@@ -1,0 +1,13 @@
+{
+  "name": "c-level-skills",
+  "description": "2 production-ready C-level advisory skills: CEO advisor for strategic decision-making and CTO advisor for technical leadership",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.com"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

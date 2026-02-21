@@ -2,7 +2,7 @@
 name: solutions-architect
 description: Expert solutions architecture covering technical requirements, solution design, integration planning, and enterprise architecture alignment.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: sales-success
 tags: [solutions, architecture, technical, integration, enterprise]
 ---

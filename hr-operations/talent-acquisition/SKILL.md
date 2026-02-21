@@ -2,7 +2,7 @@
 name: talent-acquisition
 description: Expert talent acquisition covering recruiting strategy, candidate sourcing, interview design, employer branding, and hiring analytics.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: hr-operations
 tags: [recruiting, hiring, sourcing, interviews, employer-brand]
 ---

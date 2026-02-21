@@ -27,3 +27,4 @@ node_modules/
 *.log
 *.tmp
 *.bak
+*.zip

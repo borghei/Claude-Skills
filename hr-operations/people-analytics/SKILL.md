@@ -2,7 +2,7 @@
 name: people-analytics
 description: Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: hr-operations
 tags: [people-analytics, hr-metrics, workforce, insights, predictive]
 ---

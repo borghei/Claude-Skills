@@ -2,7 +2,7 @@
 name: data-analyst
 description: Expert data analysis covering SQL, visualization, statistical analysis, business intelligence, and data storytelling.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: data-analytics
 tags: [analytics, sql, visualization, statistics, reporting]
 ---

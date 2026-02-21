@@ -2,7 +2,7 @@
 name: hr-business-partner
 description: Expert HR business partnership covering talent strategy, organizational development, employee relations, and people analytics.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: hr-operations
 tags: [hr, talent, org-development, employee-relations, people-analytics]
 ---

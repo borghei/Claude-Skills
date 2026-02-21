@@ -2,7 +2,7 @@
 name: sales-operations
 description: Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: sales-success
 tags: [sales-ops, crm, analytics, territory, compensation]
 ---

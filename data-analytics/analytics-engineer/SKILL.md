@@ -2,7 +2,7 @@
 name: analytics-engineer
 description: Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: data-analytics
 tags: [analytics-engineering, dbt, data-modeling, transformation, semantic-layer]
 ---

@@ -2,7 +2,7 @@
 name: business-intelligence
 description: Expert business intelligence covering dashboard design, data visualization, reporting automation, and executive insights delivery.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: data-analytics
 tags: [bi, dashboards, visualization, reporting, insights]
 ---

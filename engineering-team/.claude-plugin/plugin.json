@@ -1,0 +1,13 @@
+{
+  "name": "engineering-skills",
+  "description": "30 production-ready engineering skills covering architecture, frontend, backend, fullstack, QA, DevOps, security, AI/ML, and data engineering",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.com"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/engineering-team",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

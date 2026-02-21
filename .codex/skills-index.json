@@ -1,0 +1,633 @@
+{
+  "version": "1.0.0",
+  "name": "claude-code-skills",
+  "description": "Production-ready skill packages for AI agents - Engineering, Marketing, Product, C-Level, PM, RA/QM, Finance, Business Growth, Data Analytics, HR Operations, and Sales Success",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "total_skills": 93,
+  "skills": [
+    {
+      "name": "customer-success-manager",
+      "source": "../../business-growth/customer-success-manager",
+      "category": "business-growth",
+      "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success"
+    },
+    {
+      "name": "revenue-operations",
+      "source": "../../business-growth/revenue-operations",
+      "category": "business-growth",
+      "description": "Analyzes pipeline coverage, tracks forecast accuracy with MAPE, and calculates GTM efficiency metrics for SaaS revenue optimization"
+    },
+    {
+      "name": "sales-engineer",
+      "source": "../../business-growth/sales-engineer",
+      "category": "business-growth",
+      "description": "Analyzes RFP responses for coverage gaps, builds competitive feature matrices, and plans proof-of-concept engagements for pre-sales engineering"
+    },
+    {
+      "name": "ceo-advisor",
+      "source": "../../c-level-advisor/ceo-advisor",
+      "category": "c-level",
+      "description": "Executive leadership guidance for strategic decision-making, organizational development, and stakeholder management. Includes strategy analyzer, financial scenario modeling, board governance frameworks, and investor relations playbooks. Use when planning strategy, preparing board presentations, managing investors, developing organizational culture, making executive decisions, or when user mentions CEO, strategic planning, board meetings, investor updates, organizational leadership, or executive strategy."
+    },
+    {
+      "name": "cto-advisor",
+      "source": "../../c-level-advisor/cto-advisor",
+      "category": "c-level",
+      "description": "Technical leadership guidance for engineering teams, architecture decisions, and technology strategy. Includes tech debt analyzer, team scaling calculator, engineering metrics frameworks, technology evaluation tools, and ADR templates. Use when assessing technical debt, scaling engineering teams, evaluating technologies, making architecture decisions, establishing engineering metrics, or when user mentions CTO, tech debt, technical debt, team scaling, architecture decisions, technology evaluation, engineering metrics, DORA metrics, or technology strategy."
+    },
+    {
+      "name": "aws-solution-architect",
+      "source": "../../engineering-team/aws-solution-architect",
+      "category": "engineering",
+      "description": "Design AWS architectures for startups using serverless patterns and IaC templates. Use when asked to design serverless architecture, create CloudFormation templates, optimize AWS costs, set up CI/CD pipelines, or migrate to AWS. Covers Lambda, API Gateway, DynamoDB, ECS, Aurora, and cost optimization."
+    },
+    {
+      "name": "code-reviewer",
+      "source": "../../engineering-team/code-reviewer",
+      "category": "engineering",
+      "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. Use when reviewing pull requests, analyzing code quality, identifying issues, generating review checklists."
+    },
+    {
+      "name": "incident-commander",
+      "source": "../../engineering-team/incident-commander",
+      "category": "engineering",
+      "description": "Incident response playbook with severity classification, timeline reconstruction, and post-incident review generation. Includes automated severity classification, timeline reconstruction from logs, PIR generation with RCA frameworks, and communication templates for stakeholder updates."
+    },
+    {
+      "name": "tech-debt-tracker",
+      "source": "../../engineering/tech-debt-tracker",
+      "category": "engineering",
+      "description": "Codebase debt analysis with AST parsing, prioritization frameworks, and trend dashboards. Automatically identifies tech debt signals, analyzes cost-of-delay, and tracks debt trends over time with executive reporting capabilities."
+    },
+    {
+      "name": "api-design-reviewer",
+      "source": "../../engineering/api-design-reviewer",
+      "category": "engineering",
+      "description": "REST/OpenAPI linting, breaking change detection, and API design scorecards. Validates API conventions, detects compatibility issues, scores design quality, and ensures security best practices for REST APIs."
+    },
+    {
+      "name": "interview-system-designer",
+      "source": "../../engineering/interview-system-designer",
+      "category": "engineering",
+      "description": "Calibrated interview loops, question banks, and hiring calibration analysis. Designs role-specific interview processes, generates competency-based questions, and provides bias analysis with standardized evaluation frameworks."
+    },
+    {
+      "name": "migration-architect",
+      "source": "../../engineering/migration-architect",
+      "category": "engineering",
+      "description": "Zero-downtime migration planning, compatibility checking, and rollback generation. Plans phased migrations, validates schema compatibility, generates rollback procedures, and provides risk assessment for complex system migrations."
+    },
+    {
+      "name": "ms365-tenant-manager",
+      "source": "../../engineering-team/ms365-tenant-manager",
+      "category": "engineering",
+      "description": "Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and security policies. Generate PowerShell scripts for bulk operations, Conditional Access policies, license management, and compliance reporting. Use for M365 tenant manager, Office 365 admin, Azure AD users, Global Administrator, tenant configuration, or Microsoft 365 automation."
+    },
+    {
+      "name": "senior-architect",
+      "source": "../../engineering-team/senior-architect",
+      "category": "engineering",
+      "description": "This skill should be used when the user asks to \"design system architecture\", \"evaluate microservices vs monolith\", \"create architecture diagrams\", \"analyze dependencies\", \"choose a database\", \"plan for scalability\", \"make technical decisions\", or \"review system design\". Use for architecture decision records (ADRs), tech stack evaluation, system design reviews, dependency analysis, and generating architecture diagrams in Mermaid, PlantUML, or ASCII format."
+    },
+    {
+      "name": "senior-backend",
+      "source": "../../engineering-team/senior-backend",
+      "category": "engineering",
+      "description": "This skill should be used when the user asks to \"design REST APIs\", \"optimize database queries\", \"implement authentication\", \"build microservices\", \"review backend code\", \"set up GraphQL\", \"handle database migrations\", or \"load test APIs\". Use for Node.js/Express/Fastify development, PostgreSQL optimization, API security, and backend architecture patterns."
+    },
+    {
+      "name": "senior-computer-vision",
+      "source": "../../engineering-team/senior-computer-vision",
+      "category": "engineering",
+      "description": "Computer vision engineering skill for object detection, image segmentation, and visual AI systems. Covers CNN and Vision Transformer architectures, YOLO/Faster R-CNN/DETR detection, Mask R-CNN/SAM segmentation, and production deployment with ONNX/TensorRT. Includes PyTorch, torchvision, Ultralytics, Detectron2, and MMDetection frameworks. Use when building detection pipelines, training custom models, optimizing inference, or deploying vision systems."
+    },
+    {
+      "name": "senior-data-engineer",
+      "source": "../../engineering-team/senior-data-engineer",
+      "category": "engineering",
+      "description": "Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeling, pipeline orchestration, data quality, and DataOps. Use when designing data architectures, building data pipelines, optimizing data workflows, implementing data governance, or troubleshooting data issues."
+    },
+    {
+      "name": "senior-data-scientist",
+      "source": "../../engineering-team/senior-data-scientist",
+      "category": "engineering",
+      "description": "World-class data science skill for statistical modeling, experimentation, causal inference, and advanced analytics. Expertise in Python (NumPy, Pandas, Scikit-learn), R, SQL, statistical methods, A/B testing, time series, and business intelligence. Includes experiment design, feature engineering, model evaluation, and stakeholder communication. Use when designing experiments, building predictive models, performing causal analysis, or driving data-driven decisions."
+    },
+    {
+      "name": "senior-devops",
+      "source": "../../engineering-team/senior-devops",
+      "category": "engineering",
+      "description": "Comprehensive DevOps skill for CI/CD, infrastructure automation, containerization, and cloud platforms (AWS, GCP, Azure). Includes pipeline setup, infrastructure as code, deployment automation, and monitoring. Use when setting up pipelines, deploying applications, managing infrastructure, implementing monitoring, or optimizing deployment processes."
+    },
+    {
+      "name": "senior-frontend",
+      "source": "../../engineering-team/senior-frontend",
+      "category": "engineering",
+      "description": "Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding frontend projects, implementing accessibility, or reviewing frontend code quality."
+    },
+    {
+      "name": "senior-fullstack",
+      "source": "../../engineering-team/senior-fullstack",
+      "category": "engineering",
+      "description": "Fullstack development toolkit with project scaffolding for Next.js/FastAPI/MERN/Django stacks and code quality analysis. Use when scaffolding new projects, analyzing codebase quality, or implementing fullstack architecture patterns."
+    },
+    {
+      "name": "senior-ml-engineer",
+      "source": "../../engineering-team/senior-ml-engineer",
+      "category": "engineering",
+      "description": "ML engineering skill for productionizing models, building MLOps pipelines, and integrating LLMs. Covers model deployment, feature stores, drift monitoring, RAG systems, and cost optimization."
+    },
+    {
+      "name": "senior-prompt-engineer",
+      "source": "../../engineering-team/senior-prompt-engineer",
+      "category": "engineering",
+      "description": "This skill should be used when the user asks to \"optimize prompts\", \"design prompt templates\", \"evaluate LLM outputs\", \"build agentic systems\", \"implement RAG\", \"create few-shot examples\", \"analyze token usage\", or \"design AI workflows\". Use for prompt engineering patterns, LLM evaluation frameworks, agent architectures, and structured output design."
+    },
+    {
+      "name": "senior-qa",
+      "source": "../../engineering-team/senior-qa",
+      "category": "engineering",
+      "description": "This skill should be used when the user asks to \"generate tests\", \"write unit tests\", \"analyze test coverage\", \"scaffold E2E tests\", \"set up Playwright\", \"configure Jest\", \"implement testing patterns\", or \"improve test quality\". Use for React/Next.js testing with Jest, React Testing Library, and Playwright."
+    },
+    {
+      "name": "senior-secops",
+      "source": "../../engineering-team/senior-secops",
+      "category": "engineering",
+      "description": "Comprehensive SecOps skill for application security, vulnerability management, compliance, and secure development practices. Includes security scanning, vulnerability assessment, compliance checking, and security automation. Use when implementing security controls, conducting security audits, responding to vulnerabilities, or ensuring compliance requirements."
+    },
+    {
+      "name": "senior-security",
+      "source": "../../engineering-team/senior-security",
+      "category": "engineering",
+      "description": "Security engineering toolkit for threat modeling, vulnerability analysis, secure architecture, and penetration testing. Includes STRIDE analysis, OWASP guidance, cryptography patterns, and security scanning tools."
+    },
+    {
+      "name": "tdd-guide",
+      "source": "../../engineering-team/tdd-guide",
+      "category": "engineering",
+      "description": "Test-driven development workflow with test generation, coverage analysis, and multi-framework support"
+    },
+    {
+      "name": "tech-stack-evaluator",
+      "source": "../../engineering-team/tech-stack-evaluator",
+      "category": "engineering",
+      "description": "Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ownership, assessing migration paths, or analyzing ecosystem viability."
+    },
+    {
+      "name": "financial-analyst",
+      "source": "../../finance/financial-analyst",
+      "category": "finance",
+      "description": "Performs financial ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction for strategic decision-making"
+    },
+    {
+      "name": "app-store-optimization",
+      "source": "../../marketing-skill/app-store-optimization",
+      "category": "marketing",
+      "description": "App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking mobile app performance on Apple App Store and Google Play Store."
+    },
+    {
+      "name": "campaign-analytics",
+      "source": "../../marketing-skill/campaign-analytics",
+      "category": "marketing",
+      "description": "Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization"
+    },
+    {
+      "name": "content-creator",
+      "source": "../../marketing-skill/content-creator",
+      "category": "marketing",
+      "description": "Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creating social media content, analyzing brand voice, optimizing SEO, planning content calendars, or when user mentions content creation, brand voice, SEO optimization, social media marketing, or content strategy."
+    },
+    {
+      "name": "marketing-demand-acquisition",
+      "source": "../../marketing-skill/marketing-demand-acquisition",
+      "category": "marketing",
+      "description": "Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs for Series A+ startups"
+    },
+    {
+      "name": "marketing-strategy-pmm",
+      "source": "../../marketing-skill/marketing-strategy-pmm",
+      "category": "marketing",
+      "description": "Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and international market entry."
+    },
+    {
+      "name": "social-media-analyzer",
+      "source": "../../marketing-skill/social-media-analyzer",
+      "category": "marketing",
+      "description": "Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, measuring campaign ROI, comparing platform metrics, or benchmarking against industry standards."
+    },
+    {
+      "name": "agile-product-owner",
+      "source": "../../product-team/agile-product-owner",
+      "category": "product",
+      "description": "Agile product ownership for backlog management and sprint execution. Covers user story writing, acceptance criteria, sprint planning, and velocity tracking. Use for writing user stories, creating acceptance criteria, planning sprints, estimating story points, breaking down epics, or prioritizing backlog."
+    },
+    {
+      "name": "product-manager-toolkit",
+      "source": "../../product-team/product-manager-toolkit",
+      "category": "product",
+      "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization, user research synthesis, requirement documentation, and product strategy development."
+    },
+    {
+      "name": "product-strategist",
+      "source": "../../product-team/product-strategist",
+      "category": "product",
+      "description": "Strategic product leadership toolkit for Head of Product including OKR cascade generation, market analysis, vision setting, and team scaling. Use for strategic planning, goal alignment, competitive analysis, and organizational design."
+    },
+    {
+      "name": "ui-design-system",
+      "source": "../../product-team/ui-design-system",
+      "category": "product",
+      "description": "UI design system toolkit for Senior UI Designer including design token generation, component documentation, responsive design calculations, and developer handoff tools. Use for creating design systems, maintaining visual consistency, and facilitating design-dev collaboration."
+    },
+    {
+      "name": "ux-researcher-designer",
+      "source": "../../product-team/ux-researcher-designer",
+      "category": "product",
+      "description": "UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research, persona creation, journey mapping, and design validation."
+    },
+    {
+      "name": "atlassian-admin",
+      "source": "../../project-management/atlassian-admin",
+      "category": "project-management",
+      "description": "Atlassian Administrator for managing and organizing Atlassian products, users, customization of the Atlassian suite, permissions, security, integrations, system configuration, and all administrative features. Use for user provisioning, global settings, security policies, system optimization, and org-wide Atlassian governance."
+    },
+    {
+      "name": "atlassian-templates",
+      "source": "../../project-management/atlassian-templates",
+      "category": "project-management",
+      "description": "Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira and Confluence templates, blueprints, custom layouts, reusable components, and standardized content structures. Use for building org-wide templates, custom blueprints, page layouts, and automated content generation."
+    },
+    {
+      "name": "confluence-expert",
+      "source": "../../project-management/confluence-expert",
+      "category": "project-management",
+      "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation, planning, product discovery, page layouts, macros, templates, and all Confluence features. Use for documentation strategy, space architecture, content organization, and collaborative knowledge management."
+    },
+    {
+      "name": "jira-expert",
+      "source": "../../project-management/jira-expert",
+      "category": "project-management",
+      "description": "Atlassian Jira expert for creating and managing projects, planning, product discovery, JQL queries, workflows, custom fields, automation, reporting, and all Jira features. Use for Jira project setup, configuration, advanced search, dashboard creation, workflow design, and technical Jira operations."
+    },
+    {
+      "name": "scrum-master",
+      "source": "../../project-management/scrum-master",
+      "category": "project-management",
+      "description": "Advanced Scrum Master with data-driven team health analysis, velocity forecasting, retrospective insights, and team development expertise. Features comprehensive sprint health scoring, Monte Carlo forecasting, and psychological safety frameworks for high-performing agile teams."
+    },
+    {
+      "name": "senior-pm",
+      "source": "../../project-management/senior-pm",
+      "category": "project-management",
+      "description": "Senior Project Manager for enterprise software, SaaS, and digital transformation projects. Specializes in portfolio management, quantitative risk analysis, resource optimization, stakeholder alignment, and executive reporting. Uses advanced methodologies including EMV analysis, Monte Carlo simulation, WSJF prioritization, and multi-dimensional health scoring."
+    },
+    {
+      "name": "capa-officer",
+      "source": "../../ra-qm-team/capa-officer",
+      "category": "ra-qm",
+      "description": "CAPA system management for medical device QMS. Covers root cause analysis, corrective action planning, effectiveness verification, and CAPA metrics. Use for CAPA investigations, 5-Why analysis, fishbone diagrams, root cause determination, corrective action tracking, effectiveness verification, or CAPA program optimization."
+    },
+    {
+      "name": "fda-consultant-specialist",
+      "source": "../../ra-qm-team/fda-consultant-specialist",
+      "category": "ra-qm",
+      "description": "FDA regulatory consultant for medical device companies. Provides 510(k)/PMA/De Novo pathway guidance, QSR (21 CFR 820) compliance, HIPAA assessments, and device cybersecurity. Use when user mentions FDA submission, 510(k), PMA, De Novo, QSR, premarket, predicate device, substantial equivalence, HIPAA medical device, or FDA cybersecurity."
+    },
+    {
+      "name": "gdpr-dsgvo-expert",
+      "source": "../../ra-qm-team/gdpr-dsgvo-expert",
+      "category": "ra-qm",
+      "description": "GDPR and German DSGVO compliance automation. Scans codebases for privacy risks, generates DPIA documentation, tracks data subject rights requests. Use for GDPR compliance assessments, privacy audits, data protection planning, DPIA generation, and data subject rights management."
+    },
+    {
+      "name": "information-security-manager-iso27001",
+      "source": "../../ra-qm-team/information-security-manager-iso27001",
+      "category": "ra-qm",
+      "description": "ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and MedTech companies. Use for ISMS design, security risk assessment, control implementation, ISO 27001 certification, security audits, incident response, and compliance verification. Covers ISO 27001, ISO 27002, healthcare security, and medical device cybersecurity."
+    },
+    {
+      "name": "isms-audit-expert",
+      "source": "../../ra-qm-team/isms-audit-expert",
+      "category": "ra-qm",
+      "description": "Information Security Management System auditing for ISO 27001 compliance, security control assessment, and certification support"
+    },
+    {
+      "name": "mdr-745-specialist",
+      "source": "../../ra-qm-team/mdr-745-specialist",
+      "category": "ra-qm",
+      "description": "EU MDR 2017/745 compliance specialist for medical device classification, technical documentation, clinical evidence, and post-market surveillance. Covers Annex VIII classification rules, Annex II/III technical files, Annex XIV clinical evaluation, and EUDAMED integration."
+    },
+    {
+      "name": "qms-audit-expert",
+      "source": "../../ra-qm-team/qms-audit-expert",
+      "category": "ra-qm",
+      "description": "ISO 13485 internal audit expertise for medical device QMS. Covers audit planning, execution, nonconformity classification, and CAPA verification. Use for internal audit planning, audit execution, finding classification, external audit preparation, or audit program management."
+    },
+    {
+      "name": "quality-documentation-manager",
+      "source": "../../ra-qm-team/quality-documentation-manager",
+      "category": "ra-qm",
+      "description": "Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use for document control procedures, change control workflow, document numbering, version management, electronic signature compliance, or regulatory documentation review."
+    },
+    {
+      "name": "quality-manager-qmr",
+      "source": "../../ra-qm-team/quality-manager-qmr",
+      "category": "ra-qm",
+      "description": "Senior Quality Manager Responsible Person (QMR) for HealthTech and MedTech companies. Provides quality system governance, management review leadership, regulatory compliance oversight, and quality performance monitoring per ISO 13485 Clause 5.5.2."
+    },
+    {
+      "name": "quality-manager-qms-iso13485",
+      "source": "../../ra-qm-team/quality-manager-qms-iso13485",
+      "category": "ra-qm",
+      "description": "ISO 13485 Quality Management System implementation and maintenance for medical device organizations. Provides QMS design, documentation control, internal auditing, CAPA management, and certification support."
+    },
+    {
+      "name": "regulatory-affairs-head",
+      "source": "../../ra-qm-team/regulatory-affairs-head",
+      "category": "ra-qm",
+      "description": "Senior Regulatory Affairs Manager for HealthTech and MedTech companies. Provides regulatory strategy development, submission management, pathway analysis, global compliance coordination, and cross-functional team leadership."
+    },
+    {
+      "name": "risk-management-specialist",
+      "source": "../../ra-qm-team/risk-management-specialist",
+      "category": "ra-qm",
+      "description": "Medical device risk management specialist implementing ISO 14971 throughout product lifecycle. Provides risk analysis, risk evaluation, risk control, and post-production information analysis."
+    },
+    {
+      "name": "observability-designer",
+      "path": "engineering/observability-designer",
+      "category": "engineering",
+      "tier": "POWERFUL",
+      "description": "SLI/SLO frameworks, alert optimization, and dashboard generation for production observability.",
+      "scripts": [
+        "slo_designer.py",
+        "alert_optimizer.py",
+        "dashboard_generator.py"
+      ],
+      "references": true,
+      "assets": true
+    },
+    {
+      "name": "dependency-auditor",
+      "source": "../../engineering/dependency-auditor",
+      "category": "engineering",
+      "description": "Multi-language dependency scanning, license compliance, and upgrade planning for modern software projects"
+    },
+    {
+      "name": "release-manager",
+      "source": "../../engineering/release-manager",
+      "category": "engineering",
+      "description": "Automated changelog generation, semantic version bumping, and release readiness planning for production deployments"
+    },
+    {
+      "name": "database-designer",
+      "source": "../../engineering/database-designer",
+      "category": "engineering",
+      "description": "Schema analysis with ERD generation, index optimization, and migration generation for database architecture"
+    },
+    {
+      "name": "rag-architect",
+      "source": "../../engineering/rag-architect",
+      "category": "engineering",
+      "description": "RAG pipeline design with chunking optimization, retrieval evaluation, and architecture generation for AI systems"
+    },
+    {
+      "name": "agent-designer",
+      "source": "../../engineering/agent-designer",
+      "category": "engineering",
+      "description": "Multi-agent system architecture, tool schema generation, and agent performance evaluation for agentic AI"
+    },
+    {
+      "name": "skill-tester",
+      "source": "../../engineering/skill-tester",
+      "category": "engineering",
+      "description": "Meta-skill for automated skill validation, script testing, and quality scoring for skill development workflows"
+    },
+    {
+      "name": "cfo-advisor",
+      "source": "../../c-level-advisor/cfo-advisor",
+      "category": "c-level",
+      "description": "Financial leadership advisor for CFOs on financial planning, fundraising, investor reporting, unit economics, cash management, and financial operations."
+    },
+    {
+      "name": "cmo-advisor",
+      "source": "../../c-level-advisor/cmo-advisor",
+      "category": "c-level",
+      "description": "Marketing leadership advisor for CMOs on brand strategy, demand generation, marketing operations, growth marketing, and revenue marketing alignment."
+    },
+    {
+      "name": "coo-advisor",
+      "source": "../../c-level-advisor/coo-advisor",
+      "category": "c-level",
+      "description": "Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence."
+    },
+    {
+      "name": "analytics-engineer",
+      "source": "../../data-analytics/analytics-engineer",
+      "category": "data-analytics",
+      "description": "Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management."
+    },
+    {
+      "name": "business-intelligence",
+      "source": "../../data-analytics/business-intelligence",
+      "category": "data-analytics",
+      "description": "Expert business intelligence covering dashboard design, data visualization, reporting automation, and executive insights delivery."
+    },
+    {
+      "name": "data-analyst",
+      "source": "../../data-analytics/data-analyst",
+      "category": "data-analytics",
+      "description": "Expert data analysis covering SQL, visualization, statistical analysis, business intelligence, and data storytelling."
+    },
+    {
+      "name": "data-scientist",
+      "source": "../../data-analytics/data-scientist",
+      "category": "data-analytics",
+      "description": "Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics."
+    },
+    {
+      "name": "ml-ops-engineer",
+      "source": "../../data-analytics/ml-ops-engineer",
+      "category": "data-analytics",
+      "description": "Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation."
+    },
+    {
+      "name": "hr-business-partner",
+      "source": "../../hr-operations/hr-business-partner",
+      "category": "hr-operations",
+      "description": "Expert HR business partnership covering talent strategy, organizational development, employee relations, and people analytics."
+    },
+    {
+      "name": "operations-manager",
+      "source": "../../hr-operations/operations-manager",
+      "category": "hr-operations",
+      "description": "Expert operations management covering process optimization, operational efficiency, resource management, and continuous improvement."
+    },
+    {
+      "name": "people-analytics",
+      "source": "../../hr-operations/people-analytics",
+      "category": "hr-operations",
+      "description": "Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions."
+    },
+    {
+      "name": "talent-acquisition",
+      "source": "../../hr-operations/talent-acquisition",
+      "category": "hr-operations",
+      "description": "Expert talent acquisition covering recruiting strategy, candidate sourcing, interview design, employer branding, and hiring analytics."
+    },
+    {
+      "name": "account-executive",
+      "source": "../../sales-success/account-executive",
+      "category": "sales-success",
+      "description": "Expert sales execution covering pipeline management, discovery, demos, negotiation, and deal closing."
+    },
+    {
+      "name": "customer-success-manager-sales",
+      "source": "../../sales-success/customer-success-manager",
+      "category": "sales-success",
+      "description": "Expert customer success covering onboarding, adoption, retention, expansion, health scoring, and customer advocacy."
+    },
+    {
+      "name": "sales-engineer-sales",
+      "source": "../../sales-success/sales-engineer",
+      "category": "sales-success",
+      "description": "Expert sales engineering covering technical demos, solution design, RFP responses, POC management, and technical objection handling."
+    },
+    {
+      "name": "sales-operations",
+      "source": "../../sales-success/sales-operations",
+      "category": "sales-success",
+      "description": "Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization."
+    },
+    {
+      "name": "solutions-architect",
+      "source": "../../sales-success/solutions-architect",
+      "category": "sales-success",
+      "description": "Expert solutions architecture covering technical requirements, solution design, integration planning, and enterprise architecture alignment."
+    },
+    {
+      "name": "brand-strategist",
+      "source": "../../marketing-skill/brand-strategist",
+      "category": "marketing",
+      "description": "Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance."
+    },
+    {
+      "name": "growth-marketer",
+      "source": "../../marketing-skill/growth-marketer",
+      "category": "marketing",
+      "description": "Expert growth marketing covering experimentation, funnel optimization, acquisition channels, retention strategies, and viral growth."
+    },
+    {
+      "name": "marketing-analyst",
+      "source": "../../marketing-skill/marketing-analyst",
+      "category": "marketing",
+      "description": "Expert marketing analytics covering campaign analysis, attribution modeling, marketing mix modeling, ROI measurement, and performance reporting."
+    },
+    {
+      "name": "seo-specialist",
+      "source": "../../marketing-skill/seo-specialist",
+      "category": "marketing",
+      "description": "Expert SEO covering technical SEO, content optimization, link building, keyword research, and search analytics."
+    },
+    {
+      "name": "product-designer",
+      "source": "../../product-team/product-designer",
+      "category": "product",
+      "description": "Expert product design covering UI/UX design, design systems, prototyping, user research, and design thinking."
+    },
+    {
+      "name": "design-system-lead",
+      "source": "../../product-team/design-system-lead",
+      "category": "product",
+      "description": "Expert design systems leadership covering component libraries, design tokens, documentation, and design-development collaboration."
+    },
+    {
+      "name": "agile-coach",
+      "source": "../../project-management/agile-coach",
+      "category": "project-management",
+      "description": "Expert agile coaching covering team transformation, agile frameworks, coaching techniques, organizational change, and continuous improvement."
+    },
+    {
+      "name": "delivery-manager",
+      "source": "../../project-management/delivery-manager",
+      "category": "project-management",
+      "description": "Expert delivery management covering continuous delivery, release management, deployment coordination, and service operations."
+    },
+    {
+      "name": "program-manager",
+      "source": "../../project-management/program-manager",
+      "category": "project-management",
+      "description": "Expert program management covering multi-project coordination, portfolio governance, strategic alignment, and cross-functional leadership."
+    },
+    {
+      "name": "senior-mobile",
+      "source": "../../engineering-team/senior-mobile",
+      "category": "engineering",
+      "description": "Expert mobile development covering iOS, Android, React Native, and Flutter for native and cross-platform applications."
+    },
+    {
+      "name": "senior-cloud-architect",
+      "source": "../../engineering-team/senior-cloud-architect",
+      "category": "engineering",
+      "description": "Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy, cost optimization, and cloud-native design."
+    }
+  ],
+  "categories": {
+    "business-growth": {
+      "count": 3,
+      "source": "../../business-growth",
+      "description": "Customer success, sales engineering, and revenue operations skills"
+    },
+    "c-level": {
+      "count": 5,
+      "source": "../../c-level-advisor",
+      "description": "Executive leadership and advisory skills"
+    },
+    "engineering": {
+      "count": 32,
+      "source": "../../engineering-team",
+      "description": "Software engineering, DevOps, security, AI/ML, data engineering, and cloud architecture skills"
+    },
+    "finance": {
+      "count": 1,
+      "source": "../../finance",
+      "description": "Financial analysis, valuation, and forecasting skills"
+    },
+    "marketing": {
+      "count": 10,
+      "source": "../../marketing-skill",
+      "description": "Marketing, content, and demand generation skills"
+    },
+    "product": {
+      "count": 7,
+      "source": "../../product-team",
+      "description": "Product management and design skills"
+    },
+    "project-management": {
+      "count": 9,
+      "source": "../../project-management",
+      "description": "Project management and Atlassian skills"
+    },
+    "ra-qm": {
+      "count": 12,
+      "source": "../../ra-qm-team",
+      "description": "Regulatory affairs and quality management skills"
+    },
+    "data-analytics": {
+      "count": 5,
+      "source": "../../data-analytics",
+      "description": "Data analytics, business intelligence, and MLOps skills"
+    },
+    "hr-operations": {
+      "count": 4,
+      "source": "../../hr-operations",
+      "description": "HR business partnership, talent acquisition, people analytics, and operations management skills"
+    },
+    "sales-success": {
+      "count": 5,
+      "source": "../../sales-success",
+      "description": "Sales execution, customer success, sales engineering, and solutions architecture skills"
+    }
+  },
+  "total": 93
+}

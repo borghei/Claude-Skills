@@ -2,7 +2,7 @@
 name: customer-success-manager
 description: Expert customer success covering onboarding, adoption, retention, expansion, health scoring, and customer advocacy.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: sales-success
 tags: [customer-success, retention, adoption, expansion, nps]
 ---

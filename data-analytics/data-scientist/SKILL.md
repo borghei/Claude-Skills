@@ -2,7 +2,7 @@
 name: data-scientist
 description: Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: data-analytics
 tags: [data-science, machine-learning, statistics, modeling, analytics]
 ---

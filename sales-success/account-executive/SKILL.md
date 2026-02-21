@@ -2,7 +2,7 @@
 name: account-executive
 description: Expert sales execution covering pipeline management, discovery, demos, negotiation, and deal closing.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: sales-success
 tags: [sales, pipeline, negotiation, closing, deals]
 ---

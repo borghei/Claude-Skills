@@ -1,0 +1,13 @@
+{
+  "name": "marketing-skills",
+  "description": "6 production-ready marketing skills: content creator, demand generation, product marketing strategy, app store optimization, social media analytics, and campaign analytics",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.com"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/marketing-skill",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

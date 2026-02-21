@@ -2,7 +2,7 @@
 name: sales-engineer
 description: Expert sales engineering covering technical demos, solution design, RFP responses, POC management, and technical objection handling.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: sales-success
 tags: [sales, technical, demos, rfp, poc, solutions]
 ---

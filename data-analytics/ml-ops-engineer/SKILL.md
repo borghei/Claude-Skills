@@ -2,7 +2,7 @@
 name: ml-ops-engineer
 description: Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: data-analytics
 tags: [mlops, deployment, pipelines, monitoring, feature-store]
 ---

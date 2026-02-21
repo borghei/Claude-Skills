@@ -2,7 +2,7 @@
 name: operations-manager
 description: Expert operations management covering process optimization, operational efficiency, resource management, and continuous improvement.
 version: 1.0.0
-author: Claude Skills
+author: borghei
 category: hr-operations
 tags: [operations, efficiency, process, optimization, management]
 ---
