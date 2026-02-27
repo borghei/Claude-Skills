@@ -16,55 +16,64 @@
 
 ---
 
-## Quick Install
+## How to Install
 
-**Choose your method:**
-
-### Method 1: Skill Installer CLI (Recommended)
-
-Install one skill per domain group with auto-update support:
+### Option A: Clone & Use the Skill Installer (Recommended)
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/borghei/Claude-Skills.git
 cd Claude-Skills
 
-# List all 97 skills across 13 domains
+# 2. Browse available skills
 python scripts/skill-installer.py list
+python scripts/skill-installer.py list --group engineering-team
 
-# Install a skill (one per group by default)
+# 3. Install a skill to your agent of choice
 python scripts/skill-installer.py install senior-fullstack --agent claude --auto-update
 python scripts/skill-installer.py install content-creator --agent cursor --auto-update
+python scripts/skill-installer.py install ceo-advisor --agent vscode
 
-# Update all installed skills
+# 4. Keep skills up to date
 python scripts/skill-installer.py update
 ```
 
-### Method 2: Claude Code Native
+The installer enforces **one skill per domain group** by default (use `--force` to override), tracks installed skills in a `.claude-skills.json` manifest, and supports auto-updates.
+
+**Supported agents:** `claude`, `cursor`, `vscode`, `copilot`, `codex`, `goose`, `project`
+
+### Option B: Claude Code Plugin Marketplace
 
 ```bash
 # In Claude Code, run:
 /plugin marketplace add borghei/Claude-Skills
 
-# Install skill bundles:
-/plugin install engineering-skills@claude-code-skills   # 24 engineering skills
-/plugin install engineering-advanced@claude-code-skills  # 12 advanced engineering skills
-/plugin install marketing-skills@claude-code-skills     # 10 marketing skills
-/plugin install product-skills@claude-code-skills       # 7 product skills
-/plugin install c-level-skills@claude-code-skills       # 5 C-level advisory skills
-/plugin install pm-skills@claude-code-skills            # 9 project management skills
-/plugin install ra-qm-skills@claude-code-skills         # 12 regulatory/quality skills
-/plugin install business-growth-skills@claude-code-skills  # 3 business & growth skills
-/plugin install finance-skills@claude-code-skills       # 1 finance skill
-/plugin install data-analytics-skills@claude-code-skills  # 5 data & analytics skills
-/plugin install hr-operations-skills@claude-code-skills   # 4 HR & people skills
-/plugin install sales-success-skills@claude-code-skills   # 5 sales & success skills
+# Install entire domain bundles:
+/plugin install engineering-skills@claude-code-skills   # 24 skills
+/plugin install marketing-skills@claude-code-skills     # 10 skills
+/plugin install ra-qm-skills@claude-code-skills         # 12 skills
 
 # Or install individual skills:
-/plugin install content-creator@claude-code-skills
 /plugin install senior-fullstack@claude-code-skills
+/plugin install content-creator@claude-code-skills
+
+# Update anytime:
+/plugin update
 ```
 
-### Method 3: OpenAI Codex
+### Option C: Universal Installer (40+ AI Agents)
+
+```bash
+# Install to all supported agents at once
+npx agent-skills-cli add borghei/Claude-Skills
+
+# Or target a specific agent
+npx agent-skills-cli add borghei/Claude-Skills --agent claude
+npx agent-skills-cli add borghei/Claude-Skills --agent cursor
+npx agent-skills-cli add borghei/Claude-Skills --agent vscode
+```
+
+### Option D: OpenAI Codex
 
 ```bash
 git clone https://github.com/borghei/Claude-Skills.git
@@ -72,28 +81,465 @@ cd Claude-Skills
 ./scripts/codex-install.sh
 ```
 
-### Method 4: Universal Installer (40+ Agents)
+### Option E: Manual / Direct Use
+
+Copy any skill folder into your agent's skills directory, or simply paste the `SKILL.md` content directly into a Claude conversation:
 
 ```bash
-npx agent-skills-cli add borghei/Claude-Skills
+# Copy a skill to Claude Code
+cp -r engineering-team/senior-fullstack ~/.claude/skills/senior-fullstack
 
-# Install to specific agent
-npx agent-skills-cli add borghei/Claude-Skills --agent claude
-npx agent-skills-cli add borghei/Claude-Skills --agent cursor
-npx agent-skills-cli add borghei/Claude-Skills --agent vscode
+# Copy a skill to Cursor
+cp -r marketing-skill/content-creator .cursor/skills/content-creator
 ```
 
-### Method 5: Direct Use
-
-Copy any `SKILL.md` content and paste it to Claude with your request:
-
+Or paste directly:
 ```
-[Paste SKILL.md content]
+[Paste the content of any SKILL.md into Claude]
 
 Now help me with: [your specific task]
 ```
 
-See [INSTALLATION.md](INSTALLATION.md) for the full installation guide with auto-update, per-skill install, and troubleshooting.
+See [INSTALLATION.md](INSTALLATION.md) for the full guide with auto-update configuration, troubleshooting, and per-agent details.
+
+---
+
+## How to Use
+
+### 1. Using Skills (Domain Expertise)
+
+Skills give Claude deep domain knowledge. Once installed, Claude automatically activates the right skill based on your request. You can also reference them directly.
+
+**Example — Code Quality Analysis:**
+```bash
+# Run the Python tool directly
+python engineering-team/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
+```
+```
+Code Quality Report
+====================
+  Overall Score: 85/100
+  Security:      90/100 (2 medium issues)
+  Performance:   80/100 (3 optimization opportunities)
+  Test Coverage: 75% (target: 80%)
+  Documentation: 88/100
+
+Recommendations:
+  1. Update lodash to 4.17.21 (CVE-2020-8203)
+  2. Optimize database queries in UserService
+  3. Add integration tests for payment flow
+```
+
+**Example — Feature Prioritization:**
+```bash
+python product-team/product-manager-toolkit/scripts/rice_prioritizer.py features.csv --json
+```
+```json
+{
+  "prioritized_features": [
+    {"name": "SSO Integration", "reach": 8, "impact": 9, "confidence": 7, "effort": 5, "rice_score": 100.8},
+    {"name": "Dark Mode", "reach": 9, "impact": 4, "confidence": 9, "effort": 3, "rice_score": 108.0},
+    {"name": "Export to PDF", "reach": 6, "impact": 5, "confidence": 8, "effort": 2, "rice_score": 120.0}
+  ]
+}
+```
+
+**Example — CLAUDE.md Optimization:**
+```bash
+python engineering-team/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
+```
+```
+CLAUDE.md Optimization Report
+==============================
+  File:         CLAUDE.md
+  Lines:        142
+  Est. Tokens:  ~1,850
+  Budget Used:  9.3% of 20,000 token budget
+
+Section Completeness:
+  ✓ Project Overview
+  ✓ Architecture
+  ✓ Development Commands
+  ✗ Missing: Code Style (recommended)
+  ✗ Missing: Testing Strategy (recommended)
+
+Redundancy Issues:
+  - Line 34: Generic instruction "Be careful with..." (remove or make specific)
+  - Lines 67-69: Duplicate of lines 12-14
+
+Score: 72/100
+  Recommendations:
+  1. [HIGH] Add Code Style section with linter config
+  2. [MEDIUM] Remove 3 redundant instructions to save ~120 tokens
+  3. [LOW] Add Testing Strategy section
+```
+
+**Example — CI/CD Workflow Generation:**
+```bash
+python engineering-team/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python
+```
+```yaml
+# Generated: CI Pipeline for Python
+name: CI
+on:
+  pull_request:
+    branches: [main, dev]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install ruff && ruff check .
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '${{ matrix.python-version }}' }
+      - run: pip install -e ".[test]" && pytest --cov
+```
+
+**Example — Financial DCF Valuation:**
+```bash
+python finance/financial-analyst/scripts/dcf_valuation.py valuation_data.json
+```
+```
+DCF Valuation Summary
+======================
+  Revenue (Year 1):     $2,400,000
+  Growth Rate:          25%
+  Discount Rate (WACC): 12%
+  Terminal Growth:      3%
+
+  Enterprise Value:     $18,750,000
+  Net Debt:             ($1,200,000)
+  Equity Value:         $17,550,000
+
+  Sensitivity Analysis:
+  WACC \ Growth |   20%   |   25%   |   30%
+  ------------- | ------- | ------- | -------
+  10%           | $21.2M  | $24.1M  | $27.3M
+  12%           | $16.8M  | $18.8M  | $21.0M
+  14%           | $13.5M  | $14.9M  | $16.5M
+```
+
+**Example — Mobile App Scaffolding:**
+```bash
+python engineering-team/senior-mobile/scripts/mobile_scaffold.py my-app --platform react-native --state zustand
+```
+```
+Scaffolded: my-app (React Native + Expo Router)
+================================================
+  Platform:     React Native (Expo)
+  Navigation:   Expo Router (file-based)
+  State:        Zustand
+  TypeScript:   Enabled
+
+  Created:
+    my-app/
+    ├── app/                    # Expo Router pages
+    │   ├── (tabs)/             # Tab navigation
+    │   ├── (auth)/             # Auth screens
+    │   └── _layout.tsx         # Root layout
+    ├── src/
+    │   ├── components/         # Reusable components
+    │   ├── hooks/              # Custom hooks
+    │   ├── services/           # API layer
+    │   ├── stores/             # Zustand stores
+    │   └── utils/              # Helpers
+    ├── app.json
+    ├── tsconfig.json
+    └── package.json
+
+  Next: cd my-app && npx expo start
+```
+
+---
+
+### 2. Using Subagents (Autonomous Workflows)
+
+Subagents are specialized Claude Code instances that run independently with their own tools and instructions. Invoke them with `/agents/name` in Claude Code.
+
+**Example — Code Review:**
+```
+> /agents/code-reviewer Review the last commit for security and quality issues
+```
+```markdown
+## Code Review Summary
+
+**Overall Score:** 7/10
+**Risk Level:** Medium
+
+### Critical Issues (Must Fix)
+- [ ] **SQL Injection** at `src/db/queries.ts:45`
+  - **Why:** User input concatenated directly into SQL query
+  - **Fix:** Use parameterized queries: `db.query('SELECT * FROM users WHERE id = $1', [userId])`
+
+- [ ] **Missing auth check** at `src/routes/admin.ts:12`
+  - **Why:** Admin endpoint accessible without role verification
+  - **Fix:** Add `requireRole('admin')` middleware before handler
+
+### Important (Should Fix)
+- [ ] N+1 query in `src/services/orders.ts:78` — fetching user for each order in loop
+  - **Fix:** Use `JOIN` or batch fetch with `WHERE id IN (...)`
+
+### Suggestions (Nice to Have)
+- [ ] Consider adding rate limiting to `src/routes/auth.ts:30`
+
+### Positive Highlights
+- Clean separation of concerns in service layer
+- Good error handling patterns in API middleware
+
+### Scores
+| Category        | Score | Notes                          |
+|-----------------|-------|--------------------------------|
+| Correctness     | 8/10  | Logic is sound                 |
+| Security        | 5/10  | SQL injection + missing auth   |
+| Performance     | 7/10  | One N+1 query                  |
+| Maintainability | 8/10  | Clean code, good naming        |
+| Architecture    | 7/10  | Well-structured                |
+```
+
+**Example — Security Audit:**
+```
+> /agents/security-auditor Audit all API endpoints for OWASP Top 10 vulnerabilities
+```
+```markdown
+## Security Audit Report
+
+**Risk Level:** High
+**Findings:** 1 critical, 2 high, 3 medium
+**Scan Date:** 2026-02-27
+
+### Critical Findings
+| # | Finding              | File:Line            | OWASP | Severity |
+|---|----------------------|----------------------|-------|----------|
+| 1 | Command injection    | src/utils/exec.ts:23 | A03   | Critical |
+
+**Details:**
+1. **Command Injection via user input**
+   - **Location:** src/utils/exec.ts:23
+   - **Description:** `exec(`ffmpeg ${userInput}`)` passes unsanitized input to shell
+   - **Impact:** Remote code execution — attacker can run arbitrary commands
+   - **Remediation:**
+     ```typescript
+     // Before (vulnerable)
+     exec(`ffmpeg ${userInput}`)
+     // After (safe)
+     execFile('ffmpeg', ['-i', sanitizedInput])
+     ```
+   - **References:** CWE-78
+
+### High Findings
+| # | Finding                    | File:Line             | OWASP |
+|---|----------------------------|-----------------------|-------|
+| 2 | JWT with no expiry         | src/auth/jwt.ts:15    | A07   |
+| 3 | Secrets in error responses | src/middleware/err.ts:8| A09   |
+
+### Recommendations
+1. **Immediate:** Fix command injection, add JWT expiry
+2. **Short-term:** Sanitize all error responses, add rate limiting
+3. **Long-term:** Implement security headers (CSP, HSTS), add SAST to CI
+```
+
+**Example — QA Analysis:**
+```
+> /agents/qa-engineer Analyze test coverage for the payment service
+```
+```markdown
+## QA Report
+
+**Quality Score:** 6/10
+**Test Coverage:** ~45% (estimated)
+**Critical Gaps:** 3 areas needing immediate attention
+
+### Coverage Map
+| Module                | Functions | Tested | Coverage | Priority |
+|-----------------------|-----------|--------|----------|----------|
+| src/services/payment  | 12        | 5      | 42%      | Critical |
+| src/services/refund   | 6         | 1      | 17%      | Critical |
+| src/validators/card   | 4         | 4      | 100%     | Done     |
+| src/utils/currency    | 8         | 6      | 75%      | Medium   |
+
+### Critical Gaps (Must Test)
+1. **processPayment()** — Handles real money, zero test coverage
+2. **handleWebhook()** — Stripe webhook processing, no edge case tests
+3. **issueRefund()** — Only happy path tested, no failure scenarios
+
+### Bugs Found
+1. **[High]** Race condition in `processPayment` at src/services/payment.ts:67
+   - **Impact:** Double charge possible if two requests hit simultaneously
+   - **Reproduction:** Concurrent POST to /api/payments with same idempotency key
+
+### Recommendations
+1. Add integration tests for payment → refund flow
+2. Add concurrency tests with idempotency key enforcement
+3. Mock Stripe in tests instead of skipping payment tests entirely
+```
+
+**Example — Documentation Generation:**
+```
+> /agents/doc-generator Generate API documentation for src/routes/
+```
+```markdown
+## Generated Documentation
+
+### API Endpoints
+
+| Method | Endpoint          | Auth     | Description              |
+|--------|-------------------|----------|--------------------------|
+| POST   | /api/auth/login   | None     | Authenticate user        |
+| POST   | /api/auth/signup  | None     | Register new account     |
+| GET    | /api/users/:id    | Bearer   | Get user profile         |
+| PUT    | /api/users/:id    | Bearer   | Update user profile      |
+| GET    | /api/orders       | Bearer   | List user orders         |
+| POST   | /api/orders       | Bearer   | Create new order         |
+| POST   | /api/payments     | Bearer   | Process payment          |
+
+### POST /api/auth/login
+**Request:**
+```json
+{ "email": "user@example.com", "password": "..." }
+```
+**Response (200):**
+```json
+{ "token": "eyJhbG...", "user": { "id": "123", "email": "..." } }
+```
+**Response (401):**
+```json
+{ "error": "Invalid credentials" }
+```
+
+Updated: README.md, docs/api.md
+Created: docs/architecture.md
+```
+
+**Example — Changelog Generation:**
+```
+> /agents/changelog-manager Generate changelog for the upcoming release
+```
+```markdown
+## [2.1.0] - 2026-02-27
+
+### Added
+- Add payment retry logic with exponential backoff (#142)
+- Add Stripe webhook signature verification (#138)
+- Add user export endpoint for GDPR compliance (#135)
+
+### Changed
+- Upgrade Node.js from 18 to 22 in CI pipeline
+- Improve error messages in authentication flow
+
+### Fixed
+- Fix race condition in concurrent payment processing (#141)
+- Fix timezone handling in order timestamps (#139)
+
+### Security
+- Update jsonwebtoken to 9.0.2 to patch CVE-2024-XXXXX
+- Add rate limiting to authentication endpoints
+
+**Version:** MINOR bump (new features, backwards compatible)
+```
+
+**Example — Git Workflow:**
+```
+> /agents/git-workflow Prepare a release for v2.1.0
+```
+```
+Pre-commit check:
+  ✓ No secrets detected
+  ✓ No .env files staged
+  ✓ All changes match intended scope
+
+Branch: release/v2.1.0 (created from dev)
+
+Updated files:
+  ✓ CHANGELOG.md — Added [2.1.0] section
+  ✓ README.md — Updated version badge to 2.1.0
+
+Commit: release: prepare v2.1.0
+
+PR created: #156 "Release v2.1.0" (base: main)
+  - Title: Release v2.1.0
+  - Labels: release
+  - Reviewers: assigned
+
+Next steps after merge:
+  git tag -a v2.1.0 -m "Release v2.1.0"
+  git push origin v2.1.0
+```
+
+---
+
+### 3. Using Workflows (CI/CD Automation)
+
+The 12 GitHub workflows run automatically on PRs and pushes. No configuration needed — they activate based on file changes.
+
+**Code Quality Gate** — Triggers on every PR with Python changes:
+```
+✓ Python Syntax Check     — 178/178 scripts compiled successfully
+✓ Flake8 Lint             — 0 errors (E9, F63, F7, F82)
+✓ Bandit Security Scan    — 0 high-severity issues
+✓ CLI Standards           — 178/178 scripts have argparse + --help
+```
+
+**Documentation Check** — Triggers on PRs with markdown changes:
+```
+✓ YAML Frontmatter        — 97/97 SKILL.md files have valid frontmatter
+✓ Required Fields          — All files have name + description
+✓ Internal Links           — 0 broken links detected
+✓ Skill Count              — 97 skills across 13 domains
+```
+
+**Changelog Enforcer** — Triggers on PRs to main/dev:
+```
+⚠ CHANGELOG.md was not updated in this PR.
+
+  Changed files:
+    - engineering-team/senior-fullstack/scripts/code_quality_analyzer.py
+    - engineering-team/senior-fullstack/SKILL.md
+
+  Suggested changelog entry:
+    ### Changed
+    - Improve code quality analyzer scoring algorithm in senior-fullstack
+```
+
+**Skill Validation** — Triggers on PRs touching skill packages:
+```
+✓ senior-fullstack         — SKILL.md (342 lines), 3 scripts, 2 refs, 1 asset → Tier 1
+✓ claude-code-mastery      — SKILL.md (488 lines), 3 scripts, 3 refs, 2 assets → Tier 1
+✗ senior-cloud-architect   — SKILL.md (89 lines), 0 scripts → Tier 3 (needs upgrade)
+
+Quality Report:
+  Tier 1 (full stack):  52 skills
+  Tier 2 (partial):     28 skills
+  Tier 3 (docs only):   17 skills
+```
+
+**Release Drafter** — Auto-generates release notes on push to main:
+```markdown
+## What's New in v2.0.0
+
+### Repository Stats
+- **97** skills across **13** domains
+- **178** Python automation tools
+- **6** Claude Code subagents
+- **12** CI/CD workflows
+
+### New Skills
+- claude-code-mastery (engineering-team)
+- codex-cli-specialist (engineering-team)
+- devops-workflow-engineer (engineering-team)
+
+### Installation
+git clone https://github.com/borghei/Claude-Skills.git
+python scripts/skill-installer.py install <skill-name> --agent claude
+```
 
 ---
 
@@ -269,136 +715,43 @@ People operations and workforce analytics.
 
 ---
 
-## What's Inside Each Skill
-
-### Standard Skill Package Structure
-
-```
-skill-name/
-├── SKILL.md            # Main skill documentation (100-1200 lines)
-├── scripts/            # 2-4 Python CLI automation tools
-│   ├── tool1.py
-│   ├── tool2.py
-│   └── tool3.py
-├── references/         # 2-4 comprehensive expert guides
-│   ├── framework.md
-│   ├── best_practices.md
-│   └── examples.md
-└── assets/             # User-facing templates
-    ├── template1.md
-    └── checklist.md
-```
-
-### Python Automation Tools (178)
-
-All tools are:
-- **Standard library only** — no external dependencies
-- **CLI-first** with `--help` and `--json` output
-- **No API calls** — deterministic local analysis
-- **Production-ready** with error handling
-
-Example usage:
-```bash
-# Financial analysis
-python finance/financial-analyst/scripts/dcf_valuation.py valuation_data.json
-
-# Feature prioritization
-python product-team/product-manager-toolkit/scripts/rice_prioritizer.py features.csv
-
-# Code quality analysis
-python engineering-team/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
-
-# CLAUDE.md optimization
-python engineering-team/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
-
-# GitHub Actions workflow generation
-python engineering-team/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python
-
-# Scaffold a new skill
-python engineering-team/claude-code-mastery/scripts/skill_scaffolder.py my-skill --domain engineering
-
-# Mobile app performance analysis
-python engineering-team/senior-mobile/scripts/app_performance_analyzer.py /path/to/app
-
-# Pipeline analytics
-python business-growth/revenue-operations/scripts/pipeline_analyzer.py pipeline.json
-```
-
----
-
 ## Claude Code Subagents
 
-Six specialized subagents in `.claude/agents/` for autonomous workflows:
+Six specialized subagents in `.claude/agents/` for autonomous code review, documentation, QA, security, changelog, and git workflows.
 
-| Agent | Purpose | Tools |
-|-------|---------|-------|
-| [code-reviewer](.claude/agents/code-reviewer.md) | Code quality, security, performance scoring (1-10 across 5 categories) | Read, Glob, Grep, Bash |
-| [doc-generator](.claude/agents/doc-generator.md) | README, API docs, architecture docs, changelog generation | Read, Glob, Grep, Bash, Write, Edit |
-| [qa-engineer](.claude/agents/qa-engineer.md) | Test coverage analysis, OWASP bug hunting, test generation | Read, Glob, Grep, Bash |
-| [changelog-manager](.claude/agents/changelog-manager.md) | Keep a Changelog format, semver determination from git history | Read, Glob, Grep, Bash, Write, Edit |
-| [security-auditor](.claude/agents/security-auditor.md) | OWASP Top 10, secrets scanning, infrastructure security | Read, Glob, Grep, Bash |
-| [git-workflow](.claude/agents/git-workflow.md) | Conventional commits, branch strategy, PR creation, releases | Read, Glob, Grep, Bash |
+| Agent | What It Does | Invoke With |
+|-------|-------------|-------------|
+| **code-reviewer** | Scores code across 5 categories (1-10), flags bugs, security holes, performance issues | `/agents/code-reviewer` |
+| **security-auditor** | OWASP Top 10 audit, secrets scanning, infrastructure security checks | `/agents/security-auditor` |
+| **qa-engineer** | Test coverage analysis, bug hunting, test generation, quality metrics | `/agents/qa-engineer` |
+| **doc-generator** | Generates README, API docs, architecture docs, changelog entries from code | `/agents/doc-generator` |
+| **changelog-manager** | Builds Keep a Changelog entries from git history, determines semver | `/agents/changelog-manager` |
+| **git-workflow** | Conventional commits, branch strategy, PR creation, release workflow | `/agents/git-workflow` |
 
-**Usage:**
-```
-/agents/code-reviewer Review the authentication module
-/agents/security-auditor Audit the API endpoints for vulnerabilities
-/agents/doc-generator Generate API documentation for src/routes/
-/agents/qa-engineer Analyze test coverage for the payment service
-```
+See the [How to Use](#how-to-use) section above for detailed output examples from each agent.
 
 ---
 
 ## GitHub Workflows (12)
 
-CI/CD automation included in `.github/workflows/`:
+CI/CD automation that runs automatically — no configuration required.
 
-| Workflow | Trigger | Purpose |
-|----------|---------|---------|
-| `documentation-check.yml` | PR (*.md) | YAML frontmatter validation, link checking |
-| `qa-validation.yml` | PR (*.py) | Python syntax, flake8, bandit security, CLI standards |
-| `changelog-enforcer.yml` | PR to main/dev | Ensures CHANGELOG.md updates for code changes |
-| `skill-validation.yml` | PR (skills) | Package structure validation, quality report |
-| `release-drafter.yml` | Push to main | Auto-generated release notes with stats |
-| `skill-auto-update.yml` | Daily/manual | Detects skill changes, generates update manifest |
+| Workflow | Triggers On | What It Does |
+|----------|------------|--------------|
+| `qa-validation.yml` | PR with `*.py` changes | Python syntax check, flake8, bandit security, CLI standards |
+| `documentation-check.yml` | PR with `*.md` changes | YAML frontmatter validation, link checking, skill inventory |
+| `changelog-enforcer.yml` | PR to main/dev | Ensures CHANGELOG.md is updated when code changes |
+| `skill-validation.yml` | PR touching skills | Package structure validation, tier classification report |
+| `release-drafter.yml` | Push to main | Auto-generates release notes with full repo stats |
+| `skill-auto-update.yml` | Daily + manual | Detects changed skills, generates update manifest |
 | `ci-quality-gate.yml` | PR | Lint, test, build verification |
 | `claude-code-review.yml` | PR | AI-powered code review |
 | `smart-sync.yml` | Push | Cross-platform skill synchronization |
-| `pr-issue-auto-close.yml` | Merge | Auto-close linked issues |
+| `pr-issue-auto-close.yml` | Merge | Auto-close linked issues on merge |
 | `claude.yml` | Various | Claude Code integration |
 | `sync-codex-skills.yml` | Push | Codex compatibility sync |
 
----
-
-## Production Agents
-
-Pre-configured agents for autonomous workflows:
-
-| Agent | Domain | Description |
-|-------|--------|-------------|
-| [cs-content-creator](agents/marketing/cs-content-creator.md) | Marketing | Content creation with brand voice |
-| [cs-demand-gen-specialist](agents/marketing/cs-demand-gen-specialist.md) | Marketing | Demand generation campaigns |
-| [cs-ceo-advisor](agents/c-level/cs-ceo-advisor.md) | C-Level | Strategic business planning |
-| [cs-cto-advisor](agents/c-level/cs-cto-advisor.md) | C-Level | Technical leadership |
-| [cs-product-manager](agents/product/cs-product-manager.md) | Product | Product strategy & execution |
-
----
-
-## Claude Code Integration
-
-### Slash Commands
-
-```bash
-/git:cm    # Commit without push
-/git:cp    # Commit and push
-/git:pr    # Create pull request
-/review    # Run quality checks
-/security-scan  # Security validation
-```
-
-### Plugin Marketplace
-
-14 plugin bundles available via the marketplace. See [INSTALLATION.md](INSTALLATION.md) for details.
+See the [Using Workflows](#3-using-workflows-cicd-automation) section above for sample output from each workflow.
 
 ---
 
@@ -440,52 +793,15 @@ Claude-Skills/
 
 ---
 
-## Use Cases
-
-### For Individuals
-- **Career Development** — Learn expert frameworks for your role
-- **Interview Prep** — Understand what senior professionals know
-- **Skill Building** — Accelerate your learning curve
-
-### For Teams
-- **Onboarding** — Give new hires expert-level context immediately
-- **Consistency** — Standardize how your team approaches problems
-- **Knowledge Base** — Capture institutional expertise
-
-### For AI Development
-- **System Prompts** — Create specialized Claude instances
-- **Agent Building** — Equip AI agents with domain expertise
-- **Automation** — 178 Python tools for real workflows
-- **Subagents** — 6 ready-to-use Claude Code subagents
-- **CI/CD** — 12 GitHub workflows for quality gates and automation
-
----
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
-### Quick Contribution Guide
-
 1. Fork this repository
-2. Create a skill following the standard package structure
-3. Include Python tools, references, and assets
-4. Ensure comprehensive domain coverage
-5. Submit a pull request
-
-### Skill Quality Standards
-- YAML frontmatter with metadata
-- 100-1200 line SKILL.md with progressive disclosure
-- 2-4 production-ready Python tools (standard library only)
-- 2-4 reference guides
-- Reusable templates and assets
-- 15-25 keywords for discoverability
-
----
-
-## Security
-
-See [SECURITY.md](SECURITY.md) for vulnerability reporting and security practices.
+2. Create a skill following the [standard package structure](#repository-structure)
+3. Include Python tools (standard library only), references, and assets
+4. Add YAML frontmatter to your SKILL.md
+5. Submit a pull request — CI workflows will validate your skill automatically
 
 ---
 
