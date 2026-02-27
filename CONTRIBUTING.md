@@ -397,7 +397,7 @@ Expected behavior:
 - **General Questions:** Open a [discussion](https://github.com/borghei/Claude-Skills/discussions)
 - **Bug Reports:** Use [bug report template](https://github.com/borghei/Claude-Skills/issues/new?template=bug_report.md)
 - **Feature Ideas:** Use [feature request template](https://github.com/borghei/Claude-Skills/issues/new?template=feature_request.md)
-- **Contact:** [borghei.com](https://borghei.com) or [medium.com/@borghei](https://medium.com/@borghei)
+- **Contact:** [borghei.me](https://borghei.me) or [medium.com/@borghei](https://medium.com/@borghei)
 
 ---
 

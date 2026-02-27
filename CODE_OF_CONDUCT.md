@@ -61,8 +61,8 @@ representative at an online or offline event.
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at:
 
-**Email:** Available through [borghei.com](https://borghei.com)
-**Website:** [borghei.com](https://borghei.com)
+**Email:** Available through [borghei.me](https://borghei.me)
+**Website:** [borghei.me](https://borghei.me)
 
 All complaints will be reviewed and investigated promptly and fairly.
 

@@ -3,7 +3,7 @@
 > **The most comprehensive Claude AI skills repository** with 42 production-ready expert skills across 6 professional domains, featuring 97 Python automation tools and complete frameworks for Marketing, Engineering, Product, Project Management, C-Level Leadership, and Regulatory Affairs.
 
 **Repository:** https://github.com/borghei/Claude-Skills
-**Author:** [borghei](https://borghei.com) | [@borghei](https://medium.com/@borghei)
+**Author:** [borghei](https://borghei.me) | [@borghei](https://medium.com/@borghei)
 **License:** MIT
 **Status:** Production Ready | 42 Skills | 6 Domains | $20.8M Annual ROI Potential
 
@@ -295,7 +295,7 @@ A Claude Skill is a modular package of instructions, scripts, and resources that
 - Pull Requests - Contributions welcome
 
 **Contact:**
-- Website: [borghei.com](https://borghei.com)
+- Website: [borghei.me](https://borghei.me)
 - Blog: [medium.com/@borghei](https://medium.com/@borghei)
 
 ---
@@ -675,7 +675,7 @@ Content creation, demand generation, product launches, sprint planning, code rev
 **License:** MIT - Free for commercial use
 **Support:** GitHub Issues, Discussions, and direct contact
 
-**Author:** [borghei](https://borghei.com) - [Blog](https://medium.com/@borghei)
+**Author:** [borghei](https://borghei.me) - [Blog](https://medium.com/@borghei)
 
 **Related Projects:**
 - [Skill Factory](https://github.com/borghei/claude-code-skill-factory) - Generate custom skills
@@ -829,7 +829,7 @@ A: Claude Skills Library includes domain-specific skills: content-creator for ma
 **Contributing:** See CONTRIBUTING.md in repository
 
 **Author:**
-- Website: https://borghei.com
+- Website: https://borghei.me
 - Blog: https://medium.com/@borghei
 - LinkedIn: Connect for updates on Claude AI and skills development
 

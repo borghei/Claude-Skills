@@ -24,7 +24,7 @@ Please **do not** create a public GitHub issue for security vulnerabilities. Thi
 Report security vulnerabilities through:
 
 **Primary Contact:**
-- **Website:** [borghei.com](https://borghei.com) (use contact form)
+- **Website:** [borghei.me](https://borghei.me) (use contact form)
 - **Medium:** [@borghei](https://medium.com/@borghei) (private message)
 
 **Information to Include:**
@@ -275,7 +275,7 @@ Security researchers who responsibly disclose will be:
 
 For security-related inquiries:
 
-- **Website:** [borghei.com](https://borghei.com)
+- **Website:** [borghei.me](https://borghei.me)
 - **Blog:** [medium.com/@borghei](https://medium.com/@borghei)
 - **GitHub Issues:** For non-security bugs only
 

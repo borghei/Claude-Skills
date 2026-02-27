@@ -906,7 +906,7 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 - Submit via GitHub Issues with `enhancement` label
 
 **General Questions:**
-- Visit: https://borghei.com
+- Visit: https://borghei.me
 - Blog: https://medium.com/@borghei
 
 ---
