@@ -1,7 +1,7 @@
 ---
 name: agent-designer
 description: Designs multi-agent system architectures with orchestration patterns, tool schemas, and performance evaluation. Use when building AI agent systems, designing agent workflows, creating tool schemas, or evaluating agent performance.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

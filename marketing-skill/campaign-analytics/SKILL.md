@@ -1,7 +1,7 @@
 ---
 name: campaign-analytics
 description: Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei

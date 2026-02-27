@@ -1,7 +1,7 @@
 ---
 name: customer-success-manager
 description: Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei

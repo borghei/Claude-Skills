@@ -1,7 +1,7 @@
 ---
 name: observability-designer
 description: Designs comprehensive observability strategies including SLI/SLO frameworks, alerting optimization, and dashboard generation. Use when implementing monitoring, creating alerts, designing dashboards, or defining SLOs for production systems.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

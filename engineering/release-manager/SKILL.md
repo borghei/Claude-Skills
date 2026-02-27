@@ -1,7 +1,7 @@
 ---
 name: release-manager
 description: Automates release management with changelog generation, semantic versioning, and release readiness checks. Use when preparing releases, generating changelogs, bumping versions, or validating release candidates.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

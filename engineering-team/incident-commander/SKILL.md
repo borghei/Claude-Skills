@@ -1,7 +1,7 @@
 ---
 name: incident-commander
 description: Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity, or building incident response playbooks.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

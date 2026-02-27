@@ -5,7 +5,7 @@ description: >
   GitHub Actions workflows, deployment automation, and agentic workflow patterns.
   Provides production-ready templates, cost optimization strategies, quality gates,
   and multi-environment deployment planning for modern DevOps practices.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

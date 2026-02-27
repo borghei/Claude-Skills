@@ -1,7 +1,7 @@
 ---
 name: scrum-master
 description: Advanced Scrum Master with data-driven team health analysis, velocity forecasting, retrospective insights, and team development expertise. Features comprehensive sprint health scoring, Monte Carlo forecasting, and psychological safety frameworks for high-performing agile teams.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 2.0.0
   author: borghei

@@ -100,14 +100,14 @@ jobs:
         run: |
           VERSION="${{ github.event.inputs.version || 'next' }}"
 
-          # Check for existing draft
-          EXISTING=$(gh release list --limit 5 | grep "Draft" | head -1 | awk '{print $1}' || true)
+          # Check for existing draft — use --json to reliably get the tag name
+          EXISTING_TAG=$(gh release list --limit 10 --json tagName,isDraft --jq '.[] | select(.isDraft==true) | .tagName' | head -1 || true)
 
-          if [ -n "$EXISTING" ]; then
-            echo "Updating existing draft: $EXISTING"
-            gh release edit "$EXISTING" --notes-file /tmp/release-notes.md --draft
+          if [ -n "$EXISTING_TAG" ]; then
+            echo "Updating existing draft: $EXISTING_TAG"
+            gh release edit "$EXISTING_TAG" --notes-file /tmp/release-notes.md --draft
           else
-            echo "Creating new draft release"
+            echo "Creating new draft release: v${VERSION}"
             gh release create "v${VERSION}" \
               --draft \
               --title "Claude Skills Library v${VERSION}" \

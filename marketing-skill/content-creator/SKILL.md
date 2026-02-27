@@ -1,7 +1,7 @@
 ---
 name: content-creator
 description: Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creating social media content, analyzing brand voice, optimizing SEO, planning content calendars, or when user mentions content creation, brand voice, SEO optimization, social media marketing, or content strategy.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei

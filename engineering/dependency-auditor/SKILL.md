@@ -1,7 +1,7 @@
 ---
 name: dependency-auditor
 description: Scans project dependencies for vulnerabilities, license compliance issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning upgrades, or assessing supply chain security.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

@@ -1,7 +1,7 @@
 ---
 name: api-design-reviewer
 description: Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs, generates API scorecards, and detects breaking changes between versions. Use when designing APIs, reviewing API contracts, or managing API versioning.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

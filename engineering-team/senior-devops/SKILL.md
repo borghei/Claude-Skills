@@ -1,7 +1,7 @@
 ---
 name: senior-devops
 description: Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deployment strategies, monitoring and observability, and security hardening. Provides pipeline generation, Terraform scaffolding, and deployment management automation. Use when the user needs to build CI/CD pipelines, containerize applications, manage Kubernetes clusters, provision cloud infrastructure, implement deployment strategies, set up monitoring, optimize cloud costs, or handle incident response.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 2.0.0
   category: engineering

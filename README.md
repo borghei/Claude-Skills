@@ -6,7 +6,7 @@
 
 **Production-ready skill packages for Claude AI & Claude Code** — 97 expert-level skills with 178 Python automation tools, 6 Claude Code subagents, and 12 CI/CD workflows across 13 professional domains.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude AI](https://img.shields.io/badge/Claude-AI-blue.svg)](https://claude.ai)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-purple.svg)](https://claude.ai/code)
 [![Multi-Agent Compatible](https://img.shields.io/badge/Multi--Agent-Compatible-green.svg)](https://github.com/borghei/Claude-Skills)
@@ -807,7 +807,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## License
 
-MIT License — Use freely in personal and commercial projects. See [LICENSE](LICENSE).
+**MIT + Commons Clause** — Free to use in open-source projects, personal use, education, and internal business workflows. You cannot sell this software or repackage it as a paid product. See [LICENSE](LICENSE) for full terms.
 
 ---
 

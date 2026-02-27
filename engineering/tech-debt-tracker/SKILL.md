@@ -1,7 +1,7 @@
 ---
 name: tech-debt-tracker
 description: Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt, prioritizing refactoring, or measuring code quality trends over time.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering

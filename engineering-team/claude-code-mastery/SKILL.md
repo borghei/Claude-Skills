@@ -8,7 +8,7 @@ description: >-
   "set up worktrees", or "integrate Claude Code with editors".
   Use for Claude Code CLI mastery, skill authoring, context engineering,
   hooks automation, subagent creation, and development workflow optimization.
-license: MIT
+license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   category: engineering
