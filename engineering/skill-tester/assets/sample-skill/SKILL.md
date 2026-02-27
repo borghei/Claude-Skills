@@ -1,6 +1,14 @@
-# Sample Text Processor
-
 ---
+name: sample-text-processor
+description: Sample skill for testing the skill-tester validation pipeline. Demonstrates proper skill structure with scripts, references, and assets.
+license: MIT
+metadata:
+  version: 1.0.0
+  category: testing
+  tier: BASIC
+---
+
+# Sample Text Processor
 
 **Name**: sample-text-processor
 **Tier**: BASIC

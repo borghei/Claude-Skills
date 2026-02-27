@@ -1,0 +1,120 @@
+---
+name: QA Validation
+
+'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**/scripts/**'
+      - '**/*.py'
+  push:
+    branches: [dev]
+    paths:
+      - '**/scripts/**'
+      - '**/*.py'
+  workflow_dispatch:
+
+concurrency:
+  group: qa-validation-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  python-quality:
+    name: Python Script Quality
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
+
+    steps:
+      - name: Check Workflow Kill Switch
+        run: |
+          if [ -f ".github/WORKFLOW_KILLSWITCH" ]; then
+            STATUS=$(grep "STATUS:" .github/WORKFLOW_KILLSWITCH | awk '{print $2}')
+            if [ "$STATUS" = "DISABLED" ]; then
+              echo "Workflows disabled by kill switch"
+              exit 0
+            fi
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install QA tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 bandit
+
+      - name: Python syntax validation
+        run: |
+          echo "=== Python Syntax Check ==="
+          errors=0
+          total=0
+          for pyfile in $(find . -name "*.py" -not -path "./.git/*" -not -path "./__pycache__/*"); do
+            total=$((total + 1))
+            if ! python -m py_compile "$pyfile" 2>/dev/null; then
+              echo "SYNTAX ERROR: $pyfile"
+              errors=$((errors + 1))
+            fi
+          done
+          echo "Checked $total Python files, $errors syntax errors"
+          if [ $errors -gt 0 ]; then
+            exit 1
+          fi
+
+      - name: Flake8 lint (non-blocking)
+        continue-on-error: true
+        run: |
+          echo "=== Flake8 Lint ==="
+          flake8 --max-line-length=120 --count --statistics \
+            --select=E9,F63,F7,F82 \
+            --exclude=.git,__pycache__,.codex \
+            . || true
+
+      - name: Bandit security scan
+        continue-on-error: true
+        run: |
+          echo "=== Bandit Security Scan ==="
+          bandit -r . -ll --exclude .git,.codex \
+            -f txt --severity-level medium || true
+
+      - name: Check CLI standards
+        run: |
+          echo "=== CLI Standards Check ==="
+          warnings=0
+          for pyfile in $(find . -name "*.py" -not -path "./.git/*" -not -path "./__pycache__/*" -not -path "./.codex/*"); do
+            # Check for if __name__ == "__main__" pattern
+            if grep -q "def main" "$pyfile" && ! grep -q '__name__.*==.*"__main__"' "$pyfile" && ! grep -q "__name__.*==.*'__main__'" "$pyfile"; then
+              echo "WARNING: $pyfile has main() but no if __name__ guard"
+              warnings=$((warnings + 1))
+            fi
+
+            # Check for argparse or --help support
+            if grep -q "def main" "$pyfile" && ! grep -q "argparse\|--help\|sys.argv\|click\|typer" "$pyfile"; then
+              echo "INFO: $pyfile may lack CLI argument support"
+            fi
+          done
+          echo "CLI standards check complete: $warnings warnings"
+
+      - name: Script inventory
+        run: |
+          echo "=== Python Script Inventory ==="
+          total=$(find . -name "*.py" -not -path "./.git/*" -not -path "./__pycache__/*" -not -path "./.codex/*" | wc -l)
+          echo "Total Python scripts: $total"
+          echo ""
+          echo "By domain:"
+          for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success scripts; do
+            if [ -d "$domain" ]; then
+              count=$(find "$domain" -name "*.py" -not -path "*/__pycache__/*" | wc -l)
+              if [ "$count" -gt 0 ]; then
+                echo "  $domain: $count scripts"
+              fi
+            fi
+          done

@@ -1,7 +1,18 @@
+---
+name: tech-debt-tracker
+description: Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt, prioritizing refactoring, or measuring code quality trends over time.
+license: MIT
+metadata:
+  version: 1.0.0
+  category: engineering
+  domain: code-quality
+  tier: POWERFUL
+---
+
 # Tech Debt Tracker
 
-**Tier**: POWERFUL 🔥  
-**Category**: Engineering Process Automation  
+**Tier**: POWERFUL
+**Category**: Engineering Process Automation
 **Expertise**: Code Quality, Technical Debt Management, Software Engineering
 
 ## Overview

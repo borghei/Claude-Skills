@@ -1,0 +1,158 @@
+---
+name: Skill Validation
+
+'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**/SKILL.md'
+      - '**/scripts/**'
+      - '**/references/**'
+      - '**/assets/**'
+  workflow_dispatch:
+
+concurrency:
+  group: skill-validation-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  validate-skills:
+    name: Validate Skill Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+
+    steps:
+      - name: Check Workflow Kill Switch
+        run: |
+          if [ -f ".github/WORKFLOW_KILLSWITCH" ]; then
+            STATUS=$(grep "STATUS:" .github/WORKFLOW_KILLSWITCH | awk '{print $2}')
+            if [ "$STATUS" = "DISABLED" ]; then
+              echo "Workflows disabled by kill switch"
+              exit 0
+            fi
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate skill structure
+        run: |
+          echo "=== Skill Structure Validation ==="
+          errors=0
+          warnings=0
+          skills=0
+
+          for skill_file in $(find . -name "SKILL.md" -not -path "./.git/*" -not -path "./.codex/*"); do
+            skills=$((skills + 1))
+            skill_dir=$(dirname "$skill_file")
+            skill_name=$(basename "$skill_dir")
+
+            echo "--- Validating: $skill_name ---"
+
+            # Check SKILL.md minimum size
+            lines=$(wc -l < "$skill_file")
+            if [ "$lines" -lt 50 ]; then
+              echo "  WARNING: SKILL.md is only $lines lines (minimum recommended: 100)"
+              warnings=$((warnings + 1))
+            fi
+
+            # Check for required sections
+            for section in "Quick Start" "Workflow"; do
+              if ! grep -qi "$section" "$skill_file"; then
+                echo "  INFO: Missing '$section' section"
+              fi
+            done
+
+            # Validate Python scripts if present
+            if [ -d "$skill_dir/scripts" ]; then
+              for pyfile in "$skill_dir"/scripts/*.py; do
+                if [ -f "$pyfile" ]; then
+                  if ! python -m py_compile "$pyfile" 2>/dev/null; then
+                    echo "  ERROR: Syntax error in $(basename "$pyfile")"
+                    errors=$((errors + 1))
+                  fi
+                fi
+              done
+            fi
+
+            # Check for empty directories
+            for subdir in scripts references assets; do
+              if [ -d "$skill_dir/$subdir" ] && [ -z "$(ls -A "$skill_dir/$subdir" 2>/dev/null)" ]; then
+                echo "  WARNING: Empty $subdir/ directory"
+                warnings=$((warnings + 1))
+              fi
+            done
+          done
+
+          echo ""
+          echo "=== Validation Summary ==="
+          echo "Skills validated: $skills"
+          echo "Errors: $errors"
+          echo "Warnings: $warnings"
+
+          if [ $errors -gt 0 ]; then
+            echo "FAILED: $errors errors found"
+            exit 1
+          fi
+
+      - name: Check skill cross-references
+        run: |
+          echo "=== Cross-Reference Check ==="
+          # Verify skills referenced in CLAUDE.md actually exist
+          if [ -f "CLAUDE.md" ]; then
+            echo "Checking CLAUDE.md references..."
+            # Extract domain directories mentioned
+            for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success; do
+              if grep -q "$domain" CLAUDE.md; then
+                if [ ! -d "$domain" ]; then
+                  echo "WARNING: CLAUDE.md references $domain but directory doesn't exist"
+                fi
+              fi
+            done
+          fi
+
+      - name: Generate skill quality report
+        run: |
+          echo "=== Skill Quality Report ==="
+          echo ""
+          printf "%-35s %-8s %-8s %-8s %-8s %-10s\n" "Skill" "Lines" "Scripts" "Refs" "Assets" "Tier"
+          echo "$(printf '=%.0s' {1..85})"
+
+          for skill_file in $(find . -name "SKILL.md" -not -path "./.git/*" -not -path "./.codex/*" | sort); do
+            skill_dir=$(dirname "$skill_file")
+            skill_name=$(basename "$skill_dir")
+            lines=$(wc -l < "$skill_file")
+
+            scripts=0
+            refs=0
+            assets=0
+
+            if [ -d "$skill_dir/scripts" ]; then
+              scripts=$(find "$skill_dir/scripts" -name "*.py" 2>/dev/null | wc -l)
+            fi
+            if [ -d "$skill_dir/references" ]; then
+              refs=$(find "$skill_dir/references" -name "*.md" 2>/dev/null | wc -l)
+            fi
+            if [ -d "$skill_dir/assets" ]; then
+              assets=$(find "$skill_dir/assets" -type f 2>/dev/null | wc -l)
+            fi
+
+            # Determine tier
+            tier="Tier 3"
+            if [ "$scripts" -gt 0 ] && [ "$refs" -gt 0 ] && [ "$assets" -gt 0 ]; then
+              tier="Tier 1"
+            elif [ "$scripts" -gt 0 ] || [ "$refs" -gt 0 ]; then
+              tier="Tier 2"
+            fi
+
+            printf "%-35s %-8s %-8s %-8s %-8s %-10s\n" "$skill_name" "$lines" "$scripts" "$refs" "$assets" "$tier"
+          done

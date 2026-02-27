@@ -1,0 +1,299 @@
+# =============================================================================
+# CI Workflow Template -- Python + Node.js
+# =============================================================================
+#
+# Production-ready continuous integration workflow for projects that use both
+# Python (backend/scripts) and Node.js (frontend/tooling). Includes linting,
+# testing, building, and security scanning with caching and matrix strategies.
+#
+# Usage:
+#   1. Copy this file to .github/workflows/ci.yml
+#   2. Customize the variables in the env block
+#   3. Adjust matrix versions to match your project
+#   4. Remove sections you do not need (e.g., Node.js if Python-only)
+#
+# =============================================================================
+
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'packages/**'
+      - 'requirements*.txt'
+      - 'package*.json'
+      - 'Dockerfile'
+      - '.github/workflows/ci.yml'
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'LICENSE'
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# ---------------------------------------------------------------------------
+# Environment variables -- customize for your project
+# ---------------------------------------------------------------------------
+env:
+  PYTHON_DEFAULT_VERSION: '3.12'
+  NODE_DEFAULT_VERSION: '20'
+  # Set to 'true' to enable the Node.js jobs (remove or set 'false' for Python-only)
+  ENABLE_NODE: 'true'
+
+# ===========================================================================
+# Jobs
+# ===========================================================================
+jobs:
+
+  # -------------------------------------------------------------------------
+  # 1. Python Lint
+  # -------------------------------------------------------------------------
+  python-lint:
+    name: Python Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_DEFAULT_VERSION }}
+          cache: pip
+
+      - name: Install lint tools
+        run: pip install ruff
+
+      - name: Check formatting
+        run: ruff format --check .
+
+      - name: Check linting rules
+        run: ruff check .
+
+  # -------------------------------------------------------------------------
+  # 2. Python Tests (matrix)
+  # -------------------------------------------------------------------------
+  python-test:
+    name: Python Test (${{ matrix.python-version }})
+    needs: python-lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt 2>/dev/null || true
+
+      - name: Run tests
+        run: |
+          pytest \
+            --cov=src \
+            --cov-report=xml:coverage.xml \
+            --junitxml=results.xml \
+            -v
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: python-test-results-${{ matrix.python-version }}
+          path: |
+            results.xml
+            coverage.xml
+          retention-days: 7
+
+  # -------------------------------------------------------------------------
+  # 3. Node.js Lint (conditional)
+  # -------------------------------------------------------------------------
+  node-lint:
+    name: Node.js Lint
+    if: ${{ vars.ENABLE_NODE != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_DEFAULT_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck 2>/dev/null || echo "No typecheck script defined"
+
+  # -------------------------------------------------------------------------
+  # 4. Node.js Tests (conditional, matrix)
+  # -------------------------------------------------------------------------
+  node-test:
+    name: Node.js Test (Node ${{ matrix.node-version }})
+    needs: node-lint
+    if: ${{ vars.ENABLE_NODE != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['18', '20', '22']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --coverage --ci
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: node-test-results-${{ matrix.node-version }}
+          path: |
+            coverage/
+            junit.xml
+          retention-days: 7
+
+  # -------------------------------------------------------------------------
+  # 5. Build Verification
+  # -------------------------------------------------------------------------
+  build:
+    name: Build
+    needs: [python-test, node-test]
+    if: always() && !cancelled()
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_DEFAULT_VERSION }}
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        if: ${{ vars.ENABLE_NODE != 'false' }}
+        with:
+          node-version: ${{ env.NODE_DEFAULT_VERSION }}
+          cache: npm
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Node dependencies
+        if: ${{ vars.ENABLE_NODE != 'false' }}
+        run: npm ci
+
+      - name: Build Python package
+        run: |
+          pip install build
+          python -m build 2>/dev/null || echo "No Python build configured"
+
+      - name: Build Node package
+        if: ${{ vars.ENABLE_NODE != 'false' }}
+        run: npm run build 2>/dev/null || echo "No Node build configured"
+
+      - name: Build Docker image (verify only)
+        if: hashFiles('Dockerfile') != ''
+        run: |
+          docker build \
+            --tag ci-build-test:${{ github.sha }} \
+            --file Dockerfile \
+            .
+
+  # -------------------------------------------------------------------------
+  # 6. Security Scanning
+  # -------------------------------------------------------------------------
+  security:
+    name: Security Scan
+    needs: python-lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_DEFAULT_VERSION }}
+          cache: pip
+
+      - name: Python dependency audit
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt || true
+
+      - name: Node dependency audit
+        if: hashFiles('package-lock.json') != ''
+        run: npm audit --audit-level=high || true
+
+      - name: Scan for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --only-verified
+
+  # -------------------------------------------------------------------------
+  # 7. CI Gate (required status check)
+  # -------------------------------------------------------------------------
+  ci-gate:
+    name: CI Gate
+    if: always()
+    needs: [python-lint, python-test, build, security]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check results
+        run: |
+          echo "Python Lint:  ${{ needs.python-lint.result }}"
+          echo "Python Test:  ${{ needs.python-test.result }}"
+          echo "Build:        ${{ needs.build.result }}"
+          echo "Security:     ${{ needs.security.result }}"
+
+          if [[ "${{ needs.python-lint.result }}" == "failure" ]] || \
+             [[ "${{ needs.python-test.result }}" == "failure" ]]; then
+            echo "::error::Required checks failed"
+            exit 1
+          fi
+
+          echo "All required checks passed."
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## CI Results" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Check | Status |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Python Lint | ${{ needs.python-lint.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Python Test | ${{ needs.python-test.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Build | ${{ needs.build.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Security | ${{ needs.security.result }} |" >> "$GITHUB_STEP_SUMMARY"

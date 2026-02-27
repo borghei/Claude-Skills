@@ -4,28 +4,49 @@
 
 # Claude Skills Library
 
-**Production-Ready skill packages for Claude AI & Claude Code** — 93 expert-level skills with 92+ Python automation tools, combining best practices, analysis tools, and strategic frameworks across 11 professional domains.
+**Production-ready skill packages for Claude AI & Claude Code** — 97 expert-level skills with 178 Python automation tools, 6 Claude Code subagents, and 12 CI/CD workflows across 13 professional domains.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude AI](https://img.shields.io/badge/Claude-AI-blue.svg)](https://claude.ai)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-purple.svg)](https://claude.ai/code)
 [![Multi-Agent Compatible](https://img.shields.io/badge/Multi--Agent-Compatible-green.svg)](https://github.com/borghei/Claude-Skills)
-[![93 Skills](https://img.shields.io/badge/Skills-93-brightgreen.svg)](#-skills-library)
+[![97 Skills](https://img.shields.io/badge/Skills-97-brightgreen.svg)](#-skills-library)
+[![178 Tools](https://img.shields.io/badge/Python_Tools-178-blue.svg)](#python-automation-tools-178)
+[![6 Subagents](https://img.shields.io/badge/Subagents-6-orange.svg)](#claude-code-subagents)
 
 ---
 
 ## Quick Install
 
-**Choose your AI agent:**
+**Choose your method:**
 
-### Method 1: Claude Code Native (Recommended)
+### Method 1: Skill Installer CLI (Recommended)
+
+Install one skill per domain group with auto-update support:
+
+```bash
+git clone https://github.com/borghei/Claude-Skills.git
+cd Claude-Skills
+
+# List all 97 skills across 13 domains
+python scripts/skill-installer.py list
+
+# Install a skill (one per group by default)
+python scripts/skill-installer.py install senior-fullstack --agent claude --auto-update
+python scripts/skill-installer.py install content-creator --agent cursor --auto-update
+
+# Update all installed skills
+python scripts/skill-installer.py update
+```
+
+### Method 2: Claude Code Native
 
 ```bash
 # In Claude Code, run:
 /plugin marketplace add borghei/Claude-Skills
 
 # Install skill bundles:
-/plugin install engineering-skills@claude-code-skills   # 20 engineering skills
+/plugin install engineering-skills@claude-code-skills   # 24 engineering skills
 /plugin install engineering-advanced@claude-code-skills  # 12 advanced engineering skills
 /plugin install marketing-skills@claude-code-skills     # 10 marketing skills
 /plugin install product-skills@claude-code-skills       # 7 product skills
@@ -43,7 +64,7 @@
 /plugin install senior-fullstack@claude-code-skills
 ```
 
-### Method 2: OpenAI Codex
+### Method 3: OpenAI Codex
 
 ```bash
 git clone https://github.com/borghei/Claude-Skills.git
@@ -51,7 +72,7 @@ cd Claude-Skills
 ./scripts/codex-install.sh
 ```
 
-### Method 3: Universal Installer
+### Method 4: Universal Installer (40+ Agents)
 
 ```bash
 npx agent-skills-cli add borghei/Claude-Skills
@@ -59,9 +80,10 @@ npx agent-skills-cli add borghei/Claude-Skills
 # Install to specific agent
 npx agent-skills-cli add borghei/Claude-Skills --agent claude
 npx agent-skills-cli add borghei/Claude-Skills --agent cursor
+npx agent-skills-cli add borghei/Claude-Skills --agent vscode
 ```
 
-### Method 4: Direct Use
+### Method 5: Direct Use
 
 Copy any `SKILL.md` content and paste it to Claude with your request:
 
@@ -71,11 +93,13 @@ Copy any `SKILL.md` content and paste it to Claude with your request:
 Now help me with: [your specific task]
 ```
 
+See [INSTALLATION.md](INSTALLATION.md) for the full installation guide with auto-update, per-skill install, and troubleshooting.
+
 ---
 
-## Skills Library (93 Skills)
+## Skills Library (97 Skills)
 
-### Engineering Team (21)
+### Engineering Team (24)
 Core engineering expertise with Python automation tools, references, and templates.
 
 | Skill | Description | Tools |
@@ -85,9 +109,11 @@ Core engineering expertise with Python automation tools, references, and templat
 | [senior-backend](engineering-team/senior-backend/SKILL.md) | API design, microservices, databases, caching, queues | 2 |
 | [senior-fullstack](engineering-team/senior-fullstack/SKILL.md) | React, Node.js, databases, API design, system architecture | 3 |
 | [senior-qa](engineering-team/senior-qa/SKILL.md) | Test strategy, automation frameworks, performance testing | 2 |
-| [senior-devops](engineering-team/senior-devops/SKILL.md) | CI/CD, Kubernetes, Terraform, monitoring, SRE | 2 |
+| [senior-devops](engineering-team/senior-devops/SKILL.md) | Docker, Kubernetes, Terraform, CI/CD, monitoring, SRE | 2 |
 | [senior-secops](engineering-team/senior-secops/SKILL.md) | Security operations, vulnerability management, incident response | 2 |
 | [senior-security](engineering-team/senior-security/SKILL.md) | OWASP, threat modeling, penetration testing, compliance | 2 |
+| [senior-mobile](engineering-team/senior-mobile/SKILL.md) | React Native, iOS, Android, cross-platform, app store | 3 |
+| [senior-cloud-architect](engineering-team/senior-cloud-architect/SKILL.md) | AWS, GCP, Azure, multi-cloud, cost optimization | - |
 | [senior-data-scientist](engineering-team/senior-data-scientist/SKILL.md) | A/B testing, statistical analysis, feature engineering | 3 |
 | [senior-data-engineer](engineering-team/senior-data-engineer/SKILL.md) | Airflow, Spark, data pipelines, warehousing | 3 |
 | [senior-ml-engineer](engineering-team/senior-ml-engineer/SKILL.md) | ML pipelines, model deployment, MLOps, RAG systems | 3 |
@@ -99,11 +125,12 @@ Core engineering expertise with Python automation tools, references, and templat
 | [ms365-tenant-manager](engineering-team/ms365-tenant-manager/SKILL.md) | Office 365/Azure AD administration | 2 |
 | [tdd-guide](engineering-team/tdd-guide/SKILL.md) | Test-driven development workflow | 2 |
 | [tech-stack-evaluator](engineering-team/tech-stack-evaluator/SKILL.md) | Framework comparison, TCO analysis | 2 |
-| [senior-mobile](engineering-team/senior-mobile/SKILL.md) | React Native, iOS, Android, cross-platform development | - |
-| [senior-cloud-architect](engineering-team/senior-cloud-architect/SKILL.md) | AWS, GCP, Azure, multi-cloud, cost optimization | - |
+| [claude-code-mastery](engineering-team/claude-code-mastery/SKILL.md) | CLAUDE.md optimization, skill authoring, subagents, hooks | 3 |
+| [codex-cli-specialist](engineering-team/codex-cli-specialist/SKILL.md) | Cross-platform skill authoring, Codex CLI, conversion tools | 3 |
+| [devops-workflow-engineer](engineering-team/devops-workflow-engineer/SKILL.md) | GitHub Actions, CI/CD pipelines, deployment strategies | 3 |
 
-### Advanced Engineering (11)
-Enterprise-grade POWERFUL tier skills with sophisticated analysis.
+### Advanced Engineering (12)
+Enterprise-grade skills with sophisticated analysis tooling.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -248,21 +275,21 @@ People operations and workforce analytics.
 
 ```
 skill-name/
-├── SKILL.md            # Main skill documentation (100-500 lines)
-├── scripts/            # 2-3 Python CLI automation tools
+├── SKILL.md            # Main skill documentation (100-1200 lines)
+├── scripts/            # 2-4 Python CLI automation tools
 │   ├── tool1.py
 │   ├── tool2.py
 │   └── tool3.py
-├── references/         # 3-4 comprehensive guides
+├── references/         # 2-4 comprehensive expert guides
 │   ├── framework.md
 │   ├── best_practices.md
 │   └── examples.md
 └── assets/             # User-facing templates
     ├── template1.md
-    └── sample_data.json
+    └── checklist.md
 ```
 
-### Python Automation Tools (92+)
+### Python Automation Tools (178)
 
 All tools are:
 - **Standard library only** — no external dependencies
@@ -281,12 +308,65 @@ python product-team/product-manager-toolkit/scripts/rice_prioritizer.py features
 # Code quality analysis
 python engineering-team/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
 
-# SEO optimization
-python marketing-skill/content-creator/scripts/seo_optimizer.py article.md "keyword"
+# CLAUDE.md optimization
+python engineering-team/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
+
+# GitHub Actions workflow generation
+python engineering-team/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python
+
+# Scaffold a new skill
+python engineering-team/claude-code-mastery/scripts/skill_scaffolder.py my-skill --domain engineering
+
+# Mobile app performance analysis
+python engineering-team/senior-mobile/scripts/app_performance_analyzer.py /path/to/app
 
 # Pipeline analytics
 python business-growth/revenue-operations/scripts/pipeline_analyzer.py pipeline.json
 ```
+
+---
+
+## Claude Code Subagents
+
+Six specialized subagents in `.claude/agents/` for autonomous workflows:
+
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| [code-reviewer](.claude/agents/code-reviewer.md) | Code quality, security, performance scoring (1-10 across 5 categories) | Read, Glob, Grep, Bash |
+| [doc-generator](.claude/agents/doc-generator.md) | README, API docs, architecture docs, changelog generation | Read, Glob, Grep, Bash, Write, Edit |
+| [qa-engineer](.claude/agents/qa-engineer.md) | Test coverage analysis, OWASP bug hunting, test generation | Read, Glob, Grep, Bash |
+| [changelog-manager](.claude/agents/changelog-manager.md) | Keep a Changelog format, semver determination from git history | Read, Glob, Grep, Bash, Write, Edit |
+| [security-auditor](.claude/agents/security-auditor.md) | OWASP Top 10, secrets scanning, infrastructure security | Read, Glob, Grep, Bash |
+| [git-workflow](.claude/agents/git-workflow.md) | Conventional commits, branch strategy, PR creation, releases | Read, Glob, Grep, Bash |
+
+**Usage:**
+```
+/agents/code-reviewer Review the authentication module
+/agents/security-auditor Audit the API endpoints for vulnerabilities
+/agents/doc-generator Generate API documentation for src/routes/
+/agents/qa-engineer Analyze test coverage for the payment service
+```
+
+---
+
+## GitHub Workflows (12)
+
+CI/CD automation included in `.github/workflows/`:
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `documentation-check.yml` | PR (*.md) | YAML frontmatter validation, link checking |
+| `qa-validation.yml` | PR (*.py) | Python syntax, flake8, bandit security, CLI standards |
+| `changelog-enforcer.yml` | PR to main/dev | Ensures CHANGELOG.md updates for code changes |
+| `skill-validation.yml` | PR (skills) | Package structure validation, quality report |
+| `release-drafter.yml` | Push to main | Auto-generated release notes with stats |
+| `skill-auto-update.yml` | Daily/manual | Detects skill changes, generates update manifest |
+| `ci-quality-gate.yml` | PR | Lint, test, build verification |
+| `claude-code-review.yml` | PR | AI-powered code review |
+| `smart-sync.yml` | Push | Cross-platform skill synchronization |
+| `pr-issue-auto-close.yml` | Merge | Auto-close linked issues |
+| `claude.yml` | Various | Claude Code integration |
+| `sync-codex-skills.yml` | Push | Codex compatibility sync |
 
 ---
 
@@ -326,17 +406,18 @@ Pre-configured agents for autonomous workflows:
 
 ```
 Claude-Skills/
-├── .claude/              # Claude Code slash commands
+├── .claude/              # Claude Code config + 6 subagents
+│   └── agents/           # code-reviewer, doc-generator, qa-engineer, etc.
 ├── .claude-plugin/       # Plugin marketplace config
-├── .codex/               # OpenAI Codex compatibility (94 skill symlinks)
-├── .github/              # CI/CD workflows, templates, automation
+├── .codex/               # OpenAI Codex compatibility (97 skill symlinks)
+├── .github/              # 12 CI/CD workflows, templates, automation
+│   └── workflows/        # Quality gates, release drafting, auto-update
 ├── agents/               # 5 production agents
 ├── business-growth/      # 3 skills + 9 Python tools
 ├── c-level-advisor/      # 5 skills + 4 Python tools
 ├── data-analytics/       # 5 skills
-├── documentation/        # Implementation plans & sprint tracking
-├── engineering/          # 12 advanced POWERFUL tier skills + 30 tools
-├── engineering-team/     # 20 core engineering skills + 35 tools
+├── engineering/          # 12 advanced skills + 33 Python tools
+├── engineering-team/     # 24 core engineering skills + 50 Python tools
 ├── finance/              # 1 skill + 4 Python tools
 ├── hr-operations/        # 4 skills
 ├── marketing-skill/      # 10 skills + 6 Python tools
@@ -344,13 +425,13 @@ Claude-Skills/
 ├── project-management/   # 9 skills + 5 Python tools
 ├── ra-qm-team/           # 12 skills + 10 Python tools
 ├── sales-success/        # 5 skills
-├── scripts/              # Utility scripts
+├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
 ├── templates/            # Reusable templates
 ├── CLAUDE.md             # Development guide
 ├── CHANGELOG.md          # Version history
 ├── CODE_OF_CONDUCT.md    # Community guidelines
-├── CONTRIBUTING.md        # Contribution guidelines
+├── CONTRIBUTING.md       # Contribution guidelines
 ├── INSTALLATION.md       # Comprehensive installation guide
 ├── LICENSE               # MIT License
 ├── README.md             # This file
@@ -374,7 +455,9 @@ Claude-Skills/
 ### For AI Development
 - **System Prompts** — Create specialized Claude instances
 - **Agent Building** — Equip AI agents with domain expertise
-- **Automation** — 92+ Python tools for real workflows
+- **Automation** — 178 Python tools for real workflows
+- **Subagents** — 6 ready-to-use Claude Code subagents
+- **CI/CD** — 12 GitHub workflows for quality gates and automation
 
 ---
 
@@ -392,9 +475,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ### Skill Quality Standards
 - YAML frontmatter with metadata
-- 100-500 line SKILL.md with progressive disclosure
-- 2-3 production-ready Python tools (standard library only)
-- 3-4 reference guides
+- 100-1200 line SKILL.md with progressive disclosure
+- 2-4 production-ready Python tools (standard library only)
+- 2-4 reference guides
 - Reusable templates and assets
 - 15-25 keywords for discoverability
 
@@ -412,4 +495,11 @@ MIT License — Use freely in personal and commercial projects. See [LICENSE](LI
 
 ---
 
-**93 production-ready skills. 92+ Python tools. 11 professional domains. Built for the Claude community.**
+<p align="center">
+  <strong>97 production-ready skills. 178 Python tools. 6 subagents. 12 workflows. 13 domains.</strong><br>
+  Built for the Claude community.
+</p>
+
+<p align="center">
+  <a href="https://borghei.me/">borghei.me</a>
+</p>

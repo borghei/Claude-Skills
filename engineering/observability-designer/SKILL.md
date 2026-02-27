@@ -1,7 +1,18 @@
+---
+name: observability-designer
+description: Designs comprehensive observability strategies including SLI/SLO frameworks, alerting optimization, and dashboard generation. Use when implementing monitoring, creating alerts, designing dashboards, or defining SLOs for production systems.
+license: MIT
+metadata:
+  version: 1.0.0
+  category: engineering
+  domain: observability
+  tier: POWERFUL
+---
+
 # Observability Designer (POWERFUL)
 
-**Category:** Engineering  
-**Tier:** POWERFUL  
+**Category:** Engineering
+**Tier:** POWERFUL
 **Description:** Design comprehensive observability strategies for production systems including SLI/SLO frameworks, alerting optimization, and dashboard generation.
 
 ## Overview

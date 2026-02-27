@@ -1,14 +1,16 @@
 # Installation Guide - Claude Skills Library
 
-Complete installation guide for all 53 production-ready skills across multiple AI agents and platforms.
+Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 GitHub workflows.
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+- [Skill Installer CLI (New!)](#skill-installer-cli-new)
 - [Claude Code Native Marketplace](#claude-code-native-marketplace-new)
 - [Universal Installer](#universal-installer)
 - [OpenAI Codex Installation](#openai-codex-installation)
 - [Per-Skill Installation](#per-skill-installation)
+- [Auto-Update](#auto-update)
 - [Multi-Agent Setup](#multi-agent-setup)
 - [Manual Installation](#manual-installation)
 - [Verification & Testing](#verification--testing)
@@ -59,6 +61,82 @@ This single command installs all skills to all supported agents automatically.
 - ✅ Works across all skill formats
 
 Learn more: https://www.agentskills.in
+
+---
+
+## Skill Installer CLI (New!)
+
+Install **one skill per domain group** into your project with built-in auto-update support. This is the recommended way to pick individual skills.
+
+### List Available Skills
+
+```bash
+# List all 97 skills across 13 domains
+python scripts/skill-installer.py list
+
+# List skills in a specific group
+python scripts/skill-installer.py list --group engineering-team
+python scripts/skill-installer.py list --group marketing-skill
+python scripts/skill-installer.py list --group ra-qm-team
+```
+
+### Install a Skill
+
+```bash
+# Install to generic .skills/ directory (default)
+python scripts/skill-installer.py install content-creator
+
+# Install to a specific agent
+python scripts/skill-installer.py install senior-fullstack --agent claude
+python scripts/skill-installer.py install ceo-advisor --agent cursor
+python scripts/skill-installer.py install product-manager-toolkit --agent vscode
+
+# Install with auto-update enabled
+python scripts/skill-installer.py install senior-devops --agent claude --auto-update
+```
+
+**One-per-group policy:** By default, you can install one skill per domain group (e.g., one from `engineering-team`, one from `marketing-skill`). Use `--force` to override.
+
+### Update Installed Skills
+
+```bash
+# Update all skills with auto-update enabled
+python scripts/skill-installer.py update
+
+# Update a specific skill (even without auto-update)
+python scripts/skill-installer.py update content-creator
+```
+
+### Check Status
+
+```bash
+# Show all installed skills
+python scripts/skill-installer.py status
+python scripts/skill-installer.py status --agent claude
+```
+
+### Remove a Skill
+
+```bash
+python scripts/skill-installer.py uninstall content-creator
+```
+
+### Available Domain Groups
+
+| Group | Skills | Highlights |
+|-------|--------|------------|
+| **engineering-team** | 24 | fullstack, devops, security, AI/ML, mobile, cloud |
+| **engineering** | 12 | agent-designer, rag-architect, database-designer |
+| **ra-qm-team** | 12 | ISO 13485, MDR, FDA, GDPR, audit |
+| **marketing-skill** | 10 | content, SEO, ASO, analytics, growth |
+| **project-management** | 9 | PM, scrum, Jira, Confluence, delivery |
+| **product-team** | 7 | product manager, UX, design systems |
+| **c-level-advisor** | 5 | CEO, CTO, CFO, CMO, COO |
+| **data-analytics** | 5 | data analyst, BI, analytics engineer |
+| **sales-success** | 5 | account exec, sales engineer, CS |
+| **hr-operations** | 4 | talent, people analytics, HR partner |
+| **business-growth** | 3 | customer success, revenue ops |
+| **finance** | 1 | financial analyst |
 
 ---
 
@@ -312,6 +390,74 @@ npx agent-skills-cli add borghei/Claude-Skills/ra-qm-team/fda-consultant-special
 npx agent-skills-cli add borghei/Claude-Skills/ra-qm-team/qms-audit-expert
 npx agent-skills-cli add borghei/Claude-Skills/ra-qm-team/isms-audit-expert
 ```
+
+---
+
+## Auto-Update
+
+Keep your installed skills up to date automatically.
+
+### Method 1: Skill Installer CLI (Recommended)
+
+```bash
+# Pull latest repository changes
+git pull origin main
+
+# Update all skills with auto-update enabled
+python scripts/skill-installer.py update
+
+# Update a specific skill
+python scripts/skill-installer.py update senior-fullstack --agent claude
+```
+
+### Method 2: GitHub Action (CI/CD)
+
+The repository includes a `skill-auto-update.yml` workflow that:
+- Runs daily at 6 AM UTC
+- Detects which skills changed
+- Generates an update manifest
+- Can be triggered manually via `workflow_dispatch`
+
+To use in your own project, add this to your CI:
+
+```yaml
+# .github/workflows/update-skills.yml
+name: Update Claude Skills
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git clone https://github.com/borghei/Claude-Skills.git /tmp/claude-skills
+          cd /tmp/claude-skills
+          python scripts/skill-installer.py update --agent project
+```
+
+### Method 3: Git Submodule
+
+For tighter integration, add the skills repo as a submodule:
+
+```bash
+# Add as submodule
+git submodule add https://github.com/borghei/Claude-Skills.git .claude-skills
+
+# Update to latest
+git submodule update --remote .claude-skills
+```
+
+### Update Manifest
+
+When you install skills with `--auto-update`, a `.claude-skills.json` manifest is created in your target directory. This tracks:
+- Which skills are installed
+- Which group each skill belongs to
+- When each skill was last updated
+- Whether auto-update is enabled per skill
 
 ---
 
@@ -766,5 +912,5 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 ---
 
 **Last Updated:** February 2026
-**Skills Version:** 1.0 (53 production skills)
+**Skills Version:** 2.0 (97 production skills, 178 Python tools, 6 subagents, 12 workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

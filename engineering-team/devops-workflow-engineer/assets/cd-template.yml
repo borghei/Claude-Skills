@@ -1,0 +1,350 @@
+# =============================================================================
+# CD Workflow Template -- Multi-Environment Deploy
+# =============================================================================
+#
+# Production-ready continuous delivery workflow with multi-environment
+# deployment, Docker image building, health checks, and rollback support.
+#
+# Usage:
+#   1. Copy this file to .github/workflows/cd.yml
+#   2. Customize the env block with your registry and app name
+#   3. Configure GitHub Environments (dev, staging, production) with
+#      appropriate protection rules and secrets
+#   4. Set required secrets per environment:
+#      - DEPLOY_TOKEN or KUBECONFIG (for deployment)
+#      - HEALTH_CHECK_URL (for post-deploy verification)
+#
+# Deployment flow:
+#   Build -> Dev (auto) -> Staging (auto) -> Production (manual approval)
+#
+# =============================================================================
+
+name: CD
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'Dockerfile'
+      - '.github/workflows/cd.yml'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - production
+        default: staging
+      skip_tests:
+        description: 'Skip pre-deploy tests'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false    # Never cancel in-progress deployments
+
+# ---------------------------------------------------------------------------
+# Environment variables -- customize for your project
+# ---------------------------------------------------------------------------
+env:
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+  APP_NAME: ${{ github.event.repository.name }}
+  # Timeout for health checks (seconds)
+  HEALTH_CHECK_TIMEOUT: 30
+  # Number of health check retries
+  HEALTH_CHECK_RETRIES: 5
+
+# ===========================================================================
+# Jobs
+# ===========================================================================
+jobs:
+
+  # -------------------------------------------------------------------------
+  # 1. Build and Push Docker Image
+  # -------------------------------------------------------------------------
+  build:
+    name: Build Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      image_tag: ${{ github.sha }}
+      image_url: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.APP_NAME }}
+          tags: |
+            type=sha,prefix=
+            type=ref,event=branch
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            BUILD_SHA=${{ github.sha }}
+            BUILD_TIME=${{ github.event.head_commit.timestamp }}
+
+      - name: Generate build summary
+        run: |
+          echo "## Build Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Detail | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|--------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Image | \`${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Commit | \`${{ github.sha }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Branch | \`${{ github.ref_name }}\` |" >> "$GITHUB_STEP_SUMMARY"
+
+  # -------------------------------------------------------------------------
+  # 2. Pre-Deploy Tests
+  # -------------------------------------------------------------------------
+  pre-deploy-tests:
+    name: Pre-Deploy Tests
+    needs: build
+    if: inputs.skip_tests != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull built image
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }}
+
+      - name: Run smoke tests against container
+        run: |
+          # Start the container
+          docker run -d \
+            --name smoke-test \
+            -p 8080:8080 \
+            ${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }}
+
+          # Wait for container to be ready
+          for i in $(seq 1 ${{ env.HEALTH_CHECK_RETRIES }}); do
+            if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+              echo "Container is healthy"
+              break
+            fi
+            echo "Waiting for container... attempt $i/${{ env.HEALTH_CHECK_RETRIES }}"
+            sleep 5
+          done
+
+          # Verify health endpoint
+          curl -sf http://localhost:8080/health || {
+            echo "::error::Health check failed"
+            docker logs smoke-test
+            exit 1
+          }
+
+          # Cleanup
+          docker stop smoke-test
+          docker rm smoke-test
+
+  # -------------------------------------------------------------------------
+  # 3. Deploy to Dev (automatic on push to main)
+  # -------------------------------------------------------------------------
+  deploy-dev:
+    name: Deploy to Dev
+    needs: [build, pre-deploy-tests]
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      (needs.pre-deploy-tests.result == 'success' || needs.pre-deploy-tests.result == 'skipped') &&
+      (github.event_name == 'push' || inputs.environment == 'dev')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: dev
+      url: ${{ vars.APP_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to dev
+        run: |
+          echo "Deploying ${{ env.APP_NAME }}:${{ github.sha }} to dev"
+          # Replace with your deployment command:
+          # kubectl set image deployment/${{ env.APP_NAME }} \
+          #   app=${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }} \
+          #   -n dev
+          # kubectl rollout status deployment/${{ env.APP_NAME }} -n dev --timeout=300s
+
+      - name: Verify deployment
+        run: |
+          echo "Verifying dev deployment..."
+          # Replace with actual health check:
+          # for i in $(seq 1 ${{ env.HEALTH_CHECK_RETRIES }}); do
+          #   if curl -sf "${{ vars.HEALTH_CHECK_URL }}/health" --max-time ${{ env.HEALTH_CHECK_TIMEOUT }}; then
+          #     echo "Dev deployment healthy"
+          #     exit 0
+          #   fi
+          #   sleep 10
+          # done
+          # echo "::error::Dev health check failed"
+          # exit 1
+
+  # -------------------------------------------------------------------------
+  # 4. Deploy to Staging (automatic after dev)
+  # -------------------------------------------------------------------------
+  deploy-staging:
+    name: Deploy to Staging
+    needs: [build, deploy-dev]
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      (needs.deploy-dev.result == 'success' || inputs.environment == 'staging')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: staging
+      url: ${{ vars.APP_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to staging
+        run: |
+          echo "Deploying ${{ env.APP_NAME }}:${{ github.sha }} to staging"
+          # Replace with your deployment command:
+          # kubectl set image deployment/${{ env.APP_NAME }} \
+          #   app=${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }} \
+          #   -n staging
+          # kubectl rollout status deployment/${{ env.APP_NAME }} -n staging --timeout=300s
+
+      - name: Verify deployment
+        run: |
+          echo "Verifying staging deployment..."
+          # Replace with actual health check
+
+      - name: Run integration tests
+        run: |
+          echo "Running integration tests against staging..."
+          # Replace with actual integration tests:
+          # pytest tests/integration/ --base-url "${{ vars.APP_URL }}"
+
+  # -------------------------------------------------------------------------
+  # 5. Deploy to Production (manual approval required)
+  # -------------------------------------------------------------------------
+  deploy-production:
+    name: Deploy to Production
+    needs: [build, deploy-staging]
+    if: |
+      always() &&
+      needs.build.result == 'success' &&
+      (needs.deploy-staging.result == 'success' || inputs.environment == 'production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: ${{ vars.APP_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pre-deploy snapshot
+        run: |
+          echo "Recording pre-deploy state for rollback..."
+          # Record current deployment version for rollback:
+          # kubectl get deployment/${{ env.APP_NAME }} -n production \
+          #   -o jsonpath='{.spec.template.spec.containers[0].image}' > /tmp/previous-image.txt
+          # echo "Previous image: $(cat /tmp/previous-image.txt)"
+
+      - name: Deploy to production
+        run: |
+          echo "Deploying ${{ env.APP_NAME }}:${{ github.sha }} to production"
+          # Replace with your deployment command:
+          # kubectl set image deployment/${{ env.APP_NAME }} \
+          #   app=${{ env.REGISTRY }}/${{ env.APP_NAME }}:${{ github.sha }} \
+          #   -n production
+          # kubectl rollout status deployment/${{ env.APP_NAME }} -n production --timeout=300s
+
+      - name: Verify deployment
+        run: |
+          echo "Verifying production deployment..."
+          # Replace with actual health check:
+          # for i in $(seq 1 ${{ env.HEALTH_CHECK_RETRIES }}); do
+          #   if curl -sf "${{ vars.HEALTH_CHECK_URL }}/health" --max-time ${{ env.HEALTH_CHECK_TIMEOUT }}; then
+          #     echo "Production deployment healthy"
+          #     exit 0
+          #   fi
+          #   echo "Health check attempt $i failed, retrying..."
+          #   sleep 10
+          # done
+          # echo "::error::Production health check failed -- initiating rollback"
+          # kubectl rollout undo deployment/${{ env.APP_NAME }} -n production
+          # exit 1
+
+      - name: Post-deploy monitoring window
+        run: |
+          echo "Monitoring production for 2 minutes..."
+          # Replace with actual monitoring check:
+          # sleep 120
+          # ERROR_RATE=$(curl -s "${{ vars.METRICS_URL }}/error-rate?window=2m")
+          # if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )); then
+          #   echo "::error::Error rate $ERROR_RATE exceeds threshold (1%)"
+          #   kubectl rollout undo deployment/${{ env.APP_NAME }} -n production
+          #   exit 1
+          # fi
+          # echo "Error rate $ERROR_RATE is within acceptable bounds"
+
+      - name: Create deployment annotation
+        if: success()
+        run: |
+          echo "## Production Deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Detail | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|--------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Version | \`${{ github.sha }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Environment | production |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Status | Deployed |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| URL | ${{ vars.APP_URL }} |" >> "$GITHUB_STEP_SUMMARY"
+
+  # -------------------------------------------------------------------------
+  # 6. Deployment Summary
+  # -------------------------------------------------------------------------
+  summary:
+    name: Deployment Summary
+    if: always()
+    needs: [build, deploy-dev, deploy-staging, deploy-production]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Generate deployment report
+        run: |
+          echo "## Deployment Report" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Stage | Status |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Build | ${{ needs.build.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Dev | ${{ needs.deploy-dev.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Staging | ${{ needs.deploy-staging.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Production | ${{ needs.deploy-production.result }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Commit:** \`${{ github.sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Triggered by:** ${{ github.actor }}" >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,112 @@
+---
+name: Changelog Enforcer
+
+'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, dev]
+
+concurrency:
+  group: changelog-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  changelog-check:
+    name: Changelog & Version Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 5
+
+    steps:
+      - name: Check Workflow Kill Switch
+        run: |
+          if [ -f ".github/WORKFLOW_KILLSWITCH" ]; then
+            STATUS=$(grep "STATUS:" .github/WORKFLOW_KILLSWITCH | awk '{print $2}')
+            if [ "$STATUS" = "DISABLED" ]; then
+              echo "Workflows disabled by kill switch"
+              exit 0
+            fi
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check CHANGELOG updated (PRs to main)
+        if: github.base_ref == 'main'
+        run: |
+          echo "=== Checking CHANGELOG.md for PRs to main ==="
+          changed=$(git diff --name-only origin/main..HEAD)
+
+          # Skip check for docs-only or CI-only changes
+          non_doc_changes=$(echo "$changed" | grep -vE '\.(md|yml|yaml)$' | grep -v '.github/' || true)
+
+          if [ -n "$non_doc_changes" ]; then
+            if ! echo "$changed" | grep -q "CHANGELOG.md"; then
+              echo "WARNING: PRs to main with code changes should update CHANGELOG.md"
+              echo "Changed files without changelog update:"
+              echo "$non_doc_changes"
+            else
+              echo "CHANGELOG.md was updated"
+            fi
+          else
+            echo "Documentation/CI-only changes - changelog update optional"
+          fi
+
+      - name: Validate CHANGELOG format
+        run: |
+          echo "=== Validating CHANGELOG.md format ==="
+          if [ -f "CHANGELOG.md" ]; then
+            # Check for Keep a Changelog header
+            if head -5 CHANGELOG.md | grep -qi "changelog"; then
+              echo "Header present"
+            else
+              echo "WARNING: CHANGELOG.md may be missing standard header"
+            fi
+
+            # Check for version entries
+            versions=$(grep -c "^## \[" CHANGELOG.md || true)
+            echo "Version entries found: $versions"
+
+            # Check for standard categories
+            for category in "Added" "Changed" "Fixed" "Removed" "Security" "Deprecated"; do
+              count=$(grep -c "### $category" CHANGELOG.md || true)
+              if [ "$count" -gt 0 ]; then
+                echo "  $category sections: $count"
+              fi
+            done
+          else
+            echo "ERROR: CHANGELOG.md not found"
+            exit 1
+          fi
+
+      - name: Generate change summary
+        run: |
+          echo "=== PR Change Summary ==="
+          echo "Commits in this PR:"
+          git log --oneline origin/${{ github.base_ref }}..HEAD 2>/dev/null | head -20 || \
+            git log --oneline HEAD~10..HEAD | head -20
+
+          echo ""
+          echo "Files changed:"
+          git diff --stat origin/${{ github.base_ref }}..HEAD 2>/dev/null | tail -5 || \
+            git diff --stat HEAD~10..HEAD | tail -5
+
+          echo ""
+          echo "Suggested changelog categories:"
+          git log --oneline origin/${{ github.base_ref }}..HEAD 2>/dev/null | while read line; do
+            if echo "$line" | grep -qE "^[a-f0-9]+ feat"; then
+              echo "  -> Added: $line"
+            elif echo "$line" | grep -qE "^[a-f0-9]+ fix"; then
+              echo "  -> Fixed: $line"
+            elif echo "$line" | grep -qE "^[a-f0-9]+ docs"; then
+              echo "  -> Changed (docs): $line"
+            elif echo "$line" | grep -qE "^[a-f0-9]+ refactor"; then
+              echo "  -> Changed (refactor): $line"
+            elif echo "$line" | grep -qE "^[a-f0-9]+ (ci|build)"; then
+              echo "  -> Changed (infra): $line"
+            fi
+          done || true

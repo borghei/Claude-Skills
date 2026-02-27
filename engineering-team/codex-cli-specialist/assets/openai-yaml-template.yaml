@@ -1,0 +1,115 @@
+# =============================================================================
+# agents/openai.yaml - Codex CLI Skill Configuration Template
+# =============================================================================
+#
+# This template defines a skill for OpenAI Codex CLI.
+# Copy this file to your-skill/agents/openai.yaml and customize it.
+#
+# Documentation: references/codex-cli-guide.md
+# Converter tool: python scripts/codex_skill_converter.py
+# Validator tool: python scripts/cross_platform_validator.py
+#
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# REQUIRED: Skill identity
+# ---------------------------------------------------------------------------
+
+# Unique identifier for the skill (kebab-case, lowercase)
+name: my-skill-name
+
+# Short description for skill discovery and matching.
+# Codex uses this to decide when to activate the skill.
+# Be specific about what the skill does and when to use it.
+description: >
+  Expert guidance for [DOMAIN]. Analyzes [X], generates [Y],
+  and enforces [Z] best practices. Use when working with [CONTEXT].
+
+# ---------------------------------------------------------------------------
+# RECOMMENDED: Behavioral instructions
+# ---------------------------------------------------------------------------
+
+# Instructions define how the agent behaves when this skill is active.
+# Write in second person ("You are...") with clear structure.
+# Keep under 2000 words for optimal context usage.
+instructions: |
+  You are a senior [DOMAIN] specialist with deep expertise in [AREAS].
+
+  ## Core Responsibilities
+  - [Responsibility 1: what you help with]
+  - [Responsibility 2: what you analyze]
+  - [Responsibility 3: what you generate]
+
+  ## Process
+  When the user asks about [PRIMARY TASK]:
+  1. Understand the context and requirements
+  2. Run the appropriate analysis tool
+  3. Apply best practices from references/
+  4. Provide structured recommendations
+
+  When the user asks about [SECONDARY TASK]:
+  1. [Step 1]
+  2. [Step 2]
+  3. [Step 3]
+
+  ## Quality Standards
+  - Always explain your reasoning
+  - Provide concrete, actionable recommendations
+  - Reference specific files and line numbers when relevant
+  - Use the available tools for data-driven analysis
+  - Follow the patterns in references/ for domain best practices
+
+  ## Output Format
+  Structure your responses with:
+  - A brief summary of findings
+  - Detailed analysis with evidence
+  - Prioritized recommendations
+  - Next steps for the user
+
+# ---------------------------------------------------------------------------
+# RECOMMENDED: Tool definitions
+# ---------------------------------------------------------------------------
+
+# Tools expose Python scripts to the Codex agent.
+# Each tool maps to a command that Codex can execute.
+tools:
+  # Tool 1: Primary analysis tool
+  - name: primary_analyzer
+    description: >
+      Analyzes [X] and produces a structured assessment report.
+      Use this when the user asks to review, audit, or evaluate [X].
+    command: python scripts/primary_analyzer.py
+    # Optional: define accepted arguments
+    # args:
+    #   - name: input_path
+    #     description: Path to the file or directory to analyze
+    #     required: true
+    #   - name: format
+    #     description: Output format (json or text)
+    #     required: false
+    #     default: text
+
+  # Tool 2: Generator tool
+  - name: artifact_generator
+    description: >
+      Generates [Y] artifacts from templates and configuration.
+      Use this when the user asks to create, scaffold, or produce [Y].
+    command: python scripts/artifact_generator.py
+
+  # Tool 3: Validator tool (optional)
+  # - name: validator
+  #   description: >
+  #     Validates [Z] against best practices and standards.
+  #     Use this when the user asks to check, verify, or validate [Z].
+  #   command: python scripts/validator.py
+
+# ---------------------------------------------------------------------------
+# OPTIONAL: Model and version
+# ---------------------------------------------------------------------------
+
+# Preferred model for this skill (optional - uses user default if omitted)
+# Options: o4-mini (fast, cheap), o3 (complex reasoning), gpt-4.1 (broad)
+# model: o4-mini
+
+# Skill version (follows semver)
+version: 1.0.0

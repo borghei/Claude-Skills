@@ -1,7 +1,18 @@
+---
+name: migration-architect
+description: Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or versions.
+license: MIT
+metadata:
+  version: 1.0.0
+  category: engineering
+  domain: infrastructure
+  tier: POWERFUL
+---
+
 # Migration Architect
 
-**Tier:** POWERFUL  
-**Category:** Engineering - Migration Strategy  
+**Tier:** POWERFUL
+**Category:** Engineering - Migration Strategy
 **Purpose:** Zero-downtime migration planning, compatibility validation, and rollback strategy generation
 
 ## Overview

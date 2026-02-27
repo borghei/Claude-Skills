@@ -1,0 +1,146 @@
+name: Skill Auto-Update
+
+on:
+  # Run daily at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      skill_name:
+        description: 'Specific skill to update (leave empty for all)'
+        required: false
+        type: string
+  # Trigger on new releases
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  notify-update:
+    name: Check for Skill Updates
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.check.outputs.has_changes }}
+      changed_skills: ${{ steps.check.outputs.changed_skills }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for skill changes
+        id: check
+        run: |
+          # Get changed files in the last commit (or between releases)
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+
+          # Filter to SKILL.md and script changes
+          SKILL_CHANGES=$(echo "$CHANGED" | grep -E '(SKILL\.md|scripts/.*\.py|references/.*\.md|assets/)' || true)
+
+          if [ -z "$SKILL_CHANGES" ]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No skill changes detected."
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+
+            # Extract unique skill names
+            SKILLS=$(echo "$SKILL_CHANGES" | awk -F/ '{print $2}' | sort -u | tr '\n' ',' | sed 's/,$//')
+            echo "changed_skills=$SKILLS" >> "$GITHUB_OUTPUT"
+            echo "Changed skills: $SKILLS"
+          fi
+
+      - name: Generate update manifest
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          echo "## Skill Update Available" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "The following skills have been updated:" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          IFS=',' read -ra SKILLS <<< "${{ steps.check.outputs.changed_skills }}"
+          for skill in "${SKILLS[@]}"; do
+            echo "- **$skill**" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Update Instructions" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```bash' >> "$GITHUB_STEP_SUMMARY"
+          echo "# Update all installed skills" >> "$GITHUB_STEP_SUMMARY"
+          echo "python scripts/skill-installer.py update" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "# Update a specific skill" >> "$GITHUB_STEP_SUMMARY"
+          for skill in "${SKILLS[@]}"; do
+            echo "python scripts/skill-installer.py update $skill" >> "$GITHUB_STEP_SUMMARY"
+          done
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+  build-index:
+    name: Build Skills Index
+    runs-on: ubuntu-latest
+    needs: notify-update
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate skills index
+        run: |
+          python3 -c "
+          import json, os
+          from pathlib import Path
+
+          skills = {}
+          total = 0
+          for skill_md in sorted(Path('.').rglob('SKILL.md')):
+              parts = skill_md.parts
+              if 'assets' in parts or '.git' in parts:
+                  continue
+              if len(parts) < 2:
+                  continue
+              group = parts[0]
+              name = parts[1]
+              desc = ''
+              try:
+                  text = skill_md.read_text()
+                  if text.startswith('---'):
+                      end = text.find('---', 3)
+                      if end > 0:
+                          for line in text[3:end].splitlines():
+                              if 'description:' in line:
+                                  desc = line.split(':', 1)[1].strip().strip('>-').strip()[:200]
+              except:
+                  pass
+              if group not in skills:
+                  skills[group] = []
+              skills[group].append({'name': name, 'description': desc})
+              total += 1
+
+          index = {
+              'version': '2.0.0',
+              'total_skills': total,
+              'groups': len(skills),
+              'updated': '$(date -u +%Y-%m-%dT%H:%M:%SZ)',
+              'skills': skills,
+          }
+          print(json.dumps(index, indent=2))
+          " > skills-index.json
+
+          echo "## Skills Index Updated" >> "$GITHUB_STEP_SUMMARY"
+          TOTAL=$(python3 -c "import json; d=json.load(open('skills-index.json')); print(d['total_skills'])")
+          GROUPS=$(python3 -c "import json; d=json.load(open('skills-index.json')); print(d['groups'])")
+          echo "- **Total skills:** $TOTAL" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Groups:** $GROUPS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload skills index
+        uses: actions/upload-artifact@v4
+        with:
+          name: skills-index
+          path: skills-index.json

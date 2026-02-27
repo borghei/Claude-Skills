@@ -1,0 +1,129 @@
+---
+name: Documentation Quality Check
+
+'on':
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**/*.md'
+      - '**/SKILL.md'
+      - '**/references/**'
+      - '**/assets/**'
+
+concurrency:
+  group: docs-check-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  documentation-quality:
+    name: Documentation Standards
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    timeout-minutes: 10
+
+    steps:
+      - name: Check Workflow Kill Switch
+        run: |
+          if [ -f ".github/WORKFLOW_KILLSWITCH" ]; then
+            STATUS=$(grep "STATUS:" .github/WORKFLOW_KILLSWITCH | awk '{print $2}')
+            if [ "$STATUS" = "DISABLED" ]; then
+              echo "Workflows disabled by kill switch"
+              exit 0
+            fi
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check SKILL.md YAML frontmatter
+        run: |
+          echo "=== Checking SKILL.md YAML frontmatter ==="
+          errors=0
+          for skill_file in $(find . -name "SKILL.md" -not -path "./.git/*"); do
+            # Check if file starts with ---
+            if ! head -1 "$skill_file" | grep -q "^---"; then
+              echo "WARNING: Missing YAML frontmatter: $skill_file"
+              errors=$((errors + 1))
+            else
+              # Check for required fields
+              frontmatter=$(sed -n '/^---$/,/^---$/p' "$skill_file")
+              if ! echo "$frontmatter" | grep -q "name:"; then
+                echo "WARNING: Missing 'name' field: $skill_file"
+                errors=$((errors + 1))
+              fi
+              if ! echo "$frontmatter" | grep -q "description:"; then
+                echo "WARNING: Missing 'description' field: $skill_file"
+                errors=$((errors + 1))
+              fi
+            fi
+          done
+          echo "Frontmatter check complete: $errors warnings"
+
+      - name: Check documentation completeness
+        run: |
+          echo "=== Checking documentation completeness ==="
+          # Check each skill directory has required files
+          for skill_dir in $(find . -name "SKILL.md" -not -path "./.git/*" -exec dirname {} \;); do
+            skill_name=$(basename "$skill_dir")
+            has_scripts=false
+            has_refs=false
+
+            if [ -d "$skill_dir/scripts" ] && [ "$(ls -A "$skill_dir/scripts" 2>/dev/null)" ]; then
+              has_scripts=true
+            fi
+            if [ -d "$skill_dir/references" ] && [ "$(ls -A "$skill_dir/references" 2>/dev/null)" ]; then
+              has_refs=true
+            fi
+
+            if [ "$has_scripts" = false ] && [ "$has_refs" = false ]; then
+              echo "INFO: $skill_name - Documentation only (no scripts or references)"
+            elif [ "$has_scripts" = false ]; then
+              echo "INFO: $skill_name - Has references but no scripts"
+            fi
+          done
+
+      - name: Check for broken internal links
+        run: |
+          echo "=== Checking internal markdown links ==="
+          errors=0
+          # Check links in changed markdown files only
+          changed_files=$(git diff --name-only --diff-filter=ACMR ${{ github.event.pull_request.base.sha || 'HEAD~1' }} HEAD -- '*.md' 2>/dev/null || true)
+          for file in $changed_files; do
+            if [ -f "$file" ]; then
+              # Extract relative links
+              links=$(grep -oP '\[([^\]]+)\]\((?!http)([^)]+)\)' "$file" 2>/dev/null | grep -oP '\(([^)]+)\)' | tr -d '()' || true)
+              dir=$(dirname "$file")
+              for link in $links; do
+                # Remove anchors
+                target=$(echo "$link" | cut -d'#' -f1)
+                if [ -n "$target" ] && [ ! -f "$dir/$target" ] && [ ! -f "$target" ]; then
+                  echo "WARNING: Broken link in $file -> $link"
+                  errors=$((errors + 1))
+                fi
+              done
+            fi
+          done
+          echo "Link check complete: $errors warnings"
+
+      - name: Skill count summary
+        run: |
+          echo "=== Skill Count Summary ==="
+          total=$(find . -name "SKILL.md" -not -path "./.git/*" | wc -l)
+          echo "Total skills: $total"
+          echo ""
+          echo "By domain:"
+          for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success; do
+            if [ -d "$domain" ]; then
+              count=$(find "$domain" -name "SKILL.md" | wc -l)
+              echo "  $domain: $count"
+            fi
+          done

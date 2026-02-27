@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **comprehensive skills library** for Claude AI - reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. The repository provides modular skills that teams can download and use directly in their workflows.
 
-**Current Scope:** 53 production-ready skills across 8 domains with 87+ Python automation tools.
+**Current Scope:** 97+ production-ready skills across 13 domains with 170+ Python automation tools, 6 Claude Code subagents, and 11 CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their own Claude workflows.
 
@@ -25,6 +25,9 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **RA/QM Compliance** | [ra-qm-team/CLAUDE.md](ra-qm-team/CLAUDE.md) | ISO 13485, MDR, FDA compliance workflows |
 | **Business & Growth** | [business-growth/CLAUDE.md](business-growth/CLAUDE.md) | Customer success, sales engineering, revenue operations |
 | **Finance** | [finance/CLAUDE.md](finance/CLAUDE.md) | Financial analysis, DCF valuation, budgeting, forecasting |
+| **Data Analytics** | [data-analytics/CLAUDE.md](data-analytics/CLAUDE.md) | Data analysis, BI, ML ops, analytics engineering |
+| **HR Operations** | [hr-operations/CLAUDE.md](hr-operations/CLAUDE.md) | Talent acquisition, people analytics, HR business partner |
+| **Sales Success** | [sales-success/CLAUDE.md](sales-success/CLAUDE.md) | Account executive, sales ops, solutions architect |
 | **Standards Library** | [standards/CLAUDE.md](standards/CLAUDE.md) | Communication, quality, git, security standards |
 | **Templates** | [templates/CLAUDE.md](templates/CLAUDE.md) | Template system usage |
 
@@ -36,14 +39,22 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 
 ```
 claude-code-skills/
-├── agents/                    # cs-* prefixed agents (in development)
-├── marketing-skill/           # 6 marketing skills + Python tools
-├── product-team/              # 5 product skills + Python tools
-├── engineering-team/          # 18 engineering skills + Python tools
-├── c-level-advisor/           # 2 C-level skills
-├── project-management/        # 6 PM skills + Atlassian MCP
-├── ra-qm-team/                # 12 RA/QM compliance skills
+├── .claude/
+│   ├── agents/                # 6 Claude Code subagents (code-reviewer, qa, docs, etc.)
+│   └── commands/              # Slash commands (git:cm, git:cp, git:pr, review, security-scan)
+├── .github/workflows/         # 11 CI/CD workflows (quality, docs, QA, changelog, release)
+├── agents/                    # cs-* prefixed skill agents
+├── engineering-team/          # 25 engineering skills + Python tools
+├── engineering/               # 12 POWERFUL-tier architecture skills
+├── marketing-skill/           # 10 marketing skills + Python tools
+├── product-team/              # 8 product skills + Python tools
+├── project-management/        # 10 PM skills + Atlassian MCP
+├── c-level-advisor/           # 5 C-level advisory skills
+├── ra-qm-team/                # 13 RA/QM compliance skills
 ├── business-growth/           # 3 business & growth skills + Python tools
+├── data-analytics/            # 5 data analytics skills
+├── hr-operations/             # 4 HR operations skills
+├── sales-success/             # 5 sales success skills
 ├── finance/                   # 1 finance skill + Python tools
 ├── standards/                 # 5 standards library files
 ├── templates/                 # Reusable templates
@@ -136,18 +147,17 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ## Roadmap
 
-**Phase 1-2 Complete:** 53 production-ready skills deployed
-- Marketing (6), C-Level (2), Product (5), PM (6), Engineering (18), RA/QM (12), Business & Growth (3), Finance (1)
-- 87+ Python automation tools, 104+ reference guides
-- Complete enterprise coverage from marketing through regulatory compliance, sales, customer success, and finance
+**Phase 1-3 Complete:** 97+ production-ready skills deployed
+- Engineering (25 + 12 POWERFUL), Marketing (10), Product (8), PM (10), C-Level (5), RA/QM (13), Data Analytics (5), HR (4), Sales (5), Business Growth (3), Finance (1)
+- 170+ Python automation tools, 180+ reference guides
+- 6 Claude Code subagents, 11 CI/CD workflows
+- Cross-platform support (Claude Code + OpenAI Codex + Cursor + VS Code)
 
 **Next Priorities:**
-- **Phase 3 (Q2 2026):** Marketing expansion - SEO optimizer, social media manager, growth marketer
-- **Phase 4 (Q3 2026):** Specialized domains - Mobile, blockchain, web3, advanced analytics
+- **Phase 4 (Q2 2026):** Per-skill installation system, automatic updates, marketing expansion
+- **Phase 5 (Q3 2026):** 120+ skills - blockchain, web3, advanced analytics, specialized mobile
 
-**Target:** 60+ skills by Q3 2026
-
-See domain-specific roadmaps in each skill folder's README.md or roadmap files.
+**Target:** 120+ skills by Q3 2026
 
 ## Key Principles
 
@@ -183,5 +193,5 @@ See domain-specific roadmaps in each skill folder's README.md or roadmap files.
 ---
 
 **Last Updated:** February 2026
-**Current Sprint:** sprint-11-05-2025 (Skill-Agent Integration Phase 1-2)
-**Status:** 53 skills deployed, agent system in development
+**Version:** 2.0.0
+**Status:** 97+ skills, 170+ Python tools, 6 subagents, 11 workflows deployed

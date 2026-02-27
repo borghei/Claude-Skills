@@ -5,9 +5,41 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2026-02-16
+## [Unreleased] - 2026-02-27
 
 ### Added
+
+**New Skills (3):**
+- `claude-code-mastery` — Claude Code expert skill with skill scaffolder, CLAUDE.md optimizer, context analyzer (3 Python tools + 3 references + 2 templates)
+- `codex-cli-specialist` — Cross-platform skill authoring for Codex CLI with converter, validator, index builder (3 Python tools + 2 references + 1 template)
+- `devops-workflow-engineer` — CI/CD pipeline design with workflow generator, pipeline analyzer, deployment planner (3 Python tools + 3 references + 2 templates)
+
+**Claude Code Subagents (6):**
+- `code-reviewer` — Automated code review for quality, security, performance, and best practices
+- `doc-generator` — Documentation generation from source code analysis
+- `qa-engineer` — Test coverage analysis, bug hunting, and quality metrics
+- `changelog-manager` — Changelog generation from git history following Keep a Changelog format
+- `security-auditor` — OWASP Top 10 security audits, secrets scanning, and vulnerability detection
+- `git-workflow` — Git workflow management with conventional commits and branch protection
+
+**GitHub Workflows (5):**
+- `documentation-check.yml` — YAML frontmatter validation, internal link checking, skill inventory
+- `qa-validation.yml` — Python syntax check, flake8 lint, bandit security scan, CLI standards
+- `changelog-enforcer.yml` — Changelog update enforcement for PRs to main, format validation
+- `skill-validation.yml` — Skill package structure validation, cross-reference checking, quality report
+- `release-drafter.yml` — Automated release notes generation with skill counts and domain breakdown
+
+**Skill Installer & Auto-Update:**
+- `scripts/skill-installer.py` — CLI tool for per-skill installation with one-per-group policy, auto-update support, and multi-agent targeting (Claude, Cursor, VS Code, Codex, Goose)
+- `skill-auto-update.yml` — GitHub Action for automated skill update detection and notification
+
+**Infrastructure:**
+- YAML frontmatter added to all 12 engineering/ POWERFUL-tier skills
+- Domain CLAUDE.md files for data-analytics, hr-operations, sales-success
+- Mobile skill upgraded with 3 Python tools and 3 reference guides
+- Senior DevOps skill completely rewritten with comprehensive content
+
+**Previous Release Content:**
 - **incident-commander** (POWERFUL tier) — Incident response playbook with severity classifier, timeline reconstructor, and PIR generator
 - **tech-debt-tracker** (POWERFUL tier) — Codebase debt scanner with AST parsing, debt prioritizer, and trend dashboard
 - **api-design-reviewer** (POWERFUL tier) — REST API linter, breaking change detector, and API design scorecard
@@ -27,17 +59,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `financial-analyst` - DCF valuation, budgeting, forecasting, financial modeling (3 Python tools)
 - New `business-growth` domain with 3 skills
 - New `finance` domain with 1 skill
-- 92+ Python automation tools (up from 87+, including 17 new POWERFUL-tier tools)
-- 64 total skills across 8 domains (up from 53)
+
+### Changed
+- Senior DevOps skill completely rewritten with expert-level Docker, Kubernetes, CI/CD, IaC, and monitoring content
+- Senior Mobile skill upgraded from stub to production-ready with scripts and references
+- All SKILL.md files now have YAML frontmatter (100% coverage)
+- Repository now has 97 skills, 178 Python tools, 6 subagents, 12 CI/CD workflows
+- INSTALLATION.md updated with Skill Installer CLI docs, auto-update guide, and accurate counts
 
 ### Fixed
 - CI workflows (smart-sync.yml, pr-issue-auto-close.yml) — PR #193
 - Installation documentation (Issue #189) — PR #193
-
-### Planned
-- Complete Anthropic best practices refactoring (37/42 skills remaining)
-- Develop production Python tools for RA/QM skills (11 scripts)
-- Marketing expansion: SEO Optimizer, Social Media Manager skills
 
 ---
 
@@ -181,6 +213,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Key Changes |
 |---------|------|-------------|
+| 2.0.0 | 2026-02-27 | 97+ skills, 6 subagents, 11 workflows, 3 new skills, 170+ Python tools |
 | 1.1.0 | 2025-10-21 | Anthropic best practices refactoring (5 skills) |
 | 1.0.2 | 2025-10-21 | GitHub repository pages (LICENSE, CONTRIBUTING, etc.) |
 | 1.0.1 | 2025-10-21 | Star History, link fixes |
@@ -190,17 +223,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Upcoming Releases
 
-### v1.2.0 (Planned)
-- Complete Anthropic refactoring (remaining 37 skills)
-- SKILL.md optimization (reduce to <200 lines)
-- Progressive disclosure implementation
-- allowed-tools restrictions where appropriate
+### v2.1.0 (Planned - Q2 2026)
+- Marketing expansion: advanced SEO optimizer, social media manager
+- Per-skill installation system (one skill per domain group)
+- Automatic update mechanism for installed skills
+- Additional subagents for specialized domains
 
-### v2.0.0 (Planned - Q2 2026)
-- Production Python tools for RA/QM skills (11 scripts)
-- Marketing expansion (SEO Optimizer, Social Media Manager)
-- Mobile and specialized engineering skills
-- Growth Marketer skill
+### v3.0.0 (Planned - Q3 2026)
+- 120+ skills target
+- Mobile, blockchain, web3 specializations
+- Advanced analytics and ML pipeline skills
+- Cross-platform agent orchestration
 
 ---
 

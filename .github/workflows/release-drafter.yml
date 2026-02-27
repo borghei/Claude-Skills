@@ -1,0 +1,115 @@
+---
+name: Release Drafter
+
+'on':
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 2.0.0)'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  draft-release:
+    name: Draft Release Notes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check Workflow Kill Switch
+        run: |
+          if [ -f ".github/WORKFLOW_KILLSWITCH" ]; then
+            STATUS=$(grep "STATUS:" .github/WORKFLOW_KILLSWITCH | awk '{print $2}')
+            if [ "$STATUS" = "DISABLED" ]; then
+              echo "Workflows disabled by kill switch"
+              exit 0
+            fi
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate release notes
+        id: release
+        run: |
+          # Get last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LAST_TAG" ]; then
+            RANGE="HEAD"
+            echo "No previous tag found, using all history"
+          else
+            RANGE="${LAST_TAG}..HEAD"
+            echo "Generating notes from $LAST_TAG to HEAD"
+          fi
+
+          # Count changes
+          SKILL_COUNT=$(find . -name "SKILL.md" -not -path "./.git/*" -not -path "./.codex/*" | wc -l | tr -d ' ')
+          SCRIPT_COUNT=$(find . -name "*.py" -not -path "./.git/*" -not -path "*/__pycache__/*" -not -path "./.codex/*" | wc -l | tr -d ' ')
+          AGENT_COUNT=$(find .claude/agents -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+          WORKFLOW_COUNT=$(find .github/workflows -name "*.yml" 2>/dev/null | wc -l | tr -d ' ')
+
+          # Build release notes
+          cat > /tmp/release-notes.md << 'NOTES'
+          ## Claude Skills Library Release
+
+          ### Repository Stats
+          NOTES
+
+          echo "- **$SKILL_COUNT** production-ready skills" >> /tmp/release-notes.md
+          echo "- **$SCRIPT_COUNT** Python automation tools" >> /tmp/release-notes.md
+          echo "- **$AGENT_COUNT** Claude Code subagents" >> /tmp/release-notes.md
+          echo "- **$WORKFLOW_COUNT** CI/CD workflows" >> /tmp/release-notes.md
+
+          echo "" >> /tmp/release-notes.md
+          echo "### Domains" >> /tmp/release-notes.md
+          for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success; do
+            if [ -d "$domain" ]; then
+              count=$(find "$domain" -name "SKILL.md" | wc -l | tr -d ' ')
+              if [ "$count" -gt 0 ]; then
+                echo "- **$domain**: $count skills" >> /tmp/release-notes.md
+              fi
+            fi
+          done
+
+          echo "" >> /tmp/release-notes.md
+          echo "### Installation" >> /tmp/release-notes.md
+          echo '```bash' >> /tmp/release-notes.md
+          echo "# Claude Code" >> /tmp/release-notes.md
+          echo "npx agent-skills-cli add borghei/Claude-Skills --agent claude" >> /tmp/release-notes.md
+          echo "" >> /tmp/release-notes.md
+          echo "# OpenAI Codex" >> /tmp/release-notes.md
+          echo "npx agent-skills-cli add borghei/Claude-Skills --agent codex" >> /tmp/release-notes.md
+          echo "" >> /tmp/release-notes.md
+          echo "# All supported agents" >> /tmp/release-notes.md
+          echo "npx agent-skills-cli add borghei/Claude-Skills" >> /tmp/release-notes.md
+          echo '```' >> /tmp/release-notes.md
+
+          cat /tmp/release-notes.md
+
+      - name: Create or update draft release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ github.event.inputs.version || 'next' }}"
+
+          # Check for existing draft
+          EXISTING=$(gh release list --limit 5 | grep "Draft" | head -1 | awk '{print $1}' || true)
+
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing draft: $EXISTING"
+            gh release edit "$EXISTING" --notes-file /tmp/release-notes.md --draft
+          else
+            echo "Creating new draft release"
+            gh release create "v${VERSION}" \
+              --draft \
+              --title "Claude Skills Library v${VERSION}" \
+              --notes-file /tmp/release-notes.md || echo "Draft release creation skipped (may need version tag)"
+          fi

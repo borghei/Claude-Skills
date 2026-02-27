@@ -1,3 +1,14 @@
+---
+name: rag-architect
+description: Designs production-grade RAG pipelines with chunking optimization, retrieval evaluation, and pipeline architecture. Use when building RAG systems, optimizing retrieval quality, designing embedding strategies, or evaluating RAG pipeline performance.
+license: MIT
+metadata:
+  version: 1.0.0
+  category: engineering
+  domain: ai-ml
+  tier: POWERFUL
+---
+
 # RAG Architect - POWERFUL
 
 ## Overview
