@@ -19,11 +19,11 @@
   <text x="1000" y="480" font-family="monospace" font-weight="bold" font-size="280" fill="#ffffff" opacity="0.03">&lt;/&gt;</text>
 
   <text x="120" y="240" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="76" fill="#F0F0F0" letter-spacing="-1">
-    Claude Skills Library
+    AI Skills Library
   </text>
 
   <text x="120" y="325" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="34" fill="url(#accentGradient)">
-    Expert-Level AI Skills — Transform Claude into a
+    Expert-Level AI Skills — Transform any AI assistant into a
   </text>
   <text x="120" y="375" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="34" fill="url(#accentGradient)">
     world-class specialist for any professional domain.
@@ -33,7 +33,7 @@
     Each skill contains production-ready frameworks, templates, code
   </text>
   <text x="120" y="500" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#A0A4A8" font-weight="400">
-    examples, and domain expertise that makes Claude perform like
+    examples, and domain expertise that makes your AI assistant perform like
   </text>
   <text x="120" y="540" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#A0A4A8" font-weight="400">
     a senior professional with 10+ years of experience.

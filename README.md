@@ -1,18 +1,38 @@
 <p align="center">
-  <img src="assets/header.svg" alt="Claude Skills Library" width="100%"/>
+  <img src="assets/header.svg" alt="AI Skills Library" width="100%"/>
 </p>
 
-# Claude Skills Library
+# AI Skills Library
 
-**Production-ready skill packages for Claude AI & Claude Code** — 97 expert-level skills with 178 Python automation tools, 6 Claude Code subagents, and 12 CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 97 expert-level skills with 178 Python automation tools, 6 subagents, and 12 CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
-[![Claude AI](https://img.shields.io/badge/Claude-AI-blue.svg)](https://claude.ai)
-[![Claude Code](https://img.shields.io/badge/Claude-Code-purple.svg)](https://claude.ai/code)
-[![Multi-Agent Compatible](https://img.shields.io/badge/Multi--Agent-Compatible-green.svg)](https://github.com/borghei/Claude-Skills)
-[![97 Skills](https://img.shields.io/badge/Skills-97-brightgreen.svg)](#-skills-library)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
+[![Cursor](https://img.shields.io/badge/Cursor-00D1FF.svg)](https://cursor.com)
+[![GitHub Copilot](https://img.shields.io/badge/Copilot-000000.svg)](https://github.com/features/copilot)
+[![OpenAI Codex](https://img.shields.io/badge/Codex-412991.svg)](https://openai.com/codex)
+[![Windsurf](https://img.shields.io/badge/Windsurf-0EA5E9.svg)](https://codeium.com/windsurf)
+[![Cline](https://img.shields.io/badge/Cline-EC4899.svg)](https://github.com/cline/cline)
+[![Aider](https://img.shields.io/badge/Aider-14B8A6.svg)](https://aider.chat)
+[![97 Skills](https://img.shields.io/badge/Skills-97-brightgreen.svg)](#skills-library-97-skills)
 [![178 Tools](https://img.shields.io/badge/Python_Tools-178-blue.svg)](#python-automation-tools-178)
-[![6 Subagents](https://img.shields.io/badge/Subagents-6-orange.svg)](#claude-code-subagents)
+
+## Supported Platforms
+
+Works out of the box with every major AI coding assistant:
+
+| Platform | Config File | Status |
+|----------|------------|--------|
+| **Claude Code** | `CLAUDE.md` | Primary |
+| **OpenAI Codex** | `AGENTS.md` | Full |
+| **Cursor** | `.cursorrules` | Full |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | Full |
+| **Windsurf** | `.windsurfrules` | Full |
+| **Cline** | `.clinerules` | Full |
+| **Goose** | `.goosehints` | Full |
+| **Aider** | `AGENTS.md` | Full |
+| **Jules** | `AGENTS.md` | Full |
+| **RooCode / Kilo Code** | `AGENTS.md` | Full |
 
 ---
 
@@ -764,6 +784,7 @@ Claude-Skills/
 ├── .claude-plugin/       # Plugin marketplace config
 ├── .codex/               # OpenAI Codex compatibility (97 skill symlinks)
 ├── .github/              # 12 CI/CD workflows, templates, automation
+│   ├── copilot-instructions.md  # GitHub Copilot config
 │   └── workflows/        # Quality gates, release drafting, auto-update
 ├── agents/               # 5 production agents
 ├── business-growth/      # 3 skills + 9 Python tools
@@ -781,14 +802,19 @@ Claude-Skills/
 ├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
 ├── templates/            # Reusable templates
-├── CLAUDE.md             # Development guide
+├── AGENTS.md             # Universal agent config (Codex, Aider, Jules, etc.)
+├── CLAUDE.md             # Claude Code development guide
 ├── CHANGELOG.md          # Version history
 ├── CODE_OF_CONDUCT.md    # Community guidelines
 ├── CONTRIBUTING.md       # Contribution guidelines
 ├── INSTALLATION.md       # Comprehensive installation guide
 ├── LICENSE               # MIT License
 ├── README.md             # This file
-└── SECURITY.md           # Security policy
+├── SECURITY.md           # Security policy
+├── .clinerules           # Cline config
+├── .cursorrules          # Cursor config
+├── .goosehints           # Goose config
+└── .windsurfrules        # Windsurf config
 ```
 
 ---
@@ -812,8 +838,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>97 production-ready skills. 178 Python tools. 6 subagents. 12 workflows. 13 domains.</strong><br>
-  Built for the Claude community.
+  <strong>The universal AI skills library. 97 skills. 178 Python tools. 12 workflows. 13 domains.</strong><br>
+  Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 
 <p align="center">

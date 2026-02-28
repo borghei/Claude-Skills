@@ -4,11 +4,11 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready skill packages for Claude AI - 93 expert skills across marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
+  "description": "Production-ready AI skill packages for every coding assistant - 97 expert skills across marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "93 production-ready skill packages across 11 domains: marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
+    "description": "97 production-ready AI skill packages for every coding assistant across 13 domains: marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
     "version": "2.0.0"
   },
   "plugins": [

@@ -1,6 +1,6 @@
-# Installation Guide - Claude Skills Library
+# Installation Guide - AI Skills Library
 
-Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 GitHub workflows.
+Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 GitHub workflows. Works with Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 ## Table of Contents
 
@@ -47,7 +47,36 @@ cd claude-skills
 
 Skills install to `~/.codex/skills/`. See [OpenAI Codex Installation](#openai-codex-installation) for detailed instructions.
 
-### For All Other Agents (Cursor, VS Code, Goose, etc.)
+### For Windsurf Users
+
+```bash
+git clone https://github.com/borghei/Claude-Skills.git
+cd Claude-Skills
+python scripts/skill-installer.py install senior-fullstack --agent windsurf
+```
+
+Windsurf auto-detects the `.windsurfrules` config file from the project root.
+
+### For Cline Users
+
+```bash
+git clone https://github.com/borghei/Claude-Skills.git
+cd Claude-Skills
+python scripts/skill-installer.py install senior-fullstack --agent cline
+```
+
+Cline auto-detects the `.clinerules` config file from the project root.
+
+### For Aider Users
+
+```bash
+git clone https://github.com/borghei/Claude-Skills.git
+cd Claude-Skills
+# Aider reads AGENTS.md automatically
+python scripts/skill-installer.py list
+```
+
+### For All Other Agents (Goose, Jules, RooCode, etc.)
 
 ```bash
 npx agent-skills-cli add borghei/Claude-Skills
