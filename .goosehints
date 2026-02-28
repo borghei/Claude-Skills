@@ -1,0 +1,67 @@
+# AI Skills Library — Goose Hints
+
+## What This Repository Is
+
+This is the **universal AI skills library** — 97 production-ready skill packages across 13 professional domains with 178 Python automation tools and 12 CI/CD workflows. It works with every major AI coding assistant.
+
+**This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
+
+## Repository Structure
+
+- `engineering-team/` — 24 core engineering skills + 50 Python tools
+- `engineering/` — 12 advanced architecture skills + 33 Python tools
+- `marketing-skill/` — 10 marketing skills + 6 Python tools
+- `product-team/` — 7 product skills + 6 Python tools
+- `project-management/` — 9 PM skills + 5 Python tools
+- `c-level-advisor/` — 5 C-level advisory skills + 4 Python tools
+- `ra-qm-team/` — 12 regulatory/quality skills + 10 Python tools
+- `business-growth/` — 3 business skills + 9 Python tools
+- `data-analytics/` — 5 data analytics skills
+- `hr-operations/` — 4 HR operations skills
+- `sales-success/` — 5 sales success skills
+- `finance/` — 1 finance skill + 4 Python tools
+- `scripts/` — Skill installer + utility scripts
+
+## Skill Package Pattern
+
+Every skill follows this structure:
+
+```
+skill-name/
+├── SKILL.md       # Master documentation with workflows
+├── scripts/       # Python CLI tools (standard library only, no ML/LLM calls)
+├── references/    # Expert knowledge bases
+└── assets/        # User-facing templates
+```
+
+## Tool Execution
+
+Use the skill installer to browse and install skills:
+
+```bash
+# Browse available skills
+python scripts/skill-installer.py list
+python scripts/skill-installer.py list --group engineering-team
+
+# Install a skill
+python scripts/skill-installer.py install senior-fullstack --agent goose
+python scripts/skill-installer.py install content-creator --agent goose
+
+# Update installed skills
+python scripts/skill-installer.py update
+```
+
+## Key Principles
+
+1. Skills are products — each skill is deployable as a standalone package
+2. Documentation-driven — clear, actionable docs over generic advice
+3. Algorithm over AI — deterministic analysis (Python scripts) over LLM calls
+4. Template-heavy — ready-to-use templates users customize
+5. Self-contained — no dependencies between skills
+
+## Anti-Patterns
+
+- Creating dependencies between skills
+- Adding complex build systems or test frameworks
+- Generic advice instead of specific, actionable frameworks
+- LLM/ML calls in scripts (defeats portability)
