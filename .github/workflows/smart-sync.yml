@@ -4,13 +4,24 @@ name: Smart Bidirectional Sync
 'on':
   issues:
     types: [labeled, closed, reopened]
-  projects_v2_item:
-    types: [edited]
+  workflow_dispatch:
+    inputs:
+      direction:
+        description: 'Sync direction (project-to-issue requires PROJECTS_TOKEN secret)'
+        required: true
+        type: choice
+        options:
+          - project-to-issue
+          - issue-to-project
+      issue_number:
+        description: 'Issue number to sync'
+        required: true
+        type: string
 
 # Prevent sync loops with debouncing
 concurrency:
-  group: smart-sync-${{ github.event.issue.number || github.event.projects_v2_item.node_id }}
-  cancel-in-progress: true  # Cancel pending runs (debouncing effect)
+  group: smart-sync-${{ github.event.issue.number || github.event.inputs.issue_number || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   determine-direction:
@@ -19,7 +30,6 @@ jobs:
     permissions:
       contents: read
       issues: read
-      id-token: write
 
     outputs:
       should_sync: ${{ steps.check.outputs.should_sync }}
@@ -45,29 +55,32 @@ jobs:
           # Check which event triggered this workflow
           if [ "${{ github.event_name }}" = "issues" ]; then
             # Issue event → sync to project board
-            echo "direction=issue-to-project" >> $GITHUB_OUTPUT
-            echo "issue_number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
+            echo "direction=issue-to-project" >> "$GITHUB_OUTPUT"
+            echo "issue_number=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT"
 
             # Only sync on status label changes or state changes
-            if [[ "${{ github.event.action }}" == "labeled" && "${{ github.event.label.name }}" == status:* ]] || \
-               [ "${{ github.event.action }}" = "closed" ] || \
-               [ "${{ github.event.action }}" = "reopened" ]; then
-              echo "should_sync=true" >> $GITHUB_OUTPUT
-              echo "✅ Will sync: Issue #${{ github.event.issue.number }} → Project Board"
+            ACTION="${{ github.event.action }}"
+            LABEL="${{ github.event.label.name }}"
+            if { [ "$ACTION" = "labeled" ] && echo "$LABEL" | grep -q "^status:"; } || \
+               [ "$ACTION" = "closed" ] || \
+               [ "$ACTION" = "reopened" ]; then
+              echo "should_sync=true" >> "$GITHUB_OUTPUT"
+              echo "Will sync: Issue #${{ github.event.issue.number }} to Project Board"
             else
-              echo "should_sync=false" >> $GITHUB_OUTPUT
-              echo "⏭️ Skipping: Not a status change or state change"
+              echo "should_sync=false" >> "$GITHUB_OUTPUT"
+              echo "Skipping: Not a status change or state change"
             fi
 
-          elif [ "${{ github.event_name }}" = "projects_v2_item" ]; then
-            # Project event → sync to issue
-            echo "direction=project-to-issue" >> $GITHUB_OUTPUT
-            echo "should_sync=true" >> $GITHUB_OUTPUT
-            echo "✅ Will sync: Project Board → Issue"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual trigger
+            echo "direction=${{ github.event.inputs.direction }}" >> "$GITHUB_OUTPUT"
+            echo "issue_number=${{ github.event.inputs.issue_number }}" >> "$GITHUB_OUTPUT"
+            echo "should_sync=true" >> "$GITHUB_OUTPUT"
+            echo "Will sync: Manual trigger (${{ github.event.inputs.direction }})"
 
           else
-            echo "should_sync=false" >> $GITHUB_OUTPUT
-            echo "⚠️ Unknown event type"
+            echo "should_sync=false" >> "$GITHUB_OUTPUT"
+            echo "Unknown event type"
           fi
 
   rate-limit-check:
@@ -136,7 +149,6 @@ jobs:
     permissions:
       contents: read
       issues: read
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -147,11 +159,12 @@ jobs:
       - name: Sync Issue to Project Board
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
-          echo "# Issue → Project Board Sync"
-          echo "**Issue**: #${{ github.event.issue.number }} \"${{ github.event.issue.title }}\""
-          echo "**State**: ${{ github.event.issue.state }}"
-          echo "**Action**: ${{ github.event.action }}"
+          echo "# Issue to Project Board Sync"
+          echo "Issue: #${{ github.event.issue.number }} $ISSUE_TITLE"
+          echo "State: ${{ github.event.issue.state }}"
+          echo "Action: ${{ github.event.action }}"
 
           # Step 1: Check if in Project
           PROJECT_ITEM=$(gh api graphql -f query='
@@ -277,7 +290,6 @@ jobs:
     permissions:
       contents: read
       issues: write
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -288,53 +300,35 @@ jobs:
       - name: Sync Project Board to Issue
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
+          ISSUE_NUMBER: ${{ needs.determine-direction.outputs.issue_number }}
         run: |
-          echo "# Project Board → Issue Sync"
-          echo "**Project Item**: ${{ github.event.projects_v2_item.node_id }}"
-          echo "**Content**: ${{ github.event.projects_v2_item.content_node_id }}"
-          echo "**Changed By**: @${{ github.event.sender.login }}"
-
-          # Step 1: Get Issue Number
-          CONTENT_ID="${{ github.event.projects_v2_item.content_node_id }}"
-
-          ISSUE_DATA=$(gh api graphql -f query='
-            query {
-              node(id: "${{ github.event.projects_v2_item.node_id }}") {
-                ... on ProjectV2Item {
-                  content {
-                    ... on Issue {
-                      number
-                      url
-                      state
-                      title
-                    }
-                  }
-                }
-              }
-            }
-          ')
-
-          ISSUE_NUMBER=$(echo "$ISSUE_DATA" | jq -r '.data.node.content.number')
+          echo "# Project Board to Issue Sync"
+          echo "Issue: #$ISSUE_NUMBER"
+          echo "Triggered by: @${{ github.event.sender.login }}"
 
           if [ -z "$ISSUE_NUMBER" ] || [ "$ISSUE_NUMBER" = "null" ]; then
-            echo "⏭️ Not an issue (might be PR or other content)"
-            exit 0
+            echo "No issue number provided"
+            exit 1
           fi
 
-          echo "Issue Number: $ISSUE_NUMBER"
-
-          # Step 2: Get Project Status
-          STATUS=$(gh api graphql -f query='
+          # Get project item for this issue
+          PROJECT_ITEM=$(gh api graphql -f query='
             query {
-              node(id: "${{ github.event.projects_v2_item.node_id }}") {
-                ... on ProjectV2Item {
-                  fieldValues(first: 20) {
+              repository(owner: "borghei", name: "Claude-Skills") {
+                issue(number: '"$ISSUE_NUMBER"') {
+                  projectItems(first: 10) {
                     nodes {
-                      ... on ProjectV2ItemFieldSingleSelectValue {
-                        name
-                        field {
-                          ... on ProjectV2SingleSelectField {
+                      id
+                      project { number }
+                      fieldValues(first: 20) {
+                        nodes {
+                          ... on ProjectV2ItemFieldSingleSelectValue {
                             name
+                            field {
+                              ... on ProjectV2SingleSelectField {
+                                name
+                              }
+                            }
                           }
                         }
                       }
@@ -343,16 +337,25 @@ jobs:
                 }
               }
             }
-          ' --jq '.data.node.fieldValues.nodes[] | select(.field.name == "Status") | .name')
+          ')
+
+          # Extract status from project 9
+          STATUS=$(echo "$PROJECT_ITEM" | jq -r '
+            .data.repository.issue.projectItems.nodes[]
+            | select(.project.number == 9)
+            | .fieldValues.nodes[]
+            | select(.field.name == "Status")
+            | .name
+          ')
 
           if [ -z "$STATUS" ]; then
-            echo "⏭️ No status field found"
+            echo "No status field found in project board"
             exit 0
           fi
 
           echo "Project Status: $STATUS"
 
-          # Step 3: Map Status to Label
+          # Map status to label
           case "$STATUS" in
             "To triage") NEW_LABEL="status: triage" ;;
             "Backlog") NEW_LABEL="status: backlog" ;;
@@ -361,36 +364,36 @@ jobs:
             "In Review") NEW_LABEL="status: in-review" ;;
             "Done") NEW_LABEL="status: done" ;;
             *)
-              echo "⏭️ Unknown status: $STATUS"
+              echo "Unknown status: $STATUS"
               exit 0
               ;;
           esac
 
           echo "Target Label: $NEW_LABEL"
 
-          # Step 4: Update Issue Labels
-          CURRENT_LABELS=$(gh issue view $ISSUE_NUMBER --json labels --jq '[.labels[].name] | join(",")')
+          # Update issue labels
+          CURRENT_LABELS=$(gh issue view "$ISSUE_NUMBER" --json labels \
+            --jq '[.labels[].name] | join(",")')
 
-          # Remove all status: labels
-          for label in "status: triage" "status: backlog" "status: ready" "status: in-progress" "status: in-review" "status: done"; do
+          for label in "status: triage" "status: backlog" "status: ready" \
+                       "status: in-progress" "status: in-review" "status: done"; do
             if echo "$CURRENT_LABELS" | grep -q "$label"; then
-              gh issue edit $ISSUE_NUMBER --remove-label "$label" 2>/dev/null || true
+              gh issue edit "$ISSUE_NUMBER" --remove-label "$label" 2>/dev/null || true
             fi
           done
 
-          # Add new status label
-          gh issue edit $ISSUE_NUMBER --add-label "$NEW_LABEL"
-          echo "✅ Label updated to: $NEW_LABEL"
+          gh issue edit "$ISSUE_NUMBER" --add-label "$NEW_LABEL"
+          echo "Label updated to: $NEW_LABEL"
 
-          # Step 5: Handle Issue State
-          CURRENT_STATE=$(gh issue view $ISSUE_NUMBER --json state --jq '.state')
+          # Handle issue state
+          CURRENT_STATE=$(gh issue view "$ISSUE_NUMBER" --json state --jq '.state')
 
           if [ "$STATUS" = "Done" ] && [ "$CURRENT_STATE" = "OPEN" ]; then
-            gh issue close $ISSUE_NUMBER --reason completed
-            echo "✅ Issue closed (moved to Done)"
+            gh issue close "$ISSUE_NUMBER" --reason completed
+            echo "Issue closed (moved to Done)"
           elif [ "$STATUS" != "Done" ] && [ "$CURRENT_STATE" = "CLOSED" ]; then
-            gh issue reopen $ISSUE_NUMBER
-            echo "✅ Issue reopened (moved from Done)"
+            gh issue reopen "$ISSUE_NUMBER"
+            echo "Issue reopened (moved from Done)"
           fi
 
-          echo "✅ Sync complete: Issue #$ISSUE_NUMBER updated to $STATUS"
+          echo "Sync complete: Issue #$ISSUE_NUMBER updated to $STATUS"
