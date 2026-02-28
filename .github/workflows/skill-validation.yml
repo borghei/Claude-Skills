@@ -111,7 +111,11 @@ jobs:
           if [ -f "CLAUDE.md" ]; then
             echo "Checking CLAUDE.md references..."
             # Extract domain directories mentioned
-            for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success; do
+            domains="engineering-team engineering marketing-skill product-team"
+            domains="$domains project-management ra-qm-team c-level-advisor"
+            domains="$domains business-growth finance data-analytics"
+            domains="$domains hr-operations sales-success"
+            for domain in $domains; do
               if grep -q "$domain" CLAUDE.md; then
                 if [ ! -d "$domain" ]; then
                   echo "WARNING: CLAUDE.md references $domain but directory doesn't exist"
