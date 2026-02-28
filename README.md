@@ -17,6 +17,37 @@
 [![97 Skills](https://img.shields.io/badge/Skills-97-brightgreen.svg)](#skills-library-97-skills)
 [![178 Tools](https://img.shields.io/badge/Python_Tools-178-blue.svg)](#python-automation-tools-178)
 
+## What You Get
+
+| | |
+|---|---|
+| **97 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
+| **178 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, scaffolding, and beyond — all standard library, no ML dependencies |
+| **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
+| **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
+| **12 CI/CD Workflows** | Quality gates, release drafting, skill validation, auto-updates — zero configuration needed |
+| **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
+
+---
+
+## Table of Contents
+
+- [What You Get](#what-you-get)
+- [Supported Platforms](#supported-platforms)
+- [How to Install](#how-to-install)
+- [How to Use](#how-to-use)
+  - [Using Skills](#1-using-skills-domain-expertise)
+  - [Using Subagents](#2-using-subagents-autonomous-workflows)
+  - [Using Workflows](#3-using-workflows-cicd-automation)
+- [Skills Library (97 Skills)](#skills-library-97-skills)
+- [Claude Code Subagents](#claude-code-subagents)
+- [GitHub Workflows (12)](#github-workflows-12)
+- [Repository Structure](#repository-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
 ## Supported Platforms
 
 Works out of the box with every major AI coding assistant:
@@ -843,5 +874,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 </p>
 
 <p align="center">
-  <a href="https://borghei.me/">borghei.me</a>
+  <a href="https://medium.com/@borghei">borghei.me</a>
 </p>
