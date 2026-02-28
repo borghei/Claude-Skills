@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-This is a **comprehensive skills library** for Claude AI - reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. The repository provides modular skills that teams can download and use directly in their workflows.
+This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 **Current Scope:** 97+ production-ready skills across 13 domains with 170+ Python automation tools, 6 Claude Code subagents, and 11 CI/CD workflows.
 
-**Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their own Claude workflows.
+**Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
 ## Navigation Map
 
@@ -42,7 +42,9 @@ claude-code-skills/
 ├── .claude/
 │   ├── agents/                # 6 Claude Code subagents (code-reviewer, qa, docs, etc.)
 │   └── commands/              # Slash commands (git:cm, git:cp, git:pr, review, security-scan)
-├── .github/workflows/         # 11 CI/CD workflows (quality, docs, QA, changelog, release)
+├── .github/
+│   ├── copilot-instructions.md # GitHub Copilot config
+│   └── workflows/             # 11 CI/CD workflows (quality, docs, QA, changelog, release)
 ├── agents/                    # cs-* prefixed skill agents
 ├── engineering-team/          # 25 engineering skills + Python tools
 ├── engineering/               # 12 POWERFUL-tier architecture skills
@@ -58,7 +60,12 @@ claude-code-skills/
 ├── finance/                   # 1 finance skill + Python tools
 ├── standards/                 # 5 standards library files
 ├── templates/                 # Reusable templates
-└── documentation/             # Implementation plans, sprints, delivery
+├── documentation/             # Implementation plans, sprints, delivery
+├── AGENTS.md                  # Universal agent config (Codex, Aider, Jules, etc.)
+├── .cursorrules               # Cursor AI config
+├── .windsurfrules             # Windsurf config
+├── .clinerules                # Cline config
+└── .goosehints                # Goose config
 ```
 
 ### Skill Package Pattern
@@ -185,7 +192,7 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ## Additional Resources
 
-- **.gitignore:** Excludes .vscode/, .DS_Store, AGENTS.md, PROMPTS.md, .env*
+- **.gitignore:** Excludes .vscode/, .DS_Store, .env*, __pycache__/, node_modules/
 - **Standards Library:** [standards/](standards/) - Communication, quality, git, documentation, security
 - **Implementation Plans:** [documentation/implementation/](documentation/implementation/)
 - **Sprint Delivery:** [documentation/delivery/](documentation/delivery/)
