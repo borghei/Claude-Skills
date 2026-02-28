@@ -121,7 +121,11 @@ jobs:
           echo "Total skills: $total"
           echo ""
           echo "By domain:"
-          for domain in engineering-team engineering marketing-skill product-team project-management ra-qm-team c-level-advisor business-growth finance data-analytics hr-operations sales-success; do
+          domains="engineering-team engineering marketing-skill product-team"
+          domains="$domains project-management ra-qm-team c-level-advisor"
+          domains="$domains business-growth finance data-analytics"
+          domains="$domains hr-operations sales-success"
+          for domain in $domains; do
             if [ -d "$domain" ]; then
               count=$(find "$domain" -name "SKILL.md" | wc -l)
               echo "  $domain: $count"
