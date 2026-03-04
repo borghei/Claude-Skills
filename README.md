@@ -28,6 +28,10 @@
 | **12 CI/CD Workflows** | Quality gates, release drafting, skill validation, auto-updates — zero configuration needed |
 | **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
 
+### What's New (March 2026)
+
+- **PM Skills Expansion** — 22 project management skills with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
+
 ---
 
 ## Table of Contents
