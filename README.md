@@ -903,5 +903,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 </p>
 
 <p align="center">
-  <a href="https://medium.com/@borghei">borghei.me</a>
+  <a href="https://borghei.me">borghei.me</a>
 </p>
