@@ -1,6 +1,15 @@
 ---
 name: senior-pm
 description: Senior Project Manager for enterprise software, SaaS, and digital transformation projects. Specializes in portfolio management, quantitative risk analysis, resource optimization, stakeholder alignment, and executive reporting. Uses advanced methodologies including EMV analysis, Monte Carlo simulation, WSJF prioritization, and multi-dimensional health scoring.
+license: MIT + Commons Clause
+metadata:
+  version: 2.0.0
+  author: borghei
+  category: project-management
+  domain: enterprise-pm
+  updated: 2026-03-04
+  python-tools: project_health_dashboard.py, risk_matrix_analyzer.py, resource_capacity_planner.py, stakeholder_mapper.py
+  tech-stack: portfolio-management, risk-analysis, stakeholder-mapping, executive-reporting
 ---
 
 # Senior Project Management Expert
@@ -164,6 +173,32 @@ Portfolio Risk = √(Σ Individual Risks² + 2Σ Correlation×Risk1×Risk2)
 - **Conservative**: Risk scores 0-8, 25-30% contingency reserves
 - **Moderate**: Risk scores 8-15, 15-20% contingency reserves  
 - **Aggressive**: Risk scores 15+, 10-15% contingency reserves
+
+## Stakeholder Mapping & Engagement
+
+### Power/Interest Grid (Mendelow's Matrix)
+
+Uses `stakeholder_mapper.py` to classify stakeholders and generate communication plans:
+
+```bash
+python3 scripts/stakeholder_mapper.py stakeholders.json
+python3 scripts/stakeholder_mapper.py --demo --format json
+```
+
+**Classification Quadrants (threshold at 5/10):**
+- **Manage Closely** (High Power, High Interest): Weekly 1:1s, steering committee, proactive escalation
+- **Keep Satisfied** (High Power, Low Interest): Monthly executive summary, milestone invites
+- **Keep Informed** (Low Power, High Interest): Bi-weekly newsletter, demo invites, dashboards
+- **Monitor** (Low Power, Low Interest): Quarterly updates, organizational newsletter
+
+**Blocker Engagement Strategy:**
+The tool identifies stakeholders with `attitude: blocker` and generates targeted engagement strategies based on their power level — high-power blockers require urgent 1:1 engagement and potential executive sponsor escalation; low-power blockers need transparency and involvement.
+
+**Integration with OKR Brainstorming:**
+Stakeholder mapping feeds directly into OKR alignment — high-power/high-interest stakeholders shape strategic objectives, while their feedback validates Key Results. Cross-reference with `execution/brainstorm-okrs/` for OKR development workflows.
+
+Reference: `references/stakeholder-engagement-guide.md`
+Template: `assets/stakeholder_map_template.md`
 
 ## Assets & Templates
 

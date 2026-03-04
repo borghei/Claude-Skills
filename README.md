@@ -4,7 +4,7 @@
 
 # AI Skills Library
 
-**The universal AI skills library for every coding assistant** — 97 expert-level skills with 178 Python automation tools, 6 subagents, and 12 CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 109 expert-level skills with 180 Python automation tools, 6 subagents, and 12 CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
@@ -14,15 +14,15 @@
 [![Windsurf](https://img.shields.io/badge/Windsurf-0EA5E9.svg)](https://codeium.com/windsurf)
 [![Cline](https://img.shields.io/badge/Cline-EC4899.svg)](https://github.com/cline/cline)
 [![Aider](https://img.shields.io/badge/Aider-14B8A6.svg)](https://aider.chat)
-[![97 Skills](https://img.shields.io/badge/Skills-97-brightgreen.svg)](#skills-library-97-skills)
-[![178 Tools](https://img.shields.io/badge/Python_Tools-178-blue.svg)](#python-automation-tools-178)
+[![109 Skills](https://img.shields.io/badge/Skills-109-brightgreen.svg)](#skills-library-109-skills)
+[![180 Tools](https://img.shields.io/badge/Python_Tools-180-blue.svg)](#python-automation-tools-180)
 
 ## What You Get
 
 | | |
 |---|---|
-| **97 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
-| **178 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, scaffolding, and beyond — all standard library, no ML dependencies |
+| **109 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
+| **180 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, scaffolding, and beyond — all standard library, no ML dependencies |
 | **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Quality gates, release drafting, skill validation, auto-updates — zero configuration needed |
@@ -39,7 +39,7 @@
   - [Using Skills](#1-using-skills-domain-expertise)
   - [Using Subagents](#2-using-subagents-autonomous-workflows)
   - [Using Workflows](#3-using-workflows-cicd-automation)
-- [Skills Library (97 Skills)](#skills-library-97-skills)
+- [Skills Library (109 Skills)](#skills-library-109-skills)
 - [Claude Code Subagents](#claude-code-subagents)
 - [GitHub Workflows (12)](#github-workflows-12)
 - [Repository Structure](#repository-structure)
@@ -533,18 +533,18 @@ The 12 GitHub workflows run automatically on PRs and pushes. No configuration ne
 
 **Code Quality Gate** — Triggers on every PR with Python changes:
 ```
-✓ Python Syntax Check     — 178/178 scripts compiled successfully
+✓ Python Syntax Check     — 180/180 scripts compiled successfully
 ✓ Flake8 Lint             — 0 errors (E9, F63, F7, F82)
 ✓ Bandit Security Scan    — 0 high-severity issues
-✓ CLI Standards           — 178/178 scripts have argparse + --help
+✓ CLI Standards           — 180/180 scripts have argparse + --help
 ```
 
 **Documentation Check** — Triggers on PRs with markdown changes:
 ```
-✓ YAML Frontmatter        — 97/97 SKILL.md files have valid frontmatter
+✓ YAML Frontmatter        — 109/109 SKILL.md files have valid frontmatter
 ✓ Required Fields          — All files have name + description
 ✓ Internal Links           — 0 broken links detected
-✓ Skill Count              — 97 skills across 13 domains
+✓ Skill Count              — 109 skills across 13 domains
 ```
 
 **Changelog Enforcer** — Triggers on PRs to main/dev:
@@ -577,8 +577,8 @@ Quality Report:
 ## What's New in v2.0.0
 
 ### Repository Stats
-- **97** skills across **13** domains
-- **178** Python automation tools
+- **109** skills across **13** domains
+- **180** Python automation tools
 - **6** Claude Code subagents
 - **12** CI/CD workflows
 
@@ -594,7 +594,7 @@ python scripts/skill-installer.py install <skill-name> --agent claude
 
 ---
 
-## Skills Library (97 Skills)
+## Skills Library (109 Skills)
 
 ### Engineering Team (24)
 Core engineering expertise with Python automation tools, references, and templates.
@@ -683,20 +683,45 @@ User-centered product development with automation tools.
 | [product-designer](product-team/product-designer/SKILL.md) | UI/UX design, prototyping, user research, design systems | - |
 | [design-system-lead](product-team/design-system-lead/SKILL.md) | Design tokens, component libraries, documentation | - |
 
-### Project Management (9)
-Delivery excellence with Atlassian MCP integration.
+### Project Management (22)
+Delivery excellence with discovery, execution frameworks, Atlassian MCP integration, and 10 Python CLI tools.
+
+**Role-Based Skills (10)**
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
-| [senior-pm](project-management/senior-pm/SKILL.md) | Portfolio management, quantitative risk analysis, WSJF | 3 |
-| [scrum-master](project-management/scrum-master/SKILL.md) | Sprint analytics, velocity forecasting, team health | 3 |
+| [senior-pm](project-management/senior-pm/SKILL.md) | Portfolio management, stakeholder mapping, risk analysis, WSJF | 4 |
+| [scrum-master](project-management/scrum-master/SKILL.md) | Sprint analytics, velocity forecasting, capacity planning, team health | 4 |
+| [delivery-manager](project-management/delivery-manager/SKILL.md) | Release management, deployment, incident response | - |
 | [jira-expert](project-management/jira-expert/SKILL.md) | JQL mastery, workflows, automation, dashboards | - |
 | [confluence-expert](project-management/confluence-expert/SKILL.md) | Knowledge management, space architecture | - |
 | [atlassian-admin](project-management/atlassian-admin/SKILL.md) | System administration, security, integrations | - |
 | [atlassian-templates](project-management/atlassian-templates/SKILL.md) | Template design, custom blueprints | - |
 | [agile-coach](project-management/agile-coach/SKILL.md) | Transformation, framework implementation, coaching | - |
-| [delivery-manager](project-management/delivery-manager/SKILL.md) | Release management, deployment, incident response | - |
 | [program-manager](project-management/program-manager/SKILL.md) | Multi-project coordination, portfolio governance | - |
+| [packaged-skills](project-management/packaged-skills/SKILL.md) | Bundled skill packages for quick deployment | - |
+
+**Discovery Skills (4)**
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [brainstorm-ideas](project-management/discovery/brainstorm-ideas/SKILL.md) | Product Trio ideation, Opportunity Solution Trees | - |
+| [brainstorm-experiments](project-management/discovery/brainstorm-experiments/SKILL.md) | Lean experiment design, XYZ hypotheses | 1 |
+| [identify-assumptions](project-management/discovery/identify-assumptions/SKILL.md) | Assumption mapping across 4-8 risk categories | 1 |
+| [pre-mortem](project-management/discovery/pre-mortem/SKILL.md) | Tiger/Paper Tiger/Elephant risk classification | 1 |
+
+**Execution Skills (8)**
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [create-prd](project-management/execution/create-prd/SKILL.md) | PRD scaffolding with 8-section structure | 1 |
+| [brainstorm-okrs](project-management/execution/brainstorm-okrs/SKILL.md) | OKR brainstorming and validation (Wodtke) | 1 |
+| [outcome-roadmap](project-management/execution/outcome-roadmap/SKILL.md) | Output→outcome roadmap transformation | 1 |
+| [prioritization-frameworks](project-management/execution/prioritization-frameworks/SKILL.md) | Multi-framework scoring (RICE, ICE, MoSCoW) | 1 |
+| [release-notes](project-management/execution/release-notes/SKILL.md) | Release notes from tickets/changelogs | 1 |
+| [summarize-meeting](project-management/execution/summarize-meeting/SKILL.md) | Structured meeting summaries with action items | - |
+| [job-stories](project-management/execution/job-stories/SKILL.md) | JTBD When/Want/So backlog format | - |
+| [wwas](project-management/execution/wwas/SKILL.md) | Why-What-Acceptance structured backlog items | - |
 
 ### Regulatory Affairs & Quality Management (12)
 HealthTech/MedTech compliance across ISO, MDR, FDA, and GDPR.
@@ -813,7 +838,7 @@ Claude-Skills/
 ├── .claude/              # Claude Code config + 6 subagents
 │   └── agents/           # code-reviewer, doc-generator, qa-engineer, etc.
 ├── .claude-plugin/       # Plugin marketplace config
-├── .codex/               # OpenAI Codex compatibility (97 skill symlinks)
+├── .codex/               # OpenAI Codex compatibility (109 skill symlinks)
 ├── .github/              # 12 CI/CD workflows, templates, automation
 │   ├── copilot-instructions.md  # GitHub Copilot config
 │   └── workflows/        # Quality gates, release drafting, auto-update
@@ -827,7 +852,7 @@ Claude-Skills/
 ├── hr-operations/        # 4 skills
 ├── marketing-skill/      # 10 skills + 6 Python tools
 ├── product-team/         # 7 skills + 6 Python tools
-├── project-management/   # 9 skills + 5 Python tools
+├── project-management/   # 22 skills + 10 Python tools
 ├── ra-qm-team/           # 12 skills + 10 Python tools
 ├── sales-success/        # 5 skills
 ├── scripts/              # Skill installer + utility scripts
@@ -869,7 +894,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>The universal AI skills library. 97 skills. 178 Python tools. 12 workflows. 13 domains.</strong><br>
+  <strong>The universal AI skills library. 109 skills. 180 Python tools. 12 workflows. 13 domains.</strong><br>
   Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 

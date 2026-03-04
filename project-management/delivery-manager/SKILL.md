@@ -507,6 +507,29 @@ BURN RATE
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+## Release Communication
+
+Release communication is a critical cross-functional responsibility. The delivery manager coordinates timing and channels while other skills provide content expertise.
+
+### Cross-References
+
+| Activity | Primary Skill | How Delivery Manager Contributes |
+|----------|--------------|----------------------------------|
+| Release notes drafting | `execution/release-notes/` | Provides ticket list, timeline, deployment details |
+| Stakeholder notification | `senior-pm/` (stakeholder mapping) | Aligns comm plan with release calendar |
+| Sprint demo coordination | `scrum-master/` | Confirms demo-ready state matches release scope |
+| PRD release section | `execution/create-prd/` | Validates technical feasibility of release plan |
+| Pre-mortem for launch | `discovery/pre-mortem/` | Supplies deployment risk data for Tiger classification |
+
+### Release Communication Workflow
+
+1. **T-7 days**: Delivery manager confirms release scope with PM and engineering leads
+2. **T-3 days**: Draft release notes using `execution/release-notes/` skill, review with product
+3. **T-1 day**: Go/No-Go decision — stakeholder notification per communication plan
+4. **T-0**: Deploy and monitor — send release notes to customer-facing teams
+5. **T+1 day**: External communication (changelog, email, in-app notification)
+6. **T+7 days**: Release retrospective — feed learnings back to pre-mortem framework
+
 ## Reference Materials
 
 - `references/release_process.md` - Release management guide

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 97+ production-ready skills across 13 domains with 170+ Python automation tools, 6 Claude Code subagents, and 11 CI/CD workflows.
+**Current Scope:** 109+ production-ready skills across 13 domains with 180+ Python automation tools, 6 Claude Code subagents, and 11 CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -21,7 +21,7 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **Product Team** | [product-team/CLAUDE.md](product-team/CLAUDE.md) | RICE, OKRs, user stories, UX research tools |
 | **Engineering** | [engineering-team/CLAUDE.md](engineering-team/CLAUDE.md) | Scaffolding, fullstack, AI/ML, data tools |
 | **C-Level Advisory** | [c-level-advisor/CLAUDE.md](c-level-advisor/CLAUDE.md) | CEO/CTO strategic decision-making |
-| **Project Management** | [project-management/CLAUDE.md](project-management/CLAUDE.md) | Atlassian MCP, Jira/Confluence integration |
+| **Project Management** | [project-management/CLAUDE.md](project-management/CLAUDE.md) | 22 PM skills: discovery, execution, Atlassian MCP |
 | **RA/QM Compliance** | [ra-qm-team/CLAUDE.md](ra-qm-team/CLAUDE.md) | ISO 13485, MDR, FDA compliance workflows |
 | **Business & Growth** | [business-growth/CLAUDE.md](business-growth/CLAUDE.md) | Customer success, sales engineering, revenue operations |
 | **Finance** | [finance/CLAUDE.md](finance/CLAUDE.md) | Financial analysis, DCF valuation, budgeting, forecasting |
@@ -50,7 +50,7 @@ claude-code-skills/
 ├── engineering/               # 12 POWERFUL-tier architecture skills
 ├── marketing-skill/           # 10 marketing skills + Python tools
 ├── product-team/              # 8 product skills + Python tools
-├── project-management/        # 10 PM skills + Atlassian MCP
+├── project-management/        # 22 PM skills + discovery + execution + Atlassian MCP
 ├── c-level-advisor/           # 5 C-level advisory skills
 ├── ra-qm-team/                # 13 RA/QM compliance skills
 ├── business-growth/           # 3 business & growth skills + Python tools
@@ -154,9 +154,9 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ## Roadmap
 
-**Phase 1-3 Complete:** 97+ production-ready skills deployed
-- Engineering (25 + 12 POWERFUL), Marketing (10), Product (8), PM (10), C-Level (5), RA/QM (13), Data Analytics (5), HR (4), Sales (5), Business Growth (3), Finance (1)
-- 170+ Python automation tools, 180+ reference guides
+**Phase 1-3 Complete:** 109+ production-ready skills deployed
+- Engineering (25 + 12 POWERFUL), Marketing (10), Product (8), PM (22), C-Level (5), RA/QM (13), Data Analytics (5), HR (4), Sales (5), Business Growth (3), Finance (1)
+- 180+ Python automation tools, 190+ reference guides
 - 6 Claude Code subagents, 11 CI/CD workflows
 - Cross-platform support (Claude Code + OpenAI Codex + Cursor + VS Code)
 
@@ -200,5 +200,5 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 ---
 
 **Last Updated:** February 2026
-**Version:** 2.0.0
-**Status:** 97+ skills, 170+ Python tools, 6 subagents, 11 workflows deployed
+**Version:** 2.1.0
+**Status:** 109+ skills, 180+ Python tools, 6 subagents, 11 workflows deployed

@@ -1,30 +1,29 @@
 # Project Management Skills Collection
 
-**Complete suite of 6 world-class Atlassian expert skills** for project and agile delivery teams using Jira and Confluence.
+**22 production-ready PM skills** spanning role-based expertise, product discovery, and execution frameworks — with 10 Python CLI tools and Atlassian MCP integration.
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [Installation](#installation)
-- [Overview](#overview)
 - [Skills Catalog](#skills-catalog)
+  - [Role-Based Skills (10)](#role-based-skills-10)
+  - [Discovery Skills (4)](#discovery-skills-4)
+  - [Execution Skills (8)](#execution-skills-8)
+- [Python Tools](#python-tools)
 - [Atlassian MCP Integration](#atlassian-mcp-integration)
-- [Quick Start Guide](#quick-start-guide)
-- [Team Structure Recommendations](#team-structure-recommendations)
-- [Common Workflows](#common-workflows)
-- [Real-World Scenarios](#real-world-scenarios)
+- [Workflows](#workflows)
+- [Success Metrics](#success-metrics)
 
 ---
 
-## ⚡ Installation
+## Installation
 
 ### Quick Install (Recommended)
 
-Install all project management skills with one command:
-
 ```bash
-# Install all PM skills to all supported agents
+# Install all PM skills
 npx ai-agent-skills install borghei/Claude-Skills/project-management
 
 # Install to Claude Code only
@@ -37,459 +36,176 @@ npx ai-agent-skills install borghei/Claude-Skills/project-management --agent cur
 ### Install Individual Skills
 
 ```bash
-# Senior Project Manager Expert
+# Role-based skills
 npx ai-agent-skills install borghei/Claude-Skills/project-management/senior-pm
-
-# Scrum Master Expert
 npx ai-agent-skills install borghei/Claude-Skills/project-management/scrum-master
+npx ai-agent-skills install borghei/Claude-Skills/project-management/delivery-manager
 
-# Atlassian Jira Expert
-npx ai-agent-skills install borghei/Claude-Skills/project-management/jira-expert
+# Discovery skills
+npx ai-agent-skills install borghei/Claude-Skills/project-management/discovery/brainstorm-ideas
+npx ai-agent-skills install borghei/Claude-Skills/project-management/discovery/pre-mortem
 
-# Atlassian Confluence Expert
-npx ai-agent-skills install borghei/Claude-Skills/project-management/confluence-expert
-
-# Atlassian Administrator
-npx ai-agent-skills install borghei/Claude-Skills/project-management/atlassian-admin
-
-# Atlassian Template Creator
-npx ai-agent-skills install borghei/Claude-Skills/project-management/atlassian-templates
+# Execution skills
+npx ai-agent-skills install borghei/Claude-Skills/project-management/execution/create-prd
+npx ai-agent-skills install borghei/Claude-Skills/project-management/execution/prioritization-frameworks
 ```
 
 **Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+---
+
+## Skills Catalog
+
+### Role-Based Skills (10)
+
+| Skill | Focus | Python Tools | Status |
+|-------|-------|-------------|--------|
+| **senior-pm** | Portfolio management, stakeholder mapping, risk analysis | 4 scripts | v2.0 |
+| **scrum-master** | Sprint analytics, velocity forecasting, team health | 4 scripts | v2.0 |
+| **delivery-manager** | Release management, deployment, incident response | — | v1.0 |
+| **jira-expert** | Jira configuration, JQL, automation | — | v1.0 |
+| **confluence-expert** | Documentation, knowledge management | — | v1.0 |
+| **atlassian-admin** | Suite administration, user management | — | v1.0 |
+| **atlassian-templates** | Ready-to-use Jira/Confluence templates | — | v1.0 |
+| **agile-coach** | Agile transformation, team coaching | — | v1.0 |
+| **program-manager** | Multi-project coordination, dependencies | — | v1.0 |
+| **packaged-skills** | Bundled skill packages | — | v1.0 |
+
+### Discovery Skills (4)
+
+| Skill | Focus | Python Tool | Key Framework |
+|-------|-------|-------------|---------------|
+| **brainstorm-ideas** | Product ideation for new and existing products | — | Product Trio + Opportunity Solution Tree |
+| **brainstorm-experiments** | Lean experiment design and validation | `experiment_designer.py` | XYZ Hypothesis (Savoia) |
+| **identify-assumptions** | Assumption mapping and prioritization | `assumption_tracker.py` | Teresa Torres 4-8 risk categories |
+| **pre-mortem** | Pre-launch risk analysis | `risk_categorizer.py` | Tiger/Paper Tiger/Elephant (Klein) |
+
+**Discovery Flow:** Ideas → Assumptions → Experiments → Pre-Mortem → Build Decision
+
+### Execution Skills (8)
+
+| Skill | Focus | Python Tool | Key Framework |
+|-------|-------|-------------|---------------|
+| **create-prd** | PRD scaffolding and documentation | `prd_scaffolder.py` | 8-section PRD template |
+| **brainstorm-okrs** | OKR brainstorming and validation | `okr_validator.py` | Wodtke "Radical Focus" |
+| **outcome-roadmap** | Output→outcome roadmap transformation | `roadmap_transformer.py` | Now/Next/Later horizons |
+| **prioritization-frameworks** | Multi-framework prioritization scoring | `prioritization_scorer.py` | RICE, ICE, Opportunity Score, MoSCoW, Weighted |
+| **release-notes** | Release notes from tickets/changelogs | `release_notes_generator.py` | Category-based (features, fixes, breaking) |
+| **summarize-meeting** | Structured meeting summaries | — | Action items + decisions + open questions |
+| **job-stories** | JTBD backlog format | — | When/Want/So (Klement) |
+| **wwas** | Why-What-Acceptance backlog format | — | Strategic context + observable outcomes |
 
 ---
 
-## 🎯 Overview
+## Python Tools
 
-This project management skills collection provides world-class Atlassian expertise for teams using Jira and Confluence to deliver software projects and agile initiatives.
+All 10 tools are CLI-first, standard library only, with `--help`, `--demo`, and `--format json|text` support.
 
-**What's Included:**
-- **6 expert-level skills** covering PM, agile, Jira, Confluence, administration, and templates
-- **Atlassian MCP integration** for direct Jira/Confluence operations
-- **Comprehensive frameworks** for project management, agile ceremonies, and documentation
-- **15+ ready-to-use templates** for sprints, retrospectives, project charters, and more
+```bash
+# Stakeholder mapping
+python senior-pm/scripts/stakeholder_mapper.py --demo
 
-**Ideal For:**
-- Project managers at software companies
-- Scrum Masters and agile coaches
-- Atlassian administrators
-- DevOps and engineering teams using Jira/Confluence
+# Sprint capacity
+python scrum-master/scripts/sprint_capacity_calculator.py --demo
 
-**Key Benefits:**
-- ⚡ **70% time savings** on Jira/Confluence operations with automation
-- 🎯 **Consistent processes** with proven agile frameworks and templates
-- 📊 **Better visibility** with optimized dashboards and reports
-- 🚀 **Faster onboarding** with standardized templates and documentation
+# Experiment design
+python discovery/brainstorm-experiments/scripts/experiment_designer.py --demo
 
----
+# Assumption tracking
+python discovery/identify-assumptions/scripts/assumption_tracker.py --demo
 
-## 📦 Skills Catalog
+# Risk categorization
+python discovery/pre-mortem/scripts/risk_categorizer.py --demo
 
-### 1. Senior Project Manager Expert
-**Status:** ✅ Production Ready | **Version:** 1.0
+# PRD generation
+python execution/create-prd/scripts/prd_scaffolder.py --product-name "MyProduct" --objective "Improve onboarding"
 
-**Purpose:** Strategic project management for software, SaaS, and digital applications.
+# OKR validation
+python execution/brainstorm-okrs/scripts/okr_validator.py --demo
 
-**Key Capabilities:**
-- Portfolio management and strategic planning
-- Stakeholder alignment and executive reporting
-- Risk management and budget oversight
-- Cross-functional team leadership
-- Roadmap development and project charters
-- Atlassian MCP integration for metrics and reporting
+# Roadmap transformation
+python execution/outcome-roadmap/scripts/roadmap_transformer.py --demo
 
-**Use When:**
-- Managing complex multi-team projects
-- Coordinating cross-functional initiatives
-- Executive stakeholder reporting
-- Portfolio-level planning and prioritization
+# Prioritization scoring
+python execution/prioritization-frameworks/scripts/prioritization_scorer.py --demo --framework rice
 
-**Learn More:** See packaged-skills/senior-pm/ for details
+# Release notes
+python execution/release-notes/scripts/release_notes_generator.py --demo --product-name "MyProduct" --version "2.0"
+```
 
 ---
 
-### 2. Scrum Master Expert
-**Status:** ✅ Production Ready | **Version:** 1.0
+## Atlassian MCP Integration
 
-**Purpose:** Agile facilitation for software development teams.
-
-**Key Capabilities:**
-- Sprint planning and execution
-- Daily standups and retrospectives
-- Backlog refinement and grooming
-- Velocity tracking and metrics
-- Impediment removal and escalation
-- Team coaching on agile practices
-- Atlassian MCP integration for sprint management
-
-**Use When:**
-- Facilitating agile ceremonies
-- Coaching teams on Scrum practices
-- Removing team impediments
-- Tracking sprint velocity and burndown
-
-**Learn More:** [scrum-master/SKILL.md](scrum-master/SKILL.md)
-
----
-
-### 3. Atlassian Jira Expert
-**Status:** ✅ Production Ready | **Version:** 1.0
-
-**Purpose:** Jira configuration, JQL mastery, and technical operations.
-
-**Key Capabilities:**
-- Advanced JQL query writing
-- Project and workflow configuration
-- Custom fields and automation rules
-- Dashboards and reporting
-- Integration setup and optimization
-- Performance tuning
-- Atlassian MCP integration for all Jira operations
-
-**Use When:**
-- Configuring Jira projects and workflows
-- Writing complex JQL queries
-- Creating automation rules
-- Building custom dashboards
-- Optimizing Jira performance
-
-**Learn More:** See packaged-skills/jira-expert/ for details
-
----
-
-### 4. Atlassian Confluence Expert
-**Status:** ✅ Production Ready | **Version:** 1.0
-
-**Purpose:** Knowledge management and documentation architecture.
-
-**Key Capabilities:**
-- Space architecture and organization
-- Page templates and macro implementation
-- Documentation strategy and governance
-- Content collaboration workflows
-- Jira integration and linking
-- Search optimization and findability
-- Atlassian MCP integration for documentation
-
-**Use When:**
-- Designing Confluence space structures
-- Creating page templates
-- Establishing documentation standards
-- Improving content findability
-- Integrating with Jira
-
-**Learn More:** See packaged-skills/confluence-expert/ for details
-
----
-
-### 5. Atlassian Administrator
-**Status:** ✅ Production Ready | **Version:** 1.0
-
-**Purpose:** System administration for Atlassian suite.
-
-**Key Capabilities:**
-- User provisioning and access management
-- Global configuration and governance
-- Security and compliance setup
-- SSO and integration deployment
-- Performance optimization
-- Disaster recovery and license management
-- Atlassian MCP integration for system administration
-
-**Use When:**
-- Managing users and permissions
-- Configuring SSO/SAML
-- Installing and managing apps
-- Monitoring system performance
-- Planning disaster recovery
-
-**Learn More:** See packaged-skills/atlassian-admin/ for details
-
----
-
-### 6. Atlassian Template Creator Expert
-**Status:** ✅ Production Ready | **Version:** 1.0
-
-**Purpose:** Template and file creation/modification specialist.
-
-**Key Capabilities:**
-- Confluence page template design (15+ templates)
-- Jira issue template creation
-- Blueprint development for complex structures
-- Standardized content and governance
-- Dynamic content and automation
-- Template lifecycle management
-- Atlassian MCP integration for template deployment
-
-**Available Templates:**
-- Sprint planning template
-- Retrospective formats (Start-Stop-Continue, 4Ls, Mad-Sad-Glad)
-- Project charter
-- Risk register
-- Decision log
-- Meeting notes
-- Technical documentation
-- And more...
-
-**Use When:**
-- Creating reusable Confluence templates
-- Standardizing Jira issue templates
-- Building documentation blueprints
-- Establishing content governance
-
-**Learn More:** See packaged-skills/atlassian-templates/ for details
-
----
-
-## 🔌 Atlassian MCP Integration
-
-**Model Context Protocol (MCP)** enables direct integration with Jira and Confluence from Claude Code.
-
-### Key Features
-
-- **Direct API Access:** Create, read, update, delete Jira issues and Confluence pages
-- **Bulk Operations:** Process multiple issues or pages efficiently
-- **Automation:** Workflow transitions, status updates, comment additions
-- **Reporting:** Generate custom reports and dashboards
-- **Search:** Advanced JQL queries and Confluence searches
-
-### Setup
-
-Configure Atlassian MCP server in your Claude Code settings with:
-- Jira/Confluence instance URL
-- API token or OAuth credentials
-- Project/space access permissions
-
-### Example Operations
+Direct integration with Jira and Confluence via Model Context Protocol:
 
 ```bash
 # Create Jira issue
 mcp__atlassian__create_issue project="PROJ" summary="New feature" type="Story"
 
-# Update issue status
+# Transition issue
 mcp__atlassian__transition_issue key="PROJ-123" status="In Progress"
 
 # Create Confluence page
-mcp__atlassian__create_page space="TEAM" title="Sprint Retrospective" content="..."
+mcp__atlassian__create_page space="TEAM" title="Sprint Retrospective"
 
 # Run JQL query
 mcp__atlassian__search_issues jql="project = PROJ AND status = 'In Progress'"
 ```
 
-**Learn More:** See [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md) for MCP integration details
-
 ---
 
-## 🚀 Quick Start Guide
+## Workflows
 
-### For Project Managers
-
-1. **Install Senior PM Expert:**
-   ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/project-management/senior-pm
-   ```
-
-2. **Use project charter template** from Atlassian Templates skill
-3. **Set up portfolio dashboard** using Jira Expert skill
-4. **Create stakeholder reports** using MCP integration
-
-### For Scrum Masters
-
-1. **Install Scrum Master Expert:**
-   ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/project-management/scrum-master
-   ```
-
-2. **Use sprint planning template** for next sprint
-3. **Set up velocity tracking** dashboard
-4. **Facilitate retrospective** using retro templates
-
-### For Jira Administrators
-
-1. **Install Jira Expert:**
-   ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/project-management/jira-expert
-   ```
-
-2. **Configure custom workflows** for your team
-3. **Create automation rules** for common operations
-4. **Build team dashboards** with relevant metrics
-
-### For Confluence Administrators
-
-1. **Install Confluence Expert:**
-   ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/project-management/confluence-expert
-   ```
-
-2. **Design space architecture** for your organization
-3. **Create page templates** for common documentation
-4. **Implement search optimization** strategies
-
----
-
-## 👥 Team Structure Recommendations
-
-### Small Team (1-10 people)
-
-**Recommended Skills:**
-- Scrum Master (combined PM/Scrum role)
-- Atlassian Templates (standardization)
-
-**Rationale:** Hybrid roles, focus on execution over specialization
-
----
-
-### Medium Team (11-50 people)
-
-**Recommended Skills:**
-- Senior PM (strategic planning)
-- Scrum Master (per team - 1 per 7-9 people)
-- Jira Expert (part-time admin role)
-- Atlassian Templates (content governance)
-
-**Rationale:** Specialized roles, better separation of concerns
-
----
-
-### Large Organization (51+ people)
-
-**Recommended Skills:**
-- All 6 skills for complete PM organization
-- Senior PM (portfolio management)
-- Scrum Masters (multiple, 1 per team)
-- Jira Expert (dedicated Jira admin)
-- Confluence Expert (dedicated documentation lead)
-- Atlassian Admin (dedicated system admin)
-- Atlassian Templates (governance and standards)
-
-**Rationale:** Full specialization, scaled delivery
-
----
-
-## 🔄 Common Workflows
-
-### Workflow 1: Sprint Execution
+### Discovery → Execution → Delivery
 
 ```
-1. Sprint Planning → Scrum Master
-   - Use sprint planning template
-   - Facilitate capacity planning
-   - Create sprint board
-
-2. Daily Standups → Scrum Master
-   - Track impediments
-   - Update board
-   - Coordinate team
-
-3. Sprint Review → Scrum Master
-   - Demo completed work
-   - Gather stakeholder feedback
-   - Update product backlog
-
-4. Sprint Retrospective → Scrum Master
-   - Use retro template (4Ls, Start-Stop-Continue)
-   - Identify improvements
-   - Create action items
+1. brainstorm-ideas     → Generate 15 ideas across PM/Design/Eng perspectives
+2. identify-assumptions → Map and prioritize assumptions (Value/Usability/Viability/Feasibility)
+3. brainstorm-experiments → Design lean experiments for riskiest assumptions
+4. pre-mortem           → Tiger/Paper Tiger/Elephant risk analysis before build
+5. create-prd           → Scaffold PRD with objectives, segments, value props
+6. brainstorm-okrs      → Set quarterly OKRs aligned with product strategy
+7. outcome-roadmap      → Transform feature list into outcome-driven roadmap
+8. prioritization-frameworks → Score and rank with RICE/ICE/Opportunity Score
+9. release-notes        → Generate user-facing release communication
 ```
 
-### Workflow 2: Project Initiation
+### Sprint Execution (Data-Driven)
 
 ```
-1. Project Charter → Senior PM
-   - Use project charter template
-   - Define scope and objectives
-   - Identify stakeholders
-
-2. Jira Project Setup → Jira Expert
-   - Create project
-   - Configure workflows
-   - Set up permissions
-
-3. Confluence Space → Confluence Expert
-   - Create project space
-   - Set up page templates
-   - Establish documentation structure
-
-4. Dashboards & Reports → Jira Expert
-   - Build project dashboard
-   - Configure gadgets
-   - Set up automated reports
+1. sprint_capacity_calculator.py → Calculate team capacity with ceremony overhead
+2. velocity_analyzer.py          → Analyze velocity trends, Monte Carlo forecast
+3. prioritization_scorer.py      → Score backlog items for sprint selection
+4. sprint_health_scorer.py       → Assess sprint health across 6 dimensions
+5. retrospective_analyzer.py     → Analyze retro patterns and action items
 ```
 
-### Workflow 3: Documentation Governance
+### Stakeholder-Aligned Delivery
 
 ```
-1. Space Architecture → Confluence Expert
-   - Design space structure
-   - Define page hierarchy
-   - Plan content organization
-
-2. Template Creation → Atlassian Templates
-   - Build page templates
-   - Create blueprints
-   - Add macros and dynamic content
-
-3. Access Control → Atlassian Admin
-   - Configure space permissions
-   - Set up user groups
-   - Manage access levels
-
-4. Search Optimization → Confluence Expert
-   - Implement labeling strategy
-   - Optimize metadata
-   - Configure search settings
+1. stakeholder_mapper.py         → Map power/interest grid, generate comm plan
+2. risk_categorizer.py           → Pre-mortem risk analysis for launch
+3. release_notes_generator.py    → Draft release notes by category
+4. delivery-manager/SKILL.md     → Release communication workflow
 ```
 
 ---
 
-## 🌟 Real-World Scenarios
+## Success Metrics
 
-**See [REAL_WORLD_SCENARIO.md](REAL_WORLD_SCENARIO.md)** for detailed examples of:
-- Enterprise Jira/Confluence implementation
-- Multi-team agile transformation
-- Atlassian suite optimization
-- Template standardization across organization
-
----
-
-## 📊 Success Metrics
-
-### Efficiency Gains
-
-- **Sprint Predictability:** +40% improvement in sprint completion rates
-- **Project On-Time Delivery:** +25% improvement
-- **Documentation Findability:** +60% improvement in search success
-- **Atlassian Efficiency:** +70% reduction in manual operations
-
-### Quality Improvements
-
-- **Process Consistency:** 80% improvement in standard adherence
-- **Documentation Quality:** 50% improvement in completeness
-- **Team Collaboration:** 45% improvement in cross-team coordination
-
-### Cost Savings
-
-- **Admin Time:** 130 hours/month saved with automation
-- **Meeting Efficiency:** 40% reduction in meeting time
-- **Onboarding Time:** 65% faster new team member onboarding
+| Metric | Target |
+|--------|--------|
+| Sprint Predictability | +40% improvement |
+| Project On-Time Delivery | +25% improvement |
+| Atlassian Operations Efficiency | +70% time savings |
+| Documentation Findability | +60% improvement |
+| Meeting Summary Quality | +50% consistency |
+| Stakeholder Communication Coverage | 100% mapped |
 
 ---
 
-## 📚 Additional Resources
-
-- **Implementation Summary:** [IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)
-- **Real-World Scenarios:** [REAL_WORLD_SCENARIO.md](REAL_WORLD_SCENARIO.md)
-- **Installation Guide:** [INSTALLATION_GUIDE.txt](INSTALLATION_GUIDE.txt)
-- **CLAUDE.md:** [project-management/CLAUDE.md](CLAUDE.md) - Claude Code specific guidance
-- **Main Documentation:** [../CLAUDE.md](../CLAUDE.md)
-- **Installation Guide:** [../INSTALLATION.md](../INSTALLATION.md)
-
----
-
-**Last Updated:** January 2026
-**Skills Deployed:** 6/6 project management skills production-ready
-**Key Feature:** Atlassian MCP integration for direct Jira/Confluence operations
+**Last Updated:** March 2026
+**Skills Deployed:** 22/22 PM skills production-ready
+**Python Tools:** 10 CLI tools (standard library only)
+**Integration:** Atlassian MCP Server for Jira/Confluence automation

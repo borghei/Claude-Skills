@@ -8,7 +8,7 @@ metadata:
   category: project-management
   domain: agile-development
   updated: 2026-02-15
-  python-tools: velocity_analyzer.py, sprint_health_scorer.py, retrospective_analyzer.py
+  python-tools: velocity_analyzer.py, sprint_health_scorer.py, retrospective_analyzer.py, sprint_capacity_calculator.py
   tech-stack: scrum, agile-coaching, team-dynamics, data-analysis
 ---
 
@@ -162,6 +162,32 @@ python retrospective_analyzer.py sprint_data.json --format text
 - Recurring theme analysis with persistence scoring
 - Team maturity level assessment (forming/storming/norming/performing)
 - Improvement velocity trends and recommendations
+
+### Sprint Capacity Calculator (`scripts/sprint_capacity_calculator.py`)
+Team capacity estimation for sprint planning with ceremony overhead and focus factor.
+
+**Features**:
+- Per-member capacity calculation (available days, PTO, allocation %)
+- Automatic ceremony overhead: planning (2h) + daily standup (15min/day) + review (1h) + retro (1h) + refinement (1h)
+- Focus factor application (80% realistic, 85% optimistic)
+- Story point estimation from historical velocity
+- Warnings for high PTO or low allocation members
+
+**Usage**:
+```bash
+python sprint_capacity_calculator.py team_data.json --format text
+python sprint_capacity_calculator.py --demo --format json
+```
+
+**Outputs**:
+- Per-member capacity breakdown (gross hours, ceremony overhead, net hours)
+- Team total with focus-adjusted capacity
+- Story point estimates (conservative, realistic, optimistic) when historical velocity provided
+
+### Sprint Planning Resources
+- **Sprint Planning Guide**: `references/sprint-planning-guide.md` — Pre-planning checklist, SMART goal setting, capacity methodology, story selection, meeting facilitation
+- **User Story Template**: `assets/user_story_template.md` — Classic and Job Story formats, 3 C's, INVEST, Given/When/Then acceptance criteria, splitting strategies
+- **Sprint Plan Template**: `assets/sprint_plan_template.md` — Ready-to-use sprint plan with capacity, commitments, risks, and ceremony calendar
 
 ---
 
