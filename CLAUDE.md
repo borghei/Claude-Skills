@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 109+ production-ready skills across 13 domains with 180+ Python automation tools, 6 Claude Code subagents, and 11 CI/CD workflows.
+**Current Scope:** 109+ production-ready skills across 13 domains with 180+ Python automation tools, 6 Claude Code subagents, and 12 sample CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -43,8 +43,7 @@ claude-code-skills/
 │   ├── agents/                # 6 Claude Code subagents (code-reviewer, qa, docs, etc.)
 │   └── commands/              # Slash commands (git:cm, git:cp, git:pr, review, security-scan)
 ├── .github/
-│   ├── copilot-instructions.md # GitHub Copilot config
-│   └── workflows/             # 11 CI/CD workflows (quality, docs, QA, changelog, release)
+│   └── copilot-instructions.md # GitHub Copilot config
 ├── agents/                    # cs-* prefixed skill agents
 ├── engineering-team/          # 25 engineering skills + Python tools
 ├── engineering/               # 12 POWERFUL-tier architecture skills
@@ -59,7 +58,7 @@ claude-code-skills/
 ├── sales-success/             # 5 sales success skills
 ├── finance/                   # 1 finance skill + Python tools
 ├── standards/                 # 5 standards library files
-├── templates/                 # Reusable templates
+├── templates/                 # Reusable templates + 12 sample GitHub workflows
 ├── documentation/             # Implementation plans, sprints, delivery
 ├── AGENTS.md                  # Universal agent config (Codex, Aider, Jules, etc.)
 ├── .cursorrules               # Cursor AI config
@@ -157,7 +156,7 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 **Phase 1-3 Complete:** 109+ production-ready skills deployed
 - Engineering (25 + 12 POWERFUL), Marketing (10), Product (8), PM (22), C-Level (5), RA/QM (13), Data Analytics (5), HR (4), Sales (5), Business Growth (3), Finance (1)
 - 180+ Python automation tools, 190+ reference guides
-- 6 Claude Code subagents, 11 CI/CD workflows
+- 6 Claude Code subagents, 12 sample CI/CD workflows (in `templates/workflows/`)
 - Cross-platform support (Claude Code + OpenAI Codex + Cursor + VS Code)
 
 **Next Priorities:**

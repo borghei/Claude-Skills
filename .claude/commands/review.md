@@ -11,10 +11,9 @@ Perform a complete review pass:
    pip install yamllint==1.35.1 check-jsonschema==0.28.4 safety==3.2.4
    npm install --global markdown-link-check@3.12.2
    ```
-3. Lint GitHub workflows:
+3. Lint sample GitHub workflows (if present):
    ```bash
-   yamllint -d '{extends: default, rules: {line-length: {max: 160}}}' .github/workflows
-   check-jsonschema --schema github-workflow --base-dir . .github/workflows/*.yml
+   yamllint -d '{extends: default, rules: {line-length: {max: 160}}}' templates/workflows/*.yml
    ```
 4. Python syntax check:
    ```bash

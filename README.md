@@ -4,7 +4,7 @@
 
 # AI Skills Library
 
-**The universal AI skills library for every coding assistant** — 109 expert-level skills with 180 Python automation tools, 6 subagents, and 12 CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 109 expert-level skills with 180 Python automation tools, 6 subagents, and 12 sample CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
@@ -25,7 +25,7 @@
 | **180 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, scaffolding, and beyond — all standard library, no ML dependencies |
 | **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
-| **12 CI/CD Workflows** | Quality gates, release drafting, skill validation, auto-updates — zero configuration needed |
+| **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
 | **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
 
 ### What's New (March 2026)
@@ -45,7 +45,7 @@
   - [Using Workflows](#3-using-workflows-cicd-automation)
 - [Skills Library (109 Skills)](#skills-library-109-skills)
 - [Claude Code Subagents](#claude-code-subagents)
-- [GitHub Workflows (12)](#github-workflows-12)
+- [Sample GitHub Workflows (12)](#sample-github-workflows-12)
 - [Repository Structure](#repository-structure)
 - [Contributing](#contributing)
 - [License](#license)
@@ -533,7 +533,18 @@ Next steps after merge:
 
 ### 3. Using Workflows (CI/CD Automation)
 
-The 12 GitHub workflows run automatically on PRs and pushes. No configuration needed — they activate based on file changes.
+The 12 sample GitHub workflows are located in `templates/workflows/`. Copy the ones you need into your project's `.github/workflows/` directory:
+
+```bash
+# Copy all workflows
+mkdir -p .github/workflows
+cp templates/workflows/*.yml .github/workflows/
+
+# Or copy individual workflows
+cp templates/workflows/ci-quality-gate.yml .github/workflows/
+```
+
+Once installed, they run automatically on PRs and pushes based on file changes.
 
 **Code Quality Gate** — Triggers on every PR with Python changes:
 ```
@@ -812,26 +823,31 @@ See the [How to Use](#how-to-use) section above for detailed output examples fro
 
 ---
 
-## GitHub Workflows (12)
+## Sample GitHub Workflows (12)
 
-CI/CD automation that runs automatically — no configuration required.
+Ready-to-use GitHub Actions templates in [`templates/workflows/`](templates/workflows/). Copy to your `.github/workflows/` to activate.
+
+```bash
+mkdir -p .github/workflows
+cp templates/workflows/*.yml .github/workflows/
+```
 
 | Workflow | Triggers On | What It Does |
 |----------|------------|--------------|
-| `qa-validation.yml` | PR with `*.py` changes | Python syntax check, flake8, bandit security, CLI standards |
+| `ci-quality-gate.yml` | PR | YAML lint, Python syntax, security audit |
+| `qa-validation.yml` | PR with `*.py` changes | Flake8, bandit security, CLI standards |
+| `skill-validation.yml` | PR touching skills | Package structure validation, tier classification |
 | `documentation-check.yml` | PR with `*.md` changes | YAML frontmatter validation, link checking, skill inventory |
 | `changelog-enforcer.yml` | PR to main/dev | Ensures CHANGELOG.md is updated when code changes |
-| `skill-validation.yml` | PR touching skills | Package structure validation, tier classification report |
 | `release-drafter.yml` | Push to main | Auto-generates release notes with full repo stats |
 | `skill-auto-update.yml` | Daily + manual | Detects changed skills, generates update manifest |
-| `ci-quality-gate.yml` | PR | Lint, test, build verification |
 | `claude-code-review.yml` | PR | AI-powered code review |
-| `smart-sync.yml` | Push | Cross-platform skill synchronization |
-| `pr-issue-auto-close.yml` | Merge | Auto-close linked issues on merge |
-| `claude.yml` | Various | Claude Code integration |
-| `sync-codex-skills.yml` | Push | Codex compatibility sync |
+| `claude.yml` | @claude mentions | Interactive Claude Code in issues/PRs |
+| `pr-issue-auto-close.yml` | PR merged | Auto-close linked issues on merge |
+| `smart-sync.yml` | Issue label/state changes | Bidirectional issue/project board sync |
+| `sync-codex-skills.yml` | SKILL.md changes | Codex compatibility sync |
 
-See the [Using Workflows](#3-using-workflows-cicd-automation) section above for sample output from each workflow.
+See [`templates/workflows/README.md`](templates/workflows/README.md) for setup instructions, required secrets, and customization guide.
 
 ---
 
@@ -843,9 +859,8 @@ Claude-Skills/
 │   └── agents/           # code-reviewer, doc-generator, qa-engineer, etc.
 ├── .claude-plugin/       # Plugin marketplace config
 ├── .codex/               # OpenAI Codex compatibility (109 skill symlinks)
-├── .github/              # 12 CI/CD workflows, templates, automation
-│   ├── copilot-instructions.md  # GitHub Copilot config
-│   └── workflows/        # Quality gates, release drafting, auto-update
+├── .github/              # GitHub config (Copilot, issue templates, PR template)
+│   └── copilot-instructions.md  # GitHub Copilot config
 ├── agents/               # 5 production agents
 ├── business-growth/      # 3 skills + 9 Python tools
 ├── c-level-advisor/      # 5 skills + 4 Python tools
@@ -861,7 +876,7 @@ Claude-Skills/
 ├── sales-success/        # 5 skills
 ├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
-├── templates/            # Reusable templates
+├── templates/            # Reusable templates + 12 sample GitHub workflows
 ├── AGENTS.md             # Universal agent config (Codex, Aider, Jules, etc.)
 ├── CLAUDE.md             # Claude Code development guide
 ├── CHANGELOG.md          # Version history
@@ -887,7 +902,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 2. Create a skill following the [standard package structure](#repository-structure)
 3. Include Python tools (standard library only), references, and assets
 4. Add YAML frontmatter to your SKILL.md
-5. Submit a pull request — CI workflows will validate your skill automatically
+5. Submit a pull request
 
 ---
 
@@ -898,7 +913,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>The universal AI skills library. 109 skills. 180 Python tools. 12 workflows. 13 domains.</strong><br>
+  <strong>The universal AI skills library. 109 skills. 180 Python tools. 12 sample workflows. 13 domains.</strong><br>
   Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 

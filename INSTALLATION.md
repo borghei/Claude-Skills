@@ -1,6 +1,6 @@
 # Installation Guide - AI Skills Library
 
-Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 GitHub workflows. Works with Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 sample GitHub workflows. Works with Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 ## Table of Contents
 
@@ -441,13 +441,7 @@ python scripts/skill-installer.py update senior-fullstack --agent claude
 
 ### Method 2: GitHub Action (CI/CD)
 
-The repository includes a `skill-auto-update.yml` workflow that:
-- Runs daily at 6 AM UTC
-- Detects which skills changed
-- Generates an update manifest
-- Can be triggered manually via `workflow_dispatch`
-
-To use in your own project, add this to your CI:
+The repository includes a sample `skill-auto-update.yml` workflow in `templates/workflows/` that detects skill changes and generates update manifests. You can copy it to your project or create your own:
 
 ```yaml
 # .github/workflows/update-skills.yml
@@ -941,5 +935,5 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 ---
 
 **Last Updated:** February 2026
-**Skills Version:** 2.0 (97 production skills, 178 Python tools, 6 subagents, 12 workflows)
+**Skills Version:** 2.0 (97 production skills, 178 Python tools, 6 subagents, 12 sample workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)
