@@ -333,3 +333,260 @@ Analyzes device against MDR requirements, identifies compliance gaps, generates 
 - [ ] QMS (ISO 13485) certified
 - [ ] Labeling and IFU finalized
 - [ ] **Validation:** Internal gap assessment complete
+
+---
+
+## MDCG Guidance Documents Update (2024-2025)
+
+### Key MDCG Guidance Documents
+
+| Document | Title | Status | Key Impact |
+|----------|-------|--------|------------|
+| MDCG 2024-1 | Transition provisions under MDR Art. 120 | Final (2024) | Extended transition deadlines for legacy devices |
+| MDCG 2024-6 | Clinical evidence needed for medical devices previously CE marked under Directives | Final (2024) | Reduced clinical evidence burden for well-established devices |
+| MDCG 2023-4 Rev.1 | Notified Body capacity and availability | Revised (2024) | NB capacity monitoring and optimization |
+| MDCG 2022-18 Rev.1 | Software qualification and classification under MDR | Revised (2024) | Updated software classification algorithm |
+| MDCG 2020-1 Rev.1 | Clinical evaluation — equivalence | Revised (2024) | Refined equivalence demonstration requirements |
+| MDCG 2019-16 Rev.1 | Cybersecurity for medical devices | Revised (2024) | Enhanced cybersecurity requirements for connected devices |
+| MDCG 2019-11 Rev.1 | Qualification and classification of software | Active | Software as medical device classification |
+
+### MDR Transition Timeline (Post-Amendment Regulation 2023/607)
+
+| Device Category | Transition Deadline | Conditions |
+|----------------|--------------------|-----------|
+| Class III and implantable | 26 May 2026 | Valid MDD/AIMDD certificate + QMS application to NB by 26 May 2024 |
+| Class IIb | 31 December 2027 | Valid certificate + QMS application to NB |
+| Class IIa and Class I (sterile/measuring) | 31 December 2028 | Valid certificate + QMS application to NB |
+| Class I (up-classified under MDR) | 31 December 2028 | Previously exempt from NB involvement |
+
+**Conditions for extended deadlines:**
+- Device continues to comply with MDD/AIMDD
+- No significant changes in design or intended purpose
+- No unacceptable safety or performance risk
+- Manufacturer has applied to Notified Body for MDR conformity assessment before applicable deadline
+
+---
+
+## Software as Medical Device Under MDR (MDCG 2019-11 Rev.1)
+
+### Software Qualification Decision
+
+```
+Is the software a medical device?
+        │
+        ▼
+Does the software perform an action on data?
+        │
+    Yes─┴─No → NOT a medical device (data storage/communication only)
+     │
+     ▼
+Is the action for the benefit of individual patients?
+        │
+    Yes─┴─No → NOT a medical device (population health/admin)
+     │
+     ▼
+Is the action one of: treatment, diagnosis, monitoring, prediction?
+        │
+    Yes─┴─No → NOT a medical device (lifestyle/wellness)
+     │
+     ▼
+QUALIFIES AS MEDICAL DEVICE SOFTWARE → Apply classification rules
+```
+
+### Software Classification Under MDR
+
+| Decision Factor | Class IIa | Class IIb | Class III |
+|----------------|-----------|-----------|-----------|
+| Provides information to inform clinical management | Non-serious conditions | Serious conditions | N/A |
+| Drives clinical management or diagnoses | N/A | Non-serious conditions | Serious or critical conditions |
+| Monitors physiological processes | Non-vital parameters | Vital parameters (not immediate danger) | Vital parameters (immediate danger) |
+
+### Software Lifecycle Requirements Under MDR
+
+| MDR Requirement | IEC 62304 Mapping | Documentation |
+|----------------|-------------------|---------------|
+| GSPR 17.1 (repeatability, reliability) | Software development process | Software development plan |
+| GSPR 17.2 (state of the art) | Software architecture | Architecture design document |
+| GSPR 17.3 (minimum IT requirements) | System requirements | IT environment specification |
+| GSPR 17.4 (foreseeable misuse) | Risk management | Software risk analysis |
+| Annex II §6.5 (software verification) | Software testing | Test plans and reports |
+| Annex I §23.4 (labeling for software) | Release documentation | Software release notes |
+
+---
+
+## AI/ML Medical Devices Under MDR
+
+### AI/ML Classification Considerations
+
+| AI/ML Capability | MDR Classification Impact | Regulatory Consideration |
+|-----------------|--------------------------|-------------------------|
+| AI-assisted detection | Typically Class IIa-IIb (Rule 11) | Must demonstrate clinical performance per intended use |
+| AI-driven diagnosis | Typically Class IIb-III (Rule 11) | Requires clinical investigation for novel indications |
+| AI treatment optimization | Typically Class IIb-III (Rule 11 + specific rules) | Benefit-risk analysis must account for AI uncertainty |
+| Continuously learning AI | Classification per highest risk output | Post-market monitoring must track algorithm evolution |
+
+### AI/ML-Specific Technical Documentation
+
+In addition to standard Annex II requirements, AI/ML devices must document:
+
+| Section | Content | MDCG Reference |
+|---------|---------|----------------|
+| Algorithm description | Architecture, training approach, feature engineering | MDCG 2019-11, IMDRF SaMD WG |
+| Training data | Sources, demographics, size, labeling methodology, quality | MDCG 2020-1 (equivalence) |
+| Validation methodology | Test dataset independence, performance metrics, subgroup analysis | Annex XIV |
+| Clinical performance | Sensitivity, specificity, AUC, PPV, NPV per intended population | CER requirements |
+| Change management | How algorithm updates are validated and deployed | GSPR 17 |
+| Explainability | How the AI's output can be understood by intended users | GSPR 23 (labeling) |
+
+### EU AI Act Interaction with MDR
+
+| EU AI Act Requirement | MDR Equivalent | Combined Approach |
+|----------------------|----------------|-------------------|
+| High-risk classification (Annex III, Point 10) | Annex VIII classification rules | Both classifications apply; meet stricter requirement |
+| Conformity assessment (Art. 43) | Annex IX/X/XI assessment | MDR conformity assessment satisfies AI Act (Art. 120) |
+| Technical documentation (Annex IV) | Annex II technical documentation | Extend MDR technical file with AI Act-specific elements |
+| Risk management (Art. 9) | ISO 14971 + GSPR | ISO 14971 satisfies both when AI risks are included |
+| Data governance (Art. 10) | GSPR 17 + Annex XIV | Add AI-specific data governance to clinical evaluation |
+| Post-market monitoring (Art. 72) | Chapter VII PMS | Single PMS system covering both AI Act and MDR |
+
+> **See also:** `../risk-management-specialist/SKILL.md` for AI-specific risk management under ISO 14971, and `../fda-consultant-specialist/SKILL.md` for FDA's AI/ML SaMD framework and PCCP.
+
+---
+
+## Eudamed Implementation Status and Requirements
+
+### Eudamed Module Deployment Status (as of 2025)
+
+| Module | Status | Mandatory Date | Content |
+|--------|--------|----------------|---------|
+| Actor Registration | Operational | Available now | Economic operator registration |
+| UDI/Device Registration | Operational | 6 months after Eudamed fully functional | Device and UDI-DI data |
+| Notified Body and Certificates | Operational | Available now | Certificate data upload by NBs |
+| Clinical Investigations | Operational | Available now | Study registration and reporting |
+| Vigilance | Partially operational | 24 months after fully functional | Incident reports, FSCAs, trend reports |
+| Market Surveillance | In development | 18 months after fully functional | CA market surveillance activities |
+
+**Key consideration:** Until Eudamed is declared fully functional by the European Commission, manufacturers must use existing national systems (e.g., BfArM in Germany, ANSM in France) for vigilance reporting.
+
+### Eudamed Registration Requirements for Manufacturers
+
+| Data Element | Required For | Update Frequency |
+|-------------|-------------|-----------------|
+| SRN (Single Registration Number) | All manufacturers | On change |
+| Authorized representative details | Non-EU manufacturers | On change |
+| Device identification (UDI-DI) | All devices placed on market | Before first placing on market |
+| Basic UDI-DI | Device model/family grouping | Before first placing on market |
+| GMDN code | Device nomenclature | On initial registration |
+| Risk class | Classification per Annex VIII | On initial registration |
+| NB certificate reference | Class IIa and above | When certificate issued |
+| Clinical investigation registration | Interventional studies | Before study start |
+
+---
+
+## UDI-DI and UDI-PI Detailed Requirements
+
+### UDI-DI (Device Identifier) — Static Information
+
+| Element | Description | Example |
+|---------|-------------|---------|
+| Device identifier | Unique code for device model/version | 04069876543219 (GS1 GTIN) |
+| Issuing entity | GS1, HIBCC, ICCBBA, or IFA | Selected by manufacturer |
+| Device model | Specific device configuration | "CardioMonitor X200" |
+| Device version | Software version (for SaMD) | "v3.1.0" |
+| Applicable regulations | MDR or IVDR reference | MDR 2017/745 |
+| Risk class | Per Annex VIII | Class IIa |
+| Basic UDI-DI | Grouping identifier for device family | 04069876500001 |
+
+### UDI-PI (Production Identifier) — Variable Information
+
+| PI Element | When Required | Format |
+|-----------|---------------|--------|
+| Lot/batch number | When tracking by lot | Lot: ABC123 |
+| Serial number | When individual tracking required (Class III, implantable) | SN: 2024-00001 |
+| Manufacturing date | When relevant to safety | Mfg: 2024-06-15 |
+| Expiry date | When device has shelf life | Exp: 2026-06-15 |
+| Software version | SaMD and software-driven devices | SW: v3.1.0 |
+
+### UDI Carrier Requirements
+
+| Carrier Type | Format | Where Applied |
+|-------------|--------|---------------|
+| AIDC (barcode/2D code) | GS1 DataMatrix, GS1-128, HIBC | Device label, package label |
+| HRI (human-readable) | Plain text interpretation of AIDC | Adjacent to AIDC on label |
+| RFID | GS1 EPC/RFID | Optional, in addition to AIDC |
+
+**Labeling placement rules:**
+- UDI on each level of packaging (unit, intermediate, case)
+- For reusable devices requiring sterilization: UDI on device itself (direct marking)
+- Class III implantable: UDI on device or packaging that remains with patient record
+- UDI must survive device lifecycle (including reprocessing cycles for reusable devices)
+
+### UDI Database Submission Timeline
+
+| Device Class | Submission Deadline |
+|-------------|-------------------|
+| Class III and implantable | Before placing on the market |
+| Class IIb | Before placing on the market |
+| Class IIa | Before placing on the market |
+| Class I | Before placing on the market |
+
+> **Note:** All timelines are contingent on Eudamed being declared fully functional. Until then, manufacturers should pre-register in Eudamed (available modules) and maintain data readiness.
+
+---
+
+## Cross-Reference: NIS2 for Critical Infrastructure (Healthcare)
+
+Healthcare organizations manufacturing or deploying medical devices may be classified as essential entities under NIS2:
+
+| NIS2 Requirement | MDR Impact | Action for Manufacturers |
+|-----------------|-----------|--------------------------|
+| Art. 21: Cybersecurity risk management | MDCG 2019-16 cybersecurity guidance | Align device cybersecurity with organizational NIS2 compliance |
+| Art. 23: Incident reporting (24h/72h) | Art. 87-92 vigilance reporting | Unified incident reporting covering both device and infrastructure incidents |
+| Art. 21(2)(d): Supply chain security | Art. 11 authorized representatives, supply chain | Assess cybersecurity of device component suppliers |
+| Art. 20: Governance and accountability | Art. 10 manufacturer obligations | Senior management oversight of both NIS2 and MDR compliance |
+
+> **See also:** `../information-security-manager-iso27001/SKILL.md` for ISO 27001 alignment with NIS2 requirements.
+
+---
+
+## MDR Updates & Cross-Framework Integration
+
+### Latest MDCG Guidance Documents
+
+- **MDCG 2019-11 Rev.1:** Qualification and classification of software — updated algorithm for SaMD
+- **MDCG 2020-1 Rev.1:** Clinical evaluation (Annex XIV) — updated methodologies
+- **MDCG 2024-8:** EU AI Act interaction with MDR for AI-enabled medical devices
+- **MDCG 2023-4:** Legacy devices and Article 120 transition provisions
+
+### AI/ML Medical Devices Under MDR
+
+- **Classification:** AI/ML-based SaMD typically Class IIa or higher (Rule 11)
+- **Clinical Evidence:** Must demonstrate AI algorithm clinical performance (sensitivity, specificity, AUC)
+- **Continuous Learning:** PCCP-equivalent under MDR for adaptive AI devices
+- **Post-Market:** Enhanced PMCF for AI devices monitoring real-world algorithm performance
+- **EU AI Act Interaction:** High-risk AI medical devices subject to BOTH MDR and EU AI Act
+- **Cross-reference:** See `eu-ai-act-specialist` for AI Act obligations
+
+### NIS2 Impact on Healthcare
+
+- Healthcare entities are "Essential Entities" under NIS2 Directive
+- Medical device manufacturers may be "Important Entities"
+- NIS2 cybersecurity requirements supplement MDR cybersecurity expectations
+- **Cross-reference:** See `nis2-directive-specialist` for NIS2 compliance
+
+### EUDAMED Implementation Status
+
+- **Actor Registration Module:** Operational — all economic operators must register
+- **UDI/Device Registration Module:** Operational — mandatory device registration
+- **Notified Body Module:** Operational — certificate information
+- **Clinical Investigation Module:** Available
+- **Vigilance Module:** Under development
+- **Market Surveillance Module:** Under development
+
+### UDI Detailed Requirements
+
+- **UDI-DI (Device Identifier):** Unique to device model — used for EUDAMED registration
+- **UDI-PI (Production Identifier):** Identifies production unit — lot, serial, expiry, manufacturing date
+- **Issuing Entities:** GS1, HIBCC, ICCBBA, IFA
+- **Carrier Types:** AIDC (barcode/2D) + HRI (human readable)
+- **Implant Card:** Required for Class III implantable devices (UDI + patient information)

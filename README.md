@@ -4,7 +4,7 @@
 
 # AI Skills Library
 
-**The universal AI skills library for every coding assistant** — 109 expert-level skills with 180 Python automation tools, 6 subagents, and 12 sample CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 117 expert-level skills with 215+ Python automation tools, 7 subagents, and 12 sample CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
@@ -14,22 +14,31 @@
 [![Windsurf](https://img.shields.io/badge/Windsurf-0EA5E9.svg)](https://codeium.com/windsurf)
 [![Cline](https://img.shields.io/badge/Cline-EC4899.svg)](https://github.com/cline/cline)
 [![Aider](https://img.shields.io/badge/Aider-14B8A6.svg)](https://aider.chat)
-[![109 Skills](https://img.shields.io/badge/Skills-109-brightgreen.svg)](#skills-library-109-skills)
-[![180 Tools](https://img.shields.io/badge/Python_Tools-180-blue.svg)](#python-automation-tools-180)
+[![117 Skills](https://img.shields.io/badge/Skills-117-brightgreen.svg)](#skills-library-117-skills)
+[![215+ Tools](https://img.shields.io/badge/Python_Tools-215+-blue.svg)](#python-automation-tools-215)
 
 ## What You Get
 
 | | |
 |---|---|
-| **109 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
-| **180 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, scaffolding, and beyond — all standard library, no ML dependencies |
+| **117 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
+| **215+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, compliance auditing, and beyond — all standard library, no ML dependencies |
 | **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
-| **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
+| **7 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, git workflows, and **compliance auditing** |
 | **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
 | **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
 
-### What's New (March 2026)
+### What's New
 
+**March 9, 2026 — Compliance Mega-Upgrade**
+- **8 NEW compliance skills** — SOC 2 Type II, EU AI Act, NIS2, DORA, NIST CSF 2.0, PCI-DSS v4.0, CCPA/CPRA, ISO 42001
+- **Infrastructure Compliance Auditor** — Vanta-level infrastructure security checks across cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, and logging — mapped to ALL compliance frameworks
+- **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis, remediation roadmaps, and compliance scorecards
+- **Enhanced existing RA/QM skills** — Updated GDPR, ISO 27001, FDA, MDR, ISO 13485, and risk management skills with cross-framework mapping, AI governance integration, and infrastructure security references
+- **Hardware security key support** — YubiKey/FIDO2 deployment guides and phishing-resistant MFA requirements across all frameworks
+- **Total compliance coverage:** 20 skills, 35+ Python tools, 18 frameworks, 1 compliance agent
+
+**March 2026**
 - **PM Skills Expansion** — 22 project management skills with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
 
 ---
@@ -43,7 +52,7 @@
   - [Using Skills](#1-using-skills-domain-expertise)
   - [Using Subagents](#2-using-subagents-autonomous-workflows)
   - [Using Workflows](#3-using-workflows-cicd-automation)
-- [Skills Library (109 Skills)](#skills-library-109-skills)
+- [Skills Library (117 Skills)](#skills-library-117-skills)
 - [Claude Code Subagents](#claude-code-subagents)
 - [Sample GitHub Workflows (12)](#sample-github-workflows-12)
 - [Repository Structure](#repository-structure)
@@ -609,7 +618,7 @@ python scripts/skill-installer.py install <skill-name> --agent claude
 
 ---
 
-## Skills Library (109 Skills)
+## Skills Library (117 Skills)
 
 ### Engineering Team (24)
 Core engineering expertise with Python automation tools, references, and templates.
@@ -738,23 +747,54 @@ Delivery excellence with discovery, execution frameworks, Atlassian MCP integrat
 | [job-stories](project-management/execution/job-stories/SKILL.md) | JTBD When/Want/So backlog format | - |
 | [wwas](project-management/execution/wwas/SKILL.md) | Why-What-Acceptance structured backlog items | - |
 
-### Regulatory Affairs & Quality Management (12)
-HealthTech/MedTech compliance across ISO, MDR, FDA, and GDPR.
+### Regulatory Affairs, Quality Management & Compliance (20)
+Enterprise compliance across 18 frameworks — medical devices, information security, privacy, AI governance, financial resilience, and infrastructure security.
 
-| Skill | Description |
-|-------|-------------|
-| [regulatory-affairs-head](ra-qm-team/regulatory-affairs-head/SKILL.md) | Regulatory strategy, FDA/EU pathways, market access |
-| [quality-manager-qmr](ra-qm-team/quality-manager-qmr/SKILL.md) | QMS effectiveness, compliance dashboards |
-| [quality-manager-qms-iso13485](ra-qm-team/quality-manager-qms-iso13485/SKILL.md) | ISO 13485 compliance, design control |
-| [capa-officer](ra-qm-team/capa-officer/SKILL.md) | CAPA management, root cause analysis |
-| [quality-documentation-manager](ra-qm-team/quality-documentation-manager/SKILL.md) | Document control, technical file building |
-| [risk-management-specialist](ra-qm-team/risk-management-specialist/SKILL.md) | Risk register, FMEA, ISO 14971 |
-| [information-security-manager-iso27001](ra-qm-team/information-security-manager-iso27001/SKILL.md) | ISMS compliance, security risk assessment |
-| [gdpr-dsgvo-expert](ra-qm-team/gdpr-dsgvo-expert/SKILL.md) | GDPR/DSGVO compliance, DPIA generation |
-| [mdr-745-specialist](ra-qm-team/mdr-745-specialist/SKILL.md) | EU MDR compliance, UDI management |
-| [fda-consultant-specialist](ra-qm-team/fda-consultant-specialist/SKILL.md) | FDA submissions, QSR 820 compliance |
-| [qms-audit-expert](ra-qm-team/qms-audit-expert/SKILL.md) | Audit planning, finding tracking |
-| [isms-audit-expert](ra-qm-team/isms-audit-expert/SKILL.md) | ISMS audit planning, security controls |
+**Medical Device & Quality (12 skills)**
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [regulatory-affairs-head](ra-qm-team/regulatory-affairs-head/SKILL.md) | Regulatory strategy, FDA/EU pathways, market access | 1 |
+| [quality-manager-qmr](ra-qm-team/quality-manager-qmr/SKILL.md) | QMS effectiveness, compliance dashboards | 1 |
+| [quality-manager-qms-iso13485](ra-qm-team/quality-manager-qms-iso13485/SKILL.md) | ISO 13485 compliance, design control | 1 |
+| [capa-officer](ra-qm-team/capa-officer/SKILL.md) | CAPA management, root cause analysis | 1 |
+| [quality-documentation-manager](ra-qm-team/quality-documentation-manager/SKILL.md) | Document control, 21 CFR Part 11 | 1 |
+| [risk-management-specialist](ra-qm-team/risk-management-specialist/SKILL.md) | Risk register, FMEA, ISO 14971 | 1 |
+| [information-security-manager-iso27001](ra-qm-team/information-security-manager-iso27001/SKILL.md) | ISO 27001:2022 ISMS, 93 Annex A controls | 2 |
+| [gdpr-dsgvo-expert](ra-qm-team/gdpr-dsgvo-expert/SKILL.md) | GDPR/DSGVO compliance, DPIA, German BDSG | 3 |
+| [mdr-745-specialist](ra-qm-team/mdr-745-specialist/SKILL.md) | EU MDR 2017/745, GSPR, EUDAMED, UDI | 1 |
+| [fda-consultant-specialist](ra-qm-team/fda-consultant-specialist/SKILL.md) | FDA 510(k)/PMA, QSR/QMSR, HIPAA, cybersecurity | 3 |
+| [qms-audit-expert](ra-qm-team/qms-audit-expert/SKILL.md) | ISO 13485 audit planning, nonconformity management | 1 |
+| [isms-audit-expert](ra-qm-team/isms-audit-expert/SKILL.md) | ISO 27001 ISMS audits, security control testing | 1 |
+
+**Information Security & Cybersecurity (3 skills)** — NEW
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [soc2-compliance-expert](ra-qm-team/soc2-compliance-expert/SKILL.md) | SOC 2 Type I/II, Trust Services Criteria, infrastructure security, evidence collection | 3 |
+| [nist-csf-specialist](ra-qm-team/nist-csf-specialist/SKILL.md) | NIST CSF 2.0, 6 functions, maturity assessment, cross-framework mapping | 2 |
+| [pci-dss-specialist](ra-qm-team/pci-dss-specialist/SKILL.md) | PCI-DSS v4.0, 12 requirements, CDE scoping, tokenization | 2 |
+
+**AI Governance (2 skills)** — NEW
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [eu-ai-act-specialist](ra-qm-team/eu-ai-act-specialist/SKILL.md) | EU AI Act risk classification, GPAI, conformity assessment, bias detection | 3 |
+| [iso42001-ai-management](ra-qm-team/iso42001-ai-management/SKILL.md) | ISO 42001:2023 AIMS, AI lifecycle governance, impact assessment | 2 |
+
+**Privacy, Financial & Cybersecurity Directives (3 skills)** — NEW
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [ccpa-cpra-privacy-expert](ra-qm-team/ccpa-cpra-privacy-expert/SKILL.md) | CCPA/CPRA consumer privacy, data mapping, opt-out mechanisms | 2 |
+| [dora-compliance-expert](ra-qm-team/dora-compliance-expert/SKILL.md) | DORA 5 pillars, ICT risk management, resilience testing, third-party oversight | 2 |
+| [nis2-directive-specialist](ra-qm-team/nis2-directive-specialist/SKILL.md) | NIS2 10 minimum measures, incident reporting, supply chain security | 2 |
+
+**Cross-Cutting Infrastructure (1 skill)** — NEW
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [infrastructure-compliance-auditor](ra-qm-team/infrastructure-compliance-auditor/SKILL.md) | Vanta-level infrastructure audit: cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, logging — mapped to ALL 18 frameworks | 3 |
 
 ### Business Growth (3)
 Revenue optimization and customer success with Python tools.
@@ -808,7 +848,7 @@ People operations and workforce analytics.
 
 ## Claude Code Subagents
 
-Six specialized subagents in `.claude/agents/` for autonomous code review, documentation, QA, security, changelog, and git workflows.
+Seven specialized subagents in `.claude/agents/` and `agents/` for autonomous code review, documentation, QA, security, changelog, git workflows, and enterprise compliance auditing.
 
 | Agent | What It Does | Invoke With |
 |-------|-------------|-------------|
@@ -818,6 +858,7 @@ Six specialized subagents in `.claude/agents/` for autonomous code review, docum
 | **doc-generator** | Generates README, API docs, architecture docs, changelog entries from code | `/agents/doc-generator` |
 | **changelog-manager** | Builds Keep a Changelog entries from git history, determines semver | `/agents/changelog-manager` |
 | **git-workflow** | Conventional commits, branch strategy, PR creation, release workflow | `/agents/git-workflow` |
+| **cs-compliance-auditor** | Multi-framework compliance audit across 18 standards (SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA, NIST CSF 2.0, CCPA, and more). Audits infrastructure, code, policies, and access controls with Vanta-level depth | `agents/compliance/` |
 
 See the [How to Use](#how-to-use) section above for detailed output examples from each agent.
 
@@ -861,7 +902,7 @@ Claude-Skills/
 ├── .codex/               # OpenAI Codex compatibility (109 skill symlinks)
 ├── .github/              # GitHub config (Copilot, issue templates, PR template)
 │   └── copilot-instructions.md  # GitHub Copilot config
-├── agents/               # 5 production agents
+├── agents/               # 6 production agents (incl. compliance auditor)
 ├── business-growth/      # 3 skills + 9 Python tools
 ├── c-level-advisor/      # 5 skills + 4 Python tools
 ├── data-analytics/       # 5 skills
@@ -872,7 +913,7 @@ Claude-Skills/
 ├── marketing-skill/      # 10 skills + 6 Python tools
 ├── product-team/         # 7 skills + 6 Python tools
 ├── project-management/   # 22 skills + 10 Python tools
-├── ra-qm-team/           # 12 skills + 10 Python tools
+├── ra-qm-team/           # 20 skills + 35 Python tools (enterprise compliance)
 ├── sales-success/        # 5 skills
 ├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
@@ -913,7 +954,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>The universal AI skills library. 109 skills. 180 Python tools. 12 sample workflows. 13 domains.</strong><br>
+  <strong>The universal AI skills library. 117 skills. 215+ Python tools. 12 sample workflows. 13 domains.</strong><br>
   Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 

@@ -305,3 +305,265 @@ python scripts/qsr_compliance_checker.py /path/to/project --section 820.30
 # Run HIPAA risk assessment
 python scripts/hipaa_risk_assessment.py /path/to/project --category technical
 ```
+
+---
+
+## FDA QMSR — Quality Management System Regulation
+
+### Transition from QSR (21 CFR 820) to QMSR
+
+The FDA finalized the Quality Management System Regulation (QMSR) in January 2024, replacing the legacy Quality System Regulation (QSR) with ISO 13485:2016 alignment. The rule became effective **February 2, 2026**.
+
+| Aspect | Legacy QSR (21 CFR 820) | QMSR (Effective Feb 2026) |
+|--------|------------------------|---------------------------|
+| Framework | FDA-specific prescriptive requirements | Incorporates ISO 13485:2016 by reference |
+| Design controls | 820.30 (FDA-specific) | ISO 13485 Clause 7.3 |
+| CAPA | 820.100 | ISO 13485 Clause 8.5 |
+| Document control | 820.40 | ISO 13485 Clause 4.2 |
+| Management responsibility | 820.20 | ISO 13485 Clause 5 |
+| Purchasing controls | 820.50 | ISO 13485 Clause 7.4 |
+
+**Key differences under QMSR:**
+- ISO 13485:2016 is incorporated by reference as the primary QMS standard
+- FDA retains certain device-specific requirements not covered by ISO 13485 (e.g., complaint handling per 21 CFR 820.198)
+- Organizations already ISO 13485 certified have a significant head start
+- No separate FDA registration for QMS — single system serves both ISO and FDA
+
+### QMSR Transition Checklist
+
+- [ ] Gap analysis: ISO 13485:2016 vs. current QSR compliance
+- [ ] Update Quality Manual to reference ISO 13485 clause structure
+- [ ] Map existing SOPs to ISO 13485 clauses
+- [ ] Address FDA-specific retained requirements (complaint handling, MDR reporting)
+- [ ] Train staff on ISO 13485 terminology and structure
+- [ ] Update supplier agreements to reference new regulatory framework
+- [ ] Conduct internal audit against QMSR requirements
+- [ ] Update design history files to ISO 13485 Clause 7.3 format
+
+---
+
+## AI/ML-Based Software as Medical Device (SaMD)
+
+### FDA AI/ML SaMD Framework
+
+| Category | Description | FDA Pathway |
+|----------|-------------|-------------|
+| Locked algorithm | Algorithm does not change after deployment | Standard 510(k)/De Novo/PMA |
+| Adaptive algorithm (PCCP) | Algorithm learns and changes with use | Predetermined Change Control Plan |
+| Continuously learning | Real-time adaptation from new data | Case-by-case; PCCP required |
+
+### AI/ML SaMD Submission Requirements
+
+```
+AI/ML SaMD Submission Package
+├── Algorithm description and architecture
+├── Training data characterization
+│   ├── Data sources and collection methods
+│   ├── Demographics and representativeness
+│   ├── Data quality and labeling methodology
+│   └── Training/validation/test split rationale
+├── Performance evaluation
+│   ├── Pre-specified performance goals
+│   ├── Standalone performance metrics (sensitivity, specificity, AUC)
+│   ├── Subgroup analysis (age, sex, race, site)
+│   └── Real-world performance data (if available)
+├── Reference standard justification
+├── Predetermined Change Control Plan (if adaptive)
+├── Human factors / user interface
+├── Cybersecurity documentation
+└── Software documentation per IEC 62304
+```
+
+### Good Machine Learning Practice (GMLP) Principles
+
+1. Multi-disciplinary expertise throughout product lifecycle
+2. Good software engineering and security practices
+3. Representative training and test datasets
+4. Independent test datasets separate from training
+5. Reference datasets based on best available methods
+6. Model design tailored to available data and intended use
+7. Focus on performance of human-AI team
+8. Clinical study testing demonstrates real-world performance
+9. Users provided clear, essential information
+10. Deployed models monitored for performance with retraining managed
+
+---
+
+## Predetermined Change Control Plan (PCCP) for AI/ML Devices
+
+### PCCP Structure
+
+| Section | Content | Evidence |
+|---------|---------|----------|
+| Description of modifications | Types of changes the algorithm will make | Change specification document |
+| Modification protocol | How changes will be developed and tested | Validation protocol |
+| Impact assessment | How each change type affects safety and effectiveness | Risk analysis per change type |
+| Performance monitoring | Ongoing real-world performance tracking | Monitoring plan with metrics |
+| Update verification | How each update will be verified before deployment | Verification and validation plan |
+| Transparency | How users will be notified of changes | Communication plan |
+
+### PCCP Change Categories
+
+| Category | Example | Verification Level |
+|----------|---------|-------------------|
+| Performance improvement | Retrained model with additional data | Automated testing + clinical validation |
+| Input adaptation | New imaging modality support | Full V&V cycle |
+| Output modification | New risk categories or confidence levels | Clinical study |
+| Architecture change | Model architecture update | New submission (510(k)/PMA supplement) |
+
+---
+
+## Enhanced Cybersecurity Requirements (PATCH Act)
+
+The PATCH Act (effective March 2023, codified in FD&C Act §524B) requires:
+
+| Requirement | Details | Evidence |
+|-------------|---------|----------|
+| Cybersecurity plan | Submit plan to monitor, identify, and address vulnerabilities | Premarket submission section |
+| SBOM | Software Bill of Materials including commercial, open-source, off-the-shelf components | CycloneDX or SPDX format |
+| Patch/update capability | Design device to be patchable throughout lifecycle | Architecture documentation |
+| Coordinated vulnerability disclosure | Establish and maintain CVD process | Published security policy |
+| Postmarket updates | Provide patches and updates in a reasonably justified cycle | Patch management plan |
+
+### Cybersecurity Documentation for Premarket Submissions
+
+```
+Cybersecurity Premarket Package
+├── Security risk assessment
+│   ├── Threat model (STRIDE or equivalent)
+│   ├── Security risk analysis per AAMI TIR57
+│   └── Attack surface analysis
+├── Security architecture
+│   ├── Security controls implementation
+│   ├── Cryptographic architecture
+│   └── Network architecture and trust boundaries
+├── SBOM (Software Bill of Materials)
+│   ├── All software components (commercial, open-source, custom)
+│   ├── Version information
+│   └── Known vulnerability status
+├── Security testing
+│   ├── Static analysis (SAST)
+│   ├── Dynamic analysis (DAST)
+│   ├── Penetration testing report
+│   ├── Fuzz testing results
+│   └── Vulnerability scanning results
+├── Lifecycle security plan
+│   ├── Patch management process
+│   ├── End-of-life/end-of-support plan
+│   └── Customer communication plan
+└── Coordinated vulnerability disclosure policy
+```
+
+---
+
+## Cross-Reference: EU AI Act for AI Medical Devices
+
+AI-enabled medical devices must comply with both FDA requirements and EU AI Act when marketed in both jurisdictions:
+
+| Aspect | FDA Approach | EU AI Act Approach | Harmonization Strategy |
+|--------|-------------|-------------------|----------------------|
+| Risk classification | SaMD risk framework (IMDRF) | Annex III high-risk (medical devices) | Map to both frameworks; use higher standard |
+| Transparency | Labeling requirements | Art. 13 transparency obligations | Unified transparency documentation |
+| Data governance | GMLP principles | Art. 10 data and data governance | Comprehensive data quality program |
+| Human oversight | Human factors per IEC 62366 | Art. 14 human oversight | Integrated human factors + oversight design |
+| Post-market | Real-world performance monitoring | Art. 72 post-market monitoring | Single monitoring system serving both |
+| Technical documentation | FDA premarket submission | Annex IV technical documentation | Unified technical file |
+
+> **See also:** `../mdr-745-specialist/SKILL.md` for EU MDR classification of AI/ML medical devices and `../risk-management-specialist/SKILL.md` for ISO 14971 risk management for AI devices.
+
+---
+
+## Updated 510(k) Electronic Submission Requirements (eSTAR)
+
+### eSTAR Mandate
+
+As of October 1, 2023, FDA requires all 510(k) submissions to use the eSTAR template format. Paper submissions are no longer accepted.
+
+| eSTAR Requirement | Details |
+|-------------------|---------|
+| Template | FDA eSTAR template (fillable PDF) |
+| Format | Structured data fields + attachments |
+| Attachments | PDF/A format, bookmarked, OCR-searchable |
+| File naming | FDA naming convention required |
+| Submission portal | CDRH Customer Collaboration Portal or FDA ESG |
+| Maximum file size | 100MB per individual file; no total limit |
+
+### eSTAR Section Mapping
+
+| eSTAR Section | Content | Common Deficiencies |
+|---------------|---------|---------------------|
+| Administrative | Cover letter, user fee, truthful/accurate statement | Missing signatures, incorrect fee |
+| Device Description | Complete device description with images/diagrams | Insufficient detail, missing accessories |
+| Substantial Equivalence | Predicate comparison table | Incomplete comparison criteria |
+| Performance Testing | All test reports with summaries | Missing acceptance criteria, incomplete protocols |
+| Software | Level of concern, hazard analysis, architecture | Outdated IEC 62304 compliance |
+| Biocompatibility | ISO 10993 evaluation or testing | Missing risk assessment, incomplete contact analysis |
+| Sterility | Sterilization validation summary | Missing reprocessing instructions (reusable devices) |
+| Labeling | Device labels, IFU, patient materials | Non-compliant with 21 CFR 801 |
+| EMC/Electrical Safety | IEC 60601-1 compliance | Missing particular standards |
+| Clinical | Clinical data summary (if applicable) | Insufficient clinical evidence for new indications |
+
+---
+
+## Cross-Framework: FDA ↔ MDR ↔ ISO 13485 Mapping
+
+| Process Area | FDA (QMSR/QSR) | EU MDR 2017/745 | ISO 13485:2016 |
+|-------------|-----------------|-----------------|----------------|
+| Quality management system | 21 CFR 820 / QMSR | Annex IX, Annex XI | Clause 4 |
+| Management responsibility | 820.20 / ISO 13485 Cl. 5 | Annex IX §2.2 | Clause 5 |
+| Design controls | 820.30 / ISO 13485 Cl. 7.3 | Annex II §6.1, GSPR | Clause 7.3 |
+| Document control | 820.40 / ISO 13485 Cl. 4.2 | Annex IX §2.3 | Clause 4.2 |
+| Purchasing | 820.50 / ISO 13485 Cl. 7.4 | Annex IX §2.4 | Clause 7.4 |
+| Production | 820.70 / ISO 13485 Cl. 7.5 | Annex IX §2.5 | Clause 7.5 |
+| CAPA | 820.100 / ISO 13485 Cl. 8.5 | Art. 83 (PMS), Art. 89 (FSCA) | Clause 8.5 |
+| Risk management | 820.30(g) / ISO 14971 | Annex I (GSPR), ISO 14971 | Clause 7.1 |
+| Clinical evidence | 820.30(f) / clinical data | Annex XIV (clinical evaluation) | N/A (separate) |
+| Post-market | 820.198 / MDR/MedWatch | Art. 83-86 (PMS), Art. 87-92 (vigilance) | Clause 8.2.1-8.2.3 |
+| Labeling | 21 CFR 801 | Art. 10-13, Annex I Ch. III | N/A (separate) |
+| UDI | 21 CFR 830 (FDA UDI) | Art. 27-29 (UDI-DI/PI) | N/A (separate) |
+| Cybersecurity | §524B FD&C (PATCH Act) | MDCG 2019-16 | N/A (separate) |
+| AI/ML devices | AI/ML SaMD framework + PCCP | EU AI Act + MDR | ISO 13485 + ISO 42001 |
+
+> **Cross-references:** See `../quality-manager-qms-iso13485/SKILL.md` for ISO 13485 implementation aligned with QMSR, and `../mdr-745-specialist/SKILL.md` for EU MDR technical documentation requirements.
+
+---
+
+## FDA Regulatory Updates & Cross-Framework Integration
+
+### FDA QMSR — Quality Management System Regulation
+
+The FDA is aligning 21 CFR Part 820 with ISO 13485:2016 through the Quality Management System Regulation (QMSR), effective February 2, 2026:
+
+- **Key Change:** QSR (21 CFR 820) replaced by ISO 13485 as the recognized quality system standard
+- **Impact:** Manufacturers must comply with ISO 13485:2016 instead of QSR-specific requirements
+- **Design Controls:** ISO 13485 Clause 7.3 replaces 820.30
+- **CAPA:** ISO 13485 Clause 8.5 replaces 820.90/820.100
+- **Transition:** FDA accepting both QSR and QMSR during transition period
+
+### AI/ML-Based Software as Medical Device (SaMD)
+
+- **Predetermined Change Control Plan (PCCP):** Required for AI/ML devices that learn and adapt
+- **Good Machine Learning Practice (GMLP):** FDA's 10 guiding principles for AI/ML in medical devices
+- **Transparency:** Clear labeling of AI/ML-based functionality and limitations
+- **Real-World Performance:** Post-market monitoring of AI model performance drift
+- **Cross-reference:** See `eu-ai-act-specialist` for EU AI Act requirements for AI medical devices
+
+### Enhanced Cybersecurity Requirements (PATCH Act)
+
+- **Premarket Submissions:** Cybersecurity documentation required for all connected devices
+- **Software Bill of Materials (SBOM):** Mandatory for all premarket submissions
+- **Coordinated Vulnerability Disclosure:** Required policy for all connected device manufacturers
+- **Postmarket Patches:** Cybersecurity patches exempt from 510(k) requirements
+- **Cross-reference:** See `infrastructure-compliance-auditor` for technical cybersecurity checks
+
+### Cross-Framework Mapping (FDA ↔ MDR ↔ ISO 13485)
+
+| Area | FDA (QSR/QMSR) | EU MDR 2017/745 | ISO 13485:2016 |
+|------|----------------|-----------------|----------------|
+| Design Controls | 820.30 / QMSR | Annex II | Clause 7.3 |
+| Risk Management | 820.30(g) | Annex I GSPR | ISO 14971 |
+| Clinical Evidence | 820.30(f) | Annex XIV | Clause 7.3.7 |
+| CAPA | 820.90/100 | Art. 83, 89 | Clause 8.5 |
+| Post-Market | 822, MDR | Chapter VII | Clause 8.2.1 |
+| Cybersecurity | FDA Guidance | MDCG 2019-16 | IEC 62443 |
+| AI/ML | PCCP Framework | EU AI Act | ISO 42001 |
