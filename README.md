@@ -28,15 +28,15 @@
 | **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
 | **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
 
-### What's New
+### What's New (9-March-2026)
 
-**March 9, 2026, 11:30 PM — Skills Mega-Expansion (109 → 199 skills)**
+**9-March-2026 — Skills Mega-Expansion (109 → 199 skills)**
 - **82 NEW skills** across all domains — C-Level (21 new), Marketing (25 new), Business Growth (13 new), Engineering (22 new), Product (1 new)
 - Every skill from competing repos now included PLUS unique skills only we have
 - All shared skills upgraded with deeper content, better frameworks, and cross-references
 - **199 total skills** — the largest open-source AI skills library available
 
-**March 9, 2026, 8:00 PM — Compliance Mega-Upgrade**
+**9-March-2026 — Compliance Mega-Upgrade**
 - **8 NEW compliance skills** — SOC 2 Type II, EU AI Act, NIS2, DORA, NIST CSF 2.0, PCI-DSS v4.0, CCPA/CPRA, ISO 42001
 - **Infrastructure Compliance Auditor** — Vanta-level infrastructure security checks across cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, and logging — mapped to ALL compliance frameworks
 - **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis, remediation roadmaps, and compliance scorecards
@@ -44,8 +44,8 @@
 - **Hardware security key support** — YubiKey/FIDO2 deployment guides and phishing-resistant MFA requirements across all frameworks
 - **Total compliance coverage:** 20 skills, 35+ Python tools, 18 frameworks, 1 compliance agent
 
-**March 2026**
-- **PM Skills Expansion** — 22 project management skills with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
+**9-March-2026 — PM Skills Expansion**
+- 22 project management skills with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
 
 ---
 
