@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — 97 production-ready skill packages across 13 professional domains with 178 Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — 199 production-ready skill packages across 13 professional domains with 215+ Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -25,21 +25,21 @@ This is the **universal AI skills library** — 97 production-ready skill packag
 
 ```
 ├── engineering-team/     # 24 core engineering skills + 50 Python tools
-├── engineering/          # 12 advanced architecture skills + 33 Python tools
-├── marketing-skill/      # 10 marketing skills + 6 Python tools
-├── product-team/         # 7 product skills + 6 Python tools
-├── project-management/   # 9 PM skills + 5 Python tools
-├── c-level-advisor/      # 5 C-level advisory skills + 4 Python tools
-├── ra-qm-team/           # 12 regulatory/quality skills + 10 Python tools
-├── business-growth/      # 3 business skills + 9 Python tools
+├── engineering/          # 33 advanced architecture skills + 33 Python tools
+├── marketing-skill/      # 35 marketing skills + 6 Python tools
+├── product-team/         # 8 product skills + 6 Python tools
+├── project-management/   # 21 PM skills + 5 Python tools
+├── c-level-advisor/      # 26 C-level advisory skills + 4 Python tools
+├── ra-qm-team/           # 21 regulatory/quality/compliance skills + 35 Python tools
+├── business-growth/      # 16 business & growth skills + 9 Python tools
 ├── data-analytics/       # 5 data analytics skills
 ├── hr-operations/        # 4 HR operations skills
 ├── sales-success/        # 5 sales success skills
 ├── finance/              # 1 finance skill + 4 Python tools
-├── agents/               # 5 production skill agents
+├── agents/               # 7 production skill agents
 ├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
-└── templates/            # Reusable templates
+└── templates/            # Reusable templates + 12 sample workflows
 ```
 
 ## Skill Package Pattern

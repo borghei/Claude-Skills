@@ -797,7 +797,6 @@ Delivery excellence with discovery, execution frameworks, Atlassian MCP integrat
 | [atlassian-templates](project-management/atlassian-templates/SKILL.md) | Template design, custom blueprints | - |
 | [agile-coach](project-management/agile-coach/SKILL.md) | Transformation, framework implementation, coaching | - |
 | [program-manager](project-management/program-manager/SKILL.md) | Multi-project coordination, portfolio governance | - |
-| [packaged-skills](project-management/packaged-skills/SKILL.md) | Bundled skill packages for quick deployment | - |
 
 **Discovery Skills (4)**
 

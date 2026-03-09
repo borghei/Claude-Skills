@@ -45,14 +45,14 @@ claude-code-skills/
 ├── .github/
 │   └── copilot-instructions.md # GitHub Copilot config
 ├── agents/                    # cs-* prefixed skill agents
-├── engineering-team/          # 25 engineering skills + Python tools
-├── engineering/               # 12 POWERFUL-tier architecture skills
-├── marketing-skill/           # 10 marketing skills + Python tools
+├── engineering-team/          # 24 core engineering skills + Python tools
+├── engineering/               # 33 advanced architecture skills + Python tools
+├── marketing-skill/           # 35 marketing skills + Python tools
 ├── product-team/              # 8 product skills + Python tools
-├── project-management/        # 22 PM skills + discovery + execution + Atlassian MCP
-├── c-level-advisor/           # 5 C-level advisory skills
-├── ra-qm-team/                # 20 RA/QM compliance skills (18 frameworks)
-├── business-growth/           # 3 business & growth skills + Python tools
+├── project-management/        # 21 PM skills + discovery + execution + Atlassian MCP
+├── c-level-advisor/           # 26 C-level advisory skills
+├── ra-qm-team/                # 21 RA/QM compliance skills (18 frameworks)
+├── business-growth/           # 16 business & growth skills + Python tools
 ├── data-analytics/            # 5 data analytics skills
 ├── hr-operations/             # 4 HR operations skills
 ├── sales-success/             # 5 sales success skills
