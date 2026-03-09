@@ -214,3 +214,41 @@ Calculates comprehensive ROI metrics with industry benchmarking:
 - **Single-currency** -- All monetary values assumed to be in the same currency. No currency conversion support.
 - **Simplified time-decay** -- Uses exponential decay based on configurable half-life. Does not account for weekday/weekend or seasonal patterns.
 - **No cross-device tracking** -- Attribution operates on provided journey data as-is. Cross-device identity resolution must be handled upstream.
+
+---
+
+## Typical Analysis Workflow
+
+For a complete campaign review, run the three scripts in sequence:
+
+```bash
+# Step 1 -- Attribution: understand which channels drive conversions
+python scripts/attribution_analyzer.py campaign_data.json --model time-decay
+
+# Step 2 -- Funnel: identify where prospects drop off on the path to conversion
+python scripts/funnel_analyzer.py funnel_data.json
+
+# Step 3 -- ROI: calculate profitability and benchmark against industry standards
+python scripts/campaign_roi_calculator.py campaign_data.json
+```
+
+Use attribution results to identify top-performing channels, then focus funnel analysis on those channels' segments, and finally validate ROI metrics to prioritize budget reallocation.
+
+---
+
+## Input Validation
+
+Before running scripts, verify your JSON is valid and matches the expected schema. Common errors:
+
+- **Missing required keys** (e.g., `journeys`, `funnel.stages`, `campaigns`) -- script exits with a descriptive `KeyError`
+- **Mismatched array lengths** in funnel data (`stages` and `counts` must be the same length) -- raises `ValueError`
+- **Non-numeric monetary values** in ROI data -- raises `TypeError`
+
+Use `python -m json.tool your_file.json` to validate JSON syntax before passing it to any script.
+
+## Related Skills
+
+- **marketing-demand-acquisition**: For planning campaigns that analytics measures.
+- **social-media-analyzer**: For social-specific analytics complementing cross-channel analysis.
+- **marketing-strategy-pmm**: For strategic context behind campaign performance.
+- **content-creator**: For optimizing content based on analytics findings.

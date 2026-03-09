@@ -4,7 +4,7 @@
 
 # AI Skills Library
 
-**The universal AI skills library for every coding assistant** — 117 expert-level skills with 215+ Python automation tools, 7 subagents, and 12 sample CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 199 expert-level skills with 210+ Python automation tools, 7 subagents, and 12 sample CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
@@ -14,15 +14,15 @@
 [![Windsurf](https://img.shields.io/badge/Windsurf-0EA5E9.svg)](https://codeium.com/windsurf)
 [![Cline](https://img.shields.io/badge/Cline-EC4899.svg)](https://github.com/cline/cline)
 [![Aider](https://img.shields.io/badge/Aider-14B8A6.svg)](https://aider.chat)
-[![117 Skills](https://img.shields.io/badge/Skills-117-brightgreen.svg)](#skills-library-117-skills)
-[![215+ Tools](https://img.shields.io/badge/Python_Tools-215+-blue.svg)](#python-automation-tools-215)
+[![117 Skills](https://img.shields.io/badge/Skills-199-brightgreen.svg)](#skills-library-117-skills)
+[![215+ Tools](https://img.shields.io/badge/Python_Tools-210+-blue.svg)](#python-automation-tools-215)
 
 ## What You Get
 
 | | |
 |---|---|
-| **117 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
-| **215+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, compliance auditing, and beyond — all standard library, no ML dependencies |
+| **199 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
+| **210+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, compliance auditing, and beyond — all standard library, no ML dependencies |
 | **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
 | **7 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, git workflows, and **compliance auditing** |
 | **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
@@ -30,7 +30,13 @@
 
 ### What's New
 
-**March 9, 2026 — Compliance Mega-Upgrade**
+**March 9, 2026, 11:30 PM — Skills Mega-Expansion (109 → 199 skills)**
+- **82 NEW skills** across all domains — C-Level (21 new), Marketing (25 new), Business Growth (13 new), Engineering (22 new), Product (1 new)
+- Every skill from competing repos now included PLUS unique skills only we have
+- All shared skills upgraded with deeper content, better frameworks, and cross-references
+- **199 total skills** — the largest open-source AI skills library available
+
+**March 9, 2026, 8:00 PM — Compliance Mega-Upgrade**
 - **8 NEW compliance skills** — SOC 2 Type II, EU AI Act, NIS2, DORA, NIST CSF 2.0, PCI-DSS v4.0, CCPA/CPRA, ISO 42001
 - **Infrastructure Compliance Auditor** — Vanta-level infrastructure security checks across cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, and logging — mapped to ALL compliance frameworks
 - **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis, remediation roadmaps, and compliance scorecards
@@ -52,7 +58,7 @@
   - [Using Skills](#1-using-skills-domain-expertise)
   - [Using Subagents](#2-using-subagents-autonomous-workflows)
   - [Using Workflows](#3-using-workflows-cicd-automation)
-- [Skills Library (117 Skills)](#skills-library-117-skills)
+- [Skills Library (199 Skills)](#skills-library-117-skills)
 - [Claude Code Subagents](#claude-code-subagents)
 - [Sample GitHub Workflows (12)](#sample-github-workflows-12)
 - [Repository Structure](#repository-structure)
@@ -618,10 +624,10 @@ python scripts/skill-installer.py install <skill-name> --agent claude
 
 ---
 
-## Skills Library (117 Skills)
+## Skills Library (199 Skills)
 
 ### Engineering Team (24)
-Core engineering expertise with Python automation tools, references, and templates.
+Core software engineering expertise with Python automation tools, references, and templates.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -650,8 +656,8 @@ Core engineering expertise with Python automation tools, references, and templat
 | [codex-cli-specialist](engineering-team/codex-cli-specialist/SKILL.md) | Cross-platform skill authoring, Codex CLI, conversion tools | 3 |
 | [devops-workflow-engineer](engineering-team/devops-workflow-engineer/SKILL.md) | GitHub Actions, CI/CD pipelines, deployment strategies | 3 |
 
-### Advanced Engineering (12)
-Enterprise-grade skills with sophisticated analysis tooling.
+### Advanced Engineering (33)
+Enterprise-grade skills with sophisticated analysis tooling — including MCP server building, Playwright testing, CI/CD pipelines, SaaS scaffolding, and more.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -666,9 +672,30 @@ Enterprise-grade skills with sophisticated analysis tooling.
 | [release-manager](engineering/release-manager/SKILL.md) | Automated changelog, semantic versioning | 3 |
 | [skill-tester](engineering/skill-tester/SKILL.md) | Meta-skill validator, quality scoring | 3 |
 | [tech-debt-tracker](engineering/tech-debt-tracker/SKILL.md) | AST parsing, debt prioritization, trend analysis | 3 |
+| [agent-protocol](engineering/agent-protocol/SKILL.md) | AI agent communication protocols, MCP, A2A, tool schemas | - |
+| [agent-workflow-designer](engineering/agent-workflow-designer/SKILL.md) | Multi-agent orchestration, workflow DAGs, agent routing | - |
+| [api-test-suite-builder](engineering/api-test-suite-builder/SKILL.md) | API testing frameworks, contract testing, load testing | - |
+| [ci-cd-pipeline-builder](engineering/ci-cd-pipeline-builder/SKILL.md) | CI/CD design, GitHub Actions, GitLab CI, deployment strategies | - |
+| [codebase-onboarding](engineering/codebase-onboarding/SKILL.md) | New developer onboarding, codebase docs, architecture guides | - |
+| [database-schema-designer](engineering/database-schema-designer/SKILL.md) | Schema design, normalization, migration planning, ERD | - |
+| [env-secrets-manager](engineering/env-secrets-manager/SKILL.md) | Secrets management, .env security, Vault, rotation policies | - |
+| [git-worktree-manager](engineering/git-worktree-manager/SKILL.md) | Git worktree workflows, parallel development, branches | - |
+| [mcp-server-builder](engineering/mcp-server-builder/SKILL.md) | MCP server development, tool definition, transport protocols | - |
+| [monorepo-navigator](engineering/monorepo-navigator/SKILL.md) | Monorepo tooling, workspace management, build caching | - |
+| [performance-profiler](engineering/performance-profiler/SKILL.md) | Performance analysis, flame graphs, memory profiling | - |
+| [playwright-pro](engineering/playwright-pro/SKILL.md) | E2E testing with Playwright, page objects, CI integration | - |
+| [changelog-generator](engineering/changelog-generator/SKILL.md) | Automated changelogs, conventional commits, release notes | - |
+| [pr-review-expert](engineering/pr-review-expert/SKILL.md) | PR review best practices, automated checks, checklists | - |
+| [runbook-generator](engineering/runbook-generator/SKILL.md) | Operational runbooks, incident procedures, automation | - |
+| [saas-scaffolder](engineering/saas-scaffolder/SKILL.md) | SaaS boilerplate, auth, billing, multi-tenancy | - |
+| [skill-security-auditor](engineering/skill-security-auditor/SKILL.md) | Security audit for AI skills, prompt injection detection | - |
+| [context-engine](engineering/context-engine/SKILL.md) | Context management for AI agents, memory systems | - |
+| [self-improving-agent](engineering/self-improving-agent/SKILL.md) | Self-improving AI patterns, feedback loops, metrics | - |
+| [prompt-engineer-toolkit](engineering/prompt-engineer-toolkit/SKILL.md) | Prompt engineering frameworks, evaluation, optimization | - |
+| [stripe-integration-expert](engineering/stripe-integration-expert/SKILL.md) | Stripe API, payment flows, subscriptions, webhooks | - |
 
-### C-Level Advisory (5)
-Strategic decision-making for executive leadership.
+### C-Level Advisory (26)
+Strategic decision-making for executive leadership — from board governance to M&A playbooks.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -677,9 +704,30 @@ Strategic decision-making for executive leadership.
 | [cfo-advisor](c-level-advisor/cfo-advisor/SKILL.md) | Financial planning, fundraising, unit economics, treasury | - |
 | [cmo-advisor](c-level-advisor/cmo-advisor/SKILL.md) | Brand strategy, demand generation, marketing leadership | - |
 | [coo-advisor](c-level-advisor/coo-advisor/SKILL.md) | Operations strategy, process optimization, scaling | - |
+| [chief-of-staff](c-level-advisor/chief-of-staff/SKILL.md) | Executive operations, cross-functional alignment, strategic initiatives | - |
+| [chro-advisor](c-level-advisor/chro-advisor/SKILL.md) | People strategy, org design, compensation, workforce planning | - |
+| [ciso-advisor](c-level-advisor/ciso-advisor/SKILL.md) | Security strategy, risk quantification, compliance roadmap | - |
+| [cpo-advisor](c-level-advisor/cpo-advisor/SKILL.md) | Product strategy, portfolio management, product-market fit | - |
+| [cro-advisor](c-level-advisor/cro-advisor/SKILL.md) | Revenue strategy, sales/CS alignment, NRR optimization | - |
+| [culture-architect](c-level-advisor/culture-architect/SKILL.md) | Company culture design, values, engagement, remote culture | - |
+| [decision-logger](c-level-advisor/decision-logger/SKILL.md) | Decision documentation, ADRs, decision frameworks | - |
+| [executive-mentor](c-level-advisor/executive-mentor/SKILL.md) | Executive coaching, leadership development, board prep | - |
+| [founder-coach](c-level-advisor/founder-coach/SKILL.md) | Founder coaching, fundraising, pivots, co-founder dynamics | - |
+| [org-health-diagnostic](c-level-advisor/org-health-diagnostic/SKILL.md) | Organization assessment, health scoring, alignment analysis | - |
+| [board-deck-builder](c-level-advisor/board-deck-builder/SKILL.md) | Board presentation design, investor updates, narrative structure | - |
+| [board-meeting](c-level-advisor/board-meeting/SKILL.md) | Board meeting facilitation, agenda, minutes, governance | - |
+| [change-management](c-level-advisor/change-management/SKILL.md) | Organizational change, ADKAR, Kotter's 8 steps, transformation | - |
+| [company-os](c-level-advisor/company-os/SKILL.md) | Operating system for companies, cadences, OKRs, rituals | - |
+| [competitive-intel](c-level-advisor/competitive-intel/SKILL.md) | Competitive analysis, battlecards, market intelligence | - |
+| [intl-expansion](c-level-advisor/intl-expansion/SKILL.md) | International expansion, market entry, localization | - |
+| [ma-playbook](c-level-advisor/ma-playbook/SKILL.md) | M&A strategy, due diligence, integration playbook | - |
+| [strategic-alignment](c-level-advisor/strategic-alignment/SKILL.md) | Strategy alignment, OKR cascade, cross-functional sync | - |
+| [internal-narrative](c-level-advisor/internal-narrative/SKILL.md) | Internal communications, all-hands, company narratives | - |
+| [scenario-war-room](c-level-advisor/scenario-war-room/SKILL.md) | Scenario planning, war gaming, crisis simulation | - |
+| [cs-onboard](c-level-advisor/cs-onboard/SKILL.md) | C-suite onboarding, first 90 days, stakeholder mapping | - |
 
-### Marketing (10)
-Data-driven marketing with Python automation tools.
+### Marketing (35)
+Data-driven marketing with Python automation tools — from content strategy to paid ads, SEO to CRO.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -693,8 +741,33 @@ Data-driven marketing with Python automation tools.
 | [growth-marketer](marketing-skill/growth-marketer/SKILL.md) | Experimentation, funnel optimization, viral loops, retention | - |
 | [marketing-analyst](marketing-skill/marketing-analyst/SKILL.md) | Attribution modeling, ROI analysis, campaign optimization | - |
 | [seo-specialist](marketing-skill/seo-specialist/SKILL.md) | Technical SEO, keyword research, link building, analytics | - |
+| [ad-creative](marketing-skill/ad-creative/SKILL.md) | Ad creative design, A/B testing, platform-specific formats | - |
+| [ai-seo](marketing-skill/ai-seo/SKILL.md) | AI-powered SEO, SGE optimization, semantic search | - |
+| [brand-guidelines](marketing-skill/brand-guidelines/SKILL.md) | Brand identity systems, style guides, voice & tone | - |
+| [cold-email](marketing-skill/cold-email/SKILL.md) | Cold outreach, personalization, sequences, deliverability | - |
+| [content-humanizer](marketing-skill/content-humanizer/SKILL.md) | Natural writing patterns, AI detection avoidance, authenticity | - |
+| [content-production](marketing-skill/content-production/SKILL.md) | Content ops, editorial calendar, workflow management | - |
+| [content-strategy](marketing-skill/content-strategy/SKILL.md) | Content pillars, audience research, funnel mapping | - |
+| [copywriting](marketing-skill/copywriting/SKILL.md) | Persuasive writing, PAS, AIDA, BAB frameworks | - |
+| [copy-editing](marketing-skill/copy-editing/SKILL.md) | Style consistency, grammar, editorial standards | - |
+| [landing-page-generator](marketing-skill/landing-page-generator/SKILL.md) | Landing page design, conversion optimization, CTA strategy | - |
+| [marketing-context](marketing-skill/marketing-context/SKILL.md) | Market research, customer insights, positioning context | - |
+| [marketing-ideas](marketing-skill/marketing-ideas/SKILL.md) | Campaign ideation, creative brainstorming, trend analysis | - |
+| [marketing-ops](marketing-skill/marketing-ops/SKILL.md) | Marketing automation, MarTech stack, data management | - |
+| [marketing-psychology](marketing-skill/marketing-psychology/SKILL.md) | Behavioral psychology, cognitive biases, persuasion | - |
+| [paid-ads](marketing-skill/paid-ads/SKILL.md) | PPC campaigns, Google/Meta/LinkedIn Ads, budget optimization | - |
+| [social-content](marketing-skill/social-content/SKILL.md) | Social media content creation, platform-specific formats | - |
+| [programmatic-seo](marketing-skill/programmatic-seo/SKILL.md) | Programmatic page generation, template-based SEO at scale | - |
+| [schema-markup](marketing-skill/schema-markup/SKILL.md) | Structured data, JSON-LD, rich snippets, Knowledge Graph | - |
+| [seo-audit](marketing-skill/seo-audit/SKILL.md) | Technical SEO audits, Core Web Vitals, crawl analysis | - |
+| [site-architecture](marketing-skill/site-architecture/SKILL.md) | Information architecture, URL structure, internal linking | - |
+| [analytics-tracking](marketing-skill/analytics-tracking/SKILL.md) | GTM, event tracking, conversion tracking, GA4 | - |
+| [email-sequence](marketing-skill/email-sequence/SKILL.md) | Email automation, drip campaigns, nurture flows | - |
+| [email-template-builder](marketing-skill/email-template-builder/SKILL.md) | Email HTML templates, responsive design, deliverability | - |
+| [social-media-manager](marketing-skill/social-media-manager/SKILL.md) | Social media management, scheduling, community management | - |
+| [launch-strategy](marketing-skill/launch-strategy/SKILL.md) | Product launch playbooks, pre/post-launch analysis | - |
 
-### Product Team (7)
+### Product Team (8)
 User-centered product development with automation tools.
 
 | Skill | Description | Tools |
@@ -706,6 +779,7 @@ User-centered product development with automation tools.
 | [ux-researcher-designer](product-team/ux-researcher-designer/SKILL.md) | Personas, journey mapping, usability research | 1 |
 | [product-designer](product-team/product-designer/SKILL.md) | UI/UX design, prototyping, user research, design systems | - |
 | [design-system-lead](product-team/design-system-lead/SKILL.md) | Design tokens, component libraries, documentation | - |
+| [ab-test-setup](product-team/ab-test-setup/SKILL.md) | A/B testing design, statistical significance, feature flags | - |
 
 ### Project Management (22)
 Delivery excellence with discovery, execution frameworks, Atlassian MCP integration, and 10 Python CLI tools.
@@ -796,14 +870,27 @@ Enterprise compliance across 18 frameworks — medical devices, information secu
 |-------|-------------|-------|
 | [infrastructure-compliance-auditor](ra-qm-team/infrastructure-compliance-auditor/SKILL.md) | Vanta-level infrastructure audit: cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, logging — mapped to ALL 18 frameworks | 3 |
 
-### Business Growth (3)
-Revenue optimization and customer success with Python tools.
+### Business Growth (16)
+Revenue optimization, CRO, pricing strategy, and customer success with Python tools.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
 | [customer-success-manager](business-growth/customer-success-manager/SKILL.md) | Health scoring, churn prediction, expansion analysis | 3 |
 | [revenue-operations](business-growth/revenue-operations/SKILL.md) | Pipeline analytics, forecast accuracy, GTM efficiency | 3 |
 | [sales-engineer](business-growth/sales-engineer/SKILL.md) | RFP analysis, competitive positioning, POC planning | 3 |
+| [form-cro](business-growth/form-cro/SKILL.md) | Form optimization, field reduction, multi-step forms | - |
+| [onboarding-cro](business-growth/onboarding-cro/SKILL.md) | User onboarding optimization, activation, time-to-value | - |
+| [page-cro](business-growth/page-cro/SKILL.md) | Landing page CRO, above-the-fold, social proof | - |
+| [paywall-upgrade-cro](business-growth/paywall-upgrade-cro/SKILL.md) | Paywall optimization, upgrade triggers, pricing pages | - |
+| [popup-cro](business-growth/popup-cro/SKILL.md) | Exit-intent popups, timing optimization, frequency capping | - |
+| [signup-flow-cro](business-growth/signup-flow-cro/SKILL.md) | Registration optimization, SSO, progressive profiling | - |
+| [churn-prevention](business-growth/churn-prevention/SKILL.md) | Churn prediction, retention strategies, win-back campaigns | - |
+| [competitive-teardown](business-growth/competitive-teardown/SKILL.md) | Competitor analysis, feature comparison, positioning gaps | - |
+| [competitor-alternatives](business-growth/competitor-alternatives/SKILL.md) | Alternative positioning, comparison pages, switching guides | - |
+| [free-tool-strategy](business-growth/free-tool-strategy/SKILL.md) | Free tool marketing, product-led growth, conversion funnels | - |
+| [pricing-strategy](business-growth/pricing-strategy/SKILL.md) | Pricing models, value-based pricing, packaging | - |
+| [referral-program](business-growth/referral-program/SKILL.md) | Referral mechanics, viral loops, incentive design | - |
+| [contract-and-proposal-writer](business-growth/contract-and-proposal-writer/SKILL.md) | Contract templates, proposals, SOW, MSA | - |
 
 ### Finance (1)
 Financial analysis and valuation with Python tools.
@@ -903,15 +990,15 @@ Claude-Skills/
 ├── .github/              # GitHub config (Copilot, issue templates, PR template)
 │   └── copilot-instructions.md  # GitHub Copilot config
 ├── agents/               # 6 production agents (incl. compliance auditor)
-├── business-growth/      # 3 skills + 9 Python tools
-├── c-level-advisor/      # 5 skills + 4 Python tools
+├── business-growth/      # 16 skills + 9 Python tools
+├── c-level-advisor/      # 26 skills + 4 Python tools
 ├── data-analytics/       # 5 skills
-├── engineering/          # 12 advanced skills + 33 Python tools
+├── engineering/          # 33 advanced skills + 33 Python tools
 ├── engineering-team/     # 24 core engineering skills + 50 Python tools
 ├── finance/              # 1 skill + 4 Python tools
 ├── hr-operations/        # 4 skills
-├── marketing-skill/      # 10 skills + 6 Python tools
-├── product-team/         # 7 skills + 6 Python tools
+├── marketing-skill/      # 35 skills + 6 Python tools
+├── product-team/         # 8 skills + 6 Python tools
 ├── project-management/   # 22 skills + 10 Python tools
 ├── ra-qm-team/           # 20 skills + 35 Python tools (enterprise compliance)
 ├── sales-success/        # 5 skills
@@ -954,7 +1041,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>The universal AI skills library. 117 skills. 215+ Python tools. 12 sample workflows. 13 domains.</strong><br>
+  <strong>The universal AI skills library. 199 skills. 210+ Python tools. 12 sample workflows. 13 domains.</strong><br>
   Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 

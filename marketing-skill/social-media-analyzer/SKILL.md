@@ -278,3 +278,33 @@ The sample campaign shows:
 - Content type performance by platform
 - Optimal posting times and frequency
 - ROI calculation formulas
+
+## Proactive Triggers
+
+- **Engagement rate below platform average** -- Content isn't resonating. Analyze top performers for patterns to replicate.
+- **Follower growth stalled** -- Content distribution or frequency issue. Audit posting patterns and content mix.
+- **High impressions, low engagement** -- Reach without resonance. Content quality or relevance issue needs addressing.
+- **Competitor outperforming significantly** -- Content gap detected. Analyze their successful posts for format and topic insights.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| "Social media audit" | Performance analysis across platforms with benchmarks |
+| "What's performing?" | Top content analysis with patterns and recommendations |
+| "Competitor social analysis" | Competitive social media comparison with gaps |
+| "Campaign ROI" | Full ROI calculation with engagement value estimates |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **campaign-analytics**: For cross-channel analytics including social alongside other channels.
+- **content-creator**: For creating social media content optimized by analysis findings.
+- **marketing-demand-acquisition**: For integrating social media into broader demand gen strategy.
+- **marketing-strategy-pmm**: For aligning social content with product marketing positioning.

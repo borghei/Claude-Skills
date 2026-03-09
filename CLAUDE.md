@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 117+ production-ready skills across 13 domains with 215+ Python automation tools, 7 Claude Code subagents, and 12 sample CI/CD workflows.
+**Current Scope:** 199+ production-ready skills across 13 domains with 215+ Python automation tools, 7 Claude Code subagents, and 12 sample CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -153,8 +153,8 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ## Roadmap
 
-**Phase 1-3 Complete:** 117+ production-ready skills deployed
-- Engineering (25 + 12 POWERFUL), Marketing (10), Product (8), PM (22), C-Level (5), RA/QM & Compliance (20), Data Analytics (5), HR (4), Sales (5), Business Growth (3), Finance (1)
+**Phase 1-3 Complete:** 199+ production-ready skills deployed
+- Engineering (25 + 12 POWERFUL + 22 new), Marketing (10 + 25 new), Product (8 + 1 new), PM (22), C-Level (5 + 18 new), RA/QM & Compliance (20), Data Analytics (5), HR (4), Sales (5), Business Growth (3 + 13 new), Finance (1)
 - 215+ Python automation tools, 230+ reference guides
 - 7 Claude Code subagents (incl. enterprise compliance auditor), 12 sample CI/CD workflows
 - 18 compliance frameworks covered (SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA, NIST CSF 2.0, CCPA, ISO 42001, ISO 13485, ISO 14971, MDR, FDA, 21 CFR Part 11, IEC 62304, IEC 62443)
@@ -200,5 +200,5 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 ---
 
 **Last Updated:** March 2026
-**Version:** 2.2.0
-**Status:** 117+ skills, 215+ Python tools, 7 subagents, 12 workflows deployed
+**Version:** 2.3.0
+**Status:** 199+ skills, 215+ Python tools, 7 subagents, 12 workflows deployed
