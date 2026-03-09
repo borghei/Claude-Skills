@@ -264,3 +264,263 @@ All rights must be fulfilled within **30 days** (extendable to 90 for complex re
 | Employment | § 26 | Detailed employee data rules |
 | Video | § 4 | Signage and proportionality |
 | Scoring | § 31 | Explainable algorithms |
+
+---
+
+## Cross-Reference: CCPA/CPRA US Privacy Comparison
+
+When operating across EU and US jurisdictions, align GDPR compliance with California Consumer Privacy Act (CCPA) as amended by CPRA. Key differences to manage:
+
+| Dimension | GDPR | CCPA/CPRA |
+|-----------|------|-----------|
+| Scope | Any org processing EU resident data | For-profit businesses meeting revenue/data thresholds |
+| Legal basis | 6 lawful bases required (Art. 6) | No legal basis requirement; opt-out model |
+| Consent | Opt-in by default | Opt-out (except minors and sensitive data) |
+| Data subject rights | Access, rectification, erasure, portability, objection | Know, delete, correct, opt-out of sale/sharing, limit sensitive data use |
+| Breach notification | 72 hours to supervisory authority (Art. 33) | "Most expedient time possible" to consumers |
+| Enforcement | DPAs with fines up to 4% global turnover | California Privacy Protection Agency (CPPA), $2,500-$7,500 per violation |
+| DPO requirement | Mandatory in many cases (Art. 37) | No DPO requirement |
+| Children's data | Under 16 requires parental consent (Art. 8) | Under 16 opt-in for sale; under 13 parental consent |
+
+**Practical alignment:** Build a unified privacy program that satisfies the stricter GDPR requirements by default, then layer CCPA/CPRA-specific mechanisms (e.g., "Do Not Sell or Share My Personal Information" link, annual metrics disclosure).
+
+> **See also:** `../ccpa-cpra-specialist/SKILL.md` for full CCPA/CPRA compliance workflows and tools.
+
+---
+
+## Infrastructure Privacy Controls
+
+### Cookie Consent and Tracking
+
+Implement compliant cookie consent per GDPR Art. 6 + ePrivacy Directive:
+
+| Category | Examples | Consent Required | Default State |
+|----------|----------|------------------|---------------|
+| Strictly Necessary | Session, CSRF, load balancer | No | Active |
+| Functional | Language preference, UI settings | Yes | Inactive |
+| Analytics | Google Analytics, Matomo, Hotjar | Yes | Inactive |
+| Marketing | Facebook Pixel, Google Ads, retargeting | Yes | Inactive |
+
+**Implementation requirements:**
+- Banner must block all non-essential cookies until explicit consent
+- Pre-checked boxes are NOT valid consent (Planet49 ruling, CJEU C-673/17)
+- Consent must be as easy to withdraw as to give
+- Record consent proof (timestamp, version, choices made)
+- Re-consent on material changes to cookie policy
+
+### Global Privacy Control (GPC) Signal
+
+Per CCPA/CPRA regulations and emerging EU guidance:
+- Detect `Sec-GPC: 1` HTTP header and `navigator.globalPrivacyControl` JavaScript API
+- Treat GPC as valid opt-out signal for CCPA/CPRA
+- For GDPR: GPC can serve as a signal of objection under Art. 21 — evaluate on a case-by-case basis
+- Log GPC signal detection and honor it automatically
+
+### Data Localization and Cross-Border Transfers
+
+| Transfer Mechanism | Status (post-Schrems II) | When to Use |
+|---------------------|--------------------------|-------------|
+| EU Adequacy Decision | Valid | Transfers to adequate countries (e.g., Japan, UK, South Korea, US via DPF) |
+| Standard Contractual Clauses (SCCs) | Valid with TIA | Default mechanism for non-adequate countries |
+| Binding Corporate Rules (BCRs) | Valid | Intra-group transfers in multinationals |
+| EU-US Data Privacy Framework (DPF) | Valid (since July 2023) | US companies certified under DPF |
+| Derogations (Art. 49) | Limited use only | Explicit consent, contract necessity — not for systematic transfers |
+
+**Transfer Impact Assessment (TIA) requirements for SCCs:**
+1. Map the data flow (what data, to whom, where)
+2. Assess recipient country legal framework (surveillance laws, access by authorities)
+3. Evaluate supplementary measures needed (encryption, pseudonymization, contractual)
+4. Document assessment and review annually
+
+---
+
+## AI-Specific GDPR Requirements
+
+### Automated Decision-Making (Art. 22)
+
+Art. 22 restricts decisions based solely on automated processing that produce legal or similarly significant effects:
+
+| Requirement | Implementation |
+|-------------|----------------|
+| Right not to be subject to automated decisions | Provide human review mechanism for consequential decisions |
+| Right to explanation | Document and explain logic, significance, and consequences |
+| Right to contest | Enable data subjects to challenge automated decisions |
+| Explicit consent or contract necessity | Secure Art. 22(2) legal basis before deploying |
+| Suitable safeguards | Implement human oversight, right to express point of view |
+
+**AI transparency checklist:**
+- [ ] Document algorithmic logic in plain language
+- [ ] Implement human-in-the-loop for high-stakes decisions (credit, employment, insurance)
+- [ ] Provide opt-out mechanism for fully automated decisions
+- [ ] Conduct and document bias testing (protected characteristics under Art. 9)
+- [ ] Log all automated decisions with reasoning for auditability
+- [ ] Include AI decision-making in privacy notice (Art. 13(2)(f), Art. 14(2)(g))
+
+### AI Training Data Requirements
+
+| Requirement | GDPR Basis | Action |
+|-------------|------------|--------|
+| Lawful basis for training data | Art. 6 | Legitimate interest (with DPIA) or consent |
+| Purpose limitation | Art. 5(1)(b) | Training purpose must be compatible with original collection |
+| Data minimization | Art. 5(1)(c) | Use minimum data necessary; prefer synthetic/anonymized data |
+| Accuracy | Art. 5(1)(d) | Ensure training data is accurate and up-to-date |
+| Storage limitation | Art. 5(1)(e) | Define retention for training datasets |
+| Special category data | Art. 9 | Explicit consent or Art. 9(2)(j) research exemption for health/biometric data |
+| Right to erasure | Art. 17 | Implement mechanism to remove individual data from training sets (or document inability) |
+| Data scraping | Art. 14 | Inform data subjects when using publicly available data for training |
+
+---
+
+## Enhanced DPIA Methodology with EU AI Act Integration
+
+### When DPIA + AI Act Conformity Assessment Overlap
+
+For AI systems processing personal data, both GDPR Art. 35 DPIA and EU AI Act conformity assessment may apply:
+
+| AI Risk Level (EU AI Act) | GDPR DPIA Required? | Combined Assessment Approach |
+|---------------------------|----------------------|------------------------------|
+| Unacceptable (Art. 5) | N/A — prohibited | Do not deploy |
+| High-risk (Annex III) | Almost always yes | Joint DPIA + conformity assessment |
+| Limited risk (Art. 50) | Evaluate per Art. 35 criteria | DPIA if systematic monitoring or profiling |
+| Minimal risk | Evaluate per Art. 35 criteria | Standard DPIA threshold assessment |
+
+### Enhanced DPIA Process for AI Systems
+
+```
+Step 1: AI System Classification
+        → Classify under EU AI Act risk levels
+        → Map to GDPR Art. 35(3) triggers
+
+Step 2: Data Flow and Processing Analysis
+        → Document training data sources and legal basis
+        → Map inference data flows
+        → Identify automated decision points (Art. 22)
+
+Step 3: AI-Specific Risk Assessment
+        → Bias and discrimination risk (protected groups)
+        → Accuracy and reliability risk
+        → Explainability and transparency gaps
+        → Data quality and representativeness
+        → Model drift and ongoing monitoring needs
+
+Step 4: Fundamental Rights Impact
+        → Right to non-discrimination
+        → Right to privacy and data protection
+        → Freedom of expression (content moderation AI)
+        → Right to an effective remedy
+
+Step 5: Combined Mitigation Measures
+        → Technical: differential privacy, federated learning, model cards
+        → Organizational: AI ethics board, human oversight procedures
+        → Contractual: AI-specific DPA clauses with processors
+        → Monitoring: continuous bias monitoring, performance drift detection
+
+Step 6: DPO and Supervisory Authority Consultation
+        → Consult DPO on combined assessment
+        → Prior consultation with SA if high residual risk (Art. 36)
+        → Notify national AI authority if high-risk AI system
+```
+
+---
+
+## Privacy by Design Technical Controls
+
+### Data Minimization Techniques
+
+| Technique | Description | Use Case |
+|-----------|-------------|----------|
+| Field-level encryption | Encrypt specific PII fields at rest | Database storage |
+| Tokenization | Replace PII with non-reversible tokens | Payment processing, analytics |
+| Data masking | Obscure portions of data (e.g., email: j***@example.com) | UI display, logging |
+| Aggregation | Process only aggregated/statistical data | Analytics, reporting |
+| Purpose-scoped access | Limit data access to specific processing purposes | Multi-purpose systems |
+| Automatic expiration | TTL-based data deletion | Session data, temporary processing |
+
+### Pseudonymization Implementation (Recital 26, Art. 4(5))
+
+| Method | Reversibility | Strength | Best For |
+|--------|---------------|----------|----------|
+| HMAC-based | Reversible with key | Strong | Internal analytics with re-identification need |
+| Format-preserving encryption | Reversible with key | Strong | Legacy system compatibility |
+| Deterministic hashing (salted) | One-way | Medium | Cross-dataset linkage without PII |
+| Random ID mapping | Reversible with lookup table | Strong | Research datasets |
+
+**Key management for pseudonymization:**
+- Store re-identification keys separately from pseudonymized data
+- Apply strict access controls to key material (minimum two-person rule)
+- Document key rotation schedule
+- Log all re-identification events
+
+### Encryption Standards
+
+| Layer | Minimum Standard | Recommended |
+|-------|------------------|-------------|
+| At rest | AES-256 | AES-256-GCM with envelope encryption |
+| In transit | TLS 1.2 | TLS 1.3 |
+| Database | Transparent Data Encryption (TDE) | Column-level encryption for PII |
+| Backups | AES-256 | AES-256 + separate key from production |
+| Key management | Hardware-backed (HSM/KMS) | Cloud KMS with customer-managed keys (BYOK) |
+
+---
+
+## Cross-Framework Privacy Mapping
+
+| Requirement | GDPR Article | CCPA/CPRA Section | HIPAA Rule | NIS2 Article |
+|-------------|-------------|-------------------|------------|--------------|
+| Risk assessment | Art. 35 (DPIA) | §1798.185 (risk assessment regs) | §164.308(a)(1) | Art. 21(2)(a) |
+| Breach notification | Art. 33-34 (72 hrs to SA) | §1798.150 (to consumers) | §164.404-408 (60 days) | Art. 23 (24 hrs early warning) |
+| Data minimization | Art. 5(1)(c) | §1798.100(c) (collection limitation) | §164.502(b) (minimum necessary) | Art. 21(2)(e) |
+| Encryption | Art. 32(1)(a) | Implicit (reasonable security) | §164.312(a)(2)(iv) (addressable) | Art. 21(2)(e) |
+| Access controls | Art. 32(1)(b) | Implicit (reasonable security) | §164.312(a)(1) (access control) | Art. 21(2)(d) |
+| Incident response | Art. 33-34 | §1798.150 | §164.308(a)(6) | Art. 21(2)(b) |
+| Supply chain security | Art. 28 (processor agreements) | §1798.140(ag) (service provider contracts) | §164.308(b) (BAAs) | Art. 21(2)(d) |
+| Governance/accountability | Art. 5(2), Art. 24 | §1798.185 (audit regs) | §164.308(a)(1) | Art. 20 (governance) |
+| Right to delete/erasure | Art. 17 | §1798.105 | Limited (retention rules) | N/A |
+| Data portability | Art. 20 | §1798.130(a)(2) | N/A | N/A |
+
+> **Cross-references:** See `../information-security-manager-iso27001/SKILL.md` for ISO 27001 security controls, and `../mdr-745-specialist/SKILL.md` for healthcare device data protection under MDR.
+
+---
+
+## Cross-Framework Privacy Integration
+
+### GDPR ↔ CCPA/CPRA Comparison
+
+| Aspect | GDPR | CCPA/CPRA |
+|--------|------|-----------|
+| Scope | Any org processing EU residents' data | $25M+ revenue, 100K+ consumers, or 50%+ revenue from selling PI |
+| Legal Basis | 6 legal bases required (Art. 6) | Opt-out model (no legal basis needed for collection) |
+| Consent | Opt-in required | Opt-out for sale/sharing |
+| Right to Delete | Art. 17 | §1798.105 |
+| Data Portability | Art. 20 | §1798.130 |
+| Penalties | Up to €20M or 4% global turnover | $2,500-$7,500 per violation |
+| DPO Required | Yes (in many cases) | No |
+| DPIA Required | Yes (high risk processing) | Risk assessments (CPRA) |
+
+### AI-Specific GDPR Requirements
+
+- **Automated Decision-Making (Art. 22):** Right not to be subject to decisions based solely on automated processing with legal/significant effects
+- **AI Training Data:** Legitimate interest or consent required; purpose limitation applies to model training
+- **Profiling:** Requires explicit consent for automated profiling with significant effects
+- **EU AI Act Integration:** High-risk AI systems processing personal data require DPIA per Art. 35 GDPR
+- **Cross-reference:** See `eu-ai-act-specialist` for AI-specific compliance
+
+### Infrastructure Privacy Controls
+
+- **Cookie Consent:** TCF 2.2 compliant consent management platform (CMP)
+- **Global Privacy Control (GPC):** Must honor GPC browser signals (also CCPA requirement)
+- **Data Localization:** EU data residency requirements, Schrems II adequacy decisions
+- **Cross-Border Transfers:** Standard Contractual Clauses (SCCs), adequacy decisions, binding corporate rules
+- **Privacy by Design Controls:** Data minimization, pseudonymization, encryption at rest/transit, access logging
+
+### Cross-Framework Mapping
+
+| Control | GDPR | CCPA | HIPAA | NIS2 |
+|---------|------|------|-------|------|
+| Privacy Notice | Art. 13-14 | §1798.100 | Privacy Practices | — |
+| Data Subject Rights | Art. 15-22 | §1798.100-125 | Access/Amendment | — |
+| Breach Notification | Art. 33-34 | §1798.150 | §164.404-408 | Art. 23 |
+| DPO/Privacy Officer | Art. 37-39 | — | Privacy Officer | — |
+| Risk Assessment | Art. 35 (DPIA) | Risk Assessment | §164.308(a)(1) | Art. 21 |
+| Encryption | Art. 32 | Reasonable Security | §164.312(a)(2)(iv) | Art. 21.2.h |
+| Training | Art. 39.1.b | — | §164.308(a)(5) | Art. 21.2.g |

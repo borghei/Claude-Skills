@@ -308,3 +308,17 @@ Required:
 | First demo scheduled | 3 business days |
 
 **Validation:** Test lead through workflow, verify notifications and routing.
+
+## Proactive Triggers
+
+- **Over-relying on one channel** -- Single-channel dependency is a business risk. Diversify acquisition across 3+ channels.
+- **No lead scoring** -- Not all leads are equal. Route to revenue-operations for scoring setup.
+- **CAC exceeding LTV** -- Demand gen is unprofitable. Optimize or cut underperforming channels.
+- **No nurture for non-ready leads** -- 80% of leads aren't ready to buy. Nurture sequences convert them later.
+
+## Related Skills
+
+- **campaign-analytics**: For measuring demand gen effectiveness with attribution and ROI.
+- **marketing-strategy-pmm**: For positioning and GTM strategy that feeds demand gen campaigns.
+- **social-media-analyzer**: For analyzing social channel performance within demand gen mix.
+- **revenue-operations**: For pipeline analysis and forecast accuracy downstream of demand gen.

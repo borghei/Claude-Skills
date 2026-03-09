@@ -376,3 +376,33 @@ Enter new markets systematically:
 | 2 | Create assets, publish content |
 | 3 | Support launches, optimize campaigns |
 | 4 | Monthly report, plan next month |
+
+## Proactive Triggers
+
+- **No documented positioning** -- Without clear positioning, all marketing is guesswork. Start with April Dunford framework.
+- **Messaging differs across channels** -- Inconsistent story confuses buyers. Align messaging hierarchy across all touchpoints.
+- **No ICP defined** -- Selling to everyone means selling to no one. Define ICP before any campaign spend.
+- **Competitor repositioning** -- Market shift detected. Review your positioning and update battlecards.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| "Position my product" | Positioning framework (April Dunford method) with completed output |
+| "GTM strategy" | Go-to-market plan with channels, messaging, and timeline |
+| "Competitive positioning" | Positioning map with competitive gaps and opportunities |
+| "Sales enablement" | Sales deck structure, battlecards, and demo flow |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **marketing-demand-acquisition**: For executing acquisition campaigns planned by PMM.
+- **campaign-analytics**: For measuring launch and campaign effectiveness.
+- **content-creator**: For creating content assets defined in PMM strategy.
+- **social-media-analyzer**: For tracking social media performance of PMM campaigns.
