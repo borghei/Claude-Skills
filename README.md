@@ -28,24 +28,21 @@
 | **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
 | **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
 
-### What's New (March 9, 2026)
+### What's New
 
-**March 9, 2026 — Skills Mega-Expansion (109 → 199 skills)**
+**March 12, 2026 — Skill Quality Optimization (40 skills improved, avg +46%)**
+- **40 skills improved** across 10 domains with optimized trigger clauses, structured workflows, and leaner content
+- Added "Use when..." activation triggers to YAML descriptions for better skill matching
+- Converted to third-person agent voice with numbered workflow steps and validation checkpoints
+- Split 5 oversized skills into SKILL.md + REFERENCE.md for progressive disclosure and reduced token usage
+- Community contribution by [@popey](https://github.com/popey) via `tessl skill review`
+
+**March 9, 2026 — Skills Mega-Expansion & Compliance Upgrade (109 → 199 skills)**
 - **82 NEW skills** across all domains — C-Level (21 new), Marketing (25 new), Business Growth (13 new), Engineering (22 new), Product (1 new)
-- Every skill from competing repos now included PLUS unique skills only we have
-- All shared skills upgraded with deeper content, better frameworks, and cross-references
-- **199 total skills** — the largest open-source AI skills library available
-
-**March 9, 2026 — Compliance Mega-Upgrade**
 - **8 NEW compliance skills** — SOC 2 Type II, EU AI Act, NIS2, DORA, NIST CSF 2.0, PCI-DSS v4.0, CCPA/CPRA, ISO 42001
-- **Infrastructure Compliance Auditor** — Vanta-level infrastructure security checks across cloud, DNS, TLS, endpoints, access controls, containers, CI/CD, secrets, and logging — mapped to ALL compliance frameworks
-- **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis, remediation roadmaps, and compliance scorecards
-- **Enhanced existing RA/QM skills** — Updated GDPR, ISO 27001, FDA, MDR, ISO 13485, and risk management skills with cross-framework mapping, AI governance integration, and infrastructure security references
-- **Hardware security key support** — YubiKey/FIDO2 deployment guides and phishing-resistant MFA requirements across all frameworks
-- **Total compliance coverage:** 20 skills, 35+ Python tools, 18 frameworks, 1 compliance agent
-
-**March 9, 2026 — PM Skills Expansion**
-- 22 project management skills with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
+- **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis and remediation roadmaps
+- **22 PM skills** with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
+- **199 total skills** — the largest open-source AI skills library available
 
 ---
 
@@ -63,6 +60,7 @@
 - [Sample GitHub Workflows (12)](#sample-github-workflows-12)
 - [Repository Structure](#repository-structure)
 - [Contributing](#contributing)
+- [Contributors](#contributors)
 - [License](#license)
 
 ---
@@ -1033,6 +1031,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
+## Contributors
+
+| Contributor | GitHub |
+|-------------|--------|
+| Alan Pope | [@popey](https://github.com/popey) |
+
+---
+
 ## License
 
 **MIT + Commons Clause** — Free to use in open-source projects, personal use, education, and internal business workflows. You cannot sell this software or repackage it as a paid product. See [LICENSE](LICENSE) for full terms.
@@ -1047,11 +1053,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 <p align="center">
   <a href="https://borghei.me">borghei.me</a>
 </p>
-
----
-
-## Contributors
-
-| Contributor | GitHub |
-|-------------|--------|
-| Alan Pope | [@popey](https://github.com/popey) |
