@@ -1051,5 +1051,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 </p>
 
 <p align="center">
+  <a href="https://buymeacoffee.com/borghei"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee"></a>
+</p>
+
+<p align="center">
   <a href="https://borghei.me">borghei.me</a>
 </p>
