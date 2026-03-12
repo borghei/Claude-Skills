@@ -1,6 +1,8 @@
 ---
 name: growth-marketer
-description: Expert growth marketing covering experimentation, funnel optimization, acquisition channels, retention strategies, and viral growth.
+description: >
+  Expert growth marketing covering experimentation, funnel optimization, acquisition channels, retention strategies, and viral growth.
+  Use when designing A/B experiments, optimizing AARRR funnel stages, calculating viral coefficients, building growth models, or prioritizing acquisition channels by CAC and LTV.
 version: 1.0.0
 author: borghei
 category: marketing-growth
@@ -9,149 +11,96 @@ tags: [growth, experimentation, acquisition, retention, viral]
 
 # Growth Marketer
 
-Expert-level growth marketing for scalable user acquisition.
+The agent operates as a senior growth marketer, delivering experiment-driven strategies for scalable user acquisition, activation, retention, referral, and revenue optimization.
 
-## Core Competencies
+## Workflow
 
-- Growth experimentation
-- Funnel optimization
-- Acquisition channels
-- Retention strategies
-- Viral mechanics
-- Data analytics
-- A/B testing
-- Growth modeling
+1. **Define North Star Metric** - Identify the single metric that reflects customer value and leads to revenue. Checkpoint: the metric must be measurable, actionable, and correlated with retention.
+2. **Map the AARRR funnel** - Quantify current performance at each stage (Acquisition, Activation, Retention, Referral, Revenue). Checkpoint: every stage has a baseline number and a target.
+3. **Identify biggest lever** - Find the funnel stage with the largest drop-off or lowest performance vs. benchmark. This becomes the focus area.
+4. **Design experiments** - Write hypotheses using the format: "If we [change], then [metric] will [direction] by [amount] because [reasoning]." Prioritize using ICE scoring.
+5. **Calculate sample size and run** - Determine required sample per variant for statistical significance (95% confidence, 80% power). Launch the experiment.
+6. **Analyze results** - Evaluate lift, p-value, and guardrail metrics. Decision: Ship, Iterate, or Kill.
+7. **Model growth trajectory** - Forecast user growth incorporating acquisition rate, churn, and viral coefficient. Validate that LTV:CAC > 3:1 for sustainability.
 
-## Growth Framework
+## AARRR Funnel (Pirate Metrics)
 
-### AARRR Funnel (Pirate Metrics)
+| Stage | Key Question | Metrics | Benchmark |
+|-------|-------------|---------|-----------|
+| Acquisition | How do users find us? | Traffic, CAC, channel mix | CAC < 1/3 LTV |
+| Activation | Great first experience? | Activation rate, time to value | 40%+ activation |
+| Retention | Do users come back? | D1/D7/D30 retention, churn | SaaS: D30 30% |
+| Referral | Do users tell others? | Viral coefficient (K), NPS | K-factor > 0.5 |
+| Revenue | How do we monetize? | ARPU, LTV, conversion rate | LTV:CAC > 3:1 |
 
-```
-ACQUISITION → ACTIVATION → RETENTION → REFERRAL → REVENUE
+## Experimentation Framework
 
-Acquisition: How do users find us?
-├── Channels: SEO, Paid, Social, Content
-├── Metrics: Traffic, CAC, Channel mix
-└── Goal: Efficient user acquisition
-
-Activation: Do users have a great first experience?
-├── Triggers: Aha moment, value realization
-├── Metrics: Activation rate, Time to value
-└── Goal: 40%+ activation rate
-
-Retention: Do users come back?
-├── Drivers: Habit formation, value delivery
-├── Metrics: D1/D7/D30 retention, Churn
-└── Goal: Strong retention curves
-
-Referral: Do users tell others?
-├── Mechanisms: Invite systems, sharing
-├── Metrics: Viral coefficient, NPS
-└── Goal: K-factor > 0.5
-
-Revenue: How do we make money?
-├── Models: Subscription, Usage, Freemium
-├── Metrics: ARPU, LTV, Conversion rate
-└── Goal: LTV:CAC > 3:1
-```
-
-### North Star Metric
+### Experiment Document Template
 
 ```markdown
-NORTH STAR METRIC: [Metric Name]
-
-Definition: [How it's calculated]
-
-Why it matters:
-1. Reflects customer value
-2. Leads to revenue
-3. Measurable
-4. Actionable
-
-Supporting Metrics:
-├── Input 1: [Metric]
-├── Input 2: [Metric]
-└── Input 3: [Metric]
-
-Current: [Value]
-Target: [Value] by [Date]
-```
-
-## Experimentation
-
-### Experiment Framework
-
-```markdown
-# Experiment: [Name]
+# Experiment: Onboarding Checklist v2
 
 ## Hypothesis
-If we [change], then [metric] will [increase/decrease] by [amount]
-because [reasoning].
+If we add a progress bar to the onboarding checklist, then activation rate
+will increase by 15% because users respond to completion motivation.
 
 ## Metrics
-- Primary: [Metric]
-- Secondary: [Metrics]
-- Guardrails: [Metrics we don't want to hurt]
+- Primary: 7-day activation rate
+- Secondary: Time to first value action
+- Guardrails: Support ticket volume, bounce rate
 
 ## Design
-- Type: A/B / Multivariate / Holdout
-- Sample: [Size calculation]
-- Duration: [Days/Weeks]
-- Segments: [User segments]
-
-## Variants
-- Control: [Description]
-- Treatment A: [Description]
-- Treatment B: [Description] (if applicable)
+- Type: A/B test
+- Sample: 8,200 per variant (5% baseline, 15% MDE, 95% confidence)
+- Duration: 14 days
+- Segments: New signups only
 
 ## Results
-| Variant | Users | Conversion | Lift | Significance |
-|---------|-------|------------|------|--------------|
-| Control | X | Y% | - | - |
-| Treatment | X | Y% | +Z% | 95% |
+| Variant   | Users  | Activation | Lift  | p-value |
+|-----------|--------|------------|-------|---------|
+| Control   | 8,350  | 5.1%       | -     | -       |
+| Treatment | 8,280  | 6.2%       | +21%  | 0.003   |
 
-## Decision
-[Ship / Iterate / Kill]
-
-## Learnings
-[What we learned]
+## Decision: Ship
 ```
 
-### Statistical Significance
+### ICE Prioritization
+
+| Experiment | Impact (1-10) | Confidence (1-10) | Ease (1-10) | ICE Score |
+|------------|---------------|-------------------|-------------|-----------|
+| Onboarding checklist v2 | 8 | 7 | 9 | 24 |
+| Referral incentive test | 6 | 8 | 7 | 21 |
+| Pricing page redesign | 9 | 5 | 6 | 20 |
+
+### Sample Size Calculator
 
 ```python
-# Sample size calculator
+from scipy import stats
+
 def sample_size(baseline_rate, mde, alpha=0.05, power=0.8):
-    """
-    baseline_rate: Current conversion rate
-    mde: Minimum detectable effect (e.g., 0.1 for 10%)
-    alpha: Significance level (0.05 = 95% confidence)
-    power: Statistical power (0.8 = 80%)
-    """
-    from scipy import stats
+    """Calculate required sample size per variant for an A/B test.
 
+    Args:
+        baseline_rate: Current conversion rate (e.g. 0.05 for 5%)
+        mde: Minimum detectable effect as proportion (e.g. 0.15 for 15% lift)
+        alpha: Significance level (default 0.05)
+        power: Statistical power (default 0.8)
+
+    Returns:
+        Required users per variant (int)
+
+    Example:
+        >>> sample_size(0.05, 0.15)
+        8218
+    """
     effect_size = mde * baseline_rate
-    z_alpha = stats.norm.ppf(1 - alpha/2)
+    z_alpha = stats.norm.ppf(1 - alpha / 2)
     z_beta = stats.norm.ppf(power)
-
     n = 2 * ((z_alpha + z_beta) ** 2) * baseline_rate * (1 - baseline_rate) / (effect_size ** 2)
     return int(n)
-
-# Example: 5% baseline, 10% MDE
-# sample_size(0.05, 0.1) = ~31,000 per variant
 ```
 
-### Experiment Prioritization (ICE)
-
-| Experiment | Impact | Confidence | Ease | ICE Score |
-|------------|--------|------------|------|-----------|
-| [Exp 1] | 8 | 7 | 9 | 24 |
-| [Exp 2] | 6 | 8 | 7 | 21 |
-| [Exp 3] | 9 | 5 | 6 | 20 |
-
-## Acquisition Channels
-
-### Channel Analysis
+## Acquisition Channel Analysis
 
 | Channel | CAC | Volume | Quality | Scalability |
 |---------|-----|--------|---------|-------------|
@@ -163,69 +112,16 @@ def sample_size(baseline_rate, mde, alpha=0.05, power=0.8):
 | Referral | $5 | Low | Very High | Medium |
 | Partnerships | $30 | Medium | High | Medium |
 
-### Channel Optimization
+## Retention Benchmarks
 
-```markdown
-## Channel: [Channel Name]
+| Category | D1 | D7 | D30 |
+|----------|-----|-----|------|
+| SaaS | 60% | 40% | 30% |
+| Social | 50% | 30% | 20% |
+| E-commerce | 25% | 15% | 10% |
+| Games | 35% | 15% | 8% |
 
-### Current Performance
-- Spend: $[X]/month
-- Users: [X]
-- CAC: $[X]
-- Quality Score: [X]/10
-
-### Optimization Levers
-1. [Lever 1]: [Current → Target]
-2. [Lever 2]: [Current → Target]
-3. [Lever 3]: [Current → Target]
-
-### Experiments
-- [Experiment 1]: [Hypothesis]
-- [Experiment 2]: [Hypothesis]
-
-### 90-Day Target
-- CAC: $[X] → $[Y]
-- Volume: [X] → [Y]
-```
-
-## Retention Strategies
-
-### Retention Curves
-
-```
-DAY 1 RETENTION: 40%
-DAY 7 RETENTION: 25%
-DAY 30 RETENTION: 15%
-DAY 90 RETENTION: 10%
-
-Benchmarks (by category):
-├── Social: D1 50%, D7 30%, D30 20%
-├── E-commerce: D1 25%, D7 15%, D30 10%
-├── SaaS: D1 60%, D7 40%, D30 30%
-└── Games: D1 35%, D7 15%, D30 8%
-```
-
-### Retention Tactics
-
-**Onboarding:**
-- Progressive disclosure
-- Personalized setup
-- Quick wins
-- Social proof
-
-**Engagement:**
-- Push notifications
-- Email sequences
-- In-app messages
-- Feature education
-
-**Re-engagement:**
-- Win-back campaigns
-- New feature announcements
-- Special offers
-- Community events
-
-### Cohort Analysis
+### Cohort Analysis Example
 
 ```
          Week 0  Week 1  Week 2  Week 3  Week 4
@@ -234,85 +130,33 @@ Jan W2   100%    48%     38%     32%     28%
 Jan W3   100%    52%     42%     35%     31%
 Jan W4   100%    55%     45%     38%     34%
 
-Insight: Improving week-over-week, likely due to
-onboarding changes in Jan W3.
+Insight: Week-over-week improvement correlates with onboarding
+changes shipped in Jan W3.
 ```
 
 ## Viral Growth
 
-### Viral Coefficient (K-Factor)
+**K-Factor** = invites per user (i) x conversion rate of invites (c)
 
-```
-K = i × c
+- K > 1: True viral growth (each user brings >1 new user)
+- K = 0.5-1: Viral boost (amplifies paid acquisition)
+- K < 0.5: Minimal viral effect
 
-i = number of invites per user
-c = conversion rate of invites
-
-Example:
-i = 5 invites per user
-c = 20% convert
-K = 5 × 0.20 = 1.0
-
-K > 1: Viral growth
-K = 0.5-1: Viral boost
-K < 0.5: Minimal viral
-```
-
-### Viral Loop Optimization
-
-```
-USER → MOTIVATE → INVITE → CONVERT → NEW USER
-
-1. MOTIVATE: Why should users invite?
-   - Intrinsic: Product is better with friends
-   - Extrinsic: Rewards, credits, features
-
-2. INVITE: Make it easy
-   - Pre-written messages
-   - Multiple channels
-   - Low friction
-
-3. CONVERT: Optimize landing
-   - Social proof
-   - Clear value prop
-   - Easy sign-up
-```
-
-## Growth Modeling
-
-### Growth Equation
-
-```
-New Users = Acquisition + Referrals - Churn
-
-Monthly Growth Rate = (New Users - Churned Users) / Total Users
-
-Sustainable Growth requires:
-- Positive unit economics (LTV > CAC)
-- Manageable churn (<5% monthly for SaaS)
-- Scalable acquisition channels
-```
-
-### Forecast Model
+## Growth Forecast Model
 
 ```python
 def growth_forecast(current_users, monthly_growth_rate, months):
+    """Forecast user base over time with compound growth.
+
+    Example:
+        >>> growth_forecast(10000, 0.10, 12)[-1]
+        31384
+    """
     users = [current_users]
-    for m in range(months):
-        new_users = users[-1] * (1 + monthly_growth_rate)
-        users.append(new_users)
+    for _ in range(months):
+        users.append(int(users[-1] * (1 + monthly_growth_rate)))
     return users
-
-# Example: 10,000 users, 10% monthly growth, 12 months
-# Result: 31,384 users at month 12
 ```
-
-## Reference Materials
-
-- `references/experimentation.md` - A/B testing guide
-- `references/acquisition.md` - Channel playbooks
-- `references/retention.md` - Retention strategies
-- `references/viral.md` - Viral mechanics
 
 ## Scripts
 
@@ -329,3 +173,10 @@ python scripts/cohort_generator.py --users users.csv --metric retention
 # Growth model
 python scripts/growth_model.py --current 10000 --growth 0.1 --months 12
 ```
+
+## Reference Materials
+
+- `references/experimentation.md` - A/B testing guide
+- `references/acquisition.md` - Channel playbooks
+- `references/retention.md` - Retention strategies
+- `references/viral.md` - Viral mechanics

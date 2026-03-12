@@ -1,6 +1,10 @@
 ---
 name: analytics-engineer
-description: Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management.
+description: >
+  Expert analytics engineering covering data modeling, dbt development, data
+  transformation, and semantic layer management. Use when building dbt models,
+  designing star schemas, writing staging or mart SQL, configuring data tests,
+  defining semantic-layer metrics, or optimizing warehouse query performance.
 version: 1.0.0
 author: borghei
 category: data-analytics
@@ -9,95 +13,73 @@ tags: [analytics-engineering, dbt, data-modeling, transformation, semantic-layer
 
 # Analytics Engineer
 
-Expert-level analytics engineering for scalable data transformation.
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.
 
-## Core Competencies
+## Workflow
 
-- Data modeling
-- dbt development
-- SQL transformation
-- Semantic layer design
-- Data testing
-- Documentation
-- Performance optimization
-- Pipeline orchestration
+1. **Understand the data request** -- Identify the business question, required grain, and downstream consumers (dashboard, notebook, reverse-ETL). Confirm source tables exist and check freshness.
+2. **Design the dimensional model** -- Choose star or snowflake schema. Map source entities to dimension and fact tables at the correct grain. Document grain, primary keys, and foreign keys.
+3. **Build staging models** -- One `stg_` model per source table. Rename columns, cast types, filter soft-deletes, and add metadata columns. Validate: `dbt build --select stg_*`.
+4. **Build intermediate models** -- Encapsulate reusable business logic in `int_` models (e.g., `int_orders_enriched`). Keep each CTE single-purpose.
+5. **Build mart models** -- Create `dim_` and `fct_` models for consumption. Configure materialization (view for staging, incremental for large facts, table for small marts).
+6. **Add tests and documentation** -- Every primary key gets `unique` + `not_null`. Foreign keys get `relationships`. Add `accepted_values` for enums. Write model descriptions in YAML.
+7. **Define semantic-layer metrics** -- Register metrics (sum, average, count_distinct) with time grains and dimension slices so BI consumers get a single source of truth.
+8. **Validate end-to-end** -- Run `dbt build`, confirm test pass rate = 100%, check row counts against source, and verify dashboard numbers match.
 
-## Analytics Engineering Stack
-
-### Modern Data Stack
-
-```
-SOURCES → INGESTION → WAREHOUSE → TRANSFORMATION → SEMANTIC → BI
-   │          │           │             │             │        │
-   ▼          ▼           ▼             ▼             ▼        ▼
- APIs      Fivetran   Snowflake        dbt         Looker   Tableau
- DBs       Airbyte    BigQuery       Dataform     Transform  PBI
- Files     Stitch     Redshift       Spark SQL    dbt ML    Metabase
-```
-
-### Project Structure (dbt)
+## dbt Project Structure
 
 ```
 analytics/
-├── dbt_project.yml
-├── profiles.yml
-├── models/
-│   ├── staging/           # Raw → Cleaned
-│   │   ├── stg_*.sql
-│   │   └── _stg_*.yml
-│   ├── intermediate/      # Business logic
-│   │   ├── int_*.sql
-│   │   └── _int_*.yml
-│   └── marts/             # Final models
-│       ├── core/
-│       │   ├── dim_*.sql
-│       │   └── fct_*.sql
-│       ├── marketing/
-│       └── finance/
-├── macros/
-├── tests/
-├── seeds/
-├── snapshots/
-└── analyses/
+  dbt_project.yml
+  models/
+    staging/          # stg_<source>__<table>.sql  (one per source table)
+    intermediate/     # int_<entity>_<verb>.sql     (reusable logic)
+    marts/
+      core/           # dim_*.sql, fct_*.sql        (consumption-ready)
+      marketing/
+      finance/
+  macros/             # Reusable Jinja helpers
+  tests/              # Custom generic + singular tests
+  seeds/              # Static CSV lookups
+  snapshots/          # SCD Type 2 captures
 ```
 
-## Data Modeling
+## Concrete Example: Customer Dimension
 
-### Dimensional Modeling
-
-**Star Schema:**
-```
-                    ┌──────────────┐
-                    │  dim_date    │
-                    └──────┬───────┘
-                           │
-┌──────────────┐    ┌──────┴───────┐    ┌──────────────┐
-│ dim_customer │────│  fct_orders  │────│ dim_product  │
-└──────────────┘    └──────┬───────┘    └──────────────┘
-                           │
-                    ┌──────┴───────┐
-                    │  dim_store   │
-                    └──────────────┘
-```
-
-**Dimension Table Pattern:**
+**Staging model** (`models/staging/crm/stg_crm__customers.sql`):
 ```sql
--- models/marts/core/dim_customer.sql
-
-WITH customers AS (
-    SELECT * FROM {{ ref('stg_crm__customers') }}
+WITH source AS (
+    SELECT * FROM {{ source('crm', 'customers') }}
 ),
 
-addresses AS (
-    SELECT * FROM {{ ref('stg_crm__addresses') }}
+renamed AS (
+    SELECT
+        id                          AS customer_id,
+        TRIM(LOWER(name))           AS customer_name,
+        TRIM(LOWER(email))          AS email,
+        created_at::timestamp       AS created_at,
+        updated_at::timestamp       AS updated_at,
+        is_active::boolean          AS is_active,
+        _fivetran_synced            AS _loaded_at
+    FROM source
+    WHERE _fivetran_deleted = false
+)
+
+SELECT * FROM renamed
+```
+
+**Mart model** (`models/marts/core/dim_customer.sql`):
+```sql
+WITH customers AS (
+    SELECT * FROM {{ ref('stg_crm__customers') }}
 ),
 
 customer_orders AS (
     SELECT
         customer_id,
-        MIN(order_date) AS first_order_date,
-        MAX(order_date) AS most_recent_order_date,
-        COUNT(*) AS lifetime_orders,
+        MIN(order_date)  AS first_order_date,
+        MAX(order_date)  AS most_recent_order_date,
+        COUNT(*)         AS lifetime_orders,
         SUM(order_amount) AS lifetime_value
     FROM {{ ref('stg_orders__orders') }}
     GROUP BY customer_id
@@ -105,37 +87,53 @@ customer_orders AS (
 
 final AS (
     SELECT
-        customers.customer_id,
-        customers.customer_name,
-        customers.email,
-        customers.created_at,
-        addresses.city,
-        addresses.state,
-        addresses.country,
-        customer_orders.first_order_date,
-        customer_orders.most_recent_order_date,
-        customer_orders.lifetime_orders,
-        customer_orders.lifetime_value,
+        c.customer_id,
+        c.customer_name,
+        c.email,
+        c.created_at,
+        co.first_order_date,
+        co.most_recent_order_date,
+        co.lifetime_orders,
+        co.lifetime_value,
         CASE
-            WHEN customer_orders.lifetime_value >= 10000 THEN 'platinum'
-            WHEN customer_orders.lifetime_value >= 5000 THEN 'gold'
-            WHEN customer_orders.lifetime_value >= 1000 THEN 'silver'
+            WHEN co.lifetime_value >= 10000 THEN 'platinum'
+            WHEN co.lifetime_value >= 5000  THEN 'gold'
+            WHEN co.lifetime_value >= 1000  THEN 'silver'
             ELSE 'bronze'
         END AS customer_tier
-    FROM customers
-    LEFT JOIN addresses
-        ON customers.address_id = addresses.address_id
-    LEFT JOIN customer_orders
-        ON customers.customer_id = customer_orders.customer_id
+    FROM customers c
+    LEFT JOIN customer_orders co
+        ON c.customer_id = co.customer_id
 )
 
 SELECT * FROM final
 ```
 
-**Fact Table Pattern:**
+**Test configuration** (`models/marts/core/_core__models.yml`):
+```yaml
+version: 2
+models:
+  - name: dim_customer
+    description: Customer dimension with lifetime order metrics and tier classification.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: email
+        tests: [unique, not_null]
+      - name: customer_tier
+        tests:
+          - accepted_values:
+              values: ['platinum', 'gold', 'silver', 'bronze']
+      - name: lifetime_value
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+```
+
+## Incremental Fact Table Pattern
+
 ```sql
 -- models/marts/core/fct_orders.sql
-
 {{
     config(
         materialized='incremental',
@@ -158,223 +156,69 @@ order_items AS (
 
 final AS (
     SELECT
-        orders.order_id,
-        orders.order_date,
-        orders.customer_id,
-        order_items.product_id,
-        orders.store_id,
-        order_items.quantity,
-        order_items.unit_price,
-        order_items.quantity * order_items.unit_price AS line_total,
-        orders.discount_amount,
-        orders.tax_amount,
-        orders.shipping_amount,
-        orders.total_amount
-    FROM orders
-    INNER JOIN order_items
-        ON orders.order_id = order_items.order_id
+        o.order_id,
+        o.order_date,
+        o.customer_id,
+        oi.product_id,
+        o.store_id,
+        oi.quantity,
+        oi.unit_price,
+        oi.quantity * oi.unit_price AS line_total,
+        o.discount_amount,
+        o.tax_amount,
+        o.total_amount
+    FROM orders o
+    INNER JOIN order_items oi ON o.order_id = oi.order_id
 )
 
 SELECT * FROM final
 ```
 
-### Staging Layer
+## Materialization Strategy
 
-```sql
--- models/staging/crm/stg_crm__customers.sql
+| Layer | Materialization | Rationale |
+|-------|----------------|-----------|
+| Staging | View | Thin wrappers; no storage cost |
+| Intermediate | Ephemeral / View | Business logic; referenced multiple times |
+| Marts (small) | Table | Query performance for BI tools |
+| Marts (large) | Incremental | Efficient appends for large fact tables |
 
-WITH source AS (
-    SELECT * FROM {{ source('crm', 'customers') }}
-),
-
-renamed AS (
-    SELECT
-        -- Primary key
-        id AS customer_id,
-
-        -- Strings
-        TRIM(LOWER(name)) AS customer_name,
-        TRIM(LOWER(email)) AS email,
-
-        -- Dates
-        created_at::timestamp AS created_at,
-        updated_at::timestamp AS updated_at,
-
-        -- Booleans
-        is_active::boolean AS is_active,
-
-        -- Metadata
-        _fivetran_synced AS _loaded_at
-
-    FROM source
-    WHERE _fivetran_deleted = false
-)
-
-SELECT * FROM renamed
-```
-
-### Source Configuration
+## Semantic-Layer Metric Definition
 
 ```yaml
-# models/staging/crm/_crm__sources.yml
+# models/marts/core/_core__metrics.yml
+metrics:
+  - name: revenue
+    label: Total Revenue
+    model: ref('fct_orders')
+    calculation_method: sum
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month, quarter, year]
+    dimensions: [customer_tier, product_category, store_region]
+    filters:
+      - field: is_cancelled
+        operator: '='
+        value: 'false'
 
-version: 2
-
-sources:
-  - name: crm
-    description: Customer relationship management system
-    database: raw
-    schema: crm
-    loader: fivetran
-    loaded_at_field: _fivetran_synced
-
-    freshness:
-      warn_after: {count: 12, period: hour}
-      error_after: {count: 24, period: hour}
-
-    tables:
-      - name: customers
-        description: Customer master data
-        columns:
-          - name: id
-            description: Primary key
-            tests:
-              - unique
-              - not_null
-          - name: email
-            tests:
-              - unique
+  - name: average_order_value
+    label: Average Order Value
+    model: ref('fct_orders')
+    calculation_method: average
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month]
 ```
 
-## Data Testing
-
-### Test Types
-
-```yaml
-# models/marts/core/_core__models.yml
-
-version: 2
-
-models:
-  - name: dim_customer
-    description: Customer dimension table
-
-    columns:
-      - name: customer_id
-        description: Primary key
-        tests:
-          - unique
-          - not_null
-
-      - name: email
-        tests:
-          - unique
-          - not_null
-
-      - name: customer_tier
-        tests:
-          - accepted_values:
-              values: ['platinum', 'gold', 'silver', 'bronze']
-
-      - name: lifetime_value
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= 0"
-
-  - name: fct_orders
-    description: Order fact table
-
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - order_id
-            - product_id
-
-    columns:
-      - name: customer_id
-        tests:
-          - relationships:
-              to: ref('dim_customer')
-              field: customer_id
-```
-
-### Custom Tests
-
-```sql
--- tests/assert_positive_amounts.sql
-
-{% test positive_amount(model, column_name) %}
-
-SELECT
-    {{ column_name }}
-FROM {{ model }}
-WHERE {{ column_name }} < 0
-
-{% endtest %}
-```
-
-```sql
--- tests/generic/assert_row_count_equal.sql
-
-{% test row_count_equal(model, compare_model) %}
-
-WITH source_count AS (
-    SELECT COUNT(*) AS cnt FROM {{ model }}
-),
-compare_count AS (
-    SELECT COUNT(*) AS cnt FROM {{ ref(compare_model) }}
-)
-
-SELECT *
-FROM source_count
-CROSS JOIN compare_count
-WHERE source_count.cnt != compare_count.cnt
-
-{% endtest %}
-```
-
-## Macros and DRY Patterns
-
-### Common Macros
-
-```sql
--- macros/generate_schema_name.sql
-
-{% macro generate_schema_name(custom_schema_name, node) -%}
-    {%- set default_schema = target.schema -%}
-    {%- if custom_schema_name is none -%}
-        {{ default_schema }}
-    {%- else -%}
-        {{ default_schema }}_{{ custom_schema_name | trim }}
-    {%- endif -%}
-{%- endmacro %}
-```
+## Useful Macros
 
 ```sql
 -- macros/cents_to_dollars.sql
-
 {% macro cents_to_dollars(column_name) %}
     ({{ column_name }} / 100.0)::decimal(18,2)
 {% endmacro %}
-```
 
-```sql
--- macros/pivot_values.sql
-
-{% macro pivot_values(column_name, values, alias_prefix='') %}
-    {% for value in values %}
-        SUM(CASE WHEN {{ column_name }} = '{{ value }}' THEN 1 ELSE 0 END)
-            AS {{ alias_prefix }}{{ value | lower | replace(' ', '_') }}
-        {% if not loop.last %},{% endif %}
-    {% endfor %}
-{% endmacro %}
-```
-
-### Incremental Patterns
-
-```sql
--- macros/incremental_filter.sql
-
+-- macros/get_incremental_filter.sql
 {% macro get_incremental_filter(column_name, lookback_days=3) %}
     {% if is_incremental() %}
         WHERE {{ column_name }} >= (
@@ -385,286 +229,29 @@ WHERE source_count.cnt != compare_count.cnt
 {% endmacro %}
 ```
 
-## Semantic Layer
-
-### Metric Definitions
-
-```yaml
-# models/marts/core/_core__metrics.yml
-
-version: 2
-
-metrics:
-  - name: revenue
-    label: Total Revenue
-    model: ref('fct_orders')
-    description: Sum of all order amounts
-
-    calculation_method: sum
-    expression: total_amount
-
-    timestamp: order_date
-    time_grains: [day, week, month, quarter, year]
-
-    dimensions:
-      - customer_tier
-      - product_category
-      - store_region
-
-    filters:
-      - field: is_cancelled
-        operator: '='
-        value: 'false'
-
-  - name: average_order_value
-    label: Average Order Value
-    model: ref('fct_orders')
-    description: Average order amount
-
-    calculation_method: average
-    expression: total_amount
-
-    timestamp: order_date
-    time_grains: [day, week, month]
-
-  - name: customer_count
-    label: Customer Count
-    model: ref('dim_customer')
-
-    calculation_method: count_distinct
-    expression: customer_id
-```
-
-### Exposures
-
-```yaml
-# models/exposures.yml
-
-version: 2
-
-exposures:
-  - name: executive_dashboard
-    type: dashboard
-    maturity: high
-    url: https://tableau.company.com/views/executive
-    description: Executive KPI dashboard
-
-    depends_on:
-      - ref('fct_orders')
-      - ref('dim_customer')
-      - ref('dim_product')
-
-    owner:
-      name: Analytics Team
-      email: analytics@company.com
-
-  - name: marketing_report
-    type: notebook
-    maturity: medium
-    url: https://databricks.company.com/notebooks/marketing
-
-    depends_on:
-      - ref('fct_marketing_events')
-      - ref('dim_campaign')
-
-    owner:
-      name: Marketing Analytics
-      email: marketing-analytics@company.com
-```
-
-## Performance Optimization
-
-### Materialization Strategy
-
-| Layer | Materialization | Reason |
-|-------|-----------------|--------|
-| Staging | View | Raw data, no aggregation |
-| Intermediate | Ephemeral/View | Business logic, referenced multiple times |
-| Marts (small) | Table | Final models, query performance |
-| Marts (large) | Incremental | Large fact tables, efficiency |
-
-### Query Optimization
-
-```sql
--- Before: Expensive window function on full table
-SELECT
-    order_id,
-    customer_id,
-    order_date,
-    SUM(amount) OVER (
-        PARTITION BY customer_id
-        ORDER BY order_date
-    ) AS running_total
-FROM orders;
-
--- After: Pre-aggregate then join
-WITH daily_totals AS (
-    SELECT
-        customer_id,
-        order_date,
-        SUM(amount) AS daily_amount
-    FROM orders
-    GROUP BY customer_id, order_date
-),
-
-running_totals AS (
-    SELECT
-        customer_id,
-        order_date,
-        SUM(daily_amount) OVER (
-            PARTITION BY customer_id
-            ORDER BY order_date
-        ) AS running_total
-    FROM daily_totals
-)
-
-SELECT
-    o.order_id,
-    o.customer_id,
-    o.order_date,
-    rt.running_total
-FROM orders o
-JOIN running_totals rt
-    ON o.customer_id = rt.customer_id
-    AND o.order_date = rt.order_date;
-```
-
-### Clustering and Partitioning
-
-```sql
-{{
-    config(
-        materialized='incremental',
-        unique_key='event_id',
-        partition_by={
-            'field': 'event_date',
-            'data_type': 'date',
-            'granularity': 'day'
-        },
-        cluster_by=['user_id', 'event_type']
-    )
-}}
-```
-
-## CI/CD Pipeline
-
-### GitHub Actions
-
-```yaml
-# .github/workflows/dbt.yml
-
-name: dbt CI/CD
-
-on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [main]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
-        run: pip install dbt-snowflake
-
-      - name: dbt deps
-        run: dbt deps
-
-      - name: dbt compile
-        run: dbt compile --target ci
-
-      - name: dbt test
-        run: dbt test --target ci
-
-  deploy:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: dbt run
-        run: dbt run --target prod
-
-      - name: dbt test
-        run: dbt test --target prod
-```
-
-### Slim CI
+## CI/CD: Slim CI for Pull Requests
 
 ```bash
-# Only run modified models and downstream
-dbt run --select state:modified+ --defer --state ./target-base
+# Only run modified models and their downstream dependents
+dbt run  --select state:modified+ --defer --state ./target-base
 dbt test --select state:modified+ --defer --state ./target-base
 ```
 
-## Documentation
-
-### Model Documentation
-
-```yaml
-# models/marts/core/_core__models.yml
-
-version: 2
-
-models:
-  - name: fct_orders
-    description: |
-      Order fact table containing one row per order line item.
-
-      ## Business Logic
-      - Orders with status 'cancelled' are excluded
-      - Amounts are in USD
-      - Tax is calculated at time of order
-
-      ## Usage
-      ```sql
-      SELECT * FROM {{ ref('fct_orders') }}
-      WHERE order_date >= '2024-01-01'
-      ```
-
-      ## Dependencies
-      - stg_orders__orders
-      - stg_orders__order_items
-```
-
-### Generate Docs
-
-```bash
-# Generate and serve documentation
-dbt docs generate
-dbt docs serve --port 8080
-```
+For full CI/CD pipeline configuration, see `REFERENCE.md`.
 
 ## Reference Materials
 
-- `references/modeling_patterns.md` - Data modeling best practices
-- `references/dbt_style_guide.md` - SQL and dbt conventions
-- `references/testing_guide.md` - Testing strategies
-- `references/optimization.md` - Performance tuning
+- `REFERENCE.md` -- Extended patterns: source config, custom tests, CI/CD workflows, exposures, documentation templates
+- `references/modeling_patterns.md` -- Data modeling best practices
+- `references/dbt_style_guide.md` -- SQL and dbt conventions
+- `references/testing_guide.md` -- Testing strategies
+- `references/optimization.md` -- Performance tuning
 
 ## Scripts
 
 ```bash
-# Model impact analyzer
 python scripts/impact_analyzer.py --model dim_customer
-
-# Schema change detector
 python scripts/schema_diff.py --source prod --target dev
-
-# Documentation generator
 python scripts/doc_generator.py --format markdown
-
-# Data quality scorer
 python scripts/quality_scorer.py --model fct_orders
 ```

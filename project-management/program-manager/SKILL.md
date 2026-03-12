@@ -1,6 +1,10 @@
 ---
 name: program-manager
-description: Expert program management covering multi-project coordination, portfolio governance, strategic alignment, and cross-functional leadership.
+description: >
+  Expert program management for multi-project coordination, portfolio governance,
+  dependency tracking, benefits realization, and cross-functional stakeholder communication.
+  Use when standing up a new program, managing cross-project dependencies, creating governance
+  structures, tracking benefits realization, or reporting program status to steering committees.
 version: 1.0.0
 author: borghei
 category: project-ops
@@ -9,325 +13,123 @@ tags: [program, portfolio, governance, strategic, coordination]
 
 # Program Manager
 
-Expert-level program management for complex multi-project initiatives.
+The agent acts as an expert program manager coordinating complex multi-project initiatives. It structures governance, manages cross-project dependencies, tracks benefits realization, and communicates status to steering committees with appropriate escalation.
 
-## Core Competencies
+## Workflow
 
-- Program planning
-- Portfolio governance
-- Cross-project coordination
-- Strategic alignment
-- Stakeholder management
-- Resource optimization
-- Risk management
-- Benefits realization
+### 1. Define Program Structure
 
-## Program Structure
-
-### Program Hierarchy
+The agent establishes the program hierarchy and governance:
 
 ```
-PORTFOLIO
-├── Strategic alignment
-├── Investment decisions
-└── Resource allocation
-    │
-    ▼
-PROGRAM
-├── Benefit realization
-├── Cross-project coordination
-└── Governance
-    │
-    ▼
-PROJECTS
-├── Deliverables
-├── Timeline
-└── Budget
-    │
-    ▼
-WORKSTREAMS
-├── Tasks
-├── Activities
-└── Resources
+PORTFOLIO (Strategic alignment, investment decisions, resource allocation)
+  -> PROGRAM (Benefit realization, cross-project coordination, governance)
+    -> PROJECTS (Deliverables, timeline, budget)
+      -> WORKSTREAMS (Tasks, activities, resources)
 ```
 
-### Program Organization
+**Governance bodies:**
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                       STEERING COMMITTEE                         │
-│            Strategic decisions, escalations, funding             │
-├─────────────────────────────────────────────────────────────────┤
-│                        PROGRAM BOARD                             │
-│         Governance, progress review, issue resolution           │
-├─────────────────────────────────────────────────────────────────┤
-│                      PROGRAM MANAGER                             │
-│      Coordination, planning, reporting, stakeholder mgmt        │
-├───────────────┬───────────────┬───────────────┬─────────────────┤
-│   Project 1   │   Project 2   │   Project 3   │   Project N     │
-│   PM: [Name]  │   PM: [Name]  │   PM: [Name]  │   PM: [Name]    │
-└───────────────┴───────────────┴───────────────┴─────────────────┘
-```
+| Body | Cadence | Authority |
+|------|---------|-----------|
+| Steering Committee | Monthly | Strategic decisions, escalations, funding |
+| Program Board | Bi-weekly | Governance, progress review, issue resolution |
+| Project Sync | Weekly | Coordination, dependency management |
 
-## Program Planning
-
-### Program Charter
-
-```markdown
-# Program Charter: [Program Name]
-
-## Executive Summary
-[One paragraph describing the program]
-
-## Business Case
-
-### Problem Statement
-[What problem are we solving?]
-
-### Strategic Alignment
-- Strategic objective: [Objective]
-- Business priority: [Priority level]
-
-### Expected Benefits
-| Benefit | Type | Measure | Target |
-|---------|------|---------|--------|
-| Revenue increase | Financial | $ | $5M/year |
-| Efficiency gain | Operational | Time | 30% reduction |
-| Customer satisfaction | Strategic | NPS | +15 points |
-
-### Investment
-- Total budget: $[X]M
-- Duration: [X] months
-- FTE: [X] resources
-
-### ROI Analysis
-- NPV: $[X]M
-- IRR: [X]%
-- Payback: [X] months
-
-## Scope
-
-### In Scope
-- [Deliverable/capability 1]
-- [Deliverable/capability 2]
-
-### Out of Scope
-- [Explicitly excluded item 1]
-- [Explicitly excluded item 2]
-
-### Key Assumptions
-- [Assumption 1]
-- [Assumption 2]
-
-### Constraints
-- [Constraint 1]
-- [Constraint 2]
-
-## Program Structure
-
-### Projects
-| Project | Description | Owner | Duration |
-|---------|-------------|-------|----------|
-| Project 1 | [Description] | [PM] | Q1-Q2 |
-| Project 2 | [Description] | [PM] | Q2-Q3 |
-
-### Dependencies
-| From | To | Type | Risk |
-|------|----|------|------|
-| Project 1 | Project 2 | Finish-Start | High |
-
-## Governance
-
-### Steering Committee
-| Name | Role | Authority |
-|------|------|-----------|
-| [Name] | Executive Sponsor | Final decisions |
-| [Name] | Business Owner | Requirements |
-
-### Decision Rights
+**Decision rights:**
 - Budget changes >$X: Steering Committee
 - Scope changes: Program Board
 - Schedule changes <2 weeks: Program Manager
 
-### Meeting Cadence
-- Steering Committee: Monthly
-- Program Board: Bi-weekly
-- Project Sync: Weekly
+**Validation checkpoint:** Every program must have a named Executive Sponsor, defined decision rights, and an escalation matrix before proceeding.
 
-## Success Criteria
-- [Criterion 1 with measurable target]
-- [Criterion 2 with measurable target]
+### 2. Create Program Charter
 
-## Approvals
-| Role | Name | Signature | Date |
-|------|------|-----------|------|
-| Sponsor | | | |
-| Business Owner | | | |
+The agent drafts a charter covering:
+
+1. **Executive Summary** -- One paragraph describing the program
+2. **Business Case** -- Problem statement, strategic alignment, expected benefits with measurable targets, investment (budget, duration, FTE), ROI analysis (NPV, IRR, payback period)
+3. **Scope** -- In/out of scope, assumptions, constraints
+4. **Program Structure** -- Projects table (description, owner, duration), dependency map
+5. **Governance** -- Steering committee members, decision rights, meeting cadence
+6. **Success Criteria** -- Measurable targets tied to benefits
+
+**Validation checkpoint:** Charter requires sign-off from Sponsor and Business Owner before project kickoff.
+
+### 3. Map Dependencies
+
+The agent analyzes cross-project dependencies and identifies the critical path:
+
+```bash
+python scripts/dependency_analyzer.py --projects projects.yaml
 ```
 
-### Program Roadmap
+**Dependency matrix example:**
 
 ```
-PROGRAM ROADMAP: [Name]
-
-2024
-Q1                  Q2                  Q3                  Q4
-├─────────────────────────────────────────────────────────────────┤
-
-PROJECT 1: Foundation
-[████████████████████]
-├── Phase 1: Design ──┤── Phase 2: Build ─┤
-
-PROJECT 2: Implementation
-          [████████████████████████████████]
-          ├── Phase 1 ────┤── Phase 2 ────┤── Phase 3 ────┤
-
-PROJECT 3: Integration
-                              [████████████████████]
-                              ├── Build ──┤── Test ──┤── Deploy ─┤
-
-MILESTONES
-    M1 ◆              M2 ◆               M3 ◆              M4 ◆
-    Design            MVP                Beta              Launch
-    Complete          Ready              Release           Complete
-
-BENEFITS REALIZATION
-                                              [Benefit 1 starts]
-                                                    [Benefit 2 starts]
-```
-
-### Resource Plan
-
-```
-RESOURCE ALLOCATION
-
-Role          Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
-─────────────────────────────────────────────────────────────────
-Program Mgr   [█████████████████████████████████████████████████]
-Architect     [████████████████████████]
-Dev Lead      [██████████████████████████████████████]
-Developers    [█████████████] [████████████████████████████████]
-QA Lead               [████████████████████████████████████████]
-QA Engineers              [██████████████████████████████████████]
-BA            [████████████████████]        [████████████████]
-
-SUMMARY
-Total FTE:    5   7   10  12  12  12  12  10  8   6   4   2
-Budget/mo:    $   $   $   $   $   $   $   $   $   $   $   $
-```
-
-## Cross-Project Coordination
-
-### Dependency Management
-
-```
-DEPENDENCY MATRIX
-
               Project A  Project B  Project C  Project D
-Project A         -          →          →
-Project B         ←          -                     →
-Project C         ←                     -          →
-Project D                    ←          ←          -
+Project A         -          ->         ->
+Project B         <-          -                     ->
+Project C         <-                     -          ->
+Project D                    <-          <-          -
 
-Legend:
-→ = Provides dependency to
-← = Receives dependency from
-
-CRITICAL PATH
-Project A (Design) → Project B (API) → Project C (Integration) → Project D (Launch)
-           M1              M2                  M3                    M4
+Critical Path: A (Design) -> B (API) -> C (Integration) -> D (Launch)
 ```
 
-### Integration Points
+**Integration points to track:**
 
-| Integration | Projects | Interface | Owner | Risk |
-|-------------|----------|-----------|-------|------|
-| API Contract | A → B | REST API | Team B | Medium |
-| Data Migration | B → C | ETL | Team C | High |
-| SSO | A, B, C | SAML | Team A | Low |
+| Integration | Projects | Interface | Owner | Risk Level |
+|-------------|----------|-----------|-------|------------|
+| API Contract | A -> B | REST API | Team B | Medium |
+| Data Migration | B -> C | ETL Pipeline | Team C | High |
+| SSO Integration | A, B, C | SAML | Team A | Low |
 
-## Governance
+**Validation checkpoint:** Any High-risk dependency must have a mitigation plan and a named owner before the dependent project starts.
 
-### Program Dashboard
+### 4. Plan Resources
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              PROGRAM STATUS DASHBOARD                            │
-├─────────────────────────────────────────────────────────────────┤
-│  Program: Digital Transformation    Status: 🟡 At Risk          │
-│  Sponsor: [Name]                    Phase: Execution             │
-├─────────────────────────────────────────────────────────────────┤
-│  OVERALL HEALTH                                                  │
-│  Schedule: 🟡 -2 weeks    Budget: 🟢 92%    Scope: 🟢 On Track  │
-│  Quality: 🟢 Meets std    Risk: 🟡 3 High   Resources: 🟢 Stable│
-├─────────────────────────────────────────────────────────────────┤
-│  PROJECT STATUS                                                  │
-│  Project A: 🟢 Complete   Project B: 🟡 At Risk                 │
-│  Project C: 🟢 On Track   Project D: 🔵 Not Started             │
-├─────────────────────────────────────────────────────────────────┤
-│  KEY METRICS                                                     │
-│  Milestones: 4/8 (50%)   Deliverables: 12/20 (60%)             │
-│  Benefits: $1.2M realized  Issues: 5 open (2 critical)         │
-├─────────────────────────────────────────────────────────────────┤
-│  UPCOMING MILESTONES                                             │
-│  M5: Beta Release - Feb 15 (🟡 At Risk)                         │
-│  M6: UAT Complete - Mar 01 (🟢 On Track)                        │
-└─────────────────────────────────────────────────────────────────┘
+The agent creates a resource allocation plan:
+
+```bash
+python scripts/resource_forecast.py --program program.yaml --months 12
 ```
 
-### Status Reporting
+Output includes per-role monthly allocation, total FTE forecast, and budget per month. The agent flags resource conflicts where a person is allocated >100% across projects.
 
-```markdown
-# Program Status Report
+### 5. Track Benefits Realization
 
-## Report Period: [Date Range]
-
-## Executive Summary
-[2-3 sentence summary of program status]
-
-## Overall Status: 🟢🟡🔴
-
-### Health Indicators
-| Dimension | Status | Trend | Commentary |
-|-----------|--------|-------|------------|
-| Schedule | 🟡 | → | 2 weeks behind, recovery plan in place |
-| Budget | 🟢 | ↑ | 8% under budget |
-| Scope | 🟢 | → | No changes this period |
-| Quality | 🟢 | → | All quality gates passed |
-| Risk | 🟡 | ↓ | 1 new high risk identified |
-
-## Project Summaries
-| Project | Status | % Complete | Next Milestone |
-|---------|--------|------------|----------------|
-| Project A | 🟢 | 100% | Complete |
-| Project B | 🟡 | 65% | API Delivery (Feb 10) |
-| Project C | 🟢 | 40% | Integration Start (Feb 20) |
-
-## Key Accomplishments
-- [Accomplishment 1]
-- [Accomplishment 2]
-
-## Key Issues
-| Issue | Impact | Owner | Target Date |
-|-------|--------|-------|-------------|
-| [Issue] | [Impact] | [Owner] | [Date] |
-
-## Key Risks
-| Risk | Probability | Impact | Mitigation |
-|------|-------------|--------|------------|
-| [Risk] | High | High | [Action] |
-
-## Decisions Required
-| Decision | Options | Recommendation | Deadline |
-|----------|---------|----------------|----------|
-| [Decision] | [Options] | [Rec] | [Date] |
-
-## Next Period Focus
-- [Priority 1]
-- [Priority 2]
+```bash
+python scripts/benefits_tracker.py --plan benefits_plan.yaml
 ```
 
-### Escalation Matrix
+For each benefit, the agent tracks:
+- **Definition:** Metric, baseline, target
+- **Measurement:** Data source, frequency, owner
+- **Realization timeline:** Quarterly targets vs. actuals with variance
+
+**Validation checkpoint:** Benefits tracking begins at program start, not after delivery. Early measurement of leading indicators confirms the program is on track to deliver value.
+
+### 6. Report Status
+
+The agent generates program status reports for each governance body:
+
+**Dashboard structure:**
+```
+PROGRAM STATUS: [Name]         Overall: GREEN/AMBER/RED
+Schedule: [status] [trend]     Budget: [status] [%used]
+Scope: [status] [trend]        Quality: [status]
+Risk: [count] High risks       Resources: [status]
+
+PROJECT STATUS:
+  Project A: [status] [% complete] [next milestone]
+  Project B: [status] [% complete] [next milestone]
+
+KEY METRICS:
+  Milestones: X/Y completed    Benefits: $Xm realized
+  Issues: X open (Y critical)  Deliverables: X/Y complete
+```
+
+**Escalation matrix:**
 
 | Level | Criteria | Escalate To | Response Time |
 |-------|----------|-------------|---------------|
@@ -336,138 +138,79 @@ Project A (Design) → Project B (API) → Project C (Integration) → Project D
 | 3 | Program impact | Program Board | 1 week |
 | 4 | Strategic impact | Steering Committee | 2 weeks |
 
-## Risk Management
+**Validation checkpoint:** Any item at RED status for 2+ reporting periods must be escalated to the next governance level with a recovery plan.
 
-### Program Risk Register
+## Example: Program Dashboard Generation
 
-```markdown
-# Program Risk Register
+```bash
+$ python scripts/program_dashboard.py --program "Digital Transformation"
 
-| ID | Risk | Category | Probability | Impact | Score | Owner | Mitigation | Status |
-|----|------|----------|-------------|--------|-------|-------|------------|--------|
-| R1 | Key resource departure | Resource | Medium | High | 12 | PM | Cross-training, documentation | Open |
-| R2 | Integration delays | Technical | High | High | 16 | Tech Lead | Early integration testing | Monitoring |
-| R3 | Scope creep | Scope | Medium | Medium | 9 | PM | Change control process | Open |
-| R4 | Vendor delivery | External | Low | High | 8 | PM | Contract penalties, alternatives | Open |
+Program: Digital Transformation    Status: AMBER (At Risk)
+Sponsor: Jane Smith                Phase: Execution
+==========================================================
+Schedule: AMBER (-2 weeks)   Budget: GREEN (92% of plan)
+Scope: GREEN (on track)      Quality: GREEN (meets standards)
+Risk: AMBER (3 High risks)   Resources: GREEN (stable)
 
-## Risk Heat Map
+Project Status:
+  Project A: GREEN  100% complete  (Complete)
+  Project B: AMBER   65% complete  (Next: API Delivery Feb 10)
+  Project C: GREEN   40% complete  (Next: Integration Start Feb 20)
+  Project D: BLUE     0% complete  (Not Started)
 
-           │ Low (1-3) │ Medium (4-6) │ High (7-9)
-───────────┼───────────┼──────────────┼───────────
-High       │           │      R3      │   R1, R2
-Impact     │           │              │
-───────────┼───────────┼──────────────┼───────────
-Medium     │     R4    │              │
-Impact     │           │              │
-───────────┼───────────┼──────────────┼───────────
-Low        │           │              │
-Impact     │           │              │
-```
+Key Metrics:
+  Milestones: 4/8 (50%)     Benefits: $1.2M realized / $10M target
+  Issues: 5 open (2 critical)  Deliverables: 12/20 (60%)
 
-## Benefits Realization
-
-### Benefits Tracking
-
-```markdown
-# Benefits Realization Plan
-
-## Benefit 1: Revenue Increase
-
-### Definition
-- Metric: Annual revenue from new product
-- Baseline: $0
-- Target: $5M/year
-
-### Measurement
-- Source: Financial system
-- Frequency: Monthly
-- Owner: Finance
-
-### Realization Timeline
-| Quarter | Target | Actual | Variance |
-|---------|--------|--------|----------|
-| Q3 2024 | $200K | | |
-| Q4 2024 | $800K | | |
-| Q1 2025 | $1.5M | | |
-
-### Dependencies
-- Product launch (Project D)
-- Sales enablement (Project E)
-```
-
-### Benefits Dashboard
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              BENEFITS REALIZATION                                │
-├─────────────────────────────────────────────────────────────────┤
-│  Target Benefits: $10M    Realized: $3.2M    On Track: $4.5M   │
-├─────────────────────────────────────────────────────────────────┤
-│  BENEFIT BREAKDOWN                                               │
-│  Revenue Increase:  $2.0M / $5.0M  [████████░░░░░░░░] 40%      │
-│  Cost Reduction:    $1.0M / $3.0M  [█████░░░░░░░░░░░] 33%      │
-│  Efficiency Gain:   $0.2M / $2.0M  [█░░░░░░░░░░░░░░░] 10%      │
-├─────────────────────────────────────────────────────────────────┤
-│  TIMELINE                                                        │
-│  [Realization curve chart vs plan]                              │
-└─────────────────────────────────────────────────────────────────┘
+Upcoming Milestones:
+  M5: Beta Release - Feb 15 (AMBER - at risk)
+  M6: UAT Complete - Mar 01 (GREEN - on track)
 ```
 
 ## Stakeholder Management
 
-### Stakeholder Map
+The agent maps stakeholders using Mendelow's Power-Interest Grid:
 
-```
-                    HIGH INFLUENCE
-                          │
-        ┌─────────────────┼─────────────────┐
-        │    KEEP         │     MANAGE      │
-        │    SATISFIED    │     CLOSELY     │
-        │                 │                 │
-        │  - CFO          │  - CEO          │
-        │  - Legal        │  - CTO          │
-LOW     │                 │  - Bus Owner    │    HIGH
-INTEREST├─────────────────┼─────────────────┤ INTEREST
-        │    MONITOR      │     KEEP        │
-        │                 │     INFORMED    │
-        │                 │                 │
-        │  - Vendors      │  - End Users    │
-        │  - Support      │  - Teams        │
-        │                 │                 │
-        └─────────────────┼─────────────────┘
-                          │
-                    LOW INFLUENCE
-```
+| Quadrant | Stakeholders | Strategy |
+|----------|-------------|----------|
+| High Power, High Interest | CEO, CTO, Business Owner | Manage closely -- regular 1:1s, involve in decisions |
+| High Power, Low Interest | CFO, Legal | Keep satisfied -- executive summaries, escalate blockers |
+| Low Power, High Interest | End Users, Teams | Keep informed -- newsletters, demos, feedback channels |
+| Low Power, Low Interest | Vendors, Support | Monitor -- periodic updates as needed |
 
-### Communication Plan
+**Communication plan:**
 
-| Stakeholder | Information | Frequency | Channel | Owner |
-|-------------|-------------|-----------|---------|-------|
-| Steering Committee | Program status | Monthly | Meeting | PM |
-| Program Board | Detailed status | Bi-weekly | Meeting | PM |
-| Project Managers | Coordination | Weekly | Meeting | PM |
-| Teams | Updates | Weekly | Email | PM |
-| End Users | Progress | Monthly | Newsletter | Comms |
+| Audience | Content | Frequency | Channel |
+|----------|---------|-----------|---------|
+| Steering Committee | Program status, decisions needed | Monthly | Meeting |
+| Program Board | Detailed status, issue resolution | Bi-weekly | Meeting |
+| Project Managers | Coordination, dependencies | Weekly | Meeting |
+| Teams | Updates, context | Weekly | Email |
+| End Users | Progress, upcoming changes | Monthly | Newsletter |
 
-## Reference Materials
+## Risk Management
 
-- `references/governance.md` - Program governance guide
-- `references/planning.md` - Planning best practices
-- `references/benefits.md` - Benefits realization
-- `references/stakeholders.md` - Stakeholder management
+The agent maintains a program risk register scored by Probability x Impact (1-5 scale):
 
-## Scripts
+| Score Range | Classification | Action |
+|-------------|---------------|--------|
+| 15-25 | Critical | Immediate mitigation, escalate to Steering Committee |
+| 8-14 | High | Active mitigation plan, report to Program Board |
+| 4-7 | Medium | Monitor, mitigation plan on standby |
+| 1-3 | Low | Accept and monitor |
 
-```bash
-# Program dashboard generator
-python scripts/program_dashboard.py --program "Digital Transformation"
+## Tools
 
-# Dependency analyzer
-python scripts/dependency_analyzer.py --projects projects.yaml
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `program_dashboard.py` | Generate program status dashboard | `python scripts/program_dashboard.py --program "Name"` |
+| `dependency_analyzer.py` | Analyze cross-project dependencies | `python scripts/dependency_analyzer.py --projects projects.yaml` |
+| `benefits_tracker.py` | Track benefits realization vs. plan | `python scripts/benefits_tracker.py --plan benefits_plan.yaml` |
+| `resource_forecast.py` | Forecast resource allocation | `python scripts/resource_forecast.py --program program.yaml --months 12` |
 
-# Benefits tracker
-python scripts/benefits_tracker.py --plan benefits_plan.yaml
+## References
 
-# Resource forecaster
-python scripts/resource_forecast.py --program program.yaml --months 12
-```
+- `references/governance.md` -- Program governance structures, decision rights, escalation
+- `references/planning.md` -- Program planning, roadmapping, resource allocation
+- `references/benefits.md` -- Benefits realization tracking and measurement
+- `references/stakeholders.md` -- Stakeholder mapping, communication planning, influence strategies

@@ -1,6 +1,11 @@
 ---
 name: tech-debt-tracker
-description: Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt, prioritizing refactoring, or measuring code quality trends over time.
+description: >
+  Scans codebases for technical debt with AST parsing, prioritizes debt items
+  by impact, and generates trend dashboards. Use when tracking tech debt across
+  a codebase, prioritizing refactoring work, calculating cost-of-delay for
+  debt items, planning sprint debt allocation, or generating executive debt
+  reports.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,270 +16,85 @@ metadata:
 
 # Tech Debt Tracker
 
-**Tier**: POWERFUL
-**Category**: Engineering Process Automation
-**Expertise**: Code Quality, Technical Debt Management, Software Engineering
+The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards.
 
-## Overview
+## Workflow
 
-Tech debt is one of the most insidious challenges in software development - it compounds over time, slowing down development velocity, increasing maintenance costs, and reducing code quality. This skill provides a comprehensive framework for identifying, analyzing, prioritizing, and tracking technical debt across codebases.
+1. **Scan codebase** -- Run the Debt Scanner against the target repository. It uses AST parsing and pattern matching to detect debt signals across all six categories (code, architecture, test, documentation, dependency, infrastructure).
+2. **Score each item** -- Apply the Severity Scoring Framework. Rate each item on velocity impact, quality impact, productivity impact, and business impact (1-10 each). Estimate effort (XS-XL) and risk level.
+3. **Calculate interest rate** -- For each item, compute `Interest Rate = Impact Score x Frequency of Encounter` per sprint. Calculate `Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier`.
+4. **Prioritize** -- Plot items on the Cost-of-Delay vs Effort matrix. Assign priority: Immediate (high cost, low effort), Planned (high cost, high effort), Opportunistic (low cost, low effort), Backlog (low cost, high effort).
+5. **Allocate sprint capacity** -- Apply the Debt-to-Feature Ratio based on current team velocity. Reserve the recommended percentage for debt work.
+6. **Generate reports** -- Produce the Executive Dashboard (health score, trend, top risks, investment recommendation) and the Engineering Dashboard (daily new/resolved, interest rate by component, hotspots).
+7. **Track trends** -- Compare current scan against previous baselines. Alert if debt accumulation rate exceeds paydown rate for two consecutive sprints.
 
-Tech debt isn't just about messy code - it encompasses architectural shortcuts, missing tests, outdated dependencies, documentation gaps, and infrastructure compromises. Like financial debt, it accrues "interest" through increased development time, higher bug rates, and reduced team velocity.
+## Debt Classification
 
-## What This Skill Provides
-
-This skill offers three interconnected tools that form a complete tech debt management system:
-
-1. **Debt Scanner** - Automatically identifies tech debt signals in your codebase
-2. **Debt Prioritizer** - Analyzes and prioritizes debt items using cost-of-delay frameworks
-3. **Debt Dashboard** - Tracks debt trends over time and provides executive reporting
-
-Together, these tools enable engineering teams to make data-driven decisions about tech debt, balancing new feature development with maintenance work.
-
-## Technical Debt Classification Framework
-
-### 1. Code Debt
-Code-level issues that make the codebase harder to understand, modify, and maintain.
-
-**Indicators:**
-- Long functions (>50 lines for complex logic, >20 for simple operations)
-- Deep nesting (>4 levels of indentation)
-- High cyclomatic complexity (>10)
-- Duplicate code patterns (>3 similar blocks)
-- Missing or inadequate error handling
-- Poor variable/function naming
-- Magic numbers and hardcoded values
-- Commented-out code blocks
-
-**Impact:**
-- Increased debugging time
-- Higher defect rates
-- Slower feature development
-- Knowledge silos (only original author understands the code)
-
-**Detection Methods:**
-- AST parsing for structural analysis
-- Pattern matching for common anti-patterns
-- Complexity metrics calculation
-- Duplicate code detection algorithms
-
-### 2. Architecture Debt
-High-level design decisions that seemed reasonable at the time but now limit scalability or maintainability.
-
-**Indicators:**
-- Monolithic components that should be modular
-- Circular dependencies between modules
-- Violation of separation of concerns
-- Inconsistent data flow patterns
-- Over-engineering or under-engineering for current scale
-- Tightly coupled components
-- Missing abstraction layers
-
-**Impact:**
-- Difficult to scale individual components
-- Cascading changes required for simple modifications
-- Testing becomes complex and brittle
-- Onboarding new team members takes longer
-
-**Detection Methods:**
-- Dependency analysis
-- Module coupling metrics
-- Component size analysis
-- Interface consistency checks
-
-### 3. Test Debt
-Inadequate or missing test coverage, poor test quality, and testing infrastructure issues.
-
-**Indicators:**
-- Low test coverage (<80% for critical paths)
-- Missing unit tests for complex logic
-- No integration tests for key workflows
-- Flaky tests that pass/fail intermittently
-- Slow test execution (>10 minutes for unit tests)
-- Tests that don't test meaningful behavior
-- Missing test data management strategy
-
-**Impact:**
-- Fear of refactoring ("don't touch it, it works")
-- Regression bugs in production
-- Slow feedback cycles during development
-- Difficulty validating complex business logic
-
-**Detection Methods:**
-- Coverage report analysis
-- Test execution time monitoring
-- Test failure pattern analysis
-- Test code quality assessment
-
-### 4. Documentation Debt
-Missing, outdated, or poor-quality documentation that makes the system harder to understand and maintain.
-
-**Indicators:**
-- Missing API documentation
-- Outdated README files
-- No architectural decision records (ADRs)
-- Missing code comments for complex algorithms
-- No onboarding documentation for new team members
-- Inconsistent documentation formats
-- Documentation that contradicts actual implementation
-
-**Impact:**
-- Increased onboarding time for new team members
-- Knowledge loss when team members leave
-- Miscommunication between teams
-- Repeated questions in team channels
-
-**Detection Methods:**
-- Documentation coverage analysis
-- Freshness checking (last modified dates)
-- Link validation
-- Comment density analysis
-
-### 5. Dependency Debt
-Issues related to external libraries, frameworks, and system dependencies.
-
-**Indicators:**
-- Outdated packages with known security vulnerabilities
-- Dependencies with incompatible licenses
-- Unused dependencies bloating the build
-- Version conflicts between packages
-- Deprecated APIs still in use
-- Heavy dependencies for simple tasks
-- Missing dependency pinning
-
-**Impact:**
-- Security vulnerabilities
-- Build instability
-- Longer build times
-- Legal compliance issues
-- Difficulty upgrading core frameworks
-
-**Detection Methods:**
-- Vulnerability scanning
-- License compliance checking
-- Usage analysis
-- Version compatibility checking
-
-### 6. Infrastructure Debt
-Operations and deployment-related technical debt.
-
-**Indicators:**
-- Manual deployment processes
-- Missing monitoring and alerting
-- Inadequate logging
-- No disaster recovery plan
-- Inconsistent environments (dev/staging/prod)
-- Missing CI/CD pipelines
-- Infrastructure as code gaps
-
-**Impact:**
-- Deployment risks and downtime
-- Difficult troubleshooting
-- Inconsistent behavior across environments
-- Manual work that should be automated
-
-**Detection Methods:**
-- Infrastructure audit checklists
-- Configuration drift detection
-- Monitoring coverage analysis
-- Deployment process documentation review
+| Category | Key Indicators | Detection Method |
+|----------|---------------|-----------------|
+| Code | Functions > 50 lines, nesting > 4 levels, cyclomatic complexity > 10, duplicate blocks > 3 | AST parsing, complexity metrics |
+| Architecture | Circular dependencies, tight coupling, missing abstraction layers, monolithic components | Dependency analysis, coupling metrics |
+| Test | Coverage < 80% on critical paths, flaky tests, test suite > 10 min | Coverage reports, failure pattern analysis |
+| Documentation | Missing API docs, outdated READMEs, no ADRs, stale comments | Coverage analysis, freshness checking |
+| Dependency | Known CVEs, deprecated APIs, unused packages, version conflicts | Vulnerability scanning, usage analysis |
+| Infrastructure | Manual deploys, missing monitoring, env inconsistencies, no DR plan | Audit checklists, config drift detection |
 
 ## Severity Scoring Framework
 
-Each piece of tech debt is scored on multiple dimensions to determine overall severity:
+Rate each dimension 1-10:
 
-### Impact Assessment (1-10 scale)
+| Dimension | 1-2 | 5-6 | 9-10 |
+|-----------|-----|-----|------|
+| Velocity Impact | Negligible | Affects some features | Blocks new development |
+| Quality Impact | No defect increase | Moderate defect increase | Critical reliability problems |
+| Productivity Impact | No team impact | Regular complaints | Causing developer turnover |
+| Business Impact | No customer impact | Moderate performance hit | Revenue-impacting issues |
 
-**Development Velocity Impact**
-- 1-2: Negligible impact on development speed
-- 3-4: Minor slowdown, workarounds available
-- 5-6: Moderate impact, affects some features
-- 7-8: Significant slowdown, affects most work
-- 9-10: Critical blocker, prevents new development
+**Effort sizing**: XS (1-4 hrs), S (1-2 days), M (3-5 days), L (1-2 weeks), XL (3+ weeks)
 
-**Quality Impact**
-- 1-2: No impact on defect rates
-- 3-4: Minor increase in minor bugs
-- 5-6: Moderate increase in defects
-- 7-8: Regular production issues
-- 9-10: Critical reliability problems
-
-**Team Productivity Impact**
-- 1-2: No impact on team morale or efficiency
-- 3-4: Occasional frustration
-- 5-6: Regular complaints from developers
-- 7-8: Team actively avoiding the area
-- 9-10: Causing developer turnover
-
-**Business Impact**
-- 1-2: No customer-facing impact
-- 3-4: Minor UX degradation
-- 5-6: Moderate performance impact
-- 7-8: Customer complaints or churn
-- 9-10: Revenue-impacting issues
-
-### Effort Assessment
-
-**Size (Story Points or Hours)**
-- XS (1-4 hours): Simple refactor or documentation update
-- S (1-2 days): Minor architectural change
-- M (3-5 days): Moderate refactoring effort
-- L (1-2 weeks): Major component restructuring
-- XL (3+ weeks): System-wide architectural changes
-
-**Risk Level**
-- Low: Well-understood change with clear scope
-- Medium: Some unknowns but manageable
-- High: Significant unknowns, potential for scope creep
-
-**Skill Requirements**
-- Junior: Can be handled by any team member
-- Mid: Requires experienced developer
-- Senior: Needs architectural expertise
-- Expert: Requires deep system knowledge
-
-## Interest Rate Calculation
-
-Technical debt accrues "interest" - the additional cost of leaving it unfixed. This interest rate helps prioritize which debt to pay down first.
-
-### Interest Rate Formula
+## Interest Rate and Cost of Delay
 
 ```
-Interest Rate = (Impact Score × Frequency of Encounter) / Time Period
+Interest Rate = Impact Score x Frequency of Encounter (per sprint)
+Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier
+
+Example:
+  Legacy auth module with poor error handling
+  Impact: 7  |  Frequency: 15 encounters/sprint  |  Team: 8 devs
+  Planned fix: sprint 4 (3 sprints away)
+
+  Interest Rate = 7 x 15 = 105 points/sprint
+  Cost of Delay = 105 x 3 x 1.2 = 378 total cost points
 ```
 
-Where:
-- **Impact Score**: Average severity score (1-10)
-- **Frequency of Encounter**: How often developers interact with this code
-- **Time Period**: Usually measured per sprint or month
+## Prioritization Matrix
 
-### Cost of Delay Calculation
+| Quadrant | Cost of Delay | Effort | Action |
+|----------|--------------|--------|--------|
+| Immediate (quick wins) | High | Low | Do first |
+| Planned (major initiatives) | High | High | Schedule dedicated sprints |
+| Opportunistic | Low | Low | Fix when touching related code |
+| Backlog | Low | High | Reconsider quarterly |
 
-```
-Cost of Delay = Interest Rate × Time Until Fix × Team Size Multiplier
-```
-
-### Example Calculation
-
-**Scenario**: Legacy authentication module with poor error handling
-
-- Impact Score: 7 (causes regular production issues)
-- Frequency: 15 encounters per sprint (3 developers × 5 times each)
-- Team Size: 8 developers
-- Current sprint: 1, planned fix: sprint 4
+### WSJF Alternative
 
 ```
-Interest Rate = 7 × 15 = 105 points per sprint
-Cost of Delay = 105 × 3 × 1.2 = 378 total cost points
+WSJF = (Business Value + Time Criticality + Risk Reduction) / Effort
 ```
 
-This debt item should be prioritized over lower-cost items.
+Each component scored 1-10. Highest WSJF items are prioritized first.
 
-## Debt Inventory Management
+## Sprint Allocation (Debt-to-Feature Ratio)
 
-### Data Structure
+| Team Velocity | Debt % | Feature % | Strategy |
+|--------------|--------|-----------|----------|
+| < 70% of capacity | 60% | 40% | Remove major blockers |
+| 70-85% of capacity | 30% | 70% | Balanced maintenance |
+| > 85% of capacity | 15% | 85% | Opportunistic only |
 
-Each debt item is tracked with the following attributes:
+**Sprint planning rule**: Reserve 20% of sprint capacity for debt. Prioritize items with the highest interest rates. Add "debt tax" to feature estimates when working in high-debt areas.
+
+## Debt Item Data Structure
 
 ```json
 {
@@ -284,298 +104,94 @@ Each debt item is tracked with the following attributes:
   "subcategory": "error_handling",
   "location": "src/auth/legacy_auth.py:45-120",
   "description": "Authentication error handling uses generic exceptions",
-  "impact": {
-    "velocity": 7,
-    "quality": 8,
-    "productivity": 6,
-    "business": 5
-  },
-  "effort": {
-    "size": "M",
-    "risk": "medium",
-    "skill_required": "mid"
-  },
+  "impact": { "velocity": 7, "quality": 8, "productivity": 6, "business": 5 },
+  "effort": { "size": "M", "risk": "medium", "skill_required": "mid" },
   "interest_rate": 105,
   "cost_of_delay": 378,
   "priority": "high",
-  "created_date": "2024-01-15",
-  "last_updated": "2024-01-20",
-  "assigned_to": null,
   "status": "identified",
   "tags": ["security", "user-experience", "maintainability"]
 }
 ```
 
-### Status Lifecycle
-
-1. **Identified** - Debt detected but not yet analyzed
-2. **Analyzed** - Impact and effort assessed
-3. **Prioritized** - Added to backlog with priority
-4. **Planned** - Assigned to specific sprint/release
-5. **In Progress** - Actively being worked on
-6. **Review** - Implementation complete, under review
-7. **Done** - Debt resolved and verified
-8. **Won't Fix** - Consciously decided not to address
-
-## Prioritization Frameworks
-
-### 1. Cost-of-Delay vs Effort Matrix
-
-Plot debt items on a 2D matrix:
-- X-axis: Effort (XS to XL)
-- Y-axis: Cost of Delay (calculated value)
-
-**Priority Quadrants:**
-- High Cost, Low Effort: **Immediate** (quick wins)
-- High Cost, High Effort: **Planned** (major initiatives)
-- Low Cost, Low Effort: **Opportunistic** (during related work)
-- Low Cost, High Effort: **Backlog** (consider for future)
-
-### 2. Weighted Shortest Job First (WSJF)
-
-```
-WSJF Score = (Business Value + Time Criticality + Risk Reduction) / Effort
-```
-
-Where each component is scored 1-10:
-- **Business Value**: Direct impact on customer value
-- **Time Criticality**: How much value decreases over time
-- **Risk Reduction**: How much risk is mitigated by fixing this debt
-
-### 3. Technical Debt Quadrant
-
-Based on Martin Fowler's framework:
-
-**Quadrant 1: Reckless & Deliberate**
-- "We don't have time for design"
-- Highest priority for remediation
-
-**Quadrant 2: Prudent & Deliberate**  
-- "We must ship now and deal with consequences"
-- Schedule for near-term resolution
-
-**Quadrant 3: Reckless & Inadvertent**
-- "What's layering?"
-- Focus on education and process improvement
-
-**Quadrant 4: Prudent & Inadvertent**
-- "Now we know how we should have done it"
-- Normal part of learning, lowest priority
+**Status lifecycle**: Identified > Analyzed > Prioritized > Planned > In Progress > Review > Done | Won't Fix
 
 ## Refactoring Strategies
 
-### 1. Strangler Fig Pattern
-Gradually replace old system by building new functionality around it.
+| Strategy | When to Use | How It Works |
+|----------|-------------|-------------|
+| Strangler Fig | Large monoliths, high-risk migrations | Build new around old; gradually redirect traffic; remove old |
+| Branch by Abstraction | Need old + new running in parallel | Create interface; implement both behind it; switch via config |
+| Feature Toggles | Gradual rollout of refactored components | Add toggle at decision points; test both paths; remove old |
+| Parallel Run | Critical business logic changes | Run both implementations; compare outputs; build confidence |
 
-**When to use:**
-- Large, monolithic systems
-- High-risk changes to critical paths
-- Long-term architectural migrations
+## Executive Dashboard
 
-**Implementation:**
-1. Identify boundaries for extraction
-2. Create abstraction layer
-3. Route new features to new implementation
-4. Gradually migrate existing features
-5. Remove old implementation
+```
+TECH DEBT HEALTH
+  Overall Score: [0-100]  |  Trend: [improving/declining]
+  Cost of Delayed Fixes: [X development days]
+  High-Risk Items: [count]
 
-### 2. Branch by Abstraction
-Create abstraction layer to allow parallel implementations.
+MONTHLY REPORT:
+  1. Executive Summary (3 bullet points)
+  2. Health Score Trend (6-month view)
+  3. Top 3 Risk Items (business impact focus)
+  4. Investment Recommendation (resource allocation)
+  5. Success Stories (debt resolved last month)
+```
 
-**When to use:**
-- Need to support old and new systems simultaneously
-- High-risk changes with rollback requirements
-- A/B testing infrastructure changes
+## Engineering Dashboard
 
-**Implementation:**
-1. Create abstraction interface
-2. Implement abstraction for current system
-3. Replace direct calls with abstraction calls
-4. Implement new version behind same abstraction
-5. Switch implementations via configuration
-6. Remove old implementation
+```
+DAILY:
+  New items identified  |  Items resolved  |  Interest rate by component
 
-### 3. Feature Toggles
-Use configuration flags to control code execution.
+SPRINT REVIEW:
+  Debt points completed vs planned  |  Velocity impact
+  Newly discovered debt  |  Team code quality sentiment
+```
 
-**When to use:**
-- Gradual rollout of refactored components
-- Risk mitigation during large changes
-- Experimental refactoring approaches
+## Example: Scanning a Python Microservice
 
-**Implementation:**
-1. Identify decision points in code
-2. Add toggle checks at decision points
-3. Implement both old and new paths
-4. Test both paths thoroughly
-5. Gradually move toggle to new implementation
-6. Remove old path and toggle
+```bash
+# Run debt scanner
+python scripts/debt_scanner.py --repo ./payment-service --output debt_inventory.json
 
-### 4. Parallel Run
-Run old and new implementations simultaneously to verify correctness.
+# Output summary:
+#   Total items found: 47
+#   Critical: 3  |  High: 8  |  Medium: 21  |  Low: 15
+#
+#   Top 3 by cost-of-delay:
+#     1. DEBT-001: payment_processor.py - nested exception handling (CoD: 420)
+#     2. DEBT-002: db/migrations/ - 12 unapplied migrations (CoD: 315)
+#     3. DEBT-003: tests/ - 62% coverage on payment flow (CoD: 280)
 
-**When to use:**
-- Critical business logic changes
-- Data processing pipeline changes
-- Algorithm improvements
+# Prioritize items
+python scripts/debt_prioritizer.py --inventory debt_inventory.json --sprint-capacity 40
 
-**Implementation:**
-1. Implement new version alongside old
-2. Run both versions with same inputs
-3. Compare outputs and log discrepancies
-4. Investigate and fix discrepancies
-5. Build confidence through parallel execution
-6. Switch to new implementation
-7. Remove old implementation
+# Generate executive report
+python scripts/debt_dashboard.py --inventory debt_inventory.json --baseline previous_scan.json
+```
 
-## Sprint Allocation Recommendations
+## Quarterly Planning
 
-### Debt-to-Feature Ratio
+1. Identify 1-2 major debt themes per quarter
+2. Allocate dedicated sprints for large-scale refactoring
+3. Plan debt work around major feature releases
+4. Track: debt interest rate reduction, velocity improvements, defect rate reduction, code review cycle time
 
-Maintain healthy balance between new features and debt reduction:
+## Scripts
 
-**Team Velocity < 70% of capacity:**
-- 60% tech debt, 40% features
-- Focus on removing major blockers
+### Debt Scanner (`debt_scanner.py`)
+Scans codebase using AST parsing and pattern matching. Detects all six debt categories. Outputs structured JSON inventory.
 
-**Team Velocity 70-85% of capacity:**
-- 30% tech debt, 70% features  
-- Balanced maintenance approach
+### Debt Prioritizer (`debt_prioritizer.py`)
+Analyses debt inventory using cost-of-delay and WSJF frameworks. Outputs prioritized backlog with sprint allocation recommendations.
 
-**Team Velocity > 85% of capacity:**
-- 15% tech debt, 85% features
-- Opportunistic debt reduction only
+### Debt Dashboard (`debt_dashboard.py`)
+Generates trend reports comparing current scan against baselines. Produces executive and engineering dashboard views.
 
-### Sprint Planning Integration
+## References
 
-**Story Point Allocation:**
-- Reserve 20% of sprint capacity for tech debt
-- Prioritize debt items with highest interest rates
-- Include "debt tax" in feature estimates when working in high-debt areas
-
-**Debt Budget Tracking:**
-- Track debt points completed per sprint
-- Monitor debt interest rate trend
-- Alert when debt accumulation exceeds team's paydown rate
-
-### Quarterly Planning
-
-**Debt Initiatives:**
-- Identify 1-2 major debt themes per quarter
-- Allocate dedicated sprints for large-scale refactoring
-- Plan debt work around major feature releases
-
-**Success Metrics:**
-- Debt interest rate reduction
-- Developer velocity improvements
-- Defect rate reduction
-- Code review cycle time improvement
-
-## Stakeholder Reporting
-
-### Executive Dashboard
-
-**Key Metrics:**
-- Overall tech debt health score (0-100)
-- Debt trend direction (improving/declining)
-- Cost of delayed fixes (in development days)
-- High-risk debt items count
-
-**Monthly Report Structure:**
-1. **Executive Summary** (3 bullet points)
-2. **Health Score Trend** (6-month view)
-3. **Top 3 Risk Items** (business impact focus)
-4. **Investment Recommendation** (resource allocation)
-5. **Success Stories** (debt reduced last month)
-
-### Engineering Team Dashboard
-
-**Daily Metrics:**
-- New debt items identified
-- Debt items resolved
-- Interest rate by team/component
-- Debt hotspots (most problematic areas)
-
-**Sprint Reviews:**
-- Debt points completed vs. planned
-- Velocity impact from debt work
-- Newly discovered debt during feature work
-- Team sentiment on code quality
-
-### Product Manager Reports
-
-**Feature Impact Analysis:**
-- How debt affects feature development time
-- Quality risk assessment for upcoming features
-- Debt that blocks planned features
-- Recommendations for feature sequence planning
-
-**Customer Impact Translation:**
-- Debt that affects performance
-- Debt that increases bug rates
-- Debt that limits feature flexibility
-- Investment required to maintain current quality
-
-## Implementation Roadmap
-
-### Phase 1: Foundation (Weeks 1-2)
-1. Set up debt scanning infrastructure
-2. Establish debt taxonomy and scoring criteria
-3. Scan initial codebase and create baseline inventory
-4. Train team on debt identification and reporting
-
-### Phase 2: Process Integration (Weeks 3-4)
-1. Integrate debt tracking into sprint planning
-2. Establish debt budgets and allocation rules
-3. Create stakeholder reporting templates
-4. Set up automated debt scanning in CI/CD
-
-### Phase 3: Optimization (Weeks 5-6)
-1. Refine scoring algorithms based on team feedback
-2. Implement trend analysis and predictive metrics
-3. Create specialized debt reduction initiatives
-4. Establish cross-team debt coordination processes
-
-### Phase 4: Maturity (Ongoing)
-1. Continuous improvement of detection algorithms
-2. Advanced analytics and prediction models
-3. Integration with planning and project management tools
-4. Organization-wide debt management best practices
-
-## Success Criteria
-
-**Quantitative Metrics:**
-- 25% reduction in debt interest rate within 6 months
-- 15% improvement in development velocity
-- 30% reduction in production defects
-- 20% faster code review cycles
-
-**Qualitative Metrics:**
-- Improved developer satisfaction scores
-- Reduced context switching during feature development
-- Faster onboarding for new team members
-- Better predictability in feature delivery timelines
-
-## Common Pitfalls and How to Avoid Them
-
-### 1. Analysis Paralysis
-**Problem**: Spending too much time analyzing debt instead of fixing it.
-**Solution**: Set time limits for analysis, use "good enough" scoring for most items.
-
-### 2. Perfectionism
-**Problem**: Trying to eliminate all debt instead of managing it.
-**Solution**: Focus on high-impact debt, accept that some debt is acceptable.
-
-### 3. Ignoring Business Context
-**Problem**: Prioritizing technical elegance over business value.
-**Solution**: Always tie debt work to business outcomes and customer impact.
-
-### 4. Inconsistent Application
-**Problem**: Some teams adopt practices while others ignore them.
-**Solution**: Make debt tracking part of standard development workflow.
-
-### 5. Tool Over-Engineering
-**Problem**: Building complex debt management systems that nobody uses.
-**Solution**: Start simple, iterate based on actual usage patterns.
-
-Technical debt management is not just about writing better code - it's about creating sustainable development practices that balance short-term delivery pressure with long-term system health. Use these tools and frameworks to make informed decisions about when and how to invest in debt reduction.
+See `REFERENCE.md` for the complete Technical Debt Quadrant (Fowler), detailed detection heuristics per category, and implementation roadmap phases.

@@ -1,6 +1,8 @@
 ---
 name: brand-strategist
-description: Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance.
+description: >
+  Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance.
+  Use when developing brand positioning statements, creating messaging frameworks, auditing brand health metrics, building brand architecture models, or establishing brand governance guidelines.
 version: 1.0.0
 author: borghei
 category: marketing-growth
@@ -9,133 +11,50 @@ tags: [brand, strategy, positioning, identity, messaging]
 
 # Brand Strategist
 
-Expert-level brand strategy for market differentiation.
+The agent operates as a senior brand strategist, delivering actionable brand positioning, identity systems, messaging frameworks, and governance structures for market differentiation.
 
-## Core Competencies
+## Workflow
 
-- Brand positioning
-- Brand identity development
-- Brand architecture
-- Messaging frameworks
-- Visual identity systems
-- Brand governance
-- Competitive differentiation
-- Brand measurement
+1. **Assess brand context** - Identify the brand's category, competitive landscape, and target audience. Validate that a clear business objective exists (launch, rebrand, extension, or audit).
+2. **Develop positioning** - Apply the positioning framework to define target, category frame, key benefit, and proof points. Checkpoint: the positioning statement must pass the "only-we" test (no competitor could make the same claim).
+3. **Build identity system** - Define visual identity (logo, color, typography), verbal identity (voice, tone, messaging), and experiential identity. Checkpoint: every element must trace back to the positioning.
+4. **Construct messaging architecture** - Create master narrative, pillar messages, and audience-specific variants. Checkpoint: each pillar must have at least two proof points.
+5. **Select brand architecture model** - Choose Branded House, House of Brands, Endorsed, or Hybrid. Validate alignment with corporate strategy.
+6. **Establish governance** - Define brand guidelines structure, approval process, and measurement cadence. Checkpoint: brand health dashboard covers awareness, perception, and consideration.
+7. **Measure and iterate** - Set up brand tracking (NPS, unaided awareness, share of voice). Review quarterly against baselines.
 
-## Brand Strategy Framework
+## Brand Positioning Framework
 
-### Brand Pyramid
+### Positioning Statement Template
 
 ```
-                    ┌─────────────┐
-                    │   PURPOSE   │  Why we exist
-                    │             │
-                ┌───┴─────────────┴───┐
-                │      VALUES         │  What we believe
-                │                     │
-            ┌───┴─────────────────────┴───┐
-            │       PERSONALITY           │  How we behave
-            │                             │
-        ┌───┴─────────────────────────────┴───┐
-        │          POSITIONING                │  Where we play
-        │                                     │
-    ┌───┴─────────────────────────────────────┴───┐
-    │              IDENTITY                       │  How we look/sound
-    └─────────────────────────────────────────────┘
-```
-
-### Brand Strategy Document
-
-```markdown
-# Brand Strategy: [Brand Name]
-
-## Brand Purpose
-[Why the brand exists beyond making money]
-
-## Brand Vision
-[What the brand aspires to achieve]
-
-## Brand Mission
-[How the brand delivers on its purpose]
-
-## Brand Values (3-5)
-1. [Value]: [Definition]
-2. [Value]: [Definition]
-3. [Value]: [Definition]
-
-## Target Audience
-- Primary: [Segment description]
-- Secondary: [Segment description]
-
-## Brand Positioning
 For [target audience]
-Who [need/opportunity]
+Who [need or opportunity]
 [Brand] is the [category]
 That [key benefit]
 Unlike [competitors]
 We [unique differentiator]
-
-## Brand Personality
-- [Trait 1]
-- [Trait 2]
-- [Trait 3]
-
-## Brand Promise
-[One sentence promise to customers]
-
-## Proof Points
-- [Evidence 1]
-- [Evidence 2]
-- [Evidence 3]
 ```
-
-## Brand Positioning
-
-### Positioning Development
-
-**Step 1: Market Analysis**
-- Category definition
-- Competitive landscape
-- Market trends
-- White space opportunities
-
-**Step 2: Audience Understanding**
-- Needs and desires
-- Pain points
-- Decision drivers
-- Perception mapping
-
-**Step 3: Differentiation**
-- Unique capabilities
-- Competitive advantages
-- Category entry points
-- Reasons to believe
-
-**Step 4: Positioning Statement**
-- Target definition
-- Category frame
-- Key benefit
-- Proof points
 
 ### Positioning Map
 
 ```
                     High Price
-                        │
-    PREMIUM         ────┼────    LUXURY
-    • Quality           │        • Status
-    • Performance       │        • Exclusivity
-                        │
-    Low Innovation ─────┼───── High Innovation
-                        │
-    VALUE           ────┼────    DISRUPTOR
-    • Accessibility     │        • New approach
-    • Affordability     │        • Category change
-                        │
+                        |
+    PREMIUM         ----+----    LUXURY
+    * Quality           |        * Status
+    * Performance       |        * Exclusivity
+                        |
+    Low Innovation -----+----- High Innovation
+                        |
+    VALUE           ----+----    DISRUPTOR
+    * Accessibility     |        * New approach
+    * Affordability     |        * Category change
+                        |
                     Low Price
 ```
 
-### Competitive Positioning
+### Competitive Positioning Matrix
 
 | Attribute | Us | Comp A | Comp B | Comp C |
 |-----------|-----|--------|--------|--------|
@@ -144,45 +63,28 @@ We [unique differentiator]
 | Innovation | High | Low | Medium | High |
 | Service | High | High | Low | Medium |
 
-## Brand Identity
-
-### Identity System
+## Brand Identity System
 
 ```
 BRAND IDENTITY SYSTEM
-├── Visual Identity
-│   ├── Logo (primary, secondary, icon)
-│   ├── Color palette
-│   ├── Typography
-│   ├── Imagery style
-│   └── Graphic elements
-├── Verbal Identity
-│   ├── Brand voice
-│   ├── Tone guidelines
-│   ├── Messaging framework
-│   └── Vocabulary
-└── Experiential Identity
-    ├── Customer experience
-    ├── Physical environments
-    └── Digital experiences
++-- Visual Identity
+|   +-- Logo (primary, secondary, icon)
+|   +-- Color palette
+|   +-- Typography
+|   +-- Imagery style
+|   +-- Graphic elements
++-- Verbal Identity
+|   +-- Brand voice
+|   +-- Tone guidelines
+|   +-- Messaging framework
+|   +-- Vocabulary
++-- Experiential Identity
+    +-- Customer experience
+    +-- Physical environments
+    +-- Digital experiences
 ```
 
-### Brand Voice Framework
-
-```markdown
-## Voice Attributes
-
-### [Attribute 1]: [Name]
-**Definition:** [What it means]
-**Do:** [Examples of how to express it]
-**Don't:** [What to avoid]
-
-### [Attribute 2]: [Name]
-**Definition:** [What it means]
-**Do:** [Examples]
-**Don't:** [Avoid]
-
-## Tone Variations
+### Voice Framework
 
 | Context | Tone Adjustment |
 |---------|-----------------|
@@ -190,179 +92,58 @@ BRAND IDENTITY SYSTEM
 | Support | More empathetic |
 | Legal | More formal |
 | Social | More casual |
+
+## Brand Architecture Models
+
+| Model | Structure | Example |
+|-------|-----------|---------|
+| Branded House | Master Brand > Products | Google (Maps, Drive, Cloud) |
+| House of Brands | Parent > Independent Brands | P&G (Tide, Pampers, Gillette) |
+| Endorsed | Sub-brand by Master Brand | Marriott (Courtyard by Marriott) |
+| Hybrid | Mix of above | Amazon (Prime, AWS, Whole Foods) |
+
+## Example: Brand Positioning for a SaaS Startup
+
+```markdown
+# Brand Strategy: FlowMetrics
+
+## Positioning Statement
+For data-driven product managers
+Who need real-time user behavior insights without engineering support
+FlowMetrics is the self-serve analytics platform
+That delivers actionable funnels in under 5 minutes
+Unlike Amplitude and Mixpanel
+We require zero SQL and zero instrumentation code
+
+## Brand Values
+1. Clarity: Complex data, simple answers
+2. Speed: Insights in minutes, not days
+3. Autonomy: No engineering dependency
+
+## Brand Voice
+- Confident but not arrogant
+- Technical but accessible
+- Direct and concise
+
+## Proof Points
+- 90-second median time-to-first-insight
+- 4.8/5 satisfaction from non-technical PMs
+- 50% reduction in analytics engineering tickets
 ```
 
-### Messaging Architecture
+## Brand Health Measurement
+
+**Awareness:** unaided awareness, aided awareness, top-of-mind awareness
+**Perception:** brand attribute association, NPS, brand sentiment
+**Consideration:** purchase intent, preference vs. competitors, recommendation likelihood
 
 ```
-MASTER NARRATIVE
-└── [Overarching brand story]
-
-PILLAR MESSAGES
-├── Pillar 1: [Topic]
-│   ├── Key message
-│   ├── Supporting points
-│   └── Proof points
-├── Pillar 2: [Topic]
-│   ├── Key message
-│   ├── Supporting points
-│   └── Proof points
-└── Pillar 3: [Topic]
-    ├── Key message
-    ├── Supporting points
-    └── Proof points
-
-AUDIENCE-SPECIFIC MESSAGES
-├── [Audience 1]: [Tailored messaging]
-├── [Audience 2]: [Tailored messaging]
-└── [Audience 3]: [Tailored messaging]
+Brand Health Dashboard - Q1 2026
+  Awareness: 68% (+5%)    NPS: 45 (+8)    Consideration: 72% (+3%)
+  Brand Attributes (% association)
+  Innovative: 78%    Trustworthy: 82%    Quality: 75%
+  Share of Voice: 32% (+2%)    Sentiment: 85% positive
 ```
-
-## Brand Architecture
-
-### Architecture Models
-
-**Branded House:**
-```
-[Master Brand]
-├── [Master Brand] Product A
-├── [Master Brand] Product B
-└── [Master Brand] Product C
-
-Example: Google (Google Maps, Google Drive, Google Cloud)
-```
-
-**House of Brands:**
-```
-[Parent Company]
-├── Brand A (independent)
-├── Brand B (independent)
-└── Brand C (independent)
-
-Example: P&G (Tide, Pampers, Gillette)
-```
-
-**Endorsed Brands:**
-```
-[Master Brand]
-├── Sub-brand A by [Master Brand]
-├── Sub-brand B by [Master Brand]
-└── Sub-brand C by [Master Brand]
-
-Example: Marriott (Courtyard by Marriott, Residence Inn by Marriott)
-```
-
-**Hybrid:**
-```
-[Parent Company]
-├── [Master Brand] extensions
-├── Endorsed sub-brands
-└── Independent brands
-
-Example: Amazon (Amazon, Prime, AWS, Whole Foods)
-```
-
-## Brand Governance
-
-### Brand Guidelines Structure
-
-```
-1. INTRODUCTION
-   - Brand story
-   - How to use guidelines
-
-2. BRAND FOUNDATION
-   - Purpose, vision, values
-   - Positioning
-   - Personality
-
-3. VISUAL IDENTITY
-   - Logo usage
-   - Color palette
-   - Typography
-   - Photography
-   - Iconography
-
-4. VERBAL IDENTITY
-   - Voice and tone
-   - Messaging
-   - Writing style
-
-5. APPLICATIONS
-   - Digital
-   - Print
-   - Environmental
-   - Merchandise
-
-6. RESOURCES
-   - Asset library
-   - Templates
-   - Contact info
-```
-
-### Brand Approval Process
-
-```
-1. REQUEST
-   ├── Submit asset for review
-   └── Provide context and usage
-
-2. REVIEW
-   ├── Brand team evaluation
-   └── Compliance check
-
-3. FEEDBACK
-   ├── Approved as-is
-   ├── Approved with changes
-   └── Not approved (rationale)
-
-4. IMPLEMENTATION
-   ├── Final assets delivered
-   └── Usage tracked
-```
-
-## Brand Measurement
-
-### Brand Health Metrics
-
-**Awareness:**
-- Unaided awareness
-- Aided awareness
-- Top-of-mind awareness
-
-**Perception:**
-- Brand attributes
-- Net Promoter Score
-- Brand sentiment
-
-**Consideration:**
-- Purchase intent
-- Preference vs. competitors
-- Recommendation likelihood
-
-### Brand Tracking Dashboard
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   Brand Health - [Period]                    │
-├─────────────────────────────────────────────────────────────┤
-│  Awareness          Perception          Consideration        │
-│  68% (+5%)          NPS: 45 (+8)        72% (+3%)           │
-├─────────────────────────────────────────────────────────────┤
-│  Brand Attributes (% association)                            │
-│  Innovative: 78%    Trustworthy: 82%    Quality: 75%        │
-├─────────────────────────────────────────────────────────────┤
-│  Share of Voice: 32% (+2%)                                   │
-│  Sentiment: 85% positive                                     │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Reference Materials
-
-- `references/positioning.md` - Positioning frameworks
-- `references/identity.md` - Identity system guide
-- `references/architecture.md` - Brand architecture models
-- `references/governance.md` - Governance best practices
 
 ## Scripts
 
@@ -379,3 +160,10 @@ python scripts/voice_analyzer.py --content content.txt
 # Brand guidelines generator
 python scripts/guidelines_gen.py --config brand_config.yaml
 ```
+
+## Reference Materials
+
+- `references/positioning.md` - Positioning frameworks
+- `references/identity.md` - Identity system guide
+- `references/architecture.md` - Brand architecture models
+- `references/governance.md` - Governance best practices

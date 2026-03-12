@@ -1,6 +1,11 @@
 ---
 name: regulatory-affairs-head
-description: Senior Regulatory Affairs Manager for HealthTech and MedTech companies. Provides regulatory strategy development, submission management, pathway analysis, global compliance coordination, and cross-functional team leadership.
+description: >
+  Senior Regulatory Affairs Manager for HealthTech and MedTech companies. Use when
+  developing regulatory strategy, preparing FDA 510(k)/PMA/De Novo submissions,
+  planning EU MDR CE marking, coordinating global market access, or monitoring
+  regulatory intelligence. Provides pathway analysis, submission management,
+  timeline planning, and cross-functional regulatory leadership.
 triggers:
   - regulatory strategy
   - FDA submission
@@ -22,42 +27,23 @@ Regulatory strategy development, submission management, and global market access
 
 ---
 
-## Table of Contents
-
-- [Regulatory Strategy Workflow](#regulatory-strategy-workflow)
-- [FDA Submission Workflow](#fda-submission-workflow)
-- [EU MDR Submission Workflow](#eu-mdr-submission-workflow)
-- [Global Market Access Workflow](#global-market-access-workflow)
-- [Regulatory Intelligence Workflow](#regulatory-intelligence-workflow)
-- [Decision Frameworks](#decision-frameworks)
-- [Tools and References](#tools-and-references)
-
----
-
 ## Regulatory Strategy Workflow
 
-Develop regulatory strategy aligned with business objectives and product characteristics.
+The agent develops regulatory strategy aligned with business objectives and product characteristics.
 
 ### Workflow: New Product Regulatory Strategy
 
-1. Gather product information:
-   - Intended use and indications
-   - Device classification (risk level)
-   - Technology platform
-   - Target markets and timeline
-2. Identify applicable regulations per target market:
+1. **Gather product information** -- collect intended use, device classification (risk level), technology platform, target markets, and timeline from stakeholders.
+2. **Identify applicable regulations** per target market:
    - FDA (US): 21 CFR Part 820, 510(k)/PMA/De Novo
    - EU: MDR 2017/745, Notified Body requirements
    - Other markets: Health Canada, PMDA, NMPA, TGA
-3. Determine optimal regulatory pathway:
-   - Compare submission types (510(k) vs De Novo vs PMA)
-   - Assess predicate device availability
-   - Evaluate clinical evidence requirements
-4. Develop regulatory timeline with milestones
-5. Estimate resource requirements and budget
-6. Identify regulatory risks and mitigation strategies
-7. Obtain stakeholder alignment and approval
-8. **Validation:** Strategy document approved; timeline accepted; resources allocated
+3. **Determine optimal regulatory pathway** using the pathway selection matrix below -- compare submission types, assess predicate device availability, evaluate clinical evidence requirements.
+4. **Develop regulatory timeline** with milestones and critical path dependencies.
+5. **Estimate resource requirements** -- budget, personnel (FTEs), external consultants/CRO.
+6. **Identify regulatory risks** and define mitigation strategies for each.
+7. **Obtain stakeholder alignment** -- present strategy for executive approval.
+8. **Validation checkpoint:** Strategy document approved; timeline accepted by all stakeholders; resources allocated and confirmed.
 
 ### Regulatory Pathway Selection Matrix
 
@@ -70,95 +56,79 @@ Develop regulatory strategy aligned with business objectives and product charact
 | User Fee | ~$22K (2024) | ~$135K | ~$440K |
 | Best For | Me-too devices | Novel low-risk | High-risk, novel |
 
-### Regulatory Strategy Document Template
+### Example: Regulatory Strategy Output
 
 ```
 REGULATORY STRATEGY
 
-Product: [Name]
-Version: [X.X]
-Date: [Date]
+Product: CardioSense Wearable ECG Monitor
+Version: 1.0
+Date: 2026-03-12
 
 1. PRODUCT OVERVIEW
-   - Intended use: [Statement]
-   - Device classification: [Class I/II/III]
-   - Technology: [Description]
+   - Intended use: Continuous ECG monitoring for arrhythmia detection
+   - Device classification: Class II (FDA), Class IIa (EU MDR)
+   - Technology: Single-lead ECG with ML-based AF detection
 
 2. TARGET MARKETS
-   | Market | Priority | Timeline |
-   |--------|----------|----------|
-   | USA    | 1        | Q1 20XX  |
-   | EU     | 2        | Q2 20XX  |
+   | Market | Priority | Timeline    |
+   |--------|----------|-------------|
+   | USA    | 1        | Q3 2026     |
+   | EU     | 2        | Q1 2027     |
+   | Canada | 3        | Q2 2027     |
 
 3. REGULATORY PATHWAY
-   - FDA: [510(k) / De Novo / PMA]
-   - EU: [Class] via [Conformity route]
-   - Rationale: [Justification]
+   - FDA: 510(k) — Predicate: AliveCor KardiaMobile (K142743)
+   - EU: Class IIa via Annex IX (QMS) + Annex XI Part A (Product)
+   - Rationale: Established predicate supports SE argument;
+     MDR IIa classification per Rule 10 (active diagnostic)
 
 4. CLINICAL EVIDENCE STRATEGY
-   - Requirements: [Summary]
-   - Approach: [Literature / Study / Both]
+   - Requirements: SE comparison + analytical performance data
+   - Approach: Literature review for AF detection + bench study
 
-5. TIMELINE AND MILESTONES
-   [Gantt or milestone table]
-
-6. RISKS AND MITIGATION
-   | Risk | Probability | Impact | Mitigation |
-   |------|-------------|--------|------------|
-
-7. RESOURCE REQUIREMENTS
-   - Budget: $[Amount]
-   - Personnel: [FTEs]
-   - External support: [Consultants, CRO]
+5. RISKS AND MITIGATION
+   | Risk                     | Probability | Impact | Mitigation                    |
+   |--------------------------|-------------|--------|-------------------------------|
+   | FDA requests clinical    | Medium      | High   | Pre-Sub meeting to align      |
+   | NB capacity delay        | High        | Medium | Engage NB by Q4 2025         |
+   | ML algorithm as SaMD     | Medium      | High   | Follow FDA AI/ML SaMD guidance|
 ```
 
 ---
 
 ## FDA Submission Workflow
 
-Prepare and submit FDA regulatory applications.
+The agent prepares and submits FDA regulatory applications following established pathways.
 
 ### Workflow: 510(k) Submission
 
-1. Confirm 510(k) pathway suitability:
-   - Predicate device identified
-   - Substantial equivalence supportable
-   - No new intended use or technology concerns
-2. Schedule and conduct Pre-Submission (Q-Sub) meeting if needed
-3. Compile submission package:
+1. **Confirm 510(k) pathway suitability** -- verify predicate device identified, substantial equivalence supportable, no new intended use or technology concerns.
+2. **Schedule Pre-Submission (Q-Sub) meeting** if novel technology, uncertain predicate, or complex testing is involved.
+3. **Compile submission package:**
    - Cover letter and administrative information
    - Device description and intended use
    - Substantial equivalence comparison
    - Performance testing data
-   - Biocompatibility (if patient contact)
-   - Software documentation (if applicable)
+   - Biocompatibility (if patient contact, per ISO 10993)
+   - Software documentation (if applicable, per IEC 62304)
    - Labeling and IFU
-4. Conduct internal review and quality check
-5. Prepare eCopy per FDA format requirements
-6. Submit via FDA ESG portal with user fee payment
-7. Monitor MDUFA clock and respond to AI/RTA requests
-8. **Validation:** Submission accepted; MDUFA date received; tracking system updated
+4. **Conduct internal review** -- quality check all sections against FDA checklist.
+5. **Prepare eCopy** per current FDA format requirements.
+6. **Submit via FDA ESG portal** with user fee payment.
+7. **Monitor MDUFA clock** and respond to AI/RTA requests within deadline.
+8. **Validation checkpoint:** Submission accepted (RTA complete); MDUFA goal date received; tracking system updated.
 
 ### Workflow: PMA Submission
 
-1. Confirm PMA pathway:
-   - Class III device or no predicate
-   - Clinical data strategy defined
-2. Complete IDE clinical study if required:
-   - IDE approval
-   - Clinical protocol execution
-   - Study report completion
-3. Conduct Pre-Submission meeting
-4. Compile PMA submission:
-   - Administrative and device information
-   - Manufacturing information
-   - Nonclinical studies
-   - Clinical studies
-   - Labeling
-5. Submit original PMA application
-6. Address FDA questions and deficiencies
-7. Prepare for FDA facility inspection
-8. **Validation:** PMA approved; approval letter received; post-approval requirements documented
+1. **Confirm PMA pathway** -- Class III device or no suitable predicate; clinical data strategy defined.
+2. **Complete IDE clinical study** if required -- IDE approval, protocol execution, study report.
+3. **Conduct Pre-Submission meeting** with FDA.
+4. **Compile PMA submission** -- administrative/device information, manufacturing information, nonclinical studies, clinical studies, labeling.
+5. **Submit original PMA** application.
+6. **Address FDA questions** and deficiency letters within specified timeframes.
+7. **Prepare for FDA facility inspection** -- coordinate with Quality team.
+8. **Validation checkpoint:** PMA approved; approval letter received; post-approval requirements documented.
 
 ### FDA Submission Timeline
 
@@ -186,48 +156,27 @@ See: [references/fda-submission-guide.md](references/fda-submission-guide.md)
 
 ## EU MDR Submission Workflow
 
-Achieve CE marking under EU MDR 2017/745.
+The agent achieves CE marking under EU MDR 2017/745.
 
 ### Workflow: MDR Technical Documentation
 
-1. Confirm device classification per MDR Annex VIII
-2. Select conformity assessment route based on class:
+1. **Confirm device classification** per MDR Annex VIII rules.
+2. **Select conformity assessment route** based on class:
    - Class I: Self-declaration
    - Class IIa/IIb: Notified Body involvement
    - Class III: Full NB assessment
-3. Select and engage Notified Body (for Class IIa+)
-4. Compile Technical Documentation per Annex II:
+3. **Select and engage Notified Body** (for Class IIa+) -- evaluate scope, capacity, experience, and timeline.
+4. **Compile Technical Documentation** per Annex II:
    - Device description and specifications
    - Design and manufacturing information
-   - General Safety and Performance Requirements (GSPR) checklist
-   - Benefit-risk analysis and risk management
+   - GSPR checklist (General Safety and Performance Requirements)
+   - Benefit-risk analysis and risk management (ISO 14971)
    - Clinical evaluation per Annex XIV
    - Post-market surveillance plan
-5. Establish and document QMS per ISO 13485
-6. Submit application to Notified Body
-7. Address NB questions and coordinate audit
-8. **Validation:** CE certificate issued; Declaration of Conformity signed; EUDAMED registration complete
-
-### MDR Classification Decision Tree
-
-```
-Is the device active?
-        │
-    Yes─┴─No
-     │     │
-     ▼     ▼
-Is it an   Does it contact
-implant?   the body?
-  │            │
-Yes─┴─No   Yes─┴─No
- │    │     │     │
- ▼    ▼     ▼     ▼
-III  IIb  Check   Class I
-         contact  (measuring/
-         type     sterile if
-         and      applicable)
-         duration
-```
+5. **Establish and document QMS** per ISO 13485.
+6. **Submit application to Notified Body.**
+7. **Address NB questions** and coordinate audit logistics.
+8. **Validation checkpoint:** CE certificate issued; Declaration of Conformity signed; EUDAMED registration complete.
 
 ### Clinical Evidence Requirements by Class
 
@@ -255,25 +204,22 @@ See: [references/eu-mdr-submission-guide.md](references/eu-mdr-submission-guide.
 
 ## Global Market Access Workflow
 
-Coordinate regulatory approvals across international markets.
+The agent coordinates regulatory approvals across international markets.
 
 ### Workflow: Multi-Market Submission Strategy
 
-1. Define target markets based on business priorities
-2. Sequence markets for efficient evidence leverage:
+1. **Define target markets** based on business priorities and revenue projections.
+2. **Sequence markets** for efficient evidence leverage:
    - Phase 1: FDA + EU (reference markets)
-   - Phase 2: Recognition markets (Canada, Australia)
-   - Phase 3: Major markets (Japan, China)
+   - Phase 2: Recognition markets (Canada via MDSAP, Australia via TGA)
+   - Phase 3: Major markets (Japan PMDA, China NMPA)
    - Phase 4: Emerging markets
-3. Identify local requirements per market:
-   - Clinical data acceptability
-   - Local agent/representative needs
-   - Language and labeling requirements
-4. Develop master technical file with localization plan
-5. Establish in-country regulatory support
-6. Execute parallel or sequential submissions
-7. Track approvals and coordinate launches
-8. **Validation:** All target market approvals obtained; registration database updated
+3. **Identify local requirements** per market -- clinical data acceptability, local agent/representative needs, language and labeling requirements.
+4. **Develop master technical file** with localization plan.
+5. **Establish in-country regulatory support.**
+6. **Execute parallel or sequential submissions** per sequencing strategy.
+7. **Track approvals** and coordinate product launches.
+8. **Validation checkpoint:** All target market approvals obtained; registration database updated; launch dates confirmed.
 
 ### Market Priority Matrix
 
@@ -287,42 +233,24 @@ Coordinate regulatory approvals across international markets.
 | China | Large | Very High | Local testing | 3 |
 | Brazil | Medium | High | GMP inspection | 3-4 |
 
-### Documentation Efficiency Strategy
-
-| Document Type | Single Source | Localization Required |
-|---------------|---------------|----------------------|
-| Technical file core | Yes | Format adaptation |
-| Risk management | Yes | None |
-| Clinical data | Yes | Bridging assessment |
-| QMS certificate | Yes (ISO 13485) | Market-specific audit |
-| Labeling | Master label | Translation, local requirements |
-| IFU | Master content | Translation, local symbols |
-
 See: [references/global-regulatory-pathways.md](references/global-regulatory-pathways.md)
 
 ---
 
 ## Regulatory Intelligence Workflow
 
-Monitor and respond to regulatory changes affecting product portfolio.
+The agent monitors and responds to regulatory changes affecting the product portfolio.
 
 ### Workflow: Regulatory Change Management
 
-1. Monitor regulatory sources:
-   - FDA Federal Register, guidance documents
-   - EU Official Journal, MDCG guidance
-   - Notified Body communications
-   - Industry associations (AdvaMed, MedTech Europe)
-2. Assess relevance to product portfolio
-3. Evaluate impact:
-   - Timeline to compliance
-   - Resource requirements
-   - Product changes needed
-4. Develop compliance action plan
-5. Communicate to affected stakeholders
-6. Implement required changes
-7. Document compliance status
-8. **Validation:** Compliance action plan approved; changes implemented on schedule
+1. **Monitor regulatory sources** -- FDA Federal Register, EU Official Journal, MDCG guidance, Notified Body communications, industry associations (AdvaMed, MedTech Europe).
+2. **Assess relevance** to current product portfolio and pipeline.
+3. **Evaluate impact** -- timeline to compliance, resource requirements, product changes needed.
+4. **Develop compliance action plan** with owners and deadlines.
+5. **Communicate to affected stakeholders** across functions.
+6. **Implement required changes** within established timelines.
+7. **Document compliance status** for management review and audit readiness.
+8. **Validation checkpoint:** Compliance action plan approved; changes implemented on schedule; no gaps at next audit.
 
 ### Regulatory Monitoring Sources
 
@@ -335,35 +263,6 @@ Monitor and respond to regulatory changes affecting product portfolio.
 | ISO/IEC | Standards updates | Quarterly |
 | Notified Body | Audit findings, trends | Per interaction |
 
-### Impact Assessment Template
-
-```
-REGULATORY CHANGE IMPACT ASSESSMENT
-
-Change: [Description]
-Source: [Regulation/Guidance]
-Effective Date: [Date]
-Assessment Date: [Date]
-Assessed By: [Name]
-
-AFFECTED PRODUCTS
-| Product | Impact | Action Required | Timeline |
-|---------|--------|-----------------|----------|
-| [Name]  | [H/M/L]| [Description]   | [Date]   |
-
-COMPLIANCE ACTIONS
-1. [Action 1] - Owner: [Name] - Due: [Date]
-2. [Action 2] - Owner: [Name] - Due: [Date]
-
-RESOURCE REQUIREMENTS
-- Budget: $[Amount]
-- Personnel: [Hours/FTEs]
-
-APPROVAL
-Regulatory: _________________ Date: _______
-Management: _________________ Date: _______
-```
-
 ---
 
 ## Decision Frameworks
@@ -372,17 +271,17 @@ Management: _________________ Date: _______
 
 ```
 Is predicate device available?
-            │
-        Yes─┴─No
-         │     │
-         ▼     ▼
+            |
+        Yes-+-No
+         |     |
+         v     v
     Is device   Is risk level
     substantially  Low-Moderate?
-    equivalent?       │
-         │        Yes─┴─No
-     Yes─┴─No      │     │
-      │     │      ▼     ▼
-      ▼     ▼   De Novo  PMA
+    equivalent?       |
+         |        Yes-+-No
+     Yes-+-No      |     |
+      |     |      v     v
+      v     v   De Novo  PMA
     510(k)  Consider      required
            De Novo
            or PMA
@@ -392,14 +291,14 @@ Is predicate device available?
 
 | Factor | Schedule Pre-Sub | Skip Pre-Sub |
 |--------|------------------|--------------|
-| Novel Technology | ✓ | |
-| New Intended Use | ✓ | |
-| Complex Testing | ✓ | |
-| Uncertain Predicate | ✓ | |
-| Clinical Data Needed | ✓ | |
-| Well-established | | ✓ |
-| Clear Predicate | | ✓ |
-| Standard Testing | | ✓ |
+| Novel Technology | Yes | |
+| New Intended Use | Yes | |
+| Complex Testing | Yes | |
+| Uncertain Predicate | Yes | |
+| Clinical Data Needed | Yes | |
+| Well-established | | Yes |
+| Clear Predicate | | Yes |
+| Standard Testing | | Yes |
 
 ### Regulatory Escalation Criteria
 
@@ -419,13 +318,15 @@ Is predicate device available?
 
 | Tool | Purpose | Usage |
 |------|---------|-------|
-| [regulatory_tracker.py](scripts/regulatory_tracker.py) | Track submission status and timelines | `python regulatory_tracker.py` |
+| [regulatory_tracker.py](scripts/regulatory_tracker.py) | Track submission status and timelines | `python regulatory_tracker.py --help` |
 
-**Regulatory Tracker Features:**
-- Track multiple submissions across markets
-- Monitor status and target dates
-- Identify overdue submissions
-- Generate status reports
+```bash
+# Example: Track active submissions
+python scripts/regulatory_tracker.py --status active --format markdown
+
+# Example: Check overdue submissions
+python scripts/regulatory_tracker.py --overdue --notify
+```
 
 ### References
 
@@ -440,10 +341,10 @@ Is predicate device available?
 
 | KPI | Target | Calculation |
 |-----|--------|-------------|
-| First-time approval rate | >85% | (Approved without major deficiency / Total submitted) × 100 |
-| On-time submission | >90% | (Submitted by target date / Total submissions) × 100 |
-| Review cycle compliance | >95% | (Responses within deadline / Total requests) × 100 |
-| Regulatory hold time | <20% | (Days on hold / Total review days) × 100 |
+| First-time approval rate | >85% | (Approved without major deficiency / Total submitted) x 100 |
+| On-time submission | >90% | (Submitted by target date / Total submissions) x 100 |
+| Review cycle compliance | >95% | (Responses within deadline / Total requests) x 100 |
+| Regulatory hold time | <20% | (Days on hold / Total review days) x 100 |
 
 ---
 

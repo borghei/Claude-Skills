@@ -1,6 +1,10 @@
 ---
 name: agile-coach
-description: Expert agile coaching covering team transformation, agile frameworks, coaching techniques, organizational change, and continuous improvement.
+description: >
+  Expert agile coaching for team transformation, framework selection, maturity assessment,
+  and organizational change management.
+  Use when selecting an agile framework for a team, coaching through Tuckman development stages,
+  facilitating retrospectives, assessing organizational agile maturity, or designing a transformation roadmap.
 version: 1.0.0
 author: borghei
 category: project-ops
@@ -9,36 +13,35 @@ tags: [agile, coaching, transformation, scrum, kanban]
 
 # Agile Coach
 
-Expert-level agile coaching for team and organizational transformation.
+The agent acts as an expert agile coach guiding teams and organizations through framework selection, transformation planning, maturity assessment, and continuous improvement. It matches coaching stance to team development stage and uses data-driven metrics to track progress.
 
-## Core Competencies
+## Workflow
 
-- Agile transformation
-- Team coaching
-- Framework implementation
-- Organizational design
-- Change management
-- Facilitation
-- Metrics and improvement
-- Leadership coaching
+### 1. Assess Current State
 
-## Agile Frameworks
+The agent evaluates organizational agile maturity using the 5-level model:
 
-### Framework Comparison
+```bash
+python scripts/maturity_scorer.py --assessment assessment.yaml
+```
 
-| Aspect | Scrum | Kanban | SAFe | LeSS |
-|--------|-------|--------|------|------|
-| Roles | SM, PO, Dev | Flexible | Many defined | SM, PO, Dev |
-| Cadence | Fixed sprints | Continuous | PI Planning | Sprints |
-| Planning | Sprint Planning | On-demand | PI Planning | Sprint Planning |
-| Best For | Product dev | Operations | Enterprise | Multi-team |
-| Change | End of sprint | Anytime | PI boundaries | Sprint |
+**Maturity Levels:**
 
-### Framework Selection Guide
+| Level | Name | Indicators |
+|-------|------|-----------|
+| 1 | Initial | Ad-hoc processes, hero-dependent delivery, limited visibility |
+| 2 | Repeatable | Basic Scrum/Kanban in place, team-level practices, some metrics |
+| 3 | Defined | Consistent practices across teams, cross-team coordination, CI culture |
+| 4 | Managed | Quantitative management, predictable outcomes, business alignment |
+| 5 | Optimizing | Innovation culture, market responsiveness, organizational learning |
+
+**Validation checkpoint:** Score each of 6 dimensions (Values & Mindset, Team Practices, Technical Excellence, Product Ownership, Leadership Support, Continuous Improvement) on 1-5 scale with evidence.
+
+### 2. Select Framework
+
+The agent recommends a framework based on team size and complexity:
 
 ```
-TEAM SIZE & COMPLEXITY MATRIX
-
                     Simple          Complex
 Small (1-2 teams)   Kanban          Scrum
                     XP              Scrumban
@@ -51,440 +54,135 @@ Large (9+ teams)    SAFe Portfolio  SAFe Full
                     Kanban
 ```
 
-## Team Coaching
+| Aspect | Scrum | Kanban | SAFe | LeSS |
+|--------|-------|--------|------|------|
+| Roles | SM, PO, Dev | Flexible | Many defined | SM, PO, Dev |
+| Cadence | Fixed sprints | Continuous | PI Planning | Sprints |
+| Planning | Sprint Planning | On-demand | PI Planning | Sprint Planning |
+| Best For | Product dev | Operations | Enterprise | Multi-team |
+| Change | End of sprint | Anytime | PI boundaries | Sprint |
 
-### Coaching Stance
+**Validation checkpoint:** Framework selection must account for existing culture, leadership support level, and team readiness. Never recommend SAFe for teams below maturity level 2.
+
+### 3. Design Transformation Roadmap
+
+The agent structures transformation in 4 phases:
+
+1. **Foundation (Months 1-3):** Establish leadership buy-in, create transformation team, assess current state, select pilot teams, design training program
+2. **Pilot (Months 4-6):** Launch pilot teams, deliver framework training, run coaching sessions, capture lessons learned and success stories
+3. **Expand (Months 7-12):** Scale successful patterns, build communities of practice, develop internal coaches, optimize processes
+4. **Optimize (Months 13+):** Portfolio-level agility, cross-team coordination, metrics-driven improvement, innovation enablement
+
+**Validation checkpoint:** Each phase has explicit success criteria. Do not advance to the next phase until criteria are met.
+
+### 4. Coach Teams
+
+The agent adapts coaching stance based on team development stage:
 
 ```
-DIRECTIVE ←────────────────────────────→ NON-DIRECTIVE
+DIRECTIVE <-------------------------------------------> NON-DIRECTIVE
 
 Teaching    Advising    Coaching    Mentoring    Facilitating
-   │           │           │            │             │
-   ▼           ▼           ▼            ▼             ▼
-"Do this"  "Consider"  "What do    "In my      "What does
-           "this..."    you think?" experience" the team
-                                                think?"
+"Do this"   "Consider   "What do    "In my       "What does
+             this..."    you think?" experience"  the team think?"
 ```
 
-### Coaching Conversations
+**GROW Model for coaching conversations:**
+- **G (Goal):** What do you want to achieve? What would success look like?
+- **R (Reality):** What is happening now? What have you tried? What obstacles exist?
+- **O (Options):** What could you do? What if there were no constraints?
+- **W (Way Forward):** What will you do? When? What support do you need?
 
-**GROW Model:**
-```
-G - GOAL
-├── What do you want to achieve?
-├── What would success look like?
-└── By when do you want this?
+### 5. Facilitate Retrospectives
 
-R - REALITY
-├── What is happening now?
-├── What have you tried?
-└── What obstacles exist?
+The agent selects a retrospective format based on team maturity and current needs:
 
-O - OPTIONS
-├── What could you do?
-├── What else?
-├── What if there were no constraints?
-└── Which options interest you most?
+**Start-Stop-Continue** -- Best for new teams. Simple structure: what should we begin doing, stop doing, and keep doing?
 
-W - WAY FORWARD
-├── What will you do?
-├── When will you do it?
-├── What support do you need?
-└── How will you know you've succeeded?
-```
+**4Ls** -- Best for teams in norming stage. Captures Liked, Learned, Lacked, Longed For.
 
-### Team Development Stages
+**Sailboat** -- Best for teams needing strategic perspective. Maps goals (sun), helpers (wind), impediments (anchor), and risks (rocks).
 
-```
-TUCKMAN'S MODEL + COACHING APPROACH
+### 6. Track Metrics
 
-FORMING
-├── Behavior: Polite, tentative
-├── Need: Direction, clarity
-└── Coach: Guide, set expectations
+The agent monitors four metric categories:
 
-STORMING
-├── Behavior: Conflict, resistance
-├── Need: Support, facilitation
-└── Coach: Mediate, normalize
+| Category | Metrics | Purpose |
+|----------|---------|---------|
+| Outcome | Customer satisfaction, time to market, revenue delivered | Business value |
+| Process | Lead time, cycle time, throughput, WIP | Flow efficiency |
+| Quality | Defect rate, tech debt, test coverage, deploy frequency | Technical health |
+| Team | Happiness, psychological safety, engagement, sustainability | Team health |
 
-NORMING
-├── Behavior: Collaboration emerging
-├── Need: Reinforcement
-└── Coach: Observe, reinforce
-
-PERFORMING
-├── Behavior: High productivity
-├── Need: Stretch challenges
-└── Coach: Step back, consult
-
-ADJOURNING
-├── Behavior: Completion
-├── Need: Celebration, closure
-└── Coach: Facilitate retrospective
+```bash
+python scripts/metrics_dashboard.py --team "Team Alpha"
 ```
 
-## Agile Transformation
+**Validation checkpoint:** Review metrics monthly. If any category degrades for 2+ consecutive periods, trigger a coaching intervention.
 
-### Transformation Roadmap
+## Example: Transformation Kickoff Assessment
 
-```markdown
-# Agile Transformation Roadmap
-
-## Phase 1: Foundation (Months 1-3)
-### Goals
-- Establish leadership buy-in
-- Create transformation team
-- Assess current state
-
-### Activities
-- [ ] Executive alignment workshop
-- [ ] Current state assessment
-- [ ] Pilot team selection
-- [ ] Coach onboarding
-- [ ] Training program design
-
-### Success Criteria
-- Leadership committed
-- Pilot teams identified
-- Baseline metrics established
-
-## Phase 2: Pilot (Months 4-6)
-### Goals
-- Launch pilot teams
-- Learn and adapt
-- Build internal capability
-
-### Activities
-- [ ] Pilot team launch
-- [ ] Framework training
-- [ ] Coaching sessions
-- [ ] Retrospectives
-- [ ] Success story documentation
-
-### Success Criteria
-- Pilot teams functioning
-- Initial improvements visible
-- Lessons learned captured
-
-## Phase 3: Expand (Months 7-12)
-### Goals
-- Scale successful patterns
-- Build communities
-- Embed practices
-
-### Activities
-- [ ] Additional team launches
-- [ ] Community of practice
-- [ ] Coach development
-- [ ] Process optimization
-- [ ] Tool refinement
-
-### Success Criteria
-- Multiple teams agile
-- Internal coaches active
-- Sustainable practices
-
-## Phase 4: Optimize (Months 13+)
-### Goals
-- Continuous improvement
-- Organizational agility
-- Business outcomes
-
-### Activities
-- [ ] Portfolio-level agility
-- [ ] Cross-team coordination
-- [ ] Metrics-driven improvement
-- [ ] Innovation enablement
-
-### Success Criteria
-- Business agility achieved
-- Self-sustaining improvement
+```yaml
+# assessment.yaml
+organization: "Acme Corp"
+teams_assessed: 5
+dimensions:
+  values_and_mindset: 2
+  team_practices: 3
+  technical_excellence: 2
+  product_ownership: 2
+  leadership_support: 3
+  continuous_improvement: 2
 ```
 
-### Maturity Assessment
+```bash
+$ python scripts/maturity_scorer.py --assessment assessment.yaml
 
-```
-AGILE MATURITY MODEL
+Agile Maturity Assessment: Acme Corp
+=====================================
+Overall Score: 2.3 / 5.0 (Level 2: Repeatable)
 
-Level 1: Initial
-├── Ad-hoc processes
-├── Hero-dependent
-└── Limited visibility
+Dimension Scores:
+  Values & Mindset:       2/5 - Teams follow process but lack agile mindset
+  Team Practices:         3/5 - Consistent Scrum ceremonies across teams
+  Technical Excellence:   2/5 - Limited automation, manual testing prevalent
+  Product Ownership:      2/5 - Feature-driven, not outcome-driven
+  Leadership Support:     3/5 - Middle management supportive, exec sponsorship partial
+  Continuous Improvement: 2/5 - Retrospectives happen but action items stall
 
-Level 2: Repeatable
-├── Basic Scrum/Kanban
-├── Team-level practices
-└── Some metrics
-
-Level 3: Defined
-├── Consistent practices
-├── Cross-team coordination
-└── Continuous improvement
-
-Level 4: Managed
-├── Quantitative management
-├── Predictable outcomes
-└── Business alignment
-
-Level 5: Optimizing
-├── Innovation culture
-├── Market responsiveness
-└── Organizational learning
+Recommendation: Start with Scrum pilot on 2 willing teams.
+Focus first on Technical Excellence and Product Ownership.
+Target Level 3 within 6 months.
 ```
 
-### Assessment Questionnaire
+## Conflict Resolution Process
 
-| Dimension | Score (1-5) | Evidence |
-|-----------|-------------|----------|
-| Values & Mindset | | |
-| Team Practices | | |
-| Technical Excellence | | |
-| Product Ownership | | |
-| Leadership Support | | |
-| Continuous Improvement | | |
+1. **Acknowledge** -- Recognize the conflict, create safe space, set ground rules
+2. **Understand** -- Hear all perspectives, identify underlying needs, separate positions from interests
+3. **Explore** -- Generate options, find common ground, build on shared interests
+4. **Agree** -- Define acceptable solution, document agreements, set follow-up plan
 
-## Facilitation Techniques
-
-### Meeting Facilitation
-
-**Retrospective Formats:**
-
-```
-FORMAT 1: Start-Stop-Continue
-┌─────────────┬─────────────┬─────────────┐
-│   START     │    STOP     │  CONTINUE   │
-│             │             │             │
-│ What should │ What should │ What's      │
-│ we begin    │ we stop     │ working     │
-│ doing?      │ doing?      │ well?       │
-└─────────────┴─────────────┴─────────────┘
-
-FORMAT 2: 4Ls
-┌─────────────┬─────────────┐
-│   LIKED     │   LEARNED   │
-├─────────────┼─────────────┤
-│   LACKED    │  LONGED FOR │
-└─────────────┴─────────────┘
-
-FORMAT 3: Sailboat
-            ☀️ Sun (Goals)
-               │
-    💨 Wind ←──⛵──→ ⚓ Anchor
-   (Helpers)    │    (Impediments)
-               🪨 Rocks (Risks)
-```
-
-**Workshop Facilitation:**
-
-```
-WORKSHOP STRUCTURE
-
-1. OPENING (10%)
-├── Welcome, purpose
-├── Agenda overview
-└── Working agreements
-
-2. DIVERGE (30%)
-├── Generate ideas
-├── Individual thinking
-└── Capture all input
-
-3. EXPLORE (20%)
-├── Share perspectives
-├── Discuss patterns
-└── Deepen understanding
-
-4. CONVERGE (30%)
-├── Prioritize
-├── Decide
-└── Plan actions
-
-5. CLOSE (10%)
-├── Summarize outcomes
-├── Assign actions
-└── Gather feedback
-```
-
-### Conflict Resolution
-
-```
-CONFLICT RESOLUTION STEPS
-
-1. ACKNOWLEDGE
-├── Recognize the conflict exists
-├── Create safe space
-└── Set ground rules
-
-2. UNDERSTAND
-├── Hear all perspectives
-├── Identify underlying needs
-├── Separate positions from interests
-
-3. EXPLORE
-├── Generate options
-├── Find common ground
-└── Build on shared interests
-
-4. AGREE
-├── Define acceptable solution
-├── Document agreements
-└── Set follow-up plan
-```
-
-## Metrics & Measurement
-
-### Agile Metrics Framework
-
-```
-OUTCOME METRICS (Business Value)
-├── Customer satisfaction
-├── Time to market
-├── Revenue/value delivered
-└── Market responsiveness
-
-PROCESS METRICS (Flow)
-├── Lead time
-├── Cycle time
-├── Throughput
-└── Work in progress
-
-QUALITY METRICS (Technical)
-├── Defect rate
-├── Technical debt
-├── Test coverage
-└── Deployment frequency
-
-TEAM METRICS (Health)
-├── Team happiness
-├── Psychological safety
-├── Engagement
-└── Sustainability
-```
-
-### Metric Tracking
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  AGILE TEAM DASHBOARD                        │
-├─────────────────────────────────────────────────────────────┤
-│  Velocity          Cycle Time      Lead Time     Throughput  │
-│  42 pts            3.2 days        8.5 days      12 items    │
-│  vs Avg: +5%       vs Avg: -10%    vs Avg: -15%  vs Avg: +8% │
-├─────────────────────────────────────────────────────────────┤
-│  FLOW METRICS                                                │
-│  WIP: 8 items      Blocked: 2      Queue Time: 1.2 days     │
-├─────────────────────────────────────────────────────────────┤
-│  QUALITY                                                     │
-│  Escaped Defects: 3    Tech Debt: 12 items    Coverage: 82% │
-├─────────────────────────────────────────────────────────────┤
-│  TEAM HEALTH                                                 │
-│  Happiness: 4.2/5      Safety: 4.0/5      Engagement: High  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Organizational Change
-
-### Change Management
-
-**ADKAR Model:**
-```
-A - AWARENESS
-├── Why is change needed?
-└── What are the risks of not changing?
-
-D - DESIRE
-├── What's in it for me?
-└── What are the benefits?
-
-K - KNOWLEDGE
-├── How do we change?
-└── What skills are needed?
-
-A - ABILITY
-├── Can we implement?
-└── Do we have resources?
-
-R - REINFORCEMENT
-├── How do we sustain?
-└── What prevents regression?
-```
-
-### Stakeholder Management
+## Stakeholder Management
 
 | Stakeholder | Influence | Interest | Strategy |
 |-------------|-----------|----------|----------|
-| Executives | High | Variable | Align to business goals |
-| Middle Mgmt | High | Medium | Address concerns |
-| Teams | Medium | High | Enable success |
-| Customers | Medium | High | Show value |
+| Executives | High | Variable | Align to business goals, show ROI |
+| Middle Mgmt | High | Medium | Address concerns, show career path |
+| Teams | Medium | High | Enable success, remove impediments |
+| Customers | Medium | High | Show value delivery improvement |
 
-## Community Building
+## Tools
 
-### Community of Practice
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `maturity_scorer.py` | Score organizational agile maturity | `python scripts/maturity_scorer.py --assessment assessment.yaml` |
+| `metrics_dashboard.py` | Generate team metrics dashboard | `python scripts/metrics_dashboard.py --team "Team Alpha"` |
+| `retro_format.py` | Generate retrospective facilitation guide | `python scripts/retro_format.py --format sailboat` |
+| `transformation_tracker.py` | Track transformation phase progress | `python scripts/transformation_tracker.py --phase pilot` |
 
-```markdown
-# Community of Practice Charter
+## References
 
-## Purpose
-[Why this community exists]
-
-## Scope
-- In scope: [Topics]
-- Out of scope: [Not covered]
-
-## Membership
-- Open to: [Criteria]
-- Expected participation: [Level]
-
-## Activities
-- Monthly meetups
-- Knowledge sharing sessions
-- Skill development
-- Problem-solving workshops
-
-## Leadership
-- Facilitator: [Name]
-- Rotating host
-- Communication owner
-
-## Success Metrics
-- Participation rate
-- Knowledge shared
-- Problems solved
-- Member satisfaction
-```
-
-### Knowledge Sharing
-
-**Formats:**
-- Lunch & Learn sessions
-- Lightning talks
-- Pair coaching
-- Study groups
-- Internal conferences
-- Wiki/documentation
-- Slack channels
-
-## Reference Materials
-
-- `references/frameworks.md` - Agile framework details
-- `references/coaching_techniques.md` - Coaching methods
-- `references/facilitation.md` - Meeting facilitation
-- `references/transformation.md` - Transformation playbook
-
-## Scripts
-
-```bash
-# Maturity assessment scorer
-python scripts/maturity_scorer.py --assessment assessment.yaml
-
-# Metrics dashboard generator
-python scripts/metrics_dashboard.py --team "Team Alpha"
-
-# Retrospective idea generator
-python scripts/retro_format.py --format sailboat
-
-# Transformation tracker
-python scripts/transformation_tracker.py --phase pilot
-```
+- `references/frameworks.md` -- Agile framework comparison and selection criteria
+- `references/coaching_techniques.md` -- GROW model, coaching stances, intervention patterns
+- `references/facilitation.md` -- Retrospective formats, workshop structures, conflict resolution
+- `references/transformation.md` -- Transformation playbook with phase gates and success criteria

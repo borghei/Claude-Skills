@@ -1,6 +1,10 @@
 ---
 name: business-intelligence
-description: Expert business intelligence covering dashboard design, data visualization, reporting automation, and executive insights delivery.
+description: >
+  Expert business intelligence covering dashboard design, data visualization,
+  reporting automation, and executive insights delivery. Use when designing
+  dashboards, building KPI frameworks, automating scheduled reports, creating
+  data stories for stakeholders, or optimizing BI tool performance.
 version: 1.0.0
 author: borghei
 category: data-analytics
@@ -9,412 +13,158 @@ tags: [bi, dashboards, visualization, reporting, insights]
 
 # Business Intelligence
 
-Expert-level business intelligence for data-driven decisions.
+The agent operates as a senior BI specialist, designing dashboards, defining KPI frameworks, automating reporting pipelines, and translating data into executive-ready narratives.
 
-## Core Competencies
+## Workflow
 
-- Dashboard design
-- Data visualization
-- Reporting automation
-- KPI development
-- Executive reporting
-- Self-service BI
-- Data storytelling
-- Tool administration
+1. **Clarify the reporting need** -- Identify the audience (executive, operational, self-service), the key questions the dashboard must answer, and the refresh cadence. Validate that required data sources exist and are accessible.
+2. **Define KPIs and metrics** -- For each metric, specify the formula, data source, granularity, owner, and RAG thresholds using the KPI definition template below.
+3. **Design the dashboard layout** -- Apply the visual hierarchy (most important metric top-left, summary-to-detail flow top-to-bottom). Select chart types using the chart selection matrix. Limit to 5-8 visualizations per page.
+4. **Build the semantic layer** -- Define metric calculations, hierarchies, and row-level security in the BI tool's semantic model so consumers get consistent numbers.
+5. **Automate reporting** -- Configure scheduled delivery (PDF/email, Slack alerts) and threshold-based alerts with the patterns below.
+6. **Validate and iterate** -- Confirm KPI values match source-of-truth queries. Check dashboard load time (<5 s target). Gather stakeholder feedback and refine.
 
-## BI Architecture
+## KPI Definition Template
 
-### Data Flow
-
-```
-DATA SOURCES → ETL/ELT → DATA WAREHOUSE → SEMANTIC LAYER → DASHBOARDS
-     │            │            │              │              │
-     ▼            ▼            ▼              ▼              ▼
-  CRM, ERP    Transform    Star Schema    Metrics Def    Tableau/PBI
-  APIs, DBs   Clean, Load  Fact/Dims      Calculations   Looker/etc
-```
-
-### BI Stack Components
-
-```
-PRESENTATION LAYER
-├── Executive dashboards
-├── Operational reports
-├── Self-service exploration
-└── Embedded analytics
-
-SEMANTIC LAYER
-├── Business metrics definitions
-├── Calculated fields
-├── Hierarchies
-└── Row-level security
-
-DATA LAYER
-├── Data warehouse (Snowflake/BigQuery/Redshift)
-├── Data marts
-├── Materialized views
-└── Cached datasets
+```yaml
+# Copy and fill for each metric
+kpi:
+  name: "Monthly Recurring Revenue"
+  owner: "Finance"
+  purpose: "Track subscription revenue health"
+  formula: "SUM(subscription_amount) WHERE status = 'active'"
+  data_source: "billing.subscriptions"
+  granularity: "monthly"
+  target: 1200000
+  warning_threshold: 1080000   # 90% of target
+  critical_threshold: 960000   # 80% of target
+  dimensions: ["region", "plan_tier", "cohort_month"]
+  caveats:
+    - "Excludes one-time setup fees"
+    - "Currency normalized to USD at month-end rate"
 ```
 
-## Dashboard Design
+## Dashboard Design Principles
 
-### Dashboard Types
-
-**Executive Dashboard:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   EXECUTIVE SUMMARY                          │
-├─────────────────────────────────────────────────────────────┤
-│  Revenue        Pipeline       Customers      NPS            │
-│  $12.4M         $45.2M         2,847          72             │
-│  +15% YoY       +22% QoQ       +340 MTD       +5 pts         │
-├─────────────────────────────────────────────────────────────┤
-│  REVENUE TREND                 │  REVENUE BY SEGMENT         │
-│  [Line chart: 12 months]       │  [Pie chart: segments]      │
-├────────────────────────────────┼─────────────────────────────┤
-│  TOP ACCOUNTS                  │  KEY METRICS STATUS         │
-│  [Table: top 10]               │  [KPI cards with RAG]       │
-└─────────────────────────────────────────────────────────────┘
-```
-
-**Operational Dashboard:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   DAILY OPERATIONS                           │
-├─────────────────────────────────────────────────────────────┤
-│  Orders Today    Tickets Open   Avg Response   SLA Met       │
-│  1,247           89             12 min         98.5%         │
-│  vs Avg: +8%     vs Avg: -12%   vs Target: ✓  vs Target: ✓  │
-├─────────────────────────────────────────────────────────────┤
-│  HOURLY VOLUME                 │  QUEUE STATUS               │
-│  [Area chart: 24h]             │  [Stacked bar by team]      │
-├────────────────────────────────┼─────────────────────────────┤
-│  ALERTS                        │  TEAM PERFORMANCE           │
-│  [Alert list with severity]    │  [Table: agents + metrics]  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Design Principles
-
-**Visual Hierarchy:**
+**Visual hierarchy:**
 1. Most important metrics at top-left
-2. Summary → Detail flow (top to bottom)
-3. Related metrics grouped together
-4. White space for readability
+2. Summary cards flow into trend charts flow into detail tables (top to bottom)
+3. Related metrics grouped; white space separates logical sections
+4. RAG status colors: Green `#28A745` | Yellow `#FFC107` | Red `#DC3545` | Gray `#6C757D`
 
-**Color Usage:**
+**Chart selection matrix:**
+
+| Data question | Chart type | Alternative |
+|---------------|-----------|-------------|
+| Trend over time | Line | Area |
+| Part of whole | Donut / Treemap | Stacked bar |
+| Comparison across categories | Bar / Column | Bullet |
+| Distribution | Histogram | Box plot |
+| Relationship | Scatter | Bubble |
+| Geographic | Choropleth | Filled map |
+
+## Executive Dashboard Example
+
 ```
-STATUS COLORS
-├── Green (#28A745): Good/On Track
-├── Yellow (#FFC107): Warning/At Risk
-├── Red (#DC3545): Critical/Off Track
-└── Gray (#6C757D): Neutral/No Status
-
-BRAND COLORS
-├── Primary: Use for emphasis
-├── Secondary: Supporting elements
-└── Accent: Highlights only
-
-DATA COLORS
-├── Sequential: Light → Dark for ranges
-├── Diverging: Different hues for pos/neg
-└── Categorical: Distinct colors per category
-```
-
-**Chart Selection:**
-
-| Data Type | Best Charts |
-|-----------|-------------|
-| Trend over time | Line, Area |
-| Part of whole | Pie, Donut, Treemap |
-| Comparison | Bar, Column |
-| Distribution | Histogram, Box Plot |
-| Relationship | Scatter, Bubble |
-| Geographic | Map, Choropleth |
-
-## KPI Framework
-
-### KPI Development
-
-```markdown
-# KPI Definition: [Metric Name]
-
-## Business Context
-- Owner: [Department/Role]
-- Purpose: [Why this metric matters]
-- Strategic alignment: [Goal it supports]
-
-## Definition
-- Formula: [Calculation]
-- Data source: [System/Table]
-- Granularity: [Daily/Weekly/Monthly]
-
-## Targets
-- Target: [Value]
-- Threshold (Yellow): [Value]
-- Critical (Red): [Value]
-
-## Dimensions
-- Time: [Day/Week/Month/Quarter/Year]
-- Segments: [By region, product, etc.]
-
-## Caveats
-- [Known limitations]
-- [Data quality issues]
++------------------------------------------------------------+
+|                   EXECUTIVE SUMMARY                         |
+| Revenue: $12.4M (+15% YoY)   Pipeline: $45.2M (+22% QoQ)  |
+| Customers: 2,847 (+340 MTD)  NPS: 72 (+5 pts)              |
++------------------------------------------------------------+
+| REVENUE TREND (12-mo line)    | REVENUE BY SEGMENT (donut)  |
++-------------------------------+-----------------------------+
+| TOP 10 ACCOUNTS (table)       | KPI STATUS (RAG cards)      |
++-------------------------------+-----------------------------+
 ```
 
-### Metric Categories
+## Report Automation Patterns
 
-**Financial:**
-| Metric | Formula | Frequency |
-|--------|---------|-----------|
-| Revenue | Sum of closed won | Daily |
-| MRR | Monthly recurring | Monthly |
-| Gross Margin | (Rev - COGS) / Rev | Monthly |
-| CAC | S&M Spend / New Customers | Monthly |
-| LTV | ARPU × Margin × Lifetime | Quarterly |
-
-**Customer:**
-| Metric | Formula | Frequency |
-|--------|---------|-----------|
-| Active Users | DAU, WAU, MAU | Daily |
-| Churn Rate | Lost / Total | Monthly |
-| NPS | Promoters - Detractors | Quarterly |
-| CSAT | Satisfied / Responses | Weekly |
-
-**Operations:**
-| Metric | Formula | Frequency |
-|--------|---------|-----------|
-| Throughput | Units / Time | Hourly |
-| Error Rate | Errors / Total | Daily |
-| Cycle Time | End - Start | Daily |
-| Utilization | Active / Capacity | Daily |
-
-## Report Automation
-
-### Report Types
-
-**Scheduled Reports:**
+**Scheduled report (cron-style):**
 ```yaml
 report:
   name: Weekly Sales Report
-  schedule: "0 8 * * MON"  # Every Monday 8am
-  recipients:
-    - sales-team@company.com
-    - leadership@company.com
+  schedule: "0 8 * * MON"
+  recipients: [sales-team@company.com, leadership@company.com]
   format: PDF
-  pages:
-    - Executive Summary
-    - Pipeline Analysis
-    - Rep Performance
-    - Forecast
+  pages: [Executive Summary, Pipeline Analysis, Rep Performance]
 ```
 
-**Threshold Alerts:**
+**Threshold alert:**
 ```yaml
 alert:
   name: Revenue Below Target
   metric: daily_revenue
-  condition: actual < target * 0.9
-  frequency: daily
+  condition: "actual < target * 0.9"
   channels:
-    - email: finance@company.com
-    - slack: #revenue-alerts
-  message: |
-    Daily revenue of ${actual} is ${pct_diff}% below target.
-    Top contributing factors: ${top_factors}
+    email: finance@company.com
+    slack: "#revenue-alerts"
+  message: "Daily revenue ${actual} is ${pct_diff}% below target. Top factors: ${top_factors}"
 ```
 
-### Automation Patterns
-
+**Automated generation workflow (Python):**
 ```python
-def generate_report(report_config):
-    """
-    Automated report generation workflow
-    """
-    # 1. Refresh data
-    refresh_data_sources(report_config['sources'])
-
+def generate_report(config: dict) -> str:
+    """Generate and distribute a scheduled report."""
+    # 1. Refresh data sources
+    refresh_data_sources(config["sources"])
     # 2. Calculate metrics
-    metrics = calculate_metrics(report_config['metrics'])
-
-    # 3. Generate visualizations
-    charts = create_visualizations(metrics, report_config['charts'])
-
-    # 4. Build report
-    report = compile_report(
-        metrics=metrics,
-        charts=charts,
-        template=report_config['template']
-    )
-
+    metrics = calculate_metrics(config["metrics"])
+    # 3. Create visualizations
+    charts = create_visualizations(metrics, config["charts"])
+    # 4. Compile into report
+    report = compile_report(metrics=metrics, charts=charts, template=config["template"])
     # 5. Distribute
-    distribute_report(
-        report=report,
-        recipients=report_config['recipients'],
-        format=report_config['format']
-    )
-
-    return report
+    distribute_report(report, recipients=config["recipients"], fmt=config["format"])
+    return report.path
 ```
 
-## Self-Service BI
+## Self-Service BI Maturity Model
 
-### Enablement Framework
+| Level | Capability | Users can... |
+|-------|-----------|-------------|
+| 1 - Consumers | View & filter | Open dashboards, apply filters, export data |
+| 2 - Explorers | Ad-hoc queries | Write simple queries, create basic charts, share findings |
+| 3 - Builders | Design dashboards | Combine data sources, create calculated fields, publish reports |
+| 4 - Modelers | Define data models | Create semantic models, define metrics, optimize performance |
 
-```
-SELF-SERVICE MATURITY MODEL
+## Performance Optimization Checklist
 
-Level 1: Report Consumers
-├── View existing dashboards
-├── Apply filters
-└── Export data
+- [ ] Limit visualizations per page (5-8 max)
+- [ ] Use data extracts or materialized views instead of live connections for heavy dashboards
+- [ ] Minimize calculated fields in the visualization layer; push logic to the semantic layer or warehouse
+- [ ] Apply context filters to reduce query scope
+- [ ] Aggregate at source when granularity allows
+- [ ] Schedule data refreshes during off-peak hours
+- [ ] Monitor and log query execution times; target < 5 s per dashboard load
 
-Level 2: Data Explorers
-├── Ad-hoc queries
-├── Create simple charts
-└── Share findings
-
-Level 3: Report Builders
-├── Design dashboards
-├── Combine data sources
-└── Create calculated fields
-
-Level 4: Data Modelers
-├── Create data models
-├── Define metrics
-└── Optimize performance
-```
-
-### Data Catalog
-
-```markdown
-# Data Catalog Entry
-
-## Dataset: sales_opportunities
-
-### Description
-Contains all sales opportunities from CRM
-
-### Schema
-| Column | Type | Description |
-|--------|------|-------------|
-| opp_id | STRING | Unique identifier |
-| account_id | STRING | Related account |
-| amount | DECIMAL | Deal value |
-| stage | STRING | Pipeline stage |
-| close_date | DATE | Expected close |
-| owner_id | STRING | Sales rep |
-
-### Refresh
-- Frequency: Every 4 hours
-- Source: Salesforce API
-- Last refresh: 2024-01-15 08:00 UTC
-
-### Usage Notes
-- Filter by is_deleted = false
-- Amount is always in USD
-- Stage values: Prospect, Discovery, Demo, Proposal, Negotiation, Closed Won, Closed Lost
-
-### Related Datasets
-- accounts
-- sales_reps
-- products
-```
-
-## Data Storytelling
-
-### Narrative Structure
-
-```
-SITUATION → COMPLICATION → RESOLUTION
-
-1. SITUATION (Context)
-   "Last quarter, we set a goal to increase customer retention by 10%"
-
-2. COMPLICATION (Problem/Opportunity)
-   "However, churn increased by 5% in our enterprise segment"
-
-3. RESOLUTION (Insight + Action)
-   "Analysis shows onboarding time correlates with churn.
-    Reducing onboarding from 30 to 14 days could save $2M annually"
-```
-
-### Insight Framework
-
-```markdown
-# Insight: [Title]
-
-## What happened?
-[Describe the observation in data]
-
-## Why does it matter?
-[Business impact and context]
-
-## Why did it happen?
-[Root cause analysis]
-
-## What should we do?
-[Recommended actions]
-
-## Supporting Data
-[Charts and metrics]
-```
-
-### Presentation Template
-
-```
-EXECUTIVE PRESENTATION STRUCTURE
-
-1. Headlines First (2-3 key takeaways)
-2. Context (why we're looking at this)
-3. Key Findings (data + insights)
-4. Implications (what it means)
-5. Recommendations (what to do)
-6. Appendix (detailed data)
-```
-
-## Tool Administration
-
-### Performance Optimization
-
-**Dashboard Performance:**
-```
-OPTIMIZATION CHECKLIST
-□ Limit visualizations per page (5-8 max)
-□ Use data extracts vs live connections
-□ Minimize calculated fields in viz
-□ Use context filters effectively
-□ Aggregate data at source when possible
-□ Schedule refreshes during off-peak
-□ Monitor query execution times
-```
-
-**Query Optimization:**
+**Query optimization example:**
 ```sql
--- Bad: Full table scan
-SELECT * FROM large_table
-WHERE date >= '2024-01-01';
+-- Before: full table scan
+SELECT * FROM large_table WHERE date >= '2024-01-01';
 
--- Good: Partitioned and filtered
-SELECT required_columns
+-- After: partitioned, filtered, and column-pruned
+SELECT order_id, customer_id, amount
 FROM large_table
 WHERE partition_date >= '2024-01-01'
   AND status = 'active'
 LIMIT 10000;
 ```
 
-### Governance
+## Data Storytelling Structure
 
-**Access Control:**
+The agent frames every insight using Situation-Complication-Resolution:
+
+1. **Situation** -- "Last quarter we targeted 10% retention improvement."
+2. **Complication** -- "Enterprise churn rose 5%, driven by 30-day onboarding delays."
+3. **Resolution** -- "Reducing onboarding to 14 days correlates with 40% lower churn and could save $2M annually."
+
+## Governance
+
 ```yaml
 security_model:
   row_level_security:
     - rule: region_access
       filter: "region = user.region"
-    - rule: team_access
-      filter: "team_id IN user.teams"
-
   object_permissions:
     - role: viewer
       permissions: [view, export]
@@ -424,35 +174,18 @@ security_model:
       permissions: [view, export, edit, delete, publish]
 ```
 
-**Data Quality Monitoring:**
-```
-DATA QUALITY CHECKS
-├── Freshness: Is data current?
-├── Completeness: Are all records present?
-├── Accuracy: Do values make sense?
-├── Consistency: Do related metrics align?
-└── Uniqueness: Are there duplicates?
-```
-
 ## Reference Materials
 
-- `references/dashboard_patterns.md` - Dashboard design patterns
-- `references/visualization_guide.md` - Chart selection guide
-- `references/kpi_library.md` - Standard KPI definitions
-- `references/storytelling.md` - Data storytelling techniques
+- `references/dashboard_patterns.md` -- Dashboard design patterns
+- `references/visualization_guide.md` -- Chart selection guide
+- `references/kpi_library.md` -- Standard KPI definitions
+- `references/storytelling.md` -- Data storytelling techniques
 
 ## Scripts
 
 ```bash
-# Dashboard performance analyzer
 python scripts/dashboard_analyzer.py --dashboard "Sales Overview"
-
-# KPI calculator
 python scripts/kpi_calculator.py --config metrics.yaml --output report.json
-
-# Report generator
 python scripts/report_generator.py --template weekly_sales --format pdf
-
-# Data quality checker
 python scripts/data_quality.py --dataset sales_opportunities --checks all
 ```
