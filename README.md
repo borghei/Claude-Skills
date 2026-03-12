@@ -1047,3 +1047,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 <p align="center">
   <a href="https://borghei.me">borghei.me</a>
 </p>
+
+---
+
+## Contributors
+
+| Contributor | GitHub |
+|-------------|--------|
+| Alan Pope | [@popey](https://github.com/popey) |
