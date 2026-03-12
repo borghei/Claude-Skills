@@ -1,6 +1,10 @@
 ---
 name: operations-manager
-description: Expert operations management covering process optimization, operational efficiency, resource management, and continuous improvement.
+description: >
+  Expert operations management covering process optimization, operational efficiency,
+  resource management, and continuous improvement. Use when designing workflows,
+  auditing operational maturity, building capacity plans, evaluating vendors,
+  running Lean Six Sigma DMAIC projects, or optimizing cost-per-unit metrics.
 version: 1.0.0
 author: borghei
 category: hr-operations
@@ -9,300 +13,30 @@ tags: [operations, efficiency, process, optimization, management]
 
 # Operations Manager
 
-Expert-level operations management for organizational efficiency.
+The agent operates as a senior operations manager, applying Lean Six Sigma, PDCA, and capacity-planning frameworks to drive measurable efficiency gains.
 
-## Core Competencies
+## Workflow
 
-- Process optimization
-- Resource management
-- Workflow design
-- Performance management
-- Vendor management
-- Capacity planning
-- Quality assurance
-- Cost optimization
+1. **Assess maturity** -- Classify the operation against the five-level maturity model (Reactive through Optimized). Record the current level and the evidence that supports the classification.
+2. **Map the process** -- Document the target process using the process documentation template. Identify every decision point, handoff, and system dependency.
+3. **Measure baseline** -- Capture KPIs: throughput, cycle time, first-pass yield, cost per unit, and utilization. Validate each metric has a reliable data source before proceeding.
+4. **Analyze gaps** -- Run root-cause analysis (5 Whys or fishbone). Quantify the gap between baseline and target for each KPI.
+5. **Design improvement** -- Propose changes using DMAIC or PDCA. Include a pilot scope, rollback criteria, and expected ROI.
+6. **Implement and control** -- Execute the pilot, collect post-change metrics, and compare to baseline. If improvement meets threshold, standardize; otherwise iterate from step 4.
 
-## Operations Framework
+> Checkpoint: After step 3, confirm that every KPI has an owner and a data source before moving to analysis.
 
-### Operations Model
+## Operations Maturity Model
 
-```
-STRATEGY → PLANNING → EXECUTION → MONITORING → IMPROVEMENT
-     │          │           │           │            │
-     ▼          ▼           ▼           ▼            ▼
- Define     Resource     Daily       KPIs        Kaizen
- Goals      Allocation   Operations  Dashboards  Projects
- Metrics    Scheduling   Workflow    Reviews     Innovation
- Targets    Budgeting    Support     Audits      Automation
-```
+| Level | Name | Characteristics |
+|-------|------|-----------------|
+| 1 | Reactive | Ad-hoc processes, hero-dependent, crisis management, limited visibility |
+| 2 | Managed | Documented processes, basic metrics, standard procedures, some automation |
+| 3 | Defined | Consistent processes, performance tracking, cross-functional coordination, continuous improvement |
+| 4 | Measured | Data-driven decisions, predictive analytics, optimized workflows, proactive management |
+| 5 | Optimized | Self-optimizing systems, innovation culture, industry-leading efficiency, strategic advantage |
 
-### Operations Maturity
-
-```
-LEVEL 1: Reactive
-├── Ad-hoc processes
-├── Hero-dependent
-├── Crisis management
-└── Limited visibility
-
-LEVEL 2: Managed
-├── Documented processes
-├── Basic metrics
-├── Standard procedures
-└── Some automation
-
-LEVEL 3: Defined
-├── Consistent processes
-├── Performance tracking
-├── Cross-functional coordination
-└── Continuous improvement
-
-LEVEL 4: Measured
-├── Data-driven decisions
-├── Predictive analytics
-├── Optimized workflows
-└── Proactive management
-
-LEVEL 5: Optimized
-├── Self-optimizing systems
-├── Innovation culture
-├── Industry-leading efficiency
-└── Strategic competitive advantage
-```
-
-## Process Management
-
-### Process Documentation
-
-```markdown
-# Process Document: [Process Name]
-
-## Overview
-- Process Owner: [Name]
-- Department: [Department]
-- Frequency: [How often]
-- Last Updated: [Date]
-
-## Purpose
-[Why this process exists]
-
-## Scope
-- Starts: [Trigger/Input]
-- Ends: [Outcome/Output]
-- In scope: [What's included]
-- Out of scope: [What's excluded]
-
-## Process Flow
-
-### Step 1: [Step Name]
-- Owner: [Role]
-- Input: [What's needed]
-- Action: [What to do]
-- Output: [Result]
-- Time: [Duration]
-
-### Step 2: [Step Name]
-...
-
-## Decision Points
-| Decision | Criteria | Yes Path | No Path |
-|----------|----------|----------|---------|
-| [Decision] | [Criteria] | [Step X] | [Step Y] |
-
-## Systems/Tools
-- [System 1]: [Purpose]
-- [System 2]: [Purpose]
-
-## Metrics
-| Metric | Target | Current |
-|--------|--------|---------|
-| Cycle time | [X] hours | |
-| Error rate | <[X]% | |
-| Volume | [X]/day | |
-
-## Exceptions
-- [Exception 1]: [How to handle]
-- [Exception 2]: [How to handle]
-
-## Related Documents
-- [Document 1]
-- [Document 2]
-```
-
-### Process Flowchart
-
-```
-START
-  │
-  ▼
-┌──────────────────┐
-│ Receive Request  │
-└────────┬─────────┘
-         │
-         ▼
-    ┌─────────┐
-    │ Valid?  │──No──→ Reject & Notify
-    └────┬────┘
-         │Yes
-         ▼
-┌──────────────────┐
-│ Process Request  │
-└────────┬─────────┘
-         │
-         ▼
-    ┌─────────┐
-    │Approved?│──No──→ Escalate
-    └────┬────┘
-         │Yes
-         ▼
-┌──────────────────┐
-│ Execute Action   │
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│ Notify Requester │
-└────────┬─────────┘
-         │
-         ▼
-       END
-```
-
-### Process Improvement
-
-```
-LEAN SIX SIGMA: DMAIC
-
-D - DEFINE
-├── Problem statement
-├── Project scope
-├── Voice of customer
-└── Project charter
-
-M - MEASURE
-├── Current performance
-├── Data collection
-├── Process mapping
-└── Baseline metrics
-
-A - ANALYZE
-├── Root cause analysis
-├── Data analysis
-├── Gap identification
-└── Hypothesis testing
-
-I - IMPROVE
-├── Solution design
-├── Pilot testing
-├── Implementation plan
-└── Change management
-
-C - CONTROL
-├── Control plan
-├── Documentation
-├── Training
-└── Monitoring
-```
-
-## Resource Management
-
-### Capacity Planning
-
-```
-CAPACITY PLANNING FRAMEWORK
-
-DEMAND ANALYSIS
-├── Historical volume
-├── Trend analysis
-├── Seasonality
-├── Growth projections
-└── Special events
-
-CAPACITY CALCULATION
-├── Available capacity
-│   └── FTE × Hours × Productivity
-├── Required capacity
-│   └── Volume × Time per unit
-└── Gap analysis
-    └── Required - Available
-
-PLANNING HORIZONS
-├── Daily: Staff scheduling
-├── Weekly: Workload balancing
-├── Monthly: Hiring/temp staff
-├── Quarterly: Training/cross-training
-└── Annual: Strategic workforce planning
-```
-
-### Resource Allocation
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              RESOURCE ALLOCATION - [Week]                        │
-├─────────────────────────────────────────────────────────────────┤
-│  Team Capacity: 400 hours    Allocated: 380 hours (95%)         │
-├─────────────────────────────────────────────────────────────────┤
-│  BY PROJECT                                                      │
-│  Project A: 120 hrs  [████████████░░░░░░░░]  30%                │
-│  Project B: 100 hrs  [██████████░░░░░░░░░░]  25%                │
-│  Project C: 80 hrs   [████████░░░░░░░░░░░░]  20%                │
-│  BAU Work: 60 hrs    [██████░░░░░░░░░░░░░░]  15%                │
-│  Buffer: 20 hrs      [██░░░░░░░░░░░░░░░░░░]  5%                 │
-├─────────────────────────────────────────────────────────────────┤
-│  BY TEAM MEMBER                                                  │
-│  Alice: 40/40 hrs (100%)   Bob: 38/40 hrs (95%)                 │
-│  Carol: 42/40 hrs (105%)   Dave: 35/40 hrs (88%)                │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Scheduling
-
-```markdown
-# Shift Schedule Template
-
-## Week of: [Date]
-
-| Shift | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
-|-------|-----|-----|-----|-----|-----|-----|-----|
-| Early (6a-2p) | A,B | A,B | A,C | B,C | A,C | B | A |
-| Day (9a-5p) | C,D,E | C,D,E | D,E | A,D,E | B,D,E | C,D | B,C |
-| Late (2p-10p) | F,G | F,G | F,G | F,G | F,G | E,F | D,E |
-| Night (10p-6a) | H | H | H | H | H | G | F |
-
-## Coverage Requirements
-| Time | Min Staff | Optimal |
-|------|-----------|---------|
-| 6a-9a | 2 | 3 |
-| 9a-2p | 4 | 6 |
-| 2p-6p | 5 | 7 |
-| 6p-10p | 3 | 4 |
-| 10p-6a | 1 | 2 |
-```
-
-## Performance Management
-
-### Operational Metrics
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              OPERATIONS DASHBOARD                                │
-├─────────────────────────────────────────────────────────────────┤
-│  Throughput       Cycle Time       Quality          Cost        │
-│  1,250/day        4.2 hours        98.5%            $12.40/unit │
-│  +8% vs Target    -15% vs LM       +0.5% vs Target  -5% vs LM   │
-├─────────────────────────────────────────────────────────────────┤
-│  EFFICIENCY METRICS                                              │
-│  Utilization: 87%    Productivity: 92%    On-time: 95%         │
-├─────────────────────────────────────────────────────────────────┤
-│  VOLUME TREND                                                    │
-│  [Line chart showing daily/weekly volumes]                      │
-├─────────────────────────────────────────────────────────────────┤
-│  TEAM PERFORMANCE                                                │
-│  Team A: 98% SLA    Team B: 95% SLA    Team C: 97% SLA         │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### KPI Framework
+## KPI Framework
 
 | Category | Metric | Formula | Target |
 |----------|--------|---------|--------|
@@ -313,256 +47,124 @@ PLANNING HORIZONS
 | Cost | Cost per unit | Total cost / Units | Varies |
 | Customer | CSAT | Satisfied / Total responses | 90%+ |
 
-### Performance Review
+## Process Documentation Template
 
 ```markdown
-# Operations Performance Review
+# Process: [Name]
 
-## Period: [Month/Quarter]
+- **Owner:** [Role]
+- **Frequency:** [Daily / Weekly / On-demand]
+- **Trigger:** [What starts this process]
+- **Output:** [Deliverable or state change]
 
-## Summary
-[Executive summary of performance]
+## Steps
 
-## Key Metrics Performance
+| # | Action | Owner | Input | Output | SLA |
+|---|--------|-------|-------|--------|-----|
+| 1 | Receive request | Ops team | Ticket | Validated ticket | 1 hr |
+| 2 | Validate request | Analyst | Validated ticket | Approved / Rejected | 2 hr |
+| 3 | Execute action | Specialist | Approved ticket | Completed work | 4 hr |
+| 4 | Notify requester | System | Completion record | Notification sent | 15 min |
 
-| Metric | Target | Actual | Variance | Status |
-|--------|--------|--------|----------|--------|
-| Throughput | 1,200/day | 1,250 | +4.2% | 🟢 |
-| Quality | 98% | 98.5% | +0.5% | 🟢 |
-| Cycle Time | 5 hrs | 4.2 hrs | -16% | 🟢 |
-| Cost/Unit | $13.00 | $12.40 | -4.6% | 🟢 |
-| SLA | 95% | 93% | -2% | 🟡 |
+## Decision Points
 
-## Wins
-- [Achievement 1]
-- [Achievement 2]
+| Decision | Criteria | Yes Path | No Path |
+|----------|----------|----------|---------|
+| Valid request? | Meets intake checklist | Step 2 | Reject and notify |
+| Approval required? | Value > $5K | Escalate to manager | Step 3 |
 
-## Challenges
-- [Challenge 1]: [Impact and action]
-- [Challenge 2]: [Impact and action]
+## Metrics
 
-## Improvement Initiatives
-
-| Initiative | Status | Impact |
-|------------|--------|--------|
-| [Initiative 1] | In Progress | [Impact] |
-| [Initiative 2] | Complete | [Impact] |
-
-## Next Period Focus
-- [Priority 1]
-- [Priority 2]
+| Metric | Target | Current |
+|--------|--------|---------|
+| Cycle time | < 8 hours | |
+| Error rate | < 2% | |
+| Volume | 50/day | |
 ```
 
-## Vendor Management
+## Example: DMAIC Cycle Time Reduction
 
-### Vendor Evaluation
-
-```markdown
-# Vendor Scorecard: [Vendor Name]
-
-## Overview
-- Vendor: [Name]
-- Category: [Service/Product]
-- Contract Value: $[Amount]
-- Contract Period: [Dates]
-
-## Performance Metrics
-
-### Quality (Weight: 30%)
-| Metric | Target | Actual | Score |
-|--------|--------|--------|-------|
-| Defect rate | <1% | 0.5% | 5/5 |
-| First-pass acceptance | >95% | 97% | 5/5 |
-
-### Delivery (Weight: 25%)
-| Metric | Target | Actual | Score |
-|--------|--------|--------|-------|
-| On-time delivery | >98% | 96% | 4/5 |
-| Lead time | <5 days | 4.5 days | 5/5 |
-
-### Cost (Weight: 20%)
-| Metric | Target | Actual | Score |
-|--------|--------|--------|-------|
-| Price vs market | Within 5% | +2% | 4/5 |
-| Invoice accuracy | >99% | 99.5% | 5/5 |
-
-### Service (Weight: 15%)
-| Metric | Target | Actual | Score |
-|--------|--------|--------|-------|
-| Response time | <24 hrs | 18 hrs | 5/5 |
-| Issue resolution | <48 hrs | 36 hrs | 5/5 |
-
-### Relationship (Weight: 10%)
-| Metric | Target | Actual | Score |
-|--------|--------|--------|-------|
-| Communication | Good | Excellent | 5/5 |
-| Flexibility | Good | Good | 4/5 |
-
-## Overall Score: 4.6/5
-
-## Recommendations
-- [Recommendation 1]
-- [Recommendation 2]
-```
-
-### Contract Management
+A fulfillment team running 6.5-hour average cycle time against a 5-hour target:
 
 ```
-CONTRACT LIFECYCLE
+DEFINE
+  Problem: Cycle time 30% above target (6.5 hr vs 5.0 hr)
+  Scope: Order-to-ship for domestic orders
+  Metric: Average cycle time, measured from ERP timestamps
 
-PLANNING
-├── Needs assessment
-├── Requirements definition
-├── Market research
-└── Budget approval
+MEASURE
+  Baseline data (30 days, n=1200 orders):
+    Mean: 6.5 hr | Median: 6.1 hr | P95: 9.8 hr
+    Bottleneck: Pick-and-pack stage accounts for 55% of total time
 
-PROCUREMENT
-├── RFP development
-├── Vendor evaluation
-├── Negotiation
-└── Contract award
+ANALYZE
+  5 Whys on pick-and-pack delay:
+    1. Why slow? -> Pickers walk long distances
+    2. Why long walks? -> Items stored alphabetically, not by frequency
+    3. Why alphabetical? -> Legacy warehouse layout from 2019
+  Root cause: Storage layout does not reflect current SKU velocity
 
-EXECUTION
-├── Onboarding
-├── Service delivery
-├── Performance monitoring
-└── Issue management
+IMPROVE
+  Action: Re-slot top 20% SKUs (by volume) to Zone A near packing stations
+  Pilot: 2-week trial on Aisle 1-3
+  Expected result: 25% reduction in pick time
 
-RENEWAL/EXIT
-├── Performance review
-├── Renewal negotiation
-├── Transition planning
-└── Contract close-out
+CONTROL
+  Post-pilot (14 days, n=580 orders):
+    Mean: 4.8 hr | Median: 4.5 hr | P95: 7.2 hr
+  Result: 26% reduction -- standardize across all aisles
+  Control: Weekly cycle-time dashboard with alert at > 5.5 hr
 ```
 
-## Continuous Improvement
-
-### Improvement Framework
+## Capacity Planning
 
 ```
-PDCA CYCLE
+Capacity Required = Forecast Volume x Time per Unit
+Capacity Available = FTE x Hours per Day x Productivity Factor
 
-PLAN
-├── Identify opportunity
-├── Analyze current state
-├── Set improvement goal
-└── Develop action plan
+Gap = Required - Available
 
-DO
-├── Implement on small scale
-├── Document observations
-├── Collect data
-└── Note issues
-
-CHECK
-├── Analyze results
-├── Compare to goals
-├── Identify gaps
-└── Root cause analysis
-
-ACT
-├── Standardize if successful
-├── Scale implementation
-├── Document learnings
-└── Identify next improvements
+Planning Horizons:
+  Daily    -> Staff scheduling, shift adjustments
+  Weekly   -> Workload balancing across teams
+  Monthly  -> Temp staffing, overtime authorization
+  Quarterly -> Hiring plans, cross-training programs
+  Annual   -> Strategic workforce and capex planning
 ```
 
-### Kaizen Events
+## Vendor Scorecard
 
-```markdown
-# Kaizen Event: [Topic]
+| Dimension | Weight | Metrics |
+|-----------|--------|---------|
+| Quality | 30% | Defect rate (< 1%), first-pass acceptance (> 95%) |
+| Delivery | 25% | On-time delivery (> 98%), lead time (< 5 days) |
+| Cost | 20% | Price vs market (within 5%), invoice accuracy (> 99%) |
+| Service | 15% | Response time (< 24 hr), issue resolution (< 48 hr) |
+| Relationship | 10% | Communication quality, flexibility |
 
-## Event Details
-- Date: [Date]
-- Duration: [X] days
-- Facilitator: [Name]
-- Team: [Names]
+Score each metric 1-5. Weighted total determines vendor tier: 4.5+ = Strategic Partner, 3.5-4.4 = Preferred, below 3.5 = Under Review.
 
-## Problem Statement
-[What problem are we solving?]
-
-## Current State
-- Process: [Description]
-- Metrics: [Current performance]
-- Pain points: [Issues]
-
-## Target State
-- Goal: [What we want to achieve]
-- Metrics: [Target performance]
-- Benefits: [Expected outcomes]
-
-## Root Cause Analysis
-[5 Whys or Fishbone results]
-
-## Solutions Implemented
-| Solution | Owner | Status |
-|----------|-------|--------|
-| [Solution 1] | [Name] | Complete |
-| [Solution 2] | [Name] | In Progress |
-
-## Results
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| [Metric 1] | [X] | [Y] | [%] |
-
-## Sustainability Plan
-- Standard work documented
-- Training completed
-- Metrics in place
-- Review schedule set
-```
-
-## Cost Management
-
-### Cost Analysis
+## Cost Breakdown Structure
 
 ```
-COST BREAKDOWN STRUCTURE
-
 DIRECT COSTS
-├── Labor
-│   ├── Wages: $X
-│   ├── Benefits: $X
-│   └── Overtime: $X
-├── Materials
-│   ├── Raw materials: $X
-│   └── Supplies: $X
-└── Equipment
-    ├── Depreciation: $X
-    └── Maintenance: $X
+  Labor: Wages + Benefits + Overtime
+  Materials: Raw materials + Supplies
+  Equipment: Depreciation + Maintenance
 
 INDIRECT COSTS
-├── Overhead
-│   ├── Facilities: $X
-│   ├── Utilities: $X
-│   └── Insurance: $X
-└── Administrative
-    ├── Management: $X
-    └── Support: $X
+  Overhead: Facilities + Utilities + Insurance
+  Administrative: Management + Support staff
 
-TOTAL COST: $X
-COST PER UNIT: $X
+Cost per Unit = (Direct + Indirect) / Units Produced
 ```
 
-### Budget Management
+## Continuous Improvement: PDCA
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              OPERATIONS BUDGET - [Year]                          │
-├─────────────────────────────────────────────────────────────────┤
-│  Annual Budget: $2.5M    YTD Spend: $1.8M    Remaining: $0.7M  │
-├─────────────────────────────────────────────────────────────────┤
-│  CATEGORY BREAKDOWN                                              │
-│  Labor: $1.5M (60%)      [████████████░░░░░░░░] 70% spent      │
-│  Materials: $0.5M (20%)  [██████████░░░░░░░░░░] 68% spent      │
-│  Equipment: $0.3M (12%)  [████████████████░░░░] 85% spent      │
-│  Other: $0.2M (8%)       [██████████████░░░░░░] 75% spent      │
-├─────────────────────────────────────────────────────────────────┤
-│  VARIANCE ANALYSIS                                               │
-│  On track: Labor, Materials    Over: Equipment (+$15K)         │
-│  Under: Other (-$10K)          Net Variance: +$5K (0.2%)       │
-└─────────────────────────────────────────────────────────────────┘
-```
+1. **Plan** -- Identify the opportunity, analyze the current state, set an improvement target, develop the action plan.
+2. **Do** -- Implement on a small scale, document observations, collect data.
+3. **Check** -- Compare results to the target. If gap remains, perform root-cause analysis.
+4. **Act** -- If successful, standardize and scale. If not, return to Plan with new hypotheses.
 
 ## Reference Materials
 

@@ -1,6 +1,11 @@
 ---
 name: cmo-advisor
-description: Marketing leadership advisor for CMOs on brand strategy, demand generation, marketing operations, growth marketing, and revenue marketing alignment.
+description: >
+  Marketing leadership advisor for CMOs on brand strategy, demand generation,
+  marketing operations, growth marketing, and revenue marketing alignment.
+  Use when building a marketing strategy, planning demand-gen campaigns,
+  designing lead scoring models, allocating marketing budget, or aligning
+  marketing with revenue targets.
 version: 1.0.0
 author: borghei
 category: executive-leadership
@@ -9,75 +14,19 @@ tags: [marketing, brand, demand-gen, growth, revenue]
 
 # CMO Advisor
 
-Marketing leadership advisory for Chief Marketing Officers.
+The agent acts as a fractional CMO, providing strategic marketing guidance grounded in B2B SaaS benchmarks and proven frameworks.
 
-## Core Competencies
+## Workflow
 
-- Brand strategy and positioning
-- Demand generation
-- Marketing operations
-- Growth marketing
-- Revenue marketing alignment
-- Content strategy
-- Marketing technology
-- Team building and leadership
+1. **Gather context** -- Identify company stage, ICP, current ARR, and marketing team size. Validate that at least stage and ICP are defined before proceeding.
+2. **Audit current performance** -- Collect funnel metrics (visitors, MQLs, SQLs, pipeline, revenue). Flag any stage where conversion is below the benchmarks in the Channel Performance table.
+3. **Define positioning** -- Draft a positioning statement using the template below. Confirm differentiation against the top two competitors.
+4. **Build channel plan** -- Select channels from the Channel Performance Framework, allocate budget using the B2B SaaS Budget Allocation split, and set per-channel CAC targets.
+5. **Design lead scoring** -- Configure the Lead Scoring Model and set the MQL threshold. Validate that the threshold produces a manageable volume for the sales team.
+6. **Create campaign plan** -- Fill in the Campaign Planning Template for the first priority campaign. Include success metrics and required assets.
+7. **Establish measurement cadence** -- Set daily, weekly, monthly, and quarterly review rhythms using the Reporting Cadence below.
 
-## Marketing Strategy Framework
-
-### Strategic Planning Process
-
-**Phase 1: Situation Analysis**
-- Market size and dynamics
-- Competitive landscape
-- Customer segmentation
-- Current performance audit
-
-**Phase 2: Strategy Definition**
-- Target market prioritization
-- Positioning and messaging
-- Channel strategy
-- Investment allocation
-
-**Phase 3: Execution Planning**
-- Campaign calendar
-- Content roadmap
-- Technology requirements
-- Team and budget needs
-
-**Phase 4: Measurement Framework**
-- KPI definition
-- Attribution model
-- Reporting cadence
-- Optimization triggers
-
-### Marketing Budget Allocation
-
-**By Function (B2B SaaS Typical):**
-- Demand Generation: 35-45%
-- Content & Brand: 15-20%
-- Marketing Ops & Tech: 15-20%
-- Events & Field: 10-15%
-- People & Overhead: 15-20%
-
-**By Funnel Stage:**
-- Awareness: 20-25%
-- Consideration: 30-35%
-- Decision: 25-30%
-- Retention/Expansion: 15-20%
-
-## Brand Strategy
-
-### Brand Architecture
-
-**Brand Elements:**
-1. **Purpose**: Why we exist
-2. **Vision**: Where we're going
-3. **Mission**: What we do
-4. **Values**: How we operate
-5. **Personality**: How we communicate
-6. **Positioning**: How we're different
-
-### Positioning Statement Template
+## Positioning Statement Template
 
 ```
 For [target customer]
@@ -88,37 +37,17 @@ Unlike [primary competitive alternative]
 Our product [statement of primary differentiation]
 ```
 
-### Messaging Framework
+## Marketing Budget Allocation (B2B SaaS Typical)
 
-| Audience | Pain Point | Solution | Proof Point |
-|----------|------------|----------|-------------|
-| Buyer 1 | [Problem] | [How we help] | [Evidence] |
-| Buyer 2 | [Problem] | [How we help] | [Evidence] |
-| User 1 | [Problem] | [How we help] | [Evidence] |
+| Function | % of Budget |
+|----------|-------------|
+| Demand Generation | 35-45% |
+| Content & Brand | 15-20% |
+| Marketing Ops & Tech | 15-20% |
+| Events & Field | 10-15% |
+| People & Overhead | 15-20% |
 
-## Demand Generation
-
-### Funnel Metrics
-
-**Top of Funnel:**
-- Website visitors
-- Content engagement
-- Social reach
-- Brand awareness
-
-**Middle of Funnel:**
-- MQLs generated
-- Content downloads
-- Webinar attendance
-- Demo requests
-
-**Bottom of Funnel:**
-- SQLs accepted
-- Opportunities created
-- Pipeline influenced
-- Revenue attributed
-
-### Channel Performance Framework
+## Channel Performance Framework
 
 | Channel | CAC | Volume | Quality | Scalability |
 |---------|-----|--------|---------|-------------|
@@ -130,7 +59,26 @@ Our product [statement of primary differentiation]
 | Events | $$$ | Low | High | Low |
 | Partnerships | $$ | Medium | High | Medium |
 
-### Campaign Planning Template
+## Lead Scoring Model
+
+| Action | Points |
+|--------|--------|
+| Website visit | 1 |
+| Content download | 5 |
+| Email open | 1 |
+| Email click | 3 |
+| Webinar registration | 10 |
+| Webinar attendance | 15 |
+| Demo request | 25 |
+| Pricing page visit | 10 |
+
+**MQL Threshold**: 50 points
+
+## Lead Stages
+
+Visitor > Known > Engaged > MQL > SAL > SQL > Opportunity > Customer
+
+## Campaign Planning Template
 
 ```
 CAMPAIGN: [Name]
@@ -156,191 +104,63 @@ ASSETS REQUIRED:
 - [ ] Content pieces
 ```
 
-## Marketing Operations
+## Messaging Framework
 
-### Tech Stack Categories
+| Audience | Pain Point | Solution | Proof Point |
+|----------|------------|----------|-------------|
+| Buyer 1 | [Problem] | [How we help] | [Evidence] |
+| Buyer 2 | [Problem] | [How we help] | [Evidence] |
+| User 1 | [Problem] | [How we help] | [Evidence] |
 
-**Core Platform:**
-- Marketing Automation (HubSpot, Marketo, Pardot)
-- CRM Integration (Salesforce, HubSpot)
-- Analytics (GA4, Mixpanel)
+## Reporting Cadence
 
-**Content & Creative:**
-- CMS (WordPress, Webflow)
-- Design (Figma, Canva)
-- DAM (Bynder, Brandfolder)
+- **Daily**: Campaign performance (spend, clicks, conversions)
+- **Weekly**: Pipeline and stage-over-stage conversion
+- **Monthly**: Full funnel analysis, MQL-to-SQL conversion, CAC trend
+- **Quarterly**: Channel ROI review, budget reallocation decisions
 
-**Advertising:**
-- Ad Platforms (Google, LinkedIn, Meta)
-- ABM (6sense, Demandbase)
-- Retargeting (various)
+## Multi-Touch Attribution Model
 
-**Intelligence:**
-- Intent Data (Bombora, G2)
-- Competitive Intel (Crayon, Klue)
-- Attribution (Bizible, Dreamdata)
+| Touch | Weight |
+|-------|--------|
+| First Touch | 30% |
+| Lead Creation | 20% |
+| Opportunity Creation | 30% |
+| Closed Won | 20% |
 
-### Lead Management
+## Content Types by Funnel Stage
 
-**Lead Stages:**
-1. Visitor (anonymous)
-2. Known (identified)
-3. Engaged (active interest)
-4. MQL (marketing qualified)
-5. SAL (sales accepted)
-6. SQL (sales qualified)
-7. Opportunity
-8. Customer
+| Stage | Formats |
+|-------|---------|
+| Awareness | Blog posts, social content, podcasts, industry reports |
+| Consideration | Ebooks/guides, webinars, case studies, comparison guides |
+| Decision | Product demos, ROI calculators, testimonials, implementation guides |
 
-**Lead Scoring Model:**
+## Example: Series-B SaaS Demand-Gen Plan
 
-| Action | Points |
-|--------|--------|
-| Website visit | 1 |
-| Content download | 5 |
-| Email open | 1 |
-| Email click | 3 |
-| Webinar registration | 10 |
-| Webinar attendance | 15 |
-| Demo request | 25 |
-| Pricing page visit | 10 |
+A Series-B SaaS company ($8M ARR, 12-person marketing team) targeting mid-market DevOps buyers:
 
-**MQL Threshold**: 50 points
+```
+Budget: $2.4M annual ($200K/mo)
+Allocation:
+  Demand Gen (40%):  $960K -- Paid search ($300K), LinkedIn Ads ($250K),
+                               Content syndication ($200K), Events ($210K)
+  Content & Brand (18%): $432K
+  Ops & Tech (17%):      $408K
+  People (25%):          $600K
 
-## Content Strategy
+Targets:
+  MQLs/month: 400  |  SQL conversion: 25%  |  Pipeline/quarter: $6M
+  Blended CAC: $18K  |  CAC Payback: 14 months
+```
 
-### Content Pillars
+## Marketing Org by Stage
 
-Define 3-5 content pillars aligned to:
-- Target audience pain points
-- Product differentiators
-- Search opportunity
-- Thought leadership goals
-
-### Content Types by Funnel Stage
-
-**Awareness:**
-- Blog posts
-- Social content
-- Podcasts
-- Industry reports
-
-**Consideration:**
-- Ebooks/guides
-- Webinars
-- Case studies
-- Comparison guides
-
-**Decision:**
-- Product demos
-- ROI calculators
-- Customer testimonials
-- Implementation guides
-
-### Editorial Calendar
-
-| Week | Topic | Format | Channel | Owner | Status |
-|------|-------|--------|---------|-------|--------|
-| 1 | [Topic] | Blog | Organic | [Name] | Draft |
-| 2 | [Topic] | Webinar | Email | [Name] | Planning |
-
-## Revenue Marketing Alignment
-
-### SLA Between Marketing and Sales
-
-**Marketing Commits:**
-- Deliver X MQLs per month
-- MQL to SQL conversion > Y%
-- Lead response within Z hours
-- Pipeline attribution target
-
-**Sales Commits:**
-- Follow up on MQLs within 24 hours
-- Provide feedback on lead quality
-- Update opportunity stages
-- Share customer insights
-
-### Attribution Model
-
-**Multi-Touch Attribution:**
-- First Touch: 30%
-- Lead Creation: 20%
-- Opportunity Creation: 30%
-- Closed Won: 20%
-
-**Reporting Cadence:**
-- Daily: Campaign performance
-- Weekly: Pipeline and conversion
-- Monthly: Full funnel analysis
-- Quarterly: Channel ROI review
-
-## Team Structure
-
-### Marketing Org by Stage
-
-**Series A (5-10 people):**
-- Head of Marketing
-- Content/Brand
-- Demand Gen
-- Marketing Ops
-
-**Series B (10-20 people):**
-- CMO
-- Director, Brand
-- Director, Demand Gen
-- Manager, Content
-- Manager, Ops
-- Individual contributors
-
-**Series C+ (20+ people):**
-- CMO
-- VP Brand
-- VP Demand Gen
-- VP Revenue Marketing
-- VP Marketing Ops
-- Specialized teams
-
-## Common Scenarios
-
-### Scenario: Missed Pipeline Target
-
-When marketing-sourced pipeline falls short:
-1. Analyze conversion by stage
-2. Identify drop-off points
-3. Review lead quality feedback
-4. Assess channel performance
-5. Adjust tactics for next period
-6. Communicate plan to leadership
-
-### Scenario: Rebrand Initiative
-
-When undertaking brand refresh:
-1. Define scope and objectives
-2. Conduct brand audit
-3. Stakeholder research
-4. Develop creative concepts
-5. Test with target audience
-6. Create rollout plan
-7. Update all touchpoints
-8. Launch and measure
-
-### Scenario: New Market Entry
-
-When expanding to new segment:
-1. Market sizing and analysis
-2. Competitive research
-3. Buyer persona development
-4. Messaging adaptation
-5. Channel identification
-6. Pilot campaign execution
-7. Learn and scale
-
-## Reference Materials
-
-- `references/brand_guidelines.md` - Brand standards and usage
-- `references/demand_gen_playbook.md` - Campaign execution guide
-- `references/content_strategy.md` - Content planning framework
-- `references/martech_stack.md` - Technology recommendations
+| Stage | Roles |
+|-------|-------|
+| Series A (5-10) | Head of Marketing, Content/Brand, Demand Gen, Marketing Ops |
+| Series B (10-20) | CMO, Director Brand, Director Demand Gen, Manager Content, Manager Ops, ICs |
+| Series C+ (20+) | CMO, VP Brand, VP Demand Gen, VP Revenue Marketing, VP Marketing Ops, Specialized teams |
 
 ## Scripts
 
@@ -357,3 +177,10 @@ python scripts/content_calendar.py --pillars topics.yaml
 # Attribution reporter
 python scripts/attribution.py --period monthly
 ```
+
+## References
+
+- `references/brand_guidelines.md` -- Brand standards and usage
+- `references/demand_gen_playbook.md` -- Campaign execution guide
+- `references/content_strategy.md` -- Content planning framework
+- `references/martech_stack.md` -- Technology recommendations

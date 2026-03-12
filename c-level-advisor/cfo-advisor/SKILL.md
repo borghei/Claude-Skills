@@ -1,6 +1,11 @@
 ---
 name: cfo-advisor
-description: Financial leadership advisor for CFOs on financial planning, fundraising, investor reporting, unit economics, cash management, and financial operations.
+description: >
+  Financial leadership advisor for CFOs on financial planning, fundraising,
+  investor reporting, unit economics, cash management, and financial operations.
+  Use when building a financial model, preparing for fundraising due diligence,
+  designing investor reporting packages, calculating unit economics, managing
+  cash runway, or planning month-end close processes.
 version: 1.0.0
 author: borghei
 category: executive-leadership
@@ -9,145 +14,53 @@ tags: [finance, fundraising, accounting, reporting, treasury]
 
 # CFO Advisor
 
-Financial leadership advisory for Chief Financial Officers.
+The agent acts as a fractional CFO, providing financial strategy and operational finance guidance grounded in SaaS benchmarks, GAAP standards, and investor expectations.
 
-## Core Competencies
+## Workflow
 
-- Financial planning and analysis (FP&A)
-- Fundraising and capital markets
-- Investor and board reporting
-- Unit economics and metrics
-- Cash flow management
-- Accounting and compliance
-- Tax strategy
-- Risk management
+1. **Establish financial baseline** -- Collect current ARR, burn rate, cash balance, and headcount. Calculate runway in months. Validate that the data is recent (within 30 days).
+2. **Build unit economics** -- Calculate CAC, LTV, CAC Payback, LTV:CAC ratio, NRR, and Burn Multiple using the formulas below. Flag any metric outside benchmark ranges.
+3. **Construct financial model** -- Build a 3-year model following the Revenue Build and Expense Build structures. Document all key assumptions explicitly.
+4. **Design investor reporting** -- Configure the Monthly Metrics Package template. Set up the Board Financial Presentation slide structure for quarterly use.
+5. **Set up cash management** -- Build the 13-week cash flow forecast. Establish the monthly rolling forecast. Verify minimum 6-month runway is maintained.
+6. **Establish close cadence** -- Implement the Month-End Timeline (Day 1-12). Assign owners to each quality checklist item.
+7. **Assess risk posture** -- Review market, credit, and operational risk categories. Confirm insurance coverage is adequate for company stage.
 
-## Financial Planning Framework
+## SaaS Unit Economics
 
-### Annual Planning Process
-
-**Timeline:**
-- Month 1: Strategic priorities from CEO/Board
-- Month 2: Departmental bottoms-up planning
-- Month 3: Consolidation and iteration
-- Month 4: Board approval and communication
-
-**Plan Components:**
-1. Revenue model and assumptions
-2. Headcount plan by department
-3. Operating expense budget
-4. Capital expenditure plan
-5. Cash flow projections
-6. Key metrics and targets
-
-### Budget Categories
-
-**Revenue:**
-- New business (by segment)
-- Expansion revenue
-- Renewals
-- Professional services
-- Other revenue
-
-**Cost of Revenue:**
-- Hosting/infrastructure
-- Customer support
-- Professional services delivery
-- Payment processing
-
-**Operating Expenses:**
-- Sales and Marketing
-- Research and Development
-- General and Administrative
-
-## Unit Economics
-
-### SaaS Metrics Framework
-
-**Customer Acquisition:**
 ```
 CAC = (Sales + Marketing Spend) / New Customers
-CAC Payback = CAC / (ARPU × Gross Margin)
-```
+CAC Payback = CAC / (ARPU x Gross Margin)
 
-**Customer Value:**
-```
-LTV = ARPU × Gross Margin × Customer Lifetime
-LTV:CAC Ratio = LTV / CAC (Target: > 3:1)
-```
+LTV = ARPU x Gross Margin x Customer Lifetime
+LTV:CAC Ratio = LTV / CAC                        Target: > 3:1
 
-**Retention:**
-```
 Logo Retention = (Customers End - New) / Customers Start
 Net Revenue Retention = (MRR End - Churn + Expansion) / MRR Start
 ```
 
-### Burn Multiple
+## Burn Multiple
 
 ```
 Burn Multiple = Net Burn / Net New ARR
 
-Benchmarks:
-- < 1.0x: Excellent efficiency
-- 1.0-1.5x: Good efficiency
-- 1.5-2.0x: Average
-- > 2.0x: Needs improvement
+< 1.0x   Excellent efficiency
+1.0-1.5x Good efficiency
+1.5-2.0x Average
+> 2.0x   Needs improvement
 ```
 
-### Rule of 40
+## Rule of 40
 
 ```
 Rule of 40 = Revenue Growth % + Profit Margin %
 
-Benchmarks:
-- > 40%: Strong performance
-- 20-40%: Acceptable
-- < 20%: Needs attention
+> 40%   Strong performance
+20-40%  Acceptable
+< 20%   Needs attention
 ```
 
-## Fundraising Finance
-
-### Due Diligence Preparation
-
-**Financial Data Room:**
-- [ ] 3 years historical financials
-- [ ] Monthly P&L by segment
-- [ ] Balance sheet and cash flow
-- [ ] ARR/MRR cohort analysis
-- [ ] Customer unit economics
-- [ ] Revenue recognition policy
-- [ ] Accounts receivable aging
-- [ ] Accounts payable summary
-
-**Projections:**
-- [ ] 3-5 year financial model
-- [ ] Key assumptions documented
-- [ ] Sensitivity analysis
-- [ ] Use of funds breakdown
-- [ ] Path to profitability
-
-### Financial Model Structure
-
-**Revenue Build:**
-1. Starting ARR/customers
-2. New logo assumptions
-3. Expansion rate
-4. Churn rate
-5. Pricing changes
-6. Segment mix
-
-**Expense Build:**
-1. Headcount plan
-2. Comp and benefits
-3. Contractors
-4. Software/tools
-5. Facilities
-6. Marketing programs
-7. Travel and events
-
-## Investor Reporting
-
-### Monthly Metrics Package
+## Monthly Metrics Package
 
 ```
 FINANCIAL HIGHLIGHTS
@@ -169,9 +82,8 @@ EFFICIENCY METRICS
 - Burn Multiple: X.Xx
 ```
 
-### Board Financial Presentation
+## Board Financial Presentation
 
-**Slide Structure:**
 1. Financial summary (1 slide)
 2. Revenue performance (1-2 slides)
 3. Expense breakdown (1 slide)
@@ -179,35 +91,64 @@ EFFICIENCY METRICS
 5. Key metrics trends (1 slide)
 6. Forecast outlook (1 slide)
 
+## Revenue Build (Financial Model)
+
+1. Starting ARR / customers
+2. New logo assumptions (by segment)
+3. Expansion rate
+4. Churn rate
+5. Pricing changes
+6. Segment mix
+
+## Expense Build (Financial Model)
+
+1. Headcount plan (by department)
+2. Comp and benefits
+3. Contractors
+4. Software / tools
+5. Facilities
+6. Marketing programs
+7. Travel and events
+
+## Budget Categories
+
+| Category | Line Items |
+|----------|-----------|
+| Revenue | New business (by segment), expansion, renewals, professional services |
+| Cost of Revenue | Hosting/infrastructure, support, PS delivery, payment processing |
+| OpEx | Sales & Marketing, R&D, G&A |
+
+## Month-End Close Timeline
+
+| Days | Activity |
+|------|----------|
+| 1-3 | Transaction cutoff |
+| 3-5 | Reconciliations |
+| 5-7 | Accruals and adjustments |
+| 7-10 | Management review |
+| 10-12 | Final close |
+
+**Quality Checklist**: Bank reconciliation, revenue recognition, expense accruals, prepaid amortization, deferred revenue, intercompany elimination, flux analysis.
+
+## Revenue Recognition (ASC 606)
+
+1. Identify the contract
+2. Identify performance obligations
+3. Determine transaction price
+4. Allocate price to obligations
+5. Recognize revenue when satisfied
+
+**SaaS considerations**: Subscription vs usage revenue, implementation services, professional services, multi-year contracts, discounts and credits.
+
 ## Cash Management
 
-### Cash Flow Forecasting
+**13-Week Cash Flow**: Week-by-week projections of all known inflows/outflows. Review weekly. Maintain minimum cash buffer.
 
-**13-Week Cash Flow:**
-- Week-by-week projections
-- All known inflows/outflows
-- Timing of large payments
-- Minimum cash buffer
-- Review weekly
+**Monthly Rolling Forecast**: 12-month forward view covering revenue collection timing, payroll, vendor payments, debt service, and CapEx.
 
-**Monthly Rolling Forecast:**
-- 12-month forward view
-- Revenue collection timing
-- Payroll and benefits
-- Vendor payments
-- Debt service
-- Capital expenditures
+**Treasury Principles**: Maintain 6+ months runway, preserve capital, optimize yield on idle cash, follow investment policy.
 
-### Treasury Principles
-
-1. **Liquidity**: Maintain minimum 6 months runway
-2. **Safety**: Preserve capital, minimize risk
-3. **Yield**: Optimize returns on idle cash
-4. **Compliance**: Follow investment policy
-
-### Cash Preservation Levers
-
-When extending runway:
+**Cash Preservation Levers** (when extending runway):
 1. Hiring freeze
 2. Vendor renegotiation
 3. Discretionary spend cuts
@@ -215,108 +156,58 @@ When extending runway:
 5. Revenue acceleration
 6. Bridge financing
 
-## Accounting Operations
+## Due Diligence Data Room Checklist
 
-### Close Process
+**Financial data**:
+- [ ] 3 years historical financials
+- [ ] Monthly P&L by segment
+- [ ] Balance sheet and cash flow
+- [ ] ARR/MRR cohort analysis
+- [ ] Customer unit economics
+- [ ] Revenue recognition policy
+- [ ] AR aging
+- [ ] AP summary
 
-**Month-End Timeline:**
-- Day 1-3: Transaction cutoff
-- Day 3-5: Reconciliations
-- Day 5-7: Accruals and adjustments
-- Day 7-10: Management review
-- Day 10-12: Final close
+**Projections**:
+- [ ] 3-5 year financial model
+- [ ] Key assumptions documented
+- [ ] Sensitivity analysis
+- [ ] Use of funds breakdown
+- [ ] Path to profitability
 
-**Quality Checklist:**
-- [ ] Bank reconciliation
-- [ ] Revenue recognition
-- [ ] Expense accruals
-- [ ] Prepaid amortization
-- [ ] Deferred revenue
-- [ ] Intercompany elimination
-- [ ] Flux analysis
+## Financial Risk Categories
 
-### Revenue Recognition (ASC 606)
+| Risk Type | Key Concerns |
+|-----------|-------------|
+| Market | Interest rate exposure, FX exposure, customer concentration |
+| Credit | Customer creditworthiness, AR aging, bad debt reserves |
+| Operational | Internal controls, fraud prevention, systems reliability |
 
-**Five-Step Model:**
-1. Identify the contract
-2. Identify performance obligations
-3. Determine transaction price
-4. Allocate price to obligations
-5. Recognize revenue when satisfied
+## Example: Series-A SaaS Financial Snapshot
 
-**Common SaaS Considerations:**
-- Subscription vs usage
-- Implementation services
-- Professional services
-- Multi-year contracts
-- Discounts and credits
+A Series-A company ($3M ARR, 35 employees, $12M raised) preparing for Series B:
 
-## Risk Management
+```
+Unit Economics:
+  CAC: $22K  |  LTV: $88K  |  LTV:CAC: 4.0x  |  CAC Payback: 16 months
+  NRR: 115%  |  Logo Retention: 90%  |  Gross Margin: 78%
 
-### Financial Risk Categories
+Burn:
+  Monthly burn: $350K  |  Net new ARR/month: $180K
+  Burn Multiple: 1.9x (average -- needs improvement for Series B)
+  Cash: $5.2M  |  Runway: 15 months
 
-**Market Risk:**
-- Interest rate exposure
-- Foreign exchange exposure
-- Customer concentration
+Rule of 40:
+  Revenue growth: 95% YoY  |  Profit margin: -40%
+  Score: 55% (strong)
 
-**Credit Risk:**
-- Customer creditworthiness
-- AR aging management
-- Bad debt reserves
+Board recommendation: Raise in 6 months at current trajectory.
+  Target metrics for raise: Burn Multiple < 1.5x, NRR > 120%.
+```
 
-**Operational Risk:**
-- Internal controls
-- Fraud prevention
-- Systems reliability
+## Essential Insurance Policies
 
-### Insurance Coverage
-
-Essential policies:
-- Directors & Officers (D&O)
-- Errors & Omissions (E&O)
-- Cyber liability
-- General liability
-- Workers compensation
-- Key person insurance
-
-## Common Scenarios
-
-### Scenario: Runway Concerns
-
-When cash runway drops below 12 months:
-1. Model scenarios (growth vs conservation)
-2. Identify quick wins on spend
-3. Accelerate collections efforts
-4. Explore bridge financing
-5. Communicate to board proactively
-
-### Scenario: Audit Preparation
-
-First audit checklist:
-1. Select auditor (Big 4 or regional)
-2. Prepare accounting policies
-3. Document internal controls
-4. Gather supporting documentation
-5. Schedule interim fieldwork
-6. Management representation letter
-
-### Scenario: M&A Financial Diligence
-
-Acquirer requests:
-- Quality of earnings analysis
-- Working capital normalization
-- Customer cohort data
-- Expense categorization
-- Liability identification
-- Tax exposure assessment
-
-## Reference Materials
-
-- `references/financial_modeling.md` - Model building guide
-- `references/saas_metrics.md` - SaaS metrics deep dive
-- `references/accounting_policies.md` - Policy documentation
-- `references/audit_prep.md` - Audit readiness guide
+D&O, E&O, Cyber liability, General liability, Workers compensation, Key person insurance.
 
 ## Scripts
 
@@ -333,3 +224,10 @@ python scripts/fin_model.py --template saas --output model.xlsx
 # Investor metrics dashboard
 python scripts/investor_metrics.py --period monthly
 ```
+
+## References
+
+- `references/financial_modeling.md` -- Model building guide
+- `references/saas_metrics.md` -- SaaS metrics deep dive
+- `references/accounting_policies.md` -- Policy documentation
+- `references/audit_prep.md` -- Audit readiness guide

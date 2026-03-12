@@ -1,6 +1,8 @@
 ---
 name: product-designer
-description: Expert product design covering UI/UX design, design systems, prototyping, user research, and design thinking.
+description: >
+  Expert product design covering UI/UX design, design systems, prototyping, user research, and design thinking.
+  Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles for a product.
 version: 1.0.0
 author: borghei
 category: product-design
@@ -9,401 +11,166 @@ tags: [design, ux, ui, figma, prototyping, design-systems]
 
 # Product Designer
 
-Expert-level product design for digital products.
+The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing.
 
-## Core Competencies
+## Workflow
 
-- User experience design
-- User interface design
-- Design systems
-- Prototyping
-- User research
-- Interaction design
-- Visual design
-- Design thinking
+1. **Discover** - Research user needs through interviews, analytics, and competitive analysis. Create user journey maps and identify pain points. Checkpoint: problem statement is validated by at least 3 user data points.
+2. **Define** - Synthesize findings into a clear problem statement and design requirements. Build information architecture (card sorting, site maps). Checkpoint: IA has been validated via card sort or tree test.
+3. **Develop** - Ideate solutions through sketching and wireframing. Build prototypes at appropriate fidelity. Checkpoint: prototype covers the complete happy path plus one error state.
+4. **Test** - Run usability tests with 5-8 participants. Measure task completion rate, time on task, error rate, and SUS score. Checkpoint: all critical usability issues are documented with severity ratings.
+5. **Deliver** - Refine designs based on test findings. Prepare dev handoff with design tokens, component specs, and interaction documentation. Checkpoint: engineering has confirmed feasibility of all interactions.
 
-## Design Process
-
-### Double Diamond
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      DISCOVER                                │
-│    Diverge: Research, explore, understand the problem        │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                       DEFINE                                 │
-│    Converge: Synthesize, insights, problem statement         │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                      DEVELOP                                 │
-│    Diverge: Ideate, prototype, test solutions                │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────▼──────────────────────────────────┐
-│                      DELIVER                                 │
-│    Converge: Refine, build, launch                          │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Design Sprint (5 Days)
+## Design Sprint (5-Day Format)
 
 | Day | Activity | Output |
 |-----|----------|--------|
-| Monday | Map & Target | Challenge map, interview experts |
-| Tuesday | Sketch | Solution sketches, crazy 8s |
-| Wednesday | Decide | Storyboard, testable hypothesis |
-| Thursday | Prototype | Realistic prototype |
-| Friday | Test | User feedback, learnings |
+| Monday | Map problem, interview experts | Challenge map, target area |
+| Tuesday | Sketch solutions, Crazy 8s | Solution sketches |
+| Wednesday | Decide, storyboard | Testable hypothesis |
+| Thursday | Build prototype | Realistic clickable prototype |
+| Friday | Test with 5 users | Validated/invalidated hypothesis |
 
-## UX Design
-
-### User Journey Mapping
+## User Journey Map Template
 
 ```
-PERSONA: [Name, role, goals]
+PERSONA: Sarah, Product Manager, goal: find analytics insights fast
 
-JOURNEY: [Process being mapped]
-
-┌─────────┬────────────┬────────────┬────────────┬────────────┐
-│ STAGE   │ AWARENESS  │ CONSIDER   │ PURCHASE   │ RETENTION  │
-├─────────┼────────────┼────────────┼────────────┼────────────┤
-│ Actions │ Searches   │ Compares   │ Checks out │ Uses       │
-│         │ for        │ options    │ Pays       │ regularly  │
-│         │ solution   │            │            │            │
-├─────────┼────────────┼────────────┼────────────┼────────────┤
-│ Touch-  │ Google     │ Website    │ Checkout   │ App        │
-│ points  │ Social     │ Reviews    │ Email      │ Support    │
-├─────────┼────────────┼────────────┼────────────┼────────────┤
-│ Emotions│ 😟 Confused │ 🤔 Curious  │ 😰 Anxious  │ 😊 Happy    │
-├─────────┼────────────┼────────────┼────────────┼────────────┤
-│ Pain    │ Too many   │ Hard to    │ Complex    │ Missing    │
-│ Points  │ options    │ compare    │ forms      │ features   │
-├─────────┼────────────┼────────────┼────────────┼────────────┤
-│ Opport- │ SEO        │ Comparison │ Streamline │ Onboard    │
-│ unities │ content    │ tools      │ checkout   │ tutorials  │
-└─────────┴────────────┴────────────┴────────────┴────────────┘
+STAGE:      AWARENESS    CONSIDER     PURCHASE     ONBOARD      RETAIN
+Actions:    Searches     Compares     Signs up     Configures   Uses daily
+Touchpoint: Google       Website      Checkout     Setup wizard App
+Emotion:    Frustrated   Curious      Anxious      Hopeful      Satisfied
+Pain point: Too many     Hard to      Complex      Slow setup   Missing
+            options      compare      pricing                   features
+Opportunity: SEO content  Comparison   Simplify     Quick-start  Feature
+                         tool         flow         template     education
 ```
 
-### Information Architecture
+## Information Architecture
 
-**Card Sorting:**
-```
-Open Sort: Users create categories
-Closed Sort: Users place items in predefined categories
-Hybrid: Combination of both
+**Card Sorting Methods:**
+- Open sort: users create their own categories
+- Closed sort: users place items into predefined categories
+- Hybrid: combination approach
 
-Analysis:
-- Similarity matrix
-- Dendrograms
-- Category labels
-```
-
-**Site Map:**
+**Example Site Map:**
 ```
 Home
-├── Products
-│   ├── Category A
-│   │   ├── Product 1
-│   │   └── Product 2
-│   └── Category B
-├── About
-│   ├── Team
-│   └── Careers
-├── Resources
-│   ├── Blog
-│   └── Help Center
-└── Account
-    ├── Profile
-    └── Settings
++-- Products
+|   +-- Category A
+|   |   +-- Product 1
+|   |   +-- Product 2
+|   +-- Category B
++-- About
+|   +-- Team
+|   +-- Careers
++-- Resources
+|   +-- Blog
+|   +-- Help Center
++-- Account
+    +-- Profile
+    +-- Settings
 ```
 
-### Wireframing
-
-**Low-Fidelity:**
-```
-┌─────────────────────────────────────┐
-│  [Logo]          [Nav] [Nav] [Nav]  │
-├─────────────────────────────────────┤
-│                                     │
-│  ┌─────────────────────────────┐   │
-│  │                             │   │
-│  │       Hero Image            │   │
-│  │                             │   │
-│  └─────────────────────────────┘   │
-│                                     │
-│  [Headline Text Here]               │
-│  [Supporting text goes here]        │
-│                                     │
-│  ┌───────┐ ┌───────┐ ┌───────┐     │
-│  │ Card  │ │ Card  │ │ Card  │     │
-│  │       │ │       │ │       │     │
-│  └───────┘ └───────┘ └───────┘     │
-│                                     │
-└─────────────────────────────────────┘
-```
-
-## UI Design
+## UI Design Foundations
 
 ### Design Principles
 
-**1. Hierarchy**
-- Visual weight guides attention
-- Size, color, contrast indicate importance
-- Group related elements
+1. **Hierarchy** - Visual weight guides attention via size, color, and contrast
+2. **Consistency** - Reuse patterns and components; maintain predictable interactions
+3. **Feedback** - Acknowledge every user action; show system status and loading states
+4. **Accessibility** - 4.5:1 color contrast minimum, focus indicators, screen reader support
 
-**2. Consistency**
-- Reuse patterns and components
-- Maintain visual rhythm
-- Predictable interactions
-
-**3. Feedback**
-- Acknowledge user actions
-- Show system status
-- Indicate loading states
-
-**4. Accessibility**
-- Color contrast (4.5:1 minimum)
-- Focus indicators
-- Screen reader support
-
-### Color System
+### Design Token System
 
 ```css
-/* Primary Colors */
---color-primary-50: #eff6ff;
---color-primary-100: #dbeafe;
+/* Color tokens */
 --color-primary-500: #3b82f6;
 --color-primary-600: #2563eb;
---color-primary-700: #1d4ed8;
-
-/* Neutral Colors */
 --color-gray-50: #f9fafb;
---color-gray-100: #f3f4f6;
---color-gray-500: #6b7280;
 --color-gray-900: #111827;
-
-/* Semantic Colors */
 --color-success: #10b981;
 --color-warning: #f59e0b;
 --color-error: #ef4444;
---color-info: #3b82f6;
-```
 
-### Typography Scale
-
-```css
-/* Font Sizes */
---text-xs: 0.75rem;    /* 12px */
+/* Typography scale */
 --text-sm: 0.875rem;   /* 14px */
 --text-base: 1rem;     /* 16px */
 --text-lg: 1.125rem;   /* 18px */
 --text-xl: 1.25rem;    /* 20px */
 --text-2xl: 1.5rem;    /* 24px */
---text-3xl: 1.875rem;  /* 30px */
---text-4xl: 2.25rem;   /* 36px */
 
-/* Line Heights */
---leading-tight: 1.25;
---leading-normal: 1.5;
---leading-relaxed: 1.75;
+/* Spacing (4px base unit) */
+--space-1: 0.25rem;    /* 4px */
+--space-2: 0.5rem;     /* 8px */
+--space-4: 1rem;       /* 16px */
+--space-6: 1.5rem;     /* 24px */
+--space-8: 2rem;       /* 32px */
 ```
 
-### Spacing System
-
-```css
-/* 4px base unit */
---space-1: 0.25rem;   /* 4px */
---space-2: 0.5rem;    /* 8px */
---space-3: 0.75rem;   /* 12px */
---space-4: 1rem;      /* 16px */
---space-5: 1.25rem;   /* 20px */
---space-6: 1.5rem;    /* 24px */
---space-8: 2rem;      /* 32px */
---space-10: 2.5rem;   /* 40px */
---space-12: 3rem;     /* 48px */
---space-16: 4rem;     /* 64px */
-```
-
-## Design Systems
-
-### Component Structure
+## Component Structure
 
 ```
 Button/
-├── Variants
-│   ├── Primary
-│   ├── Secondary
-│   ├── Tertiary
-│   └── Destructive
-├── Sizes
-│   ├── Small
-│   ├── Medium
-│   └── Large
-├── States
-│   ├── Default
-│   ├── Hover
-│   ├── Active
-│   ├── Focus
-│   ├── Disabled
-│   └── Loading
-└── Anatomy
-    ├── Label
-    ├── Icon (optional)
-    └── Container
++-- Variants: Primary, Secondary, Tertiary, Destructive
++-- Sizes: Small (32px), Medium (40px), Large (48px)
++-- States: Default, Hover, Active, Focus, Disabled, Loading
++-- Anatomy: [Leading Icon] Label [Trailing Icon]
 ```
 
-### Component Documentation
-
-```markdown
-# Button
-
-Buttons trigger actions or navigation.
-
-## Usage
-- Use primary buttons for main actions
-- Use secondary for supporting actions
-- Use tertiary for low-emphasis actions
-- Use destructive for irreversible actions
-
-## Do's
-- Use clear, action-oriented labels
-- Keep labels concise (1-3 words)
-- Use icons to reinforce meaning
-
-## Don'ts
-- Don't use multiple primary buttons
-- Don't use vague labels like "Click here"
-- Don't disable without explanation
-
-## Accessibility
-- Minimum touch target: 44x44px
-- Include focus state
-- Use aria-label for icon-only buttons
-```
-
-### Design Tokens
+### Component Design Tokens (JSON)
 
 ```json
 {
   "color": {
-    "primary": {
-      "50": {"value": "#eff6ff"},
-      "500": {"value": "#3b82f6"},
-      "600": {"value": "#2563eb"}
-    },
-    "semantic": {
-      "success": {"value": "{color.green.500}"},
-      "error": {"value": "{color.red.500}"}
-    }
+    "primary": {"50": {"value": "#eff6ff"}, "500": {"value": "#3b82f6"}},
+    "semantic": {"success": {"value": "{color.green.500}"}, "error": {"value": "{color.red.500}"}}
   },
-  "spacing": {
-    "xs": {"value": "4px"},
-    "sm": {"value": "8px"},
-    "md": {"value": "16px"},
-    "lg": {"value": "24px"}
-  },
-  "borderRadius": {
-    "sm": {"value": "4px"},
-    "md": {"value": "8px"},
-    "lg": {"value": "12px"},
-    "full": {"value": "9999px"}
-  }
+  "spacing": {"xs": {"value": "4px"}, "sm": {"value": "8px"}, "md": {"value": "16px"}},
+  "borderRadius": {"sm": {"value": "4px"}, "md": {"value": "8px"}, "full": {"value": "9999px"}}
 }
 ```
 
-## Prototyping
-
-### Prototype Fidelity
-
-| Fidelity | Purpose | Tools | Time |
-|----------|---------|-------|------|
-| Paper | Quick exploration | Paper, pen | Minutes |
-| Low-Fi | Flow validation | Figma, Sketch | Hours |
-| Mid-Fi | Usability testing | Figma | Days |
-| High-Fi | Dev handoff, final testing | Figma | Days-Weeks |
-
-### Interaction Patterns
-
-**Navigation:**
-- Tabs
-- Drawers
-- Breadcrumbs
-- Bottom navigation
-
-**Data Entry:**
-- Form fields
-- Dropdowns
-- Date pickers
-- File uploads
-
-**Feedback:**
-- Toasts
-- Modals
-- Inline validation
-- Progress indicators
-
-## Usability Testing
-
-### Test Plan
+## Example: Usability Test Plan
 
 ```markdown
-# Usability Test Plan
+# Usability Test: New Checkout Flow
 
 ## Objectives
-- Validate new checkout flow
-- Identify usability issues
+- Validate that users can complete purchase in < 3 minutes
+- Identify friction points in address and payment steps
 
 ## Participants
-- 5-8 users
-- Mix of new and existing users
+- 6 users (3 new, 3 returning)
+- Mix of desktop and mobile
 
 ## Tasks
-1. Find and add product to cart
-2. Complete checkout process
-3. Modify order
+1. "Find a laptop under $1,000 and add it to your cart" (browse + add)
+2. "Complete the purchase using a credit card" (checkout flow)
+3. "Change the shipping address on your order" (post-purchase edit)
+
+## Success Criteria
+| Task | Completion Target | Time Target |
+|------|-------------------|-------------|
+| Browse + Add | 100% | < 60s |
+| Checkout | 90%+ | < 180s |
+| Edit address | 80%+ | < 90s |
 
 ## Metrics
 - Task completion rate
 - Time on task
-- Error rate
-- SUS score
-
-## Materials
-- Prototype link
-- Task script
-- Recording consent
-- Compensation
+- Error count per task
+- System Usability Scale (SUS) score (target: 68+)
 ```
 
-### Task Script
+## Prototype Fidelity Guide
 
-```markdown
-Task 1: Find a product
-
-"Imagine you're looking for a new laptop.
-Please find a laptop that meets your needs and add it to your cart.
-Think aloud as you go."
-
-Success Criteria:
-- [ ] Navigated to products
-- [ ] Used filters/search
-- [ ] Added to cart
-
-Observations:
-- [Notes]
-
-Time: [Duration]
-```
-
-## Reference Materials
-
-- `references/design_principles.md` - Core design principles
-- `references/component_library.md` - Component guidelines
-- `references/accessibility.md` - Accessibility checklist
-- `references/research_methods.md` - Research techniques
+| Fidelity | Purpose | Tools | Timeline |
+|----------|---------|-------|----------|
+| Paper | Quick exploration | Paper, pen | Minutes |
+| Low-fi | Flow validation | Figma, Sketch | Hours |
+| Mid-fi | Usability testing | Figma | Days |
+| High-fi | Dev handoff, final testing | Figma | Days-Weeks |
 
 ## Scripts
 
@@ -420,3 +187,10 @@ python scripts/asset_export.py --figma-file FILE_ID --format svg,png
 # Design QA report
 python scripts/design_qa.py --spec spec.figma --impl https://staging.example.com
 ```
+
+## Reference Materials
+
+- `references/design_principles.md` - Core design principles
+- `references/component_library.md` - Component guidelines
+- `references/accessibility.md` - Accessibility checklist
+- `references/research_methods.md` - Research techniques

@@ -1,6 +1,10 @@
 ---
 name: sales-engineer
-description: Expert sales engineering covering technical demos, solution design, RFP responses, POC management, and technical objection handling.
+description: >
+  Expert sales engineering covering technical demos, solution design, RFP responses,
+  POC management, and technical objection handling. Use when preparing product demos,
+  responding to RFPs/RFIs, scoping proof-of-concept projects, building competitive
+  battle cards, or handling technical objections during sales cycles.
 version: 1.0.0
 author: borghei
 category: sales-success
@@ -9,42 +13,19 @@ tags: [sales, technical, demos, rfp, poc, solutions]
 
 # Sales Engineer
 
-Expert-level technical sales support.
+The agent operates as an expert sales engineer, delivering technical discovery, tailored demonstrations, RFP responses, proof-of-concept management, competitive positioning, and technical objection resolution throughout the sales cycle.
 
-## Core Competencies
+## Workflow
 
-- Technical demonstrations
-- Solution architecture
-- RFP/RFI responses
-- POC management
-- Technical objection handling
-- Competitive positioning
-- Customer requirements analysis
-- Cross-functional collaboration
+1. **Conduct technical discovery** -- Map the prospect's environment, requirements, and success criteria using the discovery template. Validate: all must-have requirements documented, tech stack identified, and timeline confirmed.
+2. **Prepare the demo** -- Build a demo plan tailored to attendees' roles and priorities. Select use cases that address the prospect's top pain points. Configure the demo environment with relevant data. Validate: demo plan reviewed with the account executive and aligned to discovery findings.
+3. **Deliver the demo** -- Follow the CONNECT-CONTEXT-SHOW-SUMMARIZE-CLOSE structure. Lead with the highest-impact use case. Involve the audience. Validate: positive audience engagement and clear next steps agreed.
+4. **Manage the POC** -- Define scope, success criteria, and timeline. Run weekly check-ins and track technical/business/relationship success metrics. Validate: all success criteria measured and documented before the evaluation meeting.
+5. **Respond to RFPs** -- Categorize each requirement (Full/Partial/Roadmap/Partner/N/A). Write the executive summary and solution overview. Validate: 100% of requirements addressed with accurate response categories.
+6. **Handle objections** -- Apply the LAER framework (Listen, Acknowledge, Explore, Respond) for technical concerns. Provide evidence and alternatives. Validate: objection resolved or escalation path defined.
+7. **Deliver competitive positioning** -- Maintain battle cards with current differentiators, competitor weaknesses, and landmine questions. Validate: battle cards updated quarterly.
 
-## Discovery Process
-
-### Technical Discovery Questions
-
-**Environment:**
-- What systems do you currently use?
-- How are they integrated?
-- What's your tech stack?
-- What security/compliance requirements?
-
-**Requirements:**
-- What problem are you trying to solve?
-- What does success look like?
-- What are your must-haves vs nice-to-haves?
-- What's your timeline?
-
-**Decision Process:**
-- Who else is involved in this decision?
-- What's your evaluation process?
-- What other solutions are you considering?
-- What would make this a no-brainer?
-
-### Discovery Template
+## Technical Discovery Template
 
 ```markdown
 # Technical Discovery: [Company Name]
@@ -55,122 +36,97 @@ Expert-level technical sales support.
 - Tech maturity: [Low/Medium/High]
 
 ## Current State
-- Systems: [List]
-- Pain points: [List]
-- Workflows: [Description]
+- Systems: [List of current tools and platforms]
+- Pain points: [Specific problems with current approach]
+- Workflows: [Key processes affected]
 
 ## Requirements
-
 ### Must Have
-1. [Requirement]
-2. [Requirement]
+1. [Requirement with measurable criteria]
+2. [Requirement with measurable criteria]
 
 ### Nice to Have
 1. [Requirement]
 
 ## Technical Environment
-- Cloud: [AWS/GCP/Azure/On-prem]
-- Languages: [Languages]
-- Integrations needed: [Systems]
+- Cloud: [AWS/GCP/Azure/On-prem/Hybrid]
+- Languages: [Languages and frameworks]
+- Integrations needed: [Systems to connect]
 
 ## Success Criteria
-- [Metric 1]: [Target]
-- [Metric 2]: [Target]
+- [Metric 1]: [Specific target]
+- [Metric 2]: [Specific target]
 
 ## Timeline
 - Decision: [Date]
 - Implementation: [Date]
 - Go-live: [Date]
-
-## Next Steps
-- [ ] [Action item]
 ```
 
-## Demo Excellence
+## Demo Execution
 
-### Demo Preparation
+### Demo Plan Template
 
 ```markdown
 # Demo Plan: [Company Name]
 
 ## Attendees
-| Name | Role | Priorities |
-|------|------|------------|
-| [Name] | [Role] | [What they care about] |
+| Name | Role | Top Priority |
+|------|------|-------------|
+| [Name] | [Role] | [What they care most about] |
 
 ## Agenda (60 min)
 1. Discovery recap (5 min)
 2. Solution overview (10 min)
-3. Use case demo (30 min)
+3. Use case demonstrations (30 min)
 4. Q&A (10 min)
 5. Next steps (5 min)
 
 ## Use Cases to Demo
-1. [Use case]: [Pain point it addresses]
-2. [Use case]: [Pain point it addresses]
-3. [Use case]: [Pain point it addresses]
+1. [Use case] -> addresses [specific pain point from discovery]
+2. [Use case] -> addresses [specific pain point from discovery]
 
-## Competitive Differentiators
-- vs [Competitor]: [Our advantage]
+## Competitive Differentiators to Highlight
+- vs [Competitor]: [Our specific advantage]
 
-## Potential Objections
-| Objection | Response |
-|-----------|----------|
-| [Objection] | [Response] |
+## Anticipated Objections
+| Objection | Prepared Response |
+|-----------|------------------|
+| [Objection] | [Response with evidence] |
 
 ## Demo Environment
 - Instance: [URL]
-- Data: [Test data to use]
-- Features to show: [List]
+- Test data: [Description of realistic data loaded]
+- Features to show: [Prioritized list]
 
-## Success =
-[What does a successful demo look like?]
+## Success Criteria
+- [What makes this demo successful -- e.g., "Champion confirms technical fit"]
 ```
 
 ### Demo Structure
 
 ```
 1. CONNECT (5 min)
-   - Recap discovery
-   - Confirm priorities
-   - Set agenda
+   Recap discovery findings. Confirm priorities have not changed. Set agenda.
 
 2. CONTEXT (5 min)
-   - "Based on what you shared..."
-   - Frame the solution
+   "Based on what you shared about [pain point], here's how we approach this..."
+   Frame the solution in their language.
 
 3. SHOW (30 min)
-   - Start with the "wow"
-   - Tell a story, don't feature dump
-   - Match to their use cases
-   - Involve the audience
+   Lead with the highest-impact use case ("wow" moment first).
+   Tell their story, don't feature-dump.
+   Map every feature shown to a specific pain point or requirement.
+   Pause for questions and involve the audience.
 
 4. SUMMARIZE (5 min)
-   - Recap value
-   - Address concerns
-   - Trial/POC discussion
+   Recap value demonstrated. Address any open concerns.
+   Transition to trial or POC discussion.
 
 5. CLOSE (5 min)
-   - Clear next steps
-   - Timeline alignment
-   - Owner assignment
+   Define next steps with owners and dates.
+   Confirm timeline alignment with their evaluation process.
 ```
-
-### Demo Best Practices
-
-**Do:**
-- Start with their problem
-- Use their terminology
-- Show the "aha" moment early
-- Involve the audience
-- Handle questions gracefully
-
-**Don't:**
-- Feature dump
-- Rush through
-- Ignore questions
-- Over-promise
-- Bad-mouth competitors
 
 ## POC Management
 
@@ -180,21 +136,20 @@ Expert-level technical sales support.
 # POC Plan: [Company Name]
 
 ## Objectives
-- Primary: [Objective]
-- Secondary: [Objective]
+- Primary: [Objective with measurable outcome]
+- Secondary: [Objective with measurable outcome]
 
 ## Success Criteria
-| Criteria | Target | Measurement |
-|----------|--------|-------------|
-| [Criteria] | [Target] | [How to measure] |
+| Criteria | Target | How to Measure |
+|----------|--------|----------------|
+| [Criteria] | [Target] | [Method] |
 
 ## Scope
 ### In Scope
 - [Item]
-- [Item]
 
 ### Out of Scope
-- [Item]
+- [Item] -- rationale: [why excluded]
 
 ## Timeline
 | Phase | Duration | Dates |
@@ -202,15 +157,6 @@ Expert-level technical sales support.
 | Setup | 1 week | [Dates] |
 | Testing | 2 weeks | [Dates] |
 | Evaluation | 1 week | [Dates] |
-
-## Resources
-- Customer: [Names/roles]
-- Our team: [Names/roles]
-
-## Technical Setup
-- Environment: [Details]
-- Data: [What data to use]
-- Integrations: [What to connect]
 
 ## Check-in Schedule
 - Kickoff: [Date]
@@ -220,123 +166,62 @@ Expert-level technical sales support.
 ## Risks
 | Risk | Mitigation |
 |------|------------|
-| [Risk] | [Plan] |
+| [Risk] | [Specific mitigation plan] |
 ```
 
-### POC Success Metrics
+### POC Success Dimensions
 
-```
-TECHNICAL SUCCESS
-- Feature requirements met: X/Y
-- Performance benchmarks: Pass/Fail
-- Integration completed: Yes/No
-
-BUSINESS SUCCESS
-- Time savings demonstrated: X%
-- Ease of use rating: X/5
-- Stakeholder approval: Yes/No
-
-RELATIONSHIP SUCCESS
-- Engagement level: High/Medium/Low
-- Champion identified: Yes/No
-- Decision maker engaged: Yes/No
-```
+- **Technical:** Feature requirements met (X/Y), performance benchmarks passed, integrations functional.
+- **Business:** Time savings demonstrated (X%), ease-of-use rating (X/5), stakeholder approval obtained.
+- **Relationship:** Engagement level, champion confirmed, decision maker engaged in review.
 
 ## RFP Response
 
-### RFP Response Template
-
-```markdown
-# RFP Response: [Company Name]
-
-## Executive Summary
-[2-3 paragraphs summarizing fit]
-
-## Company Overview
-[About your company]
-
-## Solution Overview
-[How you address their needs]
-
-## Requirements Response
-
-| ID | Requirement | Response | Notes |
-|----|-------------|----------|-------|
-| R1 | [Req] | Full/Partial/Roadmap | [Details] |
-| R2 | [Req] | Full/Partial/Roadmap | [Details] |
-
-## Implementation Approach
-[How you'll implement]
-
-## Support & Services
-[What support you provide]
-
-## Pricing
-[Pricing summary]
-
-## References
-[Customer references]
-
-## Appendix
-[Additional materials]
-```
-
 ### Response Categories
 
-```
-FULL: We fully meet this requirement today
-PARTIAL: We partially meet this, with [explanation]
-ROADMAP: This is on our roadmap for [timeframe]
-PARTNER: We address this via [partner]
-N/A: Not applicable to our solution
-```
+| Category | Meaning |
+|----------|---------|
+| Full | Fully meets this requirement today |
+| Partial | Partially meets, with explanation of gap |
+| Roadmap | Planned for [specific timeframe] |
+| Partner | Addressed via [named partner integration] |
+| N/A | Not applicable to the solution |
 
-## Objection Handling
+### Example: RFP Requirements Response
 
-### Common Objections
+| ID | Requirement | Response | Detail |
+|----|-------------|----------|--------|
+| R1 | SSO via SAML 2.0 | Full | Native SAML 2.0 support with all major IdPs |
+| R2 | On-premise deployment | Partial | Available as private cloud; bare-metal on roadmap Q3 |
+| R3 | Real-time analytics | Full | Sub-second dashboards with custom metrics |
+| R4 | HIPAA compliance | Roadmap | BAA available Q2 2026 |
 
-| Objection | Response Framework |
+## Objection Handling: LAER Framework
+
+The agent applies LAER for every technical objection:
+
+1. **Listen** -- Let the prospect finish completely. Take notes. Show empathy.
+2. **Acknowledge** -- "I understand that concern. It's important to get [X] right."
+3. **Explore** -- "Can you tell me more about what specifically concerns you?" Uncover the root cause.
+4. **Respond** -- Address the specific concern with evidence (benchmarks, case studies, architecture details). Offer alternatives where needed.
+
+### Common Technical Objections
+
+| Objection | Response Approach |
 |-----------|-------------------|
-| "Too expensive" | Value justification + ROI |
-| "Missing feature X" | Workaround + roadmap |
-| "We use competitor Y" | Differentiation + migration ease |
-| "Security concerns" | Certifications + architecture |
-| "Implementation risk" | Success stories + support |
+| "Too expensive" | Value justification with ROI calculation from their own metrics |
+| "Missing feature X" | Workaround demonstration + roadmap commitment with timeline |
+| "We use Competitor Y" | Differentiation on specific technical capabilities + migration ease |
+| "Security concerns" | Present certifications, architecture documentation, and pen test results |
+| "Implementation risk" | Reference similar customer success stories + support model details |
 
-### LAER Framework
-
-```
-L - Listen
-  - Let them finish
-  - Take notes
-  - Show empathy
-
-A - Acknowledge
-  - "I understand your concern"
-  - Validate the point
-
-E - Explore
-  - "Can you tell me more?"
-  - Understand root cause
-
-R - Respond
-  - Address specifically
-  - Provide evidence
-  - Offer alternatives
-```
-
-## Technical Content
-
-### Competitive Battle Card
+## Competitive Battle Card Template
 
 ```markdown
-# Competitive Battle Card: [Competitor]
+# Battle Card: [Competitor Name]
 
-## Quick Facts
-- Founded: [Year]
-- Employees: [Number]
-- Funding: [Amount]
-- Customers: [Number]
+## Quick Profile
+- Founded: [Year] | Employees: [Number] | Funding: $[Amount]
 
 ## Their Strengths
 - [Strength 1]
@@ -346,29 +231,18 @@ R - Respond
 - [Weakness 1]
 - [Weakness 2]
 
-## Our Differentiators
-| Area | Us | Them |
-|------|-----|------|
+## Head-to-Head Comparison
+| Capability | Us | Them |
+|-----------|-----|------|
 | [Area] | [Our approach] | [Their approach] |
 
-## Common Objections
-| Objection | Response |
-|-----------|----------|
-| "[Objection]" | "[Response]" |
+## Landmine Questions
+- "How does [Competitor] handle [area where they're weak]?"
+- "Ask them to show [capability they lack] in a live demo."
 
-## Landmines to Set
-- "[Question to ask prospect]"
-
-## Reference Customers
-- [Customer] who switched from [Competitor]
+## Win Stories
+- [Customer] switched from [Competitor] because [reason]. Result: [outcome].
 ```
-
-## Reference Materials
-
-- `references/demo_playbook.md` - Demo best practices
-- `references/objections.md` - Objection handling guide
-- `references/competitive.md` - Competitive intelligence
-- `references/rfp_templates.md` - RFP response templates
 
 ## Scripts
 
@@ -385,3 +259,10 @@ python scripts/poc_tracker.py --customer "Customer Name" --status update
 # Competitive comparison
 python scripts/competitive_compare.py --competitor "Competitor Name"
 ```
+
+## Reference Materials
+
+- `references/demo_playbook.md` -- Demo best practices
+- `references/objections.md` -- Objection handling guide
+- `references/competitive.md` -- Competitive intelligence
+- `references/rfp_templates.md` -- RFP response templates

@@ -1,6 +1,11 @@
 ---
 name: talent-acquisition
-description: Expert talent acquisition covering recruiting strategy, candidate sourcing, interview design, employer branding, and hiring analytics.
+description: >
+  Expert talent acquisition covering recruiting strategy, candidate sourcing,
+  interview design, employer branding, and hiring analytics. Use when building
+  job descriptions, designing interview scorecards, analyzing hiring funnels,
+  drafting sourcing outreach, structuring compensation bands, or improving
+  offer acceptance rates.
 version: 1.0.0
 author: borghei
 category: hr-operations
@@ -9,506 +14,194 @@ tags: [recruiting, hiring, sourcing, interviews, employer-brand]
 
 # Talent Acquisition
 
-Expert-level talent acquisition for building high-performing teams.
+The agent operates as a senior talent acquisition partner, applying structured hiring methodology to build high-performing teams efficiently and equitably.
 
-## Core Competencies
+## Workflow
 
-- Recruiting strategy
-- Candidate sourcing
-- Interview design
-- Offer management
-- Employer branding
-- Hiring analytics
-- DEI in hiring
-- Candidate experience
+1. **Define the role** -- Collaborate with the hiring manager to draft a job description using the template below. Confirm level, compensation band, and must-have vs nice-to-have requirements. Validate that the role is approved and budgeted before proceeding.
+2. **Build sourcing strategy** -- Select channels based on the role profile (see Source Channel Matrix). Set weekly outreach targets and pipeline stage goals.
+3. **Screen candidates** -- Apply the structured phone screen framework. Score against must-have criteria. Pass or reject within 48 hours.
+4. **Run interviews** -- Use competency-based scorecards. Every interviewer scores independently before the debrief to prevent anchoring bias.
+5. **Extend offer** -- Follow the offer approval workflow. Present a verbal offer, handle negotiation, and send the written offer within 24 hours of verbal acceptance.
+6. **Close and onboard** -- Confirm start date, initiate background check, and hand off to hiring manager with a 30-60-90 day plan.
 
-## Recruiting Framework
+> Checkpoint: After step 1, validate the job description against DEI inclusive language guidelines before posting.
 
-### Hiring Funnel
+## Hiring Funnel Metrics
 
-```
-SOURCING → SCREENING → INTERVIEWING → OFFER → ONBOARDING
-    │           │            │           │          │
-    ▼           ▼            ▼           ▼          ▼
-Inbound      Resume       Phone        Extend    30-60-90
-Outbound     Review       Technical    Negotiate Day Plan
-Referrals    Phone        Onsite       Accept    Ramp
-Events       Screen       Panel        Start     Mentor
-```
+| Stage | Metric | Benchmark |
+|-------|--------|-----------|
+| Application to Screen | Conversion rate | 40-50% |
+| Screen to Interview | Conversion rate | 30-40% |
+| Interview to Offer | Conversion rate | 15-25% |
+| Offer to Accept | Acceptance rate | 80-90% |
+| End-to-end | Time to fill | 30-45 days |
+| End-to-end | Cost per hire | $3,000-5,000 |
+| Post-hire | Quality of hire (90-day performance + retention) | 80%+ |
 
-### Funnel Metrics
+## Source Channel Matrix
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              RECRUITING FUNNEL - [Month]                         │
-├─────────────────────────────────────────────────────────────────┤
-│  Applications     Screened        Interviewed      Offers        │
-│  250              120             45               8             │
-│  100%             48%             18%              3.2%          │
-├─────────────────────────────────────────────────────────────────┤
-│  CONVERSION RATES                                                │
-│  App→Screen: 48%    Screen→Interview: 38%    Interview→Offer: 18%│
-│  Offer Accept: 75%  Time to Fill: 32 days    Cost/Hire: $4,500  │
-├─────────────────────────────────────────────────────────────────┤
-│  SOURCE BREAKDOWN                                                │
-│  LinkedIn: 40%    Referrals: 25%    Job Boards: 20%    Other: 15%│
-└─────────────────────────────────────────────────────────────────┘
-```
+| Channel | Best For | Cost | Quality | Typical Yield |
+|---------|----------|------|---------|---------------|
+| LinkedIn Recruiter | All roles | $$ | High | 8-12% response |
+| Employee referrals | Culture-fit roles | $ | Highest | 40-60% interview rate |
+| Job boards (Indeed, etc.) | Volume hiring | $$ | Medium | 2-5% qualified |
+| Agencies | Specialized / executive | $$$ | High | 50-70% submit-to-interview |
+| Events / meetups | Early career, niche | $$ | Medium | Relationship-driven |
+| Direct sourcing | Executives, passive | $ | High | 5-10% response |
 
-## Job Design
-
-### Job Description Template
+## Job Description Template
 
 ```markdown
-# [Job Title]
+# [Job Title] - [Level]
 
 ## About [Company]
-[2-3 sentences about company mission and culture]
+[2-3 sentences: mission, stage, team size]
 
 ## The Role
-[2-3 sentences describing the position and its impact]
+[What the person will own and why it matters to the business]
 
-## What You'll Do
-- [Responsibility 1 - action verb + outcome]
-- [Responsibility 2 - action verb + outcome]
-- [Responsibility 3 - action verb + outcome]
-- [Responsibility 4 - action verb + outcome]
-- [Responsibility 5 - action verb + outcome]
+## Responsibilities
+- [Action verb] + [deliverable] + [impact]
+- [Action verb] + [deliverable] + [impact]
+- [Action verb] + [deliverable] + [impact]
 
-## What You'll Bring
-**Must Have:**
-- [X] years of experience in [field]
-- Proficiency in [skill/technology]
-- Experience with [relevant experience]
-- [Other requirement]
+## Requirements
+**Must have:**
+- [X] years in [domain]
+- Demonstrated skill in [specific competency]
 
-**Nice to Have:**
-- Experience with [bonus skill]
-- Background in [related field]
+**Nice to have:**
+- Experience with [tool/framework]
+- Background in [adjacent domain]
 
-## What We Offer
-- Competitive salary: $[Range]
-- Equity participation
-- Health, dental, vision insurance
-- Unlimited PTO
-- Remote-first culture
-- Professional development budget
-- [Other benefits]
+## Compensation
+- Base: $[min]-$[max]
+- Equity: [details]
+- Benefits: [highlights]
 
-## Our Hiring Process
-1. Application review
+## Hiring Process
+1. Application review (48 hr)
 2. Recruiter screen (30 min)
 3. Hiring manager interview (45 min)
-4. Technical/skills assessment
-5. Final interviews (2-3 hours)
+4. Skills assessment (1-2 hr)
+5. Final panel (2-3 hr)
 6. Offer
-
-## Equal Opportunity
-[Company] is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.
 ```
 
-### Compensation Framework
+## Compensation Band Framework
 
-```
-COMPENSATION STRUCTURE
+| Level | Title | Base Range | Equity | Total Comp Target |
+|-------|-------|-----------|--------|-------------------|
+| IC1 | Entry-level (0-2 yr) | $70-90K | $5-15K | $80-100K |
+| IC2 | Mid-level (2-5 yr) | $90-120K | $15-30K | $105-140K |
+| IC3 | Senior (5-8 yr) | $120-160K | $30-60K | $150-200K |
+| IC4 | Staff (8-12 yr) | $160-200K | $60-120K | $220-300K |
+| IC5 | Principal (12+ yr) | $200-250K | $120-200K | $320-420K |
 
-LEVEL FRAMEWORK
-├── IC1: Entry-level (0-2 years)
-├── IC2: Mid-level (2-5 years)
-├── IC3: Senior (5-8 years)
-├── IC4: Staff (8-12 years)
-├── IC5: Principal (12+ years)
-└── IC6: Distinguished (expert)
+Position within band based on: scope of role, candidate experience, internal equity, and market data percentile (target 50th-75th).
 
-COMPENSATION BANDS
-Level    Base Range         Equity      Total Target
-IC1      $70-90K           $5-15K      $80-100K
-IC2      $90-120K          $15-30K     $105-140K
-IC3      $120-160K         $30-60K     $150-200K
-IC4      $160-200K         $60-120K    $220-300K
-IC5      $200-250K         $120-200K   $320-420K
-
-POSITIONING
-├── 25th percentile: Below market
-├── 50th percentile: At market
-├── 75th percentile: Above market
-└── 90th percentile: Premium
-```
-
-## Sourcing Strategy
-
-### Source Channels
-
-| Channel | Best For | Cost | Quality |
-|---------|----------|------|---------|
-| LinkedIn | All roles | $$ | High |
-| Referrals | Culture fit | $ | Highest |
-| Job Boards | Volume | $$ | Medium |
-| Agencies | Specialized | $$$ | High |
-| Events | Early career | $$ | Medium |
-| Direct | Executives | $ | High |
-
-### Sourcing Outreach
+## Interview Scorecard
 
 ```markdown
-# Outreach Templates
+# Scorecard: [Candidate] for [Role]
 
-## Initial Message (LinkedIn)
+**Interviewer:** [Name]
+**Date:** [Date]
+**Stage:** [Phone Screen / Technical / Final]
 
-Subject: [Role] opportunity at [Company]
+## Competency Ratings (1-5 scale)
 
-Hi [Name],
+| Competency | Weight | Rating | Evidence |
+|------------|--------|--------|----------|
+| Technical depth | 40% | | [Specific example from interview] |
+| Problem solving | 20% | | [Specific example from interview] |
+| Communication | 20% | | [Specific example from interview] |
+| Culture alignment | 20% | | [Specific example from interview] |
 
-I came across your profile and was impressed by your work on [specific project/experience]. At [Company], we're building [brief description] and looking for a [role] to [key impact].
+**Weighted Score:** [calculated]
 
-Would you be open to a quick chat to learn more? No commitment needed.
+## Recommendation
+[ ] Strong Hire  [ ] Hire  [ ] No Hire  [ ] Strong No Hire
 
-Best,
-[Your name]
-
-## Follow-up (If no response)
-
-Hi [Name],
-
-Just circling back on my previous message. I understand you're busy, but wanted to share that this role offers [key differentiator - remote, equity, growth, etc.].
-
-If timing isn't right, I'd still love to connect for the future.
-
-## Referral Request
-
-Hi [Name],
-
-Hope you're doing well! We're hiring a [role] at [Company]. Given your network in [industry/function], do you know anyone who might be a fit?
-
-Here's the job description: [link]
-
-Happy to share a referral bonus of $[amount] for successful hires.
-```
-
-### Talent Pipeline
-
-```
-PIPELINE MANAGEMENT
-
-HOT (Ready Now)
-├── Interviewed in last 30 days
-├── Active job seekers
-└── Referrals
-
-WARM (3-6 months)
-├── Engaged in past
-├── Passive candidates
-└── Industry contacts
-
-COLD (6-12 months)
-├── Conference connections
-├── Competitor talent
-└── Future potential
-
-NURTURING ACTIVITIES
-├── Monthly newsletter
-├── Industry content sharing
-├── Company updates
-├── Event invitations
-└── 1:1 coffee chats
-```
-
-## Interview Process
-
-### Interview Design
-
-```
-INTERVIEW STRUCTURE
-
-PHONE SCREEN (30 min) - Recruiter
-├── Role overview
-├── Experience review
-├── Salary expectations
-├── Timeline/availability
-└── Questions
-
-HIRING MANAGER (45 min)
-├── Deep dive on experience
-├── Role fit assessment
-├── Career goals
-├── Team dynamics
-└── Questions
-
-TECHNICAL/SKILLS (1-2 hours)
-├── Technical assessment
-├── Problem-solving
-├── Skill demonstration
-├── Real-world scenarios
-└── Questions
-
-FINAL PANEL (2-3 hours)
-├── Cross-functional interviews
-├── Culture fit
-├── Leadership (for senior roles)
-├── Presentation (if applicable)
-└── Questions
-```
-
-### Competency-Based Interview
-
-```markdown
-# Interview Scorecard
-
-## Candidate: [Name]
-## Role: [Role]
-## Interviewer: [Name]
-## Date: [Date]
-
-## Competencies Assessed
-
-### Technical Skills (Weight: 40%)
-| Skill | Rating (1-5) | Evidence |
-|-------|--------------|----------|
-| [Skill 1] | | |
-| [Skill 2] | | |
-| [Skill 3] | | |
-
-### Problem Solving (Weight: 20%)
-| Dimension | Rating (1-5) | Evidence |
-|-----------|--------------|----------|
-| Analytical thinking | | |
-| Creativity | | |
-| Decision making | | |
-
-### Communication (Weight: 20%)
-| Dimension | Rating (1-5) | Evidence |
-|-----------|--------------|----------|
-| Clarity | | |
-| Listening | | |
-| Collaboration | | |
-
-### Culture Fit (Weight: 20%)
-| Value | Rating (1-5) | Evidence |
-|-------|--------------|----------|
-| [Value 1] | | |
-| [Value 2] | | |
-| [Value 3] | | |
-
-## Overall Assessment
-- Score: [X]/5
-- Recommendation: Strong Hire / Hire / No Hire / Strong No Hire
-
-## Strengths
+## Key Strengths
 -
 
-## Concerns
--
-
-## Questions for Next Round
+## Key Concerns
 -
 ```
 
-### Behavioral Questions (STAR)
+## Behavioral Interview Questions (STAR Format)
 
 | Competency | Question |
 |------------|----------|
-| Leadership | Tell me about a time you led a team through a difficult situation |
-| Problem Solving | Describe a complex problem you solved and your approach |
-| Collaboration | Give an example of a successful cross-functional project |
-| Conflict | Tell me about a disagreement with a colleague and how you resolved it |
-| Failure | Describe a time you failed and what you learned |
-| Growth | How have you developed your skills in the past year? |
+| Leadership | Tell me about a time you led a team through a difficult situation. What was the outcome? |
+| Problem Solving | Describe a complex problem you solved. Walk me through your approach step by step. |
+| Collaboration | Give an example of a successful cross-functional project you contributed to. |
+| Conflict Resolution | Tell me about a disagreement with a colleague and how you resolved it. |
+| Resilience | Describe a time you failed. What did you learn and what did you do differently? |
 
-## Offer Management
+## Example: Hiring Funnel Analysis
 
-### Offer Process
-
-```
-OFFER WORKFLOW
-
-1. INTERNAL APPROVAL
-├── Compensation review
-├── Manager approval
-├── HR approval
-├── Finance sign-off (if needed)
-└── Executive approval (senior roles)
-
-2. VERBAL OFFER
-├── Call candidate
-├── Present offer details
-├── Gauge reaction
-├── Address questions
-└── Set deadline
-
-3. WRITTEN OFFER
-├── Generate offer letter
-├── Include all details
-├── Send for e-signature
-├── Track status
-└── Follow up
-
-4. NEGOTIATION
-├── Understand concerns
-├── Evaluate requests
-├── Propose alternatives
-├── Reach agreement
-└── Update offer
-
-5. CLOSE
-├── Signed offer received
-├── Background check initiated
-├── Start date confirmed
-├── Onboarding scheduled
-└── Team notified
-```
-
-### Offer Letter Template
-
-```markdown
-# Offer of Employment
-
-[Date]
-
-Dear [Candidate Name],
-
-We are pleased to offer you the position of [Job Title] at [Company Name]. We were impressed by your background and believe you will be a valuable addition to our team.
-
-## Position Details
-- **Title:** [Job Title]
-- **Department:** [Department]
-- **Manager:** [Manager Name]
-- **Start Date:** [Start Date]
-- **Location:** [Location/Remote]
-
-## Compensation
-- **Base Salary:** $[Amount] per year, paid [frequency]
-- **Equity:** [X] stock options, vesting over 4 years with 1-year cliff
-- **Bonus Target:** [X]% of base salary, based on performance
-
-## Benefits
-- Medical, dental, and vision insurance
-- 401(k) with [X]% company match
-- [X] days PTO per year
-- [Additional benefits]
-
-## Terms
-This offer is contingent upon:
-- Successful completion of background check
-- Proof of eligibility to work in [country]
-- Signing of confidentiality and invention assignment agreement
-
-This offer expires on [Date].
-
-To accept this offer, please sign below and return by [Date].
-
-Welcome to the team!
-
-[Signature]
-[Hiring Manager Name]
-[Title]
-
----
-
-I accept this offer of employment:
-
-Signature: _________________ Date: _________
-Name: [Candidate Name]
-```
-
-## Employer Branding
-
-### Brand Elements
+A company struggling with a 45-day time-to-fill and 65% offer acceptance rate:
 
 ```
-EMPLOYER VALUE PROPOSITION (EVP)
+DATA (Q4, 12 open reqs)
+  Applications: 600
+  Screened:     288 (48% pass rate)
+  Interviewed:   86 (30% pass rate)
+  Offers:        14 (16% pass rate)
+  Accepted:       9 (64% acceptance -- below 80% benchmark)
 
-WHAT WE OFFER
-├── Mission: [Why we exist]
-├── Culture: [How we work]
-├── Growth: [Career development]
-├── Rewards: [Compensation/benefits]
-└── Impact: [What you'll achieve]
+BOTTLENECK ANALYSIS
+  1. Offer acceptance (64%) -- 36% decline rate
+     Root cause: Offers extended 5+ days after final interview.
+     Candidates accept competing offers in the gap.
 
-BRAND PILLARS
-├── Innovation: Cutting-edge technology
-├── People: Diverse, talented team
-├── Growth: Career development focus
-├── Purpose: Making a difference
-└── Flexibility: Work-life balance
+  2. Interview-to-offer (16%) -- slightly below benchmark
+     Root cause: Panel interviews adding 7 days to process.
 
-PROOF POINTS
-├── Glassdoor rating: 4.5/5
-├── LinkedIn Top Company
-├── Great Place to Work certified
-├── Employee testimonials
-└── Award recognition
+ACTIONS
+  1. Compress offer timeline: verbal offer within 48 hr of final interview
+  2. Replace 4-person panel with 2 focused 1:1s (saves 5 days)
+  3. Add "warm close" step: recruiter checks candidate sentiment before offer
+
+RESULT (Q1, 10 open reqs)
+  Time to fill: 32 days (-29%)
+  Offer acceptance: 85% (+21 points)
+  Cost per hire: $3,800 (-15%)
 ```
 
-### Careers Page Content
+## Offer Approval Workflow
 
-```markdown
-# Life at [Company]
+1. Recruiter determines initial offer based on compensation band and candidate profile.
+2. Hiring manager reviews and confirms level and scope alignment.
+3. HRBP checks internal equity and budget availability.
+4. Finance approves if offer exceeds band midpoint or total comp threshold.
+5. Verbal offer extended. Written offer sent within 24 hours of verbal acceptance.
 
-## Our Mission
-[Why we exist and what we're building]
+## Employer Value Proposition
 
-## Our Values
-- **[Value 1]:** [Description]
-- **[Value 2]:** [Description]
-- **[Value 3]:** [Description]
+Structure the EVP around five pillars:
 
-## Why Join Us?
-
-### Impact
-[What you'll work on and why it matters]
-
-### Growth
-[Learning and development opportunities]
-
-### Team
-[Who you'll work with]
-
-### Benefits
-[Key benefits and perks]
-
-## What Our Team Says
-[Employee testimonials]
-
-## Our Hiring Process
-[Step-by-step process]
-
-## Open Roles
-[Job listings]
-```
+| Pillar | Key Message | Proof Points |
+|--------|-------------|--------------|
+| Mission | Why the company exists | Customer impact stories |
+| Culture | How the team works | Glassdoor rating, employee testimonials |
+| Growth | Career development | Promotion rate, learning budget |
+| Rewards | Total compensation | Comp percentile positioning, benefits |
+| Flexibility | Work-life integration | Remote policy, PTO structure |
 
 ## Hiring Analytics
 
-### Key Metrics
-
 | Metric | Formula | Benchmark |
 |--------|---------|-----------|
-| Time to Fill | Req open → Offer accept | 30-45 days |
-| Time to Hire | First contact → Accept | 14-21 days |
-| Cost per Hire | Total spend / Hires | $3-5K |
-| Quality of Hire | Performance + Retention | 80%+ |
-| Offer Accept Rate | Accepts / Offers | 85%+ |
-| Source Effectiveness | Hires / Source | Varies |
-
-### Recruiting Dashboard
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│              RECRUITING DASHBOARD - [Month]                      │
-├─────────────────────────────────────────────────────────────────┤
-│  Open Reqs       Hires MTD       Time to Fill    Offer Accept   │
-│  25              8               28 days         88%            │
-│  +5 vs LM        +3 vs Target    -5 days YoY     +3% YoY        │
-├─────────────────────────────────────────────────────────────────┤
-│  PIPELINE BY STAGE                                               │
-│  Sourced: 150    Screening: 45    Interview: 20    Offer: 5    │
-├─────────────────────────────────────────────────────────────────┤
-│  HIRES BY DEPARTMENT                                             │
-│  Engineering: 4    Sales: 2    Product: 1    Operations: 1      │
-├─────────────────────────────────────────────────────────────────┤
-│  DIVERSITY                                                       │
-│  Gender: 42% women    Ethnicity: 35% URG    Veteran: 5%        │
-└─────────────────────────────────────────────────────────────────┘
-```
+| Time to Fill | Req open date to offer accept date | 30-45 days |
+| Time to Hire | First candidate contact to accept | 14-21 days |
+| Cost per Hire | Total recruiting spend / Hires | $3-5K |
+| Quality of Hire | (90-day performance + 1-yr retention) / 2 | 80%+ |
+| Offer Accept Rate | Accepts / Offers extended | 85%+ |
+| Source Effectiveness | Hires per source / Cost per source | Varies |
 
 ## Reference Materials
 

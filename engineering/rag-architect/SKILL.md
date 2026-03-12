@@ -1,6 +1,11 @@
 ---
 name: rag-architect
-description: Designs production-grade RAG pipelines with chunking optimization, retrieval evaluation, and pipeline architecture. Use when building RAG systems, optimizing retrieval quality, designing embedding strategies, or evaluating RAG pipeline performance.
+description: >
+  Designs production-grade RAG pipelines with chunking optimization, retrieval
+  evaluation, and pipeline architecture. Use when building a RAG system,
+  selecting a chunking strategy, choosing a vector database, optimizing
+  retrieval quality, designing embedding pipelines, or evaluating RAG
+  performance with RAGAS metrics.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -9,316 +14,160 @@ metadata:
   tier: POWERFUL
 ---
 
-# RAG Architect - POWERFUL
+# RAG Architect
 
-## Overview
+The agent designs, implements, and optimizes production-grade Retrieval-Augmented Generation pipelines, covering the full lifecycle from document chunking through evaluation.
 
-The RAG (Retrieval-Augmented Generation) Architect skill provides comprehensive tools and knowledge for designing, implementing, and optimizing production-grade RAG pipelines. This skill covers the entire RAG ecosystem from document chunking strategies to evaluation frameworks, enabling you to build scalable, efficient, and accurate retrieval systems.
+## Workflow
 
-## Core Competencies
+1. **Analyse corpus** -- Profile the document collection: count, average length, format mix (PDF, HTML, Markdown), language(s), and domain. Validate that sample documents are accessible before proceeding.
+2. **Select chunking strategy** -- Choose from the Chunking Strategy Matrix based on corpus characteristics. Set chunk size, overlap, and boundary rules. Run a test split on 100 sample documents.
+3. **Choose embedding model** -- Select an embedding model from the Embedding Model table based on domain, latency budget, and cost constraints. Verify dimension compatibility with the target vector database.
+4. **Select vector database** -- Pick a vector store from the Vector Database Comparison based on scale, query patterns, and operational requirements.
+5. **Design retrieval pipeline** -- Configure retrieval strategy (dense, sparse, or hybrid). Add reranking if precision requirements exceed 0.85. Set the top-K parameter and similarity threshold.
+6. **Implement query transformations** -- If query-document style mismatch exists, enable HyDE. If queries are ambiguous, enable multi-query generation. Validate each transformation improves retrieval metrics on a held-out set.
+7. **Configure guardrails** -- Enable PII detection, toxicity filtering, hallucination detection, and source attribution. Set confidence score thresholds.
+8. **Evaluate end-to-end** -- Run the RAGAS evaluation framework. Verify faithfulness > 0.90, context relevance > 0.80, answer relevance > 0.85. Iterate on weak components.
 
-### 1. Document Processing & Chunking Strategies
+## Chunking Strategy Matrix
 
-#### Fixed-Size Chunking
-- **Character-based chunking**: Simple splitting by character count (e.g., 512, 1024, 2048 chars)
-- **Token-based chunking**: Splitting by token count to respect model limits
-- **Overlap strategies**: 10-20% overlap to maintain context continuity
-- **Pros**: Predictable chunk sizes, simple implementation, consistent processing time
-- **Cons**: May break semantic units, context boundaries ignored
-- **Best for**: Uniform documents, when consistent chunk sizes are critical
+| Strategy | Best For | Chunk Size | Overlap | Pros | Cons |
+|----------|----------|-----------|---------|------|------|
+| Fixed-size (token) | Uniform docs, consistent sizing | 512-2048 tokens | 10-20% | Predictable, simple | Breaks semantic units |
+| Sentence-based | Narrative text, articles | 3-8 sentences | 1 sentence | Preserves language boundaries | Variable sizes |
+| Paragraph-based | Structured docs, technical manuals | 1-3 paragraphs | 0-1 paragraph | Preserves topic coherence | Highly variable sizes |
+| Semantic | Long-form, research papers | Dynamic | Topic-shift detection | Best coherence | Computationally expensive |
+| Recursive | Mixed content types | Dynamic, multi-level | Per-level | Optimal utilization | Complex implementation |
+| Document-aware | Multi-format collections | Format-specific | Section-level | Preserves metadata | Format-specific code required |
 
-#### Sentence-Based Chunking
-- **Sentence boundary detection**: Using NLTK, spaCy, or regex patterns
-- **Sentence grouping**: Combining sentences until size threshold is reached
-- **Paragraph preservation**: Avoiding mid-paragraph splits when possible
-- **Pros**: Preserves natural language boundaries, better readability
-- **Cons**: Variable chunk sizes, potential for very short/long chunks
-- **Best for**: Narrative text, articles, books
+## Embedding Model Comparison
 
-#### Paragraph-Based Chunking
-- **Paragraph detection**: Double newlines, HTML tags, markdown formatting
-- **Hierarchical splitting**: Respecting document structure (sections, subsections)
-- **Size balancing**: Merging small paragraphs, splitting large ones
-- **Pros**: Preserves logical document structure, maintains topic coherence
-- **Cons**: Highly variable sizes, may create very large chunks
-- **Best for**: Structured documents, technical documentation
+| Model | Dimensions | Speed | Quality | Cost | Best For |
+|-------|-----------|-------|---------|------|----------|
+| all-MiniLM-L6-v2 | 384 | ~14K tok/s | Good | Free (local) | Prototyping, low-latency |
+| all-mpnet-base-v2 | 768 | ~2.8K tok/s | Better | Free (local) | Balanced production use |
+| text-embedding-3-small | 1536 | API | High | $0.02/1M tokens | Cost-effective production |
+| text-embedding-3-large | 3072 | API | Highest | $0.13/1M tokens | Maximum quality |
+| Domain fine-tuned | Varies | Varies | Domain-best | Training cost | Specialized domains (legal, medical) |
 
-#### Semantic Chunking
-- **Topic modeling**: Using TF-IDF, embeddings similarity for topic detection
-- **Heading-aware splitting**: Respecting document hierarchy (H1, H2, H3)
-- **Content-based boundaries**: Detecting topic shifts using semantic similarity
-- **Pros**: Maintains semantic coherence, respects document structure
-- **Cons**: Complex implementation, computationally expensive
-- **Best for**: Long-form content, technical manuals, research papers
+## Vector Database Comparison
 
-#### Recursive Chunking
-- **Hierarchical approach**: Try larger chunks first, recursively split if needed
-- **Multi-level splitting**: Different strategies at different levels
-- **Size optimization**: Minimize number of chunks while respecting size limits
-- **Pros**: Optimal chunk utilization, preserves context when possible
-- **Cons**: Complex logic, potential performance overhead
-- **Best for**: Mixed content types, when chunk count optimization is important
+| Database | Type | Scaling | Key Feature | Best For |
+|----------|------|---------|-------------|----------|
+| Pinecone | Managed | Auto-scaling | Metadata filtering, hybrid search | Production, managed preference |
+| Weaviate | Open source | Horizontal | GraphQL API, multi-modal | Complex data types |
+| Qdrant | Open source | Distributed | High perf, low memory (Rust) | Performance-critical |
+| Chroma | Embedded | Limited | Simple API, SQLite-backed | Prototyping, small-scale |
+| pgvector | PostgreSQL ext | PostgreSQL scaling | ACID, SQL joins | Existing PostgreSQL infra |
 
-#### Document-Aware Chunking
-- **File type detection**: PDF pages, Word sections, HTML elements
-- **Metadata preservation**: Headers, footers, page numbers, sections
-- **Table and image handling**: Special processing for non-text elements
-- **Pros**: Preserves document structure and metadata
-- **Cons**: Format-specific implementation required
-- **Best for**: Multi-format document collections, when metadata is important
+## Retrieval Strategies
 
-### 2. Embedding Model Selection
+| Strategy | When to Use | Implementation |
+|----------|-------------|---------------|
+| Dense (vector similarity) | Default for semantic search | Cosine similarity with k-NN/ANN |
+| Sparse (BM25/TF-IDF) | Exact keyword matching needed | Elasticsearch or inverted index |
+| Hybrid (dense + sparse) | Best of both needed | Reciprocal Rank Fusion (RRF) with tuned weights |
+| + Reranking | Precision must exceed 0.85 | Cross-encoder reranker after initial retrieval |
 
-#### Dimension Considerations
-- **128-256 dimensions**: Fast retrieval, lower memory usage, suitable for simple domains
-- **512-768 dimensions**: Balanced performance, good for most applications
-- **1024-1536 dimensions**: High quality, better for complex domains, higher cost
-- **2048+ dimensions**: Maximum quality, specialized use cases, significant resources
+## Query Transformation Techniques
 
-#### Speed vs Quality Tradeoffs
-- **Fast models**: sentence-transformers/all-MiniLM-L6-v2 (384 dim, ~14k tokens/sec)
-- **Balanced models**: sentence-transformers/all-mpnet-base-v2 (768 dim, ~2.8k tokens/sec)
-- **Quality models**: text-embedding-ada-002 (1536 dim, OpenAI API)
-- **Specialized models**: Domain-specific fine-tuned models
+| Technique | When to Use | How It Works |
+|-----------|-------------|-------------|
+| HyDE | Query/document style mismatch | LLM generates hypothetical answer; embed that instead of query |
+| Multi-query | Ambiguous queries | Generate 3-5 query variations; retrieve for each; deduplicate |
+| Step-back | Specific questions needing general context | Transform to broader query; retrieve general + specific |
 
-#### Model Categories
-- **General purpose**: all-MiniLM, all-mpnet, Universal Sentence Encoder
-- **Code embeddings**: CodeBERT, GraphCodeBERT, CodeT5
-- **Scientific text**: SciBERT, BioBERT, ClinicalBERT
-- **Multilingual**: LaBSE, multilingual-e5, paraphrase-multilingual
+## Context Window Optimization
 
-### 3. Vector Database Selection
+- **Relevance ordering**: Most relevant chunks first in the context window
+- **Diversity**: Deduplicate semantically similar chunks
+- **Token budget**: Fit within model context limit; reserve tokens for system prompt and answer
+- **Hierarchical inclusion**: Include section summary before detailed chunks when available
+- **Compression**: Summarize low-relevance chunks; extract key facts from verbose passages
 
-#### Pinecone
-- **Managed service**: Fully hosted, auto-scaling
-- **Features**: Metadata filtering, hybrid search, real-time updates
-- **Pricing**: $70/month for 1M vectors (1536 dim), pay-per-use scaling
-- **Best for**: Production applications, when managed service is preferred
-- **Cons**: Vendor lock-in, costs can scale quickly
+## Evaluation Metrics (RAGAS Framework)
 
-#### Weaviate
-- **Open source**: Self-hosted or cloud options available
-- **Features**: GraphQL API, multi-modal search, automatic vectorization
-- **Scaling**: Horizontal scaling, HNSW indexing
-- **Best for**: Complex data types, when GraphQL API is preferred
-- **Cons**: Learning curve, requires infrastructure management
+| Metric | Target | What It Measures |
+|--------|--------|-----------------|
+| Faithfulness | > 0.90 | Answers grounded in retrieved context |
+| Context Relevance | > 0.80 | Retrieved chunks relevant to query |
+| Answer Relevance | > 0.85 | Answer addresses the original question |
+| Precision@K | > 0.70 | % of top-K results that are relevant |
+| Recall@K | > 0.80 | % of relevant docs found in top-K |
+| MRR | > 0.75 | Reciprocal rank of first relevant result |
 
-#### Qdrant
-- **Rust-based**: High performance, low memory footprint
-- **Features**: Payload filtering, clustering, distributed deployment
-- **API**: REST and gRPC interfaces
-- **Best for**: High-performance requirements, resource-constrained environments
-- **Cons**: Smaller community, fewer integrations
+## Guardrails
 
-#### Chroma
-- **Embedded database**: SQLite-based, easy local development
-- **Features**: Collections, metadata filtering, persistence
-- **Scaling**: Limited, suitable for prototyping and small deployments
-- **Best for**: Development, testing, small-scale applications
-- **Cons**: Not suitable for production scale
+- **PII detection**: Scan retrieved chunks and generated responses for PII; redact or block
+- **Hallucination detection**: Compare generated claims against source documents via NLI
+- **Source attribution**: Every factual claim must cite a retrieved chunk
+- **Confidence scoring**: Return confidence level; if below threshold, return "I don't have enough information"
+- **Injection prevention**: Sanitize user queries; reject prompt injection attempts
 
-#### pgvector (PostgreSQL)
-- **SQL integration**: Leverage existing PostgreSQL infrastructure
-- **Features**: ACID compliance, joins with relational data, mature ecosystem
-- **Performance**: ivfflat and HNSW indexing, parallel query processing
-- **Best for**: When you already use PostgreSQL, need ACID compliance
-- **Cons**: Requires PostgreSQL expertise, less specialized than purpose-built DBs
+## Example: Internal Knowledge Base RAG Pipeline
 
-### 4. Retrieval Strategies
+```yaml
+corpus:
+  documents: 12,000 Confluence pages + 3,000 PDFs
+  avg_length: 2,400 tokens
+  languages: [English]
+  domain: internal engineering docs
 
-#### Dense Retrieval
-- **Semantic similarity**: Using embedding cosine similarity
-- **Advantages**: Captures semantic meaning, handles paraphrasing well
-- **Limitations**: May miss exact keyword matches, requires good embeddings
-- **Implementation**: Vector similarity search with k-NN or ANN algorithms
+pipeline:
+  chunking:
+    strategy: recursive
+    max_tokens: 512
+    overlap: 50 tokens
+    boundary: paragraph
+  embedding:
+    model: text-embedding-3-small
+    dimensions: 1536
+    batch_size: 100
+  vector_db:
+    engine: pgvector
+    index: HNSW (ef_construction=128, m=16)
+    reason: "Existing PostgreSQL infra; ACID compliance for audit"
+  retrieval:
+    strategy: hybrid
+    dense_weight: 0.7
+    sparse_weight: 0.3
+    top_k: 10
+    reranker: cross-encoder/ms-marco-MiniLM-L-12-v2
+    final_k: 5
 
-#### Sparse Retrieval
-- **Keyword-based**: TF-IDF, BM25, Elasticsearch
-- **Advantages**: Exact keyword matching, interpretable results
-- **Limitations**: Misses semantic similarity, vulnerable to vocabulary mismatch
-- **Implementation**: Inverted indexes, term frequency analysis
+evaluation_results:
+  faithfulness: 0.93
+  context_relevance: 0.84
+  answer_relevance: 0.88
+  precision_at_5: 0.76
+  recall_at_10: 0.85
+```
 
-#### Hybrid Retrieval
-- **Combination approach**: Dense + sparse retrieval with score fusion
-- **Fusion strategies**: Reciprocal Rank Fusion (RRF), weighted combination
-- **Benefits**: Combines semantic understanding with exact matching
-- **Complexity**: Requires tuning fusion weights, more complex infrastructure
+## Production Patterns
 
-#### Reranking
-- **Two-stage approach**: Initial retrieval followed by reranking
-- **Reranking models**: Cross-encoders, specialized reranking transformers
-- **Benefits**: Higher precision, can use more sophisticated models for final ranking
-- **Tradeoff**: Additional latency, computational cost
+- **Caching**: Query-level (exact match), semantic (similar queries via embedding distance < 0.05), chunk-level (embedding cache)
+- **Streaming**: Stream generation tokens while retrieval completes; show sources after generation
+- **Fallbacks**: If primary vector DB is unavailable, serve from read-replica; if retrieval returns no results above threshold, say so explicitly
+- **Document refresh**: Incremental re-embedding on change detection; full re-index weekly
+- **Cost control**: Batch embeddings, cache aggressively, route simple queries to BM25 only
 
-### 5. Query Transformation Techniques
+## Common Pitfalls
 
-#### HyDE (Hypothetical Document Embeddings)
-- **Approach**: Generate hypothetical answer, embed answer instead of query
-- **Benefits**: Improves retrieval by matching document style rather than query style
-- **Implementation**: Use LLM to generate hypothetical document, embed that
-- **Use cases**: When queries and documents have different styles
+| Problem | Solution |
+|---------|----------|
+| Chunks break mid-sentence | Use boundary-aware chunking with sentence/paragraph overlap |
+| Low retrieval precision | Add cross-encoder reranker; tune similarity threshold |
+| High latency (> 2s) | Cache embeddings; use faster model; reduce top-K |
+| Inconsistent quality | Implement RAGAS evaluation in CI; add quality scoring |
+| Scalability bottleneck | Shard vector DB; implement auto-scaling; add caching layer |
 
-#### Multi-Query Generation
-- **Approach**: Generate multiple query variations, retrieve for each, merge results
-- **Benefits**: Increases recall, handles query ambiguity
-- **Implementation**: LLM generates 3-5 query variations, deduplicate results
-- **Considerations**: Higher cost and latency due to multiple retrievals
+## Scripts
 
-#### Step-Back Prompting
-- **Approach**: Generate broader, more general version of specific query
-- **Benefits**: Retrieves more general context that helps answer specific questions
-- **Implementation**: Transform "What is the capital of France?" to "What are European capitals?"
-- **Use cases**: When specific questions need general context
+### Chunking Optimizer
+Analyses corpus and recommends optimal chunking strategy with parameters.
 
-### 6. Context Window Optimization
+### Retrieval Evaluator
+Runs evaluation suite (precision, recall, MRR, NDCG) against a test query set.
 
-#### Dynamic Context Assembly
-- **Relevance-based ordering**: Most relevant chunks first
-- **Diversity optimization**: Avoid redundant information
-- **Token budget management**: Fit within model context limits
-- **Hierarchical inclusion**: Include summaries before detailed chunks
-
-#### Context Compression
-- **Summarization**: Compress less relevant chunks while preserving key information
-- **Key information extraction**: Extract only relevant facts/entities
-- **Template-based compression**: Use structured formats to reduce token usage
-- **Selective inclusion**: Include only chunks above relevance threshold
-
-### 7. Evaluation Frameworks
-
-#### Faithfulness Metrics
-- **Definition**: How well generated answers are grounded in retrieved context
-- **Measurement**: Fact verification against source documents
-- **Implementation**: NLI models to check entailment between answer and context
-- **Threshold**: >90% for production systems
-
-#### Relevance Metrics
-- **Context relevance**: How relevant retrieved chunks are to the query
-- **Answer relevance**: How well the answer addresses the original question
-- **Measurement**: Embedding similarity, human evaluation, LLM-as-judge
-- **Targets**: Context relevance >0.8, Answer relevance >0.85
-
-#### Context Precision & Recall
-- **Precision@K**: Percentage of top-K results that are relevant
-- **Recall@K**: Percentage of relevant documents found in top-K results
-- **Mean Reciprocal Rank (MRR)**: Average of reciprocal ranks of first relevant result
-- **NDCG@K**: Normalized Discounted Cumulative Gain at K
-
-#### End-to-End Metrics
-- **RAGAS**: Comprehensive RAG evaluation framework
-- **Correctness**: Factual accuracy of generated answers
-- **Completeness**: Coverage of all relevant aspects
-- **Consistency**: Consistency across multiple runs with same query
-
-### 8. Production Patterns
-
-#### Caching Strategies
-- **Query-level caching**: Cache results for identical queries
-- **Semantic caching**: Cache for semantically similar queries
-- **Chunk-level caching**: Cache embedding computations
-- **Multi-level caching**: Redis for hot queries, disk for warm queries
-
-#### Streaming Retrieval
-- **Progressive loading**: Stream results as they become available
-- **Incremental generation**: Generate answers while still retrieving
-- **Real-time updates**: Handle document updates without full reprocessing
-- **Connection management**: Handle client disconnections gracefully
-
-#### Fallback Mechanisms
-- **Graceful degradation**: Fallback to simpler retrieval if primary fails
-- **Cache fallbacks**: Serve stale results when retrieval is unavailable
-- **Alternative sources**: Multiple vector databases for redundancy
-- **Error handling**: Comprehensive error recovery and user communication
-
-### 9. Cost Optimization
-
-#### Embedding Cost Management
-- **Batch processing**: Batch documents for embedding to reduce API costs
-- **Caching strategies**: Cache embeddings to avoid recomputation
-- **Model selection**: Balance cost vs quality for embedding models
-- **Update optimization**: Only re-embed changed documents
-
-#### Vector Database Optimization
-- **Index optimization**: Choose appropriate index types for use case
-- **Compression**: Use quantization to reduce storage costs
-- **Tiered storage**: Hot/warm/cold data strategies
-- **Resource scaling**: Auto-scaling based on query patterns
-
-#### Query Optimization
-- **Query routing**: Route simple queries to cheaper methods
-- **Result caching**: Avoid repeated expensive retrievals
-- **Batch querying**: Process multiple queries together when possible
-- **Smart filtering**: Use metadata filters to reduce search space
-
-### 10. Guardrails & Safety
-
-#### Content Filtering
-- **Toxicity detection**: Filter harmful or inappropriate content
-- **PII detection**: Identify and handle personally identifiable information
-- **Content validation**: Ensure retrieved content meets quality standards
-- **Source verification**: Validate document authenticity and reliability
-
-#### Query Safety
-- **Injection prevention**: Prevent malicious query injection attacks
-- **Rate limiting**: Prevent abuse and ensure fair usage
-- **Query validation**: Sanitize and validate user inputs
-- **Access controls**: Ensure users can only access authorized content
-
-#### Response Safety
-- **Hallucination detection**: Identify when model generates unsupported claims
-- **Confidence scoring**: Provide confidence levels for generated responses
-- **Source attribution**: Always provide sources for factual claims
-- **Uncertainty handling**: Gracefully handle cases where answer is uncertain
-
-## Implementation Best Practices
-
-### Development Workflow
-1. **Requirements gathering**: Understand use case, scale, and quality requirements
-2. **Data analysis**: Analyze document corpus characteristics
-3. **Prototype development**: Build minimal viable RAG pipeline
-4. **Chunking optimization**: Test different chunking strategies
-5. **Retrieval tuning**: Optimize retrieval parameters and thresholds
-6. **Evaluation setup**: Implement comprehensive evaluation metrics
-7. **Production deployment**: Scale-ready implementation with monitoring
-
-### Monitoring & Observability
-- **Query analytics**: Track query patterns and performance
-- **Retrieval metrics**: Monitor precision, recall, and latency
-- **Generation quality**: Track faithfulness and relevance scores
-- **System health**: Monitor database performance and availability
-- **Cost tracking**: Monitor embedding and vector database costs
-
-### Maintenance & Updates
-- **Document refresh**: Handle new documents and updates
-- **Index maintenance**: Regular vector database optimization
-- **Model updates**: Evaluate and migrate to improved models
-- **Performance tuning**: Continuous optimization based on usage patterns
-- **Security updates**: Regular security assessments and updates
-
-## Common Pitfalls & Solutions
-
-### Poor Chunking Strategy
-- **Problem**: Chunks break mid-sentence or lose context
-- **Solution**: Use boundary-aware chunking with overlap
-
-### Low Retrieval Precision
-- **Problem**: Retrieved chunks are not relevant to query
-- **Solution**: Improve embedding model, add reranking, tune similarity threshold
-
-### High Latency
-- **Problem**: Slow retrieval and generation
-- **Solution**: Optimize vector indexing, implement caching, use faster embedding models
-
-### Inconsistent Quality
-- **Problem**: Variable answer quality across different queries
-- **Solution**: Implement comprehensive evaluation, add quality scoring, improve fallbacks
-
-### Scalability Issues
-- **Problem**: System doesn't scale with increased load
-- **Solution**: Implement proper caching, database sharding, and auto-scaling
-
-## Conclusion
-
-Building effective RAG systems requires careful consideration of each component in the pipeline. The key to success is understanding the tradeoffs between different approaches and choosing the right combination of techniques for your specific use case. Start with simple approaches and gradually add sophistication based on evaluation results and production requirements.
-
-This skill provides the foundation for making informed decisions throughout the RAG development lifecycle, from initial design to production deployment and ongoing maintenance.
+### Pipeline Benchmarker
+Measures end-to-end latency, throughput, and cost per query across configurations.

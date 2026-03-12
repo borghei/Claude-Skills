@@ -1,6 +1,8 @@
 ---
 name: seo-specialist
-description: Expert SEO covering technical SEO, content optimization, link building, keyword research, and search analytics.
+description: >
+  Expert SEO covering technical SEO, content optimization, link building, keyword research, and search analytics.
+  Use when auditing technical SEO issues, researching keywords by intent and difficulty, optimizing on-page elements, building link acquisition strategies, or analyzing organic search performance.
 version: 1.0.0
 author: borghei
 category: marketing-growth
@@ -9,303 +11,134 @@ tags: [seo, search, keywords, technical-seo, link-building]
 
 # SEO Specialist
 
-Expert-level search engine optimization.
+The agent operates as a senior SEO specialist, delivering technical audits, keyword strategies, on-page optimization, link building plans, and performance analysis for organic search growth.
 
-## Core Competencies
+## Workflow
 
-- Technical SEO
-- On-page optimization
-- Content SEO
-- Link building
-- Keyword research
-- Local SEO
-- Analytics and reporting
-- Algorithm updates
+1. **Run technical audit** - Check crawlability (robots.txt, sitemap, canonical tags), indexability (duplicate content, thin pages), performance (Core Web Vitals), and structure (URL hierarchy, internal linking). Checkpoint: zero critical crawl errors in Search Console.
+2. **Research keywords** - Start with seed keywords, expand via competitor analysis and search suggest, analyze by volume/difficulty/intent, and prioritize by business value and ranking opportunity. Checkpoint: each target keyword has a mapped content asset.
+3. **Optimize on-page elements** - Apply title tag, meta description, heading hierarchy, keyword placement, image alt text, and schema markup. Checkpoint: primary keyword appears in H1, first 100 words, and title tag.
+4. **Build link acquisition plan** - Identify content-based (original research, guides), outreach-based (guest posts, HARO), and relationship-based (partners, testimonials) opportunities. Checkpoint: target links have DA 50+ and topical relevance.
+5. **Monitor and report** - Track organic traffic, keyword rankings, Core Web Vitals, and conversion rate. Review weekly; report monthly. Checkpoint: dashboard covers visibility, engagement, and conversions.
 
-## Technical SEO
-
-### Site Audit Checklist
+## Technical SEO Audit Checklist
 
 **Crawlability:**
 - [ ] Robots.txt properly configured
-- [ ] XML sitemap submitted
-- [ ] No crawl errors in Search Console
-- [ ] Proper use of noindex/nofollow
-- [ ] Canonical tags implemented
+- [ ] XML sitemap submitted and current
+- [ ] No critical crawl errors in Search Console
+- [ ] Canonical tags on all indexable pages
+- [ ] Noindex/nofollow used correctly
 
-**Indexability:**
-- [ ] Important pages indexed
-- [ ] Duplicate content resolved
-- [ ] Thin content identified
-- [ ] Pagination handled correctly
+**Performance (Core Web Vitals):**
 
-**Performance:**
-- [ ] Core Web Vitals passing
-- [ ] Mobile-friendly
-- [ ] HTTPS implemented
-- [ ] Page speed optimized
+| Metric | Good | Needs Improvement | Poor |
+|--------|------|-------------------|------|
+| LCP (Largest Contentful Paint) | < 2.5s | 2.5s - 4s | > 4s |
+| FID (First Input Delay) | < 100ms | 100 - 300ms | > 300ms |
+| CLS (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 |
 
 **Structure:**
-- [ ] Clean URL structure
-- [ ] Proper heading hierarchy
-- [ ] Internal linking optimized
+- [ ] Clean, descriptive URL slugs
+- [ ] Proper heading hierarchy (single H1, logical H2/H3)
+- [ ] Internal linking between related content
 - [ ] Breadcrumbs implemented
 
-### Core Web Vitals
+## Keyword Research Process
 
-```
-LCP (Largest Contentful Paint)
-├── Good: < 2.5s
-├── Needs Improvement: 2.5s - 4s
-└── Poor: > 4s
+1. **Seed** - Brainstorm topics, analyze competitors, mine customer interviews
+2. **Expand** - Use Ahrefs/SEMrush, Google Suggest, People Also Ask, related searches
+3. **Analyze** - Score by search volume, keyword difficulty, search intent, SERP features
+4. **Prioritize** - Rank by business value x ranking opportunity
 
-FID (First Input Delay)
-├── Good: < 100ms
-├── Needs Improvement: 100ms - 300ms
-└── Poor: > 300ms
-
-CLS (Cumulative Layout Shift)
-├── Good: < 0.1
-├── Needs Improvement: 0.1 - 0.25
-└── Poor: > 0.25
-```
-
-### Schema Markup
-
-```json
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Article Title",
-  "author": {
-    "@type": "Person",
-    "name": "Author Name"
-  },
-  "datePublished": "2024-01-15",
-  "dateModified": "2024-01-20",
-  "image": "https://example.com/image.jpg",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Company Name",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/logo.png"
-    }
-  }
-}
-```
-
-## Keyword Research
-
-### Research Process
-
-```
-1. SEED KEYWORDS
-   ├── Brainstorm topics
-   ├── Competitor analysis
-   └── Customer interviews
-
-2. EXPAND
-   ├── Keyword tools (Ahrefs, SEMrush)
-   ├── Google Suggest
-   ├── People Also Ask
-   └── Related searches
-
-3. ANALYZE
-   ├── Search volume
-   ├── Keyword difficulty
-   ├── Search intent
-   └── SERP features
-
-4. PRIORITIZE
-   ├── Business value
-   ├── Ranking opportunity
-   └── Content requirements
-```
-
-### Keyword Metrics
+### Keyword Metrics Guide
 
 | Metric | Good | Moderate | Difficult |
 |--------|------|----------|-----------|
-| Volume | 1000+ | 100-1000 | <100 |
-| Difficulty | <30 | 30-60 | >60 |
-| CPC | >$5 | $1-5 | <$1 |
+| Volume | 1000+ | 100-1000 | < 100 |
+| Difficulty | < 30 | 30-60 | > 60 |
+| CPC (commercial signal) | > $5 | $1-5 | < $1 |
 
-### Search Intent Types
+### Search Intent Classification
 
-**Informational:**
-- "how to", "what is", "guide"
-- Content: Blog posts, guides, tutorials
+| Intent | Signal Words | Content Type |
+|--------|-------------|-------------|
+| Informational | "how to", "what is", "guide" | Blog posts, tutorials |
+| Navigational | Brand names, product names | Homepage, product pages |
+| Commercial | "best", "reviews", "vs" | Comparison pages, reviews |
+| Transactional | "buy", "discount", "pricing" | Product pages, landing pages |
 
-**Navigational:**
-- Brand names, specific products
-- Content: Homepage, product pages
+## On-Page Optimization Checklist
 
-**Commercial:**
-- "best", "reviews", "vs"
-- Content: Comparison, reviews, lists
+**Title Tag:** primary keyword front-loaded, 50-60 characters, compelling for CTR
+**Meta Description:** includes keyword, clear value prop, CTA, 150-160 characters
+**Headings:** H1 contains primary keyword, H2s contain secondary keywords, logical hierarchy
+**Content:** keyword in first 100 words, natural density, related terms (LSI), comprehensive coverage
+**Images:** descriptive filenames, keyword-rich alt text, compressed, lazy-loaded
 
-**Transactional:**
-- "buy", "discount", "pricing"
-- Content: Product pages, landing pages
+## Example: Optimized Page Structure
 
-## On-Page Optimization
+```html
+<!-- Title: 58 chars, keyword front-loaded -->
+<title>Cloud Cost Optimization: 7 Strategies That Cut AWS Bills 40%</title>
 
-### Page Optimization Checklist
+<!-- Meta: 155 chars, keyword + value prop + CTA -->
+<meta name="description" content="Learn 7 proven cloud cost optimization
+strategies used by 500+ engineering teams. Reduce AWS spend by 40% without
+sacrificing performance. Free checklist inside.">
 
-**Title Tag:**
-- Primary keyword included
-- Front-loaded if possible
-- 50-60 characters
-- Compelling for clicks
+<!-- Schema markup for article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cloud Cost Optimization: 7 Strategies That Cut AWS Bills 40%",
+  "author": {"@type": "Person", "name": "Jane Chen"},
+  "datePublished": "2026-02-15",
+  "publisher": {
+    "@type": "Organization",
+    "name": "CloudOps Weekly"
+  }
+}
+</script>
 
-**Meta Description:**
-- Includes keyword
-- Clear value proposition
-- Call to action
-- 150-160 characters
+<h1>Cloud Cost Optimization: 7 Strategies That Cut AWS Bills 40%</h1>
+<p>Cloud cost optimization is the #1 priority for engineering leaders in 2026...</p>
 
-**Headings:**
-- H1 contains primary keyword
-- H2s contain secondary keywords
-- Logical hierarchy
-- Descriptive and scannable
+<h2>1. Right-Size EC2 Instances Using Usage Data</h2>
+<h3>How to Identify Oversized Instances</h3>
 
-**Content:**
-- Keyword in first 100 words
-- Natural keyword usage
-- Related terms included
-- Comprehensive coverage
-
-**Images:**
-- Descriptive file names
-- Alt text with keywords
-- Compressed for speed
-- Lazy loading enabled
-
-### Content Optimization Template
-
-```markdown
-# [Primary Keyword] - [Compelling Hook]
-
-[Introduction with primary keyword in first 100 words]
-
-## [H2 with Secondary Keyword]
-
-[Content section]
-
-### [H3 with Related Term]
-
-[Subsection content]
-
-## FAQ
-
-### [Question with keyword]
-[Answer]
-
-## Conclusion
-
-[Summary with CTA]
+<h2>FAQ</h2>
+<h3>What is cloud cost optimization?</h3>
+<h3>How much can cloud optimization save?</h3>
 ```
 
-## Link Building
-
-### Link Building Strategies
-
-**Content-Based:**
-- Original research and data
-- Comprehensive guides
-- Infographics and visual content
-- Tools and calculators
-
-**Outreach-Based:**
-- Guest posting
-- HARO (Help a Reporter Out)
-- Podcast appearances
-- Expert roundups
-
-**Relationship-Based:**
-- Partner exchanges
-- Testimonials
-- Case studies
-- Co-marketing
-
-### Link Quality Assessment
+## Link Quality Assessment
 
 | Factor | High Quality | Low Quality |
 |--------|-------------|-------------|
-| Domain Authority | 50+ | <20 |
+| Domain Authority | 50+ | < 20 |
 | Relevance | Same industry | Unrelated |
 | Traffic | Active site | Dead site |
 | Link Type | Editorial | Paid/Spam |
-| Anchor Text | Natural | Exact match |
+| Anchor Text | Natural variation | Exact match spam |
 
-### Outreach Template
-
-```
-Subject: [Personalized hook]
-
-Hi [Name],
-
-[Personalized opening referencing their content]
-
-[Value proposition - what you're offering]
-
-[Clear ask]
-
-[Sign off]
-```
-
-## Analytics & Reporting
-
-### SEO Dashboard
+## SEO Performance Dashboard
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                   SEO Performance - [Period]                 │
-├─────────────────────────────────────────────────────────────┤
-│  Organic Traffic    Rankings          Conversions           │
-│  125,432           Top 3: 45         542                    │
-│  +12% MoM          Top 10: 234       +15% MoM               │
-├─────────────────────────────────────────────────────────────┤
-│  Top Growing Keywords                                        │
-│  1. [Keyword] - #8 → #3 (+5)                               │
-│  2. [Keyword] - #15 → #7 (+8)                              │
-│  3. [Keyword] - New → #12                                   │
-├─────────────────────────────────────────────────────────────┤
-│  Technical Health                                            │
-│  Core Web Vitals: Pass                                      │
-│  Index Coverage: 1,234 pages                                │
-│  Crawl Errors: 3 (down from 12)                             │
-└─────────────────────────────────────────────────────────────┘
+SEO Performance - March 2026
+  Organic Traffic: 125,432 (+12% MoM)
+  Rankings: Top 3: 45 | Top 10: 234
+  Conversions: 542 (+15% MoM)
+
+  Top Growing Keywords
+  1. "cloud cost optimization" - #8 -> #3 (+5)
+  2. "aws billing alerts"     - #15 -> #7 (+8)
+  3. "kubernetes autoscaling"  - New -> #12
+
+  Technical Health
+  Core Web Vitals: Pass | Index: 1,234 pages | Crawl Errors: 3
 ```
-
-### Key Metrics
-
-**Visibility:**
-- Organic traffic
-- Keyword rankings
-- SERP features won
-- Share of voice
-
-**Engagement:**
-- Bounce rate
-- Time on site
-- Pages per session
-- Scroll depth
-
-**Conversions:**
-- Organic conversions
-- Conversion rate
-- Revenue from organic
-- Assisted conversions
-
-## Reference Materials
-
-- `references/technical_seo.md` - Technical SEO guide
-- `references/keyword_research.md` - Keyword research methods
-- `references/link_building.md` - Link building playbook
-- `references/algorithm_updates.md` - Google update history
 
 ## Scripts
 
@@ -322,3 +155,10 @@ python scripts/rank_tracker.py --keywords keywords.csv --domain example.com
 # Backlink analyzer
 python scripts/backlink_analyzer.py --domain example.com --output links.csv
 ```
+
+## Reference Materials
+
+- `references/technical_seo.md` - Technical SEO guide
+- `references/keyword_research.md` - Keyword research methods
+- `references/link_building.md` - Link building playbook
+- `references/algorithm_updates.md` - Google update history

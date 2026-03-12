@@ -1,166 +1,167 @@
 ---
 name: senior-data-scientist
-description: World-class data science skill for statistical modeling, experimentation, causal inference, and advanced analytics. Expertise in Python (NumPy, Pandas, Scikit-learn), R, SQL, statistical methods, A/B testing, time series, and business intelligence. Includes experiment design, feature engineering, model evaluation, and stakeholder communication. Use when designing experiments, building predictive models, performing causal analysis, or driving data-driven decisions.
+description: >-
+  Use when the user asks to "design an experiment", "build a predictive model",
+  "run A/B test analysis", "perform causal inference", "engineer features",
+  "evaluate model performance", "set up MLOps pipeline", "analyze time series",
+  "calculate sample size", or "deploy a model to production".
+  Expert data science covering statistical modeling, experimentation, causal inference,
+  feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
+version: 1.0.0
+author: borghei
+category: engineering
+tags: [data-science, ml, statistics, experimentation, python, mlops]
 ---
 
 # Senior Data Scientist
 
-World-class senior data scientist skill for production-grade AI/ML/Data systems.
+Expert data science for statistical modeling, experimentation, ML deployment,
+and data-driven decision making.
+
+## Keywords
+
+data-science, machine-learning, statistics, a-b-testing, causal-inference,
+feature-engineering, mlops, experiment-design, model-deployment, python,
+scikit-learn, pytorch, tensorflow, spark, airflow
+
+---
 
 ## Quick Start
 
-### Main Capabilities
-
 ```bash
-# Core Tool 1
+# Design an experiment with power analysis
 python scripts/experiment_designer.py --input data/ --output results/
 
-# Core Tool 2  
+# Run feature engineering pipeline
 python scripts/feature_engineering_pipeline.py --target project/ --analyze
 
-# Core Tool 3
+# Evaluate model performance
 python scripts/model_evaluation_suite.py --config config.yaml --deploy
+
+# Statistical analysis
+python scripts/statistical_analyzer.py --data input.csv --test ttest --output report.json
 ```
 
-## Core Expertise
+---
 
-This skill covers world-class capabilities in:
+## Tools
 
-- Advanced production patterns and architectures
-- Scalable system design and implementation
-- Performance optimization at scale
-- MLOps and DataOps best practices
-- Real-time processing and inference
-- Distributed computing frameworks
-- Model deployment and monitoring
-- Security and compliance
-- Cost optimization
-- Team leadership and mentoring
+| Script | Purpose |
+|--------|---------|
+| `scripts/experiment_designer.py` | A/B test design, power analysis, sample size calculation |
+| `scripts/feature_engineering_pipeline.py` | Automated feature generation, correlation analysis, feature selection |
+| `scripts/statistical_analyzer.py` | Hypothesis testing, causal inference, regression analysis |
+| `scripts/model_evaluation_suite.py` | Model comparison, cross-validation, deployment readiness checks |
+
+---
 
 ## Tech Stack
 
-**Languages:** Python, SQL, R, Scala, Go
-**ML Frameworks:** PyTorch, TensorFlow, Scikit-learn, XGBoost
-**Data Tools:** Spark, Airflow, dbt, Kafka, Databricks
-**LLM Frameworks:** LangChain, LlamaIndex, DSPy
-**Deployment:** Docker, Kubernetes, AWS/GCP/Azure
-**Monitoring:** MLflow, Weights & Biases, Prometheus
-**Databases:** PostgreSQL, BigQuery, Snowflake, Pinecone
+| Category | Tools |
+|----------|-------|
+| Languages | Python, SQL, R, Scala |
+| ML Frameworks | PyTorch, TensorFlow, Scikit-learn, XGBoost |
+| Data Processing | Spark, Airflow, dbt, Kafka, Databricks |
+| Deployment | Docker, Kubernetes, AWS SageMaker, GCP Vertex AI |
+| Experiment Tracking | MLflow, Weights & Biases |
+| Databases | PostgreSQL, BigQuery, Snowflake, Pinecone |
 
-## Reference Documentation
+---
 
-### 1. Statistical Methods Advanced
+## Workflow 1: Design and Analyze an A/B Test
 
-Comprehensive guide available in `references/statistical_methods_advanced.md` covering:
+1. **Define hypothesis** -- State the null and alternative hypotheses. Identify the primary metric (e.g., conversion rate, revenue per user).
+2. **Calculate sample size** -- `python scripts/experiment_designer.py --input data/ --output results/`
+   - Specify minimum detectable effect (MDE), significance level (alpha=0.05), and power (0.80).
+   - Example: For baseline conversion 5%, MDE 10% relative lift, need ~31,000 users per variant.
+3. **Randomize assignment** -- Use hash-based assignment on user ID for deterministic, reproducible splits.
+4. **Run experiment** -- Monitor for sample ratio mismatch (SRM) daily. Flag if observed ratio deviates >1% from expected.
+5. **Analyze results:**
+   ```python
+   from scipy import stats
 
-- Advanced patterns and best practices
-- Production implementation strategies
-- Performance optimization techniques
-- Scalability considerations
-- Security and compliance
-- Real-world case studies
+   # Two-proportion z-test for conversion rates
+   control_conv = control_successes / control_total
+   treatment_conv = treatment_successes / treatment_total
+   z_stat, p_value = stats.proportions_ztest(
+       [treatment_successes, control_successes],
+       [treatment_total, control_total],
+       alternative='two-sided'
+   )
+   # Reject H0 if p_value < 0.05
+   ```
+6. **Validate** -- Check for novelty effects, Simpson's paradox across segments, and pre-experiment balance on covariates.
 
-### 2. Experiment Design Frameworks
+## Workflow 2: Build a Feature Engineering Pipeline
 
-Complete workflow documentation in `references/experiment_design_frameworks.md` including:
+1. **Profile raw data** -- `python scripts/feature_engineering_pipeline.py --target project/ --analyze`
+   - Identify null rates, cardinality, distributions, and data types.
+2. **Generate candidate features:**
+   - Temporal: day-of-week, hour, recency, frequency, monetary (RFM)
+   - Aggregation: rolling means/sums over 7d/30d/90d windows
+   - Interaction: ratio features, polynomial combinations
+   - Text: TF-IDF, embedding vectors
+3. **Select features** -- Remove features with >95% null rate, near-zero variance, or >0.95 pairwise correlation. Use recursive feature elimination or SHAP importance.
+4. **Validate** -- Confirm no target leakage (no features derived from post-outcome data). Check train/test distribution alignment.
+5. **Register** -- Store features in feature store with versioning and lineage metadata.
 
-- Step-by-step processes
-- Architecture design patterns
-- Tool integration guides
-- Performance tuning strategies
-- Troubleshooting procedures
+## Workflow 3: Train and Evaluate a Model
 
-### 3. Feature Engineering Patterns
+1. **Split data** -- Stratified train/validation/test split (70/15/15). For time series, use temporal split (no future leakage).
+2. **Train baseline** -- Start with a simple model (logistic regression, gradient boosted trees) to establish a benchmark.
+3. **Tune hyperparameters** -- Use Optuna or cross-validated grid search. Log all runs to MLflow.
+4. **Evaluate on held-out test set:**
+   ```python
+   from sklearn.metrics import classification_report, roc_auc_score
 
-Technical reference guide in `references/feature_engineering_patterns.md` with:
+   y_pred = model.predict(X_test)
+   y_prob = model.predict_proba(X_test)[:, 1]
 
-- System design principles
-- Implementation examples
-- Configuration best practices
-- Deployment strategies
-- Monitoring and observability
+   print(classification_report(y_test, y_pred))
+   print(f"AUC-ROC: {roc_auc_score(y_test, y_prob):.4f}")
+   ```
+5. **Validate** -- Check calibration (predicted probabilities match observed rates). Evaluate fairness metrics across protected groups. Confirm no overfitting (train vs test gap <5%).
 
-## Production Patterns
+## Workflow 4: Deploy a Model to Production
 
-### Pattern 1: Scalable Data Processing
+1. **Containerize** -- Package model with inference dependencies in Docker:
+   ```bash
+   docker build -t model-service:v1 .
+   ```
+2. **Set up serving** -- Deploy behind a REST API with health check, input validation, and structured error responses.
+3. **Configure monitoring:**
+   - Input drift: compare incoming feature distributions to training baseline (KS test, PSI)
+   - Output drift: monitor prediction distribution shifts
+   - Performance: track latency P50/P95/P99 targets (<50ms / <100ms / <200ms)
+4. **Enable canary deployment** -- Route 5% traffic to new model, compare metrics against baseline for 24-48 hours.
+5. **Validate** -- `python scripts/model_evaluation_suite.py --config config.yaml --deploy` confirms serving latency, error rate <0.1%, and model outputs match offline evaluation.
 
-Enterprise-scale data processing with distributed computing:
+## Workflow 5: Perform Causal Inference
 
-- Horizontal scaling architecture
-- Fault-tolerant design
-- Real-time and batch processing
-- Data quality validation
-- Performance monitoring
+1. **Assess assignment mechanism** -- Determine if treatment was randomized (use experiment analysis) or observational (use causal methods below).
+2. **Select method** based on data structure:
+   - **Propensity Score Matching**: when treatment is binary, many covariates available
+   - **Difference-in-Differences**: when pre/post data available for treatment and control groups
+   - **Regression Discontinuity**: when treatment assigned by threshold on running variable
+   - **Instrumental Variables**: when unobserved confounding present but valid instrument exists
+3. **Check assumptions** -- Parallel trends (DiD), overlap/positivity (PSM), continuity (RDD).
+4. **Estimate treatment effect** and compute confidence intervals.
+5. **Validate** -- Run placebo tests (apply method to pre-treatment period, expect null effect). Sensitivity analysis for unobserved confounding.
 
-### Pattern 2: ML Model Deployment
-
-Production ML system with high availability:
-
-- Model serving with low latency
-- A/B testing infrastructure
-- Feature store integration
-- Model monitoring and drift detection
-- Automated retraining pipelines
-
-### Pattern 3: Real-Time Inference
-
-High-throughput inference system:
-
-- Batching and caching strategies
-- Load balancing
-- Auto-scaling
-- Latency optimization
-- Cost optimization
-
-## Best Practices
-
-### Development
-
-- Test-driven development
-- Code reviews and pair programming
-- Documentation as code
-- Version control everything
-- Continuous integration
-
-### Production
-
-- Monitor everything critical
-- Automate deployments
-- Feature flags for releases
-- Canary deployments
-- Comprehensive logging
-
-### Team Leadership
-
-- Mentor junior engineers
-- Drive technical decisions
-- Establish coding standards
-- Foster learning culture
-- Cross-functional collaboration
+---
 
 ## Performance Targets
 
-**Latency:**
-- P50: < 50ms
-- P95: < 100ms
-- P99: < 200ms
+| Metric | Target |
+|--------|--------|
+| P50 latency | < 50ms |
+| P95 latency | < 100ms |
+| P99 latency | < 200ms |
+| Throughput | > 1,000 req/s |
+| Availability | 99.9% |
+| Error rate | < 0.1% |
 
-**Throughput:**
-- Requests/second: > 1000
-- Concurrent users: > 10,000
-
-**Availability:**
-- Uptime: 99.9%
-- Error rate: < 0.1%
-
-## Security & Compliance
-
-- Authentication & authorization
-- Data encryption (at rest & in transit)
-- PII handling and anonymization
-- GDPR/CCPA compliance
-- Regular security audits
-- Vulnerability management
+---
 
 ## Common Commands
 
@@ -184,43 +185,13 @@ kubectl logs -f deployment/service
 python scripts/health_check.py
 ```
 
-## Resources
+---
 
-- Advanced Patterns: `references/statistical_methods_advanced.md`
-- Implementation Guide: `references/experiment_design_frameworks.md`
-- Technical Reference: `references/feature_engineering_patterns.md`
-- Automation Scripts: `scripts/` directory
+## Reference Documentation
 
-## Senior-Level Responsibilities
-
-As a world-class senior professional:
-
-1. **Technical Leadership**
-   - Drive architectural decisions
-   - Mentor team members
-   - Establish best practices
-   - Ensure code quality
-
-2. **Strategic Thinking**
-   - Align with business goals
-   - Evaluate trade-offs
-   - Plan for scale
-   - Manage technical debt
-
-3. **Collaboration**
-   - Work across teams
-   - Communicate effectively
-   - Build consensus
-   - Share knowledge
-
-4. **Innovation**
-   - Stay current with research
-   - Experiment with new approaches
-   - Contribute to community
-   - Drive continuous improvement
-
-5. **Production Excellence**
-   - Ensure high availability
-   - Monitor proactively
-   - Optimize performance
-   - Respond to incidents
+| Document | Path |
+|----------|------|
+| Statistical Methods | [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md) |
+| Experiment Design Frameworks | [references/experiment_design_frameworks.md](references/experiment_design_frameworks.md) |
+| Feature Engineering Patterns | [references/feature_engineering_patterns.md](references/feature_engineering_patterns.md) |
+| Automation Scripts | `scripts/` directory |
