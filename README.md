@@ -4,7 +4,7 @@
 
 # AI Skills Library
 
-**The universal AI skills library for every coding assistant** — 199 expert-level skills with 210+ Python automation tools, 7 subagents, and 12 sample CI/CD workflows across 13 professional domains.
+**The universal AI skills library for every coding assistant** — 204 expert-level skills with 230+ Python automation tools, 7 subagents, and 12 sample CI/CD workflows across 13 professional domains.
 
 [![License: MIT + Commons Clause](https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-purple.svg)](https://claude.ai/code)
@@ -14,15 +14,15 @@
 [![Windsurf](https://img.shields.io/badge/Windsurf-0EA5E9.svg)](https://codeium.com/windsurf)
 [![Cline](https://img.shields.io/badge/Cline-EC4899.svg)](https://github.com/cline/cline)
 [![Aider](https://img.shields.io/badge/Aider-14B8A6.svg)](https://aider.chat)
-[![117 Skills](https://img.shields.io/badge/Skills-199-brightgreen.svg)](#skills-library-117-skills)
-[![215+ Tools](https://img.shields.io/badge/Python_Tools-210+-blue.svg)](#python-automation-tools-215)
+[![204 Skills](https://img.shields.io/badge/Skills-204-brightgreen.svg)](#skills-library-204-skills)
+[![230+ Tools](https://img.shields.io/badge/Python_Tools-230+-blue.svg)](#python-automation-tools-230)
 
 ## What You Get
 
 | | |
 |---|---|
-| **199 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
-| **210+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, compliance auditing, and beyond — all standard library, no ML dependencies |
+| **204 Skills** | Production-ready expertise across engineering, marketing, product, finance, HR, sales, compliance, and more |
+| **230+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, RICE prioritization, compliance auditing, QA automation, release orchestration, and beyond — all standard library, no ML dependencies |
 | **13 Domains** | Engineering, Marketing, Product, Project Management, C-Level Advisory, RA/QM Compliance, Business Growth, Finance, Data Analytics, HR, Sales, Advanced Engineering, Standards |
 | **7 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, git workflows, and **compliance auditing** |
 | **12 Sample Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation, auto-updates — copy to your `.github/workflows/` |
@@ -30,19 +30,24 @@
 
 ### What's New
 
+**March 18, 2026 — 5 New Engineering & PM Skills with 20 Python Tools (199 → 204 skills)**
+- **[qa-browser-automation](engineering-team/qa-browser-automation/SKILL.md)** — 11-phase browser QA protocol with health scoring (0-100), WCAG accessibility auditing, visual regression tracking, and safety controls (4 Python tools)
+- **[release-orchestrator](engineering-team/release-orchestrator/SKILL.md)** — End-to-end release pipeline with pre-flight checks, semantic versioning, changelog generation, and GO/NO-GO readiness scoring (4 Python tools)
+- **[doc-drift-detector](engineering-team/doc-drift-detector/SKILL.md)** — Documentation drift analysis with staleness scoring, API doc validation via Python AST, and link integrity auditing (4 Python tools)
+- **[sprint-retrospective](project-management/sprint-retrospective/SKILL.md)** — Data-driven sprint retros with velocity analytics, contributor insights, code churn analysis, and trend tracking (4 Python tools)
+- **[design-auditor](engineering-team/design-auditor/SKILL.md)** — 12-category design audit with AI slop detection, WCAG color contrast checking, design system validation, and 3 independent grades (4 Python tools)
+- **20 new Python CLI tools** — all standard library, no dependencies, JSON + human-readable output
+- Inspired by gstack's engineering workflows, built to surpass them with composable Python tooling and cross-platform support
+
 **March 12, 2026 — Skill Quality Optimization (40 skills improved, avg +46%)**
 - **40 skills improved** across 10 domains with optimized trigger clauses, structured workflows, and leaner content
 - Added "Use when..." activation triggers to YAML descriptions for better skill matching
-- Converted to third-person agent voice with numbered workflow steps and validation checkpoints
-- Split 5 oversized skills into SKILL.md + REFERENCE.md for progressive disclosure and reduced token usage
 - Community contribution by [@popey](https://github.com/popey) via `tessl skill review`
 
 **March 9, 2026 — Skills Mega-Expansion & Compliance Upgrade (109 → 199 skills)**
 - **82 NEW skills** across all domains — C-Level (21 new), Marketing (25 new), Business Growth (13 new), Engineering (22 new), Product (1 new)
 - **8 NEW compliance skills** — SOC 2 Type II, EU AI Act, NIS2, DORA, NIST CSF 2.0, PCI-DSS v4.0, CCPA/CPRA, ISO 42001
-- **Compliance Auditor Agent** — Multi-framework audit agent covering 18 compliance standards with automated gap analysis and remediation roadmaps
-- **22 PM skills** with discovery and execution frameworks, 10 Python CLI tools, and Atlassian MCP integration
-- **199 total skills** — the largest open-source AI skills library available
+- **204 total skills** — the largest open-source AI skills library available
 
 ---
 
@@ -55,7 +60,7 @@
   - [Using Skills](#1-using-skills-domain-expertise)
   - [Using Subagents](#2-using-subagents-autonomous-workflows)
   - [Using Workflows](#3-using-workflows-cicd-automation)
-- [Skills Library (199 Skills)](#skills-library-117-skills)
+- [Skills Library (199 Skills)](#skills-library-204-skills)
 - [Claude Code Subagents](#claude-code-subagents)
 - [Sample GitHub Workflows (12)](#sample-github-workflows-12)
 - [Repository Structure](#repository-structure)
@@ -605,15 +610,20 @@ Quality Report:
 ## What's New in v2.0.0
 
 ### Repository Stats
-- **109** skills across **13** domains
-- **180** Python automation tools
-- **6** Claude Code subagents
+- **204** skills across **13** domains
+- **230+** Python automation tools
+- **7** Claude Code subagents
 - **12** CI/CD workflows
 
-### New Skills
-- claude-code-mastery (engineering-team)
-- codex-cli-specialist (engineering-team)
-- devops-workflow-engineer (engineering-team)
+### Latest Skills (March 2026)
+- qa-browser-automation (engineering-team) — 4 tools
+- release-orchestrator (engineering-team) — 4 tools
+- doc-drift-detector (engineering-team) — 4 tools
+- design-auditor (engineering-team) — 4 tools
+- sprint-retrospective (project-management) — 4 tools
+- claude-code-mastery (engineering-team) — 3 tools
+- codex-cli-specialist (engineering-team) — 3 tools
+- devops-workflow-engineer (engineering-team) — 3 tools
 
 ### Installation
 git clone https://github.com/borghei/Claude-Skills.git
@@ -622,9 +632,9 @@ python scripts/skill-installer.py install <skill-name> --agent claude
 
 ---
 
-## Skills Library (199 Skills)
+## Skills Library (204 Skills)
 
-### Engineering Team (24)
+### Engineering Team (28)
 Core software engineering expertise with Python automation tools, references, and templates.
 
 | Skill | Description | Tools |
@@ -653,6 +663,10 @@ Core software engineering expertise with Python automation tools, references, an
 | [claude-code-mastery](engineering-team/claude-code-mastery/SKILL.md) | CLAUDE.md optimization, skill authoring, subagents, hooks | 3 |
 | [codex-cli-specialist](engineering-team/codex-cli-specialist/SKILL.md) | Cross-platform skill authoring, Codex CLI, conversion tools | 3 |
 | [devops-workflow-engineer](engineering-team/devops-workflow-engineer/SKILL.md) | GitHub Actions, CI/CD pipelines, deployment strategies | 3 |
+| [qa-browser-automation](engineering-team/qa-browser-automation/SKILL.md) | 11-phase browser QA, health scoring, WCAG audit, visual regression | 4 |
+| [release-orchestrator](engineering-team/release-orchestrator/SKILL.md) | Release pipeline, pre-flight checks, versioning, readiness scoring | 4 |
+| [doc-drift-detector](engineering-team/doc-drift-detector/SKILL.md) | Documentation drift analysis, staleness scoring, API doc validation | 4 |
+| [design-auditor](engineering-team/design-auditor/SKILL.md) | 12-category design audit, AI slop detection, color contrast checking | 4 |
 
 ### Advanced Engineering (33)
 Enterprise-grade skills with sophisticated analysis tooling — including MCP server building, Playwright testing, CI/CD pipelines, SaaS scaffolding, and more.
@@ -779,8 +793,8 @@ User-centered product development with automation tools.
 | [design-system-lead](product-team/design-system-lead/SKILL.md) | Design tokens, component libraries, documentation | - |
 | [ab-test-setup](product-team/ab-test-setup/SKILL.md) | A/B testing design, statistical significance, feature flags | - |
 
-### Project Management (22)
-Delivery excellence with discovery, execution frameworks, Atlassian MCP integration, and 10 Python CLI tools.
+### Project Management (23)
+Delivery excellence with discovery, execution frameworks, Atlassian MCP integration, and 14 Python CLI tools.
 
 **Role-Based Skills (10)**
 
@@ -795,6 +809,7 @@ Delivery excellence with discovery, execution frameworks, Atlassian MCP integrat
 | [atlassian-templates](project-management/atlassian-templates/SKILL.md) | Template design, custom blueprints | - |
 | [agile-coach](project-management/agile-coach/SKILL.md) | Transformation, framework implementation, coaching | - |
 | [program-manager](project-management/program-manager/SKILL.md) | Multi-project coordination, portfolio governance | - |
+| [sprint-retrospective](project-management/sprint-retrospective/SKILL.md) | Data-driven sprint retros, velocity analytics, code churn, trend tracking | 4 |
 
 **Discovery Skills (4)**
 
@@ -1046,7 +1061,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ---
 
 <p align="center">
-  <strong>The universal AI skills library. 199 skills. 210+ Python tools. 12 sample workflows. 13 domains.</strong><br>
+  <strong>The universal AI skills library. 204 skills. 230+ Python tools. 12 sample workflows. 13 domains.</strong><br>
   Works with Claude, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose & more.
 </p>
 

@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — 199 production-ready skill packages across 13 professional domains with 215+ Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — 204 production-ready skill packages across 13 professional domains with 230+ Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -24,11 +24,11 @@ This is the **universal AI skills library** — 199 production-ready skill packa
 ## Repository Structure
 
 ```
-├── engineering-team/     # 24 core engineering skills + 50 Python tools
+├── engineering-team/     # 28 core engineering skills + 66 Python tools
 ├── engineering/          # 33 advanced architecture skills + 33 Python tools
 ├── marketing-skill/      # 35 marketing skills + 6 Python tools
 ├── product-team/         # 8 product skills + 6 Python tools
-├── project-management/   # 21 PM skills + 5 Python tools
+├── project-management/   # 23 PM skills + 14 Python tools
 ├── c-level-advisor/      # 26 C-level advisory skills + 4 Python tools
 ├── ra-qm-team/           # 21 regulatory/quality/compliance skills + 35 Python tools
 ├── business-growth/      # 16 business & growth skills + 9 Python tools

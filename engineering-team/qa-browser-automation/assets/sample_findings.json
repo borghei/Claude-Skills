@@ -1,0 +1,99 @@
+{
+  "project": "Example Web App",
+  "url": "https://app.example.com",
+  "tester": "QA Automation",
+  "tier": "standard",
+  "timestamp": "2026-03-18T14:30:00Z",
+  "findings": [
+    {
+      "severity": "P0",
+      "category": "functional",
+      "title": "Checkout form silently drops payment data on submit",
+      "description": "Submitting the checkout form with valid credit card data returns success but no charge is created. Order appears in dashboard with $0.00 total.",
+      "location": "/checkout",
+      "steps_to_reproduce": "1. Add item to cart. 2. Proceed to checkout. 3. Enter valid payment info. 4. Click Submit.",
+      "expected": "Payment is processed and order total matches cart",
+      "actual": "Order created with $0.00 total, no payment charge"
+    },
+    {
+      "severity": "P1",
+      "category": "accessibility",
+      "title": "Login form inputs have no associated labels",
+      "description": "Email and password fields use placeholder text only, with no <label> elements or aria-label attributes. Screen readers cannot identify the fields.",
+      "location": "/login",
+      "steps_to_reproduce": "Navigate to /login and inspect form elements",
+      "expected": "Each input has an associated label element",
+      "actual": "Inputs have placeholder only, no labels"
+    },
+    {
+      "severity": "P1",
+      "category": "console_errors",
+      "title": "Unhandled promise rejection on dashboard load",
+      "description": "TypeError: Cannot read properties of undefined (reading 'map') appears in console when loading the dashboard with no data.",
+      "location": "/dashboard",
+      "steps_to_reproduce": "Log in as new user with no data, navigate to /dashboard",
+      "expected": "Empty state message displayed",
+      "actual": "Blank page with console error"
+    },
+    {
+      "severity": "P2",
+      "category": "performance",
+      "title": "LCP exceeds 4 seconds on product listing page",
+      "description": "Largest Contentful Paint is 4.2 seconds due to unoptimized hero image (2.8 MB PNG).",
+      "location": "/products",
+      "steps_to_reproduce": "Navigate to /products on standard 4G connection",
+      "expected": "LCP <= 2.5 seconds",
+      "actual": "LCP = 4.2 seconds"
+    },
+    {
+      "severity": "P2",
+      "category": "visual_consistency",
+      "title": "Modal content overflows on mobile viewport",
+      "description": "Settings modal extends beyond viewport at 320px width, with no scroll and a clipped close button.",
+      "location": "/settings",
+      "steps_to_reproduce": "Open settings modal at 320px viewport width",
+      "expected": "Modal fits within viewport or scrolls internally",
+      "actual": "Content overflows, close button inaccessible"
+    },
+    {
+      "severity": "P3",
+      "category": "ux_flow",
+      "title": "No loading indicator during search",
+      "description": "Performing a search shows no loading state. Results appear after 1-2 seconds with no feedback.",
+      "location": "/search",
+      "steps_to_reproduce": "Enter a search query and submit",
+      "expected": "Loading spinner or skeleton while results load",
+      "actual": "No visual feedback during loading"
+    },
+    {
+      "severity": "P3",
+      "category": "security_headers",
+      "title": "Missing Content-Security-Policy header",
+      "description": "The application does not send a Content-Security-Policy header, increasing XSS risk.",
+      "location": "All pages",
+      "steps_to_reproduce": "Inspect response headers on any page",
+      "expected": "Content-Security-Policy header present",
+      "actual": "Header missing"
+    },
+    {
+      "severity": "P4",
+      "category": "content_quality",
+      "title": "Lorem ipsum placeholder text in footer",
+      "description": "The footer 'About Us' section contains 'Lorem ipsum dolor sit amet...' placeholder text.",
+      "location": "/ (footer)",
+      "steps_to_reproduce": "Scroll to footer on any page",
+      "expected": "Real content",
+      "actual": "Lorem ipsum placeholder"
+    },
+    {
+      "severity": "P4",
+      "category": "visual_consistency",
+      "title": "Inconsistent button border-radius across pages",
+      "description": "Buttons on /settings use 4px border-radius while buttons on /profile use 8px.",
+      "location": "/settings, /profile",
+      "steps_to_reproduce": "Compare button styles between pages",
+      "expected": "Consistent border-radius across all buttons",
+      "actual": "4px on /settings, 8px on /profile"
+    }
+  ]
+}

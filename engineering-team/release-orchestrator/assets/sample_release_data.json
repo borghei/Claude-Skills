@@ -1,0 +1,49 @@
+{
+  "version": "1.3.0",
+  "tests": {
+    "total_tests": 342,
+    "passed_tests": 340,
+    "coverage_percent": 82,
+    "flaky_tests": 1,
+    "coverage_delta": -0.5
+  },
+  "code_quality": {
+    "lint_errors": 0,
+    "type_errors": 2,
+    "complexity_violations": 1,
+    "duplication_percent": 3.2,
+    "dead_code_count": 0
+  },
+  "documentation": {
+    "readme_updated": true,
+    "api_docs_current": true,
+    "changelog_generated": true,
+    "migration_guide": false
+  },
+  "security": {
+    "secrets_found": 0,
+    "critical_cves": 0,
+    "high_cves": 0,
+    "medium_cves": 2,
+    "sast_clean": true
+  },
+  "breaking_changes": {
+    "breaking_changes_count": 1,
+    "breaking_changes_documented": true,
+    "migration_path_provided": true,
+    "deprecation_notice_given": false
+  },
+  "dependencies": {
+    "lock_files_consistent": true,
+    "yanked_packages": 0,
+    "major_upgrades_pending": 1,
+    "major_upgrades_reviewed": true,
+    "outdated_dependencies": 8
+  },
+  "rollback_plan": {
+    "rollback_documented": true,
+    "db_migration_reversible": true,
+    "feature_flags_in_place": true,
+    "monitoring_configured": true
+  }
+}

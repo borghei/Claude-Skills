@@ -5,6 +5,46 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-03-18
+
+### Added
+
+**New Skills (5):**
+- `qa-browser-automation` — 11-phase browser QA protocol with health scoring (0-100, 10 weighted categories), WCAG accessibility auditing, visual regression tracking, safety controls (50-fix cap, risk accumulator, revert protocol), and 4 Python tools
+- `release-orchestrator` — End-to-end release pipeline with pre-flight checks (secret scanning, branch sync, conventional commits), semantic versioning, changelog generation, GO/CONDITIONAL/NO-GO readiness scoring, and 4 Python tools
+- `doc-drift-detector` — Documentation drift analysis with staleness scoring (0-100, 5 dimensions), API doc validation via Python AST, link integrity auditing, auto-fix classification, and 4 Python tools
+- `sprint-retrospective` — Data-driven sprint retrospectives with velocity analytics, contributor insights (specialization detection, session analysis), code churn analysis (hotspots, oscillation detection), trend tracking, and 4 Python tools
+- `design-auditor` — 12-category design audit with AI slop detection (11 pattern types, confidence scoring), WCAG color contrast checking, design system token validation, 3 independent grades (Design/AI Slop/Accessibility), and 4 Python tools
+
+**Python Tools (20 new):**
+- `qa_health_scorer.py` — 10-category weighted QA scoring with baseline persistence and trend tracking
+- `accessibility_auditor.py` — WCAG 2.1 HTML analysis with 12 automated checks (A/AA/AAA levels)
+- `visual_regression_tracker.py` — SHA-256 baseline management with configurable change thresholds
+- `test_report_generator.py` — Markdown/JSON QA report generation with executive summaries
+- `preflight_checker.py` — 7-check release validation (secrets, branch sync, commits, conflicts)
+- `changelog_generator.py` — Conventional commit parsing with Keep a Changelog format output
+- `version_bumper.py` — Multi-file semver management (package.json, pyproject.toml, Cargo.toml, etc.)
+- `release_readiness_scorer.py` — 7-category deployment readiness with GO/NO-GO decisions
+- `drift_analyzer.py` — Git-based doc-code drift detection with 5 drift categories
+- `doc_staleness_scorer.py` — Documentation freshness scoring across 5 weighted dimensions
+- `api_doc_validator.py` — Python AST-based API doc validation (signatures, parameters, deprecations)
+- `link_checker.py` — Markdown link validation (files, anchors, cross-document references)
+- `velocity_analyzer.py` — Git velocity metrics with session detection and hourly distribution
+- `contributor_insights.py` — Per-contributor analysis with specialization detection and bus factor
+- `code_churn_analyzer.py` — File hotspot scoring, oscillation detection, refactoring candidates
+- `retro_report_generator.py` — Publication-ready retro reports with tweetable summaries
+- `design_scorer.py` — 12-category weighted design scoring with 3 independent grades (A-F)
+- `ai_slop_detector.py` — HTML/CSS pattern analysis for AI-generated UI detection
+- `color_contrast_checker.py` — WCAG AA/AAA contrast validation with fix suggestions
+- `design_system_validator.py` — CSS-to-token compliance checking with deviation reporting
+
+### Changed
+- Repository total: 199 → 204 skills, 210 → 230+ Python tools
+- Engineering Team: 24 → 28 skills (4 new)
+- Project Management: 22 → 23 skills (1 new)
+
+---
+
 ## [Unreleased] - 2026-02-27
 
 ### Added
@@ -213,6 +253,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Key Changes |
 |---------|------|-------------|
+| 2.1.0 | 2026-03-18 | 204 skills, 5 new skills (QA, release, doc-drift, retro, design), 20 new Python tools |
 | 2.0.0 | 2026-02-27 | 97+ skills, 6 subagents, 11 workflows, 3 new skills, 170+ Python tools |
 | 1.1.0 | 2025-10-21 | Anthropic best practices refactoring (5 skills) |
 | 1.0.2 | 2025-10-21 | GitHub repository pages (LICENSE, CONTRIBUTING, etc.) |

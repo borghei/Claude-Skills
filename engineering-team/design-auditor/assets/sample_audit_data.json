@@ -1,0 +1,182 @@
+{
+  "categories": {
+    "visual_hierarchy": {
+      "score": 7.5,
+      "findings": [
+        {
+          "description": "Homepage lacks clear visual entry point — competing headlines and CTAs create equal visual weight",
+          "priority": "high",
+          "fix": "Establish a single primary focal point using size contrast and whitespace",
+          "impact": 7
+        }
+      ]
+    },
+    "typography": {
+      "score": 8.0,
+      "findings": [
+        {
+          "description": "Body text line length exceeds 80 characters on wide screens",
+          "priority": "medium",
+          "fix": "Add max-width constraint (65ch) to paragraph containers",
+          "impact": 5
+        }
+      ]
+    },
+    "color_contrast": {
+      "score": 6.5,
+      "findings": [
+        {
+          "description": "Placeholder text in form inputs fails WCAG AA contrast (2.8:1 ratio)",
+          "priority": "critical",
+          "fix": "Darken placeholder color from #b0b0b0 to #767676 for 4.5:1 ratio",
+          "impact": 9
+        },
+        {
+          "description": "Secondary button text on light gray background has only 3.2:1 contrast",
+          "priority": "high",
+          "fix": "Darken button text or increase background contrast to meet 4.5:1",
+          "impact": 7
+        }
+      ]
+    },
+    "spacing_layout": {
+      "score": 7.0,
+      "findings": [
+        {
+          "description": "Inconsistent spacing between card components — varies between 16px, 20px, and 24px",
+          "priority": "medium",
+          "fix": "Standardize card gap to 24px using spacing token --space-lg",
+          "impact": 4
+        }
+      ]
+    },
+    "interaction_states": {
+      "score": 5.5,
+      "findings": [
+        {
+          "description": "Missing loading state for data table — no skeleton screen or spinner during fetch",
+          "priority": "high",
+          "fix": "Add skeleton loader matching table row structure",
+          "impact": 8
+        },
+        {
+          "description": "Empty state for search results shows only 'No results' without guidance",
+          "priority": "medium",
+          "fix": "Add suggestions: check spelling, try different keywords, or browse categories",
+          "impact": 6
+        },
+        {
+          "description": "Focus indicators removed globally with outline:none and no replacement",
+          "priority": "critical",
+          "fix": "Add visible focus-visible styles using 2px ring with brand color",
+          "impact": 10
+        }
+      ]
+    },
+    "navigation_ia": {
+      "score": 8.5,
+      "findings": [
+        {
+          "description": "Breadcrumb navigation missing on product detail pages",
+          "priority": "low",
+          "fix": "Add breadcrumb component showing Category > Subcategory > Product",
+          "impact": 4
+        }
+      ]
+    },
+    "responsive": {
+      "score": 7.0,
+      "findings": [
+        {
+          "description": "Data table requires horizontal scroll on mobile with no indication",
+          "priority": "high",
+          "fix": "Add scroll shadow indicators or convert to card layout on mobile",
+          "impact": 7
+        }
+      ]
+    },
+    "accessibility": {
+      "score": 5.0,
+      "findings": [
+        {
+          "description": "Form inputs missing associated label elements — using placeholder only",
+          "priority": "critical",
+          "fix": "Add visible <label> elements with for attribute matching input id",
+          "impact": 10
+        },
+        {
+          "description": "Modal dialog does not trap focus — tab key moves to background content",
+          "priority": "critical",
+          "fix": "Implement focus trap within modal and return focus on close",
+          "impact": 9
+        },
+        {
+          "description": "Skip navigation link missing",
+          "priority": "high",
+          "fix": "Add skip-to-content link as first focusable element",
+          "impact": 6
+        }
+      ]
+    },
+    "motion_animation": {
+      "score": 7.5,
+      "findings": [
+        {
+          "description": "Page transition animations do not respect prefers-reduced-motion",
+          "priority": "high",
+          "fix": "Add @media (prefers-reduced-motion: reduce) to disable or minimize animations",
+          "impact": 7
+        }
+      ]
+    },
+    "content_microcopy": {
+      "score": 6.0,
+      "findings": [
+        {
+          "description": "Error messages are generic — 'Something went wrong' without specific guidance",
+          "priority": "high",
+          "fix": "Replace with specific messages: what failed, why, and what the user can do",
+          "impact": 8
+        },
+        {
+          "description": "Three CTA buttons all say 'Learn More' without differentiating destination",
+          "priority": "medium",
+          "fix": "Use specific labels: 'View pricing', 'Read documentation', 'See case studies'",
+          "impact": 5
+        }
+      ]
+    },
+    "ai_slop": {
+      "score": 6.0,
+      "findings": [
+        {
+          "description": "Hero section follows generic centered-text-over-gradient pattern",
+          "priority": "medium",
+          "fix": "Redesign with asymmetric layout using product screenshots or interactive demo",
+          "impact": 6
+        },
+        {
+          "description": "Features section uses exact 3-column icon+heading+paragraph grid",
+          "priority": "medium",
+          "fix": "Vary layout with different block sizes or add product screenshots",
+          "impact": 5
+        }
+      ]
+    },
+    "performance_design": {
+      "score": 7.0,
+      "findings": [
+        {
+          "description": "Hero image causes layout shift (CLS) while loading",
+          "priority": "high",
+          "fix": "Add explicit width/height attributes or aspect-ratio CSS to image container",
+          "impact": 7
+        }
+      ]
+    }
+  },
+  "coherence": {
+    "score": 7.0,
+    "notes": "Generally consistent visual language with some off-system elements. Typography and color are cohesive but spacing inconsistencies break the rhythm."
+  }
+}

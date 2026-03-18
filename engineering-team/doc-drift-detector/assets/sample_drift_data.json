@@ -1,0 +1,76 @@
+{
+  "repository": "/path/to/example-project",
+  "scan_date": "2026-03-18T14:30:00Z",
+  "tool_version": "2.0.0",
+  "summary": {
+    "total_docs": 8,
+    "drifted_docs": 3,
+    "overall_score": 62,
+    "broken_links": 5,
+    "api_mismatches": 7
+  },
+  "staleness_scores": [
+    {"file": "README.md", "score": 78, "last_updated": "2026-03-01", "status": "good"},
+    {"file": "docs/api.md", "score": 34, "last_updated": "2025-12-15", "status": "critical"},
+    {"file": "docs/architecture.md", "score": 85, "last_updated": "2026-02-20", "status": "good"},
+    {"file": "CONTRIBUTING.md", "score": 92, "last_updated": "2026-03-10", "status": "excellent"},
+    {"file": "CHANGELOG.md", "score": 45, "last_updated": "2026-01-30", "status": "stale"},
+    {"file": "docs/deployment.md", "score": 58, "last_updated": "2026-02-01", "status": "stale"},
+    {"file": "docs/testing.md", "score": 71, "last_updated": "2026-02-15", "status": "good"},
+    {"file": "docs/security.md", "score": 88, "last_updated": "2026-03-05", "status": "good"}
+  ],
+  "drift_issues": [
+    {
+      "file": "docs/api.md",
+      "severity": "high",
+      "category": "factual",
+      "description": "Function create_user() signature changed: added 'role' parameter",
+      "fix_type": "semi",
+      "source_file": "src/handlers/users.py",
+      "source_line": 45
+    },
+    {
+      "file": "README.md",
+      "severity": "medium",
+      "category": "temporal",
+      "description": "Version string says 1.8.0, current version is 2.0.0",
+      "fix_type": "auto",
+      "source_file": "pyproject.toml",
+      "source_line": 3
+    },
+    {
+      "file": "docs/api.md",
+      "severity": "high",
+      "category": "structural",
+      "description": "Module 'src/handlers/webhooks.py' has no documentation section",
+      "fix_type": "manual",
+      "source_file": "src/handlers/webhooks.py",
+      "source_line": null
+    },
+    {
+      "file": "CHANGELOG.md",
+      "severity": "medium",
+      "category": "structural",
+      "description": "No entries for version 2.0.0 (released 2026-03-15)",
+      "fix_type": "semi",
+      "source_file": null,
+      "source_line": null
+    },
+    {
+      "file": "docs/deployment.md",
+      "severity": "low",
+      "category": "referential",
+      "description": "Link to 'scripts/deploy.sh' broken - file moved to 'bin/deploy.sh'",
+      "fix_type": "auto",
+      "source_file": "bin/deploy.sh",
+      "source_line": null
+    }
+  ],
+  "score_breakdown": {
+    "last_updated": {"weight": 0.20, "score": 65, "weighted": 13.0},
+    "code_doc_alignment": {"weight": 0.30, "score": 48, "weighted": 14.4},
+    "link_health": {"weight": 0.15, "score": 72, "weighted": 10.8},
+    "completeness": {"weight": 0.20, "score": 70, "weighted": 14.0},
+    "accuracy": {"weight": 0.15, "score": 65, "weighted": 9.75}
+  }
+}

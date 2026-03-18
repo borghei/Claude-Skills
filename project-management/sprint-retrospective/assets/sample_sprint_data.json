@@ -1,0 +1,84 @@
+{
+  "sprint": {
+    "name": "Sprint 23",
+    "start_date": "2026-03-04",
+    "end_date": "2026-03-18",
+    "team_size": 5
+  },
+  "velocity": {
+    "total_commits": 115,
+    "loc_added": 4823,
+    "loc_removed": 1976,
+    "loc_net": 2847,
+    "prs_merged": 14,
+    "avg_pr_size_loc": 203,
+    "throughput_per_day": 8.2,
+    "cycle_time_hours": 18.3,
+    "lead_time_hours": 22.1,
+    "deploy_frequency_per_day": 1.0,
+    "commit_types": {
+      "feat": 48,
+      "fix": 21,
+      "docs": 16,
+      "refactor": 14,
+      "test": 9,
+      "chore": 7
+    },
+    "sessions": {
+      "deep_work": 18,
+      "focused": 24,
+      "micro": 15
+    }
+  },
+  "contributors": [
+    {
+      "email": "alice@example.com",
+      "commits": 34,
+      "loc_added": 1204,
+      "loc_removed": 387,
+      "files_touched": 28,
+      "peak_hours": [10, 11, 14, 15],
+      "specialization": {"backend": 0.67, "tests": 0.22, "docs": 0.11},
+      "sessions": {"deep_work": 5, "focused": 4, "micro": 3},
+      "consistency_score": 0.82
+    },
+    {
+      "email": "bob@example.com",
+      "commits": 28,
+      "loc_added": 1567,
+      "loc_removed": 823,
+      "files_touched": 35,
+      "peak_hours": [9, 10, 11, 13, 14],
+      "specialization": {"frontend": 0.55, "backend": 0.30, "infra": 0.15},
+      "sessions": {"deep_work": 6, "focused": 5, "micro": 2},
+      "consistency_score": 0.75
+    },
+    {
+      "email": "carol@example.com",
+      "commits": 25,
+      "loc_added": 987,
+      "loc_removed": 412,
+      "files_touched": 22,
+      "peak_hours": [11, 14, 15, 16],
+      "specialization": {"backend": 0.48, "data": 0.32, "tests": 0.20},
+      "sessions": {"deep_work": 4, "focused": 7, "micro": 3},
+      "consistency_score": 0.88
+    }
+  ],
+  "churn": {
+    "hotspots": [
+      {"file": "src/api/handlers.py", "changes": 12, "authors": 3, "churn_score": 8.4},
+      {"file": "src/models/user.py", "changes": 8, "authors": 2, "churn_score": 5.2},
+      {"file": "src/ui/dashboard.tsx", "changes": 7, "authors": 2, "churn_score": 4.8}
+    ],
+    "churn_rate": 0.34,
+    "test_to_prod_ratio": 0.38,
+    "refactor_frequency": 0.12,
+    "hotspot_concentration": 0.32
+  },
+  "previous_action_items": [
+    {"text": "Reduce average PR size below 250 LOC", "status": "done"},
+    {"text": "Add integration tests for auth module", "status": "in_progress"},
+    {"text": "Schedule weekly knowledge-sharing sessions", "status": "not_started"}
+  ]
+}
