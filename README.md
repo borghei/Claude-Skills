@@ -30,6 +30,13 @@
 
 ### What's New
 
+**March 21, 2026 — Analytics Engineer Skill Package (community contribution)**
+- **[analytics-engineer](data-analytics/analytics-engineer/SKILL.md)** — Complete dbt skill package with star schema modeling, SQL optimization, testing standards, and 4 Python automation tools
+- 4 new Python tools: `impact_analyzer.py` (downstream lineage BFS), `schema_diff.py` (schema drift detection), `doc_generator.py` (model documentation), `quality_scorer.py` (dbt coding standards audit)
+- 4 reference guides: modeling patterns, dbt style guide, testing guide, SQL optimization
+- 4 asset templates: `dbt_project.yml`, `macros.sql`, `schema.yml`, `source.yml`
+- Community contribution by [@weemax](https://github.com/weemax)
+
 **March 18, 2026 — 5 New Engineering & PM Skills with 20 Python Tools (199 → 204 skills)**
 - **[qa-browser-automation](engineering-team/qa-browser-automation/SKILL.md)** — 11-phase browser QA protocol with health scoring (0-100), WCAG accessibility auditing, visual regression tracking, and safety controls (4 Python tools)
 - **[release-orchestrator](engineering-team/release-orchestrator/SKILL.md)** — End-to-end release pipeline with pre-flight checks, semantic versioning, changelog generation, and GO/NO-GO readiness scoring (4 Python tools)
@@ -1051,6 +1058,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 | Contributor | GitHub |
 |-------------|--------|
 | Alan Pope | [@popey](https://github.com/popey) |
+| Izzy | [@weemax](https://github.com/weemax) |
 
 ---
 
