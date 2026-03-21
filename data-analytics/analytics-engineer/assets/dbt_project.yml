@@ -1,0 +1,47 @@
+name: 'analytics_engine'
+version: '1.0.0'
+config-version: 2
+
+profile: 'redshift'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configure environments 
+models:
+  analytics_engine:
+    # Staging models are strictly views
+    staging:
+      +materialized: view
+      +schema: staging
+    
+    # Intermediate models are ephemeral or views
+    intermediate:
+      +materialized: ephemeral
+      
+    # Marts are fully materialized tables
+    marts:
+      +materialized: table
+      +schema: marts
+      
+      # For ultra-large facts, we configure incremental overrides
+      core:
+        fct_events:
+          +materialized: incremental
+          +incremental_strategy: merge
+          +unique_key: event_id
+
+# Global variable configuration
+vars:
+  # Lookback window for incremental models
+  incremental_lookback_days: 3
+  # Toggle for limits in dev environment
+  strict_mode: true

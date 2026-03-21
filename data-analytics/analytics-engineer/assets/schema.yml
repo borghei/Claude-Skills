@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "{{ doc('fct_orders_doc') }}" # Points to corresponding .md file
+    config:
+      materialized: incremental
+      unique_key: order_id
+      cluster_by: ['order_date']
+
+    columns:
+      - name: order_id
+        description: "Surrogate PK for the order."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: "FK routing back to dim_customers."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: order_status
+        description: "Current progression state."
+        tests:
+          - accepted_values:
+              values: ['pending', 'shipped', 'cancelled', 'returned']
+
+      - name: total_amount
+        description: "Gross revenue of the order in USD."
+        tests:
+          - not_null
+          # Implement dbt_utils generic macros
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+# Sample Semantic Layer Configuration
+metrics:
+  - name: gross_revenue
+    label: Gross Revenue
+    model: ref('fct_orders')
+    description: "Total gross amount driven by closed-won sales."
+    calculation_method: sum
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month, quarter]
+    dimensions:
+      - order_status
