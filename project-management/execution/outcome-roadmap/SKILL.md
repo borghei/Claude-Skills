@@ -166,6 +166,73 @@ For each initiative, the transformed roadmap includes:
 | `roadmap_transformer.py` | Transform output initiatives to outcomes | `python scripts/roadmap_transformer.py --input roadmap.json` |
 | `roadmap_transformer.py` | Run demo transformation | `python scripts/roadmap_transformer.py --demo` |
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| All initiatives classified as "Later" | Quarter strings do not match expected format (e.g., "Q2 2026") or dates are far future | Verify `quarter` field uses "Q[1-4] YYYY" format; the tool uses current date to compute Now/Next/Later horizons |
+| "So what?" chain produces vague outcomes | Team stopped the chain too early or did not reach business impact | Push through at least 3 "So what?" levels; the last answer should reference a business metric (revenue, retention, cost) |
+| Stakeholders keep asking "when exactly will this ship?" | Commitment levels not communicated clearly, or stakeholders trained to expect dates | Redirect to Now/Next/Later commitment framework; Now items have dates, Next has direction, Later has intent only |
+| Outcome statements all sound the same | Using the template formula mechanically without domain-specific context | Customize the "[customer segment]", "[desired outcome]", and "[business impact]" placeholders with real data |
+| Roadmap has too many "Now" items | Team not making hard prioritization choices, or everything feels urgent | Enforce a cap: maximum 2-3 Now items at any time; use `prioritization-frameworks/` to rank competing priorities |
+| Demo mode works but custom input fails | JSON schema mismatch: missing `initiatives` key or missing required fields per item | Each initiative needs `title`, `description`, `quarter`, and `type` (feature/improvement/infrastructure) |
+
+## Success Criteria
+
+- Every roadmap initiative has an outcome statement answering Who benefits, What changes, and Why it matters
+- Now items have full outcome statements with 2-3 measurable success metrics and dependencies documented
+- Next items have outcome statements with draft metrics (no counter-metrics required)
+- Later items have problem statements and strategic intent only (no false-precision metrics or solutions)
+- Stakeholders understand and accept the commitment level framework (Now = high, Next = medium, Later = low)
+- Roadmap is reviewed quarterly with stakeholders to validate horizon placement
+- Output-to-outcome transformation reduces "when will it ship?" questions by 50%+
+
+## Scope & Limitations
+
+**In Scope:**
+- Transforming output-based feature lists into outcome-driven roadmap items
+- Now/Next/Later horizon classification based on quarter-to-current-date distance
+- "So what?" chain generation for each initiative
+- Strategic question prompts and metric suggestions by initiative type (feature, improvement, infrastructure)
+- Markdown and text report output with grouped-by-horizon formatting
+
+**Out of Scope:**
+- Feature prioritization or scoring (see `execution/prioritization-frameworks/`)
+- Detailed sprint-level planning or capacity allocation (see `scrum-master/`)
+- Product strategy or vision definition (outcome roadmaps communicate strategy, they do not create it)
+- Dependency management across teams (see `program-manager/`)
+
+**Important Caveats:**
+- Outcome roadmaps require a cultural shift. Teams accustomed to date-driven feature lists need coaching on commitment levels.
+- The tool generates outcome statement templates, not finished outcomes. The templates must be filled in with real customer and business data.
+- Later items intentionally lack detailed metrics. Adding false precision to uncertain items undermines the roadmap's credibility.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `execution/brainstorm-okrs/` | Receives from | OKR key results become success metrics for Now/Next roadmap items |
+| `execution/prioritization-frameworks/` | Receives from | RICE/ICE scores inform which initiatives move to Now vs. Next vs. Later |
+| `execution/create-prd/` | Feeds into | Now items with validated outcomes become PRD candidates |
+| `discovery/brainstorm-experiments/` | Receives from | Experiment results validate demand for Next/Later items, promoting them to Now |
+| `senior-pm/` | Receives from | Portfolio strategic priorities influence roadmap horizon placement |
+| `scrum-master/` | Receives from | Sprint capacity data determines how many Now items the team can support |
+
+## Tool Reference
+
+### roadmap_transformer.py
+
+Transforms output-based roadmap initiatives into outcome-driven format with horizon classification, strategic questions, and metric suggestions.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--input` | string | (required, mutually exclusive with --demo) | Path to JSON file containing roadmap initiatives |
+| `--demo` | flag | off | Run transformation on built-in demo data (5 initiatives) |
+| `--format` | choice | `text` | Output format: `text`, `json`, or `markdown` |
+| `--output` | string | stdout | Output file path; if omitted, prints to stdout |
+
+**Supported initiative types:** `feature`, `improvement`, `infrastructure`
+
 ## References
 
 - `references/outcome-roadmap-guide.md` -- Detailed guide with comparison, formulas, and stakeholder strategies

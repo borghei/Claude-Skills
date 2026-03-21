@@ -180,3 +180,48 @@ python scripts/growth_model.py --current 10000 --growth 0.1 --months 12
 - `references/acquisition.md` - Channel playbooks
 - `references/retention.md` - Retention strategies
 - `references/viral.md` - Viral mechanics
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| K-factor below 0.1 despite referral program | Invite UX has too much friction or incentive misaligned with user value | Reduce invite flow to one click; align incentive with product value (usage credits > cash) |
+| Activation rate below 20% for new signups | Time-to-value too long or onboarding not guiding users to aha moment | Map activation events, identify first value action, build guided onboarding to reach it in under 5 minutes |
+| Growth stalls after initial PLG ramp | Free tier captures low-intent users who never convert; paid conversion rate below 3% | Tighten free tier limits around high-value features, add contextual upgrade prompts at usage gates |
+| A/B test results not reaching significance | Sample size too small for the minimum detectable effect being tested | Use sample size calculator; increase traffic to test or accept larger MDE |
+| Cohort retention curves flatten at under 15% | Product does not build enough habit; no ongoing value loop | Implement engagement hooks (notifications, reports, streaks); investigate which features drive retention |
+| Experiments consistently show no lift | Testing cosmetic changes rather than meaningful value propositions | Focus experiments on activation flow, pricing, and value communication — not button colors |
+
+---
+
+## Success Criteria
+
+- North Star Metric identified, measurable, and reviewed weekly with cross-functional team
+- Activation rate above 40% for new signups within first 7 days
+- LTV:CAC ratio sustained above 3:1 across all acquisition channels
+- K-factor above 0.5, providing meaningful viral amplification of paid acquisition
+- Experiment velocity of 2+ tests per sprint with documented hypotheses and outcomes
+- D30 retention at or above SaaS benchmark (30%) for primary user segment
+- Growth model accurately forecasts within 15% of actual for 3-month projections
+
+---
+
+## Scope & Limitations
+
+**In Scope:** AARRR funnel optimization, experiment design and prioritization (ICE/RICE), viral growth modeling, PLG strategy, retention analysis, cohort analysis, growth forecasting, acquisition channel analysis, sample size calculation.
+
+**Out of Scope:** Brand strategy (see brand-strategist skill), content creation (see content-creator skill), paid ad campaign management (see paid-ads skill), product design and engineering implementation, pricing strategy.
+
+**Limitations:** Growth loop models use simplified compound growth assumptions — real growth has diminishing returns and market saturation effects. Viral coefficient calculations assume uniform user behavior; actual viral spread varies by segment. Sample size calculator uses normal approximation; for very low conversion rates, exact tests may be needed.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/growth_loop_modeler.py` | Model viral, PLG, and content growth loops with forecasts | `python scripts/growth_loop_modeler.py --type viral --users 1000 --k-factor 0.6 --months 12` |
+| `scripts/viral_coefficient_calculator.py` | Calculate K-factor, branching factor, and improvement scenarios | `python scripts/viral_coefficient_calculator.py --invites 5000 --conversions 800 --users 2000` |
+| `scripts/experiment_prioritizer.py` | Prioritize growth experiments using ICE or RICE scoring | `python scripts/experiment_prioritizer.py experiments.json --framework ice --demo` |

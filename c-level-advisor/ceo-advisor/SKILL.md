@@ -515,3 +515,90 @@ From `references/board_governance_investor_relations.md`:
 ⚠️ Cash burn increasing  
 ⚠️ Innovation stalling  
 ⚠️ Personal burnout signs
+
+---
+
+## Tool Reference
+
+### strategy_analyzer.py
+
+Comprehensive strategic position analysis across 5 pillars (market position, financial health, operational excellence, organizational capability, growth potential). Applies Porter's Five Forces, SWOT, and BCG matrix.
+
+```bash
+# Run with demo data
+python scripts/strategy_analyzer.py
+
+# Run with custom company data (JSON)
+python scripts/strategy_analyzer.py < company_data.json
+```
+
+**Input format**: JSON with `market_position`, `financial_health`, `organizational_capability`, `growth_potential`, `competitive_forces` objects. Each contains factor scores (0-100).
+
+**Output**: Strategic health score (0-100), pillar-level analysis, strategic options ranked by priority, risk assessment, and 4-phase roadmap.
+
+### financial_scenario_analyzer.py
+
+Models multiple financial scenarios with NPV, IRR, break-even analysis, and risk-adjusted returns.
+
+```bash
+# Run with demo scenarios
+python scripts/financial_scenario_analyzer.py
+
+# Run with custom base case and scenarios (JSON)
+python scripts/financial_scenario_analyzer.py < scenarios.json
+```
+
+**Input format**: JSON with `base_case` (revenue, cogs, operating_expenses, cash, burn_rate, valuation) and `scenarios` array (each with name, probability, growth_model, growth_rate, changes).
+
+**Output**: Base case summary, per-scenario projections (3-year), NPV, IRR, break-even month, risk-adjusted expected value, and recommended scenario.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Strategy analysis scores all pillars as "Adequate" (50) | Default scores used because no data provided | Provide actual pillar data; defaults mask real strengths and weaknesses |
+| Board loses confidence in CEO updates | Updates are vague or miss key metrics | Use the 3-sentence executive summary format; lead with numbers, not narratives |
+| Strategic plan exists but execution stalls | No OKR cascade or accountability mechanism | Tie strategy to quarterly rocks; review weekly in L10 meetings |
+| Investor updates generate more questions than answers | Missing key metrics or unclear narrative | Follow Monthly Metrics Package template; include variance explanations for every miss |
+| Crisis response is reactive and chaotic | No pre-defined severity levels or response playbook | Implement 3-level crisis framework; run tabletop exercises quarterly |
+| Culture initiatives don't stick | No reinforcement mechanism; treated as one-time event | Embed culture metrics in performance reviews; CEO models behaviors visibly |
+| Board meeting prep is always last-minute | No structured T-minus timeline | Implement the T-14 to T-0 preparation workflow; assign Chief of Staff as owner |
+
+---
+
+## Success Criteria
+
+- Strategic health score improves quarter-over-quarter (tracked via strategy_analyzer.py)
+- Board confidence rating maintained at 8+/10 (informal quarterly feedback)
+- Investor update sent within 24 hours of month-end close with zero data discrepancies
+- Crisis response time: Level 1 within 24 hours, Level 2 within 4 hours, Level 3 immediate
+- Executive team alignment: 90%+ of leadership can articulate top 3 company priorities identically
+- Succession plan exists for CEO and all direct reports, reviewed annually
+- CEO time allocation: 40%+ on strategic work, less than 25% on operational firefighting
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Strategic planning frameworks, financial scenario modeling, board governance, investor relations, crisis management, culture development, CEO routines and decision frameworks.
+
+**Out of Scope**: Legal advice, regulatory filings, actual fundraising execution, personal coaching beyond frameworks, industry-specific competitive intelligence, board member recruiting.
+
+**Limitations**: Strategy analyzer uses weighted scoring which simplifies complex strategic reality. Financial scenario models use simplified growth projections -- they are directional, not precise forecasts. Crisis playbooks provide structure but cannot predict specific crisis scenarios.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `cfo-advisor` | Financial scenarios, fundraising strategy, board financial sections |
+| `board-deck-builder` | Executive summary and strategic outlook sections of board decks |
+| `board-meeting` | CEO leads Phase 1 context and Phase 5 synthesis review |
+| `chief-of-staff` | Routes strategic questions; synthesizes multi-advisor outputs |
+| `company-os` | CEO sets vision that feeds 1-year plan and quarterly rocks |
+| `culture-architect` | Culture transformation frameworks; values-to-behaviors translation |
+| `founder-coach` | CEO personal development and leadership evolution |
+| `strategic-alignment` | Validates goal cascade from vision to team-level OKRs |

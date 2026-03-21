@@ -449,3 +449,98 @@ Reference: `assets/expected_output.json`
 - Customer impact assessment of portfolio decisions
 
 This skill represents the pinnacle of enterprise project management capability, providing both strategic oversight and tactical execution support for complex digital transformation initiatives. The combination of quantitative analysis, sophisticated prioritization, and executive-level communication enables senior project managers to drive significant business value while managing enterprise-level risks and complexities.
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Portfolio health score does not match stakeholder perception | Dimension weights misaligned with organizational priorities, or data inputs incomplete | Recalibrate HEALTH_DIMENSIONS weights with executive sponsors; ensure all 5 dimensions have data |
+| Risk matrix shows all risks clustered in medium zone | Probability/impact scoring lacks granularity or team avoids extreme ratings | Facilitate risk calibration workshop; use three-point estimation and reference past incidents |
+| Resource capacity planner shows zero gaps despite team complaints | Utilization data does not account for meeting overhead, context-switching, or unplanned work | Verify CAPACITY_FACTORS config; include 15% meeting overhead and 5% context-switching penalty |
+| Stakeholder mapper classifies everyone as "Manage Closely" | Power/interest thresholds too low for your organization, or scores inflated | Adjust POWER_THRESHOLD and INTEREST_THRESHOLD (default: 5); use relative ranking within group |
+| RAG status oscillates between green and amber weekly | Thresholds set too tight, or data updates cause noise | Widen amber band (e.g., 55-80 instead of 60-80); use rolling 2-week average instead of point-in-time |
+| EMV calculations produce unrealistically high risk exposure | Category weights compounding with high probability/impact scores | Review RISK_CATEGORIES weights; cap financial risk weight at 1.4x; validate probability estimates against historical data |
+| Executive reports are too long for stakeholder attention span | Report template includes too many detail sections for the audience | Tailor output to audience using the tone guide; executives need 1-page RAG summary, not full dimension breakdown |
+
+## Success Criteria
+
+- Portfolio average health score maintained above 75/100 across all active projects
+- On-time delivery rate exceeds 80% (within 10% of planned timeline)
+- Budget variance maintained below 5% average across the portfolio
+- Risk mitigation effectiveness above 90% (all critical/high risks have active mitigation plans)
+- Resource utilization consistently in the 70-85% optimal range
+- Stakeholder satisfaction above 8.5/10 as measured by quarterly surveys
+- All projects in red RAG status have documented intervention plans within 48 hours
+
+## Scope & Limitations
+
+**In Scope:**
+- Multi-project portfolio health assessment with weighted composite scoring
+- Quantitative risk analysis using EMV, probability/impact matrices, and category weighting
+- Resource capacity planning with utilization optimization and skill-matching
+- Stakeholder mapping with Mendelow's Matrix and targeted communication plans
+- Executive-level reporting with RAG status dashboards and strategic recommendations
+
+**Out of Scope:**
+- Sprint-level team management (see `scrum-master/` skill)
+- Product backlog management and feature prioritization (see `execution/prioritization-frameworks/`)
+- Agile coaching and team maturity assessment (see `agile-coach/` skill)
+- Financial modeling beyond project-level ROI (see `finance/` domain skills)
+- Contract negotiation and procurement management
+
+**Important Caveats:**
+- Health scores use deterministic formulas, not ML predictions. Calibrate thresholds to your portfolio context.
+- Risk EMV calculations assume independent risks. Portfolio risk correlation analysis (Step 4) provides a more accurate combined view but requires cross-project dependency data.
+- Resource capacity planning models are weekly snapshots; they do not account for intra-week variability or unplanned work spikes.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `scrum-master/` | Receives from | Sprint velocity and health metrics feed portfolio-level health dashboards |
+| `sprint-retrospective/` | Receives from | Retro insights inform stakeholder reports and process improvement tracking |
+| `execution/brainstorm-okrs/` | Feeds into | Portfolio priorities and strategic context shape quarterly OKR themes |
+| `execution/outcome-roadmap/` | Feeds into | Portfolio health data influences roadmap commitment levels (Now/Next/Later) |
+| `discovery/pre-mortem/` | Receives from | Launch-blocking tigers escalate into portfolio risk register |
+| `execution/release-notes/` | Complements | Release notes incorporate stakeholder communication plans from mapper |
+| Jira via Atlassian MCP | Bidirectional | Pull project data for health analysis; push status reports to Confluence |
+| Financial Systems | Receives from | Real-time budget and spend data for variance analysis |
+
+## Tool Reference
+
+### project_health_dashboard.py
+
+Aggregates project metrics across timeline, budget, scope, quality, and risk dimensions. Produces composite health scores and RAG status.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing project portfolio data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### risk_matrix_analyzer.py
+
+Builds probability/impact matrices, calculates weighted risk scores by category, and suggests mitigation strategies.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing risk register data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### resource_capacity_planner.py
+
+Models team capacity across projects, identifies utilization imbalances, and provides optimization recommendations.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing resource and project capacity data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### stakeholder_mapper.py
+
+Classifies stakeholders into Mendelow's Matrix quadrants and generates tailored communication plans with blocker engagement strategies.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (optional) | Path to JSON file with stakeholder data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+| `--demo` | flag | off | Run with built-in sample data (10 stakeholders) |

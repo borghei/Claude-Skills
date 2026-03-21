@@ -497,3 +497,70 @@ Diagnostic checklist when you lose a citation:
 - **Content Humanizer** — Use after writing. AI-sounding content performs worse in AI citations — AI systems prefer credible, human-sounding writing.
 - **Content Strategy** — Use when deciding which topics and queries to target for AI visibility.
 - **Marketing Analytics** — Use campaign analytics tools to track the business impact of AI citation traffic.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content not cited despite high DA | Poor extractability — answers buried in prose | Restructure with definition blocks, numbered steps, and FAQ pairs in first 200 words |
+| Cited on Perplexity but not ChatGPT | Different crawling and indexing pipelines per platform | Verify bot access for all AI crawlers; test rendering without JavaScript |
+| AI Overview shows competitor instead | Competitor has more extractable, better-attributed content | Audit competitor's cited content format and match or exceed specificity |
+| Citation dropped after site update | Page restructure broke the extraction pattern AI was using | Compare old vs new page structure; restore extractable blocks |
+| GPTBot blocked in robots.txt unknowingly | CMS update or security plugin overwrote robots.txt | Audit robots.txt after every CMS or plugin update; set up monitoring |
+| Schema markup present but no rich results | Missing required fields or content-markup mismatch | Validate with Google Rich Results Test; ensure schema matches visible page content |
+| AI cites your data but not your brand | Missing entity signals — no Organization schema or sameAs links | Implement Organization schema with sameAs to Wikidata, LinkedIn, and social profiles |
+
+---
+
+## Success Criteria
+
+- **AI citation rate**: Achieve citation in 30%+ of target queries across Perplexity, ChatGPT, and Google AI Overviews within 90 days of optimization
+- **Extractability score**: Score 6-7 out of 7 on the Content Extractability Scoring checklist for all key pages
+- **Bot access**: Zero AI crawlers blocked in robots.txt — verified monthly with automated monitoring
+- **Entity recognition**: Brand appears in Google Knowledge Panel and is recognized as an entity on Wikidata
+- **Schema coverage**: 100% of content pages have appropriate JSON-LD schema (Article, FAQPage, or HowTo) validated without errors
+- **Freshness cadence**: All key pages updated within the last 90 days with current dateModified signals
+- **CTR from AI Overviews**: Maintain organic CTR above 0.8% for queries where AI Overviews appear (benchmark: average drops to 0.61% with AI Overviews per 2026 data)
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Optimizing content structure for AI extraction and citation
+- Bot access configuration and monitoring
+- Schema markup implementation for AI discoverability
+- Entity optimization and Knowledge Graph presence
+- Citation tracking across AI search platforms
+- Content pattern design (definitions, steps, tables, FAQs)
+
+**Out of scope:**
+- Traditional organic ranking optimization (use SEO Specialist)
+- Content creation from scratch (use Content Production)
+- Paid search or paid AI placement strategies
+- AI model training data licensing or opt-out negotiations
+- Platform-specific API integrations for automated tracking
+- Social media optimization for AI-adjacent platforms
+
+**Known limitations:**
+- AI citation tracking is largely manual — no standardized API exists across platforms
+- Citation algorithms are opaque and change frequently without notice
+- Blocking AI training while allowing citation is not technically enforceable with current bot protocols
+- AI Overviews reduce traditional organic CTR by approximately 42-47% (2026 benchmarks), and this cannot be fully mitigated
+
+---
+
+## Scripts
+
+```bash
+# Analyze content for AI citability signals
+python scripts/content_scorer.py page.html --json
+
+# Simulate how content might appear in AI search results
+python scripts/serp_simulator.py --query "what is cloud cost optimization" --content page.md
+
+# Analyze keyword opportunities for AI search visibility
+python scripts/keyword_analyzer.py --keywords keywords.csv --json
+```

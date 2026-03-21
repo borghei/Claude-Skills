@@ -369,3 +369,96 @@ START: Culture debt identified
 | "Audit culture debt" | Debt inventory with priority, cost, and fix plan |
 | "Remote culture strategy" | Operating principles, tools, rituals for distributed teams |
 | "M&A culture integration" | Culture comparison matrix, clash risk map, integration timeline |
+
+---
+
+## Tool Reference
+
+### 1. culture_survey_analyzer.py
+
+Analyzes culture health survey results across 8 dimensions (psychological safety, clarity, fairness, growth, trust, recognition, belonging, autonomy). Calculates dimension scores, overall health rating, identifies strengths and risks, and generates action recommendations.
+
+```bash
+python scripts/culture_survey_analyzer.py --input survey_data.json --json
+python scripts/culture_survey_analyzer.py --input survey_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with survey responses (dimension scores per respondent, optional department/tenure metadata) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. values_alignment_scorer.py
+
+Scores alignment between stated values and observed behaviors using the Competing Values Framework quadrants (Clan, Adhocracy, Market, Hierarchy). Detects gaps between current and desired culture, identifies value-washing risks, and recommends alignment actions.
+
+```bash
+python scripts/values_alignment_scorer.py --input values_data.json --json
+python scripts/values_alignment_scorer.py --input values_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with stated values, behavioral evidence scores, and optional CVF quadrant assessments |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. engagement_tracker.py
+
+Tracks employee engagement metrics over time including eNPS, survey scores, participation rates, and retention correlation. Detects trends, flags declining dimensions, and generates quarterly engagement reports.
+
+```bash
+python scripts/engagement_tracker.py --input engagement_data.json --json
+python scripts/engagement_tracker.py --input engagement_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with periodic engagement data (eNPS scores, survey results, participation rates, optional attrition data) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Values posted on wall but never referenced in decisions | Values created as aspirational exercise, not operational tool | Run values-to-behaviors workshop; tie values to performance reviews, hiring rubrics, and recognition |
+| Culture survey scores declining quarter-over-quarter | Underlying issue not addressed after previous survey | Analyze by dimension to isolate the declining area; share results transparently; commit to specific actions with deadlines |
+| Star performer protected from cultural standards | Leadership avoidance or fear of losing output | Address within 1 week; culture debt compounds daily; document impact on team morale and attrition |
+| New hires say culture is "different than advertised" | Culture code describes aspiration, not reality | Rewrite culture code to describe what IS; include "who doesn't thrive here" section honestly |
+| eNPS declining but leadership claims culture is strong | Leadership disconnected from frontline experience; survey results not shared | Share survey results with full team; conduct skip-level conversations; address top 2 detractor themes |
+| Remote team members feel excluded from culture | Rituals designed for in-person only; hallway decisions on hybrid days | Apply Remote Culture Operating Principles; redesign rituals for hybrid; enforce "if one remote, all remote" meeting rule |
+| Culture committee produces no measurable impact | Committee is all HR, no peers; no decision authority or budget | Reconstitute with peer representatives; grant budget and decision authority; set quarterly culture OKRs |
+
+---
+
+## Success Criteria
+
+- Culture health score above 70% across all 8 assessment dimensions
+- eNPS above 30 (Good) sustained across 4 consecutive quarters
+- Values-to-behaviors translation completed for all stated values with observable anchors
+- 30-day employees can accurately describe the culture without prompting
+- Culture debt inventory reviewed quarterly with no "Critical" items unaddressed for more than 30 days
+- Survey participation rate above 80% indicating trust in the feedback process
+- Zero cultural standard exceptions for high performers (no "brilliant jerk" tolerance)
+
+---
+
+## Scope & Limitations
+
+**In scope:** Mission/vision/values workshop facilitation, values-to-behaviors translation, culture code creation, culture health assessment (8-dimension survey, eNPS), cultural rituals design by company stage, culture debt identification and management, remote/hybrid culture operating principles, M&A culture integration planning, and Competing Values Framework assessment.
+
+**Out of scope:** HR policy creation (use hr-operations/), compensation and benefits design (use chro-advisor), DEI program management, employee relations and conflict resolution, performance management system design, and organizational restructuring (use coo-advisor). Tools analyze survey and engagement data; continuous culture monitoring requires integration with HR platforms.
+
+**Limitations:** Culture assessment depends on honest survey responses; low participation rates (<50%) or fear of retaliation invalidate results. The Competing Values Framework provides a useful map but oversimplifies the complexity of real organizational culture. Culture change is slow (12-24 months for meaningful shifts); tools measure progress but cannot accelerate the human change process. M&A culture integration assessments are predictive, not deterministic.
+
+---
+
+## Integration Points
+
+- **chro-advisor** -- Hiring for culture fit, performance reviews tied to values, attrition analysis linked to culture health
+- **ceo-advisor** -- Culture strategy aligns with company vision; values refresh tied to strategic pivots
+- **coo-advisor** -- Culture rituals embedded in operating rhythm; org restructures assessed for culture impact
+- **change-management** -- Cultural dimension of any major change initiative; resistance patterns mapped to culture type
+- **founder-coach** -- Leadership style impact on culture; founder behavior modeling assessed against stated values
+- **company-os** -- Culture rituals integrated into the organizational operating system meeting cadence

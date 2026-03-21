@@ -287,3 +287,67 @@ After Email 4:
 | **launch-strategy** | Coordinating email sequences around product launches |
 | **content-creator** | Writing landing page copy that email CTAs point to |
 | **ab-test-setup** | Designing statistically valid email A/B tests |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Welcome email open rate below 40% | Deliverability issue or weak subject line | Check sender reputation and SPF/DKIM/DMARC. Test subject variants. |
+| Open rates declining across sequence | Fatigue or irrelevance | Shorten sequence, improve subject lines, or add more value per email. |
+| High opens, low clicks | Body copy or CTA is weak | Rewrite body with stronger benefit and simplify CTA to one action. |
+| High click rate, low conversion | Landing page problem | Audit post-click experience: message match, page speed, form friction. |
+| Rising unsubscribes after email 3 | Too frequent or too salesy | Increase spacing between emails and add more educational content. |
+| Emails clipped by Gmail | HTML template over 102KB | Use `render_size_analyzer.py` from email-template-builder to reduce size. |
+| Sequence not triggering | Automation platform misconfiguration | Verify trigger events, check suppression rules for conflicts. |
+
+---
+
+## Success Criteria
+
+- Welcome sequence open rate above 50% (benchmark: 50-70%)
+- Nurture sequence click-through rate above 3% (benchmark: 3-8%)
+- Trial expiration conversion rate above 10% (benchmark: 10-25%)
+- Unsubscribe rate below 0.5% per email (below 0.3% for nurture)
+- Every email has 3+ subject line A/B variants tested
+- Branching logic covers at least 2 behavioral segments per sequence
+- Sequence-level conversion rate (total conversions / initial sends) above 5%
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Lifecycle email sequence design, copy, timing, branching logic, segmentation, and performance optimization for SaaS/B2B.
+
+**Out of Scope:** Email HTML rendering (use email-template-builder), cold outreach sequences (use cold-email), marketing automation platform setup, transactional email infrastructure.
+
+**Limitations:** Benchmarks are SaaS/B2B focused. Adjust thresholds for e-commerce, consumer, or other verticals.
+
+---
+
+## Python Automation Tools
+
+### 1. Subject Line Scorer (`scripts/subject_line_scorer.py`)
+Scores sequence email subject lines for open-rate potential and auto-detects sequence type (welcome, trial, nurture, re-engagement).
+
+```bash
+python scripts/subject_line_scorer.py "Your trial ends tomorrow"
+python scripts/subject_line_scorer.py --file subjects.txt --json
+```
+
+### 2. Sequence Mapper (`scripts/sequence_mapper.py`)
+Generates a visual sequence map with timing, branching logic, and exit conditions from a sequence definition.
+
+```bash
+python scripts/sequence_mapper.py sequence_def.json
+python scripts/sequence_mapper.py --sample --json
+```
+
+### 3. Performance Analyzer (`scripts/performance_analyzer.py`)
+Analyzes email sequence metrics against benchmarks, identifies bottlenecks, and recommends optimizations.
+
+```bash
+python scripts/performance_analyzer.py metrics.json
+python scripts/performance_analyzer.py --sample --json
+```

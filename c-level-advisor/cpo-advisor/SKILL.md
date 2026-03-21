@@ -328,3 +328,97 @@ Every product team should operate as a trio: PM + Designer + Tech Lead.
 | "Product board section" | Board slide: north star, retention, roadmap highlights, risks |
 | "Set our north star" | North star proposal with hierarchy, leading indicators, and guard rails |
 | "Kill a product" | Sunset plan: timeline, migration, communication, team reallocation |
+
+---
+
+## Tool Reference
+
+### 1. product_portfolio_analyzer.py
+
+Analyzes a product portfolio using BCG matrix classification (Star/Cash Cow/Question Mark/Dog), calculates portfolio health scores, identifies investment misalignment, and generates rebalancing recommendations.
+
+```bash
+python scripts/product_portfolio_analyzer.py --input portfolio.json --json
+python scripts/product_portfolio_analyzer.py --input portfolio.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with products (revenue, growth rate, market share, engineering investment %, retention) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. feature_prioritizer.py
+
+Prioritizes features using RICE scoring (Reach x Impact x Confidence / Effort). Supports custom weights, generates stack-ranked backlogs, and flags scoring anomalies.
+
+```bash
+python scripts/feature_prioritizer.py --input features.json --json
+python scripts/feature_prioritizer.py --input features.json --method rice
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with features (reach, impact, confidence, effort, optional category) |
+| `--method` | optional | Scoring method: `rice` (default), `ice`, or `weighted` |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. product_health_scorer.py
+
+Scores product health across 5 dimensions: retention (D30/D90), engagement (DAU/MAU), satisfaction (NPS/Sean Ellis), growth (organic %), and activation (time to value). Generates PMF assessment and trend analysis.
+
+```bash
+python scripts/product_health_scorer.py --input product_data.json --json
+python scripts/product_health_scorer.py --input product_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with product metrics across retention, engagement, satisfaction, growth, and activation |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Products stuck as "question marks" for 2+ quarters | No decision framework or leadership avoidance | Force invest-or-kill decision at next portfolio review; set 90-day milestones with automatic kill trigger |
+| Engineering allocated to highest-revenue product while highest-growth product starves | Investment posture not aligned to growth potential | Run portfolio analyzer to quantify misalignment; reallocate using BCG classification |
+| RICE scores gamed by PMs inflating reach or impact | No calibration process or shared scoring standards | Require evidence for each score dimension; run quarterly calibration sessions across PM teams |
+| North star metric trending up while retention trends down | Wrong north star metric selected or metric is gameable | Re-evaluate north star against the 5 selection criteria; add retention as a guard rail metric |
+| Roadmap built from sales requests instead of user data | No structured intake process or CPO not filtering | Implement feature request triage; require user research evidence before roadmap inclusion |
+| Platform team has 6-week queue blocking stream teams | Platform not self-service; too many dependencies | Redesign platform for self-service APIs; add enabling team to unblock highest-priority streams |
+| No user research conducted in 90+ days | Research not embedded in team workflow or understaffed | Embed researcher in product trio; set minimum research cadence (2 studies per quarter minimum) |
+
+---
+
+## Success Criteria
+
+- Every product has a clear investment posture (Invest/Maintain/Harvest/Kill) reviewed quarterly
+- North star metric improving month-over-month for "Invest" products
+- D30 retention flattening or improving for all active products
+- Engineering investment percentage aligned to portfolio posture within 10% tolerance
+- Feature prioritization uses a consistent scoring framework across all PM teams
+- Time to first value decreasing quarter-over-quarter
+- No product classified as "question mark" for more than 2 consecutive quarters
+
+---
+
+## Scope & Limitations
+
+**In scope:** Product-market fit assessment, portfolio management (BCG classification, investment postures), north star metric framework, product organization design (team topologies, ratios, product trio), feature prioritization (RICE/ICE scoring), product health scoring, CPO dashboard metrics, and board-level product reporting.
+
+**Out of scope:** Feature-level product management (use product-team/product-strategist), UX design and research execution (use product-team/ux-researcher), engineering implementation planning (use engineering-team/ skills), pricing strategy (use cro-advisor pricing section), and customer success management. Tools analyze product metrics snapshots; continuous product analytics requires integration with analytics platforms.
+
+**Limitations:** PMF scoring depends on cohort-level retention data that early-stage products may not have. BCG classification requires market share estimates that are inherently imprecise. RICE scoring is subjective; quality depends on calibration rigor. Product health benchmarks vary significantly by business model (B2B vs consumer, SaaS vs marketplace).
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Product strategy translates CEO vision into product bets; portfolio health feeds board reporting
+- **cto-advisor** -- Technical feasibility co-owned; features vs platform trade-off decisions require CTO partnership
+- **cro-advisor** -- Sales-requested features filtered through CPO; expansion revenue depends on product roadmap
+- **cmo-advisor** -- Launch timing aligned with demand gen capacity; product positioning informs marketing
+- **cfo-advisor** -- Investment allocation per product justified with portfolio health data
+- **product-team/** -- CPO strategy executed through product managers; research and prioritization cascade down

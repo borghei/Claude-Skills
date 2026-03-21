@@ -126,6 +126,73 @@ Break into subsections:
 |------|---------|---------|
 | `prd_scaffolder.py` | Generate PRD skeleton | `python scripts/prd_scaffolder.py --product-name "MyProduct" --objective "Short description" --segments "Segment A, Segment B"` |
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| PRD scaffolder output is too generic | Only product name provided; objective and segments need specificity | Write a 1-2 sentence objective that states the outcome, not just the product category; define segments by jobs-to-be-done, not demographics |
+| Stakeholders skip reading the PRD | Document too long, too jargon-heavy, or lacks a clear Summary section | Ensure Section 1 (Summary) answers What/Who/Why in 3 sentences; cut any section beyond 1 page that is not Section 7 |
+| Engineering team builds the wrong thing | PRD focuses on solution before establishing problem context | Strengthen Section 3 (Background) and Section 5 (Market Segments); ensure problem definition precedes solution |
+| PRD assumptions never validated | Assumptions listed in Section 7 but no validation plan assigned | Add a validation plan column to the Assumptions table; link each assumption to `identify-assumptions/` or `brainstorm-experiments/` |
+| Scope creep after PRD approval | Section 8 (Release) does not clearly separate v1 from future versions | Be explicit about "Explicitly Deferred" items; ensure every stakeholder has seen and acknowledged the deferred list |
+| PRD becomes stale during development | Treated as a static document rather than a living reference | Update after implementation decisions change; archive final state and link to retrospective notes |
+| `--segments` flag parsing fails | Segments not properly comma-separated or contain special characters | Wrap the segments argument in quotes: `--segments "Segment A, Segment B"` |
+
+## Success Criteria
+
+- PRD passes the "10-second executive test" -- a busy executive understands scope from Section 1 alone
+- All 8 sections are complete before development begins (no placeholder sections remain)
+- Market segments defined by jobs-to-be-done, not demographics
+- Key Results in Section 4 are measurable with baselines, targets, and deadlines
+- Every assumption in Section 7 has a validation plan and owner
+- PRD reviewed by PM, Engineering Lead, Design Lead, and at least one stakeholder before commitment
+- v1 scope in Section 8 draws a clear line between what ships and what is explicitly deferred
+
+## Scope & Limitations
+
+**In Scope:**
+- 8-section PRD skeleton generation with guided placeholders
+- Section-by-section writing guidance following plain-language, specificity-over-abstraction principles
+- Market segment definition using jobs-to-be-done framework
+- Value proposition mapping with Value Curve competitive analysis
+- Release planning with Now/Next/Later and explicit deferral documentation
+
+**Out of Scope:**
+- Technical architecture or system design documents (see `engineering-team/` skills)
+- User story writing and backlog creation (see `execution/job-stories/` and `execution/wwas/`)
+- Detailed UX research or usability testing plans (see `product-team/` skills)
+- Financial business case modeling (see `finance/` domain skills)
+
+**Important Caveats:**
+- A PRD is a communication tool, not a contract. Treat it as a living document that evolves with implementation learning.
+- The 8-section framework is a proven structure, but lightweight agile teams may need only sections 1, 3, 4, 7, and 8. Heavyweight compliance contexts (medical devices, regulated industries) may need additional sections.
+- A 2025 Carnegie Mellon SEI study found that effective requirements management eliminates 50-80% of project defects. The investment in a clear PRD pays for itself in reduced rework.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `discovery/identify-assumptions/` | Receives from | Validated and "Test Now" assumptions populate PRD Section 7 with evidence |
+| `discovery/brainstorm-experiments/` | Receives from | Experiment results validate or invalidate PRD assumptions |
+| `discovery/pre-mortem/` | Receives from | Tiger mitigations become PRD risk sections |
+| `execution/brainstorm-okrs/` | Feeds into | PRD Key Results (Section 4) align with quarterly OKR targets |
+| `execution/outcome-roadmap/` | Feeds into | PRD release plan (Section 8) maps to roadmap Now/Next/Later horizons |
+| `execution/prioritization-frameworks/` | Receives from | Feature priority (P0/P1/P2) in Section 7 informed by RICE/ICE scoring |
+| `senior-pm/` | Feeds into | PRD stakeholder context feeds stakeholder mapper engagement plans |
+
+## Tool Reference
+
+### prd_scaffolder.py
+
+Generates a complete 8-section PRD markdown skeleton with guided placeholders, market segment sections, and value proposition templates.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--product-name` | string | (required) | Name of the product (used in title and headers) |
+| `--objective` | string | (required) | Short description of the product objective (1-2 sentences) |
+| `--segments` | string | (required) | Comma-separated list of market segments |
+| `--output` | string | stdout | Output file path; if omitted, prints to stdout |
+
 ## References
 
 - `references/prd-writing-guide.md` -- Section-by-section writing guide and review checklist

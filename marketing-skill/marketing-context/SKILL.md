@@ -412,3 +412,48 @@ Flag a context review when:
 - **Social Content** — Reads brand voice and audience details for platform-specific content.
 - **Brand Guidelines** — Aligns brand voice and personality between context and visual standards.
 - **Paid Ads** — Reads audience targeting details and value proposition for campaign setup.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Marketing copy sounds generic across all channels | Context document missing customer language section with verbatim quotes | Conduct 6-10 customer interviews; capture exact phrases used to describe problem and solution |
+| Sales and marketing using different messaging | Context document exists but not shared cross-functionally, or multiple conflicting versions | Consolidate into single source of truth; share with sales, product, and CS; version-control updates |
+| ICP keeps expanding until it includes everyone | No anti-persona defined; pressure to broaden targeting | Document who is NOT a good fit and why; validate ICP against top 20% customers by LTV |
+| Competitive positioning feels reactive | Landscape section only updated after losing deals, not proactively | Set monthly competitive review cadence; monitor competitor websites, pricing, and job postings |
+| Context document becomes stale within 2 months | No update triggers or review schedule defined | Assign section owners; set quarterly review calendar; flag automatic updates on product launches or ICP shifts |
+| New team members cannot find or understand the context | Document too long (50+ pages) or buried in wiki structure | Keep context under 10 pages; use templates with clear headers; include in onboarding checklist |
+
+---
+
+## Success Criteria
+
+- Context completeness score above 80% on context_completeness_checker.py (all 12 sections present with minimum depth)
+- Every positioning claim traceable to specific customer feedback or data source
+- Customer language section contains 10+ verbatim quotes (not paraphrased summaries)
+- Context document reviewed and updated at least quarterly, with change log
+- 100% of marketing skills reference context before starting work
+- ICP definition validated against actual customer data: A-fit customers have lowest churn and fastest close
+- Anti-personas defined with clear exclusion criteria to prevent wasted marketing spend
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Product positioning documentation, ICP definition and validation, buyer persona creation, competitive analysis framework, customer language capture, brand voice establishment, proof point compilation, objection handling, switching dynamics (JTBD Four Forces), content and SEO context, context maintenance and freshness management.
+
+**Out of Scope:** Brand visual identity (see brand-guidelines skill), marketing execution and campaign management (see marketing-ops skill), product strategy and roadmap (see product-team skills), market sizing and TAM analysis (see c-level-advisor skills).
+
+**Limitations:** Marketing context is only as accurate as the inputs — garbage in, garbage out. Context derived solely from internal assumptions (without customer interviews) will have blind spots. Competitive analysis is point-in-time; markets shift and require continuous monitoring.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/icp_fit_scorer.py` | Score prospects against ICP criteria with A/B/C/D grading | `python scripts/icp_fit_scorer.py prospects.json --icp icp_config.json --demo` |
+| `scripts/competitive_landscape_mapper.py` | Map competitive positioning, features, pricing, and identify gaps | `python scripts/competitive_landscape_mapper.py competitors.json --demo` |
+| `scripts/context_completeness_checker.py` | Audit marketing context document for missing or thin sections | `python scripts/context_completeness_checker.py context.md --json` |

@@ -412,3 +412,44 @@ System administrator with deep expertise in Atlassian Cloud/Data Center manageme
 - Provide Confluence Expert with template management
 - Ensure Senior PM has visibility into org health
 - Enable Scrum Master with team provisioning
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| SSO login fails intermittently for some users | SAML assertion clock skew, certificate expiration, or IdP session timeout mismatch | Check IdP and Atlassian server time sync (NTP); verify SAML certificate validity; align session timeout settings between IdP and Atlassian |
+| Users cannot access products after provisioning | SCIM sync delay, group membership not propagated, or product access not granted | Verify SCIM provisioning logs; manually check group membership; confirm product access is assigned (not just org access) |
+| Marketplace app causes performance degradation | App consuming excessive API calls, memory leaks, or incompatible with current Atlassian version | Check app-specific logs and resource usage; contact vendor for known issues; disable app temporarily and measure performance delta |
+| Backup restoration fails or produces incomplete data | Backup file corrupted, version mismatch between backup and target instance, or attachments excluded | Verify backup integrity checksums; ensure target instance version matches; confirm backup includes attachments and active storage |
+| Permission scheme changes do not take effect immediately | Browser cache, Jira index lag, or scheme not associated with the correct project | Clear browser cache; trigger a manual reindex; verify scheme-to-project association in project settings |
+| API rate limits hit during automation | Too many concurrent API calls from automation rules, scripts, or integrations | Implement rate limiting and retry logic in scripts; stagger automation rule execution; consider Atlassian Forge for higher limits |
+| Audit log gaps for critical admin actions | Audit logging level too low, or retention policy purging logs before review | Enable comprehensive audit logging; set retention to meet compliance requirements (minimum 1 year); export logs to SIEM for long-term storage |
+
+## Success Criteria
+
+- User provisioning/deprovisioning completes within 4 hours of request for standard access changes
+- SSO authentication success rate exceeds 99.5% measured monthly
+- All marketplace apps reviewed annually with documented security assessment
+- System uptime meets or exceeds 99.9% (excluding Atlassian-side outages)
+- Permission audit completed quarterly with findings documented and remediated within 30 days
+- Zero orphaned admin accounts (former employees retaining admin access)
+- Disaster recovery drill completed at least once per quarter with documented RTO/RPO results
+
+## Scope & Limitations
+
+**In Scope:** User provisioning and deprovisioning, group and permission management, SSO/SAML configuration, marketplace app lifecycle management, system performance optimization, security policy enforcement, backup and disaster recovery, audit logging and compliance, global configuration of Jira and Confluence settings, integration management.
+
+**Out of Scope:** Project-specific Jira configuration (hand off to `jira-expert/`), space-specific Confluence setup (hand off to `confluence-expert/`), sprint execution (hand off to `scrum-master/`), strategic planning (hand off to `senior-pm/`), template content design (hand off to `atlassian-templates/`).
+
+**Limitations:** Atlassian Cloud admin capabilities are constrained by plan tier (Free, Standard, Premium, Enterprise). Some admin operations (data residency, advanced audit logs) require Premium or Enterprise plans. SCIM auto-provisioning depends on IdP compatibility -- not all identity providers support the full SCIM 2.0 spec. Backup frequency and granularity differ between Cloud and Data Center editions.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `jira-expert/` | Admin -> Jira | Global workflow schemes, custom field creation, permission scheme deployment |
+| `confluence-expert/` | Admin -> Confluence | Global templates, space permission schemes, blueprint configuration |
+| `atlassian-templates/` | Admin -> Templates | Template governance policies, global template deployment approval |
+| `senior-pm/` | Admin -> PM | Usage analytics, capacity planning data, cost optimization recommendations |
+| `scrum-master/` | Admin -> SM | Team access provisioning, board configuration capabilities |
+| `agile-coach/` | Admin -> Coach | Organizational user data for team structure mapping |

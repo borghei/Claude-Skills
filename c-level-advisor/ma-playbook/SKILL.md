@@ -341,3 +341,63 @@ For ALL types, ask:
 | "Plan the integration" | 100-day integration plan with owners and milestones |
 | "Prepare to be acquired" | Readiness assessment + 6-month preparation plan |
 | "Build the data room" | Complete data room checklist with document list |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Due diligence keeps surfacing new issues after expected completion | DD scope not defined upfront; no priority matrix followed | Use the Priority Matrix strictly: deal-breakers in Week 1-2, valuation impact in Week 2-4; new findings after Week 4 go to post-close optimization |
+| Key employees leaving within 6 months of acquisition | Retention agreements insufficient or culture integration failed | Structure retention bonuses with 24-month cliff; conduct Day 1 welcome meetings; include acquired team in integration decisions |
+| Synergy targets missed at 100-day mark | Synergies were aspirational projections, not auditable targets | Require each synergy to have a specific metric, owner, and measurement method before deal close; track quarterly |
+| Integration stalls with no clear ownership | No Integration Management Office (IMO) or named integration lead | Appoint dedicated integration lead from Day 0; establish IMO with cross-functional representatives and weekly cadence |
+| Earnout disputes destroying the relationship | Metrics not clearly defined or seller lacks control over outcomes | Define earnout metrics that are measurable, auditable, and within seller's meaningful control; include dispute resolution mechanism |
+| Valuation gap between buyer and seller too large to bridge | Different methodologies or growth assumptions | Use multiple valuation methods and present range; bridge with earnout structure tied to the gap assumptions |
+| Post-acquisition customer churn spike | Customer communication delayed or inadequate; service disruption during integration | Execute customer communication on Day 1; maintain service continuity as Phase 1 priority; assign dedicated CS contact |
+
+---
+
+## Success Criteria
+
+- Strategic rationale articulated in one paragraph before any DD begins; "buy vs. build" analysis completed with clear justification
+- Due diligence completed within 8-week timeline with all Priority 1 items cleared by Week 2
+- Integration plan documented before deal close, not after, with named owners for every workstream
+- Day 1 checklist 100% executed: CEO welcome, customer communication, key person meetings, systems access, reporting structure
+- 100-day integration milestones met: 90%+ key person retention, zero customer churn attributable to integration, systems integrated per plan
+- Synergy targets tracked quarterly with variance < 15% from projections
+- Data room (if selling) complete and organized 30 days before process begins
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Strategic rationale assessment, buy vs. build analysis, due diligence frameworks (financial, technical, legal, people, market, product, security), valuation methodologies, deal structure negotiation, integration planning and execution, preparation for being acquired, data room construction
+- **Out of scope:** Legal document drafting (use M&A legal counsel); tax structure optimization (use tax advisors); regulatory antitrust filings (use specialized counsel); investment banking services (engage M&A advisor for process management)
+- **Limitation:** Valuation multiples are market-dependent and change with conditions; ranges provided are indicative benchmarks, not appraisals
+- **Limitation:** Framework optimized for technology company M&A (SaaS, software); manufacturing, retail, and regulated industry M&A have additional complexities
+- **Limitation:** Integration success depends heavily on cultural compatibility, which is difficult to assess fully during DD
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | M&A is a CEO strategic decision requiring board alignment | CEO strategy → M&A strategic rationale |
+| `cfo-advisor` | Valuation, deal structure, financial DD, and financing | M&A financials → CFO valuation model |
+| `cto-advisor` | Technical DD, architecture assessment, integration plan | M&A tech assessment → CTO integration roadmap |
+| `chro-advisor` | People DD, retention planning, culture assessment | M&A people risks → CHRO retention strategy |
+| `coo-advisor` | Integration execution, process merge, operational DD | M&A integration plan → COO execution |
+| `culture-architect` | Culture clash detection and integration culture plan | M&A culture assessment → Culture integration strategy |
+| `ciso-advisor` | Security posture assessment and compliance DD | M&A security audit → CISO remediation plan |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/due_diligence_tracker.py` | Track due diligence items across 8 domains with priority, status, and red flag detection | `python scripts/due_diligence_tracker.py add --domain financial --item "Revenue recognition audit" --priority 1 --json` |
+| `scripts/synergy_calculator.py` | Calculate and track revenue and cost synergies with confidence-weighted projections | `python scripts/synergy_calculator.py --revenue-synergies 500000 --cost-synergies 200000 --confidence 0.7 --timeline-months 24 --json` |
+| `scripts/integration_planner.py` | Generate a 100-day integration plan with phases, milestones, owners, and status tracking | `python scripts/integration_planner.py --mode absorb --target-name "AcquiredCo" --headcount 25 --json` |

@@ -163,6 +163,69 @@ Use `assets/experiment_plan_template.md` to document each experiment:
 - Use `identify-assumptions/` to find the riskiest assumptions to test.
 - After experiments, use `pre-mortem/` before committing to full build.
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Tool suggests only low-SITG experiments | Hypothesis text lacks action-oriented keywords (pay, purchase, upgrade) | Rewrite hypothesis using explicit behavioral verbs; check KEYWORD_SIGNALS mapping in script |
+| All experiments recommended are the same method | Hypothesis signals are too narrow or product_type is wrong | Verify `product_type` is set correctly (new vs. existing); broaden hypothesis to cover more intent signals |
+| Demo mode works but custom input fails | Input JSON schema does not match expected format (missing `hypotheses` key) | Validate JSON has top-level `hypotheses` array with `hypothesis_text`, `target_segment`, `product_type` per entry |
+| Experiment results are always inconclusive | Sample size too small or experiment duration too short for the metric | Extend timebox, increase traffic allocation, or choose a metric with higher signal-to-noise ratio |
+| Fake door test shows high clicks but feature never builds | No decision framework tied to experiment outcome | Define clear pass/fail thresholds before running; document the "if pass, then build" commitment upfront |
+| Team runs experiments but never acts on results | Results not connected to roadmap or prioritization process | Feed experiment outcomes into `identify-assumptions/` for re-scoring; link to `execution/outcome-roadmap/` |
+
+## Success Criteria
+
+- Every product hypothesis has a falsifiable XYZ statement before experiment design begins
+- Experiments measure Skin-in-the-Game (SITG) signals, not stated preferences
+- Pass/fail thresholds are defined before the experiment runs, not after
+- Experiment duration does not exceed 4 weeks for any single hypothesis
+- At least 70% of experiments produce a clear pass or fail verdict (not inconclusive)
+- Results directly feed the build/pivot/abandon decision within 1 week of experiment completion
+- Your Own Data (YODA) principle is followed -- no reliance on industry benchmarks for go/no-go decisions
+
+## Scope & Limitations
+
+**In Scope:**
+- XYZ hypothesis formulation and validation for product ideas
+- Experiment method selection for both new products (landing page, pre-order, concierge, explainer video) and existing products (fake door, feature stub, A/B test, Wizard of Oz, in-app survey)
+- Automated experiment design suggestions based on hypothesis keyword analysis
+- Metric selection, success threshold definition, and effort/duration estimation
+
+**Out of Scope:**
+- Statistical power analysis or sample size calculation (use dedicated A/B test platforms)
+- Experiment infrastructure setup (feature flags, analytics instrumentation)
+- Running the actual experiment (this skill designs experiments, not executes them)
+- Long-term product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
+
+**Important Caveats:**
+- Pretotyping is for validating demand and value, not for measuring usability or performance.
+- In-app surveys are the weakest SITG signal. Use them only when behavioral experiments are impractical.
+- The tool's keyword-to-signal matching is heuristic-based. Review suggested experiments and override when domain knowledge dictates a better method.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
+| `identify-assumptions/` | Receives from | "Test Now" assumptions become hypotheses for this skill |
+| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
+| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
+| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
+| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+
+## Tool Reference
+
+### experiment_designer.py
+
+Suggests 2-3 experiment designs for each product hypothesis based on keyword signal analysis.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input_file` | positional | (optional) | Path to JSON file with hypotheses array |
+| `--demo` | flag | off | Run with built-in sample data (3 hypotheses) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
 ## References
 
 - Alberto Savoia, *The Right It* (2019)

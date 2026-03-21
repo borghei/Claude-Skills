@@ -357,3 +357,96 @@ Example:
 | "Revenue board section" | ARR waterfall, NRR, pipeline coverage, forecast, risks |
 | "Design sales process" | Stage definitions, qualification criteria, deal review cadence |
 | "Win/loss analysis" | Aggregate findings by competitor, segment, and reason |
+
+---
+
+## Tool Reference
+
+### 1. revenue_waterfall_analyzer.py
+
+Analyzes ARR waterfall (new logo, expansion, contraction, churn) to calculate NRR, GRR, and net new ARR. Detects trends, flags retention risks, and benchmarks against SaaS industry standards.
+
+```bash
+python scripts/revenue_waterfall_analyzer.py --input revenue_data.json --json
+python scripts/revenue_waterfall_analyzer.py --input revenue_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with period-level ARR components (opening, new, expansion, contraction, churn) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. pipeline_coverage_calculator.py
+
+Calculates pipeline coverage ratios by quarter position, analyzes stage distribution health, detects deal aging risks, and generates pipeline adequacy assessments with action recommendations.
+
+```bash
+python scripts/pipeline_coverage_calculator.py --input pipeline_data.json --json
+python scripts/pipeline_coverage_calculator.py --input pipeline_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with deals (stage, value, age, close date), quota, and quarter dates |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. sales_efficiency_scorer.py
+
+Scores sales efficiency using Magic Number, CAC Payback, quota attainment distribution, win rate, and sales cycle metrics. Benchmarks against SaaS standards and generates improvement recommendations.
+
+```bash
+python scripts/sales_efficiency_scorer.py --input sales_data.json --json
+python scripts/sales_efficiency_scorer.py --input sales_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with revenue, S&M spend, rep-level quota attainment, win/loss counts, and cycle times |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| NRR declining 2+ quarters | Product-market fit erosion, CS gap, or ICP drift | Segment NRR by cohort and plan tier; diagnose whether churn is product, service, or fit-driven |
+| Pipeline coverage below 3x entering quarter | Insufficient top-of-funnel or poor lead-to-opp conversion | Audit lead sources by conversion rate; increase SDR activity; align with CMO on MQL volume |
+| Win rate dropping while sales cycle extends | Competitive pressure, product gap, or wrong ICP | Analyze win/loss by competitor and segment; review qualification criteria; check ICP alignment |
+| Less than 50% of AEs quota-attaining | Quota calibration, ramp, or enablement issue | Benchmark quota:OTE ratio (4-6x); review ramp schedule; assess territory balance |
+| Magic Number below 0.5 | S&M spend not converting to revenue efficiently | Review channel ROI; reduce spend on low-performing channels; improve rep productivity before adding headcount |
+| Forecast accuracy below 80% | Pipeline quality issues, sandbagging, or weak inspection | Standardize stage exit criteria; implement MEDDPICC qualification; conduct weekly deal reviews |
+| Expansion ARR less than 20% of total new ARR | Missing upsell/cross-sell motion or no expansion playbook | Design expansion triggers with CS; implement usage-based upsell alerts; create cross-sell bundles |
+
+---
+
+## Success Criteria
+
+- NRR exceeds 110% sustained across 4 consecutive quarters
+- Pipeline coverage maintains 3-4x quota with healthy stage distribution at quarter start
+- Win rate stable or improving against top 3 competitors
+- 60-70% of ramped AEs achieving quota attainment
+- Magic Number exceeds 0.75 indicating efficient S&M spend
+- CAC Payback under 18 months with LTV:CAC ratio above 3:1
+- Forecast accuracy exceeds 85% within two quarters of implementation
+
+---
+
+## Scope & Limitations
+
+**In scope:** Revenue health diagnostics (NRR, GRR, ARR waterfall), sales model selection and optimization, pipeline management (stage definitions, coverage modeling, MEDDPICC qualification), pricing strategy frameworks, sales team scaling (capacity model, quota setting, territory design), revenue forecasting, and board-level revenue reporting.
+
+**Out of scope:** CRM system administration or data extraction (tools consume JSON exports), individual deal coaching (tools flag patterns, not prescribe tactics), marketing attribution modeling (use cmo-advisor), customer success health scoring (use customer-success-manager), and compensation plan legal compliance. Tools analyze point-in-time revenue snapshots; continuous monitoring requires CRM/BI integration.
+
+**Limitations:** Revenue benchmarks based on aggregate B2B SaaS data; targets vary by stage, ACV, and sales motion (PLG vs enterprise vs channel). Pipeline analysis assumes accurate CRM data including stage, value, age, and close date. Sales efficiency metrics require accurate financial data that early-stage companies may not track. Quota recommendations are directional; final calibration requires territory-level analysis.
+
+---
+
+## Integration Points
+
+- **cfo-advisor** -- Revenue forecasts and capacity models feed financial planning; pricing impacts margin modeling
+- **cpo-advisor** -- Product roadmap must support ICP needs and close pipeline gaps; feature requests filtered through CPO
+- **cmo-advisor** -- Pipeline SLA and MQL-to-SQL conversion jointly owned; CAC optimization requires marketing alignment
+- **coo-advisor** -- RevOps staffing and commission infrastructure depend on operational capacity planning
+- **competitive-intel** -- Win/loss data and competitive win rates inform battlecard updates and positioning
+- **sales-success/** -- Sales efficiency metrics cascade to account executive and sales ops execution

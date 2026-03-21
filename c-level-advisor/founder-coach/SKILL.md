@@ -418,3 +418,62 @@ The first is leadership. The second is the trap.
 | "Am I growing as a leader?" | 360 feedback design + leadership evolution roadmap |
 | "What are my blind spots?" | Blind spot assessment with detection methods |
 | "Plan for my succession" | Succession readiness assessment + development plan |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Founder refuses to delegate despite knowing they should | Identity tied to execution; fear of irrelevance | Use the Co-Active coaching reframe: "Your value is multiplied through others, not diminished"; start with one low-risk delegation at Level 3 |
+| Calendar audit shows improvement but founder still feels overwhelmed | Energy management not addressed alongside time allocation | Run energy audit in parallel; reallocate based on energy impact, not just time categories |
+| Archetype assessment feels inaccurate | Founder is a hybrid or in transition between archetypes | Score across all four archetypes; most founders are 60/40 blend; focus on the dominant blind spot |
+| Delegation repeatedly fails (delegate drops the ball) | Delegating at wrong level; insufficient context provided | Move down one delegation ladder level; ensure context document exists; check if the right person was chosen |
+| Founder reports burnout symptoms but won't reduce workload | Structural dependency on founder; no capable backup | Build succession readiness to Level 2 first; hire specific capability gaps before reducing hours |
+| Co-founder conflict escalating despite awareness | Avoiding the direct conversation; hoping it resolves | Apply Hard Call framework from Executive Mentor; set 48-hour deadline for direct conversation with structured agenda |
+| Leadership evolution stalls at IC-to-Manager transition | Founder keeps doing the work instead of coaching the team | Remove founder from execution entirely for 2 weeks as forced experiment; track what breaks vs. what thrives |
+
+---
+
+## Success Criteria
+
+- Founder correctly identifies their primary archetype and has an active plan addressing their top blind spot within 30 days
+- Delegation ladder shows measurable progression: at least 3 tasks moved up one level per quarter
+- Calendar audit shows time allocation within 5% of stage-appropriate targets after 90 days
+- Energy audit results in net-positive energy balance: more energizing activities than draining ones
+- 360 feedback scores improve by at least 1 point on the identified blind spot dimension within 6 months
+- Succession readiness advances at least one level within 12 months
+- Burnout signal progression stays at Early stage or better; no founder reaches Late stage
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Founder personal development, archetype identification, delegation coaching, energy management, calendar optimization, leadership evolution, blind spot detection, imposter syndrome support, mental health awareness, succession planning
+- **Out of scope:** Clinical therapy (refer to licensed therapist for mental health treatment); couples counseling for co-founder relationships (refer to specialized mediator); executive recruiting (use CHRO Advisor); compensation design; legal aspects of founder transitions
+- **Limitation:** Self-assessment accuracy depends on founder honesty; 360 feedback provides external validation
+- **Limitation:** Growth ceiling model is stage-based approximation; actual ceilings vary by industry, culture, and individual
+- **Limitation:** Wellness indicators are screening tools, not clinical diagnostics; always refer to professionals for mental health concerns
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `executive-mentor` | Stress-testing founder decisions reveals development needs | Mentor challenges → Coach development areas |
+| `ceo-advisor` | Strategic leadership development aligns with CEO advisory | Coach leadership gaps → CEO strategic focus |
+| `chro-advisor` | Executive team hiring criteria informed by founder blind spots | Coach archetype gaps → CHRO hiring profile |
+| `culture-architect` | Founder behavior directly shapes culture | Coach behavior changes → Culture evolution |
+| `chief-of-staff` | Chief of Staff can handle delegation overflow | Coach delegation plan → CoS task assignment |
+| `org-health-diagnostic` | People health dimension reflects founder leadership quality | Health people score → Coach priority areas |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/startup_stage_assessor.py` | Assess current startup stage and identify the founder growth ceiling being approached | `python scripts/startup_stage_assessor.py --headcount 35 --arr 1200000 --stage series-a --json` |
+| `scripts/founder_wellness_checker.py` | Screen for burnout signals across early/mid/late stages with actionable recommendations | `python scripts/founder_wellness_checker.py --hours-per-week 65 --sleep-hours 5.5 --exercise-days 1 --json` |
+| `scripts/milestone_tracker.py` | Track founder development milestones across delegation, leadership evolution, and succession readiness | `python scripts/milestone_tracker.py add --category delegation --milestone "Hired first manager" --json` |

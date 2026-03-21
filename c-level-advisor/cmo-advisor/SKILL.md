@@ -184,3 +184,107 @@ python scripts/attribution.py --period monthly
 - `references/demand_gen_playbook.md` -- Campaign execution guide
 - `references/content_strategy.md` -- Content planning framework
 - `references/martech_stack.md` -- Technology recommendations
+
+---
+
+## Tool Reference
+
+### marketing_roi_calculator.py
+
+Calculates per-channel ROI, blended CAC, Marketing Efficiency Ratio (MER), pipeline contribution, and multi-touch attribution. Produces board-ready marketing performance reports.
+
+```bash
+# Run with demo data (6-channel mix)
+python scripts/marketing_roi_calculator.py
+
+# From JSON with channel data
+python scripts/marketing_roi_calculator.py --input marketing_data.json
+
+# JSON output
+python scripts/marketing_roi_calculator.py --json
+```
+
+### brand_health_tracker.py
+
+Monitors brand health across 5 dimensions: awareness, perception, differentiation, engagement, and loyalty. Tracks competitive share of voice.
+
+```bash
+# Run with demo data
+python scripts/brand_health_tracker.py
+
+# From JSON with brand metrics
+python scripts/brand_health_tracker.py --input brand_data.json
+
+# JSON output
+python scripts/brand_health_tracker.py --json
+```
+
+### channel_mix_optimizer.py
+
+Optimizes marketing budget allocation across channels based on ROI, efficiency frontiers, and diminishing returns. Projects impact of reallocation.
+
+```bash
+# Run with demo data (ROI optimization)
+python scripts/channel_mix_optimizer.py
+
+# Optimize for pipeline
+python scripts/channel_mix_optimizer.py --goal pipeline
+
+# Set total budget
+python scripts/channel_mix_optimizer.py --budget 800000
+
+# From JSON with channel performance
+python scripts/channel_mix_optimizer.py --input channels.json
+
+# JSON output
+python scripts/channel_mix_optimizer.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Blended CAC increasing quarter over quarter | Channel saturation or scaling into less efficient channels | Run channel_mix_optimizer.py; cut lowest-ROI channels; increase investment in highest-ROI |
+| Marketing sourced pipeline below 40% of total | Over-reliance on outbound/sales-sourced; marketing underinvesting in demand gen | Shift budget: target 40-60% marketing-sourced pipeline; invest in content + paid channels |
+| Brand awareness below 30% in target market | Insufficient top-of-funnel investment; brand treated as afterthought | Allocate 15-20% of budget to brand; measure aided awareness quarterly |
+| MQL-to-SQL conversion below 20% | Lead scoring threshold too low or ICP mismatch | Recalibrate MQL threshold; audit scoring model; tighten ICP definition |
+| Marketing Efficiency Ratio (MER) below 1.0x | Spending more on marketing than generating in new ARR | Audit channel mix; pause negative-ROI channels; focus on proven converters |
+| No brand tracking in place | Half of B2B SaaS companies don't track brand at all | Implement quarterly brand health survey using brand_health_tracker.py framework |
+
+---
+
+## Success Criteria
+
+- Marketing Efficiency Ratio (MER) above 1.5x -- every $1 of marketing generates $1.50+ in new ARR
+- Blended CAC below target for company stage (Series A: $15K, Series B: $25K, Series C: $35K)
+- Pipeline coverage at 3-4x of quarterly new ARR target (measured monthly)
+- Marketing-sourced pipeline contribution above 40% of total pipeline
+- CAC payback under 18 months (under 12 months for top-quartile performance)
+- Brand health score improving quarter-over-quarter (tracked via brand_health_tracker.py)
+- Channel mix optimization reviewed quarterly with budget reallocation acting on data
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Marketing ROI calculation, channel performance analysis, brand health tracking, lead scoring, campaign planning, budget allocation optimization, multi-touch attribution, competitive share of voice.
+
+**Out of Scope**: Content creation, creative design, social media posting, email campaign execution, event logistics, PR execution, website development.
+
+**Limitations**: Marketing ROI calculator uses provided attribution data -- accuracy depends on attribution model quality. Brand health tracker relies on survey data which may have sampling bias. Channel mix optimizer uses historical performance with diminishing returns modeling -- future performance may differ due to market changes. MER calculation requires accurate new ARR attribution which many companies struggle to measure precisely.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `cro-advisor` | Pipeline contribution alignment; marketing-sourced vs sales-sourced targets |
+| `cfo-advisor` | Marketing budget as % of revenue; CAC payback for unit economics |
+| `ceo-advisor` | Brand positioning alignment with company vision |
+| `cpo-advisor` | Product marketing alignment; feature launch campaigns |
+| `board-deck-builder` | Growth/marketing section with CAC, pipeline, channel performance |
+| `chief-of-staff` | Routes market strategy and brand questions |
+| `competitive-intel` | Competitive positioning; share of voice vs competitors |

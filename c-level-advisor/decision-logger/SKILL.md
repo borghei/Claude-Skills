@@ -390,3 +390,95 @@ memory/
 | "Log this decision" | Formatted decision entry with all fields |
 | "Check for conflicts" | Conflict scan against all active decisions |
 | "Decision summary for board" | Decision velocity, completion rate, open items |
+
+---
+
+## Tool Reference
+
+### 1. decision_tracker.py
+
+Tracks executive decisions with full lifecycle management (Proposed > Approved > Active > Completed/Superseded/Expired). Scans for overdue action items, stale decisions, and generates status summaries.
+
+```bash
+python scripts/decision_tracker.py --input decisions.json --json
+python scripts/decision_tracker.py --input decisions.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with decision records (title, status, owner, deadline, action items, tags) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. decision_quality_scorer.py
+
+Scores decision quality across 6 dimensions: framing (problem definition), alternatives (options considered), information (evidence quality), reasoning (logic soundness), commitment (action clarity), and metacognition (awareness of uncertainty). Generates improvement recommendations.
+
+```bash
+python scripts/decision_quality_scorer.py --input decision_assessments.json --json
+python scripts/decision_quality_scorer.py --input decision_assessments.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with decision assessments (dimension scores 1-10, optional outcome data) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. decision_tree_builder.py
+
+Builds decision trees with expected value analysis. Calculates optimal paths through probability-weighted outcomes, identifies highest-value decisions, and generates sensitivity analysis on key assumptions.
+
+```bash
+python scripts/decision_tree_builder.py --input tree_data.json --json
+python scripts/decision_tree_builder.py --input tree_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with decision nodes (options, probabilities, outcomes, values) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Same topic discussed 3+ times without a logged decision | Decision avoidance or no clear decision-making authority | Force a decision at next session; use decision tree builder to clarify options; assign explicit decision owner |
+| Action items consistently overdue by same owner | Owner over-committed, lacks capacity, or accountability issue | Review owner workload; redistribute if capacity issue; escalate to founder if accountability issue |
+| Decisions made without checking history | Decision log not consulted at session start; no integration habit | Automate decision log loading at board meeting Phase 1; surface relevant past decisions proactively |
+| Rejected proposals resurfacing in new language | DO_NOT_RESURFACE not enforced; team members unaware of prior rejection | Enforce conflict detection before logging; block proposals matching rejected items; require explicit "reopen" from founder |
+| Decision log growing but never consulted for patterns | Log treated as archive, not strategic tool | Run quarterly decision review; analyze decision velocity, completion rate, and quality trends |
+| All decisions owned by one person | Bottleneck or delegation failure | Distribute ownership; use decision quality scorer to assess whether centralization improves or hurts quality |
+| Decision quality scores low on "alternatives" dimension | Team anchoring on first option instead of exploring | Require minimum 3 alternatives for decisions above a threshold; use decision tree builder to model options |
+
+---
+
+## Success Criteria
+
+- All board meeting decisions logged in Layer 2 within 24 hours of approval
+- Action item completion rate exceeds 80% within stated deadlines
+- Zero DO_NOT_RESURFACE violations (rejected proposals do not re-enter decision flow)
+- Decision review dates honored for 90%+ of active decisions
+- Decision quality score averages above 7/10 across all 6 dimensions
+- Conflict detection catches 100% of topic contradictions before new decisions are logged
+- Decision log consulted at the start of every board meeting session
+
+---
+
+## Scope & Limitations
+
+**In scope:** Two-layer decision memory architecture, decision entry and lifecycle management (Proposed > Approved > Active > Completed/Superseded/Expired), conflict detection (DO_NOT_RESURFACE, topic contradiction, owner conflict), action item tracking with overdue alerting, decision search and retrieval by topic/owner/date/status, decision quality scoring, and expected value analysis via decision trees.
+
+**Out of scope:** CRM or project management tool integration (tools consume JSON exports), meeting transcription or recording, team-level task management (use project-management/ skills), strategic planning or OKR tracking (use strategic-alignment or ceo-advisor), and automated decision-making. This skill tracks and evaluates decisions; it does not make them.
+
+**Limitations:** Conflict detection uses tag and text matching; semantically similar but differently worded proposals may not be caught. Decision quality scoring is retrospective and depends on honest self-assessment. Decision tree expected value calculations assume probabilities are estimable; highly uncertain environments may make probability assignment misleading. The two-layer architecture requires discipline to maintain; if Layer 2 is not consistently updated, institutional memory degrades.
+
+---
+
+## Integration Points
+
+- **chief-of-staff** -- Manages the logging workflow; single point of control for Layer 2 writes
+- **board-meeting** -- Triggers decision logging after Phase 5 approval; decision log loaded at Phase 1
+- **strategic-alignment** -- Checks if decisions cascade properly to team goals and OKRs
+- **executive-mentor** -- Reviews stale decisions for re-evaluation; coaches on decision quality improvement
+- **ceo-advisor** -- Strategic decisions logged and tracked; decision patterns inform leadership coaching

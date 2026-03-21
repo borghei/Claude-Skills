@@ -337,3 +337,116 @@ Each section is owned by a specific C-suite role:
 | "Deliver bad news" | SOUF framework applied to specific situation |
 | "Fundraising deck" | Vision-led deck with traction, team, market, ask |
 | "Review my board deck" | Critique against best practices, identify gaps |
+
+---
+
+## Tool Reference
+
+### deck_structure_validator.py
+
+Validates board deck completeness against best-practice section requirements.
+
+```bash
+# Validate with demo data
+python scripts/deck_structure_validator.py
+
+# Validate specific deck type with slide count
+python scripts/deck_structure_validator.py --type quarterly --slides 24
+
+# Validate with section list
+python scripts/deck_structure_validator.py --sections executive_summary metrics_dashboard financial_update
+
+# Validate from JSON file
+python scripts/deck_structure_validator.py --input deck.json
+
+# JSON output
+python scripts/deck_structure_validator.py --input deck.json --json
+```
+
+### metrics_dashboard_generator.py
+
+Generates formatted board-ready metrics dashboards with RAG status and trends.
+
+```bash
+# Generate demo dashboard
+python scripts/metrics_dashboard_generator.py
+
+# From JSON metrics file
+python scripts/metrics_dashboard_generator.py --input metrics.json
+
+# From CSV file
+python scripts/metrics_dashboard_generator.py --csv metrics.csv
+
+# JSON output
+python scripts/metrics_dashboard_generator.py --json
+```
+
+### board_prep_checklist.py
+
+Generates T-minus timeline checklists for board meeting preparation.
+
+```bash
+# Generate checklist for meeting 14 days out
+python scripts/board_prep_checklist.py
+
+# Specific meeting date with completed tasks
+python scripts/board_prep_checklist.py --meeting-date 2026-04-15 --completed agenda_set topics_confirmed
+
+# List all task IDs
+python scripts/board_prep_checklist.py --list-tasks
+
+# JSON output
+python scripts/board_prep_checklist.py --meeting-date 2026-04-15 --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Board members ask basic questions answered in the deck | Deck not sent far enough in advance or not self-explanatory | Send 48+ hours ahead with a 3-takeaway cover note; ensure deck reads standalone |
+| Financial numbers don't match across sections | No CFO cross-validation step | Add T-5 day CFO validation checkpoint; single source of truth for all metrics |
+| Meeting runs over time on early sections | Too much detail in presenter slides, no time boxing | Enforce max 6 lines per slide; use speaker notes for depth; assign timekeeper |
+| Board members surprised by bad news | Information not previewed in 1:1 pre-calls | CEO pre-briefs each board member on material issues before the meeting |
+| Asks section produces no follow-through | Asks are vague ("any help appreciated") | Make asks specific, named, and actionable ("3 warm intros to Series B CFOs") |
+| Same deck format for 4+ quarters with no improvement | No post-meeting feedback loop | Rate deck effectiveness at meeting end; iterate one section per quarter |
+| Appendix never referenced | Appendix is stale or not relevant to current agenda | Update appendix before every meeting; remove data nobody has asked about in 2+ quarters |
+
+---
+
+## Success Criteria
+
+- Board members report reading the deck in advance in 80%+ of meetings (measured by pre-meeting questions received)
+- Meeting stays within time allocation with 70%+ of time on strategic discussion, not status updates
+- Every board meeting produces at least 2 logged decisions with named owners and deadlines
+- Bad news is never a surprise in the meeting -- all material issues previewed via 1:1 pre-calls
+- Board NPS (informal quarterly check) scores 8+/10 on meeting usefulness
+- Deck assembly completes by T-2 days with zero last-minute scrambles in 90%+ of quarters
+- Action items from previous meeting have 80%+ completion rate reported at the next meeting
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Board deck structure, section templates, narrative frameworks, bad news delivery, metrics dashboards, deck assembly workflows, board prep checklists, quality validation.
+
+**Out of Scope**: Actual financial data collection, slide design/visual formatting, board member relationship management, legal governance requirements, proxy statement preparation, regulatory filings.
+
+**Limitations**: This skill provides structure and process but cannot replace the judgment required for crafting board narratives. The deck structure validator checks completeness, not quality of content. Metrics dashboard tools calculate RAG status from provided data but do not source live metrics.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `ceo-advisor` | Executive summary and strategic outlook sections; overall narrative direction |
+| `cfo-advisor` | Financial update section; all numbers validated through CFO tools |
+| `cro-advisor` | Revenue and pipeline section; ARR waterfall and forecast confidence |
+| `cmo-advisor` | Growth/marketing section; CAC by channel, marketing ROI data |
+| `chro-advisor` | Team/people section; headcount, attrition, engagement metrics |
+| `ciso-advisor` | Risk/security section; security posture, compliance status |
+| `board-meeting` | Deck feeds into the 6-phase board meeting protocol |
+| `chief-of-staff` | Prep checklist coordination; section owner orchestration |
+| `company-os` | Scorecard metrics flow directly into the metrics dashboard section |

@@ -488,6 +488,126 @@ larger average PR sizes in the auth migration epic.
 
 ---
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| velocity_analyzer.py returns zero commits | Wrong date range, repo not fetched with full history, or branch filter excluding commits | Verify `--since`/`--until` dates; ensure `git fetch --all` was run; check `--repo` path points to a valid git repo |
+| Session detection shows 100% micro sessions | Session gap threshold too low, or all commits are atomic (one-line changes) | Increase `--gap-minutes` from 45 to 60-90; micro-heavy patterns may genuinely indicate context-switching |
+| Contributor specialization shows "other" for all files | File extensions not matching any SPECIALIZATION_PATTERNS category | Check if your codebase uses non-standard extensions; the tool classifies by extension and path patterns |
+| Code churn hotspots dominated by generated files | Auto-generated files (lock files, builds, migrations) inflate churn scores | Use `--path src/` to filter to source code, or add generated file patterns to .gitignore |
+| Retro report generator produces empty sections | Input JSON files contain `{}` or data keys do not match expected schema | Verify velocity JSON has `total_commits`, `loc`, `sessions` keys; run individual tools first to confirm output |
+| Previous action items not detected in carry-over | Action items in prior retro not formatted as `- [ ]` or `- [x]` markdown checkboxes | Ensure previous retro follows the standard checkbox format; the parser requires `- [ ]` prefix |
+| Cycle time estimate is zero or unrealistically low | No merge commits found in the period, or all work merged via squash without branch history | Cycle time requires merge commits; squash-merge workflows lose branch-to-merge timing data |
+
+## Success Criteria
+
+- Retrospective reports consistently generated within 5 minutes of sprint end using the 4-tool pipeline
+- Velocity trends tracked over 3+ sprints with sprint-over-sprint delta comparison
+- Code churn hotspots identified and addressed, reducing top-file churn rate below 0.5/day
+- Test-to-production ratio maintained above 0.3 (healthy range)
+- Deep work session ratio maintained above 30% of total sessions
+- Action item completion rate from previous retros tracked and exceeds 60%
+- Bus factor risks (single-owner directories) reduced sprint-over-sprint
+
+## Scope & Limitations
+
+**In Scope:**
+- Git history analysis for velocity, contributor, and code churn metrics
+- Session detection using commit timestamp gap analysis
+- Commit type classification via conventional commit prefix parsing
+- Markdown report generation with executive summary, dashboards, and action item tracking
+- Sprint-over-sprint comparison with directional deltas
+- Bus factor and knowledge silo identification
+
+**Out of Scope:**
+- Sprint planning and capacity calculation (see `scrum-master/` skill)
+- JSON-based sprint data analysis with planned vs. completed points (see `scrum-master/velocity_analyzer.py`)
+- Product-level OKR tracking or roadmap management (see `execution/` skills)
+- Code quality analysis beyond churn (no static analysis, no test coverage measurement)
+- Jira/Linear ticket-level cycle time (this skill uses git merge commits as proxy)
+
+**Important Caveats:**
+- All metrics are derived from git history only. Teams using squash merges lose branch-level cycle time data.
+- Session detection is a heuristic based on commit timestamps; it does not measure actual focused work time.
+- The Scrum Guide 2020 de-emphasized velocity as a required artifact. This skill treats velocity as a diagnostic signal, not a performance target. Flow metrics (cycle time, throughput, WIP) are first-class citizens alongside traditional velocity measures.
+- Retrospective facilitation formats (4Ls, Starfish, Sailboat, DAKI) rotate every 3-5 sprints to prevent staleness. See `references/retrospective_facilitation.md` for format selection guidance.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `scrum-master/` | Complements | Git-based velocity supplements JSON-based sprint data analysis; cross-reference for fuller picture |
+| `senior-pm/` | Feeds into | Retro velocity trends inform executive reporting and portfolio health dashboards |
+| `delivery-manager/` | Feeds into | Velocity trends help delivery managers forecast sprint capacity and release timing |
+| `agile-coach/` | Feeds into | Retro trend data identifies systemic patterns for coaching interventions |
+| `execution/release-notes/` | Feeds into | Sprint commit data and type distribution inform release note generation |
+| CI/CD Workflows | Automated | GitHub Actions workflow runs the 4-tool pipeline on a cron schedule (see CI/CD Integration section) |
+| `.retro-history/` | Bidirectional | Save sprint snapshots for trend tracking; load previous snapshots for comparison |
+
+## Tool Reference
+
+### velocity_analyzer.py
+
+Analyzes git history for sprint velocity metrics including throughput, cycle time, session detection, and commit type breakdown.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--days` | int | `7` | Number of days to analyze |
+| `--since` | string | (none) | Start date YYYY-MM-DD, overrides `--days` |
+| `--until` | string | today | End date YYYY-MM-DD |
+| `--compare-previous` | flag | off | Compare against preceding period of equal length |
+| `--gap-minutes` | int | `45` | Session gap threshold in minutes |
+| `--repo` | string | `.` | Path to git repository |
+| `-f`, `--format` | choice | `text` | Output format: `text` or `json` |
+
+### contributor_insights.py
+
+Per-contributor analysis of commits, LOC, work patterns, specialization detection, and collaboration metrics.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--days` | int | `7` | Number of days to analyze |
+| `--since` | string | (none) | Start date YYYY-MM-DD |
+| `--until` | string | today | End date YYYY-MM-DD |
+| `--author` | string | (none) | Filter to specific author (partial match) |
+| `--collaboration` | flag | off | Include bus factor and knowledge silo metrics |
+| `--gap-minutes` | int | `45` | Session gap threshold in minutes |
+| `--repo` | string | `.` | Path to git repository |
+| `-f`, `--format` | choice | `text` | Output format: `text` or `json` |
+
+### code_churn_analyzer.py
+
+Identifies file hotspots, calculates churn rates, detects oscillation patterns, and flags refactoring candidates.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--days` | int | `7` | Number of days to analyze |
+| `--since` | string | (none) | Start date YYYY-MM-DD |
+| `--until` | string | today | End date YYYY-MM-DD |
+| `--top` | int | `15` | Number of top hotspots to display |
+| `--path` | string | (none) | Filter to files under this path prefix |
+| `--detect-oscillation` | flag | off | Enable add/remove oscillation pattern detection |
+| `--repo` | string | `.` | Path to git repository |
+| `-f`, `--format` | choice | `text` | Output format: `text` or `json` |
+
+### retro_report_generator.py
+
+Assembles a comprehensive markdown retrospective report from velocity, contributor, and churn analysis data.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `-v`, `--velocity` | string | (required) | Path to velocity analysis JSON file |
+| `-c`, `--contributors` | string | (none) | Path to contributor insights JSON file |
+| `-u`, `--churn` | string | (none) | Path to code churn analysis JSON file |
+| `-s`, `--sprint-name` | string | `Sprint` | Sprint name for report title |
+| `--previous-retro` | string | (none) | Path to previous retro markdown for action item tracking |
+| `--previous-velocity` | string | (none) | Path to previous velocity JSON for comparison |
+| `-o`, `--output` | string | stdout | Output file path |
+| `--save` | string | (none) | Save sprint snapshot to directory (e.g., `.retro-history/`) |
+
+---
+
 **Last Updated:** 2026-03-18
 **Version:** 2.0.0
 **Status:** Production-ready — 4 Python tools, 2 reference guides, 2 asset templates

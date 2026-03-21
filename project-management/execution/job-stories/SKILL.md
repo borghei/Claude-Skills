@@ -195,3 +195,44 @@ When I am preparing my weekly budget on Sunday evening, I want to see how much I
 
 - See `references/jtbd-guide.md` for Jobs-to-Be-Done theory, comparison with user stories, and story splitting techniques.
 - See `assets/job_story_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Team writes situations that are too vague ("When I use the app...") | Insufficient user research; situations invented at desk rather than observed | Require each situation to reference a specific interview quote, support ticket, or analytics event; use the "could you video this?" test |
+| Motivations prescribe a specific solution ("I want a dropdown...") | Team conflates solution with capability; negotiability criterion failing | Rewrite using "I want to [verb] [object]" pattern without naming UI elements; apply the INVEST-N check before acceptance |
+| Outcomes are not measurable ("So I can be productive") | Outcome too abstract; not grounded in observable behavior | Ask "How would you know the user achieved this?" -- if you cannot describe an observable signal, the outcome needs rewriting |
+| Job stories are too large for a single sprint | Multiple situations or motivations packed into one story | Split by situation (different contexts become separate stories) or by outcome (different success criteria become separate stories) |
+| Team defaults to user story format despite training | Habit and muscle memory; Jira templates still use "As a..." format | Update Jira issue templates to use JTBD format; run a conversion workshop with 5 real user stories rewritten as job stories |
+| Acceptance criteria describe implementation steps instead of outcomes | Engineering team writing criteria from their perspective rather than the user's perspective | Apply the "would the user care about this?" filter; replace API/database criteria with observable behavior statements |
+| Job stories lack connection to strategic objectives | JTBD format focuses on user context but does not inherently include business "why" | Pair each job story with a WWAS "Why" statement from `wwas/`; or add an optional "Supports:" field linking to an OKR |
+
+## Success Criteria
+
+- 100% of job stories in the backlog follow the "When / I want to / So I can" format correctly
+- All situations reference observable, specific contexts (pass the "could you video this?" test)
+- All motivations are solution-agnostic (no UI element names or implementation details)
+- Each story has 6-8 acceptance criteria focused on observable outcomes, not implementation
+- Every job story passes all 6 INVEST criteria before entering a sprint
+- Defect rate on stories written in JTBD format is 20%+ lower than stories written in traditional format (measured over 3 months)
+- Team members can articulate the difference between a job story and a user story and choose the appropriate format for the context
+
+## Scope & Limitations
+
+**In Scope:** Writing job stories using JTBD "When/Want/So" format, applying INVEST quality criteria, writing outcome-focused acceptance criteria, converting existing user stories to job stories, facilitating story-writing workshops, integrating job stories with Jira backlog items.
+
+**Out of Scope:** Strategic backlog items with business context (hand off to `wwas/`), product ideation and opportunity discovery (hand off to `discovery/brainstorm-ideas/`), detailed technical specifications, UX research and user interviewing methodology.
+
+**Limitations:** Job stories work best when the team has access to real user research (interviews, observation, support data). Without user context, teams will invent situations that may not reflect reality. The format is less natural for purely technical or infrastructure work where there is no direct user situation. Job stories and user stories are complementary -- some teams use both formats for different types of work.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Complementary | WWAS adds strategic "Why" context; job stories add situational "When" context. Use both when needed |
+| `summarize-meeting/` | Meetings -> Stories | Discovery conversations and refinement sessions produce the situations that inform job stories |
+| `../jira-expert/` | Stories -> Jira | Completed job stories become Jira tickets with structured descriptions |
+| `discovery/brainstorm-ideas/` | Ideas -> Stories | Validated product ideas decompose into job stories for the backlog |
+| `execution/brainstorm-okrs/` | OKRs -> Stories | Team objectives define the outcomes that job stories should connect to |
+| `execution/prioritization-frameworks/` | Stories -> Prioritization | Job stories scored via RICE or other frameworks for sprint planning |

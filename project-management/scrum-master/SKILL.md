@@ -197,3 +197,96 @@ All tools accept JSON following `assets/sample_sprint_data.json`:
 | Action Item Completion | >70% | Retro items done by next retro |
 | Ceremony Engagement | >90% | Attendance + participation quality |
 | Psychological Safety | >4.0/5.0 | Monthly pulse survey |
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Velocity drops for 2+ sprints without team change | Hidden scope creep, unclear definition of done, or tech debt accumulation | Run `sprint_health_scorer.py` to check scope stability score; tighten DoD and refinement process |
+| CV exceeds 30% despite stable team | Inconsistent story sizing, mid-sprint scope injection, or unplanned absences | Analyze anomalies via `velocity_analyzer.py`; introduce reference stories for estimation calibration |
+| Action item completion rate below 50% | Too many action items per retro, no owners assigned, or unrealistic scope | Cap new items at 2-3 per retro based on `retrospective_analyzer.py` historical completion data |
+| Health score below 60 but team feels productive | Dimension weights may not match team context, or ceremony data is incomplete | Review dimension weights in HEALTH_DIMENSIONS config; ensure ceremony attendance data is populated |
+| Monte Carlo forecast has wide confidence intervals | Insufficient historical data or high velocity volatility | Accumulate 6+ sprints of data; address root causes of volatility before relying on forecasts |
+| Sprint capacity calculator overestimates | Focus factor set too high or ceremony overhead not calibrated | Adjust focus factor from 0.85 to 0.80; verify ceremony durations match actual team practices |
+| Retrospective themes keep recurring across sprints | Systemic issues not addressed at root cause, or action items too superficial | Use `retrospective_analyzer.py` persistent issue detection; escalate recurring themes to management |
+
+## Success Criteria
+
+- Sprint health score consistently above 80/100 across 6-dimension assessment
+- Velocity coefficient of variation (CV) maintained below 20% over rolling 6-sprint window
+- Sprint commitment reliability exceeds 85% (completed vs. planned points)
+- Action item completion rate from retrospectives exceeds 70% by next retro
+- Blocker average resolution time under 3 working days
+- Team maturity advances at least one Tuckman stage within 3-6 months of coaching
+- Psychological safety score on Edmondson scale exceeds 4.0/5.0
+
+## Scope & Limitations
+
+**In Scope:**
+- Sprint-level data analysis (velocity, health, capacity, retrospectives)
+- Statistical forecasting using Monte Carlo simulation on historical velocity
+- Team dynamics coaching based on Tuckman model and Edmondson psychological safety
+- Ceremony facilitation guidance and retrospective pattern analysis
+
+**Out of Scope:**
+- Portfolio-level project management (see `senior-pm/` skill)
+- Product backlog prioritization and roadmap decisions (see `execution/prioritization-frameworks/`)
+- Individual performance evaluation -- this skill measures team-level metrics only
+- Real-time Jira/Confluence integration (see `jira-expert/` and `confluence-expert/` skills)
+- SAFe-specific PI planning or cross-team dependency management (see `program-manager/`)
+
+**Important Caveats:**
+- The Scrum Guide 2020 removed the term "velocity" as a required artifact; this skill treats velocity as a diagnostic tool, not a performance measure. Flow metrics (cycle time, throughput, WIP) complement velocity for delivery forecasting. Use both -- velocity for sprint planning, flow metrics for process improvement.
+- Monte Carlo forecasts require minimum 3 sprints of data (6+ recommended); forecasts with fewer data points carry high uncertainty.
+- Health scores are heuristics, not absolute measures. Calibrate dimension weights to your team context.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `senior-pm/` | Feeds into | Sprint velocity and health data informs portfolio-level health dashboards and executive reporting |
+| `sprint-retrospective/` | Complements | Git-based velocity analysis complements this skill's JSON-based sprint data analysis |
+| `execution/brainstorm-okrs/` | Feeds into | Sprint capacity data helps set realistic OKR targets for the quarter |
+| `execution/prioritization-frameworks/` | Receives from | Prioritized backlog items feed into sprint planning commitment decisions |
+| `discovery/pre-mortem/` | Receives from | Launch-blocking tigers may surface as sprint blockers requiring SM intervention |
+| Jira via Atlassian MCP | Bidirectional | Pull sprint data for analysis; push health reports to Confluence dashboards |
+| CI/CD Pipelines | Receives from | Deployment frequency and lead time data supplement velocity metrics |
+
+## Tool Reference
+
+### velocity_analyzer.py
+
+Analyzes sprint velocity data with trend detection, Monte Carlo forecasting, and anomaly identification.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing sprint data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### sprint_health_scorer.py
+
+Scores sprint health across 6 weighted dimensions with composite grading and recommendations.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing sprint health data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### retrospective_analyzer.py
+
+Processes retrospective data to track action item completion, identify recurring themes, and assess team maturity.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (required) | Path to JSON file containing retrospective data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+### sprint_capacity_calculator.py
+
+Calculates sprint capacity accounting for ceremony overhead, PTO, allocation percentages, and focus factor.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | (optional) | Path to JSON file containing team capacity data |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+| `--demo` | flag | off | Run with built-in sample data |

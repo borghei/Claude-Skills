@@ -462,3 +462,65 @@ After 7-14 days with statistical significance:
 - **Campaign Analytics** — Use to measure ad performance and feed learnings back into the iteration cycle.
 - **Marketing Psychology** — Use psychological principles (anchoring, social proof, loss aversion) to strengthen ad messaging.
 - **Brand Guidelines** — Reference brand voice and visual standards to maintain consistency across ad creative.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Ad rejected by platform | Policy violation (caps, claims, trademarked terms) | Run `headline_generator.py` to generate compliant variants. Check rejection triggers. |
+| All headlines same style | No formula diversity | Generate across 5 formula types: benefit, curiosity, social proof, problem, urgency. |
+| CTR declining across ad set | Creative fatigue | Run `creative_fatigue_detector.py`. Refresh every 2-4 weeks. |
+| High CTR but low conversions | Ad-to-landing-page mismatch | Ensure headline promise matches landing page. Message match is the #1 conversion factor. |
+| Can't fill all Google RSA slots | Not enough headline variations | Use `headline_generator.py` to produce 15+ variations from value proposition. |
+| Video underperforming on Meta | Hook not in first 2-3 seconds | 80%+ of social impressions are mobile. Hook must appear in first 2 seconds. |
+| Same CPA across all creative | Not testing enough angles | Build a creative testing matrix with 5 hook types x platforms. Use `creative_matrix_builder.py`. |
+
+---
+
+## Success Criteria
+
+- 3+ creative variants per ad group/set (minimum for testing)
+- All copy within platform character limits with zero rejections
+- Headline formula mix: benefit, curiosity, social proof, problem, urgency
+- Creative refreshed every 2-4 weeks before fatigue signals appear
+- A/B test documentation for every test: hypothesis, variants, result, learning
+- Winning patterns documented in creative playbook for institutional knowledge
+- CTR above platform benchmarks with declining CPA trend
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Ad headline/body copy generation, platform-specific formatting, A/B testing frameworks, creative iteration methodology, compliance validation, cross-platform adaptation.
+
+**Out of Scope:** Visual design/production, video editing, campaign management (use paid-ads), landing page copy (use copywriting), media buying.
+
+---
+
+## Python Automation Tools
+
+### 1. Headline Generator (`scripts/headline_generator.py`)
+Generates ad headline variations from a value proposition using proven formula patterns, scored for platform compliance.
+
+```bash
+python scripts/headline_generator.py --value-prop "Reduce churn by 30%" --platform google --audience "SaaS teams"
+python scripts/headline_generator.py --value-prop "Reduce churn by 30%" --json
+```
+
+### 2. Creative Fatigue Detector (`scripts/creative_fatigue_detector.py`)
+Analyzes ad performance trends (CTR, CPA, frequency) to detect creative fatigue and recommend refresh timing.
+
+```bash
+python scripts/creative_fatigue_detector.py campaign_data.json
+python scripts/creative_fatigue_detector.py --sample --json
+```
+
+### 3. Creative Matrix Builder (`scripts/creative_matrix_builder.py`)
+Generates a cross-platform creative testing matrix from a brief, organized by hook type and funnel stage.
+
+```bash
+python scripts/creative_matrix_builder.py brief.json
+python scripts/creative_matrix_builder.py --sample --json
+```

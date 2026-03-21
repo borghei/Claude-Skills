@@ -370,3 +370,63 @@ If these are not met within 12 months, evaluate exit:
 | "Regulatory requirements for [region]" | Compliance checklist with timeline and cost |
 | "International pricing strategy" | Market-specific pricing recommendation |
 | "Launch plan for [market]" | 90-day launch plan with milestones and exit criteria |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Market scores high but pipeline generation is near zero | Market sizing based on TAM not SAM; ICP not validated locally | Re-score using serviceable addressable market; run 20 discovery calls before committing further resources |
+| Local hire producing no results after 3 months | Wrong profile (too senior or too junior), insufficient HQ support, or wrong ICP | Assess whether hire has local market expertise AND startup mindset; ensure HQ provides enablement materials and responsive support |
+| Regulatory compliance taking 2x longer than planned | Underestimated complexity; no local legal counsel engaged early | Engage local legal counsel in pre-launch phase (T-90); add 50% buffer to all regulatory timelines |
+| Localization costs spiraling beyond budget | Scope creep from "nice to have" to "must have"; no phased approach | Apply localization framework layers strictly: Must Have first, Nice to Have only after revenue proves market |
+| Pricing not competitive in new market | Direct currency conversion without local willingness-to-pay research | Conduct 10+ pricing conversations with local prospects; consider PPP adjustment or market-specific pricing tier |
+| Partnership/reseller underperforming | Partner not incentivized properly or wrong partner profile | Review partner selection criteria; ensure economic alignment (margins); set 90-day performance review with exit clause |
+| Cultural missteps damaging brand in new market | No local market expertise on team; copy-paste approach from home market | Hire local advisor or consultant for cultural review; adapt messaging, not just translate it |
+
+---
+
+## Success Criteria
+
+- Market selection scoring produces a clear rank-ordered list with at least 3 candidate markets scored across all 6 factors
+- Entry mode selected matches the graduation path: no legal entity before $200K ARR from market
+- Pre-launch checklist 100% complete by T-30 days before launch
+- First 90 days produce 20+ qualified conversations, 5+ pipeline opportunities, and 2+ closed deals
+- Exit criteria defined before market entry with specific revenue and cost thresholds
+- Localization phased: Must Have items complete at launch; Nice to Have items gated behind revenue milestone
+- Regulatory compliance achieved before first customer contract signed in new market
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Market selection scoring, entry mode evaluation, localization planning (product, GTM, operations), regulatory compliance mapping by region, pricing strategy adaptation, launch planning with exit criteria, team structure decisions
+- **Out of scope:** Detailed tax advisory (engage local tax counsel); immigration and visa processing (use specialized provider); transfer pricing implementation (use CFO Advisor with tax expertise); detailed legal entity formation (use local legal counsel)
+- **Limitation:** Regional quick reference data is indicative and changes with regulations; always validate with local experts before committing
+- **Limitation:** Framework optimized for B2B SaaS companies; B2C, hardware, and marketplace businesses have different expansion dynamics
+- **Limitation:** Market scoring is a structured estimate, not a guarantee; validate with real market signals (inbound demand, pilot customers) before major investment
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | Market entry is a strategic CEO decision | CEO strategy → Market selection priority |
+| `cfo-advisor` | Investment sizing, ROI modeling, entity structure | Expansion budget → CFO financial model |
+| `cro-advisor` | Revenue targets and sales model adaptation | Market ICP → CRO sales playbook adaptation |
+| `cmo-advisor` | Local positioning and channel strategy | Market research → CMO local GTM plan |
+| `cpo-advisor` | Localization roadmap and feature priorities | Localization requirements → CPO product roadmap |
+| `ciso-advisor` | Data privacy and regulatory compliance | Regulatory map → CISO compliance checklist |
+| `chro-advisor` | Local hiring, employment law, compensation | Market team plan → CHRO local hiring strategy |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/market_readiness_scorer.py` | Score and rank target markets using the 6-factor weighted framework | `python scripts/market_readiness_scorer.py --market "Germany" --market-size 4 --competition 3 --regulatory 2 --cultural-distance 3 --traction 4 --operational 3 --json` |
+| `scripts/localization_checklist.py` | Generate a phased localization checklist for a target market | `python scripts/localization_checklist.py --market "Japan" --product-type saas --current-languages en --json` |
+| `scripts/regulatory_mapper.py` | Map regulatory requirements by region including data privacy, tax, and employment law | `python scripts/regulatory_mapper.py --region eu --industry saas --data-processing yes --json` |

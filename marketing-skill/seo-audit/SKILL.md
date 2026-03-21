@@ -465,3 +465,80 @@ Every finding gets classified:
 - **site-architecture** -- Use when audit uncovers structural issues (orphan pages, deep nesting, poor internal linking) requiring architectural redesign.
 - **content-creator** -- Use when audit reveals content quality issues requiring editorial improvement.
 - **competitor-alternatives** -- Use when competitive gap analysis reveals positioning opportunities for comparison content.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Sitewide traffic drop after algorithm update | Core update changed quality thresholds or E-E-A-T weight | Run full E-E-A-T audit, compare content against newly ranking competitors, add experience signals |
+| Pages indexed but receiving zero impressions | Keyword cannibalization or content quality below ranking threshold | Run cannibalization detection, consolidate or differentiate competing pages |
+| Core Web Vitals failing on mobile only | Third-party scripts or unoptimized images loading on mobile viewport | Defer non-critical JS, serve responsive images, audit third-party script impact |
+| Crawl budget exhausted on low-value pages | Parameter URLs, tag archives, or pagination consuming crawl resources | Noindex thin pages, consolidate parameters, block faceted navigation in robots.txt |
+| Manual action in Search Console | Unnatural links, thin content, or structured data misuse detected | Follow Google's reconsideration process — fix all flagged issues, document changes, submit review |
+| Rankings dropped for specific pages only | Competitor published stronger content or lost key backlinks | Check backlink profile changes, compare content depth against new page 1 results |
+| INP failing despite fast server response | Long JavaScript tasks blocking main thread on user interaction | Break JS into smaller tasks, defer non-critical scripts, audit event handler performance |
+
+---
+
+## Success Criteria
+
+- **Overall audit score**: Achieve grade B (80+) or higher on the severity-weighted scoring system
+- **Zero critical failures**: All Critical-severity checks passing across all 8 dimensions
+- **Core Web Vitals pass rate**: All three metrics (LCP < 2.5s, INP < 200ms, CLS < 0.1) passing at 75th percentile — benchmark: only 47-55% of sites pass as of 2026
+- **Indexation coverage**: 95%+ of target pages indexed with zero conflicting signals (canonical vs noindex vs sitemap)
+- **Crawl error rate**: Zero 5xx errors and fewer than 0.5% 4xx errors in the indexed page set
+- **Organic CTR**: Position 1 pages achieving 25%+ CTR, position 2-3 achieving 10%+ (2026 benchmarks: pos 1 avg 27.6%, pos 2 avg 15.8%)
+- **Remediation velocity**: All P0 emergency findings fixed within 24 hours, P1 critical within 7 days
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Technical SEO across all 8 audit dimensions (crawlability, indexation, CWV, on-page, content quality, infrastructure, off-page, analytics)
+- Severity-weighted scoring with prioritized remediation plans
+- Traffic drop diagnosis and root cause analysis
+- Competitive gap analysis across technical and content dimensions
+- Pre-migration and post-migration audit checklists
+- AI content quality detection signals
+
+**Out of scope:**
+- Content creation or rewriting (use Content Creator)
+- Structured data implementation (use Schema Markup)
+- Site architecture redesign (use Site Architecture)
+- Link building execution (audit identifies gaps, not outreach)
+- Paid search or advertising campaign audits
+- Server infrastructure provisioning or CDN setup
+
+**Known limitations:**
+- Field CWV data requires sufficient traffic volume for CrUX reporting — low-traffic sites must rely on lab data
+- Off-page signals (backlinks, brand mentions) require third-party tools (Ahrefs, SEMrush) for comprehensive data
+- AI Overview impact on CTR varies by query type — no universal benchmark exists
+- Google's algorithm changes 500-600 times per year; audit findings reflect a point-in-time snapshot
+
+---
+
+## Integration Points
+
+- **AI SEO** -- Run after audit to optimize for AI search citation alongside traditional SEO findings.
+- **Schema Markup** -- Use when audit reveals missing or broken structured data opportunities.
+- **Site Architecture** -- Use when audit uncovers structural issues requiring architectural redesign.
+- **Content Humanizer** -- Use when audit flags AI content detection signals on key pages.
+- **Content Strategy** -- Use when audit reveals content gaps or pillar coverage weaknesses.
+
+---
+
+## Scripts
+
+```bash
+# Check redirect chains and status codes
+python scripts/redirect_checker.py --url https://example.com/old-page --json
+
+# Analyze XML sitemap for errors
+python scripts/sitemap_analyzer.py --sitemap https://example.com/sitemap.xml
+
+# Score content quality for SEO
+python scripts/content_scorer.py article.md --json
+```

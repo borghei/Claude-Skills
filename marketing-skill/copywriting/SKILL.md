@@ -424,3 +424,65 @@ Position risk reversals near CTAs:
 - **Brand Guidelines** — Reference brand voice and visual standards for consistency.
 - **Ad Creative** — Use for platform-specific ad copy. Copywriting handles page-level copy.
 - **Content Humanizer** — Use if AI-drafted copy sounds robotic and needs voice injection.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Page not converting despite traffic | Headline-to-traffic mismatch or weak CTA | Verify headline matches the ad/email source. Run `headline_scorer.py`. |
+| Visitors bounce without scrolling | Hero section fails the 5-second test | Rewrite headline: benefit + specificity. Remove jargon. |
+| High scroll depth but no clicks | CTA is weak, buried, or too many options | Run `cta_optimizer.py`. Place CTA above fold and after every major section. |
+| Copy sounds like a brochure | Too company-focused, not customer-focused | Run `page_copy_auditor.py`. Ensure you/your outnumbers we/our 2:1. |
+| Features listed without impact | Missing "which means..." bridges | Connect every feature to a business outcome the reader cares about. |
+| Social proof feels generic | "Great product!" without specifics | Replace with named testimonials + specific metrics + outcomes. |
+| Pricing page has high drop-off | No objection handling or risk reversal | Add FAQ, guarantees, and "no credit card required" near CTA. |
+
+---
+
+## Success Criteria
+
+- Every headline passes the 5-second test: visitor understands value without scrolling
+- You/your language outnumbers we/our by at least 2:1 across the page
+- Every feature has a corresponding benefit with "which means..." bridge
+- CTA appears 2-3 times on every page (hero, mid-page, footer)
+- Risk reversal text appears near every CTA ("No credit card," "Cancel anytime")
+- Specific numbers used instead of vague claims ("2,847 teams" not "thousands")
+- A/B test running on headline at all times for top-traffic pages
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Marketing page copy for homepages, landing pages, pricing pages, feature pages, and product pages. Headline formulas, CTA frameworks, objection handling, voice calibration.
+
+**Out of Scope:** Ad copy (use ad-creative), email copy (use email-sequence), blog/content writing (use content-creator), page design/code (use landing-page-generator), copy editing (use copy-editing).
+
+---
+
+## Python Automation Tools
+
+### 1. Headline Scorer (`scripts/headline_scorer.py`)
+Scores marketing headlines for clarity, benefit strength, specificity, and conversion potential.
+
+```bash
+python scripts/headline_scorer.py "Build landing pages in minutes without writing code"
+python scripts/headline_scorer.py --file headlines.txt --json
+```
+
+### 2. CTA Optimizer (`scripts/cta_optimizer.py`)
+Analyzes and scores CTA text for action strength, specificity, ownership language, and friction level.
+
+```bash
+python scripts/cta_optimizer.py "Start my free trial"
+python scripts/cta_optimizer.py --file ctas.txt --json
+```
+
+### 3. Page Copy Auditor (`scripts/page_copy_auditor.py`)
+Audits marketing page copy for customer focus, specificity, social proof, CTA presence, objection handling, and readability.
+
+```bash
+python scripts/page_copy_auditor.py page.txt
+python scripts/page_copy_auditor.py page.html --json
+```

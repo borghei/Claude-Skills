@@ -496,3 +496,44 @@ Expected outcomes and impacts
 - Support Scrum Master with ceremony templates
 - Link to Jira issues for Jira Expert
 - Provide templates for Template Creator
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Users cannot find existing documentation | Poor space/page hierarchy, missing labels, or unclear page titles | Restructure to max 3 levels deep; enforce descriptive naming conventions; add labels to all pages and use `contentbylabel` macro for discovery |
+| Confluence search returns irrelevant results | Page titles are generic, content lacks keywords, or spaces have too many orphaned pages | Use specific, descriptive titles; add excerpt macros for search snippets; audit and remove orphaned pages quarterly |
+| Pages become stale with outdated information | No content ownership model, no review cadence, or no visible "last updated" date | Assign a page owner to every active page; set quarterly review reminders; add `{date}` macro to show last update prominently |
+| Space permissions are too permissive or too restrictive | Ad-hoc permission changes without a governance model; individual permissions used instead of groups | Reset to group-based permissions; define 3-4 standard permission schemes; audit permissions quarterly |
+| Jira macros embedded in pages show errors or no data | JQL references deleted projects, or the viewer lacks Jira permissions for the referenced project | Verify JQL validity; ensure Confluence viewers also have Jira browse permissions for referenced projects |
+| Content duplication across multiple spaces | No single source of truth policy; teams copy content instead of linking | Implement excerpt-include pattern for shared content; establish content ownership map; use cross-space linking instead of copying |
+| Page tree becomes too deep (>5 levels) creating navigation fatigue | Organic growth without architectural review; no archiving strategy | Flatten hierarchy to max 3 levels; archive completed project pages; use labels and search instead of deep nesting |
+
+## Success Criteria
+
+- 90%+ of active pages have a designated owner and a review date within the past 6 months
+- Orphaned pages (no parent, no links, no views in 90 days) represent less than 5% of total content
+- New team members can find onboarding documentation within 3 clicks from the space homepage
+- Content duplication rate stays below 10% (measured by duplicate title or excerpt analysis)
+- All spaces follow the standardized page architecture template (overview, team info, projects, processes, resources)
+- Confluence adoption measured by monthly active editors exceeds 60% of licensed users
+- Knowledge base articles resolve 40%+ of common questions without escalation to a person
+
+## Scope & Limitations
+
+**In Scope:** Space creation and architecture, page hierarchy design, template creation and management, content governance (review cycles, archiving, quality standards), macro usage and dynamic content, documentation strategy, knowledge base management, Jira-Confluence integration, content analytics.
+
+**Out of Scope:** Global Atlassian administration (hand off to `atlassian-admin/`), Jira project configuration (hand off to `jira-expert/`), template design and governance (hand off to `atlassian-templates/`), sprint execution artifacts (hand off to `scrum-master/`).
+
+**Limitations:** Confluence Cloud has storage limits per plan tier that affect attachment-heavy spaces. Advanced analytics (page view trends, contributor activity) require Confluence Premium or marketplace apps. Space-level permissions cannot override more restrictive org-wide security policies set by `atlassian-admin/`. Content migration between spaces can break internal links and require manual fixup.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `jira-expert/` | Bidirectional | Jira macros in Confluence pages; Confluence page links in Jira issue descriptions |
+| `atlassian-admin/` | Admin -> Confluence | Global templates, space permission schemes, blueprint configuration |
+| `atlassian-templates/` | Templates -> Confluence | Designed templates deployed to spaces; template usage guidelines |
+| `scrum-master/` | SM -> Confluence | Sprint ceremony documentation needs, team working agreement pages |
+| `senior-pm/` | PM -> Confluence | Executive report pages, portfolio documentation, stakeholder communication |
+| `delivery-manager/` | DM -> Confluence | Post-mortem documentation, runbooks, release notes pages |

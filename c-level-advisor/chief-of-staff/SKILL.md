@@ -395,3 +395,107 @@ Surface these without being asked when detected:
 | Over-routing simple questions | Wastes founder time | Score 1-3 = single advisor, direct answer |
 | Letting advisors cross-pollinate | Groupthink risk | Enforce independent contributions |
 | Generic advice without context | Worthless recommendations | Always load company context first |
+
+---
+
+## Tool Reference
+
+### routing_engine.py
+
+Analyzes questions, detects topics from keywords, scores complexity, and determines routing to single/dual/multi-advisor or full board meeting.
+
+```bash
+# Route a question
+python scripts/routing_engine.py --question "Should we raise a Series B now or wait?" --complexity 8
+
+# Specify topic directly
+python scripts/routing_engine.py --topic fundraising --complexity 7
+
+# List all topic routing
+python scripts/routing_engine.py --list-topics
+
+# JSON output
+python scripts/routing_engine.py --question "How should we restructure engineering?" --json
+```
+
+### synthesis_generator.py
+
+Merges multi-advisor contributions into decision-ready format. Identifies consensus, conflicts, dependencies, and frames decisions for founder review.
+
+```bash
+# Run with demo contributions
+python scripts/synthesis_generator.py
+
+# From JSON with advisor contributions
+python scripts/synthesis_generator.py --input contributions.json
+
+# JSON output
+python scripts/synthesis_generator.py --json
+```
+
+### ecosystem_mapper.py
+
+Maps the C-suite advisory ecosystem, identifies coverage gaps, tracks utilization, and generates ecosystem health reports.
+
+```bash
+# Map with default ecosystem
+python scripts/ecosystem_mapper.py
+
+# Specify active skills
+python scripts/ecosystem_mapper.py --active CEO CFO CTO CMO CHRO
+
+# From JSON
+python scripts/ecosystem_mapper.py --input ecosystem.json
+
+# JSON output
+python scripts/ecosystem_mapper.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Simple questions routed to full board meeting | Complexity scoring too aggressive or modifiers over-applied | Recalibrate: most questions need 1-2 advisors; reserve board for score 9-10 |
+| Synthesis smooths over real disagreements | Chief of Staff optimizing for consensus instead of clarity | Name every disagreement explicitly; state each side's reasoning and what it's really about |
+| Same debate keeps recurring across sessions | Decision not logged or logged without DO_NOT_RESURFACE flag | Log every decision; mark rejected proposals; check history before routing |
+| Routing loops detected (A -> B -> A) | Circular dependency between advisors | Stop routing immediately; surface the conflict to founder for direct judgment |
+| Advisor outputs feel generic | Company context not loaded at session start | Make context loading mandatory in Step 1; verify context is recent (within 30 days) |
+| Founder bypasses Chief of Staff and goes directly to advisors | CoS not adding value or slowing things down | Reduce friction: for score 1-3 questions, CoS routes silently with no overhead |
+
+---
+
+## Success Criteria
+
+- 90%+ of questions routed to the correct primary advisor on first attempt (measured by founder override rate)
+- Synthesis outputs always lead with bottom line -- zero preamble or process narration
+- Every synthesis contains named conflicts (not smoothed over) when advisors disagree
+- Decision log has zero unresolved conflicts lasting more than 7 days
+- Average time from question to synthesized answer: under 5 minutes for score 1-3, under 15 minutes for score 4-6
+- Zero routing loops per quarter (loop prevention rules enforced)
+- Proactive triggers surface stale decisions within 7 days of review date passing
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Question routing, complexity scoring, multi-advisor synthesis, decision logging integration, loop prevention, ecosystem orchestration, proactive triggers.
+
+**Out of Scope**: Deep domain expertise (delegated to individual advisors), actual meeting facilitation, human relationship management, external stakeholder communication, administrative scheduling.
+
+**Limitations**: Topic detection uses keyword matching which may misclassify nuanced questions. Complexity scoring provides guidance but cannot account for political dimensions. Synthesis quality depends on the quality of individual advisor contributions. Ecosystem mapper tracks skill availability but not skill quality.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| All C-suite advisors | Routes to all 9 C-suite roles based on topic and complexity |
+| `board-meeting` | Triggers full board protocol for complexity score >= 8 |
+| `decision-logger` | Logs every decision; checks for conflicts with existing decisions |
+| `executive-mentor` | Routes for stress-testing when plan needs adversarial review |
+| `strategic-alignment` | Validates that routed advice aligns with strategic goals |
+| `board-deck-builder` | Routes board prep questions to CEO + CFO |
+| `company-os` | Integrates with meeting pulse for decision cadence |

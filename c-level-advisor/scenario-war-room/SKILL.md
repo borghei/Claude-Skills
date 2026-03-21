@@ -292,3 +292,64 @@ REVIEW DATE: [When to re-run this analysis — typically 90 days or after any va
 | **coo-advisor** | Operational contingency planning |
 | **internal-narrative** | Communicating scenario outcomes to stakeholders |
 | **cs-onboard** | Company context that feeds scenario variables |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Scenarios feel too abstract to act on | Variables not specific or quantified enough | Require dollar amounts, percentages, and timelines for every variable; "revenue drops" is not actionable, "$420K ARR at risk over 60 days" is |
+| Team generates only obvious, low-probability scenarios | Conformity bias; not applying Shell scenario planning method of challenging mental models | Use inversion technique: "What would guarantee our failure?"; bring in external perspective; reference industry-specific historical precedents |
+| Cascade mapping stops at first-order effects | Facilitator not pushing past immediate consequences | Require minimum 3 levels of cascade for each variable; use "and then what?" prompting for each domain impact |
+| Hedges identified but never implemented | No ownership, deadline, or cost attached | Every hedge must have: cost estimate, owner name, deadline, and status tracking; review in weekly leadership meeting |
+| War room sessions take too long (> 4 hours) | Too many variables or trying to model every scenario | Enforce maximum 3 variables and 3-4 scenarios per session; use severity matrix to focus on highest-impact combinations |
+| Early warning signals not being monitored | Signals assigned but not integrated into existing reporting | Add signals to existing dashboards and weekly scorecards; assign specific person to monitor each signal |
+| Participants reluctant to name worst-case scenarios | Fear of being seen as negative or alarmist | Establish ground rules explicitly; cite Shell's experience: "the value is in surfacing what others won't say"; reward naming hard truths |
+
+---
+
+## Success Criteria
+
+- Each scenario session produces exactly 3 variables, 3 severity levels, and a cascade map with interruption points identified
+- Early warning signals are specific enough to be monitored: observable, leading, and actionable with defined thresholds
+- Hedges are costed, owned, and have deadlines within 7 days of the war room session
+- At least one hedge per scenario is implemented (not just planned) within 30 days
+- Scenario review conducted every 90 days with probability updates based on new information
+- When an early warning signal fires, the pre-planned response is executed within the defined timeline
+- War room output is concise enough for board consumption: one-page summary per scenario
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Multi-variable scenario construction, cascade modeling across all business functions, severity matrix analysis, early warning signal design, hedge strategy with cost-benefit analysis, scenario review cadence
+- **Out of scope:** Single-variable financial sensitivity analysis (use CFO Advisor stress testing); technical failure mode analysis (use engineering incident planning); routine project risk assessment (use project management frameworks); insurance and risk transfer (use specialized broker)
+- **Limitation:** Scenario probabilities are subjective estimates, not actuarial calculations; value is in preparedness, not prediction accuracy
+- **Limitation:** Framework assumes scenarios are independent or correlated; black swan events by definition are not modelable
+- **Limitation:** Cascade mapping is based on common organizational patterns; unique company structures may have different cascade paths
+- **Limitation:** Maximum 3 variables per scenario is a deliberate constraint; more variables create analysis paralysis, not better insight
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | Strategic decisions informed by scenario analysis | War room scenarios → CEO decision inputs |
+| `cfo-advisor` | Financial modeling for scenario impacts and hedge costs | War room financial impacts → CFO stress test models |
+| `coo-advisor` | Operational contingency planning and cascade interruption | War room cascade map → COO contingency plans |
+| `executive-mentor` | Pre-mortem failure modes feed into scenario variables | Mentor failure modes → War room variables |
+| `internal-narrative` | Crisis scenarios require pre-built communication plans | War room crisis scenarios → Narrative crisis templates |
+| `org-health-diagnostic` | Health dimension scores surface scenario variables | Health red flags → War room variable candidates |
+| `strategic-alignment` | Scenario outcomes may require strategic realignment | War room outcomes → Alignment reassessment |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/scenario_builder.py` | Build structured scenarios with variables, probabilities, detection signals, and severity levels | `python scripts/scenario_builder.py --name "Customer Concentration Risk" --variable "Top customer churns" --probability 20 --impact 500000 --timeline 90 --json` |
+| `scripts/impact_matrix_calculator.py` | Calculate compound impact across multiple variables with severity matrix and cascade risk scoring | `python scripts/impact_matrix_calculator.py --variables "churn:500000:0.2" "fundraise_delay:0:0.3" "key_departure:0:0.15" --arr 2000000 --runway-months 14 --json` |
+| `scripts/decision_tree_analyzer.py` | Build and evaluate decision trees with expected value calculations for strategic options | `python scripts/decision_tree_analyzer.py --decision "Enter Japan market" --option "Direct:0.6:2000000:-500000" --option "Partnership:0.75:1000000:-200000" --option "Wait:1.0:0:0" --json` |

@@ -397,3 +397,67 @@ Help readers visualize the outcome:
 - **Pricing** — Apply pricing psychology (anchoring, decoy, charm pricing) to pricing page design.
 - **Copy Editing** — Use the Heightened Emotion sweep to apply psychology during editorial review.
 - **Marketing Context** — Understanding customer psychology informs positioning and messaging strategy.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Page feels persuasive but doesn't convert | Missing trust cascade (visual > relevance > credibility > risk) | Build trust in sequence. Run `persuasion_auditor.py` to find gaps. |
+| Pricing page has high drop-off | No anchoring, no decoy, no recommended plan | Run `pricing_psychology_analyzer.py`. Add 3-tier structure with highlighted middle tier. |
+| Social proof present but not working | Generic testimonials without specificity | Replace "Great product!" with named testimonials + specific metrics + outcomes. |
+| Scarcity messaging feels manipulative | Fake constraints (countdown timers, fake "limited") | Only use scarcity when genuine. Fake scarcity erodes trust permanently. |
+| Too many principles applied at once | Cognitive overload from stacking 10+ techniques | Apply 2-3 complementary principles, not everything. Less is more. |
+| Loss-framed headlines not performing | Audience is solution-aware, not problem-aware | Match framing to awareness level. Solution-aware audiences respond to gain framing. |
+| Users abandon during long forms | Friction too high, no progress indicators | Apply Zeigarnik effect: add progress bars. Reduce fields to minimum. |
+
+---
+
+## Success Criteria
+
+- Cialdini principle coverage: 4+ of 7 principles applied on key conversion pages
+- Every pricing page uses anchoring, recommended plan highlight, and risk reversal
+- A/B test running on every psychology-based change (hypothesis + measurement)
+- Loss-framed and gain-framed headline variants tested (loss framing typically wins 60-70%)
+- Social proof includes specific numbers (not "thousands" but "2,847 teams")
+- Ethical guidelines followed: all scarcity real, all claims verifiable, easy cancellation
+- Document learnings: build audience-specific psychology knowledge base from test results
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Behavioral psychology principles applied to marketing, conversion optimization, pricing strategy, copy improvement, campaign design. 70+ mental models with implementation guides.
+
+**Out of Scope:** Academic psychology research, clinical applications, UX research methodology (use product-team), A/B test statistical analysis tools, consumer psychology outside marketing context.
+
+**Limitations:** Psychology provides hypotheses, not certainties. All changes must be A/B tested. What works for consumer SaaS may not work for enterprise. Cultural context matters significantly. Principles should be applied ethically -- persuasion that helps customers make good decisions, not manipulation.
+
+---
+
+## Python Automation Tools
+
+### 1. Persuasion Auditor (`scripts/persuasion_auditor.py`)
+Audits marketing copy for Cialdini's 7 principles plus behavioral economics techniques. Identifies what's applied and what's missing.
+
+```bash
+python scripts/persuasion_auditor.py page.html
+python scripts/persuasion_auditor.py landing_page.txt --json
+```
+
+### 2. Cognitive Bias Checker (`scripts/cognitive_bias_checker.py`)
+Identifies cognitive biases being leveraged (or missed) in marketing copy, pricing pages, and landing pages.
+
+```bash
+python scripts/cognitive_bias_checker.py pricing_page.html
+python scripts/cognitive_bias_checker.py page.txt --json
+```
+
+### 3. Pricing Psychology Analyzer (`scripts/pricing_psychology_analyzer.py`)
+Analyzes pricing page structure for anchoring, decoy effect, charm pricing, framing, and tier design.
+
+```bash
+python scripts/pricing_psychology_analyzer.py pricing.json
+python scripts/pricing_psychology_analyzer.py --sample --json
+```

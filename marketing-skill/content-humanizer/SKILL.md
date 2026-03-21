@@ -372,3 +372,72 @@ Every vague claim must become either specific or honestly qualified. There is no
 - **AI SEO** — Use after humanizing to optimize for AI search citation. Human-sounding content gets cited more, but still needs structure for extraction.
 - **Brand Guidelines** — Reference brand voice and personality standards before voice injection.
 - **Copy Editing** — Use after humanization for grammar, fact-checking, and editorial consistency passes.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content still sounds AI-generated after humanization pass | Only surface-level word replacements done — structural uniformity and hedging patterns remain | Run all three passes in order: filler removal, rhythm repair, specificity replacement. Address structure, not just words |
+| Brand voice inconsistent after editing | Voice injection done without reference examples or clear guidelines | Request one example of writing the brand loves before injecting voice; extract formality, humor, and relationship stance |
+| Over-humanized technical documentation | Personality injection applied to content that needs clarity over personality | Match humanization level to content type — docs need clarity; blog posts and marketing copy need personality |
+| Specificity gaps flagged but cannot be filled | Writer does not have access to real data, expert quotes, or original research | Flag clearly as "author must provide" — humanizer cannot invent proof points. Honest qualification beats vague authority |
+| AI detection tools still flagging content | Structural patterns (SEEB uniformity) persist despite word-level changes | Vary paragraph structures deliberately — single-sentence paragraphs, questions, fragments, asides, confessions |
+| Readability dropped after humanization | Informal language and fragments reduced Flesch score | Balance personality with readability — fragments are fine but complex vocabulary can hurt scores. Target Flesch 60-70 |
+| Google SynthID or similar tool detects AI origin | Content was generated with tools that embed watermarks (e.g., Google Gemini) | Rewrite substantially rather than editing in place; change structure, not just words. SynthID detection is statistical |
+
+---
+
+## Success Criteria
+
+- **AI tell density**: Fewer than 3 AI tells per 500 words after humanization pass (from baseline of 8+ pre-edit)
+- **Unique paragraph structures**: At least 4 distinct paragraph patterns in any 1,000-word piece (vs. uniform SEEB pattern)
+- **Specificity rate**: Zero vague claims remaining without either specific data or honest qualification
+- **Voice consistency**: Consistent formality level, humor usage, and relationship stance from introduction to conclusion
+- **Read-aloud test**: Content sounds natural when read aloud — no press-release cadence or robotic phrasing
+- **Readability maintenance**: Flesch Reading Ease stays within 55-75 range after humanization (no degradation)
+- **Brand voice match**: Content passes brand voice review with 90%+ alignment to documented voice guidelines
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- AI pattern detection and audit (diagnostic only or with edits)
+- Filler word replacement with context-appropriate alternatives
+- Sentence rhythm and cadence repair
+- Paragraph structure diversification
+- Specificity replacement (vague claims to specific or honestly qualified)
+- Voice injection from brand guidelines or example content
+- Consistency checking across full-length pieces
+
+**Out of scope:**
+- Content creation from scratch (use Content Production)
+- Grammar and spelling correction (use Copy Editing)
+- SEO optimization (use SEO Specialist or Content Production optimization pass)
+- Content strategy or topic selection (use Content Strategy)
+- AI content generation or LLM API integration
+- Plagiarism detection or originality verification
+
+**Known limitations:**
+- Cannot add specificity where no data exists — must flag for author input
+- AI detection tools (GPTZero, Originality.ai, Google SynthID) have false positive rates of 10-30%
+- Voice injection without clear brand guidelines produces inconsistent results
+- Humanization of very short content (<300 words) may not have enough surface area for meaningful improvement
+- Content watermarked by AI generation tools (SynthID) may require substantial rewriting beyond pattern-level edits
+
+---
+
+## Scripts
+
+```bash
+# Score content for AI patterns and generate audit report
+python scripts/readability_scorer.py article.md --json
+
+# Detect AI filler words and hedging patterns with counts
+python scripts/ai_pattern_detector.py article.md --verbose
+
+# Analyze content for humanization opportunities
+python scripts/content_scorer.py article.md --json
+```

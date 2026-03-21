@@ -231,3 +231,108 @@ python scripts/investor_metrics.py --period monthly
 - `references/saas_metrics.md` -- SaaS metrics deep dive
 - `references/accounting_policies.md` -- Policy documentation
 - `references/audit_prep.md` -- Audit readiness guide
+
+---
+
+## Tool Reference
+
+### financial_health_scorer.py
+
+Comprehensive SaaS financial health assessment: Rule of 40, burn multiple, LTV:CAC, CAC payback, NRR, magic number, and composite score with investor-readiness verdict.
+
+```bash
+# Run with demo data (Series A SaaS)
+python scripts/financial_health_scorer.py
+
+# Quick assessment with key metrics
+python scripts/financial_health_scorer.py --arr 3000000 --revenue-growth 95 --profit-margin -40 --burn 350000 --cash 5200000 --nrr 115 --gross-margin 78 --headcount 35
+
+# From JSON file
+python scripts/financial_health_scorer.py --input financials.json
+
+# JSON output
+python scripts/financial_health_scorer.py --input financials.json --json
+```
+
+### burn_rate_calculator.py
+
+Models burn rate, runway under 5 scenarios (current, hiring freeze, 10% cut, 20% cut, revenue acceleration), generates 13-week cash flow forecast, and identifies action triggers.
+
+```bash
+# Run with demo data
+python scripts/burn_rate_calculator.py
+
+# Quick calculation
+python scripts/burn_rate_calculator.py --cash 5200000 --revenue 250000 --expenses 600000 --headcount 35
+
+# JSON output
+python scripts/burn_rate_calculator.py --json
+```
+
+### scenario_modeler.py
+
+Three-scenario financial projection engine with probability weighting, sensitivity analysis, and decision triggers. Projects base, upside, and downside cases over 8 quarters.
+
+```bash
+# Run with demo data
+python scripts/scenario_modeler.py
+
+# Quick model from key inputs
+python scripts/scenario_modeler.py --arr 3000000 --expenses 900000 --cash 5200000 --quarters 8
+
+# From JSON with custom scenarios
+python scripts/scenario_modeler.py --input scenarios.json
+
+# JSON output
+python scripts/scenario_modeler.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Burn multiple shows > 3.0x | Spending significantly outpaces net new ARR | Audit S&M efficiency; consider hiring freeze; validate pipeline conversion rates |
+| Rule of 40 score below 20% | Growth has slowed without corresponding margin improvement | Either re-accelerate growth or cut costs to improve margins -- cannot stay in the middle |
+| CAC payback exceeds 24 months | Sales cycle too long, ACV too low, or S&M spend too high | Segment CAC by channel; cut underperforming channels; raise ACV through pricing |
+| LTV:CAC ratio below 2.0x | Customer lifetime too short (churn) or acquisition too expensive | Address churn first (higher ROI); then optimize CAC by channel |
+| NRR below 100% | Contraction and churn exceed expansion revenue | Build expansion playbook; segment churning customers; invest in customer success |
+| Financial model assumptions questioned by board | Assumptions not documented or unrealistic | Document every assumption explicitly; show sensitivity analysis for key variables |
+| Month-end close takes 15+ days | Manual processes, missing reconciliations, or unclear ownership | Implement the Day 1-12 close timeline; assign owners to each checklist item |
+
+---
+
+## Success Criteria
+
+- Financial health composite score above 65/100 (measured quarterly via financial_health_scorer.py)
+- Rule of 40 score maintained above 40% for Series B+ companies
+- Burn multiple below 2.0x (below 1.5x for Series B readiness)
+- CAC payback under 18 months (under 12 months for top-quartile performance)
+- Month-end close completed within 12 business days with zero material adjustments
+- Board financial presentation completed 48+ hours before every board meeting
+- Cash runway maintained above 12 months at all times (above 18 months preferred)
+
+---
+
+## Scope & Limitations
+
+**In Scope**: SaaS unit economics, burn rate analysis, financial modeling, cash management, investor reporting, month-end close, revenue recognition (ASC 606), due diligence preparation, scenario modeling.
+
+**Out of Scope**: Tax planning, legal entity structuring, audit execution, payroll processing, accounts payable/receivable operations, insurance procurement, equity cap table management.
+
+**Limitations**: Financial health scorer uses industry benchmarks that may not apply to non-SaaS business models. Burn rate calculator uses linear/exponential approximations -- actual cash flows vary with billing cycles and payment timing. Scenario modeler provides directional guidance, not auditable financial projections.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `ceo-advisor` | Financial scenarios feed board strategy discussions |
+| `board-deck-builder` | Financial update section; all deck numbers validated through CFO tools |
+| `cro-advisor` | Revenue forecasting; pipeline-to-revenue conversion assumptions |
+| `chro-advisor` | Headcount budget modeling; fully-loaded cost calculations |
+| `ciso-advisor` | Compliance budget sizing against quantified risk exposure |
+| `company-os` | Financial metrics in the weekly scorecard |
+| `chief-of-staff` | Routes financial questions; synthesizes CFO + CEO perspectives |

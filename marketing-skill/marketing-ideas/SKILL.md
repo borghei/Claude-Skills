@@ -430,3 +430,48 @@ Before acting on a trend, evaluate:
 - **Social Content** — Use when the chosen idea involves social media execution.
 - **Cold Email** — Use when the chosen tactic is outbound email outreach.
 - **Campaign Analytics** — Use to measure the performance of implemented ideas.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Team overwhelmed by too many ideas, nothing gets executed | No prioritization framework applied; all ideas treated equally | Use idea_scorer.py to filter by stage, budget, and goal; select top 3-5 only |
+| Implemented ideas do not produce expected results | Ideas selected without validating fit for current stage and audience | Match ideas to ICP and marketing context before execution; validate with small test first |
+| Content ideas generate traffic but zero leads | Targeting top-of-funnel informational keywords without conversion path | Add lead magnets, CTAs, and gated content to every content piece; create bottom-of-funnel companion pages |
+| Paid ads burn budget with poor ROAS in first month | No testing phase; full budget deployed on unvalidated targeting | Start at 20% budget for 2 weeks to test, then scale winners; kill ads below 1.5x ROAS after testing period |
+| Campaign briefs lack clarity, causing rework | Brief missing key sections (audience, budget, timeline, KPIs) | Use campaign_brief_generator.py to create structured briefs with all required fields before execution |
+| Trend-chasing produces off-brand content | Trend adopted without evaluating brand alignment or resource fit | Run trend_evaluator.py before committing; only pursue trends scoring above 55% on evaluation |
+
+---
+
+## Success Criteria
+
+- Ideas curated to 3-5 maximum per cycle, matched to stage, budget, and goal constraints
+- Each implemented idea has a documented hypothesis, success metric, and evaluation date
+- 60%+ of implemented ideas produce measurable results within their expected timeline
+- Campaign briefs generated for every idea before execution begins
+- Trends evaluated systematically before adoption; only "PURSUE" or "EXPERIMENT" rated trends get resources
+- Idea backlog maintained and reviewed quarterly; stale ideas pruned
+- Focus on 1-2 channels mastered before expanding to additional channels
+
+---
+
+## Scope & Limitations
+
+**In Scope:** 139+ marketing ideas organized by category/stage/budget/timeline, campaign ideation frameworks, idea scoring and prioritization, campaign brief generation, trend identification and evaluation, quick win identification, PLG strategy ideas.
+
+**Out of Scope:** Detailed implementation for each idea (see channel-specific skills), budget allocation optimization (see marketing-analyst skill), execution tracking and analytics (see campaign-analytics skill), content creation (see content-creator skill).
+
+**Limitations:** This skill provides strategy and ideas, not execution. Each idea requires a channel-specific skill for full implementation. Impact estimates (High/Medium/Low) are directional based on benchmarks; actual results depend on execution quality, market fit, and timing. Trend evaluation is subjective and should be combined with data analysis.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/idea_scorer.py` | Score and prioritize marketing ideas by impact, effort, and alignment | `python scripts/idea_scorer.py ideas.json --stage growth --budget medium --goal leads` |
+| `scripts/campaign_brief_generator.py` | Generate structured campaign briefs from parameters | `python scripts/campaign_brief_generator.py config.json --demo` |
+| `scripts/trend_evaluator.py` | Evaluate marketing trends for relevance, risk, and actionability | `python scripts/trend_evaluator.py trends.json --demo` |

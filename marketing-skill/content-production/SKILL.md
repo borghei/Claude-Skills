@@ -360,3 +360,71 @@ Every piece must pass these gates before publishing:
 - **SEO Specialist** — Use for technical SEO audits across the content library. Content Production handles per-piece optimization.
 - **Social Content** — Use for distributing and repurposing content across social platforms.
 - **Copy Editing** — Use for the editorial review pass within the production pipeline.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content consistently fails the quality gate checklist | Briefs are incomplete or writers do not have enough context | Invest more time in brief creation — include target keyword, angle, audience, H2 structure, and competitive gaps |
+| Published content ranks #15-30 but does not break into top 10 | Content depth insufficient or missing E-E-A-T signals compared to page 1 results | Add original data, expert quotes, experience signals; increase word count to match or exceed top-ranking competitors |
+| Content sounds robotic after AI-assisted drafting | AI patterns not caught during editing passes | Run Content Humanizer audit before SEO optimization pass; check for filler words, hedging, and structural uniformity |
+| Internal linking neglected on new posts | Not built into production workflow | Add "update 2-4 existing posts to link to new content" as a required step in every production checklist |
+| Repurposing never happens despite planning | Repurposing treated as afterthought instead of workflow step | Build repurposing into the production timeline — schedule derivative content in the same editorial calendar |
+| Production bottleneck at editorial review stage | Single editor reviewing all content; no SLA on review turnaround | Set 48-hour review SLA; create self-service checklists writers can run before submitting for review |
+| Content outdated within 6 months of publishing | No refresh cycle established | Schedule quarterly reviews for all content ranking top 20; update stats, links, and publish dates |
+
+---
+
+## Success Criteria
+
+- **Production velocity**: Maintaining planned cadence (2-4 pieces/week) with less than 10% schedule slippage
+- **Quality gate pass rate**: 90%+ of drafts passing the pre-publish quality gate checklist on first or second review
+- **SEO optimization score**: Average score of 75+ on the four-pass optimization pipeline (SEO, readability, structure, meta)
+- **Readability score**: Flesch Reading Ease of 60-70 across all published content (appropriate for web audiences)
+- **Internal link coverage**: Every new piece includes 3-5 internal links, and 3+ existing pieces updated to link back
+- **Repurposing multiplier**: Each pillar piece produces 5+ derivative pieces across social, email, and other channels
+- **Content performance**: 60%+ of content published in last 6 months generating organic impressions within 90 days
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Full content production pipeline from brief to publish
+- Competitive research and source gathering for content briefs
+- Drafting methodology (outline-first, section-by-section)
+- Four-pass optimization pipeline (SEO, readability, structure, meta)
+- Editorial calendar management and production timelines
+- Content repurposing system across channels
+- Quality gates and pre-publish checklists
+
+**Out of scope:**
+- Content strategy and topic selection (use Content Strategy)
+- AI content humanization (use Content Humanizer)
+- Detailed copy editing (use Copy Editing)
+- Technical SEO audits (use SEO Specialist)
+- Social media platform management (use Social Content)
+- Design and visual content creation
+
+**Known limitations:**
+- 60% of marketing teams now use AI in content workflows (2026 data) — quality control processes must account for AI-assisted drafting
+- Production timelines assume dedicated writer and editor roles; solo operators need adjusted timelines
+- Content performance measurement requires Google Search Console and analytics access
+- Repurposing effectiveness varies by platform — not all derivative formats will perform equally
+
+---
+
+## Scripts
+
+```bash
+# Score content readability with detailed metrics
+python scripts/readability_scorer.py article.md --json
+
+# Generate a content brief from keyword research
+python scripts/content_brief_generator.py --keyword "cloud cost optimization" --json
+
+# Analyze headline options for a new piece
+python scripts/headline_analyzer.py --headlines headlines.txt --json
+```

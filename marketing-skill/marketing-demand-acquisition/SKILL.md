@@ -322,3 +322,113 @@ Required:
 - **marketing-strategy-pmm**: For positioning and GTM strategy that feeds demand gen campaigns.
 - **social-media-analyzer**: For analyzing social channel performance within demand gen mix.
 - **revenue-operations**: For pipeline analysis and forecast accuracy downstream of demand gen.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| CAC exceeding LTV ratio (below 3:1) | Over-spending on high-cost channels without sufficient conversion optimization | Audit channel-specific CAC against benchmarks. Cut or pause channels with CAC >$400 for B2B SaaS. Shift budget toward lower-CAC channels (SEO, email, organic social). A 3:1 LTV:CAC ratio is the minimum for sustainability; below 2:1 indicates immediate problems |
+| LinkedIn Ads delivering low CTR (<0.4%) | Audience too broad, creative fatigue, or wrong ad format | Narrow targeting to Director+ titles at 50-5,000 employee companies. Refresh creative every 2-3 weeks. Test Thought Leader Ads before scaling standard formats -- they deliver 10-20% CTR at premium CPMs, which frequently beats standard LinkedIn ads' 0.5-1% rates |
+| Google Ads CPA rising above target | Insufficient conversion data for automated bidding, or keyword competition increasing | Stay on Manual CPC until you have 50+ conversions, then switch to Target CPA. Google Ads CPC increased 164% from 2019-2024. Expand negative keyword list (maintain 100+). Focus on long-tail, high-intent keywords to reduce competition |
+| MQL-to-SQL conversion rate below 15% | Lead scoring too loose, or MQL criteria not aligned with sales expectations | Tighten MQL scoring criteria. Require minimum engagement score (demo request or equivalent high-intent action). Align with sales on SQL criteria: Director+ title, 50-5,000 employees, $10k+ budget, buying within 90 days |
+| UTM parameters not appearing in HubSpot contact records | Tracking script not firing, form stripping UTM values, or redirect losing parameters | Verify HubSpot tracking code is on all pages. Ensure forms pass hidden UTM fields. Test by clicking a UTM-tagged link and checking the contact record. Use server-side UTM capture if client-side tracking is blocked by privacy tools |
+| Partner channel not generating pipeline | Partner enablement insufficient, or wrong partner tier selection | Ensure partners have completed demo training and have access to co-branded assets. Focus on Tier 1 strategic integration partners (high effort, very high ROI) before scaling to Tier 2 affiliates. Set clear success metrics and revenue model before launch |
+| Single-channel dependency risk | Over 50% of pipeline from one channel | Diversify acquisition across 3+ channels immediately. Recommended 2026 allocation: AI-enhanced paid search 28-33%, omnichannel social 22-28%, content + experience marketing 20-25%. No single channel should exceed 40% of total pipeline |
+
+---
+
+## Success Criteria
+
+- **Blended CAC**: Target <$300 for B2B SaaS Series A (2026 benchmark). Channel-specific targets: LinkedIn $150-400, Google Search $80-250, SEO/Organic $50-150, Email $20-80. Average B2B SaaS CAC reached $1,200 in 2026 for all segments; self-serve targets $100-500 while enterprise can reach $5,000+
+- **CAC Payback Period**: Achieve payback within 6-12 months (2026 median). Elite performers reach payback in under 80 days. Payback exceeding 18 months signals unsustainable unit economics
+- **LTV:CAC Ratio**: Maintain minimum 3:1 ratio. Below 2:1 requires immediate intervention. Top-quartile SaaS companies spend $1.10 or less to acquire $1 of new ARR; median spends $2 per $1 ARR
+- **MQL-to-SQL Conversion**: Target 15-25% for Google Search, 12-22% for SEO, 10-20% for LinkedIn, 8-15% for email. Overall blended target >15%
+- **Pipeline Velocity**: Close marketing-sourced deals within 60 days average. SDR response to MQL within 4 hours, AE demo booking within 24 hours, first demo within 3 business days
+- **Channel Diversification**: No single channel should represent more than 40% of pipeline. Maintain active campaigns across minimum 3 channels. LinkedIn generates highest quality B2B leads (40% of marketers cite it as most effective)
+- **Marketing Budget Efficiency**: SaaS companies under $10M ARR should spend 20-35% of revenue on marketing; $10-50M spend 18-25%; $50-100M spend 15-20%. For 2026, allocate 18-28% of revenue total with clear channel allocation ratios
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Multi-channel demand generation strategy for B2B SaaS (Series A+) with hybrid PLG/sales-led motion
+- Paid media channel selection, budget allocation, and CAC calculation (LinkedIn, Google Search, Google Display, Meta)
+- SEO strategy including technical foundation, keyword strategy, on-page optimization, and link building priorities
+- Partnership program planning (strategic integrations, affiliates, referrals, marketplace listings)
+- Attribution model selection (first-touch, last-touch, W-shaped) with HubSpot integration guidance
+- UTM structure standards and campaign tracking
+- MQL/SQL criteria definition and handoff SLA
+
+**Out of Scope:**
+- Campaign creative design (ad copy, images, video production)
+- Platform-specific campaign management UI guidance (use LinkedIn Campaign Manager, Google Ads, Meta Ads Manager directly)
+- Product-led growth (PLG) product instrumentation (freemium flows, in-app upgrade prompts)
+- Sales process optimization beyond MQL-to-SQL handoff (see revenue-operations or sales-success skills)
+- Advanced predictive analytics or ML-based lead scoring
+- International regulatory compliance for advertising (GDPR consent, CCPA disclosures)
+- Brand marketing and awareness campaigns without direct pipeline attribution
+
+**Market Context (2026):**
+- CAC is rising 40-60% since 2023 across B2B SaaS
+- Google Ads CPC increased 164% from 2019-2024; LinkedIn costs up 89%
+- Privacy regulations and cookie deprecation are reducing attribution accuracy
+- AI-enhanced bidding strategies (Google Performance Max, LinkedIn Maximize Conversions) are becoming standard
+
+---
+
+## Integration Points
+
+| Integration | Purpose | How to Connect |
+|-------------|---------|----------------|
+| **HubSpot CRM** | Campaign tracking, lead scoring, MQL/SQL workflows, attribution reporting | Create campaigns with UTM structure (`utm_source={channel}`, `utm_medium={type}`, `utm_campaign={campaign-id}`). Configure W-shaped (40-20-40) attribution model. Set 90-day lookback window. Validate with weekly metrics dashboard |
+| **Google Ads** | Paid search campaign management | Structure: Brand > Competitor > Solution > Category keywords. 3 responsive search ads per ad group (15 headlines, 4 descriptions). Start Manual CPC, switch to Target CPA after 50+ conversions. Weekly search term review |
+| **LinkedIn Campaign Manager** | B2B paid social campaigns | Structure: Awareness > Consideration > Conversion campaigns. Target Director+, 50-5,000 employees. Start $50/day per campaign. Scale 20% weekly if CAC < target. Verify LinkedIn Insight Tag on all pages. Test Thought Leader Ads for higher CTR |
+| **Google Search Console** | SEO performance tracking | Monitor indexing, Core Web Vitals, keyword positions. Target page speed >90 mobile. Submit XML sitemap. Track non-brand traffic percentage as key SEO health metric |
+| **campaign-analytics skill** | Attribution modeling and ROI calculation | Export HubSpot journey data as JSON for `attribution_analyzer.py`. Use `campaign_roi_calculator.py` for cross-channel ROI comparison. Feed funnel data into `funnel_analyzer.py` for bottleneck detection |
+| **social-media-analyzer skill** | Social channel performance within demand gen mix | Analyze paid social campaign performance with `calculate_metrics.py`. Compare social channel CAC against other acquisition channels |
+| **Partner Platforms (PartnerStack, Impact, Rewardful)** | Affiliate and partner program management | Configure 20-30% recurring commission. Create affiliate enablement kit. Set up partner UTM tracking. Test affiliate link tracking through to conversion |
+
+---
+
+## Tool Reference
+
+### calculate_cac.py
+
+**Type:** CLI script (runs with example data or edit inline)
+
+**Usage:**
+```bash
+python calculate_cac.py
+```
+
+**Note:** This script uses hardcoded example data. To analyze your own data, edit the `example_data` list in the script with your channel-specific spend and customer counts.
+
+**Input Format (edit in script):**
+```python
+example_data = [
+    {'channel': 'LinkedIn Ads', 'spend': 15000, 'customers': 10},
+    {'channel': 'Google Search', 'spend': 12000, 'customers': 20},
+    {'channel': 'SEO/Organic', 'spend': 5000, 'customers': 15},
+    {'channel': 'Partnerships', 'spend': 3000, 'customers': 5},
+]
+```
+
+**Functions:**
+
+| Function | Parameters | Returns |
+|----------|-----------|---------|
+| `calculate_cac()` | `total_spend: float`, `customers_acquired: int` | Basic CAC as float. Returns 0.0 if customers is 0 |
+| `calculate_channel_cac()` | `channel_data: List[Dict]` (each dict: channel, spend, customers) | Dict with per-channel breakdown (spend, customers, cac) plus `blended` key with total_spend, total_customers, blended_cac |
+| `print_results()` | `results: Dict` | Prints formatted table to stdout with per-channel and blended CAC |
+
+**Built-in Benchmarks (printed at end of output):**
+- LinkedIn Ads: $150-$400
+- Google Search: $80-$250
+- SEO/Organic: $50-$150
+- Partnerships: $100-$300
+- Blended Target: <$300
+
+**2026 Context:** These benchmarks reflect Series A B2B SaaS. Overall B2B SaaS CAC has risen to $1,200 average across all segments (up 40-60% since 2023). Self-serve models target $100-500; enterprise segments can exceed $5,000. The median SaaS company spends $2 to acquire $1 of new ARR.

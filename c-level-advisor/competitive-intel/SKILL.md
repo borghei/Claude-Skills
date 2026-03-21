@@ -308,3 +308,96 @@ RISK WATCH
 | "Competitor just launched [feature]" | Impact assessment + recommended response + timeline |
 | "Competitive section for board" | Monthly summary: movements, win/loss, recommended actions |
 | "Update our positioning" | Positioning analysis against current competitive landscape |
+
+---
+
+## Tool Reference
+
+### 1. market_landscape_mapper.py
+
+Maps the competitive landscape across configurable dimensions, classifying competitors by tier, plotting market positioning, and identifying whitespace opportunities.
+
+```bash
+python scripts/market_landscape_mapper.py --input competitors.json --json
+python scripts/market_landscape_mapper.py --input competitors.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor data (name, tier, dimensions, scores) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. competitor_tracker.py
+
+Tracks competitor movements over time across 8 dimensions (product, pricing, funding, hiring, partnerships, customers, messaging, market share). Detects significant changes and generates alerts.
+
+```bash
+python scripts/competitor_tracker.py --input tracking_data.json --json
+python scripts/competitor_tracker.py --input tracking_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor tracking entries over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. swot_analyzer.py
+
+Performs structured SWOT analysis with weighted scoring, cross-impact assessment (SO/WO/ST/WT strategies), and strategic priority recommendations.
+
+```bash
+python scripts/swot_analyzer.py --input swot_data.json --json
+python scripts/swot_analyzer.py --input swot_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with strengths, weaknesses, opportunities, threats (each with description, impact 1-10, confidence 1-10) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Battlecards outdated within weeks of creation | No triggered update process for competitor moves | Implement event-driven battlecard updates tied to monitoring alerts; assign a battlecard owner per Tier 1 competitor |
+| Win/loss interviews not being conducted | AEs reluctant to participate or no clear owner | Assign non-AE interviewers (CS, product, or external); make win/loss a process requirement, not optional |
+| Competitive intel stays in Slack, not reaching sales | No single source of truth or distribution cadence | Centralize intel in CRM-attached battlecards; set monthly distribution cadence with CRO ownership |
+| Feature gap analysis does not influence roadmap | Product team not consuming competitive data | Include CPO in quarterly landscape review; tie gap analysis to roadmap planning cycle |
+| Competitor tier classification never updated | No annual review of competitive landscape | Schedule annual tier reassessment; add/remove competitors based on ICP overlap and funding changes |
+| Team over-reacts to every competitor move | No framework for assessing threat significance | Use the Threat Classification Matrix to filter signal from noise; only escalate Tier 1 changes |
+| Intelligence collection is inconsistent | No assigned owners or cadence for tracking dimensions | Assign dimension owners from the Intelligence Distribution table; automate monitoring where possible |
+
+---
+
+## Success Criteria
+
+- Battlecards updated within 48 hours of significant Tier 1 competitor moves
+- Win rate against top 3 competitors stable or improving quarter-over-quarter
+- Win/loss interviews conducted for 90%+ of lost deals above $50K ACV
+- Sales team can articulate top 3 differentiators vs each Tier 1 competitor without reference material
+- Competitive intelligence influences at least 2 roadmap decisions per quarter
+- Time from competitor event to internal awareness is under 72 hours
+- Positioning refreshed at least once per year based on landscape analysis
+
+---
+
+## Scope & Limitations
+
+**In scope:** Competitor identification and tier classification, 8-dimension tracking across product/pricing/funding/hiring/partnerships/customers/messaging/market share, SWOT analysis per competitor, feature gap analysis, battlecard creation and distribution, win/loss analysis, competitive positioning maps, board-level competitive summaries, and market landscape mapping via Python tools.
+
+**Out of scope:** Real-time competitor monitoring (tools analyze point-in-time data exports), pricing intelligence from competitor internal data, customer-level deal coaching (tools flag patterns but do not prescribe sales tactics), market research surveys or primary research, and competitor financial modeling beyond publicly available data.
+
+**Limitations:** SWOT and landscape analysis depend on the quality and recency of input data. Competitive intelligence older than 6 months should be treated as directional only. Win/loss analysis requires a minimum of 10 interviews per quarter for statistical significance. Market positioning maps are subjective and should be validated with customer perception data.
+
+---
+
+## Integration Points
+
+- **cro-advisor** -- Battlecards feed directly into sales enablement; win/loss data informs pipeline strategy and quota setting
+- **cpo-advisor** -- Feature gap analysis influences product roadmap prioritization and portfolio investment decisions
+- **cmo-advisor** -- Competitive positioning informs messaging, content strategy, and campaign differentiation
+- **ceo-advisor** -- Board-level competitive summaries inform strategic direction and M&A evaluation
+- **board-deck-builder** -- Monthly competitive landscape slides feed into quarterly board presentations
+- **sales-success/** -- Battlecards and killer questions enable sales team competitive selling

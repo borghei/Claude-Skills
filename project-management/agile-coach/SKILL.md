@@ -186,3 +186,44 @@ Target Level 3 within 6 months.
 - `references/coaching_techniques.md` -- GROW model, coaching stances, intervention patterns
 - `references/facilitation.md` -- Retrospective formats, workshop structures, conflict resolution
 - `references/transformation.md` -- Transformation playbook with phase gates and success criteria
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Teams revert to waterfall habits after initial training | Coaching stance too directive; team never internalized agile values | Shift to facilitative coaching; run a "why agile" workshop focused on outcomes, not ceremonies |
+| Velocity fluctuates wildly sprint to sprint | Inconsistent story pointing, scope changes mid-sprint, or unplanned work not tracked | Calibrate estimation with reference stories; track unplanned work separately; protect sprint scope |
+| Retrospective action items never get implemented | Actions too vague, no owners, or no capacity reserved for improvements | Apply SMART criteria to retro actions; reserve 10-15% sprint capacity for improvement items |
+| Leadership loses patience with transformation timeline | Unrealistic expectations set during Phase 1; no visible quick wins | Identify and publicize early wins within first 60 days; show leading indicators (cycle time, team satisfaction) before lagging indicators (revenue, quality) |
+| Teams resist framework adoption | Change fatigue, lack of psychological safety, or imposed top-down mandate | Start with volunteer pilot teams; let success stories create pull rather than push; address fears openly |
+| Agile maturity score plateaus at Level 2-3 | Focus on ceremonies over outcomes; technical practices neglected | Invest in engineering excellence (CI/CD, TDD, pair programming); shift metrics from output to outcomes |
+| Cross-team coordination breaks down at scale | No explicit coordination mechanisms beyond team-level Scrum | Introduce Scrum-of-Scrums, communities of practice, or consider a lightweight scaling framework (LeSS, Nexus) |
+
+## Success Criteria
+
+- Team velocity stabilizes within +/-15% variance after 4 sprints of coaching engagement
+- Agile maturity score improves by at least 1 full level within 6 months of sustained coaching
+- Retrospective action item completion rate exceeds 70% per sprint
+- Team NPS or satisfaction score (measured quarterly) trends upward over 3 consecutive periods
+- Cycle time for standard work items decreases by 20%+ within the first quarter
+- At least 80% of team members can articulate the purpose behind each ceremony they practice
+- Leadership stakeholders rate transformation progress as "on track" or better in quarterly reviews
+
+## Scope & Limitations
+
+**In Scope:** Framework selection and recommendation, team-level coaching and facilitation, maturity assessment and scoring, retrospective design, transformation roadmap creation, conflict resolution within agile teams, stakeholder alignment for agile adoption.
+
+**Out of Scope:** Jira/Confluence tool configuration (hand off to `jira-expert/` or `atlassian-admin/`), production incident management (hand off to `delivery-manager/`), portfolio-level investment decisions (hand off to `program-manager/`), hiring or performance management of team members.
+
+**Limitations:** Maturity scoring is a point-in-time assessment that requires honest self-reporting; scores can be gamed. Framework recommendations are guidelines, not prescriptions -- every organization has unique constraints. Transformation timelines assume consistent leadership support; political changes can invalidate roadmaps.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `scrum-master/` | Bidirectional | Agile coach sets framework; Scrum Master executes sprint-level practices |
+| `delivery-manager/` | Coach -> DM | Transformation roadmap milestones feed into delivery planning |
+| `program-manager/` | Coach -> PgM | Scaling framework selection informs program governance structure |
+| `jira-expert/` | Coach -> Jira | Board and workflow requirements derived from framework selection |
+| `senior-pm/` | PM -> Coach | Portfolio priorities shape which teams get coaching focus first |
+| `confluence-expert/` | Coach -> Confluence | Coaching artifacts (maturity reports, retro outcomes) documented in Confluence |

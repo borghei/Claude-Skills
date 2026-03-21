@@ -193,3 +193,44 @@ python scripts/deploy.py --env production --strategy canary
 - `references/deployment_patterns.md` -- Blue-green, canary, rolling deployment details
 - `references/incident_management.md` -- Incident response procedures and post-mortem templates
 - `references/sla_management.md` -- SLA framework, error budgets, and reporting
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Canary deployment shows elevated errors but feature works in staging | Environment parity gap -- staging lacks production data volume, traffic patterns, or third-party integrations | Improve staging fidelity; use traffic shadowing before canary; define canary success thresholds based on production baselines, not staging |
+| Release go/no-go keeps getting deferred | Exit criteria too rigid or too many items flagged as blockers at the last moment | Separate "must-have" from "nice-to-have" criteria upfront; run readiness checks at T-7 and T-3 to surface issues early |
+| Incident post-mortems produce action items that never get implemented | Actions lack owners, due dates, or priority relative to feature work | Assign every action to a named owner with a calendar date; reserve sprint capacity for reliability work; track post-mortem actions in a dedicated Jira board |
+| Error budget burns through in the first week of the month | Single large incident or multiple small incidents compounding | Implement burn-rate alerting at 50% and 75% thresholds; auto-freeze non-critical deployments when burn rate exceeds 1.5x |
+| Change requests bypass the CAB process | Emergency change pathway overused; teams lack awareness of change types | Audit emergency changes monthly; retrain teams on change classification; add automation to flag changes missing required approvals |
+| DORA metrics stagnate despite tooling investment | Measuring deployment frequency without addressing batch size, or measuring MTTR without improving observability | Focus on leading indicators (batch size, test coverage, observability depth) before expecting DORA improvement |
+| Rollback takes longer than expected | Rollback plan not tested; database migrations are not backward-compatible | Require rollback rehearsal for every major release; enforce backward-compatible migration policy; blue-green with instant switch as default strategy |
+
+## Success Criteria
+
+- Change failure rate stays below 5% measured over a rolling 30-day window
+- Mean time to recovery (MTTR) for SEV-1/SEV-2 incidents is under 1 hour
+- 100% of SEV-1/SEV-2 incidents produce a post-mortem with action items within 48 hours
+- Error budget consumption stays below 80% in any given month
+- Release cadence meets or exceeds the target deployment frequency (weekly or better)
+- Zero deployments proceed without a documented rollback plan
+- DORA metrics show quarter-over-quarter improvement across all four measures
+
+## Scope & Limitations
+
+**In Scope:** Release planning and readiness assessment, deployment strategy selection and coordination, incident response process management, change request evaluation, SLA/error budget tracking, DORA metrics monitoring, post-mortem facilitation, delivery maturity assessment.
+
+**Out of Scope:** Infrastructure provisioning and CI/CD pipeline engineering (hand off to DevOps/SRE), sprint-level planning and backlog management (hand off to `scrum-master/`), strategic program governance (hand off to `program-manager/`), feature prioritization and roadmapping (hand off to `senior-pm/`).
+
+**Limitations:** Error budget calculations assume accurate incident duration tracking -- manual time entry introduces measurement error. Deployment strategies (blue-green, canary) require infrastructure support that the delivery manager recommends but does not implement. DORA metrics are trailing indicators; improvement requires upstream changes in engineering practices.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `scrum-master/` | SM -> DM | Sprint completion data, demo-ready confirmation, velocity for release sizing |
+| `senior-pm/` | PM -> DM | Release calendar, stakeholder communication requirements |
+| `program-manager/` | PgM -> DM | Cross-project release dependencies, milestone alignment |
+| `jira-expert/` | Bidirectional | Release version tracking in Jira; deployment status field updates |
+| `agile-coach/` | Coach -> DM | Delivery maturity assessment inputs, DevOps culture recommendations |
+| `confluence-expert/` | DM -> Confluence | Post-mortem documentation, runbook maintenance, release notes publishing |

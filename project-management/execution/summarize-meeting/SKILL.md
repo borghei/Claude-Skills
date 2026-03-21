@@ -164,3 +164,44 @@ When summarizing, deprioritize:
 
 - See `references/meeting-facilitation-guide.md` for meeting types, note-taking strategies, and anti-patterns.
 - See `assets/meeting_summary_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Action items are assigned to teams instead of individuals | Culture avoids individual accountability; facilitator does not press for a single owner | Enforce the "one owner" rule during the meeting; if a team is named, ask "Who on that team is the single point of contact?" |
+| Summaries are too long and nobody reads them | Summarizer includes too much detail; tries to capture everything | Apply the "would someone who missed the meeting need this?" filter to every bullet point; target 1 page maximum for 1-hour meetings |
+| Decisions are not documented, leading to re-litigation in future meetings | Meeting moved quickly; facilitator focused on discussion, not decisions | Pause after each decision and state it aloud: "Let me confirm: we decided X because Y"; add decision capture as a facilitator checklist item |
+| Action items have vague due dates ("soon", "next sprint") | Facilitator does not push for specificity; team uncomfortable committing to dates | Require a calendar date for every action; if the team cannot commit, set a date to decide the date |
+| Summaries are distributed days after the meeting | Summarizer is overburdened or perfectionist | Set a 24-hour distribution rule; use a structured template to reduce writing effort; assign summary responsibility before the meeting |
+| Open questions from previous meetings are never resolved | No follow-up mechanism; questions captured but not tracked | Add "Previous Open Questions" as a standing agenda item; assign each question an owner and a resolution date |
+| Attendees disagree with the summary after distribution | Summary reflects summarizer's interpretation, not group consensus | Share key decisions and action items verbally at the meeting close; invite corrections within 24 hours of distribution |
+
+## Success Criteria
+
+- 100% of meetings with decisions or action items produce a written summary within 24 hours
+- Every action item has a single named owner and a specific calendar due date
+- Action item completion rate exceeds 80% by the stated due date
+- Summaries are 1 page or less for meetings under 1 hour
+- Decisions are documented with enough context that a non-attendee can understand the rationale
+- Open questions from previous meetings are tracked and resolved within 2 meeting cycles
+- Meeting summary satisfaction (from periodic team survey) averages 4+/5
+
+## Scope & Limitations
+
+**In Scope:** Capturing meeting metadata, extracting key discussion points, documenting decisions with rationale, recording action items with owners and due dates, capturing open questions, distributing summaries, maintaining consistent naming conventions and storage.
+
+**Out of Scope:** Meeting facilitation and agenda design, real-time transcription (use a transcription tool as input), project status tracking (hand off to `../jira-expert/`), strategic decision frameworks (hand off to `../senior-pm/`), recording or video management.
+
+**Limitations:** Summary quality is bounded by the quality of input notes or transcript. Automated transcription tools may introduce errors that the summarizer must catch. The skill does not replace the need for a skilled facilitator -- poorly run meetings produce poor summaries regardless of template quality. Sensitive or confidential meetings may require restricted distribution that the standard workflow does not address.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Meetings -> WWAS | Decisions and commitments from meetings become WWAS backlog items |
+| `job-stories/` | Meetings -> Stories | Discovery discussions surface situations and motivations for job stories |
+| `../jira-expert/` | Meetings -> Jira | Action items create Jira tickets; decisions update issue comments |
+| `../confluence-expert/` | Meetings -> Confluence | Summaries stored in Confluence using meeting notes template |
+| `../senior-pm/` | Meetings -> PM | Steering committee and stakeholder meeting summaries feed portfolio reporting |
+| `../delivery-manager/` | Meetings -> DM | Release planning and incident review meeting outcomes feed delivery tracking |

@@ -471,3 +471,72 @@ Score each dimension 1-5, then apply the threshold.
 - **site-architecture** -- Plan hub-and-spoke structure and crawl budget management for large pSEO deployments (500+ pages).
 - **competitor-alternatives** -- Use the Comparisons playbook when building "[X] vs [Y]" pages; competitor-alternatives has dedicated comparison page frameworks.
 - **content-creator** -- Use when individual pages in the set need editorial-quality unique content beyond template generation.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Google deindexed 90%+ of pSEO pages | Thin content — pages have insufficient unique content (<300 words) or >80% similarity | Increase unique content per page to 500+ words; ensure 30-40% differentiation between pages |
+| Pages indexed but getting zero traffic | Pages target zero-volume keywords or content does not match search intent | Validate demand before generating; noindex zero-volume pages; verify intent alignment |
+| "Doorway pages" manual action in GSC | Template pages with only variable substitution (city name swap) and no unique value | Add genuinely unique data per page — local stats, specific recommendations, conditional content blocks |
+| Hub page ranks but spokes do not | Spokes missing inbound internal links or hub not linking down to spokes | Verify bidirectional hub-spoke linking; add contextual cross-links between related spokes |
+| Crawl budget exhausted before all pages indexed | Too many pages submitted at once or low-value pages consuming crawl resources | Phase deployment in batches of 100-500; use tiered indexation with strategic noindex |
+| Content similarity too high across page set | Template lacks conditional content blocks; only variable substitution used | Add 3-5 conditional content sections per template that change based on data attributes |
+| AI content detection flagging pSEO pages | Over-reliance on AI generation without human editorial review | Use AI for data enrichment only, not full content generation; sample 5-10% for quality review |
+
+---
+
+## Success Criteria
+
+- **Indexation rate**: 90%+ of submitted pages indexed within 60 days of deployment
+- **Content uniqueness**: Every page has 500+ unique words with <40% similarity to any other page in the set (2026 Google threshold)
+- **Head keyword rankings**: Top 10% of pages (by volume) ranking in top 30 within 90 days
+- **Organic traffic growth**: Page set generating measurable organic traffic within 60 days of full deployment
+- **Thin content rate**: Zero pages flagged as thin content in Google Search Console
+- **Bounce rate**: Below 70% average across the page set (indicating intent match)
+- **Conversion rate**: 1%+ for transactional intent pages, measurable lead capture for informational pages
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Keyword pattern mining and volume distribution analysis
+- Data pipeline design (source > extraction > transformation > validation > publication)
+- Template architecture with uniqueness requirements
+- Quality control frameworks including thin content detection
+- Hub-and-spoke internal linking for pSEO page sets
+- Phased indexation strategy and crawl budget management
+- Post-launch optimization and monitoring dashboards
+
+**Out of scope:**
+- Individual editorial content creation (use Content Production)
+- Data collection or web scraping implementation
+- CMS or static site generator setup and configuration
+- Server infrastructure for large-scale deployments
+- Paid acquisition for pSEO pages
+- Legal compliance for data usage rights
+
+**Known limitations:**
+- Google's 2026 helpful content system can deindex large page sets retroactively if quality drops below threshold
+- Programmatic SEO at Tier F data (public/scraped) carries high penalty risk regardless of template quality
+- Engagement metrics (bounce rate, time on page) now influence indexation decisions for pSEO pages
+- AI content detection is improving — fully automated content generation without human oversight is increasingly risky
+- Travel site case study: 50,000 city-swap pages had 98% deindexed within 3 months (per 2025 industry data)
+
+---
+
+## Scripts
+
+```bash
+# Analyze keyword patterns for pSEO opportunities
+python scripts/keyword_pattern_miner.py --keywords keywords.csv --json
+
+# Score page templates for content quality and uniqueness
+python scripts/template_scorer.py --template template.html --data sample_data.json
+
+# Validate data quality for pSEO data pipeline
+python scripts/data_validator.py --file data.csv --rules rules.json --json
+```

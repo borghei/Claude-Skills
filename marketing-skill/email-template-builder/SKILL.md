@@ -527,3 +527,66 @@ npx email lint --dir emails/templates
 | **email-sequence** | Writing email copy and designing automation flows |
 | **analytics-tracking** | Setting up email engagement tracking and attribution |
 | **launch-strategy** | Coordinating email templates for product launches |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Email clipped in Gmail | HTML over 102KB | Run `render_size_analyzer.py`. Remove comments, minify, replace base64 images. |
+| Layout broken in Outlook | CSS flexbox/grid used | Use table-based layout. Run `template_validator.py` for compatibility check. |
+| Styles stripped in Gmail | Styles in `<head>` only | Inline all CSS. React Email handles this automatically. |
+| Unreadable in dark mode | No dark mode CSS | Add `prefers-color-scheme: dark` media queries with `!important`. |
+| Low deliverability score | Missing unsubscribe, heavy images | Run `spam_score_checker.py`. Add RFC 8058 one-click unsubscribe headers. |
+| Images not loading | Blocked by email client defaults | Add descriptive alt text. Maintain 60%+ text-to-image ratio. |
+| Template renders differently across clients | Unsupported CSS properties | Test on Gmail, Apple Mail, Outlook (Windows) before production sends. |
+
+---
+
+## Success Criteria
+
+- Spam score of 9+/10 on mail-tester.com before production sends
+- Template renders correctly on Gmail, Apple Mail, and Outlook (Windows)
+- HTML under 80KB (well under Gmail's 102KB clip threshold)
+- Text-to-image ratio above 60%
+- Dark mode tested and readable for 30%+ of users
+- All images have alt text and explicit width/height dimensions
+- One-click unsubscribe (RFC 8058) implemented in all templates
+- Separate sending domains for transactional vs. marketing email
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Email HTML/CSS template engineering, React Email and MJML components, multi-provider sending abstraction, i18n, dark mode, deliverability infrastructure, spam score optimization.
+
+**Out of Scope:** Email copy/sequence writing (use email-sequence), marketing automation workflows, email list management, A/B test statistical analysis.
+
+---
+
+## Python Automation Tools
+
+### 1. Spam Score Checker (`scripts/spam_score_checker.py`)
+Analyzes email HTML for spam risk: text-to-image ratio, link density, spam words, unsubscribe presence, HTML structure.
+
+```bash
+python scripts/spam_score_checker.py template.html
+python scripts/spam_score_checker.py template.html --json
+```
+
+### 2. Template Validator (`scripts/template_validator.py`)
+Validates email templates for client compatibility (Outlook, Gmail), accessibility, responsive design, and inline styles.
+
+```bash
+python scripts/template_validator.py template.html
+python scripts/template_validator.py template.html --json
+```
+
+### 3. Render Size Analyzer (`scripts/render_size_analyzer.py`)
+Analyzes template file size, estimates render weight, and checks against Gmail's 102KB clip threshold with detailed breakdown.
+
+```bash
+python scripts/render_size_analyzer.py template.html
+python scripts/render_size_analyzer.py --dir templates/ --json
+```

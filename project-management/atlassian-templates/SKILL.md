@@ -749,3 +749,44 @@ Use emojis or numeric scale (1-10) to capture team sentiment.
 - Provide Jira Expert with issue templates
 - Supply Senior PM with reporting templates
 - Give Scrum Master sprint ceremony templates
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Users create pages from scratch instead of using templates | Templates not discoverable, or template names are unclear | Pin templates to space sidebar; use descriptive names (e.g., "Sprint Retro - Team Template"); send periodic reminders with usage links |
+| Template produces inconsistent output across teams | Template has too many free-text sections without guidance; teams interpret placeholders differently | Add inline instructions within placeholders; provide a completed example alongside the blank template; standardize section headings |
+| Confluence macros in templates break after product updates | Atlassian deprecated or renamed macros in a platform update | Subscribe to Atlassian release notes; test templates in sandbox after major updates; maintain a macro compatibility checklist |
+| Template versioning creates confusion about which version to use | Multiple versions coexist without clear deprecation; naming does not indicate version | Use version suffix in template name (e.g., "PRD Template v2.1"); archive old versions immediately after migration; add deprecation banner to old templates |
+| Jira issue templates do not apply consistently | Template applied at wrong level (project vs. issue type), or default values overridden by workflow post-functions | Verify template scope matches intended issue type and project; check for conflicting automation rules or post-functions |
+| Template adoption rate is low despite training | Templates add friction rather than reducing it; too many required fields | Simplify templates to the minimum viable structure; make optional sections collapsible; gather user feedback and iterate quarterly |
+| Dynamic macros (Jira queries, charts) show stale data | JQL filter references incorrect project, or cache settings are too aggressive | Verify JQL in each dynamic macro; adjust cache refresh intervals; test macros after any project key or filter changes |
+
+## Success Criteria
+
+- Template adoption rate exceeds 70% for targeted content types (measured by pages created from templates vs. blank pages)
+- New template requests are evaluated and deployed within 10 business days
+- All active templates have documented usage instructions and at least one completed example
+- Template satisfaction score (from quarterly user survey) averages 4+/5
+- Zero active templates older than 12 months without a documented review
+- Template-created content passes quality checklist at 85%+ rate on first use
+- Deprecated templates are archived within 30 days of replacement deployment
+
+## Scope & Limitations
+
+**In Scope:** Confluence page template design and deployment, Jira issue description templates, blueprint development, template governance and lifecycle management, template versioning, usage analytics tracking, user training on template usage, macro-enhanced dynamic templates.
+
+**Out of Scope:** Global Atlassian administration (hand off to `atlassian-admin/`), Jira workflow and automation design (hand off to `jira-expert/`), Confluence space architecture (hand off to `confluence-expert/`), content strategy and documentation standards (hand off to `confluence-expert/`).
+
+**Limitations:** Confluence Cloud templates cannot include all macro types (some advanced macros require manual insertion after page creation). Jira issue templates are limited to description field content -- they cannot pre-set custom field values without automation rules. Template analytics require Confluence Premium or a marketplace analytics app for detailed usage metrics.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `confluence-expert/` | Bidirectional | Confluence expert defines content standards; template creator implements them as templates |
+| `jira-expert/` | Templates -> Jira | Issue description templates, workflow documentation templates |
+| `atlassian-admin/` | Admin -> Templates | Global template deployment approval, governance policies |
+| `scrum-master/` | SM -> Templates | Sprint ceremony template requirements, retrospective format preferences |
+| `senior-pm/` | PM -> Templates | Executive reporting templates, portfolio tracking layouts |
+| `delivery-manager/` | DM -> Templates | Post-mortem templates, release checklist templates, runbook structures |

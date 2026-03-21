@@ -375,3 +375,107 @@ Only reinforcement creates adoption. Compliance is the result of enforcement. Ai
 | "Are we in change fatigue?" | Change inventory + fatigue assessment + recommendations |
 | "Communication plan for [change]" | Sequenced communication with templates |
 | "Measure adoption of [change]" | Adoption metrics dashboard with targets |
+
+---
+
+## Tool Reference
+
+### change_readiness_assessor.py
+
+Assesses organizational readiness using ADKAR model, identifies resistance patterns, measures change fatigue, and generates intervention plans.
+
+```bash
+# Run with demo data
+python scripts/change_readiness_assessor.py
+
+# Specify change type
+python scripts/change_readiness_assessor.py --type org
+
+# From JSON assessment data
+python scripts/change_readiness_assessor.py --input assessment.json
+
+# JSON output
+python scripts/change_readiness_assessor.py --json
+```
+
+### adoption_tracker.py
+
+Tracks usage rates, reversion rates, satisfaction, and support requests to distinguish real adoption from surface compliance.
+
+```bash
+# Run with demo data
+python scripts/adoption_tracker.py
+
+# From JSON with weekly data
+python scripts/adoption_tracker.py --input adoption_data.json
+
+# JSON output
+python scripts/adoption_tracker.py --json
+```
+
+### communication_planner.py
+
+Generates audience-sequenced communication plans with templates, channel recommendations, and timing.
+
+```bash
+# Generate for process change
+python scripts/communication_planner.py --type process --name "New CRM Rollout" --date 2026-04-15
+
+# Generate for org change
+python scripts/communication_planner.py --type org --name "Engineering Restructure"
+
+# From JSON
+python scripts/communication_planner.py --input comm_plan.json
+
+# JSON output
+python scripts/communication_planner.py --type strategy --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Usage rate high but satisfaction low | Compliance without adoption -- people use it because forced to | Investigate satisfaction drivers; don't rely on enforcement alone; improve the tool/process itself |
+| Adoption plateaus at 60-70% | Remaining 30% have unaddressed ADKAR gaps (often Ability) | Segment non-adopters; run 1:1 diagnostics; provide targeted support |
+| Change reverts within weeks of go-live | Reinforcement phase skipped; old system still accessible | Remove old system access; measure and recognize new behavior; embed in performance reviews |
+| Leaders exempt themselves from the change | "Do as I say, not as I do" pattern | Leaders must go first and visibly. No exceptions. This is the #1 credibility destroyer |
+| Multiple changes running and all struggling | Change fatigue -- organizational attention exhausted | Inventory active changes; pause non-critical ones; space major changes 2-3 months apart |
+| Communication plan exists but concerns persist | Communication was broadcast-only with no feedback channel | Add Q&A sessions, named contact person, anonymous feedback channel |
+
+---
+
+## Success Criteria
+
+- ADKAR readiness score above 70/100 before go-live (measured via change_readiness_assessor.py)
+- Adoption rate exceeds 80% within 8 weeks of go-live (usage, not just compliance)
+- Reversion rate below 10% by week 8 (measured by system usage data)
+- Satisfaction survey shows 60%+ agreement that "the new way is better" by week 8
+- Support requests decline week-over-week after week 2 (ability phase resolving)
+- No change announced on Friday afternoon (measured by communication log timestamps)
+- Post-change retrospective conducted within 90 days with documented lessons learned
+
+---
+
+## Scope & Limitations
+
+**In Scope**: ADKAR-based readiness assessment, resistance diagnosis and response, change fatigue measurement, communication planning and sequencing, adoption tracking, playbooks for process/org/strategy/culture changes.
+
+**Out of Scope**: Specific tool migration execution (CRM, ERP configuration), legal compliance for workforce reductions, union negotiation, employment law, individual coaching or therapy.
+
+**Limitations**: ADKAR scores are based on assessment inputs -- they reflect perception, not objective measurement. Adoption tracker requires manual data collection for most metrics. Communication planner provides templates but cannot account for company-specific political dynamics. Change fatigue assessment is directional; actual organizational capacity varies by company culture.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `coo-advisor` | Process change design before announcing; operational readiness |
+| `chro-advisor` | People impact assessment; communication sequencing for reorgs |
+| `ceo-advisor` | Strategy pivot narrative alignment; CEO as primary communicator |
+| `culture-architect` | Culture change playbook; values-to-behaviors translation |
+| `company-os` | New OS rollout follows ADKAR model; meeting rhythm changes |
+| `chief-of-staff` | Routes change management questions; orchestrates cross-functional alignment |
+| `strategic-alignment` | Verifies goal cascade post-change; validates new direction is reflected in OKRs |

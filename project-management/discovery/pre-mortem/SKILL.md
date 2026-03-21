@@ -218,6 +218,77 @@ Use `assets/pre_mortem_template.md` for the full document template.
 - Feed launch-blocking Tiger mitigations back into `identify-assumptions/` if they surface new assumptions.
 - Elephants often reveal assumptions that the team has been avoiding.
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Team generates mostly paper tigers | Risk aversion or surface-level thinking; team not fully immersing in the failure scenario | Re-read the thought experiment prompt slowly; extend silent writing time from 10 to 15 minutes; use specific prompts |
+| No elephants surfaced | Psychological safety too low, or facilitator is a manager creating power dynamics | Use anonymous contribution (sticky notes or digital tools); consider an external facilitator; separate session from performance reviews |
+| All risks classified as tigers | Team lacks calibration on what constitutes real evidence vs. anxiety | Require concrete evidence for each tiger; if evidence is hypothetical, reclassify as paper tiger |
+| Elephant escalation check flags too many false positives | ESCALATION_KEYWORDS list is broad, matching common words in non-critical contexts | Review matched keywords in output; refine escalation thresholds; use the recommendation as a prompt, not a verdict |
+| Launch-blocking tigers have no owners assigned | Pre-mortem session ended without Phase 5 mitigation planning | Always reserve 15 minutes for mitigation plans; do not skip Phase 5 even if the session runs long |
+| Validation errors on input JSON | Missing required fields (`description`, `evidence`, `category`) or invalid urgency for tigers | Check that every tiger has `urgency` set to one of: `launch_blocking`, `fast_follow`, `track` |
+
+## Success Criteria
+
+- Pre-mortem conducted before every major launch, migration, or significant resource commitment
+- At least 5-10 risks generated per person during the silent writing phase
+- Risk distribution includes all three categories (not all tigers, not all paper tigers)
+- Every launch-blocking tiger has an assigned owner, concrete mitigation plan, and decision date
+- Elephants are explicitly named and either addressed or consciously accepted with documented rationale
+- Pre-mortem findings are reviewed against actual outcomes post-launch to calibrate future sessions
+- Session duration stays within 60-90 minutes total across all 6 phases
+
+## Scope & Limitations
+
+**In Scope:**
+- Prospective hindsight exercises using the "14 days after launch failure" framing
+- Tiger / Paper Tiger / Elephant risk classification with urgency levels
+- Automated elephant escalation detection based on keyword signals
+- Risk registry generation with category distribution and action plans
+- Facilitation methodology for both in-person and remote teams
+
+**Out of Scope:**
+- Ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`)
+- Quantitative risk analysis with probability/impact scoring (see `senior-pm/` skill)
+- Product discovery and hypothesis validation (see `brainstorm-experiments/`)
+- Technical architecture risk assessment (see `engineering-team/` skills)
+
+**Important Caveats:**
+- Pre-mortems are most effective with 4-8 participants. Fewer than 4 limits perspective diversity; more than 10 makes classification unwieldy.
+- The elephant escalation keyword check is a heuristic. It catches common patterns but cannot detect all political or organizational risks.
+- Pre-mortems complement, not replace, assumption mapping. Use `identify-assumptions/` for systematic risk categorization and `pre-mortem/` for surfacing unspoken concerns.
+- Psychological safety is a prerequisite. If the team cannot speak honestly, the pre-mortem will produce sanitized results.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `brainstorm-ideas/` | Receives from | Ideas that passed initial validation are subject to pre-mortem before full build |
+| `brainstorm-experiments/` | Receives from | Post-experiment, pre-mortem stress-tests the build decision |
+| `identify-assumptions/` | Bidirectional | Launch-blocking tigers may surface new assumptions; elephants often reveal avoided assumptions |
+| `execution/create-prd/` | Feeds into | Tiger mitigations become PRD risk sections and assumption validation plans |
+| `senior-pm/` | Feeds into | Launch-blocking tigers escalate into portfolio risk registers via `risk_matrix_analyzer.py` |
+| `scrum-master/` | Feeds into | Fast-follow tigers become sprint backlog items with mitigation-focused stories |
+
+## Tool Reference
+
+### risk_categorizer.py
+
+Categorizes pre-mortem risks as Tigers, Paper Tigers, or Elephants. Generates action plans for launch-blocking tigers and flags elephants with escalation signals.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input_file` | positional | (optional) | Path to JSON file with risks array |
+| `--demo` | flag | off | Run with built-in sample data (7 risks across all categories) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+**Input fields per risk:**
+- `description` (required): Clear description of the risk scenario
+- `category` (required): One of `tiger`, `paper_tiger`, `elephant`
+- `evidence` (required): Supporting data or observations
+- `urgency` (required for tigers): One of `launch_blocking`, `fast_follow`, `track`
+
 ## References
 
 - Gary Klein, "Performing a Project Pre-Mortem," *Harvard Business Review* (2007)

@@ -410,3 +410,111 @@ If ROI < 1.0x --> Weak case, re-evaluate or accept the risk
 | "Security board section" | Risk posture summary, compliance status, incident report, budget ask |
 | "Evaluate vendor security" | Vendor tier assessment with risk scoring and contract recommendations |
 | "Justify security budget" | Risk-based budget proposal with ROI for each investment |
+
+---
+
+## Tool Reference
+
+### security_posture_scorer.py
+
+Scores security posture across NIST CSF 2.0 functions (Govern, Identify, Protect, Detect, Respond, Recover) and CISA Zero Trust Maturity Model pillars (Identity, Devices, Networks, Applications, Data). Produces board-ready security health reports.
+
+```bash
+# Run with demo data (realistic Series B company)
+python scripts/security_posture_scorer.py
+
+# From JSON with control assessments (0-4 maturity per control)
+python scripts/security_posture_scorer.py --input controls.json
+
+# JSON output
+python scripts/security_posture_scorer.py --json
+```
+
+### risk_register_manager.py
+
+Manages cyber risk register with ALE (SLE x ARO) calculations, mitigation ROI, and board-ready risk reports.
+
+```bash
+# Run with demo risk register
+python scripts/risk_register_manager.py
+
+# From JSON risk register
+python scripts/risk_register_manager.py --input risks.json
+
+# Sort by ROI (best investments first)
+python scripts/risk_register_manager.py --sort-by roi
+
+# JSON output
+python scripts/risk_register_manager.py --json
+```
+
+### compliance_tracker.py
+
+Tracks progress across SOC 2 Type I/II, ISO 27001, HIPAA, and GDPR. Calculates gap analysis, framework overlaps, and effort estimates.
+
+```bash
+# Track SOC 2 readiness (default)
+python scripts/compliance_tracker.py
+
+# Track multiple frameworks
+python scripts/compliance_tracker.py --frameworks soc2_type1 iso27001 gdpr
+
+# List available frameworks
+python scripts/compliance_tracker.py --list-frameworks
+
+# From JSON
+python scripts/compliance_tracker.py --input compliance.json
+
+# JSON output
+python scripts/compliance_tracker.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Security budget justified by "industry benchmarks" not risk data | No risk quantification framework in place | Implement ALE-based risk register; justify every dollar against quantified risk reduction |
+| Pursuing SOC 2 before basic hygiene (MFA, backups) | Checkbox compliance without substance | Phase 1 foundation first: MFA, endpoint protection, backups; then pursue certifications |
+| Pen test findings unresolved after 90 days | Testing without fixing is theater | Set SLA: critical 7 days, high 30 days, medium 90 days; track in risk register |
+| Security team reports to IT, not executive level | Misaligned incentives and budget competition | CISO should report to CEO or COO; separate budget from IT |
+| Enterprise deals blocked by security questionnaires | No SOC 2 or questionnaire response backlog > 30 days | Prioritize SOC 2 Type I; create questionnaire response library; assign dedicated owner |
+| Zero Trust initiative stalled at identity layer | Trying to implement all pillars simultaneously | Follow maturity model: Identity first (months 1-3), then Network, then Data |
+
+---
+
+## Success Criteria
+
+- Security posture score above 70/100 on NIST CSF assessment (measured annually via security_posture_scorer.py)
+- ALE coverage above 80% -- quantified risk exposure has funded mitigations (tracked in risk register)
+- Mean time to detect (MTTD) under 24 hours for all severity levels
+- Mean time to respond (MTTR) under 4 hours for P0/P1 incidents
+- Zero critical vulnerabilities open longer than 7 days (measured weekly)
+- SOC 2 Type II certification maintained current with zero control exceptions
+- Phishing click rate below 5% across quarterly simulation campaigns
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Risk quantification (ALE/SLE/ARO), compliance roadmapping, Zero Trust maturity assessment, NIST CSF 2.0 scoring, incident response protocol, vendor security assessment, security budget justification, board-level security reporting.
+
+**Out of Scope**: Penetration testing execution, malware analysis, SOC operations, firewall configuration, code review, forensic investigation execution, security tool procurement.
+
+**Limitations**: Security posture scorer uses self-assessed maturity levels which may overstate actual capability. Risk register ALE calculations are estimates based on industry data -- actual losses vary significantly. Compliance tracker measures control implementation, not control effectiveness. Zero Trust scoring uses binary (implemented/not) which oversimplifies partial implementations.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `cto-advisor` | Security architecture reviews; threat modeling for new features |
+| `cfo-advisor` | Security budget sizing against quantified risk; compliance costs |
+| `ceo-advisor` | Board security reporting; incident communication to stakeholders |
+| `coo-advisor` | Vendor security SLAs; right-to-audit contract clauses |
+| `cro-advisor` | Security questionnaire response; SOC 2 as sales enabler |
+| `chro-advisor` | Security team hiring; security awareness training programs |
+| `board-deck-builder` | Risk/security section of board deck with posture score and compliance status |
+| `ra-qm-team` | Extended compliance frameworks (ISO 13485, MDR, FDA, GDPR, NIS2, DORA) |

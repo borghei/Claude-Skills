@@ -308,3 +308,48 @@ The launch is not over on day one. Most of the value comes from sustained post-l
 | **content-creator** | Writing blog posts and landing page copy for the launch |
 | **analytics-tracking** | Setting up tracking for launch conversion metrics |
 | **ab-test-setup** | Testing launch page variants |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Launch day traffic spike but near-zero signups | Landing page value proposition unclear or CTA buried | Audit landing page: headline must answer "what is this and why should I care" in 5 seconds |
+| Product Hunt submission gets below 50 upvotes | No community warm-up, poor listing assets, or launched on wrong day | Follow 4-week PH playbook; launch Tue-Thu; ensure gallery images show product, not marketing graphics |
+| Post-launch momentum dies by day 3 | No post-launch content plan; team assumes launch day is the end | Execute 30-day post-launch plan with follow-up content, testimonials, and retargeting |
+| Email open rate below 15% on launch announcement | Subject line not compelling or list not segmented by engagement | A/B test subject lines; segment by engagement (send to most engaged first, then broader list) |
+| Support team overwhelmed on launch day | Not briefed on new feature or FAQ not prepared | Include support briefing and FAQ creation in pre-launch checklist, minimum 1 week before launch |
+| Metrics dashboard shows no data on launch day | Tracking not configured or UTMs not applied to launch URLs | Include tracking verification in final QA checklist, test all conversion events in staging first |
+
+---
+
+## Success Criteria
+
+- Launch readiness score above 80% on readiness checker before go-live decision
+- Launch day traffic at least 5x normal daily traffic
+- Signup/conversion rate between 5-15% of launch day visitors
+- 50+ social shares/mentions on launch day
+- Product Hunt top 5 finish (for Tier 1 launches using PH channel)
+- Post-launch 30-day signups at 2-5x monthly average
+- Activation rate of launch cohort matches or exceeds normal cohort within 10%
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Phased launch planning (Tier 1-4), ORB channel strategy, Product Hunt playbook, launch day execution checklists, post-launch momentum campaigns, waitlist management, launch metrics tracking, launch readiness assessment.
+
+**Out of Scope:** Product development and feature readiness (engineering responsibility), pricing strategy (see marketing-strategy-pmm skill), ongoing marketing operations (see marketing-ops skill), press and media relationship building (PR function).
+
+**Limitations:** Launch success depends on product-market fit — no launch strategy compensates for a product that does not solve a real problem. Product Hunt effectiveness varies by product category; B2C and developer tools typically perform better than enterprise B2B. Post-launch metrics require 30 days minimum for meaningful assessment.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/launch_readiness_checker.py` | Assess go/no-go readiness across positioning, assets, channels, team, tracking | `python scripts/launch_readiness_checker.py checklist.json --tier 1` |
+| `scripts/launch_timeline_generator.py` | Generate week-by-week launch timeline with tasks and owners | `python scripts/launch_timeline_generator.py --date 2026-04-15 --tier 1` |
+| `scripts/launch_metrics_tracker.py` | Track actual vs target metrics across pre-launch, launch day, and post-launch | `python scripts/launch_metrics_tracker.py metrics.json --demo` |

@@ -475,3 +475,67 @@ Below the button, reduce friction:
 - **Campaign Analytics** — Use to measure landing page performance and feed insights into optimization.
 - **Brand Guidelines** — Reference brand visual and voice standards for consistency.
 - **Content Humanizer** — Use if page copy sounds robotic or generic after initial drafting.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| High bounce rate from paid traffic | Headline doesn't match the ad | Ensure exact message match between ad copy and landing page H1. |
+| CTA below fold on mobile | Hero section too tall or CTA not prioritized | Test on 375px viewport. CTA must be visible without scrolling. |
+| Good traffic but zero conversions | Conversion tracking broken | Verify pixel fires on thank-you page. Test with a real conversion. |
+| Slow page load (>3s mobile) | Unoptimized images, heavy JS | Run `page_speed_estimator.py`. Convert images to WebP, defer non-critical JS. |
+| Form submissions but no leads in CRM | Form-to-CRM integration broken | Test form submission end-to-end. Check webhook/API connection. |
+| Multiple CTAs confusing visitors | Too many conversion paths | Single goal per landing page. All CTAs drive the same action. |
+| Low conversion despite good copy | No social proof or risk reversal | Run `conversion_checklist.py`. Add testimonials and "no credit card" near CTAs. |
+
+---
+
+## Success Criteria
+
+- Conversion rate above 6.6% (2025 median across industries) for primary CTA
+- Page loads under 3 seconds on mobile (LCP under 2.5s, CLS under 0.1)
+- CTA visible above fold on both desktop (1440px) and mobile (375px)
+- Single conversion goal with no competing navigation or exit paths
+- Message match: landing page headline mirrors the traffic source (ad, email, link)
+- Social proof visible within first two scrolls
+- A/B test running on headline or CTA at all times for high-traffic pages
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Landing page structure, section patterns, copy framework application, conversion optimization, CTA strategy, SEO meta tags, A/B testing framework, design style guidance.
+
+**Out of Scope:** Page copy writing (use copywriting), paid ad campaigns driving traffic (use paid-ads), CMS/website builder administration, analytics platform setup.
+
+**Limitations:** Conversion benchmarks vary significantly by industry, traffic source, and offer type. The 6.6% median is across all industries; SaaS trials may see 10-25% while e-commerce may see 2-3%.
+
+---
+
+## Python Automation Tools
+
+### 1. Page Speed Estimator (`scripts/page_speed_estimator.py`)
+Estimates Core Web Vitals from HTML source: LCP, CLS risk, script/image analysis, and conversion impact.
+
+```bash
+python scripts/page_speed_estimator.py page.html
+python scripts/page_speed_estimator.py page.html --json
+```
+
+### 2. CTA Analyzer (`scripts/cta_analyzer.py`)
+Analyzes CTA placement, copy strength, friction level, and consistency across the landing page.
+
+```bash
+python scripts/cta_analyzer.py page.html
+python scripts/cta_analyzer.py page.html --json
+```
+
+### 3. Conversion Checklist (`scripts/conversion_checklist.py`)
+Runs a comprehensive 20+ point conversion optimization audit against 2025-2026 best practices and benchmarks.
+
+```bash
+python scripts/conversion_checklist.py page.html
+python scripts/conversion_checklist.py page.html --json
+```

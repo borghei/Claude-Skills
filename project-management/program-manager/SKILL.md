@@ -214,3 +214,44 @@ The agent maintains a program risk register scored by Probability x Impact (1-5 
 - `references/planning.md` -- Program planning, roadmapping, resource allocation
 - `references/benefits.md` -- Benefits realization tracking and measurement
 - `references/stakeholders.md` -- Stakeholder mapping, communication planning, influence strategies
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Cross-project dependencies cause cascading delays | Dependencies identified too late or dependency owners not empowered to resolve conflicts | Run dependency mapping at program kickoff and refresh biweekly; assign a named owner to every high-risk dependency with authority to escalate |
+| Benefits realization tracking shows zero progress months into execution | Benefits not baselined at program start, or measurement relies on lagging indicators only | Establish baselines before project kickoff; define leading indicators that show early directional progress (e.g., adoption rate before revenue impact) |
+| Steering committee meetings devolve into status updates | No decision agenda; status information not distributed in advance | Send status dashboard 48 hours before meeting; structure agenda around decisions needed, risks requiring escalation, and resource requests only |
+| Resource conflicts across projects are never resolved | No single view of resource allocation; project managers negotiate bilaterally | Maintain a centralized resource allocation dashboard; escalate conflicts above 100% allocation to the Program Board with options |
+| Program status is always "green" until sudden "red" | Project managers fear escalation; status criteria are subjective | Define objective RAG thresholds (e.g., >5 days late = Amber, >15 days = Red); normalize escalation as a positive signal, not a failure |
+| Governance overhead slows delivery | Too many approval gates, overlapping governance bodies, or unclear decision rights | Streamline to three governance tiers maximum; publish a RACI for every decision type; delegate routine decisions to lowest appropriate level |
+| Stakeholders disengage from the program | Communication is generic, too frequent, or not relevant to their interests | Segment communication by Mendelow quadrant; tailor content to each audience's concerns; reduce frequency for low-interest stakeholders |
+
+## Success Criteria
+
+- All cross-project dependencies are identified, owned, and tracked with biweekly status updates
+- Benefits realization reaches at least 50% of target by the program midpoint (measured by leading indicators)
+- Steering committee meetings result in documented decisions within 48 hours of the meeting
+- Resource allocation conflicts are resolved within 5 business days of identification
+- Program status reports are distributed on schedule with 100% cadence compliance
+- No project remains at RED status for more than 2 consecutive reporting periods without an escalation and recovery plan
+- Program closes with a formal benefits realization report comparing actuals to the original business case
+
+## Scope & Limitations
+
+**In Scope:** Program charter creation, governance structure design, cross-project dependency management, benefits realization tracking, resource allocation planning, stakeholder communication, risk management, milestone tracking, steering committee facilitation, escalation management.
+
+**Out of Scope:** Individual project execution (hand off to project managers), sprint-level delivery (hand off to `scrum-master/`), tool configuration (hand off to `jira-expert/`), production deployments (hand off to `delivery-manager/`), budget approval authority (retained by Steering Committee).
+
+**Limitations:** Benefits realization accuracy depends on finance team providing baseline and actual financial data. Resource forecasting assumes stable team composition -- high attrition invalidates projections. Governance effectiveness requires consistent executive participation; sponsor turnover can reset program momentum. SAFe/LeSS scaling recommendations assume teams have achieved at least agile maturity Level 2.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `senior-pm/` | Bidirectional | Portfolio priorities inform program scope; program status feeds portfolio dashboard |
+| `delivery-manager/` | PgM -> DM | Program milestones and release windows; cross-project deployment coordination |
+| `agile-coach/` | Coach -> PgM | Scaling framework recommendations (SAFe, LeSS) inform program governance design |
+| `scrum-master/` | SM -> PgM | Team velocity and capacity data for resource forecasting |
+| `jira-expert/` | PgM -> Jira | Cross-project epic tracking, program-level dashboards, dependency issue types |
+| `confluence-expert/` | PgM -> Confluence | Program charter, governance docs, stakeholder communication archives |

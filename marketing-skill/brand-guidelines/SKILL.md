@@ -446,3 +446,48 @@ For a comprehensive brand audit across the organization:
 - **Social Content** — Apply platform-specific brand adaptations from the cross-channel guide.
 - **Ad Creative** — Reference visual identity and voice standards for all advertising creative.
 - **Landing Page Generator** — Apply brand colors, typography, and voice to all landing pages.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Brand colors look different across web and print | RGB vs CMYK color space mismatch; no Pantone reference defined | Document colors in all three systems (Hex/RGB for digital, CMYK for print, Pantone for exact matching) |
+| Teams consistently use wrong fonts | Font files not distributed or licensed for all team members | Create a shared font kit, document web-safe fallbacks, include licensing status per font |
+| Logo appears stretched or pixelated on partner sites | Co-branding guidelines not shared or minimum size not enforced | Distribute logo kit with vector formats (SVG/EPS), document minimum sizes and clear space rules |
+| Voice varies dramatically across customer support vs marketing | Tone calibration by context not documented or not trained | Create channel-specific tone guides with before/after examples, include in onboarding |
+| Brand drift detected in quarterly audit | No governance process for new assets, no template enforcement | Implement approval workflow, lock master templates, assign brand guardians per channel |
+| Color contrast failures on accessibility audits | Brand palette not tested against WCAG AA/AAA standards | Run color_accessibility_checker.py on full palette, adjust problematic combinations |
+| New hires produce off-brand content in first 30 days | Brand guidelines not included in onboarding process | Add brand guidelines review to onboarding checklist, provide quick-reference card |
+
+---
+
+## Success Criteria
+
+- Brand audit scores 4.0+/5.0 average across all seven dimensions (color, typography, logo, voice, imagery, layout, content)
+- All brand color combinations meet WCAG AA contrast ratio (4.5:1 for normal text, 3:1 for large text)
+- Quarterly audit variance stays below 10% across all channels
+- 100% of customer-facing templates use approved brand assets
+- New team members produce on-brand content within first 2 weeks of onboarding
+- Zero unauthorized logo modifications detected across all channels
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Visual identity systems (color, typography, logo, imagery), voice and tone frameworks, brand audit methodology, cross-channel application guides, co-branding rules, brand governance processes, accessibility compliance for brand colors.
+
+**Out of Scope:** Brand strategy and positioning decisions (see brand-strategist skill), brand architecture models (see brand-strategist skill), marketing copy creation (see copywriting skill), design file creation (Figma, Sketch), print production specifications.
+
+**Limitations:** Brand guidelines are documentation — enforcement depends on organizational process. This skill provides frameworks and audit tools but cannot enforce compliance without governance workflows. Color accessibility checking uses algorithmic WCAG formulas and does not account for all visual impairment types.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/brand_audit_scorer.py` | Score brand consistency across seven dimensions with priorities | `python scripts/brand_audit_scorer.py audit_data.json --json` |
+| `scripts/messaging_consistency_checker.py` | Check text against brand voice standards, detect vocabulary violations | `python scripts/messaging_consistency_checker.py --text "Your copy here"` |
+| `scripts/color_accessibility_checker.py` | Validate brand colors against WCAG contrast requirements | `python scripts/color_accessibility_checker.py --fg "#2563EB" --bg "#FFFFFF"` |

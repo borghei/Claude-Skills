@@ -309,3 +309,63 @@ Watch for these signs that narrative is fracturing:
 | **cfo-advisor** | Financial narrative for investors and board |
 | **scenario-war-room** | Crisis scenarios that may require communication plans |
 | **cs-onboard** | Building the foundational company context that feeds all narratives |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Employees describe the company mission differently across departments | Core narrative not established or not communicated with enough frequency | Rebuild core narrative using Step 1 template; communicate through 7+ channels; re-test with 5-person test after 2 weeks |
+| Investor update and all-hands deck tell conflicting stories | Different authors without shared source-of-truth document | Create single core narrative document; all communications must derive from it; run contradiction detection before every external communication |
+| All-hands Q&A produces only softball questions | Employees don't trust that honest questions are safe | Switch to anonymous question submission; answer the hardest question first; CEO models vulnerability by sharing a mistake |
+| Crisis communication arrives after employees see it on social media | No 4-hour rule in place or no internal communication chain | Establish internal-first protocol with pre-drafted templates; designate single spokesperson; practice crisis drills quarterly |
+| Change communication met with cynicism ("another reorganization") | Past changes communicated without follow-through on ADKAR reinforcement stage | Include 30-day progress update in every change plan; reference previous successful changes as evidence |
+| Careers page describes a culture employees don't recognize | Marketing owns careers page without HR/employee input | Co-create careers content with current employees; include real employee stories; audit annually against engagement survey data |
+| Stakeholder groups receiving inconsistent messaging about company priorities | No audience translation matrix maintained | Build and maintain the translation matrix from Step 2; review before every major communication cycle |
+
+---
+
+## Success Criteria
+
+- 5-person articulation test scores 8/10 or higher (4+ of 5 people give consistent answers about company priority)
+- Contradiction detection protocol catches zero unresolved contradictions before major external communications
+- All-hands open Q&A produces at least 5 unscreened questions per session with substantive CEO responses
+- Investor updates sent on same date each month with < 500 words and at least one honest challenge included
+- Crisis internal communication delivered within 4 hours of event becoming known, every time
+- Change communication follows full ADKAR sequence with measurable reinforcement at 30 days
+- Employee engagement survey shows "I understand company direction" scores above 80%
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Core narrative construction, audience translation, contradiction detection, all-hands design, investor update templates, crisis communication frameworks, change communication using ADKAR, communication cadence design
+- **Out of scope:** PR and media relations strategy (use CMO Advisor); legal review of external statements (use legal counsel); employer branding campaigns (use CHRO Advisor); social media content strategy
+- **Limitation:** Narrative consistency requires ongoing maintenance; a one-time exercise degrades within 1-2 quarters without reinforcement
+- **Limitation:** Crisis communication templates are starting points; legal review is always required for statements involving liability
+- **Limitation:** Framework assumes good-faith leadership; narrative architecture cannot fix fundamentally dishonest communication
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | CEO strategic decisions require narrative communication | CEO decisions → Narrative framing for each audience |
+| `cfo-advisor` | Financial narrative for investors must align with company narrative | CFO metrics → Investor update narrative |
+| `cmo-advisor` | External marketing narrative must match internal story | Narrative core → Marketing messaging alignment |
+| `chro-advisor` | Recruiting narrative must reflect employee reality | Narrative careers content → CHRO validation |
+| `scenario-war-room` | Crisis scenarios require pre-built communication plans | War room scenarios → Crisis narrative templates |
+| `strategic-alignment` | Strategy cascade depends on clear narrative communication | Narrative clarity → Alignment articulation test |
+| `change-management` | Every change initiative requires narrative support | Change plan → Narrative ADKAR communication |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/narrative_consistency_checker.py` | Check two or more communication texts for factual contradictions and tone mismatches | `python scripts/narrative_consistency_checker.py --texts investor_update.txt allhands_deck.txt --json` |
+| `scripts/messaging_framework_generator.py` | Generate an audience translation matrix from a core narrative statement | `python scripts/messaging_framework_generator.py --narrative "We are shifting from product A to product B" --audiences employees,investors,customers --json` |
+| `scripts/stakeholder_mapper.py` | Map stakeholders by influence, interest, and communication needs | `python scripts/stakeholder_mapper.py add --name "Board of Directors" --influence high --interest high --frequency quarterly --json` |

@@ -351,3 +351,67 @@ Not all data is always available. The diagnostic handles partial data:
 | "Compare to last quarter" | Quarter-over-quarter comparison with trend arrows |
 | "Where are we at risk?" | Cascade risk map with interconnected failures |
 | "What data do we need?" | Data gap analysis with collection recommendations |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Scores consistently show all green but team sentiment is negative | Metrics being gamed or standards set too low; measurement doesn't capture reality | Cross-reference quantitative scores with qualitative signals (exit interviews, Glassdoor, skip-level conversations); raise benchmarks to industry-standard levels |
+| Cascade analysis shows systemic issue but leadership disagrees | Red dimension owners resistant to acknowledging problems | Present cascade evidence with data: "People Red for 2 months → Engineering Yellow → Product delays in pipeline"; use McKinsey OHI principle of benchmarking against external data |
+| Data gaps persist across multiple diagnostic cycles | No measurement infrastructure; teams don't prioritize data collection | Assign data collection to specific owners with deadlines; start with proxy metrics where direct measurement is unavailable |
+| Diagnostic takes too long to produce (> 2 weeks) | Trying to measure everything perfectly instead of using available data | Apply graceful degradation: score what you have, flag gaps, iterate; a partial diagnostic now beats a perfect one in 6 weeks |
+| Different stakeholders interpret traffic light scores differently | No shared understanding of what Green/Yellow/Red means operationally | Document specific thresholds for each metric in each dimension; share calibration examples ("Red runway = less than 9 months at current burn") |
+| Quarterly diagnostic shows no change despite interventions | Wrong interventions, or interventions not given enough time, or measuring lagging indicators | Verify interventions target root cause not symptoms; check leading indicators alongside lagging ones; allow 2 quarters for structural changes to show in scores |
+| Board wants a single number but diagnostic is multi-dimensional | Board unfamiliar with the 8-dimension model | Provide the weighted overall score (1-10) as headline with stage-adjusted weighting; drill-down dimensions available on request |
+
+---
+
+## Success Criteria
+
+- All 8 dimensions scored with traffic lights within 5 business days of data collection start
+- Cascade analysis correctly predicts downstream impacts: when a Red dimension is not addressed, connected dimensions degrade within 2 quarters
+- Stage-adjusted benchmarks applied correctly: Seed company not held to Series C standards and vice versa
+- Top 3 priorities identified with specific owners, timelines, and verification methods
+- Data gaps reduced by at least 50% between first and second diagnostic cycle
+- Board-ready health summary produced quarterly with trend comparison to prior quarter
+- Overall health score trending stable or improving over 3 consecutive quarters
+
+---
+
+## Scope & Limitations
+
+- **In scope:** 8-dimension organizational health scoring, traffic light dashboards, cascade analysis, stage-adjusted benchmarks, graceful degradation for partial data, diagnostic cadence recommendations, board-ready reporting
+- **Out of scope:** Deep functional diagnostics within a single dimension (use the respective C-suite advisor skill); employee engagement survey design and administration (use CHRO Advisor); financial auditing (use external auditors); security penetration testing (use CISO Advisor)
+- **Limitation:** Diagnostic quality depends on data accuracy; garbage in, garbage out applies -- verify data sources
+- **Limitation:** McKinsey OHI benchmarks are based on large enterprise data; early-stage companies may need adjusted benchmarks
+- **Limitation:** The 8-dimension model is a simplification; some organizations may need additional dimensions (e.g., ESG, regulatory) depending on industry
+- **Limitation:** Cascade predictions are based on common patterns; specific organizations may have unique cascade paths
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `cfo-advisor` | Financial Health dimension deep dive | Health financial score → CFO detailed analysis |
+| `cro-advisor` | Revenue Health dimension deep dive | Health revenue score → CRO pipeline review |
+| `cpo-advisor` | Product Health dimension deep dive | Health product score → CPO PMF assessment |
+| `cto-advisor` | Engineering Health dimension deep dive | Health engineering score → CTO tech debt plan |
+| `chro-advisor` | People Health dimension deep dive | Health people score → CHRO retention strategy |
+| `coo-advisor` | Operational Health dimension deep dive | Health operations score → COO process review |
+| `ciso-advisor` | Security Health dimension deep dive | Health security score → CISO risk register |
+| `cmo-advisor` | Market Health dimension deep dive | Health market score → CMO channel review |
+| `strategic-alignment` | Health scores inform alignment priorities | Health priorities → Alignment focus areas |
+| `executive-mentor` | Red dimensions trigger executive coaching focus | Health red flags → Mentor challenge areas |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/org_health_scorer.py` | Score all 8 dimensions with traffic lights, stage-adjusted weighting, and overall health calculation | `python scripts/org_health_scorer.py --stage series-a --financial 7.5 --revenue 5.8 --product 7.2 --engineering 5.0 --people 3.5 --operations 6.0 --security 7.8 --market 5.5 --json` |
+| `scripts/span_of_control_analyzer.py` | Analyze manager-to-IC ratios across the organization and flag unhealthy spans | `python scripts/span_of_control_analyzer.py --org-file org_structure.csv --json` |
+| `scripts/engagement_benchmarker.py` | Benchmark engagement metrics against industry standards and flag gaps | `python scripts/engagement_benchmarker.py --enps 15 --attrition 18 --time-to-fill 60 --promotion-rate 20 --industry saas --json` |

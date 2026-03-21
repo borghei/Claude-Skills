@@ -167,3 +167,46 @@ python scripts/guidelines_gen.py --config brand_config.yaml
 - `references/identity.md` - Identity system guide
 - `references/architecture.md` - Brand architecture models
 - `references/governance.md` - Governance best practices
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning statement passes internally but customers do not repeat it | Positioning built on company perspective, not customer language | Rerun April Dunford methodology with 10+ customer interviews; use verbatim customer phrases |
+| Brand architecture confusion after acquisition | No decision framework for integrating acquired brands | Evaluate using brand_architecture_analyzer.py; score audience overlap and category fit to choose model |
+| NPS declining despite product improvements | Brand perception lagging behind product reality | Run brand health dashboard; invest in rebranding or brand awareness campaign targeting perception gap |
+| Multiple sub-brands competing for same audience | House of Brands model applied when Branded House was appropriate | Consolidate overlapping brands; use brand architecture analyzer to validate optimal model |
+| Competitive positioning feels generic | Differentiators are category requirements, not unique advantages | Apply "only-we" test: if a competitor could make the same claim, it is not a differentiator |
+
+---
+
+## Success Criteria
+
+- Positioning statement passes the "only-we" test — no competitor could make the same claim
+- 7+ out of 10 customers describe brand value unprompted in interviews
+- Brand health index scores 65+/100 across awareness, perception, consideration, and loyalty
+- Brand architecture model validated by lowest churn and fastest close among A-fit segments
+- Share of voice increases 5+ percentage points within two quarters of brand strategy execution
+- Competitive positioning map shows clear white space between brand and nearest competitor
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Brand positioning frameworks (April Dunford), brand identity system design, brand architecture model selection (Branded House, House of Brands, Endorsed, Hybrid), competitive positioning analysis, brand health measurement, brand governance structures.
+
+**Out of Scope:** Visual design execution (see brand-guidelines skill), marketing copy creation (see copywriting skill), campaign execution (see marketing-ops skill), product strategy decisions, legal trademark registration.
+
+**Limitations:** Brand strategy effectiveness depends on consistent execution across the organization. Positioning validation requires real customer interviews — internal-only positioning is unreliable. Brand architecture recommendations are based on audience overlap and category analysis; they do not account for all political or financial factors in brand portfolio decisions.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/brand_health_dashboard.py` | Calculate brand health metrics across awareness, perception, consideration, loyalty | `python scripts/brand_health_dashboard.py survey_data.json --json` |
+| `scripts/positioning_map_generator.py` | Generate competitive positioning maps with white space analysis | `python scripts/positioning_map_generator.py competitors.json --demo` |
+| `scripts/brand_architecture_analyzer.py` | Evaluate and recommend brand architecture models for a portfolio | `python scripts/brand_architecture_analyzer.py portfolio.json --json` |

@@ -206,3 +206,95 @@ python scripts/ops_dashboard.py --metrics metrics.json
 - `references/scaling_playbook.md` -- Scaling operations guide
 - `references/vendor_management.md` -- Vendor relationship framework
 - `references/bcp_template.md` -- Business continuity planning
+
+---
+
+## Tool Reference
+
+### 1. operational_kpi_tracker.py
+
+Tracks operational KPIs across efficiency, quality, and scalability categories. Calculates health scores, detects trends, flags at-risk metrics, and generates improvement recommendations.
+
+```bash
+python scripts/operational_kpi_tracker.py --input kpi_data.json --json
+python scripts/operational_kpi_tracker.py --input kpi_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with KPI categories, metrics, targets, and actuals over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. process_efficiency_scorer.py
+
+Scores process efficiency across cycle time, first-time completion rate, cost per transaction, automation rate, error rate, and rework percentage. Identifies bottlenecks and prioritizes improvement opportunities.
+
+```bash
+python scripts/process_efficiency_scorer.py --input processes.json --json
+python scripts/process_efficiency_scorer.py --input processes.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with process definitions, step-level metrics, and benchmarks |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. capacity_modeler.py
+
+Models headcount capacity requirements using the formula: Required HC = Volume / (Productivity x Utilization). Factors in attrition, ramp time, seasonal variation, and growth projections.
+
+```bash
+python scripts/capacity_modeler.py --input capacity_data.json --json
+python scripts/capacity_modeler.py --input capacity_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with volume forecasts, productivity rates, utilization targets, and adjustment factors |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| KPI dashboard shows green but operations feel broken | Metrics not measuring what matters or targets set too loosely | Audit KPIs against actual customer/team complaints; tighten targets to match industry benchmarks |
+| Process documentation exists but nobody follows it | Documentation created top-down without practitioner input | Rebuild SOPs with process owners; validate with frontline team; schedule quarterly reviews |
+| Automation projects stall after initial wins | Quick wins captured but strategic projects lack sustained investment | Use Automation Priority Matrix; assign dedicated owners to strategic projects; protect automation budget |
+| Capacity model consistently under-predicts needs | Ramp time, attrition, or seasonal variation not factored | Add adjustment factors for attrition (10-20%), ramp time (3-6 months), and seasonal peaks |
+| Operating rhythm meetings feel unproductive | Meetings lack defined purpose, output, or decision rights | Redesign each meeting using the Operating Rhythm table; require agenda, output artifact, and decision owner |
+| Vendor performance degrading without consequence | No SLA monitoring or regular performance reviews | Implement quarterly vendor scorecards; tie contract renewal to SLA compliance |
+
+---
+
+## Success Criteria
+
+- Operations Maturity Model level increases by at least 1 level within 12 months
+- Top 5 processes documented with owners, SLAs, and exception handling
+- Process cycle time reduced by 20%+ for at least 2 critical processes
+- Automation rate exceeds 40% for high-volume, low-complexity processes
+- Headcount capacity model accuracy within 10% of actual needs
+- Incident response meets SLA targets for P1 (15 min) and P2 (1 hour) consistently
+- Budget variance stays within 10% for all operational categories
+
+---
+
+## Scope & Limitations
+
+**In scope:** Operations maturity assessment, process documentation and optimization, headcount capacity modeling, operational KPI tracking and dashboarding, automation prioritization, vendor management frameworks, incident classification and response, business continuity planning, budget variance analysis, and operating rhythm design.
+
+**Out of scope:** IT infrastructure management (use engineering-team/ skills), HR policy design (use hr-operations/ skills), financial planning and FP&A (use finance/ skills), product operations (use cpo-advisor), and real-time monitoring system implementation. Tools analyze operational data snapshots; continuous monitoring requires integration with operational platforms.
+
+**Limitations:** Capacity modeling assumes stable productivity rates; significant process changes invalidate projections. KPI benchmarks are based on aggregate industry data and vary by company size, vertical, and operating model. Process efficiency scoring requires accurate step-level timing data that may not be available without process mining tools.
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Operational health metrics feed into strategic decision-making and board reporting
+- **cfo-advisor** -- Budget variance analysis and capacity costs inform financial planning
+- **cro-advisor** -- RevOps staffing and commission infrastructure depend on operational capacity
+- **cpo-advisor** -- Product operations and delivery capacity affect roadmap execution
+- **chro-advisor** -- Headcount planning and team scaling require HR partnership
+- **ciso-advisor** -- BCP and incident response intersect with security operations

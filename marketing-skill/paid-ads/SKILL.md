@@ -443,3 +443,67 @@ utm_term: [keyword] (search only)
 - **Marketing Context** — Use as foundation for audience targeting and messaging alignment.
 - **Marketing Psychology** — Apply psychological principles to improve ad creative and landing page conversion.
 - **Copywriting** — Use for optimizing landing page copy to improve post-click conversion rates.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| CPA above target with low CTR | Creative fatigue or audience mismatch | Refresh creative. Use `ad_copy_scorer.py` to validate new copy. |
+| CPA above target with good CTR | Landing page conversion issue | Audit post-click experience: message match, page speed, form friction. |
+| CTR dropping week over week | Creative fatigue (>3 frequency) | Refresh creative every 2-4 weeks. Expand audience to reduce frequency. |
+| Budget not spending | Audience too narrow or bid too low | Check audience size with `audience_sizer.py`. Increase bid 10-20%. |
+| Platform reports inflated conversions | Attribution window too wide | Compare platform data to GA4/CRM. Use incrementality testing for true lift. |
+| Performance Max underperforming | Insufficient conversion data | Need 30+ conversions in 30 days for PMax to optimize. Start with Search campaigns. |
+| CPA spikes after budget increase | Algorithm learning disrupted | Never increase budget more than 20-30% at a time. Wait 3-5 days between changes. |
+
+---
+
+## Success Criteria
+
+- CPA within target range for campaign objective (B2B SaaS: $50-200 for qualified leads)
+- ROAS above 3x for revenue-focused campaigns
+- CTR above platform benchmarks: 2-5% search, 0.5-2% social
+- Conversion tracking verified with test conversion before launch
+- Budget allocation: 70% proven / 20% expansion / 10% testing (at scale)
+- All campaigns have proper UTM tagging and GA4 attribution configured
+- Weekly optimization routine completed with documented changes
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Campaign strategy, platform selection, audience targeting, budget allocation, bid strategies, retargeting, performance optimization, attribution, pre-launch checklists.
+
+**Out of Scope:** Ad copy writing (use ad-creative), landing page design (use landing-page-generator), creative design/production, marketing automation, CRM configuration.
+
+**Limitations:** Budget minimums and CPC benchmarks are directional estimates. Actual costs vary by industry, geography, and competition. Platform-reported metrics are typically 20-50% inflated versus CRM truth.
+
+---
+
+## Python Automation Tools
+
+### 1. Ad Copy Scorer (`scripts/ad_copy_scorer.py`)
+Scores ad copy against platform specs, compliance rules, and conversion best practices.
+
+```bash
+python scripts/ad_copy_scorer.py --headline "Cut churn by 30%" --description "See how 1200 SaaS teams reduced churn" --platform google
+python scripts/ad_copy_scorer.py --file ads.json --json
+```
+
+### 2. CPC / CPA / ROAS Calculator (`scripts/cpc_calculator.py`)
+Calculates key advertising metrics from campaign data with industry benchmarks.
+
+```bash
+python scripts/cpc_calculator.py --spend 5000 --clicks 1200 --conversions 45 --revenue 12000 --platform meta
+python scripts/cpc_calculator.py --file campaign.json --json
+```
+
+### 3. Audience Sizer (`scripts/audience_sizer.py`)
+Estimates target audience size and recommends budget based on platform and targeting criteria.
+
+```bash
+python scripts/audience_sizer.py --platform linkedin --targeting "CMOs at SaaS companies 50-500 employees"
+python scripts/audience_sizer.py --file targeting.json --json
+```

@@ -409,5 +409,83 @@ Detailed metrics attached.
 ⚠️ Growing incidents  
 ⚠️ Team morale declining  
 ⚠️ Budget overruns  
-⚠️ Vendor dependencies  
+⚠️ Vendor dependencies
 ⚠️ Security vulnerabilities
+
+---
+
+## Tool Reference
+
+### 1. tech_debt_analyzer.py
+
+Analyzes system architecture for technical debt across 5 categories (architecture, code quality, infrastructure, security, performance). Calculates weighted debt scores, prioritizes reduction actions, estimates effort, and assesses risk levels.
+
+```bash
+python scripts/tech_debt_analyzer.py --input system_config.json --json
+python scripts/tech_debt_analyzer.py --input system_config.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | optional | Path to JSON file with system configuration (category indicators scored 0-100, team size, criticality, business context). Uses built-in example if omitted |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. team_scaling_calculator.py
+
+Calculates optimal engineering team scaling plans including hiring timeline, role distribution, team structure design, budget projections, and risk assessment. Applies Brooks' Law and Conway's Law factors.
+
+```bash
+python scripts/team_scaling_calculator.py --input team_data.json --json
+python scripts/team_scaling_calculator.py --input team_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | optional | Path to JSON file with current state (headcount, roles, velocity) and growth targets (target headcount, timeline). Uses built-in example if omitted |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Tech debt score increasing despite dedicated sprints | Debt reduction not keeping pace with new debt creation | Implement debt prevention gates (code review, architecture review); track debt creation rate alongside reduction rate |
+| DORA metrics improving but customer satisfaction declining | Shipping faster but not shipping the right things | Add customer-impact metrics alongside DORA; review feature adoption rates; reconnect with product team on priorities |
+| Team scaling plan keeps missing hiring targets | Unrealistic timeline, insufficient recruiting capacity, or poor employer brand | Adjust timeline using 25% max quarterly growth rate; add recruiting resources (1 per 50 annual hires); invest in employer brand |
+| Architecture decisions not documented or followed | No ADR process or ADRs created but not referenced | Implement lightweight ADR template; make ADR review part of design review; link ADRs to relevant code |
+| Engineering team morale declining during rapid growth | Culture dilution, unclear expectations, or insufficient onboarding | Implement structured onboarding; maintain 1:8 manager ratio; run quarterly team health surveys |
+| Vendor lock-in creating strategic risk | No evaluation framework or over-reliance on single vendor | Run technology evaluation for critical vendors; implement abstraction layers; maintain exit strategies |
+
+---
+
+## Success Criteria
+
+- Tech debt score below 40 (Medium-Low) across all categories
+- DORA metrics at "High" or "Elite" performance tier (deployment frequency > weekly, lead time < 1 week, MTTR < 1 day, change failure rate < 15%)
+- Team balance score above 70/100 with appropriate role ratios maintained
+- Architecture decisions documented via ADRs for all significant technical choices
+- System uptime exceeds 99.9% for production systems
+- Engineering team satisfaction above 8/10 with attrition below 10%
+- Innovation time (hackathons, exploration) maintained at 15-20% of engineering capacity
+
+---
+
+## Scope & Limitations
+
+**In scope:** Technology strategy and vision, technical debt assessment and reduction planning, engineering team scaling and structure design, architecture governance (ADRs, design reviews), vendor management and evaluation, engineering metrics (DORA, quality, team health), crisis management (incident response, security breach, data loss), stakeholder management and board reporting, and strategic initiatives (cloud migration, platform engineering, AI/ML integration).
+
+**Out of scope:** Hands-on coding or code review (use engineering-team/ skills), product feature prioritization (use cpo-advisor), security architecture and compliance (use ciso-advisor or ra-qm-team/), HR policy and compensation design (use chro-advisor or hr-operations/), and financial planning for engineering budget (use cfo-advisor). Tools analyze engineering data snapshots; continuous metrics tracking requires integration with DevOps platforms.
+
+**Limitations:** Tech debt scoring depends on self-reported indicator data; automated code analysis tools provide more objective measures. Team scaling budget projections use average salary bands that vary significantly by location, seniority mix, and market conditions. DORA benchmarks assume standard software delivery practices; hardware or embedded systems teams may need different targets.
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Technology strategy aligns with business direction; engineering capacity enables or constrains strategic bets
+- **cpo-advisor** -- Technical feasibility co-owned with CPO; features vs platform trade-offs require joint decision-making
+- **cfo-advisor** -- Engineering budget, headcount costs, and vendor spend feed financial planning
+- **coo-advisor** -- System reliability and incident response intersect with operational excellence
+- **ciso-advisor** -- Security architecture, vulnerability management, and compliance require CISO partnership
+- **engineering-team/** -- CTO strategy cascades to engineering team execution; architecture decisions guide implementation

@@ -208,3 +208,48 @@ python scripts/forecast.py --historical data.csv --periods 6
 - `references/attribution.md` - Attribution modeling
 - `references/reporting.md` - Reporting best practices
 - `references/forecasting.md` - Forecasting methods
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Attribution models give wildly different channel credit allocations | No single model captures full truth; each has structural bias | Run 3+ models (first-touch, last-touch, position-based) and compare; use position-based as default for B2B |
+| ROAS calculations look great but pipeline is flat | Revenue attribution counting existing customers, not new pipeline | Separate new business attribution from expansion; report pipeline separately from revenue |
+| Marketing reports and sales reports show different lead counts | Marketing counts MQLs at form fill, sales counts at CRM entry with different criteria | Align on shared definitions: document exact MQL, SQL, and opportunity criteria in a shared SLA |
+| Forecast consistently over-predicts by 20%+ | Model uses linear extrapolation without accounting for seasonality or saturation | Apply dampening factors for longer forecasts; use ensemble method (linear + growth rate + moving average) |
+| Executive dashboard takes too long to build each month | Manual data pulls from 5+ platforms with different schemas | Automate data collection; standardize UTM and naming conventions so cross-platform analysis is consistent |
+| Channel ROI is negative but still generating pipeline | Long B2B sales cycle means revenue attribution has not caught up to spend | Use pipeline-based attribution for channels with 3+ month sales cycles rather than closed-won revenue |
+
+---
+
+## Success Criteria
+
+- Multi-touch attribution model deployed comparing 3+ models with documented channel credit differences
+- Monthly marketing report delivered within 3 business days of month close
+- Budget reallocation recommendations backed by per-channel ROI data and implemented quarterly
+- Forecast accuracy within 15% of actual for 3-month projections
+- Campaign performance reports include target vs actual for every KPI
+- Every data point in executive reports has an actionable insight (passes "so what" test)
+- Channel data completeness above 95% (no channel has >5% missing data)
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Campaign performance analysis, multi-touch attribution modeling, marketing mix optimization, ROI/ROAS calculation, budget allocation recommendations, executive reporting, cohort retention analysis, marketing forecasting.
+
+**Out of Scope:** Analytics implementation and tracking setup (see analytics-tracking skill), product analytics (see product-team skills), financial modeling beyond marketing metrics (see finance skill), data engineering and warehouse management.
+
+**Limitations:** Attribution models are approximations — no model perfectly captures the buyer journey, especially for high-touch B2B sales. Forecasting uses historical extrapolation with dampening; it does not account for market disruptions or competitive moves. Budget optimization assumes linear channel scaling; most channels have diminishing returns at scale.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/channel_mix_optimizer.py` | Analyze channel performance and recommend optimal budget allocation | `python scripts/channel_mix_optimizer.py channels.json --budget 100000 --demo` |
+| `scripts/cohort_analyzer.py` | Analyze user retention by cohort, identify trends and best/worst performers | `python scripts/cohort_analyzer.py cohort_data.json --demo` |
+| `scripts/marketing_forecast_generator.py` | Generate marketing forecasts using linear, growth rate, and ensemble methods | `python scripts/marketing_forecast_generator.py historical.json --periods 6` |

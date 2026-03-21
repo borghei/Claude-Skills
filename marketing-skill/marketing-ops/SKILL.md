@@ -389,3 +389,49 @@ For each area, score 1-5:
 - **Content Strategy** — Coordinate content calendar with campaign schedule.
 - **Paid Ads** — Coordinate paid campaigns with organic efforts and landing pages.
 - **Cold Email** — Coordinate outbound with inbound campaigns to avoid audience overlap.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Marketing and sales disagree on lead quality | Lead scoring thresholds not aligned or model not validated against outcomes | Run lead_scoring_simulator.py with historical data; validate that high-scored leads convert at 2x+ the rate of low-scored |
+| MarTech stack costs growing 20%+ YoY without proportional ROI | Tool proliferation without consolidation; unused tools not audited | Run martech_stack_auditor.py quarterly; cut tools with <30% utilization; consolidate overlapping categories |
+| Campaign data siloed across platforms, attribution impossible | No unified UTM standard; tools not integrated through CRM | Standardize UTM parameters (lowercase, hyphens, documented registry); require CRM integration for every tool |
+| Lead routing to sales takes >24 hours | Manual handoff process; no automation between marketing automation and CRM | Implement automated lead routing rules; route hot leads (76+ score) within 15 minutes |
+| Email deliverability dropping below 90% | List hygiene not maintained; bounced/inactive contacts not cleaned | Deduplicate monthly; verify addresses before campaigns; clean inactive contacts quarterly |
+| Budget spent evenly across channels regardless of performance | No performance-based allocation framework in place | Use campaign_budget_allocator.py with historical ROAS data; shift budget quarterly toward highest performers |
+| Multi-skill campaigns produce inconsistent messaging | No orchestration sequence defined; skills executed ad hoc | Follow campaign orchestration templates; always start with marketing context verification |
+
+---
+
+## Success Criteria
+
+- All MarTech tools connected to CRM with verified data flow
+- MarTech stack audit score above 70/100 with zero critical gaps
+- Lead scoring model validated: high-scored leads convert at 2x+ rate of low-scored
+- UTM parameters 100% standardized and validated before every campaign launch
+- Campaign orchestration follows documented sequences with context verified first
+- Budget allocation reviewed and adjusted quarterly based on channel ROI data
+- Data quality: <5% duplicate rate in CRM, <2% email bounce rate, >95% required fields complete
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Skill routing and orchestration, campaign sequencing, MarTech stack management and auditing, marketing automation (email sequences, lead scoring, lead routing), data quality management, UTM standardization, attribution framework setup, marketing audit methodology, budget allocation.
+
+**Out of Scope:** Individual channel execution (see channel-specific skills), analytics implementation (see analytics-tracking skill), content creation (see content-creator skill), sales operations and CRM administration (sales ops function).
+
+**Limitations:** Marketing ops is the coordination layer, not the execution layer. Tool auditing uses self-reported utilization data; actual usage may differ. Lead scoring models require minimum 50+ historical conversions for meaningful validation. Budget allocation assumes linear channel scaling; real channels have diminishing returns.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/martech_stack_auditor.py` | Audit MarTech stack for gaps, redundancies, and optimization opportunities | `python scripts/martech_stack_auditor.py stack.json --demo` |
+| `scripts/campaign_budget_allocator.py` | Allocate marketing budget across campaigns by priority and performance | `python scripts/campaign_budget_allocator.py campaigns.json --budget 100000 --strategy balanced` |
+| `scripts/lead_scoring_simulator.py` | Simulate and validate lead scoring models against actual outcomes | `python scripts/lead_scoring_simulator.py leads.json --demo` |

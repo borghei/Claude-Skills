@@ -164,3 +164,44 @@ See `references/ideation-frameworks.md` for detailed descriptions of each techni
 - Marty Cagan, *Inspired* (2018)
 - Jake Knapp, *Sprint* (2016)
 - Michael Michalko, *Thinkertoys* (2006) -- SCAMPER origin
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Ideation session produces only incremental ideas, no breakthrough thinking | Anchoring bias -- team defaults to what they know; PM perspective dominates | Explicitly rotate perspectives (Designer first, then Engineer); use "Worst Possible Idea" technique to break anchoring; invite an outsider to challenge assumptions |
+| Prioritization scores cluster tightly, making ranking impossible | Scoring criteria are too similar, or the team is avoiding differentiation | Add a forced-rank step after weighted scoring; increase weight spread between criteria; use pairwise comparison for the top 5 |
+| Opportunity Solution Tree has too many branches to be actionable | Team brainstormed opportunities without filtering by evidence | Require each opportunity to link to at least 2 user interview quotes or data points; prune branches without evidence |
+| Stakeholders reject prioritized ideas because "the real problem is different" | Problem framing was done without stakeholder input; target outcome not validated | Run a problem framing workshop with stakeholders before ideation; validate the target outcome with data before generating solutions |
+| Same ideas keep resurfacing across sessions | Previous ideation results not documented or accessible; no "already considered" registry | Maintain an idea backlog with status (explored, parked, rejected with rationale); review it at the start of each session |
+| Engineer perspective ideas are too implementation-focused | Engineers default to "how to build" rather than "what to build" | Reframe the prompt: "What new capability would our tech stack enable for users?" rather than "What should we build next?" |
+| Validation suggestions are too expensive or slow | Team defaults to full A/B tests when lighter methods exist | Introduce pretotyping and Wizard-of-Oz as first validation options; use the `brainstorm-experiments/` skill for experiment design |
+
+## Success Criteria
+
+- Each ideation session produces at least 15 ideas across all three Product Trio perspectives (minimum 3 per perspective)
+- Top 5 prioritized ideas each have a documented riskiest assumption and a validation plan
+- At least 60% of prioritized ideas can begin validation within 2 weeks using lightweight methods
+- Stakeholders rate the ideation output as "relevant to strategic objectives" at 4+/5
+- Ideas that proceed to validation have a clear connection to the target outcome (traceable through the Opportunity Solution Tree)
+- Ideation cadence is maintained (at minimum quarterly for existing products, monthly during new product exploration)
+- At least 1 idea per quarter advances from ideation through validation to backlog commitment
+
+## Scope & Limitations
+
+**In Scope:** Structured ideation facilitation using Product Trio approach, Opportunity Solution Tree mapping, idea prioritization with weighted scoring, SCAMPER and HMW supplementary techniques, idea documentation with validation plans, integration with downstream discovery skills.
+
+**Out of Scope:** Assumption testing and experiment design (hand off to `brainstorm-experiments/` and `identify-assumptions/`), detailed product requirements (hand off to `execution/create-prd/`), market research and competitive analysis, financial modeling for ideas.
+
+**Limitations:** Ideation quality is bounded by the diversity of perspectives in the room -- remote-only sessions may reduce creative energy. Scoring models provide structured comparison but are not objective truth; they encode the biases of the scorers. Opportunity Solution Trees require ongoing user research to populate -- they are not a substitute for customer interviews.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `identify-assumptions/` | Ideas -> Assumptions | Top 5 ideas feed into assumption mapping for risk assessment |
+| `brainstorm-experiments/` | Ideas -> Experiments | Riskiest assumptions from ideas become experiment candidates |
+| `pre-mortem/` | Ideas -> Risk | Selected ideas run through pre-mortem before build commitment |
+| `execution/create-prd/` | Ideas -> PRD | Validated ideas become PRD inputs with problem statement and success metrics |
+| `execution/brainstorm-okrs/` | OKRs -> Ideas | Team OKRs define the target outcomes that frame ideation sessions |
+| `execution/prioritization-frameworks/` | Ideas -> Prioritization | Scored ideas feed into RICE or other frameworks for backlog ordering |

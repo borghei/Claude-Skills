@@ -383,3 +383,65 @@ Prevent recurrence with a quarterly check:
 | "Strategy isn't translating to execution" | Communication gap analysis + fix plan |
 | "Run an alignment workshop" | Workshop agenda + facilitation guide |
 | "Quarterly alignment check" | Quarterly check process + report template |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| 5-person test scores below 5/10 despite strategy existing | Strategy too complex, too vague, or communicated only once | Rewrite strategy as one falsifiable sentence; communicate through 7+ channels; repeat weekly for 4 weeks then re-test |
+| Cascade map shows orphan goals but teams resist cutting them | Teams emotionally attached to work-in-progress; sunk cost fallacy | Frame as "connect or cut": every goal must have a parent OKR; if no parent exists, either create the connection or stop the work |
+| Conflicting goals identified but no resolution reached | Department heads unwilling to compromise; incentive misalignment | Escalate to CEO for priority decision; create shared metric that both teams own; use balanced scorecard perspective alignment |
+| Silo score above 30 but no one acknowledges the problem | Each silo operates well internally; pain is only felt at interfaces | Show cross-functional project data: 3x expected timeline; present customer impact of handoff failures; use strategy map visualization |
+| Communication gap persists despite increased frequency | Wrong medium, wrong messenger, or message too abstract | Vary communication format (written, visual, verbal); use skip-level conversations; show resource allocation as proof of strategy ("money follows words") |
+| Alignment workshop produces action items that are never implemented | No follow-up mechanism; workshop treated as event not process | Assign every action item an owner and deadline during the workshop; review at next weekly leadership meeting; track completion rate |
+| Quarterly alignment check becomes a checkbox exercise | No consequences for misalignment; diagnostic not connected to decisions | Tie alignment score to OKR cycle planning; Red alignment areas must be addressed before new OKRs are finalized |
+
+---
+
+## Success Criteria
+
+- 5-person articulation test scores 8/10 or higher within 30 days of strategy communication
+- Zero orphan goals remain after quarterly cascade mapping review
+- All identified goal conflicts have documented resolution with shared metrics within 2 weeks
+- Silo detection score below 20 (minor friction or healthy) maintained across 3 consecutive quarters
+- Communication gap analysis shows < 30% signal loss from CEO to IC level (measured by strategy comprehension survey)
+- Alignment score (5 areas, /50) at 35 or above and trending stable or improving
+- Quarterly alignment check completed within first 2 weeks of every quarter
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Strategy articulation testing, cascade mapping and validation, orphan goal detection, conflicting goal identification, coverage gap analysis, silo diagnosis, communication gap analysis, realignment protocols, alignment scoring, quarterly check cadence
+- **Out of scope:** OKR writing and goal-setting methodology (use project management or Company OS skills); individual performance management (use CHRO Advisor); strategy formulation (use CEO Advisor -- this skill assumes strategy exists and tests its cascade)
+- **Limitation:** Alignment diagnostics are point-in-time assessments; alignment degrades continuously and requires quarterly maintenance
+- **Limitation:** The 5-person test is a heuristic, not a statistically rigorous survey; for organizations > 200 people, supplement with broader pulse survey
+- **Limitation:** Silo detection matrix relies on self-reported data; supplement with objective measures (cross-functional project timelines, escalation patterns)
+- **Limitation:** Framework assumes a hierarchical OKR cascade; matrix organizations and flat structures may need adapted cascade mapping
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | Strategy must exist before alignment can be tested | CEO strategy statement → Alignment articulation test |
+| `coo-advisor` | Operations owns the alignment cadence and cross-functional OKRs | Alignment conflicts → COO shared metric design |
+| `company-os` | Alignment check integrates into planning rhythm | Alignment cadence → Company OS quarterly cycle |
+| `chief-of-staff` | CoS facilitates alignment workshops and tracks follow-through | Alignment action items → CoS tracking |
+| `culture-architect` | Silos are both structural and cultural problems | Alignment silo diagnosis → Culture intervention |
+| `change-management` | Strategy changes require alignment cascade update | Change plan → Alignment re-cascade |
+| `org-health-diagnostic` | Operational Health dimension reflects alignment quality | Health operations score → Alignment priority |
+| `internal-narrative` | Strategy communication depends on narrative clarity | Alignment communication gaps → Narrative improvement |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/okr_cascade_validator.py` | Validate that team OKRs connect to company OKRs, detecting orphans, conflicts, and coverage gaps | `python scripts/okr_cascade_validator.py --company-okrs company_okrs.csv --team-okrs team_okrs.csv --json` |
+| `scripts/strategy_map_generator.py` | Generate a balanced scorecard strategy map linking financial, customer, process, and learning perspectives | `python scripts/strategy_map_generator.py --objective "Win mid-market healthcare in DACH" --financial "5M ARR by Q4" --customer "NPS > 40" --process "Ship workflow automation" --learning "Hire 3 healthcare domain experts" --json` |
+| `scripts/alignment_scorer.py` | Calculate alignment score across 5 dimensions with trend tracking and recommendations | `python scripts/alignment_scorer.py --clarity 8 --cascade 6 --conflicts 7 --coverage 5 --communication 6 --previous-score 28 --json` |

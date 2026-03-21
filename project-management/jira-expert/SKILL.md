@@ -317,3 +317,44 @@ priority = Blocker AND status != Done
 - Configure sprint boards for Scrum Master
 - Create documentation pages for Confluence Expert
 - Support template creation for Template Creator
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| JQL queries return unexpected results or time out | Overly broad filters, missing indexes, or incorrect field references | Add specificity with project/date constraints; use `ORDER BY` sparingly on large datasets; verify field names with autocomplete |
+| Automation rules fire multiple times for a single event | Cascading triggers where one rule's action triggers another rule | Add conditions to prevent loops (e.g., check `initiator is automation`); use the audit log to trace execution chains |
+| Board shows wrong issues or missing cards | Filter behind the board is misconfigured or sprint assignment is incorrect | Verify the board's saved filter JQL; check that issues have the correct sprint field value; review board settings > general |
+| Workflow transitions fail with validator errors | Required fields not populated, or post-function order is incorrect | Check validator configuration; ensure required fields have values before transition; reorder post-functions so field-setting happens before validation |
+| Custom fields not appearing on screens | Field added to wrong screen scheme or issue type context is too narrow | Verify field context includes the target project and issue type; confirm the correct screen scheme is associated with the project |
+| Bulk operations fail or time out | Too many issues selected (>1000) or complex post-functions on transitions | Reduce batch size to 100-200 issues; disable non-essential automation rules temporarily during bulk operations |
+| Dashboard gadgets show "No data" | Underlying filter returns no results for the current user due to permissions | Verify the filter is shared with the dashboard viewers; check project permission schemes |
+
+## Success Criteria
+
+- All active projects use standardized workflow schemes (no more than 5 unique workflows org-wide)
+- JQL saved filters cover 90%+ of recurring reporting needs without ad-hoc queries
+- Automation rules reduce manual status updates by 60%+ across managed projects
+- Data quality score (required fields populated, consistent labeling) exceeds 85% for active issues
+- Average dashboard load time stays under 3 seconds with all gadgets rendering
+- New project setup (from request to team-ready board) completes within 2 business days
+- Zero critical permission escalations caused by misconfigured schemes per quarter
+
+## Scope & Limitations
+
+**In Scope:** Jira project creation and configuration, workflow design and implementation, JQL query authoring and optimization, automation rule design, dashboard and reporting setup, custom field management, board configuration, bulk operations, issue linking strategies.
+
+**Out of Scope:** Org-wide Atlassian administration (hand off to `atlassian-admin/`), Confluence space management (hand off to `confluence-expert/`), sprint execution and team coaching (hand off to `scrum-master/`), strategic project prioritization (hand off to `senior-pm/`).
+
+**Limitations:** Jira Cloud automation has monthly execution limits per plan tier. Complex JQL on large instances (>100K issues) may hit performance ceilings. Workflow changes to active projects require careful migration planning -- retroactive changes do not apply to in-flight issues.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `atlassian-admin/` | Admin -> Jira | Global schemes, permission templates, user provisioning |
+| `scrum-master/` | SM -> Jira | Sprint board configuration requests, velocity report needs |
+| `senior-pm/` | PM -> Jira | Portfolio-level reporting requirements, cross-project dashboards |
+| `confluence-expert/` | Bidirectional | Jira macros embedded in Confluence pages; documentation links in issue descriptions |
+| `atlassian-templates/` | Templates -> Jira | Issue description templates, workflow documentation |
+| `delivery-manager/` | DM -> Jira | Release version management, deployment tracking fields |

@@ -179,3 +179,44 @@ The strength of WWAS is the explicit strategic connection. Use this mapping to w
 
 - See `references/backlog-management-guide.md` for format comparison, INVEST deep dive, and refinement best practices.
 - See `assets/wwas_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| "Why" statements are generic ("Because the customer asked for it") | PM did not connect the request to a business objective; strategic context unclear | Require every Why to reference a specific OKR, metric, or business case; use the objective-level mapping table in this skill |
+| "What" descriptions are either too vague or too detailed | Team unclear on the "reminder of discussion" principle; no refinement session occurred | Run a refinement session before writing the What; enforce the 1-2 paragraph limit; link to design docs for details |
+| Acceptance criteria describe implementation steps | Engineering team wrote criteria without user-facing framing | Apply the "would the user care?" filter; rewrite every criterion as an observable outcome; remove API/database references |
+| Items consistently fail the INVEST-S (Small) gate | Scope creep during refinement; team reluctant to split items | Practice vertical slicing: split by user segment, by scenario, or by outcome; target items completable in 3-5 days |
+| Backlog items lose strategic connection over time | Why statements written once and never revisited; OKRs shift without backlog update | Review backlog alignment quarterly; update or retire items whose Why no longer connects to current objectives |
+| Team finds WWAS format overhead compared to simple user stories | Format adds friction without perceived value; team already has strong strategic context | Use WWAS for high-priority items and features; allow simpler formats for bugs and technical tasks; demonstrate value by showing how Why prevents wasted work |
+| Acceptance criteria are too few or too shallow | Team rushes through refinement; criteria treated as a checkbox exercise | Set minimum of 4 acceptance criteria per item; include at least 1 edge case and 1 error state criterion |
+
+## Success Criteria
+
+- 100% of feature backlog items include a Why statement referencing a specific business objective or OKR
+- What descriptions are 1-2 paragraphs and link to design documentation when applicable
+- Every item has at least 4 acceptance criteria focused on observable user outcomes
+- All sprint-ready items pass the full INVEST quality gate before entering a sprint
+- Stakeholders can read any backlog item's Why and confirm strategic alignment without additional context
+- Items written in WWAS format have a 30%+ lower rejection rate at sprint review compared to items without strategic context
+- Backlog alignment review occurs at least quarterly, with outdated items retired or updated
+
+## Scope & Limitations
+
+**In Scope:** Writing backlog items in Why-What-Acceptance format, applying INVEST quality gates, connecting work items to strategic objectives, facilitating refinement sessions to produce WWAS items, converting existing backlog items to WWAS format, integrating with Jira for ticket creation.
+
+**Out of Scope:** Situation-driven requirements (hand off to `job-stories/`), product ideation and opportunity discovery (hand off to `discovery/brainstorm-ideas/`), OKR definition (hand off to `execution/brainstorm-okrs/`), detailed technical specifications, sprint planning and capacity management (hand off to `../scrum-master/`).
+
+**Limitations:** WWAS format adds most value when the organization has clearly defined objectives (OKRs, North Star metrics). Without strategic context, the Why becomes a forced exercise with limited benefit. The format is designed for product/feature work -- purely technical debt or infrastructure items may not fit naturally. Teams transitioning from user stories may need 2-3 sprints to build fluency with the format.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `job-stories/` | Complementary | Job stories add situational context (When); WWAS adds strategic context (Why). Use both for complete requirements |
+| `summarize-meeting/` | Meetings -> WWAS | Refinement session discussions produce the What; decisions produce acceptance criteria |
+| `../jira-expert/` | WWAS -> Jira | WWAS items become Jira tickets with structured description fields |
+| `execution/brainstorm-okrs/` | OKRs -> WWAS | Team OKRs provide the strategic objectives that Why statements reference |
+| `execution/prioritization-frameworks/` | WWAS -> Prioritization | WWAS items scored via RICE or other frameworks for backlog ordering |
+| `discovery/brainstorm-ideas/` | Ideas -> WWAS | Validated ideas decompose into WWAS backlog items with strategic traceability |

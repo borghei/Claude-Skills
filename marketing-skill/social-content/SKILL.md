@@ -415,3 +415,65 @@ What fails:
 - **Brand Guidelines** — Reference brand voice and visual standards for social content consistency.
 - **Marketing Context** — Use as foundation for audience, voice, and positioning alignment.
 - **Ad Creative** — Use for paid social ad copy. Social Content handles organic posts.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Low engagement despite posting | Weak hooks or wrong format | Test new hook formulas from the library. Try carousels or polls (highest engagement formats). |
+| Declining reach week-over-week | Algorithm fatigue or format monotony | Mix formats weekly. Instagram/LinkedIn deprioritize repetitive content patterns. |
+| High reach, low engagement | Content attracts but does not resonate | Make content more specific, opinionated, or actionable. Generic posts get impressions but no interaction. |
+| Followers growing but not converting | Wrong audience or no CTAs | Adjust pillar mix toward more business-relevant content. Add intentional CTAs. |
+| Hashtags not driving discovery (2026) | Instagram/LinkedIn reduced hashtag weight | Use 3-5 niche hashtags max. Shares and saves now outweigh hashtag reach on most platforms. |
+| Content feels stale | Not repurposing or only one content source | Use the repurposing system: one pillar piece becomes 5-10 social derivatives. |
+| Low comment-to-like ratio | Posts don't invite conversation | End posts with specific questions. Polls and hot takes drive 3-5x more comments. |
+
+---
+
+## Success Criteria
+
+- Engagement rate above platform average: 2-5% LinkedIn, 1-3% Twitter/X, 2-5% Instagram
+- Follower growth rate of 2-5% monthly (quality followers matching ICP)
+- Comments per post consistently higher than likes-only engagement
+- Content pillar mix: no more than 10-15% promotional content
+- 1-2 weeks of scheduled content maintained at all times
+- Daily engagement routine: 30 min/day responding and commenting on others' posts
+- Saves/bookmarks increasing month-over-month (indicates high-value content)
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Organic social media content creation, platform-specific formatting, hook writing, content calendars, pillar systems, repurposing workflows, engagement tactics, analytics.
+
+**Out of Scope:** Paid social ad copy (use ad-creative), social media account management tools, influencer outreach, community platform management (Discord, Slack), video production.
+
+---
+
+## Python Automation Tools
+
+### 1. Engagement Calculator (`scripts/engagement_calculator.py`)
+Calculates engagement rates by post and format, benchmarks against platform standards, identifies top performers.
+
+```bash
+python scripts/engagement_calculator.py posts.json
+python scripts/engagement_calculator.py --sample --json
+```
+
+### 2. Post Scheduler (`scripts/post_scheduler.py`)
+Generates optimal posting schedules with pillar allocation, format suggestions, and platform-specific timing.
+
+```bash
+python scripts/post_scheduler.py --platform linkedin --posts-per-week 5
+python scripts/post_scheduler.py --platform instagram --posts-per-week 5 --json
+```
+
+### 3. Hashtag Analyzer (`scripts/hashtag_analyzer.py`)
+Analyzes hashtag strategy for relevance, platform limits, and discovery potential. Flags overly broad tags.
+
+```bash
+python scripts/hashtag_analyzer.py "#saas #b2bmarketing #growth"
+python scripts/hashtag_analyzer.py --file post.txt --platform instagram --json
+```

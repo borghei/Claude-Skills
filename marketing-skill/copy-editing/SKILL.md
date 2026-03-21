@@ -378,3 +378,70 @@ very, really, extremely, incredibly, quite, rather, somewhat, just, actually, ba
 - **Brand Guidelines** — Reference brand voice and style standards during the Voice and Tone sweep.
 - **Marketing Psychology** — Apply psychological principles during the Heightened Emotion sweep.
 - **Content Strategy** — Use when the problem is what to say, not how to say it.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Same issues appear across multiple pieces from the same writer | Systemic writing habit, not a one-off error | Create a writer-specific checklist of recurring issues; address in style guide or training, not just per-piece edits |
+| Copy loses its original voice after editing | Editor over-corrected; replaced author voice with editor's style | Preserve author voice — enhance clarity and impact without rewriting personality. Read original aloud before editing |
+| Edits introduce new inconsistencies | Previous sweeps not re-checked after later sweeps modified content | Always re-run earlier sweeps after making changes — Sweep 7 edits can break Sweep 1 clarity |
+| CTA buried or ineffective despite multiple edit passes | CTA was not the focus of any sweep — copy editing focused on prose quality | Prioritize CTA area first (Sweep 7: Zero Risk) before polishing earlier sections |
+| Fact-checking reveals unverifiable claims | Writer invented statistics or used outdated data | Flag and return to writer — editor cannot invent evidence. Document all unverifiable claims explicitly |
+| Style inconsistencies between sections | Multiple writers contributed or copy was assembled from different drafts | Run style consistency checklist end-to-end; standardize contractions, heading case, number format, and punctuation |
+
+---
+
+## Success Criteria
+
+- **Seven Sweeps completion**: All 7 sweeps completed per piece with previous sweeps re-verified after each pass
+- **Error rate**: Zero grammatical errors, typos, or broken links in published copy
+- **Style consistency**: 100% adherence to documented style guide (Oxford comma, heading case, number format, etc.)
+- **Fact verification**: All statistics have named source and year; all claims are verifiable or labeled as opinion
+- **CTA effectiveness**: Every piece has a clear, specific CTA visible within 2 scrolls of the content end
+- **Clarity score**: Every sentence understandable on first read — zero ambiguous pronoun references or multi-clause confusion
+- **Edit turnaround**: 48-hour maximum turnaround on editorial review with clear change documentation
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Seven Sweeps editorial framework (clarity, voice, so-what, proof, specificity, emotion, zero-risk)
+- Quick-pass editing (word-level, sentence-level, paragraph-level)
+- Style consistency auditing and enforcement
+- Fact-checking protocol for claims, statistics, and competitive references
+- Pre-edit and post-edit checklists
+- Common copy problem diagnosis and fixing
+
+**Out of scope:**
+- Writing new copy from scratch (use Copywriting skill)
+- AI content detection and humanization (use Content Humanizer)
+- SEO optimization passes (use Content Production optimization pipeline)
+- Content strategy or topic selection (use Content Strategy)
+- Visual design or layout feedback
+- Legal review of marketing claims
+
+**Known limitations:**
+- Cannot verify internal company claims (product capabilities, uptime SLAs) without access to product documentation
+- Fact-checking external claims requires access to original sources — may need writer input
+- Style consistency requires an existing style guide; without one, editor must make judgment calls
+- Emotional impact (Sweep 6) is subjective and varies by audience — use target audience context
+- Multi-language copy editing requires native-level proficiency in each language
+
+---
+
+## Scripts
+
+```bash
+# Score content readability with detailed metrics
+python scripts/readability_scorer.py article.md --json
+
+# Detect AI patterns that need humanization before editing
+python scripts/ai_pattern_detector.py article.md --verbose
+
+# Check style consistency across multiple documents
+python scripts/style_checker.py --files doc1.md doc2.md doc3.md --json
+```

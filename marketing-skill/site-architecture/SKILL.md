@@ -407,3 +407,70 @@ The homepage is your highest-equity page. Use it wisely.
 - **schema-markup** -- For adding BreadcrumbList and other structured data after architecture decisions are finalized.
 - **programmatic-seo** -- For hub-and-spoke structures at scale when generating hundreds of template-based pages.
 - **content-creator** -- For creating the pillar content that hub pages need to rank effectively.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Orphan pages appearing in Google index | Pages exist in sitemap or have external links but no internal links pointing to them | Add contextual internal links from 3+ related pages; update hub pages to include them |
+| Crawl depth exceeds 4+ clicks for key pages | Flat navigation missing or hub pages not linking to spokes | Create shortcut links via primary nav, hub page content blocks, or featured sections |
+| Category/hub pages ranking poorly | Hub pages have no substantive content — just link lists | Add 800+ words of pillar content to every hub page; they must rank on their own merit |
+| Redirect chains after site migration | Old redirects not updated to point to final destination; chains accumulate over multiple migrations | Audit all existing redirects; collapse chains so every redirect points directly to the final URL |
+| Internal links using generic anchor text | "Click here" and "learn more" anchor text dominating internal links | Rewrite anchors to be descriptive with partial-match keywords; aim for 60-70% partial match |
+| New sections not getting crawled | No internal links from existing high-authority pages to new section | Add contextual links from homepage and related hub pages; submit new section sitemap |
+
+---
+
+## Success Criteria
+
+- **Crawl depth**: 95%+ of indexable pages reachable within 3 clicks from homepage
+- **Zero orphan pages**: No indexed pages without at least 3 inbound internal links
+- **URL cleanliness**: 100% of URLs follow the established pattern — lowercase, hyphenated, descriptive, consistent trailing slash policy
+- **Navigation coverage**: All key revenue and pillar pages accessible via primary or secondary navigation
+- **Internal link density**: Every content page has 3-5 outbound contextual internal links with descriptive anchor text
+- **Silo coherence**: Each topic cluster has a defined hub page with bidirectional links to all spokes
+- **Breadcrumb coverage**: BreadcrumbList schema present on 100% of non-homepage pages
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- URL hierarchy design and restructuring
+- Navigation architecture (primary, secondary, breadcrumb, footer, contextual, sidebar)
+- Silo structure and topic cluster planning
+- Internal linking strategy and optimization
+- Crawl equity analysis and optimization
+- Architecture audits with scored reports
+- URL migration planning with redirect mapping
+
+**Out of scope:**
+- Content creation for hub pages (use Content Production)
+- Schema markup implementation (use Schema Markup)
+- Technical SEO beyond architecture (use SEO Audit)
+- Visual design or UX design of navigation
+- CMS development or template coding
+- External link building
+
+**Known limitations:**
+- Crawl equity distribution is estimated — Google does not publish exact PageRank flow data
+- Architecture changes on large sites (10K+ pages) require careful phased migration to avoid traffic loss
+- Navigation testing (card sorts, tree tests) requires user research tools and participants
+- Cross-silo linking recommendations are qualitative — no deterministic formula exists for optimal cross-linking density
+
+---
+
+## Scripts
+
+```bash
+# Analyze sitemap for depth and structure issues
+python scripts/sitemap_analyzer.py --file sitemap.xml --json
+
+# Check URLs for redirect chains and patterns
+python scripts/redirect_checker.py --file urls.txt --json
+
+# Map internal link structure from a sitemap
+python scripts/link_mapper.py --sitemap sitemap.xml --json
+```

@@ -162,3 +162,81 @@ python scripts/backlink_analyzer.py --domain example.com --output links.csv
 - `references/keyword_research.md` - Keyword research methods
 - `references/link_building.md` - Link building playbook
 - `references/algorithm_updates.md` - Google update history
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Rankings dropped after Google core update | E-E-A-T signals insufficient or content quality below new thresholds | Audit content against December 2025 / March 2026 core update criteria — add experience signals, author credentials, original data |
+| High impressions but low CTR | Title tags and meta descriptions not compelling enough for the SERP | Rewrite titles with numbers, power words, and clear value props; test meta descriptions with hooks |
+| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers; 43% of sites still fail INP in 2026 |
+| Indexed pages declining in Search Console | Google tightening quality bar — deindexing thin or duplicate content | Consolidate thin pages, add unique content, improve E-E-A-T signals on remaining pages |
+| AI Overviews stealing clicks from position 1 | Google AI Overviews now appear in 50%+ of queries, reducing organic CTR by ~42% | Optimize for AI citation (extractable content blocks), add FAQ schema, target queries less likely to trigger AI Overviews |
+| Keyword cannibalization across blog and product pages | Multiple pages competing for same keyword with conflicting intent | Map one primary keyword per page, consolidate or redirect competing pages, differentiate intent |
+
+---
+
+## Success Criteria
+
+- **Organic traffic growth**: 10%+ month-over-month organic traffic growth sustained over 6 months
+- **Top 10 rankings**: 50%+ of target keywords ranking in top 10 positions within 6 months
+- **Core Web Vitals**: All three metrics passing (LCP < 2.5s, INP < 200ms, CLS < 0.1) at 75th percentile — only 47-55% of sites achieve this in 2026
+- **CTR performance**: Position 1 achieving 25%+ CTR, position 3 achieving 10%+ CTR (2026 benchmarks)
+- **Conversion from organic**: Organic traffic converting at 2%+ for B2B, 2.5%+ for e-commerce (industry benchmarks)
+- **Indexation health**: 95%+ of target pages indexed with zero critical crawl errors
+- **E-E-A-T compliance**: Author bylines, credentials, and experience signals on 100% of content pages
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Technical SEO auditing (crawlability, indexation, Core Web Vitals, site structure)
+- Keyword research, intent classification, and prioritization
+- On-page optimization (title tags, meta descriptions, headings, content, schema)
+- Link building strategy and opportunity identification
+- Organic search performance monitoring and reporting
+- Algorithm update impact assessment and recovery planning
+
+**Out of scope:**
+- Paid search / Google Ads management
+- Social media marketing and optimization
+- Content writing and production (use Content Production skill)
+- AI-specific search optimization (use AI SEO skill)
+- Website development or code deployment
+- Brand strategy and positioning
+
+**Known limitations:**
+- Keyword difficulty scores vary significantly across tools — no single source of truth
+- Google algorithm changes 500-600 times per year; strategies require continuous adaptation
+- AI Overviews are reducing organic CTR — position 1 no longer guarantees high click volume
+- Backlink analysis requires third-party tools (Ahrefs, SEMrush, Moz) for comprehensive data
+- INP optimization often requires developer involvement for JavaScript refactoring
+
+---
+
+## Integration Points
+
+- **SEO Audit** — Use for comprehensive 85-point site audits when detailed diagnostic is needed.
+- **AI SEO** — Use alongside traditional SEO for AI search citation optimization.
+- **Schema Markup** — Use for structured data implementation after on-page optimization.
+- **Site Architecture** — Use when structural issues (deep nesting, orphan pages) block ranking progress.
+- **Content Strategy** — Use for topic selection and editorial calendar planning before SEO optimization.
+- **Content Humanizer** — Use when content flagged as AI-generated needs authenticity improvement.
+
+---
+
+## Scripts
+
+```bash
+# Analyze keyword list for search intent and difficulty
+python scripts/keyword_analyzer.py --keywords keywords.csv --json
+
+# Simulate SERP appearance for a page
+python scripts/serp_simulator.py --title "Cloud Cost Optimization Guide" --description "Learn 7 proven strategies..." --url "/guides/cloud-cost" --json
+
+# Score content for on-page SEO quality
+python scripts/content_scorer.py article.md --keyword "cloud cost optimization" --json
+```

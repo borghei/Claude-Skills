@@ -413,3 +413,49 @@ Surface these findings without being asked:
 | **ab-test-setup** | Designing experiments (this skill's events feed A/B tests) |
 | **launch-strategy** | Tracking events for product launches |
 | **email-sequence** | Setting up email click tracking and UTM parameters |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| GA4 shows 50% less traffic than expected after privacy changes | Client-side tracking blocked by ad blockers and ITP/ETP cookie expiry | Implement server-side GTM tagging — recovers 20-40% of lost attribution data within first quarter |
+| Conversion counts differ between GA4 and Google Ads by >15% | Attribution window mismatch or deduplication failure between pixel and CAPI | Align attribution windows across platforms and ensure matching `event_id` for deduplication |
+| Events fire in GTM Preview but do not appear in GA4 reports | Measurement ID mismatch, consent mode blocking, or data processing delay | Check Measurement ID in GA4 Configuration tag, verify consent state, wait 24-48 hours for standard reports |
+| UTM parameters show as (not set) in GA4 | UTMs stripped by redirects, social platform link wrappers, or internal links overwriting | Audit redirect chains, use UTM-safe shorteners, never tag internal links with UTMs |
+| Server-side container returns 400 errors | Malformed event payload or missing required fields in Measurement Protocol requests | Validate payload against GA4 Measurement Protocol schema, check required `client_id` and `api_secret` |
+| Enhanced Measurement duplicating custom GTM events | Both Enhanced Measurement and GTM firing the same event type (e.g., page_view, scroll) | Disable the overlapping Enhanced Measurement toggle for events you track via GTM |
+| Consent Mode v2 reporting zero EU data instead of modeled data | Default consent state not set before GA4 tag fires, or CMP not updating consent correctly | Ensure consent defaults fire as the very first tag in GTM before all other tags |
+
+---
+
+## Success Criteria
+
+- All custom events follow consistent `noun_verb` snake_case naming convention with zero violations in schema audit
+- GA4 conversion counts match ad platform conversion counts within 10% variance
+- Server-side tracking recovers 20%+ of previously lost attribution data within 90 days of deployment
+- UTM parameter validation passes 100% on all active campaigns (no mixed case, no spaces, no missing required params)
+- Consent Mode v2 limits EU data loss to under 15% via behavioral modeling
+- Event parameters contain zero PII violations as verified by automated schema checker
+- Data retention set to 14 months, internal traffic filtered, and cross-domain tracking verified
+
+---
+
+## Scope & Limitations
+
+**In Scope:** GA4 configuration, GTM implementation, event taxonomy design, conversion tracking setup, UTM strategy, consent management, data quality auditing, server-side tagging architecture, cross-domain tracking, ad platform conversion integration (Google Ads, Meta, LinkedIn).
+
+**Out of Scope:** Product analytics platforms (Amplitude, Mixpanel), data warehouse configuration, custom ETL pipelines, mobile app tracking (Firebase), marketing attribution modeling (see marketing-analyst skill), A/B test statistical analysis (see ab-test-setup skill).
+
+**Limitations:** Server-side tracking requires a cloud-hosted GTM container (GCP, AWS, or third-party) with associated infrastructure costs. Privacy-first analytics with Consent Mode v2 produces modeled data for non-consented users — modeled data has 5-15% variance from actual. This skill does not make LLM or API calls; all validation is deterministic.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/utm_validator.py` | Validate UTM parameters for consistency and naming conventions | `python scripts/utm_validator.py urls.csv --json` |
+| `scripts/event_schema_checker.py` | Validate event names and parameters against taxonomy, detect PII | `python scripts/event_schema_checker.py events.json --json` |
+| `scripts/funnel_drop_off_analyzer.py` | Analyze conversion funnels and identify biggest drop-off points | `python scripts/funnel_drop_off_analyzer.py --stages "Visitors:10000,Signups:1200,Paid:120"` |

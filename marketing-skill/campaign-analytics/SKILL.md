@@ -252,3 +252,129 @@ Use `python -m json.tool your_file.json` to validate JSON syntax before passing 
 - **social-media-analyzer**: For social-specific analytics complementing cross-channel analysis.
 - **marketing-strategy-pmm**: For strategic context behind campaign performance.
 - **content-creator**: For optimizing content based on analytics findings.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Attribution model shows all credit on one channel | Using first-touch or last-touch on a multi-channel funnel | Switch to linear, time-decay, or position-based attribution. Compare at least 3 models to triangulate true channel value. GA4's data-driven attribution (DDA) is the recommended default for 2026 |
+| Funnel conversion rate is unrealistically high or low | Mismatched stage definitions or counts array length error | Verify that `stages` and `counts` arrays are the same length and ordered top-to-bottom (largest count first). Ensure counts represent unique users at each stage, not cumulative events |
+| ROI calculator flags all campaigns as underperforming | Channel name in JSON does not match built-in benchmark keys | Use exact channel names: `email`, `paid_search`, `paid_social`, `display`, `organic_search`, `organic_social`, `referral`, `direct`. Unrecognized channels fall back to `default` benchmarks |
+| Time-decay model produces unexpected credit distribution | Half-life parameter does not match your sales cycle | Set `--half-life` to approximately half your average sales cycle length. For B2B SaaS (60-90 day cycles), use `--half-life 30`. For e-commerce (1-7 day cycles), use `--half-life 3` |
+| JSON parsing errors on script execution | Malformed JSON, trailing commas, or encoding issues | Validate JSON with `python -m json.tool your_file.json` before passing to any script. Ensure UTF-8 encoding and no BOM characters |
+| GA4 attribution data does not match script output | Different lookback windows and model defaults | GA4 uses a 30-day lookback for acquisition and 90-day for engagement by default. DDA falls back to last-click when a key event has fewer than 400 conversions. Align your script's `--half-life` and data window to match GA4 settings |
+| Campaign spend data shows zero ROI despite conversions | Revenue field missing or set to zero in input JSON | Ensure every campaign object includes a `revenue` field with actual attributed revenue. If revenue attribution is not available, use estimated values based on average deal size multiplied by customer count |
+
+---
+
+## Success Criteria
+
+- **Attribution Model Coverage**: Run at least 3 attribution models per analysis cycle to triangulate channel value. Position-based (40/20/40) or GA4 data-driven attribution is recommended as primary model for hybrid PLG/sales-led motions
+- **Funnel Conversion Rate**: Target overall funnel conversion (top-to-bottom) of 2-5% for B2B SaaS and 5-15% for B2C. Identify and address any single stage with >60% drop-off rate as a critical bottleneck
+- **Campaign ROAS**: Achieve minimum 4:1 ROAS for paid search, 3:1 for paid social, and 30:1+ for email channels (2026 industry targets). Flag any campaign below 2:1 ROAS for immediate optimization or budget reallocation
+- **Cost Per Acquisition**: Maintain blended CPA below $45 across channels (2026 B2B SaaS median). Channel-specific targets: email <$15, paid search <$50, paid social <$40, display <$75
+- **UTM Compliance**: Achieve 100% UTM parameter coverage on all paid and owned media links. Use lowercase, standardized naming (GA4 is case-sensitive). Teams with standardized UTM conventions see 29% improvement in attribution accuracy
+- **Analysis Cadence**: Run campaign ROI analysis weekly for active campaigns and monthly for strategic review. Update attribution models quarterly as channel mix evolves
+- **Benchmark Accuracy**: All campaigns should be assessed against channel-specific benchmarks, not generic averages. The built-in benchmark tables cover CTR, ROAS, and CPA by channel with low/target/high ranges
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Multi-touch attribution modeling with 5 industry-standard models (first-touch, last-touch, linear, time-decay, position-based)
+- Funnel conversion analysis with stage-by-stage metrics, bottleneck detection, and segment comparison
+- Campaign ROI calculation with 10+ metrics (ROI, ROAS, CPA, CPL, CAC, CTR, CVR, CPC, CPM, lead conversion rate)
+- Industry benchmarking by channel with underperformance flagging
+- Portfolio-level summary with channel breakdown
+
+**Out of Scope:**
+- Real-time data connections or API integrations (scripts analyze static JSON snapshots)
+- Statistical significance testing for A/B tests (descriptive metrics only; use dedicated A/B testing tools for p-value calculations)
+- Cross-device identity resolution (must be handled upstream by your CDP or analytics platform)
+- Currency conversion (all monetary values assumed same currency)
+- Predictive modeling or forecasting (current analysis is retrospective)
+- GA4 or HubSpot direct integration (export data from those platforms into JSON format for analysis)
+- Datasets exceeding 100K journeys (standard library implementation, not optimized for very large datasets)
+
+---
+
+## Integration Points
+
+| Integration | Purpose | How to Connect |
+|-------------|---------|----------------|
+| **Google Analytics 4 (GA4)** | Source of journey and conversion data | Export GA4 Exploration reports or use BigQuery export to generate journey JSON. GA4's DDA model (default in 2026) complements this skill's 5 models. Align lookback windows: GA4 defaults to 30-day acquisition / 90-day engagement |
+| **HubSpot** | CRM attribution, lead scoring, deal data | Export HubSpot contact journey data with UTM parameters as JSON input. Use W-shaped (40-20-40) attribution for hybrid PLG/sales motions. Map HubSpot lifecycle stages to funnel analyzer stages |
+| **UTM Parameter Standards** | Consistent campaign tagging | Enforce lowercase UTM values: `utm_source={channel}`, `utm_medium={type}`, `utm_campaign={campaign-id}`, `utm_content={variant}`, `utm_term={keyword}`. GA4 treats `Email` and `email` as separate entries |
+| **social-media-analyzer skill** | Social channel performance data | Feed social media campaign metrics from `calculate_metrics.py` into `campaign_roi_calculator.py` for cross-channel ROI comparison |
+| **marketing-demand-acquisition skill** | Demand gen campaign planning | Use attribution results to identify top-performing channels, then feed insights into demand gen budget allocation decisions |
+| **Business intelligence tools (Looker, Tableau, Power BI)** | Dashboard visualization | Use `--format json` output from all three scripts for direct ingestion into BI tools. JSON output is structured for easy transformation |
+| **Spreadsheet tools (Excel, Google Sheets)** | Manual analysis and reporting | Use `--format text` output for human-readable reports. Copy JSON output into spreadsheets for custom pivot analysis |
+
+---
+
+## Tool Reference
+
+### attribution_analyzer.py
+
+**Type:** CLI script with argparse
+
+**Usage:**
+```bash
+python attribution_analyzer.py <input_file> [--model MODEL] [--half-life DAYS] [--format FORMAT]
+```
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `input_file` | Yes | -- | Path to JSON file containing journey/touchpoint data. Must have a top-level `journeys` array |
+| `--model` | No | all 5 models | Run a specific model: `first-touch`, `last-touch`, `linear`, `time-decay`, `position-based` |
+| `--half-life` | No | `7.0` | Half-life in days for time-decay model. Set to ~half your average sales cycle |
+| `--format` | No | `text` | Output format: `text` (human-readable tables) or `json` (machine-readable) |
+
+**Input Schema:** `{"journeys": [{"journey_id": "str", "touchpoints": [{"channel": "str", "timestamp": "ISO-8601", "interaction": "str"}], "converted": bool, "revenue": float}]}`
+
+**Output:** Summary statistics (total journeys, conversion rate, total revenue, channels observed) plus per-model channel credit allocation with revenue and share percentages. Cross-model comparison table when running all models.
+
+### funnel_analyzer.py
+
+**Type:** CLI script with argparse
+
+**Usage:**
+```bash
+python funnel_analyzer.py <input_file> [--format FORMAT]
+```
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `input_file` | Yes | -- | Path to JSON file containing funnel data. Must have `funnel` (single) or `segments` (multi-segment) key |
+| `--format` | No | `text` | Output format: `text` or `json` |
+
+**Single Funnel Input:** `{"funnel": {"stages": ["Stage1", "Stage2", ...], "counts": [10000, 5200, ...]}}`
+
+**Multi-Segment Input:** `{"stages": ["Stage1", "Stage2", ...], "segments": {"segment_a": {"counts": [...]}, "segment_b": {"counts": [...]}}}`
+
+**Output:** Stage-by-stage conversion rates, drop-off counts and percentages, cumulative conversion, bottleneck identification (both absolute and relative), and segment rankings when comparing multiple segments.
+
+### campaign_roi_calculator.py
+
+**Type:** CLI script with argparse
+
+**Usage:**
+```bash
+python campaign_roi_calculator.py <input_file> [--format FORMAT]
+```
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `input_file` | Yes | -- | Path to JSON file containing campaign data. Must have a top-level `campaigns` array |
+| `--format` | No | `text` | Output format: `text` or `json` |
+
+**Input Schema:** `{"campaigns": [{"name": "str", "channel": "str", "spend": float, "revenue": float, "impressions": int, "clicks": int, "leads": int, "customers": int}]}`
+
+**Recognized Channels for Benchmarking:** `email`, `paid_search`, `paid_social`, `display`, `organic_search`, `organic_social`, `referral`, `direct`. Unrecognized channels use `default` benchmarks.
+
+**Calculated Metrics:** ROI %, ROAS, CPA, CPL, CAC, CTR %, CVR % (lead-to-customer), CPC, CPM, click-to-lead rate %, profit. Each campaign assessed against channel-specific benchmarks (low/target/high) with performance flags and recommendations.
+
+**Output:** Portfolio summary (totals, blended metrics, top performer, flagged campaigns, channel breakdown) plus per-campaign detail with benchmark assessments, warning flags, and actionable recommendations.

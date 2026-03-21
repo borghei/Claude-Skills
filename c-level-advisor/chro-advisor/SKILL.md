@@ -367,3 +367,102 @@ Surface these without being asked when detected:
 | "People board section" | Board slide: headcount, attrition, hiring velocity, engagement, top risks |
 | "Performance review setup" | Performance framework: ratings, calibration, review cadence, templates |
 | "Remote work policy" | Policy document: expectations, tools, communication norms, exceptions |
+
+---
+
+## Tool Reference
+
+### retention_risk_scorer.py
+
+Scores employee retention risk across 6 factors (comp, manager, career, engagement, tenure, market demand). Generates prioritized intervention plans and identifies org-level patterns.
+
+```bash
+# Run with demo data
+python scripts/retention_risk_scorer.py
+
+# From JSON with employee data
+python scripts/retention_risk_scorer.py --input employees.json
+
+# JSON output
+python scripts/retention_risk_scorer.py --json
+```
+
+### headcount_planner.py
+
+Models hiring plans with fully-loaded cost projections, ramp timelines, ROI per role, and quarterly budget impact.
+
+```bash
+# Run with demo plan
+python scripts/headcount_planner.py
+
+# From JSON hiring plan
+python scripts/headcount_planner.py --input hiring_plan.json
+
+# JSON output
+python scripts/headcount_planner.py --json
+```
+
+### comp_band_analyzer.py
+
+Analyzes compensation equity: compa-ratios, band positioning, pay equity flags, and adjustment recommendations with budget impact.
+
+```bash
+# Run with demo data
+python scripts/comp_band_analyzer.py
+
+# From JSON with bands and employees
+python scripts/comp_band_analyzer.py --input comp_data.json
+
+# JSON output
+python scripts/comp_band_analyzer.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Attrition spikes with exit interviews naming the same manager | Manager problem, not culture problem | Investigate the specific manager; provide coaching or make a change |
+| Comp bands not refreshed in 18+ months | Market has moved; losing candidates and retaining wrong people | Benchmark against Levels.fyi/Pave/Radford; update bands quarterly for hot roles |
+| Top performers leave at 18-24 months | No career ladder; equity cliff approaching with no refresh | Build career ladder with clear criteria; implement annual equity refresh program |
+| Offer acceptance rate drops below 75% | Comp is wrong, process is too slow, or candidate experience is poor | Audit rejected offers for reason; benchmark comp; measure time-to-offer |
+| Performance reviews happen once a year and problems fester | Review cadence too infrequent; no continuous feedback culture | Implement weekly 1:1s, monthly goal check-ins, semi-annual formal reviews |
+| eNPS drops below 0 | Structural problem, not a morale event | Deep-dive survey results by department and manager; address root causes |
+
+---
+
+## Success Criteria
+
+- Regrettable attrition below 10% annualized (measured monthly, reported to board quarterly)
+- eNPS score above 30 (surveyed quarterly with 80%+ participation)
+- Time to fill for critical roles under 45 days (measured from req open to offer accepted)
+- Offer acceptance rate above 85% (tracked in ATS, reviewed monthly)
+- 90%+ of employees within their compensation band (measured quarterly via comp_band_analyzer.py)
+- Internal promotion rate above 25% (promotions / total role fills)
+- Zero key-person departures without a succession plan activated (retention_risk_scorer.py identifies risk)
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Workforce planning, compensation design, org structure, performance management, retention strategy, career ladders, people analytics, headcount modeling, comp band analysis.
+
+**Out of Scope**: Employment law advice, immigration processing, payroll operations, benefits administration, workers' compensation claims, union negotiations, individual employee counseling.
+
+**Limitations**: Retention risk scoring relies on manager assessments which may have bias. Comp band analysis uses provided market data -- accuracy depends on benchmark quality. Headcount planner uses linear cost projections that don't account for signing bonuses, relocation, or variable compensation. Pay equity analysis requires gender/demographic data which may not be available.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `cfo-advisor` | Headcount budget modeling; fully-loaded cost for financial planning |
+| `ceo-advisor` | People KPIs for board reporting; attrition risk narrative |
+| `coo-advisor` | Hiring timing aligned with operational capacity |
+| `cto-advisor` | Engineering hiring scorecards; technical leveling |
+| `cro-advisor` | Revenue team quota coverage modeling; sales ramp projections |
+| `culture-architect` | Behavioral anchors for performance reviews; engagement programs |
+| `founder-coach` | Founder leadership style evolution; delegation frameworks |
+| `change-management` | People impact assessment for reorgs; communication sequencing |

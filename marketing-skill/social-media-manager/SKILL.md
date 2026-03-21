@@ -364,3 +364,65 @@ Next Month Focus:
 | **launch-strategy** | Coordinating social media around product launches |
 | **email-sequence** | Converting social followers to email subscribers |
 | **analytics-tracking** | Setting up social media UTM tracking and attribution |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Engagement rate below platform average | Content not resonating or weak hooks | Audit last 20 posts for patterns. Run `social_audit_scorer.py`. |
+| Posting dropped below 3x/week | No batching system or content calendar | Use `content_calendar_generator.py` and batch-create weekly. |
+| 100% promotional content | No pillar system | Shift to 90/10 value/promo split. Cap promotional at 10%. |
+| No outbound engagement | Broadcasting without participating | Spend 15 min/day commenting on relevant posts. Social is bilateral. |
+| Same format every post | Algorithm fatigue | Mix text, carousel, video, poll formats weekly. |
+| Growing followers but flat engagement | Attracting but not resonating | Audit content pillars. Narrow topics to build deeper engagement. |
+| Crisis going viral on social | No crisis protocol in place | Use the 4-hour rule: assess, pause scheduled posts, draft response, get approval. |
+
+---
+
+## Success Criteria
+
+- Engagement rate: >3% LinkedIn, >1% Twitter/X, >2% Instagram
+- Follower growth rate: >5% monthly
+- Posting consistency: minimum 3x/week with no gaps longer than 3 days
+- Content pillar balance: educational 30-40%, promotional under 15%
+- Response time: under 2 hours for all comments and mentions
+- Outbound engagement: 15+ comments on others' content per week
+- Monthly reporting delivered with actionable insights (not just metrics)
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Social media strategy, platform selection, content pillar design, editorial calendars, community engagement, crisis response, social audits, growth tactics, performance measurement.
+
+**Out of Scope:** Writing individual posts (use social-content), paid social campaigns (use paid-ads), influencer management, social media tool administration.
+
+---
+
+## Python Automation Tools
+
+### 1. Social Audit Scorer (`scripts/social_audit_scorer.py`)
+Scores social media profiles on profile completeness, content quality, and engagement health.
+
+```bash
+python scripts/social_audit_scorer.py audit_data.json
+python scripts/social_audit_scorer.py --sample --json
+```
+
+### 2. Content Calendar Generator (`scripts/content_calendar_generator.py`)
+Generates structured content calendars with pillar assignments, format recommendations, and batch creation plans.
+
+```bash
+python scripts/content_calendar_generator.py --platform linkedin --weeks 4
+python scripts/content_calendar_generator.py --platform instagram --weeks 4 --json
+```
+
+### 3. Growth Tracker (`scripts/growth_tracker.py`)
+Tracks follower growth, engagement trends, and content performance over time with projections.
+
+```bash
+python scripts/growth_tracker.py weekly_data.json
+python scripts/growth_tracker.py --sample --json
+```

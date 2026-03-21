@@ -152,6 +152,90 @@ Set 3: 85/100 - PASS
 | `okr_validator.py` | Validate and score OKR sets | `python scripts/okr_validator.py --input okrs.json` |
 | `okr_validator.py` | Run demo validation | `python scripts/okr_validator.py --demo` |
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| OKR set scores below 70% consistently | Key results framed as tasks/outputs instead of outcomes, or objective contains numbers | Ask "So what?" for each KR until you reach a measurable outcome; remove numbers from objectives |
+| Validator flags "output-oriented language" | KR description starts with verbs like "launch", "build", "implement", "ship" | Reframe: "Launch mobile app" becomes "Increase mobile-originated revenue from 0% to 15%" |
+| Team sets 5+ objectives per quarter | Lack of strategic focus or inability to say no | Enforce 1 theme per team per quarter; use the Radical Focus constraint: one objective, maybe two |
+| Key results hit 100% every quarter | Targets are sandbagged at 100% confidence | Stretch to 60-70% confidence; if you hit every KR, you are not being ambitious enough |
+| Counter-metrics missing from OKR sets | Team did not apply the gaming test to KR pairs | For every pair of KRs, ask: "Could we hit these numbers by doing something harmful?" Add a counter-metric if yes |
+| OKRs set and forgotten until quarter end | No weekly check-in rhythm established | Implement weekly confidence scoring (red/yellow/green) per KR; teams with weekly check-ins complete 43% more goals |
+| Validator rejects input JSON | Schema mismatch: missing `okr_sets` key or `key_results` array per set | Ensure JSON has `okr_sets` array, each with `objective` string and `key_results` array containing `description`, `metric`, `target_value`, `current_value` |
+
+## Success Criteria
+
+- Each OKR set scores above 80/100 on the validator before committing to the quarter
+- Maximum 1-2 objectives per team per quarter (focus over breadth)
+- Every objective is qualitative and inspirational (no numbers in the objective itself)
+- Each objective has exactly 3 key results: primary metric, secondary dimension, and counter-metric
+- Key results are set at 60-70% confidence (stretch, not sandbagged)
+- Weekly confidence check-ins are conducted, not just end-of-quarter reviews
+- OKR retrospectives run at quarter end with structured review of what was learned
+
+## Scope & Limitations
+
+**In Scope:**
+- OKR brainstorming using Christina Wodtke's Radical Focus methodology
+- Generating 3 distinct OKR sets per theme with counter-metric testing
+- Automated validation and scoring of OKR quality (output detection, metric presence, structural checks)
+- Guidance on OKR vs. KPI vs. North Star Metric distinctions
+- Common OKR mistake identification and remediation
+
+**Out of Scope:**
+- OKR tracking and progress monitoring over the quarter (use dedicated OKR platforms)
+- Company-level OKR cascade and alignment across teams (see `senior-pm/` for portfolio alignment)
+- Individual performance-linked OKRs (OKRs should be team goals, not performance reviews)
+- Metric instrumentation or analytics setup for measuring key results
+
+**Important Caveats:**
+- OKRs work best when combined with weekly check-ins. Teams that review OKRs only at quarter end see 30-45% lower completion rates.
+- The validator catches structural issues but cannot assess strategic quality. A perfectly scored OKR can still be the wrong goal.
+- OKRs should be aligned top-down (strategic direction) and bottom-up (team insight). Pure top-down OKRs reduce team ownership.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `scrum-master/` | Receives from | Sprint velocity and capacity data inform realistic KR target-setting |
+| `senior-pm/` | Receives from | Portfolio strategic priorities shape quarterly OKR themes |
+| `execution/outcome-roadmap/` | Feeds into | OKR key results become success metrics for roadmap Now/Next items |
+| `execution/prioritization-frameworks/` | Complements | Prioritized initiatives inform which OKR theme to focus on |
+| `discovery/identify-assumptions/` | Receives from | Validated assumptions increase confidence in OKR target feasibility |
+| `discovery/brainstorm-experiments/` | Feeds into | Experiment metrics may become OKR key results when validated |
+
+## Tool Reference
+
+### okr_validator.py
+
+Validates and scores OKR sets against quality criteria. Checks objectives for qualitative/inspirational language, key results for measurable outcomes, and structural completeness.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--input` | string | (required, mutually exclusive with --demo) | Path to JSON file containing OKR sets |
+| `--demo` | flag | off | Run validation on built-in demo data (mix of good and bad OKRs) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+**Input JSON schema:**
+```json
+{
+  "okr_sets": [
+    {
+      "objective": "string (qualitative, no numbers)",
+      "key_results": [
+        {
+          "description": "string",
+          "metric": "string (unit of measurement)",
+          "target_value": "number",
+          "current_value": "number (baseline)"
+        }
+      ]
+    }
+  ]
+}
+```
+
 ## References
 
 - `references/okr-best-practices.md` -- Detailed OKR guide with examples and anti-patterns

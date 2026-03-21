@@ -369,3 +369,63 @@ FOLLOW-UP REVIEW: [Date to check all changes are implemented]
 | "Stress test this assumption" | Counter-evidence, downside modeling, hedge recommendation |
 | "Run a post-mortem" | Blameless analysis with root cause, contributing factors, and changes |
 | "Find my blind spots" | Pattern analysis of past decisions and recurring themes |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Stress test produces no actionable insights | Assumptions too vague or too few failure modes identified | Require minimum 5 specific, quantified failure modes per plan; use GROW model (Goal, Reality, Options, Will) to sharpen each |
+| Board prep feels superficial | Skipping the hard questions or not rehearsing answers | Run the 10 Hardest Board Questions drill with a trusted peer; record and review responses |
+| Post-mortem devolves into blame | Facilitator not enforcing blameless culture | Restate ground rules at start; focus language on systems not people; consider external facilitator |
+| Pre-mortem participants only list obvious risks | Group conformity bias suppressing creative thinking | Use silent brainstorming first (written, anonymous), then share; apply inversion technique ("How would we guarantee failure?") |
+| Hard call framework produces analysis paralysis | Too many options or unclear decision criteria | Limit to 3 options maximum; apply the reversibility test first to eliminate low-stakes decisions from full framework |
+| Founder avoids engaging with mentor challenges | Ego protection or fear of appearing weak | Start with evidence file review (past wins); normalize the process by referencing Co-Active coaching principle: the leader is naturally creative and resourceful |
+| Tripwires set but never monitored | No ownership or tracking cadence assigned | Assign a specific person to each tripwire; add to weekly leadership meeting agenda |
+
+---
+
+## Success Criteria
+
+- Pre-mortem analysis identifies at least 2 failure modes rated severity > 15 that were not previously considered by the leadership team
+- Board preparation drill produces confident, rehearsed answers to all 10 hardest questions at least 24 hours before the meeting
+- Hard call decisions are made within the framework's recommended timeline (48 hours for reversible, 2 weeks for irreversible)
+- Post-mortem root causes lead to implemented system changes verified at the 30-day follow-up review
+- Stress test hedges are costed and assigned within 7 days of the analysis
+- At least one blind spot is surfaced and acknowledged per quarterly review cycle
+- Decision quality improves measurably: fewer repeated failures, faster response to tripwire triggers
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Plan validation, board preparation, decision stress-testing, post-mortem facilitation, assumption challenging, blind spot detection for founders and C-suite executives
+- **Out of scope:** Therapy or clinical mental health support (refer to licensed professionals); legal advice on board governance; financial modeling (use CFO Advisor); technical architecture decisions (use CTO Advisor)
+- **Limitation:** Framework effectiveness depends on honest self-assessment; works best when the executive is willing to be challenged
+- **Limitation:** Pre-mortem and stress tests are qualitative estimates, not predictive models; probability ratings are subjective
+- **Limitation:** Board preparation assumes standard VC/PE board dynamics; public company boards and non-profit boards have different dynamics
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ceo-advisor` | Strategic decisions feed into stress testing | CEO strategy → Mentor challenges assumptions |
+| `founder-coach` | Personal development gaps surface during mentoring | Mentor blind spots → Coach development plan |
+| `board-deck-builder` | Board prep protocol feeds directly into deck construction | Mentor hard questions → Deck narrative answers |
+| `strategic-alignment` | Strategy cascade validation after stress testing | Mentor-validated plan → Alignment cascade |
+| `scenario-war-room` | Pre-mortem failure modes feed into scenario modeling | Mentor failure modes → War room scenarios |
+| `org-health-diagnostic` | Health scores reveal areas needing executive attention | Health red flags → Mentor focus areas |
+| `cfo-advisor` | Financial assumptions require CFO validation | Mentor financial challenges → CFO bear case model |
+
+---
+
+## Python Tools
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `scripts/leadership_assessment.py` | Score leadership competencies across 8 dimensions using the GROW model framework | `python scripts/leadership_assessment.py --name "Jane Doe" --role CEO --json` |
+| `scripts/coaching_plan_generator.py` | Generate a structured 90-day coaching plan based on assessment gaps | `python scripts/coaching_plan_generator.py --gaps delegation,communication --stage "series-a" --json` |
+| `scripts/goal_tracker.py` | Track executive development goals with progress and accountability | `python scripts/goal_tracker.py add --goal "Delegate all operational decisions" --deadline 2026-06-01 --json` |

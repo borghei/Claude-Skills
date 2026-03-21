@@ -356,3 +356,106 @@ Step 6: Confirm to founder:
 | "Review a past meeting" | Load Layer 1 raw transcript (explicit request only) |
 | "What did we decide about [topic]?" | Search Layer 2 decision history |
 | "Resume a pending meeting" | Reload Phase 5 with pending synthesis |
+
+---
+
+## Tool Reference
+
+### meeting_simulator.py
+
+Validates role activation, contribution completeness, and phase sequencing.
+
+```bash
+# Simulate with defaults
+python scripts/meeting_simulator.py
+
+# Specify topic and complexity
+python scripts/meeting_simulator.py --topic "Series B timing" --type fundraising --complexity 9
+
+# Specify activated roles
+python scripts/meeting_simulator.py --type m_and_a --roles CEO CFO CTO CHRO
+
+# List all topic types and required roles
+python scripts/meeting_simulator.py --list-topics
+
+# JSON output
+python scripts/meeting_simulator.py --type strategy --json
+```
+
+### decision_tracker.py
+
+Tracks board decisions, detects conflicts, flags overdue reviews and actions.
+
+```bash
+# Track demo decisions
+python scripts/decision_tracker.py
+
+# From decision log file
+python scripts/decision_tracker.py --input decisions.json
+
+# JSON output
+python scripts/decision_tracker.py --json
+```
+
+### complexity_scorer.py
+
+Scores decision complexity to determine single/dual/multi-advisor or board routing.
+
+```bash
+# Score with CLI flags
+python scripts/complexity_scorer.py --topic "Market expansion" --domains 2 --reversibility 2 --financial 1 --team 2 --urgency 0
+
+# Add modifiers
+python scripts/complexity_scorer.py --topic "Acquisition" --domains 2 --reversibility 2 --financial 2 --team 2 --urgency 1 --modifiers cross_functional external_stakeholders sets_precedent
+
+# JSON output
+python scripts/complexity_scorer.py --topic "Pricing change" --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| All advisors agree without any tension in Phase 2 | Groupthink or trivial topic; isolation may have been breached | Re-run Phase 2 with forced "strongest argument against" from each role |
+| Discussion exceeds 5 points per advisor | Analysis paralysis; no cap enforced | Hard cap at 5 key points; force a recommendation even with Low confidence |
+| Phase 5 times out with no founder response | Founder absence or decision avoidance | Auto-close as "pending review" at 30 min; no decisions without founder |
+| Same topic discussed in 3+ meetings | Decision avoidance or new data not surfaced | Escalate: force decision or formally defer with stated timeline |
+| Decisions logged but never reviewed | Decision logger not integrated into meeting cadence | Add "previous decisions review" to Phase 1 context loading |
+| Roles operating outside their domain | No critic analysis conducted or critic missed it | Enforce Phase 3 critic checklist; flag domain violations explicitly |
+
+---
+
+## Success Criteria
+
+- Every board meeting produces at least 1 logged decision with owner, deadline, and review date
+- Phase 2 contributions are independently generated (zero cross-pollination incidents per quarter)
+- Phase 3 critic analysis identifies at least 1 unvalidated assumption per meeting
+- Founder approval/modification/rejection captured within 30 minutes of synthesis presentation
+- Decision history has zero conflicting active decisions (conflicts detected and resolved)
+- Meeting duration stays within 2 hours for standard strategic reviews, 1 hour for resolution meetings
+- 90%+ of logged decisions have action items completed by their stated deadlines
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Multi-agent deliberation protocol, role activation matrix, contribution formats, critic analysis, synthesis, decision extraction, decision conflict detection, meeting simulation.
+
+**Out of Scope**: Actual AI agent orchestration (this is a protocol specification, not runtime code), real-time meeting facilitation, video/audio recording, external board member management.
+
+**Limitations**: The protocol assumes all advisor contributions are available in text format. Complexity scoring provides routing guidance but cannot account for political dynamics. Decision conflict detection works on exact topic matching -- semantic conflicts across different topics require human judgment.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `chief-of-staff` | Routes questions that score 9-10 complexity into the board meeting protocol |
+| `decision-logger` | Phase 6 feeds decisions directly into the two-layer decision memory |
+| `board-deck-builder` | Board deck sections provide pre-read context for Phase 1 |
+| `executive-mentor` | Phase 3 critic analysis can be performed by the Executive Mentor skill |
+| `ceo-advisor` through `ciso-advisor` | All C-suite advisors contribute independently in Phase 2 |
+| `strategic-alignment` | Validates that meeting decisions align with strategic goals |

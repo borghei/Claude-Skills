@@ -460,3 +460,82 @@ Required for commercial electronic messages to Canadian recipients:
 - **Marketing Context** — Use for ICP definition and positioning. If you do not know who you are targeting and why, cold email is the wrong tool.
 - **Marketing Psychology** — Apply psychological principles (reciprocity, social proof, scarcity) to strengthen email messaging.
 - **Campaign Analytics** — Use to track sequence performance and optimize based on data.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Open rate below 15% | Subject lines too long, spammy, or generic | Test 2-4 word internal-email-style subjects. Run `subject_line_scorer.py`. |
+| Opens but reply rate below 1% | Email body lacks relevance or CTA is too high-friction | Rewrite opener about their world. Use a question CTA, not a statement. |
+| Emails landing in spam (2026) | Missing SPF/DKIM/DMARC or RFC 8058 one-click unsubscribe | Gmail/Yahoo/Microsoft now reject non-compliant bulk mail. Run `deliverability_checker.py`. |
+| Bounce rate above 3% | Unverified email list or role-based addresses | Verify every address before sending. Remove catch-alls and role accounts. |
+| Spam complaint rate above 0.10% | Irrelevant targeting or too-frequent sends | Gmail enforces 0.10% threshold as of 2026. Improve targeting and reduce volume per domain. |
+| Replies but wrong outcome | CTA mismatch with funnel stage | Align CTA friction to prospect readiness. C-suite wants a question; managers accept a demo link. |
+| Domain blacklisted | Sending from primary domain or too-high volume | Use dedicated sending subdomains. Warm new domains 4-6 weeks. Max 100 emails/day/address. |
+
+---
+
+## Success Criteria
+
+- Open rate consistently above 35% across sequence (benchmark: 25-40% for cold B2B)
+- Reply rate above 3% (benchmark: 2-5% for well-targeted cold outreach)
+- Bounce rate below 2% on every campaign (Gmail/Microsoft 2026 threshold)
+- Spam complaint rate below 0.10% (2026 Gmail/Yahoo hard enforcement line)
+- Deliverability rate above 95% with SPF/DKIM/DMARC/RFC 8058 fully configured
+- Sequence produces replies from emails 2-5, not just email 1 (follow-ups carry 60%+ of replies)
+- Every email under 150 words with one CTA and zero corporate speak
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- B2B cold email outreach strategy and copy
+- Multi-email sequence design and optimization
+- Subject line and body copy frameworks
+- Deliverability infrastructure setup (SPF, DKIM, DMARC, domain warming)
+- CAN-SPAM, GDPR, CASL compliance guidance
+- Performance diagnosis and iteration methodology
+
+**Out of Scope:**
+- Email HTML template design (use email-template-builder)
+- Marketing automation platform configuration (Outreach, Salesloft, Apollo)
+- Email list building or scraping (compliance risk)
+- Warm/inbound email sequences (use email-sequence)
+- Phone call scripts or LinkedIn outreach sequences
+- Legal advice on compliance (consult legal counsel for jurisdiction-specific requirements)
+
+**Limitations:**
+- Scripts use heuristic analysis, not live inbox testing (use mail-tester.com for production validation)
+- Deliverability checker cannot perform live DNS lookups (verify SPF/DKIM/DMARC records separately)
+- Benchmarks are B2B SaaS-focused; adjust thresholds for other industries
+
+---
+
+## Python Automation Tools
+
+### 1. Subject Line Scorer (`scripts/subject_line_scorer.py`)
+Scores cold email subject lines on deliverability, spam risk, and open-rate potential using deterministic heuristics.
+
+```bash
+python scripts/subject_line_scorer.py "quick question"
+python scripts/subject_line_scorer.py --file subjects.txt --json
+```
+
+### 2. Deliverability Checker (`scripts/deliverability_checker.py`)
+Audits email content for spam triggers, HTML complexity, link density, and compliance against 2025-2026 Gmail/Yahoo/Microsoft requirements.
+
+```bash
+python scripts/deliverability_checker.py email.txt
+python scripts/deliverability_checker.py email.txt --domain yourdomain.com --json
+```
+
+### 3. Sequence Optimizer (`scripts/sequence_optimizer.py`)
+Analyzes cold email sequence performance data against industry benchmarks. Diagnoses open rate, reply rate, bounce rate, and cadence issues.
+
+```bash
+python scripts/sequence_optimizer.py sequence_data.json
+python scripts/sequence_optimizer.py --sample --json
+```

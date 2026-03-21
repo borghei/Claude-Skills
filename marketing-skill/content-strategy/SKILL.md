@@ -369,3 +369,71 @@ For each top competitor:
 - **Social Content** — Use for distributing content across social platforms after publication.
 - **Marketing Context** — Use as the foundation. Content strategy should align with ICP, positioning, and business goals.
 - **Campaign Analytics** — Use to measure content performance and inform strategy adjustments.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content published consistently but no organic traffic growth | Topics selected without keyword research or targeting zero-volume queries | Re-prioritize using search volume x business relevance x competitive gap scoring matrix |
+| All content is awareness-stage, no leads generated | Over-indexing on top-of-funnel content without consideration/decision stage pieces | Audit funnel coverage per pillar; create 2-3 consideration and decision pieces per pillar |
+| Topic cannibalization across content pieces | Multiple articles targeting the same keyword without differentiation | Map one primary keyword per page; consolidate competing pieces or differentiate angles |
+| Content calendar frequently disrupted | Production timelines too tight or no buffer for reviews and revisions | Add 3-day buffer per piece; batch brief creation 4-6 pieces at a time |
+| Competitor consistently outranks on shared topics | Competitor has stronger E-E-A-T signals or deeper content coverage | Analyze competitor content depth; add original data, expert quotes, and experience signals |
+| Content audit reveals 70%+ of library is underperforming | Strategy was never defined — content was reactive, not planned | Start with 3 content pillars, build 10-15 cluster topics per pillar, then produce systematically |
+
+---
+
+## Success Criteria
+
+- **Pillar coverage**: 3-5 content pillars defined with 15+ cluster topics each, covering all three funnel stages
+- **Organic traffic contribution**: Content driving 40%+ of total organic traffic within 12 months
+- **Topic cluster completeness**: Each pillar has hub page + 10+ supporting pieces with bidirectional internal links
+- **Content freshness**: 80%+ of library updated within the last 12 months; high-value content refreshed quarterly
+- **Funnel balance**: Content split approximately 60% awareness, 25% consideration, 15% decision (or adjusted per business model)
+- **Conversion from content**: Content-attributed leads growing 10%+ quarter-over-quarter
+- **Search visibility**: 50%+ of target keywords ranking in top 20 within 6 months of strategy execution
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Content pillar definition and topic cluster planning
+- Audience research methodology for content topics
+- Keyword-informed topic prioritization
+- Funnel mapping (awareness, consideration, decision)
+- Content audit and remediation planning
+- Competitive content gap analysis
+- Editorial calendar structure and cadence planning
+
+**Out of scope:**
+- Content writing and production (use Content Production)
+- SEO technical optimization (use SEO Specialist)
+- Social media distribution strategy (use Social Content)
+- Paid content promotion and advertising
+- Content management system selection or setup
+- Brand voice and messaging development
+
+**Known limitations:**
+- Content strategy requires 6-12 months to show compounding results — short-term ROI expectations are unrealistic
+- AI Overviews reducing organic CTR means position 1 delivers fewer clicks than historical benchmarks
+- Keyword volume data from tools is estimated and varies between providers
+- Content audit accuracy depends on access to Google Search Console and analytics data
+- Competitive content analysis is point-in-time; competitors update strategies continuously
+
+---
+
+## Scripts
+
+```bash
+# Generate a content calendar plan from topic list
+python scripts/content_calendar_planner.py --topics topics.csv --cadence weekly --json
+
+# Analyze headlines for click-worthiness and SEO
+python scripts/headline_analyzer.py --headlines headlines.txt --json
+
+# Score content brief completeness
+python scripts/content_brief_generator.py --keyword "cloud cost optimization" --json
+```

@@ -387,3 +387,71 @@ Test every schema implementation with all three tools before deployment:
 - **site-architecture** -- For URL structure and navigation. Use when architecture is the root cause, not schema.
 - **programmatic-seo** -- For sites with thousands of pages that need schema at scale. Schema patterns feed into pSEO template design.
 - **content-creator** -- For content creation. Use before implementing Article schema to ensure content quality.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Schema passes validation but no rich results appear | Missing required fields for rich result eligibility, or Google has not recrawled | Verify against Google Rich Results Test (not just schema.org validator); request reindexing via GSC |
+| FAQPage schema not generating FAQ dropdowns | Questions not visible to users on the page, or site lacks sufficient authority | Ensure Q&A content is visible in page HTML, not hidden behind tabs or JS toggles |
+| Product schema shows "missing field" warnings in GSC | Required fields (price, availability, review) absent or malformed | Add all required Product + Offer fields; use ISO 4217 for currency, schema.org/InStock for availability |
+| GTM-injected schema not being indexed | Client-side rendering — Google may not execute GTM JavaScript for schema | Move schema from GTM to server-side `<head>` injection; GTM schema is unreliable for indexing |
+| dateModified older than datePublished | Data entry error or CMS auto-populating incorrectly | Ensure dateModified >= datePublished; audit CMS date field logic |
+| Multiple conflicting Organization blocks | Different plugins or templates injecting separate Organization schema | Consolidate into a single Organization block on the homepage; remove duplicates |
+| Schema validated but Google shows "content mismatch" | Schema claims content not actually visible to users on the page | Only add schema for content physically present on the page — never fake or hidden content |
+
+---
+
+## Success Criteria
+
+- **Rich result eligibility**: 100% of content pages with appropriate schema types eligible for rich results per Google Rich Results Test
+- **Validation pass rate**: Zero errors in Google Search Console Enhancements reports across all schema types
+- **Rich result CTR boost**: Structured data pages achieving 20-35% higher CTR than non-structured pages (2026 benchmark from SearchPilot testing)
+- **AI citation impact**: FAQPage and HowTo schema present on all informational content pages to maximize AI extraction
+- **Entity recognition**: Organization schema with 5+ sameAs links deployed site-wide; brand appearing in Knowledge Graph
+- **Coverage breadth**: Schema implemented on 95%+ of indexable pages (BreadcrumbList minimum, content-specific types on relevant pages)
+- **Freshness accuracy**: dateModified updated within 24 hours of every content change across all Article schema
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Schema type selection and JSON-LD implementation for 20+ schema types
+- Rich result eligibility verification and optimization
+- AI search visibility through structured data
+- Knowledge Graph entity optimization
+- Schema validation, testing, and error resolution
+- CMS-specific deployment guidance (WordPress, Webflow, Shopify, Next.js)
+
+**Out of scope:**
+- Content creation for schema-eligible pages (use Content Production)
+- Technical SEO beyond structured data (use SEO Audit)
+- Microdata or RDFa implementations (JSON-LD only — Google's recommendation)
+- Custom schema.org extensions or vocabulary proposals
+- Server-side rendering implementation
+- CMS plugin development
+
+**Known limitations:**
+- Google does not guarantee rich results even with valid schema — authority and content quality also factor in
+- GTM-injected schema is frequently not indexed — server-side deployment is required for reliability
+- Schema.org spec updates faster than Google's support — not all valid types generate rich results
+- Rich result types can be deprecated with minimal notice (e.g., HowTo rich results were restricted in 2023)
+- Structured data CTR impact varies by industry and SERP features present
+
+---
+
+## Scripts
+
+```bash
+# Validate JSON-LD schema from a file or URL
+python scripts/schema_validator.py --file schema.json --json
+
+# Audit a page for schema coverage and completeness
+python scripts/schema_validator.py --html page.html --verbose
+
+# Generate JSON-LD templates for common page types
+python scripts/schema_generator.py --type Article --title "My Post" --author "Jane" --json
+```

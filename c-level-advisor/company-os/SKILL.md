@@ -357,3 +357,109 @@ These four alone improve coordination more than most companies achieve in a year
 | "Help with quarterly planning" | Planning session agenda + rock-setting framework |
 | "Fix our accountability" | Accountability chart workshop + gap/overlap analysis |
 | "We keep discussing the same issues" | IDS training + issues list audit |
+
+---
+
+## Tool Reference
+
+### scorecard_builder.py
+
+Builds and tracks weekly company scorecards with RAG status, trend analysis, and IDS-ready issue lists for L10 meetings.
+
+```bash
+# Run with demo data
+python scripts/scorecard_builder.py
+
+# From JSON with metrics and rocks
+python scripts/scorecard_builder.py --input scorecard.json
+
+# JSON output
+python scripts/scorecard_builder.py --json
+```
+
+### rocks_tracker.py
+
+Tracks 90-day company and individual rocks with binary status, blocker identification, and owner accountability.
+
+```bash
+# Run with demo data
+python scripts/rocks_tracker.py
+
+# Specify quarter
+python scripts/rocks_tracker.py --quarter Q2
+
+# From JSON
+python scripts/rocks_tracker.py --input rocks.json
+
+# JSON output
+python scripts/rocks_tracker.py --json
+```
+
+### meeting_pulse_designer.py
+
+Designs company meeting rhythms, validates meeting load, identifies redundancies and gaps, and generates L10 agenda templates.
+
+```bash
+# Run with demo meetings
+python scripts/meeting_pulse_designer.py
+
+# Specify team size
+python scripts/meeting_pulse_designer.py --team-size 50
+
+# From JSON with current meetings
+python scripts/meeting_pulse_designer.py --input meetings.json
+
+# JSON output
+python scripts/meeting_pulse_designer.py --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Five team leads give different answers about top 3 priorities | Alignment failure -- rocks not cascaded or not reviewed weekly | Re-run quarterly planning; review rocks weekly in L10; publish company priorities visibly |
+| Same issue on the issues list for 4+ weeks | Avoidance or structural problem too scary to address | Force it: address this week or permanently remove; escalate if needed |
+| Scorecard has 30+ KPIs | Metric overload -- nothing gets attention | Cut to 5-10 metrics. Only the ones that tell you if the company is on track. |
+| Rocks set but never reviewed | Goals without accountability; L10 meeting not happening | Weekly L10 is non-negotiable; 5 minutes on rocks review every week |
+| Leadership team skips L10 or ignores IDS | Leader non-compliance destroys the OS | CEO must enforce: leaders go first. If CEO skips, the OS dies. |
+| Meetings added on top of existing meetings | Meeting fatigue from accumulation | Replace meetings, don't add them. Audit meeting inventory; eliminate redundancies |
+
+---
+
+## Success Criteria
+
+- Weekly L10 meeting happens every week with 90%+ leadership attendance (no exceptions for 12+ consecutive weeks)
+- Scorecard reviewed weekly with red metrics discussed using IDS format (zero red metrics ignored)
+- 70%+ of quarterly rocks completed as binary done/not-done by end of quarter
+- Issues list: average issue resolved within 2 meetings (no issue lingers 4+ weeks)
+- All team leads can articulate top 3 company priorities identically (tested quarterly)
+- Meeting hours per person per week below 10 hours (measured via meeting_pulse_designer.py)
+- Accountability chart reviewed and updated quarterly with zero unowned functions
+
+---
+
+## Scope & Limitations
+
+**In Scope**: Operating system selection (EOS, Scaling Up, OKR, Holacracy), accountability charts, weekly scorecards, meeting pulse design, IDS issue resolution, 90-day rocks, communication cadence, implementation roadmap.
+
+**Out of Scope**: OKR software configuration, project management tool setup, Agile/Scrum methodology, sprint planning, product backlog management, HR policy development.
+
+**Limitations**: Scorecard builder calculates RAG from provided data but cannot source live metrics from business systems. Rocks tracker uses manual status updates -- it cannot automatically detect completion. Meeting pulse designer provides recommendations based on team size and meeting inventory but cannot account for company-specific cultural norms. Framework comparison is directional -- actual implementation success depends on leadership commitment.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `ceo-advisor` | CEO sets vision that feeds 1-year plan and rocks |
+| `coo-advisor` | Owns meeting pulse and issue resolution cadence |
+| `cfo-advisor` | Financial metrics in the weekly scorecard |
+| `cto-advisor` | Engineering rocks and tech scorecard metrics |
+| `chro-advisor` | People metrics (attrition, hiring velocity) in scorecard |
+| `culture-architect` | Culture rituals integrate into meeting pulse |
+| `strategic-alignment` | Validates team rocks cascade from company rocks |
+| `change-management` | New OS rollout follows ADKAR model for adoption |
+| `chief-of-staff` | Orchestrates quarterly planning sessions and L10 follow-up |

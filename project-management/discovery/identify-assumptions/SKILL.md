@@ -209,6 +209,77 @@ Use `assets/assumption_map_template.md` for the full template.
 - Feed "Test Now" assumptions into `brainstorm-experiments/` for experiment design.
 - Run `pre-mortem/` to catch risks that assumption mapping might miss (especially elephants).
 
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| All assumptions classified as "Test Now" | Impact scores inflated or confidence levels consistently set to "low" | Calibrate impact scoring with team; use relative ranking (force distribution across quadrants) |
+| Validation fails with category error | Category string does not match valid set exactly | Use lowercase: `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team` |
+| Risk scores cluster around the same value | Impact and confidence values lack variance across assumptions | Use the full 1-10 impact scale; challenge the team to differentiate high vs. medium vs. low confidence with evidence |
+| Team generates fewer than 10 assumptions | Devil's Advocate perspectives not applied systematically | Run all three perspectives (PM, Designer, Engineer) independently before combining; use the prompts in Phase 1 |
+| "Defer" quadrant is empty | All assumptions scored as high impact, or low-impact assumptions not captured | Include operational and edge-case assumptions; not every assumption is existential |
+| Suggested tests are too generic | Tool uses category-level test suggestions, not assumption-specific ones | Use the category suggestion as a starting point; tailor the test method using `brainstorm-experiments/` skill |
+| Assumptions not updated after experiments | No feedback loop from experiment results back to assumption tracker | Re-run `assumption_tracker.py` with updated confidence levels after each experiment completes |
+
+## Success Criteria
+
+- All product decisions have at least 8-15 explicit assumptions documented before build commitment
+- Every "Test Now" assumption has an assigned owner, validation method, and timeline
+- Risk scores are calculated consistently using the Impact x (1 - Confidence) formula
+- Assumptions are re-scored after each validation experiment (confidence levels update)
+- At least 80% of "Test Now" assumptions are validated or invalidated before major build decisions
+- Assumption map is reviewed and updated at every product discovery cycle (weekly or bi-weekly)
+- The team can articulate the top 3 riskiest assumptions for any active initiative
+
+## Scope & Limitations
+
+**In Scope:**
+- Systematic assumption identification using PM/Designer/Engineer devil's advocate perspectives
+- 8-category risk classification (Value, Usability, Viability, Feasibility, Ethics, Go-to-Market, Strategy, Team)
+- Quantitative risk scoring using Impact x (1 - Confidence) formula
+- Quadrant classification (Test Now, Proceed, Investigate, Defer) with suggested validation methods
+- Assumption registry with priority sorting and action plan generation
+
+**Out of Scope:**
+- Running validation experiments (see `brainstorm-experiments/` skill)
+- Product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
+- Technical feasibility deep-dives or architecture reviews (see `engineering-team/` skills)
+- Financial modeling for viability assumptions (see `finance/` domain skills)
+
+**Important Caveats:**
+- Confidence levels (high/medium/low) map to fixed numeric values (0.8/0.5/0.2). This is a simplification; real confidence is continuous.
+- The quadrant threshold for "high impact" is set at 7/10. Adjust this threshold for your risk tolerance.
+- Assumption mapping is most effective when done collaboratively (Product Trio), not by a single person.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `brainstorm-ideas/` | Receives from | Ideas generated become the subjects whose assumptions are mapped |
+| `brainstorm-experiments/` | Feeds into | "Test Now" assumptions become hypotheses for experiment design |
+| `pre-mortem/` | Complements | Pre-mortem catches risks that assumption mapping may miss (especially elephants) |
+| `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
+| `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
+| `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
+
+## Tool Reference
+
+### assumption_tracker.py
+
+Tracks, scores, and prioritizes product assumptions using an Impact x Risk matrix with quadrant classification.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input_file` | positional | (optional) | Path to JSON file with assumptions array |
+| `--demo` | flag | off | Run with built-in sample data (8 assumptions across all categories) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+**Input fields per assumption:**
+- `description` (required): Clear statement of what must be true
+- `category` (required): One of `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team`
+- `confidence` (required): One of `high`, `medium`, `low`
+- `impact` (required): Integer 1-10
+
 ## References
 
 - Teresa Torres, *Continuous Discovery Habits* (2021)

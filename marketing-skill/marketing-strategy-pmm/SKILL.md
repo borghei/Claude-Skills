@@ -406,3 +406,49 @@ All output passes quality verification:
 - **campaign-analytics**: For measuring launch and campaign effectiveness.
 - **content-creator**: For creating content assets defined in PMM strategy.
 - **social-media-analyzer**: For tracking social media performance of PMM campaigns.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning resonates internally but customers do not repeat it | Positioning built from company perspective, not customer language | Rerun April Dunford methodology starting from competitive alternatives, not from product features |
+| Win rate against specific competitor below 25% | Battlecard outdated or sales team not using it | Run win_loss_analyzer.py to identify loss patterns; update battlecard monthly; validate 80%+ sales usage |
+| GTM motion producing high MQLs but low pipeline conversion | Wrong GTM motion for ACV and buyer type; marketing-led when should be sales-led | Reassess motion using gtm_planner.py; for ACV >$25K, shift to sales-led or hybrid PLG+sales |
+| Sales enablement assets gathering dust | Assets created without sales input; format does not match how sales actually works | Co-create assets with sales; survey sales on what they need; track asset usage in deal cycles |
+| International expansion burning cash with zero pipeline | Market entered without validating demand (inbound signal, TAM) | Validate 3+ paying customers from market in first 90 days; if not, pause and reassess market priority |
+| Competitive intelligence always reactive to lost deals | No proactive monitoring system; battlecards only updated post-loss | Set up monthly competitor monitoring (website, pricing, job postings, G2 reviews); update battlecards proactively |
+| Messaging differs across website, sales deck, and ads | No messaging hierarchy documented; each team creates independently | Build messaging hierarchy (headline > subhead > benefits > features > proof) and enforce across all touchpoints |
+
+---
+
+## Success Criteria
+
+- Positioning validated with 10+ customer interviews; 7+ describe value unprompted
+- Win rate above 30% in competitive deals, measured and tracked monthly
+- Sales velocity improves 20%+ YoY (days from SQL to close decreasing)
+- Sales team uses battlecards in 80%+ of competitive opportunities
+- Product adoption exceeds 40% within 90 days of launch
+- GTM plan generates 3:1 pipeline-to-marketing-spend ROMI
+- Messaging hierarchy consistent across all customer-facing touchpoints
+
+---
+
+## Scope & Limitations
+
+**In Scope:** Product positioning (April Dunford methodology), ICP definition and validation, competitive intelligence and battlecards, GTM strategy and motion selection (PLG, sales-led, marketing-led, community-led), product launch planning, sales enablement, win/loss analysis, international expansion planning, messaging hierarchy, PMM KPIs.
+
+**Out of Scope:** Brand identity and visual design (see brand-guidelines skill), demand generation execution (see marketing-demand-acquisition skill), content creation (see content-creator skill), pricing strategy optimization, sales process design.
+
+**Limitations:** Positioning frameworks require real customer input to be effective — internally generated positioning is unreliable. Win/loss analysis requires honest deal outcome data from sales; incomplete data produces misleading patterns. GTM motion recommendations are based on ACV and buyer type heuristics; edge cases may require hybrid approaches. International expansion timelines assume US-first model and may not apply to non-US companies.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/gtm_planner.py` | Generate GTM plans with motion selection, channel strategy, and timeline | `python scripts/gtm_planner.py config.json --demo` |
+| `scripts/win_loss_analyzer.py` | Analyze deal outcomes by competitor, segment, and reason | `python scripts/win_loss_analyzer.py deals.json --demo` |
+| `scripts/battlecard_generator.py` | Generate competitive battlecards with feature comparison and objection handling | `python scripts/battlecard_generator.py competitor.json --demo` |

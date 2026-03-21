@@ -385,3 +385,51 @@ The context file is loaded by every C-level advisory skill:
 | **internal-narrative** | Building narratives from the captured context |
 | **scenario-war-room** | Modeling risks based on company context |
 | **context-engine** | Technical implementation of context management for AI agents |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Founder gives vague, marketing-speak answers | Interview not building trust; questions too formal | Reset with a personal question; follow a thread they care about; use reflection ("So what you're really saying is...") |
+| Key dimensions left as "[not captured]" after interview | Founder avoided topic or interview ran out of time | Note which dimensions were skipped (avoidance signals importance); schedule targeted follow-up for missing areas |
+| Context file feels generic, could apply to any company | Interviewer used the framework as a script, not a map | Re-interview with focus on specifics: names, numbers, stories; capture their actual words, not paraphrases |
+| Advisory skills still giving textbook answers despite context | Context file too sparse or stale (>90 days) | Run /cs:score to assess completeness and freshness; schedule /cs:update if freshness is Stale or Expired |
+| Quarterly refresh takes too long or feels redundant | Refresh covering all 7 dimensions instead of focusing on changes | Lead with "What changed?" per dimension; skip unchanged areas quickly; target 15 minutes total |
+| Multiple founders give conflicting context | Different perspectives on stage, challenges, or priorities | Note the conflict explicitly in context file; mark which founder provided which data; flag for resolution |
+| Context file modified without founder approval | AI agent or team member updated context silently | Enforce "never silently modify" rule; require explicit founder confirmation before any context update |
+
+---
+
+## Success Criteria
+
+- Context completeness score reaches 7/7 dimensions within first session or first follow-up
+- Context freshness maintained at "Fresh" (< 90 days old) through quarterly refresh protocol
+- Advisory skills produce company-specific (not generic) recommendations when context is loaded
+- Founder reports that AI advisory conversations feel "like talking to someone who knows my business"
+- Time to complete full onboarding interview under 45 minutes
+- Time to complete quarterly refresh under 15 minutes
+- Zero instances of context file modified without founder approval
+
+---
+
+## Scope & Limitations
+
+**In scope:** Structured founder interview across 7 dimensions (identity, stage, founder profile, team/culture, market/competition, challenges, goals), context file generation and maintenance, quarterly refresh protocol, context quality scoring (completeness and freshness), context enrichment during advisory sessions, privacy rules for external data handling, and missing context graceful handling.
+
+**Out of scope:** Company financial modeling (use cfo-advisor), competitive intelligence gathering (use competitive-intel), team assessment or 360 reviews (use hr-operations/), product analytics (use cpo-advisor), and automated context capture from external data sources. This skill captures context through conversation, not data integration.
+
+**Limitations:** Context quality depends entirely on founder candor; evasive or aspirational answers reduce advisory effectiveness. Single-founder interviews may miss co-founder perspectives. Context is a point-in-time snapshot; rapid company changes (pivot, reorg, fundraise) can make context stale before the 90-day refresh. Privacy rules prevent sharing specific context externally, which limits integration with external tools.
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Strategic recommendations calibrated to company stage, challenges, and founder archetype
+- **cfo-advisor** -- Financial guidance calibrated to runway, revenue range, and growth stage
+- **cto-advisor** -- Technical strategy calibrated to team size, architecture maturity, and founder technical depth
+- **coo-advisor** -- Operations advice calibrated to scale, process maturity, and headcount
+- **cmo-advisor** -- Marketing strategy calibrated to stage, market position, and competitive landscape
+- **internal-narrative** -- Narrative construction uses company identity, values, and founder voice from context
+- **scenario-war-room** -- Risk variables calibrated to actual competitive threats and company vulnerabilities
