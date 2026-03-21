@@ -590,3 +590,146 @@ instructions: You are an expert at X. Help the user with Y.
 ### Pattern: Full-Featured Codex Skill
 
 See the complete production-grade template at [assets/openai-yaml-template.yaml](assets/openai-yaml-template.yaml), which includes instructions, tools, model selection, and versioning.
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Converter produces empty `instructions` field | SKILL.md has no `## Best Practices` or `### Workflow` headings for the parser to extract | Add clearly labeled `### Workflow N:` and `## Best Practices` sections with bulleted items in the source SKILL.md |
+| Validator fails with "No valid YAML frontmatter" | SKILL.md does not start with `---` on the very first line, or the closing `---` delimiter is missing | Ensure the file begins with `---` on line 1, followed by frontmatter fields, followed by a closing `---` line with no leading whitespace |
+| `agents/openai.yaml` tool references show "missing script" error | The `command` field path in openai.yaml does not match the actual filename in `scripts/` | Verify that each tool's `command` value uses the exact filename (case-sensitive) under `scripts/` and uses the prefix `python scripts/` |
+| Index builder returns 0 skills | Subdirectories scanned do not contain a `SKILL.md` file, or the target path points to a single skill instead of a parent directory | Pass the parent directory that contains skill subdirectories, not a single skill folder. Hidden directories (dot-prefixed) are also skipped |
+| Validator warns "Description should use third-person, discovery-friendly format" | The `description` frontmatter field does not contain recognized discovery patterns like "This skill should be used when" | Rewrite the description to begin with "This skill should be used when the user asks to..." or include verbs like "analyzes", "generates", "provides" |
+| Converter overwrites existing `agents/openai.yaml` without backup | Running the converter with output-dir set to the same directory as the source skill | Use `--output-dir` to write to a separate directory, or manually back up the existing `agents/openai.yaml` before converting |
+| Strict validation fails on optional missing directories | Running `--strict` treats warnings (missing `references/`, `assets/`, license field) as errors | Either create the missing optional directories and fields, or run without `--strict` to allow warnings |
+
+---
+
+## Success Criteria
+
+- Converted skills pass `cross_platform_validator.py --strict` with zero errors and zero warnings
+- Generated `agents/openai.yaml` contains a valid `name`, `description`, `instructions`, and `tools` section that matches the source SKILL.md
+- Skills index built from 50+ skill directories completes in under 10 seconds with accurate metadata extraction
+- All three Python tools exit with code 0 on valid input and exit with code 1 on invalid input, enabling reliable CI/CD integration
+- Batch conversion of an entire skill domain (e.g., all `engineering-team/` skills) produces Codex-compatible output with no manual edits required for structure
+- Cross-platform skills load and function correctly in both Claude Code (via SKILL.md) and Codex CLI (via `agents/openai.yaml`) without platform-specific workarounds
+- Generated `skills-index.json` is valid JSON parseable by any standard JSON parser and includes complete metadata for every scanned skill
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- Installing, configuring, and operating OpenAI Codex CLI
+- Converting Claude Code SKILL.md files into Codex-compatible format with `agents/openai.yaml`
+- Validating skill directories for dual-platform (Claude Code + Codex CLI) compatibility
+- Building skill registry manifests (`skills-index.json`) for discovery and distribution
+
+**This skill does NOT cover:**
+- Writing the actual domain logic inside Python tool scripts (see [senior-fullstack](../senior-fullstack/SKILL.md), [code-reviewer](../code-reviewer/SKILL.md), or the relevant domain skill)
+- Cursor, Windsurf, Cline, or Aider platform-specific configuration (see [standards/](../../standards/) and root-level dotfiles like `.cursorrules`, `.windsurfrules`)
+- OpenAI API key management, billing, or rate-limit troubleshooting (out of scope -- refer to OpenAI documentation)
+- Automated testing or CI/CD pipeline authoring beyond skill validation (see [senior-devops](../senior-devops/SKILL.md) and [templates/](../../templates/))
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| [code-reviewer](../code-reviewer/SKILL.md) | Convert code-reviewer's SKILL.md to Codex format so it can run in Codex CLI | `codex_skill_converter.py` reads code-reviewer's SKILL.md and generates `agents/openai.yaml` |
+| [senior-fullstack](../senior-fullstack/SKILL.md) | Validate fullstack skill's cross-platform compatibility after adding Codex support | `cross_platform_validator.py` checks both SKILL.md frontmatter and openai.yaml structure |
+| [senior-devops](../senior-devops/SKILL.md) | Embed skill validation and index building into CI/CD pipelines | DevOps workflows call `cross_platform_validator.py --strict --json` and `skills_index_builder.py` as pipeline steps |
+| [tech-stack-evaluator](../tech-stack-evaluator/SKILL.md) | Evaluate whether Codex CLI fits a project's AI tooling stack | Tech stack evaluator references Codex CLI capabilities and configuration patterns from this skill |
+| [senior-architect](../senior-architect/SKILL.md) | Architect multi-agent skill systems that span Claude Code and Codex CLI | Architect uses cross-platform skill patterns and index manifests to plan skill distribution |
+
+---
+
+## Tool Reference
+
+### codex_skill_converter.py
+
+**Purpose:** Converts a Claude Code SKILL.md into Codex-compatible format by parsing YAML frontmatter, extracting scripts, building instructions, and generating an `agents/openai.yaml` configuration file.
+
+**Usage:**
+```bash
+python scripts/codex_skill_converter.py <skill_md> [--output-dir DIR] [--json]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skill_md` | positional | Yes | -- | Path to the Claude Code SKILL.md file to convert |
+| `--output-dir` | string | No | Same as source directory | Output directory for the converted skill. If different from source, copies `scripts/`, `references/`, `assets/`, and `SKILL.md` alongside the generated `agents/openai.yaml` |
+| `--json` | flag | No | Off (human-readable) | Output results in JSON format instead of human-readable text |
+
+**Example:**
+```bash
+python scripts/codex_skill_converter.py engineering-team/code-reviewer/SKILL.md \
+  --output-dir ./codex-ready/code-reviewer --json
+```
+
+**Output Formats:**
+- **Human-readable (default):** Displays source path, output path, status (SUCCESS/ERROR), lists of generated files, copied files, warnings, and errors
+- **JSON (`--json`):** Structured object with keys: `status`, `source`, `output_dir`, `files_generated`, `files_copied`, `warnings`, `errors`
+
+---
+
+### cross_platform_validator.py
+
+**Purpose:** Validates that a skill directory is compatible with both Claude Code and Codex CLI by running 17 checks across three categories: Claude Code compatibility, Codex CLI compatibility, and cross-platform checks.
+
+**Usage:**
+```bash
+python scripts/cross_platform_validator.py <skill_dir> [--strict] [--json]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skill_dir` | positional | Yes | -- | Path to the skill directory to validate |
+| `--strict` | flag | No | Off | Treat warnings as errors -- the skill is marked NOT COMPATIBLE if any warnings exist |
+| `--json` | flag | No | Off (human-readable) | Output results in JSON format instead of human-readable text |
+
+**Example:**
+```bash
+python scripts/cross_platform_validator.py engineering-team/codex-cli-specialist/ --strict --json
+```
+
+**Output Formats:**
+- **Human-readable (default):** Groups checks by platform (Claude Code Compatibility, Codex CLI Compatibility, Cross-Platform Checks) with `[PASS]`, `[WARN]`, `[FAIL]`, or `[INFO]` status per check, plus an overall compatibility verdict and pass/total count
+- **JSON (`--json`):** Structured object with keys: `skill_name`, `skill_path`, `compatible` (boolean), `summary` (total_checks, passed, errors, warnings, info), `checks` (array of check objects with `check`, `platform`, `passed`, `message`, `severity`)
+
+---
+
+### skills_index_builder.py
+
+**Purpose:** Scans a directory of skill subdirectories, extracts metadata from each SKILL.md, and builds a `skills-index.json` manifest for skill registries, discovery systems, and version pinning.
+
+**Usage:**
+```bash
+python scripts/skills_index_builder.py <skills_dir> [--output FILE] [--format FORMAT] [--category CATEGORY]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skills_dir` | positional | Yes | -- | Path to the directory containing skill subdirectories (each with a SKILL.md) |
+| `--output`, `-o` | string | No | stdout | Output file path. If omitted, prints to stdout |
+| `--format`, `-f` | choice | No | `json` | Output format: `json` (structured manifest) or `human` (tabular summary) |
+| `--category`, `-c` | string | No | None (all categories) | Filter skills by category (matches the `metadata.category` frontmatter field, case-insensitive) |
+
+**Example:**
+```bash
+python scripts/skills_index_builder.py ./engineering-team \
+  --output skills-index.json --format json --category engineering
+```
+
+**Output Formats:**
+- **JSON (`json`, default):** Full index object with keys: `version`, `generated_at` (UTC ISO 8601), `source_directory`, `skills_count`, `summary` (total_tools, total_references, total_size, categories, domains, platforms), `skills` (array of skill objects with name, title, description, version, license, category, domain, keywords, tools, references, assets, platforms, size_bytes, size_human, path)
+- **Human-readable (`human`):** Tabular display with source, generation timestamp, skill count, totals, category breakdown, platform support counts, and a table of skills with name, version, tool count, and platforms

@@ -642,3 +642,196 @@ Feature flags enable progressive rollouts and instant rollbacks. The release orc
 
 - `assets/release_checklist_template.md` - Copy-paste release checklist for your team
 - `assets/sample_release_data.json` - Sample input for `release_readiness_scorer.py`
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---|---|---|
+| Pre-flight checker reports "HEAD is detached" | Running from a detached HEAD state (e.g., CI checkout of a specific commit) | Check out a named branch before running: `git checkout <branch>` |
+| Changelog generator returns "No commits found in the specified range" | The `--from` ref does not exist, or the range contains only merge commits (excluded by `--no-merges`) | Verify the tag/ref exists with `git tag -l`; use `--since`/`--until` date range as an alternative |
+| Version bumper cannot parse current version | The version string in the discovered file does not conform to semver (e.g., `1.0` instead of `1.0.0`) | Ensure the version in `package.json`, `pyproject.toml`, or `VERSION` file follows `MAJOR.MINOR.PATCH` format |
+| Readiness scorer exits with code 1 despite high overall score | A single category scored below the 40-point blocker threshold, forcing a NO-GO regardless of the aggregate | Check the `BLOCKERS` section in the report output and address the failing category before re-scoring |
+| Secret scanning produces false positives on test fixtures or documentation | Pattern matching flags example tokens, placeholder keys, or JWTs in test data | Lines starting with `#` that contain "example" or "placeholder" are already skipped; move other fixtures to a non-tracked directory or add exceptions upstream |
+| Version bumper updates wrong file when multiple version sources exist | The tool uses the first discovered source as the canonical version and replaces the version string in all matching files | Ensure all version files contain the same value; remove stale version declarations from unused manifests |
+| Pre-flight fetch fails with "could not read from remote repository" | The `origin` remote is missing or SSH keys are not configured in the current environment | Run `git remote -v` to verify the remote; configure SSH agent or use HTTPS remote URL |
+
+## Success Criteria
+
+- Release cadence within 1 day of the target schedule, validated by comparing planned vs. actual release dates across the last 5 releases.
+- GO/NO-GO readiness score above 80 for at least 90% of production releases, measured by `release_readiness_scorer.py` output.
+- Zero secrets detected in pre-flight checks across all release branches, confirmed by `preflight_checker.py` exit code 0.
+- Changelog generation covers 100% of conventional commits in the release range with correct section grouping, verified by `--json` output.
+- Version bump auto-detection matches the expected semver level (major/minor/patch) for at least 95% of releases, confirmed by `--dry-run` before applying.
+- All seven readiness categories score above the 40-point blocker threshold at release time, ensuring no single-category vetoes.
+- Time from "release branch cut" to "deployment decision" under 10 minutes when running the full end-to-end pipeline script.
+
+## Scope & Limitations
+
+**This skill covers:**
+
+- Pre-release repository validation (branch sync, secrets, conflicts, conventional commits, dependency locks)
+- Semantic version detection, calculation, and multi-file updates across 6 manifest formats
+- Changelog generation from conventional commits with Keep a Changelog formatting
+- Weighted, multi-category deployment readiness scoring with GO/CONDITIONAL/NO-GO gating
+
+**This skill does NOT cover:**
+
+- Actual deployment execution or infrastructure provisioning (see `senior-devops` and `senior-cloud-architect`)
+- CI/CD pipeline creation or runner configuration (see `devops-workflow-engineer`; this skill produces data for pipelines, not the pipelines themselves)
+- Runtime monitoring, alerting, or incident response after deployment (see `incident-commander`)
+- Security vulnerability remediation; the skill detects secrets and flags CVEs but does not patch them (see `senior-security` and `senior-secops`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|---|---|---|
+| `senior-devops` | Pipeline stages consume pre-flight and readiness JSON outputs as gate conditions | `preflight_checker.py --json` and `release_readiness_scorer.py --json` feed CI/CD decision gates |
+| `senior-qa` | Test pass rates and coverage metrics populate the Tests category (25% weight) in readiness scoring | QA test report JSON maps to `tests.total_tests`, `tests.passed_tests`, `tests.coverage_percent` fields |
+| `senior-security` / `senior-secops` | Secret scan results and CVE counts feed the Security category (15% weight) | Pre-flight secret findings and `pip-audit`/`npm audit` output map to `security.secrets_found`, `security.critical_cves` |
+| `code-reviewer` | Code quality metrics (lint errors, type errors, complexity, duplication) populate the Code Quality category (20% weight) | Linter and SAST output maps to `code_quality.lint_errors`, `code_quality.type_errors`, `code_quality.complexity_violations` |
+| `incident-commander` | Rollback plan completeness feeds the Rollback Plan category (5% weight); post-deployment issues trigger rollback strategies documented in this skill | Readiness `rollback_plan` checks validate that `incident-commander` runbooks are in place before release |
+| `devops-workflow-engineer` | GitHub Actions / GitLab CI workflow files call the four Python tools as pipeline steps | Workflow YAML invokes scripts with `--json` flag; exit codes control stage pass/fail |
+
+## Tool Reference
+
+### preflight_checker.py
+
+**Purpose:** Validates repository state before release by running seven automated checks: branch sync, merge conflicts, uncommitted changes, secret scanning, gitignore validation, conventional commit compliance, and dependency lock file consistency.
+
+**Usage:**
+
+```bash
+python scripts/preflight_checker.py --repo /path/to/repo --base main
+```
+
+**Flags/Parameters:**
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `--repo` | string | `.` | Path to the git repository |
+| `--base` | string | `main` | Base branch to check against (used for sync and merge conflict detection) |
+| `--verbose`, `-v` | flag | off | Show detailed output including per-check finding lists |
+| `--json` | flag | off | Output results as JSON instead of formatted text |
+| `--commits` | integer | `20` | Number of recent commits to validate for conventional commit format |
+
+**Example:**
+
+```bash
+python scripts/preflight_checker.py --repo . --base main --verbose --json
+```
+
+**Output Formats:**
+
+- **Text (default):** Pass/fail checklist with `[PASS]`, `[FAIL]`, or `[WARN]` markers per check, plus a summary line.
+- **JSON (`--json`):** Object with `all_passed` (bool), `passed`/`failed`/`warnings` counts, and a `checks` array containing `name`, `passed`, `message`, `severity`, and `details` for each check.
+- **Exit code:** 0 if all error-severity checks pass; 1 if any error-severity check fails.
+
+---
+
+### changelog_generator.py
+
+**Purpose:** Parses git log for conventional commits, groups them by type (Added, Fixed, Changed, etc.), detects breaking changes, and generates Keep a Changelog formatted output with contributor attribution.
+
+**Usage:**
+
+```bash
+python scripts/changelog_generator.py --repo . --from v1.0.0 --to HEAD
+```
+
+**Flags/Parameters:**
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `--repo` | string | `.` | Path to git repository |
+| `--from` | string | none | Start ref: a tag, commit hash, or the literal `latest` (resolves to most recent tag) |
+| `--to` | string | `HEAD` | End ref: a tag, commit hash, or `HEAD` |
+| `--since` | string | none | Start date filter (`YYYY-MM-DD`); used instead of or alongside `--from` |
+| `--until` | string | none | End date filter (`YYYY-MM-DD`); used instead of or alongside `--to` |
+| `--output`, `-o` | string | none | Write changelog to this file path; if the file exists and contains a Keep a Changelog header, the new release is inserted after the header |
+| `--version` | string | auto-detected | Override the version label for this release entry |
+| `--json` | flag | off | Output as JSON |
+| `--format` | choice | `markdown` | Output format: `markdown` or `text` |
+| `--full` | flag | off | Generate a full changelog document including the Keep a Changelog header |
+
+**Example:**
+
+```bash
+python scripts/changelog_generator.py --repo . --from latest --to HEAD --output CHANGELOG.md --full
+```
+
+**Output Formats:**
+
+- **Markdown (default):** Keep a Changelog sections grouped by type, with commit hashes and `@author` attribution.
+- **Text (`--format text`):** Compact summary with section headings and indented entries.
+- **JSON (`--json`):** Object with `version`, `date`, `total_commits`, `breaking_changes` count, `contributors` list, and `sections` map of commit arrays.
+- **Exit code:** 0 on success; 1 if no commits found in range; 2 on input errors.
+
+---
+
+### version_bumper.py
+
+**Purpose:** Reads the current version from project manifests (package.json, pyproject.toml, setup.py, setup.cfg, Cargo.toml, VERSION file), auto-determines the bump level from conventional commits, and updates the version string across all discovered files.
+
+**Usage:**
+
+```bash
+python scripts/version_bumper.py --repo . --dry-run
+```
+
+**Flags/Parameters:**
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `--repo` | string | `.` | Path to repository |
+| `--bump` | choice | auto-detected | Bump type: `major`, `minor`, or `patch`. When omitted, the tool analyzes commits since the last tag to determine the level automatically. |
+| `--pre` | string | none | Pre-release tag to append (e.g., `alpha`, `beta`, `rc`). Produces versions like `1.3.0-rc.1`. Increments the pre-release number if the current version already has the same pre-release tag and base version. |
+| `--dry-run` | flag | off | Show what would change without modifying any files |
+| `--json` | flag | off | Output as JSON |
+
+**Example:**
+
+```bash
+python scripts/version_bumper.py --repo . --bump minor --pre beta --dry-run --json
+```
+
+**Output Formats:**
+
+- **Text (default):** Report showing current version, next version, bump type, auto-detection status, commit analysis counts, version sources found, and files updated (or files that would be updated in dry-run mode).
+- **JSON (`--json`):** Object with `current_version`, `next_version`, `bump_type`, `dry_run` (bool), `auto_detected` (bool), `commit_analysis` (map of type counts), `sources` (array with file, version, line), and `updated_files` (array of paths).
+- **Exit code:** 0 on success; 1 on version parse failure; 2 on input errors.
+
+---
+
+### release_readiness_scorer.py
+
+**Purpose:** Computes a weighted readiness score (0-100) from release checklist data across seven categories (Tests 25%, Code Quality 20%, Documentation 15%, Security 15%, Breaking Changes 10%, Dependencies 10%, Rollback Plan 5%). Outputs a GO / CONDITIONAL / NO-GO decision with category breakdowns, blocker detection, recommendations, and optional trend tracking.
+
+**Usage:**
+
+```bash
+python scripts/release_readiness_scorer.py --input release_data.json
+```
+
+**Flags/Parameters:**
+
+| Flag | Type | Default | Description |
+|---|---|---|---|
+| `--input`, `-i` | string | required | Path to release data JSON file containing category sub-objects (`tests`, `code_quality`, `documentation`, `security`, `breaking_changes`, `dependencies`, `rollback_plan`) |
+| `--history` | string | none | Path to release history JSON file. When provided, the current score is appended and trend data is included in the output. |
+| `--json` | flag | off | Output as JSON |
+| `--format` | choice | `full` | Output format: `full` (detailed report) or `summary` (single-line notification string) |
+
+**Example:**
+
+```bash
+python scripts/release_readiness_scorer.py --input release_data.json --history .release-history/scores.json --json
+```
+
+**Output Formats:**
+
+- **Full text (default):** Category breakdown table with scores, weights, weighted contributions, blocker markers, followed by blockers list, numbered recommendations, optional trend chart, and a decision box.
+- **Summary (`--format summary`):** Single line: `Release {version} scored {score}/100 ({decision}) - {n} recommendation(s)`.
+- **JSON (`--json`):** Object with `version`, `timestamp`, `overall_score`, `decision`, `has_category_blocker` (bool), `blockers` array, `recommendations` array, `categories` array (each with `score`, `weight`, `weighted_score`, `checks`, `recommendations`, `is_blocker`), and optional `trend` array when `--history` is used.
+- **Exit code:** 0 for GO or CONDITIONAL decisions; 1 for NO-GO.

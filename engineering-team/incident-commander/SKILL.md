@@ -677,3 +677,254 @@ The Incident Commander skill provides a comprehensive framework for managing inc
 The key to successful incident management is preparation, practice, and continuous learning. Use this framework as a starting point, but adapt it to your organization's specific needs, culture, and technical environment.
 
 Remember: The goal isn't to prevent all incidents (which is impossible), but to detect them quickly, respond effectively, communicate clearly, and learn continuously.
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Classifier assigns SEV1 to minor issues | Description contains high-severity keywords like "down" or "outage" in a non-critical context | Provide explicit `affected_users` percentage and `business_impact` fields to give the scoring engine more signal beyond keyword matching |
+| Timeline reconstructor reports "No valid events found" | Event timestamps are in an unsupported format or the `timestamp`/`time` field is missing | Use ISO-8601 (`YYYY-MM-DDTHH:MM:SSZ`), `YYYY-MM-DD HH:MM:SS`, Unix epoch, or other supported formats; ensure each event has a `timestamp` or `time` key |
+| PIR generator produces a shallow 5 Whys analysis | Incident data lacks detail in the `description`, `affected_services`, or `customer_impact` fields | Enrich the input JSON with specific technical details; supply a timeline file via `--timeline` so the generator can cross-reference events |
+| Gap analysis shows no gaps even though response was slow | The gap threshold defaults to 15-45 minutes depending on the tool; sparse events may all fall within one window | Increase event granularity by including communication and action events, not just alerts and resolutions |
+| Postmortem generator marks all action items as invalid | Action items in the input JSON are missing `title`, `owner`, or `deadline` fields | Ensure every action item object includes at minimum `title`, `owner`, `priority`, and `deadline` keys |
+| Severity classifier composite score seems too low | The weighted scoring dimensions (revenue, user scope, data/security, service criticality, blast radius) need structured `impact` and `signals` objects | Provide the full input schema with `impact`, `signals`, and `context` keys rather than a flat description string |
+| Timeline builder produces "No phases detected" | Events lack `type` fields that map to known phase triggers (detection, declaration, escalation, investigation, mitigation, resolution) | Set the `type` field on each event to one of the recognized event types listed in the tool's `EVENT_TYPES` constant |
+
+## Success Criteria
+
+- **MTTA under 5 minutes** -- Incident Commander assigned and war room established within 5 minutes of a SEV1 declaration, as measured by the timeline builder's phase detection
+- **MTTD under 10 minutes** -- Mean Time to Detect stays below 10 minutes for SEV1 incidents; the severity classifier and timeline tools surface detection-to-triage latency for tracking
+- **MTTR under 2 hours for SEV1** -- Mean Time to Resolve for critical incidents remains under 120 minutes, validated by postmortem generator benchmark comparisons
+- **PIR published within 48 hours** -- Post-Incident Review draft completed within 24 hours and final version published within 48 hours of resolution for SEV1/SEV2 incidents
+- **100% action item coverage** -- Every contributing factor category identified in the 5 Whys analysis has at least one corresponding action item; the postmortem generator's coverage gap detector reports zero gaps
+- **Stakeholder update cadence met** -- SEV1 updates every 15 minutes, SEV2 every 30 minutes, with no communication gaps flagged by the timeline reconstructor's gap analysis
+- **Action item completion within SLA** -- All P0 action items closed within 48 hours, P1 within 2 weeks; the postmortem generator's `is_past_deadline` check returns false for all open items
+
+## Scope & Limitations
+
+**This skill covers:**
+- Automated severity classification using keyword analysis, impact metrics, and multi-dimensional weighted scoring across five dimensions (revenue, user scope, data/security, service criticality, blast radius)
+- Incident timeline reconstruction from heterogeneous event sources (logs, alerts, Slack messages, deployment events) with automatic phase detection, gap analysis, and duration metrics
+- Post-incident review generation with four RCA frameworks (5 Whys, Fishbone, Timeline Analysis, Bow Tie) and structured action item tracking with quality scoring
+- Communication template generation for internal stakeholders, executives, status pages, and customer notifications across all severity levels
+
+**This skill does NOT cover:**
+- Real-time monitoring, alerting, or on-call scheduling -- see `senior-devops` and `senior-secops` for infrastructure monitoring and security alerting workflows
+- Automated incident remediation or runbook execution -- this skill generates runbook templates but does not execute commands against live infrastructure
+- Organizational change management or team restructuring -- see `c-level-advisor/cto-advisor` for engineering org design and leadership decision frameworks
+- Compliance-specific incident reporting (SOC 2, HIPAA, GDPR breach notification) -- see `ra-qm-team` for regulatory compliance skills with framework-specific reporting requirements
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-devops` | Monitoring alerts and deployment events feed into the timeline reconstructor as event sources; runbook templates generated here inform DevOps playbooks | Alerts/deployments -> `timeline_reconstructor.py` -> phase analysis; runbook templates -> DevOps execution |
+| `senior-secops` | Security incidents classified by `incident_classifier.py` trigger SecOps escalation paths; breach indicators auto-escalate to SEV1 via `severity_classifier.py` | Security alerts -> severity classification -> SecOps response; PIR security findings -> SecOps remediation |
+| `senior-qa` | Test failures and regression data provide incident context; PIR action items of type `prevention` feed back into QA test plans | QA regression data -> incident context; PIR action items -> QA test coverage expansion |
+| `code-reviewer` | PIR action items categorized as `immediate_fix` or `architectural` route to code review workflows; deployment-related root causes trigger review process improvements | PIR action items -> code review queue; review process gaps -> PIR lessons learned |
+| `release-orchestrator` | Deployment events from release pipelines feed timeline reconstruction; rollback decisions during incidents inform release gating criteria | Release events -> timeline builder; incident rollback data -> release gate policies |
+| `senior-architect` | Architectural root causes identified in Fishbone and Bow Tie analyses escalate to architecture review; blast radius analysis informs system design decisions | PIR architectural findings -> architecture review backlog; dependency analysis -> resilience design |
+
+## Tool Reference
+
+### incident_classifier.py
+
+**Purpose:** Analyzes incident descriptions and outputs severity levels (SEV1-SEV4), recommended response teams, initial actions, escalation paths, and communication templates. Uses keyword matching and impact scoring to classify incidents.
+
+**Usage:**
+```bash
+python scripts/incident_classifier.py --input incident.json
+echo '{"description": "Database is down", "business_impact": "high"}' | python scripts/incident_classifier.py --format text
+python scripts/incident_classifier.py --interactive
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--input`, `-i` | string | -- | Input file path (JSON format) or `-` for stdin |
+| `--format`, `-f` | choice | `json` | Output format: `json` or `text` |
+| `--interactive` | flag | off | Run in interactive mode with prompts for each field |
+| `--output`, `-o` | string | stdout | Output file path |
+
+**Input JSON fields:** `description` (required), `service`, `affected_users`, `business_impact`, `duration_minutes`. Accepts plain text via stdin (auto-parsed into structured data).
+
+**Example:**
+```bash
+echo '{"description": "API rate limits causing failures", "service": "api-gateway", "affected_users": "50%", "business_impact": "high"}' | python scripts/incident_classifier.py --format text
+```
+
+**Output Formats:**
+- **JSON** -- Full classification result with `classification`, `response`, `initial_actions`, `communication`, `timeline`, and `escalation` objects
+- **Text** -- Formatted report with severity, confidence score, recommended teams, prioritized actions, and communication details
+
+---
+
+### severity_classifier.py
+
+**Purpose:** Multi-dimensional severity classification engine that scores incidents across five weighted dimensions (revenue impact 25%, user impact scope 25%, data/security risk 20%, service criticality 15%, blast radius 15%). Generates escalation paths, SLA impact assessments, and immediate action plans.
+
+**Usage:**
+```bash
+python scripts/severity_classifier.py incident.json
+python scripts/severity_classifier.py incident.json --format markdown
+cat incident.json | python scripts/severity_classifier.py --format json
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | stdin | JSON file with incident data (reads stdin if omitted) |
+| `--format` | choice | `text` | Output format: `text`, `json`, or `markdown` |
+
+**Input JSON structure:** Requires `incident` key with title/description. Optional keys: `impact` (revenue_impact, affected_users_percentage, affected_regions, data_integrity_risk, security_breach, customer_facing, degradation_type, workaround_available), `signals` (error_rate_percentage, latency_p99_ms, alert_count, customer_reports, dependent_services, affected_endpoints), `context` (on_call configuration).
+
+**Example:**
+```bash
+echo '{"incident": {"title": "Payment API failure", "description": "Payments failing"}, "impact": {"revenue_impact": "critical", "affected_users_percentage": 60, "customer_facing": true}}' | python scripts/severity_classifier.py --format json
+```
+
+**Output Formats:**
+- **JSON** -- Complete analysis with severity_score, escalation_path, action_plan, sla_impact, and all dimension breakdowns
+- **Text** -- Human-readable report with severity badge, dimension scores, escalation chain, and action checklist
+- **Markdown** -- Formatted report with tables for dimension scores, escalation paths, and SLA impact assessment
+
+---
+
+### timeline_reconstructor.py
+
+**Purpose:** Reconstructs incident timelines from timestamped events sourced from logs, alerts, Slack messages, and deployment systems. Detects incident phases (detection, triage, escalation, mitigation, resolution, review), calculates duration metrics, and performs gap analysis to identify periods of inactivity.
+
+**Usage:**
+```bash
+python scripts/timeline_reconstructor.py --input events.json --output timeline.md
+python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis
+cat events.json | python scripts/timeline_reconstructor.py --format text
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--input`, `-i` | string | -- | Input file path (JSON format) or `-` for stdin |
+| `--output`, `-o` | string | stdout | Output file path |
+| `--format`, `-f` | choice | `json` | Output format: `json`, `text`, or `markdown` |
+| `--detect-phases` | flag | off | Enable automatic incident phase detection |
+| `--gap-analysis` | flag | off | Enable gap analysis to identify periods of inactivity |
+| `--min-events` | int | `2` | Minimum number of events required for valid timeline |
+
+**Input JSON format:** Array of event objects. Each event supports: `timestamp` or `time` (required), `source`, `type`, `message` or `description`, `severity` or `level`, `actor` or `user`, plus arbitrary metadata fields.
+
+**Example:**
+```bash
+python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown --output report.md
+```
+
+**Output Formats:**
+- **JSON** -- Structured output with `timeline` (events, phases, time range), `metrics` (durations, counts), `gap_analysis`, `narrative`, and `summary`
+- **Text** -- Human-readable timeline report with phase markers, duration calculations, and gap warnings
+- **Markdown** -- Professional report with timeline table, phase summary, and gap analysis sections
+
+---
+
+### incident_timeline_builder.py
+
+**Purpose:** Builds structured incident timelines with automatic phase detection, gap analysis (threshold: 15 minutes), communication template generation, and response metrics calculation (MTTD, MTTR). Produces professional reports with phase duration distribution charts.
+
+**Usage:**
+```bash
+python scripts/incident_timeline_builder.py incident_data.json
+python scripts/incident_timeline_builder.py incident_data.json --format json
+python scripts/incident_timeline_builder.py incident_data.json --format markdown
+cat incident_data.json | python scripts/incident_timeline_builder.py --format text
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | stdin | JSON file with incident data (reads stdin if omitted) |
+| `--format` | choice | `text` | Output format: `text`, `json`, or `markdown` |
+
+**Input JSON structure:** Requires `incident` key (id, title, severity, status, commander, service, affected_services, declared_at, resolved_at) and `events` array. Each event requires `timestamp`, `type` (one of: detection, declaration, escalation, investigation, mitigation, communication, resolution, action_item), `actor`, and `description`.
+
+**Example:**
+```bash
+python scripts/incident_timeline_builder.py incident.json --format markdown > report.md
+```
+
+**Output Formats:**
+- **JSON** -- Full analysis with incident summary, sorted timeline, detected phases, gaps, decision points, metrics (MTTD, MTTR, phase durations, gap statistics), and four generated communication templates (initial notification, status page, executive summary, customer notification)
+- **Text** -- Formatted report with incident summary, key metrics, phase breakdown, chronological timeline with decision point markers, gap warnings, and generated communications
+- **Markdown** -- Professional report with summary table, metrics bullets, phase duration table with ASCII bar chart, chronological timeline with decision point highlighting, gap analysis callouts, and event type breakdown table
+
+---
+
+### pir_generator.py
+
+**Purpose:** Generates comprehensive Post-Incident Review documents from incident data and optional timeline reconstructions. Applies four RCA frameworks (5 Whys, Fishbone/Ishikawa, Timeline Analysis, Bow Tie) and produces structured action items, lessons learned, and prevention recommendations.
+
+**Usage:**
+```bash
+python scripts/pir_generator.py --incident incident.json --timeline timeline.json --output pir.md
+python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items
+cat incident.json | python scripts/pir_generator.py --format markdown
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--incident`, `-i` | string | -- | Incident data file (JSON) or `-` for stdin |
+| `--timeline`, `-t` | string | -- | Timeline reconstruction file (JSON), optional |
+| `--output`, `-o` | string | stdout | Output file path |
+| `--format`, `-f` | choice | `markdown` | Output format: `json`, `markdown`, or `text` |
+| `--rca-method` | choice | `five_whys` | RCA framework: `five_whys`, `fishbone`, `timeline`, or `bow_tie` |
+| `--template-type` | choice | `comprehensive` | PIR document template: `comprehensive`, `standard`, or `brief` |
+| `--action-items` | flag | off | Include enhanced action item generation and categorization |
+
+**Input JSON fields:** `incident_id`, `title`, `description`, `severity`, `start_time`, `end_time`, `affected_services`, `customer_impact`, `business_impact`, `incident_commander`, `responders`, `status`.
+
+**Example:**
+```bash
+python scripts/pir_generator.py --incident incident.json --rca-method fishbone --template-type comprehensive --action-items --format markdown --output pir.md
+```
+
+**Output Formats:**
+- **JSON** -- Complete PIR data with `pir_document`, `metadata`, `incident_info`, `rca_results` (method-specific analysis), `lessons_learned`, and `action_items` (categorized as immediate_fix, process_improvement, monitoring_alerting, documentation, training, architectural, tooling)
+- **Markdown** -- Full PIR document using the selected template (comprehensive includes executive summary, timeline, RCA, what went well/wrong, lessons learned, action items, prevention measures, and appendix)
+- **Text** -- Plain text version of the PIR document
+
+---
+
+### postmortem_generator.py
+
+**Purpose:** Generates structured postmortem reports with automatic 5-Whys analysis, contributing factor classification (process, tooling, human, environment, external), action item validation with quality scoring, MTTD/MTTR benchmark comparisons, and coverage gap detection. Identifies missing action items and provides theme-based recommendations.
+
+**Usage:**
+```bash
+python scripts/postmortem_generator.py incident_data.json
+python scripts/postmortem_generator.py incident_data.json --format markdown
+python scripts/postmortem_generator.py incident_data.json --format json
+cat incident_data.json | python scripts/postmortem_generator.py
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `data_file` | positional | stdin | JSON file with incident + resolution data (reads stdin if omitted) |
+| `--format` | choice | `text` | Output format: `text`, `json`, or `markdown` |
+
+**Input JSON structure:** Requires `incident` (id, title, severity, commander, service, affected_services), `timeline` (issue_started, detected_at, declared_at, mitigated_at, resolved_at, postmortem_at -- all ISO-8601), `resolution` (root_cause, contributing_factors array, customer_impact object), `action_items` array (each with title, owner, priority, deadline, type, status), and `participants` array.
+
+**Example:**
+```bash
+python scripts/postmortem_generator.py incident.json --format markdown > postmortem.md
+```
+
+**Output Formats:**
+- **JSON** -- Full analysis with incident metadata, timeline metrics (MTTD, MTTR, time-to-mitigate, time-to-declare) with industry benchmark comparisons, contributing factor distribution by category, 5-Whys chains per factor, action item validation (quality scores 0-100, deadline tracking), coverage gap analysis, suggested missing actions, and theme-based recommendations
+- **Text** -- Human-readable report with executive summary, metrics table with benchmark deltas, contributing factors with category weights, 5-Whys chains, action items with validation status, and improvement recommendations
+- **Markdown** -- Professional postmortem document with summary table, metrics section with benchmark comparison, contributing factor breakdown, 5-Whys analysis, validated action items, coverage gaps, and strategic recommendations per systemic theme

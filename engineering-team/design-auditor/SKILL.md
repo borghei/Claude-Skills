@@ -535,3 +535,195 @@ jobs:
 
 - `assets/design_audit_template.md` — Ready-to-use audit report template
 - `assets/sample_audit_data.json` — Sample JSON input for Python tools
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `design_scorer.py` exits with "Missing category" | Input JSON is missing one or more of the 12 required category keys under `categories` | Ensure all 12 keys are present: `visual_hierarchy`, `typography`, `color_contrast`, `spacing_layout`, `interaction_states`, `navigation_ia`, `responsive`, `accessibility`, `motion_animation`, `content_microcopy`, `ai_slop`, `performance_design` |
+| Color contrast checker rejects a color value | Unsupported color format passed to `--foreground` or `--background` | Use hex (`#RGB`/`#RRGGBB`), `rgb(R,G,B)`, `hsl(H,S%,L%)`, or a named color (`black`, `white`, `red`, etc.) |
+| AI slop detector reports zero findings on a clearly templated page | Confidence threshold is set too high, filtering out valid detections | Lower `--threshold` (default `0.5`); try `0.3` for a broader sweep |
+| Design system validator finds no violations but CSS clearly has hardcoded values | Token JSON is missing the relevant category (e.g., `spacing` or `border_radii`) | Add all applicable token categories to the tokens file; the validator skips any category with no defined tokens |
+| `design_system_validator.py` reports "No CSS files found" | Path points to a directory but files use `.scss` extension | Pass `--glob "*.scss"` or `--glob "*"` to include SCSS files |
+| Scores seem inflated despite many findings | Category scores in the input JSON are set too high relative to the findings listed | Scores are author-provided (0-10); re-evaluate each category score to accurately reflect the number and severity of findings |
+| Baseline trend comparison shows unexpected "unchanged" across all categories | Baseline JSON file has the same scores as the current file | Verify you are passing the correct previous audit JSON via `--baseline`, not a copy of the current file |
+
+## Success Criteria
+
+- WCAG AA color contrast compliance rate above 95% across all foreground/background pairs in the project.
+- Design system token compliance rate at or above 90%, with zero off-system color values in production CSS.
+- AI Slop Grade of B or higher (two or fewer high-confidence AI patterns detected above the 0.5 threshold).
+- Overall Design Grade of B (80/100) or higher before release, with no Critical-priority findings remaining open.
+- Accessibility Grade of A (score 8.5+/10), confirming full WCAG 2.1 AA compliance with no perceivable or operable barriers.
+- All interactive elements have complete state coverage: default, hover, focus, active, disabled, loading, error, empty, and success.
+- Zero lorem ipsum or placeholder text residue detected by the AI slop detector in any production build.
+
+## Scope & Limitations
+
+**Covers:**
+- Visual and structural auditing across 12 weighted categories with three independent grades (Design, AI Slop, Accessibility).
+- Automated WCAG 2.1 AA/AAA color contrast validation with compliant color suggestions for failing pairs.
+- Design token compliance checking for colors, spacing, typography, radii, shadows, z-indices, transitions, and breakpoints.
+- AI-generated pattern detection in HTML markup, CSS stylesheets, inline styles, and page copy.
+
+**Does NOT cover:**
+- Runtime accessibility testing (screen reader behavior, live ARIA state changes, keyboard trap detection) — see `senior-qa` for end-to-end testing workflows.
+- Performance profiling (LCP, CLS, INP measurement) — see `senior-frontend` and `senior-devops` for Lighthouse and Core Web Vitals tooling.
+- User research or usability testing with real participants — see `product-team/ux-researcher` for research frameworks.
+- Design file inspection (Figma, Sketch, Adobe XD source files) — this skill operates on implemented HTML/CSS output only.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `senior-frontend` | Run design audit on frontend component library after build | Frontend CSS/HTML output -> `design_system_validator.py` + `color_contrast_checker.py` -> compliance gates |
+| `senior-qa` | Incorporate accessibility and design regression checks into QA pipelines | `design_scorer.py` report JSON -> QA test assertions on grade thresholds |
+| `code-reviewer` | Attach design audit findings to frontend PR reviews | `ai_slop_detector.py` + `color_contrast_checker.py` findings -> PR comment annotations |
+| `senior-devops` | Gate deployments on minimum design compliance scores in CI/CD | `design_system_validator.py` compliance percentage -> pipeline pass/fail exit code |
+| `product-team/ux-researcher` | Feed audit findings into usability research prioritization | `design_scorer.py` recommendations list -> research backlog items ranked by impact |
+| `senior-secops` | Validate that accessibility compliance meets regulatory requirements (ADA, EAA) | Accessibility Grade from `design_scorer.py` -> compliance evidence artifacts |
+
+## Tool Reference
+
+### design_scorer.py
+
+**Purpose:** Computes three independent grades (Design A-F, AI Slop A-F, Accessibility A-F) from a 12-category audit findings JSON file. Supports baseline trend comparison and prioritized fix recommendations.
+
+**Usage:**
+
+```bash
+python scripts/design_scorer.py --input findings.json
+python scripts/design_scorer.py --input findings.json --output report.json --verbose
+python scripts/design_scorer.py --input findings.json --baseline previous.json --format text
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--input` | `-i` | Yes | — | Path to audit findings JSON file |
+| `--output` | `-o` | No | stdout | Path to write report output |
+| `--baseline` | `-b` | No | — | Path to baseline findings JSON for trend comparison |
+| `--format` | `-f` | No | `json` | Output format: `json` or `text` |
+| `--verbose` | `-v` | No | off | Include detailed per-category findings in text output |
+
+**Example:**
+
+```bash
+python scripts/design_scorer.py --input audit_findings.json --baseline last_sprint.json --format text --verbose
+```
+
+**Output Formats:**
+- **JSON** (default) — Full report object with `grades`, `category_breakdown`, `coherence`, `recommendations`, `summary`, and optional `trend` data.
+- **Text** — Human-readable report with grade summary, category score table, findings summary, top issues, trend comparison (if baseline provided), and all recommendations grouped by priority.
+- **Text + Verbose** — Text report plus a detailed section listing every finding per category with priority, description, suggested fix, and impact score.
+
+---
+
+### ai_slop_detector.py
+
+**Purpose:** Analyzes HTML and CSS files for AI-generated UI patterns including stock gradients, generic hero sections, cookie-cutter layouts, buzzword-heavy copy, lorem ipsum residue, and inconsistent icon styles. Each finding receives a confidence score (0.0-1.0).
+
+**Usage:**
+
+```bash
+python scripts/ai_slop_detector.py --input page.html
+python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6
+python scripts/ai_slop_detector.py --input page.html --format text --output report.txt
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--input` | `-i` | Yes | — | Path to HTML file to analyze |
+| `--css` | `-c` | No | — | Path to external CSS file (inline and embedded styles are always extracted from HTML) |
+| `--threshold` | `-t` | No | `0.5` | Confidence threshold (0.0-1.0); findings below this are reported but counted separately |
+| `--output` | `-o` | No | stdout | Path to write report output |
+| `--format` | `-f` | No | `json` | Output format: `json` or `text` |
+
+**Example:**
+
+```bash
+python scripts/ai_slop_detector.py --input dist/index.html --css dist/styles.css --threshold 0.7 --format json
+```
+
+**Output Formats:**
+- **JSON** (default) — Report with `grade` (A-F), `summary` (total patterns, above/below threshold counts, by-category breakdown), `findings` sorted by confidence descending, and `findings_by_category` grouped into `visual`, `structural`, and `copy`.
+- **Text** — Human-readable report with grade, category totals, and each finding showing confidence bar, type, description, evidence, line number, and remediation suggestion.
+
+---
+
+### color_contrast_checker.py
+
+**Purpose:** Validates color contrast ratios against WCAG 2.1 AA and AAA standards. Supports hex, rgb, hsl, and named color formats. Can check a single pair or batch-process from a JSON file. Optionally suggests the closest compliant color alternative for failing pairs.
+
+**Usage:**
+
+```bash
+# Single pair
+python scripts/color_contrast_checker.py --foreground "#333" --background "#fff"
+
+# Batch mode
+python scripts/color_contrast_checker.py --input color_pairs.json --level AAA --suggest-fixes
+
+# With text size context
+python scripts/color_contrast_checker.py --fg "#666" --bg "#eee" --size large --format text
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--foreground` | `--fg` | Yes (single mode) | — | Foreground color (hex, rgb, hsl, or named) |
+| `--background` | `--bg` | Yes (single mode) | — | Background color (hex, rgb, hsl, or named) |
+| `--size` | — | No | `normal` | Text size context: `normal`, `large`, or `ui` |
+| `--input` | `-i` | Yes (batch mode) | — | Path to JSON file with color pairs |
+| `--level` | `-l` | No | `AA` | WCAG level to check: `AA` or `AAA` |
+| `--suggest-fixes` | `-s` | No | off | Suggest closest compliant foreground and background alternatives for failing pairs |
+| `--output` | `-o` | No | stdout | Path to write report output |
+| `--format` | `-f` | No | `json` | Output format: `json` or `text` |
+
+**Example:**
+
+```bash
+python scripts/color_contrast_checker.py --input brand-colors.json --level AA --suggest-fixes --format text
+```
+
+**Output Formats:**
+- **JSON** (default) — Report with `accessibility_grade` (A+ through F), `summary` (total pairs, passing, failing, compliance rate), `results` array with per-pair ratio, pass/fail status across all WCAG levels, and optional `suggestions` with adjusted foreground/background hex values and their new ratios.
+- **Text** — Human-readable report with grade, compliance rate, per-pair pass/fail status, ratio details, WCAG level results (AA normal, AA large, AAA normal, AAA large), suggested fixes, and a failing pairs summary.
+
+---
+
+### design_system_validator.py
+
+**Purpose:** Validates CSS files against a design token JSON definition. Detects hardcoded colors, spacing, font sizes, font families, font weights, line heights, border radii, shadows, breakpoints, z-indices, and transitions that deviate from the token set. Reports compliance percentage and suggests the closest matching token for each violation.
+
+**Usage:**
+
+```bash
+python scripts/design_system_validator.py --tokens tokens.json --input styles.css
+python scripts/design_system_validator.py --tokens tokens.json --input src/ --glob "*.scss"
+python scripts/design_system_validator.py --tokens tokens.json --input styles.css --output report.json --format text
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--tokens` | `-t` | Yes | — | Path to design tokens JSON file |
+| `--input` | `-i` | Yes | — | Path to CSS file or directory to scan |
+| `--glob` | `-g` | No | `*.css` | Glob pattern for filtering files when input is a directory (e.g., `*.scss`, `*`) |
+| `--output` | `-o` | No | stdout | Path to write report output |
+| `--format` | `-f` | No | `json` | Output format: `json` or `text` |
+
+**Example:**
+
+```bash
+python scripts/design_system_validator.py --tokens design-tokens.json --input src/styles/ --glob "*" --format text
+```
+
+**Output Formats:**
+- **JSON** (default) — Report with `compliance_grade` (A-F), `compliance_rate` percentage, `summary` (total values checked, compliant, violations), `category_breakdown` with per-category stats, `violations_by_category` grouped with property/value/line/selector/suggested token, and `all_violations` flat list.
+- **Text** — Human-readable report with grade, compliance rate, category breakdown table (total/pass/fail/rate per category), and violations listed per category with line numbers, property values, and suggested token replacements (limited to 20 per category in display).

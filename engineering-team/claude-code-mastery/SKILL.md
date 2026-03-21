@@ -265,3 +265,153 @@ Hooks run custom scripts at lifecycle events without user approval.
 | Hooks Cookbook | [references/hooks-cookbook.md](references/hooks-cookbook.md) |
 | Skill Template | [assets/skill-template.md](assets/skill-template.md) |
 | Agent Template | [assets/agent-template.md](assets/agent-template.md) |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| CLAUDE.md changes not picked up | Claude loads CLAUDE.md at session start | Start a new conversation or use `/clear` to reload configuration |
+| Skill not triggering on expected prompts | Description field in YAML frontmatter missing trigger phrases | Add quoted user phrases to the `description` field (e.g., `"optimize queries"`, `"profile memory"`) |
+| Context window exhausted mid-task | Root CLAUDE.md too large or too many files read | Run `context_analyzer.py` to audit token usage, then move domain content to child CLAUDE.md files |
+| Hook not firing after tool use | Matcher in `.claude/settings.json` does not match the tool name | Verify the `matcher` regex matches the exact tool name (e.g., `Edit\|Write`, not `edit\|write`) |
+| Subagent exceeds scope and edits unrelated files | `allowed-tools` list is too permissive | Restrict to read-only tools (`Read, Glob, Grep`) and add write tools only when necessary |
+| Scaffolder fails with "Directory already exists" | Target skill directory already present on disk | Remove or rename the existing directory, or choose a different skill name |
+| Optimizer reports low score despite good structure | Token count exceeds the default 6000 limit | Pass `--token-limit` matching your actual budget (e.g., `--token-limit 10000`) |
+
+## Success Criteria
+
+- CLAUDE.md optimizer score of 80+ on all project CLAUDE.md files
+- Root CLAUDE.md stays under 4000 tokens (verified by `claudemd_optimizer.py --token-limit 4000`)
+- Auto-loaded configuration (all CLAUDE.md files combined) consumes less than 10% of the context window
+- Every new skill scaffolded passes the optimizer with zero "critical" missing sections
+- Subagents stay within their declared `allowed-tools` scope during testing
+- Hooks execute in under 500ms to avoid perceptible delay on tool use
+- Context analyzer shows 50%+ of the context window available for source code and reasoning
+
+## Scope & Limitations
+
+**This skill covers:**
+
+- Authoring, structuring, and optimizing CLAUDE.md files for any project
+- Scaffolding new skill packages with correct directory layout and frontmatter
+- Creating and configuring Claude Code subagents with scoped tool access
+- Analyzing and managing context window token budgets across a codebase
+
+**This skill does NOT cover:**
+
+- Writing application source code or implementing business logic (see [senior-fullstack](../senior-fullstack/SKILL.md), [senior-backend](../senior-backend/SKILL.md))
+- MCP server development or custom transport protocols (see [mcp-server-builder](../../engineering/mcp-server-builder/SKILL.md))
+- Advanced prompt engineering techniques for LLM applications (see [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md))
+- CI/CD pipeline configuration or deployment automation (see [senior-devops](../senior-devops/SKILL.md), [ci-cd-pipeline-builder](../../engineering/ci-cd-pipeline-builder/SKILL.md))
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
+| [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
+| [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
+
+## Tool Reference
+
+### 1. Skill Scaffolder (`scripts/skill_scaffolder.py`)
+
+**Purpose:** Generate a complete skill package directory with SKILL.md template, starter Python script, reference document, and proper YAML frontmatter.
+
+**Usage:**
+
+```bash
+python scripts/skill_scaffolder.py <skill_name> [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skill_name` | positional | Yes | -- | Name for the skill in kebab-case (e.g., `my-new-skill`) |
+| `--domain, -d` | string | No | `engineering` | Domain category. Options: `engineering`, `marketing`, `product`, `project-management`, `c-level`, `ra-qm`, `business-growth`, `finance`, `standards`, `development-tools` |
+| `--description` | string | No | auto-generated | Brief description for YAML frontmatter, optimized for auto-discovery |
+| `--version` | string | No | `1.0.0` | Semantic version for metadata |
+| `--license` | string | No | `MIT` | License type for frontmatter |
+| `--category` | string | No | same as domain | Skill category for metadata |
+| `--output, -o` | string | No | `.` (current dir) | Parent directory for the skill folder |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/skill_scaffolder.py api-analyzer -d engineering --description "API analysis and optimization" --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints skill name, domain, version, location, directory tree, and next-steps checklist.
+- **JSON (`--json`):** Returns `{ success, path, name, domain, version, directories_created, files_created }`.
+
+---
+
+### 2. CLAUDE.md Optimizer (`scripts/claudemd_optimizer.py`)
+
+**Purpose:** Analyze a CLAUDE.md file for structure completeness, token efficiency, redundancy, and verbosity. Produces a scored report with prioritized optimization recommendations.
+
+**Usage:**
+
+```bash
+python scripts/claudemd_optimizer.py <file_path> [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `file_path` | positional | Yes | -- | Path to the CLAUDE.md file to analyze |
+| `--token-limit` | integer | No | `6000` | Maximum recommended token count for the file |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/claudemd_optimizer.py path/to/CLAUDE.md --token-limit 4000
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays score (0-100), file metrics (lines, words, tokens), section breakdown with per-section token estimates, section completeness checklist (critical/high/medium), redundancy issues, and prioritized recommendations (HIGH/MEDIUM/LOW).
+- **JSON (`--json`):** Returns `{ success, file, metrics, sections, completeness, redundancies, recommendations, score }`.
+
+---
+
+### 3. Context Analyzer (`scripts/context_analyzer.py`)
+
+**Purpose:** Scan a project directory to estimate how much of Claude Code's context window is consumed by CLAUDE.md files, skill definitions, source code, and configuration. Produces a token budget breakdown with reduction recommendations.
+
+**Usage:**
+
+```bash
+python scripts/context_analyzer.py <project_path> [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `project_path` | positional | Yes | -- | Path to the project directory to analyze |
+| `--max-depth` | integer | No | `5` | Maximum directory traversal depth |
+| `--context-window` | integer | No | `200000` | Total context window size in tokens |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/context_analyzer.py /path/to/project --max-depth 3 --context-window 200000 --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays project summary (files scanned, total tokens, auto-loaded tokens), context budget breakdown with visual bar chart, per-category breakdown (Claude Configuration, Skill Definitions, Reference Documents, Source Code, Config & Build, Documentation) with largest files listed, top 20 largest files, and prioritized recommendations.
+- **JSON (`--json`):** Returns `{ success, project_path, context_window, summary, categories, budget, largest_files, recommendations }`.

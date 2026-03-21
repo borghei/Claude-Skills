@@ -353,3 +353,165 @@ python scripts/agent_orchestrator.py agent.yaml --validate       # Validate conf
 python scripts/agent_orchestrator.py agent.yaml --visualize      # Show workflow
 python scripts/agent_orchestrator.py agent.yaml --estimate-cost  # Token estimation
 ```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Token count seems inaccurate | Character-based estimation varies by language and special characters | Use `--model` flag matching your target model; Claude uses a 3.5 char/token ratio vs 4.0 for GPT models |
+| Clarity score is low despite clear prompt | Vague-pattern detector flags common words like "analyze" or "some" even in valid contexts | Review flagged lines individually; not every match is a true issue --- focus on genuinely ambiguous instructions |
+| Few-shot examples not detected | Examples do not follow the `Input:/Output:` or `Example N:` labeling convention | Format examples with explicit `Input:` and `Output:` prefixes so the extractor can parse them |
+| RAG evaluator shows 0.0 for all metrics | Input JSON schema mismatch --- missing `question`, `content`, or `question_id` keys | Verify JSON uses the expected keys (`question`/`query`, `content`/`text`, `question_id`/`query_id`) |
+| Agent YAML parsing fails | Built-in YAML parser is simplified and cannot handle advanced syntax (anchors, multi-line blocks) | Convert config to JSON, or restructure YAML to use only simple key-value pairs and dash-prefixed lists |
+| Optimization produces minimal changes | `--optimize` only performs whitespace normalization, not semantic rewriting | Use `--analyze` first to get suggestions, then manually apply structural improvements before re-running `--optimize` |
+| Mermaid diagram renders incorrectly | More than 6 tools overflow the generated subgraph | Reduce tool count in the config or manually edit the Mermaid output to split into sub-diagrams |
+
+---
+
+## Success Criteria
+
+- **Prompt clarity score above 70/100** on all production prompts, measured via `prompt_optimizer.py --analyze`
+- **Token efficiency improved by 30%+** after applying optimization suggestions and removing redundant content
+- **RAG context relevance at or above 0.80** across evaluation sets, verified by `rag_evaluator.py`
+- **Answer faithfulness at or above 0.95** with zero unsupported claims in critical workflows
+- **Agent validation passes with zero errors** for all deployed agent configurations
+- **Cost per agent run within budget** --- estimated monthly spend confirmed via `agent_orchestrator.py --estimate-cost`
+- **Few-shot example coverage includes edge cases** --- at least 1 simple, 1 complex, and 1 negative example per prompt template
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- Static prompt analysis: token counting, clarity scoring, structure detection, and optimization suggestions
+- RAG evaluation: context relevance, answer faithfulness, groundedness, and retrieval metrics (Precision@K, ROUGE-L, MRR, NDCG)
+- Agent workflow design: configuration validation, ASCII/Mermaid visualization, and token cost estimation
+- Few-shot example extraction and management from existing prompts
+
+**This skill does NOT cover:**
+- Live LLM calls or runtime prompt testing --- all analysis is static/deterministic (see `senior-ml-engineer` for LLM integration)
+- Vector database setup or embedding generation --- RAG evaluator scores pre-retrieved contexts only (see `senior-data-engineer` for pipeline orchestration)
+- Fine-tuning, RLHF, or model training workflows (see `senior-ml-engineer` for model deployment)
+- Production monitoring, A/B test execution, or real-time drift detection (see `senior-data-scientist` for experiment design)
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-ml-engineer` | LLM integration and model deployment | Optimized prompts from this skill feed into `llm_integration_builder.py` prompt templates |
+| `senior-data-scientist` | A/B test design for prompt experiments | `experiment_designer.py` defines test parameters; this skill provides the prompt variants to compare |
+| `senior-data-engineer` | RAG pipeline orchestration | `pipeline_orchestrator.py` builds the retrieval pipeline; this skill evaluates its output quality |
+| `senior-fullstack` | End-to-end application scaffolding | Fullstack apps consume agent configs validated by `agent_orchestrator.py` |
+| `senior-security` | Prompt injection and adversarial input review | Security analysis covers the attack surface; this skill ensures prompts include defensive constraints |
+| `senior-qa` | Quality assurance for AI-powered features | QA test suites validate that optimized prompts produce consistent outputs in production |
+
+---
+
+## Tool Reference
+
+### prompt_optimizer.py
+
+**Purpose:** Static analysis tool for prompt engineering. Estimates token counts, scores clarity and structure, detects ambiguous instructions and redundant content, extracts few-shot examples, and generates optimized prompt versions.
+
+**Usage:**
+```bash
+python scripts/prompt_optimizer.py <prompt_file> [options]
+```
+
+**Parameters:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `prompt` | _(positional)_ | string | _(required)_ | Path to the prompt text file to analyze |
+| `--analyze` | `-a` | flag | off | Run full analysis (clarity, structure, issues, suggestions) |
+| `--tokens` | `-t` | flag | off | Count tokens and estimate cost only |
+| `--optimize` | `-O` | flag | off | Generate whitespace-optimized version of the prompt |
+| `--extract-examples` | `-e` | flag | off | Extract few-shot examples (Input/Output pairs) as JSON |
+| `--model` | `-m` | choice | `gpt-4` | Model for token/cost estimation. Choices: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`, `claude-3-opus`, `claude-3-sonnet`, `claude-3-haiku` |
+| `--output` | `-o` | string | _(none)_ | Write results to this file path |
+| `--json` | `-j` | flag | off | Output analysis as JSON instead of human-readable report |
+| `--compare` | `-c` | string | _(none)_ | Path to a baseline analysis JSON file for comparison |
+
+**Example:**
+```bash
+python scripts/prompt_optimizer.py prompt.txt --analyze --model claude-3-sonnet --json
+```
+
+**Output Formats:**
+- **Default (text):** Human-readable report with metrics, scores, detected sections, issues, and suggestions
+- **JSON (`--json`):** Structured `PromptAnalysis` object with keys: `token_count`, `estimated_cost`, `model`, `clarity_score`, `structure_score`, `issues`, `suggestions`, `sections`, `has_examples`, `example_count`, `has_output_format`, `word_count`, `line_count`
+- **Token-only (`--tokens`):** Single-line token count and cost estimate
+- **Examples (`--extract-examples`):** JSON array of `{input_text, output_text, index}` objects
+- **Optimized (`--optimize`):** Cleaned prompt text with normalized whitespace
+
+---
+
+### rag_evaluator.py
+
+**Purpose:** Evaluates Retrieval-Augmented Generation quality by measuring context relevance (lexical overlap, term coverage), answer faithfulness (claim-level verification), groundedness (ROUGE-L), and retrieval metrics (Precision@K, MRR, NDCG).
+
+**Usage:**
+```bash
+python scripts/rag_evaluator.py --contexts <contexts.json> --questions <questions.json> [options]
+```
+
+**Parameters:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `--contexts` | `-c` | string | _(required)_ | Path to JSON file with retrieved contexts. Expected keys per object: `question_id`/`query_id`, `content`/`text` |
+| `--questions` | `-q` | string | _(required)_ | Path to JSON file with questions and answers. Expected keys per object: `id`, `question`/`query`, `answer`/`response`, `expected`/`ground_truth` |
+| `--k` | | int | `5` | Number of top contexts to evaluate per question |
+| `--output` | `-o` | string | _(none)_ | Write detailed report to this JSON file |
+| `--json` | `-j` | flag | off | Output as JSON instead of human-readable text |
+| `--verbose` | `-v` | flag | off | Include per-question detail breakdowns in the report |
+| `--compare` | | string | _(none)_ | Path to a baseline report JSON for metric comparison |
+
+**Example:**
+```bash
+python scripts/rag_evaluator.py --contexts retrieved.json --questions eval_set.json --k 10 --verbose --output report.json
+```
+
+**Output Formats:**
+- **Default (text):** Human-readable report with summary, retrieval metrics (context relevance, Precision@K), generation metrics (faithfulness, groundedness), issues, and recommendations
+- **JSON (`--json`):** Structured `RAGEvaluationReport` object with keys: `total_questions`, `avg_context_relevance`, `avg_faithfulness`, `avg_groundedness`, `retrieval_metrics`, `coverage`, `issues`, `recommendations`, `question_details`
+- **Verbose (`--verbose`):** Adds per-question `question_details` array containing individual context scores and faithfulness breakdowns
+
+---
+
+### agent_orchestrator.py
+
+**Purpose:** Parses agent configurations (YAML or JSON), validates tool registrations and flow correctness, generates ASCII or Mermaid workflow diagrams, and estimates token costs per run and monthly spend.
+
+**Usage:**
+```bash
+python scripts/agent_orchestrator.py <config_file> [options]
+```
+
+**Parameters:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `config` | _(positional)_ | string | _(required)_ | Path to agent configuration file (YAML or JSON) |
+| `--validate` | `-V` | flag | off | Validate agent configuration (errors, warnings, tool status). Runs by default if no other action is specified |
+| `--visualize` | `-v` | flag | off | Generate workflow diagram |
+| `--format` | `-f` | choice | `ascii` | Visualization format. Choices: `ascii`, `mermaid` |
+| `--estimate-cost` | `-e` | flag | off | Estimate token usage and costs |
+| `--runs` | `-r` | int | `100` | Daily run count for monthly cost projection |
+| `--output` | `-o` | string | _(none)_ | Write output to this file path |
+| `--json` | `-j` | flag | off | Output validation and cost results as JSON |
+
+**Example:**
+```bash
+python scripts/agent_orchestrator.py agent.yaml --validate --visualize --format mermaid --output workflow.md
+```
+
+**Output Formats:**
+- **Validation (text):** Agent info, tool status with OK/WARN indicators, flow analysis (max iterations, token estimate, loop detection), errors, and warnings
+- **Validation (JSON, `--json`):** Structured `ValidationResult` object with keys: `is_valid`, `errors`, `warnings`, `tool_status`, `estimated_tokens_per_run`, `potential_infinite_loop`, `max_depth`
+- **Visualization (`--visualize`):** ASCII box-drawing diagram (default) or Mermaid flowchart (`--format mermaid`) showing the agent pattern flow and registered tools
+- **Cost estimation (`--estimate-cost`):** Token range per run, cost range per run, and projected monthly cost at the specified daily run rate

@@ -990,3 +990,327 @@ SELECT * FROM {{ ref('stg_orders') }}
 WHERE _loaded_at > (SELECT MAX(_loaded_at) FROM {{ this }})
 {% endif %}
 ```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline silently produces zero rows | Incremental watermark column has timezone mismatch between source and warehouse | Normalize all timestamps to UTC at extraction; add a row-count assertion (`dbt_utils.equal_rowcount`) after every incremental load |
+| Spark shuffle stage takes 10x longer than expected | Heavy data skew on the join key (a few keys hold most rows) | Salt the skewed key (`CONCAT(key, '_', MOD(RAND()*10,10))`) or use broadcast join for the smaller table |
+| Airflow scheduler marks DAG as "no tasks to run" | Circular or broken dependency reference in the DAG definition | Run `airflow dags list-import-errors` and fix the import; use `pipeline_orchestrator.py validate --dag <file> --type airflow` |
+| dbt run succeeds but downstream dashboards show stale data | Source freshness not checked before transformation begins | Add `dbt source freshness` as a prerequisite task in the DAG; define `freshness.warn_after` and `error_after` in `sources.yml` |
+| Kafka consumer lag grows unbounded | Consumer throughput is lower than producer rate; partition count too low | Increase partitions, scale consumer group, and batch `max.poll.records`; monitor with `data_quality_validator.py profile` on output tables |
+| Data quality validator reports false-positive anomalies | Default z-score threshold (3.0) is too tight for heavy-tailed distributions | Raise the z-threshold or switch to IQR mode with a higher multiplier; re-run `data_quality_validator.py validate --detect-anomalies` |
+| Cost estimate differs significantly from actual cloud bill | The tool uses heuristic estimates without live warehouse metadata | Treat `etl_performance_optimizer.py estimate-cost` output as a directional guide; cross-reference with the warehouse query history view |
+
+---
+
+## Success Criteria
+
+- **Pipeline SLA above 99.5%** -- fewer than 2 unplanned failures per month across all production DAGs.
+- **Data freshness under 15 minutes** for streaming pipelines and under 2 hours for batch pipelines measured at the mart layer.
+- **Data quality score >= 95%** on completeness, uniqueness, validity, consistency, and accuracy (as reported by `data_quality_validator.py`).
+- **Zero duplicate records** in all fact and dimension tables enforced by primary key merge/upsert logic and dbt uniqueness tests.
+- **Query optimization savings >= 30%** in compute cost or execution time after applying recommendations from `etl_performance_optimizer.py analyze-sql`.
+- **Schema drift detected within one pipeline run** -- all contract violations surfaced automatically before data reaches the mart layer.
+- **Incident MTTR under 30 minutes** for P1 pipeline failures with documented runbooks referencing the troubleshooting table above.
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- End-to-end batch and streaming pipeline design (Airflow, Prefect, Dagster, Kafka, Spark)
+- Data quality validation, profiling, anomaly detection, and Great Expectations suite generation
+- SQL and Spark performance analysis with actionable optimization recommendations
+- Data modeling patterns (star schema, snowflake, data vault, SCD types)
+
+**This skill does NOT cover:**
+- Machine learning model training and serving -- see `senior-ml-engineer`
+- Statistical experiment design and hypothesis testing -- see `senior-data-scientist`
+- Cloud infrastructure provisioning (Terraform, CloudFormation) -- see `senior-devops` or `aws-solution-architect`
+- Application-level security hardening and vulnerability scanning -- see `senior-secops` or `senior-security`
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-data-scientist` | Feature engineering pipelines consume cleaned data from the mart layer | Data engineer publishes curated datasets; data scientist runs experiments and feeds feature definitions back for productionization |
+| `senior-ml-engineer` | ML training pipelines depend on feature store tables built by data engineering | Data engineer maintains feature store refresh; ML engineer deploys model artifacts and monitoring |
+| `senior-devops` | CI/CD for dbt projects, Airflow deployment, and container orchestration | Data engineer defines pipeline code; DevOps manages infrastructure, Docker images, and deployment workflows |
+| `senior-architect` | Architecture reviews for data platform decisions (lakehouse vs warehouse, Lambda vs Kappa) | Data engineer proposes designs; architect validates against enterprise standards and non-functional requirements |
+| `senior-backend` | API-sourced ingestion and event-driven pipelines consume backend service events | Backend publishes events to Kafka/queues; data engineer builds consumers and transformation layers |
+| `code-reviewer` | Pipeline code reviews for Airflow DAGs, dbt models, and Spark jobs | Data engineer submits PRs; code reviewer validates SQL patterns, idempotency, and error handling |
+
+---
+
+## Tool Reference
+
+### pipeline_orchestrator.py
+
+**Purpose:** Generate pipeline configurations for Airflow, Prefect, and Dagster. Supports ETL pattern generation, dependency management, scheduling, and DAG validation.
+
+**Subcommands:**
+
+#### `generate` -- Generate pipeline code
+
+```bash
+python scripts/pipeline_orchestrator.py generate \
+  --type airflow \
+  --source postgres \
+  --destination snowflake \
+  --tables orders,customers \
+  --schedule "0 5 * * *" \
+  --mode incremental \
+  --output dags/my_pipeline.py
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--type` | `-t` | Yes | -- | Pipeline framework: `airflow`, `prefect`, `dagster` |
+| `--source` | `-s` | No | `postgres` | Source system type |
+| `--destination` | `-d` | No | `snowflake` | Destination system type |
+| `--tables` | -- | No | -- | Comma-separated list of tables to extract |
+| `--config` | `-c` | No | -- | Configuration YAML file (overrides other source/dest flags) |
+| `--output` | `-o` | No | stdout | Output file path for generated code |
+| `--name` | `-n` | No | auto-generated | Pipeline name |
+| `--schedule` | -- | No | `0 5 * * *` | Cron schedule expression |
+| `--mode` | -- | No | `incremental` | Load mode: `incremental` or `full` |
+
+**Output formats:** Generated Python code written to file or printed to stdout.
+
+#### `validate` -- Validate existing pipeline code
+
+```bash
+python scripts/pipeline_orchestrator.py validate \
+  --dag dags/my_dag.py \
+  --type airflow
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--dag` | -- | Yes | -- | Path to the DAG/flow file to validate |
+| `--type` | `-t` | Yes | -- | Framework type: `airflow`, `prefect`, `dagster` |
+
+**Output formats:** JSON validation result with `valid` (boolean), `issues` (list), and `warnings` (list). Exits with code 0 on success, 1 on failure.
+
+#### `template` -- Generate from ETL pattern template
+
+```bash
+python scripts/pipeline_orchestrator.py template \
+  --pattern extract-load \
+  --type airflow \
+  --source postgres \
+  --destination snowflake \
+  --tables orders,customers \
+  --output dags/el_pipeline.py
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `--pattern` | `-p` | Yes | -- | ETL pattern: `extract-load`, `transform`, `cdc` |
+| `--type` | `-t` | Yes | -- | Framework type: `airflow`, `prefect`, `dagster` |
+| `--source` | `-s` | Yes | -- | Source system type |
+| `--destination` | `-d` | Yes | -- | Destination system type |
+| `--tables` | -- | Yes | -- | Comma-separated list of tables |
+| `--output` | `-o` | No | stdout | Output file path |
+
+---
+
+### data_quality_validator.py
+
+**Purpose:** Comprehensive data quality validation including schema checking, data profiling, anomaly detection, Great Expectations suite generation, and data contract enforcement. Supports CSV, JSON, and JSONL inputs.
+
+**Global flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--verbose` | `-v` | Enable verbose logging output |
+
+**Subcommands:**
+
+#### `validate` -- Validate data against a schema
+
+```bash
+python scripts/data_quality_validator.py validate data.csv \
+  --schema schema.json \
+  --detect-anomalies \
+  --output report.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Input data file (CSV, JSON, JSONL) |
+| `--schema` | `-s` | No | -- | Schema file (JSON) to validate against |
+| `--output` | `-o` | No | stdout | Output report file path |
+| `--json` | -- | No | `false` | Output as JSON instead of human-readable text |
+| `--detect-anomalies` | -- | No | `false` | Also run statistical anomaly detection (z-score and IQR) |
+
+**Output formats:** Human-readable validation report (default) or JSON with per-check results, severity, failed rows, and overall quality score.
+
+#### `profile` -- Generate a statistical data profile
+
+```bash
+python scripts/data_quality_validator.py profile data.csv \
+  --output profile.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Input data file |
+| `--output` | `-o` | No | stdout | Output profile file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Per-column statistics including null counts, unique counts, min/max/mean/median/std_dev for numerics, length stats for strings, top values, and detected patterns.
+
+#### `generate-suite` -- Generate a Great Expectations suite
+
+```bash
+python scripts/data_quality_validator.py generate-suite data.csv \
+  --output expectations.json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Input data file to base expectations on |
+| `--output` | `-o` | No | stdout | Output expectations JSON file |
+
+**Output formats:** JSON expectation suite compatible with Great Expectations, derived from the data profile.
+
+#### `contract` -- Validate against a data contract
+
+```bash
+python scripts/data_quality_validator.py contract data.csv \
+  --contract contract.yaml \
+  --output report.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Input data file |
+| `--contract` | `-c` | Yes | -- | Data contract file (YAML or JSON) |
+| `--output` | `-o` | No | stdout | Output report file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Contract validation report showing SLA compliance (freshness, completeness, accuracy) and per-field results.
+
+#### `schema` -- Infer and generate a schema from data
+
+```bash
+python scripts/data_quality_validator.py schema data.csv \
+  --output schema.json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Input data file |
+| `--output` | `-o` | No | stdout | Output schema JSON file |
+
+**Output formats:** JSON schema with inferred column types, nullability, uniqueness, and detected patterns.
+
+---
+
+### etl_performance_optimizer.py
+
+**Purpose:** ETL/ELT performance analysis and optimization. Analyzes SQL queries, Spark job metrics, partition strategies, and estimates cloud warehouse costs. Provides actionable recommendations sorted by priority and severity.
+
+**Global flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--verbose` | `-v` | Enable verbose logging output |
+
+**Subcommands:**
+
+#### `analyze-sql` -- Analyze a SQL query for optimization
+
+```bash
+python scripts/etl_performance_optimizer.py analyze-sql query.sql \
+  --warehouse snowflake \
+  --stats data_stats.json \
+  --output recommendations.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | SQL file path or inline query string |
+| `--warehouse` | `-w` | No | -- | Target warehouse: `bigquery`, `snowflake`, `redshift`, `databricks` |
+| `--stats` | `-s` | No | -- | Data statistics JSON file for context-aware recommendations |
+| `--output` | `-o` | No | stdout | Output file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Prioritized list of recommendations with category, severity, title, description, current issue, recommendation, expected improvement, and implementation steps.
+
+#### `analyze-spark` -- Analyze Spark job metrics
+
+```bash
+python scripts/etl_performance_optimizer.py analyze-spark spark_metrics.json \
+  --output report.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Spark metrics JSON file (from Spark History Server or custom export) |
+| `--output` | `-o` | No | stdout | Output file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Analysis of shuffle, memory, GC pressure, skew ratio, and task failure rates with targeted recommendations.
+
+#### `optimize-partition` -- Recommend partition strategies
+
+```bash
+python scripts/etl_performance_optimizer.py optimize-partition data_stats.json \
+  --output partitions.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | Data statistics JSON file with column cardinality and distribution info |
+| `--output` | `-o` | No | stdout | Output file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Partition strategy per column including type (range, hash, list), recommended partition count, target partition size in MB, reasoning, and implementation SQL.
+
+#### `estimate-cost` -- Estimate query execution cost
+
+```bash
+python scripts/etl_performance_optimizer.py estimate-cost query.sql \
+  --warehouse snowflake \
+  --stats data_stats.json \
+  --output cost.json \
+  --json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `input` (positional) | -- | Yes | -- | SQL file path or inline query string |
+| `--warehouse` | `-w` | Yes | -- | Target warehouse: `bigquery`, `snowflake`, `redshift`, `databricks` |
+| `--stats` | `-s` | No | -- | Data statistics JSON file for more accurate estimates |
+| `--output` | `-o` | No | stdout | Output file path |
+| `--json` | -- | No | `false` | Output as JSON |
+
+**Output formats:** Cost breakdown with compute, storage, and data transfer costs in USD plus underlying assumptions.
+
+#### `template` -- Generate template files for input
+
+```bash
+python scripts/etl_performance_optimizer.py template data_stats --output stats_template.json
+python scripts/etl_performance_optimizer.py template spark_metrics --output metrics_template.json
+```
+
+| Flag | Short | Required | Default | Description |
+|------|-------|----------|---------|-------------|
+| `template` (positional) | -- | Yes | -- | Template type: `data_stats` or `spark_metrics` |
+| `--output` | `-o` | No | stdout | Output file path |
+
+**Output formats:** JSON template with placeholder values showing the expected structure for `--stats` input files or Spark metrics files.

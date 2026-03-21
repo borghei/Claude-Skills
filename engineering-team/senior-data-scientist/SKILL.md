@@ -195,3 +195,167 @@ python scripts/health_check.py
 | Experiment Design Frameworks | [references/experiment_design_frameworks.md](references/experiment_design_frameworks.md) |
 | Feature Engineering Patterns | [references/feature_engineering_patterns.md](references/feature_engineering_patterns.md) |
 | Automation Scripts | `scripts/` directory |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Sample size calculation returns unreasonably large numbers | Minimum detectable effect (MDE) is set too small relative to baseline variance | Increase MDE to a practically meaningful threshold or accept longer experiment duration |
+| Feature pipeline reports high null rates across all generated features | Source data contains upstream ingestion gaps or schema drift | Validate raw data completeness before running the pipeline; check ETL logs for failed loads |
+| Model AUC drops significantly on validation vs. training set | Overfitting due to high-cardinality features or insufficient regularization | Apply stronger regularization, reduce feature set, or increase training data volume |
+| Experiment shows significant results but large confidence intervals | Insufficient sample size or high metric variance | Extend experiment runtime, increase traffic allocation, or switch to a variance-reduction technique (CUPED) |
+| Deployed model latency exceeds P95 targets | Model complexity too high for serving infrastructure or missing batching | Quantize the model, reduce input feature count, or enable request batching on the serving layer |
+| Feature importance scores are unstable across cross-validation folds | Correlated features cause importance to shift between redundant predictors | Remove highly correlated features (>0.95) before training or use permutation importance with repeated runs |
+| Causal inference estimates show implausible treatment effects | Violation of parallel trends assumption (DiD) or poor covariate overlap (PSM) | Run diagnostic tests (placebo checks, overlap histograms) and consider alternative identification strategies |
+
+---
+
+## Success Criteria
+
+- **Model discrimination**: AUC-ROC above 0.85 on held-out test set for classification tasks
+- **Calibration quality**: Brier score below 0.15; predicted probabilities within 5% of observed rates across decile bins
+- **Feature coverage**: Feature importance analysis accounts for at least 90% of cumulative model importance
+- **Experiment power**: All A/B tests designed with statistical power of 0.80 or higher at the specified MDE
+- **Deployment readiness**: Model serving latency under 100ms at P95; error rate below 0.1%
+- **Reproducibility**: All experiments and training runs logged with full parameter tracking; results reproducible from logged artifacts
+- **Data quality**: Input feature pipelines maintain less than 2% null rate on critical features after imputation
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- End-to-end experiment design including power analysis, randomization, and post-hoc analysis
+- Feature engineering pipelines with profiling, generation, selection, and validation
+- Model training evaluation including cross-validation, calibration, and fairness checks
+- Production model deployment with monitoring, drift detection, and canary rollouts
+
+**This skill does NOT cover:**
+- Data engineering infrastructure (ETL orchestration, pipeline scheduling, data lake management) -- see `senior-data-engineer`
+- Deep learning model architecture design and training at scale (distributed GPU training, custom layers) -- see `senior-ml-engineer`
+- Prompt engineering, RAG systems, and LLM fine-tuning workflows -- see `senior-prompt-engineer`
+- Computer vision pipelines (object detection, segmentation, video processing) -- see `senior-computer-vision`
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-data-engineer` | Feature pipeline ingests data from ETL outputs; shares data quality validation patterns | Raw data stores --> feature engineering pipeline --> feature store |
+| `senior-ml-engineer` | Trained models handed off for MLOps deployment; shares model registry and serving configs | Evaluated model artifacts --> deployment pipeline --> production serving |
+| `senior-prompt-engineer` | Embedding features from LLMs feed into ML pipelines; experiment frameworks apply to prompt A/B tests | LLM embeddings --> feature vectors; experiment designs --> prompt evaluation |
+| `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --> deployment topology --> monitoring dashboards |
+| `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --> backend service layer --> client applications |
+| `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --> Kubernetes manifests --> production clusters |
+
+---
+
+## Tool Reference
+
+### experiment_designer.py
+
+**Purpose:** A/B test design, statistical power analysis, and sample size calculation. Validates experiment configuration and produces structured results with timestamps.
+
+**Usage:**
+```bash
+python scripts/experiment_designer.py --input data/ --output results/
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (directory or file containing experiment data) |
+| `--output` | `-o` | Yes | Output path (directory for results) |
+| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
+| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
+
+**Example:**
+```bash
+python scripts/experiment_designer.py -i data/experiment_config/ -o results/power_analysis/ -c config.yaml -v
+```
+
+**Output Format:** JSON to stdout with the following structure:
+```json
+{
+  "status": "completed",
+  "start_time": "2026-03-21T10:00:00.000000",
+  "processed_items": 0,
+  "end_time": "2026-03-21T10:00:01.000000"
+}
+```
+
+---
+
+### feature_engineering_pipeline.py
+
+**Purpose:** Automated feature generation, correlation analysis, and feature selection. Profiles raw data, generates candidate features, and validates for target leakage.
+
+**Usage:**
+```bash
+python scripts/feature_engineering_pipeline.py --input data/ --output features/
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (directory or file containing raw data) |
+| `--output` | `-o` | Yes | Output path (directory for generated features) |
+| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
+| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
+
+**Example:**
+```bash
+python scripts/feature_engineering_pipeline.py -i data/raw/ -o features/v2/ -v
+```
+
+**Output Format:** JSON to stdout with the following structure:
+```json
+{
+  "status": "completed",
+  "start_time": "2026-03-21T10:00:00.000000",
+  "processed_items": 0,
+  "end_time": "2026-03-21T10:00:01.000000"
+}
+```
+
+---
+
+### model_evaluation_suite.py
+
+**Purpose:** Model comparison, cross-validation, and deployment readiness checks. Validates serving latency, error rates, and confirms model outputs match offline evaluation.
+
+**Usage:**
+```bash
+python scripts/model_evaluation_suite.py --input models/ --output evaluation/
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (directory or file containing model artifacts) |
+| `--output` | `-o` | Yes | Output path (directory for evaluation results) |
+| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
+| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
+
+**Example:**
+```bash
+python scripts/model_evaluation_suite.py -i models/xgb_v3/ -o evaluation/report/ -c prod_config.yaml
+```
+
+**Output Format:** JSON to stdout with the following structure:
+```json
+{
+  "status": "completed",
+  "start_time": "2026-03-21T10:00:00.000000",
+  "processed_items": 0,
+  "end_time": "2026-03-21T10:00:01.000000"
+}
+```
+
+> **Note:** The Tools table references `scripts/statistical_analyzer.py` but this script does not yet exist in the repository. Statistical analysis workflows described in the SKILL.md can be performed using inline Python (scipy, statsmodels) as shown in Workflow 1 and Workflow 5.

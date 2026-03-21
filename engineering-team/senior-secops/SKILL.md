@@ -503,3 +503,170 @@ app.use((req, res, next) => {
 - Vanta (SOC 2 automation)
 - Drata (compliance management)
 - AWS Config (configuration compliance)
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Security scanner reports zero findings on a known-vulnerable project | Test and spec files are excluded by the false-positive filter | Rename the file to remove `test`/`spec` from the path, or review the `_is_false_positive` method |
+| Vulnerability assessor misses a CVE for a listed dependency | The package or CVE is not in the built-in `KNOWN_CVES` database | Supplement with an external feed (Snyk, OSV, `npm audit`) and use the assessor for triage prioritization |
+| Compliance checker shows `CRITICAL_GAPS` despite controls being present | Pattern-based file search did not match the specific naming convention used in your codebase | Run with `--verbose` to see which checks fail, then verify the matching code patterns or filenames |
+| `--json` output is printed to stdout even when `--output` is specified | Both flags are set correctly; this is expected behavior (summary prints to stderr-style console, JSON to file) | Redirect stdout if you need a clean pipe: `python script.py . --json --output report.json > /dev/null` |
+| Exit code is 0 despite medium-severity findings | Exit codes only trigger on critical (exit 2) or high (exit 1) severity findings | Use `--severity medium` to surface medium findings in the report, and parse the JSON output for CI/CD gating |
+| Scanner is slow on large monorepos | All files matching `SCAN_EXTENSIONS` are read in full | Narrow the target to a subdirectory, or exclude heavy vendor directories by placing them in `SKIP_DIRS` |
+| Compliance score appears inflated because many controls show `warning` | Warnings score 0.5 (partial credit) in the weighted calculation | Treat any control below `passed` as requiring remediation; filter the JSON output for `status != "passed"` |
+
+---
+
+## Success Criteria
+
+- **Zero critical CVEs in production** -- all critical-severity vulnerabilities are patched or mitigated before deployment.
+- **Mean time to patch under 48 hours** -- critical and high-severity findings are remediated within two business days of detection.
+- **Compliance score at or above 90%** -- the compliance checker returns `COMPLIANT` status for every applicable framework before each release.
+- **100% of secrets externalized** -- the security scanner reports zero hardcoded secrets (API keys, passwords, private keys) across the entire codebase.
+- **CI/CD security gate pass rate above 95%** -- fewer than 5% of pull requests are blocked by security scans, indicating proactive secure coding practices.
+- **Incident response time under 15 minutes** -- security incidents are acknowledged and an incident commander assigned within the Phase 1 detection window.
+- **Quarterly dependency audit cadence** -- the vulnerability assessor is executed against all ecosystems (npm, Python, Go) at least once per quarter with results documented.
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+
+- Static analysis of source code for common vulnerability classes (secrets, injection, XSS, command injection, path traversal).
+- Dependency vulnerability assessment against a built-in CVE database for npm, Python, and Go ecosystems.
+- Compliance verification for SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR.
+- Security workflow orchestration including CI/CD gating, CVE triage, and incident response procedures.
+
+**This skill does NOT cover:**
+
+- Dynamic application security testing (DAST) or runtime analysis -- use OWASP ZAP or Burp Suite for live scanning.
+- Infrastructure-as-code security (Terraform, CloudFormation misconfigurations) -- see the `senior-devops` skill for IaC hardening.
+- Container image scanning or Kubernetes admission control -- see the `senior-devops` skill or use Trivy directly.
+- Penetration testing execution or red-team operations -- these require specialized tooling and authorized human operators.
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-devops` | Infrastructure hardening and CI/CD pipeline configuration | Security scan results feed into deployment gates; DevOps provides container and IaC scanning |
+| `senior-backend` | Secure coding patterns and input validation in server-side code | SecOps scanner findings drive backend remediation; backend applies parameterized queries and output encoding |
+| `senior-qa` | Security test cases and regression verification after patches | Vulnerability reports generate QA test cases; QA confirms fixes do not introduce regressions |
+| `senior-architect` | Threat modeling, defense-in-depth design, and zero-trust architecture | Compliance gaps inform architecture decisions; architect provides security design patterns |
+| `code-reviewer` | Security-focused code review and pre-merge analysis | Scanner findings prioritize review focus areas; reviewer enforces secure coding standards |
+| `senior-fullstack` | End-to-end security across frontend and API layers (XSS, CSRF, auth) | SecOps identifies frontend and API vulnerabilities; fullstack applies framework-level mitigations |
+
+---
+
+## Tool Reference
+
+### security_scanner.py
+
+**Purpose:** Scan source code for security vulnerabilities including hardcoded secrets, SQL injection, XSS, command injection, and path traversal patterns.
+
+**Usage:**
+
+```bash
+python scripts/security_scanner.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | *(required)* | Directory or file to scan |
+| `--severity` | `-s` | choice | `low` | Minimum severity to report: `critical`, `high`, `medium`, `low`, `info` |
+| `--verbose` | `-v` | flag | off | Print each file path as it is scanned |
+| `--json` | -- | flag | off | Output results as JSON (to stdout or combined with `--output`) |
+| `--output` | `-o` | string | -- | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Scan current directory for high and critical findings, export JSON
+python scripts/security_scanner.py . --severity high --json --output security-report.json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints a summary table with severity counts and the top 5 findings including file path, line number, and description.
+- **JSON (`--json`):** Full structured report with `status`, `files_scanned`, `scan_duration_seconds`, `total_findings`, `severity_counts`, and a `findings` array. Each finding includes `rule_id`, `severity`, `category`, `title`, `description`, `file_path`, `line_number`, `code_snippet`, and `recommendation`.
+
+**Exit Codes:** `0` = no critical/high findings, `1` = high-severity findings present, `2` = critical-severity findings present.
+
+---
+
+### vulnerability_assessor.py
+
+**Purpose:** Scan project dependency manifests (package.json, requirements.txt, pyproject.toml, package-lock.json, go.mod) for known CVEs and calculate an overall risk score.
+
+**Usage:**
+
+```bash
+python scripts/vulnerability_assessor.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | *(required)* | Directory containing dependency files |
+| `--severity` | `-s` | choice | `low` | Minimum severity to report: `critical`, `high`, `medium`, `low` |
+| `--verbose` | `-v` | flag | off | Print each dependency file path as it is scanned |
+| `--json` | -- | flag | off | Output results as JSON (to stdout or combined with `--output`) |
+| `--output` | `-o` | string | -- | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Assess dependencies, show only critical vulnerabilities
+python scripts/vulnerability_assessor.py /path/to/project --severity critical --verbose
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints a summary with files scanned, packages scanned, risk score (0-100), risk level (NONE/LOW/MEDIUM/HIGH/CRITICAL), severity counts, and the top 5 vulnerabilities sorted by CVSS score.
+- **JSON (`--json`):** Full structured report with `status`, `target`, `files_scanned`, `packages_scanned`, `scan_duration_seconds`, `total_vulnerabilities`, `risk_score`, `risk_level`, `severity_counts`, and a `vulnerabilities` array. Each vulnerability includes `cve_id`, `package`, `installed_version`, `fixed_version`, `severity`, `cvss_score`, `description`, `ecosystem`, and `recommendation`.
+
+**Exit Codes:** `0` = no critical/high vulnerabilities, `1` = high-severity vulnerabilities present, `2` = critical-severity vulnerabilities present.
+
+---
+
+### compliance_checker.py
+
+**Purpose:** Verify security compliance against SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR by scanning project files for evidence of required controls.
+
+**Usage:**
+
+```bash
+python scripts/compliance_checker.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | *(required)* | Directory to check for compliance |
+| `--framework` | `-f` | choice | `all` | Compliance framework: `soc2`, `pci-dss`, `hipaa`, `gdpr`, `all` |
+| `--verbose` | `-v` | flag | off | Print each framework check as it runs |
+| `--json` | -- | flag | off | Output results as JSON (to stdout or combined with `--output`) |
+| `--output` | `-o` | string | -- | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Check SOC 2 compliance and export report
+python scripts/compliance_checker.py . --framework soc2 --json --output soc2-report.json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints compliance score as a percentage with level (COMPLIANT/PARTIALLY_COMPLIANT/NON_COMPLIANT/CRITICAL_GAPS), a passed/failed/warning/N/A breakdown, and the top 5 failed controls with severity and remediation recommendations.
+- **JSON (`--json`):** Full structured report with `status`, `target`, `framework`, `scan_duration_seconds`, `compliance_score`, `compliance_level`, `summary` (passed/failed/warnings/not_applicable/total), and a `controls` array. Each control includes `control_id`, `framework`, `category`, `title`, `description`, `status`, `evidence`, `recommendation`, and `severity`.
+
+**Exit Codes:** `0` = compliant (90%+ score), `1` = non-compliant (50-69% score), `2` = critical gaps (<50% score).

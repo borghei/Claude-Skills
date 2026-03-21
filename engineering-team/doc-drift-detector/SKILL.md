@@ -457,6 +457,211 @@ Add staleness scoring to release checklists. Block releases if documentation sco
 
 ---
 
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `drift_analyzer.py` reports zero docs found | Repository has non-standard doc extensions or docs are in ignored directories (e.g., `node_modules`, `dist`) | Use `--doc-patterns "*.md,*.rst,*.txt"` to explicitly specify extensions |
+| Staleness scores are unexpectedly low | Docs reference files that were reorganized or moved to new directories | Run `link_checker.py` first to identify broken references, fix them, then re-score |
+| API validator finds no source signatures | Source path points to a non-Python directory or all functions are `_`-prefixed private | Verify `source_path` contains `.py` files; add `--include-private` if the API surface uses private names |
+| Link checker flags valid anchors as broken | Heading text contains special characters, inline code, or emoji that alter the slug | Compare the expected slug (lowercase, special chars stripped, spaces to hyphens) against the actual heading text |
+| Git history comparison shows no changes | Shallow clone lacks full commit history (common in CI) | Clone with `fetch-depth: 0` or pass `--scope` to narrow the analysis window |
+| External URL checks hang or time out | Target servers are slow or block automated HEAD requests | Omit `--check-external` for local-only validation, or run external checks in a separate non-blocking job |
+| Drift report marks everything as `[MANUAL]` | Most detected drift is semantic or architectural, not auto-fixable | This is expected for large refactors; focus on `[AUTO]` and `[SEMI]` items first, then triage `[MANUAL]` items by severity |
+
+---
+
+## Success Criteria
+
+- **Zero stale docs older than 90 days** -- every documentation file has been updated within the last 90 days relative to its associated code changes
+- **Aggregate staleness score above 80/100** -- the repository-wide freshness score stays in the "Good" or "Excellent" range
+- **Link integrity above 99%** -- fewer than 1% of internal links (file references, anchors, cross-document links) are broken
+- **API doc coverage above 95%** -- at least 95% of public functions and classes have corresponding entries in API documentation
+- **Zero high-severity drift issues in CI** -- pull requests with high or critical drift are blocked before merge
+- **Version string accuracy at 100%** -- every version reference in documentation matches the current release tag or package manifest
+- **Drift report turnaround under 60 seconds** -- full drift analysis completes in under one minute for repositories with up to 500 documentation files
+
+---
+
+## Scope & Limitations
+
+**Covers:**
+
+- Detection of documentation drift against git history for any git repository
+- AST-based validation of Python API documentation (function signatures, class definitions, parameters, return types)
+- Internal link validation including local files, markdown anchors, cross-document anchors, images, and case-sensitivity checks
+- Multi-dimensional staleness scoring with configurable weights and CI/CD threshold enforcement
+
+**Does NOT cover:**
+
+- Non-Python source code API validation -- the AST-based validator only parses Python; for TypeScript, Go, Rust, or Java APIs, use language-specific doc generators and pair with the link checker
+- External URL uptime monitoring -- `--check-external` performs one-shot HEAD requests but does not provide continuous monitoring; use the **senior-devops** skill for uptime dashboards
+- Automatic documentation rewriting -- tools classify issues as `[AUTO]`, `[SEMI]`, or `[MANUAL]` but do not generate replacement text; use the **code-reviewer** skill for AI-assisted doc suggestions
+- Content quality or readability assessment -- staleness scoring measures freshness and structural completeness, not prose quality; see the **standards/communication** library for writing guidelines
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **code-reviewer** | Include drift report in PR review comments | `drift_analyzer.py --json` output feeds into review checklists as a documentation health section |
+| **senior-devops** | Add staleness gate to CI/CD pipelines | `doc_staleness_scorer.py --threshold 50` returns exit code 1 on failure, blocking deploys |
+| **senior-qa** | Documentation quality as part of QA acceptance | `link_checker.py --json` output merges into QA dashboards alongside test coverage metrics |
+| **senior-fullstack** | Validate generated project docs post-scaffold | Run `api_doc_validator.py` against scaffolded `docs/` directory to confirm generated API docs match source |
+| **senior-secops** | Audit security documentation currency | `drift_analyzer.py --scope security/` detects when security docs fall behind policy changes |
+| **senior-architect** | Architecture decision record (ADR) freshness | `doc_staleness_scorer.py --required-sections "Status,Context,Decision,Consequences"` validates ADR completeness |
+
+---
+
+## Tool Reference
+
+### drift_analyzer.py
+
+**Purpose:** Scan a git repository for documentation that has fallen out of sync with code. Maps documentation files to their associated code directories, compares git modification dates, detects renamed files, version string drift, broken references, and structural gaps. Classifies every issue by category, severity, and fix type.
+
+**Usage:**
+
+```bash
+python scripts/drift_analyzer.py <repo_path> [options]
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `repo_path` | positional | *(required)* | Path to the git repository to analyze |
+| `--json` | flag | off | Output the full drift report as JSON |
+| `--min-severity` | choice | `low` | Minimum severity to include in report. Choices: `critical`, `high`, `medium`, `low`, `info` |
+| `--scope` | string | `""` (all) | Limit code analysis to a subdirectory (e.g., `src/`) |
+| `--doc-patterns` | string | `*.md,*.rst,*.txt,*.adoc` | Comma-separated file patterns for documentation discovery |
+
+**Example:**
+
+```bash
+python scripts/drift_analyzer.py /path/to/repo --min-severity medium --scope src/ --json
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Grouped by severity with `[AUTO]`/`[SEMI]`/`[MANUAL]` fix-type tags, category labels, and a fix-type summary
+- **JSON** (`--json`): Structured object with `repository`, `scan_date`, `summary` (counts by severity, category, fix type), and `issues` array
+
+**Exit Codes:** 0 = no high/critical issues, 1 = high or critical issues found, 2 = tool error (invalid path, not a git repo)
+
+---
+
+### doc_staleness_scorer.py
+
+**Purpose:** Score documentation freshness on a weighted 0-100 scale across five dimensions: last updated, code-doc alignment, link health, completeness, and accuracy. Supports CI/CD threshold gates and README-focused analysis.
+
+**Usage:**
+
+```bash
+python scripts/doc_staleness_scorer.py <repo_path> [options]
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `repo_path` | positional | *(required)* | Path to the git repository to score |
+| `--json` | flag | off | Output the full scoring report as JSON |
+| `--threshold` | float | *(none)* | Fail with exit code 1 if aggregate score falls below this value |
+| `--readme-focus` | flag | off | Only score README files (filenames starting with `readme`) |
+| `--required-sections` | string | `Installation,Usage,API,Contributing,License` | Comma-separated section names for completeness scoring |
+| `--quiet` | flag | off | Only print the aggregate score number (no report) |
+| `--weight-updated` | float | `0.20` | Weight for the "last updated" dimension |
+| `--weight-alignment` | float | `0.30` | Weight for the "code-doc alignment" dimension |
+| `--weight-links` | float | `0.15` | Weight for the "link health" dimension |
+| `--weight-completeness` | float | `0.20` | Weight for the "completeness" dimension |
+| `--weight-accuracy` | float | `0.15` | Weight for the "accuracy" dimension |
+
+**Example:**
+
+```bash
+python scripts/doc_staleness_scorer.py /path/to/repo --threshold 60 --readme-focus --quiet
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Aggregate score with label, per-file score table sorted worst-first, and dimension breakdown with ASCII bars for the bottom 5 files
+- **JSON** (`--json`): Structured object with `aggregate_score`, `aggregate_label`, `total_documents`, and `documents` array (each with `total_score`, `label`, and per-dimension scores/details)
+- **Quiet** (`--quiet`): Single line with the aggregate score (e.g., `72.3`)
+
+**Exit Codes:** 0 = score above threshold (or no threshold set), 1 = score below threshold, 2 = tool error
+
+---
+
+### api_doc_validator.py
+
+**Purpose:** Extract function and class signatures from Python source files using the `ast` module and compare them against API documentation in markdown files. Detects undocumented items, phantom documentation for removed code, parameter mismatches, and deprecated items.
+
+**Usage:**
+
+```bash
+python scripts/api_doc_validator.py <source_path> <doc_path> [options]
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `source_path` | positional | *(required)* | Path to a Python source file or directory |
+| `doc_path` | positional | *(required)* | Path to API documentation file (`.md`) or directory |
+| `--json` | flag | off | Output the validation report as JSON |
+| `--recursive` | flag | off | Recursively scan the doc directory for markdown files |
+| `--include-private` | flag | off | Include `_`-prefixed private functions and classes in validation |
+
+**Example:**
+
+```bash
+python scripts/api_doc_validator.py /path/to/src /path/to/docs/ --recursive --include-private --json
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Summary counts (source signatures, documented items, issues), then issues grouped by severity with type tags, source/doc file locations, and a summary-by-type table
+- **JSON** (`--json`): Structured object with `summary` (counts by type and severity) and `issues` array (each with `type`, `severity`, `name`, file/line references, and `description`)
+
+**Exit Codes:** 0 = no high-severity issues, 1 = high-severity issues found (e.g., documented items missing from source), 2 = tool error
+
+---
+
+### link_checker.py
+
+**Purpose:** Scan markdown files for every link type (local files, anchors, cross-document anchors, images, HTML links, reference-style links) and validate them against the filesystem and document headings. Optionally validates external URLs via HTTP HEAD requests. Also detects duplicate heading anchors.
+
+**Usage:**
+
+```bash
+python scripts/link_checker.py <path> [options]
+```
+
+**Parameters:**
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `path` | positional | *(required)* | File or directory to check (single `.md` file or directory for recursive scan) |
+| `--json` | flag | off | Output the link check report as JSON |
+| `--broken-only` | flag | off | Only show broken links in the report (omit valid links from output) |
+| `--check-external` | flag | off | Also validate external URLs via HTTP HEAD requests (slower, makes network requests) |
+
+**Example:**
+
+```bash
+python scripts/link_checker.py /path/to/repo --broken-only --json
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Summary counts (total, valid, broken, skipped, duplicate anchors), broken links grouped by source file with line numbers and error messages, duplicate anchor list, and link-type breakdown table
+- **JSON** (`--json`): Structured object with `summary` (counts), `broken_links` array (each with source file, line, text, target, type, error), `duplicate_anchors` map, and optionally `all_links` (when `--broken-only` is not set)
+
+**Exit Codes:** 0 = no broken links and no duplicate anchors, 1 = broken links or duplicate anchors found, 2 = tool error
+
+---
+
 **Last Updated:** 2026-03-18
 **Version:** 2.0.0
 **Tools:** 4 Python CLI tools, 0 external dependencies

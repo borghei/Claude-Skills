@@ -433,3 +433,140 @@ See: [references/cryptography-implementation.md](references/cryptography-impleme
 | [senior-secops](../senior-secops/) | Security monitoring, incident response |
 | [senior-backend](../senior-backend/) | Secure API development |
 | [senior-architect](../senior-architect/) | Security architecture decisions |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Secret scanner reports false positives on test fixtures | Test files contain example tokens that match secret patterns | Add test directories to the exclude list or filter by `--severity critical` to focus on confirmed secrets |
+| Threat model returns all threats instead of component-specific ones | Component name does not match any entry in the component mapping | Use a recognized component keyword (e.g., "authentication", "api", "database", "network", "storage") or a composite like "web application" |
+| DREAD scores seem inflated for low-likelihood threats | DREAD factors are derived from likelihood and severity with fixed multipliers | Interpret DREAD as a relative ranking within the report, not an absolute metric; adjust risk acceptance thresholds accordingly |
+| Secret scanner misses secrets in non-standard file extensions | Only files whose extensions appear in the pattern's `file_extensions` list are scanned | Rename config files to use a recognized extension (e.g., `.conf`, `.env`, `.yml`) or extend the pattern database |
+| Threat model does not cover custom component types | The `COMPONENT_MAPPING` dictionary has a fixed set of keywords | Add new entries to `COMPONENT_MAPPING` in `threat_modeler.py` for project-specific components |
+| Secret scanner exits with code 1 even after fixing secrets | Previous scan results are cached or the fix introduced a new match | Re-run the scanner after every fix; exit code 1 triggers whenever any critical or high finding remains |
+| Security headers audit produces incomplete results | Application is behind a reverse proxy that strips or overrides headers | Test headers at the edge (CDN/load balancer) rather than at the application origin |
+
+---
+
+## Success Criteria
+
+- Zero critical- or high-severity secrets detected by `secret_scanner.py` across the entire codebase before every release.
+- Threat model coverage above 90%: every component in the data flow diagram has a completed STRIDE analysis with documented mitigations.
+- All OWASP Top 10 vulnerability categories addressed in the security architecture with at least one compensating control per category.
+- Mean time to remediate critical vulnerabilities under 48 hours from discovery to verified fix.
+- 100% of authentication and authorization code paths reviewed with the Secure Code Review Checklist before merge.
+- Incident response exercises (tabletop or simulated) conducted at least quarterly with post-mortem documentation.
+- DREAD risk scores for all remaining accepted risks reviewed and re-validated every 90 days.
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- Application-level security: threat modeling, secure code review, secret detection, and vulnerability assessment for web applications and APIs.
+- Security architecture design: defense-in-depth layering, Zero Trust patterns, authentication/authorization model selection, and encryption strategy.
+- Incident response planning: severity classification, containment procedures, post-mortem frameworks, and runbook creation.
+- Compliance mapping: OWASP ASVS, CIS Benchmarks, NIST CSF, PCI-DSS, HIPAA, and SOC 2 alignment at the application layer.
+
+**This skill does NOT cover:**
+- Infrastructure and cloud security hardening (see [senior-devops](../senior-devops/) and [aws-solution-architect](../aws-solution-architect/)).
+- Runtime security monitoring, SIEM rule authoring, and SOC operations (see [senior-secops](../senior-secops/)).
+- Full regulatory compliance programs, audit evidence collection, and certification processes (see [ra-qm-team](../../ra-qm-team/)).
+- Network penetration testing tooling, red team operations, and physical security assessments.
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| [senior-devops](../senior-devops/) | CI/CD pipeline security gates | Threat model mitigations feed into pipeline hardening requirements; secret scanner runs as a pre-commit or CI step |
+| [senior-secops](../senior-secops/) | Security monitoring and incident response | Threat model outputs define detection rules; incident severity levels align with SecOps alerting tiers |
+| [senior-backend](../senior-backend/) | Secure API development | Secure code review checklist applied to backend PRs; authentication pattern selection guides API auth implementation |
+| [senior-architect](../senior-architect/) | Security architecture decisions | Defense-in-depth layers and Zero Trust principles inform architecture design reviews; STRIDE results feed architecture risk register |
+| [senior-qa](../senior-qa/) | Security testing integration | Vulnerability assessment findings become QA regression test cases; OWASP Top 10 mapping drives security test coverage |
+| [ra-qm-team](../../ra-qm-team/) | Compliance framework alignment | Security controls mapped to SOC 2, PCI-DSS, and HIPAA requirements; threat model documentation satisfies audit evidence needs |
+
+---
+
+## Tool Reference
+
+### threat_modeler.py
+
+**Purpose:** Performs STRIDE threat analysis on system components with DREAD risk scoring, mitigation recommendations, and structured reporting.
+
+**Usage:**
+
+```bash
+python threat_modeler.py --component "User Authentication"
+python threat_modeler.py --component "API Gateway" --assets "user_data,tokens" --json
+python threat_modeler.py --component "Database" --output report.txt
+python threat_modeler.py --interactive
+python threat_modeler.py --list-threats
+```
+
+**Flags:**
+
+| Flag | Short | Type | Required | Description |
+|------|-------|------|----------|-------------|
+| `--component` | `-c` | string | Yes (unless `--interactive` or `--list-threats`) | Component to analyze (e.g., "User Authentication", "API Gateway", "Database") |
+| `--assets` | `-a` | string | No | Comma-separated list of assets to protect |
+| `--json` | | flag | No | Output report as JSON instead of text |
+| `--interactive` | `-i` | flag | No | Run guided interactive threat modeling session |
+| `--list-threats` | `-l` | flag | No | List all threats in the built-in database |
+| `--output` | `-o` | string | No | Write report to file path instead of stdout |
+
+**Example:**
+
+```bash
+$ python threat_modeler.py --component "API Gateway" --json --output api-threats.json
+Report written to api-threats.json
+```
+
+**Output Formats:**
+- **Text (default):** Structured report grouped by STRIDE category with risk scores, DREAD ratings, attack vectors, and mitigations.
+- **JSON (`--json`):** Machine-readable object containing `component`, `analysis_date`, `summary` (counts by risk level), and `threats` array with full DREAD breakdown per threat.
+
+---
+
+### secret_scanner.py
+
+**Purpose:** Detects hardcoded secrets, API keys, credentials, and private keys in source code. Supports 20+ secret patterns across cloud providers (AWS, GCP, Azure), authentication tokens (GitHub, GitLab, Slack, Stripe, Twilio, SendGrid), cryptographic keys, and generic credential patterns. Exits with code 1 when critical or high findings are present, making it CI/CD-ready.
+
+**Usage:**
+
+```bash
+python secret_scanner.py /path/to/project
+python secret_scanner.py /path/to/file.py
+python secret_scanner.py /path/to/project --format json --output report.json
+python secret_scanner.py /path/to/project --severity critical
+python secret_scanner.py --list-patterns
+```
+
+**Flags:**
+
+| Flag | Short | Type | Required | Description |
+|------|-------|------|----------|-------------|
+| `path` | | positional | Yes (unless `--list-patterns`) | File or directory path to scan |
+| `--format` | `-f` | choice: `text`, `json` | No | Output format (default: `text`) |
+| `--output` | `-o` | string | No | Write report to file path instead of stdout |
+| `--list-patterns` | `-l` | flag | No | List all detection patterns with IDs and severity |
+| `--severity` | `-s` | choice: `critical`, `high`, `medium`, `low` | No | Minimum severity threshold to report (includes all levels from critical down to the specified level) |
+
+**Example:**
+
+```bash
+$ python secret_scanner.py ./src --severity high --format json
+{
+  "target": "./src",
+  "scan_date": "2026-03-21T10:30:00",
+  "summary": { "total": 2, "by_severity": { "critical": 1, "high": 1, "medium": 0, "low": 0 } },
+  "findings": [ ... ]
+}
+```
+
+**Output Formats:**
+- **Text (default):** Severity-grouped report showing pattern ID, file path with line number, masked match text, and remediation recommendation.
+- **JSON (`--format json`):** Machine-readable object with `target`, `scan_date`, `summary` (counts by severity), and `findings` array. Each finding includes `pattern_id`, `name`, `severity`, `file_path`, `line_number`, `matched_text` (masked), and `recommendation`.

@@ -529,3 +529,234 @@ trtexec --loadEngine=model.engine --batch=1 --iterations=1000 --avgRuns=100
 - **Optimization Guide**: `references/object_detection_optimization.md`
 - **Deployment Guide**: `references/production_vision_systems.md`
 - **Scripts**: `scripts/` directory for automation tools
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Model exports to ONNX but TensorRT conversion fails | Unsupported ONNX opset version or dynamic shapes | Pin `--opset_version 17`, replace dynamic axes with fixed sizes, and run `python -m onnxsim model.onnx model_sim.onnx` before TensorRT conversion |
+| mAP drops significantly after INT8 quantization | Calibration dataset is too small or unrepresentative | Use at least 500 representative images from the training distribution for calibration; verify per-class AP to find affected classes |
+| Training loss plateaus early without convergence | Learning rate too high, insufficient augmentation, or frozen backbone layers | Reduce `lr0` by 10x, enable mosaic/mixup augmentation, and unfreeze backbone (`--freeze None`) after initial warmup |
+| CUDA out-of-memory during training | Batch size or image resolution too large for available VRAM | Halve `--batch`, reduce `--imgsz` to 512, enable `--amp True` for mixed precision, or use gradient accumulation via `--nbs` |
+| High false-positive rate on small objects | Default anchor sizes miss small targets; NMS threshold too permissive | Use SAHI (Slicing Aided Hyper Inference), add FPN levels for small scales, and tighten `conf` threshold to 0.4+ |
+| Annotation format conversion produces empty labels | Coordinate system mismatch (absolute vs normalized) or category ID mapping errors | Run `dataset_pipeline_builder.py validate` before and after conversion; check that bounding box values are within image dimensions |
+| Inference FPS is lower than expected on GPU | CPU-bound pre/post-processing bottleneck, no batch processing, or missing CUDA warmup | Profile with `--benchmark --warmup 10`, move pre-processing to GPU (torchvision transforms), and ensure `torch.cuda.synchronize()` is called correctly |
+
+## Success Criteria
+
+- **Detection accuracy**: mAP@50 above 0.70 and mAP@50:95 above 0.50 on the target validation set
+- **Inference latency**: P99 latency under 50ms per frame at batch size 1 on target hardware for real-time deployments
+- **Throughput**: Sustained processing above 30 FPS for real-time pipelines, above 10 FPS for high-accuracy pipelines
+- **Model size**: Optimized model under 50MB for edge deployment, under 200MB for cloud GPU deployment
+- **Quantization fidelity**: Less than 2% mAP drop when moving from FP32 to FP16; less than 3% drop for INT8
+- **Dataset quality**: Class imbalance ratio no worse than 1:10 between least and most frequent classes; zero corrupted images; annotation coverage above 95% of images
+- **Deployment reliability**: ONNX model passes `onnx.checker.check_model()` validation; TensorRT engine builds without warnings on target GPU architecture
+
+## Scope & Limitations
+
+**This skill covers:**
+
+- End-to-end object detection and segmentation pipeline design (data preparation through production deployment)
+- Training configuration generation for Ultralytics YOLO, Detectron2, and MMDetection frameworks
+- Model optimization and export to ONNX, TensorRT, OpenVINO, and CoreML runtimes
+- Dataset format conversion (COCO, YOLO, Pascal VOC, CVAT), splitting, validation, and augmentation configuration
+
+**This skill does NOT cover:**
+
+- Generative vision tasks (image generation, style transfer, super-resolution) -- see dedicated generative AI skills
+- 3D reconstruction, SLAM, or point cloud processing beyond basic depth estimation
+- Medical imaging regulatory compliance (DICOM, FDA 510(k)) -- see `ra-qm-team/` compliance skills
+- Real-time video streaming infrastructure (RTSP, WebRTC, GStreamer pipeline design) -- see `senior-devops` for infrastructure
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-ml-engineer` | Model serving and MLOps pipeline setup | Trained model artifacts (.pt, .onnx) flow into `model_deployment_pipeline.py` for containerized serving and monitoring |
+| `senior-data-engineer` | Dataset ETL and storage pipelines | Raw image data ingested via `pipeline_orchestrator.py`; cleaned datasets flow into `dataset_pipeline_builder.py` for CV formatting |
+| `senior-data-scientist` | Experiment design and statistical analysis | Experiment parameters from `experiment_designer.py` guide hyperparameter search; model metrics feed back for significance testing |
+| `senior-devops` | CI/CD and GPU infrastructure provisioning | Optimized model artifacts deployed via CI/CD pipelines; GPU node scaling managed through infrastructure-as-code |
+| `senior-prompt-engineer` | Multimodal RAG and vision-language integration | Vision model embeddings and detections feed into `rag_system_builder.py` for multimodal retrieval pipelines |
+| `senior-cloud-architect` | Cloud GPU resource planning and cost optimization | Benchmark results from `inference_optimizer.py` inform instance type selection and auto-scaling policies |
+
+## Tool Reference
+
+### vision_model_trainer.py
+
+**Purpose:** Generates training configuration files for object detection and segmentation models across Ultralytics YOLO, Detectron2, and MMDetection frameworks.
+
+**Usage:**
+
+```bash
+python scripts/vision_model_trainer.py <data_dir> [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data_dir` | positional | (required) | Path to dataset directory |
+| `--task` | choice | `detection` | Task type: `detection`, `segmentation` |
+| `--framework` | choice | `ultralytics` | Training framework: `ultralytics`, `detectron2`, `mmdetection` |
+| `--arch` | string | `yolov8m` | Model architecture (e.g., `yolov8n`, `yolov8s`, `yolov8m`, `yolov8l`, `yolov8x`, `yolov5n`-`yolov5x`, `faster_rcnn_R_50_FPN`, `mask_rcnn_R_50_FPN`, `retinanet_R_50_FPN`, `detr_r50`, `dino_r50`, `yolox_s`/`m`/`l`) |
+| `--epochs` | int | `100` | Number of training epochs |
+| `--batch` | int | `16` | Batch size |
+| `--imgsz` | int | `640` | Input image size (Ultralytics only) |
+| `--output`, `-o` | string | None | Output config file path |
+| `--analyze-only` | flag | off | Only analyze dataset structure, skip config generation |
+| `--json` | flag | off | Output results as JSON |
+
+**Example:**
+
+```bash
+# Generate Ultralytics YOLO training config
+python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolov8m --epochs 100 --batch 16 --output configs/train.yaml
+
+# Analyze dataset only
+python scripts/vision_model_trainer.py data/coco/ --analyze-only --json
+
+# Generate Detectron2 config
+python scripts/vision_model_trainer.py data/coco/ --framework detectron2 --arch faster_rcnn_R_50_FPN --output configs/detectron2.py
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Prints a summary table with framework, architecture, parameters, COCO mAP, and the training command
+- **JSON** (`--json`): Full configuration dictionary including all hyperparameters and metadata
+- **Config file** (`--output`): YAML for Ultralytics; Python config for Detectron2/MMDetection
+
+---
+
+### inference_optimizer.py
+
+**Purpose:** Analyzes model structure, benchmarks inference speed across batch sizes, and provides optimization recommendations for target deployment platforms.
+
+**Usage:**
+
+```bash
+python scripts/inference_optimizer.py <model_path> [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `model_path` | positional | (required) | Path to model file (`.pt`, `.pth`, `.onnx`, `.engine`, `.trt`, `.xml`, `.mlpackage`, `.mlmodel`) |
+| `--analyze` | flag | off | Analyze model structure (parameters, layers, input/output shapes) |
+| `--benchmark` | flag | off | Benchmark inference speed |
+| `--input-size` | int int | `640 640` | Input image size as H W |
+| `--batch-sizes` | int list | `1 4 8` | Batch sizes to benchmark |
+| `--iterations` | int | `100` | Number of benchmark iterations |
+| `--warmup` | int | `10` | Number of warmup iterations before benchmarking |
+| `--target` | choice | `gpu` | Target deployment platform: `gpu`, `cpu`, `edge`, `mobile`, `apple`, `intel` |
+| `--recommend` | flag | off | Show optimization recommendations for the target platform |
+| `--json` | flag | off | Output results as JSON |
+| `--output`, `-o` | string | None | Save results to file |
+
+**Example:**
+
+```bash
+# Analyze model structure
+python scripts/inference_optimizer.py model.onnx --analyze
+
+# Benchmark with custom batch sizes
+python scripts/inference_optimizer.py model.pt --benchmark --input-size 640 640 --batch-sizes 1 4 8 16 --warmup 10 --iterations 100
+
+# Get optimization recommendations for edge deployment
+python scripts/inference_optimizer.py model.pt --analyze --recommend --target edge --json
+
+# Save full report
+python scripts/inference_optimizer.py model.onnx --analyze --benchmark --recommend --output report.json
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Summary table with file size, parameters, node count; benchmark table with latency, throughput, and P99 per batch size; numbered optimization recommendations with expected speedup
+- **JSON** (`--json`): Nested dictionary with `analysis`, `benchmark`, and `recommendations` keys
+- **File** (`--output`): JSON report saved to specified path
+
+---
+
+### dataset_pipeline_builder.py
+
+**Purpose:** Production-grade tool for analyzing, converting, splitting, augmenting, and validating computer vision datasets. Uses subcommands for each operation.
+
+**Usage:**
+
+```bash
+python scripts/dataset_pipeline_builder.py <command> [options]
+```
+
+**Subcommands:**
+
+#### `analyze` -- Analyze dataset structure and statistics
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--input`, `-i` | string | (required) | Path to dataset |
+| `--json` | flag | off | Output as JSON |
+
+```bash
+python scripts/dataset_pipeline_builder.py analyze --input data/coco/
+python scripts/dataset_pipeline_builder.py analyze --input data/coco/ --json
+```
+
+#### `convert` -- Convert between annotation formats
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--input`, `-i` | string | (required) | Input dataset path |
+| `--output`, `-o` | string | (required) | Output dataset path |
+| `--format`, `-f` | choice | (required) | Target format: `yolo`, `coco`, `voc` |
+| `--source-format`, `-s` | choice | None | Source format: `yolo`, `coco`, `voc` (auto-detected if omitted) |
+
+```bash
+python scripts/dataset_pipeline_builder.py convert --input data/voc/ --output data/coco/ --format coco
+python scripts/dataset_pipeline_builder.py convert --input data/coco/ --output data/yolo/ --format yolo --source-format coco
+```
+
+#### `split` -- Split dataset into train/val/test sets
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--input`, `-i` | string | (required) | Input dataset path |
+| `--output`, `-o` | string | same as input | Output path |
+| `--train` | float | `0.8` | Train split ratio |
+| `--val` | float | `0.1` | Validation split ratio |
+| `--test` | float | `0.1` | Test split ratio |
+| `--stratify` | flag | off | Stratify splits by class distribution |
+| `--seed` | int | `42` | Random seed for reproducibility |
+
+```bash
+python scripts/dataset_pipeline_builder.py split --input data/coco/ --train 0.8 --val 0.1 --test 0.1 --stratify --seed 42
+```
+
+#### `augment-config` -- Generate augmentation configuration
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--task`, `-t` | choice | (required) | CV task: `detection`, `segmentation`, `classification` |
+| `--intensity`, `-n` | choice | `medium` | Augmentation intensity: `light`, `medium`, `heavy` |
+| `--framework`, `-f` | choice | `albumentations` | Target framework: `albumentations`, `torchvision`, `ultralytics` |
+| `--output`, `-o` | string | None | Output file path |
+
+```bash
+python scripts/dataset_pipeline_builder.py augment-config --task detection --intensity heavy --output augmentations.yaml
+```
+
+#### `validate` -- Validate dataset integrity
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--input`, `-i` | string | (required) | Path to dataset |
+| `--format`, `-f` | choice | None | Dataset format: `yolo`, `coco`, `voc` (auto-detected if omitted) |
+| `--json` | flag | off | Output as JSON |
+
+```bash
+python scripts/dataset_pipeline_builder.py validate --input data/coco/ --format coco
+```
+
+**Output Formats:**
+
+- **Human-readable** (default): Structured report with dataset statistics, annotation counts, class distributions, quality checks, and actionable recommendations
+- **JSON** (`--json`): Full analysis dictionary including image stats, annotation details, bounding box statistics, and quality check results

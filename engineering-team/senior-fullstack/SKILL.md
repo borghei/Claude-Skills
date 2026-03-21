@@ -279,3 +279,128 @@ See `references/tech_stack_guide.md` for detailed comparison.
 | Auth complexity | Use Auth.js or Clerk |
 | Type errors | Enable strict mode in tsconfig |
 | CORS issues | Configure middleware properly |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Scaffolder creates empty files | Template name misspelled or unsupported | Run `python project_scaffolder.py --list-templates` to verify available templates |
+| Quality analyzer reports 0 files analyzed | Project path points to wrong directory or contains only non-code files | Confirm the path contains `.ts`, `.tsx`, `.js`, `.jsx`, `.py`, `.go`, `.java`, `.rb`, `.php`, or `.cs` files outside `node_modules/`, `.git/`, `dist/`, and other skip directories |
+| False-positive hardcoded secret warnings | Regex matches long strings assigned to variables named `password`, `secret`, `token`, etc. | Review flagged lines manually; suppress by renaming variables or extracting values to `.env` files |
+| Cyclomatic complexity score seems inflated | Analyzer counts all decision points (`if`, `else`, `for`, `while`, `&&`, `\|\|`) across the entire file, not per function | Use the score as a relative indicator; pair with `--verbose` to identify specific high-complexity files for refactoring |
+| Dependency vulnerability check misses packages | Only a built-in subset of known CVEs is checked (lodash, axios, minimist, jsonwebtoken) | Supplement with `npm audit` or `pip-audit` for comprehensive CVE coverage |
+| Docker Compose fails after scaffolding | Port 5432 already in use by a local PostgreSQL instance | Stop the local instance or remap the port in `docker-compose.yml` |
+| Scaffolded Next.js project fails `npm install` | Node.js version below 18 or conflicting global packages | Use Node.js 18+ and run `npm install` in a clean shell without global `next` conflicts |
+
+---
+
+## Success Criteria
+
+- **Quality score >= 80/100 (Grade B or higher)** on the code quality analyzer for all production codebases
+- **Zero P0 (critical) security findings** before merging to main branch
+- **Test file ratio >= 70%** of source files (estimated coverage target reported by the analyzer)
+- **Average cyclomatic complexity < 15** across all analyzed files
+- **No high-complexity files with nesting depth > 4** without documented justification
+- **Scaffolded projects build and start successfully** on first run after `npm install` / `pip install`
+- **Documentation score >= 75/100** (README, LICENSE, and either CONTRIBUTING or API docs present)
+
+---
+
+## Scope & Limitations
+
+**What this skill covers:**
+- Project scaffolding for Next.js, FastAPI+React, MERN, and Django+React stacks with Docker, TypeScript, and environment configuration
+- Static code quality analysis including complexity metrics, security pattern detection, dependency vulnerability checks, test coverage estimation, and documentation scoring
+- Stack selection guidance via the tech stack decision matrix and reference guides
+- Fullstack architecture patterns (frontend component design, backend clean architecture, API design, caching, auth)
+
+**What this skill does NOT cover:**
+- Runtime performance profiling, load testing, or APM instrumentation -- see `senior-devops` for observability tooling
+- Infrastructure provisioning, Terraform/Pulumi, or cloud deployment automation -- see `aws-solution-architect` and `senior-devops`
+- Comprehensive CVE scanning against live vulnerability databases -- use `npm audit`, `pip-audit`, or `senior-secops` for deep security analysis
+- Mobile or native desktop application scaffolding -- this skill targets web-based fullstack architectures only
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-devops` | CI/CD pipeline setup for scaffolded projects | Scaffolder output directory feeds into DevOps pipeline configuration and Docker deployment workflows |
+| `senior-secops` | Deep security audit after initial quality scan | Code quality analyzer P0/P1 security findings hand off to SecOps for remediation tracking and penetration testing |
+| `senior-qa` | Test strategy for scaffolded projects | Test coverage estimation from the analyzer informs QA test plan gaps; scaffolded test infrastructure provides the harness |
+| `code-reviewer` | Automated review of generated and existing code | Quality analyzer JSON report provides structured input for code review checklists and PR approval criteria |
+| `senior-architect` | Architecture validation of stack choices | Tech stack guide recommendations feed into architecture decision records; complexity metrics validate design compliance |
+| `aws-solution-architect` | Cloud deployment of scaffolded applications | Docker Compose configurations from the scaffolder translate into ECS/EKS task definitions and infrastructure blueprints |
+
+---
+
+## Tool Reference
+
+### project_scaffolder.py
+
+**Purpose:** Generates complete fullstack project structures with boilerplate code, configuration files, Docker setup, and environment templates for four supported stack templates.
+
+**Usage:**
+
+```bash
+python scripts/project_scaffolder.py <template> <project_name> [options]
+python scripts/project_scaffolder.py --list-templates
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `template` | -- | positional | (required) | Template name: `nextjs`, `fastapi-react`, `mern`, or `django-react` |
+| `project_name` | -- | positional | (required) | Name for the new project directory |
+| `--output` | `-o` | string | `.` (current directory) | Output directory where the project folder is created |
+| `--list-templates` | `-l` | flag | false | List all available templates and exit |
+| `--json` | -- | flag | false | Output result in JSON format |
+
+**Example:**
+
+```bash
+# Scaffold a FastAPI + React project in a custom directory
+python scripts/project_scaffolder.py fastapi-react my-api --output ./projects --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints project name, template used, location on disk, file count, and numbered next steps for getting started.
+- **JSON (`--json`):** Returns a structured object with keys: `success`, `project_name`, `template`, `description`, `location`, `files_created`, `directories_created`, `next_steps`. On failure, returns `success: false` with an `error` message and `available` templates list.
+
+---
+
+### code_quality_analyzer.py
+
+**Purpose:** Performs comprehensive static analysis of fullstack codebases, reporting on security vulnerabilities, cyclomatic complexity, dependency health, test coverage estimation, documentation quality, and an overall quality score with prioritized recommendations.
+
+**Usage:**
+
+```bash
+python scripts/code_quality_analyzer.py [project_path] [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | `.` (current directory) | Path to the project directory to analyze |
+| `--verbose` | `-v` | flag | false | Show detailed findings including individual security issue locations |
+| `--json` | -- | flag | false | Output full analysis in JSON format |
+| `--output` | `-o` | string | (none) | Write the report to a file (writes JSON regardless of `--json` flag when used with human-readable mode) |
+
+**Example:**
+
+```bash
+# Full verbose analysis with JSON report saved to disk
+python scripts/code_quality_analyzer.py /path/to/project --verbose --json --output audit.json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints a formatted report with sections for overall score/grade, language breakdown, security issue counts by severity, complexity metrics, dependency status, test coverage estimate, documentation checklist, and up to 10 prioritized recommendations. Use `--verbose` to expand individual security findings with file paths and line numbers.
+- **JSON (`--json`):** Returns a structured object with keys: `summary`, `languages`, `security` (categorized by severity), `complexity`, `code_smells`, `dependencies`, `tests`, `documentation`, `overall_score`, `grade`, `recommendations`. Each recommendation includes `priority` (P0/P1/P2), `category`, `issue`, and `action`.

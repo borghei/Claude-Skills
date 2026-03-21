@@ -302,3 +302,147 @@ Sets up drift detection, alerting, and performance dashboards.
 | Data | Spark, Airflow, dbt, Kafka |
 | Deployment | Docker, Kubernetes, Triton |
 | Databases | PostgreSQL, BigQuery, Pinecone, Redis |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Model latency spikes after deployment | Container resource limits too low or cold starts on serverless | Pre-warm instances, increase CPU/memory limits, enable GPU request batching |
+| Data drift alerts firing constantly | Reference distribution outdated or threshold too sensitive | Recalibrate reference window to recent 30 days, raise PSI warning threshold to 0.15 |
+| Feature store serving stale features | TTL misconfigured or materialization job failing silently | Verify TTL matches data freshness SLA, add alerting on materialization job status |
+| RAG retrieval returns irrelevant chunks | Chunk size too large or embedding model mismatch | Reduce chunk size to 300-500 tokens, switch to domain-tuned embedding model, add reranker |
+| LLM provider rate limits hit in production | No request queuing or burst traffic exceeds quota | Implement token bucket rate limiter, add request queue with backpressure, configure fallback provider |
+| Model accuracy degrades gradually | Concept drift in underlying data distribution | Enable automated retraining triggers on accuracy drop > 2%, schedule weekly evaluation jobs |
+| A/B test results inconclusive after weeks | Insufficient traffic split or high-variance metric chosen | Increase treatment allocation to 10-20%, switch to lower-variance proxy metric, extend test duration |
+
+---
+
+## Success Criteria
+
+- Model serving latency p99 under 100ms for real-time inference endpoints
+- Zero data drift alerts unresolved for more than 48 hours
+- Automated retraining pipeline triggers within 1 hour of performance threshold breach
+- RAG system retrieval accuracy (hit rate at k=5) above 90% on evaluation set
+- LLM integration uptime at 99.9% with provider fallback activating in under 2 seconds
+- Feature store materialization freshness within defined TTL for all online features
+- Model deployment rollback completes in under 5 minutes with zero dropped requests
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- End-to-end model deployment pipelines (packaging, containerization, serving, canary rollout)
+- MLOps infrastructure setup (feature stores, experiment tracking, model registries, retraining)
+- LLM integration patterns (provider abstraction, retries, caching, cost tracking)
+- RAG system architecture (vector databases, chunking, retrieval, reranking)
+
+**This skill does NOT cover:**
+- Model training algorithms or hyperparameter tuning (see `senior-data-scientist`)
+- Raw data pipeline construction and ETL orchestration (see `senior-data-engineer`)
+- Prompt engineering techniques, few-shot design, or prompt optimization (see `senior-prompt-engineer`)
+- Image/video model architectures or computer vision inference optimization (see `senior-computer-vision`)
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-data-scientist` | Receives trained models and evaluation metrics for deployment | Data Scientist exports model artifacts and baseline metrics; ML Engineer packages and deploys |
+| `senior-data-engineer` | Consumes feature pipelines and data quality outputs | Data Engineer builds ETL and feature pipelines; ML Engineer reads from feature store for serving |
+| `senior-prompt-engineer` | Provides LLM serving infrastructure for prompt workflows | Prompt Engineer designs prompts; ML Engineer deploys provider abstraction and manages cost/latency |
+| `senior-devops` | Leverages CI/CD and Kubernetes infrastructure for model serving | DevOps manages cluster and pipelines; ML Engineer defines deployment manifests and health checks |
+| `senior-computer-vision` | Deploys vision models through shared serving infrastructure | CV Engineer trains and exports models; ML Engineer handles Triton/TorchServe deployment and monitoring |
+| `senior-security` | Applies security scanning to model containers and API endpoints | Security reviews container images and endpoint auth; ML Engineer remediates findings before promotion |
+
+---
+
+## Tool Reference
+
+### model_deployment_pipeline.py
+
+**Purpose:** Generates deployment artifacts for productionizing ML models, including Dockerfiles, Kubernetes manifests, and health check configurations.
+
+**Usage:**
+
+```bash
+python scripts/model_deployment_pipeline.py --input <path> --output <path> [--config <file>] [--verbose]
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (model artifact or directory) |
+| `--output` | `-o` | Yes | Output path for generated deployment artifacts |
+| `--config` | `-c` | No | Configuration file for deployment settings |
+| `--verbose` | `-v` | No | Enable debug-level logging output |
+
+**Example:**
+
+```bash
+python scripts/model_deployment_pipeline.py -i ./models/classifier.pkl -o ./deploy/
+```
+
+**Output Formats:** JSON to stdout containing `status`, `start_time`, `end_time`, and `processed_items`. Logs progress to stderr.
+
+---
+
+### rag_system_builder.py
+
+**Purpose:** Scaffolds a RAG pipeline with vector store integration, retrieval logic, and ingestion configuration.
+
+**Usage:**
+
+```bash
+python scripts/rag_system_builder.py --input <path> --output <path> [--config <file>] [--verbose]
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (document corpus or configuration directory) |
+| `--output` | `-o` | Yes | Output path for generated RAG pipeline artifacts |
+| `--config` | `-c` | No | Configuration file for RAG settings (vector DB, chunking, embedding) |
+| `--verbose` | `-v` | No | Enable debug-level logging output |
+
+**Example:**
+
+```bash
+python scripts/rag_system_builder.py -i ./documents/ -o ./rag-pipeline/ -c rag_config.yaml
+```
+
+**Output Formats:** JSON to stdout containing `status`, `start_time`, `end_time`, and `processed_items`. Logs progress to stderr.
+
+---
+
+### ml_monitoring_suite.py
+
+**Purpose:** Sets up drift detection, performance alerting, and monitoring dashboards for production ML models.
+
+**Usage:**
+
+```bash
+python scripts/ml_monitoring_suite.py --input <path> --output <path> [--config <file>] [--verbose]
+```
+
+**Flags/Parameters:**
+
+| Flag | Short | Required | Description |
+|------|-------|----------|-------------|
+| `--input` | `-i` | Yes | Input path (model metrics, reference data, or monitoring config) |
+| `--output` | `-o` | Yes | Output path for generated monitoring configuration and dashboards |
+| `--config` | `-c` | No | Configuration file for monitoring thresholds and alert rules |
+| `--verbose` | `-v` | No | Enable debug-level logging output |
+
+**Example:**
+
+```bash
+python scripts/ml_monitoring_suite.py -i ./model-metrics/ -o ./monitoring/ -c monitoring.yaml -v
+```
+
+**Output Formats:** JSON to stdout containing `status`, `start_time`, `end_time`, and `processed_items`. Logs progress to stderr.

@@ -512,5 +512,201 @@ After 3+ sessions, the scorer can generate trend analysis:
 
 ---
 
-**Last Updated:** 2026-03-18
-**Version:** 2.0.0
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Health scorer exits with code 1 but no errors printed | Score fell below the `--threshold` value (default 70) | Check the score in the report output; raise with `--threshold 50` if intentional, or fix findings to increase the score |
+| Accessibility auditor reports `parse-error` violation | Malformed or truncated HTML fed to the auditor | Ensure the HTML file is complete and well-formed; if piping from `curl`, verify the response is not a redirect or error page |
+| Visual regression tracker shows 100% change on all pages | Baseline manifest is empty or was never initialized | Run `--init --baseline-dir ./baselines` followed by `--register ./baselines` before comparing |
+| Visual regression reports `baseline_missing` for known pages | Screenshot filenames changed between runs (e.g., route slug renamed) | Re-register baselines with `--register` after renaming, or use `--update-baseline` to refresh from current screenshots |
+| Findings JSON loads but all findings default to P3/functional | Finding objects missing `severity` or `category` keys | Ensure each finding dict includes `"severity": "P0"-"P4"` and `"category"` matching one of the 10 scoring categories |
+| Test report generator produces empty Findings section | Session JSON has findings at the top level instead of under a `"findings"` key | Structure the session JSON with a `"findings"` array; see the expected schema in `test_report_generator.py` docstring |
+| Chrome MCP `read_page` returns stale content after SPA navigation | Single-page app updated the DOM without a full page load | Wait for the SPA transition to complete, then call `mcp__claude-in-chrome__read_page` again; use `read_console_messages` to confirm the route change landed |
+
+---
+
+## Success Criteria
+
+- **Health score above 85/100** on the target application after a Standard-tier sweep, indicating ship-ready quality with only minor issues remaining.
+- **Zero P0 (Critical) findings** at the end of the QA session; any P0 discovered during the sweep must be resolved or escalated before the session closes.
+- **WCAG AA compliance at or above 95%** as reported by `accessibility_auditor.py`, with zero `must-fix` violations remaining.
+- **Visual regression pass rate of 100%** against the established baseline at the configured threshold (default 5%), confirming no unintended visual changes.
+- **All Core Web Vitals within "Good" thresholds** — LCP under 2.5s, CLS below 0.1, INP under 200ms — on at least the three highest-traffic pages.
+- **Fewer than 5 P2 (Medium) findings** remaining after the triage-and-fix loop, demonstrating that functional friction has been addressed.
+- **Trend line stable or improving** across consecutive sessions; no category drops more than 10 points compared to the previous baseline.
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+
+- End-to-end browser QA via Chrome MCP: navigation, form interaction, console monitoring, network inspection, responsive testing, and screenshot capture.
+- Static HTML accessibility auditing against WCAG 2.1 levels A, AA, and AAA using deterministic Python checks (no external services required).
+- Visual regression tracking through file-hash comparison and byte-level diff analysis with configurable thresholds.
+- Weighted health scoring across 10 quality categories with severity-based deductions, baseline trend tracking, and CI-friendly exit codes.
+
+**This skill does NOT cover:**
+
+- Cross-browser testing beyond Chrome (Safari, Firefox, Edge). For multi-browser matrix testing, integrate with `senior-devops` CI pipeline skills.
+- Pixel-perfect image diffing or perceptual hashing — the visual regression tracker uses byte-level comparison, not computer-vision-based diffing. For advanced visual AI comparison, pair with `senior-computer-vision`.
+- Backend API testing, database validation, or load/stress testing. Use `senior-backend` for API contract verification and `senior-devops` for load testing infrastructure.
+- Runtime color contrast computation from rendered CSS. The accessibility auditor flags inline-style risk patterns and recommends manual verification; it does not compute contrast ratios from computed styles.
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `code-reviewer` | Feed the health score and findings summary into PR review context so reviewers can make informed approval decisions | QA session `report.md` or `--json` output attached to the PR body or review comment |
+| `senior-frontend` | Visual regression baselines align with component library standards; baseline updates happen alongside design system releases | `visual_regression_tracker.py` baseline directory shared in the component library repo |
+| `senior-devops` | Health score gates CI/CD deployment pipelines via the scorer's non-zero exit code on threshold failure | `qa_health_scorer.py --threshold 80 --json` runs as a pipeline step; exit code 1 blocks deploy |
+| `senior-secops` | Security header findings (CSP, HSTS, X-Frame-Options) from the QA sweep escalate to the security review workflow | P0/P1 findings with `category: security_headers` forwarded to the secops triage queue |
+| `incident-commander` | P0 findings discovered on production URLs trigger the incident response protocol | P0 finding JSON payload sent to the incident channel with evidence screenshots |
+| `senior-qa` | Extends manual QA checklists with automated browser verification; manual testers review automated findings and add exploratory context | `test_report_generator.py` markdown report used as the starting point for manual QA sign-off |
+
+---
+
+## Tool Reference
+
+### qa_health_scorer.py
+
+**Purpose:** Computes a weighted health score (0-100) from QA findings across 10 categories. Produces a letter grade (A-F), supports trend tracking against previous baselines, and returns a non-zero exit code when the score falls below the passing threshold.
+
+**Usage:**
+
+```bash
+python scripts/qa_health_scorer.py <findings_file> [options]
+```
+
+**Parameters:**
+
+| Flag / Argument | Type | Required | Default | Description |
+|-----------------|------|----------|---------|-------------|
+| `findings_file` | positional | Yes | — | Path to a JSON file containing QA findings (array of finding objects, or an object with a `"findings"` key) |
+| `--json` | flag | No | off | Output results as machine-readable JSON instead of the human-readable text report |
+| `--baseline` | string | No | `None` | Path to a previous score JSON file for trend comparison (computes delta and direction) |
+| `--threshold` | int | No | `70` | Minimum passing score; the tool exits with code 1 if the score falls below this value |
+| `--save-baseline` | flag | No | off | Save the current score to `.qa-baselines/{YYYY-MM-DD}.json` and `.qa-baselines/latest.json` for future trend comparison |
+
+**Example:**
+
+```bash
+# Score findings with an 85-point threshold, compare against last run, save result as new baseline
+python scripts/qa_health_scorer.py findings.json --threshold 85 --baseline .qa-baselines/latest.json --save-baseline --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Tabular report with overall score, grade, pass/fail status, severity breakdown, category breakdown with weights/scores/findings, and priority areas for categories scoring below 70%.
+- **JSON (`--json`):** Object with keys `overall_score`, `grade`, `passed`, `threshold`, `timestamp`, `severity_summary`, `total_findings`, `categories` (per-category weight, score_pct, deductions, finding_counts), and optional `trend`.
+
+---
+
+### accessibility_auditor.py
+
+**Purpose:** Analyzes HTML content for WCAG 2.1 violations across conformance levels A, AA, and AAA. Detects missing alt text, page language, heading hierarchy issues, duplicate IDs, unlabeled form inputs, empty link text, media without captions, autoplay media, missing landmark regions, positive tabindex values, focus indicator removal, and inline color contrast risk patterns. Returns a non-zero exit code when must-fix violations are present.
+
+**Usage:**
+
+```bash
+python scripts/accessibility_auditor.py <html_file> [options]
+```
+
+**Parameters:**
+
+| Flag / Argument | Type | Required | Default | Description |
+|-----------------|------|----------|---------|-------------|
+| `html_file` | positional | Yes | — | Path to an HTML file to audit; use `"-"` to read from stdin |
+| `--level` | choice | No | `AA` | WCAG conformance level to check: `A`, `AA`, or `AAA` |
+| `--json` | flag | No | off | Output results as JSON instead of the human-readable text report |
+
+**Example:**
+
+```bash
+# Audit a page at AAA level, output JSON for downstream processing
+curl -s https://example.com | python scripts/accessibility_auditor.py - --level AAA --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Report with level checked, elements checked, total violations, compliance percentage, violations broken down by level and severity, and a numbered list of each violation with rule ID, WCAG criterion, issue description, element, and remediation guidance.
+- **JSON (`--json`):** Object with keys `level_checked`, `total_elements_checked`, `total_violations`, `compliance_percentage`, `by_level`, `by_severity`, and `violations` (array of objects each containing `rule_id`, `wcag_criterion`, `level`, `severity`, `message`, `element`, `selector_hint`, `remediation`).
+
+---
+
+### visual_regression_tracker.py
+
+**Purpose:** Manages screenshot baselines and detects visual regressions between test runs. Maintains a JSON manifest of baseline screenshots with SHA-256 file hashes. Compares current screenshots against baselines using byte-level analysis and flags pages exceeding a configurable change threshold. Returns a non-zero exit code when regressions are detected.
+
+**Usage:**
+
+```bash
+python scripts/visual_regression_tracker.py [action] [options]
+```
+
+**Parameters:**
+
+| Flag / Argument | Type | Required | Default | Description |
+|-----------------|------|----------|---------|-------------|
+| `--init` | flag | No | off | Initialize a new baseline directory with an empty manifest |
+| `--register` | string (DIR) | No | — | Scan the given directory and register all image files (png, jpg, jpeg, bmp, gif, webp) in the baseline manifest |
+| `--update-baseline` | flag | No | off | Copy current screenshots into the baseline directory and update the manifest |
+| `--baseline-dir` / `--baseline` | string | Conditional | — | Path to the baseline screenshot directory (required for `--init`, comparison, and `--update-baseline`) |
+| `--current` | string | Conditional | — | Path to the current screenshot directory (required for comparison and `--update-baseline`) |
+| `--threshold` | float | No | `5.0` | Change percentage threshold above which a page is flagged as a regression |
+| `--json` | flag | No | off | Output results as JSON instead of the human-readable text report |
+
+**Example:**
+
+```bash
+# Initialize, register baselines, then compare with a tight 2% threshold
+python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
+python scripts/visual_regression_tracker.py --register ./baselines
+python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 2 --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Report with timestamp, threshold, counts of compared/passed/failed/new/missing pages, overall pass/fail result, and per-page status with change percentages.
+- **JSON (`--json`):** Object with keys `timestamp`, `threshold`, `baseline_dir`, `current_dir`, `pages` (per-page status, change_pct, hashes, sizes), and `summary` (total_compared, passed, failed, new_pages, missing_pages).
+
+---
+
+### test_report_generator.py
+
+**Purpose:** Generates comprehensive QA reports from session data. Consumes a JSON file containing findings, health scores, accessibility results, performance metrics, and visual regression data, then produces a detailed markdown or JSON report with executive summary, health score dashboard, category breakdown, findings grouped by severity, accessibility and performance sections, visual regression results, and prioritized recommendations.
+
+**Usage:**
+
+```bash
+python scripts/test_report_generator.py <session_file> [options]
+```
+
+**Parameters:**
+
+| Flag / Argument | Type | Required | Default | Description |
+|-----------------|------|----------|---------|-------------|
+| `session_file` | positional | Yes | — | Path to the QA session data JSON file (expected keys: `project`, `url`, `tester`, `tier`, `findings`, and optionally `health_score`, `accessibility`, `performance`, `visual_regression`, `screenshots`, `notes`) |
+| `--format` | choice | No | `markdown` | Output format: `markdown` or `json` |
+| `-o` / `--output` | string | No | stdout | Write the report to the specified file path instead of printing to stdout |
+| `--history` | string | No | `None` | Path to a score history JSON file for trend analysis (array of objects with `score` or `overall_score` keys) |
+
+**Example:**
+
+```bash
+# Generate a markdown report with trend data, written to a file
+python scripts/test_report_generator.py session_data.json --format markdown --history .qa-baselines/history.json -o reports/qa-report-2026-03-21.md
+```
+
+**Output Formats:**
+
+- **Markdown (default):** Full report with header (project, URL, tester, tier), executive summary, health score dashboard with category breakdown table, optional trend section, findings grouped by severity with details (title, category, location, description, steps, expected/actual), accessibility results, performance metrics table against thresholds, visual regression results, numbered recommendations, optional notes, and timestamped footer.
+- **JSON (`--format json`):** Object with keys `report_type`, `generated`, `project`, `url`, `tier`, `health_score`, `grade`, `passed`, `total_findings`, `findings_by_severity`, `findings_by_category`, `accessibility_violations`, `accessibility_compliance_pct`, `visual_regressions`, `performance_metrics`, `trend`, and `recommendations`.
+
+---
+
+**Last Updated:** 2026-03-21
+**Version:** 2.1.0

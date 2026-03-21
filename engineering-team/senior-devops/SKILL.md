@@ -1192,7 +1192,169 @@ This skill works alongside other skills in the library:
 
 ---
 
-**Last Updated:** February 2026
-**Version:** 2.0.0
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Terraform state lock stuck after interrupted apply | Previous `terraform apply` was killed or timed out, leaving the DynamoDB/GCS lock entry | Run `terraform force-unlock <LOCK_ID>` after confirming no other apply is running |
+| Pipeline builds pass locally but fail in CI | Missing environment variables, different Node/Python versions, or Docker socket unavailable | Pin runtime versions in CI config, export required secrets in the CI environment, verify Docker-in-Docker or socket mount |
+| Kubernetes pods stuck in `CrashLoopBackOff` | Application fails health checks on startup or missing config/secrets | Check logs with `kubectl logs <pod>`, verify ConfigMaps and Secrets exist, increase `startupProbe.failureThreshold` for slow-starting apps |
+| Canary deployment shows healthy metrics but users report errors | Canary metrics aggregated across all pods mask the canary-specific error rate | Use per-pod or per-revision metric labels in Prometheus queries; configure Istio/Nginx to tag canary traffic separately |
+| Docker image builds are slow (10+ minutes) | Layer cache invalidated by early COPY of frequently changing files | Reorder Dockerfile to copy dependency manifests before source code; use BuildKit cache mounts (`--mount=type=cache`) |
+| Helm upgrade fails with `UPGRADE FAILED: another operation is in progress` | Previous Helm release is in a pending or failed state | Run `helm history <release>` to identify the stuck revision, then `helm rollback <release> <last-good-revision>` |
+| Terraform plan shows unexpected resource destruction | Resource identifier changed (name, provider, or moved between modules) without a `moved` block | Use `terraform state mv` or add a `moved` block in HCL before applying to preserve the resource |
+
+---
+
+## Success Criteria
+
+- **Deployment frequency** above 1 deployment per day to production, sustained over a 30-day rolling window
+- **Change failure rate** below 5% of deployments requiring rollback or hotfix
+- **Mean time to recovery (MTTR)** under 30 minutes for SEV-1 and SEV-2 incidents
+- **Pipeline execution time** under 15 minutes from commit to production-ready artifact (build + test + security scan)
+- **Infrastructure drift** detected and resolved within 24 hours; zero unplanned drift persists beyond one business day
+- **Container image size** reduced by at least 60% compared to naive single-stage builds through multi-stage optimization
+- **Cost efficiency** achieving 20%+ savings through right-sizing, spot instances, and reserved capacity within the first quarter of adoption
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- CI/CD pipeline design and generation for GitHub Actions, GitLab CI, Jenkins, and CircleCI
+- Infrastructure as Code with Terraform including module structure, state management, and drift detection
+- Container orchestration with Kubernetes including pod design, Helm charts, autoscaling, and network policies
+- Deployment strategies (rolling, blue-green, canary, feature flags) with implementation patterns and rollback procedures
+
+**This skill does NOT cover:**
+- Application-level code architecture or business logic design (see `senior-architect` and `senior-backend`)
+- Security compliance auditing, SOC 2 controls, or regulatory framework implementation (see `senior-secops` and `ra-qm-team/` skills)
+- Cloud platform account setup, billing configuration, or organizational unit design (see `aws-solution-architect`)
+- Database schema design, query optimization, or data modeling (see `senior-data-engineer`)
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **senior-secops** | Security scanning embedded in CI/CD pipelines; container image vulnerability analysis before registry push | Pipeline config feeds scan results to secops dashboards; secops policies define admission control rules consumed by deployment manifests |
+| **senior-architect** | Infrastructure topology decisions inform Terraform module design; service dependency maps drive Kubernetes network policies | Architecture decision records (ADRs) flow into IaC module selection; deployment topology diagrams inform Helm chart structure |
+| **senior-backend** | Application health check endpoints consumed by Kubernetes probes; container build targets defined by backend service structure | Backend Dockerfiles feed into pipeline build stages; config requirements flow into ConfigMap and Secret definitions |
+| **aws-solution-architect** | AWS service selection drives Terraform provider and module choices; cost optimization recommendations inform instance sizing | AWS Well-Architected review outputs feed into Terraform variable tuning; cost reports trigger right-sizing actions in deployment configs |
+| **code-reviewer** | Infrastructure-as-code review standards applied to Terraform PRs; pipeline configuration reviewed for security and efficiency | Terraform plan output submitted for review; reviewer feedback drives module refactoring and pipeline optimization |
+| **senior-fullstack** | Fullstack scaffolder output feeds into pipeline generator for CI/CD setup; Docker Compose configs align with deployment manifests | Scaffolded project structure consumed by `pipeline_generator.py`; generated pipeline configs committed alongside application code |
+
+---
+
+## Tool Reference
+
+### pipeline_generator.py
+
+**Purpose:** Analyzes a project directory and generates CI/CD pipeline configurations tailored to the detected technology stack. Supports GitHub Actions, GitLab CI, Jenkins, and CircleCI output formats.
+
+**Usage:**
+
+```bash
+python scripts/pipeline_generator.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | required | Target project path to analyze for pipeline generation |
+| `--verbose` | `-v` | flag | `false` | Enable detailed progress output during analysis |
+| `--json` | -- | flag | `false` | Output results as JSON instead of human-readable report |
+| `--output` | `-o` | string | stdout | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Analyze a Node.js project and generate a pipeline report
+python scripts/pipeline_generator.py /path/to/project --verbose
+
+# Export pipeline analysis as JSON to a file
+python scripts/pipeline_generator.py /path/to/project --json --output pipeline-report.json
+```
+
+**Output Formats:**
+- **Human-readable (default):** Prints a formatted report with target path, status, and findings count
+- **JSON (`--json`):** Structured output with `status`, `target`, and `findings` fields suitable for downstream tooling
+
+---
+
+### terraform_scaffolder.py
+
+**Purpose:** Creates a Terraform infrastructure scaffold for a target directory, applying best-practice module structure, variable definitions, and environment separation patterns.
+
+**Usage:**
+
+```bash
+python scripts/terraform_scaffolder.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | required | Target directory path where Terraform files will be scaffolded |
+| `--verbose` | `-v` | flag | `false` | Enable detailed progress output during scaffolding |
+| `--json` | -- | flag | `false` | Output results as JSON instead of human-readable report |
+| `--output` | `-o` | string | stdout | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Scaffold Terraform structure in a new directory
+python scripts/terraform_scaffolder.py /path/to/infra --verbose
+
+# Generate scaffold report as JSON
+python scripts/terraform_scaffolder.py /path/to/infra --json --output scaffold-report.json
+```
+
+**Output Formats:**
+- **Human-readable (default):** Prints a formatted report with target path, status, and findings count
+- **JSON (`--json`):** Structured output with `status`, `target`, and `findings` fields suitable for CI/CD integration or audit logging
+
+---
+
+### deployment_manager.py
+
+**Purpose:** Manages deployment operations for a target project path, performing validation, analysis, and reporting. Supports dry-run inspection and structured output for integration with deployment pipelines.
+
+**Usage:**
+
+```bash
+python scripts/deployment_manager.py <target> [options]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `target` | -- | positional | required | Target deployment path to analyze and process |
+| `--verbose` | `-v` | flag | `false` | Enable detailed progress output during deployment analysis |
+| `--json` | -- | flag | `false` | Output results as JSON instead of human-readable report |
+| `--output` | `-o` | string | stdout | Write results to the specified file path |
+
+**Example:**
+
+```bash
+# Analyze a deployment target with verbose output
+python scripts/deployment_manager.py /path/to/deploy --verbose
+
+# Export deployment analysis as JSON
+python scripts/deployment_manager.py /path/to/deploy --json --output deploy-report.json
+```
+
+**Output Formats:**
+- **Human-readable (default):** Prints a formatted report with target path, status, and findings count
+- **JSON (`--json`):** Structured output with `status`, `target`, and `findings` fields for pipeline consumption or audit trails
+
+---
+
+**Last Updated:** March 2026
+**Version:** 2.1.0
 **Tools:** 3 Python automation scripts
 **References:** 3 deep-dive guides
