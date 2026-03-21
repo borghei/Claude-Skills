@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+from collections import deque
 import json
 import os
 import sys
@@ -39,7 +40,7 @@ def analyze_impact(manifest, model_name):
     child_map = build_parent_map(manifest)
     
     # BFS to find all downstream
-    queue = [node_id]
+    queue = deque([node_id])
     visited = set()
     exposures = []
     downstream_models = []
@@ -49,7 +50,7 @@ def analyze_impact(manifest, model_name):
     manifest_exposures = manifest.get("exposures", {})
     
     while queue:
-        current = queue.pop(0)
+        current = queue.popleft()
         if current in visited:
             continue
         visited.add(current)
@@ -82,15 +83,15 @@ def main():
     if args.json:
         print(json.dumps(impact, indent=2))
     else:
-        print(f"🔍 Impact Analysis for: {impact['model']}")
+        print(f"Impact Analysis for: {impact['model']}")
         print("=" * 40)
         print(f"Total Downstream Nodes : {impact['direct_and_indirect_children_count']}")
         print(f"Downstream Tests      : {impact['downstream_tests']}")
-        print(f"\n📊 Downstream Models ({len(impact['downstream_models'])}):")
+        print(f"\nDownstream Models ({len(impact['downstream_models'])}):")
         for m in sorted(impact['downstream_models']):
             print(f"  - {m}")
-        
-        print(f"\n⚠️  Downstream Exposures ({len(impact['downstream_exposures'])}):")
+
+        print(f"\n[WARN] Downstream Exposures ({len(impact['downstream_exposures'])}):")
         if not impact['downstream_exposures']:
             print("  None")
         for e in sorted(impact['downstream_exposures']):

@@ -20,7 +20,8 @@
 {%- endmacro %}
 
 -- 2. Incremental Lookback Filter
--- Enforces a rolling window update to avoid massive full-table scans.
+-- NOTE: This macro only emits SQL inside incremental models (uses is_incremental() guard).
+-- Always call within an incremental model; in non-incremental context it returns empty string.
 {% macro get_incremental_filter(column_name, default_lookback=3) %}
     {% if is_incremental() %}
         -- Grab from global variables or fallback to default

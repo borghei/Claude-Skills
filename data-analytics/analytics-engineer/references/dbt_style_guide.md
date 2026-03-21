@@ -32,8 +32,9 @@ The dbt project must follow a strict three-layer architecture:
 ## 2. SQL Formatting and Syntax
 
 ### No Implicit Columns
-- NEVER use `SELECT *` in Production models (outside of simple staging passthroughs).
-- **Why**: Implicit lists break dbt data contracts during schema drift and inflate network/memory payloads. **Always project columns explicitly.**
+- NEVER use `SELECT *` against source or ref tables in Production models (outside of simple staging passthroughs).
+- The terminal `SELECT * FROM final` CTE pattern is acceptable as it references an explicitly projected CTE.
+- **Why**: Implicit lists break dbt data contracts during schema drift and inflate network/memory payloads. **Always project columns explicitly in CTEs.**
 
 ### CTE Structure
 - All models must use Common Table Expressions (CTEs), ending with a final `SELECT * FROM final` block.

@@ -21,7 +21,7 @@ def generate_markdown(manifest, catalog, model_name):
     # Find model in manifest
     model_node = None
     for node_id, data in manifest.get("nodes", {}).items():
-        if data.get("name") == model_name:
+        if data.get("name") == model_name and data.get("resource_type") == "model":
             model_node = data
             break
             
@@ -64,7 +64,7 @@ def generate_markdown(manifest, catalog, model_name):
             if child_id.startswith("test."):
                 child_data = manifest.get("nodes", {}).get(child_id, {})
                 if child_data.get("column_name") == c_name:
-                    test_type = child_id.split('.')[1]
+                    test_type = child_data.get("test_metadata", {}).get("name", child_id.split(".")[-1])
                     tests.append(test_type)
         
         test_str = ", ".join(tests) if tests else "none"

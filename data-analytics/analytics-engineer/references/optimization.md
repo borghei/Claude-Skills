@@ -13,7 +13,7 @@ This guide outlines antipatterns that cripple data warehouse performance and det
 - **Jaywalking**: Storing comma-separated delimited IDs inside a single column and using `JOIN ON a LIKE '%' || b || '%'` to connect them.
 - **EAV (Entity-Attribute-Value)**: Storing schema-less data in three vertical columns (`entity_id`, `attribute_name`, `value`).
 - **The Issue**: Both patterns completely bypass the relational database indexing structures, forcing horizontal table scans that are mathematically exponential.
-- **The Fix**: Abstract many-to-many elements into an explicit explicit Intersection Table natively supporting primary-to-foreign key bridging.
+- **The Fix**: Abstract many-to-many elements into an explicit Intersection Table natively supporting primary-to-foreign key bridging.
 
 ## 3. Ambiguous Aggregations
 

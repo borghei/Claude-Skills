@@ -23,7 +23,7 @@ def build_schema_map(catalog):
     schema_map = {}
     for node_id, data in nodes.items():
         if node_id.startswith("model."):
-            model_name = data.get("metadata", {}).get("name", node_id)
+            model_name = data.get("metadata", {}).get("name") or node_id.split(".")[-1]
             columns = data.get("columns", {})
             schema_map[model_name] = {
                 c_name.lower(): c_data.get("type", "UNKNOWN").upper()
@@ -82,19 +82,19 @@ def main():
         print(json.dumps(diff, indent=2))
         return
         
-    print("🔍 Schema Diff Analysis")
+    print("Schema Diff Analysis")
     print("=" * 40)
     print(f"New Models Added   : {len(diff['new_models'])}")
     print(f"Models Dropped     : {len(diff['dropped_models'])}")
     print(f"Models Modified    : {len(diff['modified_models'])}")
-    
+
     if diff["dropped_models"]:
-        print("\n⚠️  WARNING: Models Dropped")
+        print("\n[WARN] Models Dropped:")
         for m in diff["dropped_models"]:
             print(f"  - {m}")
-            
+
     if diff["modified_models"]:
-        print("\n📊 Model Modifications:")
+        print("\nModel Modifications:")
         for model, changes in diff["modified_models"].items():
             if changes["dropped_columns"]:
                 print(f"\n  [!] {model} - DROPPED COLUMNS (Breaking Change!):")

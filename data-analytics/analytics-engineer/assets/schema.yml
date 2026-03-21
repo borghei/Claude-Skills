@@ -33,7 +33,7 @@ models:
         description: "Gross revenue of the order in USD."
         tests:
           - not_null
-          # Implement dbt_utils generic macros
+          # Requires: dbt-utils in packages.yml
           - dbt_utils.expression_is_true:
               expression: ">= 0"
 

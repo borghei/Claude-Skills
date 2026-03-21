@@ -2,7 +2,8 @@ name: 'analytics_engine'
 version: '1.0.0'
 config-version: 2
 
-profile: 'redshift'
+# Replace with your profile name from ~/.dbt/profiles.yml
+profile: 'your_profile_name'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]

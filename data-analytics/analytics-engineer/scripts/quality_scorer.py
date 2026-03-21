@@ -22,7 +22,7 @@ def run_checks(manifest, model_name):
     # Find node
     node = None
     for n_id, data in manifest.get("nodes", {}).items():
-        if data.get("name") == model_name:
+        if data.get("name") == model_name and data.get("resource_type") == "model":
             node = data
             break
             
@@ -95,22 +95,22 @@ def main():
         print(json.dumps(result, indent=2))
         return
         
-    print(f"🏆 Quality Score for: {result['model']}")
+    print(f"Quality Score for: {result['model']}")
     print("=" * 40)
-    
+
     score_display = ""
-    if result['score'] >= 90: score_display = f"🟢 {result['score']}/100 (Excellent)"
-    elif result['score'] >= 70: score_display = f"🟡 {result['score']}/100 (Needs Work)"
-    else: score_display = f"🔴 {result['score']}/100 (Critical Action Required)"
-    
+    if result['score'] >= 90: score_display = f"[PASS] {result['score']}/100 (Excellent)"
+    elif result['score'] >= 70: score_display = f"[WARN] {result['score']}/100 (Needs Work)"
+    else: score_display = f"[FAIL] {result['score']}/100 (Critical Action Required)"
+
     print(score_display)
-    
+
     if result['deductions']:
-        print("\n📉 Deductions:")
+        print("\nDeductions:")
         for r in result['deductions']:
             print(f"  {r}")
     else:
-        print("\n✨ Perfect Score! Model follows all enforced conventions.")
+        print("\nPerfect Score! Model follows all enforced conventions.")
 
 if __name__ == "__main__":
     main()
