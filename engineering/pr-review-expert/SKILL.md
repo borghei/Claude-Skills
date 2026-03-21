@@ -366,3 +366,50 @@ Use consistent labels so authors can quickly prioritize:
 5. **Batch all comments in one round** — multiple partial reviews frustrate authors
 6. **Acknowledge good patterns** — specific praise improves code quality culture
 7. **Reproduce locally for non-trivial changes** — especially auth and performance-sensitive code
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Blast radius analysis misses dependents | `grep` only searches `src/` by default | Expand search paths to include `packages/`, `libs/`, and monorepo service directories |
+| Security scan produces false positives on test files | Diff includes test fixtures with fake secrets | Filter scan output to exclude `*.test.*`, `*.spec.*`, `__tests__/`, and `fixtures/` paths |
+| Breaking change detection flags internal-only types | No distinction between exported and internal interfaces | Check whether flagged types are re-exported from the package entry point before reporting |
+| Test coverage delta shows 0 when tests exist | Test files use non-standard naming conventions | Adjust the `grep -E` pattern in Step 5 to match your project's test file naming (e.g., `*.unit.*`, `*_test.*`) |
+| `gh pr diff` returns empty output | PR has no commits yet or branch is not pushed | Verify the PR has at least one commit pushed to the remote with `gh pr view $PR --json commits` |
+| N+1 detection flags ORM eager-loaded queries | Pattern matching cannot distinguish eager vs lazy loading | Cross-reference flagged lines with ORM configuration to confirm whether relations are pre-loaded |
+| Review report is too long for PR comment | PR touches 50+ files across multiple services | Split the review into per-service comments or request the author break the PR into smaller scoped PRs |
+
+## Success Criteria
+
+- Review turnaround time under 30 minutes for PRs with fewer than 500 changed lines
+- Zero post-merge security findings on PRs that received a full review using this skill
+- Blast radius severity rating matches actual production impact in 90%+ of cases
+- All must-fix items are resolved before merge with no exceptions
+- Test coverage delta is calculated and reported on every reviewed PR
+- Breaking changes are detected before merge in 95%+ of cases, validated against deployment incidents
+- Reviewer feedback is batched into a single review round at least 90% of the time
+
+## Scope & Limitations
+
+**This skill covers:**
+- Structured review of GitHub PRs and GitLab MRs using a 35+ item checklist
+- Blast radius analysis for monorepo and multi-service architectures
+- Static security scanning of diffs for common vulnerability patterns (SQLi, XSS, secrets, auth bypass)
+- Breaking change detection for APIs, database schemas, TypeScript interfaces, and environment variables
+
+**This skill does NOT cover:**
+- Automated code fixes or refactoring — use `engineering/saas-scaffolder` or `engineering/migration-architect` for code generation
+- Runtime security analysis, SAST/DAST tool orchestration, or CVE database lookups — use `engineering/dependency-auditor` for dependency-level vulnerability scanning
+- CI/CD pipeline configuration or build failure triage — use `engineering/ci-cd-pipeline-builder` for pipeline design
+- Performance benchmarking or load testing — use `engineering/performance-profiler` for profiling and optimization guidance
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/dependency-auditor` | Run dependency audit before reviewing PRs that add or upgrade packages | Audit report feeds into the Security section of the review report |
+| `engineering/ci-cd-pipeline-builder` | Embed review checklist gates into CI pipelines as automated PR checks | Checklist items become pass/fail signals in the pipeline |
+| `engineering/performance-profiler` | Escalate N+1 and unbounded query findings for detailed profiling | Flagged code paths from review become profiling targets |
+| `engineering/migration-architect` | Validate database migration safety for PRs that include schema changes | Migration risk assessment supplements the Breaking Changes section |
+| `engineering/release-manager` | Feed breaking change detection results into release notes and changelogs | Detected breaking changes auto-populate release documentation |
+| `engineering/api-design-reviewer` | Cross-reference API endpoint changes with API design standards | API review findings merge into the Blast Radius and Breaking Changes sections |

@@ -395,3 +395,50 @@ After creating a worktree, verify:
 5. **Run cleanup weekly** — scan for stale and merged-branch worktrees
 6. **Include worktree path in terminal title** — prevents wrong-window commits
 7. **Never force-remove dirty worktrees** — unless changes are intentionally discarded
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `fatal: '<path>' is already checked out` | Branch is already active in another worktree | Use `git worktree list` to find where the branch is checked out, then switch to a different branch or remove the existing worktree first |
+| Port conflict despite deterministic allocation | A non-worktree process is occupying the assigned port | Run `lsof -i :<port>` to identify the process, terminate it or adjust the stride/base in the port allocation formula |
+| `.env` file missing after worktree creation | Setup script was not run or `.env` does not exist in the main repo | Copy `.env` manually from the main repo root, or re-run `setup-worktree.sh` which handles env file copying |
+| `git worktree prune` reports nothing but stale paths remain | Worktree directory was deleted manually without `git worktree remove` | Run `git worktree prune` to clean orphaned metadata, then verify with `git worktree list` |
+| Dependencies fail to install in new worktree | Lockfile references a private registry or cache not available in the worktree path | Ensure `.npmrc`, `.yarnrc.yml`, or pip config files are copied alongside `.env` during setup |
+| Docker Compose services start on wrong ports | The `docker-compose.worktree.yml` override was not included in the compose command | Always pass both files: `docker compose -f docker-compose.yml -f docker-compose.worktree.yml up` |
+| Worktree shows as dirty immediately after creation | Untracked files from `.env` copy or generated `.worktree-ports.json` | Add `.worktree-ports.json` and copied env files to `.gitignore` in the project |
+
+## Success Criteria
+
+- **Zero port conflicts** across all active worktrees measured by `lsof` checks returning no collisions after setup
+- **Worktree creation under 60 seconds** including dependency installation for projects with warm package caches
+- **100% env parity** between main repo and worktrees verified by diffing `.env` keys (values may differ for ports)
+- **Stale worktree count stays at zero** when cleanup automation runs on a weekly schedule with a 14-day threshold
+- **No cross-worktree interference** validated by running concurrent dev servers in 3+ worktrees simultaneously without failures
+- **Branch-to-worktree traceability** maintained via `.worktree-ports.json` present in every active worktree with correct metadata
+- **Cleanup safety rate of 100%** meaning no worktree with uncommitted changes is ever removed without explicit `--force` confirmation
+
+## Scope & Limitations
+
+**This skill covers:**
+- Git worktree lifecycle: creation, listing, status inspection, and removal
+- Deterministic port allocation and collision avoidance for parallel dev servers
+- Environment file synchronization and Docker Compose override patterns
+- Multi-agent workspace isolation strategies and cleanup automation
+
+**This skill does NOT cover:**
+- Git branching strategies or merge conflict resolution (see `pr-review-expert` and `release-manager`)
+- Secret rotation, vault integration, or credential management (see `env-secrets-manager`)
+- CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
+- Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
+| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
+| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
+| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
+| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
+| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |

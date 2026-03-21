@@ -435,3 +435,50 @@ API
 5. **Monitor continuously** — add Datadog/Prometheus/Grafana metrics for key code paths
 6. **Cache aggressively, invalidate precisely** — cache is the fastest optimization but hardest to debug
 7. **Document the win** — before/after in the PR description motivates the team and creates institutional knowledge
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Flamegraph shows only `(idle)` frames | Profiling during low-load period; no meaningful CPU work captured | Apply realistic load with autocannon or k6 during profiling, target the specific endpoint under investigation |
+| Heap snapshot comparison shows no growth but memory still climbs | Native memory leak outside V8 heap (e.g., native addon, file descriptor leak) | Use `process.memoryUsage().rss` tracking alongside heap snapshots; profile with Valgrind or `memray` for native allocations |
+| `EXPLAIN ANALYZE` shows Index Scan but query is still slow | Index exists but is not selective enough, or query returns too many rows for index to help | Check index selectivity with `SELECT count(DISTINCT col)/count(*) FROM table`; consider composite index or partial index |
+| k6 load test passes locally but fails in CI | CI runner has limited CPU/memory; network latency differs from local | Run k6 against a dedicated staging environment, not localhost in CI; adjust thresholds for CI-specific baselines |
+| Bundle analyzer shows expected size but app still loads slowly | Large bundle is code-split but critical path has render-blocking resources | Audit the critical rendering path separately with Lighthouse; check for synchronous scripts and unoptimized images |
+| `py-spy` cannot attach to running process | Insufficient permissions or SIP (System Integrity Protection) on macOS | Run with `sudo py-spy record --pid <PID>`; on macOS, disable SIP or use `--subprocesses` flag with a fresh process |
+| N+1 detection middleware reports false positives | Legitimate batch operations trigger high query counts per request | Add endpoint-level allowlists to the detection middleware; distinguish between N+1 patterns and intentional batch queries by checking for repeated identical query templates |
+
+## Success Criteria
+
+- **Baseline coverage:** Every optimization PR includes documented before/after metrics with P50, P95, and P99 latency values
+- **Latency targets met:** P95 API response time stays below 200ms and P99 below 500ms as validated by k6 threshold checks in CI
+- **Memory stability:** No heap growth exceeding 10% over a 24-hour soak test under sustained load
+- **Bundle budget enforced:** JavaScript bundle size for initial page load remains under 200kB gzipped, verified by CI gate
+- **N+1 elimination:** Query count per API request stays below 10 for all critical endpoints, validated by request-level query logging
+- **Load test confidence:** Staging load tests demonstrate the system handles 2x expected peak traffic with error rate below 1%
+- **Regression detection:** Performance regressions are caught within one CI cycle, not discovered in production monitoring
+
+## Scope & Limitations
+
+**This skill covers:**
+- CPU and memory profiling for Node.js, Python, and Go applications using flamegraphs and heap snapshots
+- Database query optimization including EXPLAIN ANALYZE interpretation, N+1 detection, and index recommendations
+- Frontend bundle analysis and size reduction strategies for webpack and Next.js projects
+- Load testing methodology with k6 including ramp-up patterns, threshold enforcement, and CI integration
+
+**This skill does NOT cover:**
+- Application Performance Monitoring (APM) platform setup and configuration (Datadog, New Relic, Grafana) — see `engineering/observability-designer`
+- Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering-team/senior-devops`
+- Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering-team/senior-security`
+- Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering-team/senior-mobile`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
+| `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
+| `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
+| `engineering-team/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
+| `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
+| `engineering-team/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |

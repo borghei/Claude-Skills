@@ -507,3 +507,50 @@ export function buildProject(overrides = {}) {
 5. For contract tests, run them in CI against both consumer and provider
 6. For load tests, set SLA thresholds (`p(95)<200`) and fail the build if violated
 7. Keep test files colocated with the code they test or in a parallel `tests/` tree
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated tests fail with `Cannot find module` errors | Test helper imports reference paths that don't exist in target project | Update import paths in generated files to match the project's `tsconfig.json` paths or Jest `moduleNameMapper` configuration |
+| Auth tests all return 200 instead of 401/403 | Test app instance is not using the same auth middleware as production | Ensure `createTestApp()` loads the full middleware stack including auth guards; check that `JWT_SECRET` env var is set in the test environment |
+| Pact contract verification fails on CI but passes locally | Provider state callbacks are missing or the provider is running a different version | Pin the provider version in CI, ensure all `given()` states have matching provider state handlers, and verify the Pact broker URL is correct |
+| k6 load tests report 0 requests or instant completion | `BASE_URL` environment variable is not set or points to an unreachable host | Pass `-e BASE_URL=http://localhost:3000` explicitly and verify the server is running before starting the k6 run |
+| Pagination tests fail with inconsistent ordering | The API does not enforce a default sort order, so results vary between runs | Add an explicit `ORDER BY` clause to the API query or include `?sort=created_at` in test requests to guarantee deterministic ordering |
+| Input validation tests pass but miss real-world edge cases | Generated boundary values use generic limits (256 chars) that don't match actual schema constraints | Read the schema or validator definitions (Zod, Joi, Pydantic) and adjust boundary values to match declared `maxLength`, `minimum`, and `enum` values |
+| Tests are flaky due to database state leakage between runs | Tests share a database and don't clean up after themselves | Wrap each test in a transaction that rolls back, or use `beforeEach` to truncate relevant tables; avoid relying on auto-increment IDs |
+
+## Success Criteria
+
+- **Route coverage >= 95%**: Every API endpoint in the codebase has at least one generated test file covering auth, validation, and happy path scenarios
+- **Error path ratio >= 3:1**: At least three negative/error test cases exist for every happy-path test case per endpoint
+- **Test execution time < 60s**: The full generated unit/integration test suite runs in under 60 seconds (excluding load tests)
+- **Zero hardcoded secrets**: No test file contains hardcoded API keys, tokens, or passwords; all credentials come from environment variables or factories
+- **Contract test coverage for all external APIs**: Every endpoint consumed by an external service or frontend client has a corresponding Pact or schema snapshot test
+- **Load test SLA thresholds defined**: Every load-tested endpoint has explicit P95 and P99 latency thresholds and an error rate ceiling configured in the k6 script
+- **CI integration complete**: Generated tests run automatically in the CI pipeline with clear pass/fail reporting and no manual intervention required
+
+## Scope & Limitations
+
+**This skill covers:**
+- Generating test suites from route definitions for REST APIs across Node.js, Python, and Go frameworks
+- Authentication, authorization, input validation, pagination, and error-path test generation
+- Consumer-driven contract testing with Pact and schema snapshot validation
+- Load and performance testing script generation with k6 and Artillery
+
+**This skill does NOT cover:**
+- GraphQL API testing (see `engineering/api-design-reviewer` for schema review patterns)
+- End-to-end browser testing or UI interaction testing (see `engineering/playwright-pro`)
+- Database migration testing or schema validation (see `engineering/database-schema-designer`)
+- Security penetration testing beyond input sanitization checks (see `engineering/skill-security-auditor`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/api-design-reviewer` | Validate API design before generating tests | Design review output defines the endpoint contracts that this skill generates tests for |
+| `engineering/ci-cd-pipeline-builder` | Embed generated tests into CI/CD pipelines | Generated test files and k6 scripts are added as pipeline stages with pass/fail gates |
+| `engineering/playwright-pro` | Complement API tests with E2E browser tests | API test suite validates backend behavior; Playwright tests validate the frontend consuming those APIs |
+| `engineering/database-schema-designer` | Align test fixtures with database schema | Schema definitions inform factory functions and seed data used in generated test helpers |
+| `engineering/observability-designer` | Monitor test-covered endpoints in production | Load test thresholds (P95, P99) feed into alerting rules for the same endpoints in production dashboards |
+| `engineering/performance-profiler` | Investigate endpoints that fail load test thresholds | k6 results identify slow endpoints; the profiler skill traces root causes at the code level |

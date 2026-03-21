@@ -388,3 +388,50 @@ erDiagram
 6. **RLS over application-level filtering** — the database enforces tenancy, not just application code
 7. **Version column for optimistic locking** — `WHERE version = $expected_version` prevents lost updates
 8. **Audit log with JSON snapshots** — store before/after state for compliance and debugging
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Migration locks table for minutes | Adding NOT NULL column or index on large table without batching | Use the three-phase migration pattern: add nullable, backfill in batches, then set NOT NULL |
+| RLS policies silently return empty results | `current_setting('app.current_user_id')` not set before query | Verify middleware calls `set_config` at the start of every request; add a test that queries as a non-superuser role |
+| Composite index not used by query planner | Columns in the WHERE clause do not match the index prefix order | Reorder index columns so equality predicates come first, then range predicates; run `EXPLAIN ANALYZE` to confirm |
+| Soft-deleted records appear in API responses | Application queries missing `WHERE deleted_at IS NULL` filter | Add a default scope or database view that excludes soft-deleted rows; prefer RLS policy for enforcement |
+| Optimistic locking conflicts spike after deploy | New code path writes without incrementing the `version` column | Audit all UPDATE statements to include `SET version = version + 1` and `WHERE version = $expected` |
+| Foreign key CASCADE deletes are slow | Missing index on the child table's FK column | Add a B-tree index on every FK column; verify with `EXPLAIN` on a DELETE of the parent row |
+| CUID2/UUIDv7 IDs cause index bloat over time | Text-based IDs are wider than integers, increasing B-tree page splits | Schedule `REINDEX CONCURRENTLY` during low-traffic windows; monitor `pg_stat_user_indexes` for bloat ratio |
+
+## Success Criteria
+
+- **Schema passes 3NF validation** — no transitive dependencies remain unless documented as intentional denormalization for read performance
+- **All foreign key columns are indexed** — zero FK columns without a corresponding B-tree index, verified via `pg_indexes` query
+- **Zero-downtime migrations verified** — every migration executes without `ACCESS EXCLUSIVE` locks exceeding 5 seconds on tables with 100K+ rows
+- **RLS policies tested with non-superuser role** — at least one integration test per tenant-scoped table confirms cross-tenant data isolation
+- **Type generation matches schema** — generated TypeScript interfaces or Pydantic models have zero drift from the current DDL, validated in CI
+- **Query performance meets SLA** — 95th percentile query latency under 50ms for indexed queries on tables up to 10M rows
+- **Audit log captures all mutations** — every INSERT, UPDATE, and DELETE on auditable tables produces a corresponding audit_log entry with before/after snapshots
+
+## Scope & Limitations
+
+**This skill covers:**
+- Relational schema design for PostgreSQL, MySQL, and SQLite including normalization through 3NF
+- Migration generation and zero-downtime migration planning for Drizzle, Prisma, TypeORM, and Alembic
+- Row-Level Security policies, index strategy, and type generation (TypeScript and Python)
+- Cross-cutting patterns: multi-tenancy, soft deletes, audit trails, optimistic locking, and temporal data
+
+**This skill does NOT cover:**
+- NoSQL or document database design (MongoDB, DynamoDB, Cassandra) — see `senior-data-engineer` for broader data store guidance
+- Query optimization and execution plan analysis beyond index recommendations — see `performance-profiler` for runtime profiling
+- Database infrastructure provisioning, replication, or failover configuration — see `senior-cloud-architect` for cloud database setup
+- Application-layer ORM patterns, connection pooling, or caching strategies — see `senior-backend` for backend architecture decisions
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `migration-architect` | Hands off generated DDL and migration files for sequencing across services | Schema Designer produces migrations, Migration Architect orchestrates cross-service rollout order |
+| `api-design-reviewer` | Schema entities map directly to API resource models and endpoint structure | Schema entities and relationships feed into REST/GraphQL resource definitions and validation rules |
+| `senior-backend` | Generated types and ORM schemas plug into repository and service layers | TypeScript interfaces and Pydantic models from schema become the backend's data access contracts |
+| `performance-profiler` | Index strategy recommendations are validated against real query execution plans | Schema Designer proposes indexes, Performance Profiler confirms effectiveness with `EXPLAIN ANALYZE` data |
+| `senior-secops` | RLS policies and column encryption align with security compliance requirements | Security requirements flow in, RLS policies and encryption specifications flow out for audit verification |
+| `observability-designer` | Audit log schema provides the foundation for operational dashboards and alerting | Audit log table structure feeds into observability pipelines for change tracking and anomaly detection |

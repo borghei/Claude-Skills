@@ -618,3 +618,50 @@ def test_mcp_server_tools():
 6. **Log every tool call** with agent ID, inputs, outputs, and latency for debugging
 7. **Test tool selection** — present your tool list to an LLM and verify it picks the right one
 8. **Use protocol bridges** at boundaries rather than forcing all agents onto one protocol
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| LLM never selects the correct tool | Tool description is vague or missing usage guidance | Rewrite description using the "[What it does]. [What it returns]. [When to use it]." pattern |
+| MCP server connects but no tools appear | Missing `tools` in server capabilities declaration | Add `capabilities: { tools: {} }` to the `McpServer` constructor options |
+| A2A task stuck in `working` state indefinitely | Agent has no timeout or heartbeat mechanism | Implement `max_polls` and `poll_interval` in `wait_for_completion`; add server-side task TTLs |
+| `AUTH_EXPIRED` errors after token refresh | Refreshed token not propagated to in-flight requests | Store tokens centrally and read from shared state per-request rather than caching on the client instance |
+| Protocol bridge drops artifacts from A2A responses | Bridge only extracts `text` parts, ignoring `file` or `data` parts | Extend `_a2a_result_to_mcp_response` to handle all artifact part types including binary and structured data |
+| Rate limiting triggers during normal multi-tool calls | Per-agent rate limit is too low for parallel tool execution | Increase the per-minute ceiling or implement token-bucket rate limiting with burst allowance |
+| Tool schema validation passes but agent sends wrong types | JSON Schema `type` is correct but lacks `format`, `enum`, or `pattern` constraints | Add tighter constraints (e.g., `"format": "date"`, `"pattern": "^[A-Z]{3}$"`) to catch malformed inputs early |
+
+## Success Criteria
+
+- **Tool selection accuracy >= 95%**: LLMs select the intended tool on the first attempt when presented with the full tool list and a matching user query.
+- **Schema validation coverage = 100%**: Every deployed tool passes `validate_mcp_tool()` with zero issues reported.
+- **Error response consistency**: All protocol endpoints return structured error objects with `code`, `message`, and `retryable` fields — no raw exception strings.
+- **Discovery latency < 500ms**: Agent card retrieval (A2A) and `tools/list` (MCP) responses complete within 500ms at the 95th percentile.
+- **Protocol bridge translation fidelity >= 99%**: Cross-protocol calls preserve all input parameters and output artifacts without data loss or type coercion errors.
+- **Authentication failure recovery < 2 retries**: Token refresh flows resolve `AUTH_EXPIRED` errors within a single retry cycle without user intervention.
+- **Mean time to integrate a new tool < 30 minutes**: A developer with access to this skill can define, validate, and deploy a new MCP or A2A tool in under 30 minutes.
+
+## Scope & Limitations
+
+**This skill covers:**
+- Designing tool schemas for MCP, A2A, OpenAI Function Calling, and LangChain Tools
+- Transport selection, capability discovery, and protocol version negotiation
+- Authentication, rate limiting, and structured error handling for agent communication
+- Protocol bridging between heterogeneous agent ecosystems
+
+**This skill does NOT cover:**
+- Building complete MCP server applications with business logic — see `engineering/mcp-server-builder`
+- Agent orchestration patterns, planning loops, or multi-step reasoning — see `engineering/agent-workflow-designer`
+- Designing agent personas, memory systems, or behavioral profiles — see `engineering/agent-designer`
+- Infrastructure deployment, CI/CD pipelines, or container orchestration for agent services — see `engineering-team/senior-devops`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/mcp-server-builder` | Protocol schemas defined here feed directly into MCP server scaffolding | Tool definitions and inputSchema objects flow into server code generation |
+| `engineering/agent-workflow-designer` | Workflow orchestrators consume protocol interfaces to dispatch tasks | Agent-protocol defines the transport contract; workflow-designer defines execution order and branching |
+| `engineering/agent-designer` | Agent identity and capability profiles reference protocol-level skill declarations | Agent cards and capability metadata from protocol design inform agent persona configuration |
+| `engineering-team/senior-security` | Security review of auth flows, token scoping, and rate limiting configurations | OAuth 2.1 flows, API key rotation policies, and audit logging patterns flow into security assessments |
+| `engineering/api-design-reviewer` | REST and JSON-RPC endpoint design review for A2A and MCP HTTP transports | API schema and endpoint contracts feed into design review checklists |
+| `engineering/observability-designer` | Monitoring and tracing for inter-agent calls, latency tracking, and error budgets | Tool call logs with agent ID, latency, and error codes flow into observability dashboards |

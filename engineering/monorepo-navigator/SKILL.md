@@ -420,3 +420,50 @@ turbo run build test
 6. **Changesets over manual versioning** — never hand-edit package.json versions in a monorepo
 7. **Impact analysis before merging shared package changes** — check affected packages, communicate blast radius
 8. **Keep workspace:* for internal deps** — real version ranges are for external npm packages only
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `turbo run build` rebuilds everything despite no changes | Inputs glob is too broad or `globalDependencies` includes volatile files | Narrow `inputs` in turbo.json; exclude `.env`, docs, and test fixtures from build inputs |
+| `ERR_PNPM_PEER_DEP_ISSUES` on install | Peer dependency mismatches across workspace packages | Add `peerDependencyRules.ignoreMissing` or `peerDependencyRules.allowAny` in root `.npmrc` or `package.json` |
+| Remote cache reports 0% hit rate in CI | TURBO_TOKEN or TURBO_TEAM not set, or `inputs`/`outputs` changed between runs | Verify env vars with `turbo run build --summarize`; ensure inputs/outputs are stable across branches |
+| `workspace:*` version appears in published package | Published with `npm publish` or `pnpm publish` instead of Changesets | Always use `pnpm changeset publish` which replaces `workspace:*` with resolved versions automatically |
+| Circular dependency detected between packages | Two packages import from each other directly | Run `madge --circular` to identify the cycle; extract shared code into a new leaf package with no internal deps |
+| TypeScript `Cannot find module '@repo/ui'` in IDE | IDE TypeScript server not resolving workspace paths | Add `paths` mapping in root `tsconfig.json` or use TypeScript project references; restart TS server after changes |
+| CI takes longer after monorepo migration than multi-repo | Missing remote cache, no `--filter`, or `fetch-depth: 1` preventing git comparisons | Enable remote caching, use `--filter='...[origin/main]'`, and set `fetch-depth: 0` in checkout action |
+
+## Success Criteria
+
+- **Build time reduction**: CI pipeline completes affected-only builds in under 50% of full-build time within 2 weeks of adoption
+- **Cache hit rate**: Remote cache achieves 70%+ hit rate on PR builds after initial warm-up period
+- **Impact visibility**: Every PR includes an affected-packages summary showing blast radius of changes
+- **Zero full rebuilds in CI**: No CI workflow runs all packages unconditionally; every pipeline uses `--filter` or equivalent
+- **Publishing reliability**: Changesets workflow produces correct versions and changelogs with zero manual `package.json` edits per release cycle
+- **Migration completeness**: Multi-repo to monorepo migration preserves 100% of git history for all migrated packages
+- **Developer onboarding**: New team members can run, build, and test any package locally within 15 minutes using documented workspace commands
+
+## Scope & Limitations
+
+**This skill covers:**
+- Turborepo, Nx, and pnpm workspace configuration and optimization
+- Cross-package dependency analysis and impact visualization
+- Remote caching setup (Vercel, Nx Cloud, self-hosted)
+- Changesets-based coordinated versioning and npm publishing
+
+**This skill does NOT cover:**
+- Application-level build configuration (webpack, Vite, esbuild internals) — see `performance-profiler`
+- CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
+- Git branching strategies and release flow — see `release-manager`
+- Dependency vulnerability scanning and license auditing — see `dependency-auditor`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
+| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
+| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
+| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
+| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
+| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator's impact analysis identifies coupling hotspots that Tech Debt Tracker records |

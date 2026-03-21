@@ -450,3 +450,50 @@ Every quarter (add to team calendar):
 6. **Postmortem drives runbook updates** — every incident should improve at least one runbook
 7. **Link, do not duplicate** — reference the canonical config, do not copy its contents
 8. **Test runbooks like you test code** — untested runbooks are worse than no runbooks (false confidence)
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Stack detection returns no results | Repo uses non-standard config file names or paths | Manually specify the stack in the runbook header; extend detection script with custom paths |
+| Generated commands fail in staging | Environment variables not set or differ between environments | Verify all referenced env vars exist in the target environment with `printenv \| grep PROD` before executing |
+| Staleness script reports false positives | Config files touched by formatting-only commits (linting, whitespace) | Filter staleness checks by diffing actual content changes: `git diff --stat` on the flagged commit |
+| Runbook steps are out of order after a platform upgrade | Hosting provider changed their deploy pipeline or CLI flags | Re-run stack detection after every major platform upgrade; diff the new CLI help output against runbook commands |
+| Escalation contacts are stale | Team rotations or org changes not reflected in runbooks | Integrate escalation tables with your on-call tool API (PagerDuty, Opsgenie) so contacts resolve dynamically |
+| Rollback procedure fails mid-execution | Database migration was partially applied before the deploy failed | Always wrap migrations in transactions where the engine supports it; include a "partial rollback" section for non-transactional DDL |
+| Runbook verification checks pass but the feature is broken | Smoke tests only cover health endpoint, not critical user paths | Add at least three smoke-test URLs per runbook: health, auth, and one core business endpoint |
+
+## Success Criteria
+
+- **Runbook coverage >= 90%** — every production service has at least a deployment and incident response runbook
+- **Mean time to mitigate (MTTM) drops by 30%+** within one quarter of adopting generated runbooks
+- **Zero placeholder commands** — every command in every runbook is copy-pasteable without manual editing beyond env var substitution
+- **Staleness rate < 10%** — fewer than 10% of runbooks flagged as stale in any given quarterly review cycle
+- **Quarterly dry-run pass rate >= 95%** — at least 95% of runbook steps execute successfully in staging during scheduled dry-runs
+- **On-call onboarding time < 2 hours** — a new engineer can read all runbooks for their service and feel confident to handle L1 incidents within two hours
+- **Post-incident runbook update rate = 100%** — every postmortem produces at least one runbook addition or correction
+
+## Scope & Limitations
+
+**This skill covers:**
+- Generating deployment, incident response, database maintenance, scaling, and monitoring runbooks from codebase analysis
+- Stack detection for common CI/CD platforms (GitHub Actions, GitLab CI, Jenkins), databases (PostgreSQL, MySQL, MongoDB), and hosting providers (Vercel, Fly.io, Kubernetes, AWS)
+- Staleness detection automation and quarterly review processes
+- Escalation path templates with severity-based routing
+
+**This skill does NOT cover:**
+- Automated execution of runbook steps — it generates documentation, not orchestration (see `ci-cd-pipeline-builder` for automated pipelines)
+- Infrastructure provisioning or Terraform/Pulumi code generation (see `migration-architect` for schema migration tooling)
+- Observability stack setup such as Prometheus rules, Grafana dashboards, or alert definitions (see `observability-designer` for monitoring infrastructure)
+- Security incident response or vulnerability remediation playbooks (see `skill-security-auditor` for security-focused analysis)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ci-cd-pipeline-builder` | Runbook deployment steps align with pipeline stages | Pipeline config feeds into deployment runbook generation; runbook rollback steps reference pipeline rollback triggers |
+| `observability-designer` | Monitoring runbook references alert rules and dashboards | Observability outputs (alert names, dashboard URLs) are embedded in runbook VERIFY and Monitor steps |
+| `migration-architect` | Database maintenance runbook uses migration tooling conventions | Migration file paths and commands flow into the database runbook template; rollback steps mirror migration rollback commands |
+| `release-manager` | Release process triggers runbook execution checkpoints | Release tags and changelogs feed into runbook staleness checks; release gates reference runbook pre-deployment checklists |
+| `env-secrets-manager` | Runbook commands reference env vars managed by secrets tooling | Secret names and vault paths flow into runbook env var references; rotation schedules inform runbook update cadence |
+| `changelog-generator` | Post-deployment runbook steps cross-reference changelog entries | Changelog diffs help identify which runbook steps need re-verification after a release |

@@ -376,3 +376,50 @@ After generating onboarding docs, validate with this checklist:
 5. **Version-specific notes** — call out what changed in recent versions so returning developers catch up
 6. **Runbooks over theory** — "run this command" is more useful than "the system uses Redis for caching"
 7. **Key file map is mandatory** — every project should have an annotated list of the 10-20 most important files
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated setup guide fails on fresh machine | Implicit dependencies not captured during analysis | Re-run Phase 1 gather commands on a clean environment; add every missing tool to the prerequisites table |
+| Architecture diagram does not match actual data flow | Analysis relied on stale code paths or unused modules | Cross-reference with `git log --since="90 days"` to find active code paths; interview a senior engineer to validate |
+| Key file map is too large (30+ files) | No prioritization applied; every file treated equally | Limit to 15-20 files maximum; rank by edit frequency (`git log --format='%H' -- <file> | wc -l`) and coupling |
+| Onboarding doc goes stale within weeks | No process ties doc updates to code changes | Add a "docs" checkbox to the PR template; schedule quarterly freshness reviews |
+| Audience sections feel generic | Same content served to juniors, seniors, and contractors | Generate separate docs per audience or use collapsible sections; run the audience customization checklist from this skill |
+| Debugging guide missing real errors | Errors were invented rather than collected from logs | Mine actual error messages from Sentry, CI logs, and Slack support channels before writing the guide |
+| Environment variable list is incomplete | `grep` scan missed dynamically constructed variable names | Supplement grep results with a manual review of config loader files and `.env.example`; verify against deployment manifests |
+
+## Success Criteria
+
+- **Setup completion rate**: 90%+ of new developers reach a working local environment within 10 minutes using only the generated guide (no Slack questions needed).
+- **First-commit time**: New hires make their first meaningful commit within 2 business days of starting onboarding.
+- **Error coverage**: The debugging guide covers at least 80% of errors reported in the team's support channel over the prior 90 days.
+- **Doc freshness**: Onboarding documentation passes a quarterly freshness audit with fewer than 3 stale sections flagged.
+- **Key file accuracy**: The key file map covers all files edited in more than 5 PRs during the past quarter.
+- **Audience satisfaction**: Post-onboarding survey scores average 4.0+ out of 5.0 across junior, senior, and contractor cohorts.
+- **Link validity**: Zero broken internal or external links when validated by an automated link checker at publish time.
+
+## Scope & Limitations
+
+**This skill covers:**
+- Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
+- Audience-aware documentation tailored for junior developers, senior engineers, and contractors
+- Output in Markdown, Notion, and Confluence formats
+- Quality verification checklists and freshness audit processes
+
+**This skill does NOT cover:**
+- Automated API reference generation from code annotations — see `engineering/changelog-generator` for release-oriented docs or `engineering/api-design-reviewer` for API quality
+- Continuous documentation pipelines or CI-triggered doc builds — see `engineering/ci-cd-pipeline-builder` for pipeline automation
+- Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
+- Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
+| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
+| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
+| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
+| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
+| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |

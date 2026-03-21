@@ -552,3 +552,50 @@ class CircuitBreaker:
 6. **Log every agent call** with input hash, output hash, tokens, latency, and cost
 7. **Set SLAs per stage** — if research takes >30s, timeout and use cached results
 8. **Test with production-scale inputs** — a pipeline that works on 100 words may fail on 10,000
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline hangs indefinitely | Missing timeout enforcement on one or more agent stages | Add `asyncio.wait_for()` with explicit `timeout_seconds` at every agent boundary; use the Circuit Breaker pattern to fail fast |
+| Circular dependency error at runtime | Subtask graph contains a cycle (e.g., task A depends on B which depends on A) | Validate DAG structure at build time with topological sort; the `_batch_by_dependencies` method catches this but validation should happen earlier |
+| Context window exceeded mid-pipeline | Intermediate outputs grow beyond the model's token limit | Use the `ContextBudget` class to allocate tokens per stage; summarize or truncate outputs before passing to the next stage |
+| Fan-out tasks return inconsistent formats | Each parallel agent interprets the output schema differently | Define a shared `TypedDict` or `dataclass` for all fan-out results; add a validation step before the merge function |
+| Orchestrator plan creates too many subtasks | The planning prompt does not constrain subtask count, leading to over-decomposition | Add explicit constraints in the planner system prompt (e.g., "maximum 5 subtasks"); review and approve plans before execution in high-stakes workflows |
+| Consensus never reaches quorum | Validators disagree consistently or confidence scores are too low | Lower the `quorum` threshold, add a tiebreaker agent, or revise validator prompts to align on evaluation criteria |
+| Cost spikes on parallel workflows | Expensive models (Opus) used for all fan-out branches instead of routing by complexity | Apply cost-aware routing: use Haiku for classification and simple tasks, Sonnet for most work, Opus only for final synthesis or high-stakes decisions |
+
+## Success Criteria
+
+- Pipeline end-to-end latency stays within the defined SLA (e.g., under 60 seconds for a 5-stage workflow) with no stage exceeding its individual timeout
+- Agent routing accuracy exceeds 90% when measured against a labeled test set of at least 100 representative requests
+- Fan-out/fan-in workflows complete with fewer than 5% task failures across all parallel branches under normal operating conditions
+- Total token cost per workflow run decreases by at least 40% after applying model tiering (Haiku for routing, Sonnet for core work, Opus for synthesis)
+- Circuit breakers trigger correctly within 5 consecutive failures and recover automatically after the defined recovery window
+- Context window utilization stays below 85% of model limits at every pipeline stage, with no truncation-related quality degradation
+- All inter-agent handoffs pass schema validation with zero type errors across 100 consecutive workflow executions
+
+## Scope & Limitations
+
+**This skill covers:**
+- Design and implementation of five core multi-agent orchestration patterns (sequential, parallel, hierarchical, event-driven, consensus)
+- Agent routing strategies including intent-based, skill-based, and cost-aware routing
+- Reliability engineering patterns: circuit breakers, retries, timeouts, and dead letter queues
+- Context window budgeting, cost optimization, and framework-specific implementations (LangGraph, CrewAI, AutoGen)
+
+**This skill does NOT cover:**
+- Training or fine-tuning the underlying LLMs used by agents (see `engineering/ml-pipeline-architect` for ML training workflows)
+- Infrastructure provisioning, container orchestration, or deployment pipelines (see `engineering/cloud-infrastructure-designer` for cloud architecture)
+- Human-in-the-loop approval workflows or UI design for agent dashboards (see `product-team/ux-researcher` for user-facing workflow design)
+- Long-term agent memory, vector database setup, or RAG pipeline construction (see `engineering/rag-pipeline-architect` for retrieval-augmented generation)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ml-pipeline-architect` | Agent workflows that include ML inference stages use ML Pipeline Architect for model serving and batch prediction design | Workflow DAG exports stage specs to ML pipeline; ML pipeline returns inference endpoints for agent consumption |
+| `engineering/rag-pipeline-architect` | Research and retrieval agents within workflows rely on RAG pipelines for grounded knowledge access | Agent sends queries to RAG pipeline; RAG returns ranked document chunks with citations for agent context |
+| `engineering/cloud-infrastructure-designer` | Production deployment of agent workflows requires infrastructure design for scaling, queuing, and monitoring | Workflow resource requirements feed into infrastructure specs; infra returns endpoint URLs, queue ARNs, and scaling policies |
+| `engineering/api-design-architect` | Inter-agent communication contracts and external API boundaries follow API design standards | Agent handoff schemas are validated against API design specs; API architect provides OpenAPI definitions for external integrations |
+| `engineering/system-design-architect` | Overall system architecture decisions (sync vs async, monolith vs distributed) shape workflow topology choices | System design constraints (latency budgets, availability targets) inform pattern selection; workflow requirements feed back into system capacity planning |
+| `project-management/technical-project-planning` | Complex multi-agent projects require structured planning for phased rollout, risk management, and milestone tracking | Workflow complexity estimates feed into project plans; PM skill provides sprint boundaries and dependency timelines for staged deployment |

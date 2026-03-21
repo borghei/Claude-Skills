@@ -400,3 +400,50 @@ Attackers may try to bypass detection. Be aware of:
 6. **Re-audit on updates** — each new version may introduce new risks
 7. **Maintain an approved skill list** — pre-audited skills that the team trusts
 8. **Report suspicious skills** — notify the skill repository maintainer and community
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| False positive on `subprocess.run()` with list arguments | Pattern matches any `subprocess` usage regardless of shell parameter | Verify the call uses a list (not a string) and `shell=True` is absent; mark as INFO, not CRITICAL |
+| Prompt injection flagged in legitimate SKILL.md documentation | Phrases like "ignore previous" appear in educational or example text | Wrap examples in fenced code blocks; the scanner should skip content inside triple-backtick blocks |
+| Audit reports zero findings on a skill with known issues | Skill uses an unsupported language or evasion technique not in the pattern set | Supplement with the Manual Audit Checklist and inspect files line-by-line for the known issue |
+| Large binary file triggers FAIL but the file is a required dataset | Any binary over 1 MB defaults to HIGH severity | Verify the file contents independently (e.g., `file` command, hex dump) and document an explicit exception in the audit report |
+| Dependency typosquatting check produces false negatives | Levenshtein distance threshold is too lenient for short package names | Cross-reference every dependency against the official PyPI or npm registry manually before approving |
+| CI pipeline audit step times out on monorepo PRs | Scanner processes every changed skill sequentially | Limit the scan to only the skills modified in the PR using the `git diff` path filter shown in the CI/CD section |
+| Audit verdict is WARN but team policy requires PASS | Default mode allows HIGH findings to produce WARN instead of FAIL | Enable `--strict` mode so any HIGH finding escalates the verdict to FAIL |
+
+## Success Criteria
+
+- **Zero CRITICAL findings on install**: Every skill deployed to production passes the audit with zero CRITICAL-severity findings.
+- **Audit coverage >= 100% of new skills**: No skill is installed or merged without a completed security audit report on file.
+- **False positive rate < 15%**: Fewer than 15% of flagged findings are confirmed false positives after manual review.
+- **Mean time to audit < 5 minutes per skill**: A standard skill package (under 20 files) completes the full scan in under 5 minutes.
+- **Remediation turnaround < 24 hours**: CRITICAL and HIGH findings are resolved or explicitly risk-accepted within one business day.
+- **CI gate adoption = 100% of skill repositories**: Every repository that hosts skills runs the audit workflow on every pull request.
+- **Re-audit compliance >= 95%**: At least 95% of skills are re-audited within one release cycle after any version update.
+
+## Scope & Limitations
+
+**This skill covers:**
+- Static pattern-based detection of dangerous code constructs in Python, Bash, JavaScript, and TypeScript files
+- Prompt injection scanning across all markdown files within a skill package
+- Dependency supply chain validation for `requirements.txt` and `package.json`
+- File structure boundary checks including symlinks, binaries, hidden files, and oversized payloads
+
+**This skill does NOT cover:**
+- Runtime or dynamic analysis — code is never executed during the audit (see `skill-tester` for runtime validation)
+- Live CVE database lookups or real-time vulnerability feeds (see `dependency-auditor` for active CVE scanning)
+- Infrastructure-level security controls such as network segmentation, container hardening, or cloud IAM policies (see `infrastructure-compliance-auditor` in ra-qm-team)
+- Compliance framework certification against ISO 27001, SOC 2, GDPR, or other regulatory standards (see `information-security-manager-iso27001` and `gdpr-dsgvo-expert` in ra-qm-team)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `dependency-auditor` | Feed audit findings into live CVE scanning for flagged dependencies | Security audit report → dependency-auditor for real-time vulnerability lookup |
+| `ci-cd-pipeline-builder` | Embed the audit workflow as a required check in generated CI/CD pipelines | Pipeline template ← audit job YAML from this skill's CI/CD section |
+| `skill-tester` | Run dynamic runtime tests on skills that pass static analysis | PASS verdict from this skill → skill-tester for behavioral validation |
+| `infrastructure-compliance-auditor` | Extend auditing scope from skill-level to infrastructure-level security controls | Skill audit findings → infrastructure auditor for environment-wide posture review |
+| `env-secrets-manager` | Cross-reference credential harvesting findings with secrets management policy | Credential-access flags from audit → env-secrets-manager for policy verification |
+| `pr-review-expert` | Surface audit findings as inline PR review comments on flagged lines | Audit report line references → PR review annotations for developer visibility |

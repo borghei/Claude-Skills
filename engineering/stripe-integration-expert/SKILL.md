@@ -668,3 +668,58 @@ model StripeEvent {
 | **analytics-tracking** | Tracking checkout and subscription conversion events |
 | **email-template-builder** | Building dunning and billing notification emails |
 | **api-design-reviewer** | Reviewing your billing API endpoints |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Webhook returns 400 on all events | Webhook signing secret mismatch between environments | Verify `STRIPE_WEBHOOK_SECRET` matches the endpoint in Stripe Dashboard; use `stripe listen` output secret for local dev |
+| Checkout session redirects to blank page | `success_url` or `cancel_url` missing `{CHECKOUT_SESSION_ID}` template or pointing to wrong domain | Ensure URLs use `APP_URL` env var and include the session ID template literal for retrieval |
+| Subscription shows `incomplete` status | First payment requires 3D Secure but was never completed | Handle `checkout.session.async_payment_failed` and send the customer a link to complete authentication |
+| Proration invoice charges full price instead of difference | Using `create_prorations` instead of `always_invoice` or not passing existing subscription item ID | Use `always_invoice` proration behavior and update the existing `items[0].id` rather than adding a new line item |
+| Usage records return "Cannot create usage record" | Reporting usage on a non-metered price or after subscription cancellation | Confirm the price uses `recurring.usage_type: "metered"` and the subscription is active before reporting |
+| Customer Portal shows no options | Portal configuration not enabled in Stripe Dashboard | Navigate to Stripe Dashboard > Settings > Billing > Customer Portal and enable subscription management features |
+| Duplicate webhook processing despite idempotency table | `markProcessed` called before handler completes, then handler throws on retry | Move `markProcessed` to after the handler succeeds (as shown in the webhook handler pattern above) |
+
+---
+
+## Success Criteria
+
+- **Webhook reliability:** 99.9%+ webhook processing success rate with zero duplicate side effects over a 30-day window
+- **Checkout conversion:** End-to-end checkout flow completes in under 3 seconds (redirect to Stripe and back)
+- **Idempotency coverage:** 100% of webhook handlers are idempotent, verified by replaying the same event ID twice with no state change on the second pass
+- **Subscription state accuracy:** Database subscription status matches Stripe source of truth within 60 seconds of any state change
+- **SCA compliance:** All European payment flows pass 3D Secure challenges without manual intervention or dropped transactions
+- **Dunning recovery:** Automated dunning emails recover at least 30% of failed payments within the retry window (typically 7-21 days)
+- **Zero hardcoded price IDs:** All Stripe price IDs are sourced from environment variables, enabling test/production parity without code changes
+
+---
+
+## Scope & Limitations
+
+**This skill covers:**
+- Stripe Checkout, Subscriptions, and Customer Portal integration for SaaS billing
+- Webhook handling with idempotency, signature verification, and retry safety
+- Usage-based (metered) billing, proration previews, and plan change workflows
+- SCA/3D Secure compliance for European payment regulations (PSD2)
+
+**This skill does NOT cover:**
+- Stripe Connect (marketplace payouts, multi-party payments) -- see platform-specific Stripe Connect documentation
+- One-time payment flows without subscriptions (e.g., e-commerce product purchases)
+- Tax calculation and remittance (Stripe Tax configuration, VAT/GST filing) -- see `ra-qm-team/` compliance skills for regulatory guidance
+- Payment fraud detection and dispute management (Stripe Radar rules, chargeback workflows) -- see `skill-security-auditor` for security review patterns
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **api-design-reviewer** | Review billing API endpoints for REST conventions, error handling, and rate limiting | Billing route definitions --> API review checklist --> validated endpoint contracts |
+| **database-schema-designer** | Design and validate the Prisma schema for Stripe customer, subscription, and event tracking tables | Schema requirements --> normalized table design --> migration files |
+| **observability-designer** | Instrument webhook handlers and checkout flows with structured logging, metrics, and alerting | Webhook events --> OpenTelemetry traces --> dashboard alerts on failure spikes |
+| **env-secrets-manager** | Manage Stripe API keys, webhook secrets, and price IDs across dev/staging/production | Secret definitions --> encrypted vault storage --> runtime injection via env vars |
+| **ci-cd-pipeline-builder** | Automate Stripe CLI webhook testing in CI and validate integration before deployment | Test triggers --> `stripe listen` in CI --> webhook handler assertions |
+| **runbook-generator** | Create operational runbooks for billing incidents: failed webhooks, mass payment failures, subscription reconciliation | Incident scenarios --> step-by-step remediation --> escalation paths |

@@ -496,3 +496,50 @@ export function canAccessFeature(workspace: Workspace, feature: string): boolean
 6. **Rate limiting on auth routes** — prevent brute force with Upstash Redis + `@upstash/ratelimit`
 7. **Workspace context in every query** — never query without scoping to the current workspace
 8. **Test with Stripe CLI** — `stripe listen --forward-to localhost:3000/api/webhooks/stripe` for local development
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `NEXTAUTH_URL` mismatch errors in production | Environment variable not updated from localhost default | Set `NEXTAUTH_URL` to your actual production domain; omit trailing slash |
+| Stripe webhook returns 400 on every event | Raw body is consumed before signature verification | Ensure the webhook route uses `req.text()` before any JSON parsing; do not use body-parser middleware on the webhook endpoint |
+| Drizzle migrations fail with "relation already exists" | Migration was partially applied or schema drifted from migration history | Run `pnpm drizzle-kit drop` to reset the migration journal, then regenerate with `pnpm drizzle-kit generate` and reapply |
+| OAuth callback redirects to wrong URL | Redirect URI registered in provider console does not match `NEXTAUTH_URL` | Update the authorized redirect URI in Google/GitHub developer console to match your deployment URL exactly |
+| Multi-tenant queries return data from other workspaces | Missing `workspaceId` filter in a database query | Audit all `db.query` and `db.select` calls to ensure every query includes a `where` clause scoped to the current workspace |
+| Hydration mismatch on dashboard pages | Server-rendered HTML differs from client due to conditional auth checks | Move auth-dependent rendering into client components or wrap with `<Suspense>`; avoid reading session in server components that also render on the client |
+| Stripe test mode charges succeed but live mode fails | Live mode price IDs differ from test mode IDs | Use separate environment variables for test vs. live Stripe keys and price IDs; verify `.env.production` references the correct live values |
+
+## Success Criteria
+
+- Scaffolded project passes `pnpm build` with zero errors and zero TypeScript warnings on first run
+- End-to-end authentication flow (register, login, logout, password reset) completes in under 60 seconds of manual testing
+- Stripe checkout creates a subscription and webhook handler updates the database within 5 seconds of payment completion
+- Multi-tenant data isolation verified: queries scoped to Workspace A return zero rows belonging to Workspace B
+- Lighthouse performance score on the landing page is 90+ on mobile with no accessibility violations at the AA level
+- Time from `git clone` to running local dev server with seeded data is under 10 minutes following the generated README
+- All environment variables are documented in `.env.example` with descriptions, and the app fails fast with clear error messages when required variables are missing
+
+## Scope & Limitations
+
+**This skill covers:**
+- Full-stack SaaS scaffolding with Next.js App Router, TypeScript, Tailwind, and shadcn/ui
+- Authentication setup with NextAuth v5, Clerk, or Supabase Auth including OAuth and magic link providers
+- Stripe and Lemon Squeezy billing integration with checkout, webhooks, and customer portal
+- Multi-tenancy patterns (workspace/organization) with role-based access and plan-based feature gating
+
+**This skill does NOT cover:**
+- Ongoing Stripe billing logic beyond initial integration (metered billing, usage-based pricing, invoicing customization) — see `stripe-integration-expert`
+- Database schema design decisions beyond the core tenancy model (complex relational modeling, indexing strategies) — see `database-schema-designer`
+- CI/CD pipeline configuration, deployment automation, or infrastructure provisioning — see `ci-cd-pipeline-builder`
+- API design standards, versioning, or OpenAPI specification generation — see `api-design-reviewer`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `stripe-integration-expert` | Extends the scaffolded Stripe setup with advanced billing patterns (metered, tiered, usage-based) | Scaffolder outputs base Stripe config and webhook handler; Stripe expert refines pricing models and adds invoice customization |
+| `database-schema-designer` | Designs extended schemas beyond the core tenancy tables | Scaffolder provides baseline users/workspaces/members schema; schema designer adds domain-specific entities and optimizes indexes |
+| `api-design-reviewer` | Reviews and improves the generated API routes for consistency and standards compliance | Scaffolder generates initial API routes; reviewer audits naming, error handling, and response formats |
+| `ci-cd-pipeline-builder` | Creates deployment pipelines for the scaffolded project | Scaffolder outputs the application code; pipeline builder adds GitHub Actions, preview deployments, and production release workflows |
+| `env-secrets-manager` | Audits and secures the environment variable configuration | Scaffolder generates `.env.example`; secrets manager validates no secrets are hardcoded and recommends vault integration |
+| `observability-designer` | Adds logging, tracing, and monitoring to the scaffolded application | Scaffolder provides the application structure; observability designer instruments API routes, webhooks, and auth flows |

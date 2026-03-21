@@ -434,3 +434,50 @@ test('dashboard meets WCAG AA standards', async ({ page }) => {
 6. **Trace + screenshot on failure** — upload as CI artifacts for post-mortem debugging
 7. **Visual regression for critical UI** — catch unintended visual changes automatically
 8. **Accessibility tests in the suite** — WCAG compliance as a regression gate, not an afterthought
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `locator.click()` times out | Element hidden behind overlay/modal or not yet rendered | Add `await expect(locator).toBeVisible()` before clicking; check for z-index overlays blocking the target |
+| Visual snapshots fail on every CI run | Different OS font rendering between local and CI | Generate baseline screenshots inside CI (Linux), not locally (macOS); use `maxDiffPixelRatio: 0.02` for tolerance |
+| Auth setup project runs but tests get 401 | `storageState` path mismatch or expired token | Verify `storageState` path in `playwright.config.ts` matches the setup script; confirm tokens don't expire mid-suite |
+| `page.route()` intercept never triggers | Route pattern doesn't match the actual request URL or glob syntax error | Log requests with `page.on('request', r => console.log(r.url()))` to verify the exact URL; use `**` glob for subpaths |
+| Tests pass individually but fail when run together | Shared mutable state or port collision between parallel workers | Ensure test isolation via `test.beforeEach` setup; use unique test data per worker with `test.info().parallelIndex` |
+| `toHaveScreenshot()` throws "missing baseline" | Snapshot file not committed to version control | Run `npx playwright test --update-snapshots` and commit the generated files under the `__screenshots__` directory |
+| Accessibility audit returns false positives | Axe scanning third-party embedded widgets or iframes | Use `.exclude('.third-party-widget')` or `.include('#app-root')` to scope the audit to your own markup |
+
+## Success Criteria
+
+- **Flaky test rate below 2%** — measured over a rolling 7-day window across all CI runs; any test exceeding 5% flake rate is quarantined and fixed within 48 hours
+- **E2E suite completes within 10 minutes** — full cross-browser matrix (Chromium, Firefox, mobile) on CI with 4 parallel workers; alert if wall-clock time exceeds threshold
+- **100% of critical user journeys covered** — login, checkout, onboarding, and core CRUD workflows each have dedicated spec files with happy-path and primary error-path tests
+- **Zero `waitForTimeout()` calls in the codebase** — enforced via ESLint rule or grep-based CI check; all waits use web-first assertions
+- **Page Object coverage for every tested page** — no raw locators in spec files; all element access goes through page object classes with user-intent method names
+- **WCAG AA compliance gate passing** — accessibility tests run on every PR; zero critical or serious violations allowed to merge
+- **Visual regression baselines reviewed on every UI PR** — screenshot diffs attached to PR as artifacts; baseline updates require explicit reviewer approval
+
+## Scope & Limitations
+
+**This skill covers:**
+- End-to-end test authoring, organization, and maintenance with Playwright
+- Page Object Model architecture and locator strategy best practices
+- Flaky test diagnosis, CI integration, and trace-based debugging
+- Visual regression testing and WCAG accessibility auditing
+
+**This skill does NOT cover:**
+- Unit testing or component testing in isolation (see `engineering-team/testing-strategy` for test pyramid guidance)
+- API contract testing or load/performance testing (see `api-test-suite-builder` for API-focused testing)
+- Test data management, database seeding, or factory patterns for test fixtures
+- Mobile native app testing (Appium, Detox); this skill targets web browsers only
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ci-cd-pipeline-builder` | E2E tests run as a pipeline stage after build and unit tests | Pipeline config triggers `playwright test`; artifacts (traces, screenshots) upload on failure |
+| `api-test-suite-builder` | API tests validate backend contracts; Playwright tests validate UI flows end-to-end | API test results confirm endpoint stability before E2E suite runs against the same environment |
+| `pr-review-expert` | PR reviews check for test coverage on UI changes and flag missing E2E specs | Review checklist references Playwright Pro golden rules; flags `waitForTimeout` or raw CSS selectors |
+| `performance-profiler` | Performance budgets complement E2E tests to catch regressions | Profiler identifies slow pages; Playwright tests add `networkidle` waits or performance assertions for flagged routes |
+| `observability-designer` | Test failures feed into observability dashboards for flake tracking | CI test results export JSON reports; observability pipelines ingest pass/fail/flake metrics over time |
+| `release-manager` | E2E suite is a release gate; green suite required before deployment proceeds | Release workflow calls Playwright CI job; blocks release tag creation on any test failure |

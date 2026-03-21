@@ -375,3 +375,50 @@ When new information contradicts existing knowledge:
 - `references/feedback-loop-patterns.md` - Detailed feedback capture and analysis patterns
 - `references/memory-curation-guide.md` - Step-by-step memory review and promotion procedures
 - `references/meta-learning-architectures.md` - Advanced patterns for agents that learn how to learn
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| MEMORY.md exceeds 200 lines and keeps growing | Auto-capture enabled without scheduled curation | Run the Weekly Memory Health Check workflow; split topic-specific entries into `memory/<topic>.md` files |
+| Promoted rules contradict each other | Two conflicting patterns both crossed the 3-recurrence threshold | Apply the Belief Revision protocol -- compare confidence scores, resolve the conflict, delete the weaker rule |
+| Agent performance degrades after a promotion batch | Newly promoted rules interact badly or are overly prescriptive | Roll back the most recent promotions, re-validate each rule in isolation, and promote incrementally |
+| Skill extraction produces a package that only works on the original project | Generalization step was skipped or rushed | Revisit Extraction Process Step 2 -- strip project-specific details, parameterize hardcoded values, test on a second project before packaging |
+| Feedback loop captures noise (trivial observations dominate) | Capture strategy has not been calibrated with the Adaptive Capture Strategy | After 10 sessions, analyze promotion rates by category and restrict capture to high-value categories (error resolutions, user corrections, tool preferences) |
+| Regression Detection flags false positives | Thresholds set too aggressively for early-stage projects | Widen thresholds during the first 20 sessions (e.g., first-attempt success 60% instead of 70%), then tighten once a stable baseline exists |
+| Confidence scores decay too fast on valid long-term rules | Recency factor penalizes rules that are infrequently encountered but still correct | For rules explicitly confirmed by the user, override the recency factor to 1.0 regardless of age |
+
+## Success Criteria
+
+- **First-attempt success rate above 80%** after 20 sessions of active self-improvement, measured as tasks accepted without user correction.
+- **Memory size stays under 200 lines** in MEMORY.md at all times, with overflow correctly routed to topic files.
+- **Promotion rate of 15-25%** of captured observations within 30 days, indicating the capture strategy targets high-value signals.
+- **Zero stale rules** remaining after each Weekly Memory Health Check -- every rule references current code, tools, and workflows.
+- **Regression detection latency under 3 sessions** -- performance degradation is flagged within 3 sessions of onset, not discovered weeks later.
+- **Extracted skills reusable across 2+ projects** without modification, validating that the generalization step produces genuinely portable packages.
+- **Contradiction resolution within 1 session** -- conflicting rules are detected and resolved via the Belief Revision protocol before they cause downstream errors.
+
+## Scope & Limitations
+
+**This skill covers:**
+- Architectural patterns for building agents that learn from execution history and user feedback.
+- Memory lifecycle management: capture, curation, promotion, and retirement of learned knowledge.
+- Performance regression detection frameworks and response protocols for agent systems.
+- Skill extraction methodology for graduating proven patterns into reusable, standalone packages.
+
+**This skill does NOT cover:**
+- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol` for those patterns.
+- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit` for prompt lifecycle management.
+- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer` for system-level monitoring.
+- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer` for foundational agent design decisions.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **context-engine** | Context Engine controls what the agent sees per session; Self-Improving Agent decides what is worth remembering long-term | Promoted rules and curated memory flow into context retrieval; context relevance metrics flow back for regression tracking |
+| **agent-designer** | Agent Designer defines the agent's architecture and capabilities; Self-Improving Agent layers learning infrastructure on top | Architecture constraints inform what feedback loops are possible; extracted skills feed back as new agent capabilities |
+| **prompt-engineer-toolkit** | Prompts degrade over time as codebases evolve; Self-Improving Agent detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as rule changes in CLAUDE.md |
+| **observability-designer** | Observability provides system-level metrics; Self-Improving Agent provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent performance metrics can be exported to observability dashboards |
+| **tech-debt-tracker** | Stale rules and bloated memory are a form of technical debt; Tech Debt Tracker can surface them alongside code debt | Memory health metrics feed into debt scoring; debt prioritization informs which stale rules to retire first |
+| **agent-workflow-designer** | Multi-step agent workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted workflow optimizations flow back as updated workflow definitions |

@@ -378,3 +378,50 @@ Step 4: Prune stale memory
 - `references/context-window-strategies.md` - Detailed packing algorithms and benchmarks
 - `references/code-retrieval-patterns.md` - RAG for code: chunking, embedding, and ranking strategies
 - `references/memory-architecture-guide.md` - Multi-layer memory system design patterns
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Agent responses ignore relevant files | Context retrieval missing import graph traversal | Enable dependency-aware retrieval; always include direct imports and type definitions alongside target files |
+| Output truncated mid-response | No output buffer reserved in token budget | Reserve 10-15% of context window for generation; reduce Tier 2/3 content first |
+| Stale context causing hallucinations | Memory layer not tracking file modification timestamps | Implement staleness detection with freshness scores; invalidate cache entries when source files change |
+| RAG retrieval returns irrelevant chunks | Chunking splits functions mid-body or ignores code structure | Switch to AST-aware chunking at function/class boundaries; attach file path and export metadata to each chunk |
+| Context window exceeded on large tasks | Greedy packing loads too many full files | Use adaptive compression: summarize boilerplate, load only signatures for low-priority files, keep high-signal code verbatim |
+| Multi-agent handoff loses critical state | Raw conversation history passed instead of structured summary | Follow the Context Handoff Protocol: pass state summary, artifacts, constraints, open questions, and next steps |
+| Knowledge graph queries return empty results | Graph not rebuilt after major refactors or branch switches | Schedule reindexing on commit hooks or branch checkout; validate node counts after rebuild |
+
+## Success Criteria
+
+- **Context Relevance above 70%**: At least 70% of tokens loaded into the context window are directly referenced or used in the agent's response.
+- **Retrieval Precision above 80%**: More than 80% of retrieved code chunks or files are relevant to the current task, measured by human evaluation or downstream task success.
+- **Token Utilization above 85%**: Productive token usage (system instructions + task-relevant code + active conversation) exceeds 85% of the allocated budget, with less than 15% wasted on redundant or low-signal content.
+- **Staleness Rate below 5%**: Fewer than 5% of context items are outdated (file changed since last retrieval without re-verification), validated by comparing loaded content hashes against current file state.
+- **Cache Hit Rate above 40%**: At least 40% of repeated tool invocations (file reads, searches) are served from cache, reducing redundant token consumption and latency.
+- **Handoff Completeness at 100%**: Every multi-agent context handoff includes all five protocol elements (state summary, artifacts, constraints, open questions, next steps) with zero information gaps.
+- **Session Memory Promotion Accuracy above 90%**: Learnings promoted to persistent memory (CLAUDE.md, rules files) are validated as still accurate within 30 days, with fewer than 10% requiring correction or rollback.
+
+## Scope & Limitations
+
+**This skill covers:**
+- Context window token budget planning, allocation strategies, and packing algorithms for AI coding agents.
+- Multi-layer memory architecture design (working memory, session memory, knowledge base) with promotion and staleness protocols.
+- Code-specific retrieval strategies including file-level, chunk-level, and dependency-aware retrieval for RAG pipelines.
+- Knowledge graph construction from codebases and graph-based context queries for agent workflows.
+
+**This skill does NOT cover:**
+- Vector store infrastructure setup, embedding model selection, or database deployment — see **rag-architect** for vector store design and embedding strategies.
+- Agent role definition, personality design, or multi-agent orchestration logic — see **agent-designer** for agent architecture and **agent-workflow-designer** for orchestration patterns.
+- Runtime observability, metrics dashboards, or alerting for agent systems — see **observability-designer** for monitoring and instrumentation.
+- Prompt engineering techniques, chain-of-thought design, or instruction tuning — see **prompt-engineer-toolkit** for prompt construction patterns.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **rag-architect** | Context Engine defines retrieval strategies; RAG Architect implements the vector store and embedding pipeline | Retrieval queries flow from Context Engine to RAG Architect's indexed store; ranked results flow back as context chunks |
+| **agent-designer** | Agent Designer defines agent roles and capabilities; Context Engine manages per-agent context budgets and memory layers | Agent specifications define context requirements; Context Engine returns tailored context windows per agent role |
+| **self-improving-agent** | Self-Improving Agent identifies recurring patterns and corrections; Context Engine decides when to promote learnings to persistent memory | Candidate learnings flow from Self-Improving Agent; promotion decisions and memory updates flow back through Context Engine's staleness and promotion protocols |
+| **observability-designer** | Observability Designer instruments context utilization metrics (relevance, staleness, cache hits); Context Engine exposes metric endpoints | Raw metric events flow from Context Engine; Observability Designer aggregates into dashboards and alerts |
+| **agent-workflow-designer** | Agent Workflow Designer defines multi-agent handoff sequences; Context Engine implements the shared context bus and handoff protocol | Workflow definitions specify which agents share context; Context Engine manages the context bus, serialization, and handoff payloads |
+| **codebase-onboarding** | Codebase Onboarding generates project summaries and architecture maps; Context Engine consumes these as Tier 0 bootstrap context | Onboarding artifacts (project summary, directory map, entry points) feed into Context Engine's initial knowledge graph and context tiers |

@@ -425,3 +425,145 @@ fi
 The API Design Reviewer skill provides a comprehensive framework for building, reviewing, and maintaining high-quality REST APIs. By following these guidelines and using the provided tools, development teams can create APIs that are consistent, well-documented, secure, and maintainable.
 
 Regular use of the linting, breaking change detection, and scoring tools ensures continuous improvement and helps maintain API quality throughout the development lifecycle.
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Linter reports false positives on action endpoints (e.g., `/activate`) | Verb detection flags action segments as REST anti-patterns | Action endpoints are acceptable for non-CRUD operations; suppress with caution or restructure as `POST /resource/{id}/activations` |
+| Breaking change detector misses schema-level changes | Input specs lack `components/schemas` definitions or use inline schemas | Ensure both old and new specs define reusable schemas under `components/schemas` for accurate comparison |
+| Scorecard gives low security score despite auth being implemented | Security schemes are defined but not applied globally or per-operation | Add a top-level `security` array in the OpenAPI spec and reference `securitySchemes` under `components` |
+| Linter exits with code 1 on specs with no endpoints | Zero endpoints with any structural error triggers a non-zero exit | Verify the spec contains at least one path under `paths`; the linter requires endpoints to produce a meaningful score |
+| JSON parse error on valid YAML OpenAPI specs | All three tools accept JSON input only | Convert YAML specs to JSON before running tools: `python -c "import yaml,json,sys; json.dump(yaml.safe_load(open(sys.argv[1])),open(sys.argv[2],'w'),indent=2)" spec.yaml spec.json` |
+| Naming convention warnings on legacy APIs with snake_case fields | Linter enforces camelCase for properties and kebab-case for URL segments | For brownfield APIs, address naming in new endpoints first and plan a migration for existing fields across a major version bump |
+| Scorecard reports 0% for performance category | Spec contains no caching headers, pagination, or compression references | Add `Cache-Control` response headers, define pagination query parameters (`limit`, `offset` or `cursor`), and document compression support |
+
+## Success Criteria
+
+- Zero breaking changes detected between consecutive minor or patch releases (semver compliance)
+- API consistency score (from `api_scorecard.py`) above 90 across all reviewed specifications
+- Overall scorecard grade of B or higher (80+) before any API ships to production
+- 100% of endpoints include at least one success response and one error response definition
+- All path segments follow kebab-case naming and all schema properties follow camelCase naming with zero linter errors
+- Breaking change reports generated and reviewed for every PR that modifies an OpenAPI spec
+- Documentation coverage score above 85%, meaning every operation has a summary and every schema has a description
+
+## Scope & Limitations
+
+**This skill covers:**
+- Linting OpenAPI 3.x and Swagger 2.0 JSON specifications against REST conventions
+- Detecting breaking, potentially-breaking, and non-breaking changes between two spec versions
+- Scoring API design quality across consistency, documentation, security, usability, and performance
+- Generating actionable migration guides when breaking changes are found
+
+**This skill does NOT cover:**
+- Runtime API testing, load testing, or contract testing (see `api-test-suite-builder`)
+- GraphQL, gRPC, or WebSocket API design review
+- Auto-generation of OpenAPI specs from code or server stubs
+- Authentication flow implementation or OAuth server configuration (see `senior-security` in engineering-team/)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/api-test-suite-builder` | Generate test cases from linter findings | Linter issues feed into test plan priorities for endpoint validation |
+| `engineering/changelog-generator` | Document breaking changes in release notes | Breaking change detector output provides structured change data for changelogs |
+| `engineering/ci-cd-pipeline-builder` | Gate deployments on API quality | Scorecard grade and linter exit codes integrate as pipeline quality gates |
+| `engineering-team/senior-backend` | Review API implementation against design | Scorecard recommendations guide backend refactoring decisions |
+| `engineering-team/code-reviewer` | Enrich PR reviews with API analysis | Linter and breaking change reports attach to PR review comments |
+| `engineering/release-manager` | Validate version bumps match change severity | Breaking change detector severity levels inform semver version decisions |
+
+## Tool Reference
+
+### api_linter.py
+
+**Purpose:** Analyzes OpenAPI/Swagger JSON specifications for compliance with REST conventions and best practices. Checks naming conventions, HTTP method usage, URL structure, status codes, error formats, documentation completeness, and security configuration.
+
+**Usage:**
+```bash
+python api_linter.py [OPTIONS] INPUT_FILE
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `input_file` | positional | Yes | -- | Path to OpenAPI/Swagger JSON file or raw endpoints JSON |
+| `--format` | option | No | `text` | Output format: `text` or `json` |
+| `--raw-endpoints` | flag | No | off | Treat input as raw endpoint definitions instead of an OpenAPI spec |
+| `--output` | option | No | stdout | Write report to the specified file path |
+
+**Example:**
+```bash
+python api_linter.py openapi.json
+python api_linter.py --format json openapi.json > report.json
+python api_linter.py --raw-endpoints endpoints.json
+python api_linter.py --output lint-report.txt openapi.json
+```
+
+**Output Formats:**
+- **text** -- Human-readable report with issue breakdown by category, severity icons, suggestions, and a scoring summary. Exits with code 1 if any errors are found, 0 otherwise.
+- **json** -- Machine-readable JSON object with `summary` (total_endpoints, endpoints_with_issues, total_issues, errors, warnings, info, score) and `issues` array (severity, category, message, path, suggestion).
+
+---
+
+### breaking_change_detector.py
+
+**Purpose:** Compares two versions of an OpenAPI JSON specification and detects breaking changes including removed endpoints, modified response structures, removed fields, type changes, new required fields, parameter changes, and status code changes. Generates migration guides for each breaking change.
+
+**Usage:**
+```bash
+python breaking_change_detector.py [OPTIONS] OLD_SPEC NEW_SPEC
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `old_spec` | positional | Yes | -- | Path to the old (baseline) API specification JSON file |
+| `new_spec` | positional | Yes | -- | Path to the new API specification JSON file |
+| `--format` | option | No | `text` | Output format: `text` or `json` |
+| `--output` | option | No | stdout | Write report to the specified file path |
+| `--exit-on-breaking` | flag | No | off | Exit with code 1 if any breaking changes are detected |
+
+**Example:**
+```bash
+python breaking_change_detector.py v1.json v2.json
+python breaking_change_detector.py --format json v1.json v2.json > changes.json
+python breaking_change_detector.py --exit-on-breaking --output report.txt v1.json v2.json
+```
+
+**Output Formats:**
+- **text** -- Human-readable report listing each change with its type (breaking, potentially_breaking, non_breaking, enhancement), severity (critical, high, medium, low, info), category, path, message, impact description, and migration guide.
+- **json** -- Machine-readable JSON object with `summary` (total_changes, breaking_changes, potentially_breaking_changes, non_breaking_changes, enhancements, and per-severity counts) and `changes` array (changeType, severity, category, path, message, oldValue, newValue, migrationGuide, impactDescription).
+
+---
+
+### api_scorecard.py
+
+**Purpose:** Generates a comprehensive API design quality scorecard by evaluating an OpenAPI JSON specification across five weighted dimensions: Consistency (30%), Documentation (20%), Security (20%), Usability (15%), and Performance (15%). Produces letter grades (A-F) per category and overall, with actionable improvement recommendations.
+
+**Usage:**
+```bash
+python api_scorecard.py [OPTIONS] SPEC_FILE
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `spec_file` | positional | Yes | -- | Path to the OpenAPI/Swagger specification JSON file |
+| `--format` | option | No | `text` | Output format: `text` or `json` |
+| `--output` | option | No | stdout | Write scorecard to the specified file path |
+| `--min-grade` | option | No | none | Minimum acceptable grade (`A`, `B`, `C`, `D`, `F`); exits with code 1 if the overall grade falls below this threshold |
+
+**Example:**
+```bash
+python api_scorecard.py openapi.json
+python api_scorecard.py --format json openapi.json > scorecard.json
+python api_scorecard.py --min-grade B --output scorecard.txt openapi.json
+```
+
+**Output Formats:**
+- **text** -- Human-readable scorecard showing API info, per-category scores with letter grades, issue counts, recommendations, and an overall weighted score with grade.
+- **json** -- Machine-readable JSON object with `apiInfo`, `categoryScores` (per category: score, maxScore, weight, letterGrade, weightedScore, issues, recommendations), `overallScore`, `overallGrade`, `totalEndpoints`, and `topRecommendations`.

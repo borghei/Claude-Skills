@@ -500,3 +500,50 @@ Before merging a generated pipeline:
 6. **Track pipeline duration and flakiness** as first-class engineering metrics
 7. **Separate deploy jobs from CI jobs** to keep feedback fast for developers
 8. **Regenerate the pipeline when the stack changes significantly** (new language, new framework)
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline YAML fails validation | Indentation errors or invalid key names | Run `yamllint` locally before committing; use the CI platform's built-in linter (e.g., `act` for GitHub Actions, `gitlab-ci-lint` for GitLab) |
+| Cache misses on every run | Cache key does not include the correct lockfile hash | Verify the `hashFiles()` path matches the actual lockfile location; check the Caching Strategy Reference table above |
+| Matrix build times explode | Running full OS + version matrix on every PR | Restrict the full matrix to `main` branch pushes; run a single representative version on PRs |
+| Deployment job triggers on PRs | Missing branch/event guard on deploy jobs | Add `if: github.ref == 'refs/heads/main' && github.event_name == 'push'` or equivalent platform condition |
+| Service containers fail to start | Health check misconfigured or image not found | Pin the service image to a specific major version; confirm health check command exists in the image |
+| Secret not available in workflow | Secret not added to the repository or environment settings | Add the secret via the CI platform's secrets UI; ensure the job references the correct `environment` name |
+| Build artifact missing in deploy job | Artifact name mismatch or retention expired | Ensure `upload-artifact` and `download-artifact` use the same `name` value; set `retention-days` high enough to survive the full pipeline |
+
+## Success Criteria
+
+- Pipeline generates valid YAML that passes platform-native linting on first attempt for detected stacks
+- Build times stay under 10 minutes for lint + test + build stages combined (excluding deploy)
+- Cache hit rate exceeds 90% on repeat runs with unchanged lockfiles
+- Security scanning (SAST + dependency + container) executes on every push to `main` without manual triggers
+- Deployment to staging is fully automated; production requires exactly one manual approval gate
+- Pipeline flakiness rate remains below 2% over a rolling 30-day window
+- Zero hardcoded secrets in generated pipeline YAML; all sensitive values reference platform secret stores
+
+## Scope & Limitations
+
+**This skill covers:**
+- Generating CI/CD pipelines for GitHub Actions, GitLab CI, CircleCI, and Buildkite
+- Stack detection from lockfiles, manifests, Dockerfiles, and infrastructure-as-code definitions
+- Deployment strategy selection (blue-green, canary, rolling, recreate) with decision framework
+- Pipeline optimization including caching, matrix builds, path filtering, and concurrency control
+
+**This skill does NOT cover:**
+- Runtime infrastructure provisioning or cloud resource management (see `engineering/saas-scaffolder`)
+- Application-level security hardening beyond CI-integrated scanning (see `engineering/skill-security-auditor`)
+- Monitoring, alerting, and observability configuration after deployment (see `engineering/observability-designer`)
+- Database migration orchestration during deployments (see `engineering/migration-architect`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/dependency-auditor` | Feeds vulnerability scan results into pipeline security gates | Auditor findings trigger pipeline failure or warning annotations |
+| `engineering/release-manager` | Coordinates versioning and changelog with deploy stages | Release tags drive conditional deployment job execution |
+| `engineering/observability-designer` | Post-deploy health checks and alerting complement pipeline gates | Pipeline triggers smoke tests; observability confirms deployment health |
+| `engineering/env-secrets-manager` | Manages secrets referenced by pipeline environment variables | Secret rotation policies feed into pipeline secret store configuration |
+| `engineering/migration-architect` | Database migrations run as a pre-deploy step in the pipeline | Migration status gates the application deployment job |
+| `engineering/runbook-generator` | Generates rollback runbooks aligned with deployment strategy | Pipeline failure triggers link to the relevant rollback runbook |

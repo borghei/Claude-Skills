@@ -441,3 +441,50 @@ fi
 6. **Use short-lived credentials** — prefer OIDC/instance roles over long-lived access keys
 7. **Audit access** — log every secret read in Vault/SSM; alert on anomalous access patterns
 8. **Document rotation playbooks** — write them before an incident, not during one
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Startup validation fails with MISSING for a set variable | Variable is set in `.env` but the app reads from a different file (e.g., `.env.local` overrides it to empty) | Check file hierarchy load order; ensure the correct `.env.*` file is loaded and no override blanks the value |
+| Pre-commit hook passes but CI detects a leaked secret | Pre-commit patterns list is out of date or does not cover the token format CI scans for | Sync the regex pattern list between the pre-commit hook and CI scanner; add the missing pattern |
+| `vault kv get` returns "permission denied" | OIDC token expired or the Vault policy does not grant read access to the target path | Re-authenticate with `vault login -method=oidc` and verify the policy includes `read` capability on the secret path |
+| Environment drift detection shows false positives | One environment uses a prefix convention (e.g., `NEXT_PUBLIC_`) that the other does not | Add an exclusion list of known environment-specific keys to the drift script |
+| Secret rotation causes service outage | Code was deployed without the dual-read period; only the new secret is accepted immediately | Always deploy the dual-read code change first, then update the secret value, then remove old-secret support |
+| `.env.example` accidentally contains real credentials | Developer copied `.env` to `.env.example` without stripping values | Run the auto-generation script to rebuild `.env.example` from `.env` with values stripped; add a CI check that `.env.example` values match safe defaults only |
+| AWS SSM `put-parameter` fails with AccessDeniedException | IAM role lacks `ssm:PutParameter` or `kms:Encrypt` permissions for the target key | Attach the required IAM policy granting `ssm:PutParameter` and `kms:Encrypt` on the KMS key alias used for SecureString |
+
+## Success Criteria
+
+- **Zero secrets in git history** — secret leak scanner reports 0 findings across all branches
+- **100% startup validation coverage** — every required variable is declared in the validation script; no production deploy starts with missing vars
+- **Rotation completed within SLA** — credential rotation finishes within 4 hours of incident detection, including dual-write period and verification
+- **Environment drift below 5%** — staging and production variable key sets differ by no more than 5% (intentional differences documented)
+- **Pre-commit hook adoption at 100%** — every contributor has the secret-blocking pre-commit hook installed and active
+- **Quarterly rotation compliance** — all long-lived credentials are rotated at least once per quarter with audit trail in the secret manager
+- **Post-rotation monitoring green** — zero authentication failures attributed to stale credentials in the 24-hour window after each rotation
+
+## Scope & Limitations
+
+**This skill covers:**
+- `.env` file scaffolding, hierarchy, and validation for any language/framework
+- Secret leak detection in git history, staged files, and working tree
+- Credential rotation playbooks with zero-downtime dual-read strategy
+- Integration patterns for HashiCorp Vault, AWS SSM, 1Password CLI, and Doppler
+
+**This skill does NOT cover:**
+- Runtime secret injection in Kubernetes (see `engineering/ci-cd-pipeline-builder` for deployment pipeline secrets)
+- Infrastructure-as-code for provisioning Vault clusters or SSM policies (see `engineering/ci-cd-pipeline-builder`)
+- Application-level encryption at rest or in transit (see `engineering/api-design-reviewer` for API security patterns)
+- Identity and access management (IAM) role design or SSO/OIDC provider configuration (see `ra-qm-team/` compliance skills for access control frameworks)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ci-cd-pipeline-builder` | Inject secrets from Vault/SSM/Doppler into CI/CD pipeline stages | Rotation playbook outputs feed pipeline secret-update steps |
+| `engineering/dependency-auditor` | Flag dependencies that bundle or require hardcoded credentials | Dependency audit findings trigger secret leak scans on affected repos |
+| `engineering/skill-security-auditor` | Validate that no skill packages ship embedded secrets or credentials | Security audit references this skill's regex patterns for detection |
+| `engineering/codebase-onboarding` | Include `.env.example` setup and secret-manager access in onboarding checklists | Onboarding workflow consumes the `.env` hierarchy and validation script |
+| `engineering/observability-designer` | Monitor authentication failures post-rotation; alert on anomalous secret access | Post-rotation verification metrics flow into observability dashboards |
+| `ra-qm-team/soc2-compliance-auditor` | Demonstrate secret management controls for SOC 2 CC6.1 and CC6.6 criteria | Rotation audit logs and access policies serve as SOC 2 evidence artifacts |
