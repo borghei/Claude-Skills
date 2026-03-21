@@ -409,6 +409,99 @@ User cannot access the feature at all. Show the value clearly.
 
 ---
 
+## Tool Reference
+
+### 1. paywall_trigger_auditor.py
+
+Audits paywall trigger configuration for timing, frequency, and coverage issues. Reads a JSON file of trigger rules and user event data, then flags misconfigured triggers, missing cooldowns, and dark-pattern risks.
+
+```bash
+python scripts/paywall_trigger_auditor.py triggers.json --format text
+python scripts/paywall_trigger_auditor.py triggers.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `triggers.json` | positional | Path to JSON file with trigger rules and event data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. upgrade_funnel_analyzer.py
+
+Analyzes upgrade funnel step-by-step conversion from paywall impression through payment completion. Identifies the highest-drop steps, calculates stage-over-stage conversion, and benchmarks against industry targets.
+
+```bash
+python scripts/upgrade_funnel_analyzer.py funnel.json --format text
+python scripts/upgrade_funnel_analyzer.py funnel.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `funnel.json` | positional | Path to JSON file with funnel step data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. paywall_copy_scorer.py
+
+Scores paywall screen copy against proven conversion patterns. Evaluates headline structure, benefit clarity, CTA strength, social proof presence, and dark-pattern risk. Outputs a 0-100 score with itemized feedback.
+
+```bash
+python scripts/paywall_copy_scorer.py copy.json --format text
+python scripts/paywall_copy_scorer.py copy.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `copy.json` | positional | Path to JSON file with paywall copy elements |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Paywall CTR below 3% | Trigger fires before user reaches aha moment or copy is feature-focused instead of benefit-focused | Delay trigger until after activation event; rewrite headline to outcome-based messaging (lifts CTR up to 23% per Strava case study) |
+| Upgrade completion below 20% | Too much friction in payment flow (redirects, missing payment methods, surprise charges) | Keep flow in-context (modal/slide-out), pre-fill known info, show price before payment step |
+| Post-upgrade churn above 15% | Value expectation mismatch -- paid experience does not match what the paywall promised | Audit feature access post-upgrade, add guided tour of newly unlocked features, align copy with actual capabilities |
+| Free-to-paid conversion below 1% | Paywall appears before value is delivered or free tier is too generous | Map activation events and ensure paywall only fires after aha moment; review free vs paid feature boundary |
+| Users close paywall within 1 second repeatedly | Paywall is interrupting workflow or appearing too frequently | Increase cooldown to 7+ days after dismissal, cap at 3 per month, switch to less intrusive format (banner vs modal) |
+| Mobile paywall underperforms desktop by >30% | iOS/Android IAP friction, small dismiss targets, or full-screen overlay on mobile | Ensure 44x44px touch targets, use bottom-sheet format on mobile, comply with App Store guidelines |
+| Trial expiration emails have low open rate | Generic subject lines, wrong send timing, or email deliverability issues | Personalize with usage data ("You created 12 projects"), send at user's active hours, check spam score |
+
+---
+
+## Success Criteria
+
+- Free-to-paid conversion rate reaches 2-5% for freemium models or 15-30% for trial models within 90 days of optimization
+- Paywall CTR stabilizes at 5-15% across all trigger types
+- Upgrade completion rate (paywall click to payment) exceeds 30%
+- Post-upgrade 30-day retention exceeds 90% (churn below 10%)
+- Paywall annoyance signals (sub-1-second dismissals) decrease to below 5% of impressions
+- Zero dark patterns present in paywall audit (no shame copy, no hidden close buttons, no fake urgency)
+- Annual plan adoption reaches 40%+ of new upgrades when annual toggle defaults are implemented (benchmark: 20-40% lift)
+
+---
+
+## Scope & Limitations
+
+**In scope:** In-product upgrade flows including feature gates, usage limit screens, trial expiration sequences, upgrade trigger timing, save offer strategy, paywall screen design, and A/B test frameworks for freemium-to-paid and trial-to-paid conversion.
+
+**Out of scope:** Public-facing pricing pages (use page-cro), the pricing model itself (use pricing-strategy), post-signup onboarding before the aha moment (use onboarding-cro), initial registration flows (use signup-flow-cro), and post-upgrade churn intervention (use churn-prevention). This skill does not cover App Store Optimization (ASO) or paid acquisition strategies. Scripts operate on local data only -- no integrations with payment processors, analytics platforms, or A/B testing tools.
+
+**Limitations:** Conversion benchmarks are based on aggregate SaaS/app industry data and may vary significantly by vertical, price point, and audience. Mobile paywall performance is highly dependent on platform-specific IAP requirements (Apple 30% commission, Google Play billing). Scripts analyze static snapshots; real-time paywall optimization requires integration with analytics and experimentation platforms not provided here.
+
+---
+
+## Integration Points
+
+- **pricing-strategy** -- Feed pricing tier structure and value metric into paywall copy and plan comparison design
+- **onboarding-cro** -- Coordinate activation event definitions; paywall triggers should fire only after onboarding confirms aha moment
+- **churn-prevention** -- Post-upgrade churn data feeds back into paywall expectation-setting; save offers should align with churn prevention playbook
+- **page-cro** -- Public pricing page design feeds into in-app upgrade flow consistency; ensure messaging alignment
+- **signup-flow-cro** -- Registration flow completion triggers trial start; trial duration and paywall timing depend on signup context
+- **popup-cro** -- Share frequency capping logic and suppression rules; paywall modals follow same UX principles as marketing popups
+
+---
+
 ## Related Skills
 
 - **page-cro** -- Use for public pricing page optimization. Paywall-upgrade-cro handles in-product upgrade moments.

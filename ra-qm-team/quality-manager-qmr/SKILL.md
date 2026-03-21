@@ -399,3 +399,82 @@ python scripts/management_review_tracker.py --summary --format markdown
 | [capa-officer](../capa-officer/) | CAPA system oversight |
 | [qms-audit-expert](../qms-audit-expert/) | Internal audit program |
 | [quality-documentation-manager](../quality-documentation-manager/) | Document control oversight |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Management review tracker shows "Not Collected" for all inputs | Input data JSON is empty or incorrectly structured | Verify the JSON file contains `inputs` with `topic`, `responsible`, `status`, and `data_period` fields. Use `--summary` to check the expected structure. |
+| Action items all showing as "Overdue" | Due dates in the data file are in the past with no completion dates | Update completed actions with `completion_date` and change status to `Complete` or `Verified`. For genuinely overdue items, escalate per the performance response matrix. |
+| Metrics summary produces zeros for all KPIs | Metrics section missing from review data JSON | Add a `metrics` object with fields for `complaint_rate`, `capa_open`, `capa_effectiveness`, `first_pass_yield`, `customer_satisfaction`, and `training_compliance`. |
+| Quality culture survey response rate below 60% | Survey not communicated effectively or confidentiality concerns | Re-communicate the survey purpose with explicit confidentiality assurances. Extend the response window. Consider anonymous submission to increase participation. |
+| Quality objectives not measurable | Objectives written as aspirational statements rather than SMART criteria | Rewrite each objective with a quantifiable target, baseline, owner, timeline, and measurement method per the SMART format documented in this skill. |
+| KPI dashboard shows conflicting trends | Data collected from multiple sources with different time periods | Standardize data collection periods across all KPI sources. Ensure all metrics use the same calendar quarter or review period boundaries. |
+| Inspection readiness checklist incomplete | Multiple departments not providing status updates | Assign a readiness coordinator per department. Conduct weekly readiness stand-ups in the 30 days before an expected inspection. |
+
+---
+
+## Success Criteria
+
+- Management reviews conducted at planned intervals (minimum annually, recommended quarterly) with all ISO 13485 Clause 5.6.2 required inputs collected and analyzed
+- Every management review produces documented outputs per Clause 5.6.3: QMS improvement decisions, resource needs, and quality objective updates, each with assigned owners and due dates
+- Quality KPI framework covers all required categories (process, CAPA, audit, customer) with measurable targets and documented escalation thresholds
+- Action item completion rate from management reviews exceeds 90% by due date, with no overdue high-priority items
+- Quality culture assessment conducted annually with response rate exceeding 60%, and action plans addressing the bottom 3 dimension scores
+- Regulatory compliance monitoring covers all applicable jurisdictions with no expired registrations or certifications
+- Cost of quality tracked and reported quarterly, demonstrating prevention investment reducing failure costs over time
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Management review preparation, execution, and output tracking per ISO 13485 Clause 5.6
+- Quality KPI framework design, target setting, and performance monitoring
+- Quality objective setting and tracking per Clause 5.4.1
+- Quality culture assessment and improvement planning
+- Multi-jurisdictional regulatory compliance monitoring
+- Inspection readiness assessment and checklist management
+- QMR accountability and authority framework
+
+**Out of Scope:**
+- Detailed CAPA management (use capa-officer for root cause analysis, implementation, and effectiveness verification)
+- Internal audit program execution (use qms-audit-expert for audit planning, conduct, and finding classification)
+- Document control operations (use quality-documentation-manager for numbering, approval workflows, and Part 11 compliance)
+- Product-level quality engineering (process validation, statistical process control, Six Sigma methodologies)
+- HR performance management or compensation decisions linked to quality objectives
+- Financial budgeting or resource allocation decisions (the skill recommends resource needs but does not manage budgets)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | QMS process management provides the operational foundation that the QMR oversees; QMS metrics feed into management review |
+| [capa-officer](../capa-officer/) | CAPA status and effectiveness rates are required management review inputs; QMR oversees CAPA program performance |
+| [qms-audit-expert](../qms-audit-expert/) | Audit results (internal and external) are required management review inputs; audit finding closure rate is a core QMR KPI |
+| [quality-documentation-manager](../quality-documentation-manager/) | Document control metrics (cycle time, overdue reviews) feed into management review; QMR ensures document system adequacy |
+| [regulatory-affairs-head](../regulatory-affairs-head/) | Regulatory changes affecting the QMS are a required management review input; RA and QMR coordinate compliance status reporting |
+| [risk-management-specialist](../risk-management-specialist/) | Risk management file reviews and post-market risk data inform management review decisions on product safety |
+
+---
+
+## Tool Reference
+
+### management_review_tracker.py
+
+Tracks management review inputs, action items, and generates review metrics reports.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--data` | Yes (or `--interactive`) | Path to review data JSON file containing inputs, action items, and metrics for the review period |
+| `--interactive` | No | Launch interactive mode for guided data entry |
+| `--output` | No | Output format: `json` for structured output, omit for human-readable text |
+| `--status` | No | Filter view: `inputs` (show input collection status), `actions` (show action item status) |
+| `--overdue` | No | Show only overdue action items (use with `--status actions`) |
+| `--period` | No | Review period identifier (e.g., `Q4-2025`) to filter data |
+| `--summary` | No | Generate a metrics summary report for the current review period |
+| `--format` | No | Output format for summary: `markdown` for formatted text, omit for plain text |

@@ -253,18 +253,82 @@ Before starting any people analytics project:
 ## Scripts
 
 ```bash
-# Turnover analysis
-python scripts/turnover_analyzer.py --data employees.csv
+# Analyze engagement survey results with driver analysis
+python scripts/survey_analyzer.py --file survey_results.csv
+python scripts/survey_analyzer.py --file survey_results.csv --prior prior_survey.csv --json
 
-# Flight risk scorer
-python scripts/flight_risk.py --model model.pkl --employees current.csv
+# Score attrition risk from employee data
+python scripts/attrition_predictor.py --file employees.csv
+python scripts/attrition_predictor.py --file employees.csv --threshold 0.7 --json
 
-# Survey analyzer
-python scripts/survey_analyzer.py --responses survey.csv --prior prior.csv
-
-# DEI metrics generator
-python scripts/dei_metrics.py --data workforce.csv
-
-# Workforce planner
-python scripts/workforce_planner.py --current state.csv --plan business_plan.yaml
+# Workforce headcount planning calculations
+python scripts/headcount_planner.py --file workforce.csv --growth 0.15 --attrition 0.12
+python scripts/headcount_planner.py --file workforce.csv --growth 0.15 --attrition 0.12 --json
 ```
+
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Low survey response rate (< 70%) | Survey fatigue, lack of trust in anonymity, or no visible action from prior surveys | Shorten survey to 15-20 questions max; communicate anonymity safeguards clearly; publish and act on top 3 findings from prior survey before launching next one |
+| Attrition model produces too many false positives | Overfitting on historical data, missing key features, or class imbalance | Add regularization; use SMOTE or class weights to handle imbalance; validate with cross-validation not just train/test split; include manager quality and comp-ratio as features |
+| Stakeholders distrust analytics findings | Results contradict lived experience, or methodology is opaque | Present methodology transparently; validate findings with HRBPs before publishing; use confidence intervals not point estimates; start with descriptive analytics to build trust before predictive |
+| Data quality issues across HRIS sources | Inconsistent coding, missing fields, stale records, or duplicate entries | Establish data governance council; define data owners per field; run quarterly data quality audits; build automated validation checks at ingestion |
+| Privacy concerns block analysis | Insufficient anonymization, no consent framework, or regulatory gaps | Apply k-anonymity (minimum group size of 5); conduct privacy impact assessment before each project; engage Legal early; use aggregated data when individual-level is not required |
+| Engagement scores are flat despite interventions | Measuring wrong drivers, action plans not executed, or survey is too generic | Run driver analysis to identify high-impact low-score areas; assign action owners with quarterly check-ins; customize survey questions by department or function |
+| Leadership does not act on insights | Insights are too academic, lack business framing, or arrive too late | Lead with business impact (revenue, cost, risk); limit recommendations to 2-3 with clear owners and timelines; deliver insights within 2 weeks of data collection |
+
+## Success Criteria
+
+| Dimension | Metric | Target | Measurement |
+|-----------|--------|--------|-------------|
+| Data Quality | HRIS data completeness | > 95% of required fields populated | Quarterly data audit report |
+| Data Quality | Data freshness | All records updated within 30 days | HRIS last-modified timestamps |
+| Adoption | Stakeholder usage of dashboards | > 70% of HRBPs and VPs access monthly | Dashboard analytics / login tracking |
+| Adoption | Insight-to-action rate | > 60% of recommendations result in initiatives | Quarterly tracking of recommendation outcomes |
+| Accuracy | Attrition prediction precision | > 70% precision at 50% recall | Model evaluation against actuals (6-month lag) |
+| Accuracy | Survey driver analysis validity | Top 3 drivers validated by qualitative data | Cross-reference with exit interviews and focus groups |
+| Impact | Regrettable attrition reduction | 10-20% reduction within 12 months of intervention | HRIS voluntary termination data, regrettable flag |
+| Impact | Time from question to insight | < 2 weeks for standard analyses | Request-to-delivery tracking |
+| Compliance | Privacy incidents | Zero breaches of anonymity thresholds | Audit log of all queries; minimum group size enforcement |
+| Maturity | Analytics maturity level progression | Advance 1 level per 12-18 months | Self-assessment against the Analytics Maturity Model |
+
+## Scope & Limitations
+
+**In Scope:**
+- Workforce descriptive analytics: headcount, turnover, retention, demographics, tenure distribution
+- Engagement survey design, analysis, driver identification, and benchmarking
+- Attrition risk scoring using rule-based and statistical methods (standard library only)
+- Pay equity analysis: raw gap, controlled gap, outlier flagging
+- DEI metrics: representation, progression rates, hiring funnel equity
+- Workforce planning: headcount forecasting, scenario modeling, gap analysis
+- Dashboard design and KPI framework recommendations
+
+**Out of Scope:**
+- Real-time predictive models requiring ML frameworks (scikit-learn, TensorFlow) -- scripts use rule-based scoring for portability
+- Sentiment analysis of free-text survey responses (requires NLP libraries)
+- Individual employee profiling or surveillance -- all analysis uses aggregated or anonymized data
+- HRIS system administration, data pipeline engineering, or ETL development
+- Legal interpretation of pay equity findings (requires Employment Law counsel)
+- Organizational network analysis requiring email/calendar metadata
+
+**Known Limitations:**
+- Attrition risk scoring in scripts uses weighted heuristics, not trained ML models; accuracy depends on feature quality and weight calibration
+- Pay equity analysis in the SKILL.md examples requires statsmodels (external dependency); scripts use standard-library approximations
+- Survey analysis assumes Likert scale (1-5) responses; other formats require preprocessing
+- Small population segments (< 30) produce unreliable statistical results; flag these in reporting
+- Historical data biases (e.g., biased performance ratings) propagate into predictive models if not addressed
+
+## Integration Points
+
+| System / Skill | Integration | Data Flow |
+|----------------|-------------|-----------|
+| **HRIS** (Workday, BambooHR, HiBob) | Employee master data, tenure, compensation, performance ratings | HRIS -> analytics data lake; analytics insights -> HRBP workforce plans |
+| **ATS** (Greenhouse, Lever) | Hiring funnel data, source-of-hire, time-to-fill | ATS -> hiring analytics; quality-of-hire scoring feeds back to TA strategy |
+| **Survey Platform** (Culture Amp, Qualtrics, Lattice) | Engagement survey responses, eNPS, pulse check data | Survey platform -> survey_analyzer.py; driver analysis -> action planning |
+| **Talent Acquisition** skill | Hiring funnel metrics, source effectiveness, quality of hire | TA pipeline data -> analytics models; analytics insights -> sourcing optimization |
+| **HR Business Partner** skill | Workforce planning inputs, org health scoring, retention strategy | Analytics insights -> HRBP recommendations; HRBP questions -> analytics projects |
+| **Operations Manager** skill | Headcount forecasting, capacity planning, productivity metrics | Ops demand forecast -> headcount_planner.py; workforce metrics -> ops capacity models |
+| **Finance** skill | Compensation budgets, cost modeling, headcount budget vs actual | Finance comp data -> pay equity analysis; headcount plan -> Finance budget model |
+| **Payroll** (ADP, Gusto) | Compensation actuals, bonus payouts, overtime data | Payroll -> comp analysis; pay equity findings -> comp adjustment recommendations |
+| **BI Platform** (Tableau, Looker, Power BI) | Dashboard hosting, self-service analytics, scheduled reporting | Analytics outputs -> BI dashboards; BI usage metrics -> adoption tracking |

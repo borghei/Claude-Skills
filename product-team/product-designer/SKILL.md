@@ -194,3 +194,120 @@ python scripts/design_qa.py --spec spec.figma --impl https://staging.example.com
 - `references/component_library.md` - Component guidelines
 - `references/accessibility.md` - Accessibility checklist
 - `references/research_methods.md` - Research techniques
+
+---
+
+## Tool Reference
+
+### design_critique.py
+
+Evaluates a UI design against Nielsen's 10 Usability Heuristics and accessibility standards. Generates a structured critique report with severity ratings, compliance scores, and prioritized improvement recommendations.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--checklist` | flag | - | Generate empty checklist for evaluation |
+| `--answers` | string | - | Path to completed checklist JSON file |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/design_critique.py --checklist
+python scripts/design_critique.py --checklist --json > checklist.json
+python scripts/design_critique.py --answers completed_checklist.json
+python scripts/design_critique.py --answers completed_checklist.json --json
+```
+
+### journey_mapper.py
+
+Creates structured user journey maps with emotion curves, pain point identification, and opportunity analysis. Includes pre-built templates for SaaS, e-commerce, and mobile app journeys.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--template`, `-t` | choice | - | Pre-built template: `saas`, `ecommerce`, `mobile_app` |
+| `--stages`, `-s` | string | - | Path to custom stages JSON file |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/journey_mapper.py --template saas
+python scripts/journey_mapper.py --template ecommerce --json
+python scripts/journey_mapper.py --stages custom_journey.json
+```
+
+### usability_scorer.py
+
+Calculates System Usability Scale (SUS) scores and task performance metrics from usability test data. Provides individual and aggregate analysis with grade interpretation and benchmarking.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `action` | positional | - | "sample" to create sample CSV files |
+| `--sus-responses` | string | - | CSV with SUS responses (participant, q1-q10) |
+| `--task-data` | string | - | CSV with task data (participant, task, completed, time_seconds, errors) |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/usability_scorer.py sample
+python scripts/usability_scorer.py --sus-responses responses.csv
+python scripts/usability_scorer.py --task-data tasks.csv
+python scripts/usability_scorer.py --sus-responses responses.csv --task-data tasks.csv --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| SUS score below 68 (benchmark) | Significant usability issues | Focus on critical severity findings from design_critique first |
+| Low task completion rate (<80%) | Task flow too complex or unclear | Simplify flow; add progressive disclosure; reduce steps |
+| Users cannot find features | Poor information architecture | Conduct card sorting; redesign navigation; add search |
+| High error rate on forms | Insufficient validation and guidance | Add inline validation, smart defaults, and contextual help |
+| Inconsistent design across screens | Missing or ignored design system | Audit with design_critique; enforce token usage |
+| Usability test participants are unrepresentative | Poor recruitment criteria | Screen for target persona match; mix new and returning users |
+| Journey map emotions are flat | Insufficient research data | Conduct deeper interviews; observe real usage sessions |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| SUS score | >68 (industry average), target >80 | usability_scorer aggregate score |
+| Task completion rate | >85% for core flows | usability_scorer task metrics |
+| Time on task | <2x expected duration | usability_scorer avg_time_seconds |
+| Design critique compliance | >80% checklist pass rate | design_critique compliance_score |
+| Accessibility compliance | WCAG AA on all screens | design_critique accessibility section |
+| Journey map coverage | All key personas mapped | Count of completed journey maps |
+| Usability test cadence | Test every sprint or release | Count of tests per quarter |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Heuristic evaluation and design critique
+- User journey mapping with emotion curves
+- Usability test scoring (SUS and task metrics)
+- Design sprint facilitation structure
+- Information architecture planning
+- Prototype fidelity guidance
+- Accessibility checkpoint evaluation
+
+**Out of scope:**
+- Automated visual regression testing (use Chromatic/Percy)
+- Real-time analytics dashboards (use Amplitude/Mixpanel)
+- Figma file manipulation or asset export (use Figma API)
+- Eye tracking or biometric analysis
+- A/B test implementation (see ab-test-setup skill)
+- Design token generation (see ui-design-system or design-system-lead skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Figma | Journey map and critique findings as design specs | Translate research into design changes |
+| Maze / UserTesting | Export task data CSV for usability_scorer | Score test results from remote testing platforms |
+| Dovetail / Condens | Export interview themes for journey_mapper | Build journey maps from research repositories |
+| Jira / Linear | design_critique JSON priorities as tickets | Track usability improvements in sprint backlog |
+| Notion / Confluence | Human-readable output from all tools | Document research findings and design decisions |
+| Miro / FigJam | journey_mapper JSON output | Collaborative journey map workshops |

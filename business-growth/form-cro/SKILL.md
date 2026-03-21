@@ -386,3 +386,100 @@ Track these events in your analytics:
 - **popup-cro** -- Use when the form lives inside a modal or popup. Form-cro handles the form itself; popup-cro handles the trigger, timing, and container.
 - **page-cro** -- Use when the page surrounding the form needs optimization (headline, value prop, layout).
 - **onboarding-cro** -- Use when post-form-submission activation is the bottleneck, not the form itself.
+
+---
+
+## Tool Reference
+
+### 1. form_scorer.py
+
+**Purpose:** Score a form against CRO best practices across field count, field types, CTA quality, mobile readiness, and trust signals.
+
+```bash
+python scripts/form_scorer.py form_config.json
+python scripts/form_scorer.py form_config.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `form_config.json` | Yes | JSON file with form fields, CTA, and context metadata |
+| `--json` | No | Output results as JSON |
+
+### 2. field_cost_analyzer.py
+
+**Purpose:** Calculate the estimated abandonment cost of each form field and recommend fields to remove, keep, or make enrichable.
+
+```bash
+python scripts/field_cost_analyzer.py form_fields.json
+python scripts/field_cost_analyzer.py form_fields.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `form_fields.json` | Yes | JSON file with form fields and their types |
+| `--json` | No | Output results as JSON |
+| `--monthly-visitors` | No | Monthly form visitors for dollar impact estimate (default: 1000) |
+| `--current-rate` | No | Current form completion rate as percentage (default: 25) |
+| `--value-per-lead` | No | Dollar value per lead for ROI calculation (default: 50) |
+
+### 3. ab_test_calculator.py
+
+**Purpose:** Calculate A/B test sample size, duration, and statistical significance for form optimization experiments.
+
+```bash
+python scripts/ab_test_calculator.py --baseline 25 --lift 10 --traffic 500
+python scripts/ab_test_calculator.py --baseline 25 --lift 10 --traffic 500 --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--baseline` | Yes | Current conversion rate as percentage (e.g., 25 for 25%) |
+| `--lift` | Yes | Minimum detectable lift as percentage (e.g., 10 for 10% relative lift) |
+| `--traffic` | Yes | Daily traffic (visitors per day to the form) |
+| `--confidence` | No | Confidence level as percentage (default: 95) |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Form completion rate below 15% | Too many fields or high-friction fields present | Run field_cost_analyzer.py to identify and remove high-cost fields; target email-only for first-touch lead forms |
+| Mobile completion rate 50%+ lower than desktop | Form not optimized for touch input | Ensure 44px touch targets, single-column layout, native keyboard types; replace dropdowns with button groups on mobile |
+| Users start but do not finish the form | Friction in middle fields (phone, budget, message) | Move high-friction fields to later steps in a multi-step form; capture email in step 1 |
+| High error rate on email or phone fields | Validation too aggressive or unclear error messages | Validate on blur (not keystroke); use specific error copy ("Please include @ in email") not generic ("Invalid input") |
+| A/B test results are inconclusive after 4 weeks | Insufficient sample size or too small a lift target | Use ab_test_calculator.py to confirm required sample size; consider testing bigger changes (field removal vs copy tweak) |
+| CTA clicks are low despite good page traffic | CTA copy is generic or button is not prominent enough | Replace "Submit" with value-specific copy ("Get My Report"); ensure CTA is full-width on mobile, high-contrast color |
+
+---
+
+## Success Criteria
+
+- Form completion rate above 25% for lead capture forms (above 35% is excellent)
+- Mobile completion rate within 20% of desktop rate
+- Error rate below 10% of form interactions
+- Field-level drop-off identifies specific friction points with clear remediation
+- Each form field has documented justification (business need or enrichable post-submission)
+- A/B tests run for minimum 200 conversions per variant before declaring winner
+- Post-form-submission follow-up occurs within 24 hours for demo and contact forms
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Form field optimization, CTA copy, validation UX, mobile optimization, trust signal placement, A/B test design, field cost analysis
+- **Out of scope:** Page-level CRO (use page-cro), popup trigger optimization (use popup-cro), signup/registration flows (use signup-flow-cro), post-submission nurture sequences
+- **Data dependency:** Field-level analytics (per-field drop-off) provide the most actionable data but require analytics instrumentation
+- **Compliance constraint:** GDPR/HIPAA may require specific fields that cannot be removed; document compliance requirements before optimizing
+- **Statistical validity:** A/B test recommendations require sufficient traffic volume; low-traffic forms may need longer test durations or alternative evaluation methods
+
+---
+
+## Integration Points
+
+- **page-cro** -- When the form converts well but the surrounding page does not drive form interactions, optimize the page-level elements first
+- **popup-cro** -- When the form is inside a popup or modal, trigger timing and container design are handled by popup-cro
+- **signup-flow-cro** -- For account creation and registration forms (not lead capture), use signup-flow-cro which handles multi-step auth flows
+- **onboarding-cro** -- When post-form-submission activation is the bottleneck, not the form completion rate itself
+- **free-tool-strategy** -- Free tools often include lead capture forms; use form-cro to optimize the capture form within the tool

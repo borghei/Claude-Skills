@@ -358,3 +358,99 @@ Target: Break-even within 6 months
 - **form-cro** -- Use for optimizing the lead capture form within the tool.
 - **page-cro** -- Use for optimizing the landing page conversion rate.
 - **content-creator** -- Use for writing the blog post and social content supporting the tool launch.
+
+---
+
+## Tool Reference
+
+### 1. tool_idea_scorer.py
+
+**Purpose:** Score free tool ideas against the 6-factor evaluation framework and rank candidates.
+
+```bash
+python scripts/tool_idea_scorer.py tool_ideas.json
+python scripts/tool_idea_scorer.py tool_ideas.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `tool_ideas.json` | Yes | JSON file with tool idea names and 6-factor scores |
+| `--json` | No | Output results as JSON |
+
+### 2. tool_roi_calculator.py
+
+**Purpose:** Calculate the ROI and break-even timeline for a free tool based on traffic, conversion, and cost assumptions.
+
+```bash
+python scripts/tool_roi_calculator.py --build-cost 5000 --monthly-traffic 2000 --conversion-rate 8 --lead-value 50
+python scripts/tool_roi_calculator.py --build-cost 5000 --monthly-traffic 2000 --conversion-rate 8 --lead-value 50 --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--build-cost` | Yes | Total build cost in dollars (engineering time + design) |
+| `--monthly-traffic` | Yes | Expected monthly sessions after 90 days |
+| `--conversion-rate` | Yes | Expected lead conversion rate as percentage |
+| `--lead-value` | Yes | Dollar value per captured lead |
+| `--monthly-hosting` | No | Monthly hosting/maintenance cost (default: 50) |
+| `--json` | No | Output results as JSON |
+
+### 3. launch_checklist_generator.py
+
+**Purpose:** Generate a phased launch checklist (pre-launch, launch week, post-launch) customized to the tool type and distribution channels.
+
+```bash
+python scripts/launch_checklist_generator.py --tool-type calculator --channels seo,producthunt,social
+python scripts/launch_checklist_generator.py --tool-type checker --channels seo,email --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--tool-type` | Yes | Tool type: calculator, generator, checker, grader, converter, template, visualization |
+| `--channels` | No | Comma-separated launch channels (default: seo,social,email) |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| High traffic to tool but low lead capture | Gate is too aggressive or positioned before value delivery | Show core results first, then gate the detailed report or export; use email-only capture form |
+| Tool built but no organic traffic after 3 months | SEO landing page is thin or keywords are too competitive | Add 1500+ words of supporting content (how it works, use cases, FAQ); target long-tail keywords |
+| Tool is used once but users do not return | No recurring value or no save/bookmark mechanism | Add saved results, email reports, or periodic re-run reminders; consider a "monitor" mode |
+| Build cost exceeded estimate | Scope creep during development | Use tool_roi_calculator.py upfront to set budget ceiling; define MVP scope and ship in 2 weeks max |
+| Product Hunt launch got minimal traction | Poor timing or weak positioning | Launch Tuesday-Thursday; lead with the user benefit, not the technology; get 5+ early upvotes from network |
+| Tool generates leads but low conversion to paid | Tool attracts wrong audience or no connection to paid product | Ensure the tool solves a problem your paid product also addresses; add contextual upgrade prompts |
+
+---
+
+## Success Criteria
+
+- Tool scores 20+ on the 6-factor evaluation framework before committing to build
+- Tool achieves 500+ monthly sessions within 90 days of launch
+- Lead conversion rate of 5-15% of tool completions
+- Tool earns 10+ organic backlinks within 6 months
+- Break-even achieved within 6 months (verified by tool_roi_calculator.py)
+- Completion rate above 60% (users who start using the tool finish the workflow)
+- At least 1 supporting blog post and social launch content published at launch
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Tool idea evaluation, ROI modeling, launch planning, distribution strategy, lead capture architecture, SEO landing page strategy, measurement framework
+- **Out of scope:** Engineering implementation, design/UI work, paid advertising strategy, AI/ML-powered tool features
+- **Build constraint:** All tools should be buildable in 1-4 weeks; if longer, the scope is too large for a free marketing tool
+- **Maintenance cost:** Every tool requires ongoing maintenance (monthly checks, quarterly content updates); budget for this before building
+- **No API dependencies:** Free tools should use client-side logic where possible to avoid ongoing API costs and reliability issues
+
+---
+
+## Integration Points
+
+- **form-cro** -- Use for optimizing the lead capture form embedded within the free tool
+- **page-cro** -- Use for optimizing the SEO landing page that hosts the tool for conversion
+- **seo-audit** -- Use for validating the tool landing page meets technical SEO requirements
+- **content-creator** -- Use for writing the launch blog post, social content, and outreach emails
+- **schema-markup** -- Use for implementing SoftwareApplication and FAQPage schema on the tool page

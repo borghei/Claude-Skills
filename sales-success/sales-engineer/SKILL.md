@@ -260,6 +260,74 @@ python scripts/poc_tracker.py --customer "Customer Name" --status update
 python scripts/competitive_compare.py --competitor "Competitor Name"
 ```
 
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Demo falls flat; audience disengaged | Feature dump instead of pain-based storytelling; wrong use cases selected | Always map demo flow to discovery findings. Lead with highest-impact use case. Pause every 10 minutes for interaction. If discovery was incomplete, reschedule with a mini-discovery first. |
+| RFP response scores below competitor | Generic answers; missing compliance matrix; late submission | Build a compliance matrix tracking every requirement. Use structured response categories (Full/Partial/Roadmap/Partner/N/A). Start executive summary with customer-specific value proposition. Complete draft 3+ days before deadline for review. |
+| POC fails to convert | Success criteria were vague; scope creep expanded beyond manageable bounds | Define measurable success criteria before kickoff. Lock scope with explicit in-scope/out-of-scope boundaries. Run weekly check-ins to catch drift early. If scope changes, renegotiate timeline. |
+| Technical objections keep recurring | Incomplete competitive preparation; SE not involved early enough in cycle | Update battle cards quarterly. Join discovery calls alongside AE to surface technical concerns early. Maintain a shared objection log with proven responses. |
+| Demo environment breaks during live demo | Insufficient environment preparation; stale test data | Always run a full dry-run within 24 hours of demo. Use isolated demo tenants with stable test data. Have a backup recording ready for critical demos. |
+| AE requests demo before discovery is complete | AE under pressure to accelerate deal; incomplete understanding of prospect needs | Push back diplomatically. Run a 15-minute technical pre-qualification call with the prospect. Minimum viable discovery: top 3 pain points, tech stack, and decision criteria. |
+| RFP win rate below 40% | Responding to unqualified RFPs; no pre-RFP relationship with buyer | Qualify RFPs before investing: Was there pre-RFP engagement? Do you know the decision criteria? Is the RFP wired for a competitor? Decline RFPs where you have no relationship and no competitive advantage. |
+
+## Success Criteria
+
+| Metric | Target | Measurement Method |
+|--------|--------|--------------------|
+| Demo-to-advance rate | 70%+ | Deals advancing to next stage after demo / Total demos delivered |
+| POC conversion rate | 60%+ | POCs resulting in proposal or closed-won / Total POCs |
+| RFP win rate | 45%+ | RFPs won / RFPs submitted (qualified only) |
+| Technical win rate | 80%+ | Deals where technical evaluation was won / Total technical evaluations |
+| Demo NPS / feedback score | 4.0+ out of 5 | Post-demo survey from attendees |
+| Time-to-demo | Under 5 business days from request | Days from demo request to demo delivery |
+| RFP response time | 100% on-time submission | Submissions before deadline / Total RFPs |
+| Battle card currency | Updated within last 90 days | Percentage of battle cards reviewed in current quarter |
+
+## Scope & Limitations
+
+**In Scope:**
+- Technical discovery, requirements gathering, and solution fit assessment
+- Demo planning, environment preparation, and live demonstration delivery
+- RFP/RFI/RFQ response management and requirement scoring
+- Proof-of-concept scoping, execution support, and evaluation
+- Technical objection handling using the LAER framework
+- Competitive technical positioning and battle card maintenance
+- Integration architecture discussion during pre-sales
+
+**Out of Scope:**
+- Commercial negotiation, pricing strategy, and deal closing (see account-executive)
+- Post-sale implementation, deployment, and production support (see solutions-architect for architecture)
+- CRM data management, territory planning, and sales process design (see sales-operations)
+- Product development, bug fixes, and feature roadmap decisions (coordinate with Engineering)
+- Customer success management and ongoing relationship post-sale (see customer-success-manager)
+- Marketing content strategy and demand generation (see marketing-skill)
+
+**Limitations:**
+- Demo environment quality depends on infrastructure provided; scripts cannot provision environments
+- RFP analyzer processes text-based requirements only; cannot parse complex PDF layouts or images
+- Technical qualification scoring uses configurable weights but requires calibration to your product's actual capabilities
+- Battle cards require manual competitive intelligence gathering; no automated competitor monitoring
+
+## Integration Points
+
+| Integration | Direction | Purpose | Handoff Artifact |
+|-------------|-----------|---------|-----------------|
+| **Account Executive** | AE -> SE | Demo requests, discovery context, deal strategy alignment | Discovery notes, stakeholder map, competitive landscape, demo requirements |
+| **Solutions Architect** | SE -> SA | Complex enterprise deals requiring deep architecture design | Technical discovery output, integration requirements, security assessment needs |
+| **Product Team** | SE -> Product | Feature gaps surfaced during evaluations, competitive intel | Feature request log, RFP gap analysis, competitive capability comparison |
+| **Customer Success Manager** | SE -> CSM | Technical context for post-sale onboarding | POC results, technical configuration, integration specs, known limitations |
+| **Sales Operations** | SE -> Ops | Technical win/loss data, demo activity metrics | Technical win/loss reports, demo conversion data |
+| **Marketing** | Bidirectional | Technical content needs (whitepapers, solution briefs); competitive positioning | Content requests, competitive analysis, technical differentiation points |
+| **Engineering** | SE -> Eng | Escalation for deep technical questions; product feedback | Technical escalation tickets, product feedback summaries |
+
+**Workflow Handoff Protocol:**
+1. SE receives demo request from AE with completed discovery template (minimum: pain points, tech stack, decision criteria)
+2. SE delivers demo plan to AE for review at least 24 hours before scheduled demo
+3. SE documents technical win/loss for every completed evaluation within 5 business days
+4. SE escalates to SA when deal requires custom integration architecture or multi-system design
+
 ## Reference Materials
 
 - `references/demo_playbook.md` -- Demo best practices

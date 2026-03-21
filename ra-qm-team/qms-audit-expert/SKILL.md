@@ -321,3 +321,75 @@ Track audit program effectiveness:
 | Repeat findings | <10% | Same finding in consecutive audits |
 | CAPA effectiveness | >90% | Verified effective at follow-up |
 | Auditor utilization | 4 days/month | Audit days per qualified auditor |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Schedule optimizer produces no audits for a process | `last_audit_date` is recent and risk level is Low | Low-risk processes are scheduled annually. If the last audit was within 365 days, no new audit is generated. Increase `risk_level` or `criticality_score` to trigger earlier scheduling. |
+| Optimizer flags all processes as overdue | Date format in `processes.json` is incorrect | Use ISO 8601 format (`YYYY-MM-DD`) for `last_audit_date`. Invalid dates cause the tool to treat the last audit as missing. |
+| Interactive mode does not accept input | Terminal does not support stdin prompts | Use file-based input with `--processes processes.json` instead of `--interactive`. |
+| Audit schedule does not cover all ISO 13485 clauses | Input process list is incomplete | The optimizer schedules only the processes provided. Ensure all required clauses (4.2, 5.6, 6.2, 7.3, 7.4, 7.5, 7.6, 8.2.2, 8.3, 8.5) are represented in the input. |
+| Finding classified as Minor but should be Major | Classification was applied inconsistently | Apply the decision tree: systematic failure or absent element = Major; isolated lapse = Minor. Consider whether the finding could affect product safety (auto-escalate to Major). |
+| External auditor raises finding already closed internally | CAPA effectiveness verification not completed before external audit | Ensure all internal audit findings have completed CAPA with documented effectiveness verification before the external audit date. Close the loop, do not just complete the action. |
+| Audit report rejected by process owner | Findings not supported by objective evidence | Every finding must reference specific evidence (document number, record ID, observation details). Rework findings using the Requirement-Evidence-Gap format documented in this skill. |
+
+---
+
+## Success Criteria
+
+- Annual audit schedule covers 100% of ISO 13485 clauses with risk-based frequency (quarterly for high-risk, semi-annual for medium, annual for low)
+- Schedule compliance rate exceeds 90% (audits completed on time vs. planned)
+- All Major findings result in full root cause analysis CAPA initiated within 30 days and verified effective within 6 months
+- Finding closure rate exceeds 95% by due date, with no overdue Major findings at any point
+- Repeat finding rate below 10% across consecutive audit cycles, demonstrating effective corrective actions
+- Auditor independence verified and documented for every audit assignment (no self-auditing of own work area)
+- Mock audit conducted before every external certification or surveillance audit with all Major and Minor findings resolved
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- ISO 13485:2016 internal audit planning, scheduling, and execution
+- Risk-based audit frequency optimization
+- Nonconformity classification (Major/Minor/Observation) with decision tree
+- CAPA integration for audit findings
+- External audit preparation and mock audit protocols
+- Audit program metrics and effectiveness tracking
+
+**Out of Scope:**
+- External audit execution (this skill supports preparation for and response to external audits, not conducting them)
+- Regulatory inspection management (FDA, Notified Body inspections have jurisdiction-specific protocols beyond internal audit scope)
+- Detailed CAPA root cause analysis methodology (use capa-officer skill for 5-Why, Fishbone, FTA, FMEA)
+- ISO 19011 auditor certification or training program administration
+- Technical product testing or process validation
+- QMSR-specific audit checklist generation (use quality-manager-qms-iso13485 for QMSR gap analysis)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | Provides the QMS process framework that the audit program evaluates; audit results feed into management review inputs |
+| [capa-officer](../capa-officer/) | Major and Minor audit findings trigger CAPA initiation; CAPA effectiveness verification closes the audit finding loop |
+| [quality-documentation-manager](../quality-documentation-manager/) | Document control audit coverage (Clause 4.2) validates document numbering, approval workflows, and Part 11 compliance |
+| [quality-manager-qmr](../quality-manager-qmr/) | Audit program results are a required management review input (Clause 5.6.2); QMR oversees audit program effectiveness |
+| [risk-management-specialist](../risk-management-specialist/) | Risk management process audit (Clause 7.1) verifies ISO 14971 implementation and risk file completeness |
+
+---
+
+## Tool Reference
+
+### audit_schedule_optimizer.py
+
+Generates risk-based audit schedules optimized by process risk, findings history, and time since last audit.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--processes` | Yes (or `--interactive`) | Path to JSON file containing process definitions with `name`, `iso_clause`, `risk_level` (HIGH/MEDIUM/LOW), `last_audit_date`, `previous_findings`, and `criticality_score` |
+| `--interactive` | No | Launch interactive mode for guided process entry (alternative to file input) |
+| `--output` | No | Output format: `json` for structured output, omit for human-readable text |

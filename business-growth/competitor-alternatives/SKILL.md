@@ -378,3 +378,97 @@ Be explicit about ideal customer for each option:
 - **page-cro** -- Use for optimizing comparison page conversion rates (CTA placement, social proof, layout).
 - **content-creator** -- Use for writing supporting competitive blog content based on comparison data.
 - **programmatic-seo** -- Use when you have 10+ competitors and want to generate comparison pages at scale using templates.
+
+---
+
+## Tool Reference
+
+### 1. comparison_page_planner.py
+
+**Purpose:** Generate a prioritized comparison page plan from competitor data with keyword targets and estimated search volume.
+
+```bash
+python scripts/comparison_page_planner.py competitors.json
+python scripts/comparison_page_planner.py competitors.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitors.json` | Yes | JSON file with competitor names and search volume estimates |
+| `--json` | No | Output results as JSON |
+| `--brand` | No | Your brand name for URL slug generation (default: "your-product") |
+
+### 2. competitor_data_tracker.py
+
+**Purpose:** Track and manage centralized competitor data files with staleness detection and update reminders.
+
+```bash
+python scripts/competitor_data_tracker.py competitor_profiles/
+python scripts/competitor_data_tracker.py competitor_profiles/ --json
+python scripts/competitor_data_tracker.py competitor_profiles/ --stale-days 60
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitor_profiles/` | Yes | Directory containing competitor profile JSON files |
+| `--json` | No | Output results as JSON |
+| `--stale-days` | No | Number of days before data is considered stale (default: 90) |
+
+### 3. comparison_content_scorer.py
+
+**Purpose:** Score existing comparison page content against quality and SEO best practices.
+
+```bash
+python scripts/comparison_content_scorer.py page_content.json
+python scripts/comparison_content_scorer.py page_content.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `page_content.json` | Yes | JSON file with comparison page content and metadata |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Comparison pages not ranking for target keywords | Thin content or poor on-page SEO | Add 1500+ words of paragraph content (not just tables); ensure H1 matches primary keyword; add FAQ with schema markup |
+| Pages rank but do not convert | Missing CTA or weak value proposition | Add CTA after every major section; include migration section and risk reversal (free trial, no CC); use comparison_content_scorer.py to audit |
+| Competitor data becomes outdated quickly | No update process in place | Use competitor_data_tracker.py with --stale-days 30 for pricing, 90 for features; assign ownership for monthly checks |
+| Sales team does not use comparison content | Pages are too marketing-focused | Create sales-specific versions with objection handling, landmine questions, and talk tracks; test with 3 reps before publishing |
+| Legal pushback on competitor claims | Unverifiable or aggressive claims | Cite public sources for every claim; use "as of [date]" qualifiers; acknowledge competitor strengths honestly |
+| Too many competitors to cover | Trying to create pages for every competitor | Prioritize using comparison_page_planner.py; start with top 3-5 competitors by search volume and deal frequency |
+
+---
+
+## Success Criteria
+
+- Comparison pages ranking on page 1 for "[competitor] alternative" within 6 months
+- Each comparison page converts at 3%+ (visitor to CTA click)
+- All competitor data verified within the last 90 days (use competitor_data_tracker.py)
+- Pages include honest "Who [Competitor] is best for" section (builds trust, reduces bounce)
+- At least 1 customer testimonial from a switcher per comparison page
+- Hub page links to all comparison content with clear navigation
+- Quarterly content refresh with "Last updated" date on every page
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Comparison page content strategy, SEO optimization, competitor data management, content quality scoring, page planning and prioritization
+- **Out of scope:** Primary competitive intelligence gathering (use competitive-teardown), paid advertising strategy, design/development of pages
+- **Legal constraint:** All claims must be verifiable from public sources; avoid disparaging competitors; include "as of [date]" for factual claims
+- **SEO timeline:** Comparison pages typically take 3-6 months to rank; plan for long-term investment
+- **Maintenance cost:** Each competitor page requires ongoing updates; budget for quarterly refreshes
+
+---
+
+## Integration Points
+
+- **competitive-teardown** -- Teardown provides the raw competitive intelligence; this skill transforms it into marketing content
+- **page-cro** -- Use for optimizing comparison page conversion rates after content is published
+- **seo-audit** -- Use to validate comparison pages meet technical SEO requirements before publishing
+- **content-creator** -- Use for writing supporting blog content (competitor comparison blog posts, switching guides)
+- **customer-success-manager** -- When customers mention competitor evaluation, comparison pages can be shared proactively

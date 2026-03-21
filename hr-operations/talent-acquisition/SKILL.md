@@ -213,15 +213,80 @@ Structure the EVP around five pillars:
 ## Scripts
 
 ```bash
-# Pipeline analyzer
-python scripts/pipeline_analyzer.py --period month
+# Analyze job descriptions for bias, readability, and quality
+python scripts/job_posting_analyzer.py --file job_description.md
+python scripts/job_posting_analyzer.py --file job_description.md --json
 
-# Source effectiveness report
-python scripts/source_report.py --data hiring_data.csv
+# Track candidate pipeline funnel metrics
+python scripts/candidate_pipeline_tracker.py --file pipeline.csv
+python scripts/candidate_pipeline_tracker.py --file pipeline.csv --json
 
-# Time to fill calculator
-python scripts/time_to_fill.py --reqs requisitions.csv
-
-# Diversity metrics generator
-python scripts/diversity_metrics.py --hires hires.csv
+# Generate structured interview scorecards
+python scripts/interview_scorecard.py --role "Senior Engineer" --level IC3
+python scripts/interview_scorecard.py --role "Product Manager" --level IC2 --json
 ```
+
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Low application volume | Poor job distribution, weak employer brand, or overly narrow requirements | Audit posting reach across channels; A/B test job titles; reduce must-have requirements to true essentials (aim for 5-7 max) |
+| High screen-to-interview drop-off | Misalignment between recruiter screen criteria and hiring manager expectations | Run a calibration session with the hiring manager before sourcing; agree on 3-4 non-negotiable criteria with concrete examples |
+| Low offer acceptance rate (< 80%) | Slow offer turnaround, uncompetitive compensation, or poor candidate experience | Compress decision-to-offer to 48 hours; benchmark comp at 50th-75th percentile; add a "warm close" step where the recruiter gauges candidate sentiment before extending |
+| High first-year attrition (> 20%) | Expectation mismatch during hiring, weak onboarding, or manager misalignment | Implement realistic job previews; extend structured onboarding to 90 days; pair new hires with a buddy |
+| Interviewer inconsistency | No shared rubric, anchoring bias in debriefs, or untrained interviewers | Mandate independent scoring before debrief; train all interviewers on structured behavioral techniques; rotate interview panels quarterly |
+| Diversity pipeline is thin | Over-reliance on referrals and single-channel sourcing | Add 2-3 diversity-focused sourcing channels; partner with ERGs for referrals; blind resume screening for initial pass |
+| Candidate ghosting after interview | Lengthy process, lack of communication, or competing offers | Send status updates within 24 hours of each stage; target 5-day max between stages; collect feedback even from declined candidates |
+
+## Success Criteria
+
+| Dimension | Metric | Target | Measurement |
+|-----------|--------|--------|-------------|
+| Speed | Time to fill | < 35 days (tech), < 25 days (non-tech) | ATS req-open to offer-accept timestamps |
+| Speed | Time to hire | < 18 days from first contact to accept | ATS candidate journey timestamps |
+| Cost | Cost per hire | < $4,500 (direct roles), < $8,000 (agency) | Total recruiting spend / hires per quarter |
+| Quality | Quality of hire | > 80% (90-day performance + 1-yr retention average) | HRIS performance data + retention tracking |
+| Quality | Offer acceptance rate | > 85% | Offers accepted / offers extended |
+| Quality | First-year retention | > 85% | New hires retained at 12 months / total hires |
+| Experience | Candidate NPS (cNPS) | > 50 | Post-process candidate survey |
+| Diversity | Diverse slate rate | 100% of final rounds include underrepresented candidates | ATS demographic flags (voluntary self-ID) |
+| Efficiency | Recruiter capacity | 15-25 active reqs per recruiter | ATS workload reporting |
+| Pipeline | Source channel yield | Top 3 channels produce > 60% of hires | Source-of-hire attribution in ATS |
+
+## Scope & Limitations
+
+**In Scope:**
+- End-to-end recruiting workflow from requisition approval through offer acceptance
+- Job description creation, sourcing strategy, screening, interviewing, and offer management
+- Hiring funnel analytics, source channel effectiveness, and pipeline health reporting
+- Employer branding strategy and candidate experience design
+- Compensation band guidance for offer decisions
+- DEI-focused hiring practices and inclusive language review
+
+**Out of Scope:**
+- Background check execution and adjudication (handled by third-party vendor + Legal)
+- Immigration and visa sponsorship (requires Employment Law / Legal counsel)
+- Onboarding program design beyond the hiring handoff (owned by HR Operations / L&D)
+- Headcount budgeting and approval (owned by Finance + hiring manager)
+- Employment contract drafting (owned by Legal)
+- Internal mobility and transfer processes (owned by HRBP)
+
+**Known Limitations:**
+- Compensation benchmarks in this skill are illustrative; always validate against current market data from Radford, Mercer, or Levels.fyi before extending offers
+- Funnel conversion benchmarks vary significantly by industry, geography, role type, and seniority level
+- DEI metrics require voluntary self-identification data; coverage may be incomplete
+- Quality of hire is a lagging indicator -- meaningful measurement requires 6-12 months post-hire
+
+## Integration Points
+
+| System / Skill | Integration | Data Flow |
+|----------------|-------------|-----------|
+| **ATS** (Greenhouse, Lever, Ashby) | Pipeline stages, candidate data, offer tracking | ATS -> funnel metrics, source attribution, time-to-fill |
+| **HRIS** (Workday, BambooHR) | New hire records, headcount, compensation bands | HRIS -> internal equity checks; ATS -> HRIS on hire |
+| **People Analytics** skill | Quality of hire scoring, attrition correlation, source ROI | TA pipeline data -> analytics models; analytics insights -> sourcing strategy |
+| **HR Business Partner** skill | Workforce planning, headcount approval, hiring prioritization | HRBP workforce plan -> TA hiring plan; TA pipeline updates -> HRBP capacity planning |
+| **Operations Manager** skill | Hiring capacity planning, onboarding process handoff | Ops headcount forecast -> TA demand; TA offer accept -> Ops onboarding trigger |
+| **Finance** skill | Compensation budgeting, cost-per-hire tracking, headcount approval | Finance approved budget -> TA comp bands; TA spend data -> Finance reporting |
+| **Scheduling** (Calendly, GoodTime) | Interview scheduling automation | Candidate availability -> scheduler -> interviewer calendars |
+| **Background Check** (Checkr, Sterling) | Pre-hire verification | Offer accepted -> background check initiated -> clearance status |
+| **Candidate Survey** (SurveyMonkey, Qualtrics) | Candidate experience measurement | Process completion -> survey trigger -> cNPS scores |

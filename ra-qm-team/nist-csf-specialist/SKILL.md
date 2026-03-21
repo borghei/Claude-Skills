@@ -945,3 +945,89 @@ NIST CSF 2.0 maps to multiple compliance frameworks, enabling organizations to s
 - [ ] Controls tested and validated post-implementation
 - [ ] Metrics established and baseline measurements taken
 - [ ] Continuous monitoring operational
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Maturity assessor output shows all categories at Tier 1 | Input JSON missing score entries or all scores set to default | Verify the input JSON has a `score` field (1-4) for each assessed category. Run with `--functions` to test a subset first. |
+| Control mapper produces empty mappings for a target framework | Framework identifier misspelled or unsupported | Use exact identifiers: `iso27001`, `soc2`, `hipaa`, `pci-dss`, or `all`. Check `--source-framework` is set to `nist-csf`. |
+| Gap analysis shows no gaps despite immature program | Target tier set too low (e.g., Tier 1) | Increase `--target-tier` to 3 or 4 to reflect a meaningful target state. Tier 1 is "Partial" and almost any control satisfies it. |
+| Markdown output formatting broken | Special characters in evidence or notes fields | Ensure evidence text in input JSON does not contain unescaped pipe characters or markdown syntax. Use plain text descriptions. |
+| Assessment does not include GOVERN function | Input JSON uses CSF 1.1 structure without GOVERN | GOVERN is new in CSF 2.0. Update the input JSON to include `GOVERN` with categories GV.OC, GV.RM, GV.RR, GV.PO, GV.OV, and GV.SC. |
+| Cross-framework mapping missing subcategory detail | Mapper operates at category level, not subcategory | The mapper provides category-to-control mappings. For subcategory-level detail, consult the NIST CSF 2.0 Informative References online catalog. |
+| Report file not created | Output path directory does not exist | Create the output directory before running. The tool does not create intermediate directories automatically. |
+
+---
+
+## Success Criteria
+
+- Current profile documented with evidence-backed scores for all 22 CSF 2.0 categories across all 6 functions
+- Target profile defined with stakeholder-approved tier targets aligned to organizational risk appetite and regulatory obligations
+- Gap analysis completed with each gap scored by risk exposure, remediation effort, and business impact, producing a prioritized roadmap
+- GOVERN function fully implemented: cybersecurity governance charter, board reporting cadence established, CISO role defined, risk appetite documented
+- Cross-framework control mapping completed for all applicable compliance obligations (ISO 27001, SOC 2, HIPAA, PCI-DSS) reducing audit duplication by 30%+
+- Maturity reassessment conducted within 12 months showing measurable tier improvement in at least 75% of assessed categories
+- Supply chain risk management program (GV.SC) operational with tiered supplier assessments and SBOM tracking for critical applications
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- NIST CSF 2.0 maturity assessment across all 6 functions and 22 categories
+- Current and target profile creation with gap analysis
+- Cross-framework control mapping to ISO 27001:2022, SOC 2 TSC, HIPAA Security Rule, and PCI-DSS v4.0
+- Implementation roadmap generation with phased milestones
+- Tier-based scoring (Partial, Risk Informed, Repeatable, Adaptive)
+
+**Out of Scope:**
+- NIST SP 800-53 control-level implementation (CSF is a framework, not a control catalog; use SP 800-53 for prescriptive controls)
+- Technical security testing, vulnerability scanning, or penetration testing (use infrastructure-compliance-auditor)
+- Sector-specific Community Profiles (the tool provides organizational profiles; community profiles require sector-specific customization)
+- Real-time security monitoring or SIEM configuration
+- Compliance certification (NIST CSF is voluntary and does not offer formal certification)
+- Legal or regulatory advice on specific compliance obligations
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [soc2-compliance-expert](../soc2-compliance-expert/) | SOC 2 TSC maps directly to CSF functions; use the control mapper to generate a unified control matrix reducing dual-audit burden |
+| [information-security-manager-iso27001](../information-security-manager-iso27001/) | ISO 27001 Annex A controls are the implementation backbone for CSF categories; CSF maturity scores inform ISMS continual improvement |
+| [infrastructure-compliance-auditor](../infrastructure-compliance-auditor/) | Validates technical controls (access, encryption, monitoring, endpoints) that underpin PROTECT and DETECT function scores |
+| [pci-dss-specialist](../pci-dss-specialist/) | PCI-DSS v4.0 requirements map to CSF categories; use cross-framework mapper for payment environments |
+| [nis2-directive-specialist](../nis2-directive-specialist/) | NIS2 Article 21 measures align to CSF functions; CSF maturity assessment benchmarks NIS2 compliance posture |
+| [dora-compliance-expert](../dora-compliance-expert/) | DORA ICT risk management pillars map to GOVERN and IDENTIFY functions; use CSF as the unifying assessment framework |
+
+---
+
+## Tool Reference
+
+### csf_maturity_assessor.py
+
+Assesses cybersecurity maturity across NIST CSF 2.0 functions and generates gap analysis.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input` | Yes | Path to current state assessment JSON file with per-category scores (1-4) and evidence |
+| `--target-tier` | Yes | Target maturity tier for gap analysis (1-4: Partial, Risk Informed, Repeatable, Adaptive) |
+| `--output` | Yes | Path to write the output report file |
+| `--format` | No | Output format: `json` (default) or `markdown` |
+| `--functions` | No | Comma-separated list of functions to assess (e.g., `GOVERN,IDENTIFY,PROTECT`). Omit for all 6. |
+
+### csf_control_mapper.py
+
+Maps NIST CSF 2.0 categories to controls in other compliance frameworks.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--source-framework` | Yes | Source framework identifier (use `nist-csf`) |
+| `--target-framework` | Yes | Target framework: `iso27001`, `soc2`, `hipaa`, `pci-dss`, or `all` |
+| `--output` | Yes | Path to write the mapping output file |
+| `--format` | No | Output format: `json` (default) or `markdown` |
+| `--functions` | No | Comma-separated list of CSF functions to include (e.g., `GOVERN,PROTECT`). Omit for all. |

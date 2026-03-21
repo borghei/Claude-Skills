@@ -646,6 +646,104 @@ ICT third-party register template, contractual requirements checklist, exit stra
 
 ---
 
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Readiness score unexpectedly low on Pillar 1 (ICT Risk Management) | Management body has not formally approved the ICT risk management framework | Ensure the management body signs off on the framework, digital resilience strategy, and ICT risk tolerance level per Article 5; document board meeting minutes |
+| Incident classification tool returns "major" for minor service interruptions | Threshold parameters set too conservatively or default values used | Review classification criteria against actual RTS thresholds; adjust `--clients-affected`, `--duration-hours`, and `--economic-impact` inputs to match your entity's context |
+| Third-party register incomplete despite significant outsourcing | ICT service arrangements not systematically tracked or sub-contractor chains undocumented | Inventory all contractual ICT arrangements; use the register template from `references/dora-third-party-management.md`; include sub-processing chains and data processing locations |
+| Resilience testing program scored as non-compliant | Only basic vulnerability scanning performed; no scenario-based or penetration testing | Design a comprehensive testing program per Article 25 covering all 12 test types; schedule annual penetration testing and scenario-based exercises; plan for TLPT if designated by competent authority |
+| Pillar 5 (Information Sharing) shows zero compliance | Organization has not joined any cyber threat intelligence sharing arrangement | Evaluate participation in an ISAC (Information Sharing and Analysis Center) relevant to your financial sub-sector; notify competent authority of participation per Article 45 |
+| Exit strategies missing for critical ICT third-party providers | Contracts lack termination, transition, and data recovery provisions | Update all contracts for critical functions to include comprehensive exit strategies per Article 28(8); test transition plans and document alternative provider options |
+| Proportionality assessment unclear | Organization unsure whether simplified framework applies | Assess entity size, risk profile, and systemic importance per DORA proportionality principle; small and non-interconnected firms may qualify for simplified requirements |
+
+---
+
+## Success Criteria
+
+- **Overall readiness score of 75+ across all 5 pillars** -- indicating the organization can demonstrate compliance with core DORA requirements to competent authorities
+- **ICT risk management framework formally approved by the management body** -- with documented digital operational resilience strategy, risk tolerance levels, and annual review cycle
+- **Incident classification and reporting procedures operational** -- with capability to submit initial notification within 4 hours of major incident classification and intermediate report within 72 hours
+- **Complete ICT third-party register maintained** -- covering all contractual arrangements, distinguishing critical/important functions, with entity identification, service details, and sub-contractor chains
+- **Resilience testing program covers all 12 required test types** -- with annual penetration testing, scenario-based exercises, and TLPT preparation (if applicable) per Articles 24-27
+- **Exit strategies documented and tested for all critical ICT providers** -- with comprehensive transition arrangements, alternative provider identification, and data recovery procedures
+- **Annual ICT security awareness training delivered to all staff** -- with records maintained and specialized training for ICT and security personnel per Article 13
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Readiness assessment against all 5 DORA pillars with per-pillar scoring
+- ICT incident classification per Article 18 criteria with major incident determination
+- Reporting deadline calculation (4-hour initial, 72-hour intermediate, 1-month final)
+- Incident notification template generation for competent authority submissions
+- Third-party risk management guidance including register template and contractual requirements
+- Resilience testing program design covering basic and advanced (TLPT) testing
+- Gap analysis with prioritized remediation recommendations
+
+**Out of Scope:**
+- Actual penetration testing execution or vulnerability scanning -- this skill provides planning and assessment frameworks, not testing tools
+- Direct interaction with competent authorities or ESAs (EBA, ESMA, EIOPA)
+- Legal determination of entity scope (whether your organization falls under DORA's 20 entity types) -- consult regulatory counsel
+- CTPP (Critical Third-Party Provider) oversight framework compliance -- applicable only to ESA-designated providers
+- Real-time ICT monitoring or SIEM implementation -- use `infrastructure-compliance-auditor` for technical security controls
+
+**Important Notes:**
+- DORA became applicable January 17, 2025; regulators are treating 2025 as a transition year but enforcement is expected to intensify in 2026
+- Non-compliance penalties can reach up to 2% of total annual worldwide turnover or 1% of average daily global turnover for up to 6 months (for CTPPs)
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `information-security-manager-iso27001` | ISO 27001 controls map directly to DORA Pillar 1 requirements; ISO 27001 certification supports DORA compliance evidence | When building ICT risk management framework aligned with both ISO 27001 and DORA |
+| `nis2-directive-specialist` | DORA is lex specialis for financial sector; NIS2 applies residually; coordinate incident reporting timelines | When financial entity also falls under NIS2 scope for non-financial ICT services |
+| `infrastructure-compliance-auditor` | Technical infrastructure checks validate DORA Pillar 1 (protection, detection) and Pillar 3 (resilience testing) controls | When assessing actual infrastructure security posture against DORA requirements |
+| `nist-csf-specialist` | NIST CSF 2.0 functions map to DORA pillars; useful for organizations with US operations | When building a unified resilience framework across US and EU requirements |
+
+---
+
+## Tool Reference
+
+### dora_readiness_checker.py
+
+Assesses organizational readiness against all 5 DORA pillars with per-pillar scoring and gap analysis.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config <file>` | Yes (unless `--template`) | Path to JSON assessment configuration file |
+| `--template` | No | Generate blank assessment template to stdout |
+| `--pillars <nums>` | No | Assess specific pillars only (e.g., `--pillars 1 3 4`) |
+| `--json` | No | Output results in JSON format for automation |
+| `--output <file>` | No | Export report to specified file path |
+
+**Output:** Overall readiness score (0-100), per-pillar readiness scores, ICT risk management framework validation, incident management readiness, third-party risk assessment, resilience testing evaluation, and prioritized remediation recommendations.
+
+### dora_incident_classifier.py
+
+Classifies ICT incidents per DORA Article 18 criteria and determines reporting obligations.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config <file>` | No | Path to JSON incident description file |
+| `--template` | No | Generate blank incident input template to stdout |
+| `--clients-affected <num>` | No | Number of clients/financial counterparts affected |
+| `--duration-hours <num>` | No | Duration of the incident in hours |
+| `--data-loss <yes/no>` | No | Whether data loss occurred (availability, integrity, or confidentiality) |
+| `--services-critical <yes/no>` | No | Whether critical or important functions were affected |
+| `--economic-impact <num>` | No | Estimated economic impact in EUR |
+| `--json` | No | Output results in JSON format |
+| `--generate-template` | No | Generate incident notification template for competent authority |
+| `--output <file>` | No | Export report or template to specified file path |
+
+**Output:** Incident severity scoring per Article 18 criteria, major incident determination, reporting deadline calculation (initial 4h, intermediate 72h, final 1 month), and notification template generation.
+
+---
+
 *Last Updated: March 2026*
 *Regulation Reference: EU 2022/2554*
 *Applicable From: January 17, 2025*

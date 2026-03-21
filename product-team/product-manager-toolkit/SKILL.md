@@ -502,3 +502,109 @@ python scripts/customer_interview_analyzer.py interview.txt json
 
 - `references/prd_templates.md` - PRD templates for different contexts
 - `references/frameworks.md` - Detailed framework documentation (RICE, MoSCoW, Kano, JTBD, etc.)
+
+---
+
+## Tool Reference
+
+### rice_prioritizer.py
+
+RICE framework implementation with portfolio analysis and quarterly roadmap generation.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input` | positional | (optional) | CSV file with features or "sample" to create sample |
+| `--capacity` | int | 10 | Team capacity per quarter in person-months |
+| `--output` | choice | text | Output format: `text`, `json`, `csv` |
+
+**CSV columns:** `name, reach, impact, confidence, effort, description`
+
+**Impact values:** massive, high, medium, low, minimal
+**Confidence values:** high (100%), medium (80%), low (50%)
+**Effort values:** xl (13mo), l (8mo), m (5mo), s (3mo), xs (1mo)
+
+```bash
+python scripts/rice_prioritizer.py sample                          # Create sample CSV
+python scripts/rice_prioritizer.py features.csv                    # Default capacity (10)
+python scripts/rice_prioritizer.py features.csv --capacity 20      # Custom capacity
+python scripts/rice_prioritizer.py features.csv --output json      # JSON for integration
+python scripts/rice_prioritizer.py features.csv --output csv       # CSV for spreadsheets
+```
+
+### customer_interview_analyzer.py
+
+Keyword-based interview transcript analysis for extracting actionable insights.
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `interview_file` | positional | (required) | Path to interview transcript text file |
+| `json` | positional | (optional) | Add "json" as second arg for JSON output |
+
+**Extraction capabilities:** pain points (with severity), feature requests (with type and priority), jobs-to-be-done patterns, sentiment analysis, key themes, notable quotes, metrics mentioned, competitor mentions.
+
+```bash
+python scripts/customer_interview_analyzer.py interview.txt        # Human-readable
+python scripts/customer_interview_analyzer.py interview.txt json   # JSON output
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| RICE scores cluster together | Impact/confidence not differentiated enough | Calibrate scoring rubric with team; use specific examples for each level |
+| Roadmap overcommits capacity | Effort estimates too optimistic | Add 20% buffer; validate estimates with engineering before finalizing |
+| Interview analysis misses key insights | Transcript is too short or uses unexpected phrasing | Supplement with manual review; ensure transcripts capture full context |
+| Stakeholders disagree with priorities | Different value perceptions | Share raw RICE inputs transparently; allow stakeholders to adjust weights |
+| Quick wins dominate roadmap | Bias toward low-effort items | Reserve 30-40% of capacity for strategic big bets |
+| PRD scope creeps after approval | Insufficient out-of-scope definition | Explicitly list excluded items; require change request for additions |
+| Feature factory behavior | Shipping without measuring impact | Define success metrics in PRD before development starts |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Prioritization velocity | <2 hours from data to ranked backlog | Time from CSV input to roadmap output |
+| Interview analysis coverage | >80% of pain points captured | Compare tool output to manual expert review |
+| Estimation accuracy | Actual effort within 1.5x of RICE estimate | Track actual vs estimated effort post-delivery |
+| Roadmap confidence | >70% of Q1 roadmap items shipped in quarter | Shipped items / Planned items |
+| Discovery cadence | 5-8 interviews per segment per quarter | Count completed interviews |
+| PRD quality | 0 scope change requests after approval | Track change requests per PRD |
+| Feature impact rate | >60% of shipped features hit success metrics | Post-launch metric comparison |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- RICE prioritization with portfolio analysis
+- Quarterly roadmap generation with capacity planning
+- Customer interview transcript analysis
+- Pain point, feature request, and JTBD extraction
+- Sentiment analysis using keyword heuristics
+- PRD development process and templates
+- CSV/JSON import and export
+
+**Out of scope:**
+- Real-time analytics integration (use Amplitude/Mixpanel APIs)
+- NLP model-based analysis (tool uses keyword heuristics, not ML)
+- Multi-language transcript analysis (English only)
+- Visual wireframe or prototype generation
+- Competitive intelligence gathering (see business-growth skills)
+- Revenue impact modeling (see finance skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Jira / Linear | `--output json` from rice_prioritizer | Import prioritized features as tickets |
+| Google Sheets | `--output csv` from rice_prioritizer | Share roadmap with stakeholders |
+| Dovetail / Notion | JSON output from interview analyzer | Aggregate interview insights in research repo |
+| agile-product-owner | RICE priorities feed sprint backlog | Connect strategy to execution |
+| product-strategist | OKR cascade informs RICE reach/impact | Align features with strategic objectives |
+| Slack / Email | Human-readable output from both tools | Async stakeholder communication |

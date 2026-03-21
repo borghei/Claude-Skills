@@ -228,6 +228,77 @@ python scripts/quota_calculator.py --target 50000000 --reps team.csv
 python scripts/forecast_report.py --quarter Q4 --output report.html
 ```
 
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Forecast accuracy below 70% | Inconsistent stage definitions; reps over-committing; lack of weighted methodology | Enforce strict stage entry/exit criteria. Apply probability weights by category (Commit 90%, Best Case 50%, Pipeline 20%). Review commit deals individually in weekly forecast calls. Compare rolling 4-quarter actuals to calibrate weights. |
+| Territory imbalance causing rep attrition | Uneven account distribution; potential-to-quota mismatch exceeding 20% | Re-score accounts quarterly using the scoring model. Target less than 15% variance in potential-to-quota ratio across territories. Review territory balance monthly in high-growth periods. |
+| CRM data quality below 80% completeness | Insufficient enforcement; no automated validation; rep adoption gaps | Implement required field validation at stage transitions. Run weekly data quality reports. Tie CRM hygiene to variable compensation (5-10% of bonus). Target 95%+ daily login rate. |
+| Quota attainment below 60% team-wide | Quotas set too aggressively; insufficient pipeline; ramp time underestimated | Reconcile top-down and bottom-up models. Flag divergence exceeding 10%. Risk-adjust for ramp (ramping reps at 50-75% quota). Ensure 3-4x pipeline coverage at quarter start. |
+| Comp plan driving wrong behaviors | Misaligned incentives; rewarding volume over quality; no accelerators | Audit comp plans against strategic objectives. Ensure accelerators kick in at 100% attainment. Weight new business vs. expansion per GTM strategy. Add SPIFs for strategic priorities. |
+| Pipeline coverage drops mid-quarter | Insufficient lead flow; deals pushed or lost faster than replaced | Alert AEs when individual coverage drops below 2.5x. Coordinate with Marketing on lead generation campaigns. Implement minimum weekly prospecting activity requirements. |
+| Stage conversion rates declining | Process bottleneck; missing enablement; competitive pressure | Identify the specific stage with the highest drop-off. Compare top performer conversion rates to team average. Deploy targeted training on the bottleneck stage. Review competitive win/loss data for that stage. |
+
+## Success Criteria
+
+| Metric | Target | Measurement Method |
+|--------|--------|--------------------|
+| Forecast accuracy | Within 10% of actual quarterly | Abs(Weighted Forecast - Actual) / Actual |
+| Pipeline coverage ratio | 3-4x quota at quarter start | Total pipeline value / Team quota |
+| CRM data completeness | 95%+ required fields populated | Weekly automated data quality audit |
+| Territory balance | Less than 15% variance in potential-to-quota | Standard deviation of potential-to-quota ratio across territories |
+| Quota attainment distribution | 60%+ of reps at or above quota | Reps at 100%+ / Total ramped reps |
+| Stage conversion rates | Improving or stable QoQ | Stage N+1 entries / Stage N entries per period |
+| Sales cycle length | Trending downward or stable | Average days from opportunity creation to close |
+| Ramp time to productivity | Under 6 months for new hires | Months until new rep reaches 75% of quota run rate |
+| Process adoption | 90%+ compliance with defined process | Audit score from monthly process compliance review |
+
+## Scope & Limitations
+
+**In Scope:**
+- CRM administration, data quality management, and process enforcement
+- Pipeline analytics: coverage ratios, stage conversion, velocity metrics, deal aging
+- Territory design, account scoring, and balanced assignment optimization
+- Quota modeling: top-down, bottom-up, and reconciliation approaches
+- Compensation architecture: OTE splits, commission tiers, accelerators, SPIFs
+- Forecast methodology: weighted pipeline, category-based, rolling forecasts
+- Sales process audit: stage analysis, activity benchmarking, tool utilization
+- Reporting infrastructure and dashboard design
+
+**Out of Scope:**
+- Individual deal strategy, qualification, and closing (see account-executive)
+- Technical demos, RFP responses, and POC management (see sales-engineer)
+- Post-sale customer management and retention (see customer-success-manager)
+- Enterprise solution architecture and integration design (see solutions-architect)
+- Marketing attribution modeling and campaign ROI (see marketing-skill/campaign-analytics)
+- Financial modeling beyond sales compensation (see finance)
+
+**Limitations:**
+- Territory optimization uses heuristic scoring, not mathematical optimization solvers; results are directional, not globally optimal
+- Quota models require accurate historical data; garbage in, garbage out
+- Forecast accuracy benchmarks assume consistent CRM hygiene; accuracy degrades with poor data quality
+- Scripts process CSV/JSON exports only; no direct CRM API connectivity
+- Compensation modeling does not account for tax implications or local labor law constraints
+
+## Integration Points
+
+| Integration | Direction | Purpose | Handoff Artifact |
+|-------------|-----------|---------|-----------------|
+| **Account Executive** | Ops -> AE | Territory assignments, quota targets, pipeline reports, forecast templates | Territory map, quota letter, pipeline dashboard, forecast submission form |
+| **Sales Engineer** | Ops -> SE | Activity tracking, demo conversion metrics, technical win/loss data | SE activity reports, technical evaluation pipeline |
+| **Customer Success Manager** | Ops -> CSM | Renewal pipeline tracking, expansion revenue attribution, churn reporting | Renewal forecast rollup, NRR reports, churn analysis |
+| **Marketing** | Bidirectional | Lead attribution, MQL-to-SQL conversion, campaign ROI, pipeline sourcing | Attribution reports, lead routing rules, campaign pipeline reports |
+| **Finance** | Ops -> Finance | Revenue forecasting, commission calculations, quota-to-capacity planning | Forecast submissions, commission statements, headcount models |
+| **Revenue Operations** | Bidirectional | Cross-functional GTM metrics, funnel analytics, ARR reporting | Unified revenue dashboard, GTM efficiency metrics |
+| **HR** | Ops -> HR | Headcount planning, ramp modeling, performance data for reviews | Ramp timelines, quota attainment reports, territory capacity models |
+
+**Workflow Handoff Protocol:**
+1. Sales Ops publishes territory assignments and quota letters at least 2 weeks before quarter start
+2. Sales Ops delivers weekly pipeline report to sales leadership every Monday by 10 AM
+3. Sales Ops collects forecast submissions from AEs every Friday and publishes rolled-up forecast by Monday
+4. Sales Ops runs monthly territory health review and flags imbalances exceeding 15% variance
+
 ## Reference Materials
 
 - `references/analytics.md` -- Sales analytics guide

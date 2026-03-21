@@ -374,3 +374,94 @@ python scripts/okr_cascade_generator.py revenue -c 0.4       # 40% contribution
 python scripts/okr_cascade_generator.py growth --json        # JSON export
 python scripts/okr_cascade_generator.py growth -t "A,B,C"    # Custom teams
 ```
+
+---
+
+## Tool Reference
+
+### okr_cascade_generator.py
+
+Generates aligned OKRs from company strategy down to product and team levels with alignment scoring.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `strategy` | positional | growth | Strategy type: `growth`, `retention`, `revenue`, `innovation`, `operational` |
+| `--teams`, `-t` | string | Growth,Platform,Mobile,Data | Comma-separated team names |
+| `--contribution`, `-c` | float | 0.3 | Product contribution to company OKRs (0-1) |
+| `--json`, `-j` | flag | False | Output as JSON instead of dashboard |
+| `--metrics`, `-m` | string | sample metrics | Metrics as JSON string |
+
+**Alignment scores generated:**
+- Vertical alignment: How well each level supports the level above (target: >90%)
+- Horizontal alignment: How well teams coordinate with each other (target: >75%)
+- Coverage: What percentage of company OKRs are addressed by product (target: >80%)
+- Balance: Whether work is evenly distributed across teams (target: >80%)
+- Overall: Weighted composite score (target: >80%)
+
+```bash
+python scripts/okr_cascade_generator.py growth
+python scripts/okr_cascade_generator.py retention --teams "Engineering,Design,Data,Growth"
+python scripts/okr_cascade_generator.py revenue --contribution 0.4 --json
+python scripts/okr_cascade_generator.py innovation --metrics '{"current": 50000, "target": 100000}'
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Overall alignment score <60% | Too many orphaned objectives without parent link | Reduce objective count; ensure every product OKR maps to a company OKR |
+| Horizontal alignment low | Teams working on isolated goals | Identify shared objectives; add cross-team key results |
+| Balance score low | One team overloaded with objectives | Redistribute objectives; adjust team contribution percentages |
+| Key results not measurable | Template uses vague language | Replace every KR with specific current/target numbers and timeframe |
+| Contribution percentage unrealistic | Product team cannot own 50%+ of company KR | Calibrate with other functions (sales, marketing); 25-35% is typical |
+| Teams report OKR fatigue | Too many objectives per team | Limit to 3 objectives and 3-5 key results per team per quarter |
+| OKRs disconnected from daily work | Sprint work not mapped to OKRs | Link every epic/story to a team-level key result |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Overall alignment score | >80% | okr_cascade_generator alignment output |
+| OKR completion rate | >70% of KRs hit target | End-of-quarter KR progress review |
+| Cascade coverage | 100% of company OKRs have product children | Coverage score in alignment output |
+| Planning velocity | <4 hours from strategy to team OKRs | Time from generator run to stakeholder approval |
+| Quarterly check-in cadence | Bi-weekly progress reviews | Count of check-in meetings held |
+| OKR quality | All KRs have current + target values | Audit key results for measurability |
+| Team buy-in | >80% of teams confirm OKR relevance | Survey after OKR rollout |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Company-to-team OKR cascade generation
+- Five strategy templates (growth, retention, revenue, innovation, operational)
+- Alignment scoring across vertical and horizontal dimensions
+- Custom team structure configuration
+- Contribution percentage modeling
+- JSON export for OKR tracking tools
+
+**Out of scope:**
+- OKR progress tracking over time (use Lattice, Ally, or Workboard)
+- Automated metric collection (connect to analytics platforms)
+- Individual contributor OKR generation
+- Cross-functional OKRs beyond product (sales, marketing, etc.)
+- Historical OKR analysis and trend reporting
+- Board-level strategic planning frameworks
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Lattice / Ally / Workboard | `--json` export | Import OKRs into tracking platform |
+| Notion / Confluence | Human-readable dashboard output | Document quarterly OKRs for team access |
+| Google Sheets | JSON-to-spreadsheet conversion | Executive OKR summary |
+| product-manager-toolkit | OKRs inform RICE reach/impact values | Connect objectives to feature prioritization |
+| agile-product-owner | Team OKRs guide epic selection | Sprint planning aligned with quarterly goals |
+| Slack | Dashboard output summary | Async OKR rollout communication |

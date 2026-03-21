@@ -363,3 +363,125 @@ Rank all test ideas by ICE score. Run highest first.
 | **campaign-analytics** | Folding experiment results into broader attribution |
 | **launch-strategy** | Testing within a product launch sequence |
 | **prompt-engineer-toolkit** | A/B testing AI prompts in production |
+
+---
+
+## Tool Reference
+
+### sample_size_calculator.py
+
+Calculates required sample size per variant using the normal approximation to the two-proportion z-test. Includes Bonferroni correction for multi-variant tests and duration estimation.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--baseline`, `-b` | float | (required) | Baseline conversion rate (e.g. 0.05 for 5%) |
+| `--mde`, `-m` | float | (required) | Minimum detectable effect as relative lift (e.g. 0.10 for 10%) |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--power`, `-p` | float | 0.80 | Statistical power |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic for duration estimation |
+| `--one-tailed` | flag | False | Use one-tailed test instead of two-tailed |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10
+python scripts/sample_size_calculator.py --baseline 0.12 --mde 0.15 --power 0.9 --daily-traffic 5000
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10 --variants 3 --json
+```
+
+### experiment_analyzer.py
+
+Analyzes A/B test results using the two-proportion z-test with confidence intervals and segment breakdown.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input` | positional | (required) | CSV file with results or "sample" to create sample |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--json` | flag | False | Output as JSON |
+
+**CSV format:** `variant,visitors,conversions,segment`
+
+```bash
+python scripts/experiment_analyzer.py sample
+python scripts/experiment_analyzer.py results.csv
+python scripts/experiment_analyzer.py results.csv --alpha 0.01 --json
+```
+
+### experiment_planner.py
+
+Generates a structured experiment plan from a hypothesis text, including metric selection, sample size, timeline, risks, and documentation template.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--hypothesis`, `-H` | string | (required) | Experiment hypothesis text |
+| `--baseline`, `-b` | float | 0.05 | Baseline conversion rate |
+| `--mde`, `-m` | float | 0.10 | Minimum detectable effect as relative lift |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/experiment_planner.py --hypothesis "Larger CTA will increase signups by 15%"
+python scripts/experiment_planner.py -H "Simplified checkout boosts conversions" -b 0.08 -m 0.15 -d 3000
+python scripts/experiment_planner.py -H "New pricing page" --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Sample size is unrealistically large | MDE too small or baseline too low | Increase MDE (test bolder changes) or target a higher-traffic page |
+| Test duration exceeds 6 weeks | Insufficient daily traffic | Consider qualitative methods, test bigger changes, or combine traffic from multiple pages |
+| p-value hovers around 0.05 | Borderline significance | Do not stop early; run to planned sample size or extend 20% |
+| Results significant but lift is tiny (<1%) | Overpowered test | Check practical significance alongside statistical significance |
+| Segment results contradict overall | Simpson's paradox | Investigate segment composition; report both overall and segment results |
+| Variant performs differently on mobile vs desktop | Device-specific UX issues | Design device-specific variants; increase per-segment sample size |
+| Calculator produces negative CI | Very small samples or extreme rates | Ensure sufficient sample size; check data integrity |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Tests reach planned sample size | 100% of tests | Compare actual vs planned sample at conclusion |
+| False positive rate | <5% | Track post-implementation lift vs test prediction |
+| Test velocity | 2+ tests per team per month | Count experiments documented per sprint |
+| Documentation completeness | 100% of tests documented | Audit experiment records quarterly |
+| Average test duration | <4 weeks | Measure start-to-conclusion calendar days |
+| Decision quality | >80% of shipped variants hold gains at 90 days | Post-ship metric tracking |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Hypothesis formulation and validation
+- Sample size and power calculations
+- Frequentist two-proportion z-tests
+- A/B, A/B/n, and split URL test planning
+- Segment-level analysis
+- Pre/post test documentation
+
+**Out of scope:**
+- Bayesian A/B testing methods (use dedicated Bayesian tools)
+- Multi-armed bandit algorithms (require real-time allocation infrastructure)
+- Multivariate testing (MVT) analysis (combinatorial explosion requires specialized tools)
+- Server-side feature flag implementation (see engineering skills)
+- Revenue-based metrics requiring transaction-level data
+- Sequential testing / always-valid p-values (use Optimizely Stats Engine or similar)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| PostHog / Amplitude | JSON export from experiment_analyzer | Feed results into product analytics |
+| Jira / Linear | experiment_planner JSON output | Create experiment tickets with metadata |
+| Google Sheets | CSV export from experiment_analyzer | Share results with non-technical stakeholders |
+| LaunchDarkly / Unleash | experiment_planner checklist | Pre-launch validation before feature flag rollout |
+| Slack / Notion | Copy human-readable output | Async experiment status updates |
+| CI/CD pipelines | `--json` flag on all scripts | Automated experiment health checks |

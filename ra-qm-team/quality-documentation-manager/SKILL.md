@@ -435,3 +435,77 @@ Track document control system performance.
 | Incomplete change history | Require history update with each revision |
 | No periodic review schedule | Establish and enforce review calendar |
 | Inadequate audit trail | Validate DMS for Part 11 compliance |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Document validator reports "invalid numbering format" | Document number does not match the `PREFIX-CATEGORY-SEQUENCE` pattern | Ensure the number follows the format `SOP-02-001` (type prefix, 2-digit category code, 3-digit sequence). Check that the prefix matches a recognized document type (QM, SOP, WI, TF, SPEC, PLN). |
+| Validation flags missing approver despite having signatures | `approver` field is null or empty in the input JSON | Populate the `approver` field with the name of the approving authority. For SOPs, both Process Owner and QA Manager are required. |
+| Review date validation fails for a current document | `review_date` is in the past | Update the review date to reflect the next scheduled review. Documents past their review date should be flagged for periodic review and re-approval. |
+| Change history marked incomplete | Not all revisions have entries in the `change_history` array | Every revision increment must have a corresponding change history entry with revision number, date, description, and author. Fill gaps in the history. |
+| Part 11 controls flagged despite using an eDMS | `has_audit_trail` or `has_electronic_signature` set to false | Set both to `true` and ensure `signature_components` is at least 2 (user ID + password minimum per Part 11). Verify the eDMS produces computer-generated, timestamped audit trails. |
+| Interactive mode does not display all validation rules | Terminal width too narrow for table output | Widen the terminal window or use `--output json` for structured output that is not affected by display width. |
+| Obsolete documents still appearing as "Effective" | Status field not updated during revision cycle | When a new revision is released, update the prior revision's status to "Superseded" and ensure it is removed from points of use. Run the validator against the superseded document to confirm. |
+
+---
+
+## Success Criteria
+
+- Document numbering system enforced with zero duplicate numbers in the Document Master List and 100% format compliance
+- Document cycle time (draft to effective) averages less than 30 business days across all document types
+- Review completion rate exceeds 95% (reviews completed on time vs. total reviews initiated)
+- Overdue periodic review rate below 5% of total effective documents at any point
+- 21 CFR Part 11 compliance verified for all electronic records: audit trails capture who/what/when for every change, electronic signatures include printed name, date/time, and meaning
+- Change control process handles 100% of document changes through the classification workflow (Administrative/Minor/Major/Emergency) with documented impact assessments
+- Zero external audit findings related to document control in the most recent certification or surveillance audit
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Document numbering convention design and validation
+- Document lifecycle management (Draft through Obsolete)
+- Review and approval workflow enforcement
+- Change control process with classification and impact assessment
+- 21 CFR Part 11 electronic record and electronic signature compliance validation
+- Periodic review schedule management
+- Document Master List maintenance
+
+**Out of Scope:**
+- eDMS software selection, implementation, or validation (the tool validates metadata, not the DMS platform itself)
+- EU Annex 11 computerized system validation (complementary to Part 11 but requires separate assessment approach)
+- Technical file / Design History File content creation (use regulatory-affairs-head for technical documentation)
+- Record retention schedule creation (the tool validates dates but does not determine regulatory retention periods)
+- Physical document distribution or archival logistics
+- Training record management (the tool validates training-related documents but does not manage training programs)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | Document control (Clause 4.2.3) and record control (Clause 4.2.4) are core QMS processes; the validator enforces ISO 13485 documentation requirements |
+| [qms-audit-expert](../qms-audit-expert/) | Internal audits of Clause 4.2 verify document control effectiveness; audit findings drive document process improvements |
+| [quality-manager-qmr](../quality-manager-qmr/) | Document control metrics (cycle time, overdue reviews, backlog) are reported to management review as QMS performance indicators |
+| [fda-consultant-specialist](../fda-consultant-specialist/) | FDA QMSR (effective Feb 2026) incorporates ISO 13485 Clause 4.2 by reference; Part 11 compliance remains a separate FDA requirement for electronic records |
+| [capa-officer](../capa-officer/) | CAPA actions frequently require document revisions; the change control process tracks CAPA-driven document changes |
+
+---
+
+## Tool Reference
+
+### document_validator.py
+
+Validates document metadata, numbering conventions, and regulatory control requirements.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--doc` | Yes (or `--interactive` or `--sample`) | Path to document metadata JSON file containing number, title, type, revision, status, dates, approvers, change history, and Part 11 fields |
+| `--interactive` | No | Launch interactive validation mode for guided document entry |
+| `--output` | No | Output format: `json` for structured output with severity-rated findings, omit for human-readable text |
+| `--sample` | No | Generate a sample document JSON template (pipe to file with `> sample_doc.json`) |

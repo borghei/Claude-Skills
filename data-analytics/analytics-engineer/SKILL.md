@@ -255,3 +255,50 @@ python scripts/schema_diff.py --source prod --target dev
 python scripts/doc_generator.py --format markdown
 python scripts/quality_scorer.py --model fct_orders
 ```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `impact_analyzer.py` | Trace downstream impact of a dbt model via BFS on the manifest DAG | `--model <name>`, `--manifest <path>`, `--json` |
+| `schema_diff.py` | Compare two dbt catalog.json files to detect column additions, removals, and type changes | `--source <path>`, `--target <path>`, `--json` |
+| `doc_generator.py` | Generate markdown documentation (column dictionary, dependencies, tests) for a dbt model | `--model <name>`, `--manifest <path>`, `--catalog <path>` |
+| `quality_scorer.py` | Score a dbt model 0-100 based on documentation, testing, and layer-convention adherence | `--model <name>`, `--manifest <path>`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| `dbt build` fails with "relation does not exist" | Upstream model was not run or materialization changed | Run `dbt build --select +<model>` to build the full upstream chain |
+| Incremental model produces duplicates | `unique_key` does not match the actual grain | Verify the `unique_key` config matches the primary key columns; run a full refresh with `--full-refresh` |
+| Test failures on `not_null` after deployment | Source data introduced unexpected NULLs in a previously clean column | Add a staging-layer `COALESCE` or adjust the test to `warn` severity while investigating upstream |
+| Schema drift detected by `schema_diff.py` | Upstream source changed column types or removed columns | Coordinate with the data engineering team; update staging model casts and regenerate documentation |
+| Semantic-layer metric values differ from dashboard | Dashboard applies its own filters or calculations outside the semantic layer | Move all calculation logic into the semantic layer; audit dashboard-level computed fields |
+| Slow `dbt run` on large incremental models | Lookback window is too wide or partition pruning is not engaged | Narrow the incremental filter, verify `partition_by` config, and check warehouse query plan |
+| `quality_scorer.py` reports low score despite good coverage | Staging model contains JOINs or GROUP BY operations triggering layer-violation penalties | Refactor aggregation logic into intermediate or mart models; keep staging models as thin wrappers |
+
+## Success Criteria
+
+- All dbt models pass `dbt build` with a 100% test pass rate before merging to production.
+- Every model has a YAML description and at least one test per primary key (`unique` + `not_null`).
+- Incremental models process new data in under 5 minutes for tables up to 100M rows.
+- Schema drift between prod and dev environments is detected and reviewed before each release.
+- `quality_scorer.py` reports >= 80/100 for every mart model.
+- Downstream dashboards refresh within SLA (< 5 s load time) after transformation runs complete.
+- Semantic-layer metrics are the single source of truth -- no ad-hoc metric calculations exist in BI tools.
+
+## Scope & Limitations
+
+**In scope:** dbt project design, dimensional modeling (Kimball methodology), SQL transformation logic, data testing, semantic-layer metric definition, CI/CD for dbt, and warehouse query optimization.
+
+**Out of scope:** Raw data ingestion and extraction (ELT/ETL orchestration tools like Fivetran or Airbyte), data infrastructure provisioning, BI tool configuration beyond semantic-layer integration, and real-time streaming pipelines.
+
+**Limitations:** The Python tools operate on dbt manifest/catalog JSON artifacts and do not query the warehouse directly. Scoring heuristics in `quality_scorer.py` use rule-based deductions that may not cover every project convention. All scripts use the Python standard library only -- no external dependencies required.
+
+## Integration Points
+
+- **Data Engineer** (`engineering-team/senior-data-engineer`): Coordinates on source table contracts, ingestion SLAs, and schema change notifications.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Consumes mart models and semantic-layer metrics; dashboard specs reference model outputs.
+- **Data Analyst** (`data-analytics/data-analyst`): Writes ad-hoc queries against mart models; reports data quality issues back to the analytics engineer.
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Feature engineering pipelines may depend on intermediate or mart models as upstream inputs.
+- **CI/CD Workflows** (`templates/`): Slim CI patterns (`state:modified+`) integrate into GitHub Actions or similar runners for automated PR validation.

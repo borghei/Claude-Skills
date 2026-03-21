@@ -1,6 +1,6 @@
 # Product Team Skills - Claude Code Guidance
 
-This guide covers the 5 production-ready product management skills and their Python automation tools.
+This guide covers the 8 production-ready product management skills and their Python automation tools.
 
 ## Product Skills Overview
 
@@ -10,8 +10,11 @@ This guide covers the 5 production-ready product management skills and their Pyt
 3. **product-strategist/** - OKR cascade, strategic planning (1 tool)
 4. **ux-researcher-designer/** - Persona generation, user research (1 tool)
 5. **ui-design-system/** - Design token generation, component systems (1 tool)
+6. **ab-test-setup/** - Sample size calculation, experiment analysis, experiment planning (3 tools)
+7. **design-system-lead/** - Token generation, component scaffolding, adoption analysis (3 tools)
+8. **product-designer/** - Design critique, journey mapping, usability scoring (3 tools)
 
-**Total Tools:** 6 Python automation tools
+**Total Tools:** 15 Python automation tools
 
 ## Python Automation Tools
 
@@ -241,17 +244,17 @@ python ux-researcher-designer/scripts/persona_generator.py --output json > perso
 
 ## Roadmap
 
-**Current (Phase 1):** 5 skills deployed with 6 tools
+**Current (Phase 2):** 8 skills deployed with 15 tools
 
-**Phase 2 (Q1 2026):** Product analytics
-- A/B test analyzer
-- Funnel conversion tracker
-- Cohort retention analyzer
+**Completed (Phase 1):** 5 core skills with 6 tools
+**Completed (Phase 2):** 3 additional skills (ab-test-setup, design-system-lead, product-designer) with 9 new tools
 
 **Phase 3 (Q2 2026):** Advanced PM tools
 - Competitive analysis framework
 - Product-market fit assessment
 - Revenue impact calculator
+- Funnel conversion tracker
+- Cohort retention analyzer
 
 See `product_team_implementation_guide.md` for detailed plans.
 
@@ -263,6 +266,6 @@ See `product_team_implementation_guide.md` for detailed plans.
 
 ---
 
-**Last Updated:** November 5, 2025
-**Skills Deployed:** 5/5 product skills production-ready
-**Total Tools:** 6 Python automation tools
+**Last Updated:** March 21, 2026
+**Skills Deployed:** 8/8 product skills production-ready
+**Total Tools:** 15 Python automation tools

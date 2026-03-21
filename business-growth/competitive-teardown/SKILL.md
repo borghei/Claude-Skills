@@ -392,3 +392,97 @@ CUSTOMER QUOTE:
 - **pricing-strategy** -- Use when competitive analysis reveals pricing misalignment. Feed teardown pricing data into pricing-strategy.
 - **page-cro** -- Use for optimizing your comparison or competitor landing pages for conversion.
 - **content-creator** -- Use for writing competitive content (blog posts, comparison guides) based on teardown findings.
+
+---
+
+## Tool Reference
+
+### 1. competitor_scorer.py
+
+**Purpose:** Score competitors across the 12-dimension rubric and generate a numeric comparison scorecard.
+
+```bash
+python scripts/competitor_scorer.py competitor_data.json
+python scripts/competitor_scorer.py competitor_data.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitor_data.json` | Yes | JSON file with competitor dimension scores and evidence |
+| `--json` | No | Output results as JSON |
+| `--weights` | No | Custom dimension weights as JSON string (default: equal weights) |
+
+### 2. feature_matrix_builder.py
+
+**Purpose:** Build a feature comparison matrix from structured feature data and calculate coverage scores.
+
+```bash
+python scripts/feature_matrix_builder.py features.json
+python scripts/feature_matrix_builder.py features.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `features.json` | Yes | JSON file with feature comparison data |
+| `--json` | No | Output results as JSON |
+
+### 3. battle_card_generator.py
+
+**Purpose:** Generate a one-page battle card from competitor data for sales team use.
+
+```bash
+python scripts/battle_card_generator.py competitor_profile.json
+python scripts/battle_card_generator.py competitor_profile.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitor_profile.json` | Yes | JSON file with competitor profile data |
+| `--json` | No | Output results as JSON |
+| `--format` | No | Output format: text (default) or markdown |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Scoring feels subjective across analysts | No shared rubric calibration | Use the 12-dimension rubric with explicit 1/3/5 definitions; have two analysts score independently and reconcile |
+| Data is stale within weeks of teardown | Fast-moving competitors | Set calendar reminders for monthly pricing checks and quarterly full refreshes; use competitor_scorer.py to track score changes over time |
+| Feature matrix has too many rows to be useful | Trying to capture every micro-feature | Group features into 8-12 categories; detail only the top differentiators |
+| Battle cards are not used by sales | Too long, too academic, or not actionable | Keep to one page; lead with "Where We Win" and "Landmines"; validate with 3 sales reps before distributing |
+| Review data is contradictory | Small sample size or selection bias | Target 50+ reviews per competitor across G2, Capterra, and TrustRadius; weight recent reviews more heavily |
+| Cannot get pricing data for enterprise tiers | Custom pricing not published | Use sales intel (request a demo), G2 pricing data, or customer interviews for directional estimates |
+| SWOT analysis has no actionable output | Analysis lacks connection to action plan | Every SWOT bullet must map to a specific quick-win, medium-term, or strategic action |
+
+---
+
+## Success Criteria
+
+- 12-dimension scorecard completed with evidence notes for every score
+- Feature matrix covers at least 80% of features that prospects evaluate
+- Battle cards reviewed and approved by 3+ sales representatives
+- Pricing data verified within the last 30 days
+- Teardown produces at least 3 actionable quick wins and 2 strategic priorities
+- Stakeholder presentation reviewed and feedback incorporated within 1 week
+- Teardown data refreshed quarterly with score trend tracking
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Product analysis, feature comparison, pricing deconstruction, UX audit, SWOT analysis, battle card creation, action plan generation
+- **Out of scope:** Primary market research (customer interviews, surveys), financial modeling, legal competitive analysis, intellectual property assessment
+- **Data dependency:** Quality depends on publicly available data, user reviews, and product access; some competitors may have limited public information
+- **Bias risk:** Teardowns conducted by internal teams may have confirmation bias; consider external validation for high-stakes decisions
+- **Point-in-time:** Teardowns are snapshots; competitors evolve continuously -- schedule regular refreshes
+
+---
+
+## Integration Points
+
+- **competitor-alternatives** -- Teardown provides the data; competitor-alternatives produces the marketing content (comparison and alternative pages)
+- **pricing-strategy** -- When teardown reveals pricing misalignment, feed pricing data into pricing-strategy for repositioning analysis
+- **page-cro** -- Use for optimizing your comparison or competitor landing pages for conversion after teardown produces the content
+- **sales-engineer** -- Battle cards feed directly into sales engineering competitive positioning and RFP responses
+- **customer-success-manager** -- When exit surveys reveal COMPETITOR as a top churn reason, use teardown data to understand what competitors offer that you do not

@@ -184,8 +184,56 @@ security_model:
 ## Scripts
 
 ```bash
-python scripts/dashboard_analyzer.py --dashboard "Sales Overview"
-python scripts/kpi_calculator.py --config metrics.yaml --output report.json
-python scripts/report_generator.py --template weekly_sales --format pdf
-python scripts/data_quality.py --dataset sales_opportunities --checks all
+python scripts/kpi_tracker.py --definitions kpis.json --data sales.csv
+python scripts/kpi_tracker.py --definitions kpis.json --data sales.csv --json
+python scripts/dashboard_spec_generator.py --definitions kpis.json --title "Sales Dashboard"
+python scripts/dashboard_spec_generator.py --definitions kpis.json --layout 3-column --json
+python scripts/metric_validator.py --definitions metrics.json --strict
+python scripts/metric_validator.py --definitions metrics.json --json
 ```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `kpi_tracker.py` | Calculate KPIs from data against targets; report RAG status and variance | `--definitions <json>`, `--data <csv/json>`, `--json` |
+| `dashboard_spec_generator.py` | Generate dashboard layout specs (chart types, positions, filters) from KPI definitions | `--definitions <json>`, `--title`, `--layout 2-column/3-column`, `--json` |
+| `metric_validator.py` | Validate metric definitions for completeness, naming, threshold logic, and consistency | `--definitions <json>`, `--strict`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Dashboard loads slowly (> 5 s) | Too many visualizations or live-connection queries hitting raw tables | Reduce widgets to 5-8 per page; switch to extracts or materialized views for heavy dashboards |
+| KPI values differ between dashboard and source query | Dashboard applies additional filters, currency conversion, or calculated fields not in the semantic layer | Centralize all metric logic in the semantic layer; remove dashboard-level computed fields |
+| RAG thresholds trigger false alerts | Warning/critical percentages are miscalibrated for seasonal patterns | Adjust thresholds per season or use rolling baselines; validate with `metric_validator.py --strict` |
+| Stakeholders ignore dashboards | Dashboard answers the wrong questions or lacks actionable context | Redesign using the Situation-Complication-Resolution storytelling framework; add annotations and targets |
+| Row-level security hides data unexpectedly | Security rules are too broad or user-role mapping is incorrect | Audit RLS rules; test with a sample user from each role; log filtered row counts |
+| Scheduled report emails land in spam | Large PDF attachments or sender reputation issues | Reduce attachment size; switch to embedded links; work with IT to whitelist the sender domain |
+| `metric_validator.py` reports formula-aggregation mismatch | The `formula` field (e.g., "SUM(...)") does not match the declared `aggregation` | Align the two fields; the aggregation field drives the tool while the formula documents intent |
+
+## Success Criteria
+
+- Dashboard load time is under 5 seconds for 95% of page views.
+- KPI definitions pass `metric_validator.py --strict` with zero errors before production deployment.
+- Executive dashboards follow the visual hierarchy: summary cards at top-left, trends in the middle, detail tables at the bottom.
+- Every KPI has a defined owner, target, and RAG thresholds documented in the definitions file.
+- Self-service BI adoption reaches Level 2 (Explorers) for at least 60% of target users within 90 days.
+- Scheduled reports are delivered within 15 minutes of the configured schedule window.
+- Data storytelling follows the What / So What / Now What structure with quantified impact in every insight.
+
+## Scope & Limitations
+
+**In scope:** Dashboard design and layout, KPI framework definition, report automation patterns, data storytelling, self-service BI enablement, row-level security configuration, and visualization best practices.
+
+**Out of scope:** Data warehouse infrastructure, ETL/ELT pipeline development, raw data ingestion, machine learning model building, and BI tool installation or licensing.
+
+**Limitations:** The Python tools (`kpi_tracker.py`, `dashboard_spec_generator.py`, `metric_validator.py`) operate on local JSON and CSV files only -- they do not connect to live databases or BI platforms. All scripts use the Python standard library with no external dependencies. Dashboard specifications are platform-agnostic and require manual translation to specific BI tools (Tableau, Power BI, Looker, etc.).
+
+## Integration Points
+
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Provides the mart models and semantic-layer metrics that dashboards consume; schema changes require dashboard updates.
+- **Data Analyst** (`data-analytics/data-analyst`): Creates ad-hoc analyses that may evolve into repeatable dashboards; shares visualization standards.
+- **Product Team** (`product-team/`): Defines product KPIs and user-facing analytics requirements.
+- **C-Level Advisor** (`c-level-advisor/`): Executive dashboards translate strategic objectives into measurable KPIs.
+- **Finance** (`finance/`): Financial KPIs (MRR, CAC, LTV) require alignment between BI dashboards and finance team definitions.

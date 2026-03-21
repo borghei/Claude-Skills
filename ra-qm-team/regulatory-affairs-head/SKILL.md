@@ -356,3 +356,80 @@ python scripts/regulatory_tracker.py --overdue --notify
 | [fda-consultant-specialist](../fda-consultant-specialist/) | FDA submission deep expertise |
 | [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | QMS for regulatory compliance |
 | [risk-management-specialist](../risk-management-specialist/) | ISO 14971 risk management |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Regulatory tracker shows "No existing data file found" | Data file does not exist at the expected path | Create an initial submissions JSON file or use the tracker to add a first submission. The tool creates the file on first save. |
+| Submission status shows as PLANNING when it should be SUBMITTED | Status not updated after submission | Update the submission record with `submission_status: SUBMITTED` and `submission_date`. The tracker does not auto-detect FDA ESG submission status. |
+| Overdue notification fires for approved submission | `actual_approval_date` field not populated | Update the record with the actual approval date. The tracker compares `target_approval_date` against today when `actual_approval_date` is null. |
+| 510(k) pathway selected but clinical data still needed | Novel technology or uncertain predicate | Schedule a Pre-Submission (Q-Sub) meeting with FDA. Novel technologies or complex testing may require clinical evidence even under the 510(k) pathway. |
+| Notified Body timeline exceeds plan | NB capacity constraints (common in 2025-2026) | Engage the NB as early as possible (6+ months before target submission). The number of designated MDR NBs has grown to ~50 as of 2024, but capacity remains tight for complex device classes. |
+| EUDAMED registration blocked | EUDAMED modules not yet mandatory or data upload issues | Develop a secure process for uploading device data into EUDAMED. Certain modules become mandatory in 2026. Prepare data structures proactively. |
+| Multi-market submission timeline keeps slipping | Sequential submissions creating cascading delays | Where possible, shift to parallel submission strategy. Use FDA + EU as reference markets and leverage MDSAP for recognition markets (Canada, Australia, Japan, Brazil). |
+
+---
+
+## Success Criteria
+
+- First-time regulatory approval rate exceeds 85% across all submission types (510(k), PMA, De Novo, CE marking)
+- Regulatory submission timelines met for 90%+ of submissions (submitted by target date)
+- Pre-Submission meetings scheduled and completed for all novel technology, uncertain predicate, or complex testing submissions
+- FDA review cycle compliance exceeds 95% (responses to AI/RTA/deficiency requests submitted within deadline)
+- EU MDR Technical Documentation complete and accepted by Notified Body with no critical findings on first review
+- Global market access strategy documented with phased market sequencing, resource estimates, and risk mitigation for each target jurisdiction
+- Regulatory intelligence monitoring active for all applicable jurisdictions with change assessments completed within 30 days of publication
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Regulatory strategy development for medical devices across FDA, EU MDR, and global markets
+- FDA submission management (510(k), PMA, De Novo, Q-Sub/Pre-Submission)
+- EU MDR conformity assessment route selection and Notified Body engagement
+- Global market access planning and multi-market submission sequencing
+- Regulatory intelligence monitoring and change management
+- Submission timeline planning and milestone tracking
+- Regulatory pathway selection decision frameworks
+
+**Out of Scope:**
+- Clinical trial design, execution, or data analysis (the skill addresses clinical evidence strategy but not clinical operations)
+- Detailed technical file content creation (use mdr-745-specialist for GSPR checklists, Annex II documentation)
+- Quality system management (use quality-manager-qms-iso13485 for QMS processes)
+- Post-market surveillance program execution (the skill defines PMS strategy but execution is managed by PMS teams)
+- Reimbursement strategy or health technology assessment (HTA) submissions
+- Patent or intellectual property strategy related to regulatory pathways
+- In vitro diagnostic (IVD) specific regulatory requirements under IVDR 2017/746
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [mdr-745-specialist](../mdr-745-specialist/) | Detailed EU MDR technical requirements, GSPR checklists, Annex VIII classification rules, and EUDAMED registration |
+| [fda-consultant-specialist](../fda-consultant-specialist/) | FDA submission deep expertise including QMSR alignment, HIPAA, cybersecurity guidance, and 510(k)/PMA specifics |
+| [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | QMS certification is a prerequisite for MDR conformity assessment and supports FDA QMSR compliance |
+| [risk-management-specialist](../risk-management-specialist/) | ISO 14971 risk management file is required for both FDA submissions and EU MDR Technical Documentation |
+| [quality-manager-qmr](../quality-manager-qmr/) | Regulatory changes affecting the QMS are management review inputs; QMR coordinates compliance across jurisdictions |
+
+---
+
+## Tool Reference
+
+### regulatory_tracker.py
+
+Tracks regulatory submission status, timelines, and overdue notifications across all markets.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--status` | No | Filter submissions by status: `active`, `planning`, `submitted`, `approved`, `all` |
+| `--overdue` | No | Show only submissions past their target approval date without an actual approval date |
+| `--notify` | No | Generate notification alerts for overdue or at-risk submissions |
+| `--format` | No | Output format: `markdown` for formatted text, omit for default display |
+
+Note: The tracker operates on a `regulatory_submissions.json` data file (default path). Submissions are added and updated programmatically through the `RegulatoryTracker` class API. The tool supports submission types: FDA_510K, FDA_PMA, FDA_DE_NOVO, EU_MDR_CE, ISO_CERTIFICATION, GLOBAL_REGULATORY.

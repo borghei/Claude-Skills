@@ -240,7 +240,109 @@ python scripts/poc_planner.py poc_data.json --format json
 
 ---
 
-**Last Updated:** February 2026
+## Tool Reference
+
+### 1. rfp_response_analyzer.py
+
+Parses RFP/RFI requirements and scores coverage using Full/Partial/Planned/Gap categories. Generates weighted coverage scores, gap analysis, effort estimation, and bid/no-bid recommendations.
+
+```bash
+python scripts/rfp_response_analyzer.py rfp_data.json
+python scripts/rfp_response_analyzer.py rfp_data.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `rfp_data.json` | positional | Path to JSON file with RFP requirements and coverage data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+**Bid/No-Bid Logic:**
+- **Bid:** Coverage score >70% AND must-have gaps <=3
+- **Conditional Bid:** Coverage score 50-70% OR must-have gaps 2-3
+- **No-Bid:** Coverage score <50% OR must-have gaps >3
+
+### 2. competitive_matrix_builder.py
+
+Generates feature comparison matrices, calculates weighted competitive scores, identifies differentiators and vulnerabilities, and produces win themes.
+
+```bash
+python scripts/competitive_matrix_builder.py competitive_data.json
+python scripts/competitive_matrix_builder.py competitive_data.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `competitive_data.json` | positional | Path to JSON file with feature comparison data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+**Scoring:** Full (3), Partial (2), Limited (1), None (0)
+
+### 3. poc_planner.py
+
+Generates structured POC plans with phased timelines, resource allocation, success criteria, evaluation scorecards, risk registers, and go/no-go frameworks.
+
+```bash
+python scripts/poc_planner.py poc_data.json
+python scripts/poc_planner.py poc_data.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `poc_data.json` | positional | Path to JSON file with POC scope and requirements |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+**Default Phase Breakdown:** Week 1 Setup, Weeks 2-3 Core Testing, Week 4 Advanced Testing, Week 5 Evaluation
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| RFP coverage score below 50% triggering No-Bid | Product gaps in must-have requirements or incorrect coverage assessment | Review gap items -- distinguish true gaps from items addressable via configuration, integration, or roadmap commitment; reassess before declining |
+| Competitive matrix shows vulnerabilities in 3+ categories | Product gaps relative to a specific competitor, or scoring does not reflect actual competitive dynamics | Validate scoring with field SEs who have competed against this vendor; focus battlecard on differentiators where you lead, not where you trail |
+| POC-to-close conversion below 60% | POC scope too broad, success criteria not aligned with buyer priorities, or wrong stakeholders involved | Narrow POC to 3-5 use cases tied to buyer's stated pain; get written agreement on success criteria before starting; ensure executive sponsor participates in evaluation |
+| Win rate below 30% | Technical win but commercial loss, late involvement in deal, or poor discovery leading to misaligned demos | Engage earlier in sales cycle; improve discovery quality using MEDDIC framework; align demo storyline to buyer's language not product features |
+| Demo-to-POC conversion below 40% | Demo did not address buyer's specific use case or was too generic | Customize every demo to buyer's stated requirements; use their data or industry-specific scenarios; include Q&A and next-step proposal at end |
+| RFP response time exceeds 2 weeks | Manual response process without templates or pre-built content library | Build a response library indexed by requirement category; use rfp_response_analyzer.py to prioritize effort on must-have items |
+| Stakeholder engagement score below 75% | Key decision-makers not involved in technical evaluation | Map stakeholder roles early; ensure executive briefing alongside technical deep-dives; send personalized follow-up to each stakeholder |
+
+---
+
+## Success Criteria
+
+- Win rate exceeds 30% across all competitive opportunities
+- Sales cycle length stays below 90 days from discovery to close
+- POC-to-close conversion rate exceeds 60%
+- RFP coverage score averages above 80% for opportunities pursued (bid decisions working correctly)
+- Competitive matrix identifies minimum 3 clear differentiators per competitor
+- Customer engagement score exceeds 75% (measured by stakeholder participation in evaluation milestones)
+- Average RFP response time drops below 5 business days with structured response library
+
+---
+
+## Scope & Limitations
+
+**In scope:** RFP/RFI response analysis and scoring, competitive feature matrix construction, proof-of-concept planning and evaluation, demo preparation frameworks, technical proposal structure, win/loss analysis methodology, and stakeholder engagement tracking across the 5-phase pre-sales workflow (Discovery, Solution Design, Demo, POC, Proposal).
+
+**Out of scope:** Sales strategy and territory planning (account executive function), pricing and commercial terms negotiation (use pricing-strategy), post-sale implementation and customer success (use customer-success-manager), marketing content and competitive messaging (use marketing skills), and product roadmap decisions based on RFP gaps (use product-team). Tools analyze static data exports -- no integrations with CRM systems (Salesforce, HubSpot) or RFP platforms (Loopio, Arphie).
+
+**Limitations:** Bid/no-bid thresholds are configurable but defaults assume B2B SaaS with 30%+ win-rate targets. Competitive matrix scoring is only as accurate as the input data -- validate scores with field experience against specific competitors. POC timelines assume standard 5-week engagement; highly regulated industries (healthcare, government) may require 2-3x longer. AI-assisted RFP tools (emerging in 2025-2026) can reduce response time 60-80% but are not integrated here.
+
+---
+
+## Integration Points
+
+- **revenue-operations** -- Pipeline deals requiring technical validation flow through SE workflow; SE win/loss data feeds pipeline analysis
+- **customer-success-manager** -- POC results and success criteria hand off to CSM for post-close adoption tracking
+- **pricing-strategy** -- Competitive pricing data from matrix builder informs pricing positioning decisions
+- **product-team** -- RFP gaps flagged as "Planned" or "Gap" feed into product roadmap prioritization
+- **c-level-advisor** -- Strategic deals requiring executive engagement escalate through C-level advisory workflow
+- **marketing-skill** -- Competitive intelligence from marketing feeds into battlecard creation and positioning
+
+---
+
+**Last Updated:** March 2026
 **Status:** Production-ready
 **Tools:** 3 Python automation scripts
 **References:** 3 knowledge base documents

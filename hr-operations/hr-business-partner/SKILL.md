@@ -176,15 +176,81 @@ WORKFORCE PLAN
 ## Scripts
 
 ```bash
-# Workforce planning calculator
-python scripts/workforce_plan.py --current headcount.csv --growth 0.2
+# Score organizational health from workforce metrics
+python scripts/org_health_scorer.py --file org_metrics.csv
+python scripts/org_health_scorer.py --file org_metrics.csv --json
 
-# Attrition analyzer
-python scripts/attrition_analyzer.py --data terminations.csv
+# Analyze compensation for pay equity
+python scripts/compensation_analyzer.py --file comp_data.csv
+python scripts/compensation_analyzer.py --file comp_data.csv --json
 
-# Compensation analyzer
-python scripts/comp_analyzer.py --roles roles.csv --market market_data.csv
-
-# Engagement survey analyzer
-python scripts/engagement_analyzer.py --survey survey_results.csv
+# Generate workforce dashboard from HR data
+python scripts/workforce_dashboard.py --file workforce.csv
+python scripts/workforce_dashboard.py --file workforce.csv --json
 ```
+
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Business leaders treat HRBP as transactional HR | Unclear role definition, reactive posture, or lack of business acumen | Establish a formal operating model: 70% strategic / 30% operational; present quarterly people plans tied to business OKRs; delegate administrative tasks to HR shared services |
+| Calibration sessions devolve into arguments | No shared rubric, manager defensiveness, or lack of pre-work | Require managers to submit ratings with 2+ behavioral evidence examples before the session; facilitate with a neutral framework; start with aligned ratings and work through outliers |
+| Workforce plan disconnected from business strategy | HRBP not included in business planning, or plan built in isolation | Attend leadership team meetings; build workforce plan as an appendix to the business plan; tie every headcount request to a revenue or product milestone |
+| High regrettable turnover in specific teams | Manager quality issues, compensation misalignment, or stalled career paths | Run stay interviews with high performers; analyze exit data by manager; benchmark comp by role and level; publish career ladders with clear promotion criteria |
+| Employee relations cases escalate unnecessarily | Late intervention, poor documentation, or inconsistent policy application | Train managers on early issue identification; standardize the ER intake and investigation framework; conduct monthly ER case reviews to identify patterns |
+| Performance review cycle seen as bureaucratic | Too many forms, unclear purpose, or ratings disconnected from comp | Simplify to a 2-page template; connect review outcomes directly to merit and promotion decisions; train managers on feedback delivery (SBI-E model) |
+| Change management initiatives fail to stick | Insufficient sponsorship, poor communication cadence, or no measurement | Apply Kotter's 8-step model; secure visible executive sponsorship; communicate in 5+ channels; measure adoption at 30/60/90 days |
+
+## Success Criteria
+
+| Dimension | Metric | Target | Measurement |
+|-----------|--------|--------|-------------|
+| Strategic Impact | Business leader satisfaction with HRBP | > 4.0 / 5.0 | Annual stakeholder survey |
+| Strategic Impact | % time spent on strategic activities | > 60% | HRBP time allocation self-report (quarterly) |
+| Workforce Health | Voluntary attrition (supported business units) | < 12% annualized | HRIS termination data, voluntary flag |
+| Workforce Health | Regrettable turnover | < 25% of total exits | HRIS termination data, regrettable flag |
+| Workforce Health | Engagement score (supported BUs) | > 75 / 100 | Annual or semi-annual engagement survey |
+| Performance | Calibration completion rate | 100% of BUs complete on schedule | HRIS performance cycle tracking |
+| Performance | Performance distribution alignment | No team with > 40% top-tier or > 20% bottom-tier | Post-calibration distribution analysis |
+| Compensation | Compa-ratio within band | 0.90-1.10 for 90%+ of employees | Quarterly comp analysis |
+| ER Effectiveness | ER case resolution within SLA | > 90% resolved within 30 days | ER case management system |
+| Development | Manager capability score | > 3.5 / 5.0 on upward feedback | 360 or upward feedback survey |
+
+## Scope & Limitations
+
+**In Scope:**
+- Strategic workforce planning: headcount forecasting, gap analysis, succession planning
+- Performance management cycle: goal setting, calibration facilitation, rating alignment
+- Employee relations: intake, investigation, resolution, and pattern identification
+- Compensation advisory: internal equity analysis, offer review, merit and promotion recommendations
+- Manager coaching: difficult conversations, feedback delivery, team development
+- Organizational design advisory: spans of control, reporting structure, team topology
+- Change management support: stakeholder mapping, communication planning, adoption tracking
+
+**Out of Scope:**
+- Benefits plan design and administration (owned by Total Rewards / Benefits)
+- Payroll processing and tax compliance (owned by Payroll)
+- Learning and development program design (owned by L&D; HRBP identifies needs)
+- Legal counsel on employment law matters (HRBP escalates to Legal)
+- Recruiting execution (owned by Talent Acquisition; HRBP sets hiring priorities)
+- HRIS system configuration and administration (owned by HR Technology)
+
+**Known Limitations:**
+- Organizational health scoring is based on available metrics; cultural factors and informal dynamics require qualitative assessment alongside quantitative data
+- Compensation analysis depends on accurate market data; benchmark sources (Radford, Mercer, Levels.fyi) should be refreshed at least annually
+- The SBI-E framework works best for individualized feedback; systemic team issues require different interventions (team retrospectives, org design changes)
+- HRBP effectiveness depends heavily on the quality of the business leader relationship; new partnerships require 1-2 quarters to reach full strategic impact
+
+## Integration Points
+
+| System / Skill | Integration | Data Flow |
+|----------------|-------------|-----------|
+| **HRIS** (Workday, BambooHR) | Headcount, attrition, performance ratings, compensation data | HRIS -> org_health_scorer.py, workforce_dashboard.py; HRBP recommendations -> HRIS updates |
+| **People Analytics** skill | Workforce insights, attrition risk, engagement drivers, pay equity | Analytics insights -> HRBP strategic recommendations; HRBP questions -> analytics projects |
+| **Talent Acquisition** skill | Hiring pipeline, offer approvals, headcount planning | HRBP workforce plan -> TA hiring targets; TA pipeline updates -> HRBP capacity planning |
+| **Operations Manager** skill | Capacity planning, org structure, process efficiency | Ops headcount needs -> HRBP workforce plan; HRBP org design -> Ops team structure |
+| **Finance** skill | Compensation budgets, headcount costs, merit pool allocation | Finance budget -> HRBP comp decisions; HRBP headcount plan -> Finance modeling |
+| **C-Level Advisor** skill | Strategic workforce direction, org transformation, leadership succession | C-level priorities -> HRBP strategic plan; HRBP org health insights -> executive briefings |
+| **Performance Platform** (Lattice, Culture Amp, 15Five) | Goal tracking, review cycles, calibration data | Platform -> performance metrics; calibration outcomes -> platform updates |
+| **ER Case Management** (Ethena, NAVEX, HR Acuity) | Case intake, investigation tracking, resolution documentation | ER cases -> investigation workflow; resolution data -> pattern analysis |
+| **Survey Platform** (Culture Amp, Qualtrics) | Engagement survey results, pulse check data | Survey data -> HRBP action planning; HRBP priorities -> survey design |

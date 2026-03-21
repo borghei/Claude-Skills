@@ -1119,6 +1119,116 @@ Domain Weights:
 
 ---
 
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Infra audit runner returns mostly "UNKNOWN" statuses | Config JSON missing required keys or key paths do not match expected `check_key` format | Generate a fresh template with `--generate-template` and verify all key paths match the control registry (e.g., `aws.iam.root_mfa_enabled`); fill in actual values from your infrastructure |
+| DNS security checker cannot resolve records | `dig` command not available on the system or DNS resolver blocking queries | Install `dnsutils` (Linux) or `bind` (macOS via Homebrew); alternatively the tool falls back to socket-based lookups but with reduced functionality; check network connectivity to DNS resolvers |
+| Access control auditor shows Critical findings for MFA | SMS/TOTP MFA deployed instead of hardware security keys for admin accounts | Migrate admin accounts to FIDO2/WebAuthn hardware keys (YubiKey 5, Titan); disable SMS MFA for privileged access; use `--generate-template` to review all MFA-related control expectations |
+| Framework-filtered report shows zero controls for a specific framework | Framework label mismatch in `--frameworks` flag (e.g., `pci-dss` instead of `pci_dss`) | Use exact framework identifiers: `soc2`, `iso27001`, `hipaa`, `gdpr`, `pci_dss`, `nis2`, `dora`, `nist_csf`, `fedramp`, `ccpa` |
+| Overall score low despite strong cloud security | Domain weights distribute score across all 11 domains; weak areas (e.g., physical security, DNS) drag down the average | Review per-domain scores to identify weakest areas; prioritize remediation in highest-weighted domains (Cloud Infrastructure 15%, Access Control 15%, Network Security 12%) |
+| Container security audit fails with all controls non-compliant | Organization does not use containers but config JSON contains default/empty container section | Set container controls to `N/A` or remove the container section from the config; tool scores only applicable controls |
+| Audit report too large for stakeholder review | Full 250+ control audit generates extensive output | Use `--frameworks` flag to filter to relevant frameworks; use `--format markdown` for human-readable summary; generate separate reports per domain for team-specific remediation |
+
+---
+
+## Success Criteria
+
+- **Overall infrastructure score of 80+ (Good or Excellent)** -- indicating audit-readiness with only minor gaps across all 11 domains
+- **Zero Critical findings across all domains** -- all Critical-severity controls (root MFA, no wildcard IAM policies, encryption at rest, hardware key admin MFA) passing
+- **Framework-specific compliance above 85%** -- for each targeted compliance framework (SOC 2, ISO 27001, PCI-DSS, etc.), the mapped controls show 85%+ pass rate
+- **DNS security fully configured** -- SPF, DKIM, and DMARC (policy=reject) records validated, DNSSEC enabled, CAA records set, and MTA-STS deployed
+- **Access control audit passes all Critical and High controls** -- centralized IdP deployed, SSO integrated for all applications, hardware security keys enforced for admin accounts, PAM implemented, and RBAC documented
+- **Secrets management score above 90%** -- dedicated secrets vault deployed, automated rotation configured, no secrets in source code (git scanning enabled), and HSM for cryptographic operations
+- **Evidence artifacts generated for audit** -- JSON or markdown reports suitable for auditor review, with per-control pass/fail status and framework mapping
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Infrastructure security audit across 11 domains: Cloud, DNS, TLS/SSL, Endpoints, Access Control, Network, Containers/K8s, CI/CD, Secrets, Logging/Monitoring, Physical Security
+- Framework mapping to 10 compliance standards: SOC 2, ISO 27001, HIPAA, GDPR, PCI-DSS, NIS2, DORA, NIST CSF, FedRAMP, CCPA
+- 250+ individual control checks with severity-weighted scoring
+- DNS security validation including SPF, DKIM, DMARC, DNSSEC, CAA, MTA-STS, and subdomain takeover risk
+- Access control audit covering IdP, SSO, MFA, FIDO2/hardware keys, PAM, RBAC, service accounts, SSH keys, API keys, and Zero Trust
+- Evidence-generating reports in JSON and markdown formats for auditor consumption
+
+**Out of Scope:**
+- Actual penetration testing, vulnerability scanning, or active exploitation -- this skill performs configuration-based assessment, not active testing
+- Cloud provider API calls or live infrastructure scanning -- the tool works with JSON configuration input describing your infrastructure state
+- Compliance certification or attestation -- this skill identifies gaps but does not replace formal SOC 2, ISO 27001, or PCI-DSS audits
+- Application security testing (SAST/DAST) beyond CI/CD pipeline configuration checks
+- Compliance program management, policy writing, or governance documentation
+
+**Important Notes:**
+- SOC 2 2026 best practices demand real-time monitoring dashboards flagging control deficiencies within 48 hours; periodic spot-checks are no longer sufficient
+- Zero Trust architecture is increasingly expected across all frameworks; perimeter-based security alone is insufficient for SOC 2, ISO 27001, and NIS2
+- Compliance automation platforms (Drata, Vanta, Sprinto) complement but do not replace the deterministic checks this tool provides
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `soc2-compliance-expert` | SOC 2 Trust Services Criteria mapped to infrastructure controls; evidence collection for SOC 2 Type II | When infrastructure audit supports SOC 2 certification |
+| `information-security-manager-iso27001` | ISO 27001 Annex A technological controls validated by infrastructure checks | When ISO 27001 certification requires evidence of technical control implementation |
+| `nist-csf-specialist` | NIST CSF 2.0 Protect and Detect functions mapped to infrastructure domains | When building unified security posture across NIST and other frameworks |
+| `dora-compliance-expert` | DORA Pillar 1 and Pillar 3 controls validated by infrastructure security checks | When financial entity requires infrastructure evidence for DORA compliance |
+| `pci-dss-specialist` | PCI-DSS v4.0 network security, encryption, and access control requirements mapped to checks | When cardholder data environment requires infrastructure compliance validation |
+| `gdpr-dsgvo-expert` | Technical privacy controls (encryption, access controls, data masking) supporting GDPR Art. 32 | When infrastructure controls support personal data protection requirements |
+
+---
+
+## Tool Reference
+
+### infra_audit_runner.py
+
+Comprehensive infrastructure audit across 11 domains with compliance framework mapping.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config <file>` | Yes (unless `--generate-template`) | Path to JSON file describing infrastructure configuration |
+| `--generate-template` | No | Generate blank infrastructure configuration template |
+| `--frameworks <list>` | No | Comma-separated framework filter (e.g., `soc2,iso27001,hipaa`); uses identifiers: `soc2`, `iso27001`, `hipaa`, `gdpr`, `pci_dss`, `nis2`, `dora`, `nist_csf`, `fedramp`, `ccpa` |
+| `--format <fmt>` | No | Output format: `json` (default) or `markdown` |
+| `--output <file>` | No | Export report to specified file path |
+
+**Output:** Per-domain scores (0-100), overall weighted score, per-control pass/fail/unknown status, framework-mapped findings with severity, and remediation recommendations.
+
+### dns_security_checker.py
+
+DNS-specific security audit validating email authentication, DNSSEC, certificate authority authorization, and subdomain takeover risk.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--domain <domain>` | Yes | Domain name to audit (e.g., `example.com`) |
+| `--output <file>` | No | Export report to specified file path |
+| `--format <fmt>` | No | Output format: `json` (default) or `markdown` |
+| `--subdomains <list>` | No | Comma-separated subdomains to check for takeover risk (e.g., `sub1,sub2,sub3`) |
+| `--dkim-selectors <list>` | No | Comma-separated DKIM selectors to validate (e.g., `google,selector1`) |
+
+**Checks:** SPF record syntax and lookup count, DKIM record presence and key strength, DMARC policy and reporting configuration, DNSSEC validation, CAA record authorization, MTA-STS policy, and subdomain takeover risk assessment.
+
+### access_control_auditor.py
+
+Access control audit covering identity, authentication, authorization, and privileged access management.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config <file>` | Yes (unless `--generate-template`) | Path to JSON file describing access control configuration |
+| `--generate-template` | No | Generate blank access control configuration template |
+| `--format <fmt>` | No | Output format: `json` (default) or `markdown` |
+| `--output <file>` | No | Export report to specified file path |
+
+**Audit Categories:** Identity Provider (IdP) configuration, SSO/SCIM provisioning, MFA enforcement, hardware security key (FIDO2/YubiKey) deployment, Privileged Access Management (PAM), RBAC, service account governance, SSH key management, API key management, and Zero Trust architecture.
+
+---
+
 **Last Updated:** March 2026
 **Version:** 1.0.0
 **Total Controls:** 250+ across 11 audit domains

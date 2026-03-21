@@ -376,6 +376,99 @@ If your site runs multiple popups, implement these rules:
 
 ---
 
+## Tool Reference
+
+### 1. popup_strategy_auditor.py
+
+Audits existing popup configurations for compliance, frequency conflicts, targeting gaps, and mobile safety. Reads a JSON inventory of popups and flags issues against best practices.
+
+```bash
+python scripts/popup_strategy_auditor.py popups.json --format text
+python scripts/popup_strategy_auditor.py popups.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `popups.json` | positional | Path to JSON file with popup inventory and rules |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. popup_ab_test_calculator.py
+
+Calculates statistical significance for popup A/B tests. Takes impressions and conversions for control and variant, computes conversion rates, relative lift, confidence level, and recommends whether to ship, continue testing, or abandon.
+
+```bash
+python scripts/popup_ab_test_calculator.py test.json --format text
+python scripts/popup_ab_test_calculator.py test.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `test.json` | positional | Path to JSON file with A/B test data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. popup_roi_estimator.py
+
+Estimates revenue impact of popup lead capture by modeling lead volume, conversion rates, and customer lifetime value. Compares popup-sourced leads against other channels.
+
+```bash
+python scripts/popup_roi_estimator.py roi_data.json --format text
+python scripts/popup_roi_estimator.py roi_data.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `roi_data.json` | positional | Path to JSON file with popup performance and revenue data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Popup conversion rate below 2% | Wrong trigger timing, weak offer, or poor copy | Test scroll-triggered (50-70%) vs time-delayed; use benefit-focused headline; add countdown timer (lifts to 14.4% avg per 2026 benchmarks) |
+| Bounce rate increases >5% after adding popup | Popup fires too early or covers too much screen on mobile | Increase time delay to 15-30s or switch to scroll trigger; use slide-in format instead of center modal |
+| Email list quality drops (low open rates from popup leads) | Generic offer attracts low-intent subscribers | Switch to content upgrade offers specific to the page; add qualification question |
+| Multiple popups fire in same session | No global popup state manager or priority system implemented | Implement session-level state tracking via localStorage; enforce one-popup-per-session rule with priority ranking |
+| Mobile popup triggers Google penalty | Full-screen overlay or popup covers content before engagement | Switch to bottom bar, slide-in (<30% screen), or inline expansion format; test with Google Mobile-Friendly Tool |
+| Exit-intent not working on mobile | Exit-intent relies on mouse movement which does not exist on mobile | Use scroll-up or inactivity trigger as mobile alternative; segment trigger rules by device type |
+| Cookie consent popup conflicts with marketing popup | No priority system; both fire simultaneously | Legal popups always take priority; queue marketing popup to fire only after consent is given |
+
+---
+
+## Success Criteria
+
+- Popup conversion rate reaches 3-5% (good) or 5-10% (excellent) within 30 days of optimization
+- Bounce rate impact stays below 5% increase compared to no-popup baseline
+- Email lead quality maintains >30% open rate on subsequent emails from popup-sourced leads
+- Mobile popup compliance passes Google Mobile-Friendly Test with zero warnings
+- Frequency capping limits impressions to max 1 per session and 3-4 per month per user
+- Zero GDPR/CCPA compliance violations in popup consent flows
+- Gamified or countdown-enhanced popups reach 13%+ average conversion rate (2026 benchmark)
+
+---
+
+## Scope & Limitations
+
+**In scope:** Popup and modal format selection, trigger engineering, audience targeting, frequency capping, copy architecture, mobile-safe design, multi-popup conflict resolution, compliance requirements (GDPR, CCPA, CAN-SPAM, cookie consent), and structured A/B testing for lead capture, promotional, announcement, and feedback popups.
+
+**Out of scope:** Form field-level optimization within popups (use form-cro), page-level conversion optimization around the popup (use page-cro), in-app onboarding modals and tooltips (use onboarding-cro), registration flows triggered by popups (use signup-flow-cro). Scripts operate on local data only -- no integrations with popup platforms (OptinMonster, Wisepops, etc.) or analytics tools.
+
+**Limitations:** Conversion benchmarks are aggregate industry averages from 2025-2026 studies (Popupsmart 10K+ campaigns, Wisepops 1B+ displays) and vary significantly by industry, traffic source, and offer type. Exit-intent detection is desktop-only; mobile alternatives (scroll-up, inactivity) have different performance characteristics. Google intrusive interstitial penalties apply to mobile search traffic specifically -- direct/paid traffic is less affected.
+
+---
+
+## Integration Points
+
+- **form-cro** -- Popup form fields should follow form-cro field reduction and validation standards
+- **page-cro** -- Page conversion should be optimized before layering popups; popup performance depends on page quality
+- **signup-flow-cro** -- Popup-to-signup handoff should maintain context and pre-fill captured email
+- **paywall-upgrade-cro** -- In-app upgrade modals share frequency capping and UX principles with marketing popups
+- **onboarding-cro** -- Product onboarding tooltips and modals should use separate state management from marketing popups
+- **referral-program** -- Post-purchase or post-conversion popups can trigger referral program prompts
+
+---
+
 ## Related Skills
 
 - **form-cro** -- Use when the form inside the popup needs field-level optimization (field count, validation, layout).

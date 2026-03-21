@@ -229,6 +229,76 @@ python scripts/security_assess.py --customer "Customer Name"
 python scripts/poc_tracker.py --customer "Customer Name"
 ```
 
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Architecture rejected by customer's IT team | Solution does not align with customer's existing standards or security policies | Conduct thorough technical discovery including IT governance standards before designing. Map solution to their approved technology stack. Engage their enterprise architect early. |
+| Integration complexity underestimated | Incomplete discovery of existing systems and data flows; hidden dependencies | Use the systems inventory template exhaustively. Map all integration points including legacy systems. Add 30-50% buffer to integration timeline estimates. Identify data transformation requirements early. |
+| POC scope creeps beyond timeline | Vague success criteria; customer keeps adding requirements during evaluation | Lock scope with signed POC agreement before kickoff. Use explicit in-scope/out-of-scope boundaries. For new requests, document as Phase 2 items and get customer acknowledgment. |
+| Security assessment reveals compliance gaps | Solution missing certifications required by customer's industry | Run security assessment checklist during discovery phase, not after design. Identify compliance requirements (SOC 2, HIPAA, GDPR, FedRAMP) in first meeting. Build remediation timeline into implementation roadmap. |
+| Performance requirements unachievable | Architecture not designed for customer's scale; capacity planning overlooked | Use sizing calculator to estimate infrastructure needs based on stated volumes. Validate with load testing during POC. Design for 3x current peak as growth buffer. |
+| Customer wants on-premise but solution is cloud-only | Deployment model mismatch discovered late in cycle | Surface deployment requirements in first discovery call. If hybrid is possible, design a hybrid architecture pattern. If not, qualify out early to avoid wasted effort. |
+| Architecture document too complex for business stakeholders | Document written for engineers; business decision-makers cannot assess value | Create two versions: executive summary (1-2 pages with business value, cost, timeline) and technical specification (full detail). Present executive version in business meetings. |
+
+## Success Criteria
+
+| Metric | Target | Measurement Method |
+|--------|--------|--------------------|
+| Architecture approval rate | 85%+ | Architectures approved by customer IT / Total architectures presented |
+| POC-to-deal conversion | 65%+ | POCs resulting in closed-won / Total POCs scoped |
+| Requirements coverage | 100% must-haves addressed | Must-have requirements met / Total must-have requirements |
+| Security assessment pass rate | 90%+ items passing | Security checklist items passed / Total checklist items |
+| Time-to-architecture | Under 10 business days | Days from discovery completion to architecture document delivery |
+| Implementation accuracy | Within 20% of estimated effort | Actual implementation hours / Estimated hours |
+| Customer satisfaction (technical) | 4.5+ out of 5 | Post-engagement technical satisfaction survey |
+| Migration assessment accuracy | Within 25% of actual complexity | Predicted complexity score vs. actual migration effort |
+
+## Scope & Limitations
+
+**In Scope:**
+- Technical discovery and requirements analysis (functional and non-functional)
+- Solution architecture design: components, integrations, APIs, data flows
+- Security and compliance assessment across authentication, authorization, data protection
+- Proof-of-concept scoping, milestone tracking, and success evaluation
+- Deployment architecture: infrastructure, environments, configuration management
+- Scalability and performance planning with capacity modeling
+- Implementation roadmap creation with phased delivery and dependencies
+- Migration assessment for on-premise to cloud, legacy modernization, and platform transitions
+
+**Out of Scope:**
+- Commercial deal strategy, pricing, and contract negotiation (see account-executive)
+- Product demo delivery and competitive battle cards (see sales-engineer)
+- CRM management, territory planning, and sales process design (see sales-operations)
+- Post-sale customer success and health scoring (see customer-success-manager)
+- Production infrastructure provisioning and DevOps (coordinate with Engineering)
+- Ongoing maintenance, monitoring, and incident response (coordinate with Support)
+
+**Limitations:**
+- Architecture designs are pre-sales artifacts; production architecture may require refinement during implementation
+- Sizing calculations are estimates based on stated requirements; actual infrastructure needs depend on real usage patterns
+- Migration complexity scoring uses weighted heuristics; complex legacy systems may require hands-on assessment
+- Security assessment covers common enterprise requirements but does not replace formal penetration testing or compliance audits
+- Scripts generate assessments and scores based on input data; they do not connect to live infrastructure
+
+## Integration Points
+
+| Integration | Direction | Purpose | Handoff Artifact |
+|-------------|-----------|---------|-----------------|
+| **Account Executive** | AE -> SA | Complex enterprise deals requiring architecture design; deal strategy alignment | Discovery notes, deal context, customer constraints, budget parameters |
+| **Sales Engineer** | SE -> SA | Escalation for multi-system integration design; deep technical requirements | Technical discovery output, POC results, integration specifications |
+| **Customer Success Manager** | SA -> CSM | Technical architecture context for post-sale onboarding and support | Architecture document, deployment specs, integration runbook, known limitations |
+| **Engineering** | SA -> Eng | Implementation handoff; technical feasibility validation | Architecture specification, API contracts, data flow diagrams, deployment architecture |
+| **Product Team** | SA -> Product | Platform capability gaps identified during enterprise evaluations | Gap analysis, feature requests with business justification, competitive capability gaps |
+| **Security Team** | Bidirectional | Compliance requirements, security review, certification status | Security assessment results, compliance gap analysis, remediation timelines |
+| **Professional Services** | SA -> PS | Implementation scoping and resource planning | Architecture document, implementation roadmap, effort estimates, risk assessment |
+
+**Workflow Handoff Protocol:**
+1. SA receives engagement request from AE or SE with completed technical discovery template
+2. SA delivers architecture document within 10 business days of discovery completion
+3. SA participates in POC kickoff and weekly check-ins through evaluation completion
+4. SA delivers implementation handoff package to Engineering/PS within 5 days of deal close
+
 ## Reference Materials
 
 - `references/architecture_patterns.md` -- Common patterns

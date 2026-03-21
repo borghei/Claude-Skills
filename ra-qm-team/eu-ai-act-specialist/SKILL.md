@@ -406,6 +406,114 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 
 ---
 
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| AI system classified as HIGH-RISK but organization believes it qualifies for Art. 6(3) exception | Exception analysis incomplete or domain mapping incorrect | Re-evaluate against all Art. 6(3) exception criteria; the system must perform a narrow procedural task, improve the result of a previously completed human activity, or be purely preparatory; document rationale with legal review |
+| Bias detector reports disparate impact but model performs well overall | Aggregated metrics mask subgroup disparities; four-fifths rule violation on specific protected attributes | Analyze per-group positive outcome rates using `--protected-attributes` flag; implement targeted mitigation (re-sampling, threshold adjustment) for affected groups; document residual bias with justification |
+| Compliance checker returns low score despite extensive documentation | Documentation exists but key compliance fields marked as incomplete or not up to date | Verify each obligation field in the input JSON reflects current state; ensure `kept_up_to_date` and `lifecycle_coverage` flags are set; update technical documentation per Art. 11 before reassessment |
+| System falls under multiple Annex III categories simultaneously | AI system serves multiple domains (e.g., employment + education) | Classify under the highest-risk applicable category; apply the most stringent obligations; document classification rationale for each category |
+| GPAI model obligations unclear for downstream provider | Upstream GPAI provider has not supplied sufficient documentation per Art. 53 | Request technical documentation, training data summary, and copyright compliance information from the GPAI provider; if unavailable, document the gap and assess independent obligations |
+| Conformity assessment route uncertain (internal vs. third-party) | Biometric identification system or insufficient harmonized standards | Biometric ID systems (Annex III point 1) require third-party assessment (Annex VII); all others may use internal control (Annex VI) unless harmonized standards are unavailable; consult notified body |
+| Post-market monitoring shows model performance degradation | Data drift, concept drift, or deployment context changed since initial assessment | Trigger Art. 72 post-market monitoring procedures; report serious incidents within 15 days; update risk management system and technical documentation; consider re-running conformity assessment |
+
+---
+
+## Success Criteria
+
+- **All AI systems inventoried and classified** -- every system assessed against the risk-based framework with documented classification rationale, including Art. 6(3) exception analysis where applicable
+- **Prohibited practices identified and discontinued** -- all Art. 5 prohibited practices flagged by February 2, 2025, with documented evidence of discontinuation or lawful exception application
+- **High-risk systems fully compliant by August 2, 2026** -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
+- **Bias testing completed for all high-risk systems** -- demographic parity, equalized odds, and predictive parity metrics within four-fifths threshold for all protected attributes, or residual bias documented with justification
+- **GPAI model obligations met by August 2, 2025** -- technical documentation maintained, downstream provider information supplied, copyright compliance verified, and training data summary published
+- **Conformity assessment completed per correct route** -- internal control (Annex VI) or third-party assessment (Annex VII) selected based on system classification, with all certificates issued and filed
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- AI system risk classification across all four tiers (Prohibited, High-Risk, Limited Risk, Minimal Risk)
+- Annex III category analysis and Art. 6(3) exception evaluation
+- Provider and deployer obligation mapping with compliance gap analysis
+- GPAI model classification including systemic risk determination (10^25 FLOPs threshold)
+- Bias detection and fairness testing mapped to Art. 10 data governance requirements
+- Conformity assessment workflow guidance (Annex VI internal control and Annex VII third-party)
+- Implementation timeline tracking with penalty exposure assessment
+
+**Out of Scope:**
+- Actual ML model training, retraining, or adversarial testing -- this skill provides compliance frameworks, not ML engineering tools
+- Notified body selection, engagement, or audit execution
+- National regulatory sandbox applications or experimental AI system exemptions
+- Detailed GPAI Code of Practice implementation beyond obligation mapping
+- CE marking physical affixation or EU database registration system interaction
+- Legal advice on liability, insurance, or contractual allocation of AI Act obligations
+
+**Important Notes:**
+- The EU AI Act compliance deadline of August 2, 2026 for high-risk systems is firm -- organizations should begin classification and gap analysis immediately
+- Penalties are severe: up to EUR 35 million or 7% of global turnover for prohibited practices, EUR 15 million or 3% for high-risk non-compliance
+- SMEs and startups receive proportionate penalty treatment (lower of absolute or percentage)
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `iso42001-ai-management` | ISO 42001 AIMS provides organizational framework for EU AI Act compliance; certification demonstrates Art. 17 QMS | When building AI governance program that satisfies both ISO 42001 and EU AI Act |
+| `gdpr-dsgvo-expert` | Art. 10 data governance overlaps with GDPR; high-risk AI systems processing personal data require DPIA per GDPR Art. 35 | When AI system processes personal data and requires combined DPIA + conformity assessment |
+| `mdr-745-specialist` | AI medical devices fall under both EU AI Act and MDR; MDR conformity assessment may satisfy AI Act per Art. 120 | When AI-enabled medical device requires dual MDR and AI Act compliance |
+| `fda-consultant-specialist` | Cross-jurisdictional AI/ML SaMD compliance mapping between FDA PCCP and EU AI Act | When AI medical device is marketed in both US and EU |
+| `infrastructure-compliance-auditor` | Technical security controls supporting Art. 15 accuracy, robustness, and cybersecurity requirements | When validating infrastructure security for deployed high-risk AI systems |
+
+---
+
+## Tool Reference
+
+### ai_risk_classifier.py
+
+Classifies AI systems into EU AI Act risk categories based on a JSON system description.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes (unless `--inline`) | Path to JSON file containing AI system description |
+| `--inline '<json>'` | No | Inline JSON system description for quick classification |
+| `--json` | No | Output results in JSON format for programmatic use |
+| `--output <file>` | No | Export classification report to specified file path |
+
+**Input Fields:** `name`, `description`, `domain`, `sub_domain`, `uses_biometrics`, `biometric_type`, `biometric_context`, `interacts_with_persons`, `generates_content`, `content_type`, `decision_type`, `affected_persons`, `is_safety_component`, `product_legislation`, `eu_deployment`, `social_scoring`, `manipulates_behavior`, `targets_vulnerable_groups`, `predictive_policing_individual`, `untargeted_scraping`, `is_gpai`, `training_compute_flops`, `critical_infrastructure`, `infrastructure_type`.
+
+### ai_compliance_checker.py
+
+Validates AI system compliance against all provider and deployer obligations with gap analysis.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes | Path to JSON compliance status file |
+| `--role <role>` | No | Check obligations for specific role: `provider` (default) or `deployer` |
+| `--json` | No | Output results in JSON format with remediation steps |
+| `--output <file>` | No | Export compliance report to specified file path |
+
+**Output:** Overall compliance score (0-100), per-obligation status, gap analysis with Art. references, and prioritized remediation recommendations.
+
+### ai_bias_detector.py
+
+Analyzes dataset statistics for bias indicators mapped to Art. 10 data governance requirements.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes | Path to JSON file with dataset statistics (demographics, outcomes, correlations) |
+| `--protected-attributes <attrs>` | No | Comma-separated list of protected attributes to analyze (e.g., `gender,age_group,ethnicity`) |
+| `--json` | No | Output results in JSON format |
+| `--output <file>` | No | Export bias assessment report to specified file path |
+
+**Thresholds:** Representation ratio 0.8-1.25 (within 20% of population), class imbalance >0.5, four-fifths rule (0.8) for disparate impact, proxy correlation >0.5 for proxy variable detection.
+
+---
+
 **Regulation Reference:** Regulation (EU) 2024/1689 of the European Parliament and of the Council of 13 June 2024
 **Last Updated:** March 2026
 **Version:** 1.0.0

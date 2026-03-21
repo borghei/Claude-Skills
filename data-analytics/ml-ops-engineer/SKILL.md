@@ -227,8 +227,58 @@ For extended pipeline examples (Kubeflow, Airflow DAGs, full CI/CD workflows), s
 ## Scripts
 
 ```bash
-python scripts/deploy_model.py --model fraud_detector --version v2.3 --env prod
-python scripts/drift_analyzer.py --model fraud_detector --window 7d
-python scripts/materialize_features.py --feature-view customer_stats
-python scripts/run_pipeline.py --pipeline training --params config.yaml
+python scripts/model_registry.py register --name fraud_detector --version v2.3 --metrics '{"f1":0.91,"auc":0.95}' --params '{"n_estimators":200}'
+python scripts/model_registry.py promote --name fraud_detector --version v2.3 --stage production
+python scripts/model_registry.py list --stage production --json
+python scripts/model_registry.py compare --name fraud_detector --versions v2.2 v2.3
+python scripts/drift_detector.py --reference train_data.csv --current prod_data.csv
+python scripts/drift_detector.py --reference baseline.csv --current latest.csv --threshold 0.1 --json
+python scripts/pipeline_validator.py --pipeline pipeline.json --strict
+python scripts/pipeline_validator.py --pipeline pipeline.json --json
 ```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `model_registry.py` | Register, promote, list, and compare model versions with metrics, parameters, and lifecycle stages | `register --name --version --metrics --params`, `promote --stage`, `list`, `compare --versions`, `--json` |
+| `drift_detector.py` | Detect data/model drift between reference and current datasets using KS statistic, PSI, and chi-square | `--reference <csv>`, `--current <csv>`, `--columns`, `--threshold`, `--json` |
+| `pipeline_validator.py` | Validate ML pipeline definitions for completeness, stage ordering, evaluation gates, and rollback config | `--pipeline <json>`, `--strict`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model latency exceeds P99 SLA (> 200 ms) | Model is too large, input preprocessing is slow, or pod resources are undersized | Profile the serving endpoint; consider model distillation, input caching, or increasing CPU/memory limits |
+| `drift_detector.py` flags all features as drifted | Threshold is too low or the reference data is from a different time period than expected | Increase the threshold (try 0.15-0.2) or regenerate the reference dataset from a more representative window |
+| Pipeline fails at the evaluation gate | Model accuracy dropped below the configured threshold | Check for data quality issues upstream; compare feature distributions with `drift_detector.py`; retrain with fresh data |
+| Model registry shows "already registered" error | The exact name + version combination was previously registered | Use a new version string (e.g., v2.3.1) or remove the old entry if it was a test |
+| Kubernetes pods crash-loop on model server | OOM kill due to model size exceeding memory limits, or health check timeout too short | Increase `resources.limits.memory`; extend `initialDelaySeconds` on readiness probe for large models |
+| Feature store returns stale features | Materialization job failed or ran outside the TTL window | Check materialization logs; re-run `materialize_features`; consider reducing TTL or adding freshness alerts |
+| `pipeline_validator.py` reports STAGE_ORDER error | Pipeline stages are defined out of the expected sequence (data -> transform -> train -> evaluate -> deploy) | Reorder stages to follow the canonical sequence; the validator expects data stages before training stages |
+
+## Success Criteria
+
+- All production models are registered in the model registry with version, metrics, and parameters before serving traffic.
+- Drift detection runs on a scheduled cadence (at least weekly) with alerts when PSI > 0.2 or KS > 0.15.
+- ML pipelines pass `pipeline_validator.py --strict` with zero errors before deployment.
+- Model serving latency stays within SLA: P50 < 50 ms, P95 < 100 ms, P99 < 200 ms.
+- Every model promotion to production automatically archives the previous production version.
+- Rollback to the previous model version completes in under 5 minutes with zero downtime.
+- Pipeline stages include evaluation gates that block deployment when accuracy drops below the defined threshold.
+
+## Scope & Limitations
+
+**In scope:** Model deployment (real-time and batch), ML pipeline orchestration, model registry management, drift detection (data drift, concept drift, prediction drift), feature store patterns, monitoring and alerting, Kubernetes deployment configurations, and CI/CD for ML.
+
+**Out of scope:** Model architecture design and algorithm selection (see data-scientist), raw data ingestion pipelines, BI dashboard development, and business strategy.
+
+**Limitations:** The Python tools use only the Python standard library. `drift_detector.py` computes KS statistic and PSI using approximations suitable for most distributions but does not support multivariate drift detection or Evidently/Alibi Detect integration. `model_registry.py` stores state in a local JSON file -- for production use, integrate with MLflow Model Registry or a similar platform. `pipeline_validator.py` validates structure and conventions but does not execute pipeline stages.
+
+## Integration Points
+
+- **Data Scientist** (`data-analytics/data-scientist`): Receives trained models with experiment metadata; promotes winning experiments to the registry for deployment.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on dbt mart models; schema changes trigger pipeline revalidation.
+- **Engineering** (`engineering-team/senior-ml-engineer`): Collaborates on model architecture optimization for serving constraints (latency, memory, GPU).
+- **Infrastructure** (`engineering-team/`): Kubernetes configurations, autoscaling policies, and CI/CD workflows are co-managed with platform engineering.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Model predictions may feed into BI dashboards; monitoring metrics are surfaced in operational dashboards.

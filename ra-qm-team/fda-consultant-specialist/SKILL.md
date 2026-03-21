@@ -567,3 +567,107 @@ The FDA is aligning 21 CFR Part 820 with ISO 13485:2016 through the Quality Mana
 | Post-Market | 822, MDR | Chapter VII | Clause 8.2.1 |
 | Cybersecurity | FDA Guidance | MDCG 2019-16 | IEC 62443 |
 | AI/ML | PCCP Framework | EU AI Act | ISO 42001 |
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| 510(k) submission returned as RTA (Refuse to Accept) | Missing user fee, incomplete Form 3514, no predicate identified, or inadequate SE comparison | Review the RTA checklist per FDA guidance; verify payment, complete all eSTAR fields, confirm K-number in FDA database, and address all technological characteristics in SE comparison |
+| QSR compliance checker shows gaps in design controls (820.30) | Design History File incomplete or not aligned with ISO 13485 Clause 7.3 under QMSR | Map existing DHF to ISO 13485 Clause 7.3 structure; ensure design inputs, outputs, reviews, verification, and validation are documented with traceability |
+| HIPAA risk assessment returns low score for technical safeguards | Missing encryption at rest/transit, no MFA implementation, or audit logging not enabled | Implement AES-256 encryption at rest, TLS 1.2+ in transit, MFA for all users with ePHI access, and comprehensive audit logging; run `hipaa_risk_assessment.py` with `--category technical` to validate |
+| FDA AI request (Additional Information) received during 510(k) review | Performance testing insufficient, SE argument incomplete, or software documentation gaps | Respond within 180 days; address each question specifically; supplement with additional test data, clinical evidence, or software documentation per IEC 62304 |
+| QMSR transition gap analysis reveals significant differences | Organization structured QMS around legacy 21 CFR 820 rather than ISO 13485 | Conduct systematic gap analysis mapping 820 subsections to ISO 13485 clauses; prioritize complaint handling (retained FDA requirement), risk-based evidence across all processes, and updated Quality Manual |
+| Cybersecurity documentation rejected in premarket submission | SBOM incomplete, threat model missing, or coordinated vulnerability disclosure policy not published | Generate comprehensive SBOM in CycloneDX or SPDX format; complete STRIDE threat model per AAMI TIR57; publish CVD policy; document patch management lifecycle plan |
+| AI/ML SaMD submission lacks Predetermined Change Control Plan | Adaptive algorithm deployed without PCCP framework | Develop PCCP covering modification types, validation protocol, impact assessment, performance monitoring, and user notification plan; include all four change categories with appropriate verification levels |
+
+---
+
+## Success Criteria
+
+- **510(k) submission accepted on first attempt** -- zero RTA deficiencies, with all eSTAR sections complete, user fee verified, predicate identified, and SE comparison addressing all technological characteristics
+- **QSR/QMSR compliance score above 85%** -- as measured by `qsr_compliance_checker.py`, with all critical subsections (design controls, CAPA, document control) showing evidence of implementation
+- **HIPAA technical safeguards fully implemented** -- AES-256 encryption at rest, TLS 1.2+ in transit, MFA enforced, audit controls active, and automatic logoff configured for all systems handling ePHI
+- **FDA submission timeline targets met** -- 510(k) traditional within 90 days, De Novo within 150 days, PMA within 180 days, tracked via `fda_submission_tracker.py` milestones
+- **QMSR transition completed** -- Quality Manual references ISO 13485 clause structure, all SOPs mapped, FDA-specific retained requirements addressed, and internal audit conducted against QMSR requirements
+- **Cybersecurity documentation complete for all connected devices** -- SBOM, threat model, security testing reports, vulnerability disclosure policy, and patch management plan included in premarket submissions
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- FDA regulatory pathway selection (510(k), De Novo, PMA) with decision framework and comparison
+- 510(k) submission process including eSTAR requirements, SE comparison, and RTA prevention
+- Quality System Regulation (21 CFR 820) and QMSR (ISO 13485:2016 alignment) compliance assessment
+- HIPAA Security Rule safeguard evaluation for medical device software
+- Device cybersecurity requirements including SBOM, threat modeling, and PATCH Act compliance
+- AI/ML SaMD framework including PCCP, GMLP principles, and training data characterization
+- Cross-framework mapping between FDA, EU MDR, and ISO 13485
+
+**Out of Scope:**
+- Preparation or writing of actual FDA submission documents -- this skill provides frameworks and gap analysis, not document authoring
+- Clinical trial design, execution, or statistical analysis for PMA clinical data
+- FDA establishment registration, device listing, or UDI system implementation
+- Post-market surveillance reporting (MDR, MedWatch) beyond process guidance
+- De novo classification request scientific review preparation
+- Direct interaction with FDA reviewers or Pre-Submission (Q-Sub) meeting facilitation
+
+**Important Notes:**
+- The QMSR became effective February 2, 2026 -- all manufacturers must now comply with ISO 13485:2016 as incorporated by reference, with FDA-specific retained requirements
+- The Quality System Inspection Technique (QSIT) has been withdrawn and replaced with updated inspection procedures under Compliance Program 7382.850
+- Risk-based thinking is now expected across all QMS processes under QMSR, not just design controls
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `quality-manager-qms-iso13485` | ISO 13485 QMS implementation aligned with QMSR; process management and supplier qualification | When implementing QMS satisfying both ISO 13485 certification and FDA QMSR requirements |
+| `mdr-745-specialist` | Cross-framework mapping for dual US/EU market submissions; technical documentation alignment | When medical device requires both FDA clearance/approval and EU MDR CE marking |
+| `capa-officer` | CAPA process management per ISO 13485 Clause 8.5 (replacing legacy 820.100 under QMSR) | When managing corrective and preventive actions within the FDA quality system |
+| `risk-management-specialist` | ISO 14971 risk management integrated with design controls and cybersecurity risk assessment | When conducting risk analysis for premarket submissions per 820.30(g) and AAMI TIR57 |
+| `eu-ai-act-specialist` | Cross-jurisdictional AI/ML compliance for devices marketed in both US and EU | When AI-enabled medical device requires both FDA PCCP framework and EU AI Act conformity assessment |
+| `infrastructure-compliance-auditor` | Technical cybersecurity validation for connected device security controls | When documenting cybersecurity architecture and SBOM for premarket submissions |
+
+---
+
+## Tool Reference
+
+### fda_submission_tracker.py
+
+Tracks FDA submission milestones and calculates regulatory timelines for 510(k), De Novo, and PMA pathways.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `<project_dir>` | Yes | Path to project directory containing submission documents |
+| `--type <pathway>` | No | Submission type: `510k` (default), `de_novo`, `pma`, `pma_supplement` |
+| `--json` | No | Output results in JSON format |
+
+**Output:** Milestone tracking with completion status, timeline calculations against FDA review goals, phase progress (planning, preparation, submission, review, decision), and overdue milestone alerts.
+
+### qsr_compliance_checker.py
+
+Assesses compliance with 21 CFR Part 820 / QMSR by analyzing project documentation for evidence of implementation.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `<project_dir>` | Yes | Path to project directory containing QMS documentation |
+| `--section <section>` | No | Check specific QSR section (e.g., `820.30` for design controls, `820.100` for CAPA) |
+| `--json` | No | Output results in JSON format |
+
+**Output:** Per-section compliance status, evidence found (document patterns and keyword matches), compliance percentage, gap identification with required evidence descriptions.
+
+### hipaa_risk_assessment.py
+
+Evaluates HIPAA Security Rule safeguards for medical device software and connected devices.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `<project_dir>` | Yes | Path to project directory for assessment |
+| `--category <cat>` | No | Assess specific category: `administrative`, `physical`, `technical`, or all (default) |
+| `--json` | No | Output results in JSON format |
+
+**Output:** Per-safeguard compliance status across administrative (Section 164.308), physical (Section 164.310), and technical (Section 164.312) categories, with weighted scoring, evidence detection, and remediation recommendations.

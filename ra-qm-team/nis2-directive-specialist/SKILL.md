@@ -618,6 +618,99 @@ Complete coverage of all 10 minimum security measures with implementation guidan
 
 ---
 
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Scope Analyzer returns "out of scope" for an entity that should be in scope | Automatic inclusion criteria not triggered; size thresholds not met | Check for automatic inclusion flags (DNS providers, TLD registries, sole provider). Verify `--turnover` and `--employees` values. Use `--checklist` flag to review all criteria. |
+| Compliance Checker scores are unexpectedly low | Assessment JSON has missing or null control responses | Run `--template` to regenerate a fresh assessment template. Ensure every control question has a boolean or score value. |
+| Gap report does not cover all 10 measures | `--measures` flag is filtering output | Remove the `--measures` flag to assess all 10 Article 21 measures. Verify the config JSON includes all measure sections. |
+| Entity classified as "Important" instead of "Essential" | Sector falls under Annex II rather than Annex I | Review sector/sub-sector classification. Annex I sectors produce Essential entities; Annex II sectors produce Important entities. Size also matters. |
+| National transposition requirements unclear | Member State has not yet fully transposed NIS2 | As of early 2026, 13 of 27 EU Member States have incomplete transposition. Check the ECSO NIS2 Transposition Tracker for country-specific status. Apply the directive's baseline requirements. |
+| Supply chain assessment section incomplete | Supplier tier classification not provided in config | Populate supplier data with tier levels (Critical/Important/Standard) and include contractual security requirements for each tier. |
+| Incident reporting readiness score is zero | No incident handling controls documented in assessment | Complete Measure 2 (Incident Handling) controls in the assessment JSON, including detection capabilities, classification procedures, and CSIRT reporting integration. |
+
+---
+
+## Success Criteria
+
+- All in-scope entities correctly classified as Essential or Important with documented rationale for the classification decision
+- Compliance scores of 70% or higher across all 10 minimum security measures within the first assessment cycle, trending toward 90%+ within 12 months
+- Incident reporting procedures tested and validated against the 24h/72h/1-month staged timeline, with documented CSIRT contact and reporting templates
+- Management body members have completed mandatory cybersecurity training with documented attendance and knowledge assessment records
+- Supply chain security program covers 100% of Tier 1 (critical) suppliers with quality agreements, right-to-audit clauses, and incident notification requirements in contracts
+- Gap analysis produces a prioritized remediation roadmap with assigned owners, budgets, and milestone dates for every identified gap
+- Quarterly compliance reassessments demonstrate measurable improvement with trending metrics reported to management
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- NIS2 Directive (EU 2022/2555) compliance assessment and gap analysis
+- Entity classification (Essential vs Important) per Annex I and Annex II
+- All 10 Article 21 minimum security measures assessment
+- Incident reporting readiness evaluation against the multi-stage reporting regime
+- Supply chain security framework assessment (Tier 1/2/3 suppliers)
+- Management accountability verification per Article 20
+- Cross-framework mapping to ISO 27001 controls
+
+**Out of Scope:**
+- National transposition specifics (varies by Member State; the tools assess against the directive baseline, not country-specific implementing legislation)
+- Technical penetration testing or vulnerability scanning (use infrastructure-compliance-auditor for technical checks)
+- CER Directive (EU 2022/2557) physical resilience requirements (complementary but separate regulation)
+- DORA (EU 2022/2554) requirements for financial sector entities (use dora-compliance-expert for lex specialis)
+- Legal advice on penalty exposure or liability (consult qualified legal counsel)
+- Real-time infrastructure monitoring or SIEM deployment
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [information-security-manager-iso27001](../information-security-manager-iso27001/) | NIS2 measures map closely to ISO 27001 Annex A controls; use ISO 27001 ISMS as the implementation backbone for NIS2 compliance |
+| [infrastructure-compliance-auditor](../infrastructure-compliance-auditor/) | Validate technical controls (DNS, TLS, MFA, encryption, monitoring) that satisfy NIS2 Article 21 requirements |
+| [dora-compliance-expert](../dora-compliance-expert/) | DORA is lex specialis for financial sector entities; coordinate NIS2 and DORA assessments to avoid duplication |
+| [nist-csf-specialist](../nist-csf-specialist/) | NIST CSF 2.0 functions map to NIS2 measures; use CSF maturity assessor to benchmark cybersecurity posture |
+| [soc2-compliance-expert](../soc2-compliance-expert/) | SOC 2 Trust Services Criteria overlap significantly with NIS2 measures; leverage existing SOC 2 evidence |
+| [isms-audit-expert](../isms-audit-expert/) | ISO 27001 audit evidence directly supports NIS2 compliance demonstrations |
+
+---
+
+## Tool Reference
+
+### nis2_scope_analyzer.py
+
+Determines NIS2 applicability and entity classification.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--sector` | Yes (or `--config`) | Sector identifier (e.g., `energy`, `health`, `digital_infrastructure`) |
+| `--sub-sector` | Yes (or `--config`) | Sub-sector identifier (e.g., `electricity`, `healthcare_providers`, `cloud_computing`) |
+| `--employees` | Yes (or `--config`) | Number of employees in the organization |
+| `--turnover` | Yes (or `--config`) | Annual turnover in millions of euros |
+| `--config` | No | Path to organization JSON config file (alternative to individual flags) |
+| `--json` | No | Output results in JSON format |
+| `--checklist` | No | Generate a compliance checklist based on entity classification |
+| `--output` | No | Path to write the output report file |
+
+### nis2_compliance_checker.py
+
+Assesses compliance against all 10 Article 21 minimum security measures.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config` | Yes (or `--template`) | Path to assessment JSON file with control responses |
+| `--template` | No | Generate a blank assessment template (pipe to file with `>`) |
+| `--measures` | No | Space-separated list of measure numbers to assess (e.g., `1 2 4`). Omit for all 10. |
+| `--json` | No | Output results in JSON format |
+| `--output` | No | Path to write the gap analysis report |
+
+---
+
 *Last Updated: March 2026*
 *Directive Reference: EU 2022/2555*
 *Applicable From: October 17, 2024 (Member State transposition deadline)*

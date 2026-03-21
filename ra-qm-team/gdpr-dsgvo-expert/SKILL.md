@@ -524,3 +524,119 @@ Step 6: DPO and Supervisory Authority Consultation
 | Risk Assessment | Art. 35 (DPIA) | Risk Assessment | §164.308(a)(1) | Art. 21 |
 | Encryption | Art. 32 | Reasonable Security | §164.312(a)(2)(iv) | Art. 21.2.h |
 | Training | Art. 39.1.b | — | §164.308(a)(5) | Art. 21.2.g |
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Compliance checker reports critical findings for special category data | Code processes health, biometric, or religious data without explicit consent or Art. 9(2) exception | Identify all special category data processing; secure explicit consent or document applicable Art. 9(2) exception; implement field-level encryption for sensitive fields |
+| DPIA generator determines assessment required but organization has no DPIA process | Processing triggers Art. 35(3) criteria (systematic monitoring, large-scale special categories, or automated decision-making) | Follow the DPIA methodology in `references/dpia_methodology.md`; generate template with `dpia_generator.py --template`; consult DPO before proceeding; consider prior consultation with supervisory authority if high residual risk (Art. 36) |
+| Data subject rights requests consistently exceed 30-day deadline | Manual fulfillment without tracking system, unclear data location, or complex verification requirements | Deploy `data_subject_rights_tracker.py` for automated deadline monitoring; map all personal data locations using data inventory; streamline identity verification to proportionate measures |
+| Cross-border transfer mechanism invalidated or uncertain | Reliance on deprecated mechanism or Transfer Impact Assessment not completed for SCCs | Review current adequacy decisions (UK, Japan, South Korea, US via DPF); for SCCs, complete Transfer Impact Assessment per Schrems II requirements; document supplementary measures (encryption, pseudonymization) |
+| Cookie consent banner flagged as non-compliant | Pre-checked boxes, cookie wall blocking access, or reject button harder to find than accept | Implement TCF 2.2 compliant CMP; ensure all non-essential cookies blocked until explicit consent; make reject as prominent as accept (per Planet49 ruling, CJEU C-673/17); record consent proof |
+| GDPR compliance checker detects personal data in application logs | Application logs contain email addresses, IP addresses, or user identifiers | Implement log sanitization to mask or pseudonymize personal data before storage; configure logging frameworks to exclude PII fields; set log retention limits aligned with purpose |
+| AI system processing personal data lacks Art. 22 safeguards | Automated decision-making produces legal or significant effects without human review mechanism | Implement human-in-the-loop for high-stakes decisions; provide right to explanation and right to contest; document algorithmic logic in plain language; include AI decision-making in privacy notice per Art. 13(2)(f) |
+
+---
+
+## Success Criteria
+
+- **Compliance score of 80+ on codebase scan** -- indicating no critical personal data exposure issues, with all high-risk patterns addressed and documented
+- **All data subject rights requests fulfilled within 30 days** -- tracked via `data_subject_rights_tracker.py` with identity verification completed, response templates generated, and compliance reports showing zero overdue requests
+- **DPIA completed for all high-risk processing activities** -- covering Art. 35(3) triggers, WP29 criteria, risk mitigation measures, and DPO consultation; prior SA consultation documented where required
+- **Records of Processing Activities (Art. 30) maintained and current** -- covering all processing activities with purposes, legal bases, data categories, recipients, retention periods, and transfer mechanisms
+- **Cross-border transfer mechanisms validated** -- adequacy decisions, SCCs with TIA, or BCRs in place for all international data flows, reviewed annually
+- **Cookie consent implementation compliant** -- non-essential cookies blocked until explicit consent, reject as easy as accept, consent proof recorded with timestamp and version, GPC signal honored
+- **DPO appointed and registered where required** -- including German BDSG Section 38 threshold (20+ employees processing personal data automatically), with supervisory authority notification
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Codebase scanning for personal data patterns and risky processing practices
+- DPIA generation following Art. 35 requirements with threshold assessment and risk mitigation
+- Data subject rights request tracking (Art. 15-22) with deadline monitoring and response templates
+- German BDSG-specific requirements (DPO threshold, employment data, video surveillance, credit scoring)
+- Cross-border transfer mechanism assessment (adequacy decisions, SCCs, BCRs, DPF)
+- AI-specific GDPR requirements (Art. 22 automated decisions, training data governance, profiling)
+- Cross-framework privacy mapping (GDPR, CCPA/CPRA, HIPAA, NIS2)
+
+**Out of Scope:**
+- Legal advice on specific legal basis selection or legitimate interest balancing tests -- consult DPO and legal counsel
+- Supervisory authority notification or interaction for breach reporting (Art. 33-34)
+- Implementation of cookie consent management platforms or consent management code
+- GDPR representative appointment logistics for non-EU organizations (Art. 27)
+- Binding Corporate Rules (BCR) application or approval process
+- German Landesdatenschutzgesetze (state-level data protection laws) beyond general guidance
+
+**Important Notes:**
+- GDPR enforcement fines reached EUR 2.3 billion in 2025, a 38% year-over-year increase; healthcare violations spiked with average penalties of EUR 203,000
+- The EU AI Act creates dual obligations for AI systems processing personal data -- both DPIA (GDPR Art. 35) and conformity assessment (AI Act) may apply simultaneously
+- Dark patterns in consent interfaces are under heightened enforcement scrutiny; regulators are penalizing cookie walls, manipulative UI, and buried reject options
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `ccpa-cpra-privacy-expert` | Unified privacy program covering both GDPR and CCPA/CPRA; cross-framework mapping | When organization processes data of both EU residents and California consumers |
+| `eu-ai-act-specialist` | Combined DPIA + AI Act conformity assessment for high-risk AI systems processing personal data | When AI system triggers both GDPR Art. 35 DPIA and EU AI Act high-risk classification |
+| `information-security-manager-iso27001` | ISO 27001 security controls support GDPR Art. 32 security of processing requirements | When implementing technical and organizational measures for personal data protection |
+| `infrastructure-compliance-auditor` | Technical privacy controls validation (encryption, access controls, logging, data masking) | When assessing infrastructure supporting GDPR privacy-by-design requirements |
+| `dora-compliance-expert` | DORA complements GDPR for financial sector ICT systems processing personal data | When financial entity must align DORA ICT security with GDPR data protection requirements |
+
+---
+
+## Tool Reference
+
+### gdpr_compliance_checker.py
+
+Scans codebases for potential GDPR compliance issues including personal data patterns and risky code practices.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `<project_dir>` | Yes | Path to project directory to scan |
+| `--json` | No | Output results in JSON format for CI/CD integration |
+| `--output <file>` | No | Export report to specified file path |
+
+**Detects:** Email, phone, IP address, credit card, IBAN, German ID patterns; special category data (health, biometric, religion); risky code patterns (logging PII, missing consent, indefinite retention, unencrypted sensitive data, disabled deletion). **Output:** Compliance score (0-100), risk categorization (critical/high/medium), and prioritized recommendations with GDPR article references.
+
+### dpia_generator.py
+
+Generates Data Protection Impact Assessment documentation following Art. 35 requirements.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--template` | No | Generate blank DPIA input template to stdout |
+| `--input <file>` | Yes (unless `--template` or `--interactive`) | Path to JSON processing activity description |
+| `--output <file>` | No | Export DPIA report to specified file path (markdown format) |
+| `--interactive` | No | Launch interactive mode for guided DPIA creation |
+
+**Features:** Automatic DPIA threshold assessment against Art. 35(3) triggers and WP29 criteria, risk identification based on processing characteristics, legal basis documentation, mitigation recommendations, and markdown report generation.
+
+### data_subject_rights_tracker.py
+
+Manages data subject rights requests under GDPR Articles 15-22 with deadline tracking and response templates.
+
+| Subcommand | Description |
+|------------|-------------|
+| `add` | Add new request (`--type`, `--subject`, `--email` required) |
+| `list` | List all tracked requests |
+| `status` | View or update request status (`--id` required, `--update` to change status) |
+| `report` | Generate compliance report (`--output` for file export) |
+| `template` | Generate response template for specific request (`--id` required) |
+
+| Flag | Description |
+|------|-------------|
+| `--type <right>` | Right type: `access`, `rectification`, `erasure`, `restriction`, `portability`, `objection`, `automated` |
+| `--subject <name>` | Data subject name |
+| `--email <email>` | Data subject email address |
+| `--id <request_id>` | Request identifier (e.g., `DSR-202601-0001`) |
+| `--update <status>` | New status: `received`, `verified`, `in_progress`, `completed`, `denied`, `extended` |
+| `--output <file>` | Export report or template to specified file path |
+
+**Features:** 30-day deadline tracking with overdue alerts, identity verification workflow, response template generation per right type, and compliance reporting with metrics.

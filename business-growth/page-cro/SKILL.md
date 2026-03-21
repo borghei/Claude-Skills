@@ -406,3 +406,101 @@ For paid traffic: Compare the ad copy with the landing page headline. They must 
 - **popup-cro** -- Use when considering a popup as an additional conversion layer on the page.
 - **onboarding-cro** -- Use when post-conversion activation is the real problem and the page itself converts adequately.
 - **pricing-strategy** -- Use when the pricing page needs structural redesign (tier structure, value metric), not just CRO tweaks.
+
+---
+
+## Tool Reference
+
+### 1. page_cro_scorer.py
+
+**Purpose:** Score a marketing page across the 7 CRO dimensions and generate an audit report with severity ratings.
+
+```bash
+python scripts/page_cro_scorer.py page_audit.json
+python scripts/page_cro_scorer.py page_audit.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `page_audit.json` | Yes | JSON file with page elements and dimension checks |
+| `--json` | No | Output results as JSON |
+
+### 2. headline_scorer.py
+
+**Purpose:** Score headline effectiveness against the 5-criteria rubric and generate copy alternatives.
+
+```bash
+python scripts/headline_scorer.py --headline "Marketing Automation Software" --audience "B2B marketers" --traffic-source paid-search
+python scripts/headline_scorer.py --headline "Marketing Automation Software" --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--headline` | Yes | The headline text to score |
+| `--audience` | No | Target audience description (default: "general") |
+| `--traffic-source` | No | Primary traffic source: organic, paid-search, paid-social, email, referral (default: organic) |
+| `--json` | No | Output results as JSON |
+
+### 3. conversion_benchmark_calculator.py
+
+**Purpose:** Calculate conversion rate benchmarks for a given page type, traffic source, and industry, and assess current performance.
+
+```bash
+python scripts/conversion_benchmark_calculator.py --page-type landing-page --traffic paid --current-rate 8.5
+python scripts/conversion_benchmark_calculator.py --page-type homepage --traffic organic --current-rate 3.0 --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--page-type` | Yes | Page type: homepage, landing-page, pricing, feature, blog |
+| `--traffic` | Yes | Traffic source: organic, paid, email, social, referral |
+| `--current-rate` | Yes | Current conversion rate as percentage |
+| `--industry` | No | Industry for benchmarks: saas, ecommerce, fintech, healthcare, education (default: saas) |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| High bounce rate (>70%) on landing page | Message mismatch with traffic source or poor above-the-fold | Audit message match: compare ad copy with landing page headline; ensure value proposition is visible in first 5 seconds |
+| Page converts on desktop but not mobile | Mobile UX not optimized | Check touch targets (44px+), form field count on mobile, CTA visibility without scrolling; score with page_cro_scorer.py |
+| CTA click rate below 2% | CTA is generic, below the fold, or visually weak | Replace "Submit" with value-specific copy; ensure CTA is visible above fold and repeated after key sections |
+| High scroll depth but low conversion | Visitors read but are not convinced to act | Add social proof near CTA positions; address objections in FAQ; add risk reversal (free trial, no CC) |
+| A/B test shows no significant winner after 4 weeks | Change too small to detect or insufficient traffic | Use ab_test_calculator.py from form-cro to validate sample size; test bigger changes (headline rewrite vs word swap) |
+| Paid traffic converts worse than organic | Landing page not tailored to paid traffic intent | Create dedicated landing pages for paid campaigns with message match; remove navigation on paid landing pages |
+| Social proof section is ignored | Generic testimonials or poor placement | Use specific, attributed testimonials with metrics; place after the section that makes the claim they validate |
+
+---
+
+## Success Criteria
+
+- Page CRO score of 70+ across the 7-dimension framework (scored by page_cro_scorer.py)
+- Headline scores 7+ on the 10-point rubric (scored by headline_scorer.py)
+- Conversion rate at or above industry benchmark for page type (verified by conversion_benchmark_calculator.py)
+- Above-the-fold contains: headline, CTA, and at least one social proof element
+- Message match verified for all paid traffic campaigns (ad copy matches landing page headline)
+- Mobile conversion rate within 20% of desktop rate
+- Every page addresses at least 3 of the 5 universal objections
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Page-level conversion optimization, headline effectiveness, CTA hierarchy, social proof placement, objection handling, traffic source matching, A/B test prioritization
+- **Out of scope:** Form optimization (use form-cro), signup flow optimization (use signup-flow-cro), popup optimization (use popup-cro), pricing structure changes (use pricing-strategy)
+- **Page speed:** This skill covers CRO elements, not technical performance; pages loading >3 seconds need technical optimization first
+- **Traffic minimum:** A/B testing recommendations require 200+ conversions per variant; low-traffic pages should implement best practices without testing
+- **Qualitative input:** Heatmaps and session recordings provide critical behavioral data that analytics alone cannot reveal; consider investing in these tools
+
+---
+
+## Integration Points
+
+- **form-cro** -- When the form on the page is the bottleneck (field optimization, validation UX, mobile form experience)
+- **signup-flow-cro** -- When users convert on the page but drop off during the signup/registration process
+- **popup-cro** -- When considering a popup as an additional conversion layer on top of the page
+- **onboarding-cro** -- When post-conversion activation is the real problem and the page itself converts adequately
+- **pricing-strategy** -- When the pricing page needs structural redesign (tier structure, value metric), not just CRO tweaks
+- **competitive-teardown** -- When comparison pages need competitive data to build credible content

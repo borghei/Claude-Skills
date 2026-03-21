@@ -176,15 +176,83 @@ Cost per Unit = (Direct + Indirect) / Units Produced
 ## Scripts
 
 ```bash
-# Process analyzer
-python scripts/process_analyzer.py --process order_fulfillment
+# Map and analyze business processes
+python scripts/process_mapper.py --file process_steps.csv
+python scripts/process_mapper.py --file process_steps.csv --json
 
-# Capacity planner
-python scripts/capacity_planner.py --forecast demand.csv --staff team.csv
+# Resource capacity planning
+python scripts/capacity_planner.py --file resources.csv --forecast demand.csv
+python scripts/capacity_planner.py --file resources.csv --forecast demand.csv --json
 
-# Cost calculator
-python scripts/cost_calculator.py --data operations.csv
-
-# Vendor scorecard generator
-python scripts/vendor_scorecard.py --vendor "Vendor Name"
+# SLA compliance tracking
+python scripts/sla_tracker.py --file tickets.csv
+python scripts/sla_tracker.py --file tickets.csv --threshold 95 --json
 ```
+
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Cycle time increasing despite no volume change | Process drift, undocumented workarounds, or degraded tooling | Re-map the current process against documented standard; look for unofficial steps added over time; check system performance and integration latency |
+| First-pass yield dropping below 95% | Training gaps, unclear specifications, or upstream quality issues | Run a fishbone analysis on defect categories; check if the issue correlates with new hires (training) or specific inputs (upstream); add quality gates at handoff points |
+| Utilization consistently above 95% | Understaffing, poor demand forecasting, or inability to say no to ad-hoc requests | Sustained >95% utilization causes burnout and errors; hire or cross-train to reach 85% target; implement demand prioritization with SLA tiers |
+| SLA compliance below target | Unrealistic SLAs, inconsistent triage, or capacity bottlenecks | Audit SLA definitions against actual capability; implement priority-based routing; add escalation triggers at 70% of SLA elapsed time |
+| Cost per unit rising | Volume decline (fixed cost spread), scope creep, or vendor price increases | Decompose costs into fixed and variable; benchmark vendor costs annually; eliminate non-value-add process steps identified through value stream mapping |
+| Cross-functional handoffs cause delays | No clear ownership at boundaries, different systems, or misaligned SLAs | Define RACI for every handoff; align upstream/downstream SLAs; implement handoff checklists with automated notifications |
+| Improvement projects fail to sustain gains | No control plan, missing ownership, or competing priorities | Every DMAIC project must include a Control phase with dashboards, alert thresholds, and a named process owner; conduct 30/60/90 day post-implementation reviews |
+
+## Success Criteria
+
+| Dimension | Metric | Target | Measurement |
+|-----------|--------|--------|-------------|
+| Efficiency | Process cycle time | Within 10% of target for each process | ERP/workflow system timestamps |
+| Efficiency | Resource utilization | 80-90% (avoid burnout above 95%) | Time tracking / capacity planning tool |
+| Quality | First-pass yield | > 95% | Quality inspection data or error logs |
+| Quality | Error/rework rate | < 2% | Defect tracking system |
+| Cost | Cost per unit trend | Year-over-year reduction of 3-5% | Finance cost allocation reports |
+| Cost | Budget variance | Within +/- 5% of plan | Monthly budget vs actual reporting |
+| Customer | Internal CSAT | > 90% satisfied | Quarterly internal customer survey |
+| Customer | SLA compliance | > 95% of commitments met | SLA tracking dashboard |
+| Delivery | On-time delivery | > 98% | Order/ticket completion timestamps |
+| Maturity | Operations maturity level | Advance 1 level per 12-18 months | Annual self-assessment against the Operations Maturity Model |
+| Improvement | Completed improvement projects | 4+ DMAIC/PDCA cycles per year | Project tracking log |
+
+## Scope & Limitations
+
+**In Scope:**
+- Process documentation, mapping, and optimization using Lean Six Sigma, DMAIC, and PDCA methodologies
+- Capacity planning: demand forecasting, resource allocation, utilization tracking, and scenario modeling
+- KPI framework design: defining, measuring, and reporting operational metrics
+- SLA definition, tracking, compliance reporting, and escalation management
+- Vendor management: scorecard design, performance evaluation, and relationship tiering
+- Cost analysis: cost breakdown structures, cost-per-unit tracking, and reduction initiatives
+- Continuous improvement: root cause analysis (5 Whys, fishbone), pilot design, and control plans
+
+**Out of Scope:**
+- IT infrastructure and systems administration (owned by IT Operations / SRE)
+- Financial budgeting and capital expenditure approval (owned by Finance)
+- HR policy creation and employee relations (owned by HRBP)
+- Product development and engineering processes (owned by Engineering)
+- Legal and regulatory compliance interpretation (owned by Legal / RA-QM)
+- Supply chain logistics and procurement contract negotiation (owned by Supply Chain)
+
+**Known Limitations:**
+- Capacity planning accuracy depends on forecast quality; garbage-in-garbage-out applies strongly here
+- Process mapping captures the designed flow; actual execution may differ due to informal workarounds -- validate with process observation
+- Vendor scorecards are only as good as the data collection discipline; automate data feeds where possible
+- SLA compliance tracking requires consistent timestamping; manual logging introduces measurement error
+- Cost per unit calculations assume stable product/service definitions; changes in scope require rebasing
+
+## Integration Points
+
+| System / Skill | Integration | Data Flow |
+|----------------|-------------|-----------|
+| **ERP / Workflow** (SAP, Oracle, ServiceNow) | Process execution data, timestamps, volume metrics | ERP -> process_mapper.py, capacity_planner.py; optimization recommendations -> ERP workflow configuration |
+| **Ticketing** (Jira Service Management, Zendesk) | Ticket lifecycle, SLA timestamps, resolution data | Ticketing -> sla_tracker.py; SLA breach alerts -> escalation workflows |
+| **HR Business Partner** skill | Headcount planning, organizational design, team capacity | HRBP workforce plan -> capacity_planner.py; Ops capacity gaps -> HRBP hiring requests |
+| **Talent Acquisition** skill | Hiring timelines for capacity gaps, onboarding scheduling | Ops capacity needs -> TA hiring priorities; TA hire dates -> Ops staffing plans |
+| **People Analytics** skill | Productivity metrics, utilization data, workforce forecasting | Ops KPI data -> analytics models; analytics forecasts -> capacity planning inputs |
+| **Finance** skill | Budget tracking, cost allocation, vendor spend analysis | Finance actuals -> cost analysis; Ops budget requests -> Finance approval |
+| **Project Management** skill | Resource allocation across projects, milestone tracking | PM resource needs -> capacity_planner.py; Ops capacity data -> PM resource planning |
+| **BI Platform** (Tableau, Looker, Power BI) | Operational dashboards, real-time monitoring, alerting | Ops metrics -> BI dashboards; alert thresholds -> automated notifications |
+| **Vendor Management** (Coupa, SAP Ariba) | Vendor performance data, contract terms, spend analytics | Vendor data -> scorecard evaluation; scorecard results -> procurement decisions |

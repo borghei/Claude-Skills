@@ -168,8 +168,58 @@ def analyze_ab(control: np.ndarray, treatment: np.ndarray, alpha: float = 0.05) 
 ## Scripts
 
 ```bash
-python scripts/train_model.py --config model_config.yaml
-python scripts/feature_importance.py --model model.pkl --data test.csv
-python scripts/ab_analyzer.py --control control.csv --treatment treatment.csv
-python scripts/evaluate_model.py --model model.pkl --test test.csv
+python scripts/experiment_tracker.py log --name "xgb_v2" --params '{"lr":0.1,"depth":6}' --metrics '{"f1":0.87,"auc":0.92}'
+python scripts/experiment_tracker.py list --sort-by f1 --top 5
+python scripts/experiment_tracker.py compare --ids 1 3 5 --json
+python scripts/hypothesis_tester.py ttest --file data.csv --col-a group_a --col-b group_b
+python scripts/hypothesis_tester.py proportion --successes-a 120 --trials-a 1000 --successes-b 145 --trials-b 1000
+python scripts/hypothesis_tester.py chi-square --file contingency.csv --json
+python scripts/feature_selector.py --file dataset.csv --target churn --top 10
+python scripts/feature_selector.py --file dataset.csv --target revenue --method correlation --json
 ```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `experiment_tracker.py` | Log, list, and compare experiments with parameters, metrics, and tags in a local JSON file | `log --name --params --metrics --tags`, `list --sort-by --top`, `compare --ids`, `--json` |
+| `hypothesis_tester.py` | Run statistical tests: Welch's t-test, paired t-test, proportion z-test, chi-square independence | `ttest --file --col-a --col-b [--paired]`, `proportion --successes-a --trials-a ...`, `chi-square --file`, `--json` |
+| `feature_selector.py` | Rank features by composite score (variance, correlation, mutual information, null rate) for a target column | `--file <csv>`, `--target <col>`, `--top <n>`, `--method all/correlation/mutual_info`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model overfits (large train-test gap in metrics) | Too many features, insufficient regularization, or data leakage | Reduce feature count with `feature_selector.py`, add regularization, and audit feature engineering for temporal leakage |
+| A/B test shows significant result but tiny effect size | Large sample size makes small differences statistically significant | Always report effect size (Cohen's d) alongside p-value; use practical significance thresholds |
+| `hypothesis_tester.py` p-value differs from scipy | The tool uses normal/t-distribution approximations (standard library only) | For publication-grade analysis, validate with scipy.stats; the tool is designed for fast directional estimates |
+| Feature importance scores are near-zero for all features | Target variable has extremely low variance or the feature set lacks predictive signal | Check target distribution; consider feature engineering or collecting additional data sources |
+| `experiment_tracker.py` shows experiment IDs out of order | Experiments were logged non-sequentially or the log file was manually edited | IDs are auto-incremented; use `--sort-by` on a metric for meaningful ordering |
+| Chi-square test fails with "table must be at least 2x2" | CSV contingency table has fewer than 2 rows or 2 columns of numeric data | Ensure the CSV has a header row and at least 2x2 numeric cells; verify the format matches expectations |
+| Class imbalance causes misleading accuracy | Accuracy inflated by majority class predictions | Use F1, precision-recall, or AUC-ROC instead; apply SMOTE or class weights during training |
+
+## Success Criteria
+
+- Every ML project follows the Define-Collect-Engineer-Train-Evaluate-Communicate workflow before deployment.
+- Feature selection is documented: `feature_selector.py` output is saved with the experiment record.
+- All experiments are tracked with `experiment_tracker.py` including parameters, metrics, and a descriptive name.
+- Model evaluation reports include at least 3 metrics (e.g., F1, AUC-ROC, precision) and comparison against a baseline.
+- A/B tests pre-register the hypothesis, sample size calculation, and primary metric before data collection begins.
+- Statistical tests report effect size and confidence intervals, not just p-values.
+- Business impact is quantified in dollar terms or user-metric terms (e.g., "reduces false positives by 30%, saving $500K/yr").
+
+## Scope & Limitations
+
+**In scope:** Machine learning algorithm selection, feature engineering, model training and evaluation, A/B test design and analysis, statistical hypothesis testing, experiment tracking, and communicating results to stakeholders.
+
+**Out of scope:** Model deployment to production (see ml-ops-engineer), data pipeline infrastructure, dashboard development, and real-time serving architecture.
+
+**Limitations:** The Python tools use only the Python standard library. `hypothesis_tester.py` uses normal and t-distribution approximations that are accurate for moderate sample sizes but should be validated with scipy for edge cases (very small n, extreme skew). `feature_selector.py` computes approximate mutual information using binned discretization -- for high-precision feature selection, use sklearn's mutual_info_classif or permutation importance. All tools process local files and do not integrate with MLflow, W&B, or other tracking platforms.
+
+## Integration Points
+
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Trained models are handed off for production deployment, monitoring, and registry management.
+- **Data Analyst** (`data-analytics/data-analyst`): Complex analytical questions requiring predictive modeling are escalated from the analyst to the data scientist.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on mart models as upstream data sources.
+- **Product Team** (`product-team/`): Experiment results inform product decisions; A/B test designs are co-created with product managers.
+- **Engineering** (`engineering-team/senior-ml-engineer`): Algorithm implementation details and model architecture decisions bridge data science and ML engineering.

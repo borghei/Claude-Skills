@@ -826,3 +826,100 @@ For high-assurance authentication per A.5.17 and A.8.5:
 - **Contractual Security Clauses:** Data protection, incident reporting, audit rights, exit terms
 - **Continuous Monitoring:** Vendor security ratings, certificate expiry alerts, breach notifications
 - **SBOM Requirements:** Software Bill of Materials for all third-party software components
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Compliance checker shows low score despite documented policies | Controls documented but not implemented or operating effectively; evidence of operation missing | Focus on evidence of control operation (logs, reports, screenshots) rather than just policy documents; run `compliance_checker.py --gap-analysis` to identify implementation gaps |
+| Risk assessment generates excessive number of high/critical risks | Asset classification overly conservative or threat likelihood ratings not calibrated to organization context | Calibrate likelihood and impact scales to actual organizational experience; review threat catalog against industry benchmarks; use `--template healthcare` or `--template cloud` for context-appropriate threat catalogs |
+| Stage 1 audit identifies significant documentation gaps | ISMS documentation not aligned with ISO 27001:2022 clause structure or missing mandatory documented information | Review the 2022 mandatory documentation list (information security policy, SoA, risk assessment methodology, risk treatment plan); ensure clause 4-10 documentation uses the 2022 structure |
+| Transitioning from ISO 27001:2013 -- controls do not map | 2022 revision restructured 114 controls into 93 across 4 themes; some controls merged or renamed | Use the 11 new controls list as starting point; map merged controls; update Statement of Applicability to reflect 4-theme structure (Organizational, People, Physical, Technological) |
+| Cloud security controls insufficient for multi-cloud environment | Generic controls applied without cloud-provider-specific implementation | Map ISO 27001 controls to provider-specific services (AWS: GuardDuty, Config; Azure: Defender, Policy; GCP: SCC, DLP); use the cloud-specific control tables in this skill |
+| Zero Trust implementation conflicts with existing network architecture | Legacy perimeter-based security model incompatible with microsegmentation | Follow the phased Zero Trust roadmap (Foundation 0-6mo, Enhancement 6-12mo, Maturation 12-18mo); start with identity and MFA before network changes |
+| Supply chain security assessment overwhelmed by vendor count | No vendor risk tiering applied; all vendors assessed at same depth | Apply the Third-Party Risk Tiers (Critical, High, Medium, Low); focus full security audits on Critical tier; use questionnaires for Medium/Low |
+
+---
+
+## Success Criteria
+
+- **Overall compliance score above 85%** -- as measured by `compliance_checker.py`, with all high-priority controls implemented and operating effectively
+- **Risk register complete with assigned owners for all high/critical risks** -- every risk assessed using Likelihood x Impact methodology with documented treatment plans and target remediation dates
+- **Statement of Applicability current and approved** -- covering all 93 Annex A controls with justification for inclusion/exclusion, aligned with the 2022 four-theme structure
+- **Internal audit conducted annually** -- covering all ISMS clauses (4-10) and all Annex A controls within the 3-year certification cycle, with findings documented and corrective actions tracked
+- **Management review completed with documented outputs** -- including ISMS performance metrics, audit findings, risk treatment status, and improvement decisions
+- **Security awareness training completion rate above 95%** -- all personnel trained annually with records maintained; specialized training for security and IT staff
+- **Incident response tested and validated** -- at least one tabletop exercise or simulation annually; post-incident reviews conducted for all actual incidents; lessons learned documented and implemented
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- ISO 27001:2022 ISMS implementation guidance including all 93 Annex A controls across 4 themes
+- Security risk assessment following ISO 27001 Clause 6.1.2 methodology with configurable threat catalogs (general, healthcare, cloud)
+- Compliance checking and gap analysis against ISO 27001 and ISO 27002 controls
+- Cross-framework mapping to SOC 2 TSC, NIST CSF 2.0, and NIS2 Directive
+- Cloud-specific security controls for AWS, Azure, and GCP
+- Zero Trust architecture integration with phased implementation roadmap
+- Hardware security key (FIDO2/WebAuthn) requirements and deployment guidance
+- Supply chain security controls including SBOM requirements and vendor risk tiering
+
+**Out of Scope:**
+- ISO 27001 certification audit execution -- this skill provides preparation guidance, not audit services
+- Implementation of specific security tools (SIEM, EDR, DLP, WAF) -- this skill maps requirements to tool categories
+- Penetration testing or vulnerability scanning execution -- use `infrastructure-compliance-auditor` for technical checks
+- ISO 27701 (privacy information management), ISO 27017 (cloud security), or ISO 27018 (cloud privacy) implementation beyond cross-reference
+- Physical security system design or installation beyond control requirements
+
+**Important Notes:**
+- The ISO 27001:2013 to 2022 transition deadline was October 2025; all certifications must now conform to the 2022 edition
+- The 2022 revision introduced 11 entirely new controls, notably A.5.7 (Threat intelligence), A.5.23 (Cloud services), A.8.9 (Configuration management), A.8.16 (Monitoring activities), and A.8.28 (Secure coding)
+- Integration with other standards (ISO 27701, ISO 42001, ISO 9001) via the harmonized Annex SL structure is becoming standard practice
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `isms-audit-expert` | Internal and external ISMS audit management; control testing and finding management | When planning or executing ISO 27001 audits and tracking corrective actions |
+| `infrastructure-compliance-auditor` | Technical infrastructure checks validate ISO 27001 Annex A technological controls | When assessing actual infrastructure security posture against ISO 27001 requirements |
+| `soc2-compliance-expert` | SOC 2 Trust Services Criteria mapped to ISO 27001 controls for dual compliance | When organization requires both ISO 27001 certification and SOC 2 Type II report |
+| `gdpr-dsgvo-expert` | GDPR Art. 32 security of processing aligned with ISO 27001 controls; A.5.34 PII protection | When ISMS must support GDPR compliance requirements |
+| `nist-csf-specialist` | NIST CSF 2.0 functions mapped to ISO 27001 for organizations with US operations | When building unified security framework across ISO 27001 and NIST CSF |
+| `dora-compliance-expert` | ISO 27001 controls support DORA Pillar 1 (ICT Risk Management) requirements for financial entities | When financial entity uses ISO 27001 as foundation for DORA compliance |
+
+---
+
+## Tool Reference
+
+### risk_assessment.py
+
+Automated security risk assessment following ISO 27001 Clause 6.1.2 methodology.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--scope <name>` | Yes (unless `--assets`) | System or area to assess (e.g., `cloud-infrastructure`, `ehr-system`, `patient-data-system`) |
+| `--template <type>` | No | Assessment template: `general` (default), `healthcare`, `cloud` -- each provides context-appropriate threat catalogs |
+| `--assets <file>` | No | CSV file with asset inventory (columns: asset_id, name, type, owner, classification) |
+| `--output <file>` | No | Output file path (default: stdout) |
+| `--format <fmt>` | No | Output format: `json` (default), `csv`, `markdown` |
+
+**Output:** Asset inventory with classification, threat and vulnerability mapping, risk scores (Likelihood x Impact on 1-5 scale), treatment recommendations per risk level, and residual risk calculations.
+
+### compliance_checker.py
+
+Verifies ISO 27001/27002 control implementation status with gap analysis and remediation recommendations.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--standard <std>` | Yes | Standard to check: `iso27001`, `iso27002`, `hipaa` |
+| `--controls-file <file>` | No | CSV file with current control implementation status |
+| `--gap-analysis` | No | Include detailed remediation recommendations in output |
+| `--domains <domains>` | No | Comma-separated specific control domains to check (e.g., `access-control,cryptography`) |
+| `--output <file>` | No | Output file path for compliance report |
+
+**Output:** Control implementation status per domain, compliance percentage by theme/domain, gap analysis with priorities (when `--gap-analysis` flag used), and remediation recommendations mapped to ISO 27002 control guidance.

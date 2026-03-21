@@ -318,6 +318,111 @@ python scripts/expansion_opportunity_scorer.py customer_data.json --format json
 
 ---
 
-**Last Updated:** February 2026
+---
+
+## Tool Reference
+
+### 1. health_score_calculator.py
+
+**Purpose:** Multi-dimensional customer health scoring with trend analysis and segment-aware benchmarking.
+
+```bash
+python scripts/health_score_calculator.py customer_data.json
+python scripts/health_score_calculator.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer health data (usage, engagement, support, relationship metrics) |
+| `--format` | No | Output format: text (default) or json |
+
+**Dimensions and Weights:** Usage (30%), Engagement (25%), Support (20%), Relationship (25%)
+
+**Classification:** Green (75-100), Yellow (50-74), Red (0-49) -- thresholds adjust by segment (Enterprise, Mid-Market, SMB)
+
+### 2. churn_risk_analyzer.py
+
+**Purpose:** Identify at-risk accounts with behavioral signal detection and tier-based intervention recommendations.
+
+```bash
+python scripts/churn_risk_analyzer.py customer_data.json
+python scripts/churn_risk_analyzer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with churn risk signals (usage decline, engagement drop, support issues, relationship signals, commercial factors) |
+| `--format` | No | Output format: text (default) or json |
+
+**Risk Tiers:** Critical (80-100), High (60-79), Medium (40-59), Low (0-39)
+
+**Signal Weights:** Usage Decline (30%), Engagement Drop (25%), Support Issues (20%), Relationship Signals (15%), Commercial Factors (10%)
+
+### 3. expansion_opportunity_scorer.py
+
+**Purpose:** Identify upsell, cross-sell, and expansion opportunities with revenue estimation and priority ranking.
+
+```bash
+python scripts/expansion_opportunity_scorer.py customer_data.json
+python scripts/expansion_opportunity_scorer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer contract, product usage, and department data |
+| `--format` | No | Output format: text (default) or json |
+
+**Expansion Types:** Upsell (tier upgrade), Cross-sell (new modules), Expansion (seats/departments)
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Health scores do not correlate with actual churn | Default thresholds do not match your product | Calibrate segment thresholds using historical churn data; compare 90-day retained vs churned cohorts |
+| All accounts show as Yellow | Thresholds too strict or data quality issues | Review input data completeness; adjust benchmarks in health_score_calculator.py constants for your industry |
+| Churn risk scores are uniformly low | Missing key signals (champion left, competitor mentions) | Ensure all signal categories have data; missing data defaults to low risk, which understates actual risk |
+| Expansion scores do not reflect reality | Product usage data is incomplete or stale | Verify product_usage fields cover all modules; run with fresh data exports from your product analytics |
+| Scripts error on input data | JSON format does not match expected schema | Reference the Input Requirements section for exact JSON structure; validate JSON before running |
+| Trend analysis shows no change | Previous period data not provided | Include the previous_period block in health score input for meaningful trend comparison |
+| Intervention recommendations feel generic | Segment is not specified | Always include the segment field (enterprise, mid-market, smb) for segment-appropriate playbooks |
+
+---
+
+## Success Criteria
+
+- Health scores run weekly for Enterprise, bi-weekly for Mid-Market, monthly for SMB accounts
+- Portfolio health distribution: 60%+ Green, less than 15% Red
+- Churn risk critical accounts have executive escalation within 48 hours
+- Expansion pipeline generated covers 20%+ of net retention target
+- Health score trends (improving/declining) drive proactive outreach before renewal window
+- QBR preparation includes health score, risk assessment, and expansion opportunities for every strategic account
+- Intervention playbooks followed for all High and Critical risk accounts
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Customer health scoring, churn risk analysis, expansion opportunity identification, segment benchmarking, trend analysis, QBR preparation
+- **Out of scope:** CRM integration, real-time monitoring, predictive ML modeling, automated outreach
+- **Data dependency:** Scripts analyze point-in-time JSON snapshots; data must be exported manually from your CRM/CS platform
+- **Deterministic scoring:** All analysis is algorithmic based on weighted signals -- no machine learning predictions
+- **Threshold tuning:** Default thresholds are industry-standard benchmarks; calibrate for your specific product and customer base
+- **Revenue estimates:** Expansion revenue estimates are approximations based on usage patterns, not binding forecasts
+
+---
+
+## Integration Points
+
+- **churn-prevention** -- High-risk accounts from churn_risk_analyzer.py should trigger cancel flow optimization and save offer review
+- **revenue-operations** -- Expansion opportunities feed into pipeline forecasting; health scores inform forecast confidence
+- **onboarding-cro** -- When health scores show low usage in early lifecycle, the root cause is often poor activation
+- **pricing-strategy** -- When expansion analysis reveals pricing as a barrier to upsell, feed into pricing-strategy for packaging review
+- **competitive-teardown** -- When churn risk signals include competitor mentions, use teardown data to build counter-positioning
+
+---
+
+**Last Updated:** March 2026
 **Tools:** 3 Python CLI tools
 **Dependencies:** Python 3.7+ standard library only

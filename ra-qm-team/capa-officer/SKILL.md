@@ -432,3 +432,95 @@ Required CAPA elements:
 | Root cause analysis superficial | Inadequate investigation training |
 | Effectiveness not verified | No verification procedure |
 | Actions do not address root cause | Symptom treatment vs. cause elimination |
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Root cause analysis yields only symptoms | Investigation stopped too early or used wrong RCA method | Apply the RCA Method Selection Decision Tree; ensure at least 5 levels of "why" with evidence at each level |
+| CAPA effectiveness verification fails repeatedly | Corrective action addresses symptoms, not true root cause | Re-open investigation, consider hybrid RCA approach (e.g., Fishbone + 5-Why), involve additional subject matter experts |
+| CAPA cycle times consistently exceed 60-day target | Insufficient resources allocated or unclear ownership | Escalate during management review; assign dedicated CAPA coordinator; break complex CAPAs into phased actions |
+| Overdue CAPA rate exceeds 10% | Lack of automated tracking or reminder system | Implement automated alerts via QMS software; run `python scripts/capa_tracker.py --capas capas.json` weekly to identify aging items |
+| Auditors cite "superficial root cause analysis" | Inadequate training on RCA methodologies | Conduct RCA methodology training for investigation teams; use templates from `references/rca-methodologies.md`; require evidence at each analysis step |
+| Recurring issues despite closed CAPAs | Preventive actions not extended to similar processes | During action planning, explicitly assess all analogous processes; add preventive actions targeting systemic causes, not just the specific instance |
+| Stakeholders disagree on CAPA severity classification | No standardized severity criteria applied | Use the CAPA Necessity Determination table and Severity definitions consistently; document classification rationale with objective evidence |
+
+---
+
+## Success Criteria
+
+- **First-time effectiveness rate exceeds 90%** -- verified through post-implementation data collection showing no recurrence during the verification window
+- **Average CAPA cycle time under 60 days** -- measured from open date to close date across all severity levels, tracked via `capa_tracker.py` metrics
+- **Overdue rate maintained below 10%** -- monitored through aging analysis with escalation triggers at 61-day and 90-day thresholds
+- **100% of root causes validated with objective evidence** -- every root cause passes the validation checklist (explains all symptoms, elimination prevents recurrence, within organizational control)
+- **All critical and major CAPAs include preventive actions** -- corrective actions address the specific occurrence while preventive actions extend solutions to analogous processes
+- **Management review receives monthly CAPA status reports** -- including open count by severity, overdue list, cycle time trends, and effectiveness rate trends
+- **Recurrence rate below 5%** -- tracked by monitoring closed CAPAs for reappearance of the same issue type within 12 months of closure
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- CAPA investigation workflow from trigger event through closure
+- Root cause analysis using 5-Why, Fishbone (6M), Fault Tree Analysis, Human Factors Analysis, and FMEA methodologies
+- Corrective and preventive action planning, implementation tracking, and effectiveness verification
+- CAPA metrics calculation, aging analysis, and management reporting
+- Alignment with ISO 13485:2016 Clause 8.5 and FDA 21 CFR 820.100 requirements
+
+**Out of Scope:**
+- This skill does not replace a validated eQMS (electronic Quality Management System) for production CAPA tracking -- it provides analysis templates and metric calculations
+- Statistical process control and advanced trend analysis requiring specialized SPC software
+- Regulatory submission preparation (use `fda-consultant-specialist` or `mdr-745-specialist` for submission-related CAPAs)
+- Supplier CAPA management beyond internal investigation (use `quality-manager-qms-iso13485` for supplier qualification)
+- Clinical investigation CAPAs requiring medical/scientific expertise beyond procedural guidance
+
+**Important Notes:**
+- Under the FDA QMSR (effective February 2, 2026), CAPA requirements align with ISO 13485:2016 Clause 8.5 rather than the legacy 21 CFR 820.100 structure -- this skill covers both frameworks
+- The `capa_tracker.py` tool works with JSON input and does not connect to live QMS databases; export data from your eQMS for analysis
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `quality-manager-qms-iso13485` | CAPA findings feed into QMS process improvements and supplier corrective actions | When root cause involves QMS process gaps or supplier nonconformances |
+| `qms-audit-expert` | Audit findings are a primary CAPA source; CAPA closure evidence supports audit follow-up | When CAPAs originate from internal or external audit findings |
+| `risk-management-specialist` | CAPA outcomes update risk assessments; FMEA results may trigger preventive CAPAs | When root cause analysis reveals previously unassessed risks |
+| `fda-consultant-specialist` | FDA 483 observations and warning letters require formal CAPA responses | When CAPA originates from FDA inspection findings |
+| `mdr-745-specialist` | EU MDR vigilance reports and FSCA may trigger CAPAs; CAPA data feeds PMS/PSUR | When post-market surveillance identifies safety or performance issues |
+| `quality-documentation-manager` | Document control updates resulting from CAPA actions; 21 CFR Part 11 compliance for electronic CAPA records | When corrective actions require SOP revisions or new document creation |
+
+---
+
+## Tool Reference
+
+### capa_tracker.py
+
+Tracks CAPA status, calculates metrics, identifies overdue items, and generates management review reports.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--capas <file>` | Yes (unless `--interactive` or `--sample`) | Path to JSON file containing CAPA records |
+| `--interactive` | No | Launch interactive mode for manual CAPA entry |
+| `--output <format>` | No | Output format: `json` for machine-readable, default is human-readable text |
+| `--sample` | No | Generate a sample CAPA JSON file to stdout for use as a template |
+
+**Calculated Metrics:**
+- Total, open, closed, and overdue CAPA counts
+- Average cycle time (days from open to close)
+- First-time effectiveness rate (effective on first verification / total verified)
+- Status distribution, severity breakdown, and source analysis
+- Aging report bucketed by 0-30, 31-60, 61-90, and 90+ days
+- Overdue CAPA list with owners and days past target
+
+**Example:**
+```bash
+# Generate sample data, then analyze
+python scripts/capa_tracker.py --sample > sample_capas.json
+python scripts/capa_tracker.py --capas sample_capas.json
+python scripts/capa_tracker.py --capas sample_capas.json --output json
+```

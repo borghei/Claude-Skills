@@ -206,6 +206,76 @@ python scripts/risk_analyzer.py --portfolio customers.csv
 python scripts/renewal_forecast.py --period Q1
 ```
 
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Health scores not predicting churn | Model weights are stale or too generic | Recalibrate weights quarterly by comparing predicted scores against actual renewal outcomes. Segment scoring by customer tier, lifecycle stage, and use case. |
+| Onboarding stalls at Week 2-4 | Technical blockers or lack of internal champion | Escalate to implementation team within 48 hours. Schedule a joint troubleshooting call. If champion is absent, request executive sponsor intervention. |
+| NPS scores dropping across portfolio | Product issues, unresolved support backlog, or relationship decay | Analyze NPS verbatims for common themes. Prioritize red accounts for immediate outreach. Coordinate with Product on systemic issues. |
+| Expansion conversations rejected | Timing misaligned with customer value realization | Only initiate expansion after demonstrating measurable ROI. Lead with value recap before any commercial discussion. Wait until health score is Green for 60+ days. |
+| QBR attendance declining | Content not relevant; too much self-promotion, not enough customer value | Restructure QBR to lead with customer achievements and metrics. Limit product roadmap to items relevant to their use cases. Keep meetings under 45 minutes. |
+| Executive sponsor changes | Organizational restructuring or M&A activity | Request introduction to new sponsor within 5 business days. Prepare a condensed value summary. Reset success metrics aligned to new sponsor's priorities. |
+| Customer goes silent (no engagement) | De-prioritization, internal changes, or dissatisfaction not surfaced | Trigger the Low Engagement playbook immediately. Try multiple channels (email, phone, LinkedIn). Engage other known contacts. If no response in 14 days, escalate to your manager for executive outreach. |
+| Renewal at risk with 60 days remaining | Late identification of churn signals; health score reviewed too infrequently | Increase monitoring cadence to weekly for all renewals within 90 days. Run churn risk scoring monthly. Pre-negotiate renewal terms 120 days before expiry. |
+
+## Success Criteria
+
+| Metric | Target | Measurement Method |
+|--------|--------|--------------------|
+| Gross revenue retention (GRR) | 90%+ | Renewed ARR / Expiring ARR (excluding expansion) |
+| Net revenue retention (NRR) | 110%+ | (Renewed + Expansion - Contraction) / Beginning ARR |
+| Logo retention rate | 90%+ | Renewed customers / Total customers up for renewal |
+| Customer health score accuracy | 80%+ predictive | Percentage of Green accounts that actually renewed |
+| Time-to-value | Under 30 days | Days from contract signature to first measurable outcome |
+| QBR completion rate | 100% for accounts above ARR threshold | QBRs delivered / QBRs due per quarter |
+| NPS score | 50+ | Portfolio-wide NPS from quarterly surveys |
+| Expansion revenue | 20%+ of book | Expansion ARR / Total managed ARR |
+| Support escalation resolution | Under 48 hours | Average time from escalation to resolution |
+
+## Scope & Limitations
+
+**In Scope:**
+- Post-sale customer lifecycle management from onboarding through renewal and advocacy
+- Multi-dimensional health scoring (Product, Relationship, Outcomes)
+- Risk identification, intervention playbooks, and escalation management
+- Expansion signal detection and upsell/cross-sell conversation frameworks
+- QBR preparation, delivery, and follow-up
+- Customer advocacy and reference program management
+- Renewal forecasting and negotiation support
+
+**Out of Scope:**
+- Pre-sale deal qualification and closing (see account-executive)
+- Technical implementation and integration support (see solutions-architect)
+- Territory design, CRM administration, and comp plans (see sales-operations)
+- Product roadmap decisions and feature development (coordinate with Product)
+- Billing, invoicing, and revenue recognition (coordinate with Finance)
+- Marketing content creation for customer stories (see marketing-skill/content-creator)
+
+**Limitations:**
+- Health scoring model requires calibration against your specific product's usage patterns; default weights are starting points
+- Churn prediction accuracy improves over time as historical data accumulates; expect 60-70% accuracy initially, improving to 80%+ after 4 quarters of data
+- Scripts process local data exports only; no direct CRM or product analytics API integration
+- NPS and sentiment inputs require manual collection or export from survey tools
+
+## Integration Points
+
+| Integration | Direction | Purpose | Handoff Artifact |
+|-------------|-----------|---------|-----------------|
+| **Account Executive** | AE -> CSM | Post-sale handoff with deal context and success criteria | Handoff template with stakeholder map, success criteria, implementation timeline |
+| **Sales Engineer** | SE -> CSM | Technical context from pre-sale evaluation | Technical discovery notes, POC results, integration requirements |
+| **Sales Operations** | Bidirectional | Renewal forecasting, expansion pipeline tracking, churn reporting | Renewal forecast submissions, health score data exports |
+| **Product Team** | CSM -> Product | Feature requests, usage feedback, product issues | Aggregated feedback reports, feature request rankings, bug reports |
+| **Support Team** | Support -> CSM | Escalation routing, ticket trends, resolution tracking | Escalation alerts, monthly ticket summaries by account |
+| **Marketing** | CSM -> Marketing | Customer stories, references, advocacy program | Case study candidates, reference availability, NPS promoters list |
+| **Finance** | Bidirectional | Renewal pricing, credit requests, revenue forecasting | Renewal quotes, churn impact reports, expansion revenue tracking |
+
+**Workflow Handoff Protocol:**
+1. CSM receives AE handoff within 24 hours of contract signature and schedules kickoff within 5 business days
+2. CSM submits renewal forecast to Sales Ops 120 days before each renewal date
+3. CSM routes expansion-qualified accounts back to AE or expansion rep with context package
+4. CSM flags product issues affecting 3+ accounts to Product within 24 hours
+
 ## Reference Materials
 
 - `references/onboarding.md` -- Onboarding playbook

@@ -356,3 +356,101 @@ done
 | **ceo-advisor** | Strategic decisions about partnerships and business models |
 | **cfo-advisor** | Financial terms, pricing strategy, revenue recognition |
 | **launch-strategy** | Contract timing around product launches |
+
+---
+
+## Tool Reference
+
+### 1. contract_clause_checker.py
+
+**Purpose:** Validate a contract document (as structured JSON) against required clauses for a given jurisdiction and engagement type.
+
+```bash
+python scripts/contract_clause_checker.py contract.json --jurisdiction us-delaware
+python scripts/contract_clause_checker.py contract.json --jurisdiction eu --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `contract.json` | Yes | JSON file with contract clauses and metadata |
+| `--jurisdiction` | No | Jurisdiction to check against: us-delaware, eu, uk, dach (default: us-delaware) |
+| `--type` | No | Contract type: fixed-price, hourly, retainer, nda, msa (default: fixed-price) |
+| `--json` | No | Output results as JSON |
+
+### 2. proposal_cost_estimator.py
+
+**Purpose:** Generate a project cost estimate with phase breakdown, payment schedule, and margin analysis.
+
+```bash
+python scripts/proposal_cost_estimator.py --hourly-rate 150 --hours 200 --phases 4
+python scripts/proposal_cost_estimator.py --hourly-rate 150 --hours 200 --phases 4 --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--hourly-rate` | Yes | Hourly rate in dollars |
+| `--hours` | Yes | Estimated total hours |
+| `--phases` | No | Number of project phases (default: 3) |
+| `--margin` | No | Desired profit margin percentage (default: 20) |
+| `--currency` | No | Currency code (default: USD) |
+| `--json` | No | Output results as JSON |
+
+### 3. contract_comparison_analyzer.py
+
+**Purpose:** Compare two contract versions and identify differences in key clauses, payment terms, and risk areas.
+
+```bash
+python scripts/contract_comparison_analyzer.py contract_v1.json contract_v2.json
+python scripts/contract_comparison_analyzer.py contract_v1.json contract_v2.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `contract_v1.json` | Yes | JSON file with first contract version |
+| `contract_v2.json` | Yes | JSON file with second contract version |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Placeholders left in final document | Rushed filling process | Use contract_clause_checker.py to scan for unfilled [BRACKETED] placeholders before sending |
+| IP clause is unenforceable in EU/DACH | Using US work-for-hire language in EU context | Switch to explicit Nutzungsrechte transfer for DACH; use separate written assignment deed for EU |
+| Client disputes scope after signing | Vague acceptance criteria or missing change order process | Define "accepted" = written sign-off within X business days; include change order clause with pricing mechanism |
+| Payment disputes on hourly contracts | No time tracking requirement or unclear invoicing terms | Specify time tracking tool, invoicing frequency (monthly), and payment terms (net-30) in the contract |
+| GDPR non-compliance penalty risk | Missing DPA for EU/DACH engagements involving personal data | Always include Art. 28 DPA when processing EU personal data; use the template block in this skill |
+| Contract fails legal review | Jurisdiction mismatch or missing mandatory clauses | Run contract_clause_checker.py against the target jurisdiction before legal review |
+
+---
+
+## Success Criteria
+
+- All [BRACKETED] placeholders filled before document delivery
+- Correct jurisdiction selected and consistent throughout (verified by contract_clause_checker.py)
+- Payment terms match engagement model with clear invoicing cadence
+- IP clause matches jurisdiction requirements (work-for-hire for US, Nutzungsrechte for DACH)
+- Liability cap set at 1-3x contract value with consequential damages excluded
+- DPA included for all EU/DACH engagements involving personal data
+- Change order process defined for all fixed-price contracts
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Contract templates, proposal generation, clause libraries, jurisdiction-specific compliance, document comparison, cost estimation
+- **Out of scope:** Legal advice, contract negotiation strategy, litigation support, regulatory filings
+- **Not legal counsel:** These templates are starting points; review with an attorney for engagements over $50K or involving complex IP, equity, or regulatory requirements
+- **Jurisdiction coverage:** US (Delaware), EU (general), UK, DACH (Germany/Austria/Switzerland); other jurisdictions may require additional legal review
+- **Currency:** Cost estimator defaults to USD; adjust for local currency in international engagements
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Strategic decisions about partnership structures and business models that drive contract type selection
+- **cfo-advisor** -- Financial terms, revenue recognition, and pricing strategy that inform payment schedule and margin targets
+- **customer-success-manager** -- SOW and MSA structures for customer engagements; renewal terms feed into CS workflows
+- **pricing-strategy** -- When proposal pricing needs strategic positioning against competitors or market rates
+- **revenue-operations** -- Contract values and payment schedules feed into pipeline forecasting and revenue recognition

@@ -377,3 +377,94 @@ SPI categories requiring enhanced protections under CPRA §1798.140(ae):
 - Plan annual cybersecurity audit
 - Establish ongoing monitoring and metrics
 - Document compliance program for regulatory defense
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Compliance score unexpectedly low despite privacy policy updates | Policy disclosures incomplete -- missing SPI categories, retention periods, or sale/sharing categories | Run `ccpa_compliance_checker.py --input profile.json` and review per-category scores; cross-reference privacy policy against the 17+ required disclosure elements |
+| Data mapper flags cross-border transfers but organization operates only in US | Data inventory includes cloud services with non-US processing locations | Review data inventory entries for cloud provider data processing locations; document all sub-processor locations per service provider agreements |
+| Consumer rights requests consistently exceed 45-day response deadline | Manual fulfillment process without tracking system or unclear ownership | Implement `ccpa_data_mapper.py` to map PI across all systems; deploy request tracking with automated deadline alerts; assign per-system data stewards |
+| GPC signal detection not working | Application does not check `Sec-GPC: 1` header or `navigator.globalPrivacyControl` | Implement server-side header detection and client-side JavaScript check; test with browsers that support GPC (Firefox, Brave); log detection events |
+| CPPA enforcement inquiry received | Potential compliance gap discovered during regulatory sweep or consumer complaint | Immediately run full compliance assessment; prioritize critical gaps (opt-out link, GPC, privacy policy); engage privacy counsel; document remediation timeline |
+| Vendor contracts missing CCPA-required provisions | Service provider agreements predate CPRA amendments | Audit all vendor agreements against CCPA service provider/contractor requirements; update contracts to include certification, limited use, audit rights, and data deletion obligations |
+| Risk assessment requirements unclear | New CPRA regulations (effective January 1, 2026) mandate risk assessments for six processing categories | Review processing activities against the six "significant risk" categories; document risk assessments per CPPA regulatory template; plan for April 2028 attestation deadline |
+
+---
+
+## Success Criteria
+
+- **Overall compliance score of 80+ on initial assessment** -- indicating foundational CCPA/CPRA controls are in place, with per-category scores identifying targeted remediation areas
+- **All consumer rights requests fulfilled within 45 calendar days** -- with 10-business-day acknowledgment, tracked through a request management system with automated deadline alerts
+- **Privacy policy updated at least annually** -- with documented reviews quarterly, disclosing all 11 PI categories collected, sources, purposes, third-party sharing, and all seven consumer rights
+- **GPC signal honored automatically** -- detected via `Sec-GPC: 1` header and `navigator.globalPrivacyControl`, applied to both sale and sharing of PI, with no re-authentication required
+- **Complete data inventory maintained** -- all PI categories mapped to collection sources, business purposes, sharing recipients, and retention schedules using `ccpa_data_mapper.py`
+- **Service provider and contractor agreements include all CCPA-required provisions** -- including certification of limited use, deletion obligations, audit rights, and sub-contractor chain documentation
+- **Risk assessments completed for all applicable processing activities** -- covering the six CPRA significant-risk categories, with attestation readiness by the April 2028 deadline
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- CCPA/CPRA applicability determination (revenue, consumer count, PI revenue thresholds)
+- Privacy policy compliance assessment against all required disclosures
+- Consumer rights readiness validation (Know, Delete, Opt-Out, Correct, Portability, Limit SPI Use)
+- Data inventory mapping across all 11 CCPA personal information categories
+- Sensitive personal information identification per CPRA definitions
+- Technical safeguard assessment (encryption, access controls, opt-out mechanisms)
+- Service provider and contractor agreement requirements
+
+**Out of Scope:**
+- Legal advice or determination of exemption applicability (HIPAA, GLBA, FCRA, employment data) -- consult privacy counsel for exemption analysis
+- Implementation of cookie consent management platforms or GPC signal handling code
+- CCPA private right of action defense (data breach litigation) -- consult legal counsel
+- Other state privacy laws (Virginia VCDPA, Colorado CPA, Connecticut CTDPA) beyond the comparison tables provided -- use jurisdiction-specific guidance
+- Automated decision-making technology (ADMT) compliance under CPRA regulations effective January 2027 -- monitor CPPA rulemaking for final requirements
+
+**Important Notes:**
+- CPPA enforcement is escalating significantly in 2025-2026, with fines exceeding $1.3M in individual cases and joint multi-state enforcement sweeps targeting GPC non-compliance
+- New CPRA regulations effective January 1, 2026 add risk assessment, cybersecurity audit, and updated compliance requirements -- plan implementation accordingly
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `gdpr-dsgvo-expert` | Unified privacy program satisfying both GDPR and CCPA; cross-framework privacy mapping | When organization operates in both EU and California markets |
+| `infrastructure-compliance-auditor` | Technical safeguard validation (encryption, access controls, logging) for CCPA reasonable security | When assessing infrastructure controls supporting CCPA compliance |
+| `information-security-manager-iso27001` | Security controls supporting CCPA "reasonable security" requirement | When building security program that satisfies both ISO 27001 and CCPA |
+| `soc2-compliance-expert` | SOC 2 controls mapped to CCPA technical safeguard requirements | When SOC 2 audit evidence supports CCPA security compliance |
+
+---
+
+## Tool Reference
+
+### ccpa_compliance_checker.py
+
+Evaluates organizational readiness against all CCPA/CPRA requirements across 8 assessment categories.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes (unless `--template`) | Path to JSON company profile for assessment |
+| `--template` | No | Generate blank input template to stdout |
+| `--json` | No | Output results in JSON format for automation |
+| `--output <file>` | No | Export report to specified file path |
+
+**Output:** Overall compliance score (0-100), per-category scores with pass/fail/partial status, prioritized findings with regulatory references, and remediation recommendations.
+
+### ccpa_data_mapper.py
+
+Maps personal information categories, tracks data flows, and generates data inventory reports.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes (unless `--template`) | Path to JSON data inventory for mapping |
+| `--template` | No | Generate blank inventory template to stdout |
+| `--output <file>` | No | Export mapping report to specified file path |
+| `--flow-diagram` | No | Generate text-based data flow diagram showing collection, use, sharing, and selling paths |
+
+**Output:** PI category mapping across all 11 CCPA categories, SPI identification, data flow analysis (sources, purposes, recipients), cross-border transfer flags, and data retention gap detection.

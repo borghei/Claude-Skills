@@ -470,6 +470,99 @@ So far, you've earned $[X] from [N] referrals.
 
 ---
 
+## Tool Reference
+
+### 1. referral_economics_calculator.py
+
+Calculates referral program economics including reward sizing, K-factor, referral CAC, ROI projections, and break-even analysis. Models double-sided vs single-sided reward structures.
+
+```bash
+python scripts/referral_economics_calculator.py program.json --format text
+python scripts/referral_economics_calculator.py program.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `program.json` | positional | Path to JSON file with program economics data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. referral_funnel_analyzer.py
+
+Analyzes the 4-stage referral loop (trigger, share, convert, reward) with stage-over-stage conversion, identifies the weakest stage, and provides prioritized improvement recommendations.
+
+```bash
+python scripts/referral_funnel_analyzer.py funnel.json --format text
+python scripts/referral_funnel_analyzer.py funnel.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `funnel.json` | positional | Path to JSON file with referral funnel metrics |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. affiliate_commission_modeler.py
+
+Models affiliate program commission structures across tier levels. Calculates per-tier economics, lifetime partner value, and compares commission models (flat fee vs recurring percentage).
+
+```bash
+python scripts/affiliate_commission_modeler.py affiliate.json --format text
+python scripts/affiliate_commission_modeler.py affiliate.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `affiliate.json` | positional | Path to JSON file with affiliate program data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Program awareness below 40% of active users | Referral program is buried in settings or only mentioned in email footers | Add persistent dashboard widget, post-activation prompt, and post-NPS trigger; desktop sharing now outperforms mobile (2026 data) |
+| Users see prompt but share rate is below 20% | Share flow has too much friction or pre-filled message is not compelling | Add one-click copy link, native share sheet on mobile, pre-filled first-person message; ensure multiple channels (email, Slack, social) |
+| Referrals sent but conversion rate below 15% | Referral landing page lacks personalization or incentive is not prominent | Add referrer name/photo, display incentive above fold, reduce signup friction; mobile-referred users convert 2-3x (2026 data) |
+| K-factor below 0.1 | Fundamental program design issue -- either low awareness, high friction, or weak incentive | Diagnose in sequence: fix awareness first, then share flow, then landing page, then incentive (optimize mechanics before rewards) |
+| Reward redemption below 70% | Reward delivery is delayed or redemption process is complicated | Auto-apply credits immediately, send instant notification, make redemption one-click; show running total in dashboard |
+| Referred customers churn faster than organic | Referral incentive attracts low-intent users or onboarding for referred users is inadequate | Shift from cash/discount rewards to product-value rewards (feature unlock, extended trial); add referred-user onboarding path |
+| Affiliate partners not producing conversions | Partners lack proper toolkit or audience mismatch | Provide pre-written copy, banner assets, comparison tables, and dedicated landing pages; audit partner audience fit |
+
+---
+
+## Success Criteria
+
+- K-factor reaches 0.3-0.7 range within 90 days of program launch (strong referral contribution without requiring virality)
+- Referral CAC is below 50% of other acquisition channel CAC
+- Active referrer percentage reaches 5-15% of active users
+- Referral-sourced revenue contributes 10-25% of total new revenue within 6 months
+- Referred customer LTV exceeds non-referred customer LTV (typical: 16-25% higher per industry data)
+- Reward redemption rate exceeds 70% within 30 days of earning
+- Double-sided program achieves 2x+ conversion rate compared to single-sided (validate within first 1,000 referrals)
+
+---
+
+## Scope & Limitations
+
+**In scope:** Customer referral program design (4-stage loop), incentive structure (single-sided, double-sided, tiered), trigger moment architecture, share mechanics, referral landing page specifications, viral coefficient modeling, affiliate program framework (commission models, tier systems, recruitment), and systematic optimization playbook.
+
+**Out of scope:** Referral landing page visual design and CRO (use page-cro), signup flow optimization for referred users (use signup-flow-cro), post-signup onboarding for referred users (use onboarding-cro), churn prevention for referred customers (use churn-prevention), and reward pricing alignment (use pricing-strategy). Scripts operate on local data only -- no integrations with referral platforms (ReferralHero, Viral Loops, PartnerStack, etc.).
+
+**Limitations:** K-factor benchmarks assume consumer or prosumer SaaS; B2B enterprise referral programs have different dynamics (lower K but higher per-referral value). Affiliate commission benchmarks (20-30% recurring) are SaaS-specific; marketplace and e-commerce commissions follow different models. Attribution windows (30-90 day cookies) face increasing limitations from browser privacy features (Safari ITP, Chrome third-party cookie deprecation). Revenue projections are estimates based on provided conversion rates.
+
+---
+
+## Integration Points
+
+- **pricing-strategy** -- Referral reward sizing must align with pricing margins and LTV; reward should be <30% of first payment
+- **signup-flow-cro** -- Referred user signup flow should pre-fill email, show referrer context, and minimize friction
+- **onboarding-cro** -- Referred users may need different onboarding path (they arrive with context from the referrer)
+- **churn-prevention** -- Monitor referred customer retention separately; high referral churn wastes acquisition spend
+- **page-cro** -- Referral landing page conversion optimization follows page-cro methodology
+- **popup-cro** -- Post-purchase or post-milestone popups are natural referral trigger points
+
+---
+
 ## Related Skills
 
 - **pricing-strategy** -- Use when referral reward sizing needs to align with pricing and margin structure.

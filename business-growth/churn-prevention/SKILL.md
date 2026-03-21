@@ -403,3 +403,118 @@ Example:
 - **pricing-strategy** -- Use when churn root cause is pricing or packaging mismatch. Not for save offer design.
 - **onboarding-cro** -- Use when churn traces back to poor activation. If users never experienced value, fix onboarding first.
 - **referral-program** -- Use for acquisition. Churn prevention handles the other end of the funnel.
+
+---
+
+## Tool Reference
+
+### 1. churn_impact_calculator.py
+
+**Purpose:** Calculate the revenue impact of churn reduction at various improvement levels.
+
+```bash
+python scripts/churn_impact_calculator.py --mrr 500000 --churn-rate 4.0 --save-rate 20
+python scripts/churn_impact_calculator.py --mrr 500000 --churn-rate 4.0 --save-rate 20 --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--mrr` | Yes | Current monthly recurring revenue in dollars |
+| `--churn-rate` | Yes | Current monthly churn rate as percentage (e.g., 4.0 for 4%) |
+| `--save-rate` | No | Cancel flow save rate as percentage (default: 15) |
+| `--target-churn` | No | Target churn rate as percentage (default: current minus 1) |
+| `--json` | No | Output results as JSON |
+
+### 2. dunning_sequence_analyzer.py
+
+**Purpose:** Analyze dunning email sequence effectiveness and recommend retry timing optimizations.
+
+```bash
+python scripts/dunning_sequence_analyzer.py dunning_data.json
+python scripts/dunning_sequence_analyzer.py dunning_data.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `dunning_data.json` | Yes | JSON file with failed payment and retry data |
+| `--json` | No | Output results as JSON |
+
+**Input JSON format:**
+```json
+{
+  "failed_payments": [
+    {
+      "payment_id": "PAY-001",
+      "amount": 99.00,
+      "failure_reason": "expired_card",
+      "retry_attempts": [
+        {"day": 0, "recovered": false},
+        {"day": 3, "recovered": false},
+        {"day": 7, "recovered": true}
+      ]
+    }
+  ]
+}
+```
+
+### 3. exit_survey_analyzer.py
+
+**Purpose:** Analyze exit survey responses to identify churn patterns, save offer effectiveness, and systemic issues.
+
+```bash
+python scripts/exit_survey_analyzer.py survey_data.json
+python scripts/exit_survey_analyzer.py survey_data.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `survey_data.json` | Yes | JSON file with exit survey response data |
+| `--json` | No | Output results as JSON |
+| `--period` | No | Analysis period label (default: "current") |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Save rate below 5% across all reasons | Save offers do not match exit reasons | Rebuild the exit-reason-to-offer mapping using survey data; run exit_survey_analyzer.py to identify mismatches |
+| Exit survey completion under 60% | Survey is optional or too long | Make the single-question survey required before showing the save offer; remove multi-page flows |
+| Payment recovery rate below 20% | Retry logic misconfigured or dunning emails not sending | Audit dunning sequence with dunning_sequence_analyzer.py; verify email deliverability and retry schedule |
+| Single exit reason exceeds 40% of responses | Systemic product or pricing issue | Escalate to product or leadership; this is not solvable with cancel flow alone |
+| Churn rate above 5% monthly | Likely ICP, product-market fit, or pricing problem | Churn prevention alone will not fix this; pair with pricing-strategy and product feedback loops |
+| Win-back emails have zero reactivations | Emails not reaching inbox or offers are weak | Check deliverability (SPF, DKIM, DMARC); test stronger offers; verify reactivation links work |
+| Involuntary churn rising while voluntary is stable | Card updater not enabled or retry timing is poor | Enable automatic card updating on your payment processor; review retry schedule in dunning_sequence_analyzer.py |
+
+---
+
+## Success Criteria
+
+- Monthly voluntary churn rate below 2.5% (below 1.5% is excellent)
+- Monthly involuntary churn rate below 1.0% (below 0.5% is excellent)
+- Cancel flow save rate of 15-25% (above 20% is excellent)
+- Payment recovery rate of 30%+ on failed payments
+- Exit survey completion rate above 80%
+- Win-back reactivation rate of 5-10% within 90 days post-cancel
+- Save offer acceptance rate above 20% with retained customers staying 6+ months post-save
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Cancel flow design, exit survey architecture, save offer mapping, dunning sequences, payment recovery, win-back campaigns, churn impact modeling
+- **Out of scope:** Product-market fit analysis, pricing restructuring, ICP redefinition, customer acquisition
+- **Data dependency:** Scripts analyze point-in-time snapshots from JSON input; no real-time CRM integration
+- **Not predictive ML:** All scoring is deterministic and algorithmic -- no machine learning models
+- **Legal note:** Cancel flows must comply with FTC guidelines (US) and consumer protection laws (EU) -- do not make cancellation unreasonably difficult
+- **Revenue estimates:** Impact calculations are projections based on input assumptions, not guarantees
+
+---
+
+## Integration Points
+
+- **customer-success-manager** -- Feed health scores into churn risk assessment; use churn data to calibrate health score thresholds
+- **pricing-strategy** -- When exit survey data shows PRICE as the dominant reason (>30%), escalate to pricing-strategy for structural pricing review
+- **onboarding-cro** -- When exit survey data shows LOW_USAGE or COMPLEXITY as top reasons, the root cause is often poor activation; fix onboarding first
+- **revenue-operations** -- Pipeline and forecast models should account for churn reduction impact on net revenue retention (NRR)
+- **referral-program** -- Retained customers from save offers are candidates for referral program enrollment after 90 days of continued usage

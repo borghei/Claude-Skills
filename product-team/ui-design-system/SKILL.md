@@ -377,3 +377,67 @@ Detailed reference guides in `references/`:
 - [ ] Framework integration documented
 - [ ] Design tool synced
 - [ ] Component documentation complete
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated colors fail WCAG contrast | Brand color too light or too saturated | Use darker shades (600+) for text on light backgrounds; check with contrast tool |
+| Token export has incorrect values | Wrong format argument or color syntax | Ensure hex color is quoted (e.g. `"#0066CC"`); verify format is `json`, `css`, or `scss` |
+| Typography scale too large/small | Default 1.25x ratio doesn't fit design | Modify `type_scale_ratio` in DesignTokenGenerator class (1.125 for tighter, 1.333 for looser) |
+| SCSS variables conflict with existing | Token naming collision | Prefix all tokens with project namespace (edit export function) |
+| Design tools show different colors | Hex rounding in color scale generation | Use JSON export as source of truth; sync with Tokens Studio plugin |
+| Spacing values don't align with grid | Custom spacing mixed with 8pt grid | Use only values from the generated spacing system; avoid arbitrary pixel values |
+| Shadow tokens look wrong in dark mode | Shadows designed for light backgrounds | Create separate dark-mode shadow tokens with lighter opacity values |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Token consistency | Zero hardcoded color/spacing values in codebase | Lint rule violations count |
+| WCAG AA compliance | All text colors meet 4.5:1 contrast ratio | Automated contrast checker or manual audit |
+| Export format coverage | CSS, SCSS, and JSON all generate correctly | Run generator with each format; validate output |
+| Design-dev sync | <24h between token update and code deployment | Time from Figma change to production |
+| Component token coverage | 100% of components use design tokens | Audit component styles for hardcoded values |
+| Typography consistency | All text uses design system type scale | Visual audit across all pages |
+| Responsive behavior | Fluid typography works across all breakpoints | Test at xs, sm, md, lg, xl, 2xl widths |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Complete design token generation from brand color
+- Color palette generation (primary, secondary, neutral, semantic)
+- Typography system with modular scale
+- 8pt grid-based spacing system
+- Component sizing, border, shadow, animation tokens
+- Export to CSS custom properties, SCSS variables, and JSON
+- Responsive breakpoint definitions
+- WCAG contrast reference tables
+
+**Out of scope:**
+- Dark mode token generation (requires separate palette mapping)
+- Animation/motion design library
+- Icon system generation
+- Runtime theme switching implementation
+- Figma plugin or API integration (use Tokens Studio)
+- Visual regression testing
+- Design-to-code conversion (use Figma Dev Mode or Locofy)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Figma / Tokens Studio | Import JSON output as token source | Sync design tool with code tokens |
+| Tailwind CSS | JSON tokens as `tailwind.config.js` theme | Configure Tailwind from design system |
+| styled-components / Emotion | Import JSON tokens in theme provider | CSS-in-JS theming |
+| Style Dictionary | Use JSON output as source tokens | Multi-platform token build (iOS, Android, web) |
+| Storybook | Pair tokens with component stories | Document component visual variations |
+| CI/CD | Token generation in build pipeline | Automated token updates on brand change |

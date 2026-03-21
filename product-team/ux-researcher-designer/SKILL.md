@@ -412,3 +412,101 @@ Detailed reference guides in `references/`:
 - [ ] Findings include evidence
 - [ ] Recommendations are actionable
 - [ ] Priorities justified
+
+---
+
+## Tool Reference
+
+### persona_generator.py
+
+Generates data-driven personas from user research data, classifying users into archetypes with demographics, psychographics, behaviors, goals, frustrations, and design implications.
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `format` | positional | (none) | Add `json` for JSON output; omit for human-readable |
+
+**Archetypes supported:** power_user, casual_user, business_user, mobile_first
+
+**Output components:** name, archetype, tagline, quote, demographics, psychographics, behaviors, needs_and_goals, frustrations, scenarios, data_points, design_implications
+
+```bash
+python scripts/persona_generator.py           # Human-readable formatted output
+python scripts/persona_generator.py json      # JSON for programmatic use
+```
+
+**Data input format (customize in script):**
+```json
+[{
+  "user_id": "user_1",
+  "age": 32,
+  "usage_frequency": "daily",
+  "features_used": ["dashboard", "reports", "export"],
+  "primary_device": "desktop",
+  "usage_context": "work",
+  "tech_proficiency": 7,
+  "pain_points": ["slow loading", "confusing UI"]
+}]
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Persona confidence level is "Low" | Fewer than 20 users in sample data | Collect more data points; combine quantitative analytics with qualitative interviews |
+| All users classified as same archetype | Insufficient variation in input data | Ensure data includes diverse usage frequencies, devices, and contexts |
+| Frustrations are generic (fallback defaults) | Not enough pain_points in user data | Enrich user data with pain_points from interviews and support tickets |
+| Design implications too vague | Patterns don't strongly differentiate | Add more behavioral signals (features_used, session duration, task completion) |
+| Journey map has flat emotion curve | All stages scored similarly | Re-evaluate with actual user data; conduct contextual interviews per stage |
+| Usability test sample too small | Fewer than 5 participants | 5 participants find ~85% of usability issues; recruit to minimum 5 |
+| Research synthesis has no clear patterns | Data not coded consistently | Use consistent tagging scheme (GOAL, PAIN, BEHAVIOR, CONTEXT, QUOTE) |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Persona validity | Validated by 3+ real users ("sounds like me") | Post-creation validation interviews |
+| Persona coverage | All key segments represented | Count of personas vs identified user segments |
+| Data confidence level | "High" (31+ users) | persona_generator data_points.confidence_level |
+| Research cadence | 5-8 interviews per segment per quarter | Count of completed research sessions |
+| Insight-to-action rate | >70% of findings result in design changes | Track findings through to implementation |
+| Usability issue resolution | All critical/major issues fixed before release | Issue severity tracking |
+| Journey map freshness | Updated at least quarterly | Last-updated date on each journey map |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Data-driven persona generation from user research
+- Archetype classification (power, casual, business, mobile-first)
+- User journey mapping frameworks
+- Usability test planning and scoring
+- Research synthesis and coding methodology
+- Interview question frameworks
+- Empathy map and opportunity identification
+
+**Out of scope:**
+- Automated user interview recording/transcription
+- Real-time analytics integration (use analytics platforms)
+- Quantitative survey design and distribution (use Typeform/SurveyMonkey)
+- Eye tracking or biometric data analysis
+- AI-powered sentiment analysis (tool uses heuristic classification)
+- Persona illustration or visual asset generation
+- Accessibility auditing (see product-designer or design-system-lead skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Dovetail / Condens | Export research data, import persona JSON | Centralize research insights |
+| Figma / Miro | Paste persona output as design artifact | Reference personas during design work |
+| Notion / Confluence | Human-readable output | Document and share personas with team |
+| product-manager-toolkit | Persona pain points inform RICE scoring | Connect user needs to feature prioritization |
+| agile-product-owner | Persona data informs user story personas | Write stories grounded in research |
+| product-designer | Persona feeds into journey mapping and usability test recruitment | End-to-end design research workflow |

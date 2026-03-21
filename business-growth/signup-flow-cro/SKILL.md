@@ -417,6 +417,99 @@ Collect information over multiple sessions instead of one long form.
 
 ---
 
+## Tool Reference
+
+### 1. signup_field_auditor.py
+
+Audits a signup form configuration for unnecessary fields, missing enrichment opportunities, and friction points. Evaluates each field against the "Before First Use" test and recommends which to keep, defer, or enrich.
+
+```bash
+python scripts/signup_field_auditor.py fields.json --format text
+python scripts/signup_field_auditor.py fields.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `fields.json` | positional | Path to JSON file with form field configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. signup_flow_scorer.py
+
+Scores a complete signup flow against conversion best practices. Evaluates SSO availability, field count, step count, mobile optimization, error handling, and post-submit experience. Outputs a 0-100 score with itemized improvements.
+
+```bash
+python scripts/signup_flow_scorer.py flow.json --format text
+python scripts/signup_flow_scorer.py flow.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `flow.json` | positional | Path to JSON file with signup flow configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. cc_requirement_analyzer.py
+
+Analyzes whether to require a credit card for trial signup. Takes business metrics (ACV, trial-to-paid rate, support costs, competitors) and recommends CC-required, CC-free, or "$0 charge" approach with projected volume and revenue impact.
+
+```bash
+python scripts/cc_requirement_analyzer.py business.json --format text
+python scripts/cc_requirement_analyzer.py business.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `business.json` | positional | Path to JSON file with business metrics |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Signup completion rate below 30% (B2B) or 40% (B2C) | Too many fields, no SSO option, or form on a separate page from the CTA | Reduce to email-only or SSO; keep form on the same page as the value proposition; each removed field improves conversion ~10% |
+| SSO adoption rate below 30% when offered | SSO buttons placed below the email form, or wrong SSO providers for the audience | Move SSO buttons above the email form with "or" divider; match SSO to audience (Google for B2B, Apple for iOS users) |
+| Mobile completion rate >15% below desktop | Form not optimized for touch (small inputs, wrong keyboard types, no auto-fill) | Ensure 44px min touch targets, use type="email"/type="tel", enable browser auto-fill, pin CTA to bottom of viewport |
+| High drop-off on password field | Complex password requirements shown only after submission, or no password visibility toggle | Show requirements as real-time checklist, add show/hide toggle, consider magic link or SSO to eliminate password entirely |
+| Email verification kills activation | Verification required before any product use blocks the critical first-session experience | Defer verification to 24-48 hours; allow product use immediately; gate only email-sending features behind verification |
+| "Email already registered" errors are frequent | Users forget they have accounts; error message does not help them recover | Change error to "This email has an account. [Log in] or [Reset password]" with direct links |
+| High abandonment on multi-step flows | Steps are not progressive, no progress indicator, or too many fields per step | Show step count and progress bar; limit step 1 to account creation only; add "Skip for now" on non-essential steps |
+
+---
+
+## Success Criteria
+
+- Signup page visit-to-completion rate reaches 30-50% (B2B) or 40-60% (B2C) within 60 days of optimization
+- SSO adoption reaches 30-60% of total signups when SSO is properly offered
+- Median time-to-complete stays below 45 seconds for simple flows and below 2 minutes for multi-step
+- Mobile completion rate falls within 15% of desktop completion rate
+- Email verification rate exceeds 70% within 48 hours of signup
+- Field-level drop-off analysis shows no single field causing >10% incremental abandonment
+- Post-signup activation rate (first key action) improves alongside signup rate (not a vanity metric tradeoff)
+
+---
+
+## Scope & Limitations
+
+**In scope:** Authentication strategy (SSO, magic link, email+password), field reduction methodology, multi-step flow architecture, credit card requirement analysis, post-submit experience design, mobile signup optimization, progressive profiling schedules, error and edge case handling, and A/B testing frameworks for registration flows.
+
+**Out of scope:** Post-signup onboarding and activation (use onboarding-cro), non-registration forms like lead capture or contact forms (use form-cro), landing page conversion before the signup form (use page-cro), in-app upgrade and paywall flows (use paywall-upgrade-cro). Scripts operate on local data only -- no integrations with authentication providers (Auth0, Clerk, etc.) or analytics platforms.
+
+**Limitations:** Conversion benchmarks are aggregate SaaS/app industry data and vary by vertical, price point, and audience. SSO adoption rates depend heavily on audience composition (developer audiences adopt GitHub SSO at 40%+, while SMB audiences may prefer email). Credit card requirement analysis is modeled on industry averages -- actual impact requires A/B testing in your specific context. Progressive profiling recommendations assume standard SaaS lifecycle stages.
+
+---
+
+## Integration Points
+
+- **onboarding-cro** -- Signup flow ends at account creation; onboarding-cro picks up from first login through activation
+- **form-cro** -- Field-level optimization principles (validation, keyboard types, error handling) apply to signup forms
+- **page-cro** -- Landing page quality directly impacts signup form reach; optimize the page before optimizing the form
+- **paywall-upgrade-cro** -- Trial signup configuration (CC-required, trial length) affects downstream upgrade flow design
+- **pricing-strategy** -- Pricing model (freemium vs trial) determines signup flow type and field requirements
+- **referral-program** -- Referred user signups should pre-fill referrer context and display incentive
+
+---
+
 ## Related Skills
 
 - **onboarding-cro** -- Use for post-signup activation optimization. Signup-flow-cro ends when the user has an account; onboarding-cro starts there.

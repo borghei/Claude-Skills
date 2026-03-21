@@ -805,3 +805,82 @@ With FDA's Quality Management System Regulation (QMSR) effective Feb 2026:
 - **Open Source Software:** Risk assessment for OSS components (licensing, maintenance, vulnerabilities)
 - **SaaS Tools:** Validation requirements for SaaS platforms used in QMS processes
 - **SBOM Management:** Track software components across the supply chain
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Audit checklist generator returns empty output | Clause number not recognized | Use exact clause numbers from ISO 13485:2016 (e.g., `7.3`, `4.2.3`, `8.5.2`). Run with `--interactive` to see all available clauses. |
+| System audit checklist is very large | `--audit-type system` includes all clauses | For targeted audits, use `--clause` or `--process` flags to generate focused checklists. System audits intentionally cover the full standard. |
+| Gap analysis matrix shows all clauses as "Major" gaps | Assessment conducted against a greenfield organization | Prioritize gaps by regulatory criticality and product safety impact. Address Clauses 4.2, 7.3, 8.2.4, 8.3, and 8.5 first as these require mandatory documented procedures. |
+| QMSR transition mapping unclear | QSR sections not aligned to ISO 13485 clauses | The QMSR (effective Feb 2, 2026) incorporates ISO 13485 by reference. Map QSR 21 CFR 820 sub-parts to ISO 13485 clauses using the QMSR Gap Analysis Checklist in this skill. |
+| Supplier qualification score borderline (60-80) | Supplier meets some criteria but has gaps | Issue conditional approval with documented improvement requirements and a defined reassessment date. Increase monitoring frequency until the supplier exceeds the 80-point threshold. |
+| Process validation protocol incomplete | IQ/OQ/PQ phases not clearly separated | Each qualification phase must have distinct objectives, acceptance criteria, and documented results. Use the Validation Documentation Requirements table as a template for protocol structure. |
+| Design control audit questions not applicable | Organization does not perform design activities | ISO 13485 permits exclusion of Clause 7.3 if the organization does not design products. Document the exclusion justification in the Quality Manual per Clause 4.2.2. |
+
+---
+
+## Success Criteria
+
+- QMS gap analysis completed against all ISO 13485:2016 clauses with documented current state, gap severity, priority, and remediation actions
+- All 6 mandatory documented procedures established, trained, and effective (document control, record control, internal audit, NC product, corrective action, preventive action)
+- Quality Manual approved with justified clause exclusions, process interactions documented, and scope clearly defined
+- QMSR transition completed: all QSR SOPs mapped to ISO 13485 clauses, FDA-retained requirements addressed, internal audit checklist updated for combined ISO 13485 + FDA requirements
+- Supplier qualification program operational with category-based assessment (A/B/C), documented scoring, and approved supplier list maintained
+- Process validation completed for all special processes (IQ/OQ/PQ documented with approved protocols and reports)
+- Certification audit passed with zero Major nonconformities and a plan to address any Minor findings within 60 days
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- ISO 13485:2016 QMS implementation from gap analysis through certification
+- Document control system design (numbering, approval, change control, review schedules)
+- Internal audit program planning and execution per Clause 8.2.4
+- Process validation methodology (IQ/OQ/PQ) per Clause 7.5.6
+- Supplier qualification and monitoring per Clause 7.4
+- FDA QMSR transition planning and gap analysis
+- Digital QMS implementation (eDMS, Part 11, Annex 11 requirements)
+- Remote and hybrid audit methodology
+- AI-enabled medical device QMS considerations (ISO 42001 integration)
+
+**Out of Scope:**
+- Clinical evaluation or clinical investigation management (use regulatory-affairs-head for clinical evidence strategy)
+- Product-specific design control execution (the skill provides the design control framework, not product-specific design inputs/outputs)
+- Sterilization validation protocol development (requires product-specific expertise per ISO 11135/11137/17665)
+- Regulatory submission preparation (use fda-consultant-specialist or mdr-745-specialist)
+- Post-market surveillance program execution (use risk-management-specialist for post-production risk monitoring)
+- IT infrastructure or cybersecurity implementation (use infrastructure-compliance-auditor for technical security)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [quality-manager-qmr](../quality-manager-qmr/) | QMR oversees QMS effectiveness; management review inputs include QMS process performance metrics |
+| [capa-officer](../capa-officer/) | CAPA system (Clause 8.5) is a core QMS process; CAPA effectiveness feeds into management review |
+| [qms-audit-expert](../qms-audit-expert/) | Internal audit program (Clause 8.2.4) evaluates QMS processes; audit findings drive CAPA and improvement |
+| [quality-documentation-manager](../quality-documentation-manager/) | Document and record control (Clause 4.2) provides the documentation foundation for the entire QMS |
+| [risk-management-specialist](../risk-management-specialist/) | ISO 14971 risk management integrates with design control (Clause 7.3) and product realization planning (Clause 7.1) |
+| [fda-consultant-specialist](../fda-consultant-specialist/) | QMSR alignment requires mapping FDA-specific requirements (MDR reporting, UDI, Part 11) beyond ISO 13485 |
+| [regulatory-affairs-head](../regulatory-affairs-head/) | Regulatory strategy informs QMS scope, market-specific requirements, and certification timelines |
+
+---
+
+## Tool Reference
+
+### qms_audit_checklist.py
+
+Generates ISO 13485:2016 audit checklists by clause, process, or full system audit.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--clause` | No | ISO 13485 clause number to generate a clause-specific checklist (e.g., `7.3`, `4.2.3`, `8.5.2`) |
+| `--process` | No | Process name for a process-based checklist (e.g., `design-control`, `purchasing`, `capa`) |
+| `--audit-type` | No | Audit type: `system` for a full-system checklist covering all clauses |
+| `--output` | No | Output format: `json` for structured output, omit for human-readable text |
+| `--interactive` | No | Launch interactive mode for guided clause/process selection |

@@ -590,3 +590,90 @@ Healthcare organizations manufacturing or deploying medical devices may be class
 - **Issuing Entities:** GS1, HIBCC, ICCBBA, IFA
 - **Carrier Types:** AIDC (barcode/2D) + HRI (human readable)
 - **Implant Card:** Required for Class III implantable devices (UDI + patient information)
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Device classification unclear -- rules yield different results | Multiple classification rules apply; highest class must be selected per MDR Article 51(7) | Apply all applicable rules from Annex VIII (Rules 1-22); use the implementing rule that gives the highest classification; for software, apply MDCG 2019-11 Rev.1 algorithm; document rationale for each rule considered |
+| Notified Body rejects technical file for incompleteness | GSPR compliance matrix gaps, missing clinical evaluation, or insufficient risk management documentation | Review GSPR checklist in this skill; ensure Annex II technical file structure is complete; verify CER meets Annex XIV requirements; confirm ISO 14971 risk management file is current and comprehensive |
+| EUDAMED registration delays blocking market access | Module not operational or manufacturer SRN not obtained | Check current EUDAMED module status; obtain SRN via actor registration module (operational); use national systems for vigilance reporting until Eudamed Vigilance module is fully functional |
+| Clinical evidence insufficient for Class IIb/III device | Equivalence route rejected by NB or clinical investigation not planned | Reassess equivalence per MDCG 2020-1 Rev.1 (technical, biological, clinical equivalence with access to data); if equivalence fails, plan clinical investigation per Article 61; consider MDCG 2024-6 for reduced evidence burden on well-established devices |
+| MDR transition deadline approaching with NB application pending | Limited NB capacity (approximately 40 designated EU-wide as of 2025) | Verify transition deadline for your device class (Class III: May 2026, Class IIb: Dec 2027, Class IIa: Dec 2028); ensure QMS application was submitted to NB by applicable deadline; maintain MDD/AIMDD compliance during transition |
+| UDI labeling rejected by NB or competent authority | UDI-DI/UDI-PI format incorrect, AIDC carrier unreadable, or missing elements | Verify all required UDI elements per Article 27; ensure AIDC format (GS1 DataMatrix preferred) is scannable; include HRI adjacent to barcode; for reusable devices, apply direct marking that survives reprocessing |
+| AI/ML medical device faces dual regulatory obligations | Device classified under both MDR and EU AI Act as high-risk | Assess both MDR Annex VIII classification and EU AI Act Annex III categorization; MDR conformity assessment may satisfy AI Act per Art. 120; extend technical documentation with AI-specific elements per MDCG 2024-8 |
+
+---
+
+## Success Criteria
+
+- **Device correctly classified with documented rationale** -- classification per Annex VIII with all applicable rules evaluated, highest class selected, and rationale documented for NB review
+- **Complete technical file per Annex II structure** -- device description, labeling/IFU, design and manufacturing info, GSPR compliance matrix, benefit-risk analysis, verification and validation, and clinical evaluation report all present and current
+- **GSPR compliance matrix fully addressed** -- all applicable General Safety and Performance Requirements mapped to evidence with cross-references to risk management file, biocompatibility reports, sterilization validation, software documentation, and labeling
+- **Clinical evaluation report meets Annex XIV requirements** -- literature search methodology documented, data appraised and analyzed, safety and performance conclusions stated, benefit-risk determined, and PMCF plan included
+- **PMS system operational** -- PMS plan per Article 84, complaint handling procedures, vigilance reporting process, PSUR schedule defined by class, and PMCF activities integrated with CER
+- **UDI system fully implemented** -- UDI-DI assigned per device variant, UDI-PI applied (lot/serial/dates), AIDC and HRI carriers on all packaging levels, EUDAMED registration complete (when applicable)
+- **MDR gap analysis shows zero critical gaps** -- as measured by `mdr_gap_analyzer.py`, with all requirements addressed or in-progress with documented timeline
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Device classification per MDR Annex VIII (Rules 1-22) including software classification per MDCG 2019-11 Rev.1
+- Technical documentation structure and requirements per Annex II and Annex III
+- GSPR compliance matrix with evidence mapping
+- Clinical evidence strategy including equivalence assessment, CER structure, and PMCF planning
+- Post-market surveillance system design including PMS plan, PSUR schedule, and vigilance reporting timelines
+- EUDAMED and UDI system implementation guidance
+- Conformity assessment route selection by device class
+- MDR transition timeline tracking (post-Amendment Regulation 2023/607)
+- AI/ML medical device considerations including EU AI Act interaction
+
+**Out of Scope:**
+- Clinical investigation protocol design, execution, or statistical analysis
+- Biocompatibility testing per ISO 10993 (beyond evidence mapping in GSPR)
+- Sterilization validation per ISO 11135/11137 (beyond evidence mapping)
+- Notified Body selection, engagement, or commercial negotiation
+- Quality Management System implementation -- use `quality-manager-qms-iso13485` for ISO 13485 QMS
+- Risk management process implementation -- use `risk-management-specialist` for ISO 14971
+
+**Important Notes:**
+- EUDAMED's first four modules became mandatory from May 28, 2026; manufacturers must have SRN and device registrations ready
+- Only approximately 40 Notified Bodies are designated EU-wide as of 2025, creating capacity constraints; early NB engagement is critical
+- The European Commission published updated transition timelines in December 2025 extending deadlines for certain device categories
+- Manufacturers must adopt recently harmonized standards with no formal transition period (Decision EU 2025/2078)
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `fda-consultant-specialist` | Cross-framework mapping for dual US/EU market; FDA QMSR aligns with ISO 13485 used by MDR | When device requires both FDA clearance/approval and EU MDR CE marking |
+| `quality-manager-qms-iso13485` | ISO 13485 QMS is prerequisite for MDR conformity assessment (Annex IX, XI) | When establishing or auditing QMS for MDR compliance |
+| `risk-management-specialist` | ISO 14971 risk management file is core component of MDR technical documentation | When developing risk management file, FMEA, and benefit-risk analysis |
+| `eu-ai-act-specialist` | AI medical devices subject to both MDR and EU AI Act; classification and conformity assessment interaction | When AI-enabled medical device requires dual regulatory compliance |
+| `capa-officer` | CAPA process supports MDR vigilance obligations and FSCA implementation | When post-market surveillance identifies safety or performance issues requiring corrective action |
+| `infrastructure-compliance-auditor` | Cybersecurity validation per MDCG 2019-16 Rev.1 for connected medical devices | When connected device requires cybersecurity documentation for technical file |
+
+---
+
+## Tool Reference
+
+### mdr_gap_analyzer.py
+
+Analyzes device against MDR requirements, identifies compliance gaps, and generates prioritized recommendations.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--device <name>` | Yes (unless `--interactive`) | Device name for gap analysis |
+| `--class <class>` | Yes (unless `--interactive`) | Device classification: `I`, `Is`, `Im`, `IIa`, `IIb`, `III` |
+| `--output <format>` | No | Output format: `json` for machine-readable output; default is human-readable text |
+| `--interactive` | No | Launch interactive assessment mode with guided questions |
+
+**Analysis Categories:** Technical documentation (Annex II), GSPR compliance, clinical evidence (Annex XIV), post-market surveillance (Chapter VII), UDI/EUDAMED, labeling (Article 13), quality management system, risk management, and conformity assessment route.
+
+**Output:** Requirements checklist with per-item status (Not Started/In Progress/Complete/N/A), gap identification with priority (Critical/High/Medium/Low), critical gap highlighting, completion percentage, and compliance roadmap recommendations.

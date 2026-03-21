@@ -226,3 +226,122 @@ python scripts/visual_regression.py --baseline main --compare feature/new-button
 - `references/component_patterns.md` - Component best practices
 - `references/governance.md` - Contribution guidelines
 - `references/figma_setup.md` - Figma library management
+
+---
+
+## Tool Reference
+
+### token_gen.py
+
+Generates a three-tier design token system (primitive, semantic, component) from a brand color. Supports CSS, SCSS, and JSON output. Includes WCAG contrast ratio checking.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--color`, `-c` | string | #0066CC | Brand color in hex |
+| `--format`, `-f` | choice | summary | Output format: `json`, `css`, `scss`, `summary` |
+| `--tiers`, `-t` | choice | all | Token tiers: `all`, `primitive`, `semantic`, `component` |
+| `--output`, `-o` | string | (stdout) | Output directory for generated files |
+| `--json` | flag | False | Shortcut for `--format json` |
+
+```bash
+python scripts/token_gen.py --color "#0066CC"
+python scripts/token_gen.py --color "#0066CC" --format css --output dist/
+python scripts/token_gen.py --color "#8B4513" --tiers primitive --json
+```
+
+### component_scaffold.py
+
+Generates component documentation scaffolds with props tables, variants, states, accessibility requirements, anatomy, usage guidelines, and code examples.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--name`, `-n` | string | (required) | Component name in PascalCase |
+| `--category`, `-c` | choice | (required) | Category: `primitive`, `composite`, `pattern` |
+| `--variants`, `-v` | string | (category default) | Comma-separated variant names |
+| `--sizes`, `-s` | string | sm,md,lg | Comma-separated size names |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/component_scaffold.py --name Button --category primitive
+python scripts/component_scaffold.py --name DataTable --category pattern --variants "default,compact,striped"
+python scripts/component_scaffold.py --name Modal --category composite --json
+```
+
+### adoption_analyzer.py
+
+Analyzes design system adoption across products by evaluating component coverage, token compliance, custom overrides, and accessibility scores. Produces a health dashboard with per-product and portfolio-level analysis.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input` | positional | (required) | CSV file with adoption data or "sample" |
+| `--threshold`, `-t` | int | 75 | Health score threshold for flagging |
+| `--json` | flag | False | Output as JSON |
+
+**CSV columns:** `product, total_components, ds_components, total_tokens, ds_tokens, custom_overrides, a11y_score, last_audit`
+
+```bash
+python scripts/adoption_analyzer.py sample
+python scripts/adoption_analyzer.py adoption_data.csv
+python scripts/adoption_analyzer.py adoption_data.csv --threshold 80 --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Token overrides in production | Teams bypassing design system | Run adoption_analyzer monthly; add lint rules for hardcoded values |
+| Inconsistent component behavior across products | Version drift | Enforce SemVer; automate DS dependency updates in CI |
+| Low adoption in older products | Migration cost perceived as too high | Prioritize high-traffic pages; create migration guides per product |
+| Token naming conflicts | No naming convention enforced | Adopt CTI (Category-Type-Item) naming; document in governance |
+| Component API breaking changes | Insufficient versioning discipline | Use codemods for migration; deprecation period of 2 minor versions |
+| Designers and developers out of sync | Figma/code token drift | Use Tokens Studio plugin; sync on every release |
+| Contribution bottleneck | RFC review queue backed up | Set SLA for reviews (48h); rotate reviewers weekly |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Component coverage | >80% across all products | adoption_analyzer component coverage metric |
+| Token compliance | >90% (no hardcoded values) | adoption_analyzer token compliance metric |
+| Custom overrides | Trending downward quarter-over-quarter | Track total overrides in adoption report |
+| Time to build new feature | 30%+ reduction vs pre-DS baseline | Compare sprint velocity before/after DS adoption |
+| Accessibility score | >85% across all products | adoption_analyzer a11y score |
+| Contribution rate | 2+ external contributions per quarter | Track merged RFCs from non-core-team members |
+| Design-dev handoff time | <1 day for standard components | Measure time from design approval to code PR |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- Three-tier token architecture design and generation
+- Component library structure and documentation scaffolding
+- Adoption tracking and health reporting
+- Cross-platform token export (CSS, SCSS, JSON)
+- Governance process definition
+- WCAG contrast ratio validation
+
+**Out of scope:**
+- Visual regression testing execution (use Chromatic, Percy, or BackstopJS)
+- Figma plugin development (use Tokens Studio for token sync)
+- Runtime theme switching implementation (framework-specific)
+- Icon library creation and SVG optimization
+- Motion design and animation library
+- Component implementation code (scaffold generates docs, not runtime code)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Figma / Tokens Studio | Import token_gen JSON output | Sync design tokens between design and code |
+| Style Dictionary | Use token_gen JSON as source | Build multi-platform tokens (iOS, Android, web) |
+| Storybook | component_scaffold output as stories template | Auto-generate component documentation |
+| Chromatic / Percy | Pair with component_scaffold test checklist | Visual regression testing pipeline |
+| CI/CD | adoption_analyzer `--json` in pipeline | Automated adoption health checks on PRs |
+| Tailwind / CSS-in-JS | token_gen CSS/JSON export | Theme configuration from design tokens |

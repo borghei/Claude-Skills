@@ -410,3 +410,95 @@ Focus optimization on the step with the largest absolute drop.
 - **paywall-upgrade-cro** -- Use when onboarding leads into upgrade moments. Do not show paywalls before the aha moment is reached.
 - **churn-prevention** -- Use when users activate but then churn. If they never activate, the problem is onboarding, not churn.
 - **page-cro** -- Use when the marketing page before signup is the bottleneck, not the post-signup experience.
+
+---
+
+## Tool Reference
+
+### 1. activation_funnel_analyzer.py
+
+**Purpose:** Analyze an onboarding activation funnel to identify the biggest drop-off points and estimate the impact of fixing each step.
+
+```bash
+python scripts/activation_funnel_analyzer.py funnel_data.json
+python scripts/activation_funnel_analyzer.py funnel_data.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `funnel_data.json` | Yes | JSON file with funnel step names and user counts |
+| `--json` | No | Output results as JSON |
+
+### 2. onboarding_checklist_scorer.py
+
+**Purpose:** Score an onboarding checklist design against best practices (item count, ordering, quick wins, progress indication).
+
+```bash
+python scripts/onboarding_checklist_scorer.py checklist.json
+python scripts/onboarding_checklist_scorer.py checklist.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `checklist.json` | Yes | JSON file with checklist items and their properties |
+| `--json` | No | Output results as JSON |
+
+### 3. ttv_estimator.py
+
+**Purpose:** Estimate time-to-value (TTV) based on onboarding steps and identify bottlenecks that can be reduced or eliminated.
+
+```bash
+python scripts/ttv_estimator.py onboarding_steps.json
+python scripts/ttv_estimator.py onboarding_steps.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `onboarding_steps.json` | Yes | JSON file with onboarding steps, estimated minutes, and requirements |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Activation rate below 25% (B2B) or 40% (B2C) | Aha moment not reached fast enough | Run ttv_estimator.py to identify TTV bottlenecks; target first value within 5 minutes |
+| Users complete onboarding but do not return Day 7 | Onboarding leads to setup, not to value | Restructure flow so the first session delivers a meaningful output, not just configuration |
+| Onboarding checklist completion below 50% | Too many items or first item is too complex | Reduce to 3-7 items; start with a quick win completable in under 60 seconds; use onboarding_checklist_scorer.py to audit |
+| Stalled users at 40%+ of signups | Blank slate problem or unclear next step | Add pre-populated sample data and empty state CTAs; implement stalled user recovery emails at 24h and 72h |
+| Day-1 retention below 30% | First-run experience has dead ends or confusion | Apply the 30-second rule: within 30 seconds, user sees a single next action, understands the value, and has a path forward |
+| Email onboarding sequences have low open rates | Generic subject lines or wrong timing | Personalize subject lines to reference the specific next step; send at trigger-based timing, not fixed schedules |
+| Team invite rate is low | Invite step placed before value is demonstrated | Defer team invite until after the user has experienced core value individually |
+
+---
+
+## Success Criteria
+
+- Activation rate of 30-40% within 14 days for B2B (40-60% for B2C)
+- Time-to-first-value under 5 minutes (verified by ttv_estimator.py)
+- Onboarding completion rate above 60%
+- Day-1 retention above 40%
+- Day-7 retention above 25%
+- Stalled user recovery emails achieve 10%+ reactivation rate
+- Onboarding checklist scores 70+ on onboarding_checklist_scorer.py assessment
+
+---
+
+## Scope & Limitations
+
+- **In scope:** Activation definition, onboarding flow design, time-to-value engineering, empty state design, checklist design, tooltip/tour design, email coordination, stalled user recovery, experiment design
+- **Out of scope:** Signup/registration flow (use signup-flow-cro), marketing page optimization (use page-cro), long-term retention strategy, feature development
+- **Data dependency:** Best results require funnel analytics (per-step drop-off data); without this, optimization is based on heuristics
+- **Product type matters:** B2B SaaS, marketplace, mobile app, and content platforms have fundamentally different onboarding patterns; use the correct pattern for your product type
+- **No silver bullet:** If the product does not deliver value, no amount of onboarding optimization will fix retention; validate product-market fit first
+
+---
+
+## Integration Points
+
+- **signup-flow-cro** -- Optimizes the registration flow before onboarding begins; hand-off point is the moment after successful account creation
+- **churn-prevention** -- When users activate but then churn, the problem shifts from onboarding to retention; use churn-prevention for post-activation churn
+- **paywall-upgrade-cro** -- Upgrade prompts should only appear after the aha moment is reached; never show paywalls during initial onboarding
+- **page-cro** -- When the bottleneck is the marketing page (users are not signing up), optimize the page before optimizing onboarding
+- **customer-success-manager** -- For enterprise accounts, human-assisted onboarding complements product-led flows; CS team should monitor activation metrics

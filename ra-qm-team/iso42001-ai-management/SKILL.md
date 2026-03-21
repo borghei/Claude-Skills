@@ -483,3 +483,101 @@ Sector-specific considerations:
 - Address nonconformities
 - Prepare for Stage 1 certification audit
 - Compile evidence packages per clause
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Readiness score low on Clause 5 (Leadership) despite executive sponsorship | AI policy does not include ethical principles, responsible AI commitment, or framework for setting AI objectives | Update AI policy to explicitly address all required elements: ethical principles, responsible AI, legal alignment, continual improvement commitment, and AI objectives framework; obtain formal management sign-off |
+| AI impact assessment returns High/Critical risk across all dimensions | AI system processes sensitive personal data, makes autonomous decisions, and affects large populations without safeguards | Implement targeted mitigations per dimension: human-in-the-loop for safety, bias testing for fairness, explainability mechanisms for transparency, data protection for privacy; re-run assessment after mitigation |
+| Annex A controls scored as "Not Implemented" despite operational practices | Practices exist informally but are not documented per ISO 42001 requirements | Document all existing AI practices as formal procedures; create evidence artifacts (policy documents, meeting minutes, risk registers, training records); map to specific Annex A control objectives |
+| Certification body auditor questions AI risk assessment methodology | Risk assessment does not cover all seven required risk categories (fairness, transparency, safety, privacy, security, accountability, societal) | Update risk assessment methodology to explicitly address all ISO 42001 risk categories; use `ai_impact_assessor.py` template to ensure comprehensive coverage; document risk criteria and tolerance levels |
+| Third-party AI components lack governance controls | Organization uses third-party AI models or APIs without formal evaluation or supplier management | Implement Annex A.10 (Third-Party Relationships) controls; evaluate all third-party AI components; establish contractual requirements for AI service providers; monitor supplier AI practices |
+| Data management procedures incomplete for AI lifecycle | Data quality, provenance, and bias assessment not systematically performed for training and evaluation data | Implement Annex A.7 (Data for AI Systems) controls; establish data quality assessment procedures; document data provenance and lineage; conduct bias assessments per dataset; define retention and disposal procedures |
+| Stage 1 audit finds AIMS documentation insufficient | Documentation follows generic QMS structure without AI-specific elements | Restructure documentation to address all ISO 42001 clauses (4-10) and Annex A controls (A.2-A.10); include AI-specific policies, risk assessments, impact assessments, and lifecycle procedures |
+
+---
+
+## Success Criteria
+
+- **Overall readiness score of 80+ for certification readiness** -- as measured by `aims_readiness_checker.py`, with all clauses at Defined maturity level or above
+- **AI policy established and communicated** -- including ethical principles, responsible AI commitment, legal compliance alignment, continual improvement, and framework for AI objectives, with formal management approval
+- **AI impact assessments completed for all in-scope AI systems** -- covering all six dimensions (fairness, transparency, safety, privacy, security, accountability) with risk treatments documented and residual risk accepted by management
+- **AI risk assessment methodology covers all required categories** -- fairness, transparency, safety, privacy, security, accountability, and societal/environmental impacts, with defined risk criteria and tolerance levels
+- **Annex A controls implemented with evidence** -- A.2 (Policies) through A.10 (Third-Party) with documented procedures, records, and evidence artifacts suitable for certification audit
+- **Internal audit conducted against all AIMS clauses** -- with findings documented, corrective actions tracked to closure, and management review completed with documented improvement decisions
+- **AI lifecycle procedures operational** -- covering design, development, testing, deployment, monitoring, and retirement stages with documented controls at each gate
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- ISO 42001:2023 readiness assessment across all clauses (4-10) and Annex A controls (A.2-A.10)
+- AI impact assessment across six dimensions (fairness, transparency, safety, privacy, security, accountability)
+- AIMS certification preparation including gap analysis, implementation roadmap, and audit readiness
+- AI lifecycle management guidance (design through retirement)
+- Data management for AI systems (quality, provenance, bias, governance)
+- Third-party AI supplier management and evaluation
+- Regulatory mapping to EU AI Act requirements
+- Integration guidance with ISO 27001, ISO 9001, and ISO 14001
+
+**Out of Scope:**
+- Actual AI model development, training, testing, or deployment -- this skill provides governance frameworks, not ML engineering
+- Certification body selection, audit scheduling, or certification fee negotiation
+- Ethical review board establishment or ethical decision-making beyond procedural guidance
+- Specific AI fairness algorithm implementation (e.g., adversarial debiasing, calibrated equalized odds) -- use `eu-ai-act-specialist` bias detector for technical testing
+- Environmental impact measurement or carbon footprint calculation for AI training
+
+**Important Notes:**
+- ISO 42001 certification follows a 3-year cycle with annual surveillance audits at 12-month intervals
+- Major certification bodies (BSI, DNV, TUV, LRQA) have operationalized ISO 42001 audit services as of 2025-2026
+- Many organizations pursue dual alignment: ISO 42001 certification for governance controls plus EU AI Code of Practice for regulatory expectations
+- The standard's Annex SL structure enables direct integration with ISO 27001, reducing redundant documentation and audit effort
+
+---
+
+## Integration Points
+
+| Skill | Integration | When to Use |
+|-------|-------------|-------------|
+| `eu-ai-act-specialist` | ISO 42001 AIMS maps directly to EU AI Act requirements; certification demonstrates Art. 17 QMS compliance | When building AI governance satisfying both ISO 42001 and EU AI Act obligations |
+| `information-security-manager-iso27001` | ISO 27001 security controls integrate with AIMS via shared Annex SL structure; risk assessment methodologies align | When implementing joint ISMS + AIMS covering both information security and AI governance |
+| `gdpr-dsgvo-expert` | AIMS data management (Annex A.7) aligns with GDPR data protection requirements; AI processing requires DPIA | When AI systems process personal data and require both AIMS and GDPR compliance |
+| `isms-audit-expert` | Internal audit methodology and finding management shared between ISO 27001 and ISO 42001 | When conducting internal audits covering both ISMS and AIMS |
+
+---
+
+## Tool Reference
+
+### aims_readiness_checker.py
+
+Assesses organizational readiness against all ISO 42001:2023 clauses and Annex A controls.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes (unless `--template`) | Path to JSON organizational profile for assessment |
+| `--template` | No | Generate blank input template to stdout |
+| `--json` | No | Output results in JSON format for automation |
+| `--output <file>` | No | Export report to specified file path |
+
+**Assessment Scope:** Clause 4 (Context), Clause 5 (Leadership), Clause 6 (Planning), Clause 7 (Support), Clause 8 (Operation), Clause 9 (Performance), Clause 10 (Improvement), and Annex A controls (A.2-A.10).
+
+**Output:** Overall readiness score (0-100), per-clause scores with maturity level (Initial/Developing/Defined/Managed/Optimized), Annex A control implementation status, gap analysis with prioritized recommendations, and certification readiness assessment (Ready/Near Ready/Significant Gaps).
+
+### ai_impact_assessor.py
+
+Generates comprehensive AI impact assessments across six risk dimensions with regulatory mapping.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input <file>` | Yes (unless `--template`) | Path to JSON AI system description for assessment |
+| `--template` | No | Generate blank AI system template to stdout |
+| `--format <fmt>` | No | Output format: `json` (default) or `markdown` |
+| `--output <file>` | No | Export assessment report to specified file path |
+
+**Assessment Dimensions:** Fairness (bias, discrimination, equity), Transparency (explainability, interpretability), Safety (reliability, robustness, harm prevention), Privacy (data protection, consent, minimization), Security (adversarial resilience, access control), Accountability (governance, responsibility, auditability).
+
+**Output:** Per-dimension risk scoring (Low/Medium/High/Critical), interested party impact mapping, risk treatment options (Avoid/Mitigate/Transfer/Accept), regulatory mapping (EU AI Act risk tier, ISO 42001 Annex A controls), residual risk calculation, and markdown or JSON report.

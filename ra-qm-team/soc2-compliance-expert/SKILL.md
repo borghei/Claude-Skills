@@ -266,3 +266,106 @@ python scripts/soc2_infrastructure_auditor.py --config infra-config.json --forma
 | [Trust Services Criteria Guide](references/trust-services-criteria-guide.md) | Complete TSC reference with control objectives and audit questions |
 | [Infrastructure Security Controls](references/infrastructure-security-controls.md) | Cloud, DNS, TLS, endpoint, container, CI/CD security configurations |
 | [Audit Preparation Playbook](references/audit-preparation-playbook.md) | End-to-end audit prep guide with timelines, checklists, cost estimation |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Readiness checker scores are 0% across all categories | Controls JSON missing `config_key` values or all set to false | Verify the input JSON maps each TSC control to a boolean value under the correct `config_key`. Run `--generate-sample > sample-config.json` to see the expected structure. |
+| Infrastructure auditor reports all checks as "fail" | Infrastructure config JSON is empty or uses wrong key names | Run `--generate-template` to produce a valid template. Populate DNS, TLS, cloud, endpoint, and other sections with actual infrastructure state. |
+| Evidence collector checklist missing categories | `--categories` flag filtering output | Use `--categories all` to generate the complete checklist. Available categories: `security`, `availability`, `processing_integrity`, `confidentiality`, `privacy`. |
+| Evidence tracker status not updating | Tracker file path incorrect or file not writable | Verify the path passed to `--status` or `--update` points to an existing tracker JSON file. Check file permissions. |
+| Cloud mapping not appearing in readiness report | `--cloud-mapping` flag not included | Add `--cloud-mapping` to the readiness checker command to include AWS/Azure/GCP control mappings in the output. |
+| Type II observation period too short for auditor | Observation period is less than 3 months | Most CPA firms require a minimum 3-month observation period for Type II. A 6-12 month period carries more weight. Plan the observation window during the scoping phase. |
+| Auditor requests evidence not in the tracker | Evidence catalog does not cover all TSC subcriteria for the selected scope | Supplement the auto-generated checklist with auditor-specific evidence requests. Each CPA firm may have additional requirements beyond the standard TSC evidence items. |
+
+---
+
+## Success Criteria
+
+- SOC 2 scope defined with all applicable TSC categories selected, system boundaries documented, and subservice organizations identified (carve-out vs inclusive)
+- Gap analysis completed with every identified gap assigned a severity rating, remediation owner, and target completion date
+- Readiness score of 80%+ across all in-scope TSC categories before engaging the CPA firm, trending to 95%+ before Type II fieldwork
+- Evidence collection framework operational with centralized repository, defined refresh cadence per TSC category, and automated collection where possible
+- Infrastructure audit passes with no critical or high-severity findings in DNS, TLS, cloud, endpoint, or access control domains
+- Type II observation period of at least 6 months with continuous control operation, quarterly self-assessments, and no significant control failures
+- Clean SOC 2 Type II opinion received with any findings addressed by management response and documented remediation plans
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- SOC 2 Type I and Type II readiness assessment against all TSC categories (CC1-CC9, A1, PI1, C1, P1)
+- Infrastructure security validation (DNS, TLS, cloud, endpoint, network, container, CI/CD, secrets)
+- Evidence collection framework generation and tracking
+- Gap analysis with severity-rated findings and remediation guidance
+- Audit timeline planning and CPA firm engagement preparation
+- Incident response plan structure and requirements
+- Continuous compliance program design
+
+**Out of Scope:**
+- CPA firm audit execution (the tools prepare for audit; the actual Type I/II report requires an independent CPA firm)
+- SOC 1 (ICFR) assessment (SOC 1 covers financial reporting controls, not security/availability/privacy)
+- SOC 3 report generation (SOC 3 is a public-facing summary derived from SOC 2; it requires a completed SOC 2 audit)
+- Penetration testing execution (use infrastructure-compliance-auditor or engage a third-party pentest firm)
+- GRC platform selection or implementation (the skill is compatible with Vanta, Drata, Secureframe, etc., but does not implement them)
+- Legal advice on customer contractual requirements for SOC 2 reports
+- Physical security assessments (the infrastructure auditor covers logical controls; physical data center audits require on-site assessment)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [infrastructure-compliance-auditor](../infrastructure-compliance-auditor/) | Provides Vanta-level infrastructure checks across cloud, DNS, TLS, endpoints, access controls, and CI/CD that map directly to SOC 2 TSC requirements |
+| [nist-csf-specialist](../nist-csf-specialist/) | NIST CSF functions map to SOC 2 TSC categories; use the control mapper to build unified control matrices for organizations pursuing both |
+| [information-security-manager-iso27001](../information-security-manager-iso27001/) | ISO 27001 Annex A controls provide a management system backbone that satisfies many SOC 2 requirements; shared evidence reduces audit burden |
+| [pci-dss-specialist](../pci-dss-specialist/) | PCI DSS requirements overlap with SOC 2 CC6 (access), CC7 (operations), CC8 (change management); shared controls for payment-processing organizations |
+| [gdpr-dsgvo-expert](../gdpr-dsgvo-expert/) | GDPR requirements align with SOC 2 Privacy (P1) criteria; organizations processing EU personal data can leverage shared privacy controls |
+| [nis2-directive-specialist](../nis2-directive-specialist/) | NIS2 minimum security measures overlap with SOC 2 security criteria; EU entities can map shared incident response, access control, and encryption controls |
+
+---
+
+## Tool Reference
+
+### soc2_readiness_checker.py
+
+Evaluates organizational controls against SOC 2 Trust Services Criteria with per-category scoring.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config` | Yes (or `--generate-sample`) | Path to organization controls JSON file with boolean values for each TSC control |
+| `--format` | No | Output format: `json` for structured output, omit for human-readable text |
+| `--categories` | No | Space-separated TSC categories to assess (e.g., `security availability`). Omit for all. |
+| `--cloud-mapping` | No | Include cloud provider (AWS/Azure/GCP) control mappings in the output |
+| `--generate-sample` | No | Generate a sample controls JSON template (pipe to file with `> sample-config.json`) |
+
+### evidence_collector.py
+
+Generates evidence collection checklists and tracks evidence gathering status.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--generate-checklist` | No | Generate an evidence collection checklist for the specified categories |
+| `--categories` | No | Space-separated TSC categories: `security`, `availability`, `processing_integrity`, `confidentiality`, `privacy`, or `all` |
+| `--status` | No | Path to evidence tracker JSON file to display collection status |
+| `--update` | No | Path to evidence tracker JSON file to update (use with `--item` and `--status`) |
+| `--item` | No | Evidence item identifier to update (e.g., `CC6.1-MFA`) |
+| `--dashboard` | No | Path to evidence tracker JSON file to generate a readiness dashboard |
+| `--export` | No | Path to evidence tracker JSON file to export |
+| `--format` | No | Export format: `json` for structured output |
+
+### soc2_infrastructure_auditor.py
+
+Audits infrastructure configurations against SOC 2 requirements with severity-rated findings.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--config` | Yes (or `--generate-template`) | Path to infrastructure configuration JSON file with DNS, TLS, cloud, endpoint, and other domain settings |
+| `--format` | No | Output format: `json` for structured findings with severity ratings, omit for human-readable text |
+| `--domains` | No | Space-separated infrastructure domains to audit (e.g., `dns tls cloud`). Omit for all domains. |
+| `--generate-template` | No | Generate a sample infrastructure configuration template (pipe to file with `> infra-config.json`) |

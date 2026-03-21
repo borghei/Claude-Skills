@@ -838,3 +838,85 @@ When managing risk for AI/ML medical devices, extend ISO 14971 with:
 | Monitoring | Clause 9 | DE.CM | Art. 10 | Art. 21.2.f |
 | Incident Response | Clause 9 | RS.MA | Art. 17 | Art. 23 |
 | Continuous Improvement | Clause 10 | ID.IM | Art. 13 | Art. 21.2.f |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Risk matrix calculator returns "Invalid probability" | Probability value outside 1-5 range | Use integers 1-5 for probability (`--probability`) and 1-5 for severity (`--severity`). Run `--list-criteria` to display the full scale definitions. |
+| FMEA RPN calculation produces unexpected results | Severity, occurrence, or detection values outside 1-10 range | FMEA mode (`--fmea`) requires `--severity`, `--occurrence`, and `--detection` values each in the 1-10 range. Values outside this range produce unreliable RPNs. |
+| Risk level shows "Medium" but stakeholders expect "High" | Risk acceptability criteria differ from the tool's default 5x5 matrix | The default matrix follows common ISO 14971 practice. If your organization uses a custom risk matrix, adjust the risk acceptability criteria in your Risk Management Plan and document deviations. |
+| Post-production risk data not triggering file updates | Review triggers not defined or too narrow | Define explicit triggers: any serious incident (immediate), new hazard identification (30 days), trend increase (60 days), design change (before implementation), and standards update (per transition period). |
+| AI-specific hazards not captured in FMEA | Standard FMEA template lacks AI failure modes | Extend the FMEA with AI-specific failure modes: model bias, data drift, concept drift, adversarial inputs, automation complacency. Use the AI Risk Analysis Methodology section as a guide. |
+| Cybersecurity threats not integrated into risk assessment | Threat modeling methodology not aligned to ISO 14971 | Use STRIDE methodology for threat identification, then map each threat to an ISO 14971 harm pathway. Reference IEC 81001-5-1 for health software cybersecurity integration. |
+| Benefit-risk analysis requested but no template available | The tool calculates risk levels but does not generate benefit-risk documents | The benefit-risk analysis is a narrative document per ISO 14971 Clause 8. Use the risk matrix outputs as quantitative inputs, then document clinical benefits vs. residual risks in the Risk Management Report. |
+
+---
+
+## Success Criteria
+
+- Risk Management Plan approved with defined scope, risk acceptability matrix, RACI chart, and post-production monitoring plan before design input phase
+- 100% of ISO 14971 hazard categories analyzed (electrical, mechanical, thermal, radiation, biological, chemical, software, use error, environmental) with documented rationale for each
+- All identified risks evaluated against the 5x5 acceptability matrix with no uncontrolled "Unacceptable" residual risks remaining
+- Risk controls implemented following the priority hierarchy (inherent safety first, then protective measures, then information for safety) with verification records for every control
+- Overall residual risk evaluated as acceptable or ALARP demonstrated, with benefit-risk analysis completed for any residual risks remaining in High territory
+- Post-production risk monitoring operational with defined information sources, review triggers, and a documented process for updating the Risk Management File
+- For AI/ML devices: AI-specific risk categories (bias, drift, adversarial inputs) assessed per BS/AAMI 34971:2023 or equivalent, with continuous performance monitoring thresholds defined
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- ISO 14971:2019 risk management process implementation (planning, analysis, evaluation, control, residual risk, production/post-production)
+- 5x5 risk matrix calculation and FMEA RPN scoring
+- Hazard analysis methodology guidance (FMEA, FTA, HAZOP, Use Error Analysis, PHA)
+- Risk control hierarchy application and verification planning
+- Benefit-risk analysis framework
+- Post-production risk monitoring and risk file update triggers
+- AI/ML-specific risk management extensions (model bias, drift, adversarial inputs)
+- Cybersecurity risk integration per IEC 81001-5-1
+- Supply chain risk assessment methodology
+- Cross-framework risk mapping (ISO 14971, NIST CSF, DORA, NIS2)
+
+**Out of Scope:**
+- Clinical investigation design or execution (risk management informs clinical strategy but does not execute studies)
+- Software hazard analysis per IEC 62304 (the skill references software risk but detailed software lifecycle management requires IEC 62304 expertise)
+- Biocompatibility testing or ISO 10993 evaluation (the skill identifies biological hazards but does not execute biocompatibility testing)
+- Cybersecurity penetration testing or vulnerability scanning (use infrastructure-compliance-auditor for technical security testing)
+- CAPA root cause analysis execution (use capa-officer for 5-Why, Fishbone, FTA, FMEA-based root cause investigation)
+- Regulatory submission of risk management files (use regulatory-affairs-head for submission strategy and packaging)
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|------------|
+| [quality-manager-qms-iso13485](../quality-manager-qms-iso13485/) | Risk management (Clause 7.1) integrates with QMS product realization planning; risk file is part of the Design History File |
+| [capa-officer](../capa-officer/) | Post-market risk signals may trigger CAPA; CAPA root cause analysis methods (FMEA, FTA) overlap with risk analysis techniques |
+| [regulatory-affairs-head](../regulatory-affairs-head/) | Risk management file is required for FDA submissions and EU MDR Technical Documentation; benefit-risk analysis supports clinical evaluation |
+| [quality-documentation-manager](../quality-documentation-manager/) | Risk management file and records must be controlled per document control procedures (Clause 4.2) |
+| [fda-consultant-specialist](../fda-consultant-specialist/) | FDA cybersecurity guidance (2025 update) requires integration of security risks into ISO 14971 processes for premarket submissions |
+| [infrastructure-compliance-auditor](../infrastructure-compliance-auditor/) | Technical security controls validated by the infrastructure auditor serve as risk mitigations for cybersecurity threats in the risk assessment |
+| [nist-csf-specialist](../nist-csf-specialist/) | NIST CSF risk assessment (ID.RA) maps to ISO 14971 hazard identification and risk estimation; unified risk register possible |
+
+---
+
+## Tool Reference
+
+### risk_matrix_calculator.py
+
+Calculates ISO 14971 risk levels and FMEA Risk Priority Numbers.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--probability` | Yes (for ISO 14971 mode) | Probability level (1-5): 1=Improbable, 2=Remote, 3=Occasional, 4=Probable, 5=Frequent |
+| `--severity` | Yes (for both modes) | Severity level: 1-5 for ISO 14971 mode, 1-10 for FMEA mode |
+| `--fmea` | No | Switch to FMEA RPN calculation mode (requires `--severity`, `--occurrence`, `--detection`) |
+| `--occurrence` | Yes (for FMEA mode) | Occurrence rating (1-10) for FMEA RPN calculation |
+| `--detection` | Yes (for FMEA mode) | Detection rating (1-10) for FMEA RPN calculation |
+| `--interactive` | No | Launch interactive mode for guided risk assessment |
+| `--list-criteria` | No | Display probability, severity, and risk level criteria definitions |

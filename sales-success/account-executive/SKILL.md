@@ -183,6 +183,73 @@ python scripts/win_loss.py --deals closed_deals.csv
 python scripts/account_plan.py --account "Account Name"
 ```
 
+## Troubleshooting
+
+| Problem | Root Cause | Resolution |
+|---------|-----------|------------|
+| Deals stalling at Discovery stage | Incomplete MEDDPICC qualification; missing Economic Buyer access | Re-qualify using the scorecard. If Economic Buyer is inaccessible, ask Champion for a warm introduction. Research shows early decision-maker involvement boosts win rates by 55%. |
+| Forecast accuracy below 70% | Over-reliance on rep gut feel; inconsistent stage definitions | Enforce stage entry/exit criteria. Require documented next steps with dates. Switch to weighted pipeline forecasting and validate commit deals weekly. |
+| Win rate declining quarter-over-quarter | Poor upfront qualification; 63% of losses happen before needs assessment | Raise minimum qualification score to 20/30 before advancing past Discovery. Implement mandatory MEDDPICC field updates at every stage gate. |
+| Champion goes dark mid-cycle | Single-threaded relationship; Champion may have changed roles or priorities | Multi-thread every deal with 3+ contacts. Reach out to other mapped stakeholders within 48 hours. Refresh the relationship map monthly. |
+| Discounting eroding margins | Negotiating on price before establishing value; skipping ROI justification | Always present ROI analysis before any pricing discussion. Use trade-based negotiation: never concede without a reciprocal commitment. |
+| Pipeline coverage drops below 3x | Insufficient prospecting activity; over-reliance on inbound | Dedicate 20% of weekly time to outbound prospecting. Set minimum weekly meeting targets. Review pipeline coverage every Monday. |
+| Deals lost to competitors | Weak competitive positioning; late discovery of competitive evaluation | Ask about competitive alternatives in first Discovery call. Prepare battle cards and landmine questions. Engage sales engineering early for technical differentiation. |
+
+## Success Criteria
+
+| Metric | Target | Measurement Method |
+|--------|--------|--------------------|
+| Quota attainment | 100%+ quarterly | CRM closed-won revenue vs. assigned quota |
+| Win rate | 25%+ overall; 35%+ for qualified pipeline | Won / (Won + Lost) excluding disqualified |
+| Average deal size | Trending upward QoQ | Mean ACV of closed-won deals |
+| Sales cycle length | Under 60 days for mid-market; under 90 for enterprise | Average days from Discovery to Closed Won |
+| Pipeline coverage | 3-4x quota at all times | Total weighted pipeline / remaining quota |
+| Forecast accuracy | Within 10% of actual | Abs(Forecast - Actual) / Actual per quarter |
+| MEDDPICC completion | 100% for deals past Discovery | Percentage of qualified deals with all 6+ fields populated |
+| Activity-to-close ratio | Improving QoQ | Meetings booked / Deals closed |
+
+## Scope & Limitations
+
+**In Scope:**
+- Full-cycle deal management from qualification through close and CS handoff
+- MEDDPICC and BANT qualification frameworks for B2B enterprise and mid-market
+- Pipeline management, forecasting, and weekly hygiene
+- Negotiation strategy, objection handling, and proposal construction
+- Account planning for strategic and named accounts
+- Multi-stakeholder selling with 3-10 decision participants
+
+**Out of Scope:**
+- Lead generation and top-of-funnel prospecting strategy (see marketing-skill/demand-acquisition)
+- Post-sale customer success execution (see customer-success-manager)
+- CRM administration, territory design, and comp plan architecture (see sales-operations)
+- Technical demo delivery and POC management (see sales-engineer)
+- Complex enterprise integration architecture (see solutions-architect)
+- Legal contract review and procurement negotiation beyond commercial terms
+
+**Limitations:**
+- Qualification frameworks assume B2B SaaS or technology selling motions; adapt scoring weights for hardware, services, or transactional sales
+- Pipeline velocity benchmarks are calibrated to mid-market ($50K-$500K ACV); adjust thresholds for SMB or enterprise segments
+- Discount guidelines require alignment with your organization's specific approval matrix
+- Scripts process local CSV/JSON data only; no CRM API integration
+
+## Integration Points
+
+| Integration | Direction | Purpose | Handoff Artifact |
+|-------------|-----------|---------|-----------------|
+| **Sales Engineer** | AE -> SE | Technical validation, demo delivery, POC support | Discovery notes, stakeholder map, demo requirements |
+| **Sales Operations** | Bidirectional | Pipeline data, territory assignments, forecast rollups, quota tracking | CRM opportunity records, forecast submissions |
+| **Customer Success Manager** | AE -> CSM | Post-close handoff with account context | Success criteria doc, stakeholder map, implementation expectations, signed contract |
+| **Marketing (Demand Gen)** | Marketing -> AE | MQL-to-SQL conversion, lead routing, campaign attribution | Qualified lead with engagement history and ICP score |
+| **Solutions Architect** | AE -> SA | Complex enterprise deals requiring architecture design | Technical requirements, integration constraints, compliance needs |
+| **Product Team** | AE -> Product | Feature requests, competitive intel, market feedback | Win/loss reports, feature gap analysis, competitive battle cards |
+| **Finance** | Bidirectional | Deal desk approval, revenue recognition, payment terms | Signed MSA, order form, discount justification |
+
+**Workflow Handoff Protocol:**
+1. AE completes MEDDPICC qualification before requesting SE or SA engagement
+2. AE submits forecast to Sales Ops weekly by end-of-day Friday
+3. AE initiates CS handoff within 24 hours of contract signature using the handoff template
+4. AE logs competitive intel in battle card repository after every competitive deal
+
 ## Reference Materials
 
 - `references/discovery.md` -- Discovery framework

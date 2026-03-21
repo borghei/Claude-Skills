@@ -389,3 +389,95 @@ Story is complete when:
 - [ ] Deployed to staging environment
 - [ ] Product Owner accepted
 - [ ] No critical bugs remaining
+
+---
+
+## Tool Reference
+
+### user_story_generator.py
+
+Generates INVEST-compliant user stories from a sample epic, including acceptance criteria, story point estimates, priority assignments, and sprint planning.
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `sprint` | subcommand | - | Run in sprint planning mode |
+| `[capacity]` | int | 30 | Sprint capacity in story points (used with `sprint`) |
+
+```bash
+# Generate stories from sample epic
+python scripts/user_story_generator.py
+
+# Sprint planning with capacity
+python scripts/user_story_generator.py sprint 30
+python scripts/user_story_generator.py sprint 45
+```
+
+**Output includes:**
+- Story ID, title, type, priority, and point estimate
+- User story narrative in "As a... I want... So that..." format
+- 5 acceptance criteria per story (Given-When-Then, validation, error, performance, accessibility)
+- INVEST criteria checklist per story
+- Backlog summary with priority breakdown
+- Sprint loading with committed and stretch items (in sprint mode)
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Stories too large (>8 points) | Epic not broken down enough | Apply splitting techniques: by workflow step, persona, or CRUD operation |
+| Acceptance criteria untestable | Criteria use vague language | Rewrite using Given-When-Then format with specific, observable outcomes |
+| Sprint commitment missed repeatedly | Velocity not stabilized or too aggressive | Track velocity over 3+ sprints; commit to 80-85% of rolling average |
+| Too many carryover stories | Mid-sprint scope changes or poor estimation | Enforce no-scope-change rule; calibrate estimates using planning poker |
+| Stories lack clear value | Missing "so that" benefit clause | Validate every story answers: who benefits, what they get, and why it matters |
+| Sprint has too many dependencies | Stories not independent | Re-sequence backlog; break dependent stories into independent slices |
+| Stakeholders dispute priority | No objective prioritization framework | Use WSJF or value/effort scoring; document decision rationale |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Commitment reliability | >85% of committed points completed | Points completed / Points committed per sprint |
+| INVEST compliance | 100% of stories pass all 6 criteria | user_story_generator INVEST checklist |
+| Velocity stability | Within +/-10% of rolling average | Track velocity trend over 5+ sprints |
+| Scope change | <10% of sprint points added/removed mid-sprint | Count points added or removed after planning |
+| Carryover rate | <15% of committed points | Points not completed / Points committed |
+| Acceptance criteria quality | All criteria testable and verified | QA sign-off on acceptance criteria before sprint start |
+| Backlog grooming | Top 2 sprints of backlog always ready | Count of refined stories with acceptance criteria |
+
+---
+
+## Scope & Limitations
+
+**In scope:**
+- User story generation with INVEST validation
+- Acceptance criteria in Given-When-Then format
+- Sprint planning with capacity-based loading
+- Epic breakdown into sprint-sized stories
+- Backlog prioritization frameworks (WSJF, value/effort)
+- Velocity tracking and sprint metrics
+- Definition of Done enforcement
+
+**Out of scope:**
+- Jira/Linear ticket creation (use JSON export with their APIs)
+- Burndown chart visualization (use project management tool dashboards)
+- Team member assignment and capacity by individual
+- Cross-team dependency management (use program-level tools)
+- Release planning beyond quarterly horizon
+- Automated acceptance test generation (see engineering skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Jira / Linear | Copy story output or extend script for JSON export | Import generated stories as tickets |
+| Confluence / Notion | Paste human-readable output | Document sprint plans and backlog |
+| Slack | Share sprint planning summary | Async sprint kickoff communication |
+| product-manager-toolkit | RICE scores inform story priority | Align sprint priorities with product strategy |
+| product-strategist | OKR cascade informs epic selection | Connect sprint work to quarterly objectives |
+| ux-researcher-designer | Persona data informs story personas | Ground user stories in research-backed personas |
