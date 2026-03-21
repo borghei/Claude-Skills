@@ -302,7 +302,7 @@ python scripts/competitive_compare.py --competitor "Competitor Name"
 - CRM data management, territory planning, and sales process design (see sales-operations)
 - Product development, bug fixes, and feature roadmap decisions (coordinate with Engineering)
 - Customer success management and ongoing relationship post-sale (see customer-success-manager)
-- Marketing content strategy and demand generation (see marketing-skill)
+- Marketing content strategy and demand generation (see marketing)
 
 **Limitations:**
 - Demo environment quality depends on infrastructure provided; scripts cannot provision environments

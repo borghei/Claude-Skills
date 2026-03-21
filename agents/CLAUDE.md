@@ -7,7 +7,7 @@ This guide provides comprehensive instructions for creating **cs-* prefixed agen
 ### What are cs-* Agents?
 
 **cs-* agents** are specialized Claude Code agents that orchestrate the 42 existing skills. Each agent:
-- References skills via relative paths (`../../marketing-skill/`)
+- References skills via relative paths (`../../marketing/`)
 - Executes Python automation tools from skill packages
 - Follows established workflows and templates
 - Maintains skill portability and independence
@@ -60,7 +60,7 @@ tools: [Read, Write, Bash, Grep, Glob]
 **Field Definitions:**
 - **name**: Agent identifier with `cs-` prefix (e.g., `cs-content-creator`)
 - **description**: Single sentence describing agent's purpose
-- **skills**: Skill folder this agent references (e.g., `marketing-skill/content-creator`)
+- **skills**: Skill folder this agent references (e.g., `marketing/content-creator`)
 - **domain**: Domain category (marketing, product, engineering, c-level, pm, ra-qm)
 - **model**: Claude model to use (sonnet, opus, haiku)
 - **tools**: Array of Claude Code tools agent can use
@@ -88,25 +88,25 @@ After YAML frontmatter, include these sections:
 All skill references use the `../../` pattern:
 
 ```markdown
-**Skill Location:** `../../marketing-skill/content-creator/`
+**Skill Location:** `../../marketing/content-creator/`
 
 ### Python Tools
 
 1. **Brand Voice Analyzer**
-   - **Path:** `../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py`
-   - **Usage:** `python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py content.txt`
+   - **Path:** `../../marketing/content-creator/scripts/brand_voice_analyzer.py`
+   - **Usage:** `python ../../marketing/content-creator/scripts/brand_voice_analyzer.py content.txt`
 
 2. **SEO Optimizer**
-   - **Path:** `../../marketing-skill/content-creator/scripts/seo_optimizer.py`
-   - **Usage:** `python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "keyword"`
+   - **Path:** `../../marketing/content-creator/scripts/seo_optimizer.py`
+   - **Usage:** `python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "keyword"`
 ```
 
 ### Why `../../`?
 
 From agent location: `agents/marketing/cs-content-creator.md`
-To skill location: `marketing-skill/content-creator/`
+To skill location: `marketing/content-creator/`
 
-Navigation: `agents/marketing/` → `../../` (up to root) → `marketing-skill/content-creator/`
+Navigation: `agents/marketing/` → `../../` (up to root) → `marketing/content-creator/`
 
 **Always test paths resolve correctly!**
 
@@ -118,10 +118,10 @@ Agents execute Python tools from skill packages:
 
 ```bash
 # From agent context
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt
 
 # With JSON output
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt json
 
 # With arguments
 python ../../product-team/product-manager-toolkit/scripts/rice_prioritizer.py features.csv --capacity 20
@@ -168,7 +168,7 @@ Each workflow must include:
 **Example:**
 \`\`\`bash
 # Concrete example command
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
+python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
 \`\`\`
 ```
 
@@ -291,7 +291,7 @@ Test these aspects:
 ```bash
 # From agent directory
 cd agents/marketing/
-ls ../../marketing-skill/content-creator/  # Should list contents
+ls ../../marketing/content-creator/  # Should list contents
 ```
 
 **2. Python Tool Execution**
@@ -300,7 +300,7 @@ ls ../../marketing-skill/content-creator/  # Should list contents
 echo "Test content" > test-input.txt
 
 # Execute tool
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py test-input.txt
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py test-input.txt
 
 # Verify output
 ```
@@ -308,14 +308,14 @@ python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py tes
 **3. Knowledge Base Access**
 ```bash
 # Verify reference files exist
-cat ../../marketing-skill/content-creator/references/brand_guidelines.md
+cat ../../marketing/content-creator/references/brand_guidelines.md
 ```
 
 ## Domain-Specific Guidelines
 
 ### Marketing Agents (agents/marketing/)
 - Focus on content creation, SEO, demand generation
-- Reference: `../../marketing-skill/`
+- Reference: `../../marketing/`
 - Tools: brand_voice_analyzer.py, seo_optimizer.py
 
 ### Product Agents (agents/product/)
@@ -330,7 +330,7 @@ cat ../../marketing-skill/content-creator/references/brand_guidelines.md
 
 ### Engineering Agents (agents/engineering/)
 - Focus on scaffolding, code quality, fullstack development
-- Reference: `../../engineering-team/`
+- Reference: `../../engineering/`
 - Tools: project_scaffolder.py, code_quality_analyzer.py
 
 ## Common Pitfalls

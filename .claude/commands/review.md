@@ -17,7 +17,7 @@ Perform a complete review pass:
    ```
 4. Python syntax check:
    ```bash
-   python -m compileall marketing-skill product-team c-level-advisor engineering-team ra-qm-team
+   python -m compileall marketing product-team c-level-advisor engineering ra-qm-team
    ```
 5. Markdown sanity check:
    ```bash

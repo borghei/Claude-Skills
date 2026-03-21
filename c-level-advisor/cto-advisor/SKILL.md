@@ -475,7 +475,7 @@ python scripts/team_scaling_calculator.py --input team_data.json
 
 **In scope:** Technology strategy and vision, technical debt assessment and reduction planning, engineering team scaling and structure design, architecture governance (ADRs, design reviews), vendor management and evaluation, engineering metrics (DORA, quality, team health), crisis management (incident response, security breach, data loss), stakeholder management and board reporting, and strategic initiatives (cloud migration, platform engineering, AI/ML integration).
 
-**Out of scope:** Hands-on coding or code review (use engineering-team/ skills), product feature prioritization (use cpo-advisor), security architecture and compliance (use ciso-advisor or ra-qm-team/), HR policy and compensation design (use chro-advisor or hr-operations/), and financial planning for engineering budget (use cfo-advisor). Tools analyze engineering data snapshots; continuous metrics tracking requires integration with DevOps platforms.
+**Out of scope:** Hands-on coding or code review (use engineering/ skills), product feature prioritization (use cpo-advisor), security architecture and compliance (use ciso-advisor or ra-qm-team/), HR policy and compensation design (use chro-advisor or hr-operations/), and financial planning for engineering budget (use cfo-advisor). Tools analyze engineering data snapshots; continuous metrics tracking requires integration with DevOps platforms.
 
 **Limitations:** Tech debt scoring depends on self-reported indicator data; automated code analysis tools provide more objective measures. Team scaling budget projections use average salary bands that vary significantly by location, seniority mix, and market conditions. DORA benchmarks assume standard software delivery practices; hardware or embedded systems teams may need different targets.
 
@@ -488,4 +488,4 @@ python scripts/team_scaling_calculator.py --input team_data.json
 - **cfo-advisor** -- Engineering budget, headcount costs, and vendor spend feed financial planning
 - **coo-advisor** -- System reliability and incident response intersect with operational excellence
 - **ciso-advisor** -- Security architecture, vulnerability management, and compliance require CISO partnership
-- **engineering-team/** -- CTO strategy cascades to engineering team execution; architecture decisions guide implementation
+- **engineering/** -- CTO strategy cascades to engineering team execution; architecture decisions guide implementation

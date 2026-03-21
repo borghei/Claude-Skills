@@ -56,7 +56,7 @@ watcher = currentUser() AND status != Done
 
 **Team workload:**
 ```jql
-assignee IN membersOf("engineering-team") AND status IN ("In Progress", "In Review")
+assignee IN membersOf("engineering") AND status IN ("In Progress", "In Review")
 ORDER BY assignee, priority DESC
 ```
 
@@ -186,7 +186,7 @@ labels = tech-debt AND status != Done ORDER BY priority DESC
 **My team's sprint work:**
 ```jql
 sprint IN openSprints() 
-AND assignee IN membersOf("engineering-team") 
+AND assignee IN membersOf("engineering") 
 AND status != Done
 ORDER BY assignee, priority DESC
 ```
@@ -331,7 +331,7 @@ AND resolved >= startOfYear() AND resolved <= endOfQuarter()
 
 **Team capacity:**
 ```jql
-assignee IN membersOf("engineering-team") 
+assignee IN membersOf("engineering") 
 AND sprint IN openSprints()
 ```
 *Sum original estimates*

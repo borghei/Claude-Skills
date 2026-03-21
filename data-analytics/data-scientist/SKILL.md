@@ -222,4 +222,4 @@ python scripts/feature_selector.py --file dataset.csv --target revenue --method 
 - **Data Analyst** (`data-analytics/data-analyst`): Complex analytical questions requiring predictive modeling are escalated from the analyst to the data scientist.
 - **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on mart models as upstream data sources.
 - **Product Team** (`product-team/`): Experiment results inform product decisions; A/B test designs are co-created with product managers.
-- **Engineering** (`engineering-team/senior-ml-engineer`): Algorithm implementation details and model architecture decisions bridge data science and ML engineering.
+- **Engineering** (`engineering/senior-ml-engineer`): Algorithm implementation details and model architecture decisions bridge data science and ML engineering.

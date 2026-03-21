@@ -243,7 +243,7 @@ Use `assets/assumption_map_template.md` for the full template.
 **Out of Scope:**
 - Running validation experiments (see `brainstorm-experiments/` skill)
 - Product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
-- Technical feasibility deep-dives or architecture reviews (see `engineering-team/` skills)
+- Technical feasibility deep-dives or architecture reviews (see `engineering/` skills)
 - Financial modeling for viability assumptions (see `finance/` domain skills)
 
 **Important Caveats:**

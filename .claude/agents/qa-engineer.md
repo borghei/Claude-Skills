@@ -106,3 +106,21 @@ When generating tests, follow these principles:
 - Duplicate code blocks
 - TODO/FIXME/HACK comments
 - Dependencies with known vulnerabilities
+
+## Skill-Powered Analysis
+
+### Tools to Run
+1. `python engineering/senior-qa/scripts/coverage_analyzer.py <project_dir>` — Test coverage analysis with gap detection
+2. `python engineering/senior-qa/scripts/test_suite_generator.py <project_dir>` — Generate test skeletons for uncovered code
+3. `python engineering/tdd-guide/scripts/tdd_workflow.py` — TDD quality assessment
+
+### Pass/Fail Thresholds
+- **PASS**: Coverage above 80% AND zero critical gaps in business logic
+- **WARN**: Coverage 60-80% OR gaps in non-critical paths
+- **FAIL**: Coverage below 60% OR critical gaps in auth/payment/data paths
+
+### Workflow
+1. Run coverage_analyzer.py to establish quantitative baseline
+2. Identify critical gaps and generate test skeletons with test_suite_generator.py
+3. Report coverage score and gap list at the top of every QA assessment
+4. Prioritize gaps by business impact (auth > payments > data > UI)

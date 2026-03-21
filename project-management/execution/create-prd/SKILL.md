@@ -158,7 +158,7 @@ Break into subsections:
 - Release planning with Now/Next/Later and explicit deferral documentation
 
 **Out of Scope:**
-- Technical architecture or system design documents (see `engineering-team/` skills)
+- Technical architecture or system design documents (see `engineering/` skills)
 - User story writing and backlog creation (see `execution/job-stories/` and `execution/wwas/`)
 - Detailed UX research or usability testing plans (see `product-team/` skills)
 - Financial business case modeling (see `finance/` domain skills)

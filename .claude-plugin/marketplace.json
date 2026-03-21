@@ -13,8 +13,8 @@
   },
   "plugins": [
     {
-      "name": "marketing-skills",
-      "source": "./marketing-skill",
+      "name": "marketings",
+      "source": "./marketing",
       "description": "10 marketing skills: content creator, demand generation, product marketing, ASO, social media analytics, campaign analytics, brand strategist, growth marketer, marketing analyst, SEO specialist",
       "version": "1.0.0",
       "author": {
@@ -25,7 +25,7 @@
     },
     {
       "name": "engineering-skills",
-      "source": "./engineering-team",
+      "source": "./engineering",
       "description": "30 engineering skills: architecture, frontend, backend, fullstack, QA, DevOps, security, AI/ML, data engineering",
       "version": "1.0.0",
       "author": {
@@ -102,7 +102,7 @@
     },
     {
       "name": "content-creator",
-      "source": "./marketing-skill/content-creator",
+      "source": "./marketing/content-creator",
       "description": "Brand voice analysis, SEO optimization, content frameworks for marketing content creation",
       "version": "1.0.0",
       "author": {
@@ -113,7 +113,7 @@
     },
     {
       "name": "demand-gen",
-      "source": "./marketing-skill/marketing-demand-acquisition",
+      "source": "./marketing/marketing-demand-acquisition",
       "description": "Demand generation, paid media, SEO, partnerships for Series A+ startups",
       "version": "1.0.0",
       "author": {
@@ -124,7 +124,7 @@
     },
     {
       "name": "fullstack-engineer",
-      "source": "./engineering-team/senior-fullstack",
+      "source": "./engineering/senior-fullstack",
       "description": "End-to-end application development with Next.js, GraphQL, PostgreSQL",
       "version": "1.0.0",
       "author": {
@@ -135,7 +135,7 @@
     },
     {
       "name": "aws-architect",
-      "source": "./engineering-team/aws-solution-architect",
+      "source": "./engineering/aws-solution-architect",
       "description": "AWS solution architecture with serverless, cost optimization, and security best practices",
       "version": "1.0.0",
       "author": {

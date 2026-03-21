@@ -349,8 +349,8 @@ The Chief of Staff routes to the entire C-level advisory ecosystem:
 | Domain | Skill Path | Integration |
 |--------|-----------|-------------|
 | Product | `product-team/product-strategist` | Product strategy alignment |
-| Engineering | `engineering-team/` | Technical implementation |
-| Marketing | `marketing-skill/` | Campaign execution |
+| Engineering | `engineering/` | Technical implementation |
+| Marketing | `marketing/` | Campaign execution |
 | Project Management | `project-management/` | Execution tracking |
 | Data Analytics | `data-analytics/` | Metrics and analysis |
 

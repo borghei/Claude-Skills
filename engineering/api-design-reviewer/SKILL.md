@@ -460,7 +460,7 @@ Regular use of the linting, breaking change detection, and scoring tools ensures
 - Runtime API testing, load testing, or contract testing (see `api-test-suite-builder`)
 - GraphQL, gRPC, or WebSocket API design review
 - Auto-generation of OpenAPI specs from code or server stubs
-- Authentication flow implementation or OAuth server configuration (see `senior-security` in engineering-team/)
+- Authentication flow implementation or OAuth server configuration (see `senior-security` in engineering/)
 
 ## Integration Points
 
@@ -469,8 +469,8 @@ Regular use of the linting, breaking change detection, and scoring tools ensures
 | `engineering/api-test-suite-builder` | Generate test cases from linter findings | Linter issues feed into test plan priorities for endpoint validation |
 | `engineering/changelog-generator` | Document breaking changes in release notes | Breaking change detector output provides structured change data for changelogs |
 | `engineering/ci-cd-pipeline-builder` | Gate deployments on API quality | Scorecard grade and linter exit codes integrate as pipeline quality gates |
-| `engineering-team/senior-backend` | Review API implementation against design | Scorecard recommendations guide backend refactoring decisions |
-| `engineering-team/code-reviewer` | Enrich PR reviews with API analysis | Linter and breaking change reports attach to PR review comments |
+| `engineering/senior-backend` | Review API implementation against design | Scorecard recommendations guide backend refactoring decisions |
+| `engineering/code-reviewer` | Enrich PR reviews with API analysis | Linter and breaking change reports attach to PR review comments |
 | `engineering/release-manager` | Validate version bumps match change severity | Breaking change detector severity levels inform semver version decisions |
 
 ## Tool Reference

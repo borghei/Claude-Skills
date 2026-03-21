@@ -98,3 +98,20 @@ git push origin vX.Y.Z
 - Prefer keeping both changes when possible
 - Test after resolution
 - Never force-push to shared branches without explicit permission
+
+## Skill-Powered Analysis
+
+### Tools to Run
+1. `python engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py <workflow_file>` — Analyze CI/CD pipeline for issues
+2. `python engineering/ci-cd-pipeline-builder/scripts/pipeline_linter.py <workflow_file>` — Lint workflow YAML for security/best practices
+
+### Pass/Fail Thresholds
+- **PASS**: Zero hardcoded secrets AND all jobs have timeouts AND permissions block present
+- **WARN**: Missing timeout or concurrency group
+- **FAIL**: Hardcoded secrets OR missing permissions block OR production deploy without gate
+
+### Workflow
+1. Run pipeline_linter.py on any CI/CD files before committing workflow changes
+2. Run pipeline_analyzer.py for optimization suggestions
+3. Report lint score alongside workflow recommendations
+4. Cross-reference with engineering/senior-devops patterns for deployment best practices

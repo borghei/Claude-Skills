@@ -1,7 +1,7 @@
 ---
 name: cs-code-auditor
 description: Comprehensive code audit specialist for quality analysis, security scanning, dependency health, and tech debt assessment
-skills: engineering-team/code-reviewer
+skills: engineering/code-reviewer
 domain: engineering
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,35 +19,35 @@ The cs-code-auditor agent bridges the gap between individual code reviews and fu
 
 ## Skill Integration
 
-**Primary Skill Location:** `../../engineering-team/code-reviewer/`
+**Primary Skill Location:** `../../engineering/code-reviewer/`
 
 ### Python Tools
 
 1. **PR Analyzer**
    - **Purpose:** Analyzes pull request diffs for complexity, risk areas, and review focus points
-   - **Path:** `../../engineering-team/code-reviewer/scripts/pr_analyzer.py`
-   - **Usage:** `python ../../engineering-team/code-reviewer/scripts/pr_analyzer.py diff.patch`
+   - **Path:** `../../engineering/code-reviewer/scripts/pr_analyzer.py`
+   - **Usage:** `python ../../engineering/code-reviewer/scripts/pr_analyzer.py diff.patch`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Pre-merge review, change risk assessment, review prioritization
 
 2. **Code Quality Checker**
    - **Purpose:** Static code quality analysis including complexity metrics, duplication detection, and style consistency
-   - **Path:** `../../engineering-team/code-reviewer/scripts/code_quality_checker.py`
-   - **Usage:** `python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/`
+   - **Path:** `../../engineering/code-reviewer/scripts/code_quality_checker.py`
+   - **Usage:** `python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Codebase quality baseline, CI quality gates, quality trend tracking
 
 3. **Review Report Generator**
    - **Purpose:** Generates structured code review reports with findings categorized by severity and type
-   - **Path:** `../../engineering-team/code-reviewer/scripts/review_report_generator.py`
-   - **Usage:** `python ../../engineering-team/code-reviewer/scripts/review_report_generator.py findings.json`
+   - **Path:** `../../engineering/code-reviewer/scripts/review_report_generator.py`
+   - **Usage:** `python ../../engineering/code-reviewer/scripts/review_report_generator.py findings.json`
    - **Output Formats:** Markdown report
    - **Use Cases:** Formal audit documentation, compliance evidence, stakeholder reporting
 
 4. **Secret Scanner**
    - **Purpose:** Scans codebase for exposed secrets, API keys, tokens, and credentials
-   - **Path:** `../../engineering-team/senior-security/scripts/secret_scanner.py`
-   - **Usage:** `python ../../engineering-team/senior-security/scripts/secret_scanner.py .`
+   - **Path:** `../../engineering/senior-security/scripts/secret_scanner.py`
+   - **Usage:** `python ../../engineering/senior-security/scripts/secret_scanner.py .`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Pre-commit secret detection, security audit, compliance scanning
 
@@ -75,22 +75,22 @@ The cs-code-auditor agent bridges the gap between individual code reviews and fu
 ### Knowledge Bases
 
 1. **Code Review Checklist**
-   - **Location:** `../../engineering-team/code-reviewer/references/code_review_checklist.md`
+   - **Location:** `../../engineering/code-reviewer/references/code_review_checklist.md`
    - **Content:** Comprehensive review checklist covering correctness, security, performance, maintainability, and testing
    - **Use Case:** Structured review process, reviewer training, audit methodology
 
 2. **Coding Standards**
-   - **Location:** `../../engineering-team/code-reviewer/references/coding_standards.md`
+   - **Location:** `../../engineering/code-reviewer/references/coding_standards.md`
    - **Content:** Language-agnostic coding standards for naming, structure, error handling, and documentation
    - **Use Case:** Quality baseline definition, style guide reference, onboarding material
 
 3. **Common Antipatterns**
-   - **Location:** `../../engineering-team/code-reviewer/references/common_antipatterns.md`
+   - **Location:** `../../engineering/code-reviewer/references/common_antipatterns.md`
    - **Content:** Catalog of common code antipatterns with detection heuristics and remediation strategies
    - **Use Case:** Antipattern identification, refactoring guidance, developer education
 
 4. **Threat Modeling Guide**
-   - **Location:** `../../engineering-team/senior-security/references/threat-modeling-guide.md`
+   - **Location:** `../../engineering/senior-security/references/threat-modeling-guide.md`
    - **Content:** STRIDE methodology, threat classification, risk scoring framework
    - **Use Case:** Security-focused code review, attack surface analysis, risk prioritization
 
@@ -108,11 +108,11 @@ The cs-code-auditor agent bridges the gap between individual code reviews and fu
 **Steps:**
 1. **Code Quality Baseline** - Run quality checker on the full codebase
    ```bash
-   python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/
+   python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/
    ```
 2. **Secret Scan** - Check for exposed credentials and API keys
    ```bash
-   python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+   python ../../engineering/senior-security/scripts/secret_scanner.py .
    ```
 3. **Dependency Audit** - Scan for CVEs and outdated dependencies
    ```bash
@@ -129,7 +129,7 @@ The cs-code-auditor agent bridges the gap between individual code reviews and fu
 6. **Consolidate Findings** - Merge all findings, deduplicate, rank by severity (critical/high/medium/low)
 7. **Generate Audit Report** - Produce structured report using review report generator
    ```bash
-   python ../../engineering-team/code-reviewer/scripts/review_report_generator.py consolidated-findings.json
+   python ../../engineering/code-reviewer/scripts/review_report_generator.py consolidated-findings.json
    ```
 
 **Expected Output:** Comprehensive audit report with findings across quality, security, dependencies, licenses, and tech debt
@@ -139,8 +139,8 @@ The cs-code-auditor agent bridges the gap between individual code reviews and fu
 **Example:**
 ```bash
 # Quick full audit
-echo "=== Quality ===" && python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/
-echo "=== Secrets ===" && python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+echo "=== Quality ===" && python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/
+echo "=== Secrets ===" && python ../../engineering/senior-security/scripts/secret_scanner.py .
 echo "=== Dependencies ===" && python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.txt
 echo "=== Licenses ===" && python ../../engineering/dependency-auditor/scripts/license_checker.py requirements.txt
 echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/debt_scanner.py src/
@@ -157,19 +157,19 @@ echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/d
    ```
 2. **Analyze PR** - Run PR analyzer for complexity and risk assessment
    ```bash
-   python ../../engineering-team/code-reviewer/scripts/pr_analyzer.py pr.patch
+   python ../../engineering/code-reviewer/scripts/pr_analyzer.py pr.patch
    ```
 3. **Quality Check Changed Files** - Run quality checker on modified files only
    ```bash
-   python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/changed-module/
+   python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/changed-module/
    ```
 4. **Secret Scan** - Ensure no secrets introduced in the diff
    ```bash
-   python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+   python ../../engineering/senior-security/scripts/secret_scanner.py .
    ```
 5. **Review Against Checklist** - Walk through code review checklist
    ```bash
-   cat ../../engineering-team/code-reviewer/references/code_review_checklist.md
+   cat ../../engineering/code-reviewer/references/code_review_checklist.md
    ```
 6. **Document Findings** - Produce review summary with approval/revision recommendation
 
@@ -184,7 +184,7 @@ echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/d
 **Steps:**
 1. **Secret Scan** - Detect exposed credentials across the codebase
    ```bash
-   python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+   python ../../engineering/senior-security/scripts/secret_scanner.py .
    ```
 2. **CVE Scan** - Check all dependencies for known vulnerabilities
    ```bash
@@ -196,7 +196,7 @@ echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/d
    ```
 4. **Review Threat Model** - Reference threat modeling guide for risk context
    ```bash
-   cat ../../engineering-team/senior-security/references/threat-modeling-guide.md
+   cat ../../engineering/senior-security/references/threat-modeling-guide.md
    ```
 5. **Create Upgrade Plan** - Prioritize dependency upgrades by CVE severity and breaking change risk
 6. **Document Remediation** - Produce security findings report with remediation timeline
@@ -220,11 +220,11 @@ echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/d
    ```
 3. **Check Antipatterns** - Cross-reference against known antipatterns
    ```bash
-   cat ../../engineering-team/code-reviewer/references/common_antipatterns.md
+   cat ../../engineering/code-reviewer/references/common_antipatterns.md
    ```
 4. **Quality Correlation** - Run quality checker to correlate debt with quality metrics
    ```bash
-   python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/
+   python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/
    ```
 5. **Prioritize Remediation** - Rank debt items by impact, effort, and risk
 6. **Create Quarterly Plan** - Produce debt reduction plan with sprint-level tasks
@@ -244,10 +244,10 @@ echo "=== Tech Debt ===" && python ../../engineering/tech-debt-tracker/scripts/d
 echo "Running quality gate..."
 
 # Quality check
-python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/ --json > quality.json
+python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/ --json > quality.json
 
 # Secret scan
-python ../../engineering-team/senior-security/scripts/secret_scanner.py . --json > secrets.json
+python ../../engineering/senior-security/scripts/secret_scanner.py . --json > secrets.json
 
 # Dependency scan
 python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.txt --json > deps.json
@@ -269,7 +269,7 @@ echo "Quality gate passed"
 echo "=== Q1 Codebase Health Report ==="
 
 echo "--- Code Quality ---"
-python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py src/
+python ../../engineering/code-reviewer/scripts/code_quality_checker.py src/
 
 echo "--- Tech Debt ---"
 python ../../engineering/tech-debt-tracker/scripts/debt_scanner.py src/
@@ -288,8 +288,8 @@ python ../../engineering/dependency-auditor/scripts/license_checker.py requireme
 REPO_PATH=$1
 
 echo "=== Codebase Assessment: $REPO_PATH ==="
-python ../../engineering-team/code-reviewer/scripts/code_quality_checker.py "$REPO_PATH"
-python ../../engineering-team/senior-security/scripts/secret_scanner.py "$REPO_PATH"
+python ../../engineering/code-reviewer/scripts/code_quality_checker.py "$REPO_PATH"
+python ../../engineering/senior-security/scripts/secret_scanner.py "$REPO_PATH"
 python ../../engineering/tech-debt-tracker/scripts/debt_scanner.py "$REPO_PATH"
 echo "=== Assessment Complete ==="
 ```
@@ -321,11 +321,11 @@ echo "=== Assessment Complete ==="
 
 ## References
 
-- **Code Reviewer Skill:** [../../engineering-team/code-reviewer/SKILL.md](../../engineering-team/code-reviewer/SKILL.md)
-- **Security Skill:** [../../engineering-team/senior-security/SKILL.md](../../engineering-team/senior-security/SKILL.md)
+- **Code Reviewer Skill:** [../../engineering/code-reviewer/SKILL.md](../../engineering/code-reviewer/SKILL.md)
+- **Security Skill:** [../../engineering/senior-security/SKILL.md](../../engineering/senior-security/SKILL.md)
 - **Dependency Auditor Skill:** [../../engineering/dependency-auditor/SKILL.md](../../engineering/dependency-auditor/SKILL.md)
 - **Tech Debt Tracker Skill:** [../../engineering/tech-debt-tracker/SKILL.md](../../engineering/tech-debt-tracker/SKILL.md)
-- **Engineering Domain Guide:** [../../engineering-team/CLAUDE.md](../../engineering-team/CLAUDE.md)
+- **Engineering Domain Guide:** [../../engineering/CLAUDE.md](../../engineering/CLAUDE.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
 
 ---

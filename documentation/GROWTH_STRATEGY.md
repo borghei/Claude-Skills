@@ -206,8 +206,8 @@ Closes #{issue_number}"
 ### Current Agent-Skill Architecture
 
 **Existing Agents (5):**
-1. `cs-content-creator` → marketing-skill/content-creator/
-2. `cs-demand-gen-specialist` → marketing-skill/marketing-demand-acquisition/
+1. `cs-content-creator` → marketing/content-creator/
+2. `cs-demand-gen-specialist` → marketing/marketing-demand-acquisition/
 3. `cs-ceo-advisor` → c-level-advisor/ceo-advisor/
 4. `cs-cto-advisor` → c-level-advisor/cto-advisor/
 5. `cs-product-manager` → product-team/product-manager-toolkit/

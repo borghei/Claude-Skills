@@ -653,7 +653,7 @@ def test_mcp_server_tools():
 - Building complete MCP server applications with business logic — see `engineering/mcp-server-builder`
 - Agent orchestration patterns, planning loops, or multi-step reasoning — see `engineering/agent-workflow-designer`
 - Designing agent personas, memory systems, or behavioral profiles — see `engineering/agent-designer`
-- Infrastructure deployment, CI/CD pipelines, or container orchestration for agent services — see `engineering-team/senior-devops`
+- Infrastructure deployment, CI/CD pipelines, or container orchestration for agent services — see `engineering/senior-devops`
 
 ## Integration Points
 
@@ -662,6 +662,6 @@ def test_mcp_server_tools():
 | `engineering/mcp-server-builder` | Protocol schemas defined here feed directly into MCP server scaffolding | Tool definitions and inputSchema objects flow into server code generation |
 | `engineering/agent-workflow-designer` | Workflow orchestrators consume protocol interfaces to dispatch tasks | Agent-protocol defines the transport contract; workflow-designer defines execution order and branching |
 | `engineering/agent-designer` | Agent identity and capability profiles reference protocol-level skill declarations | Agent cards and capability metadata from protocol design inform agent persona configuration |
-| `engineering-team/senior-security` | Security review of auth flows, token scoping, and rate limiting configurations | OAuth 2.1 flows, API key rotation policies, and audit logging patterns flow into security assessments |
+| `engineering/senior-security` | Security review of auth flows, token scoping, and rate limiting configurations | OAuth 2.1 flows, API key rotation policies, and audit logging patterns flow into security assessments |
 | `engineering/api-design-reviewer` | REST and JSON-RPC endpoint design review for A2A and MCP HTTP transports | API schema and endpoint contracts feed into design review checklists |
 | `engineering/observability-designer` | Monitoring and tracing for inter-agent calls, latency tracking, and error budgets | Tool call logs with agent ID, latency, and error codes flow into observability dashboards |

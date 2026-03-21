@@ -250,7 +250,7 @@ python scripts/renewal_forecast.py --period Q1
 - Territory design, CRM administration, and comp plans (see sales-operations)
 - Product roadmap decisions and feature development (coordinate with Product)
 - Billing, invoicing, and revenue recognition (coordinate with Finance)
-- Marketing content creation for customer stories (see marketing-skill/content-creator)
+- Marketing content creation for customer stories (see marketing/content-creator)
 
 **Limitations:**
 - Health scoring model requires calibration against your specific product's usage patterns; default weights are starting points

@@ -271,7 +271,7 @@ python scripts/forecast_report.py --quarter Q4 --output report.html
 - Technical demos, RFP responses, and POC management (see sales-engineer)
 - Post-sale customer management and retention (see customer-success-manager)
 - Enterprise solution architecture and integration design (see solutions-architect)
-- Marketing attribution modeling and campaign ROI (see marketing-skill/campaign-analytics)
+- Marketing attribution modeling and campaign ROI (see marketing/campaign-analytics)
 - Financial modeling beyond sales compensation (see finance)
 
 **Limitations:**

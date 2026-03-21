@@ -38,11 +38,11 @@
 - Community contribution by [@weemax](https://github.com/weemax)
 
 **March 18, 2026 — 5 New Engineering & PM Skills with 20 Python Tools (199 → 204 skills)**
-- **[qa-browser-automation](engineering-team/qa-browser-automation/SKILL.md)** — 11-phase browser QA protocol with health scoring (0-100), WCAG accessibility auditing, visual regression tracking, and safety controls (4 Python tools)
-- **[release-orchestrator](engineering-team/release-orchestrator/SKILL.md)** — End-to-end release pipeline with pre-flight checks, semantic versioning, changelog generation, and GO/NO-GO readiness scoring (4 Python tools)
-- **[doc-drift-detector](engineering-team/doc-drift-detector/SKILL.md)** — Documentation drift analysis with staleness scoring, API doc validation via Python AST, and link integrity auditing (4 Python tools)
+- **[qa-browser-automation](engineering/qa-browser-automation/SKILL.md)** — 11-phase browser QA protocol with health scoring (0-100), WCAG accessibility auditing, visual regression tracking, and safety controls (4 Python tools)
+- **[release-orchestrator](engineering/release-orchestrator/SKILL.md)** — End-to-end release pipeline with pre-flight checks, semantic versioning, changelog generation, and GO/NO-GO readiness scoring (4 Python tools)
+- **[doc-drift-detector](engineering/doc-drift-detector/SKILL.md)** — Documentation drift analysis with staleness scoring, API doc validation via Python AST, and link integrity auditing (4 Python tools)
 - **[sprint-retrospective](project-management/sprint-retrospective/SKILL.md)** — Data-driven sprint retros with velocity analytics, contributor insights, code churn analysis, and trend tracking (4 Python tools)
-- **[design-auditor](engineering-team/design-auditor/SKILL.md)** — 12-category design audit with AI slop detection, WCAG color contrast checking, design system validation, and 3 independent grades (4 Python tools)
+- **[design-auditor](engineering/design-auditor/SKILL.md)** — 12-category design audit with AI slop detection, WCAG color contrast checking, design system validation, and 3 independent grades (4 Python tools)
 - **20 new Python CLI tools** — all standard library, no dependencies, JSON + human-readable output
 - Inspired by gstack's engineering workflows, built to surpass them with composable Python tooling and cross-platform support
 
@@ -107,7 +107,7 @@ cd Claude-Skills
 
 # 2. Browse available skills
 python scripts/skill-installer.py list
-python scripts/skill-installer.py list --group engineering-team
+python scripts/skill-installer.py list --group engineering
 
 # 3. Install a skill to your agent of choice
 python scripts/skill-installer.py install senior-fullstack --agent claude --auto-update
@@ -130,7 +130,7 @@ The installer enforces **one skill per domain group** by default (use `--force` 
 
 # Install entire domain bundles:
 /plugin install engineering-skills@claude-code-skills   # 24 skills
-/plugin install marketing-skills@claude-code-skills     # 10 skills
+/plugin install marketings@claude-code-skills     # 10 skills
 /plugin install ra-qm-skills@claude-code-skills         # 12 skills
 
 # Or install individual skills:
@@ -167,10 +167,10 @@ Copy any skill folder into your agent's skills directory, or simply paste the `S
 
 ```bash
 # Copy a skill to Claude Code
-cp -r engineering-team/senior-fullstack ~/.claude/skills/senior-fullstack
+cp -r engineering/senior-fullstack ~/.claude/skills/senior-fullstack
 
 # Copy a skill to Cursor
-cp -r marketing-skill/content-creator .cursor/skills/content-creator
+cp -r marketing/content-creator .cursor/skills/content-creator
 ```
 
 Or paste directly:
@@ -193,7 +193,7 @@ Skills give Claude deep domain knowledge. Once installed, Claude automatically a
 **Example — Code Quality Analysis:**
 ```bash
 # Run the Python tool directly
-python engineering-team/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
+python engineering/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
 ```
 ```
 Code Quality Report
@@ -226,7 +226,7 @@ python product-team/product-manager-toolkit/scripts/rice_prioritizer.py features
 
 **Example — CLAUDE.md Optimization:**
 ```bash
-python engineering-team/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
+python engineering/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
 ```
 ```
 CLAUDE.md Optimization Report
@@ -256,7 +256,7 @@ Score: 72/100
 
 **Example — CI/CD Workflow Generation:**
 ```bash
-python engineering-team/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python
+python engineering/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python
 ```
 ```yaml
 # Generated: CI Pipeline for Python
@@ -310,7 +310,7 @@ DCF Valuation Summary
 
 **Example — Mobile App Scaffolding:**
 ```bash
-python engineering-team/senior-mobile/scripts/mobile_scaffold.py my-app --platform react-native --state zustand
+python engineering/senior-mobile/scripts/mobile_scaffold.py my-app --platform react-native --state zustand
 ```
 ```
 Scaffolded: my-app (React Native + Expo Router)
@@ -592,8 +592,8 @@ Once installed, they run automatically on PRs and pushes based on file changes.
 ⚠ CHANGELOG.md was not updated in this PR.
 
   Changed files:
-    - engineering-team/senior-fullstack/scripts/code_quality_analyzer.py
-    - engineering-team/senior-fullstack/SKILL.md
+    - engineering/senior-fullstack/scripts/code_quality_analyzer.py
+    - engineering/senior-fullstack/SKILL.md
 
   Suggested changelog entry:
     ### Changed
@@ -623,14 +623,14 @@ Quality Report:
 - **12** CI/CD workflows
 
 ### Latest Skills (March 2026)
-- qa-browser-automation (engineering-team) — 4 tools
-- release-orchestrator (engineering-team) — 4 tools
-- doc-drift-detector (engineering-team) — 4 tools
-- design-auditor (engineering-team) — 4 tools
+- qa-browser-automation (engineering) — 4 tools
+- release-orchestrator (engineering) — 4 tools
+- doc-drift-detector (engineering) — 4 tools
+- design-auditor (engineering) — 4 tools
 - sprint-retrospective (project-management) — 4 tools
-- claude-code-mastery (engineering-team) — 3 tools
-- codex-cli-specialist (engineering-team) — 3 tools
-- devops-workflow-engineer (engineering-team) — 3 tools
+- claude-code-mastery (engineering) — 3 tools
+- codex-cli-specialist (engineering) — 3 tools
+- devops-workflow-engineer (engineering) — 3 tools
 
 ### Installation
 git clone https://github.com/borghei/Claude-Skills.git
@@ -646,34 +646,34 @@ Core software engineering expertise with Python automation tools, references, an
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
-| [senior-architect](engineering-team/senior-architect/SKILL.md) | System design, distributed systems, architectural patterns | 2 |
-| [senior-frontend](engineering-team/senior-frontend/SKILL.md) | React patterns, state management, performance, accessibility | 2 |
-| [senior-backend](engineering-team/senior-backend/SKILL.md) | API design, microservices, databases, caching, queues | 2 |
-| [senior-fullstack](engineering-team/senior-fullstack/SKILL.md) | React, Node.js, databases, API design, system architecture | 3 |
-| [senior-qa](engineering-team/senior-qa/SKILL.md) | Test strategy, automation frameworks, performance testing | 2 |
-| [senior-devops](engineering-team/senior-devops/SKILL.md) | Docker, Kubernetes, Terraform, CI/CD, monitoring, SRE | 2 |
-| [senior-secops](engineering-team/senior-secops/SKILL.md) | Security operations, vulnerability management, incident response | 2 |
-| [senior-security](engineering-team/senior-security/SKILL.md) | OWASP, threat modeling, penetration testing, compliance | 2 |
-| [senior-mobile](engineering-team/senior-mobile/SKILL.md) | React Native, iOS, Android, cross-platform, app store | 3 |
-| [senior-cloud-architect](engineering-team/senior-cloud-architect/SKILL.md) | AWS, GCP, Azure, multi-cloud, cost optimization | - |
-| [senior-data-scientist](engineering-team/senior-data-scientist/SKILL.md) | A/B testing, statistical analysis, feature engineering | 3 |
-| [senior-data-engineer](engineering-team/senior-data-engineer/SKILL.md) | Airflow, Spark, data pipelines, warehousing | 3 |
-| [senior-ml-engineer](engineering-team/senior-ml-engineer/SKILL.md) | ML pipelines, model deployment, MLOps, RAG systems | 3 |
-| [senior-prompt-engineer](engineering-team/senior-prompt-engineer/SKILL.md) | Prompt optimization, LLM evaluation, agents | 3 |
-| [senior-computer-vision](engineering-team/senior-computer-vision/SKILL.md) | Object detection, image segmentation, model training | 3 |
-| [aws-solution-architect](engineering-team/aws-solution-architect/SKILL.md) | Serverless patterns, CloudFormation, cost optimization | 2 |
-| [code-reviewer](engineering-team/code-reviewer/SKILL.md) | PR analysis, code quality checking, review automation | 2 |
-| [incident-commander](engineering-team/incident-commander/SKILL.md) | Incident response, severity classification, RCA | 3 |
-| [ms365-tenant-manager](engineering-team/ms365-tenant-manager/SKILL.md) | Office 365/Azure AD administration | 2 |
-| [tdd-guide](engineering-team/tdd-guide/SKILL.md) | Test-driven development workflow | 2 |
-| [tech-stack-evaluator](engineering-team/tech-stack-evaluator/SKILL.md) | Framework comparison, TCO analysis | 2 |
-| [claude-code-mastery](engineering-team/claude-code-mastery/SKILL.md) | CLAUDE.md optimization, skill authoring, subagents, hooks | 3 |
-| [codex-cli-specialist](engineering-team/codex-cli-specialist/SKILL.md) | Cross-platform skill authoring, Codex CLI, conversion tools | 3 |
-| [devops-workflow-engineer](engineering-team/devops-workflow-engineer/SKILL.md) | GitHub Actions, CI/CD pipelines, deployment strategies | 3 |
-| [qa-browser-automation](engineering-team/qa-browser-automation/SKILL.md) | 11-phase browser QA, health scoring, WCAG audit, visual regression | 4 |
-| [release-orchestrator](engineering-team/release-orchestrator/SKILL.md) | Release pipeline, pre-flight checks, versioning, readiness scoring | 4 |
-| [doc-drift-detector](engineering-team/doc-drift-detector/SKILL.md) | Documentation drift analysis, staleness scoring, API doc validation | 4 |
-| [design-auditor](engineering-team/design-auditor/SKILL.md) | 12-category design audit, AI slop detection, color contrast checking | 4 |
+| [senior-architect](engineering/senior-architect/SKILL.md) | System design, distributed systems, architectural patterns | 2 |
+| [senior-frontend](engineering/senior-frontend/SKILL.md) | React patterns, state management, performance, accessibility | 2 |
+| [senior-backend](engineering/senior-backend/SKILL.md) | API design, microservices, databases, caching, queues | 2 |
+| [senior-fullstack](engineering/senior-fullstack/SKILL.md) | React, Node.js, databases, API design, system architecture | 3 |
+| [senior-qa](engineering/senior-qa/SKILL.md) | Test strategy, automation frameworks, performance testing | 2 |
+| [senior-devops](engineering/senior-devops/SKILL.md) | Docker, Kubernetes, Terraform, CI/CD, monitoring, SRE | 2 |
+| [senior-secops](engineering/senior-secops/SKILL.md) | Security operations, vulnerability management, incident response | 2 |
+| [senior-security](engineering/senior-security/SKILL.md) | OWASP, threat modeling, penetration testing, compliance | 2 |
+| [senior-mobile](engineering/senior-mobile/SKILL.md) | React Native, iOS, Android, cross-platform, app store | 3 |
+| [senior-cloud-architect](engineering/senior-cloud-architect/SKILL.md) | AWS, GCP, Azure, multi-cloud, cost optimization | - |
+| [senior-data-scientist](engineering/senior-data-scientist/SKILL.md) | A/B testing, statistical analysis, feature engineering | 3 |
+| [senior-data-engineer](engineering/senior-data-engineer/SKILL.md) | Airflow, Spark, data pipelines, warehousing | 3 |
+| [senior-ml-engineer](engineering/senior-ml-engineer/SKILL.md) | ML pipelines, model deployment, MLOps, RAG systems | 3 |
+| [senior-prompt-engineer](engineering/senior-prompt-engineer/SKILL.md) | Prompt optimization, LLM evaluation, agents | 3 |
+| [senior-computer-vision](engineering/senior-computer-vision/SKILL.md) | Object detection, image segmentation, model training | 3 |
+| [aws-solution-architect](engineering/aws-solution-architect/SKILL.md) | Serverless patterns, CloudFormation, cost optimization | 2 |
+| [code-reviewer](engineering/code-reviewer/SKILL.md) | PR analysis, code quality checking, review automation | 2 |
+| [incident-commander](engineering/incident-commander/SKILL.md) | Incident response, severity classification, RCA | 3 |
+| [ms365-tenant-manager](engineering/ms365-tenant-manager/SKILL.md) | Office 365/Azure AD administration | 2 |
+| [tdd-guide](engineering/tdd-guide/SKILL.md) | Test-driven development workflow | 2 |
+| [tech-stack-evaluator](engineering/tech-stack-evaluator/SKILL.md) | Framework comparison, TCO analysis | 2 |
+| [claude-code-mastery](engineering/claude-code-mastery/SKILL.md) | CLAUDE.md optimization, skill authoring, subagents, hooks | 3 |
+| [codex-cli-specialist](engineering/codex-cli-specialist/SKILL.md) | Cross-platform skill authoring, Codex CLI, conversion tools | 3 |
+| [devops-workflow-engineer](engineering/devops-workflow-engineer/SKILL.md) | GitHub Actions, CI/CD pipelines, deployment strategies | 3 |
+| [qa-browser-automation](engineering/qa-browser-automation/SKILL.md) | 11-phase browser QA, health scoring, WCAG audit, visual regression | 4 |
+| [release-orchestrator](engineering/release-orchestrator/SKILL.md) | Release pipeline, pre-flight checks, versioning, readiness scoring | 4 |
+| [doc-drift-detector](engineering/doc-drift-detector/SKILL.md) | Documentation drift analysis, staleness scoring, API doc validation | 4 |
+| [design-auditor](engineering/design-auditor/SKILL.md) | 12-category design audit, AI slop detection, color contrast checking | 4 |
 
 ### Advanced Engineering (33)
 Enterprise-grade skills with sophisticated analysis tooling — including MCP server building, Playwright testing, CI/CD pipelines, SaaS scaffolding, and more.
@@ -750,41 +750,41 @@ Data-driven marketing with Python automation tools — from content strategy to 
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
-| [content-creator](marketing-skill/content-creator/SKILL.md) | Brand voice analyzer, SEO optimizer, content frameworks | 2 |
-| [marketing-demand-acquisition](marketing-skill/marketing-demand-acquisition/SKILL.md) | Demand gen, paid media, SEO, partnerships | 1 |
-| [marketing-strategy-pmm](marketing-skill/marketing-strategy-pmm/SKILL.md) | Positioning, GTM, competitive intelligence | - |
-| [app-store-optimization](marketing-skill/app-store-optimization/SKILL.md) | ASO for iOS & Android | - |
-| [campaign-analytics](marketing-skill/campaign-analytics/SKILL.md) | Multi-touch attribution, funnel analysis, ROI | 3 |
-| [social-media-analyzer](marketing-skill/social-media-analyzer/SKILL.md) | Social media performance tracking, engagement metrics | - |
-| [brand-strategist](marketing-skill/brand-strategist/SKILL.md) | Brand positioning, identity systems, brand architecture | - |
-| [growth-marketer](marketing-skill/growth-marketer/SKILL.md) | Experimentation, funnel optimization, viral loops, retention | - |
-| [marketing-analyst](marketing-skill/marketing-analyst/SKILL.md) | Attribution modeling, ROI analysis, campaign optimization | - |
-| [seo-specialist](marketing-skill/seo-specialist/SKILL.md) | Technical SEO, keyword research, link building, analytics | - |
-| [ad-creative](marketing-skill/ad-creative/SKILL.md) | Ad creative design, A/B testing, platform-specific formats | - |
-| [ai-seo](marketing-skill/ai-seo/SKILL.md) | AI-powered SEO, SGE optimization, semantic search | - |
-| [brand-guidelines](marketing-skill/brand-guidelines/SKILL.md) | Brand identity systems, style guides, voice & tone | - |
-| [cold-email](marketing-skill/cold-email/SKILL.md) | Cold outreach, personalization, sequences, deliverability | - |
-| [content-humanizer](marketing-skill/content-humanizer/SKILL.md) | Natural writing patterns, AI detection avoidance, authenticity | - |
-| [content-production](marketing-skill/content-production/SKILL.md) | Content ops, editorial calendar, workflow management | - |
-| [content-strategy](marketing-skill/content-strategy/SKILL.md) | Content pillars, audience research, funnel mapping | - |
-| [copywriting](marketing-skill/copywriting/SKILL.md) | Persuasive writing, PAS, AIDA, BAB frameworks | - |
-| [copy-editing](marketing-skill/copy-editing/SKILL.md) | Style consistency, grammar, editorial standards | - |
-| [landing-page-generator](marketing-skill/landing-page-generator/SKILL.md) | Landing page design, conversion optimization, CTA strategy | - |
-| [marketing-context](marketing-skill/marketing-context/SKILL.md) | Market research, customer insights, positioning context | - |
-| [marketing-ideas](marketing-skill/marketing-ideas/SKILL.md) | Campaign ideation, creative brainstorming, trend analysis | - |
-| [marketing-ops](marketing-skill/marketing-ops/SKILL.md) | Marketing automation, MarTech stack, data management | - |
-| [marketing-psychology](marketing-skill/marketing-psychology/SKILL.md) | Behavioral psychology, cognitive biases, persuasion | - |
-| [paid-ads](marketing-skill/paid-ads/SKILL.md) | PPC campaigns, Google/Meta/LinkedIn Ads, budget optimization | - |
-| [social-content](marketing-skill/social-content/SKILL.md) | Social media content creation, platform-specific formats | - |
-| [programmatic-seo](marketing-skill/programmatic-seo/SKILL.md) | Programmatic page generation, template-based SEO at scale | - |
-| [schema-markup](marketing-skill/schema-markup/SKILL.md) | Structured data, JSON-LD, rich snippets, Knowledge Graph | - |
-| [seo-audit](marketing-skill/seo-audit/SKILL.md) | Technical SEO audits, Core Web Vitals, crawl analysis | - |
-| [site-architecture](marketing-skill/site-architecture/SKILL.md) | Information architecture, URL structure, internal linking | - |
-| [analytics-tracking](marketing-skill/analytics-tracking/SKILL.md) | GTM, event tracking, conversion tracking, GA4 | - |
-| [email-sequence](marketing-skill/email-sequence/SKILL.md) | Email automation, drip campaigns, nurture flows | - |
-| [email-template-builder](marketing-skill/email-template-builder/SKILL.md) | Email HTML templates, responsive design, deliverability | - |
-| [social-media-manager](marketing-skill/social-media-manager/SKILL.md) | Social media management, scheduling, community management | - |
-| [launch-strategy](marketing-skill/launch-strategy/SKILL.md) | Product launch playbooks, pre/post-launch analysis | - |
+| [content-creator](marketing/content-creator/SKILL.md) | Brand voice analyzer, SEO optimizer, content frameworks | 2 |
+| [marketing-demand-acquisition](marketing/marketing-demand-acquisition/SKILL.md) | Demand gen, paid media, SEO, partnerships | 1 |
+| [marketing-strategy-pmm](marketing/marketing-strategy-pmm/SKILL.md) | Positioning, GTM, competitive intelligence | - |
+| [app-store-optimization](marketing/app-store-optimization/SKILL.md) | ASO for iOS & Android | - |
+| [campaign-analytics](marketing/campaign-analytics/SKILL.md) | Multi-touch attribution, funnel analysis, ROI | 3 |
+| [social-media-analyzer](marketing/social-media-analyzer/SKILL.md) | Social media performance tracking, engagement metrics | - |
+| [brand-strategist](marketing/brand-strategist/SKILL.md) | Brand positioning, identity systems, brand architecture | - |
+| [growth-marketer](marketing/growth-marketer/SKILL.md) | Experimentation, funnel optimization, viral loops, retention | - |
+| [marketing-analyst](marketing/marketing-analyst/SKILL.md) | Attribution modeling, ROI analysis, campaign optimization | - |
+| [seo-specialist](marketing/seo-specialist/SKILL.md) | Technical SEO, keyword research, link building, analytics | - |
+| [ad-creative](marketing/ad-creative/SKILL.md) | Ad creative design, A/B testing, platform-specific formats | - |
+| [ai-seo](marketing/ai-seo/SKILL.md) | AI-powered SEO, SGE optimization, semantic search | - |
+| [brand-guidelines](marketing/brand-guidelines/SKILL.md) | Brand identity systems, style guides, voice & tone | - |
+| [cold-email](marketing/cold-email/SKILL.md) | Cold outreach, personalization, sequences, deliverability | - |
+| [content-humanizer](marketing/content-humanizer/SKILL.md) | Natural writing patterns, AI detection avoidance, authenticity | - |
+| [content-production](marketing/content-production/SKILL.md) | Content ops, editorial calendar, workflow management | - |
+| [content-strategy](marketing/content-strategy/SKILL.md) | Content pillars, audience research, funnel mapping | - |
+| [copywriting](marketing/copywriting/SKILL.md) | Persuasive writing, PAS, AIDA, BAB frameworks | - |
+| [copy-editing](marketing/copy-editing/SKILL.md) | Style consistency, grammar, editorial standards | - |
+| [landing-page-generator](marketing/landing-page-generator/SKILL.md) | Landing page design, conversion optimization, CTA strategy | - |
+| [marketing-context](marketing/marketing-context/SKILL.md) | Market research, customer insights, positioning context | - |
+| [marketing-ideas](marketing/marketing-ideas/SKILL.md) | Campaign ideation, creative brainstorming, trend analysis | - |
+| [marketing-ops](marketing/marketing-ops/SKILL.md) | Marketing automation, MarTech stack, data management | - |
+| [marketing-psychology](marketing/marketing-psychology/SKILL.md) | Behavioral psychology, cognitive biases, persuasion | - |
+| [paid-ads](marketing/paid-ads/SKILL.md) | PPC campaigns, Google/Meta/LinkedIn Ads, budget optimization | - |
+| [social-content](marketing/social-content/SKILL.md) | Social media content creation, platform-specific formats | - |
+| [programmatic-seo](marketing/programmatic-seo/SKILL.md) | Programmatic page generation, template-based SEO at scale | - |
+| [schema-markup](marketing/schema-markup/SKILL.md) | Structured data, JSON-LD, rich snippets, Knowledge Graph | - |
+| [seo-audit](marketing/seo-audit/SKILL.md) | Technical SEO audits, Core Web Vitals, crawl analysis | - |
+| [site-architecture](marketing/site-architecture/SKILL.md) | Information architecture, URL structure, internal linking | - |
+| [analytics-tracking](marketing/analytics-tracking/SKILL.md) | GTM, event tracking, conversion tracking, GA4 | - |
+| [email-sequence](marketing/email-sequence/SKILL.md) | Email automation, drip campaigns, nurture flows | - |
+| [email-template-builder](marketing/email-template-builder/SKILL.md) | Email HTML templates, responsive design, deliverability | - |
+| [social-media-manager](marketing/social-media-manager/SKILL.md) | Social media management, scheduling, community management | - |
+| [launch-strategy](marketing/launch-strategy/SKILL.md) | Product launch playbooks, pre/post-launch analysis | - |
 
 ### Product Team (8)
 User-centered product development with automation tools.
@@ -1012,11 +1012,10 @@ Claude-Skills/
 ├── business-growth/      # 16 skills + 9 Python tools
 ├── c-level-advisor/      # 26 skills + 4 Python tools
 ├── data-analytics/       # 5 skills
-├── engineering/          # 33 advanced skills + 33 Python tools
-├── engineering-team/     # 24 core engineering skills + 50 Python tools
+├── engineering/          # 61 engineering skills + 177 Python tools
 ├── finance/              # 1 skill + 4 Python tools
 ├── hr-operations/        # 4 skills
-├── marketing-skill/      # 35 skills + 6 Python tools
+├── marketing/      # 35 skills + 6 Python tools
 ├── product-team/         # 8 skills + 6 Python tools
 ├── project-management/   # 22 skills + 10 Python tools
 ├── ra-qm-team/           # 20 skills + 35 Python tools (enterprise compliance)

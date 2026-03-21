@@ -284,7 +284,7 @@ python scripts/capacity_modeler.py --input capacity_data.json
 
 **In scope:** Operations maturity assessment, process documentation and optimization, headcount capacity modeling, operational KPI tracking and dashboarding, automation prioritization, vendor management frameworks, incident classification and response, business continuity planning, budget variance analysis, and operating rhythm design.
 
-**Out of scope:** IT infrastructure management (use engineering-team/ skills), HR policy design (use hr-operations/ skills), financial planning and FP&A (use finance/ skills), product operations (use cpo-advisor), and real-time monitoring system implementation. Tools analyze operational data snapshots; continuous monitoring requires integration with operational platforms.
+**Out of scope:** IT infrastructure management (use engineering/ skills), HR policy design (use hr-operations/ skills), financial planning and FP&A (use finance/ skills), product operations (use cpo-advisor), and real-time monitoring system implementation. Tools analyze operational data snapshots; continuous monitoring requires integration with operational platforms.
 
 **Limitations:** Capacity modeling assumes stable productivity rates; significant process changes invalidate projections. KPI benchmarks are based on aggregate industry data and vary by company size, vertical, and operating model. Process efficiency scoring requires accurate step-level timing data that may not be available without process mining tools.
 

@@ -603,11 +603,11 @@ Content creation, demand generation, product launches, sprint planning, code rev
 - **LICENSE** - MIT License
 
 ### Domain Guides
-- **marketing-skill/README.md** - Marketing team guide (957 lines)
+- **marketing/README.md** - Marketing team guide (957 lines)
 - **product-team/README.md** - Product team guide (if exists)
 - **project-management/README.md** - PM team guide (974 lines)
-- **engineering-team/START_HERE.md** - Engineering quick start (355 lines)
-- **engineering-team/TEAM_STRUCTURE_GUIDE.md** - Team composition (631 lines)
+- **engineering/START_HERE.md** - Engineering quick start (355 lines)
+- **engineering/TEAM_STRUCTURE_GUIDE.md** - Team composition (631 lines)
 - **ra-qm-team/README.md** - Regulatory/Quality guide (489 lines)
 
 ### Technical Documentation

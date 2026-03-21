@@ -125,3 +125,21 @@ grep -rn --include="*.{py,js,ts,yaml,yml,json,env,conf,cfg,ini,toml}" \
 2. Short-term improvements (this quarter)
 3. Long-term security roadmap
 ```
+
+## Skill-Powered Analysis
+
+### Tools to Run
+1. `python engineering/skill-security-auditor/scripts/code_scanner.py <src_dir>` — Scan for code execution, injection, exfiltration patterns
+2. `python engineering/env-secrets-manager/scripts/secret_scanner.py <src_dir>` — Detect hardcoded secrets (API keys, tokens, passwords)
+3. `python ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py` — SOC 2 readiness assessment (when applicable)
+
+### Pass/Fail Thresholds
+- **PASS**: Zero CRITICAL findings AND fewer than 3 HIGH findings
+- **WARN**: Zero CRITICAL but 3+ HIGH findings
+- **FAIL**: Any CRITICAL finding (code execution, leaked secrets, injection)
+
+### Workflow
+1. Run code_scanner.py and secret_scanner.py first for quantitative baseline
+2. Cross-reference findings with RA/QM compliance frameworks when project context warrants it
+3. Report tool verdict alongside LLM analysis
+4. Always include remediation priority (immediate/short-term/long-term)

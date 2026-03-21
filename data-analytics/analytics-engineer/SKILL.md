@@ -297,7 +297,7 @@ python scripts/quality_scorer.py --model fct_orders
 
 ## Integration Points
 
-- **Data Engineer** (`engineering-team/senior-data-engineer`): Coordinates on source table contracts, ingestion SLAs, and schema change notifications.
+- **Data Engineer** (`engineering/senior-data-engineer`): Coordinates on source table contracts, ingestion SLAs, and schema change notifications.
 - **Business Intelligence** (`data-analytics/business-intelligence`): Consumes mart models and semantic-layer metrics; dashboard specs reference model outputs.
 - **Data Analyst** (`data-analytics/data-analyst`): Writes ad-hoc queries against mart models; reports data quality issues back to the analytics engineer.
 - **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Feature engineering pipelines may depend on intermediate or mart models as upstream inputs.

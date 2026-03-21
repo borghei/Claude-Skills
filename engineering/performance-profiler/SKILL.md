@@ -468,9 +468,9 @@ API
 
 **This skill does NOT cover:**
 - Application Performance Monitoring (APM) platform setup and configuration (Datadog, New Relic, Grafana) — see `engineering/observability-designer`
-- Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering-team/senior-devops`
-- Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering-team/senior-security`
-- Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering-team/senior-mobile`
+- Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering/senior-devops`
+- Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering/senior-security`
+- Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering/senior-mobile`
 
 ## Integration Points
 
@@ -479,6 +479,6 @@ API
 | `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
 | `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
 | `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
-| `engineering-team/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
+| `engineering/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
 | `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
-| `engineering-team/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |
+| `engineering/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |

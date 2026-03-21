@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — 204 production-ready skill packages across 13 professional domains with 230+ Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — 204 production-ready skill packages across 13 professional domains with 559 Python automation tools, 17 AI agents, and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -24,19 +24,18 @@ This is the **universal AI skills library** — 204 production-ready skill packa
 ## Repository Structure
 
 ```
-├── engineering-team/     # 28 core engineering skills + 66 Python tools
-├── engineering/          # 33 advanced architecture skills + 33 Python tools
-├── marketing-skill/      # 35 marketing skills + 6 Python tools
-├── product-team/         # 8 product skills + 6 Python tools
-├── project-management/   # 23 PM skills + 14 Python tools
-├── c-level-advisor/      # 26 C-level advisory skills + 4 Python tools
-├── ra-qm-team/           # 21 regulatory/quality/compliance skills + 35 Python tools
-├── business-growth/      # 16 business & growth skills + 9 Python tools
-├── data-analytics/       # 5 data analytics skills
-├── hr-operations/        # 4 HR operations skills
-├── sales-success/        # 5 sales success skills
+├── engineering/          # 61 engineering skills + 177 Python tools
+├── marketing/      # 35 marketing skills + 106 Python tools
+├── product-team/         # 8 product skills + 15 Python tools
+├── project-management/   # 25 PM skills + 53 Python tools
+├── c-level-advisor/      # 26 C-level advisory skills + 73 Python tools
+├── ra-qm-team/           # 21 regulatory/quality/compliance skills + 38 Python tools
+├── business-growth/      # 17 business & growth skills + 48 Python tools
+├── data-analytics/       # 5 data analytics skills + 16 Python tools
+├── hr-operations/        # 4 HR operations skills + 12 Python tools
+├── sales-success/        # 5 sales success skills + 15 Python tools
 ├── finance/              # 1 finance skill + 4 Python tools
-├── agents/               # 7 production skill agents
+├── agents/               # 11 production skill agents
 ├── scripts/              # Skill installer + utility scripts
 ├── standards/            # Best practices library
 └── templates/            # Reusable templates + 12 sample workflows

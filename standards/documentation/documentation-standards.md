@@ -47,7 +47,7 @@ agents/marketing/cs-content-creator.md
 agents/c-level/cs-ceo-advisor.md
 
 # Skills (lowercase, no hyphens in folder names)
-marketing-skill/content-creator/SKILL.md
+marketing/content-creator/SKILL.md
 
 # Standards (lowercase with hyphens)
 standards/communication/communication-standards.md

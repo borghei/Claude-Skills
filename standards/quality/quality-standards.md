@@ -191,7 +191,7 @@ documentation_quality:
 yamllint agents/**/*.md standards/**/*.md documentation/**/*.md
 
 # Python syntax validation
-python -m compileall marketing-skill product-team c-level-advisor engineering-team ra-qm-team
+python -m compileall marketing product-team c-level-advisor engineering ra-qm-team
 
 # Check for broken links (manual check required)
 # Verify all ../../ relative paths resolve

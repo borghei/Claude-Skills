@@ -80,3 +80,21 @@ Follow Semantic Versioning:
 - [ ] Links to PRs/issues included
 - [ ] CHANGELOG.md updated at top (newest first)
 - [ ] Version history summary table updated
+
+## Skill-Powered Analysis
+
+### Tools to Run
+1. `python engineering/changelog-generator/scripts/commit_parser.py` — Parse conventional commits into structured entries
+2. `python engineering/changelog-generator/scripts/changelog_formatter.py` — Format entries into Keep a Changelog markdown
+3. `python engineering/changelog-generator/scripts/breaking_change_detector.py` — Scan for breaking changes
+
+### Pass/Fail Thresholds
+- **PASS**: 100% conventional commit parse rate AND all breaking changes detected
+- **WARN**: Parse rate 90-99% (some non-conventional commits)
+- **FAIL**: Parse rate below 90% OR missed breaking changes
+
+### Workflow
+1. Run commit_parser.py on git log output first
+2. Pipe parsed output to breaking_change_detector.py for safety check
+3. Use changelog_formatter.py to generate formatted output
+4. Report parse rate and breaking change count before presenting changelog

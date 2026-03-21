@@ -20,11 +20,11 @@ from typing import Dict, List, Optional
 
 # Skill domain configuration
 SKILL_DOMAINS = {
-    "marketing-skill": {
+    "marketing": {
         "category": "marketing",
         "description": "Marketing, content, and demand generation skills"
     },
-    "engineering-team": {
+    "engineering": {
         "category": "engineering",
         "description": "Software engineering and technical skills"
     },

@@ -255,30 +255,30 @@ tools: [Read, Write, Bash, Grep, Glob]
 
 ## Skill Integration
 
-**Skill Location:** `../../marketing-skill/content-creator/`
+**Skill Location:** `../../marketing/content-creator/`
 
 ### Python Tools
 
 **Brand Voice Analyzer:**
 ```bash
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt json
 ```
 
 **SEO Optimizer:**
 ```bash
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
+python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
+python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
 ```
 
 ### Knowledge Bases
-- Brand Guidelines: `../../marketing-skill/content-creator/references/brand_guidelines.md`
-- Content Frameworks: `../../marketing-skill/content-creator/references/content_frameworks.md`
-- Social Media Optimization: `../../marketing-skill/content-creator/references/social_media_optimization.md`
+- Brand Guidelines: `../../marketing/content-creator/references/brand_guidelines.md`
+- Content Frameworks: `../../marketing/content-creator/references/content_frameworks.md`
+- Social Media Optimization: `../../marketing/content-creator/references/social_media_optimization.md`
 
 ### Templates
-- Content Calendar: `../../marketing-skill/content-creator/assets/content-calendar-template.md`
-- Brand Voice Checklist: `../../marketing-skill/content-creator/assets/brand-voice-checklist.md`
+- Content Calendar: `../../marketing/content-creator/assets/content-calendar-template.md`
+- Brand Voice Checklist: `../../marketing/content-creator/assets/brand-voice-checklist.md`
 
 ## Workflows
 
@@ -302,7 +302,7 @@ python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md
 - cs-product-marketing (product launches)
 
 ## References
-- Skill Documentation: `../../marketing-skill/content-creator/SKILL.md`
+- Skill Documentation: `../../marketing/content-creator/SKILL.md`
 - Standards: `../../standards/communication/communication-standards.md`
 ```
 
@@ -310,12 +310,12 @@ python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md
 ```bash
 # Test relative paths
 cd agents/marketing
-ls ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py
-ls ../../marketing-skill/content-creator/references/brand_guidelines.md
+ls ../../marketing/content-creator/scripts/brand_voice_analyzer.py
+ls ../../marketing/content-creator/references/brand_guidelines.md
 
 # Test Python tool execution
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py \
-  ../../marketing-skill/content-creator/SKILL.md
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py \
+  ../../marketing/content-creator/SKILL.md
 
 # Back to root
 cd ../..
@@ -340,7 +340,7 @@ cd ../..
 
 **Structure:** Similar to cs-content-creator
 - YAML frontmatter
-- Skill integration: `../../marketing-skill/marketing-demand-acquisition/`
+- Skill integration: `../../marketing/marketing-demand-acquisition/`
 - Python tool: campaign_analyzer.py
 - Workflows: Lead gen, conversion optimization, funnel analysis
 
@@ -628,8 +628,8 @@ head -20 agents/marketing/cs-content-creator.md  # Should show valid YAML
 ```bash
 # Test from each agent directory
 cd agents/marketing
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py --help
-ls ../../marketing-skill/content-creator/references/brand_guidelines.md
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py --help
+ls ../../marketing/content-creator/references/brand_guidelines.md
 
 cd ../c-level
 ls ../../c-level-advisor/ceo-advisor/scripts/
@@ -643,9 +643,9 @@ cd ../..
 5. **Python Tool Execution** (30 min)
 ```bash
 # Run actual tools to verify they work
-python marketing-skill/content-creator/scripts/brand_voice_analyzer.py CLAUDE.md
+python marketing/content-creator/scripts/brand_voice_analyzer.py CLAUDE.md
 
-python marketing-skill/content-creator/scripts/seo_optimizer.py README.md "claude skills"
+python marketing/content-creator/scripts/seo_optimizer.py README.md "claude skills"
 
 python product-team/product-manager-toolkit/scripts/rice_prioritizer.py --help
 ```

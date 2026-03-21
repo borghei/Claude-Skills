@@ -73,7 +73,7 @@ jobs:
 
       - name: Python syntax check
         run: |
-          python -m compileall marketing-skill product-team c-level-advisor engineering-team ra-qm-team || true
+          python -m compileall marketing product-team c-level-advisor engineering ra-qm-team || true
 
       - name: Safety dependency audit (requirements*.txt)
         run: |

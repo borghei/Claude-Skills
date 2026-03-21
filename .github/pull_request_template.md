@@ -57,4 +57,4 @@ Related to #
 ---
 
 **Type**: <!-- feat | fix | docs | refactor | chore | ci | test | perf | skill -->
-**Scope**: <!-- component affected (e.g., marketing-skill, workflows, agents, templates) -->
+**Scope**: <!-- component affected (e.g., marketing, workflows, agents, templates) -->

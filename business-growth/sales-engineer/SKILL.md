@@ -233,7 +233,7 @@ python scripts/poc_planner.py poc_data.json --format json
 
 ## Integration Points
 
-- **Marketing Skills** - Leverage competitive intelligence and messaging frameworks from `../../marketing-skill/`
+- **Marketing Skills** - Leverage competitive intelligence and messaging frameworks from `../../marketing/`
 - **Product Team** - Coordinate on roadmap items flagged as "Planned" in RFP analysis from `../../product-team/`
 - **C-Level Advisory** - Escalate strategic deals requiring executive engagement from `../../c-level-advisor/`
 - **Customer Success** - Hand off POC results and success criteria to CSM from `../customer-success-manager/`
@@ -338,7 +338,7 @@ python scripts/poc_planner.py poc_data.json --format json
 - **pricing-strategy** -- Competitive pricing data from matrix builder informs pricing positioning decisions
 - **product-team** -- RFP gaps flagged as "Planned" or "Gap" feed into product roadmap prioritization
 - **c-level-advisor** -- Strategic deals requiring executive engagement escalate through C-level advisory workflow
-- **marketing-skill** -- Competitive intelligence from marketing feeds into battlecard creation and positioning
+- **marketing** -- Competitive intelligence from marketing feeds into battlecard creation and positioning
 
 ---
 

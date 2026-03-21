@@ -46,7 +46,7 @@ metadata:
     - c-level-advisor/ceo-advisor
     - c-level-advisor/board-deck-builder
     - sales-success/
-    - marketing-skill/
+    - marketing/
 ---
 
 # Competitive Intelligence

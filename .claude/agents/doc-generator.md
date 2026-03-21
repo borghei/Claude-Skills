@@ -78,3 +78,21 @@ Brief description from package metadata.
 - Always show what documentation was generated/updated
 - Provide a summary of changes made
 - Flag any areas where documentation seems incomplete or outdated
+
+## Skill-Powered Analysis
+
+### Tools to Run
+1. `python engineering/doc-drift-detector/scripts/drift_analyzer.py <docs_dir>` — Detect documentation drift from code
+2. `python engineering/doc-drift-detector/scripts/doc_staleness_scorer.py <docs_dir>` — Score documentation freshness
+3. `python engineering/codebase-onboarding/scripts/setup_validator.py <project_dir>` — Validate dev setup docs completeness
+
+### Pass/Fail Thresholds
+- **PASS**: Staleness score above 80 AND zero stale docs older than 90 days
+- **WARN**: Staleness score 60-80 OR docs 60-90 days old
+- **FAIL**: Staleness score below 60 OR critical docs (README, API) stale > 90 days
+
+### Workflow
+1. Run staleness_scorer.py and drift_analyzer.py before generating any docs
+2. Prioritize updating stale docs over creating new ones
+3. Run setup_validator.py to ensure onboarding docs are complete
+4. Report freshness scores alongside generated documentation

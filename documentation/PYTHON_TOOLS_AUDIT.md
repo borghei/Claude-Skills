@@ -362,8 +362,8 @@ Accurate statement:
 Check if engineering scripts are production-ready or placeholders:
 ```bash
 # Sample a few scripts
-cat ./engineering-team/senior-frontend/scripts/component_generator.py | head -50
-cat ./engineering-team/senior-backend/scripts/api_scaffolder.py | head -50
+cat ./engineering/senior-frontend/scripts/component_generator.py | head -50
+cat ./engineering/senior-backend/scripts/api_scaffolder.py | head -50
 ```
 
 **3. Document or Remove medium-content-pro**

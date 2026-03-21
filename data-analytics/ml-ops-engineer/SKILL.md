@@ -279,6 +279,6 @@ python scripts/pipeline_validator.py --pipeline pipeline.json --json
 
 - **Data Scientist** (`data-analytics/data-scientist`): Receives trained models with experiment metadata; promotes winning experiments to the registry for deployment.
 - **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on dbt mart models; schema changes trigger pipeline revalidation.
-- **Engineering** (`engineering-team/senior-ml-engineer`): Collaborates on model architecture optimization for serving constraints (latency, memory, GPU).
-- **Infrastructure** (`engineering-team/`): Kubernetes configurations, autoscaling policies, and CI/CD workflows are co-managed with platform engineering.
+- **Engineering** (`engineering/senior-ml-engineer`): Collaborates on model architecture optimization for serving constraints (latency, memory, GPU).
+- **Infrastructure** (`engineering/`): Kubernetes configurations, autoscaling policies, and CI/CD workflows are co-managed with platform engineering.
 - **Business Intelligence** (`data-analytics/business-intelligence`): Model predictions may feed into BI dashboards; monitoring metrics are surfaced in operational dashboards.

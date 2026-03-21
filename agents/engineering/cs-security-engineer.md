@@ -1,7 +1,7 @@
 ---
 name: cs-security-engineer
 description: Security engineering specialist for threat modeling, vulnerability scanning, secrets detection, and compliance assessment
-skills: engineering-team/senior-security
+skills: engineering/senior-security
 domain: engineering
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,42 +19,42 @@ The cs-security-engineer agent bridges the gap between individual security check
 
 ## Skill Integration
 
-**Primary Skill Location:** `../../engineering-team/senior-security/`
+**Primary Skill Location:** `../../engineering/senior-security/`
 
 ### Python Tools
 
 1. **Threat Modeler**
    - **Purpose:** Structured threat modeling using STRIDE methodology with risk scoring, attack surface mapping, and mitigation recommendations
-   - **Path:** `../../engineering-team/senior-security/scripts/threat_modeler.py`
-   - **Usage:** `python ../../engineering-team/senior-security/scripts/threat_modeler.py system_description.yaml`
+   - **Path:** `../../engineering/senior-security/scripts/threat_modeler.py`
+   - **Usage:** `python ../../engineering/senior-security/scripts/threat_modeler.py system_description.yaml`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** New system threat modeling, architecture security review, risk assessment
 
 2. **Secret Scanner**
    - **Purpose:** Detects exposed secrets, API keys, tokens, credentials, and private keys across the codebase
-   - **Path:** `../../engineering-team/senior-security/scripts/secret_scanner.py`
-   - **Usage:** `python ../../engineering-team/senior-security/scripts/secret_scanner.py .`
+   - **Path:** `../../engineering/senior-security/scripts/secret_scanner.py`
+   - **Usage:** `python ../../engineering/senior-security/scripts/secret_scanner.py .`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Pre-commit scanning, security audit, CI/CD gate, incident investigation
 
 3. **Compliance Checker**
    - **Purpose:** Checks codebase and infrastructure against compliance frameworks (SOC2, GDPR, PCI-DSS, HIPAA)
-   - **Path:** `../../engineering-team/senior-secops/scripts/compliance_checker.py`
-   - **Usage:** `python ../../engineering-team/senior-secops/scripts/compliance_checker.py . --framework soc2`
+   - **Path:** `../../engineering/senior-secops/scripts/compliance_checker.py`
+   - **Usage:** `python ../../engineering/senior-secops/scripts/compliance_checker.py . --framework soc2`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Compliance audit, gap analysis, certification preparation, evidence collection
 
 4. **Security Scanner**
    - **Purpose:** OWASP-based application security scanning for common vulnerabilities including injection, XSS, CSRF, and authentication issues
-   - **Path:** `../../engineering-team/senior-secops/scripts/security_scanner.py`
-   - **Usage:** `python ../../engineering-team/senior-secops/scripts/security_scanner.py src/`
+   - **Path:** `../../engineering/senior-secops/scripts/security_scanner.py`
+   - **Usage:** `python ../../engineering/senior-secops/scripts/security_scanner.py src/`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Application security assessment, OWASP Top 10 check, pre-deployment review
 
 5. **Vulnerability Assessor**
    - **Purpose:** Comprehensive vulnerability assessment combining multiple scanning techniques with risk-based prioritization
-   - **Path:** `../../engineering-team/senior-secops/scripts/vulnerability_assessor.py`
-   - **Usage:** `python ../../engineering-team/senior-secops/scripts/vulnerability_assessor.py .`
+   - **Path:** `../../engineering/senior-secops/scripts/vulnerability_assessor.py`
+   - **Usage:** `python ../../engineering/senior-secops/scripts/vulnerability_assessor.py .`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Vulnerability management, penetration test planning, risk prioritization
 
@@ -68,22 +68,22 @@ The cs-security-engineer agent bridges the gap between individual security check
 ### Knowledge Bases
 
 1. **Threat Modeling Guide**
-   - **Location:** `../../engineering-team/senior-security/references/threat-modeling-guide.md`
+   - **Location:** `../../engineering/senior-security/references/threat-modeling-guide.md`
    - **Content:** STRIDE methodology, threat classification, risk scoring (DREAD), attack tree construction, mitigation strategies
    - **Use Case:** Threat modeling process, risk assessment methodology, security architecture review
 
 2. **Security Architecture Patterns**
-   - **Location:** `../../engineering-team/senior-security/references/security-architecture-patterns.md`
+   - **Location:** `../../engineering/senior-security/references/security-architecture-patterns.md`
    - **Content:** Zero trust architecture, defense in depth, secure API design, authentication patterns, data protection strategies
    - **Use Case:** Security design review, architecture hardening, secure-by-design guidance
 
 3. **Cryptography Implementation**
-   - **Location:** `../../engineering-team/senior-security/references/cryptography-implementation.md`
+   - **Location:** `../../engineering/senior-security/references/cryptography-implementation.md`
    - **Content:** Encryption algorithms, key management, hashing, TLS configuration, secure storage patterns
    - **Use Case:** Crypto implementation review, key management audit, TLS assessment
 
 4. **Compliance Requirements**
-   - **Location:** `../../engineering-team/senior-secops/references/compliance_requirements.md`
+   - **Location:** `../../engineering/senior-secops/references/compliance_requirements.md`
    - **Content:** SOC2 Trust Service Criteria, GDPR requirements, PCI-DSS controls, HIPAA safeguards, mapping between frameworks
    - **Use Case:** Compliance gap analysis, control mapping, audit preparation
 
@@ -102,15 +102,15 @@ The cs-security-engineer agent bridges the gap between individual security check
 1. **Define System Scope** - Document system boundaries, data flows, trust boundaries, and external interfaces
 2. **Run Threat Modeler** - Generate STRIDE-based threat analysis
    ```bash
-   python ../../engineering-team/senior-security/scripts/threat_modeler.py system_description.yaml
+   python ../../engineering/senior-security/scripts/threat_modeler.py system_description.yaml
    ```
 3. **Reference Threat Guide** - Enrich analysis with methodology context
    ```bash
-   cat ../../engineering-team/senior-security/references/threat-modeling-guide.md
+   cat ../../engineering/senior-security/references/threat-modeling-guide.md
    ```
 4. **Review Architecture Patterns** - Identify applicable security patterns for mitigations
    ```bash
-   cat ../../engineering-team/senior-security/references/security-architecture-patterns.md
+   cat ../../engineering/senior-security/references/security-architecture-patterns.md
    ```
 5. **Score Risks** - Apply DREAD scoring to each identified threat
 6. **Create Mitigation Plan** - Map threats to mitigations, prioritize by risk score
@@ -135,7 +135,7 @@ trust_boundaries:
   - internet/dmz
   - dmz/internal
 EOF
-python ../../engineering-team/senior-security/scripts/threat_modeler.py system.yaml
+python ../../engineering/senior-security/scripts/threat_modeler.py system.yaml
 ```
 
 ### Workflow 2: Full Security Scan
@@ -145,15 +145,15 @@ python ../../engineering-team/senior-security/scripts/threat_modeler.py system.y
 **Steps:**
 1. **Secret Scan** - Detect exposed credentials and API keys
    ```bash
-   python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+   python ../../engineering/senior-security/scripts/secret_scanner.py .
    ```
 2. **Application Security Scan** - OWASP Top 10 vulnerability check
    ```bash
-   python ../../engineering-team/senior-secops/scripts/security_scanner.py src/
+   python ../../engineering/senior-secops/scripts/security_scanner.py src/
    ```
 3. **Vulnerability Assessment** - Comprehensive vulnerability analysis
    ```bash
-   python ../../engineering-team/senior-secops/scripts/vulnerability_assessor.py .
+   python ../../engineering/senior-secops/scripts/vulnerability_assessor.py .
    ```
 4. **Dependency CVE Scan** - Check all dependencies for known vulnerabilities
    ```bash
@@ -169,9 +169,9 @@ python ../../engineering-team/senior-security/scripts/threat_modeler.py system.y
 **Example:**
 ```bash
 # Quick full security scan
-echo "=== Secrets ===" && python ../../engineering-team/senior-security/scripts/secret_scanner.py .
-echo "=== OWASP ===" && python ../../engineering-team/senior-secops/scripts/security_scanner.py src/
-echo "=== Vulnerabilities ===" && python ../../engineering-team/senior-secops/scripts/vulnerability_assessor.py .
+echo "=== Secrets ===" && python ../../engineering/senior-security/scripts/secret_scanner.py .
+echo "=== OWASP ===" && python ../../engineering/senior-secops/scripts/security_scanner.py src/
+echo "=== Vulnerabilities ===" && python ../../engineering/senior-secops/scripts/vulnerability_assessor.py .
 echo "=== Dependencies ===" && python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.txt
 ```
 
@@ -190,7 +190,7 @@ echo "=== Dependencies ===" && python ../../engineering/dependency-auditor/scrip
    ```
 3. **Review Crypto Dependencies** - Check cryptographic libraries for known weaknesses
    ```bash
-   cat ../../engineering-team/senior-security/references/cryptography-implementation.md
+   cat ../../engineering/senior-security/references/cryptography-implementation.md
    ```
 4. **Create Upgrade Plan** - Prioritize dependency upgrades by CVE severity, breaking change risk, and effort
 5. **Document Findings** - Produce dependency security report with upgrade roadmap
@@ -206,19 +206,19 @@ echo "=== Dependencies ===" && python ../../engineering/dependency-auditor/scrip
 **Steps:**
 1. **Run Compliance Checker** - Assess against target framework
    ```bash
-   python ../../engineering-team/senior-secops/scripts/compliance_checker.py . --framework soc2
+   python ../../engineering/senior-secops/scripts/compliance_checker.py . --framework soc2
    ```
 2. **Reference Requirements** - Review detailed compliance requirements
    ```bash
-   cat ../../engineering-team/senior-secops/references/compliance_requirements.md
+   cat ../../engineering/senior-secops/references/compliance_requirements.md
    ```
 3. **Security Architecture Review** - Check architecture against compliance-required patterns
    ```bash
-   cat ../../engineering-team/senior-security/references/security-architecture-patterns.md
+   cat ../../engineering/senior-security/references/security-architecture-patterns.md
    ```
 4. **Secret Audit** - Verify credential management meets compliance requirements
    ```bash
-   python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+   python ../../engineering/senior-security/scripts/secret_scanner.py .
    ```
 5. **Gap Analysis** - Map current state vs required controls, identify gaps
 6. **Remediation Roadmap** - Produce phased plan to close compliance gaps with effort estimates
@@ -232,7 +232,7 @@ echo "=== Dependencies ===" && python ../../engineering/dependency-auditor/scrip
 # Multi-framework compliance check
 for framework in soc2 gdpr pci-dss; do
   echo "=== $framework ==="
-  python ../../engineering-team/senior-secops/scripts/compliance_checker.py . --framework $framework
+  python ../../engineering/senior-secops/scripts/compliance_checker.py . --framework $framework
 done
 ```
 
@@ -247,7 +247,7 @@ done
 echo "Running pre-deployment security gate..."
 
 # Secret scan (critical - blocks deployment)
-python ../../engineering-team/senior-security/scripts/secret_scanner.py . --json > secrets.json
+python ../../engineering/senior-security/scripts/secret_scanner.py . --json > secrets.json
 SECRETS=$(python -c "import json; d=json.load(open('secrets.json')); print(len(d.get('findings',[])))")
 if [ "$SECRETS" -gt 0 ]; then
   echo "BLOCKED: $SECRETS secrets detected"
@@ -255,7 +255,7 @@ if [ "$SECRETS" -gt 0 ]; then
 fi
 
 # OWASP scan
-python ../../engineering-team/senior-secops/scripts/security_scanner.py src/ --json > owasp.json
+python ../../engineering/senior-secops/scripts/security_scanner.py src/ --json > owasp.json
 
 # Dependency scan
 python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.txt --json > deps.json
@@ -271,10 +271,10 @@ echo "=== Weekly Security Report ==="
 echo "Date: $(date)"
 
 echo "--- Secret Scan ---"
-python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+python ../../engineering/senior-security/scripts/secret_scanner.py .
 
 echo "--- Vulnerability Assessment ---"
-python ../../engineering-team/senior-secops/scripts/vulnerability_assessor.py .
+python ../../engineering/senior-secops/scripts/vulnerability_assessor.py .
 
 echo "--- Dependency Health ---"
 python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.txt
@@ -287,7 +287,7 @@ python ../../engineering/dependency-auditor/scripts/dep_scanner.py requirements.
 echo "=== Emergency Secret Scan ==="
 
 # Full codebase scan
-python ../../engineering-team/senior-security/scripts/secret_scanner.py .
+python ../../engineering/senior-security/scripts/secret_scanner.py .
 
 # Check git history for committed secrets
 git log --all --full-history --source -- '*.env' '*.key' '*.pem'
@@ -322,10 +322,10 @@ echo "=== Review findings and rotate any exposed credentials immediately ==="
 
 ## References
 
-- **Senior Security Skill:** [../../engineering-team/senior-security/SKILL.md](../../engineering-team/senior-security/SKILL.md)
-- **Senior SecOps Skill:** [../../engineering-team/senior-secops/SKILL.md](../../engineering-team/senior-secops/SKILL.md)
+- **Senior Security Skill:** [../../engineering/senior-security/SKILL.md](../../engineering/senior-security/SKILL.md)
+- **Senior SecOps Skill:** [../../engineering/senior-secops/SKILL.md](../../engineering/senior-secops/SKILL.md)
 - **Dependency Auditor Skill:** [../../engineering/dependency-auditor/SKILL.md](../../engineering/dependency-auditor/SKILL.md)
-- **Engineering Domain Guide:** [../../engineering-team/CLAUDE.md](../../engineering-team/CLAUDE.md)
+- **Engineering Domain Guide:** [../../engineering/CLAUDE.md](../../engineering/CLAUDE.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
 
 ---

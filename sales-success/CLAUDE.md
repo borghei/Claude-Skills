@@ -99,10 +99,10 @@ python sales-operations/scripts/territory_planner.py account_data.json
 ## Related Skills
 
 - **Business & Growth:** Revenue operations, customer success strategy -> `../business-growth/`
-- **Marketing:** Demand generation, campaign analytics -> `../marketing-skill/`
+- **Marketing:** Demand generation, campaign analytics -> `../marketing/`
 - **Product Team:** Product positioning, competitive analysis -> `../product-team/`
 - **C-Level:** GTM strategy, revenue planning -> `../c-level-advisor/`
-- **Engineering:** Technical integration, solution architecture -> `../engineering-team/`
+- **Engineering:** Technical integration, solution architecture -> `../engineering/`
 
 ## Additional Resources
 

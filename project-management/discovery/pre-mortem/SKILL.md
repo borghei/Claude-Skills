@@ -252,7 +252,7 @@ Use `assets/pre_mortem_template.md` for the full document template.
 - Ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`)
 - Quantitative risk analysis with probability/impact scoring (see `senior-pm/` skill)
 - Product discovery and hypothesis validation (see `brainstorm-experiments/`)
-- Technical architecture risk assessment (see `engineering-team/` skills)
+- Technical architecture risk assessment (see `engineering/` skills)
 
 **Important Caveats:**
 - Pre-mortems are most effective with 4-8 participants. Fewer than 4 limits perspective diversity; more than 10 makes classification unwieldy.

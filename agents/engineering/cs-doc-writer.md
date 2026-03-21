@@ -1,7 +1,7 @@
 ---
 name: cs-doc-writer
 description: Technical documentation specialist for README generation, API docs, architecture diagrams, changelogs, and release notes
-skills: engineering-team/senior-architect
+skills: engineering/senior-architect
 domain: engineering
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,28 +19,28 @@ The cs-doc-writer agent bridges the gap between code and documentation by progra
 
 ## Skill Integration
 
-**Primary Skill Location:** `../../engineering-team/senior-architect/`
+**Primary Skill Location:** `../../engineering/senior-architect/`
 
 ### Python Tools
 
 1. **Architecture Diagram Generator**
    - **Purpose:** Generates architecture diagrams from codebase analysis including component relationships, data flow, and deployment topology
-   - **Path:** `../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py`
-   - **Usage:** `python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py src/`
+   - **Path:** `../../engineering/senior-architect/scripts/architecture_diagram_generator.py`
+   - **Usage:** `python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py src/`
    - **Output Formats:** Mermaid diagram syntax, ASCII diagrams
    - **Use Cases:** Architecture documentation, system overview diagrams, onboarding materials
 
 2. **Dependency Analyzer**
    - **Purpose:** Maps project dependencies and their relationships, producing dependency graphs and impact analysis
-   - **Path:** `../../engineering-team/senior-architect/scripts/dependency_analyzer.py`
-   - **Usage:** `python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py .`
+   - **Path:** `../../engineering/senior-architect/scripts/dependency_analyzer.py`
+   - **Usage:** `python ../../engineering/senior-architect/scripts/dependency_analyzer.py .`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Dependency documentation, upgrade impact analysis, architecture mapping
 
 3. **Project Architect**
    - **Purpose:** Analyzes project structure, identifies architectural patterns, and generates structural documentation
-   - **Path:** `../../engineering-team/senior-architect/scripts/project_architect.py`
-   - **Usage:** `python ../../engineering-team/senior-architect/scripts/project_architect.py .`
+   - **Path:** `../../engineering/senior-architect/scripts/project_architect.py`
+   - **Usage:** `python ../../engineering/senior-architect/scripts/project_architect.py .`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Project structure documentation, architecture review, README generation
 
@@ -68,12 +68,12 @@ The cs-doc-writer agent bridges the gap between code and documentation by progra
 ### Knowledge Bases
 
 1. **Architecture Patterns**
-   - **Location:** `../../engineering-team/senior-architect/references/architecture_patterns.md`
+   - **Location:** `../../engineering/senior-architect/references/architecture_patterns.md`
    - **Content:** Common architecture patterns (microservices, monolith, event-driven, CQRS), trade-offs, and when to use each
    - **Use Case:** Architecture documentation context, pattern identification, design decision documentation
 
 2. **System Design Workflows**
-   - **Location:** `../../engineering-team/senior-architect/references/system_design_workflows.md`
+   - **Location:** `../../engineering/senior-architect/references/system_design_workflows.md`
    - **Content:** System design process, capacity planning, scalability analysis, and documentation workflows
    - **Use Case:** System design documentation, architecture decision records, technical specifications
 
@@ -96,15 +96,15 @@ The cs-doc-writer agent bridges the gap between code and documentation by progra
 **Steps:**
 1. **Analyze Project Structure** - Map the project's architecture and component relationships
    ```bash
-   python ../../engineering-team/senior-architect/scripts/project_architect.py .
+   python ../../engineering/senior-architect/scripts/project_architect.py .
    ```
 2. **Generate Architecture Diagram** - Create visual representation of the system
    ```bash
-   python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py src/
+   python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py src/
    ```
 3. **Map Dependencies** - Document external dependencies and their roles
    ```bash
-   python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py .
+   python ../../engineering/senior-architect/scripts/dependency_analyzer.py .
    ```
 4. **Compile README** - Assemble findings into structured README with sections: Overview, Architecture, Installation, Usage, API, Contributing
 5. **Validate Completeness** - Ensure all key sections present and accurate
@@ -116,9 +116,9 @@ The cs-doc-writer agent bridges the gap between code and documentation by progra
 **Example:**
 ```bash
 # Generate all inputs for README
-python ../../engineering-team/senior-architect/scripts/project_architect.py . > structure.txt
-python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py src/ > diagrams.txt
-python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py . > deps.txt
+python ../../engineering/senior-architect/scripts/project_architect.py . > structure.txt
+python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py src/ > diagrams.txt
+python ../../engineering/senior-architect/scripts/dependency_analyzer.py . > deps.txt
 # Then compile into README.md
 ```
 
@@ -157,23 +157,23 @@ python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py . 
 **Steps:**
 1. **Analyze Architecture** - Map component relationships and system boundaries
    ```bash
-   python ../../engineering-team/senior-architect/scripts/project_architect.py .
+   python ../../engineering/senior-architect/scripts/project_architect.py .
    ```
 2. **Generate Diagrams** - Create component, data flow, and deployment diagrams
    ```bash
-   python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py src/
+   python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py src/
    ```
 3. **Reference Architecture Patterns** - Identify which patterns the system follows
    ```bash
-   cat ../../engineering-team/senior-architect/references/architecture_patterns.md
+   cat ../../engineering/senior-architect/references/architecture_patterns.md
    ```
 4. **Analyze Dependencies** - Map internal and external dependencies
    ```bash
-   python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py .
+   python ../../engineering/senior-architect/scripts/dependency_analyzer.py .
    ```
 5. **Create ADRs** - Document key architecture decisions using ADR format from system design workflows
    ```bash
-   cat ../../engineering-team/senior-architect/references/system_design_workflows.md
+   cat ../../engineering/senior-architect/references/system_design_workflows.md
    ```
 6. **Assemble Documentation** - Compile into architecture document with diagrams, ADRs, and component descriptions
 
@@ -219,13 +219,13 @@ python ../../engineering/release-manager/changelog_generator.py
 PROJECT_ROOT=$1
 
 echo "=== Analyzing Project ==="
-python ../../engineering-team/senior-architect/scripts/project_architect.py "$PROJECT_ROOT"
+python ../../engineering/senior-architect/scripts/project_architect.py "$PROJECT_ROOT"
 
 echo "=== Generating Architecture Diagrams ==="
-python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py "$PROJECT_ROOT/src"
+python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py "$PROJECT_ROOT/src"
 
 echo "=== Mapping Dependencies ==="
-python ../../engineering-team/senior-architect/scripts/dependency_analyzer.py "$PROJECT_ROOT"
+python ../../engineering/senior-architect/scripts/dependency_analyzer.py "$PROJECT_ROOT"
 
 echo "=== Generating Changelog ==="
 python ../../engineering/release-manager/changelog_generator.py
@@ -255,10 +255,10 @@ echo "Updating changelog..."
 python ../../engineering/release-manager/changelog_generator.py
 
 echo "Updating architecture docs..."
-python ../../engineering-team/senior-architect/scripts/architecture_diagram_generator.py src/
+python ../../engineering/senior-architect/scripts/architecture_diagram_generator.py src/
 
 echo "Verifying project structure docs..."
-python ../../engineering-team/senior-architect/scripts/project_architect.py .
+python ../../engineering/senior-architect/scripts/project_architect.py .
 ```
 
 ## Success Metrics
@@ -288,10 +288,10 @@ python ../../engineering-team/senior-architect/scripts/project_architect.py .
 
 ## References
 
-- **Senior Architect Skill:** [../../engineering-team/senior-architect/SKILL.md](../../engineering-team/senior-architect/SKILL.md)
+- **Senior Architect Skill:** [../../engineering/senior-architect/SKILL.md](../../engineering/senior-architect/SKILL.md)
 - **API Design Reviewer Skill:** [../../engineering/api-design-reviewer/SKILL.md](../../engineering/api-design-reviewer/SKILL.md)
 - **Release Manager Skill:** [../../engineering/release-manager/SKILL.md](../../engineering/release-manager/SKILL.md)
-- **Engineering Domain Guide:** [../../engineering-team/CLAUDE.md](../../engineering-team/CLAUDE.md)
+- **Engineering Domain Guide:** [../../engineering/CLAUDE.md](../../engineering/CLAUDE.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
 
 ---

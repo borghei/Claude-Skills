@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Skills - The Universal AI Skills Library</title>
+  <meta name="description" content="204 production-ready skills, 559 Python tools, 13 domains. Works with every major AI coding assistant.">
+  <meta property="og:title" content="Claude Skills - The Universal AI Skills Library">
+  <meta property="og:description" content="204 skills. 559 tools. 13 domains. Every major AI coding assistant.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <h1 class="hero-title fade-in">The Universal AI<br><span class="gradient-text">Skills Library</span></h1>
+      <p class="hero-subtitle fade-in">204 skills. 559 tools. 13 domains. Every major AI coding assistant.</p>
+      <div class="terminal hero-terminal fade-in">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="typed-command" id="hero-cmd">python engineering/senior-architect/scripts/dependency_analyzer.py ./src --json</span>
+          </div>
+          <div class="terminal-output" id="hero-output">{"coupling_score": 0.23, "circular_deps": 0, "components": 47}</div>
+        </div>
+      </div>
+      <div class="hero-buttons fade-in">
+        <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
+        <a href="https://github.com/borghei/Claude-Skills#readme" class="btn btn-secondary" target="_blank" rel="noopener">View Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" id="stats">
+    <div class="container stats-bar">
+      <div class="stat-item">
+        <span class="stat-number" data-target="204">0</span>
+        <span class="stat-label">Skills</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="559">0</span>
+        <span class="stat-label">Python Tools</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="13">0</span>
+        <span class="stat-label">Domains</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="19">0</span>
+        <span class="stat-label">Agents</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="10">0</span>
+        <span class="stat-label">Platforms</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Domains -->
+  <section class="domains" id="domains">
+    <div class="container">
+      <h2 class="section-title fade-in"><span class="gradient-text">13 Domains</span></h2>
+      <p class="section-subtitle fade-in">Production-ready skill packages across every business function</p>
+      <div class="domains-grid">
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F528;</div>
+          <h3>Engineering</h3>
+          <div class="domain-meta">61 skills &middot; 177 tools</div>
+          <p>Architecture, fullstack, AI/ML, security, and infrastructure</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4E3;</div>
+          <h3>Marketing</h3>
+          <div class="domain-meta">35 skills &middot; 106 tools</div>
+          <p>Content creation, SEO, demand gen, campaign analytics</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F451;</div>
+          <h3>C-Level</h3>
+          <div class="domain-meta">26 skills &middot; 73 tools</div>
+          <p>CEO, CTO, CFO, and CISO strategic advisory</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4CB;</div>
+          <h3>Project Management</h3>
+          <div class="domain-meta">25 skills &middot; 53 tools</div>
+          <p>Discovery, execution, Atlassian MCP integration</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4C8;</div>
+          <h3>Business &amp; Growth</h3>
+          <div class="domain-meta">17 skills &middot; 48 tools</div>
+          <p>Customer success, sales engineering, revenue ops</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F6E1;&#xFE0F;</div>
+          <h3>Compliance</h3>
+          <div class="domain-meta">21 skills &middot; 38 tools</div>
+          <p>ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4CA;</div>
+          <h3>Data Analytics</h3>
+          <div class="domain-meta">5 skills &middot; 16 tools</div>
+          <p>BI, ML ops, analytics engineering, data pipelines</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4E6;</div>
+          <h3>Product</h3>
+          <div class="domain-meta">8 skills &middot; 15 tools</div>
+          <p>RICE scoring, OKRs, user stories, UX research</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4B0;</div>
+          <h3>Sales</h3>
+          <div class="domain-meta">5 skills &middot; 15 tools</div>
+          <p>Account executive, sales ops, solutions architect</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F465;</div>
+          <h3>HR Operations</h3>
+          <div class="domain-meta">4 skills &middot; 12 tools</div>
+          <p>Talent acquisition, people analytics, HR business partner</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4B5;</div>
+          <h3>Finance</h3>
+          <div class="domain-meta">1 skill &middot; 4 tools</div>
+          <p>DCF valuation, budgeting, forecasting, ratio analysis</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4D0;</div>
+          <h3>Standards</h3>
+          <div class="domain-meta">5 skills</div>
+          <p>Communication, quality, git, security standards</p>
+        </div>
+        <div class="domain-card fade-in">
+          <div class="domain-icon">&#x1F4C4;</div>
+          <h3>Templates</h3>
+          <div class="domain-meta">12 workflows</div>
+          <p>Reusable CI/CD workflows and project templates</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Demo -->
+  <section class="demo" id="demo">
+    <div class="container">
+      <h2 class="section-title fade-in">See It <span class="gradient-text">In Action</span></h2>
+      <p class="section-subtitle fade-in">Real tools, real output, zero LLM dependencies</p>
+      <div class="terminal demo-terminal fade-in">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">demo</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="typed-command" id="demo-cmd"></span><span class="cursor" id="demo-cursor">|</span>
+          </div>
+          <pre class="terminal-output" id="demo-output"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agents -->
+  <section class="agents" id="agents">
+    <div class="container">
+      <h2 class="section-title fade-in">Role-Based <span class="gradient-text">AI Agents</span></h2>
+      <p class="section-subtitle fade-in">Specialized agents for every executive and lead role</p>
+      <div class="agents-grid">
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F468;&#x200D;&#x1F4BB;</div>
+          <h3>Tech Lead</h3>
+          <p>Architecture decisions, code review, technical strategy</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F3D7;&#xFE0F;</div>
+          <h3>Engineering Director</h3>
+          <p>Team scaling, process optimization, delivery excellence</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F4B8;</div>
+          <h3>CFO</h3>
+          <p>Financial modeling, budgeting, investor relations</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F510;</div>
+          <h3>CISO</h3>
+          <p>Security posture, compliance, incident response</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F4E2;</div>
+          <h3>CMO</h3>
+          <p>Brand strategy, demand generation, market positioning</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F6E1;&#xFE0F;</div>
+          <h3>Privacy Officer</h3>
+          <p>GDPR, CCPA, data governance, privacy audits</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F680;</div>
+          <h3>Growth Lead</h3>
+          <p>Revenue ops, customer success, market expansion</p>
+        </div>
+        <div class="agent-card fade-in">
+          <div class="agent-icon">&#x1F3A8;</div>
+          <h3>Design Lead</h3>
+          <p>UX strategy, design systems, accessibility audits</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section class="install" id="install">
+    <div class="container">
+      <h2 class="section-title fade-in"><span class="gradient-text">Get Started</span> in Seconds</h2>
+      <div class="install-block fade-in">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">install</span>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-line">
+              <span class="terminal-prompt">$</span>
+              <span class="install-cmd">git clone https://github.com/borghei/Claude-Skills.git</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-buttons fade-in">
+        <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Star on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+        <span class="footer-sep">&middot;</span>
+        <span>MIT + Commons Clause</span>
+        <span class="footer-sep">&middot;</span>
+        <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+      </div>
+      <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

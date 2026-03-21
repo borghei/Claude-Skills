@@ -50,7 +50,7 @@ metadata:
     - c-level-advisor/ceo-advisor
     - c-level-advisor/coo-advisor
     - c-level-advisor/cro-advisor
-    - engineering-team/
+    - engineering/
     - standards/security/
 ---
 

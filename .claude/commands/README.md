@@ -130,7 +130,7 @@
 
 ```
 # 1. Make changes to skills
-[Edit files in marketing-skill/, product-team/, etc.]
+[Edit files in marketing/, product-team/, etc.]
 
 # 2. Run quality checks
 /review
@@ -191,11 +191,11 @@ All commits follow **Conventional Commits**:
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-**Scopes**: `marketing-skill`, `product-team`, `c-level-advisor`, `engineering-team`, `ra-qm-team`, `workflows`, `docs`, `ci`
+**Scopes**: `marketing`, `product-team`, `c-level-advisor`, `engineering`, `ra-qm-team`, `workflows`, `docs`, `ci`
 
 **Examples**:
 ```
-feat(marketing-skill): add LinkedIn content framework
+feat(marketing): add LinkedIn content framework
 fix(product-team): correct RICE prioritization calculation
 docs(README): update skill installation instructions
 ci(workflows): add auto-close issues on PR merge

@@ -1,7 +1,7 @@
 ---
 name: cs-demand-gen-specialist
 description: Demand generation and customer acquisition specialist for lead generation, conversion optimization, and multi-channel acquisition campaigns
-skills: marketing-skill/marketing-demand-acquisition
+skills: marketing/marketing-demand-acquisition
 domain: marketing
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,14 +19,14 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 
 ## Skill Integration
 
-**Skill Location:** `../../marketing-skill/marketing-demand-acquisition/`
+**Skill Location:** `../../marketing/marketing-demand-acquisition/`
 
 ### Python Tools
 
 1. **CAC Calculator**
    - **Purpose:** Calculates Customer Acquisition Cost (CAC) across channels and campaigns
-   - **Path:** `../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py`
-   - **Usage:** `python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py campaign-spend.csv customer-data.csv`
+   - **Path:** `../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py`
+   - **Usage:** `python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py campaign-spend.csv customer-data.csv`
    - **Features:** CAC calculation by channel, LTV:CAC ratio, payback period analysis, ROI metrics
    - **Use Cases:** Budget allocation, channel performance evaluation, campaign ROI analysis
 
@@ -35,28 +35,28 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 ### Knowledge Bases
 
 1. **Acquisition Frameworks**
-   - **Location:** `../../marketing-skill/marketing-demand-acquisition/references/acquisition_frameworks.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/references/acquisition_frameworks.md`
    - **Content:** Lead generation strategies, conversion optimization frameworks, acquisition funnel templates
    - **Use Case:** Campaign planning, strategy development, funnel design
 
 2. **Channel Best Practices**
-   - **Location:** `../../marketing-skill/marketing-demand-acquisition/references/channel_best_practices.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/references/channel_best_practices.md`
    - **Content:** Paid search (Google Ads), paid social (LinkedIn, Facebook), content marketing, email campaigns
    - **Use Case:** Channel-specific optimization, budget allocation, A/B testing
 
 3. **Conversion Optimization**
-   - **Location:** `../../marketing-skill/marketing-demand-acquisition/references/conversion_optimization.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/references/conversion_optimization.md`
    - **Content:** Landing page best practices, CTA optimization, form optimization, lead magnets
    - **Use Case:** Conversion rate improvement, landing page design, lead capture optimization
 
 ### Templates
 
 1. **Campaign Planning Template**
-   - **Location:** `../../marketing-skill/marketing-demand-acquisition/assets/campaign-plan.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/assets/campaign-plan.md`
    - **Use Case:** Multi-channel campaign planning, goal setting
 
 2. **Funnel Analysis Template**
-   - **Location:** `../../marketing-skill/marketing-demand-acquisition/assets/funnel-analysis.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/assets/funnel-analysis.md`
    - **Use Case:** Conversion funnel mapping, bottleneck identification
 
 ## Workflows
@@ -69,19 +69,19 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 1. **Define Campaign Goals** - Set targets for leads, MQLs, SQLs, conversion rates
 2. **Reference Acquisition Frameworks** - Review proven lead generation strategies
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/acquisition_frameworks.md
+   cat ../../marketing/marketing-demand-acquisition/references/acquisition_frameworks.md
    ```
 3. **Select Channels** - Choose optimal mix based on target audience and budget
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/channel_best_practices.md
+   cat ../../marketing/marketing-demand-acquisition/references/channel_best_practices.md
    ```
 4. **Create Campaign Plan** - Use template to structure multi-channel approach
    ```bash
-   cp ../../marketing-skill/marketing-demand-acquisition/assets/campaign-plan.md q4-demand-gen-campaign.md
+   cp ../../marketing/marketing-demand-acquisition/assets/campaign-plan.md q4-demand-gen-campaign.md
    ```
 5. **Design Landing Pages** - Reference conversion optimization best practices
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
    ```
 6. **Launch and Monitor** - Deploy campaigns, track metrics, collect data
 
@@ -97,11 +97,11 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 1. **Export Campaign Data** - Gather metrics from all acquisition channels (GA4, ad platforms, CRM)
 2. **Calculate Channel CAC** - Run CAC calculator to analyze cost efficiency
    ```bash
-   python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py campaign-spend.csv conversions.csv
+   python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py campaign-spend.csv conversions.csv
    ```
 3. **Map Conversion Funnel** - Use template to visualize drop-off points
    ```bash
-   cp ../../marketing-skill/marketing-demand-acquisition/assets/funnel-analysis.md current-funnel-analysis.md
+   cp ../../marketing/marketing-demand-acquisition/assets/funnel-analysis.md current-funnel-analysis.md
    ```
 4. **Identify Bottlenecks** - Analyze conversion rates at each funnel stage:
    - Awareness → Interest (CTR)
@@ -110,12 +110,12 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
    - Intent → Purchase/MQL (qualification rate)
 5. **Reference Optimization Guides** - Review best practices for problem areas
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
    ```
 6. **Implement A/B Tests** - Test hypotheses for improvement
 7. **Re-calculate CAC Post-Optimization** - Measure cost efficiency improvements
    ```bash
-   python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py post-optimization-spend.csv post-optimization-conversions.csv
+   python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py post-optimization-spend.csv post-optimization-conversions.csv
    ```
 
 **Expected Output:** 15-30% reduction in CAC and improved LTV:CAC ratio
@@ -125,7 +125,7 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 **Example:**
 ```bash
 # Complete CAC analysis workflow
-python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py q3-spend.csv q3-conversions.csv > cac-report.txt
+python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py q3-spend.csv q3-conversions.csv > cac-report.txt
 cat cac-report.txt
 # Review metrics and optimize high-CAC channels
 ```
@@ -143,11 +143,11 @@ cat cac-report.txt
    - Email Campaigns (open rate, click rate, conversions)
 2. **Run CAC Comparison** - Calculate and compare CAC across all channels
    ```bash
-   python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py channel-spend.csv channel-conversions.csv
+   python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py channel-spend.csv channel-conversions.csv
    ```
 3. **Reference Channel Best Practices** - Understand benchmarks for each channel
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/channel_best_practices.md
+   cat ../../marketing/marketing-demand-acquisition/references/channel_best_practices.md
    ```
 4. **Calculate Key Metrics:**
    - CAC (Customer Acquisition Cost) by channel
@@ -169,7 +169,7 @@ cat cac-report.txt
 1. **Define Lead Magnet** - Choose format: ebook, webinar, template, assessment, free trial
 2. **Reference Conversion Best Practices** - Review lead capture optimization strategies
    ```bash
-   cat ../../marketing-skill/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
    ```
 3. **Create Landing Page** - Design high-converting landing page with:
    - Clear value proposition
@@ -185,7 +185,7 @@ cat cac-report.txt
 6. **Monitor and Optimize** - Track CAC and conversion metrics
    ```bash
    # Weekly CAC analysis
-   python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py lead-magnet-spend.csv lead-magnet-conversions.csv
+   python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py lead-magnet-spend.csv lead-magnet-conversions.csv
    ```
 
 **Expected Output:** Lead magnet campaign generating 100-500 leads with 25-40% conversion rate
@@ -206,7 +206,7 @@ echo "📊 Demand Gen Dashboard - $DATE"
 echo "========================================"
 
 # Calculate yesterday's CAC by channel
-python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py \
+python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py \
   daily-spend.csv daily-conversions.csv
 
 echo ""
@@ -222,7 +222,7 @@ cat optimization-priorities.txt
 
 ```bash
 # Generate weekly CAC report for stakeholders
-python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py \
+python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py \
   weekly-spend.csv weekly-conversions.csv > weekly-cac-report.txt
 
 # Email to stakeholders
@@ -234,7 +234,7 @@ echo "Weekly CAC analysis report attached." | \
 
 ```bash
 # Monitor CAC in real-time (run daily via cron)
-CAC_RESULT=$(python ../../marketing-skill/marketing-demand-acquisition/scripts/calculate_cac.py \
+CAC_RESULT=$(python ../../marketing/marketing-demand-acquisition/scripts/calculate_cac.py \
   daily-spend.csv daily-conversions.csv | grep "Average CAC" | awk '{print $3}')
 
 CAC_THRESHOLD=50
@@ -278,10 +278,10 @@ fi
 
 ## References
 
-- **Skill Documentation:** [../../marketing-skill/marketing-demand-acquisition/SKILL.md](../../marketing-skill/marketing-demand-acquisition/SKILL.md)
-- **Marketing Domain Guide:** [../../marketing-skill/CLAUDE.md](../../marketing-skill/CLAUDE.md)
+- **Skill Documentation:** [../../marketing/marketing-demand-acquisition/SKILL.md](../../marketing/marketing-demand-acquisition/SKILL.md)
+- **Marketing Domain Guide:** [../../marketing/CLAUDE.md](../../marketing/CLAUDE.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
-- **Marketing Roadmap:** [../../marketing-skill/marketing_skills_roadmap.md](../../marketing-skill/marketing_skills_roadmap.md)
+- **Marketing Roadmap:** [../../marketing/marketing_skills_roadmap.md](../../marketing/marketing_skills_roadmap.md)
 
 ---
 

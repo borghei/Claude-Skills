@@ -1,7 +1,7 @@
 ---
 name: cs-seo-analyst
 description: Website SEO analysis specialist for technical audits, keyword research, content optimization, and search performance
-skills: marketing-skill/content-creator
+skills: marketing/content-creator
 domain: marketing
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,58 +19,58 @@ The cs-seo-analyst agent bridges the gap between content creation and search eng
 
 ## Skill Integration
 
-**Primary Skill Location:** `../../marketing-skill/content-creator/`
-**SEO Knowledge Base:** `../../marketing-skill/seo-specialist/`
+**Primary Skill Location:** `../../marketing/content-creator/`
+**SEO Knowledge Base:** `../../marketing/seo-specialist/`
 
 ### Python Tools
 
 1. **SEO Optimizer**
    - **Purpose:** Comprehensive SEO analysis with keyword density, content structure evaluation, and actionable recommendations. Produces a 0-100 SEO score.
-   - **Path:** `../../marketing-skill/content-creator/scripts/seo_optimizer.py`
-   - **Usage:** `python ../../marketing-skill/content-creator/scripts/seo_optimizer.py page.md "primary keyword" "secondary,keywords"`
+   - **Path:** `../../marketing/content-creator/scripts/seo_optimizer.py`
+   - **Usage:** `python ../../marketing/content-creator/scripts/seo_optimizer.py page.md "primary keyword" "secondary,keywords"`
    - **Output Formats:** Human-readable report or JSON for integrations
    - **Use Cases:** Page-level SEO audit, keyword optimization, content structure validation
 
 2. **Brand Voice Analyzer**
    - **Purpose:** Readability scoring and tone analysis for SEO-content alignment. Ensures optimized content remains readable and on-brand.
-   - **Path:** `../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py`
-   - **Usage:** `python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py page.md`
+   - **Path:** `../../marketing/content-creator/scripts/brand_voice_analyzer.py`
+   - **Usage:** `python ../../marketing/content-creator/scripts/brand_voice_analyzer.py page.md`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Readability assessment for SEO content, E-E-A-T quality signals
 
 3. **Funnel Analyzer**
    - **Purpose:** Search-to-conversion funnel analysis. Maps organic traffic through awareness, consideration, and conversion stages.
-   - **Path:** `../../marketing-skill/campaign-analytics/scripts/funnel_analyzer.py`
-   - **Usage:** `python ../../marketing-skill/campaign-analytics/scripts/funnel_analyzer.py funnel_data.csv`
+   - **Path:** `../../marketing/campaign-analytics/scripts/funnel_analyzer.py`
+   - **Usage:** `python ../../marketing/campaign-analytics/scripts/funnel_analyzer.py funnel_data.csv`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Organic search funnel performance, landing page conversion analysis
 
 4. **Campaign ROI Calculator**
    - **Purpose:** ROI calculation for organic search channel versus paid channels. Measures cost-per-acquisition and lifetime value from organic traffic.
-   - **Path:** `../../marketing-skill/campaign-analytics/scripts/campaign_roi_calculator.py`
-   - **Usage:** `python ../../marketing-skill/campaign-analytics/scripts/campaign_roi_calculator.py campaign_data.csv`
+   - **Path:** `../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py`
+   - **Usage:** `python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py campaign_data.csv`
    - **Output Formats:** Human-readable report or JSON
    - **Use Cases:** Organic channel ROI, SEO investment justification, channel comparison
 
 ### Knowledge Bases
 
 1. **SEO Specialist Knowledge Base**
-   - **Location:** `../../marketing-skill/seo-specialist/SKILL.md`
+   - **Location:** `../../marketing/seo-specialist/SKILL.md`
    - **Content:** Technical SEO checklists, keyword research frameworks, on-page optimization rules, crawlability guidelines, Core Web Vitals requirements
    - **Use Case:** Technical SEO audit methodology, keyword research process, site structure analysis
 
 2. **Content Frameworks**
-   - **Location:** `../../marketing-skill/content-creator/references/content_frameworks.md`
+   - **Location:** `../../marketing/content-creator/references/content_frameworks.md`
    - **Content:** 15+ content templates including SEO-optimized blog post structures, landing page copy frameworks, pillar page architecture
    - **Use Case:** SEO content planning, content structure optimization, topic cluster design
 
 3. **Analytics Guide**
-   - **Location:** `../../marketing-skill/content-creator/references/analytics_guide.md`
+   - **Location:** `../../marketing/content-creator/references/analytics_guide.md`
    - **Content:** Content performance measurement, engagement metrics, traffic analysis methodology
    - **Use Case:** SEO performance tracking, organic traffic analysis, content effectiveness measurement
 
 4. **Campaign Metrics Benchmarks**
-   - **Location:** `../../marketing-skill/campaign-analytics/references/campaign-metrics-benchmarks.md`
+   - **Location:** `../../marketing/campaign-analytics/references/campaign-metrics-benchmarks.md`
    - **Content:** Industry benchmarks for organic search metrics, conversion rates by channel, cost-per-acquisition baselines
    - **Use Case:** SEO performance benchmarking, organic vs paid comparison, goal setting
 
@@ -84,19 +84,19 @@ The cs-seo-analyst agent bridges the gap between content creation and search eng
 1. **Identify Top Pages** - Gather the site's highest-traffic pages and key landing pages
 2. **Reference Technical SEO Checklist** - Review technical SEO requirements and crawlability guidelines
    ```bash
-   cat ../../marketing-skill/seo-specialist/SKILL.md
+   cat ../../marketing/seo-specialist/SKILL.md
    ```
 3. **Run SEO Optimizer on Each Page** - Score each page and collect optimization recommendations
    ```bash
    for file in pages/*.md; do
      echo "=== Auditing: $file ==="
-     python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$file" "target keyword"
+     python ../../marketing/content-creator/scripts/seo_optimizer.py "$file" "target keyword"
    done
    ```
 4. **Check Readability** - Verify content readability meets quality thresholds
    ```bash
    for file in pages/*.md; do
-     python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py "$file"
+     python ../../marketing/content-creator/scripts/brand_voice_analyzer.py "$file"
    done
    ```
 5. **Consolidate Findings** - Aggregate scores, rank pages by severity, create prioritized fix list
@@ -111,7 +111,7 @@ The cs-seo-analyst agent bridges the gap between content creation and search eng
 # Quick audit of top 5 landing pages
 ls -t landing-pages/*.md | head -5 | while read file; do
   echo "=== $file ==="
-  python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$file" "main keyword"
+  python ../../marketing/content-creator/scripts/seo_optimizer.py "$file" "main keyword"
   echo ""
 done
 ```
@@ -124,17 +124,17 @@ done
 1. **Audit Current Keyword Coverage** - Run SEO optimizer on existing content to extract targeted keywords
    ```bash
    for file in blog/*.md; do
-     python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$file" "" --json >> keyword-coverage.json
+     python ../../marketing/content-creator/scripts/seo_optimizer.py "$file" "" --json >> keyword-coverage.json
    done
    ```
 2. **Reference SEO Knowledge Base** - Review keyword research frameworks and topic cluster methodology
    ```bash
-   cat ../../marketing-skill/seo-specialist/SKILL.md
+   cat ../../marketing/seo-specialist/SKILL.md
    ```
 3. **Identify Gaps** - Compare covered keywords against target keyword list, identify missing topics
 4. **Map Content Types** - Use content frameworks to select optimal format for each keyword gap
    ```bash
-   cat ../../marketing-skill/content-creator/references/content_frameworks.md
+   cat ../../marketing/content-creator/references/content_frameworks.md
    ```
 5. **Build Content Calendar** - Prioritize keyword targets by search volume, difficulty, and business impact
 6. **Create Content Briefs** - Produce brief for each planned content piece with target keywords and structure
@@ -150,17 +150,17 @@ done
 **Steps:**
 1. **Baseline Score** - Run SEO optimizer on the current page version
    ```bash
-   python ../../marketing-skill/content-creator/scripts/seo_optimizer.py page.md "target keyword" "secondary,keywords"
+   python ../../marketing/content-creator/scripts/seo_optimizer.py page.md "target keyword" "secondary,keywords"
    ```
 2. **Review Recommendations** - Analyze keyword density, heading structure, meta tag, and content length findings
 3. **Implement Optimizations** - Update content structure, keyword placement, internal links, meta description
 4. **Check Readability** - Ensure optimizations haven't degraded readability
    ```bash
-   python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py page.md
+   python ../../marketing/content-creator/scripts/brand_voice_analyzer.py page.md
    ```
 5. **Re-Score** - Run SEO optimizer again to verify score improvement
    ```bash
-   python ../../marketing-skill/content-creator/scripts/seo_optimizer.py page.md "target keyword" "secondary,keywords"
+   python ../../marketing/content-creator/scripts/seo_optimizer.py page.md "target keyword" "secondary,keywords"
    ```
 6. **Document Changes** - Record before/after scores and changes made
 
@@ -172,10 +172,10 @@ done
 ```bash
 # Full optimization cycle for a single page
 echo "=== BEFORE ==="
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py landing-page.md "product demo" "free trial,signup"
+python ../../marketing/content-creator/scripts/seo_optimizer.py landing-page.md "product demo" "free trial,signup"
 # ... make edits ...
 echo "=== AFTER ==="
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py landing-page.md "product demo" "free trial,signup"
+python ../../marketing/content-creator/scripts/seo_optimizer.py landing-page.md "product demo" "free trial,signup"
 ```
 
 ### Workflow 4: Organic Channel Performance Review
@@ -186,15 +186,15 @@ python ../../marketing-skill/content-creator/scripts/seo_optimizer.py landing-pa
 1. **Gather Channel Data** - Collect organic search traffic, conversion, and revenue data
 2. **Run Funnel Analysis** - Analyze organic search funnel from visit to conversion
    ```bash
-   python ../../marketing-skill/campaign-analytics/scripts/funnel_analyzer.py organic_funnel.csv
+   python ../../marketing/campaign-analytics/scripts/funnel_analyzer.py organic_funnel.csv
    ```
 3. **Calculate Organic ROI** - Compare organic channel ROI against paid channels
    ```bash
-   python ../../marketing-skill/campaign-analytics/scripts/campaign_roi_calculator.py channel_data.csv
+   python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py channel_data.csv
    ```
 4. **Benchmark Performance** - Compare metrics against industry benchmarks
    ```bash
-   cat ../../marketing-skill/campaign-analytics/references/campaign-metrics-benchmarks.md
+   cat ../../marketing/campaign-analytics/references/campaign-metrics-benchmarks.md
    ```
 5. **Identify Trends** - Spot improving/declining pages, seasonal patterns, algorithm impact
 6. **Produce Performance Report** - Executive summary with ROI metrics, trends, and recommendations
@@ -215,7 +215,7 @@ THRESHOLD=70
 FAIL_COUNT=0
 
 for file in content/*.md; do
-  SCORE=$(python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$file" "target keyword" --json 2>/dev/null | python -c "import sys,json; print(json.load(sys.stdin).get('overall_score',0))")
+  SCORE=$(python ../../marketing/content-creator/scripts/seo_optimizer.py "$file" "target keyword" --json 2>/dev/null | python -c "import sys,json; print(json.load(sys.stdin).get('overall_score',0))")
   if [ "$SCORE" -lt "$THRESHOLD" ]; then
     echo "FAIL: $file (score: $SCORE)"
     FAIL_COUNT=$((FAIL_COUNT + 1))
@@ -236,15 +236,15 @@ CONTENT=$1
 KEYWORD=$2
 
 echo "--- SEO Analysis ---"
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$CONTENT" "$KEYWORD"
+python ../../marketing/content-creator/scripts/seo_optimizer.py "$CONTENT" "$KEYWORD"
 
 echo ""
 echo "--- Readability Analysis ---"
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py "$CONTENT"
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py "$CONTENT"
 
 echo ""
 echo "--- Funnel Context ---"
-cat ../../marketing-skill/campaign-analytics/references/campaign-metrics-benchmarks.md | head -50
+cat ../../marketing/campaign-analytics/references/campaign-metrics-benchmarks.md | head -50
 ```
 
 ### Example 3: Keyword Coverage Report
@@ -255,7 +255,7 @@ echo "Keyword Coverage Report"
 echo "======================"
 for file in blog/*.md; do
   echo "--- $(basename $file) ---"
-  python ../../marketing-skill/content-creator/scripts/seo_optimizer.py "$file" "" 2>/dev/null | grep -i "keyword"
+  python ../../marketing/content-creator/scripts/seo_optimizer.py "$file" "" 2>/dev/null | grep -i "keyword"
 done
 ```
 
@@ -285,10 +285,10 @@ done
 
 ## References
 
-- **SEO Specialist Skill:** [../../marketing-skill/seo-specialist/SKILL.md](../../marketing-skill/seo-specialist/SKILL.md)
-- **Content Creator Skill:** [../../marketing-skill/content-creator/SKILL.md](../../marketing-skill/content-creator/SKILL.md)
-- **Campaign Analytics Skill:** [../../marketing-skill/campaign-analytics/SKILL.md](../../marketing-skill/campaign-analytics/SKILL.md)
-- **Marketing Domain Guide:** [../../marketing-skill/CLAUDE.md](../../marketing-skill/CLAUDE.md)
+- **SEO Specialist Skill:** [../../marketing/seo-specialist/SKILL.md](../../marketing/seo-specialist/SKILL.md)
+- **Content Creator Skill:** [../../marketing/content-creator/SKILL.md](../../marketing/content-creator/SKILL.md)
+- **Campaign Analytics Skill:** [../../marketing/campaign-analytics/SKILL.md](../../marketing/campaign-analytics/SKILL.md)
+- **Marketing Domain Guide:** [../../marketing/CLAUDE.md](../../marketing/CLAUDE.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
 
 ---

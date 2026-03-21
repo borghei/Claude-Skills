@@ -466,7 +466,7 @@ test('dashboard meets WCAG AA standards', async ({ page }) => {
 - Visual regression testing and WCAG accessibility auditing
 
 **This skill does NOT cover:**
-- Unit testing or component testing in isolation (see `engineering-team/testing-strategy` for test pyramid guidance)
+- Unit testing or component testing in isolation (see `engineering/testing-strategy` for test pyramid guidance)
 - API contract testing or load/performance testing (see `api-test-suite-builder` for API-focused testing)
 - Test data management, database seeding, or factory patterns for test fixtures
 - Mobile native app testing (Appium, Detox); this skill targets web browsers only

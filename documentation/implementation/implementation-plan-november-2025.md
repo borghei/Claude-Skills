@@ -45,11 +45,11 @@ claude-code-skills/
 │   ├── documentation/
 │   └── security/
 ├── templates/                 # Templates (NEW)
-├── marketing-skill/          # EXISTING - unchanged
+├── marketing/          # EXISTING - unchanged
 ├── c-level-advisor/          # EXISTING - unchanged
 ├── product-team/             # EXISTING - unchanged
 ├── project-management/       # EXISTING - unchanged
-├── engineering-team/         # EXISTING - unchanged
+├── engineering/         # EXISTING - unchanged
 ├── ra-qm-team/               # EXISTING - unchanged
 ├── install.sh                # Installation script (FUTURE)
 ├── uninstall.sh              # Cleanup script (FUTURE)
@@ -183,32 +183,32 @@ Specialized agent for creating high-quality marketing content across multiple fo
 
 ## Skill Integration
 
-**Skill Location:** `../../marketing-skill/content-creator/`
+**Skill Location:** `../../marketing/content-creator/`
 
 ### Python Tools
 
 **Brand Voice Analyzer:**
 ```bash
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py input.txt json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py input.txt json
 ```
 
 **SEO Optimizer:**
 ```bash
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
+python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "primary keyword"
+python ../../marketing/content-creator/scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
 ```
 
 ### Knowledge Bases
 
-- Brand Guidelines: `../../marketing-skill/content-creator/references/brand_guidelines.md`
-- Content Frameworks: `../../marketing-skill/content-creator/references/content_frameworks.md`
-- Social Media Optimization: `../../marketing-skill/content-creator/references/social_media_optimization.md`
+- Brand Guidelines: `../../marketing/content-creator/references/brand_guidelines.md`
+- Content Frameworks: `../../marketing/content-creator/references/content_frameworks.md`
+- Social Media Optimization: `../../marketing/content-creator/references/social_media_optimization.md`
 
 ### Templates
 
-- Content Calendar: `../../marketing-skill/content-creator/assets/content-calendar-template.md`
-- Brand Voice Checklist: `../../marketing-skill/content-creator/assets/brand-voice-checklist.md`
+- Content Calendar: `../../marketing/content-creator/assets/content-calendar-template.md`
+- Brand Voice Checklist: `../../marketing/content-creator/assets/brand-voice-checklist.md`
 
 ## Workflows
 
@@ -241,7 +241,7 @@ python ../../marketing-skill/content-creator/scripts/seo_optimizer.py article.md
 ```bash
 # User provides brief
 # Agent drafts article as draft.md
-python ../../marketing-skill/content-creator/scripts/seo_optimizer.py draft.md "content marketing"
+python ../../marketing/content-creator/scripts/seo_optimizer.py draft.md "content marketing"
 
 # Review SEO score and recommendations
 # Refine draft based on suggestions
@@ -251,9 +251,9 @@ python ../../marketing-skill/content-creator/scripts/seo_optimizer.py draft.md "
 **Example 2: Brand voice audit**
 ```bash
 # User provides 3 content samples
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py sample1.txt json > voice1.json
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py sample2.txt json > voice2.json
-python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py sample3.txt json > voice3.json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py sample1.txt json > voice1.json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py sample2.txt json > voice2.json
+python ../../marketing/content-creator/scripts/brand_voice_analyzer.py sample3.txt json > voice3.json
 
 # Agent analyzes JSON outputs
 # Identifies consistency patterns
@@ -274,7 +274,7 @@ python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py sam
 
 ## References
 
-- Skill Documentation: `../../marketing-skill/content-creator/SKILL.md`
+- Skill Documentation: `../../marketing/content-creator/SKILL.md`
 - Standards: `../../standards/communication/communication-standards.md`
 ```
 
@@ -283,7 +283,7 @@ python ../../marketing-skill/content-creator/scripts/brand_voice_analyzer.py sam
 **File:** `agents/marketing/cs-demand-gen-specialist.md`
 
 **Structure:** (Similar YAML frontmatter + content structure)
-- Integrates with `../../marketing-skill/marketing-demand-acquisition/`
+- Integrates with `../../marketing/marketing-demand-acquisition/`
 - Python tool: campaign_analyzer.py
 - Workflows: Lead gen campaigns, conversion optimization, funnel analysis
 
@@ -553,7 +553,7 @@ python ../../product-team/product-manager-toolkit/scripts/rice_prioritizer.py fe
 - Checklist:
   - [ ] Create cs-content-creator.md with full structure
   - [ ] Create cs-demand-gen-specialist.md
-  - [ ] Test relative paths to marketing-skill/
+  - [ ] Test relative paths to marketing/
   - [ ] Validate Python tool invocation
   - [ ] Document workflows
   - [ ] Add integration examples
@@ -683,11 +683,11 @@ claude-code-skills/
 │   │   └── implementation-plan-november-2025.md  # THIS FILE
 │   ├── GIST_CONTENT.md
 │   └── PYTHON_TOOLS_AUDIT.md
-├── marketing-skill/          # EXISTING
+├── marketing/          # EXISTING
 ├── c-level-advisor/          # EXISTING
 ├── product-team/             # EXISTING
 ├── project-management/       # EXISTING
-├── engineering-team/         # EXISTING
+├── engineering/         # EXISTING
 ├── ra-qm-team/               # EXISTING
 ├── CLAUDE.md
 ├── README.md

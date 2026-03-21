@@ -8,7 +8,7 @@ Codex, and generic project layouts.
 
 Usage:
     python skill-installer.py list                              # List all skills
-    python skill-installer.py list --group engineering-team     # List skills in a group
+    python skill-installer.py list --group engineering     # List skills in a group
     python skill-installer.py install content-creator           # Install a skill
     python skill-installer.py install senior-fullstack --agent cursor
     python skill-installer.py install ceo-advisor --auto-update # Enable auto-updates
@@ -386,7 +386,7 @@ def main():
         epilog="""
 Examples:
   %(prog)s list                              List all available skills
-  %(prog)s list --group engineering-team     List engineering skills
+  %(prog)s list --group engineering     List engineering skills
   %(prog)s install content-creator           Install content-creator skill
   %(prog)s install senior-fullstack --agent cursor --auto-update
   %(prog)s update                            Update all auto-update skills

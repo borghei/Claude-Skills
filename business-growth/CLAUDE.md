@@ -176,10 +176,10 @@ python revenue-operations/scripts/gtm_efficiency_calculator.py gtm_data.json --f
 
 ## Related Skills
 
-- **Marketing:** Content creation, demand generation -> `../marketing-skill/`
+- **Marketing:** Content creation, demand generation -> `../marketing/`
 - **Product Team:** User research, feature prioritization -> `../product-team/`
 - **C-Level:** Strategic planning -> `../c-level-advisor/`
-- **Engineering:** Technical implementation -> `../engineering-team/`
+- **Engineering:** Technical implementation -> `../engineering/`
 
 ---
 

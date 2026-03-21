@@ -219,7 +219,7 @@ python scripts/account_plan.py --account "Account Name"
 - Multi-stakeholder selling with 3-10 decision participants
 
 **Out of Scope:**
-- Lead generation and top-of-funnel prospecting strategy (see marketing-skill/demand-acquisition)
+- Lead generation and top-of-funnel prospecting strategy (see marketing/demand-acquisition)
 - Post-sale customer success execution (see customer-success-manager)
 - CRM administration, territory design, and comp plan architecture (see sales-operations)
 - Technical demo delivery and POC management (see sales-engineer)

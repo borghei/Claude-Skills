@@ -408,7 +408,7 @@ python scripts/product_health_scorer.py --input product_data.json
 
 **In scope:** Product-market fit assessment, portfolio management (BCG classification, investment postures), north star metric framework, product organization design (team topologies, ratios, product trio), feature prioritization (RICE/ICE scoring), product health scoring, CPO dashboard metrics, and board-level product reporting.
 
-**Out of scope:** Feature-level product management (use product-team/product-strategist), UX design and research execution (use product-team/ux-researcher), engineering implementation planning (use engineering-team/ skills), pricing strategy (use cro-advisor pricing section), and customer success management. Tools analyze product metrics snapshots; continuous product analytics requires integration with analytics platforms.
+**Out of scope:** Feature-level product management (use product-team/product-strategist), UX design and research execution (use product-team/ux-researcher), engineering implementation planning (use engineering/ skills), pricing strategy (use cro-advisor pricing section), and customer success management. Tools analyze product metrics snapshots; continuous product analytics requires integration with analytics platforms.
 
 **Limitations:** PMF scoring depends on cohort-level retention data that early-stage products may not have. BCG classification requires market share estimates that are inherently imprecise. RICE scoring is subjective; quality depends on calibration rigor. Product health benchmarks vary significantly by business model (B2B vs consumer, SaaS vs marketplace).
 

@@ -48,7 +48,7 @@ This guide covers the 5 data analytics skills and planned Python automation tool
 
 ## Integration with Engineering Team
 
-The data-analytics domain connects closely with engineering-team skills:
+The data-analytics domain connects closely with engineering skills:
 
 | Data Analytics Skill | Engineering Skill | Integration Pattern |
 |---------------------|-------------------|-------------------|
@@ -91,7 +91,7 @@ python ml-ops-engineer/scripts/model_health_monitor.py model_metrics.json
 
 ## Related Skills
 
-- **Engineering:** Data engineering, ML engineering -> `../engineering-team/`
+- **Engineering:** Data engineering, ML engineering -> `../engineering/`
 - **Product Team:** User analytics, metrics-driven product decisions -> `../product-team/`
 - **Finance:** Financial data analysis, forecasting -> `../finance/`
 - **Business & Growth:** Revenue analytics, customer health scoring -> `../business-growth/`

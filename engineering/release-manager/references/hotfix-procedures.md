@@ -172,7 +172,7 @@ main ← hotfix/critical-fix → main (immediate deploy)
    # Use GitHub CLI or web interface
    gh pr create --title "HOTFIX: Payment gateway timeout" \
                 --body "Critical fix for payment processing failures" \
-                --reviewer engineering-team \
+                --reviewer engineering \
                 --label hotfix
    ```
 

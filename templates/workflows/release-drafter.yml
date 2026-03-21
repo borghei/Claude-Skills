@@ -69,7 +69,7 @@ jobs:
 
           echo "" >> /tmp/release-notes.md
           echo "### Domains" >> /tmp/release-notes.md
-          domains="engineering-team engineering marketing-skill product-team"
+          domains="engineering marketing product-team"
           domains="$domains project-management ra-qm-team c-level-advisor"
           domains="$domains business-growth finance data-analytics"
           domains="$domains hr-operations sales-success"
