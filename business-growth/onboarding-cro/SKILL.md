@@ -1,19 +1,23 @@
 ---
 name: onboarding-cro
-description: Post-signup user onboarding optimization covering activation metrics, time-to-value reduction, onboarding flow design, empty state optimization, multi-channel coordination, and stalled user recovery.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, onboarding, activation, user-experience, retention, time-to-value]
-triggers:
-  - user wants to optimize post-signup onboarding or first-run experience
-  - user mentions activation rate, user activation, or aha moment
-  - user has low Day-1 or Day-7 retention
-  - user says users sign up but do not come back
-  - user mentions onboarding checklist, empty states, or guided tours
-  - user asks about improving trial-to-paid conversion
+description: >
+  Post-signup user onboarding optimization covering activation metrics,
+  time-to-value reduction, onboarding flow design, empty state optimization,
+  multi-channel coordination, and stalled user recovery.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags:
+    - cro
+    - onboarding
+    - activation
+    - user-experience
+    - retention
+    - time-to-value
 ---
-
 # Onboarding CRO
 
 Production-grade user onboarding optimization framework covering activation definition, time-to-value engineering, flow architecture, empty state design, multi-channel coordination, stalled user recovery, and experiment design. Focused on the critical window between signup and habitual product usage.

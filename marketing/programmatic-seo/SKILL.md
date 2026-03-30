@@ -1,19 +1,18 @@
 ---
 name: programmatic-seo
-description: Programmatic page generation at scale using template-based SEO, data pipelines, and automated content production. Covers keyword pattern mining, template architecture, data sourcing, quality control, and indexation strategy for 100-100K+ page deployments.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [seo, programmatic, templates, content-at-scale, data-driven-seo]
-triggers:
-  - user mentions programmatic SEO or pSEO
-  - user wants to create hundreds or thousands of SEO pages
-  - user mentions template pages, directory pages, or location pages
-  - user describes a keyword pattern like "[X] in [Y]" or "[X] vs [Y]"
-  - user wants to build integration pages, comparison pages, or glossary pages at scale
-  - seo-audit reveals a cluster of unaddressed keyword patterns
+description: >
+  Programmatic page generation at scale using template-based SEO, data
+  pipelines, and automated content production. Covers keyword pattern mining,
+  template architecture, data sourcing, quality control, and indexation strategy
+  for 100-100K+ page deployments.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [seo, programmatic, templates, content-at-scale, data-driven-seo]
 ---
-
 # Programmatic SEO
 
 Production-grade framework for building SEO page sets at scale. Covers the full lifecycle from keyword pattern discovery through template design, data pipeline construction, quality assurance, and post-launch optimization. Designed for deployments ranging from 50 to 100,000+ pages.

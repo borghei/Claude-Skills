@@ -1,19 +1,23 @@
 ---
 name: site-architecture
-description: Information architecture, URL hierarchy, internal linking strategy, navigation design, and silo structure for websites. Covers architectural audits, new site planning, crawl equity optimization, and topic cluster mapping.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [seo, information-architecture, internal-linking, url-structure, navigation, siloing]
-triggers:
-  - user mentions site architecture or information architecture
-  - user asks about URL structure, internal linking, or navigation design
-  - user mentions breadcrumbs, topic clusters, hub pages, or silo structure
-  - user has orphan pages or crawl depth issues
-  - user is planning a site restructure or URL reorganization
-  - seo-audit reveals structural problems as the root cause
+description: >
+  Information architecture, URL hierarchy, internal linking strategy, navigation
+  design, and silo structure for websites. Covers architectural audits, new site
+  planning, crawl equity optimization, and topic cluster mapping.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags:
+    - seo
+    - information-architecture
+    - internal-linking
+    - url-structure
+    - navigation
+    - siloing
 ---
-
 # Site Architecture & Internal Linking
 
 Production-grade website architecture framework covering URL hierarchy design, internal linking strategy, navigation optimization, silo structure, and crawl equity management. Handles architecture audits, new site planning, and restructuring existing sites.

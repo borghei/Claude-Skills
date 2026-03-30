@@ -1,8 +1,17 @@
 ---
 name: sales-engineer
-description: Analyzes RFP responses for coverage gaps, builds competitive feature matrices, and plans proof-of-concept engagements for pre-sales engineering
+description: >
+  Analyzes RFP responses for coverage gaps, builds competitive feature matrices,
+  and plans proof-of-concept engagements for pre-sales engineering
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  domain: sales-engineering
+  updated: 2026-03-31
+  tags: [sales-engineering, demos, poc, technical-sales, solutions]
 ---
-
 # Sales Engineer Skill
 
 A production-ready skill package for pre-sales engineering that bridges technical expertise and sales execution. Provides automated analysis for RFP/RFI responses, competitive positioning, and proof-of-concept planning.

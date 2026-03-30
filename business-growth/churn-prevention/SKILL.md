@@ -1,19 +1,17 @@
 ---
 name: churn-prevention
-description: SaaS churn reduction covering cancel flow design, dynamic save offers, exit survey architecture, dunning sequences, payment recovery, win-back campaigns, and churn impact modeling.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [churn, retention, cancel-flow, dunning, payment-recovery, win-back]
-triggers:
-  - user wants to reduce churn or improve retention
-  - user needs to design or optimize a cancel flow
-  - user mentions save offers, exit surveys, or dunning emails
-  - user has high failed payment churn
-  - user asks about win-back campaigns
-  - user reports churn rate above 5% monthly
+description: >
+  SaaS churn reduction covering cancel flow design, dynamic save offers, exit
+  survey architecture, dunning sequences, payment recovery, win-back campaigns,
+  and churn impact modeling.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [churn, retention, cancel-flow, dunning, payment-recovery, win-back]
 ---
-
 # Churn Prevention
 
 Production-grade SaaS churn reduction framework covering cancel flow architecture, dynamic save offer mapping, exit survey design, dunning sequence engineering, payment recovery optimization, win-back campaigns, and churn impact modeling. Addresses both voluntary churn (customers who decide to leave) and involuntary churn (customers who leave due to payment failure).

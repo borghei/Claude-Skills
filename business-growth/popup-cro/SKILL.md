@@ -1,19 +1,18 @@
 ---
 name: popup-cro
-description: Popup and modal optimization for conversion. Covers exit-intent, slide-ins, banners, timing optimization, frequency capping, audience targeting, compliance, and A/B testing frameworks for lead capture, promotions, and announcements.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, popup, modal, exit-intent, lead-capture, conversion-optimization]
-triggers:
-  - user wants to create or optimize popups or modals
-  - user mentions exit intent, popup conversions, or lead capture popup
-  - user asks about slide-in, overlay, or announcement banner
-  - user reports low email list growth
-  - user has high bounce rate and wants to capture exiting visitors
-  - user asks about popup compliance or Google intrusive interstitials
+description: >
+  Popup and modal optimization for conversion. Covers exit-intent, slide-ins,
+  banners, timing optimization, frequency capping, audience targeting,
+  compliance, and A/B testing frameworks for lead capture, promotions, and
+  announcements.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [cro, popup, modal, exit-intent, lead-capture, conversion-optimization]
 ---
-
 # Popup CRO
 
 Production-grade popup optimization framework covering format selection, trigger engineering, audience targeting, frequency capping, copy design, compliance requirements, and structured A/B testing. Handles lead capture, promotional, announcement, and feedback popups across web and mobile.

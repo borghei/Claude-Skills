@@ -1,8 +1,20 @@
 ---
 name: atlassian-templates
-description: Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira and Confluence templates, blueprints, custom layouts, reusable components, and standardized content structures. Use for building org-wide templates, custom blueprints, page layouts, and automated content generation.
+description: >
+  Atlassian Template and Files Creator/Modifier expert for creating, modifying,
+  and managing Jira and Confluence templates, blueprints, custom layouts,
+  reusable components, and standardized content structures. Use for building
+  org-wide templates, custom blueprints, page layouts, and automated content
+  generation.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-management
+  domain: atlassian
+  updated: 2026-03-31
+  tags: [atlassian, jira-templates, confluence-templates, workflows]
 ---
-
 # Atlassian Template & Files Creator Expert
 
 Specialist in creating, modifying, and managing reusable templates and files for Jira and Confluence. Ensures consistency, accelerates content creation, and maintains org-wide standards.

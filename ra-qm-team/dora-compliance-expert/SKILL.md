@@ -1,18 +1,21 @@
 ---
 name: dora-compliance-expert
-description: DORA (EU 2022/2554) digital operational resilience compliance automation for financial entities. Assesses readiness against all 5 DORA pillars, classifies ICT incidents, validates third-party risk management, and generates resilience testing plans. Use for DORA compliance assessments, ICT risk management, incident classification, third-party ICT oversight, and digital operational resilience testing.
-triggers:
-  - DORA
-  - digital operational resilience
-  - financial sector cybersecurity
-  - ICT risk management
-  - DORA compliance
-  - third-party ICT risk
-  - resilience testing
-  - DORA incident reporting
-  - financial services cybersecurity
+description: >
+  DORA (EU 2022/2554) digital operational resilience compliance automation for
+  financial entities. Assesses readiness against all 5 DORA pillars, classifies
+  ICT incidents, validates third-party risk management, and generates resilience
+  testing plans. Use for DORA compliance assessments, ICT risk management,
+  incident classification, third-party ICT oversight, and digital operational
+  resilience testing.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: financial-resilience
+  updated: 2026-03-31
+  tags: [dora, ict-risk, resilience-testing, financial-services]
 ---
-
 # DORA Compliance Expert
 
 Tools and guidance for Regulation (EU) 2022/2554 on digital operational resilience for the financial sector (Digital Operational Resilience Act — DORA).

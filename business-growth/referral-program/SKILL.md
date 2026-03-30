@@ -1,19 +1,17 @@
 ---
 name: referral-program
-description: Referral and affiliate program design covering referral loop architecture, incentive design, trigger moment optimization, viral coefficient modeling, affiliate program structure, and optimization playbook.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [referral, affiliate, growth, viral, word-of-mouth, acquisition]
-triggers:
-  - user wants to design or optimize a referral program
-  - user mentions refer-a-friend, referral link, or word-of-mouth growth
-  - user asks about affiliate programs or partner programs
-  - user mentions viral loops, K-factor, or viral coefficient
-  - user wants to reduce CAC through referrals
-  - user mentions brand ambassador or incentive program
+description: >
+  Referral and affiliate program design covering referral loop architecture,
+  incentive design, trigger moment optimization, viral coefficient modeling,
+  affiliate program structure, and optimization playbook.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [referral, affiliate, growth, viral, word-of-mouth, acquisition]
 ---
-
 # Referral Program
 
 Production-grade referral and affiliate program framework covering the 4-stage referral loop, incentive design methodology, trigger moment optimization, share mechanics, viral coefficient modeling, affiliate program architecture, and systematic optimization playbook. Designed to build programs that compound, not collect dust.

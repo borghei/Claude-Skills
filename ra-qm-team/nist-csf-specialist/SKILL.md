@@ -1,8 +1,20 @@
 ---
 name: nist-csf-specialist
-description: NIST Cybersecurity Framework 2.0 implementation, assessment, and compliance management. Use for NIST cybersecurity framework, CSF 2.0, NIST compliance, cybersecurity risk management, NIST controls, NIST assessment, cybersecurity maturity, NIST CSF profile, cybersecurity governance, CSF gap analysis, cybersecurity program development, and cross-framework compliance mapping.
+description: >
+  NIST Cybersecurity Framework 2.0 implementation, assessment, and compliance
+  management. Use for NIST cybersecurity framework, CSF 2.0, NIST compliance,
+  cybersecurity risk management, NIST controls, NIST assessment, cybersecurity
+  maturity, NIST CSF profile, cybersecurity governance, CSF gap analysis,
+  cybersecurity program development, and cross-framework compliance mapping.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: cybersecurity-framework
+  updated: 2026-03-31
+  tags: [nist-csf, cybersecurity, maturity-assessment, risk-management]
 ---
-
 # NIST CSF 2.0 Specialist
 
 Implement, assess, and manage cybersecurity programs aligned with the NIST Cybersecurity Framework 2.0 — the definitive standard for organizational cybersecurity risk management.

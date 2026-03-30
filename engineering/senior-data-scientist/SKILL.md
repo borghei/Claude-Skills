@@ -1,18 +1,15 @@
 ---
 name: senior-data-scientist
-description: >-
-  Use when the user asks to "design an experiment", "build a predictive model",
-  "run A/B test analysis", "perform causal inference", "engineer features",
-  "evaluate model performance", "set up MLOps pipeline", "analyze time series",
-  "calculate sample size", or "deploy a model to production".
-  Expert data science covering statistical modeling, experimentation, causal inference,
-  feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
-version: 1.0.0
-author: borghei
-category: engineering
-tags: [data-science, ml, statistics, experimentation, python, mlops]
+description: 
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: data-science
+  updated: 2026-03-31
+  tags: [data-science, ml, statistics, experimentation, python, mlops]
 ---
-
 # Senior Data Scientist
 
 Expert data science for statistical modeling, experimentation, ML deployment,

@@ -1,8 +1,19 @@
 ---
 name: senior-fullstack
-description: Fullstack development toolkit with project scaffolding for Next.js/FastAPI/MERN/Django stacks and code quality analysis. Use when scaffolding new projects, analyzing codebase quality, or implementing fullstack architecture patterns.
+description: >
+  Fullstack development toolkit with project scaffolding for
+  Next.js/FastAPI/MERN/Django stacks and code quality analysis. Use when
+  scaffolding new projects, analyzing codebase quality, or implementing
+  fullstack architecture patterns.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: fullstack
+  updated: 2026-03-31
+  tags: [react, nodejs, databases, api-design, system-architecture]
 ---
-
 # Senior Fullstack
 
 Fullstack development skill with project scaffolding and code quality analysis tools.

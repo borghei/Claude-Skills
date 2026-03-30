@@ -1,14 +1,18 @@
 ---
 name: release-manager
-description: Automates release management with changelog generation, semantic versioning, and release readiness checks. Use when preparing releases, generating changelogs, bumping versions, or validating release candidates.
+description: >
+  Automates release management with changelog generation, semantic versioning,
+  and release readiness checks. Use when preparing releases, generating
+  changelogs, bumping versions, or validating release candidates.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: devops
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # Release Manager
 
 **Tier:** POWERFUL

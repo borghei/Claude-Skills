@@ -1,19 +1,22 @@
 ---
 name: free-tool-strategy
-description: Free tool marketing strategy covering idea evaluation, tool design, lead capture architecture, SEO landing pages, launch playbook, and ROI measurement for calculators, generators, checkers, graders, and interactive tools.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [growth, free-tools, engineering-as-marketing, lead-generation, product-led-growth]
-triggers:
-  - user wants to build a free tool for marketing or lead generation
-  - user mentions engineering as marketing, free calculator, or free generator
-  - user asks about building tools for traffic or backlinks
-  - user mentions interactive content for lead capture
-  - user wants product-led growth through free tools
-  - user asks about free tool ROI or build-vs-buy for marketing tools
+description: >
+  Free tool marketing strategy covering idea evaluation, tool design, lead
+  capture architecture, SEO landing pages, launch playbook, and ROI measurement
+  for calculators, generators, checkers, graders, and interactive tools.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags:
+    - growth
+    - free-tools
+    - engineering-as-marketing
+    - lead-generation
+    - product-led-growth
 ---
-
 # Free Tool Strategy
 
 Production-grade framework for building free tools that generate traffic, leads, and backlinks. Covers idea evaluation with a 6-factor scoring system, tool design patterns, lead capture architecture, SEO landing page strategy, launch playbook, and ROI measurement. Applicable to calculators, generators, checkers, graders, converters, templates, and interactive visualizations.

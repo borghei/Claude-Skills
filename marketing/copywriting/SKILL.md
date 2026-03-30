@@ -1,6 +1,13 @@
 ---
 name: copywriting
-description: Write persuasive marketing copy for homepages, landing pages, pricing pages, feature pages, and product pages. Includes headline formulas, CTA frameworks, page structure templates, conversion copy principles, and objection handling. Use when writing page copy, improving headlines, crafting CTAs, rewriting marketing pages, or when user mentions copywriting, marketing copy, headline help, CTA copy, page copy, conversion copy, landing page copy, homepage copy, or persuasive writing.
+description: >
+  Write persuasive marketing copy for homepages, landing pages, pricing pages,
+  feature pages, and product pages. Includes headline formulas, CTA frameworks,
+  page structure templates, conversion copy principles, and objection handling.
+  Use when writing page copy, improving headlines, crafting CTAs, rewriting
+  marketing pages, or when user mentions copywriting, marketing copy, headline
+  help, CTA copy, page copy, conversion copy, landing page copy, homepage copy,
+  or persuasive writing.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: copywriting
   updated: 2026-03-09
 ---
-
 # Copywriting
 
 Conversion-focused marketing copy that is clear, compelling, and drives action across every page type.

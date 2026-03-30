@@ -1,8 +1,19 @@
 ---
 name: product-manager-toolkit
-description: Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization, user research synthesis, requirement documentation, and product strategy development.
+description: >
+  Comprehensive toolkit for product managers including RICE prioritization,
+  customer interview analysis, PRD templates, discovery frameworks, and
+  go-to-market strategies. Use for feature prioritization, user research
+  synthesis, requirement documentation, and product strategy development.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: product
+  domain: product-management
+  updated: 2026-03-31
+  tags: [product-management, rice, okr, roadmap, prioritization]
 ---
-
 # Product Manager Toolkit
 
 Essential tools and frameworks for modern product management, from discovery to delivery.

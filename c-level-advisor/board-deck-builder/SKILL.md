@@ -1,12 +1,13 @@
 ---
 name: board-deck-builder
 description: >
-  Assembles comprehensive board and investor update decks by pulling perspectives from
-  all C-suite roles. Covers deck structure, narrative frameworks, bad news delivery,
-  section-by-section guidance, and common mistakes. Use when preparing board meetings,
-  investor updates, quarterly business reviews, fundraising narratives, or when user
-  mentions board deck, investor update, board pack, board presentation, quarterly review,
-  fundraising deck, or investor deck.
+  Assembles comprehensive board and investor update decks by pulling
+  perspectives from all C-suite roles. Covers deck structure, narrative
+  frameworks, bad news delivery, section-by-section guidance, and common
+  mistakes. Use when preparing board meetings, investor updates, quarterly
+  business reviews, fundraising narratives, or when user mentions board deck,
+  investor update, board pack, board presentation, quarterly review, fundraising
+  deck, or investor deck.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -37,19 +38,7 @@ metadata:
     - investor report
     - board materials
     - board slides
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cro-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ciso-advisor
-    - c-level-advisor/board-meeting
-    - c-level-advisor/org-health-diagnostic
 ---
-
 # Board Deck Builder
 
 Build board decks that tell a story, not just show data. Every section has an owner, a narrative, and a "so what." Boards see 10+ decks per quarter -- yours needs a through-line.

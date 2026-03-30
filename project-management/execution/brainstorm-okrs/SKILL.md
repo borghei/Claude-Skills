@@ -3,9 +3,9 @@ name: brainstorm-okrs
 description: >
   OKR brainstorming and validation using the Radical Focus framework. Generates
   outcome-focused objectives with measurable key results and counter-metrics.
-  Use when setting quarterly OKRs, validating existing OKRs against quality criteria,
-  aligning team goals to company objectives, or teaching teams the difference between
-  outputs and outcomes in goal-setting.
+  Use when setting quarterly OKRs, validating existing OKRs against quality
+  criteria, aligning team goals to company objectives, or teaching teams the
+  difference between outputs and outcomes in goal-setting.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -16,7 +16,6 @@ metadata:
   python-tools: okr_validator.py
   tech-stack: okr, radical-focus, goal-setting, strategic-planning
 ---
-
 # OKR Brainstorming Expert
 
 The agent generates and validates outcome-focused OKR sets using Christina Wodtke's Radical Focus methodology. It produces inspirational objectives with measurable key results, applies counter-metric tests, and scores quality against proven criteria.

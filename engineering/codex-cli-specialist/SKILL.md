@@ -1,13 +1,21 @@
 ---
 name: codex-cli-specialist
-description: This skill should be used when the user asks to "set up Codex CLI", "convert skills for Codex", "write cross-platform AI skills", "configure agents/openai.yaml", "build skills index", "validate skill compatibility", "sync skills between Claude Code and Codex", or "optimize Codex CLI workflows". Use for OpenAI Codex CLI mastery, cross-platform skill authoring, skill conversion, and multi-agent compatibility patterns.
+description: >
+  This skill should be used when the user asks to "set up Codex CLI", "convert
+  skills for Codex", "write cross-platform AI skills", "configure
+  agents/openai.yaml", "build skills index", "validate skill compatibility",
+  "sync skills between Claude Code and Codex", or "optimize Codex CLI
+  workflows". Use for OpenAI Codex CLI mastery, cross-platform skill authoring,
+  skill conversion, and multi-agent compatibility patterns.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: development-tools
+  updated: 2026-03-31
+  tags: [openai-codex, cross-platform, skill-conversion, cli]
 ---
-
 # Codex CLI Specialist
 
 Expert-level guidance for OpenAI Codex CLI: installation, configuration, skill authoring, cross-platform compatibility with Claude Code, and productivity workflows.

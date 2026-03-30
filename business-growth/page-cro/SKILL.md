@@ -1,19 +1,17 @@
 ---
 name: page-cro
-description: Landing page and marketing page conversion rate optimization covering value proposition clarity, headline effectiveness, CTA hierarchy, visual flow, social proof placement, objection handling, and structured A/B testing.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, landing-page, conversion-optimization, copywriting, ux]
-triggers:
-  - user wants to optimize conversions on a marketing page
-  - user says a page is not converting or has high bounce rate
-  - user mentions CRO or conversion rate optimization
-  - user is building a new landing page and wants conversion review
-  - user is running paid traffic to a page
-  - user mentions pricing page optimization
+description: >
+  Landing page and marketing page conversion rate optimization covering value
+  proposition clarity, headline effectiveness, CTA hierarchy, visual flow,
+  social proof placement, objection handling, and structured A/B testing.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [cro, landing-page, conversion-optimization, copywriting, ux]
 ---
-
 # Page CRO
 
 Production-grade conversion rate optimization framework for marketing pages. Covers the 7-dimension analysis framework, page-type-specific playbooks, copy alternatives methodology, above-the-fold engineering, social proof hierarchy, objection handling patterns, and structured A/B test design.

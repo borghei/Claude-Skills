@@ -1,12 +1,13 @@
 ---
 name: company-os
 description: >
-  The meta-framework for how a company runs -- the connective tissue between all C-suite
-  roles. Covers operating system selection (EOS, Scaling Up, OKR-native, hybrid), accountability
-  charts, scorecards, meeting pulse design, issue resolution (IDS), 90-day rocks, and
-  communication cadence. Use when setting up company operations, selecting a management
-  framework, designing meeting rhythms, building accountability systems, implementing OKRs,
-  or when user mentions EOS, Scaling Up, operating system, L10 meetings, rocks, scorecard,
+  The meta-framework for how a company runs -- the connective tissue between all
+  C-suite roles. Covers operating system selection (EOS, Scaling Up, OKR-native,
+  hybrid), accountability charts, scorecards, meeting pulse design, issue
+  resolution (IDS), 90-day rocks, and communication cadence. Use when setting up
+  company operations, selecting a management framework, designing meeting
+  rhythms, building accountability systems, implementing OKRs, or when user
+  mentions EOS, Scaling Up, operating system, L10 meetings, rocks, scorecard,
   accountability chart, quarterly planning, or meeting cadence.
 license: MIT + Commons Clause
 metadata:
@@ -46,15 +47,7 @@ metadata:
     - meeting cadence
     - weekly meeting
     - annual planning
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/strategic-alignment
-    - c-level-advisor/culture-architect
-    - c-level-advisor/chief-of-staff
-    - project-management/
 ---
-
 # Company Operating System
 
 The operating system is the collection of tools, rhythms, and agreements that determine how the company functions. Every company has one -- most just do not know what it is. Making it explicit makes it improvable.

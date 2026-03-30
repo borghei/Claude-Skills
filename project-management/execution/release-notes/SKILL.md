@@ -1,6 +1,8 @@
 ---
 name: release-notes
-description: Structured release notes creation that translates technical changes into user-benefit-oriented communication.
+description: >
+  Structured release notes creation that translates technical changes into
+  user-benefit-oriented communication.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -8,11 +10,10 @@ metadata:
   category: project-management
   domain: pm-execution
   updated: 2026-03-04
-  tech-stack: release-management, changelog, semantic-versioning
   python-tools:
     - scripts/release_notes_generator.py
+  tech-stack: release-management, changelog, semantic-versioning
 ---
-
 # Release Notes Expert
 
 ## Overview

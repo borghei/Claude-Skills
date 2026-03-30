@@ -1,21 +1,18 @@
 ---
 name: senior-security
-description: Security engineering toolkit for threat modeling, vulnerability analysis, secure architecture, and penetration testing. Includes STRIDE analysis, OWASP guidance, cryptography patterns, and security scanning tools.
-triggers:
-  - security architecture
-  - threat modeling
-  - STRIDE analysis
-  - penetration testing
-  - vulnerability assessment
-  - secure coding
-  - OWASP
-  - application security
-  - cryptography implementation
-  - secret scanning
-  - security audit
-  - zero trust
+description: >
+  Security engineering toolkit for threat modeling, vulnerability analysis,
+  secure architecture, and penetration testing. Includes STRIDE analysis, OWASP
+  guidance, cryptography patterns, and security scanning tools.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: application-security
+  updated: 2026-03-31
+  tags: [owasp, threat-modeling, penetration-testing, application-security]
 ---
-
 # Senior Security Engineer
 
 Security engineering tools for threat modeling, vulnerability analysis, secure architecture design, and penetration testing.

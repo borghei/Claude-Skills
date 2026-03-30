@@ -2,27 +2,19 @@
 name: devops-workflow-engineer
 description: >
   Guides teams through designing, implementing, and optimizing CI/CD pipelines,
-  GitHub Actions workflows, deployment automation, and agentic workflow patterns.
-  Provides production-ready templates, cost optimization strategies, quality gates,
-  and multi-environment deployment planning for modern DevOps practices.
+  GitHub Actions workflows, deployment automation, and agentic workflow
+  patterns. Provides production-ready templates, cost optimization strategies,
+  quality gates, and multi-environment deployment planning for modern DevOps
+  practices.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: devops
-  tools:
-    - workflow_generator.py
-    - pipeline_analyzer.py
-    - deployment_planner.py
-  references:
-    - github-actions-patterns.md
-    - deployment-strategies.md
-    - agentic-workflows-guide.md
-  assets:
-    - ci-template.yml
-    - cd-template.yml
+  updated: 2026-03-31
+  tags: [github-actions, ci-cd, deployment, workflows]
 ---
-
 # DevOps Workflow Engineer
 
 Design, implement, and optimize CI/CD pipelines, GitHub Actions workflows, and deployment automation for production systems.

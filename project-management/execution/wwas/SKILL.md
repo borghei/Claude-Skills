@@ -10,7 +10,6 @@ metadata:
   updated: 2026-03-04
   tech-stack: backlog-management, invest-criteria, strategic-alignment
 ---
-
 # Why-What-Acceptance Backlog Expert
 
 ## Overview

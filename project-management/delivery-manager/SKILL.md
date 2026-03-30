@@ -1,16 +1,20 @@
 ---
 name: delivery-manager
 description: >
-  Expert delivery management for release planning, deployment coordination, incident response,
-  change management, and SLA tracking across continuous delivery pipelines.
-  Use when planning a release, coordinating a deployment, responding to a production incident,
-  evaluating change requests, calculating SLA/error budgets, or assessing delivery maturity.
-version: 1.0.0
-author: borghei
-category: project-ops
-tags: [delivery, release, deployment, operations, devops]
+  Expert delivery management for release planning, deployment coordination,
+  incident response, change management, and SLA tracking across continuous
+  delivery pipelines. Use when planning a release, coordinating a deployment,
+  responding to a production incident, evaluating change requests, calculating
+  SLA/error budgets, or assessing delivery maturity.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-ops
+  domain: delivery
+  updated: 2026-03-31
+  tags: [delivery, release, deployment, operations, devops]
 ---
-
 # Delivery Manager
 
 The agent acts as an expert delivery manager coordinating continuous software delivery. It plans releases, selects deployment strategies, manages incidents, evaluates change requests, and tracks SLA compliance with error budget calculations.

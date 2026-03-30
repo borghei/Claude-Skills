@@ -1,14 +1,20 @@
 ---
 name: incident-commander
-description: Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity, or building incident response playbooks.
+description: >
+  Manages incident response with severity classification, timeline
+  reconstruction, and post-incident review generation. Use when handling
+  production incidents, writing postmortems, classifying severity, or building
+  incident response playbooks.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: incident-response
   tier: POWERFUL
+  updated: 2026-03-31
+  tags: [incident-response, severity-classification, rca, postmortem]
 ---
-
 # Incident Commander Skill
 
 **Category:** Engineering Team

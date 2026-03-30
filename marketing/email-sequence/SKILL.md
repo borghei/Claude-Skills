@@ -1,6 +1,12 @@
 ---
 name: email-sequence
-description: Design and write complete email automation sequences for SaaS and B2B products. Covers welcome/onboarding, lead nurture, re-engagement, post-purchase, trial expiration, and sales sequences. Outputs ready-to-send drafts with subject lines, preview text, full body copy, CTAs, timing, and segmentation logic. Use when building drip campaigns, improving trial-to-paid conversion, or designing lifecycle email programs.
+description: >
+  Design and write complete email automation sequences for SaaS and B2B
+  products. Covers welcome/onboarding, lead nurture, re-engagement,
+  post-purchase, trial expiration, and sales sequences. Outputs ready-to-send
+  drafts with subject lines, preview text, full body copy, CTAs, timing, and
+  segmentation logic. Use when building drip campaigns, improving trial-to-paid
+  conversion, or designing lifecycle email programs.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -10,7 +16,6 @@ metadata:
   updated: 2026-03-09
   frameworks: email-automation, lifecycle-marketing, drip-campaigns
 ---
-
 # Email Sequence Design
 
 **Category:** Marketing

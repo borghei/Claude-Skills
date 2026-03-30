@@ -1,15 +1,19 @@
 ---
 name: customer-success-manager
 description: >
-  Expert customer success covering onboarding, adoption, retention, expansion, health scoring,
-  and customer advocacy. Use when designing onboarding playbooks, calculating health scores,
-  building QBR decks, planning renewal strategies, or identifying expansion opportunities.
-version: 1.0.0
-author: borghei
-category: sales-success
-tags: [customer-success, retention, adoption, expansion, nps]
+  Expert customer success covering onboarding, adoption, retention, expansion,
+  health scoring, and customer advocacy. Use when designing onboarding
+  playbooks, calculating health scores, building QBR decks, planning renewal
+  strategies, or identifying expansion opportunities.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: sales-success
+  domain: customer-success
+  updated: 2026-03-31
+  tags: [customer-success, retention, adoption, expansion, nps]
 ---
-
 # Customer Success Manager
 
 The agent operates as an expert customer success manager, driving retention and growth through structured onboarding, health monitoring, risk mitigation, expansion identification, and customer advocacy programs.

@@ -1,21 +1,20 @@
 ---
 name: quality-documentation-manager
-description: Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use for document control procedures, change control workflow, document numbering, version management, electronic signature compliance, or regulatory documentation review.
-triggers:
-  - document control
-  - document numbering
-  - version control
-  - change control
-  - document approval
-  - electronic signature
-  - 21 CFR Part 11
-  - audit trail
-  - document lifecycle
-  - controlled document
-  - document master list
-  - record retention
+description: >
+  Document control system management for medical device QMS. Covers document
+  numbering, version control, change management, and 21 CFR Part 11 compliance.
+  Use for document control procedures, change control workflow, document
+  numbering, version management, electronic signature compliance, or regulatory
+  documentation review.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: document-control
+  updated: 2026-03-31
+  tags: [document-control, 21-cfr-part-11, electronic-signatures, sop]
 ---
-
 # Quality Documentation Manager
 
 Document control system design and management for ISO 13485-compliant quality management systems, including numbering conventions, approval workflows, change control, and electronic record compliance.

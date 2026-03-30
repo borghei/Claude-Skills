@@ -1,16 +1,19 @@
 ---
 name: solutions-architect
 description: >
-  Expert solutions architecture covering technical requirements, solution design,
-  integration planning, and enterprise architecture alignment. Use when conducting
-  technical discovery, designing integration architectures, running security assessments,
-  scoping proof-of-concept engagements, or creating solution architecture documents.
-version: 1.0.0
-author: borghei
-category: sales-success
-tags: [solutions, architecture, technical, integration, enterprise]
+  Expert solutions architecture covering technical requirements, solution
+  design, integration planning, and enterprise architecture alignment. Use when
+  conducting technical discovery, designing integration architectures, running
+  security assessments, scoping proof-of-concept engagements, or creating
+  solution architecture documents.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: sales-success
+  updated: 2026-03-31
+  tags: [solutions, architecture, technical, integration, enterprise]
 ---
-
 # Solutions Architect
 
 The agent operates as an expert solutions architect for complex enterprise sales, delivering technical requirements analysis, integration design, security assessment, proof-of-concept scoping, and architecture documentation.

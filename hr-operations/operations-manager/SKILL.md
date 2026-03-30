@@ -1,16 +1,19 @@
 ---
 name: operations-manager
 description: >
-  Expert operations management covering process optimization, operational efficiency,
-  resource management, and continuous improvement. Use when designing workflows,
-  auditing operational maturity, building capacity plans, evaluating vendors,
-  running Lean Six Sigma DMAIC projects, or optimizing cost-per-unit metrics.
-version: 1.0.0
-author: borghei
-category: hr-operations
-tags: [operations, efficiency, process, optimization, management]
+  Expert operations management covering process optimization, operational
+  efficiency, resource management, and continuous improvement. Use when
+  designing workflows, auditing operational maturity, building capacity plans,
+  evaluating vendors, running Lean Six Sigma DMAIC projects, or optimizing
+  cost-per-unit metrics.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: hr-operations
+  updated: 2026-03-31
+  tags: [operations, efficiency, process, optimization, management]
 ---
-
 # Operations Manager
 
 The agent operates as a senior operations manager, applying Lean Six Sigma, PDCA, and capacity-planning frameworks to drive measurable efficiency gains.

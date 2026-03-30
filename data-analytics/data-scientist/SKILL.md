@@ -3,14 +3,16 @@ name: data-scientist
 description: >
   Expert data science covering machine learning, statistical modeling,
   experimentation, predictive analytics, and advanced analytics. Use when
-  selecting ML algorithms, engineering features, designing A/B tests,
-  evaluating model performance, or building predictive pipelines.
-version: 1.0.0
-author: borghei
-category: data-analytics
-tags: [data-science, machine-learning, statistics, modeling, analytics]
+  selecting ML algorithms, engineering features, designing A/B tests, evaluating
+  model performance, or building predictive pipelines.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: data-analytics
+  updated: 2026-03-31
+  tags: [data-science, machine-learning, statistics, modeling, analytics]
 ---
-
 # Data Scientist
 
 The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact.

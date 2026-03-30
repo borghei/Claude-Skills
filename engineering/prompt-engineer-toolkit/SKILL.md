@@ -1,6 +1,11 @@
 ---
 name: prompt-engineer-toolkit
-description: Production prompt engineering frameworks for building, testing, versioning, and evaluating prompts. Covers chain-of-thought, few-shot design, system prompt architecture, prompt regression testing, and evaluation rubrics. Use when designing prompts for production systems, running A/B tests on prompts, building prompt libraries, or debugging prompt quality degradation.
+description: >
+  Production prompt engineering frameworks for building, testing, versioning,
+  and evaluating prompts. Covers chain-of-thought, few-shot design, system
+  prompt architecture, prompt regression testing, and evaluation rubrics. Use
+  when designing prompts for production systems, running A/B tests on prompts,
+  building prompt libraries, or debugging prompt quality degradation.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +16,6 @@ metadata:
   updated: 2026-03-09
   frameworks: prompt-patterns, evaluation-rubrics, regression-testing, version-control
 ---
-
 # Prompt Engineer Toolkit - Production Prompt Engineering
 
 **Tier:** POWERFUL

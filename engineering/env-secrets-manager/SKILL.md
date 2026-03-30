@@ -1,16 +1,21 @@
 ---
 name: env-secrets-manager
-description: Complete environment and secrets management lifecycle. Covers .env file scaffolding, validation scripts, secret leak detection in git history, credential rotation playbooks, and integration with HashiCorp Vault, AWS SSM, 1Password CLI, and Doppler. Use when setting up projects, scanning for leaked secrets, or rotating credentials after an incident.
+description: >
+  Complete environment and secrets management lifecycle. Covers .env file
+  scaffolding, validation scripts, secret leak detection in git history,
+  credential rotation playbooks, and integration with HashiCorp Vault, AWS SSM,
+  1Password CLI, and Doppler. Use when setting up projects, scanning for leaked
+  secrets, or rotating credentials after an incident.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: security-devops
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: vault, aws-ssm, 1password-cli, doppler
 ---
-
 # Env & Secrets Manager
 
 **Tier:** POWERFUL

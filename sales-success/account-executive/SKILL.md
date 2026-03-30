@@ -1,15 +1,18 @@
 ---
 name: account-executive
 description: >
-  Expert sales execution covering pipeline management, discovery, demos, negotiation,
-  and deal closing. Use when qualifying opportunities, running MEDDIC discovery, building
-  account plans, handling objections, structuring proposals, or forecasting pipeline.
-version: 1.0.0
-author: borghei
-category: sales-success
-tags: [sales, pipeline, negotiation, closing, deals]
+  Expert sales execution covering pipeline management, discovery, demos,
+  negotiation, and deal closing. Use when qualifying opportunities, running
+  MEDDIC discovery, building account plans, handling objections, structuring
+  proposals, or forecasting pipeline.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: sales-success
+  updated: 2026-03-31
+  tags: [sales, pipeline, negotiation, closing, deals]
 ---
-
 # Account Executive
 
 The agent operates as an expert account executive, driving revenue through disciplined pipeline management, structured discovery, value-based selling, strategic negotiation, and accurate forecasting.

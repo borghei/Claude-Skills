@@ -1,8 +1,21 @@
 ---
 name: senior-data-engineer
-description: Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeling, pipeline orchestration, data quality, and DataOps. Use when designing data architectures, building data pipelines, optimizing data workflows, implementing data governance, or troubleshooting data issues.
+description: >
+  Data engineering skill for building scalable data pipelines, ETL/ELT systems,
+  and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka,
+  and modern data stack. Includes data modeling, pipeline orchestration, data
+  quality, and DataOps. Use when designing data architectures, building data
+  pipelines, optimizing data workflows, implementing data governance, or
+  troubleshooting data issues.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: data-engineering
+  updated: 2026-03-31
+  tags: [airflow, spark, data-pipelines, warehousing, etl]
 ---
-
 # Senior Data Engineer
 
 Production-grade data engineering skill for building scalable, reliable data systems.

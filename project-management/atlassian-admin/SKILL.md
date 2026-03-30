@@ -1,8 +1,20 @@
 ---
 name: atlassian-admin
-description: Atlassian Administrator for managing and organizing Atlassian products, users, customization of the Atlassian suite, permissions, security, integrations, system configuration, and all administrative features. Use for user provisioning, global settings, security policies, system optimization, and org-wide Atlassian governance.
+description: >
+  Atlassian Administrator for managing and organizing Atlassian products, users,
+  customization of the Atlassian suite, permissions, security, integrations,
+  system configuration, and all administrative features. Use for user
+  provisioning, global settings, security policies, system optimization, and
+  org-wide Atlassian governance.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-management
+  domain: atlassian
+  updated: 2026-03-31
+  tags: [atlassian, jira, confluence, administration, permissions]
 ---
-
 # Atlassian Administrator Expert
 
 System administrator with deep expertise in Atlassian Cloud/Data Center management, user provisioning, security, integrations, and org-wide configuration and governance.

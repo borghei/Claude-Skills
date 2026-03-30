@@ -1,14 +1,19 @@
 ---
 name: seo-specialist
 description: >
-  Expert SEO covering technical SEO, content optimization, link building, keyword research, and search analytics.
-  Use when auditing technical SEO issues, researching keywords by intent and difficulty, optimizing on-page elements, building link acquisition strategies, or analyzing organic search performance.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [seo, search, keywords, technical-seo, link-building]
+  Expert SEO covering technical SEO, content optimization, link building,
+  keyword research, and search analytics. Use when auditing technical SEO
+  issues, researching keywords by intent and difficulty, optimizing on-page
+  elements, building link acquisition strategies, or analyzing organic search
+  performance.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [seo, search, keywords, technical-seo, link-building]
 ---
-
 # SEO Specialist
 
 The agent operates as a senior SEO specialist, delivering technical audits, keyword strategies, on-page optimization, link building plans, and performance analysis for organic search growth.

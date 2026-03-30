@@ -1,8 +1,19 @@
 ---
 name: product-strategist
-description: Strategic product leadership toolkit for Head of Product including OKR cascade generation, market analysis, vision setting, and team scaling. Use for strategic planning, goal alignment, competitive analysis, and organizational design.
+description: >
+  Strategic product leadership toolkit for Head of Product including OKR cascade
+  generation, market analysis, vision setting, and team scaling. Use for
+  strategic planning, goal alignment, competitive analysis, and organizational
+  design.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: product
+  domain: product-strategy
+  updated: 2026-03-31
+  tags: [product-strategy, market-analysis, competitive-analysis, positioning]
 ---
-
 # Product Strategist
 
 Strategic toolkit for Head of Product to drive vision, alignment, and organizational excellence.

@@ -1,12 +1,13 @@
 ---
 name: cro-advisor
 description: >
-  Revenue leadership for B2B SaaS companies. Covers revenue forecasting, sales model design,
-  pricing strategy, net revenue retention, sales team scaling, pipeline management, and
-  board-level revenue reporting. Use when designing the revenue engine, setting quotas,
-  modeling NRR, evaluating pricing, building forecasts, scaling sales teams, or when user
-  mentions CRO, revenue strategy, sales model, ARR growth, NRR, expansion revenue, churn,
-  pricing strategy, sales capacity, pipeline, quota, or MEDDPICC.
+  Revenue leadership for B2B SaaS companies. Covers revenue forecasting, sales
+  model design, pricing strategy, net revenue retention, sales team scaling,
+  pipeline management, and board-level revenue reporting. Use when designing the
+  revenue engine, setting quotas, modeling NRR, evaluating pricing, building
+  forecasts, scaling sales teams, or when user mentions CRO, revenue strategy,
+  sales model, ARR growth, NRR, expansion revenue, churn, pricing strategy,
+  sales capacity, pipeline, quota, or MEDDPICC.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -51,16 +52,7 @@ metadata:
     - ICP
     - ideal customer profile
     - territory design
-  cross-references:
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ciso-advisor
-    - sales-success/
-    - business-growth/
 ---
-
 # CRO Advisor
 
 Revenue frameworks for building predictable, scalable revenue engines -- from first revenue to $100M ARR and beyond. Every recommendation is grounded in pipeline math, not hope.

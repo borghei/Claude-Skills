@@ -1,6 +1,14 @@
 ---
 name: marketing-context
-description: Create and maintain the foundational marketing context document covering product positioning, ICP definition, competitive landscape, brand voice, customer language, objection handling, proof points, and switching dynamics. All marketing skills read this context before starting. Use when setting up marketing context, defining target audience, establishing brand voice, documenting ICP, capturing customer language, or when user mentions marketing context, brand voice setup, target audience, ICP, positioning, customer insights, competitive analysis, or market research.
+description: >
+  Create and maintain the foundational marketing context document covering
+  product positioning, ICP definition, competitive landscape, brand voice,
+  customer language, objection handling, proof points, and switching dynamics.
+  All marketing skills read this context before starting. Use when setting up
+  marketing context, defining target audience, establishing brand voice,
+  documenting ICP, capturing customer language, or when user mentions marketing
+  context, brand voice setup, target audience, ICP, positioning, customer
+  insights, competitive analysis, or market research.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +17,6 @@ metadata:
   domain: strategy
   updated: 2026-03-09
 ---
-
 # Marketing Context
 
 The foundational context document that every marketing skill reads before starting. Captures positioning, ICP, competitive landscape, brand voice, and customer language in one place.

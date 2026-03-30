@@ -1,6 +1,11 @@
 ---
 name: stripe-integration-expert
-description: Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent webhook handlers, customer portal, dunning, SCA compliance, and local testing with Stripe CLI. Provides patterns for Next.js, Express, and Django.
+description: >
+  Implement production-grade Stripe integrations for SaaS billing. Covers
+  subscription lifecycle management, checkout sessions, plan upgrades/downgrades
+  with proration, usage-based billing, idempotent webhook handlers, customer
+  portal, dunning, SCA compliance, and local testing with Stripe CLI. Provides
+  patterns for Next.js, Express, and Django.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +16,6 @@ metadata:
   updated: 2026-03-09
   frameworks: stripe-subscriptions, webhook-handling, billing-infrastructure
 ---
-
 # Stripe Integration Expert
 
 **Tier:** POWERFUL

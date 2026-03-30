@@ -1,6 +1,9 @@
 ---
 name: identify-assumptions
-description: Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil's advocate analysis.
+description: >
+  Assumption mapping expert that identifies, categorizes, and prioritizes
+  product assumptions across 4-8 risk categories using devil's advocate
+  analysis.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +14,6 @@ metadata:
   python-tools: assumption_tracker.py
   tech-stack: assumption-mapping, risk-matrix, teresa-torres, continuous-discovery
 ---
-
 # Assumption Mapping Expert
 
 ## Overview

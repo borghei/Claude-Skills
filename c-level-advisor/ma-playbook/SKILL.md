@@ -1,13 +1,13 @@
 ---
 name: ma-playbook
 description: >
-  M&A strategy for acquiring companies or being acquired. Covers strategic rationale
-  assessment, target screening, due diligence frameworks, valuation methodologies,
-  deal structure, negotiation strategy, integration planning, and post-acquisition
-  execution. Use when evaluating acquisitions, preparing to be acquired, conducting
-  due diligence, planning integration, negotiating deal terms, or when user mentions
-  M&A, acquisition, merger, acqui-hire, due diligence, valuation, LOI, earnout,
-  integration, or deal structure.
+  M&A strategy for acquiring companies or being acquired. Covers strategic
+  rationale assessment, target screening, due diligence frameworks, valuation
+  methodologies, deal structure, negotiation strategy, integration planning, and
+  post-acquisition execution. Use when evaluating acquisitions, preparing to be
+  acquired, conducting due diligence, planning integration, negotiating deal
+  terms, or when user mentions M&A, acquisition, merger, acqui-hire, due
+  diligence, valuation, LOI, earnout, integration, or deal structure.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -41,17 +41,7 @@ metadata:
     - selling the company
     - exit strategy
     - data room
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/ciso-advisor
-    - c-level-advisor/culture-architect
 ---
-
 # M&A Playbook
 
 Frameworks for both sides of M&A: acquiring companies and being acquired. Every M&A decision starts with strategic rationale -- without it, you are buying problems.

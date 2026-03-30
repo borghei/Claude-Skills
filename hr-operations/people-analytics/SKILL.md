@@ -1,16 +1,19 @@
 ---
 name: people-analytics
 description: >
-  Expert people analytics covering workforce analytics, HR metrics, predictive modeling,
-  employee insights, and data-driven HR decisions. Use when building turnover prediction
-  models, analyzing engagement surveys, running pay equity regressions, designing
-  people dashboards, scoring flight risk, or advising HR leaders with workforce data.
-version: 1.0.0
-author: borghei
-category: hr-operations
-tags: [people-analytics, hr-metrics, workforce, insights, predictive]
+  Expert people analytics covering workforce analytics, HR metrics, predictive
+  modeling, employee insights, and data-driven HR decisions. Use when building
+  turnover prediction models, analyzing engagement surveys, running pay equity
+  regressions, designing people dashboards, scoring flight risk, or advising HR
+  leaders with workforce data.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: hr-operations
+  updated: 2026-03-31
+  tags: [people-analytics, hr-metrics, workforce, insights, predictive]
 ---
-
 # People Analytics
 
 The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices.

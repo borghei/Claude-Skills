@@ -1,6 +1,8 @@
 ---
 name: create-prd
-description: PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.
+description: >
+  PRD scaffolding expert that generates structured product requirements
+  documents using an 8-section framework.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +13,6 @@ metadata:
   python-tools: prd_scaffolder.py
   tech-stack: prd, product-requirements, documentation
 ---
-
 # PRD Scaffolding Expert
 
 ## Overview

@@ -1,16 +1,21 @@
 ---
 name: changelog-generator
-description: Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and commit message linting. Use when preparing releases, enforcing commit standards, or automating release notes.
+description: >
+  Generate changelogs and release notes from Conventional Commits. Covers commit
+  parsing, semantic version bump detection, Keep a Changelog formatting,
+  monorepo scoped changelogs, CI integration, and commit message linting. Use
+  when preparing releases, enforcing commit standards, or automating release
+  notes.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: release-management
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: conventional-commits, keep-a-changelog, semantic-versioning
 ---
-
 # Changelog Generator
 
 **Tier:** POWERFUL

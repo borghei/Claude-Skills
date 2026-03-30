@@ -1,14 +1,14 @@
 ---
 name: decision-logger
 description: >
-  Two-layer memory architecture for tracking executive decisions. Layer 1 stores raw
-  deliberation transcripts, Layer 2 stores founder-approved decisions only. Future
-  sessions read Layer 2 to prevent hallucinated consensus from past debates. Handles
-  conflict detection, supersession tracking, DO_NOT_RESURFACE enforcement, overdue
-  action item alerts, and decision search. Use when logging decisions, reviewing past
-  decisions, checking overdue items, detecting conflicting decisions, or when user
-  mentions decision log, decision history, past decisions, action items, decision
-  tracking, or decision review.
+  Two-layer memory architecture for tracking executive decisions. Layer 1 stores
+  raw deliberation transcripts, Layer 2 stores founder-approved decisions only.
+  Future sessions read Layer 2 to prevent hallucinated consensus from past
+  debates. Handles conflict detection, supersession tracking, DO_NOT_RESURFACE
+  enforcement, overdue action item alerts, and decision search. Use when logging
+  decisions, reviewing past decisions, checking overdue items, detecting
+  conflicting decisions, or when user mentions decision log, decision history,
+  past decisions, action items, decision tracking, or decision review.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -37,13 +37,7 @@ metadata:
     - decision search
     - what did we decide
     - reopen decision
-  cross-references:
-    - c-level-advisor/chief-of-staff
-    - c-level-advisor/board-meeting
-    - c-level-advisor/strategic-alignment
-    - c-level-advisor/executive-mentor
 ---
-
 # Decision Logger
 
 Two-layer memory system for executive decisions. Layer 1 stores everything discussed. Layer 2 stores only what the founder approved. Future sessions read Layer 2 only -- this prevents hallucinated consensus from past debates bleeding into new deliberations.

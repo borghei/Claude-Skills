@@ -1,14 +1,16 @@
 ---
 name: chief-of-staff
 description: >
-  C-suite orchestration layer that routes founder questions to the right advisor role(s),
-  triggers multi-role board meetings for complex decisions, synthesizes outputs, tracks
-  decisions, and manages cross-functional alignment. Every C-suite interaction starts here.
-  Use when coordinating executive decisions, routing strategic questions, managing board
-  meetings, synthesizing multi-perspective advice, tracking decision history, resolving
-  inter-department conflicts, or when user mentions chief of staff, orchestrator, c-suite
-  coordinator, executive routing, board coordination, decision synthesis, advisor routing,
-  multi-agent coordination, or strategic orchestration.
+  C-suite orchestration layer that routes founder questions to the right advisor
+  role(s), triggers multi-role board meetings for complex decisions, synthesizes
+  outputs, tracks decisions, and manages cross-functional alignment. Every
+  C-suite interaction starts here. Use when coordinating executive decisions,
+  routing strategic questions, managing board meetings, synthesizing
+  multi-perspective advice, tracking decision history, resolving
+  inter-department conflicts, or when user mentions chief of staff,
+  orchestrator, c-suite coordinator, executive routing, board coordination,
+  decision synthesis, advisor routing, multi-agent coordination, or strategic
+  orchestration.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -36,18 +38,7 @@ metadata:
     - strategic routing
     - advisor selection
     - cross-functional decision
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/board-meeting
-    - c-level-advisor/decision-logger
-    - c-level-advisor/executive-mentor
-    - c-level-advisor/strategic-alignment
 ---
-
 # Chief of Staff
 
 The orchestration layer between founder and C-suite. Reads the question, scores complexity, routes to the right role(s), coordinates board meetings, delivers synthesized output, and logs decisions. Every executive interaction flows through this skill.

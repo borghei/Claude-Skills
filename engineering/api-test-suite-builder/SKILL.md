@@ -1,16 +1,20 @@
 ---
 name: api-test-suite-builder
-description: Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test generation. Use when adding new APIs, auditing test coverage, or building regression suites.
+description: >
+  Generate comprehensive API test suites from route definitions across
+  frameworks. Covers auth testing, input validation, contract testing, load
+  testing with k6, API mocking, and OpenAPI-driven test generation. Use when
+  adding new APIs, auditing test coverage, or building regression suites.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: api-testing
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: vitest, pytest, supertest, httpx, k6, pact
 ---
-
 # API Test Suite Builder
 
 **Tier:** POWERFUL

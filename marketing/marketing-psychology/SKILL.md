@@ -1,6 +1,14 @@
 ---
 name: marketing-psychology
-description: Apply behavioral psychology and cognitive biases to marketing for conversion optimization, pricing strategy, copy improvement, and campaign design. Includes 70+ mental models organized by application, diagnostic frameworks for identifying behavioral barriers, and implementation guides with before/after examples. Use when applying psychology to marketing, optimizing conversions, improving pricing pages, or when user mentions psychology, cognitive bias, persuasion, behavioral science, mental models, why people buy, decision-making, consumer behavior, or neuromarketing.
+description: >
+  Apply behavioral psychology and cognitive biases to marketing for conversion
+  optimization, pricing strategy, copy improvement, and campaign design.
+  Includes 70+ mental models organized by application, diagnostic frameworks for
+  identifying behavioral barriers, and implementation guides with before/after
+  examples. Use when applying psychology to marketing, optimizing conversions,
+  improving pricing pages, or when user mentions psychology, cognitive bias,
+  persuasion, behavioral science, mental models, why people buy,
+  decision-making, consumer behavior, or neuromarketing.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +17,6 @@ metadata:
   domain: psychology
   updated: 2026-03-09
 ---
-
 # Marketing Psychology
 
 Applied behavioral science for marketing — identifying which psychological principles apply to specific challenges and showing exactly how to implement them.

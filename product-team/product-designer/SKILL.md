@@ -1,14 +1,19 @@
 ---
 name: product-designer
 description: >
-  Expert product design covering UI/UX design, design systems, prototyping, user research, and design thinking.
-  Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles for a product.
-version: 1.0.0
-author: borghei
-category: product-design
-tags: [design, ux, ui, figma, prototyping, design-systems]
+  Expert product design covering UI/UX design, design systems, prototyping, user
+  research, and design thinking. Use when creating user journey maps, building
+  wireframes, defining design tokens and component systems, planning usability
+  tests, or establishing design principles for a product.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: product-design
+  domain: product-design
+  updated: 2026-03-31
+  tags: [design, ux, ui, figma, prototyping, design-systems]
 ---
-
 # Product Designer
 
 The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing.

@@ -209,7 +209,7 @@ Delivery excellence with discovery, execution frameworks, and Atlassian integrat
 | [job-stories](../project-management/execution/job-stories/SKILL.md) | JTBD When/Want/So backlog format | - |
 | [wwas](../project-management/execution/wwas/SKILL.md) | Why-What-Acceptance structured backlog items | - |
 
-## Regulatory Affairs, Quality Management & Compliance (20)
+## Regulatory Affairs, Quality Management & Compliance (21)
 
 Enterprise compliance across 18 frameworks.
 
@@ -252,6 +252,12 @@ Enterprise compliance across 18 frameworks.
 | [ccpa-cpra-privacy-expert](../ra-qm-team/ccpa-cpra-privacy-expert/SKILL.md) | CCPA/CPRA consumer privacy, data mapping, opt-out mechanisms | 2 |
 | [dora-compliance-expert](../ra-qm-team/dora-compliance-expert/SKILL.md) | DORA 5 pillars, ICT risk management, resilience testing | 2 |
 | [nis2-directive-specialist](../ra-qm-team/nis2-directive-specialist/SKILL.md) | NIS2 10 minimum measures, incident reporting, supply chain security | 2 |
+
+### Cross-Cutting Infrastructure (1)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [infrastructure-compliance-auditor](../ra-qm-team/infrastructure-compliance-auditor/SKILL.md) | Cross-framework infrastructure security audit (cloud, DNS, TLS, endpoints, CI/CD) | 4 |
 
 ## Business Growth (16)
 

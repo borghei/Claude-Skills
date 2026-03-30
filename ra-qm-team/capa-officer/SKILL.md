@@ -1,21 +1,20 @@
 ---
 name: capa-officer
-description: CAPA system management for medical device QMS. Covers root cause analysis, corrective action planning, effectiveness verification, and CAPA metrics. Use for CAPA investigations, 5-Why analysis, fishbone diagrams, root cause determination, corrective action tracking, effectiveness verification, or CAPA program optimization.
-triggers:
-  - CAPA investigation
-  - root cause analysis
-  - 5 Why analysis
-  - fishbone diagram
-  - corrective action
-  - preventive action
-  - effectiveness verification
-  - CAPA metrics
-  - nonconformance investigation
-  - quality issue investigation
-  - CAPA tracking
-  - audit finding CAPA
+description: >
+  CAPA system management for medical device QMS. Covers root cause analysis,
+  corrective action planning, effectiveness verification, and CAPA metrics. Use
+  for CAPA investigations, 5-Why analysis, fishbone diagrams, root cause
+  determination, corrective action tracking, effectiveness verification, or CAPA
+  program optimization.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: corrective-action
+  updated: 2026-03-31
+  tags: [capa, root-cause-analysis, fmea, corrective-action, quality]
 ---
-
 # CAPA Officer
 
 Corrective and Preventive Action (CAPA) management within Quality Management Systems, focusing on systematic root cause analysis, action implementation, and effectiveness verification.

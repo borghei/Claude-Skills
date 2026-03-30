@@ -1,6 +1,13 @@
 ---
 name: ceo-advisor
-description: Executive leadership guidance for strategic decision-making, organizational development, and stakeholder management. Includes strategy analyzer, financial scenario modeling, board governance frameworks, and investor relations playbooks. Use when planning strategy, preparing board presentations, managing investors, developing organizational culture, making executive decisions, or when user mentions CEO, strategic planning, board meetings, investor updates, organizational leadership, or executive strategy.
+description: >
+  Executive leadership guidance for strategic decision-making, organizational
+  development, and stakeholder management. Includes strategy analyzer, financial
+  scenario modeling, board governance frameworks, and investor relations
+  playbooks. Use when planning strategy, preparing board presentations, managing
+  investors, developing organizational culture, making executive decisions, or
+  when user mentions CEO, strategic planning, board meetings, investor updates,
+  organizational leadership, or executive strategy.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +18,6 @@ metadata:
   python-tools: strategy_analyzer.py, financial_scenario_analyzer.py
   frameworks: executive-decision-framework, board-governance, investor-relations
 ---
-
 # CEO Advisor
 
 Strategic frameworks and tools for chief executive leadership, organizational transformation, and stakeholder management.

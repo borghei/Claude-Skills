@@ -1,6 +1,13 @@
 ---
 name: internal-narrative
-description: Build and maintain one coherent company story across all stakeholder audiences -- employees, investors, customers, candidates, and partners. Covers narrative construction, audience translation, contradiction detection, all-hands design, investor updates, crisis communication, and change management communications. Use when preparing all-hands meetings, investor updates, board presentations, recruiting narratives, crisis communications, or any time narrative consistency matters.
+description: >
+  Build and maintain one coherent company story across all stakeholder audiences
+  -- employees, investors, customers, candidates, and partners. Covers narrative
+  construction, audience translation, contradiction detection, all-hands design,
+  investor updates, crisis communication, and change management communications.
+  Use when preparing all-hands meetings, investor updates, board presentations,
+  recruiting narratives, crisis communications, or any time narrative
+  consistency matters.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +18,6 @@ metadata:
   updated: 2026-03-09
   frameworks: narrative-construction, audience-translation, crisis-communication
 ---
-
 # Internal Narrative Builder
 
 **Tier:** POWERFUL

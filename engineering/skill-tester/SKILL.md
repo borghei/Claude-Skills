@@ -1,14 +1,19 @@
 ---
 name: skill-tester
-description: Validates and scores Claude Code skill packages for quality, completeness, and best practices compliance. Tests Python scripts, checks YAML frontmatter, and generates quality reports. Use when creating new skills, validating skill packages, or auditing skill quality.
+description: >
+  Validates and scores Claude Code skill packages for quality, completeness, and
+  best practices compliance. Tests Python scripts, checks YAML frontmatter, and
+  generates quality reports. Use when creating new skills, validating skill
+  packages, or auditing skill quality.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: meta-skills
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # Skill Tester
 
 **Name**: skill-tester

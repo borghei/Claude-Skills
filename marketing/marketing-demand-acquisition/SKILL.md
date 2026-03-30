@@ -1,22 +1,9 @@
 ---
 name: marketing-demand-acquisition
-description: Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs for Series A+ startups
-triggers:
-  - demand gen
-  - demand generation
-  - paid ads
-  - paid media
-  - LinkedIn ads
-  - Google ads
-  - Meta ads
-  - CAC
-  - customer acquisition cost
-  - lead generation
-  - MQL
-  - SQL
-  - pipeline generation
-  - acquisition strategy
-  - HubSpot campaigns
+description: >
+  Multi-channel demand generation, paid media optimization, SEO strategy, and
+  partnership programs for Series A+ startups
+license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
@@ -24,7 +11,6 @@ metadata:
   domain: demand-generation
   updated: 2025-01
 ---
-
 # Marketing Demand & Acquisition
 
 Acquisition playbook for Series A+ startups scaling internationally (EU/US/Canada) with hybrid PLG/Sales-Led motion.

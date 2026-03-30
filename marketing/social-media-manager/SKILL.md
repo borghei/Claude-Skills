@@ -1,6 +1,12 @@
 ---
 name: social-media-manager
-description: Strategic social media management for B2B SaaS and technology companies. Covers platform selection, content pillar design, editorial calendars, community engagement frameworks, crisis response protocols, growth tactics, and performance measurement. Use when building social media strategy, planning content calendars, managing community engagement, conducting social audits, or scaling social operations.
+description: >
+  Strategic social media management for B2B SaaS and technology companies.
+  Covers platform selection, content pillar design, editorial calendars,
+  community engagement frameworks, crisis response protocols, growth tactics,
+  and performance measurement. Use when building social media strategy, planning
+  content calendars, managing community engagement, conducting social audits, or
+  scaling social operations.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -10,7 +16,6 @@ metadata:
   updated: 2026-03-09
   frameworks: content-pillars, community-management, social-audit, crisis-response
 ---
-
 # Social Media Manager
 
 **Category:** Marketing

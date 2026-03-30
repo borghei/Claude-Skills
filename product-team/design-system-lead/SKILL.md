@@ -1,14 +1,20 @@
 ---
 name: design-system-lead
 description: >
-  Expert design systems leadership covering component libraries, design tokens, documentation, and design-development collaboration.
-  Use when architecting a design token system, building a component library, defining governance and contribution processes, measuring design system adoption, or generating cross-platform tokens (CSS, SCSS, iOS, Android).
-version: 1.0.0
-author: borghei
-category: product-design
-tags: [design-systems, components, tokens, documentation, figma]
+  Expert design systems leadership covering component libraries, design tokens,
+  documentation, and design-development collaboration. Use when architecting a
+  design token system, building a component library, defining governance and
+  contribution processes, measuring design system adoption, or generating
+  cross-platform tokens (CSS, SCSS, iOS, Android).
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: product-design
+  domain: design-systems
+  updated: 2026-03-31
+  tags: [design-systems, components, tokens, documentation, figma]
 ---
-
 # Design System Lead
 
 The agent operates as a senior design system lead, delivering scalable component libraries, token architectures, governance processes, and adoption strategies for cross-functional product teams.

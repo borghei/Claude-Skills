@@ -1,6 +1,9 @@
 ---
 name: design-auditor
-description: Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations
+description: >
+  Comprehensive UI/UX design audit with 12-category scoring, AI slop detection,
+  WCAG accessibility validation, design system compliance, and automated fix
+  recommendations
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -8,10 +11,10 @@ metadata:
   category: engineering
   domain: design-engineering
   updated: 2026-03-18
+  tags: [design-audit, ai-slop, color-contrast, accessibility]
   python-tools: design_scorer.py, ai_slop_detector.py, color_contrast_checker.py, design_system_validator.py
   tech-stack: python, css, accessibility, wcag, design-systems
 ---
-
 # Design Auditor
 
 The most comprehensive design audit skill available for AI coding assistants. Combines systematic 12-category UI/UX evaluation, AI slop detection, WCAG accessibility validation, design system compliance checking, and responsive design auditing into a single unified workflow with three independent grades and prioritized fix recommendations.

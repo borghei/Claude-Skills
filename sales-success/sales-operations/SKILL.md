@@ -1,15 +1,18 @@
 ---
 name: sales-operations
 description: >
-  Expert sales operations covering CRM management, sales analytics, territory planning,
-  compensation design, and process optimization. Use when building pipeline reports,
-  designing territories, setting quotas, creating comp plans, or auditing CRM data quality.
-version: 1.0.0
-author: borghei
-category: sales-success
-tags: [sales-ops, crm, analytics, territory, compensation]
+  Expert sales operations covering CRM management, sales analytics, territory
+  planning, compensation design, and process optimization. Use when building
+  pipeline reports, designing territories, setting quotas, creating comp plans,
+  or auditing CRM data quality.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: sales-success
+  updated: 2026-03-31
+  tags: [sales-ops, crm, analytics, territory, compensation]
 ---
-
 # Sales Operations
 
 The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization.

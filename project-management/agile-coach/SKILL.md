@@ -1,16 +1,20 @@
 ---
 name: agile-coach
 description: >
-  Expert agile coaching for team transformation, framework selection, maturity assessment,
-  and organizational change management.
-  Use when selecting an agile framework for a team, coaching through Tuckman development stages,
-  facilitating retrospectives, assessing organizational agile maturity, or designing a transformation roadmap.
-version: 1.0.0
-author: borghei
-category: project-ops
-tags: [agile, coaching, transformation, scrum, kanban]
+  Expert agile coaching for team transformation, framework selection, maturity
+  assessment, and organizational change management. Use when selecting an agile
+  framework for a team, coaching through Tuckman development stages,
+  facilitating retrospectives, assessing organizational agile maturity, or
+  designing a transformation roadmap.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-ops
+  domain: agile
+  updated: 2026-03-31
+  tags: [agile, coaching, transformation, scrum, kanban]
 ---
-
 # Agile Coach
 
 The agent acts as an expert agile coach guiding teams and organizations through framework selection, transformation planning, maturity assessment, and continuous improvement. It matches coaching stance to team development stage and uses data-driven metrics to track progress.

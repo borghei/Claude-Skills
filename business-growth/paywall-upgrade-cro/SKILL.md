@@ -1,19 +1,17 @@
 ---
 name: paywall-upgrade-cro
-description: In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, paywall, upgrade, freemium, monetization, upsell]
-triggers:
-  - user wants to optimize in-app paywall or upgrade screens
-  - user mentions upgrade modal, feature gate, or upsell
-  - user wants to convert free users to paid
-  - user mentions trial expiration screen or limit reached screen
-  - user has low freemium conversion rate
-  - user asks about pricing page within an app
+description: >
+  In-app paywall and upgrade screen optimization covering feature gate design,
+  usage limit UX, trial expiration flows, upgrade trigger timing, save offer
+  strategy, and ethical monetization patterns.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [cro, paywall, upgrade, freemium, monetization, upsell]
 ---
-
 # Paywall & Upgrade Screen CRO
 
 Production-grade framework for in-product upgrade flows. Covers feature gate design, usage limit UX, trial expiration sequences, upgrade trigger timing, dark pattern avoidance, and ethical monetization. Distinct from public pricing pages (use page-cro for those) -- this focuses on in-product moments where users have already experienced value.

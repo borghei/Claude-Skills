@@ -1,6 +1,13 @@
 ---
 name: copy-editing
-description: Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Framework, editorial checklists, common problem diagnosis, and style consistency standards. Use when editing marketing copy, reviewing drafts, polishing content, proofreading, or when user mentions edit copy, review copy, copy feedback, proofread, polish, copy sweep, editorial review, or fact-checking.
+description: >
+  Systematic copy editing through focused passes covering clarity, voice
+  consistency, benefit framing, proof validation, specificity, emotional impact,
+  and friction removal. Includes the Seven Sweeps Framework, editorial
+  checklists, common problem diagnosis, and style consistency standards. Use
+  when editing marketing copy, reviewing drafts, polishing content,
+  proofreading, or when user mentions edit copy, review copy, copy feedback,
+  proofread, polish, copy sweep, editorial review, or fact-checking.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: copywriting
   updated: 2026-03-09
 ---
-
 # Copy Editing
 
 Systematic copy improvement through focused editorial passes that enhance clarity, voice, proof, and conversion impact.

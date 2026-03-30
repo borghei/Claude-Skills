@@ -1,8 +1,19 @@
 ---
 name: confluence-expert
-description: Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation, planning, product discovery, page layouts, macros, templates, and all Confluence features. Use for documentation strategy, space architecture, content organization, and collaborative knowledge management.
+description: >
+  Atlassian Confluence expert for creating and managing spaces, knowledge bases,
+  documentation, planning, product discovery, page layouts, macros, templates,
+  and all Confluence features. Use for documentation strategy, space
+  architecture, content organization, and collaborative knowledge management.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-management
+  domain: atlassian
+  updated: 2026-03-31
+  tags: [confluence, knowledge-management, wiki, documentation]
 ---
-
 # Atlassian Confluence Expert
 
 Master-level expertise in Confluence space management, documentation architecture, content creation, macros, templates, and collaborative knowledge management.

@@ -1,14 +1,19 @@
 ---
 name: brand-strategist
 description: >
-  Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance.
-  Use when developing brand positioning statements, creating messaging frameworks, auditing brand health metrics, building brand architecture models, or establishing brand governance guidelines.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [brand, strategy, positioning, identity, messaging]
+  Expert brand strategy covering brand positioning, identity development, brand
+  architecture, messaging frameworks, and brand governance. Use when developing
+  brand positioning statements, creating messaging frameworks, auditing brand
+  health metrics, building brand architecture models, or establishing brand
+  governance guidelines.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [brand, strategy, positioning, identity, messaging]
 ---
-
 # Brand Strategist
 
 The agent operates as a senior brand strategist, delivering actionable brand positioning, identity systems, messaging frameworks, and governance structures for market differentiation.

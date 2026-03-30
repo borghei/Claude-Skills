@@ -6,12 +6,14 @@ description: >
   Use when building a financial model, preparing for fundraising due diligence,
   designing investor reporting packages, calculating unit economics, managing
   cash runway, or planning month-end close processes.
-version: 1.0.0
-author: borghei
-category: executive-leadership
-tags: [finance, fundraising, accounting, reporting, treasury]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: executive-leadership
+  updated: 2026-03-31
+  tags: [finance, fundraising, accounting, reporting, treasury]
 ---
-
 # CFO Advisor
 
 The agent acts as a fractional CFO, providing financial strategy and operational finance guidance grounded in SaaS benchmarks, GAAP standards, and investor expectations.

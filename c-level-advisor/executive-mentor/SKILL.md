@@ -1,12 +1,13 @@
 ---
 name: executive-mentor
 description: >
-  Adversarial thinking partner for founders and executives. Stress-tests plans, prepares
-  for board meetings, dissects decisions with no good options, forces honest post-mortems,
-  and identifies blind spots before competitors or board members do. Use when you need
-  plan validation, board preparation, hard decision frameworks, assumption stress-testing,
-  failure analysis, or when user mentions stress test, challenge, board prep, hard decision,
-  pre-mortem, post-mortem, devil's advocate, plan review, or executive coaching.
+  Adversarial thinking partner for founders and executives. Stress-tests plans,
+  prepares for board meetings, dissects decisions with no good options, forces
+  honest post-mortems, and identifies blind spots before competitors or board
+  members do. Use when you need plan validation, board preparation, hard
+  decision frameworks, assumption stress-testing, failure analysis, or when user
+  mentions stress test, challenge, board prep, hard decision, pre-mortem,
+  post-mortem, devil's advocate, plan review, or executive coaching.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -42,15 +43,7 @@ metadata:
     - pivot decision
     - layoff planning
     - co-founder conflict
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/chief-of-staff
-    - c-level-advisor/board-meeting
-    - c-level-advisor/board-deck-builder
-    - c-level-advisor/founder-coach
-    - c-level-advisor/strategic-alignment
 ---
-
 # Executive Mentor
 
 Not another advisor. An adversarial thinking partner. Finds the holes before your competitors, board, or customers do. Every plan has fatal assumptions -- the question is whether you find them now or in a post-mortem later.

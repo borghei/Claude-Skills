@@ -1,12 +1,13 @@
 ---
 name: intl-expansion
 description: >
-  International market expansion strategy for scaling companies. Covers market selection
-  scoring, entry mode evaluation, localization requirements, regulatory compliance by
-  region, go-to-market adaptation, team structure decisions, and launch planning. Use when
-  expanding to new countries, evaluating international markets, planning localization,
-  building regional teams, assessing regulatory requirements, or when user mentions
-  international expansion, market entry, localization, regional strategy, global expansion,
+  International market expansion strategy for scaling companies. Covers market
+  selection scoring, entry mode evaluation, localization requirements,
+  regulatory compliance by region, go-to-market adaptation, team structure
+  decisions, and launch planning. Use when expanding to new countries,
+  evaluating international markets, planning localization, building regional
+  teams, assessing regulatory requirements, or when user mentions international
+  expansion, market entry, localization, regional strategy, global expansion,
   cross-border, or new market.
 license: MIT + Commons Clause
 metadata:
@@ -41,16 +42,7 @@ metadata:
     - data residency
     - local entity
     - regional team
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cro-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/ciso-advisor
-    - c-level-advisor/chro-advisor
 ---
-
 # International Expansion
 
 Frameworks for expanding into new markets: selection, entry mode, localization, regulatory compliance, GTM adaptation, and execution. Every expansion is a bet -- this skill structures the bet to maximize signal before committing resources.

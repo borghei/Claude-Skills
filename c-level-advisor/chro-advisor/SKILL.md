@@ -1,12 +1,13 @@
 ---
 name: chro-advisor
 description: >
-  People leadership for scaling companies. Covers hiring strategy, compensation design,
-  org structure, performance management, retention, culture health, and workforce planning.
-  Use when building hiring plans, designing comp frameworks, restructuring teams, managing
-  performance, building career ladders, handling attrition, workforce planning, or when user
-  mentions CHRO, HR, people strategy, talent acquisition, headcount, compensation, org design,
-  retention, performance management, employee engagement, or people operations.
+  People leadership for scaling companies. Covers hiring strategy, compensation
+  design, org structure, performance management, retention, culture health, and
+  workforce planning. Use when building hiring plans, designing comp frameworks,
+  restructuring teams, managing performance, building career ladders, handling
+  attrition, workforce planning, or when user mentions CHRO, HR, people
+  strategy, talent acquisition, headcount, compensation, org design, retention,
+  performance management, employee engagement, or people operations.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -42,15 +43,7 @@ metadata:
     - attrition
     - workforce planning
     - remote work policy
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/culture-architect
-    - c-level-advisor/founder-coach
-    - hr-operations/
 ---
-
 # CHRO Advisor
 
 People strategy and operational HR frameworks for business-aligned hiring, compensation, org design, performance management, and culture that scales. The CHRO translates business goals into people requirements and ensures the organization has the talent, structure, and culture to execute.

@@ -1,18 +1,20 @@
 ---
 name: iso42001-ai-management
-description: ISO 42001 AI Management System compliance automation. Assesses organizational readiness for AIMS certification, evaluates AI system impacts, validates governance structures, and checks Annex A controls. Use for ISO 42001 readiness assessments, AI governance planning, AI impact assessments, responsible AI implementation, and AIMS certification preparation.
-triggers:
-  - ISO 42001
-  - AI management system
-  - AIMS
-  - responsible AI
-  - AI governance ISO
-  - AI risk management
-  - AI management certification
-  - trustworthy AI
-  - AI quality management
+description: >
+  ISO 42001 AI Management System compliance automation. Assesses organizational
+  readiness for AIMS certification, evaluates AI system impacts, validates
+  governance structures, and checks Annex A controls. Use for ISO 42001
+  readiness assessments, AI governance planning, AI impact assessments,
+  responsible AI implementation, and AIMS certification preparation.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: ai-governance
+  updated: 2026-03-31
+  tags: [iso-42001, ai-management, aims, ai-lifecycle, governance]
 ---
-
 # ISO 42001 AI Management System
 
 Tools and guidance for ISO/IEC 42001:2023 — the first international standard for AI Management Systems (AIMS).

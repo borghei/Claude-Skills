@@ -1,6 +1,11 @@
 ---
 name: launch-strategy
-description: Plan and execute product launches and feature announcements for SaaS and technology products. Covers phased launch plans (alpha, beta, GA), channel strategy (owned/rented/borrowed), Product Hunt playbooks, launch day execution, and post-launch momentum. Use when launching a new product, major feature, pricing change, or planning a Product Hunt launch.
+description: >
+  Plan and execute product launches and feature announcements for SaaS and
+  technology products. Covers phased launch plans (alpha, beta, GA), channel
+  strategy (owned/rented/borrowed), Product Hunt playbooks, launch day
+  execution, and post-launch momentum. Use when launching a new product, major
+  feature, pricing change, or planning a Product Hunt launch.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -10,7 +15,6 @@ metadata:
   updated: 2026-03-09
   frameworks: phased-launch, orb-channels, product-hunt, launch-momentum
 ---
-
 # Launch Strategy
 
 **Category:** Marketing

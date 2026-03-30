@@ -1,16 +1,21 @@
 ---
 name: monorepo-navigator
-description: Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, migration from multi-repo, and coordinated publishing. Use when working in monorepos, optimizing build times, or managing shared packages.
+description: >
+  Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces,
+  and Changesets. Covers cross-package impact analysis, selective builds,
+  dependency graph visualization, remote caching, migration from multi-repo, and
+  coordinated publishing. Use when working in monorepos, optimizing build times,
+  or managing shared packages.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: monorepo-architecture
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: turborepo, nx, pnpm-workspaces, changesets
 ---
-
 # Monorepo Navigator
 
 **Tier:** POWERFUL

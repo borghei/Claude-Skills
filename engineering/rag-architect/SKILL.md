@@ -9,11 +9,12 @@ description: >
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-ml
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # RAG Architect
 
 The agent designs, implements, and optimizes production-grade Retrieval-Augmented Generation pipelines, covering the full lifecycle from document chunking through evaluation.

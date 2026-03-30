@@ -1,16 +1,22 @@
 ---
 name: mcp-server-builder
-description: Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and Python implementations, testing strategies, authentication, and deployment. Use when exposing APIs to AI agents, building tool servers, or creating MCP integrations.
+description: >
+  Build production-ready MCP (Model Context Protocol) servers with tool
+  definitions, resource providers, prompt templates, and transport
+  configuration. Covers OpenAPI-to-MCP conversion, TypeScript and Python
+  implementations, testing strategies, authentication, and deployment. Use when
+  exposing APIs to AI agents, building tool servers, or creating MCP
+  integrations.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-integration
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: mcp-sdk, typescript, python, openapi
 ---
-
 # MCP Server Builder
 
 **Tier:** POWERFUL

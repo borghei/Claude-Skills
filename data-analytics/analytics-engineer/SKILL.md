@@ -5,12 +5,19 @@ description: >
   transformation, and semantic layer management. Use when building dbt models,
   designing star schemas, writing staging or mart SQL, configuring data tests,
   defining semantic-layer metrics, or optimizing warehouse query performance.
-version: 1.0.0
-author: borghei
-category: data-analytics
-tags: [analytics-engineering, dbt, data-modeling, transformation, semantic-layer]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: data-analytics
+  updated: 2026-03-31
+  tags:
+    - analytics-engineering
+    - dbt
+    - data-modeling
+    - transformation
+    - semantic-layer
 ---
-
 # Analytics Engineer
 
 The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.

@@ -1,6 +1,12 @@
 ---
 name: contract-and-proposal-writer
-description: Generate production-ready business documents including freelance contracts, project proposals, SOWs, NDAs, and MSAs with jurisdiction-aware clauses. Covers US (Delaware), EU (GDPR), UK, and DACH (German law) legal frameworks. Includes contract templates, clause libraries, and DOCX conversion. Use when starting client engagements, writing proposals, drafting partnership agreements, or needing GDPR-compliant data processing addenda.
+description: >
+  Generate production-ready business documents including freelance contracts,
+  project proposals, SOWs, NDAs, and MSAs with jurisdiction-aware clauses.
+  Covers US (Delaware), EU (GDPR), UK, and DACH (German law) legal frameworks.
+  Includes contract templates, clause libraries, and DOCX conversion. Use when
+  starting client engagements, writing proposals, drafting partnership
+  agreements, or needing GDPR-compliant data processing addenda.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +17,6 @@ metadata:
   updated: 2026-03-09
   frameworks: contract-templates, jurisdiction-compliance, proposal-writing
 ---
-
 # Contract & Proposal Writer
 
 **Tier:** POWERFUL

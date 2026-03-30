@@ -1,6 +1,8 @@
 ---
 name: doc-drift-detector
-description: Automated documentation drift detection and synchronization with code change analysis, staleness scoring, and intelligent update recommendations
+description: >
+  Automated documentation drift detection and synchronization with code change
+  analysis, staleness scoring, and intelligent update recommendations
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -8,10 +10,10 @@ metadata:
   category: engineering
   domain: documentation
   updated: 2026-03-18
+  tags: [documentation, staleness, api-docs, drift-analysis]
   python-tools: drift_analyzer.py, doc_staleness_scorer.py, api_doc_validator.py, link_checker.py
   tech-stack: python, git, markdown, documentation
 ---
-
 # Documentation Drift Detector
 
 Automated documentation drift detection and synchronization for codebases of any size. Identifies when documentation falls out of sync with code, scores staleness, validates API docs against source, and audits link integrity -- all with zero external dependencies.

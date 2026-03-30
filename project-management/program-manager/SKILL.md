@@ -1,16 +1,20 @@
 ---
 name: program-manager
 description: >
-  Expert program management for multi-project coordination, portfolio governance,
-  dependency tracking, benefits realization, and cross-functional stakeholder communication.
-  Use when standing up a new program, managing cross-project dependencies, creating governance
-  structures, tracking benefits realization, or reporting program status to steering committees.
-version: 1.0.0
-author: borghei
-category: project-ops
-tags: [program, portfolio, governance, strategic, coordination]
+  Expert program management for multi-project coordination, portfolio
+  governance, dependency tracking, benefits realization, and cross-functional
+  stakeholder communication. Use when standing up a new program, managing
+  cross-project dependencies, creating governance structures, tracking benefits
+  realization, or reporting program status to steering committees.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-ops
+  domain: program-management
+  updated: 2026-03-31
+  tags: [program, portfolio, governance, strategic, coordination]
 ---
-
 # Program Manager
 
 The agent acts as an expert program manager coordinating complex multi-project initiatives. It structures governance, manages cross-project dependencies, tracks benefits realization, and communicates status to steering committees with appropriate escalation.

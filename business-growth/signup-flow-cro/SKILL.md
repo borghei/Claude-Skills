@@ -1,19 +1,17 @@
 ---
 name: signup-flow-cro
-description: Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patterns.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, signup, registration, authentication, conversion-optimization]
-triggers:
-  - user wants to optimize signup, registration, or account creation
-  - user mentions signup conversion, registration friction, or signup dropoff
-  - user asks about SSO, social login, or magic link authentication
-  - user mentions free trial signup optimization
-  - user reports high mobile signup abandonment
-  - user asks whether to require a credit card for trial
+description: >
+  Signup and registration flow optimization covering SSO strategy, progressive
+  profiling, field reduction, multi-step flow design, authentication UX,
+  post-submit experience, and mobile registration patterns.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [cro, signup, registration, authentication, conversion-optimization]
 ---
-
 # Signup Flow CRO
 
 Production-grade signup and registration optimization framework covering authentication strategy, field reduction methodology, multi-step flow architecture, SSO implementation, progressive profiling, credit card requirement analysis, post-submit experience design, and mobile-specific registration patterns. For post-signup onboarding, use onboarding-cro. For lead capture forms (not account creation), use form-cro.

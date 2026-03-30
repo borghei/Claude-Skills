@@ -1,17 +1,17 @@
 ---
 name: tdd-guide
-description: Test-driven development workflow with test generation, coverage analysis, and multi-framework support
-triggers:
-  - generate tests
-  - analyze coverage
-  - TDD workflow
-  - red green refactor
-  - Jest tests
-  - Pytest tests
-  - JUnit tests
-  - coverage report
+description: >
+  Test-driven development workflow with test generation, coverage analysis, and
+  multi-framework support
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: testing
+  updated: 2026-03-31
+  tags: [tdd, test-driven-development, testing, red-green-refactor]
 ---
-
 # TDD Guide
 
 Test-driven development skill for generating tests, analyzing coverage, and guiding red-green-refactor workflows across Jest, Pytest, JUnit, and Vitest.

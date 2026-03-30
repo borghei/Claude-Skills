@@ -1,12 +1,13 @@
 ---
 name: board-meeting
 description: >
-  Multi-agent board meeting protocol for strategic decisions. Runs a structured 6-phase
-  deliberation: context loading, independent C-suite contributions, critic analysis,
-  synthesis, founder review, and decision extraction. Prevents groupthink through isolated
-  contributions. Use when making major strategic decisions, resolving cross-functional
-  disagreements, evaluating irreversible choices, or when user mentions board meeting,
-  executive deliberation, strategic decision, multi-perspective, or structured deliberation.
+  Multi-agent board meeting protocol for strategic decisions. Runs a structured
+  6-phase deliberation: context loading, independent C-suite contributions,
+  critic analysis, synthesis, founder review, and decision extraction. Prevents
+  groupthink through isolated contributions. Use when making major strategic
+  decisions, resolving cross-functional disagreements, evaluating irreversible
+  choices, or when user mentions board meeting, executive deliberation,
+  strategic decision, multi-perspective, or structured deliberation.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -35,21 +36,7 @@ metadata:
     - multi-agent deliberation
     - need all perspectives
     - complex decision
-  cross-references:
-    - c-level-advisor/chief-of-staff
-    - c-level-advisor/decision-logger
-    - c-level-advisor/executive-mentor
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/cro-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ciso-advisor
 ---
-
 # Board Meeting Protocol
 
 Structured multi-agent deliberation that prevents groupthink, captures minority views, and produces clean, actionable decisions. Every phase has a purpose, a format, and rules that cannot be skipped.

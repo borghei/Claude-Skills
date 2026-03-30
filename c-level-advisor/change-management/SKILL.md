@@ -1,12 +1,13 @@
 ---
 name: change-management
 description: >
-  Framework for rolling out organizational changes without chaos. Covers the ADKAR model
-  adapted for startups, communication templates, resistance patterns and responses, change
-  fatigue management, and specific playbooks for process changes, reorgs, strategy pivots,
-  and culture changes. Use when announcing a reorg, switching tools, pivoting strategy,
-  killing a product, changing leadership, rolling out new processes, or when user mentions
-  change management, change rollout, managing resistance, org change, reorg, pivot
+  Framework for rolling out organizational changes without chaos. Covers the
+  ADKAR model adapted for startups, communication templates, resistance patterns
+  and responses, change fatigue management, and specific playbooks for process
+  changes, reorgs, strategy pivots, and culture changes. Use when announcing a
+  reorg, switching tools, pivoting strategy, killing a product, changing
+  leadership, rolling out new processes, or when user mentions change
+  management, change rollout, managing resistance, org change, reorg, pivot
   communication, tool migration, or change fatigue.
 license: MIT + Commons Clause
 metadata:
@@ -42,15 +43,7 @@ metadata:
     - new process
     - announce change
     - manage resistance
-  cross-references:
-    - c-level-advisor/culture-architect
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/company-os
-    - c-level-advisor/strategic-alignment
 ---
-
 # Change Management Playbook
 
 Most changes fail at implementation, not design. This skill provides the complete framework for rolling out organizational changes -- from process tweaks to full strategic pivots -- with minimal disruption and maximum adoption.

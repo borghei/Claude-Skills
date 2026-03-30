@@ -1,6 +1,8 @@
 ---
 name: prioritization-frameworks
-description: Comprehensive prioritization framework expert covering 9 methods with scoring tools and decision guidance for product managers.
+description: >
+  Comprehensive prioritization framework expert covering 9 methods with scoring
+  tools and decision guidance for product managers.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +13,6 @@ metadata:
   python-tools: prioritization_scorer.py
   tech-stack: rice, ice, kano, moscow, eisenhower, opportunity-score, prioritization
 ---
-
 # Prioritization Framework Expert
 
 ## Overview

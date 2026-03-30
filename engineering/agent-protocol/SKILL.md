@@ -1,16 +1,21 @@
 ---
 name: agent-protocol
-description: Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when building multi-agent systems, defining tool interfaces, implementing agent-to-agent communication, or standardizing LLM tool calling patterns across platforms.
+description: >
+  Design and implement AI agent communication protocols including MCP tool
+  schemas, Google A2A protocol, OpenAI function calling, structured inter-agent
+  messaging, and protocol negotiation. Use when building multi-agent systems,
+  defining tool interfaces, implementing agent-to-agent communication, or
+  standardizing LLM tool calling patterns across platforms.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-agent-systems
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: mcp, a2a, openai-functions, langchain-tools
 ---
-
 # Agent Protocol
 
 **Tier:** POWERFUL

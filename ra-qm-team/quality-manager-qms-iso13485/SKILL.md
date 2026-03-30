@@ -1,21 +1,23 @@
 ---
 name: quality-manager-qms-iso13485
-description: ISO 13485 Quality Management System implementation and maintenance for medical device organizations. Provides QMS design, documentation control, internal auditing, CAPA management, and certification support.
-triggers:
-  - ISO 13485
-  - QMS implementation
-  - quality management system
-  - document control
-  - internal audit
-  - management review
-  - quality manual
-  - CAPA process
-  - process validation
-  - design control
-  - supplier qualification
-  - quality records
+description: >
+  ISO 13485 Quality Management System implementation and maintenance for medical
+  device organizations. Provides QMS design, documentation control, internal
+  auditing, CAPA management, and certification support.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: quality-management
+  updated: 2026-03-31
+  tags:
+    - iso-13485
+    - qms
+    - design-control
+    - supplier-qualification
+    - medical-device
 ---
-
 # Quality Manager - QMS ISO 13485 Specialist
 
 ISO 13485:2016 Quality Management System implementation, maintenance, and certification support for medical device organizations.

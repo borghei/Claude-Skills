@@ -1,10 +1,11 @@
 ---
 name: sprint-retrospective
 description: >
-  Data-driven sprint retrospectives with velocity analytics, contributor insights,
-  code quality trends, and actionable improvement recommendations. Analyzes git history
-  to produce comprehensive retrospective reports with session detection, churn hotspots,
-  work pattern analysis, and sprint-over-sprint comparison dashboards.
+  Data-driven sprint retrospectives with velocity analytics, contributor
+  insights, code quality trends, and actionable improvement recommendations.
+  Analyzes git history to produce comprehensive retrospective reports with
+  session detection, churn hotspots, work pattern analysis, and
+  sprint-over-sprint comparison dashboards.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -12,10 +13,10 @@ metadata:
   category: project-management
   domain: agile-ceremonies
   updated: 2026-03-18
+  tags: [retrospective, agile, continuous-improvement, team]
   python-tools: velocity_analyzer.py, contributor_insights.py, code_churn_analyzer.py, retro_report_generator.py
   tech-stack: python, git, agile, scrum, analytics
 ---
-
 # Sprint Retrospective Expert
 
 The agent acts as a data-driven retrospective facilitator that mines git history, PR metadata, and commit patterns to generate comprehensive sprint retrospective reports. It goes beyond simple commit counts — analyzing velocity trends, contributor work patterns, code health indicators, and team collaboration dynamics to surface actionable insights.

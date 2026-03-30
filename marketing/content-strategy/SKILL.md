@@ -1,6 +1,12 @@
 ---
 name: content-strategy
-description: Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what content to create, building a content calendar, planning topic clusters, conducting content audits, or when user mentions content strategy, content ideas, blog strategy, topic clusters, content planning, content pillars, content gaps, or editorial planning.
+description: >
+  Plan content strategy including content pillars, audience research, topic
+  clustering, funnel mapping, competitive content analysis, content audits, and
+  editorial planning. Use when deciding what content to create, building a
+  content calendar, planning topic clusters, conducting content audits, or when
+  user mentions content strategy, content ideas, blog strategy, topic clusters,
+  content planning, content pillars, content gaps, or editorial planning.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +15,6 @@ metadata:
   domain: content
   updated: 2026-03-09
 ---
-
 # Content Strategy
 
 Strategic content planning that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.

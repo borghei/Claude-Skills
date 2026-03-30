@@ -1,6 +1,13 @@
 ---
 name: marketing-ops
-description: Central marketing operations hub covering MarTech stack management, marketing automation, data management, attribution modeling, campaign orchestration, skill routing, and cross-functional coordination. Use when routing marketing questions, orchestrating multi-skill campaigns, managing MarTech stack, setting up marketing automation, or when user mentions marketing ops, campaign plan, marketing help, marketing priorities, coordinate marketing, MarTech, marketing automation, data management, or attribution.
+description: >
+  Central marketing operations hub covering MarTech stack management, marketing
+  automation, data management, attribution modeling, campaign orchestration,
+  skill routing, and cross-functional coordination. Use when routing marketing
+  questions, orchestrating multi-skill campaigns, managing MarTech stack,
+  setting up marketing automation, or when user mentions marketing ops, campaign
+  plan, marketing help, marketing priorities, coordinate marketing, MarTech,
+  marketing automation, data management, or attribution.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: operations
   updated: 2026-03-09
 ---
-
 # Marketing Ops
 
 Central command for marketing operations — routing questions, orchestrating campaigns, managing MarTech, and coordinating across all marketing functions.

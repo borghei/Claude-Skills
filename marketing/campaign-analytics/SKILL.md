@@ -1,6 +1,8 @@
 ---
 name: campaign-analytics
-description: Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization
+description: >
+  Analyzes campaign performance with multi-touch attribution, funnel conversion,
+  and ROI calculation for marketing optimization
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +13,6 @@ metadata:
   python-tools: attribution_analyzer.py, funnel_analyzer.py, campaign_roi_calculator.py
   tech-stack: marketing-analytics, attribution-modeling
 ---
-
 # Campaign Analytics
 
 Production-grade campaign performance analysis with multi-touch attribution modeling, funnel conversion analysis, and ROI calculation. Three Python CLI tools provide deterministic, repeatable analytics using standard library only -- no external dependencies, no API calls, no ML models.

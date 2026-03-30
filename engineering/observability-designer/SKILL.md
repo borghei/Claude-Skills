@@ -3,17 +3,18 @@ name: observability-designer
 description: >
   Designs comprehensive observability strategies including SLI/SLO frameworks,
   alerting optimization, and dashboard generation. Use when implementing
-  monitoring for a production service, creating or tuning alert rules,
-  designing Grafana dashboards, defining SLOs and error budgets, or
-  reducing alert fatigue in on-call rotations.
+  monitoring for a production service, creating or tuning alert rules, designing
+  Grafana dashboards, defining SLOs and error budgets, or reducing alert fatigue
+  in on-call rotations.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: observability
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # Observability Designer
 
 The agent designs production-ready observability strategies that combine the three pillars (metrics, logs, traces) with SLI/SLO frameworks, golden signals monitoring, and alert optimization.

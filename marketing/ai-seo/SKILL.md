@@ -1,6 +1,13 @@
 ---
 name: ai-seo
-description: Optimize content for AI search engines including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Microsoft Copilot. Covers generative engine optimization (GEO), AI citability audits, content structuring for extraction, schema markup, bot access configuration, and monitoring. Use when optimizing for AI search, AI overviews, generative search, LLM visibility, semantic search, entity optimization, or when user mentions AI SEO, GEO, Perplexity citations, ChatGPT visibility, or AI-generated answers.
+description: >
+  Optimize content for AI search engines including Google AI Overviews, ChatGPT,
+  Perplexity, Claude, Gemini, and Microsoft Copilot. Covers generative engine
+  optimization (GEO), AI citability audits, content structuring for extraction,
+  schema markup, bot access configuration, and monitoring. Use when optimizing
+  for AI search, AI overviews, generative search, LLM visibility, semantic
+  search, entity optimization, or when user mentions AI SEO, GEO, Perplexity
+  citations, ChatGPT visibility, or AI-generated answers.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: seo
   updated: 2026-03-09
 ---
-
 # AI SEO
 
 Generative engine optimization (GEO) for getting cited by AI search platforms — not just ranked in traditional results.

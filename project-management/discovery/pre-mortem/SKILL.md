@@ -1,6 +1,8 @@
 ---
 name: pre-mortem
-description: Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.
+description: >
+  Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers,
+  and Elephants to surface launch-blocking issues before they happen.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +13,6 @@ metadata:
   python-tools: risk_categorizer.py
   tech-stack: pre-mortem, risk-analysis, gary-klein, prospective-hindsight
 ---
-
 # Pre-Mortem Risk Analysis Expert
 
 ## Overview

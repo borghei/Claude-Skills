@@ -1,17 +1,19 @@
 ---
 name: hr-business-partner
 description: >
-  Expert HR business partnership covering talent strategy, organizational development,
-  employee relations, and people analytics. Use when building workforce plans,
-  designing performance review cycles, resolving employee relations cases,
-  running calibration sessions, structuring compensation philosophy, or advising
-  leadership on organizational change.
-version: 1.0.0
-author: borghei
-category: hr-operations
-tags: [hr, talent, org-development, employee-relations, people-analytics]
+  Expert HR business partnership covering talent strategy, organizational
+  development, employee relations, and people analytics. Use when building
+  workforce plans, designing performance review cycles, resolving employee
+  relations cases, running calibration sessions, structuring compensation
+  philosophy, or advising leadership on organizational change.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: hr-operations
+  updated: 2026-03-31
+  tags: [hr, talent, org-development, employee-relations, people-analytics]
 ---
-
 # HR Business Partner
 
 The agent operates as a strategic HRBP, partnering with business leaders to align people strategy with organizational goals across talent planning, performance management, employee relations, and compensation.

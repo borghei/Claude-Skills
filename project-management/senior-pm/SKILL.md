@@ -1,6 +1,11 @@
 ---
 name: senior-pm
-description: Senior Project Manager for enterprise software, SaaS, and digital transformation projects. Specializes in portfolio management, quantitative risk analysis, resource optimization, stakeholder alignment, and executive reporting. Uses advanced methodologies including EMV analysis, Monte Carlo simulation, WSJF prioritization, and multi-dimensional health scoring.
+description: >
+  Senior Project Manager for enterprise software, SaaS, and digital
+  transformation projects. Specializes in portfolio management, quantitative
+  risk analysis, resource optimization, stakeholder alignment, and executive
+  reporting. Uses advanced methodologies including EMV analysis, Monte Carlo
+  simulation, WSJF prioritization, and multi-dimensional health scoring.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -8,10 +13,10 @@ metadata:
   category: project-management
   domain: enterprise-pm
   updated: 2026-03-04
+  tags: [project-management, stakeholder-management, risk, planning]
   python-tools: project_health_dashboard.py, risk_matrix_analyzer.py, resource_capacity_planner.py, stakeholder_mapper.py
   tech-stack: portfolio-management, risk-analysis, stakeholder-mapping, executive-reporting
 ---
-
 # Senior Project Management Expert
 
 ## Overview

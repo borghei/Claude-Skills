@@ -1,6 +1,12 @@
 ---
 name: content-creator
-description: Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creating social media content, analyzing brand voice, optimizing SEO, planning content calendars, or when user mentions content creation, brand voice, SEO optimization, social media marketing, or content strategy.
+description: >
+  Create SEO-optimized marketing content with consistent brand voice. Includes
+  brand voice analyzer, SEO optimizer, content frameworks, and social media
+  templates. Use when writing blog posts, creating social media content,
+  analyzing brand voice, optimizing SEO, planning content calendars, or when
+  user mentions content creation, brand voice, SEO optimization, social media
+  marketing, or content strategy.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +17,6 @@ metadata:
   python-tools: brand_voice_analyzer.py, seo_optimizer.py
   tech-stack: SEO, social-media-platforms
 ---
-
 # Content Creator
 
 Professional-grade brand voice analysis, SEO optimization, and platform-specific content frameworks.

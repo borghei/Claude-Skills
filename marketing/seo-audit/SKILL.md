@@ -1,20 +1,24 @@
 ---
 name: seo-audit
-description: Comprehensive technical SEO auditing covering crawlability, indexation, Core Web Vitals, on-page optimization, content quality, and competitive gap analysis. Includes 85-point audit checklist, severity-weighted scoring, and prioritized remediation plans.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [seo, audit, technical-seo, core-web-vitals, indexation, crawl-analysis]
-triggers:
-  - user mentions SEO audit or technical SEO
-  - user asks why their site is not ranking
-  - user mentions SEO issues, on-page SEO, or meta tags review
-  - user reports a traffic drop or ranking decline
-  - user is planning a site migration or redesign
-  - user mentions Core Web Vitals failures
-  - user asks for an SEO health check
+description: >
+  Comprehensive technical SEO auditing covering crawlability, indexation, Core
+  Web Vitals, on-page optimization, content quality, and competitive gap
+  analysis. Includes 85-point audit checklist, severity-weighted scoring, and
+  prioritized remediation plans.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags:
+    - seo
+    - audit
+    - technical-seo
+    - core-web-vitals
+    - indexation
+    - crawl-analysis
 ---
-
 # SEO Audit
 
 Production-grade SEO audit framework with an 85-point checklist across 8 dimensions, severity-weighted scoring, automated diagnostic workflows, and prioritized remediation plans. Covers technical SEO, on-page optimization, content quality, competitive positioning, and migration readiness.

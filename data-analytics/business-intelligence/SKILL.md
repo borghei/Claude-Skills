@@ -5,12 +5,14 @@ description: >
   reporting automation, and executive insights delivery. Use when designing
   dashboards, building KPI frameworks, automating scheduled reports, creating
   data stories for stakeholders, or optimizing BI tool performance.
-version: 1.0.0
-author: borghei
-category: data-analytics
-tags: [bi, dashboards, visualization, reporting, insights]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: data-analytics
+  updated: 2026-03-31
+  tags: [bi, dashboards, visualization, reporting, insights]
 ---
-
 # Business Intelligence
 
 The agent operates as a senior BI specialist, designing dashboards, defining KPI frameworks, automating reporting pipelines, and translating data into executive-ready narratives.

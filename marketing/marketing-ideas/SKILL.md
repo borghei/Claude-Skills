@@ -1,6 +1,13 @@
 ---
 name: marketing-ideas
-description: Library of 139+ proven marketing strategies organized by category, stage, budget, and timeline. Covers content, SEO, paid ads, social, email, partnerships, events, product-led growth, and unconventional tactics. Use when brainstorming marketing ideas, planning growth strategies, or when user mentions marketing ideas, growth ideas, how to market, marketing strategies, marketing tactics, ways to promote, campaign ideation, creative brainstorming, or trend analysis.
+description: >
+  Library of 139+ proven marketing strategies organized by category, stage,
+  budget, and timeline. Covers content, SEO, paid ads, social, email,
+  partnerships, events, product-led growth, and unconventional tactics. Use when
+  brainstorming marketing ideas, planning growth strategies, or when user
+  mentions marketing ideas, growth ideas, how to market, marketing strategies,
+  marketing tactics, ways to promote, campaign ideation, creative brainstorming,
+  or trend analysis.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: strategy
   updated: 2026-03-09
 ---
-
 # Marketing Ideas
 
 139+ proven marketing strategies with implementation guidance matched to stage, budget, and goals.

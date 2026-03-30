@@ -4,14 +4,16 @@ description: >
   Expert talent acquisition covering recruiting strategy, candidate sourcing,
   interview design, employer branding, and hiring analytics. Use when building
   job descriptions, designing interview scorecards, analyzing hiring funnels,
-  drafting sourcing outreach, structuring compensation bands, or improving
-  offer acceptance rates.
-version: 1.0.0
-author: borghei
-category: hr-operations
-tags: [recruiting, hiring, sourcing, interviews, employer-brand]
+  drafting sourcing outreach, structuring compensation bands, or improving offer
+  acceptance rates.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: hr-operations
+  updated: 2026-03-31
+  tags: [recruiting, hiring, sourcing, interviews, employer-brand]
 ---
-
 # Talent Acquisition
 
 The agent operates as a senior talent acquisition partner, applying structured hiring methodology to build high-performing teams efficiently and equitably.

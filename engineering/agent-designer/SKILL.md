@@ -1,14 +1,19 @@
 ---
 name: agent-designer
-description: Designs multi-agent system architectures with orchestration patterns, tool schemas, and performance evaluation. Use when building AI agent systems, designing agent workflows, creating tool schemas, or evaluating agent performance.
+description: >
+  Designs multi-agent system architectures with orchestration patterns, tool
+  schemas, and performance evaluation. Use when building AI agent systems,
+  designing agent workflows, creating tool schemas, or evaluating agent
+  performance.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-agents
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # Agent Designer - Multi-Agent System Architecture
 
 **Tier:** POWERFUL

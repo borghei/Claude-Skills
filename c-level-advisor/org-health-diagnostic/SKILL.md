@@ -1,12 +1,12 @@
 ---
 name: org-health-diagnostic
 description: >
-  Cross-functional organizational health check combining signals from all C-suite roles.
-  Scores 8 dimensions on a traffic-light scale with drill-down recommendations and
-  cascade analysis. Use when assessing overall company health, preparing for board reviews,
-  identifying at-risk functions, diagnosing cross-functional problems, or when user mentions
-  org health, health check, health dashboard, company health, functional health, or
-  health assessment.
+  Cross-functional organizational health check combining signals from all
+  C-suite roles. Scores 8 dimensions on a traffic-light scale with drill-down
+  recommendations and cascade analysis. Use when assessing overall company
+  health, preparing for board reviews, identifying at-risk functions, diagnosing
+  cross-functional problems, or when user mentions org health, health check,
+  health dashboard, company health, functional health, or health assessment.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -35,19 +35,7 @@ metadata:
     - risk dashboard
     - overall health
     - company assessment
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cfo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/cpo-advisor
-    - c-level-advisor/cro-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ciso-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/strategic-alignment
 ---
-
 # Org Health Diagnostic
 
 Eight dimensions. Traffic lights. Real benchmarks. Surfaces the problems you do not know you have and shows how problems in one dimension cascade to others.

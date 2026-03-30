@@ -1,8 +1,19 @@
 ---
 name: code-reviewer
-description: Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. Use when reviewing pull requests, analyzing code quality, identifying issues, generating review checklists.
+description: >
+  Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin.
+  Analyzes PRs for complexity and risk, checks code quality for SOLID violations
+  and code smells, generates review reports. Use when reviewing pull requests,
+  analyzing code quality, identifying issues, generating review checklists.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: code-quality
+  updated: 2026-03-31
+  tags: [code-review, pull-request, code-quality, best-practices]
 ---
-
 # Code Reviewer
 
 Automated code review tools for analyzing pull requests, detecting code quality issues, and generating review reports.

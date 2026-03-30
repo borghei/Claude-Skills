@@ -1,19 +1,23 @@
 ---
 name: competitive-teardown
-description: Systematic competitor analysis covering product teardowns, 12-dimension scoring rubric, feature comparison matrices, SWOT analysis, pricing model deconstruction, UX audits, and strategic action plans with stakeholder presentation templates.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [competitive-intelligence, competitor-analysis, product-strategy, battle-cards, market-analysis]
-triggers:
-  - user wants to analyze competitors or competitive landscape
-  - user mentions competitor analysis, feature comparison, or battle cards
-  - user is preparing for a product strategy or roadmap session
-  - user needs to respond to a competitor launch or pricing change
-  - user is conducting a quarterly competitive review
-  - user asks about competitive positioning gaps
+description: >
+  Systematic competitor analysis covering product teardowns, 12-dimension
+  scoring rubric, feature comparison matrices, SWOT analysis, pricing model
+  deconstruction, UX audits, and strategic action plans with stakeholder
+  presentation templates.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags:
+    - competitive-intelligence
+    - competitor-analysis
+    - product-strategy
+    - battle-cards
+    - market-analysis
 ---
-
 # Competitive Teardown
 
 Production-grade competitor analysis framework covering systematic data collection across 6 intelligence sources, a 12-dimension scoring rubric, feature comparison matrices, SWOT analysis, pricing model deconstruction, UX audit methodology, and strategic action plans. Produces battle-card-ready output and stakeholder presentation templates.

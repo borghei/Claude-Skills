@@ -1,19 +1,23 @@
 ---
 name: competitor-alternatives
-description: Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content architecture, research methodology, and centralized competitor data management.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [competitive-content, seo, comparison-pages, alternative-pages, sales-enablement]
-triggers:
-  - user wants to create competitor comparison or alternative pages
-  - user mentions alternative page, vs page, or comparison page
-  - user asks about competitive landing pages or switch-from-competitor content
-  - user mentions comparison content for SEO
-  - sales team needs competitive content for prospect objections
-  - keyword research reveals competitor-branded search terms with no coverage
+description: >
+  Competitor comparison and alternative page creation for SEO and sales
+  enablement. Covers 4 page formats (singular alternative, plural alternatives,
+  vs pages, competitor vs competitor), content architecture, research
+  methodology, and centralized competitor data management.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags:
+    - competitive-content
+    - seo
+    - comparison-pages
+    - alternative-pages
+    - sales-enablement
 ---
-
 # Competitor & Alternative Pages
 
 Production-grade framework for creating competitor comparison and alternative pages. Covers 4 page formats, centralized competitor data architecture, deep research methodology, SEO optimization, content templates, and ongoing maintenance strategy. Designed for both SEO traffic capture and sales enablement.

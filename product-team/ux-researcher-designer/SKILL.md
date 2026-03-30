@@ -1,8 +1,19 @@
 ---
 name: ux-researcher-designer
-description: UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research, persona creation, journey mapping, and design validation.
+description: >
+  UX research and design toolkit for Senior UX Designer/Researcher including
+  data-driven persona generation, journey mapping, usability testing frameworks,
+  and research synthesis. Use for user research, persona creation, journey
+  mapping, and design validation.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: product
+  domain: ux-research
+  updated: 2026-03-31
+  tags: [ux-research, usability-testing, user-interviews, personas]
 ---
-
 # UX Researcher & Designer
 
 Generate user personas from research data, create journey maps, plan usability tests, and synthesize research findings into actionable design recommendations.

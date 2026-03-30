@@ -1,8 +1,24 @@
 ---
 name: senior-secops
-description: Comprehensive SecOps skill for application security, vulnerability management, compliance, and secure development practices. Includes security scanning, vulnerability assessment, compliance checking, and security automation. Use when implementing security controls, conducting security audits, responding to vulnerabilities, or ensuring compliance requirements.
+description: >
+  Comprehensive SecOps skill for application security, vulnerability management,
+  compliance, and secure development practices. Includes security scanning,
+  vulnerability assessment, compliance checking, and security automation. Use
+  when implementing security controls, conducting security audits, responding to
+  vulnerabilities, or ensuring compliance requirements.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: security-operations
+  updated: 2026-03-31
+  tags:
+    - security-operations
+    - vulnerability-management
+    - incident-response
+    - siem
 ---
-
 # Senior SecOps Engineer
 
 Complete toolkit for Security Operations including vulnerability management, compliance verification, secure coding practices, and security automation.

@@ -1,13 +1,14 @@
 ---
 name: strategic-alignment
 description: >
-  Cascades strategy from boardroom to individual contributor and detects misalignment.
-  Covers strategy articulation testing, cascade mapping, orphan goal detection, conflicting
-  goal identification, silo diagnosis, communication gap analysis, and realignment protocols.
-  Use when teams are pulling in different directions, OKRs don't connect, departments optimize
-  locally at company expense, strategy doesn't translate to execution, or when user mentions
-  alignment, strategy cascade, silo, conflicting OKRs, strategy communication, goal cascade,
-  or misalignment.
+  Cascades strategy from boardroom to individual contributor and detects
+  misalignment. Covers strategy articulation testing, cascade mapping, orphan
+  goal detection, conflicting goal identification, silo diagnosis, communication
+  gap analysis, and realignment protocols. Use when teams are pulling in
+  different directions, OKRs don't connect, departments optimize locally at
+  company expense, strategy doesn't translate to execution, or when user
+  mentions alignment, strategy cascade, silo, conflicting OKRs, strategy
+  communication, goal cascade, or misalignment.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -44,16 +45,7 @@ metadata:
     - OKRs don't connect
     - local optimization
     - strategy communication
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/company-os
-    - c-level-advisor/chief-of-staff
-    - c-level-advisor/change-management
-    - c-level-advisor/culture-architect
-    - project-management/
 ---
-
 # Strategic Alignment Engine
 
 Strategy fails at the cascade, not the boardroom. This skill detects misalignment before it becomes dysfunction and builds systems that keep strategy connected from CEO to individual contributor.

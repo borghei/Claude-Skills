@@ -1,6 +1,8 @@
 ---
 name: brainstorm-experiments
-description: Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
+description: >
+  Experiment design expert using pretotyping and lean validation for both new
+  product concepts and existing product features.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +13,6 @@ metadata:
   python-tools: experiment_designer.py
   tech-stack: pretotyping, lean-validation, ab-testing, xyz-hypothesis
 ---
-
 # Experiment Design Expert
 
 ## Overview

@@ -1,11 +1,11 @@
 ---
 name: outcome-roadmap
 description: >
-  Transforms output-based feature lists into outcome-driven roadmaps with measurable impact
-  using Now/Next/Later framing and the "so what?" technique.
-  Use when converting a feature-list roadmap into outcome-driven format, communicating product
-  strategy to executives or customers, running quarterly planning, or aligning teams around
-  impact rather than deliverables.
+  Transforms output-based feature lists into outcome-driven roadmaps with
+  measurable impact using Now/Next/Later framing and the "so what?" technique.
+  Use when converting a feature-list roadmap into outcome-driven format,
+  communicating product strategy to executives or customers, running quarterly
+  planning, or aligning teams around impact rather than deliverables.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -16,7 +16,6 @@ metadata:
   python-tools: roadmap_transformer.py
   tech-stack: outcome-roadmap, product-strategy, now-next-later
 ---
-
 # Outcome Roadmap Expert
 
 The agent transforms output-based roadmaps ("build feature X") into outcome-driven roadmaps ("enable customers to achieve Y") using the "so what?" technique and Now/Next/Later framing. It produces roadmaps that communicate strategy and measurable impact, not just feature lists and dates.

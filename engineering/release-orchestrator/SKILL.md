@@ -1,6 +1,9 @@
 ---
 name: release-orchestrator
-description: End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation
+description: >
+  End-to-end release pipeline automation with pre-flight checks, test
+  orchestration, semantic versioning, changelog generation, and deployment
+  readiness validation
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -8,10 +11,10 @@ metadata:
   category: engineering
   domain: release-engineering
   updated: 2026-03-18
+  tags: [release-pipeline, versioning, pre-flight, readiness]
   python-tools: preflight_checker.py, changelog_generator.py, version_bumper.py, release_readiness_scorer.py
   tech-stack: python, git, semver, conventional-commits, ci-cd
 ---
-
 # Release Orchestrator Skill
 
 **Category:** Engineering Team

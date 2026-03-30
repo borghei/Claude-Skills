@@ -1,6 +1,8 @@
 ---
 name: qa-browser-automation
-description: Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage
+description: >
+  Production-grade browser QA automation with visual regression testing,
+  accessibility auditing, performance profiling, and intelligent bug triage
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -8,10 +10,10 @@ metadata:
   category: engineering
   domain: quality-assurance
   updated: 2026-03-18
+  tags: [browser-qa, wcag, visual-regression, health-scoring]
   python-tools: qa_health_scorer.py, accessibility_auditor.py, visual_regression_tracker.py, test_report_generator.py
   tech-stack: python, chrome-mcp, accessibility, wcag, performance
 ---
-
 # QA Browser Automation
 
 The most comprehensive browser QA skill available for AI coding assistants. Combines live Chrome MCP browser control with deterministic Python analysis tools to deliver systematic, repeatable quality assurance across any web application.

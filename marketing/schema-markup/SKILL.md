@@ -1,19 +1,17 @@
 ---
 name: schema-markup
-description: Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specific deployment guides.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [seo, schema, structured-data, json-ld, rich-snippets, knowledge-graph]
-triggers:
-  - user mentions structured data, schema.org, or JSON-LD
-  - user wants rich results, rich snippets, or enhanced SERP features
-  - user asks about FAQ schema, Product schema, HowTo schema, or any specific type
-  - user reports structured data errors in Google Search Console
-  - user asks why content is not showing rich results
-  - user wants to improve AI search visibility or Knowledge Graph presence
+description: >
+  Structured data implementation, validation, and optimization. Covers JSON-LD
+  patterns for 20+ schema types, rich snippet eligibility, AI search visibility,
+  Knowledge Graph optimization, and CMS-specific deployment guides.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [seo, schema, structured-data, json-ld, rich-snippets, knowledge-graph]
 ---
-
 # Schema Markup Implementation
 
 Production-grade structured data implementation covering 20+ schema types, rich result eligibility rules, AI search optimization, and CMS-specific deployment patterns. Handles auditing existing markup, implementing new schema, and fixing validation errors.

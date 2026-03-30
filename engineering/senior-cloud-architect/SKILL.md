@@ -1,18 +1,15 @@
 ---
 name: senior-cloud-architect
-description: >-
-  Use when the user asks to "design cloud architecture", "set up Terraform infrastructure",
-  "optimize cloud costs", "plan disaster recovery", "configure multi-region failover",
-  "audit IAM policies", "migrate to cloud", "set up VPC networking",
-  "compare AWS vs GCP vs Azure", or "right-size cloud instances".
-  Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy,
-  cost optimization, security, and infrastructure automation.
-version: 1.0.0
-author: borghei
-category: engineering
-tags: [cloud, aws, gcp, azure, architecture, infrastructure, terraform]
+description: 
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: engineering
+  domain: cloud-architecture
+  updated: 2026-03-31
+  tags: [cloud, aws, gcp, azure, architecture, infrastructure, terraform]
 ---
-
 # Senior Cloud Architect
 
 Expert cloud architecture and infrastructure design across AWS, GCP, and Azure.

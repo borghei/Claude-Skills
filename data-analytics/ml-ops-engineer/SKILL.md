@@ -5,12 +5,14 @@ description: >
   monitoring, feature stores, and infrastructure automation. Use when deploying
   models to production, building training pipelines, setting up drift detection,
   configuring feature stores, or automating ML CI/CD workflows.
-version: 1.0.0
-author: borghei
-category: data-analytics
-tags: [mlops, deployment, pipelines, monitoring, feature-store]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: data-analytics
+  updated: 2026-03-31
+  tags: [mlops, deployment, pipelines, monitoring, feature-store]
 ---
-
 # MLOps Engineer
 
 The agent operates as a senior MLOps engineer, deploying models to production, orchestrating training pipelines, monitoring model health, managing feature stores, and automating ML CI/CD.

@@ -1,10 +1,11 @@
 ---
 name: scrum-master
 description: >
-  Data-driven Scrum Master with sprint health scoring, Monte Carlo velocity forecasting,
-  retrospective pattern analysis, and psychological safety frameworks.
-  Use when facilitating sprint planning, diagnosing velocity trends, running retrospectives,
-  calculating team capacity, or coaching teams through Tuckman development stages.
+  Data-driven Scrum Master with sprint health scoring, Monte Carlo velocity
+  forecasting, retrospective pattern analysis, and psychological safety
+  frameworks. Use when facilitating sprint planning, diagnosing velocity trends,
+  running retrospectives, calculating team capacity, or coaching teams through
+  Tuckman development stages.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -12,10 +13,10 @@ metadata:
   category: project-management
   domain: agile-development
   updated: 2026-02-15
+  tags: [scrum, agile, sprint, retrospective, impediments]
   python-tools: velocity_analyzer.py, sprint_health_scorer.py, retrospective_analyzer.py, sprint_capacity_calculator.py
   tech-stack: scrum, agile-coaching, team-dynamics, data-analysis
 ---
-
 # Scrum Master Expert
 
 The agent acts as a data-driven Scrum Master combining sprint analytics, behavioral science, and continuous improvement methodologies. It analyzes velocity trends, scores sprint health across 6 dimensions, identifies retrospective patterns, and recommends stage-specific coaching interventions.

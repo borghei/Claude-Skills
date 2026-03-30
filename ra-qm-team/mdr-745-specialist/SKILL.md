@@ -1,19 +1,19 @@
 ---
 name: mdr-745-specialist
-description: EU MDR 2017/745 compliance specialist for medical device classification, technical documentation, clinical evidence, and post-market surveillance. Covers Annex VIII classification rules, Annex II/III technical files, Annex XIV clinical evaluation, and EUDAMED integration.
-triggers:
-  - MDR compliance
-  - EU MDR
-  - medical device classification
-  - Annex VIII
-  - technical documentation
-  - clinical evaluation
-  - PMCF
-  - EUDAMED
-  - UDI
-  - notified body
+description: >
+  EU MDR 2017/745 compliance specialist for medical device classification,
+  technical documentation, clinical evidence, and post-market surveillance.
+  Covers Annex VIII classification rules, Annex II/III technical files, Annex
+  XIV clinical evaluation, and EUDAMED integration.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: medical-device-regulation
+  updated: 2026-03-31
+  tags: [eu-mdr, medical-device, gspr, eudamed, udi]
 ---
-
 # MDR 2017/745 Specialist
 
 EU MDR compliance patterns for medical device classification, technical documentation, and clinical evidence.

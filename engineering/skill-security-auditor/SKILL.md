@@ -1,16 +1,23 @@
 ---
 name: skill-security-auditor
-description: Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, credential harvesting, dependency supply chain risks, file system boundary violations, and obfuscation. Produces PASS/WARN/FAIL verdicts with remediation guidance. Use when evaluating untrusted skills, pre-install security gates, or auditing skill repositories.
+description: >
+  Security audit and vulnerability scanning for AI agent skills before
+  installation. Detects prompt injection in SKILL.md files, dangerous code
+  patterns (eval, exec, subprocess), network exfiltration, credential
+  harvesting, dependency supply chain risks, file system boundary violations,
+  and obfuscation. Produces PASS/WARN/FAIL verdicts with remediation guidance.
+  Use when evaluating untrusted skills, pre-install security gates, or auditing
+  skill repositories.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-security
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: static-analysis, supply-chain-security
 ---
-
 # Skill Security Auditor
 
 **Tier:** POWERFUL

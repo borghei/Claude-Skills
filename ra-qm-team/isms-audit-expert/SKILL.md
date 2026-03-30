@@ -3,21 +3,18 @@ name: isms-audit-expert
 description: >
   Information Security Management System auditing for ISO 27001 compliance,
   security control assessment, and certification support. Use when planning ISMS
-  audit programs, executing internal or external ISO 27001 audits, testing ISO 27002
-  Annex A controls, managing audit findings and corrective actions, or preparing
-  for Stage 1/Stage 2 certification and surveillance audits.
-triggers:
-  - ISMS audit
-  - ISO 27001 audit
-  - security audit
-  - internal audit ISO 27001
-  - security control assessment
-  - certification audit
-  - surveillance audit
-  - audit finding
-  - nonconformity
+  audit programs, executing internal or external ISO 27001 audits, testing ISO
+  27002 Annex A controls, managing audit findings and corrective actions, or
+  preparing for Stage 1/Stage 2 certification and surveillance audits.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: security-audit
+  updated: 2026-03-31
+  tags: [iso-27001, isms-audit, security-testing, certification, controls]
 ---
-
 # ISMS Audit Expert
 
 Internal and external ISMS audit management for ISO 27001 compliance verification, security control assessment, and certification support.

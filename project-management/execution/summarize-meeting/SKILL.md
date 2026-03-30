@@ -1,6 +1,8 @@
 ---
 name: summarize-meeting
-description: Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
+description: >
+  Structured meeting summarization that captures decisions, action items, and
+  open questions in a consistent format.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -10,7 +12,6 @@ metadata:
   updated: 2026-03-04
   tech-stack: meeting-facilitation, action-tracking, decision-logging
 ---
-
 # Meeting Summary Expert
 
 ## Overview

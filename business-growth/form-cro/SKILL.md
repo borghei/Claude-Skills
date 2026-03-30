@@ -1,19 +1,17 @@
 ---
 name: form-cro
-description: Form optimization for lead capture, contact, demo request, application, and checkout forms. Covers field-cost analysis, multi-step form design, validation UX, mobile optimization, and A/B testing frameworks.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [cro, forms, lead-capture, conversion-optimization, ux]
-triggers:
-  - user wants to optimize a lead capture, contact, or demo request form
-  - user mentions form conversions, form friction, or form completion rate
-  - user has a form with 7+ fields
-  - user reports low form submission rates
-  - user asks about multi-step forms vs single-step forms
-  - mobile conversion gap detected on a form page
+description: >
+  Form optimization for lead capture, contact, demo request, application, and
+  checkout forms. Covers field-cost analysis, multi-step form design, validation
+  UX, mobile optimization, and A/B testing frameworks.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [cro, forms, lead-capture, conversion-optimization, ux]
 ---
-
 # Form CRO
 
 Production-grade form optimization framework covering field-cost analysis, layout engineering, multi-step form architecture, validation UX patterns, mobile-specific optimization, and structured A/B test design. Applicable to lead capture, contact, demo request, application, survey, and checkout forms. For signup/registration flows, use signup-flow-cro.

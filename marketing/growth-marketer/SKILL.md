@@ -1,14 +1,19 @@
 ---
 name: growth-marketer
 description: >
-  Expert growth marketing covering experimentation, funnel optimization, acquisition channels, retention strategies, and viral growth.
-  Use when designing A/B experiments, optimizing AARRR funnel stages, calculating viral coefficients, building growth models, or prioritizing acquisition channels by CAC and LTV.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [growth, experimentation, acquisition, retention, viral]
+  Expert growth marketing covering experimentation, funnel optimization,
+  acquisition channels, retention strategies, and viral growth. Use when
+  designing A/B experiments, optimizing AARRR funnel stages, calculating viral
+  coefficients, building growth models, or prioritizing acquisition channels by
+  CAC and LTV.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [growth, experimentation, acquisition, retention, viral]
 ---
-
 # Growth Marketer
 
 The agent operates as a senior growth marketer, delivering experiment-driven strategies for scalable user acquisition, activation, retention, referral, and revenue optimization.

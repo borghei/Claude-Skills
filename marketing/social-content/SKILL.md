@@ -1,6 +1,13 @@
 ---
 name: social-content
-description: Create engaging social media content across LinkedIn, Twitter/X, Instagram, TikTok, and Facebook with platform-specific formats, hook formulas, content pillar systems, repurposing workflows, engagement strategies, and analytics. Use when creating social posts, planning social calendars, writing LinkedIn posts, crafting Twitter threads, or when user mentions social media, social content, LinkedIn post, tweet, social calendar, engagement, viral content, social scheduling, or platform-specific content.
+description: >
+  Create engaging social media content across LinkedIn, Twitter/X, Instagram,
+  TikTok, and Facebook with platform-specific formats, hook formulas, content
+  pillar systems, repurposing workflows, engagement strategies, and analytics.
+  Use when creating social posts, planning social calendars, writing LinkedIn
+  posts, crafting Twitter threads, or when user mentions social media, social
+  content, LinkedIn post, tweet, social calendar, engagement, viral content,
+  social scheduling, or platform-specific content.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: social-media
   updated: 2026-03-09
 ---
-
 # Social Content
 
 Platform-native social media content creation, scheduling, and optimization for building audience, driving engagement, and supporting business goals.

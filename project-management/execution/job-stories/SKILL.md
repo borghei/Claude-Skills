@@ -10,7 +10,6 @@ metadata:
   updated: 2026-03-04
   tech-stack: jtbd, jobs-to-be-done, invest-criteria
 ---
-
 # Job Stories Expert
 
 ## Overview

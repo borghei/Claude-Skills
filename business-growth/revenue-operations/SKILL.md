@@ -1,8 +1,17 @@
 ---
 name: revenue-operations
-description: Analyzes pipeline coverage, tracks forecast accuracy with MAPE, and calculates GTM efficiency metrics for SaaS revenue optimization
+description: >
+  Analyzes pipeline coverage, tracks forecast accuracy with MAPE, and calculates
+  GTM efficiency metrics for SaaS revenue optimization
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  domain: revenue-ops
+  updated: 2026-03-31
+  tags: [revops, pipeline, forecast, gtm-efficiency, saas-metrics]
 ---
-
 # Revenue Operations
 
 Pipeline analysis, forecast accuracy tracking, and GTM efficiency measurement for SaaS revenue teams.

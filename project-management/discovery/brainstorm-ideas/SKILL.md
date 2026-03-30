@@ -1,6 +1,8 @@
 ---
 name: brainstorm-ideas
-description: Product ideation expert using Product Trio approach and Opportunity Solution Trees for both new and existing products.
+description: >
+  Product ideation expert using Product Trio approach and Opportunity Solution
+  Trees for both new and existing products.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -10,7 +12,6 @@ metadata:
   updated: 2026-03-04
   tech-stack: product-trio, opportunity-solution-tree, scamper, hmw
 ---
-
 # Product Ideation Expert
 
 ## Overview

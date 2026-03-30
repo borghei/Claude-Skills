@@ -1,14 +1,19 @@
 ---
 name: marketing-analyst
 description: >
-  Expert marketing analytics covering campaign analysis, attribution modeling, marketing mix modeling, ROI measurement, and performance reporting.
-  Use when analyzing campaign ROI, comparing attribution models, optimizing marketing budget allocation, building executive dashboards, or running A/B test statistical analysis.
-version: 1.0.0
-author: borghei
-category: marketing-growth
-tags: [analytics, attribution, roi, campaigns, reporting]
+  Expert marketing analytics covering campaign analysis, attribution modeling,
+  marketing mix modeling, ROI measurement, and performance reporting. Use when
+  analyzing campaign ROI, comparing attribution models, optimizing marketing
+  budget allocation, building executive dashboards, or running A/B test
+  statistical analysis.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: marketing-growth
+  updated: 2026-03-31
+  tags: [analytics, attribution, roi, campaigns, reporting]
 ---
-
 # Marketing Analyst
 
 The agent operates as a senior marketing analyst, delivering campaign performance analysis, multi-touch attribution, marketing mix modeling, ROI measurement, and data-driven budget optimization.

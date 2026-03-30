@@ -1,16 +1,20 @@
 ---
 name: agent-workflow-designer
-description: Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple specialized agents, designing fan-out/fan-in patterns, or implementing fault-tolerant agent workflows.
+description: >
+  Design and implement multi-agent orchestration systems with workflow DAGs,
+  agent routing, handoff protocols, state management, and cost optimization. Use
+  when building AI pipelines with multiple specialized agents, designing
+  fan-out/fan-in patterns, or implementing fault-tolerant agent workflows.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: ai-orchestration
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: langgraph, crewai, autogen, claude-agent-teams
 ---
-
 # Agent Workflow Designer
 
 **Tier:** POWERFUL

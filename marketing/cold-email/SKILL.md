@@ -1,6 +1,13 @@
 ---
 name: cold-email
-description: Write, build, and optimize B2B cold email outreach sequences that get replies. Covers first-touch emails, multi-email sequences, personalization strategies, follow-up cadence, deliverability setup, and compliance (CAN-SPAM, GDPR). Use when writing cold outreach, prospecting emails, SDR emails, sales emails, first-touch emails, follow-up sequences, or when user mentions cold email, cold outreach, email prospecting, outbound email, sales development, or sequence building.
+description: >
+  Write, build, and optimize B2B cold email outreach sequences that get replies.
+  Covers first-touch emails, multi-email sequences, personalization strategies,
+  follow-up cadence, deliverability setup, and compliance (CAN-SPAM, GDPR). Use
+  when writing cold outreach, prospecting emails, SDR emails, sales emails,
+  first-touch emails, follow-up sequences, or when user mentions cold email,
+  cold outreach, email prospecting, outbound email, sales development, or
+  sequence building.
 license: MIT
 metadata:
   version: 1.0.0
@@ -9,7 +16,6 @@ metadata:
   domain: outbound
   updated: 2026-03-09
 ---
-
 # Cold Email Outreach
 
 Production-grade B2B cold email that sounds like it came from a person, not a sequence tool.

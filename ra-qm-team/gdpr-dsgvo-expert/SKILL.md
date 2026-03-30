@@ -1,8 +1,19 @@
 ---
 name: gdpr-dsgvo-expert
-description: GDPR and German DSGVO compliance automation. Scans codebases for privacy risks, generates DPIA documentation, tracks data subject rights requests. Use for GDPR compliance assessments, privacy audits, data protection planning, DPIA generation, and data subject rights management.
+description: >
+  GDPR and German DSGVO compliance automation. Scans codebases for privacy
+  risks, generates DPIA documentation, tracks data subject rights requests. Use
+  for GDPR compliance assessments, privacy audits, data protection planning,
+  DPIA generation, and data subject rights management.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: privacy-compliance
+  updated: 2026-03-31
+  tags: [gdpr, dsgvo, dpia, data-protection, privacy]
 ---
-
 # GDPR/DSGVO Expert
 
 Tools and guidance for EU General Data Protection Regulation (GDPR) and German Bundesdatenschutzgesetz (BDSG) compliance.

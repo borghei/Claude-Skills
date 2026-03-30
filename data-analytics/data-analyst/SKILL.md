@@ -5,12 +5,14 @@ description: >
   analysis, business reporting, and data storytelling. Use when writing SQL
   queries, building dashboards, performing cohort or funnel analysis, running
   hypothesis tests, or presenting data-driven recommendations to stakeholders.
-version: 1.0.0
-author: borghei
-category: data-analytics
-tags: [analytics, sql, visualization, statistics, reporting]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: data-analytics
+  updated: 2026-03-31
+  tags: [analytics, sql, visualization, statistics, reporting]
 ---
-
 # Data Analyst
 
 The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations.

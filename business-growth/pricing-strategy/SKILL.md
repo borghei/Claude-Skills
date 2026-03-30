@@ -1,20 +1,17 @@
 ---
 name: pricing-strategy
-description: SaaS pricing design and optimization covering value metric selection, tier architecture, price point research, pricing page design, price increase execution, and competitive pricing analysis.
-version: 1.0.0
-author: borghei
-category: business-growth
-tags: [pricing, monetization, packaging, saas, value-based-pricing, revenue]
-triggers:
-  - user wants to design or redesign pricing
-  - user mentions pricing tiers, packaging, or value metric
-  - user asks about price increase strategy
-  - user mentions pricing page optimization or conversion
-  - user asks about per-seat, usage-based, or flat-rate pricing
-  - user mentions freemium vs free trial decision
-  - user reports high trial-to-paid conversion (possible underpricing signal)
+description: >
+  SaaS pricing design and optimization covering value metric selection, tier
+  architecture, price point research, pricing page design, price increase
+  execution, and competitive pricing analysis.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: business-growth
+  updated: 2026-03-31
+  tags: [pricing, monetization, packaging, saas, value-based-pricing, revenue]
 ---
-
 # Pricing Strategy
 
 Production-grade SaaS pricing framework covering the three pricing axes (value metric, packaging, price point), value-based pricing methodology, tier architecture, pricing research methods, pricing page design, price increase execution, and competitive pricing positioning. Pricing is positioning -- the right price communicates as much about your product as your marketing does.

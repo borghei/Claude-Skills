@@ -1,16 +1,21 @@
 ---
 name: pr-review-expert
-description: Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item checklist. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.
+description: >
+  Systematic PR review with blast radius analysis, security scanning, breaking
+  change detection, test coverage delta, and performance impact assessment.
+  Produces prioritized findings with a 35+ item checklist. Use when reviewing
+  PRs that touch shared libraries, APIs, database schemas, auth, or
+  security-sensitive code.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: code-review
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: github, gitlab, review-checklist
 ---
-
 # PR Review Expert
 
 **Tier:** POWERFUL

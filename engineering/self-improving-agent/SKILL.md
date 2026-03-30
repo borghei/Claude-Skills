@@ -1,6 +1,11 @@
 ---
 name: self-improving-agent
-description: Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill extraction, and meta-learning architectures. Use when building agents that need to get better over time, managing auto-memory, or designing self-correcting systems.
+description: >
+  Patterns for building AI agents that learn from their own execution, detect
+  failure modes, and improve autonomously. Covers feedback loops, performance
+  regression detection, memory curation, skill extraction, and meta-learning
+  architectures. Use when building agents that need to get better over time,
+  managing auto-memory, or designing self-correcting systems.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +16,6 @@ metadata:
   updated: 2026-03-09
   frameworks: feedback-loops, memory-curation, meta-learning, performance-regression
 ---
-
 # Self-Improving Agent - Autonomous Learning Patterns
 
 **Tier:** POWERFUL

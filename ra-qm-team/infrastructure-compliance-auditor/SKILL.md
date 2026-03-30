@@ -1,8 +1,24 @@
 ---
 name: infrastructure-compliance-auditor
-description: Cross-cutting infrastructure security audit skill that checks cloud infrastructure, DNS, TLS, endpoints, access control, network security, containers, CI/CD pipelines, secrets management, logging, and physical security against ALL major compliance frameworks. Use for infrastructure audit, cloud security audit, infrastructure compliance, DNS security audit, TLS audit, endpoint security, access control audit, network security assessment, infrastructure security, cloud compliance, Vanta alternative, compliance automation, security posture assessment, hardware security keys, YubiKey compliance.
+description: >
+  Cross-cutting infrastructure security audit skill that checks cloud
+  infrastructure, DNS, TLS, endpoints, access control, network security,
+  containers, CI/CD pipelines, secrets management, logging, and physical
+  security against ALL major compliance frameworks. Use for infrastructure
+  audit, cloud security audit, infrastructure compliance, DNS security audit,
+  TLS audit, endpoint security, access control audit, network security
+  assessment, infrastructure security, cloud compliance, Vanta alternative,
+  compliance automation, security posture assessment, hardware security keys,
+  YubiKey compliance.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: compliance
+  domain: infrastructure-security
+  updated: 2026-03-31
+  tags: [infrastructure-audit, cloud-security, dns, tls, compliance-automation]
 ---
-
 # Infrastructure Compliance Auditor
 
 Cross-cutting infrastructure security audit across ALL compliance frameworks. Replaces manual Vanta-style checks with deterministic, repeatable, evidence-generating infrastructure audits covering cloud, DNS, TLS, endpoints, access control, network, containers, CI/CD, secrets, logging, and physical security.

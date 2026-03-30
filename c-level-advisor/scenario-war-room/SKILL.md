@@ -1,6 +1,12 @@
 ---
 name: scenario-war-room
-description: Cross-functional what-if modeling for compound adversity scenarios. Models cascading multi-variable risks across all business functions simultaneously. Unlike single-assumption stress tests, this shows how one problem creates the next. Use when facing complex risk scenarios, strategic decisions with major downside, multi-variable threats, or when someone asks "what if X AND Y both happen?"
+description: >
+  Cross-functional what-if modeling for compound adversity scenarios. Models
+  cascading multi-variable risks across all business functions simultaneously.
+  Unlike single-assumption stress tests, this shows how one problem creates the
+  next. Use when facing complex risk scenarios, strategic decisions with major
+  downside, multi-variable threats, or when someone asks "what if X AND Y both
+  happen?
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -11,7 +17,6 @@ metadata:
   updated: 2026-03-09
   frameworks: cascade-modeling, scenario-planning, pre-mortem, contingency-design
 ---
-
 # Scenario War Room
 
 **Tier:** POWERFUL

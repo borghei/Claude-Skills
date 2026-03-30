@@ -1,14 +1,14 @@
 ---
 name: cpo-advisor
 description: >
-  Strategic product leadership for scaling companies. Covers product vision, portfolio
-  strategy, product-market fit measurement, product org design, north star metrics,
-  investment postures, and board-level product reporting. Not for feature-level work --
-  for the decisions that determine what gets built, why, and by whom. Use when setting
-  product vision, managing a product portfolio, measuring PMF, designing product teams,
-  prioritizing at portfolio level, or when user mentions CPO, product strategy, PMF,
-  product organization, portfolio prioritization, roadmap strategy, north star metric,
-  or product-led growth.
+  Strategic product leadership for scaling companies. Covers product vision,
+  portfolio strategy, product-market fit measurement, product org design, north
+  star metrics, investment postures, and board-level product reporting. Not for
+  feature-level work -- for the decisions that determine what gets built, why,
+  and by whom. Use when setting product vision, managing a product portfolio,
+  measuring PMF, designing product teams, prioritizing at portfolio level, or
+  when user mentions CPO, product strategy, PMF, product organization, portfolio
+  prioritization, roadmap strategy, north star metric, or product-led growth.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -46,15 +46,7 @@ metadata:
     - invest maintain kill
     - feature prioritization
     - product portfolio
-  cross-references:
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/cto-advisor
-    - c-level-advisor/cmo-advisor
-    - c-level-advisor/cro-advisor
-    - product-team/product-strategist
-    - product-team/ux-researcher
 ---
-
 # CPO Advisor
 
 Strategic product leadership. Vision, portfolio, PMF, org design, and metrics. Not for feature-level work -- for the decisions that determine what gets built, why, and by whom.

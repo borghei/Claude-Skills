@@ -1,8 +1,19 @@
 ---
 name: jira-expert
-description: Atlassian Jira expert for creating and managing projects, planning, product discovery, JQL queries, workflows, custom fields, automation, reporting, and all Jira features. Use for Jira project setup, configuration, advanced search, dashboard creation, workflow design, and technical Jira operations.
+description: >
+  Atlassian Jira expert for creating and managing projects, planning, product
+  discovery, JQL queries, workflows, custom fields, automation, reporting, and
+  all Jira features. Use for Jira project setup, configuration, advanced search,
+  dashboard creation, workflow design, and technical Jira operations.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: project-management
+  domain: atlassian
+  updated: 2026-03-31
+  tags: [jira, jql, workflows, automation, dashboards]
 ---
-
 # Atlassian Jira Expert
 
 Master-level expertise in Jira configuration, project management, JQL, workflows, automation, and reporting. Handles all technical and operational aspects of Jira.

@@ -1,19 +1,19 @@
 ---
 name: tech-debt-tracker
 description: >
-  Scans codebases for technical debt with AST parsing, prioritizes debt items
-  by impact, and generates trend dashboards. Use when tracking tech debt across
-  a codebase, prioritizing refactoring work, calculating cost-of-delay for
-  debt items, planning sprint debt allocation, or generating executive debt
-  reports.
+  Scans codebases for technical debt with AST parsing, prioritizes debt items by
+  impact, and generates trend dashboards. Use when tracking tech debt across a
+  codebase, prioritizing refactoring work, calculating cost-of-delay for debt
+  items, planning sprint debt allocation, or generating executive debt reports.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: code-quality
   tier: POWERFUL
+  updated: 2026-03-31
 ---
-
 # Tech Debt Tracker
 
 The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards.

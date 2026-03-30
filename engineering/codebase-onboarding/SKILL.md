@@ -1,16 +1,21 @@
 ---
 name: codebase-onboarding
-description: Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines. Audience-aware output for junior, senior, or contractor developers. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.
+description: >
+  Analyze a codebase and generate comprehensive onboarding documentation
+  including architecture overviews, key file maps, local setup guides, task
+  runbooks, debugging guides, and contribution guidelines. Audience-aware output
+  for junior, senior, or contractor developers. Use when onboarding new team
+  members, open-sourcing, or documenting after a major refactor.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: engineering
   domain: developer-experience
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: markdown, notion, confluence
 ---
-
 # Codebase Onboarding
 
 **Tier:** POWERFUL

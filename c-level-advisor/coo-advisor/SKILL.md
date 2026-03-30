@@ -6,12 +6,14 @@ description: >
   operational excellence. Use when designing operational processes, planning
   headcount capacity, optimizing vendor relationships, building business
   continuity plans, or scaling operations for rapid growth.
-version: 1.0.0
-author: borghei
-category: executive-leadership
-tags: [operations, process, scaling, efficiency, execution]
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0
+  author: borghei
+  category: executive-leadership
+  updated: 2026-03-31
+  tags: [operations, process, scaling, efficiency, execution]
 ---
-
 # COO Advisor
 
 The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization.

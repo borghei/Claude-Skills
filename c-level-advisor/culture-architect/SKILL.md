@@ -1,13 +1,14 @@
 ---
 name: culture-architect
 description: >
-  Build, measure, and evolve company culture as operational behavior -- not wall posters.
-  Covers mission/vision/values workshops, values-to-behaviors translation, culture code
-  creation, culture health assessment, cultural rituals by stage, and culture debt management.
-  Use when building company values, assessing culture health, designing rituals, creating
-  culture codes, handling culture clashes, managing through rapid growth, M&A integration,
-  or when user mentions culture, values, culture debt, founder culture, culture code,
-  psychological safety, engagement, eNPS, or remote culture.
+  Build, measure, and evolve company culture as operational behavior -- not wall
+  posters. Covers mission/vision/values workshops, values-to-behaviors
+  translation, culture code creation, culture health assessment, cultural
+  rituals by stage, and culture debt management. Use when building company
+  values, assessing culture health, designing rituals, creating culture codes,
+  handling culture clashes, managing through rapid growth, M&A integration, or
+  when user mentions culture, values, culture debt, founder culture, culture
+  code, psychological safety, engagement, eNPS, or remote culture.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -46,16 +47,7 @@ metadata:
     - culture clash
     - M&A culture
     - employer brand
-  cross-references:
-    - c-level-advisor/chro-advisor
-    - c-level-advisor/ceo-advisor
-    - c-level-advisor/coo-advisor
-    - c-level-advisor/change-management
-    - c-level-advisor/founder-coach
-    - c-level-advisor/company-os
-    - hr-operations/
 ---
-
 # Culture Architect
 
 Culture is what you DO, not what you SAY. This skill builds culture as an operational system -- observable behaviors, measurable health, and rituals that scale from 5 people to 500.
