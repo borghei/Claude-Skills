@@ -7,12 +7,9 @@
   <title>Claude Skills - The Universal AI Skills Library</title>
   <meta name="description" content="225 production-ready skills, 613 Python tools, 32 agents, 26 commands. Works with every major AI coding assistant.">
   <meta property="og:title" content="Claude Skills - The Universal AI Skills Library">
-  <meta property="og:description" content="225 skills. 613 tools. 32 agents. 26 commands. Every major AI coding assistant.">
+  <meta property="og:description" content="225 skills. 613 tools. 32 agents. 11 platforms. Every major AI coding assistant.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,62 +25,28 @@
         <a href="skills/">Skills</a>
         <a href="agents/">Agents</a>
         <a href="commands/">Commands</a>
-        <a href="https://github.com/borghei/Claude-Skills" target="_blank">GitHub</a>
+        <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
     <div class="container">
-      <h1 class="hero-title fade-in">The Universal AI<br><span class="gradient-text">Skills Library</span></h1>
-      <p class="hero-subtitle fade-in">225 skills. 613 tools. 13 domains. Every major AI coding assistant.</p>
-      <div class="terminal hero-terminal fade-in">
-        <div class="terminal-bar">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
-          <span class="terminal-title">terminal</span>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line">
-            <span class="terminal-prompt">$</span>
-            <span class="typed-command" id="hero-cmd">python engineering/senior-architect/scripts/dependency_analyzer.py ./src --json</span>
-          </div>
-          <div class="terminal-output" id="hero-output">{"coupling_score": 0.23, "circular_deps": 0, "components": 47}</div>
-        </div>
+      <h1 class="hero-title fade-in">The Universal AI Skills Library</h1>
+      <p class="hero-subtitle fade-in">Production-ready skill packages for every AI coding assistant. Domain expertise, automation tools, and strategic frameworks in one place.</p>
+      <div class="stats-row fade-in" id="stats">
+        <span class="stat-item"><span class="stat-number" data-target="225">0</span> Skills</span>
+        <span class="dot">&middot;</span>
+        <span class="stat-item"><span class="stat-number" data-target="613">0</span> Tools</span>
+        <span class="dot">&middot;</span>
+        <span class="stat-item"><span class="stat-number" data-target="32">0</span> Agents</span>
+        <span class="dot">&middot;</span>
+        <span class="stat-item"><span class="stat-number" data-target="11">0</span> Platforms</span>
       </div>
       <div class="hero-buttons fade-in">
         <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
-        <a href="skills/" class="btn btn-secondary">Browse All Skills</a>
-        <a href="skills/" class="btn btn-secondary">View Docs</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <section class="stats" id="stats">
-    <div class="container stats-bar">
-      <div class="stat-item">
-        <span class="stat-number" data-target="225">0</span>
-        <span class="stat-label">Skills</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="613">0</span>
-        <span class="stat-label">Python Tools</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="13">0</span>
-        <span class="stat-label">Domains</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="32">0</span>
-        <span class="stat-label">Agents</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number" data-target="11">0</span>
-        <span class="stat-label">Platforms</span>
+        <a href="skills/" class="btn btn-secondary">Browse Skills</a>
       </div>
     </div>
   </section>
@@ -91,301 +54,222 @@
   <!-- Domains -->
   <section class="domains" id="domains">
     <div class="container">
-      <h2 class="section-title fade-in"><span class="gradient-text">13 Domains</span></h2>
-      <p class="section-subtitle fade-in">Production-ready skill packages across every business function</p>
+      <h2 class="section-title fade-in">Skill Domains</h2>
+      <p class="section-subtitle fade-in">Production-ready packages across every business function</p>
       <div class="domains-grid">
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F528;</div>
-          <h3>Engineering</h3>
-          <div class="domain-meta">76 skills &middot; 177 tools</div>
-          <p>Architecture, fullstack, AI/ML, security, and infrastructure</p>
-          <div class="domain-tags"><span class="tag">docker</span><span class="tag">terraform</span><span class="tag">a11y</span><span class="tag">playwright</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4E3;</div>
-          <h3>Marketing</h3>
-          <div class="domain-meta">38 skills &middot; 106 tools</div>
-          <p>Content creation, SEO, demand gen, campaign analytics</p>
-          <div class="domain-tags"><span class="tag">seo</span><span class="tag">content</span><span class="tag">demand-gen</span><span class="tag">analytics</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F451;</div>
-          <h3>C-Level</h3>
-          <div class="domain-meta">26 skills &middot; 73 tools</div>
-          <p>CEO, CTO, CFO, and CISO strategic advisory</p>
-          <div class="domain-tags"><span class="tag">ceo</span><span class="tag">cto</span><span class="tag">cfo</span><span class="tag">ciso</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4CB;</div>
-          <h3>Project Management</h3>
-          <div class="domain-meta">10 skills &middot; 53 tools</div>
-          <p>Discovery, execution, Atlassian MCP integration</p>
-          <div class="domain-tags"><span class="tag">sprints</span><span class="tag">jira</span><span class="tag">retro</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4C8;</div>
-          <h3>Business &amp; Growth</h3>
-          <div class="domain-meta">16 skills &middot; 48 tools</div>
-          <p>Customer success, sales engineering, revenue ops</p>
-          <div class="domain-tags"><span class="tag">revenue</span><span class="tag">churn</span><span class="tag">onboarding</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F6E1;&#xFE0F;</div>
-          <h3>Compliance</h3>
-          <div class="domain-meta">21 skills &middot; 38 tools</div>
-          <p>ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2</p>
-          <div class="domain-tags"><span class="tag">soc2</span><span class="tag">gdpr</span><span class="tag">hipaa</span><span class="tag">iso</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4CA;</div>
-          <h3>Data Analytics</h3>
-          <div class="domain-meta">5 skills &middot; 16 tools</div>
-          <p>BI, ML ops, analytics engineering, data pipelines</p>
-          <div class="domain-tags"><span class="tag">ml-ops</span><span class="tag">pipelines</span><span class="tag">bi</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4E6;</div>
-          <h3>Product</h3>
-          <div class="domain-meta">8 skills &middot; 15 tools</div>
-          <p>RICE scoring, OKRs, user stories, UX research</p>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4B0;</div>
-          <h3>Sales</h3>
-          <div class="domain-meta">5 skills &middot; 15 tools</div>
-          <p>Account executive, sales ops, solutions architect</p>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F465;</div>
-          <h3>HR Operations</h3>
-          <div class="domain-meta">4 skills &middot; 12 tools</div>
-          <p>Talent acquisition, people analytics, HR business partner</p>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4B5;</div>
-          <h3>Finance</h3>
-          <div class="domain-meta">3 skills &middot; 10 tools</div>
-          <p>DCF valuation, budgeting, forecasting, ratio analysis</p>
-          <div class="domain-tags"><span class="tag">dcf</span><span class="tag">saas-metrics</span><span class="tag">budgeting</span></div>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4D0;</div>
-          <h3>Standards</h3>
-          <div class="domain-meta">7 standards</div>
-          <p>Communication, quality, git, security standards</p>
-        </div>
-        <div class="domain-card fade-in">
-          <div class="domain-icon">&#x1F4C4;</div>
-          <h3>Templates</h3>
-          <div class="domain-meta">12 workflows</div>
-          <p>Reusable CI/CD workflows and project templates</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Terminal Demo -->
-  <section class="demo" id="demo">
-    <div class="container">
-      <h2 class="section-title fade-in">See It <span class="gradient-text">In Action</span></h2>
-      <p class="section-subtitle fade-in">Real tools, real output, zero LLM dependencies</p>
-      <div class="terminal demo-terminal fade-in">
-        <div class="terminal-bar">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
-          <span class="terminal-title">demo</span>
-        </div>
-        <div class="terminal-body">
-          <div class="terminal-line">
-            <span class="terminal-prompt">$</span>
-            <span class="typed-command" id="demo-cmd"></span><span class="cursor" id="demo-cursor">|</span>
+        <a href="skills/engineering/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
           </div>
-          <pre class="terminal-output" id="demo-output"></pre>
-        </div>
+          <h3>Engineering</h3>
+          <span class="badge">76 skills</span>
+          <p>Architecture, DevOps, security, AI/ML, fullstack development</p>
+          <div class="domain-tags">
+            <span class="tag">docker</span>
+            <span class="tag">terraform</span>
+            <span class="tag">playwright</span>
+            <span class="tag">kubernetes</span>
+          </div>
+        </a>
+
+        <a href="skills/marketing/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          </div>
+          <h3>Marketing</h3>
+          <span class="badge">38 skills</span>
+          <p>Content creation, SEO, demand gen, campaign analytics</p>
+          <div class="domain-tags">
+            <span class="tag">seo</span>
+            <span class="tag">content</span>
+            <span class="tag">demand-gen</span>
+            <span class="tag">analytics</span>
+          </div>
+        </a>
+
+        <a href="skills/c-level-advisor/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <h3>C-Level Advisory</h3>
+          <span class="badge">26 skills</span>
+          <p>CEO, CTO, CFO, and CISO strategic decision-making</p>
+          <div class="domain-tags">
+            <span class="tag">ceo</span>
+            <span class="tag">cto</span>
+            <span class="tag">cfo</span>
+            <span class="tag">ciso</span>
+          </div>
+        </a>
+
+        <a href="skills/ra-qm-team/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Compliance</h3>
+          <span class="badge">21 skills</span>
+          <p>ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2</p>
+          <div class="domain-tags">
+            <span class="tag">soc2</span>
+            <span class="tag">gdpr</span>
+            <span class="tag">hipaa</span>
+            <span class="tag">iso</span>
+          </div>
+        </a>
+
+        <a href="skills/business-growth/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3>Business & Growth</h3>
+          <span class="badge">16 skills</span>
+          <p>Customer success, sales engineering, revenue operations</p>
+          <div class="domain-tags">
+            <span class="tag">revenue</span>
+            <span class="tag">churn</span>
+            <span class="tag">onboarding</span>
+          </div>
+        </a>
+
+        <a href="skills/product-team/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3>Product</h3>
+          <span class="badge">8 skills</span>
+          <p>RICE scoring, OKRs, user stories, UX research</p>
+          <div class="domain-tags">
+            <span class="tag">rice</span>
+            <span class="tag">prd</span>
+            <span class="tag">okrs</span>
+          </div>
+        </a>
+
+        <a href="skills/project-management/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
+          </div>
+          <h3>Project Management</h3>
+          <span class="badge">10 skills</span>
+          <p>Discovery, execution, Atlassian MCP integration</p>
+          <div class="domain-tags">
+            <span class="tag">sprints</span>
+            <span class="tag">jira</span>
+            <span class="tag">retro</span>
+          </div>
+        </a>
+
+        <a href="skills/data-analytics/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Data Analytics</h3>
+          <span class="badge">5 skills</span>
+          <p>BI, ML ops, analytics engineering, data pipelines</p>
+          <div class="domain-tags">
+            <span class="tag">ml-ops</span>
+            <span class="tag">pipelines</span>
+            <span class="tag">bi</span>
+          </div>
+        </a>
+
+        <a href="skills/sales-success/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Sales</h3>
+          <span class="badge">5 skills</span>
+          <p>Account executive, sales ops, solutions architect</p>
+          <div class="domain-tags">
+            <span class="tag">pipeline</span>
+            <span class="tag">discovery</span>
+            <span class="tag">deals</span>
+          </div>
+        </a>
+
+        <a href="skills/hr-operations/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>HR Operations</h3>
+          <span class="badge">4 skills</span>
+          <p>Talent acquisition, people analytics, HR business partner</p>
+        </a>
+
+        <a href="skills/finance/" class="domain-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M6 16h4"/></svg>
+          </div>
+          <h3>Finance</h3>
+          <span class="badge">3 skills</span>
+          <p>DCF valuation, budgeting, forecasting, ratio analysis</p>
+          <div class="domain-tags">
+            <span class="tag">dcf</span>
+            <span class="tag">saas-metrics</span>
+            <span class="tag">budgeting</span>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <!-- Agents -->
-  <section class="agents" id="agents">
-    <div class="container">
-      <h2 class="section-title fade-in">Role-Based <span class="gradient-text">AI Agents</span></h2>
-      <p class="section-subtitle fade-in">Specialized agents for every executive and lead role</p>
-      <div class="agents-grid">
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F468;&#x200D;&#x1F4BB;</div>
-          <h3>Tech Lead</h3>
-          <p>Architecture decisions, code review, technical strategy</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F3D7;&#xFE0F;</div>
-          <h3>Engineering Director</h3>
-          <p>Team scaling, process optimization, delivery excellence</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F4B8;</div>
-          <h3>CFO</h3>
-          <p>Financial modeling, budgeting, investor relations</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F510;</div>
-          <h3>CISO</h3>
-          <p>Security posture, compliance, incident response</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F4E2;</div>
-          <h3>CMO</h3>
-          <p>Brand strategy, demand generation, market positioning</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F6E1;&#xFE0F;</div>
-          <h3>Privacy Officer</h3>
-          <p>GDPR, CCPA, data governance, privacy audits</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F680;</div>
-          <h3>Growth Lead</h3>
-          <p>Revenue ops, customer success, market expansion</p>
-        </div>
-        <div class="agent-card fade-in">
-          <div class="agent-icon">&#x1F3A8;</div>
-          <h3>Design Lead</h3>
-          <p>UX strategy, design systems, accessibility audits</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Personas -->
-  <section class="personas" id="personas">
-    <div class="container">
-      <h2 class="section-title fade-in">Cross-Domain <span class="gradient-text">Personas</span></h2>
-      <p class="section-subtitle fade-in">Activate a persona to combine skills across multiple domains</p>
-      <div class="personas-grid">
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F4BB;</div>
-          <h3>Startup CTO</h3>
-          <p>Architecture, hiring, budgets, and technical roadmap for early-stage startups</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F4C8;</div>
-          <h3>Growth Marketer</h3>
-          <p>Demand gen, analytics, SEO, and conversion optimization in one workflow</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F680;</div>
-          <h3>Solo Founder</h3>
-          <p>Product, engineering, marketing, and finance combined for one-person teams</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F3AF;</div>
-          <h3>Product Lead</h3>
-          <p>PRDs, user stories, RICE scoring, and sprint planning end-to-end</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F6E1;&#xFE0F;</div>
-          <h3>Compliance Officer</h3>
-          <p>SOC 2, GDPR, HIPAA, and ISO audits with automated evidence collection</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F4B0;</div>
-          <h3>Revenue Leader</h3>
-          <p>Sales ops, customer success, and financial metrics in a unified view</p>
-        </div>
-        <div class="persona-card fade-in">
-          <div class="persona-icon">&#x1F527;</div>
-          <h3>DevOps Engineer</h3>
-          <p>CI/CD, infrastructure, monitoring, and security automation</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slash Commands -->
-  <section class="commands" id="commands">
-    <div class="container">
-      <h2 class="section-title fade-in">Slash <span class="gradient-text">Commands</span></h2>
-      <p class="section-subtitle fade-in">26 built-in commands for common workflows</p>
-      <div class="commands-grid">
-        <div class="command-card fade-in">
-          <code class="command-name">/tdd</code>
-          <p>Test-driven development workflow</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/rice</code>
-          <p>RICE-score features for prioritization</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/prd</code>
-          <p>Generate a product requirements doc</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/retro</code>
-          <p>Sprint retrospective from git history</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/tech-debt</code>
-          <p>Scan and prioritize technical debt</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/security-scan</code>
-          <p>Run security audit before pushing</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/a11y-audit</code>
-          <p>WCAG accessibility compliance check</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/sprint-plan</code>
-          <p>Plan a sprint from backlog analysis</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/changelog</code>
-          <p>Generate changelog from git tags</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/persona</code>
-          <p>Activate a cross-domain persona</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/git:pr</code>
-          <p>Create a pull request from branch</p>
-        </div>
-        <div class="command-card fade-in">
-          <code class="command-name">/seo-auditor</code>
-          <p>SEO audit on web content and HTML</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- New Features -->
+  <!-- Features -->
   <section class="features" id="features">
     <div class="container">
-      <h2 class="section-title fade-in">New <span class="gradient-text">Features</span></h2>
-      <p class="section-subtitle fade-in">Latest additions to the skills library</p>
+      <h2 class="section-title fade-in">Key Features</h2>
+      <p class="section-subtitle fade-in">Everything you need to supercharge your AI-assisted workflow</p>
       <div class="features-grid">
+
         <div class="feature-card fade-in">
-          <div class="feature-icon">&#x1F50C;</div>
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>7 Personas</h3>
+          <p>Cross-domain thinking for startup CTO, growth marketer, solo founder, and more</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3>26 Commands</h3>
+          <p>Slash commands for every workflow -- TDD, PRDs, retros, security scans</p>
+        </div>
+
+        <div class="feature-card fade-in">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+          </div>
           <h3>MCP Server</h3>
-          <p>Model Context Protocol server for direct integration with AI assistants and IDE extensions</p>
+          <p>Model Context Protocol integration for direct use as Claude Code tools</p>
         </div>
+
         <div class="feature-card fade-in">
-          <div class="feature-icon">&#x2318;</div>
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="m8 10 3 3-3 3"/><line x1="14" y1="16" x2="18" y2="16"/></svg>
+          </div>
           <h3>CLI Tool</h3>
-          <p>Command-line interface to search, install, and manage skills from your terminal</p>
+          <p>Search, install, and manage skills from your terminal</p>
         </div>
+
         <div class="feature-card fade-in">
-          <div class="feature-icon">&#x2B50;</div>
-          <h3>Quality Scorer</h3>
-          <p>Automated scoring system that rates skill completeness, docs quality, and tool coverage</p>
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h3>11 Platforms</h3>
+          <p>Claude Code, Codex, Gemini CLI, Cursor, Copilot, Windsurf, and more</p>
         </div>
+
         <div class="feature-card fade-in">
-          <div class="feature-icon">&#x1F4E6;</div>
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
           <h3>Starter Bundles</h3>
-          <p>Pre-configured skill bundles for common roles: startup CTO, growth marketer, solo founder</p>
+          <p>Role-based skill kits for common workflows, ready to go</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -393,26 +277,11 @@
   <!-- Install -->
   <section class="install" id="install">
     <div class="container">
-      <h2 class="section-title fade-in"><span class="gradient-text">Get Started</span> in Seconds</h2>
+      <h2 class="section-title fade-in">Get Started</h2>
       <div class="install-block fade-in">
-        <div class="terminal">
-          <div class="terminal-bar">
-            <span class="terminal-dot red"></span>
-            <span class="terminal-dot yellow"></span>
-            <span class="terminal-dot green"></span>
-            <span class="terminal-title">install</span>
-          </div>
-          <div class="terminal-body">
-            <div class="terminal-line">
-              <span class="terminal-prompt">$</span>
-              <span class="install-cmd">git clone https://github.com/borghei/Claude-Skills.git</span>
-            </div>
-          </div>
-        </div>
+        <span class="prompt">$</span><code>git clone https://github.com/borghei/Claude-Skills.git</code>
       </div>
-      <div class="hero-buttons fade-in">
-        <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Star on GitHub</a>
-      </div>
+      <p class="install-hint fade-in">Or install specific skills: <code>cs install engineering/senior-backend ./</code></p>
     </div>
   </section>
 
