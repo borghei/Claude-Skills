@@ -10,208 +10,288 @@
   <meta property="og:description" content="26 specialized AI agents for executive and lead roles.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/agents/">
   <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   
   <style>
 :root {
-  --bg: #0a0a0f;
-  --bg-card: #12121a;
-  --bg-terminal: #0d0d14;
-  --text: #f0f0f0;
-  --text-muted: #a0a0a0;
-  --accent-blue: #00d4ff;
-  --accent-violet: #7c3aed;
-  --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
   --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
-  font-family: var(--font);
+  font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
 }
-a { color: var(--accent-blue); text-decoration: none; transition: opacity 0.2s; }
-a:hover { opacity: 0.8; }
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+code { font-family: var(--font-mono); font-size: 0.875em; }
 
-/* Nav */
-.nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; }
-.nav-brand { font-weight: 800; font-size: 1.1rem; color: var(--text); }
-.nav-brand:hover { opacity: 1; }
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
 .nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-.nav-links a:hover { color: var(--accent-blue); opacity: 1; }
-.nav-links a.active { color: var(--accent-blue); }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
 
 /* Breadcrumbs */
 .breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
 .breadcrumbs a { color: var(--text-muted); }
-.breadcrumbs a:hover { color: var(--accent-blue); }
+.breadcrumbs a:hover { color: var(--accent); }
 .breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
 
 /* Page header */
 .page-header { padding: 48px 0 32px; }
-.page-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
-.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
 
 /* Search + Filter */
 .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
 .search-input {
-  flex: 1; min-width: 200px; padding: 12px 16px;
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
-  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
-.search-input:focus { border-color: var(--accent-blue); }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 .search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
 .filter-select {
-  padding: 12px 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
   font-size: 0.9rem; outline: none; cursor: pointer;
 }
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 
-/* Skill cards grid */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .skill-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   display: flex; flex-direction: column;
 }
 .skill-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08), 0 0 60px rgba(124,58,237,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
 .skill-card h3 a { color: var(--text); }
-.skill-card h3 a:hover { color: var(--accent-blue); }
-.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.skill-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.skill-tag {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);
-  border-radius: 4px; color: var(--accent-blue);
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
 }
-.skill-domain-badge {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
-  border-radius: 4px; color: var(--accent-violet);
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
-.tools-count {
-  font-family: var(--font-mono); font-size: 0.75rem;
-  color: var(--text-muted); margin-top: 10px;
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
 
 /* Skill detail page */
 .skill-detail { padding-bottom: 80px; }
-.skill-detail h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-.skill-detail h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 12px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
 .skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 .skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
 .skill-detail li { margin-bottom: 6px; }
 .skill-detail pre {
-  background: var(--bg-terminal); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); padding: 16px 20px; overflow-x: auto;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
   font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
-  color: var(--accent-blue); margin: 12px 0 20px;
+  color: var(--text); margin: 12px 0 20px;
 }
 .skill-detail code {
   font-family: var(--font-mono); font-size: 0.85rem;
-  background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
 }
 .skill-detail pre code { background: none; padding: 0; }
 
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
 /* Tools list */
-.tool-item { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 12px; }
-.tool-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
 .tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
 /* Related skills */
-.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
 
 /* Agents grid */
-.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .agent-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .agent-card:hover {
-  border-color: rgba(124,58,237,0.3);
-  box-shadow: 0 0 30px rgba(124,58,237,0.08), 0 0 60px rgba(0,212,255,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.agent-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
 
 /* Commands grid */
-.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-bottom: 60px; }
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
 .command-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .command-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.command-card h3 { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--accent-blue); }
-.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
 
 /* Footer */
-.footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px; }
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-links { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; color: var(--text-muted); }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
 .footer-links a { color: var(--text-muted); }
-.footer-links a:hover { color: var(--accent-blue); }
-.footer-sep { color: rgba(255,255,255,0.15); }
-.footer-credit { font-size: 0.875rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
 .footer-credit a { color: var(--text); font-weight: 600; }
-
-/* Count badge */
-.count-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue); margin-left: 8px; }
-
-/* Badge bar (skill detail pages) */
-.badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
-.badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 10px;
-  border-radius: 6px; font-weight: 500; white-space: nowrap;
-}
-.badge-domain { background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: var(--accent-violet); }
-.badge-subdomain { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); color: var(--accent-blue); }
-.badge-version { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); }
-.badge-tools { background: rgba(40,200,64,0.1); border: 1px solid rgba(40,200,64,0.2); color: #28c840; }
-.badge-refs { background: rgba(254,188,46,0.1); border: 1px solid rgba(254,188,46,0.2); color: #febc2e; }
-
-/* Example skill pills on domain cards */
-.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-.example-pill {
-  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px; color: var(--text-muted);
-}
 
 /* Responsive */
 @media (max-width: 768px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
   .commands-grid { grid-template-columns: 1fr; }
   .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
 }
 @media (max-width: 480px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
@@ -220,15 +300,14 @@ a:hover { opacity: 0.8; }
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="container nav-inner">
-    <a href="https://borghei.github.io/Claude-Skills/" class="nav-brand"><span class="gradient-text">Claude Skills</span></a>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
     <div class="nav-links">
-      <a href="https://borghei.github.io/Claude-Skills/">Home</a>
       <a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a>
       <a href="https://borghei.github.io/Claude-Skills/agents/" class="active">Agents</a>
       <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
-      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     </div>
   </div>
 </nav>
@@ -236,11 +315,11 @@ a:hover { opacity: 0.8; }
 <main class="container">
 
 <div class="page-header">
-  <h1 class="page-title">Role-Based <span class="gradient-text">AI Agents</span> <span class="count-badge">26</span></h1>
+  <h1 class="page-title">AI Agents <span class="count-badge">26</span></h1>
   <p class="page-subtitle">Specialized agents for every executive and lead role. Each agent orchestrates multiple skills for comprehensive workflows.</p>
 </div>
 <div class="agents-grid">
-<div class="agent-card"><h3>Content Strategist</h3><p>Editorial-minded strategist who combines narrative craft with data-driven distribution. Thinks in audience journeys, content systems, and compounding assets.</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/content-strategist.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Architecture Reviewer</h3><span class="skill-domain-badge">Engineering</span><p>Architecture review specialist for system design validation, technology evaluation, ADR creation, and migration planning</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-architecture-reviewer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Ceo Advisor</h3><span class="skill-domain-badge">C Level</span><p>Strategic leadership advisor for CEOs covering vision, strategy, board management, investor relations, and organizational culture</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-ceo-advisor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Cfo Advisor</h3><span class="skill-domain-badge">C Level</span><p>Strategic financial advisor for CFOs covering financial analysis, forecasting, board preparation, and revenue operations</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-cfo-advisor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Ciso Advisor</h3><span class="skill-domain-badge">Compliance</span><p>Strategic security advisor for CISOs covering security posture management, compliance readiness, and risk governance</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/compliance/cs-ciso-advisor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Cmo Advisor</h3><span class="skill-domain-badge">Marketing</span><p>Strategic marketing advisor for CMOs covering marketing strategy, campaign management, brand development, and growth optimization</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-cmo-advisor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Code Auditor</h3><span class="skill-domain-badge">Engineering</span><p>Comprehensive code audit specialist for quality analysis, security scanning, dependency health, and tech debt assessment</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-code-auditor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Compliance Auditor</h3><span class="skill-domain-badge">Compliance</span><p>&quot;Enterprise Compliance Auditor — comprehensive multi-framework compliance assessment covering SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA,...</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/compliance/cs-compliance-auditor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Content Creator</h3><span class="skill-domain-badge">Marketing</span><p>AI-powered content creation specialist for brand voice consistency, SEO optimization, and multi-platform content strategy</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-content-creator.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Cto Advisor</h3><span class="skill-domain-badge">C Level</span><p>Technical leadership advisor for CTOs covering technology strategy, team scaling, architecture decisions, and engineering excellence</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-cto-advisor.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Demand Gen Specialist</h3><span class="skill-domain-badge">Marketing</span><p>Demand generation and customer acquisition specialist for lead generation, conversion optimization, and multi-channel acquisition campaigns</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-demand-gen-specialist.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Design Lead</h3><span class="skill-domain-badge">Product</span><p>Design leadership advisor for Design Leads managing design systems, UX quality, accessibility compliance, and design operations</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-design-lead.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Doc Writer</h3><span class="skill-domain-badge">Engineering</span><p>Technical documentation specialist for README generation, API docs, architecture diagrams, changelogs, and release notes</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-doc-writer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Engineering Director</h3><span class="skill-domain-badge">Engineering</span><p>VP/Head of Engineering agent for portfolio-level engineering decisions, cross-team visibility, and organizational scaling</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-engineering-director.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Growth Lead</h3><span class="skill-domain-badge">Business &amp; Growth</span><p>Growth leadership advisor for Growth Leads managing acquisition funnels, activation optimization, retention strategy, and pricing experimentation</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-growth-lead.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Privacy Officer</h3><span class="skill-domain-badge">Compliance</span><p>Data protection and privacy compliance advisor for DPOs and Privacy Officers covering GDPR, CCPA, EU AI Act, and data security</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-privacy-officer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Product Manager</h3><span class="skill-domain-badge">Product</span><p>Product management agent for feature prioritization, customer discovery, PRD development, and roadmap planning using RICE framework</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/product/cs-product-manager.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Security Engineer</h3><span class="skill-domain-badge">Engineering</span><p>Security engineering specialist for threat modeling, vulnerability scanning, secrets detection, and compliance assessment</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-security-engineer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Seo Analyst</h3><span class="skill-domain-badge">Marketing</span><p>Website SEO analysis specialist for technical audits, keyword research, content optimization, and search performance</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-seo-analyst.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Cs Tech Lead</h3><span class="skill-domain-badge">Engineering</span><p>Tech Lead agent for daily architecture reviews, code quality oversight, and tech debt management</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-tech-lead.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Devops Engineer</h3><p>Infrastructure and reliability specialist who combines systems thinking with developer empathy. Automates everything, measures in SLAs, and sleeps well...</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/devops-engineer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Finance Lead</h3><p>Financial strategist who combines analytical rigor with operational pragmatism. Thinks in unit economics, runway, and ROI. Every decision passes through the...</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/finance-lead.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Growth Marketer</h3><p>Data-driven growth practitioner who combines marketing creativity with engineering-level analytical rigor. Thinks in funnels, experiments, and metrics.</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/growth-marketer.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Product Manager</h3><p>Customer-obsessed product leader who combines user empathy with technical feasibility judgment. Thinks in outcomes and jobs-to-be-done, not features.</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/product-manager.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Solo Founder</h3><p>Cross-domain generalist running a one-person startup. Wears every hat, optimizes ruthlessly for leverage, and filters all decisions through impact per hour.</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/solo-founder.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div><div class="agent-card"><h3>Startup Cto</h3><p>Engineering leader who combines deep technical expertise with business strategy. Thinks in tradeoffs, velocity, and pragmatic architecture decisions.</p><p style="margin-top:8px"><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/startup-cto.md" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p></div>
+<div class="agent-card"><h3>Content Strategist</h3><p>Editorial-minded strategist who combines narrative craft with data-driven distribution. Thinks in audience journeys, content systems, and compounding assets.</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/content-strategist.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Architecture Reviewer</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>Architecture review specialist for system design validation, technology evaluation, ADR creation, and migration planning</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-architecture-reviewer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Ceo Advisor</h3><div class="badge-bar"><span class="badge badge-domain">C Level</span></div><p>Strategic leadership advisor for CEOs covering vision, strategy, board management, investor relations, and organizational culture</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-ceo-advisor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Cfo Advisor</h3><div class="badge-bar"><span class="badge badge-domain">C Level</span></div><p>Strategic financial advisor for CFOs covering financial analysis, forecasting, board preparation, and revenue operations</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-cfo-advisor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Ciso Advisor</h3><div class="badge-bar"><span class="badge badge-domain">Compliance</span></div><p>Strategic security advisor for CISOs covering security posture management, compliance readiness, and risk governance</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/compliance/cs-ciso-advisor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Cmo Advisor</h3><div class="badge-bar"><span class="badge badge-domain">Marketing</span></div><p>Strategic marketing advisor for CMOs covering marketing strategy, campaign management, brand development, and growth optimization</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-cmo-advisor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Code Auditor</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>Comprehensive code audit specialist for quality analysis, security scanning, dependency health, and tech debt assessment</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-code-auditor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Compliance Auditor</h3><div class="badge-bar"><span class="badge badge-domain">Compliance</span></div><p>&quot;Enterprise Compliance Auditor — comprehensive multi-framework compliance assessment covering SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA,...</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/compliance/cs-compliance-auditor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Content Creator</h3><div class="badge-bar"><span class="badge badge-domain">Marketing</span></div><p>AI-powered content creation specialist for brand voice consistency, SEO optimization, and multi-platform content strategy</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-content-creator.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Cto Advisor</h3><div class="badge-bar"><span class="badge badge-domain">C Level</span></div><p>Technical leadership advisor for CTOs covering technology strategy, team scaling, architecture decisions, and engineering excellence</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/c-level/cs-cto-advisor.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Demand Gen Specialist</h3><div class="badge-bar"><span class="badge badge-domain">Marketing</span></div><p>Demand generation and customer acquisition specialist for lead generation, conversion optimization, and multi-channel acquisition campaigns</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-demand-gen-specialist.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Design Lead</h3><div class="badge-bar"><span class="badge badge-domain">Product</span></div><p>Design leadership advisor for Design Leads managing design systems, UX quality, accessibility compliance, and design operations</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-design-lead.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Doc Writer</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>Technical documentation specialist for README generation, API docs, architecture diagrams, changelogs, and release notes</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-doc-writer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Engineering Director</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>VP/Head of Engineering agent for portfolio-level engineering decisions, cross-team visibility, and organizational scaling</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-engineering-director.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Growth Lead</h3><div class="badge-bar"><span class="badge badge-domain">Business &amp; Growth</span></div><p>Growth leadership advisor for Growth Leads managing acquisition funnels, activation optimization, retention strategy, and pricing experimentation</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-growth-lead.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Privacy Officer</h3><div class="badge-bar"><span class="badge badge-domain">Compliance</span></div><p>Data protection and privacy compliance advisor for DPOs and Privacy Officers covering GDPR, CCPA, EU AI Act, and data security</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/cs-privacy-officer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Product Manager</h3><div class="badge-bar"><span class="badge badge-domain">Product</span></div><p>Product management agent for feature prioritization, customer discovery, PRD development, and roadmap planning using RICE framework</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/product/cs-product-manager.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Security Engineer</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>Security engineering specialist for threat modeling, vulnerability scanning, secrets detection, and compliance assessment</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-security-engineer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Seo Analyst</h3><div class="badge-bar"><span class="badge badge-domain">Marketing</span></div><p>Website SEO analysis specialist for technical audits, keyword research, content optimization, and search performance</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/marketing/cs-seo-analyst.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Cs Tech Lead</h3><div class="badge-bar"><span class="badge badge-domain">Engineering</span></div><p>Tech Lead agent for daily architecture reviews, code quality oversight, and tech debt management</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/engineering/cs-tech-lead.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Devops Engineer</h3><p>Infrastructure and reliability specialist who combines systems thinking with developer empathy. Automates everything, measures in SLAs, and sleeps well...</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/devops-engineer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Finance Lead</h3><p>Financial strategist who combines analytical rigor with operational pragmatism. Thinks in unit economics, runway, and ROI. Every decision passes through the...</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/finance-lead.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Growth Marketer</h3><p>Data-driven growth practitioner who combines marketing creativity with engineering-level analytical rigor. Thinks in funnels, experiments, and metrics.</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/growth-marketer.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Product Manager</h3><p>Customer-obsessed product leader who combines user empathy with technical feasibility judgment. Thinks in outcomes and jobs-to-be-done, not features.</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/product-manager.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Solo Founder</h3><p>Cross-domain generalist running a one-person startup. Wears every hat, optimizes ruthlessly for leverage, and filters all decisions through impact per hour.</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/solo-founder.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div><div class="agent-card"><h3>Startup Cto</h3><p>Engineering leader who combines deep technical expertise with business strategy. Thinks in tradeoffs, velocity, and pragmatic architecture decisions.</p><a href="https://github.com/borghei/Claude-Skills/tree/main/agents/personas/startup-cto.md" target="_blank" rel="noopener" class="view-link">View source <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>
 </div>
 </main>
 <footer class="footer">
@@ -255,5 +334,6 @@ a:hover { opacity: 0.8; }
     <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
   </div>
 </footer>
+
 </body>
 </html>

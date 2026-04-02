@@ -34,22 +34,37 @@ BASE_URL = "https://borghei.github.io/Claude-Skills"
 GITHUB_URL = "https://github.com/borghei/Claude-Skills"
 
 # ---------------------------------------------------------------------------
-# Domain display metadata
+# Domain display metadata (no emojis — icons handled via inline SVG)
 # ---------------------------------------------------------------------------
 
 DOMAIN_META = {
-    "engineering":        {"label": "Engineering",        "icon": "&#x1F528;",          "desc": "Architecture, fullstack, AI/ML, security, and infrastructure"},
-    "marketing":          {"label": "Marketing",          "icon": "&#x1F4E3;",          "desc": "Content creation, SEO, demand gen, campaign analytics"},
-    "c-level-advisor":    {"label": "C-Level Advisory",   "icon": "&#x1F451;",          "desc": "CEO, CTO, CFO, and CISO strategic advisory"},
-    "project-management": {"label": "Project Management", "icon": "&#x1F4CB;",          "desc": "Discovery, execution, Atlassian MCP integration"},
-    "business-growth":    {"label": "Business & Growth",  "icon": "&#x1F4C8;",          "desc": "Customer success, sales engineering, revenue ops"},
-    "ra-qm-team":        {"label": "Compliance",         "icon": "&#x1F6E1;&#xFE0F;",  "desc": "ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2"},
-    "data-analytics":     {"label": "Data Analytics",     "icon": "&#x1F4CA;",          "desc": "BI, ML ops, analytics engineering, data pipelines"},
-    "product-team":       {"label": "Product",            "icon": "&#x1F4E6;",          "desc": "RICE scoring, OKRs, user stories, UX research"},
-    "sales-success":      {"label": "Sales",              "icon": "&#x1F4B0;",          "desc": "Account executive, sales ops, solutions architect"},
-    "hr-operations":      {"label": "HR Operations",      "icon": "&#x1F465;",          "desc": "Talent acquisition, people analytics, HR business partner"},
-    "finance":            {"label": "Finance",            "icon": "&#x1F4B5;",          "desc": "DCF valuation, budgeting, forecasting, ratio analysis"},
+    "engineering":        {"label": "Engineering",        "desc": "Architecture, fullstack, AI/ML, security, and infrastructure"},
+    "marketing":          {"label": "Marketing",          "desc": "Content creation, SEO, demand gen, campaign analytics"},
+    "c-level-advisor":    {"label": "C-Level Advisory",   "desc": "CEO, CTO, CFO, and CISO strategic advisory"},
+    "project-management": {"label": "Project Management", "desc": "Discovery, execution, Atlassian MCP integration"},
+    "business-growth":    {"label": "Business & Growth",  "desc": "Customer success, sales engineering, revenue ops"},
+    "ra-qm-team":        {"label": "Compliance",         "desc": "ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2"},
+    "data-analytics":     {"label": "Data Analytics",     "desc": "BI, ML ops, analytics engineering, data pipelines"},
+    "product-team":       {"label": "Product",            "desc": "RICE scoring, OKRs, user stories, UX research"},
+    "sales-success":      {"label": "Sales",              "desc": "Account executive, sales ops, solutions architect"},
+    "hr-operations":      {"label": "HR Operations",      "desc": "Talent acquisition, people analytics, HR business partner"},
+    "finance":            {"label": "Finance",            "desc": "DCF valuation, budgeting, forecasting, ratio analysis"},
 }
+
+# Inline SVG icons (16x16, stroke-based line icons)
+SVG_ICONS = {
+    "arrow-right": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    "github": '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+    "tools": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>',
+    "folder": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>',
+    "terminal": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+    "search": '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    "grid": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    "users": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
+    "command": '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a3 3 0 00-3 3v12a3 3 0 003 3 3 3 0 003-3 3 3 0 00-3-3H6a3 3 0 00-3 3 3 3 0 003 3 3 3 0 003-3V6a3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3h12a3 3 0 003-3 3 3 0 00-3-3z"/></svg>',
+    "external": '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+}
+
 
 # ---------------------------------------------------------------------------
 # Data loading
@@ -85,7 +100,6 @@ def parse_tools_section(md_text):
         elif in_section and tools and not tools[-1]["desc"]:
             stripped = line.strip()
             if stripped and not stripped.startswith("```") and not stripped.startswith("**"):
-                # first non-empty prose line after heading
                 if stripped.startswith("-") or stripped.startswith("*"):
                     stripped = stripped.lstrip("-* ")
                 tools[-1]["desc"] = stripped
@@ -106,7 +120,6 @@ def parse_quick_start(md_text):
         if collecting:
             result.append(line)
     text = "\n".join(result).strip()
-    # strip leading ---
     text = re.sub(r"^---\s*", "", text).strip()
     return text
 
@@ -143,7 +156,6 @@ def collect_commands():
         text = md_file.read_text(encoding="utf-8")
         meta = _parse_frontmatter(text)
         name = md_file.stem
-        # handle git/cm -> git:cm
         if md_file.parent.name != "commands":
             name = f"{md_file.parent.name}:{md_file.stem}"
         desc = meta.get("description", "")
@@ -163,7 +175,6 @@ def _parse_frontmatter(text):
     current_key = None
     for line in block.splitlines():
         if line.startswith("  ") and current_key:
-            # continuation of multiline value
             meta[current_key] = (meta.get(current_key, "") + " " + line.strip()).strip()
             continue
         m = re.match(r"^(\w[\w-]*):\s*(.*)", line)
@@ -177,209 +188,292 @@ def _parse_frontmatter(text):
 
 
 # ---------------------------------------------------------------------------
-# HTML template system
+# HTML template system — claude.ai-inspired cream/terracotta design
 # ---------------------------------------------------------------------------
 
 def _css():
-    """Return the inline CSS matching the existing site design."""
+    """Return the inline CSS for the cream/terracotta design system."""
     return """
 :root {
-  --bg: #0a0a0f;
-  --bg-card: #12121a;
-  --bg-terminal: #0d0d14;
-  --text: #f0f0f0;
-  --text-muted: #a0a0a0;
-  --accent-blue: #00d4ff;
-  --accent-violet: #7c3aed;
-  --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
   --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
-  font-family: var(--font);
+  font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
 }
-a { color: var(--accent-blue); text-decoration: none; transition: opacity 0.2s; }
-a:hover { opacity: 0.8; }
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+code { font-family: var(--font-mono); font-size: 0.875em; }
 
-/* Nav */
-.nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; }
-.nav-brand { font-weight: 800; font-size: 1.1rem; color: var(--text); }
-.nav-brand:hover { opacity: 1; }
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
 .nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-.nav-links a:hover { color: var(--accent-blue); opacity: 1; }
-.nav-links a.active { color: var(--accent-blue); }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
 
 /* Breadcrumbs */
 .breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
 .breadcrumbs a { color: var(--text-muted); }
-.breadcrumbs a:hover { color: var(--accent-blue); }
+.breadcrumbs a:hover { color: var(--accent); }
 .breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
 
 /* Page header */
 .page-header { padding: 48px 0 32px; }
-.page-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
-.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
 
 /* Search + Filter */
 .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
 .search-input {
-  flex: 1; min-width: 200px; padding: 12px 16px;
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
-  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
-.search-input:focus { border-color: var(--accent-blue); }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 .search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
 .filter-select {
-  padding: 12px 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
   font-size: 0.9rem; outline: none; cursor: pointer;
 }
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 
-/* Skill cards grid */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .skill-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   display: flex; flex-direction: column;
 }
 .skill-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08), 0 0 60px rgba(124,58,237,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
 .skill-card h3 a { color: var(--text); }
-.skill-card h3 a:hover { color: var(--accent-blue); }
-.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.skill-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.skill-tag {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);
-  border-radius: 4px; color: var(--accent-blue);
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
 }
-.skill-domain-badge {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
-  border-radius: 4px; color: var(--accent-violet);
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
-.tools-count {
-  font-family: var(--font-mono); font-size: 0.75rem;
-  color: var(--text-muted); margin-top: 10px;
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
 
 /* Skill detail page */
 .skill-detail { padding-bottom: 80px; }
-.skill-detail h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-.skill-detail h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 12px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
 .skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 .skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
 .skill-detail li { margin-bottom: 6px; }
 .skill-detail pre {
-  background: var(--bg-terminal); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); padding: 16px 20px; overflow-x: auto;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
   font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
-  color: var(--accent-blue); margin: 12px 0 20px;
+  color: var(--text); margin: 12px 0 20px;
 }
 .skill-detail code {
   font-family: var(--font-mono); font-size: 0.85rem;
-  background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
 }
 .skill-detail pre code { background: none; padding: 0; }
 
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
 /* Tools list */
-.tool-item { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 12px; }
-.tool-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
 .tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
 /* Related skills */
-.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
 
 /* Agents grid */
-.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .agent-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .agent-card:hover {
-  border-color: rgba(124,58,237,0.3);
-  box-shadow: 0 0 30px rgba(124,58,237,0.08), 0 0 60px rgba(0,212,255,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.agent-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
 
 /* Commands grid */
-.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-bottom: 60px; }
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
 .command-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .command-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.command-card h3 { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--accent-blue); }
-.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
 
 /* Footer */
-.footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px; }
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-links { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; color: var(--text-muted); }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
 .footer-links a { color: var(--text-muted); }
-.footer-links a:hover { color: var(--accent-blue); }
-.footer-sep { color: rgba(255,255,255,0.15); }
-.footer-credit { font-size: 0.875rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
 .footer-credit a { color: var(--text); font-weight: 600; }
-
-/* Count badge */
-.count-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue); margin-left: 8px; }
-
-/* Badge bar (skill detail pages) */
-.badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
-.badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 10px;
-  border-radius: 6px; font-weight: 500; white-space: nowrap;
-}
-.badge-domain { background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: var(--accent-violet); }
-.badge-subdomain { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); color: var(--accent-blue); }
-.badge-version { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); }
-.badge-tools { background: rgba(40,200,64,0.1); border: 1px solid rgba(40,200,64,0.2); color: #28c840; }
-.badge-refs { background: rgba(254,188,46,0.1); border: 1px solid rgba(254,188,46,0.2); color: #febc2e; }
-
-/* Example skill pills on domain cards */
-.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-.example-pill {
-  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px; color: var(--text-muted);
-}
 
 /* Responsive */
 @media (max-width: 768px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
   .commands-grid { grid-template-columns: 1fr; }
   .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
 }
 @media (max-width: 480px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
@@ -392,15 +486,15 @@ def _nav(active=""):
     """Navigation bar HTML."""
     def _cls(name):
         return ' class="active"' if active == name else ""
-    return f"""<nav class="nav">
-  <div class="container nav-inner">
-    <a href="{BASE_URL}/" class="nav-brand"><span class="gradient-text">Claude Skills</span></a>
+    gh_icon = SVG_ICONS["github"]
+    return f"""<nav class="navbar">
+  <div class="container">
+    <a href="{BASE_URL}/" class="nav-logo">Claude Skills</a>
     <div class="nav-links">
-      <a href="{BASE_URL}/"{ _cls("home")}>Home</a>
       <a href="{BASE_URL}/skills/"{ _cls("skills")}>Skills</a>
       <a href="{BASE_URL}/agents/"{ _cls("agents")}>Agents</a>
       <a href="{BASE_URL}/commands/"{ _cls("commands")}>Commands</a>
-      <a href="{GITHUB_URL}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{GITHUB_URL}" target="_blank" rel="noopener" class="gh-link">{gh_icon} GitHub</a>
     </div>
   </div>
 </nav>"""
@@ -421,7 +515,7 @@ def _footer():
 </footer>"""
 
 
-def page(title, description, canonical, body, active="", breadcrumbs=None, og_url=None, jsonld=None):
+def page(title, description, canonical, body, active="", breadcrumbs=None, og_url=None, jsonld=None, extra_js=""):
     """Wrap body content in a full HTML page."""
     og = og_url or canonical
     bc_html = ""
@@ -438,6 +532,10 @@ def page(title, description, canonical, body, active="", breadcrumbs=None, og_ur
     if jsonld:
         ld_tag = f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'
 
+    js_tag = ""
+    if extra_js:
+        js_tag = f"<script>{extra_js}</script>"
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -450,9 +548,6 @@ def page(title, description, canonical, body, active="", breadcrumbs=None, og_ur
   <meta property="og:description" content="{escape(description[:200])}">
   <meta property="og:url" content="{og}">
   <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   {ld_tag}
   <style>{_css()}</style>
 </head>
@@ -463,6 +558,7 @@ def page(title, description, canonical, body, active="", breadcrumbs=None, og_ur
 {body}
 </main>
 {_footer()}
+{js_tag}
 </body>
 </html>
 """
@@ -502,7 +598,6 @@ def truncate(text, length=160):
 
 def md_code_to_html(text):
     """Minimal markdown code-block to HTML conversion."""
-    # Replace ```lang\n...\n``` with <pre><code>
     def _repl(m):
         code = escape(m.group(2))
         return f"<pre><code>{code}</code></pre>"
@@ -553,22 +648,78 @@ def gen_skill_page(skill, catalog, all_skills_by_domain):
     version = skill.get("version", "")
     has_refs = skill.get("has_references", False)
 
-    # Badge bar: domain, subdomain, version, tools, references
+    # Badge bar
     badges = f'<span class="badge badge-domain">{escape(dl)}</span>'
     if subdomain:
         badges += f' <span class="badge badge-subdomain">{escape(pretty_name(subdomain))}</span>'
     if version:
         badges += f' <span class="badge badge-version">v{escape(version)}</span>'
     if tools_count:
-        badges += f' <span class="badge badge-tools">{tools_count} tool{"s" if tools_count != 1 else ""}</span>'
+        badges += f' <span class="badge badge-tools">{SVG_ICONS["tools"]} {tools_count} tool{"s" if tools_count != 1 else ""}</span>'
     if has_refs:
         badges += ' <span class="badge badge-refs">references</span>'
     badge_bar = f'<div class="badge-bar">{badges}</div>'
 
     # Tags as pills
-    tags_html = "".join(f'<span class="skill-tag">{escape(t)}</span>' for t in tags)
+    tags_html = "".join(f'<span class="tag">{escape(t)}</span>' for t in tags)
     if tags_html:
         tags_html = f'<div class="skill-meta" style="margin-bottom:24px">{tags_html}</div>'
+
+    # How to Use — tabbed platform selector
+    skill_dir = os.path.dirname(skill_path)
+    how_to = f"""<h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-claude">
+  <pre><code># Add to your project
+cs install {escape(skill_dir)} ./
+
+# Or copy directly
+git clone {GITHUB_URL}.git
+cp -r Claude-Skills/{escape(skill_dir)} your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/{escape(name)}/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/{escape(name)} your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/{escape(name)}/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/{escape(name)} your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: {escape(skill_dir)}/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone {GITHUB_URL}.git
+cp -r Claude-Skills/{escape(skill_dir)} your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone {GITHUB_URL}.git
+cp -r Claude-Skills/{escape(skill_dir)} your-project/
+
+# Or download just this skill
+curl -sL {GITHUB_URL}/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/{escape(skill_dir)}</code></pre>
+</div>"""
+
+    if tools_count:
+        how_to += f"""
+<h3>Run Python Tools</h3>
+<pre><code>python {escape(skill_dir)}/scripts/tool_name.py --help</code></pre>"""
 
     # Tools section
     tools_html = ""
@@ -584,33 +735,6 @@ def gen_skill_page(skill, catalog, all_skills_by_domain):
     if quick_start:
         qs_html = f"<h2>Quick Start</h2>{md_code_to_html(quick_start)}"
 
-    # How to use
-    skill_dir = os.path.dirname(skill_path)
-    how_to = f"""<h2>How to Use This Skill</h2>
-
-<h3>With Claude Code</h3>
-<p>Copy the skill folder to your project:</p>
-<pre><code>git clone {GITHUB_URL}.git
-cp -r Claude-Skills/{escape(skill_dir)} your-project/</code></pre>
-
-<h3>With the CS CLI</h3>
-<pre><code>cs install {escape(skill_dir)} ./</code></pre>
-
-<h3>With OpenAI Codex</h3>
-<p>The skill is available in <code>.codex/skills/{escape(name)}/</code></p>
-
-<h3>With Gemini CLI</h3>
-<p>The skill is available in <code>.gemini/skills/{escape(name)}/</code></p>
-
-<h3>Manual Copy</h3>
-<pre><code>curl -sL {GITHUB_URL}/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/{escape(skill_dir)}</code></pre>"""
-
-    if tools_count:
-        how_to += f"""
-
-<h3>Run Python Tools</h3>
-<pre><code>python {escape(skill_dir)}/scripts/tool_name.py --help</code></pre>"""
-
     # Related skills (same domain, max 6)
     related = [s for s in all_skills_by_domain.get(domain, []) if s["name"] != name][:6]
     related_html = ""
@@ -624,14 +748,27 @@ cp -r Claude-Skills/{escape(skill_dir)} your-project/</code></pre>
         related_html = f'<h2>Related Skills in {escape(dl)}</h2><div class="related-grid">{cards}</div>'
 
     # Source link
-    source_html = f'<p style="margin-top:32px"><a href="{GITHUB_URL}/tree/main/{skill_path}" target="_blank" rel="noopener">View source on GitHub &rarr;</a></p>'
+    ext_icon = SVG_ICONS["external"]
+    source_html = f'<p style="margin-top:32px"><a href="{GITHUB_URL}/tree/main/{skill_path}" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub {ext_icon}</a></p>'
+
+    # Tab-switching JS
+    tab_js = """
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+"""
 
     body = f"""
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">{escape(pn)}</h1>
-    {badge_bar}
     <p class="page-subtitle">{escape(desc)}</p>
+    {badge_bar}
     {tags_html}
   </div>
   {how_to}
@@ -641,14 +778,13 @@ cp -r Claude-Skills/{escape(skill_dir)} your-project/</code></pre>
   {source_html}
 </article>"""
 
-    return page(title, desc, canonical, body, active="skills", breadcrumbs=breadcrumbs, jsonld=jsonld)
+    return page(title, desc, canonical, body, active="skills", breadcrumbs=breadcrumbs, jsonld=jsonld, extra_js=tab_js)
 
 
 def gen_domain_page(domain, skills, catalog):
     """Generate a domain index page."""
     dl = domain_label(domain)
     dm = DOMAIN_META.get(domain, {})
-    icon = dm.get("icon", "")
     desc_short = dm.get("desc", f"Skills in the {dl} domain")
     count = len(skills)
     tools_total = sum(s.get("tools", 0) for s in skills)
@@ -662,15 +798,17 @@ def gen_domain_page(domain, skills, catalog):
         (dl, None),
     ]
 
-    # Search bar
+    search_icon = SVG_ICONS["search"]
     filter_html = f"""<div class="filter-bar">
-  <input type="text" class="search-input" placeholder="Search {dl} skills..." id="domain-search" onkeyup="filterCards()">
+  <div class="search-wrap">
+    {search_icon}
+    <input type="text" class="search-input" placeholder="Search {dl} skills..." id="domain-search" onkeyup="filterCards()">
+  </div>
 </div>"""
 
-    # Cards with category/subdomain/tools badges + tag pills
     cards = []
     for s in sorted(skills, key=lambda x: x["name"]):
-        tags = "".join(f'<span class="skill-tag">{escape(t)}</span>' for t in s.get("tags", [])[:4])
+        tags = "".join(f'<span class="tag">{escape(t)}</span>' for t in s.get("tags", [])[:4])
         tc = s.get("tools", 0)
         subdomain = s.get("subdomain", "")
         badges = f'<span class="badge badge-domain">{escape(dl)}</span>'
@@ -686,7 +824,7 @@ def gen_domain_page(domain, skills, catalog):
             f'<div class="skill-meta">{tags}</div></a>'
         )
 
-    search_js = """<script>
+    search_js = """
 function filterCards(){
   var q=document.getElementById('domain-search').value.toLowerCase();
   document.querySelectorAll('.skill-card').forEach(function(c){
@@ -696,20 +834,19 @@ function filterCards(){
     c.style.display=(n.includes(q)||t.includes(q)||txt.includes(q))?'':'none';
   });
 }
-</script>"""
+"""
 
     body = f"""
 <div class="page-header">
-  <h1 class="page-title">{icon} {escape(dl)} <span class="count-badge">{count} skills</span></h1>
+  <h1 class="page-title">{escape(dl)} <span class="count-badge">{count} skills</span></h1>
   <p class="page-subtitle">{escape(desc_short)}. {tools_total} Python automation tools.</p>
 </div>
 {filter_html}
 <div class="skills-grid">
 {"".join(cards)}
-</div>
-{search_js}"""
+</div>"""
 
-    return page(title, description, canonical, body, active="skills", breadcrumbs=breadcrumbs)
+    return page(title, description, canonical, body, active="skills", breadcrumbs=breadcrumbs, extra_js=search_js)
 
 
 def gen_skills_index(catalog, all_skills_by_domain):
@@ -727,39 +864,41 @@ def gen_skills_index(catalog, all_skills_by_domain):
         for d in sorted(all_skills_by_domain.keys())
     )
 
+    search_icon = SVG_ICONS["search"]
     filter_html = f"""<div class="filter-bar">
-  <input type="text" class="search-input" placeholder="Search {total} skills..." id="skill-search" onkeyup="filterSkills()">
+  <div class="search-wrap">
+    {search_icon}
+    <input type="text" class="search-input" placeholder="Search {total} skills..." id="skill-search" onkeyup="filterSkills()">
+  </div>
   <select class="filter-select" id="domain-filter" onchange="filterSkills()">
     <option value="">All Domains</option>
     {domain_options}
   </select>
 </div>"""
 
-    # Domain summary cards with example skill names as pills
+    # Domain summary cards
     domain_summary = []
     for d in sorted(all_skills_by_domain.keys()):
         dm = DOMAIN_META.get(d, {})
-        icon = dm.get("icon", "")
-        dl = domain_label(d)
+        dl_name = domain_label(d)
         cnt = len(all_skills_by_domain[d])
         tc = sum(s.get("tools", 0) for s in all_skills_by_domain[d])
-        # Pick up to 4 example skill names
         examples = [s["name"] for s in all_skills_by_domain[d][:4]]
         pills = "".join(f'<span class="example-pill">{escape(pretty_name(e))}</span>' for e in examples)
         if cnt > len(examples):
             pills += f'<span class="example-pill">+{cnt - len(examples)} more</span>'
         domain_summary.append(
             f'<a href="{BASE_URL}/skills/{d}/" class="skill-card" style="text-decoration:none">'
-            f'<h3>{icon} {escape(dl)}</h3>'
-            f'<div class="badge-bar"><span class="badge badge-tools">{cnt} skills</span><span class="badge badge-version">{tc} tools</span></div>'
+            f'<h3>{escape(dl_name)}</h3>'
+            f'<div class="badge-bar"><span class="badge badge-domain">{cnt} skills</span><span class="badge badge-tools">{tc} tools</span></div>'
             f'<p>{escape(dm.get("desc", ""))}</p>'
             f'<div class="example-pills">{pills}</div></a>'
         )
 
-    # All skill cards with badges
+    # All skill cards
     cards = []
     for s in sorted(catalog["skills"], key=lambda x: x["name"]):
-        tags = "".join(f'<span class="skill-tag">{escape(t)}</span>' for t in s.get("tags", [])[:3])
+        tags = "".join(f'<span class="tag">{escape(t)}</span>' for t in s.get("tags", [])[:3])
         tc = s.get("tools", 0)
         subdomain = s.get("subdomain", "")
         badges = f'<span class="badge badge-domain">{escape(domain_label(s["domain"]))}</span>'
@@ -777,7 +916,7 @@ def gen_skills_index(catalog, all_skills_by_domain):
             f'<div class="skill-meta">{tags}</div></a>'
         )
 
-    search_js = """<script>
+    search_js = """
 function filterSkills(){
   var q=(document.getElementById('skill-search').value||'').toLowerCase();
   var d=document.getElementById('domain-filter').value;
@@ -791,27 +930,26 @@ function filterSkills(){
     c.style.display=(matchQ&&matchD)?'':'none';
   });
 }
-</script>"""
+"""
 
     body = f"""
 <div class="page-header">
-  <h1 class="page-title"><span class="gradient-text">Skill Catalog</span> <span class="count-badge">{total} skills</span></h1>
+  <h1 class="page-title">Skill Catalog <span class="count-badge">{total} skills</span></h1>
   <p class="page-subtitle">{escape(description)}</p>
 </div>
 
-<h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px">Browse by Domain</h2>
+<h2 class="section-heading">Browse by Domain</h2>
 <div class="skills-grid" style="margin-bottom:48px">
 {"".join(domain_summary)}
 </div>
 
-<h2 style="font-size:1.3rem;font-weight:700;margin-bottom:20px">All Skills</h2>
+<h2 class="section-heading">All Skills</h2>
 {filter_html}
 <div class="skills-grid" id="all-skills">
 {"".join(cards)}
-</div>
-{search_js}"""
+</div>"""
 
-    return page(title, description, canonical, body, active="skills", breadcrumbs=breadcrumbs)
+    return page(title, description, canonical, body, active="skills", breadcrumbs=breadcrumbs, extra_js=search_js)
 
 
 def gen_agents_page(agents):
@@ -821,22 +959,23 @@ def gen_agents_page(agents):
     canonical = f"{BASE_URL}/agents/"
     breadcrumbs = [("Home", f"{BASE_URL}/"), ("Agents", None)]
 
+    ext_icon = SVG_ICONS["external"]
     cards = []
     for a in sorted(agents, key=lambda x: x["name"]):
         dl = domain_label(a["domain"]) if a["domain"] else ""
-        badge = f'<span class="skill-domain-badge">{escape(dl)}</span>' if dl else ""
+        badge = f'<span class="badge badge-domain">{escape(dl)}</span>' if dl else ""
         cards.append(
             f'<div class="agent-card">'
             f'<h3>{escape(pretty_name(a["name"]))}</h3>'
-            f'{badge}'
+            f'{f"""<div class="badge-bar">{badge}</div>""" if badge else ""}'
             f'<p>{escape(truncate(a.get("description", ""), 160))}</p>'
-            f'<p style="margin-top:8px"><a href="{GITHUB_URL}/tree/main/{a["path"]}" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p>'
+            f'<a href="{GITHUB_URL}/tree/main/{a["path"]}" target="_blank" rel="noopener" class="view-link">View source {ext_icon}</a>'
             f'</div>'
         )
 
     body = f"""
 <div class="page-header">
-  <h1 class="page-title">Role-Based <span class="gradient-text">AI Agents</span> <span class="count-badge">{len(agents)}</span></h1>
+  <h1 class="page-title">AI Agents <span class="count-badge">{len(agents)}</span></h1>
   <p class="page-subtitle">Specialized agents for every executive and lead role. Each agent orchestrates multiple skills for comprehensive workflows.</p>
 </div>
 <div class="agents-grid">
@@ -853,19 +992,20 @@ def gen_commands_page(commands):
     canonical = f"{BASE_URL}/commands/"
     breadcrumbs = [("Home", f"{BASE_URL}/"), ("Commands", None)]
 
+    ext_icon = SVG_ICONS["external"]
     cards = []
     for c in sorted(commands, key=lambda x: x["name"]):
         cards.append(
             f'<div class="command-card">'
             f'<h3>/{escape(c["name"])}</h3>'
             f'<p>{escape(truncate(c.get("description", ""), 200))}</p>'
-            f'<p style="margin-top:8px"><a href="{GITHUB_URL}/tree/main/{c["path"]}" target="_blank" rel="noopener" style="font-size:0.8rem">View source &rarr;</a></p>'
+            f'<a href="{GITHUB_URL}/tree/main/{c["path"]}" target="_blank" rel="noopener" class="view-link">View source {ext_icon}</a>'
             f'</div>'
         )
 
     body = f"""
 <div class="page-header">
-  <h1 class="page-title"><span class="gradient-text">Slash Commands</span> <span class="count-badge">{len(commands)}</span></h1>
+  <h1 class="page-title">Slash Commands <span class="count-badge">{len(commands)}</span></h1>
   <p class="page-subtitle">Built-in commands for Claude Code. Type <code>/command-name</code> in your Claude Code session to run.</p>
 </div>
 <div class="commands-grid">

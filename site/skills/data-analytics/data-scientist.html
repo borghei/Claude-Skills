@@ -10,208 +10,288 @@
   <meta property="og:description" content="Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html">
   <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Data Scientist", "description": "Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...", "applicationCategory": "Data Analytics", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
-  --bg: #0a0a0f;
-  --bg-card: #12121a;
-  --bg-terminal: #0d0d14;
-  --text: #f0f0f0;
-  --text-muted: #a0a0a0;
-  --accent-blue: #00d4ff;
-  --accent-violet: #7c3aed;
-  --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
   --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
-  font-family: var(--font);
+  font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
 }
-a { color: var(--accent-blue); text-decoration: none; transition: opacity 0.2s; }
-a:hover { opacity: 0.8; }
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
 .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+code { font-family: var(--font-mono); font-size: 0.875em; }
 
-/* Nav */
-.nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; }
-.nav-brand { font-weight: 800; font-size: 1.1rem; color: var(--text); }
-.nav-brand:hover { opacity: 1; }
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
 .nav-links { display: flex; gap: 28px; align-items: center; }
-.nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
-.nav-links a:hover { color: var(--accent-blue); opacity: 1; }
-.nav-links a.active { color: var(--accent-blue); }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
 
 /* Breadcrumbs */
 .breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
 .breadcrumbs a { color: var(--text-muted); }
-.breadcrumbs a:hover { color: var(--accent-blue); }
+.breadcrumbs a:hover { color: var(--accent); }
 .breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
 
 /* Page header */
 .page-header { padding: 48px 0 32px; }
-.page-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
-.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
 
 /* Search + Filter */
 .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
 .search-input {
-  flex: 1; min-width: 200px; padding: 12px 16px;
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
-  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
 }
-.search-input:focus { border-color: var(--accent-blue); }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 .search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
 .filter-select {
-  padding: 12px 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
   font-size: 0.9rem; outline: none; cursor: pointer;
 }
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
 
-/* Skill cards grid */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .skill-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
   display: flex; flex-direction: column;
 }
 .skill-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08), 0 0 60px rgba(124,58,237,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
 .skill-card h3 a { color: var(--text); }
-.skill-card h3 a:hover { color: var(--accent-blue); }
-.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
-.skill-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.skill-tag {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);
-  border-radius: 4px; color: var(--accent-blue);
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
 }
-.skill-domain-badge {
-  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
-  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
-  border-radius: 4px; color: var(--accent-violet);
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
-.tools-count {
-  font-family: var(--font-mono); font-size: 0.75rem;
-  color: var(--text-muted); margin-top: 10px;
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
 }
 
 /* Skill detail page */
 .skill-detail { padding-bottom: 80px; }
-.skill-detail h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
-.skill-detail h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 12px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
 .skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 .skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
 .skill-detail li { margin-bottom: 6px; }
 .skill-detail pre {
-  background: var(--bg-terminal); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius-sm); padding: 16px 20px; overflow-x: auto;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
   font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
-  color: var(--accent-blue); margin: 12px 0 20px;
+  color: var(--text); margin: 12px 0 20px;
 }
 .skill-detail code {
   font-family: var(--font-mono); font-size: 0.85rem;
-  background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
 }
 .skill-detail pre code { background: none; padding: 0; }
 
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
 /* Tools list */
-.tool-item { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 12px; }
-.tool-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
 .tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
 
 /* Related skills */
-.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
 
 /* Agents grid */
-.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
 .agent-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .agent-card:hover {
-  border-color: rgba(124,58,237,0.3);
-  box-shadow: 0 0 30px rgba(124,58,237,0.08), 0 0 60px rgba(0,212,255,0.06);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.agent-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
 
 /* Commands grid */
-.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-bottom: 60px; }
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
 .command-card {
-  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
-  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .command-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 0 30px rgba(0,212,255,0.08);
-  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
-.command-card h3 { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--accent-blue); }
-.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
 
 /* Footer */
-.footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px; }
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-links { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; color: var(--text-muted); }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
 .footer-links a { color: var(--text-muted); }
-.footer-links a:hover { color: var(--accent-blue); }
-.footer-sep { color: rgba(255,255,255,0.15); }
-.footer-credit { font-size: 0.875rem; color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
 .footer-credit a { color: var(--text); font-weight: 600; }
-
-/* Count badge */
-.count-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue); margin-left: 8px; }
-
-/* Badge bar (skill detail pages) */
-.badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
-.badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 10px;
-  border-radius: 6px; font-weight: 500; white-space: nowrap;
-}
-.badge-domain { background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: var(--accent-violet); }
-.badge-subdomain { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); color: var(--accent-blue); }
-.badge-version { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); }
-.badge-tools { background: rgba(40,200,64,0.1); border: 1px solid rgba(40,200,64,0.2); color: #28c840; }
-.badge-refs { background: rgba(254,188,46,0.1); border: 1px solid rgba(254,188,46,0.2); color: #febc2e; }
-
-/* Example skill pills on domain cards */
-.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-.example-pill {
-  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px; color: var(--text-muted);
-}
 
 /* Responsive */
 @media (max-width: 768px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
   .commands-grid { grid-template-columns: 1fr; }
   .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
 }
 @media (max-width: 480px) {
   .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
@@ -220,15 +300,14 @@ a:hover { opacity: 0.8; }
 </style>
 </head>
 <body>
-<nav class="nav">
-  <div class="container nav-inner">
-    <a href="https://borghei.github.io/Claude-Skills/" class="nav-brand"><span class="gradient-text">Claude Skills</span></a>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
     <div class="nav-links">
-      <a href="https://borghei.github.io/Claude-Skills/">Home</a>
       <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
       <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
       <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
-      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     </div>
   </div>
 </nav>
@@ -238,35 +317,64 @@ a:hover { opacity: 0.8; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Data Scientist</h1>
-    <div class="badge-bar"><span class="badge badge-domain">Data Analytics</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools">3 tools</span></div>
     <p class="page-subtitle">Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...</p>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="skill-tag">data-science</span><span class="skill-tag">machine-learning</span><span class="skill-tag">statistics</span><span class="skill-tag">modeling</span><span class="skill-tag">analytics</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Data Analytics</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">data-science</span><span class="tag">machine-learning</span><span class="tag">statistics</span><span class="tag">modeling</span><span class="tag">analytics</span></div>
   </div>
-  <h2>How to Use This Skill</h2>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-claude">
+  <pre><code># Add to your project
+cs install data-analytics/data-scientist ./
 
-<h3>With Claude Code</h3>
-<p>Copy the skill folder to your project:</p>
-<pre><code>git clone https://github.com/borghei/Claude-Skills.git
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
 cp -r Claude-Skills/data-analytics/data-scientist your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/data-scientist/
 
-<h3>With the CS CLI</h3>
-<pre><code>cs install data-analytics/data-scientist ./</code></pre>
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/data-scientist your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/data-scientist/
 
-<h3>With OpenAI Codex</h3>
-<p>The skill is available in <code>.codex/skills/data-scientist/</code></p>
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/data-scientist your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: data-analytics/data-scientist/SKILL.md
 
-<h3>With Gemini CLI</h3>
-<p>The skill is available in <code>.gemini/skills/data-scientist/</code></p>
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/data-analytics/data-scientist your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/data-analytics/data-scientist your-project/
 
-<h3>Manual Copy</h3>
-<pre><code>curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/data-analytics/data-scientist</code></pre>
-
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/data-analytics/data-scientist</code></pre>
+</div>
 <h3>Run Python Tools</h3>
 <pre><code>python data-analytics/data-scientist/scripts/tool_name.py --help</code></pre>
   
   
   <h2>Related Skills in Data Analytics</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html" class="skill-card" style="text-decoration:none"><h3>Analytics Engineer</h3><p>Expert analytics engineering covering data modeling, dbt development, data transformation, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/business-intelligence.html" class="skill-card" style="text-decoration:none"><h3>Business Intelligence</h3><p>Expert business intelligence covering dashboard design, data visualization, reporting...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-analyst.html" class="skill-card" style="text-decoration:none"><h3>Data Analyst</h3><p>Expert data analysis covering SQL querying, data visualization, statistical analysis, business...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/ml-ops-engineer.html" class="skill-card" style="text-decoration:none"><h3>Ml Ops Engineer</h3><p>Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature...</p></a></div>
-  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/data-analytics/data-scientist/SKILL.md" target="_blank" rel="noopener">View source on GitHub &rarr;</a></p>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/data-analytics/data-scientist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>
 <footer class="footer">
@@ -281,5 +389,15 @@ cp -r Claude-Skills/data-analytics/data-scientist your-project/</code></pre>
     <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+</script>
 </body>
 </html>
