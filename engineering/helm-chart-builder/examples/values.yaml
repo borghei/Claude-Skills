@@ -1,0 +1,112 @@
+# values.yaml — Helm values file with common anti-patterns
+#
+# This values file contains deliberate issues for the helm-chart-builder
+# skill analyzer to detect:
+#   - Missing resource limits/requests
+#   - No security context
+#   - Running as root
+#   - No liveness/readiness probes
+#   - Hardcoded secrets
+#   - No pod disruption budget
+#   - No network policies
+#   - No topology spread constraints
+
+replicaCount: 1   # ISSUE: single replica for a production workload
+
+image:
+  repository: acme/webapp
+  tag: latest       # ISSUE: "latest" tag is not reproducible
+  pullPolicy: Always
+
+# ISSUE: no imagePullSecrets configured for private registry
+
+nameOverride: ""
+fullnameOverride: "acme-webapp"
+
+service:
+  type: LoadBalancer   # ISSUE: LoadBalancer exposes directly; consider ClusterIP + Ingress
+  port: 80
+
+ingress:
+  enabled: false   # ISSUE: no ingress configured despite being a web app
+
+# ISSUE: no securityContext at pod or container level
+# Should include:
+#   runAsNonRoot: true
+#   readOnlyRootFilesystem: true
+#   allowPrivilegeEscalation: false
+#   capabilities: { drop: [ALL] }
+
+# ISSUE: no resource requests or limits defined
+# resources:
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+#   limits:
+#     cpu: 500m
+#     memory: 512Mi
+
+# ISSUE: no liveness or readiness probes
+# livenessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: http
+# readinessProbe:
+#   httpGet:
+#     path: /ready
+#     port: http
+
+env:
+  # ISSUE: hardcoded secrets in values (should use secretRef)
+  - name: DATABASE_URL
+    value: "postgres://admin:pr0duction_s3cret@postgres:5432/acme"
+  - name: REDIS_URL
+    value: "redis://:redis_pass@redis:6379"
+  - name: API_SECRET_KEY
+    value: "sk-live-abc123def456ghi789"
+  - name: NODE_ENV
+    value: "production"
+  - name: LOG_LEVEL
+    value: "debug"   # ISSUE: debug logging in production
+
+# ISSUE: no pod disruption budget
+# podDisruptionBudget:
+#   minAvailable: 1
+
+# ISSUE: no autoscaling configured for production
+autoscaling:
+  enabled: false
+
+# ISSUE: no nodeSelector, tolerations, or affinity rules
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# ISSUE: no topology spread constraints for HA
+# topologySpreadConstraints: []
+
+# ISSUE: no network policy
+# networkPolicy:
+#   enabled: false
+
+# ISSUE: no service account configuration
+serviceAccount:
+  create: false
+
+# Dependency values
+postgresql:
+  enabled: true
+  auth:
+    # ISSUE: hardcoded database password
+    postgresPassword: "supersecret123"
+    database: acme
+  primary:
+    persistence:
+      size: 10Gi
+    # ISSUE: no resource limits on database
+
+redis:
+  enabled: true
+  auth:
+    password: "redis_pass"   # ISSUE: hardcoded password
+  # ISSUE: no resource limits on cache

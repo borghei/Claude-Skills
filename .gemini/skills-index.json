@@ -1,0 +1,3031 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-04-02",
+  "total_skills": 203,
+  "skills": [
+    {
+      "name": "churn-prevention",
+      "description": "SaaS churn reduction covering cancel flow design, dynamic save offers, exit survey architecture, dunning sequences, payment recovery, win-back campaigns, and churn impact modeling.",
+      "domain": "business-growth",
+      "path": "business-growth/churn-prevention/SKILL.md",
+      "tools": [
+        "churn_impact_calculator.py",
+        "dunning_sequence_analyzer.py",
+        "exit_survey_analyzer.py"
+      ],
+      "tags": [
+        "churn",
+        "retention",
+        "cancel-flow",
+        "dunning",
+        "payment-recovery",
+        "win-back"
+      ]
+    },
+    {
+      "name": "competitive-teardown",
+      "description": "Systematic competitor analysis covering product teardowns, 12-dimension scoring rubric, feature comparison matrices, SWOT analysis, pricing model deconstruction, UX audits, and strategic action plans ...",
+      "domain": "business-growth",
+      "path": "business-growth/competitive-teardown/SKILL.md",
+      "tools": [
+        "battle_card_generator.py",
+        "competitor_scorer.py",
+        "feature_matrix_builder.py"
+      ],
+      "tags": [
+        "competitive-intelligence",
+        "competitor-analysis",
+        "product-strategy",
+        "battle-cards",
+        "market-analysis"
+      ]
+    },
+    {
+      "name": "competitor-alternatives",
+      "description": "Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content archite...",
+      "domain": "business-growth",
+      "path": "business-growth/competitor-alternatives/SKILL.md",
+      "tools": [
+        "comparison_content_scorer.py",
+        "comparison_page_planner.py",
+        "competitor_data_tracker.py"
+      ],
+      "tags": [
+        "competitive-content",
+        "seo",
+        "comparison-pages",
+        "alternative-pages",
+        "sales-enablement"
+      ]
+    },
+    {
+      "name": "contract-and-proposal-writer",
+      "description": "Generate production-ready business documents including freelance contracts, project proposals, SOWs, NDAs, and MSAs with jurisdiction-aware clauses. Covers US (Delaware), EU (GDPR), UK, and DACH (Germ...",
+      "domain": "business-growth",
+      "path": "business-growth/contract-and-proposal-writer/SKILL.md",
+      "tools": [
+        "contract_clause_checker.py",
+        "contract_comparison_analyzer.py",
+        "proposal_cost_estimator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "customer-success-manager",
+      "description": "Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success",
+      "domain": "business-growth",
+      "path": "business-growth/customer-success-manager/SKILL.md",
+      "tools": [
+        "churn_risk_analyzer.py",
+        "expansion_opportunity_scorer.py",
+        "health_score_calculator.py"
+      ],
+      "tags": [
+        "customer-success",
+        "churn",
+        "health-score",
+        "expansion",
+        "saas"
+      ]
+    },
+    {
+      "name": "form-cro",
+      "description": "Form optimization for lead capture, contact, demo request, application, and checkout forms. Covers field-cost analysis, multi-step form design, validation UX, mobile optimization, and A/B testing fram...",
+      "domain": "business-growth",
+      "path": "business-growth/form-cro/SKILL.md",
+      "tools": [
+        "ab_test_calculator.py",
+        "field_cost_analyzer.py",
+        "form_scorer.py"
+      ],
+      "tags": [
+        "cro",
+        "forms",
+        "lead-capture",
+        "conversion-optimization",
+        "ux"
+      ]
+    },
+    {
+      "name": "free-tool-strategy",
+      "description": "Free tool marketing strategy covering idea evaluation, tool design, lead capture architecture, SEO landing pages, launch playbook, and ROI measurement for calculators, generators, checkers, graders, a...",
+      "domain": "business-growth",
+      "path": "business-growth/free-tool-strategy/SKILL.md",
+      "tools": [
+        "launch_checklist_generator.py",
+        "tool_idea_scorer.py",
+        "tool_roi_calculator.py"
+      ],
+      "tags": [
+        "growth",
+        "free-tools",
+        "engineering-as-marketing",
+        "lead-generation",
+        "product-led-growth"
+      ]
+    },
+    {
+      "name": "onboarding-cro",
+      "description": "Post-signup user onboarding optimization covering activation metrics, time-to-value reduction, onboarding flow design, empty state optimization, multi-channel coordination, and stalled user recovery.",
+      "domain": "business-growth",
+      "path": "business-growth/onboarding-cro/SKILL.md",
+      "tools": [
+        "activation_funnel_analyzer.py",
+        "onboarding_checklist_scorer.py",
+        "ttv_estimator.py"
+      ],
+      "tags": [
+        "cro",
+        "onboarding",
+        "activation",
+        "user-experience",
+        "retention",
+        "time-to-value"
+      ]
+    },
+    {
+      "name": "page-cro",
+      "description": "Landing page and marketing page conversion rate optimization covering value proposition clarity, headline effectiveness, CTA hierarchy, visual flow, social proof placement, objection handling, and str...",
+      "domain": "business-growth",
+      "path": "business-growth/page-cro/SKILL.md",
+      "tools": [
+        "conversion_benchmark_calculator.py",
+        "headline_scorer.py",
+        "page_cro_scorer.py"
+      ],
+      "tags": [
+        "cro",
+        "landing-page",
+        "conversion-optimization",
+        "copywriting",
+        "ux"
+      ]
+    },
+    {
+      "name": "paywall-upgrade-cro",
+      "description": "In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.",
+      "domain": "business-growth",
+      "path": "business-growth/paywall-upgrade-cro/SKILL.md",
+      "tools": [
+        "paywall_copy_scorer.py",
+        "paywall_trigger_auditor.py",
+        "upgrade_funnel_analyzer.py"
+      ],
+      "tags": [
+        "cro",
+        "paywall",
+        "upgrade",
+        "freemium",
+        "monetization",
+        "upsell"
+      ]
+    },
+    {
+      "name": "popup-cro",
+      "description": "Popup and modal optimization for conversion. Covers exit-intent, slide-ins, banners, timing optimization, frequency capping, audience targeting, compliance, and A/B testing frameworks for lead capture...",
+      "domain": "business-growth",
+      "path": "business-growth/popup-cro/SKILL.md",
+      "tools": [
+        "popup_ab_test_calculator.py",
+        "popup_roi_estimator.py",
+        "popup_strategy_auditor.py"
+      ],
+      "tags": [
+        "cro",
+        "popup",
+        "modal",
+        "exit-intent",
+        "lead-capture",
+        "conversion-optimization"
+      ]
+    },
+    {
+      "name": "pricing-strategy",
+      "description": "SaaS pricing design and optimization covering value metric selection, tier architecture, price point research, pricing page design, price increase execution, and competitive pricing analysis.",
+      "domain": "business-growth",
+      "path": "business-growth/pricing-strategy/SKILL.md",
+      "tools": [
+        "price_increase_modeler.py",
+        "price_sensitivity_calculator.py",
+        "pricing_model_analyzer.py"
+      ],
+      "tags": [
+        "pricing",
+        "monetization",
+        "packaging",
+        "saas",
+        "value-based-pricing",
+        "revenue"
+      ]
+    },
+    {
+      "name": "referral-program",
+      "description": "Referral and affiliate program design covering referral loop architecture, incentive design, trigger moment optimization, viral coefficient modeling, affiliate program structure, and optimization play...",
+      "domain": "business-growth",
+      "path": "business-growth/referral-program/SKILL.md",
+      "tools": [
+        "affiliate_commission_modeler.py",
+        "referral_economics_calculator.py",
+        "referral_funnel_analyzer.py"
+      ],
+      "tags": [
+        "referral",
+        "affiliate",
+        "growth",
+        "viral",
+        "word-of-mouth",
+        "acquisition"
+      ]
+    },
+    {
+      "name": "revenue-operations",
+      "description": "Analyzes pipeline coverage, tracks forecast accuracy with MAPE, and calculates GTM efficiency metrics for SaaS revenue optimization",
+      "domain": "business-growth",
+      "path": "business-growth/revenue-operations/SKILL.md",
+      "tools": [
+        "forecast_accuracy_tracker.py",
+        "gtm_efficiency_calculator.py",
+        "pipeline_analyzer.py"
+      ],
+      "tags": [
+        "revops",
+        "pipeline",
+        "forecast",
+        "gtm-efficiency",
+        "saas-metrics"
+      ]
+    },
+    {
+      "name": "sales-engineer",
+      "description": "Analyzes RFP responses for coverage gaps, builds competitive feature matrices, and plans proof-of-concept engagements for pre-sales engineering",
+      "domain": "business-growth",
+      "path": "business-growth/sales-engineer/SKILL.md",
+      "tools": [
+        "competitive_matrix_builder.py",
+        "poc_planner.py",
+        "rfp_response_analyzer.py"
+      ],
+      "tags": [
+        "sales-engineering",
+        "demos",
+        "poc",
+        "technical-sales",
+        "solutions"
+      ]
+    },
+    {
+      "name": "signup-flow-cro",
+      "description": "Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patt...",
+      "domain": "business-growth",
+      "path": "business-growth/signup-flow-cro/SKILL.md",
+      "tools": [
+        "cc_requirement_analyzer.py",
+        "signup_field_auditor.py",
+        "signup_flow_scorer.py"
+      ],
+      "tags": [
+        "cro",
+        "signup",
+        "registration",
+        "authentication",
+        "conversion-optimization"
+      ]
+    },
+    {
+      "name": "board-deck-builder",
+      "description": "Assembles comprehensive board and investor update decks by pulling perspectives from all C-suite roles. Covers deck structure, narrative frameworks, bad news delivery, section-by-section guidance, and...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/board-deck-builder/SKILL.md",
+      "tools": [
+        "board_prep_checklist.py",
+        "deck_structure_validator.py",
+        "metrics_dashboard_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "board-meeting",
+      "description": "Multi-agent board meeting protocol for strategic decisions. Runs a structured 6-phase deliberation: context loading, independent C-suite contributions, critic analysis, synthesis, founder review, and ...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/board-meeting/SKILL.md",
+      "tools": [
+        "complexity_scorer.py",
+        "decision_tracker.py",
+        "meeting_simulator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ceo-advisor",
+      "description": "Executive leadership guidance for strategic decision-making, organizational development, and stakeholder management. Includes strategy analyzer, financial scenario modeling, board governance framework...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/ceo-advisor/SKILL.md",
+      "tools": [
+        "financial_scenario_analyzer.py",
+        "strategy_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "cfo-advisor",
+      "description": "Financial leadership advisor for CFOs on financial planning, fundraising, investor reporting, unit economics, cash management, and financial operations. Use when building a financial model, preparing ...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cfo-advisor/SKILL.md",
+      "tools": [
+        "burn_rate_calculator.py",
+        "financial_health_scorer.py",
+        "scenario_modeler.py"
+      ],
+      "tags": [
+        "finance",
+        "fundraising",
+        "accounting",
+        "reporting",
+        "treasury"
+      ]
+    },
+    {
+      "name": "change-management",
+      "description": "Framework for rolling out organizational changes without chaos. Covers the ADKAR model adapted for startups, communication templates, resistance patterns and responses, change fatigue management, and ...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/change-management/SKILL.md",
+      "tools": [
+        "adoption_tracker.py",
+        "change_readiness_assessor.py",
+        "communication_planner.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "chief-of-staff",
+      "description": "C-suite orchestration layer that routes founder questions to the right advisor role(s), triggers multi-role board meetings for complex decisions, synthesizes outputs, tracks decisions, and manages cro...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/chief-of-staff/SKILL.md",
+      "tools": [
+        "ecosystem_mapper.py",
+        "routing_engine.py",
+        "synthesis_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "chro-advisor",
+      "description": "People leadership for scaling companies. Covers hiring strategy, compensation design, org structure, performance management, retention, culture health, and workforce planning. Use when building hiring...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/chro-advisor/SKILL.md",
+      "tools": [
+        "comp_band_analyzer.py",
+        "headcount_planner.py",
+        "retention_risk_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ciso-advisor",
+      "description": "Security leadership for growth-stage companies. Risk quantification in dollars, compliance roadmap sequencing (SOC 2, ISO 27001, HIPAA, GDPR), security architecture strategy, incident response leaders...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/ciso-advisor/SKILL.md",
+      "tools": [
+        "compliance_tracker.py",
+        "risk_register_manager.py",
+        "security_posture_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "cmo-advisor",
+      "description": "Marketing leadership advisor for CMOs on brand strategy, demand generation, marketing operations, growth marketing, and revenue marketing alignment. Use when building a marketing strategy, planning de...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cmo-advisor/SKILL.md",
+      "tools": [
+        "brand_health_tracker.py",
+        "channel_mix_optimizer.py",
+        "marketing_roi_calculator.py"
+      ],
+      "tags": [
+        "marketing",
+        "brand",
+        "demand-gen",
+        "growth",
+        "revenue"
+      ]
+    },
+    {
+      "name": "company-os",
+      "description": "The meta-framework for how a company runs -- the connective tissue between all C-suite roles. Covers operating system selection (EOS, Scaling Up, OKR-native, hybrid), accountability charts, scorecards...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/company-os/SKILL.md",
+      "tools": [
+        "meeting_pulse_designer.py",
+        "rocks_tracker.py",
+        "scorecard_builder.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "competitive-intel",
+      "description": "Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Covers competitor identification, 8-dimension tracking, analysis frameworks, battlecard creation,...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/competitive-intel/SKILL.md",
+      "tools": [
+        "competitor_tracker.py",
+        "market_landscape_mapper.py",
+        "swot_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "coo-advisor",
+      "description": "Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence. Use when designing operational proc...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/coo-advisor/SKILL.md",
+      "tools": [
+        "capacity_modeler.py",
+        "operational_kpi_tracker.py",
+        "process_efficiency_scorer.py"
+      ],
+      "tags": [
+        "operations",
+        "process",
+        "scaling",
+        "efficiency",
+        "execution"
+      ]
+    },
+    {
+      "name": "cpo-advisor",
+      "description": "Strategic product leadership for scaling companies. Covers product vision, portfolio strategy, product-market fit measurement, product org design, north star metrics, investment postures, and board-le...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cpo-advisor/SKILL.md",
+      "tools": [
+        "feature_prioritizer.py",
+        "product_health_scorer.py",
+        "product_portfolio_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "cro-advisor",
+      "description": "Revenue leadership for B2B SaaS companies. Covers revenue forecasting, sales model design, pricing strategy, net revenue retention, sales team scaling, pipeline management, and board-level revenue rep...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cro-advisor/SKILL.md",
+      "tools": [
+        "pipeline_coverage_calculator.py",
+        "revenue_waterfall_analyzer.py",
+        "sales_efficiency_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "cs-onboard",
+      "description": "Structured C-suite onboarding through a founder interview that captures company context across 7 dimensions. Generates a persistent company context file used by all C-level advisory skills. Includes q...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cs-onboard/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "cto-advisor",
+      "description": "Technical leadership guidance for engineering teams, architecture decisions, and technology strategy. Includes tech debt analyzer, team scaling calculator, engineering metrics frameworks, technology e...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/cto-advisor/SKILL.md",
+      "tools": [
+        "team_scaling_calculator.py",
+        "tech_debt_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "culture-architect",
+      "description": "Build, measure, and evolve company culture as operational behavior -- not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health a...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/culture-architect/SKILL.md",
+      "tools": [
+        "culture_survey_analyzer.py",
+        "engagement_tracker.py",
+        "values_alignment_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "decision-logger",
+      "description": "Two-layer memory architecture for tracking executive decisions. Layer 1 stores raw deliberation transcripts, Layer 2 stores founder-approved decisions only. Future sessions read Layer 2 to prevent hal...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/decision-logger/SKILL.md",
+      "tools": [
+        "decision_quality_scorer.py",
+        "decision_tracker.py",
+        "decision_tree_builder.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "executive-mentor",
+      "description": "Adversarial thinking partner for founders and executives. Stress-tests plans, prepares for board meetings, dissects decisions with no good options, forces honest post-mortems, and identifies blind spo...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/executive-mentor/SKILL.md",
+      "tools": [
+        "coaching_plan_generator.py",
+        "goal_tracker.py",
+        "leadership_assessment.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "founder-coach",
+      "description": "Personal leadership development for founders and first-time CEOs. Covers founder archetype identification, delegation frameworks, energy management, CEO calendar audits, leadership style evolution, bl...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/founder-coach/SKILL.md",
+      "tools": [
+        "founder_wellness_checker.py",
+        "milestone_tracker.py",
+        "startup_stage_assessor.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "internal-narrative",
+      "description": "Build and maintain one coherent company story across all stakeholder audiences -- employees, investors, customers, candidates, and partners. Covers narrative construction, audience translation, contra...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/internal-narrative/SKILL.md",
+      "tools": [
+        "messaging_framework_generator.py",
+        "narrative_consistency_checker.py",
+        "stakeholder_mapper.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "intl-expansion",
+      "description": "International market expansion strategy for scaling companies. Covers market selection scoring, entry mode evaluation, localization requirements, regulatory compliance by region, go-to-market adaptati...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/intl-expansion/SKILL.md",
+      "tools": [
+        "localization_checklist.py",
+        "market_readiness_scorer.py",
+        "regulatory_mapper.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ma-playbook",
+      "description": "M&A strategy for acquiring companies or being acquired. Covers strategic rationale assessment, target screening, due diligence frameworks, valuation methodologies, deal structure, negotiation strategy...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/ma-playbook/SKILL.md",
+      "tools": [
+        "due_diligence_tracker.py",
+        "integration_planner.py",
+        "synergy_calculator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "org-health-diagnostic",
+      "description": "Cross-functional organizational health check combining signals from all C-suite roles. Scores 8 dimensions on a traffic-light scale with drill-down recommendations and cascade analysis. Use when asses...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/org-health-diagnostic/SKILL.md",
+      "tools": [
+        "engagement_benchmarker.py",
+        "org_health_scorer.py",
+        "span_of_control_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "scenario-war-room",
+      "description": "Cross-functional what-if modeling for compound adversity scenarios. Models cascading multi-variable risks across all business functions simultaneously. Unlike single-assumption stress tests, this show...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/scenario-war-room/SKILL.md",
+      "tools": [
+        "decision_tree_analyzer.py",
+        "impact_matrix_calculator.py",
+        "scenario_builder.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "strategic-alignment",
+      "description": "Cascades strategy from boardroom to individual contributor and detects misalignment. Covers strategy articulation testing, cascade mapping, orphan goal detection, conflicting goal identification, silo...",
+      "domain": "c-level-advisor",
+      "path": "c-level-advisor/strategic-alignment/SKILL.md",
+      "tools": [
+        "alignment_scorer.py",
+        "okr_cascade_validator.py",
+        "strategy_map_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "analytics-engineer",
+      "description": "Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...",
+      "domain": "data-analytics",
+      "path": "data-analytics/analytics-engineer/SKILL.md",
+      "tools": [
+        "doc_generator.py",
+        "impact_analyzer.py",
+        "quality_scorer.py",
+        "schema_diff.py"
+      ],
+      "tags": [
+        "analytics-engineering",
+        "dbt",
+        "data-modeling",
+        "transformation",
+        "semantic-layer"
+      ]
+    },
+    {
+      "name": "business-intelligence",
+      "description": "Expert business intelligence covering dashboard design, data visualization, reporting automation, and executive insights delivery. Use when designing dashboards, building KPI frameworks, automating sc...",
+      "domain": "data-analytics",
+      "path": "data-analytics/business-intelligence/SKILL.md",
+      "tools": [
+        "dashboard_spec_generator.py",
+        "kpi_tracker.py",
+        "metric_validator.py"
+      ],
+      "tags": [
+        "bi",
+        "dashboards",
+        "visualization",
+        "reporting",
+        "insights"
+      ]
+    },
+    {
+      "name": "data-analyst",
+      "description": "Expert data analysis covering SQL querying, data visualization, statistical analysis, business reporting, and data storytelling. Use when writing SQL queries, building dashboards, performing cohort or...",
+      "domain": "data-analytics",
+      "path": "data-analytics/data-analyst/SKILL.md",
+      "tools": [
+        "data_profiler.py",
+        "query_optimizer.py",
+        "report_generator.py"
+      ],
+      "tags": [
+        "analytics",
+        "sql",
+        "visualization",
+        "statistics",
+        "reporting"
+      ]
+    },
+    {
+      "name": "data-scientist",
+      "description": "Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...",
+      "domain": "data-analytics",
+      "path": "data-analytics/data-scientist/SKILL.md",
+      "tools": [
+        "experiment_tracker.py",
+        "feature_selector.py",
+        "hypothesis_tester.py"
+      ],
+      "tags": [
+        "data-science",
+        "machine-learning",
+        "statistics",
+        "modeling",
+        "analytics"
+      ]
+    },
+    {
+      "name": "ml-ops-engineer",
+      "description": "Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation. Use when deploying models to production, building training pipelines,...",
+      "domain": "data-analytics",
+      "path": "data-analytics/ml-ops-engineer/SKILL.md",
+      "tools": [
+        "drift_detector.py",
+        "model_registry.py",
+        "pipeline_validator.py"
+      ],
+      "tags": [
+        "mlops",
+        "deployment",
+        "pipelines",
+        "monitoring",
+        "feature-store"
+      ]
+    },
+    {
+      "name": "agent-designer",
+      "description": "Designs multi-agent system architectures with orchestration patterns, tool schemas, and performance evaluation. Use when building AI agent systems, designing agent workflows, creating tool schemas, or...",
+      "domain": "engineering",
+      "path": "engineering/agent-designer/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "agent-protocol",
+      "description": "Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when bui...",
+      "domain": "engineering",
+      "path": "engineering/agent-protocol/SKILL.md",
+      "tools": [
+        "capability_mapper.py",
+        "protocol_validator.py",
+        "schema_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "agent-workflow-designer",
+      "description": "Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple speci...",
+      "domain": "engineering",
+      "path": "engineering/agent-workflow-designer/SKILL.md",
+      "tools": [
+        "cost_estimator.py",
+        "workflow_validator.py",
+        "workflow_visualizer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "api-design-reviewer",
+      "description": "Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs, generates API scorecards, and detects breaking changes between versions. Use when designing APIs, reviewin...",
+      "domain": "engineering",
+      "path": "engineering/api-design-reviewer/SKILL.md",
+      "tools": [
+        "api_linter.py",
+        "api_scorecard.py",
+        "breaking_change_detector.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "api-test-suite-builder",
+      "description": "Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test gen...",
+      "domain": "engineering",
+      "path": "engineering/api-test-suite-builder/SKILL.md",
+      "tools": [
+        "contract_validator.py",
+        "coverage_analyzer.py",
+        "test_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "aws-solution-architect",
+      "description": "Design AWS architectures for startups using serverless patterns and IaC templates. Use when asked to design serverless architecture, create CloudFormation templates, optimize AWS costs, set up CI/CD p...",
+      "domain": "engineering",
+      "path": "engineering/aws-solution-architect/SKILL.md",
+      "tools": [
+        "architecture_designer.py",
+        "cost_optimizer.py",
+        "serverless_stack.py"
+      ],
+      "tags": [
+        "aws",
+        "serverless",
+        "cloudformation",
+        "cost-optimization"
+      ]
+    },
+    {
+      "name": "changelog-generator",
+      "description": "Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and co...",
+      "domain": "engineering",
+      "path": "engineering/changelog-generator/SKILL.md",
+      "tools": [
+        "breaking_change_detector.py",
+        "changelog_formatter.py",
+        "commit_parser.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ci-cd-pipeline-builder",
+      "description": "Design and generate CI/CD pipelines from detected project stack signals. Covers GitHub Actions, GitLab CI, CircleCI, and Buildkite with caching, matrix builds, deployment strategies (blue-green, canar...",
+      "domain": "engineering",
+      "path": "engineering/ci-cd-pipeline-builder/SKILL.md",
+      "tools": [
+        "cache_optimizer.py",
+        "pipeline_generator.py",
+        "pipeline_linter.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "claude-code-mastery",
+      "description": "",
+      "domain": "engineering",
+      "path": "engineering/claude-code-mastery/SKILL.md",
+      "tools": [
+        "claudemd_optimizer.py",
+        "context_analyzer.py",
+        "skill_scaffolder.py"
+      ],
+      "tags": [
+        "claude-code",
+        "skill-authoring",
+        "subagents",
+        "hooks"
+      ]
+    },
+    {
+      "name": "code-reviewer",
+      "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. ...",
+      "domain": "engineering",
+      "path": "engineering/code-reviewer/SKILL.md",
+      "tools": [
+        "code_quality_checker.py",
+        "pr_analyzer.py",
+        "review_report_generator.py"
+      ],
+      "tags": [
+        "code-review",
+        "pull-request",
+        "code-quality",
+        "best-practices"
+      ]
+    },
+    {
+      "name": "codebase-onboarding",
+      "description": "Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines...",
+      "domain": "engineering",
+      "path": "engineering/codebase-onboarding/SKILL.md",
+      "tools": [
+        "architecture_mapper.py",
+        "onboarding_generator.py",
+        "setup_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "codex-cli-specialist",
+      "description": "This skill should be used when the user asks to \"set up Codex CLI\", \"convert skills for Codex\", \"write cross-platform AI skills\", \"configure agents/openai.yaml\", \"build skills index\", \"validate skill ...",
+      "domain": "engineering",
+      "path": "engineering/codex-cli-specialist/SKILL.md",
+      "tools": [
+        "codex_skill_converter.py",
+        "cross_platform_validator.py",
+        "skills_index_builder.py"
+      ],
+      "tags": [
+        "openai-codex",
+        "cross-platform",
+        "skill-conversion",
+        "cli"
+      ]
+    },
+    {
+      "name": "context-engine",
+      "description": "Context management engine for AI coding agents. Handles context window optimization, persistent memory across sessions, context retrieval strategies, token budget allocation, and knowledge graph const...",
+      "domain": "engineering",
+      "path": "engineering/context-engine/SKILL.md",
+      "tools": [
+        "context_analyzer.py",
+        "context_pruner.py",
+        "memory_indexer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "database-designer",
+      "description": "Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...",
+      "domain": "engineering",
+      "path": "engineering/database-designer/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "database-schema-designer",
+      "description": "Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...",
+      "domain": "engineering",
+      "path": "engineering/database-schema-designer/SKILL.md",
+      "tools": [
+        "erd_generator.py",
+        "migration_diffr.py",
+        "schema_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "dependency-auditor",
+      "description": "Scans project dependencies for vulnerabilities, license compliance issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning u...",
+      "domain": "engineering",
+      "path": "engineering/dependency-auditor/SKILL.md",
+      "tools": [
+        "dep_scanner.py",
+        "license_checker.py",
+        "upgrade_planner.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "design-auditor",
+      "description": "Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations",
+      "domain": "engineering",
+      "path": "engineering/design-auditor/SKILL.md",
+      "tools": [
+        "ai_slop_detector.py",
+        "color_contrast_checker.py",
+        "design_scorer.py",
+        "design_system_validator.py"
+      ],
+      "tags": [
+        "design-audit",
+        "ai-slop",
+        "color-contrast",
+        "accessibility"
+      ]
+    },
+    {
+      "name": "devops-workflow-engineer",
+      "description": "Guides teams through designing, implementing, and optimizing CI/CD pipelines, GitHub Actions workflows, deployment automation, and agentic workflow patterns. Provides production-ready templates, cost ...",
+      "domain": "engineering",
+      "path": "engineering/devops-workflow-engineer/SKILL.md",
+      "tools": [
+        "deployment_planner.py",
+        "pipeline_analyzer.py",
+        "workflow_generator.py"
+      ],
+      "tags": [
+        "github-actions",
+        "ci-cd",
+        "deployment",
+        "workflows"
+      ]
+    },
+    {
+      "name": "doc-drift-detector",
+      "description": "Automated documentation drift detection and synchronization with code change analysis, staleness scoring, and intelligent update recommendations",
+      "domain": "engineering",
+      "path": "engineering/doc-drift-detector/SKILL.md",
+      "tools": [
+        "api_doc_validator.py",
+        "doc_staleness_scorer.py",
+        "drift_analyzer.py",
+        "link_checker.py"
+      ],
+      "tags": [
+        "documentation",
+        "staleness",
+        "api-docs",
+        "drift-analysis"
+      ]
+    },
+    {
+      "name": "env-secrets-manager",
+      "description": "Complete environment and secrets management lifecycle. Covers .env file scaffolding, validation scripts, secret leak detection in git history, credential rotation playbooks, and integration with Hashi...",
+      "domain": "engineering",
+      "path": "engineering/env-secrets-manager/SKILL.md",
+      "tools": [
+        "env_sync_checker.py",
+        "env_validator.py",
+        "secret_scanner.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "git-worktree-manager",
+      "description": "Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...",
+      "domain": "engineering",
+      "path": "engineering/git-worktree-manager/SKILL.md",
+      "tools": [
+        "port_allocator.py",
+        "worktree_manager.py",
+        "worktree_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "incident-commander",
+      "description": "Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...",
+      "domain": "engineering",
+      "path": "engineering/incident-commander/SKILL.md",
+      "tools": [
+        "incident_classifier.py",
+        "incident_timeline_builder.py",
+        "pir_generator.py",
+        "postmortem_generator.py",
+        "severity_classifier.py",
+        "timeline_reconstructor.py"
+      ],
+      "tags": [
+        "incident-response",
+        "severity-classification",
+        "rca",
+        "postmortem"
+      ]
+    },
+    {
+      "name": "interview-system-designer",
+      "description": "This skill should be used when the user asks to \"design interview processes\", \"create hiring pipelines\", \"calibrate interview loops\", \"generate interview questions\", \"design competency matrices\", \"ana...",
+      "domain": "engineering",
+      "path": "engineering/interview-system-designer/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "mcp-server-builder",
+      "description": "Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and P...",
+      "domain": "engineering",
+      "path": "engineering/mcp-server-builder/SKILL.md",
+      "tools": [
+        "openapi_converter.py",
+        "server_scaffolder.py",
+        "tool_linter.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "migration-architect",
+      "description": "Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or vers...",
+      "domain": "engineering",
+      "path": "engineering/migration-architect/SKILL.md",
+      "tools": [
+        "compatibility_checker.py",
+        "migration_planner.py",
+        "rollback_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "monorepo-navigator",
+      "description": "Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, mi...",
+      "domain": "engineering",
+      "path": "engineering/monorepo-navigator/SKILL.md",
+      "tools": [
+        "dependency_graph.py",
+        "impact_detector.py",
+        "package_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ms365-tenant-manager",
+      "description": "Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...",
+      "domain": "engineering",
+      "path": "engineering/ms365-tenant-manager/SKILL.md",
+      "tools": [
+        "powershell_generator.py",
+        "tenant_setup.py",
+        "user_management.py"
+      ],
+      "tags": [
+        "microsoft-365",
+        "azure-ad",
+        "office-365",
+        "administration"
+      ]
+    },
+    {
+      "name": "observability-designer",
+      "description": "Designs comprehensive observability strategies including SLI/SLO frameworks, alerting optimization, and dashboard generation. Use when implementing monitoring for a production service, creating or tun...",
+      "domain": "engineering",
+      "path": "engineering/observability-designer/SKILL.md",
+      "tools": [
+        "alert_optimizer.py",
+        "dashboard_generator.py",
+        "slo_designer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "performance-profiler",
+      "description": "Systematic performance profiling for Node.js, Python, and Go applications. Covers CPU flamegraphs, memory leak detection, bundle analysis, database query optimization, N+1 detection, load testing with...",
+      "domain": "engineering",
+      "path": "engineering/performance-profiler/SKILL.md",
+      "tools": [
+        "benchmark_reporter.py",
+        "bottleneck_detector.py",
+        "resource_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "playwright-pro",
+      "description": "Production-grade end-to-end testing with Playwright. Covers test generation from user stories, page object patterns, locator strategy, flaky test diagnosis, Cypress/Selenium migration, CI integration,...",
+      "domain": "engineering",
+      "path": "engineering/playwright-pro/SKILL.md",
+      "tools": [
+        "page_object_generator.py",
+        "test_analyzer.py",
+        "test_report_parser.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "pr-review-expert",
+      "description": "Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...",
+      "domain": "engineering",
+      "path": "engineering/pr-review-expert/SKILL.md",
+      "tools": [
+        "blast_radius_calculator.py",
+        "diff_analyzer.py",
+        "review_checklist_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "prompt-engineer-toolkit",
+      "description": "Production prompt engineering frameworks for building, testing, versioning, and evaluating prompts. Covers chain-of-thought, few-shot design, system prompt architecture, prompt regression testing, and...",
+      "domain": "engineering",
+      "path": "engineering/prompt-engineer-toolkit/SKILL.md",
+      "tools": [
+        "eval_scorer.py",
+        "prompt_analyzer.py",
+        "prompt_diff.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "qa-browser-automation",
+      "description": "Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage",
+      "domain": "engineering",
+      "path": "engineering/qa-browser-automation/SKILL.md",
+      "tools": [
+        "accessibility_auditor.py",
+        "qa_health_scorer.py",
+        "test_report_generator.py",
+        "visual_regression_tracker.py"
+      ],
+      "tags": [
+        "browser-qa",
+        "wcag",
+        "visual-regression",
+        "health-scoring"
+      ]
+    },
+    {
+      "name": "rag-architect",
+      "description": "Designs production-grade RAG pipelines with chunking optimization, retrieval evaluation, and pipeline architecture. Use when building a RAG system, selecting a chunking strategy, choosing a vector dat...",
+      "domain": "engineering",
+      "path": "engineering/rag-architect/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "release-manager",
+      "description": "Automates release management with changelog generation, semantic versioning, and release readiness checks. Use when preparing releases, generating changelogs, bumping versions, or validating release c...",
+      "domain": "engineering",
+      "path": "engineering/release-manager/SKILL.md",
+      "tools": [],
+      "tags": []
+    },
+    {
+      "name": "release-orchestrator",
+      "description": "End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation",
+      "domain": "engineering",
+      "path": "engineering/release-orchestrator/SKILL.md",
+      "tools": [
+        "changelog_generator.py",
+        "preflight_checker.py",
+        "release_readiness_scorer.py",
+        "version_bumper.py"
+      ],
+      "tags": [
+        "release-pipeline",
+        "versioning",
+        "pre-flight",
+        "readiness"
+      ]
+    },
+    {
+      "name": "runbook-generator",
+      "description": "Generate production-grade operational runbooks from codebase analysis. Covers deployment procedures, incident response, database maintenance, scaling operations, and monitoring setup. Every step inclu...",
+      "domain": "engineering",
+      "path": "engineering/runbook-generator/SKILL.md",
+      "tools": [
+        "runbook_scaffolder.py",
+        "runbook_validator.py",
+        "staleness_checker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "saas-scaffolder",
+      "description": "Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...",
+      "domain": "engineering",
+      "path": "engineering/saas-scaffolder/SKILL.md",
+      "tools": [
+        "feature_flag_manager.py",
+        "saas_scaffolder.py",
+        "tenant_config_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "self-improving-agent",
+      "description": "Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...",
+      "domain": "engineering",
+      "path": "engineering/self-improving-agent/SKILL.md",
+      "tools": [
+        "feedback_analyzer.py",
+        "regression_detector.py",
+        "rule_manager.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "senior-architect",
+      "description": "This skill should be used when the user asks to \"design system architecture\", \"evaluate microservices vs monolith\", \"create architecture diagrams\", \"analyze dependencies\", \"choose a database\", \"plan f...",
+      "domain": "engineering",
+      "path": "engineering/senior-architect/SKILL.md",
+      "tools": [
+        "architecture_diagram_generator.py",
+        "dependency_analyzer.py",
+        "project_architect.py"
+      ],
+      "tags": [
+        "system-design",
+        "distributed-systems",
+        "architecture",
+        "adr",
+        "scalability"
+      ]
+    },
+    {
+      "name": "senior-backend",
+      "description": "This skill should be used when the user asks to \"design REST APIs\", \"optimize database queries\", \"implement authentication\", \"build microservices\", \"review backend code\", \"set up GraphQL\", \"handle dat...",
+      "domain": "engineering",
+      "path": "engineering/senior-backend/SKILL.md",
+      "tools": [
+        "api_load_tester.py",
+        "api_scaffolder.py",
+        "database_migration_tool.py"
+      ],
+      "tags": [
+        "api-design",
+        "microservices",
+        "databases",
+        "caching",
+        "queues"
+      ]
+    },
+    {
+      "name": "senior-cloud-architect",
+      "description": "",
+      "domain": "engineering",
+      "path": "engineering/senior-cloud-architect/SKILL.md",
+      "tools": [],
+      "tags": [
+        "cloud",
+        "aws",
+        "gcp",
+        "azure",
+        "architecture",
+        "infrastructure",
+        "terraform"
+      ]
+    },
+    {
+      "name": "senior-computer-vision",
+      "description": "Computer vision engineering skill for object detection, image segmentation, and visual AI systems. Covers CNN and Vision Transformer architectures, YOLO/Faster R-CNN/DETR detection, Mask R-CNN/SAM seg...",
+      "domain": "engineering",
+      "path": "engineering/senior-computer-vision/SKILL.md",
+      "tools": [
+        "dataset_pipeline_builder.py",
+        "inference_optimizer.py",
+        "vision_model_trainer.py"
+      ],
+      "tags": [
+        "object-detection",
+        "image-segmentation",
+        "computer-vision",
+        "model-training"
+      ]
+    },
+    {
+      "name": "senior-data-engineer",
+      "description": "Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeli...",
+      "domain": "engineering",
+      "path": "engineering/senior-data-engineer/SKILL.md",
+      "tools": [
+        "data_quality_validator.py",
+        "etl_performance_optimizer.py",
+        "pipeline_orchestrator.py"
+      ],
+      "tags": [
+        "airflow",
+        "spark",
+        "data-pipelines",
+        "warehousing",
+        "etl"
+      ]
+    },
+    {
+      "name": "senior-data-scientist",
+      "description": "",
+      "domain": "engineering",
+      "path": "engineering/senior-data-scientist/SKILL.md",
+      "tools": [
+        "experiment_designer.py",
+        "feature_engineering_pipeline.py",
+        "model_evaluation_suite.py"
+      ],
+      "tags": [
+        "data-science",
+        "ml",
+        "statistics",
+        "experimentation",
+        "python",
+        "mlops"
+      ]
+    },
+    {
+      "name": "senior-devops",
+      "description": "Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deploymen...",
+      "domain": "engineering",
+      "path": "engineering/senior-devops/SKILL.md",
+      "tools": [
+        "deployment_manager.py",
+        "pipeline_generator.py",
+        "terraform_scaffolder.py"
+      ],
+      "tags": [
+        "docker",
+        "kubernetes",
+        "terraform",
+        "ci-cd",
+        "monitoring"
+      ]
+    },
+    {
+      "name": "senior-frontend",
+      "description": "Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding fronte...",
+      "domain": "engineering",
+      "path": "engineering/senior-frontend/SKILL.md",
+      "tools": [
+        "bundle_analyzer.py",
+        "component_generator.py",
+        "frontend_scaffolder.py"
+      ],
+      "tags": [
+        "react",
+        "typescript",
+        "accessibility",
+        "performance",
+        "state-management"
+      ]
+    },
+    {
+      "name": "senior-fullstack",
+      "description": "Fullstack development toolkit with project scaffolding for Next.js/FastAPI/MERN/Django stacks and code quality analysis. Use when scaffolding new projects, analyzing codebase quality, or implementing ...",
+      "domain": "engineering",
+      "path": "engineering/senior-fullstack/SKILL.md",
+      "tools": [
+        "code_quality_analyzer.py",
+        "project_scaffolder.py"
+      ],
+      "tags": [
+        "react",
+        "nodejs",
+        "databases",
+        "api-design",
+        "system-architecture"
+      ]
+    },
+    {
+      "name": "senior-ml-engineer",
+      "description": "ML engineering skill for productionizing models, building MLOps pipelines, and integrating LLMs. Covers model deployment, feature stores, drift monitoring, RAG systems, and cost optimization.",
+      "domain": "engineering",
+      "path": "engineering/senior-ml-engineer/SKILL.md",
+      "tools": [
+        "ml_monitoring_suite.py",
+        "model_deployment_pipeline.py",
+        "rag_system_builder.py"
+      ],
+      "tags": [
+        "ml-pipelines",
+        "model-deployment",
+        "mlops",
+        "rag"
+      ]
+    },
+    {
+      "name": "senior-mobile",
+      "description": "",
+      "domain": "engineering",
+      "path": "engineering/senior-mobile/SKILL.md",
+      "tools": [
+        "app_performance_analyzer.py",
+        "mobile_scaffold.py",
+        "store_metadata_generator.py"
+      ],
+      "tags": [
+        "mobile",
+        "ios",
+        "android",
+        "react-native",
+        "flutter",
+        "swift",
+        "kotlin"
+      ]
+    },
+    {
+      "name": "senior-prompt-engineer",
+      "description": "This skill should be used when the user asks to \"optimize prompts\", \"design prompt templates\", \"evaluate LLM outputs\", \"build agentic systems\", \"implement RAG\", \"create few-shot examples\", \"analyze to...",
+      "domain": "engineering",
+      "path": "engineering/senior-prompt-engineer/SKILL.md",
+      "tools": [
+        "agent_orchestrator.py",
+        "prompt_optimizer.py",
+        "rag_evaluator.py"
+      ],
+      "tags": [
+        "prompt-optimization",
+        "llm-evaluation",
+        "agents",
+        "prompt-engineering"
+      ]
+    },
+    {
+      "name": "senior-qa",
+      "description": "This skill should be used when the user asks to \"generate tests\", \"write unit tests\", \"analyze test coverage\", \"scaffold E2E tests\", \"set up Playwright\", \"configure Jest\", \"implement testing patterns\"...",
+      "domain": "engineering",
+      "path": "engineering/senior-qa/SKILL.md",
+      "tools": [
+        "coverage_analyzer.py",
+        "e2e_test_scaffolder.py",
+        "test_suite_generator.py"
+      ],
+      "tags": [
+        "test-strategy",
+        "automation",
+        "performance-testing",
+        "test-frameworks"
+      ]
+    },
+    {
+      "name": "senior-secops",
+      "description": "Comprehensive SecOps skill for application security, vulnerability management, compliance, and secure development practices. Includes security scanning, vulnerability assessment, compliance checking, ...",
+      "domain": "engineering",
+      "path": "engineering/senior-secops/SKILL.md",
+      "tools": [
+        "compliance_checker.py",
+        "security_scanner.py",
+        "vulnerability_assessor.py"
+      ],
+      "tags": [
+        "security-operations",
+        "vulnerability-management",
+        "incident-response",
+        "siem"
+      ]
+    },
+    {
+      "name": "senior-security",
+      "description": "Security engineering toolkit for threat modeling, vulnerability analysis, secure architecture, and penetration testing. Includes STRIDE analysis, OWASP guidance, cryptography patterns, and security sc...",
+      "domain": "engineering",
+      "path": "engineering/senior-security/SKILL.md",
+      "tools": [
+        "secret_scanner.py",
+        "threat_modeler.py"
+      ],
+      "tags": [
+        "owasp",
+        "threat-modeling",
+        "penetration-testing",
+        "application-security"
+      ]
+    },
+    {
+      "name": "skill-security-auditor",
+      "description": "Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, c...",
+      "domain": "engineering",
+      "path": "engineering/skill-security-auditor/SKILL.md",
+      "tools": [
+        "code_scanner.py",
+        "prompt_injection_scanner.py",
+        "supply_chain_checker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "skill-tester",
+      "description": "Validates and scores Claude Code skill packages for quality, completeness, and best practices compliance. Tests Python scripts, checks YAML frontmatter, and generates quality reports. Use when creatin...",
+      "domain": "engineering",
+      "path": "engineering/skill-tester/SKILL.md",
+      "tools": [
+        "quality_scorer.py",
+        "script_tester.py",
+        "skill_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "stripe-integration-expert",
+      "description": "Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent w...",
+      "domain": "engineering",
+      "path": "engineering/stripe-integration-expert/SKILL.md",
+      "tools": [
+        "checkout_scaffolder.py",
+        "integration_auditor.py",
+        "webhook_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "tdd-guide",
+      "description": "Test-driven development workflow with test generation, coverage analysis, and multi-framework support",
+      "domain": "engineering",
+      "path": "engineering/tdd-guide/SKILL.md",
+      "tools": [
+        "coverage_analyzer.py",
+        "fixture_generator.py",
+        "format_detector.py",
+        "framework_adapter.py",
+        "metrics_calculator.py",
+        "output_formatter.py",
+        "tdd_workflow.py",
+        "test_generator.py"
+      ],
+      "tags": [
+        "tdd",
+        "test-driven-development",
+        "testing",
+        "red-green-refactor"
+      ]
+    },
+    {
+      "name": "tech-debt-tracker",
+      "description": "Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...",
+      "domain": "engineering",
+      "path": "engineering/tech-debt-tracker/SKILL.md",
+      "tools": [
+        "debt_dashboard.py",
+        "debt_prioritizer.py",
+        "debt_scanner.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "tech-stack-evaluator",
+      "description": "Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ...",
+      "domain": "engineering",
+      "path": "engineering/tech-stack-evaluator/SKILL.md",
+      "tools": [
+        "ecosystem_analyzer.py",
+        "format_detector.py",
+        "migration_analyzer.py",
+        "report_generator.py",
+        "security_assessor.py",
+        "stack_comparator.py",
+        "tco_calculator.py"
+      ],
+      "tags": [
+        "framework-comparison",
+        "tco-analysis",
+        "technology-evaluation"
+      ]
+    },
+    {
+      "name": "financial-analyst",
+      "description": "Performs financial ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction for strategic decision-making",
+      "domain": "finance",
+      "path": "finance/financial-analyst/SKILL.md",
+      "tools": [
+        "budget_variance_analyzer.py",
+        "dcf_valuation.py",
+        "forecast_builder.py",
+        "ratio_calculator.py"
+      ],
+      "tags": [
+        "financial-analysis",
+        "dcf",
+        "budgeting",
+        "forecasting",
+        "ratios"
+      ]
+    },
+    {
+      "name": "hr-business-partner",
+      "description": "Expert HR business partnership covering talent strategy, organizational development, employee relations, and people analytics. Use when building workforce plans, designing performance review cycles, r...",
+      "domain": "hr-operations",
+      "path": "hr-operations/hr-business-partner/SKILL.md",
+      "tools": [
+        "compensation_analyzer.py",
+        "org_health_scorer.py",
+        "workforce_dashboard.py"
+      ],
+      "tags": [
+        "hr",
+        "talent",
+        "org-development",
+        "employee-relations",
+        "people-analytics"
+      ]
+    },
+    {
+      "name": "operations-manager",
+      "description": "Expert operations management covering process optimization, operational efficiency, resource management, and continuous improvement. Use when designing workflows, auditing operational maturity, buildi...",
+      "domain": "hr-operations",
+      "path": "hr-operations/operations-manager/SKILL.md",
+      "tools": [
+        "capacity_planner.py",
+        "process_mapper.py",
+        "sla_tracker.py"
+      ],
+      "tags": [
+        "operations",
+        "efficiency",
+        "process",
+        "optimization",
+        "management"
+      ]
+    },
+    {
+      "name": "people-analytics",
+      "description": "Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...",
+      "domain": "hr-operations",
+      "path": "hr-operations/people-analytics/SKILL.md",
+      "tools": [
+        "attrition_predictor.py",
+        "headcount_planner.py",
+        "survey_analyzer.py"
+      ],
+      "tags": [
+        "people-analytics",
+        "hr-metrics",
+        "workforce",
+        "insights",
+        "predictive"
+      ]
+    },
+    {
+      "name": "talent-acquisition",
+      "description": "Expert talent acquisition covering recruiting strategy, candidate sourcing, interview design, employer branding, and hiring analytics. Use when building job descriptions, designing interview scorecard...",
+      "domain": "hr-operations",
+      "path": "hr-operations/talent-acquisition/SKILL.md",
+      "tools": [
+        "candidate_pipeline_tracker.py",
+        "interview_scorecard.py",
+        "job_posting_analyzer.py"
+      ],
+      "tags": [
+        "recruiting",
+        "hiring",
+        "sourcing",
+        "interviews",
+        "employer-brand"
+      ]
+    },
+    {
+      "name": "ad-creative",
+      "description": "Design high-converting ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok. Includes platform-specific format specs, A/B testing frameworks, headline formulas, creative iteration methodol...",
+      "domain": "marketing",
+      "path": "marketing/ad-creative/SKILL.md",
+      "tools": [
+        "creative_fatigue_detector.py",
+        "creative_matrix_builder.py",
+        "headline_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ai-seo",
+      "description": "Optimize content for AI search engines including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Microsoft Copilot. Covers generative engine optimization (GEO), AI citability audits, con...",
+      "domain": "marketing",
+      "path": "marketing/ai-seo/SKILL.md",
+      "tools": [
+        "content_scorer.py",
+        "keyword_analyzer.py",
+        "serp_simulator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "analytics-tracking",
+      "description": "End-to-end analytics implementation for web and SaaS products. Covers GA4 configuration, Google Tag Manager setup, event taxonomy design, conversion tracking across Google Ads and Meta, cross-domain t...",
+      "domain": "marketing",
+      "path": "marketing/analytics-tracking/SKILL.md",
+      "tools": [
+        "event_schema_checker.py",
+        "funnel_drop_off_analyzer.py",
+        "utm_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "app-store-optimization",
+      "description": "App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking mobile app performance on Apple App Store and Google Play Store.",
+      "domain": "marketing",
+      "path": "marketing/app-store-optimization/SKILL.md",
+      "tools": [
+        "ab_test_planner.py",
+        "aso_scorer.py",
+        "competitor_analyzer.py",
+        "keyword_analyzer.py",
+        "launch_checklist.py",
+        "localization_helper.py",
+        "metadata_optimizer.py",
+        "review_analyzer.py"
+      ],
+      "tags": [
+        "aso",
+        "app-store",
+        "google-play",
+        "keywords",
+        "ratings"
+      ]
+    },
+    {
+      "name": "brand-guidelines",
+      "description": "Build, document, and enforce brand identity systems covering visual identity, voice and tone, typography, color systems, logo usage, imagery standards, and cross-channel consistency. Use when creating...",
+      "domain": "marketing",
+      "path": "marketing/brand-guidelines/SKILL.md",
+      "tools": [
+        "brand_audit_scorer.py",
+        "color_accessibility_checker.py",
+        "messaging_consistency_checker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "brand-strategist",
+      "description": "Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance. Use when developing brand positioning statements, creating messa...",
+      "domain": "marketing",
+      "path": "marketing/brand-strategist/SKILL.md",
+      "tools": [
+        "brand_architecture_analyzer.py",
+        "brand_health_dashboard.py",
+        "positioning_map_generator.py"
+      ],
+      "tags": [
+        "brand",
+        "strategy",
+        "positioning",
+        "identity",
+        "messaging"
+      ]
+    },
+    {
+      "name": "campaign-analytics",
+      "description": "Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization",
+      "domain": "marketing",
+      "path": "marketing/campaign-analytics/SKILL.md",
+      "tools": [
+        "attribution_analyzer.py",
+        "campaign_roi_calculator.py",
+        "funnel_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "cold-email",
+      "description": "Write, build, and optimize B2B cold email outreach sequences that get replies. Covers first-touch emails, multi-email sequences, personalization strategies, follow-up cadence, deliverability setup, an...",
+      "domain": "marketing",
+      "path": "marketing/cold-email/SKILL.md",
+      "tools": [
+        "deliverability_checker.py",
+        "sequence_optimizer.py",
+        "subject_line_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "content-creator",
+      "description": "Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creating ...",
+      "domain": "marketing",
+      "path": "marketing/content-creator/SKILL.md",
+      "tools": [
+        "brand_voice_analyzer.py",
+        "seo_optimizer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "content-humanizer",
+      "description": "Transform AI-generated content into authentic, human-sounding writing. Covers AI pattern detection, natural writing rhythm restoration, voice injection, brand personality application, and authenticity...",
+      "domain": "marketing",
+      "path": "marketing/content-humanizer/SKILL.md",
+      "tools": [
+        "ai_pattern_detector.py",
+        "content_scorer.py",
+        "readability_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "content-production",
+      "description": "Full content production pipeline from blank page to publish-ready piece. Covers competitive research, content briefs, drafting, SEO optimization, readability scoring, editorial quality gates, and inte...",
+      "domain": "marketing",
+      "path": "marketing/content-production/SKILL.md",
+      "tools": [
+        "content_brief_generator.py",
+        "headline_analyzer.py",
+        "readability_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "content-strategy",
+      "description": "Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what conte...",
+      "domain": "marketing",
+      "path": "marketing/content-strategy/SKILL.md",
+      "tools": [
+        "content_brief_generator.py",
+        "content_calendar_planner.py",
+        "headline_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "copy-editing",
+      "description": "Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Fr...",
+      "domain": "marketing",
+      "path": "marketing/copy-editing/SKILL.md",
+      "tools": [
+        "ai_pattern_detector.py",
+        "readability_scorer.py",
+        "style_checker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "copywriting",
+      "description": "Write persuasive marketing copy for homepages, landing pages, pricing pages, feature pages, and product pages. Includes headline formulas, CTA frameworks, page structure templates, conversion copy pri...",
+      "domain": "marketing",
+      "path": "marketing/copywriting/SKILL.md",
+      "tools": [
+        "cta_optimizer.py",
+        "headline_scorer.py",
+        "page_copy_auditor.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "email-sequence",
+      "description": "Design and write complete email automation sequences for SaaS and B2B products. Covers welcome/onboarding, lead nurture, re-engagement, post-purchase, trial expiration, and sales sequences. Outputs re...",
+      "domain": "marketing",
+      "path": "marketing/email-sequence/SKILL.md",
+      "tools": [
+        "performance_analyzer.py",
+        "sequence_mapper.py",
+        "subject_line_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "email-template-builder",
+      "description": "Build production-grade email template systems with React Email or MJML. Covers responsive layouts, dark mode, multi-provider sending (Resend, SendGrid, Postmark, SES), i18n, spam score optimization, p...",
+      "domain": "marketing",
+      "path": "marketing/email-template-builder/SKILL.md",
+      "tools": [
+        "render_size_analyzer.py",
+        "spam_score_checker.py",
+        "template_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "growth-marketer",
+      "description": "Expert growth marketing covering experimentation, funnel optimization, acquisition channels, retention strategies, and viral growth. Use when designing A/B experiments, optimizing AARRR funnel stages,...",
+      "domain": "marketing",
+      "path": "marketing/growth-marketer/SKILL.md",
+      "tools": [
+        "experiment_prioritizer.py",
+        "growth_loop_modeler.py",
+        "viral_coefficient_calculator.py"
+      ],
+      "tags": [
+        "growth",
+        "experimentation",
+        "acquisition",
+        "retention",
+        "viral"
+      ]
+    },
+    {
+      "name": "landing-page-generator",
+      "description": "Generate high-converting landing pages with complete page structure, copy frameworks, conversion optimization, CTA strategy, and performance patterns. Covers hero sections, feature grids, pricing tabl...",
+      "domain": "marketing",
+      "path": "marketing/landing-page-generator/SKILL.md",
+      "tools": [
+        "conversion_checklist.py",
+        "cta_analyzer.py",
+        "page_speed_estimator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "launch-strategy",
+      "description": "Plan and execute product launches and feature announcements for SaaS and technology products. Covers phased launch plans (alpha, beta, GA), channel strategy (owned/rented/borrowed), Product Hunt playb...",
+      "domain": "marketing",
+      "path": "marketing/launch-strategy/SKILL.md",
+      "tools": [
+        "launch_metrics_tracker.py",
+        "launch_readiness_checker.py",
+        "launch_timeline_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-analyst",
+      "description": "Expert marketing analytics covering campaign analysis, attribution modeling, marketing mix modeling, ROI measurement, and performance reporting. Use when analyzing campaign ROI, comparing attribution ...",
+      "domain": "marketing",
+      "path": "marketing/marketing-analyst/SKILL.md",
+      "tools": [
+        "channel_mix_optimizer.py",
+        "cohort_analyzer.py",
+        "marketing_forecast_generator.py"
+      ],
+      "tags": [
+        "analytics",
+        "attribution",
+        "roi",
+        "campaigns",
+        "reporting"
+      ]
+    },
+    {
+      "name": "marketing-context",
+      "description": "Create and maintain the foundational marketing context document covering product positioning, ICP definition, competitive landscape, brand voice, customer language, objection handling, proof points, a...",
+      "domain": "marketing",
+      "path": "marketing/marketing-context/SKILL.md",
+      "tools": [
+        "competitive_landscape_mapper.py",
+        "context_completeness_checker.py",
+        "icp_fit_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-demand-acquisition",
+      "description": "Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs for Series A+ startups",
+      "domain": "marketing",
+      "path": "marketing/marketing-demand-acquisition/SKILL.md",
+      "tools": [
+        "calculate_cac.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-ideas",
+      "description": "Library of 139+ proven marketing strategies organized by category, stage, budget, and timeline. Covers content, SEO, paid ads, social, email, partnerships, events, product-led growth, and unconvention...",
+      "domain": "marketing",
+      "path": "marketing/marketing-ideas/SKILL.md",
+      "tools": [
+        "campaign_brief_generator.py",
+        "idea_scorer.py",
+        "trend_evaluator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-ops",
+      "description": "Central marketing operations hub covering MarTech stack management, marketing automation, data management, attribution modeling, campaign orchestration, skill routing, and cross-functional coordinatio...",
+      "domain": "marketing",
+      "path": "marketing/marketing-ops/SKILL.md",
+      "tools": [
+        "campaign_budget_allocator.py",
+        "lead_scoring_simulator.py",
+        "martech_stack_auditor.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-psychology",
+      "description": "Apply behavioral psychology and cognitive biases to marketing for conversion optimization, pricing strategy, copy improvement, and campaign design. Includes 70+ mental models organized by application,...",
+      "domain": "marketing",
+      "path": "marketing/marketing-psychology/SKILL.md",
+      "tools": [
+        "cognitive_bias_checker.py",
+        "persuasion_auditor.py",
+        "pricing_psychology_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "marketing-strategy-pmm",
+      "description": "Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and ...",
+      "domain": "marketing",
+      "path": "marketing/marketing-strategy-pmm/SKILL.md",
+      "tools": [
+        "battlecard_generator.py",
+        "gtm_planner.py",
+        "win_loss_analyzer.py"
+      ],
+      "tags": [
+        "product-marketing",
+        "positioning",
+        "gtm",
+        "competitive-intel",
+        "launches"
+      ]
+    },
+    {
+      "name": "paid-ads",
+      "description": "Plan, execute, and optimize paid advertising campaigns across Google Ads, Meta Ads, LinkedIn Ads, Twitter/X, and TikTok. Covers campaign structure, audience targeting, budget allocation, bid strategie...",
+      "domain": "marketing",
+      "path": "marketing/paid-ads/SKILL.md",
+      "tools": [
+        "ad_copy_scorer.py",
+        "audience_sizer.py",
+        "cpc_calculator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "programmatic-seo",
+      "description": "Programmatic page generation at scale using template-based SEO, data pipelines, and automated content production. Covers keyword pattern mining, template architecture, data sourcing, quality control, ...",
+      "domain": "marketing",
+      "path": "marketing/programmatic-seo/SKILL.md",
+      "tools": [
+        "data_validator.py",
+        "keyword_pattern_miner.py",
+        "template_scorer.py"
+      ],
+      "tags": [
+        "seo",
+        "programmatic",
+        "templates",
+        "content-at-scale",
+        "data-driven-seo"
+      ]
+    },
+    {
+      "name": "schema-markup",
+      "description": "Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specif...",
+      "domain": "marketing",
+      "path": "marketing/schema-markup/SKILL.md",
+      "tools": [
+        "schema_auditor.py",
+        "schema_generator.py",
+        "schema_validator.py"
+      ],
+      "tags": [
+        "seo",
+        "schema",
+        "structured-data",
+        "json-ld",
+        "rich-snippets",
+        "knowledge-graph"
+      ]
+    },
+    {
+      "name": "seo-audit",
+      "description": "Comprehensive technical SEO auditing covering crawlability, indexation, Core Web Vitals, on-page optimization, content quality, and competitive gap analysis. Includes 85-point audit checklist, severit...",
+      "domain": "marketing",
+      "path": "marketing/seo-audit/SKILL.md",
+      "tools": [
+        "content_scorer.py",
+        "redirect_checker.py",
+        "sitemap_analyzer.py"
+      ],
+      "tags": [
+        "seo",
+        "audit",
+        "technical-seo",
+        "core-web-vitals",
+        "indexation",
+        "crawl-analysis"
+      ]
+    },
+    {
+      "name": "seo-specialist",
+      "description": "Expert SEO covering technical SEO, content optimization, link building, keyword research, and search analytics. Use when auditing technical SEO issues, researching keywords by intent and difficulty, o...",
+      "domain": "marketing",
+      "path": "marketing/seo-specialist/SKILL.md",
+      "tools": [
+        "content_scorer.py",
+        "keyword_analyzer.py",
+        "serp_simulator.py"
+      ],
+      "tags": [
+        "seo",
+        "search",
+        "keywords",
+        "technical-seo",
+        "link-building"
+      ]
+    },
+    {
+      "name": "site-architecture",
+      "description": "Information architecture, URL hierarchy, internal linking strategy, navigation design, and silo structure for websites. Covers architectural audits, new site planning, crawl equity optimization, and t...",
+      "domain": "marketing",
+      "path": "marketing/site-architecture/SKILL.md",
+      "tools": [
+        "link_mapper.py",
+        "redirect_checker.py",
+        "sitemap_analyzer.py"
+      ],
+      "tags": [
+        "seo",
+        "information-architecture",
+        "internal-linking",
+        "url-structure",
+        "navigation",
+        "siloing"
+      ]
+    },
+    {
+      "name": "social-content",
+      "description": "Create engaging social media content across LinkedIn, Twitter/X, Instagram, TikTok, and Facebook with platform-specific formats, hook formulas, content pillar systems, repurposing workflows, engagemen...",
+      "domain": "marketing",
+      "path": "marketing/social-content/SKILL.md",
+      "tools": [
+        "engagement_calculator.py",
+        "hashtag_analyzer.py",
+        "post_scheduler.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "social-media-analyzer",
+      "description": "Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, mea...",
+      "domain": "marketing",
+      "path": "marketing/social-media-analyzer/SKILL.md",
+      "tools": [
+        "analyze_performance.py",
+        "calculate_metrics.py"
+      ],
+      "tags": [
+        "social-media",
+        "analytics",
+        "sentiment-analysis",
+        "engagement"
+      ]
+    },
+    {
+      "name": "social-media-manager",
+      "description": "Strategic social media management for B2B SaaS and technology companies. Covers platform selection, content pillar design, editorial calendars, community engagement frameworks, crisis response protoco...",
+      "domain": "marketing",
+      "path": "marketing/social-media-manager/SKILL.md",
+      "tools": [
+        "content_calendar_generator.py",
+        "growth_tracker.py",
+        "social_audit_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "ab-test-setup",
+      "description": "Design and implement statistically rigorous A/B tests and experiments. Covers hypothesis formulation, sample size calculation, metric selection, traffic allocation, implementation patterns (client-sid...",
+      "domain": "product-team",
+      "path": "product-team/ab-test-setup/SKILL.md",
+      "tools": [
+        "experiment_analyzer.py",
+        "experiment_planner.py",
+        "sample_size_calculator.py"
+      ],
+      "tags": [
+        "ab-testing",
+        "experimentation",
+        "hypothesis",
+        "statistical-significance"
+      ]
+    },
+    {
+      "name": "agile-product-owner",
+      "description": "Agile product ownership for backlog management and sprint execution. Covers user story writing, acceptance criteria, sprint planning, and velocity tracking. Use for writing user stories, creating acce...",
+      "domain": "product-team",
+      "path": "product-team/agile-product-owner/SKILL.md",
+      "tools": [
+        "user_story_generator.py"
+      ],
+      "tags": [
+        "agile",
+        "user-stories",
+        "backlog",
+        "sprint-planning",
+        "scrum"
+      ]
+    },
+    {
+      "name": "design-system-lead",
+      "description": "Expert design systems leadership covering component libraries, design tokens, documentation, and design-development collaboration. Use when architecting a design token system, building a component lib...",
+      "domain": "product-team",
+      "path": "product-team/design-system-lead/SKILL.md",
+      "tools": [
+        "adoption_analyzer.py",
+        "component_scaffold.py",
+        "token_gen.py"
+      ],
+      "tags": [
+        "design-systems",
+        "components",
+        "tokens",
+        "documentation",
+        "figma"
+      ]
+    },
+    {
+      "name": "product-designer",
+      "description": "Expert product design covering UI/UX design, design systems, prototyping, user research, and design thinking. Use when creating user journey maps, building wireframes, defining design tokens and compo...",
+      "domain": "product-team",
+      "path": "product-team/product-designer/SKILL.md",
+      "tools": [
+        "design_critique.py",
+        "journey_mapper.py",
+        "usability_scorer.py"
+      ],
+      "tags": [
+        "design",
+        "ux",
+        "ui",
+        "figma",
+        "prototyping",
+        "design-systems"
+      ]
+    },
+    {
+      "name": "product-manager-toolkit",
+      "description": "Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritization,...",
+      "domain": "product-team",
+      "path": "product-team/product-manager-toolkit/SKILL.md",
+      "tools": [
+        "customer_interview_analyzer.py",
+        "rice_prioritizer.py"
+      ],
+      "tags": [
+        "product-management",
+        "rice",
+        "okr",
+        "roadmap",
+        "prioritization"
+      ]
+    },
+    {
+      "name": "product-strategist",
+      "description": "Strategic product leadership toolkit for Head of Product including OKR cascade generation, market analysis, vision setting, and team scaling. Use for strategic planning, goal alignment, competitive an...",
+      "domain": "product-team",
+      "path": "product-team/product-strategist/SKILL.md",
+      "tools": [
+        "okr_cascade_generator.py"
+      ],
+      "tags": [
+        "product-strategy",
+        "market-analysis",
+        "competitive-analysis",
+        "positioning"
+      ]
+    },
+    {
+      "name": "ui-design-system",
+      "description": "UI design system toolkit for Senior UI Designer including design token generation, component documentation, responsive design calculations, and developer handoff tools. Use for creating design systems...",
+      "domain": "product-team",
+      "path": "product-team/ui-design-system/SKILL.md",
+      "tools": [
+        "design_token_generator.py"
+      ],
+      "tags": [
+        "design-system",
+        "components",
+        "tokens",
+        "ui-patterns"
+      ]
+    },
+    {
+      "name": "ux-researcher-designer",
+      "description": "UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research,...",
+      "domain": "product-team",
+      "path": "product-team/ux-researcher-designer/SKILL.md",
+      "tools": [
+        "persona_generator.py"
+      ],
+      "tags": [
+        "ux-research",
+        "usability-testing",
+        "user-interviews",
+        "personas"
+      ]
+    },
+    {
+      "name": "agile-coach",
+      "description": "Expert agile coaching for team transformation, framework selection, maturity assessment, and organizational change management. Use when selecting an agile framework for a team, coaching through Tuckma...",
+      "domain": "project-management",
+      "path": "project-management/agile-coach/SKILL.md",
+      "tools": [
+        "agile_maturity_scorer.py",
+        "team_health_checker.py",
+        "velocity_analyzer.py"
+      ],
+      "tags": [
+        "agile",
+        "coaching",
+        "transformation",
+        "scrum",
+        "kanban"
+      ]
+    },
+    {
+      "name": "atlassian-admin",
+      "description": "Atlassian Administrator for managing and organizing Atlassian products, users, customization of the Atlassian suite, permissions, security, integrations, system configuration, and all administrative f...",
+      "domain": "project-management",
+      "path": "project-management/atlassian-admin/SKILL.md",
+      "tools": [
+        "license_analyzer.py",
+        "permission_auditor.py",
+        "system_health_checker.py"
+      ],
+      "tags": [
+        "atlassian",
+        "jira",
+        "confluence",
+        "administration",
+        "permissions"
+      ]
+    },
+    {
+      "name": "atlassian-templates",
+      "description": "Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira and Confluence templates, blueprints, custom layouts, reusable components, and standardized content stru...",
+      "domain": "project-management",
+      "path": "project-management/atlassian-templates/SKILL.md",
+      "tools": [
+        "template_scaffolder.py",
+        "template_usage_analyzer.py",
+        "template_validator.py"
+      ],
+      "tags": [
+        "atlassian",
+        "jira-templates",
+        "confluence-templates",
+        "workflows"
+      ]
+    },
+    {
+      "name": "confluence-expert",
+      "description": "Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation, planning, product discovery, page layouts, macros, templates, and all Confluence features. Use for documen...",
+      "domain": "project-management",
+      "path": "project-management/confluence-expert/SKILL.md",
+      "tools": [
+        "content_health_auditor.py",
+        "label_taxonomy_analyzer.py",
+        "space_structure_analyzer.py"
+      ],
+      "tags": [
+        "confluence",
+        "knowledge-management",
+        "wiki",
+        "documentation"
+      ]
+    },
+    {
+      "name": "delivery-manager",
+      "description": "Expert delivery management for release planning, deployment coordination, incident response, change management, and SLA tracking across continuous delivery pipelines. Use when planning a release, coor...",
+      "domain": "project-management",
+      "path": "project-management/delivery-manager/SKILL.md",
+      "tools": [
+        "delivery_metrics_tracker.py",
+        "dependency_mapper.py",
+        "risk_register.py"
+      ],
+      "tags": [
+        "delivery",
+        "release",
+        "deployment",
+        "operations",
+        "devops"
+      ]
+    },
+    {
+      "name": "brainstorm-experiments",
+      "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.",
+      "domain": "project-management",
+      "path": "project-management/discovery/brainstorm-experiments/SKILL.md",
+      "tools": [
+        "experiment_designer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "brainstorm-ideas",
+      "description": "Product ideation expert using Product Trio approach and Opportunity Solution Trees for both new and existing products.",
+      "domain": "project-management",
+      "path": "project-management/discovery/brainstorm-ideas/SKILL.md",
+      "tools": [
+        "idea_scorer.py",
+        "opportunity_tree_builder.py",
+        "scamper_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "identify-assumptions",
+      "description": "Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil's advocate analysis.",
+      "domain": "project-management",
+      "path": "project-management/discovery/identify-assumptions/SKILL.md",
+      "tools": [
+        "assumption_tracker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "pre-mortem",
+      "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
+      "domain": "project-management",
+      "path": "project-management/discovery/pre-mortem/SKILL.md",
+      "tools": [
+        "risk_categorizer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "brainstorm-okrs",
+      "description": "OKR brainstorming and validation using the Radical Focus framework. Generates outcome-focused objectives with measurable key results and counter-metrics. Use when setting quarterly OKRs, validating ex...",
+      "domain": "project-management",
+      "path": "project-management/execution/brainstorm-okrs/SKILL.md",
+      "tools": [
+        "okr_validator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "create-prd",
+      "description": "PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.",
+      "domain": "project-management",
+      "path": "project-management/execution/create-prd/SKILL.md",
+      "tools": [
+        "prd_scaffolder.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "job-stories",
+      "description": "Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas.",
+      "domain": "project-management",
+      "path": "project-management/execution/job-stories/SKILL.md",
+      "tools": [
+        "invest_validator.py",
+        "story_converter.py",
+        "story_quality_checker.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "outcome-roadmap",
+      "description": "Transforms output-based feature lists into outcome-driven roadmaps with measurable impact using Now/Next/Later framing and the \"so what?\" technique. Use when converting a feature-list roadmap into out...",
+      "domain": "project-management",
+      "path": "project-management/execution/outcome-roadmap/SKILL.md",
+      "tools": [
+        "roadmap_transformer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "prioritization-frameworks",
+      "description": "Comprehensive prioritization framework expert covering 9 methods with scoring tools and decision guidance for product managers.",
+      "domain": "project-management",
+      "path": "project-management/execution/prioritization-frameworks/SKILL.md",
+      "tools": [
+        "prioritization_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "release-notes",
+      "description": "Structured release notes creation that translates technical changes into user-benefit-oriented communication.",
+      "domain": "project-management",
+      "path": "project-management/execution/release-notes/SKILL.md",
+      "tools": [
+        "release_notes_generator.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "summarize-meeting",
+      "description": "Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.",
+      "domain": "project-management",
+      "path": "project-management/execution/summarize-meeting/SKILL.md",
+      "tools": [
+        "action_item_tracker.py",
+        "decision_log_builder.py",
+        "meeting_effectiveness_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "wwas",
+      "description": "Why-What-Acceptance backlog format that connects every work item to strategic business objectives.",
+      "domain": "project-management",
+      "path": "project-management/execution/wwas/SKILL.md",
+      "tools": [
+        "backlog_alignment_checker.py",
+        "invest_gate_checker.py",
+        "wwas_quality_scorer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "jira-expert",
+      "description": "Atlassian Jira expert for creating and managing projects, planning, product discovery, JQL queries, workflows, custom fields, automation, reporting, and all Jira features. Use for Jira project setup, ...",
+      "domain": "project-management",
+      "path": "project-management/jira-expert/SKILL.md",
+      "tools": [
+        "board_optimizer.py",
+        "issue_quality_checker.py",
+        "workflow_analyzer.py"
+      ],
+      "tags": [
+        "jira",
+        "jql",
+        "workflows",
+        "automation",
+        "dashboards"
+      ]
+    },
+    {
+      "name": "program-manager",
+      "description": "Expert program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, and cross-functional stakeholder communication. Use when standing up a new pr...",
+      "domain": "project-management",
+      "path": "project-management/program-manager/SKILL.md",
+      "tools": [
+        "milestone_tracker.py",
+        "portfolio_dashboard.py",
+        "resource_allocator.py"
+      ],
+      "tags": [
+        "program",
+        "portfolio",
+        "governance",
+        "strategic",
+        "coordination"
+      ]
+    },
+    {
+      "name": "scrum-master",
+      "description": "Data-driven Scrum Master with sprint health scoring, Monte Carlo velocity forecasting, retrospective pattern analysis, and psychological safety frameworks. Use when facilitating sprint planning, diagn...",
+      "domain": "project-management",
+      "path": "project-management/scrum-master/SKILL.md",
+      "tools": [
+        "retrospective_analyzer.py",
+        "sprint_capacity_calculator.py",
+        "sprint_health_scorer.py",
+        "velocity_analyzer.py"
+      ],
+      "tags": [
+        "scrum",
+        "agile",
+        "sprint",
+        "retrospective",
+        "impediments"
+      ]
+    },
+    {
+      "name": "senior-pm",
+      "description": "Senior Project Manager for enterprise software, SaaS, and digital transformation projects. Specializes in portfolio management, quantitative risk analysis, resource optimization, stakeholder alignment...",
+      "domain": "project-management",
+      "path": "project-management/senior-pm/SKILL.md",
+      "tools": [
+        "project_health_dashboard.py",
+        "resource_capacity_planner.py",
+        "risk_matrix_analyzer.py",
+        "stakeholder_mapper.py"
+      ],
+      "tags": [
+        "project-management",
+        "stakeholder-management",
+        "risk",
+        "planning"
+      ]
+    },
+    {
+      "name": "sprint-retrospective",
+      "description": "Data-driven sprint retrospectives with velocity analytics, contributor insights, code quality trends, and actionable improvement recommendations. Analyzes git history to produce comprehensive retrospe...",
+      "domain": "project-management",
+      "path": "project-management/sprint-retrospective/SKILL.md",
+      "tools": [
+        "code_churn_analyzer.py",
+        "contributor_insights.py",
+        "retro_report_generator.py",
+        "velocity_analyzer.py"
+      ],
+      "tags": [
+        "retrospective",
+        "agile",
+        "continuous-improvement",
+        "team"
+      ]
+    },
+    {
+      "name": "capa-officer",
+      "description": "CAPA system management for medical device QMS. Covers root cause analysis, corrective action planning, effectiveness verification, and CAPA metrics. Use for CAPA investigations, 5-Why analysis, fishbo...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/capa-officer/SKILL.md",
+      "tools": [
+        "capa_tracker.py"
+      ],
+      "tags": [
+        "capa",
+        "root-cause-analysis",
+        "fmea",
+        "corrective-action",
+        "quality"
+      ]
+    },
+    {
+      "name": "ccpa-cpra-privacy-expert",
+      "description": "CCPA and CPRA privacy compliance automation. Audits organizations for California privacy law compliance, maps personal information flows, validates consumer rights readiness, and checks technical safe...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/ccpa-cpra-privacy-expert/SKILL.md",
+      "tools": [
+        "ccpa_compliance_checker.py",
+        "ccpa_data_mapper.py"
+      ],
+      "tags": [
+        "ccpa",
+        "cpra",
+        "california-privacy",
+        "data-mapping",
+        "opt-out"
+      ]
+    },
+    {
+      "name": "dora-compliance-expert",
+      "description": "DORA (EU 2022/2554) digital operational resilience compliance automation for financial entities. Assesses readiness against all 5 DORA pillars, classifies ICT incidents, validates third-party risk man...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/dora-compliance-expert/SKILL.md",
+      "tools": [
+        "dora_incident_classifier.py",
+        "dora_readiness_checker.py"
+      ],
+      "tags": [
+        "dora",
+        "ict-risk",
+        "resilience-testing",
+        "financial-services"
+      ]
+    },
+    {
+      "name": "eu-ai-act-specialist",
+      "description": "EU AI Act (Regulation EU 2024/1689) compliance specialist. Use when classifying AI systems by risk tier, assessing provider or deployer obligations, evaluating GPAI model compliance, running conformit...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/eu-ai-act-specialist/SKILL.md",
+      "tools": [
+        "ai_bias_detector.py",
+        "ai_compliance_checker.py",
+        "ai_risk_classifier.py"
+      ],
+      "tags": [
+        "eu-ai-act",
+        "ai-governance",
+        "risk-classification",
+        "gpai",
+        "conformity"
+      ]
+    },
+    {
+      "name": "fda-consultant-specialist",
+      "description": "FDA regulatory consultant for medical device companies. Provides 510(k)/PMA/De Novo pathway guidance, QSR (21 CFR 820) compliance, HIPAA assessments, and device cybersecurity. Use when user mentions F...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/fda-consultant-specialist/SKILL.md",
+      "tools": [
+        "fda_submission_tracker.py",
+        "hipaa_risk_assessment.py",
+        "qsr_compliance_checker.py"
+      ],
+      "tags": [
+        "fda",
+        "510k",
+        "pma",
+        "qsr",
+        "hipaa",
+        "cybersecurity"
+      ]
+    },
+    {
+      "name": "gdpr-dsgvo-expert",
+      "description": "GDPR and German DSGVO compliance automation. Scans codebases for privacy risks, generates DPIA documentation, tracks data subject rights requests. Use for GDPR compliance assessments, privacy audits, ...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/gdpr-dsgvo-expert/SKILL.md",
+      "tools": [
+        "data_subject_rights_tracker.py",
+        "dpia_generator.py",
+        "gdpr_compliance_checker.py"
+      ],
+      "tags": [
+        "gdpr",
+        "dsgvo",
+        "dpia",
+        "data-protection",
+        "privacy"
+      ]
+    },
+    {
+      "name": "information-security-manager-iso27001",
+      "description": "ISO 27001 ISMS implementation and cybersecurity governance for HealthTech and MedTech companies. Use for ISMS design, security risk assessment, control implementation, ISO 27001 certification, securit...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/information-security-manager-iso27001/SKILL.md",
+      "tools": [
+        "compliance_checker.py",
+        "risk_assessment.py"
+      ],
+      "tags": [
+        "iso-27001",
+        "isms",
+        "annex-a",
+        "information-security",
+        "cloud-security"
+      ]
+    },
+    {
+      "name": "infrastructure-compliance-auditor",
+      "description": "Cross-cutting infrastructure security audit skill that checks cloud infrastructure, DNS, TLS, endpoints, access control, network security, containers, CI/CD pipelines, secrets management, logging, and...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/infrastructure-compliance-auditor/SKILL.md",
+      "tools": [
+        "access_control_auditor.py",
+        "dns_security_checker.py",
+        "infra_audit_runner.py"
+      ],
+      "tags": [
+        "infrastructure-audit",
+        "cloud-security",
+        "dns",
+        "tls",
+        "compliance-automation"
+      ]
+    },
+    {
+      "name": "isms-audit-expert",
+      "description": "Information Security Management System auditing for ISO 27001 compliance, security control assessment, and certification support. Use when planning ISMS audit programs, executing internal or external ...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/isms-audit-expert/SKILL.md",
+      "tools": [
+        "isms_audit_scheduler.py"
+      ],
+      "tags": [
+        "iso-27001",
+        "isms-audit",
+        "security-testing",
+        "certification",
+        "controls"
+      ]
+    },
+    {
+      "name": "iso42001-ai-management",
+      "description": "ISO 42001 AI Management System compliance automation. Assesses organizational readiness for AIMS certification, evaluates AI system impacts, validates governance structures, and checks Annex A control...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/iso42001-ai-management/SKILL.md",
+      "tools": [
+        "ai_impact_assessor.py",
+        "aims_readiness_checker.py"
+      ],
+      "tags": [
+        "iso-42001",
+        "ai-management",
+        "aims",
+        "ai-lifecycle",
+        "governance"
+      ]
+    },
+    {
+      "name": "mdr-745-specialist",
+      "description": "EU MDR 2017/745 compliance specialist for medical device classification, technical documentation, clinical evidence, and post-market surveillance. Covers Annex VIII classification rules, Annex II/III ...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/mdr-745-specialist/SKILL.md",
+      "tools": [
+        "mdr_gap_analyzer.py"
+      ],
+      "tags": [
+        "eu-mdr",
+        "medical-device",
+        "gspr",
+        "eudamed",
+        "udi"
+      ]
+    },
+    {
+      "name": "nis2-directive-specialist",
+      "description": "NIS2 Directive (EU 2022/2555) compliance automation. Analyzes organizational scope, assesses compliance against all 10 minimum security measures, validates incident reporting readiness, and generates ...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/nis2-directive-specialist/SKILL.md",
+      "tools": [
+        "nis2_compliance_checker.py",
+        "nis2_scope_analyzer.py"
+      ],
+      "tags": [
+        "nis2",
+        "cybersecurity-directive",
+        "incident-reporting",
+        "supply-chain"
+      ]
+    },
+    {
+      "name": "nist-csf-specialist",
+      "description": "NIST Cybersecurity Framework 2.0 implementation, assessment, and compliance management. Use for NIST cybersecurity framework, CSF 2.0, NIST compliance, cybersecurity risk management, NIST controls, NI...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/nist-csf-specialist/SKILL.md",
+      "tools": [
+        "csf_control_mapper.py",
+        "csf_maturity_assessor.py"
+      ],
+      "tags": [
+        "nist-csf",
+        "cybersecurity",
+        "maturity-assessment",
+        "risk-management"
+      ]
+    },
+    {
+      "name": "pci-dss-specialist",
+      "description": "PCI DSS v4.0 payment card industry data security standard compliance, assessment, and implementation. Use for PCI DSS, payment card security, cardholder data, PCI compliance, payment security, PCI ass...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/pci-dss-specialist/SKILL.md",
+      "tools": [
+        "pci_compliance_checker.py",
+        "pci_scope_analyzer.py"
+      ],
+      "tags": [
+        "pci-dss",
+        "payment-security",
+        "tokenization",
+        "cardholder-data"
+      ]
+    },
+    {
+      "name": "qms-audit-expert",
+      "description": "ISO 13485 internal audit expertise for medical device QMS. Covers audit planning, execution, nonconformity classification, and CAPA verification. Use for internal audit planning, audit execution, find...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/qms-audit-expert/SKILL.md",
+      "tools": [
+        "audit_schedule_optimizer.py"
+      ],
+      "tags": [
+        "iso-13485",
+        "audit",
+        "nonconformity",
+        "quality-audit",
+        "certification"
+      ]
+    },
+    {
+      "name": "quality-documentation-manager",
+      "description": "Document control system management for medical device QMS. Covers document numbering, version control, change management, and 21 CFR Part 11 compliance. Use for document control procedures, change con...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/quality-documentation-manager/SKILL.md",
+      "tools": [
+        "document_validator.py"
+      ],
+      "tags": [
+        "document-control",
+        "21-cfr-part-11",
+        "electronic-signatures",
+        "sop"
+      ]
+    },
+    {
+      "name": "quality-manager-qmr",
+      "description": "Senior Quality Manager Responsible Person (QMR) for HealthTech and MedTech companies. Use when conducting management reviews, setting quality objectives, tracking quality KPIs, assessing quality cultu...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/quality-manager-qmr/SKILL.md",
+      "tools": [
+        "management_review_tracker.py"
+      ],
+      "tags": [
+        "quality-management",
+        "qms",
+        "kpi",
+        "management-review",
+        "compliance"
+      ]
+    },
+    {
+      "name": "quality-manager-qms-iso13485",
+      "description": "ISO 13485 Quality Management System implementation and maintenance for medical device organizations. Provides QMS design, documentation control, internal auditing, CAPA management, and certification s...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/quality-manager-qms-iso13485/SKILL.md",
+      "tools": [
+        "qms_audit_checklist.py"
+      ],
+      "tags": [
+        "iso-13485",
+        "qms",
+        "design-control",
+        "supplier-qualification",
+        "medical-device"
+      ]
+    },
+    {
+      "name": "regulatory-affairs-head",
+      "description": "Senior Regulatory Affairs Manager for HealthTech and MedTech companies. Use when developing regulatory strategy, preparing FDA 510(k)/PMA/De Novo submissions, planning EU MDR CE marking, coordinating ...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/regulatory-affairs-head/SKILL.md",
+      "tools": [
+        "regulatory_tracker.py"
+      ],
+      "tags": [
+        "regulatory-affairs",
+        "fda",
+        "eu-mdr",
+        "market-access",
+        "regulatory-strategy"
+      ]
+    },
+    {
+      "name": "risk-management-specialist",
+      "description": "Medical device risk management specialist implementing ISO 14971 throughout product lifecycle. Provides risk analysis, risk evaluation, risk control, and post-production information analysis.",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/risk-management-specialist/SKILL.md",
+      "tools": [
+        "risk_matrix_calculator.py"
+      ],
+      "tags": [
+        "iso-14971",
+        "risk-analysis",
+        "fmea",
+        "risk-register",
+        "medical-device"
+      ]
+    },
+    {
+      "name": "soc2-compliance-expert",
+      "description": "SOC 2 Type I and Type II compliance management. Use when conducting SOC 2 readiness assessments, performing gap analysis against Trust Services Criteria, collecting audit evidence, validating infrastr...",
+      "domain": "ra-qm-team",
+      "path": "ra-qm-team/soc2-compliance-expert/SKILL.md",
+      "tools": [
+        "evidence_collector.py",
+        "soc2_infrastructure_auditor.py",
+        "soc2_readiness_checker.py"
+      ],
+      "tags": [
+        "soc2",
+        "trust-services",
+        "security-compliance",
+        "evidence-collection"
+      ]
+    },
+    {
+      "name": "account-executive",
+      "description": "Expert sales execution covering pipeline management, discovery, demos, negotiation, and deal closing. Use when qualifying opportunities, running MEDDIC discovery, building account plans, handling obje...",
+      "domain": "sales-success",
+      "path": "sales-success/account-executive/SKILL.md",
+      "tools": [
+        "deal_scorer.py",
+        "pipeline_analyzer.py",
+        "win_loss_analyzer.py"
+      ],
+      "tags": [
+        "sales",
+        "pipeline",
+        "negotiation",
+        "closing",
+        "deals"
+      ]
+    },
+    {
+      "name": "customer-success-manager",
+      "description": "Expert customer success covering onboarding, adoption, retention, expansion, health scoring, and customer advocacy. Use when designing onboarding playbooks, calculating health scores, building QBR dec...",
+      "domain": "sales-success",
+      "path": "sales-success/customer-success-manager/SKILL.md",
+      "tools": [
+        "churn_predictor.py",
+        "health_scorer.py",
+        "qbr_generator.py"
+      ],
+      "tags": [
+        "customer-success",
+        "retention",
+        "adoption",
+        "expansion",
+        "nps"
+      ]
+    },
+    {
+      "name": "sales-engineer",
+      "description": "Expert sales engineering covering technical demos, solution design, RFP responses, POC management, and technical objection handling. Use when preparing product demos, responding to RFPs/RFIs, scoping ...",
+      "domain": "sales-success",
+      "path": "sales-success/sales-engineer/SKILL.md",
+      "tools": [
+        "demo_planner.py",
+        "rfp_analyzer.py",
+        "technical_qualifier.py"
+      ],
+      "tags": [
+        "sales",
+        "technical",
+        "demos",
+        "rfp",
+        "poc",
+        "solutions"
+      ]
+    },
+    {
+      "name": "sales-operations",
+      "description": "Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...",
+      "domain": "sales-success",
+      "path": "sales-success/sales-operations/SKILL.md",
+      "tools": [
+        "forecast_analyzer.py",
+        "quota_calculator.py",
+        "territory_planner.py"
+      ],
+      "tags": [
+        "sales-ops",
+        "crm",
+        "analytics",
+        "territory",
+        "compensation"
+      ]
+    },
+    {
+      "name": "solutions-architect",
+      "description": "Expert solutions architecture covering technical requirements, solution design, integration planning, and enterprise architecture alignment. Use when conducting technical discovery, designing integrat...",
+      "domain": "sales-success",
+      "path": "sales-success/solutions-architect/SKILL.md",
+      "tools": [
+        "architecture_scorer.py",
+        "migration_assessor.py",
+        "sizing_calculator.py"
+      ],
+      "tags": [
+        "solutions",
+        "architecture",
+        "technical",
+        "integration",
+        "enterprise"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+# ============================================================================
+# Sync Codex Skills — Auto-update .codex/ directory from skill sources
+# ============================================================================
+# When SKILL.md files or Python scripts change on main, this workflow
+# runs the sync script to regenerate Codex-compatible skill definitions
+# in the .codex/ directory. If changes are detected, they are committed
+# and pushed automatically.
+# ============================================================================
+
+name: Sync Codex Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/SKILL.md'
+      - '**/scripts/**'
+      - 'AGENTS.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Prevent concurrent syncs from overlapping
+concurrency:
+  group: sync-codex
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Sync skills to Codex format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Use a token that can push back to the repo
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check for sync script
+        id: check
+        run: |
+          # Look for the sync script in common locations
+          for path in \
+            "scripts/sync-codex-skills.py" \
+            "tools/sync-codex-skills.py" \
+            ".codex/sync.py"; do
+            if [ -f "$path" ]; then
+              echo "script=$path" >> "$GITHUB_OUTPUT"
+              echo "found=true" >> "$GITHUB_OUTPUT"
+              echo "Found sync script at: $path"
+              exit 0
+            fi
+          done
+          echo "::warning::No sync script found. Skipping."
+          echo "found=false" >> "$GITHUB_OUTPUT"
+
+      - name: Run Codex sync
+        if: steps.check.outputs.found == 'true'
+        run: |
+          python3 "${{ steps.check.outputs.script }}"
+          echo "Sync script completed."
+
+      - name: Check for changes
+        if: steps.check.outputs.found == 'true'
+        id: changes
+        run: |
+          git diff --quiet && git diff --staged --quiet && \
+            echo "has_changes=false" >> "$GITHUB_OUTPUT" || \
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .codex/ AGENTS.md
+          git commit -m "chore(codex): auto-sync skill definitions from source
+
+          Triggered by push to main.
+          Source paths: **/SKILL.md, **/scripts/**"
+          git push
+          echo "Changes committed and pushed."
+
+      - name: No changes detected
+        if: steps.check.outputs.found == 'true' && steps.changes.outputs.has_changes != 'true'
+        run: echo "Codex definitions are already up to date."

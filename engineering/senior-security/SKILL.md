@@ -1,9 +1,10 @@
 ---
 name: senior-security
 description: >
-  Security engineering toolkit for threat modeling, vulnerability analysis,
-  secure architecture, and penetration testing. Includes STRIDE analysis, OWASP
-  guidance, cryptography patterns, and security scanning tools.
+  Performs STRIDE threat modeling, DREAD risk scoring, secret detection, and
+  secure architecture design. Use when conducting threat models, reviewing code
+  for security vulnerabilities, designing defense-in-depth architectures, or
+  scanning for hardcoded secrets and credentials.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -15,7 +16,7 @@ metadata:
 ---
 # Senior Security Engineer
 
-Security engineering tools for threat modeling, vulnerability analysis, secure architecture design, and penetration testing.
+The agent performs STRIDE threat analysis with DREAD risk scoring, designs defense-in-depth security architectures with Zero Trust principles, conducts secure code reviews against OWASP Top 10, and scans codebases for hardcoded secrets across 20+ credential patterns.
 
 ---
 
@@ -430,6 +431,17 @@ See: [references/cryptography-implementation.md](references/cryptography-impleme
 | [senior-secops](../senior-secops/) | Security monitoring, incident response |
 | [senior-backend](../senior-backend/) | Secure API development |
 | [senior-architect](../senior-architect/) | Security architecture decisions |
+
+---
+
+## Anti-Patterns
+
+- **Security by obscurity** -- hiding endpoints or using non-standard ports is not a control; implement authentication, authorization, and encryption
+- **MD5/SHA1 for password hashing** -- both are broken for this purpose; use Argon2id or bcrypt with cost factor >= 12
+- **Math.random for tokens** -- predictable values allow session hijacking; use `crypto.getRandomValues()` or `secrets.token_hex()`
+- **Shell=True in subprocess** -- enables command injection; use argument lists with `subprocess.run(["cmd", "arg"])`
+- **Threat model without data flow diagram** -- STRIDE analysis requires DFD elements to be systematic; skip the DFD and you miss entire attack surfaces
+- **Accepted risks without review cadence** -- DREAD scores drift as systems evolve; re-validate accepted risks every 90 days
 
 ---
 

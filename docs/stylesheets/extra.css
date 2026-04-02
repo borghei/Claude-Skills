@@ -1,0 +1,53 @@
+/* Feature grid on the home page */
+.md-typeset .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.md-typeset .grid .card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+  padding: 1.2rem;
+  transition: box-shadow .25s;
+}
+
+.md-typeset .grid .card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+}
+
+.md-typeset .grid .card h3 {
+  margin-top: 0;
+}
+
+/* Stat counters */
+.md-typeset .stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.md-typeset .stats .stat {
+  text-align: center;
+}
+
+.md-typeset .stats .stat .number {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  line-height: 1.1;
+}
+
+.md-typeset .stats .stat .label {
+  font-size: .85rem;
+  opacity: .7;
+}
+
+/* Skill table tweaks */
+.md-typeset table.skill-table th:first-child,
+.md-typeset table.skill-table td:first-child {
+  white-space: nowrap;
+}

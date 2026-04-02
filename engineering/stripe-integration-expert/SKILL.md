@@ -18,13 +18,7 @@ metadata:
 ---
 # Stripe Integration Expert
 
-**Tier:** POWERFUL
-**Category:** Engineering
-**Tags:** Stripe, payments, subscriptions, billing, webhooks, SCA, usage-based billing
-
-## Overview
-
-Build production-grade Stripe integrations for SaaS products: subscriptions with trials and proration, one-time payments, usage-based billing, Checkout sessions, idempotent webhook handlers, Customer Portal, invoicing, and dunning. Covers Next.js App Router, Express, and Django patterns with emphasis on real-world edge cases that documentation does not warn you about.
+The agent builds production-grade Stripe integrations for SaaS billing: subscription lifecycle management with trials and proration, idempotent webhook handlers, usage-based metered billing, Checkout sessions, Customer Portal, dunning recovery, and SCA/3D Secure compliance. Provides patterns for Next.js, Express, and Django with emphasis on real-world edge cases.
 
 ---
 

@@ -1,8 +1,10 @@
 ---
 name: tdd-guide
 description: >
-  Test-driven development workflow with test generation, coverage analysis, and
-  multi-framework support
+  Guides red-green-refactor TDD workflows with test generation, coverage gap
+  analysis, and multi-framework support. Use when writing tests first,
+  analyzing coverage reports, generating test stubs, or converting tests
+  between Jest, Pytest, JUnit, and Vitest.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -14,108 +16,83 @@ metadata:
 ---
 # TDD Guide
 
-Test-driven development skill for generating tests, analyzing coverage, and guiding red-green-refactor workflows across Jest, Pytest, JUnit, and Vitest.
+The agent guides red-green-refactor TDD workflows, generates framework-specific test stubs from requirements, parses coverage reports to identify prioritized gaps, and calculates test quality metrics including smell detection and assertion density. Supports Jest, Pytest, JUnit, Vitest, and Mocha.
 
-## Table of Contents
+## Quick Start
 
-- [Capabilities](#capabilities)
-- [Workflows](#workflows)
-- [Tools](#tools)
-- [Input Requirements](#input-requirements)
-- [Limitations](#limitations)
+```bash
+# Generate test cases from requirements (Python API)
+from test_generator import TestGenerator, TestFramework
+gen = TestGenerator(framework=TestFramework.PYTEST, language="python")
+cases = gen.generate_from_requirements(requirements)
+
+# Analyze coverage gaps from LCOV report
+from coverage_analyzer import CoverageAnalyzer
+analyzer = CoverageAnalyzer()
+analyzer.parse_coverage_report(content, "lcov")
+gaps = analyzer.identify_gaps(threshold=80.0)
+
+# Guide TDD cycle
+from tdd_workflow import TDDWorkflow
+wf = TDDWorkflow()
+wf.start_cycle("User can reset password via email")
+```
 
 ---
 
-## Capabilities
+## Core Workflows
 
-| Capability | Description |
-|------------|-------------|
-| Test Generation | Convert requirements or code into test cases with proper structure |
-| Coverage Analysis | Parse LCOV/JSON/XML reports, identify gaps, prioritize fixes |
-| TDD Workflow | Guide red-green-refactor cycles with validation |
-| Framework Adapters | Generate tests for Jest, Pytest, JUnit, Vitest, Mocha |
-| Quality Scoring | Assess test isolation, assertions, naming, detect test smells |
-| Fixture Generation | Create realistic test data, mocks, and factories |
+### Workflow 1: TDD a New Feature
 
----
+1. Write a failing test for the feature requirement (RED phase)
+2. Call `validate_red_phase()` -- confirms test exists and fails
+3. Write minimal code to make the test pass (GREEN phase)
+4. Call `validate_green_phase()` -- confirms all tests pass
+5. Refactor while keeping tests green (REFACTOR phase)
+6. Call `validate_refactor_phase()` -- confirms tests still pass after cleanup
+7. **Validation checkpoint:** Each cycle completes in under 10 minutes; zero test smells introduced
 
-## Workflows
+### Workflow 2: Analyze Coverage Gaps
 
-### Generate Tests from Code
+1. Generate coverage report: `npm test -- --coverage` or `pytest --cov`
+2. Detect format with `detect_format()` and parse with `parse_coverage_report()`
+3. Run `identify_gaps(threshold=80.0)` to get prioritized file list (P0/P1/P2)
+4. Generate test stubs for P0 files (business-critical, lowest coverage)
+5. **Validation checkpoint:** Line coverage >= 80%; branch coverage >= 70%; zero P0 gaps in critical paths
 
-1. Provide source code (TypeScript, JavaScript, Python, Java)
-2. Specify target framework (Jest, Pytest, JUnit, Vitest)
-3. Run `test_generator.py` with requirements
-4. Review generated test stubs
-5. **Validation:** Tests compile and cover happy path, error cases, edge cases
+### Workflow 3: Generate Tests from Requirements
 
-### Analyze Coverage Gaps
-
-1. Generate coverage report from test runner (`npm test -- --coverage`)
-2. Run `coverage_analyzer.py` on LCOV/JSON/XML report
-3. Review prioritized gaps (P0/P1/P2)
-4. Generate missing tests for uncovered paths
-5. **Validation:** Coverage meets target threshold (typically 80%+)
-
-### TDD New Feature
-
-1. Write failing test first (RED)
-2. Run `tdd_workflow.py --phase red` to validate
-3. Implement minimal code to pass (GREEN)
-4. Run `tdd_workflow.py --phase green` to validate
-5. Refactor while keeping tests green (REFACTOR)
-6. **Validation:** All tests pass after each cycle
+1. Structure requirements as user stories with acceptance criteria
+2. Call `generate_from_requirements()` with target framework
+3. Review generated test cases for completeness (happy path, error, edge cases)
+4. Generate test file with `generate_test_file()`
+5. **Validation checkpoint:** Each acceptance criterion has at least one test; all tests compile
 
 ---
 
 ## Tools
 
-| Tool | Purpose | Usage |
-|------|---------|-------|
-| `test_generator.py` | Generate test cases from code/requirements | `python scripts/test_generator.py --input source.py --framework pytest` |
-| `coverage_analyzer.py` | Parse and analyze coverage reports | `python scripts/coverage_analyzer.py --report lcov.info --threshold 80` |
-| `tdd_workflow.py` | Guide red-green-refactor cycles | `python scripts/tdd_workflow.py --phase red --test test_auth.py` |
-| `framework_adapter.py` | Convert tests between frameworks | `python scripts/framework_adapter.py --from jest --to pytest` |
-| `fixture_generator.py` | Generate test data and mocks | `python scripts/fixture_generator.py --entity User --count 5` |
-| `metrics_calculator.py` | Calculate test quality metrics | `python scripts/metrics_calculator.py --tests tests/` |
-| `format_detector.py` | Detect language and framework | `python scripts/format_detector.py --file source.ts` |
-| `output_formatter.py` | Format output for CLI/desktop/CI | `python scripts/output_formatter.py --format markdown` |
+| Tool | Purpose |
+|------|---------|
+| `test_generator.py` | Generate test cases from requirements/specs |
+| `coverage_analyzer.py` | Parse LCOV/JSON/XML reports, find gaps |
+| `tdd_workflow.py` | Guide red-green-refactor cycles |
+| `framework_adapter.py` | Convert tests between frameworks |
+| `fixture_generator.py` | Generate test data and mocks with seeds |
+| `metrics_calculator.py` | Calculate complexity and test quality |
+| `format_detector.py` | Auto-detect language and framework |
+| `output_formatter.py` | Format output for CLI/desktop/CI |
 
 ---
 
-## Input Requirements
+## Anti-Patterns
 
-**For Test Generation:**
-- Source code (file path or pasted content)
-- Target framework (Jest, Pytest, JUnit, Vitest)
-- Coverage scope (unit, integration, edge cases)
-
-**For Coverage Analysis:**
-- Coverage report file (LCOV, JSON, or XML format)
-- Optional: Source code for context
-- Optional: Target threshold percentage
-
-**For TDD Workflow:**
-- Feature requirements or user story
-- Current phase (RED, GREEN, REFACTOR)
-- Test code and implementation status
-
----
-
-## Limitations
-
-| Scope | Details |
-|-------|---------|
-| Unit test focus | Integration and E2E tests require different patterns |
-| Static analysis | Cannot execute tests or measure runtime behavior |
-| Language support | Best for TypeScript, JavaScript, Python, Java |
-| Report formats | LCOV, JSON, XML only; other formats need conversion |
-| Generated tests | Provide scaffolding; require human review for complex logic |
-
-**When to use other tools:**
-- E2E testing: Playwright, Cypress, Selenium
-- Performance testing: k6, JMeter, Locust
-- Security testing: OWASP ZAP, Burp Suite
+- **Tests that pass immediately** -- a test with no real assertion or `assert True` skips the RED phase; every test must fail before implementation
+- **Testing implementation details** -- coupling tests to internal method names makes refactoring break tests; test behavior and outputs, not internals
+- **Non-deterministic fixtures** -- random data without a seed produces different failures across CI runs; always pass `seed=<int>` to `FixtureGenerator`
+- **Skipping the refactor phase** -- GREEN code that works but is messy accumulates; refactoring is not optional in TDD
+- **Coverage theater** -- writing tests that hit lines without meaningful assertions; use `metrics_calculator.py` to detect low assertion density
+- **Conditional test logic** -- `if/else` inside tests masks failures; each test should have a single clear path
 
 ---
 

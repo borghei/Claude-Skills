@@ -1,0 +1,65 @@
+# test_results.csv — A/B test results for the ab-test-setup analyzer
+# Experiment: Homepage CTA button redesign (March 2026)
+# Fields: variant, visitor_id, timestamp, converted, revenue_cents, device, source
+# Control = existing blue button, Variant A = green button, Variant B = larger red button
+variant,visitor_id,timestamp,converted,revenue_cents,device,source
+control,V00101,2026-03-01 08:12:33,0,0,desktop,organic
+control,V00102,2026-03-01 08:45:19,1,4900,desktop,organic
+control,V00103,2026-03-01 09:03:41,0,0,mobile,paid
+control,V00104,2026-03-01 09:22:08,0,0,mobile,organic
+control,V00105,2026-03-01 10:15:50,1,2900,desktop,referral
+control,V00106,2026-03-01 11:30:22,0,0,tablet,organic
+control,V00107,2026-03-01 12:08:14,1,4900,desktop,paid
+control,V00108,2026-03-01 13:44:59,0,0,mobile,organic
+control,V00109,2026-03-01 14:20:33,0,0,mobile,paid
+control,V00110,2026-03-01 15:55:18,0,0,desktop,organic
+control,V00111,2026-03-02 07:33:41,1,2900,desktop,organic
+control,V00112,2026-03-02 08:19:05,0,0,mobile,social
+control,V00113,2026-03-02 09:48:22,0,0,mobile,organic
+control,V00114,2026-03-02 10:30:17,1,9900,desktop,paid
+control,V00115,2026-03-02 11:15:44,0,0,tablet,organic
+control,V00116,2026-03-02 12:42:30,0,0,mobile,referral
+control,V00117,2026-03-02 14:05:19,0,0,desktop,organic
+control,V00118,2026-03-02 15:33:28,1,4900,desktop,paid
+control,V00119,2026-03-03 08:10:42,0,0,mobile,organic
+control,V00120,2026-03-03 09:25:51,0,0,mobile,social
+variant_a,V00201,2026-03-01 08:14:20,1,4900,desktop,organic
+variant_a,V00202,2026-03-01 08:50:33,0,0,mobile,organic
+variant_a,V00203,2026-03-01 09:18:45,1,2900,desktop,paid
+variant_a,V00204,2026-03-01 10:05:12,0,0,mobile,organic
+variant_a,V00205,2026-03-01 10:42:38,1,4900,desktop,referral
+variant_a,V00206,2026-03-01 11:28:55,0,0,tablet,organic
+variant_a,V00207,2026-03-01 12:15:10,1,9900,desktop,paid
+variant_a,V00208,2026-03-01 13:50:44,1,2900,mobile,organic
+variant_a,V00209,2026-03-01 14:33:21,0,0,mobile,paid
+variant_a,V00210,2026-03-01 16:05:18,0,0,desktop,organic
+variant_a,V00211,2026-03-02 07:45:33,1,4900,desktop,organic
+variant_a,V00212,2026-03-02 08:30:19,0,0,mobile,social
+variant_a,V00213,2026-03-02 09:55:41,1,2900,desktop,organic
+variant_a,V00214,2026-03-02 10:48:05,0,0,mobile,paid
+variant_a,V00215,2026-03-02 11:22:38,1,4900,desktop,paid
+variant_a,V00216,2026-03-02 12:50:14,0,0,tablet,referral
+variant_a,V00217,2026-03-02 14:18:33,1,9900,desktop,organic
+variant_a,V00218,2026-03-02 15:45:20,0,0,mobile,organic
+variant_a,V00219,2026-03-03 08:22:15,0,0,mobile,social
+variant_a,V00220,2026-03-03 09:40:30,1,2900,desktop,paid
+variant_b,V00301,2026-03-01 08:18:42,1,4900,desktop,organic
+variant_b,V00302,2026-03-01 08:55:10,1,2900,mobile,organic
+variant_b,V00303,2026-03-01 09:25:33,0,0,desktop,paid
+variant_b,V00304,2026-03-01 10:10:48,1,4900,mobile,organic
+variant_b,V00305,2026-03-01 10:50:15,1,9900,desktop,referral
+variant_b,V00306,2026-03-01 11:35:22,0,0,tablet,organic
+variant_b,V00307,2026-03-01 12:20:40,1,4900,desktop,paid
+variant_b,V00308,2026-03-01 13:58:18,1,2900,mobile,organic
+variant_b,V00309,2026-03-01 14:40:55,0,0,mobile,paid
+variant_b,V00310,2026-03-01 16:12:30,1,4900,desktop,organic
+variant_b,V00311,2026-03-02 07:50:18,1,9900,desktop,organic
+variant_b,V00312,2026-03-02 08:38:44,0,0,mobile,social
+variant_b,V00313,2026-03-02 10:02:19,1,2900,desktop,organic
+variant_b,V00314,2026-03-02 10:55:33,1,4900,mobile,paid
+variant_b,V00315,2026-03-02 11:30:50,0,0,desktop,paid
+variant_b,V00316,2026-03-02 12:58:42,1,4900,tablet,referral
+variant_b,V00317,2026-03-02 14:25:10,0,0,desktop,organic
+variant_b,V00318,2026-03-02 15:52:38,1,9900,mobile,organic
+variant_b,V00319,2026-03-03 08:30:25,0,0,mobile,social
+variant_b,V00320,2026-03-03 09:48:12,1,2900,desktop,paid

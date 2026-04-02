@@ -3,171 +3,212 @@
 </p>
 
 <h1 align="center">Claude Skills</h1>
-<p align="center">The universal AI skills library for every coding assistant</p>
+<p align="center">Production-ready AI skill packages for every coding assistant</p>
 
 <p align="center">
+  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Skills-225-brightgreen.svg" alt="225 Skills"></a>
+  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-613-blue.svg" alt="613 Tools"></a>
+  <a href="#platform-support"><img src="https://img.shields.io/badge/Platforms-11-orange.svg" alt="11 Platforms"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License"></a>
-  <a href="#domains"><img src="https://img.shields.io/badge/Skills-204-brightgreen.svg" alt="204 Skills"></a>
-  <a href="#domains"><img src="https://img.shields.io/badge/Python_Tools-559-blue.svg" alt="559 Tools"></a>
-  <a href="https://claude.ai/code"><img src="https://img.shields.io/badge/Claude_Code-purple.svg" alt="Claude Code"></a>
-  <a href="https://cursor.com"><img src="https://img.shields.io/badge/Cursor-00D1FF.svg" alt="Cursor"></a>
-  <a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/Copilot-000000.svg" alt="GitHub Copilot"></a>
-  <a href="https://openai.com/codex"><img src="https://img.shields.io/badge/Codex-412991.svg" alt="OpenAI Codex"></a>
-  <a href="https://codeium.com/windsurf"><img src="https://img.shields.io/badge/Windsurf-0EA5E9.svg" alt="Windsurf"></a>
-  <a href="https://github.com/cline/cline"><img src="https://img.shields.io/badge/Cline-EC4899.svg" alt="Cline"></a>
-  <a href="https://aider.chat"><img src="https://img.shields.io/badge/Aider-14B8A6.svg" alt="Aider"></a>
+  <img src="https://img.shields.io/badge/Version-4.0.0-purple.svg" alt="v4.0.0">
 </p>
 
 ---
 
-## What You Get
+## What is this?
 
-| | |
-|---|---|
-| **204 Skills** | Production-ready expertise across 13 professional domains |
-| **559 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, and more -- all standard library, no ML dependencies |
-| **19 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
-| **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
-| **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |
-| **10 Platforms** | Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode |
+Claude Skills is the universal AI skills library -- reusable, self-contained skill packages that bundle domain expertise, Python automation tools, reference knowledge bases, and ready-to-use templates. Each skill works as a standalone package you can drop into any AI coding assistant: Claude Code, Codex, Gemini CLI, Cursor, Copilot, Windsurf, Cline, Aider, Goose, and more.
+
+Skills are not plugins or extensions. They are structured knowledge packages that make your AI assistant an expert in a specific domain -- from Terraform infrastructure to SOC 2 compliance to DCF valuation.
 
 ---
 
 ## Quick Start
 
-### Option A: Clone & Use
+### Option A: Clone the full library
 
 ```bash
 git clone https://github.com/borghei/Claude-Skills.git
 cd Claude-Skills
 
-# Browse skills
-ls engineering/ marketing/ product-team/ c-level-advisor/
+# Browse domains
+ls engineering/ marketing/ c-level-advisor/ ra-qm-team/
 
-# Run a Python tool directly
+# Run any Python tool directly
 python engineering/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
-
-# Install a skill to your project
-python scripts/skill-installer.py install senior-fullstack --agent claude
 ```
 
-### Option B: Copy a Skill Manually
+### Option B: Use the CLI tool
 
 ```bash
-# Copy a skill folder into your project
-cp -r engineering/senior-fullstack ~/.claude/skills/senior-fullstack
+# Search for skills
+python scripts/cs.py search "docker"
 
-# Or paste any SKILL.md content directly into your AI assistant
+# Install a skill into your project
+python scripts/cs.py install docker-development --agent claude
+
+# See what's available
+python scripts/cs.py stats
 ```
 
-See [INSTALLATION.md](INSTALLATION.md) for the full installation guide with auto-update configuration and per-agent details.
+### Option C: Copy a single skill
 
----
-
-## Usage
-
-**Run a Python tool:**
 ```bash
-python engineering/claude-code-mastery/scripts/claudemd_optimizer.py CLAUDE.md
-```
-```
-CLAUDE.md Optimization Report
-  Score: 72/100 | Lines: 142 | Tokens: ~1,850 (9.3% of budget)
-  Missing: Code Style, Testing Strategy
-  Redundancy: 3 issues found (-120 tokens)
+# Grab just the skill you need
+cp -r engineering/senior-devops/ ~/.claude/skills/senior-devops
+
+# Or paste the SKILL.md content directly into your AI assistant's context
 ```
 
-**Use a subagent:**
-```
-> /agents/code-reviewer Review the last commit for security issues
-```
-```
-Code Review: 7/10 | 1 critical (SQL injection), 1 high (missing auth), 1 N+1 query
-```
-
-See [docs/USAGE.md](docs/USAGE.md) for detailed examples across all tools and agents.
+See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update configuration and per-agent setup.
 
 ---
 
-## Domains
+## Stats at a Glance
 
-| Domain | Skills | Tools | Focus |
-|--------|--------|-------|-------|
-| [Engineering](docs/SKILLS.md#engineering-28) | 28 | 77 | Fullstack, DevOps, security, mobile, ML, cloud |
-| [Advanced Engineering](docs/SKILLS.md#advanced-engineering-33) | 33 | 33 | MCP servers, Playwright, CI/CD, SaaS, observability |
-| [C-Level Advisory](docs/SKILLS.md#c-level-advisory-26) | 26 | 4 | CEO, CTO, CFO, CISO strategic decision-making |
-| [Marketing](docs/SKILLS.md#marketing-35) | 35 | 6 | Content, SEO, demand gen, paid ads, CRO |
-| [Product Team](docs/SKILLS.md#product-team-8) | 8 | 6 | RICE, OKRs, user stories, UX research, design systems |
-| [Project Management](docs/SKILLS.md#project-management-23) | 23 | 14 | Scrum, discovery, execution, Atlassian, retros |
-| [RA/QM & Compliance](docs/SKILLS.md#regulatory-affairs-quality-management--compliance-20) | 20 | 35 | ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA |
-| [Business Growth](docs/SKILLS.md#business-growth-16) | 16 | 9 | CRO, churn prevention, pricing, referral programs |
-| [Finance](docs/SKILLS.md#finance-1) | 1 | 4 | DCF valuation, ratio analysis, budgeting |
-| [Data & Analytics](docs/SKILLS.md#data--analytics-5) | 5 | 4 | SQL, ML ops, dbt, business intelligence |
-| [Sales & Success](docs/SKILLS.md#sales--success-5) | 5 | - | MEDDIC, pipeline management, solutions architecture |
-| [HR & People](docs/SKILLS.md#hr--people-4) | 4 | - | Talent acquisition, people analytics, org design |
-| [Standards](standards/) | 5 | - | Communication, quality, git, security standards |
-| | **204** | **559** | |
-
-See [docs/SKILLS.md](docs/SKILLS.md) for the complete skills reference with descriptions and tool counts.
+| Metric | Count |
+|--------|-------|
+| **Skills** | 225 |
+| **Python Tools** | 613 |
+| **Agents & Personas** | 32 |
+| **Slash Commands** | 26 |
+| **Domains** | 13 |
+| **Platforms** | 11 |
+| **CI/CD Workflows** | 6 |
+| **Compliance Frameworks** | 18 |
+| **Standards** | 7 |
 
 ---
 
-## Agents
+## Skill Domains
 
-Claude Skills includes **19 role-based agents** that combine multiple skills into specialized AI personas, plus **6 built-in subagents** for autonomous code workflows.
+| Domain | Skills | Description | Highlights |
+|--------|--------|-------------|------------|
+| [**Engineering**](docs/SKILLS.md#engineering) | 76 | Fullstack, DevOps, security, AI/ML, cloud, mobile, data | Docker, Terraform, K8s, Playwright, MCP servers, RAG, observability |
+| [**Marketing**](docs/SKILLS.md#marketing) | 38 | Content, SEO, demand gen, paid ads, CRO, social, video | SEO auditor, campaign analytics, A/B testing, X/Twitter growth |
+| [**C-Level Advisory**](docs/SKILLS.md#c-level-advisory) | 26 | CEO, CTO, CFO, CISO strategic decision-making | Board governance, fundraising, tech strategy, Virtual Board of Directors |
+| [**RA/QM & Compliance**](docs/SKILLS.md#regulatory-affairs-quality-management--compliance) | 21 | Regulatory, quality, security, privacy compliance | ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, HIPAA |
+| [**Business & Growth**](docs/SKILLS.md#business-growth) | 16 | Revenue ops, customer success, pricing, churn prevention | CRO, referral programs, pricing optimization, retention analytics |
+| [**Project Management**](docs/SKILLS.md#project-management) | 10 | Agile, Scrum, Jira, Confluence, sprint planning | Sprint health, retrospectives, portfolio management, Atlassian MCP |
+| [**Product Team**](docs/SKILLS.md#product-team) | 8 | Discovery, analytics, roadmaps, UX research, design systems | RICE scoring, OKRs, PRDs, user story generation |
+| [**Data Analytics**](docs/SKILLS.md#data--analytics) | 5 | BI, ML ops, analytics engineering, dbt | SQL optimization, data pipelines, business intelligence |
+| [**Sales Success**](docs/SKILLS.md#sales--success) | 5 | Account exec, solutions architect, sales ops | MEDDIC, pipeline management, technical sales |
+| [**HR Operations**](docs/SKILLS.md#hr--people) | 4 | Talent acquisition, people analytics, HR business partner | Hiring loops, org design, compensation benchmarking |
+| [**Finance**](docs/SKILLS.md#finance) | 3 | Financial analyst, SaaS metrics, investment advisor | DCF valuation, ratio analysis, SaaS benchmarks, budgeting |
+| [**Standards**](standards/) | 7 | Communication, quality, git, security, orchestration, authoring | Skill Authoring Standard, Orchestration Protocol |
 
-Role-based agents act as domain experts. When you invoke one, it selects the right skills, runs relevant Python tools, and produces structured analysis.
-
-| Agent | Domain | Role |
-|-------|--------|------|
-| **cs-tech-lead** | Engineering | Architecture reviews, team mentoring |
-| **cs-engineering-director** | Engineering | Engineering management, hiring, process |
-| **cs-ceo-advisor** | C-Level | Strategic planning, board governance |
-| **cs-cto-advisor** | C-Level | Technical strategy, engineering leadership |
-| **cs-cfo-advisor** | C-Level | Financial planning, fundraising |
-| **cs-compliance-auditor** | Compliance | 18-framework audit (SOC 2, GDPR, HIPAA, etc.) |
-| **cs-ciso-advisor** | Compliance | Security strategy, risk quantification |
-| **cs-product-manager** | Product | Roadmap planning, user research |
-
-See [docs/AGENTS.md](docs/AGENTS.md) for the full list of all 25 agents with descriptions and example workflows.
+See [docs/SKILLS.md](docs/SKILLS.md) for the complete reference with descriptions and tool counts.
 
 ---
 
-## Repository Structure
+## Key Features
 
+### Cross-Domain Personas
+
+7 personas that combine skills from multiple domains into a single expert identity:
+
+`startup-cto` | `growth-marketer` | `solo-founder` | `content-strategist` | `devops-engineer` | `finance-lead` | `product-manager`
+
+Activate with `/persona startup-cto` or by referencing the persona in conversation.
+
+### Compound Sub-Skill Systems
+
+3 deep-dive skill systems with 21 total sub-skills:
+
+- **Playwright Pro** -- Advanced browser automation, testing patterns, and debugging
+- **Self-Improving Agent** -- Agents that evaluate and improve their own performance
+- **AgentHub** -- Multi-agent orchestration, tool schemas, and communication protocols
+
+### Slash Commands
+
+26 commands for common workflows:
+
+| Command | Purpose |
+|---------|---------|
+| `/tdd` | Test-driven development workflow |
+| `/rice` | RICE-score feature prioritization |
+| `/prd` | Generate a product requirements doc |
+| `/retro` | Data-driven sprint retrospective |
+| `/tech-debt` | Scan and prioritize technical debt |
+| `/security-scan` | Run security audit gate |
+| `/a11y-audit` | WCAG accessibility audit |
+| `/changelog` | Generate changelog from git history |
+| `/sprint-plan` | Plan a sprint from backlog |
+| `/focused-fix` | Minimal-blast-radius bugfix |
+
+Run `/README` in Claude Code to see the full list.
+
+### Orchestration Protocol
+
+4 multi-agent patterns for complex workflows: sequential pipeline, parallel fan-out, supervisor delegation, and consensus voting. Defined in the [Orchestration Protocol standard](standards/).
+
+### MCP Server
+
+Use skills as Claude Code tools via the built-in MCP server:
+
+```bash
+python scripts/mcp_server.py
 ```
-Claude-Skills/
-├── .claude/              # Claude Code config
-│   └── agents/           # 6 subagents (code-reviewer, qa-engineer, etc.)
-├── agents/               # 19 role-based agents
-│   ├── engineering/      # Tech lead, director, code auditor, etc.
-│   ├── c-level/          # CEO, CTO, CFO advisors
-│   ├── compliance/       # Compliance auditor, CISO advisor
-│   ├── marketing/        # Content creator, demand gen, SEO
-│   └── product/          # Product manager
-├── engineering/          # 61 engineering skills + 177 Python tools
-├── c-level-advisor/      # 26 C-level advisory skills
-├── marketing/            # 35 marketing skills + 6 Python tools
-├── product-team/         # 8 product skills + 6 Python tools
-├── project-management/   # 23 PM skills + 14 Python tools
-├── ra-qm-team/           # 20 compliance skills + 35 Python tools
-├── business-growth/      # 16 growth skills + 9 Python tools
-├── finance/              # 1 finance skill + 4 Python tools
-├── data-analytics/       # 5 analytics skills + 4 Python tools
-├── sales-success/        # 5 sales skills
-├── hr-operations/        # 4 HR skills
-├── standards/            # Best practices library
-├── templates/            # Templates + 12 sample GitHub workflows
-├── scripts/              # Skill installer + utilities
-├── docs/                 # Extended documentation
-└── CLAUDE.md             # Claude Code config
+
+### Starter Bundles
+
+Pre-configured skill sets for common roles:
+
+`SaaS Founder Kit` | `DevOps Kit` | `Compliance Kit` | `Growth Kit` | `Product Kit` | `Data Kit` | `Security Kit` | `Finance Kit`
+
+Install with `python scripts/cs.py bundle saas-founder`.
+
+---
+
+## Platform Support
+
+| Platform | Config File | Status |
+|----------|-------------|--------|
+| **Claude Code** | `CLAUDE.md` | Native |
+| **OpenAI Codex** | `AGENTS.md` | Native |
+| **Gemini CLI** | `GEMINI.md`, `.gemini/` | Native |
+| **Cursor** | `.cursorrules` | Native |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | Native |
+| **Windsurf** | `.windsurfrules` | Native |
+| **Cline** | `.clinerules` | Native |
+| **Aider** | `AGENTS.md` | Compatible |
+| **Goose** | `.goosehints` | Native |
+| **Jules** | `AGENTS.md` | Compatible |
+| **RooCode** | `AGENTS.md` | Compatible |
+
+---
+
+## CLI Tool
+
+```bash
+python scripts/cs.py <command>
+
+# Commands
+  search <query>       Search skills by keyword
+  install <skill>      Install a skill into your project
+  list                 List all available skills
+  stats                Show library statistics
+  doctor               Check skill health and integrity
+  bundle <name>        Install a starter bundle
 ```
+
+---
+
+## Documentation
+
+- **Full docs site:** [docs/](docs/) (MkDocs Material)
+- **Skills reference:** [docs/SKILLS.md](docs/SKILLS.md)
+- **Agents reference:** [docs/AGENTS.md](docs/AGENTS.md)
+- **Usage guide:** [docs/USAGE.md](docs/USAGE.md)
+- **Installation:** [INSTALLATION.md](INSTALLATION.md)
+- **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Standards:** [standards/](standards/)
 
 ---
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fork the repo, create a skill following the standard package structure, include Python tools and YAML frontmatter, and submit a PR.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fork the repo, create a skill following the [Skill Authoring Standard](standards/), include Python tools and YAML frontmatter, and submit a PR.
 
 ---
 
@@ -187,7 +228,7 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 ---
 
 <p align="center">
-  <strong>204 skills. 559 tools. 13 domains. 19 agents. 10 platforms.</strong><br>
+  <strong>225 skills. 613 tools. 13 domains. 32 agents. 11 platforms.</strong><br>
   <a href="https://borghei.me">borghei.me</a>
 </p>
 

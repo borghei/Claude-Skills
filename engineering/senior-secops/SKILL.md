@@ -21,40 +21,7 @@ metadata:
 ---
 # Senior SecOps Engineer
 
-Complete toolkit for Security Operations including vulnerability management, compliance verification, secure coding practices, and security automation.
-
----
-
-## Table of Contents
-
-- [Trigger Terms](#trigger-terms)
-- [Core Capabilities](#core-capabilities)
-- [Workflows](#workflows)
-- [Tool Reference](#tool-reference)
-- [Security Standards](#security-standards)
-- [Compliance Frameworks](#compliance-frameworks)
-- [Best Practices](#best-practices)
-
----
-
-## Trigger Terms
-
-Use this skill when you encounter:
-
-| Category | Terms |
-|----------|-------|
-| **Vulnerability Management** | CVE, CVSS, vulnerability scan, security patch, dependency audit, npm audit, pip-audit |
-| **OWASP Top 10** | injection, XSS, CSRF, broken authentication, security misconfiguration, sensitive data exposure |
-| **Compliance** | SOC 2, PCI-DSS, HIPAA, GDPR, compliance audit, security controls, access control |
-| **Secure Coding** | input validation, output encoding, parameterized queries, prepared statements, sanitization |
-| **Secrets Management** | API key, secrets vault, environment variables, HashiCorp Vault, AWS Secrets Manager |
-| **Authentication** | JWT, OAuth, MFA, 2FA, TOTP, password hashing, bcrypt, argon2, session management |
-| **Security Testing** | SAST, DAST, penetration test, security scan, Snyk, Semgrep, CodeQL, Trivy |
-| **Incident Response** | security incident, breach notification, incident response, forensics, containment |
-| **Network Security** | TLS, HTTPS, HSTS, CSP, CORS, security headers, firewall rules, WAF |
-| **Infrastructure Security** | container security, Kubernetes security, IAM, least privilege, zero trust |
-| **Cryptography** | encryption at rest, encryption in transit, AES-256, RSA, key management, KMS |
-| **Monitoring** | security monitoring, SIEM, audit logging, intrusion detection, anomaly detection |
+The agent scans source code for security vulnerabilities (hardcoded secrets, SQL injection, XSS, command injection), assesses dependency CVEs across npm/Python/Go ecosystems, and verifies compliance against SOC 2, PCI-DSS, HIPAA, and GDPR frameworks.
 
 ---
 
@@ -519,6 +486,17 @@ app.use((req, res, next) => {
 - Vanta (SOC 2 automation)
 - Drata (compliance management)
 - AWS Config (configuration compliance)
+
+---
+
+## Anti-Patterns
+
+- **Relying solely on automated scanning** -- SAST tools miss business logic flaws and authorization issues; combine with manual code review for auth-sensitive code
+- **Ignoring medium-severity findings** -- exit code 0 on medium findings does not mean safe; parse JSON output for comprehensive CI gating
+- **Hardcoding secrets in test fixtures** -- test files with example tokens trigger false positives; use environment variables or mock values even in tests
+- **Compliance score as a goal** -- a 90% compliance score with failed encryption controls is worse than 80% with all critical controls passing; prioritize by severity
+- **One-time security audits** -- running the scanner once per quarter misses regressions; integrate into every PR via CI/CD
+- **Treating warnings as passed** -- compliance checker scores warnings at 0.5 (partial credit); any control below `passed` needs remediation
 
 ---
 

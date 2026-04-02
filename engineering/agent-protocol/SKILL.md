@@ -18,17 +18,7 @@ metadata:
 ---
 # Agent Protocol
 
-**Tier:** POWERFUL
-**Category:** Engineering / AI Systems
-**Maintainer:** Claude Skills Team
-
-## Overview
-
-The Agent Protocol skill provides production-grade patterns for AI agent communication across every major protocol: Model Context Protocol (MCP), Google Agent-to-Agent (A2A), OpenAI Function Calling, and custom inter-agent messaging. Covers tool schema design, transport negotiation, capability discovery, authentication, error handling, and protocol bridging for heterogeneous agent ecosystems.
-
-## Keywords
-
-agent protocol, MCP, model context protocol, A2A, agent-to-agent, function calling, tool schema, agent communication, inter-agent messaging, tool definition, capability discovery, protocol bridge, agent orchestration, LLM tools
+The agent designs tool schemas for MCP, Google A2A, and OpenAI Function Calling protocols. It implements transport selection, capability discovery, authentication flows (OAuth 2.1, API keys), structured error handling, rate limiting, and protocol bridges for heterogeneous agent ecosystems.
 
 ## Core Capabilities
 

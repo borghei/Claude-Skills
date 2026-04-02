@@ -18,19 +18,7 @@ metadata:
 ---
 # Senior Computer Vision Engineer
 
-Production computer vision engineering skill for object detection, image segmentation, and visual AI system deployment.
-
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Core Expertise](#core-expertise)
-- [Tech Stack](#tech-stack)
-- [Workflow 1: Object Detection Pipeline](#workflow-1-object-detection-pipeline)
-- [Workflow 2: Model Optimization and Deployment](#workflow-2-model-optimization-and-deployment)
-- [Workflow 3: Custom Dataset Preparation](#workflow-3-custom-dataset-preparation)
-- [Architecture Selection Guide](#architecture-selection-guide)
-- [Reference Documentation](#reference-documentation)
-- [Common Commands](#common-commands)
+The agent designs end-to-end computer vision pipelines for object detection, instance/semantic segmentation, and production deployment. It generates training configurations for YOLO/Detectron2/MMDetection, optimizes models for ONNX/TensorRT/OpenVINO runtimes, and builds dataset preparation workflows with format conversion and augmentation.
 
 ## Quick Start
 
@@ -45,34 +33,11 @@ python scripts/inference_optimizer.py model.pt --target onnx --benchmark
 python scripts/dataset_pipeline_builder.py images/ --format coco --augment
 ```
 
-## Core Expertise
-
-This skill provides guidance on:
-
-- **Object Detection**: YOLO family (v5-v11), Faster R-CNN, DETR, RT-DETR
-- **Instance Segmentation**: Mask R-CNN, YOLACT, SOLOv2
-- **Semantic Segmentation**: DeepLabV3+, SegFormer, SAM (Segment Anything)
-- **Image Classification**: ResNet, EfficientNet, Vision Transformers (ViT, DeiT)
-- **Video Analysis**: Object tracking (ByteTrack, SORT), action recognition
-- **3D Vision**: Depth estimation, point cloud processing, NeRF
-- **Production Deployment**: ONNX, TensorRT, OpenVINO, CoreML
-
-## Tech Stack
-
-| Category | Technologies |
-|----------|--------------|
-| Frameworks | PyTorch, torchvision, timm |
-| Detection | Ultralytics (YOLO), Detectron2, MMDetection |
-| Segmentation | segment-anything, mmsegmentation |
-| Optimization | ONNX, TensorRT, OpenVINO, torch.compile |
-| Image Processing | OpenCV, Pillow, albumentations |
-| Annotation | CVAT, Label Studio, Roboflow |
-| Experiment Tracking | MLflow, Weights & Biases |
-| Serving | Triton Inference Server, TorchServe |
+---
 
 ## Workflow 1: Object Detection Pipeline
 
-Use this workflow when building an object detection system from scratch.
+The agent uses this workflow when building an object detection system from scratch.
 
 ### Step 1: Define Detection Requirements
 
@@ -542,6 +507,17 @@ trtexec --loadEngine=model.engine --batch=1 --iterations=1000 --avgRuns=100
 - **Optimization Guide**: `references/object_detection_optimization.md`
 - **Deployment Guide**: `references/production_vision_systems.md`
 - **Scripts**: `scripts/` directory for automation tools
+
+## Anti-Patterns
+
+- **Training without data audit** -- skipping `dataset_pipeline_builder.py analyze` leads to corrupted images, duplicate pairs, and class imbalance surprises mid-training
+- **Deploying FP32 to production** -- always export to FP16 minimum; FP32 wastes 2x memory and 1.5-2x latency for <0.5% mAP difference
+- **Ignoring calibration dataset** -- INT8 quantization with random samples causes 5-10% mAP drop; use 500+ representative images from the training distribution
+- **One-size-fits-all architecture** -- using YOLOv8x for edge deployment or YOLOv8n for high-accuracy requirements; match architecture to deployment target
+- **Benchmarking without warmup** -- first N inference calls include JIT compilation overhead; always use `--warmup 10` for accurate measurements
+- **Skipping ONNX validation** -- export can silently produce incorrect models; always run `onnx.checker.check_model()` after export
+
+---
 
 ## Troubleshooting
 

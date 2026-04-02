@@ -1,0 +1,74 @@
+# ============================================================================
+# Claude Code Review — AI-powered PR review using Claude
+# ============================================================================
+# Uses the Anthropic Claude GitHub Action to review pull request changes.
+# Posts inline review comments highlighting issues, suggestions, and
+# adherence to the project's skill package standards.
+#
+# Required secret: ANTHROPIC_API_KEY
+# ============================================================================
+
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+# Only allow one review per PR at a time
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number || github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    name: Claude PR Review
+    runs-on: ubuntu-latest
+    # Run on PR events, or on issue comments that mention @claude
+    if: |
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       contains(github.event.comment.body, '@claude'))
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # Direct prompt instructs Claude on what to review
+          direct_prompt: |
+            Review this PR for the Claude Skills repository. Focus on:
+
+            1. **Skill Structure**: SKILL.md present, scripts/ in correct location,
+               references/ and assets/ used appropriately
+            2. **Python Quality**: Standard library only, CLI-first design,
+               no ML/LLM calls, no hardcoded secrets
+            3. **Security**: No eval/exec, no shell=True, no network exfiltration
+            4. **Documentation**: Clear, actionable, follows existing voice/style
+            5. **Conventional Commits**: Commit messages follow feat/fix/docs pattern
+
+            Be concise. Only flag real issues — do not nitpick formatting.
+
+          # Allowed tools for Claude to use during review
+          allowed_tools: |
+            Bash(git diff HEAD~1)
+            Bash(find . -name '*.py' -path '*/scripts/*')
+            Read
+            Grep
+
+          # Model to use for review
+          model: claude-sonnet-4-20250514
+
+      - name: Post review status
+        if: always()
+        run: echo "Claude review completed with status ${{ job.status }}"

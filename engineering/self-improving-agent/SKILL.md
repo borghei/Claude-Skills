@@ -8,12 +8,13 @@ description: >
   managing auto-memory, or designing self-correcting systems.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 2.0.0
   author: borghei
   category: engineering
   domain: ai-agents
   tier: POWERFUL
-  updated: 2026-03-09
+  updated: 2026-04-02
+  tags: [self-improvement, ai-agents, feedback-loops, auto-memory, meta-learning, memory-curation]
   frameworks: feedback-loops, memory-curation, meta-learning, performance-regression
 ---
 # Self-Improving Agent - Autonomous Learning Patterns
@@ -27,6 +28,39 @@ metadata:
 Self-Improving Agent provides architectural patterns for AI agents that get better with use. Most agents are stateless -- they make the same mistakes repeatedly because they lack mechanisms to learn from their own execution. This skill addresses that gap with concrete patterns for feedback capture, memory curation, skill extraction, and regression detection.
 
 The key insight: auto-memory captures everything, but curation is what turns noise into knowledge.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific step of the improvement loop:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Remember** | `skills/remember.md` | Capture errors and learnings from current session |
+| **Extract** | `skills/extract.md` | Extract reusable patterns from completed work |
+| **Promote** | `skills/promote.md` | Graduate proven patterns to permanent rules |
+| **Review** | `skills/review.md` | Audit memory health, prune stale entries |
+| **Status** | `skills/status.md` | Dashboard showing memory state and learning progress |
+
+### Sub-Skill Flow
+
+```
+Remember ──> Extract ──> Promote ──> Review
+    ^                                  │
+    └──────────── Status ◄─────────────┘
+```
+
+**The improvement cycle:** Remember captures events during work, Extract identifies patterns across sessions, Promote graduates proven patterns to rules, Review maintains memory health, and Status provides visibility into the entire system.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/pattern_extractor.py` | Extract reusable patterns from session logs |
+| `scripts/memory_health_checker.py` | Audit memory for stale, duplicate, and promotable entries |
+| `scripts/rule_promoter.py` | Validate and apply promotions from memory to rules |
+| `scripts/feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities |
+| `scripts/regression_detector.py` | Compare baseline vs current performance metrics |
+| `scripts/rule_manager.py` | Manage a learned rules knowledge base with CRUD |
 
 ## Core Architecture
 

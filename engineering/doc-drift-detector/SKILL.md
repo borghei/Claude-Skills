@@ -1,8 +1,10 @@
 ---
 name: doc-drift-detector
 description: >
-  Automated documentation drift detection and synchronization with code change
-  analysis, staleness scoring, and intelligent update recommendations
+  Detects documentation drift against code changes, scores staleness on a
+  weighted 0-100 scale, validates API docs via AST parsing, and audits link
+  integrity. Use when documentation falls out of sync with code, preparing
+  releases, running CI doc gates, or auditing README/API doc accuracy.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.0
@@ -16,53 +18,7 @@ metadata:
 ---
 # Documentation Drift Detector
 
-Automated documentation drift detection and synchronization for codebases of any size. Identifies when documentation falls out of sync with code, scores staleness, validates API docs against source, and audits link integrity -- all with zero external dependencies.
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Keywords](#keywords)
-- [Quick Start](#quick-start)
-- [Core Workflows](#core-workflows)
-  - [1. Full Drift Analysis](#workflow-1-full-drift-analysis)
-  - [2. API Documentation Validation](#workflow-2-api-documentation-validation)
-  - [3. README Health Check](#workflow-3-readme-health-check)
-  - [4. Link Integrity Audit](#workflow-4-link-integrity-audit)
-  - [5. Continuous Doc Monitoring](#workflow-5-continuous-doc-monitoring)
-- [Tools](#tools)
-- [Staleness Scoring](#staleness-scoring)
-- [Drift Categories](#drift-categories)
-- [Auto-Fix vs Manual-Fix Classification](#auto-fix-vs-manual-fix-classification)
-- [Integration Points](#integration-points)
-- [Reference Guides](#reference-guides)
-- [Assets](#assets)
-
----
-
-## Overview
-
-Documentation drift is the silent killer of developer productivity. When docs say one thing and code does another, teams waste hours debugging misunderstandings, onboarding slows to a crawl, and API consumers hit walls that should never exist.
-
-This skill provides four Python CLI tools that work together to detect, measure, classify, and report documentation drift. Unlike basic file-date comparisons, these tools perform semantic analysis: mapping code directories to their documentation, extracting function signatures to compare against API docs, validating every link and anchor, and scoring freshness on a weighted 0-100 scale.
-
-**What sets this apart:**
-
-- **Code-to-doc mapping** -- automatically discovers which docs describe which code directories
-- **AST-based API validation** -- parses Python source with the `ast` module to compare real signatures against documented ones
-- **Weighted staleness scoring** -- five dimensions scored independently, then combined with configurable weights
-- **Drift classification** -- categorizes every issue as structural, factual, referential, temporal, or semantic
-- **Auto-fix triage** -- tells you which issues can be fixed automatically vs. which need human judgment
-- **CI/CD ready** -- exit codes, JSON output, and threshold flags for pipeline integration
-
-**Standard library only.** No pip installs. No ML calls. No network requests (except optional URL validation). Drop the scripts into any Python 3.8+ environment and run.
-
----
-
-## Keywords
-
-documentation drift, doc sync, staleness detection, API documentation validation, link checker, markdown analysis, documentation quality, code-doc alignment, README health, changelog validation, documentation CI/CD, documentation gates, broken links, anchor validation, documentation scoring, freshness metrics
+The agent detects documentation drift by mapping code directories to their docs, comparing git modification histories, extracting Python function signatures via AST, validating every markdown link and anchor, and scoring freshness on a weighted 0-100 scale. All four CLI tools use the Python standard library only.
 
 ---
 
@@ -456,6 +412,16 @@ Add staleness scoring to release checklists. Block releases if documentation sco
 |-------|-------------|
 | [Drift Report Template](assets/drift_report_template.md) | Template for drift analysis reports |
 | [Sample Drift Data](assets/sample_drift_data.json) | Sample JSON for testing and demonstration |
+
+---
+
+## Anti-Patterns
+
+- **Ignoring drift until release** -- run drift analysis in CI on every PR, not as a release-day scramble
+- **Treating all drift as equal** -- factual drift (wrong function signatures) is critical; temporal drift (stale dates) is cosmetic; prioritize by category
+- **Manual-only doc updates** -- use `[AUTO]` fixes for version strings and broken links; reserve human effort for semantic and architectural drift
+- **Shallow clone in CI** -- `fetch-depth: 1` breaks git history comparison; always use `fetch-depth: 0` for drift analysis
+- **Skipping link checks on internal docs** -- cross-document anchor references break silently on refactors; run `link_checker.py` on every markdown change
 
 ---
 

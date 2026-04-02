@@ -1,0 +1,185 @@
+<!--
+  sample-page.html — Deliberately broken accessibility example
+
+  This HTML page contains common WCAG violations for the a11y-audit
+  scanner to detect. Violations include:
+    - Missing alt text on images
+    - Skipped heading levels (h1 -> h3 -> h5)
+    - Form inputs without labels
+    - Poor color contrast
+    - Missing lang attribute
+    - No skip navigation link
+    - Missing ARIA landmarks
+    - Auto-playing media
+    - Non-descriptive link text
+    - Missing focus indicators
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Acme Corp — Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      /* VIOLATION: removing focus outlines globally */
+      outline: none;
+    }
+    *:focus { outline: none; }
+
+    .header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 24px;
+    }
+    /* VIOLATION: very low contrast — light gray on white */
+    .subtle-text {
+      color: #ccc;
+      background: #fff;
+      font-size: 12px;
+    }
+    /* VIOLATION: low contrast link color */
+    .content a {
+      color: #aab3ff;
+      background: #f0f0ff;
+    }
+    .card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 12px;
+      width: 300px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .btn-primary {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+    td, th { border: 1px solid #ddd; padding: 8px; text-align: left; }
+  </style>
+</head>
+<!-- VIOLATION: no lang attribute on <html> -->
+<body>
+  <!-- VIOLATION: no skip-navigation link -->
+  <!-- VIOLATION: no <main>, <nav>, <header> landmark elements -->
+
+  <div class="header">
+    <!-- VIOLATION: image with empty alt attribute used decoratively but is informational -->
+    <img src="/logo.png" alt="">
+    <span style="font-size:24px; font-weight:bold;">Acme Corp Dashboard</span>
+  </div>
+
+  <div style="padding: 24px;">
+    <!-- VIOLATION: skips from h1 to h3 -->
+    <h1>Welcome Back, Sarah</h1>
+    <h3>Your Weekly Summary</h3>
+
+    <p class="subtle-text">Last updated: March 28, 2026 at 14:32 UTC</p>
+
+    <div class="card">
+      <!-- VIOLATION: image missing alt attribute entirely -->
+      <img src="/charts/revenue-q1.png" width="280" height="160">
+      <!-- VIOLATION: skips from h3 to h5 -->
+      <h5>Q1 Revenue</h5>
+      <p>Total revenue this quarter: $1.24M</p>
+      <!-- VIOLATION: non-descriptive link text -->
+      <a href="/reports/q1-revenue">Click here</a>
+    </div>
+
+    <div class="card">
+      <img src="/charts/users-growth.png" width="280" height="160">
+      <h5>User Growth</h5>
+      <p>Active users increased 23% month-over-month.</p>
+      <!-- VIOLATION: non-descriptive link text -->
+      <a href="/reports/user-growth">Read more</a>
+    </div>
+
+    <div class="card">
+      <!-- VIOLATION: decorative image should have alt="" but has no alt at all -->
+      <img src="/icons/alert-triangle.svg" width="32" height="32">
+      <h5>Open Incidents</h5>
+      <p class="subtle-text">3 incidents require your attention.</p>
+      <a href="/incidents">More info</a>
+    </div>
+
+    <!-- VIOLATION: form inputs without associated labels -->
+    <h3>Quick Search</h3>
+    <form action="/search" method="GET">
+      <input type="text" name="q" placeholder="Search reports...">
+      <input type="date" name="from">
+      <input type="date" name="to">
+      <select name="department">
+        <option value="">Select department</option>
+        <option value="eng">Engineering</option>
+        <option value="sales">Sales</option>
+        <option value="mktg">Marketing</option>
+      </select>
+      <button class="btn-primary" type="submit">Search</button>
+    </form>
+
+    <!-- VIOLATION: table without caption or summary, no <thead>/<th> scope -->
+    <h3>Recent Transactions</h3>
+    <table>
+      <tr>
+        <td><strong>Date</strong></td>
+        <td><strong>Description</strong></td>
+        <td><strong>Amount</strong></td>
+        <td><strong>Status</strong></td>
+      </tr>
+      <tr>
+        <td>2026-03-27</td>
+        <td>Enterprise license — Globex Corp</td>
+        <td>$48,000</td>
+        <!-- VIOLATION: color alone conveys meaning (green = paid) -->
+        <td style="color: green;">Paid</td>
+      </tr>
+      <tr>
+        <td>2026-03-25</td>
+        <td>Pro plan upgrade — Initech LLC</td>
+        <td>$2,400</td>
+        <td style="color: green;">Paid</td>
+      </tr>
+      <tr>
+        <td>2026-03-24</td>
+        <td>Starter plan — Wayne Enterprises</td>
+        <td>$600</td>
+        <!-- VIOLATION: color alone conveys meaning (red = overdue) -->
+        <td style="color: red;">Overdue</td>
+      </tr>
+      <tr>
+        <td>2026-03-22</td>
+        <td>Add-on: Analytics — Stark Industries</td>
+        <td>$1,200</td>
+        <td style="color: orange;">Pending</td>
+      </tr>
+    </table>
+
+    <!-- VIOLATION: auto-playing video without controls -->
+    <h3>Product Tour</h3>
+    <video src="/media/product-tour.mp4" autoplay muted width="640"></video>
+
+    <!-- VIOLATION: onClick on non-interactive element without keyboard support -->
+    <div onclick="togglePanel()" style="cursor:pointer; padding:12px; background:#f5f5f5; margin:12px 0;">
+      Click to expand advanced filters
+    </div>
+
+    <!-- VIOLATION: tabindex > 0 disrupts natural tab order -->
+    <a href="/settings" tabindex="5">Account Settings</a>
+    <a href="/billing" tabindex="3">Billing</a>
+    <a href="/support" tabindex="1">Support</a>
+  </div>
+
+  <script>
+    function togglePanel() {
+      // no-op placeholder
+    }
+  </script>
+</body>
+</html>

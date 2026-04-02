@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "claude-skills": {
+      "command": "python3",
+      "args": ["scripts/mcp_server.py"],
+      "cwd": "/path/to/Claude-Skills"
+    }
+  }
+}

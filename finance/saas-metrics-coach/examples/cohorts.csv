@@ -1,0 +1,17 @@
+# cohorts.csv — User cohort retention data for SaaS retention analysis
+# Fields: cohort_month, users_acquired, month_0, month_1, ..., month_11
+# Values represent active users remaining in each month after acquisition
+# Use with the saas-metrics-coach retention analysis tools
+cohort_month,users_acquired,month_0,month_1,month_2,month_3,month_4,month_5,month_6,month_7,month_8,month_9,month_10,month_11
+2025-01,48,48,42,38,35,32,30,28,26,25,24,23,22
+2025-02,55,55,47,41,37,34,31,28,26,24,23,22,
+2025-03,62,62,54,48,43,39,35,32,30,28,26,,
+2025-04,58,58,49,42,37,33,30,27,25,23,,,
+2025-05,71,71,60,52,46,41,37,33,31,,,,
+2025-06,65,65,55,47,41,36,32,29,,,,,
+2025-07,78,78,66,57,50,44,39,,,,,,
+2025-08,84,84,71,61,53,46,,,,,,,
+2025-09,73,73,61,52,45,,,,,,,,
+2025-10,90,90,76,65,,,,,,,,,
+2025-11,82,82,69,,,,,,,,,,
+2025-12,95,95,,,,,,,,,,,

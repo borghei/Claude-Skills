@@ -1,0 +1,121 @@
+{
+  "_comment": "opportunities.json — 5 investment opportunities for the screener tool. Each includes financial metrics, risk factors, and thesis for evaluation.",
+  "screened_date": "2026-03-31",
+  "opportunities": [
+    {
+      "id": "OPP-001",
+      "name": "NovaTech AI Solutions",
+      "type": "series_b",
+      "sector": "Enterprise Software / AI",
+      "stage": "Growth",
+      "ask_amount": 5000000,
+      "pre_money_valuation": 45000000,
+      "currency": "USD",
+      "financials": {
+        "arr": 8200000,
+        "arr_growth_yoy": 0.142,
+        "gross_margin": 0.78,
+        "net_revenue_retention": 1.25,
+        "burn_rate_monthly": 420000,
+        "runway_months": 14,
+        "ltv_cac_ratio": 4.2,
+        "payback_months": 11
+      },
+      "thesis": "Category-leading AI ops platform with strong enterprise traction. 85 customers including 12 Fortune 500. Risk: concentrated revenue — top 3 customers = 40% of ARR.",
+      "risk_factors": ["customer_concentration", "competitive_market", "short_runway"],
+      "target_return_multiple": 8.0
+    },
+    {
+      "id": "OPP-002",
+      "name": "GreenGrid Energy Storage",
+      "type": "series_a",
+      "sector": "Clean Energy / Hardware",
+      "stage": "Early Growth",
+      "ask_amount": 12000000,
+      "pre_money_valuation": 38000000,
+      "currency": "USD",
+      "financials": {
+        "arr": 3100000,
+        "arr_growth_yoy": 0.280,
+        "gross_margin": 0.42,
+        "net_revenue_retention": 1.08,
+        "burn_rate_monthly": 850000,
+        "runway_months": 9,
+        "ltv_cac_ratio": 2.1,
+        "payback_months": 18
+      },
+      "thesis": "Novel solid-state battery tech with 3 patents granted. First utility-scale contracts signed. Risk: hardware margins, capital intensity, 9-month runway.",
+      "risk_factors": ["capital_intensive", "hardware_margins", "regulatory_risk", "short_runway"],
+      "target_return_multiple": 12.0
+    },
+    {
+      "id": "OPP-003",
+      "name": "MedSecure Compliance",
+      "type": "series_b",
+      "sector": "Healthcare IT / Compliance",
+      "stage": "Growth",
+      "ask_amount": 8000000,
+      "pre_money_valuation": 62000000,
+      "currency": "USD",
+      "financials": {
+        "arr": 14500000,
+        "arr_growth_yoy": 0.085,
+        "gross_margin": 0.82,
+        "net_revenue_retention": 1.12,
+        "burn_rate_monthly": 310000,
+        "runway_months": 28,
+        "ltv_cac_ratio": 5.8,
+        "payback_months": 8
+      },
+      "thesis": "HIPAA/SOC2 compliance automation with 340 healthcare clients. Sticky product with low churn. Risk: slowing growth (8.5% YoY), regulatory dependency.",
+      "risk_factors": ["slowing_growth", "regulatory_dependency", "niche_market"],
+      "target_return_multiple": 4.0
+    },
+    {
+      "id": "OPP-004",
+      "name": "UrbanFleet Logistics",
+      "type": "series_c",
+      "sector": "Logistics / Marketplace",
+      "stage": "Late Growth",
+      "ask_amount": 25000000,
+      "pre_money_valuation": 180000000,
+      "currency": "USD",
+      "financials": {
+        "arr": 42000000,
+        "arr_growth_yoy": 0.065,
+        "gross_margin": 0.31,
+        "net_revenue_retention": 0.94,
+        "burn_rate_monthly": 2800000,
+        "runway_months": 11,
+        "ltv_cac_ratio": 1.8,
+        "payback_months": 22
+      },
+      "thesis": "Last-mile delivery platform in 18 metro areas. Strong brand. Risk: negative unit economics in 6 markets, NRR below 100%, thin margins.",
+      "risk_factors": ["negative_unit_economics", "thin_margins", "high_burn", "net_retention_below_100"],
+      "target_return_multiple": 3.0
+    },
+    {
+      "id": "OPP-005",
+      "name": "Cobalt Cybersecurity",
+      "type": "series_a",
+      "sector": "Cybersecurity",
+      "stage": "Early Growth",
+      "ask_amount": 6000000,
+      "pre_money_valuation": 28000000,
+      "currency": "USD",
+      "financials": {
+        "arr": 4800000,
+        "arr_growth_yoy": 0.220,
+        "gross_margin": 0.74,
+        "net_revenue_retention": 1.32,
+        "burn_rate_monthly": 380000,
+        "runway_months": 18,
+        "ltv_cac_ratio": 3.9,
+        "payback_months": 13
+      },
+      "thesis": "AI-powered threat detection for mid-market. 132% NRR driven by expansion. Former CrowdStrike leadership team. Risk: crowded market, mid-market churn.",
+      "risk_factors": ["competitive_market", "mid_market_churn_risk"],
+      "target_return_multiple": 10.0
+    }
+  ]
+}

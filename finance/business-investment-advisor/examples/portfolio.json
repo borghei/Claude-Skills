@@ -1,0 +1,129 @@
+{
+  "_comment": "portfolio.json — Sample investment portfolio for the portfolio analyzer. Contains 10 positions across asset classes with purchase history and current valuations.",
+  "portfolio_name": "Meridian Growth Fund",
+  "owner": "Meridian Capital Partners",
+  "as_of_date": "2026-03-31",
+  "base_currency": "USD",
+  "positions": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "asset_class": "equity",
+      "sector": "Technology",
+      "shares": 450,
+      "avg_cost_basis": 178.50,
+      "current_price": 215.30,
+      "currency": "USD",
+      "purchase_date": "2024-06-15",
+      "account": "taxable"
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "asset_class": "equity",
+      "sector": "Technology",
+      "shares": 300,
+      "avg_cost_basis": 340.00,
+      "current_price": 428.75,
+      "currency": "USD",
+      "purchase_date": "2024-03-22",
+      "account": "taxable"
+    },
+    {
+      "ticker": "JNJ",
+      "name": "Johnson & Johnson",
+      "asset_class": "equity",
+      "sector": "Healthcare",
+      "shares": 200,
+      "avg_cost_basis": 162.30,
+      "current_price": 155.40,
+      "currency": "USD",
+      "purchase_date": "2025-01-10",
+      "account": "ira"
+    },
+    {
+      "ticker": "VTI",
+      "name": "Vanguard Total Stock Market ETF",
+      "asset_class": "etf",
+      "sector": "Broad Market",
+      "shares": 800,
+      "avg_cost_basis": 225.00,
+      "current_price": 262.80,
+      "currency": "USD",
+      "purchase_date": "2023-11-05",
+      "account": "ira"
+    },
+    {
+      "ticker": "BND",
+      "name": "Vanguard Total Bond Market ETF",
+      "asset_class": "fixed_income",
+      "sector": "Bonds",
+      "shares": 600,
+      "avg_cost_basis": 73.50,
+      "current_price": 72.10,
+      "currency": "USD",
+      "purchase_date": "2024-09-18",
+      "account": "ira"
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com Inc.",
+      "asset_class": "equity",
+      "sector": "Technology",
+      "shares": 250,
+      "avg_cost_basis": 145.20,
+      "current_price": 198.60,
+      "currency": "USD",
+      "purchase_date": "2024-07-30",
+      "account": "taxable"
+    },
+    {
+      "ticker": "XOM",
+      "name": "Exxon Mobil Corporation",
+      "asset_class": "equity",
+      "sector": "Energy",
+      "shares": 350,
+      "avg_cost_basis": 105.80,
+      "current_price": 112.45,
+      "currency": "USD",
+      "purchase_date": "2025-04-12",
+      "account": "taxable"
+    },
+    {
+      "ticker": "VXUS",
+      "name": "Vanguard Total International Stock ETF",
+      "asset_class": "etf",
+      "sector": "International",
+      "shares": 500,
+      "avg_cost_basis": 56.20,
+      "current_price": 61.35,
+      "currency": "USD",
+      "purchase_date": "2024-01-15",
+      "account": "ira"
+    },
+    {
+      "ticker": "O",
+      "name": "Realty Income Corporation",
+      "asset_class": "reit",
+      "sector": "Real Estate",
+      "shares": 400,
+      "avg_cost_basis": 58.90,
+      "current_price": 55.20,
+      "currency": "USD",
+      "purchase_date": "2025-06-20",
+      "account": "taxable"
+    },
+    {
+      "ticker": "GLD",
+      "name": "SPDR Gold Shares",
+      "asset_class": "commodity",
+      "sector": "Precious Metals",
+      "shares": 150,
+      "avg_cost_basis": 185.00,
+      "current_price": 224.60,
+      "currency": "USD",
+      "purchase_date": "2024-11-08",
+      "account": "taxable"
+    }
+  ]
+}

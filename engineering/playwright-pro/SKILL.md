@@ -8,12 +8,13 @@ description: >
   tests, or migrating from Cypress/Selenium.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 2.0.0
   author: borghei
   category: engineering
   domain: e2e-testing
   tier: POWERFUL
-  updated: 2026-03-09
+  updated: 2026-04-02
+  tags: [playwright, e2e-testing, page-objects, flaky-tests, migration, ci-integration, visual-regression, accessibility]
   frameworks: playwright, vitest, ci-integration
 ---
 # Playwright Pro
@@ -25,6 +26,45 @@ metadata:
 ## Overview
 
 Production-grade end-to-end testing with Playwright. Generate tests from user stories, implement the Page Object pattern for maintainability, apply the correct locator strategy for resilient tests, diagnose and fix flaky tests, migrate from Cypress or Selenium, integrate with CI/CD, run visual regression tests, and perform accessibility audits. Enforces the 10 golden rules that eliminate 90% of E2E test failures.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific workflow:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Init** | `skills/init.md` | Bootstrap Playwright in a project -- install, configure, create first test |
+| **Generate** | `skills/generate.md` | Generate test files from user stories or page descriptions |
+| **Fix** | `skills/fix.md` | Diagnose and fix failing or flaky tests using trace analysis |
+| **Migrate** | `skills/migrate.md` | Migrate from Cypress or Selenium to Playwright |
+| **Review** | `skills/review.md` | Audit test quality, coverage gaps, and flaky test indicators |
+| **Report** | `skills/report.md` | Generate execution reports from Playwright JSON output |
+| **Coverage** | `skills/coverage.md` | Map tests to user stories, identify coverage gaps |
+| **BrowserStack** | `skills/browserstack.md` | BrowserStack cloud integration for cross-browser testing |
+| **TestRail** | `skills/testrail.md` | TestRail integration for test case management |
+
+### Sub-Skill Flow
+
+```
+Init ──> Generate ──> Review ──> Fix (if needed)
+                         │
+                    Coverage ──> Generate (fill gaps)
+                         │
+                    Report ──> BrowserStack / TestRail
+```
+
+**Typical lifecycle:** Init sets up the project, Generate creates tests from stories, Review audits quality, Fix resolves failures, Coverage identifies gaps that feed back into Generate, and Report/BrowserStack/TestRail handle reporting and integration.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/test_generator.py` | Generate Playwright test code from user story descriptions |
+| `scripts/flaky_detector.py` | Analyze multiple CI runs to detect flaky test patterns |
+| `scripts/coverage_mapper.py` | Map tests to user flows and identify coverage gaps |
+| `scripts/page_object_generator.py` | Generate Page Object classes from HTML or selector lists |
+| `scripts/test_analyzer.py` | Scan test files for anti-patterns and quality issues |
+| `scripts/test_report_parser.py` | Parse Playwright JSON reports into summaries |
 
 ## Keywords
 

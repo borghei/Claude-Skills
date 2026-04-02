@@ -1,0 +1,35 @@
+# subscriptions.csv — 12 months of SaaS subscription data for MRR calculator
+# Fields: customer_id, customer_name, plan, amount_cents, start_date, end_date, status
+# Includes upgrades, downgrades, churns, and new business for MRR analysis
+customer_id,customer_name,plan,amount_cents,start_date,end_date,status
+C001,Globex Corporation,enterprise,49900,2025-01-15,,active
+C002,Initech LLC,pro,2990,2025-02-01,,active
+C003,Hooli Inc,enterprise,49900,2025-01-08,2025-09-30,churned
+C004,Pied Piper,starter,990,2025-03-12,,active
+C005,Massive Dynamic,pro,2990,2025-01-22,,active
+C006,Umbrella Corp,enterprise,49900,2025-04-01,,active
+C007,Wayne Enterprises,pro,2990,2025-02-18,2025-08-15,churned
+C008,Stark Industries,enterprise,99900,2025-01-05,,active
+C009,Cyberdyne Systems,starter,990,2025-05-20,2025-11-30,churned
+C010,Soylent Corp,pro,2990,2025-03-01,,active
+C011,Tyrell Corporation,enterprise,49900,2025-06-15,,active
+C012,Weyland-Yutani,pro,2990,2025-04-22,,active
+C013,Oscorp Industries,starter,990,2025-07-01,,active
+C014,LexCorp,enterprise,49900,2025-05-10,,active
+C015,Wonka Industries,pro,2990,2025-08-01,,active
+C016,Acme Corp,starter,990,2025-01-30,2025-06-28,churned
+C017,Bluth Company,starter,990,2025-09-14,,active
+C018,Sterling Cooper,pro,2990,2025-06-01,,active
+C019,Dunder Mifflin,starter,990,2025-10-05,,active
+C020,Prestige Worldwide,pro,2990,2025-07-18,,active
+C021,Vandelay Industries,enterprise,49900,2025-11-01,,active
+C022,Aperture Science,pro,2990,2025-08-22,,active
+C023,Black Mesa,starter,990,2025-12-01,,active
+C024,Nakatomi Trading,pro,2990,2025-09-10,,active
+C025,Rekall Inc,enterprise,49900,2025-10-15,,active
+C002,Initech LLC,enterprise,49900,2025-08-01,,active
+C004,Pied Piper,pro,2990,2025-09-01,,active
+C010,Soylent Corp,enterprise,49900,2025-11-01,,active
+C013,Oscorp Industries,pro,2990,2025-12-01,,active
+C005,Massive Dynamic,starter,990,2025-10-01,,active
+C015,Wonka Industries,starter,990,2025-12-15,,active

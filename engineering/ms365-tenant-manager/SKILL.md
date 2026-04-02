@@ -19,35 +19,7 @@ metadata:
 ---
 # Microsoft 365 Tenant Manager
 
-Expert guidance and automation for Microsoft 365 Global Administrators managing tenant setup, user lifecycle, security policies, and organizational optimization.
-
----
-
-## Table of Contents
-
-- [Trigger Phrases](#trigger-phrases)
-- [Quick Start](#quick-start)
-- [Tools](#tools)
-- [Workflows](#workflows)
-- [Best Practices](#best-practices)
-- [Reference Guides](#reference-guides)
-- [Limitations](#limitations)
-
----
-
-## Trigger Phrases
-
-Use this skill when you hear:
-- "set up Microsoft 365 tenant"
-- "create Office 365 users"
-- "configure Azure AD"
-- "generate PowerShell script for M365"
-- "set up Conditional Access"
-- "bulk user provisioning"
-- "M365 security audit"
-- "license management"
-- "Exchange Online configuration"
-- "Teams administration"
+The agent generates production-ready PowerShell scripts for M365 tenant setup, bulk user provisioning, Conditional Access policies, security audits, and license management. It automates user lifecycle operations (onboarding, offboarding), recommends license SKUs by role, and produces 7-category security audit reports via Microsoft Graph.
 
 ---
 
@@ -307,6 +279,17 @@ Install-Module MicrosoftTeams -Scope CurrentUser
 - **User Administrator** - User management
 - **Security Administrator** - Security policies
 - **Exchange Administrator** - Mailbox management
+
+---
+
+## Anti-Patterns
+
+- **Using admin accounts for daily work** -- Global Admin accounts should use PIM (Privileged Identity Management) with JIT activation; use separate accounts for daily tasks
+- **Skipping report-only mode** -- deploying Conditional Access policies directly to enforcement blocks legitimate users; always validate in report-only mode first
+- **Hardcoding credentials in scripts** -- PowerShell scripts with embedded passwords are security incidents waiting to happen; use Azure Key Vault or environment variables
+- **Using legacy MSOnline module** -- MSOnline is deprecated; all new scripts should use Microsoft Graph (`Connect-MgGraph`)
+- **No break-glass account** -- excluding zero accounts from CA policies means a misconfiguration can lock out all admins; maintain at least one excluded emergency access account
+- **Bulk operations without -WhatIf** -- running bulk user creation or license assignment without dry-run risks mass misconfiguration; always test with `-WhatIf` first
 
 ---
 

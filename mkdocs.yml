@@ -1,0 +1,130 @@
+site_name: "Claude Skills — Universal AI Skills Library"
+site_url: https://borghei.github.io/Claude-Skills
+site_description: >-
+  224 production-ready AI skills across 13 domains with 613 Python tools,
+  25 agents, and support for 10 platforms including Claude Code, Cursor,
+  Codex, Copilot, Windsurf, Cline, and Aider.
+site_author: Brian Borghei
+repo_url: https://github.com/borghei/Claude-Skills
+repo_name: borghei/Claude-Skills
+edit_uri: edit/main/docs/
+copyright: "&copy; 2024-2026 Brian Borghei &mdash; MIT + Commons Clause"
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/brain
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+  - social
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/borghei/Claude-Skills
+    - icon: fontawesome/solid/globe
+      link: https://borghei.me
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - def_list
+  - footnotes
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - getting-started/index.md
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+    - Platforms: getting-started/platforms.md
+  - Skills:
+    - skills/index.md
+    - Engineering: skills/engineering.md
+    - Marketing: skills/marketing.md
+    - C-Level Advisory: skills/c-level.md
+    - Compliance: skills/compliance.md
+    - Product & PM: skills/product.md
+    - Business & Sales: skills/business.md
+    - Data, HR & Other: skills/other.md
+  - Agents:
+    - agents/index.md
+    - Task Agents: agents/task-agents.md
+    - Personas: agents/personas.md
+  - Commands:
+    - commands/index.md
+  - Guides:
+    - guides/authoring.md
+    - Orchestration: guides/orchestration.md
+    - Customization: guides/customization.md
+    - Starter Bundles: guides/bundles.md
+  - Reference:
+    - reference/cli.md
+    - Standards: reference/standards.md
+    - Architecture: reference/architecture.md
+  - Changelog: changelog.md

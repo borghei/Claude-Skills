@@ -18,11 +18,7 @@ metadata:
 ---
 # Codex CLI Specialist
 
-Expert-level guidance for OpenAI Codex CLI: installation, configuration, skill authoring, cross-platform compatibility with Claude Code, and productivity workflows.
-
-## Keywords
-
-codex, codex-cli, openai, skill authoring, agents/openai.yaml, cross-platform skills, claude code, skill conversion, skill index, multi-agent, ai cli tools, developer productivity, codex configuration, skill management
+The agent converts Claude Code skills to Codex-compatible format, validates cross-platform compatibility, and builds skill registry manifests. It generates `agents/openai.yaml` configurations from SKILL.md frontmatter, runs 17 compatibility checks across both platforms, and produces `skills-index.json` for discovery systems.
 
 ## Table of Contents
 
@@ -598,6 +594,17 @@ instructions: You are an expert at X. Help the user with Y.
 ### Pattern: Full-Featured Codex Skill
 
 See the complete production-grade template at [assets/openai-yaml-template.yaml](assets/openai-yaml-template.yaml), which includes instructions, tools, model selection, and versioning.
+
+---
+
+## Anti-Patterns
+
+- **Converting without reviewing** -- auto-generated `agents/openai.yaml` needs human review for instruction accuracy and tool command paths
+- **Global skill installation** -- project-specific skills should stay in `.codex/skills/`, not `~/.codex/skills/`, to avoid version conflicts across projects
+- **Duplicating logic in SKILL.md and openai.yaml** -- keep `SKILL.md` as source of truth; `openai.yaml` should reference shared scripts, not rewrite instructions
+- **Shell-specific syntax in scripts** -- bash-isms break on Windows; stick to Python for all automation logic
+- **Ignoring strict validation warnings** -- optional directories (`references/`, `assets/`) that are missing degrade skill quality even if not required
+- **Skipping version pinning** -- teams without `skills-index.json` version pinning get inconsistent behavior across members
 
 ---
 

@@ -1,0 +1,129 @@
+{
+  "version": "1.0.0",
+  "description": "Curated skill bundles for common roles and team configurations",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "bundles": {
+    "saas-founder": {
+      "name": "SaaS Founder Kit",
+      "description": "Everything a solo SaaS founder needs — from strategy and metrics to marketing and product",
+      "skills": [
+        "c-level-advisor/ceo-advisor",
+        "finance/saas-metrics-coach",
+        "marketing/launch-strategy",
+        "marketing/content-creator",
+        "marketing/seo-audit",
+        "business-growth/pricing-strategy",
+        "product-team/product-manager-toolkit",
+        "engineering/senior-fullstack"
+      ],
+      "persona": "solo-founder"
+    },
+    "devops-team": {
+      "name": "DevOps & Infrastructure",
+      "description": "CI/CD pipelines, cloud architecture, observability, and incident response",
+      "skills": [
+        "engineering/ci-cd-pipeline-builder",
+        "engineering/aws-solution-architect",
+        "engineering/senior-cloud-architect",
+        "engineering/observability-designer",
+        "engineering/incident-commander",
+        "engineering/docker-development",
+        "engineering/helm-chart-builder",
+        "engineering/env-secrets-manager"
+      ],
+      "persona": "devops-engineer"
+    },
+    "agency-freelancer": {
+      "name": "Agency & Freelancer Toolkit",
+      "description": "Win clients, deliver projects, and grow a services business",
+      "skills": [
+        "business-growth/contract-and-proposal-writer",
+        "marketing/content-creator",
+        "marketing/copywriting",
+        "marketing/landing-page-generator",
+        "marketing/seo-audit",
+        "business-growth/pricing-strategy",
+        "project-management/senior-pm",
+        "engineering/senior-fullstack"
+      ],
+      "persona": "freelancer"
+    },
+    "engineering-lead": {
+      "name": "Engineering Lead Kit",
+      "description": "Code quality, architecture, team workflows, and technical debt management",
+      "skills": [
+        "engineering/senior-architect",
+        "engineering/code-reviewer",
+        "engineering/pr-review-expert",
+        "engineering/tech-debt-tracker",
+        "engineering/database-schema-designer",
+        "engineering/performance-profiler",
+        "engineering/dependency-auditor",
+        "engineering/codebase-onboarding",
+        "c-level-advisor/cto-advisor"
+      ],
+      "persona": "engineering-lead"
+    },
+    "growth-team": {
+      "name": "Growth Team Bundle",
+      "description": "Full-funnel growth — acquisition, activation, retention, and revenue",
+      "skills": [
+        "marketing/growth-marketer",
+        "marketing/campaign-analytics",
+        "marketing/analytics-tracking",
+        "marketing/ab-test-setup",
+        "marketing/email-sequence",
+        "business-growth/signup-flow-cro",
+        "business-growth/onboarding-cro",
+        "business-growth/churn-prevention",
+        "data-analytics/data-analyst"
+      ],
+      "persona": "growth-marketer"
+    },
+    "compliance-officer": {
+      "name": "Compliance & Risk Management",
+      "description": "Regulatory compliance across SOC 2, GDPR, ISO, FDA, and more",
+      "skills": [
+        "ra-qm-team/soc2-compliance-expert",
+        "ra-qm-team/gdpr-dsgvo-expert",
+        "ra-qm-team/information-security-manager-iso27001",
+        "ra-qm-team/nist-csf-specialist",
+        "ra-qm-team/risk-management-specialist",
+        "ra-qm-team/infrastructure-compliance-auditor",
+        "ra-qm-team/quality-documentation-manager",
+        "c-level-advisor/ciso-advisor"
+      ],
+      "persona": "compliance-officer"
+    },
+    "product-team": {
+      "name": "Product Team Essentials",
+      "description": "Product strategy, user research, design systems, and agile delivery",
+      "skills": [
+        "product-team/product-manager-toolkit",
+        "product-team/product-strategist",
+        "product-team/ux-researcher-designer",
+        "product-team/design-system-lead",
+        "product-team/ab-test-setup",
+        "project-management/scrum-master",
+        "project-management/discovery",
+        "data-analytics/data-analyst"
+      ],
+      "persona": "product-manager"
+    },
+    "ai-builder": {
+      "name": "AI Builder Kit",
+      "description": "Design, build, and deploy AI-powered applications and agents",
+      "skills": [
+        "engineering/agent-designer",
+        "engineering/rag-architect",
+        "engineering/senior-ml-engineer",
+        "engineering/prompt-engineer-toolkit",
+        "engineering/mcp-server-builder",
+        "engineering/llm-cost-optimizer",
+        "engineering/senior-data-scientist",
+        "data-analytics/ml-ops-engineer"
+      ],
+      "persona": "ai-engineer"
+    }
+  }
+}

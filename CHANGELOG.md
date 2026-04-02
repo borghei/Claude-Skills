@@ -5,6 +5,72 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-04-02
+
+### Added
+
+**New Skills (21):**
+- Engineering: `docker-development`, `terraform-patterns`, `helm-chart-builder`, `a11y-audit`, `sql-database-assistant`, `threat-detection`, `google-workspace-cli`, `ai-security`, `browser-automation`, `focused-fix`, `llm-cost-optimizer`, `prompt-governance`, `secrets-vault-manager`, `red-team`, `snowflake-development`, `agenthub`
+- Finance: `saas-metrics-coach`, `business-investment-advisor`
+- Marketing: `video-content-strategist`, `x-twitter-growth`, `ab-test-setup`
+
+**Cross-Domain Personas (7):**
+- `startup-cto`, `growth-marketer`, `solo-founder`, `content-strategist`, `devops-engineer`, `finance-lead`, `product-manager`
+- Located in `agents/personas/`, usable via `/persona` slash command
+
+**Slash Commands (21 new):**
+- `a11y-audit`, `changelog`, `code-to-prd`, `competitive-matrix`, `financial-health`, `focused-fix`, `okr`, `persona`, `pipeline`, `plugin-audit`, `project-health`, `retro`, `rice`, `saas-health`, `security-scan`, `seo-auditor`, `sprint-health`, `sprint-plan`, `tdd`, `tech-debt`, `user-story`
+
+**Compound Sub-Skill Systems (3 systems, 21 sub-skills):**
+- Playwright Pro -- advanced browser automation patterns and debugging
+- Self-Improving Agent -- agents that evaluate and improve their own performance
+- AgentHub -- multi-agent orchestration, tool schemas, communication protocols
+
+**Platform Support:**
+- Gemini CLI native support (`.gemini/` directory, `GEMINI.md`, install script)
+
+**CI/CD Workflows (5 new):**
+- `enforce-pr-target.yml` -- enforce PR target branch rules
+- `skill-security-audit.yml` -- automated skill package security scanning
+- `claude-code-review.yml` -- AI-powered code review on PRs
+- `virustotal-scan.yml` -- VirusTotal integration for release artifacts
+- `sync-codex-skills.yml` -- sync skills to Codex-compatible format
+
+**Standards (2 new):**
+- Orchestration Protocol -- 4 multi-agent patterns (sequential, parallel, supervisor, consensus)
+- Skill Authoring Standard -- 10 formal patterns for skill creation
+
+**Infrastructure & Tooling:**
+- MCP server for skills (`scripts/mcp_server.py`)
+- CLI tool (`scripts/cs.py`) with `search`, `install`, `list`, `stats`, `doctor`, `bundle` commands
+- Skill quality scoring system (`scripts/skill_quality_scorer.py`)
+- Integration test runner (`scripts/integration_test_runner.py`)
+- Skill scaffolder (`scripts/create_skill.py`)
+- Skill relationship graph generator (`scripts/skill_graph.py`)
+- Starter bundles for 8 roles (`bundles.json`)
+- Sample data/fixtures for 10 key skills
+- MkDocs Material documentation site
+- `CONTRIBUTING.md` guide
+
+### Changed
+- Quality audit: 7 bloated engineering skills reduced by 67-78% (token savings)
+- Quality audit: 15 mid-range engineering skills refined (trigger clauses, agent voice, anti-patterns)
+- `CLAUDE.md` updated to v4.0.0 with new stats and structure
+- `skills.json` updated with 21 new skill entries
+- Repository structure expanded with `.gemini/`, `agents/personas/`, `docs/`
+- `README.md` fully rewritten with modern structure
+
+### Stats
+- Skills: 204 -> 225 (+21)
+- Python tools: 559 -> 613 (+54)
+- Agents: 17 -> 32 (+15, including 7 personas)
+- Slash commands: 5 -> 26 (+21)
+- CI/CD workflows: 1 -> 6 (+5)
+- Standards: 5 -> 7 (+2)
+- Platform support: 10 -> 11 (+Gemini CLI)
+
+---
+
 ## [2.1.0] - 2026-03-18
 
 ### Added
@@ -253,6 +319,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Key Changes |
 |---------|------|-------------|
+| 4.0.0 | 2026-04-02 | 225 skills, 21 new skills, 7 personas, 26 slash commands, MCP server, Gemini CLI support |
 | 2.1.0 | 2026-03-18 | 204 skills, 5 new skills (QA, release, doc-drift, retro, design), 20 new Python tools |
 | 2.0.0 | 2026-02-27 | 97+ skills, 6 subagents, 11 workflows, 3 new skills, 170+ Python tools |
 | 1.1.0 | 2025-10-21 | Anthropic best practices refactoring (5 skills) |
@@ -264,17 +331,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Upcoming Releases
 
-### v2.1.0 (Planned - Q2 2026)
-- Marketing expansion: advanced SEO optimizer, social media manager
-- Per-skill installation system (one skill per domain group)
-- Automatic update mechanism for installed skills
-- Additional subagents for specialized domains
-
-### v3.0.0 (Planned - Q3 2026)
-- 120+ skills target
-- Mobile, blockchain, web3 specializations
+### v5.0.0 (Planned - Q3 2026)
+- 250+ skills target
+- Blockchain, web3 specializations
 - Advanced analytics and ML pipeline skills
-- Cross-platform agent orchestration
+- Plugin marketplace and skill registry
+- Cross-platform agent orchestration improvements
 
 ---
 
@@ -290,7 +352,9 @@ All contributors will be credited in release notes for their specific contributi
 
 ---
 
-[Unreleased]: https://github.com/borghei/Claude-Skills/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/borghei/Claude-Skills/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/borghei/Claude-Skills/compare/v2.1.0...v4.0.0
+[2.1.0]: https://github.com/borghei/Claude-Skills/compare/v2.0.0...v2.1.0
 [1.1.0]: https://github.com/borghei/Claude-Skills/compare/v1.0.1...v1.1.0
 [1.0.2]: https://github.com/borghei/Claude-Skills/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/borghei/Claude-Skills/compare/v1.0.0...v1.0.1

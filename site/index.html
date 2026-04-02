@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/Claude-Skills/">
   <title>Claude Skills - The Universal AI Skills Library</title>
-  <meta name="description" content="204 production-ready skills, 559 Python tools, 13 domains. Works with every major AI coding assistant.">
+  <meta name="description" content="225 production-ready skills, 613 Python tools, 32 agents, 26 commands. Works with every major AI coding assistant.">
   <meta property="og:title" content="Claude Skills - The Universal AI Skills Library">
-  <meta property="og:description" content="204 skills. 559 tools. 13 domains. Every major AI coding assistant.">
+  <meta property="og:description" content="225 skills. 613 tools. 32 agents. 26 commands. Every major AI coding assistant.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,12 +17,28 @@
 </head>
 <body>
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="./" class="nav-logo">Claude Skills</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="skills/">Skills</a>
+        <a href="agents/">Agents</a>
+        <a href="commands/">Commands</a>
+        <a href="https://github.com/borghei/Claude-Skills" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="hero-bg"></div>
     <div class="container">
       <h1 class="hero-title fade-in">The Universal AI<br><span class="gradient-text">Skills Library</span></h1>
-      <p class="hero-subtitle fade-in">204 skills. 559 tools. 13 domains. Every major AI coding assistant.</p>
+      <p class="hero-subtitle fade-in">225 skills. 613 tools. 13 domains. Every major AI coding assistant.</p>
       <div class="terminal hero-terminal fade-in">
         <div class="terminal-bar">
           <span class="terminal-dot red"></span>
@@ -40,7 +56,8 @@
       </div>
       <div class="hero-buttons fade-in">
         <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
-        <a href="https://github.com/borghei/Claude-Skills#readme" class="btn btn-secondary" target="_blank" rel="noopener">View Docs</a>
+        <a href="skills/" class="btn btn-secondary">Browse All Skills</a>
+        <a href="skills/" class="btn btn-secondary">View Docs</a>
       </div>
     </div>
   </section>
@@ -49,11 +66,11 @@
   <section class="stats" id="stats">
     <div class="container stats-bar">
       <div class="stat-item">
-        <span class="stat-number" data-target="204">0</span>
+        <span class="stat-number" data-target="225">0</span>
         <span class="stat-label">Skills</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-target="559">0</span>
+        <span class="stat-number" data-target="613">0</span>
         <span class="stat-label">Python Tools</span>
       </div>
       <div class="stat-item">
@@ -61,11 +78,11 @@
         <span class="stat-label">Domains</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-target="19">0</span>
+        <span class="stat-number" data-target="32">0</span>
         <span class="stat-label">Agents</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-target="10">0</span>
+        <span class="stat-number" data-target="11">0</span>
         <span class="stat-label">Platforms</span>
       </div>
     </div>
@@ -80,44 +97,51 @@
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F528;</div>
           <h3>Engineering</h3>
-          <div class="domain-meta">61 skills &middot; 177 tools</div>
+          <div class="domain-meta">76 skills &middot; 177 tools</div>
           <p>Architecture, fullstack, AI/ML, security, and infrastructure</p>
+          <div class="domain-tags"><span class="tag">docker</span><span class="tag">terraform</span><span class="tag">a11y</span><span class="tag">playwright</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4E3;</div>
           <h3>Marketing</h3>
-          <div class="domain-meta">35 skills &middot; 106 tools</div>
+          <div class="domain-meta">38 skills &middot; 106 tools</div>
           <p>Content creation, SEO, demand gen, campaign analytics</p>
+          <div class="domain-tags"><span class="tag">seo</span><span class="tag">content</span><span class="tag">demand-gen</span><span class="tag">analytics</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F451;</div>
           <h3>C-Level</h3>
           <div class="domain-meta">26 skills &middot; 73 tools</div>
           <p>CEO, CTO, CFO, and CISO strategic advisory</p>
+          <div class="domain-tags"><span class="tag">ceo</span><span class="tag">cto</span><span class="tag">cfo</span><span class="tag">ciso</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4CB;</div>
           <h3>Project Management</h3>
-          <div class="domain-meta">25 skills &middot; 53 tools</div>
+          <div class="domain-meta">10 skills &middot; 53 tools</div>
           <p>Discovery, execution, Atlassian MCP integration</p>
+          <div class="domain-tags"><span class="tag">sprints</span><span class="tag">jira</span><span class="tag">retro</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4C8;</div>
           <h3>Business &amp; Growth</h3>
-          <div class="domain-meta">17 skills &middot; 48 tools</div>
+          <div class="domain-meta">16 skills &middot; 48 tools</div>
           <p>Customer success, sales engineering, revenue ops</p>
+          <div class="domain-tags"><span class="tag">revenue</span><span class="tag">churn</span><span class="tag">onboarding</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F6E1;&#xFE0F;</div>
           <h3>Compliance</h3>
           <div class="domain-meta">21 skills &middot; 38 tools</div>
           <p>ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2</p>
+          <div class="domain-tags"><span class="tag">soc2</span><span class="tag">gdpr</span><span class="tag">hipaa</span><span class="tag">iso</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4CA;</div>
           <h3>Data Analytics</h3>
           <div class="domain-meta">5 skills &middot; 16 tools</div>
           <p>BI, ML ops, analytics engineering, data pipelines</p>
+          <div class="domain-tags"><span class="tag">ml-ops</span><span class="tag">pipelines</span><span class="tag">bi</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4E6;</div>
@@ -140,13 +164,14 @@
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4B5;</div>
           <h3>Finance</h3>
-          <div class="domain-meta">1 skill &middot; 4 tools</div>
+          <div class="domain-meta">3 skills &middot; 10 tools</div>
           <p>DCF valuation, budgeting, forecasting, ratio analysis</p>
+          <div class="domain-tags"><span class="tag">dcf</span><span class="tag">saas-metrics</span><span class="tag">budgeting</span></div>
         </div>
         <div class="domain-card fade-in">
           <div class="domain-icon">&#x1F4D0;</div>
           <h3>Standards</h3>
-          <div class="domain-meta">5 skills</div>
+          <div class="domain-meta">7 standards</div>
           <p>Communication, quality, git, security standards</p>
         </div>
         <div class="domain-card fade-in">
@@ -227,6 +252,139 @@
           <div class="agent-icon">&#x1F3A8;</div>
           <h3>Design Lead</h3>
           <p>UX strategy, design systems, accessibility audits</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personas -->
+  <section class="personas" id="personas">
+    <div class="container">
+      <h2 class="section-title fade-in">Cross-Domain <span class="gradient-text">Personas</span></h2>
+      <p class="section-subtitle fade-in">Activate a persona to combine skills across multiple domains</p>
+      <div class="personas-grid">
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F4BB;</div>
+          <h3>Startup CTO</h3>
+          <p>Architecture, hiring, budgets, and technical roadmap for early-stage startups</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F4C8;</div>
+          <h3>Growth Marketer</h3>
+          <p>Demand gen, analytics, SEO, and conversion optimization in one workflow</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F680;</div>
+          <h3>Solo Founder</h3>
+          <p>Product, engineering, marketing, and finance combined for one-person teams</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F3AF;</div>
+          <h3>Product Lead</h3>
+          <p>PRDs, user stories, RICE scoring, and sprint planning end-to-end</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F6E1;&#xFE0F;</div>
+          <h3>Compliance Officer</h3>
+          <p>SOC 2, GDPR, HIPAA, and ISO audits with automated evidence collection</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F4B0;</div>
+          <h3>Revenue Leader</h3>
+          <p>Sales ops, customer success, and financial metrics in a unified view</p>
+        </div>
+        <div class="persona-card fade-in">
+          <div class="persona-icon">&#x1F527;</div>
+          <h3>DevOps Engineer</h3>
+          <p>CI/CD, infrastructure, monitoring, and security automation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slash Commands -->
+  <section class="commands" id="commands">
+    <div class="container">
+      <h2 class="section-title fade-in">Slash <span class="gradient-text">Commands</span></h2>
+      <p class="section-subtitle fade-in">26 built-in commands for common workflows</p>
+      <div class="commands-grid">
+        <div class="command-card fade-in">
+          <code class="command-name">/tdd</code>
+          <p>Test-driven development workflow</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/rice</code>
+          <p>RICE-score features for prioritization</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/prd</code>
+          <p>Generate a product requirements doc</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/retro</code>
+          <p>Sprint retrospective from git history</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/tech-debt</code>
+          <p>Scan and prioritize technical debt</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/security-scan</code>
+          <p>Run security audit before pushing</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/a11y-audit</code>
+          <p>WCAG accessibility compliance check</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/sprint-plan</code>
+          <p>Plan a sprint from backlog analysis</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/changelog</code>
+          <p>Generate changelog from git tags</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/persona</code>
+          <p>Activate a cross-domain persona</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/git:pr</code>
+          <p>Create a pull request from branch</p>
+        </div>
+        <div class="command-card fade-in">
+          <code class="command-name">/seo-auditor</code>
+          <p>SEO audit on web content and HTML</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="section-title fade-in">New <span class="gradient-text">Features</span></h2>
+      <p class="section-subtitle fade-in">Latest additions to the skills library</p>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">&#x1F50C;</div>
+          <h3>MCP Server</h3>
+          <p>Model Context Protocol server for direct integration with AI assistants and IDE extensions</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">&#x2318;</div>
+          <h3>CLI Tool</h3>
+          <p>Command-line interface to search, install, and manage skills from your terminal</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">&#x2B50;</div>
+          <h3>Quality Scorer</h3>
+          <p>Automated scoring system that rates skill completeness, docs quality, and tool coverage</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">&#x1F4E6;</div>
+          <h3>Starter Bundles</h3>
+          <p>Pre-configured skill bundles for common roles: startup CTO, growth marketer, solo founder</p>
         </div>
       </div>
     </div>

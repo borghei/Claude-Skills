@@ -1,0 +1,54 @@
+# ============================================================================
+# Enforce PR Target — Prevent PRs to wrong branches
+# ============================================================================
+# Branch governance:
+#   feature/* → must target dev (not main)
+#   dev       → may target main
+#   hotfix/*  → may target main (emergency fixes)
+#   All other → must target dev
+# ============================================================================
+
+name: Enforce PR Target
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  check-target:
+    name: Validate PR target branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch targeting rules
+        env:
+          BASE: ${{ github.event.pull_request.base.ref }}
+          HEAD: ${{ github.event.pull_request.head.ref }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "PR #${PR_NUMBER}: ${HEAD} → ${BASE}"
+
+          # Rule 1: feature/* branches must target dev, never main
+          if [[ "$HEAD" == feature/* && "$BASE" == "main" ]]; then
+            echo "::error::Feature branches must target 'dev', not 'main'."
+            echo ""
+            echo "Please update PR #${PR_NUMBER} to target the 'dev' branch."
+            echo "Workflow: feature/* → dev → main"
+            exit 1
+          fi
+
+          # Rule 2: Only dev and hotfix/* branches may target main
+          if [[ "$BASE" == "main" && "$HEAD" != "dev" && "$HEAD" != hotfix/* ]]; then
+            echo "::error::Only 'dev' and 'hotfix/*' branches may target 'main'."
+            echo ""
+            echo "Branch '${HEAD}' should target 'dev' instead."
+            echo "Allowed paths to main: dev → main, hotfix/* → main"
+            exit 1
+          fi
+
+          # Rule 3: Warn if targeting a non-standard base branch
+          if [[ "$BASE" != "main" && "$BASE" != "dev" ]]; then
+            echo "::warning::PR targets non-standard base branch '${BASE}'."
+            echo "Standard targets are 'dev' or 'main'."
+          fi
+
+          echo "Branch targeting rules passed."

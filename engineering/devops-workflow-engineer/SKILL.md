@@ -1,100 +1,62 @@
 ---
 name: devops-workflow-engineer
 description: >
-  Guides teams through designing, implementing, and optimizing CI/CD pipelines,
-  GitHub Actions workflows, deployment automation, and agentic workflow
-  patterns. Provides production-ready templates, cost optimization strategies,
-  quality gates, and multi-environment deployment planning for modern DevOps
-  practices.
+  Use when designing GitHub Actions workflows, creating CI/CD pipelines,
+  planning multi-environment deployments, optimizing pipeline cost and
+  execution time, or implementing deployment strategies (blue-green, canary,
+  rolling). Generates production-ready workflow YAML, analyzes existing
+  pipelines for optimization, and creates deployment plans.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: engineering
   domain: devops
-  updated: 2026-03-31
+  updated: 2026-04-02
   tags: [github-actions, ci-cd, deployment, workflows]
+  python-tools: workflow_generator.py, pipeline_analyzer.py, deployment_planner.py
+  tech-stack: python, github-actions, yaml, ci-cd
 ---
 # DevOps Workflow Engineer
 
-Design, implement, and optimize CI/CD pipelines, GitHub Actions workflows, and deployment automation for production systems.
-
-## Keywords
-
-`ci/cd` `github-actions` `deployment` `automation` `pipelines` `devops` `continuous-integration` `continuous-delivery` `blue-green` `canary` `rolling-deploy` `feature-flags` `matrix-builds` `caching` `secrets-management` `reusable-workflows` `composite-actions` `agentic-workflows` `quality-gates` `security-scanning` `cost-optimization` `multi-environment` `infrastructure-as-code` `gitops`
-
-## Quick Start
-
-### 1. Generate a CI Workflow
-
-```bash
-python scripts/workflow_generator.py --type ci --language python --test-framework pytest
-```
-
-### 2. Analyze Existing Pipelines
-
-```bash
-python scripts/pipeline_analyzer.py path/to/.github/workflows/
-```
-
-### 3. Plan a Deployment Strategy
-
-```bash
-python scripts/deployment_planner.py --type webapp --environments dev,staging,prod
-```
-
-### 4. Use Production Templates
-
-Copy templates from `assets/` into your `.github/workflows/` directory and customize.
+The agent generates GitHub Actions workflow YAML, analyzes existing pipelines for optimization opportunities, and creates deployment plans with strategy selection, health checks, and rollback procedures.
 
 ---
 
-## Core Workflows
+## Quick Start
 
-### Workflow 1: GitHub Actions Design
+```bash
+# Generate a CI workflow
+python scripts/workflow_generator.py --type ci --language python --test-framework pytest
 
-**Goal:** Design maintainable, efficient GitHub Actions workflows from scratch.
+# Analyze existing pipelines for optimization
+python scripts/pipeline_analyzer.py .github/workflows/ --format json
 
-**Process:**
+# Plan a deployment strategy
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --strategy canary
+```
 
-1. **Identify triggers** -- Determine which events should start the pipeline (push, PR, schedule, manual dispatch).
-2. **Map job dependencies** -- Draw a DAG of jobs; identify which can run in parallel vs. which must be sequential.
-3. **Select runners** -- Choose between GitHub-hosted (ubuntu-latest, macos-latest, windows-latest) and self-hosted runners based on cost, performance, and security needs.
-4. **Structure the workflow file** -- Use clear naming, concurrency groups, and permissions scoping.
-5. **Add quality gates** -- Each job should have a clear pass/fail criterion.
+## Tools Overview
 
-**Design Principles:**
+| Tool | Input | Output |
+|------|-------|--------|
+| `workflow_generator.py` | Workflow type + language | GitHub Actions YAML (ci, cd, release, security-scan, docs-check) |
+| `pipeline_analyzer.py` | Workflow file or directory | Optimization findings, cost estimates, severity ratings |
+| `deployment_planner.py` | Project type + environments | Deployment plan with strategy, health checks, rollback |
 
-- **Fail fast:** Put the cheapest, fastest checks first (linting before integration tests).
-- **Minimize blast radius:** Use `permissions` to grant least-privilege access.
-- **Idempotency:** Every workflow run should produce the same result for the same inputs.
-- **Observability:** Add step summaries and annotations for quick debugging.
+All tools support `--format json` and `--output` for file writing.
 
-**Trigger Selection Matrix:**
+---
 
-| Trigger | Use Case | Example |
-|---------|----------|---------|
-| `push` | Run on every commit to specific branches | `push: branches: [main, dev]` |
-| `pull_request` | Validate PRs before merge | `pull_request: branches: [main]` |
-| `schedule` | Nightly builds, dependency checks | `schedule: - cron: '0 2 * * *'` |
-| `workflow_dispatch` | Manual deployments, ad-hoc tasks | Add `inputs:` for parameters |
-| `release` | Publish artifacts on new release | `release: types: [published]` |
-| `workflow_call` | Reusable workflow invocation | Define `inputs:` and `secrets:` |
+## Workflow 1: CI Pipeline Design
 
-### Workflow 2: CI Pipeline Creation
+The agent generates pipelines following fail-fast ordering:
 
-**Goal:** Build a continuous integration pipeline that catches issues early and runs efficiently.
-
-**Process:**
-
-1. **Lint and format check** (fastest gate, ~30s)
-2. **Unit tests** (medium speed, ~2-5m)
-3. **Build verification** (compile/bundle, ~3-8m)
-4. **Integration tests** (slower, ~5-15m, run in parallel with build)
-5. **Security scanning** (SAST, dependency audit, ~2-5m)
-6. **Report aggregation** (combine results, post summaries)
-
-**Optimized CI Structure:**
+1. **Lint and format** (~30s) -- cheapest gate first
+2. **Unit tests** (~2-5m) -- matrix across versions
+3. **Build verification** (~3-8m)
+4. **Integration tests** (~5-15m, parallel with build)
+5. **Security scanning** (~2-5m)
 
 ```yaml
 jobs:
@@ -102,252 +64,150 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run linter
-        run: make lint
+      - run: make lint
 
   test:
     needs: lint
     strategy:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: pip
+        with: { python-version: "${{ matrix.python-version }}", cache: pip }
       - run: pip install -r requirements.txt
       - run: pytest --junitxml=results.xml
-      - uses: actions/upload-artifact@v4
-        with:
-          name: test-results-${{ matrix.python-version }}
-          path: results.xml
 
   security:
     needs: lint
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Dependency audit
-        run: pip-audit -r requirements.txt
+      - run: pip-audit -r requirements.txt
 ```
 
-**Key CI Metrics:**
+**CI targets:**
 
-| Metric | Target | Action if Exceeded |
-|--------|--------|--------------------|
-| Total CI time | < 10 minutes | Parallelize jobs, add caching |
-| Lint step | < 1 minute | Use pre-commit locally |
-| Unit tests | < 5 minutes | Split test suites, use matrix |
-| Flaky test rate | < 1% | Quarantine flaky tests |
+| Metric | Target | Fix |
+|--------|--------|-----|
+| Total CI time | < 10 min | Parallelize, add caching |
+| Lint step | < 1 min | Use pre-commit locally |
+| Unit tests | < 5 min | Split suites, use matrix |
+| Flaky rate | < 1% | Quarantine flaky tests |
 | Cache hit rate | > 80% | Review cache keys |
 
-### Workflow 3: CD Pipeline Creation
+---
 
-**Goal:** Automate delivery from merged code to running production systems.
+## Workflow 2: CD Pipeline and Multi-Environment Deployment
 
-**Process:**
+```bash
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --format json
+```
 
-1. **Build artifacts** -- Create deployable packages (Docker images, bundles, binaries).
-2. **Publish artifacts** -- Push to registry (GHCR, ECR, Docker Hub, npm).
-3. **Deploy to staging** -- Automatic deployment on merge to main.
-4. **Run smoke tests** -- Validate the staging deployment with lightweight checks.
-5. **Promote to production** -- Manual approval gate or automated canary.
-6. **Post-deploy verification** -- Health checks, synthetic monitoring.
-
-**Environment Promotion Flow:**
-
+**Environment promotion flow:**
 ```
 Build -> Dev (auto) -> Staging (auto) -> Production (manual approval)
                                               |
                                         Canary (10%) -> Full rollout
 ```
 
-**CD Best Practices:**
-
-- Always deploy the same artifact across environments (build once, deploy many).
-- Use immutable deployments (never modify a running instance).
-- Maintain rollback capability at every stage.
-- Tag artifacts with the commit SHA for traceability.
-- Use environment protection rules in GitHub for production gates.
-
-### Workflow 4: Multi-Environment Deployment
-
-**Goal:** Manage consistent deployments across dev, staging, and production.
-
-**Environment Configuration Matrix:**
-
 | Aspect | Dev | Staging | Production |
 |--------|-----|---------|------------|
-| Deploy trigger | Every push | Merge to main | Manual approval |
+| Trigger | Every push | Merge to main | Manual approval |
 | Replicas | 1 | 2 | 3+ (auto-scaled) |
-| Database | Shared test DB | Isolated clone | Production DB |
-| Secrets source | Repository secrets | Environment secrets | Vault/OIDC |
+| Secrets | Repository | Environment | Vault/OIDC |
 | Monitoring | Basic logs | Full observability | Full + alerting |
-| Rollback | Redeploy | Automated | Automated + page |
 
-**Environment Variables Strategy:**
+**Key CD rules:**
+- Build once, deploy the same artifact everywhere
+- Tag artifacts with commit SHA for traceability
+- Use environment protection rules for production gates
+- Maintain rollback capability at every stage
 
-```yaml
-env:
-  REGISTRY: ghcr.io/${{ github.repository_owner }}
+---
 
-jobs:
-  deploy:
-    strategy:
-      matrix:
-        environment: [dev, staging, production]
-    environment: ${{ matrix.environment }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          API_KEY: ${{ secrets.API_KEY }}
-        run: |
-          ./deploy.sh --env ${{ matrix.environment }}
+## Workflow 3: Pipeline Optimization
+
+```bash
+python scripts/pipeline_analyzer.py .github/workflows/ --format json -o report.json
 ```
 
-### Workflow 5: Workflow Optimization
+The agent checks for:
 
-**Goal:** Reduce CI/CD execution time and cost while maintaining quality.
+1. **Missing caching** -- dependencies reinstalled every run
+2. **No timeouts** -- stuck jobs burn budget
+3. **Sequential chains** that could parallelize
+4. **Deprecated actions** with newer versions available
+5. **Security issues** -- secrets in logs, missing permissions scoping
+6. **Cost inefficiency** -- oversized runners, no path filtering
 
-**Optimization Checklist:**
+**Optimization techniques:**
 
-1. **Caching** -- Cache dependencies, build outputs, Docker layers.
-2. **Parallelization** -- Run independent jobs concurrently.
-3. **Conditional execution** -- Skip unchanged paths with `paths` filter or `dorny/paths-filter`.
-4. **Artifact reuse** -- Build once, test/deploy the artifact everywhere.
-5. **Runner sizing** -- Use larger runners for CPU-bound tasks; smaller for I/O-bound.
-6. **Concurrency controls** -- Cancel in-progress runs for the same branch.
-
-**Path-Based Filtering:**
-
+**Path-based filtering** -- skip CI for docs-only changes:
 ```yaml
 on:
   push:
-    paths:
-      - 'src/**'
-      - 'tests/**'
-      - 'requirements*.txt'
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
+    paths: ['src/**', 'tests/**', 'requirements*.txt']
+    paths-ignore: ['docs/**', '*.md']
 ```
 
-**Concurrency Groups:**
-
+**Concurrency cancellation** -- cancel superseded runs:
 ```yaml
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 ```
 
+**Dependency caching:**
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-deps-${{ hashFiles('**/requirements.txt') }}
+```
+
+---
+
+## Deployment Strategies
+
+**Decision tree:**
+```
+Zero-downtime required?
+  No  -> Rolling deployment
+  Yes -> Need instant rollback?
+    No  -> Rolling with health checks
+    Yes -> Budget for 2x infrastructure?
+      Yes -> Blue-green
+      No  -> Canary
+```
+
+**Canary traffic split schedule:**
+
+| Phase | % | Duration | Gate |
+|-------|---|----------|------|
+| 1 | 5% | 15 min | Error rate < 0.1% |
+| 2 | 25% | 30 min | P99 latency < 200ms |
+| 3 | 50% | 60 min | Business metrics stable |
+| 4 | 100% | -- | Full promotion |
+
 ---
 
 ## GitHub Actions Patterns
 
-### Matrix Builds
-
-Use matrices to test across multiple versions, OS, or configurations:
-
+**Reusable workflows** -- define once, call everywhere:
 ```yaml
-strategy:
-  fail-fast: false
-  matrix:
-    os: [ubuntu-latest, macos-latest, windows-latest]
-    node-version: [18, 20, 22]
-    exclude:
-      - os: windows-latest
-        node-version: 18
-    include:
-      - os: ubuntu-latest
-        node-version: 22
-        experimental: true
+# .github/workflows/reusable-deploy.yml
+on:
+  workflow_call:
+    inputs:
+      environment: { required: true, type: string }
+      image_tag: { required: true, type: string }
+    secrets:
+      DEPLOY_KEY: { required: true }
 ```
 
-**Dynamic Matrices** -- generate the matrix in a prior job:
-
-```yaml
-jobs:
-  prepare:
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: echo "matrix=$(jq -c . matrix.json)" >> "$GITHUB_OUTPUT"
-
-  build:
-    needs: prepare
-    strategy:
-      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
-```
-
-### Caching Strategies
-
-**Dependency Caching:**
-
-```yaml
-- uses: actions/cache@v4
-  with:
-    path: |
-      ~/.cache/pip
-      ~/.npm
-      ~/.cargo/registry
-    key: ${{ runner.os }}-deps-${{ hashFiles('**/requirements.txt', '**/package-lock.json') }}
-    restore-keys: |
-      ${{ runner.os }}-deps-
-```
-
-**Docker Layer Caching:**
-
-```yaml
-- uses: docker/build-push-action@v5
-  with:
-    context: .
-    cache-from: type=gha
-    cache-to: type=gha,mode=max
-    push: true
-    tags: ${{ env.IMAGE }}:${{ github.sha }}
-```
-
-### Artifacts
-
-Upload and share artifacts between jobs:
-
-```yaml
-- uses: actions/upload-artifact@v4
-  with:
-    name: build-output
-    path: dist/
-    retention-days: 5
-
-# In downstream job
-- uses: actions/download-artifact@v4
-  with:
-    name: build-output
-    path: dist/
-```
-
-### Secrets Management
-
-**Hierarchy:** Organization > Repository > Environment secrets.
-
-**Best Practices:**
-
-- Never echo secrets; use `add-mask` for dynamic values.
-- Prefer OIDC for cloud authentication (no long-lived credentials).
-- Rotate secrets on a schedule; use expiration alerts.
-- Use environment protection rules for production secrets.
-
-**OIDC Example (AWS):**
-
+**OIDC authentication** -- no long-lived credentials:
 ```yaml
 permissions:
   id-token: write
   contents: read
-
 steps:
   - uses: aws-actions/configure-aws-credentials@v4
     with:
@@ -355,518 +215,34 @@ steps:
       aws-region: us-east-1
 ```
 
-### Reusable Workflows
-
-Define a workflow that other workflows can call:
-
-```yaml
-# .github/workflows/reusable-deploy.yml
-on:
-  workflow_call:
-    inputs:
-      environment:
-        required: true
-        type: string
-      image_tag:
-        required: true
-        type: string
-    secrets:
-      DEPLOY_KEY:
-        required: true
-
-jobs:
-  deploy:
-    environment: ${{ inputs.environment }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: ./deploy.sh ${{ inputs.environment }} ${{ inputs.image_tag }}
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-```
-
-**Calling a reusable workflow:**
-
-```yaml
-jobs:
-  deploy-staging:
-    uses: ./.github/workflows/reusable-deploy.yml
-    with:
-      environment: staging
-      image_tag: ${{ github.sha }}
-    secrets:
-      DEPLOY_KEY: ${{ secrets.STAGING_DEPLOY_KEY }}
-```
-
-### Composite Actions
-
-Bundle multiple steps into a reusable action:
-
-```yaml
-# .github/actions/setup-project/action.yml
-name: Setup Project
-description: Install dependencies and configure the environment
-
-inputs:
-  node-version:
-    description: Node.js version
-    default: '20'
-
-runs:
-  using: composite
-  steps:
-    - uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
-        cache: npm
-    - run: npm ci
-      shell: bash
-    - run: npm run build
-      shell: bash
-```
+**Secrets hierarchy:** Organization > Repository > Environment. Never echo secrets; use `add-mask` for dynamic values. Prefer OIDC for cloud auth.
 
 ---
 
-## GitHub Agentic Workflows (2026)
-
-GitHub's agentic workflow system enables AI-driven automation using markdown-based definitions.
-
-### Markdown-Based Workflow Authoring
-
-Agentic workflows are defined in `.github/agents/` as markdown files:
-
-```markdown
----
-name: code-review-agent
-description: Automated code review with context-aware feedback
-triggers:
-  - pull_request
-tools:
-  - code-search
-  - file-read
-  - comment-create
-permissions:
-  pull-requests: write
-  contents: read
-safe-outputs: true
----
-
-# Code Review Agent
-
-Review pull requests for:
-1. Code quality and adherence to project conventions
-2. Security vulnerabilities
-3. Performance regressions
-4. Test coverage gaps
-
-## Instructions
-- Read the diff and related files for context
-- Post inline comments for specific issues
-- Summarize findings as a PR comment
-```
-
-### Safe-Outputs
-
-The `safe-outputs: true` flag ensures that agent-generated outputs are:
-
-- Clearly labeled as AI-generated.
-- Not automatically merged or deployed without human review.
-- Logged with full provenance for auditing.
-
-### Tool Permissions
-
-Agentic workflows declare which tools they can access:
-
-| Tool | Capability | Permission Scope |
-|------|-----------|-----------------|
-| `code-search` | Search repository code | `contents: read` |
-| `file-read` | Read file contents | `contents: read` |
-| `file-write` | Modify files | `contents: write` |
-| `comment-create` | Post PR/issue comments | `pull-requests: write` |
-| `issue-create` | Create issues | `issues: write` |
-| `workflow-trigger` | Trigger other workflows | `actions: write` |
-
-### Continuous Automation Categories
-
-| Category | Examples | Trigger Pattern |
-|----------|----------|-----------------|
-| Code Quality | Auto-review, style fixes | `pull_request` |
-| Documentation | Doc generation, changelog | `push` to main |
-| Security | Dependency alerts, secret detection | `schedule`, `push` |
-| Release | Versioning, release notes | `release`, `workflow_dispatch` |
-| Triage | Issue labeling, assignment | `issues`, `pull_request` |
-
----
-
-## Quality Gates
-
-### Linting
-
-Enforce code style before any other check:
-
-```yaml
-lint:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Python lint
-      run: |
-        pip install ruff
-        ruff check .
-        ruff format --check .
-    - name: YAML lint
-      run: |
-        pip install yamllint
-        yamllint .github/workflows/
-```
-
-### Testing
-
-Structure tests by speed tier:
-
-| Tier | Type | Max Duration | Runs On |
-|------|------|-------------|---------|
-| 1 | Unit tests | 5 minutes | Every push |
-| 2 | Integration tests | 15 minutes | Every PR |
-| 3 | E2E tests | 30 minutes | Pre-deploy |
-| 4 | Load tests | 60 minutes | Weekly schedule |
-
-### Security Scanning
-
-Integrate security at multiple levels:
-
-```yaml
-security:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-
-    - name: SAST - Static analysis
-      uses: github/codeql-action/analyze@v3
-
-    - name: Dependency audit
-      run: |
-        pip-audit -r requirements.txt
-        npm audit --audit-level=high
-
-    - name: Container scan
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: ${{ env.IMAGE }}:${{ github.sha }}
-        severity: CRITICAL,HIGH
-```
-
-### Performance Benchmarks
-
-Gate deployments on performance regression:
-
-```yaml
-benchmark:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v4
-    - name: Run benchmarks
-      run: python -m pytest benchmarks/ --benchmark-json=output.json
-    - name: Compare with baseline
-      run: python scripts/compare_benchmarks.py output.json baseline.json --threshold 10
-```
-
----
-
-## Deployment Strategies
-
-### Blue-Green Deployment
-
-Maintain two identical environments; switch traffic after verification.
-
-**Flow:**
-
-```
-1. Deploy new version to "green" environment
-2. Run health checks on green
-3. Switch load balancer to green
-4. Monitor for errors (5-15 minutes)
-5. If healthy: decommission old "blue"
-   If unhealthy: switch back to blue (instant rollback)
-```
-
-**Best for:** Zero-downtime deployments, applications needing instant rollback.
-
-### Canary Deployment
-
-Route a small percentage of traffic to the new version.
-
-**Flow:**
-
-```
-1. Deploy canary (new version) alongside stable
-2. Route 5% traffic to canary
-3. Monitor error rates, latency, business metrics
-4. If healthy: increase to 25% -> 50% -> 100%
-   If unhealthy: route 100% back to stable
-```
-
-**Traffic Split Schedule:**
-
-| Phase | Canary % | Duration | Gate |
-|-------|---------|----------|------|
-| 1 | 5% | 15 min | Error rate < 0.1% |
-| 2 | 25% | 30 min | P99 latency < 200ms |
-| 3 | 50% | 60 min | Business metrics stable |
-| 4 | 100% | -- | Full promotion |
-
-### Rolling Deployment
-
-Update instances incrementally, maintaining availability.
-
-**Best for:** Stateless services, Kubernetes deployments with multiple replicas.
-
-```yaml
-# Kubernetes rolling update
-spec:
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-```
-
-### Feature Flags
-
-Decouple deployment from release using feature flags:
-
-```python
-# Feature flag check (simplified)
-if feature_flags.is_enabled("new-checkout-flow", user_id=user.id):
-    return new_checkout(request)
-else:
-    return legacy_checkout(request)
-```
-
-**Benefits:**
-
-- Deploy code without exposing it to users.
-- Gradual rollout by user segment (internal, beta, percentage).
-- Instant kill switch without redeployment.
-- A/B testing capability.
-
----
-
-## Monitoring and Alerting Integration
-
-### Deploy-Time Monitoring Checklist
-
-After every deployment, verify:
-
-1. **Health endpoints** respond with 200 status.
-2. **Error rate** has not increased (compare 5-minute window pre/post).
-3. **Latency** P50/P95/P99 within acceptable bounds.
-4. **CPU/Memory** usage is not spiking.
-5. **Business metrics** (conversion rate, API calls) are stable.
-
-### Alert Configuration
-
-```yaml
-# Example alert rules (Prometheus-compatible)
-groups:
-  - name: deployment-alerts
-    rules:
-      - alert: HighErrorRate
-        expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.05
-        for: 2m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Error rate exceeds 5% after deployment"
-
-      - alert: HighLatency
-        expr: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m])) > 0.5
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "P99 latency exceeds 500ms"
-```
-
-### Deployment Annotations
-
-Mark deployments in your monitoring system for correlation:
-
-```bash
-# Grafana annotation
-curl -X POST "$GRAFANA_URL/api/annotations" \
-  -H "Authorization: Bearer $GRAFANA_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d "{
-    \"text\": \"Deploy $VERSION to $ENVIRONMENT\",
-    \"tags\": [\"deployment\", \"$ENVIRONMENT\"]
-  }"
-```
-
----
-
-## Cost Optimization for CI/CD
-
-### Runner Cost Comparison
+## Runner Cost Optimization
 
 | Runner | vCPU | RAM | Cost/min | Best For |
 |--------|------|-----|----------|----------|
-| ubuntu-latest (2-core) | 2 | 7 GB | $0.008 | Standard tasks |
-| ubuntu-latest (4-core) | 4 | 16 GB | $0.016 | Build-heavy tasks |
-| ubuntu-latest (8-core) | 8 | 32 GB | $0.032 | Large compilations |
-| ubuntu-latest (16-core) | 16 | 64 GB | $0.064 | Parallel test suites |
-| Self-hosted | Variable | Variable | Infra cost | Specialized needs |
+| 2-core | 2 | 7 GB | $0.008 | Standard tasks |
+| 4-core | 4 | 16 GB | $0.016 | Build-heavy |
+| 8-core | 8 | 32 GB | $0.032 | Large compilations |
+| 16-core | 16 | 64 GB | $0.064 | Parallel test suites |
 
-### Cost Reduction Strategies
-
-1. **Path filters** -- Do not run full CI for docs-only changes.
-2. **Concurrency cancellation** -- Cancel superseded runs.
-3. **Cache aggressively** -- Save 30-60% of dependency install time.
-4. **Right-size runners** -- Use larger runners only for jobs that benefit.
-5. **Schedule expensive jobs** -- Run full matrix nightly, not on every push.
-6. **Timeout limits** -- Prevent runaway jobs from burning minutes.
-
-```yaml
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15  # Hard limit
-```
-
-### Monthly Budget Estimation
-
-```
-Formula:
-  Monthly minutes = (runs/day) x (avg minutes/run) x 30
-  Monthly cost = Monthly minutes x (cost/minute)
-
-Example:
-  50 pushes/day x 8 min/run x 30 days = 12,000 minutes
-  12,000 x $0.008 = $96/month (2-core Linux)
-```
-
-**Use `scripts/pipeline_analyzer.py`** to estimate costs for your specific workflows.
-
----
-
-## Tools Reference
-
-### workflow_generator.py
-
-Generate GitHub Actions workflow YAML from templates.
-
-```bash
-# Generate CI workflow for Python + pytest
-python scripts/workflow_generator.py --type ci --language python --test-framework pytest
-
-# Generate CD workflow for Node.js webapp
-python scripts/workflow_generator.py --type cd --language node --deploy-target kubernetes
-
-# Generate security scan workflow
-python scripts/workflow_generator.py --type security-scan --language python
-
-# Generate release workflow
-python scripts/workflow_generator.py --type release --language python
-
-# Generate docs-check workflow
-python scripts/workflow_generator.py --type docs-check
-
-# Output as JSON
-python scripts/workflow_generator.py --type ci --language python --format json
-```
-
-### pipeline_analyzer.py
-
-Analyze existing workflows for optimization opportunities.
-
-```bash
-# Analyze all workflows in a directory
-python scripts/pipeline_analyzer.py path/to/.github/workflows/
-
-# Analyze a single workflow file
-python scripts/pipeline_analyzer.py path/to/workflow.yml
-
-# Output as JSON
-python scripts/pipeline_analyzer.py path/to/.github/workflows/ --format json
-```
-
-### deployment_planner.py
-
-Generate deployment plans based on project type.
-
-```bash
-# Plan for a web application
-python scripts/deployment_planner.py --type webapp --environments dev,staging,prod
-
-# Plan for a microservice
-python scripts/deployment_planner.py --type microservice --environments dev,staging,prod --strategy canary
-
-# Plan for a library/package
-python scripts/deployment_planner.py --type library --environments staging,prod
-
-# Output as JSON
-python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --format json
-```
+**Monthly estimate:** `(runs/day) x (avg min/run) x 30 x (cost/min)`
+Example: 50 pushes/day x 8 min x 30 = 12,000 min x $0.008 = **$96/month**.
 
 ---
 
 ## Anti-Patterns
 
-| Anti-Pattern | Problem | Solution |
-|-------------|---------|----------|
-| Monolithic workflow | Single 45-minute workflow | Split into parallel jobs |
-| No caching | Reinstall deps every run | Cache dependencies and build outputs |
-| Secrets in logs | Leaked credentials | Use `add-mask`, avoid `echo` |
-| No timeout | Stuck jobs burn budget | Set `timeout-minutes` on every job |
-| Always full matrix | 30-minute matrix on every push | Full matrix nightly; reduced on push |
-| Manual deployments | Error-prone, slow | Automate with approval gates |
+| Anti-Pattern | Problem | Fix |
+|-------------|---------|-----|
+| Monolithic workflow | 45-min single workflow | Split into parallel jobs |
+| No caching | Reinstall deps every run | Cache dependencies and builds |
+| Secrets in logs | Leaked credentials | `add-mask`, avoid `echo` |
+| No timeout | Stuck jobs burn budget | `timeout-minutes` on every job |
+| Full matrix every push | 30-min matrix on every commit | Full nightly; reduced on push |
 | No rollback plan | Stuck with broken deploy | Automate rollback in CD pipeline |
-| Shared mutable state | Flaky tests, race conditions | Isolate environments per job |
-
----
-
-## Decision Framework
-
-### Choosing a Deployment Strategy
-
-```
-Is zero-downtime required?
-  No  -> Rolling deployment
-  Yes ->
-    Need instant rollback?
-      No  -> Rolling with health checks
-      Yes ->
-        Budget for 2x infrastructure?
-          Yes -> Blue-green
-          No  ->
-            Can handle complexity of traffic splitting?
-              Yes -> Canary
-              No  -> Blue-green with smaller footprint
-```
-
-### Choosing CI Runner Size
-
-```
-Job duration > 20 minutes on 2-core?
-  No  -> Use 2-core (cheapest)
-  Yes ->
-    CPU-bound (compilation, tests)?
-      Yes -> 4-core or 8-core (cut time in half)
-      No  ->
-        I/O bound (downloads, Docker)?
-          Yes -> 2-core is fine, optimize caching
-          No  -> Profile the job to find the bottleneck
-```
-
----
-
-## Further Reading
-
-- `references/github-actions-patterns.md` -- 30+ production patterns
-- `references/deployment-strategies.md` -- Deep dive on each strategy
-- `references/agentic-workflows-guide.md` -- GitHub agentic workflows (2026)
-- `assets/ci-template.yml` -- Production CI template
-- `assets/cd-template.yml` -- Production CD template
 
 ---
 
@@ -874,153 +250,36 @@ Job duration > 20 minutes on 2-core?
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| Workflow never triggers | Incorrect `on:` trigger configuration or branch name mismatch | Verify trigger events match your branching strategy; check `branches:` and `paths:` filters against actual file paths |
-| Cache miss on every run | Cache key uses a volatile value (e.g., timestamp) or restore-keys are missing | Use `hashFiles()` on lock files for the cache key and add broad `restore-keys` prefixes for partial hits |
-| Matrix job fails on one OS only | Platform-specific path separators, shell differences, or missing system dependencies | Use `shell: bash` explicitly on all steps; install OS-level dependencies in a setup step per matrix entry |
-| Secret not available in workflow | Secret is scoped to a different environment or the workflow lacks the required `environment:` key | Ensure the job declares the correct `environment:` and the secret is defined at the matching scope (repo, environment, or org) |
-| Deployment succeeds but health check fails | Application not fully started before the check runs, or wrong health endpoint configured | Add a retry loop with backoff to the health check step; confirm the endpoint path and expected status code in `deployment_planner.py` output |
-| Concurrency group cancels needed runs | Overly broad concurrency group key causes unrelated runs to cancel each other | Scope the group to `${{ github.workflow }}-${{ github.ref }}` so only same-branch runs cancel; use separate groups for deploy jobs |
-| Pipeline analyzer reports false positives | Minimal YAML parser cannot handle advanced syntax (anchors, multi-line strings, complex expressions) | Review flagged items manually; feed the workflow through a full YAML linter first; report edge cases for parser improvement |
+| Workflow never triggers | Wrong `on:` config or branch name mismatch | Verify triggers match branching strategy |
+| Cache miss every run | Volatile cache key (timestamp) | Use `hashFiles()` on lock files |
+| Matrix fails on one OS only | Platform-specific paths or deps | Use `shell: bash`; install OS deps per matrix entry |
+| Secret not available | Wrong environment scope | Ensure job declares correct `environment:` |
+| Health check fails after deploy | App not started before check | Add retry loop with backoff |
+| Concurrency cancels needed runs | Overly broad group key | Scope to `workflow-ref`; separate groups for deploy |
 
 ---
 
-## Success Criteria
+## References
 
-- **CI pipeline total duration under 10 minutes** for standard pushes, with lint completing in under 60 seconds.
-- **Cache hit rate above 80%** across dependency and build caches, measured over a rolling 7-day window.
-- **Zero hardcoded secrets** detected by `pipeline_analyzer.py` across all workflow files.
-- **Every job defines `timeout-minutes`** and a top-level `permissions` block scoped to least privilege.
-- **Deployment rollback completes within the strategy's target** -- under 1 minute for blue-green/canary, under 20 minutes for rolling.
-- **Post-deploy error rate stays below 0.1%** for the first 15 minutes after production promotion.
-- **Pipeline cost per run stays within budget** -- monthly cost estimates from `pipeline_analyzer.py` reviewed and approved each sprint.
-
----
-
-## Scope & Limitations
-
-**This skill covers:**
-
-- Designing, generating, and optimizing GitHub Actions CI/CD workflows (triggers, jobs, caching, matrix builds, concurrency).
-- Multi-environment deployment planning with blue-green, canary, and rolling strategies.
-- Security scanning integration (SAST, dependency audit, secret detection) within pipelines.
-- Cost estimation and optimization for GitHub-hosted and self-hosted runners.
-
-**This skill does NOT cover:**
-
-- Infrastructure provisioning or IaC authoring (Terraform, Pulumi, CloudFormation) -- see `senior-devops` and `aws-solution-architect`.
-- Application-level security hardening, penetration testing, or compliance frameworks -- see `senior-secops` and `senior-security`.
-- Incident response, on-call runbooks, or post-incident review processes -- see `incident-commander`.
-- Container orchestration internals (Kubernetes resource tuning, service mesh configuration) -- see `senior-cloud-architect`.
+| Guide | Path |
+|-------|------|
+| GitHub Actions Patterns | `references/github-actions-patterns.md` |
+| Deployment Strategies | `references/deployment-strategies.md` |
+| Agentic Workflows Guide | `references/agentic-workflows-guide.md` |
 
 ---
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-secops` | Security scanning steps generated by `workflow_generator.py --type security-scan` feed into SecOps review workflows | Pipeline findings (dependency audit, CodeQL, secret scan) flow to SecOps dashboards |
-| `release-orchestrator` | Release workflows (`--type release`) align with the release-orchestrator's versioning and changelog strategy | Deployment planner output provides the promotion gates; release-orchestrator drives the version bump |
-| `senior-qa` | CI quality gates (lint, test matrix, coverage thresholds) map to QA acceptance criteria | Test results and coverage artifacts uploaded by CI are consumed by QA reporting |
-| `senior-devops` | Deployment strategies and environment matrices complement DevOps infrastructure automation | `deployment_planner.py` environment config informs DevOps provisioning; DevOps provides the runtime targets CI/CD deploys to |
-| `code-reviewer` | Pull request workflows trigger automated code review via agentic workflow agents | PR-triggered CI results feed into code-reviewer's merge-readiness assessment |
-| `incident-commander` | Rollback procedures and monitoring alerts defined here connect to incident response playbooks | Post-deploy alert thresholds trigger incident-commander escalation; rollback steps execute as part of incident mitigation |
+| Skill | Integration |
+|-------|-------------|
+| `release-orchestrator` | Release workflows align with versioning and changelog |
+| `senior-devops` | Deployment strategies complement infra automation |
+| `senior-secops` | Security scanning steps feed SecOps dashboards |
+| `senior-qa` | CI quality gates map to QA acceptance criteria |
+| `incident-commander` | Rollback procedures connect to incident playbooks |
 
 ---
 
-## Tool Reference
-
-### workflow_generator.py
-
-**Purpose:** Generates production-ready GitHub Actions workflow YAML files from built-in templates for CI, CD, release, security-scan, and docs-check workflow types.
-
-**Usage:**
-
-```bash
-python scripts/workflow_generator.py --type <workflow-type> [options]
-```
-
-**Flags / Parameters:**
-
-| Flag | Required | Values | Default | Description |
-|------|----------|--------|---------|-------------|
-| `--type` | Yes | `ci`, `cd`, `release`, `security-scan`, `docs-check` | -- | Type of workflow to generate |
-| `--language` | Yes (except `docs-check`) | `python`, `node`, `go`, `rust` | -- | Programming language for the project |
-| `--test-framework` | No | Depends on language (e.g., `pytest`, `unittest`, `jest`, `vitest`, `mocha`, `gotest`, `cargo`) | Language default | Override the default test framework |
-| `--deploy-target` | No | `kubernetes`, `docker-compose`, `aws-ecs`, `static` | `kubernetes` | Deployment target for CD workflows |
-| `--format` | No | `yaml`, `json` | `yaml` | Output format; `json` wraps the YAML in a metadata envelope |
-| `--output`, `-o` | No | File path | stdout | Write output to a file instead of stdout |
-
-**Example:**
-
-```bash
-python scripts/workflow_generator.py --type ci --language python --test-framework pytest --format json -o ci.json
-```
-
-**Output Formats:**
-
-- **yaml** (default) -- Raw GitHub Actions workflow YAML printed to stdout or written to file.
-- **json** -- JSON object containing `workflow_type`, `language`, `test_framework` (or `deploy_target`), `yaml` (the generated YAML as a string), and `generated_at` timestamp.
-
----
-
-### pipeline_analyzer.py
-
-**Purpose:** Analyzes existing GitHub Actions workflow files for optimization opportunities including missing caching, absent timeouts, sequential chains that could be parallelized, deprecated actions, security issues, and per-run cost estimation.
-
-**Usage:**
-
-```bash
-python scripts/pipeline_analyzer.py <path> [options]
-```
-
-**Flags / Parameters:**
-
-| Flag | Required | Values | Default | Description |
-|------|----------|--------|---------|-------------|
-| `path` (positional) | Yes | File path (`.yml`/`.yaml`) or directory | -- | Workflow file or directory of workflow files to analyze |
-| `--format` | No | `text`, `json` | `text` | Output format for the report |
-| `--output`, `-o` | No | File path | stdout | Write report to a file instead of stdout |
-
-**Example:**
-
-```bash
-python scripts/pipeline_analyzer.py .github/workflows/ --format json -o report.json
-```
-
-**Output Formats:**
-
-- **text** (default) -- Human-readable report with severity-tagged findings (`[CRITICAL]`, `[WARNING]`, `[INFO]`), recommendations, estimated savings, and a per-job cost breakdown with monthly projections at 50 and 200 runs.
-- **json** -- Array of objects, one per file, each containing `file` metadata (path, name, line count, cost estimate), `findings` array (severity, category, title, description, recommendation, estimated_savings), and a `summary` with counts by severity.
-
----
-
-### deployment_planner.py
-
-**Purpose:** Generates a deployment plan document covering strategy selection, environment matrix, health checks, monitoring metrics, pre/post-deploy checklists, rollback procedures, and promotion flow based on project type.
-
-**Usage:**
-
-```bash
-python scripts/deployment_planner.py --type <project-type> --environments <env-list> [options]
-```
-
-**Flags / Parameters:**
-
-| Flag | Required | Values | Default | Description |
-|------|----------|--------|---------|-------------|
-| `--type` | Yes | `webapp`, `microservice`, `library`, `mobile`, `infrastructure` | -- | Project type to plan for |
-| `--environments` | Yes | Comma-separated list (e.g., `dev,staging,prod`) | -- | Target environments; built-in names: `dev`, `staging`, `prod`, `qa`, `uat`; custom names get sensible defaults |
-| `--strategy` | No | `blue-green`, `canary`, `rolling` | Depends on project type | Deployment strategy override |
-| `--format` | No | `text`, `json` | `text` | Output format |
-| `--output`, `-o` | No | File path | stdout | Write plan to a file instead of stdout |
-
-**Example:**
-
-```bash
-python scripts/deployment_planner.py --type microservice --environments dev,staging,prod --strategy canary -o deploy-plan.md
-```
-
-**Output Formats:**
-
-- **text** (default) -- Markdown document with strategy overview (pros, cons, phases), environment matrix table, build artifacts, pre-deploy checklist, health check table with a generated bash verification script, post-deploy verification, monitoring metrics, rollback procedure with auto-rollback triggers, and an environment promotion flow diagram.
-- **json** -- Structured JSON object containing all plan data: `project_type`, `strategy`, `environments` (per-env config), `artifacts`, `health_checks`, `monitoring_metrics`, `pre_deploy_checks`, `post_deploy_checks`, `rollback_steps`, `strategy_details` (pros, cons, phases, rollback_time), and `generated_at` timestamp.
+**Last Updated:** April 2026
+**Version:** 1.1.0

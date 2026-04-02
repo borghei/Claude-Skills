@@ -1,0 +1,91 @@
+# ============================================================================
+# Skill Security Audit — Scan Python scripts for unsafe patterns
+# ============================================================================
+# Checks for:
+#   - Command injection (os.system, subprocess shell=True, eval, exec)
+#   - Hardcoded secrets and credential patterns
+#   - Unsafe file operations (e.g., path traversal)
+#   - Network calls that could exfiltrate data
+#   - Import of dangerous or unnecessary modules
+# ============================================================================
+
+name: Skill Security Audit
+
+on:
+  pull_request:
+    paths: ['**/scripts/**/*.py', '**/SKILL.md']
+  push:
+    branches: [dev, main]
+    paths: ['**/scripts/**/*.py']
+
+jobs:
+  security-scan:
+    name: Scan Python scripts for unsafe patterns
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find Python scripts to scan
+        id: find-scripts
+        run: |
+          SCRIPTS=$(find . -path '*/scripts/*.py' -type f | sort)
+          if [ -z "$SCRIPTS" ]; then
+            echo "No Python scripts found. Skipping scan."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Found $(echo "$SCRIPTS" | wc -l | tr -d ' ') script(s) to scan."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scan for command injection
+        if: steps.find-scripts.outputs.skip != 'true'
+        run: |
+          echo "--- Checking for command injection patterns ---"
+          FOUND=0
+          # os.system(), subprocess with shell=True, eval(), exec()
+          while IFS= read -r file; do
+            HITS=$(grep -nE '(os\.system\(|subprocess\.(call|run|Popen)\(.*shell\s*=\s*True|eval\(|exec\()' "$file" || true)
+            if [ -n "$HITS" ]; then
+              echo "::warning file=${file}::Potential command injection found"
+              echo "$HITS"
+              FOUND=$((FOUND + 1))
+            fi
+          done < <(find . -path '*/scripts/*.py' -type f)
+          echo "Files with command injection patterns: $FOUND"
+          # Fail on eval/exec (high risk); warn on others
+          if grep -rlE '(eval\(|exec\()' --include='*.py' . 2>/dev/null | grep -q 'scripts'; then
+            echo "::error::eval() or exec() found in scripts — these are blocked."
+            exit 1
+          fi
+
+      - name: Scan for hardcoded secrets
+        if: steps.find-scripts.outputs.skip != 'true'
+        run: |
+          echo "--- Checking for hardcoded secrets ---"
+          PATTERNS='(api_key|api_secret|password|secret_key|access_token|private_key)\s*=\s*["\x27][^"\x27]{8,}'
+          FOUND=$(grep -rnEi "$PATTERNS" --include='*.py' . || true)
+          if [ -n "$FOUND" ]; then
+            echo "::error::Potential hardcoded secrets detected:"
+            echo "$FOUND"
+            exit 1
+          fi
+          echo "No hardcoded secrets found."
+
+      - name: Scan for dangerous network calls
+        if: steps.find-scripts.outputs.skip != 'true'
+        run: |
+          echo "--- Checking for network exfiltration risk ---"
+          # Flag urllib/requests/httpx/socket usage — skills should be offline
+          FOUND=$(grep -rnE '(import requests|from requests|import urllib|import httpx|import socket|from socket)' --include='*.py' . || true)
+          if [ -n "$FOUND" ]; then
+            echo "::warning::Network library imports found (skills should be offline-capable):"
+            echo "$FOUND"
+          else
+            echo "No network imports found."
+          fi
+
+      - name: Summary
+        if: steps.find-scripts.outputs.skip != 'true'
+        run: |
+          TOTAL=$(find . -path '*/scripts/*.py' -type f | wc -l | tr -d ' ')
+          echo "Security audit complete. Scanned $TOTAL Python script(s)."

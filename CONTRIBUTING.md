@@ -1,408 +1,297 @@
-# Contributing to Claude Skills Library
+# Contributing to Claude Skills
 
-Thank you for your interest in contributing to the Claude Skills Library! This repository aims to democratize professional expertise through reusable, production-ready skill packages for Claude AI.
+Welcome, and thank you for considering a contribution. Claude Skills is a universal AI skills library -- reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
 
-## 🎯 Ways to Contribute
+We value contributions of all kinds:
 
-### 1. Create New Skills
-
-Add domain expertise in your field:
-- Marketing, sales, customer success
-- Engineering specializations
-- Business functions (finance, HR, operations)
-- Industry-specific skills (FinTech, EdTech, etc.)
-
-### 2. Enhance Existing Skills
-
-Improve current skills with:
-- Better frameworks and templates
-- Additional Python automation tools
-- Updated best practices
-- More reference materials
-- Real-world examples and case studies
-
-### 3. Improve Documentation
-
-Help others use skills effectively:
-- Clearer how-to guides
-- Additional usage examples
-- Better README files
-- Translations to other languages
-
-### 4. Fix Bugs
-
-Report or fix issues in:
-- Python scripts
-- Documentation errors
-- Broken links
-- Outdated information
+- **New skills** -- Add a skill to an existing domain or propose a new domain.
+- **Skill improvements** -- Sharpen workflows, add examples, fix anti-patterns.
+- **Python tools** -- Build new CLI automation scripts for existing skills.
+- **Bug fixes** -- Fix broken paths, incorrect calculations, or logic errors.
+- **Documentation** -- Improve SKILL.md files, references, or standards.
+- **Translations** -- Localize skills or documentation for non-English audiences.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### Prerequisites
-
-- Python 3.7+ (for running/testing scripts)
-- Git and GitHub account
-- Claude AI or Claude Code account (for testing skills)
-- Familiarity with the skill domain you're contributing to
-
-### Fork and Clone
+### 1. Fork and Clone
 
 ```bash
-# Fork the repository on GitHub first
-git clone https://github.com/YOUR_USERNAME/claude-skills.git
-cd claude-skills
-
-# Add upstream remote
-git remote add upstream https://github.com/borghei/Claude-Skills.git
+gh repo fork <owner>/Claude-Skills --clone
+cd Claude-Skills
 ```
 
-### Create a Branch
+### 2. Branch from dev
+
+All work branches from `dev`. Direct pushes to `main` are blocked by branch protection.
 
 ```bash
-# Create feature branch
-git checkout -b feature/my-new-skill
-
-# Or for improvements
-git checkout -b improvement/enhance-content-creator
+git checkout dev
+git pull origin dev
+git checkout -b <branch-name>
 ```
+
+### 3. Branch Naming
+
+Use one of these prefixes:
+
+| Prefix | Purpose | Example |
+|--------|---------|---------|
+| `feature/` | New skill or tool | `feature/engineering-terraform-skill` |
+| `fix/` | Bug fix | `fix/seo-keyword-density-calc` |
+| `docs/` | Documentation only | `docs/marketing-skill-examples` |
 
 ---
 
-## 📝 Skill Creation Guidelines
+## Creating a New Skill
 
-### Following Anthropic's Official Spec
+### Skill Package Structure
 
-All skills must follow [Anthropic's Agent Skills Specification](https://docs.anthropic.com/en/docs/agents-and-tools/agent-skills/overview).
-
-### Required Structure
+Every skill lives inside a domain directory and follows this layout:
 
 ```
-your-skill-name/
-├── SKILL.md (required)
-│   ├── YAML frontmatter (name, description, license, metadata)
-│   └── Markdown content (instructions, examples, workflows)
-├── scripts/ (optional but recommended)
-│   ├── tool1.py
-│   ├── tool2.py
-│   └── tool3.py
-├── references/ (optional but recommended)
-│   ├── framework.md
-│   ├── best-practices.md
-│   └── examples.md
-└── assets/ (optional)
-    └── templates/
+<domain>/<skill-name>/
+├── SKILL.md              # Master documentation (required)
+├── scripts/              # Python CLI tools (required if adding tools)
+│   └── tool_name.py
+├── references/           # Expert knowledge bases
+│   └── domain-guide.md
+└── assets/               # User-facing templates
+    └── template.md
 ```
+
+### Authoring Workflow
+
+1. Read the [Skill Authoring Standard](standards/skill-authoring-standard.md) before writing anything.
+2. Create the directory structure under the appropriate domain folder.
+3. Write `SKILL.md` following the patterns in the authoring standard.
+4. Add Python tools in `scripts/` and reference material in `references/`.
+5. Validate quality (see requirements below).
+
+Knowledge flows from `references/` into `SKILL.md` workflows, executed via `scripts/`, and applied using `assets/` templates. Keep this pipeline intact.
+
+---
+
+## Skill Quality Requirements
+
+Every skill must meet these standards before it can be merged.
 
 ### SKILL.md Requirements
 
-**YAML Frontmatter (required):**
-```yaml
----
-name: your-skill-name
-description: What it does and when to use it. Include specific triggers and keywords.
-license: MIT
-metadata:
-  version: 1.0.0
-  author: Your Name
-  category: domain-category
-  updated: 2025-10-28
----
+1. **YAML frontmatter** -- Include all required fields: `name`, `description`, `version`, `updated`, `domain`, `tags`.
+2. **Trigger clause** -- The description must contain a "Use when..." sentence that tells AI assistants when to activate the skill.
+3. **Third-person agent voice** -- Write as instructions to an AI agent ("The agent analyzes..."), not as a tutorial ("You should analyze...").
+4. **Numbered workflow steps** -- Every workflow must use numbered steps with explicit validation checkpoints (e.g., "Validate: confirm output contains at least 3 recommendations").
+5. **Anti-patterns section** -- List at least 3 things the skill should never do.
+6. **Length limits** -- Under 500 lines and 3,000 words. Skills that exceed this should be split.
+7. **Concrete examples** -- Include examples with realistic data, not placeholder text. "Acme Corp Q3 revenue of $2.4M" beats "Company X revenue of $N".
+
+### Quality Score
+
+If the quality scorer is available, run it against your skill:
+
+```bash
+python scripts/skill_quality_scorer.py <domain>/<skill-name>
 ```
 
-**Markdown Content (required):**
-- Clear heading and overview
-- Keywords section for discovery
-- Quick start guide
-- Core workflows
-- Script documentation (if applicable)
-- Reference guide (if applicable)
-- Best practices
-- Examples
+Target a score of **70 or higher**. Skills below 70 will be sent back for revision.
 
-**Target Length:** 100-200 lines for SKILL.md
-- Keep core instructions lean
-- Move detailed content to references/
-- Follow progressive disclosure principle
+---
 
-### Python Script Standards
+## Python Tool Standards
 
-**Quality Requirements:**
-- Production-ready code (not placeholders)
-- Standard library preferred (minimal dependencies)
-- CLI-first design with --help support
-- JSON output option for automation
-- Clear docstrings and comments
-- Error handling and validation
+Python tools are the executable backbone of each skill. Every script must follow these rules.
 
-**Example:**
+### Hard Requirements
+
+| Rule | Detail |
+|------|--------|
+| Standard library only | Zero `pip install` dependencies. Use `os`, `json`, `argparse`, `csv`, `pathlib`, etc. |
+| argparse CLI | Every tool must define `--help` with a clear description of purpose and arguments. |
+| Dual output format | Support `--format json` and `--format human` (default: human). |
+| Compiles cleanly | Must pass `python -m py_compile <file>`. |
+| No ML/LLM calls | No imports of `openai`, `anthropic`, `transformers`, or similar. Skills stay portable and fast. |
+| 150-300 lines | Real logic, not boilerplate. Tools under 150 lines likely lack substance; over 300 should be split. |
+
+### Integration Testing
+
+If the integration test runner is available, run it before submitting:
+
+```bash
+python scripts/integration_test_runner.py --skill <domain>/<skill-name>
+```
+
+### Example Tool Skeleton
+
 ```python
 #!/usr/bin/env python3
-"""
-Tool Name - Brief description
+"""Brief description of what this tool does."""
 
-Usage:
-    python tool.py input.txt [--output json]
-"""
+import argparse
+import json
+import sys
+
 
 def main():
-    # Implementation
-    pass
+    parser = argparse.ArgumentParser(
+        description="One-line description shown in --help"
+    )
+    parser.add_argument("input", help="Path to input file or data source")
+    parser.add_argument(
+        "--format",
+        choices=["json", "human"],
+        default="human",
+        help="Output format (default: human)",
+    )
+    args = parser.parse_args()
+
+    result = analyze(args.input)
+
+    if args.format == "json":
+        print(json.dumps(result, indent=2))
+    else:
+        print_human(result)
+
+
+def analyze(input_path):
+    """Core logic goes here. Returns a dict."""
+    # Real analysis, no stubs
+    return {"status": "ok"}
+
+
+def print_human(result):
+    """Readable console output."""
+    for key, value in result.items():
+        print(f"{key}: {value}")
+
 
 if __name__ == "__main__":
     main()
 ```
 
-### Documentation Standards
-
-- Clear, actionable guidance
-- Real-world examples
-- Specific metrics and benchmarks
-- No generic advice
-- Professional tone
-- Proper formatting
-
 ---
 
-## 🔄 Contribution Process
+## Pull Request Process
 
-### Step 1: Discuss First (Recommended)
+### Before Opening a PR
 
-For major contributions:
-1. Open an issue describing your idea
-2. Discuss approach with maintainers
-3. Get feedback before investing time
-4. Avoid duplicate efforts
+1. **Commit with conventional commits.** Format: `<type>(<domain>): <description>`
 
-### Step 2: Develop Your Contribution
+   ```bash
+   feat(engineering): add terraform-skill with 3 automation tools
+   fix(marketing): correct CTR calculation in campaign-analyzer
+   docs(product-team): add RICE scoring examples
+   ```
 
-Follow the guidelines above for:
-- New skills
-- Python tools
-- Documentation
-- Bug fixes
+2. **Run the review gate:**
 
-### Step 3: Test Thoroughly
+   ```bash
+   /review
+   ```
 
-**For New Skills:**
-- [ ] YAML frontmatter valid (no syntax errors)
-- [ ] Description triggers Claude correctly
-- [ ] All Python scripts work with --help
-- [ ] All reference links work
-- [ ] Skill activates when expected
-- [ ] Tested with Claude AI or Claude Code
+3. **Run the security scan:**
 
-**For Python Tools:**
-- [ ] Runs without errors
-- [ ] Handles edge cases
-- [ ] Provides helpful error messages
-- [ ] JSON output works (if applicable)
-- [ ] Dependencies documented
+   ```bash
+   /security-scan
+   ```
 
-### Step 4: Submit Pull Request
+4. **Verify compilation of all Python tools:**
 
-```bash
-# Commit your changes
-git add .
-git commit -m "feat(domain): add new-skill with [capabilities]"
+   ```bash
+   python -m py_compile <domain>/<skill-name>/scripts/*.py
+   ```
 
-# Push to your fork
-git push origin feature/my-new-skill
+### Opening the PR
 
-# Create pull request on GitHub
+- Target the **dev** branch. Never open a PR directly to `main`.
+- One skill per PR unless skills are tightly coupled (e.g., a skill and its companion agent).
+- Use this PR description template:
+
+```markdown
+## What this skill does
+<1-2 sentences>
+
+## Tools added
+- `tool_name.py` -- brief description
+- `other_tool.py` -- brief description
+
+## Quality score
+<score> / 100
+
+## Checklist
+- [ ] YAML frontmatter complete
+- [ ] "Use when..." trigger clause present
+- [ ] Numbered workflows with validation checkpoints
+- [ ] Anti-patterns section included
+- [ ] Python tools compile cleanly
+- [ ] Integration tests pass
+- [ ] No secrets or credentials committed
 ```
 
-**PR Title Format:**
-- `feat(domain): add new skill for [purpose]`
-- `fix(skill-name): correct issue with [component]`
-- `docs(domain): improve documentation for [topic]`
-- `refactor(skill-name): optimize [component]`
+---
 
-**PR Description Must Include:**
-- What: What does this add/change/fix?
-- Why: Why is this valuable?
-- Testing: How was it tested?
-- Documentation: What docs were updated?
+## Skill Review Criteria
+
+Reviewers evaluate every skill against these questions:
+
+1. **Does it save users 40%+ time?** The skill must demonstrably reduce effort compared to doing the work manually or with generic AI prompting.
+2. **Is it opinionated?** Good skills take positions and recommend specific approaches. They do not just list options and say "it depends."
+3. **Is it self-contained?** No dependencies on other skills. A user must be able to extract the skill folder and use it in isolation.
+4. **Are examples concrete and realistic?** Real company names, plausible numbers, specific scenarios. No "Company X" or "lorem ipsum."
+5. **Would a senior professional find it useful?** The skill must encode genuine domain expertise, not surface-level summaries.
+
+A skill that fails on any of these criteria will be sent back with specific feedback.
 
 ---
 
-## ✅ Quality Standards
+## Code of Conduct
 
-### Skill Quality Checklist
+We are committed to providing a welcoming and respectful environment for everyone.
 
-All new skills must meet these standards:
+- Be respectful and constructive in all interactions.
+- Focus feedback on the work, not the person.
+- Assume good intent. Ask clarifying questions before criticizing.
+- No harassment, discrimination, or personal attacks of any kind.
 
-**Documentation:**
-- [ ] Clear SKILL.md with all required sections
-- [ ] Enhanced description with triggers and keywords
-- [ ] Keywords section for discovery
-- [ ] Quick start guide with 2-3 examples
-- [ ] Professional metadata (license, version, author)
-- [ ] Domain-specific README updated (if applicable)
-
-**Python Tools (if included):**
-- [ ] Production-ready code (not placeholders)
-- [ ] CLI with --help support
-- [ ] Proper error handling
-- [ ] Clear docstrings
-- [ ] Dependencies minimal and documented
-
-**References (if included):**
-- [ ] Actionable frameworks and templates
-- [ ] Specific guidance (not generic advice)
-- [ ] Real-world benchmarks and examples
-- [ ] Properly linked from SKILL.md
-
-**Testing:**
-- [ ] Skill activates correctly with Claude
-- [ ] All scripts execute without errors
-- [ ] All links work
-- [ ] No broken references
-
-**ROI:**
-- [ ] Demonstrates measurable value
-- [ ] Time savings quantified
-- [ ] Quality improvements specified
-- [ ] Clear use cases documented
+If a `CODE_OF_CONDUCT.md` exists in the repository root, it takes precedence over this summary.
 
 ---
 
-## 🎨 Style Guide
+## Recognition
 
-### Python Code
+- All contributors are acknowledged in release notes.
+- Significant contributors (3+ merged skills or major improvements) are listed in the project README.
+- Skill authors are credited in the YAML frontmatter `author` field of the skills they create.
 
-**Follow PEP 8:**
-- 4 spaces for indentation
-- Max line length: 100 characters
-- Clear variable names
-- Docstrings for functions
+---
 
-**Example:**
-```python
-def analyze_content(text: str, keywords: list) -> dict:
-    """
-    Analyze text content for keyword density and readability.
+## Quick Reference Checklist
 
-    Args:
-        text: Content to analyze
-        keywords: List of keywords to check
+Use this checklist before submitting any PR:
 
-    Returns:
-        dict: Analysis results with scores and recommendations
-    """
-    pass
+```
+[ ] Branched from dev (not main)
+[ ] Branch name follows convention (feature/, fix/, docs/)
+[ ] Conventional commit messages used
+[ ] SKILL.md has YAML frontmatter with all required fields
+[ ] "Use when..." trigger clause in description
+[ ] Third-person agent voice throughout
+[ ] Numbered workflow steps with validation checkpoints
+[ ] Anti-patterns section with 3+ entries
+[ ] Under 500 lines / 3,000 words
+[ ] Concrete examples with realistic data
+[ ] Python tools use standard library only
+[ ] Python tools have argparse with --help
+[ ] Python tools support --format json and --format human
+[ ] All Python files pass py_compile
+[ ] No secrets, API keys, or credentials
+[ ] /review gate passed
+[ ] /security-scan passed
+[ ] PR targets dev branch
+[ ] One skill per PR
 ```
 
-### Markdown Documentation
-
-- Use headers consistently (H1 for title, H2 for sections)
-- Include code blocks with language specification
-- Use tables for comparisons
-- Add emojis sparingly for visual hierarchy
-- Keep paragraphs concise
-
-### Commit Messages
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-- `feat(domain): add new capability`
-- `fix(skill): correct bug in script`
-- `docs(readme): update installation guide`
-- `refactor(skill): optimize SKILL.md length`
-- `test(tool): add test coverage`
-
 ---
 
-## 🏆 Recognition
-
-### Contributors
-
-All contributors will be:
-- Listed in CHANGELOG.md for their contributions
-- Mentioned in release notes
-- Credited in PR merge messages
-- Acknowledged in the community
-
-### Significant Contributions
-
-Major contributions may result in:
-- Co-author credit in commits
-- Feature attribution in documentation
-- Highlighted in README
-- Social media recognition
-
----
-
-## 📋 Domain-Specific Guidelines
-
-### Marketing Skills
-
-- Include real benchmarks (CAC, conversion rates, etc.)
-- Platform-specific guidance (LinkedIn, Google, etc.)
-- B2B or B2C focus clearly stated
-- International market considerations
-
-### Engineering Skills
-
-- Include tech stack in metadata
-- Provide architecture patterns
-- Add code quality standards
-- Performance benchmarks
-
-### Product Skills
-
-- Include frameworks (RICE, OKR, etc.)
-- Real-world metrics and KPIs
-- Template-heavy with examples
-- Integration points with tools
-
-### Regulatory/Quality Skills
-
-- Cite specific standards (ISO, FDA, EU MDR)
-- Compliance frameworks clear
-- Industry-specific (HealthTech, MedTech)
-- Regulatory jurisdiction specified
-
----
-
-## 🚫 What NOT to Contribute
-
-**We will not accept:**
-- Generic advice without actionable frameworks
-- Placeholder scripts (must be production-ready)
-- Skills without clear use cases
-- Duplicate capabilities of existing skills
-- Proprietary or confidential information
-- Content that violates licenses
-- Skills promoting unethical practices
-
----
-
-## 🤝 Code of Conduct
-
-By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-Expected behavior:
-- Be respectful and inclusive
-- Provide constructive feedback
-- Focus on what's best for the community
-- Show empathy and kindness
-
----
-
-## 📞 Questions?
-
-- **General Questions:** Open a [discussion](https://github.com/borghei/Claude-Skills/discussions)
-- **Bug Reports:** Use [bug report template](https://github.com/borghei/Claude-Skills/issues/new?template=bug_report.md)
-- **Feature Ideas:** Use [feature request template](https://github.com/borghei/Claude-Skills/issues/new?template=feature_request.md)
-- **Contact:** [borghei.me](https://borghei.me) or [medium.com/@borghei](https://medium.com/@borghei)
-
----
-
-## 🙏 Thank You!
-
-Your contributions help make world-class expertise accessible to everyone through Claude AI. Every skill added, bug fixed, or documentation improved makes a difference.
-
-**Happy contributing!** 🚀
+**Questions?** Open a GitHub issue with the `question` label, or start a discussion in the repository's Discussions tab.

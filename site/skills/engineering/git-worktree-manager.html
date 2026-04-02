@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Worktree Manager - Claude Skills</title>
+  <meta name="description" content="Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html">
+  <meta property="og:title" content="Git Worktree Manager - Claude Skills">
+  <meta property="og:description" content="Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Git Worktree Manager", "description": "Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-terminal: #0d0d14;
+  --text: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --accent-blue: #00d4ff;
+  --accent-violet: #7c3aed;
+  --gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --max-width: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent-blue); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.8; }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Nav */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-weight: 800; font-size: 1.1rem; color: var(--text); }
+.nav-brand:hover { opacity: 1; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+.nav-links a:hover { color: var(--accent-blue); opacity: 1; }
+.nav-links a.active { color: var(--accent-blue); }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent-blue); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; margin-bottom: 12px; letter-spacing: -0.01em; }
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; }
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 12px 16px;
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--accent-blue); }
+.search-input::placeholder { color: var(--text-muted); }
+.filter-select {
+  padding: 12px 16px; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm); color: var(--text); font-family: var(--font);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+
+/* Skill cards grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: rgba(0,212,255,0.3);
+  box-shadow: 0 0 30px rgba(0,212,255,0.08), 0 0 60px rgba(124,58,237,0.06);
+  transform: translateY(-3px);
+}
+.skill-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent-blue); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1; }
+.skill-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.skill-tag {
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
+  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 4px; color: var(--accent-blue);
+}
+.skill-domain-badge {
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px;
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 4px; color: var(--accent-violet);
+}
+.tools-count {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--text-muted); margin-top: 10px;
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 { font-size: 1.5rem; font-weight: 700; margin: 40px 0 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+.skill-detail h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 12px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-terminal); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-sm); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--accent-blue); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Tools list */
+.tool-item { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 12px; }
+.tool-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.agent-card:hover {
+  border-color: rgba(124,58,237,0.3);
+  box-shadow: 0 0 30px rgba(124,58,237,0.08), 0 0 60px rgba(0,212,255,0.06);
+  transform: translateY(-3px);
+}
+.agent-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding-bottom: 60px; }
+.command-card {
+  background: var(--bg-card); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius); padding: 24px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.command-card:hover {
+  border-color: rgba(0,212,255,0.3);
+  box-shadow: 0 0 30px rgba(0,212,255,0.08);
+  transform: translateY(-3px);
+}
+.command-card h3 { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; margin-bottom: 6px; color: var(--accent-blue); }
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Footer */
+.footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; color: var(--text-muted); }
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent-blue); }
+.footer-sep { color: rgba(255,255,255,0.15); }
+.footer-credit { font-size: 0.875rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Count badge */
+.count-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue); margin-left: 8px; }
+
+/* Badge bar (skill detail pages) */
+.badge-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 20px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.75rem; padding: 4px 10px;
+  border-radius: 6px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: var(--accent-violet); }
+.badge-subdomain { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.15); color: var(--accent-blue); }
+.badge-version { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); }
+.badge-tools { background: rgba(40,200,64,0.1); border: 1px solid rgba(40,200,64,0.2); color: #28c840; }
+.badge-refs { background: rgba(254,188,46,0.1); border: 1px solid rgba(254,188,46,0.2); color: #febc2e; }
+
+/* Example skill pills on domain cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-brand"><span class="gradient-text">Claude Skills</span></a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/">Home</a>
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/engineering/">Engineering</a><span class=sep>/</span><span>Git Worktree Manager</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Git Worktree Manager</h1>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Developer Tooling</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools">3 tools</span></div>
+    <p class="page-subtitle">Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...</p>
+    
+  </div>
+  <h2>How to Use This Skill</h2>
+
+<h3>With Claude Code</h3>
+<p>Copy the skill folder to your project:</p>
+<pre><code>git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/engineering/git-worktree-manager your-project/</code></pre>
+
+<h3>With the CS CLI</h3>
+<pre><code>cs install engineering/git-worktree-manager ./</code></pre>
+
+<h3>With OpenAI Codex</h3>
+<p>The skill is available in <code>.codex/skills/git-worktree-manager/</code></p>
+
+<h3>With Gemini CLI</h3>
+<p>The skill is available in <code>.gemini/skills/git-worktree-manager/</code></p>
+
+<h3>Manual Copy</h3>
+<pre><code>curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/engineering/git-worktree-manager</code></pre>
+
+<h3>Run Python Tools</h3>
+<pre><code>python engineering/git-worktree-manager/scripts/tool_name.py --help</code></pre>
+  
+  <h2>Quick Start</h2>### Create a Worktree
+
+<pre><code># Create worktree for a new feature branch
+git worktree add ../wt-auth -b feature/new-auth main
+
+# Create worktree from an existing branch
+git worktree add ../wt-hotfix hotfix/fix-login
+
+# Create worktree in a dedicated directory
+git worktree add ~/worktrees/myapp-auth -b feature/auth origin/main
+</code></pre>
+
+### List All Worktrees
+
+<pre><code>git worktree list
+# Output:
+# /Users/dev/myapp              abc1234 [main]
+# /Users/dev/wt-auth            def5678 [feature/new-auth]
+# /Users/dev/wt-hotfix          ghi9012 [hotfix/fix-login]
+</code></pre>
+
+### Remove a Worktree
+
+<pre><code># Safe removal (fails if there are uncommitted changes)
+git worktree remove ../wt-auth
+
+# Force removal (discards uncommitted changes)
+git worktree remove --force ../wt-auth
+
+# Prune stale metadata
+git worktree prune
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/git-worktree-manager/SKILL.md" target="_blank" rel="noopener">View source on GitHub &rarr;</a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+</body>
+</html>

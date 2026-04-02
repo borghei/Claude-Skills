@@ -2,6 +2,18 @@
 
 This guide covers the 28 production-ready engineering skills and their Python automation tools.
 
+## Customizing Tech Stacks
+
+> **Tip:** The engineering skills are written with common tech stacks (Node.js/Express, PostgreSQL, AWS, React, etc.) as defaults. You should customize these for your project's actual stack. For example:
+>
+> - **Backend:** Replace Express references with FastAPI, Django, Spring Boot, or your framework
+> - **Database:** Swap PostgreSQL examples for MySQL, MongoDB, DynamoDB, or your database
+> - **Cloud:** Change AWS patterns to GCP, Azure, or your cloud provider
+> - **Frontend:** Adapt React patterns for Vue, Svelte, Angular, or your UI framework
+> - **Language:** Convert Node.js/Python examples to Go, Rust, Java, or your language
+>
+> The workflows, patterns, and anti-patterns in each skill are universal -- only the specific tool names and syntax need adapting. When using a skill, tell your AI assistant your actual stack and it will adapt automatically.
+
 ## Engineering Skills Overview
 
 **Core Engineering (13 skills):**

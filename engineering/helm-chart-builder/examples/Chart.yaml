@@ -1,0 +1,29 @@
+# Chart.yaml — Sample Helm chart metadata for the helm-chart-builder skill
+#
+# This chart definition has several issues for the analyzer to flag:
+#   - Missing appVersion
+#   - No maintainers listed
+#   - No home/sources URLs
+#   - Missing keywords for discoverability
+#   - Deprecated apiVersion v1 (should be v2)
+
+apiVersion: v1   # ISSUE: should use apiVersion v2 for Helm 3
+name: acme-webapp
+version: 0.1.0
+# ISSUE: missing appVersion field
+description: Acme Corp web application
+type: application
+# ISSUE: no maintainers
+# ISSUE: no home URL
+# ISSUE: no sources
+# ISSUE: no icon
+# ISSUE: no keywords
+
+dependencies:
+  - name: postgresql
+    version: "12.x.x"   # ISSUE: overly broad version constraint
+    repository: "https://charts.bitnami.com/bitnami"
+  - name: redis
+    version: "*"         # ISSUE: wildcard version — not reproducible
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: redis.enabled

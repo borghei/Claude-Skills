@@ -1,12 +1,13 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 204 production-ready skills across 13 domains",
-  "version": "3.0.0",
+  "description": "The Universal AI Skills Library — 224 production-ready skills across 13 domains",
+  "version": "4.0.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 203,
+  "total_skills": 224,
+  "updated": "2026-04-02",
   "domains": {
     "business-growth": {
       "count": 16,
@@ -21,20 +22,20 @@
       "tools": 16
     },
     "engineering": {
-      "count": 60,
-      "tools": 191
+      "count": 76,
+      "tools": 224
     },
     "finance": {
-      "count": 1,
-      "tools": 4
+      "count": 3,
+      "tools": 10
     },
     "hr-operations": {
       "count": 4,
       "tools": 12
     },
     "marketing": {
-      "count": 35,
-      "tools": 106
+      "count": 38,
+      "tools": 115
     },
     "product-team": {
       "count": 8,
@@ -3542,6 +3543,434 @@
       ],
       "tools": 3,
       "has_references": false,
+      "has_assets": false
+    },
+    {
+      "name": "docker-development",
+      "description": "Automated analysis of Dockerfiles and docker-compose configurations. Identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations.",
+      "path": "engineering/docker-development/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "containers",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "docker",
+        "containers",
+        "devops",
+        "compose",
+        "dockerfile"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "terraform-patterns",
+      "description": "Automated analysis of Terraform configurations for module complexity, security misconfigurations, and infrastructure best practices. Catches open ports, public buckets, missing encryption, and overly permissive IAM policies.",
+      "path": "engineering/terraform-patterns/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "infrastructure-as-code",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "terraform",
+        "iac",
+        "security",
+        "cloud",
+        "infrastructure"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "helm-chart-builder",
+      "description": "Automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. Helps teams maintain high-quality charts with correct configurations and proper security contexts.",
+      "path": "engineering/helm-chart-builder/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "kubernetes",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "helm",
+        "kubernetes",
+        "k8s",
+        "charts",
+        "devops"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "a11y-audit",
+      "description": "Automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. Catches missing alt text, broken heading hierarchies, unlabeled form inputs, and insufficient color contrast.",
+      "path": "engineering/a11y-audit/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "accessibility",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "accessibility",
+        "a11y",
+        "wcag",
+        "contrast",
+        "html"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "sql-database-assistant",
+      "description": "Tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. Helps teams write efficient queries and manage database evolution safely.",
+      "path": "engineering/sql-database-assistant/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "databases",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "sql",
+        "database",
+        "optimization",
+        "migration",
+        "schema"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "threat-detection",
+      "description": "Automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators.",
+      "path": "engineering/threat-detection/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "security",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "security",
+        "threat-detection",
+        "logs",
+        "monitoring",
+        "incident-response"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "google-workspace-cli",
+      "description": "Tools for auditing Google Workspace configurations, generating authentication setup documentation, and diagnosing common GWS issues. Helps IT administrators maintain secure, well-configured Workspace environments.",
+      "path": "engineering/google-workspace-cli/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "google-workspace",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "google-workspace",
+        "gws",
+        "admin",
+        "security",
+        "audit"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "ai-security",
+      "description": "Specialized threat scanning for AI and machine learning systems. Identifies vulnerabilities including prompt injection, data poisoning, model extraction, adversarial inputs, and insecure model serving configurations.",
+      "path": "engineering/ai-security/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "ai-security",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "ai-security",
+        "prompt-injection",
+        "data-poisoning",
+        "model-extraction",
+        "adversarial-ml"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "browser-automation",
+      "description": "Tools for building robust web automation, checking scripts for bot detection signatures, generating form automation code, and creating web scraping solutions with rate limiting and best practices.",
+      "path": "engineering/browser-automation/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "web-automation",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "browser-automation",
+        "web-scraping",
+        "anti-detection",
+        "form-automation",
+        "selenium"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "focused-fix",
+      "description": "Enforces a disciplined minimal-change approach to bug fixing. Identifies the smallest possible change set that resolves an issue, reducing risk and preventing scope creep during bugfixes.",
+      "path": "engineering/focused-fix/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "debugging",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "bugfix",
+        "minimal-change",
+        "scope-analysis",
+        "debugging",
+        "focused-fix"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "llm-cost-optimizer",
+      "description": "Tools for counting tokens, estimating costs across different LLM providers, and optimizing prompts to reduce token usage without sacrificing quality. Essential for teams managing LLM API budgets at scale.",
+      "path": "engineering/llm-cost-optimizer/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "ai-cost-management",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "llm",
+        "tokens",
+        "cost-optimization",
+        "prompt-engineering",
+        "pricing"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "prompt-governance",
+      "description": "Tools for auditing prompts for security vulnerabilities, bias, and safety issues, plus managing a versioned catalog of approved prompts. Essential for organizations deploying LLM-based applications at scale.",
+      "path": "engineering/prompt-governance/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "ai-governance",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "prompt-governance",
+        "prompt-safety",
+        "prompt-audit",
+        "prompt-catalog",
+        "ai-compliance"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "secrets-vault-manager",
+      "description": "Tools for generating HashiCorp Vault configurations, planning and scheduling secret rotation cycles, and analyzing vault audit logs for suspicious access patterns.",
+      "path": "engineering/secrets-vault-manager/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "secrets-management",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "secrets",
+        "vault",
+        "hashicorp",
+        "rotation",
+        "audit",
+        "security"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "red-team",
+      "description": "Tools for planning and scoping security engagements. Helps define rules of engagement, select methodologies, scope targets, plan attack phases, and generate engagement documentation.",
+      "path": "engineering/red-team/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "offensive-security",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "red-team",
+        "penetration-testing",
+        "security-assessment",
+        "adversary-simulation",
+        "engagement-planning"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "snowflake-development",
+      "description": "Tools for analyzing and optimizing Snowflake SQL queries, recommending warehouse sizing, and enforcing Snowflake-specific best practices. Helps data engineers reduce costs and improve query performance.",
+      "path": "engineering/snowflake-development/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "data-warehouse",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "snowflake",
+        "sql",
+        "data-warehouse",
+        "query-optimization",
+        "warehouse-sizing"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "agenthub",
+      "description": "Multi-agent DAG orchestration framework. Design, execute, and manage workflows where multiple AI agents collaborate on complex tasks with dependency graphs. Covers agent spawning, output merging, quality evaluation, and real-time status boards.",
+      "path": "engineering/agenthub/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "ai-agents",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "multi-agent",
+        "orchestration",
+        "dag",
+        "workflow",
+        "parallel",
+        "agent-hub"
+      ],
+      "tools": 4,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "saas-metrics-coach",
+      "description": "Production-ready SaaS metrics toolkit for calculating MRR/ARR, analyzing cohort retention, and evaluating unit economics. Designed for SaaS founders, finance teams, and growth operators.",
+      "path": "finance/saas-metrics-coach/SKILL.md",
+      "domain": "finance",
+      "category": "finance",
+      "subdomain": "saas-metrics",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "saas",
+        "mrr",
+        "arr",
+        "churn",
+        "cohort-analysis",
+        "ltv",
+        "cac",
+        "unit-economics"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "business-investment-advisor",
+      "description": "Production-ready investment analysis toolkit for screening opportunities, analyzing portfolio composition, and generating due diligence checklists. For business owners, angel investors, and corporate development teams.",
+      "path": "finance/business-investment-advisor/SKILL.md",
+      "domain": "finance",
+      "category": "finance",
+      "subdomain": "investment",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "investment",
+        "portfolio",
+        "due-diligence",
+        "roi",
+        "risk-analysis",
+        "diversification"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "video-content-strategist",
+      "description": "Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO across YouTube, TikTok, LinkedIn, and other platforms.",
+      "path": "marketing/video-content-strategist/SKILL.md",
+      "domain": "marketing",
+      "category": "marketing",
+      "subdomain": "video",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "video",
+        "youtube",
+        "content-calendar",
+        "thumbnail",
+        "seo",
+        "video-strategy"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "x-twitter-growth",
+      "description": "Production-ready X/Twitter growth toolkit for analyzing tweet performance patterns, structuring optimal threads, and tracking engagement metrics. For creators, marketers, and brand accounts growing audience systematically.",
+      "path": "marketing/x-twitter-growth/SKILL.md",
+      "domain": "marketing",
+      "category": "marketing",
+      "subdomain": "social-media",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "twitter",
+        "x",
+        "social-media",
+        "engagement",
+        "threads",
+        "growth-hacking"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "ab-test-setup",
+      "description": "Production-ready A/B testing toolkit for calculating sample sizes, designing rigorous test plans, and analyzing results with statistical significance testing. For growth teams, product managers, and marketers.",
+      "path": "marketing/ab-test-setup/SKILL.md",
+      "domain": "marketing",
+      "category": "marketing",
+      "subdomain": "experimentation",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "ab-testing",
+        "experimentation",
+        "statistics",
+        "sample-size",
+        "conversion-rate"
+      ],
+      "tools": 3,
+      "has_references": true,
       "has_assets": false
     }
   ]

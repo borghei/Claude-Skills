@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Purpose
 
-This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 204 production-ready skills across 13 domains with 559 Python automation tools, 17 AI agents, and 12 sample CI/CD workflows.
+**Current Scope:** 225 production-ready skills across 13 domains with 613 Python automation tools, 32 AI agents (including 7 personas), 26 slash commands, 21 compound sub-skills, and 17 CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -41,25 +41,30 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 claude-code-skills/
 ├── .claude/
 │   ├── agents/                # 6 Claude Code subagents (code-reviewer, qa, docs, etc.)
-│   └── commands/              # Slash commands (git:cm, git:cp, git:pr, review, security-scan)
+│   └── commands/              # 26 slash commands (git, review, prd, tdd, rice, retro, etc.)
+├── .gemini/                   # Gemini CLI support (skills-index.json + 20 skill wrappers)
 ├── .github/
+│   ├── workflows/             # 6 CI/CD workflows (pages, enforce-pr, security, review, etc.)
 │   └── copilot-instructions.md # GitHub Copilot config
-├── agents/                    # cs-* prefixed skill agents
-├── engineering/               # 61 engineering skills + 177 Python tools
-├── marketing/           # 35 marketing skills + 106 Python tools
-├── product-team/              # 8 product skills + 15 Python tools
-├── project-management/        # 25 PM skills + 53 Python tools
-├── c-level-advisor/           # 26 C-level advisory skills + 73 Python tools
-├── ra-qm-team/                # 21 RA/QM compliance skills + 38 Python tools
-├── business-growth/           # 17 business & growth skills + 48 Python tools
-├── data-analytics/            # 5 data analytics skills + 16 Python tools
-├── hr-operations/             # 4 HR operations skills + 12 Python tools
-├── sales-success/             # 5 sales success skills + 15 Python tools
-├── finance/                   # 1 finance skill + 4 Python tools
-├── standards/                 # 5 standards library files
+├── agents/
+│   ├── (domain dirs)/         # 26 cs-* prefixed skill agents
+│   └── personas/              # 7 cross-domain personas (startup-cto, solo-founder, etc.)
+├── engineering/               # 76 engineering skills + 3 compound sub-skill systems
+├── marketing/                 # 38 marketing skills + Python tools
+├── product-team/              # 8 product skills + Python tools
+├── project-management/        # 10 PM skills + Python tools
+├── c-level-advisor/           # 26 C-level advisory skills + Python tools
+├── ra-qm-team/                # 21 RA/QM compliance skills + Python tools
+├── business-growth/           # 16 business & growth skills + Python tools
+├── data-analytics/            # 5 data analytics skills + Python tools
+├── hr-operations/             # 4 HR operations skills + Python tools
+├── sales-success/             # 5 sales success skills + Python tools
+├── finance/                   # 3 finance skills + Python tools
+├── standards/                 # 7 standards (+ orchestration protocol, skill authoring standard)
 ├── templates/                 # Reusable templates + 12 sample GitHub workflows
 ├── documentation/             # Implementation plans, sprints, delivery
 ├── AGENTS.md                  # Universal agent config (Codex, Aider, Jules, etc.)
+├── GEMINI.md                  # Gemini CLI instructions
 ├── .cursorrules               # Cursor AI config
 ├── .windsurfrules             # Windsurf config
 ├── .clinerules                # Cline config
@@ -152,18 +157,21 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ## Roadmap
 
-**Phase 1-3 Complete:** 204 production-ready skills deployed
-- Engineering (28 + 12 POWERFUL + 22 new), Marketing (10 + 25 new), Product (8 + 1 new), PM (23), C-Level (5 + 18 new), RA/QM & Compliance (20), Data Analytics (5), HR (4), Sales (5), Business Growth (3 + 13 new), Finance (1)
-- 559 Python automation tools, 230+ reference guides
-- 17 AI agents (6 .claude/agents + 11 agents/), 12 sample CI/CD workflows
+**Phase 1-4 Complete:** 225 production-ready skills deployed
+- Engineering (76 skills incl. 3 compound sub-skill systems), Marketing (38), Product (8), PM (10), C-Level (26), RA/QM & Compliance (21), Data Analytics (5), HR (4), Sales (5), Business Growth (16), Finance (3)
+- 613 Python automation tools, 280+ reference guides
+- 32 AI agents (6 .claude/agents + 19 domain agents + 7 personas)
+- 26 slash commands, 21 compound sub-skills, 6 active CI/CD workflows + 12 templates
 - 18 compliance frameworks covered (SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA, NIST CSF 2.0, CCPA, ISO 42001, ISO 13485, ISO 14971, MDR, FDA, 21 CFR Part 11, IEC 62304, IEC 62443)
-- Cross-platform support (Claude Code + OpenAI Codex + Cursor + VS Code)
+- Cross-platform support (Claude Code + OpenAI Codex + Gemini CLI + Cursor + VS Code)
+- Persona system (7 cross-domain personas) + Orchestration Protocol (4 patterns)
+- Skill Authoring Standard (10 formal patterns)
 
 **Next Priorities:**
-- **Phase 4 (Q2 2026):** Per-skill installation system, automatic updates, marketing expansion
-- **Phase 5 (Q3 2026):** 120+ skills - blockchain, web3, advanced analytics, specialized mobile
+- **Phase 5 (Q2 2026):** Per-skill installation system, automatic updates, ClawHub publishing
+- **Phase 6 (Q3 2026):** 250+ skills - blockchain, web3, advanced analytics, specialized mobile
 
-**Target:** 130+ skills by Q3 2026
+**Target:** 250+ skills by Q3 2026
 
 ## Key Principles
 
@@ -198,6 +206,6 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ---
 
-**Last Updated:** March 2026
-**Version:** 3.0.0
-**Status:** 204 skills, 559 Python tools, 17 agents, 12 workflows deployed
+**Last Updated:** April 2026
+**Version:** 4.0.0
+**Status:** 225 skills, 613 Python tools, 32 agents, 26 commands, 21 sub-skills, Gemini CLI support
