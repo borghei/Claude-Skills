@@ -49,6 +49,7 @@ DOMAIN_META = {
     "sales-success":      {"label": "Sales",              "desc": "Account executive, sales ops, solutions architect"},
     "hr-operations":      {"label": "HR Operations",      "desc": "Talent acquisition, people analytics, HR business partner"},
     "finance":            {"label": "Finance",            "desc": "DCF valuation, budgeting, forecasting, ratio analysis"},
+    "legal":              {"label": "Legal",              "desc": "Contract review, NDA, privacy, DPIA, risk, compliance (EXPERIMENTAL)"},
 }
 
 # Inline SVG icons (16x16, stroke-based line icons)
