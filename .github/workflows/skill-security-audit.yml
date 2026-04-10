@@ -12,6 +12,7 @@
 name: Skill Security Audit
 
 on:
+  workflow_dispatch:
   pull_request:
     paths: ['**/scripts/**/*.py', '**/SKILL.md']
   push:
