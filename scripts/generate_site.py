@@ -164,6 +164,110 @@ def collect_commands():
     return cmds
 
 
+def generate_quick_prompt(skill_name, description, md_text, domain):
+    """Generate a condensed copy-paste prompt from a SKILL.md for use in claude.ai / desktop."""
+    # Extract key sections from the markdown
+    lines = md_text.splitlines()
+
+    # Remove YAML frontmatter
+    content_lines = lines
+    if lines and lines[0].strip() == "---":
+        end_idx = -1
+        for i, line in enumerate(lines[1:], 1):
+            if line.strip() == "---":
+                end_idx = i
+                break
+        if end_idx > 0:
+            content_lines = lines[end_idx + 1:]
+
+    content = "\n".join(content_lines).strip()
+
+    # Extract sections we want to condense
+    sections = {}
+    current_section = "intro"
+    sections[current_section] = []
+    for line in content_lines:
+        h2_match = re.match(r"^##\s+(.+)", line)
+        if h2_match:
+            current_section = h2_match.group(1).strip().lower()
+            sections[current_section] = []
+        else:
+            if current_section in sections:
+                sections[current_section].append(line)
+
+    # Build the condensed prompt
+    pretty = pretty_name(skill_name)
+    dl = domain_label(domain)
+
+    # Get overview text (first ~5 meaningful lines after the title)
+    overview_lines = []
+    for line in content_lines:
+        stripped = line.strip()
+        if stripped and not stripped.startswith("#") and not stripped.startswith("---") and not stripped.startswith("|"):
+            overview_lines.append(stripped)
+        if len(overview_lines) >= 3:
+            break
+    overview = " ".join(overview_lines)
+
+    # Extract workflow names
+    workflows = []
+    for line in content_lines:
+        m = re.match(r"^###\s+(?:Workflow\s+\d+[:\s]*)?(.+)", line)
+        if m and len(workflows) < 8:
+            wf = m.group(1).strip()
+            if len(wf) > 5 and not wf.startswith("Step") and "Example" not in wf:
+                workflows.append(wf)
+
+    # Extract template/framework names
+    templates = []
+    for line in content_lines:
+        if "template" in line.lower() or "framework" in line.lower() or "canvas" in line.lower():
+            stripped = line.strip().lstrip("#").strip()
+            if len(stripped) > 5 and len(stripped) < 80:
+                templates.append(stripped)
+                if len(templates) >= 5:
+                    break
+
+    # Build prompt
+    prompt_parts = []
+    prompt_parts.append(f"You are an expert {pretty} ({dl} domain).")
+    prompt_parts.append("")
+    if description:
+        prompt_parts.append(description)
+        prompt_parts.append("")
+
+    if overview and overview != description:
+        prompt_parts.append(overview[:300])
+        prompt_parts.append("")
+
+    if workflows:
+        prompt_parts.append("## Your Key Capabilities")
+        for wf in workflows[:6]:
+            prompt_parts.append(f"- {wf}")
+        prompt_parts.append("")
+
+    if templates:
+        prompt_parts.append("## Frameworks & Templates You Know")
+        for t in templates[:5]:
+            prompt_parts.append(f"- {t}")
+        prompt_parts.append("")
+
+    prompt_parts.append("## How to Help")
+    prompt_parts.append("When the user asks for help in this domain:")
+    prompt_parts.append("1. Ask clarifying questions to understand their context")
+    prompt_parts.append("2. Apply the relevant framework or workflow from your expertise")
+    prompt_parts.append("3. Provide actionable, specific output (not generic advice)")
+    prompt_parts.append("4. Offer concrete templates, checklists, or analysis")
+    prompt_parts.append("")
+    prompt_parts.append(f"For the full skill with Python tools and references, visit:")
+    prompt_parts.append(f"https://github.com/borghei/Claude-Skills/tree/main/{skill_name}")
+    prompt_parts.append("")
+    prompt_parts.append("---")
+    prompt_parts.append("Start by asking the user what they need help with.")
+
+    return "\n".join(prompt_parts)
+
+
 def _parse_frontmatter(text):
     """Simple YAML frontmatter parser (key: value pairs only)."""
     meta = {}
@@ -378,6 +482,41 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 .tab-content pre {
   border-top: none; border-radius: 0 0 var(--radius) var(--radius);
   margin-top: 0;
+}
+
+/* Quick Start prompt box */
+.prompt-box {
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
+  overflow: hidden;
+}
+.prompt-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 18px; background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
 }
 
 /* Tools list */
@@ -666,17 +805,35 @@ def gen_skill_page(skill, catalog, all_skills_by_domain):
     if tags_html:
         tags_html = f'<div class="skill-meta" style="margin-bottom:24px">{tags_html}</div>'
 
+    # Generate the quick prompt for copy-paste
+    quick_prompt = generate_quick_prompt(name, desc, md_text, domain)
+    prompt_escaped = escape(quick_prompt)
+
     # How to Use — tabbed platform selector
     skill_dir = os.path.dirname(skill_path)
     how_to = f"""<h2>How to Use</h2>
 <div class="platform-tabs">
-  <button class="tab-btn active" data-tab="claude">Claude Code</button>
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
   <button class="tab-btn" data-tab="codex">Codex</button>
   <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
   <button class="tab-btn" data-tab="cursor">Cursor</button>
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
-<div class="tab-content active" id="tab-claude">
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-box">
+    <div class="prompt-header">
+      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="{prompt_escaped}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span>Copy Prompt</span>
+      </button>
+    </div>
+    <pre class="prompt-preview">{prompt_escaped}</pre>
+    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
   <pre><code># Add to your project
 cs install {escape(skill_dir)} ./
 
@@ -752,7 +909,7 @@ curl -sL {GITHUB_URL}/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/
     ext_icon = SVG_ICONS["external"]
     source_html = f'<p style="margin-top:32px"><a href="{GITHUB_URL}/tree/main/{skill_path}" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub {ext_icon}</a></p>'
 
-    # Tab-switching JS
+    # Tab-switching + copy prompt JS
     tab_js = """
 document.querySelectorAll('.tab-btn').forEach(function(btn){
   btn.addEventListener('click',function(){
@@ -762,6 +919,21 @@ document.querySelectorAll('.tab-btn').forEach(function(btn){
     document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
   });
 });
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
 """
 
     body = f"""
