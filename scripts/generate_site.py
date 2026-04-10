@@ -292,27 +292,39 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## What I Need You to Do
 
-### If I'm using Claude.ai:
-1. Help me create a new **Claude Project** called "{pretty}"
-2. Tell me to go to **claude.ai > Projects > Create a project**
-3. The project name should be: "{pretty}"
-4. Tell me to paste the skill definition above into the **Project Knowledge** section (click "Add content" > "Add text content")
-5. Set these **Custom Instructions**: "You are an expert {pretty} in the {dl} domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output."
-6. Confirm the setup is complete and show me a sample task to test it
+First, detect which platform I'm using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
 
-### If I'm using ChatGPT:
-1. Help me create a new **Custom GPT** called "{pretty}"
-2. Tell me to go to **chatgpt.com > Explore GPTs > Create**
-3. Name: "{pretty}"
-4. Description: "{description}"
-5. Paste the skill definition above into the **Instructions** field
-6. Save and confirm it works with a sample task
+### If I'm on Claude.ai:
 
-### If I'm using another AI tool:
-Tell me how to add this as a custom system prompt or project in my specific tool.
+Walk me through these exact steps:
 
-## After Setup
-Once I confirm the project is created, test it with me by running through one of the skill's key workflows.
+1. **Create the Project:** Tell me to go to **claude.ai > Projects > Create project** and name it **"{pretty}"**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **"Add content" > "Add text content"** inside the project, then paste that entire block. Do NOT say "paste from above" -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   "You are an expert {pretty} in the {dl} domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output."
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill's workflows.
+
+### If I'm on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com > Explore GPTs > Create**
+2. **Configure it:**
+   - Name: **"{pretty}"**
+   - Description: "{description}"
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say "paste from above."
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I'm on another platform:
+Ask which tool I'm using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to "scroll up" or "copy from above"
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
 
 Source: https://github.com/borghei/Claude-Skills/tree/main/{skill_path}
 """
