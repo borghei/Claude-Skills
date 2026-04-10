@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Devops Workflow Engineer (Engineering domain).
 
 Guides teams through designing, implementing, and optimizing CI/CD pipelines, GitHub Actions workflows, deployment automation, and agentic workflow patterns. Provides production-ready templates, cost ...
@@ -387,11 +409,11 @@ https://github.com/borghei/Claude-Skills/tree/main/devops-workflow-engineer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Devops Workflow Engineer (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Devops Workflow Engineer (Engineering domain).
 
 Guides teams through designing, implementing, and optimizing CI/CD pipelines, GitHub Actions workflows, deployment automation, and agentic workflow patterns. Provides production-ready templates, cost ...
 
@@ -409,7 +431,620 @@ https://github.com/borghei/Claude-Skills/tree/main/devops-workflow-engineer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Devops Workflow Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# DevOps Workflow Engineer
+
+The agent generates GitHub Actions workflow YAML, analyzes existing pipelines for optimization opportunities, and creates deployment plans with strategy selection, health checks, and rollback procedures.
+
+---
+
+## Quick Start
+
+```bash
+# Generate a CI workflow
+python scripts/workflow_generator.py --type ci --language python --test-framework pytest
+
+# Analyze existing pipelines for optimization
+python scripts/pipeline_analyzer.py .github/workflows/ --format json
+
+# Plan a deployment strategy
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --strategy canary
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `workflow_generator.py` | Workflow type + language | GitHub Actions YAML (ci, cd, release, security-scan, docs-check) |
+| `pipeline_analyzer.py` | Workflow file or directory | Optimization findings, cost estimates, severity ratings |
+| `deployment_planner.py` | Project type + environments | Deployment plan with strategy, health checks, rollback |
+
+All tools support `--format json` and `--output` for file writing.
+
+---
+
+## Workflow 1: CI Pipeline Design
+
+The agent generates pipelines following fail-fast ordering:
+
+1. **Lint and format** (~30s) -- cheapest gate first
+2. **Unit tests** (~2-5m) -- matrix across versions
+3. **Build verification** (~3-8m)
+4. **Integration tests** (~5-15m, parallel with build)
+5. **Security scanning** (~2-5m)
+
+```yaml
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make lint
+
+  test:
+    needs: lint
+    strategy:
+      matrix:
+        python-version: [&#x27;3.10&#x27;, &#x27;3.11&#x27;, &#x27;3.12&#x27;]
+    steps:
+      - uses: actions/setup-python@v5
+        with: { python-version: &quot;${{ matrix.python-version }}&quot;, cache: pip }
+      - run: pip install -r requirements.txt
+      - run: pytest --junitxml=results.xml
+
+  security:
+    needs: lint
+    steps:
+      - run: pip-audit -r requirements.txt
+```
+
+**CI targets:**
+
+| Metric | Target | Fix |
+|--------|--------|-----|
+| Total CI time | &lt; 10 min | Parallelize, add caching |
+| Lint step | &lt; 1 min | Use pre-commit locally |
+| Unit tests | &lt; 5 min | Split suites, use matrix |
+| Flaky rate | &lt; 1% | Quarantine flaky tests |
+| Cache hit rate | &gt; 80% | Review cache keys |
+
+---
+
+## Workflow 2: CD Pipeline and Multi-Environment Deployment
+
+```bash
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --format json
+```
+
+**Environment promotion flow:**
+```
+Build -&gt; Dev (auto) -&gt; Staging (auto) -&gt; Production (manual approval)
+                                              |
+                                        Canary (10%) -&gt; Full rollout
+```
+
+| Aspect | Dev | Staging | Production |
+|--------|-----|---------|------------|
+| Trigger | Every push | Merge to main | Manual approval |
+| Replicas | 1 | 2 | 3+ (auto-scaled) |
+| Secrets | Repository | Environment | Vault/OIDC |
+| Monitoring | Basic logs | Full observability | Full + alerting |
+
+**Key CD rules:**
+- Build once, deploy the same artifact everywhere
+- Tag artifacts with commit SHA for traceability
+- Use environment protection rules for production gates
+- Maintain rollback capability at every stage
+
+---
+
+## Workflow 3: Pipeline Optimization
+
+```bash
+python scripts/pipeline_analyzer.py .github/workflows/ --format json -o report.json
+```
+
+The agent checks for:
+
+1. **Missing caching** -- dependencies reinstalled every run
+2. **No timeouts** -- stuck jobs burn budget
+3. **Sequential chains** that could parallelize
+4. **Deprecated actions** with newer versions available
+5. **Security issues** -- secrets in logs, missing permissions scoping
+6. **Cost inefficiency** -- oversized runners, no path filtering
+
+**Optimization techniques:**
+
+**Path-based filtering** -- skip CI for docs-only changes:
+```yaml
+on:
+  push:
+    paths: [&#x27;src/**&#x27;, &#x27;tests/**&#x27;, &#x27;requirements*.txt&#x27;]
+    paths-ignore: [&#x27;docs/**&#x27;, &#x27;*.md&#x27;]
+```
+
+**Concurrency cancellation** -- cancel superseded runs:
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+**Dependency caching:**
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-deps-${{ hashFiles(&#x27;**/requirements.txt&#x27;) }}
+```
+
+---
+
+## Deployment Strategies
+
+**Decision tree:**
+```
+Zero-downtime required?
+  No  -&gt; Rolling deployment
+  Yes -&gt; Need instant rollback?
+    No  -&gt; Rolling with health checks
+    Yes -&gt; Budget for 2x infrastructure?
+      Yes -&gt; Blue-green
+      No  -&gt; Canary
+```
+
+**Canary traffic split schedule:**
+
+| Phase | % | Duration | Gate |
+|-------|---|----------|------|
+| 1 | 5% | 15 min | Error rate &lt; 0.1% |
+| 2 | 25% | 30 min | P99 latency &lt; 200ms |
+| 3 | 50% | 60 min | Business metrics stable |
+| 4 | 100% | -- | Full promotion |
+
+---
+
+## GitHub Actions Patterns
+
+**Reusable workflows** -- define once, call everywhere:
+```yaml
+# .github/workflows/reusable-deploy.yml
+on:
+  workflow_call:
+    inputs:
+      environment: { required: true, type: string }
+      image_tag: { required: true, type: string }
+    secrets:
+      DEPLOY_KEY: { required: true }
+```
+
+**OIDC authentication** -- no long-lived credentials:
+```yaml
+permissions:
+  id-token: write
+  contents: read
+steps:
+  - uses: aws-actions/configure-aws-credentials@v4
+    with:
+      role-to-assume: arn:aws:iam::123456789:role/github-actions
+      aws-region: us-east-1
+```
+
+**Secrets hierarchy:** Organization &gt; Repository &gt; Environment. Never echo secrets; use `add-mask` for dynamic values. Prefer OIDC for cloud auth.
+
+---
+
+## Runner Cost Optimization
+
+| Runner | vCPU | RAM | Cost/min | Best For |
+|--------|------|-----|----------|----------|
+| 2-core | 2 | 7 GB | $0.008 | Standard tasks |
+| 4-core | 4 | 16 GB | $0.016 | Build-heavy |
+| 8-core | 8 | 32 GB | $0.032 | Large compilations |
+| 16-core | 16 | 64 GB | $0.064 | Parallel test suites |
+
+**Monthly estimate:** `(runs/day) x (avg min/run) x 30 x (cost/min)`
+Example: 50 pushes/day x 8 min x 30 = 12,000 min x $0.008 = **$96/month**.
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Problem | Fix |
+|-------------|---------|-----|
+| Monolithic workflow | 45-min single workflow | Split into parallel jobs |
+| No caching | Reinstall deps every run | Cache dependencies and builds |
+| Secrets in logs | Leaked credentials | `add-mask`, avoid `echo` |
+| No timeout | Stuck jobs burn budget | `timeout-minutes` on every job |
+| Full matrix every push | 30-min matrix on every commit | Full nightly; reduced on push |
+| No rollback plan | Stuck with broken deploy | Automate rollback in CD pipeline |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Workflow never triggers | Wrong `on:` config or branch name mismatch | Verify triggers match branching strategy |
+| Cache miss every run | Volatile cache key (timestamp) | Use `hashFiles()` on lock files |
+| Matrix fails on one OS only | Platform-specific paths or deps | Use `shell: bash`; install OS deps per matrix entry |
+| Secret not available | Wrong environment scope | Ensure job declares correct `environment:` |
+| Health check fails after deploy | App not started before check | Add retry loop with backoff |
+| Concurrency cancels needed runs | Overly broad group key | Scope to `workflow-ref`; separate groups for deploy |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| GitHub Actions Patterns | `references/github-actions-patterns.md` |
+| Deployment Strategies | `references/deployment-strategies.md` |
+| Agentic Workflows Guide | `references/agentic-workflows-guide.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `release-orchestrator` | Release workflows align with versioning and changelog |
+| `senior-devops` | Deployment strategies complement infra automation |
+| `senior-secops` | Security scanning steps feed SecOps dashboards |
+| `senior-qa` | CI quality gates map to QA acceptance criteria |
+| `incident-commander` | Rollback procedures connect to incident playbooks |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 1.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Devops Workflow Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Devops Workflow Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Devops Workflow Engineer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Devops Workflow Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Devops Workflow Engineer&quot;
+4. Description: &quot;Guides teams through designing, implementing, and optimizing CI/CD pipelines, GitHub Actions workflows, deployment automation, and agentic workflow patterns. Provides production-ready templates, cost ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/devops-workflow-engineer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Devops Workflow Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# DevOps Workflow Engineer
+
+The agent generates GitHub Actions workflow YAML, analyzes existing pipelines for optimization opportunities, and creates deployment plans with strategy selection, health checks, and rollback procedures.
+
+---
+
+## Quick Start
+
+```bash
+# Generate a CI workflow
+python scripts/workflow_generator.py --type ci --language python --test-framework pytest
+
+# Analyze existing pipelines for optimization
+python scripts/pipeline_analyzer.py .github/workflows/ --format json
+
+# Plan a deployment strategy
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --strategy canary
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `workflow_generator.py` | Workflow type + language | GitHub Actions YAML (ci, cd, release, security-scan, docs-check) |
+| `pipeline_analyzer.py` | Workflow file or directory | Optimization findings, cost estimates, severity ratings |
+| `deployment_planner.py` | Project type + environments | Deployment plan with strategy, health checks, rollback |
+
+All tools support `--format json` and `--output` for file writing.
+
+---
+
+## Workflow 1: CI Pipeline Design
+
+The agent generates pipelines following fail-fast ordering:
+
+1. **Lint and format** (~30s) -- cheapest gate first
+2. **Unit tests** (~2-5m) -- matrix across versions
+3. **Build verification** (~3-8m)
+4. **Integration tests** (~5-15m, parallel with build)
+5. **Security scanning** (~2-5m)
+
+```yaml
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: make lint
+
+  test:
+    needs: lint
+    strategy:
+      matrix:
+        python-version: [&#x27;3.10&#x27;, &#x27;3.11&#x27;, &#x27;3.12&#x27;]
+    steps:
+      - uses: actions/setup-python@v5
+        with: { python-version: &quot;${{ matrix.python-version }}&quot;, cache: pip }
+      - run: pip install -r requirements.txt
+      - run: pytest --junitxml=results.xml
+
+  security:
+    needs: lint
+    steps:
+      - run: pip-audit -r requirements.txt
+```
+
+**CI targets:**
+
+| Metric | Target | Fix |
+|--------|--------|-----|
+| Total CI time | &lt; 10 min | Parallelize, add caching |
+| Lint step | &lt; 1 min | Use pre-commit locally |
+| Unit tests | &lt; 5 min | Split suites, use matrix |
+| Flaky rate | &lt; 1% | Quarantine flaky tests |
+| Cache hit rate | &gt; 80% | Review cache keys |
+
+---
+
+## Workflow 2: CD Pipeline and Multi-Environment Deployment
+
+```bash
+python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --format json
+```
+
+**Environment promotion flow:**
+```
+Build -&gt; Dev (auto) -&gt; Staging (auto) -&gt; Production (manual approval)
+                                              |
+                                        Canary (10%) -&gt; Full rollout
+```
+
+| Aspect | Dev | Staging | Production |
+|--------|-----|---------|------------|
+| Trigger | Every push | Merge to main | Manual approval |
+| Replicas | 1 | 2 | 3+ (auto-scaled) |
+| Secrets | Repository | Environment | Vault/OIDC |
+| Monitoring | Basic logs | Full observability | Full + alerting |
+
+**Key CD rules:**
+- Build once, deploy the same artifact everywhere
+- Tag artifacts with commit SHA for traceability
+- Use environment protection rules for production gates
+- Maintain rollback capability at every stage
+
+---
+
+## Workflow 3: Pipeline Optimization
+
+```bash
+python scripts/pipeline_analyzer.py .github/workflows/ --format json -o report.json
+```
+
+The agent checks for:
+
+1. **Missing caching** -- dependencies reinstalled every run
+2. **No timeouts** -- stuck jobs burn budget
+3. **Sequential chains** that could parallelize
+4. **Deprecated actions** with newer versions available
+5. **Security issues** -- secrets in logs, missing permissions scoping
+6. **Cost inefficiency** -- oversized runners, no path filtering
+
+**Optimization techniques:**
+
+**Path-based filtering** -- skip CI for docs-only changes:
+```yaml
+on:
+  push:
+    paths: [&#x27;src/**&#x27;, &#x27;tests/**&#x27;, &#x27;requirements*.txt&#x27;]
+    paths-ignore: [&#x27;docs/**&#x27;, &#x27;*.md&#x27;]
+```
+
+**Concurrency cancellation** -- cancel superseded runs:
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+**Dependency caching:**
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.cache/pip
+    key: ${{ runner.os }}-deps-${{ hashFiles(&#x27;**/requirements.txt&#x27;) }}
+```
+
+---
+
+## Deployment Strategies
+
+**Decision tree:**
+```
+Zero-downtime required?
+  No  -&gt; Rolling deployment
+  Yes -&gt; Need instant rollback?
+    No  -&gt; Rolling with health checks
+    Yes -&gt; Budget for 2x infrastructure?
+      Yes -&gt; Blue-green
+      No  -&gt; Canary
+```
+
+**Canary traffic split schedule:**
+
+| Phase | % | Duration | Gate |
+|-------|---|----------|------|
+| 1 | 5% | 15 min | Error rate &lt; 0.1% |
+| 2 | 25% | 30 min | P99 latency &lt; 200ms |
+| 3 | 50% | 60 min | Business metrics stable |
+| 4 | 100% | -- | Full promotion |
+
+---
+
+## GitHub Actions Patterns
+
+**Reusable workflows** -- define once, call everywhere:
+```yaml
+# .github/workflows/reusable-deploy.yml
+on:
+  workflow_call:
+    inputs:
+      environment: { required: true, type: string }
+      image_tag: { required: true, type: string }
+    secrets:
+      DEPLOY_KEY: { required: true }
+```
+
+**OIDC authentication** -- no long-lived credentials:
+```yaml
+permissions:
+  id-token: write
+  contents: read
+steps:
+  - uses: aws-actions/configure-aws-credentials@v4
+    with:
+      role-to-assume: arn:aws:iam::123456789:role/github-actions
+      aws-region: us-east-1
+```
+
+**Secrets hierarchy:** Organization &gt; Repository &gt; Environment. Never echo secrets; use `add-mask` for dynamic values. Prefer OIDC for cloud auth.
+
+---
+
+## Runner Cost Optimization
+
+| Runner | vCPU | RAM | Cost/min | Best For |
+|--------|------|-----|----------|----------|
+| 2-core | 2 | 7 GB | $0.008 | Standard tasks |
+| 4-core | 4 | 16 GB | $0.016 | Build-heavy |
+| 8-core | 8 | 32 GB | $0.032 | Large compilations |
+| 16-core | 16 | 64 GB | $0.064 | Parallel test suites |
+
+**Monthly estimate:** `(runs/day) x (avg min/run) x 30 x (cost/min)`
+Example: 50 pushes/day x 8 min x 30 = 12,000 min x $0.008 = **$96/month**.
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Problem | Fix |
+|-------------|---------|-----|
+| Monolithic workflow | 45-min single workflow | Split into parallel jobs |
+| No caching | Reinstall deps every run | Cache dependencies and builds |
+| Secrets in logs | Leaked credentials | `add-mask`, avoid `echo` |
+| No timeout | Stuck jobs burn budget | `timeout-minutes` on every job |
+| Full matrix every push | 30-min matrix on every commit | Full nightly; reduced on push |
+| No rollback plan | Stuck with broken deploy | Automate rollback in CD pipeline |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Workflow never triggers | Wrong `on:` config or branch name mismatch | Verify triggers match branching strategy |
+| Cache miss every run | Volatile cache key (timestamp) | Use `hashFiles()` on lock files |
+| Matrix fails on one OS only | Platform-specific paths or deps | Use `shell: bash`; install OS deps per matrix entry |
+| Secret not available | Wrong environment scope | Ensure job declares correct `environment:` |
+| Health check fails after deploy | App not started before check | Add retry loop with backoff |
+| Concurrency cancels needed runs | Overly broad group key | Scope to `workflow-ref`; separate groups for deploy |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| GitHub Actions Patterns | `references/github-actions-patterns.md` |
+| Deployment Strategies | `references/deployment-strategies.md` |
+| Agentic Workflows Guide | `references/agentic-workflows-guide.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `release-orchestrator` | Release workflows align with versioning and changelog |
+| `senior-devops` | Deployment strategies complement infra automation |
+| `senior-secops` | Security scanning steps feed SecOps dashboards |
+| `senior-qa` | CI quality gates map to QA acceptance criteria |
+| `incident-commander` | Rollback procedures connect to incident playbooks |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 1.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Devops Workflow Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Devops Workflow Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Devops Workflow Engineer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Devops Workflow Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Devops Workflow Engineer&quot;
+4. Description: &quot;Guides teams through designing, implementing, and optimizing CI/CD pipelines, GitHub Actions workflows, deployment automation, and agentic workflow patterns. Provides production-ready templates, cost ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/devops-workflow-engineer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

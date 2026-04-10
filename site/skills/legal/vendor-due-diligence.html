@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Vendor Due Diligence (Legal domain).
 
 Assess IT vendors and third-party partners with multi-factor risk scoring and regulatory compliance checklists. Use when evaluating technology vendors.
@@ -401,11 +423,11 @@ https://github.com/borghei/Claude-Skills/tree/main/vendor-due-diligence
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Vendor Due Diligence (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Vendor Due Diligence (Legal domain).
 
 Assess IT vendors and third-party partners with multi-factor risk scoring and regulatory compliance checklists. Use when evaluating technology vendors.
 
@@ -437,7 +459,464 @@ https://github.com/borghei/Claude-Skills/tree/main/vendor-due-diligence
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Vendor Due Diligence&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Vendor Due Diligence Skill
+
+## Overview
+
+Production-ready framework for assessing IT service providers, technology vendors, and third-party partners. Provides a Three-Phase Assessment (Initial Screening, Detailed Assessment, Final Evaluation), Multi-Factor Risk Scoring across 6 dimensions with critical-service weighting, regulatory compliance checklists for 8 frameworks, vendor comparison matrices, and ongoing monitoring with Early Warning Indicators. Designed for procurement teams, legal counsel, IT security, and compliance officers evaluating technology vendors.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Vendor Risk Scorer (`scripts/vendor_risk_scorer.py`)
+
+Scores a vendor across 6 risk dimensions based on questionnaire responses. Calculates weighted composite score with 2x multiplier for critical services. Generates risk heat map and overall recommendation.
+
+```bash
+# Score a vendor from questionnaire responses
+python scripts/vendor_risk_scorer.py vendor_responses.json
+
+# JSON output for dashboards
+python scripts/vendor_risk_scorer.py vendor_responses.json --json
+
+# Flag as critical service (2x weight on security + compliance)
+python scripts/vendor_risk_scorer.py vendor_responses.json --critical
+```
+
+### 2. Vendor Comparison (`scripts/vendor_comparison.py`)
+
+Takes multiple vendor risk assessment JSONs and generates a side-by-side comparison matrix. Ranks vendors by composite score and recommends preferred vendor with rationale.
+
+```bash
+# Compare two vendors
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json
+
+# Compare multiple vendors with JSON output
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json vendor_c.json --json
+
+# Compare with critical service weighting
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json --critical
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/risk_assessment_framework.md` | 6-dimension scoring system, weighting methodology, composite score interpretation |
+| `references/regulatory_checklists.md` | Pre-built compliance checklists for GDPR, DORA, NIS2, SOX, PCI DSS, ISO 27001/SOC 2, HIPAA, FedRAMP |
+| `references/monitoring_framework.md` | Quarterly reviews, Early Warning Indicators, KPI metrics, risk mitigation strategies, onboarding checklists |
+
+## Workflows
+
+### Workflow 1: Three-Phase Vendor Assessment
+
+**Phase 1: Initial Screening (Days 1-5)**
+1. Gather basic vendor information (company profile, financial health, certifications)
+2. Run `vendor_risk_scorer.py` with preliminary data for initial risk classification
+3. Check applicable regulatory frameworks from `regulatory_checklists.md`
+4. Decision gate: Proceed to detailed assessment or reject early
+
+**Phase 2: Detailed Assessment (Days 5-15)**
+1. Issue comprehensive vendor questionnaire covering all 6 risk dimensions
+2. Run `vendor_risk_scorer.py` with complete questionnaire responses
+3. Execute regulatory compliance checklists for all applicable frameworks
+4. Request supporting documentation (SOC 2 reports, pen test results, financials)
+5. Conduct reference checks and public record searches
+
+**Phase 3: Final Evaluation (Days 15-20)**
+1. Run `vendor_comparison.py` if evaluating multiple vendors
+2. Compile Vendor Risk Report with dimension breakdowns
+3. Document gaps and required mitigations from `risk_assessment_framework.md`
+4. Present recommendation (Approve / Approve with Conditions / Reject)
+5. If approved, generate onboarding checklist from `monitoring_framework.md`
+
+### Workflow 2: Competitive Vendor Selection
+
+1. **Define requirements** -- Document must-have and nice-to-have criteria mapped to risk dimensions
+2. **Screen candidates** -- Run initial scoring on all candidates; eliminate any with Critical risk
+3. **Deep-dive finalists** -- Full 6-dimension assessment on top 2-3 vendors
+4. **Compare** -- Run `vendor_comparison.py` on finalist assessments
+5. **Negotiate** -- Use risk findings as leverage in contract negotiations (integrates with `tech-contract-negotiation` skill)
+6. **Select and onboard** -- Approve preferred vendor; set up monitoring per `monitoring_framework.md`
+
+### Workflow 3: Ongoing Vendor Monitoring
+
+1. **Quarterly review** -- Re-score vendor using updated data; compare against baseline
+2. **Event-triggered review** -- Re-assess on M&amp;A, breaches, regulatory changes, or leadership turnover
+3. **Annual re-assessment** -- Full 6-dimension re-evaluation with updated questionnaire
+4. **Early Warning response** -- Monitor indicators from `monitoring_framework.md`; escalate per defined paths
+5. **Exit planning** -- If risk exceeds threshold, activate exit provisions and dual-source strategy
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| All dimensions score 1 (Low Risk) | Vendor self-reported optimistically on questionnaire | Cross-reference with SOC 2 reports, pen test results, and financial filings; adjust scores based on evidence |
+| Composite score doesn&#x27;t reflect known security issues | Security dimension not weighted for critical service | Re-run with `--critical` flag to apply 2x multiplier on security and compliance dimensions |
+| Comparison matrix shows all vendors tied | Scoring inputs are too similar or too coarse | Request more granular data; use the 5-level scoring criteria from the risk framework to differentiate |
+| Regulatory checklist seems incomplete for your industry | Only 8 frameworks are pre-built | Customize checklists by adding industry-specific requirements as additional items |
+| Vendor refuses to complete questionnaire | Vendor sees assessment as overly burdensome | Share only the dimensions relevant to their service scope; offer to accept SOC 2/ISO 27001 reports as partial substitutes |
+| Risk score changed dramatically between quarters | Major event occurred (breach, M&amp;A, leadership change) | This is expected behavior; document the trigger event and follow the event-triggered review process |
+
+## Success Criteria
+
+- **Assessment Completeness**: 100% of vendor assessments cover all 6 risk dimensions with evidence-backed scores
+- **Timeline Adherence**: Three-phase assessment completed within 20 business days for 90% of evaluations
+- **Risk Prediction Accuracy**: Vendors flagged as High/Critical risk experience 3x more incidents than Low risk vendors over 12 months
+- **Regulatory Coverage**: All applicable regulatory checklists completed with zero missed frameworks for 95% of assessments
+- **Comparison Consistency**: Vendor comparison rankings remain stable when re-scored by different assessors (inter-rater reliability &gt; 85%)
+- **Monitoring Compliance**: 100% of quarterly reviews completed on schedule with documented findings
+- **Early Warning Detection**: 80%+ of vendor incidents preceded by at least one Early Warning Indicator flagged in monitoring
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Multi-factor risk scoring across 6 dimensions (Financial, Operational, Compliance, Security, Reputational, Strategic) with critical-service weighting
+- Regulatory compliance checklists for GDPR, DORA, NIS2, SOX, PCI DSS, ISO 27001/SOC 2, HIPAA, and FedRAMP
+- Side-by-side vendor comparison with composite ranking and dimension-level analysis
+- Ongoing monitoring framework with quarterly reviews, Early Warning Indicators, and escalation paths
+- Risk mitigation strategies and onboarding checklists by risk level
+
+**This skill does NOT cover:**
+- Real-time vendor monitoring dashboards, automated data feeds, or integration with GRC platforms (all input is via JSON files)
+- Financial auditing, forensic accounting, or detailed financial statement analysis of vendors (use the `finance/financial-analyst` skill)
+- Physical security assessments, on-site facility audits, or hardware supply chain verification
+- Legal review of vendor contracts or negotiation of terms (use the `legal/tech-contract-negotiation` skill)
+- Vendor relationship management, performance optimization, or strategic partnership development beyond risk assessment
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Relying solely on vendor self-assessment questionnaires | Vendors underreport risks; no independent verification | Cross-reference questionnaire responses with SOC 2/ISO 27001 reports, pen test results, and public records |
+| Applying the same weight to all dimensions regardless of service type | A payroll vendor and a marketing tool have different risk profiles | Use `--critical` flag for critical services; adjust dimension weights based on service classification |
+| Completing due diligence once and never revisiting | Vendor risk changes over time due to M&amp;A, breaches, market shifts | Implement quarterly monitoring with annual re-assessment per the monitoring framework |
+| Rejecting vendors for a single high-risk dimension without considering mitigations | Eliminates potentially strong vendors with addressable gaps | Use the gap analysis severity classification; require remediation plans for major concerns before final decision |
+| Skipping the comparison matrix for sole-source procurements | Misses opportunity to benchmark the vendor against market standards | Run comparison against industry benchmarks or previous vendor assessments to establish a risk baseline |
+
+## Tool Reference
+
+### `scripts/vendor_risk_scorer.py`
+
+Score a vendor across 6 risk dimensions and generate an overall recommendation.
+
+```
+usage: vendor_risk_scorer.py [-h] [--json] [--critical]
+                              input_file
+
+positional arguments:
+  input_file            Path to JSON file with vendor questionnaire responses
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --critical            Apply 2x weight to security and compliance
+                        dimensions (for critical/essential services)
+```
+
+**Outputs:** 6-dimension risk scores (1-5 each), weighted composite score, risk level classification (Low/Moderate/High/Critical), overall recommendation (Approve/Approve with Conditions/Reject), dimension-level findings, and gap analysis.
+
+### `scripts/vendor_comparison.py`
+
+Compare multiple vendors side-by-side and recommend preferred vendor.
+
+```
+usage: vendor_comparison.py [-h] [--json] [--critical]
+                             input_files [input_files ...]
+
+positional arguments:
+  input_files           Paths to vendor assessment JSON files (minimum 2)
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --critical            Apply 2x weight to security and compliance
+                        dimensions (for critical/essential services)
+```
+
+**Outputs:** Side-by-side comparison matrix, composite score ranking, per-dimension strength/weakness analysis, preferred vendor recommendation with rationale, and risk delta highlights.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Vendor Due Diligence&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Vendor Due Diligence&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Vendor Due Diligence in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Vendor Due Diligence&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Vendor Due Diligence&quot;
+4. Description: &quot;Assess IT vendors and third-party partners with multi-factor risk scoring and regulatory compliance checklists. Use when evaluating technology vendors.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/vendor-due-diligence/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Vendor Due Diligence&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Vendor Due Diligence Skill
+
+## Overview
+
+Production-ready framework for assessing IT service providers, technology vendors, and third-party partners. Provides a Three-Phase Assessment (Initial Screening, Detailed Assessment, Final Evaluation), Multi-Factor Risk Scoring across 6 dimensions with critical-service weighting, regulatory compliance checklists for 8 frameworks, vendor comparison matrices, and ongoing monitoring with Early Warning Indicators. Designed for procurement teams, legal counsel, IT security, and compliance officers evaluating technology vendors.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Vendor Risk Scorer (`scripts/vendor_risk_scorer.py`)
+
+Scores a vendor across 6 risk dimensions based on questionnaire responses. Calculates weighted composite score with 2x multiplier for critical services. Generates risk heat map and overall recommendation.
+
+```bash
+# Score a vendor from questionnaire responses
+python scripts/vendor_risk_scorer.py vendor_responses.json
+
+# JSON output for dashboards
+python scripts/vendor_risk_scorer.py vendor_responses.json --json
+
+# Flag as critical service (2x weight on security + compliance)
+python scripts/vendor_risk_scorer.py vendor_responses.json --critical
+```
+
+### 2. Vendor Comparison (`scripts/vendor_comparison.py`)
+
+Takes multiple vendor risk assessment JSONs and generates a side-by-side comparison matrix. Ranks vendors by composite score and recommends preferred vendor with rationale.
+
+```bash
+# Compare two vendors
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json
+
+# Compare multiple vendors with JSON output
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json vendor_c.json --json
+
+# Compare with critical service weighting
+python scripts/vendor_comparison.py vendor_a.json vendor_b.json --critical
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/risk_assessment_framework.md` | 6-dimension scoring system, weighting methodology, composite score interpretation |
+| `references/regulatory_checklists.md` | Pre-built compliance checklists for GDPR, DORA, NIS2, SOX, PCI DSS, ISO 27001/SOC 2, HIPAA, FedRAMP |
+| `references/monitoring_framework.md` | Quarterly reviews, Early Warning Indicators, KPI metrics, risk mitigation strategies, onboarding checklists |
+
+## Workflows
+
+### Workflow 1: Three-Phase Vendor Assessment
+
+**Phase 1: Initial Screening (Days 1-5)**
+1. Gather basic vendor information (company profile, financial health, certifications)
+2. Run `vendor_risk_scorer.py` with preliminary data for initial risk classification
+3. Check applicable regulatory frameworks from `regulatory_checklists.md`
+4. Decision gate: Proceed to detailed assessment or reject early
+
+**Phase 2: Detailed Assessment (Days 5-15)**
+1. Issue comprehensive vendor questionnaire covering all 6 risk dimensions
+2. Run `vendor_risk_scorer.py` with complete questionnaire responses
+3. Execute regulatory compliance checklists for all applicable frameworks
+4. Request supporting documentation (SOC 2 reports, pen test results, financials)
+5. Conduct reference checks and public record searches
+
+**Phase 3: Final Evaluation (Days 15-20)**
+1. Run `vendor_comparison.py` if evaluating multiple vendors
+2. Compile Vendor Risk Report with dimension breakdowns
+3. Document gaps and required mitigations from `risk_assessment_framework.md`
+4. Present recommendation (Approve / Approve with Conditions / Reject)
+5. If approved, generate onboarding checklist from `monitoring_framework.md`
+
+### Workflow 2: Competitive Vendor Selection
+
+1. **Define requirements** -- Document must-have and nice-to-have criteria mapped to risk dimensions
+2. **Screen candidates** -- Run initial scoring on all candidates; eliminate any with Critical risk
+3. **Deep-dive finalists** -- Full 6-dimension assessment on top 2-3 vendors
+4. **Compare** -- Run `vendor_comparison.py` on finalist assessments
+5. **Negotiate** -- Use risk findings as leverage in contract negotiations (integrates with `tech-contract-negotiation` skill)
+6. **Select and onboard** -- Approve preferred vendor; set up monitoring per `monitoring_framework.md`
+
+### Workflow 3: Ongoing Vendor Monitoring
+
+1. **Quarterly review** -- Re-score vendor using updated data; compare against baseline
+2. **Event-triggered review** -- Re-assess on M&amp;A, breaches, regulatory changes, or leadership turnover
+3. **Annual re-assessment** -- Full 6-dimension re-evaluation with updated questionnaire
+4. **Early Warning response** -- Monitor indicators from `monitoring_framework.md`; escalate per defined paths
+5. **Exit planning** -- If risk exceeds threshold, activate exit provisions and dual-source strategy
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| All dimensions score 1 (Low Risk) | Vendor self-reported optimistically on questionnaire | Cross-reference with SOC 2 reports, pen test results, and financial filings; adjust scores based on evidence |
+| Composite score doesn&#x27;t reflect known security issues | Security dimension not weighted for critical service | Re-run with `--critical` flag to apply 2x multiplier on security and compliance dimensions |
+| Comparison matrix shows all vendors tied | Scoring inputs are too similar or too coarse | Request more granular data; use the 5-level scoring criteria from the risk framework to differentiate |
+| Regulatory checklist seems incomplete for your industry | Only 8 frameworks are pre-built | Customize checklists by adding industry-specific requirements as additional items |
+| Vendor refuses to complete questionnaire | Vendor sees assessment as overly burdensome | Share only the dimensions relevant to their service scope; offer to accept SOC 2/ISO 27001 reports as partial substitutes |
+| Risk score changed dramatically between quarters | Major event occurred (breach, M&amp;A, leadership change) | This is expected behavior; document the trigger event and follow the event-triggered review process |
+
+## Success Criteria
+
+- **Assessment Completeness**: 100% of vendor assessments cover all 6 risk dimensions with evidence-backed scores
+- **Timeline Adherence**: Three-phase assessment completed within 20 business days for 90% of evaluations
+- **Risk Prediction Accuracy**: Vendors flagged as High/Critical risk experience 3x more incidents than Low risk vendors over 12 months
+- **Regulatory Coverage**: All applicable regulatory checklists completed with zero missed frameworks for 95% of assessments
+- **Comparison Consistency**: Vendor comparison rankings remain stable when re-scored by different assessors (inter-rater reliability &gt; 85%)
+- **Monitoring Compliance**: 100% of quarterly reviews completed on schedule with documented findings
+- **Early Warning Detection**: 80%+ of vendor incidents preceded by at least one Early Warning Indicator flagged in monitoring
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Multi-factor risk scoring across 6 dimensions (Financial, Operational, Compliance, Security, Reputational, Strategic) with critical-service weighting
+- Regulatory compliance checklists for GDPR, DORA, NIS2, SOX, PCI DSS, ISO 27001/SOC 2, HIPAA, and FedRAMP
+- Side-by-side vendor comparison with composite ranking and dimension-level analysis
+- Ongoing monitoring framework with quarterly reviews, Early Warning Indicators, and escalation paths
+- Risk mitigation strategies and onboarding checklists by risk level
+
+**This skill does NOT cover:**
+- Real-time vendor monitoring dashboards, automated data feeds, or integration with GRC platforms (all input is via JSON files)
+- Financial auditing, forensic accounting, or detailed financial statement analysis of vendors (use the `finance/financial-analyst` skill)
+- Physical security assessments, on-site facility audits, or hardware supply chain verification
+- Legal review of vendor contracts or negotiation of terms (use the `legal/tech-contract-negotiation` skill)
+- Vendor relationship management, performance optimization, or strategic partnership development beyond risk assessment
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Relying solely on vendor self-assessment questionnaires | Vendors underreport risks; no independent verification | Cross-reference questionnaire responses with SOC 2/ISO 27001 reports, pen test results, and public records |
+| Applying the same weight to all dimensions regardless of service type | A payroll vendor and a marketing tool have different risk profiles | Use `--critical` flag for critical services; adjust dimension weights based on service classification |
+| Completing due diligence once and never revisiting | Vendor risk changes over time due to M&amp;A, breaches, market shifts | Implement quarterly monitoring with annual re-assessment per the monitoring framework |
+| Rejecting vendors for a single high-risk dimension without considering mitigations | Eliminates potentially strong vendors with addressable gaps | Use the gap analysis severity classification; require remediation plans for major concerns before final decision |
+| Skipping the comparison matrix for sole-source procurements | Misses opportunity to benchmark the vendor against market standards | Run comparison against industry benchmarks or previous vendor assessments to establish a risk baseline |
+
+## Tool Reference
+
+### `scripts/vendor_risk_scorer.py`
+
+Score a vendor across 6 risk dimensions and generate an overall recommendation.
+
+```
+usage: vendor_risk_scorer.py [-h] [--json] [--critical]
+                              input_file
+
+positional arguments:
+  input_file            Path to JSON file with vendor questionnaire responses
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --critical            Apply 2x weight to security and compliance
+                        dimensions (for critical/essential services)
+```
+
+**Outputs:** 6-dimension risk scores (1-5 each), weighted composite score, risk level classification (Low/Moderate/High/Critical), overall recommendation (Approve/Approve with Conditions/Reject), dimension-level findings, and gap analysis.
+
+### `scripts/vendor_comparison.py`
+
+Compare multiple vendors side-by-side and recommend preferred vendor.
+
+```
+usage: vendor_comparison.py [-h] [--json] [--critical]
+                             input_files [input_files ...]
+
+positional arguments:
+  input_files           Paths to vendor assessment JSON files (minimum 2)
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --critical            Apply 2x weight to security and compliance
+                        dimensions (for critical/essential services)
+```
+
+**Outputs:** Side-by-side comparison matrix, composite score ranking, per-dimension strength/weakness analysis, preferred vendor recommendation with rationale, and risk delta highlights.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Vendor Due Diligence&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Vendor Due Diligence&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Vendor Due Diligence in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Vendor Due Diligence&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Vendor Due Diligence&quot;
+4. Description: &quot;Assess IT vendors and third-party partners with multi-factor risk scoring and regulatory compliance checklists. Use when evaluating technology vendors.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/vendor-due-diligence/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

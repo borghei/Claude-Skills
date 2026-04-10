@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Culture Architect (C-Level Advisory domain).
 
 Build, measure, and evolve company culture as operational behavior -- not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health a...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/culture-architect
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Culture Architect (C-Level Advisory domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Culture Architect (C-Level Advisory domain).
 
 Build, measure, and evolve company culture as operational behavior -- not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health a...
 
@@ -439,7 +461,900 @@ https://github.com/borghei/Claude-Skills/tree/main/culture-architect
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Culture Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Culture Architect
+
+Culture is what you DO, not what you SAY. This skill builds culture as an operational system -- observable behaviors, measurable health, and rituals that scale from 5 people to 500.
+
+## Keywords
+
+culture, company culture, values, mission, vision, culture code, cultural rituals, culture health, values-to-behaviors, founder culture, culture debt, value-washing, culture assessment, culture survey, psychological safety, culture scaling, engagement, eNPS, remote culture, hybrid culture, culture clash, employer brand, onboarding culture, performance culture, recognition
+
+---
+
+## Core Principle
+
+**Culture = (What you reward) + (What you tolerate) + (What you celebrate)**
+
+If your values say &quot;transparency&quot; but you punish bearers of bad news, your real value is &quot;optics.&quot; Culture is not aspirational. It is descriptive. The work is closing the gap between stated and actual.
+
+---
+
+## Culture Diagnostic Decision Tree
+
+```
+START: &quot;How is our culture?&quot;
+  |
+  v
+[Run the Values Audit]
+  Ask: &quot;What did the last person who got promoted demonstrate?&quot;
+  |
+  +-- Answer matches stated values --&gt; Values are real. Check transmission.
+  |     |
+  |     v
+  |   [Can a 30-day employee describe the culture accurately?]
+  |     +-- YES --&gt; Culture is operational. Maintain and evolve.
+  |     +-- NO  --&gt; Transmission gap. Fix onboarding and rituals.
+  |
+  +-- Answer differs from stated values --&gt; Values are performative.
+        |
+        v
+      [Do leaders model the real (non-stated) values?]
+        +-- YES --&gt; Rewrite values to match reality, then iterate.
+        +-- NO  --&gt; Deeper problem: no coherent culture exists. Build from scratch.
+```
+
+---
+
+## Framework 1: Mission / Vision / Values Workshop
+
+### Mission (Why We Exist)
+
+| Element | Test | Example |
+|---------|------|---------|
+| Present-tense | Is it about what we do now, not what we aspire to? | &quot;We reduce preventable falls in elderly care&quot; |
+| Specific | Could a competitor claim the exact same thing? If yes, too generic. | Not &quot;We make the world better&quot; |
+| Meaningful | Would something be lost if we disappeared? | Answer must be concrete |
+
+### Vision (What Winning Looks Like)
+
+| Quality | Bad | Good |
+|---------|-----|------|
+| Specificity | &quot;Be the market leader&quot; | &quot;Every care home in Europe uses our system by 2030&quot; |
+| Falsifiability | &quot;Transform healthcare&quot; | &quot;Reduce fall-related injuries by 50% in partner facilities&quot; |
+| Timeline | No date | 5-10 year horizon with milestones |
+
+### Values (What We Actually Do)
+
+| Rule | Explanation |
+|------|-------------|
+| 3-5 values maximum | More than 5 and none are memorable |
+| Derived from observation | &quot;What did our best hire do that nobody asked?&quot; |
+| Each has behavioral anchors | Specific enough to judge against |
+| Include the tension | Good values have a cost (&quot;Speed&quot; means &quot;we accept some risk&quot;) |
+
+---
+
+## Framework 2: Values-to-Behaviors Translation
+
+This is the work that makes values operational. Every value needs concrete behavioral anchors.
+
+| Value | Vague Version | Behavioral Anchor | How You&#x27;d Observe It |
+|-------|---------------|-------------------|---------------------|
+| Transparency | &quot;We&#x27;re open and honest&quot; | &quot;We share bad news within 24 hours, including to our manager&quot; | Bad news travels fast, no surprises |
+| Ownership | &quot;We take responsibility&quot; | &quot;We don&#x27;t hand off problems -- we own until resolved, even across team boundaries&quot; | No orphaned issues |
+| Speed | &quot;We move fast&quot; | &quot;Decisions under $5K happen at team level, same day&quot; | Low decision latency |
+| Quality | &quot;We don&#x27;t cut corners&quot; | &quot;We stop the line before shipping something we&#x27;re not proud of&quot; | Teams delay launches for quality |
+| Customer-first | &quot;Customers are our priority&quot; | &quot;Any team member can escalate a customer issue to leadership, bypassing normal channels&quot; | Escalation is celebrated, not punished |
+
+### Translation Workshop (90 minutes)
+
+```
+For each value:
+  Step 1: State the value in 2-3 words
+  Step 2: Ask &quot;How would a new hire know we live this on day 30?&quot;
+  Step 3: Write 3 observable behaviors that prove this value
+  Step 4: Write 3 behaviors that violate this value
+  Step 5: Ask &quot;What does this value cost us? What&#x27;s the trade-off?&quot;
+  Step 6: If no trade-off exists, it&#x27;s not a value -- it&#x27;s a platitude
+
+Output: Value card with behaviors, violations, and trade-offs
+```
+
+---
+
+## Framework 3: Culture Code Creation
+
+A culture code is a public document that describes how you operate. It should attract the right people and repel the wrong ones.
+
+### Culture Code Structure
+
+| Section | Purpose | Key Question |
+|---------|---------|-------------|
+| 1. Who We Are | Mission, context, stage | &quot;Why does this company exist?&quot; |
+| 2. Who Thrives Here | Specific behaviors, not adjectives | &quot;What does success look like day-to-day?&quot; |
+| 3. Who Doesn&#x27;t Thrive Here | Honest misfit description | &quot;When have we made a bad hire? What was the pattern?&quot; |
+| 4. How We Make Decisions | Decision rights, speed expectations | &quot;Who can decide what, and how fast?&quot; |
+| 5. How We Communicate | Channels, cadence, expectations | &quot;What can I expect in response time and transparency?&quot; |
+| 6. How We Grow People | Career development, feedback | &quot;What&#x27;s my path here?&quot; |
+| 7. What We Expect of Leaders | Leadership behaviors | &quot;How should managers behave?&quot; |
+
+### Culture Code Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Alternative |
+|-------------|-------------|-------------------|
+| &quot;We&#x27;re a family&quot; | Families don&#x27;t fire for performance | &quot;We&#x27;re a high-performing team that cares about each other&quot; |
+| Only positive traits | Not credible, doesn&#x27;t help people self-select | Include &quot;who doesn&#x27;t thrive here&quot; section |
+| Aspirational, not descriptive | Creates cynicism when reality differs | Describe what IS, then iterate |
+| Too long (&gt; 15 pages) | Nobody reads it | Keep to 5-8 pages, link to details |
+| Never updated | Becomes irrelevant as company scales | Review annually, update at each stage |
+
+---
+
+## Framework 4: Culture Health Assessment
+
+Run quarterly. Anonymous. 8-12 questions maximum.
+
+### Core Assessment Dimensions
+
+| Dimension | Question Example | What It Measures |
+|-----------|-----------------|-----------------|
+| Psychological safety | &quot;I can raise a concern without fear of negative consequences&quot; | Trust in the system |
+| Clarity | &quot;I know how my work connects to company goals&quot; | Strategic alignment |
+| Fairness | &quot;Decisions here are made consistently and transparently&quot; | Trust in leadership |
+| Growth | &quot;I am learning and being challenged here&quot; | Development opportunity |
+| Trust in leadership | &quot;I believe what leadership tells me&quot; | Communication credibility |
+| Recognition | &quot;Good work is noticed and acknowledged&quot; | Reward system health |
+| Belonging | &quot;I feel like I belong on this team&quot; | Inclusion effectiveness |
+| Autonomy | &quot;I have enough freedom to do my best work&quot; | Micromanagement detection |
+
+### Score Interpretation and Response
+
+| Score Range | Status | Action Required | Timeline |
+|-------------|--------|-----------------|----------|
+| 80-100% | Healthy | Document what works, celebrate, share practices | Maintain |
+| 65-79% | Warning | Identify specific friction points, address top 2-3 | 30 days |
+| 50-64% | Damaged | Leadership attention required, specific interventions | 14 days |
+| &lt; 50% | Crisis | All-hands intervention, external facilitation may be needed | Immediate |
+
+### eNPS Integration
+
+```
+eNPS Question: &quot;On a scale of 0-10, how likely are you to recommend
+this company as a place to work?&quot;
+
+Promoters (9-10)    - Detractors (0-6)   = eNPS
+-----------------------------------------
+&gt; 50  = Exceptional
+30-50 = Good
+10-30 = Acceptable
+0-10  = Concerning
+&lt; 0   = Crisis
+```
+
+---
+
+## Framework 5: Cultural Rituals by Stage
+
+Rituals are the delivery mechanism for culture. What works at 10 people breaks at 100.
+
+### Ritual Matrix
+
+| Stage | Team Size | Key Rituals | Culture Risk |
+|-------|-----------|-------------|-------------|
+| Seed | &lt; 15 | Weekly all-hands (30 min), monthly retro, default transparency | Culture by osmosis -- works but won&#x27;t scale |
+| Early Growth | 15-50 | Quarterly culture survey, onboarding buddy, recognition program, leader office hours | First transmission failures appear |
+| Scaling | 50-200 | Culture committee (peer-driven), values-based reviews, manager training, dept + company all-hands | Subcultures form, drift begins |
+| Large | 200+ | Annual culture plan with KPIs, internal NPS, subculture management, culture integration for M&amp;A | Culture becomes fragile without systems |
+
+### Ritual Design Template
+
+| Element | Description |
+|---------|-------------|
+| Name | Clear, memorable name for the ritual |
+| Purpose | Which value does this reinforce? |
+| Frequency | Weekly, monthly, quarterly, annual |
+| Duration | Time commitment (shorter is better) |
+| Participants | Who is involved, who leads |
+| Format | In-person, remote, hybrid |
+| Measurement | How do you know it&#x27;s working? |
+| Sunset criteria | When should this ritual be retired? |
+
+---
+
+## Framework 6: Culture Debt
+
+Culture debt accumulates like technical debt: small compromises that compound.
+
+### Culture Debt Inventory
+
+| Debt Type | Example | Cost | Fix Difficulty |
+|-----------|---------|------|----------------|
+| Tolerated bad behavior | Star performer who is toxic | Team morale, attrition | High (requires confrontation) |
+| Stale values | Values from founding team, never updated | Cynicism, disengagement | Medium (requires workshop) |
+| Missing rituals | No recognition system, no all-hands | Low cohesion, isolation | Low (design and implement) |
+| Inconsistent enforcement | Some people held to standards, others not | Trust erosion, unfairness | High (requires consistency) |
+| Osmosis-only transmission | No onboarding for culture, just happens | New hires don&#x27;t get it | Medium (design onboarding) |
+
+### Culture Debt Decision Tree
+
+```
+START: Culture debt identified
+  |
+  v
+[Is it actively causing harm?]
+  |
+  +-- YES --&gt; [Is the cost of fixing it &lt; cost of keeping it?]
+  |            |
+  |            +-- YES --&gt; Fix immediately. This week.
+  |            +-- NO  --&gt; Fix within 30 days. Plan the transition.
+  |
+  +-- NO  --&gt; [Will it compound if ignored for 6 months?]
+              |
+              +-- YES --&gt; Schedule fix within 90 days
+              +-- NO  --&gt; Document and monitor quarterly
+```
+
+---
+
+## Remote and Hybrid Culture
+
+### Remote Culture Operating Principles
+
+| Principle | Implementation |
+|-----------|---------------|
+| Default to async | Write first, meet only when needed |
+| Intentional social | Regular non-work social time (weekly) |
+| Over-communicate decisions | Document reasoning, share broadly |
+| Equal access | Remote participants get equal voice in hybrid meetings |
+| Visible work | Regular updates so work is seen without surveillance |
+
+### Hybrid Meeting Rules
+
+| Rule | Rationale |
+|------|-----------|
+| If one person is remote, everyone joins individually | Prevents room-vs-screen dynamic |
+| Camera-optional for working sessions | Reduces fatigue |
+| Shared document for all meetings | Creates equal participation |
+| Record meetings with decisions | Timezone inclusion |
+| No hallway decisions on hybrid days | Excludes remote team members |
+
+---
+
+## Red Flags
+
+- Values posted on wall, never referenced in reviews or decisions
+- Star performers protected from cultural standards -- destroys credibility
+- Leaders who &quot;don&#x27;t have time&quot; for culture rituals -- signals culture isn&#x27;t a priority
+- New hires feel culture is &quot;different than advertised&quot; -- culture code is fiction
+- No mechanism to raise cultural concerns safely -- problems go underground
+- Culture survey results not shared with team -- breeds distrust
+- Same values for 5+ years despite major scaling -- values are stale
+- Founders exempt from cultural norms -- &quot;do as I say, not as I do&quot;
+- No consequences for value violations -- values are suggestions, not standards
+- Culture committee is all HR, no peers -- becomes compliance, not culture
+
+---
+
+## Integration with C-Suite
+
+| When... | Culture Architect Works With... | To... |
+|---------|---------------------------------|-------|
+| Hiring surge | CHRO (`chro-advisor`) | Ensure culture fit is measured, not guessed |
+| Org restructure | COO + CEO | Manage culture disruption from structure change |
+| M&amp;A or partnership | CEO + COO | Detect and resolve culture clashes early |
+| Performance issues | CHRO | Separate culture misfit from skill deficit |
+| Strategy pivot | CEO (`ceo-advisor`) | Update values that the pivot makes obsolete |
+| Rapid growth | All C-suite | Scale rituals before culture dilutes |
+| Change rollout | Change Management (`change-management`) | Cultural dimension of change |
+| Operating system design | Company OS (`company-os`) | Culture rituals in the meeting pulse |
+| Founder evolution | Founder Coach (`founder-coach`) | Leadership style impact on culture |
+
+---
+
+## Proactive Triggers
+
+- eNPS declining 2+ quarters -- investigate root cause before it becomes attrition
+- Rapid hiring (&gt; 30% headcount growth in a quarter) -- culture transmission at risk
+- M&amp;A announced -- culture integration plan needed immediately
+- Star performer exhibiting toxic behavior -- address within 1 week or culture debt compounds
+- Values haven&#x27;t been reviewed in 2+ years -- schedule values refresh workshop
+- Remote team growing without intentional culture design -- isolation and drift risk
+- Exit interviews mention &quot;culture&quot; as departure reason -- pattern analysis needed
+
+---
+
+## Output Artifacts
+
+| Request | Deliverable |
+|---------|-------------|
+| &quot;Build our values&quot; | Values workshop facilitation guide + values cards with behaviors |
+| &quot;Create a culture code&quot; | Culture code document (5-8 pages) with all 7 sections |
+| &quot;Assess our culture health&quot; | Survey design, score interpretation, action plan |
+| &quot;Design cultural rituals&quot; | Ritual calendar by stage with design templates |
+| &quot;Audit culture debt&quot; | Debt inventory with priority, cost, and fix plan |
+| &quot;Remote culture strategy&quot; | Operating principles, tools, rituals for distributed teams |
+| &quot;M&amp;A culture integration&quot; | Culture comparison matrix, clash risk map, integration timeline |
+
+---
+
+## Tool Reference
+
+### 1. culture_survey_analyzer.py
+
+Analyzes culture health survey results across 8 dimensions (psychological safety, clarity, fairness, growth, trust, recognition, belonging, autonomy). Calculates dimension scores, overall health rating, identifies strengths and risks, and generates action recommendations.
+
+```bash
+python scripts/culture_survey_analyzer.py --input survey_data.json --json
+python scripts/culture_survey_analyzer.py --input survey_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with survey responses (dimension scores per respondent, optional department/tenure metadata) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. values_alignment_scorer.py
+
+Scores alignment between stated values and observed behaviors using the Competing Values Framework quadrants (Clan, Adhocracy, Market, Hierarchy). Detects gaps between current and desired culture, identifies value-washing risks, and recommends alignment actions.
+
+```bash
+python scripts/values_alignment_scorer.py --input values_data.json --json
+python scripts/values_alignment_scorer.py --input values_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with stated values, behavioral evidence scores, and optional CVF quadrant assessments |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. engagement_tracker.py
+
+Tracks employee engagement metrics over time including eNPS, survey scores, participation rates, and retention correlation. Detects trends, flags declining dimensions, and generates quarterly engagement reports.
+
+```bash
+python scripts/engagement_tracker.py --input engagement_data.json --json
+python scripts/engagement_tracker.py --input engagement_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with periodic engagement data (eNPS scores, survey results, participation rates, optional attrition data) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Values posted on wall but never referenced in decisions | Values created as aspirational exercise, not operational tool | Run values-to-behaviors workshop; tie values to performance reviews, hiring rubrics, and recognition |
+| Culture survey scores declining quarter-over-quarter | Underlying issue not addressed after previous survey | Analyze by dimension to isolate the declining area; share results transparently; commit to specific actions with deadlines |
+| Star performer protected from cultural standards | Leadership avoidance or fear of losing output | Address within 1 week; culture debt compounds daily; document impact on team morale and attrition |
+| New hires say culture is &quot;different than advertised&quot; | Culture code describes aspiration, not reality | Rewrite culture code to describe what IS; include &quot;who doesn&#x27;t thrive here&quot; section honestly |
+| eNPS declining but leadership claims culture is strong | Leadership disconnected from frontline experience; survey results not shared | Share survey results with full team; conduct skip-level conversations; address top 2 detractor themes |
+| Remote team members feel excluded from culture | Rituals designed for in-person only; hallway decisions on hybrid days | Apply Remote Culture Operating Principles; redesign rituals for hybrid; enforce &quot;if one remote, all remote&quot; meeting rule |
+| Culture committee produces no measurable impact | Committee is all HR, no peers; no decision authority or budget | Reconstitute with peer representatives; grant budget and decision authority; set quarterly culture OKRs |
+
+---
+
+## Success Criteria
+
+- Culture health score above 70% across all 8 assessment dimensions
+- eNPS above 30 (Good) sustained across 4 consecutive quarters
+- Values-to-behaviors translation completed for all stated values with observable anchors
+- 30-day employees can accurately describe the culture without prompting
+- Culture debt inventory reviewed quarterly with no &quot;Critical&quot; items unaddressed for more than 30 days
+- Survey participation rate above 80% indicating trust in the feedback process
+- Zero cultural standard exceptions for high performers (no &quot;brilliant jerk&quot; tolerance)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Mission/vision/values workshop facilitation, values-to-behaviors translation, culture code creation, culture health assessment (8-dimension survey, eNPS), cultural rituals design by company stage, culture debt identification and management, remote/hybrid culture operating principles, M&amp;A culture integration planning, and Competing Values Framework assessment.
+
+**Out of scope:** HR policy creation (use hr-operations/), compensation and benefits design (use chro-advisor), DEI program management, employee relations and conflict resolution, performance management system design, and organizational restructuring (use coo-advisor). Tools analyze survey and engagement data; continuous culture monitoring requires integration with HR platforms.
+
+**Limitations:** Culture assessment depends on honest survey responses; low participation rates (&lt;50%) or fear of retaliation invalidate results. The Competing Values Framework provides a useful map but oversimplifies the complexity of real organizational culture. Culture change is slow (12-24 months for meaningful shifts); tools measure progress but cannot accelerate the human change process. M&amp;A culture integration assessments are predictive, not deterministic.
+
+---
+
+## Integration Points
+
+- **chro-advisor** -- Hiring for culture fit, performance reviews tied to values, attrition analysis linked to culture health
+- **ceo-advisor** -- Culture strategy aligns with company vision; values refresh tied to strategic pivots
+- **coo-advisor** -- Culture rituals embedded in operating rhythm; org restructures assessed for culture impact
+- **change-management** -- Cultural dimension of any major change initiative; resistance patterns mapped to culture type
+- **founder-coach** -- Leadership style impact on culture; founder behavior modeling assessed against stated values
+- **company-os** -- Culture rituals integrated into the organizational operating system meeting cadence
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Culture Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Culture Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Culture Architect in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Culture Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Culture Architect&quot;
+4. Description: &quot;Build, measure, and evolve company culture as operational behavior -- not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health a...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/culture-architect/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Culture Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Culture Architect
+
+Culture is what you DO, not what you SAY. This skill builds culture as an operational system -- observable behaviors, measurable health, and rituals that scale from 5 people to 500.
+
+## Keywords
+
+culture, company culture, values, mission, vision, culture code, cultural rituals, culture health, values-to-behaviors, founder culture, culture debt, value-washing, culture assessment, culture survey, psychological safety, culture scaling, engagement, eNPS, remote culture, hybrid culture, culture clash, employer brand, onboarding culture, performance culture, recognition
+
+---
+
+## Core Principle
+
+**Culture = (What you reward) + (What you tolerate) + (What you celebrate)**
+
+If your values say &quot;transparency&quot; but you punish bearers of bad news, your real value is &quot;optics.&quot; Culture is not aspirational. It is descriptive. The work is closing the gap between stated and actual.
+
+---
+
+## Culture Diagnostic Decision Tree
+
+```
+START: &quot;How is our culture?&quot;
+  |
+  v
+[Run the Values Audit]
+  Ask: &quot;What did the last person who got promoted demonstrate?&quot;
+  |
+  +-- Answer matches stated values --&gt; Values are real. Check transmission.
+  |     |
+  |     v
+  |   [Can a 30-day employee describe the culture accurately?]
+  |     +-- YES --&gt; Culture is operational. Maintain and evolve.
+  |     +-- NO  --&gt; Transmission gap. Fix onboarding and rituals.
+  |
+  +-- Answer differs from stated values --&gt; Values are performative.
+        |
+        v
+      [Do leaders model the real (non-stated) values?]
+        +-- YES --&gt; Rewrite values to match reality, then iterate.
+        +-- NO  --&gt; Deeper problem: no coherent culture exists. Build from scratch.
+```
+
+---
+
+## Framework 1: Mission / Vision / Values Workshop
+
+### Mission (Why We Exist)
+
+| Element | Test | Example |
+|---------|------|---------|
+| Present-tense | Is it about what we do now, not what we aspire to? | &quot;We reduce preventable falls in elderly care&quot; |
+| Specific | Could a competitor claim the exact same thing? If yes, too generic. | Not &quot;We make the world better&quot; |
+| Meaningful | Would something be lost if we disappeared? | Answer must be concrete |
+
+### Vision (What Winning Looks Like)
+
+| Quality | Bad | Good |
+|---------|-----|------|
+| Specificity | &quot;Be the market leader&quot; | &quot;Every care home in Europe uses our system by 2030&quot; |
+| Falsifiability | &quot;Transform healthcare&quot; | &quot;Reduce fall-related injuries by 50% in partner facilities&quot; |
+| Timeline | No date | 5-10 year horizon with milestones |
+
+### Values (What We Actually Do)
+
+| Rule | Explanation |
+|------|-------------|
+| 3-5 values maximum | More than 5 and none are memorable |
+| Derived from observation | &quot;What did our best hire do that nobody asked?&quot; |
+| Each has behavioral anchors | Specific enough to judge against |
+| Include the tension | Good values have a cost (&quot;Speed&quot; means &quot;we accept some risk&quot;) |
+
+---
+
+## Framework 2: Values-to-Behaviors Translation
+
+This is the work that makes values operational. Every value needs concrete behavioral anchors.
+
+| Value | Vague Version | Behavioral Anchor | How You&#x27;d Observe It |
+|-------|---------------|-------------------|---------------------|
+| Transparency | &quot;We&#x27;re open and honest&quot; | &quot;We share bad news within 24 hours, including to our manager&quot; | Bad news travels fast, no surprises |
+| Ownership | &quot;We take responsibility&quot; | &quot;We don&#x27;t hand off problems -- we own until resolved, even across team boundaries&quot; | No orphaned issues |
+| Speed | &quot;We move fast&quot; | &quot;Decisions under $5K happen at team level, same day&quot; | Low decision latency |
+| Quality | &quot;We don&#x27;t cut corners&quot; | &quot;We stop the line before shipping something we&#x27;re not proud of&quot; | Teams delay launches for quality |
+| Customer-first | &quot;Customers are our priority&quot; | &quot;Any team member can escalate a customer issue to leadership, bypassing normal channels&quot; | Escalation is celebrated, not punished |
+
+### Translation Workshop (90 minutes)
+
+```
+For each value:
+  Step 1: State the value in 2-3 words
+  Step 2: Ask &quot;How would a new hire know we live this on day 30?&quot;
+  Step 3: Write 3 observable behaviors that prove this value
+  Step 4: Write 3 behaviors that violate this value
+  Step 5: Ask &quot;What does this value cost us? What&#x27;s the trade-off?&quot;
+  Step 6: If no trade-off exists, it&#x27;s not a value -- it&#x27;s a platitude
+
+Output: Value card with behaviors, violations, and trade-offs
+```
+
+---
+
+## Framework 3: Culture Code Creation
+
+A culture code is a public document that describes how you operate. It should attract the right people and repel the wrong ones.
+
+### Culture Code Structure
+
+| Section | Purpose | Key Question |
+|---------|---------|-------------|
+| 1. Who We Are | Mission, context, stage | &quot;Why does this company exist?&quot; |
+| 2. Who Thrives Here | Specific behaviors, not adjectives | &quot;What does success look like day-to-day?&quot; |
+| 3. Who Doesn&#x27;t Thrive Here | Honest misfit description | &quot;When have we made a bad hire? What was the pattern?&quot; |
+| 4. How We Make Decisions | Decision rights, speed expectations | &quot;Who can decide what, and how fast?&quot; |
+| 5. How We Communicate | Channels, cadence, expectations | &quot;What can I expect in response time and transparency?&quot; |
+| 6. How We Grow People | Career development, feedback | &quot;What&#x27;s my path here?&quot; |
+| 7. What We Expect of Leaders | Leadership behaviors | &quot;How should managers behave?&quot; |
+
+### Culture Code Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Alternative |
+|-------------|-------------|-------------------|
+| &quot;We&#x27;re a family&quot; | Families don&#x27;t fire for performance | &quot;We&#x27;re a high-performing team that cares about each other&quot; |
+| Only positive traits | Not credible, doesn&#x27;t help people self-select | Include &quot;who doesn&#x27;t thrive here&quot; section |
+| Aspirational, not descriptive | Creates cynicism when reality differs | Describe what IS, then iterate |
+| Too long (&gt; 15 pages) | Nobody reads it | Keep to 5-8 pages, link to details |
+| Never updated | Becomes irrelevant as company scales | Review annually, update at each stage |
+
+---
+
+## Framework 4: Culture Health Assessment
+
+Run quarterly. Anonymous. 8-12 questions maximum.
+
+### Core Assessment Dimensions
+
+| Dimension | Question Example | What It Measures |
+|-----------|-----------------|-----------------|
+| Psychological safety | &quot;I can raise a concern without fear of negative consequences&quot; | Trust in the system |
+| Clarity | &quot;I know how my work connects to company goals&quot; | Strategic alignment |
+| Fairness | &quot;Decisions here are made consistently and transparently&quot; | Trust in leadership |
+| Growth | &quot;I am learning and being challenged here&quot; | Development opportunity |
+| Trust in leadership | &quot;I believe what leadership tells me&quot; | Communication credibility |
+| Recognition | &quot;Good work is noticed and acknowledged&quot; | Reward system health |
+| Belonging | &quot;I feel like I belong on this team&quot; | Inclusion effectiveness |
+| Autonomy | &quot;I have enough freedom to do my best work&quot; | Micromanagement detection |
+
+### Score Interpretation and Response
+
+| Score Range | Status | Action Required | Timeline |
+|-------------|--------|-----------------|----------|
+| 80-100% | Healthy | Document what works, celebrate, share practices | Maintain |
+| 65-79% | Warning | Identify specific friction points, address top 2-3 | 30 days |
+| 50-64% | Damaged | Leadership attention required, specific interventions | 14 days |
+| &lt; 50% | Crisis | All-hands intervention, external facilitation may be needed | Immediate |
+
+### eNPS Integration
+
+```
+eNPS Question: &quot;On a scale of 0-10, how likely are you to recommend
+this company as a place to work?&quot;
+
+Promoters (9-10)    - Detractors (0-6)   = eNPS
+-----------------------------------------
+&gt; 50  = Exceptional
+30-50 = Good
+10-30 = Acceptable
+0-10  = Concerning
+&lt; 0   = Crisis
+```
+
+---
+
+## Framework 5: Cultural Rituals by Stage
+
+Rituals are the delivery mechanism for culture. What works at 10 people breaks at 100.
+
+### Ritual Matrix
+
+| Stage | Team Size | Key Rituals | Culture Risk |
+|-------|-----------|-------------|-------------|
+| Seed | &lt; 15 | Weekly all-hands (30 min), monthly retro, default transparency | Culture by osmosis -- works but won&#x27;t scale |
+| Early Growth | 15-50 | Quarterly culture survey, onboarding buddy, recognition program, leader office hours | First transmission failures appear |
+| Scaling | 50-200 | Culture committee (peer-driven), values-based reviews, manager training, dept + company all-hands | Subcultures form, drift begins |
+| Large | 200+ | Annual culture plan with KPIs, internal NPS, subculture management, culture integration for M&amp;A | Culture becomes fragile without systems |
+
+### Ritual Design Template
+
+| Element | Description |
+|---------|-------------|
+| Name | Clear, memorable name for the ritual |
+| Purpose | Which value does this reinforce? |
+| Frequency | Weekly, monthly, quarterly, annual |
+| Duration | Time commitment (shorter is better) |
+| Participants | Who is involved, who leads |
+| Format | In-person, remote, hybrid |
+| Measurement | How do you know it&#x27;s working? |
+| Sunset criteria | When should this ritual be retired? |
+
+---
+
+## Framework 6: Culture Debt
+
+Culture debt accumulates like technical debt: small compromises that compound.
+
+### Culture Debt Inventory
+
+| Debt Type | Example | Cost | Fix Difficulty |
+|-----------|---------|------|----------------|
+| Tolerated bad behavior | Star performer who is toxic | Team morale, attrition | High (requires confrontation) |
+| Stale values | Values from founding team, never updated | Cynicism, disengagement | Medium (requires workshop) |
+| Missing rituals | No recognition system, no all-hands | Low cohesion, isolation | Low (design and implement) |
+| Inconsistent enforcement | Some people held to standards, others not | Trust erosion, unfairness | High (requires consistency) |
+| Osmosis-only transmission | No onboarding for culture, just happens | New hires don&#x27;t get it | Medium (design onboarding) |
+
+### Culture Debt Decision Tree
+
+```
+START: Culture debt identified
+  |
+  v
+[Is it actively causing harm?]
+  |
+  +-- YES --&gt; [Is the cost of fixing it &lt; cost of keeping it?]
+  |            |
+  |            +-- YES --&gt; Fix immediately. This week.
+  |            +-- NO  --&gt; Fix within 30 days. Plan the transition.
+  |
+  +-- NO  --&gt; [Will it compound if ignored for 6 months?]
+              |
+              +-- YES --&gt; Schedule fix within 90 days
+              +-- NO  --&gt; Document and monitor quarterly
+```
+
+---
+
+## Remote and Hybrid Culture
+
+### Remote Culture Operating Principles
+
+| Principle | Implementation |
+|-----------|---------------|
+| Default to async | Write first, meet only when needed |
+| Intentional social | Regular non-work social time (weekly) |
+| Over-communicate decisions | Document reasoning, share broadly |
+| Equal access | Remote participants get equal voice in hybrid meetings |
+| Visible work | Regular updates so work is seen without surveillance |
+
+### Hybrid Meeting Rules
+
+| Rule | Rationale |
+|------|-----------|
+| If one person is remote, everyone joins individually | Prevents room-vs-screen dynamic |
+| Camera-optional for working sessions | Reduces fatigue |
+| Shared document for all meetings | Creates equal participation |
+| Record meetings with decisions | Timezone inclusion |
+| No hallway decisions on hybrid days | Excludes remote team members |
+
+---
+
+## Red Flags
+
+- Values posted on wall, never referenced in reviews or decisions
+- Star performers protected from cultural standards -- destroys credibility
+- Leaders who &quot;don&#x27;t have time&quot; for culture rituals -- signals culture isn&#x27;t a priority
+- New hires feel culture is &quot;different than advertised&quot; -- culture code is fiction
+- No mechanism to raise cultural concerns safely -- problems go underground
+- Culture survey results not shared with team -- breeds distrust
+- Same values for 5+ years despite major scaling -- values are stale
+- Founders exempt from cultural norms -- &quot;do as I say, not as I do&quot;
+- No consequences for value violations -- values are suggestions, not standards
+- Culture committee is all HR, no peers -- becomes compliance, not culture
+
+---
+
+## Integration with C-Suite
+
+| When... | Culture Architect Works With... | To... |
+|---------|---------------------------------|-------|
+| Hiring surge | CHRO (`chro-advisor`) | Ensure culture fit is measured, not guessed |
+| Org restructure | COO + CEO | Manage culture disruption from structure change |
+| M&amp;A or partnership | CEO + COO | Detect and resolve culture clashes early |
+| Performance issues | CHRO | Separate culture misfit from skill deficit |
+| Strategy pivot | CEO (`ceo-advisor`) | Update values that the pivot makes obsolete |
+| Rapid growth | All C-suite | Scale rituals before culture dilutes |
+| Change rollout | Change Management (`change-management`) | Cultural dimension of change |
+| Operating system design | Company OS (`company-os`) | Culture rituals in the meeting pulse |
+| Founder evolution | Founder Coach (`founder-coach`) | Leadership style impact on culture |
+
+---
+
+## Proactive Triggers
+
+- eNPS declining 2+ quarters -- investigate root cause before it becomes attrition
+- Rapid hiring (&gt; 30% headcount growth in a quarter) -- culture transmission at risk
+- M&amp;A announced -- culture integration plan needed immediately
+- Star performer exhibiting toxic behavior -- address within 1 week or culture debt compounds
+- Values haven&#x27;t been reviewed in 2+ years -- schedule values refresh workshop
+- Remote team growing without intentional culture design -- isolation and drift risk
+- Exit interviews mention &quot;culture&quot; as departure reason -- pattern analysis needed
+
+---
+
+## Output Artifacts
+
+| Request | Deliverable |
+|---------|-------------|
+| &quot;Build our values&quot; | Values workshop facilitation guide + values cards with behaviors |
+| &quot;Create a culture code&quot; | Culture code document (5-8 pages) with all 7 sections |
+| &quot;Assess our culture health&quot; | Survey design, score interpretation, action plan |
+| &quot;Design cultural rituals&quot; | Ritual calendar by stage with design templates |
+| &quot;Audit culture debt&quot; | Debt inventory with priority, cost, and fix plan |
+| &quot;Remote culture strategy&quot; | Operating principles, tools, rituals for distributed teams |
+| &quot;M&amp;A culture integration&quot; | Culture comparison matrix, clash risk map, integration timeline |
+
+---
+
+## Tool Reference
+
+### 1. culture_survey_analyzer.py
+
+Analyzes culture health survey results across 8 dimensions (psychological safety, clarity, fairness, growth, trust, recognition, belonging, autonomy). Calculates dimension scores, overall health rating, identifies strengths and risks, and generates action recommendations.
+
+```bash
+python scripts/culture_survey_analyzer.py --input survey_data.json --json
+python scripts/culture_survey_analyzer.py --input survey_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with survey responses (dimension scores per respondent, optional department/tenure metadata) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. values_alignment_scorer.py
+
+Scores alignment between stated values and observed behaviors using the Competing Values Framework quadrants (Clan, Adhocracy, Market, Hierarchy). Detects gaps between current and desired culture, identifies value-washing risks, and recommends alignment actions.
+
+```bash
+python scripts/values_alignment_scorer.py --input values_data.json --json
+python scripts/values_alignment_scorer.py --input values_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with stated values, behavioral evidence scores, and optional CVF quadrant assessments |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. engagement_tracker.py
+
+Tracks employee engagement metrics over time including eNPS, survey scores, participation rates, and retention correlation. Detects trends, flags declining dimensions, and generates quarterly engagement reports.
+
+```bash
+python scripts/engagement_tracker.py --input engagement_data.json --json
+python scripts/engagement_tracker.py --input engagement_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with periodic engagement data (eNPS scores, survey results, participation rates, optional attrition data) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Values posted on wall but never referenced in decisions | Values created as aspirational exercise, not operational tool | Run values-to-behaviors workshop; tie values to performance reviews, hiring rubrics, and recognition |
+| Culture survey scores declining quarter-over-quarter | Underlying issue not addressed after previous survey | Analyze by dimension to isolate the declining area; share results transparently; commit to specific actions with deadlines |
+| Star performer protected from cultural standards | Leadership avoidance or fear of losing output | Address within 1 week; culture debt compounds daily; document impact on team morale and attrition |
+| New hires say culture is &quot;different than advertised&quot; | Culture code describes aspiration, not reality | Rewrite culture code to describe what IS; include &quot;who doesn&#x27;t thrive here&quot; section honestly |
+| eNPS declining but leadership claims culture is strong | Leadership disconnected from frontline experience; survey results not shared | Share survey results with full team; conduct skip-level conversations; address top 2 detractor themes |
+| Remote team members feel excluded from culture | Rituals designed for in-person only; hallway decisions on hybrid days | Apply Remote Culture Operating Principles; redesign rituals for hybrid; enforce &quot;if one remote, all remote&quot; meeting rule |
+| Culture committee produces no measurable impact | Committee is all HR, no peers; no decision authority or budget | Reconstitute with peer representatives; grant budget and decision authority; set quarterly culture OKRs |
+
+---
+
+## Success Criteria
+
+- Culture health score above 70% across all 8 assessment dimensions
+- eNPS above 30 (Good) sustained across 4 consecutive quarters
+- Values-to-behaviors translation completed for all stated values with observable anchors
+- 30-day employees can accurately describe the culture without prompting
+- Culture debt inventory reviewed quarterly with no &quot;Critical&quot; items unaddressed for more than 30 days
+- Survey participation rate above 80% indicating trust in the feedback process
+- Zero cultural standard exceptions for high performers (no &quot;brilliant jerk&quot; tolerance)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Mission/vision/values workshop facilitation, values-to-behaviors translation, culture code creation, culture health assessment (8-dimension survey, eNPS), cultural rituals design by company stage, culture debt identification and management, remote/hybrid culture operating principles, M&amp;A culture integration planning, and Competing Values Framework assessment.
+
+**Out of scope:** HR policy creation (use hr-operations/), compensation and benefits design (use chro-advisor), DEI program management, employee relations and conflict resolution, performance management system design, and organizational restructuring (use coo-advisor). Tools analyze survey and engagement data; continuous culture monitoring requires integration with HR platforms.
+
+**Limitations:** Culture assessment depends on honest survey responses; low participation rates (&lt;50%) or fear of retaliation invalidate results. The Competing Values Framework provides a useful map but oversimplifies the complexity of real organizational culture. Culture change is slow (12-24 months for meaningful shifts); tools measure progress but cannot accelerate the human change process. M&amp;A culture integration assessments are predictive, not deterministic.
+
+---
+
+## Integration Points
+
+- **chro-advisor** -- Hiring for culture fit, performance reviews tied to values, attrition analysis linked to culture health
+- **ceo-advisor** -- Culture strategy aligns with company vision; values refresh tied to strategic pivots
+- **coo-advisor** -- Culture rituals embedded in operating rhythm; org restructures assessed for culture impact
+- **change-management** -- Cultural dimension of any major change initiative; resistance patterns mapped to culture type
+- **founder-coach** -- Leadership style impact on culture; founder behavior modeling assessed against stated values
+- **company-os** -- Culture rituals integrated into the organizational operating system meeting cadence
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Culture Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Culture Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Culture Architect in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Culture Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Culture Architect&quot;
+4. Description: &quot;Build, measure, and evolve company culture as operational behavior -- not wall posters. Covers mission/vision/values workshops, values-to-behaviors translation, culture code creation, culture health a...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/culture-architect/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

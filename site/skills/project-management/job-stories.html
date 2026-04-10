@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Job Stories (Project Management domain).
 
 Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas.
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/job-stories
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Job Stories (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Job Stories (Project Management domain).
 
 Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas.
 
@@ -439,7 +461,702 @@ https://github.com/borghei/Claude-Skills/tree/main/job-stories
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Job Stories&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Job Stories Expert
+
+## Overview
+
+Write job stories using the Jobs-to-Be-Done (JTBD) framework. Unlike traditional user stories that focus on roles (&quot;As a user...&quot;), job stories focus on the situation, motivation, and desired outcome. This shift produces requirements that are more grounded in real user context and less likely to encode assumptions about who the user is.
+
+### When to Use
+
+- **Feature definition** -- When you need to articulate what to build and why, grounded in user context.
+- **Backlog creation** -- When populating a backlog with work items that stay focused on user outcomes.
+- **Requirement workshops** -- When collaborating with stakeholders to define what &quot;done&quot; looks like.
+- **Design briefs** -- When giving designers context about the situation and motivation behind a feature.
+
+### When NOT to Use
+
+- When you need strategic backlog items with business context -- use `wwas/` instead.
+- When you need lightweight stories for a team already fluent in user story format.
+- When the work is purely technical with no direct user-facing situation.
+
+## JTBD Discovery Canvas
+
+Before writing job stories, run a Jobs-to-Be-Done discovery canvas to understand what customers are trying to achieve, where they struggle, and what outcomes they value most. This canvas produces the situational context that feeds directly into job story writing.
+
+### When to Run Discovery First
+
+- Starting a new product area with no existing user research.
+- Entering a new market segment or persona.
+- Backlog items feel disconnected from real user needs.
+- Team debates &quot;what to build&quot; without grounding in customer jobs.
+
+### Discovery Canvas Template
+
+#### 1. Customer Jobs
+
+**Functional Jobs:**
+- [Tasks customers need to perform — keep each bullet 4-8 words]
+
+**Social Jobs:**
+- [Ways customers want to be perceived socially]
+
+**Emotional Jobs:**
+- [Emotional states customers seek to achieve or avoid]
+
+#### 2. Pains
+
+**Challenges:**
+- [Obstacles customers face when performing their jobs]
+
+**Costliness:**
+- [What customers find too costly in time, money, or effort]
+
+**Common Mistakes:**
+- [Frequent errors customers make that could be prevented]
+
+**Unresolved Problems:**
+- [Problems not solved by current solutions]
+
+#### 3. Gains
+
+**Expectations:**
+- [Ways current solutions fail to meet expectations]
+
+**Savings:**
+- [Ways savings in time, money, or effort would delight customers]
+
+**Adoption Factors:**
+- [Factors that would increase the likelihood of adoption]
+
+**Life Improvement:**
+- [Ways a solution could make customers&#x27; lives easier or more enjoyable]
+
+#### 4. Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+- [Assumption 3]
+
+### From Canvas to Job Stories
+
+Each row in the discovery canvas maps to job story components:
+
+| Canvas Section | Maps To | Example |
+|---|---|---|
+| Customer Jobs (Functional) | **Motivation** (I want to...) | &quot;I want to reconcile my accounts&quot; |
+| Pains (Challenges) | **Situation** (When...) | &quot;When I discover a discrepancy during month-end close&quot; |
+| Gains (Expectations) | **Outcome** (So I can...) | &quot;So I can submit accurate reports before the deadline&quot; |
+
+**Process:**
+1. Run the discovery canvas with stakeholders or from research data.
+2. Identify the highest-impact job-pain-gain clusters.
+3. Write one job story per cluster using the When/Want/So format below.
+4. Validate assumptions before committing to build.
+
+### Next Steps After Discovery
+
+1. Generate prioritized opportunity statements from the canvas (Recommended)
+2. Convert the canvas into a value proposition draft
+3. Generate interview questions to validate top assumptions
+4. Generate a hypothesis backlog for rapid experiments
+
+---
+
+## The Job Story Format
+
+```
+When [situation], I want to [motivation], so I can [outcome].
+```
+
+| Component | Focus | Question It Answers |
+|-----------|-------|-------------------|
+| **When [situation]** | The context or trigger | What is happening when the user needs this? |
+| **I want to [motivation]** | The action or capability desired | What does the user want to do in this moment? |
+| **So I can [outcome]** | The expected result or benefit | What does success look like for the user? |
+
+### Key Principle: Focus on the Job, Not the Role
+
+User stories say &quot;As a [role]...&quot; which anchors the requirement to a persona. Job stories remove the role and instead describe the *situation* -- the real-world context that creates the need. This matters because:
+
+- The same person may have different needs in different situations.
+- Different people in the same situation often have the same need.
+- Situations are observable and testable; roles are abstract labels.
+
+**Example comparison:**
+
+| User Story | Job Story |
+|-----------|-----------|
+| As a budget manager, I want to see a spending report so I can track expenses. | When I am preparing my weekly budget, I want to see spending so far this period, so I can adjust before overspending. |
+| As an admin, I want to export user data so I can comply with data requests. | When I receive a data subject access request, I want to export all data associated with that person, so I can respond within the 30-day legal deadline. |
+
+The job story version is more specific, more testable, and provides better design guidance.
+
+## Writing Good Job Stories
+
+### Situations (When...)
+
+Good situations are:
+
+- **Specific and observable** -- You could watch someone be in this situation.
+- **Contextual** -- They describe what is happening, not who the person is.
+- **Triggering** -- They explain what creates the need right now.
+
+| Weak Situation | Strong Situation |
+|---------------|-----------------|
+| When I use the app | When I open the app for the first time after signing up |
+| When I need data | When I am in a client meeting and need to reference last quarter&#x27;s results |
+| When I manage my team | When a team member submits a time-off request that overlaps with a project deadline |
+
+### Motivations (I want to...)
+
+Good motivations are:
+
+- **Action-oriented** -- They describe doing something, not having something.
+- **Solution-agnostic** -- They describe the capability, not the implementation.
+- **Singular** -- One motivation per story.
+
+| Weak Motivation | Strong Motivation |
+|----------------|-------------------|
+| I want a dashboard | I want to see my team&#x27;s progress at a glance |
+| I want better notifications | I want to be alerted only when something requires my action |
+| I want to manage users and permissions | I want to grant a new team member access to the project (split into two if needed) |
+
+### Outcomes (So I can...)
+
+Good outcomes are:
+
+- **Benefit-focused** -- They describe the end result, not the means.
+- **Measurable or observable** -- You can tell if the outcome was achieved.
+- **Meaningful** -- They connect to something the user genuinely cares about.
+
+| Weak Outcome | Strong Outcome |
+|-------------|----------------|
+| So I can use the feature | So I can complete my weekly report in under 10 minutes |
+| So I can be productive | So I can identify which tasks are blocked before standup |
+| So I can do my job | So I can respond to the customer within our 4-hour SLA |
+
+## INVEST Quality Criteria
+
+Apply INVEST to every job story before it enters the backlog:
+
+| Criterion | Question | Red Flag |
+|-----------|----------|----------|
+| **Independent** | Can this story be delivered without depending on another story? | &quot;This only works after story X is done&quot; |
+| **Negotiable** | Is the implementation open to discussion, or is it prescribing a solution? | Motivation says &quot;I want a dropdown menu&quot; instead of &quot;I want to select from available options&quot; |
+| **Valuable** | Does the outcome deliver clear value to the user? | Outcome is vague (&quot;so I can use it&quot;) or internal (&quot;so the database is normalized&quot;) |
+| **Estimable** | Can the team estimate the effort? | Situation is too vague to understand scope |
+| **Small** | Can this be completed in one sprint? | Story covers multiple distinct situations or motivations |
+| **Testable** | Can you write acceptance criteria that verify the outcome? | Outcome is subjective (&quot;so I feel confident&quot;) |
+
+## Story Template
+
+For each job story, produce a card with the following structure:
+
+```markdown
+### [Title]
+
+**Job Story:**
+When [situation], I want to [motivation], so I can [outcome].
+
+**Design:** [Link to design file or &quot;TBD&quot;]
+
+**Acceptance Criteria:**
+
+1. [ ] [Observable outcome that verifies the story is complete]
+2. [ ] [Observable outcome]
+3. [ ] [Observable outcome]
+4. [ ] [Observable outcome]
+5. [ ] [Observable outcome]
+6. [ ] [Observable outcome]
+```
+
+### Acceptance Criteria Guidelines
+
+- Write 6-8 acceptance criteria per story.
+- Focus on **outcomes**, not implementation steps.
+- Each criterion should be independently verifiable.
+- Use the pattern: &quot;[Thing] [does/shows/enables] [expected behavior] [under condition].&quot;
+- Include edge cases and error states, not just the happy path.
+
+**Good acceptance criteria examples:**
+
+1. The spending summary shows all transactions from the current period, grouped by category.
+2. Transactions from previous periods are excluded from the current period total.
+3. The summary updates within 5 seconds of a new transaction being recorded.
+4. If no transactions exist for the current period, a message explains that no spending has been recorded yet.
+5. The summary is accessible on mobile screens without horizontal scrolling.
+6. Category totals match the individual transaction amounts (no rounding discrepancies).
+
+**Bad acceptance criteria examples (avoid):**
+
+- The API returns a 200 status code (implementation detail)
+- The React component renders correctly (implementation detail)
+- It works (not testable)
+- The user is happy (not observable)
+
+## Worked Example
+
+**Context:** A budgeting application for personal finance.
+
+### Weekly Budget Check
+
+**Job Story:**
+When I am preparing my weekly budget on Sunday evening, I want to see how much I have spent so far this month by category, so I can decide where to cut back before the month ends.
+
+**Design:** [Link to Figma mock]
+
+**Acceptance Criteria:**
+
+1. [ ] The spending view shows the current month&#x27;s transactions grouped by category (e.g., groceries, dining, transport).
+2. [ ] Each category displays the total spent and the remaining budget for that category.
+3. [ ] Categories that have exceeded their budget are visually distinguished from those within budget.
+4. [ ] Tapping a category shows the individual transactions within it.
+5. [ ] The view loads within 2 seconds on a standard mobile connection.
+6. [ ] If no budget has been set for a category, the category still appears with total spent but no remaining budget indicator.
+7. [ ] The date range is fixed to the current calendar month and is clearly displayed.
+8. [ ] A &quot;last updated&quot; timestamp shows when transaction data was last synced.
+
+## Integration with Other Skills
+
+- Use `summarize-meeting/` to capture the discovery conversations that inform job stories.
+- Use `wwas/` when you need to add strategic business context (the &quot;Why&quot;) to backlog items.
+- Feed completed job stories into `../jira-expert/` for ticket creation.
+- Use `brainstorm-okrs/` to connect job stories back to team objectives.
+
+## References
+
+- See `references/jtbd-guide.md` for Jobs-to-Be-Done theory, comparison with user stories, and story splitting techniques.
+- See `assets/job_story_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Team writes situations that are too vague (&quot;When I use the app...&quot;) | Insufficient user research; situations invented at desk rather than observed | Require each situation to reference a specific interview quote, support ticket, or analytics event; use the &quot;could you video this?&quot; test |
+| Motivations prescribe a specific solution (&quot;I want a dropdown...&quot;) | Team conflates solution with capability; negotiability criterion failing | Rewrite using &quot;I want to [verb] [object]&quot; pattern without naming UI elements; apply the INVEST-N check before acceptance |
+| Outcomes are not measurable (&quot;So I can be productive&quot;) | Outcome too abstract; not grounded in observable behavior | Ask &quot;How would you know the user achieved this?&quot; -- if you cannot describe an observable signal, the outcome needs rewriting |
+| Job stories are too large for a single sprint | Multiple situations or motivations packed into one story | Split by situation (different contexts become separate stories) or by outcome (different success criteria become separate stories) |
+| Team defaults to user story format despite training | Habit and muscle memory; Jira templates still use &quot;As a...&quot; format | Update Jira issue templates to use JTBD format; run a conversion workshop with 5 real user stories rewritten as job stories |
+| Acceptance criteria describe implementation steps instead of outcomes | Engineering team writing criteria from their perspective rather than the user&#x27;s perspective | Apply the &quot;would the user care about this?&quot; filter; replace API/database criteria with observable behavior statements |
+| Job stories lack connection to strategic objectives | JTBD format focuses on user context but does not inherently include business &quot;why&quot; | Pair each job story with a WWAS &quot;Why&quot; statement from `wwas/`; or add an optional &quot;Supports:&quot; field linking to an OKR |
+
+## Success Criteria
+
+- 100% of job stories in the backlog follow the &quot;When / I want to / So I can&quot; format correctly
+- All situations reference observable, specific contexts (pass the &quot;could you video this?&quot; test)
+- All motivations are solution-agnostic (no UI element names or implementation details)
+- Each story has 6-8 acceptance criteria focused on observable outcomes, not implementation
+- Every job story passes all 6 INVEST criteria before entering a sprint
+- Defect rate on stories written in JTBD format is 20%+ lower than stories written in traditional format (measured over 3 months)
+- Team members can articulate the difference between a job story and a user story and choose the appropriate format for the context
+
+## Scope &amp; Limitations
+
+**In Scope:** Writing job stories using JTBD &quot;When/Want/So&quot; format, applying INVEST quality criteria, writing outcome-focused acceptance criteria, converting existing user stories to job stories, facilitating story-writing workshops, integrating job stories with Jira backlog items.
+
+**Out of Scope:** Strategic backlog items with business context (hand off to `wwas/`), product ideation and opportunity discovery (hand off to `discovery/brainstorm-ideas/`), detailed technical specifications, UX research and user interviewing methodology.
+
+**Limitations:** Job stories work best when the team has access to real user research (interviews, observation, support data). Without user context, teams will invent situations that may not reflect reality. The format is less natural for purely technical or infrastructure work where there is no direct user situation. Job stories and user stories are complementary -- some teams use both formats for different types of work.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Complementary | WWAS adds strategic &quot;Why&quot; context; job stories add situational &quot;When&quot; context. Use both when needed |
+| `summarize-meeting/` | Meetings -&gt; Stories | Discovery conversations and refinement sessions produce the situations that inform job stories |
+| `../jira-expert/` | Stories -&gt; Jira | Completed job stories become Jira tickets with structured descriptions |
+| `discovery/brainstorm-ideas/` | Ideas -&gt; Stories | Validated product ideas decompose into job stories for the backlog |
+| `execution/brainstorm-okrs/` | OKRs -&gt; Stories | Team objectives define the outcomes that job stories should connect to |
+| `execution/prioritization-frameworks/` | Stories -&gt; Prioritization | Job stories scored via RICE or other frameworks for sprint planning |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Job Stories&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Job Stories&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Job Stories in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Job Stories&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Job Stories&quot;
+4. Description: &quot;Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/job-stories/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Job Stories&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Job Stories Expert
+
+## Overview
+
+Write job stories using the Jobs-to-Be-Done (JTBD) framework. Unlike traditional user stories that focus on roles (&quot;As a user...&quot;), job stories focus on the situation, motivation, and desired outcome. This shift produces requirements that are more grounded in real user context and less likely to encode assumptions about who the user is.
+
+### When to Use
+
+- **Feature definition** -- When you need to articulate what to build and why, grounded in user context.
+- **Backlog creation** -- When populating a backlog with work items that stay focused on user outcomes.
+- **Requirement workshops** -- When collaborating with stakeholders to define what &quot;done&quot; looks like.
+- **Design briefs** -- When giving designers context about the situation and motivation behind a feature.
+
+### When NOT to Use
+
+- When you need strategic backlog items with business context -- use `wwas/` instead.
+- When you need lightweight stories for a team already fluent in user story format.
+- When the work is purely technical with no direct user-facing situation.
+
+## JTBD Discovery Canvas
+
+Before writing job stories, run a Jobs-to-Be-Done discovery canvas to understand what customers are trying to achieve, where they struggle, and what outcomes they value most. This canvas produces the situational context that feeds directly into job story writing.
+
+### When to Run Discovery First
+
+- Starting a new product area with no existing user research.
+- Entering a new market segment or persona.
+- Backlog items feel disconnected from real user needs.
+- Team debates &quot;what to build&quot; without grounding in customer jobs.
+
+### Discovery Canvas Template
+
+#### 1. Customer Jobs
+
+**Functional Jobs:**
+- [Tasks customers need to perform — keep each bullet 4-8 words]
+
+**Social Jobs:**
+- [Ways customers want to be perceived socially]
+
+**Emotional Jobs:**
+- [Emotional states customers seek to achieve or avoid]
+
+#### 2. Pains
+
+**Challenges:**
+- [Obstacles customers face when performing their jobs]
+
+**Costliness:**
+- [What customers find too costly in time, money, or effort]
+
+**Common Mistakes:**
+- [Frequent errors customers make that could be prevented]
+
+**Unresolved Problems:**
+- [Problems not solved by current solutions]
+
+#### 3. Gains
+
+**Expectations:**
+- [Ways current solutions fail to meet expectations]
+
+**Savings:**
+- [Ways savings in time, money, or effort would delight customers]
+
+**Adoption Factors:**
+- [Factors that would increase the likelihood of adoption]
+
+**Life Improvement:**
+- [Ways a solution could make customers&#x27; lives easier or more enjoyable]
+
+#### 4. Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+- [Assumption 3]
+
+### From Canvas to Job Stories
+
+Each row in the discovery canvas maps to job story components:
+
+| Canvas Section | Maps To | Example |
+|---|---|---|
+| Customer Jobs (Functional) | **Motivation** (I want to...) | &quot;I want to reconcile my accounts&quot; |
+| Pains (Challenges) | **Situation** (When...) | &quot;When I discover a discrepancy during month-end close&quot; |
+| Gains (Expectations) | **Outcome** (So I can...) | &quot;So I can submit accurate reports before the deadline&quot; |
+
+**Process:**
+1. Run the discovery canvas with stakeholders or from research data.
+2. Identify the highest-impact job-pain-gain clusters.
+3. Write one job story per cluster using the When/Want/So format below.
+4. Validate assumptions before committing to build.
+
+### Next Steps After Discovery
+
+1. Generate prioritized opportunity statements from the canvas (Recommended)
+2. Convert the canvas into a value proposition draft
+3. Generate interview questions to validate top assumptions
+4. Generate a hypothesis backlog for rapid experiments
+
+---
+
+## The Job Story Format
+
+```
+When [situation], I want to [motivation], so I can [outcome].
+```
+
+| Component | Focus | Question It Answers |
+|-----------|-------|-------------------|
+| **When [situation]** | The context or trigger | What is happening when the user needs this? |
+| **I want to [motivation]** | The action or capability desired | What does the user want to do in this moment? |
+| **So I can [outcome]** | The expected result or benefit | What does success look like for the user? |
+
+### Key Principle: Focus on the Job, Not the Role
+
+User stories say &quot;As a [role]...&quot; which anchors the requirement to a persona. Job stories remove the role and instead describe the *situation* -- the real-world context that creates the need. This matters because:
+
+- The same person may have different needs in different situations.
+- Different people in the same situation often have the same need.
+- Situations are observable and testable; roles are abstract labels.
+
+**Example comparison:**
+
+| User Story | Job Story |
+|-----------|-----------|
+| As a budget manager, I want to see a spending report so I can track expenses. | When I am preparing my weekly budget, I want to see spending so far this period, so I can adjust before overspending. |
+| As an admin, I want to export user data so I can comply with data requests. | When I receive a data subject access request, I want to export all data associated with that person, so I can respond within the 30-day legal deadline. |
+
+The job story version is more specific, more testable, and provides better design guidance.
+
+## Writing Good Job Stories
+
+### Situations (When...)
+
+Good situations are:
+
+- **Specific and observable** -- You could watch someone be in this situation.
+- **Contextual** -- They describe what is happening, not who the person is.
+- **Triggering** -- They explain what creates the need right now.
+
+| Weak Situation | Strong Situation |
+|---------------|-----------------|
+| When I use the app | When I open the app for the first time after signing up |
+| When I need data | When I am in a client meeting and need to reference last quarter&#x27;s results |
+| When I manage my team | When a team member submits a time-off request that overlaps with a project deadline |
+
+### Motivations (I want to...)
+
+Good motivations are:
+
+- **Action-oriented** -- They describe doing something, not having something.
+- **Solution-agnostic** -- They describe the capability, not the implementation.
+- **Singular** -- One motivation per story.
+
+| Weak Motivation | Strong Motivation |
+|----------------|-------------------|
+| I want a dashboard | I want to see my team&#x27;s progress at a glance |
+| I want better notifications | I want to be alerted only when something requires my action |
+| I want to manage users and permissions | I want to grant a new team member access to the project (split into two if needed) |
+
+### Outcomes (So I can...)
+
+Good outcomes are:
+
+- **Benefit-focused** -- They describe the end result, not the means.
+- **Measurable or observable** -- You can tell if the outcome was achieved.
+- **Meaningful** -- They connect to something the user genuinely cares about.
+
+| Weak Outcome | Strong Outcome |
+|-------------|----------------|
+| So I can use the feature | So I can complete my weekly report in under 10 minutes |
+| So I can be productive | So I can identify which tasks are blocked before standup |
+| So I can do my job | So I can respond to the customer within our 4-hour SLA |
+
+## INVEST Quality Criteria
+
+Apply INVEST to every job story before it enters the backlog:
+
+| Criterion | Question | Red Flag |
+|-----------|----------|----------|
+| **Independent** | Can this story be delivered without depending on another story? | &quot;This only works after story X is done&quot; |
+| **Negotiable** | Is the implementation open to discussion, or is it prescribing a solution? | Motivation says &quot;I want a dropdown menu&quot; instead of &quot;I want to select from available options&quot; |
+| **Valuable** | Does the outcome deliver clear value to the user? | Outcome is vague (&quot;so I can use it&quot;) or internal (&quot;so the database is normalized&quot;) |
+| **Estimable** | Can the team estimate the effort? | Situation is too vague to understand scope |
+| **Small** | Can this be completed in one sprint? | Story covers multiple distinct situations or motivations |
+| **Testable** | Can you write acceptance criteria that verify the outcome? | Outcome is subjective (&quot;so I feel confident&quot;) |
+
+## Story Template
+
+For each job story, produce a card with the following structure:
+
+```markdown
+### [Title]
+
+**Job Story:**
+When [situation], I want to [motivation], so I can [outcome].
+
+**Design:** [Link to design file or &quot;TBD&quot;]
+
+**Acceptance Criteria:**
+
+1. [ ] [Observable outcome that verifies the story is complete]
+2. [ ] [Observable outcome]
+3. [ ] [Observable outcome]
+4. [ ] [Observable outcome]
+5. [ ] [Observable outcome]
+6. [ ] [Observable outcome]
+```
+
+### Acceptance Criteria Guidelines
+
+- Write 6-8 acceptance criteria per story.
+- Focus on **outcomes**, not implementation steps.
+- Each criterion should be independently verifiable.
+- Use the pattern: &quot;[Thing] [does/shows/enables] [expected behavior] [under condition].&quot;
+- Include edge cases and error states, not just the happy path.
+
+**Good acceptance criteria examples:**
+
+1. The spending summary shows all transactions from the current period, grouped by category.
+2. Transactions from previous periods are excluded from the current period total.
+3. The summary updates within 5 seconds of a new transaction being recorded.
+4. If no transactions exist for the current period, a message explains that no spending has been recorded yet.
+5. The summary is accessible on mobile screens without horizontal scrolling.
+6. Category totals match the individual transaction amounts (no rounding discrepancies).
+
+**Bad acceptance criteria examples (avoid):**
+
+- The API returns a 200 status code (implementation detail)
+- The React component renders correctly (implementation detail)
+- It works (not testable)
+- The user is happy (not observable)
+
+## Worked Example
+
+**Context:** A budgeting application for personal finance.
+
+### Weekly Budget Check
+
+**Job Story:**
+When I am preparing my weekly budget on Sunday evening, I want to see how much I have spent so far this month by category, so I can decide where to cut back before the month ends.
+
+**Design:** [Link to Figma mock]
+
+**Acceptance Criteria:**
+
+1. [ ] The spending view shows the current month&#x27;s transactions grouped by category (e.g., groceries, dining, transport).
+2. [ ] Each category displays the total spent and the remaining budget for that category.
+3. [ ] Categories that have exceeded their budget are visually distinguished from those within budget.
+4. [ ] Tapping a category shows the individual transactions within it.
+5. [ ] The view loads within 2 seconds on a standard mobile connection.
+6. [ ] If no budget has been set for a category, the category still appears with total spent but no remaining budget indicator.
+7. [ ] The date range is fixed to the current calendar month and is clearly displayed.
+8. [ ] A &quot;last updated&quot; timestamp shows when transaction data was last synced.
+
+## Integration with Other Skills
+
+- Use `summarize-meeting/` to capture the discovery conversations that inform job stories.
+- Use `wwas/` when you need to add strategic business context (the &quot;Why&quot;) to backlog items.
+- Feed completed job stories into `../jira-expert/` for ticket creation.
+- Use `brainstorm-okrs/` to connect job stories back to team objectives.
+
+## References
+
+- See `references/jtbd-guide.md` for Jobs-to-Be-Done theory, comparison with user stories, and story splitting techniques.
+- See `assets/job_story_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Team writes situations that are too vague (&quot;When I use the app...&quot;) | Insufficient user research; situations invented at desk rather than observed | Require each situation to reference a specific interview quote, support ticket, or analytics event; use the &quot;could you video this?&quot; test |
+| Motivations prescribe a specific solution (&quot;I want a dropdown...&quot;) | Team conflates solution with capability; negotiability criterion failing | Rewrite using &quot;I want to [verb] [object]&quot; pattern without naming UI elements; apply the INVEST-N check before acceptance |
+| Outcomes are not measurable (&quot;So I can be productive&quot;) | Outcome too abstract; not grounded in observable behavior | Ask &quot;How would you know the user achieved this?&quot; -- if you cannot describe an observable signal, the outcome needs rewriting |
+| Job stories are too large for a single sprint | Multiple situations or motivations packed into one story | Split by situation (different contexts become separate stories) or by outcome (different success criteria become separate stories) |
+| Team defaults to user story format despite training | Habit and muscle memory; Jira templates still use &quot;As a...&quot; format | Update Jira issue templates to use JTBD format; run a conversion workshop with 5 real user stories rewritten as job stories |
+| Acceptance criteria describe implementation steps instead of outcomes | Engineering team writing criteria from their perspective rather than the user&#x27;s perspective | Apply the &quot;would the user care about this?&quot; filter; replace API/database criteria with observable behavior statements |
+| Job stories lack connection to strategic objectives | JTBD format focuses on user context but does not inherently include business &quot;why&quot; | Pair each job story with a WWAS &quot;Why&quot; statement from `wwas/`; or add an optional &quot;Supports:&quot; field linking to an OKR |
+
+## Success Criteria
+
+- 100% of job stories in the backlog follow the &quot;When / I want to / So I can&quot; format correctly
+- All situations reference observable, specific contexts (pass the &quot;could you video this?&quot; test)
+- All motivations are solution-agnostic (no UI element names or implementation details)
+- Each story has 6-8 acceptance criteria focused on observable outcomes, not implementation
+- Every job story passes all 6 INVEST criteria before entering a sprint
+- Defect rate on stories written in JTBD format is 20%+ lower than stories written in traditional format (measured over 3 months)
+- Team members can articulate the difference between a job story and a user story and choose the appropriate format for the context
+
+## Scope &amp; Limitations
+
+**In Scope:** Writing job stories using JTBD &quot;When/Want/So&quot; format, applying INVEST quality criteria, writing outcome-focused acceptance criteria, converting existing user stories to job stories, facilitating story-writing workshops, integrating job stories with Jira backlog items.
+
+**Out of Scope:** Strategic backlog items with business context (hand off to `wwas/`), product ideation and opportunity discovery (hand off to `discovery/brainstorm-ideas/`), detailed technical specifications, UX research and user interviewing methodology.
+
+**Limitations:** Job stories work best when the team has access to real user research (interviews, observation, support data). Without user context, teams will invent situations that may not reflect reality. The format is less natural for purely technical or infrastructure work where there is no direct user situation. Job stories and user stories are complementary -- some teams use both formats for different types of work.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Complementary | WWAS adds strategic &quot;Why&quot; context; job stories add situational &quot;When&quot; context. Use both when needed |
+| `summarize-meeting/` | Meetings -&gt; Stories | Discovery conversations and refinement sessions produce the situations that inform job stories |
+| `../jira-expert/` | Stories -&gt; Jira | Completed job stories become Jira tickets with structured descriptions |
+| `discovery/brainstorm-ideas/` | Ideas -&gt; Stories | Validated product ideas decompose into job stories for the backlog |
+| `execution/brainstorm-okrs/` | OKRs -&gt; Stories | Team objectives define the outcomes that job stories should connect to |
+| `execution/prioritization-frameworks/` | Stories -&gt; Prioritization | Job stories scored via RICE or other frameworks for sprint planning |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Job Stories&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Job Stories&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Job Stories in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Job Stories&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Job Stories&quot;
+4. Description: &quot;Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/job-stories/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

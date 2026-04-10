@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Tdd Guide (Engineering domain).
 
 Test-driven development workflow with test generation, coverage analysis, and multi-framework support
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/tdd-guide
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Tdd Guide (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Tdd Guide (Engineering domain).
 
 Test-driven development workflow with test generation, coverage analysis, and multi-framework support
 
@@ -439,7 +461,1136 @@ https://github.com/borghei/Claude-Skills/tree/main/tdd-guide
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Tdd Guide&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# TDD Guide
+
+The agent guides red-green-refactor TDD workflows, generates framework-specific test stubs from requirements, parses coverage reports to identify prioritized gaps, and calculates test quality metrics including smell detection and assertion density. Supports Jest, Pytest, JUnit, Vitest, and Mocha.
+
+## Quick Start
+
+```bash
+# Generate test cases from requirements (Python API)
+from test_generator import TestGenerator, TestFramework
+gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+cases = gen.generate_from_requirements(requirements)
+
+# Analyze coverage gaps from LCOV report
+from coverage_analyzer import CoverageAnalyzer
+analyzer = CoverageAnalyzer()
+analyzer.parse_coverage_report(content, &quot;lcov&quot;)
+gaps = analyzer.identify_gaps(threshold=80.0)
+
+# Guide TDD cycle
+from tdd_workflow import TDDWorkflow
+wf = TDDWorkflow()
+wf.start_cycle(&quot;User can reset password via email&quot;)
+```
+
+---
+
+## Core Workflows
+
+### Workflow 1: TDD a New Feature
+
+1. Write a failing test for the feature requirement (RED phase)
+2. Call `validate_red_phase()` -- confirms test exists and fails
+3. Write minimal code to make the test pass (GREEN phase)
+4. Call `validate_green_phase()` -- confirms all tests pass
+5. Refactor while keeping tests green (REFACTOR phase)
+6. Call `validate_refactor_phase()` -- confirms tests still pass after cleanup
+7. **Validation checkpoint:** Each cycle completes in under 10 minutes; zero test smells introduced
+
+### Workflow 2: Analyze Coverage Gaps
+
+1. Generate coverage report: `npm test -- --coverage` or `pytest --cov`
+2. Detect format with `detect_format()` and parse with `parse_coverage_report()`
+3. Run `identify_gaps(threshold=80.0)` to get prioritized file list (P0/P1/P2)
+4. Generate test stubs for P0 files (business-critical, lowest coverage)
+5. **Validation checkpoint:** Line coverage &gt;= 80%; branch coverage &gt;= 70%; zero P0 gaps in critical paths
+
+### Workflow 3: Generate Tests from Requirements
+
+1. Structure requirements as user stories with acceptance criteria
+2. Call `generate_from_requirements()` with target framework
+3. Review generated test cases for completeness (happy path, error, edge cases)
+4. Generate test file with `generate_test_file()`
+5. **Validation checkpoint:** Each acceptance criterion has at least one test; all tests compile
+
+---
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `test_generator.py` | Generate test cases from requirements/specs |
+| `coverage_analyzer.py` | Parse LCOV/JSON/XML reports, find gaps |
+| `tdd_workflow.py` | Guide red-green-refactor cycles |
+| `framework_adapter.py` | Convert tests between frameworks |
+| `fixture_generator.py` | Generate test data and mocks with seeds |
+| `metrics_calculator.py` | Calculate complexity and test quality |
+| `format_detector.py` | Auto-detect language and framework |
+| `output_formatter.py` | Format output for CLI/desktop/CI |
+
+---
+
+## Anti-Patterns
+
+- **Tests that pass immediately** -- a test with no real assertion or `assert True` skips the RED phase; every test must fail before implementation
+- **Testing implementation details** -- coupling tests to internal method names makes refactoring break tests; test behavior and outputs, not internals
+- **Non-deterministic fixtures** -- random data without a seed produces different failures across CI runs; always pass `seed=&lt;int&gt;` to `FixtureGenerator`
+- **Skipping the refactor phase** -- GREEN code that works but is messy accumulates; refactoring is not optional in TDD
+- **Coverage theater** -- writing tests that hit lines without meaningful assertions; use `metrics_calculator.py` to detect low assertion density
+- **Conditional test logic** -- `if/else` inside tests masks failures; each test should have a single clear path
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated tests pass immediately (no RED phase) | Test has no real assertion or asserts a trivially true value | Ensure every test contains an assertion against the actual unit under test; remove placeholder `assert True` stubs before running |
+| Coverage report fails to parse | Report format does not match the expected LCOV, JSON, or XML structure | Run `format_detector.py` first to verify the detected format; convert non-standard reports (e.g., Clover) to Cobertura XML |
+| Framework adapter produces wrong import style | Source and target framework were swapped, or language/framework mismatch | Verify the `framework` and `language` arguments match your project; use `detect_framework()` on existing test code to auto-detect |
+| Fixture generator produces non-deterministic data | No random seed was supplied, so each run yields different values | Pass `seed=&lt;int&gt;` to `FixtureGenerator()` for reproducible fixtures across CI runs |
+| Metrics calculator reports 0 test functions | Test code uses an unsupported naming convention (e.g., `spec_` prefix) | Rename tests to follow `test_*` / `it()` / `@Test` conventions, or extend the regex patterns in `_count_test_functions()` |
+| TDD workflow validates GREEN phase but tests still fail locally | Test result dict passed to `validate_green_phase()` has `status` not set to `&quot;passed&quot;` | Ensure your test runner output is normalized to `{&quot;status&quot;: &quot;passed&quot;}` or `{&quot;status&quot;: &quot;failed&quot;}` before passing it in |
+| Coverage gaps list is empty despite low overall coverage | All individual files meet the threshold even though the aggregate does not | Lower the `threshold` argument in `identify_gaps()` or inspect per-file coverage with `get_file_coverage()` |
+
+---
+
+## Success Criteria
+
+- **Test-first ratio above 80%** -- at least 4 out of every 5 features begin with a failing test before any implementation code is written.
+- **Red-green-refactor cycle under 10 minutes** -- each TDD micro-cycle (write failing test, make it pass, refactor) completes within a single focused interval.
+- **Line coverage at or above 80%** -- measured by `coverage_analyzer.py` against LCOV/JSON/XML reports, with branch coverage at or above 70%.
+- **Test quality score at or above 75/100** -- as reported by `metrics_calculator.py`, combining assertion density, isolation, naming quality, and absence of test smells.
+- **Zero P0 coverage gaps in critical paths** -- business-critical modules (auth, payments, data persistence) have no files flagged P0 by `identify_gaps()`.
+- **Test smell count of zero for high-severity items** -- no `missing_assertions`, `sleepy_test`, or `conditional_test_logic` smells detected at high severity.
+- **Fixture reproducibility across CI** -- all generated fixtures use a fixed seed and produce identical output on every pipeline run.
+
+---
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Unit test generation, scaffolding, and stub creation for Jest, Pytest, JUnit, Vitest, and Mocha
+- Static coverage report parsing (LCOV, JSON/Istanbul, XML/Cobertura) with gap identification and prioritized recommendations
+- Red-green-refactor workflow guidance with phase validation and cycle tracking
+- Test quality assessment including complexity analysis, isolation scoring, naming quality, and test smell detection
+
+**This skill does NOT cover:**
+- Integration, end-to-end, or performance test generation -- see `senior-qa` for E2E patterns and `senior-devops` for load testing
+- Runtime test execution or live coverage measurement -- scripts perform static analysis only; you must run your test suite externally
+- Visual/snapshot testing or browser-based test workflows -- use Playwright, Cypress, or Storybook for UI-level testing
+- Security-focused test generation (fuzz testing, penetration testing) -- see `senior-security` and `senior-secops` skills
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-qa` | Generated test stubs feed into QA review workflows; QA coverage standards inform threshold settings | `test_generator.py` output → QA review → approved test suite |
+| `code-reviewer` | Metrics calculator output provides quantitative data for code review checklists | `metrics_calculator.py` quality report → code review scoring |
+| `senior-fullstack` | Scaffolded projects include test infrastructure; TDD guide generates tests for scaffolded modules | `project_scaffolder.py` output → `test_generator.py` input |
+| `senior-devops` | Coverage reports from CI pipelines are parsed by coverage analyzer; recommendations feed back into pipeline gates | CI coverage artifact → `coverage_analyzer.py` → pass/fail gate |
+| `senior-security` | Edge-case fixtures for auth and API scenarios complement security-focused test plans | `fixture_generator.py` auth/API edge cases → security test plan |
+| `tech-stack-evaluator` | Framework detection informs stack evaluation; test quality metrics feed into technology assessment | `format_detector.py` analysis → stack evaluation input |
+
+---
+
+## Tool Reference
+
+### 1. `test_generator.py`
+
+**Purpose:** Generate test cases from requirements, user stories, and API specs, then produce framework-specific test stubs and complete test files.
+
+**Module:** `TestGenerator` class
+
+**Usage:**
+```python
+from test_generator import TestGenerator, TestFramework, TestType
+
+gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+cases = gen.generate_from_requirements(requirements, test_type=TestType.UNIT)
+stub = gen.generate_test_stub(cases[0])
+file_content = gen.generate_test_file(&quot;my_module&quot;, cases)
+suggestions = gen.suggest_missing_scenarios(existing_tests, code_analysis)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `framework` | `TestFramework` | Yes | Target framework: `JEST`, `VITEST`, `PYTEST`, `JUNIT`, `MOCHA` |
+| `language` | `str` | Yes | Programming language: `typescript`, `javascript`, `python`, `java` |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_from_requirements(requirements, test_type)` | `requirements`: dict with `user_stories`, `acceptance_criteria`, `api_specs`; `test_type`: `TestType` enum (default `UNIT`) | `List[Dict]` of test case specs |
+| `generate_test_stub(test_case)` | `test_case`: single test case dict | `str` -- framework-specific test stub code |
+| `generate_test_file(module_name, test_cases)` | `module_name`: str; `test_cases`: optional list (uses stored cases if omitted) | `str` -- complete test file with imports |
+| `suggest_missing_scenarios(existing_tests, code_analysis)` | `existing_tests`: list of test name strings; `code_analysis`: dict with `error_handlers`, `conditional_branches`, `input_validation` | `List[Dict]` of suggested test scenarios |
+
+**Output Formats:** Python dict/list (test case specifications), string (generated code).
+
+**Example:**
+```python
+requirements = {
+    &quot;user_stories&quot;: [{&quot;action&quot;: &quot;login&quot;, &quot;given&quot;: [&quot;valid credentials&quot;], &quot;when&quot;: &quot;submit form&quot;, &quot;then&quot;: &quot;redirect to dashboard&quot;}],
+    &quot;api_specs&quot;: [{&quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/auth/login&quot;, &quot;requires_auth&quot;: False, &quot;required_params&quot;: [&quot;email&quot;, &quot;password&quot;]}]
+}
+gen = TestGenerator(framework=TestFramework.JEST, language=&quot;typescript&quot;)
+cases = gen.generate_from_requirements(requirements)
+print(gen.generate_test_file(&quot;auth_service&quot;, cases))
+```
+
+---
+
+### 2. `coverage_analyzer.py`
+
+**Purpose:** Parse coverage reports in LCOV, JSON (Istanbul/nyc), and XML (Cobertura) formats. Calculate summary metrics, identify files below threshold, and generate prioritized recommendations.
+
+**Module:** `CoverageAnalyzer` class
+
+**Usage:**
+```python
+from coverage_analyzer import CoverageAnalyzer
+
+analyzer = CoverageAnalyzer()
+data = analyzer.parse_coverage_report(report_content, format_type=&quot;lcov&quot;)
+summary = analyzer.calculate_summary()
+gaps = analyzer.identify_gaps(threshold=80.0)
+recs = analyzer.generate_recommendations()
+file_detail = analyzer.get_file_coverage(&quot;src/auth.ts&quot;)
+detected = analyzer.detect_format(raw_content)
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `parse_coverage_report(report_content, format_type)` | `report_content`: str; `format_type`: `&quot;lcov&quot;`, `&quot;json&quot;`, `&quot;xml&quot;`, `&quot;cobertura&quot;` | `Dict` of per-file coverage data |
+| `calculate_summary()` | None | `Dict` with `line_coverage`, `branch_coverage`, `function_coverage`, totals |
+| `identify_gaps(threshold)` | `threshold`: float (default `80.0`) | `List[Dict]` of files below threshold with priority P0/P1/P2 |
+| `generate_recommendations()` | None | `List[Dict]` of prioritized recommendations |
+| `get_file_coverage(file_path)` | `file_path`: str | `Dict` with per-file line/branch/function coverage |
+| `detect_format(content)` | `content`: str | `str` -- `&quot;lcov&quot;`, `&quot;json&quot;`, or `&quot;xml&quot;` |
+
+**Output Formats:** Python dict/list. Use `output_formatter.py` for terminal/markdown/JSON rendering.
+
+**Example:**
+```python
+with open(&quot;coverage/lcov.info&quot;) as f:
+    content = f.read()
+analyzer = CoverageAnalyzer()
+fmt = analyzer.detect_format(content)
+analyzer.parse_coverage_report(content, fmt)
+summary = analyzer.calculate_summary()
+# {&#x27;line_coverage&#x27;: 76.5, &#x27;branch_coverage&#x27;: 62.3, ...}
+gaps = analyzer.identify_gaps(threshold=80.0)
+# [{&#x27;file&#x27;: &#x27;src/auth.ts&#x27;, &#x27;line_coverage&#x27;: 45.0, &#x27;priority&#x27;: &#x27;P0&#x27;, ...}]
+```
+
+---
+
+### 3. `tdd_workflow.py`
+
+**Purpose:** Guide users through red-green-refactor TDD cycles with phase validation, workflow state tracking, and refactoring suggestions.
+
+**Module:** `TDDWorkflow` class
+
+**Usage:**
+```python
+from tdd_workflow import TDDWorkflow
+
+wf = TDDWorkflow()
+guidance = wf.start_cycle(&quot;User can reset password via email&quot;)
+red_result = wf.validate_red_phase(test_code, test_result={&quot;status&quot;: &quot;failed&quot;})
+green_result = wf.validate_green_phase(impl_code, {&quot;status&quot;: &quot;passed&quot;})
+refactor_result = wf.validate_refactor_phase(original, refactored, {&quot;status&quot;: &quot;passed&quot;})
+phase_guide = wf.get_phase_guidance()
+summary = wf.generate_workflow_summary()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `start_cycle(requirement)` | `requirement`: str -- user story or feature description | `Dict` with phase, instruction, checklist, tips |
+| `validate_red_phase(test_code, test_result)` | `test_code`: str; `test_result`: optional dict with `status` key | `Dict` with `phase_complete`, validations, next instruction |
+| `validate_green_phase(implementation_code, test_result)` | `implementation_code`: str; `test_result`: dict with `status` key | `Dict` with `phase_complete`, validations, `refactoring_suggestions` |
+| `validate_refactor_phase(original_code, refactored_code, test_result)` | `original_code`: str; `refactored_code`: str; `test_result`: dict with `status` key | `Dict` with `phase_complete`, `cycle_complete`, next steps |
+| `get_phase_guidance(phase)` | `phase`: optional `TDDPhase` enum (uses current phase if omitted) | `Dict` with goal, steps, common mistakes, tips |
+| `generate_workflow_summary()` | None | `str` -- markdown summary of current state and completed cycles |
+
+**Output Formats:** Python dict (validation results), string (summary).
+
+**Example:**
+```python
+wf = TDDWorkflow()
+wf.start_cycle(&quot;Add email validation to signup form&quot;)
+result = wf.validate_red_phase(&quot;def test_invalid_email():\n    assert validate(&#x27;bad&#x27;) == False&quot;, {&quot;status&quot;: &quot;failed&quot;})
+# {&#x27;phase_complete&#x27;: True, &#x27;next_phase&#x27;: &#x27;GREEN&#x27;, ...}
+```
+
+---
+
+### 4. `framework_adapter.py`
+
+**Purpose:** Provide multi-framework support with adapters for Jest, Vitest, Pytest, unittest, JUnit, TestNG, Mocha, and Jasmine. Generate framework-specific imports, test suites, test functions, assertions, and setup/teardown hooks.
+
+**Module:** `FrameworkAdapter` class
+
+**Usage:**
+```python
+from framework_adapter import FrameworkAdapter, Framework, Language
+
+adapter = FrameworkAdapter(framework=Framework.JEST, language=Language.TYPESCRIPT)
+imports = adapter.generate_imports()
+suite = adapter.generate_test_suite_wrapper(&quot;AuthService&quot;, test_content)
+test_fn = adapter.generate_test_function(&quot;should reject invalid email&quot;, body, &quot;Validates email format&quot;)
+assertion = adapter.generate_assertion(&quot;result&quot;, &quot;true&quot;, &quot;true&quot;)
+hooks = adapter.generate_setup_teardown(setup_code=&quot;db = create_test_db()&quot;, teardown_code=&quot;db.close()&quot;)
+detected = adapter.detect_framework(existing_code)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `framework` | `Framework` | Yes | `JEST`, `VITEST`, `PYTEST`, `UNITTEST`, `JUNIT`, `TESTNG`, `MOCHA`, `JASMINE` |
+| `language` | `Language` | Yes | `TYPESCRIPT`, `JAVASCRIPT`, `PYTHON`, `JAVA` |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_imports()` | None | `str` -- framework-specific import statements |
+| `generate_test_suite_wrapper(suite_name, test_content)` | `suite_name`: str; `test_content`: str | `str` -- complete test suite wrapping content |
+| `generate_test_function(test_name, test_body, description)` | `test_name`: str; `test_body`: str; `description`: str (default `&quot;&quot;`) | `str` -- complete test function |
+| `generate_assertion(actual, expected, assertion_type)` | `actual`: str; `expected`: str; `assertion_type`: `&quot;equals&quot;`, `&quot;not_equals&quot;`, `&quot;true&quot;`, `&quot;false&quot;`, `&quot;throws&quot;` (default `&quot;equals&quot;`) | `str` -- assertion statement |
+| `generate_setup_teardown(setup_code, teardown_code)` | `setup_code`: str (default `&quot;&quot;`); `teardown_code`: str (default `&quot;&quot;`) | `str` -- setup/teardown hooks |
+| `detect_framework(code)` | `code`: str | `Framework` enum or `None` |
+
+**Output Formats:** String (generated code).
+
+**Example:**
+```python
+adapter = FrameworkAdapter(Framework.PYTEST, Language.PYTHON)
+print(adapter.generate_imports())
+# import pytest
+print(adapter.generate_assertion(&quot;calculate_total(items)&quot;, &quot;150.0&quot;, &quot;equals&quot;))
+# assert calculate_total(items) == 150.0
+```
+
+---
+
+### 5. `fixture_generator.py`
+
+**Purpose:** Generate realistic test data, boundary values, edge-case scenarios, and mock objects for various domains (auth, payment, form, API, file upload).
+
+**Module:** `FixtureGenerator` class
+
+**Usage:**
+```python
+from fixture_generator import FixtureGenerator
+
+gen = FixtureGenerator(seed=42)
+boundaries = gen.generate_boundary_values(&quot;int&quot;, {&quot;min&quot;: 0, &quot;max&quot;: 255})
+edge_cases = gen.generate_edge_cases(&quot;auth&quot;)
+mocks = gen.generate_mock_data(schema, count=5)
+fixture_content = gen.generate_fixture_file(&quot;users&quot;, mocks, format=&quot;json&quot;)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `seed` | `int` or `None` | No | Random seed for reproducible output (default `None`) |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_boundary_values(data_type, constraints)` | `data_type`: `&quot;int&quot;`, `&quot;string&quot;`, `&quot;array&quot;`, `&quot;date&quot;`, `&quot;email&quot;`, `&quot;url&quot;`; `constraints`: optional dict (`min`, `max`, `min_length`, `max_length`, `min_size`, `max_size`) | `List` of boundary values |
+| `generate_edge_cases(scenario, context)` | `scenario`: `&quot;auth&quot;`, `&quot;payment&quot;`, `&quot;form&quot;`, `&quot;api&quot;`, `&quot;file_upload&quot;`; `context`: optional dict (required for `&quot;form&quot;` with `fields` key) | `List[Dict]` of edge case scenarios |
+| `generate_mock_data(schema, count)` | `schema`: dict mapping field names to `{&quot;type&quot;: ...}` defs; `count`: int (default `1`) | `List[Dict]` of mock objects |
+| `generate_fixture_file(fixture_name, data, format)` | `fixture_name`: str; `data`: any; `format`: `&quot;json&quot;`, `&quot;python&quot;`, `&quot;yaml&quot;` (default `&quot;json&quot;`) | `str` -- fixture file content |
+
+**Supported Schema Field Types:** `string`, `int`, `float`, `bool`, `email`, `date`, `array`.
+
+**Output Formats:** Python list/dict (data), string (file content in JSON/Python/YAML).
+
+**Example:**
+```python
+gen = FixtureGenerator(seed=123)
+schema = {
+    &quot;id&quot;: {&quot;type&quot;: &quot;int&quot;, &quot;min&quot;: 1, &quot;max&quot;: 9999},
+    &quot;email&quot;: {&quot;type&quot;: &quot;email&quot;},
+    &quot;active&quot;: {&quot;type&quot;: &quot;bool&quot;}
+}
+users = gen.generate_mock_data(schema, count=3)
+print(gen.generate_fixture_file(&quot;test_users&quot;, users, format=&quot;json&quot;))
+```
+
+---
+
+### 6. `metrics_calculator.py`
+
+**Purpose:** Calculate comprehensive test and code quality metrics including cyclomatic/cognitive complexity, testability scoring, test quality assessment (assertions, isolation, naming, smells), and execution analysis.
+
+**Module:** `MetricsCalculator` class
+
+**Usage:**
+```python
+from metrics_calculator import MetricsCalculator
+
+calc = MetricsCalculator()
+all_metrics = calc.calculate_all_metrics(source_code, test_code, coverage_data, execution_data)
+complexity = calc.calculate_complexity(source_code)
+test_quality = calc.calculate_test_quality(test_code)
+execution = calc.analyze_execution_metrics(execution_data)
+summary = calc.generate_metrics_summary()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `calculate_all_metrics(source_code, test_code, coverage_data, execution_data)` | `source_code`: str; `test_code`: str; `coverage_data`: optional dict; `execution_data`: optional dict | `Dict` with `complexity`, `test_quality`, `coverage`, `execution` |
+| `calculate_complexity(code)` | `code`: str | `Dict` with `cyclomatic_complexity`, `cognitive_complexity`, `testability_score`, `assessment` |
+| `calculate_test_quality(test_code)` | `test_code`: str | `Dict` with `total_tests`, `total_assertions`, `avg_assertions_per_test`, `isolation_score`, `naming_quality`, `test_smells`, `quality_score` |
+| `analyze_execution_metrics(execution_data)` | `execution_data`: dict with `tests` list (each having `duration`, `status`, optional `failure_rate`) | `Dict` with `total_tests`, timing stats, `slow_tests`, `flaky_tests`, `pass_rate` |
+| `generate_metrics_summary()` | None | `str` -- human-readable markdown summary |
+
+**Output Formats:** Python dict (metrics data), string (markdown summary).
+
+**Example:**
+```python
+calc = MetricsCalculator()
+complexity = calc.calculate_complexity(open(&quot;src/auth.py&quot;).read())
+# {&#x27;cyclomatic_complexity&#x27;: 8, &#x27;cognitive_complexity&#x27;: 12, &#x27;testability_score&#x27;: 82.0, &#x27;assessment&#x27;: &#x27;Medium complexity - moderately testable&#x27;}
+quality = calc.calculate_test_quality(open(&quot;tests/test_auth.py&quot;).read())
+# {&#x27;quality_score&#x27;: 78.5, &#x27;test_smells&#x27;: [], ...}
+```
+
+---
+
+### 7. `format_detector.py`
+
+**Purpose:** Automatically detect programming language, testing framework, coverage report format, and project structure from code content or file paths.
+
+**Module:** `FormatDetector` class
+
+**Usage:**
+```python
+from format_detector import FormatDetector
+
+detector = FormatDetector()
+language = detector.detect_language(code)
+framework = detector.detect_test_framework(test_code)
+cov_format = detector.detect_coverage_format(report_content)
+input_info = detector.detect_input_format(raw_input)
+file_info = detector.extract_file_info(&quot;/src/auth.service.ts&quot;)
+test_name = detector.suggest_test_file_name(&quot;auth.service.ts&quot;, &quot;jest&quot;)
+patterns = detector.identify_test_patterns(test_code)
+project = detector.analyze_project_structure(file_path_list)
+env = detector.detect_environment()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `detect_language(code)` | `code`: str | `str` -- `&quot;typescript&quot;`, `&quot;javascript&quot;`, `&quot;python&quot;`, `&quot;java&quot;`, `&quot;unknown&quot;` |
+| `detect_test_framework(code)` | `code`: str | `str` -- `&quot;jest&quot;`, `&quot;vitest&quot;`, `&quot;pytest&quot;`, `&quot;unittest&quot;`, `&quot;junit&quot;`, `&quot;mocha&quot;`, `&quot;unknown&quot;` |
+| `detect_coverage_format(content)` | `content`: str | `str` -- `&quot;lcov&quot;`, `&quot;json&quot;`, `&quot;xml&quot;`, `&quot;unknown&quot;` |
+| `detect_input_format(input_data)` | `input_data`: str | `Dict` with `format`, `language`, `framework`, `content_type` |
+| `extract_file_info(file_path)` | `file_path`: str | `Dict` with `file_name`, `extension`, `language`, `is_test`, `purpose` |
+| `suggest_test_file_name(source_file, framework)` | `source_file`: str; `framework`: str | `str` -- suggested test file name |
+| `identify_test_patterns(code)` | `code`: str | `List[str]` of detected patterns (AAA, Given-When-Then, etc.) |
+| `analyze_project_structure(file_paths)` | `file_paths`: list of str | `Dict` with `primary_language`, `test_ratio`, `suggested_framework` |
+| `detect_environment()` | None | `Dict` with `environment`, `output_preference` |
+
+**Output Formats:** String (detection result), Python dict (detailed analysis).
+
+**Example:**
+```python
+detector = FormatDetector()
+print(detector.detect_language(&quot;const add = (a: number, b: number): number =&gt; a + b;&quot;))
+# &quot;typescript&quot;
+print(detector.suggest_test_file_name(&quot;UserService.java&quot;, &quot;junit&quot;))
+# &quot;UserserviceTest.java&quot;
+print(detector.identify_test_patterns(&quot;// Arrange\nsetup()\n// Act\nresult = run()\n// Assert\nassert result&quot;))
+# [&#x27;AAA (Arrange-Act-Assert)&#x27;]
+```
+
+---
+
+### 8. `output_formatter.py`
+
+**Purpose:** Context-aware output formatting for different environments (Desktop/markdown, CLI/terminal, API/JSON). Supports progressive disclosure, token-efficient summary reports, and output truncation.
+
+**Module:** `OutputFormatter` class
+
+**Usage:**
+```python
+from output_formatter import OutputFormatter
+
+fmt = OutputFormatter(environment=&quot;cli&quot;, verbose=False)
+cov_output = fmt.format_coverage_summary(summary, detailed=True)
+rec_output = fmt.format_recommendations(recommendations, max_items=5)
+test_output = fmt.format_test_results(results, show_details=True)
+report = fmt.create_summary_report(coverage, metrics, recommendations)
+should_detail = fmt.should_show_detailed(data_size=50)
+truncated = fmt.truncate_output(long_text, max_lines=30)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `environment` | `str` | No | Target environment: `&quot;desktop&quot;`, `&quot;cli&quot;`, `&quot;api&quot;` (default `&quot;cli&quot;`) |
+| `verbose` | `bool` | No | Include detailed output (default `False`) |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `format_coverage_summary(summary, detailed)` | `summary`: dict; `detailed`: bool (default `False`) | `str` -- formatted coverage (markdown/terminal/JSON based on environment) |
+| `format_recommendations(recommendations, max_items)` | `recommendations`: list of dicts; `max_items`: optional int | `str` -- formatted recommendations grouped by priority |
+| `format_test_results(results, show_details)` | `results`: dict with `total_tests`, `passed`, `failed`, `skipped`, `failed_tests`; `show_details`: bool (default `False`) | `str` -- formatted test results |
+| `create_summary_report(coverage, metrics, recommendations)` | `coverage`: dict; `metrics`: dict; `recommendations`: list | `str` -- token-efficient summary (&lt;200 tokens) |
+| `should_show_detailed(data_size)` | `data_size`: int | `bool` -- whether to show detailed output |
+| `truncate_output(text, max_lines)` | `text`: str; `max_lines`: int (default `50`) | `str` -- truncated text with remaining-lines indicator |
+
+**Output Formats:** String in markdown (desktop), plain text (CLI), or JSON (API) depending on `environment` setting.
+
+**Example:**
+```python
+fmt = OutputFormatter(environment=&quot;desktop&quot;, verbose=True)
+print(fmt.format_coverage_summary({&quot;line_coverage&quot;: 82.5, &quot;branch_coverage&quot;: 71.0, &quot;function_coverage&quot;: 90.0}))
+# ## Test Coverage Summary
+# ### Overall Metrics
+# - **Line Coverage**: 82.5%
+# ...
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tdd Guide&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tdd Guide&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tdd Guide in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tdd Guide&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tdd Guide&quot;
+4. Description: &quot;Test-driven development workflow with test generation, coverage analysis, and multi-framework support&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/tdd-guide/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Tdd Guide&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# TDD Guide
+
+The agent guides red-green-refactor TDD workflows, generates framework-specific test stubs from requirements, parses coverage reports to identify prioritized gaps, and calculates test quality metrics including smell detection and assertion density. Supports Jest, Pytest, JUnit, Vitest, and Mocha.
+
+## Quick Start
+
+```bash
+# Generate test cases from requirements (Python API)
+from test_generator import TestGenerator, TestFramework
+gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+cases = gen.generate_from_requirements(requirements)
+
+# Analyze coverage gaps from LCOV report
+from coverage_analyzer import CoverageAnalyzer
+analyzer = CoverageAnalyzer()
+analyzer.parse_coverage_report(content, &quot;lcov&quot;)
+gaps = analyzer.identify_gaps(threshold=80.0)
+
+# Guide TDD cycle
+from tdd_workflow import TDDWorkflow
+wf = TDDWorkflow()
+wf.start_cycle(&quot;User can reset password via email&quot;)
+```
+
+---
+
+## Core Workflows
+
+### Workflow 1: TDD a New Feature
+
+1. Write a failing test for the feature requirement (RED phase)
+2. Call `validate_red_phase()` -- confirms test exists and fails
+3. Write minimal code to make the test pass (GREEN phase)
+4. Call `validate_green_phase()` -- confirms all tests pass
+5. Refactor while keeping tests green (REFACTOR phase)
+6. Call `validate_refactor_phase()` -- confirms tests still pass after cleanup
+7. **Validation checkpoint:** Each cycle completes in under 10 minutes; zero test smells introduced
+
+### Workflow 2: Analyze Coverage Gaps
+
+1. Generate coverage report: `npm test -- --coverage` or `pytest --cov`
+2. Detect format with `detect_format()` and parse with `parse_coverage_report()`
+3. Run `identify_gaps(threshold=80.0)` to get prioritized file list (P0/P1/P2)
+4. Generate test stubs for P0 files (business-critical, lowest coverage)
+5. **Validation checkpoint:** Line coverage &gt;= 80%; branch coverage &gt;= 70%; zero P0 gaps in critical paths
+
+### Workflow 3: Generate Tests from Requirements
+
+1. Structure requirements as user stories with acceptance criteria
+2. Call `generate_from_requirements()` with target framework
+3. Review generated test cases for completeness (happy path, error, edge cases)
+4. Generate test file with `generate_test_file()`
+5. **Validation checkpoint:** Each acceptance criterion has at least one test; all tests compile
+
+---
+
+## Tools
+
+| Tool | Purpose |
+|------|---------|
+| `test_generator.py` | Generate test cases from requirements/specs |
+| `coverage_analyzer.py` | Parse LCOV/JSON/XML reports, find gaps |
+| `tdd_workflow.py` | Guide red-green-refactor cycles |
+| `framework_adapter.py` | Convert tests between frameworks |
+| `fixture_generator.py` | Generate test data and mocks with seeds |
+| `metrics_calculator.py` | Calculate complexity and test quality |
+| `format_detector.py` | Auto-detect language and framework |
+| `output_formatter.py` | Format output for CLI/desktop/CI |
+
+---
+
+## Anti-Patterns
+
+- **Tests that pass immediately** -- a test with no real assertion or `assert True` skips the RED phase; every test must fail before implementation
+- **Testing implementation details** -- coupling tests to internal method names makes refactoring break tests; test behavior and outputs, not internals
+- **Non-deterministic fixtures** -- random data without a seed produces different failures across CI runs; always pass `seed=&lt;int&gt;` to `FixtureGenerator`
+- **Skipping the refactor phase** -- GREEN code that works but is messy accumulates; refactoring is not optional in TDD
+- **Coverage theater** -- writing tests that hit lines without meaningful assertions; use `metrics_calculator.py` to detect low assertion density
+- **Conditional test logic** -- `if/else` inside tests masks failures; each test should have a single clear path
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated tests pass immediately (no RED phase) | Test has no real assertion or asserts a trivially true value | Ensure every test contains an assertion against the actual unit under test; remove placeholder `assert True` stubs before running |
+| Coverage report fails to parse | Report format does not match the expected LCOV, JSON, or XML structure | Run `format_detector.py` first to verify the detected format; convert non-standard reports (e.g., Clover) to Cobertura XML |
+| Framework adapter produces wrong import style | Source and target framework were swapped, or language/framework mismatch | Verify the `framework` and `language` arguments match your project; use `detect_framework()` on existing test code to auto-detect |
+| Fixture generator produces non-deterministic data | No random seed was supplied, so each run yields different values | Pass `seed=&lt;int&gt;` to `FixtureGenerator()` for reproducible fixtures across CI runs |
+| Metrics calculator reports 0 test functions | Test code uses an unsupported naming convention (e.g., `spec_` prefix) | Rename tests to follow `test_*` / `it()` / `@Test` conventions, or extend the regex patterns in `_count_test_functions()` |
+| TDD workflow validates GREEN phase but tests still fail locally | Test result dict passed to `validate_green_phase()` has `status` not set to `&quot;passed&quot;` | Ensure your test runner output is normalized to `{&quot;status&quot;: &quot;passed&quot;}` or `{&quot;status&quot;: &quot;failed&quot;}` before passing it in |
+| Coverage gaps list is empty despite low overall coverage | All individual files meet the threshold even though the aggregate does not | Lower the `threshold` argument in `identify_gaps()` or inspect per-file coverage with `get_file_coverage()` |
+
+---
+
+## Success Criteria
+
+- **Test-first ratio above 80%** -- at least 4 out of every 5 features begin with a failing test before any implementation code is written.
+- **Red-green-refactor cycle under 10 minutes** -- each TDD micro-cycle (write failing test, make it pass, refactor) completes within a single focused interval.
+- **Line coverage at or above 80%** -- measured by `coverage_analyzer.py` against LCOV/JSON/XML reports, with branch coverage at or above 70%.
+- **Test quality score at or above 75/100** -- as reported by `metrics_calculator.py`, combining assertion density, isolation, naming quality, and absence of test smells.
+- **Zero P0 coverage gaps in critical paths** -- business-critical modules (auth, payments, data persistence) have no files flagged P0 by `identify_gaps()`.
+- **Test smell count of zero for high-severity items** -- no `missing_assertions`, `sleepy_test`, or `conditional_test_logic` smells detected at high severity.
+- **Fixture reproducibility across CI** -- all generated fixtures use a fixed seed and produce identical output on every pipeline run.
+
+---
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Unit test generation, scaffolding, and stub creation for Jest, Pytest, JUnit, Vitest, and Mocha
+- Static coverage report parsing (LCOV, JSON/Istanbul, XML/Cobertura) with gap identification and prioritized recommendations
+- Red-green-refactor workflow guidance with phase validation and cycle tracking
+- Test quality assessment including complexity analysis, isolation scoring, naming quality, and test smell detection
+
+**This skill does NOT cover:**
+- Integration, end-to-end, or performance test generation -- see `senior-qa` for E2E patterns and `senior-devops` for load testing
+- Runtime test execution or live coverage measurement -- scripts perform static analysis only; you must run your test suite externally
+- Visual/snapshot testing or browser-based test workflows -- use Playwright, Cypress, or Storybook for UI-level testing
+- Security-focused test generation (fuzz testing, penetration testing) -- see `senior-security` and `senior-secops` skills
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-qa` | Generated test stubs feed into QA review workflows; QA coverage standards inform threshold settings | `test_generator.py` output → QA review → approved test suite |
+| `code-reviewer` | Metrics calculator output provides quantitative data for code review checklists | `metrics_calculator.py` quality report → code review scoring |
+| `senior-fullstack` | Scaffolded projects include test infrastructure; TDD guide generates tests for scaffolded modules | `project_scaffolder.py` output → `test_generator.py` input |
+| `senior-devops` | Coverage reports from CI pipelines are parsed by coverage analyzer; recommendations feed back into pipeline gates | CI coverage artifact → `coverage_analyzer.py` → pass/fail gate |
+| `senior-security` | Edge-case fixtures for auth and API scenarios complement security-focused test plans | `fixture_generator.py` auth/API edge cases → security test plan |
+| `tech-stack-evaluator` | Framework detection informs stack evaluation; test quality metrics feed into technology assessment | `format_detector.py` analysis → stack evaluation input |
+
+---
+
+## Tool Reference
+
+### 1. `test_generator.py`
+
+**Purpose:** Generate test cases from requirements, user stories, and API specs, then produce framework-specific test stubs and complete test files.
+
+**Module:** `TestGenerator` class
+
+**Usage:**
+```python
+from test_generator import TestGenerator, TestFramework, TestType
+
+gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+cases = gen.generate_from_requirements(requirements, test_type=TestType.UNIT)
+stub = gen.generate_test_stub(cases[0])
+file_content = gen.generate_test_file(&quot;my_module&quot;, cases)
+suggestions = gen.suggest_missing_scenarios(existing_tests, code_analysis)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `framework` | `TestFramework` | Yes | Target framework: `JEST`, `VITEST`, `PYTEST`, `JUNIT`, `MOCHA` |
+| `language` | `str` | Yes | Programming language: `typescript`, `javascript`, `python`, `java` |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_from_requirements(requirements, test_type)` | `requirements`: dict with `user_stories`, `acceptance_criteria`, `api_specs`; `test_type`: `TestType` enum (default `UNIT`) | `List[Dict]` of test case specs |
+| `generate_test_stub(test_case)` | `test_case`: single test case dict | `str` -- framework-specific test stub code |
+| `generate_test_file(module_name, test_cases)` | `module_name`: str; `test_cases`: optional list (uses stored cases if omitted) | `str` -- complete test file with imports |
+| `suggest_missing_scenarios(existing_tests, code_analysis)` | `existing_tests`: list of test name strings; `code_analysis`: dict with `error_handlers`, `conditional_branches`, `input_validation` | `List[Dict]` of suggested test scenarios |
+
+**Output Formats:** Python dict/list (test case specifications), string (generated code).
+
+**Example:**
+```python
+requirements = {
+    &quot;user_stories&quot;: [{&quot;action&quot;: &quot;login&quot;, &quot;given&quot;: [&quot;valid credentials&quot;], &quot;when&quot;: &quot;submit form&quot;, &quot;then&quot;: &quot;redirect to dashboard&quot;}],
+    &quot;api_specs&quot;: [{&quot;method&quot;: &quot;POST&quot;, &quot;path&quot;: &quot;/auth/login&quot;, &quot;requires_auth&quot;: False, &quot;required_params&quot;: [&quot;email&quot;, &quot;password&quot;]}]
+}
+gen = TestGenerator(framework=TestFramework.JEST, language=&quot;typescript&quot;)
+cases = gen.generate_from_requirements(requirements)
+print(gen.generate_test_file(&quot;auth_service&quot;, cases))
+```
+
+---
+
+### 2. `coverage_analyzer.py`
+
+**Purpose:** Parse coverage reports in LCOV, JSON (Istanbul/nyc), and XML (Cobertura) formats. Calculate summary metrics, identify files below threshold, and generate prioritized recommendations.
+
+**Module:** `CoverageAnalyzer` class
+
+**Usage:**
+```python
+from coverage_analyzer import CoverageAnalyzer
+
+analyzer = CoverageAnalyzer()
+data = analyzer.parse_coverage_report(report_content, format_type=&quot;lcov&quot;)
+summary = analyzer.calculate_summary()
+gaps = analyzer.identify_gaps(threshold=80.0)
+recs = analyzer.generate_recommendations()
+file_detail = analyzer.get_file_coverage(&quot;src/auth.ts&quot;)
+detected = analyzer.detect_format(raw_content)
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `parse_coverage_report(report_content, format_type)` | `report_content`: str; `format_type`: `&quot;lcov&quot;`, `&quot;json&quot;`, `&quot;xml&quot;`, `&quot;cobertura&quot;` | `Dict` of per-file coverage data |
+| `calculate_summary()` | None | `Dict` with `line_coverage`, `branch_coverage`, `function_coverage`, totals |
+| `identify_gaps(threshold)` | `threshold`: float (default `80.0`) | `List[Dict]` of files below threshold with priority P0/P1/P2 |
+| `generate_recommendations()` | None | `List[Dict]` of prioritized recommendations |
+| `get_file_coverage(file_path)` | `file_path`: str | `Dict` with per-file line/branch/function coverage |
+| `detect_format(content)` | `content`: str | `str` -- `&quot;lcov&quot;`, `&quot;json&quot;`, or `&quot;xml&quot;` |
+
+**Output Formats:** Python dict/list. Use `output_formatter.py` for terminal/markdown/JSON rendering.
+
+**Example:**
+```python
+with open(&quot;coverage/lcov.info&quot;) as f:
+    content = f.read()
+analyzer = CoverageAnalyzer()
+fmt = analyzer.detect_format(content)
+analyzer.parse_coverage_report(content, fmt)
+summary = analyzer.calculate_summary()
+# {&#x27;line_coverage&#x27;: 76.5, &#x27;branch_coverage&#x27;: 62.3, ...}
+gaps = analyzer.identify_gaps(threshold=80.0)
+# [{&#x27;file&#x27;: &#x27;src/auth.ts&#x27;, &#x27;line_coverage&#x27;: 45.0, &#x27;priority&#x27;: &#x27;P0&#x27;, ...}]
+```
+
+---
+
+### 3. `tdd_workflow.py`
+
+**Purpose:** Guide users through red-green-refactor TDD cycles with phase validation, workflow state tracking, and refactoring suggestions.
+
+**Module:** `TDDWorkflow` class
+
+**Usage:**
+```python
+from tdd_workflow import TDDWorkflow
+
+wf = TDDWorkflow()
+guidance = wf.start_cycle(&quot;User can reset password via email&quot;)
+red_result = wf.validate_red_phase(test_code, test_result={&quot;status&quot;: &quot;failed&quot;})
+green_result = wf.validate_green_phase(impl_code, {&quot;status&quot;: &quot;passed&quot;})
+refactor_result = wf.validate_refactor_phase(original, refactored, {&quot;status&quot;: &quot;passed&quot;})
+phase_guide = wf.get_phase_guidance()
+summary = wf.generate_workflow_summary()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `start_cycle(requirement)` | `requirement`: str -- user story or feature description | `Dict` with phase, instruction, checklist, tips |
+| `validate_red_phase(test_code, test_result)` | `test_code`: str; `test_result`: optional dict with `status` key | `Dict` with `phase_complete`, validations, next instruction |
+| `validate_green_phase(implementation_code, test_result)` | `implementation_code`: str; `test_result`: dict with `status` key | `Dict` with `phase_complete`, validations, `refactoring_suggestions` |
+| `validate_refactor_phase(original_code, refactored_code, test_result)` | `original_code`: str; `refactored_code`: str; `test_result`: dict with `status` key | `Dict` with `phase_complete`, `cycle_complete`, next steps |
+| `get_phase_guidance(phase)` | `phase`: optional `TDDPhase` enum (uses current phase if omitted) | `Dict` with goal, steps, common mistakes, tips |
+| `generate_workflow_summary()` | None | `str` -- markdown summary of current state and completed cycles |
+
+**Output Formats:** Python dict (validation results), string (summary).
+
+**Example:**
+```python
+wf = TDDWorkflow()
+wf.start_cycle(&quot;Add email validation to signup form&quot;)
+result = wf.validate_red_phase(&quot;def test_invalid_email():\n    assert validate(&#x27;bad&#x27;) == False&quot;, {&quot;status&quot;: &quot;failed&quot;})
+# {&#x27;phase_complete&#x27;: True, &#x27;next_phase&#x27;: &#x27;GREEN&#x27;, ...}
+```
+
+---
+
+### 4. `framework_adapter.py`
+
+**Purpose:** Provide multi-framework support with adapters for Jest, Vitest, Pytest, unittest, JUnit, TestNG, Mocha, and Jasmine. Generate framework-specific imports, test suites, test functions, assertions, and setup/teardown hooks.
+
+**Module:** `FrameworkAdapter` class
+
+**Usage:**
+```python
+from framework_adapter import FrameworkAdapter, Framework, Language
+
+adapter = FrameworkAdapter(framework=Framework.JEST, language=Language.TYPESCRIPT)
+imports = adapter.generate_imports()
+suite = adapter.generate_test_suite_wrapper(&quot;AuthService&quot;, test_content)
+test_fn = adapter.generate_test_function(&quot;should reject invalid email&quot;, body, &quot;Validates email format&quot;)
+assertion = adapter.generate_assertion(&quot;result&quot;, &quot;true&quot;, &quot;true&quot;)
+hooks = adapter.generate_setup_teardown(setup_code=&quot;db = create_test_db()&quot;, teardown_code=&quot;db.close()&quot;)
+detected = adapter.detect_framework(existing_code)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `framework` | `Framework` | Yes | `JEST`, `VITEST`, `PYTEST`, `UNITTEST`, `JUNIT`, `TESTNG`, `MOCHA`, `JASMINE` |
+| `language` | `Language` | Yes | `TYPESCRIPT`, `JAVASCRIPT`, `PYTHON`, `JAVA` |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_imports()` | None | `str` -- framework-specific import statements |
+| `generate_test_suite_wrapper(suite_name, test_content)` | `suite_name`: str; `test_content`: str | `str` -- complete test suite wrapping content |
+| `generate_test_function(test_name, test_body, description)` | `test_name`: str; `test_body`: str; `description`: str (default `&quot;&quot;`) | `str` -- complete test function |
+| `generate_assertion(actual, expected, assertion_type)` | `actual`: str; `expected`: str; `assertion_type`: `&quot;equals&quot;`, `&quot;not_equals&quot;`, `&quot;true&quot;`, `&quot;false&quot;`, `&quot;throws&quot;` (default `&quot;equals&quot;`) | `str` -- assertion statement |
+| `generate_setup_teardown(setup_code, teardown_code)` | `setup_code`: str (default `&quot;&quot;`); `teardown_code`: str (default `&quot;&quot;`) | `str` -- setup/teardown hooks |
+| `detect_framework(code)` | `code`: str | `Framework` enum or `None` |
+
+**Output Formats:** String (generated code).
+
+**Example:**
+```python
+adapter = FrameworkAdapter(Framework.PYTEST, Language.PYTHON)
+print(adapter.generate_imports())
+# import pytest
+print(adapter.generate_assertion(&quot;calculate_total(items)&quot;, &quot;150.0&quot;, &quot;equals&quot;))
+# assert calculate_total(items) == 150.0
+```
+
+---
+
+### 5. `fixture_generator.py`
+
+**Purpose:** Generate realistic test data, boundary values, edge-case scenarios, and mock objects for various domains (auth, payment, form, API, file upload).
+
+**Module:** `FixtureGenerator` class
+
+**Usage:**
+```python
+from fixture_generator import FixtureGenerator
+
+gen = FixtureGenerator(seed=42)
+boundaries = gen.generate_boundary_values(&quot;int&quot;, {&quot;min&quot;: 0, &quot;max&quot;: 255})
+edge_cases = gen.generate_edge_cases(&quot;auth&quot;)
+mocks = gen.generate_mock_data(schema, count=5)
+fixture_content = gen.generate_fixture_file(&quot;users&quot;, mocks, format=&quot;json&quot;)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `seed` | `int` or `None` | No | Random seed for reproducible output (default `None`) |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `generate_boundary_values(data_type, constraints)` | `data_type`: `&quot;int&quot;`, `&quot;string&quot;`, `&quot;array&quot;`, `&quot;date&quot;`, `&quot;email&quot;`, `&quot;url&quot;`; `constraints`: optional dict (`min`, `max`, `min_length`, `max_length`, `min_size`, `max_size`) | `List` of boundary values |
+| `generate_edge_cases(scenario, context)` | `scenario`: `&quot;auth&quot;`, `&quot;payment&quot;`, `&quot;form&quot;`, `&quot;api&quot;`, `&quot;file_upload&quot;`; `context`: optional dict (required for `&quot;form&quot;` with `fields` key) | `List[Dict]` of edge case scenarios |
+| `generate_mock_data(schema, count)` | `schema`: dict mapping field names to `{&quot;type&quot;: ...}` defs; `count`: int (default `1`) | `List[Dict]` of mock objects |
+| `generate_fixture_file(fixture_name, data, format)` | `fixture_name`: str; `data`: any; `format`: `&quot;json&quot;`, `&quot;python&quot;`, `&quot;yaml&quot;` (default `&quot;json&quot;`) | `str` -- fixture file content |
+
+**Supported Schema Field Types:** `string`, `int`, `float`, `bool`, `email`, `date`, `array`.
+
+**Output Formats:** Python list/dict (data), string (file content in JSON/Python/YAML).
+
+**Example:**
+```python
+gen = FixtureGenerator(seed=123)
+schema = {
+    &quot;id&quot;: {&quot;type&quot;: &quot;int&quot;, &quot;min&quot;: 1, &quot;max&quot;: 9999},
+    &quot;email&quot;: {&quot;type&quot;: &quot;email&quot;},
+    &quot;active&quot;: {&quot;type&quot;: &quot;bool&quot;}
+}
+users = gen.generate_mock_data(schema, count=3)
+print(gen.generate_fixture_file(&quot;test_users&quot;, users, format=&quot;json&quot;))
+```
+
+---
+
+### 6. `metrics_calculator.py`
+
+**Purpose:** Calculate comprehensive test and code quality metrics including cyclomatic/cognitive complexity, testability scoring, test quality assessment (assertions, isolation, naming, smells), and execution analysis.
+
+**Module:** `MetricsCalculator` class
+
+**Usage:**
+```python
+from metrics_calculator import MetricsCalculator
+
+calc = MetricsCalculator()
+all_metrics = calc.calculate_all_metrics(source_code, test_code, coverage_data, execution_data)
+complexity = calc.calculate_complexity(source_code)
+test_quality = calc.calculate_test_quality(test_code)
+execution = calc.analyze_execution_metrics(execution_data)
+summary = calc.generate_metrics_summary()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `calculate_all_metrics(source_code, test_code, coverage_data, execution_data)` | `source_code`: str; `test_code`: str; `coverage_data`: optional dict; `execution_data`: optional dict | `Dict` with `complexity`, `test_quality`, `coverage`, `execution` |
+| `calculate_complexity(code)` | `code`: str | `Dict` with `cyclomatic_complexity`, `cognitive_complexity`, `testability_score`, `assessment` |
+| `calculate_test_quality(test_code)` | `test_code`: str | `Dict` with `total_tests`, `total_assertions`, `avg_assertions_per_test`, `isolation_score`, `naming_quality`, `test_smells`, `quality_score` |
+| `analyze_execution_metrics(execution_data)` | `execution_data`: dict with `tests` list (each having `duration`, `status`, optional `failure_rate`) | `Dict` with `total_tests`, timing stats, `slow_tests`, `flaky_tests`, `pass_rate` |
+| `generate_metrics_summary()` | None | `str` -- human-readable markdown summary |
+
+**Output Formats:** Python dict (metrics data), string (markdown summary).
+
+**Example:**
+```python
+calc = MetricsCalculator()
+complexity = calc.calculate_complexity(open(&quot;src/auth.py&quot;).read())
+# {&#x27;cyclomatic_complexity&#x27;: 8, &#x27;cognitive_complexity&#x27;: 12, &#x27;testability_score&#x27;: 82.0, &#x27;assessment&#x27;: &#x27;Medium complexity - moderately testable&#x27;}
+quality = calc.calculate_test_quality(open(&quot;tests/test_auth.py&quot;).read())
+# {&#x27;quality_score&#x27;: 78.5, &#x27;test_smells&#x27;: [], ...}
+```
+
+---
+
+### 7. `format_detector.py`
+
+**Purpose:** Automatically detect programming language, testing framework, coverage report format, and project structure from code content or file paths.
+
+**Module:** `FormatDetector` class
+
+**Usage:**
+```python
+from format_detector import FormatDetector
+
+detector = FormatDetector()
+language = detector.detect_language(code)
+framework = detector.detect_test_framework(test_code)
+cov_format = detector.detect_coverage_format(report_content)
+input_info = detector.detect_input_format(raw_input)
+file_info = detector.extract_file_info(&quot;/src/auth.service.ts&quot;)
+test_name = detector.suggest_test_file_name(&quot;auth.service.ts&quot;, &quot;jest&quot;)
+patterns = detector.identify_test_patterns(test_code)
+project = detector.analyze_project_structure(file_path_list)
+env = detector.detect_environment()
+```
+
+**Constructor Parameters:** None.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `detect_language(code)` | `code`: str | `str` -- `&quot;typescript&quot;`, `&quot;javascript&quot;`, `&quot;python&quot;`, `&quot;java&quot;`, `&quot;unknown&quot;` |
+| `detect_test_framework(code)` | `code`: str | `str` -- `&quot;jest&quot;`, `&quot;vitest&quot;`, `&quot;pytest&quot;`, `&quot;unittest&quot;`, `&quot;junit&quot;`, `&quot;mocha&quot;`, `&quot;unknown&quot;` |
+| `detect_coverage_format(content)` | `content`: str | `str` -- `&quot;lcov&quot;`, `&quot;json&quot;`, `&quot;xml&quot;`, `&quot;unknown&quot;` |
+| `detect_input_format(input_data)` | `input_data`: str | `Dict` with `format`, `language`, `framework`, `content_type` |
+| `extract_file_info(file_path)` | `file_path`: str | `Dict` with `file_name`, `extension`, `language`, `is_test`, `purpose` |
+| `suggest_test_file_name(source_file, framework)` | `source_file`: str; `framework`: str | `str` -- suggested test file name |
+| `identify_test_patterns(code)` | `code`: str | `List[str]` of detected patterns (AAA, Given-When-Then, etc.) |
+| `analyze_project_structure(file_paths)` | `file_paths`: list of str | `Dict` with `primary_language`, `test_ratio`, `suggested_framework` |
+| `detect_environment()` | None | `Dict` with `environment`, `output_preference` |
+
+**Output Formats:** String (detection result), Python dict (detailed analysis).
+
+**Example:**
+```python
+detector = FormatDetector()
+print(detector.detect_language(&quot;const add = (a: number, b: number): number =&gt; a + b;&quot;))
+# &quot;typescript&quot;
+print(detector.suggest_test_file_name(&quot;UserService.java&quot;, &quot;junit&quot;))
+# &quot;UserserviceTest.java&quot;
+print(detector.identify_test_patterns(&quot;// Arrange\nsetup()\n// Act\nresult = run()\n// Assert\nassert result&quot;))
+# [&#x27;AAA (Arrange-Act-Assert)&#x27;]
+```
+
+---
+
+### 8. `output_formatter.py`
+
+**Purpose:** Context-aware output formatting for different environments (Desktop/markdown, CLI/terminal, API/JSON). Supports progressive disclosure, token-efficient summary reports, and output truncation.
+
+**Module:** `OutputFormatter` class
+
+**Usage:**
+```python
+from output_formatter import OutputFormatter
+
+fmt = OutputFormatter(environment=&quot;cli&quot;, verbose=False)
+cov_output = fmt.format_coverage_summary(summary, detailed=True)
+rec_output = fmt.format_recommendations(recommendations, max_items=5)
+test_output = fmt.format_test_results(results, show_details=True)
+report = fmt.create_summary_report(coverage, metrics, recommendations)
+should_detail = fmt.should_show_detailed(data_size=50)
+truncated = fmt.truncate_output(long_text, max_lines=30)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `environment` | `str` | No | Target environment: `&quot;desktop&quot;`, `&quot;cli&quot;`, `&quot;api&quot;` (default `&quot;cli&quot;`) |
+| `verbose` | `bool` | No | Include detailed output (default `False`) |
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `format_coverage_summary(summary, detailed)` | `summary`: dict; `detailed`: bool (default `False`) | `str` -- formatted coverage (markdown/terminal/JSON based on environment) |
+| `format_recommendations(recommendations, max_items)` | `recommendations`: list of dicts; `max_items`: optional int | `str` -- formatted recommendations grouped by priority |
+| `format_test_results(results, show_details)` | `results`: dict with `total_tests`, `passed`, `failed`, `skipped`, `failed_tests`; `show_details`: bool (default `False`) | `str` -- formatted test results |
+| `create_summary_report(coverage, metrics, recommendations)` | `coverage`: dict; `metrics`: dict; `recommendations`: list | `str` -- token-efficient summary (&lt;200 tokens) |
+| `should_show_detailed(data_size)` | `data_size`: int | `bool` -- whether to show detailed output |
+| `truncate_output(text, max_lines)` | `text`: str; `max_lines`: int (default `50`) | `str` -- truncated text with remaining-lines indicator |
+
+**Output Formats:** String in markdown (desktop), plain text (CLI), or JSON (API) depending on `environment` setting.
+
+**Example:**
+```python
+fmt = OutputFormatter(environment=&quot;desktop&quot;, verbose=True)
+print(fmt.format_coverage_summary({&quot;line_coverage&quot;: 82.5, &quot;branch_coverage&quot;: 71.0, &quot;function_coverage&quot;: 90.0}))
+# ## Test Coverage Summary
+# ### Overall Metrics
+# - **Line Coverage**: 82.5%
+# ...
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tdd Guide&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tdd Guide&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tdd Guide in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tdd Guide&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tdd Guide&quot;
+4. Description: &quot;Test-driven development workflow with test generation, coverage analysis, and multi-framework support&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/tdd-guide/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

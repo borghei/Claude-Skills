@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Backend (Engineering domain).
 
 This skill should be used when the user asks to &quot;design REST APIs&quot;, &quot;optimize database queries&quot;, &quot;implement authentication&quot;, &quot;build microservices&quot;, &quot;review backend code&quot;, &quot;set up GraphQL&quot;, &quot;handle dat...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-backend
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Senior Backend (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Senior Backend (Engineering domain).
 
 This skill should be used when the user asks to &quot;design REST APIs&quot;, &quot;optimize database queries&quot;, &quot;implement authentication&quot;, &quot;build microservices&quot;, &quot;review backend code&quot;, &quot;set up GraphQL&quot;, &quot;handle dat...
 
@@ -439,7 +461,1400 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-backend
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Senior Backend&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Backend Engineer
+
+Backend development patterns, API design, database optimization, and security practices.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Tools Overview](#tools-overview)
+  - [API Scaffolder](#1-api-scaffolder)
+  - [Database Migration Tool](#2-database-migration-tool)
+  - [API Load Tester](#3-api-load-tester)
+- [Backend Development Workflows](#backend-development-workflows)
+  - [API Design Workflow](#api-design-workflow)
+  - [Database Optimization Workflow](#database-optimization-workflow)
+  - [Security Hardening Workflow](#security-hardening-workflow)
+- [Reference Documentation](#reference-documentation)
+- [Common Patterns Quick Reference](#common-patterns-quick-reference)
+
+---
+
+## Quick Start
+
+```bash
+# Generate API routes from OpenAPI spec
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+
+# Analyze database schema and generate migrations
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb --analyze
+
+# Load test an API endpoint
+python scripts/api_load_tester.py https://api.example.com/users --concurrency 50 --duration 30
+```
+
+---
+
+## Tools Overview
+
+### 1. API Scaffolder
+
+Generates API route handlers, middleware, and OpenAPI specifications from schema definitions.
+
+**Input:** OpenAPI spec (YAML/JSON) or database schema
+**Output:** Route handlers, validation middleware, TypeScript types
+
+**Usage:**
+```bash
+# Generate Express routes from OpenAPI spec
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+
+# Output:
+# Generated 12 route handlers in src/routes/
+# - GET /users (listUsers)
+# - POST /users (createUser)
+# - GET /users/{id} (getUser)
+# - PUT /users/{id} (updateUser)
+# - DELETE /users/{id} (deleteUser)
+# ...
+# Created validation middleware: src/middleware/validators.ts
+# Created TypeScript types: src/types/api.ts
+
+# Generate from database schema
+python scripts/api_scaffolder.py --from-db postgres://localhost/mydb --output src/routes/
+
+# Generate OpenAPI spec from existing routes
+python scripts/api_scaffolder.py src/routes/ --generate-spec --output openapi.yaml
+```
+
+**Supported Frameworks:**
+- Express.js (`--framework express`)
+- Fastify (`--framework fastify`)
+- Koa (`--framework koa`)
+
+---
+
+### 2. Database Migration Tool
+
+Analyzes database schemas, detects changes, and generates migration files with rollback support.
+
+**Input:** Database connection string or schema files
+**Output:** Migration files, schema diff report, optimization suggestions
+
+**Usage:**
+```bash
+# Analyze current schema and suggest optimizations
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb --analyze
+
+# Output:
+# === Database Analysis Report ===
+# Tables: 24
+# Total rows: 1,247,832
+#
+# MISSING INDEXES (5 found):
+#   orders.user_id - 847ms avg query time, ADD INDEX recommended
+#   products.category_id - 234ms avg query time, ADD INDEX recommended
+#
+# N+1 QUERY RISKS (3 found):
+#   users -&gt; orders relationship (no eager loading)
+#
+# SUGGESTED MIGRATIONS:
+#   1. Add index on orders(user_id)
+#   2. Add index on products(category_id)
+#   3. Add composite index on order_items(order_id, product_id)
+
+# Generate migration from schema diff
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb \
+  --compare schema/v2.sql --output migrations/
+
+# Output:
+# Generated migration: migrations/20240115_add_user_indexes.sql
+# Generated rollback: migrations/20240115_add_user_indexes_rollback.sql
+
+# Dry-run a migration
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb \
+  --migrate migrations/20240115_add_user_indexes.sql --dry-run
+```
+
+---
+
+### 3. API Load Tester
+
+Performs HTTP load testing with configurable concurrency, measuring latency percentiles and throughput.
+
+**Input:** API endpoint URL and test configuration
+**Output:** Performance report with latency distribution, error rates, throughput metrics
+
+**Usage:**
+```bash
+# Basic load test
+python scripts/api_load_tester.py https://api.example.com/users --concurrency 50 --duration 30
+
+# Output:
+# === Load Test Results ===
+# Target: https://api.example.com/users
+# Duration: 30s | Concurrency: 50
+#
+# THROUGHPUT:
+#   Total requests: 15,247
+#   Requests/sec: 508.2
+#   Successful: 15,102 (99.0%)
+#   Failed: 145 (1.0%)
+#
+# LATENCY (ms):
+#   Min: 12
+#   Avg: 89
+#   P50: 67
+#   P95: 198
+#   P99: 423
+#   Max: 1,247
+#
+# ERRORS:
+#   Connection timeout: 89
+#   HTTP 503: 56
+#
+# RECOMMENDATION: P99 latency (423ms) exceeds 200ms target.
+# Consider: connection pooling, query optimization, or horizontal scaling.
+
+# Test with custom headers and body
+python scripts/api_load_tester.py https://api.example.com/orders \
+  --method POST \
+  --header &quot;Authorization: Bearer token123&quot; \
+  --body &#x27;{&quot;product_id&quot;: 1, &quot;quantity&quot;: 2}&#x27; \
+  --concurrency 100 \
+  --duration 60
+
+# Compare two endpoints
+python scripts/api_load_tester.py https://api.example.com/v1/users https://api.example.com/v2/users \
+  --compare --concurrency 50 --duration 30
+```
+
+---
+
+## Backend Development Workflows
+
+### API Design Workflow
+
+Use when designing a new API or refactoring existing endpoints.
+
+**Step 1: Define resources and operations**
+```yaml
+# openapi.yaml
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: List users
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+    post:
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#x27;#/components/schemas/CreateUser&#x27;
+```
+
+**Step 2: Generate route scaffolding**
+```bash
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+```
+
+**Step 3: Implement business logic**
+```typescript
+// src/routes/users.ts (generated, then customized)
+export const createUser = async (req: Request, res: Response) =&gt; {
+  const { email, name } = req.body;
+
+  // Add business logic
+  const user = await userService.create({ email, name });
+
+  res.status(201).json(user);
+};
+```
+
+**Step 4: Add validation middleware**
+```bash
+# Validation is auto-generated from OpenAPI schema
+# src/middleware/validators.ts includes:
+# - Request body validation
+# - Query parameter validation
+# - Path parameter validation
+```
+
+**Step 5: Generate updated OpenAPI spec**
+```bash
+python scripts/api_scaffolder.py src/routes/ --generate-spec --output openapi.yaml
+```
+
+---
+
+### Database Optimization Workflow
+
+Use when queries are slow or database performance needs improvement.
+
+**Step 1: Analyze current performance**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+```
+
+**Step 2: Identify slow queries**
+```sql
+-- Check query execution plans
+EXPLAIN ANALYZE SELECT * FROM orders
+WHERE user_id = 123
+ORDER BY created_at DESC
+LIMIT 10;
+
+-- Look for: Seq Scan (bad), Index Scan (good)
+```
+
+**Step 3: Generate index migrations**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --suggest-indexes --output migrations/
+```
+
+**Step 4: Test migration (dry-run)**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --migrate migrations/add_indexes.sql --dry-run
+```
+
+**Step 5: Apply and verify**
+```bash
+# Apply migration
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --migrate migrations/add_indexes.sql
+
+# Verify improvement
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+```
+
+---
+
+### Security Hardening Workflow
+
+Use when preparing an API for production or after a security review.
+
+**Step 1: Review authentication setup**
+```typescript
+// Verify JWT configuration
+const jwtConfig = {
+  secret: process.env.JWT_SECRET,  // Must be from env, never hardcoded
+  expiresIn: &#x27;1h&#x27;,                 // Short-lived tokens
+  algorithm: &#x27;RS256&#x27;               // Prefer asymmetric
+};
+```
+
+**Step 2: Add rate limiting**
+```typescript
+import rateLimit from &#x27;express-rate-limit&#x27;;
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,  // 15 minutes
+  max: 100,                   // 100 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(&#x27;/api/&#x27;, apiLimiter);
+```
+
+**Step 3: Validate all inputs**
+```typescript
+import { z } from &#x27;zod&#x27;;
+
+const CreateUserSchema = z.object({
+  email: z.string().email().max(255),
+  name: z.string().min(1).max(100),
+  age: z.number().int().positive().optional()
+});
+
+// Use in route handler
+const data = CreateUserSchema.parse(req.body);
+```
+
+**Step 4: Load test with attack patterns**
+```bash
+# Test rate limiting
+python scripts/api_load_tester.py https://api.example.com/login \
+  --concurrency 200 --duration 10 --expect-rate-limit
+
+# Test input validation
+python scripts/api_load_tester.py https://api.example.com/users \
+  --method POST \
+  --body &#x27;{&quot;email&quot;: &quot;not-an-email&quot;}&#x27; \
+  --expect-status 400
+```
+
+**Step 5: Review security headers**
+```typescript
+import helmet from &#x27;helmet&#x27;;
+
+app.use(helmet({
+  contentSecurityPolicy: true,
+  crossOriginEmbedderPolicy: true,
+  crossOriginOpenerPolicy: true,
+  crossOriginResourcePolicy: true,
+  hsts: { maxAge: 31536000, includeSubDomains: true },
+}));
+```
+
+---
+
+## Reference Documentation
+
+| File | Contains | Use When |
+|------|----------|----------|
+| `references/api_design_patterns.md` | REST vs GraphQL, versioning, error handling, pagination | Designing new APIs |
+| `references/database_optimization_guide.md` | Indexing strategies, query optimization, N+1 solutions | Fixing slow queries |
+| `references/backend_security_practices.md` | OWASP Top 10, auth patterns, input validation | Security hardening |
+
+---
+
+## Common Patterns Quick Reference
+
+### REST API Response Format
+```json
+{
+  &quot;data&quot;: { &quot;id&quot;: 1, &quot;name&quot;: &quot;John&quot; },
+  &quot;meta&quot;: { &quot;requestId&quot;: &quot;abc-123&quot; }
+}
+```
+
+### Error Response Format
+```json
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;VALIDATION_ERROR&quot;,
+    &quot;message&quot;: &quot;Invalid email format&quot;,
+    &quot;details&quot;: [{ &quot;field&quot;: &quot;email&quot;, &quot;message&quot;: &quot;must be valid email&quot; }]
+  },
+  &quot;meta&quot;: { &quot;requestId&quot;: &quot;abc-123&quot; }
+}
+```
+
+### HTTP Status Codes
+| Code | Use Case |
+|------|----------|
+| 200 | Success (GET, PUT, PATCH) |
+| 201 | Created (POST) |
+| 204 | No Content (DELETE) |
+| 400 | Validation error |
+| 401 | Authentication required |
+| 403 | Permission denied |
+| 404 | Resource not found |
+| 429 | Rate limit exceeded |
+| 500 | Internal server error |
+
+### Database Index Strategy
+```sql
+-- Single column (equality lookups)
+CREATE INDEX idx_users_email ON users(email);
+
+-- Composite (multi-column queries)
+CREATE INDEX idx_orders_user_status ON orders(user_id, status);
+
+-- Partial (filtered queries)
+CREATE INDEX idx_orders_active ON orders(created_at) WHERE status = &#x27;active&#x27;;
+
+-- Covering (avoid table lookup)
+CREATE INDEX idx_users_email_name ON users(email) INCLUDE (name);
+```
+
+---
+
+## Common Commands
+
+```bash
+# API Development
+python scripts/api_scaffolder.py openapi.yaml --framework express
+python scripts/api_scaffolder.py src/routes/ --generate-spec
+
+# Database Operations
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+python scripts/database_migration_tool.py --connection $DATABASE_URL --migrate file.sql
+
+# Performance Testing
+python scripts/api_load_tester.py https://api.example.com/endpoint --concurrency 50
+python scripts/api_load_tester.py https://api.example.com/endpoint --compare baseline.json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `api_scaffolder.py` generates empty route files | OpenAPI spec missing `operationId` fields or paths use unsupported HTTP methods | Add `operationId` to each operation; verify methods are GET, POST, PUT, PATCH, or DELETE |
+| `database_migration_tool.py` parses zero tables | SQL file uses non-standard DDL syntax or multi-line comments break regex parsing | Ensure `CREATE TABLE` statements end with `;` and remove block comments (`/* ... */`) before analysis |
+| Load tester reports 100% failure rate | Target URL unreachable, SSL verification failing, or firewall blocking concurrent connections | Verify URL manually with `curl`; try `--no-verify-ssl` for self-signed certs; reduce `--concurrency` |
+| Generated TypeScript types show `unknown` for all fields | OpenAPI schema uses `$ref` references to external files or missing `components/schemas` section | Inline referenced schemas or ensure all `$ref` targets exist within the same spec file |
+| Migration diff reports &quot;No changes&quot; when changes exist | Column type differences are case-sensitive; `VARCHAR(255)` vs `varchar(255)` treated as different | Normalize casing in schema files; the parser converts types to uppercase internally |
+| Load tester hangs after duration expires | Worker threads blocked on slow connections that exceed the default 30s timeout | Set `--timeout` lower than `--duration` (e.g., `--timeout 5 --duration 30`) to prevent thread starvation |
+| Zod validators missing for nested objects | Deeply nested `$ref` chains not fully resolved by the scaffolder | Flatten nested schemas in the OpenAPI spec or manually extend the generated validators |
+
+---
+
+## Success Criteria
+
+- **API p99 latency under 200ms** at production concurrency levels, verified by `api_load_tester.py`
+- **Zero N+1 query patterns detected** in schema analysis via `database_migration_tool.py --analyze`
+- **All foreign key columns indexed** with no &quot;missing index&quot; warnings from the migration tool
+- **100% of generated routes include input validation** middleware (Zod schemas auto-generated from OpenAPI spec)
+- **Success rate above 99.5%** during sustained load tests at target concurrency for 60+ seconds
+- **Every migration paired with a rollback script** to enable zero-downtime deployment reversals
+- **API response format consistency** across all endpoints following the standardized `data`/`error`/`meta` envelope pattern
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- REST API design, scaffolding, and OpenAPI-driven code generation for Express, Fastify, and Koa
+- PostgreSQL schema analysis, index optimization, migration generation with rollback support
+- HTTP load testing with latency percentile analysis, throughput measurement, and endpoint comparison
+- Backend security patterns including JWT configuration, rate limiting, input validation, and security headers
+
+**What this skill does NOT cover:**
+- Frontend development, UI components, or client-side state management -- see `senior-frontend`
+- Infrastructure provisioning, container orchestration, or CI/CD pipeline setup -- see `senior-devops`
+- GraphQL schema design, resolvers, or subscriptions -- see `senior-fullstack`
+- Application performance monitoring (APM), distributed tracing, or log aggregation -- see `senior-secops`
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-fullstack` | API routes generated here feed into fullstack project scaffolding | OpenAPI spec &amp;rarr; fullstack scaffolder consumes as API contract |
+| `senior-devops` | Migration scripts output here are consumed by CI/CD deployment pipelines | `migrations/` directory &amp;rarr; deployment workflow applies and verifies |
+| `senior-security` | Load test results and security hardening output feed into security review | Load test JSON &amp;rarr; security audit validates rate limiting and error handling |
+| `senior-qa` | Generated route handlers and validators provide test surface for QA automation | Route files + Zod schemas &amp;rarr; QA generates integration test suites |
+| `senior-frontend` | TypeScript types generated by the scaffolder are shared with frontend consumers | `types.ts` &amp;rarr; frontend imports API types for type-safe client code |
+| `code-reviewer` | Schema analysis issues and migration diffs feed into code review checklists | Analysis report &amp;rarr; reviewer validates index coverage and naming conventions |
+
+---
+
+## Tool Reference
+
+### api_scaffolder.py
+
+**Purpose:** Generate Express.js/Fastify/Koa route handlers, Zod validators, and TypeScript types from an OpenAPI specification.
+
+**Usage:**
+```bash
+python scripts/api_scaffolder.py &lt;spec&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `spec` | | positional | *(required)* | Path to OpenAPI specification file (YAML or JSON) |
+| `--output` | `-o` | string | `./generated` | Output directory for generated files |
+| `--framework` | `-f` | choice | `express` | Target framework: `express`, `fastify`, or `koa` |
+| `--types-only` | | flag | `false` | Generate only TypeScript type definitions, skip routes and validators |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows spec title/version) |
+| `--json` | | flag | `false` | Output results summary as JSON |
+
+**Example:**
+```bash
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/ --verbose
+```
+```
+API Scaffolder - Express
+Spec: openapi.yaml
+Output: src/routes/
+--------------------------------------------------
+Loaded: User Service API v1.0.0
+  Generated: src/routes/types.ts
+  Generated: src/routes/validators.ts
+  Generated: src/routes/users.routes.ts (5 handlers)
+  Generated: src/routes/index.ts
+--------------------------------------------------
+Generated 5 route handlers
+Generated 3 type definitions
+Output: src/routes/
+```
+
+**Output Formats:** Human-readable console output by default. Add `--json` for machine-readable JSON with `status`, `generated_files`, `routes_count`, and `types_count` fields.
+
+---
+
+### database_migration_tool.py
+
+**Purpose:** Analyze SQL schema files for issues, compare schemas to generate migrations with rollback scripts, and suggest missing indexes.
+
+**Usage:**
+```bash
+python scripts/database_migration_tool.py &lt;schema&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `schema` | | positional | *(required)* | Path to SQL schema file |
+| `--analyze` | | flag | `false` | Analyze schema for issues and optimizations (default mode if no other mode specified) |
+| `--compare` | | string | | Path to a second schema file to compare against and generate migration |
+| `--suggest-indexes` | | flag | `false` | Generate index suggestions for foreign keys, filter columns, and timestamps |
+| `--output` | `-o` | string | | Output directory for generated migration files |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows parsed table count and info-level suggestions) |
+| `--json` | | flag | `false` | Output results as JSON |
+
+**Example:**
+```bash
+python scripts/database_migration_tool.py schema.sql --analyze --verbose
+```
+```
+Database Migration Tool
+Schema: schema.sql
+--------------------------------------------------
+Parsed 8 tables
+
+Analysis Results:
+  Tables: 8
+  Errors: 1
+  Warnings: 3
+  Suggestions: 7
+
+ERRORS:
+  [audit_log] Table &#x27;audit_log&#x27; has no primary key
+    Suggestion: Add a primary key column (e.g., &#x27;id SERIAL PRIMARY KEY&#x27;)
+
+WARNINGS:
+  [orders] Foreign key column &#x27;user_id&#x27; is not indexed
+    Suggestion: CREATE INDEX idx_orders_user_id ON orders(user_id);
+```
+
+**Output Formats:** Human-readable console output by default. Add `--json` for structured JSON with `issues_detail` array containing severity, category, table, message, and suggestion for each finding. When using `--compare --output`, generates timestamped `_migration.sql` and `_migration_rollback.sql` files.
+
+---
+
+### api_load_tester.py
+
+**Purpose:** Perform HTTP load testing with configurable concurrency, measuring latency percentiles (p50/p90/p95/p99), throughput, error rates, and optional endpoint comparison.
+
+**Usage:**
+```bash
+python scripts/api_load_tester.py &lt;urls...&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `urls` | | positional | *(required)* | One or more URLs to test |
+| `--method` | `-m` | choice | `GET` | HTTP method: `GET`, `POST`, `PUT`, `PATCH`, or `DELETE` |
+| `--body` | `-b` | string | | Request body as a JSON string |
+| `--header` | `-H` | string (repeatable) | | HTTP header in `&quot;Name: Value&quot;` format; can be specified multiple times |
+| `--concurrency` | `-c` | int | `10` | Number of concurrent request threads |
+| `--duration` | `-d` | float | `10.0` | Test duration in seconds |
+| `--timeout` | `-t` | float | `30.0` | Per-request timeout in seconds |
+| `--compare` | | flag | `false` | Compare two endpoints side-by-side (requires two URLs) |
+| `--no-verify-ssl` | | flag | `false` | Disable SSL certificate verification |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows transfer bytes and throughput Mbps) |
+| `--json` | | flag | `false` | Output results as JSON |
+| `--output` | `-o` | string | | File path to write JSON results |
+
+**Example:**
+```bash
+python scripts/api_load_tester.py https://api.example.com/users \
+  --method GET \
+  --header &quot;Authorization: Bearer tok_abc123&quot; \
+  --concurrency 50 \
+  --duration 30 \
+  --verbose
+```
+```
+============================================================
+LOAD TEST RESULTS
+============================================================
+
+Target: https://api.example.com/users
+Method: GET
+Duration: 30.2s
+Concurrency: 50
+
+THROUGHPUT:
+  Total requests: 14,832
+  Requests/sec: 491.1
+  Successful: 14,710 (99.2%)
+  Failed: 122
+
+LATENCY (ms):
+  Min: 11.3
+  Avg: 92.4
+  P50: 71.2
+  P90: 165.8
+  P95: 201.3
+  P99: 387.6
+  Max: 1,102.5
+  StdDev: 89.2
+
+TRANSFER:
+  Total bytes: 45,291,520
+  Throughput: 12.01 Mbps
+
+RECOMMENDATIONS:
+  Warning: P99 latency (388ms) exceeds 500ms
+    Consider: Connection pooling, query optimization, caching
+  Performance looks good for this load level
+============================================================
+```
+
+**Output Formats:** Human-readable console report by default with latency distribution and recommendations. Add `--json` for structured JSON output. Use `--output results.json` to write results to a file. When using `--compare` with two URLs, outputs a side-by-side metric comparison table.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Backend&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Backend&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Backend in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Backend&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Backend&quot;
+4. Description: &quot;This skill should be used when the user asks to &quot;design REST APIs&quot;, &quot;optimize database queries&quot;, &quot;implement authentication&quot;, &quot;build microservices&quot;, &quot;review backend code&quot;, &quot;set up GraphQL&quot;, &quot;handle dat...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-backend/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Senior Backend&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Backend Engineer
+
+Backend development patterns, API design, database optimization, and security practices.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Tools Overview](#tools-overview)
+  - [API Scaffolder](#1-api-scaffolder)
+  - [Database Migration Tool](#2-database-migration-tool)
+  - [API Load Tester](#3-api-load-tester)
+- [Backend Development Workflows](#backend-development-workflows)
+  - [API Design Workflow](#api-design-workflow)
+  - [Database Optimization Workflow](#database-optimization-workflow)
+  - [Security Hardening Workflow](#security-hardening-workflow)
+- [Reference Documentation](#reference-documentation)
+- [Common Patterns Quick Reference](#common-patterns-quick-reference)
+
+---
+
+## Quick Start
+
+```bash
+# Generate API routes from OpenAPI spec
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+
+# Analyze database schema and generate migrations
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb --analyze
+
+# Load test an API endpoint
+python scripts/api_load_tester.py https://api.example.com/users --concurrency 50 --duration 30
+```
+
+---
+
+## Tools Overview
+
+### 1. API Scaffolder
+
+Generates API route handlers, middleware, and OpenAPI specifications from schema definitions.
+
+**Input:** OpenAPI spec (YAML/JSON) or database schema
+**Output:** Route handlers, validation middleware, TypeScript types
+
+**Usage:**
+```bash
+# Generate Express routes from OpenAPI spec
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+
+# Output:
+# Generated 12 route handlers in src/routes/
+# - GET /users (listUsers)
+# - POST /users (createUser)
+# - GET /users/{id} (getUser)
+# - PUT /users/{id} (updateUser)
+# - DELETE /users/{id} (deleteUser)
+# ...
+# Created validation middleware: src/middleware/validators.ts
+# Created TypeScript types: src/types/api.ts
+
+# Generate from database schema
+python scripts/api_scaffolder.py --from-db postgres://localhost/mydb --output src/routes/
+
+# Generate OpenAPI spec from existing routes
+python scripts/api_scaffolder.py src/routes/ --generate-spec --output openapi.yaml
+```
+
+**Supported Frameworks:**
+- Express.js (`--framework express`)
+- Fastify (`--framework fastify`)
+- Koa (`--framework koa`)
+
+---
+
+### 2. Database Migration Tool
+
+Analyzes database schemas, detects changes, and generates migration files with rollback support.
+
+**Input:** Database connection string or schema files
+**Output:** Migration files, schema diff report, optimization suggestions
+
+**Usage:**
+```bash
+# Analyze current schema and suggest optimizations
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb --analyze
+
+# Output:
+# === Database Analysis Report ===
+# Tables: 24
+# Total rows: 1,247,832
+#
+# MISSING INDEXES (5 found):
+#   orders.user_id - 847ms avg query time, ADD INDEX recommended
+#   products.category_id - 234ms avg query time, ADD INDEX recommended
+#
+# N+1 QUERY RISKS (3 found):
+#   users -&gt; orders relationship (no eager loading)
+#
+# SUGGESTED MIGRATIONS:
+#   1. Add index on orders(user_id)
+#   2. Add index on products(category_id)
+#   3. Add composite index on order_items(order_id, product_id)
+
+# Generate migration from schema diff
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb \
+  --compare schema/v2.sql --output migrations/
+
+# Output:
+# Generated migration: migrations/20240115_add_user_indexes.sql
+# Generated rollback: migrations/20240115_add_user_indexes_rollback.sql
+
+# Dry-run a migration
+python scripts/database_migration_tool.py --connection postgres://localhost/mydb \
+  --migrate migrations/20240115_add_user_indexes.sql --dry-run
+```
+
+---
+
+### 3. API Load Tester
+
+Performs HTTP load testing with configurable concurrency, measuring latency percentiles and throughput.
+
+**Input:** API endpoint URL and test configuration
+**Output:** Performance report with latency distribution, error rates, throughput metrics
+
+**Usage:**
+```bash
+# Basic load test
+python scripts/api_load_tester.py https://api.example.com/users --concurrency 50 --duration 30
+
+# Output:
+# === Load Test Results ===
+# Target: https://api.example.com/users
+# Duration: 30s | Concurrency: 50
+#
+# THROUGHPUT:
+#   Total requests: 15,247
+#   Requests/sec: 508.2
+#   Successful: 15,102 (99.0%)
+#   Failed: 145 (1.0%)
+#
+# LATENCY (ms):
+#   Min: 12
+#   Avg: 89
+#   P50: 67
+#   P95: 198
+#   P99: 423
+#   Max: 1,247
+#
+# ERRORS:
+#   Connection timeout: 89
+#   HTTP 503: 56
+#
+# RECOMMENDATION: P99 latency (423ms) exceeds 200ms target.
+# Consider: connection pooling, query optimization, or horizontal scaling.
+
+# Test with custom headers and body
+python scripts/api_load_tester.py https://api.example.com/orders \
+  --method POST \
+  --header &quot;Authorization: Bearer token123&quot; \
+  --body &#x27;{&quot;product_id&quot;: 1, &quot;quantity&quot;: 2}&#x27; \
+  --concurrency 100 \
+  --duration 60
+
+# Compare two endpoints
+python scripts/api_load_tester.py https://api.example.com/v1/users https://api.example.com/v2/users \
+  --compare --concurrency 50 --duration 30
+```
+
+---
+
+## Backend Development Workflows
+
+### API Design Workflow
+
+Use when designing a new API or refactoring existing endpoints.
+
+**Step 1: Define resources and operations**
+```yaml
+# openapi.yaml
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: List users
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+    post:
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: &#x27;#/components/schemas/CreateUser&#x27;
+```
+
+**Step 2: Generate route scaffolding**
+```bash
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/
+```
+
+**Step 3: Implement business logic**
+```typescript
+// src/routes/users.ts (generated, then customized)
+export const createUser = async (req: Request, res: Response) =&gt; {
+  const { email, name } = req.body;
+
+  // Add business logic
+  const user = await userService.create({ email, name });
+
+  res.status(201).json(user);
+};
+```
+
+**Step 4: Add validation middleware**
+```bash
+# Validation is auto-generated from OpenAPI schema
+# src/middleware/validators.ts includes:
+# - Request body validation
+# - Query parameter validation
+# - Path parameter validation
+```
+
+**Step 5: Generate updated OpenAPI spec**
+```bash
+python scripts/api_scaffolder.py src/routes/ --generate-spec --output openapi.yaml
+```
+
+---
+
+### Database Optimization Workflow
+
+Use when queries are slow or database performance needs improvement.
+
+**Step 1: Analyze current performance**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+```
+
+**Step 2: Identify slow queries**
+```sql
+-- Check query execution plans
+EXPLAIN ANALYZE SELECT * FROM orders
+WHERE user_id = 123
+ORDER BY created_at DESC
+LIMIT 10;
+
+-- Look for: Seq Scan (bad), Index Scan (good)
+```
+
+**Step 3: Generate index migrations**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --suggest-indexes --output migrations/
+```
+
+**Step 4: Test migration (dry-run)**
+```bash
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --migrate migrations/add_indexes.sql --dry-run
+```
+
+**Step 5: Apply and verify**
+```bash
+# Apply migration
+python scripts/database_migration_tool.py --connection $DATABASE_URL \
+  --migrate migrations/add_indexes.sql
+
+# Verify improvement
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+```
+
+---
+
+### Security Hardening Workflow
+
+Use when preparing an API for production or after a security review.
+
+**Step 1: Review authentication setup**
+```typescript
+// Verify JWT configuration
+const jwtConfig = {
+  secret: process.env.JWT_SECRET,  // Must be from env, never hardcoded
+  expiresIn: &#x27;1h&#x27;,                 // Short-lived tokens
+  algorithm: &#x27;RS256&#x27;               // Prefer asymmetric
+};
+```
+
+**Step 2: Add rate limiting**
+```typescript
+import rateLimit from &#x27;express-rate-limit&#x27;;
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,  // 15 minutes
+  max: 100,                   // 100 requests per window
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(&#x27;/api/&#x27;, apiLimiter);
+```
+
+**Step 3: Validate all inputs**
+```typescript
+import { z } from &#x27;zod&#x27;;
+
+const CreateUserSchema = z.object({
+  email: z.string().email().max(255),
+  name: z.string().min(1).max(100),
+  age: z.number().int().positive().optional()
+});
+
+// Use in route handler
+const data = CreateUserSchema.parse(req.body);
+```
+
+**Step 4: Load test with attack patterns**
+```bash
+# Test rate limiting
+python scripts/api_load_tester.py https://api.example.com/login \
+  --concurrency 200 --duration 10 --expect-rate-limit
+
+# Test input validation
+python scripts/api_load_tester.py https://api.example.com/users \
+  --method POST \
+  --body &#x27;{&quot;email&quot;: &quot;not-an-email&quot;}&#x27; \
+  --expect-status 400
+```
+
+**Step 5: Review security headers**
+```typescript
+import helmet from &#x27;helmet&#x27;;
+
+app.use(helmet({
+  contentSecurityPolicy: true,
+  crossOriginEmbedderPolicy: true,
+  crossOriginOpenerPolicy: true,
+  crossOriginResourcePolicy: true,
+  hsts: { maxAge: 31536000, includeSubDomains: true },
+}));
+```
+
+---
+
+## Reference Documentation
+
+| File | Contains | Use When |
+|------|----------|----------|
+| `references/api_design_patterns.md` | REST vs GraphQL, versioning, error handling, pagination | Designing new APIs |
+| `references/database_optimization_guide.md` | Indexing strategies, query optimization, N+1 solutions | Fixing slow queries |
+| `references/backend_security_practices.md` | OWASP Top 10, auth patterns, input validation | Security hardening |
+
+---
+
+## Common Patterns Quick Reference
+
+### REST API Response Format
+```json
+{
+  &quot;data&quot;: { &quot;id&quot;: 1, &quot;name&quot;: &quot;John&quot; },
+  &quot;meta&quot;: { &quot;requestId&quot;: &quot;abc-123&quot; }
+}
+```
+
+### Error Response Format
+```json
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;VALIDATION_ERROR&quot;,
+    &quot;message&quot;: &quot;Invalid email format&quot;,
+    &quot;details&quot;: [{ &quot;field&quot;: &quot;email&quot;, &quot;message&quot;: &quot;must be valid email&quot; }]
+  },
+  &quot;meta&quot;: { &quot;requestId&quot;: &quot;abc-123&quot; }
+}
+```
+
+### HTTP Status Codes
+| Code | Use Case |
+|------|----------|
+| 200 | Success (GET, PUT, PATCH) |
+| 201 | Created (POST) |
+| 204 | No Content (DELETE) |
+| 400 | Validation error |
+| 401 | Authentication required |
+| 403 | Permission denied |
+| 404 | Resource not found |
+| 429 | Rate limit exceeded |
+| 500 | Internal server error |
+
+### Database Index Strategy
+```sql
+-- Single column (equality lookups)
+CREATE INDEX idx_users_email ON users(email);
+
+-- Composite (multi-column queries)
+CREATE INDEX idx_orders_user_status ON orders(user_id, status);
+
+-- Partial (filtered queries)
+CREATE INDEX idx_orders_active ON orders(created_at) WHERE status = &#x27;active&#x27;;
+
+-- Covering (avoid table lookup)
+CREATE INDEX idx_users_email_name ON users(email) INCLUDE (name);
+```
+
+---
+
+## Common Commands
+
+```bash
+# API Development
+python scripts/api_scaffolder.py openapi.yaml --framework express
+python scripts/api_scaffolder.py src/routes/ --generate-spec
+
+# Database Operations
+python scripts/database_migration_tool.py --connection $DATABASE_URL --analyze
+python scripts/database_migration_tool.py --connection $DATABASE_URL --migrate file.sql
+
+# Performance Testing
+python scripts/api_load_tester.py https://api.example.com/endpoint --concurrency 50
+python scripts/api_load_tester.py https://api.example.com/endpoint --compare baseline.json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `api_scaffolder.py` generates empty route files | OpenAPI spec missing `operationId` fields or paths use unsupported HTTP methods | Add `operationId` to each operation; verify methods are GET, POST, PUT, PATCH, or DELETE |
+| `database_migration_tool.py` parses zero tables | SQL file uses non-standard DDL syntax or multi-line comments break regex parsing | Ensure `CREATE TABLE` statements end with `;` and remove block comments (`/* ... */`) before analysis |
+| Load tester reports 100% failure rate | Target URL unreachable, SSL verification failing, or firewall blocking concurrent connections | Verify URL manually with `curl`; try `--no-verify-ssl` for self-signed certs; reduce `--concurrency` |
+| Generated TypeScript types show `unknown` for all fields | OpenAPI schema uses `$ref` references to external files or missing `components/schemas` section | Inline referenced schemas or ensure all `$ref` targets exist within the same spec file |
+| Migration diff reports &quot;No changes&quot; when changes exist | Column type differences are case-sensitive; `VARCHAR(255)` vs `varchar(255)` treated as different | Normalize casing in schema files; the parser converts types to uppercase internally |
+| Load tester hangs after duration expires | Worker threads blocked on slow connections that exceed the default 30s timeout | Set `--timeout` lower than `--duration` (e.g., `--timeout 5 --duration 30`) to prevent thread starvation |
+| Zod validators missing for nested objects | Deeply nested `$ref` chains not fully resolved by the scaffolder | Flatten nested schemas in the OpenAPI spec or manually extend the generated validators |
+
+---
+
+## Success Criteria
+
+- **API p99 latency under 200ms** at production concurrency levels, verified by `api_load_tester.py`
+- **Zero N+1 query patterns detected** in schema analysis via `database_migration_tool.py --analyze`
+- **All foreign key columns indexed** with no &quot;missing index&quot; warnings from the migration tool
+- **100% of generated routes include input validation** middleware (Zod schemas auto-generated from OpenAPI spec)
+- **Success rate above 99.5%** during sustained load tests at target concurrency for 60+ seconds
+- **Every migration paired with a rollback script** to enable zero-downtime deployment reversals
+- **API response format consistency** across all endpoints following the standardized `data`/`error`/`meta` envelope pattern
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- REST API design, scaffolding, and OpenAPI-driven code generation for Express, Fastify, and Koa
+- PostgreSQL schema analysis, index optimization, migration generation with rollback support
+- HTTP load testing with latency percentile analysis, throughput measurement, and endpoint comparison
+- Backend security patterns including JWT configuration, rate limiting, input validation, and security headers
+
+**What this skill does NOT cover:**
+- Frontend development, UI components, or client-side state management -- see `senior-frontend`
+- Infrastructure provisioning, container orchestration, or CI/CD pipeline setup -- see `senior-devops`
+- GraphQL schema design, resolvers, or subscriptions -- see `senior-fullstack`
+- Application performance monitoring (APM), distributed tracing, or log aggregation -- see `senior-secops`
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-fullstack` | API routes generated here feed into fullstack project scaffolding | OpenAPI spec &amp;rarr; fullstack scaffolder consumes as API contract |
+| `senior-devops` | Migration scripts output here are consumed by CI/CD deployment pipelines | `migrations/` directory &amp;rarr; deployment workflow applies and verifies |
+| `senior-security` | Load test results and security hardening output feed into security review | Load test JSON &amp;rarr; security audit validates rate limiting and error handling |
+| `senior-qa` | Generated route handlers and validators provide test surface for QA automation | Route files + Zod schemas &amp;rarr; QA generates integration test suites |
+| `senior-frontend` | TypeScript types generated by the scaffolder are shared with frontend consumers | `types.ts` &amp;rarr; frontend imports API types for type-safe client code |
+| `code-reviewer` | Schema analysis issues and migration diffs feed into code review checklists | Analysis report &amp;rarr; reviewer validates index coverage and naming conventions |
+
+---
+
+## Tool Reference
+
+### api_scaffolder.py
+
+**Purpose:** Generate Express.js/Fastify/Koa route handlers, Zod validators, and TypeScript types from an OpenAPI specification.
+
+**Usage:**
+```bash
+python scripts/api_scaffolder.py &lt;spec&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `spec` | | positional | *(required)* | Path to OpenAPI specification file (YAML or JSON) |
+| `--output` | `-o` | string | `./generated` | Output directory for generated files |
+| `--framework` | `-f` | choice | `express` | Target framework: `express`, `fastify`, or `koa` |
+| `--types-only` | | flag | `false` | Generate only TypeScript type definitions, skip routes and validators |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows spec title/version) |
+| `--json` | | flag | `false` | Output results summary as JSON |
+
+**Example:**
+```bash
+python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/ --verbose
+```
+```
+API Scaffolder - Express
+Spec: openapi.yaml
+Output: src/routes/
+--------------------------------------------------
+Loaded: User Service API v1.0.0
+  Generated: src/routes/types.ts
+  Generated: src/routes/validators.ts
+  Generated: src/routes/users.routes.ts (5 handlers)
+  Generated: src/routes/index.ts
+--------------------------------------------------
+Generated 5 route handlers
+Generated 3 type definitions
+Output: src/routes/
+```
+
+**Output Formats:** Human-readable console output by default. Add `--json` for machine-readable JSON with `status`, `generated_files`, `routes_count`, and `types_count` fields.
+
+---
+
+### database_migration_tool.py
+
+**Purpose:** Analyze SQL schema files for issues, compare schemas to generate migrations with rollback scripts, and suggest missing indexes.
+
+**Usage:**
+```bash
+python scripts/database_migration_tool.py &lt;schema&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `schema` | | positional | *(required)* | Path to SQL schema file |
+| `--analyze` | | flag | `false` | Analyze schema for issues and optimizations (default mode if no other mode specified) |
+| `--compare` | | string | | Path to a second schema file to compare against and generate migration |
+| `--suggest-indexes` | | flag | `false` | Generate index suggestions for foreign keys, filter columns, and timestamps |
+| `--output` | `-o` | string | | Output directory for generated migration files |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows parsed table count and info-level suggestions) |
+| `--json` | | flag | `false` | Output results as JSON |
+
+**Example:**
+```bash
+python scripts/database_migration_tool.py schema.sql --analyze --verbose
+```
+```
+Database Migration Tool
+Schema: schema.sql
+--------------------------------------------------
+Parsed 8 tables
+
+Analysis Results:
+  Tables: 8
+  Errors: 1
+  Warnings: 3
+  Suggestions: 7
+
+ERRORS:
+  [audit_log] Table &#x27;audit_log&#x27; has no primary key
+    Suggestion: Add a primary key column (e.g., &#x27;id SERIAL PRIMARY KEY&#x27;)
+
+WARNINGS:
+  [orders] Foreign key column &#x27;user_id&#x27; is not indexed
+    Suggestion: CREATE INDEX idx_orders_user_id ON orders(user_id);
+```
+
+**Output Formats:** Human-readable console output by default. Add `--json` for structured JSON with `issues_detail` array containing severity, category, table, message, and suggestion for each finding. When using `--compare --output`, generates timestamped `_migration.sql` and `_migration_rollback.sql` files.
+
+---
+
+### api_load_tester.py
+
+**Purpose:** Perform HTTP load testing with configurable concurrency, measuring latency percentiles (p50/p90/p95/p99), throughput, error rates, and optional endpoint comparison.
+
+**Usage:**
+```bash
+python scripts/api_load_tester.py &lt;urls...&gt; [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `urls` | | positional | *(required)* | One or more URLs to test |
+| `--method` | `-m` | choice | `GET` | HTTP method: `GET`, `POST`, `PUT`, `PATCH`, or `DELETE` |
+| `--body` | `-b` | string | | Request body as a JSON string |
+| `--header` | `-H` | string (repeatable) | | HTTP header in `&quot;Name: Value&quot;` format; can be specified multiple times |
+| `--concurrency` | `-c` | int | `10` | Number of concurrent request threads |
+| `--duration` | `-d` | float | `10.0` | Test duration in seconds |
+| `--timeout` | `-t` | float | `30.0` | Per-request timeout in seconds |
+| `--compare` | | flag | `false` | Compare two endpoints side-by-side (requires two URLs) |
+| `--no-verify-ssl` | | flag | `false` | Disable SSL certificate verification |
+| `--verbose` | `-v` | flag | `false` | Enable verbose output (shows transfer bytes and throughput Mbps) |
+| `--json` | | flag | `false` | Output results as JSON |
+| `--output` | `-o` | string | | File path to write JSON results |
+
+**Example:**
+```bash
+python scripts/api_load_tester.py https://api.example.com/users \
+  --method GET \
+  --header &quot;Authorization: Bearer tok_abc123&quot; \
+  --concurrency 50 \
+  --duration 30 \
+  --verbose
+```
+```
+============================================================
+LOAD TEST RESULTS
+============================================================
+
+Target: https://api.example.com/users
+Method: GET
+Duration: 30.2s
+Concurrency: 50
+
+THROUGHPUT:
+  Total requests: 14,832
+  Requests/sec: 491.1
+  Successful: 14,710 (99.2%)
+  Failed: 122
+
+LATENCY (ms):
+  Min: 11.3
+  Avg: 92.4
+  P50: 71.2
+  P90: 165.8
+  P95: 201.3
+  P99: 387.6
+  Max: 1,102.5
+  StdDev: 89.2
+
+TRANSFER:
+  Total bytes: 45,291,520
+  Throughput: 12.01 Mbps
+
+RECOMMENDATIONS:
+  Warning: P99 latency (388ms) exceeds 500ms
+    Consider: Connection pooling, query optimization, caching
+  Performance looks good for this load level
+============================================================
+```
+
+**Output Formats:** Human-readable console report by default with latency distribution and recommendations. Add `--json` for structured JSON output. Use `--output results.json` to write results to a file. When using `--compare` with two URLs, outputs a side-by-side metric comparison table.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Backend&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Backend&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Backend in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Backend&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Backend&quot;
+4. Description: &quot;This skill should be used when the user asks to &quot;design REST APIs&quot;, &quot;optimize database queries&quot;, &quot;implement authentication&quot;, &quot;build microservices&quot;, &quot;review backend code&quot;, &quot;set up GraphQL&quot;, &quot;handle dat...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-backend/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

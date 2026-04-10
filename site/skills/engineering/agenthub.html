@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Agenthub (Engineering domain).
 
 Multi-agent DAG orchestration framework. Design, execute, and manage workflows where multiple AI agents collaborate on complex tasks with dependency graphs. Covers agent spawning, output merging, quality evaluation, and real-time status boards.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/agenthub
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Agenthub (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Agenthub (Engineering domain).
 
 Multi-agent DAG orchestration framework. Design, execute, and manage workflows where multiple AI agents collaborate on complex tasks with dependency graphs. Covers agent spawning, output merging, quality evaluation, and real-time status boards.
 
@@ -425,7 +447,624 @@ https://github.com/borghei/Claude-Skills/tree/main/agenthub
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Agenthub&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# AgentHub - Multi-Agent DAG Orchestration
+
+**Category:** Engineering / AI Agents
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+AgentHub provides patterns and tools for orchestrating multiple AI agents as a directed acyclic graph (DAG). Instead of one agent doing everything sequentially, AgentHub lets you decompose complex tasks into sub-tasks, assign each to a specialized agent, define dependencies between them, and merge their outputs into a coherent result.
+
+The core insight: complex tasks decompose better than they scale. A 10-step sequential task run by one agent hits context limits and quality degradation. Five parallel agents with clear scopes and a merge step produce better results faster.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a stage of the orchestration lifecycle:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Init** | `skills/init.md` | Initialize a multi-agent workflow definition |
+| **Run** | `skills/run.md` | Execute a defined workflow end-to-end |
+| **Spawn** | `skills/spawn.md` | Spawn individual agents within a workflow |
+| **Board** | `skills/board.md` | Dashboard showing agent status and progress |
+| **Eval** | `skills/eval.md` | Evaluate agent outputs for quality and consistency |
+| **Merge** | `skills/merge.md` | Merge outputs from multiple agents into final result |
+| **Status** | `skills/status.md` | Show workflow execution status and health |
+
+### Sub-Skill Flow
+
+```
+Init ──&gt; Run ──&gt; Spawn (parallel) ──&gt; Eval ──&gt; Merge
+                      │                            │
+                    Board ◄──── Status ◄───────────┘
+```
+
+**Lifecycle:** Init defines the workflow DAG, Run orchestrates execution, Spawn creates individual agents, Board provides real-time visibility, Eval checks output quality, Merge combines results, and Status reports overall health.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/dag_analyzer.py` | Analyze DAG definitions for cycles, unreachable nodes, and bottlenecks |
+| `scripts/board_manager.py` | Manage agent task boards with status tracking |
+| `scripts/result_ranker.py` | Rank and merge outputs from multiple agents |
+| `scripts/session_manager.py` | Manage orchestration sessions and state |
+
+## Core Concepts
+
+### Workflow DAG
+
+A workflow is a directed acyclic graph where:
+- **Nodes** are agent tasks with a defined scope, inputs, and expected outputs
+- **Edges** are dependencies: agent B cannot start until agent A completes
+- **Root nodes** have no dependencies and start immediately
+- **Terminal nodes** have no dependents and feed into the merge step
+
+```
+┌──────────┐     ┌──────────┐     ┌──────────┐
+│ Research  │────&gt;│ Analysis │────&gt;│  Merge   │
+│  Agent    │     │  Agent   │     │  Agent   │
+└──────────┘     └──────────┘     └──────────┘
+                       ▲
+┌──────────┐           │
+│ Data      │──────────┘
+│ Agent     │
+└──────────┘
+```
+
+### Workflow Definition Format
+
+```json
+{
+  &quot;name&quot;: &quot;market-analysis&quot;,
+  &quot;description&quot;: &quot;Comprehensive market analysis for product launch&quot;,
+  &quot;agents&quot;: {
+    &quot;researcher&quot;: {
+      &quot;task&quot;: &quot;Research competitor landscape and market size&quot;,
+      &quot;inputs&quot;: [&quot;product_description&quot;],
+      &quot;outputs&quot;: [&quot;competitor_list&quot;, &quot;market_size&quot;],
+      &quot;dependencies&quot;: []
+    },
+    &quot;data_collector&quot;: {
+      &quot;task&quot;: &quot;Collect pricing and feature data from competitors&quot;,
+      &quot;inputs&quot;: [&quot;competitor_list&quot;],
+      &quot;outputs&quot;: [&quot;pricing_data&quot;, &quot;feature_matrix&quot;],
+      &quot;dependencies&quot;: [&quot;researcher&quot;]
+    },
+    &quot;analyst&quot;: {
+      &quot;task&quot;: &quot;Analyze positioning opportunities and pricing strategy&quot;,
+      &quot;inputs&quot;: [&quot;pricing_data&quot;, &quot;feature_matrix&quot;, &quot;market_size&quot;],
+      &quot;outputs&quot;: [&quot;positioning_report&quot;, &quot;pricing_recommendation&quot;],
+      &quot;dependencies&quot;: [&quot;data_collector&quot;, &quot;researcher&quot;]
+    },
+    &quot;writer&quot;: {
+      &quot;task&quot;: &quot;Write executive summary combining all findings&quot;,
+      &quot;inputs&quot;: [&quot;positioning_report&quot;, &quot;pricing_recommendation&quot;],
+      &quot;outputs&quot;: [&quot;executive_summary&quot;],
+      &quot;dependencies&quot;: [&quot;analyst&quot;]
+    }
+  },
+  &quot;config&quot;: {
+    &quot;max_parallel&quot;: 3,
+    &quot;timeout_per_agent&quot;: 300,
+    &quot;retry_on_failure&quot;: true,
+    &quot;quality_threshold&quot;: 0.7
+  }
+}
+```
+
+### Agent States
+
+| State | Description |
+|-------|-------------|
+| `PENDING` | Waiting for dependencies to complete |
+| `READY` | All dependencies met, queued for execution |
+| `RUNNING` | Currently executing |
+| `COMPLETED` | Finished successfully |
+| `FAILED` | Failed after all retries |
+| `SKIPPED` | Skipped due to upstream failure |
+| `EVALUATING` | Output being evaluated for quality |
+
+### Execution Strategy
+
+1. **Topological sort** the DAG to determine execution order
+2. **Identify parallel groups**: nodes with no inter-dependencies run simultaneously
+3. **Execute root nodes** first (no dependencies)
+4. **Chain results**: completed node outputs become inputs for dependents
+5. **Evaluate outputs** at quality gates
+6. **Merge terminal outputs** into final result
+
+## Workflows
+
+### Workflow 1: Define and Validate
+
+```
+1. Define agents with tasks, inputs, outputs, dependencies
+2. Run dag_analyzer.py to validate:
+   - No cycles in the dependency graph
+   - All referenced inputs are produced by upstream agents
+   - No unreachable nodes
+   - Critical path length is acceptable
+3. Estimate execution time based on agent count and dependencies
+```
+
+### Workflow 2: Execute Orchestration
+
+```
+1. Load workflow definition
+2. Initialize session (session_manager.py)
+3. Topological sort to determine execution order
+4. For each parallel group:
+   a. Spawn agents (up to max_parallel)
+   b. Monitor progress on board
+   c. Collect outputs on completion
+   d. Evaluate outputs against quality threshold
+5. Pass outputs to downstream agents as inputs
+6. Merge final outputs
+7. Generate execution report
+```
+
+### Workflow 3: Evaluate and Iterate
+
+```
+1. Collect all agent outputs
+2. Run quality evaluation (eval sub-skill)
+3. Rank outputs by quality score (result_ranker.py)
+4. If any output below threshold:
+   a. Retry the agent with adjusted instructions
+   b. Or flag for human review
+5. Merge passing outputs into final result
+```
+
+## Common Patterns
+
+### Fan-Out / Fan-In
+
+Multiple independent agents work in parallel, then a single agent merges results:
+```
+Task A ──┐
+Task B ──┼──&gt; Merge
+Task C ──┘
+```
+
+### Pipeline
+
+Sequential agents where each transforms the previous output:
+```
+Extract ──&gt; Transform ──&gt; Load ──&gt; Validate
+```
+
+### Reducer
+
+Multiple agents produce competing outputs, ranked and best one selected:
+```
+Agent 1 ──┐
+Agent 2 ──┼──&gt; Rank ──&gt; Best Output
+Agent 3 ──┘
+```
+
+### Validator Chain
+
+Each agent validates the previous agent&#x27;s work:
+```
+Generate ──&gt; Review ──&gt; Fix ──&gt; Approve
+```
+
+## Best Practices
+
+1. **Small, focused agent scopes** -- each agent should have a single clear objective
+2. **Explicit inputs/outputs** -- never rely on implicit shared state between agents
+3. **Quality gates between stages** -- evaluate before passing outputs downstream
+4. **Timeout per agent** -- prevent runaway agents from blocking the workflow
+5. **Retry with context** -- when retrying a failed agent, include the failure reason
+6. **Merge strategy documented** -- how competing or complementary outputs combine
+7. **Critical path awareness** -- optimize the longest dependency chain first
+8. **Idempotent agents** -- agents should produce the same output given the same input
+
+## Common Pitfalls
+
+| Pitfall | Why It Happens | Fix |
+|---------|---------------|-----|
+| Cycle in DAG | Agent A depends on B which depends on A | Run dag_analyzer.py before execution |
+| Output format mismatch | Agent B expects JSON, Agent A produces markdown | Define explicit output schemas per agent |
+| Single bottleneck agent | One agent depends on everything | Restructure DAG to parallelize dependencies |
+| Lost context between agents | Outputs too terse for downstream use | Require structured output with context preservation |
+| Quality degradation in merge | Naive concatenation loses coherence | Use a dedicated merge agent with synthesis instructions |
+| Runaway execution time | No timeouts, retry loops | Set timeout_per_agent and max retries |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Workflow hangs at agent N | Dependency not met or agent timeout | Check board for PENDING agents; verify upstream completed; check timeout config |
+| Merged output is incoherent | No merge strategy defined | Use the merge sub-skill with explicit synthesis instructions |
+| Agent produces wrong format | Input/output contract unclear | Define JSON schemas for agent inputs and outputs |
+| DAG validation fails with cycle | Circular dependency in definition | Use dag_analyzer.py to identify the cycle; restructure the dependency chain |
+| Quality eval fails everything | Threshold too strict for task complexity | Lower threshold or add a revision step before eval |
+
+## Success Criteria
+
+- **DAG validation passes** on every workflow definition before execution
+- **Parallel execution utilization above 60%** -- agents running in parallel most of the time
+- **Quality gate pass rate above 80%** -- agent outputs meet threshold on first attempt
+- **End-to-end execution time within 2x critical path** -- parallelization delivers real speedup
+- **Zero lost outputs** -- every agent&#x27;s output is captured and available for merge/review
+- **Merge coherence score above 0.7** -- final merged output reads as a unified deliverable
+
+## Scope and Limitations
+
+**This skill covers:**
+- Multi-agent workflow design with DAG dependency graphs
+- Agent spawning, monitoring, and lifecycle management
+- Output quality evaluation and ranking
+- Result merging strategies for coherent final deliverables
+
+**This skill does NOT cover:**
+- Individual agent design or prompt engineering (see `agent-designer`)
+- Agent memory and self-improvement (see `self-improving-agent`)
+- Infrastructure for running agents (compute, scheduling, deployment)
+- Real-time streaming communication between agents
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `agent-designer` | Defines individual agent capabilities that become DAG nodes | Agent specs flow in; execution results flow back for agent tuning |
+| `self-improving-agent` | Each agent can use self-improvement patterns to get better | Session feedback from orchestration feeds into agent learning loops |
+| `prompt-engineer-toolkit` | Agent task prompts benefit from prompt engineering | Optimized prompts improve individual agent quality within the DAG |
+| `context-engine` | Manages what context each agent sees | Context retrieval provides relevant inputs to each spawned agent |
+| `observability-designer` | Monitors workflow execution and agent health | Agent state transitions and timing metrics feed into dashboards |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agenthub&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agenthub&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agenthub in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agenthub&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agenthub&quot;
+4. Description: &quot;Multi-agent DAG orchestration framework. Design, execute, and manage workflows where multiple AI agents collaborate on complex tasks with dependency graphs. Covers agent spawning, output merging, quality evaluation, and real-time status boards.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agenthub/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Agenthub&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# AgentHub - Multi-Agent DAG Orchestration
+
+**Category:** Engineering / AI Agents
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+AgentHub provides patterns and tools for orchestrating multiple AI agents as a directed acyclic graph (DAG). Instead of one agent doing everything sequentially, AgentHub lets you decompose complex tasks into sub-tasks, assign each to a specialized agent, define dependencies between them, and merge their outputs into a coherent result.
+
+The core insight: complex tasks decompose better than they scale. A 10-step sequential task run by one agent hits context limits and quality degradation. Five parallel agents with clear scopes and a merge step produce better results faster.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a stage of the orchestration lifecycle:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Init** | `skills/init.md` | Initialize a multi-agent workflow definition |
+| **Run** | `skills/run.md` | Execute a defined workflow end-to-end |
+| **Spawn** | `skills/spawn.md` | Spawn individual agents within a workflow |
+| **Board** | `skills/board.md` | Dashboard showing agent status and progress |
+| **Eval** | `skills/eval.md` | Evaluate agent outputs for quality and consistency |
+| **Merge** | `skills/merge.md` | Merge outputs from multiple agents into final result |
+| **Status** | `skills/status.md` | Show workflow execution status and health |
+
+### Sub-Skill Flow
+
+```
+Init ──&gt; Run ──&gt; Spawn (parallel) ──&gt; Eval ──&gt; Merge
+                      │                            │
+                    Board ◄──── Status ◄───────────┘
+```
+
+**Lifecycle:** Init defines the workflow DAG, Run orchestrates execution, Spawn creates individual agents, Board provides real-time visibility, Eval checks output quality, Merge combines results, and Status reports overall health.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/dag_analyzer.py` | Analyze DAG definitions for cycles, unreachable nodes, and bottlenecks |
+| `scripts/board_manager.py` | Manage agent task boards with status tracking |
+| `scripts/result_ranker.py` | Rank and merge outputs from multiple agents |
+| `scripts/session_manager.py` | Manage orchestration sessions and state |
+
+## Core Concepts
+
+### Workflow DAG
+
+A workflow is a directed acyclic graph where:
+- **Nodes** are agent tasks with a defined scope, inputs, and expected outputs
+- **Edges** are dependencies: agent B cannot start until agent A completes
+- **Root nodes** have no dependencies and start immediately
+- **Terminal nodes** have no dependents and feed into the merge step
+
+```
+┌──────────┐     ┌──────────┐     ┌──────────┐
+│ Research  │────&gt;│ Analysis │────&gt;│  Merge   │
+│  Agent    │     │  Agent   │     │  Agent   │
+└──────────┘     └──────────┘     └──────────┘
+                       ▲
+┌──────────┐           │
+│ Data      │──────────┘
+│ Agent     │
+└──────────┘
+```
+
+### Workflow Definition Format
+
+```json
+{
+  &quot;name&quot;: &quot;market-analysis&quot;,
+  &quot;description&quot;: &quot;Comprehensive market analysis for product launch&quot;,
+  &quot;agents&quot;: {
+    &quot;researcher&quot;: {
+      &quot;task&quot;: &quot;Research competitor landscape and market size&quot;,
+      &quot;inputs&quot;: [&quot;product_description&quot;],
+      &quot;outputs&quot;: [&quot;competitor_list&quot;, &quot;market_size&quot;],
+      &quot;dependencies&quot;: []
+    },
+    &quot;data_collector&quot;: {
+      &quot;task&quot;: &quot;Collect pricing and feature data from competitors&quot;,
+      &quot;inputs&quot;: [&quot;competitor_list&quot;],
+      &quot;outputs&quot;: [&quot;pricing_data&quot;, &quot;feature_matrix&quot;],
+      &quot;dependencies&quot;: [&quot;researcher&quot;]
+    },
+    &quot;analyst&quot;: {
+      &quot;task&quot;: &quot;Analyze positioning opportunities and pricing strategy&quot;,
+      &quot;inputs&quot;: [&quot;pricing_data&quot;, &quot;feature_matrix&quot;, &quot;market_size&quot;],
+      &quot;outputs&quot;: [&quot;positioning_report&quot;, &quot;pricing_recommendation&quot;],
+      &quot;dependencies&quot;: [&quot;data_collector&quot;, &quot;researcher&quot;]
+    },
+    &quot;writer&quot;: {
+      &quot;task&quot;: &quot;Write executive summary combining all findings&quot;,
+      &quot;inputs&quot;: [&quot;positioning_report&quot;, &quot;pricing_recommendation&quot;],
+      &quot;outputs&quot;: [&quot;executive_summary&quot;],
+      &quot;dependencies&quot;: [&quot;analyst&quot;]
+    }
+  },
+  &quot;config&quot;: {
+    &quot;max_parallel&quot;: 3,
+    &quot;timeout_per_agent&quot;: 300,
+    &quot;retry_on_failure&quot;: true,
+    &quot;quality_threshold&quot;: 0.7
+  }
+}
+```
+
+### Agent States
+
+| State | Description |
+|-------|-------------|
+| `PENDING` | Waiting for dependencies to complete |
+| `READY` | All dependencies met, queued for execution |
+| `RUNNING` | Currently executing |
+| `COMPLETED` | Finished successfully |
+| `FAILED` | Failed after all retries |
+| `SKIPPED` | Skipped due to upstream failure |
+| `EVALUATING` | Output being evaluated for quality |
+
+### Execution Strategy
+
+1. **Topological sort** the DAG to determine execution order
+2. **Identify parallel groups**: nodes with no inter-dependencies run simultaneously
+3. **Execute root nodes** first (no dependencies)
+4. **Chain results**: completed node outputs become inputs for dependents
+5. **Evaluate outputs** at quality gates
+6. **Merge terminal outputs** into final result
+
+## Workflows
+
+### Workflow 1: Define and Validate
+
+```
+1. Define agents with tasks, inputs, outputs, dependencies
+2. Run dag_analyzer.py to validate:
+   - No cycles in the dependency graph
+   - All referenced inputs are produced by upstream agents
+   - No unreachable nodes
+   - Critical path length is acceptable
+3. Estimate execution time based on agent count and dependencies
+```
+
+### Workflow 2: Execute Orchestration
+
+```
+1. Load workflow definition
+2. Initialize session (session_manager.py)
+3. Topological sort to determine execution order
+4. For each parallel group:
+   a. Spawn agents (up to max_parallel)
+   b. Monitor progress on board
+   c. Collect outputs on completion
+   d. Evaluate outputs against quality threshold
+5. Pass outputs to downstream agents as inputs
+6. Merge final outputs
+7. Generate execution report
+```
+
+### Workflow 3: Evaluate and Iterate
+
+```
+1. Collect all agent outputs
+2. Run quality evaluation (eval sub-skill)
+3. Rank outputs by quality score (result_ranker.py)
+4. If any output below threshold:
+   a. Retry the agent with adjusted instructions
+   b. Or flag for human review
+5. Merge passing outputs into final result
+```
+
+## Common Patterns
+
+### Fan-Out / Fan-In
+
+Multiple independent agents work in parallel, then a single agent merges results:
+```
+Task A ──┐
+Task B ──┼──&gt; Merge
+Task C ──┘
+```
+
+### Pipeline
+
+Sequential agents where each transforms the previous output:
+```
+Extract ──&gt; Transform ──&gt; Load ──&gt; Validate
+```
+
+### Reducer
+
+Multiple agents produce competing outputs, ranked and best one selected:
+```
+Agent 1 ──┐
+Agent 2 ──┼──&gt; Rank ──&gt; Best Output
+Agent 3 ──┘
+```
+
+### Validator Chain
+
+Each agent validates the previous agent&#x27;s work:
+```
+Generate ──&gt; Review ──&gt; Fix ──&gt; Approve
+```
+
+## Best Practices
+
+1. **Small, focused agent scopes** -- each agent should have a single clear objective
+2. **Explicit inputs/outputs** -- never rely on implicit shared state between agents
+3. **Quality gates between stages** -- evaluate before passing outputs downstream
+4. **Timeout per agent** -- prevent runaway agents from blocking the workflow
+5. **Retry with context** -- when retrying a failed agent, include the failure reason
+6. **Merge strategy documented** -- how competing or complementary outputs combine
+7. **Critical path awareness** -- optimize the longest dependency chain first
+8. **Idempotent agents** -- agents should produce the same output given the same input
+
+## Common Pitfalls
+
+| Pitfall | Why It Happens | Fix |
+|---------|---------------|-----|
+| Cycle in DAG | Agent A depends on B which depends on A | Run dag_analyzer.py before execution |
+| Output format mismatch | Agent B expects JSON, Agent A produces markdown | Define explicit output schemas per agent |
+| Single bottleneck agent | One agent depends on everything | Restructure DAG to parallelize dependencies |
+| Lost context between agents | Outputs too terse for downstream use | Require structured output with context preservation |
+| Quality degradation in merge | Naive concatenation loses coherence | Use a dedicated merge agent with synthesis instructions |
+| Runaway execution time | No timeouts, retry loops | Set timeout_per_agent and max retries |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Workflow hangs at agent N | Dependency not met or agent timeout | Check board for PENDING agents; verify upstream completed; check timeout config |
+| Merged output is incoherent | No merge strategy defined | Use the merge sub-skill with explicit synthesis instructions |
+| Agent produces wrong format | Input/output contract unclear | Define JSON schemas for agent inputs and outputs |
+| DAG validation fails with cycle | Circular dependency in definition | Use dag_analyzer.py to identify the cycle; restructure the dependency chain |
+| Quality eval fails everything | Threshold too strict for task complexity | Lower threshold or add a revision step before eval |
+
+## Success Criteria
+
+- **DAG validation passes** on every workflow definition before execution
+- **Parallel execution utilization above 60%** -- agents running in parallel most of the time
+- **Quality gate pass rate above 80%** -- agent outputs meet threshold on first attempt
+- **End-to-end execution time within 2x critical path** -- parallelization delivers real speedup
+- **Zero lost outputs** -- every agent&#x27;s output is captured and available for merge/review
+- **Merge coherence score above 0.7** -- final merged output reads as a unified deliverable
+
+## Scope and Limitations
+
+**This skill covers:**
+- Multi-agent workflow design with DAG dependency graphs
+- Agent spawning, monitoring, and lifecycle management
+- Output quality evaluation and ranking
+- Result merging strategies for coherent final deliverables
+
+**This skill does NOT cover:**
+- Individual agent design or prompt engineering (see `agent-designer`)
+- Agent memory and self-improvement (see `self-improving-agent`)
+- Infrastructure for running agents (compute, scheduling, deployment)
+- Real-time streaming communication between agents
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `agent-designer` | Defines individual agent capabilities that become DAG nodes | Agent specs flow in; execution results flow back for agent tuning |
+| `self-improving-agent` | Each agent can use self-improvement patterns to get better | Session feedback from orchestration feeds into agent learning loops |
+| `prompt-engineer-toolkit` | Agent task prompts benefit from prompt engineering | Optimized prompts improve individual agent quality within the DAG |
+| `context-engine` | Manages what context each agent sees | Context retrieval provides relevant inputs to each spawned agent |
+| `observability-designer` | Monitors workflow execution and agent health | Agent state transitions and timing metrics feed into dashboards |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agenthub&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agenthub&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agenthub in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agenthub&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agenthub&quot;
+4. Description: &quot;Multi-agent DAG orchestration framework. Design, execute, and manage workflows where multiple AI agents collaborate on complex tasks with dependency graphs. Covers agent spawning, output merging, quality evaluation, and real-time status boards.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agenthub/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

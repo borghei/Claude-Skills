@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Performance Profiler (Engineering domain).
 
 Systematic performance profiling for Node.js, Python, and Go applications. Covers CPU flamegraphs, memory leak detection, bundle analysis, database query optimization, N+1 detection, load testing with...
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/performance-profiler
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Performance Profiler (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Performance Profiler (Engineering domain).
 
 Systematic performance profiling for Node.js, Python, and Go applications. Covers CPU flamegraphs, memory leak detection, bundle analysis, database query optimization, N+1 detection, load testing with...
 
@@ -431,7 +453,1030 @@ https://github.com/borghei/Claude-Skills/tree/main/performance-profiler
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Performance Profiler&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Performance Profiler
+
+**Tier:** POWERFUL
+**Category:** Engineering / Performance
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Systematic performance profiling for Node.js, Python, and Go applications. Identifies CPU bottlenecks with flamegraphs, detects memory leaks with heap snapshots, analyzes bundle sizes, optimizes database queries, detects N+1 patterns, and runs load tests with k6 and Artillery. Enforces a measure-first methodology: establish baseline, identify bottleneck, fix, and verify improvement.
+
+## Keywords
+
+performance profiling, flamegraph, memory leak, bundle analysis, N+1 queries, load testing, k6, latency, P99, CPU profiling, heap snapshot, database optimization
+
+## Golden Rule: Measure First
+
+```
+WRONG: &quot;I think the N+1 query is slow, let me fix it&quot;
+RIGHT: Profile → Confirm bottleneck → Fix → Measure again → Verify improvement
+
+Every optimization must have:
+1. Baseline metrics (before)
+2. Profiler evidence (what&#x27;s actually slow)
+3. The fix
+4. Post-fix metrics (after)
+5. Delta calculation (improvement %)
+```
+
+## Core Capabilities
+
+### 1. CPU Profiling
+- Node.js: Clinic.js flamegraphs, V8 CPU profiles
+- Python: py-spy flamegraphs, cProfile, scalene
+- Go: pprof CPU profiles, trace visualization
+- Browser: Chrome DevTools Performance panel
+
+### 2. Memory Profiling
+- Heap snapshots and comparison (before/after)
+- Garbage collection pressure analysis
+- Memory leak detection patterns
+- Retained object graph analysis
+
+### 3. Database Optimization
+- EXPLAIN ANALYZE for query plan analysis
+- N+1 query detection and batching
+- Slow query log analysis
+- Missing index identification
+- Connection pool sizing
+
+### 4. Bundle Analysis
+- webpack-bundle-analyzer visualization
+- Next.js bundle analyzer
+- Tree-shaking effectiveness
+- Dynamic import opportunities
+- Heavy dependency identification
+
+### 5. Load Testing
+- k6 scripts with ramp-up patterns
+- SLA threshold enforcement in CI
+- Latency percentile tracking (P50, P95, P99)
+- Concurrent user simulation
+
+## When to Use
+
+- App is slow and you do not know where the bottleneck is
+- P99 latency exceeds SLA before a release
+- Memory usage grows over time (suspected leak)
+- Bundle size increased after adding dependencies
+- Preparing for a traffic spike (load test before launch)
+- Database queries taking &gt;100ms
+- After a dependency upgrade to verify no regressions
+
+## Node.js CPU Profiling
+
+### Method 1: Clinic.js Flamegraph
+
+```bash
+# Install
+npm install -g clinic
+
+# Generate flamegraph (starts server, applies load, generates HTML report)
+clinic flame -- node server.js
+
+# With specific load profile
+clinic flame --autocannon [ /api/endpoint -c 10 -d 30 ] -- node server.js
+
+# Analyze specific scenario
+clinic flame --on-port &#x27;autocannon -c 50 -d 60 http://localhost:$PORT/api/heavy-endpoint&#x27; -- node server.js
+```
+
+### Method 2: V8 CPU Profile
+
+```bash
+# Start Node with inspector
+node --inspect server.js
+
+# Or profile on demand
+node --cpu-prof --cpu-prof-dir=./profiles server.js
+# Load the .cpuprofile file in Chrome DevTools &gt; Performance
+
+# Programmatic profiling of a specific function
+const { Session } = require(&#x27;inspector&#x27;);
+const session = new Session();
+session.connect();
+
+session.post(&#x27;Profiler.enable&#x27;, () =&gt; {
+  session.post(&#x27;Profiler.start&#x27;, () =&gt; {
+    // Run the code you want to profile
+    runHeavyOperation();
+
+    session.post(&#x27;Profiler.stop&#x27;, (err, { profile }) =&gt; {
+      require(&#x27;fs&#x27;).writeFileSync(&#x27;profile.cpuprofile&#x27;, JSON.stringify(profile));
+    });
+  });
+});
+```
+
+## Memory Leak Detection
+
+### Node.js Heap Snapshots
+
+```javascript
+// Take heap snapshots programmatically
+const v8 = require(&#x27;v8&#x27;);
+const fs = require(&#x27;fs&#x27;);
+
+function takeHeapSnapshot(label) {
+  const snapshotPath = `heap-${label}-${Date.now()}.heapsnapshot`;
+  const stream = v8.writeHeapSnapshot(snapshotPath);
+  console.log(`Heap snapshot written to: ${snapshotPath}`);
+  return snapshotPath;
+}
+
+// Leak detection pattern: compare two snapshots
+// 1. Take snapshot at startup
+takeHeapSnapshot(&#x27;baseline&#x27;);
+
+// 2. Run operations that you suspect leak
+// ... process 1000 requests ...
+
+// 3. Force GC and take another snapshot
+if (global.gc) global.gc(); // requires --expose-gc flag
+takeHeapSnapshot(&#x27;after-load&#x27;);
+
+// Load both .heapsnapshot files in Chrome DevTools &gt; Memory
+// Use &quot;Comparison&quot; view to find objects that grew
+```
+
+### Python Memory Profiling
+
+```bash
+# Install tracemalloc-based profiler
+pip install memray
+
+# Profile a script
+memray run my_script.py
+memray flamegraph memray-output.bin -o flamegraph.html
+
+# Profile a specific function
+python -c &quot;
+import tracemalloc
+tracemalloc.start()
+
+# Run your code
+from my_module import heavy_function
+heavy_function()
+
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics(&#x27;lineno&#x27;)
+print(&#x27;Top 10 memory allocations:&#x27;)
+for stat in top_stats[:10]:
+    print(stat)
+&quot;
+```
+
+## Database Query Optimization
+
+### EXPLAIN ANALYZE Workflow
+
+```sql
+-- Step 1: Get the actual execution plan (not just estimated)
+EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
+SELECT t.*, p.name as project_name
+FROM tasks t
+JOIN projects p ON p.id = t.project_id
+WHERE p.workspace_id = &#x27;ws_abc123&#x27;
+  AND t.status = &#x27;in_progress&#x27;
+  AND t.deleted_at IS NULL
+ORDER BY t.updated_at DESC
+LIMIT 20;
+
+-- What to look for in the output:
+-- Seq Scan on tasks  → MISSING INDEX (should be Index Scan)
+-- Rows Removed by Filter: 99000  → INDEX NOT SELECTIVE ENOUGH
+-- Sort Method: external merge  → NOT ENOUGH work_mem
+-- Nested Loop with inner Seq Scan  → MISSING INDEX ON JOIN COLUMN
+-- Actual rows=1000 vs estimated rows=1  → STALE STATISTICS (run ANALYZE)
+```
+
+### N+1 Query Detection
+
+```typescript
+// PROBLEM: N+1 query pattern
+async function getProjectsWithTasks(workspaceId: string) {
+  const projects = await db.query.projects.findMany({
+    where: eq(projects.workspaceId, workspaceId),
+  });
+
+  // This executes N additional queries (one per project)
+  for (const project of projects) {
+    project.tasks = await db.query.tasks.findMany({
+      where: eq(tasks.projectId, project.id),
+    });
+  }
+  return projects;
+}
+// Total queries: 1 + N (where N = number of projects)
+
+// FIX: Single query with JOIN or relation loading
+async function getProjectsWithTasks(workspaceId: string) {
+  return db.query.projects.findMany({
+    where: eq(projects.workspaceId, workspaceId),
+    with: {
+      tasks: true,  // Drizzle generates a single JOIN or subquery
+    },
+  });
+}
+// Total queries: 1-2 (depending on ORM strategy)
+```
+
+### N+1 Detection Script
+
+```bash
+# Log query count per request (add to middleware)
+# Node.js with Drizzle:
+let queryCount = 0;
+const originalQuery = db.execute;
+db.execute = (...args) =&gt; { queryCount++; return originalQuery.apply(db, args); };
+
+// After request completes:
+if (queryCount &gt; 10) {
+  console.warn(`N+1 ALERT: ${req.method} ${req.path} executed ${queryCount} queries`);
+}
+```
+
+## Bundle Analysis
+
+### Next.js Bundle Analyzer
+
+```bash
+# Install
+pnpm add -D @next/bundle-analyzer
+
+# next.config.js
+const withBundleAnalyzer = require(&#x27;@next/bundle-analyzer&#x27;)({
+  enabled: process.env.ANALYZE === &#x27;true&#x27;,
+});
+module.exports = withBundleAnalyzer(nextConfig);
+
+# Run analysis
+ANALYZE=true pnpm build
+# Opens browser with interactive treemap
+```
+
+### Quick Bundle Size Check
+
+```bash
+# Check what you&#x27;re shipping
+npx source-map-explorer .next/static/chunks/*.js
+
+# Size of individual imports
+npx import-cost  # VS Code extension for inline size
+
+# Find heavy dependencies
+npx depcheck --json | jq &#x27;.dependencies&#x27;
+npx bundlephobia-cli &lt;package-name&gt;
+```
+
+### Common Bundle Wins
+
+| Before | After | Savings |
+|--------|-------|---------|
+| `import _ from &#x27;lodash&#x27;` | `import groupBy from &#x27;lodash/groupBy&#x27;` | ~70KB |
+| `import moment from &#x27;moment&#x27;` | `import { format } from &#x27;date-fns&#x27;` | ~60KB |
+| `import { icons } from &#x27;lucide-react&#x27;` | `import { Search } from &#x27;lucide-react&#x27;` | ~50KB |
+| Static import of heavy component | `dynamic(() =&gt; import(&#x27;./HeavyChart&#x27;))` | Deferred |
+| All routes in one chunk | Code splitting per route (automatic in Next.js) | Per-route |
+
+## Load Testing with k6
+
+```javascript
+// load-test.k6.js
+import http from &#x27;k6/http&#x27;
+import { check, sleep } from &#x27;k6&#x27;
+import { Trend, Rate } from &#x27;k6/metrics&#x27;
+
+const apiLatency = new Trend(&#x27;api_latency&#x27;)
+const errorRate = new Rate(&#x27;errors&#x27;)
+
+export const options = {
+  stages: [
+    { duration: &#x27;1m&#x27;, target: 20 },    // ramp up
+    { duration: &#x27;3m&#x27;, target: 100 },   // sustain
+    { duration: &#x27;1m&#x27;, target: 0 },     // ramp down
+  ],
+  thresholds: {
+    http_req_duration: [&#x27;p(95)&lt;200&#x27;, &#x27;p(99)&lt;500&#x27;],
+    errors: [&#x27;rate&lt;0.01&#x27;],
+    api_latency: [&#x27;p(95)&lt;150&#x27;],
+  },
+}
+
+export default function () {
+  const res = http.get(`${__ENV.BASE_URL}/api/v1/projects?limit=20`, {
+    headers: { Authorization: `Bearer ${__ENV.TOKEN}` },
+  })
+
+  apiLatency.add(res.timings.duration)
+  check(res, {
+    &#x27;status 200&#x27;: (r) =&gt; r.status === 200,
+    &#x27;body has data&#x27;: (r) =&gt; JSON.parse(r.body).data !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+}
+```
+
+```bash
+# Run locally
+k6 run load-test.k6.js -e BASE_URL=http://localhost:3000 -e TOKEN=$TOKEN
+
+# Run with cloud reporting
+k6 cloud load-test.k6.js
+```
+
+## Before/After Measurement Template
+
+```markdown
+## Performance Optimization: [What You Fixed]
+
+**Date:** YYYY-MM-DD
+**Ticket:** PROJ-123
+
+### Problem
+[1-2 sentences: what was slow, how it was observed]
+
+### Root Cause
+[What the profiler revealed — include flamegraph link or screenshot]
+
+### Baseline (Before)
+| Metric | Value |
+|--------|-------|
+| P50 latency | XXms |
+| P95 latency | XXms |
+| P99 latency | XXms |
+| Throughput (RPS) | XX |
+| DB queries/request | XX |
+| Bundle size | XXkB |
+
+### Fix Applied
+[Brief description + link to PR]
+
+### After
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| P50 | XXms | XXms | -XX% |
+| P95 | XXms | XXms | -XX% |
+| P99 | XXms | XXms | -XX% |
+| RPS | XX | XX | +XX% |
+| DB queries/req | XX | XX | -XX% |
+
+### Verification
+[Link to k6 output, CI run, or monitoring dashboard]
+```
+
+## Quick-Win Optimization Checklist
+
+```
+DATABASE
+[ ] Missing indexes on WHERE/ORDER BY columns
+[ ] N+1 queries (check query count per request)
+[ ] SELECT * when only 2-3 columns needed
+[ ] No LIMIT on unbounded queries
+[ ] Missing connection pool (new connection per request)
+[ ] Stale statistics (run ANALYZE on busy tables)
+
+NODE.JS
+[ ] Sync I/O (fs.readFileSync) in request handlers
+[ ] JSON.parse/stringify of large objects in hot loops
+[ ] Missing response compression (gzip/brotli)
+[ ] Dependencies loaded inside request handlers (move to module level)
+[ ] Sequential awaits that could be Promise.all
+
+BUNDLE
+[ ] Full lodash/moment import instead of specific functions
+[ ] Static imports of heavy components (use dynamic import)
+[ ] Images not optimized / not using next/image
+[ ] No code splitting on routes
+
+API
+[ ] No pagination on list endpoints
+[ ] No Cache-Control headers on stable responses
+[ ] Serial fetches that could run in parallel
+[ ] Fetching related data in loops instead of JOINs
+```
+
+## Common Pitfalls
+
+- **Optimizing without measuring** — you will optimize the wrong thing
+- **Testing with development data** — 10 rows in dev vs millions in prod reveals different bottlenecks
+- **Ignoring P99** — P50 can look fine while P99 is catastrophic for some users
+- **Premature optimization** — fix correctness first, then measure and optimize
+- **Not re-measuring after the fix** — always verify the fix actually improved the metrics
+- **Load testing production** — use staging with production-sized data volumes instead
+
+## Best Practices
+
+1. **Baseline first, always** — record P50/P95/P99, RPS, and error rate before touching anything
+2. **One change at a time** — isolate the variable to confirm causation, not correlation
+3. **Profile with realistic data volumes** — performance characteristics change dramatically with scale
+4. **Set performance budgets** — `p(95) &lt; 200ms` as a CI gate with k6
+5. **Monitor continuously** — add Datadog/Prometheus/Grafana metrics for key code paths
+6. **Cache aggressively, invalidate precisely** — cache is the fastest optimization but hardest to debug
+7. **Document the win** — before/after in the PR description motivates the team and creates institutional knowledge
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Flamegraph shows only `(idle)` frames | Profiling during low-load period; no meaningful CPU work captured | Apply realistic load with autocannon or k6 during profiling, target the specific endpoint under investigation |
+| Heap snapshot comparison shows no growth but memory still climbs | Native memory leak outside V8 heap (e.g., native addon, file descriptor leak) | Use `process.memoryUsage().rss` tracking alongside heap snapshots; profile with Valgrind or `memray` for native allocations |
+| `EXPLAIN ANALYZE` shows Index Scan but query is still slow | Index exists but is not selective enough, or query returns too many rows for index to help | Check index selectivity with `SELECT count(DISTINCT col)/count(*) FROM table`; consider composite index or partial index |
+| k6 load test passes locally but fails in CI | CI runner has limited CPU/memory; network latency differs from local | Run k6 against a dedicated staging environment, not localhost in CI; adjust thresholds for CI-specific baselines |
+| Bundle analyzer shows expected size but app still loads slowly | Large bundle is code-split but critical path has render-blocking resources | Audit the critical rendering path separately with Lighthouse; check for synchronous scripts and unoptimized images |
+| `py-spy` cannot attach to running process | Insufficient permissions or SIP (System Integrity Protection) on macOS | Run with `sudo py-spy record --pid &lt;PID&gt;`; on macOS, disable SIP or use `--subprocesses` flag with a fresh process |
+| N+1 detection middleware reports false positives | Legitimate batch operations trigger high query counts per request | Add endpoint-level allowlists to the detection middleware; distinguish between N+1 patterns and intentional batch queries by checking for repeated identical query templates |
+
+## Success Criteria
+
+- **Baseline coverage:** Every optimization PR includes documented before/after metrics with P50, P95, and P99 latency values
+- **Latency targets met:** P95 API response time stays below 200ms and P99 below 500ms as validated by k6 threshold checks in CI
+- **Memory stability:** No heap growth exceeding 10% over a 24-hour soak test under sustained load
+- **Bundle budget enforced:** JavaScript bundle size for initial page load remains under 200kB gzipped, verified by CI gate
+- **N+1 elimination:** Query count per API request stays below 10 for all critical endpoints, validated by request-level query logging
+- **Load test confidence:** Staging load tests demonstrate the system handles 2x expected peak traffic with error rate below 1%
+- **Regression detection:** Performance regressions are caught within one CI cycle, not discovered in production monitoring
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- CPU and memory profiling for Node.js, Python, and Go applications using flamegraphs and heap snapshots
+- Database query optimization including EXPLAIN ANALYZE interpretation, N+1 detection, and index recommendations
+- Frontend bundle analysis and size reduction strategies for webpack and Next.js projects
+- Load testing methodology with k6 including ramp-up patterns, threshold enforcement, and CI integration
+
+**This skill does NOT cover:**
+- Application Performance Monitoring (APM) platform setup and configuration (Datadog, New Relic, Grafana) — see `engineering/observability-designer`
+- Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering/senior-devops`
+- Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering/senior-security`
+- Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering/senior-mobile`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
+| `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
+| `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
+| `engineering/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
+| `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
+| `engineering/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Performance Profiler&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Performance Profiler&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Performance Profiler in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Performance Profiler&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Performance Profiler&quot;
+4. Description: &quot;Systematic performance profiling for Node.js, Python, and Go applications. Covers CPU flamegraphs, memory leak detection, bundle analysis, database query optimization, N+1 detection, load testing with...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/performance-profiler/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Performance Profiler&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Performance Profiler
+
+**Tier:** POWERFUL
+**Category:** Engineering / Performance
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Systematic performance profiling for Node.js, Python, and Go applications. Identifies CPU bottlenecks with flamegraphs, detects memory leaks with heap snapshots, analyzes bundle sizes, optimizes database queries, detects N+1 patterns, and runs load tests with k6 and Artillery. Enforces a measure-first methodology: establish baseline, identify bottleneck, fix, and verify improvement.
+
+## Keywords
+
+performance profiling, flamegraph, memory leak, bundle analysis, N+1 queries, load testing, k6, latency, P99, CPU profiling, heap snapshot, database optimization
+
+## Golden Rule: Measure First
+
+```
+WRONG: &quot;I think the N+1 query is slow, let me fix it&quot;
+RIGHT: Profile → Confirm bottleneck → Fix → Measure again → Verify improvement
+
+Every optimization must have:
+1. Baseline metrics (before)
+2. Profiler evidence (what&#x27;s actually slow)
+3. The fix
+4. Post-fix metrics (after)
+5. Delta calculation (improvement %)
+```
+
+## Core Capabilities
+
+### 1. CPU Profiling
+- Node.js: Clinic.js flamegraphs, V8 CPU profiles
+- Python: py-spy flamegraphs, cProfile, scalene
+- Go: pprof CPU profiles, trace visualization
+- Browser: Chrome DevTools Performance panel
+
+### 2. Memory Profiling
+- Heap snapshots and comparison (before/after)
+- Garbage collection pressure analysis
+- Memory leak detection patterns
+- Retained object graph analysis
+
+### 3. Database Optimization
+- EXPLAIN ANALYZE for query plan analysis
+- N+1 query detection and batching
+- Slow query log analysis
+- Missing index identification
+- Connection pool sizing
+
+### 4. Bundle Analysis
+- webpack-bundle-analyzer visualization
+- Next.js bundle analyzer
+- Tree-shaking effectiveness
+- Dynamic import opportunities
+- Heavy dependency identification
+
+### 5. Load Testing
+- k6 scripts with ramp-up patterns
+- SLA threshold enforcement in CI
+- Latency percentile tracking (P50, P95, P99)
+- Concurrent user simulation
+
+## When to Use
+
+- App is slow and you do not know where the bottleneck is
+- P99 latency exceeds SLA before a release
+- Memory usage grows over time (suspected leak)
+- Bundle size increased after adding dependencies
+- Preparing for a traffic spike (load test before launch)
+- Database queries taking &gt;100ms
+- After a dependency upgrade to verify no regressions
+
+## Node.js CPU Profiling
+
+### Method 1: Clinic.js Flamegraph
+
+```bash
+# Install
+npm install -g clinic
+
+# Generate flamegraph (starts server, applies load, generates HTML report)
+clinic flame -- node server.js
+
+# With specific load profile
+clinic flame --autocannon [ /api/endpoint -c 10 -d 30 ] -- node server.js
+
+# Analyze specific scenario
+clinic flame --on-port &#x27;autocannon -c 50 -d 60 http://localhost:$PORT/api/heavy-endpoint&#x27; -- node server.js
+```
+
+### Method 2: V8 CPU Profile
+
+```bash
+# Start Node with inspector
+node --inspect server.js
+
+# Or profile on demand
+node --cpu-prof --cpu-prof-dir=./profiles server.js
+# Load the .cpuprofile file in Chrome DevTools &gt; Performance
+
+# Programmatic profiling of a specific function
+const { Session } = require(&#x27;inspector&#x27;);
+const session = new Session();
+session.connect();
+
+session.post(&#x27;Profiler.enable&#x27;, () =&gt; {
+  session.post(&#x27;Profiler.start&#x27;, () =&gt; {
+    // Run the code you want to profile
+    runHeavyOperation();
+
+    session.post(&#x27;Profiler.stop&#x27;, (err, { profile }) =&gt; {
+      require(&#x27;fs&#x27;).writeFileSync(&#x27;profile.cpuprofile&#x27;, JSON.stringify(profile));
+    });
+  });
+});
+```
+
+## Memory Leak Detection
+
+### Node.js Heap Snapshots
+
+```javascript
+// Take heap snapshots programmatically
+const v8 = require(&#x27;v8&#x27;);
+const fs = require(&#x27;fs&#x27;);
+
+function takeHeapSnapshot(label) {
+  const snapshotPath = `heap-${label}-${Date.now()}.heapsnapshot`;
+  const stream = v8.writeHeapSnapshot(snapshotPath);
+  console.log(`Heap snapshot written to: ${snapshotPath}`);
+  return snapshotPath;
+}
+
+// Leak detection pattern: compare two snapshots
+// 1. Take snapshot at startup
+takeHeapSnapshot(&#x27;baseline&#x27;);
+
+// 2. Run operations that you suspect leak
+// ... process 1000 requests ...
+
+// 3. Force GC and take another snapshot
+if (global.gc) global.gc(); // requires --expose-gc flag
+takeHeapSnapshot(&#x27;after-load&#x27;);
+
+// Load both .heapsnapshot files in Chrome DevTools &gt; Memory
+// Use &quot;Comparison&quot; view to find objects that grew
+```
+
+### Python Memory Profiling
+
+```bash
+# Install tracemalloc-based profiler
+pip install memray
+
+# Profile a script
+memray run my_script.py
+memray flamegraph memray-output.bin -o flamegraph.html
+
+# Profile a specific function
+python -c &quot;
+import tracemalloc
+tracemalloc.start()
+
+# Run your code
+from my_module import heavy_function
+heavy_function()
+
+snapshot = tracemalloc.take_snapshot()
+top_stats = snapshot.statistics(&#x27;lineno&#x27;)
+print(&#x27;Top 10 memory allocations:&#x27;)
+for stat in top_stats[:10]:
+    print(stat)
+&quot;
+```
+
+## Database Query Optimization
+
+### EXPLAIN ANALYZE Workflow
+
+```sql
+-- Step 1: Get the actual execution plan (not just estimated)
+EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)
+SELECT t.*, p.name as project_name
+FROM tasks t
+JOIN projects p ON p.id = t.project_id
+WHERE p.workspace_id = &#x27;ws_abc123&#x27;
+  AND t.status = &#x27;in_progress&#x27;
+  AND t.deleted_at IS NULL
+ORDER BY t.updated_at DESC
+LIMIT 20;
+
+-- What to look for in the output:
+-- Seq Scan on tasks  → MISSING INDEX (should be Index Scan)
+-- Rows Removed by Filter: 99000  → INDEX NOT SELECTIVE ENOUGH
+-- Sort Method: external merge  → NOT ENOUGH work_mem
+-- Nested Loop with inner Seq Scan  → MISSING INDEX ON JOIN COLUMN
+-- Actual rows=1000 vs estimated rows=1  → STALE STATISTICS (run ANALYZE)
+```
+
+### N+1 Query Detection
+
+```typescript
+// PROBLEM: N+1 query pattern
+async function getProjectsWithTasks(workspaceId: string) {
+  const projects = await db.query.projects.findMany({
+    where: eq(projects.workspaceId, workspaceId),
+  });
+
+  // This executes N additional queries (one per project)
+  for (const project of projects) {
+    project.tasks = await db.query.tasks.findMany({
+      where: eq(tasks.projectId, project.id),
+    });
+  }
+  return projects;
+}
+// Total queries: 1 + N (where N = number of projects)
+
+// FIX: Single query with JOIN or relation loading
+async function getProjectsWithTasks(workspaceId: string) {
+  return db.query.projects.findMany({
+    where: eq(projects.workspaceId, workspaceId),
+    with: {
+      tasks: true,  // Drizzle generates a single JOIN or subquery
+    },
+  });
+}
+// Total queries: 1-2 (depending on ORM strategy)
+```
+
+### N+1 Detection Script
+
+```bash
+# Log query count per request (add to middleware)
+# Node.js with Drizzle:
+let queryCount = 0;
+const originalQuery = db.execute;
+db.execute = (...args) =&gt; { queryCount++; return originalQuery.apply(db, args); };
+
+// After request completes:
+if (queryCount &gt; 10) {
+  console.warn(`N+1 ALERT: ${req.method} ${req.path} executed ${queryCount} queries`);
+}
+```
+
+## Bundle Analysis
+
+### Next.js Bundle Analyzer
+
+```bash
+# Install
+pnpm add -D @next/bundle-analyzer
+
+# next.config.js
+const withBundleAnalyzer = require(&#x27;@next/bundle-analyzer&#x27;)({
+  enabled: process.env.ANALYZE === &#x27;true&#x27;,
+});
+module.exports = withBundleAnalyzer(nextConfig);
+
+# Run analysis
+ANALYZE=true pnpm build
+# Opens browser with interactive treemap
+```
+
+### Quick Bundle Size Check
+
+```bash
+# Check what you&#x27;re shipping
+npx source-map-explorer .next/static/chunks/*.js
+
+# Size of individual imports
+npx import-cost  # VS Code extension for inline size
+
+# Find heavy dependencies
+npx depcheck --json | jq &#x27;.dependencies&#x27;
+npx bundlephobia-cli &lt;package-name&gt;
+```
+
+### Common Bundle Wins
+
+| Before | After | Savings |
+|--------|-------|---------|
+| `import _ from &#x27;lodash&#x27;` | `import groupBy from &#x27;lodash/groupBy&#x27;` | ~70KB |
+| `import moment from &#x27;moment&#x27;` | `import { format } from &#x27;date-fns&#x27;` | ~60KB |
+| `import { icons } from &#x27;lucide-react&#x27;` | `import { Search } from &#x27;lucide-react&#x27;` | ~50KB |
+| Static import of heavy component | `dynamic(() =&gt; import(&#x27;./HeavyChart&#x27;))` | Deferred |
+| All routes in one chunk | Code splitting per route (automatic in Next.js) | Per-route |
+
+## Load Testing with k6
+
+```javascript
+// load-test.k6.js
+import http from &#x27;k6/http&#x27;
+import { check, sleep } from &#x27;k6&#x27;
+import { Trend, Rate } from &#x27;k6/metrics&#x27;
+
+const apiLatency = new Trend(&#x27;api_latency&#x27;)
+const errorRate = new Rate(&#x27;errors&#x27;)
+
+export const options = {
+  stages: [
+    { duration: &#x27;1m&#x27;, target: 20 },    // ramp up
+    { duration: &#x27;3m&#x27;, target: 100 },   // sustain
+    { duration: &#x27;1m&#x27;, target: 0 },     // ramp down
+  ],
+  thresholds: {
+    http_req_duration: [&#x27;p(95)&lt;200&#x27;, &#x27;p(99)&lt;500&#x27;],
+    errors: [&#x27;rate&lt;0.01&#x27;],
+    api_latency: [&#x27;p(95)&lt;150&#x27;],
+  },
+}
+
+export default function () {
+  const res = http.get(`${__ENV.BASE_URL}/api/v1/projects?limit=20`, {
+    headers: { Authorization: `Bearer ${__ENV.TOKEN}` },
+  })
+
+  apiLatency.add(res.timings.duration)
+  check(res, {
+    &#x27;status 200&#x27;: (r) =&gt; r.status === 200,
+    &#x27;body has data&#x27;: (r) =&gt; JSON.parse(r.body).data !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+}
+```
+
+```bash
+# Run locally
+k6 run load-test.k6.js -e BASE_URL=http://localhost:3000 -e TOKEN=$TOKEN
+
+# Run with cloud reporting
+k6 cloud load-test.k6.js
+```
+
+## Before/After Measurement Template
+
+```markdown
+## Performance Optimization: [What You Fixed]
+
+**Date:** YYYY-MM-DD
+**Ticket:** PROJ-123
+
+### Problem
+[1-2 sentences: what was slow, how it was observed]
+
+### Root Cause
+[What the profiler revealed — include flamegraph link or screenshot]
+
+### Baseline (Before)
+| Metric | Value |
+|--------|-------|
+| P50 latency | XXms |
+| P95 latency | XXms |
+| P99 latency | XXms |
+| Throughput (RPS) | XX |
+| DB queries/request | XX |
+| Bundle size | XXkB |
+
+### Fix Applied
+[Brief description + link to PR]
+
+### After
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| P50 | XXms | XXms | -XX% |
+| P95 | XXms | XXms | -XX% |
+| P99 | XXms | XXms | -XX% |
+| RPS | XX | XX | +XX% |
+| DB queries/req | XX | XX | -XX% |
+
+### Verification
+[Link to k6 output, CI run, or monitoring dashboard]
+```
+
+## Quick-Win Optimization Checklist
+
+```
+DATABASE
+[ ] Missing indexes on WHERE/ORDER BY columns
+[ ] N+1 queries (check query count per request)
+[ ] SELECT * when only 2-3 columns needed
+[ ] No LIMIT on unbounded queries
+[ ] Missing connection pool (new connection per request)
+[ ] Stale statistics (run ANALYZE on busy tables)
+
+NODE.JS
+[ ] Sync I/O (fs.readFileSync) in request handlers
+[ ] JSON.parse/stringify of large objects in hot loops
+[ ] Missing response compression (gzip/brotli)
+[ ] Dependencies loaded inside request handlers (move to module level)
+[ ] Sequential awaits that could be Promise.all
+
+BUNDLE
+[ ] Full lodash/moment import instead of specific functions
+[ ] Static imports of heavy components (use dynamic import)
+[ ] Images not optimized / not using next/image
+[ ] No code splitting on routes
+
+API
+[ ] No pagination on list endpoints
+[ ] No Cache-Control headers on stable responses
+[ ] Serial fetches that could run in parallel
+[ ] Fetching related data in loops instead of JOINs
+```
+
+## Common Pitfalls
+
+- **Optimizing without measuring** — you will optimize the wrong thing
+- **Testing with development data** — 10 rows in dev vs millions in prod reveals different bottlenecks
+- **Ignoring P99** — P50 can look fine while P99 is catastrophic for some users
+- **Premature optimization** — fix correctness first, then measure and optimize
+- **Not re-measuring after the fix** — always verify the fix actually improved the metrics
+- **Load testing production** — use staging with production-sized data volumes instead
+
+## Best Practices
+
+1. **Baseline first, always** — record P50/P95/P99, RPS, and error rate before touching anything
+2. **One change at a time** — isolate the variable to confirm causation, not correlation
+3. **Profile with realistic data volumes** — performance characteristics change dramatically with scale
+4. **Set performance budgets** — `p(95) &lt; 200ms` as a CI gate with k6
+5. **Monitor continuously** — add Datadog/Prometheus/Grafana metrics for key code paths
+6. **Cache aggressively, invalidate precisely** — cache is the fastest optimization but hardest to debug
+7. **Document the win** — before/after in the PR description motivates the team and creates institutional knowledge
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Flamegraph shows only `(idle)` frames | Profiling during low-load period; no meaningful CPU work captured | Apply realistic load with autocannon or k6 during profiling, target the specific endpoint under investigation |
+| Heap snapshot comparison shows no growth but memory still climbs | Native memory leak outside V8 heap (e.g., native addon, file descriptor leak) | Use `process.memoryUsage().rss` tracking alongside heap snapshots; profile with Valgrind or `memray` for native allocations |
+| `EXPLAIN ANALYZE` shows Index Scan but query is still slow | Index exists but is not selective enough, or query returns too many rows for index to help | Check index selectivity with `SELECT count(DISTINCT col)/count(*) FROM table`; consider composite index or partial index |
+| k6 load test passes locally but fails in CI | CI runner has limited CPU/memory; network latency differs from local | Run k6 against a dedicated staging environment, not localhost in CI; adjust thresholds for CI-specific baselines |
+| Bundle analyzer shows expected size but app still loads slowly | Large bundle is code-split but critical path has render-blocking resources | Audit the critical rendering path separately with Lighthouse; check for synchronous scripts and unoptimized images |
+| `py-spy` cannot attach to running process | Insufficient permissions or SIP (System Integrity Protection) on macOS | Run with `sudo py-spy record --pid &lt;PID&gt;`; on macOS, disable SIP or use `--subprocesses` flag with a fresh process |
+| N+1 detection middleware reports false positives | Legitimate batch operations trigger high query counts per request | Add endpoint-level allowlists to the detection middleware; distinguish between N+1 patterns and intentional batch queries by checking for repeated identical query templates |
+
+## Success Criteria
+
+- **Baseline coverage:** Every optimization PR includes documented before/after metrics with P50, P95, and P99 latency values
+- **Latency targets met:** P95 API response time stays below 200ms and P99 below 500ms as validated by k6 threshold checks in CI
+- **Memory stability:** No heap growth exceeding 10% over a 24-hour soak test under sustained load
+- **Bundle budget enforced:** JavaScript bundle size for initial page load remains under 200kB gzipped, verified by CI gate
+- **N+1 elimination:** Query count per API request stays below 10 for all critical endpoints, validated by request-level query logging
+- **Load test confidence:** Staging load tests demonstrate the system handles 2x expected peak traffic with error rate below 1%
+- **Regression detection:** Performance regressions are caught within one CI cycle, not discovered in production monitoring
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- CPU and memory profiling for Node.js, Python, and Go applications using flamegraphs and heap snapshots
+- Database query optimization including EXPLAIN ANALYZE interpretation, N+1 detection, and index recommendations
+- Frontend bundle analysis and size reduction strategies for webpack and Next.js projects
+- Load testing methodology with k6 including ramp-up patterns, threshold enforcement, and CI integration
+
+**This skill does NOT cover:**
+- Application Performance Monitoring (APM) platform setup and configuration (Datadog, New Relic, Grafana) — see `engineering/observability-designer`
+- Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering/senior-devops`
+- Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering/senior-security`
+- Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering/senior-mobile`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
+| `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
+| `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
+| `engineering/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
+| `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
+| `engineering/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Performance Profiler&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Performance Profiler&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Performance Profiler in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Performance Profiler&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Performance Profiler&quot;
+4. Description: &quot;Systematic performance profiling for Node.js, Python, and Go applications. Covers CPU flamegraphs, memory leak detection, bundle analysis, database query optimization, N+1 detection, load testing with...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/performance-profiler/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

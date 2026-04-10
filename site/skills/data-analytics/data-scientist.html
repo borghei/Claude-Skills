@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Data Scientist (Data Analytics domain).
 
 Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...
@@ -390,11 +412,11 @@ https://github.com/borghei/Claude-Skills/tree/main/data-scientist
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Data Scientist (Data Analytics domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Data Scientist (Data Analytics domain).
 
 Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...
 
@@ -415,7 +437,512 @@ https://github.com/borghei/Claude-Skills/tree/main/data-scientist
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Data Scientist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Data Scientist
+
+The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact.
+
+## Workflow
+
+1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clustering). Define the primary evaluation metric (e.g., F1 for imbalanced classification, RMSE for regression). Document constraints (latency, interpretability, data volume).
+2. **Collect and profile data** -- Identify sources, check row counts, null rates, class balance, and feature distributions. Flag data-quality issues before modeling.
+3. **Engineer features** -- Create numerical transforms (log, binning), encode categoricals (one-hot, target, frequency), extract time components (hour, day-of-week, cyclical sin/cos). Select top features via importance, mutual information, or RFE.
+4. **Select and train models** -- Use the algorithm selection matrix below. Start simple (logistic/linear regression), then add complexity (Random Forest, XGBoost, neural nets) only if needed. Use cross-validation.
+5. **Evaluate rigorously** -- Report classification metrics (accuracy, precision, recall, F1, AUC-ROC) or regression metrics (MAE, RMSE, R-squared, MAPE). Compare against a baseline. Check for overfitting (train vs. test gap).
+6. **Communicate results** -- Present business impact (e.g., &quot;model reduces false positives by 30%, saving $500K/yr&quot;). Recommend deployment path or next experiment.
+
+## Algorithm Selection Matrix
+
+| Scenario | Recommended | When to upgrade |
+|----------|------------|-----------------|
+| Need interpretability | Logistic / Linear Regression | Always start here for stakeholder-facing models |
+| Small data (&lt; 10K rows) | Random Forest | Move to XGBoost if accuracy insufficient |
+| Medium data, high accuracy needed | XGBoost / LightGBM | Default workhorse for tabular data |
+| Large data, complex patterns | Neural Network | Only when tree methods plateau |
+| Unsupervised grouping | K-Means / DBSCAN | Use silhouette score to validate k |
+
+## Feature Engineering Examples
+
+**Numerical transforms:**
+```python
+import numpy as np, pandas as pd
+
+def engineer_numerical(df: pd.DataFrame, col: str) -&gt; pd.DataFrame:
+    return pd.DataFrame({
+        f&#x27;{col}_log&#x27;:     np.log1p(df[col]),
+        f&#x27;{col}_sqrt&#x27;:    np.sqrt(df[col].clip(lower=0)),
+        f&#x27;{col}_squared&#x27;: df[col] ** 2,
+        f&#x27;{col}_binned&#x27;:  pd.cut(df[col], bins=5, labels=False),
+    })
+```
+
+**Time-based features with cyclical encoding:**
+```python
+def engineer_time(df: pd.DataFrame, col: str) -&gt; pd.DataFrame:
+    dt = pd.to_datetime(df[col])
+    return pd.DataFrame({
+        f&#x27;{col}_hour&#x27;:      dt.dt.hour,
+        f&#x27;{col}_dayofweek&#x27;: dt.dt.dayofweek,
+        f&#x27;{col}_month&#x27;:     dt.dt.month,
+        f&#x27;{col}_is_weekend&#x27;: dt.dt.dayofweek.isin([5, 6]).astype(int),
+        f&#x27;{col}_hour_sin&#x27;:  np.sin(2 * np.pi * dt.dt.hour / 24),
+        f&#x27;{col}_hour_cos&#x27;:  np.cos(2 * np.pi * dt.dt.hour / 24),
+    })
+```
+
+**Feature selection (importance-based):**
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+def select_top_features(X, y, n=20):
+    rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf.fit(X, y)
+    importance = pd.Series(rf.feature_importances_, index=X.columns)
+    return importance.nlargest(n).index.tolist()
+```
+
+## Model Evaluation
+
+**Classification:**
+```python
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+def evaluate_classifier(y_true, y_pred, y_proba=None) -&gt; dict:
+    m = {
+        &quot;accuracy&quot;:  accuracy_score(y_true, y_pred),
+        &quot;precision&quot;: precision_score(y_true, y_pred),
+        &quot;recall&quot;:    recall_score(y_true, y_pred),
+        &quot;f1&quot;:        f1_score(y_true, y_pred),
+    }
+    if y_proba is not None:
+        m[&quot;auc_roc&quot;] = roc_auc_score(y_true, y_proba)
+    return m
+```
+
+**Regression:**
+```python
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+def evaluate_regressor(y_true, y_pred) -&gt; dict:
+    return {
+        &quot;mae&quot;:  mean_absolute_error(y_true, y_pred),
+        &quot;rmse&quot;: np.sqrt(mean_squared_error(y_true, y_pred)),
+        &quot;r2&quot;:   r2_score(y_true, y_pred),
+    }
+```
+
+## A/B Test Design and Analysis
+
+**Sample size calculation:**
+```python
+from scipy import stats
+import numpy as np
+
+def required_sample_size(baseline_rate: float, mde: float, alpha: float = 0.05, power: float = 0.8) -&gt; int:
+    &quot;&quot;&quot;Return required N per variant. mde is relative (e.g., 0.10 = 10% lift).&quot;&quot;&quot;
+    effect = baseline_rate * mde
+    z_a = stats.norm.ppf(1 - alpha / 2)
+    z_b = stats.norm.ppf(power)
+    p = baseline_rate
+    return int(np.ceil(2 * p * (1 - p) * (z_a + z_b) ** 2 / effect ** 2))
+
+# Example: baseline 5% conversion, detect 10% relative lift
+# &gt;&gt;&gt; required_sample_size(0.05, 0.10)  -&gt; ~62,214 per variant
+```
+
+**Result analysis:**
+```python
+def analyze_ab(control: np.ndarray, treatment: np.ndarray, alpha: float = 0.05) -&gt; dict:
+    &quot;&quot;&quot;Analyze A/B test with proportions z-test.&quot;&quot;&quot;
+    n_c, n_t = len(control), len(treatment)
+    p_c, p_t = control.mean(), treatment.mean()
+    p_pool = (control.sum() + treatment.sum()) / (n_c + n_t)
+    se = np.sqrt(p_pool * (1 - p_pool) * (1/n_c + 1/n_t))
+    z = (p_t - p_c) / se
+    p_val = 2 * (1 - stats.norm.cdf(abs(z)))
+    return {
+        &quot;control_rate&quot;: p_c, &quot;treatment_rate&quot;: p_t,
+        &quot;lift&quot;: (p_t - p_c) / p_c,
+        &quot;p_value&quot;: p_val, &quot;significant&quot;: p_val &lt; alpha,
+        &quot;ci_95&quot;: ((p_t - p_c) - 1.96 * se, (p_t - p_c) + 1.96 * se),
+    }
+```
+
+## Project Template
+
+```markdown
+# Data Science Project: [Name]
+## Business Objective -- What problem are we solving?
+## Success Metrics -- Primary: [metric]; Secondary: [metric]
+## Data -- Sources, size (rows/features), time period
+## Methodology -- Numbered steps
+## Results
+| Metric | Baseline | Model | Improvement |
+|--------|----------|-------|-------------|
+## Business Impact -- [Quantified impact]
+## Recommendations -- [Next actions]
+## Limitations -- [Known caveats]
+```
+
+## Reference Materials
+
+- `references/ml_algorithms.md` -- Algorithm deep dives
+- `references/feature_engineering.md` -- Feature engineering patterns
+- `references/experimentation.md` -- A/B testing guide
+- `references/statistics.md` -- Statistical methods
+
+## Scripts
+
+```bash
+python scripts/experiment_tracker.py log --name &quot;xgb_v2&quot; --params &#x27;{&quot;lr&quot;:0.1,&quot;depth&quot;:6}&#x27; --metrics &#x27;{&quot;f1&quot;:0.87,&quot;auc&quot;:0.92}&#x27;
+python scripts/experiment_tracker.py list --sort-by f1 --top 5
+python scripts/experiment_tracker.py compare --ids 1 3 5 --json
+python scripts/hypothesis_tester.py ttest --file data.csv --col-a group_a --col-b group_b
+python scripts/hypothesis_tester.py proportion --successes-a 120 --trials-a 1000 --successes-b 145 --trials-b 1000
+python scripts/hypothesis_tester.py chi-square --file contingency.csv --json
+python scripts/feature_selector.py --file dataset.csv --target churn --top 10
+python scripts/feature_selector.py --file dataset.csv --target revenue --method correlation --json
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `experiment_tracker.py` | Log, list, and compare experiments with parameters, metrics, and tags in a local JSON file | `log --name --params --metrics --tags`, `list --sort-by --top`, `compare --ids`, `--json` |
+| `hypothesis_tester.py` | Run statistical tests: Welch&#x27;s t-test, paired t-test, proportion z-test, chi-square independence | `ttest --file --col-a --col-b [--paired]`, `proportion --successes-a --trials-a ...`, `chi-square --file`, `--json` |
+| `feature_selector.py` | Rank features by composite score (variance, correlation, mutual information, null rate) for a target column | `--file &lt;csv&gt;`, `--target &lt;col&gt;`, `--top &lt;n&gt;`, `--method all/correlation/mutual_info`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model overfits (large train-test gap in metrics) | Too many features, insufficient regularization, or data leakage | Reduce feature count with `feature_selector.py`, add regularization, and audit feature engineering for temporal leakage |
+| A/B test shows significant result but tiny effect size | Large sample size makes small differences statistically significant | Always report effect size (Cohen&#x27;s d) alongside p-value; use practical significance thresholds |
+| `hypothesis_tester.py` p-value differs from scipy | The tool uses normal/t-distribution approximations (standard library only) | For publication-grade analysis, validate with scipy.stats; the tool is designed for fast directional estimates |
+| Feature importance scores are near-zero for all features | Target variable has extremely low variance or the feature set lacks predictive signal | Check target distribution; consider feature engineering or collecting additional data sources |
+| `experiment_tracker.py` shows experiment IDs out of order | Experiments were logged non-sequentially or the log file was manually edited | IDs are auto-incremented; use `--sort-by` on a metric for meaningful ordering |
+| Chi-square test fails with &quot;table must be at least 2x2&quot; | CSV contingency table has fewer than 2 rows or 2 columns of numeric data | Ensure the CSV has a header row and at least 2x2 numeric cells; verify the format matches expectations |
+| Class imbalance causes misleading accuracy | Accuracy inflated by majority class predictions | Use F1, precision-recall, or AUC-ROC instead; apply SMOTE or class weights during training |
+
+## Success Criteria
+
+- Every ML project follows the Define-Collect-Engineer-Train-Evaluate-Communicate workflow before deployment.
+- Feature selection is documented: `feature_selector.py` output is saved with the experiment record.
+- All experiments are tracked with `experiment_tracker.py` including parameters, metrics, and a descriptive name.
+- Model evaluation reports include at least 3 metrics (e.g., F1, AUC-ROC, precision) and comparison against a baseline.
+- A/B tests pre-register the hypothesis, sample size calculation, and primary metric before data collection begins.
+- Statistical tests report effect size and confidence intervals, not just p-values.
+- Business impact is quantified in dollar terms or user-metric terms (e.g., &quot;reduces false positives by 30%, saving $500K/yr&quot;).
+
+## Scope &amp; Limitations
+
+**In scope:** Machine learning algorithm selection, feature engineering, model training and evaluation, A/B test design and analysis, statistical hypothesis testing, experiment tracking, and communicating results to stakeholders.
+
+**Out of scope:** Model deployment to production (see ml-ops-engineer), data pipeline infrastructure, dashboard development, and real-time serving architecture.
+
+**Limitations:** The Python tools use only the Python standard library. `hypothesis_tester.py` uses normal and t-distribution approximations that are accurate for moderate sample sizes but should be validated with scipy for edge cases (very small n, extreme skew). `feature_selector.py` computes approximate mutual information using binned discretization -- for high-precision feature selection, use sklearn&#x27;s mutual_info_classif or permutation importance. All tools process local files and do not integrate with MLflow, W&amp;B, or other tracking platforms.
+
+## Integration Points
+
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Trained models are handed off for production deployment, monitoring, and registry management.
+- **Data Analyst** (`data-analytics/data-analyst`): Complex analytical questions requiring predictive modeling are escalated from the analyst to the data scientist.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on mart models as upstream data sources.
+- **Product Team** (`product-team/`): Experiment results inform product decisions; A/B test designs are co-created with product managers.
+- **Engineering** (`engineering/senior-ml-engineer`): Algorithm implementation details and model architecture decisions bridge data science and ML engineering.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Data Scientist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Data Scientist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Data Scientist in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Data Scientist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Data Scientist&quot;
+4. Description: &quot;Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/data-scientist/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Data Scientist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Data Scientist
+
+The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact.
+
+## Workflow
+
+1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clustering). Define the primary evaluation metric (e.g., F1 for imbalanced classification, RMSE for regression). Document constraints (latency, interpretability, data volume).
+2. **Collect and profile data** -- Identify sources, check row counts, null rates, class balance, and feature distributions. Flag data-quality issues before modeling.
+3. **Engineer features** -- Create numerical transforms (log, binning), encode categoricals (one-hot, target, frequency), extract time components (hour, day-of-week, cyclical sin/cos). Select top features via importance, mutual information, or RFE.
+4. **Select and train models** -- Use the algorithm selection matrix below. Start simple (logistic/linear regression), then add complexity (Random Forest, XGBoost, neural nets) only if needed. Use cross-validation.
+5. **Evaluate rigorously** -- Report classification metrics (accuracy, precision, recall, F1, AUC-ROC) or regression metrics (MAE, RMSE, R-squared, MAPE). Compare against a baseline. Check for overfitting (train vs. test gap).
+6. **Communicate results** -- Present business impact (e.g., &quot;model reduces false positives by 30%, saving $500K/yr&quot;). Recommend deployment path or next experiment.
+
+## Algorithm Selection Matrix
+
+| Scenario | Recommended | When to upgrade |
+|----------|------------|-----------------|
+| Need interpretability | Logistic / Linear Regression | Always start here for stakeholder-facing models |
+| Small data (&lt; 10K rows) | Random Forest | Move to XGBoost if accuracy insufficient |
+| Medium data, high accuracy needed | XGBoost / LightGBM | Default workhorse for tabular data |
+| Large data, complex patterns | Neural Network | Only when tree methods plateau |
+| Unsupervised grouping | K-Means / DBSCAN | Use silhouette score to validate k |
+
+## Feature Engineering Examples
+
+**Numerical transforms:**
+```python
+import numpy as np, pandas as pd
+
+def engineer_numerical(df: pd.DataFrame, col: str) -&gt; pd.DataFrame:
+    return pd.DataFrame({
+        f&#x27;{col}_log&#x27;:     np.log1p(df[col]),
+        f&#x27;{col}_sqrt&#x27;:    np.sqrt(df[col].clip(lower=0)),
+        f&#x27;{col}_squared&#x27;: df[col] ** 2,
+        f&#x27;{col}_binned&#x27;:  pd.cut(df[col], bins=5, labels=False),
+    })
+```
+
+**Time-based features with cyclical encoding:**
+```python
+def engineer_time(df: pd.DataFrame, col: str) -&gt; pd.DataFrame:
+    dt = pd.to_datetime(df[col])
+    return pd.DataFrame({
+        f&#x27;{col}_hour&#x27;:      dt.dt.hour,
+        f&#x27;{col}_dayofweek&#x27;: dt.dt.dayofweek,
+        f&#x27;{col}_month&#x27;:     dt.dt.month,
+        f&#x27;{col}_is_weekend&#x27;: dt.dt.dayofweek.isin([5, 6]).astype(int),
+        f&#x27;{col}_hour_sin&#x27;:  np.sin(2 * np.pi * dt.dt.hour / 24),
+        f&#x27;{col}_hour_cos&#x27;:  np.cos(2 * np.pi * dt.dt.hour / 24),
+    })
+```
+
+**Feature selection (importance-based):**
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+def select_top_features(X, y, n=20):
+    rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf.fit(X, y)
+    importance = pd.Series(rf.feature_importances_, index=X.columns)
+    return importance.nlargest(n).index.tolist()
+```
+
+## Model Evaluation
+
+**Classification:**
+```python
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+def evaluate_classifier(y_true, y_pred, y_proba=None) -&gt; dict:
+    m = {
+        &quot;accuracy&quot;:  accuracy_score(y_true, y_pred),
+        &quot;precision&quot;: precision_score(y_true, y_pred),
+        &quot;recall&quot;:    recall_score(y_true, y_pred),
+        &quot;f1&quot;:        f1_score(y_true, y_pred),
+    }
+    if y_proba is not None:
+        m[&quot;auc_roc&quot;] = roc_auc_score(y_true, y_proba)
+    return m
+```
+
+**Regression:**
+```python
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+def evaluate_regressor(y_true, y_pred) -&gt; dict:
+    return {
+        &quot;mae&quot;:  mean_absolute_error(y_true, y_pred),
+        &quot;rmse&quot;: np.sqrt(mean_squared_error(y_true, y_pred)),
+        &quot;r2&quot;:   r2_score(y_true, y_pred),
+    }
+```
+
+## A/B Test Design and Analysis
+
+**Sample size calculation:**
+```python
+from scipy import stats
+import numpy as np
+
+def required_sample_size(baseline_rate: float, mde: float, alpha: float = 0.05, power: float = 0.8) -&gt; int:
+    &quot;&quot;&quot;Return required N per variant. mde is relative (e.g., 0.10 = 10% lift).&quot;&quot;&quot;
+    effect = baseline_rate * mde
+    z_a = stats.norm.ppf(1 - alpha / 2)
+    z_b = stats.norm.ppf(power)
+    p = baseline_rate
+    return int(np.ceil(2 * p * (1 - p) * (z_a + z_b) ** 2 / effect ** 2))
+
+# Example: baseline 5% conversion, detect 10% relative lift
+# &gt;&gt;&gt; required_sample_size(0.05, 0.10)  -&gt; ~62,214 per variant
+```
+
+**Result analysis:**
+```python
+def analyze_ab(control: np.ndarray, treatment: np.ndarray, alpha: float = 0.05) -&gt; dict:
+    &quot;&quot;&quot;Analyze A/B test with proportions z-test.&quot;&quot;&quot;
+    n_c, n_t = len(control), len(treatment)
+    p_c, p_t = control.mean(), treatment.mean()
+    p_pool = (control.sum() + treatment.sum()) / (n_c + n_t)
+    se = np.sqrt(p_pool * (1 - p_pool) * (1/n_c + 1/n_t))
+    z = (p_t - p_c) / se
+    p_val = 2 * (1 - stats.norm.cdf(abs(z)))
+    return {
+        &quot;control_rate&quot;: p_c, &quot;treatment_rate&quot;: p_t,
+        &quot;lift&quot;: (p_t - p_c) / p_c,
+        &quot;p_value&quot;: p_val, &quot;significant&quot;: p_val &lt; alpha,
+        &quot;ci_95&quot;: ((p_t - p_c) - 1.96 * se, (p_t - p_c) + 1.96 * se),
+    }
+```
+
+## Project Template
+
+```markdown
+# Data Science Project: [Name]
+## Business Objective -- What problem are we solving?
+## Success Metrics -- Primary: [metric]; Secondary: [metric]
+## Data -- Sources, size (rows/features), time period
+## Methodology -- Numbered steps
+## Results
+| Metric | Baseline | Model | Improvement |
+|--------|----------|-------|-------------|
+## Business Impact -- [Quantified impact]
+## Recommendations -- [Next actions]
+## Limitations -- [Known caveats]
+```
+
+## Reference Materials
+
+- `references/ml_algorithms.md` -- Algorithm deep dives
+- `references/feature_engineering.md` -- Feature engineering patterns
+- `references/experimentation.md` -- A/B testing guide
+- `references/statistics.md` -- Statistical methods
+
+## Scripts
+
+```bash
+python scripts/experiment_tracker.py log --name &quot;xgb_v2&quot; --params &#x27;{&quot;lr&quot;:0.1,&quot;depth&quot;:6}&#x27; --metrics &#x27;{&quot;f1&quot;:0.87,&quot;auc&quot;:0.92}&#x27;
+python scripts/experiment_tracker.py list --sort-by f1 --top 5
+python scripts/experiment_tracker.py compare --ids 1 3 5 --json
+python scripts/hypothesis_tester.py ttest --file data.csv --col-a group_a --col-b group_b
+python scripts/hypothesis_tester.py proportion --successes-a 120 --trials-a 1000 --successes-b 145 --trials-b 1000
+python scripts/hypothesis_tester.py chi-square --file contingency.csv --json
+python scripts/feature_selector.py --file dataset.csv --target churn --top 10
+python scripts/feature_selector.py --file dataset.csv --target revenue --method correlation --json
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `experiment_tracker.py` | Log, list, and compare experiments with parameters, metrics, and tags in a local JSON file | `log --name --params --metrics --tags`, `list --sort-by --top`, `compare --ids`, `--json` |
+| `hypothesis_tester.py` | Run statistical tests: Welch&#x27;s t-test, paired t-test, proportion z-test, chi-square independence | `ttest --file --col-a --col-b [--paired]`, `proportion --successes-a --trials-a ...`, `chi-square --file`, `--json` |
+| `feature_selector.py` | Rank features by composite score (variance, correlation, mutual information, null rate) for a target column | `--file &lt;csv&gt;`, `--target &lt;col&gt;`, `--top &lt;n&gt;`, `--method all/correlation/mutual_info`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model overfits (large train-test gap in metrics) | Too many features, insufficient regularization, or data leakage | Reduce feature count with `feature_selector.py`, add regularization, and audit feature engineering for temporal leakage |
+| A/B test shows significant result but tiny effect size | Large sample size makes small differences statistically significant | Always report effect size (Cohen&#x27;s d) alongside p-value; use practical significance thresholds |
+| `hypothesis_tester.py` p-value differs from scipy | The tool uses normal/t-distribution approximations (standard library only) | For publication-grade analysis, validate with scipy.stats; the tool is designed for fast directional estimates |
+| Feature importance scores are near-zero for all features | Target variable has extremely low variance or the feature set lacks predictive signal | Check target distribution; consider feature engineering or collecting additional data sources |
+| `experiment_tracker.py` shows experiment IDs out of order | Experiments were logged non-sequentially or the log file was manually edited | IDs are auto-incremented; use `--sort-by` on a metric for meaningful ordering |
+| Chi-square test fails with &quot;table must be at least 2x2&quot; | CSV contingency table has fewer than 2 rows or 2 columns of numeric data | Ensure the CSV has a header row and at least 2x2 numeric cells; verify the format matches expectations |
+| Class imbalance causes misleading accuracy | Accuracy inflated by majority class predictions | Use F1, precision-recall, or AUC-ROC instead; apply SMOTE or class weights during training |
+
+## Success Criteria
+
+- Every ML project follows the Define-Collect-Engineer-Train-Evaluate-Communicate workflow before deployment.
+- Feature selection is documented: `feature_selector.py` output is saved with the experiment record.
+- All experiments are tracked with `experiment_tracker.py` including parameters, metrics, and a descriptive name.
+- Model evaluation reports include at least 3 metrics (e.g., F1, AUC-ROC, precision) and comparison against a baseline.
+- A/B tests pre-register the hypothesis, sample size calculation, and primary metric before data collection begins.
+- Statistical tests report effect size and confidence intervals, not just p-values.
+- Business impact is quantified in dollar terms or user-metric terms (e.g., &quot;reduces false positives by 30%, saving $500K/yr&quot;).
+
+## Scope &amp; Limitations
+
+**In scope:** Machine learning algorithm selection, feature engineering, model training and evaluation, A/B test design and analysis, statistical hypothesis testing, experiment tracking, and communicating results to stakeholders.
+
+**Out of scope:** Model deployment to production (see ml-ops-engineer), data pipeline infrastructure, dashboard development, and real-time serving architecture.
+
+**Limitations:** The Python tools use only the Python standard library. `hypothesis_tester.py` uses normal and t-distribution approximations that are accurate for moderate sample sizes but should be validated with scipy for edge cases (very small n, extreme skew). `feature_selector.py` computes approximate mutual information using binned discretization -- for high-precision feature selection, use sklearn&#x27;s mutual_info_classif or permutation importance. All tools process local files and do not integrate with MLflow, W&amp;B, or other tracking platforms.
+
+## Integration Points
+
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Trained models are handed off for production deployment, monitoring, and registry management.
+- **Data Analyst** (`data-analytics/data-analyst`): Complex analytical questions requiring predictive modeling are escalated from the analyst to the data scientist.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on mart models as upstream data sources.
+- **Product Team** (`product-team/`): Experiment results inform product decisions; A/B test designs are co-created with product managers.
+- **Engineering** (`engineering/senior-ml-engineer`): Algorithm implementation details and model architecture decisions bridge data science and ML engineering.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Data Scientist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Data Scientist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Data Scientist in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Data Scientist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Data Scientist&quot;
+4. Description: &quot;Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/data-scientist/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

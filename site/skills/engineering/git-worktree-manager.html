@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Git Worktree Manager (Engineering domain).
 
 Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/git-worktree-manager
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Git Worktree Manager (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Git Worktree Manager (Engineering domain).
 
 Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...
 
@@ -425,7 +447,950 @@ https://github.com/borghei/Claude-Skills/tree/main/git-worktree-manager
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Git Worktree Manager&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Git Worktree Manager
+
+**Tier:** POWERFUL
+**Category:** Engineering / Developer Tooling
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with its own ports, environment, and running services.
+
+## Keywords
+
+git worktree, parallel development, branch isolation, port allocation, multi-agent development, worktree cleanup, Docker Compose worktree, concurrent branches
+
+## Core Capabilities
+
+### 1. Worktree Lifecycle Management
+- Create worktrees from new or existing branches with deterministic naming
+- Copy .env files from main repo to new worktrees
+- Install dependencies based on lockfile detection
+- List all worktrees with status (clean/dirty, ahead/behind)
+- Safe cleanup with uncommitted change detection
+
+### 2. Port Allocation
+- Deterministic port assignment per worktree (base + index * stride)
+- Collision detection against running processes
+- Persistent port map in `.worktree-ports.json`
+- Docker Compose override generation for per-worktree ports
+
+### 3. Multi-Agent Isolation
+- One branch per worktree, one agent per worktree
+- No shared state between agent workspaces
+- Conflict-free parallel execution
+- Task ID mapping for traceability
+
+### 4. Cleanup Automation
+- Stale worktree detection by age
+- Merged branch detection for safe removal
+- Dirty state warnings before deletion
+- Bulk cleanup with safety confirmations
+
+## When to Use
+
+- You need 2+ concurrent branches open with running dev servers
+- You want isolated environments for feature work, hotfixes, and PR review
+- Multiple AI agents need separate workspaces that do not interfere
+- Your current branch is blocked but a hotfix is urgent
+- You want automated cleanup instead of manual `rm -rf` operations
+
+## Quick Start
+
+### Create a Worktree
+
+```bash
+# Create worktree for a new feature branch
+git worktree add ../wt-auth -b feature/new-auth main
+
+# Create worktree from an existing branch
+git worktree add ../wt-hotfix hotfix/fix-login
+
+# Create worktree in a dedicated directory
+git worktree add ~/worktrees/myapp-auth -b feature/auth origin/main
+```
+
+### List All Worktrees
+
+```bash
+git worktree list
+# Output:
+# /Users/dev/myapp              abc1234 [main]
+# /Users/dev/wt-auth            def5678 [feature/new-auth]
+# /Users/dev/wt-hotfix          ghi9012 [hotfix/fix-login]
+```
+
+### Remove a Worktree
+
+```bash
+# Safe removal (fails if there are uncommitted changes)
+git worktree remove ../wt-auth
+
+# Force removal (discards uncommitted changes)
+git worktree remove --force ../wt-auth
+
+# Prune stale metadata
+git worktree prune
+```
+
+## Port Allocation Strategy
+
+### Deterministic Port Assignment
+
+Each worktree gets a block of ports based on its index:
+
+```
+Worktree Index    App Port    DB Port    Redis Port    API Port
+────────────────────────────────────────────────────────────────
+0 (main)          3000        5432       6379          8000
+1 (wt-auth)       3010        5442       6389          8010
+2 (wt-hotfix)     3020        5452       6399          8020
+3 (wt-feature)    3030        5462       6409          8030
+```
+
+Formula: `port = base_port + (worktree_index * stride)`
+Default stride: 10
+
+### Port Map File
+
+Store the allocation in `.worktree-ports.json` at the worktree root:
+
+```json
+{
+  &quot;worktree&quot;: &quot;wt-auth&quot;,
+  &quot;branch&quot;: &quot;feature/new-auth&quot;,
+  &quot;index&quot;: 1,
+  &quot;ports&quot;: {
+    &quot;app&quot;: 3010,
+    &quot;database&quot;: 5442,
+    &quot;redis&quot;: 6389,
+    &quot;api&quot;: 8010
+  },
+  &quot;created&quot;: &quot;2026-03-09T10:30:00Z&quot;
+}
+```
+
+### Port Collision Detection
+
+```bash
+# Check if a port is already in use
+check_port() {
+  local port=$1
+  if lsof -i :&quot;$port&quot; &gt; /dev/null 2&gt;&amp;1; then
+    echo &quot;PORT $port is BUSY&quot;
+    return 1
+  else
+    echo &quot;PORT $port is FREE&quot;
+    return 0
+  fi
+}
+
+# Check all ports for a worktree
+for port in 3010 5442 6389 8010; do
+  check_port $port
+done
+```
+
+## Full Worktree Setup Script
+
+```bash
+#!/bin/bash
+# setup-worktree.sh — Create a fully prepared worktree
+set -euo pipefail
+
+BRANCH=&quot;${1:?Usage: setup-worktree.sh &lt;branch-name&gt; [base-branch]}&quot;
+BASE=&quot;${2:-main}&quot;
+WT_NAME=&quot;wt-$(echo &quot;$BRANCH&quot; | sed &#x27;s|.*/||&#x27; | tr &#x27;[:upper:]&#x27; &#x27;[:lower:]&#x27;)&quot;
+WT_PATH=&quot;../$WT_NAME&quot;
+MAIN_REPO=&quot;$(git rev-parse --show-toplevel)&quot;
+
+echo &quot;Creating worktree: $WT_PATH from $BASE...&quot;
+
+# 1. Create worktree
+if git rev-parse --verify &quot;$BRANCH&quot; &gt; /dev/null 2&gt;&amp;1; then
+  git worktree add &quot;$WT_PATH&quot; &quot;$BRANCH&quot;
+else
+  git worktree add &quot;$WT_PATH&quot; -b &quot;$BRANCH&quot; &quot;$BASE&quot;
+fi
+
+# 2. Copy environment files
+for envfile in .env .env.local .env.development; do
+  if [ -f &quot;$MAIN_REPO/$envfile&quot; ]; then
+    cp &quot;$MAIN_REPO/$envfile&quot; &quot;$WT_PATH/$envfile&quot;
+    echo &quot;Copied $envfile&quot;
+  fi
+done
+
+# 3. Allocate ports
+WT_INDEX=$(git worktree list | grep -n &quot;$WT_PATH&quot; | cut -d: -f1)
+WT_INDEX=$((WT_INDEX - 1))
+STRIDE=10
+
+cat &gt; &quot;$WT_PATH/.worktree-ports.json&quot; &lt;&lt; EOF
+{
+  &quot;worktree&quot;: &quot;$WT_NAME&quot;,
+  &quot;branch&quot;: &quot;$BRANCH&quot;,
+  &quot;index&quot;: $WT_INDEX,
+  &quot;ports&quot;: {
+    &quot;app&quot;: $((3000 + WT_INDEX * STRIDE)),
+    &quot;database&quot;: $((5432 + WT_INDEX * STRIDE)),
+    &quot;redis&quot;: $((6379 + WT_INDEX * STRIDE)),
+    &quot;api&quot;: $((8000 + WT_INDEX * STRIDE))
+  }
+}
+EOF
+echo &quot;Ports allocated (index $WT_INDEX)&quot;
+
+# 4. Update .env with allocated ports
+if [ -f &quot;$WT_PATH/.env&quot; ]; then
+  APP_PORT=$((3000 + WT_INDEX * STRIDE))
+  DB_PORT=$((5432 + WT_INDEX * STRIDE))
+  sed -i.bak &quot;s/APP_PORT=.*/APP_PORT=$APP_PORT/&quot; &quot;$WT_PATH/.env&quot;
+  sed -i.bak &quot;s/:5432/:$DB_PORT/g&quot; &quot;$WT_PATH/.env&quot;
+  rm -f &quot;$WT_PATH/.env.bak&quot;
+  echo &quot;Updated .env with worktree ports&quot;
+fi
+
+# 5. Install dependencies
+cd &quot;$WT_PATH&quot;
+if [ -f &quot;pnpm-lock.yaml&quot; ]; then
+  pnpm install --frozen-lockfile
+elif [ -f &quot;package-lock.json&quot; ]; then
+  npm ci
+elif [ -f &quot;yarn.lock&quot; ]; then
+  yarn install --frozen-lockfile
+elif [ -f &quot;requirements.txt&quot; ]; then
+  pip install -r requirements.txt
+elif [ -f &quot;go.mod&quot; ]; then
+  go mod download
+fi
+
+echo &quot;&quot;
+echo &quot;Worktree ready: $WT_PATH&quot;
+echo &quot;Branch: $BRANCH&quot;
+echo &quot;App port: $((3000 + WT_INDEX * STRIDE))&quot;
+echo &quot;&quot;
+echo &quot;Next: cd $WT_PATH &amp;&amp; pnpm dev&quot;
+```
+
+## Docker Compose Per-Worktree
+
+```yaml
+# docker-compose.worktree.yml — override for worktree-specific ports
+# Usage: docker compose -f docker-compose.yml -f docker-compose.worktree.yml up
+
+services:
+  postgres:
+    ports:
+      - &quot;${DB_PORT:-5432}:5432&quot;
+    environment:
+      POSTGRES_DB: &quot;myapp_${WT_NAME:-main}&quot;
+
+  redis:
+    ports:
+      - &quot;${REDIS_PORT:-6379}:6379&quot;
+
+  app:
+    ports:
+      - &quot;${APP_PORT:-3000}:3000&quot;
+    environment:
+      DATABASE_URL: &quot;postgresql://dev:dev@postgres:5432/myapp_${WT_NAME:-main}&quot;
+```
+
+Launch with worktree-specific ports:
+
+```bash
+DB_PORT=5442 REDIS_PORT=6389 APP_PORT=3010 WT_NAME=auth \
+  docker compose -f docker-compose.yml -f docker-compose.worktree.yml up -d
+```
+
+## Cleanup Automation
+
+```bash
+#!/bin/bash
+# cleanup-worktrees.sh — Safe worktree cleanup
+set -euo pipefail
+
+STALE_DAYS=&quot;${1:-14}&quot;
+DRY_RUN=&quot;${2:-true}&quot;
+
+echo &quot;Scanning worktrees (stale threshold: ${STALE_DAYS} days)...&quot;
+echo &quot;&quot;
+
+git worktree list --porcelain | while read -r line; do
+  case &quot;$line&quot; in
+    worktree\ *)
+      WT_PATH=&quot;${line#worktree }&quot;
+      ;;
+    branch\ *)
+      BRANCH=&quot;${line#branch refs/heads/}&quot;
+      # Skip main worktree
+      if [ &quot;$WT_PATH&quot; = &quot;$(git rev-parse --show-toplevel)&quot; ]; then
+        continue
+      fi
+
+      # Check if branch is merged
+      MERGED=&quot;&quot;
+      if git branch --merged main | grep -q &quot;$BRANCH&quot; 2&gt;/dev/null; then
+        MERGED=&quot; [MERGED]&quot;
+      fi
+
+      # Check for uncommitted changes
+      DIRTY=&quot;&quot;
+      if [ -d &quot;$WT_PATH&quot; ]; then
+        cd &quot;$WT_PATH&quot;
+        if [ -n &quot;$(git status --porcelain)&quot; ]; then
+          DIRTY=&quot; [DIRTY - has uncommitted changes]&quot;
+        fi
+        cd - &gt; /dev/null
+      fi
+
+      # Check age
+      if [ -d &quot;$WT_PATH&quot; ]; then
+        AGE_DAYS=$(( ($(date +%s) - $(stat -f %m &quot;$WT_PATH&quot; 2&gt;/dev/null || stat -c %Y &quot;$WT_PATH&quot; 2&gt;/dev/null)) / 86400 ))
+        STALE=&quot;&quot;
+        if [ &quot;$AGE_DAYS&quot; -gt &quot;$STALE_DAYS&quot; ]; then
+          STALE=&quot; [STALE: ${AGE_DAYS} days old]&quot;
+        fi
+      fi
+
+      echo &quot;$WT_PATH ($BRANCH)$MERGED$DIRTY$STALE&quot;
+
+      if [ -n &quot;$MERGED&quot; ] &amp;&amp; [ -z &quot;$DIRTY&quot; ] &amp;&amp; [ &quot;$DRY_RUN&quot; = &quot;false&quot; ]; then
+        echo &quot;  -&gt; Removing merged clean worktree...&quot;
+        git worktree remove &quot;$WT_PATH&quot;
+      fi
+      ;;
+  esac
+done
+
+echo &quot;&quot;
+git worktree prune
+echo &quot;Done. Run with &#x27;false&#x27; as second arg to actually remove.&quot;
+```
+
+## Multi-Agent Workflow Pattern
+
+When running multiple AI agents (Claude Code, Cursor, Copilot) on the same repo:
+
+```
+Agent Assignment:
+───────────────────────────────────────────────────
+Agent 1 (Claude Code)  → wt-feature-auth   (port 3010)
+Agent 2 (Cursor)       → wt-feature-billing (port 3020)
+Agent 3 (Copilot)      → wt-bugfix-login   (port 3030)
+Main repo              → integration (main) (port 3000)
+───────────────────────────────────────────────────
+
+Rules:
+- Each agent works ONLY in its assigned worktree
+- No agent modifies another agent&#x27;s worktree
+- Integration happens via PRs to main, not direct merges
+- Port conflicts are impossible due to deterministic allocation
+```
+
+## Decision Matrix
+
+| Scenario | Action |
+|----------|--------|
+| Need isolated dev server for a feature | Create a new worktree |
+| Quick diff review of a branch | `git diff` in current tree (no worktree needed) |
+| Hotfix while feature branch is dirty | Create dedicated hotfix worktree |
+| Bug triage with reproduction branch | Temporary worktree, cleanup same day |
+| PR review with running code | Worktree at PR branch, run tests |
+| Multiple agents on same repo | One worktree per agent |
+
+## Validation Checklist
+
+After creating a worktree, verify:
+
+1. `git worktree list` shows the expected path and branch
+2. `.worktree-ports.json` exists with unique port assignments
+3. `.env` files are present and contain worktree-specific ports
+4. `pnpm install` (or equivalent) completed without errors
+5. Dev server starts on the allocated port
+6. Database connects on the allocated DB port
+7. No port conflicts with other worktrees or services
+
+## Common Pitfalls
+
+- **Creating worktrees inside the main repo directory** — always use `../wt-name` to keep them alongside
+- **Reusing localhost:3000 across all branches** — causes port conflicts; use deterministic allocation
+- **Sharing one DATABASE_URL across worktrees** — each needs its own database or schema
+- **Removing a worktree with uncommitted changes** — always check dirty state before removal
+- **Forgetting to prune after branch deletion** — run `git worktree prune` to clean metadata
+- **Not updating .env ports after worktree creation** — the setup script should handle this automatically
+
+## Best Practices
+
+1. **One branch per worktree, one agent per worktree** — never share
+2. **Keep worktrees short-lived** — remove after the branch is merged
+3. **Deterministic naming** — use `wt-&lt;topic&gt;` pattern for easy identification
+4. **Persist port mappings** — store in `.worktree-ports.json`, not in memory
+5. **Run cleanup weekly** — scan for stale and merged-branch worktrees
+6. **Include worktree path in terminal title** — prevents wrong-window commits
+7. **Never force-remove dirty worktrees** — unless changes are intentionally discarded
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `fatal: &#x27;&lt;path&gt;&#x27; is already checked out` | Branch is already active in another worktree | Use `git worktree list` to find where the branch is checked out, then switch to a different branch or remove the existing worktree first |
+| Port conflict despite deterministic allocation | A non-worktree process is occupying the assigned port | Run `lsof -i :&lt;port&gt;` to identify the process, terminate it or adjust the stride/base in the port allocation formula |
+| `.env` file missing after worktree creation | Setup script was not run or `.env` does not exist in the main repo | Copy `.env` manually from the main repo root, or re-run `setup-worktree.sh` which handles env file copying |
+| `git worktree prune` reports nothing but stale paths remain | Worktree directory was deleted manually without `git worktree remove` | Run `git worktree prune` to clean orphaned metadata, then verify with `git worktree list` |
+| Dependencies fail to install in new worktree | Lockfile references a private registry or cache not available in the worktree path | Ensure `.npmrc`, `.yarnrc.yml`, or pip config files are copied alongside `.env` during setup |
+| Docker Compose services start on wrong ports | The `docker-compose.worktree.yml` override was not included in the compose command | Always pass both files: `docker compose -f docker-compose.yml -f docker-compose.worktree.yml up` |
+| Worktree shows as dirty immediately after creation | Untracked files from `.env` copy or generated `.worktree-ports.json` | Add `.worktree-ports.json` and copied env files to `.gitignore` in the project |
+
+## Success Criteria
+
+- **Zero port conflicts** across all active worktrees measured by `lsof` checks returning no collisions after setup
+- **Worktree creation under 60 seconds** including dependency installation for projects with warm package caches
+- **100% env parity** between main repo and worktrees verified by diffing `.env` keys (values may differ for ports)
+- **Stale worktree count stays at zero** when cleanup automation runs on a weekly schedule with a 14-day threshold
+- **No cross-worktree interference** validated by running concurrent dev servers in 3+ worktrees simultaneously without failures
+- **Branch-to-worktree traceability** maintained via `.worktree-ports.json` present in every active worktree with correct metadata
+- **Cleanup safety rate of 100%** meaning no worktree with uncommitted changes is ever removed without explicit `--force` confirmation
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Git worktree lifecycle: creation, listing, status inspection, and removal
+- Deterministic port allocation and collision avoidance for parallel dev servers
+- Environment file synchronization and Docker Compose override patterns
+- Multi-agent workspace isolation strategies and cleanup automation
+
+**This skill does NOT cover:**
+- Git branching strategies or merge conflict resolution (see `pr-review-expert` and `release-manager`)
+- Secret rotation, vault integration, or credential management (see `env-secrets-manager`)
+- CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
+- Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
+| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
+| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
+| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
+| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
+| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Git Worktree Manager&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Git Worktree Manager&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Git Worktree Manager in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Git Worktree Manager&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Git Worktree Manager&quot;
+4. Description: &quot;Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/git-worktree-manager/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Git Worktree Manager&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Git Worktree Manager
+
+**Tier:** POWERFUL
+**Category:** Engineering / Developer Tooling
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with its own ports, environment, and running services.
+
+## Keywords
+
+git worktree, parallel development, branch isolation, port allocation, multi-agent development, worktree cleanup, Docker Compose worktree, concurrent branches
+
+## Core Capabilities
+
+### 1. Worktree Lifecycle Management
+- Create worktrees from new or existing branches with deterministic naming
+- Copy .env files from main repo to new worktrees
+- Install dependencies based on lockfile detection
+- List all worktrees with status (clean/dirty, ahead/behind)
+- Safe cleanup with uncommitted change detection
+
+### 2. Port Allocation
+- Deterministic port assignment per worktree (base + index * stride)
+- Collision detection against running processes
+- Persistent port map in `.worktree-ports.json`
+- Docker Compose override generation for per-worktree ports
+
+### 3. Multi-Agent Isolation
+- One branch per worktree, one agent per worktree
+- No shared state between agent workspaces
+- Conflict-free parallel execution
+- Task ID mapping for traceability
+
+### 4. Cleanup Automation
+- Stale worktree detection by age
+- Merged branch detection for safe removal
+- Dirty state warnings before deletion
+- Bulk cleanup with safety confirmations
+
+## When to Use
+
+- You need 2+ concurrent branches open with running dev servers
+- You want isolated environments for feature work, hotfixes, and PR review
+- Multiple AI agents need separate workspaces that do not interfere
+- Your current branch is blocked but a hotfix is urgent
+- You want automated cleanup instead of manual `rm -rf` operations
+
+## Quick Start
+
+### Create a Worktree
+
+```bash
+# Create worktree for a new feature branch
+git worktree add ../wt-auth -b feature/new-auth main
+
+# Create worktree from an existing branch
+git worktree add ../wt-hotfix hotfix/fix-login
+
+# Create worktree in a dedicated directory
+git worktree add ~/worktrees/myapp-auth -b feature/auth origin/main
+```
+
+### List All Worktrees
+
+```bash
+git worktree list
+# Output:
+# /Users/dev/myapp              abc1234 [main]
+# /Users/dev/wt-auth            def5678 [feature/new-auth]
+# /Users/dev/wt-hotfix          ghi9012 [hotfix/fix-login]
+```
+
+### Remove a Worktree
+
+```bash
+# Safe removal (fails if there are uncommitted changes)
+git worktree remove ../wt-auth
+
+# Force removal (discards uncommitted changes)
+git worktree remove --force ../wt-auth
+
+# Prune stale metadata
+git worktree prune
+```
+
+## Port Allocation Strategy
+
+### Deterministic Port Assignment
+
+Each worktree gets a block of ports based on its index:
+
+```
+Worktree Index    App Port    DB Port    Redis Port    API Port
+────────────────────────────────────────────────────────────────
+0 (main)          3000        5432       6379          8000
+1 (wt-auth)       3010        5442       6389          8010
+2 (wt-hotfix)     3020        5452       6399          8020
+3 (wt-feature)    3030        5462       6409          8030
+```
+
+Formula: `port = base_port + (worktree_index * stride)`
+Default stride: 10
+
+### Port Map File
+
+Store the allocation in `.worktree-ports.json` at the worktree root:
+
+```json
+{
+  &quot;worktree&quot;: &quot;wt-auth&quot;,
+  &quot;branch&quot;: &quot;feature/new-auth&quot;,
+  &quot;index&quot;: 1,
+  &quot;ports&quot;: {
+    &quot;app&quot;: 3010,
+    &quot;database&quot;: 5442,
+    &quot;redis&quot;: 6389,
+    &quot;api&quot;: 8010
+  },
+  &quot;created&quot;: &quot;2026-03-09T10:30:00Z&quot;
+}
+```
+
+### Port Collision Detection
+
+```bash
+# Check if a port is already in use
+check_port() {
+  local port=$1
+  if lsof -i :&quot;$port&quot; &gt; /dev/null 2&gt;&amp;1; then
+    echo &quot;PORT $port is BUSY&quot;
+    return 1
+  else
+    echo &quot;PORT $port is FREE&quot;
+    return 0
+  fi
+}
+
+# Check all ports for a worktree
+for port in 3010 5442 6389 8010; do
+  check_port $port
+done
+```
+
+## Full Worktree Setup Script
+
+```bash
+#!/bin/bash
+# setup-worktree.sh — Create a fully prepared worktree
+set -euo pipefail
+
+BRANCH=&quot;${1:?Usage: setup-worktree.sh &lt;branch-name&gt; [base-branch]}&quot;
+BASE=&quot;${2:-main}&quot;
+WT_NAME=&quot;wt-$(echo &quot;$BRANCH&quot; | sed &#x27;s|.*/||&#x27; | tr &#x27;[:upper:]&#x27; &#x27;[:lower:]&#x27;)&quot;
+WT_PATH=&quot;../$WT_NAME&quot;
+MAIN_REPO=&quot;$(git rev-parse --show-toplevel)&quot;
+
+echo &quot;Creating worktree: $WT_PATH from $BASE...&quot;
+
+# 1. Create worktree
+if git rev-parse --verify &quot;$BRANCH&quot; &gt; /dev/null 2&gt;&amp;1; then
+  git worktree add &quot;$WT_PATH&quot; &quot;$BRANCH&quot;
+else
+  git worktree add &quot;$WT_PATH&quot; -b &quot;$BRANCH&quot; &quot;$BASE&quot;
+fi
+
+# 2. Copy environment files
+for envfile in .env .env.local .env.development; do
+  if [ -f &quot;$MAIN_REPO/$envfile&quot; ]; then
+    cp &quot;$MAIN_REPO/$envfile&quot; &quot;$WT_PATH/$envfile&quot;
+    echo &quot;Copied $envfile&quot;
+  fi
+done
+
+# 3. Allocate ports
+WT_INDEX=$(git worktree list | grep -n &quot;$WT_PATH&quot; | cut -d: -f1)
+WT_INDEX=$((WT_INDEX - 1))
+STRIDE=10
+
+cat &gt; &quot;$WT_PATH/.worktree-ports.json&quot; &lt;&lt; EOF
+{
+  &quot;worktree&quot;: &quot;$WT_NAME&quot;,
+  &quot;branch&quot;: &quot;$BRANCH&quot;,
+  &quot;index&quot;: $WT_INDEX,
+  &quot;ports&quot;: {
+    &quot;app&quot;: $((3000 + WT_INDEX * STRIDE)),
+    &quot;database&quot;: $((5432 + WT_INDEX * STRIDE)),
+    &quot;redis&quot;: $((6379 + WT_INDEX * STRIDE)),
+    &quot;api&quot;: $((8000 + WT_INDEX * STRIDE))
+  }
+}
+EOF
+echo &quot;Ports allocated (index $WT_INDEX)&quot;
+
+# 4. Update .env with allocated ports
+if [ -f &quot;$WT_PATH/.env&quot; ]; then
+  APP_PORT=$((3000 + WT_INDEX * STRIDE))
+  DB_PORT=$((5432 + WT_INDEX * STRIDE))
+  sed -i.bak &quot;s/APP_PORT=.*/APP_PORT=$APP_PORT/&quot; &quot;$WT_PATH/.env&quot;
+  sed -i.bak &quot;s/:5432/:$DB_PORT/g&quot; &quot;$WT_PATH/.env&quot;
+  rm -f &quot;$WT_PATH/.env.bak&quot;
+  echo &quot;Updated .env with worktree ports&quot;
+fi
+
+# 5. Install dependencies
+cd &quot;$WT_PATH&quot;
+if [ -f &quot;pnpm-lock.yaml&quot; ]; then
+  pnpm install --frozen-lockfile
+elif [ -f &quot;package-lock.json&quot; ]; then
+  npm ci
+elif [ -f &quot;yarn.lock&quot; ]; then
+  yarn install --frozen-lockfile
+elif [ -f &quot;requirements.txt&quot; ]; then
+  pip install -r requirements.txt
+elif [ -f &quot;go.mod&quot; ]; then
+  go mod download
+fi
+
+echo &quot;&quot;
+echo &quot;Worktree ready: $WT_PATH&quot;
+echo &quot;Branch: $BRANCH&quot;
+echo &quot;App port: $((3000 + WT_INDEX * STRIDE))&quot;
+echo &quot;&quot;
+echo &quot;Next: cd $WT_PATH &amp;&amp; pnpm dev&quot;
+```
+
+## Docker Compose Per-Worktree
+
+```yaml
+# docker-compose.worktree.yml — override for worktree-specific ports
+# Usage: docker compose -f docker-compose.yml -f docker-compose.worktree.yml up
+
+services:
+  postgres:
+    ports:
+      - &quot;${DB_PORT:-5432}:5432&quot;
+    environment:
+      POSTGRES_DB: &quot;myapp_${WT_NAME:-main}&quot;
+
+  redis:
+    ports:
+      - &quot;${REDIS_PORT:-6379}:6379&quot;
+
+  app:
+    ports:
+      - &quot;${APP_PORT:-3000}:3000&quot;
+    environment:
+      DATABASE_URL: &quot;postgresql://dev:dev@postgres:5432/myapp_${WT_NAME:-main}&quot;
+```
+
+Launch with worktree-specific ports:
+
+```bash
+DB_PORT=5442 REDIS_PORT=6389 APP_PORT=3010 WT_NAME=auth \
+  docker compose -f docker-compose.yml -f docker-compose.worktree.yml up -d
+```
+
+## Cleanup Automation
+
+```bash
+#!/bin/bash
+# cleanup-worktrees.sh — Safe worktree cleanup
+set -euo pipefail
+
+STALE_DAYS=&quot;${1:-14}&quot;
+DRY_RUN=&quot;${2:-true}&quot;
+
+echo &quot;Scanning worktrees (stale threshold: ${STALE_DAYS} days)...&quot;
+echo &quot;&quot;
+
+git worktree list --porcelain | while read -r line; do
+  case &quot;$line&quot; in
+    worktree\ *)
+      WT_PATH=&quot;${line#worktree }&quot;
+      ;;
+    branch\ *)
+      BRANCH=&quot;${line#branch refs/heads/}&quot;
+      # Skip main worktree
+      if [ &quot;$WT_PATH&quot; = &quot;$(git rev-parse --show-toplevel)&quot; ]; then
+        continue
+      fi
+
+      # Check if branch is merged
+      MERGED=&quot;&quot;
+      if git branch --merged main | grep -q &quot;$BRANCH&quot; 2&gt;/dev/null; then
+        MERGED=&quot; [MERGED]&quot;
+      fi
+
+      # Check for uncommitted changes
+      DIRTY=&quot;&quot;
+      if [ -d &quot;$WT_PATH&quot; ]; then
+        cd &quot;$WT_PATH&quot;
+        if [ -n &quot;$(git status --porcelain)&quot; ]; then
+          DIRTY=&quot; [DIRTY - has uncommitted changes]&quot;
+        fi
+        cd - &gt; /dev/null
+      fi
+
+      # Check age
+      if [ -d &quot;$WT_PATH&quot; ]; then
+        AGE_DAYS=$(( ($(date +%s) - $(stat -f %m &quot;$WT_PATH&quot; 2&gt;/dev/null || stat -c %Y &quot;$WT_PATH&quot; 2&gt;/dev/null)) / 86400 ))
+        STALE=&quot;&quot;
+        if [ &quot;$AGE_DAYS&quot; -gt &quot;$STALE_DAYS&quot; ]; then
+          STALE=&quot; [STALE: ${AGE_DAYS} days old]&quot;
+        fi
+      fi
+
+      echo &quot;$WT_PATH ($BRANCH)$MERGED$DIRTY$STALE&quot;
+
+      if [ -n &quot;$MERGED&quot; ] &amp;&amp; [ -z &quot;$DIRTY&quot; ] &amp;&amp; [ &quot;$DRY_RUN&quot; = &quot;false&quot; ]; then
+        echo &quot;  -&gt; Removing merged clean worktree...&quot;
+        git worktree remove &quot;$WT_PATH&quot;
+      fi
+      ;;
+  esac
+done
+
+echo &quot;&quot;
+git worktree prune
+echo &quot;Done. Run with &#x27;false&#x27; as second arg to actually remove.&quot;
+```
+
+## Multi-Agent Workflow Pattern
+
+When running multiple AI agents (Claude Code, Cursor, Copilot) on the same repo:
+
+```
+Agent Assignment:
+───────────────────────────────────────────────────
+Agent 1 (Claude Code)  → wt-feature-auth   (port 3010)
+Agent 2 (Cursor)       → wt-feature-billing (port 3020)
+Agent 3 (Copilot)      → wt-bugfix-login   (port 3030)
+Main repo              → integration (main) (port 3000)
+───────────────────────────────────────────────────
+
+Rules:
+- Each agent works ONLY in its assigned worktree
+- No agent modifies another agent&#x27;s worktree
+- Integration happens via PRs to main, not direct merges
+- Port conflicts are impossible due to deterministic allocation
+```
+
+## Decision Matrix
+
+| Scenario | Action |
+|----------|--------|
+| Need isolated dev server for a feature | Create a new worktree |
+| Quick diff review of a branch | `git diff` in current tree (no worktree needed) |
+| Hotfix while feature branch is dirty | Create dedicated hotfix worktree |
+| Bug triage with reproduction branch | Temporary worktree, cleanup same day |
+| PR review with running code | Worktree at PR branch, run tests |
+| Multiple agents on same repo | One worktree per agent |
+
+## Validation Checklist
+
+After creating a worktree, verify:
+
+1. `git worktree list` shows the expected path and branch
+2. `.worktree-ports.json` exists with unique port assignments
+3. `.env` files are present and contain worktree-specific ports
+4. `pnpm install` (or equivalent) completed without errors
+5. Dev server starts on the allocated port
+6. Database connects on the allocated DB port
+7. No port conflicts with other worktrees or services
+
+## Common Pitfalls
+
+- **Creating worktrees inside the main repo directory** — always use `../wt-name` to keep them alongside
+- **Reusing localhost:3000 across all branches** — causes port conflicts; use deterministic allocation
+- **Sharing one DATABASE_URL across worktrees** — each needs its own database or schema
+- **Removing a worktree with uncommitted changes** — always check dirty state before removal
+- **Forgetting to prune after branch deletion** — run `git worktree prune` to clean metadata
+- **Not updating .env ports after worktree creation** — the setup script should handle this automatically
+
+## Best Practices
+
+1. **One branch per worktree, one agent per worktree** — never share
+2. **Keep worktrees short-lived** — remove after the branch is merged
+3. **Deterministic naming** — use `wt-&lt;topic&gt;` pattern for easy identification
+4. **Persist port mappings** — store in `.worktree-ports.json`, not in memory
+5. **Run cleanup weekly** — scan for stale and merged-branch worktrees
+6. **Include worktree path in terminal title** — prevents wrong-window commits
+7. **Never force-remove dirty worktrees** — unless changes are intentionally discarded
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `fatal: &#x27;&lt;path&gt;&#x27; is already checked out` | Branch is already active in another worktree | Use `git worktree list` to find where the branch is checked out, then switch to a different branch or remove the existing worktree first |
+| Port conflict despite deterministic allocation | A non-worktree process is occupying the assigned port | Run `lsof -i :&lt;port&gt;` to identify the process, terminate it or adjust the stride/base in the port allocation formula |
+| `.env` file missing after worktree creation | Setup script was not run or `.env` does not exist in the main repo | Copy `.env` manually from the main repo root, or re-run `setup-worktree.sh` which handles env file copying |
+| `git worktree prune` reports nothing but stale paths remain | Worktree directory was deleted manually without `git worktree remove` | Run `git worktree prune` to clean orphaned metadata, then verify with `git worktree list` |
+| Dependencies fail to install in new worktree | Lockfile references a private registry or cache not available in the worktree path | Ensure `.npmrc`, `.yarnrc.yml`, or pip config files are copied alongside `.env` during setup |
+| Docker Compose services start on wrong ports | The `docker-compose.worktree.yml` override was not included in the compose command | Always pass both files: `docker compose -f docker-compose.yml -f docker-compose.worktree.yml up` |
+| Worktree shows as dirty immediately after creation | Untracked files from `.env` copy or generated `.worktree-ports.json` | Add `.worktree-ports.json` and copied env files to `.gitignore` in the project |
+
+## Success Criteria
+
+- **Zero port conflicts** across all active worktrees measured by `lsof` checks returning no collisions after setup
+- **Worktree creation under 60 seconds** including dependency installation for projects with warm package caches
+- **100% env parity** between main repo and worktrees verified by diffing `.env` keys (values may differ for ports)
+- **Stale worktree count stays at zero** when cleanup automation runs on a weekly schedule with a 14-day threshold
+- **No cross-worktree interference** validated by running concurrent dev servers in 3+ worktrees simultaneously without failures
+- **Branch-to-worktree traceability** maintained via `.worktree-ports.json` present in every active worktree with correct metadata
+- **Cleanup safety rate of 100%** meaning no worktree with uncommitted changes is ever removed without explicit `--force` confirmation
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Git worktree lifecycle: creation, listing, status inspection, and removal
+- Deterministic port allocation and collision avoidance for parallel dev servers
+- Environment file synchronization and Docker Compose override patterns
+- Multi-agent workspace isolation strategies and cleanup automation
+
+**This skill does NOT cover:**
+- Git branching strategies or merge conflict resolution (see `pr-review-expert` and `release-manager`)
+- Secret rotation, vault integration, or credential management (see `env-secrets-manager`)
+- CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
+- Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
+| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
+| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
+| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
+| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
+| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Git Worktree Manager&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Git Worktree Manager&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Git Worktree Manager in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Git Worktree Manager&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Git Worktree Manager&quot;
+4. Description: &quot;Manage parallel development with Git worktrees. Covers worktree creation with port allocation, environment sync, branch isolation for multi-agent workflows, cleanup automation, and Docker Compose inte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/git-worktree-manager/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

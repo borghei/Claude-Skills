@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Whistleblower Compliance (Legal domain).
 
 Audit whistleblower systems and draft compliant reporting policies. Use when assessing or building whistleblower programs.
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/whistleblower-compliance
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Whistleblower Compliance (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Whistleblower Compliance (Legal domain).
 
 Audit whistleblower systems and draft compliant reporting policies. Use when assessing or building whistleblower programs.
 
@@ -433,7 +455,538 @@ https://github.com/borghei/Claude-Skills/tree/main/whistleblower-compliance
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Whistleblower Compliance&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Whistleblower Compliance Skill
+
+## Overview
+
+Production-ready whistleblower compliance toolkit for auditing existing reporting systems and drafting compliant policies. Covers EU Directive 2019/1937, US SOX Section 806, US Dodd-Frank, and UK Public Interest Disclosure Act 1998. Operates in two modes: Mode A (Assessment) runs an 8-phase, 56-checkpoint audit of existing systems; Mode B (Drafting) generates jurisdiction-specific reporting policies.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Compliance Checker (`scripts/whistleblower_compliance_checker.py`)
+
+Assess an existing whistleblower system against regulatory requirements. Takes organizational parameters and outputs a compliance score with priority-classified gaps.
+
+```bash
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction EU --headcount 300 --sector financial \
+  --channels internal,external --has-designated-person \
+  --has-confidentiality --has-gdpr-measures --has-dissemination
+
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction US --headcount 5000 --sector healthcare \
+  --channels internal --json
+
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction UK --headcount 50 --sector technology \
+  --channels none
+```
+
+### 2. Policy Scaffolder (`scripts/whistleblower_policy_scaffolder.py`)
+
+Generate a whistleblower policy skeleton pre-populated with required sections per regulatory framework.
+
+```bash
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction EU --org-type private --headcount 500 \
+  --org-name &quot;Acme Corp&quot;
+
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction US --org-type public --headcount 10000 \
+  --org-name &quot;MegaCorp Inc&quot; --json
+
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction UK --org-type nonprofit --headcount 100 \
+  --org-name &quot;CharityOrg&quot; --output policy-draft.md
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/regulatory_framework.md` | Multi-jurisdiction whistleblower regulations, comparison matrix |
+| `references/assessment_checklist.md` | 8-phase, 56-checkpoint assessment with priority classifications |
+
+## Workflows
+
+### Mode A: Assessment Workflow
+
+1. **Gather Parameters** -- Collect jurisdiction, headcount, sector, and system description
+2. **Run Compliance Checker** -- Execute `whistleblower_compliance_checker.py` with parameters
+3. **Review Gaps** -- Prioritize CRITICAL gaps first, then IMPORTANT, then IMPROVEMENT
+4. **Cross-Reference Checklist** -- Walk through `assessment_checklist.md` for manual verification
+5. **Generate Remediation Plan** -- Address gaps by priority, set deadlines per regulatory timelines
+
+### Mode B: Drafting Workflow
+
+1. **Determine Jurisdiction** -- Identify applicable regulations based on headquarters and operations
+2. **Generate Scaffold** -- Run `whistleblower_policy_scaffolder.py` with organization details
+3. **Customize Sections** -- Replace placeholders with organization-specific information
+4. **Legal Review** -- Route draft through legal counsel for jurisdiction-specific validation
+5. **Approval &amp; Publication** -- Obtain board/management approval and disseminate to all personnel
+
+### 8-Phase Assessment Framework
+
+| Phase | Focus | Checkpoints |
+|-------|-------|-------------|
+| 1. Applicability | Regulatory scope determination | 3 |
+| 2. Reception Channel | Reporting channel adequacy | 5 |
+| 3. Designated Persons | Personnel and independence | 7 |
+| 4. Verification/Processing | Investigation procedures | 8 |
+| 5. Confidentiality | Identity and data protection | 9 |
+| 6. Dissemination/Information | Awareness and accessibility | 10 |
+| 7. Data Protection/GDPR | Privacy compliance | 12 |
+| 8. Sector-Specific | Industry requirements | 6 |
+| **Total** | | **60** |
+
+### Three Reporting Channels
+
+| Channel | When Used | Key Requirements |
+|---------|-----------|-----------------|
+| Internal | First preference; report to organization | Acknowledge within 7 days; feedback within 3 months |
+| External (Regulatory) | When internal fails or is inappropriate | Report to competent authority; same protections apply |
+| Public Disclosure | Last resort; imminent danger or retaliation | Protected only if internal/external channels exhausted |
+
+### Whistleblower Protections
+
+| Protection | Description |
+|------------|-------------|
+| Civil immunity | No liability for breach of confidentiality obligations |
+| Criminal immunity | No criminal liability for acquiring reported information |
+| Prohibited retaliation | Dismissal, demotion, harassment, blacklisting, discrimination |
+| Burden of proof reversal | Employer must prove action was not retaliatory |
+| Interim relief | Provisional protection during investigation |
+| Legal aid access | Access to legal counsel and support |
+
+### Priority Classification
+
+| Priority | Definition | Example |
+|----------|-----------|---------|
+| CRITICAL | Legal non-compliance; immediate regulatory risk | No reporting channel exists; no confidentiality measures |
+| IMPORTANT | Significant gap reducing system effectiveness | Acknowledgment timeline exceeds 7 days; no designated person |
+| IMPROVEMENT | Enhancement opportunity; not currently non-compliant | Training frequency below best practice; limited channel types |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Checker reports all CRITICAL | No system parameters provided | Provide accurate `--channels`, `--has-designated-person`, and other flags |
+| Wrong jurisdiction requirements | Multi-jurisdiction entity using single jurisdiction | Run checker separately per jurisdiction; use strictest requirements |
+| Policy scaffold missing sections | Jurisdiction flag incorrect | Verify `--jurisdiction` matches EU, US, or UK |
+| Headcount threshold confusion | EU directive has different thresholds by entity type | Private sector: 50+ employees; public sector: all municipalities |
+| Sector-specific gaps not flagged | Generic sector value used | Use specific sector: `financial`, `healthcare`, `defense`, `nuclear` |
+| GDPR checks fail for US entity | US entities may still need GDPR compliance | If processing EU citizen data, add `--has-gdpr-measures` |
+| Timeline requirements unclear | Different jurisdictions have different timelines | EU: 7-day ack, 3-month feedback; SOX: 180-day filing deadline |
+| Policy output too generic | Minimal parameters provided | Add `--org-name`, `--org-type`, and `--headcount` for specificity |
+
+## Success Criteria
+
+- **Compliance Coverage**: Assessment covers 100% of applicable regulatory requirements for specified jurisdiction
+- **Gap Identification**: All CRITICAL and IMPORTANT gaps identified with clear remediation guidance
+- **Policy Completeness**: Generated policies include all mandatory sections per applicable regulation
+- **Timeline Compliance**: Policies reflect correct acknowledgment (7 days) and feedback (3 months) timelines
+- **Audit Readiness**: Assessment output sufficient for regulatory audit preparation and evidence gathering
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Compliance assessment against EU Directive 2019/1937, US SOX/Dodd-Frank, UK PIDA
+- Policy scaffolding with jurisdiction-specific mandatory sections
+- Gap analysis with priority classification and remediation guidance
+- Multi-sector considerations (financial, healthcare, defense, nuclear, transport)
+
+**This skill does NOT cover:**
+- Actual whistleblower case management or investigation procedures
+- Legal advice or attorney-client privileged analysis
+- Real-time regulatory monitoring or automatic updates when laws change
+- Whistleblower hotline software implementation or vendor selection
+- Cross-border reporting coordination between multiple regulators
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Copy-pasting policy from another jurisdiction | Regulations differ materially; EU requires 7-day ack, SOX has 180-day filing | Run scaffolder with correct jurisdiction; customize per local requirements |
+| Treating all gaps as equal priority | Wastes resources on improvements while CRITICAL gaps remain | Address CRITICAL first, IMPORTANT second, IMPROVEMENT last |
+| Single assessment for multi-jurisdiction org | Each jurisdiction has unique requirements and thresholds | Run separate assessments per jurisdiction; merge into unified policy |
+| Skipping sector-specific phase | Regulated sectors (financial, healthcare) have additional requirements | Always complete Phase 8 for regulated industries |
+| No periodic reassessment | Regulations evolve; transposition deadlines pass | Schedule annual reassessment; monitor legislative changes |
+
+## Tool Reference
+
+### `scripts/whistleblower_compliance_checker.py`
+
+Assess whistleblower system compliance against regulatory requirements.
+
+```
+usage: whistleblower_compliance_checker.py [-h] [--json]
+                                           --jurisdiction {EU,US,UK}
+                                           --headcount HEADCOUNT
+                                           --sector SECTOR
+                                           [--channels CHANNELS]
+                                           [--has-designated-person]
+                                           [--has-confidentiality]
+                                           [--has-gdpr-measures]
+                                           [--has-dissemination]
+                                           [--has-acknowledgment-timeline]
+                                           [--has-feedback-timeline]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --jurisdiction        Regulatory jurisdiction: EU, US, or UK
+  --headcount           Number of employees in the organization
+  --sector              Industry sector (financial, healthcare, technology, etc.)
+  --channels            Comma-separated channel types: internal, external, none
+  --has-designated-person  Designated person(s) appointed for handling reports
+  --has-confidentiality    Confidentiality measures in place
+  --has-gdpr-measures      GDPR/data protection measures implemented
+  --has-dissemination      Policy disseminated to all personnel
+  --has-acknowledgment-timeline  7-day acknowledgment timeline met
+  --has-feedback-timeline  3-month feedback timeline met
+```
+
+### `scripts/whistleblower_policy_scaffolder.py`
+
+Generate jurisdiction-specific whistleblower policy skeleton.
+
+```
+usage: whistleblower_policy_scaffolder.py [-h] [--json]
+                                          --jurisdiction {EU,US,UK}
+                                          --org-type {public,private,nonprofit}
+                                          --headcount HEADCOUNT
+                                          [--org-name ORG_NAME]
+                                          [--output OUTPUT]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --jurisdiction        Regulatory jurisdiction: EU, US, or UK
+  --org-type            Organization type
+  --headcount           Number of employees
+  --org-name            Organization name (used in policy template)
+  --output              Write policy to file instead of stdout
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Whistleblower Compliance&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Whistleblower Compliance&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Whistleblower Compliance in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Whistleblower Compliance&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Whistleblower Compliance&quot;
+4. Description: &quot;Audit whistleblower systems and draft compliant reporting policies. Use when assessing or building whistleblower programs.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/whistleblower-compliance/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Whistleblower Compliance&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Whistleblower Compliance Skill
+
+## Overview
+
+Production-ready whistleblower compliance toolkit for auditing existing reporting systems and drafting compliant policies. Covers EU Directive 2019/1937, US SOX Section 806, US Dodd-Frank, and UK Public Interest Disclosure Act 1998. Operates in two modes: Mode A (Assessment) runs an 8-phase, 56-checkpoint audit of existing systems; Mode B (Drafting) generates jurisdiction-specific reporting policies.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Compliance Checker (`scripts/whistleblower_compliance_checker.py`)
+
+Assess an existing whistleblower system against regulatory requirements. Takes organizational parameters and outputs a compliance score with priority-classified gaps.
+
+```bash
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction EU --headcount 300 --sector financial \
+  --channels internal,external --has-designated-person \
+  --has-confidentiality --has-gdpr-measures --has-dissemination
+
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction US --headcount 5000 --sector healthcare \
+  --channels internal --json
+
+python scripts/whistleblower_compliance_checker.py \
+  --jurisdiction UK --headcount 50 --sector technology \
+  --channels none
+```
+
+### 2. Policy Scaffolder (`scripts/whistleblower_policy_scaffolder.py`)
+
+Generate a whistleblower policy skeleton pre-populated with required sections per regulatory framework.
+
+```bash
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction EU --org-type private --headcount 500 \
+  --org-name &quot;Acme Corp&quot;
+
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction US --org-type public --headcount 10000 \
+  --org-name &quot;MegaCorp Inc&quot; --json
+
+python scripts/whistleblower_policy_scaffolder.py \
+  --jurisdiction UK --org-type nonprofit --headcount 100 \
+  --org-name &quot;CharityOrg&quot; --output policy-draft.md
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/regulatory_framework.md` | Multi-jurisdiction whistleblower regulations, comparison matrix |
+| `references/assessment_checklist.md` | 8-phase, 56-checkpoint assessment with priority classifications |
+
+## Workflows
+
+### Mode A: Assessment Workflow
+
+1. **Gather Parameters** -- Collect jurisdiction, headcount, sector, and system description
+2. **Run Compliance Checker** -- Execute `whistleblower_compliance_checker.py` with parameters
+3. **Review Gaps** -- Prioritize CRITICAL gaps first, then IMPORTANT, then IMPROVEMENT
+4. **Cross-Reference Checklist** -- Walk through `assessment_checklist.md` for manual verification
+5. **Generate Remediation Plan** -- Address gaps by priority, set deadlines per regulatory timelines
+
+### Mode B: Drafting Workflow
+
+1. **Determine Jurisdiction** -- Identify applicable regulations based on headquarters and operations
+2. **Generate Scaffold** -- Run `whistleblower_policy_scaffolder.py` with organization details
+3. **Customize Sections** -- Replace placeholders with organization-specific information
+4. **Legal Review** -- Route draft through legal counsel for jurisdiction-specific validation
+5. **Approval &amp; Publication** -- Obtain board/management approval and disseminate to all personnel
+
+### 8-Phase Assessment Framework
+
+| Phase | Focus | Checkpoints |
+|-------|-------|-------------|
+| 1. Applicability | Regulatory scope determination | 3 |
+| 2. Reception Channel | Reporting channel adequacy | 5 |
+| 3. Designated Persons | Personnel and independence | 7 |
+| 4. Verification/Processing | Investigation procedures | 8 |
+| 5. Confidentiality | Identity and data protection | 9 |
+| 6. Dissemination/Information | Awareness and accessibility | 10 |
+| 7. Data Protection/GDPR | Privacy compliance | 12 |
+| 8. Sector-Specific | Industry requirements | 6 |
+| **Total** | | **60** |
+
+### Three Reporting Channels
+
+| Channel | When Used | Key Requirements |
+|---------|-----------|-----------------|
+| Internal | First preference; report to organization | Acknowledge within 7 days; feedback within 3 months |
+| External (Regulatory) | When internal fails or is inappropriate | Report to competent authority; same protections apply |
+| Public Disclosure | Last resort; imminent danger or retaliation | Protected only if internal/external channels exhausted |
+
+### Whistleblower Protections
+
+| Protection | Description |
+|------------|-------------|
+| Civil immunity | No liability for breach of confidentiality obligations |
+| Criminal immunity | No criminal liability for acquiring reported information |
+| Prohibited retaliation | Dismissal, demotion, harassment, blacklisting, discrimination |
+| Burden of proof reversal | Employer must prove action was not retaliatory |
+| Interim relief | Provisional protection during investigation |
+| Legal aid access | Access to legal counsel and support |
+
+### Priority Classification
+
+| Priority | Definition | Example |
+|----------|-----------|---------|
+| CRITICAL | Legal non-compliance; immediate regulatory risk | No reporting channel exists; no confidentiality measures |
+| IMPORTANT | Significant gap reducing system effectiveness | Acknowledgment timeline exceeds 7 days; no designated person |
+| IMPROVEMENT | Enhancement opportunity; not currently non-compliant | Training frequency below best practice; limited channel types |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Checker reports all CRITICAL | No system parameters provided | Provide accurate `--channels`, `--has-designated-person`, and other flags |
+| Wrong jurisdiction requirements | Multi-jurisdiction entity using single jurisdiction | Run checker separately per jurisdiction; use strictest requirements |
+| Policy scaffold missing sections | Jurisdiction flag incorrect | Verify `--jurisdiction` matches EU, US, or UK |
+| Headcount threshold confusion | EU directive has different thresholds by entity type | Private sector: 50+ employees; public sector: all municipalities |
+| Sector-specific gaps not flagged | Generic sector value used | Use specific sector: `financial`, `healthcare`, `defense`, `nuclear` |
+| GDPR checks fail for US entity | US entities may still need GDPR compliance | If processing EU citizen data, add `--has-gdpr-measures` |
+| Timeline requirements unclear | Different jurisdictions have different timelines | EU: 7-day ack, 3-month feedback; SOX: 180-day filing deadline |
+| Policy output too generic | Minimal parameters provided | Add `--org-name`, `--org-type`, and `--headcount` for specificity |
+
+## Success Criteria
+
+- **Compliance Coverage**: Assessment covers 100% of applicable regulatory requirements for specified jurisdiction
+- **Gap Identification**: All CRITICAL and IMPORTANT gaps identified with clear remediation guidance
+- **Policy Completeness**: Generated policies include all mandatory sections per applicable regulation
+- **Timeline Compliance**: Policies reflect correct acknowledgment (7 days) and feedback (3 months) timelines
+- **Audit Readiness**: Assessment output sufficient for regulatory audit preparation and evidence gathering
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Compliance assessment against EU Directive 2019/1937, US SOX/Dodd-Frank, UK PIDA
+- Policy scaffolding with jurisdiction-specific mandatory sections
+- Gap analysis with priority classification and remediation guidance
+- Multi-sector considerations (financial, healthcare, defense, nuclear, transport)
+
+**This skill does NOT cover:**
+- Actual whistleblower case management or investigation procedures
+- Legal advice or attorney-client privileged analysis
+- Real-time regulatory monitoring or automatic updates when laws change
+- Whistleblower hotline software implementation or vendor selection
+- Cross-border reporting coordination between multiple regulators
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Copy-pasting policy from another jurisdiction | Regulations differ materially; EU requires 7-day ack, SOX has 180-day filing | Run scaffolder with correct jurisdiction; customize per local requirements |
+| Treating all gaps as equal priority | Wastes resources on improvements while CRITICAL gaps remain | Address CRITICAL first, IMPORTANT second, IMPROVEMENT last |
+| Single assessment for multi-jurisdiction org | Each jurisdiction has unique requirements and thresholds | Run separate assessments per jurisdiction; merge into unified policy |
+| Skipping sector-specific phase | Regulated sectors (financial, healthcare) have additional requirements | Always complete Phase 8 for regulated industries |
+| No periodic reassessment | Regulations evolve; transposition deadlines pass | Schedule annual reassessment; monitor legislative changes |
+
+## Tool Reference
+
+### `scripts/whistleblower_compliance_checker.py`
+
+Assess whistleblower system compliance against regulatory requirements.
+
+```
+usage: whistleblower_compliance_checker.py [-h] [--json]
+                                           --jurisdiction {EU,US,UK}
+                                           --headcount HEADCOUNT
+                                           --sector SECTOR
+                                           [--channels CHANNELS]
+                                           [--has-designated-person]
+                                           [--has-confidentiality]
+                                           [--has-gdpr-measures]
+                                           [--has-dissemination]
+                                           [--has-acknowledgment-timeline]
+                                           [--has-feedback-timeline]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --jurisdiction        Regulatory jurisdiction: EU, US, or UK
+  --headcount           Number of employees in the organization
+  --sector              Industry sector (financial, healthcare, technology, etc.)
+  --channels            Comma-separated channel types: internal, external, none
+  --has-designated-person  Designated person(s) appointed for handling reports
+  --has-confidentiality    Confidentiality measures in place
+  --has-gdpr-measures      GDPR/data protection measures implemented
+  --has-dissemination      Policy disseminated to all personnel
+  --has-acknowledgment-timeline  7-day acknowledgment timeline met
+  --has-feedback-timeline  3-month feedback timeline met
+```
+
+### `scripts/whistleblower_policy_scaffolder.py`
+
+Generate jurisdiction-specific whistleblower policy skeleton.
+
+```
+usage: whistleblower_policy_scaffolder.py [-h] [--json]
+                                          --jurisdiction {EU,US,UK}
+                                          --org-type {public,private,nonprofit}
+                                          --headcount HEADCOUNT
+                                          [--org-name ORG_NAME]
+                                          [--output OUTPUT]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --jurisdiction        Regulatory jurisdiction: EU, US, or UK
+  --org-type            Organization type
+  --headcount           Number of employees
+  --org-name            Organization name (used in policy template)
+  --output              Write policy to file instead of stdout
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Whistleblower Compliance&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Whistleblower Compliance&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Whistleblower Compliance in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Whistleblower Compliance&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Whistleblower Compliance&quot;
+4. Description: &quot;Audit whistleblower systems and draft compliant reporting policies. Use when assessing or building whistleblower programs.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/whistleblower-compliance/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

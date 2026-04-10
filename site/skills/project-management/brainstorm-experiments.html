@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Brainstorm Experiments (Project Management domain).
 
 Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/brainstorm-experiments
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Brainstorm Experiments (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Brainstorm Experiments (Project Management domain).
 
 Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
 
@@ -433,7 +455,528 @@ https://github.com/borghei/Claude-Skills/tree/main/brainstorm-experiments
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Brainstorm Experiments&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Experiment Design Expert
+
+## Overview
+
+Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing products.
+
+### When to Use
+
+- You have a product idea or feature hypothesis and need to validate it cheaply.
+- You want to test willingness to pay or genuine user interest, not just stated preference.
+- You need to choose the right experiment method for your context (new vs. existing product).
+
+## Core Principles
+
+### 1. XYZ Hypothesis Format
+
+Every experiment starts with a falsifiable hypothesis:
+
+**&quot;At least X% of Y will do Z.&quot;**
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| **X%** | The success threshold | 15% |
+| **Y** | The target population | trial users who reach the dashboard |
+| **Z** | The specific measurable action | click &quot;Upgrade to Pro&quot; within 7 days |
+
+A good XYZ hypothesis is specific, measurable, and has a clear pass/fail threshold set before the experiment runs.
+
+### 2. Skin-in-the-Game (SITG)
+
+Stated interest is unreliable. Valid experiments measure actions that require commitment:
+- **Money** -- Pre-orders, deposits, paid waitlists.
+- **Time** -- Signing up, completing a multi-step flow, scheduling a demo.
+- **Reputation** -- Sharing with colleagues, posting publicly.
+
+Always prefer SITG signals over surveys, likes, or verbal feedback.
+
+### 3. Your Own Data (YODA)
+
+Do not rely on market reports, competitor benchmarks, or industry averages. Run your own experiment with your own audience to get Your Own Data. Others&#x27; data reflects their context, not yours.
+
+## Experiment Types
+
+### For New Products
+
+| Method | Description | Best For | Effort | Duration |
+|--------|-------------|----------|--------|----------|
+| **Landing Page** | Single-page site describing the product with a CTA (sign up, pre-order) | Testing value proposition and demand | Low | 1-2 weeks |
+| **Explainer Video** | Short video demonstrating the concept with a CTA | Testing comprehension and interest | Low-Medium | 1-2 weeks |
+| **Pre-Order / Waitlist** | Accept payment or email for a product that does not exist yet | Testing willingness to pay | Low | 2-4 weeks |
+| **Concierge MVP** | Deliver the service manually to a small group, as if automated | Testing whether the solution actually solves the problem | Medium | 2-4 weeks |
+
+### For Existing Products
+
+| Method | Description | Best For | Effort | Duration |
+|--------|-------------|----------|--------|----------|
+| **Fake Door Test** | Add a button/link for a feature that does not exist; measure clicks | Testing demand for a specific feature | Low | 1-2 weeks |
+| **Feature Stub** | Build minimal version (e.g., static mockup) behind a flag | Testing engagement with a feature concept | Low-Medium | 1-2 weeks |
+| **A/B Test** | Show variant to a percentage of users; measure conversion | Testing incremental changes to existing flows | Medium | 2-4 weeks |
+| **Wizard of Oz** | Feature appears automated to user but is manually operated behind the scenes | Testing complex features before building automation | Medium-High | 2-4 weeks |
+| **Survey (In-App)** | Targeted survey shown to users who match specific behavioral criteria | Testing preferences when SITG methods are impractical | Low | 1 week |
+
+## Methodology
+
+### Step 1: Write the XYZ Hypothesis
+
+Start with the assumption you need to test. Convert it into XYZ format.
+
+**Weak:** &quot;Users will like the new dashboard.&quot;
+**Strong:** &quot;At least 30% of active users who see the new dashboard will set it as their default view within 5 days.&quot;
+
+### Step 2: Select the Experiment Method
+
+Choose based on:
+- **Product type** (new vs. existing)
+- **What you are testing** (demand, usability, willingness to pay, engagement)
+- **Available effort** (team capacity and timeline)
+- **Required confidence** (directional signal vs. statistically significant result)
+
+### Step 3: Define the Metric and Threshold
+
+| Element | Description |
+|---------|-------------|
+| **Primary metric** | The single number that determines pass/fail |
+| **Success threshold** | The minimum value to consider the hypothesis validated |
+| **Secondary metrics** | Additional signals to watch (but not used for pass/fail) |
+| **Guardrail metrics** | Metrics that must NOT degrade (e.g., existing conversion rate) |
+
+### Step 4: Run the Experiment
+
+- **Set a timebox.** Every experiment has a fixed end date.
+- **Do not peek.** Avoid checking results daily and making early calls.
+- **Document everything.** Record setup, audience, duration, and any anomalies.
+
+### Step 5: Evaluate Results
+
+| Outcome | Meaning | Next Action |
+|---------|---------|-------------|
+| **Clear pass** | Metric exceeds threshold | Proceed to build or next validation stage |
+| **Clear fail** | Metric well below threshold | Pivot, modify hypothesis, or abandon |
+| **Inconclusive** | Metric near threshold or insufficient sample | Extend duration, increase sample, or refine experiment |
+
+## Python Tool: experiment_designer.py
+
+Design experiments from hypotheses using the CLI tool:
+
+```bash
+# Run with demo data
+python3 scripts/experiment_designer.py --demo
+
+# Run with custom input
+python3 scripts/experiment_designer.py input.json
+
+# Output as JSON
+python3 scripts/experiment_designer.py input.json --format json
+```
+
+### Input Format
+
+```json
+{
+  &quot;hypotheses&quot;: [
+    {
+      &quot;hypothesis_text&quot;: &quot;At least 20% of trial users will click Upgrade within 7 days&quot;,
+      &quot;target_segment&quot;: &quot;trial users on free plan&quot;,
+      &quot;product_type&quot;: &quot;existing&quot;
+    }
+  ]
+}
+```
+
+### Output
+
+For each hypothesis, the tool suggests 2-3 experiment designs with method, metric, success threshold, effort level, and duration estimate.
+
+See `scripts/experiment_designer.py` for full documentation.
+
+## Output Template
+
+Use `assets/experiment_plan_template.md` to document each experiment:
+
+- Experiment card with hypothesis, method, metric, threshold, owner, timeline
+- Experiment tracker for managing multiple concurrent experiments
+- Results documentation for recording outcomes and decisions
+
+## Integration with Other Discovery Skills
+
+- Use `brainstorm-ideas/` to generate ideas that become hypotheses.
+- Use `identify-assumptions/` to find the riskiest assumptions to test.
+- After experiments, use `pre-mortem/` before committing to full build.
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Tool suggests only low-SITG experiments | Hypothesis text lacks action-oriented keywords (pay, purchase, upgrade) | Rewrite hypothesis using explicit behavioral verbs; check KEYWORD_SIGNALS mapping in script |
+| All experiments recommended are the same method | Hypothesis signals are too narrow or product_type is wrong | Verify `product_type` is set correctly (new vs. existing); broaden hypothesis to cover more intent signals |
+| Demo mode works but custom input fails | Input JSON schema does not match expected format (missing `hypotheses` key) | Validate JSON has top-level `hypotheses` array with `hypothesis_text`, `target_segment`, `product_type` per entry |
+| Experiment results are always inconclusive | Sample size too small or experiment duration too short for the metric | Extend timebox, increase traffic allocation, or choose a metric with higher signal-to-noise ratio |
+| Fake door test shows high clicks but feature never builds | No decision framework tied to experiment outcome | Define clear pass/fail thresholds before running; document the &quot;if pass, then build&quot; commitment upfront |
+| Team runs experiments but never acts on results | Results not connected to roadmap or prioritization process | Feed experiment outcomes into `identify-assumptions/` for re-scoring; link to `execution/outcome-roadmap/` |
+
+## Success Criteria
+
+- Every product hypothesis has a falsifiable XYZ statement before experiment design begins
+- Experiments measure Skin-in-the-Game (SITG) signals, not stated preferences
+- Pass/fail thresholds are defined before the experiment runs, not after
+- Experiment duration does not exceed 4 weeks for any single hypothesis
+- At least 70% of experiments produce a clear pass or fail verdict (not inconclusive)
+- Results directly feed the build/pivot/abandon decision within 1 week of experiment completion
+- Your Own Data (YODA) principle is followed -- no reliance on industry benchmarks for go/no-go decisions
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- XYZ hypothesis formulation and validation for product ideas
+- Experiment method selection for both new products (landing page, pre-order, concierge, explainer video) and existing products (fake door, feature stub, A/B test, Wizard of Oz, in-app survey)
+- Automated experiment design suggestions based on hypothesis keyword analysis
+- Metric selection, success threshold definition, and effort/duration estimation
+
+**Out of Scope:**
+- Statistical power analysis or sample size calculation (use dedicated A/B test platforms)
+- Experiment infrastructure setup (feature flags, analytics instrumentation)
+- Running the actual experiment (this skill designs experiments, not executes them)
+- Long-term product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
+
+**Important Caveats:**
+- Pretotyping is for validating demand and value, not for measuring usability or performance.
+- In-app surveys are the weakest SITG signal. Use them only when behavioral experiments are impractical.
+- The tool&#x27;s keyword-to-signal matching is heuristic-based. Review suggested experiments and override when domain knowledge dictates a better method.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
+| `identify-assumptions/` | Receives from | &quot;Test Now&quot; assumptions become hypotheses for this skill |
+| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
+| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
+| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
+| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+
+## Tool Reference
+
+### experiment_designer.py
+
+Suggests 2-3 experiment designs for each product hypothesis based on keyword signal analysis.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input_file` | positional | (optional) | Path to JSON file with hypotheses array |
+| `--demo` | flag | off | Run with built-in sample data (3 hypotheses) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+## References
+
+- Alberto Savoia, *The Right It* (2019)
+- Eric Ries, *The Lean Startup* (2011)
+- Jeff Gothelf &amp; Josh Seiden, *Lean UX* (2013)
+- Teresa Torres, *Continuous Discovery Habits* (2021)
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Brainstorm Experiments&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Brainstorm Experiments&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Brainstorm Experiments in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Brainstorm Experiments&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Brainstorm Experiments&quot;
+4. Description: &quot;Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Brainstorm Experiments&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Experiment Design Expert
+
+## Overview
+
+Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing products.
+
+### When to Use
+
+- You have a product idea or feature hypothesis and need to validate it cheaply.
+- You want to test willingness to pay or genuine user interest, not just stated preference.
+- You need to choose the right experiment method for your context (new vs. existing product).
+
+## Core Principles
+
+### 1. XYZ Hypothesis Format
+
+Every experiment starts with a falsifiable hypothesis:
+
+**&quot;At least X% of Y will do Z.&quot;**
+
+| Component | Description | Example |
+|-----------|-------------|---------|
+| **X%** | The success threshold | 15% |
+| **Y** | The target population | trial users who reach the dashboard |
+| **Z** | The specific measurable action | click &quot;Upgrade to Pro&quot; within 7 days |
+
+A good XYZ hypothesis is specific, measurable, and has a clear pass/fail threshold set before the experiment runs.
+
+### 2. Skin-in-the-Game (SITG)
+
+Stated interest is unreliable. Valid experiments measure actions that require commitment:
+- **Money** -- Pre-orders, deposits, paid waitlists.
+- **Time** -- Signing up, completing a multi-step flow, scheduling a demo.
+- **Reputation** -- Sharing with colleagues, posting publicly.
+
+Always prefer SITG signals over surveys, likes, or verbal feedback.
+
+### 3. Your Own Data (YODA)
+
+Do not rely on market reports, competitor benchmarks, or industry averages. Run your own experiment with your own audience to get Your Own Data. Others&#x27; data reflects their context, not yours.
+
+## Experiment Types
+
+### For New Products
+
+| Method | Description | Best For | Effort | Duration |
+|--------|-------------|----------|--------|----------|
+| **Landing Page** | Single-page site describing the product with a CTA (sign up, pre-order) | Testing value proposition and demand | Low | 1-2 weeks |
+| **Explainer Video** | Short video demonstrating the concept with a CTA | Testing comprehension and interest | Low-Medium | 1-2 weeks |
+| **Pre-Order / Waitlist** | Accept payment or email for a product that does not exist yet | Testing willingness to pay | Low | 2-4 weeks |
+| **Concierge MVP** | Deliver the service manually to a small group, as if automated | Testing whether the solution actually solves the problem | Medium | 2-4 weeks |
+
+### For Existing Products
+
+| Method | Description | Best For | Effort | Duration |
+|--------|-------------|----------|--------|----------|
+| **Fake Door Test** | Add a button/link for a feature that does not exist; measure clicks | Testing demand for a specific feature | Low | 1-2 weeks |
+| **Feature Stub** | Build minimal version (e.g., static mockup) behind a flag | Testing engagement with a feature concept | Low-Medium | 1-2 weeks |
+| **A/B Test** | Show variant to a percentage of users; measure conversion | Testing incremental changes to existing flows | Medium | 2-4 weeks |
+| **Wizard of Oz** | Feature appears automated to user but is manually operated behind the scenes | Testing complex features before building automation | Medium-High | 2-4 weeks |
+| **Survey (In-App)** | Targeted survey shown to users who match specific behavioral criteria | Testing preferences when SITG methods are impractical | Low | 1 week |
+
+## Methodology
+
+### Step 1: Write the XYZ Hypothesis
+
+Start with the assumption you need to test. Convert it into XYZ format.
+
+**Weak:** &quot;Users will like the new dashboard.&quot;
+**Strong:** &quot;At least 30% of active users who see the new dashboard will set it as their default view within 5 days.&quot;
+
+### Step 2: Select the Experiment Method
+
+Choose based on:
+- **Product type** (new vs. existing)
+- **What you are testing** (demand, usability, willingness to pay, engagement)
+- **Available effort** (team capacity and timeline)
+- **Required confidence** (directional signal vs. statistically significant result)
+
+### Step 3: Define the Metric and Threshold
+
+| Element | Description |
+|---------|-------------|
+| **Primary metric** | The single number that determines pass/fail |
+| **Success threshold** | The minimum value to consider the hypothesis validated |
+| **Secondary metrics** | Additional signals to watch (but not used for pass/fail) |
+| **Guardrail metrics** | Metrics that must NOT degrade (e.g., existing conversion rate) |
+
+### Step 4: Run the Experiment
+
+- **Set a timebox.** Every experiment has a fixed end date.
+- **Do not peek.** Avoid checking results daily and making early calls.
+- **Document everything.** Record setup, audience, duration, and any anomalies.
+
+### Step 5: Evaluate Results
+
+| Outcome | Meaning | Next Action |
+|---------|---------|-------------|
+| **Clear pass** | Metric exceeds threshold | Proceed to build or next validation stage |
+| **Clear fail** | Metric well below threshold | Pivot, modify hypothesis, or abandon |
+| **Inconclusive** | Metric near threshold or insufficient sample | Extend duration, increase sample, or refine experiment |
+
+## Python Tool: experiment_designer.py
+
+Design experiments from hypotheses using the CLI tool:
+
+```bash
+# Run with demo data
+python3 scripts/experiment_designer.py --demo
+
+# Run with custom input
+python3 scripts/experiment_designer.py input.json
+
+# Output as JSON
+python3 scripts/experiment_designer.py input.json --format json
+```
+
+### Input Format
+
+```json
+{
+  &quot;hypotheses&quot;: [
+    {
+      &quot;hypothesis_text&quot;: &quot;At least 20% of trial users will click Upgrade within 7 days&quot;,
+      &quot;target_segment&quot;: &quot;trial users on free plan&quot;,
+      &quot;product_type&quot;: &quot;existing&quot;
+    }
+  ]
+}
+```
+
+### Output
+
+For each hypothesis, the tool suggests 2-3 experiment designs with method, metric, success threshold, effort level, and duration estimate.
+
+See `scripts/experiment_designer.py` for full documentation.
+
+## Output Template
+
+Use `assets/experiment_plan_template.md` to document each experiment:
+
+- Experiment card with hypothesis, method, metric, threshold, owner, timeline
+- Experiment tracker for managing multiple concurrent experiments
+- Results documentation for recording outcomes and decisions
+
+## Integration with Other Discovery Skills
+
+- Use `brainstorm-ideas/` to generate ideas that become hypotheses.
+- Use `identify-assumptions/` to find the riskiest assumptions to test.
+- After experiments, use `pre-mortem/` before committing to full build.
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Tool suggests only low-SITG experiments | Hypothesis text lacks action-oriented keywords (pay, purchase, upgrade) | Rewrite hypothesis using explicit behavioral verbs; check KEYWORD_SIGNALS mapping in script |
+| All experiments recommended are the same method | Hypothesis signals are too narrow or product_type is wrong | Verify `product_type` is set correctly (new vs. existing); broaden hypothesis to cover more intent signals |
+| Demo mode works but custom input fails | Input JSON schema does not match expected format (missing `hypotheses` key) | Validate JSON has top-level `hypotheses` array with `hypothesis_text`, `target_segment`, `product_type` per entry |
+| Experiment results are always inconclusive | Sample size too small or experiment duration too short for the metric | Extend timebox, increase traffic allocation, or choose a metric with higher signal-to-noise ratio |
+| Fake door test shows high clicks but feature never builds | No decision framework tied to experiment outcome | Define clear pass/fail thresholds before running; document the &quot;if pass, then build&quot; commitment upfront |
+| Team runs experiments but never acts on results | Results not connected to roadmap or prioritization process | Feed experiment outcomes into `identify-assumptions/` for re-scoring; link to `execution/outcome-roadmap/` |
+
+## Success Criteria
+
+- Every product hypothesis has a falsifiable XYZ statement before experiment design begins
+- Experiments measure Skin-in-the-Game (SITG) signals, not stated preferences
+- Pass/fail thresholds are defined before the experiment runs, not after
+- Experiment duration does not exceed 4 weeks for any single hypothesis
+- At least 70% of experiments produce a clear pass or fail verdict (not inconclusive)
+- Results directly feed the build/pivot/abandon decision within 1 week of experiment completion
+- Your Own Data (YODA) principle is followed -- no reliance on industry benchmarks for go/no-go decisions
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- XYZ hypothesis formulation and validation for product ideas
+- Experiment method selection for both new products (landing page, pre-order, concierge, explainer video) and existing products (fake door, feature stub, A/B test, Wizard of Oz, in-app survey)
+- Automated experiment design suggestions based on hypothesis keyword analysis
+- Metric selection, success threshold definition, and effort/duration estimation
+
+**Out of Scope:**
+- Statistical power analysis or sample size calculation (use dedicated A/B test platforms)
+- Experiment infrastructure setup (feature flags, analytics instrumentation)
+- Running the actual experiment (this skill designs experiments, not executes them)
+- Long-term product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
+
+**Important Caveats:**
+- Pretotyping is for validating demand and value, not for measuring usability or performance.
+- In-app surveys are the weakest SITG signal. Use them only when behavioral experiments are impractical.
+- The tool&#x27;s keyword-to-signal matching is heuristic-based. Review suggested experiments and override when domain knowledge dictates a better method.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
+| `identify-assumptions/` | Receives from | &quot;Test Now&quot; assumptions become hypotheses for this skill |
+| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
+| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
+| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
+| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+
+## Tool Reference
+
+### experiment_designer.py
+
+Suggests 2-3 experiment designs for each product hypothesis based on keyword signal analysis.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input_file` | positional | (optional) | Path to JSON file with hypotheses array |
+| `--demo` | flag | off | Run with built-in sample data (3 hypotheses) |
+| `--format` | choice | `text` | Output format: `text` or `json` |
+
+## References
+
+- Alberto Savoia, *The Right It* (2019)
+- Eric Ries, *The Lean Startup* (2011)
+- Jeff Gothelf &amp; Josh Seiden, *Lean UX* (2013)
+- Teresa Torres, *Continuous Discovery Habits* (2021)
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Brainstorm Experiments&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Brainstorm Experiments&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Brainstorm Experiments in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Brainstorm Experiments&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Brainstorm Experiments&quot;
+4. Description: &quot;Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Paywall Upgrade Cro (Business &amp; Growth domain).
 
 In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/paywall-upgrade-cro
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Paywall Upgrade Cro (Business &amp; Growth domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Paywall Upgrade Cro (Business &amp; Growth domain).
 
 In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.
 
@@ -433,7 +455,1078 @@ https://github.com/borghei/Claude-Skills/tree/main/paywall-upgrade-cro
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Paywall Upgrade Cro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Paywall &amp; Upgrade Screen CRO
+
+Production-grade framework for in-product upgrade flows. Covers feature gate design, usage limit UX, trial expiration sequences, upgrade trigger timing, dark pattern avoidance, and ethical monetization. Distinct from public pricing pages (use page-cro for those) -- this focuses on in-product moments where users have already experienced value.
+
+---
+
+## Table of Contents
+
+- [Initial Assessment](#initial-assessment)
+- [The Value-First Principle](#the-value-first-principle)
+- [Paywall Trigger Architecture](#paywall-trigger-architecture)
+- [Paywall Screen Design](#paywall-screen-design)
+- [Feature Gate Patterns](#feature-gate-patterns)
+- [Usage Limit UX](#usage-limit-ux)
+- [Trial Expiration Flows](#trial-expiration-flows)
+- [Timing and Frequency Rules](#timing-and-frequency-rules)
+- [Upgrade Flow Optimization](#upgrade-flow-optimization)
+- [Dark Pattern Avoidance](#dark-pattern-avoidance)
+- [Platform-Specific Considerations](#platform-specific-considerations)
+- [Metrics and Benchmarks](#metrics-and-benchmarks)
+- [A/B Test Framework](#ab-test-framework)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Initial Assessment
+
+### Required Context
+
+| Question | Why It Matters |
+|----------|---------------|
+| What is the upgrade model? (freemium to paid, trial to paid, tier upgrade) | Determines the paywall type |
+| What is free vs paid? | Defines the value gap to communicate |
+| What triggers upgrade prompts today? | Identifies current trigger points |
+| What is the current free-to-paid conversion rate? | Baseline for improvement |
+| What is the aha moment for users? | Determines when the paywall should appear |
+| What pricing model? (per seat, usage, flat) | Affects paywall messaging |
+| Mobile app, web app, or both? | Platform-specific requirements |
+
+---
+
+## The Value-First Principle
+
+The single most important rule in paywall design: **The user must have experienced real value before seeing an upgrade prompt.**
+
+### Value-First Checklist
+
+- [ ] User has completed the activation event (aha moment reached)
+- [ ] User has used the product at least 2-3 times
+- [ ] User has created or stored data they would lose
+- [ ] The upgrade feels like a natural next step, not a trap
+
+### When to Show vs When NOT to Show
+
+| Show | Do Not Show |
+|------|------------|
+| After aha moment is reached | During onboarding |
+| When user hits a genuine limit | On first login |
+| When user clicks a paid feature | When user is in the middle of a task |
+| After milestone completion | Immediately after a frustrating experience |
+| On session start (gentle reminder) | After every action |
+
+---
+
+## Paywall Trigger Architecture
+
+### Trigger Types
+
+| Trigger | When It Fires | Best For |
+|---------|--------------|----------|
+| Feature gate | User clicks a locked feature | Feature-differentiated tiers |
+| Usage limit | User reaches a quota | Usage-based pricing |
+| Trial expiration | Trial period ending | Time-limited trial models |
+| Time-based | After N days of active use | Freemium nurture |
+| Milestone-based | After user achieves X | Upsell at success moments |
+| Team-based | When team grows past free seat limit | Per-seat models |
+
+### Trigger Priority Map
+
+| User State | Primary Trigger | Timing |
+|-----------|----------------|--------|
+| Activated, under limits | Feature gate (when they try paid feature) | On click |
+| Approaching limit | Soft warning (80% of limit) | Proactive |
+| Hit limit | Usage limit paywall | On action that exceeds limit |
+| Trial day 7 of 14 | Trial ending reminder | Session start |
+| Trial day 13 of 14 | Urgent trial expiration | Session start + email |
+| Trial day 14 | Trial expired | On login |
+| Active for 30+ days, free | Value-based upgrade prompt | Session start, once per week |
+
+---
+
+## Paywall Screen Design
+
+### Screen Anatomy
+
+```
+┌─────────────────────────────────────┐
+│ [X Close / &quot;Not now&quot;]               │  Escape hatch (always visible)
+│                                     │
+│ HEADLINE: Value-focused             │  &quot;Unlock [feature] to [benefit]&quot;
+│                                     │
+│ [Feature preview / screenshot]      │  Show what they are missing
+│                                     │
+│ KEY BENEFITS:                       │
+│ - Benefit 1                        │
+│ - Benefit 2                        │
+│ - Benefit 3                        │
+│                                     │
+│ PRICE: $X/month                    │  Clear, simple pricing
+│ (or plan comparison)               │
+│                                     │
+│ [UPGRADE CTA - Primary]           │  &quot;Start Pro Plan&quot;
+│ [Maybe Later - Secondary]          │  Clear secondary action
+│                                     │
+│ &quot;Join 5,000+ teams on Pro&quot;        │  Social proof
+└─────────────────────────────────────┘
+```
+
+### Copy Patterns by Trigger Type
+
+| Trigger | Headline Pattern | CTA Pattern |
+|---------|-----------------|-------------|
+| Feature gate | &quot;Unlock [Feature] to [Benefit]&quot; | &quot;Upgrade to [Plan]&quot; |
+| Usage limit | &quot;You&#x27;ve used all [N] [resources]&quot; | &quot;Get Unlimited [Resources]&quot; |
+| Trial expiring | &quot;Your trial ends in [N] days&quot; | &quot;Continue with [Plan]&quot; |
+| Milestone | &quot;You just hit [milestone]! Keep growing with Pro&quot; | &quot;Upgrade &amp; Keep Growing&quot; |
+| Time-based | &quot;[Product] Pro helps teams like yours [benefit]&quot; | &quot;See Pro Features&quot; |
+
+---
+
+## Feature Gate Patterns
+
+### Soft Gate (Preview + Lock)
+
+User can see what the feature does but cannot use it fully.
+
+```
+┌──────────────────────────────┐
+│  [Feature Preview]           │  Blurred screenshot or partial result
+│                              │
+│  [Lock Icon] Pro Feature     │
+│                              │
+│  [Feature name] lets you:    │
+│  - Capability 1              │
+│  - Capability 2              │
+│                              │
+│  [Upgrade to Pro - $X/mo]   │
+│  [Maybe Later]              │
+└──────────────────────────────┘
+```
+
+### Hard Gate (Block + Explain)
+
+User cannot access the feature at all. Show the value clearly.
+
+```
+┌──────────────────────────────┐
+│  [Lock Icon]                 │
+│                              │
+│  This feature is available   │
+│  on the Pro plan             │
+│                              │
+│  What you get:               │
+│  - Benefit 1                 │
+│  - Benefit 2                 │
+│  - Benefit 3                 │
+│                              │
+│  [Upgrade to Pro]            │
+│  [Compare Plans]             │
+└──────────────────────────────┘
+```
+
+### Feature Gate Design Rules
+
+- Always explain WHY the feature is valuable (not just that it is locked)
+- Show what the feature produces (output preview) when possible
+- Include a &quot;Compare Plans&quot; link for users who want more detail
+- Do not gate features the user was already using during trial
+
+---
+
+## Usage Limit UX
+
+### Approaching Limit (80% Warning)
+
+```
+┌──────────────────────────────────┐
+│  [Progress Bar: 80%]            │
+│  You&#x27;ve used 80 of 100 credits  │
+│                                  │
+│  [Get More Credits]  [Dismiss]  │
+└──────────────────────────────────┘
+```
+
+### At Limit (100%)
+
+```
+┌──────────────────────────────────────┐
+│  [Progress Bar: 100%]               │
+│  You&#x27;ve reached your monthly limit  │
+│                                      │
+│  Free: 100 credits | Pro: Unlimited │
+│                                      │
+│  [Upgrade to Pro]                   │
+│  [Delete items to free space]       │  Alternative action
+└──────────────────────────────────────┘
+```
+
+### Usage Limit Rules
+
+- Show usage context before the limit hits (progress indicators in the UI)
+- Provide an alternative action (delete, archive, export) when possible
+- Never delete user data when limits are reached
+- Allow grace period (do not cut off mid-task)
+
+---
+
+## Trial Expiration Flows
+
+### Trial Countdown Sequence
+
+| Day | Channel | Message | Tone |
+|-----|---------|---------|------|
+| Day 7 (of 14) | In-app banner | &quot;7 days left in your trial&quot; | Informational |
+| Day 10 | Email | &quot;4 days left -- here&#x27;s what you&#x27;ve accomplished&quot; | Value summary |
+| Day 12 | In-app modal | &quot;2 days left -- don&#x27;t lose access to [feature]&quot; | Mild urgency |
+| Day 13 | Email | &quot;Tomorrow is your last day&quot; | Urgency + offer |
+| Day 14 | In-app full screen | &quot;Your trial has ended&quot; | Clear options |
+| Day 15 | Email | &quot;We kept your data safe -- reactivate anytime&quot; | Reassurance |
+
+### Trial Expiration Screen Design
+
+```
+┌─────────────────────────────────────────┐
+│  Your trial has ended                    │
+│                                          │
+│  What you accomplished during trial:     │
+│  - Created [N] projects                 │  Personalized data
+│  - Invited [N] team members             │
+│  - Saved an estimated [X] hours         │
+│                                          │
+│  What happens now:                       │
+│  - Your data is saved for 30 days       │
+│  - Read-only access to existing work    │
+│  - Full access resumes when you upgrade │
+│                                          │
+│  [Continue with Pro - $X/mo]            │
+│  [Remind Me Later]  [Downgrade to Free] │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Timing and Frequency Rules
+
+### Frequency Caps
+
+| Rule | Implementation |
+|------|---------------|
+| Max 1 paywall per session | Do not interrupt twice in one visit |
+| 3-7 day cooldown after dismissal | If they click &quot;Not now&quot;, wait at least 3 days |
+| Never during active task | If user is creating, editing, or mid-workflow, do not interrupt |
+| Cap at 3 per month | After 3 dismissals in a month, stop showing until next month |
+| Track annoyance signals | If user closes paywall within 1 second repeatedly, increase cooldown |
+
+### Escalation Pattern
+
+| Attempt | Approach | Invasiveness |
+|---------|----------|-------------|
+| 1 | Subtle banner or sidebar widget | Low |
+| 2 | Modal with value proposition | Medium |
+| 3 | Modal with special offer (discount/extended trial) | Medium-High |
+| 4+ | Reduce frequency, switch to email nurture | Low (change channel) |
+
+---
+
+## Upgrade Flow Optimization
+
+### From Paywall Click to Payment
+
+| Step | Optimization |
+|------|-------------|
+| 1. Click upgrade CTA | Opens upgrade flow (do not redirect to external page if avoidable) |
+| 2. Plan selection | Pre-select the recommended plan, show comparison |
+| 3. Payment | Pre-fill known info (email, name), support all payment methods |
+| 4. Confirmation | Immediate access to paid features, confirmation email |
+| 5. Post-upgrade | Guide to newly unlocked features, celebration moment |
+
+### Friction Reduction
+
+- Keep the upgrade flow in-context (modal or slide-out, not a full page redirect)
+- Pre-fill all known information
+- Support saved payment methods and one-click upgrade for returning upgraders
+- Show price clearly before the payment step (no surprise charges)
+
+---
+
+## Dark Pattern Avoidance
+
+### Patterns to NEVER Use
+
+| Dark Pattern | Why It Fails | Ethical Alternative |
+|-------------|-------------|---------------------|
+| Hidden close button | Breaks trust, generates support tickets | Clear X in top-right corner |
+| Shame copy (&quot;No, I don&#x27;t want to grow my business&quot;) | Manipulative, reduces brand respect | &quot;Maybe later&quot; or &quot;Not now&quot; |
+| Countdown timer (fake urgency) | Users discover it resets, destroys credibility | Only use for genuinely expiring offers |
+| Confusing plan selection | Users feel tricked, higher refund rate | Clear plan names with honest comparison |
+| Blocking critical actions | Users feel trapped, generates churn | Allow continued use of existing features |
+| Making downgrade difficult | Regulatory risk (especially in EU/CA) | One-click downgrade option |
+
+---
+
+## Platform-Specific Considerations
+
+### iOS App Store
+
+- Apple requires in-app purchase (IAP) for digital goods/services
+- Apple takes 30% commission (15% for small business program)
+- Must comply with App Store Review Guidelines 3.1
+- Cannot link to external payment pages from within the app
+- Must clearly communicate subscription terms and renewal
+
+### Google Play
+
+- Similar IAP requirements as iOS
+- Google Play billing required for digital goods
+- 15% commission on first $1M in annual revenue, then 30%
+- Must provide clear subscription management
+
+### Web App
+
+- Full control over payment flow and presentation
+- Can offer any payment method
+- No platform commission
+- Can A/B test freely without app review delays
+
+---
+
+## Metrics and Benchmarks
+
+### Key Metrics
+
+| Metric | Formula | Benchmark |
+|--------|---------|-----------|
+| Paywall impression rate | Users who see paywall / Active users | Track, no universal benchmark |
+| Paywall CTR | Upgrade clicks / Paywall impressions | 5-15% |
+| Upgrade completion rate | Completed upgrades / Upgrade clicks | 30-60% |
+| Free-to-paid conversion | Paid users / Total free users | 2-5% for freemium, 15-30% for trial |
+| Revenue per user (ARPU) | Total revenue / Active users | Segment-dependent |
+| Post-upgrade churn (30-day) | Churned within 30 days / New paid users | &lt; 10% |
+
+### Warning Signals
+
+| Signal | Diagnosis | Action |
+|--------|-----------|--------|
+| CTR &lt; 3% | Paywall copy or timing is wrong | Test different triggers and messaging |
+| Completion &lt; 20% | Upgrade flow has too much friction | Simplify payment flow |
+| Post-upgrade churn &gt; 15% | Value not matching expectations | Review feature access and onboarding |
+| Free-to-paid &lt; 1% | Paywall appears before value is delivered | Delay triggers until after activation |
+
+---
+
+## A/B Test Framework
+
+### High-Impact Tests
+
+| Test | Hypothesis | Metric |
+|------|-----------|--------|
+| Trigger timing (earlier vs later) | Later trigger = higher conversion rate | Free-to-paid conversion |
+| Soft gate vs hard gate | Soft gate (preview) converts better | Feature gate CTR |
+| Copy variation | Value-focused vs urgency-focused | Paywall CTR |
+| Price presentation | Monthly vs annual default | ARPU |
+
+### Test Measurement
+
+- Run for minimum 2 weeks or 100 conversions per variant
+- Track upgrade rate AND 30-day post-upgrade retention
+- A test that increases upgrades but increases churn is a net negative
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Paywall Trigger Map | Trigger x timing x frequency table | All trigger points with rules and cooldowns |
+| Screen Copy Set | Complete screen designs | Headline, benefits, CTA, escape hatch for each paywall type |
+| Upgrade Flow Diagram | Step-by-step flow | Paywall click to post-upgrade confirmation |
+| Dark Pattern Audit | Checklist | Review of existing paywall for manipulative patterns |
+| Trial Expiration Sequence | Day-by-day plan | In-app + email sequence for trial countdown |
+| A/B Test Backlog | Prioritized table | Test ideas ranked by expected impact |
+
+---
+
+## Tool Reference
+
+### 1. paywall_trigger_auditor.py
+
+Audits paywall trigger configuration for timing, frequency, and coverage issues. Reads a JSON file of trigger rules and user event data, then flags misconfigured triggers, missing cooldowns, and dark-pattern risks.
+
+```bash
+python scripts/paywall_trigger_auditor.py triggers.json --format text
+python scripts/paywall_trigger_auditor.py triggers.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `triggers.json` | positional | Path to JSON file with trigger rules and event data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. upgrade_funnel_analyzer.py
+
+Analyzes upgrade funnel step-by-step conversion from paywall impression through payment completion. Identifies the highest-drop steps, calculates stage-over-stage conversion, and benchmarks against industry targets.
+
+```bash
+python scripts/upgrade_funnel_analyzer.py funnel.json --format text
+python scripts/upgrade_funnel_analyzer.py funnel.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `funnel.json` | positional | Path to JSON file with funnel step data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. paywall_copy_scorer.py
+
+Scores paywall screen copy against proven conversion patterns. Evaluates headline structure, benefit clarity, CTA strength, social proof presence, and dark-pattern risk. Outputs a 0-100 score with itemized feedback.
+
+```bash
+python scripts/paywall_copy_scorer.py copy.json --format text
+python scripts/paywall_copy_scorer.py copy.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `copy.json` | positional | Path to JSON file with paywall copy elements |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Paywall CTR below 3% | Trigger fires before user reaches aha moment or copy is feature-focused instead of benefit-focused | Delay trigger until after activation event; rewrite headline to outcome-based messaging (lifts CTR up to 23% per Strava case study) |
+| Upgrade completion below 20% | Too much friction in payment flow (redirects, missing payment methods, surprise charges) | Keep flow in-context (modal/slide-out), pre-fill known info, show price before payment step |
+| Post-upgrade churn above 15% | Value expectation mismatch -- paid experience does not match what the paywall promised | Audit feature access post-upgrade, add guided tour of newly unlocked features, align copy with actual capabilities |
+| Free-to-paid conversion below 1% | Paywall appears before value is delivered or free tier is too generous | Map activation events and ensure paywall only fires after aha moment; review free vs paid feature boundary |
+| Users close paywall within 1 second repeatedly | Paywall is interrupting workflow or appearing too frequently | Increase cooldown to 7+ days after dismissal, cap at 3 per month, switch to less intrusive format (banner vs modal) |
+| Mobile paywall underperforms desktop by &gt;30% | iOS/Android IAP friction, small dismiss targets, or full-screen overlay on mobile | Ensure 44x44px touch targets, use bottom-sheet format on mobile, comply with App Store guidelines |
+| Trial expiration emails have low open rate | Generic subject lines, wrong send timing, or email deliverability issues | Personalize with usage data (&quot;You created 12 projects&quot;), send at user&#x27;s active hours, check spam score |
+
+---
+
+## Success Criteria
+
+- Free-to-paid conversion rate reaches 2-5% for freemium models or 15-30% for trial models within 90 days of optimization
+- Paywall CTR stabilizes at 5-15% across all trigger types
+- Upgrade completion rate (paywall click to payment) exceeds 30%
+- Post-upgrade 30-day retention exceeds 90% (churn below 10%)
+- Paywall annoyance signals (sub-1-second dismissals) decrease to below 5% of impressions
+- Zero dark patterns present in paywall audit (no shame copy, no hidden close buttons, no fake urgency)
+- Annual plan adoption reaches 40%+ of new upgrades when annual toggle defaults are implemented (benchmark: 20-40% lift)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** In-product upgrade flows including feature gates, usage limit screens, trial expiration sequences, upgrade trigger timing, save offer strategy, paywall screen design, and A/B test frameworks for freemium-to-paid and trial-to-paid conversion.
+
+**Out of scope:** Public-facing pricing pages (use page-cro), the pricing model itself (use pricing-strategy), post-signup onboarding before the aha moment (use onboarding-cro), initial registration flows (use signup-flow-cro), and post-upgrade churn intervention (use churn-prevention). This skill does not cover App Store Optimization (ASO) or paid acquisition strategies. Scripts operate on local data only -- no integrations with payment processors, analytics platforms, or A/B testing tools.
+
+**Limitations:** Conversion benchmarks are based on aggregate SaaS/app industry data and may vary significantly by vertical, price point, and audience. Mobile paywall performance is highly dependent on platform-specific IAP requirements (Apple 30% commission, Google Play billing). Scripts analyze static snapshots; real-time paywall optimization requires integration with analytics and experimentation platforms not provided here.
+
+---
+
+## Integration Points
+
+- **pricing-strategy** -- Feed pricing tier structure and value metric into paywall copy and plan comparison design
+- **onboarding-cro** -- Coordinate activation event definitions; paywall triggers should fire only after onboarding confirms aha moment
+- **churn-prevention** -- Post-upgrade churn data feeds back into paywall expectation-setting; save offers should align with churn prevention playbook
+- **page-cro** -- Public pricing page design feeds into in-app upgrade flow consistency; ensure messaging alignment
+- **signup-flow-cro** -- Registration flow completion triggers trial start; trial duration and paywall timing depend on signup context
+- **popup-cro** -- Share frequency capping logic and suppression rules; paywall modals follow same UX principles as marketing popups
+
+---
+
+## Related Skills
+
+- **page-cro** -- Use for public pricing page optimization. Paywall-upgrade-cro handles in-product upgrade moments.
+- **onboarding-cro** -- Use when users have not reached activation. Do not show paywalls before the aha moment.
+- **pricing-strategy** -- Use when the pricing model itself needs redesigning (tier structure, value metric, price points).
+- **churn-prevention** -- Use when users upgrade but then churn. If they never upgrade, the problem is here.
+- **signup-flow-cro** -- Use for the initial registration flow. Paywall-upgrade-cro handles post-signup monetization.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Paywall Upgrade Cro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Paywall Upgrade Cro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Paywall Upgrade Cro in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Paywall Upgrade Cro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Paywall Upgrade Cro&quot;
+4. Description: &quot;In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/paywall-upgrade-cro/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Paywall Upgrade Cro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Paywall &amp; Upgrade Screen CRO
+
+Production-grade framework for in-product upgrade flows. Covers feature gate design, usage limit UX, trial expiration sequences, upgrade trigger timing, dark pattern avoidance, and ethical monetization. Distinct from public pricing pages (use page-cro for those) -- this focuses on in-product moments where users have already experienced value.
+
+---
+
+## Table of Contents
+
+- [Initial Assessment](#initial-assessment)
+- [The Value-First Principle](#the-value-first-principle)
+- [Paywall Trigger Architecture](#paywall-trigger-architecture)
+- [Paywall Screen Design](#paywall-screen-design)
+- [Feature Gate Patterns](#feature-gate-patterns)
+- [Usage Limit UX](#usage-limit-ux)
+- [Trial Expiration Flows](#trial-expiration-flows)
+- [Timing and Frequency Rules](#timing-and-frequency-rules)
+- [Upgrade Flow Optimization](#upgrade-flow-optimization)
+- [Dark Pattern Avoidance](#dark-pattern-avoidance)
+- [Platform-Specific Considerations](#platform-specific-considerations)
+- [Metrics and Benchmarks](#metrics-and-benchmarks)
+- [A/B Test Framework](#ab-test-framework)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Initial Assessment
+
+### Required Context
+
+| Question | Why It Matters |
+|----------|---------------|
+| What is the upgrade model? (freemium to paid, trial to paid, tier upgrade) | Determines the paywall type |
+| What is free vs paid? | Defines the value gap to communicate |
+| What triggers upgrade prompts today? | Identifies current trigger points |
+| What is the current free-to-paid conversion rate? | Baseline for improvement |
+| What is the aha moment for users? | Determines when the paywall should appear |
+| What pricing model? (per seat, usage, flat) | Affects paywall messaging |
+| Mobile app, web app, or both? | Platform-specific requirements |
+
+---
+
+## The Value-First Principle
+
+The single most important rule in paywall design: **The user must have experienced real value before seeing an upgrade prompt.**
+
+### Value-First Checklist
+
+- [ ] User has completed the activation event (aha moment reached)
+- [ ] User has used the product at least 2-3 times
+- [ ] User has created or stored data they would lose
+- [ ] The upgrade feels like a natural next step, not a trap
+
+### When to Show vs When NOT to Show
+
+| Show | Do Not Show |
+|------|------------|
+| After aha moment is reached | During onboarding |
+| When user hits a genuine limit | On first login |
+| When user clicks a paid feature | When user is in the middle of a task |
+| After milestone completion | Immediately after a frustrating experience |
+| On session start (gentle reminder) | After every action |
+
+---
+
+## Paywall Trigger Architecture
+
+### Trigger Types
+
+| Trigger | When It Fires | Best For |
+|---------|--------------|----------|
+| Feature gate | User clicks a locked feature | Feature-differentiated tiers |
+| Usage limit | User reaches a quota | Usage-based pricing |
+| Trial expiration | Trial period ending | Time-limited trial models |
+| Time-based | After N days of active use | Freemium nurture |
+| Milestone-based | After user achieves X | Upsell at success moments |
+| Team-based | When team grows past free seat limit | Per-seat models |
+
+### Trigger Priority Map
+
+| User State | Primary Trigger | Timing |
+|-----------|----------------|--------|
+| Activated, under limits | Feature gate (when they try paid feature) | On click |
+| Approaching limit | Soft warning (80% of limit) | Proactive |
+| Hit limit | Usage limit paywall | On action that exceeds limit |
+| Trial day 7 of 14 | Trial ending reminder | Session start |
+| Trial day 13 of 14 | Urgent trial expiration | Session start + email |
+| Trial day 14 | Trial expired | On login |
+| Active for 30+ days, free | Value-based upgrade prompt | Session start, once per week |
+
+---
+
+## Paywall Screen Design
+
+### Screen Anatomy
+
+```
+┌─────────────────────────────────────┐
+│ [X Close / &quot;Not now&quot;]               │  Escape hatch (always visible)
+│                                     │
+│ HEADLINE: Value-focused             │  &quot;Unlock [feature] to [benefit]&quot;
+│                                     │
+│ [Feature preview / screenshot]      │  Show what they are missing
+│                                     │
+│ KEY BENEFITS:                       │
+│ - Benefit 1                        │
+│ - Benefit 2                        │
+│ - Benefit 3                        │
+│                                     │
+│ PRICE: $X/month                    │  Clear, simple pricing
+│ (or plan comparison)               │
+│                                     │
+│ [UPGRADE CTA - Primary]           │  &quot;Start Pro Plan&quot;
+│ [Maybe Later - Secondary]          │  Clear secondary action
+│                                     │
+│ &quot;Join 5,000+ teams on Pro&quot;        │  Social proof
+└─────────────────────────────────────┘
+```
+
+### Copy Patterns by Trigger Type
+
+| Trigger | Headline Pattern | CTA Pattern |
+|---------|-----------------|-------------|
+| Feature gate | &quot;Unlock [Feature] to [Benefit]&quot; | &quot;Upgrade to [Plan]&quot; |
+| Usage limit | &quot;You&#x27;ve used all [N] [resources]&quot; | &quot;Get Unlimited [Resources]&quot; |
+| Trial expiring | &quot;Your trial ends in [N] days&quot; | &quot;Continue with [Plan]&quot; |
+| Milestone | &quot;You just hit [milestone]! Keep growing with Pro&quot; | &quot;Upgrade &amp; Keep Growing&quot; |
+| Time-based | &quot;[Product] Pro helps teams like yours [benefit]&quot; | &quot;See Pro Features&quot; |
+
+---
+
+## Feature Gate Patterns
+
+### Soft Gate (Preview + Lock)
+
+User can see what the feature does but cannot use it fully.
+
+```
+┌──────────────────────────────┐
+│  [Feature Preview]           │  Blurred screenshot or partial result
+│                              │
+│  [Lock Icon] Pro Feature     │
+│                              │
+│  [Feature name] lets you:    │
+│  - Capability 1              │
+│  - Capability 2              │
+│                              │
+│  [Upgrade to Pro - $X/mo]   │
+│  [Maybe Later]              │
+└──────────────────────────────┘
+```
+
+### Hard Gate (Block + Explain)
+
+User cannot access the feature at all. Show the value clearly.
+
+```
+┌──────────────────────────────┐
+│  [Lock Icon]                 │
+│                              │
+│  This feature is available   │
+│  on the Pro plan             │
+│                              │
+│  What you get:               │
+│  - Benefit 1                 │
+│  - Benefit 2                 │
+│  - Benefit 3                 │
+│                              │
+│  [Upgrade to Pro]            │
+│  [Compare Plans]             │
+└──────────────────────────────┘
+```
+
+### Feature Gate Design Rules
+
+- Always explain WHY the feature is valuable (not just that it is locked)
+- Show what the feature produces (output preview) when possible
+- Include a &quot;Compare Plans&quot; link for users who want more detail
+- Do not gate features the user was already using during trial
+
+---
+
+## Usage Limit UX
+
+### Approaching Limit (80% Warning)
+
+```
+┌──────────────────────────────────┐
+│  [Progress Bar: 80%]            │
+│  You&#x27;ve used 80 of 100 credits  │
+│                                  │
+│  [Get More Credits]  [Dismiss]  │
+└──────────────────────────────────┘
+```
+
+### At Limit (100%)
+
+```
+┌──────────────────────────────────────┐
+│  [Progress Bar: 100%]               │
+│  You&#x27;ve reached your monthly limit  │
+│                                      │
+│  Free: 100 credits | Pro: Unlimited │
+│                                      │
+│  [Upgrade to Pro]                   │
+│  [Delete items to free space]       │  Alternative action
+└──────────────────────────────────────┘
+```
+
+### Usage Limit Rules
+
+- Show usage context before the limit hits (progress indicators in the UI)
+- Provide an alternative action (delete, archive, export) when possible
+- Never delete user data when limits are reached
+- Allow grace period (do not cut off mid-task)
+
+---
+
+## Trial Expiration Flows
+
+### Trial Countdown Sequence
+
+| Day | Channel | Message | Tone |
+|-----|---------|---------|------|
+| Day 7 (of 14) | In-app banner | &quot;7 days left in your trial&quot; | Informational |
+| Day 10 | Email | &quot;4 days left -- here&#x27;s what you&#x27;ve accomplished&quot; | Value summary |
+| Day 12 | In-app modal | &quot;2 days left -- don&#x27;t lose access to [feature]&quot; | Mild urgency |
+| Day 13 | Email | &quot;Tomorrow is your last day&quot; | Urgency + offer |
+| Day 14 | In-app full screen | &quot;Your trial has ended&quot; | Clear options |
+| Day 15 | Email | &quot;We kept your data safe -- reactivate anytime&quot; | Reassurance |
+
+### Trial Expiration Screen Design
+
+```
+┌─────────────────────────────────────────┐
+│  Your trial has ended                    │
+│                                          │
+│  What you accomplished during trial:     │
+│  - Created [N] projects                 │  Personalized data
+│  - Invited [N] team members             │
+│  - Saved an estimated [X] hours         │
+│                                          │
+│  What happens now:                       │
+│  - Your data is saved for 30 days       │
+│  - Read-only access to existing work    │
+│  - Full access resumes when you upgrade │
+│                                          │
+│  [Continue with Pro - $X/mo]            │
+│  [Remind Me Later]  [Downgrade to Free] │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Timing and Frequency Rules
+
+### Frequency Caps
+
+| Rule | Implementation |
+|------|---------------|
+| Max 1 paywall per session | Do not interrupt twice in one visit |
+| 3-7 day cooldown after dismissal | If they click &quot;Not now&quot;, wait at least 3 days |
+| Never during active task | If user is creating, editing, or mid-workflow, do not interrupt |
+| Cap at 3 per month | After 3 dismissals in a month, stop showing until next month |
+| Track annoyance signals | If user closes paywall within 1 second repeatedly, increase cooldown |
+
+### Escalation Pattern
+
+| Attempt | Approach | Invasiveness |
+|---------|----------|-------------|
+| 1 | Subtle banner or sidebar widget | Low |
+| 2 | Modal with value proposition | Medium |
+| 3 | Modal with special offer (discount/extended trial) | Medium-High |
+| 4+ | Reduce frequency, switch to email nurture | Low (change channel) |
+
+---
+
+## Upgrade Flow Optimization
+
+### From Paywall Click to Payment
+
+| Step | Optimization |
+|------|-------------|
+| 1. Click upgrade CTA | Opens upgrade flow (do not redirect to external page if avoidable) |
+| 2. Plan selection | Pre-select the recommended plan, show comparison |
+| 3. Payment | Pre-fill known info (email, name), support all payment methods |
+| 4. Confirmation | Immediate access to paid features, confirmation email |
+| 5. Post-upgrade | Guide to newly unlocked features, celebration moment |
+
+### Friction Reduction
+
+- Keep the upgrade flow in-context (modal or slide-out, not a full page redirect)
+- Pre-fill all known information
+- Support saved payment methods and one-click upgrade for returning upgraders
+- Show price clearly before the payment step (no surprise charges)
+
+---
+
+## Dark Pattern Avoidance
+
+### Patterns to NEVER Use
+
+| Dark Pattern | Why It Fails | Ethical Alternative |
+|-------------|-------------|---------------------|
+| Hidden close button | Breaks trust, generates support tickets | Clear X in top-right corner |
+| Shame copy (&quot;No, I don&#x27;t want to grow my business&quot;) | Manipulative, reduces brand respect | &quot;Maybe later&quot; or &quot;Not now&quot; |
+| Countdown timer (fake urgency) | Users discover it resets, destroys credibility | Only use for genuinely expiring offers |
+| Confusing plan selection | Users feel tricked, higher refund rate | Clear plan names with honest comparison |
+| Blocking critical actions | Users feel trapped, generates churn | Allow continued use of existing features |
+| Making downgrade difficult | Regulatory risk (especially in EU/CA) | One-click downgrade option |
+
+---
+
+## Platform-Specific Considerations
+
+### iOS App Store
+
+- Apple requires in-app purchase (IAP) for digital goods/services
+- Apple takes 30% commission (15% for small business program)
+- Must comply with App Store Review Guidelines 3.1
+- Cannot link to external payment pages from within the app
+- Must clearly communicate subscription terms and renewal
+
+### Google Play
+
+- Similar IAP requirements as iOS
+- Google Play billing required for digital goods
+- 15% commission on first $1M in annual revenue, then 30%
+- Must provide clear subscription management
+
+### Web App
+
+- Full control over payment flow and presentation
+- Can offer any payment method
+- No platform commission
+- Can A/B test freely without app review delays
+
+---
+
+## Metrics and Benchmarks
+
+### Key Metrics
+
+| Metric | Formula | Benchmark |
+|--------|---------|-----------|
+| Paywall impression rate | Users who see paywall / Active users | Track, no universal benchmark |
+| Paywall CTR | Upgrade clicks / Paywall impressions | 5-15% |
+| Upgrade completion rate | Completed upgrades / Upgrade clicks | 30-60% |
+| Free-to-paid conversion | Paid users / Total free users | 2-5% for freemium, 15-30% for trial |
+| Revenue per user (ARPU) | Total revenue / Active users | Segment-dependent |
+| Post-upgrade churn (30-day) | Churned within 30 days / New paid users | &lt; 10% |
+
+### Warning Signals
+
+| Signal | Diagnosis | Action |
+|--------|-----------|--------|
+| CTR &lt; 3% | Paywall copy or timing is wrong | Test different triggers and messaging |
+| Completion &lt; 20% | Upgrade flow has too much friction | Simplify payment flow |
+| Post-upgrade churn &gt; 15% | Value not matching expectations | Review feature access and onboarding |
+| Free-to-paid &lt; 1% | Paywall appears before value is delivered | Delay triggers until after activation |
+
+---
+
+## A/B Test Framework
+
+### High-Impact Tests
+
+| Test | Hypothesis | Metric |
+|------|-----------|--------|
+| Trigger timing (earlier vs later) | Later trigger = higher conversion rate | Free-to-paid conversion |
+| Soft gate vs hard gate | Soft gate (preview) converts better | Feature gate CTR |
+| Copy variation | Value-focused vs urgency-focused | Paywall CTR |
+| Price presentation | Monthly vs annual default | ARPU |
+
+### Test Measurement
+
+- Run for minimum 2 weeks or 100 conversions per variant
+- Track upgrade rate AND 30-day post-upgrade retention
+- A test that increases upgrades but increases churn is a net negative
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Paywall Trigger Map | Trigger x timing x frequency table | All trigger points with rules and cooldowns |
+| Screen Copy Set | Complete screen designs | Headline, benefits, CTA, escape hatch for each paywall type |
+| Upgrade Flow Diagram | Step-by-step flow | Paywall click to post-upgrade confirmation |
+| Dark Pattern Audit | Checklist | Review of existing paywall for manipulative patterns |
+| Trial Expiration Sequence | Day-by-day plan | In-app + email sequence for trial countdown |
+| A/B Test Backlog | Prioritized table | Test ideas ranked by expected impact |
+
+---
+
+## Tool Reference
+
+### 1. paywall_trigger_auditor.py
+
+Audits paywall trigger configuration for timing, frequency, and coverage issues. Reads a JSON file of trigger rules and user event data, then flags misconfigured triggers, missing cooldowns, and dark-pattern risks.
+
+```bash
+python scripts/paywall_trigger_auditor.py triggers.json --format text
+python scripts/paywall_trigger_auditor.py triggers.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `triggers.json` | positional | Path to JSON file with trigger rules and event data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. upgrade_funnel_analyzer.py
+
+Analyzes upgrade funnel step-by-step conversion from paywall impression through payment completion. Identifies the highest-drop steps, calculates stage-over-stage conversion, and benchmarks against industry targets.
+
+```bash
+python scripts/upgrade_funnel_analyzer.py funnel.json --format text
+python scripts/upgrade_funnel_analyzer.py funnel.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `funnel.json` | positional | Path to JSON file with funnel step data |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. paywall_copy_scorer.py
+
+Scores paywall screen copy against proven conversion patterns. Evaluates headline structure, benefit clarity, CTA strength, social proof presence, and dark-pattern risk. Outputs a 0-100 score with itemized feedback.
+
+```bash
+python scripts/paywall_copy_scorer.py copy.json --format text
+python scripts/paywall_copy_scorer.py copy.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `copy.json` | positional | Path to JSON file with paywall copy elements |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Paywall CTR below 3% | Trigger fires before user reaches aha moment or copy is feature-focused instead of benefit-focused | Delay trigger until after activation event; rewrite headline to outcome-based messaging (lifts CTR up to 23% per Strava case study) |
+| Upgrade completion below 20% | Too much friction in payment flow (redirects, missing payment methods, surprise charges) | Keep flow in-context (modal/slide-out), pre-fill known info, show price before payment step |
+| Post-upgrade churn above 15% | Value expectation mismatch -- paid experience does not match what the paywall promised | Audit feature access post-upgrade, add guided tour of newly unlocked features, align copy with actual capabilities |
+| Free-to-paid conversion below 1% | Paywall appears before value is delivered or free tier is too generous | Map activation events and ensure paywall only fires after aha moment; review free vs paid feature boundary |
+| Users close paywall within 1 second repeatedly | Paywall is interrupting workflow or appearing too frequently | Increase cooldown to 7+ days after dismissal, cap at 3 per month, switch to less intrusive format (banner vs modal) |
+| Mobile paywall underperforms desktop by &gt;30% | iOS/Android IAP friction, small dismiss targets, or full-screen overlay on mobile | Ensure 44x44px touch targets, use bottom-sheet format on mobile, comply with App Store guidelines |
+| Trial expiration emails have low open rate | Generic subject lines, wrong send timing, or email deliverability issues | Personalize with usage data (&quot;You created 12 projects&quot;), send at user&#x27;s active hours, check spam score |
+
+---
+
+## Success Criteria
+
+- Free-to-paid conversion rate reaches 2-5% for freemium models or 15-30% for trial models within 90 days of optimization
+- Paywall CTR stabilizes at 5-15% across all trigger types
+- Upgrade completion rate (paywall click to payment) exceeds 30%
+- Post-upgrade 30-day retention exceeds 90% (churn below 10%)
+- Paywall annoyance signals (sub-1-second dismissals) decrease to below 5% of impressions
+- Zero dark patterns present in paywall audit (no shame copy, no hidden close buttons, no fake urgency)
+- Annual plan adoption reaches 40%+ of new upgrades when annual toggle defaults are implemented (benchmark: 20-40% lift)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** In-product upgrade flows including feature gates, usage limit screens, trial expiration sequences, upgrade trigger timing, save offer strategy, paywall screen design, and A/B test frameworks for freemium-to-paid and trial-to-paid conversion.
+
+**Out of scope:** Public-facing pricing pages (use page-cro), the pricing model itself (use pricing-strategy), post-signup onboarding before the aha moment (use onboarding-cro), initial registration flows (use signup-flow-cro), and post-upgrade churn intervention (use churn-prevention). This skill does not cover App Store Optimization (ASO) or paid acquisition strategies. Scripts operate on local data only -- no integrations with payment processors, analytics platforms, or A/B testing tools.
+
+**Limitations:** Conversion benchmarks are based on aggregate SaaS/app industry data and may vary significantly by vertical, price point, and audience. Mobile paywall performance is highly dependent on platform-specific IAP requirements (Apple 30% commission, Google Play billing). Scripts analyze static snapshots; real-time paywall optimization requires integration with analytics and experimentation platforms not provided here.
+
+---
+
+## Integration Points
+
+- **pricing-strategy** -- Feed pricing tier structure and value metric into paywall copy and plan comparison design
+- **onboarding-cro** -- Coordinate activation event definitions; paywall triggers should fire only after onboarding confirms aha moment
+- **churn-prevention** -- Post-upgrade churn data feeds back into paywall expectation-setting; save offers should align with churn prevention playbook
+- **page-cro** -- Public pricing page design feeds into in-app upgrade flow consistency; ensure messaging alignment
+- **signup-flow-cro** -- Registration flow completion triggers trial start; trial duration and paywall timing depend on signup context
+- **popup-cro** -- Share frequency capping logic and suppression rules; paywall modals follow same UX principles as marketing popups
+
+---
+
+## Related Skills
+
+- **page-cro** -- Use for public pricing page optimization. Paywall-upgrade-cro handles in-product upgrade moments.
+- **onboarding-cro** -- Use when users have not reached activation. Do not show paywalls before the aha moment.
+- **pricing-strategy** -- Use when the pricing model itself needs redesigning (tier structure, value metric, price points).
+- **churn-prevention** -- Use when users upgrade but then churn. If they never upgrade, the problem is here.
+- **signup-flow-cro** -- Use for the initial registration flow. Paywall-upgrade-cro handles post-signup monetization.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Paywall Upgrade Cro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Paywall Upgrade Cro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Paywall Upgrade Cro in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Paywall Upgrade Cro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Paywall Upgrade Cro&quot;
+4. Description: &quot;In-app paywall and upgrade screen optimization covering feature gate design, usage limit UX, trial expiration flows, upgrade trigger timing, save offer strategy, and ethical monetization patterns.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/paywall-upgrade-cro/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

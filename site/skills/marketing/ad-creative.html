@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ad Creative (Marketing domain).
 
 Design high-converting ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok. Includes platform-specific format specs, A/B testing frameworks, headline formulas, creative iteration methodol...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/ad-creative
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Ad Creative (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Ad Creative (Marketing domain).
 
 Design high-converting ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok. Includes platform-specific format specs, A/B testing frameworks, headline formulas, creative iteration methodol...
 
@@ -439,7 +461,1116 @@ https://github.com/borghei/Claude-Skills/tree/main/ad-creative
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Ad Creative&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Ad Creative
+
+Production-grade ad creative design, iteration, and optimization across all major advertising platforms.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [Core Workflows](#core-workflows)
+- [Platform Specifications](#platform-specifications)
+- [Creative Frameworks by Funnel Stage](#creative-frameworks-by-funnel-stage)
+- [Headline Formula Library](#headline-formula-library)
+- [Iteration Methodology](#iteration-methodology)
+- [A/B Testing Framework](#ab-testing-framework)
+- [Quality Validation](#quality-validation)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+ad creative, ad copy, headline generation, RSA headlines, Meta ad copy, LinkedIn ads, Google Ads, Twitter/X ads, TikTok ads, creative testing, A/B testing, ad variations, bulk creative, performance creative, display ads, search ads, social ads, CTA optimization, ad compliance, character limits, creative matrix, ad iteration, conversion copy, platform-specific ads
+
+---
+
+## Quick Start
+
+### Generate Ad Copy from Scratch
+
+1. Define product, audience, and funnel stage
+2. Select platform and ad format from the specs table
+3. Choose creative framework matching funnel stage
+4. Generate 8-15 headline variations using formula library
+5. Write body copy per platform character limits
+6. Run quality validation checklist before submission
+
+### Iterate on Existing Ads
+
+1. Collect performance data (CTR, CVR, CPA) for current ads
+2. Diagnose winning pattern: hook type, emotional driver, CTA style
+3. Generate 3-5 on-theme variations preserving the winning pattern
+4. Generate 2-3 new angle tests for exploration
+5. Validate all copy against platform compliance rules
+
+---
+
+## Core Workflows
+
+### Workflow 1: Full Creative Set Generation
+
+**Step 1: Define the Creative Brief**
+
+Document before writing any copy:
+
+```markdown
+## Creative Brief
+- Product/Offer: [Specific product, feature, or lead magnet]
+- Value Proposition: [One sentence — what changes in the customer&#x27;s life]
+- Target Audience: [Job title, pain point, awareness level]
+- Platform(s): [Google / Meta / LinkedIn / Twitter/X / TikTok]
+- Funnel Stage: [Awareness / Consideration / Decision]
+- Existing Creative: [Yes/No — if yes, attach performance data]
+- Budget Context: [Daily/monthly spend, CPA targets]
+```
+
+**Step 2: Generate Headlines by Formula Type**
+
+Produce minimum 10 headlines, distributed across formula categories:
+- 3 benefit-first headlines
+- 2 curiosity headlines
+- 2 social proof headlines
+- 2 problem agitation headlines
+- 1 urgency headline (only if genuine scarcity exists)
+
+**Step 3: Write Platform-Specific Body Copy**
+
+For each platform, write 2-3 body copy variations:
+- Respect character limits exactly
+- Match tone to platform norms
+- Include CTA aligned with landing page offer
+
+**Step 4: Assemble Ad Sets**
+
+Organize into testable ad sets:
+
+```
+[AD SET: Benefit-First] | [Platform] | [Funnel Stage]
+  Headline A: &quot;...&quot; (28/30 chars)
+  Headline B: &quot;...&quot; (26/30 chars)
+  Body: &quot;...&quot; (87/90 chars)
+  CTA: &quot;Start Free Trial&quot;
+```
+
+**Step 5: Validate and Submit**
+
+Run every ad through the quality checklist before upload.
+
+### Workflow 2: Performance-Based Iteration
+
+**Step 1: Audit Current Creative**
+
+For each running ad, classify:
+- Hook type: Problem / Benefit / Curiosity / Social Proof / Urgency
+- Emotional driver: Fear / Ambition / FOMO / Frustration / Relief
+- CTA type: Click / Sign up / Learn more / Book / Download
+- Performance tier: Winner / Average / Underperformer
+
+**Step 2: Extract the Winning Pattern**
+
+Identify what the top performers share:
+- Specific numbers vs. vague claims
+- Customer voice vs. brand voice
+- Direct benefit vs. emotional appeal
+- Short vs. long format
+
+**Step 3: Generate Variations**
+
+- 3-5 on-theme variations (same hook type, different angle)
+- 2-3 exploration variations (new hook type, untested territory)
+
+**Step 4: Build a Creative Testing Matrix**
+
+| Angle | Google | Meta | LinkedIn |
+|-------|--------|------|----------|
+| Benefit-first | [copy] | [copy] | [copy] |
+| Social proof | [copy] | [copy] | [copy] |
+| Problem agitation | [copy] | [copy] | [copy] |
+
+### Workflow 3: Cross-Platform Adaptation
+
+**Step 1: Lock the Core Message**
+
+Define the single transferable message that works across all platforms.
+
+**Step 2: Adapt Per Platform**
+
+Reformat (not rewrite from scratch):
+- Adjust character count to platform specs
+- Modify tone (LinkedIn = professional, TikTok = casual, Google = direct)
+- Change CTA style to match platform conventions
+- Adjust visual/copy balance per platform norms
+
+---
+
+## Platform Specifications
+
+### Character Limits Reference
+
+| Platform | Format | Headline Limit | Body/Description Limit | Key Constraints |
+|----------|--------|---------------|------------------------|-----------------|
+| Google RSA | Search | 30 chars x 15 | 90 chars x 4 descriptions | Max 3 pinned positions |
+| Google Display | Display | 30 chars x 5 short, 90 chars x 1 long | 90 chars x 5 | Requires 5+ images |
+| Google Performance Max | Multi | 30 chars x 5 short, 90 chars x 5 long | 90 chars x 5 | Auto-placement |
+| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Image text &lt; 20% |
+| Meta Stories | Vertical | 40 chars | 125 chars | 9:16 aspect ratio |
+| LinkedIn Sponsored | Content | 70 chars headline | 150 chars intro text | No clickbait policies |
+| LinkedIn Message | InMail | 60 chars subject | 1,500 chars body | Personalization required |
+| Twitter/X | Promoted | 70 chars headline | 280 chars total | No deceptive tactics |
+| TikTok In-Feed | Video | No text overlay limit | 80-100 chars caption | Hook in first 2-3 seconds |
+| TikTok Spark | Native | Varies | 100 chars | Must use creator content |
+
+### Platform-Specific Rejection Triggers
+
+**Google Ads:**
+- ALL CAPS (except acronyms like SaaS, API)
+- Excessive punctuation (!!!, ???, ....)
+- Misleading claims (&quot;guaranteed #1 ranking&quot;)
+- Trademarked competitor names in headlines
+- Gimmicky formatting (s.p.a.c.e.d letters)
+
+**Meta Ads:**
+- Image text exceeding 20% of image area
+- Before/after body transformation images
+- Personal attributes assumptions (&quot;Are you overweight?&quot;)
+- Fake UI elements (play buttons, notifications)
+- Sensationalized content
+
+**LinkedIn Ads:**
+- Clickbait headlines
+- Misleading claims about job opportunities
+- Profanity or inappropriate language
+- Targeting by sensitive categories
+
+---
+
+## Creative Frameworks by Funnel Stage
+
+### Awareness Stage: Lead with the Problem
+
+The audience does not know you. Meet them where they are.
+
+**Framework: Problem &gt; Amplify &gt; Hint**
+
+```
+Hook: [State the problem in their language]
+Amplify: [Show the cost of inaction]
+Hint: [Tease that a solution exists — don&#x27;t pitch yet]
+```
+
+**What works at awareness:**
+- Curiosity hooks that create an open loop
+- Statistic-led hooks with surprising data
+- &quot;You know that feeling when...&quot; relatable hooks
+- Questions that make them stop scrolling
+
+**What fails at awareness:**
+- Product pitches to cold audiences
+- Feature lists nobody asked for
+- Brand-centric messaging (&quot;We&#x27;re the leading...&quot;)
+
+### Consideration Stage: Lead with the Solution
+
+They know the problem. They are evaluating options.
+
+**Framework: Solution &gt; Mechanism &gt; Proof**
+
+```
+Hook: [Name the outcome they want]
+Mechanism: [Explain how you deliver it differently]
+Proof: [Show evidence it works]
+```
+
+**What works at consideration:**
+- Benefit-first headlines with specificity
+- Comparison frames (&quot;Unlike X, we do Y&quot;)
+- How-it-works explanations in 3 steps
+- Case study references with real numbers
+
+### Decision Stage: Lead with Proof
+
+They are close. Remove the last objection.
+
+**Framework: Proof &gt; Risk Removal &gt; Action**
+
+```
+Hook: [Testimonial, case study, or result with numbers]
+Risk Removal: [Free trial, money-back, no credit card]
+Action: [Specific, clear CTA]
+```
+
+**What works at decision:**
+- Social proof headlines with specific metrics
+- Guarantee-first positioning
+- Before/after transformation stories
+- Urgency only if real (limited slots, deadline-based pricing)
+
+---
+
+## Headline Formula Library
+
+### Benefit-First Formulas
+
+```
+[Verb] [specific outcome] [timeframe or qualifier]
+```
+
+Examples:
+- &quot;Cut your churn rate by 30% without chasing customers&quot;
+- &quot;Ship features your team actually uses&quot;
+- &quot;Hire senior engineers in 2 weeks, not 4 months&quot;
+- &quot;Reduce support tickets by 60% this quarter&quot;
+
+### Curiosity Formulas
+
+```
+[Surprising claim or counterintuitive angle]
+```
+
+Examples:
+- &quot;The email sequence that gets replies when your first one fails&quot;
+- &quot;Why your best customers leave at 90 days&quot;
+- &quot;What your analytics dashboard is hiding from you&quot;
+
+### Social Proof Formulas
+
+```
+[Number] [people/companies] [outcome]
+```
+
+Examples:
+- &quot;1,200 SaaS teams use this to reduce support tickets&quot;
+- &quot;Trusted by 40,000 developers across 80 countries&quot;
+- &quot;How Stripe doubled activation in 6 weeks&quot;
+
+### Problem Agitation Formulas
+
+```
+[Describe the pain vividly in their language]
+```
+
+Examples:
+- &quot;Still losing 40% of signups before they see value?&quot;
+- &quot;Your ads are running, your budget is spending, and you can&#x27;t tell what&#x27;s working&quot;
+- &quot;Another month of manually updating spreadsheets?&quot;
+
+### Urgency Formulas (Use Only with Genuine Scarcity)
+
+```
+[Real constraint + specific deadline or quantity]
+```
+
+Examples:
+- &quot;Q1 pricing ends March 31 — new rates from April 1&quot;
+- &quot;Only 3 onboarding slots open this month&quot;
+
+Anti-pattern to avoid:
+- &quot;LIMITED TIME DEAL!! ACT NOW!!!&quot; — gets rejected and destroys trust
+
+---
+
+## Iteration Methodology
+
+### Step 1: Diagnose the Winner
+
+For every winning ad, document:
+
+| Dimension | Answer |
+|-----------|--------|
+| Hook type | Problem / Benefit / Curiosity / Social Proof |
+| Funnel stage served | Awareness / Consideration / Decision |
+| Emotional driver | Fear / Ambition / FOMO / Frustration / Relief |
+| CTA friction level | Low (learn more) / Medium (free trial) / High (book demo) |
+| Specificity level | Vague claims / Specific numbers / Case study reference |
+
+### Step 2: Generate On-Theme Variations
+
+Preserve the winning pattern, vary one element at a time:
+- Same hook type, different product angle
+- Same emotional driver, different customer scenario
+- Same structure, different proof point
+
+### Step 3: Test New Territory
+
+For every 3-5 on-theme variations, include 2-3 exploration ads:
+- Different hook type than the winner
+- Different emotional driver
+- Different audience segment language
+
+### Step 4: Measure and Learn
+
+After 7-14 days with statistical significance:
+- Promote winners to main rotation
+- Pause underperformers
+- Document what worked for the creative playbook
+- Feed learnings into next iteration cycle
+
+---
+
+## A/B Testing Framework
+
+### Testing Hierarchy (Highest to Lowest Impact)
+
+1. **Creative concept/angle** — The biggest lever. Test different value propositions
+2. **Hook/headline** — First impression. Test different opening patterns
+3. **Visual style** — Image vs. video, lifestyle vs. product, dark vs. light
+4. **Body copy** — Supporting argument. Test different proof points
+5. **CTA** — Action text. Test different friction levels
+
+### Testing Rules
+
+- Test one variable at a time per ad set
+- Minimum 1,000 impressions per variant before drawing conclusions
+- Run tests for 7-14 days minimum
+- Use platform-native A/B tools when available
+- Document every test hypothesis, variant, and result
+- Calculate statistical significance before declaring winners (95% confidence)
+
+### Test Documentation Template
+
+```markdown
+## A/B Test: [Name]
+- Hypothesis: [If we change X, then Y will improve because Z]
+- Variable: [Headline / Body / CTA / Visual]
+- Control: [Current version]
+- Variant: [New version]
+- Metric: [CTR / CVR / CPA / ROAS]
+- Duration: [Start date - End date]
+- Sample size: [Impressions per variant]
+- Result: [Winner + confidence level]
+- Learning: [What we learned for future creative]
+```
+
+---
+
+## Quality Validation
+
+### Pre-Submission Checklist
+
+**Platform Compliance:**
+- [ ] All character counts within platform limits
+- [ ] No ALL CAPS except standard acronyms
+- [ ] No excessive punctuation (!!! or ??? or ....)
+- [ ] No trademarked competitor names in restricted positions
+- [ ] No platform name references in copy (&quot;Facebook,&quot; &quot;Google&quot;)
+- [ ] No fake UI elements in images
+- [ ] Image text ratio under 20% for Meta
+
+**Copy Quality:**
+- [ ] Headline makes sense standalone without description
+- [ ] Specific claims over vague claims (&quot;save 3 hours&quot; not &quot;save time&quot;)
+- [ ] CTA matches the landing page offer exactly
+- [ ] No unsubstantiated superlatives (#1, best-in-class, industry-leading)
+- [ ] No claims that require disclaimers you have not included
+
+**Strategic Alignment:**
+- [ ] Copy matches the target funnel stage
+- [ ] Language matches how the audience describes this problem
+- [ ] Hook type varies across the ad set (not all the same formula)
+- [ ] Landing page message matches ad promise
+
+**Common Rejection Reasons to Pre-Check:**
+- Misleading destination (ad says X, landing page says Y)
+- Unsubstantiated claims about results or performance
+- Trademark violations in headline text
+- Policy-violating content categories (alcohol, healthcare claims, financial guarantees)
+
+---
+
+## Best Practices
+
+1. **Write 3x more headlines than you need** — Generate 15-20, select the best 8-10. Creative quality increases with volume.
+
+2. **Pin headlines strategically** — In Google RSA, pin only your strongest headline to Position 1. Let the algorithm optimize the rest.
+
+3. **Never reuse landing page copy verbatim** — Ad copy and landing page should feel connected but not identical. The ad earns the click; the page earns the conversion.
+
+4. **Refresh creative every 2-4 weeks** — Ad fatigue degrades performance. Track frequency metrics and replace creative before CTR declines.
+
+5. **Localize, do not just translate** — Different markets require different cultural references, humor styles, and proof points.
+
+6. **Match CTA friction to funnel stage** — Awareness: &quot;Learn more.&quot; Consideration: &quot;See how it works.&quot; Decision: &quot;Start free trial.&quot;
+
+7. **Use dynamic keyword insertion carefully** — It improves relevance but can produce awkward headlines. Always preview all combinations.
+
+8. **Test video vs. static on Meta and TikTok** — Video consistently outperforms static for awareness, but static can win for retargeting.
+
+9. **Lead with mobile** — 80%+ of social ad impressions are mobile. Design for small screens first.
+
+10. **Keep proof points current** — &quot;Trusted by 500 companies&quot; should update as you grow. Stale numbers erode credibility.
+
+---
+
+## Integration Points
+
+- **Paid Ads** — Use for campaign strategy, audience targeting, and budget optimization. Ad Creative handles the copy; Paid Ads handles the campaign.
+- **Copywriting** — Use for landing page and long-form web copy. Ad creative follows different constraints (character limits, platform compliance).
+- **Campaign Analytics** — Use to measure ad performance and feed learnings back into the iteration cycle.
+- **Marketing Psychology** — Use psychological principles (anchoring, social proof, loss aversion) to strengthen ad messaging.
+- **Brand Guidelines** — Reference brand voice and visual standards to maintain consistency across ad creative.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Ad rejected by platform | Policy violation (caps, claims, trademarked terms) | Run `headline_generator.py` to generate compliant variants. Check rejection triggers. |
+| All headlines same style | No formula diversity | Generate across 5 formula types: benefit, curiosity, social proof, problem, urgency. |
+| CTR declining across ad set | Creative fatigue | Run `creative_fatigue_detector.py`. Refresh every 2-4 weeks. |
+| High CTR but low conversions | Ad-to-landing-page mismatch | Ensure headline promise matches landing page. Message match is the #1 conversion factor. |
+| Can&#x27;t fill all Google RSA slots | Not enough headline variations | Use `headline_generator.py` to produce 15+ variations from value proposition. |
+| Video underperforming on Meta | Hook not in first 2-3 seconds | 80%+ of social impressions are mobile. Hook must appear in first 2 seconds. |
+| Same CPA across all creative | Not testing enough angles | Build a creative testing matrix with 5 hook types x platforms. Use `creative_matrix_builder.py`. |
+
+---
+
+## Success Criteria
+
+- 3+ creative variants per ad group/set (minimum for testing)
+- All copy within platform character limits with zero rejections
+- Headline formula mix: benefit, curiosity, social proof, problem, urgency
+- Creative refreshed every 2-4 weeks before fatigue signals appear
+- A/B test documentation for every test: hypothesis, variants, result, learning
+- Winning patterns documented in creative playbook for institutional knowledge
+- CTR above platform benchmarks with declining CPA trend
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Ad headline/body copy generation, platform-specific formatting, A/B testing frameworks, creative iteration methodology, compliance validation, cross-platform adaptation.
+
+**Out of Scope:** Visual design/production, video editing, campaign management (use paid-ads), landing page copy (use copywriting), media buying.
+
+---
+
+## Python Automation Tools
+
+### 1. Headline Generator (`scripts/headline_generator.py`)
+Generates ad headline variations from a value proposition using proven formula patterns, scored for platform compliance.
+
+```bash
+python scripts/headline_generator.py --value-prop &quot;Reduce churn by 30%&quot; --platform google --audience &quot;SaaS teams&quot;
+python scripts/headline_generator.py --value-prop &quot;Reduce churn by 30%&quot; --json
+```
+
+### 2. Creative Fatigue Detector (`scripts/creative_fatigue_detector.py`)
+Analyzes ad performance trends (CTR, CPA, frequency) to detect creative fatigue and recommend refresh timing.
+
+```bash
+python scripts/creative_fatigue_detector.py campaign_data.json
+python scripts/creative_fatigue_detector.py --sample --json
+```
+
+### 3. Creative Matrix Builder (`scripts/creative_matrix_builder.py`)
+Generates a cross-platform creative testing matrix from a brief, organized by hook type and funnel stage.
+
+```bash
+python scripts/creative_matrix_builder.py brief.json
+python scripts/creative_matrix_builder.py --sample --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ad Creative&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ad Creative&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ad Creative in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ad Creative&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ad Creative&quot;
+4. Description: &quot;Design high-converting ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok. Includes platform-specific format specs, A/B testing frameworks, headline formulas, creative iteration methodol...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/ad-creative/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Ad Creative&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Ad Creative
+
+Production-grade ad creative design, iteration, and optimization across all major advertising platforms.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [Core Workflows](#core-workflows)
+- [Platform Specifications](#platform-specifications)
+- [Creative Frameworks by Funnel Stage](#creative-frameworks-by-funnel-stage)
+- [Headline Formula Library](#headline-formula-library)
+- [Iteration Methodology](#iteration-methodology)
+- [A/B Testing Framework](#ab-testing-framework)
+- [Quality Validation](#quality-validation)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+ad creative, ad copy, headline generation, RSA headlines, Meta ad copy, LinkedIn ads, Google Ads, Twitter/X ads, TikTok ads, creative testing, A/B testing, ad variations, bulk creative, performance creative, display ads, search ads, social ads, CTA optimization, ad compliance, character limits, creative matrix, ad iteration, conversion copy, platform-specific ads
+
+---
+
+## Quick Start
+
+### Generate Ad Copy from Scratch
+
+1. Define product, audience, and funnel stage
+2. Select platform and ad format from the specs table
+3. Choose creative framework matching funnel stage
+4. Generate 8-15 headline variations using formula library
+5. Write body copy per platform character limits
+6. Run quality validation checklist before submission
+
+### Iterate on Existing Ads
+
+1. Collect performance data (CTR, CVR, CPA) for current ads
+2. Diagnose winning pattern: hook type, emotional driver, CTA style
+3. Generate 3-5 on-theme variations preserving the winning pattern
+4. Generate 2-3 new angle tests for exploration
+5. Validate all copy against platform compliance rules
+
+---
+
+## Core Workflows
+
+### Workflow 1: Full Creative Set Generation
+
+**Step 1: Define the Creative Brief**
+
+Document before writing any copy:
+
+```markdown
+## Creative Brief
+- Product/Offer: [Specific product, feature, or lead magnet]
+- Value Proposition: [One sentence — what changes in the customer&#x27;s life]
+- Target Audience: [Job title, pain point, awareness level]
+- Platform(s): [Google / Meta / LinkedIn / Twitter/X / TikTok]
+- Funnel Stage: [Awareness / Consideration / Decision]
+- Existing Creative: [Yes/No — if yes, attach performance data]
+- Budget Context: [Daily/monthly spend, CPA targets]
+```
+
+**Step 2: Generate Headlines by Formula Type**
+
+Produce minimum 10 headlines, distributed across formula categories:
+- 3 benefit-first headlines
+- 2 curiosity headlines
+- 2 social proof headlines
+- 2 problem agitation headlines
+- 1 urgency headline (only if genuine scarcity exists)
+
+**Step 3: Write Platform-Specific Body Copy**
+
+For each platform, write 2-3 body copy variations:
+- Respect character limits exactly
+- Match tone to platform norms
+- Include CTA aligned with landing page offer
+
+**Step 4: Assemble Ad Sets**
+
+Organize into testable ad sets:
+
+```
+[AD SET: Benefit-First] | [Platform] | [Funnel Stage]
+  Headline A: &quot;...&quot; (28/30 chars)
+  Headline B: &quot;...&quot; (26/30 chars)
+  Body: &quot;...&quot; (87/90 chars)
+  CTA: &quot;Start Free Trial&quot;
+```
+
+**Step 5: Validate and Submit**
+
+Run every ad through the quality checklist before upload.
+
+### Workflow 2: Performance-Based Iteration
+
+**Step 1: Audit Current Creative**
+
+For each running ad, classify:
+- Hook type: Problem / Benefit / Curiosity / Social Proof / Urgency
+- Emotional driver: Fear / Ambition / FOMO / Frustration / Relief
+- CTA type: Click / Sign up / Learn more / Book / Download
+- Performance tier: Winner / Average / Underperformer
+
+**Step 2: Extract the Winning Pattern**
+
+Identify what the top performers share:
+- Specific numbers vs. vague claims
+- Customer voice vs. brand voice
+- Direct benefit vs. emotional appeal
+- Short vs. long format
+
+**Step 3: Generate Variations**
+
+- 3-5 on-theme variations (same hook type, different angle)
+- 2-3 exploration variations (new hook type, untested territory)
+
+**Step 4: Build a Creative Testing Matrix**
+
+| Angle | Google | Meta | LinkedIn |
+|-------|--------|------|----------|
+| Benefit-first | [copy] | [copy] | [copy] |
+| Social proof | [copy] | [copy] | [copy] |
+| Problem agitation | [copy] | [copy] | [copy] |
+
+### Workflow 3: Cross-Platform Adaptation
+
+**Step 1: Lock the Core Message**
+
+Define the single transferable message that works across all platforms.
+
+**Step 2: Adapt Per Platform**
+
+Reformat (not rewrite from scratch):
+- Adjust character count to platform specs
+- Modify tone (LinkedIn = professional, TikTok = casual, Google = direct)
+- Change CTA style to match platform conventions
+- Adjust visual/copy balance per platform norms
+
+---
+
+## Platform Specifications
+
+### Character Limits Reference
+
+| Platform | Format | Headline Limit | Body/Description Limit | Key Constraints |
+|----------|--------|---------------|------------------------|-----------------|
+| Google RSA | Search | 30 chars x 15 | 90 chars x 4 descriptions | Max 3 pinned positions |
+| Google Display | Display | 30 chars x 5 short, 90 chars x 1 long | 90 chars x 5 | Requires 5+ images |
+| Google Performance Max | Multi | 30 chars x 5 short, 90 chars x 5 long | 90 chars x 5 | Auto-placement |
+| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Image text &lt; 20% |
+| Meta Stories | Vertical | 40 chars | 125 chars | 9:16 aspect ratio |
+| LinkedIn Sponsored | Content | 70 chars headline | 150 chars intro text | No clickbait policies |
+| LinkedIn Message | InMail | 60 chars subject | 1,500 chars body | Personalization required |
+| Twitter/X | Promoted | 70 chars headline | 280 chars total | No deceptive tactics |
+| TikTok In-Feed | Video | No text overlay limit | 80-100 chars caption | Hook in first 2-3 seconds |
+| TikTok Spark | Native | Varies | 100 chars | Must use creator content |
+
+### Platform-Specific Rejection Triggers
+
+**Google Ads:**
+- ALL CAPS (except acronyms like SaaS, API)
+- Excessive punctuation (!!!, ???, ....)
+- Misleading claims (&quot;guaranteed #1 ranking&quot;)
+- Trademarked competitor names in headlines
+- Gimmicky formatting (s.p.a.c.e.d letters)
+
+**Meta Ads:**
+- Image text exceeding 20% of image area
+- Before/after body transformation images
+- Personal attributes assumptions (&quot;Are you overweight?&quot;)
+- Fake UI elements (play buttons, notifications)
+- Sensationalized content
+
+**LinkedIn Ads:**
+- Clickbait headlines
+- Misleading claims about job opportunities
+- Profanity or inappropriate language
+- Targeting by sensitive categories
+
+---
+
+## Creative Frameworks by Funnel Stage
+
+### Awareness Stage: Lead with the Problem
+
+The audience does not know you. Meet them where they are.
+
+**Framework: Problem &gt; Amplify &gt; Hint**
+
+```
+Hook: [State the problem in their language]
+Amplify: [Show the cost of inaction]
+Hint: [Tease that a solution exists — don&#x27;t pitch yet]
+```
+
+**What works at awareness:**
+- Curiosity hooks that create an open loop
+- Statistic-led hooks with surprising data
+- &quot;You know that feeling when...&quot; relatable hooks
+- Questions that make them stop scrolling
+
+**What fails at awareness:**
+- Product pitches to cold audiences
+- Feature lists nobody asked for
+- Brand-centric messaging (&quot;We&#x27;re the leading...&quot;)
+
+### Consideration Stage: Lead with the Solution
+
+They know the problem. They are evaluating options.
+
+**Framework: Solution &gt; Mechanism &gt; Proof**
+
+```
+Hook: [Name the outcome they want]
+Mechanism: [Explain how you deliver it differently]
+Proof: [Show evidence it works]
+```
+
+**What works at consideration:**
+- Benefit-first headlines with specificity
+- Comparison frames (&quot;Unlike X, we do Y&quot;)
+- How-it-works explanations in 3 steps
+- Case study references with real numbers
+
+### Decision Stage: Lead with Proof
+
+They are close. Remove the last objection.
+
+**Framework: Proof &gt; Risk Removal &gt; Action**
+
+```
+Hook: [Testimonial, case study, or result with numbers]
+Risk Removal: [Free trial, money-back, no credit card]
+Action: [Specific, clear CTA]
+```
+
+**What works at decision:**
+- Social proof headlines with specific metrics
+- Guarantee-first positioning
+- Before/after transformation stories
+- Urgency only if real (limited slots, deadline-based pricing)
+
+---
+
+## Headline Formula Library
+
+### Benefit-First Formulas
+
+```
+[Verb] [specific outcome] [timeframe or qualifier]
+```
+
+Examples:
+- &quot;Cut your churn rate by 30% without chasing customers&quot;
+- &quot;Ship features your team actually uses&quot;
+- &quot;Hire senior engineers in 2 weeks, not 4 months&quot;
+- &quot;Reduce support tickets by 60% this quarter&quot;
+
+### Curiosity Formulas
+
+```
+[Surprising claim or counterintuitive angle]
+```
+
+Examples:
+- &quot;The email sequence that gets replies when your first one fails&quot;
+- &quot;Why your best customers leave at 90 days&quot;
+- &quot;What your analytics dashboard is hiding from you&quot;
+
+### Social Proof Formulas
+
+```
+[Number] [people/companies] [outcome]
+```
+
+Examples:
+- &quot;1,200 SaaS teams use this to reduce support tickets&quot;
+- &quot;Trusted by 40,000 developers across 80 countries&quot;
+- &quot;How Stripe doubled activation in 6 weeks&quot;
+
+### Problem Agitation Formulas
+
+```
+[Describe the pain vividly in their language]
+```
+
+Examples:
+- &quot;Still losing 40% of signups before they see value?&quot;
+- &quot;Your ads are running, your budget is spending, and you can&#x27;t tell what&#x27;s working&quot;
+- &quot;Another month of manually updating spreadsheets?&quot;
+
+### Urgency Formulas (Use Only with Genuine Scarcity)
+
+```
+[Real constraint + specific deadline or quantity]
+```
+
+Examples:
+- &quot;Q1 pricing ends March 31 — new rates from April 1&quot;
+- &quot;Only 3 onboarding slots open this month&quot;
+
+Anti-pattern to avoid:
+- &quot;LIMITED TIME DEAL!! ACT NOW!!!&quot; — gets rejected and destroys trust
+
+---
+
+## Iteration Methodology
+
+### Step 1: Diagnose the Winner
+
+For every winning ad, document:
+
+| Dimension | Answer |
+|-----------|--------|
+| Hook type | Problem / Benefit / Curiosity / Social Proof |
+| Funnel stage served | Awareness / Consideration / Decision |
+| Emotional driver | Fear / Ambition / FOMO / Frustration / Relief |
+| CTA friction level | Low (learn more) / Medium (free trial) / High (book demo) |
+| Specificity level | Vague claims / Specific numbers / Case study reference |
+
+### Step 2: Generate On-Theme Variations
+
+Preserve the winning pattern, vary one element at a time:
+- Same hook type, different product angle
+- Same emotional driver, different customer scenario
+- Same structure, different proof point
+
+### Step 3: Test New Territory
+
+For every 3-5 on-theme variations, include 2-3 exploration ads:
+- Different hook type than the winner
+- Different emotional driver
+- Different audience segment language
+
+### Step 4: Measure and Learn
+
+After 7-14 days with statistical significance:
+- Promote winners to main rotation
+- Pause underperformers
+- Document what worked for the creative playbook
+- Feed learnings into next iteration cycle
+
+---
+
+## A/B Testing Framework
+
+### Testing Hierarchy (Highest to Lowest Impact)
+
+1. **Creative concept/angle** — The biggest lever. Test different value propositions
+2. **Hook/headline** — First impression. Test different opening patterns
+3. **Visual style** — Image vs. video, lifestyle vs. product, dark vs. light
+4. **Body copy** — Supporting argument. Test different proof points
+5. **CTA** — Action text. Test different friction levels
+
+### Testing Rules
+
+- Test one variable at a time per ad set
+- Minimum 1,000 impressions per variant before drawing conclusions
+- Run tests for 7-14 days minimum
+- Use platform-native A/B tools when available
+- Document every test hypothesis, variant, and result
+- Calculate statistical significance before declaring winners (95% confidence)
+
+### Test Documentation Template
+
+```markdown
+## A/B Test: [Name]
+- Hypothesis: [If we change X, then Y will improve because Z]
+- Variable: [Headline / Body / CTA / Visual]
+- Control: [Current version]
+- Variant: [New version]
+- Metric: [CTR / CVR / CPA / ROAS]
+- Duration: [Start date - End date]
+- Sample size: [Impressions per variant]
+- Result: [Winner + confidence level]
+- Learning: [What we learned for future creative]
+```
+
+---
+
+## Quality Validation
+
+### Pre-Submission Checklist
+
+**Platform Compliance:**
+- [ ] All character counts within platform limits
+- [ ] No ALL CAPS except standard acronyms
+- [ ] No excessive punctuation (!!! or ??? or ....)
+- [ ] No trademarked competitor names in restricted positions
+- [ ] No platform name references in copy (&quot;Facebook,&quot; &quot;Google&quot;)
+- [ ] No fake UI elements in images
+- [ ] Image text ratio under 20% for Meta
+
+**Copy Quality:**
+- [ ] Headline makes sense standalone without description
+- [ ] Specific claims over vague claims (&quot;save 3 hours&quot; not &quot;save time&quot;)
+- [ ] CTA matches the landing page offer exactly
+- [ ] No unsubstantiated superlatives (#1, best-in-class, industry-leading)
+- [ ] No claims that require disclaimers you have not included
+
+**Strategic Alignment:**
+- [ ] Copy matches the target funnel stage
+- [ ] Language matches how the audience describes this problem
+- [ ] Hook type varies across the ad set (not all the same formula)
+- [ ] Landing page message matches ad promise
+
+**Common Rejection Reasons to Pre-Check:**
+- Misleading destination (ad says X, landing page says Y)
+- Unsubstantiated claims about results or performance
+- Trademark violations in headline text
+- Policy-violating content categories (alcohol, healthcare claims, financial guarantees)
+
+---
+
+## Best Practices
+
+1. **Write 3x more headlines than you need** — Generate 15-20, select the best 8-10. Creative quality increases with volume.
+
+2. **Pin headlines strategically** — In Google RSA, pin only your strongest headline to Position 1. Let the algorithm optimize the rest.
+
+3. **Never reuse landing page copy verbatim** — Ad copy and landing page should feel connected but not identical. The ad earns the click; the page earns the conversion.
+
+4. **Refresh creative every 2-4 weeks** — Ad fatigue degrades performance. Track frequency metrics and replace creative before CTR declines.
+
+5. **Localize, do not just translate** — Different markets require different cultural references, humor styles, and proof points.
+
+6. **Match CTA friction to funnel stage** — Awareness: &quot;Learn more.&quot; Consideration: &quot;See how it works.&quot; Decision: &quot;Start free trial.&quot;
+
+7. **Use dynamic keyword insertion carefully** — It improves relevance but can produce awkward headlines. Always preview all combinations.
+
+8. **Test video vs. static on Meta and TikTok** — Video consistently outperforms static for awareness, but static can win for retargeting.
+
+9. **Lead with mobile** — 80%+ of social ad impressions are mobile. Design for small screens first.
+
+10. **Keep proof points current** — &quot;Trusted by 500 companies&quot; should update as you grow. Stale numbers erode credibility.
+
+---
+
+## Integration Points
+
+- **Paid Ads** — Use for campaign strategy, audience targeting, and budget optimization. Ad Creative handles the copy; Paid Ads handles the campaign.
+- **Copywriting** — Use for landing page and long-form web copy. Ad creative follows different constraints (character limits, platform compliance).
+- **Campaign Analytics** — Use to measure ad performance and feed learnings back into the iteration cycle.
+- **Marketing Psychology** — Use psychological principles (anchoring, social proof, loss aversion) to strengthen ad messaging.
+- **Brand Guidelines** — Reference brand voice and visual standards to maintain consistency across ad creative.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Ad rejected by platform | Policy violation (caps, claims, trademarked terms) | Run `headline_generator.py` to generate compliant variants. Check rejection triggers. |
+| All headlines same style | No formula diversity | Generate across 5 formula types: benefit, curiosity, social proof, problem, urgency. |
+| CTR declining across ad set | Creative fatigue | Run `creative_fatigue_detector.py`. Refresh every 2-4 weeks. |
+| High CTR but low conversions | Ad-to-landing-page mismatch | Ensure headline promise matches landing page. Message match is the #1 conversion factor. |
+| Can&#x27;t fill all Google RSA slots | Not enough headline variations | Use `headline_generator.py` to produce 15+ variations from value proposition. |
+| Video underperforming on Meta | Hook not in first 2-3 seconds | 80%+ of social impressions are mobile. Hook must appear in first 2 seconds. |
+| Same CPA across all creative | Not testing enough angles | Build a creative testing matrix with 5 hook types x platforms. Use `creative_matrix_builder.py`. |
+
+---
+
+## Success Criteria
+
+- 3+ creative variants per ad group/set (minimum for testing)
+- All copy within platform character limits with zero rejections
+- Headline formula mix: benefit, curiosity, social proof, problem, urgency
+- Creative refreshed every 2-4 weeks before fatigue signals appear
+- A/B test documentation for every test: hypothesis, variants, result, learning
+- Winning patterns documented in creative playbook for institutional knowledge
+- CTR above platform benchmarks with declining CPA trend
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Ad headline/body copy generation, platform-specific formatting, A/B testing frameworks, creative iteration methodology, compliance validation, cross-platform adaptation.
+
+**Out of Scope:** Visual design/production, video editing, campaign management (use paid-ads), landing page copy (use copywriting), media buying.
+
+---
+
+## Python Automation Tools
+
+### 1. Headline Generator (`scripts/headline_generator.py`)
+Generates ad headline variations from a value proposition using proven formula patterns, scored for platform compliance.
+
+```bash
+python scripts/headline_generator.py --value-prop &quot;Reduce churn by 30%&quot; --platform google --audience &quot;SaaS teams&quot;
+python scripts/headline_generator.py --value-prop &quot;Reduce churn by 30%&quot; --json
+```
+
+### 2. Creative Fatigue Detector (`scripts/creative_fatigue_detector.py`)
+Analyzes ad performance trends (CTR, CPA, frequency) to detect creative fatigue and recommend refresh timing.
+
+```bash
+python scripts/creative_fatigue_detector.py campaign_data.json
+python scripts/creative_fatigue_detector.py --sample --json
+```
+
+### 3. Creative Matrix Builder (`scripts/creative_matrix_builder.py`)
+Generates a cross-platform creative testing matrix from a brief, organized by hook type and funnel stage.
+
+```bash
+python scripts/creative_matrix_builder.py brief.json
+python scripts/creative_matrix_builder.py --sample --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ad Creative&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ad Creative&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ad Creative in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ad Creative&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ad Creative&quot;
+4. Description: &quot;Design high-converting ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok. Includes platform-specific format specs, A/B testing frameworks, headline formulas, creative iteration methodol...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/ad-creative/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

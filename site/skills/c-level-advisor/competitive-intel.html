@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Competitive Intel (C-Level Advisory domain).
 
 Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Covers competitor identification, 8-dimension tracking, analysis frameworks, battlecard creation,...
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/competitive-intel
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Competitive Intel (C-Level Advisory domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Competitive Intel (C-Level Advisory domain).
 
 Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Covers competitor identification, 8-dimension tracking, analysis frameworks, battlecard creation,...
 
@@ -435,7 +457,792 @@ https://github.com/borghei/Claude-Skills/tree/main/competitive-intel
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Competitive Intel&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Competitive Intelligence
+
+Systematic competitor tracking. Not obsession -- intelligence that drives real decisions. Know competitors well enough to win against them. Do not let them set your agenda.
+
+## Keywords
+
+competitive intelligence, competitor analysis, battlecard, win/loss analysis, competitive positioning, competitive tracking, market intelligence, competitor research, SWOT, competitive map, feature gap analysis, competitive strategy, market share, competitive advantage, moat, switching costs
+
+---
+
+## 5-Layer Intelligence System
+
+### Layer 1: Competitor Identification
+
+#### Threat Classification Matrix
+
+| | Same ICP | Different ICP |
+|---|---|---|
+| **Same problem** | Direct threat (Tier 1) | Adjacent watch (Tier 2) |
+| **Different problem** | Displacement risk (Tier 2) | Monitor only (Tier 3) |
+
+#### Competitor Tiers
+
+| Tier | Definition | Tracking Intensity | Examples |
+|------|-----------|-------------------|---------|
+| 1: Direct | Same ICP, same problem, similar price | Monthly deep tracking | Your top 3 named competitors |
+| 2: Adjacent | Same budget, different solution approach | Quarterly review | Build-in-house, adjacent products |
+| 3: Future | Well-funded in adjacent space or incumbents with roadmap overlap | Semi-annual scan | Funded startups, big tech features |
+
+### Layer 2: Tracking Dimensions
+
+| Dimension | Sources | Cadence | Priority |
+|-----------|---------|---------|----------|
+| Product moves | Changelog, G2, Capterra, Twitter, LinkedIn | Monthly | High |
+| Pricing changes | Pricing page, sales intel, customer feedback | Triggered | High |
+| Funding | Crunchbase, TechCrunch, LinkedIn | Triggered | Medium |
+| Hiring signals | LinkedIn job postings, Indeed, Glassdoor | Monthly | Medium |
+| Partnerships | Press releases, co-marketing, integrations | Triggered | Medium |
+| Customer wins/losses | Case studies, review sites, LinkedIn | Monthly | High |
+| Customer losses (theirs) | G2 reviews, forums, your own inbound | Ongoing | High |
+| Messaging shifts | Homepage, ads, conference talks | Quarterly | Medium |
+
+### Layer 3: Analysis Frameworks
+
+#### SWOT Per Competitor
+
+| Element | Key Questions |
+|---------|-------------|
+| Strengths | Where do they consistently win? What do customers praise? |
+| Weaknesses | Where do they lose? What do reviews complain about? |
+| Opportunities | What could they do that would threaten you more? |
+| Threats | What is their existential risk? What could make them irrelevant? |
+
+#### Feature Gap Analysis Template
+
+| Feature/Capability | You | Competitor A | Competitor B | Status |
+|-------------------|-----|-------------|-------------|--------|
+| Core Feature 1 | [check] | [check] | [x] | Your advantage |
+| Core Feature 2 | [x] | [check] | [check] | Gap -- on roadmap? |
+| Feature 3 | [check] | [x] | [x] | Moat (unique to you) |
+| Feature 4 | [x] | [x] | [check] | Comp B only |
+| Feature 5 | [check] | [check] | [check] | Table stakes |
+
+#### Competitive Positioning Map
+
+Choose 2 axes that show YOUR differentiation:
+
+| Common Axis Pairs | When to Use |
+|------------------|------------|
+| Price vs. Feature Depth | When you compete on value |
+| Enterprise-ready vs. SMB-ready | When you serve a different segment |
+| Easy to Implement vs. Configurable | When implementation speed is your advantage |
+| Vertical-specific vs. Horizontal | When you specialize |
+
+### Layer 4: Output Formats
+
+#### Battlecard Template (Sales Use)
+
+```
+BATTLECARD: [Competitor Name]
+Last Updated: [Date]
+
+OVERVIEW
+  Company: [name, founded, HQ, funding, size]
+  Product: [1-sentence description]
+  ICP overlap: [High/Medium/Low]
+  Threat level: [High/Medium/Low]
+
+WHY WE WIN
+  1. [Advantage 1 with proof point]
+  2. [Advantage 2 with proof point]
+  3. [Advantage 3 with proof point]
+
+WHERE THEY WIN
+  1. [Their advantage -- be honest]
+  2. [Their advantage]
+
+LANDMINES (what they say about us)
+  - &quot;[Their claim]&quot; --&gt; Counter: &quot;[Your response with evidence]&quot;
+  - &quot;[Their claim]&quot; --&gt; Counter: &quot;[Your response with evidence]&quot;
+
+KILLER QUESTIONS (ask the prospect)
+  1. &quot;[Question that exposes competitor weakness]&quot;
+  2. &quot;[Question that highlights your strength]&quot;
+  3. &quot;[Question that validates your differentiation]&quot;
+
+RECENT MOVES
+  - [Date]: [What they did, what it means]
+
+CUSTOMER REFERENCES (ask for these)
+  - [Customer name, use case, result]
+```
+
+#### Board Competitive Summary (Monthly)
+
+```
+COMPETITIVE INTELLIGENCE SUMMARY -- [Month]
+
+MARKET MOVEMENTS
+  [Competitor A]: [What happened, significance]
+  [Competitor B]: [What happened, significance]
+
+WIN/LOSS SNAPSHOT
+  Win rate vs [Comp A]: [X]% (trend: [up/down/stable])
+  Win rate vs [Comp B]: [X]% (trend: [up/down/stable])
+  Top win reason: [reason]
+  Top loss reason: [reason]
+
+RECOMMENDED RESPONSE
+  [1 specific action with owner and timeline]
+
+RISK WATCH
+  [Specific risk with probability and impact]
+```
+
+### Layer 5: Intelligence Cadence
+
+| Cadence | Activity | Output |
+|---------|----------|--------|
+| Monthly (scheduled) | Review Tier 1 competitors, update battlecards | Updated battlecards + leadership summary |
+| Triggered (event) | Competitor raises funding, launches feature, changes pricing | Impact assessment within 48 hours |
+| Quarterly | Full landscape review, positioning map update | Board-ready competitive slide |
+| Annual | Add/remove tracked competitors, refresh threat assessment | Updated competitive strategy |
+
+---
+
+## Win/Loss Analysis
+
+### When to Conduct
+
+| Event | Interview? | Who Conducts |
+|-------|-----------|-------------|
+| Lost deal &gt; $50K ACV | Always | Non-AE (CS, product, or external) |
+| Churn &gt; 6 months tenure | Always | CS or product team |
+| Competitive win | Selectively | Product or marketing |
+| Lost to &quot;no decision&quot; | Sample | Marketing or product |
+
+### Interview Protocol
+
+| Order | Question | What You Learn |
+|-------|----------|---------------|
+| 1 | &quot;Walk me through your evaluation process&quot; | How they buy, who was involved |
+| 2 | &quot;Who else were you considering?&quot; | Competitive set from their perspective |
+| 3 | &quot;What were the top 3 criteria in your decision?&quot; | Decision drivers (may differ from what AE reported) |
+| 4 | &quot;Where did [our product] fall short?&quot; | Specific gaps, not vague &quot;they were better&quot; |
+| 5 | &quot;What was the deciding factor?&quot; | The one thing that tipped the decision |
+| 6 | &quot;What would have changed your decision?&quot; | The counterfactual -- most actionable intel |
+
+### Aggregate Analysis
+
+| Metric | Cadence | Output |
+|--------|---------|--------|
+| Win reasons (ranked by frequency) | Monthly | Top 5 with trend |
+| Loss reasons (ranked by frequency) | Monthly | Top 5 with trend |
+| Competitor win rates (by competitor, segment) | Monthly | Competitive scoreboard |
+| Win rate trends over time | Quarterly | Trend lines for board |
+
+---
+
+## The Balance: Intelligence vs. Obsession
+
+### Over-Tracking Signals
+
+| Signal | Risk |
+|--------|------|
+| Roadmap driven by &quot;they shipped X&quot; | Reactive, not strategic |
+| Team morale drops when competitor fundraises | Emotional, not analytical |
+| Shipping features to match checklists | Building for competitors, not customers |
+| Pricing always starts with &quot;well, they charge X&quot; | Cost-anchored, not value-anchored |
+
+### Under-Tracking Signals
+
+| Signal | Risk |
+|--------|------|
+| AEs blindsided on calls | Losing deals from lack of preparation |
+| Prospects know more than your team | Credibility gap in sales |
+| Missed major competitor launch | Reactive when it could have been proactive |
+| Positioning unchanged in 12+ months | Market moved, you did not |
+
+### The Right Posture
+
+- Know competitors well enough to win against them
+- Do not let them set your agenda
+- Roadmap is led by customer problems, informed by competitive gaps
+- Pricing is anchored to your value, not their price
+
+---
+
+## Intelligence Distribution
+
+| Audience | Format | Cadence | Owner |
+|----------|--------|---------|-------|
+| AEs + SDRs | Battlecards in CRM | Monthly + triggered | CRO |
+| Product | Feature gap analysis | Quarterly | CPO |
+| Marketing | Positioning brief | Quarterly | CMO |
+| Leadership | 1-page competitive summary | Monthly | CEO/COO |
+| Board | Competitive landscape slide | Quarterly | CEO |
+
+**One source of truth**: All competitive intel in one place (Notion, Confluence, etc.). Slack-only distribution disappears.
+
+---
+
+## Red Flags
+
+| Signal | Implication | Action |
+|--------|------------|--------|
+| Competitor win rate &gt; 50% in core segment | Fundamental positioning problem | Strategy review, not more battlecards |
+| Same objection from 5+ deals | Feature gap that is real, not optics | Product roadmap input |
+| Competitor hired 10+ engineers in your domain | Major product investment incoming | Accelerate your roadmap or differentiate |
+| Competitor raised &gt; $20M targeting your ICP | 12-month competitive intensity increase | Strengthen moat, lock in customers |
+| Prospects evaluate you to justify competitor choice | You are the &quot;check box&quot; | Fix perception or change segment |
+| No win/loss interviews conducted | Learning nothing from outcomes | Implement win/loss program immediately |
+
+---
+
+## Integration with C-Suite
+
+| Intelligence Type | Feeds To | Action |
+|------------------|----------|--------|
+| Product moves | CPO (`cpo-advisor`) | Roadmap input, feature gap review |
+| Pricing changes | CRO + CFO | Pricing response evaluation |
+| Funding rounds | CEO + CFO | Strategic positioning update |
+| Hiring signals | CHRO + CTO | Talent market intelligence |
+| Customer wins/losses | CRO + CMO | Battlecard updates, positioning shifts |
+| Marketing campaigns | CMO (`cmo-advisor`) | Counter-positioning, channel strategy |
+| Market trends | CEO + Board Deck Builder | Board competitive slide |
+
+---
+
+## Output Artifacts
+
+| Request | Deliverable |
+|---------|-------------|
+| &quot;Map the competitive landscape&quot; | Competitor identification + tier classification + positioning map |
+| &quot;Build a battlecard for [competitor]&quot; | Sales battlecard with win themes, landmines, killer questions |
+| &quot;Analyze our win/loss data&quot; | Aggregate analysis with patterns, trends, and recommendations |
+| &quot;Competitor just launched [feature]&quot; | Impact assessment + recommended response + timeline |
+| &quot;Competitive section for board&quot; | Monthly summary: movements, win/loss, recommended actions |
+| &quot;Update our positioning&quot; | Positioning analysis against current competitive landscape |
+
+---
+
+## Tool Reference
+
+### 1. market_landscape_mapper.py
+
+Maps the competitive landscape across configurable dimensions, classifying competitors by tier, plotting market positioning, and identifying whitespace opportunities.
+
+```bash
+python scripts/market_landscape_mapper.py --input competitors.json --json
+python scripts/market_landscape_mapper.py --input competitors.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor data (name, tier, dimensions, scores) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. competitor_tracker.py
+
+Tracks competitor movements over time across 8 dimensions (product, pricing, funding, hiring, partnerships, customers, messaging, market share). Detects significant changes and generates alerts.
+
+```bash
+python scripts/competitor_tracker.py --input tracking_data.json --json
+python scripts/competitor_tracker.py --input tracking_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor tracking entries over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. swot_analyzer.py
+
+Performs structured SWOT analysis with weighted scoring, cross-impact assessment (SO/WO/ST/WT strategies), and strategic priority recommendations.
+
+```bash
+python scripts/swot_analyzer.py --input swot_data.json --json
+python scripts/swot_analyzer.py --input swot_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with strengths, weaknesses, opportunities, threats (each with description, impact 1-10, confidence 1-10) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Battlecards outdated within weeks of creation | No triggered update process for competitor moves | Implement event-driven battlecard updates tied to monitoring alerts; assign a battlecard owner per Tier 1 competitor |
+| Win/loss interviews not being conducted | AEs reluctant to participate or no clear owner | Assign non-AE interviewers (CS, product, or external); make win/loss a process requirement, not optional |
+| Competitive intel stays in Slack, not reaching sales | No single source of truth or distribution cadence | Centralize intel in CRM-attached battlecards; set monthly distribution cadence with CRO ownership |
+| Feature gap analysis does not influence roadmap | Product team not consuming competitive data | Include CPO in quarterly landscape review; tie gap analysis to roadmap planning cycle |
+| Competitor tier classification never updated | No annual review of competitive landscape | Schedule annual tier reassessment; add/remove competitors based on ICP overlap and funding changes |
+| Team over-reacts to every competitor move | No framework for assessing threat significance | Use the Threat Classification Matrix to filter signal from noise; only escalate Tier 1 changes |
+| Intelligence collection is inconsistent | No assigned owners or cadence for tracking dimensions | Assign dimension owners from the Intelligence Distribution table; automate monitoring where possible |
+
+---
+
+## Success Criteria
+
+- Battlecards updated within 48 hours of significant Tier 1 competitor moves
+- Win rate against top 3 competitors stable or improving quarter-over-quarter
+- Win/loss interviews conducted for 90%+ of lost deals above $50K ACV
+- Sales team can articulate top 3 differentiators vs each Tier 1 competitor without reference material
+- Competitive intelligence influences at least 2 roadmap decisions per quarter
+- Time from competitor event to internal awareness is under 72 hours
+- Positioning refreshed at least once per year based on landscape analysis
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Competitor identification and tier classification, 8-dimension tracking across product/pricing/funding/hiring/partnerships/customers/messaging/market share, SWOT analysis per competitor, feature gap analysis, battlecard creation and distribution, win/loss analysis, competitive positioning maps, board-level competitive summaries, and market landscape mapping via Python tools.
+
+**Out of scope:** Real-time competitor monitoring (tools analyze point-in-time data exports), pricing intelligence from competitor internal data, customer-level deal coaching (tools flag patterns but do not prescribe sales tactics), market research surveys or primary research, and competitor financial modeling beyond publicly available data.
+
+**Limitations:** SWOT and landscape analysis depend on the quality and recency of input data. Competitive intelligence older than 6 months should be treated as directional only. Win/loss analysis requires a minimum of 10 interviews per quarter for statistical significance. Market positioning maps are subjective and should be validated with customer perception data.
+
+---
+
+## Integration Points
+
+- **cro-advisor** -- Battlecards feed directly into sales enablement; win/loss data informs pipeline strategy and quota setting
+- **cpo-advisor** -- Feature gap analysis influences product roadmap prioritization and portfolio investment decisions
+- **cmo-advisor** -- Competitive positioning informs messaging, content strategy, and campaign differentiation
+- **ceo-advisor** -- Board-level competitive summaries inform strategic direction and M&amp;A evaluation
+- **board-deck-builder** -- Monthly competitive landscape slides feed into quarterly board presentations
+- **sales-success/** -- Battlecards and killer questions enable sales team competitive selling
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Competitive Intel&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Competitive Intel&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Competitive Intel in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Competitive Intel&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Competitive Intel&quot;
+4. Description: &quot;Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Covers competitor identification, 8-dimension tracking, analysis frameworks, battlecard creation,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/competitive-intel/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Competitive Intel&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Competitive Intelligence
+
+Systematic competitor tracking. Not obsession -- intelligence that drives real decisions. Know competitors well enough to win against them. Do not let them set your agenda.
+
+## Keywords
+
+competitive intelligence, competitor analysis, battlecard, win/loss analysis, competitive positioning, competitive tracking, market intelligence, competitor research, SWOT, competitive map, feature gap analysis, competitive strategy, market share, competitive advantage, moat, switching costs
+
+---
+
+## 5-Layer Intelligence System
+
+### Layer 1: Competitor Identification
+
+#### Threat Classification Matrix
+
+| | Same ICP | Different ICP |
+|---|---|---|
+| **Same problem** | Direct threat (Tier 1) | Adjacent watch (Tier 2) |
+| **Different problem** | Displacement risk (Tier 2) | Monitor only (Tier 3) |
+
+#### Competitor Tiers
+
+| Tier | Definition | Tracking Intensity | Examples |
+|------|-----------|-------------------|---------|
+| 1: Direct | Same ICP, same problem, similar price | Monthly deep tracking | Your top 3 named competitors |
+| 2: Adjacent | Same budget, different solution approach | Quarterly review | Build-in-house, adjacent products |
+| 3: Future | Well-funded in adjacent space or incumbents with roadmap overlap | Semi-annual scan | Funded startups, big tech features |
+
+### Layer 2: Tracking Dimensions
+
+| Dimension | Sources | Cadence | Priority |
+|-----------|---------|---------|----------|
+| Product moves | Changelog, G2, Capterra, Twitter, LinkedIn | Monthly | High |
+| Pricing changes | Pricing page, sales intel, customer feedback | Triggered | High |
+| Funding | Crunchbase, TechCrunch, LinkedIn | Triggered | Medium |
+| Hiring signals | LinkedIn job postings, Indeed, Glassdoor | Monthly | Medium |
+| Partnerships | Press releases, co-marketing, integrations | Triggered | Medium |
+| Customer wins/losses | Case studies, review sites, LinkedIn | Monthly | High |
+| Customer losses (theirs) | G2 reviews, forums, your own inbound | Ongoing | High |
+| Messaging shifts | Homepage, ads, conference talks | Quarterly | Medium |
+
+### Layer 3: Analysis Frameworks
+
+#### SWOT Per Competitor
+
+| Element | Key Questions |
+|---------|-------------|
+| Strengths | Where do they consistently win? What do customers praise? |
+| Weaknesses | Where do they lose? What do reviews complain about? |
+| Opportunities | What could they do that would threaten you more? |
+| Threats | What is their existential risk? What could make them irrelevant? |
+
+#### Feature Gap Analysis Template
+
+| Feature/Capability | You | Competitor A | Competitor B | Status |
+|-------------------|-----|-------------|-------------|--------|
+| Core Feature 1 | [check] | [check] | [x] | Your advantage |
+| Core Feature 2 | [x] | [check] | [check] | Gap -- on roadmap? |
+| Feature 3 | [check] | [x] | [x] | Moat (unique to you) |
+| Feature 4 | [x] | [x] | [check] | Comp B only |
+| Feature 5 | [check] | [check] | [check] | Table stakes |
+
+#### Competitive Positioning Map
+
+Choose 2 axes that show YOUR differentiation:
+
+| Common Axis Pairs | When to Use |
+|------------------|------------|
+| Price vs. Feature Depth | When you compete on value |
+| Enterprise-ready vs. SMB-ready | When you serve a different segment |
+| Easy to Implement vs. Configurable | When implementation speed is your advantage |
+| Vertical-specific vs. Horizontal | When you specialize |
+
+### Layer 4: Output Formats
+
+#### Battlecard Template (Sales Use)
+
+```
+BATTLECARD: [Competitor Name]
+Last Updated: [Date]
+
+OVERVIEW
+  Company: [name, founded, HQ, funding, size]
+  Product: [1-sentence description]
+  ICP overlap: [High/Medium/Low]
+  Threat level: [High/Medium/Low]
+
+WHY WE WIN
+  1. [Advantage 1 with proof point]
+  2. [Advantage 2 with proof point]
+  3. [Advantage 3 with proof point]
+
+WHERE THEY WIN
+  1. [Their advantage -- be honest]
+  2. [Their advantage]
+
+LANDMINES (what they say about us)
+  - &quot;[Their claim]&quot; --&gt; Counter: &quot;[Your response with evidence]&quot;
+  - &quot;[Their claim]&quot; --&gt; Counter: &quot;[Your response with evidence]&quot;
+
+KILLER QUESTIONS (ask the prospect)
+  1. &quot;[Question that exposes competitor weakness]&quot;
+  2. &quot;[Question that highlights your strength]&quot;
+  3. &quot;[Question that validates your differentiation]&quot;
+
+RECENT MOVES
+  - [Date]: [What they did, what it means]
+
+CUSTOMER REFERENCES (ask for these)
+  - [Customer name, use case, result]
+```
+
+#### Board Competitive Summary (Monthly)
+
+```
+COMPETITIVE INTELLIGENCE SUMMARY -- [Month]
+
+MARKET MOVEMENTS
+  [Competitor A]: [What happened, significance]
+  [Competitor B]: [What happened, significance]
+
+WIN/LOSS SNAPSHOT
+  Win rate vs [Comp A]: [X]% (trend: [up/down/stable])
+  Win rate vs [Comp B]: [X]% (trend: [up/down/stable])
+  Top win reason: [reason]
+  Top loss reason: [reason]
+
+RECOMMENDED RESPONSE
+  [1 specific action with owner and timeline]
+
+RISK WATCH
+  [Specific risk with probability and impact]
+```
+
+### Layer 5: Intelligence Cadence
+
+| Cadence | Activity | Output |
+|---------|----------|--------|
+| Monthly (scheduled) | Review Tier 1 competitors, update battlecards | Updated battlecards + leadership summary |
+| Triggered (event) | Competitor raises funding, launches feature, changes pricing | Impact assessment within 48 hours |
+| Quarterly | Full landscape review, positioning map update | Board-ready competitive slide |
+| Annual | Add/remove tracked competitors, refresh threat assessment | Updated competitive strategy |
+
+---
+
+## Win/Loss Analysis
+
+### When to Conduct
+
+| Event | Interview? | Who Conducts |
+|-------|-----------|-------------|
+| Lost deal &gt; $50K ACV | Always | Non-AE (CS, product, or external) |
+| Churn &gt; 6 months tenure | Always | CS or product team |
+| Competitive win | Selectively | Product or marketing |
+| Lost to &quot;no decision&quot; | Sample | Marketing or product |
+
+### Interview Protocol
+
+| Order | Question | What You Learn |
+|-------|----------|---------------|
+| 1 | &quot;Walk me through your evaluation process&quot; | How they buy, who was involved |
+| 2 | &quot;Who else were you considering?&quot; | Competitive set from their perspective |
+| 3 | &quot;What were the top 3 criteria in your decision?&quot; | Decision drivers (may differ from what AE reported) |
+| 4 | &quot;Where did [our product] fall short?&quot; | Specific gaps, not vague &quot;they were better&quot; |
+| 5 | &quot;What was the deciding factor?&quot; | The one thing that tipped the decision |
+| 6 | &quot;What would have changed your decision?&quot; | The counterfactual -- most actionable intel |
+
+### Aggregate Analysis
+
+| Metric | Cadence | Output |
+|--------|---------|--------|
+| Win reasons (ranked by frequency) | Monthly | Top 5 with trend |
+| Loss reasons (ranked by frequency) | Monthly | Top 5 with trend |
+| Competitor win rates (by competitor, segment) | Monthly | Competitive scoreboard |
+| Win rate trends over time | Quarterly | Trend lines for board |
+
+---
+
+## The Balance: Intelligence vs. Obsession
+
+### Over-Tracking Signals
+
+| Signal | Risk |
+|--------|------|
+| Roadmap driven by &quot;they shipped X&quot; | Reactive, not strategic |
+| Team morale drops when competitor fundraises | Emotional, not analytical |
+| Shipping features to match checklists | Building for competitors, not customers |
+| Pricing always starts with &quot;well, they charge X&quot; | Cost-anchored, not value-anchored |
+
+### Under-Tracking Signals
+
+| Signal | Risk |
+|--------|------|
+| AEs blindsided on calls | Losing deals from lack of preparation |
+| Prospects know more than your team | Credibility gap in sales |
+| Missed major competitor launch | Reactive when it could have been proactive |
+| Positioning unchanged in 12+ months | Market moved, you did not |
+
+### The Right Posture
+
+- Know competitors well enough to win against them
+- Do not let them set your agenda
+- Roadmap is led by customer problems, informed by competitive gaps
+- Pricing is anchored to your value, not their price
+
+---
+
+## Intelligence Distribution
+
+| Audience | Format | Cadence | Owner |
+|----------|--------|---------|-------|
+| AEs + SDRs | Battlecards in CRM | Monthly + triggered | CRO |
+| Product | Feature gap analysis | Quarterly | CPO |
+| Marketing | Positioning brief | Quarterly | CMO |
+| Leadership | 1-page competitive summary | Monthly | CEO/COO |
+| Board | Competitive landscape slide | Quarterly | CEO |
+
+**One source of truth**: All competitive intel in one place (Notion, Confluence, etc.). Slack-only distribution disappears.
+
+---
+
+## Red Flags
+
+| Signal | Implication | Action |
+|--------|------------|--------|
+| Competitor win rate &gt; 50% in core segment | Fundamental positioning problem | Strategy review, not more battlecards |
+| Same objection from 5+ deals | Feature gap that is real, not optics | Product roadmap input |
+| Competitor hired 10+ engineers in your domain | Major product investment incoming | Accelerate your roadmap or differentiate |
+| Competitor raised &gt; $20M targeting your ICP | 12-month competitive intensity increase | Strengthen moat, lock in customers |
+| Prospects evaluate you to justify competitor choice | You are the &quot;check box&quot; | Fix perception or change segment |
+| No win/loss interviews conducted | Learning nothing from outcomes | Implement win/loss program immediately |
+
+---
+
+## Integration with C-Suite
+
+| Intelligence Type | Feeds To | Action |
+|------------------|----------|--------|
+| Product moves | CPO (`cpo-advisor`) | Roadmap input, feature gap review |
+| Pricing changes | CRO + CFO | Pricing response evaluation |
+| Funding rounds | CEO + CFO | Strategic positioning update |
+| Hiring signals | CHRO + CTO | Talent market intelligence |
+| Customer wins/losses | CRO + CMO | Battlecard updates, positioning shifts |
+| Marketing campaigns | CMO (`cmo-advisor`) | Counter-positioning, channel strategy |
+| Market trends | CEO + Board Deck Builder | Board competitive slide |
+
+---
+
+## Output Artifacts
+
+| Request | Deliverable |
+|---------|-------------|
+| &quot;Map the competitive landscape&quot; | Competitor identification + tier classification + positioning map |
+| &quot;Build a battlecard for [competitor]&quot; | Sales battlecard with win themes, landmines, killer questions |
+| &quot;Analyze our win/loss data&quot; | Aggregate analysis with patterns, trends, and recommendations |
+| &quot;Competitor just launched [feature]&quot; | Impact assessment + recommended response + timeline |
+| &quot;Competitive section for board&quot; | Monthly summary: movements, win/loss, recommended actions |
+| &quot;Update our positioning&quot; | Positioning analysis against current competitive landscape |
+
+---
+
+## Tool Reference
+
+### 1. market_landscape_mapper.py
+
+Maps the competitive landscape across configurable dimensions, classifying competitors by tier, plotting market positioning, and identifying whitespace opportunities.
+
+```bash
+python scripts/market_landscape_mapper.py --input competitors.json --json
+python scripts/market_landscape_mapper.py --input competitors.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor data (name, tier, dimensions, scores) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. competitor_tracker.py
+
+Tracks competitor movements over time across 8 dimensions (product, pricing, funding, hiring, partnerships, customers, messaging, market share). Detects significant changes and generates alerts.
+
+```bash
+python scripts/competitor_tracker.py --input tracking_data.json --json
+python scripts/competitor_tracker.py --input tracking_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with competitor tracking entries over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. swot_analyzer.py
+
+Performs structured SWOT analysis with weighted scoring, cross-impact assessment (SO/WO/ST/WT strategies), and strategic priority recommendations.
+
+```bash
+python scripts/swot_analyzer.py --input swot_data.json --json
+python scripts/swot_analyzer.py --input swot_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with strengths, weaknesses, opportunities, threats (each with description, impact 1-10, confidence 1-10) |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Battlecards outdated within weeks of creation | No triggered update process for competitor moves | Implement event-driven battlecard updates tied to monitoring alerts; assign a battlecard owner per Tier 1 competitor |
+| Win/loss interviews not being conducted | AEs reluctant to participate or no clear owner | Assign non-AE interviewers (CS, product, or external); make win/loss a process requirement, not optional |
+| Competitive intel stays in Slack, not reaching sales | No single source of truth or distribution cadence | Centralize intel in CRM-attached battlecards; set monthly distribution cadence with CRO ownership |
+| Feature gap analysis does not influence roadmap | Product team not consuming competitive data | Include CPO in quarterly landscape review; tie gap analysis to roadmap planning cycle |
+| Competitor tier classification never updated | No annual review of competitive landscape | Schedule annual tier reassessment; add/remove competitors based on ICP overlap and funding changes |
+| Team over-reacts to every competitor move | No framework for assessing threat significance | Use the Threat Classification Matrix to filter signal from noise; only escalate Tier 1 changes |
+| Intelligence collection is inconsistent | No assigned owners or cadence for tracking dimensions | Assign dimension owners from the Intelligence Distribution table; automate monitoring where possible |
+
+---
+
+## Success Criteria
+
+- Battlecards updated within 48 hours of significant Tier 1 competitor moves
+- Win rate against top 3 competitors stable or improving quarter-over-quarter
+- Win/loss interviews conducted for 90%+ of lost deals above $50K ACV
+- Sales team can articulate top 3 differentiators vs each Tier 1 competitor without reference material
+- Competitive intelligence influences at least 2 roadmap decisions per quarter
+- Time from competitor event to internal awareness is under 72 hours
+- Positioning refreshed at least once per year based on landscape analysis
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Competitor identification and tier classification, 8-dimension tracking across product/pricing/funding/hiring/partnerships/customers/messaging/market share, SWOT analysis per competitor, feature gap analysis, battlecard creation and distribution, win/loss analysis, competitive positioning maps, board-level competitive summaries, and market landscape mapping via Python tools.
+
+**Out of scope:** Real-time competitor monitoring (tools analyze point-in-time data exports), pricing intelligence from competitor internal data, customer-level deal coaching (tools flag patterns but do not prescribe sales tactics), market research surveys or primary research, and competitor financial modeling beyond publicly available data.
+
+**Limitations:** SWOT and landscape analysis depend on the quality and recency of input data. Competitive intelligence older than 6 months should be treated as directional only. Win/loss analysis requires a minimum of 10 interviews per quarter for statistical significance. Market positioning maps are subjective and should be validated with customer perception data.
+
+---
+
+## Integration Points
+
+- **cro-advisor** -- Battlecards feed directly into sales enablement; win/loss data informs pipeline strategy and quota setting
+- **cpo-advisor** -- Feature gap analysis influences product roadmap prioritization and portfolio investment decisions
+- **cmo-advisor** -- Competitive positioning informs messaging, content strategy, and campaign differentiation
+- **ceo-advisor** -- Board-level competitive summaries inform strategic direction and M&amp;A evaluation
+- **board-deck-builder** -- Monthly competitive landscape slides feed into quarterly board presentations
+- **sales-success/** -- Battlecards and killer questions enable sales team competitive selling
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Competitive Intel&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Competitive Intel&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Competitive Intel in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Competitive Intel&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Competitive Intel&quot;
+4. Description: &quot;Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Covers competitor identification, 8-dimension tracking, analysis frameworks, battlecard creation,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/competitive-intel/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

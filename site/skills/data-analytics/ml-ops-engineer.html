@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ml Ops Engineer (Data Analytics domain).
 
 Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation. Use when deploying models to production, building training pipelines,...
@@ -390,11 +412,11 @@ https://github.com/borghei/Claude-Skills/tree/main/ml-ops-engineer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Ml Ops Engineer (Data Analytics domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Ml Ops Engineer (Data Analytics domain).
 
 Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation. Use when deploying models to production, building training pipelines,...
 
@@ -415,7 +437,630 @@ https://github.com/borghei/Claude-Skills/tree/main/ml-ops-engineer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Ml Ops Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# MLOps Engineer
+
+The agent operates as a senior MLOps engineer, deploying models to production, orchestrating training pipelines, monitoring model health, managing feature stores, and automating ML CI/CD.
+
+## Workflow
+
+1. **Assess ML maturity** -- Determine the current level (manual notebooks vs. automated pipelines vs. full CI/CD). Identify the highest-impact gap to close first.
+2. **Build or extend training pipeline** -- Define fetch-data, validate, preprocess, train, evaluate stages. Use Kubeflow, Airflow, or equivalent. Gate deployment on an accuracy threshold (e.g., &gt; 0.85).
+3. **Deploy model for serving** -- Choose real-time (FastAPI + K8s) or batch (Spark/Parquet) based on latency requirements. Configure health checks, autoscaling, and resource limits.
+4. **Register in model registry** -- Log parameters, metrics, and artifacts in MLflow. Transition the winning version to Production stage; archive the previous version.
+5. **Instrument monitoring** -- Set up latency (P50/P95/P99), error rate, prediction-distribution, and feature-drift dashboards. Configure alerting thresholds.
+6. **Validate end-to-end** -- Run smoke tests against the serving endpoint. Confirm monitoring dashboards populate. Verify rollback procedure works.
+
+## MLOps Maturity Model
+
+| Level | Capabilities | Key signals |
+|-------|-------------|------------|
+| 0 - Manual | Jupyter notebooks, manual deploy | No version control on models |
+| 1 - Pipeline | Automated training, versioned models | MLflow tracking in use |
+| 2 - CI/CD | Continuous training, automated tests | Feature store operational |
+| 3 - Full MLOps | Auto-retraining on drift, A/B testing | SLA-backed monitoring |
+
+## Real-Time Serving Example
+
+```python
+# model_server.py -- FastAPI model serving
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import mlflow.pyfunc, time
+
+app = FastAPI()
+model = mlflow.pyfunc.load_model(&quot;models:/fraud_detector/Production&quot;)
+
+class PredictionRequest(BaseModel):
+    features: list[float]
+
+class PredictionResponse(BaseModel):
+    prediction: float
+    model_version: str
+    latency_ms: float
+
+@app.post(&quot;/predict&quot;, response_model=PredictionResponse)
+async def predict(req: PredictionRequest):
+    start = time.time()
+    try:
+        pred = model.predict([req.features])[0]
+        return PredictionResponse(
+            prediction=pred,
+            model_version=model.metadata.run_id,
+            latency_ms=(time.time() - start) * 1000,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get(&quot;/health&quot;)
+async def health():
+    return {&quot;status&quot;: &quot;healthy&quot;, &quot;model_loaded&quot;: model is not None}
+```
+
+## Kubernetes Deployment
+
+```yaml
+# k8s/model-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: model-server}
+  template:
+    metadata:
+      labels: {app: model-server}
+    spec:
+      containers:
+      - name: model-server
+        image: gcr.io/project/model-server:v1.2.3
+        ports: [{containerPort: 8080}]
+        resources:
+          requests: {memory: &quot;2Gi&quot;, cpu: &quot;1000m&quot;}
+          limits: {memory: &quot;4Gi&quot;, cpu: &quot;2000m&quot;, nvidia.com/gpu: 1}
+        env:
+        - {name: MODEL_URI, value: &quot;s3://models/production/v1.2.3&quot;}
+        readinessProbe:
+          httpGet: {path: /health, port: 8080}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: model-server-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: model-server
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target: {type: Utilization, averageUtilization: 70}
+```
+
+## Drift Detection
+
+```python
+# monitoring/drift_detector.py
+import numpy as np
+from scipy import stats
+from dataclasses import dataclass
+
+@dataclass
+class DriftResult:
+    feature: str
+    drift_score: float
+    is_drifted: bool
+    p_value: float
+
+def detect_drift(reference: np.ndarray, current: np.ndarray, threshold: float = 0.05) -&gt; DriftResult:
+    &quot;&quot;&quot;Detect distribution drift using Kolmogorov-Smirnov test.&quot;&quot;&quot;
+    statistic, p_value = stats.ks_2samp(reference, current)
+    return DriftResult(feature=&quot;&quot;, drift_score=statistic, is_drifted=p_value &lt; threshold, p_value=p_value)
+
+def monitor_all_features(reference: dict, current: dict, threshold: float = 0.05) -&gt; list[DriftResult]:
+    &quot;&quot;&quot;Run drift detection across all features; return list of results.&quot;&quot;&quot;
+    results = []
+    for feat in reference:
+        r = detect_drift(reference[feat], current[feat], threshold)
+        r.feature = feat
+        results.append(r)
+    return results
+```
+
+## Alert Rules
+
+```python
+ALERT_RULES = {
+    &quot;latency_p99&quot;:    {&quot;threshold&quot;: 200,  &quot;severity&quot;: &quot;warning&quot;,  &quot;msg&quot;: &quot;P99 latency exceeded 200 ms&quot;},
+    &quot;error_rate&quot;:     {&quot;threshold&quot;: 0.01, &quot;severity&quot;: &quot;critical&quot;, &quot;msg&quot;: &quot;Error rate exceeded 1%&quot;},
+    &quot;accuracy_drop&quot;:  {&quot;threshold&quot;: 0.05, &quot;severity&quot;: &quot;critical&quot;, &quot;msg&quot;: &quot;Accuracy dropped &gt; 5%&quot;},
+    &quot;drift_score&quot;:    {&quot;threshold&quot;: 0.15, &quot;severity&quot;: &quot;warning&quot;,  &quot;msg&quot;: &quot;Feature drift detected&quot;},
+}
+```
+
+## Feature Store (Feast)
+
+```python
+# features/customer_features.py
+from feast import Entity, Feature, FeatureView, FileSource, ValueType
+from datetime import timedelta
+
+customer = Entity(name=&quot;customer_id&quot;, value_type=ValueType.INT64)
+
+customer_stats = FeatureView(
+    name=&quot;customer_stats&quot;,
+    entities=[&quot;customer_id&quot;],
+    ttl=timedelta(days=1),
+    features=[
+        Feature(name=&quot;total_purchases&quot;,       dtype=ValueType.FLOAT),
+        Feature(name=&quot;avg_order_value&quot;,        dtype=ValueType.FLOAT),
+        Feature(name=&quot;days_since_last_order&quot;,  dtype=ValueType.INT32),
+        Feature(name=&quot;lifetime_value&quot;,         dtype=ValueType.FLOAT),
+    ],
+    online=True,
+    source=FileSource(
+        path=&quot;gs://features/customer_stats.parquet&quot;,
+        timestamp_field=&quot;event_timestamp&quot;,
+    ),
+)
+```
+
+**Online retrieval at serving time:**
+```python
+from feast import FeatureStore
+store = FeatureStore(repo_path=&quot;.&quot;)
+features = store.get_online_features(
+    features=[&quot;customer_stats:total_purchases&quot;, &quot;customer_stats:avg_order_value&quot;],
+    entity_rows=[{&quot;customer_id&quot;: 1234}],
+).to_dict()
+```
+
+## Experiment Tracking (MLflow)
+
+```python
+import mlflow
+
+mlflow.set_tracking_uri(&quot;http://mlflow.company.com&quot;)
+mlflow.set_experiment(&quot;fraud_detection&quot;)
+
+with mlflow.start_run(run_name=&quot;xgboost_v2&quot;):
+    mlflow.log_params({&quot;n_estimators&quot;: 100, &quot;max_depth&quot;: 6, &quot;learning_rate&quot;: 0.1})
+    model = train_model(X_train, y_train)
+    mlflow.log_metrics({
+        &quot;accuracy&quot;: accuracy_score(y_test, preds),
+        &quot;f1&quot;: f1_score(y_test, preds),
+    })
+    mlflow.sklearn.log_model(model, &quot;model&quot;, registered_model_name=&quot;fraud_detector&quot;)
+```
+
+For extended pipeline examples (Kubeflow, Airflow DAGs, full CI/CD workflows), see `REFERENCE.md`.
+
+## Reference Materials
+
+- `REFERENCE.md` -- Extended patterns: Kubeflow pipelines, Airflow DAGs, CI/CD workflows, model registry operations
+- `references/deployment_patterns.md` -- Model deployment strategies
+- `references/monitoring_guide.md` -- ML monitoring best practices
+- `references/feature_store.md` -- Feature store patterns
+- `references/pipeline_design.md` -- ML pipeline architecture
+
+## Scripts
+
+```bash
+python scripts/model_registry.py register --name fraud_detector --version v2.3 --metrics &#x27;{&quot;f1&quot;:0.91,&quot;auc&quot;:0.95}&#x27; --params &#x27;{&quot;n_estimators&quot;:200}&#x27;
+python scripts/model_registry.py promote --name fraud_detector --version v2.3 --stage production
+python scripts/model_registry.py list --stage production --json
+python scripts/model_registry.py compare --name fraud_detector --versions v2.2 v2.3
+python scripts/drift_detector.py --reference train_data.csv --current prod_data.csv
+python scripts/drift_detector.py --reference baseline.csv --current latest.csv --threshold 0.1 --json
+python scripts/pipeline_validator.py --pipeline pipeline.json --strict
+python scripts/pipeline_validator.py --pipeline pipeline.json --json
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `model_registry.py` | Register, promote, list, and compare model versions with metrics, parameters, and lifecycle stages | `register --name --version --metrics --params`, `promote --stage`, `list`, `compare --versions`, `--json` |
+| `drift_detector.py` | Detect data/model drift between reference and current datasets using KS statistic, PSI, and chi-square | `--reference &lt;csv&gt;`, `--current &lt;csv&gt;`, `--columns`, `--threshold`, `--json` |
+| `pipeline_validator.py` | Validate ML pipeline definitions for completeness, stage ordering, evaluation gates, and rollback config | `--pipeline &lt;json&gt;`, `--strict`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model latency exceeds P99 SLA (&gt; 200 ms) | Model is too large, input preprocessing is slow, or pod resources are undersized | Profile the serving endpoint; consider model distillation, input caching, or increasing CPU/memory limits |
+| `drift_detector.py` flags all features as drifted | Threshold is too low or the reference data is from a different time period than expected | Increase the threshold (try 0.15-0.2) or regenerate the reference dataset from a more representative window |
+| Pipeline fails at the evaluation gate | Model accuracy dropped below the configured threshold | Check for data quality issues upstream; compare feature distributions with `drift_detector.py`; retrain with fresh data |
+| Model registry shows &quot;already registered&quot; error | The exact name + version combination was previously registered | Use a new version string (e.g., v2.3.1) or remove the old entry if it was a test |
+| Kubernetes pods crash-loop on model server | OOM kill due to model size exceeding memory limits, or health check timeout too short | Increase `resources.limits.memory`; extend `initialDelaySeconds` on readiness probe for large models |
+| Feature store returns stale features | Materialization job failed or ran outside the TTL window | Check materialization logs; re-run `materialize_features`; consider reducing TTL or adding freshness alerts |
+| `pipeline_validator.py` reports STAGE_ORDER error | Pipeline stages are defined out of the expected sequence (data -&gt; transform -&gt; train -&gt; evaluate -&gt; deploy) | Reorder stages to follow the canonical sequence; the validator expects data stages before training stages |
+
+## Success Criteria
+
+- All production models are registered in the model registry with version, metrics, and parameters before serving traffic.
+- Drift detection runs on a scheduled cadence (at least weekly) with alerts when PSI &gt; 0.2 or KS &gt; 0.15.
+- ML pipelines pass `pipeline_validator.py --strict` with zero errors before deployment.
+- Model serving latency stays within SLA: P50 &lt; 50 ms, P95 &lt; 100 ms, P99 &lt; 200 ms.
+- Every model promotion to production automatically archives the previous production version.
+- Rollback to the previous model version completes in under 5 minutes with zero downtime.
+- Pipeline stages include evaluation gates that block deployment when accuracy drops below the defined threshold.
+
+## Scope &amp; Limitations
+
+**In scope:** Model deployment (real-time and batch), ML pipeline orchestration, model registry management, drift detection (data drift, concept drift, prediction drift), feature store patterns, monitoring and alerting, Kubernetes deployment configurations, and CI/CD for ML.
+
+**Out of scope:** Model architecture design and algorithm selection (see data-scientist), raw data ingestion pipelines, BI dashboard development, and business strategy.
+
+**Limitations:** The Python tools use only the Python standard library. `drift_detector.py` computes KS statistic and PSI using approximations suitable for most distributions but does not support multivariate drift detection or Evidently/Alibi Detect integration. `model_registry.py` stores state in a local JSON file -- for production use, integrate with MLflow Model Registry or a similar platform. `pipeline_validator.py` validates structure and conventions but does not execute pipeline stages.
+
+## Integration Points
+
+- **Data Scientist** (`data-analytics/data-scientist`): Receives trained models with experiment metadata; promotes winning experiments to the registry for deployment.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on dbt mart models; schema changes trigger pipeline revalidation.
+- **Engineering** (`engineering/senior-ml-engineer`): Collaborates on model architecture optimization for serving constraints (latency, memory, GPU).
+- **Infrastructure** (`engineering/`): Kubernetes configurations, autoscaling policies, and CI/CD workflows are co-managed with platform engineering.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Model predictions may feed into BI dashboards; monitoring metrics are surfaced in operational dashboards.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ml Ops Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ml Ops Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ml Ops Engineer in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ml Ops Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ml Ops Engineer&quot;
+4. Description: &quot;Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation. Use when deploying models to production, building training pipelines,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/ml-ops-engineer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Ml Ops Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# MLOps Engineer
+
+The agent operates as a senior MLOps engineer, deploying models to production, orchestrating training pipelines, monitoring model health, managing feature stores, and automating ML CI/CD.
+
+## Workflow
+
+1. **Assess ML maturity** -- Determine the current level (manual notebooks vs. automated pipelines vs. full CI/CD). Identify the highest-impact gap to close first.
+2. **Build or extend training pipeline** -- Define fetch-data, validate, preprocess, train, evaluate stages. Use Kubeflow, Airflow, or equivalent. Gate deployment on an accuracy threshold (e.g., &gt; 0.85).
+3. **Deploy model for serving** -- Choose real-time (FastAPI + K8s) or batch (Spark/Parquet) based on latency requirements. Configure health checks, autoscaling, and resource limits.
+4. **Register in model registry** -- Log parameters, metrics, and artifacts in MLflow. Transition the winning version to Production stage; archive the previous version.
+5. **Instrument monitoring** -- Set up latency (P50/P95/P99), error rate, prediction-distribution, and feature-drift dashboards. Configure alerting thresholds.
+6. **Validate end-to-end** -- Run smoke tests against the serving endpoint. Confirm monitoring dashboards populate. Verify rollback procedure works.
+
+## MLOps Maturity Model
+
+| Level | Capabilities | Key signals |
+|-------|-------------|------------|
+| 0 - Manual | Jupyter notebooks, manual deploy | No version control on models |
+| 1 - Pipeline | Automated training, versioned models | MLflow tracking in use |
+| 2 - CI/CD | Continuous training, automated tests | Feature store operational |
+| 3 - Full MLOps | Auto-retraining on drift, A/B testing | SLA-backed monitoring |
+
+## Real-Time Serving Example
+
+```python
+# model_server.py -- FastAPI model serving
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import mlflow.pyfunc, time
+
+app = FastAPI()
+model = mlflow.pyfunc.load_model(&quot;models:/fraud_detector/Production&quot;)
+
+class PredictionRequest(BaseModel):
+    features: list[float]
+
+class PredictionResponse(BaseModel):
+    prediction: float
+    model_version: str
+    latency_ms: float
+
+@app.post(&quot;/predict&quot;, response_model=PredictionResponse)
+async def predict(req: PredictionRequest):
+    start = time.time()
+    try:
+        pred = model.predict([req.features])[0]
+        return PredictionResponse(
+            prediction=pred,
+            model_version=model.metadata.run_id,
+            latency_ms=(time.time() - start) * 1000,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get(&quot;/health&quot;)
+async def health():
+    return {&quot;status&quot;: &quot;healthy&quot;, &quot;model_loaded&quot;: model is not None}
+```
+
+## Kubernetes Deployment
+
+```yaml
+# k8s/model-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: model-server}
+  template:
+    metadata:
+      labels: {app: model-server}
+    spec:
+      containers:
+      - name: model-server
+        image: gcr.io/project/model-server:v1.2.3
+        ports: [{containerPort: 8080}]
+        resources:
+          requests: {memory: &quot;2Gi&quot;, cpu: &quot;1000m&quot;}
+          limits: {memory: &quot;4Gi&quot;, cpu: &quot;2000m&quot;, nvidia.com/gpu: 1}
+        env:
+        - {name: MODEL_URI, value: &quot;s3://models/production/v1.2.3&quot;}
+        readinessProbe:
+          httpGet: {path: /health, port: 8080}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: model-server-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: model-server
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target: {type: Utilization, averageUtilization: 70}
+```
+
+## Drift Detection
+
+```python
+# monitoring/drift_detector.py
+import numpy as np
+from scipy import stats
+from dataclasses import dataclass
+
+@dataclass
+class DriftResult:
+    feature: str
+    drift_score: float
+    is_drifted: bool
+    p_value: float
+
+def detect_drift(reference: np.ndarray, current: np.ndarray, threshold: float = 0.05) -&gt; DriftResult:
+    &quot;&quot;&quot;Detect distribution drift using Kolmogorov-Smirnov test.&quot;&quot;&quot;
+    statistic, p_value = stats.ks_2samp(reference, current)
+    return DriftResult(feature=&quot;&quot;, drift_score=statistic, is_drifted=p_value &lt; threshold, p_value=p_value)
+
+def monitor_all_features(reference: dict, current: dict, threshold: float = 0.05) -&gt; list[DriftResult]:
+    &quot;&quot;&quot;Run drift detection across all features; return list of results.&quot;&quot;&quot;
+    results = []
+    for feat in reference:
+        r = detect_drift(reference[feat], current[feat], threshold)
+        r.feature = feat
+        results.append(r)
+    return results
+```
+
+## Alert Rules
+
+```python
+ALERT_RULES = {
+    &quot;latency_p99&quot;:    {&quot;threshold&quot;: 200,  &quot;severity&quot;: &quot;warning&quot;,  &quot;msg&quot;: &quot;P99 latency exceeded 200 ms&quot;},
+    &quot;error_rate&quot;:     {&quot;threshold&quot;: 0.01, &quot;severity&quot;: &quot;critical&quot;, &quot;msg&quot;: &quot;Error rate exceeded 1%&quot;},
+    &quot;accuracy_drop&quot;:  {&quot;threshold&quot;: 0.05, &quot;severity&quot;: &quot;critical&quot;, &quot;msg&quot;: &quot;Accuracy dropped &gt; 5%&quot;},
+    &quot;drift_score&quot;:    {&quot;threshold&quot;: 0.15, &quot;severity&quot;: &quot;warning&quot;,  &quot;msg&quot;: &quot;Feature drift detected&quot;},
+}
+```
+
+## Feature Store (Feast)
+
+```python
+# features/customer_features.py
+from feast import Entity, Feature, FeatureView, FileSource, ValueType
+from datetime import timedelta
+
+customer = Entity(name=&quot;customer_id&quot;, value_type=ValueType.INT64)
+
+customer_stats = FeatureView(
+    name=&quot;customer_stats&quot;,
+    entities=[&quot;customer_id&quot;],
+    ttl=timedelta(days=1),
+    features=[
+        Feature(name=&quot;total_purchases&quot;,       dtype=ValueType.FLOAT),
+        Feature(name=&quot;avg_order_value&quot;,        dtype=ValueType.FLOAT),
+        Feature(name=&quot;days_since_last_order&quot;,  dtype=ValueType.INT32),
+        Feature(name=&quot;lifetime_value&quot;,         dtype=ValueType.FLOAT),
+    ],
+    online=True,
+    source=FileSource(
+        path=&quot;gs://features/customer_stats.parquet&quot;,
+        timestamp_field=&quot;event_timestamp&quot;,
+    ),
+)
+```
+
+**Online retrieval at serving time:**
+```python
+from feast import FeatureStore
+store = FeatureStore(repo_path=&quot;.&quot;)
+features = store.get_online_features(
+    features=[&quot;customer_stats:total_purchases&quot;, &quot;customer_stats:avg_order_value&quot;],
+    entity_rows=[{&quot;customer_id&quot;: 1234}],
+).to_dict()
+```
+
+## Experiment Tracking (MLflow)
+
+```python
+import mlflow
+
+mlflow.set_tracking_uri(&quot;http://mlflow.company.com&quot;)
+mlflow.set_experiment(&quot;fraud_detection&quot;)
+
+with mlflow.start_run(run_name=&quot;xgboost_v2&quot;):
+    mlflow.log_params({&quot;n_estimators&quot;: 100, &quot;max_depth&quot;: 6, &quot;learning_rate&quot;: 0.1})
+    model = train_model(X_train, y_train)
+    mlflow.log_metrics({
+        &quot;accuracy&quot;: accuracy_score(y_test, preds),
+        &quot;f1&quot;: f1_score(y_test, preds),
+    })
+    mlflow.sklearn.log_model(model, &quot;model&quot;, registered_model_name=&quot;fraud_detector&quot;)
+```
+
+For extended pipeline examples (Kubeflow, Airflow DAGs, full CI/CD workflows), see `REFERENCE.md`.
+
+## Reference Materials
+
+- `REFERENCE.md` -- Extended patterns: Kubeflow pipelines, Airflow DAGs, CI/CD workflows, model registry operations
+- `references/deployment_patterns.md` -- Model deployment strategies
+- `references/monitoring_guide.md` -- ML monitoring best practices
+- `references/feature_store.md` -- Feature store patterns
+- `references/pipeline_design.md` -- ML pipeline architecture
+
+## Scripts
+
+```bash
+python scripts/model_registry.py register --name fraud_detector --version v2.3 --metrics &#x27;{&quot;f1&quot;:0.91,&quot;auc&quot;:0.95}&#x27; --params &#x27;{&quot;n_estimators&quot;:200}&#x27;
+python scripts/model_registry.py promote --name fraud_detector --version v2.3 --stage production
+python scripts/model_registry.py list --stage production --json
+python scripts/model_registry.py compare --name fraud_detector --versions v2.2 v2.3
+python scripts/drift_detector.py --reference train_data.csv --current prod_data.csv
+python scripts/drift_detector.py --reference baseline.csv --current latest.csv --threshold 0.1 --json
+python scripts/pipeline_validator.py --pipeline pipeline.json --strict
+python scripts/pipeline_validator.py --pipeline pipeline.json --json
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `model_registry.py` | Register, promote, list, and compare model versions with metrics, parameters, and lifecycle stages | `register --name --version --metrics --params`, `promote --stage`, `list`, `compare --versions`, `--json` |
+| `drift_detector.py` | Detect data/model drift between reference and current datasets using KS statistic, PSI, and chi-square | `--reference &lt;csv&gt;`, `--current &lt;csv&gt;`, `--columns`, `--threshold`, `--json` |
+| `pipeline_validator.py` | Validate ML pipeline definitions for completeness, stage ordering, evaluation gates, and rollback config | `--pipeline &lt;json&gt;`, `--strict`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Model latency exceeds P99 SLA (&gt; 200 ms) | Model is too large, input preprocessing is slow, or pod resources are undersized | Profile the serving endpoint; consider model distillation, input caching, or increasing CPU/memory limits |
+| `drift_detector.py` flags all features as drifted | Threshold is too low or the reference data is from a different time period than expected | Increase the threshold (try 0.15-0.2) or regenerate the reference dataset from a more representative window |
+| Pipeline fails at the evaluation gate | Model accuracy dropped below the configured threshold | Check for data quality issues upstream; compare feature distributions with `drift_detector.py`; retrain with fresh data |
+| Model registry shows &quot;already registered&quot; error | The exact name + version combination was previously registered | Use a new version string (e.g., v2.3.1) or remove the old entry if it was a test |
+| Kubernetes pods crash-loop on model server | OOM kill due to model size exceeding memory limits, or health check timeout too short | Increase `resources.limits.memory`; extend `initialDelaySeconds` on readiness probe for large models |
+| Feature store returns stale features | Materialization job failed or ran outside the TTL window | Check materialization logs; re-run `materialize_features`; consider reducing TTL or adding freshness alerts |
+| `pipeline_validator.py` reports STAGE_ORDER error | Pipeline stages are defined out of the expected sequence (data -&gt; transform -&gt; train -&gt; evaluate -&gt; deploy) | Reorder stages to follow the canonical sequence; the validator expects data stages before training stages |
+
+## Success Criteria
+
+- All production models are registered in the model registry with version, metrics, and parameters before serving traffic.
+- Drift detection runs on a scheduled cadence (at least weekly) with alerts when PSI &gt; 0.2 or KS &gt; 0.15.
+- ML pipelines pass `pipeline_validator.py --strict` with zero errors before deployment.
+- Model serving latency stays within SLA: P50 &lt; 50 ms, P95 &lt; 100 ms, P99 &lt; 200 ms.
+- Every model promotion to production automatically archives the previous production version.
+- Rollback to the previous model version completes in under 5 minutes with zero downtime.
+- Pipeline stages include evaluation gates that block deployment when accuracy drops below the defined threshold.
+
+## Scope &amp; Limitations
+
+**In scope:** Model deployment (real-time and batch), ML pipeline orchestration, model registry management, drift detection (data drift, concept drift, prediction drift), feature store patterns, monitoring and alerting, Kubernetes deployment configurations, and CI/CD for ML.
+
+**Out of scope:** Model architecture design and algorithm selection (see data-scientist), raw data ingestion pipelines, BI dashboard development, and business strategy.
+
+**Limitations:** The Python tools use only the Python standard library. `drift_detector.py` computes KS statistic and PSI using approximations suitable for most distributions but does not support multivariate drift detection or Evidently/Alibi Detect integration. `model_registry.py` stores state in a local JSON file -- for production use, integrate with MLflow Model Registry or a similar platform. `pipeline_validator.py` validates structure and conventions but does not execute pipeline stages.
+
+## Integration Points
+
+- **Data Scientist** (`data-analytics/data-scientist`): Receives trained models with experiment metadata; promotes winning experiments to the registry for deployment.
+- **Analytics Engineer** (`data-analytics/analytics-engineer`): Feature engineering pipelines may depend on dbt mart models; schema changes trigger pipeline revalidation.
+- **Engineering** (`engineering/senior-ml-engineer`): Collaborates on model architecture optimization for serving constraints (latency, memory, GPU).
+- **Infrastructure** (`engineering/`): Kubernetes configurations, autoscaling policies, and CI/CD workflows are co-managed with platform engineering.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Model predictions may feed into BI dashboards; monitoring metrics are surfaced in operational dashboards.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ml Ops Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ml Ops Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ml Ops Engineer in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ml Ops Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ml Ops Engineer&quot;
+4. Description: &quot;Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature stores, and infrastructure automation. Use when deploying models to production, building training pipelines,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/ml-ops-engineer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

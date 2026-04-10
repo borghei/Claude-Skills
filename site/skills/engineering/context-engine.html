@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Context Engine (Engineering domain).
 
 Context management engine for AI coding agents. Handles context window optimization, persistent memory across sessions, context retrieval strategies, token budget allocation, and knowledge graph const...
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/context-engine
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Context Engine (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Context Engine (Engineering domain).
 
 Context management engine for AI coding agents. Handles context window optimization, persistent memory across sessions, context retrieval strategies, token budget allocation, and knowledge graph const...
 
@@ -435,7 +457,914 @@ https://github.com/borghei/Claude-Skills/tree/main/context-engine
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Context Engine&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Context Engine - AI Agent Context Management
+
+**Tier:** POWERFUL
+**Category:** Engineering
+**Tags:** context management, AI agents, memory systems, RAG, token optimization, knowledge graphs
+
+## Overview
+
+Context Engine provides production-grade patterns for managing what AI agents know, remember, and retrieve. It covers the full lifecycle: ingestion of project knowledge, optimal packing of context windows, persistent memory across sessions, and retrieval-augmented generation for large codebases. The difference between a useful agent and a hallucinating one is context management.
+
+## Core Capabilities
+
+### 1. Context Window Architecture
+
+Every AI agent operates within a finite context window. Mismanaging it is the #1 cause of degraded agent performance.
+
+#### Token Budget Allocation Framework
+
+| Segment | Budget % | Purpose | Priority |
+|---------|----------|---------|----------|
+| System Instructions | 5-10% | Agent identity, rules, constraints | Fixed (always loaded) |
+| Task Context | 20-30% | Current task description, requirements | High (per-request) |
+| Relevant Code | 25-40% | Source files, dependencies, types | Dynamic (retrieved) |
+| Conversation History | 10-20% | Prior turns, decisions made | Sliding window |
+| Tool Results | 5-15% | Command output, search results | Ephemeral |
+| Reserved Buffer | 5-10% | Output generation headroom | Protected |
+
+#### Context Packing Strategies
+
+**Greedy Relevance Packing**
+```
+1. Score all candidate context by relevance to current task
+2. Sort by score descending
+3. Pack until budget exhausted
+4. Always reserve output buffer
+```
+- Pros: Simple, fast, works well for focused tasks
+- Cons: Misses cross-cutting context, no diversity
+
+**Tiered Loading**
+```
+Tier 0 (always loaded): System prompt, project rules, active file
+Tier 1 (task-specific):  Related files, type definitions, tests
+Tier 2 (on-demand):      Documentation, examples, history
+Tier 3 (retrieved):      Search results, RAG chunks
+```
+- Pros: Predictable, debuggable, respects fixed costs
+- Cons: Requires upfront tier classification
+
+**Adaptive Compression**
+```
+1. Load full context for first pass
+2. Identify low-signal sections (boilerplate, repetitive code)
+3. Summarize or truncate low-signal sections
+4. Re-pack with compressed context
+5. Preserve high-signal sections verbatim
+```
+- Pros: Maximizes information density
+- Cons: Risk of losing important details in compression
+
+### 2. Memory Architecture
+
+#### Three-Layer Memory Model
+
+```
+┌─────────────────────────────────────────────────┐
+│  Layer 1: Working Memory (Context Window)        │
+│  Scope: Current conversation/task                │
+│  Lifetime: Single session                        │
+│  Storage: In-context tokens                      │
+│  Update: Every turn                              │
+├─────────────────────────────────────────────────┤
+│  Layer 2: Session Memory (Persistent Store)      │
+│  Scope: Project-level learnings                  │
+│  Lifetime: Across sessions                       │
+│  Storage: MEMORY.md, .claude/rules/, CLAUDE.md   │
+│  Update: End of session or on discovery          │
+├─────────────────────────────────────────────────┤
+│  Layer 3: Knowledge Base (Indexed Corpus)        │
+│  Scope: Full codebase + documentation            │
+│  Lifetime: Persistent, versioned                 │
+│  Storage: Vector store, graph DB, file index     │
+│  Update: On commit / scheduled reindex           │
+└─────────────────────────────────────────────────┘
+```
+
+#### Memory Promotion Protocol
+
+Knowledge flows upward through layers based on recurrence and value:
+
+| Signal | Action | Example |
+|--------|--------|---------|
+| Pattern seen 1x | Working memory only | &quot;This file uses tabs&quot; |
+| Pattern seen 2-3x | Candidate for session memory | &quot;Project uses pnpm everywhere&quot; |
+| Pattern confirmed across sessions | Promote to CLAUDE.md/rules | &quot;Always use pnpm, never npm&quot; |
+| Pattern is domain knowledge | Add to knowledge base | &quot;Auth flow uses JWT + refresh tokens&quot; |
+
+#### Staleness Detection
+
+Context has a shelf life. Stale context causes hallucinations.
+
+```
+Freshness Score = f(last_verified, change_frequency, confidence)
+
+Fresh   (&lt; 7 days, file unchanged):  Use directly
+Aging   (7-30 days, file changed):   Re-verify before using
+Stale   (&gt; 30 days):                 Flag, re-retrieve, or discard
+Unknown (never verified):            Treat as low-confidence
+```
+
+### 3. Retrieval Strategies for Code
+
+#### File-Level Retrieval
+
+Best for: navigating to the right file when the agent knows what it needs.
+
+```
+Query: &quot;authentication middleware&quot;
+Strategy:
+  1. Filename pattern match: *auth*, *middleware*
+  2. Import graph: files that import auth modules
+  3. Symbol search: exported functions matching auth*
+  4. Content search: files containing auth-related patterns
+  5. Rank by: recency of edit + import centrality + name match
+```
+
+#### Chunk-Level Retrieval (RAG for Code)
+
+Best for: finding specific implementations within large files.
+
+**Chunking Strategy for Source Code:**
+- Chunk by function/class boundaries (never mid-function)
+- Include the function signature + docstring + body as one chunk
+- Attach metadata: file path, language, exports, imports
+- Overlap: include 2 lines above/below for context
+- Max chunk size: 200 lines (larger functions get sub-chunked by logical block)
+
+**Embedding Considerations:**
+- Code-specific embeddings (CodeBERT, StarCoder embeddings) outperform general text embeddings by 15-30% on code retrieval tasks
+- Hybrid search (keyword + semantic) outperforms either alone
+- Index function signatures separately for fast symbol lookup
+
+#### Dependency-Aware Retrieval
+
+When retrieving a function, also retrieve:
+1. Its type definitions (interfaces, types it uses)
+2. Its direct dependencies (imported functions it calls)
+3. Its tests (to understand expected behavior)
+4. Its callers (to understand usage context)
+
+This &quot;context neighborhood&quot; approach prevents the agent from seeing a function in isolation.
+
+### 4. Knowledge Graph Construction
+
+#### Codebase Graph Schema
+
+```
+Nodes:
+  - File (path, language, size, last_modified)
+  - Function (name, signature, docstring, complexity)
+  - Class (name, methods, properties, inheritance)
+  - Module (name, exports, dependencies)
+  - Test (name, covers, assertions)
+  - Config (type, values, affects)
+
+Edges:
+  - IMPORTS (File → File)
+  - CALLS (Function → Function)
+  - IMPLEMENTS (Class → Interface)
+  - TESTS (Test → Function)
+  - CONFIGURES (Config → Module)
+  - DEPENDS_ON (Module → Module)
+```
+
+#### Graph Queries for Context
+
+| Agent Question | Graph Query | Context Retrieved |
+|---------------|-------------|-------------------|
+| &quot;How does auth work?&quot; | Subgraph around auth module, 2 hops | Auth files + dependencies + tests |
+| &quot;What breaks if I change X?&quot; | Reverse dependency traversal from X | All callers + their tests |
+| &quot;What&#x27;s the API surface?&quot; | All exported functions from API modules | Route handlers + types + middleware |
+| &quot;How is this tested?&quot; | TEST edges from target function | Test files + fixtures + mocks |
+
+### 5. Context Window Optimization Patterns
+
+#### Pattern: Sliding Window with Anchors
+
+For long conversations, maintain fixed &quot;anchor&quot; messages while sliding recent history.
+
+```
+[System Prompt]           ← Fixed anchor (never evicted)
+[Task Definition]         ← Fixed anchor
+[Key Decision #1]         ← Pinned (user marked as important)
+[Key Decision #2]         ← Pinned
+...
+[Turn N-4]                ← Sliding window starts here
+[Turn N-3]
+[Turn N-2]
+[Turn N-1]
+[Current Turn]
+[Output Buffer]           ← Reserved
+```
+
+#### Pattern: Progressive Summarization
+
+When conversation exceeds budget:
+1. Summarize oldest turns into a &quot;conversation summary&quot; block
+2. Keep the summary as a single anchor message
+3. Update summary every N turns
+4. Always keep: first system message, task definition, last 5 turns
+
+#### Pattern: Selective Tool Result Caching
+
+Tool outputs (file reads, search results, command output) consume the most tokens.
+
+```
+Strategy:
+  - Cache tool results keyed by (tool, args, file_hash)
+  - On re-request: serve from cache (0 new tokens)
+  - On file change: invalidate cache for that file
+  - Always truncate: command output &gt; 200 lines → first 50 + last 50
+  - Never cache: error output (always show in full)
+```
+
+### 6. Multi-Agent Context Sharing
+
+When multiple agents collaborate, context synchronization becomes critical.
+
+#### Shared Context Bus
+
+```
+┌──────────┐     ┌──────────────────┐     ┌──────────┐
+│ Agent A   │────▶│  Shared Context   │◀────│ Agent B   │
+│ (Planner) │     │  - Task state     │     │ (Coder)   │
+└──────────┘     │  - Decisions log  │     └──────────┘
+                  │  - File changes   │
+┌──────────┐     │  - Constraints    │     ┌──────────┐
+│ Agent C   │────▶│  - Artifacts      │◀────│ Agent D   │
+│ (Reviewer)│     └──────────────────┘     │ (Tester)  │
+└──────────┘                               └──────────┘
+```
+
+#### Context Handoff Protocol
+
+When Agent A passes work to Agent B:
+1. **State Summary**: What was done, decisions made, current state
+2. **Relevant Artifacts**: Files created/modified, with paths
+3. **Constraints**: What must not be changed, invariants
+4. **Open Questions**: Unresolved decisions that need Agent B&#x27;s input
+5. **Next Steps**: Explicit instructions for what Agent B should do
+
+Anti-pattern: Passing the entire conversation history. Always summarize.
+
+## Workflows
+
+### Workflow 1: Bootstrap Agent Context for a New Codebase
+
+```
+Step 1: Index the codebase
+  - Build file tree with metadata (language, size, last modified)
+  - Extract all exports, imports, and dependency edges
+  - Identify entry points (main files, route handlers, CLI commands)
+
+Step 2: Construct initial knowledge graph
+  - Map module dependencies
+  - Identify architectural layers (API, service, data, config)
+  - Detect frameworks and conventions (naming, structure, patterns)
+
+Step 3: Generate project summary
+  - One paragraph: what this project does
+  - Architecture diagram (text-based)
+  - Key directories and their roles
+  - Critical files (config, entry points, shared types)
+
+Step 4: Configure context tiers
+  - Tier 0: Project summary, CLAUDE.md, active file
+  - Tier 1: Related files within same module
+  - Tier 2: Cross-module dependencies
+  - Tier 3: Documentation and examples
+```
+
+### Workflow 2: Optimize Context for a Specific Task
+
+```
+Step 1: Parse task requirements
+  - Extract entities (files, functions, features mentioned)
+  - Identify task type (bug fix, feature, refactor, review)
+
+Step 2: Retrieve relevant context
+  - File-level: files matching entities
+  - Dependency-level: imports/exports of matched files
+  - Test-level: tests covering matched code
+  - History-level: recent changes to matched files
+
+Step 3: Budget allocation
+  - Calculate total tokens available
+  - Allocate per tier (see Token Budget Framework)
+  - Pack context with greedy relevance
+
+Step 4: Verify coverage
+  - Check: all mentioned files included?
+  - Check: type definitions for used types included?
+  - Check: test examples for expected behavior included?
+  - If gaps: retrieve missing context from lower tiers
+```
+
+### Workflow 3: Session Memory Management
+
+```
+Step 1: During session - capture learnings
+  - New patterns discovered: log to working memory
+  - Corrections received: mark as high-confidence learning
+  - Errors encountered: log with resolution
+
+Step 2: End of session - evaluate learnings
+  - Which learnings are project-specific vs session-specific?
+  - Which patterns recurred during this session?
+  - Which corrections should become rules?
+
+Step 3: Promote valuable learnings
+  - Recurring patterns → CLAUDE.md or .claude/rules/
+  - Project conventions → project documentation
+  - Error resolutions → knowledge base
+
+Step 4: Prune stale memory
+  - Remove learnings about deleted files
+  - Update learnings contradicted by new information
+  - Archive session-specific context
+```
+
+## Anti-Patterns
+
+| Anti-Pattern | Problem | Better Approach |
+|-------------|---------|-----------------|
+| Dumping entire files into context | Wastes tokens on irrelevant code | Retrieve specific functions/sections |
+| No output buffer reservation | Agent output gets truncated | Always reserve 10-15% for output |
+| Static context loading | Same context regardless of task | Dynamic retrieval based on task type |
+| No staleness tracking | Using outdated information | Timestamp and verify before using |
+| Full conversation replay | Older turns crowd out relevant code | Sliding window with summarization |
+| Ignoring import graph | Missing type definitions, broken understanding | Always include direct dependencies |
+
+## Evaluation Metrics
+
+| Metric | Description | Target |
+|--------|-------------|--------|
+| Context Relevance | % of loaded context actually used in response | &gt; 70% |
+| Retrieval Precision | % of retrieved items that are relevant | &gt; 80% |
+| Token Utilization | % of context budget used productively | &gt; 85% |
+| Staleness Rate | % of context items that are outdated | &lt; 5% |
+| Cache Hit Rate | % of tool results served from cache | &gt; 40% |
+| Handoff Completeness | % of required context passed between agents | 100% |
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| **rag-architect** | Use RAG Architect for vector store design; Context Engine for retrieval strategy |
+| **agent-designer** | Agent Designer defines agent roles; Context Engine manages what each agent knows |
+| **self-improving-agent** | Self-Improving Agent promotes learnings; Context Engine decides when/how to load them |
+| **observability-designer** | Monitor context utilization metrics alongside agent performance |
+
+## References
+
+- `references/context-window-strategies.md` - Detailed packing algorithms and benchmarks
+- `references/code-retrieval-patterns.md` - RAG for code: chunking, embedding, and ranking strategies
+- `references/memory-architecture-guide.md` - Multi-layer memory system design patterns
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Agent responses ignore relevant files | Context retrieval missing import graph traversal | Enable dependency-aware retrieval; always include direct imports and type definitions alongside target files |
+| Output truncated mid-response | No output buffer reserved in token budget | Reserve 10-15% of context window for generation; reduce Tier 2/3 content first |
+| Stale context causing hallucinations | Memory layer not tracking file modification timestamps | Implement staleness detection with freshness scores; invalidate cache entries when source files change |
+| RAG retrieval returns irrelevant chunks | Chunking splits functions mid-body or ignores code structure | Switch to AST-aware chunking at function/class boundaries; attach file path and export metadata to each chunk |
+| Context window exceeded on large tasks | Greedy packing loads too many full files | Use adaptive compression: summarize boilerplate, load only signatures for low-priority files, keep high-signal code verbatim |
+| Multi-agent handoff loses critical state | Raw conversation history passed instead of structured summary | Follow the Context Handoff Protocol: pass state summary, artifacts, constraints, open questions, and next steps |
+| Knowledge graph queries return empty results | Graph not rebuilt after major refactors or branch switches | Schedule reindexing on commit hooks or branch checkout; validate node counts after rebuild |
+
+## Success Criteria
+
+- **Context Relevance above 70%**: At least 70% of tokens loaded into the context window are directly referenced or used in the agent&#x27;s response.
+- **Retrieval Precision above 80%**: More than 80% of retrieved code chunks or files are relevant to the current task, measured by human evaluation or downstream task success.
+- **Token Utilization above 85%**: Productive token usage (system instructions + task-relevant code + active conversation) exceeds 85% of the allocated budget, with less than 15% wasted on redundant or low-signal content.
+- **Staleness Rate below 5%**: Fewer than 5% of context items are outdated (file changed since last retrieval without re-verification), validated by comparing loaded content hashes against current file state.
+- **Cache Hit Rate above 40%**: At least 40% of repeated tool invocations (file reads, searches) are served from cache, reducing redundant token consumption and latency.
+- **Handoff Completeness at 100%**: Every multi-agent context handoff includes all five protocol elements (state summary, artifacts, constraints, open questions, next steps) with zero information gaps.
+- **Session Memory Promotion Accuracy above 90%**: Learnings promoted to persistent memory (CLAUDE.md, rules files) are validated as still accurate within 30 days, with fewer than 10% requiring correction or rollback.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Context window token budget planning, allocation strategies, and packing algorithms for AI coding agents.
+- Multi-layer memory architecture design (working memory, session memory, knowledge base) with promotion and staleness protocols.
+- Code-specific retrieval strategies including file-level, chunk-level, and dependency-aware retrieval for RAG pipelines.
+- Knowledge graph construction from codebases and graph-based context queries for agent workflows.
+
+**This skill does NOT cover:**
+- Vector store infrastructure setup, embedding model selection, or database deployment — see **rag-architect** for vector store design and embedding strategies.
+- Agent role definition, personality design, or multi-agent orchestration logic — see **agent-designer** for agent architecture and **agent-workflow-designer** for orchestration patterns.
+- Runtime observability, metrics dashboards, or alerting for agent systems — see **observability-designer** for monitoring and instrumentation.
+- Prompt engineering techniques, chain-of-thought design, or instruction tuning — see **prompt-engineer-toolkit** for prompt construction patterns.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **rag-architect** | Context Engine defines retrieval strategies; RAG Architect implements the vector store and embedding pipeline | Retrieval queries flow from Context Engine to RAG Architect&#x27;s indexed store; ranked results flow back as context chunks |
+| **agent-designer** | Agent Designer defines agent roles and capabilities; Context Engine manages per-agent context budgets and memory layers | Agent specifications define context requirements; Context Engine returns tailored context windows per agent role |
+| **self-improving-agent** | Self-Improving Agent identifies recurring patterns and corrections; Context Engine decides when to promote learnings to persistent memory | Candidate learnings flow from Self-Improving Agent; promotion decisions and memory updates flow back through Context Engine&#x27;s staleness and promotion protocols |
+| **observability-designer** | Observability Designer instruments context utilization metrics (relevance, staleness, cache hits); Context Engine exposes metric endpoints | Raw metric events flow from Context Engine; Observability Designer aggregates into dashboards and alerts |
+| **agent-workflow-designer** | Agent Workflow Designer defines multi-agent handoff sequences; Context Engine implements the shared context bus and handoff protocol | Workflow definitions specify which agents share context; Context Engine manages the context bus, serialization, and handoff payloads |
+| **codebase-onboarding** | Codebase Onboarding generates project summaries and architecture maps; Context Engine consumes these as Tier 0 bootstrap context | Onboarding artifacts (project summary, directory map, entry points) feed into Context Engine&#x27;s initial knowledge graph and context tiers |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Context Engine&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Context Engine&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Context Engine in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Context Engine&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Context Engine&quot;
+4. Description: &quot;Context management engine for AI coding agents. Handles context window optimization, persistent memory across sessions, context retrieval strategies, token budget allocation, and knowledge graph const...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/context-engine/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Context Engine&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Context Engine - AI Agent Context Management
+
+**Tier:** POWERFUL
+**Category:** Engineering
+**Tags:** context management, AI agents, memory systems, RAG, token optimization, knowledge graphs
+
+## Overview
+
+Context Engine provides production-grade patterns for managing what AI agents know, remember, and retrieve. It covers the full lifecycle: ingestion of project knowledge, optimal packing of context windows, persistent memory across sessions, and retrieval-augmented generation for large codebases. The difference between a useful agent and a hallucinating one is context management.
+
+## Core Capabilities
+
+### 1. Context Window Architecture
+
+Every AI agent operates within a finite context window. Mismanaging it is the #1 cause of degraded agent performance.
+
+#### Token Budget Allocation Framework
+
+| Segment | Budget % | Purpose | Priority |
+|---------|----------|---------|----------|
+| System Instructions | 5-10% | Agent identity, rules, constraints | Fixed (always loaded) |
+| Task Context | 20-30% | Current task description, requirements | High (per-request) |
+| Relevant Code | 25-40% | Source files, dependencies, types | Dynamic (retrieved) |
+| Conversation History | 10-20% | Prior turns, decisions made | Sliding window |
+| Tool Results | 5-15% | Command output, search results | Ephemeral |
+| Reserved Buffer | 5-10% | Output generation headroom | Protected |
+
+#### Context Packing Strategies
+
+**Greedy Relevance Packing**
+```
+1. Score all candidate context by relevance to current task
+2. Sort by score descending
+3. Pack until budget exhausted
+4. Always reserve output buffer
+```
+- Pros: Simple, fast, works well for focused tasks
+- Cons: Misses cross-cutting context, no diversity
+
+**Tiered Loading**
+```
+Tier 0 (always loaded): System prompt, project rules, active file
+Tier 1 (task-specific):  Related files, type definitions, tests
+Tier 2 (on-demand):      Documentation, examples, history
+Tier 3 (retrieved):      Search results, RAG chunks
+```
+- Pros: Predictable, debuggable, respects fixed costs
+- Cons: Requires upfront tier classification
+
+**Adaptive Compression**
+```
+1. Load full context for first pass
+2. Identify low-signal sections (boilerplate, repetitive code)
+3. Summarize or truncate low-signal sections
+4. Re-pack with compressed context
+5. Preserve high-signal sections verbatim
+```
+- Pros: Maximizes information density
+- Cons: Risk of losing important details in compression
+
+### 2. Memory Architecture
+
+#### Three-Layer Memory Model
+
+```
+┌─────────────────────────────────────────────────┐
+│  Layer 1: Working Memory (Context Window)        │
+│  Scope: Current conversation/task                │
+│  Lifetime: Single session                        │
+│  Storage: In-context tokens                      │
+│  Update: Every turn                              │
+├─────────────────────────────────────────────────┤
+│  Layer 2: Session Memory (Persistent Store)      │
+│  Scope: Project-level learnings                  │
+│  Lifetime: Across sessions                       │
+│  Storage: MEMORY.md, .claude/rules/, CLAUDE.md   │
+│  Update: End of session or on discovery          │
+├─────────────────────────────────────────────────┤
+│  Layer 3: Knowledge Base (Indexed Corpus)        │
+│  Scope: Full codebase + documentation            │
+│  Lifetime: Persistent, versioned                 │
+│  Storage: Vector store, graph DB, file index     │
+│  Update: On commit / scheduled reindex           │
+└─────────────────────────────────────────────────┘
+```
+
+#### Memory Promotion Protocol
+
+Knowledge flows upward through layers based on recurrence and value:
+
+| Signal | Action | Example |
+|--------|--------|---------|
+| Pattern seen 1x | Working memory only | &quot;This file uses tabs&quot; |
+| Pattern seen 2-3x | Candidate for session memory | &quot;Project uses pnpm everywhere&quot; |
+| Pattern confirmed across sessions | Promote to CLAUDE.md/rules | &quot;Always use pnpm, never npm&quot; |
+| Pattern is domain knowledge | Add to knowledge base | &quot;Auth flow uses JWT + refresh tokens&quot; |
+
+#### Staleness Detection
+
+Context has a shelf life. Stale context causes hallucinations.
+
+```
+Freshness Score = f(last_verified, change_frequency, confidence)
+
+Fresh   (&lt; 7 days, file unchanged):  Use directly
+Aging   (7-30 days, file changed):   Re-verify before using
+Stale   (&gt; 30 days):                 Flag, re-retrieve, or discard
+Unknown (never verified):            Treat as low-confidence
+```
+
+### 3. Retrieval Strategies for Code
+
+#### File-Level Retrieval
+
+Best for: navigating to the right file when the agent knows what it needs.
+
+```
+Query: &quot;authentication middleware&quot;
+Strategy:
+  1. Filename pattern match: *auth*, *middleware*
+  2. Import graph: files that import auth modules
+  3. Symbol search: exported functions matching auth*
+  4. Content search: files containing auth-related patterns
+  5. Rank by: recency of edit + import centrality + name match
+```
+
+#### Chunk-Level Retrieval (RAG for Code)
+
+Best for: finding specific implementations within large files.
+
+**Chunking Strategy for Source Code:**
+- Chunk by function/class boundaries (never mid-function)
+- Include the function signature + docstring + body as one chunk
+- Attach metadata: file path, language, exports, imports
+- Overlap: include 2 lines above/below for context
+- Max chunk size: 200 lines (larger functions get sub-chunked by logical block)
+
+**Embedding Considerations:**
+- Code-specific embeddings (CodeBERT, StarCoder embeddings) outperform general text embeddings by 15-30% on code retrieval tasks
+- Hybrid search (keyword + semantic) outperforms either alone
+- Index function signatures separately for fast symbol lookup
+
+#### Dependency-Aware Retrieval
+
+When retrieving a function, also retrieve:
+1. Its type definitions (interfaces, types it uses)
+2. Its direct dependencies (imported functions it calls)
+3. Its tests (to understand expected behavior)
+4. Its callers (to understand usage context)
+
+This &quot;context neighborhood&quot; approach prevents the agent from seeing a function in isolation.
+
+### 4. Knowledge Graph Construction
+
+#### Codebase Graph Schema
+
+```
+Nodes:
+  - File (path, language, size, last_modified)
+  - Function (name, signature, docstring, complexity)
+  - Class (name, methods, properties, inheritance)
+  - Module (name, exports, dependencies)
+  - Test (name, covers, assertions)
+  - Config (type, values, affects)
+
+Edges:
+  - IMPORTS (File → File)
+  - CALLS (Function → Function)
+  - IMPLEMENTS (Class → Interface)
+  - TESTS (Test → Function)
+  - CONFIGURES (Config → Module)
+  - DEPENDS_ON (Module → Module)
+```
+
+#### Graph Queries for Context
+
+| Agent Question | Graph Query | Context Retrieved |
+|---------------|-------------|-------------------|
+| &quot;How does auth work?&quot; | Subgraph around auth module, 2 hops | Auth files + dependencies + tests |
+| &quot;What breaks if I change X?&quot; | Reverse dependency traversal from X | All callers + their tests |
+| &quot;What&#x27;s the API surface?&quot; | All exported functions from API modules | Route handlers + types + middleware |
+| &quot;How is this tested?&quot; | TEST edges from target function | Test files + fixtures + mocks |
+
+### 5. Context Window Optimization Patterns
+
+#### Pattern: Sliding Window with Anchors
+
+For long conversations, maintain fixed &quot;anchor&quot; messages while sliding recent history.
+
+```
+[System Prompt]           ← Fixed anchor (never evicted)
+[Task Definition]         ← Fixed anchor
+[Key Decision #1]         ← Pinned (user marked as important)
+[Key Decision #2]         ← Pinned
+...
+[Turn N-4]                ← Sliding window starts here
+[Turn N-3]
+[Turn N-2]
+[Turn N-1]
+[Current Turn]
+[Output Buffer]           ← Reserved
+```
+
+#### Pattern: Progressive Summarization
+
+When conversation exceeds budget:
+1. Summarize oldest turns into a &quot;conversation summary&quot; block
+2. Keep the summary as a single anchor message
+3. Update summary every N turns
+4. Always keep: first system message, task definition, last 5 turns
+
+#### Pattern: Selective Tool Result Caching
+
+Tool outputs (file reads, search results, command output) consume the most tokens.
+
+```
+Strategy:
+  - Cache tool results keyed by (tool, args, file_hash)
+  - On re-request: serve from cache (0 new tokens)
+  - On file change: invalidate cache for that file
+  - Always truncate: command output &gt; 200 lines → first 50 + last 50
+  - Never cache: error output (always show in full)
+```
+
+### 6. Multi-Agent Context Sharing
+
+When multiple agents collaborate, context synchronization becomes critical.
+
+#### Shared Context Bus
+
+```
+┌──────────┐     ┌──────────────────┐     ┌──────────┐
+│ Agent A   │────▶│  Shared Context   │◀────│ Agent B   │
+│ (Planner) │     │  - Task state     │     │ (Coder)   │
+└──────────┘     │  - Decisions log  │     └──────────┘
+                  │  - File changes   │
+┌──────────┐     │  - Constraints    │     ┌──────────┐
+│ Agent C   │────▶│  - Artifacts      │◀────│ Agent D   │
+│ (Reviewer)│     └──────────────────┘     │ (Tester)  │
+└──────────┘                               └──────────┘
+```
+
+#### Context Handoff Protocol
+
+When Agent A passes work to Agent B:
+1. **State Summary**: What was done, decisions made, current state
+2. **Relevant Artifacts**: Files created/modified, with paths
+3. **Constraints**: What must not be changed, invariants
+4. **Open Questions**: Unresolved decisions that need Agent B&#x27;s input
+5. **Next Steps**: Explicit instructions for what Agent B should do
+
+Anti-pattern: Passing the entire conversation history. Always summarize.
+
+## Workflows
+
+### Workflow 1: Bootstrap Agent Context for a New Codebase
+
+```
+Step 1: Index the codebase
+  - Build file tree with metadata (language, size, last modified)
+  - Extract all exports, imports, and dependency edges
+  - Identify entry points (main files, route handlers, CLI commands)
+
+Step 2: Construct initial knowledge graph
+  - Map module dependencies
+  - Identify architectural layers (API, service, data, config)
+  - Detect frameworks and conventions (naming, structure, patterns)
+
+Step 3: Generate project summary
+  - One paragraph: what this project does
+  - Architecture diagram (text-based)
+  - Key directories and their roles
+  - Critical files (config, entry points, shared types)
+
+Step 4: Configure context tiers
+  - Tier 0: Project summary, CLAUDE.md, active file
+  - Tier 1: Related files within same module
+  - Tier 2: Cross-module dependencies
+  - Tier 3: Documentation and examples
+```
+
+### Workflow 2: Optimize Context for a Specific Task
+
+```
+Step 1: Parse task requirements
+  - Extract entities (files, functions, features mentioned)
+  - Identify task type (bug fix, feature, refactor, review)
+
+Step 2: Retrieve relevant context
+  - File-level: files matching entities
+  - Dependency-level: imports/exports of matched files
+  - Test-level: tests covering matched code
+  - History-level: recent changes to matched files
+
+Step 3: Budget allocation
+  - Calculate total tokens available
+  - Allocate per tier (see Token Budget Framework)
+  - Pack context with greedy relevance
+
+Step 4: Verify coverage
+  - Check: all mentioned files included?
+  - Check: type definitions for used types included?
+  - Check: test examples for expected behavior included?
+  - If gaps: retrieve missing context from lower tiers
+```
+
+### Workflow 3: Session Memory Management
+
+```
+Step 1: During session - capture learnings
+  - New patterns discovered: log to working memory
+  - Corrections received: mark as high-confidence learning
+  - Errors encountered: log with resolution
+
+Step 2: End of session - evaluate learnings
+  - Which learnings are project-specific vs session-specific?
+  - Which patterns recurred during this session?
+  - Which corrections should become rules?
+
+Step 3: Promote valuable learnings
+  - Recurring patterns → CLAUDE.md or .claude/rules/
+  - Project conventions → project documentation
+  - Error resolutions → knowledge base
+
+Step 4: Prune stale memory
+  - Remove learnings about deleted files
+  - Update learnings contradicted by new information
+  - Archive session-specific context
+```
+
+## Anti-Patterns
+
+| Anti-Pattern | Problem | Better Approach |
+|-------------|---------|-----------------|
+| Dumping entire files into context | Wastes tokens on irrelevant code | Retrieve specific functions/sections |
+| No output buffer reservation | Agent output gets truncated | Always reserve 10-15% for output |
+| Static context loading | Same context regardless of task | Dynamic retrieval based on task type |
+| No staleness tracking | Using outdated information | Timestamp and verify before using |
+| Full conversation replay | Older turns crowd out relevant code | Sliding window with summarization |
+| Ignoring import graph | Missing type definitions, broken understanding | Always include direct dependencies |
+
+## Evaluation Metrics
+
+| Metric | Description | Target |
+|--------|-------------|--------|
+| Context Relevance | % of loaded context actually used in response | &gt; 70% |
+| Retrieval Precision | % of retrieved items that are relevant | &gt; 80% |
+| Token Utilization | % of context budget used productively | &gt; 85% |
+| Staleness Rate | % of context items that are outdated | &lt; 5% |
+| Cache Hit Rate | % of tool results served from cache | &gt; 40% |
+| Handoff Completeness | % of required context passed between agents | 100% |
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| **rag-architect** | Use RAG Architect for vector store design; Context Engine for retrieval strategy |
+| **agent-designer** | Agent Designer defines agent roles; Context Engine manages what each agent knows |
+| **self-improving-agent** | Self-Improving Agent promotes learnings; Context Engine decides when/how to load them |
+| **observability-designer** | Monitor context utilization metrics alongside agent performance |
+
+## References
+
+- `references/context-window-strategies.md` - Detailed packing algorithms and benchmarks
+- `references/code-retrieval-patterns.md` - RAG for code: chunking, embedding, and ranking strategies
+- `references/memory-architecture-guide.md` - Multi-layer memory system design patterns
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Agent responses ignore relevant files | Context retrieval missing import graph traversal | Enable dependency-aware retrieval; always include direct imports and type definitions alongside target files |
+| Output truncated mid-response | No output buffer reserved in token budget | Reserve 10-15% of context window for generation; reduce Tier 2/3 content first |
+| Stale context causing hallucinations | Memory layer not tracking file modification timestamps | Implement staleness detection with freshness scores; invalidate cache entries when source files change |
+| RAG retrieval returns irrelevant chunks | Chunking splits functions mid-body or ignores code structure | Switch to AST-aware chunking at function/class boundaries; attach file path and export metadata to each chunk |
+| Context window exceeded on large tasks | Greedy packing loads too many full files | Use adaptive compression: summarize boilerplate, load only signatures for low-priority files, keep high-signal code verbatim |
+| Multi-agent handoff loses critical state | Raw conversation history passed instead of structured summary | Follow the Context Handoff Protocol: pass state summary, artifacts, constraints, open questions, and next steps |
+| Knowledge graph queries return empty results | Graph not rebuilt after major refactors or branch switches | Schedule reindexing on commit hooks or branch checkout; validate node counts after rebuild |
+
+## Success Criteria
+
+- **Context Relevance above 70%**: At least 70% of tokens loaded into the context window are directly referenced or used in the agent&#x27;s response.
+- **Retrieval Precision above 80%**: More than 80% of retrieved code chunks or files are relevant to the current task, measured by human evaluation or downstream task success.
+- **Token Utilization above 85%**: Productive token usage (system instructions + task-relevant code + active conversation) exceeds 85% of the allocated budget, with less than 15% wasted on redundant or low-signal content.
+- **Staleness Rate below 5%**: Fewer than 5% of context items are outdated (file changed since last retrieval without re-verification), validated by comparing loaded content hashes against current file state.
+- **Cache Hit Rate above 40%**: At least 40% of repeated tool invocations (file reads, searches) are served from cache, reducing redundant token consumption and latency.
+- **Handoff Completeness at 100%**: Every multi-agent context handoff includes all five protocol elements (state summary, artifacts, constraints, open questions, next steps) with zero information gaps.
+- **Session Memory Promotion Accuracy above 90%**: Learnings promoted to persistent memory (CLAUDE.md, rules files) are validated as still accurate within 30 days, with fewer than 10% requiring correction or rollback.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Context window token budget planning, allocation strategies, and packing algorithms for AI coding agents.
+- Multi-layer memory architecture design (working memory, session memory, knowledge base) with promotion and staleness protocols.
+- Code-specific retrieval strategies including file-level, chunk-level, and dependency-aware retrieval for RAG pipelines.
+- Knowledge graph construction from codebases and graph-based context queries for agent workflows.
+
+**This skill does NOT cover:**
+- Vector store infrastructure setup, embedding model selection, or database deployment — see **rag-architect** for vector store design and embedding strategies.
+- Agent role definition, personality design, or multi-agent orchestration logic — see **agent-designer** for agent architecture and **agent-workflow-designer** for orchestration patterns.
+- Runtime observability, metrics dashboards, or alerting for agent systems — see **observability-designer** for monitoring and instrumentation.
+- Prompt engineering techniques, chain-of-thought design, or instruction tuning — see **prompt-engineer-toolkit** for prompt construction patterns.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **rag-architect** | Context Engine defines retrieval strategies; RAG Architect implements the vector store and embedding pipeline | Retrieval queries flow from Context Engine to RAG Architect&#x27;s indexed store; ranked results flow back as context chunks |
+| **agent-designer** | Agent Designer defines agent roles and capabilities; Context Engine manages per-agent context budgets and memory layers | Agent specifications define context requirements; Context Engine returns tailored context windows per agent role |
+| **self-improving-agent** | Self-Improving Agent identifies recurring patterns and corrections; Context Engine decides when to promote learnings to persistent memory | Candidate learnings flow from Self-Improving Agent; promotion decisions and memory updates flow back through Context Engine&#x27;s staleness and promotion protocols |
+| **observability-designer** | Observability Designer instruments context utilization metrics (relevance, staleness, cache hits); Context Engine exposes metric endpoints | Raw metric events flow from Context Engine; Observability Designer aggregates into dashboards and alerts |
+| **agent-workflow-designer** | Agent Workflow Designer defines multi-agent handoff sequences; Context Engine implements the shared context bus and handoff protocol | Workflow definitions specify which agents share context; Context Engine manages the context bus, serialization, and handoff payloads |
+| **codebase-onboarding** | Codebase Onboarding generates project summaries and architecture maps; Context Engine consumes these as Tier 0 bootstrap context | Onboarding artifacts (project summary, directory map, entry points) feed into Context Engine&#x27;s initial knowledge graph and context tiers |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Context Engine&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Context Engine&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Context Engine in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Context Engine&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Context Engine&quot;
+4. Description: &quot;Context management engine for AI coding agents. Handles context window optimization, persistent memory across sessions, context retrieval strategies, token budget allocation, and knowledge graph const...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/context-engine/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

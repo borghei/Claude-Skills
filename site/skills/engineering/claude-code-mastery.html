@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Claude Code Mastery (Engineering domain).
 
 Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, subagent creation, hooks automation, and context engineering. claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks,
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/claude-code-mastery
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Claude Code Mastery (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Claude Code Mastery (Engineering domain).
 
 Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, subagent creation, hooks automation, and context engineering. claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks,
 
@@ -431,7 +453,888 @@ https://github.com/borghei/Claude-Skills/tree/main/claude-code-mastery
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Claude Code Mastery&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Claude Code Mastery
+
+Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring,
+subagent creation, hooks automation, and context engineering.
+
+## Keywords
+
+claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks,
+context-window, token-budget, MCP-servers, worktrees, permission-modes,
+prompt-engineering, context-engineering, slash-commands
+
+---
+
+## Quick Start
+
+```bash
+# Scaffold a new skill package
+python scripts/skill_scaffolder.py my-new-skill --domain engineering --description &quot;Brief description&quot;
+
+# Analyze and optimize an existing CLAUDE.md
+python scripts/claudemd_optimizer.py path/to/CLAUDE.md
+
+# Estimate context window usage across a project
+python scripts/context_analyzer.py /path/to/project
+
+# All tools support JSON output
+python scripts/claudemd_optimizer.py CLAUDE.md --json
+```
+
+---
+
+## Tools
+
+### Skill Scaffolder
+
+Generates a skill directory with SKILL.md template, scripts/, references/,
+assets/ directories, and YAML frontmatter.
+
+```bash
+python scripts/skill_scaffolder.py my-skill --domain engineering --description &quot;Does X&quot;
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `skill_name` | Name for the skill (kebab-case) |
+| `--domain, -d` | Domain category |
+| `--description` | Brief description for frontmatter |
+| `--version` | Semantic version (default: 1.0.0) |
+| `--license` | License type (default: MIT) |
+| `--output, -o` | Parent directory for skill folder |
+| `--json` | Output as JSON |
+
+### CLAUDE.md Optimizer
+
+Analyzes a CLAUDE.md file and produces optimization recommendations.
+
+```bash
+python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000 --json
+```
+
+**Output includes:** line count, token estimate, section completeness,
+redundancy detection, missing sections, scored recommendations.
+
+### Context Analyzer
+
+Scans a project to estimate context window consumption by file category.
+
+```bash
+python scripts/context_analyzer.py /path/to/project --max-depth 4 --json
+```
+
+**Output includes:** token estimates per category, percentage of context
+consumed, largest files, budget breakdown, reduction recommendations.
+
+---
+
+## Workflow 1: Optimize a CLAUDE.md
+
+1. **Audit** -- Run `python scripts/claudemd_optimizer.py CLAUDE.md` and capture the score.
+2. **Structure** -- Reorganize into these sections:
+   ```markdown
+   ## Project Purpose         -- What the project is
+   ## Architecture Overview   -- Directory structure, key patterns
+   ## Development Environment -- Build, test, setup commands
+   ## Key Principles          -- 3-7 non-obvious rules
+   ## Anti-Patterns to Avoid  -- Things that look right but are wrong
+   ## Git Workflow            -- Branch strategy, commit conventions
+   ```
+3. **Compress** -- Convert paragraphs to bullets (saves ~30% tokens). Use code blocks for commands. Remove generic advice Claude already knows.
+4. **Hierarchize** -- Move domain details to child CLAUDE.md files:
+   ```
+   project/
+   ├── CLAUDE.md              # Global: purpose, architecture, principles
+   ├── frontend/CLAUDE.md     # Frontend-specific: React patterns, styling
+   ├── backend/CLAUDE.md      # Backend-specific: API patterns, DB conventions
+   └── .claude/CLAUDE.md      # User-specific overrides (gitignored)
+   ```
+5. **Validate** -- Run `python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000` and confirm score improved.
+
+## Workflow 2: Author a New Skill
+
+1. **Scaffold** -- `python scripts/skill_scaffolder.py my-skill -d engineering --description &quot;...&quot;`
+2. **Write SKILL.md** in this order:
+   - YAML frontmatter (name, description with trigger phrases, license, metadata)
+   - Title and one-line summary
+   - Quick Start (3-5 copy-pasteable commands)
+   - Tools (each script with usage and parameters table)
+   - Workflows (numbered step-by-step sequences)
+   - Reference links
+3. **Optimize the description** for auto-discovery:
+   ```yaml
+   description: &gt;-
+     This skill should be used when the user asks to &quot;analyze performance&quot;,
+     &quot;optimize queries&quot;, &quot;profile memory&quot;, or &quot;benchmark endpoints&quot;.
+     Use for performance engineering and capacity planning.
+   ```
+4. **Build Python tools** -- standard library only, argparse CLI, `--json` flag, module docstring, error handling.
+5. **Verify** -- Confirm the skill triggers on expected prompts and tools run without errors.
+
+## Workflow 3: Create a Subagent
+
+1. **Define scope** -- One narrow responsibility per agent.
+2. **Create agent YAML** at `.claude/agents/agent-name.yaml`:
+   ```yaml
+   name: security-reviewer
+   description: Reviews code for security vulnerabilities
+   model: claude-sonnet-4-20250514
+   allowed-tools:
+     - Read
+     - Glob
+     - Grep
+     - Bash(git diff*)
+   custom-instructions: |
+     For every change:
+     1. Check for hardcoded secrets
+     2. Identify injection vulnerabilities
+     3. Verify auth patterns
+     4. Flag insecure dependencies
+     Output a structured report with severity levels.
+   ```
+3. **Set tool access** -- read-only (`Read, Glob, Grep`), read+commands (`+ Bash(npm test*)`), or write-capable (`+ Edit, Write`).
+4. **Invoke** -- `/agents/security-reviewer Review the last 3 commits`
+5. **Validate** -- Confirm the agent stays within scope and produces structured output.
+
+## Workflow 4: Configure Hooks
+
+Hooks run custom scripts at lifecycle events without user approval.
+
+| Hook | Fires When | Blocking |
+|------|-----------|----------|
+| `PreToolUse` | Before tool executes | Yes (exit 1 blocks) |
+| `PostToolUse` | After tool completes | No |
+| `Notification` | Claude sends notification | No |
+| `Stop` | Claude finishes turn | No |
+
+1. **Add hook config** to `.claude/settings.json`:
+   ```json
+   {
+     &quot;hooks&quot;: {
+       &quot;PostToolUse&quot;: [
+         {
+           &quot;matcher&quot;: &quot;Edit|Write&quot;,
+           &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;prettier --write \&quot;$CLAUDE_FILE_PATH\&quot; 2&gt;/dev/null || true&quot; }]
+         }
+       ],
+       &quot;PreToolUse&quot;: [
+         {
+           &quot;matcher&quot;: &quot;Bash&quot;,
+           &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash .claude/hooks/validate.sh&quot; }]
+         }
+       ]
+     }
+   }
+   ```
+2. **Test** -- Trigger the relevant tool and confirm the hook fires.
+3. **Iterate** -- Add matchers for additional tools as needed.
+
+## Workflow 5: Manage Context Budget
+
+1. **Audit** -- `python scripts/context_analyzer.py /path/to/project`
+2. **Apply budget targets:**
+   | Category | Budget | Purpose |
+   |----------|--------|---------|
+   | System prompt + CLAUDE.md | 5-10% | Project configuration |
+   | Skill definitions | 5-15% | Active skill content |
+   | Source code (read files) | 30-50% | Files Claude reads |
+   | Conversation history | 20-30% | Messages and responses |
+   | Working memory | 10-20% | Reasoning space |
+3. **Reduce overhead** -- Keep root CLAUDE.md under 4000 tokens. Use hierarchical loading. Avoid reading entire large files. Use `/compact` after completing subtasks.
+4. **Validate** -- Re-run context analyzer and confirm overhead dropped.
+
+---
+
+## Quick Reference
+
+### Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/compact` | Summarize conversation to free context |
+| `/clear` | Clear conversation history |
+| `/model` | Switch model mid-session |
+| `/agents` | List and invoke custom agents |
+| `/permissions` | View and modify tool permissions |
+| `/cost` | Show token usage and cost |
+| `/doctor` | Diagnose configuration issues |
+| `/init` | Generate CLAUDE.md for current project |
+
+### Permission Modes
+
+| Mode | Behavior | Best For |
+|------|----------|----------|
+| Default | Asks permission for writes | Normal development |
+| Allowlist | Auto-approves listed tools | Repetitive workflows |
+| Yolo | Auto-approves everything | Trusted automation |
+
+```json
+{ &quot;permissions&quot;: { &quot;allow&quot;: [&quot;Read&quot;, &quot;Glob&quot;, &quot;Grep&quot;, &quot;Bash(npm test*)&quot;],
+                    &quot;deny&quot;: [&quot;Bash(rm -rf*)&quot;, &quot;Bash(git push*)&quot;] } }
+```
+
+### CLAUDE.md Loading Order
+
+1. `~/.claude/CLAUDE.md` -- user global, always loaded
+2. `/project/CLAUDE.md` -- project root, always loaded
+3. `/project/.claude/CLAUDE.md` -- project config, always loaded
+4. `/project/subdir/CLAUDE.md` -- subdirectory, loaded when files accessed
+
+### MCP Servers
+
+| Server | Purpose |
+|--------|---------|
+| `server-filesystem` | File access beyond project |
+| `server-github` | GitHub API (issues, PRs) |
+| `server-postgres` | Database queries |
+| `server-memory` | Persistent key-value store |
+| `server-brave-search` | Web search |
+| `server-puppeteer` | Browser automation |
+
+---
+
+## Reference Documentation
+
+| Document | Path |
+|----------|------|
+| Skill Authoring Guide | [references/skill-authoring-guide.md](references/skill-authoring-guide.md) |
+| Subagent Patterns | [references/subagent-patterns.md](references/subagent-patterns.md) |
+| Hooks Cookbook | [references/hooks-cookbook.md](references/hooks-cookbook.md) |
+| Skill Template | [assets/skill-template.md](assets/skill-template.md) |
+| Agent Template | [assets/agent-template.md](assets/agent-template.md) |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| CLAUDE.md changes not picked up | Claude loads CLAUDE.md at session start | Start a new conversation or use `/clear` to reload configuration |
+| Skill not triggering on expected prompts | Description field in YAML frontmatter missing trigger phrases | Add quoted user phrases to the `description` field (e.g., `&quot;optimize queries&quot;`, `&quot;profile memory&quot;`) |
+| Context window exhausted mid-task | Root CLAUDE.md too large or too many files read | Run `context_analyzer.py` to audit token usage, then move domain content to child CLAUDE.md files |
+| Hook not firing after tool use | Matcher in `.claude/settings.json` does not match the tool name | Verify the `matcher` regex matches the exact tool name (e.g., `Edit\|Write`, not `edit\|write`) |
+| Subagent exceeds scope and edits unrelated files | `allowed-tools` list is too permissive | Restrict to read-only tools (`Read, Glob, Grep`) and add write tools only when necessary |
+| Scaffolder fails with &quot;Directory already exists&quot; | Target skill directory already present on disk | Remove or rename the existing directory, or choose a different skill name |
+| Optimizer reports low score despite good structure | Token count exceeds the default 6000 limit | Pass `--token-limit` matching your actual budget (e.g., `--token-limit 10000`) |
+
+## Success Criteria
+
+- CLAUDE.md optimizer score of 80+ on all project CLAUDE.md files
+- Root CLAUDE.md stays under 4000 tokens (verified by `claudemd_optimizer.py --token-limit 4000`)
+- Auto-loaded configuration (all CLAUDE.md files combined) consumes less than 10% of the context window
+- Every new skill scaffolded passes the optimizer with zero &quot;critical&quot; missing sections
+- Subagents stay within their declared `allowed-tools` scope during testing
+- Hooks execute in under 500ms to avoid perceptible delay on tool use
+- Context analyzer shows 50%+ of the context window available for source code and reasoning
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+
+- Authoring, structuring, and optimizing CLAUDE.md files for any project
+- Scaffolding new skill packages with correct directory layout and frontmatter
+- Creating and configuring Claude Code subagents with scoped tool access
+- Analyzing and managing context window token budgets across a codebase
+
+**This skill does NOT cover:**
+
+- Writing application source code or implementing business logic (see [senior-fullstack](../senior-fullstack/SKILL.md), [senior-backend](../senior-backend/SKILL.md))
+- MCP server development or custom transport protocols (see [mcp-server-builder](../../engineering/mcp-server-builder/SKILL.md))
+- Advanced prompt engineering techniques for LLM applications (see [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md))
+- CI/CD pipeline configuration or deployment automation (see [senior-devops](../senior-devops/SKILL.md), [ci-cd-pipeline-builder](../../engineering/ci-cd-pipeline-builder/SKILL.md))
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
+| [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
+| [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
+
+## Tool Reference
+
+### 1. Skill Scaffolder (`scripts/skill_scaffolder.py`)
+
+**Purpose:** Generate a complete skill package directory with SKILL.md template, starter Python script, reference document, and proper YAML frontmatter.
+
+**Usage:**
+
+```bash
+python scripts/skill_scaffolder.py &lt;skill_name&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skill_name` | positional | Yes | -- | Name for the skill in kebab-case (e.g., `my-new-skill`) |
+| `--domain, -d` | string | No | `engineering` | Domain category. Options: `engineering`, `marketing`, `product`, `project-management`, `c-level`, `ra-qm`, `business-growth`, `finance`, `standards`, `development-tools` |
+| `--description` | string | No | auto-generated | Brief description for YAML frontmatter, optimized for auto-discovery |
+| `--version` | string | No | `1.0.0` | Semantic version for metadata |
+| `--license` | string | No | `MIT` | License type for frontmatter |
+| `--category` | string | No | same as domain | Skill category for metadata |
+| `--output, -o` | string | No | `.` (current dir) | Parent directory for the skill folder |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/skill_scaffolder.py api-analyzer -d engineering --description &quot;API analysis and optimization&quot; --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints skill name, domain, version, location, directory tree, and next-steps checklist.
+- **JSON (`--json`):** Returns `{ success, path, name, domain, version, directories_created, files_created }`.
+
+---
+
+### 2. CLAUDE.md Optimizer (`scripts/claudemd_optimizer.py`)
+
+**Purpose:** Analyze a CLAUDE.md file for structure completeness, token efficiency, redundancy, and verbosity. Produces a scored report with prioritized optimization recommendations.
+
+**Usage:**
+
+```bash
+python scripts/claudemd_optimizer.py &lt;file_path&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `file_path` | positional | Yes | -- | Path to the CLAUDE.md file to analyze |
+| `--token-limit` | integer | No | `6000` | Maximum recommended token count for the file |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/claudemd_optimizer.py path/to/CLAUDE.md --token-limit 4000
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays score (0-100), file metrics (lines, words, tokens), section breakdown with per-section token estimates, section completeness checklist (critical/high/medium), redundancy issues, and prioritized recommendations (HIGH/MEDIUM/LOW).
+- **JSON (`--json`):** Returns `{ success, file, metrics, sections, completeness, redundancies, recommendations, score }`.
+
+---
+
+### 3. Context Analyzer (`scripts/context_analyzer.py`)
+
+**Purpose:** Scan a project directory to estimate how much of Claude Code&#x27;s context window is consumed by CLAUDE.md files, skill definitions, source code, and configuration. Produces a token budget breakdown with reduction recommendations.
+
+**Usage:**
+
+```bash
+python scripts/context_analyzer.py &lt;project_path&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `project_path` | positional | Yes | -- | Path to the project directory to analyze |
+| `--max-depth` | integer | No | `5` | Maximum directory traversal depth |
+| `--context-window` | integer | No | `200000` | Total context window size in tokens |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/context_analyzer.py /path/to/project --max-depth 3 --context-window 200000 --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays project summary (files scanned, total tokens, auto-loaded tokens), context budget breakdown with visual bar chart, per-category breakdown (Claude Configuration, Skill Definitions, Reference Documents, Source Code, Config &amp; Build, Documentation) with largest files listed, top 20 largest files, and prioritized recommendations.
+- **JSON (`--json`):** Returns `{ success, project_path, context_window, summary, categories, budget, largest_files, recommendations }`.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Claude Code Mastery&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Claude Code Mastery&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Claude Code Mastery in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Claude Code Mastery&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Claude Code Mastery&quot;
+4. Description: &quot;&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/claude-code-mastery/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Claude Code Mastery&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Claude Code Mastery
+
+Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring,
+subagent creation, hooks automation, and context engineering.
+
+## Keywords
+
+claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks,
+context-window, token-budget, MCP-servers, worktrees, permission-modes,
+prompt-engineering, context-engineering, slash-commands
+
+---
+
+## Quick Start
+
+```bash
+# Scaffold a new skill package
+python scripts/skill_scaffolder.py my-new-skill --domain engineering --description &quot;Brief description&quot;
+
+# Analyze and optimize an existing CLAUDE.md
+python scripts/claudemd_optimizer.py path/to/CLAUDE.md
+
+# Estimate context window usage across a project
+python scripts/context_analyzer.py /path/to/project
+
+# All tools support JSON output
+python scripts/claudemd_optimizer.py CLAUDE.md --json
+```
+
+---
+
+## Tools
+
+### Skill Scaffolder
+
+Generates a skill directory with SKILL.md template, scripts/, references/,
+assets/ directories, and YAML frontmatter.
+
+```bash
+python scripts/skill_scaffolder.py my-skill --domain engineering --description &quot;Does X&quot;
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `skill_name` | Name for the skill (kebab-case) |
+| `--domain, -d` | Domain category |
+| `--description` | Brief description for frontmatter |
+| `--version` | Semantic version (default: 1.0.0) |
+| `--license` | License type (default: MIT) |
+| `--output, -o` | Parent directory for skill folder |
+| `--json` | Output as JSON |
+
+### CLAUDE.md Optimizer
+
+Analyzes a CLAUDE.md file and produces optimization recommendations.
+
+```bash
+python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000 --json
+```
+
+**Output includes:** line count, token estimate, section completeness,
+redundancy detection, missing sections, scored recommendations.
+
+### Context Analyzer
+
+Scans a project to estimate context window consumption by file category.
+
+```bash
+python scripts/context_analyzer.py /path/to/project --max-depth 4 --json
+```
+
+**Output includes:** token estimates per category, percentage of context
+consumed, largest files, budget breakdown, reduction recommendations.
+
+---
+
+## Workflow 1: Optimize a CLAUDE.md
+
+1. **Audit** -- Run `python scripts/claudemd_optimizer.py CLAUDE.md` and capture the score.
+2. **Structure** -- Reorganize into these sections:
+   ```markdown
+   ## Project Purpose         -- What the project is
+   ## Architecture Overview   -- Directory structure, key patterns
+   ## Development Environment -- Build, test, setup commands
+   ## Key Principles          -- 3-7 non-obvious rules
+   ## Anti-Patterns to Avoid  -- Things that look right but are wrong
+   ## Git Workflow            -- Branch strategy, commit conventions
+   ```
+3. **Compress** -- Convert paragraphs to bullets (saves ~30% tokens). Use code blocks for commands. Remove generic advice Claude already knows.
+4. **Hierarchize** -- Move domain details to child CLAUDE.md files:
+   ```
+   project/
+   ├── CLAUDE.md              # Global: purpose, architecture, principles
+   ├── frontend/CLAUDE.md     # Frontend-specific: React patterns, styling
+   ├── backend/CLAUDE.md      # Backend-specific: API patterns, DB conventions
+   └── .claude/CLAUDE.md      # User-specific overrides (gitignored)
+   ```
+5. **Validate** -- Run `python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000` and confirm score improved.
+
+## Workflow 2: Author a New Skill
+
+1. **Scaffold** -- `python scripts/skill_scaffolder.py my-skill -d engineering --description &quot;...&quot;`
+2. **Write SKILL.md** in this order:
+   - YAML frontmatter (name, description with trigger phrases, license, metadata)
+   - Title and one-line summary
+   - Quick Start (3-5 copy-pasteable commands)
+   - Tools (each script with usage and parameters table)
+   - Workflows (numbered step-by-step sequences)
+   - Reference links
+3. **Optimize the description** for auto-discovery:
+   ```yaml
+   description: &gt;-
+     This skill should be used when the user asks to &quot;analyze performance&quot;,
+     &quot;optimize queries&quot;, &quot;profile memory&quot;, or &quot;benchmark endpoints&quot;.
+     Use for performance engineering and capacity planning.
+   ```
+4. **Build Python tools** -- standard library only, argparse CLI, `--json` flag, module docstring, error handling.
+5. **Verify** -- Confirm the skill triggers on expected prompts and tools run without errors.
+
+## Workflow 3: Create a Subagent
+
+1. **Define scope** -- One narrow responsibility per agent.
+2. **Create agent YAML** at `.claude/agents/agent-name.yaml`:
+   ```yaml
+   name: security-reviewer
+   description: Reviews code for security vulnerabilities
+   model: claude-sonnet-4-20250514
+   allowed-tools:
+     - Read
+     - Glob
+     - Grep
+     - Bash(git diff*)
+   custom-instructions: |
+     For every change:
+     1. Check for hardcoded secrets
+     2. Identify injection vulnerabilities
+     3. Verify auth patterns
+     4. Flag insecure dependencies
+     Output a structured report with severity levels.
+   ```
+3. **Set tool access** -- read-only (`Read, Glob, Grep`), read+commands (`+ Bash(npm test*)`), or write-capable (`+ Edit, Write`).
+4. **Invoke** -- `/agents/security-reviewer Review the last 3 commits`
+5. **Validate** -- Confirm the agent stays within scope and produces structured output.
+
+## Workflow 4: Configure Hooks
+
+Hooks run custom scripts at lifecycle events without user approval.
+
+| Hook | Fires When | Blocking |
+|------|-----------|----------|
+| `PreToolUse` | Before tool executes | Yes (exit 1 blocks) |
+| `PostToolUse` | After tool completes | No |
+| `Notification` | Claude sends notification | No |
+| `Stop` | Claude finishes turn | No |
+
+1. **Add hook config** to `.claude/settings.json`:
+   ```json
+   {
+     &quot;hooks&quot;: {
+       &quot;PostToolUse&quot;: [
+         {
+           &quot;matcher&quot;: &quot;Edit|Write&quot;,
+           &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;prettier --write \&quot;$CLAUDE_FILE_PATH\&quot; 2&gt;/dev/null || true&quot; }]
+         }
+       ],
+       &quot;PreToolUse&quot;: [
+         {
+           &quot;matcher&quot;: &quot;Bash&quot;,
+           &quot;hooks&quot;: [{ &quot;type&quot;: &quot;command&quot;, &quot;command&quot;: &quot;bash .claude/hooks/validate.sh&quot; }]
+         }
+       ]
+     }
+   }
+   ```
+2. **Test** -- Trigger the relevant tool and confirm the hook fires.
+3. **Iterate** -- Add matchers for additional tools as needed.
+
+## Workflow 5: Manage Context Budget
+
+1. **Audit** -- `python scripts/context_analyzer.py /path/to/project`
+2. **Apply budget targets:**
+   | Category | Budget | Purpose |
+   |----------|--------|---------|
+   | System prompt + CLAUDE.md | 5-10% | Project configuration |
+   | Skill definitions | 5-15% | Active skill content |
+   | Source code (read files) | 30-50% | Files Claude reads |
+   | Conversation history | 20-30% | Messages and responses |
+   | Working memory | 10-20% | Reasoning space |
+3. **Reduce overhead** -- Keep root CLAUDE.md under 4000 tokens. Use hierarchical loading. Avoid reading entire large files. Use `/compact` after completing subtasks.
+4. **Validate** -- Re-run context analyzer and confirm overhead dropped.
+
+---
+
+## Quick Reference
+
+### Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/compact` | Summarize conversation to free context |
+| `/clear` | Clear conversation history |
+| `/model` | Switch model mid-session |
+| `/agents` | List and invoke custom agents |
+| `/permissions` | View and modify tool permissions |
+| `/cost` | Show token usage and cost |
+| `/doctor` | Diagnose configuration issues |
+| `/init` | Generate CLAUDE.md for current project |
+
+### Permission Modes
+
+| Mode | Behavior | Best For |
+|------|----------|----------|
+| Default | Asks permission for writes | Normal development |
+| Allowlist | Auto-approves listed tools | Repetitive workflows |
+| Yolo | Auto-approves everything | Trusted automation |
+
+```json
+{ &quot;permissions&quot;: { &quot;allow&quot;: [&quot;Read&quot;, &quot;Glob&quot;, &quot;Grep&quot;, &quot;Bash(npm test*)&quot;],
+                    &quot;deny&quot;: [&quot;Bash(rm -rf*)&quot;, &quot;Bash(git push*)&quot;] } }
+```
+
+### CLAUDE.md Loading Order
+
+1. `~/.claude/CLAUDE.md` -- user global, always loaded
+2. `/project/CLAUDE.md` -- project root, always loaded
+3. `/project/.claude/CLAUDE.md` -- project config, always loaded
+4. `/project/subdir/CLAUDE.md` -- subdirectory, loaded when files accessed
+
+### MCP Servers
+
+| Server | Purpose |
+|--------|---------|
+| `server-filesystem` | File access beyond project |
+| `server-github` | GitHub API (issues, PRs) |
+| `server-postgres` | Database queries |
+| `server-memory` | Persistent key-value store |
+| `server-brave-search` | Web search |
+| `server-puppeteer` | Browser automation |
+
+---
+
+## Reference Documentation
+
+| Document | Path |
+|----------|------|
+| Skill Authoring Guide | [references/skill-authoring-guide.md](references/skill-authoring-guide.md) |
+| Subagent Patterns | [references/subagent-patterns.md](references/subagent-patterns.md) |
+| Hooks Cookbook | [references/hooks-cookbook.md](references/hooks-cookbook.md) |
+| Skill Template | [assets/skill-template.md](assets/skill-template.md) |
+| Agent Template | [assets/agent-template.md](assets/agent-template.md) |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| CLAUDE.md changes not picked up | Claude loads CLAUDE.md at session start | Start a new conversation or use `/clear` to reload configuration |
+| Skill not triggering on expected prompts | Description field in YAML frontmatter missing trigger phrases | Add quoted user phrases to the `description` field (e.g., `&quot;optimize queries&quot;`, `&quot;profile memory&quot;`) |
+| Context window exhausted mid-task | Root CLAUDE.md too large or too many files read | Run `context_analyzer.py` to audit token usage, then move domain content to child CLAUDE.md files |
+| Hook not firing after tool use | Matcher in `.claude/settings.json` does not match the tool name | Verify the `matcher` regex matches the exact tool name (e.g., `Edit\|Write`, not `edit\|write`) |
+| Subagent exceeds scope and edits unrelated files | `allowed-tools` list is too permissive | Restrict to read-only tools (`Read, Glob, Grep`) and add write tools only when necessary |
+| Scaffolder fails with &quot;Directory already exists&quot; | Target skill directory already present on disk | Remove or rename the existing directory, or choose a different skill name |
+| Optimizer reports low score despite good structure | Token count exceeds the default 6000 limit | Pass `--token-limit` matching your actual budget (e.g., `--token-limit 10000`) |
+
+## Success Criteria
+
+- CLAUDE.md optimizer score of 80+ on all project CLAUDE.md files
+- Root CLAUDE.md stays under 4000 tokens (verified by `claudemd_optimizer.py --token-limit 4000`)
+- Auto-loaded configuration (all CLAUDE.md files combined) consumes less than 10% of the context window
+- Every new skill scaffolded passes the optimizer with zero &quot;critical&quot; missing sections
+- Subagents stay within their declared `allowed-tools` scope during testing
+- Hooks execute in under 500ms to avoid perceptible delay on tool use
+- Context analyzer shows 50%+ of the context window available for source code and reasoning
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+
+- Authoring, structuring, and optimizing CLAUDE.md files for any project
+- Scaffolding new skill packages with correct directory layout and frontmatter
+- Creating and configuring Claude Code subagents with scoped tool access
+- Analyzing and managing context window token budgets across a codebase
+
+**This skill does NOT cover:**
+
+- Writing application source code or implementing business logic (see [senior-fullstack](../senior-fullstack/SKILL.md), [senior-backend](../senior-backend/SKILL.md))
+- MCP server development or custom transport protocols (see [mcp-server-builder](../../engineering/mcp-server-builder/SKILL.md))
+- Advanced prompt engineering techniques for LLM applications (see [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md))
+- CI/CD pipeline configuration or deployment automation (see [senior-devops](../senior-devops/SKILL.md), [ci-cd-pipeline-builder](../../engineering/ci-cd-pipeline-builder/SKILL.md))
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
+| [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
+| [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
+
+## Tool Reference
+
+### 1. Skill Scaffolder (`scripts/skill_scaffolder.py`)
+
+**Purpose:** Generate a complete skill package directory with SKILL.md template, starter Python script, reference document, and proper YAML frontmatter.
+
+**Usage:**
+
+```bash
+python scripts/skill_scaffolder.py &lt;skill_name&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `skill_name` | positional | Yes | -- | Name for the skill in kebab-case (e.g., `my-new-skill`) |
+| `--domain, -d` | string | No | `engineering` | Domain category. Options: `engineering`, `marketing`, `product`, `project-management`, `c-level`, `ra-qm`, `business-growth`, `finance`, `standards`, `development-tools` |
+| `--description` | string | No | auto-generated | Brief description for YAML frontmatter, optimized for auto-discovery |
+| `--version` | string | No | `1.0.0` | Semantic version for metadata |
+| `--license` | string | No | `MIT` | License type for frontmatter |
+| `--category` | string | No | same as domain | Skill category for metadata |
+| `--output, -o` | string | No | `.` (current dir) | Parent directory for the skill folder |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/skill_scaffolder.py api-analyzer -d engineering --description &quot;API analysis and optimization&quot; --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Prints skill name, domain, version, location, directory tree, and next-steps checklist.
+- **JSON (`--json`):** Returns `{ success, path, name, domain, version, directories_created, files_created }`.
+
+---
+
+### 2. CLAUDE.md Optimizer (`scripts/claudemd_optimizer.py`)
+
+**Purpose:** Analyze a CLAUDE.md file for structure completeness, token efficiency, redundancy, and verbosity. Produces a scored report with prioritized optimization recommendations.
+
+**Usage:**
+
+```bash
+python scripts/claudemd_optimizer.py &lt;file_path&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `file_path` | positional | Yes | -- | Path to the CLAUDE.md file to analyze |
+| `--token-limit` | integer | No | `6000` | Maximum recommended token count for the file |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/claudemd_optimizer.py path/to/CLAUDE.md --token-limit 4000
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays score (0-100), file metrics (lines, words, tokens), section breakdown with per-section token estimates, section completeness checklist (critical/high/medium), redundancy issues, and prioritized recommendations (HIGH/MEDIUM/LOW).
+- **JSON (`--json`):** Returns `{ success, file, metrics, sections, completeness, redundancies, recommendations, score }`.
+
+---
+
+### 3. Context Analyzer (`scripts/context_analyzer.py`)
+
+**Purpose:** Scan a project directory to estimate how much of Claude Code&#x27;s context window is consumed by CLAUDE.md files, skill definitions, source code, and configuration. Produces a token budget breakdown with reduction recommendations.
+
+**Usage:**
+
+```bash
+python scripts/context_analyzer.py &lt;project_path&gt; [options]
+```
+
+**Parameters:**
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `project_path` | positional | Yes | -- | Path to the project directory to analyze |
+| `--max-depth` | integer | No | `5` | Maximum directory traversal depth |
+| `--context-window` | integer | No | `200000` | Total context window size in tokens |
+| `--json` | flag | No | off | Output results in JSON format |
+
+**Example:**
+
+```bash
+python scripts/context_analyzer.py /path/to/project --max-depth 3 --context-window 200000 --json
+```
+
+**Output Formats:**
+
+- **Human-readable (default):** Displays project summary (files scanned, total tokens, auto-loaded tokens), context budget breakdown with visual bar chart, per-category breakdown (Claude Configuration, Skill Definitions, Reference Documents, Source Code, Config &amp; Build, Documentation) with largest files listed, top 20 largest files, and prioritized recommendations.
+- **JSON (`--json`):** Returns `{ success, project_path, context_window, summary, categories, budget, largest_files, recommendations }`.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Claude Code Mastery&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Claude Code Mastery&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Claude Code Mastery in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Claude Code Mastery&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Claude Code Mastery&quot;
+4. Description: &quot;&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/claude-code-mastery/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Changelog Generator (Engineering domain).
 
 Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and co...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/changelog-generator
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Changelog Generator (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Changelog Generator (Engineering domain).
 
 Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and co...
 
@@ -425,7 +447,1034 @@ https://github.com/borghei/Claude-Skills/tree/main/changelog-generator
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Changelog Generator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Changelog Generator
+
+**Tier:** POWERFUL
+**Category:** Engineering / Release Management
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Generate consistent, auditable changelogs and release notes from Conventional Commits. Parses commit messages, detects semantic version bumps (major/minor/patch), renders Keep a Changelog sections, supports monorepo scoped changelogs, integrates with CI for automated release notes, and enforces commit format with linting. Separates commit parsing, bump logic, and rendering so teams can automate releases without losing editorial control.
+
+## Keywords
+
+changelog, release notes, conventional commits, semantic versioning, semver, Keep a Changelog, commit linting, release automation, monorepo changelog
+
+## Core Capabilities
+
+### 1. Commit Parsing
+- Parse Conventional Commit messages into structured data
+- Extract type, scope, description, body, and footer
+- Detect breaking changes from `!` suffix and `BREAKING CHANGE:` footer
+- Handle multi-line commit bodies and co-author trailers
+
+### 2. Semantic Version Detection
+- Map commit types to version bump levels
+- Breaking changes trigger major bumps
+- `feat` triggers minor bumps
+- All other types trigger patch bumps
+- Support for pre-release versions (alpha, beta, rc)
+
+### 3. Changelog Rendering
+- Keep a Changelog format with semantic sections
+- GitHub release notes format
+- Plain markdown for documentation
+- JSON output for automation pipelines
+- Grouped by type with user-readable descriptions
+
+### 4. Quality Enforcement
+- Commit message linter for CI and pre-commit hooks
+- Strict mode that blocks non-conforming commits
+- Scope validation against allowed values
+- Breaking change documentation requirements
+
+## When to Use
+
+- Before publishing a release tag
+- During CI to generate release notes automatically
+- In PR checks to enforce commit message standards
+- In monorepos where package changelogs need scoped filtering
+- When converting raw git history into user-facing notes
+- As a pre-release checklist step
+
+## Conventional Commit Format
+
+```
+&lt;type&gt;(&lt;scope&gt;)&lt;!&gt;: &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Type to Section Mapping
+
+| Commit Type | Changelog Section | SemVer Bump | User-Facing? |
+|-------------|------------------|-------------|-------------|
+| `feat` | Added | minor | Yes |
+| `fix` | Fixed | patch | Yes |
+| `perf` | Performance | patch | Yes |
+| `security` | Security | patch | Yes |
+| `deprecated` | Deprecated | minor | Yes |
+| `remove` | Removed | major | Yes |
+| `refactor` | Changed | patch | Sometimes |
+| `docs` | — | patch | No |
+| `test` | — | — | No |
+| `build` | — | — | No |
+| `ci` | — | — | No |
+| `chore` | — | — | No |
+
+### Breaking Change Rules
+
+Breaking changes always trigger a **major** version bump regardless of type:
+
+```
+feat(api)!: remove deprecated v1 endpoints
+
+BREAKING CHANGE: The /api/v1/* endpoints have been removed.
+Migrate to /api/v2/* before upgrading. See migration guide at docs/v2-migration.md.
+```
+
+## Changelog Rendering
+
+### Keep a Changelog Format
+
+```markdown
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.4.0] - 2026-03-09
+
+### Added
+- User can now export projects as CSV ([#234](https://github.com/org/repo/pull/234))
+- Dark mode support for dashboard ([#228](https://github.com/org/repo/pull/228))
+
+### Fixed
+- Pagination returning duplicate items on page boundaries ([#231](https://github.com/org/repo/pull/231))
+- Login form not showing validation errors on mobile ([#229](https://github.com/org/repo/pull/229))
+
+### Performance
+- Reduced dashboard load time by 40% with query optimization ([#232](https://github.com/org/repo/pull/232))
+
+### Security
+- Updated jsonwebtoken to 9.0.2 to fix CVE-2024-XXXX ([#233](https://github.com/org/repo/pull/233))
+
+## [1.3.2] - 2026-02-28
+
+### Fixed
+- API rate limiter not resetting after window expiry ([#227](https://github.com/org/repo/pull/227))
+
+[1.4.0]: https://github.com/org/repo/compare/v1.3.2...v1.4.0
+[1.3.2]: https://github.com/org/repo/compare/v1.3.1...v1.3.2
+```
+
+### GitHub Release Notes Format
+
+```markdown
+## What&#x27;s New
+
+- **CSV Export**: Users can now export project data as CSV files (#234)
+- **Dark Mode**: Dashboard fully supports dark mode (#228)
+
+## Bug Fixes
+
+- Fixed pagination returning duplicate items on page boundaries (#231)
+- Fixed login form validation on mobile devices (#229)
+
+## Performance
+
+- Dashboard load time reduced by 40% through query optimization (#232)
+
+## Security
+
+- Updated jsonwebtoken to patch CVE-2024-XXXX (#233)
+
+**Full Changelog**: https://github.com/org/repo/compare/v1.3.2...v1.4.0
+```
+
+## Generation Workflow
+
+### Step 1: Collect Commits
+
+```bash
+# Get commits between two tags
+git log v1.3.2..HEAD --pretty=format:&#x27;%H %s&#x27; --no-merges
+
+# Get commits with full body (for breaking change detection)
+git log v1.3.2..HEAD --pretty=format:&#x27;%H%n%s%n%b%n---COMMIT_END---&#x27; --no-merges
+```
+
+### Step 2: Parse and Classify
+
+```python
+import re
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class ParsedCommit:
+    hash: str
+    type: str
+    scope: Optional[str]
+    description: str
+    body: Optional[str]
+    breaking: bool
+    breaking_description: Optional[str]
+
+COMMIT_PATTERN = re.compile(
+    r&#x27;^(?P&lt;type&gt;feat|fix|perf|refactor|docs|test|build|ci|chore|security|deprecated|remove)&#x27;
+    r&#x27;(?:\((?P&lt;scope&gt;[^)]+)\))?&#x27;
+    r&#x27;(?P&lt;breaking&gt;!)?&#x27;
+    r&#x27;:\s*(?P&lt;description&gt;.+)$&#x27;
+)
+
+def parse_commit(hash: str, message: str) -&gt; Optional[ParsedCommit]:
+    lines = message.strip().split(&#x27;\n&#x27;)
+    subject = lines[0]
+    body = &#x27;\n&#x27;.join(lines[1:]).strip() if len(lines) &gt; 1 else None
+
+    match = COMMIT_PATTERN.match(subject)
+    if not match:
+        return None  # Non-conventional commit
+
+    breaking = bool(match.group(&#x27;breaking&#x27;))
+    breaking_desc = None
+
+    if body and &#x27;BREAKING CHANGE:&#x27; in body:
+        breaking = True
+        bc_match = re.search(r&#x27;BREAKING CHANGE:\s*(.+)&#x27;, body, re.DOTALL)
+        if bc_match:
+            breaking_desc = bc_match.group(1).strip()
+
+    return ParsedCommit(
+        hash=hash,
+        type=match.group(&#x27;type&#x27;),
+        scope=match.group(&#x27;scope&#x27;),
+        description=match.group(&#x27;description&#x27;),
+        body=body,
+        breaking=breaking,
+        breaking_description=breaking_desc,
+    )
+```
+
+### Step 3: Determine Version Bump
+
+```python
+def determine_bump(commits: list[ParsedCommit]) -&gt; str:
+    &quot;&quot;&quot;Determine semver bump from parsed commits.&quot;&quot;&quot;
+    if any(c.breaking for c in commits):
+        return &#x27;major&#x27;
+    if any(c.type == &#x27;feat&#x27; for c in commits):
+        return &#x27;minor&#x27;
+    if any(c.type in (&#x27;fix&#x27;, &#x27;perf&#x27;, &#x27;security&#x27;, &#x27;refactor&#x27;) for c in commits):
+        return &#x27;patch&#x27;
+    return &#x27;none&#x27;
+
+def bump_version(current: str, bump: str) -&gt; str:
+    &quot;&quot;&quot;Apply bump to a semver string.&quot;&quot;&quot;
+    major, minor, patch = map(int, current.lstrip(&#x27;v&#x27;).split(&#x27;.&#x27;))
+    if bump == &#x27;major&#x27;:
+        return f&quot;{major + 1}.0.0&quot;
+    elif bump == &#x27;minor&#x27;:
+        return f&quot;{major}.{minor + 1}.0&quot;
+    elif bump == &#x27;patch&#x27;:
+        return f&quot;{major}.{minor}.{patch + 1}&quot;
+    return current
+```
+
+### Step 4: Render Changelog
+
+```python
+SECTION_MAP = {
+    &#x27;feat&#x27;: &#x27;Added&#x27;,
+    &#x27;fix&#x27;: &#x27;Fixed&#x27;,
+    &#x27;perf&#x27;: &#x27;Performance&#x27;,
+    &#x27;security&#x27;: &#x27;Security&#x27;,
+    &#x27;deprecated&#x27;: &#x27;Deprecated&#x27;,
+    &#x27;remove&#x27;: &#x27;Removed&#x27;,
+    &#x27;refactor&#x27;: &#x27;Changed&#x27;,
+}
+
+def render_changelog(version: str, date: str, commits: list[ParsedCommit], repo_url: str) -&gt; str:
+    sections: dict[str, list[str]] = {}
+
+    # Breaking changes get their own section
+    breaking = [c for c in commits if c.breaking]
+    if breaking:
+        sections[&#x27;BREAKING CHANGES&#x27;] = []
+        for c in breaking:
+            desc = c.breaking_description or c.description
+            scope = f&quot;**{c.scope}**: &quot; if c.scope else &quot;&quot;
+            sections[&#x27;BREAKING CHANGES&#x27;].append(f&quot;- {scope}{desc}&quot;)
+
+    # Group remaining by section
+    for commit in commits:
+        section = SECTION_MAP.get(commit.type)
+        if not section:
+            continue
+        if section not in sections:
+            sections[section] = []
+        scope = f&quot;**{commit.scope}**: &quot; if commit.scope else &quot;&quot;
+        link = f&quot;([{commit.hash[:7]}]({repo_url}/commit/{commit.hash}))&quot;
+        sections[section].append(f&quot;- {scope}{commit.description} {link}&quot;)
+
+    # Render
+    lines = [f&quot;## [{version}] - {date}&quot;, &quot;&quot;]
+    for section_name in [&#x27;BREAKING CHANGES&#x27;, &#x27;Added&#x27;, &#x27;Changed&#x27;, &#x27;Deprecated&#x27;, &#x27;Removed&#x27;, &#x27;Fixed&#x27;, &#x27;Performance&#x27;, &#x27;Security&#x27;]:
+        if section_name in sections:
+            lines.append(f&quot;### {section_name}&quot;)
+            lines.extend(sections[section_name])
+            lines.append(&quot;&quot;)
+
+    return &#x27;\n&#x27;.join(lines)
+```
+
+## Commit Linting
+
+### Pre-Commit Hook
+
+```bash
+#!/bin/bash
+# .git/hooks/commit-msg
+# Validates commit message follows Conventional Commit format
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat &quot;$COMMIT_MSG_FILE&quot;)
+FIRST_LINE=$(head -1 &quot;$COMMIT_MSG_FILE&quot;)
+
+PATTERN=&#x27;^(feat|fix|perf|refactor|docs|test|build|ci|chore|security|deprecated|remove)(\([a-z0-9-]+\))?!?:\s.{1,72}$&#x27;
+
+if ! echo &quot;$FIRST_LINE&quot; | grep -qE &quot;$PATTERN&quot;; then
+  echo &quot;ERROR: Commit message does not follow Conventional Commits format.&quot;
+  echo &quot;&quot;
+  echo &quot;Expected: &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;&quot;
+  echo &quot;Example:  feat(auth): add OAuth2 login flow&quot;
+  echo &quot;&quot;
+  echo &quot;Valid types: feat, fix, perf, refactor, docs, test, build, ci, chore, security&quot;
+  echo &quot;&quot;
+  echo &quot;Your message: $FIRST_LINE&quot;
+  exit 1
+fi
+
+# Check description length
+DESC_LENGTH=$(echo &quot;$FIRST_LINE&quot; | sed &#x27;s/^[^:]*: //&#x27; | wc -c)
+if [ &quot;$DESC_LENGTH&quot; -gt 72 ]; then
+  echo &quot;ERROR: Commit description exceeds 72 characters ($DESC_LENGTH chars).&quot;
+  exit 1
+fi
+```
+
+### CI Linting
+
+```yaml
+# .github/workflows/lint-commits.yml
+name: Lint Commits
+on:
+  pull_request:
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g @commitlint/cli @commitlint/config-conventional
+      - run: |
+          npx commitlint --from ${{ github.event.pull_request.base.sha }} \
+                          --to ${{ github.event.pull_request.head.sha }}
+```
+
+## Monorepo Strategy
+
+### Scoped Changelogs
+
+In a monorepo, each package maintains its own changelog filtered by scope:
+
+```bash
+# Get commits scoped to a specific package
+git log v1.3.0..HEAD --pretty=format:&#x27;%H %s&#x27; --no-merges | \
+  grep -E &#x27;^\w+ (feat|fix|perf|refactor)\(ui\):&#x27;
+
+# Example output:
+# abc1234 feat(ui): add date picker component
+# def5678 fix(ui): button alignment on mobile
+```
+
+### Per-Package Changelog Location
+
+```
+packages/
+  ui/
+    CHANGELOG.md        ← @repo/ui changes only
+    package.json
+  api/
+    CHANGELOG.md        ← @repo/api changes only
+    package.json
+CHANGELOG.md            ← infrastructure / cross-cutting changes
+```
+
+## Release Workflow Integration
+
+```
+PR merges to main
+      │
+      v
+CI detects new commits since last tag
+      │
+      v
+Parse commits → determine bump → generate changelog
+      │
+      v
+Create draft GitHub Release with generated notes
+      │
+      v
+Human reviews and edits release notes
+      │
+      v
+Publish release → triggers deployment pipeline
+```
+
+## Output Quality Checklist
+
+Before publishing generated changelog:
+
+1. Each bullet is user-meaningful, not implementation noise
+2. Breaking changes include migration instructions
+3. Security fixes are in their own section (not mixed with bug fixes)
+4. Duplicate bullets across sections are removed
+5. Scope prefixes are consistent and meaningful
+6. Empty sections are omitted
+7. Links to PRs/commits are correct
+
+## Common Pitfalls
+
+- **Merge commit messages polluting the changelog** — exclude merge commits with `--no-merges`
+- **Vague commit messages** — &quot;fix stuff&quot; cannot become a useful release note; enforce linting
+- **Missing migration guidance for breaking changes** — require `BREAKING CHANGE:` footer with instructions
+- **Docs/chore commits in user-facing changelog** — filter to only user-facing types
+- **Overwriting historical entries** — always prepend new entries, never modify existing ones
+- **Manual version bumps in monorepos** — use Changesets for coordinated versioning
+
+## Best Practices
+
+1. **Enforce conventional commits in CI** — block merges with non-conforming messages
+2. **Scope commits in monorepos** — `feat(ui):` not just `feat:` for package-specific changes
+3. **Review generated changelog before publishing** — automation gets you 90%, human editing adds polish
+4. **Tag releases after changelog is finalized** — changelog is part of the release, not an afterthought
+5. **Keep an [Unreleased] section** — for manual curation between releases
+6. **Link to PRs, not commits** — PRs have context and discussion that commits lack
+7. **Separate internal and external changelogs** — users do not need to know about CI config changes
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Changelog is empty after generation | All commits use non-user-facing types (`docs`, `chore`, `ci`, `test`) | Ensure feature and fix commits use `feat:` or `fix:` types; review type-to-section mapping |
+| Version bump detected as `none` | No commits match bump-triggering types | Verify commits follow Conventional Commit format; check regex pattern matches your type list |
+| Breaking changes missing from output | `BREAKING CHANGE:` footer has wrong casing or whitespace | Use exact string `BREAKING CHANGE:` (uppercase, with colon and space) in commit footer |
+| Monorepo changelog includes unrelated packages | Scope filter not applied or scope names inconsistent | Standardize scope names across teams; filter commits with `grep -E &#x27;type\(your-scope\):&#x27;` |
+| Merge commits polluting release notes | `--no-merges` flag omitted from `git log` | Always pass `--no-merges` when collecting commits for changelog generation |
+| Commit linter rejects valid messages | Regex pattern missing a valid type or scope contains uppercase | Update the `PATTERN` regex to include all custom types; enforce lowercase scopes |
+| Duplicate entries across changelog sections | A breaking change commit also matches its original type section | Deduplicate by checking if a commit already appears in BREAKING CHANGES before adding to type section |
+
+## Success Criteria
+
+- **Commit parse rate above 95%** — fewer than 5% of commits in a release range fail to parse as valid Conventional Commits
+- **Zero manual version bump errors** — semantic version is always determined automatically from commit types, never hand-edited
+- **Changelog generation under 10 seconds** — full parse-classify-render cycle completes in under 10 seconds for repositories with up to 500 commits per release
+- **100% of breaking changes documented** — every commit with `!` suffix or `BREAKING CHANGE:` footer appears in the BREAKING CHANGES section with migration guidance
+- **Release notes review time under 15 minutes** — generated changelog requires minimal human editing before publication
+- **Commit lint failure rate below 2%** — after team onboarding, fewer than 2% of commits are rejected by the pre-commit hook or CI linter
+- **Monorepo scope accuracy at 100%** — scoped changelogs contain only commits relevant to their package with no cross-contamination
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Parsing Conventional Commit messages into structured data for changelog generation
+- Determining semantic version bumps (major/minor/patch) from commit history
+- Rendering changelogs in Keep a Changelog, GitHub Release Notes, plain markdown, and JSON formats
+- Enforcing commit message standards via pre-commit hooks and CI linting
+
+**This skill does NOT cover:**
+- Actual release publishing or deployment pipeline execution — see `engineering/ci-cd-pipeline-design`
+- Git tag management, branch strategies, or merge workflows — see `engineering/git-workflow-automation`
+- Writing or improving commit messages themselves — see `standards/git/git-workflow-standards.md`
+- Coordinated multi-package versioning with tools like Changesets or Lerna — referenced in monorepo strategy but not implemented here
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ci-cd-pipeline-design` | Changelog generation runs as a CI stage before release publishing | Parsed commits and rendered changelog feed into the release pipeline as artifacts |
+| `engineering/git-workflow-automation` | Commit linting hooks enforce format before commits reach the changelog generator | Pre-commit validation ensures only parseable commits enter the git history |
+| `engineering/code-review-automation` | PR checks verify commit messages conform to Conventional Commits before merge | Linting results gate PR approval, preventing unparseable commits from reaching main |
+| `engineering/api-versioning-strategy` | Breaking change detection aligns API version bumps with changelog major releases | `BREAKING CHANGE` commits trigger both changelog entries and API version increments |
+| `project-management/release-management` | Release planning uses generated changelogs for stakeholder communication | Rendered release notes flow into release checklists and stakeholder announcements |
+| `standards/git/git-workflow-standards.md` | Commit format standards define the grammar this skill parses | Standard definitions are the source of truth for the commit regex pattern |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Changelog Generator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Changelog Generator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Changelog Generator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Changelog Generator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Changelog Generator&quot;
+4. Description: &quot;Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and co...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/changelog-generator/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Changelog Generator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Changelog Generator
+
+**Tier:** POWERFUL
+**Category:** Engineering / Release Management
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Generate consistent, auditable changelogs and release notes from Conventional Commits. Parses commit messages, detects semantic version bumps (major/minor/patch), renders Keep a Changelog sections, supports monorepo scoped changelogs, integrates with CI for automated release notes, and enforces commit format with linting. Separates commit parsing, bump logic, and rendering so teams can automate releases without losing editorial control.
+
+## Keywords
+
+changelog, release notes, conventional commits, semantic versioning, semver, Keep a Changelog, commit linting, release automation, monorepo changelog
+
+## Core Capabilities
+
+### 1. Commit Parsing
+- Parse Conventional Commit messages into structured data
+- Extract type, scope, description, body, and footer
+- Detect breaking changes from `!` suffix and `BREAKING CHANGE:` footer
+- Handle multi-line commit bodies and co-author trailers
+
+### 2. Semantic Version Detection
+- Map commit types to version bump levels
+- Breaking changes trigger major bumps
+- `feat` triggers minor bumps
+- All other types trigger patch bumps
+- Support for pre-release versions (alpha, beta, rc)
+
+### 3. Changelog Rendering
+- Keep a Changelog format with semantic sections
+- GitHub release notes format
+- Plain markdown for documentation
+- JSON output for automation pipelines
+- Grouped by type with user-readable descriptions
+
+### 4. Quality Enforcement
+- Commit message linter for CI and pre-commit hooks
+- Strict mode that blocks non-conforming commits
+- Scope validation against allowed values
+- Breaking change documentation requirements
+
+## When to Use
+
+- Before publishing a release tag
+- During CI to generate release notes automatically
+- In PR checks to enforce commit message standards
+- In monorepos where package changelogs need scoped filtering
+- When converting raw git history into user-facing notes
+- As a pre-release checklist step
+
+## Conventional Commit Format
+
+```
+&lt;type&gt;(&lt;scope&gt;)&lt;!&gt;: &lt;description&gt;
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Type to Section Mapping
+
+| Commit Type | Changelog Section | SemVer Bump | User-Facing? |
+|-------------|------------------|-------------|-------------|
+| `feat` | Added | minor | Yes |
+| `fix` | Fixed | patch | Yes |
+| `perf` | Performance | patch | Yes |
+| `security` | Security | patch | Yes |
+| `deprecated` | Deprecated | minor | Yes |
+| `remove` | Removed | major | Yes |
+| `refactor` | Changed | patch | Sometimes |
+| `docs` | — | patch | No |
+| `test` | — | — | No |
+| `build` | — | — | No |
+| `ci` | — | — | No |
+| `chore` | — | — | No |
+
+### Breaking Change Rules
+
+Breaking changes always trigger a **major** version bump regardless of type:
+
+```
+feat(api)!: remove deprecated v1 endpoints
+
+BREAKING CHANGE: The /api/v1/* endpoints have been removed.
+Migrate to /api/v2/* before upgrading. See migration guide at docs/v2-migration.md.
+```
+
+## Changelog Rendering
+
+### Keep a Changelog Format
+
+```markdown
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.4.0] - 2026-03-09
+
+### Added
+- User can now export projects as CSV ([#234](https://github.com/org/repo/pull/234))
+- Dark mode support for dashboard ([#228](https://github.com/org/repo/pull/228))
+
+### Fixed
+- Pagination returning duplicate items on page boundaries ([#231](https://github.com/org/repo/pull/231))
+- Login form not showing validation errors on mobile ([#229](https://github.com/org/repo/pull/229))
+
+### Performance
+- Reduced dashboard load time by 40% with query optimization ([#232](https://github.com/org/repo/pull/232))
+
+### Security
+- Updated jsonwebtoken to 9.0.2 to fix CVE-2024-XXXX ([#233](https://github.com/org/repo/pull/233))
+
+## [1.3.2] - 2026-02-28
+
+### Fixed
+- API rate limiter not resetting after window expiry ([#227](https://github.com/org/repo/pull/227))
+
+[1.4.0]: https://github.com/org/repo/compare/v1.3.2...v1.4.0
+[1.3.2]: https://github.com/org/repo/compare/v1.3.1...v1.3.2
+```
+
+### GitHub Release Notes Format
+
+```markdown
+## What&#x27;s New
+
+- **CSV Export**: Users can now export project data as CSV files (#234)
+- **Dark Mode**: Dashboard fully supports dark mode (#228)
+
+## Bug Fixes
+
+- Fixed pagination returning duplicate items on page boundaries (#231)
+- Fixed login form validation on mobile devices (#229)
+
+## Performance
+
+- Dashboard load time reduced by 40% through query optimization (#232)
+
+## Security
+
+- Updated jsonwebtoken to patch CVE-2024-XXXX (#233)
+
+**Full Changelog**: https://github.com/org/repo/compare/v1.3.2...v1.4.0
+```
+
+## Generation Workflow
+
+### Step 1: Collect Commits
+
+```bash
+# Get commits between two tags
+git log v1.3.2..HEAD --pretty=format:&#x27;%H %s&#x27; --no-merges
+
+# Get commits with full body (for breaking change detection)
+git log v1.3.2..HEAD --pretty=format:&#x27;%H%n%s%n%b%n---COMMIT_END---&#x27; --no-merges
+```
+
+### Step 2: Parse and Classify
+
+```python
+import re
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class ParsedCommit:
+    hash: str
+    type: str
+    scope: Optional[str]
+    description: str
+    body: Optional[str]
+    breaking: bool
+    breaking_description: Optional[str]
+
+COMMIT_PATTERN = re.compile(
+    r&#x27;^(?P&lt;type&gt;feat|fix|perf|refactor|docs|test|build|ci|chore|security|deprecated|remove)&#x27;
+    r&#x27;(?:\((?P&lt;scope&gt;[^)]+)\))?&#x27;
+    r&#x27;(?P&lt;breaking&gt;!)?&#x27;
+    r&#x27;:\s*(?P&lt;description&gt;.+)$&#x27;
+)
+
+def parse_commit(hash: str, message: str) -&gt; Optional[ParsedCommit]:
+    lines = message.strip().split(&#x27;\n&#x27;)
+    subject = lines[0]
+    body = &#x27;\n&#x27;.join(lines[1:]).strip() if len(lines) &gt; 1 else None
+
+    match = COMMIT_PATTERN.match(subject)
+    if not match:
+        return None  # Non-conventional commit
+
+    breaking = bool(match.group(&#x27;breaking&#x27;))
+    breaking_desc = None
+
+    if body and &#x27;BREAKING CHANGE:&#x27; in body:
+        breaking = True
+        bc_match = re.search(r&#x27;BREAKING CHANGE:\s*(.+)&#x27;, body, re.DOTALL)
+        if bc_match:
+            breaking_desc = bc_match.group(1).strip()
+
+    return ParsedCommit(
+        hash=hash,
+        type=match.group(&#x27;type&#x27;),
+        scope=match.group(&#x27;scope&#x27;),
+        description=match.group(&#x27;description&#x27;),
+        body=body,
+        breaking=breaking,
+        breaking_description=breaking_desc,
+    )
+```
+
+### Step 3: Determine Version Bump
+
+```python
+def determine_bump(commits: list[ParsedCommit]) -&gt; str:
+    &quot;&quot;&quot;Determine semver bump from parsed commits.&quot;&quot;&quot;
+    if any(c.breaking for c in commits):
+        return &#x27;major&#x27;
+    if any(c.type == &#x27;feat&#x27; for c in commits):
+        return &#x27;minor&#x27;
+    if any(c.type in (&#x27;fix&#x27;, &#x27;perf&#x27;, &#x27;security&#x27;, &#x27;refactor&#x27;) for c in commits):
+        return &#x27;patch&#x27;
+    return &#x27;none&#x27;
+
+def bump_version(current: str, bump: str) -&gt; str:
+    &quot;&quot;&quot;Apply bump to a semver string.&quot;&quot;&quot;
+    major, minor, patch = map(int, current.lstrip(&#x27;v&#x27;).split(&#x27;.&#x27;))
+    if bump == &#x27;major&#x27;:
+        return f&quot;{major + 1}.0.0&quot;
+    elif bump == &#x27;minor&#x27;:
+        return f&quot;{major}.{minor + 1}.0&quot;
+    elif bump == &#x27;patch&#x27;:
+        return f&quot;{major}.{minor}.{patch + 1}&quot;
+    return current
+```
+
+### Step 4: Render Changelog
+
+```python
+SECTION_MAP = {
+    &#x27;feat&#x27;: &#x27;Added&#x27;,
+    &#x27;fix&#x27;: &#x27;Fixed&#x27;,
+    &#x27;perf&#x27;: &#x27;Performance&#x27;,
+    &#x27;security&#x27;: &#x27;Security&#x27;,
+    &#x27;deprecated&#x27;: &#x27;Deprecated&#x27;,
+    &#x27;remove&#x27;: &#x27;Removed&#x27;,
+    &#x27;refactor&#x27;: &#x27;Changed&#x27;,
+}
+
+def render_changelog(version: str, date: str, commits: list[ParsedCommit], repo_url: str) -&gt; str:
+    sections: dict[str, list[str]] = {}
+
+    # Breaking changes get their own section
+    breaking = [c for c in commits if c.breaking]
+    if breaking:
+        sections[&#x27;BREAKING CHANGES&#x27;] = []
+        for c in breaking:
+            desc = c.breaking_description or c.description
+            scope = f&quot;**{c.scope}**: &quot; if c.scope else &quot;&quot;
+            sections[&#x27;BREAKING CHANGES&#x27;].append(f&quot;- {scope}{desc}&quot;)
+
+    # Group remaining by section
+    for commit in commits:
+        section = SECTION_MAP.get(commit.type)
+        if not section:
+            continue
+        if section not in sections:
+            sections[section] = []
+        scope = f&quot;**{commit.scope}**: &quot; if commit.scope else &quot;&quot;
+        link = f&quot;([{commit.hash[:7]}]({repo_url}/commit/{commit.hash}))&quot;
+        sections[section].append(f&quot;- {scope}{commit.description} {link}&quot;)
+
+    # Render
+    lines = [f&quot;## [{version}] - {date}&quot;, &quot;&quot;]
+    for section_name in [&#x27;BREAKING CHANGES&#x27;, &#x27;Added&#x27;, &#x27;Changed&#x27;, &#x27;Deprecated&#x27;, &#x27;Removed&#x27;, &#x27;Fixed&#x27;, &#x27;Performance&#x27;, &#x27;Security&#x27;]:
+        if section_name in sections:
+            lines.append(f&quot;### {section_name}&quot;)
+            lines.extend(sections[section_name])
+            lines.append(&quot;&quot;)
+
+    return &#x27;\n&#x27;.join(lines)
+```
+
+## Commit Linting
+
+### Pre-Commit Hook
+
+```bash
+#!/bin/bash
+# .git/hooks/commit-msg
+# Validates commit message follows Conventional Commit format
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat &quot;$COMMIT_MSG_FILE&quot;)
+FIRST_LINE=$(head -1 &quot;$COMMIT_MSG_FILE&quot;)
+
+PATTERN=&#x27;^(feat|fix|perf|refactor|docs|test|build|ci|chore|security|deprecated|remove)(\([a-z0-9-]+\))?!?:\s.{1,72}$&#x27;
+
+if ! echo &quot;$FIRST_LINE&quot; | grep -qE &quot;$PATTERN&quot;; then
+  echo &quot;ERROR: Commit message does not follow Conventional Commits format.&quot;
+  echo &quot;&quot;
+  echo &quot;Expected: &lt;type&gt;(&lt;scope&gt;): &lt;description&gt;&quot;
+  echo &quot;Example:  feat(auth): add OAuth2 login flow&quot;
+  echo &quot;&quot;
+  echo &quot;Valid types: feat, fix, perf, refactor, docs, test, build, ci, chore, security&quot;
+  echo &quot;&quot;
+  echo &quot;Your message: $FIRST_LINE&quot;
+  exit 1
+fi
+
+# Check description length
+DESC_LENGTH=$(echo &quot;$FIRST_LINE&quot; | sed &#x27;s/^[^:]*: //&#x27; | wc -c)
+if [ &quot;$DESC_LENGTH&quot; -gt 72 ]; then
+  echo &quot;ERROR: Commit description exceeds 72 characters ($DESC_LENGTH chars).&quot;
+  exit 1
+fi
+```
+
+### CI Linting
+
+```yaml
+# .github/workflows/lint-commits.yml
+name: Lint Commits
+on:
+  pull_request:
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g @commitlint/cli @commitlint/config-conventional
+      - run: |
+          npx commitlint --from ${{ github.event.pull_request.base.sha }} \
+                          --to ${{ github.event.pull_request.head.sha }}
+```
+
+## Monorepo Strategy
+
+### Scoped Changelogs
+
+In a monorepo, each package maintains its own changelog filtered by scope:
+
+```bash
+# Get commits scoped to a specific package
+git log v1.3.0..HEAD --pretty=format:&#x27;%H %s&#x27; --no-merges | \
+  grep -E &#x27;^\w+ (feat|fix|perf|refactor)\(ui\):&#x27;
+
+# Example output:
+# abc1234 feat(ui): add date picker component
+# def5678 fix(ui): button alignment on mobile
+```
+
+### Per-Package Changelog Location
+
+```
+packages/
+  ui/
+    CHANGELOG.md        ← @repo/ui changes only
+    package.json
+  api/
+    CHANGELOG.md        ← @repo/api changes only
+    package.json
+CHANGELOG.md            ← infrastructure / cross-cutting changes
+```
+
+## Release Workflow Integration
+
+```
+PR merges to main
+      │
+      v
+CI detects new commits since last tag
+      │
+      v
+Parse commits → determine bump → generate changelog
+      │
+      v
+Create draft GitHub Release with generated notes
+      │
+      v
+Human reviews and edits release notes
+      │
+      v
+Publish release → triggers deployment pipeline
+```
+
+## Output Quality Checklist
+
+Before publishing generated changelog:
+
+1. Each bullet is user-meaningful, not implementation noise
+2. Breaking changes include migration instructions
+3. Security fixes are in their own section (not mixed with bug fixes)
+4. Duplicate bullets across sections are removed
+5. Scope prefixes are consistent and meaningful
+6. Empty sections are omitted
+7. Links to PRs/commits are correct
+
+## Common Pitfalls
+
+- **Merge commit messages polluting the changelog** — exclude merge commits with `--no-merges`
+- **Vague commit messages** — &quot;fix stuff&quot; cannot become a useful release note; enforce linting
+- **Missing migration guidance for breaking changes** — require `BREAKING CHANGE:` footer with instructions
+- **Docs/chore commits in user-facing changelog** — filter to only user-facing types
+- **Overwriting historical entries** — always prepend new entries, never modify existing ones
+- **Manual version bumps in monorepos** — use Changesets for coordinated versioning
+
+## Best Practices
+
+1. **Enforce conventional commits in CI** — block merges with non-conforming messages
+2. **Scope commits in monorepos** — `feat(ui):` not just `feat:` for package-specific changes
+3. **Review generated changelog before publishing** — automation gets you 90%, human editing adds polish
+4. **Tag releases after changelog is finalized** — changelog is part of the release, not an afterthought
+5. **Keep an [Unreleased] section** — for manual curation between releases
+6. **Link to PRs, not commits** — PRs have context and discussion that commits lack
+7. **Separate internal and external changelogs** — users do not need to know about CI config changes
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Changelog is empty after generation | All commits use non-user-facing types (`docs`, `chore`, `ci`, `test`) | Ensure feature and fix commits use `feat:` or `fix:` types; review type-to-section mapping |
+| Version bump detected as `none` | No commits match bump-triggering types | Verify commits follow Conventional Commit format; check regex pattern matches your type list |
+| Breaking changes missing from output | `BREAKING CHANGE:` footer has wrong casing or whitespace | Use exact string `BREAKING CHANGE:` (uppercase, with colon and space) in commit footer |
+| Monorepo changelog includes unrelated packages | Scope filter not applied or scope names inconsistent | Standardize scope names across teams; filter commits with `grep -E &#x27;type\(your-scope\):&#x27;` |
+| Merge commits polluting release notes | `--no-merges` flag omitted from `git log` | Always pass `--no-merges` when collecting commits for changelog generation |
+| Commit linter rejects valid messages | Regex pattern missing a valid type or scope contains uppercase | Update the `PATTERN` regex to include all custom types; enforce lowercase scopes |
+| Duplicate entries across changelog sections | A breaking change commit also matches its original type section | Deduplicate by checking if a commit already appears in BREAKING CHANGES before adding to type section |
+
+## Success Criteria
+
+- **Commit parse rate above 95%** — fewer than 5% of commits in a release range fail to parse as valid Conventional Commits
+- **Zero manual version bump errors** — semantic version is always determined automatically from commit types, never hand-edited
+- **Changelog generation under 10 seconds** — full parse-classify-render cycle completes in under 10 seconds for repositories with up to 500 commits per release
+- **100% of breaking changes documented** — every commit with `!` suffix or `BREAKING CHANGE:` footer appears in the BREAKING CHANGES section with migration guidance
+- **Release notes review time under 15 minutes** — generated changelog requires minimal human editing before publication
+- **Commit lint failure rate below 2%** — after team onboarding, fewer than 2% of commits are rejected by the pre-commit hook or CI linter
+- **Monorepo scope accuracy at 100%** — scoped changelogs contain only commits relevant to their package with no cross-contamination
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Parsing Conventional Commit messages into structured data for changelog generation
+- Determining semantic version bumps (major/minor/patch) from commit history
+- Rendering changelogs in Keep a Changelog, GitHub Release Notes, plain markdown, and JSON formats
+- Enforcing commit message standards via pre-commit hooks and CI linting
+
+**This skill does NOT cover:**
+- Actual release publishing or deployment pipeline execution — see `engineering/ci-cd-pipeline-design`
+- Git tag management, branch strategies, or merge workflows — see `engineering/git-workflow-automation`
+- Writing or improving commit messages themselves — see `standards/git/git-workflow-standards.md`
+- Coordinated multi-package versioning with tools like Changesets or Lerna — referenced in monorepo strategy but not implemented here
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ci-cd-pipeline-design` | Changelog generation runs as a CI stage before release publishing | Parsed commits and rendered changelog feed into the release pipeline as artifacts |
+| `engineering/git-workflow-automation` | Commit linting hooks enforce format before commits reach the changelog generator | Pre-commit validation ensures only parseable commits enter the git history |
+| `engineering/code-review-automation` | PR checks verify commit messages conform to Conventional Commits before merge | Linting results gate PR approval, preventing unparseable commits from reaching main |
+| `engineering/api-versioning-strategy` | Breaking change detection aligns API version bumps with changelog major releases | `BREAKING CHANGE` commits trigger both changelog entries and API version increments |
+| `project-management/release-management` | Release planning uses generated changelogs for stakeholder communication | Rendered release notes flow into release checklists and stakeholder announcements |
+| `standards/git/git-workflow-standards.md` | Commit format standards define the grammar this skill parses | Standard definitions are the source of truth for the commit regex pattern |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Changelog Generator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Changelog Generator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Changelog Generator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Changelog Generator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Changelog Generator&quot;
+4. Description: &quot;Generate changelogs and release notes from Conventional Commits. Covers commit parsing, semantic version bump detection, Keep a Changelog formatting, monorepo scoped changelogs, CI integration, and co...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/changelog-generator/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

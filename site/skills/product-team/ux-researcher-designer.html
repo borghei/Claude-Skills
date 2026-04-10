@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ux Researcher Designer (Product domain).
 
 UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research,...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/ux-researcher-designer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Ux Researcher Designer (Product domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Ux Researcher Designer (Product domain).
 
 UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research,...
 
@@ -439,7 +461,1256 @@ https://github.com/borghei/Claude-Skills/tree/main/ux-researcher-designer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Ux Researcher Designer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# UX Researcher &amp; Designer
+
+Generate user personas from research data, create journey maps, plan usability tests, and synthesize research findings into actionable design recommendations.
+
+---
+
+## Table of Contents
+
+- [Trigger Terms](#trigger-terms)
+- [Workflows](#workflows)
+  - [Workflow 1: Generate User Persona](#workflow-1-generate-user-persona)
+  - [Workflow 2: Create Journey Map](#workflow-2-create-journey-map)
+  - [Workflow 3: Plan Usability Test](#workflow-3-plan-usability-test)
+  - [Workflow 4: Synthesize Research](#workflow-4-synthesize-research)
+- [Tool Reference](#tool-reference)
+- [Quick Reference Tables](#quick-reference-tables)
+- [Knowledge Base](#knowledge-base)
+
+---
+
+## Trigger Terms
+
+Use this skill when you need to:
+
+- &quot;create user persona&quot;
+- &quot;generate persona from data&quot;
+- &quot;build customer journey map&quot;
+- &quot;map user journey&quot;
+- &quot;plan usability test&quot;
+- &quot;design usability study&quot;
+- &quot;analyze user research&quot;
+- &quot;synthesize interview findings&quot;
+- &quot;identify user pain points&quot;
+- &quot;define user archetypes&quot;
+- &quot;calculate research sample size&quot;
+- &quot;create empathy map&quot;
+- &quot;identify user needs&quot;
+
+---
+
+## Workflows
+
+### Workflow 1: Generate User Persona
+
+**Situation:** You have user data (analytics, surveys, interviews) and need to create a research-backed persona.
+
+**Steps:**
+
+1. **Prepare user data**
+
+   Required format (JSON):
+   ```json
+   [
+     {
+       &quot;user_id&quot;: &quot;user_1&quot;,
+       &quot;age&quot;: 32,
+       &quot;usage_frequency&quot;: &quot;daily&quot;,
+       &quot;features_used&quot;: [&quot;dashboard&quot;, &quot;reports&quot;, &quot;export&quot;],
+       &quot;primary_device&quot;: &quot;desktop&quot;,
+       &quot;usage_context&quot;: &quot;work&quot;,
+       &quot;tech_proficiency&quot;: 7,
+       &quot;pain_points&quot;: [&quot;slow loading&quot;, &quot;confusing UI&quot;]
+     }
+   ]
+   ```
+
+2. **Run persona generator**
+   ```bash
+   # Human-readable output
+   python scripts/persona_generator.py
+
+   # JSON output for integration
+   python scripts/persona_generator.py json
+   ```
+
+3. **Review generated components**
+
+   | Component | What to Check |
+   |-----------|---------------|
+   | Archetype | Does it match the data patterns? |
+   | Demographics | Are they derived from actual data? |
+   | Goals | Are they specific and actionable? |
+   | Frustrations | Do they include frequency counts? |
+   | Design implications | Can designers act on these? |
+
+4. **Validate persona**
+
+   - Show to 3-5 real users: &quot;Does this sound like you?&quot;
+   - Cross-check with support tickets
+   - Verify against analytics data
+
+5. **Reference:** See `references/persona-methodology.md` for validity criteria
+
+### Proto-Persona Canvas (Lightweight Alternative)
+
+When you lack research data but need a hypothesis-driven persona to align the team, use a proto-persona canvas. Proto-personas are assumption tools -- not validated truth -- meant to be tested and refined.
+
+**Use when:** Starting a new initiative with no research budget, aligning a cross-functional team quickly, or creating a testable hypothesis about your user.
+
+**Proto-Persona Canvas Template:**
+
+```markdown
+### [Alliterative Name] (e.g., &quot;Careful Carlos&quot;)
+
+**Bio &amp; Demographics:**
+- Age, geography, social status, career stage
+- Online presence, leisure activities, partner status
+
+**Quotes** (what they say, feel, think):
+- &quot;[Direct quote capturing their perspective]&quot;
+- &quot;[Quote revealing frustration or aspiration]&quot;
+
+**Pains:**
+- [Pain related to the problem space]
+- [Pain related to current workarounds]
+
+**What They&#x27;re Trying to Accomplish:**
+- [Observable behavior 1]
+- [Observable behavior 2]
+
+**Goals** (wants, needs, dreams):
+- [Short-term goal]
+- [Long-term aspiration]
+
+**Attitudes &amp; Influences:**
+- Decision Making Authority: [Can they buy/adopt your solution?]
+- Decision Influencers: [Who influences their decisions?]
+- Beliefs &amp; Attitudes: [What beliefs impact their choices?]
+
+**Assumptions to Validate:**
+- [Top assumption that must be true for this persona to be viable]
+- [Second assumption]
+- [Third assumption]
+```
+
+**Next steps after proto-persona:**
+1. Generate interview questions to validate assumptions (Recommended)
+2. Generate an anti-persona to define scope boundaries
+3. Convert into a one-page stakeholder brief
+
+---
+
+### Workflow 2: Create Journey Map
+
+**Situation:** You need to visualize the end-to-end user experience for a specific goal.
+
+**Steps:**
+
+1. **Define scope**
+
+   | Element | Description |
+   |---------|-------------|
+   | Persona | Which user type |
+   | Goal | What they&#x27;re trying to achieve |
+   | Start | Trigger that begins journey |
+   | End | Success criteria |
+   | Timeframe | Hours/days/weeks |
+
+2. **Gather journey data**
+
+   Sources:
+   - User interviews (ask &quot;walk me through...&quot;)
+   - Session recordings
+   - Analytics (funnel, drop-offs)
+   - Support tickets
+
+3. **Map the stages**
+
+   Typical B2B SaaS stages:
+   ```
+   Awareness → Evaluation → Onboarding → Adoption → Advocacy
+   ```
+
+4. **Fill in layers for each stage**
+
+   ```
+   Stage: [Name]
+   ├── Actions: What does user do?
+   ├── Touchpoints: Where do they interact?
+   ├── Emotions: How do they feel? (1-5)
+   ├── Pain Points: What frustrates them?
+   └── Opportunities: Where can we improve?
+   ```
+
+5. **Map three experience paths** (not just the happy path)
+
+   | Stage | Happy Path | Fail Path | Difficult Path |
+   |---|---|---|---|
+   | Awareness | Finds product via search | Never discovers product | Finds competitor first |
+   | Consideration | Clear value proposition | Confused by pricing | Needs manager approval |
+   | Decision | Easy signup flow | Form errors, abandons | Legal review delays |
+   | Delivery &amp; Use | Smooth onboarding | Can&#x27;t import data | Workaround needed |
+   | Loyalty | Becomes advocate | Churns silently | Stays but complains |
+
+   - **Happy Path:** Everything works as designed.
+   - **Fail Path:** User cannot complete their goal and drops off.
+   - **Difficult Path:** User completes the goal but with friction, workarounds, or frustration.
+
+6. **Add KPIs and ownership per stage**
+
+   | Stage | Leading KPI | Lagging KPI | Team Owner |
+   |---|---|---|---|
+   | Awareness | Site visits, ad impressions | Brand recall | Marketing |
+   | Consideration | Demo requests, pricing page views | MQL conversion | Marketing/Sales |
+   | Decision | Trial starts, contract sent | Close rate | Sales |
+   | Use | Feature adoption, DAU | Retention rate | Product |
+   | Loyalty | NPS, referral count | LTV, expansion revenue | Customer Success |
+
+7. **Identify top friction points and interventions**
+
+   For each friction point, document:
+
+   | Friction Point | Why It Matters | Intervention | Expected Impact | Effort | Confidence |
+   |---|---|---|---|---|---|
+   | [Description] | [User/business impact] | [Proposed fix] | High/Med/Low | S/M/L | High/Med/Low |
+
+   Priority Score = Frequency x Severity x Solvability
+
+8. **Reference:** See `references/journey-mapping-guide.md` for templates
+
+---
+
+### Workflow 3: Plan Usability Test
+
+**Situation:** You need to validate a design with real users.
+
+**Steps:**
+
+1. **Define research questions**
+
+   Transform vague goals into testable questions:
+
+   | Vague | Testable |
+   |-------|----------|
+   | &quot;Is it easy to use?&quot; | &quot;Can users complete checkout in &lt;3 min?&quot; |
+   | &quot;Do users like it?&quot; | &quot;Will users choose Design A or B?&quot; |
+   | &quot;Does it make sense?&quot; | &quot;Can users find settings without hints?&quot; |
+
+2. **Select method**
+
+   | Method | Participants | Duration | Best For |
+   |--------|--------------|----------|----------|
+   | Moderated remote | 5-8 | 45-60 min | Deep insights |
+   | Unmoderated remote | 10-20 | 15-20 min | Quick validation |
+   | Guerrilla | 3-5 | 5-10 min | Rapid feedback |
+
+3. **Design tasks**
+
+   Good task format:
+   ```
+   SCENARIO: &quot;Imagine you&#x27;re planning a trip to Paris...&quot;
+   GOAL: &quot;Book a hotel for 3 nights in your budget.&quot;
+   SUCCESS: &quot;You see the confirmation page.&quot;
+   ```
+
+   Task progression: Warm-up → Core → Secondary → Edge case → Free exploration
+
+4. **Define success metrics**
+
+   | Metric | Target |
+   |--------|--------|
+   | Completion rate | &gt;80% |
+   | Time on task | &lt;2× expected |
+   | Error rate | &lt;15% |
+   | Satisfaction | &gt;4/5 |
+
+5. **Prepare moderator guide**
+
+   - Think-aloud instructions
+   - Non-leading prompts
+   - Post-task questions
+
+6. **Reference:** See `references/usability-testing-frameworks.md` for full guide
+
+---
+
+### Workflow 4: Synthesize Research
+
+**Situation:** You have raw research data (interviews, surveys, observations) and need actionable insights.
+
+**Steps:**
+
+1. **Code the data**
+
+   Tag each data point:
+   - `[GOAL]` - What they want to achieve
+   - `[PAIN]` - What frustrates them
+   - `[BEHAVIOR]` - What they actually do
+   - `[CONTEXT]` - When/where they use product
+   - `[QUOTE]` - Direct user words
+
+2. **Cluster similar patterns**
+
+   ```
+   User A: Uses daily, advanced features, shortcuts
+   User B: Uses daily, complex workflows, automation
+   User C: Uses weekly, basic needs, occasional
+
+   Cluster 1: A, B (Power Users)
+   Cluster 2: C (Casual User)
+   ```
+
+3. **Calculate segment sizes**
+
+   | Cluster | Users | % | Viability |
+   |---------|-------|---|-----------|
+   | Power Users | 18 | 36% | Primary persona |
+   | Business Users | 15 | 30% | Primary persona |
+   | Casual Users | 12 | 24% | Secondary persona |
+
+4. **Extract key findings**
+
+   For each theme:
+   - Finding statement
+   - Supporting evidence (quotes, data)
+   - Frequency (X/Y participants)
+   - Business impact
+   - Recommendation
+
+5. **Prioritize opportunities**
+
+   | Factor | Score 1-5 |
+   |--------|-----------|
+   | Frequency | How often does this occur? |
+   | Severity | How much does it hurt? |
+   | Breadth | How many users affected? |
+   | Solvability | Can we fix this? |
+
+6. **Reference:** See `references/persona-methodology.md` for analysis framework
+
+---
+
+## Tool Reference
+
+### persona_generator.py
+
+Generates data-driven personas from user research data.
+
+| Argument | Values | Default | Description |
+|----------|--------|---------|-------------|
+| format | (none), json | (none) | Output format |
+
+**Sample Output:**
+
+```
+============================================================
+PERSONA: Alex the Power User
+============================================================
+
+📝 A daily user who primarily uses the product for work purposes
+
+Archetype: Power User
+Quote: &quot;I need tools that can keep up with my workflow&quot;
+
+👤 Demographics:
+  • Age Range: 25-34
+  • Location Type: Urban
+  • Tech Proficiency: Advanced
+
+🎯 Goals &amp; Needs:
+  • Complete tasks efficiently
+  • Automate workflows
+  • Access advanced features
+
+😤 Frustrations:
+  • Slow loading times (14/20 users)
+  • No keyboard shortcuts
+  • Limited API access
+
+💡 Design Implications:
+  → Optimize for speed and efficiency
+  → Provide keyboard shortcuts and power features
+  → Expose API and automation capabilities
+
+📈 Data: Based on 45 users
+    Confidence: High
+```
+
+**Archetypes Generated:**
+
+| Archetype | Signals | Design Focus |
+|-----------|---------|--------------|
+| power_user | Daily use, 10+ features | Efficiency, customization |
+| casual_user | Weekly use, 3-5 features | Simplicity, guidance |
+| business_user | Work context, team use | Collaboration, reporting |
+| mobile_first | Mobile primary | Touch, offline, speed |
+
+**Output Components:**
+
+| Component | Description |
+|-----------|-------------|
+| demographics | Age range, location, occupation, tech level |
+| psychographics | Motivations, values, attitudes, lifestyle |
+| behaviors | Usage patterns, feature preferences |
+| needs_and_goals | Primary, secondary, functional, emotional |
+| frustrations | Pain points with evidence |
+| scenarios | Contextual usage stories |
+| design_implications | Actionable recommendations |
+| data_points | Sample size, confidence level |
+
+---
+
+## Quick Reference Tables
+
+### Research Method Selection
+
+| Question Type | Best Method | Sample Size |
+|---------------|-------------|-------------|
+| &quot;What do users do?&quot; | Analytics, observation | 100+ events |
+| &quot;Why do they do it?&quot; | Interviews | 8-15 users |
+| &quot;How well can they do it?&quot; | Usability test | 5-8 users |
+| &quot;What do they prefer?&quot; | Survey, A/B test | 50+ users |
+| &quot;What do they feel?&quot; | Diary study, interviews | 10-15 users |
+
+### Persona Confidence Levels
+
+| Sample Size | Confidence | Use Case |
+|-------------|------------|----------|
+| 5-10 users | Low | Exploratory |
+| 11-30 users | Medium | Directional |
+| 31+ users | High | Production |
+
+### Usability Issue Severity
+
+| Severity | Definition | Action |
+|----------|------------|--------|
+| 4 - Critical | Prevents task completion | Fix immediately |
+| 3 - Major | Significant difficulty | Fix before release |
+| 2 - Minor | Causes hesitation | Fix when possible |
+| 1 - Cosmetic | Noticed but not problematic | Low priority |
+
+### Interview Question Types
+
+| Type | Example | Use For |
+|------|---------|---------|
+| Context | &quot;Walk me through your typical day&quot; | Understanding environment |
+| Behavior | &quot;Show me how you do X&quot; | Observing actual actions |
+| Goals | &quot;What are you trying to achieve?&quot; | Uncovering motivations |
+| Pain | &quot;What&#x27;s the hardest part?&quot; | Identifying frustrations |
+| Reflection | &quot;What would you change?&quot; | Generating ideas |
+
+---
+
+## Knowledge Base
+
+Detailed reference guides in `references/`:
+
+| File | Content |
+|------|---------|
+| `persona-methodology.md` | Validity criteria, data collection, analysis framework |
+| `journey-mapping-guide.md` | Mapping process, templates, opportunity identification |
+| `example-personas.md` | 3 complete persona examples with data |
+| `usability-testing-frameworks.md` | Test planning, task design, analysis |
+
+---
+
+## Validation Checklist
+
+### Persona Quality
+- [ ] Based on 20+ users (minimum)
+- [ ] At least 2 data sources (quant + qual)
+- [ ] Specific, actionable goals
+- [ ] Frustrations include frequency counts
+- [ ] Design implications are specific
+- [ ] Confidence level stated
+
+### Journey Map Quality
+- [ ] Scope clearly defined (persona, goal, timeframe)
+- [ ] Based on real user data, not assumptions
+- [ ] All layers filled (actions, touchpoints, emotions)
+- [ ] Pain points identified per stage
+- [ ] Opportunities prioritized
+
+### Usability Test Quality
+- [ ] Research questions are testable
+- [ ] Tasks are realistic scenarios, not instructions
+- [ ] 5+ participants per design
+- [ ] Success metrics defined
+- [ ] Findings include severity ratings
+
+### Research Synthesis Quality
+- [ ] Data coded consistently
+- [ ] Patterns based on 3+ data points
+- [ ] Findings include evidence
+- [ ] Recommendations are actionable
+- [ ] Priorities justified
+
+---
+
+## Tool Reference
+
+### persona_generator.py
+
+Generates data-driven personas from user research data, classifying users into archetypes with demographics, psychographics, behaviors, goals, frustrations, and design implications.
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `format` | positional | (none) | Add `json` for JSON output; omit for human-readable |
+
+**Archetypes supported:** power_user, casual_user, business_user, mobile_first
+
+**Output components:** name, archetype, tagline, quote, demographics, psychographics, behaviors, needs_and_goals, frustrations, scenarios, data_points, design_implications
+
+```bash
+python scripts/persona_generator.py           # Human-readable formatted output
+python scripts/persona_generator.py json      # JSON for programmatic use
+```
+
+**Data input format (customize in script):**
+```json
+[{
+  &quot;user_id&quot;: &quot;user_1&quot;,
+  &quot;age&quot;: 32,
+  &quot;usage_frequency&quot;: &quot;daily&quot;,
+  &quot;features_used&quot;: [&quot;dashboard&quot;, &quot;reports&quot;, &quot;export&quot;],
+  &quot;primary_device&quot;: &quot;desktop&quot;,
+  &quot;usage_context&quot;: &quot;work&quot;,
+  &quot;tech_proficiency&quot;: 7,
+  &quot;pain_points&quot;: [&quot;slow loading&quot;, &quot;confusing UI&quot;]
+}]
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Persona confidence level is &quot;Low&quot; | Fewer than 20 users in sample data | Collect more data points; combine quantitative analytics with qualitative interviews |
+| All users classified as same archetype | Insufficient variation in input data | Ensure data includes diverse usage frequencies, devices, and contexts |
+| Frustrations are generic (fallback defaults) | Not enough pain_points in user data | Enrich user data with pain_points from interviews and support tickets |
+| Design implications too vague | Patterns don&#x27;t strongly differentiate | Add more behavioral signals (features_used, session duration, task completion) |
+| Journey map has flat emotion curve | All stages scored similarly | Re-evaluate with actual user data; conduct contextual interviews per stage |
+| Usability test sample too small | Fewer than 5 participants | 5 participants find ~85% of usability issues; recruit to minimum 5 |
+| Research synthesis has no clear patterns | Data not coded consistently | Use consistent tagging scheme (GOAL, PAIN, BEHAVIOR, CONTEXT, QUOTE) |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Persona validity | Validated by 3+ real users (&quot;sounds like me&quot;) | Post-creation validation interviews |
+| Persona coverage | All key segments represented | Count of personas vs identified user segments |
+| Data confidence level | &quot;High&quot; (31+ users) | persona_generator data_points.confidence_level |
+| Research cadence | 5-8 interviews per segment per quarter | Count of completed research sessions |
+| Insight-to-action rate | &gt;70% of findings result in design changes | Track findings through to implementation |
+| Usability issue resolution | All critical/major issues fixed before release | Issue severity tracking |
+| Journey map freshness | Updated at least quarterly | Last-updated date on each journey map |
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Data-driven persona generation from user research
+- Archetype classification (power, casual, business, mobile-first)
+- User journey mapping frameworks
+- Usability test planning and scoring
+- Research synthesis and coding methodology
+- Interview question frameworks
+- Empathy map and opportunity identification
+
+**Out of scope:**
+- Automated user interview recording/transcription
+- Real-time analytics integration (use analytics platforms)
+- Quantitative survey design and distribution (use Typeform/SurveyMonkey)
+- Eye tracking or biometric data analysis
+- AI-powered sentiment analysis (tool uses heuristic classification)
+- Persona illustration or visual asset generation
+- Accessibility auditing (see product-designer or design-system-lead skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Dovetail / Condens | Export research data, import persona JSON | Centralize research insights |
+| Figma / Miro | Paste persona output as design artifact | Reference personas during design work |
+| Notion / Confluence | Human-readable output | Document and share personas with team |
+| product-manager-toolkit | Persona pain points inform RICE scoring | Connect user needs to feature prioritization |
+| agile-product-owner | Persona data informs user story personas | Write stories grounded in research |
+| product-designer | Persona feeds into journey mapping and usability test recruitment | End-to-end design research workflow |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ux Researcher Designer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ux Researcher Designer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ux Researcher Designer in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ux Researcher Designer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ux Researcher Designer&quot;
+4. Description: &quot;UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/ux-researcher-designer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Ux Researcher Designer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# UX Researcher &amp; Designer
+
+Generate user personas from research data, create journey maps, plan usability tests, and synthesize research findings into actionable design recommendations.
+
+---
+
+## Table of Contents
+
+- [Trigger Terms](#trigger-terms)
+- [Workflows](#workflows)
+  - [Workflow 1: Generate User Persona](#workflow-1-generate-user-persona)
+  - [Workflow 2: Create Journey Map](#workflow-2-create-journey-map)
+  - [Workflow 3: Plan Usability Test](#workflow-3-plan-usability-test)
+  - [Workflow 4: Synthesize Research](#workflow-4-synthesize-research)
+- [Tool Reference](#tool-reference)
+- [Quick Reference Tables](#quick-reference-tables)
+- [Knowledge Base](#knowledge-base)
+
+---
+
+## Trigger Terms
+
+Use this skill when you need to:
+
+- &quot;create user persona&quot;
+- &quot;generate persona from data&quot;
+- &quot;build customer journey map&quot;
+- &quot;map user journey&quot;
+- &quot;plan usability test&quot;
+- &quot;design usability study&quot;
+- &quot;analyze user research&quot;
+- &quot;synthesize interview findings&quot;
+- &quot;identify user pain points&quot;
+- &quot;define user archetypes&quot;
+- &quot;calculate research sample size&quot;
+- &quot;create empathy map&quot;
+- &quot;identify user needs&quot;
+
+---
+
+## Workflows
+
+### Workflow 1: Generate User Persona
+
+**Situation:** You have user data (analytics, surveys, interviews) and need to create a research-backed persona.
+
+**Steps:**
+
+1. **Prepare user data**
+
+   Required format (JSON):
+   ```json
+   [
+     {
+       &quot;user_id&quot;: &quot;user_1&quot;,
+       &quot;age&quot;: 32,
+       &quot;usage_frequency&quot;: &quot;daily&quot;,
+       &quot;features_used&quot;: [&quot;dashboard&quot;, &quot;reports&quot;, &quot;export&quot;],
+       &quot;primary_device&quot;: &quot;desktop&quot;,
+       &quot;usage_context&quot;: &quot;work&quot;,
+       &quot;tech_proficiency&quot;: 7,
+       &quot;pain_points&quot;: [&quot;slow loading&quot;, &quot;confusing UI&quot;]
+     }
+   ]
+   ```
+
+2. **Run persona generator**
+   ```bash
+   # Human-readable output
+   python scripts/persona_generator.py
+
+   # JSON output for integration
+   python scripts/persona_generator.py json
+   ```
+
+3. **Review generated components**
+
+   | Component | What to Check |
+   |-----------|---------------|
+   | Archetype | Does it match the data patterns? |
+   | Demographics | Are they derived from actual data? |
+   | Goals | Are they specific and actionable? |
+   | Frustrations | Do they include frequency counts? |
+   | Design implications | Can designers act on these? |
+
+4. **Validate persona**
+
+   - Show to 3-5 real users: &quot;Does this sound like you?&quot;
+   - Cross-check with support tickets
+   - Verify against analytics data
+
+5. **Reference:** See `references/persona-methodology.md` for validity criteria
+
+### Proto-Persona Canvas (Lightweight Alternative)
+
+When you lack research data but need a hypothesis-driven persona to align the team, use a proto-persona canvas. Proto-personas are assumption tools -- not validated truth -- meant to be tested and refined.
+
+**Use when:** Starting a new initiative with no research budget, aligning a cross-functional team quickly, or creating a testable hypothesis about your user.
+
+**Proto-Persona Canvas Template:**
+
+```markdown
+### [Alliterative Name] (e.g., &quot;Careful Carlos&quot;)
+
+**Bio &amp; Demographics:**
+- Age, geography, social status, career stage
+- Online presence, leisure activities, partner status
+
+**Quotes** (what they say, feel, think):
+- &quot;[Direct quote capturing their perspective]&quot;
+- &quot;[Quote revealing frustration or aspiration]&quot;
+
+**Pains:**
+- [Pain related to the problem space]
+- [Pain related to current workarounds]
+
+**What They&#x27;re Trying to Accomplish:**
+- [Observable behavior 1]
+- [Observable behavior 2]
+
+**Goals** (wants, needs, dreams):
+- [Short-term goal]
+- [Long-term aspiration]
+
+**Attitudes &amp; Influences:**
+- Decision Making Authority: [Can they buy/adopt your solution?]
+- Decision Influencers: [Who influences their decisions?]
+- Beliefs &amp; Attitudes: [What beliefs impact their choices?]
+
+**Assumptions to Validate:**
+- [Top assumption that must be true for this persona to be viable]
+- [Second assumption]
+- [Third assumption]
+```
+
+**Next steps after proto-persona:**
+1. Generate interview questions to validate assumptions (Recommended)
+2. Generate an anti-persona to define scope boundaries
+3. Convert into a one-page stakeholder brief
+
+---
+
+### Workflow 2: Create Journey Map
+
+**Situation:** You need to visualize the end-to-end user experience for a specific goal.
+
+**Steps:**
+
+1. **Define scope**
+
+   | Element | Description |
+   |---------|-------------|
+   | Persona | Which user type |
+   | Goal | What they&#x27;re trying to achieve |
+   | Start | Trigger that begins journey |
+   | End | Success criteria |
+   | Timeframe | Hours/days/weeks |
+
+2. **Gather journey data**
+
+   Sources:
+   - User interviews (ask &quot;walk me through...&quot;)
+   - Session recordings
+   - Analytics (funnel, drop-offs)
+   - Support tickets
+
+3. **Map the stages**
+
+   Typical B2B SaaS stages:
+   ```
+   Awareness → Evaluation → Onboarding → Adoption → Advocacy
+   ```
+
+4. **Fill in layers for each stage**
+
+   ```
+   Stage: [Name]
+   ├── Actions: What does user do?
+   ├── Touchpoints: Where do they interact?
+   ├── Emotions: How do they feel? (1-5)
+   ├── Pain Points: What frustrates them?
+   └── Opportunities: Where can we improve?
+   ```
+
+5. **Map three experience paths** (not just the happy path)
+
+   | Stage | Happy Path | Fail Path | Difficult Path |
+   |---|---|---|---|
+   | Awareness | Finds product via search | Never discovers product | Finds competitor first |
+   | Consideration | Clear value proposition | Confused by pricing | Needs manager approval |
+   | Decision | Easy signup flow | Form errors, abandons | Legal review delays |
+   | Delivery &amp; Use | Smooth onboarding | Can&#x27;t import data | Workaround needed |
+   | Loyalty | Becomes advocate | Churns silently | Stays but complains |
+
+   - **Happy Path:** Everything works as designed.
+   - **Fail Path:** User cannot complete their goal and drops off.
+   - **Difficult Path:** User completes the goal but with friction, workarounds, or frustration.
+
+6. **Add KPIs and ownership per stage**
+
+   | Stage | Leading KPI | Lagging KPI | Team Owner |
+   |---|---|---|---|
+   | Awareness | Site visits, ad impressions | Brand recall | Marketing |
+   | Consideration | Demo requests, pricing page views | MQL conversion | Marketing/Sales |
+   | Decision | Trial starts, contract sent | Close rate | Sales |
+   | Use | Feature adoption, DAU | Retention rate | Product |
+   | Loyalty | NPS, referral count | LTV, expansion revenue | Customer Success |
+
+7. **Identify top friction points and interventions**
+
+   For each friction point, document:
+
+   | Friction Point | Why It Matters | Intervention | Expected Impact | Effort | Confidence |
+   |---|---|---|---|---|---|
+   | [Description] | [User/business impact] | [Proposed fix] | High/Med/Low | S/M/L | High/Med/Low |
+
+   Priority Score = Frequency x Severity x Solvability
+
+8. **Reference:** See `references/journey-mapping-guide.md` for templates
+
+---
+
+### Workflow 3: Plan Usability Test
+
+**Situation:** You need to validate a design with real users.
+
+**Steps:**
+
+1. **Define research questions**
+
+   Transform vague goals into testable questions:
+
+   | Vague | Testable |
+   |-------|----------|
+   | &quot;Is it easy to use?&quot; | &quot;Can users complete checkout in &lt;3 min?&quot; |
+   | &quot;Do users like it?&quot; | &quot;Will users choose Design A or B?&quot; |
+   | &quot;Does it make sense?&quot; | &quot;Can users find settings without hints?&quot; |
+
+2. **Select method**
+
+   | Method | Participants | Duration | Best For |
+   |--------|--------------|----------|----------|
+   | Moderated remote | 5-8 | 45-60 min | Deep insights |
+   | Unmoderated remote | 10-20 | 15-20 min | Quick validation |
+   | Guerrilla | 3-5 | 5-10 min | Rapid feedback |
+
+3. **Design tasks**
+
+   Good task format:
+   ```
+   SCENARIO: &quot;Imagine you&#x27;re planning a trip to Paris...&quot;
+   GOAL: &quot;Book a hotel for 3 nights in your budget.&quot;
+   SUCCESS: &quot;You see the confirmation page.&quot;
+   ```
+
+   Task progression: Warm-up → Core → Secondary → Edge case → Free exploration
+
+4. **Define success metrics**
+
+   | Metric | Target |
+   |--------|--------|
+   | Completion rate | &gt;80% |
+   | Time on task | &lt;2× expected |
+   | Error rate | &lt;15% |
+   | Satisfaction | &gt;4/5 |
+
+5. **Prepare moderator guide**
+
+   - Think-aloud instructions
+   - Non-leading prompts
+   - Post-task questions
+
+6. **Reference:** See `references/usability-testing-frameworks.md` for full guide
+
+---
+
+### Workflow 4: Synthesize Research
+
+**Situation:** You have raw research data (interviews, surveys, observations) and need actionable insights.
+
+**Steps:**
+
+1. **Code the data**
+
+   Tag each data point:
+   - `[GOAL]` - What they want to achieve
+   - `[PAIN]` - What frustrates them
+   - `[BEHAVIOR]` - What they actually do
+   - `[CONTEXT]` - When/where they use product
+   - `[QUOTE]` - Direct user words
+
+2. **Cluster similar patterns**
+
+   ```
+   User A: Uses daily, advanced features, shortcuts
+   User B: Uses daily, complex workflows, automation
+   User C: Uses weekly, basic needs, occasional
+
+   Cluster 1: A, B (Power Users)
+   Cluster 2: C (Casual User)
+   ```
+
+3. **Calculate segment sizes**
+
+   | Cluster | Users | % | Viability |
+   |---------|-------|---|-----------|
+   | Power Users | 18 | 36% | Primary persona |
+   | Business Users | 15 | 30% | Primary persona |
+   | Casual Users | 12 | 24% | Secondary persona |
+
+4. **Extract key findings**
+
+   For each theme:
+   - Finding statement
+   - Supporting evidence (quotes, data)
+   - Frequency (X/Y participants)
+   - Business impact
+   - Recommendation
+
+5. **Prioritize opportunities**
+
+   | Factor | Score 1-5 |
+   |--------|-----------|
+   | Frequency | How often does this occur? |
+   | Severity | How much does it hurt? |
+   | Breadth | How many users affected? |
+   | Solvability | Can we fix this? |
+
+6. **Reference:** See `references/persona-methodology.md` for analysis framework
+
+---
+
+## Tool Reference
+
+### persona_generator.py
+
+Generates data-driven personas from user research data.
+
+| Argument | Values | Default | Description |
+|----------|--------|---------|-------------|
+| format | (none), json | (none) | Output format |
+
+**Sample Output:**
+
+```
+============================================================
+PERSONA: Alex the Power User
+============================================================
+
+📝 A daily user who primarily uses the product for work purposes
+
+Archetype: Power User
+Quote: &quot;I need tools that can keep up with my workflow&quot;
+
+👤 Demographics:
+  • Age Range: 25-34
+  • Location Type: Urban
+  • Tech Proficiency: Advanced
+
+🎯 Goals &amp; Needs:
+  • Complete tasks efficiently
+  • Automate workflows
+  • Access advanced features
+
+😤 Frustrations:
+  • Slow loading times (14/20 users)
+  • No keyboard shortcuts
+  • Limited API access
+
+💡 Design Implications:
+  → Optimize for speed and efficiency
+  → Provide keyboard shortcuts and power features
+  → Expose API and automation capabilities
+
+📈 Data: Based on 45 users
+    Confidence: High
+```
+
+**Archetypes Generated:**
+
+| Archetype | Signals | Design Focus |
+|-----------|---------|--------------|
+| power_user | Daily use, 10+ features | Efficiency, customization |
+| casual_user | Weekly use, 3-5 features | Simplicity, guidance |
+| business_user | Work context, team use | Collaboration, reporting |
+| mobile_first | Mobile primary | Touch, offline, speed |
+
+**Output Components:**
+
+| Component | Description |
+|-----------|-------------|
+| demographics | Age range, location, occupation, tech level |
+| psychographics | Motivations, values, attitudes, lifestyle |
+| behaviors | Usage patterns, feature preferences |
+| needs_and_goals | Primary, secondary, functional, emotional |
+| frustrations | Pain points with evidence |
+| scenarios | Contextual usage stories |
+| design_implications | Actionable recommendations |
+| data_points | Sample size, confidence level |
+
+---
+
+## Quick Reference Tables
+
+### Research Method Selection
+
+| Question Type | Best Method | Sample Size |
+|---------------|-------------|-------------|
+| &quot;What do users do?&quot; | Analytics, observation | 100+ events |
+| &quot;Why do they do it?&quot; | Interviews | 8-15 users |
+| &quot;How well can they do it?&quot; | Usability test | 5-8 users |
+| &quot;What do they prefer?&quot; | Survey, A/B test | 50+ users |
+| &quot;What do they feel?&quot; | Diary study, interviews | 10-15 users |
+
+### Persona Confidence Levels
+
+| Sample Size | Confidence | Use Case |
+|-------------|------------|----------|
+| 5-10 users | Low | Exploratory |
+| 11-30 users | Medium | Directional |
+| 31+ users | High | Production |
+
+### Usability Issue Severity
+
+| Severity | Definition | Action |
+|----------|------------|--------|
+| 4 - Critical | Prevents task completion | Fix immediately |
+| 3 - Major | Significant difficulty | Fix before release |
+| 2 - Minor | Causes hesitation | Fix when possible |
+| 1 - Cosmetic | Noticed but not problematic | Low priority |
+
+### Interview Question Types
+
+| Type | Example | Use For |
+|------|---------|---------|
+| Context | &quot;Walk me through your typical day&quot; | Understanding environment |
+| Behavior | &quot;Show me how you do X&quot; | Observing actual actions |
+| Goals | &quot;What are you trying to achieve?&quot; | Uncovering motivations |
+| Pain | &quot;What&#x27;s the hardest part?&quot; | Identifying frustrations |
+| Reflection | &quot;What would you change?&quot; | Generating ideas |
+
+---
+
+## Knowledge Base
+
+Detailed reference guides in `references/`:
+
+| File | Content |
+|------|---------|
+| `persona-methodology.md` | Validity criteria, data collection, analysis framework |
+| `journey-mapping-guide.md` | Mapping process, templates, opportunity identification |
+| `example-personas.md` | 3 complete persona examples with data |
+| `usability-testing-frameworks.md` | Test planning, task design, analysis |
+
+---
+
+## Validation Checklist
+
+### Persona Quality
+- [ ] Based on 20+ users (minimum)
+- [ ] At least 2 data sources (quant + qual)
+- [ ] Specific, actionable goals
+- [ ] Frustrations include frequency counts
+- [ ] Design implications are specific
+- [ ] Confidence level stated
+
+### Journey Map Quality
+- [ ] Scope clearly defined (persona, goal, timeframe)
+- [ ] Based on real user data, not assumptions
+- [ ] All layers filled (actions, touchpoints, emotions)
+- [ ] Pain points identified per stage
+- [ ] Opportunities prioritized
+
+### Usability Test Quality
+- [ ] Research questions are testable
+- [ ] Tasks are realistic scenarios, not instructions
+- [ ] 5+ participants per design
+- [ ] Success metrics defined
+- [ ] Findings include severity ratings
+
+### Research Synthesis Quality
+- [ ] Data coded consistently
+- [ ] Patterns based on 3+ data points
+- [ ] Findings include evidence
+- [ ] Recommendations are actionable
+- [ ] Priorities justified
+
+---
+
+## Tool Reference
+
+### persona_generator.py
+
+Generates data-driven personas from user research data, classifying users into archetypes with demographics, psychographics, behaviors, goals, frustrations, and design implications.
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `format` | positional | (none) | Add `json` for JSON output; omit for human-readable |
+
+**Archetypes supported:** power_user, casual_user, business_user, mobile_first
+
+**Output components:** name, archetype, tagline, quote, demographics, psychographics, behaviors, needs_and_goals, frustrations, scenarios, data_points, design_implications
+
+```bash
+python scripts/persona_generator.py           # Human-readable formatted output
+python scripts/persona_generator.py json      # JSON for programmatic use
+```
+
+**Data input format (customize in script):**
+```json
+[{
+  &quot;user_id&quot;: &quot;user_1&quot;,
+  &quot;age&quot;: 32,
+  &quot;usage_frequency&quot;: &quot;daily&quot;,
+  &quot;features_used&quot;: [&quot;dashboard&quot;, &quot;reports&quot;, &quot;export&quot;],
+  &quot;primary_device&quot;: &quot;desktop&quot;,
+  &quot;usage_context&quot;: &quot;work&quot;,
+  &quot;tech_proficiency&quot;: 7,
+  &quot;pain_points&quot;: [&quot;slow loading&quot;, &quot;confusing UI&quot;]
+}]
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Persona confidence level is &quot;Low&quot; | Fewer than 20 users in sample data | Collect more data points; combine quantitative analytics with qualitative interviews |
+| All users classified as same archetype | Insufficient variation in input data | Ensure data includes diverse usage frequencies, devices, and contexts |
+| Frustrations are generic (fallback defaults) | Not enough pain_points in user data | Enrich user data with pain_points from interviews and support tickets |
+| Design implications too vague | Patterns don&#x27;t strongly differentiate | Add more behavioral signals (features_used, session duration, task completion) |
+| Journey map has flat emotion curve | All stages scored similarly | Re-evaluate with actual user data; conduct contextual interviews per stage |
+| Usability test sample too small | Fewer than 5 participants | 5 participants find ~85% of usability issues; recruit to minimum 5 |
+| Research synthesis has no clear patterns | Data not coded consistently | Use consistent tagging scheme (GOAL, PAIN, BEHAVIOR, CONTEXT, QUOTE) |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Persona validity | Validated by 3+ real users (&quot;sounds like me&quot;) | Post-creation validation interviews |
+| Persona coverage | All key segments represented | Count of personas vs identified user segments |
+| Data confidence level | &quot;High&quot; (31+ users) | persona_generator data_points.confidence_level |
+| Research cadence | 5-8 interviews per segment per quarter | Count of completed research sessions |
+| Insight-to-action rate | &gt;70% of findings result in design changes | Track findings through to implementation |
+| Usability issue resolution | All critical/major issues fixed before release | Issue severity tracking |
+| Journey map freshness | Updated at least quarterly | Last-updated date on each journey map |
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Data-driven persona generation from user research
+- Archetype classification (power, casual, business, mobile-first)
+- User journey mapping frameworks
+- Usability test planning and scoring
+- Research synthesis and coding methodology
+- Interview question frameworks
+- Empathy map and opportunity identification
+
+**Out of scope:**
+- Automated user interview recording/transcription
+- Real-time analytics integration (use analytics platforms)
+- Quantitative survey design and distribution (use Typeform/SurveyMonkey)
+- Eye tracking or biometric data analysis
+- AI-powered sentiment analysis (tool uses heuristic classification)
+- Persona illustration or visual asset generation
+- Accessibility auditing (see product-designer or design-system-lead skills)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| Dovetail / Condens | Export research data, import persona JSON | Centralize research insights |
+| Figma / Miro | Paste persona output as design artifact | Reference personas during design work |
+| Notion / Confluence | Human-readable output | Document and share personas with team |
+| product-manager-toolkit | Persona pain points inform RICE scoring | Connect user needs to feature prioritization |
+| agile-product-owner | Persona data informs user story personas | Write stories grounded in research |
+| product-designer | Persona feeds into journey mapping and usability test recruitment | End-to-end design research workflow |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ux Researcher Designer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ux Researcher Designer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ux Researcher Designer in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ux Researcher Designer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ux Researcher Designer&quot;
+4. Description: &quot;UX research and design toolkit for Senior UX Designer/Researcher including data-driven persona generation, journey mapping, usability testing frameworks, and research synthesis. Use for user research,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/ux-researcher-designer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Coo Advisor (C-Level Advisory domain).
 
 Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence. Use when designing operational proc...
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/coo-advisor
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Coo Advisor (C-Level Advisory domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Coo Advisor (C-Level Advisory domain).
 
 Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence. Use when designing operational proc...
 
@@ -431,7 +453,660 @@ https://github.com/borghei/Claude-Skills/tree/main/coo-advisor
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Coo Advisor&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# COO Advisor
+
+The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization.
+
+## Workflow
+
+1. **Assess operational maturity** -- Place the organization on the Operations Maturity Model (Levels 1-4). Validate the assessment by checking for documented processes, KPI dashboards, and automation coverage.
+2. **Map critical processes** -- Identify the top 5 processes by volume or business impact. Document each using the Process Documentation Standard.
+3. **Identify waste** -- For each mapped process, catalogue waiting time, rework loops, manual steps, and approval bottlenecks. Quantify cycle time and cost per transaction.
+4. **Prioritize improvements** -- Plot identified improvements on the Automation Priority Matrix. Select quick wins (high value, low effort) for immediate action.
+5. **Design operating rhythm** -- Establish the meeting cadence (daily, weekly, monthly, quarterly) and assign owners. Verify each meeting has a defined purpose and output.
+6. **Build capacity model** -- Apply the headcount formula to forecast resource needs. Factor in attrition, ramp time, and seasonal variation.
+7. **Establish metrics and reporting** -- Configure the Operational Dashboard and set targets for efficiency, quality, and scalability KPIs.
+
+## Operations Maturity Model
+
+| Level | Name | Characteristics |
+|-------|------|-----------------|
+| 1 | Ad Hoc | Informal processes, tribal knowledge, reactive problem solving |
+| 2 | Defined | Documented processes, basic metrics, some automation |
+| 3 | Managed | KPI dashboards, regular reviews, continuous improvement |
+| 4 | Optimized | Data-driven decisions, automated workflows, industry-leading efficiency |
+
+## Process Documentation Standard
+
+```markdown
+# Process Name
+
+## Purpose
+[Why this process exists]
+
+## Owner
+[Single accountable person]
+
+## Trigger
+[What initiates this process]
+
+## Inputs
+[What is needed to start]
+
+## Steps
+1. [Step with responsible party]
+2. [Step with responsible party]
+3. [Step with responsible party]
+
+## Outputs
+[What is produced]
+
+## SLAs
+[Time and quality expectations]
+
+## Exceptions
+[How to handle edge cases]
+```
+
+## Operating Rhythm
+
+| Meeting | Frequency | Duration | Attendees | Purpose |
+|---------|-----------|----------|-----------|---------|
+| Standup | Daily | 15 min | Team | Issue escalation, key metrics |
+| Dept Sync | Weekly | 45 min | Dept heads | Cross-functional coordination |
+| Leadership Sync | Weekly | 60 min | Execs | Alignment |
+| Business Review | Monthly | 90 min | Leadership | Performance deep-dive |
+| QBR | Quarterly | Half day | Leadership | Strategy and OKR assessment |
+
+## Headcount Capacity Model
+
+```
+Required HC = Volume / (Productivity x Utilization)
+
+Volume:       Work units per period
+Productivity: Units per person per period
+Utilization:  Available time percentage (typically 75-85%)
+```
+
+**Adjustment factors**: Attrition rate (10-20%), ramp time for new hires, seasonal variation, growth assumptions.
+
+## Automation Priority Matrix
+
+```
+                    High Value
+                        |
+    Quick Wins     -----+-----   Strategic Projects
+    (Do First)          |        (Plan Carefully)
+                        |
+    Low Effort ---------+--------- High Effort
+                        |
+    Fill-ins       -----+-----   Reconsider
+    (Do When Available) |        (May Not Be Worth It)
+                        |
+                    Low Value
+```
+
+## Operational KPIs
+
+| Category | Metrics |
+|----------|---------|
+| Efficiency | Process cycle time, first-time completion rate, cost per transaction, automation rate |
+| Quality | Error rate, rework %, customer satisfaction, SLA compliance |
+| Scalability | Volume growth handling, cost per unit trend, capacity utilization, bottleneck count |
+
+## Operational Dashboard Structure
+
+```
+OPERATIONAL HEALTH
++-- Volume metrics (transactions, requests, tickets)
++-- Quality metrics (errors, rework, satisfaction)
++-- Efficiency metrics (cycle time, cost per unit)
++-- Capacity metrics (utilization, backlog)
+
+TEAM PERFORMANCE
++-- Productivity per person
++-- SLA achievement
++-- Training completion
++-- Engagement score
+
+SYSTEM HEALTH
++-- System uptime
++-- Integration status
++-- Processing latency
++-- Error rates
+```
+
+## Incident Classification
+
+| Level | Impact | Response Time | Communication |
+|-------|--------|---------------|---------------|
+| P1 | Business critical | 15 min | Exec + all stakeholders |
+| P2 | Major impact | 1 hour | Leadership + affected teams |
+| P3 | Moderate impact | 4 hours | Team leads |
+| P4 | Minor impact | 24 hours | Direct reports |
+
+## Vendor Management
+
+**Selection criteria**: Capability fit, financial stability, reference quality, service levels, pricing competitiveness, contract flexibility.
+
+**Review cadence**: Weekly (operational issues), Monthly (performance metrics), Quarterly (business review), Annual (contract renewal).
+
+## BCP Framework
+
+1. **Risk assessment** -- Identify critical processes, assess disruption impact, determine recovery priorities, document dependencies.
+2. **Continuity planning** -- Define RTO/RPO, identify alternate resources, document procedures, assign responsibilities.
+3. **Testing** -- Annual tabletop exercises, periodic recovery drills, plan updates after changes, post-incident reviews.
+
+## Example: Scaling Customer Onboarding (Series B SaaS)
+
+A Series-B SaaS company onboards 40 new customers/month with a 5-person onboarding team. Current cycle time is 21 days.
+
+```
+Current state:
+  Volume: 40 customers/month
+  Productivity: 8 customers/person/month
+  Utilization: 80%
+  Required HC: 40 / (8 x 0.80) = 6.25 -&gt; 7 FTEs (gap: 2 hires)
+
+Optimization targets:
+  Automate provisioning step (saves 3 days) -&gt; cycle time: 18 days
+  Self-serve data migration portal (saves 2 days) -&gt; cycle time: 16 days
+  Revised productivity: 10 customers/person/month
+  Required HC at 80 customers/month: 80 / (10 x 0.80) = 10 FTEs
+
+Investment: 1 eng sprint for automation + $15K/yr portal tooling
+ROI: Handles 2x volume with 43% fewer incremental hires
+```
+
+## Budget Variance Analysis
+
+1. Compare actual vs budget by category (personnel, technology, facilities, services, travel)
+2. Identify root causes for variances exceeding 10%
+3. Adjust rolling forecast
+4. Document corrective actions with owners and deadlines
+
+## Scripts
+
+```bash
+# Process efficiency analyzer
+python scripts/process_analyzer.py --process onboarding
+
+# Capacity planning calculator
+python scripts/capacity_planner.py --forecast demand.csv
+
+# Vendor scorecard generator
+python scripts/vendor_scorecard.py --vendors vendors.yaml
+
+# Operational dashboard builder
+python scripts/ops_dashboard.py --metrics metrics.json
+```
+
+## References
+
+- `references/process_templates.md` -- Standard process documentation
+- `references/scaling_playbook.md` -- Scaling operations guide
+- `references/vendor_management.md` -- Vendor relationship framework
+- `references/bcp_template.md` -- Business continuity planning
+
+---
+
+## Tool Reference
+
+### 1. operational_kpi_tracker.py
+
+Tracks operational KPIs across efficiency, quality, and scalability categories. Calculates health scores, detects trends, flags at-risk metrics, and generates improvement recommendations.
+
+```bash
+python scripts/operational_kpi_tracker.py --input kpi_data.json --json
+python scripts/operational_kpi_tracker.py --input kpi_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with KPI categories, metrics, targets, and actuals over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. process_efficiency_scorer.py
+
+Scores process efficiency across cycle time, first-time completion rate, cost per transaction, automation rate, error rate, and rework percentage. Identifies bottlenecks and prioritizes improvement opportunities.
+
+```bash
+python scripts/process_efficiency_scorer.py --input processes.json --json
+python scripts/process_efficiency_scorer.py --input processes.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with process definitions, step-level metrics, and benchmarks |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. capacity_modeler.py
+
+Models headcount capacity requirements using the formula: Required HC = Volume / (Productivity x Utilization). Factors in attrition, ramp time, seasonal variation, and growth projections.
+
+```bash
+python scripts/capacity_modeler.py --input capacity_data.json --json
+python scripts/capacity_modeler.py --input capacity_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with volume forecasts, productivity rates, utilization targets, and adjustment factors |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| KPI dashboard shows green but operations feel broken | Metrics not measuring what matters or targets set too loosely | Audit KPIs against actual customer/team complaints; tighten targets to match industry benchmarks |
+| Process documentation exists but nobody follows it | Documentation created top-down without practitioner input | Rebuild SOPs with process owners; validate with frontline team; schedule quarterly reviews |
+| Automation projects stall after initial wins | Quick wins captured but strategic projects lack sustained investment | Use Automation Priority Matrix; assign dedicated owners to strategic projects; protect automation budget |
+| Capacity model consistently under-predicts needs | Ramp time, attrition, or seasonal variation not factored | Add adjustment factors for attrition (10-20%), ramp time (3-6 months), and seasonal peaks |
+| Operating rhythm meetings feel unproductive | Meetings lack defined purpose, output, or decision rights | Redesign each meeting using the Operating Rhythm table; require agenda, output artifact, and decision owner |
+| Vendor performance degrading without consequence | No SLA monitoring or regular performance reviews | Implement quarterly vendor scorecards; tie contract renewal to SLA compliance |
+
+---
+
+## Success Criteria
+
+- Operations Maturity Model level increases by at least 1 level within 12 months
+- Top 5 processes documented with owners, SLAs, and exception handling
+- Process cycle time reduced by 20%+ for at least 2 critical processes
+- Automation rate exceeds 40% for high-volume, low-complexity processes
+- Headcount capacity model accuracy within 10% of actual needs
+- Incident response meets SLA targets for P1 (15 min) and P2 (1 hour) consistently
+- Budget variance stays within 10% for all operational categories
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Operations maturity assessment, process documentation and optimization, headcount capacity modeling, operational KPI tracking and dashboarding, automation prioritization, vendor management frameworks, incident classification and response, business continuity planning, budget variance analysis, and operating rhythm design.
+
+**Out of scope:** IT infrastructure management (use engineering/ skills), HR policy design (use hr-operations/ skills), financial planning and FP&amp;A (use finance/ skills), product operations (use cpo-advisor), and real-time monitoring system implementation. Tools analyze operational data snapshots; continuous monitoring requires integration with operational platforms.
+
+**Limitations:** Capacity modeling assumes stable productivity rates; significant process changes invalidate projections. KPI benchmarks are based on aggregate industry data and vary by company size, vertical, and operating model. Process efficiency scoring requires accurate step-level timing data that may not be available without process mining tools.
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Operational health metrics feed into strategic decision-making and board reporting
+- **cfo-advisor** -- Budget variance analysis and capacity costs inform financial planning
+- **cro-advisor** -- RevOps staffing and commission infrastructure depend on operational capacity
+- **cpo-advisor** -- Product operations and delivery capacity affect roadmap execution
+- **chro-advisor** -- Headcount planning and team scaling require HR partnership
+- **ciso-advisor** -- BCP and incident response intersect with security operations
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Coo Advisor&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Coo Advisor&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Coo Advisor in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Coo Advisor&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Coo Advisor&quot;
+4. Description: &quot;Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence. Use when designing operational proc...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/coo-advisor/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Coo Advisor&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# COO Advisor
+
+The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization.
+
+## Workflow
+
+1. **Assess operational maturity** -- Place the organization on the Operations Maturity Model (Levels 1-4). Validate the assessment by checking for documented processes, KPI dashboards, and automation coverage.
+2. **Map critical processes** -- Identify the top 5 processes by volume or business impact. Document each using the Process Documentation Standard.
+3. **Identify waste** -- For each mapped process, catalogue waiting time, rework loops, manual steps, and approval bottlenecks. Quantify cycle time and cost per transaction.
+4. **Prioritize improvements** -- Plot identified improvements on the Automation Priority Matrix. Select quick wins (high value, low effort) for immediate action.
+5. **Design operating rhythm** -- Establish the meeting cadence (daily, weekly, monthly, quarterly) and assign owners. Verify each meeting has a defined purpose and output.
+6. **Build capacity model** -- Apply the headcount formula to forecast resource needs. Factor in attrition, ramp time, and seasonal variation.
+7. **Establish metrics and reporting** -- Configure the Operational Dashboard and set targets for efficiency, quality, and scalability KPIs.
+
+## Operations Maturity Model
+
+| Level | Name | Characteristics |
+|-------|------|-----------------|
+| 1 | Ad Hoc | Informal processes, tribal knowledge, reactive problem solving |
+| 2 | Defined | Documented processes, basic metrics, some automation |
+| 3 | Managed | KPI dashboards, regular reviews, continuous improvement |
+| 4 | Optimized | Data-driven decisions, automated workflows, industry-leading efficiency |
+
+## Process Documentation Standard
+
+```markdown
+# Process Name
+
+## Purpose
+[Why this process exists]
+
+## Owner
+[Single accountable person]
+
+## Trigger
+[What initiates this process]
+
+## Inputs
+[What is needed to start]
+
+## Steps
+1. [Step with responsible party]
+2. [Step with responsible party]
+3. [Step with responsible party]
+
+## Outputs
+[What is produced]
+
+## SLAs
+[Time and quality expectations]
+
+## Exceptions
+[How to handle edge cases]
+```
+
+## Operating Rhythm
+
+| Meeting | Frequency | Duration | Attendees | Purpose |
+|---------|-----------|----------|-----------|---------|
+| Standup | Daily | 15 min | Team | Issue escalation, key metrics |
+| Dept Sync | Weekly | 45 min | Dept heads | Cross-functional coordination |
+| Leadership Sync | Weekly | 60 min | Execs | Alignment |
+| Business Review | Monthly | 90 min | Leadership | Performance deep-dive |
+| QBR | Quarterly | Half day | Leadership | Strategy and OKR assessment |
+
+## Headcount Capacity Model
+
+```
+Required HC = Volume / (Productivity x Utilization)
+
+Volume:       Work units per period
+Productivity: Units per person per period
+Utilization:  Available time percentage (typically 75-85%)
+```
+
+**Adjustment factors**: Attrition rate (10-20%), ramp time for new hires, seasonal variation, growth assumptions.
+
+## Automation Priority Matrix
+
+```
+                    High Value
+                        |
+    Quick Wins     -----+-----   Strategic Projects
+    (Do First)          |        (Plan Carefully)
+                        |
+    Low Effort ---------+--------- High Effort
+                        |
+    Fill-ins       -----+-----   Reconsider
+    (Do When Available) |        (May Not Be Worth It)
+                        |
+                    Low Value
+```
+
+## Operational KPIs
+
+| Category | Metrics |
+|----------|---------|
+| Efficiency | Process cycle time, first-time completion rate, cost per transaction, automation rate |
+| Quality | Error rate, rework %, customer satisfaction, SLA compliance |
+| Scalability | Volume growth handling, cost per unit trend, capacity utilization, bottleneck count |
+
+## Operational Dashboard Structure
+
+```
+OPERATIONAL HEALTH
++-- Volume metrics (transactions, requests, tickets)
++-- Quality metrics (errors, rework, satisfaction)
++-- Efficiency metrics (cycle time, cost per unit)
++-- Capacity metrics (utilization, backlog)
+
+TEAM PERFORMANCE
++-- Productivity per person
++-- SLA achievement
++-- Training completion
++-- Engagement score
+
+SYSTEM HEALTH
++-- System uptime
++-- Integration status
++-- Processing latency
++-- Error rates
+```
+
+## Incident Classification
+
+| Level | Impact | Response Time | Communication |
+|-------|--------|---------------|---------------|
+| P1 | Business critical | 15 min | Exec + all stakeholders |
+| P2 | Major impact | 1 hour | Leadership + affected teams |
+| P3 | Moderate impact | 4 hours | Team leads |
+| P4 | Minor impact | 24 hours | Direct reports |
+
+## Vendor Management
+
+**Selection criteria**: Capability fit, financial stability, reference quality, service levels, pricing competitiveness, contract flexibility.
+
+**Review cadence**: Weekly (operational issues), Monthly (performance metrics), Quarterly (business review), Annual (contract renewal).
+
+## BCP Framework
+
+1. **Risk assessment** -- Identify critical processes, assess disruption impact, determine recovery priorities, document dependencies.
+2. **Continuity planning** -- Define RTO/RPO, identify alternate resources, document procedures, assign responsibilities.
+3. **Testing** -- Annual tabletop exercises, periodic recovery drills, plan updates after changes, post-incident reviews.
+
+## Example: Scaling Customer Onboarding (Series B SaaS)
+
+A Series-B SaaS company onboards 40 new customers/month with a 5-person onboarding team. Current cycle time is 21 days.
+
+```
+Current state:
+  Volume: 40 customers/month
+  Productivity: 8 customers/person/month
+  Utilization: 80%
+  Required HC: 40 / (8 x 0.80) = 6.25 -&gt; 7 FTEs (gap: 2 hires)
+
+Optimization targets:
+  Automate provisioning step (saves 3 days) -&gt; cycle time: 18 days
+  Self-serve data migration portal (saves 2 days) -&gt; cycle time: 16 days
+  Revised productivity: 10 customers/person/month
+  Required HC at 80 customers/month: 80 / (10 x 0.80) = 10 FTEs
+
+Investment: 1 eng sprint for automation + $15K/yr portal tooling
+ROI: Handles 2x volume with 43% fewer incremental hires
+```
+
+## Budget Variance Analysis
+
+1. Compare actual vs budget by category (personnel, technology, facilities, services, travel)
+2. Identify root causes for variances exceeding 10%
+3. Adjust rolling forecast
+4. Document corrective actions with owners and deadlines
+
+## Scripts
+
+```bash
+# Process efficiency analyzer
+python scripts/process_analyzer.py --process onboarding
+
+# Capacity planning calculator
+python scripts/capacity_planner.py --forecast demand.csv
+
+# Vendor scorecard generator
+python scripts/vendor_scorecard.py --vendors vendors.yaml
+
+# Operational dashboard builder
+python scripts/ops_dashboard.py --metrics metrics.json
+```
+
+## References
+
+- `references/process_templates.md` -- Standard process documentation
+- `references/scaling_playbook.md` -- Scaling operations guide
+- `references/vendor_management.md` -- Vendor relationship framework
+- `references/bcp_template.md` -- Business continuity planning
+
+---
+
+## Tool Reference
+
+### 1. operational_kpi_tracker.py
+
+Tracks operational KPIs across efficiency, quality, and scalability categories. Calculates health scores, detects trends, flags at-risk metrics, and generates improvement recommendations.
+
+```bash
+python scripts/operational_kpi_tracker.py --input kpi_data.json --json
+python scripts/operational_kpi_tracker.py --input kpi_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with KPI categories, metrics, targets, and actuals over time |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 2. process_efficiency_scorer.py
+
+Scores process efficiency across cycle time, first-time completion rate, cost per transaction, automation rate, error rate, and rework percentage. Identifies bottlenecks and prioritizes improvement opportunities.
+
+```bash
+python scripts/process_efficiency_scorer.py --input processes.json --json
+python scripts/process_efficiency_scorer.py --input processes.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with process definitions, step-level metrics, and benchmarks |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+### 3. capacity_modeler.py
+
+Models headcount capacity requirements using the formula: Required HC = Volume / (Productivity x Utilization). Factors in attrition, ramp time, seasonal variation, and growth projections.
+
+```bash
+python scripts/capacity_modeler.py --input capacity_data.json --json
+python scripts/capacity_modeler.py --input capacity_data.json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `--input` | required | Path to JSON file with volume forecasts, productivity rates, utilization targets, and adjustment factors |
+| `--json` | optional | Output in JSON format instead of human-readable text |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| KPI dashboard shows green but operations feel broken | Metrics not measuring what matters or targets set too loosely | Audit KPIs against actual customer/team complaints; tighten targets to match industry benchmarks |
+| Process documentation exists but nobody follows it | Documentation created top-down without practitioner input | Rebuild SOPs with process owners; validate with frontline team; schedule quarterly reviews |
+| Automation projects stall after initial wins | Quick wins captured but strategic projects lack sustained investment | Use Automation Priority Matrix; assign dedicated owners to strategic projects; protect automation budget |
+| Capacity model consistently under-predicts needs | Ramp time, attrition, or seasonal variation not factored | Add adjustment factors for attrition (10-20%), ramp time (3-6 months), and seasonal peaks |
+| Operating rhythm meetings feel unproductive | Meetings lack defined purpose, output, or decision rights | Redesign each meeting using the Operating Rhythm table; require agenda, output artifact, and decision owner |
+| Vendor performance degrading without consequence | No SLA monitoring or regular performance reviews | Implement quarterly vendor scorecards; tie contract renewal to SLA compliance |
+
+---
+
+## Success Criteria
+
+- Operations Maturity Model level increases by at least 1 level within 12 months
+- Top 5 processes documented with owners, SLAs, and exception handling
+- Process cycle time reduced by 20%+ for at least 2 critical processes
+- Automation rate exceeds 40% for high-volume, low-complexity processes
+- Headcount capacity model accuracy within 10% of actual needs
+- Incident response meets SLA targets for P1 (15 min) and P2 (1 hour) consistently
+- Budget variance stays within 10% for all operational categories
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Operations maturity assessment, process documentation and optimization, headcount capacity modeling, operational KPI tracking and dashboarding, automation prioritization, vendor management frameworks, incident classification and response, business continuity planning, budget variance analysis, and operating rhythm design.
+
+**Out of scope:** IT infrastructure management (use engineering/ skills), HR policy design (use hr-operations/ skills), financial planning and FP&amp;A (use finance/ skills), product operations (use cpo-advisor), and real-time monitoring system implementation. Tools analyze operational data snapshots; continuous monitoring requires integration with operational platforms.
+
+**Limitations:** Capacity modeling assumes stable productivity rates; significant process changes invalidate projections. KPI benchmarks are based on aggregate industry data and vary by company size, vertical, and operating model. Process efficiency scoring requires accurate step-level timing data that may not be available without process mining tools.
+
+---
+
+## Integration Points
+
+- **ceo-advisor** -- Operational health metrics feed into strategic decision-making and board reporting
+- **cfo-advisor** -- Budget variance analysis and capacity costs inform financial planning
+- **cro-advisor** -- RevOps staffing and commission infrastructure depend on operational capacity
+- **cpo-advisor** -- Product operations and delivery capacity affect roadmap execution
+- **chro-advisor** -- Headcount planning and team scaling require HR partnership
+- **ciso-advisor** -- BCP and incident response intersect with security operations
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Coo Advisor&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Coo Advisor&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Coo Advisor in the C-Level Advisory domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Coo Advisor&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Coo Advisor&quot;
+4. Description: &quot;Operations leadership advisor for COOs on business operations, process optimization, scaling infrastructure, cross-functional alignment, and operational excellence. Use when designing operational proc...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/c-level-advisor/coo-advisor/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

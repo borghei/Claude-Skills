@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Signup Flow Cro (Business &amp; Growth domain).
 
 Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patt...
@@ -401,11 +423,11 @@ https://github.com/borghei/Claude-Skills/tree/main/signup-flow-cro
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Signup Flow Cro (Business &amp; Growth domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Signup Flow Cro (Business &amp; Growth domain).
 
 Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patt...
 
@@ -437,7 +459,1092 @@ https://github.com/borghei/Claude-Skills/tree/main/signup-flow-cro
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Signup Flow Cro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Signup Flow CRO
+
+Production-grade signup and registration optimization framework covering authentication strategy, field reduction methodology, multi-step flow architecture, SSO implementation, progressive profiling, credit card requirement analysis, post-submit experience design, and mobile-specific registration patterns. For post-signup onboarding, use onboarding-cro. For lead capture forms (not account creation), use form-cro.
+
+---
+
+## Table of Contents
+
+- [Initial Assessment](#initial-assessment)
+- [Authentication Strategy](#authentication-strategy)
+- [Field Reduction Methodology](#field-reduction-methodology)
+- [Multi-Step Flow Architecture](#multi-step-flow-architecture)
+- [Credit Card Requirement Analysis](#credit-card-requirement-analysis)
+- [Post-Submit Experience](#post-submit-experience)
+- [Mobile Signup Optimization](#mobile-signup-optimization)
+- [Signup Flow Patterns by Product Type](#signup-flow-patterns-by-product-type)
+- [Progressive Profiling](#progressive-profiling)
+- [Error and Edge Case Handling](#error-and-edge-case-handling)
+- [A/B Test Framework](#ab-test-framework)
+- [Metrics and Benchmarks](#metrics-and-benchmarks)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Initial Assessment
+
+### Required Context
+
+| Question | Why It Matters |
+|----------|---------------|
+| Flow type? (free trial, freemium, paid, waitlist) | Determines friction tolerance |
+| B2B or B2C? | B2B tolerates more fields, B2C needs minimal friction |
+| How many steps/screens currently? | Baseline for optimization |
+| What fields are required? | Identifies reduction opportunities |
+| Current completion rate? | Benchmark for improvement |
+| Where do users drop off? (field-level data) | Pinpoints specific friction |
+| What data is needed before first product use? | Separates must-have from nice-to-have |
+| What compliance requirements exist? | Constrains what can be deferred |
+
+---
+
+## Authentication Strategy
+
+### Authentication Methods Ranked by Friction
+
+| Method | Friction Level | Best For | Conversion Impact |
+|--------|---------------|----------|------------------|
+| Google SSO (one-click) | Very low | B2B SaaS, productivity tools | +15-30% vs email+password |
+| Apple Sign In | Very low | iOS/Mac-heavy audience | +10-20% on Apple devices |
+| Microsoft SSO | Low | Enterprise B2B | +10-15% for enterprise |
+| GitHub SSO | Low | Developer tools | +15-25% for dev audience |
+| Magic link (email) | Low | Security-conscious, B2B | +5-10% vs password |
+| Email + password | Medium | Universal fallback | Baseline |
+| Phone + OTP | Medium | Mobile-first, B2C | Varies by market |
+| Email + password + verification | High | When verification is required | -10-20% vs no verification |
+
+### SSO Strategy Decision
+
+| Your Audience | Primary SSO | Secondary SSO | Keep Email+Password? |
+|--------------|-------------|---------------|---------------------|
+| B2B SaaS (general) | Google Workspace | Microsoft | Yes |
+| Developer tools | GitHub | Google | Yes |
+| Enterprise | Microsoft/Okta | Google | Yes (for personal evals) |
+| B2C consumer | Google | Apple | Yes |
+| Mobile-first | Apple / Google | Phone OTP | Optional |
+| Privacy-focused | Magic link | Email+password | Yes |
+
+### SSO Placement
+
+```
+┌──────────────────────────────────┐
+│  Create your account             │
+│                                  │
+│  [Continue with Google]          │  ← SSO options first
+│  [Continue with Microsoft]       │
+│                                  │
+│  ──── or ────                   │  ← Visual separator
+│                                  │
+│  Email: [_______________]       │  ← Email+password as alternative
+│  Password: [_______________]    │
+│                                  │
+│  [Create Account]               │
+└──────────────────────────────────┘
+```
+
+**Rules:**
+- SSO buttons above the email form (not below)
+- Use branded button styles (Google&#x27;s official button, etc.)
+- &quot;or&quot; divider between SSO and email options
+- SSO reduces fields to zero (name and email come from the provider)
+
+---
+
+## Field Reduction Methodology
+
+### The &quot;Before First Use&quot; Test
+
+For every field, ask: **Does the product literally not function without this data?**
+
+| Field | Passes Test? | Action |
+|-------|-------------|--------|
+| Email | Yes (account identity) | Keep |
+| Password | Yes (account security) | Keep (or use SSO/magic link) |
+| First name | Usually no | Defer to onboarding or profile |
+| Last name | No | Defer or drop entirely |
+| Company name | Usually no | Enrich from email domain |
+| Phone number | Rarely | Defer unless SMS verification required |
+| Job title | No | Defer to onboarding or enrich |
+| Team size | No | Defer to onboarding |
+| How did you hear about us? | Never | Post-signup survey or attribution |
+| Industry | No | Enrich from company data |
+
+### Enrichment Sources
+
+| Field | Enrichment Method | Timing |
+|-------|-------------------|--------|
+| Company name | Email domain lookup (Clearbit, Apollo) | Immediately post-signup |
+| Company size | Company data API | Immediately post-signup |
+| Industry | Company data API | Immediately post-signup |
+| Job title | LinkedIn API or manual CSM research | Before first sales contact |
+| Location | IP geolocation | On signup |
+
+### Minimum Viable Field Sets
+
+| Signup Type | Minimum Fields | Additional (if needed) |
+|------------|----------------|----------------------|
+| Freemium | Email only (or SSO) | -- |
+| Free trial (product-led) | Email + Password (or SSO) | -- |
+| Free trial (sales-assisted) | Email + Password + Company | + Role (for routing) |
+| Paid signup | Email + Password + Payment | -- |
+| Waitlist | Email | + One qualifying question |
+| Enterprise trial | Email + Company + Role | + Team size (for provisioning) |
+
+---
+
+## Multi-Step Flow Architecture
+
+### When to Use Multi-Step
+
+| Condition | Single-Step | Multi-Step |
+|-----------|------------|------------|
+| Total fields | 1-4 | 5+ |
+| Need to qualify/route | No | Yes |
+| Product needs configuration | No | Yes |
+| B2B with team setup | No | Yes |
+
+### Step Design
+
+**Step 1: Account Creation (lowest friction)**
+- Email + Password (or SSO)
+- NOTHING else on this step
+- This is where 60%+ of abandonment happens if overloaded
+
+**Step 2: Personalization (if needed)**
+- Role / goal / use case selection
+- This personalizes their product experience
+- Skip button available (&quot;Set up later&quot;)
+
+**Step 3: Configuration (if needed)**
+- Team invite, integration connect, data import
+- Each sub-step is optional with &quot;Skip for now&quot;
+- Show value of completing each (&quot;Invite your team to collaborate&quot;)
+
+### Progress Design
+
+- Show step count: &quot;Step 1 of 3&quot;
+- Show progress bar
+- Label each step descriptively: &quot;Create Account&quot;, &quot;Your Role&quot;, &quot;Your Team&quot;
+- Allow back navigation (preserve entered data)
+- Never reset the form on back navigation or browser back button
+
+---
+
+## Credit Card Requirement Analysis
+
+### Decision Framework
+
+| Factor | Require CC | Do Not Require CC |
+|--------|-----------|------------------|
+| Trial conversion goal | &gt; 60% trial-to-paid | &gt; 30% trial-to-paid with higher volume |
+| Product complexity | Simple, immediate value | Complex, needs exploration |
+| ACV | &gt; $100/month | &lt; $100/month |
+| Sales motion | Product-led | Sales-assisted |
+| Competitor practice | Competitors require CC | Competitors offer CC-free trial |
+| Target audience | Enterprise (committed buyers) | SMB/prosumer (browsers) |
+
+### Impact Analysis
+
+| Approach | Signup Volume | Trial Quality | Trial-to-Paid | Net Revenue |
+|----------|-------------|---------------|---------------|-------------|
+| No CC required | Higher (+40-80%) | Lower (more tire-kickers) | Lower (2-15%) | Often higher net |
+| CC required | Lower | Higher (committed) | Higher (40-70%) | Depends on volume |
+| CC with &quot;$0 charge&quot; | Middle | Middle | Middle (20-40%) | Middle |
+
+### Recommendation Framework
+
+**Default to no CC required** unless:
+1. Your product delivers immediate, obvious value (no learning curve)
+2. Your trial-to-paid with CC is &gt; 50%
+3. You have a high-touch sales team to handle lower volume
+4. Support costs for free trials are unsustainable
+
+**If requiring CC:** Display prominently:
+- &quot;You won&#x27;t be charged until [date]&quot;
+- &quot;Cancel anytime before [date]&quot;
+- &quot;We&#x27;ll email you 3 days before your trial ends&quot;
+
+---
+
+## Post-Submit Experience
+
+### Immediately After Signup
+
+| Element | Implementation |
+|---------|---------------|
+| Auto-login | Log the user in immediately (never force a separate login) |
+| Welcome screen | Show a clear next step, not a blank dashboard |
+| Confirmation email | Send immediately, include: what to expect, key features, support contact |
+| Email verification | Defer if possible. If required, send inline and let them continue using the product before verifying |
+
+### Email Verification Strategy
+
+| Approach | Impact on Activation | When to Use |
+|----------|---------------------|-------------|
+| No verification | Best activation rate | Low-risk products, freemium |
+| Verify to unlock specific feature | Good -- users activate first | B2B SaaS with free tier |
+| Verify within 24 hours | Moderate -- creates urgency | Products that send emails |
+| Verify before any use | Worst activation rate | Regulated industries, financial products |
+
+**Default recommendation:** Let users use the product immediately. Verify within 24-48 hours. Gate only the features that require a verified email (e.g., sending emails, team invites).
+
+---
+
+## Mobile Signup Optimization
+
+### Mobile-Specific Rules
+
+| Rule | Implementation |
+|------|---------------|
+| SSO first | Google/Apple Sign In is one tap on mobile |
+| One column | Never use side-by-side fields on mobile |
+| Large inputs | Minimum 44px height for all touch targets |
+| Appropriate keyboards | `type=&quot;email&quot;`, `type=&quot;tel&quot;`, `type=&quot;password&quot;` |
+| Auto-fill support | Use standard field names for browser auto-fill |
+| Sticky CTA | Pin &quot;Create Account&quot; button to bottom of viewport |
+| No CAPTCHA | Use invisible reCAPTCHA or alternatives |
+| Password visibility | Toggle to show/hide password |
+
+### Mobile vs Desktop Signup Differences
+
+| Aspect | Desktop | Mobile |
+|--------|---------|--------|
+| Primary auth | SSO or Email+Password | SSO preferred (one-tap) |
+| Fields per screen | Up to 5 | Max 3 |
+| Password rules | Show requirements upfront | Show on interaction |
+| CAPTCHA | Standard reCAPTCHA acceptable | Invisible or none |
+| Social proof | Sidebar or adjacent | Below form or above |
+
+---
+
+## Signup Flow Patterns by Product Type
+
+### B2B SaaS Trial
+
+```
+[Google SSO] or [Email + Password]
+→ Auto-login to product
+→ Welcome screen: &quot;What brings you here?&quot; (3 options)
+→ Guided first action based on selection
+→ Team invite prompt (optional, day 2-3)
+```
+
+### B2C Consumer App
+
+```
+[Apple Sign In] or [Google Sign In] or [Email]
+→ Immediately into product
+→ Personalization (follows, preferences) inline
+→ Profile completion deferred
+```
+
+### Enterprise/Sales-Assisted
+
+```
+[Work Email + Password + Company Name]
+→ Auto-login to sandbox
+→ Role + team size (for provisioning)
+→ CSM outreach triggered for qualified accounts
+→ Guided setup with dedicated support
+```
+
+### Waitlist / Early Access
+
+```
+[Email only]
+→ Confirmation page: position in waitlist
+→ Referral mechanism: &quot;Jump ahead by sharing&quot;
+→ Weekly update email on progress
+→ Access granted email with one-click activation
+```
+
+---
+
+## Progressive Profiling
+
+Collect information over multiple sessions instead of one long form.
+
+### Progressive Profiling Schedule
+
+| Session | What to Collect | How |
+|---------|----------------|-----|
+| Signup (session 1) | Email + auth | Signup form |
+| First use (session 1-2) | Role, primary goal | In-product prompt or setup wizard |
+| Day 3-5 | Team size, use case | Contextual question in product |
+| Day 7-14 | Industry, company size | Survey or enrichment |
+| Before first payment | Billing info | Upgrade flow |
+
+### Implementation Rules
+
+- Each profiling touchpoint asks 1-2 questions maximum
+- Always explain why you are asking (&quot;So we can personalize your experience&quot;)
+- Always provide a &quot;Skip&quot; option
+- Never ask for information you can enrich automatically
+- Store partial profiles and build over time
+
+---
+
+## Error and Edge Case Handling
+
+### Password Requirements
+
+| Approach | User Experience | Security |
+|----------|----------------|----------|
+| Show requirements upfront | Best -- user knows what to enter | Good |
+| Show requirements on focus | Good | Good |
+| Show errors only after submit | Bad -- frustrating | Same |
+| Real-time checkmarks | Best -- progressive validation | Good |
+
+**Recommended:** Show password requirements as a checklist that checks off in real-time as the user types.
+
+### Common Error Scenarios
+
+| Error | Bad UX | Good UX |
+|-------|--------|---------|
+| Email already registered | &quot;Error: account exists&quot; | &quot;This email already has an account. [Log in] or [Reset password]&quot; |
+| Weak password | &quot;Password too weak&quot; | Checkmarks showing which requirements are met/unmet |
+| SSO failure | Generic error page | &quot;Something went wrong with Google login. [Try again] or [Use email instead]&quot; |
+| Network error | Form clears, no message | &quot;Connection issue. Your data is saved. [Try again]&quot; |
+| Rate limiting | Blocked with no explanation | &quot;Too many attempts. Please try again in [N] minutes&quot; |
+
+---
+
+## A/B Test Framework
+
+### High-Impact Tests
+
+| Test | Hypothesis | Metric |
+|------|-----------|--------|
+| Add Google SSO | SSO increases completion by 15-30% | Signup completion rate |
+| Remove non-essential fields | Fewer fields = higher completion | Completion rate + activation rate |
+| Single-step vs multi-step | Multi-step feels easier for 5+ field forms | Completion rate |
+| CC required vs not | No CC increases volume enough to offset lower conversion | Net revenue |
+| Defer email verification | Immediate product access increases activation | Activation rate |
+
+### Measurement Rules
+
+- Track signup completion rate AND downstream activation rate
+- A test that increases signups but decreases activation is not a win
+- Track by traffic source (paid vs organic may respond differently)
+- Track mobile and desktop separately
+
+---
+
+## Metrics and Benchmarks
+
+### Key Metrics
+
+| Metric | Formula | Benchmark |
+|--------|---------|-----------|
+| Signup page visit-to-completion | Completions / Page views | 30-50% (B2B), 40-60% (B2C) |
+| SSO adoption rate | SSO signups / Total signups | 30-60% when offered |
+| Field-level drop-off | Abandonment per field | Identify highest-drop field |
+| Time to complete | Median seconds from first interaction to submit | &lt; 45s for simple, &lt; 2min for multi-step |
+| Mobile completion rate | Mobile completions / Mobile page views | Should be within 15% of desktop |
+| Email verification rate | Verified / Total signups | &gt; 70% within 48 hours |
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Signup Flow Audit | Issue/Impact/Fix/Priority table | Per-step analysis with estimated impact |
+| Recommended Field Set | Justified list | Required vs deferrable fields with rationale |
+| Authentication Strategy | Decision matrix | SSO options, placement, priority |
+| Flow Redesign Spec | Step-by-step outline | Screen-by-screen design with copy |
+| Progressive Profiling Plan | Session-by-session schedule | What to collect, when, and how |
+| A/B Test Plan | Prioritized table | Top 5 tests with hypothesis and expected impact |
+| Mobile Optimization Checklist | Per-element rules | Touch targets, keyboards, auto-fill, sticky CTA |
+
+---
+
+## Tool Reference
+
+### 1. signup_field_auditor.py
+
+Audits a signup form configuration for unnecessary fields, missing enrichment opportunities, and friction points. Evaluates each field against the &quot;Before First Use&quot; test and recommends which to keep, defer, or enrich.
+
+```bash
+python scripts/signup_field_auditor.py fields.json --format text
+python scripts/signup_field_auditor.py fields.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `fields.json` | positional | Path to JSON file with form field configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. signup_flow_scorer.py
+
+Scores a complete signup flow against conversion best practices. Evaluates SSO availability, field count, step count, mobile optimization, error handling, and post-submit experience. Outputs a 0-100 score with itemized improvements.
+
+```bash
+python scripts/signup_flow_scorer.py flow.json --format text
+python scripts/signup_flow_scorer.py flow.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `flow.json` | positional | Path to JSON file with signup flow configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. cc_requirement_analyzer.py
+
+Analyzes whether to require a credit card for trial signup. Takes business metrics (ACV, trial-to-paid rate, support costs, competitors) and recommends CC-required, CC-free, or &quot;$0 charge&quot; approach with projected volume and revenue impact.
+
+```bash
+python scripts/cc_requirement_analyzer.py business.json --format text
+python scripts/cc_requirement_analyzer.py business.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `business.json` | positional | Path to JSON file with business metrics |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Signup completion rate below 30% (B2B) or 40% (B2C) | Too many fields, no SSO option, or form on a separate page from the CTA | Reduce to email-only or SSO; keep form on the same page as the value proposition; each removed field improves conversion ~10% |
+| SSO adoption rate below 30% when offered | SSO buttons placed below the email form, or wrong SSO providers for the audience | Move SSO buttons above the email form with &quot;or&quot; divider; match SSO to audience (Google for B2B, Apple for iOS users) |
+| Mobile completion rate &gt;15% below desktop | Form not optimized for touch (small inputs, wrong keyboard types, no auto-fill) | Ensure 44px min touch targets, use type=&quot;email&quot;/type=&quot;tel&quot;, enable browser auto-fill, pin CTA to bottom of viewport |
+| High drop-off on password field | Complex password requirements shown only after submission, or no password visibility toggle | Show requirements as real-time checklist, add show/hide toggle, consider magic link or SSO to eliminate password entirely |
+| Email verification kills activation | Verification required before any product use blocks the critical first-session experience | Defer verification to 24-48 hours; allow product use immediately; gate only email-sending features behind verification |
+| &quot;Email already registered&quot; errors are frequent | Users forget they have accounts; error message does not help them recover | Change error to &quot;This email has an account. [Log in] or [Reset password]&quot; with direct links |
+| High abandonment on multi-step flows | Steps are not progressive, no progress indicator, or too many fields per step | Show step count and progress bar; limit step 1 to account creation only; add &quot;Skip for now&quot; on non-essential steps |
+
+---
+
+## Success Criteria
+
+- Signup page visit-to-completion rate reaches 30-50% (B2B) or 40-60% (B2C) within 60 days of optimization
+- SSO adoption reaches 30-60% of total signups when SSO is properly offered
+- Median time-to-complete stays below 45 seconds for simple flows and below 2 minutes for multi-step
+- Mobile completion rate falls within 15% of desktop completion rate
+- Email verification rate exceeds 70% within 48 hours of signup
+- Field-level drop-off analysis shows no single field causing &gt;10% incremental abandonment
+- Post-signup activation rate (first key action) improves alongside signup rate (not a vanity metric tradeoff)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Authentication strategy (SSO, magic link, email+password), field reduction methodology, multi-step flow architecture, credit card requirement analysis, post-submit experience design, mobile signup optimization, progressive profiling schedules, error and edge case handling, and A/B testing frameworks for registration flows.
+
+**Out of scope:** Post-signup onboarding and activation (use onboarding-cro), non-registration forms like lead capture or contact forms (use form-cro), landing page conversion before the signup form (use page-cro), in-app upgrade and paywall flows (use paywall-upgrade-cro). Scripts operate on local data only -- no integrations with authentication providers (Auth0, Clerk, etc.) or analytics platforms.
+
+**Limitations:** Conversion benchmarks are aggregate SaaS/app industry data and vary by vertical, price point, and audience. SSO adoption rates depend heavily on audience composition (developer audiences adopt GitHub SSO at 40%+, while SMB audiences may prefer email). Credit card requirement analysis is modeled on industry averages -- actual impact requires A/B testing in your specific context. Progressive profiling recommendations assume standard SaaS lifecycle stages.
+
+---
+
+## Integration Points
+
+- **onboarding-cro** -- Signup flow ends at account creation; onboarding-cro picks up from first login through activation
+- **form-cro** -- Field-level optimization principles (validation, keyboard types, error handling) apply to signup forms
+- **page-cro** -- Landing page quality directly impacts signup form reach; optimize the page before optimizing the form
+- **paywall-upgrade-cro** -- Trial signup configuration (CC-required, trial length) affects downstream upgrade flow design
+- **pricing-strategy** -- Pricing model (freemium vs trial) determines signup flow type and field requirements
+- **referral-program** -- Referred user signups should pre-fill referrer context and display incentive
+
+---
+
+## Related Skills
+
+- **onboarding-cro** -- Use for post-signup activation optimization. Signup-flow-cro ends when the user has an account; onboarding-cro starts there.
+- **form-cro** -- Use for non-signup forms (lead capture, contact, demo request). Different optimization framework than registration.
+- **page-cro** -- Use when the landing page leading to signup is the bottleneck, not the signup form itself.
+- **paywall-upgrade-cro** -- Use when the real challenge is converting free users to paid, not getting them to sign up.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Signup Flow Cro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Signup Flow Cro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Signup Flow Cro in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Signup Flow Cro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Signup Flow Cro&quot;
+4. Description: &quot;Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patt...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/signup-flow-cro/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Signup Flow Cro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Signup Flow CRO
+
+Production-grade signup and registration optimization framework covering authentication strategy, field reduction methodology, multi-step flow architecture, SSO implementation, progressive profiling, credit card requirement analysis, post-submit experience design, and mobile-specific registration patterns. For post-signup onboarding, use onboarding-cro. For lead capture forms (not account creation), use form-cro.
+
+---
+
+## Table of Contents
+
+- [Initial Assessment](#initial-assessment)
+- [Authentication Strategy](#authentication-strategy)
+- [Field Reduction Methodology](#field-reduction-methodology)
+- [Multi-Step Flow Architecture](#multi-step-flow-architecture)
+- [Credit Card Requirement Analysis](#credit-card-requirement-analysis)
+- [Post-Submit Experience](#post-submit-experience)
+- [Mobile Signup Optimization](#mobile-signup-optimization)
+- [Signup Flow Patterns by Product Type](#signup-flow-patterns-by-product-type)
+- [Progressive Profiling](#progressive-profiling)
+- [Error and Edge Case Handling](#error-and-edge-case-handling)
+- [A/B Test Framework](#ab-test-framework)
+- [Metrics and Benchmarks](#metrics-and-benchmarks)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## Initial Assessment
+
+### Required Context
+
+| Question | Why It Matters |
+|----------|---------------|
+| Flow type? (free trial, freemium, paid, waitlist) | Determines friction tolerance |
+| B2B or B2C? | B2B tolerates more fields, B2C needs minimal friction |
+| How many steps/screens currently? | Baseline for optimization |
+| What fields are required? | Identifies reduction opportunities |
+| Current completion rate? | Benchmark for improvement |
+| Where do users drop off? (field-level data) | Pinpoints specific friction |
+| What data is needed before first product use? | Separates must-have from nice-to-have |
+| What compliance requirements exist? | Constrains what can be deferred |
+
+---
+
+## Authentication Strategy
+
+### Authentication Methods Ranked by Friction
+
+| Method | Friction Level | Best For | Conversion Impact |
+|--------|---------------|----------|------------------|
+| Google SSO (one-click) | Very low | B2B SaaS, productivity tools | +15-30% vs email+password |
+| Apple Sign In | Very low | iOS/Mac-heavy audience | +10-20% on Apple devices |
+| Microsoft SSO | Low | Enterprise B2B | +10-15% for enterprise |
+| GitHub SSO | Low | Developer tools | +15-25% for dev audience |
+| Magic link (email) | Low | Security-conscious, B2B | +5-10% vs password |
+| Email + password | Medium | Universal fallback | Baseline |
+| Phone + OTP | Medium | Mobile-first, B2C | Varies by market |
+| Email + password + verification | High | When verification is required | -10-20% vs no verification |
+
+### SSO Strategy Decision
+
+| Your Audience | Primary SSO | Secondary SSO | Keep Email+Password? |
+|--------------|-------------|---------------|---------------------|
+| B2B SaaS (general) | Google Workspace | Microsoft | Yes |
+| Developer tools | GitHub | Google | Yes |
+| Enterprise | Microsoft/Okta | Google | Yes (for personal evals) |
+| B2C consumer | Google | Apple | Yes |
+| Mobile-first | Apple / Google | Phone OTP | Optional |
+| Privacy-focused | Magic link | Email+password | Yes |
+
+### SSO Placement
+
+```
+┌──────────────────────────────────┐
+│  Create your account             │
+│                                  │
+│  [Continue with Google]          │  ← SSO options first
+│  [Continue with Microsoft]       │
+│                                  │
+│  ──── or ────                   │  ← Visual separator
+│                                  │
+│  Email: [_______________]       │  ← Email+password as alternative
+│  Password: [_______________]    │
+│                                  │
+│  [Create Account]               │
+└──────────────────────────────────┘
+```
+
+**Rules:**
+- SSO buttons above the email form (not below)
+- Use branded button styles (Google&#x27;s official button, etc.)
+- &quot;or&quot; divider between SSO and email options
+- SSO reduces fields to zero (name and email come from the provider)
+
+---
+
+## Field Reduction Methodology
+
+### The &quot;Before First Use&quot; Test
+
+For every field, ask: **Does the product literally not function without this data?**
+
+| Field | Passes Test? | Action |
+|-------|-------------|--------|
+| Email | Yes (account identity) | Keep |
+| Password | Yes (account security) | Keep (or use SSO/magic link) |
+| First name | Usually no | Defer to onboarding or profile |
+| Last name | No | Defer or drop entirely |
+| Company name | Usually no | Enrich from email domain |
+| Phone number | Rarely | Defer unless SMS verification required |
+| Job title | No | Defer to onboarding or enrich |
+| Team size | No | Defer to onboarding |
+| How did you hear about us? | Never | Post-signup survey or attribution |
+| Industry | No | Enrich from company data |
+
+### Enrichment Sources
+
+| Field | Enrichment Method | Timing |
+|-------|-------------------|--------|
+| Company name | Email domain lookup (Clearbit, Apollo) | Immediately post-signup |
+| Company size | Company data API | Immediately post-signup |
+| Industry | Company data API | Immediately post-signup |
+| Job title | LinkedIn API or manual CSM research | Before first sales contact |
+| Location | IP geolocation | On signup |
+
+### Minimum Viable Field Sets
+
+| Signup Type | Minimum Fields | Additional (if needed) |
+|------------|----------------|----------------------|
+| Freemium | Email only (or SSO) | -- |
+| Free trial (product-led) | Email + Password (or SSO) | -- |
+| Free trial (sales-assisted) | Email + Password + Company | + Role (for routing) |
+| Paid signup | Email + Password + Payment | -- |
+| Waitlist | Email | + One qualifying question |
+| Enterprise trial | Email + Company + Role | + Team size (for provisioning) |
+
+---
+
+## Multi-Step Flow Architecture
+
+### When to Use Multi-Step
+
+| Condition | Single-Step | Multi-Step |
+|-----------|------------|------------|
+| Total fields | 1-4 | 5+ |
+| Need to qualify/route | No | Yes |
+| Product needs configuration | No | Yes |
+| B2B with team setup | No | Yes |
+
+### Step Design
+
+**Step 1: Account Creation (lowest friction)**
+- Email + Password (or SSO)
+- NOTHING else on this step
+- This is where 60%+ of abandonment happens if overloaded
+
+**Step 2: Personalization (if needed)**
+- Role / goal / use case selection
+- This personalizes their product experience
+- Skip button available (&quot;Set up later&quot;)
+
+**Step 3: Configuration (if needed)**
+- Team invite, integration connect, data import
+- Each sub-step is optional with &quot;Skip for now&quot;
+- Show value of completing each (&quot;Invite your team to collaborate&quot;)
+
+### Progress Design
+
+- Show step count: &quot;Step 1 of 3&quot;
+- Show progress bar
+- Label each step descriptively: &quot;Create Account&quot;, &quot;Your Role&quot;, &quot;Your Team&quot;
+- Allow back navigation (preserve entered data)
+- Never reset the form on back navigation or browser back button
+
+---
+
+## Credit Card Requirement Analysis
+
+### Decision Framework
+
+| Factor | Require CC | Do Not Require CC |
+|--------|-----------|------------------|
+| Trial conversion goal | &gt; 60% trial-to-paid | &gt; 30% trial-to-paid with higher volume |
+| Product complexity | Simple, immediate value | Complex, needs exploration |
+| ACV | &gt; $100/month | &lt; $100/month |
+| Sales motion | Product-led | Sales-assisted |
+| Competitor practice | Competitors require CC | Competitors offer CC-free trial |
+| Target audience | Enterprise (committed buyers) | SMB/prosumer (browsers) |
+
+### Impact Analysis
+
+| Approach | Signup Volume | Trial Quality | Trial-to-Paid | Net Revenue |
+|----------|-------------|---------------|---------------|-------------|
+| No CC required | Higher (+40-80%) | Lower (more tire-kickers) | Lower (2-15%) | Often higher net |
+| CC required | Lower | Higher (committed) | Higher (40-70%) | Depends on volume |
+| CC with &quot;$0 charge&quot; | Middle | Middle | Middle (20-40%) | Middle |
+
+### Recommendation Framework
+
+**Default to no CC required** unless:
+1. Your product delivers immediate, obvious value (no learning curve)
+2. Your trial-to-paid with CC is &gt; 50%
+3. You have a high-touch sales team to handle lower volume
+4. Support costs for free trials are unsustainable
+
+**If requiring CC:** Display prominently:
+- &quot;You won&#x27;t be charged until [date]&quot;
+- &quot;Cancel anytime before [date]&quot;
+- &quot;We&#x27;ll email you 3 days before your trial ends&quot;
+
+---
+
+## Post-Submit Experience
+
+### Immediately After Signup
+
+| Element | Implementation |
+|---------|---------------|
+| Auto-login | Log the user in immediately (never force a separate login) |
+| Welcome screen | Show a clear next step, not a blank dashboard |
+| Confirmation email | Send immediately, include: what to expect, key features, support contact |
+| Email verification | Defer if possible. If required, send inline and let them continue using the product before verifying |
+
+### Email Verification Strategy
+
+| Approach | Impact on Activation | When to Use |
+|----------|---------------------|-------------|
+| No verification | Best activation rate | Low-risk products, freemium |
+| Verify to unlock specific feature | Good -- users activate first | B2B SaaS with free tier |
+| Verify within 24 hours | Moderate -- creates urgency | Products that send emails |
+| Verify before any use | Worst activation rate | Regulated industries, financial products |
+
+**Default recommendation:** Let users use the product immediately. Verify within 24-48 hours. Gate only the features that require a verified email (e.g., sending emails, team invites).
+
+---
+
+## Mobile Signup Optimization
+
+### Mobile-Specific Rules
+
+| Rule | Implementation |
+|------|---------------|
+| SSO first | Google/Apple Sign In is one tap on mobile |
+| One column | Never use side-by-side fields on mobile |
+| Large inputs | Minimum 44px height for all touch targets |
+| Appropriate keyboards | `type=&quot;email&quot;`, `type=&quot;tel&quot;`, `type=&quot;password&quot;` |
+| Auto-fill support | Use standard field names for browser auto-fill |
+| Sticky CTA | Pin &quot;Create Account&quot; button to bottom of viewport |
+| No CAPTCHA | Use invisible reCAPTCHA or alternatives |
+| Password visibility | Toggle to show/hide password |
+
+### Mobile vs Desktop Signup Differences
+
+| Aspect | Desktop | Mobile |
+|--------|---------|--------|
+| Primary auth | SSO or Email+Password | SSO preferred (one-tap) |
+| Fields per screen | Up to 5 | Max 3 |
+| Password rules | Show requirements upfront | Show on interaction |
+| CAPTCHA | Standard reCAPTCHA acceptable | Invisible or none |
+| Social proof | Sidebar or adjacent | Below form or above |
+
+---
+
+## Signup Flow Patterns by Product Type
+
+### B2B SaaS Trial
+
+```
+[Google SSO] or [Email + Password]
+→ Auto-login to product
+→ Welcome screen: &quot;What brings you here?&quot; (3 options)
+→ Guided first action based on selection
+→ Team invite prompt (optional, day 2-3)
+```
+
+### B2C Consumer App
+
+```
+[Apple Sign In] or [Google Sign In] or [Email]
+→ Immediately into product
+→ Personalization (follows, preferences) inline
+→ Profile completion deferred
+```
+
+### Enterprise/Sales-Assisted
+
+```
+[Work Email + Password + Company Name]
+→ Auto-login to sandbox
+→ Role + team size (for provisioning)
+→ CSM outreach triggered for qualified accounts
+→ Guided setup with dedicated support
+```
+
+### Waitlist / Early Access
+
+```
+[Email only]
+→ Confirmation page: position in waitlist
+→ Referral mechanism: &quot;Jump ahead by sharing&quot;
+→ Weekly update email on progress
+→ Access granted email with one-click activation
+```
+
+---
+
+## Progressive Profiling
+
+Collect information over multiple sessions instead of one long form.
+
+### Progressive Profiling Schedule
+
+| Session | What to Collect | How |
+|---------|----------------|-----|
+| Signup (session 1) | Email + auth | Signup form |
+| First use (session 1-2) | Role, primary goal | In-product prompt or setup wizard |
+| Day 3-5 | Team size, use case | Contextual question in product |
+| Day 7-14 | Industry, company size | Survey or enrichment |
+| Before first payment | Billing info | Upgrade flow |
+
+### Implementation Rules
+
+- Each profiling touchpoint asks 1-2 questions maximum
+- Always explain why you are asking (&quot;So we can personalize your experience&quot;)
+- Always provide a &quot;Skip&quot; option
+- Never ask for information you can enrich automatically
+- Store partial profiles and build over time
+
+---
+
+## Error and Edge Case Handling
+
+### Password Requirements
+
+| Approach | User Experience | Security |
+|----------|----------------|----------|
+| Show requirements upfront | Best -- user knows what to enter | Good |
+| Show requirements on focus | Good | Good |
+| Show errors only after submit | Bad -- frustrating | Same |
+| Real-time checkmarks | Best -- progressive validation | Good |
+
+**Recommended:** Show password requirements as a checklist that checks off in real-time as the user types.
+
+### Common Error Scenarios
+
+| Error | Bad UX | Good UX |
+|-------|--------|---------|
+| Email already registered | &quot;Error: account exists&quot; | &quot;This email already has an account. [Log in] or [Reset password]&quot; |
+| Weak password | &quot;Password too weak&quot; | Checkmarks showing which requirements are met/unmet |
+| SSO failure | Generic error page | &quot;Something went wrong with Google login. [Try again] or [Use email instead]&quot; |
+| Network error | Form clears, no message | &quot;Connection issue. Your data is saved. [Try again]&quot; |
+| Rate limiting | Blocked with no explanation | &quot;Too many attempts. Please try again in [N] minutes&quot; |
+
+---
+
+## A/B Test Framework
+
+### High-Impact Tests
+
+| Test | Hypothesis | Metric |
+|------|-----------|--------|
+| Add Google SSO | SSO increases completion by 15-30% | Signup completion rate |
+| Remove non-essential fields | Fewer fields = higher completion | Completion rate + activation rate |
+| Single-step vs multi-step | Multi-step feels easier for 5+ field forms | Completion rate |
+| CC required vs not | No CC increases volume enough to offset lower conversion | Net revenue |
+| Defer email verification | Immediate product access increases activation | Activation rate |
+
+### Measurement Rules
+
+- Track signup completion rate AND downstream activation rate
+- A test that increases signups but decreases activation is not a win
+- Track by traffic source (paid vs organic may respond differently)
+- Track mobile and desktop separately
+
+---
+
+## Metrics and Benchmarks
+
+### Key Metrics
+
+| Metric | Formula | Benchmark |
+|--------|---------|-----------|
+| Signup page visit-to-completion | Completions / Page views | 30-50% (B2B), 40-60% (B2C) |
+| SSO adoption rate | SSO signups / Total signups | 30-60% when offered |
+| Field-level drop-off | Abandonment per field | Identify highest-drop field |
+| Time to complete | Median seconds from first interaction to submit | &lt; 45s for simple, &lt; 2min for multi-step |
+| Mobile completion rate | Mobile completions / Mobile page views | Should be within 15% of desktop |
+| Email verification rate | Verified / Total signups | &gt; 70% within 48 hours |
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Signup Flow Audit | Issue/Impact/Fix/Priority table | Per-step analysis with estimated impact |
+| Recommended Field Set | Justified list | Required vs deferrable fields with rationale |
+| Authentication Strategy | Decision matrix | SSO options, placement, priority |
+| Flow Redesign Spec | Step-by-step outline | Screen-by-screen design with copy |
+| Progressive Profiling Plan | Session-by-session schedule | What to collect, when, and how |
+| A/B Test Plan | Prioritized table | Top 5 tests with hypothesis and expected impact |
+| Mobile Optimization Checklist | Per-element rules | Touch targets, keyboards, auto-fill, sticky CTA |
+
+---
+
+## Tool Reference
+
+### 1. signup_field_auditor.py
+
+Audits a signup form configuration for unnecessary fields, missing enrichment opportunities, and friction points. Evaluates each field against the &quot;Before First Use&quot; test and recommends which to keep, defer, or enrich.
+
+```bash
+python scripts/signup_field_auditor.py fields.json --format text
+python scripts/signup_field_auditor.py fields.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `fields.json` | positional | Path to JSON file with form field configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 2. signup_flow_scorer.py
+
+Scores a complete signup flow against conversion best practices. Evaluates SSO availability, field count, step count, mobile optimization, error handling, and post-submit experience. Outputs a 0-100 score with itemized improvements.
+
+```bash
+python scripts/signup_flow_scorer.py flow.json --format text
+python scripts/signup_flow_scorer.py flow.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `flow.json` | positional | Path to JSON file with signup flow configuration |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+### 3. cc_requirement_analyzer.py
+
+Analyzes whether to require a credit card for trial signup. Takes business metrics (ACV, trial-to-paid rate, support costs, competitors) and recommends CC-required, CC-free, or &quot;$0 charge&quot; approach with projected volume and revenue impact.
+
+```bash
+python scripts/cc_requirement_analyzer.py business.json --format text
+python scripts/cc_requirement_analyzer.py business.json --format json
+```
+
+| Flag | Type | Description |
+|------|------|-------------|
+| `business.json` | positional | Path to JSON file with business metrics |
+| `--format` | optional | Output format: `text` (default) or `json` |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Signup completion rate below 30% (B2B) or 40% (B2C) | Too many fields, no SSO option, or form on a separate page from the CTA | Reduce to email-only or SSO; keep form on the same page as the value proposition; each removed field improves conversion ~10% |
+| SSO adoption rate below 30% when offered | SSO buttons placed below the email form, or wrong SSO providers for the audience | Move SSO buttons above the email form with &quot;or&quot; divider; match SSO to audience (Google for B2B, Apple for iOS users) |
+| Mobile completion rate &gt;15% below desktop | Form not optimized for touch (small inputs, wrong keyboard types, no auto-fill) | Ensure 44px min touch targets, use type=&quot;email&quot;/type=&quot;tel&quot;, enable browser auto-fill, pin CTA to bottom of viewport |
+| High drop-off on password field | Complex password requirements shown only after submission, or no password visibility toggle | Show requirements as real-time checklist, add show/hide toggle, consider magic link or SSO to eliminate password entirely |
+| Email verification kills activation | Verification required before any product use blocks the critical first-session experience | Defer verification to 24-48 hours; allow product use immediately; gate only email-sending features behind verification |
+| &quot;Email already registered&quot; errors are frequent | Users forget they have accounts; error message does not help them recover | Change error to &quot;This email has an account. [Log in] or [Reset password]&quot; with direct links |
+| High abandonment on multi-step flows | Steps are not progressive, no progress indicator, or too many fields per step | Show step count and progress bar; limit step 1 to account creation only; add &quot;Skip for now&quot; on non-essential steps |
+
+---
+
+## Success Criteria
+
+- Signup page visit-to-completion rate reaches 30-50% (B2B) or 40-60% (B2C) within 60 days of optimization
+- SSO adoption reaches 30-60% of total signups when SSO is properly offered
+- Median time-to-complete stays below 45 seconds for simple flows and below 2 minutes for multi-step
+- Mobile completion rate falls within 15% of desktop completion rate
+- Email verification rate exceeds 70% within 48 hours of signup
+- Field-level drop-off analysis shows no single field causing &gt;10% incremental abandonment
+- Post-signup activation rate (first key action) improves alongside signup rate (not a vanity metric tradeoff)
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:** Authentication strategy (SSO, magic link, email+password), field reduction methodology, multi-step flow architecture, credit card requirement analysis, post-submit experience design, mobile signup optimization, progressive profiling schedules, error and edge case handling, and A/B testing frameworks for registration flows.
+
+**Out of scope:** Post-signup onboarding and activation (use onboarding-cro), non-registration forms like lead capture or contact forms (use form-cro), landing page conversion before the signup form (use page-cro), in-app upgrade and paywall flows (use paywall-upgrade-cro). Scripts operate on local data only -- no integrations with authentication providers (Auth0, Clerk, etc.) or analytics platforms.
+
+**Limitations:** Conversion benchmarks are aggregate SaaS/app industry data and vary by vertical, price point, and audience. SSO adoption rates depend heavily on audience composition (developer audiences adopt GitHub SSO at 40%+, while SMB audiences may prefer email). Credit card requirement analysis is modeled on industry averages -- actual impact requires A/B testing in your specific context. Progressive profiling recommendations assume standard SaaS lifecycle stages.
+
+---
+
+## Integration Points
+
+- **onboarding-cro** -- Signup flow ends at account creation; onboarding-cro picks up from first login through activation
+- **form-cro** -- Field-level optimization principles (validation, keyboard types, error handling) apply to signup forms
+- **page-cro** -- Landing page quality directly impacts signup form reach; optimize the page before optimizing the form
+- **paywall-upgrade-cro** -- Trial signup configuration (CC-required, trial length) affects downstream upgrade flow design
+- **pricing-strategy** -- Pricing model (freemium vs trial) determines signup flow type and field requirements
+- **referral-program** -- Referred user signups should pre-fill referrer context and display incentive
+
+---
+
+## Related Skills
+
+- **onboarding-cro** -- Use for post-signup activation optimization. Signup-flow-cro ends when the user has an account; onboarding-cro starts there.
+- **form-cro** -- Use for non-signup forms (lead capture, contact, demo request). Different optimization framework than registration.
+- **page-cro** -- Use when the landing page leading to signup is the bottleneck, not the signup form itself.
+- **paywall-upgrade-cro** -- Use when the real challenge is converting free users to paid, not getting them to sign up.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Signup Flow Cro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Signup Flow Cro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Signup Flow Cro in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Signup Flow Cro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Signup Flow Cro&quot;
+4. Description: &quot;Signup and registration flow optimization covering SSO strategy, progressive profiling, field reduction, multi-step flow design, authentication UX, post-submit experience, and mobile registration patt...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/signup-flow-cro/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

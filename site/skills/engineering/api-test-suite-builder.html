@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Api Test Suite Builder (Engineering domain).
 
 Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test gen...
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/api-test-suite-builder
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Api Test Suite Builder (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Api Test Suite Builder (Engineering domain).
 
 Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test gen...
 
@@ -433,7 +455,1174 @@ https://github.com/borghei/Claude-Skills/tree/main/api-test-suite-builder
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Api Test Suite Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# API Test Suite Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / Testing
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Scan API route definitions across frameworks (Next.js App Router, Express, FastAPI, Django REST, Go net/http), analyze request/response schemas, and generate comprehensive test suites covering authentication, authorization, input validation, error handling, pagination, file uploads, rate limiting, contract testing, and load testing. Outputs ready-to-run test files for Vitest+Supertest (Node), Pytest+httpx (Python), or k6 (load testing).
+
+## Keywords
+
+API testing, test generation, contract testing, load testing, Pact, k6, Supertest, httpx, auth testing, input validation, error matrix, OpenAPI testing, regression suite
+
+## Core Capabilities
+
+### 1. Route Detection and Analysis
+- Scan source files to extract all API endpoints with HTTP methods
+- Parse request body schemas from types, validators, and decorators
+- Detect authentication middleware and authorization rules
+- Identify response types and status codes from handler implementations
+
+### 2. Test Matrix Generation
+- Authentication: valid/invalid/expired tokens, missing headers, wrong roles
+- Input validation: missing fields, wrong types, boundary values, injection
+- Error paths: 400/401/403/404/409/422/429/500 for each route
+- Pagination: first/last/empty/oversized pages, cursor-based and offset
+- File uploads: valid, oversized, wrong MIME, empty, path traversal
+- Rate limiting: burst detection, per-user vs global limits
+
+### 3. Contract Testing
+- OpenAPI spec to test generation
+- Pact consumer-driven contract tests
+- Schema snapshot testing for breaking change detection
+- Response shape validation with JSON Schema
+
+### 4. Load Testing
+- k6 scripts with ramp-up patterns and SLA thresholds
+- Artillery scenarios for sustained load profiles
+- Latency percentile tracking (P50, P95, P99)
+- Concurrent user simulation with realistic data
+
+## When to Use
+
+- New API added — generate test scaffold before implementation (TDD)
+- Legacy API with no tests — scan and generate baseline coverage
+- Pre-release — ensure all routes have at least smoke tests
+- API contract change — detect and test breaking changes
+- Security audit — generate adversarial input tests
+- Performance validation — create load test baselines
+
+## Route Detection Commands
+
+### Next.js App Router
+```bash
+# Find all route handlers and extract HTTP methods
+find ./app/api -name &quot;route.ts&quot; -o -name &quot;route.js&quot; | while read f; do
+  route=$(echo &quot;$f&quot; | sed &#x27;s|./app||; s|/route\.[tj]s||&#x27;)
+  methods=$(grep -oE &quot;export (async )?function (GET|POST|PUT|PATCH|DELETE)&quot; &quot;$f&quot; | \
+    grep -oE &quot;(GET|POST|PUT|PATCH|DELETE)&quot; | tr &#x27;\n&#x27; &#x27;,&#x27;)
+  echo &quot;$methods $route&quot;
+done
+```
+
+### Express / Fastify
+```bash
+grep -rn &quot;router\.\(get\|post\|put\|delete\|patch\)\|app\.\(get\|post\|put\|delete\|patch\)&quot; \
+  src/ --include=&quot;*.ts&quot; --include=&quot;*.js&quot; | \
+  grep -oE &quot;\.(get|post|put|delete|patch)\([&#x27;\&quot;][^&#x27;\&quot;]+[&#x27;\&quot;]&quot; | \
+  sed &quot;s/\.\(.*\)(&#x27;\(.*\)&#x27;/\U\1 \2/&quot;
+```
+
+### FastAPI
+```bash
+grep -rn &quot;@\(app\|router\)\.\(get\|post\|put\|delete\|patch\)&quot; . --include=&quot;*.py&quot; | \
+  grep -oE &quot;(get|post|put|delete|patch)\([&#x27;\&quot;][^&#x27;\&quot;]*[&#x27;\&quot;]&quot;
+```
+
+### Go (net/http, Chi, Gin)
+```bash
+grep -rn &quot;\.HandleFunc\|\.Handle\|\.GET\|\.POST\|\.PUT\|\.DELETE&quot; . --include=&quot;*.go&quot; | \
+  grep -oE &quot;(GET|POST|PUT|DELETE|HandleFunc)\([&#x27;\&quot;][^&#x27;\&quot;]*[&#x27;\&quot;]&quot;
+```
+
+## Test Generation Framework
+
+### Auth Test Matrix
+
+For every authenticated endpoint, generate these test cases:
+
+```typescript
+// tests/api/[resource]/auth.test.ts
+import { describe, it, expect } from &#x27;vitest&#x27;
+import request from &#x27;supertest&#x27;
+import { createTestApp } from &#x27;../../helpers/app&#x27;
+import { createTestUser, generateToken, generateExpiredToken } from &#x27;../../helpers/auth&#x27;
+
+describe(&#x27;GET /api/v1/projects - Authentication&#x27;, () =&gt; {
+  const app = createTestApp()
+
+  it(&#x27;returns 401 when no Authorization header is sent&#x27;, async () =&gt; {
+    const res = await request(app).get(&#x27;/api/v1/projects&#x27;)
+    expect(res.status).toBe(401)
+    expect(res.body.error).toMatchObject({
+      code: &#x27;UNAUTHORIZED&#x27;,
+      message: expect.any(String),
+    })
+  })
+
+  it(&#x27;returns 401 when token format is invalid&#x27;, async () =&gt; {
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, &#x27;InvalidFormat&#x27;)
+    expect(res.status).toBe(401)
+  })
+
+  it(&#x27;returns 401 when token is expired&#x27;, async () =&gt; {
+    const token = generateExpiredToken({ userId: &#x27;user_123&#x27; })
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(401)
+    expect(res.body.error.code).toBe(&#x27;TOKEN_EXPIRED&#x27;)
+  })
+
+  it(&#x27;returns 403 when user lacks required role&#x27;, async () =&gt; {
+    const user = await createTestUser({ role: &#x27;viewer&#x27; })
+    const token = generateToken(user)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(403)
+  })
+
+  it(&#x27;returns 401 when token belongs to a deleted user&#x27;, async () =&gt; {
+    const user = await createTestUser()
+    const token = generateToken(user)
+    await deleteUser(user.id)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(401)
+  })
+
+  it(&#x27;returns 200 with valid token and correct role&#x27;, async () =&gt; {
+    const user = await createTestUser({ role: &#x27;member&#x27; })
+    const token = generateToken(user)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(200)
+    expect(res.body).toHaveProperty(&#x27;data&#x27;)
+  })
+})
+```
+
+### Input Validation Matrix
+
+```typescript
+// tests/api/[resource]/validation.test.ts
+describe(&#x27;POST /api/v1/projects - Input Validation&#x27;, () =&gt; {
+  const validPayload = {
+    name: &#x27;My Project&#x27;,
+    description: &#x27;A test project&#x27;,
+    visibility: &#x27;private&#x27;,
+  }
+
+  it(&#x27;returns 422 when body is empty&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {})
+    expect(res.status).toBe(422)
+    expect(res.body.error.details).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ field: &#x27;name&#x27;, rule: &#x27;required&#x27; }),
+      ])
+    )
+  })
+
+  it.each([
+    [&#x27;name&#x27;, undefined, &#x27;required&#x27;],
+    [&#x27;name&#x27;, &#x27;&#x27;, &#x27;min_length&#x27;],
+    [&#x27;name&#x27;, &#x27;a&#x27;.repeat(256), &#x27;max_length&#x27;],
+    [&#x27;name&#x27;, 123, &#x27;type&#x27;],
+    [&#x27;visibility&#x27;, &#x27;invalid&#x27;, &#x27;enum&#x27;],
+    [&#x27;description&#x27;, &#x27;a&#x27;.repeat(10001), &#x27;max_length&#x27;],
+  ])(&#x27;returns 422 when %s is %s (%s)&#x27;, async (field, value, rule) =&gt; {
+    const payload = { ...validPayload, [field]: value }
+    if (value === undefined) delete payload[field]
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, payload)
+    expect(res.status).toBe(422)
+    expect(res.body.error.details).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ field, rule }),
+      ])
+    )
+  })
+
+  it(&#x27;rejects SQL injection in string fields&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {
+      ...validPayload,
+      name: &quot;&#x27;; DROP TABLE projects; --&quot;,
+    })
+    // Should either reject (422) or sanitize and succeed (201)
+    expect([201, 422]).toContain(res.status)
+    if (res.status === 201) {
+      expect(res.body.data.name).not.toContain(&#x27;DROP TABLE&#x27;)
+    }
+  })
+
+  it(&#x27;rejects XSS payloads in string fields&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {
+      ...validPayload,
+      name: &#x27;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&#x27;,
+    })
+    if (res.status === 201) {
+      expect(res.body.data.name).not.toContain(&#x27;&lt;script&gt;&#x27;)
+    }
+  })
+
+  it(&#x27;accepts valid payload and returns 201 with created resource&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, validPayload)
+    expect(res.status).toBe(201)
+    expect(res.body.data).toMatchObject({
+      id: expect.any(String),
+      name: validPayload.name,
+      visibility: validPayload.visibility,
+      created_at: expect.any(String),
+    })
+    // Verify sensitive fields are NOT in response
+    expect(res.body.data).not.toHaveProperty(&#x27;internal_id&#x27;)
+  })
+})
+```
+
+### Pagination Testing
+
+```typescript
+describe(&#x27;GET /api/v1/projects - Pagination&#x27;, () =&gt; {
+  beforeAll(async () =&gt; {
+    await seedProjects(25) // Create 25 test projects
+  })
+
+  it(&#x27;returns first page with default limit&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data.length).toBeLessThanOrEqual(20) // default limit
+    expect(res.body.meta).toMatchObject({
+      total: 25,
+      page: 1,
+      has_more: true,
+    })
+  })
+
+  it(&#x27;returns second page correctly&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?page=2&amp;limit=10&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data.length).toBe(10)
+    expect(res.body.meta.page).toBe(2)
+  })
+
+  it(&#x27;returns empty array for page beyond data&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?page=100&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data).toEqual([])
+    expect(res.body.meta.has_more).toBe(false)
+  })
+
+  it(&#x27;rejects limit above maximum&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?limit=1000&#x27;)
+    expect(res.status).toBe(422)
+  })
+
+  it(&#x27;returns consistent results with cursor-based pagination&#x27;, async () =&gt; {
+    const page1 = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?limit=5&#x27;)
+    const cursor = page1.body.meta.next_cursor
+    const page2 = await authedRequest(&#x27;GET&#x27;, `/api/v1/projects?limit=5&amp;cursor=${cursor}`)
+    // No overlapping items between pages
+    const ids1 = new Set(page1.body.data.map(p =&gt; p.id))
+    const ids2 = new Set(page2.body.data.map(p =&gt; p.id))
+    const overlap = [...ids1].filter(id =&gt; ids2.has(id))
+    expect(overlap).toHaveLength(0)
+  })
+})
+```
+
+## Contract Testing with Pact
+
+```typescript
+// tests/contracts/projects.pact.test.ts
+import { PactV3, MatchersV3 } from &#x27;@pact-foundation/pact&#x27;
+
+const { like, eachLike, string, integer, iso8601DateTimeWithMillis } = MatchersV3
+
+const provider = new PactV3({
+  consumer: &#x27;frontend-app&#x27;,
+  provider: &#x27;projects-api&#x27;,
+})
+
+describe(&#x27;Projects API Contract&#x27;, () =&gt; {
+  it(&#x27;returns a list of projects&#x27;, async () =&gt; {
+    provider
+      .given(&#x27;projects exist&#x27;)
+      .uponReceiving(&#x27;a request for projects&#x27;)
+      .withRequest({
+        method: &#x27;GET&#x27;,
+        path: &#x27;/api/v1/projects&#x27;,
+        headers: { Authorization: like(&#x27;Bearer token123&#x27;) },
+      })
+      .willRespondWith({
+        status: 200,
+        headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+        body: {
+          data: eachLike({
+            id: string(&#x27;proj_abc123&#x27;),
+            name: string(&#x27;My Project&#x27;),
+            visibility: string(&#x27;private&#x27;),
+            created_at: iso8601DateTimeWithMillis(&#x27;2026-01-15T10:30:00.000Z&#x27;),
+            owner: {
+              id: string(&#x27;user_xyz&#x27;),
+              name: string(&#x27;Jane Doe&#x27;),
+            },
+          }),
+          meta: {
+            total: integer(1),
+            page: integer(1),
+            has_more: false,
+          },
+        },
+      })
+
+    await provider.executeTest(async (mockServer) =&gt; {
+      const response = await fetch(`${mockServer.url}/api/v1/projects`, {
+        headers: { Authorization: &#x27;Bearer token123&#x27; },
+      })
+      expect(response.status).toBe(200)
+      const body = await response.json()
+      expect(body.data[0]).toHaveProperty(&#x27;id&#x27;)
+      expect(body.data[0]).toHaveProperty(&#x27;name&#x27;)
+      expect(body.meta).toHaveProperty(&#x27;total&#x27;)
+    })
+  })
+})
+```
+
+## Load Testing with k6
+
+```javascript
+// tests/load/api-load.k6.js
+import http from &#x27;k6/http&#x27;
+import { check, sleep } from &#x27;k6&#x27;
+import { Rate, Trend } from &#x27;k6/metrics&#x27;
+
+const errorRate = new Rate(&#x27;errors&#x27;)
+const listLatency = new Trend(&#x27;list_projects_duration&#x27;)
+const createLatency = new Trend(&#x27;create_project_duration&#x27;)
+
+export const options = {
+  stages: [
+    { duration: &#x27;30s&#x27;, target: 10 },   // ramp up to 10 users
+    { duration: &#x27;1m&#x27;,  target: 50 },   // ramp up to 50 users
+    { duration: &#x27;2m&#x27;,  target: 50 },   // sustain 50 users
+    { duration: &#x27;30s&#x27;, target: 0 },    // ramp down
+  ],
+  thresholds: {
+    http_req_duration: [&#x27;p(95)&lt;200&#x27;, &#x27;p(99)&lt;500&#x27;],  // SLA: P95 &lt; 200ms
+    errors: [&#x27;rate&lt;0.01&#x27;],                            // Error rate &lt; 1%
+    list_projects_duration: [&#x27;p(95)&lt;150&#x27;],
+    create_project_duration: [&#x27;p(95)&lt;300&#x27;],
+  },
+}
+
+const BASE_URL = __ENV.BASE_URL || &#x27;http://localhost:3000&#x27;
+const AUTH_TOKEN = __ENV.AUTH_TOKEN || &#x27;test-token&#x27;
+
+const headers = {
+  Authorization: `Bearer ${AUTH_TOKEN}`,
+  &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+}
+
+export default function () {
+  // GET /api/v1/projects
+  const listRes = http.get(`${BASE_URL}/api/v1/projects?limit=20`, { headers })
+  listLatency.add(listRes.timings.duration)
+  check(listRes, {
+    &#x27;list: status 200&#x27;: (r) =&gt; r.status === 200,
+    &#x27;list: has data array&#x27;: (r) =&gt; JSON.parse(r.body).data !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+
+  // POST /api/v1/projects
+  const createRes = http.post(
+    `${BASE_URL}/api/v1/projects`,
+    JSON.stringify({
+      name: `Load Test Project ${Date.now()}`,
+      description: &#x27;Created by k6 load test&#x27;,
+      visibility: &#x27;private&#x27;,
+    }),
+    { headers }
+  )
+  createLatency.add(createRes.timings.duration)
+  check(createRes, {
+    &#x27;create: status 201&#x27;: (r) =&gt; r.status === 201,
+    &#x27;create: has id&#x27;: (r) =&gt; JSON.parse(r.body).data.id !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+}
+```
+
+### Run Load Tests
+
+```bash
+# Local
+k6 run tests/load/api-load.k6.js
+
+# With environment variables
+k6 run -e BASE_URL=https://staging.app.com -e AUTH_TOKEN=$STAGING_TOKEN tests/load/api-load.k6.js
+
+# Output to cloud dashboard
+k6 cloud tests/load/api-load.k6.js
+```
+
+## Test Generation Process
+
+When given a codebase, follow this workflow:
+
+1. **Scan routes** using detection commands for the detected framework
+2. **Read each route handler** to understand: request schema, auth middleware, response types, business rules
+3. **Generate test file per resource** (not per route) using the matrices above
+4. **Name tests descriptively**: `&quot;returns 401 when token is expired&quot;` not `&quot;auth test 3&quot;`
+5. **Use factories/fixtures** for test data — never hardcode IDs or tokens
+6. **Assert response shape**, not just status codes
+7. **Include negative tests** — error paths catch 80% of production bugs
+8. **Add contract tests** for any API consumed by external services
+9. **Add load tests** for any endpoint expected to handle &gt;100 RPM
+
+## Test Helper Patterns
+
+```typescript
+// tests/helpers/auth.ts — reusable auth utilities
+import jwt from &#x27;jsonwebtoken&#x27;
+
+export function generateToken(user: { id: string; role: string }, expiresIn = &#x27;1h&#x27;) {
+  return jwt.sign({ sub: user.id, role: user.role }, process.env.JWT_SECRET!, { expiresIn })
+}
+
+export function generateExpiredToken(user: { id: string }) {
+  return jwt.sign({ sub: user.id }, process.env.JWT_SECRET!, { expiresIn: &#x27;-1h&#x27; })
+}
+
+// tests/helpers/request.ts — authed request helper
+export async function authedRequest(
+  method: string,
+  path: string,
+  body?: any,
+  userOverrides?: Partial&lt;User&gt;,
+) {
+  const user = await createTestUser(userOverrides)
+  const token = generateToken(user)
+  const req = request(app)[method.toLowerCase()](path)
+    .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+  if (body) req.send(body)
+  return req
+}
+
+// tests/helpers/factory.ts — test data factories
+export function buildProject(overrides = {}) {
+  return {
+    name: `Project ${Date.now()}`,
+    description: &#x27;Test project&#x27;,
+    visibility: &#x27;private&#x27;,
+    ...overrides,
+  }
+}
+```
+
+## Common Pitfalls
+
+- **Testing only happy paths** — 80% of production bugs live in error paths; test those first
+- **Hardcoded IDs and tokens** — use factories; data changes between environments
+- **Shared state between tests** — always clean up; one test&#x27;s data should not affect another
+- **Testing implementation, not behavior** — assert what the API returns, not how it does it
+- **Missing boundary tests** — off-by-one errors are the most common bug in pagination and limits
+- **Ignoring Content-Type** — test that the API rejects wrong content types
+- **Not testing token expiry separately from invalid tokens** — they produce different error codes
+- **Flaky tests from timing** — never depend on clock time; use deterministic test data
+
+## Best Practices
+
+1. One describe block per endpoint, nested by concern (auth, validation, business logic)
+2. Seed only the minimal data each test needs — do not load the entire database
+3. Assert specific error codes and field names, not just HTTP status
+4. Test that sensitive fields (password, secret_key) are never present in responses
+5. For contract tests, run them in CI against both consumer and provider
+6. For load tests, set SLA thresholds (`p(95)&lt;200`) and fail the build if violated
+7. Keep test files colocated with the code they test or in a parallel `tests/` tree
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated tests fail with `Cannot find module` errors | Test helper imports reference paths that don&#x27;t exist in target project | Update import paths in generated files to match the project&#x27;s `tsconfig.json` paths or Jest `moduleNameMapper` configuration |
+| Auth tests all return 200 instead of 401/403 | Test app instance is not using the same auth middleware as production | Ensure `createTestApp()` loads the full middleware stack including auth guards; check that `JWT_SECRET` env var is set in the test environment |
+| Pact contract verification fails on CI but passes locally | Provider state callbacks are missing or the provider is running a different version | Pin the provider version in CI, ensure all `given()` states have matching provider state handlers, and verify the Pact broker URL is correct |
+| k6 load tests report 0 requests or instant completion | `BASE_URL` environment variable is not set or points to an unreachable host | Pass `-e BASE_URL=http://localhost:3000` explicitly and verify the server is running before starting the k6 run |
+| Pagination tests fail with inconsistent ordering | The API does not enforce a default sort order, so results vary between runs | Add an explicit `ORDER BY` clause to the API query or include `?sort=created_at` in test requests to guarantee deterministic ordering |
+| Input validation tests pass but miss real-world edge cases | Generated boundary values use generic limits (256 chars) that don&#x27;t match actual schema constraints | Read the schema or validator definitions (Zod, Joi, Pydantic) and adjust boundary values to match declared `maxLength`, `minimum`, and `enum` values |
+| Tests are flaky due to database state leakage between runs | Tests share a database and don&#x27;t clean up after themselves | Wrap each test in a transaction that rolls back, or use `beforeEach` to truncate relevant tables; avoid relying on auto-increment IDs |
+
+## Success Criteria
+
+- **Route coverage &gt;= 95%**: Every API endpoint in the codebase has at least one generated test file covering auth, validation, and happy path scenarios
+- **Error path ratio &gt;= 3:1**: At least three negative/error test cases exist for every happy-path test case per endpoint
+- **Test execution time &lt; 60s**: The full generated unit/integration test suite runs in under 60 seconds (excluding load tests)
+- **Zero hardcoded secrets**: No test file contains hardcoded API keys, tokens, or passwords; all credentials come from environment variables or factories
+- **Contract test coverage for all external APIs**: Every endpoint consumed by an external service or frontend client has a corresponding Pact or schema snapshot test
+- **Load test SLA thresholds defined**: Every load-tested endpoint has explicit P95 and P99 latency thresholds and an error rate ceiling configured in the k6 script
+- **CI integration complete**: Generated tests run automatically in the CI pipeline with clear pass/fail reporting and no manual intervention required
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Generating test suites from route definitions for REST APIs across Node.js, Python, and Go frameworks
+- Authentication, authorization, input validation, pagination, and error-path test generation
+- Consumer-driven contract testing with Pact and schema snapshot validation
+- Load and performance testing script generation with k6 and Artillery
+
+**This skill does NOT cover:**
+- GraphQL API testing (see `engineering/api-design-reviewer` for schema review patterns)
+- End-to-end browser testing or UI interaction testing (see `engineering/playwright-pro`)
+- Database migration testing or schema validation (see `engineering/database-schema-designer`)
+- Security penetration testing beyond input sanitization checks (see `engineering/skill-security-auditor`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/api-design-reviewer` | Validate API design before generating tests | Design review output defines the endpoint contracts that this skill generates tests for |
+| `engineering/ci-cd-pipeline-builder` | Embed generated tests into CI/CD pipelines | Generated test files and k6 scripts are added as pipeline stages with pass/fail gates |
+| `engineering/playwright-pro` | Complement API tests with E2E browser tests | API test suite validates backend behavior; Playwright tests validate the frontend consuming those APIs |
+| `engineering/database-schema-designer` | Align test fixtures with database schema | Schema definitions inform factory functions and seed data used in generated test helpers |
+| `engineering/observability-designer` | Monitor test-covered endpoints in production | Load test thresholds (P95, P99) feed into alerting rules for the same endpoints in production dashboards |
+| `engineering/performance-profiler` | Investigate endpoints that fail load test thresholds | k6 results identify slow endpoints; the profiler skill traces root causes at the code level |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Api Test Suite Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Api Test Suite Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Api Test Suite Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Api Test Suite Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Api Test Suite Builder&quot;
+4. Description: &quot;Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test gen...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/api-test-suite-builder/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Api Test Suite Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# API Test Suite Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / Testing
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Scan API route definitions across frameworks (Next.js App Router, Express, FastAPI, Django REST, Go net/http), analyze request/response schemas, and generate comprehensive test suites covering authentication, authorization, input validation, error handling, pagination, file uploads, rate limiting, contract testing, and load testing. Outputs ready-to-run test files for Vitest+Supertest (Node), Pytest+httpx (Python), or k6 (load testing).
+
+## Keywords
+
+API testing, test generation, contract testing, load testing, Pact, k6, Supertest, httpx, auth testing, input validation, error matrix, OpenAPI testing, regression suite
+
+## Core Capabilities
+
+### 1. Route Detection and Analysis
+- Scan source files to extract all API endpoints with HTTP methods
+- Parse request body schemas from types, validators, and decorators
+- Detect authentication middleware and authorization rules
+- Identify response types and status codes from handler implementations
+
+### 2. Test Matrix Generation
+- Authentication: valid/invalid/expired tokens, missing headers, wrong roles
+- Input validation: missing fields, wrong types, boundary values, injection
+- Error paths: 400/401/403/404/409/422/429/500 for each route
+- Pagination: first/last/empty/oversized pages, cursor-based and offset
+- File uploads: valid, oversized, wrong MIME, empty, path traversal
+- Rate limiting: burst detection, per-user vs global limits
+
+### 3. Contract Testing
+- OpenAPI spec to test generation
+- Pact consumer-driven contract tests
+- Schema snapshot testing for breaking change detection
+- Response shape validation with JSON Schema
+
+### 4. Load Testing
+- k6 scripts with ramp-up patterns and SLA thresholds
+- Artillery scenarios for sustained load profiles
+- Latency percentile tracking (P50, P95, P99)
+- Concurrent user simulation with realistic data
+
+## When to Use
+
+- New API added — generate test scaffold before implementation (TDD)
+- Legacy API with no tests — scan and generate baseline coverage
+- Pre-release — ensure all routes have at least smoke tests
+- API contract change — detect and test breaking changes
+- Security audit — generate adversarial input tests
+- Performance validation — create load test baselines
+
+## Route Detection Commands
+
+### Next.js App Router
+```bash
+# Find all route handlers and extract HTTP methods
+find ./app/api -name &quot;route.ts&quot; -o -name &quot;route.js&quot; | while read f; do
+  route=$(echo &quot;$f&quot; | sed &#x27;s|./app||; s|/route\.[tj]s||&#x27;)
+  methods=$(grep -oE &quot;export (async )?function (GET|POST|PUT|PATCH|DELETE)&quot; &quot;$f&quot; | \
+    grep -oE &quot;(GET|POST|PUT|PATCH|DELETE)&quot; | tr &#x27;\n&#x27; &#x27;,&#x27;)
+  echo &quot;$methods $route&quot;
+done
+```
+
+### Express / Fastify
+```bash
+grep -rn &quot;router\.\(get\|post\|put\|delete\|patch\)\|app\.\(get\|post\|put\|delete\|patch\)&quot; \
+  src/ --include=&quot;*.ts&quot; --include=&quot;*.js&quot; | \
+  grep -oE &quot;\.(get|post|put|delete|patch)\([&#x27;\&quot;][^&#x27;\&quot;]+[&#x27;\&quot;]&quot; | \
+  sed &quot;s/\.\(.*\)(&#x27;\(.*\)&#x27;/\U\1 \2/&quot;
+```
+
+### FastAPI
+```bash
+grep -rn &quot;@\(app\|router\)\.\(get\|post\|put\|delete\|patch\)&quot; . --include=&quot;*.py&quot; | \
+  grep -oE &quot;(get|post|put|delete|patch)\([&#x27;\&quot;][^&#x27;\&quot;]*[&#x27;\&quot;]&quot;
+```
+
+### Go (net/http, Chi, Gin)
+```bash
+grep -rn &quot;\.HandleFunc\|\.Handle\|\.GET\|\.POST\|\.PUT\|\.DELETE&quot; . --include=&quot;*.go&quot; | \
+  grep -oE &quot;(GET|POST|PUT|DELETE|HandleFunc)\([&#x27;\&quot;][^&#x27;\&quot;]*[&#x27;\&quot;]&quot;
+```
+
+## Test Generation Framework
+
+### Auth Test Matrix
+
+For every authenticated endpoint, generate these test cases:
+
+```typescript
+// tests/api/[resource]/auth.test.ts
+import { describe, it, expect } from &#x27;vitest&#x27;
+import request from &#x27;supertest&#x27;
+import { createTestApp } from &#x27;../../helpers/app&#x27;
+import { createTestUser, generateToken, generateExpiredToken } from &#x27;../../helpers/auth&#x27;
+
+describe(&#x27;GET /api/v1/projects - Authentication&#x27;, () =&gt; {
+  const app = createTestApp()
+
+  it(&#x27;returns 401 when no Authorization header is sent&#x27;, async () =&gt; {
+    const res = await request(app).get(&#x27;/api/v1/projects&#x27;)
+    expect(res.status).toBe(401)
+    expect(res.body.error).toMatchObject({
+      code: &#x27;UNAUTHORIZED&#x27;,
+      message: expect.any(String),
+    })
+  })
+
+  it(&#x27;returns 401 when token format is invalid&#x27;, async () =&gt; {
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, &#x27;InvalidFormat&#x27;)
+    expect(res.status).toBe(401)
+  })
+
+  it(&#x27;returns 401 when token is expired&#x27;, async () =&gt; {
+    const token = generateExpiredToken({ userId: &#x27;user_123&#x27; })
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(401)
+    expect(res.body.error.code).toBe(&#x27;TOKEN_EXPIRED&#x27;)
+  })
+
+  it(&#x27;returns 403 when user lacks required role&#x27;, async () =&gt; {
+    const user = await createTestUser({ role: &#x27;viewer&#x27; })
+    const token = generateToken(user)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(403)
+  })
+
+  it(&#x27;returns 401 when token belongs to a deleted user&#x27;, async () =&gt; {
+    const user = await createTestUser()
+    const token = generateToken(user)
+    await deleteUser(user.id)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(401)
+  })
+
+  it(&#x27;returns 200 with valid token and correct role&#x27;, async () =&gt; {
+    const user = await createTestUser({ role: &#x27;member&#x27; })
+    const token = generateToken(user)
+    const res = await request(app)
+      .get(&#x27;/api/v1/projects&#x27;)
+      .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+    expect(res.status).toBe(200)
+    expect(res.body).toHaveProperty(&#x27;data&#x27;)
+  })
+})
+```
+
+### Input Validation Matrix
+
+```typescript
+// tests/api/[resource]/validation.test.ts
+describe(&#x27;POST /api/v1/projects - Input Validation&#x27;, () =&gt; {
+  const validPayload = {
+    name: &#x27;My Project&#x27;,
+    description: &#x27;A test project&#x27;,
+    visibility: &#x27;private&#x27;,
+  }
+
+  it(&#x27;returns 422 when body is empty&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {})
+    expect(res.status).toBe(422)
+    expect(res.body.error.details).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ field: &#x27;name&#x27;, rule: &#x27;required&#x27; }),
+      ])
+    )
+  })
+
+  it.each([
+    [&#x27;name&#x27;, undefined, &#x27;required&#x27;],
+    [&#x27;name&#x27;, &#x27;&#x27;, &#x27;min_length&#x27;],
+    [&#x27;name&#x27;, &#x27;a&#x27;.repeat(256), &#x27;max_length&#x27;],
+    [&#x27;name&#x27;, 123, &#x27;type&#x27;],
+    [&#x27;visibility&#x27;, &#x27;invalid&#x27;, &#x27;enum&#x27;],
+    [&#x27;description&#x27;, &#x27;a&#x27;.repeat(10001), &#x27;max_length&#x27;],
+  ])(&#x27;returns 422 when %s is %s (%s)&#x27;, async (field, value, rule) =&gt; {
+    const payload = { ...validPayload, [field]: value }
+    if (value === undefined) delete payload[field]
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, payload)
+    expect(res.status).toBe(422)
+    expect(res.body.error.details).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ field, rule }),
+      ])
+    )
+  })
+
+  it(&#x27;rejects SQL injection in string fields&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {
+      ...validPayload,
+      name: &quot;&#x27;; DROP TABLE projects; --&quot;,
+    })
+    // Should either reject (422) or sanitize and succeed (201)
+    expect([201, 422]).toContain(res.status)
+    if (res.status === 201) {
+      expect(res.body.data.name).not.toContain(&#x27;DROP TABLE&#x27;)
+    }
+  })
+
+  it(&#x27;rejects XSS payloads in string fields&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, {
+      ...validPayload,
+      name: &#x27;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;&#x27;,
+    })
+    if (res.status === 201) {
+      expect(res.body.data.name).not.toContain(&#x27;&lt;script&gt;&#x27;)
+    }
+  })
+
+  it(&#x27;accepts valid payload and returns 201 with created resource&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;POST&#x27;, &#x27;/api/v1/projects&#x27;, validPayload)
+    expect(res.status).toBe(201)
+    expect(res.body.data).toMatchObject({
+      id: expect.any(String),
+      name: validPayload.name,
+      visibility: validPayload.visibility,
+      created_at: expect.any(String),
+    })
+    // Verify sensitive fields are NOT in response
+    expect(res.body.data).not.toHaveProperty(&#x27;internal_id&#x27;)
+  })
+})
+```
+
+### Pagination Testing
+
+```typescript
+describe(&#x27;GET /api/v1/projects - Pagination&#x27;, () =&gt; {
+  beforeAll(async () =&gt; {
+    await seedProjects(25) // Create 25 test projects
+  })
+
+  it(&#x27;returns first page with default limit&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data.length).toBeLessThanOrEqual(20) // default limit
+    expect(res.body.meta).toMatchObject({
+      total: 25,
+      page: 1,
+      has_more: true,
+    })
+  })
+
+  it(&#x27;returns second page correctly&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?page=2&amp;limit=10&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data.length).toBe(10)
+    expect(res.body.meta.page).toBe(2)
+  })
+
+  it(&#x27;returns empty array for page beyond data&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?page=100&#x27;)
+    expect(res.status).toBe(200)
+    expect(res.body.data).toEqual([])
+    expect(res.body.meta.has_more).toBe(false)
+  })
+
+  it(&#x27;rejects limit above maximum&#x27;, async () =&gt; {
+    const res = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?limit=1000&#x27;)
+    expect(res.status).toBe(422)
+  })
+
+  it(&#x27;returns consistent results with cursor-based pagination&#x27;, async () =&gt; {
+    const page1 = await authedRequest(&#x27;GET&#x27;, &#x27;/api/v1/projects?limit=5&#x27;)
+    const cursor = page1.body.meta.next_cursor
+    const page2 = await authedRequest(&#x27;GET&#x27;, `/api/v1/projects?limit=5&amp;cursor=${cursor}`)
+    // No overlapping items between pages
+    const ids1 = new Set(page1.body.data.map(p =&gt; p.id))
+    const ids2 = new Set(page2.body.data.map(p =&gt; p.id))
+    const overlap = [...ids1].filter(id =&gt; ids2.has(id))
+    expect(overlap).toHaveLength(0)
+  })
+})
+```
+
+## Contract Testing with Pact
+
+```typescript
+// tests/contracts/projects.pact.test.ts
+import { PactV3, MatchersV3 } from &#x27;@pact-foundation/pact&#x27;
+
+const { like, eachLike, string, integer, iso8601DateTimeWithMillis } = MatchersV3
+
+const provider = new PactV3({
+  consumer: &#x27;frontend-app&#x27;,
+  provider: &#x27;projects-api&#x27;,
+})
+
+describe(&#x27;Projects API Contract&#x27;, () =&gt; {
+  it(&#x27;returns a list of projects&#x27;, async () =&gt; {
+    provider
+      .given(&#x27;projects exist&#x27;)
+      .uponReceiving(&#x27;a request for projects&#x27;)
+      .withRequest({
+        method: &#x27;GET&#x27;,
+        path: &#x27;/api/v1/projects&#x27;,
+        headers: { Authorization: like(&#x27;Bearer token123&#x27;) },
+      })
+      .willRespondWith({
+        status: 200,
+        headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+        body: {
+          data: eachLike({
+            id: string(&#x27;proj_abc123&#x27;),
+            name: string(&#x27;My Project&#x27;),
+            visibility: string(&#x27;private&#x27;),
+            created_at: iso8601DateTimeWithMillis(&#x27;2026-01-15T10:30:00.000Z&#x27;),
+            owner: {
+              id: string(&#x27;user_xyz&#x27;),
+              name: string(&#x27;Jane Doe&#x27;),
+            },
+          }),
+          meta: {
+            total: integer(1),
+            page: integer(1),
+            has_more: false,
+          },
+        },
+      })
+
+    await provider.executeTest(async (mockServer) =&gt; {
+      const response = await fetch(`${mockServer.url}/api/v1/projects`, {
+        headers: { Authorization: &#x27;Bearer token123&#x27; },
+      })
+      expect(response.status).toBe(200)
+      const body = await response.json()
+      expect(body.data[0]).toHaveProperty(&#x27;id&#x27;)
+      expect(body.data[0]).toHaveProperty(&#x27;name&#x27;)
+      expect(body.meta).toHaveProperty(&#x27;total&#x27;)
+    })
+  })
+})
+```
+
+## Load Testing with k6
+
+```javascript
+// tests/load/api-load.k6.js
+import http from &#x27;k6/http&#x27;
+import { check, sleep } from &#x27;k6&#x27;
+import { Rate, Trend } from &#x27;k6/metrics&#x27;
+
+const errorRate = new Rate(&#x27;errors&#x27;)
+const listLatency = new Trend(&#x27;list_projects_duration&#x27;)
+const createLatency = new Trend(&#x27;create_project_duration&#x27;)
+
+export const options = {
+  stages: [
+    { duration: &#x27;30s&#x27;, target: 10 },   // ramp up to 10 users
+    { duration: &#x27;1m&#x27;,  target: 50 },   // ramp up to 50 users
+    { duration: &#x27;2m&#x27;,  target: 50 },   // sustain 50 users
+    { duration: &#x27;30s&#x27;, target: 0 },    // ramp down
+  ],
+  thresholds: {
+    http_req_duration: [&#x27;p(95)&lt;200&#x27;, &#x27;p(99)&lt;500&#x27;],  // SLA: P95 &lt; 200ms
+    errors: [&#x27;rate&lt;0.01&#x27;],                            // Error rate &lt; 1%
+    list_projects_duration: [&#x27;p(95)&lt;150&#x27;],
+    create_project_duration: [&#x27;p(95)&lt;300&#x27;],
+  },
+}
+
+const BASE_URL = __ENV.BASE_URL || &#x27;http://localhost:3000&#x27;
+const AUTH_TOKEN = __ENV.AUTH_TOKEN || &#x27;test-token&#x27;
+
+const headers = {
+  Authorization: `Bearer ${AUTH_TOKEN}`,
+  &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+}
+
+export default function () {
+  // GET /api/v1/projects
+  const listRes = http.get(`${BASE_URL}/api/v1/projects?limit=20`, { headers })
+  listLatency.add(listRes.timings.duration)
+  check(listRes, {
+    &#x27;list: status 200&#x27;: (r) =&gt; r.status === 200,
+    &#x27;list: has data array&#x27;: (r) =&gt; JSON.parse(r.body).data !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+
+  // POST /api/v1/projects
+  const createRes = http.post(
+    `${BASE_URL}/api/v1/projects`,
+    JSON.stringify({
+      name: `Load Test Project ${Date.now()}`,
+      description: &#x27;Created by k6 load test&#x27;,
+      visibility: &#x27;private&#x27;,
+    }),
+    { headers }
+  )
+  createLatency.add(createRes.timings.duration)
+  check(createRes, {
+    &#x27;create: status 201&#x27;: (r) =&gt; r.status === 201,
+    &#x27;create: has id&#x27;: (r) =&gt; JSON.parse(r.body).data.id !== undefined,
+  }) || errorRate.add(1)
+
+  sleep(1)
+}
+```
+
+### Run Load Tests
+
+```bash
+# Local
+k6 run tests/load/api-load.k6.js
+
+# With environment variables
+k6 run -e BASE_URL=https://staging.app.com -e AUTH_TOKEN=$STAGING_TOKEN tests/load/api-load.k6.js
+
+# Output to cloud dashboard
+k6 cloud tests/load/api-load.k6.js
+```
+
+## Test Generation Process
+
+When given a codebase, follow this workflow:
+
+1. **Scan routes** using detection commands for the detected framework
+2. **Read each route handler** to understand: request schema, auth middleware, response types, business rules
+3. **Generate test file per resource** (not per route) using the matrices above
+4. **Name tests descriptively**: `&quot;returns 401 when token is expired&quot;` not `&quot;auth test 3&quot;`
+5. **Use factories/fixtures** for test data — never hardcode IDs or tokens
+6. **Assert response shape**, not just status codes
+7. **Include negative tests** — error paths catch 80% of production bugs
+8. **Add contract tests** for any API consumed by external services
+9. **Add load tests** for any endpoint expected to handle &gt;100 RPM
+
+## Test Helper Patterns
+
+```typescript
+// tests/helpers/auth.ts — reusable auth utilities
+import jwt from &#x27;jsonwebtoken&#x27;
+
+export function generateToken(user: { id: string; role: string }, expiresIn = &#x27;1h&#x27;) {
+  return jwt.sign({ sub: user.id, role: user.role }, process.env.JWT_SECRET!, { expiresIn })
+}
+
+export function generateExpiredToken(user: { id: string }) {
+  return jwt.sign({ sub: user.id }, process.env.JWT_SECRET!, { expiresIn: &#x27;-1h&#x27; })
+}
+
+// tests/helpers/request.ts — authed request helper
+export async function authedRequest(
+  method: string,
+  path: string,
+  body?: any,
+  userOverrides?: Partial&lt;User&gt;,
+) {
+  const user = await createTestUser(userOverrides)
+  const token = generateToken(user)
+  const req = request(app)[method.toLowerCase()](path)
+    .set(&#x27;Authorization&#x27;, `Bearer ${token}`)
+  if (body) req.send(body)
+  return req
+}
+
+// tests/helpers/factory.ts — test data factories
+export function buildProject(overrides = {}) {
+  return {
+    name: `Project ${Date.now()}`,
+    description: &#x27;Test project&#x27;,
+    visibility: &#x27;private&#x27;,
+    ...overrides,
+  }
+}
+```
+
+## Common Pitfalls
+
+- **Testing only happy paths** — 80% of production bugs live in error paths; test those first
+- **Hardcoded IDs and tokens** — use factories; data changes between environments
+- **Shared state between tests** — always clean up; one test&#x27;s data should not affect another
+- **Testing implementation, not behavior** — assert what the API returns, not how it does it
+- **Missing boundary tests** — off-by-one errors are the most common bug in pagination and limits
+- **Ignoring Content-Type** — test that the API rejects wrong content types
+- **Not testing token expiry separately from invalid tokens** — they produce different error codes
+- **Flaky tests from timing** — never depend on clock time; use deterministic test data
+
+## Best Practices
+
+1. One describe block per endpoint, nested by concern (auth, validation, business logic)
+2. Seed only the minimal data each test needs — do not load the entire database
+3. Assert specific error codes and field names, not just HTTP status
+4. Test that sensitive fields (password, secret_key) are never present in responses
+5. For contract tests, run them in CI against both consumer and provider
+6. For load tests, set SLA thresholds (`p(95)&lt;200`) and fail the build if violated
+7. Keep test files colocated with the code they test or in a parallel `tests/` tree
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated tests fail with `Cannot find module` errors | Test helper imports reference paths that don&#x27;t exist in target project | Update import paths in generated files to match the project&#x27;s `tsconfig.json` paths or Jest `moduleNameMapper` configuration |
+| Auth tests all return 200 instead of 401/403 | Test app instance is not using the same auth middleware as production | Ensure `createTestApp()` loads the full middleware stack including auth guards; check that `JWT_SECRET` env var is set in the test environment |
+| Pact contract verification fails on CI but passes locally | Provider state callbacks are missing or the provider is running a different version | Pin the provider version in CI, ensure all `given()` states have matching provider state handlers, and verify the Pact broker URL is correct |
+| k6 load tests report 0 requests or instant completion | `BASE_URL` environment variable is not set or points to an unreachable host | Pass `-e BASE_URL=http://localhost:3000` explicitly and verify the server is running before starting the k6 run |
+| Pagination tests fail with inconsistent ordering | The API does not enforce a default sort order, so results vary between runs | Add an explicit `ORDER BY` clause to the API query or include `?sort=created_at` in test requests to guarantee deterministic ordering |
+| Input validation tests pass but miss real-world edge cases | Generated boundary values use generic limits (256 chars) that don&#x27;t match actual schema constraints | Read the schema or validator definitions (Zod, Joi, Pydantic) and adjust boundary values to match declared `maxLength`, `minimum`, and `enum` values |
+| Tests are flaky due to database state leakage between runs | Tests share a database and don&#x27;t clean up after themselves | Wrap each test in a transaction that rolls back, or use `beforeEach` to truncate relevant tables; avoid relying on auto-increment IDs |
+
+## Success Criteria
+
+- **Route coverage &gt;= 95%**: Every API endpoint in the codebase has at least one generated test file covering auth, validation, and happy path scenarios
+- **Error path ratio &gt;= 3:1**: At least three negative/error test cases exist for every happy-path test case per endpoint
+- **Test execution time &lt; 60s**: The full generated unit/integration test suite runs in under 60 seconds (excluding load tests)
+- **Zero hardcoded secrets**: No test file contains hardcoded API keys, tokens, or passwords; all credentials come from environment variables or factories
+- **Contract test coverage for all external APIs**: Every endpoint consumed by an external service or frontend client has a corresponding Pact or schema snapshot test
+- **Load test SLA thresholds defined**: Every load-tested endpoint has explicit P95 and P99 latency thresholds and an error rate ceiling configured in the k6 script
+- **CI integration complete**: Generated tests run automatically in the CI pipeline with clear pass/fail reporting and no manual intervention required
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Generating test suites from route definitions for REST APIs across Node.js, Python, and Go frameworks
+- Authentication, authorization, input validation, pagination, and error-path test generation
+- Consumer-driven contract testing with Pact and schema snapshot validation
+- Load and performance testing script generation with k6 and Artillery
+
+**This skill does NOT cover:**
+- GraphQL API testing (see `engineering/api-design-reviewer` for schema review patterns)
+- End-to-end browser testing or UI interaction testing (see `engineering/playwright-pro`)
+- Database migration testing or schema validation (see `engineering/database-schema-designer`)
+- Security penetration testing beyond input sanitization checks (see `engineering/skill-security-auditor`)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/api-design-reviewer` | Validate API design before generating tests | Design review output defines the endpoint contracts that this skill generates tests for |
+| `engineering/ci-cd-pipeline-builder` | Embed generated tests into CI/CD pipelines | Generated test files and k6 scripts are added as pipeline stages with pass/fail gates |
+| `engineering/playwright-pro` | Complement API tests with E2E browser tests | API test suite validates backend behavior; Playwright tests validate the frontend consuming those APIs |
+| `engineering/database-schema-designer` | Align test fixtures with database schema | Schema definitions inform factory functions and seed data used in generated test helpers |
+| `engineering/observability-designer` | Monitor test-covered endpoints in production | Load test thresholds (P95, P99) feed into alerting rules for the same endpoints in production dashboards |
+| `engineering/performance-profiler` | Investigate endpoints that fail load test thresholds | k6 results identify slow endpoints; the profiler skill traces root causes at the code level |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Api Test Suite Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Api Test Suite Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Api Test Suite Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Api Test Suite Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Api Test Suite Builder&quot;
+4. Description: &quot;Generate comprehensive API test suites from route definitions across frameworks. Covers auth testing, input validation, contract testing, load testing with k6, API mocking, and OpenAPI-driven test gen...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/api-test-suite-builder/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Architect (Engineering domain).
 
 This skill should be used when the user asks to &quot;design system architecture&quot;, &quot;evaluate microservices vs monolith&quot;, &quot;create architecture diagrams&quot;, &quot;analyze dependencies&quot;, &quot;choose a database&quot;, &quot;plan f...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-architect
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Senior Architect (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Senior Architect (Engineering domain).
 
 This skill should be used when the user asks to &quot;design system architecture&quot;, &quot;evaluate microservices vs monolith&quot;, &quot;create architecture diagrams&quot;, &quot;analyze dependencies&quot;, &quot;choose a database&quot;, &quot;plan f...
 
@@ -425,7 +447,1122 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-architect
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Senior Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Architect
+
+Architecture design and analysis tools for making informed technical decisions.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Tools Overview](#tools-overview)
+  - [Architecture Diagram Generator](#1-architecture-diagram-generator)
+  - [Dependency Analyzer](#2-dependency-analyzer)
+  - [Project Architect](#3-project-architect)
+- [Decision Workflows](#decision-workflows)
+  - [Database Selection](#database-selection-workflow)
+  - [Architecture Pattern Selection](#architecture-pattern-selection-workflow)
+  - [Monolith vs Microservices](#monolith-vs-microservices-decision)
+- [Reference Documentation](#reference-documentation)
+- [Tech Stack Coverage](#tech-stack-coverage)
+- [Common Commands](#common-commands)
+
+---
+
+## Quick Start
+
+```bash
+# Generate architecture diagram from project
+python scripts/architecture_diagram_generator.py ./my-project --format mermaid
+
+# Analyze dependencies for issues
+python scripts/dependency_analyzer.py ./my-project --output json
+
+# Get architecture assessment
+python scripts/project_architect.py ./my-project --verbose
+```
+
+---
+
+## Tools Overview
+
+### 1. Architecture Diagram Generator
+
+Generates architecture diagrams from project structure in multiple formats.
+
+**Solves:** &quot;I need to visualize my system architecture for documentation or team discussion&quot;
+
+**Input:** Project directory path
+**Output:** Diagram code (Mermaid, PlantUML, or ASCII)
+
+**Supported diagram types:**
+- `component` - Shows modules and their relationships
+- `layer` - Shows architectural layers (presentation, business, data)
+- `deployment` - Shows deployment topology
+
+**Usage:**
+```bash
+# Mermaid format (default)
+python scripts/architecture_diagram_generator.py ./project --format mermaid --type component
+
+# PlantUML format
+python scripts/architecture_diagram_generator.py ./project --format plantuml --type layer
+
+# ASCII format (terminal-friendly)
+python scripts/architecture_diagram_generator.py ./project --format ascii
+
+# Save to file
+python scripts/architecture_diagram_generator.py ./project -o architecture.md
+```
+
+**Example output (Mermaid):**
+```mermaid
+graph TD
+    A[API Gateway] --&gt; B[Auth Service]
+    A --&gt; C[User Service]
+    B --&gt; D[(PostgreSQL)]
+    C --&gt; D
+```
+
+---
+
+### 2. Dependency Analyzer
+
+Analyzes project dependencies for coupling, circular dependencies, and outdated packages.
+
+**Solves:** &quot;I need to understand my dependency tree and identify potential issues&quot;
+
+**Input:** Project directory path
+**Output:** Analysis report (JSON or human-readable)
+
+**Analyzes:**
+- Dependency tree (direct and transitive)
+- Circular dependencies between modules
+- Coupling score (0-100)
+- Outdated packages
+
+**Supported package managers:**
+- npm/yarn (`package.json`)
+- Python (`requirements.txt`, `pyproject.toml`)
+- Go (`go.mod`)
+- Rust (`Cargo.toml`)
+
+**Usage:**
+```bash
+# Human-readable report
+python scripts/dependency_analyzer.py ./project
+
+# JSON output for CI/CD integration
+python scripts/dependency_analyzer.py ./project --output json
+
+# Check only for circular dependencies
+python scripts/dependency_analyzer.py ./project --check circular
+
+# Verbose mode with recommendations
+python scripts/dependency_analyzer.py ./project --verbose
+```
+
+**Example output:**
+```
+Dependency Analysis Report
+==========================
+Total dependencies: 47 (32 direct, 15 transitive)
+Coupling score: 72/100 (moderate)
+
+Issues found:
+- CIRCULAR: auth → user → permissions → auth
+- OUTDATED: lodash 4.17.15 → 4.17.21 (security)
+
+Recommendations:
+1. Extract shared interface to break circular dependency
+2. Update lodash to fix CVE-2020-8203
+```
+
+---
+
+### 3. Project Architect
+
+Analyzes project structure and detects architectural patterns, code smells, and improvement opportunities.
+
+**Solves:** &quot;I want to understand the current architecture and identify areas for improvement&quot;
+
+**Input:** Project directory path
+**Output:** Architecture assessment report
+
+**Detects:**
+- Architectural patterns (MVC, layered, hexagonal, microservices indicators)
+- Code organization issues (god classes, mixed concerns)
+- Layer violations
+- Missing architectural components
+
+**Usage:**
+```bash
+# Full assessment
+python scripts/project_architect.py ./project
+
+# Verbose with detailed recommendations
+python scripts/project_architect.py ./project --verbose
+
+# JSON output
+python scripts/project_architect.py ./project --output json
+
+# Check specific aspect
+python scripts/project_architect.py ./project --check layers
+```
+
+**Example output:**
+```
+Architecture Assessment
+=======================
+Detected pattern: Layered Architecture (confidence: 85%)
+
+Structure analysis:
+  ✓ controllers/  - Presentation layer detected
+  ✓ services/     - Business logic layer detected
+  ✓ repositories/ - Data access layer detected
+  ⚠ models/       - Mixed domain and DTOs
+
+Issues:
+- LARGE FILE: UserService.ts (1,847 lines) - consider splitting
+- MIXED CONCERNS: PaymentController contains business logic
+
+Recommendations:
+1. Split UserService into focused services
+2. Move business logic from controllers to services
+3. Separate domain models from DTOs
+```
+
+---
+
+## Decision Workflows
+
+### Database Selection Workflow
+
+Use when choosing a database for a new project or migrating existing data.
+
+**Step 1: Identify data characteristics**
+| Characteristic | Points to SQL | Points to NoSQL |
+|----------------|---------------|-----------------|
+| Structured with relationships | ✓ | |
+| ACID transactions required | ✓ | |
+| Flexible/evolving schema | | ✓ |
+| Document-oriented data | | ✓ |
+| Time-series data | | ✓ (specialized) |
+
+**Step 2: Evaluate scale requirements**
+- &lt;1M records, single region → PostgreSQL or MySQL
+- 1M-100M records, read-heavy → PostgreSQL with read replicas
+- &gt;100M records, global distribution → CockroachDB, Spanner, or DynamoDB
+- High write throughput (&gt;10K/sec) → Cassandra or ScyllaDB
+
+**Step 3: Check consistency requirements**
+- Strong consistency required → SQL or CockroachDB
+- Eventual consistency acceptable → DynamoDB, Cassandra, MongoDB
+
+**Step 4: Document decision**
+Create an ADR (Architecture Decision Record) with:
+- Context and requirements
+- Options considered
+- Decision and rationale
+- Trade-offs accepted
+
+**Quick reference:**
+```
+PostgreSQL → Default choice for most applications
+MongoDB    → Document store, flexible schema
+Redis      → Caching, sessions, real-time features
+DynamoDB   → Serverless, auto-scaling, AWS-native
+TimescaleDB → Time-series data with SQL interface
+```
+
+---
+
+### Architecture Pattern Selection Workflow
+
+Use when designing a new system or refactoring existing architecture.
+
+**Step 1: Assess team and project size**
+| Team Size | Recommended Starting Point |
+|-----------|---------------------------|
+| 1-3 developers | Modular monolith |
+| 4-10 developers | Modular monolith or service-oriented |
+| 10+ developers | Consider microservices |
+
+**Step 2: Evaluate deployment requirements**
+- Single deployment unit acceptable → Monolith
+- Independent scaling needed → Microservices
+- Mixed (some services scale differently) → Hybrid
+
+**Step 3: Consider data boundaries**
+- Shared database acceptable → Monolith or modular monolith
+- Strict data isolation required → Microservices with separate DBs
+- Event-driven communication fits → Event-sourcing/CQRS
+
+**Step 4: Match pattern to requirements**
+
+| Requirement | Recommended Pattern |
+|-------------|-------------------|
+| Rapid MVP development | Modular Monolith |
+| Independent team deployment | Microservices |
+| Complex domain logic | Domain-Driven Design |
+| High read/write ratio difference | CQRS |
+| Audit trail required | Event Sourcing |
+| Third-party integrations | Hexagonal/Ports &amp; Adapters |
+
+See `references/architecture_patterns.md` for detailed pattern descriptions.
+
+---
+
+### Monolith vs Microservices Decision
+
+**Choose Monolith when:**
+- [ ] Team is small (&lt;10 developers)
+- [ ] Domain boundaries are unclear
+- [ ] Rapid iteration is priority
+- [ ] Operational complexity must be minimized
+- [ ] Shared database is acceptable
+
+**Choose Microservices when:**
+- [ ] Teams can own services end-to-end
+- [ ] Independent deployment is critical
+- [ ] Different scaling requirements per component
+- [ ] Technology diversity is needed
+- [ ] Domain boundaries are well understood
+
+**Hybrid approach:**
+Start with a modular monolith. Extract services only when:
+1. A module has significantly different scaling needs
+2. A team needs independent deployment
+3. Technology constraints require separation
+
+---
+
+## Reference Documentation
+
+Load these files for detailed information:
+
+| File | Contains | Load when user asks about |
+|------|----------|--------------------------|
+| `references/architecture_patterns.md` | 9 architecture patterns with trade-offs, code examples, and when to use | &quot;which pattern?&quot;, &quot;microservices vs monolith&quot;, &quot;event-driven&quot;, &quot;CQRS&quot; |
+| `references/system_design_workflows.md` | 6 step-by-step workflows for system design tasks | &quot;how to design?&quot;, &quot;capacity planning&quot;, &quot;API design&quot;, &quot;migration&quot; |
+| `references/tech_decision_guide.md` | Decision matrices for technology choices | &quot;which database?&quot;, &quot;which framework?&quot;, &quot;which cloud?&quot;, &quot;which cache?&quot; |
+
+---
+
+## Tech Stack Coverage
+
+**Languages:** TypeScript, JavaScript, Python, Go, Swift, Kotlin, Rust
+**Frontend:** React, Next.js, Vue, Angular, React Native, Flutter
+**Backend:** Node.js, Express, FastAPI, Go, GraphQL, REST
+**Databases:** PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cassandra
+**Infrastructure:** Docker, Kubernetes, Terraform, AWS, GCP, Azure
+**CI/CD:** GitHub Actions, GitLab CI, CircleCI, Jenkins
+
+---
+
+## Common Commands
+
+```bash
+# Architecture visualization
+python scripts/architecture_diagram_generator.py . --format mermaid
+python scripts/architecture_diagram_generator.py . --format plantuml
+python scripts/architecture_diagram_generator.py . --format ascii
+
+# Dependency analysis
+python scripts/dependency_analyzer.py . --verbose
+python scripts/dependency_analyzer.py . --check circular
+python scripts/dependency_analyzer.py . --output json
+
+# Architecture assessment
+python scripts/project_architect.py . --verbose
+python scripts/project_architect.py . --check layers
+python scripts/project_architect.py . --output json
+```
+
+---
+
+## Getting Help
+
+1. Run any script with `--help` for usage information
+2. Check reference documentation for detailed patterns and workflows
+3. Use `--verbose` flag for detailed explanations and recommendations
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Diagram shows zero components | Project uses non-standard directory structure or all directories are in the ignore list (e.g., `node_modules`, `.venv`) | Ensure source code lives in named subdirectories at the project root, not solely in ignored folders |
+| Circular dependency detection misses cycles | Import statements use aliases, dynamic imports, or barrel files that obscure the dependency chain | Run `dependency_analyzer.py --verbose` to inspect resolved module graph; refactor barrel re-exports into explicit imports |
+| Coupling score always reads 0 | Project has only one internal module (flat file structure with no subdirectories) | Organize code into multiple top-level directories so the analyzer can map inter-module relationships |
+| Layer assignment shows all directories as &quot;unknown&quot; | Directory names do not match built-in layer indicators (e.g., `src/` instead of `services/`, `controllers/`) | Rename directories to conventional names or use the JSON output to manually map layers in your ADR |
+| `--format plantuml` output renders incorrectly | Component names contain special characters (brackets, quotes) that PlantUML cannot escape | Rename directories to use alphanumeric and hyphen characters only |
+| Dependency parser reports 0 dependencies | Package manifest file (`package.json`, `requirements.txt`, `go.mod`, `Cargo.toml`) is missing or malformed | Verify the manifest exists in the project root and passes its native validation (`npm ls`, `pip check`, `go mod verify`) |
+| Architecture assessment confidence below 30% | Project mixes multiple patterns or has a flat structure without clear layering | Pick a target pattern from `references/architecture_patterns.md` and restructure directories to match its conventions |
+
+---
+
+## Success Criteria
+
+- **Coupling score below 30**: The dependency analyzer reports a coupling score under 30/100, indicating loosely coupled modules with clear boundaries.
+- **Zero circular dependencies**: Running `dependency_analyzer.py --check circular` exits with code 0 and reports no cycles.
+- **Zero layer violations**: Running `project_architect.py --check layers` detects no cross-layer dependency violations.
+- **Architecture pattern confidence above 70%**: The project architect detects a recognized pattern (layered, clean, hexagonal, MVC) with at least 70% confidence.
+- **No god classes detected**: Every class in the codebase stays below 300 lines, with no `god_class` issues in the assessment report.
+- **Average file size under 250 lines**: The code quality metrics show `avg_file_lines` well below the 500-line threshold, indicating well-decomposed modules.
+- **ADR created for every major decision**: Each architecture decision is documented using the ADR template from the database selection or pattern selection workflow.
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- System-level architecture analysis: pattern detection, layer validation, and component diagramming for existing codebases.
+- Technology-agnostic dependency analysis across npm, pip, Poetry, Go modules, and Cargo.
+- Architecture decision workflows for database selection, pattern selection, and monolith-vs-microservices trade-offs.
+- Diagram generation in Mermaid, PlantUML, and ASCII formats for documentation and team review.
+
+**What this skill does NOT cover:**
+- Runtime performance profiling or load testing -- use `senior-devops` for infrastructure capacity planning and `senior-qa` for performance test harnesses.
+- Security vulnerability scanning of dependencies -- use `senior-security` or `senior-secops` for CVE detection and SAST/DAST analysis.
+- Frontend component architecture and design system auditing -- use `senior-frontend` for React/Vue/Angular component patterns and `design-auditor` for UI consistency checks.
+- CI/CD pipeline design and deployment orchestration -- use `senior-devops` for pipeline configuration and `release-orchestrator` for release workflows.
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-backend` | Architecture patterns inform backend service boundaries and API contract design | Architect assessment output (detected pattern, layer assignments) feeds into backend module scaffolding |
+| `senior-devops` | Deployment diagrams and technology detection drive infrastructure-as-code decisions | Deployment diagram type output + detected technologies list consumed by DevOps for Terraform/K8s config |
+| `senior-security` | Dependency analysis surfaces packages that need security review | Dependency list JSON (`--output json`) passed to security scanning for CVE correlation |
+| `senior-fullstack` | Architecture pattern selection determines which fullstack scaffold template to use | Pattern selection workflow result (e.g., modular monolith) maps to `project_scaffolder.py --type` flag |
+| `code-reviewer` | Layer violation and god-class findings become review checklist items | `project_architect.py --output json` issues array integrated into code review checklists |
+| `tech-stack-evaluator` | Technology detection results feed tech stack evaluation for upgrade/migration decisions | Detected technologies list and dependency versions inform stack evaluation decision matrices |
+
+---
+
+## Tool Reference
+
+### architecture_diagram_generator.py
+
+- **Purpose**: Generates architecture diagrams from project directory structure in Mermaid, PlantUML, or ASCII format.
+- **Usage**: `python scripts/architecture_diagram_generator.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to scan |
+| `--format` | `-f` | choice: `mermaid`, `plantuml`, `ascii` | `mermaid` | Output diagram format |
+| `--type` | `-t` | choice: `component`, `layer`, `deployment` | `component` | Diagram type to generate |
+| `--output` | `-o` | string | stdout | File path to write the diagram to |
+| `--verbose` | `-v` | flag | off | Print scanning progress (components found, relationships, technologies) |
+| `--json` | -- | flag | off | Output raw scan results as JSON instead of a diagram |
+
+- **Example**:
+
+```bash
+python scripts/architecture_diagram_generator.py ./my-app --format mermaid --type layer -v
+```
+
+```
+Scanning project: /home/user/my-app
+Found 6 components
+Found 4 relationships
+Technologies: node, react, docker
+graph TB
+    subgraph Presentation Layer
+        components[&quot;components&quot;]
+        pages[&quot;pages&quot;]
+    end
+
+    subgraph Business Layer
+        services[&quot;services&quot;]
+    end
+
+    subgraph Data Layer
+        models[&quot;models&quot;]
+        repositories[&quot;repositories&quot;]
+    end
+```
+
+- **Output Formats**: Mermaid diagram code (copy into any Mermaid renderer), PlantUML markup (render via PlantUML server), ASCII art (paste into terminal or plain-text docs), or raw JSON scan data (`--json`).
+
+---
+
+### dependency_analyzer.py
+
+- **Purpose**: Analyzes project dependencies for coupling score, circular dependencies, and package health across multiple package managers.
+- **Usage**: `python scripts/dependency_analyzer.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to analyze |
+| `--output` | `-o` | choice: `human`, `json` | `human` | Output format for the report |
+| `--check` | -- | choice: `all`, `circular`, `coupling` | `all` | Restrict analysis to a specific check; `circular` exits non-zero if cycles found, `coupling` exits non-zero if score &gt;70 |
+| `--verbose` | `-v` | flag | off | Print progress details (package manager detected, dependency counts, module scan count) |
+| `--save` | `-s` | string | none | Save JSON report to the specified file path |
+
+- **Example**:
+
+```bash
+python scripts/dependency_analyzer.py ./my-app --output json --save report.json
+```
+
+```json
+{
+  &quot;project_path&quot;: &quot;/home/user/my-app&quot;,
+  &quot;package_manager&quot;: &quot;npm&quot;,
+  &quot;summary&quot;: {
+    &quot;direct_dependencies&quot;: 23,
+    &quot;dev_dependencies&quot;: 15,
+    &quot;internal_modules&quot;: 8,
+    &quot;coupling_score&quot;: 42,
+    &quot;circular_dependencies&quot;: 1,
+    &quot;issues&quot;: 1
+  },
+  &quot;circular_dependencies&quot;: [[&quot;auth&quot;, &quot;user&quot;, &quot;permissions&quot;, &quot;auth&quot;]],
+  &quot;recommendations&quot;: [
+    &quot;Extract shared interfaces or create a common module to break circular dependencies&quot;
+  ]
+}
+```
+
+- **Output Formats**: Human-readable terminal report (default) with summary, issues, and recommendations; JSON structured report for CI/CD pipeline integration or programmatic consumption.
+
+---
+
+### project_architect.py
+
+- **Purpose**: Detects architectural patterns, code organization issues, layer violations, and god classes in a project, then generates improvement recommendations.
+- **Usage**: `python scripts/project_architect.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to assess |
+| `--output` | `-o` | choice: `human`, `json` | `human` | Output format for the assessment report |
+| `--check` | -- | choice: `all`, `pattern`, `layers`, `code` | `all` | Restrict to a specific check; `pattern` prints detected pattern only, `layers` exits non-zero on violations, `code` exits non-zero on warnings |
+| `--verbose` | `-v` | flag | off | Print analysis progress (pattern detection, issue counts, violation counts) |
+| `--save` | `-s` | string | none | Save JSON report to the specified file path |
+
+- **Example**:
+
+```bash
+python scripts/project_architect.py ./my-app --check layers --verbose
+```
+
+```
+Analyzing project: /home/user/my-app
+Detected pattern: layered (confidence: 78%)
+Found 2 code issues
+Found 1 layer violations
+Found 1 layer violation(s):
+  controllers/PaymentController.ts: presentation layer should not depend on infrastructure layer
+```
+
+- **Output Formats**: Human-readable terminal report (default) with pattern detection, layer assignments, code issues, and prioritized recommendations; JSON structured report for automated quality gates and dashboard integration.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Architect in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Architect&quot;
+4. Description: &quot;This skill should be used when the user asks to &quot;design system architecture&quot;, &quot;evaluate microservices vs monolith&quot;, &quot;create architecture diagrams&quot;, &quot;analyze dependencies&quot;, &quot;choose a database&quot;, &quot;plan f...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-architect/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Senior Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Architect
+
+Architecture design and analysis tools for making informed technical decisions.
+
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Tools Overview](#tools-overview)
+  - [Architecture Diagram Generator](#1-architecture-diagram-generator)
+  - [Dependency Analyzer](#2-dependency-analyzer)
+  - [Project Architect](#3-project-architect)
+- [Decision Workflows](#decision-workflows)
+  - [Database Selection](#database-selection-workflow)
+  - [Architecture Pattern Selection](#architecture-pattern-selection-workflow)
+  - [Monolith vs Microservices](#monolith-vs-microservices-decision)
+- [Reference Documentation](#reference-documentation)
+- [Tech Stack Coverage](#tech-stack-coverage)
+- [Common Commands](#common-commands)
+
+---
+
+## Quick Start
+
+```bash
+# Generate architecture diagram from project
+python scripts/architecture_diagram_generator.py ./my-project --format mermaid
+
+# Analyze dependencies for issues
+python scripts/dependency_analyzer.py ./my-project --output json
+
+# Get architecture assessment
+python scripts/project_architect.py ./my-project --verbose
+```
+
+---
+
+## Tools Overview
+
+### 1. Architecture Diagram Generator
+
+Generates architecture diagrams from project structure in multiple formats.
+
+**Solves:** &quot;I need to visualize my system architecture for documentation or team discussion&quot;
+
+**Input:** Project directory path
+**Output:** Diagram code (Mermaid, PlantUML, or ASCII)
+
+**Supported diagram types:**
+- `component` - Shows modules and their relationships
+- `layer` - Shows architectural layers (presentation, business, data)
+- `deployment` - Shows deployment topology
+
+**Usage:**
+```bash
+# Mermaid format (default)
+python scripts/architecture_diagram_generator.py ./project --format mermaid --type component
+
+# PlantUML format
+python scripts/architecture_diagram_generator.py ./project --format plantuml --type layer
+
+# ASCII format (terminal-friendly)
+python scripts/architecture_diagram_generator.py ./project --format ascii
+
+# Save to file
+python scripts/architecture_diagram_generator.py ./project -o architecture.md
+```
+
+**Example output (Mermaid):**
+```mermaid
+graph TD
+    A[API Gateway] --&gt; B[Auth Service]
+    A --&gt; C[User Service]
+    B --&gt; D[(PostgreSQL)]
+    C --&gt; D
+```
+
+---
+
+### 2. Dependency Analyzer
+
+Analyzes project dependencies for coupling, circular dependencies, and outdated packages.
+
+**Solves:** &quot;I need to understand my dependency tree and identify potential issues&quot;
+
+**Input:** Project directory path
+**Output:** Analysis report (JSON or human-readable)
+
+**Analyzes:**
+- Dependency tree (direct and transitive)
+- Circular dependencies between modules
+- Coupling score (0-100)
+- Outdated packages
+
+**Supported package managers:**
+- npm/yarn (`package.json`)
+- Python (`requirements.txt`, `pyproject.toml`)
+- Go (`go.mod`)
+- Rust (`Cargo.toml`)
+
+**Usage:**
+```bash
+# Human-readable report
+python scripts/dependency_analyzer.py ./project
+
+# JSON output for CI/CD integration
+python scripts/dependency_analyzer.py ./project --output json
+
+# Check only for circular dependencies
+python scripts/dependency_analyzer.py ./project --check circular
+
+# Verbose mode with recommendations
+python scripts/dependency_analyzer.py ./project --verbose
+```
+
+**Example output:**
+```
+Dependency Analysis Report
+==========================
+Total dependencies: 47 (32 direct, 15 transitive)
+Coupling score: 72/100 (moderate)
+
+Issues found:
+- CIRCULAR: auth → user → permissions → auth
+- OUTDATED: lodash 4.17.15 → 4.17.21 (security)
+
+Recommendations:
+1. Extract shared interface to break circular dependency
+2. Update lodash to fix CVE-2020-8203
+```
+
+---
+
+### 3. Project Architect
+
+Analyzes project structure and detects architectural patterns, code smells, and improvement opportunities.
+
+**Solves:** &quot;I want to understand the current architecture and identify areas for improvement&quot;
+
+**Input:** Project directory path
+**Output:** Architecture assessment report
+
+**Detects:**
+- Architectural patterns (MVC, layered, hexagonal, microservices indicators)
+- Code organization issues (god classes, mixed concerns)
+- Layer violations
+- Missing architectural components
+
+**Usage:**
+```bash
+# Full assessment
+python scripts/project_architect.py ./project
+
+# Verbose with detailed recommendations
+python scripts/project_architect.py ./project --verbose
+
+# JSON output
+python scripts/project_architect.py ./project --output json
+
+# Check specific aspect
+python scripts/project_architect.py ./project --check layers
+```
+
+**Example output:**
+```
+Architecture Assessment
+=======================
+Detected pattern: Layered Architecture (confidence: 85%)
+
+Structure analysis:
+  ✓ controllers/  - Presentation layer detected
+  ✓ services/     - Business logic layer detected
+  ✓ repositories/ - Data access layer detected
+  ⚠ models/       - Mixed domain and DTOs
+
+Issues:
+- LARGE FILE: UserService.ts (1,847 lines) - consider splitting
+- MIXED CONCERNS: PaymentController contains business logic
+
+Recommendations:
+1. Split UserService into focused services
+2. Move business logic from controllers to services
+3. Separate domain models from DTOs
+```
+
+---
+
+## Decision Workflows
+
+### Database Selection Workflow
+
+Use when choosing a database for a new project or migrating existing data.
+
+**Step 1: Identify data characteristics**
+| Characteristic | Points to SQL | Points to NoSQL |
+|----------------|---------------|-----------------|
+| Structured with relationships | ✓ | |
+| ACID transactions required | ✓ | |
+| Flexible/evolving schema | | ✓ |
+| Document-oriented data | | ✓ |
+| Time-series data | | ✓ (specialized) |
+
+**Step 2: Evaluate scale requirements**
+- &lt;1M records, single region → PostgreSQL or MySQL
+- 1M-100M records, read-heavy → PostgreSQL with read replicas
+- &gt;100M records, global distribution → CockroachDB, Spanner, or DynamoDB
+- High write throughput (&gt;10K/sec) → Cassandra or ScyllaDB
+
+**Step 3: Check consistency requirements**
+- Strong consistency required → SQL or CockroachDB
+- Eventual consistency acceptable → DynamoDB, Cassandra, MongoDB
+
+**Step 4: Document decision**
+Create an ADR (Architecture Decision Record) with:
+- Context and requirements
+- Options considered
+- Decision and rationale
+- Trade-offs accepted
+
+**Quick reference:**
+```
+PostgreSQL → Default choice for most applications
+MongoDB    → Document store, flexible schema
+Redis      → Caching, sessions, real-time features
+DynamoDB   → Serverless, auto-scaling, AWS-native
+TimescaleDB → Time-series data with SQL interface
+```
+
+---
+
+### Architecture Pattern Selection Workflow
+
+Use when designing a new system or refactoring existing architecture.
+
+**Step 1: Assess team and project size**
+| Team Size | Recommended Starting Point |
+|-----------|---------------------------|
+| 1-3 developers | Modular monolith |
+| 4-10 developers | Modular monolith or service-oriented |
+| 10+ developers | Consider microservices |
+
+**Step 2: Evaluate deployment requirements**
+- Single deployment unit acceptable → Monolith
+- Independent scaling needed → Microservices
+- Mixed (some services scale differently) → Hybrid
+
+**Step 3: Consider data boundaries**
+- Shared database acceptable → Monolith or modular monolith
+- Strict data isolation required → Microservices with separate DBs
+- Event-driven communication fits → Event-sourcing/CQRS
+
+**Step 4: Match pattern to requirements**
+
+| Requirement | Recommended Pattern |
+|-------------|-------------------|
+| Rapid MVP development | Modular Monolith |
+| Independent team deployment | Microservices |
+| Complex domain logic | Domain-Driven Design |
+| High read/write ratio difference | CQRS |
+| Audit trail required | Event Sourcing |
+| Third-party integrations | Hexagonal/Ports &amp; Adapters |
+
+See `references/architecture_patterns.md` for detailed pattern descriptions.
+
+---
+
+### Monolith vs Microservices Decision
+
+**Choose Monolith when:**
+- [ ] Team is small (&lt;10 developers)
+- [ ] Domain boundaries are unclear
+- [ ] Rapid iteration is priority
+- [ ] Operational complexity must be minimized
+- [ ] Shared database is acceptable
+
+**Choose Microservices when:**
+- [ ] Teams can own services end-to-end
+- [ ] Independent deployment is critical
+- [ ] Different scaling requirements per component
+- [ ] Technology diversity is needed
+- [ ] Domain boundaries are well understood
+
+**Hybrid approach:**
+Start with a modular monolith. Extract services only when:
+1. A module has significantly different scaling needs
+2. A team needs independent deployment
+3. Technology constraints require separation
+
+---
+
+## Reference Documentation
+
+Load these files for detailed information:
+
+| File | Contains | Load when user asks about |
+|------|----------|--------------------------|
+| `references/architecture_patterns.md` | 9 architecture patterns with trade-offs, code examples, and when to use | &quot;which pattern?&quot;, &quot;microservices vs monolith&quot;, &quot;event-driven&quot;, &quot;CQRS&quot; |
+| `references/system_design_workflows.md` | 6 step-by-step workflows for system design tasks | &quot;how to design?&quot;, &quot;capacity planning&quot;, &quot;API design&quot;, &quot;migration&quot; |
+| `references/tech_decision_guide.md` | Decision matrices for technology choices | &quot;which database?&quot;, &quot;which framework?&quot;, &quot;which cloud?&quot;, &quot;which cache?&quot; |
+
+---
+
+## Tech Stack Coverage
+
+**Languages:** TypeScript, JavaScript, Python, Go, Swift, Kotlin, Rust
+**Frontend:** React, Next.js, Vue, Angular, React Native, Flutter
+**Backend:** Node.js, Express, FastAPI, Go, GraphQL, REST
+**Databases:** PostgreSQL, MySQL, MongoDB, Redis, DynamoDB, Cassandra
+**Infrastructure:** Docker, Kubernetes, Terraform, AWS, GCP, Azure
+**CI/CD:** GitHub Actions, GitLab CI, CircleCI, Jenkins
+
+---
+
+## Common Commands
+
+```bash
+# Architecture visualization
+python scripts/architecture_diagram_generator.py . --format mermaid
+python scripts/architecture_diagram_generator.py . --format plantuml
+python scripts/architecture_diagram_generator.py . --format ascii
+
+# Dependency analysis
+python scripts/dependency_analyzer.py . --verbose
+python scripts/dependency_analyzer.py . --check circular
+python scripts/dependency_analyzer.py . --output json
+
+# Architecture assessment
+python scripts/project_architect.py . --verbose
+python scripts/project_architect.py . --check layers
+python scripts/project_architect.py . --output json
+```
+
+---
+
+## Getting Help
+
+1. Run any script with `--help` for usage information
+2. Check reference documentation for detailed patterns and workflows
+3. Use `--verbose` flag for detailed explanations and recommendations
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Diagram shows zero components | Project uses non-standard directory structure or all directories are in the ignore list (e.g., `node_modules`, `.venv`) | Ensure source code lives in named subdirectories at the project root, not solely in ignored folders |
+| Circular dependency detection misses cycles | Import statements use aliases, dynamic imports, or barrel files that obscure the dependency chain | Run `dependency_analyzer.py --verbose` to inspect resolved module graph; refactor barrel re-exports into explicit imports |
+| Coupling score always reads 0 | Project has only one internal module (flat file structure with no subdirectories) | Organize code into multiple top-level directories so the analyzer can map inter-module relationships |
+| Layer assignment shows all directories as &quot;unknown&quot; | Directory names do not match built-in layer indicators (e.g., `src/` instead of `services/`, `controllers/`) | Rename directories to conventional names or use the JSON output to manually map layers in your ADR |
+| `--format plantuml` output renders incorrectly | Component names contain special characters (brackets, quotes) that PlantUML cannot escape | Rename directories to use alphanumeric and hyphen characters only |
+| Dependency parser reports 0 dependencies | Package manifest file (`package.json`, `requirements.txt`, `go.mod`, `Cargo.toml`) is missing or malformed | Verify the manifest exists in the project root and passes its native validation (`npm ls`, `pip check`, `go mod verify`) |
+| Architecture assessment confidence below 30% | Project mixes multiple patterns or has a flat structure without clear layering | Pick a target pattern from `references/architecture_patterns.md` and restructure directories to match its conventions |
+
+---
+
+## Success Criteria
+
+- **Coupling score below 30**: The dependency analyzer reports a coupling score under 30/100, indicating loosely coupled modules with clear boundaries.
+- **Zero circular dependencies**: Running `dependency_analyzer.py --check circular` exits with code 0 and reports no cycles.
+- **Zero layer violations**: Running `project_architect.py --check layers` detects no cross-layer dependency violations.
+- **Architecture pattern confidence above 70%**: The project architect detects a recognized pattern (layered, clean, hexagonal, MVC) with at least 70% confidence.
+- **No god classes detected**: Every class in the codebase stays below 300 lines, with no `god_class` issues in the assessment report.
+- **Average file size under 250 lines**: The code quality metrics show `avg_file_lines` well below the 500-line threshold, indicating well-decomposed modules.
+- **ADR created for every major decision**: Each architecture decision is documented using the ADR template from the database selection or pattern selection workflow.
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- System-level architecture analysis: pattern detection, layer validation, and component diagramming for existing codebases.
+- Technology-agnostic dependency analysis across npm, pip, Poetry, Go modules, and Cargo.
+- Architecture decision workflows for database selection, pattern selection, and monolith-vs-microservices trade-offs.
+- Diagram generation in Mermaid, PlantUML, and ASCII formats for documentation and team review.
+
+**What this skill does NOT cover:**
+- Runtime performance profiling or load testing -- use `senior-devops` for infrastructure capacity planning and `senior-qa` for performance test harnesses.
+- Security vulnerability scanning of dependencies -- use `senior-security` or `senior-secops` for CVE detection and SAST/DAST analysis.
+- Frontend component architecture and design system auditing -- use `senior-frontend` for React/Vue/Angular component patterns and `design-auditor` for UI consistency checks.
+- CI/CD pipeline design and deployment orchestration -- use `senior-devops` for pipeline configuration and `release-orchestrator` for release workflows.
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-backend` | Architecture patterns inform backend service boundaries and API contract design | Architect assessment output (detected pattern, layer assignments) feeds into backend module scaffolding |
+| `senior-devops` | Deployment diagrams and technology detection drive infrastructure-as-code decisions | Deployment diagram type output + detected technologies list consumed by DevOps for Terraform/K8s config |
+| `senior-security` | Dependency analysis surfaces packages that need security review | Dependency list JSON (`--output json`) passed to security scanning for CVE correlation |
+| `senior-fullstack` | Architecture pattern selection determines which fullstack scaffold template to use | Pattern selection workflow result (e.g., modular monolith) maps to `project_scaffolder.py --type` flag |
+| `code-reviewer` | Layer violation and god-class findings become review checklist items | `project_architect.py --output json` issues array integrated into code review checklists |
+| `tech-stack-evaluator` | Technology detection results feed tech stack evaluation for upgrade/migration decisions | Detected technologies list and dependency versions inform stack evaluation decision matrices |
+
+---
+
+## Tool Reference
+
+### architecture_diagram_generator.py
+
+- **Purpose**: Generates architecture diagrams from project directory structure in Mermaid, PlantUML, or ASCII format.
+- **Usage**: `python scripts/architecture_diagram_generator.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to scan |
+| `--format` | `-f` | choice: `mermaid`, `plantuml`, `ascii` | `mermaid` | Output diagram format |
+| `--type` | `-t` | choice: `component`, `layer`, `deployment` | `component` | Diagram type to generate |
+| `--output` | `-o` | string | stdout | File path to write the diagram to |
+| `--verbose` | `-v` | flag | off | Print scanning progress (components found, relationships, technologies) |
+| `--json` | -- | flag | off | Output raw scan results as JSON instead of a diagram |
+
+- **Example**:
+
+```bash
+python scripts/architecture_diagram_generator.py ./my-app --format mermaid --type layer -v
+```
+
+```
+Scanning project: /home/user/my-app
+Found 6 components
+Found 4 relationships
+Technologies: node, react, docker
+graph TB
+    subgraph Presentation Layer
+        components[&quot;components&quot;]
+        pages[&quot;pages&quot;]
+    end
+
+    subgraph Business Layer
+        services[&quot;services&quot;]
+    end
+
+    subgraph Data Layer
+        models[&quot;models&quot;]
+        repositories[&quot;repositories&quot;]
+    end
+```
+
+- **Output Formats**: Mermaid diagram code (copy into any Mermaid renderer), PlantUML markup (render via PlantUML server), ASCII art (paste into terminal or plain-text docs), or raw JSON scan data (`--json`).
+
+---
+
+### dependency_analyzer.py
+
+- **Purpose**: Analyzes project dependencies for coupling score, circular dependencies, and package health across multiple package managers.
+- **Usage**: `python scripts/dependency_analyzer.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to analyze |
+| `--output` | `-o` | choice: `human`, `json` | `human` | Output format for the report |
+| `--check` | -- | choice: `all`, `circular`, `coupling` | `all` | Restrict analysis to a specific check; `circular` exits non-zero if cycles found, `coupling` exits non-zero if score &gt;70 |
+| `--verbose` | `-v` | flag | off | Print progress details (package manager detected, dependency counts, module scan count) |
+| `--save` | `-s` | string | none | Save JSON report to the specified file path |
+
+- **Example**:
+
+```bash
+python scripts/dependency_analyzer.py ./my-app --output json --save report.json
+```
+
+```json
+{
+  &quot;project_path&quot;: &quot;/home/user/my-app&quot;,
+  &quot;package_manager&quot;: &quot;npm&quot;,
+  &quot;summary&quot;: {
+    &quot;direct_dependencies&quot;: 23,
+    &quot;dev_dependencies&quot;: 15,
+    &quot;internal_modules&quot;: 8,
+    &quot;coupling_score&quot;: 42,
+    &quot;circular_dependencies&quot;: 1,
+    &quot;issues&quot;: 1
+  },
+  &quot;circular_dependencies&quot;: [[&quot;auth&quot;, &quot;user&quot;, &quot;permissions&quot;, &quot;auth&quot;]],
+  &quot;recommendations&quot;: [
+    &quot;Extract shared interfaces or create a common module to break circular dependencies&quot;
+  ]
+}
+```
+
+- **Output Formats**: Human-readable terminal report (default) with summary, issues, and recommendations; JSON structured report for CI/CD pipeline integration or programmatic consumption.
+
+---
+
+### project_architect.py
+
+- **Purpose**: Detects architectural patterns, code organization issues, layer violations, and god classes in a project, then generates improvement recommendations.
+- **Usage**: `python scripts/project_architect.py &lt;project_path&gt; [flags]`
+- **Flags**:
+
+| Flag | Short | Type | Default | Description |
+|------|-------|------|---------|-------------|
+| `project_path` | -- | positional | required | Path to the project directory to assess |
+| `--output` | `-o` | choice: `human`, `json` | `human` | Output format for the assessment report |
+| `--check` | -- | choice: `all`, `pattern`, `layers`, `code` | `all` | Restrict to a specific check; `pattern` prints detected pattern only, `layers` exits non-zero on violations, `code` exits non-zero on warnings |
+| `--verbose` | `-v` | flag | off | Print analysis progress (pattern detection, issue counts, violation counts) |
+| `--save` | `-s` | string | none | Save JSON report to the specified file path |
+
+- **Example**:
+
+```bash
+python scripts/project_architect.py ./my-app --check layers --verbose
+```
+
+```
+Analyzing project: /home/user/my-app
+Detected pattern: layered (confidence: 78%)
+Found 2 code issues
+Found 1 layer violations
+Found 1 layer violation(s):
+  controllers/PaymentController.ts: presentation layer should not depend on infrastructure layer
+```
+
+- **Output Formats**: Human-readable terminal report (default) with pattern detection, layer assignments, code issues, and prioritized recommendations; JSON structured report for automated quality gates and dashboard integration.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Architect in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Architect&quot;
+4. Description: &quot;This skill should be used when the user asks to &quot;design system architecture&quot;, &quot;evaluate microservices vs monolith&quot;, &quot;create architecture diagrams&quot;, &quot;analyze dependencies&quot;, &quot;choose a database&quot;, &quot;plan f...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-architect/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Legal Canned Responses (Legal domain).
 
 Generate templated responses for common legal inquiries with escalation detection. Use when drafting legal responses.
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-canned-responses
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Legal Canned Responses (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Legal Canned Responses (Legal domain).
 
 Generate templated responses for common legal inquiries with escalation detection. Use when drafting legal responses.
 
@@ -439,7 +461,534 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-canned-responses
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Legal Canned Responses&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Canned Responses Skill
+
+## Overview
+
+Production-ready toolkit for generating templated responses to common legal inquiries with built-in escalation detection. Covers 7 response categories with multiple sub-types each, plus a universal and category-specific escalation trigger system. Designed for legal operations teams handling high volumes of recurring inquiries while ensuring critical matters are routed to counsel.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Response Categories](#response-categories)
+- [Escalation System](#escalation-system)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Response Generator (`scripts/response_generator.py`)
+
+Generate formatted legal responses from templates with variable substitution and escalation detection.
+
+```bash
+python scripts/response_generator.py \
+  --category dsr --sub-type acknowledgment \
+  --var requestor_name=&quot;Jane Doe&quot; \
+  --var request_type=&quot;access&quot; \
+  --var request_date=&quot;2026-04-10&quot;
+
+python scripts/response_generator.py \
+  --category nda --sub-type standard-form \
+  --var counterparty=&quot;Acme Corp&quot; \
+  --var purpose=&quot;due diligence&quot; --json
+
+python scripts/response_generator.py \
+  --category discovery --sub-type initial-notice \
+  --var matter_name=&quot;Smith v. Corp&quot; \
+  --var custodians=&quot;Engineering,Sales&quot;
+```
+
+### 2. Escalation Detector (`scripts/escalation_detector.py`)
+
+Analyze inquiry text for escalation triggers and recommend routing.
+
+```bash
+python scripts/escalation_detector.py \
+  --text &quot;We received a subpoena from the DOJ regarding our pricing practices&quot;
+
+python scripts/escalation_detector.py \
+  --text &quot;A reporter from the Wall Street Journal is asking about our data practices&quot; --json
+
+python scripts/escalation_detector.py \
+  --category vendor \
+  --text &quot;The vendor is threatening litigation over the contract dispute&quot;
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/response_templates.md` | Complete templates for all 7 categories with sub-types |
+| `references/escalation_triggers.md` | Universal and category-specific escalation triggers |
+
+## Workflows
+
+### Template Lifecycle
+
+1. **Creation** -- Draft response template for identified recurring inquiry type
+2. **Review** -- Legal counsel reviews template for accuracy, tone, and compliance
+3. **Publication** -- Template added to system with metadata, variables, and triggers
+4. **Use** -- Staff selects category/sub-type, fills variables, generates response
+5. **Feedback** -- Track usage and collect feedback on template effectiveness
+6. **Update** -- Revise templates based on feedback, legal changes, or policy updates
+7. **Retirement** -- Archive templates that are no longer applicable
+
+### Response Generation Workflow
+
+1. **Classify Inquiry** -- Determine category (DSR, NDA, subpoena, etc.) and sub-type
+2. **Check Escalation** -- Run escalation detector on inquiry text
+3. **If Escalation Detected** -- Stop; route to counsel with escalation report
+4. **If No Escalation** -- Generate response with appropriate template and variables
+5. **Review &amp; Send** -- Review generated response before sending; adjust if needed
+
+## Response Categories
+
+| Category | Sub-Types | Description |
+|----------|-----------|-------------|
+| Data Subject Requests (DSR) | acknowledgment, verification, fulfillment, denial, extension | GDPR/CCPA data subject right requests |
+| Discovery/Litigation Holds | initial-notice, reminder, modification, release | Litigation hold management |
+| Privacy Inquiries | cookies, data-sharing, children, transfers | General privacy questions |
+| Vendor Legal Questions | contract-status, amendments, certifications, audit | Vendor/supplier legal matters |
+| NDA Requests | standard-form, counterparty-markup, decline, renewal | Non-disclosure agreement lifecycle |
+| Subpoena/Legal Process | acknowledgment, objection, extension, compliance | Legal process responses |
+| Insurance Notifications | initial-claim, supplemental-info, reservation-of-rights | Insurance claim management |
+
+### DSR Sub-Types
+
+| Sub-Type | Use When | Key Variables |
+|----------|----------|---------------|
+| acknowledgment | New DSR received | requestor_name, request_type, request_date |
+| verification | Identity verification needed | requestor_name, verification_method |
+| fulfillment | Request completed | requestor_name, request_type, data_description |
+| denial | Request denied with reason | requestor_name, request_type, denial_reason |
+| extension | Need more time | requestor_name, request_type, extension_reason, new_deadline |
+
+### Discovery/Litigation Hold Sub-Types
+
+| Sub-Type | Use When | Key Variables |
+|----------|----------|---------------|
+| initial-notice | New litigation hold issued | matter_name, custodians, data_types |
+| reminder | Periodic hold reminder | matter_name, reminder_number |
+| modification | Hold scope changed | matter_name, modification_description |
+| release | Hold lifted | matter_name, release_date |
+
+## Escalation System
+
+### Universal Triggers (Always Escalate)
+
+| # | Trigger | Why |
+|---|---------|-----|
+| 1 | Potential or active litigation | Legal exposure requires counsel assessment |
+| 2 | Regulatory investigation or inquiry | Regulatory response requires strategic approach |
+| 3 | Government or law enforcement contact | Constitutional and procedural rights at stake |
+| 4 | Binding legal commitment requested | Cannot create legal obligations without counsel |
+| 5 | Criminal liability exposure | Requires immediate counsel involvement |
+| 6 | Media attention or press inquiry | Reputational risk requires coordinated response |
+| 7 | Unprecedented or novel situation | No template exists; bespoke legal analysis needed |
+| 8 | Multi-jurisdictional conflict | Cross-border legal complexity requires expert analysis |
+
+### Escalation Response Protocol
+
+1. **Stop** -- Do not send any templated response
+2. **Alert** -- Notify designated counsel immediately
+3. **Explain** -- Provide escalation context with matched triggers
+4. **Recommend** -- Suggest routing based on trigger type
+5. **Draft** -- Mark any preliminary draft &quot;FOR COUNSEL REVIEW ONLY&quot;
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Missing variable in output | Required variable not provided | Check template requirements; provide all required `--var` parameters |
+| Wrong template selected | Category/sub-type mismatch | Review category descriptions; ensure sub-type matches inquiry type |
+| False positive escalation | Common words matching trigger patterns | Provide `--category` to use category-specific triggers; review matched triggers |
+| False negative escalation | Inquiry text too vague | Add more context to inquiry text; run both universal and category-specific checks |
+| Template too generic | Using default values | Replace all placeholder values with actual organization-specific details |
+| Discovery hold sent to wrong custodians | Custodian list outdated | Verify custodian list against current employees and systems |
+| Subpoena response not flagged | Missing category context | Always use `--category subpoena` for legal process; subpoena category always escalates |
+| Response tone inappropriate | Wrong audience context | Select appropriate sub-type; customize tone per audience |
+
+## Success Criteria
+
+- **Response Time**: Templated responses generated within 5 minutes vs. 30+ minutes manual drafting
+- **Escalation Accuracy**: 100% of genuine escalation triggers detected (zero false negatives on CRITICAL triggers)
+- **Template Coverage**: Templates cover 80%+ of recurring legal inquiry types
+- **Consistency**: All responses within a category use consistent language, tone, and legal caveats
+- **Audit Trail**: Every generated response logged with category, sub-type, date, and escalation status
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Template-based response generation for 7 common legal inquiry categories
+- Escalation detection using keyword and pattern matching against known triggers
+- Variable substitution for organization-specific customization
+- Response metadata generation for audit trail purposes
+
+**This skill does NOT cover:**
+- Legal advice or attorney-client privileged analysis
+- Automated sending of responses (generation only; human review required)
+- Contract drafting, negotiation, or legal document creation
+- Case management, docketing, or deadline tracking
+- Jurisdiction-specific legal compliance validation of response content
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Sending templated response without review | May miss context-specific nuances; legal risk | Always review generated response before sending |
+| Ignoring escalation triggers | Critical matters mishandled; legal exposure | Run escalation detector on every inquiry; treat all triggers seriously |
+| Using templates for novel situations | Templates assume standard scenarios; novel situations need bespoke analysis | Escalate novel situations to counsel; create new template after resolution |
+| Hardcoding organization details in templates | Templates become non-portable; updates missed | Use variable substitution; maintain variables in configuration |
+| Skipping identity verification for DSRs | GDPR/CCPA require verification before fulfillment | Always send verification sub-type before fulfillment |
+
+## Tool Reference
+
+### `scripts/response_generator.py`
+
+Generate formatted legal responses with variable substitution.
+
+```
+usage: response_generator.py [-h] [--json]
+                              --category {dsr,discovery,privacy,vendor,nda,subpoena,insurance}
+                              --sub-type SUB_TYPE
+                              [--var KEY=VALUE [KEY=VALUE ...]]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --category            Response category
+  --sub-type            Response sub-type within category
+  --var                 Variable substitution as KEY=VALUE pairs
+```
+
+### `scripts/escalation_detector.py`
+
+Analyze inquiry text for escalation triggers.
+
+```
+usage: escalation_detector.py [-h] [--json]
+                               --text TEXT
+                               [--category {dsr,discovery,privacy,vendor,nda,subpoena,insurance}]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --text                Inquiry text to analyze for escalation triggers
+  --category            Optional category for category-specific trigger detection
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Canned Responses&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Canned Responses&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Canned Responses in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Canned Responses&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Canned Responses&quot;
+4. Description: &quot;Generate templated responses for common legal inquiries with escalation detection. Use when drafting legal responses.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-canned-responses/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Legal Canned Responses&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Canned Responses Skill
+
+## Overview
+
+Production-ready toolkit for generating templated responses to common legal inquiries with built-in escalation detection. Covers 7 response categories with multiple sub-types each, plus a universal and category-specific escalation trigger system. Designed for legal operations teams handling high volumes of recurring inquiries while ensuring critical matters are routed to counsel.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Response Categories](#response-categories)
+- [Escalation System](#escalation-system)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Response Generator (`scripts/response_generator.py`)
+
+Generate formatted legal responses from templates with variable substitution and escalation detection.
+
+```bash
+python scripts/response_generator.py \
+  --category dsr --sub-type acknowledgment \
+  --var requestor_name=&quot;Jane Doe&quot; \
+  --var request_type=&quot;access&quot; \
+  --var request_date=&quot;2026-04-10&quot;
+
+python scripts/response_generator.py \
+  --category nda --sub-type standard-form \
+  --var counterparty=&quot;Acme Corp&quot; \
+  --var purpose=&quot;due diligence&quot; --json
+
+python scripts/response_generator.py \
+  --category discovery --sub-type initial-notice \
+  --var matter_name=&quot;Smith v. Corp&quot; \
+  --var custodians=&quot;Engineering,Sales&quot;
+```
+
+### 2. Escalation Detector (`scripts/escalation_detector.py`)
+
+Analyze inquiry text for escalation triggers and recommend routing.
+
+```bash
+python scripts/escalation_detector.py \
+  --text &quot;We received a subpoena from the DOJ regarding our pricing practices&quot;
+
+python scripts/escalation_detector.py \
+  --text &quot;A reporter from the Wall Street Journal is asking about our data practices&quot; --json
+
+python scripts/escalation_detector.py \
+  --category vendor \
+  --text &quot;The vendor is threatening litigation over the contract dispute&quot;
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/response_templates.md` | Complete templates for all 7 categories with sub-types |
+| `references/escalation_triggers.md` | Universal and category-specific escalation triggers |
+
+## Workflows
+
+### Template Lifecycle
+
+1. **Creation** -- Draft response template for identified recurring inquiry type
+2. **Review** -- Legal counsel reviews template for accuracy, tone, and compliance
+3. **Publication** -- Template added to system with metadata, variables, and triggers
+4. **Use** -- Staff selects category/sub-type, fills variables, generates response
+5. **Feedback** -- Track usage and collect feedback on template effectiveness
+6. **Update** -- Revise templates based on feedback, legal changes, or policy updates
+7. **Retirement** -- Archive templates that are no longer applicable
+
+### Response Generation Workflow
+
+1. **Classify Inquiry** -- Determine category (DSR, NDA, subpoena, etc.) and sub-type
+2. **Check Escalation** -- Run escalation detector on inquiry text
+3. **If Escalation Detected** -- Stop; route to counsel with escalation report
+4. **If No Escalation** -- Generate response with appropriate template and variables
+5. **Review &amp; Send** -- Review generated response before sending; adjust if needed
+
+## Response Categories
+
+| Category | Sub-Types | Description |
+|----------|-----------|-------------|
+| Data Subject Requests (DSR) | acknowledgment, verification, fulfillment, denial, extension | GDPR/CCPA data subject right requests |
+| Discovery/Litigation Holds | initial-notice, reminder, modification, release | Litigation hold management |
+| Privacy Inquiries | cookies, data-sharing, children, transfers | General privacy questions |
+| Vendor Legal Questions | contract-status, amendments, certifications, audit | Vendor/supplier legal matters |
+| NDA Requests | standard-form, counterparty-markup, decline, renewal | Non-disclosure agreement lifecycle |
+| Subpoena/Legal Process | acknowledgment, objection, extension, compliance | Legal process responses |
+| Insurance Notifications | initial-claim, supplemental-info, reservation-of-rights | Insurance claim management |
+
+### DSR Sub-Types
+
+| Sub-Type | Use When | Key Variables |
+|----------|----------|---------------|
+| acknowledgment | New DSR received | requestor_name, request_type, request_date |
+| verification | Identity verification needed | requestor_name, verification_method |
+| fulfillment | Request completed | requestor_name, request_type, data_description |
+| denial | Request denied with reason | requestor_name, request_type, denial_reason |
+| extension | Need more time | requestor_name, request_type, extension_reason, new_deadline |
+
+### Discovery/Litigation Hold Sub-Types
+
+| Sub-Type | Use When | Key Variables |
+|----------|----------|---------------|
+| initial-notice | New litigation hold issued | matter_name, custodians, data_types |
+| reminder | Periodic hold reminder | matter_name, reminder_number |
+| modification | Hold scope changed | matter_name, modification_description |
+| release | Hold lifted | matter_name, release_date |
+
+## Escalation System
+
+### Universal Triggers (Always Escalate)
+
+| # | Trigger | Why |
+|---|---------|-----|
+| 1 | Potential or active litigation | Legal exposure requires counsel assessment |
+| 2 | Regulatory investigation or inquiry | Regulatory response requires strategic approach |
+| 3 | Government or law enforcement contact | Constitutional and procedural rights at stake |
+| 4 | Binding legal commitment requested | Cannot create legal obligations without counsel |
+| 5 | Criminal liability exposure | Requires immediate counsel involvement |
+| 6 | Media attention or press inquiry | Reputational risk requires coordinated response |
+| 7 | Unprecedented or novel situation | No template exists; bespoke legal analysis needed |
+| 8 | Multi-jurisdictional conflict | Cross-border legal complexity requires expert analysis |
+
+### Escalation Response Protocol
+
+1. **Stop** -- Do not send any templated response
+2. **Alert** -- Notify designated counsel immediately
+3. **Explain** -- Provide escalation context with matched triggers
+4. **Recommend** -- Suggest routing based on trigger type
+5. **Draft** -- Mark any preliminary draft &quot;FOR COUNSEL REVIEW ONLY&quot;
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Missing variable in output | Required variable not provided | Check template requirements; provide all required `--var` parameters |
+| Wrong template selected | Category/sub-type mismatch | Review category descriptions; ensure sub-type matches inquiry type |
+| False positive escalation | Common words matching trigger patterns | Provide `--category` to use category-specific triggers; review matched triggers |
+| False negative escalation | Inquiry text too vague | Add more context to inquiry text; run both universal and category-specific checks |
+| Template too generic | Using default values | Replace all placeholder values with actual organization-specific details |
+| Discovery hold sent to wrong custodians | Custodian list outdated | Verify custodian list against current employees and systems |
+| Subpoena response not flagged | Missing category context | Always use `--category subpoena` for legal process; subpoena category always escalates |
+| Response tone inappropriate | Wrong audience context | Select appropriate sub-type; customize tone per audience |
+
+## Success Criteria
+
+- **Response Time**: Templated responses generated within 5 minutes vs. 30+ minutes manual drafting
+- **Escalation Accuracy**: 100% of genuine escalation triggers detected (zero false negatives on CRITICAL triggers)
+- **Template Coverage**: Templates cover 80%+ of recurring legal inquiry types
+- **Consistency**: All responses within a category use consistent language, tone, and legal caveats
+- **Audit Trail**: Every generated response logged with category, sub-type, date, and escalation status
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Template-based response generation for 7 common legal inquiry categories
+- Escalation detection using keyword and pattern matching against known triggers
+- Variable substitution for organization-specific customization
+- Response metadata generation for audit trail purposes
+
+**This skill does NOT cover:**
+- Legal advice or attorney-client privileged analysis
+- Automated sending of responses (generation only; human review required)
+- Contract drafting, negotiation, or legal document creation
+- Case management, docketing, or deadline tracking
+- Jurisdiction-specific legal compliance validation of response content
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Sending templated response without review | May miss context-specific nuances; legal risk | Always review generated response before sending |
+| Ignoring escalation triggers | Critical matters mishandled; legal exposure | Run escalation detector on every inquiry; treat all triggers seriously |
+| Using templates for novel situations | Templates assume standard scenarios; novel situations need bespoke analysis | Escalate novel situations to counsel; create new template after resolution |
+| Hardcoding organization details in templates | Templates become non-portable; updates missed | Use variable substitution; maintain variables in configuration |
+| Skipping identity verification for DSRs | GDPR/CCPA require verification before fulfillment | Always send verification sub-type before fulfillment |
+
+## Tool Reference
+
+### `scripts/response_generator.py`
+
+Generate formatted legal responses with variable substitution.
+
+```
+usage: response_generator.py [-h] [--json]
+                              --category {dsr,discovery,privacy,vendor,nda,subpoena,insurance}
+                              --sub-type SUB_TYPE
+                              [--var KEY=VALUE [KEY=VALUE ...]]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --category            Response category
+  --sub-type            Response sub-type within category
+  --var                 Variable substitution as KEY=VALUE pairs
+```
+
+### `scripts/escalation_detector.py`
+
+Analyze inquiry text for escalation triggers.
+
+```
+usage: escalation_detector.py [-h] [--json]
+                               --text TEXT
+                               [--category {dsr,discovery,privacy,vendor,nda,subpoena,insurance}]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --text                Inquiry text to analyze for escalation triggers
+  --category            Optional category for category-specific trigger detection
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Canned Responses&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Canned Responses&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Canned Responses in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Canned Responses&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Canned Responses&quot;
+4. Description: &quot;Generate templated responses for common legal inquiries with escalation detection. Use when drafting legal responses.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-canned-responses/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

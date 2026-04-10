@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Frontend (Engineering domain).
 
 Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding fronte...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-frontend
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Senior Frontend (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Senior Frontend (Engineering domain).
 
 Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding fronte...
 
@@ -439,7 +461,1382 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-frontend
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Senior Frontend&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Frontend
+
+Frontend development patterns, performance optimization, and automation tools for React/Next.js applications.
+
+## Table of Contents
+
+- [Project Scaffolding](#project-scaffolding)
+- [Component Generation](#component-generation)
+- [Bundle Analysis](#bundle-analysis)
+- [React Patterns](#react-patterns)
+- [Next.js Optimization](#nextjs-optimization)
+- [Accessibility and Testing](#accessibility-and-testing)
+
+---
+
+## Project Scaffolding
+
+Generate a new Next.js or React project with TypeScript, Tailwind CSS, and best practice configurations.
+
+### Workflow: Create New Frontend Project
+
+1. Run the scaffolder with your project name and template:
+   ```bash
+   python scripts/frontend_scaffolder.py my-app --template nextjs
+   ```
+
+2. Add optional features (auth, api, forms, testing, storybook):
+   ```bash
+   python scripts/frontend_scaffolder.py dashboard --template nextjs --features auth,api
+   ```
+
+3. Navigate to the project and install dependencies:
+   ```bash
+   cd my-app &amp;&amp; npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Scaffolder Options
+
+| Option | Description |
+|--------|-------------|
+| `--template nextjs` | Next.js 14+ with App Router and Server Components |
+| `--template react` | React + Vite with TypeScript |
+| `--features auth` | Add NextAuth.js authentication |
+| `--features api` | Add React Query + API client |
+| `--features forms` | Add React Hook Form + Zod validation |
+| `--features testing` | Add Vitest + Testing Library |
+| `--dry-run` | Preview files without creating them |
+
+### Generated Structure (Next.js)
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx        # Root layout with fonts
+│   ├── page.tsx          # Home page
+│   ├── globals.css       # Tailwind + CSS variables
+│   └── api/health/route.ts
+├── components/
+│   ├── ui/               # Button, Input, Card
+│   └── layout/           # Header, Footer, Sidebar
+├── hooks/                # useDebounce, useLocalStorage
+├── lib/                  # utils (cn), constants
+├── types/                # TypeScript interfaces
+├── tailwind.config.ts
+├── next.config.js
+└── package.json
+```
+
+---
+
+## Component Generation
+
+Generate React components with TypeScript, tests, and Storybook stories.
+
+### Workflow: Create a New Component
+
+1. Generate a client component:
+   ```bash
+   python scripts/component_generator.py Button --dir src/components/ui
+   ```
+
+2. Generate a server component:
+   ```bash
+   python scripts/component_generator.py ProductCard --type server
+   ```
+
+3. Generate with test and story files:
+   ```bash
+   python scripts/component_generator.py UserProfile --with-test --with-story
+   ```
+
+4. Generate a custom hook:
+   ```bash
+   python scripts/component_generator.py FormValidation --type hook
+   ```
+
+### Generator Options
+
+| Option | Description |
+|--------|-------------|
+| `--type client` | Client component with &#x27;use client&#x27; (default) |
+| `--type server` | Async server component |
+| `--type hook` | Custom React hook |
+| `--with-test` | Include test file |
+| `--with-story` | Include Storybook story |
+| `--flat` | Create in output dir without subdirectory |
+| `--dry-run` | Preview without creating files |
+
+### Generated Component Example
+
+```tsx
+&#x27;use client&#x27;;
+
+import { useState } from &#x27;react&#x27;;
+import { cn } from &#x27;@/lib/utils&#x27;;
+
+interface ButtonProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function Button({ className, children }: ButtonProps) {
+  return (
+    &lt;div className={cn(&#x27;&#x27;, className)}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+```
+
+---
+
+## Bundle Analysis
+
+Analyze package.json and project structure for bundle optimization opportunities.
+
+### Workflow: Optimize Bundle Size
+
+1. Run the analyzer on your project:
+   ```bash
+   python scripts/bundle_analyzer.py /path/to/project
+   ```
+
+2. Review the health score and issues:
+   ```
+   Bundle Health Score: 75/100 (C)
+
+   HEAVY DEPENDENCIES:
+     moment (290KB)
+       Alternative: date-fns (12KB) or dayjs (2KB)
+
+     lodash (71KB)
+       Alternative: lodash-es with tree-shaking
+   ```
+
+3. Apply the recommended fixes by replacing heavy dependencies.
+
+4. Re-run with verbose mode to check import patterns:
+   ```bash
+   python scripts/bundle_analyzer.py . --verbose
+   ```
+
+### Bundle Score Interpretation
+
+| Score | Grade | Action |
+|-------|-------|--------|
+| 90-100 | A | Bundle is well-optimized |
+| 80-89 | B | Minor optimizations available |
+| 70-79 | C | Replace heavy dependencies |
+| 60-69 | D | Multiple issues need attention |
+| 0-59 | F | Critical bundle size problems |
+
+### Heavy Dependencies Detected
+
+The analyzer identifies these common heavy packages:
+
+| Package | Size | Alternative |
+|---------|------|-------------|
+| moment | 290KB | date-fns (12KB) or dayjs (2KB) |
+| lodash | 71KB | lodash-es with tree-shaking |
+| axios | 14KB | Native fetch or ky (3KB) |
+| jquery | 87KB | Native DOM APIs |
+| @mui/material | Large | shadcn/ui or Radix UI |
+
+---
+
+## React Patterns
+
+Reference: `references/react_patterns.md`
+
+### Compound Components
+
+Share state between related components:
+
+```tsx
+const Tabs = ({ children }) =&gt; {
+  const [active, setActive] = useState(0);
+  return (
+    &lt;TabsContext.Provider value={{ active, setActive }}&gt;
+      {children}
+    &lt;/TabsContext.Provider&gt;
+  );
+};
+
+Tabs.List = TabList;
+Tabs.Panel = TabPanel;
+
+// Usage
+&lt;Tabs&gt;
+  &lt;Tabs.List&gt;
+    &lt;Tabs.Tab&gt;One&lt;/Tabs.Tab&gt;
+    &lt;Tabs.Tab&gt;Two&lt;/Tabs.Tab&gt;
+  &lt;/Tabs.List&gt;
+  &lt;Tabs.Panel&gt;Content 1&lt;/Tabs.Panel&gt;
+  &lt;Tabs.Panel&gt;Content 2&lt;/Tabs.Panel&gt;
+&lt;/Tabs&gt;
+```
+
+### Custom Hooks
+
+Extract reusable logic:
+
+```tsx
+function useDebounce&lt;T&gt;(value: T, delay = 500): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() =&gt; {
+    const timer = setTimeout(() =&gt; setDebouncedValue(value), delay);
+    return () =&gt; clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage
+const debouncedSearch = useDebounce(searchTerm, 300);
+```
+
+### Render Props
+
+Share rendering logic:
+
+```tsx
+function DataFetcher({ url, render }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+    fetch(url).then(r =&gt; r.json()).then(setData).finally(() =&gt; setLoading(false));
+  }, [url]);
+
+  return render({ data, loading });
+}
+
+// Usage
+&lt;DataFetcher
+  url=&quot;/api/users&quot;
+  render={({ data, loading }) =&gt;
+    loading ? &lt;Spinner /&gt; : &lt;UserList users={data} /&gt;
+  }
+/&gt;
+```
+
+---
+
+## Next.js Optimization
+
+Reference: `references/nextjs_optimization_guide.md`
+
+### Server vs Client Components
+
+Use Server Components by default. Add &#x27;use client&#x27; only when you need:
+- Event handlers (onClick, onChange)
+- State (useState, useReducer)
+- Effects (useEffect)
+- Browser APIs
+
+```tsx
+// Server Component (default) - no &#x27;use client&#x27;
+async function ProductPage({ params }) {
+  const product = await getProduct(params.id);  // Server-side fetch
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{product.name}&lt;/h1&gt;
+      &lt;AddToCartButton productId={product.id} /&gt;  {/* Client component */}
+    &lt;/div&gt;
+  );
+}
+
+// Client Component
+&#x27;use client&#x27;;
+function AddToCartButton({ productId }) {
+  const [adding, setAdding] = useState(false);
+  return &lt;button onClick={() =&gt; addToCart(productId)}&gt;Add&lt;/button&gt;;
+}
+```
+
+### Image Optimization
+
+```tsx
+import Image from &#x27;next/image&#x27;;
+
+// Above the fold - load immediately
+&lt;Image
+  src=&quot;/hero.jpg&quot;
+  alt=&quot;Hero&quot;
+  width={1200}
+  height={600}
+  priority
+/&gt;
+
+// Responsive image with fill
+&lt;div className=&quot;relative aspect-video&quot;&gt;
+  &lt;Image
+    src=&quot;/product.jpg&quot;
+    alt=&quot;Product&quot;
+    fill
+    sizes=&quot;(max-width: 768px) 100vw, 50vw&quot;
+    className=&quot;object-cover&quot;
+  /&gt;
+&lt;/div&gt;
+```
+
+### Data Fetching Patterns
+
+```tsx
+// Parallel fetching
+async function Dashboard() {
+  const [user, stats] = await Promise.all([
+    getUser(),
+    getStats()
+  ]);
+  return &lt;div&gt;...&lt;/div&gt;;
+}
+
+// Streaming with Suspense
+async function ProductPage({ params }) {
+  return (
+    &lt;div&gt;
+      &lt;ProductDetails id={params.id} /&gt;
+      &lt;Suspense fallback={&lt;ReviewsSkeleton /&gt;}&gt;
+        &lt;Reviews productId={params.id} /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+```
+
+---
+
+## Accessibility and Testing
+
+Reference: `references/frontend_best_practices.md`
+
+### Accessibility Checklist
+
+1. **Semantic HTML**: Use proper elements (`&lt;button&gt;`, `&lt;nav&gt;`, `&lt;main&gt;`)
+2. **Keyboard Navigation**: All interactive elements focusable
+3. **ARIA Labels**: Provide labels for icons and complex widgets
+4. **Color Contrast**: Minimum 4.5:1 for normal text
+5. **Focus Indicators**: Visible focus states
+
+```tsx
+// Accessible button
+&lt;button
+  type=&quot;button&quot;
+  aria-label=&quot;Close dialog&quot;
+  onClick={onClose}
+  className=&quot;focus-visible:ring-2 focus-visible:ring-blue-500&quot;
+&gt;
+  &lt;XIcon aria-hidden=&quot;true&quot; /&gt;
+&lt;/button&gt;
+
+// Skip link for keyboard users
+&lt;a href=&quot;#main-content&quot; className=&quot;sr-only focus:not-sr-only&quot;&gt;
+  Skip to main content
+&lt;/a&gt;
+```
+
+### Testing Strategy
+
+```tsx
+// Component test with React Testing Library
+import { render, screen } from &#x27;@testing-library/react&#x27;;
+import userEvent from &#x27;@testing-library/user-event&#x27;;
+
+test(&#x27;button triggers action on click&#x27;, async () =&gt; {
+  const onClick = vi.fn();
+  render(&lt;Button onClick={onClick}&gt;Click me&lt;/Button&gt;);
+
+  await userEvent.click(screen.getByRole(&#x27;button&#x27;));
+  expect(onClick).toHaveBeenCalledTimes(1);
+});
+
+// Test accessibility
+test(&#x27;dialog is accessible&#x27;, async () =&gt; {
+  render(&lt;Dialog open={true} title=&quot;Confirm&quot; /&gt;);
+
+  expect(screen.getByRole(&#x27;dialog&#x27;)).toBeInTheDocument();
+  expect(screen.getByRole(&#x27;dialog&#x27;)).toHaveAttribute(&#x27;aria-labelledby&#x27;);
+});
+```
+
+---
+
+## Quick Reference
+
+### Common Next.js Config
+
+```js
+// next.config.js
+const nextConfig = {
+  images: {
+    remotePatterns: [{ hostname: &#x27;cdn.example.com&#x27; }],
+    formats: [&#x27;image/avif&#x27;, &#x27;image/webp&#x27;],
+  },
+  experimental: {
+    optimizePackageImports: [&#x27;lucide-react&#x27;, &#x27;@heroicons/react&#x27;],
+  },
+};
+```
+
+### Tailwind CSS Utilities
+
+```tsx
+// Conditional classes with cn()
+import { cn } from &#x27;@/lib/utils&#x27;;
+
+&lt;button className={cn(
+  &#x27;px-4 py-2 rounded&#x27;,
+  variant === &#x27;primary&#x27; &amp;&amp; &#x27;bg-blue-500 text-white&#x27;,
+  disabled &amp;&amp; &#x27;opacity-50 cursor-not-allowed&#x27;
+)} /&gt;
+```
+
+### TypeScript Patterns
+
+```tsx
+// Props with children
+interface CardProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+// Generic component
+interface ListProps&lt;T&gt; {
+  items: T[];
+  renderItem: (item: T) =&gt; React.ReactNode;
+}
+
+function List&lt;T&gt;({ items, renderItem }: ListProps&lt;T&gt;) {
+  return &lt;ul&gt;{items.map(renderItem)}&lt;/ul&gt;;
+}
+```
+
+---
+
+## Resources
+
+- React Patterns: `references/react_patterns.md`
+- Next.js Optimization: `references/nextjs_optimization_guide.md`
+- Best Practices: `references/frontend_best_practices.md`
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Scaffolder fails with &quot;Directory already exists&quot; | Target project folder already present on disk | Delete or rename the existing directory, or choose a different project name |
+| Component generator creates PascalCase name from kebab-case incorrectly | Input contains mixed delimiters (e.g., `my_comp-name`) | Use consistent kebab-case (`my-comp-name`) or PascalCase (`MyCompName`) as input |
+| Bundle analyzer reports &quot;No valid package.json found&quot; | Script is pointed at a directory without `package.json` or the file has invalid JSON | Pass the correct project root directory; validate `package.json` syntax with `python -m json.tool package.json` |
+| `--dry-run` shows files but `--features` content is listed as TODO | Feature file content keys are not mapped in `FILE_CONTENTS` dictionary | This is expected for some add-on features; implement the placeholder files manually after scaffolding |
+| Bundle score unexpectedly low despite few dependencies | Dev-only packages (TypeScript, ESLint, Tailwind) are listed under `dependencies` instead of `devDependencies` | Move build/dev tooling to `devDependencies` in `package.json` |
+| Import analysis returns zero files checked | Source code is not in `src/`, `app/`, or `pages/` directories | Run with `--verbose` and ensure your source files live in one of the three expected directories |
+| Generated component missing `&#x27;use client&#x27;` directive | Component was generated with `--type server` instead of the default `client` type | Re-run with `--type client` or add the `&#x27;use client&#x27;` directive manually at the top of the file |
+
+---
+
+## Success Criteria
+
+- **Lighthouse performance score above 90** on the generated project&#x27;s production build, indicating Server Components and image optimization are configured correctly.
+- **Bundle size under 200KB gzipped** for the initial JavaScript payload, validated by running the bundle analyzer with a grade of A or B.
+- **Zero heavy-dependency warnings** from `bundle_analyzer.py` after applying all recommended replacements.
+- **Component generation time under 2 seconds** per component, including test and story file creation.
+- **All generated TypeScript files pass `tsc --noEmit`** without errors, confirming type-safe scaffolding output.
+- **Accessibility audit produces zero critical violations** when running axe-core or Lighthouse accessibility checks against generated components.
+- **Test coverage above 80%** for generated components when the `--with-test` flag is used and tests are executed with Vitest.
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- React and Next.js project scaffolding with TypeScript and Tailwind CSS
+- Component, hook, test, and Storybook story generation following established patterns
+- Static bundle analysis based on `package.json` dependency inspection and import pattern scanning
+- Frontend-specific best practices for Server Components, image optimization, data fetching, and accessibility
+
+**What this skill does NOT cover:**
+- Backend API development, database schema design, or server infrastructure -- see **senior-backend** and **senior-fullstack**
+- End-to-end testing with Cypress or Playwright -- see **senior-qa**
+- CI/CD pipeline configuration and Docker deployment -- see **senior-devops**
+- Security vulnerability scanning and penetration testing -- see **senior-secops** and **senior-security**
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **senior-fullstack** | Scaffolded frontend projects connect to fullstack project scaffolder for API layer setup | Frontend project structure feeds into `project_scaffolder.py` which adds backend, Docker, and CI/CD layers |
+| **senior-backend** | Components consuming API data follow patterns defined by backend skill&#x27;s REST/GraphQL conventions | Backend API response types imported into frontend `types/` directory generated by this skill |
+| **senior-qa** | Generated test files (`--with-test`) use the same Testing Library conventions that the QA skill&#x27;s test strategies build upon | Component test files hand off to QA skill for integration and E2E test coverage expansion |
+| **senior-devops** | Bundle analyzer output informs build pipeline optimization decisions | Bundle health score and dependency warnings feed into CI quality gates configured by DevOps skill |
+| **senior-secops** | Dependency analysis identifies packages that need security audit | Heavy/outdated dependency warnings from `bundle_analyzer.py` trigger security review workflows |
+| **code-reviewer** | Generated components follow patterns that the code reviewer skill validates | Code reviewer checks generated components against React/TypeScript best practices defined in this skill&#x27;s references |
+
+---
+
+## Tool Reference
+
+### frontend_scaffolder.py
+
+- **Purpose**: Scaffold a complete Next.js or React project with TypeScript, Tailwind CSS, and optional feature modules.
+- **Usage**: `python scripts/frontend_scaffolder.py &lt;name&gt; [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | positional | (required) | Project name, kebab-case recommended |
+| `--dir`, `-d` | string | `.` | Output directory where the project folder is created |
+| `--template`, `-t` | choice | `nextjs` | Project template: `nextjs` or `react` |
+| `--features`, `-f` | string | (none) | Comma-separated features: `auth`, `api`, `forms`, `testing`, `storybook` |
+| `--list-templates` | flag | off | List available project templates and exit |
+| `--list-features` | flag | off | List available feature modules and exit |
+| `--dry-run` | flag | off | Preview generated file list without writing to disk |
+| `--json` | flag | off | Output result as JSON instead of human-readable summary |
+
+- **Example**:
+  ```bash
+  python scripts/frontend_scaffolder.py dashboard --template nextjs --features auth,api --json
+  ```
+  ```json
+  {
+    &quot;name&quot;: &quot;dashboard&quot;,
+    &quot;template&quot;: &quot;nextjs&quot;,
+    &quot;template_name&quot;: &quot;Next.js 14+ App Router&quot;,
+    &quot;features&quot;: [&quot;auth&quot;, &quot;api&quot;],
+    &quot;path&quot;: &quot;./dashboard&quot;,
+    &quot;files_created&quot;: 28,
+    &quot;next_steps&quot;: [&quot;cd dashboard&quot;, &quot;npm install&quot;, &quot;npm run dev&quot;]
+  }
+  ```
+- **Output Formats**: Human-readable summary (default) or JSON (`--json`).
+
+---
+
+### component_generator.py
+
+- **Purpose**: Generate React/Next.js component files with TypeScript, optional test, and Storybook story.
+- **Usage**: `python scripts/component_generator.py &lt;name&gt; [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | positional | (required) | Component name in PascalCase or kebab-case |
+| `--dir`, `-d` | string | `src/components` | Output directory for generated files |
+| `--type`, `-t` | choice | `client` | Component type: `client`, `server`, or `hook` |
+| `--with-test` | flag | off | Generate a `.test.tsx` file with Testing Library boilerplate |
+| `--with-story` | flag | off | Generate a `.stories.tsx` file for Storybook |
+| `--no-index` | flag | off | Skip generating the `index.ts` barrel export file |
+| `--flat` | flag | off | Place files directly in output dir without creating a subdirectory |
+| `--dry-run` | flag | off | Preview what would be generated without writing files |
+| `--verbose`, `-v` | flag | off | Enable verbose output |
+
+- **Example**:
+  ```bash
+  python scripts/component_generator.py ProductCard --dir src/components/ui --type client --with-test --with-story
+  ```
+  ```
+  ==================================================
+  Component Generated: ProductCard
+  ==================================================
+  Type: client
+  Directory: src/components/ui/ProductCard
+
+  Files created:
+    - src/components/ui/ProductCard/ProductCard.tsx
+    - src/components/ui/ProductCard/ProductCard.test.tsx
+    - src/components/ui/ProductCard/ProductCard.stories.tsx
+    - src/components/ui/ProductCard/index.ts
+  ==================================================
+  ```
+- **Output Formats**: Human-readable summary only.
+
+---
+
+### bundle_analyzer.py
+
+- **Purpose**: Analyze `package.json` and project source files for bundle size issues, heavy dependencies, and optimization opportunities.
+- **Usage**: `python scripts/bundle_analyzer.py [project_dir] [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `project_dir` | positional | `.` | Project directory containing `package.json` |
+| `--json` | flag | off | Output full analysis as JSON |
+| `--verbose`, `-v` | flag | off | Include detailed import pattern analysis across `src/`, `app/`, and `pages/` directories |
+
+- **Example**:
+  ```bash
+  python scripts/bundle_analyzer.py /path/to/my-app --verbose
+  ```
+  ```
+  ============================================================
+  FRONTEND BUNDLE ANALYSIS REPORT
+  ============================================================
+
+  Bundle Health Score: 70/100 (C)
+
+  Dependencies: 12 production, 18 dev
+
+  --- HEAVY DEPENDENCIES ---
+
+    moment (290KB)
+      Reason: Large locale files bundled by default
+      Alternative: date-fns (12KB) or dayjs (2KB)
+
+    lodash (71KB)
+      Reason: Full library often imported when only few functions needed
+      Alternative: lodash-es with tree-shaking or individual imports (lodash/get)
+
+  --- IMPORT ISSUES ---
+    - src/utils/date.ts: Consider replacing moment with date-fns or dayjs
+
+  --- RECOMMENDATIONS ---
+    1. Replace heavy dependencies with lighter alternatives
+  ============================================================
+  ```
+- **Output Formats**: Human-readable report (default) or JSON (`--json`).
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Frontend&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Frontend&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Frontend in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Frontend&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Frontend&quot;
+4. Description: &quot;Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding fronte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-frontend/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Senior Frontend&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Frontend
+
+Frontend development patterns, performance optimization, and automation tools for React/Next.js applications.
+
+## Table of Contents
+
+- [Project Scaffolding](#project-scaffolding)
+- [Component Generation](#component-generation)
+- [Bundle Analysis](#bundle-analysis)
+- [React Patterns](#react-patterns)
+- [Next.js Optimization](#nextjs-optimization)
+- [Accessibility and Testing](#accessibility-and-testing)
+
+---
+
+## Project Scaffolding
+
+Generate a new Next.js or React project with TypeScript, Tailwind CSS, and best practice configurations.
+
+### Workflow: Create New Frontend Project
+
+1. Run the scaffolder with your project name and template:
+   ```bash
+   python scripts/frontend_scaffolder.py my-app --template nextjs
+   ```
+
+2. Add optional features (auth, api, forms, testing, storybook):
+   ```bash
+   python scripts/frontend_scaffolder.py dashboard --template nextjs --features auth,api
+   ```
+
+3. Navigate to the project and install dependencies:
+   ```bash
+   cd my-app &amp;&amp; npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Scaffolder Options
+
+| Option | Description |
+|--------|-------------|
+| `--template nextjs` | Next.js 14+ with App Router and Server Components |
+| `--template react` | React + Vite with TypeScript |
+| `--features auth` | Add NextAuth.js authentication |
+| `--features api` | Add React Query + API client |
+| `--features forms` | Add React Hook Form + Zod validation |
+| `--features testing` | Add Vitest + Testing Library |
+| `--dry-run` | Preview files without creating them |
+
+### Generated Structure (Next.js)
+
+```
+my-app/
+├── app/
+│   ├── layout.tsx        # Root layout with fonts
+│   ├── page.tsx          # Home page
+│   ├── globals.css       # Tailwind + CSS variables
+│   └── api/health/route.ts
+├── components/
+│   ├── ui/               # Button, Input, Card
+│   └── layout/           # Header, Footer, Sidebar
+├── hooks/                # useDebounce, useLocalStorage
+├── lib/                  # utils (cn), constants
+├── types/                # TypeScript interfaces
+├── tailwind.config.ts
+├── next.config.js
+└── package.json
+```
+
+---
+
+## Component Generation
+
+Generate React components with TypeScript, tests, and Storybook stories.
+
+### Workflow: Create a New Component
+
+1. Generate a client component:
+   ```bash
+   python scripts/component_generator.py Button --dir src/components/ui
+   ```
+
+2. Generate a server component:
+   ```bash
+   python scripts/component_generator.py ProductCard --type server
+   ```
+
+3. Generate with test and story files:
+   ```bash
+   python scripts/component_generator.py UserProfile --with-test --with-story
+   ```
+
+4. Generate a custom hook:
+   ```bash
+   python scripts/component_generator.py FormValidation --type hook
+   ```
+
+### Generator Options
+
+| Option | Description |
+|--------|-------------|
+| `--type client` | Client component with &#x27;use client&#x27; (default) |
+| `--type server` | Async server component |
+| `--type hook` | Custom React hook |
+| `--with-test` | Include test file |
+| `--with-story` | Include Storybook story |
+| `--flat` | Create in output dir without subdirectory |
+| `--dry-run` | Preview without creating files |
+
+### Generated Component Example
+
+```tsx
+&#x27;use client&#x27;;
+
+import { useState } from &#x27;react&#x27;;
+import { cn } from &#x27;@/lib/utils&#x27;;
+
+interface ButtonProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export function Button({ className, children }: ButtonProps) {
+  return (
+    &lt;div className={cn(&#x27;&#x27;, className)}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+```
+
+---
+
+## Bundle Analysis
+
+Analyze package.json and project structure for bundle optimization opportunities.
+
+### Workflow: Optimize Bundle Size
+
+1. Run the analyzer on your project:
+   ```bash
+   python scripts/bundle_analyzer.py /path/to/project
+   ```
+
+2. Review the health score and issues:
+   ```
+   Bundle Health Score: 75/100 (C)
+
+   HEAVY DEPENDENCIES:
+     moment (290KB)
+       Alternative: date-fns (12KB) or dayjs (2KB)
+
+     lodash (71KB)
+       Alternative: lodash-es with tree-shaking
+   ```
+
+3. Apply the recommended fixes by replacing heavy dependencies.
+
+4. Re-run with verbose mode to check import patterns:
+   ```bash
+   python scripts/bundle_analyzer.py . --verbose
+   ```
+
+### Bundle Score Interpretation
+
+| Score | Grade | Action |
+|-------|-------|--------|
+| 90-100 | A | Bundle is well-optimized |
+| 80-89 | B | Minor optimizations available |
+| 70-79 | C | Replace heavy dependencies |
+| 60-69 | D | Multiple issues need attention |
+| 0-59 | F | Critical bundle size problems |
+
+### Heavy Dependencies Detected
+
+The analyzer identifies these common heavy packages:
+
+| Package | Size | Alternative |
+|---------|------|-------------|
+| moment | 290KB | date-fns (12KB) or dayjs (2KB) |
+| lodash | 71KB | lodash-es with tree-shaking |
+| axios | 14KB | Native fetch or ky (3KB) |
+| jquery | 87KB | Native DOM APIs |
+| @mui/material | Large | shadcn/ui or Radix UI |
+
+---
+
+## React Patterns
+
+Reference: `references/react_patterns.md`
+
+### Compound Components
+
+Share state between related components:
+
+```tsx
+const Tabs = ({ children }) =&gt; {
+  const [active, setActive] = useState(0);
+  return (
+    &lt;TabsContext.Provider value={{ active, setActive }}&gt;
+      {children}
+    &lt;/TabsContext.Provider&gt;
+  );
+};
+
+Tabs.List = TabList;
+Tabs.Panel = TabPanel;
+
+// Usage
+&lt;Tabs&gt;
+  &lt;Tabs.List&gt;
+    &lt;Tabs.Tab&gt;One&lt;/Tabs.Tab&gt;
+    &lt;Tabs.Tab&gt;Two&lt;/Tabs.Tab&gt;
+  &lt;/Tabs.List&gt;
+  &lt;Tabs.Panel&gt;Content 1&lt;/Tabs.Panel&gt;
+  &lt;Tabs.Panel&gt;Content 2&lt;/Tabs.Panel&gt;
+&lt;/Tabs&gt;
+```
+
+### Custom Hooks
+
+Extract reusable logic:
+
+```tsx
+function useDebounce&lt;T&gt;(value: T, delay = 500): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() =&gt; {
+    const timer = setTimeout(() =&gt; setDebouncedValue(value), delay);
+    return () =&gt; clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage
+const debouncedSearch = useDebounce(searchTerm, 300);
+```
+
+### Render Props
+
+Share rendering logic:
+
+```tsx
+function DataFetcher({ url, render }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() =&gt; {
+    fetch(url).then(r =&gt; r.json()).then(setData).finally(() =&gt; setLoading(false));
+  }, [url]);
+
+  return render({ data, loading });
+}
+
+// Usage
+&lt;DataFetcher
+  url=&quot;/api/users&quot;
+  render={({ data, loading }) =&gt;
+    loading ? &lt;Spinner /&gt; : &lt;UserList users={data} /&gt;
+  }
+/&gt;
+```
+
+---
+
+## Next.js Optimization
+
+Reference: `references/nextjs_optimization_guide.md`
+
+### Server vs Client Components
+
+Use Server Components by default. Add &#x27;use client&#x27; only when you need:
+- Event handlers (onClick, onChange)
+- State (useState, useReducer)
+- Effects (useEffect)
+- Browser APIs
+
+```tsx
+// Server Component (default) - no &#x27;use client&#x27;
+async function ProductPage({ params }) {
+  const product = await getProduct(params.id);  // Server-side fetch
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{product.name}&lt;/h1&gt;
+      &lt;AddToCartButton productId={product.id} /&gt;  {/* Client component */}
+    &lt;/div&gt;
+  );
+}
+
+// Client Component
+&#x27;use client&#x27;;
+function AddToCartButton({ productId }) {
+  const [adding, setAdding] = useState(false);
+  return &lt;button onClick={() =&gt; addToCart(productId)}&gt;Add&lt;/button&gt;;
+}
+```
+
+### Image Optimization
+
+```tsx
+import Image from &#x27;next/image&#x27;;
+
+// Above the fold - load immediately
+&lt;Image
+  src=&quot;/hero.jpg&quot;
+  alt=&quot;Hero&quot;
+  width={1200}
+  height={600}
+  priority
+/&gt;
+
+// Responsive image with fill
+&lt;div className=&quot;relative aspect-video&quot;&gt;
+  &lt;Image
+    src=&quot;/product.jpg&quot;
+    alt=&quot;Product&quot;
+    fill
+    sizes=&quot;(max-width: 768px) 100vw, 50vw&quot;
+    className=&quot;object-cover&quot;
+  /&gt;
+&lt;/div&gt;
+```
+
+### Data Fetching Patterns
+
+```tsx
+// Parallel fetching
+async function Dashboard() {
+  const [user, stats] = await Promise.all([
+    getUser(),
+    getStats()
+  ]);
+  return &lt;div&gt;...&lt;/div&gt;;
+}
+
+// Streaming with Suspense
+async function ProductPage({ params }) {
+  return (
+    &lt;div&gt;
+      &lt;ProductDetails id={params.id} /&gt;
+      &lt;Suspense fallback={&lt;ReviewsSkeleton /&gt;}&gt;
+        &lt;Reviews productId={params.id} /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+```
+
+---
+
+## Accessibility and Testing
+
+Reference: `references/frontend_best_practices.md`
+
+### Accessibility Checklist
+
+1. **Semantic HTML**: Use proper elements (`&lt;button&gt;`, `&lt;nav&gt;`, `&lt;main&gt;`)
+2. **Keyboard Navigation**: All interactive elements focusable
+3. **ARIA Labels**: Provide labels for icons and complex widgets
+4. **Color Contrast**: Minimum 4.5:1 for normal text
+5. **Focus Indicators**: Visible focus states
+
+```tsx
+// Accessible button
+&lt;button
+  type=&quot;button&quot;
+  aria-label=&quot;Close dialog&quot;
+  onClick={onClose}
+  className=&quot;focus-visible:ring-2 focus-visible:ring-blue-500&quot;
+&gt;
+  &lt;XIcon aria-hidden=&quot;true&quot; /&gt;
+&lt;/button&gt;
+
+// Skip link for keyboard users
+&lt;a href=&quot;#main-content&quot; className=&quot;sr-only focus:not-sr-only&quot;&gt;
+  Skip to main content
+&lt;/a&gt;
+```
+
+### Testing Strategy
+
+```tsx
+// Component test with React Testing Library
+import { render, screen } from &#x27;@testing-library/react&#x27;;
+import userEvent from &#x27;@testing-library/user-event&#x27;;
+
+test(&#x27;button triggers action on click&#x27;, async () =&gt; {
+  const onClick = vi.fn();
+  render(&lt;Button onClick={onClick}&gt;Click me&lt;/Button&gt;);
+
+  await userEvent.click(screen.getByRole(&#x27;button&#x27;));
+  expect(onClick).toHaveBeenCalledTimes(1);
+});
+
+// Test accessibility
+test(&#x27;dialog is accessible&#x27;, async () =&gt; {
+  render(&lt;Dialog open={true} title=&quot;Confirm&quot; /&gt;);
+
+  expect(screen.getByRole(&#x27;dialog&#x27;)).toBeInTheDocument();
+  expect(screen.getByRole(&#x27;dialog&#x27;)).toHaveAttribute(&#x27;aria-labelledby&#x27;);
+});
+```
+
+---
+
+## Quick Reference
+
+### Common Next.js Config
+
+```js
+// next.config.js
+const nextConfig = {
+  images: {
+    remotePatterns: [{ hostname: &#x27;cdn.example.com&#x27; }],
+    formats: [&#x27;image/avif&#x27;, &#x27;image/webp&#x27;],
+  },
+  experimental: {
+    optimizePackageImports: [&#x27;lucide-react&#x27;, &#x27;@heroicons/react&#x27;],
+  },
+};
+```
+
+### Tailwind CSS Utilities
+
+```tsx
+// Conditional classes with cn()
+import { cn } from &#x27;@/lib/utils&#x27;;
+
+&lt;button className={cn(
+  &#x27;px-4 py-2 rounded&#x27;,
+  variant === &#x27;primary&#x27; &amp;&amp; &#x27;bg-blue-500 text-white&#x27;,
+  disabled &amp;&amp; &#x27;opacity-50 cursor-not-allowed&#x27;
+)} /&gt;
+```
+
+### TypeScript Patterns
+
+```tsx
+// Props with children
+interface CardProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+// Generic component
+interface ListProps&lt;T&gt; {
+  items: T[];
+  renderItem: (item: T) =&gt; React.ReactNode;
+}
+
+function List&lt;T&gt;({ items, renderItem }: ListProps&lt;T&gt;) {
+  return &lt;ul&gt;{items.map(renderItem)}&lt;/ul&gt;;
+}
+```
+
+---
+
+## Resources
+
+- React Patterns: `references/react_patterns.md`
+- Next.js Optimization: `references/nextjs_optimization_guide.md`
+- Best Practices: `references/frontend_best_practices.md`
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Scaffolder fails with &quot;Directory already exists&quot; | Target project folder already present on disk | Delete or rename the existing directory, or choose a different project name |
+| Component generator creates PascalCase name from kebab-case incorrectly | Input contains mixed delimiters (e.g., `my_comp-name`) | Use consistent kebab-case (`my-comp-name`) or PascalCase (`MyCompName`) as input |
+| Bundle analyzer reports &quot;No valid package.json found&quot; | Script is pointed at a directory without `package.json` or the file has invalid JSON | Pass the correct project root directory; validate `package.json` syntax with `python -m json.tool package.json` |
+| `--dry-run` shows files but `--features` content is listed as TODO | Feature file content keys are not mapped in `FILE_CONTENTS` dictionary | This is expected for some add-on features; implement the placeholder files manually after scaffolding |
+| Bundle score unexpectedly low despite few dependencies | Dev-only packages (TypeScript, ESLint, Tailwind) are listed under `dependencies` instead of `devDependencies` | Move build/dev tooling to `devDependencies` in `package.json` |
+| Import analysis returns zero files checked | Source code is not in `src/`, `app/`, or `pages/` directories | Run with `--verbose` and ensure your source files live in one of the three expected directories |
+| Generated component missing `&#x27;use client&#x27;` directive | Component was generated with `--type server` instead of the default `client` type | Re-run with `--type client` or add the `&#x27;use client&#x27;` directive manually at the top of the file |
+
+---
+
+## Success Criteria
+
+- **Lighthouse performance score above 90** on the generated project&#x27;s production build, indicating Server Components and image optimization are configured correctly.
+- **Bundle size under 200KB gzipped** for the initial JavaScript payload, validated by running the bundle analyzer with a grade of A or B.
+- **Zero heavy-dependency warnings** from `bundle_analyzer.py` after applying all recommended replacements.
+- **Component generation time under 2 seconds** per component, including test and story file creation.
+- **All generated TypeScript files pass `tsc --noEmit`** without errors, confirming type-safe scaffolding output.
+- **Accessibility audit produces zero critical violations** when running axe-core or Lighthouse accessibility checks against generated components.
+- **Test coverage above 80%** for generated components when the `--with-test` flag is used and tests are executed with Vitest.
+
+---
+
+## Scope &amp; Limitations
+
+**What this skill covers:**
+- React and Next.js project scaffolding with TypeScript and Tailwind CSS
+- Component, hook, test, and Storybook story generation following established patterns
+- Static bundle analysis based on `package.json` dependency inspection and import pattern scanning
+- Frontend-specific best practices for Server Components, image optimization, data fetching, and accessibility
+
+**What this skill does NOT cover:**
+- Backend API development, database schema design, or server infrastructure -- see **senior-backend** and **senior-fullstack**
+- End-to-end testing with Cypress or Playwright -- see **senior-qa**
+- CI/CD pipeline configuration and Docker deployment -- see **senior-devops**
+- Security vulnerability scanning and penetration testing -- see **senior-secops** and **senior-security**
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **senior-fullstack** | Scaffolded frontend projects connect to fullstack project scaffolder for API layer setup | Frontend project structure feeds into `project_scaffolder.py` which adds backend, Docker, and CI/CD layers |
+| **senior-backend** | Components consuming API data follow patterns defined by backend skill&#x27;s REST/GraphQL conventions | Backend API response types imported into frontend `types/` directory generated by this skill |
+| **senior-qa** | Generated test files (`--with-test`) use the same Testing Library conventions that the QA skill&#x27;s test strategies build upon | Component test files hand off to QA skill for integration and E2E test coverage expansion |
+| **senior-devops** | Bundle analyzer output informs build pipeline optimization decisions | Bundle health score and dependency warnings feed into CI quality gates configured by DevOps skill |
+| **senior-secops** | Dependency analysis identifies packages that need security audit | Heavy/outdated dependency warnings from `bundle_analyzer.py` trigger security review workflows |
+| **code-reviewer** | Generated components follow patterns that the code reviewer skill validates | Code reviewer checks generated components against React/TypeScript best practices defined in this skill&#x27;s references |
+
+---
+
+## Tool Reference
+
+### frontend_scaffolder.py
+
+- **Purpose**: Scaffold a complete Next.js or React project with TypeScript, Tailwind CSS, and optional feature modules.
+- **Usage**: `python scripts/frontend_scaffolder.py &lt;name&gt; [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | positional | (required) | Project name, kebab-case recommended |
+| `--dir`, `-d` | string | `.` | Output directory where the project folder is created |
+| `--template`, `-t` | choice | `nextjs` | Project template: `nextjs` or `react` |
+| `--features`, `-f` | string | (none) | Comma-separated features: `auth`, `api`, `forms`, `testing`, `storybook` |
+| `--list-templates` | flag | off | List available project templates and exit |
+| `--list-features` | flag | off | List available feature modules and exit |
+| `--dry-run` | flag | off | Preview generated file list without writing to disk |
+| `--json` | flag | off | Output result as JSON instead of human-readable summary |
+
+- **Example**:
+  ```bash
+  python scripts/frontend_scaffolder.py dashboard --template nextjs --features auth,api --json
+  ```
+  ```json
+  {
+    &quot;name&quot;: &quot;dashboard&quot;,
+    &quot;template&quot;: &quot;nextjs&quot;,
+    &quot;template_name&quot;: &quot;Next.js 14+ App Router&quot;,
+    &quot;features&quot;: [&quot;auth&quot;, &quot;api&quot;],
+    &quot;path&quot;: &quot;./dashboard&quot;,
+    &quot;files_created&quot;: 28,
+    &quot;next_steps&quot;: [&quot;cd dashboard&quot;, &quot;npm install&quot;, &quot;npm run dev&quot;]
+  }
+  ```
+- **Output Formats**: Human-readable summary (default) or JSON (`--json`).
+
+---
+
+### component_generator.py
+
+- **Purpose**: Generate React/Next.js component files with TypeScript, optional test, and Storybook story.
+- **Usage**: `python scripts/component_generator.py &lt;name&gt; [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | positional | (required) | Component name in PascalCase or kebab-case |
+| `--dir`, `-d` | string | `src/components` | Output directory for generated files |
+| `--type`, `-t` | choice | `client` | Component type: `client`, `server`, or `hook` |
+| `--with-test` | flag | off | Generate a `.test.tsx` file with Testing Library boilerplate |
+| `--with-story` | flag | off | Generate a `.stories.tsx` file for Storybook |
+| `--no-index` | flag | off | Skip generating the `index.ts` barrel export file |
+| `--flat` | flag | off | Place files directly in output dir without creating a subdirectory |
+| `--dry-run` | flag | off | Preview what would be generated without writing files |
+| `--verbose`, `-v` | flag | off | Enable verbose output |
+
+- **Example**:
+  ```bash
+  python scripts/component_generator.py ProductCard --dir src/components/ui --type client --with-test --with-story
+  ```
+  ```
+  ==================================================
+  Component Generated: ProductCard
+  ==================================================
+  Type: client
+  Directory: src/components/ui/ProductCard
+
+  Files created:
+    - src/components/ui/ProductCard/ProductCard.tsx
+    - src/components/ui/ProductCard/ProductCard.test.tsx
+    - src/components/ui/ProductCard/ProductCard.stories.tsx
+    - src/components/ui/ProductCard/index.ts
+  ==================================================
+  ```
+- **Output Formats**: Human-readable summary only.
+
+---
+
+### bundle_analyzer.py
+
+- **Purpose**: Analyze `package.json` and project source files for bundle size issues, heavy dependencies, and optimization opportunities.
+- **Usage**: `python scripts/bundle_analyzer.py [project_dir] [flags]`
+- **Flags**:
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `project_dir` | positional | `.` | Project directory containing `package.json` |
+| `--json` | flag | off | Output full analysis as JSON |
+| `--verbose`, `-v` | flag | off | Include detailed import pattern analysis across `src/`, `app/`, and `pages/` directories |
+
+- **Example**:
+  ```bash
+  python scripts/bundle_analyzer.py /path/to/my-app --verbose
+  ```
+  ```
+  ============================================================
+  FRONTEND BUNDLE ANALYSIS REPORT
+  ============================================================
+
+  Bundle Health Score: 70/100 (C)
+
+  Dependencies: 12 production, 18 dev
+
+  --- HEAVY DEPENDENCIES ---
+
+    moment (290KB)
+      Reason: Large locale files bundled by default
+      Alternative: date-fns (12KB) or dayjs (2KB)
+
+    lodash (71KB)
+      Reason: Full library often imported when only few functions needed
+      Alternative: lodash-es with tree-shaking or individual imports (lodash/get)
+
+  --- IMPORT ISSUES ---
+    - src/utils/date.ts: Consider replacing moment with date-fns or dayjs
+
+  --- RECOMMENDATIONS ---
+    1. Replace heavy dependencies with lighter alternatives
+  ============================================================
+  ```
+- **Output Formats**: Human-readable report (default) or JSON (`--json`).
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Frontend&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Frontend&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Frontend in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Frontend&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Frontend&quot;
+4. Description: &quot;Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding fronte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-frontend/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

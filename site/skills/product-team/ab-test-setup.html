@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ab Test Setup (Product domain).
 
 Design and implement statistically rigorous A/B tests and experiments. Covers hypothesis formulation, sample size calculation, metric selection, traffic allocation, implementation patterns (client-sid...
@@ -401,11 +423,11 @@ https://github.com/borghei/Claude-Skills/tree/main/ab-test-setup
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Ab Test Setup (Product domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Ab Test Setup (Product domain).
 
 Design and implement statistically rigorous A/B tests and experiments. Covers hypothesis formulation, sample size calculation, metric selection, traffic allocation, implementation patterns (client-sid...
 
@@ -437,7 +459,1036 @@ https://github.com/borghei/Claude-Skills/tree/main/ab-test-setup
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Ab Test Setup&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# A/B Test Setup - Experimentation Design &amp; Analysis
+
+**Category:** Product Team
+**Tags:** A/B testing, experiments, statistical significance, sample size, feature flags, hypothesis testing
+
+## Overview
+
+A/B Test Setup provides the complete framework for designing experiments that produce statistically valid, actionable results. Most A/B tests fail not because the variant was wrong, but because the test was poorly designed: wrong sample size, wrong metric, or someone peeked at results and stopped early. This skill prevents those mistakes.
+
+---
+
+## The Experiment Lifecycle
+
+```
+1. HYPOTHESIZE  →  2. DESIGN  →  3. CALCULATE  →  4. IMPLEMENT
+       ↑                                                    │
+       │                                                    ▼
+7. ITERATE  ←  6. DOCUMENT  ←  5. ANALYZE  ←  [Run to completion]
+```
+
+---
+
+## Step 1: Hypothesis Formulation
+
+### The Hypothesis Template
+
+```
+Because [observation or data point],
+we believe [specific change]
+will cause [measurable outcome]
+for [defined audience segment].
+
+We&#x27;ll know this is true when [primary metric] changes by [minimum detectable effect].
+We&#x27;ll watch [guardrail metrics] to ensure no negative impact.
+```
+
+### Good vs Bad Hypotheses
+
+| Quality | Hypothesis | Problem |
+|---------|-----------|---------|
+| Bad | &quot;Changing the button color might increase clicks&quot; | No data basis, no target, no measurement plan |
+| Mediocre | &quot;A green button will get more clicks than blue&quot; | No &quot;why&quot;, no target size, no guardrails |
+| Good | &quot;Because heatmaps show 40% of users don&#x27;t notice our CTA, making the button 2x larger with contrasting color will increase CTA clicks by 15%+ for new visitors. Guardrail: page load time stays under 2s.&quot; | Data-backed, specific change, measurable outcome, defined audience, guardrail |
+
+### Hypothesis Sources (Where to Find Test Ideas)
+
+| Source | What to Look For | Example |
+|--------|-----------------|---------|
+| Analytics data | Drop-off points, low-performing pages | &quot;80% of users drop off at step 3 of onboarding&quot; |
+| User research | Confusion, frustration, unmet needs | &quot;Users don&#x27;t understand what the product does from the homepage&quot; |
+| Heatmaps/session recordings | Ignored elements, rage clicks | &quot;Nobody scrolls past the fold on pricing page&quot; |
+| Support tickets | Recurring complaints, feature confusion | &quot;Users constantly ask how to invite team members&quot; |
+| Competitor analysis | Different approaches to same problem | &quot;Competitor uses a wizard; we use a form&quot; |
+| Sales objections | Common reasons prospects don&#x27;t convert | &quot;Prospects want to see pricing before signing up&quot; |
+
+---
+
+## Step 2: Test Design
+
+### Test Types
+
+| Type | Variants | Traffic Need | Best For |
+|------|----------|-------------|---------|
+| A/B | 2 (control + 1 variant) | Moderate | Single change validation |
+| A/B/n | 3+ variants | High | Comparing multiple approaches |
+| Multivariate (MVT) | Combinations of changes | Very high | Optimizing multiple elements |
+| Split URL | Different pages | Moderate | Major redesigns |
+| Bandit | Dynamic allocation | Low-moderate | Revenue optimization |
+
+**Default recommendation:** Standard A/B test. Only use A/B/n or MVT when you have enough traffic and a specific need.
+
+### What to Test (By Impact)
+
+| Category | High Impact | Medium Impact | Low Impact |
+|----------|-----------|---------------|-----------|
+| **Copy** | Headline/value prop, CTA text | Body copy, social proof | Microcopy, labels |
+| **Design** | Page layout, above-fold content | Visual hierarchy, imagery | Color, font size |
+| **UX** | Number of steps, form fields | Button placement, navigation | Animations, transitions |
+| **Pricing** | Price point, plan names | Feature packaging, anchoring | Billing frequency display |
+| **Social Proof** | Testimonials vs none, logos | Testimonial format, placement | Testimonial count |
+
+### Metric Selection
+
+Every test needs three types of metrics:
+
+**Primary Metric (1 only)**
+- The single metric that determines success
+- Directly tied to the hypothesis
+- Must be measurable within the test duration
+- Examples: signup rate, click-through rate, purchase rate
+
+**Secondary Metrics (2-3)**
+- Explain why the primary metric moved
+- Provide context for decision-making
+- Examples: time on page, scroll depth, feature adoption rate
+
+**Guardrail Metrics (1-3)**
+- Things that must NOT get worse
+- Stop the test if significantly negative
+- Examples: error rate, support ticket volume, page load time, refund rate
+
+---
+
+## Step 3: Sample Size Calculation
+
+### Quick Reference Table
+
+Minimum visitors PER VARIANT needed (95% confidence, 80% power):
+
+| Baseline Rate | 5% Lift | 10% Lift | 15% Lift | 20% Lift | 50% Lift |
+|--------------|---------|----------|----------|----------|----------|
+| 1% | 620,000 | 156,000 | 70,000 | 39,000 | 6,400 |
+| 2% | 305,000 | 77,000 | 34,000 | 19,500 | 3,200 |
+| 3% | 200,000 | 51,000 | 23,000 | 12,800 | 2,100 |
+| 5% | 116,000 | 29,500 | 13,200 | 7,500 | 1,250 |
+| 10% | 54,000 | 13,800 | 6,200 | 3,500 | 600 |
+| 20% | 24,000 | 6,200 | 2,800 | 1,600 | 280 |
+| 50% | 6,100 | 1,600 | 720 | 410 | 75 |
+
+### Duration Calculation
+
+```
+Duration (days) = (Sample size per variant * Number of variants) / Daily traffic to test page
+```
+
+**Minimum duration:** 7 days (to capture day-of-week effects)
+**Maximum recommended:** 6 weeks (beyond this, external factors contaminate results)
+
+### What If You Don&#x27;t Have Enough Traffic?
+
+| Situation | Solution |
+|-----------|----------|
+| Need 100K visitors, get 5K/week | Increase minimum detectable effect (test bolder changes) |
+| Very low traffic (&lt;1K/week) | Use qualitative testing (user testing, surveys) instead |
+| Medium traffic (5-20K/week) | Run for 4-6 weeks, test big changes only |
+| High traffic (50K+/week) | You can test subtle changes, run multiple tests |
+
+---
+
+## Step 4: Implementation
+
+### Client-Side Implementation
+
+JavaScript modifies the page after initial render.
+
+**Pros:** Quick to implement, no deploy needed
+**Cons:** Can cause flicker (flash of original content), blocked by ad blockers
+**Tools:** PostHog, Optimizely, VWO, Google Optimize
+
+**Anti-flicker pattern:**
+```javascript
+// Add to &lt;head&gt; before any rendering
+&lt;style&gt;.ab-test-hide { opacity: 0 !important; }&lt;/style&gt;
+&lt;script&gt;document.documentElement.classList.add(&#x27;ab-test-hide&#x27;);&lt;/script&gt;
+
+// In your test script (runs after variant assignment):
+document.documentElement.classList.remove(&#x27;ab-test-hide&#x27;);
+```
+
+### Server-Side Implementation
+
+Variant determined before page renders. No flicker, no client-side dependency.
+
+**Pros:** No flicker, not blocked by ad blockers, works for logged-in features
+**Cons:** Requires engineering work, deploy needed
+**Tools:** PostHog, LaunchDarkly, Split, Unleash, custom feature flags
+
+**Basic feature flag pattern:**
+```python
+# Server-side variant assignment
+def get_variant(user_id: str, experiment: str) -&gt; str:
+    # Deterministic hash ensures same user always sees same variant
+    hash_input = f&quot;{user_id}:{experiment}&quot;
+    hash_value = hashlib.md5(hash_input.encode()).hexdigest()
+    bucket = int(hash_value[:8], 16) % 100
+
+    if bucket &lt; 50:
+        return &quot;control&quot;
+    else:
+        return &quot;variant&quot;
+```
+
+### Traffic Allocation
+
+| Strategy | Split | When to Use |
+|----------|-------|-------------|
+| Standard | 50/50 | Default. Maximum statistical power. |
+| Conservative | 90/10 or 80/20 | Risky changes, revenue-impacting tests |
+| Ramped | Start 95/5, increase to 50/50 | New infrastructure, technical risk |
+
+**Critical rules:**
+- Users must see the same variant on every visit (sticky assignment by user ID or cookie)
+- Allocation must be balanced across time of day and day of week
+- Never change allocation mid-test
+
+---
+
+## Step 5: Running the Test
+
+### Pre-Launch Checklist
+
+- [ ] Hypothesis documented with primary metric and minimum detectable effect
+- [ ] Sample size calculated, expected duration estimated
+- [ ] Both variants implemented and QA&#x27;d on all device types
+- [ ] Tracking verified (events fire correctly for both variants)
+- [ ] No other tests running on the same page/feature
+- [ ] Stakeholders informed of test duration and &quot;no peeking&quot; rule
+- [ ] External factor calendar checked (no major launches, holidays, press)
+
+### During the Test
+
+**DO:**
+- Monitor for technical errors (variant not rendering, tracking broken)
+- Check that traffic split is balanced daily
+- Document any external events that might affect results
+
+**DO NOT:**
+- Look at results before reaching sample size (&quot;peeking problem&quot;)
+- Make changes to either variant
+- Add traffic from new sources mid-test
+- Stop the test early because one variant &quot;looks like it&#x27;s winning&quot;
+
+### The Peeking Problem (Critical)
+
+Looking at results before reaching the planned sample size and stopping because one variant looks better leads to a **25-40% false positive rate** (vs the intended 5%).
+
+Why: Statistical significance fluctuates wildly with small samples. A variant can show p &lt; 0.05 at 20% of planned sample size and p &gt; 0.30 at full sample.
+
+**Solutions:**
+1. Pre-commit to sample size and do not check results until reached
+2. If you must monitor: use sequential testing methods (group sequential design, always-valid p-values)
+3. Set calendar reminder for expected completion date -- that is when you look
+
+---
+
+## Step 6: Analysis
+
+### Analysis Checklist
+
+1. **Did we reach planned sample size?** If not, results are preliminary only.
+2. **Is it statistically significant?** p &lt; 0.05 = 95% confidence the difference is real.
+3. **What&#x27;s the confidence interval?** Tells you the range of likely true effect.
+4. **Is the effect size meaningful?** A 0.1% lift that&#x27;s &quot;significant&quot; may not be worth implementing.
+5. **Are secondary metrics consistent?** Do they support the primary result?
+6. **Any guardrail violations?** Did anything get worse?
+7. **Segment analysis:** Different results for mobile vs desktop? New vs returning?
+
+### Interpreting Results
+
+| Result | Primary Metric | Confidence | Action |
+|--------|---------------|------------|--------|
+| Clear winner | Variant +15%, p &lt; 0.01 | High | Implement variant |
+| Modest winner | Variant +5%, p &lt; 0.05 | Medium | Implement if easy, else run longer |
+| Flat | &lt; 2% difference, p &gt; 0.20 | High (no effect) | Keep control, test something bolder |
+| Loser | Variant -10%, p &lt; 0.05 | High | Keep control, investigate why |
+| Inconclusive | 5% difference, p = 0.08 | Low | Need more traffic or bolder test |
+| Mixed signals | Primary up, guardrail down | Investigate | Dig into segments, do not ship blindly |
+
+### Common Analysis Mistakes
+
+| Mistake | Consequence | Prevention |
+|---------|-------------|------------|
+| Stopping at first significance | 25-40% false positive rate | Commit to sample size |
+| Cherry-picking segments | Finding &quot;winners&quot; that don&#x27;t replicate | Pre-register segments of interest |
+| Ignoring confidence intervals | Overestimating effect size | Always report CI alongside p-value |
+| Multiple comparisons | Inflated Type I error | Bonferroni correction for A/B/n |
+| Survivorship bias | Only analyzing users who completed flow | Include all users from assignment point |
+| Simpson&#x27;s paradox | Aggregate hides segment reversal | Always check key segments |
+
+---
+
+## Step 7: Documentation
+
+Every test must be documented, regardless of outcome.
+
+### Test Documentation Template
+
+```
+EXPERIMENT: [Name]
+DATE: [Start] to [End]
+OWNER: [Name]
+
+HYPOTHESIS:
+Because [observation], we believed [change] would cause [outcome] for [audience].
+
+VARIANTS:
+- Control: [description]
+- Variant: [description + screenshot]
+
+METRICS:
+- Primary: [metric] (baseline: [X]%, MDE: [Y]%)
+- Secondary: [metrics]
+- Guardrails: [metrics]
+
+RESULTS:
+- Sample size: [actual] / [planned]
+- Duration: [X] days
+- Primary metric: Control [X]% vs Variant [Y]% (p = [Z], CI: [range])
+- Secondary metrics: [results]
+- Guardrails: [all clear / violation noted]
+
+DECISION: [Ship variant / Keep control / Iterate]
+
+LEARNINGS:
+- [What we learned about our users]
+- [What we&#x27;d do differently next time]
+```
+
+---
+
+## Experiment Prioritization Framework
+
+### ICE Scoring
+
+| Factor | Score (1-10) | Question |
+|--------|-------------|----------|
+| **Impact** | How much will this move the metric? | Big change to primary KPI = 10 |
+| **Confidence** | How sure are we it will work? | Strong data supporting hypothesis = 10 |
+| **Ease** | How easy is it to implement and measure? | Can ship in a day = 10 |
+
+**ICE Score = (Impact + Confidence + Ease) / 3**
+
+Rank all test ideas by ICE score. Run highest first.
+
+### Test Backlog Template
+
+| # | Hypothesis | Primary Metric | ICE | Est. Duration | Status |
+|---|-----------|---------------|-----|---------------|--------|
+| 1 | Larger CTA increases signups | Signup rate | 8.3 | 2 weeks | Ready |
+| 2 | Social proof on pricing increases conversion | Plan selection rate | 7.0 | 3 weeks | Needs design |
+| 3 | Shorter onboarding increases activation | Feature activation | 6.7 | 4 weeks | In backlog |
+
+---
+
+## Proactive Triggers
+
+- Someone debates between two design options: propose an A/B test instead of opinionating
+- Conversion rate mentioned as underperforming: offer to design a test, not guess at solutions
+- Pricing page changes discussed: always test pricing changes with guardrail metrics
+- Post-launch of any feature: propose follow-up experiment to optimize
+- &quot;Let&#x27;s just try it and see&quot;: redirect to structured hypothesis before implementation
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **analytics-tracking** | Setting up event tracking that feeds experiment metrics |
+| **campaign-analytics** | Folding experiment results into broader attribution |
+| **launch-strategy** | Testing within a product launch sequence |
+| **prompt-engineer-toolkit** | A/B testing AI prompts in production |
+
+---
+
+## Tool Reference
+
+### sample_size_calculator.py
+
+Calculates required sample size per variant using the normal approximation to the two-proportion z-test. Includes Bonferroni correction for multi-variant tests and duration estimation.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--baseline`, `-b` | float | (required) | Baseline conversion rate (e.g. 0.05 for 5%) |
+| `--mde`, `-m` | float | (required) | Minimum detectable effect as relative lift (e.g. 0.10 for 10%) |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--power`, `-p` | float | 0.80 | Statistical power |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic for duration estimation |
+| `--one-tailed` | flag | False | Use one-tailed test instead of two-tailed |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10
+python scripts/sample_size_calculator.py --baseline 0.12 --mde 0.15 --power 0.9 --daily-traffic 5000
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10 --variants 3 --json
+```
+
+### experiment_analyzer.py
+
+Analyzes A/B test results using the two-proportion z-test with confidence intervals and segment breakdown.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input` | positional | (required) | CSV file with results or &quot;sample&quot; to create sample |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--json` | flag | False | Output as JSON |
+
+**CSV format:** `variant,visitors,conversions,segment`
+
+```bash
+python scripts/experiment_analyzer.py sample
+python scripts/experiment_analyzer.py results.csv
+python scripts/experiment_analyzer.py results.csv --alpha 0.01 --json
+```
+
+### experiment_planner.py
+
+Generates a structured experiment plan from a hypothesis text, including metric selection, sample size, timeline, risks, and documentation template.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--hypothesis`, `-H` | string | (required) | Experiment hypothesis text |
+| `--baseline`, `-b` | float | 0.05 | Baseline conversion rate |
+| `--mde`, `-m` | float | 0.10 | Minimum detectable effect as relative lift |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/experiment_planner.py --hypothesis &quot;Larger CTA will increase signups by 15%&quot;
+python scripts/experiment_planner.py -H &quot;Simplified checkout boosts conversions&quot; -b 0.08 -m 0.15 -d 3000
+python scripts/experiment_planner.py -H &quot;New pricing page&quot; --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Sample size is unrealistically large | MDE too small or baseline too low | Increase MDE (test bolder changes) or target a higher-traffic page |
+| Test duration exceeds 6 weeks | Insufficient daily traffic | Consider qualitative methods, test bigger changes, or combine traffic from multiple pages |
+| p-value hovers around 0.05 | Borderline significance | Do not stop early; run to planned sample size or extend 20% |
+| Results significant but lift is tiny (&lt;1%) | Overpowered test | Check practical significance alongside statistical significance |
+| Segment results contradict overall | Simpson&#x27;s paradox | Investigate segment composition; report both overall and segment results |
+| Variant performs differently on mobile vs desktop | Device-specific UX issues | Design device-specific variants; increase per-segment sample size |
+| Calculator produces negative CI | Very small samples or extreme rates | Ensure sufficient sample size; check data integrity |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Tests reach planned sample size | 100% of tests | Compare actual vs planned sample at conclusion |
+| False positive rate | &lt;5% | Track post-implementation lift vs test prediction |
+| Test velocity | 2+ tests per team per month | Count experiments documented per sprint |
+| Documentation completeness | 100% of tests documented | Audit experiment records quarterly |
+| Average test duration | &lt;4 weeks | Measure start-to-conclusion calendar days |
+| Decision quality | &gt;80% of shipped variants hold gains at 90 days | Post-ship metric tracking |
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Hypothesis formulation and validation
+- Sample size and power calculations
+- Frequentist two-proportion z-tests
+- A/B, A/B/n, and split URL test planning
+- Segment-level analysis
+- Pre/post test documentation
+
+**Out of scope:**
+- Bayesian A/B testing methods (use dedicated Bayesian tools)
+- Multi-armed bandit algorithms (require real-time allocation infrastructure)
+- Multivariate testing (MVT) analysis (combinatorial explosion requires specialized tools)
+- Server-side feature flag implementation (see engineering skills)
+- Revenue-based metrics requiring transaction-level data
+- Sequential testing / always-valid p-values (use Optimizely Stats Engine or similar)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| PostHog / Amplitude | JSON export from experiment_analyzer | Feed results into product analytics |
+| Jira / Linear | experiment_planner JSON output | Create experiment tickets with metadata |
+| Google Sheets | CSV export from experiment_analyzer | Share results with non-technical stakeholders |
+| LaunchDarkly / Unleash | experiment_planner checklist | Pre-launch validation before feature flag rollout |
+| Slack / Notion | Copy human-readable output | Async experiment status updates |
+| CI/CD pipelines | `--json` flag on all scripts | Automated experiment health checks |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ab Test Setup&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ab Test Setup&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ab Test Setup in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ab Test Setup&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ab Test Setup&quot;
+4. Description: &quot;Design and implement statistically rigorous A/B tests and experiments. Covers hypothesis formulation, sample size calculation, metric selection, traffic allocation, implementation patterns (client-sid...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/ab-test-setup/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Ab Test Setup&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# A/B Test Setup - Experimentation Design &amp; Analysis
+
+**Category:** Product Team
+**Tags:** A/B testing, experiments, statistical significance, sample size, feature flags, hypothesis testing
+
+## Overview
+
+A/B Test Setup provides the complete framework for designing experiments that produce statistically valid, actionable results. Most A/B tests fail not because the variant was wrong, but because the test was poorly designed: wrong sample size, wrong metric, or someone peeked at results and stopped early. This skill prevents those mistakes.
+
+---
+
+## The Experiment Lifecycle
+
+```
+1. HYPOTHESIZE  →  2. DESIGN  →  3. CALCULATE  →  4. IMPLEMENT
+       ↑                                                    │
+       │                                                    ▼
+7. ITERATE  ←  6. DOCUMENT  ←  5. ANALYZE  ←  [Run to completion]
+```
+
+---
+
+## Step 1: Hypothesis Formulation
+
+### The Hypothesis Template
+
+```
+Because [observation or data point],
+we believe [specific change]
+will cause [measurable outcome]
+for [defined audience segment].
+
+We&#x27;ll know this is true when [primary metric] changes by [minimum detectable effect].
+We&#x27;ll watch [guardrail metrics] to ensure no negative impact.
+```
+
+### Good vs Bad Hypotheses
+
+| Quality | Hypothesis | Problem |
+|---------|-----------|---------|
+| Bad | &quot;Changing the button color might increase clicks&quot; | No data basis, no target, no measurement plan |
+| Mediocre | &quot;A green button will get more clicks than blue&quot; | No &quot;why&quot;, no target size, no guardrails |
+| Good | &quot;Because heatmaps show 40% of users don&#x27;t notice our CTA, making the button 2x larger with contrasting color will increase CTA clicks by 15%+ for new visitors. Guardrail: page load time stays under 2s.&quot; | Data-backed, specific change, measurable outcome, defined audience, guardrail |
+
+### Hypothesis Sources (Where to Find Test Ideas)
+
+| Source | What to Look For | Example |
+|--------|-----------------|---------|
+| Analytics data | Drop-off points, low-performing pages | &quot;80% of users drop off at step 3 of onboarding&quot; |
+| User research | Confusion, frustration, unmet needs | &quot;Users don&#x27;t understand what the product does from the homepage&quot; |
+| Heatmaps/session recordings | Ignored elements, rage clicks | &quot;Nobody scrolls past the fold on pricing page&quot; |
+| Support tickets | Recurring complaints, feature confusion | &quot;Users constantly ask how to invite team members&quot; |
+| Competitor analysis | Different approaches to same problem | &quot;Competitor uses a wizard; we use a form&quot; |
+| Sales objections | Common reasons prospects don&#x27;t convert | &quot;Prospects want to see pricing before signing up&quot; |
+
+---
+
+## Step 2: Test Design
+
+### Test Types
+
+| Type | Variants | Traffic Need | Best For |
+|------|----------|-------------|---------|
+| A/B | 2 (control + 1 variant) | Moderate | Single change validation |
+| A/B/n | 3+ variants | High | Comparing multiple approaches |
+| Multivariate (MVT) | Combinations of changes | Very high | Optimizing multiple elements |
+| Split URL | Different pages | Moderate | Major redesigns |
+| Bandit | Dynamic allocation | Low-moderate | Revenue optimization |
+
+**Default recommendation:** Standard A/B test. Only use A/B/n or MVT when you have enough traffic and a specific need.
+
+### What to Test (By Impact)
+
+| Category | High Impact | Medium Impact | Low Impact |
+|----------|-----------|---------------|-----------|
+| **Copy** | Headline/value prop, CTA text | Body copy, social proof | Microcopy, labels |
+| **Design** | Page layout, above-fold content | Visual hierarchy, imagery | Color, font size |
+| **UX** | Number of steps, form fields | Button placement, navigation | Animations, transitions |
+| **Pricing** | Price point, plan names | Feature packaging, anchoring | Billing frequency display |
+| **Social Proof** | Testimonials vs none, logos | Testimonial format, placement | Testimonial count |
+
+### Metric Selection
+
+Every test needs three types of metrics:
+
+**Primary Metric (1 only)**
+- The single metric that determines success
+- Directly tied to the hypothesis
+- Must be measurable within the test duration
+- Examples: signup rate, click-through rate, purchase rate
+
+**Secondary Metrics (2-3)**
+- Explain why the primary metric moved
+- Provide context for decision-making
+- Examples: time on page, scroll depth, feature adoption rate
+
+**Guardrail Metrics (1-3)**
+- Things that must NOT get worse
+- Stop the test if significantly negative
+- Examples: error rate, support ticket volume, page load time, refund rate
+
+---
+
+## Step 3: Sample Size Calculation
+
+### Quick Reference Table
+
+Minimum visitors PER VARIANT needed (95% confidence, 80% power):
+
+| Baseline Rate | 5% Lift | 10% Lift | 15% Lift | 20% Lift | 50% Lift |
+|--------------|---------|----------|----------|----------|----------|
+| 1% | 620,000 | 156,000 | 70,000 | 39,000 | 6,400 |
+| 2% | 305,000 | 77,000 | 34,000 | 19,500 | 3,200 |
+| 3% | 200,000 | 51,000 | 23,000 | 12,800 | 2,100 |
+| 5% | 116,000 | 29,500 | 13,200 | 7,500 | 1,250 |
+| 10% | 54,000 | 13,800 | 6,200 | 3,500 | 600 |
+| 20% | 24,000 | 6,200 | 2,800 | 1,600 | 280 |
+| 50% | 6,100 | 1,600 | 720 | 410 | 75 |
+
+### Duration Calculation
+
+```
+Duration (days) = (Sample size per variant * Number of variants) / Daily traffic to test page
+```
+
+**Minimum duration:** 7 days (to capture day-of-week effects)
+**Maximum recommended:** 6 weeks (beyond this, external factors contaminate results)
+
+### What If You Don&#x27;t Have Enough Traffic?
+
+| Situation | Solution |
+|-----------|----------|
+| Need 100K visitors, get 5K/week | Increase minimum detectable effect (test bolder changes) |
+| Very low traffic (&lt;1K/week) | Use qualitative testing (user testing, surveys) instead |
+| Medium traffic (5-20K/week) | Run for 4-6 weeks, test big changes only |
+| High traffic (50K+/week) | You can test subtle changes, run multiple tests |
+
+---
+
+## Step 4: Implementation
+
+### Client-Side Implementation
+
+JavaScript modifies the page after initial render.
+
+**Pros:** Quick to implement, no deploy needed
+**Cons:** Can cause flicker (flash of original content), blocked by ad blockers
+**Tools:** PostHog, Optimizely, VWO, Google Optimize
+
+**Anti-flicker pattern:**
+```javascript
+// Add to &lt;head&gt; before any rendering
+&lt;style&gt;.ab-test-hide { opacity: 0 !important; }&lt;/style&gt;
+&lt;script&gt;document.documentElement.classList.add(&#x27;ab-test-hide&#x27;);&lt;/script&gt;
+
+// In your test script (runs after variant assignment):
+document.documentElement.classList.remove(&#x27;ab-test-hide&#x27;);
+```
+
+### Server-Side Implementation
+
+Variant determined before page renders. No flicker, no client-side dependency.
+
+**Pros:** No flicker, not blocked by ad blockers, works for logged-in features
+**Cons:** Requires engineering work, deploy needed
+**Tools:** PostHog, LaunchDarkly, Split, Unleash, custom feature flags
+
+**Basic feature flag pattern:**
+```python
+# Server-side variant assignment
+def get_variant(user_id: str, experiment: str) -&gt; str:
+    # Deterministic hash ensures same user always sees same variant
+    hash_input = f&quot;{user_id}:{experiment}&quot;
+    hash_value = hashlib.md5(hash_input.encode()).hexdigest()
+    bucket = int(hash_value[:8], 16) % 100
+
+    if bucket &lt; 50:
+        return &quot;control&quot;
+    else:
+        return &quot;variant&quot;
+```
+
+### Traffic Allocation
+
+| Strategy | Split | When to Use |
+|----------|-------|-------------|
+| Standard | 50/50 | Default. Maximum statistical power. |
+| Conservative | 90/10 or 80/20 | Risky changes, revenue-impacting tests |
+| Ramped | Start 95/5, increase to 50/50 | New infrastructure, technical risk |
+
+**Critical rules:**
+- Users must see the same variant on every visit (sticky assignment by user ID or cookie)
+- Allocation must be balanced across time of day and day of week
+- Never change allocation mid-test
+
+---
+
+## Step 5: Running the Test
+
+### Pre-Launch Checklist
+
+- [ ] Hypothesis documented with primary metric and minimum detectable effect
+- [ ] Sample size calculated, expected duration estimated
+- [ ] Both variants implemented and QA&#x27;d on all device types
+- [ ] Tracking verified (events fire correctly for both variants)
+- [ ] No other tests running on the same page/feature
+- [ ] Stakeholders informed of test duration and &quot;no peeking&quot; rule
+- [ ] External factor calendar checked (no major launches, holidays, press)
+
+### During the Test
+
+**DO:**
+- Monitor for technical errors (variant not rendering, tracking broken)
+- Check that traffic split is balanced daily
+- Document any external events that might affect results
+
+**DO NOT:**
+- Look at results before reaching sample size (&quot;peeking problem&quot;)
+- Make changes to either variant
+- Add traffic from new sources mid-test
+- Stop the test early because one variant &quot;looks like it&#x27;s winning&quot;
+
+### The Peeking Problem (Critical)
+
+Looking at results before reaching the planned sample size and stopping because one variant looks better leads to a **25-40% false positive rate** (vs the intended 5%).
+
+Why: Statistical significance fluctuates wildly with small samples. A variant can show p &lt; 0.05 at 20% of planned sample size and p &gt; 0.30 at full sample.
+
+**Solutions:**
+1. Pre-commit to sample size and do not check results until reached
+2. If you must monitor: use sequential testing methods (group sequential design, always-valid p-values)
+3. Set calendar reminder for expected completion date -- that is when you look
+
+---
+
+## Step 6: Analysis
+
+### Analysis Checklist
+
+1. **Did we reach planned sample size?** If not, results are preliminary only.
+2. **Is it statistically significant?** p &lt; 0.05 = 95% confidence the difference is real.
+3. **What&#x27;s the confidence interval?** Tells you the range of likely true effect.
+4. **Is the effect size meaningful?** A 0.1% lift that&#x27;s &quot;significant&quot; may not be worth implementing.
+5. **Are secondary metrics consistent?** Do they support the primary result?
+6. **Any guardrail violations?** Did anything get worse?
+7. **Segment analysis:** Different results for mobile vs desktop? New vs returning?
+
+### Interpreting Results
+
+| Result | Primary Metric | Confidence | Action |
+|--------|---------------|------------|--------|
+| Clear winner | Variant +15%, p &lt; 0.01 | High | Implement variant |
+| Modest winner | Variant +5%, p &lt; 0.05 | Medium | Implement if easy, else run longer |
+| Flat | &lt; 2% difference, p &gt; 0.20 | High (no effect) | Keep control, test something bolder |
+| Loser | Variant -10%, p &lt; 0.05 | High | Keep control, investigate why |
+| Inconclusive | 5% difference, p = 0.08 | Low | Need more traffic or bolder test |
+| Mixed signals | Primary up, guardrail down | Investigate | Dig into segments, do not ship blindly |
+
+### Common Analysis Mistakes
+
+| Mistake | Consequence | Prevention |
+|---------|-------------|------------|
+| Stopping at first significance | 25-40% false positive rate | Commit to sample size |
+| Cherry-picking segments | Finding &quot;winners&quot; that don&#x27;t replicate | Pre-register segments of interest |
+| Ignoring confidence intervals | Overestimating effect size | Always report CI alongside p-value |
+| Multiple comparisons | Inflated Type I error | Bonferroni correction for A/B/n |
+| Survivorship bias | Only analyzing users who completed flow | Include all users from assignment point |
+| Simpson&#x27;s paradox | Aggregate hides segment reversal | Always check key segments |
+
+---
+
+## Step 7: Documentation
+
+Every test must be documented, regardless of outcome.
+
+### Test Documentation Template
+
+```
+EXPERIMENT: [Name]
+DATE: [Start] to [End]
+OWNER: [Name]
+
+HYPOTHESIS:
+Because [observation], we believed [change] would cause [outcome] for [audience].
+
+VARIANTS:
+- Control: [description]
+- Variant: [description + screenshot]
+
+METRICS:
+- Primary: [metric] (baseline: [X]%, MDE: [Y]%)
+- Secondary: [metrics]
+- Guardrails: [metrics]
+
+RESULTS:
+- Sample size: [actual] / [planned]
+- Duration: [X] days
+- Primary metric: Control [X]% vs Variant [Y]% (p = [Z], CI: [range])
+- Secondary metrics: [results]
+- Guardrails: [all clear / violation noted]
+
+DECISION: [Ship variant / Keep control / Iterate]
+
+LEARNINGS:
+- [What we learned about our users]
+- [What we&#x27;d do differently next time]
+```
+
+---
+
+## Experiment Prioritization Framework
+
+### ICE Scoring
+
+| Factor | Score (1-10) | Question |
+|--------|-------------|----------|
+| **Impact** | How much will this move the metric? | Big change to primary KPI = 10 |
+| **Confidence** | How sure are we it will work? | Strong data supporting hypothesis = 10 |
+| **Ease** | How easy is it to implement and measure? | Can ship in a day = 10 |
+
+**ICE Score = (Impact + Confidence + Ease) / 3**
+
+Rank all test ideas by ICE score. Run highest first.
+
+### Test Backlog Template
+
+| # | Hypothesis | Primary Metric | ICE | Est. Duration | Status |
+|---|-----------|---------------|-----|---------------|--------|
+| 1 | Larger CTA increases signups | Signup rate | 8.3 | 2 weeks | Ready |
+| 2 | Social proof on pricing increases conversion | Plan selection rate | 7.0 | 3 weeks | Needs design |
+| 3 | Shorter onboarding increases activation | Feature activation | 6.7 | 4 weeks | In backlog |
+
+---
+
+## Proactive Triggers
+
+- Someone debates between two design options: propose an A/B test instead of opinionating
+- Conversion rate mentioned as underperforming: offer to design a test, not guess at solutions
+- Pricing page changes discussed: always test pricing changes with guardrail metrics
+- Post-launch of any feature: propose follow-up experiment to optimize
+- &quot;Let&#x27;s just try it and see&quot;: redirect to structured hypothesis before implementation
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **analytics-tracking** | Setting up event tracking that feeds experiment metrics |
+| **campaign-analytics** | Folding experiment results into broader attribution |
+| **launch-strategy** | Testing within a product launch sequence |
+| **prompt-engineer-toolkit** | A/B testing AI prompts in production |
+
+---
+
+## Tool Reference
+
+### sample_size_calculator.py
+
+Calculates required sample size per variant using the normal approximation to the two-proportion z-test. Includes Bonferroni correction for multi-variant tests and duration estimation.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--baseline`, `-b` | float | (required) | Baseline conversion rate (e.g. 0.05 for 5%) |
+| `--mde`, `-m` | float | (required) | Minimum detectable effect as relative lift (e.g. 0.10 for 10%) |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--power`, `-p` | float | 0.80 | Statistical power |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic for duration estimation |
+| `--one-tailed` | flag | False | Use one-tailed test instead of two-tailed |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10
+python scripts/sample_size_calculator.py --baseline 0.12 --mde 0.15 --power 0.9 --daily-traffic 5000
+python scripts/sample_size_calculator.py --baseline 0.05 --mde 0.10 --variants 3 --json
+```
+
+### experiment_analyzer.py
+
+Analyzes A/B test results using the two-proportion z-test with confidence intervals and segment breakdown.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `input` | positional | (required) | CSV file with results or &quot;sample&quot; to create sample |
+| `--alpha`, `-a` | float | 0.05 | Significance level |
+| `--json` | flag | False | Output as JSON |
+
+**CSV format:** `variant,visitors,conversions,segment`
+
+```bash
+python scripts/experiment_analyzer.py sample
+python scripts/experiment_analyzer.py results.csv
+python scripts/experiment_analyzer.py results.csv --alpha 0.01 --json
+```
+
+### experiment_planner.py
+
+Generates a structured experiment plan from a hypothesis text, including metric selection, sample size, timeline, risks, and documentation template.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--hypothesis`, `-H` | string | (required) | Experiment hypothesis text |
+| `--baseline`, `-b` | float | 0.05 | Baseline conversion rate |
+| `--mde`, `-m` | float | 0.10 | Minimum detectable effect as relative lift |
+| `--daily-traffic`, `-d` | int | 0 | Daily eligible traffic |
+| `--variants`, `-v` | int | 2 | Number of variants including control |
+| `--json` | flag | False | Output as JSON |
+
+```bash
+python scripts/experiment_planner.py --hypothesis &quot;Larger CTA will increase signups by 15%&quot;
+python scripts/experiment_planner.py -H &quot;Simplified checkout boosts conversions&quot; -b 0.08 -m 0.15 -d 3000
+python scripts/experiment_planner.py -H &quot;New pricing page&quot; --json
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Sample size is unrealistically large | MDE too small or baseline too low | Increase MDE (test bolder changes) or target a higher-traffic page |
+| Test duration exceeds 6 weeks | Insufficient daily traffic | Consider qualitative methods, test bigger changes, or combine traffic from multiple pages |
+| p-value hovers around 0.05 | Borderline significance | Do not stop early; run to planned sample size or extend 20% |
+| Results significant but lift is tiny (&lt;1%) | Overpowered test | Check practical significance alongside statistical significance |
+| Segment results contradict overall | Simpson&#x27;s paradox | Investigate segment composition; report both overall and segment results |
+| Variant performs differently on mobile vs desktop | Device-specific UX issues | Design device-specific variants; increase per-segment sample size |
+| Calculator produces negative CI | Very small samples or extreme rates | Ensure sufficient sample size; check data integrity |
+
+---
+
+## Success Criteria
+
+| Criterion | Target | How to Measure |
+|-----------|--------|----------------|
+| Tests reach planned sample size | 100% of tests | Compare actual vs planned sample at conclusion |
+| False positive rate | &lt;5% | Track post-implementation lift vs test prediction |
+| Test velocity | 2+ tests per team per month | Count experiments documented per sprint |
+| Documentation completeness | 100% of tests documented | Audit experiment records quarterly |
+| Average test duration | &lt;4 weeks | Measure start-to-conclusion calendar days |
+| Decision quality | &gt;80% of shipped variants hold gains at 90 days | Post-ship metric tracking |
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Hypothesis formulation and validation
+- Sample size and power calculations
+- Frequentist two-proportion z-tests
+- A/B, A/B/n, and split URL test planning
+- Segment-level analysis
+- Pre/post test documentation
+
+**Out of scope:**
+- Bayesian A/B testing methods (use dedicated Bayesian tools)
+- Multi-armed bandit algorithms (require real-time allocation infrastructure)
+- Multivariate testing (MVT) analysis (combinatorial explosion requires specialized tools)
+- Server-side feature flag implementation (see engineering skills)
+- Revenue-based metrics requiring transaction-level data
+- Sequential testing / always-valid p-values (use Optimizely Stats Engine or similar)
+
+---
+
+## Integration Points
+
+| Tool / Platform | Integration Method | Use Case |
+|-----------------|-------------------|----------|
+| PostHog / Amplitude | JSON export from experiment_analyzer | Feed results into product analytics |
+| Jira / Linear | experiment_planner JSON output | Create experiment tickets with metadata |
+| Google Sheets | CSV export from experiment_analyzer | Share results with non-technical stakeholders |
+| LaunchDarkly / Unleash | experiment_planner checklist | Pre-launch validation before feature flag rollout |
+| Slack / Notion | Copy human-readable output | Async experiment status updates |
+| CI/CD pipelines | `--json` flag on all scripts | Automated experiment health checks |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Ab Test Setup&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Ab Test Setup&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Ab Test Setup in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Ab Test Setup&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Ab Test Setup&quot;
+4. Description: &quot;Design and implement statistically rigorous A/B tests and experiments. Covers hypothesis formulation, sample size calculation, metric selection, traffic allocation, implementation patterns (client-sid...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/ab-test-setup/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

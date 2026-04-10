@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Daci Framework (Project Management domain).
 
 DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/daci-framework
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Daci Framework (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Daci Framework (Project Management domain).
 
 DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.
 
@@ -425,7 +447,468 @@ https://github.com/borghei/Claude-Skills/tree/main/daci-framework
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Daci Framework&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# DACI Decision Framework
+
+## Overview
+
+Clarify decision ownership and reduce decision thrash using the DACI framework (Driver, Approver, Contributor, Informed). Unlike RACI which focuses on task responsibility, DACI is purpose-built for product decisions -- who drives the decision to closure, who has veto power, who provides input, and who needs to know.
+
+### When to Use
+
+- **New team formation** -- When a new team or cross-functional group needs clear decision-making roles.
+- **Decision thrash** -- When decisions stall because nobody knows who has authority.
+- **Scaling teams** -- When team growth creates ambiguity about who owns what decisions.
+- **Post-incident** -- When a failed launch or missed deadline reveals unclear ownership.
+- **Reorg transitions** -- When role changes create governance gaps.
+
+### When NOT to Use
+
+- For task assignment or project execution (use RACI instead).
+- For individual contributor work allocation (use sprint planning).
+- When decisions are truly one-person (no governance overhead needed).
+
+## DACI Role Definitions
+
+| Role | Symbol | Definition | Rules |
+|---|---|---|---|
+| **Driver** | D | The person driving the decision to closure. Responsible for process, timeline, and ensuring a decision gets made. | Exactly one per decision. |
+| **Approver** | A | The person(s) with authority to approve or veto. Their sign-off is required. | 1-2 maximum per decision. |
+| **Contributor** | C | People who provide input, expertise, or implementation effort. Their input shapes the decision but they don&#x27;t have veto power. | As many as needed. |
+| **Informed** | I | People who are notified of the decision outcome. Not part of the decision-making process. | As many as needed. |
+
+### Key DACI Principles
+
+1. **Every decision has exactly one Driver.** If two people are driving, nobody is driving.
+2. **Approvers have veto power.** Limit to 1-2 to avoid gridlock.
+3. **Contributors influence but don&#x27;t block.** Their input is valued but the Driver decides how to use it.
+4. **Informed means notified, not consulted.** Don&#x27;t confuse notification with input.
+5. **DACI is about decisions, not tasks.** Map decisions, not work items.
+
+## Building a DACI Chart
+
+### Step 1: Identify the Working Group
+
+Define the team, business unit, or cross-functional group this DACI covers.
+
+### Step 2: List Job Titles / Roles
+
+Enumerate all roles involved in product decisions. Common roles:
+
+- Executive Management
+- Product Manager
+- Product Owner
+- Engineering Lead
+- UX / Design Lead
+- Product Marketing
+- Scrum Master
+- Sales &amp; Marketing
+- Customer Support / Professional Services
+- Legal / Compliance
+
+### Step 3: Define Decisions
+
+List the key decisions this group makes. Common product decisions:
+
+| Decision | Description |
+|---|---|
+| What problem are we solving? | Problem definition and validation |
+| Who is the primary user? | Persona and segment selection |
+| What is the product vision? | Long-term direction and strategy |
+| What is the value proposition? | Differentiation and positioning |
+| What are the JTBD? | Jobs-to-be-done identification |
+| What goes into the backlog? | Story selection and prioritization |
+| What is the release plan? | Timing, scope, and sequencing |
+| What experiments to run? | Discovery and validation activities |
+| How is the product built? | Architecture and technical decisions |
+| How is the product delivered? | Deployment and rollout strategy |
+| What data do we collect? | Analytics and instrumentation |
+| How do we price the product? | Pricing model and strategy |
+| What is the GTM strategy? | Go-to-market planning |
+
+### Step 4: Build Current-State DACI
+
+Map how decisions are made **today** (not how you want them to be made):
+
+| Decision | Exec Mgmt | PM | PO | Eng Lead | Design | Marketing | Support | Legal |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Problem definition | A | D | C | C | C | I | C | |
+| User/segment selection | I | D | C | | C | A | C | |
+| Product vision | A | D | C | C | C | I | | |
+| Value proposition | I | D | | | C | A | | |
+| Backlog priorities | I | A | D | C | C | | | |
+| Release plan | I | A | D | C | | I | I | |
+| Experiments | | D | C | C | C | | | |
+| Architecture | I | C | | D | | | | A |
+| Pricing | A | C | | | | D | | C |
+| GTM strategy | A | C | | | | D | C | I |
+
+**Rules:**
+- Each row has exactly one `D`.
+- Each row has 1-2 `A` maximum.
+- Use `D`, `A`, `C`, `I`, or blank only.
+- Add Notes column for non-obvious assignments.
+
+### Step 5: Identify Pain Points
+
+From the current-state chart, identify common failure patterns:
+
+| Failure Pattern | Symptom | Business Impact |
+|---|---|---|
+| **No Driver** | Decision stalls for weeks | Missed market windows |
+| **Too many Approvers** | Endless review cycles | Slow time-to-market |
+| **Driver lacks authority** | Decision made but not respected | Rework and confusion |
+| **Informed treated as Approver** | Late objections derail decisions | Scope creep and delays |
+| **Missing Contributors** | Decisions made without key input | Poor outcomes, rework |
+
+### Step 6: Design Target-State DACI
+
+Based on pain points, redesign decision ownership:
+
+- Ensure every row has exactly one D.
+- Reduce Approvers to 1-2 per decision.
+- Move chronic blockers from A to C or I.
+- Add missing Contributors.
+- Document changes in Notes column.
+
+### Step 7: Create Transition Plan
+
+| Timeframe | Action |
+|---|---|
+| **First 30 days** | Align on first 3 high-impact decision changes; communicate new roles |
+| **60 days** | Expand to all decisions; run first decision under new DACI |
+| **90 days** | Full adoption; retrospective on decision speed and quality |
+
+## DACI Health Metrics
+
+Track these metrics to monitor governance effectiveness:
+
+| Metric | Target | How to Measure |
+|---|---|---|
+| Decision cycle time | &lt;5 business days for P0 decisions | Time from decision identified to resolved |
+| Decision reversal rate | &lt;10% | Decisions overturned within 30 days |
+| Stakeholder satisfaction | &gt;80% | Survey: &quot;Do you know who makes decision X?&quot; |
+| Escalation rate | &lt;15% | Decisions escalated past intended Approver |
+| Decision coverage | 100% | All recurring decisions have a DACI row |
+
+## Integration with Other Skills
+
+- Use `create-prd/` to document decisions made via DACI in PRD Section 2 (Contacts).
+- Use `identify-assumptions/` to surface assumptions about decision authority.
+- Use `brainstorm-okrs/` to align DACI decisions with quarterly objectives.
+- Use `summarize-meeting/` to capture decision outcomes in meeting notes.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---|---|---|
+| Decisions still stall after DACI rollout | Driver lacks confidence or authority in practice | Coach Drivers on decision-making process; ensure Approvers respect the framework |
+| Everyone is marked as Contributor | Team avoids accountability by defaulting to C | Force each person to commit to D, A, C, or I -- no &quot;everyone contributes&quot; |
+| DACI chart exists but nobody references it | Document not integrated into workflows | Post DACI in team Confluence/Notion; reference it in kickoff meetings |
+| Approvers overrule without explanation | Authority without accountability | Require Approvers to document veto rationale; review in retrospectives |
+| New decisions not added to chart | DACI treated as one-time exercise | Review and update DACI quarterly; add new decisions as they emerge |
+
+## Success Criteria
+
+- 100% of recurring product decisions have a DACI row with exactly one Driver
+- Decision cycle time reduced by 30%+ after DACI implementation
+- &lt;10% of decisions reversed within 30 days of being made
+- &gt;80% of team members can identify the Driver for any given decision
+- DACI chart reviewed and updated at least quarterly
+
+## Scope &amp; Limitations
+
+**In Scope:** DACI chart creation, current-state mapping, target-state design, transition planning, governance health metrics, pain point identification, decision ownership clarity.
+
+**Out of Scope:** Task assignment (use RACI), project execution tracking (use sprint planning), individual performance management, organizational design beyond decision governance.
+
+**Important Caveats:** DACI works best when leadership commits to respecting the framework. Without executive buy-in, Drivers may lack the authority to actually drive decisions. Start with 3-5 high-impact decisions rather than trying to map everything at once.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|---|---|---|
+| `create-prd/` | Feeds into | DACI decisions inform PRD Contacts section and decision log |
+| `identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
+| `brainstorm-okrs/` | Complements | OKR ownership aligns with DACI decision ownership |
+| `summarize-meeting/` | Feeds into | Meeting summaries capture DACI decision outcomes |
+| `senior-pm/` | Complements | Portfolio-level DACI for cross-project decisions |
+
+## References
+
+- Productside DACI guidance for product teams
+- Inspired by the DACI framework used at Intuit and other product-led organizations
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Daci Framework&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Daci Framework&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Daci Framework in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Daci Framework&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Daci Framework&quot;
+4. Description: &quot;DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/daci-framework/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Daci Framework&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# DACI Decision Framework
+
+## Overview
+
+Clarify decision ownership and reduce decision thrash using the DACI framework (Driver, Approver, Contributor, Informed). Unlike RACI which focuses on task responsibility, DACI is purpose-built for product decisions -- who drives the decision to closure, who has veto power, who provides input, and who needs to know.
+
+### When to Use
+
+- **New team formation** -- When a new team or cross-functional group needs clear decision-making roles.
+- **Decision thrash** -- When decisions stall because nobody knows who has authority.
+- **Scaling teams** -- When team growth creates ambiguity about who owns what decisions.
+- **Post-incident** -- When a failed launch or missed deadline reveals unclear ownership.
+- **Reorg transitions** -- When role changes create governance gaps.
+
+### When NOT to Use
+
+- For task assignment or project execution (use RACI instead).
+- For individual contributor work allocation (use sprint planning).
+- When decisions are truly one-person (no governance overhead needed).
+
+## DACI Role Definitions
+
+| Role | Symbol | Definition | Rules |
+|---|---|---|---|
+| **Driver** | D | The person driving the decision to closure. Responsible for process, timeline, and ensuring a decision gets made. | Exactly one per decision. |
+| **Approver** | A | The person(s) with authority to approve or veto. Their sign-off is required. | 1-2 maximum per decision. |
+| **Contributor** | C | People who provide input, expertise, or implementation effort. Their input shapes the decision but they don&#x27;t have veto power. | As many as needed. |
+| **Informed** | I | People who are notified of the decision outcome. Not part of the decision-making process. | As many as needed. |
+
+### Key DACI Principles
+
+1. **Every decision has exactly one Driver.** If two people are driving, nobody is driving.
+2. **Approvers have veto power.** Limit to 1-2 to avoid gridlock.
+3. **Contributors influence but don&#x27;t block.** Their input is valued but the Driver decides how to use it.
+4. **Informed means notified, not consulted.** Don&#x27;t confuse notification with input.
+5. **DACI is about decisions, not tasks.** Map decisions, not work items.
+
+## Building a DACI Chart
+
+### Step 1: Identify the Working Group
+
+Define the team, business unit, or cross-functional group this DACI covers.
+
+### Step 2: List Job Titles / Roles
+
+Enumerate all roles involved in product decisions. Common roles:
+
+- Executive Management
+- Product Manager
+- Product Owner
+- Engineering Lead
+- UX / Design Lead
+- Product Marketing
+- Scrum Master
+- Sales &amp; Marketing
+- Customer Support / Professional Services
+- Legal / Compliance
+
+### Step 3: Define Decisions
+
+List the key decisions this group makes. Common product decisions:
+
+| Decision | Description |
+|---|---|
+| What problem are we solving? | Problem definition and validation |
+| Who is the primary user? | Persona and segment selection |
+| What is the product vision? | Long-term direction and strategy |
+| What is the value proposition? | Differentiation and positioning |
+| What are the JTBD? | Jobs-to-be-done identification |
+| What goes into the backlog? | Story selection and prioritization |
+| What is the release plan? | Timing, scope, and sequencing |
+| What experiments to run? | Discovery and validation activities |
+| How is the product built? | Architecture and technical decisions |
+| How is the product delivered? | Deployment and rollout strategy |
+| What data do we collect? | Analytics and instrumentation |
+| How do we price the product? | Pricing model and strategy |
+| What is the GTM strategy? | Go-to-market planning |
+
+### Step 4: Build Current-State DACI
+
+Map how decisions are made **today** (not how you want them to be made):
+
+| Decision | Exec Mgmt | PM | PO | Eng Lead | Design | Marketing | Support | Legal |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Problem definition | A | D | C | C | C | I | C | |
+| User/segment selection | I | D | C | | C | A | C | |
+| Product vision | A | D | C | C | C | I | | |
+| Value proposition | I | D | | | C | A | | |
+| Backlog priorities | I | A | D | C | C | | | |
+| Release plan | I | A | D | C | | I | I | |
+| Experiments | | D | C | C | C | | | |
+| Architecture | I | C | | D | | | | A |
+| Pricing | A | C | | | | D | | C |
+| GTM strategy | A | C | | | | D | C | I |
+
+**Rules:**
+- Each row has exactly one `D`.
+- Each row has 1-2 `A` maximum.
+- Use `D`, `A`, `C`, `I`, or blank only.
+- Add Notes column for non-obvious assignments.
+
+### Step 5: Identify Pain Points
+
+From the current-state chart, identify common failure patterns:
+
+| Failure Pattern | Symptom | Business Impact |
+|---|---|---|
+| **No Driver** | Decision stalls for weeks | Missed market windows |
+| **Too many Approvers** | Endless review cycles | Slow time-to-market |
+| **Driver lacks authority** | Decision made but not respected | Rework and confusion |
+| **Informed treated as Approver** | Late objections derail decisions | Scope creep and delays |
+| **Missing Contributors** | Decisions made without key input | Poor outcomes, rework |
+
+### Step 6: Design Target-State DACI
+
+Based on pain points, redesign decision ownership:
+
+- Ensure every row has exactly one D.
+- Reduce Approvers to 1-2 per decision.
+- Move chronic blockers from A to C or I.
+- Add missing Contributors.
+- Document changes in Notes column.
+
+### Step 7: Create Transition Plan
+
+| Timeframe | Action |
+|---|---|
+| **First 30 days** | Align on first 3 high-impact decision changes; communicate new roles |
+| **60 days** | Expand to all decisions; run first decision under new DACI |
+| **90 days** | Full adoption; retrospective on decision speed and quality |
+
+## DACI Health Metrics
+
+Track these metrics to monitor governance effectiveness:
+
+| Metric | Target | How to Measure |
+|---|---|---|
+| Decision cycle time | &lt;5 business days for P0 decisions | Time from decision identified to resolved |
+| Decision reversal rate | &lt;10% | Decisions overturned within 30 days |
+| Stakeholder satisfaction | &gt;80% | Survey: &quot;Do you know who makes decision X?&quot; |
+| Escalation rate | &lt;15% | Decisions escalated past intended Approver |
+| Decision coverage | 100% | All recurring decisions have a DACI row |
+
+## Integration with Other Skills
+
+- Use `create-prd/` to document decisions made via DACI in PRD Section 2 (Contacts).
+- Use `identify-assumptions/` to surface assumptions about decision authority.
+- Use `brainstorm-okrs/` to align DACI decisions with quarterly objectives.
+- Use `summarize-meeting/` to capture decision outcomes in meeting notes.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---|---|---|
+| Decisions still stall after DACI rollout | Driver lacks confidence or authority in practice | Coach Drivers on decision-making process; ensure Approvers respect the framework |
+| Everyone is marked as Contributor | Team avoids accountability by defaulting to C | Force each person to commit to D, A, C, or I -- no &quot;everyone contributes&quot; |
+| DACI chart exists but nobody references it | Document not integrated into workflows | Post DACI in team Confluence/Notion; reference it in kickoff meetings |
+| Approvers overrule without explanation | Authority without accountability | Require Approvers to document veto rationale; review in retrospectives |
+| New decisions not added to chart | DACI treated as one-time exercise | Review and update DACI quarterly; add new decisions as they emerge |
+
+## Success Criteria
+
+- 100% of recurring product decisions have a DACI row with exactly one Driver
+- Decision cycle time reduced by 30%+ after DACI implementation
+- &lt;10% of decisions reversed within 30 days of being made
+- &gt;80% of team members can identify the Driver for any given decision
+- DACI chart reviewed and updated at least quarterly
+
+## Scope &amp; Limitations
+
+**In Scope:** DACI chart creation, current-state mapping, target-state design, transition planning, governance health metrics, pain point identification, decision ownership clarity.
+
+**Out of Scope:** Task assignment (use RACI), project execution tracking (use sprint planning), individual performance management, organizational design beyond decision governance.
+
+**Important Caveats:** DACI works best when leadership commits to respecting the framework. Without executive buy-in, Drivers may lack the authority to actually drive decisions. Start with 3-5 high-impact decisions rather than trying to map everything at once.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|---|---|---|
+| `create-prd/` | Feeds into | DACI decisions inform PRD Contacts section and decision log |
+| `identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
+| `brainstorm-okrs/` | Complements | OKR ownership aligns with DACI decision ownership |
+| `summarize-meeting/` | Feeds into | Meeting summaries capture DACI decision outcomes |
+| `senior-pm/` | Complements | Portfolio-level DACI for cross-project decisions |
+
+## References
+
+- Productside DACI guidance for product teams
+- Inspired by the DACI framework used at Intuit and other product-led organizations
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Daci Framework&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Daci Framework&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Daci Framework in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Daci Framework&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Daci Framework&quot;
+4. Description: &quot;DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/daci-framework/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

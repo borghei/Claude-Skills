@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Qa Browser Automation (Engineering domain).
 
 Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage
@@ -387,11 +409,11 @@ https://github.com/borghei/Claude-Skills/tree/main/qa-browser-automation
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Qa Browser Automation (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Qa Browser Automation (Engineering domain).
 
 Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage
 
@@ -409,7 +431,468 @@ https://github.com/borghei/Claude-Skills/tree/main/qa-browser-automation
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Qa Browser Automation&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# QA Browser Automation
+
+The agent drives Chrome MCP for live browser testing and uses four Python tools for deterministic health scoring, accessibility auditing, visual regression tracking, and report generation.
+
+---
+
+## Quick Start
+
+```bash
+# Score QA findings (0-100 weighted across 10 categories)
+python scripts/qa_health_scorer.py findings.json --threshold 85 --baseline .qa-baselines/latest.json --save-baseline --json
+
+# Audit HTML for WCAG 2.1 violations
+python scripts/accessibility_auditor.py page.html --level AA --json
+
+# Track visual regressions
+python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
+python scripts/visual_regression_tracker.py --register ./baselines
+python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5
+
+# Generate full QA report
+python scripts/test_report_generator.py session_data.json --format markdown -o report.md
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `qa_health_scorer.py` | Findings JSON | Score 0-100, grade A-F, category breakdown, trend data |
+| `accessibility_auditor.py` | HTML file (or stdin) | WCAG violations by level with remediation guidance |
+| `visual_regression_tracker.py` | Baseline + current screenshot dirs | Pass/fail per page, change percentages |
+| `test_report_generator.py` | Session data JSON | Markdown or JSON report with recommendations |
+
+All tools support `--json` for machine output. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
+
+---
+
+## Workflow 1: Full Application QA Sweep (11 Phases)
+
+**Phase 1-2: Pre-flight and authentication.**
+- Verify `git status` is clean. Abort if dirty.
+- Create session directory: `.qa-sessions/{timestamp}/`
+- Authenticate via Chrome MCP if needed.
+
+**Phase 3-4: Orient and explore.**
+- Use `mcp__claude-in-chrome__read_page` to build sitemap/page map.
+- Navigate each route. Check `read_console_messages` for errors, `read_network_requests` for 4xx/5xx.
+- Test all forms with valid data, empty submissions, and boundary values.
+
+**Phase 5: State testing.**
+- Verify loading states (skeleton screens, not blank), empty states (guides to first action), error states, success states, partial states.
+- **Four shadow paths per interaction:** happy path, nil input, empty input, error upstream.
+
+**Phase 6: Cross-device and security.**
+- Resize to 320px, 768px, 1024px, 1440px, 1920px.
+- Check touch targets (44x44px min), layout shifts.
+- Verify security headers (CSP, HSTS, X-Frame-Options), cookie flags.
+
+**Phase 7-8: Document and score.**
+- Record every finding with screenshot evidence. No finding without evidence.
+- Classify by severity (P0-P4) and category (10 categories).
+- Run: `python scripts/qa_health_scorer.py findings.json --baseline .qa-baselines/latest.json`
+
+**Phase 9: Triage and fix loop.**
+- P3/P4: AUTO-FIX, commit atomically, verify.
+- P0/P1/P2: ASK, present evidence, propose fix, wait for approval.
+- After each fix: re-run check. If fail: `git revert`.
+- Hard stop at 50 fixes.
+
+**Phase 10-11: Regression check and report.**
+- Re-visit fixed pages. Verify no new errors.
+- Generate report: `python scripts/test_report_generator.py session.json --save-baseline`
+
+**Validation checkpoint:** Health score &gt;= 85. Zero P0 findings. WCAG AA &gt;= 95%.
+
+---
+
+## Workflow 2: Visual Regression Testing
+
+```bash
+# Set up baseline
+python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
+# Capture and register screenshots
+python scripts/visual_regression_tracker.py --register ./baselines
+# After changes, compare
+python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5 --json
+# Accept intentional changes
+python scripts/visual_regression_tracker.py --update-baseline --baseline ./baselines --current ./screenshots
+```
+
+Pages exceeding the threshold (default 5%) are flagged as regressions. Uses SHA-256 hashing and byte-level comparison.
+
+---
+
+## Workflow 3: Accessibility Audit
+
+```bash
+python scripts/accessibility_auditor.py page.html --level AA --json
+curl -s https://example.com | python scripts/accessibility_auditor.py - --level AAA
+```
+
+**What gets checked by level:**
+- **A (Must Fix):** Alt text, page language, form labels, headings, duplicate IDs, autoplay media
+- **AA (Should Fix):** Color contrast (4.5:1 text, 3:1 large), heading hierarchy, focus visible, error identification
+- **AAA (Nice to Have):** Enhanced contrast (7:1), extended audio, reading level
+
+Each violation includes: WCAG criterion, severity, element selector, and remediation guidance.
+
+---
+
+## Testing Tiers
+
+| Tier | Duration | Scope |
+|------|----------|-------|
+| **Quick** | 30s | Console errors, broken links, basic a11y, mobile resize |
+| **Standard** | 2-5 min | + Top 10 routes, forms, contrast, Core Web Vitals |
+| **Deep** | 10-20 min | + Full sitemap, state testing, WCAG AA, performance, visual regression, security headers |
+| **Exhaustive** | 30+ min | + Every element, WCAG AAA, all pages performance, 5 breakpoints, auth edge cases, memory leaks |
+
+---
+
+## Health Scoring System
+
+10 weighted categories, score 0-100:
+
+| Category | Weight | Measures |
+|----------|--------|----------|
+| Functional | 18% | Forms, CRUD, navigation flows |
+| Accessibility | 13% | WCAG compliance, keyboard nav |
+| Console Errors | 12% | JS errors, unhandled rejections |
+| UX Flow | 12% | Logical navigation, clear feedback |
+| Performance | 12% | Core Web Vitals within thresholds |
+| Visual Consistency | 10% | Layout shifts, alignment, z-index |
+| Broken Links | 8% | HTTP 4xx/5xx, dead anchors |
+| Content Quality | 5% | Spelling, placeholder text, truncation |
+| Security Headers | 5% | CSP, HSTS, cookie flags |
+| Mobile Responsive | 5% | Breakpoints, touch targets, no h-scroll |
+
+**Severity deductions:** P0: -30, P1: -18, P2: -10, P3: -4, P4: -1.
+
+**Grades:** A (90-100), B (80-89), C (70-79), D (60-69), F (0-59).
+
+---
+
+## Safety Controls
+
+- **Clean working tree required** -- abort if `git status` dirty.
+- **Max 50 fixes per session** -- hard stop.
+- **Risk accumulator** -- component (+5), style (+2), config (+8), revert (+15). Stop at 25% of budget.
+- **WTF heuristic** -- 3 consecutive fix verification failures = stop entirely.
+- **Atomic commits** -- one fix = one commit: `fix(qa): [P{severity}] {description}`
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Scorer exits code 1 with no errors | Score below `--threshold` (default 70) | Check score in output; raise threshold or fix findings |
+| Auditor reports `parse-error` | Malformed HTML | Verify file is complete; check curl is not returning redirect |
+| Regression tracker 100% change on all pages | Baseline manifest empty | Run `--init` then `--register` before comparing |
+| Findings default to P3/functional | Missing `severity` or `category` keys | Include both keys in each finding dict |
+| Chrome MCP returns stale content after SPA nav | DOM updated without full page load | Wait for transition, call `read_page` again |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| Browser Testing Methodology | `references/browser_testing_methodology.md` |
+| WCAG Compliance Guide | `references/wcag_compliance_guide.md` |
+| Performance Benchmarks | `references/performance_benchmarks.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `code-reviewer` | Health score and findings in PR review context |
+| `senior-frontend` | Visual regression baselines align with component library |
+| `senior-devops` | Health score gates CI/CD via exit code |
+| `senior-secops` | Security header findings escalate to security review |
+| `incident-commander` | P0 findings trigger incident response |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 2.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Qa Browser Automation&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Qa Browser Automation&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Qa Browser Automation in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Qa Browser Automation&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Qa Browser Automation&quot;
+4. Description: &quot;Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/qa-browser-automation/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Qa Browser Automation&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# QA Browser Automation
+
+The agent drives Chrome MCP for live browser testing and uses four Python tools for deterministic health scoring, accessibility auditing, visual regression tracking, and report generation.
+
+---
+
+## Quick Start
+
+```bash
+# Score QA findings (0-100 weighted across 10 categories)
+python scripts/qa_health_scorer.py findings.json --threshold 85 --baseline .qa-baselines/latest.json --save-baseline --json
+
+# Audit HTML for WCAG 2.1 violations
+python scripts/accessibility_auditor.py page.html --level AA --json
+
+# Track visual regressions
+python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
+python scripts/visual_regression_tracker.py --register ./baselines
+python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5
+
+# Generate full QA report
+python scripts/test_report_generator.py session_data.json --format markdown -o report.md
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `qa_health_scorer.py` | Findings JSON | Score 0-100, grade A-F, category breakdown, trend data |
+| `accessibility_auditor.py` | HTML file (or stdin) | WCAG violations by level with remediation guidance |
+| `visual_regression_tracker.py` | Baseline + current screenshot dirs | Pass/fail per page, change percentages |
+| `test_report_generator.py` | Session data JSON | Markdown or JSON report with recommendations |
+
+All tools support `--json` for machine output. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
+
+---
+
+## Workflow 1: Full Application QA Sweep (11 Phases)
+
+**Phase 1-2: Pre-flight and authentication.**
+- Verify `git status` is clean. Abort if dirty.
+- Create session directory: `.qa-sessions/{timestamp}/`
+- Authenticate via Chrome MCP if needed.
+
+**Phase 3-4: Orient and explore.**
+- Use `mcp__claude-in-chrome__read_page` to build sitemap/page map.
+- Navigate each route. Check `read_console_messages` for errors, `read_network_requests` for 4xx/5xx.
+- Test all forms with valid data, empty submissions, and boundary values.
+
+**Phase 5: State testing.**
+- Verify loading states (skeleton screens, not blank), empty states (guides to first action), error states, success states, partial states.
+- **Four shadow paths per interaction:** happy path, nil input, empty input, error upstream.
+
+**Phase 6: Cross-device and security.**
+- Resize to 320px, 768px, 1024px, 1440px, 1920px.
+- Check touch targets (44x44px min), layout shifts.
+- Verify security headers (CSP, HSTS, X-Frame-Options), cookie flags.
+
+**Phase 7-8: Document and score.**
+- Record every finding with screenshot evidence. No finding without evidence.
+- Classify by severity (P0-P4) and category (10 categories).
+- Run: `python scripts/qa_health_scorer.py findings.json --baseline .qa-baselines/latest.json`
+
+**Phase 9: Triage and fix loop.**
+- P3/P4: AUTO-FIX, commit atomically, verify.
+- P0/P1/P2: ASK, present evidence, propose fix, wait for approval.
+- After each fix: re-run check. If fail: `git revert`.
+- Hard stop at 50 fixes.
+
+**Phase 10-11: Regression check and report.**
+- Re-visit fixed pages. Verify no new errors.
+- Generate report: `python scripts/test_report_generator.py session.json --save-baseline`
+
+**Validation checkpoint:** Health score &gt;= 85. Zero P0 findings. WCAG AA &gt;= 95%.
+
+---
+
+## Workflow 2: Visual Regression Testing
+
+```bash
+# Set up baseline
+python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
+# Capture and register screenshots
+python scripts/visual_regression_tracker.py --register ./baselines
+# After changes, compare
+python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5 --json
+# Accept intentional changes
+python scripts/visual_regression_tracker.py --update-baseline --baseline ./baselines --current ./screenshots
+```
+
+Pages exceeding the threshold (default 5%) are flagged as regressions. Uses SHA-256 hashing and byte-level comparison.
+
+---
+
+## Workflow 3: Accessibility Audit
+
+```bash
+python scripts/accessibility_auditor.py page.html --level AA --json
+curl -s https://example.com | python scripts/accessibility_auditor.py - --level AAA
+```
+
+**What gets checked by level:**
+- **A (Must Fix):** Alt text, page language, form labels, headings, duplicate IDs, autoplay media
+- **AA (Should Fix):** Color contrast (4.5:1 text, 3:1 large), heading hierarchy, focus visible, error identification
+- **AAA (Nice to Have):** Enhanced contrast (7:1), extended audio, reading level
+
+Each violation includes: WCAG criterion, severity, element selector, and remediation guidance.
+
+---
+
+## Testing Tiers
+
+| Tier | Duration | Scope |
+|------|----------|-------|
+| **Quick** | 30s | Console errors, broken links, basic a11y, mobile resize |
+| **Standard** | 2-5 min | + Top 10 routes, forms, contrast, Core Web Vitals |
+| **Deep** | 10-20 min | + Full sitemap, state testing, WCAG AA, performance, visual regression, security headers |
+| **Exhaustive** | 30+ min | + Every element, WCAG AAA, all pages performance, 5 breakpoints, auth edge cases, memory leaks |
+
+---
+
+## Health Scoring System
+
+10 weighted categories, score 0-100:
+
+| Category | Weight | Measures |
+|----------|--------|----------|
+| Functional | 18% | Forms, CRUD, navigation flows |
+| Accessibility | 13% | WCAG compliance, keyboard nav |
+| Console Errors | 12% | JS errors, unhandled rejections |
+| UX Flow | 12% | Logical navigation, clear feedback |
+| Performance | 12% | Core Web Vitals within thresholds |
+| Visual Consistency | 10% | Layout shifts, alignment, z-index |
+| Broken Links | 8% | HTTP 4xx/5xx, dead anchors |
+| Content Quality | 5% | Spelling, placeholder text, truncation |
+| Security Headers | 5% | CSP, HSTS, cookie flags |
+| Mobile Responsive | 5% | Breakpoints, touch targets, no h-scroll |
+
+**Severity deductions:** P0: -30, P1: -18, P2: -10, P3: -4, P4: -1.
+
+**Grades:** A (90-100), B (80-89), C (70-79), D (60-69), F (0-59).
+
+---
+
+## Safety Controls
+
+- **Clean working tree required** -- abort if `git status` dirty.
+- **Max 50 fixes per session** -- hard stop.
+- **Risk accumulator** -- component (+5), style (+2), config (+8), revert (+15). Stop at 25% of budget.
+- **WTF heuristic** -- 3 consecutive fix verification failures = stop entirely.
+- **Atomic commits** -- one fix = one commit: `fix(qa): [P{severity}] {description}`
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Scorer exits code 1 with no errors | Score below `--threshold` (default 70) | Check score in output; raise threshold or fix findings |
+| Auditor reports `parse-error` | Malformed HTML | Verify file is complete; check curl is not returning redirect |
+| Regression tracker 100% change on all pages | Baseline manifest empty | Run `--init` then `--register` before comparing |
+| Findings default to P3/functional | Missing `severity` or `category` keys | Include both keys in each finding dict |
+| Chrome MCP returns stale content after SPA nav | DOM updated without full page load | Wait for transition, call `read_page` again |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| Browser Testing Methodology | `references/browser_testing_methodology.md` |
+| WCAG Compliance Guide | `references/wcag_compliance_guide.md` |
+| Performance Benchmarks | `references/performance_benchmarks.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `code-reviewer` | Health score and findings in PR review context |
+| `senior-frontend` | Visual regression baselines align with component library |
+| `senior-devops` | Health score gates CI/CD via exit code |
+| `senior-secops` | Security header findings escalate to security review |
+| `incident-commander` | P0 findings trigger incident response |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 2.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Qa Browser Automation&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Qa Browser Automation&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Qa Browser Automation in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Qa Browser Automation&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Qa Browser Automation&quot;
+4. Description: &quot;Production-grade browser QA automation with visual regression testing, accessibility auditing, performance profiling, and intelligent bug triage&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/qa-browser-automation/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

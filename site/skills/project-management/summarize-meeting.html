@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Summarize Meeting (Project Management domain).
 
 Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/summarize-meeting
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Summarize Meeting (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Summarize Meeting (Project Management domain).
 
 Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
 
@@ -425,7 +447,476 @@ https://github.com/borghei/Claude-Skills/tree/main/summarize-meeting
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Summarize Meeting&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Meeting Summary Expert
+
+## Overview
+
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
+
+### When to Use
+
+- **After any meeting** where decisions were made or actions were assigned.
+- **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
+- **Stakeholder meetings** -- steering committees, executive reviews, client calls.
+- **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
+
+## Methodology
+
+### Step 1: Capture Meeting Metadata
+
+Record the essential context:
+
+| Field | Description |
+|-------|-------------|
+| **Date** | Meeting date (YYYY-MM-DD) |
+| **Time** | Start and end time with timezone |
+| **Participants** | Names and roles (e.g., &quot;Sarah Chen, Product Lead&quot;) |
+| **Topic** | One-line meeting purpose |
+| **Location** | Room name, video link, or &quot;async&quot; |
+
+### Step 2: Extract Key Discussion Points
+
+From the raw notes or transcript, identify the substantive topics discussed. Guidelines:
+
+- **Summarize, do not transcribe.** Capture the essence of each topic in 1-3 bullet points.
+- **Use plain language.** Avoid jargon. Anyone reading the summary should understand the points without having attended.
+- **Focus on what matters.** Skip small talk, repeated points, and tangential discussions.
+- **Note disagreements.** If there was significant debate, capture the key positions and how they were resolved (or not).
+
+### Step 3: Extract Action Items
+
+Every action item must answer three questions:
+
+1. **Who** is responsible? (Single owner, not a team)
+2. **What** specifically must they do? (Concrete, observable deliverable)
+3. **By when?** (Specific date, not &quot;soon&quot; or &quot;next sprint&quot;)
+
+Format as a table:
+
+| Due Date | Owner | Action |
+|----------|-------|--------|
+| 2026-03-10 | Sarah Chen | Share revised wireframes with the design team |
+| 2026-03-07 | James Park | Schedule load test for the staging environment |
+
+**Action item quality checks:**
+
+- Each action has exactly one owner (not &quot;Sarah and James&quot;)
+- The deliverable is specific enough to verify completion
+- The due date is a calendar date, not a relative timeframe
+- Actions use active verbs: &quot;share,&quot; &quot;schedule,&quot; &quot;draft,&quot; &quot;review,&quot; &quot;decide&quot;
+
+### Step 4: Record Decisions
+
+List each decision made during the meeting as a numbered item. Include enough context that someone who was not present understands the decision and its rationale.
+
+**Format:**
+
+1. **[Decision]** -- [Brief rationale or context]. Decided by [who].
+2. **[Decision]** -- [Brief rationale or context]. Decided by [who].
+
+**Examples:**
+
+1. **Launch date set for April 15** -- Allows two full sprints for QA after feature freeze on March 28. Decided by steering committee.
+2. **Use PostgreSQL instead of MongoDB for the analytics service** -- Team consensus based on query pattern analysis showing 80% relational queries. Decided by engineering leads.
+
+### Step 5: Capture Open Questions
+
+List unresolved questions that need follow-up. For each question, note who is expected to provide an answer and by when, if known.
+
+1. Do we need a separate staging environment for the new analytics service? (James to investigate by March 10)
+2. What is the budget ceiling for the Q2 marketing campaign? (Pending finance review)
+
+### Step 6: Save and Distribute
+
+**File naming convention:** `Meeting-Summary-[YYYY-MM-DD]-[topic-slug].md`
+
+Examples:
+- `Meeting-Summary-2026-03-04-sprint-planning.md`
+- `Meeting-Summary-2026-03-04-q2-roadmap-review.md`
+
+**Distribution:**
+- Share the summary within 24 hours of the meeting.
+- Send to all participants and relevant stakeholders who were not present.
+- Store in the team&#x27;s shared documentation space (Confluence, Notion, shared drive).
+
+## Output Template
+
+```markdown
+# Meeting Summary
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| **Date** | [YYYY-MM-DD] |
+| **Time** | [HH:MM] - [HH:MM] [TZ] |
+| **Participants** | [Name, Role]; [Name, Role]; ... |
+| **Topic** | [One-line meeting purpose] |
+
+## Summary
+
+- [Key discussion point 1]
+- [Key discussion point 2]
+- [Key discussion point 3]
+
+## Action Items
+
+| Due Date | Owner | Action |
+|----------|-------|--------|
+| [YYYY-MM-DD] | [Name] | [Specific, verifiable action] |
+
+## Decisions Made
+
+1. **[Decision]** -- [Rationale]. Decided by [who].
+
+## Open Questions
+
+1. [Question]? ([Who is expected to answer, by when])
+```
+
+## What to Focus On
+
+When summarizing, prioritize:
+
+- **Decisions that affect roadmap or strategy** -- These have the broadest impact and are most likely to be referenced later.
+- **Who does what by when** -- Accountability is the primary value of a meeting summary.
+- **Blockers and risks surfaced** -- These need visibility beyond the meeting room.
+- **Changes to previously agreed plans** -- These create confusion if not documented.
+
+When summarizing, deprioritize:
+
+- Status updates that are available elsewhere (Jira, dashboards)
+- Repetition of information already documented
+- Social conversation and small talk
+- Detailed technical discussions better captured in design docs
+
+## Integration with Other Skills
+
+- Feed decisions into `wwas/` to create backlog items with strategic context.
+- Use action items to create tickets via `../jira-expert/`.
+- Document recurring meeting outcomes in `../confluence-expert/` templates.
+
+## References
+
+- See `references/meeting-facilitation-guide.md` for meeting types, note-taking strategies, and anti-patterns.
+- See `assets/meeting_summary_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Action items are assigned to teams instead of individuals | Culture avoids individual accountability; facilitator does not press for a single owner | Enforce the &quot;one owner&quot; rule during the meeting; if a team is named, ask &quot;Who on that team is the single point of contact?&quot; |
+| Summaries are too long and nobody reads them | Summarizer includes too much detail; tries to capture everything | Apply the &quot;would someone who missed the meeting need this?&quot; filter to every bullet point; target 1 page maximum for 1-hour meetings |
+| Decisions are not documented, leading to re-litigation in future meetings | Meeting moved quickly; facilitator focused on discussion, not decisions | Pause after each decision and state it aloud: &quot;Let me confirm: we decided X because Y&quot;; add decision capture as a facilitator checklist item |
+| Action items have vague due dates (&quot;soon&quot;, &quot;next sprint&quot;) | Facilitator does not push for specificity; team uncomfortable committing to dates | Require a calendar date for every action; if the team cannot commit, set a date to decide the date |
+| Summaries are distributed days after the meeting | Summarizer is overburdened or perfectionist | Set a 24-hour distribution rule; use a structured template to reduce writing effort; assign summary responsibility before the meeting |
+| Open questions from previous meetings are never resolved | No follow-up mechanism; questions captured but not tracked | Add &quot;Previous Open Questions&quot; as a standing agenda item; assign each question an owner and a resolution date |
+| Attendees disagree with the summary after distribution | Summary reflects summarizer&#x27;s interpretation, not group consensus | Share key decisions and action items verbally at the meeting close; invite corrections within 24 hours of distribution |
+
+## Success Criteria
+
+- 100% of meetings with decisions or action items produce a written summary within 24 hours
+- Every action item has a single named owner and a specific calendar due date
+- Action item completion rate exceeds 80% by the stated due date
+- Summaries are 1 page or less for meetings under 1 hour
+- Decisions are documented with enough context that a non-attendee can understand the rationale
+- Open questions from previous meetings are tracked and resolved within 2 meeting cycles
+- Meeting summary satisfaction (from periodic team survey) averages 4+/5
+
+## Scope &amp; Limitations
+
+**In Scope:** Capturing meeting metadata, extracting key discussion points, documenting decisions with rationale, recording action items with owners and due dates, capturing open questions, distributing summaries, maintaining consistent naming conventions and storage.
+
+**Out of Scope:** Meeting facilitation and agenda design, real-time transcription (use a transcription tool as input), project status tracking (hand off to `../jira-expert/`), strategic decision frameworks (hand off to `../senior-pm/`), recording or video management.
+
+**Limitations:** Summary quality is bounded by the quality of input notes or transcript. Automated transcription tools may introduce errors that the summarizer must catch. The skill does not replace the need for a skilled facilitator -- poorly run meetings produce poor summaries regardless of template quality. Sensitive or confidential meetings may require restricted distribution that the standard workflow does not address.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Meetings -&gt; WWAS | Decisions and commitments from meetings become WWAS backlog items |
+| `job-stories/` | Meetings -&gt; Stories | Discovery discussions surface situations and motivations for job stories |
+| `../jira-expert/` | Meetings -&gt; Jira | Action items create Jira tickets; decisions update issue comments |
+| `../confluence-expert/` | Meetings -&gt; Confluence | Summaries stored in Confluence using meeting notes template |
+| `../senior-pm/` | Meetings -&gt; PM | Steering committee and stakeholder meeting summaries feed portfolio reporting |
+| `../delivery-manager/` | Meetings -&gt; DM | Release planning and incident review meeting outcomes feed delivery tracking |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Summarize Meeting&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Summarize Meeting&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Summarize Meeting in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Summarize Meeting&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Summarize Meeting&quot;
+4. Description: &quot;Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Summarize Meeting&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Meeting Summary Expert
+
+## Overview
+
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
+
+### When to Use
+
+- **After any meeting** where decisions were made or actions were assigned.
+- **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
+- **Stakeholder meetings** -- steering committees, executive reviews, client calls.
+- **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
+
+## Methodology
+
+### Step 1: Capture Meeting Metadata
+
+Record the essential context:
+
+| Field | Description |
+|-------|-------------|
+| **Date** | Meeting date (YYYY-MM-DD) |
+| **Time** | Start and end time with timezone |
+| **Participants** | Names and roles (e.g., &quot;Sarah Chen, Product Lead&quot;) |
+| **Topic** | One-line meeting purpose |
+| **Location** | Room name, video link, or &quot;async&quot; |
+
+### Step 2: Extract Key Discussion Points
+
+From the raw notes or transcript, identify the substantive topics discussed. Guidelines:
+
+- **Summarize, do not transcribe.** Capture the essence of each topic in 1-3 bullet points.
+- **Use plain language.** Avoid jargon. Anyone reading the summary should understand the points without having attended.
+- **Focus on what matters.** Skip small talk, repeated points, and tangential discussions.
+- **Note disagreements.** If there was significant debate, capture the key positions and how they were resolved (or not).
+
+### Step 3: Extract Action Items
+
+Every action item must answer three questions:
+
+1. **Who** is responsible? (Single owner, not a team)
+2. **What** specifically must they do? (Concrete, observable deliverable)
+3. **By when?** (Specific date, not &quot;soon&quot; or &quot;next sprint&quot;)
+
+Format as a table:
+
+| Due Date | Owner | Action |
+|----------|-------|--------|
+| 2026-03-10 | Sarah Chen | Share revised wireframes with the design team |
+| 2026-03-07 | James Park | Schedule load test for the staging environment |
+
+**Action item quality checks:**
+
+- Each action has exactly one owner (not &quot;Sarah and James&quot;)
+- The deliverable is specific enough to verify completion
+- The due date is a calendar date, not a relative timeframe
+- Actions use active verbs: &quot;share,&quot; &quot;schedule,&quot; &quot;draft,&quot; &quot;review,&quot; &quot;decide&quot;
+
+### Step 4: Record Decisions
+
+List each decision made during the meeting as a numbered item. Include enough context that someone who was not present understands the decision and its rationale.
+
+**Format:**
+
+1. **[Decision]** -- [Brief rationale or context]. Decided by [who].
+2. **[Decision]** -- [Brief rationale or context]. Decided by [who].
+
+**Examples:**
+
+1. **Launch date set for April 15** -- Allows two full sprints for QA after feature freeze on March 28. Decided by steering committee.
+2. **Use PostgreSQL instead of MongoDB for the analytics service** -- Team consensus based on query pattern analysis showing 80% relational queries. Decided by engineering leads.
+
+### Step 5: Capture Open Questions
+
+List unresolved questions that need follow-up. For each question, note who is expected to provide an answer and by when, if known.
+
+1. Do we need a separate staging environment for the new analytics service? (James to investigate by March 10)
+2. What is the budget ceiling for the Q2 marketing campaign? (Pending finance review)
+
+### Step 6: Save and Distribute
+
+**File naming convention:** `Meeting-Summary-[YYYY-MM-DD]-[topic-slug].md`
+
+Examples:
+- `Meeting-Summary-2026-03-04-sprint-planning.md`
+- `Meeting-Summary-2026-03-04-q2-roadmap-review.md`
+
+**Distribution:**
+- Share the summary within 24 hours of the meeting.
+- Send to all participants and relevant stakeholders who were not present.
+- Store in the team&#x27;s shared documentation space (Confluence, Notion, shared drive).
+
+## Output Template
+
+```markdown
+# Meeting Summary
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| **Date** | [YYYY-MM-DD] |
+| **Time** | [HH:MM] - [HH:MM] [TZ] |
+| **Participants** | [Name, Role]; [Name, Role]; ... |
+| **Topic** | [One-line meeting purpose] |
+
+## Summary
+
+- [Key discussion point 1]
+- [Key discussion point 2]
+- [Key discussion point 3]
+
+## Action Items
+
+| Due Date | Owner | Action |
+|----------|-------|--------|
+| [YYYY-MM-DD] | [Name] | [Specific, verifiable action] |
+
+## Decisions Made
+
+1. **[Decision]** -- [Rationale]. Decided by [who].
+
+## Open Questions
+
+1. [Question]? ([Who is expected to answer, by when])
+```
+
+## What to Focus On
+
+When summarizing, prioritize:
+
+- **Decisions that affect roadmap or strategy** -- These have the broadest impact and are most likely to be referenced later.
+- **Who does what by when** -- Accountability is the primary value of a meeting summary.
+- **Blockers and risks surfaced** -- These need visibility beyond the meeting room.
+- **Changes to previously agreed plans** -- These create confusion if not documented.
+
+When summarizing, deprioritize:
+
+- Status updates that are available elsewhere (Jira, dashboards)
+- Repetition of information already documented
+- Social conversation and small talk
+- Detailed technical discussions better captured in design docs
+
+## Integration with Other Skills
+
+- Feed decisions into `wwas/` to create backlog items with strategic context.
+- Use action items to create tickets via `../jira-expert/`.
+- Document recurring meeting outcomes in `../confluence-expert/` templates.
+
+## References
+
+- See `references/meeting-facilitation-guide.md` for meeting types, note-taking strategies, and anti-patterns.
+- See `assets/meeting_summary_template.md` for ready-to-use templates.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Action items are assigned to teams instead of individuals | Culture avoids individual accountability; facilitator does not press for a single owner | Enforce the &quot;one owner&quot; rule during the meeting; if a team is named, ask &quot;Who on that team is the single point of contact?&quot; |
+| Summaries are too long and nobody reads them | Summarizer includes too much detail; tries to capture everything | Apply the &quot;would someone who missed the meeting need this?&quot; filter to every bullet point; target 1 page maximum for 1-hour meetings |
+| Decisions are not documented, leading to re-litigation in future meetings | Meeting moved quickly; facilitator focused on discussion, not decisions | Pause after each decision and state it aloud: &quot;Let me confirm: we decided X because Y&quot;; add decision capture as a facilitator checklist item |
+| Action items have vague due dates (&quot;soon&quot;, &quot;next sprint&quot;) | Facilitator does not push for specificity; team uncomfortable committing to dates | Require a calendar date for every action; if the team cannot commit, set a date to decide the date |
+| Summaries are distributed days after the meeting | Summarizer is overburdened or perfectionist | Set a 24-hour distribution rule; use a structured template to reduce writing effort; assign summary responsibility before the meeting |
+| Open questions from previous meetings are never resolved | No follow-up mechanism; questions captured but not tracked | Add &quot;Previous Open Questions&quot; as a standing agenda item; assign each question an owner and a resolution date |
+| Attendees disagree with the summary after distribution | Summary reflects summarizer&#x27;s interpretation, not group consensus | Share key decisions and action items verbally at the meeting close; invite corrections within 24 hours of distribution |
+
+## Success Criteria
+
+- 100% of meetings with decisions or action items produce a written summary within 24 hours
+- Every action item has a single named owner and a specific calendar due date
+- Action item completion rate exceeds 80% by the stated due date
+- Summaries are 1 page or less for meetings under 1 hour
+- Decisions are documented with enough context that a non-attendee can understand the rationale
+- Open questions from previous meetings are tracked and resolved within 2 meeting cycles
+- Meeting summary satisfaction (from periodic team survey) averages 4+/5
+
+## Scope &amp; Limitations
+
+**In Scope:** Capturing meeting metadata, extracting key discussion points, documenting decisions with rationale, recording action items with owners and due dates, capturing open questions, distributing summaries, maintaining consistent naming conventions and storage.
+
+**Out of Scope:** Meeting facilitation and agenda design, real-time transcription (use a transcription tool as input), project status tracking (hand off to `../jira-expert/`), strategic decision frameworks (hand off to `../senior-pm/`), recording or video management.
+
+**Limitations:** Summary quality is bounded by the quality of input notes or transcript. Automated transcription tools may introduce errors that the summarizer must catch. The skill does not replace the need for a skilled facilitator -- poorly run meetings produce poor summaries regardless of template quality. Sensitive or confidential meetings may require restricted distribution that the standard workflow does not address.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|-------------|-----------|------------|
+| `wwas/` | Meetings -&gt; WWAS | Decisions and commitments from meetings become WWAS backlog items |
+| `job-stories/` | Meetings -&gt; Stories | Discovery discussions surface situations and motivations for job stories |
+| `../jira-expert/` | Meetings -&gt; Jira | Action items create Jira tickets; decisions update issue comments |
+| `../confluence-expert/` | Meetings -&gt; Confluence | Summaries stored in Confluence using meeting notes template |
+| `../senior-pm/` | Meetings -&gt; PM | Steering committee and stakeholder meeting summaries feed portfolio reporting |
+| `../delivery-manager/` | Meetings -&gt; DM | Release planning and incident review meeting outcomes feed delivery tracking |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Summarize Meeting&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Summarize Meeting&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Summarize Meeting in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Summarize Meeting&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Summarize Meeting&quot;
+4. Description: &quot;Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

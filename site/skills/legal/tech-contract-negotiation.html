@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Tech Contract Negotiation (Legal domain).
 
 Negotiation frameworks for technology services agreements, B2B contracts, and professional services deals. Use when reviewing or negotiating tech contracts.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/tech-contract-negotiation
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Tech Contract Negotiation (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Tech Contract Negotiation (Legal domain).
 
 Negotiation frameworks for technology services agreements, B2B contracts, and professional services deals. Use when reviewing or negotiating tech contracts.
 
@@ -425,7 +447,434 @@ https://github.com/borghei/Claude-Skills/tree/main/tech-contract-negotiation
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Tech Contract Negotiation&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Tech Contract Negotiation Skill
+
+## Overview
+
+Production-ready negotiation toolkit for technology services agreements, professional services contracts, and B2B transactions. Provides a Three-Position Framework (provider-favorable, balanced, client-favorable) for every major provision, Deal-Size Tactics across 5 tiers, Five-Tier Objection Handling, regulatory leverage arguments, and concession roadmaps. Designed for legal counsel, procurement leads, and sales/deal desk teams negotiating technology contracts from $100K to $10M+.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Negotiation Position Analyzer (`scripts/negotiation_position_analyzer.py`)
+
+Analyzes contract text and classifies each provision as provider-favorable, balanced, or client-favorable based on keyword patterns and structural analysis. Generates a position map and recommended negotiation priorities.
+
+```bash
+# Analyze a contract draft
+python scripts/negotiation_position_analyzer.py contract_draft.txt
+
+# JSON output for integration
+python scripts/negotiation_position_analyzer.py contract_draft.txt --json
+
+# Analyze from a specific party&#x27;s perspective
+python scripts/negotiation_position_analyzer.py contract_draft.txt --perspective client
+```
+
+### 2. Deal Complexity Scorer (`scripts/deal_complexity_scorer.py`)
+
+Takes deal parameters and scores complexity across 7 dimensions. Recommends deal tier (1-5), expected timeline, number of rounds, and key focus areas.
+
+```bash
+# Score deal complexity from parameters file
+python scripts/deal_complexity_scorer.py deal_params.json
+
+# JSON output
+python scripts/deal_complexity_scorer.py deal_params.json --json
+
+# Override deal value for quick what-if
+python scripts/deal_complexity_scorer.py deal_params.json --deal-value 5000000
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/three_position_framework.md` | Provider/balanced/client positions for 5 major provisions with deal-size tactics |
+| `references/objection_handling.md` | Five-tier objection methodology, prediction matrix, communication templates |
+| `references/regulatory_leverage.md` | GDPR, DORA, NIS2, SOX leverage arguments, concession roadmap, industry considerations |
+
+## Workflows
+
+### Workflow 1: Pre-Negotiation Assessment
+
+1. **Classify the deal** -- Run `deal_complexity_scorer.py` with deal parameters to determine tier, timeline, and focus areas
+2. **Analyze the draft** -- Run `negotiation_position_analyzer.py` on the initial contract to map current positions
+3. **Identify gaps** -- Compare position map against your target positions from `three_position_framework.md`
+4. **Prepare objection responses** -- Review `objection_handling.md` for predicted objections based on client type
+5. **Map regulatory leverage** -- Identify applicable frameworks from `regulatory_leverage.md`
+
+### Workflow 2: Active Negotiation
+
+1. **Open with position** -- Use the Opening Position Statement template from `objection_handling.md`
+2. **Handle pushback** -- Apply Five-Tier Objection Handling: Acknowledge, Market Context, Business Rationale, Alternatives, Bright Lines
+3. **Track concessions** -- Follow the 4-tier concession roadmap (Easy Gives through Bright Lines)
+4. **Re-analyze after redlines** -- Run `negotiation_position_analyzer.py` on each revised draft
+5. **Close** -- Use Closing the Deal template; verify no Bright Lines were crossed
+
+### Workflow 3: Deal Review and Approval
+
+1. **Final position analysis** -- Run analyzer on execution-ready draft
+2. **Complexity validation** -- Confirm final terms match expected deal tier parameters
+3. **Regulatory check** -- Verify all mandatory regulatory provisions are present
+4. **Document concessions** -- Record what was traded and why for future negotiations
+5. **Approval package** -- Combine position map, complexity score, and concession log
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Analyzer flags everything as &quot;provider-favorable&quot; | Input is a vendor&#x27;s first draft (expected behavior) | Use `--perspective provider` to flip the analysis; compare against balanced baseline |
+| Complexity scorer returns Tier 5 for a small deal | High regulatory or multi-jurisdictional flags triggered | Review the regulatory and jurisdiction inputs; lower if overestimated |
+| Position map shows no IP provisions detected | Contract uses non-standard terminology for IP clauses | Check for terms like &quot;work product,&quot; &quot;deliverables ownership,&quot; or &quot;background IP&quot; manually |
+| Deal timeline estimate seems too short | Scorer does not account for internal approval delays | Add internal review buffer (typically 1-2 weeks per approval level) to the estimated timeline |
+| Objection framework doesn&#x27;t cover a specific pushback | Counterparty raised an atypical demand | Start with Acknowledge tier; frame using closest Market Context example; escalate to Bright Lines if needed |
+| Regulatory leverage arguments rejected as irrelevant | Framework doesn&#x27;t apply to counterparty&#x27;s jurisdiction | Verify which regulations actually bind each party; remove inapplicable leverage points |
+
+## Success Criteria
+
+- **Position Accuracy**: Analyzer correctly classifies 85%+ of provisions when validated against expert review
+- **Deal Tier Alignment**: Complexity scorer tier matches actual negotiation effort within one tier for 90% of deals
+- **Negotiation Efficiency**: Average number of negotiation rounds reduced by 30% compared to ad-hoc approach
+- **Concession Tracking**: 100% of material concessions documented with rationale and trade-off analysis
+- **Bright Line Protection**: Zero instances of crossing defined Bright Lines without executive escalation and approval
+- **Regulatory Coverage**: All applicable regulatory provisions identified and addressed in 95%+ of contracts
+- **Time-to-Signature**: Deals close within estimated timeline +/- 20% for 80% of negotiations
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Technology services agreements, SaaS subscriptions, professional services contracts, and B2B licensing deals
+- Negotiation position analysis for liability, IP, payment, SLA, and warranty provisions
+- Deal complexity scoring with tier-based recommendations for timeline, rounds, and focus areas
+- Regulatory leverage for GDPR, DORA, NIS2, and SOX in technology contract contexts
+- Objection handling frameworks and communication templates for common negotiation scenarios
+
+**This skill does NOT cover:**
+- Employment agreements, M&amp;A transactions, real estate contracts, or consumer-facing terms of service
+- Jurisdiction-specific legal advice or attorney-client privileged analysis (this is a framework, not legal counsel)
+- Contract drafting from scratch (assumes an existing draft to analyze and negotiate)
+- Litigation strategy, dispute resolution beyond contract clauses, or enforcement proceedings
+- Price negotiation tactics for commodity purchases or non-technology procurement
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Treating every provision as a Bright Line | Counterparty disengages when everything is non-negotiable | Classify provisions into 4 concession tiers; trade Easy Gives early to build goodwill |
+| Skipping deal complexity assessment | Under-preparing for complex deals or over-preparing for simple ones | Always run complexity scorer first to calibrate effort, timeline, and approval requirements |
+| Using regulatory leverage when the regulation doesn&#x27;t apply | Destroys credibility and trust with informed counterparties | Verify applicability before citing any regulation; use the genuine-vs-preference test from the framework |
+| Accepting &quot;this is our standard template&quot; at face value | Every template is negotiable; accepting defaults leaves value on the table | Analyze the &quot;standard&quot; template with the position analyzer to identify moveable provisions |
+| Negotiating provisions in isolation | Conceding on SLAs without linking to liability caps creates exposure | Use the Three-Position Framework holistically; link related provisions (SLAs to credits to liability) |
+
+## Tool Reference
+
+### `scripts/negotiation_position_analyzer.py`
+
+Analyze contract text and classify provisions by negotiation position.
+
+```
+usage: negotiation_position_analyzer.py [-h] [--json] [--perspective {provider,client}]
+                                         input_file
+
+positional arguments:
+  input_file            Path to contract text file (.txt or .md)
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --perspective {provider,client}
+                        Analysis perspective (default: client)
+```
+
+**Outputs:** Provision-by-provision position classification (provider-favorable / balanced / client-favorable), overall position score, position distribution summary, and prioritized negotiation recommendations.
+
+### `scripts/deal_complexity_scorer.py`
+
+Score deal complexity across 7 dimensions and recommend negotiation parameters.
+
+```
+usage: deal_complexity_scorer.py [-h] [--json] [--deal-value DEAL_VALUE]
+                                  input_file
+
+positional arguments:
+  input_file            Path to JSON file with deal parameters
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --deal-value DEAL_VALUE
+                        Override deal value in dollars
+```
+
+**Outputs:** 7-dimension complexity breakdown (value, regulatory, technical, multi-party, duration, strategic importance, IP sensitivity), composite score, deal tier (1-5), recommended timeline, expected negotiation rounds, and key focus areas.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tech Contract Negotiation&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tech Contract Negotiation&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tech Contract Negotiation in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tech Contract Negotiation&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tech Contract Negotiation&quot;
+4. Description: &quot;Negotiation frameworks for technology services agreements, B2B contracts, and professional services deals. Use when reviewing or negotiating tech contracts.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/tech-contract-negotiation/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Tech Contract Negotiation&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Tech Contract Negotiation Skill
+
+## Overview
+
+Production-ready negotiation toolkit for technology services agreements, professional services contracts, and B2B transactions. Provides a Three-Position Framework (provider-favorable, balanced, client-favorable) for every major provision, Deal-Size Tactics across 5 tiers, Five-Tier Objection Handling, regulatory leverage arguments, and concession roadmaps. Designed for legal counsel, procurement leads, and sales/deal desk teams negotiating technology contracts from $100K to $10M+.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Negotiation Position Analyzer (`scripts/negotiation_position_analyzer.py`)
+
+Analyzes contract text and classifies each provision as provider-favorable, balanced, or client-favorable based on keyword patterns and structural analysis. Generates a position map and recommended negotiation priorities.
+
+```bash
+# Analyze a contract draft
+python scripts/negotiation_position_analyzer.py contract_draft.txt
+
+# JSON output for integration
+python scripts/negotiation_position_analyzer.py contract_draft.txt --json
+
+# Analyze from a specific party&#x27;s perspective
+python scripts/negotiation_position_analyzer.py contract_draft.txt --perspective client
+```
+
+### 2. Deal Complexity Scorer (`scripts/deal_complexity_scorer.py`)
+
+Takes deal parameters and scores complexity across 7 dimensions. Recommends deal tier (1-5), expected timeline, number of rounds, and key focus areas.
+
+```bash
+# Score deal complexity from parameters file
+python scripts/deal_complexity_scorer.py deal_params.json
+
+# JSON output
+python scripts/deal_complexity_scorer.py deal_params.json --json
+
+# Override deal value for quick what-if
+python scripts/deal_complexity_scorer.py deal_params.json --deal-value 5000000
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/three_position_framework.md` | Provider/balanced/client positions for 5 major provisions with deal-size tactics |
+| `references/objection_handling.md` | Five-tier objection methodology, prediction matrix, communication templates |
+| `references/regulatory_leverage.md` | GDPR, DORA, NIS2, SOX leverage arguments, concession roadmap, industry considerations |
+
+## Workflows
+
+### Workflow 1: Pre-Negotiation Assessment
+
+1. **Classify the deal** -- Run `deal_complexity_scorer.py` with deal parameters to determine tier, timeline, and focus areas
+2. **Analyze the draft** -- Run `negotiation_position_analyzer.py` on the initial contract to map current positions
+3. **Identify gaps** -- Compare position map against your target positions from `three_position_framework.md`
+4. **Prepare objection responses** -- Review `objection_handling.md` for predicted objections based on client type
+5. **Map regulatory leverage** -- Identify applicable frameworks from `regulatory_leverage.md`
+
+### Workflow 2: Active Negotiation
+
+1. **Open with position** -- Use the Opening Position Statement template from `objection_handling.md`
+2. **Handle pushback** -- Apply Five-Tier Objection Handling: Acknowledge, Market Context, Business Rationale, Alternatives, Bright Lines
+3. **Track concessions** -- Follow the 4-tier concession roadmap (Easy Gives through Bright Lines)
+4. **Re-analyze after redlines** -- Run `negotiation_position_analyzer.py` on each revised draft
+5. **Close** -- Use Closing the Deal template; verify no Bright Lines were crossed
+
+### Workflow 3: Deal Review and Approval
+
+1. **Final position analysis** -- Run analyzer on execution-ready draft
+2. **Complexity validation** -- Confirm final terms match expected deal tier parameters
+3. **Regulatory check** -- Verify all mandatory regulatory provisions are present
+4. **Document concessions** -- Record what was traded and why for future negotiations
+5. **Approval package** -- Combine position map, complexity score, and concession log
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Analyzer flags everything as &quot;provider-favorable&quot; | Input is a vendor&#x27;s first draft (expected behavior) | Use `--perspective provider` to flip the analysis; compare against balanced baseline |
+| Complexity scorer returns Tier 5 for a small deal | High regulatory or multi-jurisdictional flags triggered | Review the regulatory and jurisdiction inputs; lower if overestimated |
+| Position map shows no IP provisions detected | Contract uses non-standard terminology for IP clauses | Check for terms like &quot;work product,&quot; &quot;deliverables ownership,&quot; or &quot;background IP&quot; manually |
+| Deal timeline estimate seems too short | Scorer does not account for internal approval delays | Add internal review buffer (typically 1-2 weeks per approval level) to the estimated timeline |
+| Objection framework doesn&#x27;t cover a specific pushback | Counterparty raised an atypical demand | Start with Acknowledge tier; frame using closest Market Context example; escalate to Bright Lines if needed |
+| Regulatory leverage arguments rejected as irrelevant | Framework doesn&#x27;t apply to counterparty&#x27;s jurisdiction | Verify which regulations actually bind each party; remove inapplicable leverage points |
+
+## Success Criteria
+
+- **Position Accuracy**: Analyzer correctly classifies 85%+ of provisions when validated against expert review
+- **Deal Tier Alignment**: Complexity scorer tier matches actual negotiation effort within one tier for 90% of deals
+- **Negotiation Efficiency**: Average number of negotiation rounds reduced by 30% compared to ad-hoc approach
+- **Concession Tracking**: 100% of material concessions documented with rationale and trade-off analysis
+- **Bright Line Protection**: Zero instances of crossing defined Bright Lines without executive escalation and approval
+- **Regulatory Coverage**: All applicable regulatory provisions identified and addressed in 95%+ of contracts
+- **Time-to-Signature**: Deals close within estimated timeline +/- 20% for 80% of negotiations
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Technology services agreements, SaaS subscriptions, professional services contracts, and B2B licensing deals
+- Negotiation position analysis for liability, IP, payment, SLA, and warranty provisions
+- Deal complexity scoring with tier-based recommendations for timeline, rounds, and focus areas
+- Regulatory leverage for GDPR, DORA, NIS2, and SOX in technology contract contexts
+- Objection handling frameworks and communication templates for common negotiation scenarios
+
+**This skill does NOT cover:**
+- Employment agreements, M&amp;A transactions, real estate contracts, or consumer-facing terms of service
+- Jurisdiction-specific legal advice or attorney-client privileged analysis (this is a framework, not legal counsel)
+- Contract drafting from scratch (assumes an existing draft to analyze and negotiate)
+- Litigation strategy, dispute resolution beyond contract clauses, or enforcement proceedings
+- Price negotiation tactics for commodity purchases or non-technology procurement
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Treating every provision as a Bright Line | Counterparty disengages when everything is non-negotiable | Classify provisions into 4 concession tiers; trade Easy Gives early to build goodwill |
+| Skipping deal complexity assessment | Under-preparing for complex deals or over-preparing for simple ones | Always run complexity scorer first to calibrate effort, timeline, and approval requirements |
+| Using regulatory leverage when the regulation doesn&#x27;t apply | Destroys credibility and trust with informed counterparties | Verify applicability before citing any regulation; use the genuine-vs-preference test from the framework |
+| Accepting &quot;this is our standard template&quot; at face value | Every template is negotiable; accepting defaults leaves value on the table | Analyze the &quot;standard&quot; template with the position analyzer to identify moveable provisions |
+| Negotiating provisions in isolation | Conceding on SLAs without linking to liability caps creates exposure | Use the Three-Position Framework holistically; link related provisions (SLAs to credits to liability) |
+
+## Tool Reference
+
+### `scripts/negotiation_position_analyzer.py`
+
+Analyze contract text and classify provisions by negotiation position.
+
+```
+usage: negotiation_position_analyzer.py [-h] [--json] [--perspective {provider,client}]
+                                         input_file
+
+positional arguments:
+  input_file            Path to contract text file (.txt or .md)
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --perspective {provider,client}
+                        Analysis perspective (default: client)
+```
+
+**Outputs:** Provision-by-provision position classification (provider-favorable / balanced / client-favorable), overall position score, position distribution summary, and prioritized negotiation recommendations.
+
+### `scripts/deal_complexity_scorer.py`
+
+Score deal complexity across 7 dimensions and recommend negotiation parameters.
+
+```
+usage: deal_complexity_scorer.py [-h] [--json] [--deal-value DEAL_VALUE]
+                                  input_file
+
+positional arguments:
+  input_file            Path to JSON file with deal parameters
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output results as JSON
+  --deal-value DEAL_VALUE
+                        Override deal value in dollars
+```
+
+**Outputs:** 7-dimension complexity breakdown (value, regulatory, technical, multi-party, duration, strategic importance, IP sensitivity), composite score, deal tier (1-5), recommended timeline, expected negotiation rounds, and key focus areas.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tech Contract Negotiation&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tech Contract Negotiation&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tech Contract Negotiation in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tech Contract Negotiation&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tech Contract Negotiation&quot;
+4. Description: &quot;Negotiation frameworks for technology services agreements, B2B contracts, and professional services deals. Use when reviewing or negotiating tech contracts.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/tech-contract-negotiation/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

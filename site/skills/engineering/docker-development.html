@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Docker Development (Engineering domain).
 
 Automated analysis of Dockerfiles and docker-compose configurations. Identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/docker-development
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Docker Development (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Docker Development (Engineering domain).
 
 Automated analysis of Dockerfiles and docker-compose configurations. Identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations.
 
@@ -425,7 +447,342 @@ https://github.com/borghei/Claude-Skills/tree/main/docker-development
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Docker Development&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Docker Development
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Container Development &amp; Optimization
+
+## Overview
+
+The **Docker Development** skill provides automated analysis of Dockerfiles and docker-compose configurations. It identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations. Use this skill to enforce container standards across your team and catch issues before they reach production.
+
+## Quick Start
+
+```bash
+# Analyze a Dockerfile for best practices
+python scripts/dockerfile_analyzer.py --file Dockerfile
+
+# Analyze with JSON output
+python scripts/dockerfile_analyzer.py --file Dockerfile --format json
+
+# Validate a docker-compose file
+python scripts/compose_validator.py --file docker-compose.yml
+
+# Check for port conflicts across compose files
+python scripts/compose_validator.py --file docker-compose.yml --check-ports
+```
+
+## Tools Overview
+
+### dockerfile_analyzer.py
+
+Analyzes Dockerfiles for best practices, security issues, and optimization opportunities.
+
+| Feature | Description |
+|---------|-------------|
+| Layer optimization | Detects unnecessary layers, recommends combining RUN statements |
+| Multi-stage analysis | Validates multi-stage build patterns and final image size |
+| Security scanning | Flags running as root, use of latest tags, exposed secrets |
+| Base image checks | Recommends smaller base images (alpine, distroless, slim) |
+| Cache optimization | Identifies poor layer ordering that breaks Docker cache |
+
+```bash
+# Full analysis
+python scripts/dockerfile_analyzer.py --file Dockerfile
+
+# Security-focused scan
+python scripts/dockerfile_analyzer.py --file Dockerfile --security-only
+
+# JSON output for CI integration
+python scripts/dockerfile_analyzer.py --file Dockerfile --format json
+```
+
+### compose_validator.py
+
+Validates docker-compose files for correctness, dependency issues, and port conflicts.
+
+| Feature | Description |
+|---------|-------------|
+| Schema validation | Checks compose file structure and syntax |
+| Dependency graph | Validates depends_on chains for circular dependencies |
+| Port conflict detection | Identifies duplicate host port bindings |
+| Volume mount checks | Validates volume paths and mount configurations |
+| Network analysis | Checks network definitions and service connectivity |
+
+```bash
+# Full validation
+python scripts/compose_validator.py --file docker-compose.yml
+
+# Check port conflicts only
+python scripts/compose_validator.py --file docker-compose.yml --check-ports
+
+# JSON output
+python scripts/compose_validator.py --file docker-compose.yml --format json
+```
+
+## Workflows
+
+### Dockerfile Review Workflow
+
+1. **Analyze** - Run dockerfile_analyzer.py against the target Dockerfile
+2. **Review findings** - Address critical security issues first (root user, secrets)
+3. **Optimize layers** - Combine RUN statements, reorder for cache efficiency
+4. **Validate base images** - Switch to minimal base images where possible
+5. **Re-analyze** - Confirm improvements and verify no regressions
+
+### Compose Validation Workflow
+
+1. **Validate structure** - Run compose_validator.py for syntax and schema checks
+2. **Check dependencies** - Review service dependency graph for circular refs
+3. **Audit ports** - Ensure no host port conflicts across services
+4. **Review volumes** - Confirm volume mounts are correct and necessary
+5. **Network review** - Verify service isolation and connectivity
+
+### CI Integration Workflow
+
+```yaml
+# Example GitHub Actions step
+- name: Docker Lint
+  run: |
+    python scripts/dockerfile_analyzer.py --file Dockerfile --format json &gt; results.json
+    python scripts/compose_validator.py --file docker-compose.yml --format json &gt;&gt; results.json
+```
+
+## Reference Documentation
+
+- [Docker Best Practices](references/docker-best-practices.md) - Comprehensive guide to Dockerfile and Compose patterns
+
+## Common Patterns Quick Reference
+
+| Pattern | Good | Bad |
+|---------|------|-----|
+| Base image | `FROM python:3.12-slim` | `FROM python:latest` |
+| User | `USER appuser` | Running as root |
+| Layer combining | `RUN apt-get update &amp;&amp; apt-get install -y pkg` | Separate RUN for update and install |
+| COPY ordering | Copy requirements first, then code | Copy everything at once |
+| Multi-stage | Use builder stage + minimal runtime | Single stage with build tools |
+| Secrets | Use build secrets or env at runtime | `COPY .env .` or `ENV SECRET=value` |
+| Health checks | `HEALTHCHECK CMD curl -f http://localhost/` | No health check defined |
+| .dockerignore | Include node_modules, .git, etc. | No .dockerignore file |
+
+### Compose Patterns
+
+| Pattern | Good | Bad |
+|---------|------|-----|
+| Restart policy | `restart: unless-stopped` | No restart policy |
+| Resource limits | `deploy.resources.limits` set | Unlimited resources |
+| Named volumes | `volumes: [db-data:/var/lib/postgresql]` | Anonymous volumes |
+| Networks | Explicit network definitions | Default bridge only |
+| Environment | `env_file: .env` | Inline secrets in compose |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Docker Development&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Docker Development&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Docker Development in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Docker Development&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Docker Development&quot;
+4. Description: &quot;Automated analysis of Dockerfiles and docker-compose configurations. Identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/docker-development/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Docker Development&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Docker Development
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Container Development &amp; Optimization
+
+## Overview
+
+The **Docker Development** skill provides automated analysis of Dockerfiles and docker-compose configurations. It identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations. Use this skill to enforce container standards across your team and catch issues before they reach production.
+
+## Quick Start
+
+```bash
+# Analyze a Dockerfile for best practices
+python scripts/dockerfile_analyzer.py --file Dockerfile
+
+# Analyze with JSON output
+python scripts/dockerfile_analyzer.py --file Dockerfile --format json
+
+# Validate a docker-compose file
+python scripts/compose_validator.py --file docker-compose.yml
+
+# Check for port conflicts across compose files
+python scripts/compose_validator.py --file docker-compose.yml --check-ports
+```
+
+## Tools Overview
+
+### dockerfile_analyzer.py
+
+Analyzes Dockerfiles for best practices, security issues, and optimization opportunities.
+
+| Feature | Description |
+|---------|-------------|
+| Layer optimization | Detects unnecessary layers, recommends combining RUN statements |
+| Multi-stage analysis | Validates multi-stage build patterns and final image size |
+| Security scanning | Flags running as root, use of latest tags, exposed secrets |
+| Base image checks | Recommends smaller base images (alpine, distroless, slim) |
+| Cache optimization | Identifies poor layer ordering that breaks Docker cache |
+
+```bash
+# Full analysis
+python scripts/dockerfile_analyzer.py --file Dockerfile
+
+# Security-focused scan
+python scripts/dockerfile_analyzer.py --file Dockerfile --security-only
+
+# JSON output for CI integration
+python scripts/dockerfile_analyzer.py --file Dockerfile --format json
+```
+
+### compose_validator.py
+
+Validates docker-compose files for correctness, dependency issues, and port conflicts.
+
+| Feature | Description |
+|---------|-------------|
+| Schema validation | Checks compose file structure and syntax |
+| Dependency graph | Validates depends_on chains for circular dependencies |
+| Port conflict detection | Identifies duplicate host port bindings |
+| Volume mount checks | Validates volume paths and mount configurations |
+| Network analysis | Checks network definitions and service connectivity |
+
+```bash
+# Full validation
+python scripts/compose_validator.py --file docker-compose.yml
+
+# Check port conflicts only
+python scripts/compose_validator.py --file docker-compose.yml --check-ports
+
+# JSON output
+python scripts/compose_validator.py --file docker-compose.yml --format json
+```
+
+## Workflows
+
+### Dockerfile Review Workflow
+
+1. **Analyze** - Run dockerfile_analyzer.py against the target Dockerfile
+2. **Review findings** - Address critical security issues first (root user, secrets)
+3. **Optimize layers** - Combine RUN statements, reorder for cache efficiency
+4. **Validate base images** - Switch to minimal base images where possible
+5. **Re-analyze** - Confirm improvements and verify no regressions
+
+### Compose Validation Workflow
+
+1. **Validate structure** - Run compose_validator.py for syntax and schema checks
+2. **Check dependencies** - Review service dependency graph for circular refs
+3. **Audit ports** - Ensure no host port conflicts across services
+4. **Review volumes** - Confirm volume mounts are correct and necessary
+5. **Network review** - Verify service isolation and connectivity
+
+### CI Integration Workflow
+
+```yaml
+# Example GitHub Actions step
+- name: Docker Lint
+  run: |
+    python scripts/dockerfile_analyzer.py --file Dockerfile --format json &gt; results.json
+    python scripts/compose_validator.py --file docker-compose.yml --format json &gt;&gt; results.json
+```
+
+## Reference Documentation
+
+- [Docker Best Practices](references/docker-best-practices.md) - Comprehensive guide to Dockerfile and Compose patterns
+
+## Common Patterns Quick Reference
+
+| Pattern | Good | Bad |
+|---------|------|-----|
+| Base image | `FROM python:3.12-slim` | `FROM python:latest` |
+| User | `USER appuser` | Running as root |
+| Layer combining | `RUN apt-get update &amp;&amp; apt-get install -y pkg` | Separate RUN for update and install |
+| COPY ordering | Copy requirements first, then code | Copy everything at once |
+| Multi-stage | Use builder stage + minimal runtime | Single stage with build tools |
+| Secrets | Use build secrets or env at runtime | `COPY .env .` or `ENV SECRET=value` |
+| Health checks | `HEALTHCHECK CMD curl -f http://localhost/` | No health check defined |
+| .dockerignore | Include node_modules, .git, etc. | No .dockerignore file |
+
+### Compose Patterns
+
+| Pattern | Good | Bad |
+|---------|------|-----|
+| Restart policy | `restart: unless-stopped` | No restart policy |
+| Resource limits | `deploy.resources.limits` set | Unlimited resources |
+| Named volumes | `volumes: [db-data:/var/lib/postgresql]` | Anonymous volumes |
+| Networks | Explicit network definitions | Default bridge only |
+| Environment | `env_file: .env` | Inline secrets in compose |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Docker Development&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Docker Development&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Docker Development in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Docker Development&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Docker Development&quot;
+4. Description: &quot;Automated analysis of Dockerfiles and docker-compose configurations. Identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/docker-development/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

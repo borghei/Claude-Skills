@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Copy Editing (Marketing domain).
 
 Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Fr...
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/copy-editing
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Copy Editing (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Copy Editing (Marketing domain).
 
 Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Fr...
 
@@ -433,7 +455,958 @@ https://github.com/borghei/Claude-Skills/tree/main/copy-editing
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Copy Editing&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Copy Editing
+
+Systematic copy improvement through focused editorial passes that enhance clarity, voice, proof, and conversion impact.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [The Seven Sweeps Framework](#the-seven-sweeps-framework)
+- [Quick-Pass Editing Guide](#quick-pass-editing-guide)
+- [Common Copy Problems and Fixes](#common-copy-problems-and-fixes)
+- [Style Consistency Standards](#style-consistency-standards)
+- [Fact-Checking Protocol](#fact-checking-protocol)
+- [Editorial Checklist](#editorial-checklist)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+copy editing, editorial review, copy feedback, proofreading, content polishing, copy sweep, editorial standards, style consistency, grammar check, fact-checking, clarity editing, voice consistency, benefit framing, proof validation, specificity, conversion copy editing, marketing copy review, copy quality
+
+---
+
+## Quick Start
+
+### Full Copy Review (Seven Sweeps)
+
+1. Read through once without editing to understand the whole piece
+2. Sweep 1 — Clarity: flag confusing sentences, unclear references, jargon
+3. Sweep 2 — Voice and Tone: flag shifts in formality, personality inconsistencies
+4. Sweep 3 — So What: flag features without benefits, claims without consequences
+5. Sweep 4 — Prove It: flag unsubstantiated claims, missing social proof
+6. Sweep 5 — Specificity: flag vague language, round numbers, generic statements
+7. Sweep 6 — Heightened Emotion: strengthen pain points, aspirations, urgency
+8. Sweep 7 — Zero Risk: remove barriers near CTAs, add trust signals
+
+### Quick Copy Pass
+
+1. Cut filler words (very, really, just, actually, basically)
+2. Replace weak verbs (utilize &gt; use, facilitate &gt; help, leverage &gt; use)
+3. Fix passive voice (reports are generated &gt; we generate reports)
+4. Verify one idea per sentence, one topic per paragraph
+5. Check CTA for action orientation
+
+---
+
+## The Seven Sweeps Framework
+
+Edit through seven sequential passes. Each focuses on one dimension. After each sweep, verify previous sweeps are not compromised.
+
+### Sweep 1: Clarity
+
+**Focus:** Can the reader understand what you are saying on the first read?
+
+**What to check:**
+- Sentences trying to say too much (split them)
+- Unclear pronoun references (&quot;it&quot; — what is &quot;it&quot;?)
+- Jargon or insider language without explanation
+- Ambiguous statements that could be read two ways
+- Missing context that assumes reader knowledge
+
+**Clarity killers to fix:**
+
+| Problem | Fix |
+|---------|-----|
+| Sentence over 30 words | Split into two sentences |
+| Abstract language | Replace with concrete example |
+| Buried main point | Move to beginning of paragraph |
+| Three-clause sentence | Simplify to one or two clauses |
+| Undefined acronym | Spell out on first use |
+
+**After this sweep:** Confirm the &quot;Rule of One&quot; (one idea per section) and &quot;You Rule&quot; (copy speaks to the reader as &quot;you&quot;) are intact.
+
+### Sweep 2: Voice and Tone
+
+**Focus:** Does the copy sound consistent throughout?
+
+**What to check:**
+- Shifts between formal and casual language
+- Inconsistent brand personality (joking in one paragraph, corporate in the next)
+- Jarring mood changes without transition
+- Word choices that do not match the established voice
+- Mixing &quot;we&quot; and &quot;the company&quot; references
+
+**Voice consistency indicators:**
+
+| Consistent | Inconsistent |
+|-----------|-------------|
+| Same level of contractions throughout | Contractions in some sections, full forms in others |
+| Humor style maintained | Random joke in otherwise serious copy |
+| Same sentence structure patterns | Short punchy intro, corporate middle, casual close |
+| Consistent use of &quot;you&quot; | Switching between &quot;you,&quot; &quot;users,&quot; &quot;customers,&quot; &quot;one&quot; |
+
+**After this sweep:** Return to Sweep 1 to ensure voice edits did not introduce confusion.
+
+### Sweep 3: So What
+
+**Focus:** Does every claim answer &quot;why should I care?&quot;
+
+**The So What test:** For every statement, ask &quot;So what?&quot; If the copy does not answer with a deeper benefit, it needs work.
+
+| Before (features only) | After (feature + benefit) |
+|------------------------|--------------------------|
+| &quot;Our platform uses AI-powered analytics&quot; | &quot;Our AI analytics surface insights you would miss manually — so you make better decisions in half the time&quot; |
+| &quot;SOC 2 Type II certified&quot; | &quot;SOC 2 certified — your security team approves us in days, not months&quot; |
+| &quot;Real-time dashboard&quot; | &quot;See exactly what is happening right now, not what happened last week&quot; |
+
+**After this sweep:** Return to Sweeps 2 and 1.
+
+### Sweep 4: Prove It
+
+**Focus:** Is every claim backed with evidence?
+
+**Types of proof to verify:**
+
+| Proof Type | Strength | Example |
+|-----------|----------|---------|
+| Named testimonial | Strong | &quot;Sarah Chen, VP Marketing at Stripe: &#x27;Reduced our setup time by 60%&#x27;&quot; |
+| Specific statistic | Strong | &quot;2,847 teams use [Product] daily&quot; |
+| Case study reference | Strong | &quot;See how Linear reduced churn by 23% in 90 days&quot; |
+| Third-party validation | Strong | &quot;Named a Leader in Gartner&#x27;s Magic Quadrant 2025&quot; |
+| Customer logos | Medium | Recognizable brand logos with permission |
+| Generic claim | Weak — flag it | &quot;Customers love us,&quot; &quot;Industry-leading&quot; |
+
+**Common proof gaps to flag:**
+- &quot;Trusted by thousands&quot; (which thousands? give a number)
+- &quot;Industry-leading&quot; (according to whom? cite the source)
+- &quot;Best-in-class&quot; (by what measure?)
+- &quot;Customers love us&quot; (show them saying it)
+- Results claims without timeframe or specifics
+
+**After this sweep:** Return to Sweeps 3, 2, and 1.
+
+### Sweep 5: Specificity
+
+**Focus:** Is the copy concrete enough to be compelling?
+
+**Specificity upgrades:**
+
+| Vague | Specific |
+|-------|---------|
+| &quot;Save time&quot; | &quot;Save 4 hours every week&quot; |
+| &quot;Many customers&quot; | &quot;2,847 teams&quot; |
+| &quot;Fast results&quot; | &quot;Results in 14 days&quot; |
+| &quot;Improve your workflow&quot; | &quot;Cut reporting time from 4 hours to 15 minutes&quot; |
+| &quot;Great support&quot; | &quot;Average response time: 2 hours&quot; |
+| &quot;Easy to use&quot; | &quot;Set up in 10 minutes, no code required&quot; |
+| &quot;Affordable&quot; | &quot;Starting at $29/month&quot; |
+| &quot;Scalable&quot; | &quot;Handles 10,000 to 10 million records without slowdown&quot; |
+
+**Rule:** If a claim cannot be made specific, it is probably filler. Cut it or replace it with something verifiable.
+
+**After this sweep:** Return to Sweeps 4, 3, 2, and 1.
+
+### Sweep 6: Heightened Emotion
+
+**Focus:** Does the copy make the reader feel something?
+
+**Emotional dimensions to check:**
+
+| Emotion | Where to Use | Technique |
+|---------|-------------|-----------|
+| Pain/frustration | Problem section | Paint the &quot;before&quot; state vividly |
+| Relief | Solution section | Show the contrast with current pain |
+| Fear of missing out | Social proof | &quot;Teams like yours already use...&quot; |
+| Pride | Aspiration section | &quot;Be the team that...&quot; |
+| Confidence | CTA area | &quot;Join 2,847 teams who already...&quot; |
+| Urgency | Near CTA | Only if genuine (real deadline, limited spots) |
+
+**Emotion techniques:**
+- Paint the &quot;before&quot; state with sensory detail
+- Use micro-stories (1-2 sentences) from customer scenarios
+- Ask questions that prompt self-reflection
+- Reference shared experiences the audience recognizes
+
+**After this sweep:** Return to Sweeps 5, 4, 3, 2, and 1.
+
+### Sweep 7: Zero Risk
+
+**Focus:** Have we removed every barrier to action?
+
+**Friction checklist near CTAs:**
+- [ ] What happens after clicking is clear (not a mystery)
+- [ ] Objections addressed within 2 scrolls of the CTA
+- [ ] Trust signals visible (guarantee, certifications, customer count)
+- [ ] Next steps are specific (&quot;Start your 14-day free trial&quot; not &quot;Get started&quot;)
+- [ ] Risk reversals stated explicitly (money-back, no CC, cancel anytime)
+- [ ] Privacy concerns addressed if form collects data
+
+**After this sweep:** Return through all previous sweeps one final time.
+
+---
+
+## Quick-Pass Editing Guide
+
+### Word-Level Cuts
+
+**Always cut:**
+very, really, extremely, incredibly, quite, rather, somewhat, just, actually, basically, essentially, literally (unless literal), in order to (use &quot;to&quot;), the fact that, it should be noted that, it is important to
+
+**Always replace:**
+
+| Weak | Strong |
+|------|--------|
+| Utilize | Use |
+| Implement | Set up, build, create |
+| Leverage | Use, apply |
+| Facilitate | Help, enable |
+| Innovative | New, original, first-of-its-kind |
+| Robust | Strong, thorough, [be specific] |
+| Seamless | Smooth, easy, [be specific] |
+| Cutting-edge | Modern, latest, [be specific] |
+| Synergy | [Delete or be specific about the collaboration] |
+| Paradigm | [Delete or say what actually changed] |
+
+### Sentence-Level Checks
+
+- One idea per sentence
+- Vary sentence length (mix 8-word and 20-word sentences)
+- Front-load important information (do not bury the point)
+- Maximum 3 conjunctions per sentence
+- Active voice default (flip passive constructions)
+
+### Paragraph-Level Checks
+
+- One topic per paragraph
+- 2-4 sentences maximum for web copy
+- Strong opening sentence that states the paragraph&#x27;s point
+- Logical flow between paragraphs
+- White space for scannability
+
+---
+
+## Common Copy Problems and Fixes
+
+| Problem | Symptom | Fix |
+|---------|---------|-----|
+| Wall of features | List of what it does, no why | Add &quot;which means...&quot; after each feature |
+| Corporate speak | &quot;Leverage synergies to optimize outcomes&quot; | Ask &quot;How would a human say this?&quot; |
+| Weak opening | Starts with company history or vague statement | Lead with reader&#x27;s problem or desired outcome |
+| Buried CTA | Ask comes after too much buildup | Make CTA obvious, early, and repeated |
+| No proof | &quot;Customers love us&quot; with no evidence | Add specific testimonials, numbers, case references |
+| Generic claims | &quot;We help businesses grow&quot; | Specify who, how, and by how much |
+| Mixed audiences | Tries to speak to everyone | Pick one audience per page/section |
+| Feature overload | Every capability listed | Focus on 3-5 benefits that matter most |
+| Passive voice | &quot;Reports are generated by the system&quot; | &quot;The system generates reports&quot; |
+| Weasel words | &quot;Up to 50% improvement&quot; | State the median or typical result with context |
+
+---
+
+## Style Consistency Standards
+
+### Checklist for Style Consistency
+
+- [ ] Oxford comma: used consistently (or consistently omitted)
+- [ ] Contractions: consistent usage throughout
+- [ ] Heading case: consistent (sentence case or title case, not mixed)
+- [ ] Number style: consistent (spell out 1-9, numerals for 10+, or chosen standard)
+- [ ] Date format: consistent (March 9, 2026 or 2026-03-09, not mixed)
+- [ ] Brand name: capitalized and formatted consistently
+- [ ] Product/feature names: capitalized consistently per brand standards
+- [ ] Bulleted lists: consistent punctuation (periods or no periods)
+- [ ] Acronyms: spelled out on first use in each document
+- [ ] Em dashes, en dashes, hyphens: used correctly and consistently
+- [ ] Quotation marks: consistent style (straight or curly)
+
+### Common Style Conflicts
+
+| Decision | Option A | Option B | How to Decide |
+|----------|----------|----------|---------------|
+| Oxford comma | Yes | No | Pick one, document it, enforce it |
+| Heading capitalization | Sentence case | Title Case | Sentence case is modern standard |
+| &quot;Login&quot; vs &quot;Log in&quot; | One word (noun) | Two words (verb) | &quot;Log in&quot; as verb, &quot;Login&quot; as noun/adjective |
+| &quot;Setup&quot; vs &quot;Set up&quot; | One word (noun) | Two words (verb) | Same pattern as login |
+| Ampersand vs &quot;and&quot; | &amp; | and | &quot;and&quot; in prose, &quot;&amp;&quot; only in headings if brand standard |
+
+---
+
+## Fact-Checking Protocol
+
+### What to Verify
+
+- [ ] All statistics have a named source and year
+- [ ] Customer testimonials are attributed to real, named individuals
+- [ ] Customer logos are used with permission
+- [ ] Competitive claims are accurate and current
+- [ ] Product capabilities described are actually available (not roadmap items)
+- [ ] Pricing is current and matches the pricing page
+- [ ] Certifications and compliance claims are active (SOC 2, GDPR, etc.)
+- [ ] Awards and recognition are current year or specified year
+- [ ] Integration claims list actual integrations, not aspirational ones
+- [ ] Uptime/SLA claims match the actual SLA
+
+### Red Flags to Investigate
+
+- Round numbers without source (sounds made up)
+- Superlatives without qualification (&quot;fastest,&quot; &quot;best,&quot; &quot;only&quot;)
+- Claims that contradict other pages on the same site
+- Screenshots from an older version of the product
+- Competitor comparisons without date (may be outdated)
+
+---
+
+## Editorial Checklist
+
+### Pre-Edit
+
+- [ ] Understand the goal of this copy
+- [ ] Know the target audience
+- [ ] Identify the desired action
+- [ ] Read through once without editing
+
+### During Edit (Seven Sweeps Summary)
+
+- [ ] Sweep 1: Every sentence is immediately understandable
+- [ ] Sweep 2: Voice is consistent throughout
+- [ ] Sweep 3: Every feature connects to a benefit
+- [ ] Sweep 4: Claims are substantiated with evidence
+- [ ] Sweep 5: Vague words replaced with specifics
+- [ ] Sweep 6: Copy evokes appropriate emotion
+- [ ] Sweep 7: Barriers to action removed near CTAs
+
+### Post-Edit
+
+- [ ] No typos or grammatical errors
+- [ ] Consistent formatting throughout
+- [ ] Core message preserved through all edits
+- [ ] All links functional (if applicable)
+- [ ] Consistent style applied (see style checklist)
+
+---
+
+## Best Practices
+
+1. **Edit in passes, not all at once** — Trying to fix everything in one read misses issues. Each sweep catches what the others miss.
+
+2. **Preserve the author&#x27;s voice** — Good copy editing enhances; it does not replace. Maintain the original voice while improving clarity and impact.
+
+3. **Every edit needs a reason** — Never change a word without explaining the principle. &quot;Changed because it is clearer&quot; or &quot;Replaced because the original was vague.&quot;
+
+4. **Prioritize by conversion impact** — Fix the CTA before fixing a comma. Fix the headline before fixing paragraph 12.
+
+5. **Read aloud** — Voice and rhythm problems become obvious when read aloud. If it sounds wrong spoken, it reads wrong too.
+
+6. **Flag what you cannot fix** — If a claim needs proof the author must provide, flag it clearly. You can improve phrasing but you cannot invent evidence.
+
+7. **Re-check previous sweeps** — Each sweep can introduce issues caught by earlier sweeps. Always go back.
+
+8. **Cut first, add second** — Most marketing copy is 20-30% too long. Cut the fat before adding new content.
+
+9. **Get context before editing** — A copy edit without knowing the audience, goal, and voice standard produces misaligned feedback.
+
+10. **Track recurring issues** — If the same problems appear across multiple pieces, the issue is systemic. Flag it as a process improvement, not just an edit.
+
+---
+
+## Integration Points
+
+- **Copywriting** — Use for writing new copy from scratch. Copy Editing handles reviewing and improving existing copy.
+- **Content Humanizer** — Use when AI-generated copy needs humanization before editorial review.
+- **Content Production** — Use Copy Editing as part of the production pipeline between drafting and publishing.
+- **Brand Guidelines** — Reference brand voice and style standards during the Voice and Tone sweep.
+- **Marketing Psychology** — Apply psychological principles during the Heightened Emotion sweep.
+- **Content Strategy** — Use when the problem is what to say, not how to say it.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Same issues appear across multiple pieces from the same writer | Systemic writing habit, not a one-off error | Create a writer-specific checklist of recurring issues; address in style guide or training, not just per-piece edits |
+| Copy loses its original voice after editing | Editor over-corrected; replaced author voice with editor&#x27;s style | Preserve author voice — enhance clarity and impact without rewriting personality. Read original aloud before editing |
+| Edits introduce new inconsistencies | Previous sweeps not re-checked after later sweeps modified content | Always re-run earlier sweeps after making changes — Sweep 7 edits can break Sweep 1 clarity |
+| CTA buried or ineffective despite multiple edit passes | CTA was not the focus of any sweep — copy editing focused on prose quality | Prioritize CTA area first (Sweep 7: Zero Risk) before polishing earlier sections |
+| Fact-checking reveals unverifiable claims | Writer invented statistics or used outdated data | Flag and return to writer — editor cannot invent evidence. Document all unverifiable claims explicitly |
+| Style inconsistencies between sections | Multiple writers contributed or copy was assembled from different drafts | Run style consistency checklist end-to-end; standardize contractions, heading case, number format, and punctuation |
+
+---
+
+## Success Criteria
+
+- **Seven Sweeps completion**: All 7 sweeps completed per piece with previous sweeps re-verified after each pass
+- **Error rate**: Zero grammatical errors, typos, or broken links in published copy
+- **Style consistency**: 100% adherence to documented style guide (Oxford comma, heading case, number format, etc.)
+- **Fact verification**: All statistics have named source and year; all claims are verifiable or labeled as opinion
+- **CTA effectiveness**: Every piece has a clear, specific CTA visible within 2 scrolls of the content end
+- **Clarity score**: Every sentence understandable on first read — zero ambiguous pronoun references or multi-clause confusion
+- **Edit turnaround**: 48-hour maximum turnaround on editorial review with clear change documentation
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Seven Sweeps editorial framework (clarity, voice, so-what, proof, specificity, emotion, zero-risk)
+- Quick-pass editing (word-level, sentence-level, paragraph-level)
+- Style consistency auditing and enforcement
+- Fact-checking protocol for claims, statistics, and competitive references
+- Pre-edit and post-edit checklists
+- Common copy problem diagnosis and fixing
+
+**Out of scope:**
+- Writing new copy from scratch (use Copywriting skill)
+- AI content detection and humanization (use Content Humanizer)
+- SEO optimization passes (use Content Production optimization pipeline)
+- Content strategy or topic selection (use Content Strategy)
+- Visual design or layout feedback
+- Legal review of marketing claims
+
+**Known limitations:**
+- Cannot verify internal company claims (product capabilities, uptime SLAs) without access to product documentation
+- Fact-checking external claims requires access to original sources — may need writer input
+- Style consistency requires an existing style guide; without one, editor must make judgment calls
+- Emotional impact (Sweep 6) is subjective and varies by audience — use target audience context
+- Multi-language copy editing requires native-level proficiency in each language
+
+---
+
+## Scripts
+
+```bash
+# Score content readability with detailed metrics
+python scripts/readability_scorer.py article.md --json
+
+# Detect AI patterns that need humanization before editing
+python scripts/ai_pattern_detector.py article.md --verbose
+
+# Check style consistency across multiple documents
+python scripts/style_checker.py --files doc1.md doc2.md doc3.md --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Copy Editing&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Copy Editing&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Copy Editing in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Copy Editing&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Copy Editing&quot;
+4. Description: &quot;Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Fr...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/copy-editing/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Copy Editing&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Copy Editing
+
+Systematic copy improvement through focused editorial passes that enhance clarity, voice, proof, and conversion impact.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [The Seven Sweeps Framework](#the-seven-sweeps-framework)
+- [Quick-Pass Editing Guide](#quick-pass-editing-guide)
+- [Common Copy Problems and Fixes](#common-copy-problems-and-fixes)
+- [Style Consistency Standards](#style-consistency-standards)
+- [Fact-Checking Protocol](#fact-checking-protocol)
+- [Editorial Checklist](#editorial-checklist)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+copy editing, editorial review, copy feedback, proofreading, content polishing, copy sweep, editorial standards, style consistency, grammar check, fact-checking, clarity editing, voice consistency, benefit framing, proof validation, specificity, conversion copy editing, marketing copy review, copy quality
+
+---
+
+## Quick Start
+
+### Full Copy Review (Seven Sweeps)
+
+1. Read through once without editing to understand the whole piece
+2. Sweep 1 — Clarity: flag confusing sentences, unclear references, jargon
+3. Sweep 2 — Voice and Tone: flag shifts in formality, personality inconsistencies
+4. Sweep 3 — So What: flag features without benefits, claims without consequences
+5. Sweep 4 — Prove It: flag unsubstantiated claims, missing social proof
+6. Sweep 5 — Specificity: flag vague language, round numbers, generic statements
+7. Sweep 6 — Heightened Emotion: strengthen pain points, aspirations, urgency
+8. Sweep 7 — Zero Risk: remove barriers near CTAs, add trust signals
+
+### Quick Copy Pass
+
+1. Cut filler words (very, really, just, actually, basically)
+2. Replace weak verbs (utilize &gt; use, facilitate &gt; help, leverage &gt; use)
+3. Fix passive voice (reports are generated &gt; we generate reports)
+4. Verify one idea per sentence, one topic per paragraph
+5. Check CTA for action orientation
+
+---
+
+## The Seven Sweeps Framework
+
+Edit through seven sequential passes. Each focuses on one dimension. After each sweep, verify previous sweeps are not compromised.
+
+### Sweep 1: Clarity
+
+**Focus:** Can the reader understand what you are saying on the first read?
+
+**What to check:**
+- Sentences trying to say too much (split them)
+- Unclear pronoun references (&quot;it&quot; — what is &quot;it&quot;?)
+- Jargon or insider language without explanation
+- Ambiguous statements that could be read two ways
+- Missing context that assumes reader knowledge
+
+**Clarity killers to fix:**
+
+| Problem | Fix |
+|---------|-----|
+| Sentence over 30 words | Split into two sentences |
+| Abstract language | Replace with concrete example |
+| Buried main point | Move to beginning of paragraph |
+| Three-clause sentence | Simplify to one or two clauses |
+| Undefined acronym | Spell out on first use |
+
+**After this sweep:** Confirm the &quot;Rule of One&quot; (one idea per section) and &quot;You Rule&quot; (copy speaks to the reader as &quot;you&quot;) are intact.
+
+### Sweep 2: Voice and Tone
+
+**Focus:** Does the copy sound consistent throughout?
+
+**What to check:**
+- Shifts between formal and casual language
+- Inconsistent brand personality (joking in one paragraph, corporate in the next)
+- Jarring mood changes without transition
+- Word choices that do not match the established voice
+- Mixing &quot;we&quot; and &quot;the company&quot; references
+
+**Voice consistency indicators:**
+
+| Consistent | Inconsistent |
+|-----------|-------------|
+| Same level of contractions throughout | Contractions in some sections, full forms in others |
+| Humor style maintained | Random joke in otherwise serious copy |
+| Same sentence structure patterns | Short punchy intro, corporate middle, casual close |
+| Consistent use of &quot;you&quot; | Switching between &quot;you,&quot; &quot;users,&quot; &quot;customers,&quot; &quot;one&quot; |
+
+**After this sweep:** Return to Sweep 1 to ensure voice edits did not introduce confusion.
+
+### Sweep 3: So What
+
+**Focus:** Does every claim answer &quot;why should I care?&quot;
+
+**The So What test:** For every statement, ask &quot;So what?&quot; If the copy does not answer with a deeper benefit, it needs work.
+
+| Before (features only) | After (feature + benefit) |
+|------------------------|--------------------------|
+| &quot;Our platform uses AI-powered analytics&quot; | &quot;Our AI analytics surface insights you would miss manually — so you make better decisions in half the time&quot; |
+| &quot;SOC 2 Type II certified&quot; | &quot;SOC 2 certified — your security team approves us in days, not months&quot; |
+| &quot;Real-time dashboard&quot; | &quot;See exactly what is happening right now, not what happened last week&quot; |
+
+**After this sweep:** Return to Sweeps 2 and 1.
+
+### Sweep 4: Prove It
+
+**Focus:** Is every claim backed with evidence?
+
+**Types of proof to verify:**
+
+| Proof Type | Strength | Example |
+|-----------|----------|---------|
+| Named testimonial | Strong | &quot;Sarah Chen, VP Marketing at Stripe: &#x27;Reduced our setup time by 60%&#x27;&quot; |
+| Specific statistic | Strong | &quot;2,847 teams use [Product] daily&quot; |
+| Case study reference | Strong | &quot;See how Linear reduced churn by 23% in 90 days&quot; |
+| Third-party validation | Strong | &quot;Named a Leader in Gartner&#x27;s Magic Quadrant 2025&quot; |
+| Customer logos | Medium | Recognizable brand logos with permission |
+| Generic claim | Weak — flag it | &quot;Customers love us,&quot; &quot;Industry-leading&quot; |
+
+**Common proof gaps to flag:**
+- &quot;Trusted by thousands&quot; (which thousands? give a number)
+- &quot;Industry-leading&quot; (according to whom? cite the source)
+- &quot;Best-in-class&quot; (by what measure?)
+- &quot;Customers love us&quot; (show them saying it)
+- Results claims without timeframe or specifics
+
+**After this sweep:** Return to Sweeps 3, 2, and 1.
+
+### Sweep 5: Specificity
+
+**Focus:** Is the copy concrete enough to be compelling?
+
+**Specificity upgrades:**
+
+| Vague | Specific |
+|-------|---------|
+| &quot;Save time&quot; | &quot;Save 4 hours every week&quot; |
+| &quot;Many customers&quot; | &quot;2,847 teams&quot; |
+| &quot;Fast results&quot; | &quot;Results in 14 days&quot; |
+| &quot;Improve your workflow&quot; | &quot;Cut reporting time from 4 hours to 15 minutes&quot; |
+| &quot;Great support&quot; | &quot;Average response time: 2 hours&quot; |
+| &quot;Easy to use&quot; | &quot;Set up in 10 minutes, no code required&quot; |
+| &quot;Affordable&quot; | &quot;Starting at $29/month&quot; |
+| &quot;Scalable&quot; | &quot;Handles 10,000 to 10 million records without slowdown&quot; |
+
+**Rule:** If a claim cannot be made specific, it is probably filler. Cut it or replace it with something verifiable.
+
+**After this sweep:** Return to Sweeps 4, 3, 2, and 1.
+
+### Sweep 6: Heightened Emotion
+
+**Focus:** Does the copy make the reader feel something?
+
+**Emotional dimensions to check:**
+
+| Emotion | Where to Use | Technique |
+|---------|-------------|-----------|
+| Pain/frustration | Problem section | Paint the &quot;before&quot; state vividly |
+| Relief | Solution section | Show the contrast with current pain |
+| Fear of missing out | Social proof | &quot;Teams like yours already use...&quot; |
+| Pride | Aspiration section | &quot;Be the team that...&quot; |
+| Confidence | CTA area | &quot;Join 2,847 teams who already...&quot; |
+| Urgency | Near CTA | Only if genuine (real deadline, limited spots) |
+
+**Emotion techniques:**
+- Paint the &quot;before&quot; state with sensory detail
+- Use micro-stories (1-2 sentences) from customer scenarios
+- Ask questions that prompt self-reflection
+- Reference shared experiences the audience recognizes
+
+**After this sweep:** Return to Sweeps 5, 4, 3, 2, and 1.
+
+### Sweep 7: Zero Risk
+
+**Focus:** Have we removed every barrier to action?
+
+**Friction checklist near CTAs:**
+- [ ] What happens after clicking is clear (not a mystery)
+- [ ] Objections addressed within 2 scrolls of the CTA
+- [ ] Trust signals visible (guarantee, certifications, customer count)
+- [ ] Next steps are specific (&quot;Start your 14-day free trial&quot; not &quot;Get started&quot;)
+- [ ] Risk reversals stated explicitly (money-back, no CC, cancel anytime)
+- [ ] Privacy concerns addressed if form collects data
+
+**After this sweep:** Return through all previous sweeps one final time.
+
+---
+
+## Quick-Pass Editing Guide
+
+### Word-Level Cuts
+
+**Always cut:**
+very, really, extremely, incredibly, quite, rather, somewhat, just, actually, basically, essentially, literally (unless literal), in order to (use &quot;to&quot;), the fact that, it should be noted that, it is important to
+
+**Always replace:**
+
+| Weak | Strong |
+|------|--------|
+| Utilize | Use |
+| Implement | Set up, build, create |
+| Leverage | Use, apply |
+| Facilitate | Help, enable |
+| Innovative | New, original, first-of-its-kind |
+| Robust | Strong, thorough, [be specific] |
+| Seamless | Smooth, easy, [be specific] |
+| Cutting-edge | Modern, latest, [be specific] |
+| Synergy | [Delete or be specific about the collaboration] |
+| Paradigm | [Delete or say what actually changed] |
+
+### Sentence-Level Checks
+
+- One idea per sentence
+- Vary sentence length (mix 8-word and 20-word sentences)
+- Front-load important information (do not bury the point)
+- Maximum 3 conjunctions per sentence
+- Active voice default (flip passive constructions)
+
+### Paragraph-Level Checks
+
+- One topic per paragraph
+- 2-4 sentences maximum for web copy
+- Strong opening sentence that states the paragraph&#x27;s point
+- Logical flow between paragraphs
+- White space for scannability
+
+---
+
+## Common Copy Problems and Fixes
+
+| Problem | Symptom | Fix |
+|---------|---------|-----|
+| Wall of features | List of what it does, no why | Add &quot;which means...&quot; after each feature |
+| Corporate speak | &quot;Leverage synergies to optimize outcomes&quot; | Ask &quot;How would a human say this?&quot; |
+| Weak opening | Starts with company history or vague statement | Lead with reader&#x27;s problem or desired outcome |
+| Buried CTA | Ask comes after too much buildup | Make CTA obvious, early, and repeated |
+| No proof | &quot;Customers love us&quot; with no evidence | Add specific testimonials, numbers, case references |
+| Generic claims | &quot;We help businesses grow&quot; | Specify who, how, and by how much |
+| Mixed audiences | Tries to speak to everyone | Pick one audience per page/section |
+| Feature overload | Every capability listed | Focus on 3-5 benefits that matter most |
+| Passive voice | &quot;Reports are generated by the system&quot; | &quot;The system generates reports&quot; |
+| Weasel words | &quot;Up to 50% improvement&quot; | State the median or typical result with context |
+
+---
+
+## Style Consistency Standards
+
+### Checklist for Style Consistency
+
+- [ ] Oxford comma: used consistently (or consistently omitted)
+- [ ] Contractions: consistent usage throughout
+- [ ] Heading case: consistent (sentence case or title case, not mixed)
+- [ ] Number style: consistent (spell out 1-9, numerals for 10+, or chosen standard)
+- [ ] Date format: consistent (March 9, 2026 or 2026-03-09, not mixed)
+- [ ] Brand name: capitalized and formatted consistently
+- [ ] Product/feature names: capitalized consistently per brand standards
+- [ ] Bulleted lists: consistent punctuation (periods or no periods)
+- [ ] Acronyms: spelled out on first use in each document
+- [ ] Em dashes, en dashes, hyphens: used correctly and consistently
+- [ ] Quotation marks: consistent style (straight or curly)
+
+### Common Style Conflicts
+
+| Decision | Option A | Option B | How to Decide |
+|----------|----------|----------|---------------|
+| Oxford comma | Yes | No | Pick one, document it, enforce it |
+| Heading capitalization | Sentence case | Title Case | Sentence case is modern standard |
+| &quot;Login&quot; vs &quot;Log in&quot; | One word (noun) | Two words (verb) | &quot;Log in&quot; as verb, &quot;Login&quot; as noun/adjective |
+| &quot;Setup&quot; vs &quot;Set up&quot; | One word (noun) | Two words (verb) | Same pattern as login |
+| Ampersand vs &quot;and&quot; | &amp; | and | &quot;and&quot; in prose, &quot;&amp;&quot; only in headings if brand standard |
+
+---
+
+## Fact-Checking Protocol
+
+### What to Verify
+
+- [ ] All statistics have a named source and year
+- [ ] Customer testimonials are attributed to real, named individuals
+- [ ] Customer logos are used with permission
+- [ ] Competitive claims are accurate and current
+- [ ] Product capabilities described are actually available (not roadmap items)
+- [ ] Pricing is current and matches the pricing page
+- [ ] Certifications and compliance claims are active (SOC 2, GDPR, etc.)
+- [ ] Awards and recognition are current year or specified year
+- [ ] Integration claims list actual integrations, not aspirational ones
+- [ ] Uptime/SLA claims match the actual SLA
+
+### Red Flags to Investigate
+
+- Round numbers without source (sounds made up)
+- Superlatives without qualification (&quot;fastest,&quot; &quot;best,&quot; &quot;only&quot;)
+- Claims that contradict other pages on the same site
+- Screenshots from an older version of the product
+- Competitor comparisons without date (may be outdated)
+
+---
+
+## Editorial Checklist
+
+### Pre-Edit
+
+- [ ] Understand the goal of this copy
+- [ ] Know the target audience
+- [ ] Identify the desired action
+- [ ] Read through once without editing
+
+### During Edit (Seven Sweeps Summary)
+
+- [ ] Sweep 1: Every sentence is immediately understandable
+- [ ] Sweep 2: Voice is consistent throughout
+- [ ] Sweep 3: Every feature connects to a benefit
+- [ ] Sweep 4: Claims are substantiated with evidence
+- [ ] Sweep 5: Vague words replaced with specifics
+- [ ] Sweep 6: Copy evokes appropriate emotion
+- [ ] Sweep 7: Barriers to action removed near CTAs
+
+### Post-Edit
+
+- [ ] No typos or grammatical errors
+- [ ] Consistent formatting throughout
+- [ ] Core message preserved through all edits
+- [ ] All links functional (if applicable)
+- [ ] Consistent style applied (see style checklist)
+
+---
+
+## Best Practices
+
+1. **Edit in passes, not all at once** — Trying to fix everything in one read misses issues. Each sweep catches what the others miss.
+
+2. **Preserve the author&#x27;s voice** — Good copy editing enhances; it does not replace. Maintain the original voice while improving clarity and impact.
+
+3. **Every edit needs a reason** — Never change a word without explaining the principle. &quot;Changed because it is clearer&quot; or &quot;Replaced because the original was vague.&quot;
+
+4. **Prioritize by conversion impact** — Fix the CTA before fixing a comma. Fix the headline before fixing paragraph 12.
+
+5. **Read aloud** — Voice and rhythm problems become obvious when read aloud. If it sounds wrong spoken, it reads wrong too.
+
+6. **Flag what you cannot fix** — If a claim needs proof the author must provide, flag it clearly. You can improve phrasing but you cannot invent evidence.
+
+7. **Re-check previous sweeps** — Each sweep can introduce issues caught by earlier sweeps. Always go back.
+
+8. **Cut first, add second** — Most marketing copy is 20-30% too long. Cut the fat before adding new content.
+
+9. **Get context before editing** — A copy edit without knowing the audience, goal, and voice standard produces misaligned feedback.
+
+10. **Track recurring issues** — If the same problems appear across multiple pieces, the issue is systemic. Flag it as a process improvement, not just an edit.
+
+---
+
+## Integration Points
+
+- **Copywriting** — Use for writing new copy from scratch. Copy Editing handles reviewing and improving existing copy.
+- **Content Humanizer** — Use when AI-generated copy needs humanization before editorial review.
+- **Content Production** — Use Copy Editing as part of the production pipeline between drafting and publishing.
+- **Brand Guidelines** — Reference brand voice and style standards during the Voice and Tone sweep.
+- **Marketing Psychology** — Apply psychological principles during the Heightened Emotion sweep.
+- **Content Strategy** — Use when the problem is what to say, not how to say it.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Same issues appear across multiple pieces from the same writer | Systemic writing habit, not a one-off error | Create a writer-specific checklist of recurring issues; address in style guide or training, not just per-piece edits |
+| Copy loses its original voice after editing | Editor over-corrected; replaced author voice with editor&#x27;s style | Preserve author voice — enhance clarity and impact without rewriting personality. Read original aloud before editing |
+| Edits introduce new inconsistencies | Previous sweeps not re-checked after later sweeps modified content | Always re-run earlier sweeps after making changes — Sweep 7 edits can break Sweep 1 clarity |
+| CTA buried or ineffective despite multiple edit passes | CTA was not the focus of any sweep — copy editing focused on prose quality | Prioritize CTA area first (Sweep 7: Zero Risk) before polishing earlier sections |
+| Fact-checking reveals unverifiable claims | Writer invented statistics or used outdated data | Flag and return to writer — editor cannot invent evidence. Document all unverifiable claims explicitly |
+| Style inconsistencies between sections | Multiple writers contributed or copy was assembled from different drafts | Run style consistency checklist end-to-end; standardize contractions, heading case, number format, and punctuation |
+
+---
+
+## Success Criteria
+
+- **Seven Sweeps completion**: All 7 sweeps completed per piece with previous sweeps re-verified after each pass
+- **Error rate**: Zero grammatical errors, typos, or broken links in published copy
+- **Style consistency**: 100% adherence to documented style guide (Oxford comma, heading case, number format, etc.)
+- **Fact verification**: All statistics have named source and year; all claims are verifiable or labeled as opinion
+- **CTA effectiveness**: Every piece has a clear, specific CTA visible within 2 scrolls of the content end
+- **Clarity score**: Every sentence understandable on first read — zero ambiguous pronoun references or multi-clause confusion
+- **Edit turnaround**: 48-hour maximum turnaround on editorial review with clear change documentation
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Seven Sweeps editorial framework (clarity, voice, so-what, proof, specificity, emotion, zero-risk)
+- Quick-pass editing (word-level, sentence-level, paragraph-level)
+- Style consistency auditing and enforcement
+- Fact-checking protocol for claims, statistics, and competitive references
+- Pre-edit and post-edit checklists
+- Common copy problem diagnosis and fixing
+
+**Out of scope:**
+- Writing new copy from scratch (use Copywriting skill)
+- AI content detection and humanization (use Content Humanizer)
+- SEO optimization passes (use Content Production optimization pipeline)
+- Content strategy or topic selection (use Content Strategy)
+- Visual design or layout feedback
+- Legal review of marketing claims
+
+**Known limitations:**
+- Cannot verify internal company claims (product capabilities, uptime SLAs) without access to product documentation
+- Fact-checking external claims requires access to original sources — may need writer input
+- Style consistency requires an existing style guide; without one, editor must make judgment calls
+- Emotional impact (Sweep 6) is subjective and varies by audience — use target audience context
+- Multi-language copy editing requires native-level proficiency in each language
+
+---
+
+## Scripts
+
+```bash
+# Score content readability with detailed metrics
+python scripts/readability_scorer.py article.md --json
+
+# Detect AI patterns that need humanization before editing
+python scripts/ai_pattern_detector.py article.md --verbose
+
+# Check style consistency across multiple documents
+python scripts/style_checker.py --files doc1.md doc2.md doc3.md --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Copy Editing&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Copy Editing&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Copy Editing in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Copy Editing&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Copy Editing&quot;
+4. Description: &quot;Systematic copy editing through focused passes covering clarity, voice consistency, benefit framing, proof validation, specificity, emotional impact, and friction removal. Includes the Seven Sweeps Fr...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/copy-editing/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

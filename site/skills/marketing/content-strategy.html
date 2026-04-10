@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Content Strategy (Marketing domain).
 
 Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what conte...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/content-strategy
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Content Strategy (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Content Strategy (Marketing domain).
 
 Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what conte...
 
@@ -439,7 +461,942 @@ https://github.com/borghei/Claude-Skills/tree/main/content-strategy
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Content Strategy&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Content Strategy
+
+Strategic content planning that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [Core Workflows](#core-workflows)
+- [Content Pillar Framework](#content-pillar-framework)
+- [Audience Research Methodology](#audience-research-methodology)
+- [Topic Clustering](#topic-clustering)
+- [Funnel Mapping](#funnel-mapping)
+- [Content Audit Framework](#content-audit-framework)
+- [Searchable vs. Shareable Matrix](#searchable-vs-shareable-matrix)
+- [Competitive Content Analysis](#competitive-content-analysis)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+content strategy, content planning, content pillars, topic clusters, content calendar, audience research, content audit, funnel mapping, content gaps, editorial planning, blog strategy, content ideas, topic ideation, SEO content strategy, content roadmap, content marketing strategy, content performance, keyword research, buyer journey content, search intent mapping
+
+---
+
+## Quick Start
+
+### Build a Content Strategy from Scratch
+
+1. Define 3-5 content pillars aligned with business goals and audience needs
+2. Conduct audience research to identify questions, pain points, and language
+3. Build topic clusters around each pillar with keyword targets
+4. Map topics to funnel stages (awareness, consideration, decision)
+5. Prioritize by searchability, business value, and competitive gap
+6. Build an editorial calendar with publishing cadence
+
+### Audit and Improve Existing Strategy
+
+1. Inventory all existing content with performance metrics
+2. Classify each piece by pillar, funnel stage, and format
+3. Identify gaps (missing topics, underserved funnel stages, outdated content)
+4. Score each piece on traffic, engagement, conversion, and relevance
+5. Build remediation plan: update, consolidate, remove, or create new
+
+---
+
+## Core Workflows
+
+### Workflow 1: Strategy Development
+
+**Step 1: Business Context Gathering**
+
+Before planning content, understand the business foundation:
+
+```markdown
+## Strategy Context
+- Business goal for content: [Traffic / Leads / Brand awareness / Thought leadership]
+- Product/service: [What you sell and to whom]
+- Ideal customer profile: [Industry, company size, role, seniority]
+- Sales cycle: [Self-serve / Sales-assisted / Enterprise]
+- Current content state: [Starting fresh / Some content / Mature library]
+- Resources: [Writers, budget, publishing capacity per week/month]
+- Competitors producing content: [Top 3-5 competitor blogs]
+```
+
+**Step 2: Customer Research for Content**
+
+Mine these sources for content topics:
+
+| Source | What to Extract | How to Use |
+|--------|----------------|-----------|
+| Sales call recordings | Questions prospects ask before buying | Create content answering each question |
+| Support tickets | Recurring problems and confusion | Tutorial and troubleshooting content |
+| Customer interviews | Language they use to describe problems | Use their exact words in headlines and copy |
+| Product reviews (yours + competitors) | Praise and complaints | Content addressing concerns, amplifying strengths |
+| Community forums (Reddit, Slack, Discord) | Questions, debates, misconceptions | Topic ideas with proven demand |
+| Search console queries | What people search to find you | Optimize for highest-potential queries |
+
+**Step 3: Define Content Pillars**
+
+Pillars are the 3-5 broad topic areas your content focuses on. Each pillar should:
+- Connect directly to your product or expertise
+- Address a topic your audience actively seeks information about
+- Support your business goals (traffic, leads, authority)
+- Be broad enough to generate 20+ subtopics
+- Be specific enough to establish expertise
+
+**Step 4: Build Topic Clusters**
+
+For each pillar, develop a cluster of 10-25 topics:
+
+```markdown
+## Pillar: [Topic Area]
+Pillar page: [Comprehensive guide serving as the hub]
+
+### Supporting Topics
+1. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+2. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+3. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+...
+
+### Internal Linking Plan
+- All supporting topics link to pillar page
+- Pillar page links to all supporting topics
+- Related supporting topics cross-link to each other
+```
+
+**Step 5: Prioritize Topics**
+
+Score each topic on a priority matrix:
+
+| Factor | Weight | Scoring |
+|--------|--------|---------|
+| Search volume | 25% | High (3), Medium (2), Low (1) |
+| Keyword difficulty | 20% | Easy (3), Medium (2), Hard (1) |
+| Business relevance | 30% | Direct product connection (3), Adjacent (2), Tangential (1) |
+| Competitive gap | 15% | No good content exists (3), Beatable content (2), Strong competitors (1) |
+| Content asset value | 10% | Evergreen + repurposable (3), Seasonal (2), One-time (1) |
+
+Priority score = weighted sum. Execute highest scores first.
+
+### Workflow 2: Content Audit
+
+**Step 1: Inventory All Content**
+
+Build a content inventory spreadsheet:
+
+| URL | Title | Pillar | Format | Publish Date | Last Updated | Monthly Traffic | Avg Time on Page | Conversions | Target Keyword | Ranking Position |
+|-----|-------|--------|--------|-------------|-------------|----------------|-----------------|-------------|---------------|-----------------|
+
+**Step 2: Classify Each Piece**
+
+For each piece, determine:
+- **Pillar alignment**: Which pillar does it belong to? (Or does it belong to none?)
+- **Funnel stage**: Awareness, consideration, or decision?
+- **Content type**: Tutorial, comparison, thought leadership, news, case study?
+- **Status**: Current, outdated, thin, duplicate, orphaned?
+
+**Step 3: Score Performance**
+
+| Score | Traffic | Engagement | Conversion | Action |
+|-------|---------|-----------|------------|--------|
+| A (top 20%) | High traffic | Above avg time on page | Drives conversions | Protect, repurpose, update regularly |
+| B (middle 40%) | Moderate | Average engagement | Some conversions | Optimize, improve, interlink |
+| C (next 30%) | Low | Below average | Minimal | Update or consolidate |
+| D (bottom 10%) | Near zero | High bounce | None | Redirect, remove, or completely rewrite |
+
+**Step 4: Build Remediation Plan**
+
+| Action | When | How |
+|--------|------|-----|
+| Update | Content is B or C tier with good topic but outdated info | Refresh data, add new sections, update publish date |
+| Consolidate | Multiple thin pieces on same topic | Merge into one comprehensive piece, redirect old URLs |
+| Remove | Content is irrelevant, duplicate, or unfixable | 301 redirect to most relevant remaining page |
+| Create new | Gap exists in pillar coverage | Add to editorial calendar with priority score |
+| Optimize | Content ranks #4-20 for target keyword | On-page SEO improvements, better intro, internal links |
+
+---
+
+## Content Pillar Framework
+
+### Pillar Design Principles
+
+**Example Pillar Structure for a SaaS Product:**
+
+| Pillar | Business Connection | Audience Need | Content Types |
+|--------|-------------------|--------------|---------------|
+| [Core problem you solve] | Direct product relevance | Actively searching for solutions | How-to guides, tutorials, comparisons |
+| [Industry your audience works in] | Thought leadership | Staying current on trends | Analysis, predictions, benchmarks |
+| [Adjacent skill your audience needs] | Trust building | Professional development | Frameworks, templates, playbooks |
+| [Use case deep dives] | Product education | Understanding applications | Case studies, walkthroughs, examples |
+
+### Pillar Page Structure
+
+Each pillar should have a comprehensive hub page (2,000-4,000 words) that:
+- Defines the topic comprehensively
+- Links to all supporting cluster content
+- Targets the broadest keyword in the cluster
+- Gets updated as new cluster content publishes
+- Serves as the authority page for the topic area
+
+---
+
+## Audience Research Methodology
+
+### Research Framework
+
+| Method | Time Required | Quality | Best For |
+|--------|-------------|---------|----------|
+| Customer interview analysis | 2-4 hours | Highest | Understanding language, pain points, objections |
+| Sales call review | 1-2 hours | High | Identifying pre-purchase questions |
+| Support ticket mining | 1-2 hours | High | Finding confusion points and tutorial needs |
+| Competitor comment analysis | 1 hour | Medium | Discovering unmet content needs |
+| Community forum research | 1-2 hours | Medium | Finding real questions and debates |
+| Search console analysis | 30 min | Medium | Understanding what queries already reach you |
+| Keyword research tools | 1-2 hours | Medium | Quantifying demand for topics |
+
+### Customer Language Extraction
+
+The most valuable output of audience research is exact language:
+
+| Customer Says | Content Opportunity |
+|--------------|-------------------|
+| &quot;I wish I knew...&quot; | Educational content using their exact framing |
+| &quot;The hardest part is...&quot; | Tutorial content addressing that specific difficulty |
+| &quot;I always forget to...&quot; | Checklist or template content |
+| &quot;Everyone says to do X, but...&quot; | Contrarian or nuanced content |
+| &quot;Is it worth it to...&quot; | ROI analysis or comparison content |
+| &quot;What&#x27;s the difference between...&quot; | Comparison or explainer content |
+
+---
+
+## Funnel Mapping
+
+### Content by Funnel Stage
+
+| Stage | Reader Mindset | Content Goal | Content Types | Metrics |
+|-------|---------------|-------------|---------------|---------|
+| Awareness | &quot;I have a problem&quot; | Attract and educate | Blog posts, videos, infographics, social content | Traffic, impressions, shares |
+| Consideration | &quot;What are my options?&quot; | Build trust and differentiate | Comparisons, case studies, guides, webinars | Time on page, email signups, return visits |
+| Decision | &quot;Is this the right solution?&quot; | Convert | Product pages, demos, free trials, ROI calculators | Signups, trials, demo requests, purchases |
+
+### Funnel Mapping Template
+
+For each content pillar, ensure coverage across all funnel stages:
+
+```markdown
+## Pillar: [Topic]
+
+### Awareness Topics (attract new visitors)
+- [Topic targeting broad informational keyword]
+- [Topic answering common beginner question]
+- [Topic providing industry data or benchmark]
+
+### Consideration Topics (build trust and preference)
+- [Topic comparing approaches or solutions]
+- [Topic showing how to evaluate options]
+- [Case study demonstrating results]
+
+### Decision Topics (drive conversion)
+- [Product-specific tutorial or walkthrough]
+- [ROI calculator or assessment tool]
+- [FAQ addressing buying objections]
+```
+
+---
+
+## Searchable vs. Shareable Matrix
+
+### Understanding the Distinction
+
+| Dimension | Searchable Content | Shareable Content |
+|-----------|-------------------|-------------------|
+| Discovery | People search for it (keyword-driven) | People share it (social-driven) |
+| Lifespan | Evergreen (months to years) | Timely (days to weeks) |
+| Examples | &quot;How to set up GA4 tracking&quot; | &quot;The state of marketing in 2026&quot; |
+| Traffic pattern | Steady, compounding | Spike, then decline |
+| Optimization | SEO-first | Hook and emotion-first |
+| Measurement | Organic traffic, rankings | Shares, engagement, referral traffic |
+
+### Strategy Balance
+
+Most content strategies should be:
+- 60-70% searchable (sustainable traffic engine)
+- 20-30% shareable (brand awareness, audience growth)
+- 10% promotional (product launches, offers)
+
+### Content Type Classification
+
+| Content Type | Searchable | Shareable | Both |
+|-------------|-----------|-----------|------|
+| How-to guides | High | Low | — |
+| Original research | Medium | High | Yes |
+| Comparisons | High | Medium | Yes |
+| Thought leadership | Low | High | — |
+| Templates/tools | High | Medium | Yes |
+| Case studies | Medium | Medium | Yes |
+| Industry news takes | Low | High | — |
+| Tutorials | High | Low | — |
+| Frameworks/playbooks | Medium | High | Yes |
+
+---
+
+## Competitive Content Analysis
+
+### Analysis Framework
+
+For each top competitor:
+
+```markdown
+## Competitor: [Name]
+
+### Content Inventory
+- Blog frequency: [Posts per week/month]
+- Content types: [Formats they use]
+- Average word count: [Length]
+- Primary topics: [Their content pillars]
+
+### Strengths
+- [What they do well]
+- [Topics where they dominate]
+
+### Gaps
+- [Topics they don&#x27;t cover]
+- [Angles they miss]
+- [Outdated content that could be beaten]
+
+### Opportunity
+- [Where you can win with better content]
+- [Underserved topics in their coverage]
+```
+
+### Competitive Gap Scoring
+
+| Topic | Competitor A | Competitor B | Competitor C | Your Coverage | Gap Score |
+|-------|-------------|-------------|-------------|---------------|-----------|
+| [Topic 1] | Strong | None | Weak | None | High opportunity |
+| [Topic 2] | Strong | Strong | Strong | Weak | Improve existing |
+| [Topic 3] | None | None | None | None | Blue ocean opportunity |
+
+---
+
+## Best Practices
+
+1. **Strategy before production** — A mediocre topic executed well is still a mediocre result. Spend time picking the right topics.
+
+2. **Customer research is non-negotiable** — Content strategy built without customer input is guessing. Mine sales calls, support tickets, and customer language before planning.
+
+3. **Cover the full funnel** — Most teams over-index on awareness content. Ensure each pillar has consideration and decision-stage content too.
+
+4. **Prioritize by business impact, not search volume** — A 500-volume keyword with high purchase intent outperforms a 10,000-volume keyword with no commercial relevance.
+
+5. **Audit before you create** — Most content libraries have underperforming content that could be improved for more impact than writing something new.
+
+6. **Interlink systematically** — Topic clusters only work when content is connected through internal links. Build linking into the production process.
+
+7. **Refresh &gt; Publish** — Updating a post ranking #8 to reach #3 produces more traffic than a new post starting at position #50.
+
+8. **One pillar at a time** — Build depth in one pillar before spreading across all of them. Authority comes from depth, not breadth.
+
+9. **Document your strategy** — A strategy that only lives in someone&#x27;s head is not a strategy. Write it down, share it, refer to it.
+
+10. **Measure quarterly** — Content strategy is a 6-12 month investment. Monthly reviews for tactics, quarterly reviews for strategy adjustments.
+
+---
+
+## Integration Points
+
+- **Content Production** — Use for executing the strategy (writing, editing, publishing). Content Strategy decides what; Content Production does it.
+- **SEO Specialist** — Use for technical SEO and keyword research to inform topic selection and prioritization.
+- **AI SEO** — Use for optimizing content specifically for AI search citation alongside traditional SEO.
+- **Copywriting** — Use when strategy identifies need for landing pages or conversion copy.
+- **Social Content** — Use for distributing content across social platforms after publication.
+- **Marketing Context** — Use as the foundation. Content strategy should align with ICP, positioning, and business goals.
+- **Campaign Analytics** — Use to measure content performance and inform strategy adjustments.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content published consistently but no organic traffic growth | Topics selected without keyword research or targeting zero-volume queries | Re-prioritize using search volume x business relevance x competitive gap scoring matrix |
+| All content is awareness-stage, no leads generated | Over-indexing on top-of-funnel content without consideration/decision stage pieces | Audit funnel coverage per pillar; create 2-3 consideration and decision pieces per pillar |
+| Topic cannibalization across content pieces | Multiple articles targeting the same keyword without differentiation | Map one primary keyword per page; consolidate competing pieces or differentiate angles |
+| Content calendar frequently disrupted | Production timelines too tight or no buffer for reviews and revisions | Add 3-day buffer per piece; batch brief creation 4-6 pieces at a time |
+| Competitor consistently outranks on shared topics | Competitor has stronger E-E-A-T signals or deeper content coverage | Analyze competitor content depth; add original data, expert quotes, and experience signals |
+| Content audit reveals 70%+ of library is underperforming | Strategy was never defined — content was reactive, not planned | Start with 3 content pillars, build 10-15 cluster topics per pillar, then produce systematically |
+
+---
+
+## Success Criteria
+
+- **Pillar coverage**: 3-5 content pillars defined with 15+ cluster topics each, covering all three funnel stages
+- **Organic traffic contribution**: Content driving 40%+ of total organic traffic within 12 months
+- **Topic cluster completeness**: Each pillar has hub page + 10+ supporting pieces with bidirectional internal links
+- **Content freshness**: 80%+ of library updated within the last 12 months; high-value content refreshed quarterly
+- **Funnel balance**: Content split approximately 60% awareness, 25% consideration, 15% decision (or adjusted per business model)
+- **Conversion from content**: Content-attributed leads growing 10%+ quarter-over-quarter
+- **Search visibility**: 50%+ of target keywords ranking in top 20 within 6 months of strategy execution
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Content pillar definition and topic cluster planning
+- Audience research methodology for content topics
+- Keyword-informed topic prioritization
+- Funnel mapping (awareness, consideration, decision)
+- Content audit and remediation planning
+- Competitive content gap analysis
+- Editorial calendar structure and cadence planning
+
+**Out of scope:**
+- Content writing and production (use Content Production)
+- SEO technical optimization (use SEO Specialist)
+- Social media distribution strategy (use Social Content)
+- Paid content promotion and advertising
+- Content management system selection or setup
+- Brand voice and messaging development
+
+**Known limitations:**
+- Content strategy requires 6-12 months to show compounding results — short-term ROI expectations are unrealistic
+- AI Overviews reducing organic CTR means position 1 delivers fewer clicks than historical benchmarks
+- Keyword volume data from tools is estimated and varies between providers
+- Content audit accuracy depends on access to Google Search Console and analytics data
+- Competitive content analysis is point-in-time; competitors update strategies continuously
+
+---
+
+## Scripts
+
+```bash
+# Generate a content calendar plan from topic list
+python scripts/content_calendar_planner.py --topics topics.csv --cadence weekly --json
+
+# Analyze headlines for click-worthiness and SEO
+python scripts/headline_analyzer.py --headlines headlines.txt --json
+
+# Score content brief completeness
+python scripts/content_brief_generator.py --keyword &quot;cloud cost optimization&quot; --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Content Strategy&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Content Strategy&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Content Strategy in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Content Strategy&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Content Strategy&quot;
+4. Description: &quot;Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what conte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/content-strategy/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Content Strategy&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Content Strategy
+
+Strategic content planning that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.
+
+---
+
+## Table of Contents
+
+- [Keywords](#keywords)
+- [Quick Start](#quick-start)
+- [Core Workflows](#core-workflows)
+- [Content Pillar Framework](#content-pillar-framework)
+- [Audience Research Methodology](#audience-research-methodology)
+- [Topic Clustering](#topic-clustering)
+- [Funnel Mapping](#funnel-mapping)
+- [Content Audit Framework](#content-audit-framework)
+- [Searchable vs. Shareable Matrix](#searchable-vs-shareable-matrix)
+- [Competitive Content Analysis](#competitive-content-analysis)
+- [Best Practices](#best-practices)
+- [Integration Points](#integration-points)
+
+---
+
+## Keywords
+
+content strategy, content planning, content pillars, topic clusters, content calendar, audience research, content audit, funnel mapping, content gaps, editorial planning, blog strategy, content ideas, topic ideation, SEO content strategy, content roadmap, content marketing strategy, content performance, keyword research, buyer journey content, search intent mapping
+
+---
+
+## Quick Start
+
+### Build a Content Strategy from Scratch
+
+1. Define 3-5 content pillars aligned with business goals and audience needs
+2. Conduct audience research to identify questions, pain points, and language
+3. Build topic clusters around each pillar with keyword targets
+4. Map topics to funnel stages (awareness, consideration, decision)
+5. Prioritize by searchability, business value, and competitive gap
+6. Build an editorial calendar with publishing cadence
+
+### Audit and Improve Existing Strategy
+
+1. Inventory all existing content with performance metrics
+2. Classify each piece by pillar, funnel stage, and format
+3. Identify gaps (missing topics, underserved funnel stages, outdated content)
+4. Score each piece on traffic, engagement, conversion, and relevance
+5. Build remediation plan: update, consolidate, remove, or create new
+
+---
+
+## Core Workflows
+
+### Workflow 1: Strategy Development
+
+**Step 1: Business Context Gathering**
+
+Before planning content, understand the business foundation:
+
+```markdown
+## Strategy Context
+- Business goal for content: [Traffic / Leads / Brand awareness / Thought leadership]
+- Product/service: [What you sell and to whom]
+- Ideal customer profile: [Industry, company size, role, seniority]
+- Sales cycle: [Self-serve / Sales-assisted / Enterprise]
+- Current content state: [Starting fresh / Some content / Mature library]
+- Resources: [Writers, budget, publishing capacity per week/month]
+- Competitors producing content: [Top 3-5 competitor blogs]
+```
+
+**Step 2: Customer Research for Content**
+
+Mine these sources for content topics:
+
+| Source | What to Extract | How to Use |
+|--------|----------------|-----------|
+| Sales call recordings | Questions prospects ask before buying | Create content answering each question |
+| Support tickets | Recurring problems and confusion | Tutorial and troubleshooting content |
+| Customer interviews | Language they use to describe problems | Use their exact words in headlines and copy |
+| Product reviews (yours + competitors) | Praise and complaints | Content addressing concerns, amplifying strengths |
+| Community forums (Reddit, Slack, Discord) | Questions, debates, misconceptions | Topic ideas with proven demand |
+| Search console queries | What people search to find you | Optimize for highest-potential queries |
+
+**Step 3: Define Content Pillars**
+
+Pillars are the 3-5 broad topic areas your content focuses on. Each pillar should:
+- Connect directly to your product or expertise
+- Address a topic your audience actively seeks information about
+- Support your business goals (traffic, leads, authority)
+- Be broad enough to generate 20+ subtopics
+- Be specific enough to establish expertise
+
+**Step 4: Build Topic Clusters**
+
+For each pillar, develop a cluster of 10-25 topics:
+
+```markdown
+## Pillar: [Topic Area]
+Pillar page: [Comprehensive guide serving as the hub]
+
+### Supporting Topics
+1. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+2. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+3. [Topic] — KW: [keyword], Vol: [X], Diff: [X], Intent: [Info/Commercial]
+...
+
+### Internal Linking Plan
+- All supporting topics link to pillar page
+- Pillar page links to all supporting topics
+- Related supporting topics cross-link to each other
+```
+
+**Step 5: Prioritize Topics**
+
+Score each topic on a priority matrix:
+
+| Factor | Weight | Scoring |
+|--------|--------|---------|
+| Search volume | 25% | High (3), Medium (2), Low (1) |
+| Keyword difficulty | 20% | Easy (3), Medium (2), Hard (1) |
+| Business relevance | 30% | Direct product connection (3), Adjacent (2), Tangential (1) |
+| Competitive gap | 15% | No good content exists (3), Beatable content (2), Strong competitors (1) |
+| Content asset value | 10% | Evergreen + repurposable (3), Seasonal (2), One-time (1) |
+
+Priority score = weighted sum. Execute highest scores first.
+
+### Workflow 2: Content Audit
+
+**Step 1: Inventory All Content**
+
+Build a content inventory spreadsheet:
+
+| URL | Title | Pillar | Format | Publish Date | Last Updated | Monthly Traffic | Avg Time on Page | Conversions | Target Keyword | Ranking Position |
+|-----|-------|--------|--------|-------------|-------------|----------------|-----------------|-------------|---------------|-----------------|
+
+**Step 2: Classify Each Piece**
+
+For each piece, determine:
+- **Pillar alignment**: Which pillar does it belong to? (Or does it belong to none?)
+- **Funnel stage**: Awareness, consideration, or decision?
+- **Content type**: Tutorial, comparison, thought leadership, news, case study?
+- **Status**: Current, outdated, thin, duplicate, orphaned?
+
+**Step 3: Score Performance**
+
+| Score | Traffic | Engagement | Conversion | Action |
+|-------|---------|-----------|------------|--------|
+| A (top 20%) | High traffic | Above avg time on page | Drives conversions | Protect, repurpose, update regularly |
+| B (middle 40%) | Moderate | Average engagement | Some conversions | Optimize, improve, interlink |
+| C (next 30%) | Low | Below average | Minimal | Update or consolidate |
+| D (bottom 10%) | Near zero | High bounce | None | Redirect, remove, or completely rewrite |
+
+**Step 4: Build Remediation Plan**
+
+| Action | When | How |
+|--------|------|-----|
+| Update | Content is B or C tier with good topic but outdated info | Refresh data, add new sections, update publish date |
+| Consolidate | Multiple thin pieces on same topic | Merge into one comprehensive piece, redirect old URLs |
+| Remove | Content is irrelevant, duplicate, or unfixable | 301 redirect to most relevant remaining page |
+| Create new | Gap exists in pillar coverage | Add to editorial calendar with priority score |
+| Optimize | Content ranks #4-20 for target keyword | On-page SEO improvements, better intro, internal links |
+
+---
+
+## Content Pillar Framework
+
+### Pillar Design Principles
+
+**Example Pillar Structure for a SaaS Product:**
+
+| Pillar | Business Connection | Audience Need | Content Types |
+|--------|-------------------|--------------|---------------|
+| [Core problem you solve] | Direct product relevance | Actively searching for solutions | How-to guides, tutorials, comparisons |
+| [Industry your audience works in] | Thought leadership | Staying current on trends | Analysis, predictions, benchmarks |
+| [Adjacent skill your audience needs] | Trust building | Professional development | Frameworks, templates, playbooks |
+| [Use case deep dives] | Product education | Understanding applications | Case studies, walkthroughs, examples |
+
+### Pillar Page Structure
+
+Each pillar should have a comprehensive hub page (2,000-4,000 words) that:
+- Defines the topic comprehensively
+- Links to all supporting cluster content
+- Targets the broadest keyword in the cluster
+- Gets updated as new cluster content publishes
+- Serves as the authority page for the topic area
+
+---
+
+## Audience Research Methodology
+
+### Research Framework
+
+| Method | Time Required | Quality | Best For |
+|--------|-------------|---------|----------|
+| Customer interview analysis | 2-4 hours | Highest | Understanding language, pain points, objections |
+| Sales call review | 1-2 hours | High | Identifying pre-purchase questions |
+| Support ticket mining | 1-2 hours | High | Finding confusion points and tutorial needs |
+| Competitor comment analysis | 1 hour | Medium | Discovering unmet content needs |
+| Community forum research | 1-2 hours | Medium | Finding real questions and debates |
+| Search console analysis | 30 min | Medium | Understanding what queries already reach you |
+| Keyword research tools | 1-2 hours | Medium | Quantifying demand for topics |
+
+### Customer Language Extraction
+
+The most valuable output of audience research is exact language:
+
+| Customer Says | Content Opportunity |
+|--------------|-------------------|
+| &quot;I wish I knew...&quot; | Educational content using their exact framing |
+| &quot;The hardest part is...&quot; | Tutorial content addressing that specific difficulty |
+| &quot;I always forget to...&quot; | Checklist or template content |
+| &quot;Everyone says to do X, but...&quot; | Contrarian or nuanced content |
+| &quot;Is it worth it to...&quot; | ROI analysis or comparison content |
+| &quot;What&#x27;s the difference between...&quot; | Comparison or explainer content |
+
+---
+
+## Funnel Mapping
+
+### Content by Funnel Stage
+
+| Stage | Reader Mindset | Content Goal | Content Types | Metrics |
+|-------|---------------|-------------|---------------|---------|
+| Awareness | &quot;I have a problem&quot; | Attract and educate | Blog posts, videos, infographics, social content | Traffic, impressions, shares |
+| Consideration | &quot;What are my options?&quot; | Build trust and differentiate | Comparisons, case studies, guides, webinars | Time on page, email signups, return visits |
+| Decision | &quot;Is this the right solution?&quot; | Convert | Product pages, demos, free trials, ROI calculators | Signups, trials, demo requests, purchases |
+
+### Funnel Mapping Template
+
+For each content pillar, ensure coverage across all funnel stages:
+
+```markdown
+## Pillar: [Topic]
+
+### Awareness Topics (attract new visitors)
+- [Topic targeting broad informational keyword]
+- [Topic answering common beginner question]
+- [Topic providing industry data or benchmark]
+
+### Consideration Topics (build trust and preference)
+- [Topic comparing approaches or solutions]
+- [Topic showing how to evaluate options]
+- [Case study demonstrating results]
+
+### Decision Topics (drive conversion)
+- [Product-specific tutorial or walkthrough]
+- [ROI calculator or assessment tool]
+- [FAQ addressing buying objections]
+```
+
+---
+
+## Searchable vs. Shareable Matrix
+
+### Understanding the Distinction
+
+| Dimension | Searchable Content | Shareable Content |
+|-----------|-------------------|-------------------|
+| Discovery | People search for it (keyword-driven) | People share it (social-driven) |
+| Lifespan | Evergreen (months to years) | Timely (days to weeks) |
+| Examples | &quot;How to set up GA4 tracking&quot; | &quot;The state of marketing in 2026&quot; |
+| Traffic pattern | Steady, compounding | Spike, then decline |
+| Optimization | SEO-first | Hook and emotion-first |
+| Measurement | Organic traffic, rankings | Shares, engagement, referral traffic |
+
+### Strategy Balance
+
+Most content strategies should be:
+- 60-70% searchable (sustainable traffic engine)
+- 20-30% shareable (brand awareness, audience growth)
+- 10% promotional (product launches, offers)
+
+### Content Type Classification
+
+| Content Type | Searchable | Shareable | Both |
+|-------------|-----------|-----------|------|
+| How-to guides | High | Low | — |
+| Original research | Medium | High | Yes |
+| Comparisons | High | Medium | Yes |
+| Thought leadership | Low | High | — |
+| Templates/tools | High | Medium | Yes |
+| Case studies | Medium | Medium | Yes |
+| Industry news takes | Low | High | — |
+| Tutorials | High | Low | — |
+| Frameworks/playbooks | Medium | High | Yes |
+
+---
+
+## Competitive Content Analysis
+
+### Analysis Framework
+
+For each top competitor:
+
+```markdown
+## Competitor: [Name]
+
+### Content Inventory
+- Blog frequency: [Posts per week/month]
+- Content types: [Formats they use]
+- Average word count: [Length]
+- Primary topics: [Their content pillars]
+
+### Strengths
+- [What they do well]
+- [Topics where they dominate]
+
+### Gaps
+- [Topics they don&#x27;t cover]
+- [Angles they miss]
+- [Outdated content that could be beaten]
+
+### Opportunity
+- [Where you can win with better content]
+- [Underserved topics in their coverage]
+```
+
+### Competitive Gap Scoring
+
+| Topic | Competitor A | Competitor B | Competitor C | Your Coverage | Gap Score |
+|-------|-------------|-------------|-------------|---------------|-----------|
+| [Topic 1] | Strong | None | Weak | None | High opportunity |
+| [Topic 2] | Strong | Strong | Strong | Weak | Improve existing |
+| [Topic 3] | None | None | None | None | Blue ocean opportunity |
+
+---
+
+## Best Practices
+
+1. **Strategy before production** — A mediocre topic executed well is still a mediocre result. Spend time picking the right topics.
+
+2. **Customer research is non-negotiable** — Content strategy built without customer input is guessing. Mine sales calls, support tickets, and customer language before planning.
+
+3. **Cover the full funnel** — Most teams over-index on awareness content. Ensure each pillar has consideration and decision-stage content too.
+
+4. **Prioritize by business impact, not search volume** — A 500-volume keyword with high purchase intent outperforms a 10,000-volume keyword with no commercial relevance.
+
+5. **Audit before you create** — Most content libraries have underperforming content that could be improved for more impact than writing something new.
+
+6. **Interlink systematically** — Topic clusters only work when content is connected through internal links. Build linking into the production process.
+
+7. **Refresh &gt; Publish** — Updating a post ranking #8 to reach #3 produces more traffic than a new post starting at position #50.
+
+8. **One pillar at a time** — Build depth in one pillar before spreading across all of them. Authority comes from depth, not breadth.
+
+9. **Document your strategy** — A strategy that only lives in someone&#x27;s head is not a strategy. Write it down, share it, refer to it.
+
+10. **Measure quarterly** — Content strategy is a 6-12 month investment. Monthly reviews for tactics, quarterly reviews for strategy adjustments.
+
+---
+
+## Integration Points
+
+- **Content Production** — Use for executing the strategy (writing, editing, publishing). Content Strategy decides what; Content Production does it.
+- **SEO Specialist** — Use for technical SEO and keyword research to inform topic selection and prioritization.
+- **AI SEO** — Use for optimizing content specifically for AI search citation alongside traditional SEO.
+- **Copywriting** — Use when strategy identifies need for landing pages or conversion copy.
+- **Social Content** — Use for distributing content across social platforms after publication.
+- **Marketing Context** — Use as the foundation. Content strategy should align with ICP, positioning, and business goals.
+- **Campaign Analytics** — Use to measure content performance and inform strategy adjustments.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---------|-------------|-----|
+| Content published consistently but no organic traffic growth | Topics selected without keyword research or targeting zero-volume queries | Re-prioritize using search volume x business relevance x competitive gap scoring matrix |
+| All content is awareness-stage, no leads generated | Over-indexing on top-of-funnel content without consideration/decision stage pieces | Audit funnel coverage per pillar; create 2-3 consideration and decision pieces per pillar |
+| Topic cannibalization across content pieces | Multiple articles targeting the same keyword without differentiation | Map one primary keyword per page; consolidate competing pieces or differentiate angles |
+| Content calendar frequently disrupted | Production timelines too tight or no buffer for reviews and revisions | Add 3-day buffer per piece; batch brief creation 4-6 pieces at a time |
+| Competitor consistently outranks on shared topics | Competitor has stronger E-E-A-T signals or deeper content coverage | Analyze competitor content depth; add original data, expert quotes, and experience signals |
+| Content audit reveals 70%+ of library is underperforming | Strategy was never defined — content was reactive, not planned | Start with 3 content pillars, build 10-15 cluster topics per pillar, then produce systematically |
+
+---
+
+## Success Criteria
+
+- **Pillar coverage**: 3-5 content pillars defined with 15+ cluster topics each, covering all three funnel stages
+- **Organic traffic contribution**: Content driving 40%+ of total organic traffic within 12 months
+- **Topic cluster completeness**: Each pillar has hub page + 10+ supporting pieces with bidirectional internal links
+- **Content freshness**: 80%+ of library updated within the last 12 months; high-value content refreshed quarterly
+- **Funnel balance**: Content split approximately 60% awareness, 25% consideration, 15% decision (or adjusted per business model)
+- **Conversion from content**: Content-attributed leads growing 10%+ quarter-over-quarter
+- **Search visibility**: 50%+ of target keywords ranking in top 20 within 6 months of strategy execution
+
+---
+
+## Scope &amp; Limitations
+
+**In scope:**
+- Content pillar definition and topic cluster planning
+- Audience research methodology for content topics
+- Keyword-informed topic prioritization
+- Funnel mapping (awareness, consideration, decision)
+- Content audit and remediation planning
+- Competitive content gap analysis
+- Editorial calendar structure and cadence planning
+
+**Out of scope:**
+- Content writing and production (use Content Production)
+- SEO technical optimization (use SEO Specialist)
+- Social media distribution strategy (use Social Content)
+- Paid content promotion and advertising
+- Content management system selection or setup
+- Brand voice and messaging development
+
+**Known limitations:**
+- Content strategy requires 6-12 months to show compounding results — short-term ROI expectations are unrealistic
+- AI Overviews reducing organic CTR means position 1 delivers fewer clicks than historical benchmarks
+- Keyword volume data from tools is estimated and varies between providers
+- Content audit accuracy depends on access to Google Search Console and analytics data
+- Competitive content analysis is point-in-time; competitors update strategies continuously
+
+---
+
+## Scripts
+
+```bash
+# Generate a content calendar plan from topic list
+python scripts/content_calendar_planner.py --topics topics.csv --cadence weekly --json
+
+# Analyze headlines for click-worthiness and SEO
+python scripts/headline_analyzer.py --headlines headlines.txt --json
+
+# Score content brief completeness
+python scripts/content_brief_generator.py --keyword &quot;cloud cost optimization&quot; --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Content Strategy&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Content Strategy&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Content Strategy in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Content Strategy&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Content Strategy&quot;
+4. Description: &quot;Plan content strategy including content pillars, audience research, topic clustering, funnel mapping, competitive content analysis, content audits, and editorial planning. Use when deciding what conte...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/content-strategy/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

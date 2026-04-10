@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Agent Protocol (Engineering domain).
 
 Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when bui...
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/agent-protocol
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Agent Protocol (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Agent Protocol (Engineering domain).
 
 Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when bui...
 
@@ -433,7 +455,1376 @@ https://github.com/borghei/Claude-Skills/tree/main/agent-protocol
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Agent Protocol&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Agent Protocol
+
+The agent designs tool schemas for MCP, Google A2A, and OpenAI Function Calling protocols. It implements transport selection, capability discovery, authentication flows (OAuth 2.1, API keys), structured error handling, rate limiting, and protocol bridges for heterogeneous agent ecosystems.
+
+## Core Capabilities
+
+### 1. Protocol Selection and Comparison
+- **MCP (Model Context Protocol)**: Anthropic&#x27;s standard for tool/resource/prompt serving
+- **Google A2A (Agent-to-Agent)**: Agent card discovery, task lifecycle, streaming
+- **OpenAI Function Calling**: JSON Schema tool definitions, parallel calls, strict mode
+- **LangChain/LangGraph Tools**: Python-native tool wrappers with callback integration
+- **Custom Protocols**: WebSocket, gRPC, and event-driven agent messaging
+
+### 2. Tool Schema Design
+- JSON Schema validation for inputs and outputs
+- Semantic naming conventions that improve agent tool selection
+- Description engineering for maximum LLM comprehension
+- Required vs optional parameter design
+- Enum constraints and default value strategies
+
+### 3. Transport and Discovery
+- stdio, SSE, and WebSocket transport for MCP
+- HTTP+JSON-RPC for A2A task management
+- Agent card and capability advertisement
+- Health checking and graceful degradation
+- Protocol version negotiation
+
+### 4. Security and Authentication
+- OAuth 2.1 flows for MCP remote servers
+- API key rotation and scoping
+- Request signing and verification
+- Rate limiting per agent identity
+- Audit logging for all inter-agent calls
+
+## When to Use
+
+- Designing tool interfaces for LLM-powered agents
+- Building MCP servers that expose APIs to Claude, Cursor, or other clients
+- Implementing agent-to-agent communication in multi-agent systems
+- Bridging between different agent protocols (MCP to A2A, etc.)
+- Standardizing tool calling patterns across a team or organization
+- Debugging agent tool selection failures
+
+## Protocol Comparison Matrix
+
+| Feature | MCP | A2A | OpenAI Functions | LangChain Tools |
+|---------|-----|-----|-----------------|-----------------|
+| Transport | stdio/SSE/WebSocket | HTTP+JSON-RPC | HTTP REST | In-process |
+| Discovery | Server capabilities | Agent cards | API spec | Registry |
+| Streaming | SSE notifications | SSE streaming | Streaming deltas | Callbacks |
+| Auth | OAuth 2.1 | Agent auth | API key | N/A |
+| State | Resources + context | Task lifecycle | Conversation | Memory |
+| Multi-turn | Sampling | Task updates | Thread context | Chain state |
+| File handling | Resource URIs | Artifact parts | File search | Document loaders |
+| Best for | Tool serving | Agent networks | Single-model tools | Python pipelines |
+
+## Decision Framework
+
+```
+What are you building?
+│
+├─ Tools for a single LLM client (Claude, Cursor, Copilot)
+│  └─ Use MCP — it&#x27;s the native protocol for tool serving
+│
+├─ Agent-to-agent communication across organizations
+│  └─ Use A2A — designed for cross-boundary agent discovery and delegation
+│
+├─ Tools for OpenAI models specifically
+│  └─ Use OpenAI Function Calling — tightest integration
+│
+├─ Python pipeline with multiple chained tools
+│  └─ Use LangChain Tools — simplest for in-process orchestration
+│
+└─ Heterogeneous agent ecosystem (multiple protocols)
+   └─ Use Protocol Bridge pattern — translate between protocols at boundaries
+```
+
+## MCP Tool Schema Design
+
+### Anatomy of a Well-Designed Tool
+
+```json
+{
+  &quot;name&quot;: &quot;search_documents&quot;,
+  &quot;description&quot;: &quot;Search the knowledge base for documents matching a query. Returns ranked results with titles, snippets, and relevance scores. Use this when the user asks a question that requires looking up information from stored documents.&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;query&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;Natural language search query. Be specific — &#x27;Q4 2025 revenue projections&#x27; works better than &#x27;revenue&#x27;.&quot;
+      },
+      &quot;limit&quot;: {
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;description&quot;: &quot;Maximum number of results to return.&quot;,
+        &quot;default&quot;: 10,
+        &quot;minimum&quot;: 1,
+        &quot;maximum&quot;: 50
+      },
+      &quot;filters&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;description&quot;: &quot;Optional filters to narrow results.&quot;,
+        &quot;properties&quot;: {
+          &quot;date_after&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;format&quot;: &quot;date&quot;,
+            &quot;description&quot;: &quot;Only return documents created after this date (YYYY-MM-DD).&quot;
+          },
+          &quot;document_type&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [&quot;report&quot;, &quot;memo&quot;, &quot;presentation&quot;, &quot;spreadsheet&quot;],
+            &quot;description&quot;: &quot;Filter by document type.&quot;
+          }
+        }
+      }
+    },
+    &quot;required&quot;: [&quot;query&quot;]
+  }
+}
+```
+
+### Tool Naming Rules
+
+```
+GOOD tool names (verb_noun, specific):
+  search_documents      — clear action + target
+  create_github_issue   — includes the service for disambiguation
+  get_user_profile      — standard CRUD verb
+  analyze_pr_diff       — describes the analysis action
+  send_slack_message    — action + channel type
+
+BAD tool names (vague, ambiguous, or too generic):
+  search                — search what?
+  do_thing              — meaningless
+  handler               — not a verb_noun
+  processData           — camelCase breaks conventions
+  get_stuff             — too vague for LLM selection
+```
+
+### Description Engineering
+
+The description is the single most important field for agent tool selection. An LLM reads the description to decide whether to call this tool.
+
+```
+EFFECTIVE description pattern:
+&quot;[What it does]. [What it returns]. [When to use it].&quot;
+
+Example:
+&quot;Search the knowledge base for documents matching a query. Returns ranked
+results with titles, snippets, and relevance scores. Use this when the
+user asks a question that requires looking up stored documents.&quot;
+
+INEFFECTIVE descriptions:
+&quot;Searches documents.&quot;           — too short, no usage guidance
+&quot;This tool is used for...&quot;      — wastes tokens on filler
+&quot;A powerful search engine...&quot;   — marketing copy, not instructions
+```
+
+## MCP Server Implementation (TypeScript)
+
+### Minimal Server with Tool and Resource
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { StdioServerTransport } from &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;;
+import { z } from &quot;zod&quot;;
+
+const server = new McpServer({
+  name: &quot;project-tools&quot;,
+  version: &quot;1.0.0&quot;,
+  capabilities: {
+    tools: {},
+    resources: {},
+  },
+});
+
+// Tool: search codebase
+server.tool(
+  &quot;search_codebase&quot;,
+  &quot;Search the project codebase for files matching a pattern. Returns file paths and line numbers with matching content. Use when looking for implementations, definitions, or usage of specific code patterns.&quot;,
+  {
+    pattern: z.string().describe(&quot;Regex or glob pattern to search for&quot;),
+    file_type: z.enum([&quot;ts&quot;, &quot;py&quot;, &quot;go&quot;, &quot;rs&quot;, &quot;all&quot;]).default(&quot;all&quot;)
+      .describe(&quot;Filter by file extension&quot;),
+    max_results: z.number().int().min(1).max(100).default(20)
+      .describe(&quot;Maximum results to return&quot;),
+  },
+  async ({ pattern, file_type, max_results }) =&gt; {
+    // Implementation: run ripgrep or similar
+    const results = await searchFiles(pattern, file_type, max_results);
+    return {
+      content: [{
+        type: &quot;text&quot;,
+        text: JSON.stringify(results, null, 2),
+      }],
+    };
+  }
+);
+
+// Resource: project structure
+server.resource(
+  &quot;project://structure&quot;,
+  &quot;project://structure&quot;,
+  async (uri) =&gt; ({
+    contents: [{
+      uri: uri.href,
+      mimeType: &quot;application/json&quot;,
+      text: JSON.stringify(await getProjectStructure()),
+    }],
+  })
+);
+
+// Start server
+const transport = new StdioServerTransport();
+await server.connect(transport);
+```
+
+### MCP Server with Authentication (SSE Transport)
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { SSEServerTransport } from &quot;@modelcontextprotocol/sdk/server/sse.js&quot;;
+import express from &quot;express&quot;;
+
+const app = express();
+
+// Authentication middleware
+function authenticateAgent(req, res, next) {
+  const token = req.headers.authorization?.replace(&quot;Bearer &quot;, &quot;&quot;);
+  if (!token || !verifyAgentToken(token)) {
+    return res.status(401).json({ error: &quot;Invalid agent credentials&quot; });
+  }
+  req.agentId = extractAgentId(token);
+  next();
+}
+
+// Rate limiting per agent
+const rateLimiter = new Map&lt;string, { count: number; resetAt: number }&gt;();
+function rateLimit(agentId: string, maxPerMinute = 60): boolean {
+  const now = Date.now();
+  const entry = rateLimiter.get(agentId) || { count: 0, resetAt: now + 60000 };
+  if (now &gt; entry.resetAt) {
+    entry.count = 0;
+    entry.resetAt = now + 60000;
+  }
+  entry.count++;
+  rateLimiter.set(agentId, entry);
+  return entry.count &lt;= maxPerMinute;
+}
+
+app.use(&quot;/mcp&quot;, authenticateAgent);
+
+app.get(&quot;/mcp/sse&quot;, (req, res) =&gt; {
+  if (!rateLimit(req.agentId)) {
+    return res.status(429).json({ error: &quot;Rate limit exceeded&quot; });
+  }
+  const transport = new SSEServerTransport(&quot;/mcp/messages&quot;, res);
+  server.connect(transport);
+});
+
+app.listen(3001, () =&gt; console.log(&quot;MCP server on :3001&quot;));
+```
+
+## Google A2A Protocol Implementation
+
+### Agent Card (Discovery)
+
+```json
+{
+  &quot;name&quot;: &quot;Research Agent&quot;,
+  &quot;description&quot;: &quot;Performs web research and synthesizes findings into structured reports.&quot;,
+  &quot;url&quot;: &quot;https://research-agent.example.com&quot;,
+  &quot;provider&quot;: {
+    &quot;organization&quot;: &quot;Acme Corp&quot;,
+    &quot;url&quot;: &quot;https://acme.example.com&quot;
+  },
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;capabilities&quot;: {
+    &quot;streaming&quot;: true,
+    &quot;pushNotifications&quot;: false,
+    &quot;stateTransitionHistory&quot;: true
+  },
+  &quot;authentication&quot;: {
+    &quot;schemes&quot;: [&quot;Bearer&quot;],
+    &quot;credentials&quot;: &quot;oauth2&quot;
+  },
+  &quot;defaultInputModes&quot;: [&quot;text/plain&quot;],
+  &quot;defaultOutputModes&quot;: [&quot;text/plain&quot;, &quot;application/json&quot;],
+  &quot;skills&quot;: [
+    {
+      &quot;id&quot;: &quot;web-research&quot;,
+      &quot;name&quot;: &quot;Web Research&quot;,
+      &quot;description&quot;: &quot;Search the web and synthesize findings into a structured report with citations.&quot;,
+      &quot;tags&quot;: [&quot;research&quot;, &quot;web&quot;, &quot;synthesis&quot;],
+      &quot;examples&quot;: [
+        &quot;Research the latest trends in AI agent frameworks&quot;,
+        &quot;Find competitive pricing data for SaaS products in the CRM space&quot;
+      ]
+    }
+  ]
+}
+```
+
+### A2A Task Lifecycle
+
+```
+Client                           Agent
+  │                                │
+  ├─ POST /tasks/send ────────────►│ Create task
+  │◄──────── task (submitted) ─────┤
+  │                                │
+  ├─ GET /tasks/{id} ─────────────►│ Poll status
+  │◄──────── task (working) ───────┤
+  │                                │
+  │  (agent processes...)          │
+  │                                │
+  ├─ GET /tasks/{id} ─────────────►│ Poll status
+  │◄──────── task (completed) ─────┤
+  │         + artifacts            │
+```
+
+### A2A Client Implementation
+
+```python
+import httpx
+import json
+from dataclasses import dataclass
+from typing import Optional
+from enum import Enum
+
+class TaskState(Enum):
+    SUBMITTED = &quot;submitted&quot;
+    WORKING = &quot;working&quot;
+    INPUT_REQUIRED = &quot;input-required&quot;
+    COMPLETED = &quot;completed&quot;
+    FAILED = &quot;failed&quot;
+    CANCELED = &quot;canceled&quot;
+
+@dataclass
+class A2AClient:
+    base_url: str
+    auth_token: str
+    timeout: float = 30.0
+
+    def _headers(self) -&gt; dict:
+        return {
+            &quot;Authorization&quot;: f&quot;Bearer {self.auth_token}&quot;,
+            &quot;Content-Type&quot;: &quot;application/json&quot;,
+        }
+
+    def discover(self) -&gt; dict:
+        &quot;&quot;&quot;Fetch the agent card for capability discovery.&quot;&quot;&quot;
+        resp = httpx.get(
+            f&quot;{self.base_url}/.well-known/agent.json&quot;,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()
+
+    def send_task(self, message: str, task_id: Optional[str] = None) -&gt; dict:
+        &quot;&quot;&quot;Send a task to the agent. Returns task object with status.&quot;&quot;&quot;
+        payload = {
+            &quot;jsonrpc&quot;: &quot;2.0&quot;,
+            &quot;method&quot;: &quot;tasks/send&quot;,
+            &quot;params&quot;: {
+                &quot;message&quot;: {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;parts&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: message}],
+                },
+            },
+            &quot;id&quot;: task_id or self._generate_id(),
+        }
+        resp = httpx.post(
+            f&quot;{self.base_url}/a2a&quot;,
+            json=payload,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()[&quot;result&quot;]
+
+    def get_task(self, task_id: str) -&gt; dict:
+        &quot;&quot;&quot;Poll task status.&quot;&quot;&quot;
+        payload = {
+            &quot;jsonrpc&quot;: &quot;2.0&quot;,
+            &quot;method&quot;: &quot;tasks/get&quot;,
+            &quot;params&quot;: {&quot;id&quot;: task_id},
+            &quot;id&quot;: self._generate_id(),
+        }
+        resp = httpx.post(
+            f&quot;{self.base_url}/a2a&quot;,
+            json=payload,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()[&quot;result&quot;]
+
+    def wait_for_completion(self, task_id: str, poll_interval: float = 2.0, max_polls: int = 60) -&gt; dict:
+        &quot;&quot;&quot;Poll until task reaches a terminal state.&quot;&quot;&quot;
+        import time
+        terminal_states = {TaskState.COMPLETED, TaskState.FAILED, TaskState.CANCELED}
+        for _ in range(max_polls):
+            task = self.get_task(task_id)
+            if TaskState(task[&quot;status&quot;][&quot;state&quot;]) in terminal_states:
+                return task
+            time.sleep(poll_interval)
+        raise TimeoutError(f&quot;Task {task_id} did not complete within {max_polls * poll_interval}s&quot;)
+
+    @staticmethod
+    def _generate_id() -&gt; str:
+        import uuid
+        return str(uuid.uuid4())
+```
+
+## Protocol Bridge Pattern
+
+When your system uses multiple protocols, implement a bridge that translates between them.
+
+```python
+class ProtocolBridge:
+    &quot;&quot;&quot;Translates between MCP tool calls and A2A task delegation.&quot;&quot;&quot;
+
+    def __init__(self, a2a_agents: dict[str, A2AClient]):
+        self.agents = a2a_agents  # skill_id -&gt; A2AClient
+
+    def mcp_tool_to_a2a_task(self, tool_name: str, arguments: dict) -&gt; dict:
+        &quot;&quot;&quot;Convert an MCP tool call into an A2A task send.&quot;&quot;&quot;
+        agent_id, skill = self._resolve_agent(tool_name)
+        client = self.agents[agent_id]
+
+        message = self._format_task_message(tool_name, arguments)
+        task = client.send_task(message)
+        result = client.wait_for_completion(task[&quot;id&quot;])
+
+        return self._a2a_result_to_mcp_response(result)
+
+    def _resolve_agent(self, tool_name: str) -&gt; tuple[str, str]:
+        &quot;&quot;&quot;Map MCP tool name to A2A agent + skill.&quot;&quot;&quot;
+        routing = {
+            &quot;search_web&quot;: (&quot;research-agent&quot;, &quot;web-research&quot;),
+            &quot;analyze_data&quot;: (&quot;analytics-agent&quot;, &quot;data-analysis&quot;),
+            &quot;generate_code&quot;: (&quot;code-agent&quot;, &quot;code-generation&quot;),
+        }
+        if tool_name not in routing:
+            raise ValueError(f&quot;No A2A agent registered for tool: {tool_name}&quot;)
+        return routing[tool_name]
+
+    def _format_task_message(self, tool_name: str, arguments: dict) -&gt; str:
+        return json.dumps({&quot;tool&quot;: tool_name, &quot;arguments&quot;: arguments})
+
+    def _a2a_result_to_mcp_response(self, task: dict) -&gt; dict:
+        &quot;&quot;&quot;Convert A2A task result to MCP tool response format.&quot;&quot;&quot;
+        if task[&quot;status&quot;][&quot;state&quot;] == &quot;completed&quot;:
+            artifacts = task.get(&quot;artifacts&quot;, [])
+            text_parts = []
+            for artifact in artifacts:
+                for part in artifact.get(&quot;parts&quot;, []):
+                    if part[&quot;type&quot;] == &quot;text&quot;:
+                        text_parts.append(part[&quot;text&quot;])
+            return {&quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;\n&quot;.join(text_parts)}]}
+        else:
+            error_msg = task[&quot;status&quot;].get(&quot;message&quot;, &quot;Task failed&quot;)
+            return {&quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: f&quot;Error: {error_msg}&quot;}], &quot;isError&quot;: True}
+```
+
+## Error Handling Standards
+
+### Structured Error Responses
+
+Every protocol should return errors in a consistent format that agents can parse and recover from.
+
+```json
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;RATE_LIMITED&quot;,
+    &quot;message&quot;: &quot;Too many requests. Retry after 30 seconds.&quot;,
+    &quot;retryable&quot;: true,
+    &quot;retry_after_seconds&quot;: 30,
+    &quot;details&quot;: {
+      &quot;limit&quot;: 60,
+      &quot;window&quot;: &quot;1m&quot;,
+      &quot;current&quot;: 62
+    }
+  }
+}
+```
+
+### Error Code Taxonomy
+
+| Code | Meaning | Agent Action |
+|------|---------|-------------|
+| `INVALID_INPUT` | Bad parameters | Fix input and retry |
+| `NOT_FOUND` | Resource missing | Try alternative or report |
+| `AUTH_FAILED` | Credentials invalid | Refresh token and retry |
+| `AUTH_EXPIRED` | Token expired | Refresh and retry once |
+| `RATE_LIMITED` | Too many requests | Wait `retry_after` then retry |
+| `UPSTREAM_ERROR` | External service failed | Retry with backoff |
+| `INTERNAL_ERROR` | Server bug | Report, do not retry |
+| `CAPABILITY_UNAVAILABLE` | Tool/skill disabled | Use alternative tool |
+
+## Testing Agent Protocols
+
+### Tool Schema Validation
+
+```python
+import jsonschema
+
+def validate_mcp_tool(tool_def: dict) -&gt; list[str]:
+    &quot;&quot;&quot;Validate an MCP tool definition for common issues.&quot;&quot;&quot;
+    issues = []
+
+    if not tool_def.get(&quot;name&quot;):
+        issues.append(&quot;Missing tool name&quot;)
+    elif not tool_def[&quot;name&quot;].replace(&quot;_&quot;, &quot;&quot;).isalnum():
+        issues.append(f&quot;Tool name &#x27;{tool_def[&#x27;name&#x27;]}&#x27; should use snake_case with alphanumeric chars&quot;)
+
+    desc = tool_def.get(&quot;description&quot;, &quot;&quot;)
+    if len(desc) &lt; 20:
+        issues.append(&quot;Description too short — LLMs need clear usage guidance&quot;)
+    if not any(word in desc.lower() for word in [&quot;use when&quot;, &quot;returns&quot;, &quot;use this&quot;]):
+        issues.append(&quot;Description should explain when to use the tool and what it returns&quot;)
+
+    schema = tool_def.get(&quot;inputSchema&quot;, {})
+    if schema.get(&quot;type&quot;) != &quot;object&quot;:
+        issues.append(&quot;inputSchema must be type: object&quot;)
+
+    for prop_name, prop_def in schema.get(&quot;properties&quot;, {}).items():
+        if not prop_def.get(&quot;description&quot;):
+            issues.append(f&quot;Property &#x27;{prop_name}&#x27; missing description&quot;)
+        if prop_def.get(&quot;type&quot;) == &quot;string&quot; and not prop_def.get(&quot;description&quot;):
+            issues.append(f&quot;String property &#x27;{prop_name}&#x27; needs description for LLM context&quot;)
+
+    return issues
+```
+
+### Integration Testing Pattern
+
+```python
+import subprocess
+import json
+
+def test_mcp_server_tools():
+    &quot;&quot;&quot;Verify MCP server starts and lists expected tools.&quot;&quot;&quot;
+    proc = subprocess.Popen(
+        [&quot;node&quot;, &quot;dist/index.js&quot;],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    # Send initialize request
+    init_msg = json.dumps({
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;method&quot;: &quot;initialize&quot;,
+        &quot;params&quot;: {&quot;protocolVersion&quot;: &quot;2025-03-26&quot;, &quot;capabilities&quot;: {}, &quot;clientInfo&quot;: {&quot;name&quot;: &quot;test&quot;}},
+        &quot;id&quot;: 1,
+    }) + &quot;\n&quot;
+    proc.stdin.write(init_msg.encode())
+    proc.stdin.flush()
+
+    # Send tools/list
+    list_msg = json.dumps({
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;method&quot;: &quot;tools/list&quot;,
+        &quot;params&quot;: {},
+        &quot;id&quot;: 2,
+    }) + &quot;\n&quot;
+    proc.stdin.write(list_msg.encode())
+    proc.stdin.flush()
+
+    # Read and validate response
+    # (In production, use proper JSON-RPC response parsing)
+    proc.terminate()
+```
+
+## Common Pitfalls
+
+- **Vague tool descriptions** that cause the LLM to select the wrong tool or skip it entirely
+- **Missing required field declarations** leading to agents sending incomplete parameters
+- **No error codes** in responses, forcing agents to parse error messages with heuristics
+- **Exposing internal implementation details** in tool schemas instead of user-intent abstractions
+- **No rate limiting** on MCP servers, allowing runaway agent loops to exhaust resources
+- **Mixing transport concerns with protocol logic** instead of keeping them separate
+- **No capability versioning** making it impossible to evolve tools without breaking clients
+- **Synchronous-only design** that blocks on long-running operations instead of using task lifecycle
+
+## Best Practices
+
+1. **Description-first design** — write the tool description before the implementation
+2. **One intent per tool** — a tool that does three things gets selected for the wrong reason
+3. **Validate inputs on the server** — never trust that the LLM sent correct types
+4. **Return structured errors** with codes, not string messages
+5. **Version your protocol** — use capability negotiation at connection time
+6. **Log every tool call** with agent ID, inputs, outputs, and latency for debugging
+7. **Test tool selection** — present your tool list to an LLM and verify it picks the right one
+8. **Use protocol bridges** at boundaries rather than forcing all agents onto one protocol
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| LLM never selects the correct tool | Tool description is vague or missing usage guidance | Rewrite description using the &quot;[What it does]. [What it returns]. [When to use it].&quot; pattern |
+| MCP server connects but no tools appear | Missing `tools` in server capabilities declaration | Add `capabilities: { tools: {} }` to the `McpServer` constructor options |
+| A2A task stuck in `working` state indefinitely | Agent has no timeout or heartbeat mechanism | Implement `max_polls` and `poll_interval` in `wait_for_completion`; add server-side task TTLs |
+| `AUTH_EXPIRED` errors after token refresh | Refreshed token not propagated to in-flight requests | Store tokens centrally and read from shared state per-request rather than caching on the client instance |
+| Protocol bridge drops artifacts from A2A responses | Bridge only extracts `text` parts, ignoring `file` or `data` parts | Extend `_a2a_result_to_mcp_response` to handle all artifact part types including binary and structured data |
+| Rate limiting triggers during normal multi-tool calls | Per-agent rate limit is too low for parallel tool execution | Increase the per-minute ceiling or implement token-bucket rate limiting with burst allowance |
+| Tool schema validation passes but agent sends wrong types | JSON Schema `type` is correct but lacks `format`, `enum`, or `pattern` constraints | Add tighter constraints (e.g., `&quot;format&quot;: &quot;date&quot;`, `&quot;pattern&quot;: &quot;^[A-Z]{3}$&quot;`) to catch malformed inputs early |
+
+## Success Criteria
+
+- **Tool selection accuracy &gt;= 95%**: LLMs select the intended tool on the first attempt when presented with the full tool list and a matching user query.
+- **Schema validation coverage = 100%**: Every deployed tool passes `validate_mcp_tool()` with zero issues reported.
+- **Error response consistency**: All protocol endpoints return structured error objects with `code`, `message`, and `retryable` fields — no raw exception strings.
+- **Discovery latency &lt; 500ms**: Agent card retrieval (A2A) and `tools/list` (MCP) responses complete within 500ms at the 95th percentile.
+- **Protocol bridge translation fidelity &gt;= 99%**: Cross-protocol calls preserve all input parameters and output artifacts without data loss or type coercion errors.
+- **Authentication failure recovery &lt; 2 retries**: Token refresh flows resolve `AUTH_EXPIRED` errors within a single retry cycle without user intervention.
+- **Mean time to integrate a new tool &lt; 30 minutes**: A developer with access to this skill can define, validate, and deploy a new MCP or A2A tool in under 30 minutes.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Designing tool schemas for MCP, A2A, OpenAI Function Calling, and LangChain Tools
+- Transport selection, capability discovery, and protocol version negotiation
+- Authentication, rate limiting, and structured error handling for agent communication
+- Protocol bridging between heterogeneous agent ecosystems
+
+**This skill does NOT cover:**
+- Building complete MCP server applications with business logic — see `engineering/mcp-server-builder`
+- Agent orchestration patterns, planning loops, or multi-step reasoning — see `engineering/agent-workflow-designer`
+- Designing agent personas, memory systems, or behavioral profiles — see `engineering/agent-designer`
+- Infrastructure deployment, CI/CD pipelines, or container orchestration for agent services — see `engineering/senior-devops`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/mcp-server-builder` | Protocol schemas defined here feed directly into MCP server scaffolding | Tool definitions and inputSchema objects flow into server code generation |
+| `engineering/agent-workflow-designer` | Workflow orchestrators consume protocol interfaces to dispatch tasks | Agent-protocol defines the transport contract; workflow-designer defines execution order and branching |
+| `engineering/agent-designer` | Agent identity and capability profiles reference protocol-level skill declarations | Agent cards and capability metadata from protocol design inform agent persona configuration |
+| `engineering/senior-security` | Security review of auth flows, token scoping, and rate limiting configurations | OAuth 2.1 flows, API key rotation policies, and audit logging patterns flow into security assessments |
+| `engineering/api-design-reviewer` | REST and JSON-RPC endpoint design review for A2A and MCP HTTP transports | API schema and endpoint contracts feed into design review checklists |
+| `engineering/observability-designer` | Monitoring and tracing for inter-agent calls, latency tracking, and error budgets | Tool call logs with agent ID, latency, and error codes flow into observability dashboards |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agent Protocol&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agent Protocol&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agent Protocol in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agent Protocol&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agent Protocol&quot;
+4. Description: &quot;Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when bui...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agent-protocol/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Agent Protocol&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Agent Protocol
+
+The agent designs tool schemas for MCP, Google A2A, and OpenAI Function Calling protocols. It implements transport selection, capability discovery, authentication flows (OAuth 2.1, API keys), structured error handling, rate limiting, and protocol bridges for heterogeneous agent ecosystems.
+
+## Core Capabilities
+
+### 1. Protocol Selection and Comparison
+- **MCP (Model Context Protocol)**: Anthropic&#x27;s standard for tool/resource/prompt serving
+- **Google A2A (Agent-to-Agent)**: Agent card discovery, task lifecycle, streaming
+- **OpenAI Function Calling**: JSON Schema tool definitions, parallel calls, strict mode
+- **LangChain/LangGraph Tools**: Python-native tool wrappers with callback integration
+- **Custom Protocols**: WebSocket, gRPC, and event-driven agent messaging
+
+### 2. Tool Schema Design
+- JSON Schema validation for inputs and outputs
+- Semantic naming conventions that improve agent tool selection
+- Description engineering for maximum LLM comprehension
+- Required vs optional parameter design
+- Enum constraints and default value strategies
+
+### 3. Transport and Discovery
+- stdio, SSE, and WebSocket transport for MCP
+- HTTP+JSON-RPC for A2A task management
+- Agent card and capability advertisement
+- Health checking and graceful degradation
+- Protocol version negotiation
+
+### 4. Security and Authentication
+- OAuth 2.1 flows for MCP remote servers
+- API key rotation and scoping
+- Request signing and verification
+- Rate limiting per agent identity
+- Audit logging for all inter-agent calls
+
+## When to Use
+
+- Designing tool interfaces for LLM-powered agents
+- Building MCP servers that expose APIs to Claude, Cursor, or other clients
+- Implementing agent-to-agent communication in multi-agent systems
+- Bridging between different agent protocols (MCP to A2A, etc.)
+- Standardizing tool calling patterns across a team or organization
+- Debugging agent tool selection failures
+
+## Protocol Comparison Matrix
+
+| Feature | MCP | A2A | OpenAI Functions | LangChain Tools |
+|---------|-----|-----|-----------------|-----------------|
+| Transport | stdio/SSE/WebSocket | HTTP+JSON-RPC | HTTP REST | In-process |
+| Discovery | Server capabilities | Agent cards | API spec | Registry |
+| Streaming | SSE notifications | SSE streaming | Streaming deltas | Callbacks |
+| Auth | OAuth 2.1 | Agent auth | API key | N/A |
+| State | Resources + context | Task lifecycle | Conversation | Memory |
+| Multi-turn | Sampling | Task updates | Thread context | Chain state |
+| File handling | Resource URIs | Artifact parts | File search | Document loaders |
+| Best for | Tool serving | Agent networks | Single-model tools | Python pipelines |
+
+## Decision Framework
+
+```
+What are you building?
+│
+├─ Tools for a single LLM client (Claude, Cursor, Copilot)
+│  └─ Use MCP — it&#x27;s the native protocol for tool serving
+│
+├─ Agent-to-agent communication across organizations
+│  └─ Use A2A — designed for cross-boundary agent discovery and delegation
+│
+├─ Tools for OpenAI models specifically
+│  └─ Use OpenAI Function Calling — tightest integration
+│
+├─ Python pipeline with multiple chained tools
+│  └─ Use LangChain Tools — simplest for in-process orchestration
+│
+└─ Heterogeneous agent ecosystem (multiple protocols)
+   └─ Use Protocol Bridge pattern — translate between protocols at boundaries
+```
+
+## MCP Tool Schema Design
+
+### Anatomy of a Well-Designed Tool
+
+```json
+{
+  &quot;name&quot;: &quot;search_documents&quot;,
+  &quot;description&quot;: &quot;Search the knowledge base for documents matching a query. Returns ranked results with titles, snippets, and relevance scores. Use this when the user asks a question that requires looking up information from stored documents.&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;query&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;Natural language search query. Be specific — &#x27;Q4 2025 revenue projections&#x27; works better than &#x27;revenue&#x27;.&quot;
+      },
+      &quot;limit&quot;: {
+        &quot;type&quot;: &quot;integer&quot;,
+        &quot;description&quot;: &quot;Maximum number of results to return.&quot;,
+        &quot;default&quot;: 10,
+        &quot;minimum&quot;: 1,
+        &quot;maximum&quot;: 50
+      },
+      &quot;filters&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;description&quot;: &quot;Optional filters to narrow results.&quot;,
+        &quot;properties&quot;: {
+          &quot;date_after&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;format&quot;: &quot;date&quot;,
+            &quot;description&quot;: &quot;Only return documents created after this date (YYYY-MM-DD).&quot;
+          },
+          &quot;document_type&quot;: {
+            &quot;type&quot;: &quot;string&quot;,
+            &quot;enum&quot;: [&quot;report&quot;, &quot;memo&quot;, &quot;presentation&quot;, &quot;spreadsheet&quot;],
+            &quot;description&quot;: &quot;Filter by document type.&quot;
+          }
+        }
+      }
+    },
+    &quot;required&quot;: [&quot;query&quot;]
+  }
+}
+```
+
+### Tool Naming Rules
+
+```
+GOOD tool names (verb_noun, specific):
+  search_documents      — clear action + target
+  create_github_issue   — includes the service for disambiguation
+  get_user_profile      — standard CRUD verb
+  analyze_pr_diff       — describes the analysis action
+  send_slack_message    — action + channel type
+
+BAD tool names (vague, ambiguous, or too generic):
+  search                — search what?
+  do_thing              — meaningless
+  handler               — not a verb_noun
+  processData           — camelCase breaks conventions
+  get_stuff             — too vague for LLM selection
+```
+
+### Description Engineering
+
+The description is the single most important field for agent tool selection. An LLM reads the description to decide whether to call this tool.
+
+```
+EFFECTIVE description pattern:
+&quot;[What it does]. [What it returns]. [When to use it].&quot;
+
+Example:
+&quot;Search the knowledge base for documents matching a query. Returns ranked
+results with titles, snippets, and relevance scores. Use this when the
+user asks a question that requires looking up stored documents.&quot;
+
+INEFFECTIVE descriptions:
+&quot;Searches documents.&quot;           — too short, no usage guidance
+&quot;This tool is used for...&quot;      — wastes tokens on filler
+&quot;A powerful search engine...&quot;   — marketing copy, not instructions
+```
+
+## MCP Server Implementation (TypeScript)
+
+### Minimal Server with Tool and Resource
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { StdioServerTransport } from &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;;
+import { z } from &quot;zod&quot;;
+
+const server = new McpServer({
+  name: &quot;project-tools&quot;,
+  version: &quot;1.0.0&quot;,
+  capabilities: {
+    tools: {},
+    resources: {},
+  },
+});
+
+// Tool: search codebase
+server.tool(
+  &quot;search_codebase&quot;,
+  &quot;Search the project codebase for files matching a pattern. Returns file paths and line numbers with matching content. Use when looking for implementations, definitions, or usage of specific code patterns.&quot;,
+  {
+    pattern: z.string().describe(&quot;Regex or glob pattern to search for&quot;),
+    file_type: z.enum([&quot;ts&quot;, &quot;py&quot;, &quot;go&quot;, &quot;rs&quot;, &quot;all&quot;]).default(&quot;all&quot;)
+      .describe(&quot;Filter by file extension&quot;),
+    max_results: z.number().int().min(1).max(100).default(20)
+      .describe(&quot;Maximum results to return&quot;),
+  },
+  async ({ pattern, file_type, max_results }) =&gt; {
+    // Implementation: run ripgrep or similar
+    const results = await searchFiles(pattern, file_type, max_results);
+    return {
+      content: [{
+        type: &quot;text&quot;,
+        text: JSON.stringify(results, null, 2),
+      }],
+    };
+  }
+);
+
+// Resource: project structure
+server.resource(
+  &quot;project://structure&quot;,
+  &quot;project://structure&quot;,
+  async (uri) =&gt; ({
+    contents: [{
+      uri: uri.href,
+      mimeType: &quot;application/json&quot;,
+      text: JSON.stringify(await getProjectStructure()),
+    }],
+  })
+);
+
+// Start server
+const transport = new StdioServerTransport();
+await server.connect(transport);
+```
+
+### MCP Server with Authentication (SSE Transport)
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { SSEServerTransport } from &quot;@modelcontextprotocol/sdk/server/sse.js&quot;;
+import express from &quot;express&quot;;
+
+const app = express();
+
+// Authentication middleware
+function authenticateAgent(req, res, next) {
+  const token = req.headers.authorization?.replace(&quot;Bearer &quot;, &quot;&quot;);
+  if (!token || !verifyAgentToken(token)) {
+    return res.status(401).json({ error: &quot;Invalid agent credentials&quot; });
+  }
+  req.agentId = extractAgentId(token);
+  next();
+}
+
+// Rate limiting per agent
+const rateLimiter = new Map&lt;string, { count: number; resetAt: number }&gt;();
+function rateLimit(agentId: string, maxPerMinute = 60): boolean {
+  const now = Date.now();
+  const entry = rateLimiter.get(agentId) || { count: 0, resetAt: now + 60000 };
+  if (now &gt; entry.resetAt) {
+    entry.count = 0;
+    entry.resetAt = now + 60000;
+  }
+  entry.count++;
+  rateLimiter.set(agentId, entry);
+  return entry.count &lt;= maxPerMinute;
+}
+
+app.use(&quot;/mcp&quot;, authenticateAgent);
+
+app.get(&quot;/mcp/sse&quot;, (req, res) =&gt; {
+  if (!rateLimit(req.agentId)) {
+    return res.status(429).json({ error: &quot;Rate limit exceeded&quot; });
+  }
+  const transport = new SSEServerTransport(&quot;/mcp/messages&quot;, res);
+  server.connect(transport);
+});
+
+app.listen(3001, () =&gt; console.log(&quot;MCP server on :3001&quot;));
+```
+
+## Google A2A Protocol Implementation
+
+### Agent Card (Discovery)
+
+```json
+{
+  &quot;name&quot;: &quot;Research Agent&quot;,
+  &quot;description&quot;: &quot;Performs web research and synthesizes findings into structured reports.&quot;,
+  &quot;url&quot;: &quot;https://research-agent.example.com&quot;,
+  &quot;provider&quot;: {
+    &quot;organization&quot;: &quot;Acme Corp&quot;,
+    &quot;url&quot;: &quot;https://acme.example.com&quot;
+  },
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;capabilities&quot;: {
+    &quot;streaming&quot;: true,
+    &quot;pushNotifications&quot;: false,
+    &quot;stateTransitionHistory&quot;: true
+  },
+  &quot;authentication&quot;: {
+    &quot;schemes&quot;: [&quot;Bearer&quot;],
+    &quot;credentials&quot;: &quot;oauth2&quot;
+  },
+  &quot;defaultInputModes&quot;: [&quot;text/plain&quot;],
+  &quot;defaultOutputModes&quot;: [&quot;text/plain&quot;, &quot;application/json&quot;],
+  &quot;skills&quot;: [
+    {
+      &quot;id&quot;: &quot;web-research&quot;,
+      &quot;name&quot;: &quot;Web Research&quot;,
+      &quot;description&quot;: &quot;Search the web and synthesize findings into a structured report with citations.&quot;,
+      &quot;tags&quot;: [&quot;research&quot;, &quot;web&quot;, &quot;synthesis&quot;],
+      &quot;examples&quot;: [
+        &quot;Research the latest trends in AI agent frameworks&quot;,
+        &quot;Find competitive pricing data for SaaS products in the CRM space&quot;
+      ]
+    }
+  ]
+}
+```
+
+### A2A Task Lifecycle
+
+```
+Client                           Agent
+  │                                │
+  ├─ POST /tasks/send ────────────►│ Create task
+  │◄──────── task (submitted) ─────┤
+  │                                │
+  ├─ GET /tasks/{id} ─────────────►│ Poll status
+  │◄──────── task (working) ───────┤
+  │                                │
+  │  (agent processes...)          │
+  │                                │
+  ├─ GET /tasks/{id} ─────────────►│ Poll status
+  │◄──────── task (completed) ─────┤
+  │         + artifacts            │
+```
+
+### A2A Client Implementation
+
+```python
+import httpx
+import json
+from dataclasses import dataclass
+from typing import Optional
+from enum import Enum
+
+class TaskState(Enum):
+    SUBMITTED = &quot;submitted&quot;
+    WORKING = &quot;working&quot;
+    INPUT_REQUIRED = &quot;input-required&quot;
+    COMPLETED = &quot;completed&quot;
+    FAILED = &quot;failed&quot;
+    CANCELED = &quot;canceled&quot;
+
+@dataclass
+class A2AClient:
+    base_url: str
+    auth_token: str
+    timeout: float = 30.0
+
+    def _headers(self) -&gt; dict:
+        return {
+            &quot;Authorization&quot;: f&quot;Bearer {self.auth_token}&quot;,
+            &quot;Content-Type&quot;: &quot;application/json&quot;,
+        }
+
+    def discover(self) -&gt; dict:
+        &quot;&quot;&quot;Fetch the agent card for capability discovery.&quot;&quot;&quot;
+        resp = httpx.get(
+            f&quot;{self.base_url}/.well-known/agent.json&quot;,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()
+
+    def send_task(self, message: str, task_id: Optional[str] = None) -&gt; dict:
+        &quot;&quot;&quot;Send a task to the agent. Returns task object with status.&quot;&quot;&quot;
+        payload = {
+            &quot;jsonrpc&quot;: &quot;2.0&quot;,
+            &quot;method&quot;: &quot;tasks/send&quot;,
+            &quot;params&quot;: {
+                &quot;message&quot;: {
+                    &quot;role&quot;: &quot;user&quot;,
+                    &quot;parts&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: message}],
+                },
+            },
+            &quot;id&quot;: task_id or self._generate_id(),
+        }
+        resp = httpx.post(
+            f&quot;{self.base_url}/a2a&quot;,
+            json=payload,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()[&quot;result&quot;]
+
+    def get_task(self, task_id: str) -&gt; dict:
+        &quot;&quot;&quot;Poll task status.&quot;&quot;&quot;
+        payload = {
+            &quot;jsonrpc&quot;: &quot;2.0&quot;,
+            &quot;method&quot;: &quot;tasks/get&quot;,
+            &quot;params&quot;: {&quot;id&quot;: task_id},
+            &quot;id&quot;: self._generate_id(),
+        }
+        resp = httpx.post(
+            f&quot;{self.base_url}/a2a&quot;,
+            json=payload,
+            headers=self._headers(),
+            timeout=self.timeout,
+        )
+        resp.raise_for_status()
+        return resp.json()[&quot;result&quot;]
+
+    def wait_for_completion(self, task_id: str, poll_interval: float = 2.0, max_polls: int = 60) -&gt; dict:
+        &quot;&quot;&quot;Poll until task reaches a terminal state.&quot;&quot;&quot;
+        import time
+        terminal_states = {TaskState.COMPLETED, TaskState.FAILED, TaskState.CANCELED}
+        for _ in range(max_polls):
+            task = self.get_task(task_id)
+            if TaskState(task[&quot;status&quot;][&quot;state&quot;]) in terminal_states:
+                return task
+            time.sleep(poll_interval)
+        raise TimeoutError(f&quot;Task {task_id} did not complete within {max_polls * poll_interval}s&quot;)
+
+    @staticmethod
+    def _generate_id() -&gt; str:
+        import uuid
+        return str(uuid.uuid4())
+```
+
+## Protocol Bridge Pattern
+
+When your system uses multiple protocols, implement a bridge that translates between them.
+
+```python
+class ProtocolBridge:
+    &quot;&quot;&quot;Translates between MCP tool calls and A2A task delegation.&quot;&quot;&quot;
+
+    def __init__(self, a2a_agents: dict[str, A2AClient]):
+        self.agents = a2a_agents  # skill_id -&gt; A2AClient
+
+    def mcp_tool_to_a2a_task(self, tool_name: str, arguments: dict) -&gt; dict:
+        &quot;&quot;&quot;Convert an MCP tool call into an A2A task send.&quot;&quot;&quot;
+        agent_id, skill = self._resolve_agent(tool_name)
+        client = self.agents[agent_id]
+
+        message = self._format_task_message(tool_name, arguments)
+        task = client.send_task(message)
+        result = client.wait_for_completion(task[&quot;id&quot;])
+
+        return self._a2a_result_to_mcp_response(result)
+
+    def _resolve_agent(self, tool_name: str) -&gt; tuple[str, str]:
+        &quot;&quot;&quot;Map MCP tool name to A2A agent + skill.&quot;&quot;&quot;
+        routing = {
+            &quot;search_web&quot;: (&quot;research-agent&quot;, &quot;web-research&quot;),
+            &quot;analyze_data&quot;: (&quot;analytics-agent&quot;, &quot;data-analysis&quot;),
+            &quot;generate_code&quot;: (&quot;code-agent&quot;, &quot;code-generation&quot;),
+        }
+        if tool_name not in routing:
+            raise ValueError(f&quot;No A2A agent registered for tool: {tool_name}&quot;)
+        return routing[tool_name]
+
+    def _format_task_message(self, tool_name: str, arguments: dict) -&gt; str:
+        return json.dumps({&quot;tool&quot;: tool_name, &quot;arguments&quot;: arguments})
+
+    def _a2a_result_to_mcp_response(self, task: dict) -&gt; dict:
+        &quot;&quot;&quot;Convert A2A task result to MCP tool response format.&quot;&quot;&quot;
+        if task[&quot;status&quot;][&quot;state&quot;] == &quot;completed&quot;:
+            artifacts = task.get(&quot;artifacts&quot;, [])
+            text_parts = []
+            for artifact in artifacts:
+                for part in artifact.get(&quot;parts&quot;, []):
+                    if part[&quot;type&quot;] == &quot;text&quot;:
+                        text_parts.append(part[&quot;text&quot;])
+            return {&quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: &quot;\n&quot;.join(text_parts)}]}
+        else:
+            error_msg = task[&quot;status&quot;].get(&quot;message&quot;, &quot;Task failed&quot;)
+            return {&quot;content&quot;: [{&quot;type&quot;: &quot;text&quot;, &quot;text&quot;: f&quot;Error: {error_msg}&quot;}], &quot;isError&quot;: True}
+```
+
+## Error Handling Standards
+
+### Structured Error Responses
+
+Every protocol should return errors in a consistent format that agents can parse and recover from.
+
+```json
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;RATE_LIMITED&quot;,
+    &quot;message&quot;: &quot;Too many requests. Retry after 30 seconds.&quot;,
+    &quot;retryable&quot;: true,
+    &quot;retry_after_seconds&quot;: 30,
+    &quot;details&quot;: {
+      &quot;limit&quot;: 60,
+      &quot;window&quot;: &quot;1m&quot;,
+      &quot;current&quot;: 62
+    }
+  }
+}
+```
+
+### Error Code Taxonomy
+
+| Code | Meaning | Agent Action |
+|------|---------|-------------|
+| `INVALID_INPUT` | Bad parameters | Fix input and retry |
+| `NOT_FOUND` | Resource missing | Try alternative or report |
+| `AUTH_FAILED` | Credentials invalid | Refresh token and retry |
+| `AUTH_EXPIRED` | Token expired | Refresh and retry once |
+| `RATE_LIMITED` | Too many requests | Wait `retry_after` then retry |
+| `UPSTREAM_ERROR` | External service failed | Retry with backoff |
+| `INTERNAL_ERROR` | Server bug | Report, do not retry |
+| `CAPABILITY_UNAVAILABLE` | Tool/skill disabled | Use alternative tool |
+
+## Testing Agent Protocols
+
+### Tool Schema Validation
+
+```python
+import jsonschema
+
+def validate_mcp_tool(tool_def: dict) -&gt; list[str]:
+    &quot;&quot;&quot;Validate an MCP tool definition for common issues.&quot;&quot;&quot;
+    issues = []
+
+    if not tool_def.get(&quot;name&quot;):
+        issues.append(&quot;Missing tool name&quot;)
+    elif not tool_def[&quot;name&quot;].replace(&quot;_&quot;, &quot;&quot;).isalnum():
+        issues.append(f&quot;Tool name &#x27;{tool_def[&#x27;name&#x27;]}&#x27; should use snake_case with alphanumeric chars&quot;)
+
+    desc = tool_def.get(&quot;description&quot;, &quot;&quot;)
+    if len(desc) &lt; 20:
+        issues.append(&quot;Description too short — LLMs need clear usage guidance&quot;)
+    if not any(word in desc.lower() for word in [&quot;use when&quot;, &quot;returns&quot;, &quot;use this&quot;]):
+        issues.append(&quot;Description should explain when to use the tool and what it returns&quot;)
+
+    schema = tool_def.get(&quot;inputSchema&quot;, {})
+    if schema.get(&quot;type&quot;) != &quot;object&quot;:
+        issues.append(&quot;inputSchema must be type: object&quot;)
+
+    for prop_name, prop_def in schema.get(&quot;properties&quot;, {}).items():
+        if not prop_def.get(&quot;description&quot;):
+            issues.append(f&quot;Property &#x27;{prop_name}&#x27; missing description&quot;)
+        if prop_def.get(&quot;type&quot;) == &quot;string&quot; and not prop_def.get(&quot;description&quot;):
+            issues.append(f&quot;String property &#x27;{prop_name}&#x27; needs description for LLM context&quot;)
+
+    return issues
+```
+
+### Integration Testing Pattern
+
+```python
+import subprocess
+import json
+
+def test_mcp_server_tools():
+    &quot;&quot;&quot;Verify MCP server starts and lists expected tools.&quot;&quot;&quot;
+    proc = subprocess.Popen(
+        [&quot;node&quot;, &quot;dist/index.js&quot;],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    # Send initialize request
+    init_msg = json.dumps({
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;method&quot;: &quot;initialize&quot;,
+        &quot;params&quot;: {&quot;protocolVersion&quot;: &quot;2025-03-26&quot;, &quot;capabilities&quot;: {}, &quot;clientInfo&quot;: {&quot;name&quot;: &quot;test&quot;}},
+        &quot;id&quot;: 1,
+    }) + &quot;\n&quot;
+    proc.stdin.write(init_msg.encode())
+    proc.stdin.flush()
+
+    # Send tools/list
+    list_msg = json.dumps({
+        &quot;jsonrpc&quot;: &quot;2.0&quot;,
+        &quot;method&quot;: &quot;tools/list&quot;,
+        &quot;params&quot;: {},
+        &quot;id&quot;: 2,
+    }) + &quot;\n&quot;
+    proc.stdin.write(list_msg.encode())
+    proc.stdin.flush()
+
+    # Read and validate response
+    # (In production, use proper JSON-RPC response parsing)
+    proc.terminate()
+```
+
+## Common Pitfalls
+
+- **Vague tool descriptions** that cause the LLM to select the wrong tool or skip it entirely
+- **Missing required field declarations** leading to agents sending incomplete parameters
+- **No error codes** in responses, forcing agents to parse error messages with heuristics
+- **Exposing internal implementation details** in tool schemas instead of user-intent abstractions
+- **No rate limiting** on MCP servers, allowing runaway agent loops to exhaust resources
+- **Mixing transport concerns with protocol logic** instead of keeping them separate
+- **No capability versioning** making it impossible to evolve tools without breaking clients
+- **Synchronous-only design** that blocks on long-running operations instead of using task lifecycle
+
+## Best Practices
+
+1. **Description-first design** — write the tool description before the implementation
+2. **One intent per tool** — a tool that does three things gets selected for the wrong reason
+3. **Validate inputs on the server** — never trust that the LLM sent correct types
+4. **Return structured errors** with codes, not string messages
+5. **Version your protocol** — use capability negotiation at connection time
+6. **Log every tool call** with agent ID, inputs, outputs, and latency for debugging
+7. **Test tool selection** — present your tool list to an LLM and verify it picks the right one
+8. **Use protocol bridges** at boundaries rather than forcing all agents onto one protocol
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| LLM never selects the correct tool | Tool description is vague or missing usage guidance | Rewrite description using the &quot;[What it does]. [What it returns]. [When to use it].&quot; pattern |
+| MCP server connects but no tools appear | Missing `tools` in server capabilities declaration | Add `capabilities: { tools: {} }` to the `McpServer` constructor options |
+| A2A task stuck in `working` state indefinitely | Agent has no timeout or heartbeat mechanism | Implement `max_polls` and `poll_interval` in `wait_for_completion`; add server-side task TTLs |
+| `AUTH_EXPIRED` errors after token refresh | Refreshed token not propagated to in-flight requests | Store tokens centrally and read from shared state per-request rather than caching on the client instance |
+| Protocol bridge drops artifacts from A2A responses | Bridge only extracts `text` parts, ignoring `file` or `data` parts | Extend `_a2a_result_to_mcp_response` to handle all artifact part types including binary and structured data |
+| Rate limiting triggers during normal multi-tool calls | Per-agent rate limit is too low for parallel tool execution | Increase the per-minute ceiling or implement token-bucket rate limiting with burst allowance |
+| Tool schema validation passes but agent sends wrong types | JSON Schema `type` is correct but lacks `format`, `enum`, or `pattern` constraints | Add tighter constraints (e.g., `&quot;format&quot;: &quot;date&quot;`, `&quot;pattern&quot;: &quot;^[A-Z]{3}$&quot;`) to catch malformed inputs early |
+
+## Success Criteria
+
+- **Tool selection accuracy &gt;= 95%**: LLMs select the intended tool on the first attempt when presented with the full tool list and a matching user query.
+- **Schema validation coverage = 100%**: Every deployed tool passes `validate_mcp_tool()` with zero issues reported.
+- **Error response consistency**: All protocol endpoints return structured error objects with `code`, `message`, and `retryable` fields — no raw exception strings.
+- **Discovery latency &lt; 500ms**: Agent card retrieval (A2A) and `tools/list` (MCP) responses complete within 500ms at the 95th percentile.
+- **Protocol bridge translation fidelity &gt;= 99%**: Cross-protocol calls preserve all input parameters and output artifacts without data loss or type coercion errors.
+- **Authentication failure recovery &lt; 2 retries**: Token refresh flows resolve `AUTH_EXPIRED` errors within a single retry cycle without user intervention.
+- **Mean time to integrate a new tool &lt; 30 minutes**: A developer with access to this skill can define, validate, and deploy a new MCP or A2A tool in under 30 minutes.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Designing tool schemas for MCP, A2A, OpenAI Function Calling, and LangChain Tools
+- Transport selection, capability discovery, and protocol version negotiation
+- Authentication, rate limiting, and structured error handling for agent communication
+- Protocol bridging between heterogeneous agent ecosystems
+
+**This skill does NOT cover:**
+- Building complete MCP server applications with business logic — see `engineering/mcp-server-builder`
+- Agent orchestration patterns, planning loops, or multi-step reasoning — see `engineering/agent-workflow-designer`
+- Designing agent personas, memory systems, or behavioral profiles — see `engineering/agent-designer`
+- Infrastructure deployment, CI/CD pipelines, or container orchestration for agent services — see `engineering/senior-devops`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/mcp-server-builder` | Protocol schemas defined here feed directly into MCP server scaffolding | Tool definitions and inputSchema objects flow into server code generation |
+| `engineering/agent-workflow-designer` | Workflow orchestrators consume protocol interfaces to dispatch tasks | Agent-protocol defines the transport contract; workflow-designer defines execution order and branching |
+| `engineering/agent-designer` | Agent identity and capability profiles reference protocol-level skill declarations | Agent cards and capability metadata from protocol design inform agent persona configuration |
+| `engineering/senior-security` | Security review of auth flows, token scoping, and rate limiting configurations | OAuth 2.1 flows, API key rotation policies, and audit logging patterns flow into security assessments |
+| `engineering/api-design-reviewer` | REST and JSON-RPC endpoint design review for A2A and MCP HTTP transports | API schema and endpoint contracts feed into design review checklists |
+| `engineering/observability-designer` | Monitoring and tracing for inter-agent calls, latency tracking, and error budgets | Tool call logs with agent ID, latency, and error codes flow into observability dashboards |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agent Protocol&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agent Protocol&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agent Protocol in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agent Protocol&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agent Protocol&quot;
+4. Description: &quot;Design and implement AI agent communication protocols including MCP tool schemas, Google A2A protocol, OpenAI function calling, structured inter-agent messaging, and protocol negotiation. Use when bui...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agent-protocol/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

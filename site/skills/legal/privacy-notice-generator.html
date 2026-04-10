@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Privacy Notice Generator (Legal domain).
 
 Draft GDPR-compliant privacy notices for EU/EEA jurisdictions. Supports 6 notice types, 9 jurisdictions, multi-layer compliance verification. Use for privacy notice drafting, compliance checking, and jurisdiction mapping.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/privacy-notice-generator
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Privacy Notice Generator (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Privacy Notice Generator (Legal domain).
 
 Draft GDPR-compliant privacy notices for EU/EEA jurisdictions. Supports 6 notice types, 9 jurisdictions, multi-layer compliance verification. Use for privacy notice drafting, compliance checking, and jurisdiction mapping.
 
@@ -425,7 +447,724 @@ https://github.com/borghei/Claude-Skills/tree/main/privacy-notice-generator
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Privacy Notice Generator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Privacy Notice Generator
+
+Tools and guidance for drafting GDPR-compliant privacy notices across EU/EEA jurisdictions and audience types, with multi-layer compliance verification.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Privacy Notice Scaffolder](#privacy-notice-scaffolder)
+  - [Notice Compliance Checker](#notice-compliance-checker)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Privacy Notice Scaffolder
+
+Generates a privacy notice skeleton with all required sections pre-populated with jurisdiction-specific placeholders and legal references.
+
+```bash
+# Website privacy notice for German jurisdiction
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type website \
+  --jurisdiction DE \
+  --data-categories personal,contact,usage,cookies \
+  --legal-bases consent,contract,legitimate_interests \
+  --has-cookies \
+  --has-international-transfers
+
+# Employee notice for French jurisdiction with AI processing
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type employee \
+  --jurisdiction FR \
+  --data-categories personal,employment,financial,health \
+  --legal-bases contract,legal_obligation,consent \
+  --has-ai
+
+# B2C customer notice for UK with all features
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type b2c \
+  --jurisdiction UK \
+  --data-categories personal,contact,financial,usage,marketing \
+  --legal-bases consent,contract,legitimate_interests \
+  --has-cookies --has-ai --has-international-transfers \
+  --json
+```
+
+**Supported Notice Types:**
+
+| Type | Audience | Key Sections |
+|------|----------|-------------|
+| website | Website/app visitors | Cookies, analytics, tracking technologies |
+| applicant | Job applicants | Recruitment data, talent pool, retention periods |
+| employee | Employees | Works council, IT monitoring, BYOD, HR data |
+| b2b | Business partners | Art. 14 requirements, source disclosure |
+| b2c | B2C customers | Soft opt-in, payment processing, loyalty |
+| combined | Multiple audiences | Merged sections with audience-specific callouts |
+
+**Supported Jurisdictions:** DE, FR, AT, IT, ES, NL, BE, IE, UK
+
+**13-Section Notice Structure:**
+1. Controller identity and contact
+2. DPO contact details
+3. Data categories collected
+4. Purposes and legal bases
+5. Recipients and categories
+6. International transfers
+7. Retention periods
+8. Data subject rights
+9. Right to withdraw consent
+10. Right to complain to SA
+11. Automated decision-making
+12. Cookies and tracking (if applicable)
+13. AI processing (if applicable)
+
+---
+
+### Notice Compliance Checker
+
+Validates a privacy notice text against Art. 13/14 GDPR requirements and generates a compliance score with missing/incomplete elements.
+
+```bash
+# Check a privacy notice file
+python scripts/notice_compliance_checker.py privacy_notice.md
+
+# Check with jurisdiction-specific requirements
+python scripts/notice_compliance_checker.py privacy_notice.md --jurisdiction DE
+
+# Check with notice type for type-specific validation
+python scripts/notice_compliance_checker.py privacy_notice.md \
+  --jurisdiction DE --notice-type employee
+
+# JSON output
+python scripts/notice_compliance_checker.py privacy_notice.md \
+  --jurisdiction FR --notice-type website --json
+```
+
+**Checks For:**
+
+| Category | Elements Checked |
+|----------|-----------------|
+| Art. 13 Mandatory | Controller identity, DPO contact, purposes, legal bases, recipients, transfers, retention, all 8 rights, automated decisions, consent withdrawal, SA complaint |
+| Art. 14 Additional | Source of data, categories obtained (for indirect collection) |
+| General | Art. 21 right to object prominence, plain language, no placeholders, consistent formatting |
+| Jurisdiction-specific | DE: Widerspruchsrecht prominence, TDDDG; FR: CNIL recommendations; UK: ICO guidance |
+
+**Output:**
+- Compliance score (0-100)
+- Missing elements (must-fix)
+- Incomplete elements (should-improve)
+- Jurisdiction-specific findings
+- Type-specific findings
+
+---
+
+## Reference Guides
+
+### Notice Types Guide
+`references/notice_types_guide.md`
+
+Detailed guidance for 6 notice types:
+- Platform sub-types for website/app notices
+- Applicant-specific data categories and retention
+- Employee notice with works council and monitoring requirements
+- B2B Art. 14 requirements and source disclosure
+- B2C soft opt-in and payment processing
+- Combined notice merge strategies
+
+### Jurisdiction Requirements
+`references/jurisdiction_requirements.md`
+
+Jurisdiction-specific requirements for 9 jurisdictions:
+- SA details and registration requirements
+- Requirements beyond GDPR baseline
+- Standard wording recommendations
+- Retention guidance per jurisdiction
+
+### Compliance Verification
+`references/compliance_verification.md`
+
+5-layer verification system:
+- Jurisdiction-specific checks
+- Art. 13/14 mandatory disclosures
+- General compliance checks
+- Type-specific checks
+- AI Act compliance
+- Post-generation checklist
+- Writing style guide
+
+---
+
+## Workflows
+
+### Workflow 1: SCOPE → INTAKE → DRAFT → VERIFY → DELIVER
+
+```
+Step 1: SCOPE — Determine notice parameters
+        → Notice type (website/applicant/employee/b2b/b2c/combined)
+        → Jurisdiction (DE/FR/AT/IT/ES/NL/BE/IE/UK)
+        → Special features (cookies, AI, international transfers)
+
+Step 2: INTAKE — Gather information
+        → Controller identity and DPO
+        → Data inventory (categories, sources)
+        → Purposes and legal bases per category
+        → Recipients and processors
+        → Transfer destinations and mechanisms
+        → Retention periods per category
+        → Cookie/tracking inventory (if website)
+        → AI processing details (if applicable)
+
+Step 3: DRAFT — Generate notice skeleton
+        → python scripts/privacy_notice_scaffolder.py [params]
+        → Fill in placeholders with actual information from intake
+        → Add jurisdiction-specific clauses
+        → Apply writing style guide (you/your, short sentences, tables)
+
+Step 4: VERIFY — Run compliance checker
+        → python scripts/notice_compliance_checker.py notice.md --jurisdiction [J] --notice-type [T]
+        → Address all missing elements
+        → Address incomplete elements
+        → Review jurisdiction-specific findings
+
+Step 5: DELIVER — Finalize and publish
+        → Legal review sign-off
+        → Technical review (links, formatting, accessibility)
+        → Translation QA (if multilingual)
+        → Publication with version control
+        → Set review trigger calendar
+```
+
+### Workflow 2: Notice Update
+
+```
+Step 1: Identify trigger (new processing, regulation change, annual review)
+Step 2: Run compliance checker on current notice
+Step 3: Identify gaps and required updates
+Step 4: Draft updated sections
+Step 5: Re-verify with compliance checker
+Step 6: Notify data subjects of material changes
+Step 7: Update version date and change log
+```
+
+### Workflow 3: Multi-Jurisdiction Notice
+
+```
+Step 1: Generate base notice for primary jurisdiction
+        → python scripts/privacy_notice_scaffolder.py --jurisdiction [primary] ...
+Step 2: Check jurisdiction requirements for additional territories
+        → See references/jurisdiction_requirements.md
+Step 3: Add jurisdiction-specific supplements
+        → DE: TDDDG telecom disclosures, DSK guidance
+        → FR: CNIL cookie requirements, LIL specifics
+        → UK: ICO guidance, UK transfer mechanisms
+Step 4: Verify each jurisdiction version
+        → python scripts/notice_compliance_checker.py notice_de.md --jurisdiction DE
+        → python scripts/notice_compliance_checker.py notice_fr.md --jurisdiction FR
+Step 5: Publish with language/jurisdiction switcher
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Low compliance score despite complete notice | Missing jurisdiction-specific requirements (e.g., DE Widerspruchsrecht prominence) | Run checker with --jurisdiction flag; review jurisdiction_requirements.md for local additions |
+| Scaffolder generates too many sections | Combined notice type includes all audience sections | Use specific notice type instead of combined; or remove irrelevant sections post-generation |
+| Art. 14 findings for direct collection | Checker flags Art. 14 requirements for B2B notice type | Correct — B2B often involves indirect collection; ensure source disclosure is included |
+| Placeholder text in final notice | Template not fully populated | Search for `[PLACEHOLDER]` and `{{variable}}` markers; all must be replaced before publication |
+| Cookie section missing from employee notice | Employee notice type does not include cookies by default | Add --has-cookies flag if employee-facing systems use cookies/tracking |
+| AI section not generated | Missing --has-ai flag | Re-run scaffolder with --has-ai; review AI Act Art. 50 transparency requirements |
+
+---
+
+## Success Criteria
+
+- **100% Art. 13/14 compliance score** — all mandatory disclosure elements present; zero missing items
+- **Jurisdiction-specific requirements met** — compliance checker confirms local SA requirements addressed
+- **Type-specific requirements met** — notice covers all audience-specific data processing activities
+- **No placeholder text remaining** — all template variables replaced with actual information
+- **Writing style guide followed** — &quot;you/your&quot; voice; short sentences; tables for complex information; precise legal citations
+- **Legal review completed** — qualified privacy counsel sign-off on final notice
+- **Publication requirements met** — accessible, versioned, dated, with change notification mechanism
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Privacy notice skeleton generation for 6 notice types across 9 jurisdictions
+- Compliance checking against Art. 13/14 GDPR mandatory disclosures
+- Jurisdiction-specific requirement validation (DE, FR, AT, IT, ES, NL, BE, IE, UK)
+- Notice type-specific section generation and validation
+- AI Act Art. 50 transparency disclosure sections
+- Cookie and tracking technology disclosure sections
+- Writing style and plain language guidance
+
+**Out of Scope:**
+- Legal advice on specific legal basis selection — consult qualified privacy counsel
+- Translation services — tool generates English templates; professional translation required
+- Cookie consent implementation or CMP configuration
+- DPIA generation (see `dpia-assessment` skill)
+- Privacy notice hosting or publication infrastructure
+- Non-GDPR privacy notice formats (CCPA notice at collection, LGPD notices)
+- Sector-specific notices (healthcare, financial services, children&#x27;s services)
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| **Copy-paste from another company** | Different processing activities, jurisdictions, and legal bases; exposes liability gaps | Generate skeleton from actual parameters; fill with organization-specific information |
+| **One notice for all jurisdictions** | Misses jurisdiction-specific requirements (DE TDDDG, FR CNIL, UK ICO); SA enforcement | Generate jurisdiction-specific versions or supplements using scaffolder per jurisdiction |
+| **Generic legal bases** (&quot;we process your data based on applicable law&quot;) | Art. 13(1)(c) requires specific legal basis per purpose; generic statement is non-compliant | Map each processing purpose to specific Art. 6(1) basis; document in purpose-basis table |
+| **Set and forget** | Processing activities change; regulations evolve; notices become inaccurate | Set review triggers (see compliance_verification.md); run compliance checker quarterly |
+| **Overly legalistic language** | Recital 58 requires clear and plain language; complex legal jargon is non-compliant | Follow writing style guide: &quot;you/your&quot; voice, short sentences, tables, examples |
+
+---
+
+## Tool Reference
+
+### privacy_notice_scaffolder.py
+
+Generates a privacy notice skeleton based on notice type, jurisdiction, and processing parameters.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--notice-type &lt;type&gt;` | Yes | Notice type: website, applicant, employee, b2b, b2c, combined |
+| `--jurisdiction &lt;code&gt;` | Yes | Jurisdiction: DE, FR, AT, IT, ES, NL, BE, IE, UK |
+| `--data-categories &lt;list&gt;` | Yes | Comma-separated: personal, contact, usage, cookies, financial, health, employment, marketing, biometric |
+| `--legal-bases &lt;list&gt;` | Yes | Comma-separated: consent, contract, legal_obligation, legitimate_interests, vital_interests, public_task |
+| `--has-cookies` | No | Include cookies and tracking section |
+| `--has-ai` | No | Include AI and automated processing section |
+| `--has-international-transfers` | No | Include international transfers section |
+| `--json` | No | Output in JSON format |
+
+### notice_compliance_checker.py
+
+Validates a privacy notice against Art. 13/14 GDPR requirements.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `&lt;notice_file&gt;` | Yes | Path to privacy notice file (markdown or text) |
+| `--jurisdiction &lt;code&gt;` | No | Jurisdiction for local requirements: DE, FR, AT, IT, ES, NL, BE, IE, UK |
+| `--notice-type &lt;type&gt;` | No | Notice type for type-specific checks: website, applicant, employee, b2b, b2c, combined |
+| `--json` | No | Output in JSON format |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Privacy Notice Generator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Privacy Notice Generator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Privacy Notice Generator in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Privacy Notice Generator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Privacy Notice Generator&quot;
+4. Description: &quot;Draft GDPR-compliant privacy notices for EU/EEA jurisdictions. Supports 6 notice types, 9 jurisdictions, multi-layer compliance verification. Use for privacy notice drafting, compliance checking, and jurisdiction mapping.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/privacy-notice-generator/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Privacy Notice Generator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Privacy Notice Generator
+
+Tools and guidance for drafting GDPR-compliant privacy notices across EU/EEA jurisdictions and audience types, with multi-layer compliance verification.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Privacy Notice Scaffolder](#privacy-notice-scaffolder)
+  - [Notice Compliance Checker](#notice-compliance-checker)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Privacy Notice Scaffolder
+
+Generates a privacy notice skeleton with all required sections pre-populated with jurisdiction-specific placeholders and legal references.
+
+```bash
+# Website privacy notice for German jurisdiction
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type website \
+  --jurisdiction DE \
+  --data-categories personal,contact,usage,cookies \
+  --legal-bases consent,contract,legitimate_interests \
+  --has-cookies \
+  --has-international-transfers
+
+# Employee notice for French jurisdiction with AI processing
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type employee \
+  --jurisdiction FR \
+  --data-categories personal,employment,financial,health \
+  --legal-bases contract,legal_obligation,consent \
+  --has-ai
+
+# B2C customer notice for UK with all features
+python scripts/privacy_notice_scaffolder.py \
+  --notice-type b2c \
+  --jurisdiction UK \
+  --data-categories personal,contact,financial,usage,marketing \
+  --legal-bases consent,contract,legitimate_interests \
+  --has-cookies --has-ai --has-international-transfers \
+  --json
+```
+
+**Supported Notice Types:**
+
+| Type | Audience | Key Sections |
+|------|----------|-------------|
+| website | Website/app visitors | Cookies, analytics, tracking technologies |
+| applicant | Job applicants | Recruitment data, talent pool, retention periods |
+| employee | Employees | Works council, IT monitoring, BYOD, HR data |
+| b2b | Business partners | Art. 14 requirements, source disclosure |
+| b2c | B2C customers | Soft opt-in, payment processing, loyalty |
+| combined | Multiple audiences | Merged sections with audience-specific callouts |
+
+**Supported Jurisdictions:** DE, FR, AT, IT, ES, NL, BE, IE, UK
+
+**13-Section Notice Structure:**
+1. Controller identity and contact
+2. DPO contact details
+3. Data categories collected
+4. Purposes and legal bases
+5. Recipients and categories
+6. International transfers
+7. Retention periods
+8. Data subject rights
+9. Right to withdraw consent
+10. Right to complain to SA
+11. Automated decision-making
+12. Cookies and tracking (if applicable)
+13. AI processing (if applicable)
+
+---
+
+### Notice Compliance Checker
+
+Validates a privacy notice text against Art. 13/14 GDPR requirements and generates a compliance score with missing/incomplete elements.
+
+```bash
+# Check a privacy notice file
+python scripts/notice_compliance_checker.py privacy_notice.md
+
+# Check with jurisdiction-specific requirements
+python scripts/notice_compliance_checker.py privacy_notice.md --jurisdiction DE
+
+# Check with notice type for type-specific validation
+python scripts/notice_compliance_checker.py privacy_notice.md \
+  --jurisdiction DE --notice-type employee
+
+# JSON output
+python scripts/notice_compliance_checker.py privacy_notice.md \
+  --jurisdiction FR --notice-type website --json
+```
+
+**Checks For:**
+
+| Category | Elements Checked |
+|----------|-----------------|
+| Art. 13 Mandatory | Controller identity, DPO contact, purposes, legal bases, recipients, transfers, retention, all 8 rights, automated decisions, consent withdrawal, SA complaint |
+| Art. 14 Additional | Source of data, categories obtained (for indirect collection) |
+| General | Art. 21 right to object prominence, plain language, no placeholders, consistent formatting |
+| Jurisdiction-specific | DE: Widerspruchsrecht prominence, TDDDG; FR: CNIL recommendations; UK: ICO guidance |
+
+**Output:**
+- Compliance score (0-100)
+- Missing elements (must-fix)
+- Incomplete elements (should-improve)
+- Jurisdiction-specific findings
+- Type-specific findings
+
+---
+
+## Reference Guides
+
+### Notice Types Guide
+`references/notice_types_guide.md`
+
+Detailed guidance for 6 notice types:
+- Platform sub-types for website/app notices
+- Applicant-specific data categories and retention
+- Employee notice with works council and monitoring requirements
+- B2B Art. 14 requirements and source disclosure
+- B2C soft opt-in and payment processing
+- Combined notice merge strategies
+
+### Jurisdiction Requirements
+`references/jurisdiction_requirements.md`
+
+Jurisdiction-specific requirements for 9 jurisdictions:
+- SA details and registration requirements
+- Requirements beyond GDPR baseline
+- Standard wording recommendations
+- Retention guidance per jurisdiction
+
+### Compliance Verification
+`references/compliance_verification.md`
+
+5-layer verification system:
+- Jurisdiction-specific checks
+- Art. 13/14 mandatory disclosures
+- General compliance checks
+- Type-specific checks
+- AI Act compliance
+- Post-generation checklist
+- Writing style guide
+
+---
+
+## Workflows
+
+### Workflow 1: SCOPE → INTAKE → DRAFT → VERIFY → DELIVER
+
+```
+Step 1: SCOPE — Determine notice parameters
+        → Notice type (website/applicant/employee/b2b/b2c/combined)
+        → Jurisdiction (DE/FR/AT/IT/ES/NL/BE/IE/UK)
+        → Special features (cookies, AI, international transfers)
+
+Step 2: INTAKE — Gather information
+        → Controller identity and DPO
+        → Data inventory (categories, sources)
+        → Purposes and legal bases per category
+        → Recipients and processors
+        → Transfer destinations and mechanisms
+        → Retention periods per category
+        → Cookie/tracking inventory (if website)
+        → AI processing details (if applicable)
+
+Step 3: DRAFT — Generate notice skeleton
+        → python scripts/privacy_notice_scaffolder.py [params]
+        → Fill in placeholders with actual information from intake
+        → Add jurisdiction-specific clauses
+        → Apply writing style guide (you/your, short sentences, tables)
+
+Step 4: VERIFY — Run compliance checker
+        → python scripts/notice_compliance_checker.py notice.md --jurisdiction [J] --notice-type [T]
+        → Address all missing elements
+        → Address incomplete elements
+        → Review jurisdiction-specific findings
+
+Step 5: DELIVER — Finalize and publish
+        → Legal review sign-off
+        → Technical review (links, formatting, accessibility)
+        → Translation QA (if multilingual)
+        → Publication with version control
+        → Set review trigger calendar
+```
+
+### Workflow 2: Notice Update
+
+```
+Step 1: Identify trigger (new processing, regulation change, annual review)
+Step 2: Run compliance checker on current notice
+Step 3: Identify gaps and required updates
+Step 4: Draft updated sections
+Step 5: Re-verify with compliance checker
+Step 6: Notify data subjects of material changes
+Step 7: Update version date and change log
+```
+
+### Workflow 3: Multi-Jurisdiction Notice
+
+```
+Step 1: Generate base notice for primary jurisdiction
+        → python scripts/privacy_notice_scaffolder.py --jurisdiction [primary] ...
+Step 2: Check jurisdiction requirements for additional territories
+        → See references/jurisdiction_requirements.md
+Step 3: Add jurisdiction-specific supplements
+        → DE: TDDDG telecom disclosures, DSK guidance
+        → FR: CNIL cookie requirements, LIL specifics
+        → UK: ICO guidance, UK transfer mechanisms
+Step 4: Verify each jurisdiction version
+        → python scripts/notice_compliance_checker.py notice_de.md --jurisdiction DE
+        → python scripts/notice_compliance_checker.py notice_fr.md --jurisdiction FR
+Step 5: Publish with language/jurisdiction switcher
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Low compliance score despite complete notice | Missing jurisdiction-specific requirements (e.g., DE Widerspruchsrecht prominence) | Run checker with --jurisdiction flag; review jurisdiction_requirements.md for local additions |
+| Scaffolder generates too many sections | Combined notice type includes all audience sections | Use specific notice type instead of combined; or remove irrelevant sections post-generation |
+| Art. 14 findings for direct collection | Checker flags Art. 14 requirements for B2B notice type | Correct — B2B often involves indirect collection; ensure source disclosure is included |
+| Placeholder text in final notice | Template not fully populated | Search for `[PLACEHOLDER]` and `{{variable}}` markers; all must be replaced before publication |
+| Cookie section missing from employee notice | Employee notice type does not include cookies by default | Add --has-cookies flag if employee-facing systems use cookies/tracking |
+| AI section not generated | Missing --has-ai flag | Re-run scaffolder with --has-ai; review AI Act Art. 50 transparency requirements |
+
+---
+
+## Success Criteria
+
+- **100% Art. 13/14 compliance score** — all mandatory disclosure elements present; zero missing items
+- **Jurisdiction-specific requirements met** — compliance checker confirms local SA requirements addressed
+- **Type-specific requirements met** — notice covers all audience-specific data processing activities
+- **No placeholder text remaining** — all template variables replaced with actual information
+- **Writing style guide followed** — &quot;you/your&quot; voice; short sentences; tables for complex information; precise legal citations
+- **Legal review completed** — qualified privacy counsel sign-off on final notice
+- **Publication requirements met** — accessible, versioned, dated, with change notification mechanism
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Privacy notice skeleton generation for 6 notice types across 9 jurisdictions
+- Compliance checking against Art. 13/14 GDPR mandatory disclosures
+- Jurisdiction-specific requirement validation (DE, FR, AT, IT, ES, NL, BE, IE, UK)
+- Notice type-specific section generation and validation
+- AI Act Art. 50 transparency disclosure sections
+- Cookie and tracking technology disclosure sections
+- Writing style and plain language guidance
+
+**Out of Scope:**
+- Legal advice on specific legal basis selection — consult qualified privacy counsel
+- Translation services — tool generates English templates; professional translation required
+- Cookie consent implementation or CMP configuration
+- DPIA generation (see `dpia-assessment` skill)
+- Privacy notice hosting or publication infrastructure
+- Non-GDPR privacy notice formats (CCPA notice at collection, LGPD notices)
+- Sector-specific notices (healthcare, financial services, children&#x27;s services)
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| **Copy-paste from another company** | Different processing activities, jurisdictions, and legal bases; exposes liability gaps | Generate skeleton from actual parameters; fill with organization-specific information |
+| **One notice for all jurisdictions** | Misses jurisdiction-specific requirements (DE TDDDG, FR CNIL, UK ICO); SA enforcement | Generate jurisdiction-specific versions or supplements using scaffolder per jurisdiction |
+| **Generic legal bases** (&quot;we process your data based on applicable law&quot;) | Art. 13(1)(c) requires specific legal basis per purpose; generic statement is non-compliant | Map each processing purpose to specific Art. 6(1) basis; document in purpose-basis table |
+| **Set and forget** | Processing activities change; regulations evolve; notices become inaccurate | Set review triggers (see compliance_verification.md); run compliance checker quarterly |
+| **Overly legalistic language** | Recital 58 requires clear and plain language; complex legal jargon is non-compliant | Follow writing style guide: &quot;you/your&quot; voice, short sentences, tables, examples |
+
+---
+
+## Tool Reference
+
+### privacy_notice_scaffolder.py
+
+Generates a privacy notice skeleton based on notice type, jurisdiction, and processing parameters.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--notice-type &lt;type&gt;` | Yes | Notice type: website, applicant, employee, b2b, b2c, combined |
+| `--jurisdiction &lt;code&gt;` | Yes | Jurisdiction: DE, FR, AT, IT, ES, NL, BE, IE, UK |
+| `--data-categories &lt;list&gt;` | Yes | Comma-separated: personal, contact, usage, cookies, financial, health, employment, marketing, biometric |
+| `--legal-bases &lt;list&gt;` | Yes | Comma-separated: consent, contract, legal_obligation, legitimate_interests, vital_interests, public_task |
+| `--has-cookies` | No | Include cookies and tracking section |
+| `--has-ai` | No | Include AI and automated processing section |
+| `--has-international-transfers` | No | Include international transfers section |
+| `--json` | No | Output in JSON format |
+
+### notice_compliance_checker.py
+
+Validates a privacy notice against Art. 13/14 GDPR requirements.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `&lt;notice_file&gt;` | Yes | Path to privacy notice file (markdown or text) |
+| `--jurisdiction &lt;code&gt;` | No | Jurisdiction for local requirements: DE, FR, AT, IT, ES, NL, BE, IE, UK |
+| `--notice-type &lt;type&gt;` | No | Notice type for type-specific checks: website, applicant, employee, b2b, b2c, combined |
+| `--json` | No | Output in JSON format |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Privacy Notice Generator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Privacy Notice Generator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Privacy Notice Generator in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Privacy Notice Generator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Privacy Notice Generator&quot;
+4. Description: &quot;Draft GDPR-compliant privacy notices for EU/EEA jurisdictions. Supports 6 notice types, 9 jurisdictions, multi-layer compliance verification. Use for privacy notice drafting, compliance checking, and jurisdiction mapping.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/privacy-notice-generator/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

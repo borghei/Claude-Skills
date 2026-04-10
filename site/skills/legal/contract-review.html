@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Contract Review (Legal domain).
 
 Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use when reviewing vendor contracts, SaaS agreements, service agreements, or generating redline suggestions.
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/contract-review
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Contract Review (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Contract Review (Legal domain).
 
 Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use when reviewing vendor contracts, SaaS agreements, service agreements, or generating redline suggestions.
 
@@ -433,7 +455,624 @@ https://github.com/borghei/Claude-Skills/tree/main/contract-review
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Contract Review&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Contract Review
+
+Automated contract review tools that analyze agreements against organizational playbooks, classify clause risk with GREEN/YELLOW/RED severity, and generate prioritized redline suggestions with fallback positions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Contract Analyzer](#contract-analyzer)
+  - [Redline Generator](#redline-generator)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Standard Contract Review](#standard-contract-review)
+  - [Rapid Risk Triage](#rapid-risk-triage)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Contract Analyzer
+
+Analyzes contract text files for clause types, missing standard clauses, and risk indicators.
+
+```bash
+# Analyze a contract file
+python scripts/contract_analyzer.py contract.txt
+
+# JSON output for pipeline integration
+python scripts/contract_analyzer.py agreement.md --json
+
+# Save analysis to file
+python scripts/contract_analyzer.py contract.txt --output analysis.json --json
+```
+
+**What it detects:**
+- Clause types: Limitation of Liability, Indemnification, IP, Data Protection, Term &amp; Termination, Governing Law, Reps &amp; Warranties, Force Majeure, Confidentiality, Payment Terms
+- Missing standard clauses against a baseline checklist
+- Risk indicators: uncapped liability, perpetual terms, unilateral indemnification, automatic renewal without opt-out, broad IP assignment, unlimited audit rights
+
+**Risk Classification:**
+
+| Level | Meaning | Action |
+|-------|---------|--------|
+| RED | Deal-breaker risk | Must negotiate before signing |
+| YELLOW | Material concern | Should negotiate, may accept with mitigation |
+| GREEN | Standard or favorable | Acceptable as-is |
+
+---
+
+### Redline Generator
+
+Takes contract analysis JSON and generates formatted redline suggestions with priority tiers.
+
+```bash
+# Generate redlines from analysis
+python scripts/contract_analyzer.py contract.txt --json --output analysis.json
+python scripts/redline_generator.py analysis.json
+
+# JSON output
+python scripts/redline_generator.py analysis.json --json
+
+# Save redlines to file
+python scripts/redline_generator.py analysis.json --output redlines.md
+```
+
+**Output includes:**
+- Priority tier (Must-Have / Should-Have / Nice-to-Have)
+- Preferred redline language
+- Rationale for each change
+- Fallback position if counterparty rejects
+- Negotiation notes
+
+**Priority Tiers:**
+
+| Tier | Label | Description |
+|------|-------|-------------|
+| 1 | Must-Have | Deal-breakers; walk away if rejected |
+| 2 | Should-Have | Strong preferences; push hard but negotiable |
+| 3 | Nice-to-Have | Concession candidates; trade for Tier 1-2 wins |
+
+---
+
+## Reference Guides
+
+### Clause Analysis Guide
+`references/clause_analysis_guide.md`
+
+Deep reference covering 8+ clause types:
+- Limitation of Liability (cap types, carveouts, consequential damages)
+- Indemnification (mutuality, scope, procedure)
+- IP (ownership, licenses, work-for-hire, feedback)
+- Data Protection (DPA, sub-processors, breach notification, transfers)
+- Term &amp; Termination (auto-renewal, cure periods, transition)
+- Governing Law (jurisdiction, arbitration, jury waiver)
+- Representations &amp; Warranties
+- Force Majeure
+
+### Negotiation Playbook
+`references/negotiation_playbook.md`
+
+Negotiation priority framework with:
+- Tier 1 deal-breakers and walkaway criteria
+- Tier 2 strong preferences with trading strategies
+- Tier 3 concession candidates for strategic give-backs
+- Redline format template
+- Common negotiation pitfalls
+
+---
+
+## Workflows
+
+### Standard Contract Review
+
+1. **Ingest** -- Save contract as `.txt` or `.md` file
+2. **Analyze** -- Run `contract_analyzer.py` with `--json` flag
+3. **Review findings** -- Check RED items first, then YELLOW
+4. **Generate redlines** -- Run `redline_generator.py` on analysis output
+5. **Prioritize** -- Focus on Must-Have redlines, prepare fallbacks for Should-Have
+6. **Send to counsel** -- Attach analysis and redlines for final review
+
+### Rapid Risk Triage
+
+1. Run `contract_analyzer.py` in text mode for quick scan
+2. If any RED findings: escalate immediately to legal counsel
+3. If YELLOW only: schedule review within 48 hours
+4. If all GREEN: proceed with standard approval workflow
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `Error: File not found` | Contract file path is incorrect or file does not exist | Verify the file path; use absolute paths if relative paths fail |
+| No clauses detected | Contract uses unusual formatting or non-standard clause headers | Ensure contract is plain text; strip PDF artifacts before analysis |
+| All clauses marked GREEN | Contract is genuinely favorable, or text extraction missed key sections | Manually verify critical clauses (liability, indemnification, IP) are present in the input file |
+| Redline generator produces empty output | Analysis JSON has no YELLOW or RED findings | Confirm analysis JSON is valid; re-run analyzer if contract was updated |
+| False positive on uncapped liability | Liability section references a cap elsewhere in the document | Review the full Limitation of Liability section; the tool scans for cap keywords within each clause boundary |
+| Missing clause false positive | Clause exists but uses non-standard heading (e.g., &quot;Damages Cap&quot; instead of &quot;Limitation of Liability&quot;) | The analyzer checks multiple heading variants; add custom aliases if your organization uses unique terminology |
+
+---
+
+## Success Criteria
+
+- **Contract review time reduced by 50%:** Automated clause identification and risk classification eliminates manual scanning.
+- **Zero missed RED-severity clauses:** Every uncapped liability, unilateral indemnification, and broad IP assignment is flagged before human review.
+- **Redline generation under 2 minutes:** From analysis JSON to prioritized redline document.
+- **Consistent risk classification across reviewers:** GREEN/YELLOW/RED framework eliminates subjective assessments.
+- **100% of contracts reviewed with structured output:** Every agreement gets a clause inventory and risk report before negotiation begins.
+- **Negotiation success rate above 80% on Must-Have items:** Tier 1 redlines with prepared fallbacks improve negotiation outcomes.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Static text analysis of contract clauses using keyword and pattern matching
+- Clause type identification across 10+ standard commercial contract categories
+- Risk indicator detection: uncapped liability, perpetual terms, unilateral obligations, auto-renewal traps
+- Missing clause detection against a standard commercial contract baseline
+- Prioritized redline generation with fallback positions
+
+**Does NOT cover:**
+- **Legal advice** -- this tool supports review, it does not replace qualified legal counsel
+- **Jurisdiction-specific compliance** -- use `ra-qm-team` skills for regulatory compliance (GDPR, SOC 2, etc.)
+- **Contract execution or e-signature workflows** -- out of scope
+- **Multi-document cross-reference** (e.g., checking SOW against MSA) -- analyze each document separately
+- **Non-English contracts** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Signing contracts with only GREEN findings and no human review | Automated analysis cannot catch context-dependent risks, ambiguous language, or business-specific concerns | Always have qualified counsel review before execution, even on all-GREEN contracts |
+| Treating all RED findings as equal | Some RED items are structural deal-breakers while others may be resolvable with a single word change | Use the redline generator to assess effort and fallback positions for each RED finding |
+| Skipping the redline fallback positions | Entering negotiation with only preferred positions leaves no room for strategic concession | Always prepare Must-Have fallbacks and identify Nice-to-Have items to trade away |
+| Running analysis on poorly extracted text | PDF-to-text conversion artifacts break clause detection patterns | Clean the text file before analysis: remove headers, footers, page numbers, and formatting artifacts |
+
+---
+
+## Tool Reference
+
+### contract_analyzer.py
+
+**Purpose:** Analyzes contract text files for clause types, identifies missing standard clauses, and flags risk indicators with GREEN/YELLOW/RED severity classification.
+
+**Usage:**
+
+```bash
+python scripts/contract_analyzer.py &lt;contract_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `contract_file` | *(positional)* | | Path to contract text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_agreement.txt&quot;,
+  &quot;clauses_found&quot;: [
+    {
+      &quot;type&quot;: &quot;limitation_of_liability&quot;,
+      &quot;severity&quot;: &quot;RED&quot;,
+      &quot;text_snippet&quot;: &quot;...liability shall not be limited...&quot;,
+      &quot;risk_flags&quot;: [&quot;uncapped_liability&quot;],
+      &quot;notes&quot;: &quot;No liability cap found; uncapped exposure&quot;
+    }
+  ],
+  &quot;missing_clauses&quot;: [&quot;force_majeure&quot;, &quot;data_protection&quot;],
+  &quot;risk_summary&quot;: {&quot;RED&quot;: 2, &quot;YELLOW&quot;: 3, &quot;GREEN&quot;: 5},
+  &quot;overall_risk&quot;: &quot;RED&quot;
+}
+```
+
+---
+
+### redline_generator.py
+
+**Purpose:** Takes contract analysis JSON and generates formatted redline suggestions with priority tiers, rationale, and fallback positions.
+
+**Usage:**
+
+```bash
+python scripts/redline_generator.py &lt;analysis_json&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `analysis_json` | *(positional)* | | Path to contract analysis JSON file |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output:**
+
+```
+REDLINE SUGGESTIONS
+===================
+
+[MUST-HAVE] Limitation of Liability — Uncapped Liability
+  Severity: RED
+  Preferred: &quot;Aggregate liability shall not exceed 12 months of fees paid.&quot;
+  Rationale: Uncapped liability creates unlimited financial exposure.
+  Fallback: &quot;Aggregate liability shall not exceed 24 months of fees paid.&quot;
+
+[SHOULD-HAVE] Indemnification — Unilateral Indemnification
+  Severity: YELLOW
+  Preferred: &quot;Each party shall indemnify the other for breaches of this Agreement.&quot;
+  Rationale: Mutual indemnification balances risk between parties.
+  Fallback: &quot;Indemnification obligations shall be subject to the liability cap.&quot;
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Contract Review&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Contract Review&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Contract Review in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Contract Review&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Contract Review&quot;
+4. Description: &quot;Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use when reviewing vendor contracts, SaaS agreements, service agreements, or generating redline suggestions.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/contract-review/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Contract Review&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Contract Review
+
+Automated contract review tools that analyze agreements against organizational playbooks, classify clause risk with GREEN/YELLOW/RED severity, and generate prioritized redline suggestions with fallback positions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Contract Analyzer](#contract-analyzer)
+  - [Redline Generator](#redline-generator)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Standard Contract Review](#standard-contract-review)
+  - [Rapid Risk Triage](#rapid-risk-triage)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Contract Analyzer
+
+Analyzes contract text files for clause types, missing standard clauses, and risk indicators.
+
+```bash
+# Analyze a contract file
+python scripts/contract_analyzer.py contract.txt
+
+# JSON output for pipeline integration
+python scripts/contract_analyzer.py agreement.md --json
+
+# Save analysis to file
+python scripts/contract_analyzer.py contract.txt --output analysis.json --json
+```
+
+**What it detects:**
+- Clause types: Limitation of Liability, Indemnification, IP, Data Protection, Term &amp; Termination, Governing Law, Reps &amp; Warranties, Force Majeure, Confidentiality, Payment Terms
+- Missing standard clauses against a baseline checklist
+- Risk indicators: uncapped liability, perpetual terms, unilateral indemnification, automatic renewal without opt-out, broad IP assignment, unlimited audit rights
+
+**Risk Classification:**
+
+| Level | Meaning | Action |
+|-------|---------|--------|
+| RED | Deal-breaker risk | Must negotiate before signing |
+| YELLOW | Material concern | Should negotiate, may accept with mitigation |
+| GREEN | Standard or favorable | Acceptable as-is |
+
+---
+
+### Redline Generator
+
+Takes contract analysis JSON and generates formatted redline suggestions with priority tiers.
+
+```bash
+# Generate redlines from analysis
+python scripts/contract_analyzer.py contract.txt --json --output analysis.json
+python scripts/redline_generator.py analysis.json
+
+# JSON output
+python scripts/redline_generator.py analysis.json --json
+
+# Save redlines to file
+python scripts/redline_generator.py analysis.json --output redlines.md
+```
+
+**Output includes:**
+- Priority tier (Must-Have / Should-Have / Nice-to-Have)
+- Preferred redline language
+- Rationale for each change
+- Fallback position if counterparty rejects
+- Negotiation notes
+
+**Priority Tiers:**
+
+| Tier | Label | Description |
+|------|-------|-------------|
+| 1 | Must-Have | Deal-breakers; walk away if rejected |
+| 2 | Should-Have | Strong preferences; push hard but negotiable |
+| 3 | Nice-to-Have | Concession candidates; trade for Tier 1-2 wins |
+
+---
+
+## Reference Guides
+
+### Clause Analysis Guide
+`references/clause_analysis_guide.md`
+
+Deep reference covering 8+ clause types:
+- Limitation of Liability (cap types, carveouts, consequential damages)
+- Indemnification (mutuality, scope, procedure)
+- IP (ownership, licenses, work-for-hire, feedback)
+- Data Protection (DPA, sub-processors, breach notification, transfers)
+- Term &amp; Termination (auto-renewal, cure periods, transition)
+- Governing Law (jurisdiction, arbitration, jury waiver)
+- Representations &amp; Warranties
+- Force Majeure
+
+### Negotiation Playbook
+`references/negotiation_playbook.md`
+
+Negotiation priority framework with:
+- Tier 1 deal-breakers and walkaway criteria
+- Tier 2 strong preferences with trading strategies
+- Tier 3 concession candidates for strategic give-backs
+- Redline format template
+- Common negotiation pitfalls
+
+---
+
+## Workflows
+
+### Standard Contract Review
+
+1. **Ingest** -- Save contract as `.txt` or `.md` file
+2. **Analyze** -- Run `contract_analyzer.py` with `--json` flag
+3. **Review findings** -- Check RED items first, then YELLOW
+4. **Generate redlines** -- Run `redline_generator.py` on analysis output
+5. **Prioritize** -- Focus on Must-Have redlines, prepare fallbacks for Should-Have
+6. **Send to counsel** -- Attach analysis and redlines for final review
+
+### Rapid Risk Triage
+
+1. Run `contract_analyzer.py` in text mode for quick scan
+2. If any RED findings: escalate immediately to legal counsel
+3. If YELLOW only: schedule review within 48 hours
+4. If all GREEN: proceed with standard approval workflow
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `Error: File not found` | Contract file path is incorrect or file does not exist | Verify the file path; use absolute paths if relative paths fail |
+| No clauses detected | Contract uses unusual formatting or non-standard clause headers | Ensure contract is plain text; strip PDF artifacts before analysis |
+| All clauses marked GREEN | Contract is genuinely favorable, or text extraction missed key sections | Manually verify critical clauses (liability, indemnification, IP) are present in the input file |
+| Redline generator produces empty output | Analysis JSON has no YELLOW or RED findings | Confirm analysis JSON is valid; re-run analyzer if contract was updated |
+| False positive on uncapped liability | Liability section references a cap elsewhere in the document | Review the full Limitation of Liability section; the tool scans for cap keywords within each clause boundary |
+| Missing clause false positive | Clause exists but uses non-standard heading (e.g., &quot;Damages Cap&quot; instead of &quot;Limitation of Liability&quot;) | The analyzer checks multiple heading variants; add custom aliases if your organization uses unique terminology |
+
+---
+
+## Success Criteria
+
+- **Contract review time reduced by 50%:** Automated clause identification and risk classification eliminates manual scanning.
+- **Zero missed RED-severity clauses:** Every uncapped liability, unilateral indemnification, and broad IP assignment is flagged before human review.
+- **Redline generation under 2 minutes:** From analysis JSON to prioritized redline document.
+- **Consistent risk classification across reviewers:** GREEN/YELLOW/RED framework eliminates subjective assessments.
+- **100% of contracts reviewed with structured output:** Every agreement gets a clause inventory and risk report before negotiation begins.
+- **Negotiation success rate above 80% on Must-Have items:** Tier 1 redlines with prepared fallbacks improve negotiation outcomes.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Static text analysis of contract clauses using keyword and pattern matching
+- Clause type identification across 10+ standard commercial contract categories
+- Risk indicator detection: uncapped liability, perpetual terms, unilateral obligations, auto-renewal traps
+- Missing clause detection against a standard commercial contract baseline
+- Prioritized redline generation with fallback positions
+
+**Does NOT cover:**
+- **Legal advice** -- this tool supports review, it does not replace qualified legal counsel
+- **Jurisdiction-specific compliance** -- use `ra-qm-team` skills for regulatory compliance (GDPR, SOC 2, etc.)
+- **Contract execution or e-signature workflows** -- out of scope
+- **Multi-document cross-reference** (e.g., checking SOW against MSA) -- analyze each document separately
+- **Non-English contracts** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Signing contracts with only GREEN findings and no human review | Automated analysis cannot catch context-dependent risks, ambiguous language, or business-specific concerns | Always have qualified counsel review before execution, even on all-GREEN contracts |
+| Treating all RED findings as equal | Some RED items are structural deal-breakers while others may be resolvable with a single word change | Use the redline generator to assess effort and fallback positions for each RED finding |
+| Skipping the redline fallback positions | Entering negotiation with only preferred positions leaves no room for strategic concession | Always prepare Must-Have fallbacks and identify Nice-to-Have items to trade away |
+| Running analysis on poorly extracted text | PDF-to-text conversion artifacts break clause detection patterns | Clean the text file before analysis: remove headers, footers, page numbers, and formatting artifacts |
+
+---
+
+## Tool Reference
+
+### contract_analyzer.py
+
+**Purpose:** Analyzes contract text files for clause types, identifies missing standard clauses, and flags risk indicators with GREEN/YELLOW/RED severity classification.
+
+**Usage:**
+
+```bash
+python scripts/contract_analyzer.py &lt;contract_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `contract_file` | *(positional)* | | Path to contract text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_agreement.txt&quot;,
+  &quot;clauses_found&quot;: [
+    {
+      &quot;type&quot;: &quot;limitation_of_liability&quot;,
+      &quot;severity&quot;: &quot;RED&quot;,
+      &quot;text_snippet&quot;: &quot;...liability shall not be limited...&quot;,
+      &quot;risk_flags&quot;: [&quot;uncapped_liability&quot;],
+      &quot;notes&quot;: &quot;No liability cap found; uncapped exposure&quot;
+    }
+  ],
+  &quot;missing_clauses&quot;: [&quot;force_majeure&quot;, &quot;data_protection&quot;],
+  &quot;risk_summary&quot;: {&quot;RED&quot;: 2, &quot;YELLOW&quot;: 3, &quot;GREEN&quot;: 5},
+  &quot;overall_risk&quot;: &quot;RED&quot;
+}
+```
+
+---
+
+### redline_generator.py
+
+**Purpose:** Takes contract analysis JSON and generates formatted redline suggestions with priority tiers, rationale, and fallback positions.
+
+**Usage:**
+
+```bash
+python scripts/redline_generator.py &lt;analysis_json&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `analysis_json` | *(positional)* | | Path to contract analysis JSON file |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output:**
+
+```
+REDLINE SUGGESTIONS
+===================
+
+[MUST-HAVE] Limitation of Liability — Uncapped Liability
+  Severity: RED
+  Preferred: &quot;Aggregate liability shall not exceed 12 months of fees paid.&quot;
+  Rationale: Uncapped liability creates unlimited financial exposure.
+  Fallback: &quot;Aggregate liability shall not exceed 24 months of fees paid.&quot;
+
+[SHOULD-HAVE] Indemnification — Unilateral Indemnification
+  Severity: YELLOW
+  Preferred: &quot;Each party shall indemnify the other for breaches of this Agreement.&quot;
+  Rationale: Mutual indemnification balances risk between parties.
+  Fallback: &quot;Indemnification obligations shall be subject to the liability cap.&quot;
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Contract Review&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Contract Review&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Contract Review in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Contract Review&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Contract Review&quot;
+4. Description: &quot;Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use when reviewing vendor contracts, SaaS agreements, service agreements, or generating redline suggestions.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/contract-review/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

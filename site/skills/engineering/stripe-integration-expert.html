@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Stripe Integration Expert (Engineering domain).
 
 Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent w...
@@ -393,11 +415,11 @@ https://github.com/borghei/Claude-Skills/tree/main/stripe-integration-expert
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Stripe Integration Expert (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Stripe Integration Expert (Engineering domain).
 
 Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent w...
 
@@ -421,7 +443,1498 @@ https://github.com/borghei/Claude-Skills/tree/main/stripe-integration-expert
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Stripe Integration Expert&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Stripe Integration Expert
+
+The agent builds production-grade Stripe integrations for SaaS billing: subscription lifecycle management with trials and proration, idempotent webhook handlers, usage-based metered billing, Checkout sessions, Customer Portal, dunning recovery, and SCA/3D Secure compliance. Provides patterns for Next.js, Express, and Django with emphasis on real-world edge cases.
+
+---
+
+## Subscription Lifecycle State Machine
+
+Understand this before writing any code. Every billing edge case maps to a state transition.
+
+```
+                    ┌────────────────────────────────────────┐
+                    │                                        │
+ ┌──────────┐   paid    ┌────────┐   cancel    ┌──────────────┐   period_end   ┌──────────┐
+ │ TRIALING │──────────▶│ ACTIVE │────────────▶│ CANCEL_PENDING│──────────────▶│ CANCELED │
+ └──────────┘           └────────┘             └──────────────┘               └──────────┘
+      │                     │                                                      ▲
+      │                     │  upgrade                                             │
+      │                     ▼                                                  reactivate
+      │                ┌──────────┐  period_end  ┌────────┐                        │
+      │                │UPGRADING │─────────────▶│ ACTIVE │                        │
+      │                └──────────┘  (new plan)  └────────┘                        │
+      │                                                                            │
+      │  trial_end      ┌──────────┐  3x fail   ┌──────────┐                      │
+      └─(no payment)───▶│ PAST_DUE │───────────▶│ CANCELED │──────────────────────┘
+                        └──────────┘             └──────────┘
+                             │
+                        payment_success
+                             │
+                             ▼
+                        ┌────────┐
+                        │ ACTIVE │
+                        └────────┘
+```
+
+**DB status values:** `trialing | active | past_due | canceled | cancel_pending | paused | unpaid`
+
+---
+
+## Stripe Client Setup
+
+```typescript
+// lib/stripe.ts
+import Stripe from &quot;stripe&quot;;
+
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error(&quot;STRIPE_SECRET_KEY is required&quot;);
+}
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: &quot;2024-12-18.acacia&quot;,  // Pin to specific version
+  typescript: true,
+  appInfo: {
+    name: &quot;your-app-name&quot;,
+    version: &quot;1.0.0&quot;,
+    url: &quot;https://yourapp.com&quot;,
+  },
+});
+
+// Centralized plan configuration
+export const PLANS = {
+  starter: {
+    monthly: process.env.STRIPE_STARTER_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_STARTER_YEARLY_PRICE!,
+    limits: { projects: 5, events: 10_000 },
+  },
+  pro: {
+    monthly: process.env.STRIPE_PRO_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_PRO_YEARLY_PRICE!,
+    limits: { projects: -1, events: 1_000_000 },  // -1 = unlimited
+  },
+  enterprise: {
+    monthly: process.env.STRIPE_ENTERPRISE_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_ENTERPRISE_YEARLY_PRICE!,
+    limits: { projects: -1, events: -1 },
+  },
+} as const;
+
+export type PlanName = keyof typeof PLANS;
+export type BillingInterval = &quot;monthly&quot; | &quot;yearly&quot;;
+```
+
+---
+
+## Checkout Session
+
+```typescript
+// app/api/billing/checkout/route.ts
+import { NextResponse } from &quot;next/server&quot;;
+import { stripe, PLANS, type PlanName, type BillingInterval } from &quot;@/lib/stripe&quot;;
+import { getAuthUser } from &quot;@/lib/auth&quot;;
+import { db } from &quot;@/lib/db&quot;;
+
+export async function POST(req: Request) {
+  const user = await getAuthUser();
+  if (!user) return NextResponse.json({ error: &quot;Unauthorized&quot; }, { status: 401 });
+
+  const { plan, interval = &quot;monthly&quot; } = (await req.json()) as {
+    plan: PlanName;
+    interval: BillingInterval;
+  };
+
+  if (!PLANS[plan]) {
+    return NextResponse.json({ error: &quot;Invalid plan&quot; }, { status: 400 });
+  }
+
+  const priceId = PLANS[plan][interval];
+
+  // Get or create Stripe customer (idempotent)
+  let customerId = user.stripeCustomerId;
+  if (!customerId) {
+    const customer = await stripe.customers.create({
+      email: user.email,
+      name: user.name || undefined,
+      metadata: { userId: user.id, source: &quot;checkout&quot; },
+    });
+    customerId = customer.id;
+    await db.user.update({
+      where: { id: user.id },
+      data: { stripeCustomerId: customerId },
+    });
+  }
+
+  const session = await stripe.checkout.sessions.create({
+    customer: customerId,
+    mode: &quot;subscription&quot;,
+    payment_method_types: [&quot;card&quot;],
+    line_items: [{ price: priceId, quantity: 1 }],
+    allow_promotion_codes: true,
+    tax_id_collection: { enabled: true },
+    subscription_data: {
+      trial_period_days: user.hasHadTrial ? undefined : 14,
+      metadata: { userId: user.id, plan },
+    },
+    success_url: `${process.env.APP_URL}/dashboard?checkout=success&amp;session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.APP_URL}/pricing`,
+    metadata: { userId: user.id },
+  });
+
+  return NextResponse.json({ url: session.url });
+}
+```
+
+---
+
+## Subscription Management
+
+### Upgrade (Immediate, Prorated)
+
+```typescript
+export async function upgradeSubscription(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const currentItem = subscription.items.data[0];
+
+  return stripe.subscriptions.update(subscriptionId, {
+    items: [{ id: currentItem.id, price: newPriceId }],
+    proration_behavior: &quot;always_invoice&quot;,  // Charge difference immediately
+    billing_cycle_anchor: &quot;unchanged&quot;,      // Keep same billing date
+  });
+}
+```
+
+### Downgrade (End of Period, No Proration)
+
+```typescript
+export async function downgradeSubscription(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const currentItem = subscription.items.data[0];
+
+  // Schedule change for end of current period
+  return stripe.subscriptions.update(subscriptionId, {
+    items: [{ id: currentItem.id, price: newPriceId }],
+    proration_behavior: &quot;none&quot;,            // No refund
+    billing_cycle_anchor: &quot;unchanged&quot;,
+  });
+}
+```
+
+### Preview Proration (Show Before Confirming)
+
+```typescript
+export async function previewProration(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  const invoice = await stripe.invoices.createPreview({
+    customer: subscription.customer as string,
+    subscription: subscriptionId,
+    subscription_details: {
+      items: [{ id: subscription.items.data[0].id, price: newPriceId }],
+      proration_date: Math.floor(Date.now() / 1000),
+    },
+  });
+
+  return {
+    amountDue: invoice.amount_due,            // In cents
+    credit: invoice.total &lt; 0 ? Math.abs(invoice.total) : 0,
+    lineItems: invoice.lines.data.map(line =&gt; ({
+      description: line.description,
+      amount: line.amount,
+    })),
+  };
+}
+```
+
+### Cancel (At Period End)
+
+```typescript
+export async function cancelSubscription(subscriptionId: string) {
+  // Cancel at period end -- user keeps access until their paid period expires
+  return stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: true,
+  });
+}
+
+export async function reactivateSubscription(subscriptionId: string) {
+  // Undo pending cancellation
+  return stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: false,
+  });
+}
+```
+
+---
+
+## Webhook Handler (Idempotent)
+
+This is the most critical code in your billing system. Get this right.
+
+```typescript
+// app/api/webhooks/stripe/route.ts
+import { NextResponse } from &quot;next/server&quot;;
+import { headers } from &quot;next/headers&quot;;
+import { stripe } from &quot;@/lib/stripe&quot;;
+import { db } from &quot;@/lib/db&quot;;
+import type Stripe from &quot;stripe&quot;;
+
+// Idempotency: track processed events to handle Stripe retries
+async function isProcessed(eventId: string): Promise&lt;boolean&gt; {
+  return !!(await db.stripeEvent.findUnique({ where: { id: eventId } }));
+}
+
+async function markProcessed(eventId: string, type: string) {
+  await db.stripeEvent.create({
+    data: { id: eventId, type, processedAt: new Date() },
+  });
+}
+
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = headers().get(&quot;stripe-signature&quot;);
+
+  if (!signature) {
+    return NextResponse.json({ error: &quot;Missing signature&quot; }, { status: 400 });
+  }
+
+  // Step 1: Verify webhook signature
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      body, signature, process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (err) {
+    console.error(&quot;Webhook signature verification failed:&quot;, err);
+    return NextResponse.json({ error: &quot;Invalid signature&quot; }, { status: 400 });
+  }
+
+  // Step 2: Idempotency check
+  if (await isProcessed(event.id)) {
+    return NextResponse.json({ received: true, deduplicated: true });
+  }
+
+  // Step 3: Handle events
+  try {
+    switch (event.type) {
+      case &quot;checkout.session.completed&quot;:
+        await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+        break;
+      case &quot;customer.subscription.created&quot;:
+      case &quot;customer.subscription.updated&quot;:
+        await handleSubscriptionChange(event.data.object as Stripe.Subscription);
+        break;
+      case &quot;customer.subscription.deleted&quot;:
+        await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
+        break;
+      case &quot;invoice.payment_succeeded&quot;:
+        await handlePaymentSucceeded(event.data.object as Stripe.Invoice);
+        break;
+      case &quot;invoice.payment_failed&quot;:
+        await handlePaymentFailed(event.data.object as Stripe.Invoice);
+        break;
+      case &quot;customer.subscription.trial_will_end&quot;:
+        await handleTrialEnding(event.data.object as Stripe.Subscription);
+        break;
+      default:
+        // Log unhandled events for monitoring
+        console.log(`Unhandled webhook: ${event.type}`);
+    }
+
+    await markProcessed(event.id, event.type);
+    return NextResponse.json({ received: true });
+  } catch (err) {
+    console.error(`Webhook processing failed [${event.type}]:`, err);
+    // Return 500 so Stripe retries. Do NOT mark as processed.
+    return NextResponse.json({ error: &quot;Processing failed&quot; }, { status: 500 });
+  }
+}
+
+// --- Handler implementations ---
+
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  if (session.mode !== &quot;subscription&quot;) return;
+
+  const userId = session.metadata?.userId;
+  if (!userId) throw new Error(&quot;Missing userId in checkout metadata&quot;);
+
+  // Always re-fetch from Stripe API -- event data may be stale
+  const subscription = await stripe.subscriptions.retrieve(
+    session.subscription as string
+  );
+
+  await db.user.update({
+    where: { id: userId },
+    data: {
+      stripeCustomerId: session.customer as string,
+      stripeSubscriptionId: subscription.id,
+      stripePriceId: subscription.items.data[0].price.id,
+      stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      subscriptionStatus: subscription.status,
+      hasHadTrial: true,
+    },
+  });
+}
+
+async function handleSubscriptionChange(subscription: Stripe.Subscription) {
+  // Find user by subscription ID first, fall back to customer ID
+  const user = await db.user.findFirst({
+    where: {
+      OR: [
+        { stripeSubscriptionId: subscription.id },
+        { stripeCustomerId: subscription.customer as string },
+      ],
+    },
+  });
+  if (!user) {
+    console.warn(`No user for subscription ${subscription.id}`);
+    return;  // Don&#x27;t throw -- this may be a subscription we don&#x27;t manage
+  }
+
+  await db.user.update({
+    where: { id: user.id },
+    data: {
+      stripeSubscriptionId: subscription.id,
+      stripePriceId: subscription.items.data[0].price.id,
+      stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      subscriptionStatus: subscription.status,
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+    },
+  });
+}
+
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: subscription.id },
+    data: {
+      subscriptionStatus: &quot;canceled&quot;,
+      stripePriceId: null,
+      stripeCurrentPeriodEnd: null,
+      cancelAtPeriodEnd: false,
+    },
+  });
+}
+
+async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
+  if (!invoice.subscription) return;
+
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: invoice.subscription as string },
+    data: {
+      subscriptionStatus: &quot;active&quot;,
+      stripeCurrentPeriodEnd: new Date(invoice.period_end * 1000),
+    },
+  });
+}
+
+async function handlePaymentFailed(invoice: Stripe.Invoice) {
+  if (!invoice.subscription) return;
+
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: invoice.subscription as string },
+    data: { subscriptionStatus: &quot;past_due&quot; },
+  });
+
+  // Dunning: send appropriate email based on attempt count
+  const attemptCount = invoice.attempt_count || 1;
+  if (attemptCount === 1) {
+    // First failure: gentle reminder
+    await sendDunningEmail(invoice.customer_email!, &quot;first_failure&quot;);
+  } else if (attemptCount === 2) {
+    // Second failure: more urgent
+    await sendDunningEmail(invoice.customer_email!, &quot;second_failure&quot;);
+  } else if (attemptCount &gt;= 3) {
+    // Final failure: last chance before cancellation
+    await sendDunningEmail(invoice.customer_email!, &quot;final_notice&quot;);
+  }
+}
+
+async function handleTrialEnding(subscription: Stripe.Subscription) {
+  // Stripe sends this 3 days before trial ends
+  const user = await db.user.findFirst({
+    where: { stripeSubscriptionId: subscription.id },
+  });
+  if (user?.email) {
+    await sendTrialEndingEmail(user.email, subscription.trial_end!);
+  }
+}
+```
+
+---
+
+## Usage-Based Billing
+
+```typescript
+// Report metered usage
+export async function reportUsage(
+  subscriptionItemId: string,
+  quantity: number,
+  idempotencyKey?: string,
+) {
+  return stripe.subscriptionItems.createUsageRecord(
+    subscriptionItemId,
+    {
+      quantity,
+      timestamp: Math.floor(Date.now() / 1000),
+      action: &quot;increment&quot;,  // or &quot;set&quot; for absolute values
+    },
+    {
+      idempotencyKey,  // Prevent double-counting on retries
+    }
+  );
+}
+
+// Middleware: track API usage per request
+export async function trackApiUsage(userId: string) {
+  const user = await db.user.findUnique({ where: { id: userId } });
+  if (!user?.stripeSubscriptionId) return;
+
+  const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
+  const meteredItem = subscription.items.data.find(
+    (item) =&gt; item.price.recurring?.usage_type === &quot;metered&quot;
+  );
+
+  if (meteredItem) {
+    await reportUsage(meteredItem.id, 1, `${userId}-${Date.now()}`);
+  }
+}
+```
+
+---
+
+## Customer Portal
+
+```typescript
+// app/api/billing/portal/route.ts
+export async function POST() {
+  const user = await getAuthUser();
+  if (!user?.stripeCustomerId) {
+    return NextResponse.json({ error: &quot;No billing account&quot; }, { status: 400 });
+  }
+
+  const session = await stripe.billingPortal.sessions.create({
+    customer: user.stripeCustomerId,
+    return_url: `${process.env.APP_URL}/settings/billing`,
+  });
+
+  return NextResponse.json({ url: session.url });
+}
+```
+
+**Portal configuration** (must be done in Stripe Dashboard &gt; Billing &gt; Customer Portal):
+- Enable: Update subscription, cancel subscription, update payment method
+- Set cancellation flow: show pause option, require reason
+- Configure plan change options: which plans can switch to which
+
+---
+
+## Feature Gating
+
+```typescript
+// lib/subscription.ts
+import { PLANS, type PlanName } from &quot;./stripe&quot;;
+
+export function isSubscriptionActive(user: {
+  subscriptionStatus: string | null;
+  stripeCurrentPeriodEnd: Date | null;
+}): boolean {
+  if (!user.subscriptionStatus) return false;
+
+  // Active or trialing = full access
+  if ([&quot;active&quot;, &quot;trialing&quot;].includes(user.subscriptionStatus)) return true;
+
+  // Past due: grace period until period end
+  if (user.subscriptionStatus === &quot;past_due&quot; &amp;&amp; user.stripeCurrentPeriodEnd) {
+    return user.stripeCurrentPeriodEnd &gt; new Date();
+  }
+
+  // Cancel pending: access until period end
+  if (user.subscriptionStatus === &quot;cancel_pending&quot; &amp;&amp; user.stripeCurrentPeriodEnd) {
+    return user.stripeCurrentPeriodEnd &gt; new Date();
+  }
+
+  return false;
+}
+
+export function getUserPlan(stripePriceId: string | null): PlanName | &quot;free&quot; {
+  if (!stripePriceId) return &quot;free&quot;;
+
+  for (const [plan, config] of Object.entries(PLANS)) {
+    if (config.monthly === stripePriceId || config.yearly === stripePriceId) {
+      return plan as PlanName;
+    }
+  }
+
+  return &quot;free&quot;;
+}
+
+export function canAccess(user: { stripePriceId: string | null }, feature: string): boolean {
+  const plan = getUserPlan(user.stripePriceId);
+  const limits = plan === &quot;free&quot; ? { projects: 1, events: 1000 } : PLANS[plan].limits;
+
+  // Feature-specific checks
+  switch (feature) {
+    case &quot;unlimited_projects&quot;: return limits.projects === -1;
+    case &quot;api_access&quot;: return plan !== &quot;free&quot; &amp;&amp; plan !== &quot;starter&quot;;
+    default: return plan !== &quot;free&quot;;
+  }
+}
+```
+
+---
+
+## SCA (Strong Customer Authentication) Compliance
+
+Required for European customers under PSD2.
+
+```typescript
+// Checkout Sessions handle SCA automatically (3D Secure)
+// For existing subscriptions, handle authentication_required:
+
+async function handlePaymentRequiresAction(invoice: Stripe.Invoice) {
+  if (invoice.payment_intent) {
+    const pi = await stripe.paymentIntents.retrieve(invoice.payment_intent as string);
+    if (pi.status === &quot;requires_action&quot;) {
+      // Send email with link to complete authentication
+      await sendAuthenticationEmail(
+        invoice.customer_email!,
+        pi.next_action?.redirect_to_url?.url || `${process.env.APP_URL}/billing/authenticate`
+      );
+    }
+  }
+}
+```
+
+---
+
+## Testing with Stripe CLI
+
+```bash
+# Install and authenticate
+brew install stripe/stripe-cli/stripe
+stripe login
+
+# Forward webhooks to local server
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+
+# Trigger specific events
+stripe trigger checkout.session.completed
+stripe trigger customer.subscription.updated
+stripe trigger invoice.payment_failed
+stripe trigger customer.subscription.trial_will_end
+
+# Test card numbers
+# Success:               4242 4242 4242 4242
+# Requires 3D Secure:    4000 0025 0000 3155
+# Declined:              4000 0000 0000 0002
+# Insufficient funds:    4000 0000 0000 9995
+# Expired card:          4000 0000 0000 0069
+
+# View recent events
+stripe events list --limit 10
+
+# Inspect a specific event
+stripe events retrieve evt_xxx
+```
+
+---
+
+## Database Schema (Prisma)
+
+```prisma
+model User {
+  id                      String    @id @default(cuid())
+  email                   String    @unique
+  name                    String?
+
+  // Stripe fields
+  stripeCustomerId        String?   @unique
+  stripeSubscriptionId    String?   @unique
+  stripePriceId           String?
+  stripeCurrentPeriodEnd  DateTime?
+  subscriptionStatus      String?   // trialing, active, past_due, canceled, cancel_pending
+  cancelAtPeriodEnd       Boolean   @default(false)
+  hasHadTrial             Boolean   @default(false)
+}
+
+model StripeEvent {
+  id          String   @id          // Stripe event ID (evt_xxx)
+  type        String                // Event type
+  processedAt DateTime @default(now())
+
+  @@index([type])
+}
+```
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Consequence | Prevention |
+|---------|-------------|------------|
+| Trusting webhook event data | Stale data, race conditions | Always re-fetch from Stripe API in handlers |
+| No idempotency on webhooks | Double-charges, duplicate records | Track processed event IDs in database |
+| Missing metadata on checkout | Cannot link subscription to user | Always pass `userId` in metadata |
+| Proration surprises | Users charged unexpected amounts | Always preview proration before upgrade |
+| Not handling `past_due` | Users lose access without warning | Implement dunning emails on payment failure |
+| Skipping trial abuse prevention | Users create multiple accounts for free trials | Store `hasHadTrial: true`, check on checkout |
+| Customer Portal not configured | Portal returns blank page | Enable features in Stripe Dashboard first |
+| Webhook endpoint not idempotent | Stripe retries cause duplicate processing | Idempotency table with event ID dedup |
+| Not pinning API version | Breaking changes on Stripe updates | Pin `apiVersion` in client constructor |
+| Ignoring `trial_will_end` event | Users surprised when trial ends | Send reminder email 3 days before |
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **ab-test-setup** | Testing pricing page variants and checkout flows |
+| **analytics-tracking** | Tracking checkout and subscription conversion events |
+| **email-template-builder** | Building dunning and billing notification emails |
+| **api-design-reviewer** | Reviewing your billing API endpoints |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Webhook returns 400 on all events | Webhook signing secret mismatch between environments | Verify `STRIPE_WEBHOOK_SECRET` matches the endpoint in Stripe Dashboard; use `stripe listen` output secret for local dev |
+| Checkout session redirects to blank page | `success_url` or `cancel_url` missing `{CHECKOUT_SESSION_ID}` template or pointing to wrong domain | Ensure URLs use `APP_URL` env var and include the session ID template literal for retrieval |
+| Subscription shows `incomplete` status | First payment requires 3D Secure but was never completed | Handle `checkout.session.async_payment_failed` and send the customer a link to complete authentication |
+| Proration invoice charges full price instead of difference | Using `create_prorations` instead of `always_invoice` or not passing existing subscription item ID | Use `always_invoice` proration behavior and update the existing `items[0].id` rather than adding a new line item |
+| Usage records return &quot;Cannot create usage record&quot; | Reporting usage on a non-metered price or after subscription cancellation | Confirm the price uses `recurring.usage_type: &quot;metered&quot;` and the subscription is active before reporting |
+| Customer Portal shows no options | Portal configuration not enabled in Stripe Dashboard | Navigate to Stripe Dashboard &gt; Settings &gt; Billing &gt; Customer Portal and enable subscription management features |
+| Duplicate webhook processing despite idempotency table | `markProcessed` called before handler completes, then handler throws on retry | Move `markProcessed` to after the handler succeeds (as shown in the webhook handler pattern above) |
+
+---
+
+## Success Criteria
+
+- **Webhook reliability:** 99.9%+ webhook processing success rate with zero duplicate side effects over a 30-day window
+- **Checkout conversion:** End-to-end checkout flow completes in under 3 seconds (redirect to Stripe and back)
+- **Idempotency coverage:** 100% of webhook handlers are idempotent, verified by replaying the same event ID twice with no state change on the second pass
+- **Subscription state accuracy:** Database subscription status matches Stripe source of truth within 60 seconds of any state change
+- **SCA compliance:** All European payment flows pass 3D Secure challenges without manual intervention or dropped transactions
+- **Dunning recovery:** Automated dunning emails recover at least 30% of failed payments within the retry window (typically 7-21 days)
+- **Zero hardcoded price IDs:** All Stripe price IDs are sourced from environment variables, enabling test/production parity without code changes
+
+---
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Stripe Checkout, Subscriptions, and Customer Portal integration for SaaS billing
+- Webhook handling with idempotency, signature verification, and retry safety
+- Usage-based (metered) billing, proration previews, and plan change workflows
+- SCA/3D Secure compliance for European payment regulations (PSD2)
+
+**This skill does NOT cover:**
+- Stripe Connect (marketplace payouts, multi-party payments) -- see platform-specific Stripe Connect documentation
+- One-time payment flows without subscriptions (e.g., e-commerce product purchases)
+- Tax calculation and remittance (Stripe Tax configuration, VAT/GST filing) -- see `ra-qm-team/` compliance skills for regulatory guidance
+- Payment fraud detection and dispute management (Stripe Radar rules, chargeback workflows) -- see `skill-security-auditor` for security review patterns
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **api-design-reviewer** | Review billing API endpoints for REST conventions, error handling, and rate limiting | Billing route definitions --&gt; API review checklist --&gt; validated endpoint contracts |
+| **database-schema-designer** | Design and validate the Prisma schema for Stripe customer, subscription, and event tracking tables | Schema requirements --&gt; normalized table design --&gt; migration files |
+| **observability-designer** | Instrument webhook handlers and checkout flows with structured logging, metrics, and alerting | Webhook events --&gt; OpenTelemetry traces --&gt; dashboard alerts on failure spikes |
+| **env-secrets-manager** | Manage Stripe API keys, webhook secrets, and price IDs across dev/staging/production | Secret definitions --&gt; encrypted vault storage --&gt; runtime injection via env vars |
+| **ci-cd-pipeline-builder** | Automate Stripe CLI webhook testing in CI and validate integration before deployment | Test triggers --&gt; `stripe listen` in CI --&gt; webhook handler assertions |
+| **runbook-generator** | Create operational runbooks for billing incidents: failed webhooks, mass payment failures, subscription reconciliation | Incident scenarios --&gt; step-by-step remediation --&gt; escalation paths |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Stripe Integration Expert&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Stripe Integration Expert&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Stripe Integration Expert in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Stripe Integration Expert&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Stripe Integration Expert&quot;
+4. Description: &quot;Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent w...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/stripe-integration-expert/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Stripe Integration Expert&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Stripe Integration Expert
+
+The agent builds production-grade Stripe integrations for SaaS billing: subscription lifecycle management with trials and proration, idempotent webhook handlers, usage-based metered billing, Checkout sessions, Customer Portal, dunning recovery, and SCA/3D Secure compliance. Provides patterns for Next.js, Express, and Django with emphasis on real-world edge cases.
+
+---
+
+## Subscription Lifecycle State Machine
+
+Understand this before writing any code. Every billing edge case maps to a state transition.
+
+```
+                    ┌────────────────────────────────────────┐
+                    │                                        │
+ ┌──────────┐   paid    ┌────────┐   cancel    ┌──────────────┐   period_end   ┌──────────┐
+ │ TRIALING │──────────▶│ ACTIVE │────────────▶│ CANCEL_PENDING│──────────────▶│ CANCELED │
+ └──────────┘           └────────┘             └──────────────┘               └──────────┘
+      │                     │                                                      ▲
+      │                     │  upgrade                                             │
+      │                     ▼                                                  reactivate
+      │                ┌──────────┐  period_end  ┌────────┐                        │
+      │                │UPGRADING │─────────────▶│ ACTIVE │                        │
+      │                └──────────┘  (new plan)  └────────┘                        │
+      │                                                                            │
+      │  trial_end      ┌──────────┐  3x fail   ┌──────────┐                      │
+      └─(no payment)───▶│ PAST_DUE │───────────▶│ CANCELED │──────────────────────┘
+                        └──────────┘             └──────────┘
+                             │
+                        payment_success
+                             │
+                             ▼
+                        ┌────────┐
+                        │ ACTIVE │
+                        └────────┘
+```
+
+**DB status values:** `trialing | active | past_due | canceled | cancel_pending | paused | unpaid`
+
+---
+
+## Stripe Client Setup
+
+```typescript
+// lib/stripe.ts
+import Stripe from &quot;stripe&quot;;
+
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error(&quot;STRIPE_SECRET_KEY is required&quot;);
+}
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: &quot;2024-12-18.acacia&quot;,  // Pin to specific version
+  typescript: true,
+  appInfo: {
+    name: &quot;your-app-name&quot;,
+    version: &quot;1.0.0&quot;,
+    url: &quot;https://yourapp.com&quot;,
+  },
+});
+
+// Centralized plan configuration
+export const PLANS = {
+  starter: {
+    monthly: process.env.STRIPE_STARTER_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_STARTER_YEARLY_PRICE!,
+    limits: { projects: 5, events: 10_000 },
+  },
+  pro: {
+    monthly: process.env.STRIPE_PRO_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_PRO_YEARLY_PRICE!,
+    limits: { projects: -1, events: 1_000_000 },  // -1 = unlimited
+  },
+  enterprise: {
+    monthly: process.env.STRIPE_ENTERPRISE_MONTHLY_PRICE!,
+    yearly: process.env.STRIPE_ENTERPRISE_YEARLY_PRICE!,
+    limits: { projects: -1, events: -1 },
+  },
+} as const;
+
+export type PlanName = keyof typeof PLANS;
+export type BillingInterval = &quot;monthly&quot; | &quot;yearly&quot;;
+```
+
+---
+
+## Checkout Session
+
+```typescript
+// app/api/billing/checkout/route.ts
+import { NextResponse } from &quot;next/server&quot;;
+import { stripe, PLANS, type PlanName, type BillingInterval } from &quot;@/lib/stripe&quot;;
+import { getAuthUser } from &quot;@/lib/auth&quot;;
+import { db } from &quot;@/lib/db&quot;;
+
+export async function POST(req: Request) {
+  const user = await getAuthUser();
+  if (!user) return NextResponse.json({ error: &quot;Unauthorized&quot; }, { status: 401 });
+
+  const { plan, interval = &quot;monthly&quot; } = (await req.json()) as {
+    plan: PlanName;
+    interval: BillingInterval;
+  };
+
+  if (!PLANS[plan]) {
+    return NextResponse.json({ error: &quot;Invalid plan&quot; }, { status: 400 });
+  }
+
+  const priceId = PLANS[plan][interval];
+
+  // Get or create Stripe customer (idempotent)
+  let customerId = user.stripeCustomerId;
+  if (!customerId) {
+    const customer = await stripe.customers.create({
+      email: user.email,
+      name: user.name || undefined,
+      metadata: { userId: user.id, source: &quot;checkout&quot; },
+    });
+    customerId = customer.id;
+    await db.user.update({
+      where: { id: user.id },
+      data: { stripeCustomerId: customerId },
+    });
+  }
+
+  const session = await stripe.checkout.sessions.create({
+    customer: customerId,
+    mode: &quot;subscription&quot;,
+    payment_method_types: [&quot;card&quot;],
+    line_items: [{ price: priceId, quantity: 1 }],
+    allow_promotion_codes: true,
+    tax_id_collection: { enabled: true },
+    subscription_data: {
+      trial_period_days: user.hasHadTrial ? undefined : 14,
+      metadata: { userId: user.id, plan },
+    },
+    success_url: `${process.env.APP_URL}/dashboard?checkout=success&amp;session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.APP_URL}/pricing`,
+    metadata: { userId: user.id },
+  });
+
+  return NextResponse.json({ url: session.url });
+}
+```
+
+---
+
+## Subscription Management
+
+### Upgrade (Immediate, Prorated)
+
+```typescript
+export async function upgradeSubscription(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const currentItem = subscription.items.data[0];
+
+  return stripe.subscriptions.update(subscriptionId, {
+    items: [{ id: currentItem.id, price: newPriceId }],
+    proration_behavior: &quot;always_invoice&quot;,  // Charge difference immediately
+    billing_cycle_anchor: &quot;unchanged&quot;,      // Keep same billing date
+  });
+}
+```
+
+### Downgrade (End of Period, No Proration)
+
+```typescript
+export async function downgradeSubscription(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const currentItem = subscription.items.data[0];
+
+  // Schedule change for end of current period
+  return stripe.subscriptions.update(subscriptionId, {
+    items: [{ id: currentItem.id, price: newPriceId }],
+    proration_behavior: &quot;none&quot;,            // No refund
+    billing_cycle_anchor: &quot;unchanged&quot;,
+  });
+}
+```
+
+### Preview Proration (Show Before Confirming)
+
+```typescript
+export async function previewProration(subscriptionId: string, newPriceId: string) {
+  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+
+  const invoice = await stripe.invoices.createPreview({
+    customer: subscription.customer as string,
+    subscription: subscriptionId,
+    subscription_details: {
+      items: [{ id: subscription.items.data[0].id, price: newPriceId }],
+      proration_date: Math.floor(Date.now() / 1000),
+    },
+  });
+
+  return {
+    amountDue: invoice.amount_due,            // In cents
+    credit: invoice.total &lt; 0 ? Math.abs(invoice.total) : 0,
+    lineItems: invoice.lines.data.map(line =&gt; ({
+      description: line.description,
+      amount: line.amount,
+    })),
+  };
+}
+```
+
+### Cancel (At Period End)
+
+```typescript
+export async function cancelSubscription(subscriptionId: string) {
+  // Cancel at period end -- user keeps access until their paid period expires
+  return stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: true,
+  });
+}
+
+export async function reactivateSubscription(subscriptionId: string) {
+  // Undo pending cancellation
+  return stripe.subscriptions.update(subscriptionId, {
+    cancel_at_period_end: false,
+  });
+}
+```
+
+---
+
+## Webhook Handler (Idempotent)
+
+This is the most critical code in your billing system. Get this right.
+
+```typescript
+// app/api/webhooks/stripe/route.ts
+import { NextResponse } from &quot;next/server&quot;;
+import { headers } from &quot;next/headers&quot;;
+import { stripe } from &quot;@/lib/stripe&quot;;
+import { db } from &quot;@/lib/db&quot;;
+import type Stripe from &quot;stripe&quot;;
+
+// Idempotency: track processed events to handle Stripe retries
+async function isProcessed(eventId: string): Promise&lt;boolean&gt; {
+  return !!(await db.stripeEvent.findUnique({ where: { id: eventId } }));
+}
+
+async function markProcessed(eventId: string, type: string) {
+  await db.stripeEvent.create({
+    data: { id: eventId, type, processedAt: new Date() },
+  });
+}
+
+export async function POST(req: Request) {
+  const body = await req.text();
+  const signature = headers().get(&quot;stripe-signature&quot;);
+
+  if (!signature) {
+    return NextResponse.json({ error: &quot;Missing signature&quot; }, { status: 400 });
+  }
+
+  // Step 1: Verify webhook signature
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      body, signature, process.env.STRIPE_WEBHOOK_SECRET!
+    );
+  } catch (err) {
+    console.error(&quot;Webhook signature verification failed:&quot;, err);
+    return NextResponse.json({ error: &quot;Invalid signature&quot; }, { status: 400 });
+  }
+
+  // Step 2: Idempotency check
+  if (await isProcessed(event.id)) {
+    return NextResponse.json({ received: true, deduplicated: true });
+  }
+
+  // Step 3: Handle events
+  try {
+    switch (event.type) {
+      case &quot;checkout.session.completed&quot;:
+        await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+        break;
+      case &quot;customer.subscription.created&quot;:
+      case &quot;customer.subscription.updated&quot;:
+        await handleSubscriptionChange(event.data.object as Stripe.Subscription);
+        break;
+      case &quot;customer.subscription.deleted&quot;:
+        await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
+        break;
+      case &quot;invoice.payment_succeeded&quot;:
+        await handlePaymentSucceeded(event.data.object as Stripe.Invoice);
+        break;
+      case &quot;invoice.payment_failed&quot;:
+        await handlePaymentFailed(event.data.object as Stripe.Invoice);
+        break;
+      case &quot;customer.subscription.trial_will_end&quot;:
+        await handleTrialEnding(event.data.object as Stripe.Subscription);
+        break;
+      default:
+        // Log unhandled events for monitoring
+        console.log(`Unhandled webhook: ${event.type}`);
+    }
+
+    await markProcessed(event.id, event.type);
+    return NextResponse.json({ received: true });
+  } catch (err) {
+    console.error(`Webhook processing failed [${event.type}]:`, err);
+    // Return 500 so Stripe retries. Do NOT mark as processed.
+    return NextResponse.json({ error: &quot;Processing failed&quot; }, { status: 500 });
+  }
+}
+
+// --- Handler implementations ---
+
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  if (session.mode !== &quot;subscription&quot;) return;
+
+  const userId = session.metadata?.userId;
+  if (!userId) throw new Error(&quot;Missing userId in checkout metadata&quot;);
+
+  // Always re-fetch from Stripe API -- event data may be stale
+  const subscription = await stripe.subscriptions.retrieve(
+    session.subscription as string
+  );
+
+  await db.user.update({
+    where: { id: userId },
+    data: {
+      stripeCustomerId: session.customer as string,
+      stripeSubscriptionId: subscription.id,
+      stripePriceId: subscription.items.data[0].price.id,
+      stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      subscriptionStatus: subscription.status,
+      hasHadTrial: true,
+    },
+  });
+}
+
+async function handleSubscriptionChange(subscription: Stripe.Subscription) {
+  // Find user by subscription ID first, fall back to customer ID
+  const user = await db.user.findFirst({
+    where: {
+      OR: [
+        { stripeSubscriptionId: subscription.id },
+        { stripeCustomerId: subscription.customer as string },
+      ],
+    },
+  });
+  if (!user) {
+    console.warn(`No user for subscription ${subscription.id}`);
+    return;  // Don&#x27;t throw -- this may be a subscription we don&#x27;t manage
+  }
+
+  await db.user.update({
+    where: { id: user.id },
+    data: {
+      stripeSubscriptionId: subscription.id,
+      stripePriceId: subscription.items.data[0].price.id,
+      stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      subscriptionStatus: subscription.status,
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+    },
+  });
+}
+
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: subscription.id },
+    data: {
+      subscriptionStatus: &quot;canceled&quot;,
+      stripePriceId: null,
+      stripeCurrentPeriodEnd: null,
+      cancelAtPeriodEnd: false,
+    },
+  });
+}
+
+async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
+  if (!invoice.subscription) return;
+
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: invoice.subscription as string },
+    data: {
+      subscriptionStatus: &quot;active&quot;,
+      stripeCurrentPeriodEnd: new Date(invoice.period_end * 1000),
+    },
+  });
+}
+
+async function handlePaymentFailed(invoice: Stripe.Invoice) {
+  if (!invoice.subscription) return;
+
+  await db.user.updateMany({
+    where: { stripeSubscriptionId: invoice.subscription as string },
+    data: { subscriptionStatus: &quot;past_due&quot; },
+  });
+
+  // Dunning: send appropriate email based on attempt count
+  const attemptCount = invoice.attempt_count || 1;
+  if (attemptCount === 1) {
+    // First failure: gentle reminder
+    await sendDunningEmail(invoice.customer_email!, &quot;first_failure&quot;);
+  } else if (attemptCount === 2) {
+    // Second failure: more urgent
+    await sendDunningEmail(invoice.customer_email!, &quot;second_failure&quot;);
+  } else if (attemptCount &gt;= 3) {
+    // Final failure: last chance before cancellation
+    await sendDunningEmail(invoice.customer_email!, &quot;final_notice&quot;);
+  }
+}
+
+async function handleTrialEnding(subscription: Stripe.Subscription) {
+  // Stripe sends this 3 days before trial ends
+  const user = await db.user.findFirst({
+    where: { stripeSubscriptionId: subscription.id },
+  });
+  if (user?.email) {
+    await sendTrialEndingEmail(user.email, subscription.trial_end!);
+  }
+}
+```
+
+---
+
+## Usage-Based Billing
+
+```typescript
+// Report metered usage
+export async function reportUsage(
+  subscriptionItemId: string,
+  quantity: number,
+  idempotencyKey?: string,
+) {
+  return stripe.subscriptionItems.createUsageRecord(
+    subscriptionItemId,
+    {
+      quantity,
+      timestamp: Math.floor(Date.now() / 1000),
+      action: &quot;increment&quot;,  // or &quot;set&quot; for absolute values
+    },
+    {
+      idempotencyKey,  // Prevent double-counting on retries
+    }
+  );
+}
+
+// Middleware: track API usage per request
+export async function trackApiUsage(userId: string) {
+  const user = await db.user.findUnique({ where: { id: userId } });
+  if (!user?.stripeSubscriptionId) return;
+
+  const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
+  const meteredItem = subscription.items.data.find(
+    (item) =&gt; item.price.recurring?.usage_type === &quot;metered&quot;
+  );
+
+  if (meteredItem) {
+    await reportUsage(meteredItem.id, 1, `${userId}-${Date.now()}`);
+  }
+}
+```
+
+---
+
+## Customer Portal
+
+```typescript
+// app/api/billing/portal/route.ts
+export async function POST() {
+  const user = await getAuthUser();
+  if (!user?.stripeCustomerId) {
+    return NextResponse.json({ error: &quot;No billing account&quot; }, { status: 400 });
+  }
+
+  const session = await stripe.billingPortal.sessions.create({
+    customer: user.stripeCustomerId,
+    return_url: `${process.env.APP_URL}/settings/billing`,
+  });
+
+  return NextResponse.json({ url: session.url });
+}
+```
+
+**Portal configuration** (must be done in Stripe Dashboard &gt; Billing &gt; Customer Portal):
+- Enable: Update subscription, cancel subscription, update payment method
+- Set cancellation flow: show pause option, require reason
+- Configure plan change options: which plans can switch to which
+
+---
+
+## Feature Gating
+
+```typescript
+// lib/subscription.ts
+import { PLANS, type PlanName } from &quot;./stripe&quot;;
+
+export function isSubscriptionActive(user: {
+  subscriptionStatus: string | null;
+  stripeCurrentPeriodEnd: Date | null;
+}): boolean {
+  if (!user.subscriptionStatus) return false;
+
+  // Active or trialing = full access
+  if ([&quot;active&quot;, &quot;trialing&quot;].includes(user.subscriptionStatus)) return true;
+
+  // Past due: grace period until period end
+  if (user.subscriptionStatus === &quot;past_due&quot; &amp;&amp; user.stripeCurrentPeriodEnd) {
+    return user.stripeCurrentPeriodEnd &gt; new Date();
+  }
+
+  // Cancel pending: access until period end
+  if (user.subscriptionStatus === &quot;cancel_pending&quot; &amp;&amp; user.stripeCurrentPeriodEnd) {
+    return user.stripeCurrentPeriodEnd &gt; new Date();
+  }
+
+  return false;
+}
+
+export function getUserPlan(stripePriceId: string | null): PlanName | &quot;free&quot; {
+  if (!stripePriceId) return &quot;free&quot;;
+
+  for (const [plan, config] of Object.entries(PLANS)) {
+    if (config.monthly === stripePriceId || config.yearly === stripePriceId) {
+      return plan as PlanName;
+    }
+  }
+
+  return &quot;free&quot;;
+}
+
+export function canAccess(user: { stripePriceId: string | null }, feature: string): boolean {
+  const plan = getUserPlan(user.stripePriceId);
+  const limits = plan === &quot;free&quot; ? { projects: 1, events: 1000 } : PLANS[plan].limits;
+
+  // Feature-specific checks
+  switch (feature) {
+    case &quot;unlimited_projects&quot;: return limits.projects === -1;
+    case &quot;api_access&quot;: return plan !== &quot;free&quot; &amp;&amp; plan !== &quot;starter&quot;;
+    default: return plan !== &quot;free&quot;;
+  }
+}
+```
+
+---
+
+## SCA (Strong Customer Authentication) Compliance
+
+Required for European customers under PSD2.
+
+```typescript
+// Checkout Sessions handle SCA automatically (3D Secure)
+// For existing subscriptions, handle authentication_required:
+
+async function handlePaymentRequiresAction(invoice: Stripe.Invoice) {
+  if (invoice.payment_intent) {
+    const pi = await stripe.paymentIntents.retrieve(invoice.payment_intent as string);
+    if (pi.status === &quot;requires_action&quot;) {
+      // Send email with link to complete authentication
+      await sendAuthenticationEmail(
+        invoice.customer_email!,
+        pi.next_action?.redirect_to_url?.url || `${process.env.APP_URL}/billing/authenticate`
+      );
+    }
+  }
+}
+```
+
+---
+
+## Testing with Stripe CLI
+
+```bash
+# Install and authenticate
+brew install stripe/stripe-cli/stripe
+stripe login
+
+# Forward webhooks to local server
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+
+# Trigger specific events
+stripe trigger checkout.session.completed
+stripe trigger customer.subscription.updated
+stripe trigger invoice.payment_failed
+stripe trigger customer.subscription.trial_will_end
+
+# Test card numbers
+# Success:               4242 4242 4242 4242
+# Requires 3D Secure:    4000 0025 0000 3155
+# Declined:              4000 0000 0000 0002
+# Insufficient funds:    4000 0000 0000 9995
+# Expired card:          4000 0000 0000 0069
+
+# View recent events
+stripe events list --limit 10
+
+# Inspect a specific event
+stripe events retrieve evt_xxx
+```
+
+---
+
+## Database Schema (Prisma)
+
+```prisma
+model User {
+  id                      String    @id @default(cuid())
+  email                   String    @unique
+  name                    String?
+
+  // Stripe fields
+  stripeCustomerId        String?   @unique
+  stripeSubscriptionId    String?   @unique
+  stripePriceId           String?
+  stripeCurrentPeriodEnd  DateTime?
+  subscriptionStatus      String?   // trialing, active, past_due, canceled, cancel_pending
+  cancelAtPeriodEnd       Boolean   @default(false)
+  hasHadTrial             Boolean   @default(false)
+}
+
+model StripeEvent {
+  id          String   @id          // Stripe event ID (evt_xxx)
+  type        String                // Event type
+  processedAt DateTime @default(now())
+
+  @@index([type])
+}
+```
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Consequence | Prevention |
+|---------|-------------|------------|
+| Trusting webhook event data | Stale data, race conditions | Always re-fetch from Stripe API in handlers |
+| No idempotency on webhooks | Double-charges, duplicate records | Track processed event IDs in database |
+| Missing metadata on checkout | Cannot link subscription to user | Always pass `userId` in metadata |
+| Proration surprises | Users charged unexpected amounts | Always preview proration before upgrade |
+| Not handling `past_due` | Users lose access without warning | Implement dunning emails on payment failure |
+| Skipping trial abuse prevention | Users create multiple accounts for free trials | Store `hasHadTrial: true`, check on checkout |
+| Customer Portal not configured | Portal returns blank page | Enable features in Stripe Dashboard first |
+| Webhook endpoint not idempotent | Stripe retries cause duplicate processing | Idempotency table with event ID dedup |
+| Not pinning API version | Breaking changes on Stripe updates | Pin `apiVersion` in client constructor |
+| Ignoring `trial_will_end` event | Users surprised when trial ends | Send reminder email 3 days before |
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **ab-test-setup** | Testing pricing page variants and checkout flows |
+| **analytics-tracking** | Tracking checkout and subscription conversion events |
+| **email-template-builder** | Building dunning and billing notification emails |
+| **api-design-reviewer** | Reviewing your billing API endpoints |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Webhook returns 400 on all events | Webhook signing secret mismatch between environments | Verify `STRIPE_WEBHOOK_SECRET` matches the endpoint in Stripe Dashboard; use `stripe listen` output secret for local dev |
+| Checkout session redirects to blank page | `success_url` or `cancel_url` missing `{CHECKOUT_SESSION_ID}` template or pointing to wrong domain | Ensure URLs use `APP_URL` env var and include the session ID template literal for retrieval |
+| Subscription shows `incomplete` status | First payment requires 3D Secure but was never completed | Handle `checkout.session.async_payment_failed` and send the customer a link to complete authentication |
+| Proration invoice charges full price instead of difference | Using `create_prorations` instead of `always_invoice` or not passing existing subscription item ID | Use `always_invoice` proration behavior and update the existing `items[0].id` rather than adding a new line item |
+| Usage records return &quot;Cannot create usage record&quot; | Reporting usage on a non-metered price or after subscription cancellation | Confirm the price uses `recurring.usage_type: &quot;metered&quot;` and the subscription is active before reporting |
+| Customer Portal shows no options | Portal configuration not enabled in Stripe Dashboard | Navigate to Stripe Dashboard &gt; Settings &gt; Billing &gt; Customer Portal and enable subscription management features |
+| Duplicate webhook processing despite idempotency table | `markProcessed` called before handler completes, then handler throws on retry | Move `markProcessed` to after the handler succeeds (as shown in the webhook handler pattern above) |
+
+---
+
+## Success Criteria
+
+- **Webhook reliability:** 99.9%+ webhook processing success rate with zero duplicate side effects over a 30-day window
+- **Checkout conversion:** End-to-end checkout flow completes in under 3 seconds (redirect to Stripe and back)
+- **Idempotency coverage:** 100% of webhook handlers are idempotent, verified by replaying the same event ID twice with no state change on the second pass
+- **Subscription state accuracy:** Database subscription status matches Stripe source of truth within 60 seconds of any state change
+- **SCA compliance:** All European payment flows pass 3D Secure challenges without manual intervention or dropped transactions
+- **Dunning recovery:** Automated dunning emails recover at least 30% of failed payments within the retry window (typically 7-21 days)
+- **Zero hardcoded price IDs:** All Stripe price IDs are sourced from environment variables, enabling test/production parity without code changes
+
+---
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Stripe Checkout, Subscriptions, and Customer Portal integration for SaaS billing
+- Webhook handling with idempotency, signature verification, and retry safety
+- Usage-based (metered) billing, proration previews, and plan change workflows
+- SCA/3D Secure compliance for European payment regulations (PSD2)
+
+**This skill does NOT cover:**
+- Stripe Connect (marketplace payouts, multi-party payments) -- see platform-specific Stripe Connect documentation
+- One-time payment flows without subscriptions (e.g., e-commerce product purchases)
+- Tax calculation and remittance (Stripe Tax configuration, VAT/GST filing) -- see `ra-qm-team/` compliance skills for regulatory guidance
+- Payment fraud detection and dispute management (Stripe Radar rules, chargeback workflows) -- see `skill-security-auditor` for security review patterns
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| **api-design-reviewer** | Review billing API endpoints for REST conventions, error handling, and rate limiting | Billing route definitions --&gt; API review checklist --&gt; validated endpoint contracts |
+| **database-schema-designer** | Design and validate the Prisma schema for Stripe customer, subscription, and event tracking tables | Schema requirements --&gt; normalized table design --&gt; migration files |
+| **observability-designer** | Instrument webhook handlers and checkout flows with structured logging, metrics, and alerting | Webhook events --&gt; OpenTelemetry traces --&gt; dashboard alerts on failure spikes |
+| **env-secrets-manager** | Manage Stripe API keys, webhook secrets, and price IDs across dev/staging/production | Secret definitions --&gt; encrypted vault storage --&gt; runtime injection via env vars |
+| **ci-cd-pipeline-builder** | Automate Stripe CLI webhook testing in CI and validate integration before deployment | Test triggers --&gt; `stripe listen` in CI --&gt; webhook handler assertions |
+| **runbook-generator** | Create operational runbooks for billing incidents: failed webhooks, mass payment failures, subscription reconciliation | Incident scenarios --&gt; step-by-step remediation --&gt; escalation paths |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Stripe Integration Expert&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Stripe Integration Expert&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Stripe Integration Expert in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Stripe Integration Expert&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Stripe Integration Expert&quot;
+4. Description: &quot;Implement production-grade Stripe integrations for SaaS billing. Covers subscription lifecycle management, checkout sessions, plan upgrades/downgrades with proration, usage-based billing, idempotent w...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/stripe-integration-expert/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

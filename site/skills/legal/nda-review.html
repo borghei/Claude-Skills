@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Nda Review (Legal domain).
 
 Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log with redlines, fallbacks, rationales, owners, deadlines. Use when reviewing NDAs for negotiation or approval.
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/nda-review
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Nda Review (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Nda Review (Legal domain).
 
 Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log with redlines, fallbacks, rationales, owners, deadlines. Use when reviewing NDAs for negotiation or approval.
 
@@ -435,7 +457,774 @@ https://github.com/borghei/Claude-Skills/tree/main/nda-review
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Nda Review&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# NDA Review
+
+Deep clause-by-clause NDA review tool that analyzes agreements from Recipient or Discloser perspective. Produces structured issue logs with preferred redlines, fallback positions, rationale, owners, and deadlines.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [NDA Clause Reviewer](#nda-clause-reviewer)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Full NDA Review](#full-nda-review)
+  - [Perspective-Based Review](#perspective-based-review)
+- [Immediate Red Flags](#immediate-red-flags)
+- [Review Checklists](#review-checklists)
+- [Variation Callouts](#variation-callouts)
+- [Risk Rating Guide](#risk-rating-guide)
+- [Common Pitfalls](#common-pitfalls)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### NDA Clause Reviewer
+
+Performs deep analysis of NDA text, extracting and classifying each clause against best practices. Detects overbroad definitions, missing carveouts, problematic residuals, IP grants, indemnification, and audit rights.
+
+```bash
+# Review from recipient perspective (default)
+python scripts/nda_clause_reviewer.py nda_draft.txt
+
+# Review from discloser perspective
+python scripts/nda_clause_reviewer.py nda_draft.txt --perspective discloser
+
+# JSON output for integration
+python scripts/nda_clause_reviewer.py nda_draft.txt --json
+
+# Save issue log
+python scripts/nda_clause_reviewer.py nda_draft.txt --output issues.json --json
+```
+
+**What it produces:**
+- Clause-by-clause issue log with H/M/L risk ratings
+- Preferred redline for each issue
+- Fallback position if preferred is rejected
+- Rationale for each recommendation
+- Owner assignment (legal, business, executive)
+- Deadline category (pre-signing, 30-day, 90-day)
+
+---
+
+## Reference Guides
+
+### NDA Clause Reference
+`references/nda_clause_reference.md`
+
+Five deep reference modules:
+- Duration &amp; Scope (term, survival, scope limitations)
+- Key Clauses (definition, purpose, permitted use, marking)
+- Party Obligations (standard of care, use restriction, disclosure limits)
+- Remedies &amp; Liability (injunctive relief, damages, indemnification)
+- Standard Exceptions (public knowledge, prior possession, independent development, third-party receipt, legal compulsion)
+
+### NDA Review Templates
+`references/nda_review_templates.md`
+
+Output templates and worked examples:
+- Executive Summary format
+- Clause-by-clause Issue Log table format
+- Ownership and timing defaults by topic category
+- Worked examples for social media endorsement and group licensing scenarios
+
+---
+
+## Workflows
+
+### Full NDA Review
+
+1. **Triage first** -- Run `nda-triage` skill for quick GREEN/YELLOW/RED classification
+2. **Deep review** -- Run `nda_clause_reviewer.py` with appropriate `--perspective`
+3. **Review issue log** -- Address HIGH-risk items first, then MEDIUM, then LOW
+4. **Prepare redlines** -- Use preferred positions; prepare fallbacks
+5. **Assign owners** -- Legal owns clause language; business owns commercial terms
+6. **Set deadlines** -- Pre-signing items before next meeting; post-signing items within 30-90 days
+7. **Negotiate** -- Present redlines; use fallbacks as needed
+8. **Final review** -- Verify all issues resolved before execution
+
+### Perspective-Based Review
+
+| Perspective | Focus Areas | Key Concerns |
+|-------------|-------------|--------------|
+| Recipient | Scope of obligations, carveouts, residuals, return/destruction | Protecting freedom to operate; avoiding contamination claims |
+| Discloser | Definition breadth, remedies, duration, permitted disclosures | Maximizing protection; ensuring adequate enforcement |
+
+---
+
+## Immediate Red Flags
+
+Stop review and escalate if any of these 7 red flags are present.
+
+| # | Red Flag | Why It Matters | Escalation |
+|---|----------|---------------|------------|
+| 1 | Non-compete clause | Restricts business operations; requires separate consideration and analysis | Senior counsel immediately |
+| 2 | IP assignment or license grant | Transfers rights beyond confidentiality scope | Senior counsel immediately |
+| 3 | Non-solicitation of employees or customers | Employment law implications; may be unenforceable | Senior counsel within 24 hours |
+| 4 | Missing 3+ standard carveouts | Fundamentally deficient NDA | Counsel review before any response |
+| 5 | Liquidated damages or penalty clause | Transforms NDA into penalty contract | Senior counsel within 24 hours |
+| 6 | Perpetual obligations with no termination | Indefinite legal burden with no exit | Counsel review within 48 hours |
+| 7 | Exclusivity provision | Limits engagement with other parties | Business leadership + counsel |
+
+---
+
+## Review Checklists
+
+### Recipient Checklist (8 Topics)
+
+| # | Topic | Key Questions | Risk if Missing |
+|---|-------|---------------|-----------------|
+| 1 | Definition Scope | Is confidential info bounded? Is there a marking requirement? | Overbroad definition traps all shared information |
+| 2 | Standard Carveouts | Are all 5 carveouts present and properly drafted? | Missing carveouts restrict legitimate business activities |
+| 3 | Permitted Use | Is use restricted to stated purpose? Can we share with advisors? | Overly restrictive use limits may impede evaluation |
+| 4 | Residuals | Is there a residuals clause? Is it narrow or broad? | Broad residuals clause benefits; narrow or absent protects discloser |
+| 5 | Return/Destruction | Return or destroy option? Retention exception for backups? | No retention exception is impractical for electronic data |
+| 6 | Term &amp; Survival | Reasonable term? Reasonable survival period? Termination right? | Perpetual obligations are burdensome |
+| 7 | Remedies | Injunctive relief only? Or liquidated damages/indemnification? | Excessive remedies shift risk disproportionately |
+| 8 | Problematic Provisions | Non-compete? Non-solicitation? IP assignment? Audit rights? | These provisions have no place in a standard NDA |
+
+### Discloser Checklist (5 Topics)
+
+| # | Topic | Key Questions | Risk if Missing |
+|---|-------|---------------|-----------------|
+| 1 | Definition Breadth | Does definition cover all information we will share? All forms? | Gaps in definition leave information unprotected |
+| 2 | Obligation Strength | Standard of care adequate? Written agreements from recipients? | Weak obligations increase risk of unauthorized disclosure |
+| 3 | Remedies | Injunctive relief available? Is it meaningful in this jurisdiction? | Without adequate remedies, NDA is unenforceable in practice |
+| 4 | Duration | Is the term long enough? Does survival cover our exposure window? | Short terms may expire before information loses value |
+| 5 | Recipient Limits | Who can receive? Is need-to-know enforced? Downstream binding? | Unrestricted sharing exposes information to unauthorized parties |
+
+---
+
+## Variation Callouts
+
+Different NDA contexts require different review emphasis.
+
+### M&amp;A Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Standstill provision | Prevents hostile acquisition moves during due diligence | Accept if mutual and time-limited (12-18 months) |
+| Non-solicitation of employees | Standard in M&amp;A NDAs | Accept if limited to key employees for 12 months |
+| Broader definition | M&amp;A requires extensive information sharing | Accept broader definition with strong carveouts |
+| Longer survival | Sensitive strategic information shared | 3-5 year survival is appropriate |
+| Residuals clause sensitivity | Competitive intelligence at stake | Resist residuals clause or narrow significantly |
+
+### Employment Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Invention assignment | Employer IP ownership | Separate from NDA; use invention assignment agreement |
+| Post-employment obligations | Obligations after employment ends | Limit survival to 2 years; ensure enforceability |
+| Scope of work product | What the employee creates | Define in employment agreement, not NDA |
+| Non-compete enforceability | Varies by jurisdiction | Review local law before including; may be void |
+
+### VC / Fundraising Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Investor portfolio conflicts | VC may have portfolio companies in same space | Include portfolio company exclusion or conflict provision |
+| Residuals clause | VCs see many similar pitches | Resist; protect trade secrets and specific data |
+| Term limitations | VCs want short obligations | 2-3 year term acceptable; ensure adequate survival |
+| Definition scope | Founders want maximum protection | Balance with investor need for portfolio flexibility |
+
+---
+
+## Risk Rating Guide
+
+| Rating | Criteria | Action | Timeline |
+|--------|----------|--------|----------|
+| HIGH (H) | Could result in material legal or financial exposure; deal-breaker potential | Must resolve before signing | Pre-signing |
+| MEDIUM (M) | Creates meaningful risk but manageable; strong preference to resolve | Should resolve; accept with documented risk if necessary | Within 30 days |
+| LOW (L) | Minor preference; improves agreement but not material | Nice to resolve; concede if needed for higher-priority wins | Within 90 days |
+
+### Risk Rating by Issue Type
+
+| Issue Type | Typical Rating | Escalation |
+|-----------|---------------|------------|
+| Missing carveout (any) | M-H | Counsel |
+| Overbroad definition | M | Counsel |
+| Non-compete/non-solicitation | H | Senior counsel |
+| IP assignment | H | Senior counsel |
+| Residuals clause (broad) | M | Counsel |
+| Perpetual obligations | M-H | Counsel |
+| No return/destruction | M | Counsel |
+| Liquidated damages | H | Senior counsel |
+| Missing governing law | L-M | Counsel |
+| One-sided obligations | M | Counsel |
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Impact | Fix |
+|---------|--------|-----|
+| Reviewing without knowing your perspective | Recipient and discloser have opposing interests on many clauses | Always set `--perspective` flag; review with clear role in mind |
+| Treating the NDA as &quot;just a formality&quot; | Missing problematic provisions that create real obligations | Run full clause review on every NDA, regardless of perceived importance |
+| Negotiating clause-by-clause in document order | Wastes time on early low-priority clauses; may not reach critical issues | Prioritize by risk rating; address H items first |
+| Accepting &quot;standard&quot; NDAs without review | Every organization&#x27;s &quot;standard&quot; is different; one party&#x27;s standard favors that party | No NDA is truly standard; always review |
+| Ignoring context (M&amp;A, employment, VC) | Standard NDA review misses context-specific risks | Use variation callouts for specialized contexts |
+| Not preparing fallback positions | Stuck when counterparty rejects preferred redline | Prepare preferred + fallback for every H and M item |
+| Signing before resolving H-rated issues | Creates material legal exposure | Require all H items resolved or executive sign-off |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| All issues rated LOW | NDA is genuinely well-drafted, or text extraction lost key sections | Manually verify critical sections (definition, carveouts, remedies) are in the input file |
+| Perspective flag has no effect | Tool adjusts weighting, not detection; same issues found either way | Perspective changes risk ratings and recommendations, not issue detection |
+| Too many issues generated | NDA is non-standard or poorly drafted | Focus on H-rated issues first; use the issue log as a negotiation roadmap |
+| Script misses embedded provisions | Non-compete or IP clause hidden in definitions or general provisions | Search full document for &quot;compete&quot;, &quot;assign&quot;, &quot;license&quot;, &quot;solicit&quot; manually |
+| Output format does not match template | Tool outputs structured data, not final deliverable | Use `references/nda_review_templates.md` to format the output for stakeholders |
+
+---
+
+## Success Criteria
+
+- **Complete clause-by-clause review in under 15 minutes:** Automated analysis replaces 1-2 hours of manual review.
+- **Zero missed HIGH-risk issues:** Every non-compete, IP assignment, and missing carveout is identified.
+- **Actionable redlines for every H and M issue:** Each issue has preferred position, fallback, and rationale.
+- **Clear ownership assignment:** Every issue has a designated owner (legal, business, executive).
+- **Perspective-appropriate recommendations:** Recipient and discloser reviews produce different risk weightings.
+- **Context-aware review:** M&amp;A, employment, and VC variations are flagged when relevant.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Deep clause-by-clause NDA analysis with pattern matching and risk classification
+- Perspective-based review (Recipient vs. Discloser)
+- Issue log generation with redlines, fallbacks, rationale, owners, and deadlines
+- Detection of 7 immediate red flags for triage
+- Context variation awareness (M&amp;A, Employment, VC)
+
+**Does NOT cover:**
+- **Legal advice** -- this tool supports review, it does not replace qualified legal counsel
+- **Rapid triage** -- use `nda-triage` for quick GREEN/YELLOW/RED screening
+- **Contract types beyond NDAs** -- use `contract-review` for general commercial agreements
+- **Jurisdiction-specific enforceability analysis** -- requires local counsel assessment
+- **Non-English NDAs** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Running deep review without triage first | Wastes time on detailed analysis of NDAs that should be rejected outright (RED triage) | Always run `nda-triage` first; only proceed to deep review for YELLOW or GREEN-with-complexity |
+| Using Recipient perspective for both sides | Recipient perspective minimizes obligations and maximizes carveouts, which is wrong if you are the discloser | Always set the correct `--perspective` flag based on your role |
+| Accepting all LOW-rated issues without review | Some LOW issues are low-risk individually but create cumulative exposure when combined | Review the full issue log for interaction effects; multiple LOW issues in the same area may compound to MEDIUM |
+| Skipping the variation callouts for specialized contexts | Standard NDA review misses M&amp;A standstill provisions, employment invention assignment, VC portfolio conflicts | Check the variation callouts section for your specific deal context |
+
+---
+
+## Tool Reference
+
+### nda_clause_reviewer.py
+
+**Purpose:** Performs deep clause-by-clause NDA analysis. Detects overbroad definitions, missing carveouts, problematic provisions, and generates an issue log with redlines, fallbacks, rationale, owners, and deadlines.
+
+**Usage:**
+
+```bash
+python scripts/nda_clause_reviewer.py &lt;nda_file&gt; [--perspective PERSPECTIVE] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--perspective` | `-p` | `recipient` | Review perspective: `recipient` or `discloser` |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_nda.txt&quot;,
+  &quot;perspective&quot;: &quot;recipient&quot;,
+  &quot;issues&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;clause&quot;: &quot;Definition of Confidential Information&quot;,
+      &quot;issue&quot;: &quot;Overbroad definition with no marking requirement&quot;,
+      &quot;risk&quot;: &quot;H&quot;,
+      &quot;preferred_redline&quot;: &quot;Narrow to information marked Confidential or confirmed in writing within 10 days&quot;,
+      &quot;fallback&quot;: &quot;Add marking requirement for written; 10-day confirmation for oral&quot;,
+      &quot;rationale&quot;: &quot;Overbroad definition traps all shared information as confidential&quot;,
+      &quot;owner&quot;: &quot;legal&quot;,
+      &quot;deadline&quot;: &quot;pre-signing&quot;
+    }
+  ],
+  &quot;summary&quot;: {
+    &quot;total_issues&quot;: 5,
+    &quot;high&quot;: 2,
+    &quot;medium&quot;: 2,
+    &quot;low&quot;: 1
+  }
+}
+```
+
+**Example Output (Text):**
+
+```
+NDA CLAUSE REVIEW — ISSUE LOG
+==============================
+File: vendor_nda.txt
+Perspective: Recipient
+Issues Found: 5 (H:2 M:2 L:1)
+
+ #  Risk  Clause                           Issue
+ 1  H     Definition of Confidential Info  Overbroad definition; no marking requirement
+        Preferred: Narrow to marked information with 10-day oral confirmation
+        Fallback:  Add marking requirement for written; 10-day confirmation for oral
+        Rationale: Overbroad definition traps all shared information
+        Owner: legal | Deadline: pre-signing
+
+ 2  H     Standard Carveouts               Missing independent development carveout
+        Preferred: Add standard independent development exception
+        Fallback:  Add with documentary evidence requirement
+        Rationale: Missing carveout blocks internal R&amp;D
+        Owner: legal | Deadline: pre-signing
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Nda Review&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Nda Review&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Nda Review in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Nda Review&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Nda Review&quot;
+4. Description: &quot;Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log with redlines, fallbacks, rationales, owners, deadlines. Use when reviewing NDAs for negotiation or approval.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/nda-review/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Nda Review&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# NDA Review
+
+Deep clause-by-clause NDA review tool that analyzes agreements from Recipient or Discloser perspective. Produces structured issue logs with preferred redlines, fallback positions, rationale, owners, and deadlines.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [NDA Clause Reviewer](#nda-clause-reviewer)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Full NDA Review](#full-nda-review)
+  - [Perspective-Based Review](#perspective-based-review)
+- [Immediate Red Flags](#immediate-red-flags)
+- [Review Checklists](#review-checklists)
+- [Variation Callouts](#variation-callouts)
+- [Risk Rating Guide](#risk-rating-guide)
+- [Common Pitfalls](#common-pitfalls)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### NDA Clause Reviewer
+
+Performs deep analysis of NDA text, extracting and classifying each clause against best practices. Detects overbroad definitions, missing carveouts, problematic residuals, IP grants, indemnification, and audit rights.
+
+```bash
+# Review from recipient perspective (default)
+python scripts/nda_clause_reviewer.py nda_draft.txt
+
+# Review from discloser perspective
+python scripts/nda_clause_reviewer.py nda_draft.txt --perspective discloser
+
+# JSON output for integration
+python scripts/nda_clause_reviewer.py nda_draft.txt --json
+
+# Save issue log
+python scripts/nda_clause_reviewer.py nda_draft.txt --output issues.json --json
+```
+
+**What it produces:**
+- Clause-by-clause issue log with H/M/L risk ratings
+- Preferred redline for each issue
+- Fallback position if preferred is rejected
+- Rationale for each recommendation
+- Owner assignment (legal, business, executive)
+- Deadline category (pre-signing, 30-day, 90-day)
+
+---
+
+## Reference Guides
+
+### NDA Clause Reference
+`references/nda_clause_reference.md`
+
+Five deep reference modules:
+- Duration &amp; Scope (term, survival, scope limitations)
+- Key Clauses (definition, purpose, permitted use, marking)
+- Party Obligations (standard of care, use restriction, disclosure limits)
+- Remedies &amp; Liability (injunctive relief, damages, indemnification)
+- Standard Exceptions (public knowledge, prior possession, independent development, third-party receipt, legal compulsion)
+
+### NDA Review Templates
+`references/nda_review_templates.md`
+
+Output templates and worked examples:
+- Executive Summary format
+- Clause-by-clause Issue Log table format
+- Ownership and timing defaults by topic category
+- Worked examples for social media endorsement and group licensing scenarios
+
+---
+
+## Workflows
+
+### Full NDA Review
+
+1. **Triage first** -- Run `nda-triage` skill for quick GREEN/YELLOW/RED classification
+2. **Deep review** -- Run `nda_clause_reviewer.py` with appropriate `--perspective`
+3. **Review issue log** -- Address HIGH-risk items first, then MEDIUM, then LOW
+4. **Prepare redlines** -- Use preferred positions; prepare fallbacks
+5. **Assign owners** -- Legal owns clause language; business owns commercial terms
+6. **Set deadlines** -- Pre-signing items before next meeting; post-signing items within 30-90 days
+7. **Negotiate** -- Present redlines; use fallbacks as needed
+8. **Final review** -- Verify all issues resolved before execution
+
+### Perspective-Based Review
+
+| Perspective | Focus Areas | Key Concerns |
+|-------------|-------------|--------------|
+| Recipient | Scope of obligations, carveouts, residuals, return/destruction | Protecting freedom to operate; avoiding contamination claims |
+| Discloser | Definition breadth, remedies, duration, permitted disclosures | Maximizing protection; ensuring adequate enforcement |
+
+---
+
+## Immediate Red Flags
+
+Stop review and escalate if any of these 7 red flags are present.
+
+| # | Red Flag | Why It Matters | Escalation |
+|---|----------|---------------|------------|
+| 1 | Non-compete clause | Restricts business operations; requires separate consideration and analysis | Senior counsel immediately |
+| 2 | IP assignment or license grant | Transfers rights beyond confidentiality scope | Senior counsel immediately |
+| 3 | Non-solicitation of employees or customers | Employment law implications; may be unenforceable | Senior counsel within 24 hours |
+| 4 | Missing 3+ standard carveouts | Fundamentally deficient NDA | Counsel review before any response |
+| 5 | Liquidated damages or penalty clause | Transforms NDA into penalty contract | Senior counsel within 24 hours |
+| 6 | Perpetual obligations with no termination | Indefinite legal burden with no exit | Counsel review within 48 hours |
+| 7 | Exclusivity provision | Limits engagement with other parties | Business leadership + counsel |
+
+---
+
+## Review Checklists
+
+### Recipient Checklist (8 Topics)
+
+| # | Topic | Key Questions | Risk if Missing |
+|---|-------|---------------|-----------------|
+| 1 | Definition Scope | Is confidential info bounded? Is there a marking requirement? | Overbroad definition traps all shared information |
+| 2 | Standard Carveouts | Are all 5 carveouts present and properly drafted? | Missing carveouts restrict legitimate business activities |
+| 3 | Permitted Use | Is use restricted to stated purpose? Can we share with advisors? | Overly restrictive use limits may impede evaluation |
+| 4 | Residuals | Is there a residuals clause? Is it narrow or broad? | Broad residuals clause benefits; narrow or absent protects discloser |
+| 5 | Return/Destruction | Return or destroy option? Retention exception for backups? | No retention exception is impractical for electronic data |
+| 6 | Term &amp; Survival | Reasonable term? Reasonable survival period? Termination right? | Perpetual obligations are burdensome |
+| 7 | Remedies | Injunctive relief only? Or liquidated damages/indemnification? | Excessive remedies shift risk disproportionately |
+| 8 | Problematic Provisions | Non-compete? Non-solicitation? IP assignment? Audit rights? | These provisions have no place in a standard NDA |
+
+### Discloser Checklist (5 Topics)
+
+| # | Topic | Key Questions | Risk if Missing |
+|---|-------|---------------|-----------------|
+| 1 | Definition Breadth | Does definition cover all information we will share? All forms? | Gaps in definition leave information unprotected |
+| 2 | Obligation Strength | Standard of care adequate? Written agreements from recipients? | Weak obligations increase risk of unauthorized disclosure |
+| 3 | Remedies | Injunctive relief available? Is it meaningful in this jurisdiction? | Without adequate remedies, NDA is unenforceable in practice |
+| 4 | Duration | Is the term long enough? Does survival cover our exposure window? | Short terms may expire before information loses value |
+| 5 | Recipient Limits | Who can receive? Is need-to-know enforced? Downstream binding? | Unrestricted sharing exposes information to unauthorized parties |
+
+---
+
+## Variation Callouts
+
+Different NDA contexts require different review emphasis.
+
+### M&amp;A Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Standstill provision | Prevents hostile acquisition moves during due diligence | Accept if mutual and time-limited (12-18 months) |
+| Non-solicitation of employees | Standard in M&amp;A NDAs | Accept if limited to key employees for 12 months |
+| Broader definition | M&amp;A requires extensive information sharing | Accept broader definition with strong carveouts |
+| Longer survival | Sensitive strategic information shared | 3-5 year survival is appropriate |
+| Residuals clause sensitivity | Competitive intelligence at stake | Resist residuals clause or narrow significantly |
+
+### Employment Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Invention assignment | Employer IP ownership | Separate from NDA; use invention assignment agreement |
+| Post-employment obligations | Obligations after employment ends | Limit survival to 2 years; ensure enforceability |
+| Scope of work product | What the employee creates | Define in employment agreement, not NDA |
+| Non-compete enforceability | Varies by jurisdiction | Review local law before including; may be void |
+
+### VC / Fundraising Context
+
+| Additional Concern | Reason | Recommended Position |
+|-------------------|--------|---------------------|
+| Investor portfolio conflicts | VC may have portfolio companies in same space | Include portfolio company exclusion or conflict provision |
+| Residuals clause | VCs see many similar pitches | Resist; protect trade secrets and specific data |
+| Term limitations | VCs want short obligations | 2-3 year term acceptable; ensure adequate survival |
+| Definition scope | Founders want maximum protection | Balance with investor need for portfolio flexibility |
+
+---
+
+## Risk Rating Guide
+
+| Rating | Criteria | Action | Timeline |
+|--------|----------|--------|----------|
+| HIGH (H) | Could result in material legal or financial exposure; deal-breaker potential | Must resolve before signing | Pre-signing |
+| MEDIUM (M) | Creates meaningful risk but manageable; strong preference to resolve | Should resolve; accept with documented risk if necessary | Within 30 days |
+| LOW (L) | Minor preference; improves agreement but not material | Nice to resolve; concede if needed for higher-priority wins | Within 90 days |
+
+### Risk Rating by Issue Type
+
+| Issue Type | Typical Rating | Escalation |
+|-----------|---------------|------------|
+| Missing carveout (any) | M-H | Counsel |
+| Overbroad definition | M | Counsel |
+| Non-compete/non-solicitation | H | Senior counsel |
+| IP assignment | H | Senior counsel |
+| Residuals clause (broad) | M | Counsel |
+| Perpetual obligations | M-H | Counsel |
+| No return/destruction | M | Counsel |
+| Liquidated damages | H | Senior counsel |
+| Missing governing law | L-M | Counsel |
+| One-sided obligations | M | Counsel |
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Impact | Fix |
+|---------|--------|-----|
+| Reviewing without knowing your perspective | Recipient and discloser have opposing interests on many clauses | Always set `--perspective` flag; review with clear role in mind |
+| Treating the NDA as &quot;just a formality&quot; | Missing problematic provisions that create real obligations | Run full clause review on every NDA, regardless of perceived importance |
+| Negotiating clause-by-clause in document order | Wastes time on early low-priority clauses; may not reach critical issues | Prioritize by risk rating; address H items first |
+| Accepting &quot;standard&quot; NDAs without review | Every organization&#x27;s &quot;standard&quot; is different; one party&#x27;s standard favors that party | No NDA is truly standard; always review |
+| Ignoring context (M&amp;A, employment, VC) | Standard NDA review misses context-specific risks | Use variation callouts for specialized contexts |
+| Not preparing fallback positions | Stuck when counterparty rejects preferred redline | Prepare preferred + fallback for every H and M item |
+| Signing before resolving H-rated issues | Creates material legal exposure | Require all H items resolved or executive sign-off |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| All issues rated LOW | NDA is genuinely well-drafted, or text extraction lost key sections | Manually verify critical sections (definition, carveouts, remedies) are in the input file |
+| Perspective flag has no effect | Tool adjusts weighting, not detection; same issues found either way | Perspective changes risk ratings and recommendations, not issue detection |
+| Too many issues generated | NDA is non-standard or poorly drafted | Focus on H-rated issues first; use the issue log as a negotiation roadmap |
+| Script misses embedded provisions | Non-compete or IP clause hidden in definitions or general provisions | Search full document for &quot;compete&quot;, &quot;assign&quot;, &quot;license&quot;, &quot;solicit&quot; manually |
+| Output format does not match template | Tool outputs structured data, not final deliverable | Use `references/nda_review_templates.md` to format the output for stakeholders |
+
+---
+
+## Success Criteria
+
+- **Complete clause-by-clause review in under 15 minutes:** Automated analysis replaces 1-2 hours of manual review.
+- **Zero missed HIGH-risk issues:** Every non-compete, IP assignment, and missing carveout is identified.
+- **Actionable redlines for every H and M issue:** Each issue has preferred position, fallback, and rationale.
+- **Clear ownership assignment:** Every issue has a designated owner (legal, business, executive).
+- **Perspective-appropriate recommendations:** Recipient and discloser reviews produce different risk weightings.
+- **Context-aware review:** M&amp;A, employment, and VC variations are flagged when relevant.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Deep clause-by-clause NDA analysis with pattern matching and risk classification
+- Perspective-based review (Recipient vs. Discloser)
+- Issue log generation with redlines, fallbacks, rationale, owners, and deadlines
+- Detection of 7 immediate red flags for triage
+- Context variation awareness (M&amp;A, Employment, VC)
+
+**Does NOT cover:**
+- **Legal advice** -- this tool supports review, it does not replace qualified legal counsel
+- **Rapid triage** -- use `nda-triage` for quick GREEN/YELLOW/RED screening
+- **Contract types beyond NDAs** -- use `contract-review` for general commercial agreements
+- **Jurisdiction-specific enforceability analysis** -- requires local counsel assessment
+- **Non-English NDAs** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Running deep review without triage first | Wastes time on detailed analysis of NDAs that should be rejected outright (RED triage) | Always run `nda-triage` first; only proceed to deep review for YELLOW or GREEN-with-complexity |
+| Using Recipient perspective for both sides | Recipient perspective minimizes obligations and maximizes carveouts, which is wrong if you are the discloser | Always set the correct `--perspective` flag based on your role |
+| Accepting all LOW-rated issues without review | Some LOW issues are low-risk individually but create cumulative exposure when combined | Review the full issue log for interaction effects; multiple LOW issues in the same area may compound to MEDIUM |
+| Skipping the variation callouts for specialized contexts | Standard NDA review misses M&amp;A standstill provisions, employment invention assignment, VC portfolio conflicts | Check the variation callouts section for your specific deal context |
+
+---
+
+## Tool Reference
+
+### nda_clause_reviewer.py
+
+**Purpose:** Performs deep clause-by-clause NDA analysis. Detects overbroad definitions, missing carveouts, problematic provisions, and generates an issue log with redlines, fallbacks, rationale, owners, and deadlines.
+
+**Usage:**
+
+```bash
+python scripts/nda_clause_reviewer.py &lt;nda_file&gt; [--perspective PERSPECTIVE] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--perspective` | `-p` | `recipient` | Review perspective: `recipient` or `discloser` |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_nda.txt&quot;,
+  &quot;perspective&quot;: &quot;recipient&quot;,
+  &quot;issues&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;clause&quot;: &quot;Definition of Confidential Information&quot;,
+      &quot;issue&quot;: &quot;Overbroad definition with no marking requirement&quot;,
+      &quot;risk&quot;: &quot;H&quot;,
+      &quot;preferred_redline&quot;: &quot;Narrow to information marked Confidential or confirmed in writing within 10 days&quot;,
+      &quot;fallback&quot;: &quot;Add marking requirement for written; 10-day confirmation for oral&quot;,
+      &quot;rationale&quot;: &quot;Overbroad definition traps all shared information as confidential&quot;,
+      &quot;owner&quot;: &quot;legal&quot;,
+      &quot;deadline&quot;: &quot;pre-signing&quot;
+    }
+  ],
+  &quot;summary&quot;: {
+    &quot;total_issues&quot;: 5,
+    &quot;high&quot;: 2,
+    &quot;medium&quot;: 2,
+    &quot;low&quot;: 1
+  }
+}
+```
+
+**Example Output (Text):**
+
+```
+NDA CLAUSE REVIEW — ISSUE LOG
+==============================
+File: vendor_nda.txt
+Perspective: Recipient
+Issues Found: 5 (H:2 M:2 L:1)
+
+ #  Risk  Clause                           Issue
+ 1  H     Definition of Confidential Info  Overbroad definition; no marking requirement
+        Preferred: Narrow to marked information with 10-day oral confirmation
+        Fallback:  Add marking requirement for written; 10-day confirmation for oral
+        Rationale: Overbroad definition traps all shared information
+        Owner: legal | Deadline: pre-signing
+
+ 2  H     Standard Carveouts               Missing independent development carveout
+        Preferred: Add standard independent development exception
+        Fallback:  Add with documentary evidence requirement
+        Rationale: Missing carveout blocks internal R&amp;D
+        Owner: legal | Deadline: pre-signing
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Nda Review&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Nda Review&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Nda Review in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Nda Review&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Nda Review&quot;
+4. Description: &quot;Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log with redlines, fallbacks, rationales, owners, deadlines. Use when reviewing NDAs for negotiation or approval.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/nda-review/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

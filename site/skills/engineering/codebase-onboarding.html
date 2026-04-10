@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Codebase Onboarding (Engineering domain).
 
 Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/codebase-onboarding
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Codebase Onboarding (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Codebase Onboarding (Engineering domain).
 
 Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines...
 
@@ -439,7 +461,912 @@ https://github.com/borghei/Claude-Skills/tree/main/codebase-onboarding
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Codebase Onboarding&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Codebase Onboarding
+
+**Tier:** POWERFUL
+**Category:** Engineering / Developer Experience
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Analyze any codebase and generate production-quality onboarding documentation tailored to the audience. Produces architecture overviews with system diagrams, annotated key file maps, step-by-step local setup guides, common developer task runbooks, debugging guides with real error solutions, and contribution guidelines. Supports Markdown, Notion, and Confluence output formats.
+
+## Keywords
+
+codebase onboarding, developer experience, documentation, architecture overview, setup guide, debugging guide, contribution guidelines, code walkthrough, new hire onboarding
+
+## Core Capabilities
+
+### 1. Architecture Analysis
+- Tech stack identification from manifests and lockfiles
+- System boundary mapping (services, databases, external APIs)
+- Data flow diagramming with Mermaid
+- Dependency graph visualization
+- Module ownership mapping
+
+### 2. Key File Annotation
+- Identify the 20 most important files and explain why they matter
+- Mark entry points, configuration hubs, and shared utilities
+- Flag files that are dangerous to modify without coordination
+- Link files to the architectural concepts they implement
+
+### 3. Setup Guide Generation
+- Prerequisites with exact versions and install commands
+- Step-by-step from `git clone` to running tests
+- Environment variable documentation with example values
+- Infrastructure setup (Docker, databases, caches)
+- Verification checklist (what &quot;success&quot; looks like)
+
+### 4. Task Runbooks
+- How to add a new API endpoint (full lifecycle)
+- How to run and write tests
+- How to create and apply database migrations
+- How to deploy to staging and production
+- How to add a new dependency safely
+
+### 5. Debugging Guide
+- Common errors with exact error messages and solutions
+- Log locations by environment
+- Useful SQL/CLI diagnostic queries
+- How to reproduce production issues locally
+
+## When to Use
+
+- Onboarding a new team member (junior, senior, or contractor)
+- After a major refactor that made existing docs stale
+- Before open-sourcing a project
+- Creating a team wiki page for a service you own
+- Self-documenting before a long vacation or team transition
+- Preparing for a compliance audit that requires documentation
+
+## Codebase Analysis Process
+
+### Phase 1: Gather Facts
+
+Run these analysis commands to collect data before generating any documentation.
+
+```bash
+# 1. Package manifest and scripts
+cat package.json 2&gt;/dev/null | python3 -c &quot;
+import json, sys
+pkg = json.load(sys.stdin)
+print(f\&quot;Name: {pkg.get(&#x27;name&#x27;)}\&quot;)
+print(f\&quot;Scripts: {list(pkg.get(&#x27;scripts&#x27;, {}).keys())}\&quot;)
+print(f\&quot;Deps: {len(pkg.get(&#x27;dependencies&#x27;, {}))}\&quot;)
+print(f\&quot;DevDeps: {len(pkg.get(&#x27;devDependencies&#x27;, {}))}\&quot;)
+&quot; || echo &quot;No package.json found&quot;
+
+# 2. Directory structure (top 3 levels, excluding noise)
+find . -maxdepth 3 \
+  -not -path &#x27;*/node_modules/*&#x27; \
+  -not -path &#x27;*/.git/*&#x27; \
+  -not -path &#x27;*/.next/*&#x27; \
+  -not -path &#x27;*/__pycache__/*&#x27; \
+  -not -path &#x27;*/dist/*&#x27; \
+  -not -path &#x27;*/.venv/*&#x27; | \
+  sort | head -80
+
+# 3. Largest source files (complexity indicators)
+find src/ app/ lib/ -name &quot;*.ts&quot; -o -name &quot;*.tsx&quot; -o -name &quot;*.py&quot; -o -name &quot;*.go&quot; 2&gt;/dev/null | \
+  xargs wc -l 2&gt;/dev/null | sort -rn | head -20
+
+# 4. API routes
+find . -name &quot;route.ts&quot; -path &quot;*/api/*&quot; 2&gt;/dev/null | sort  # Next.js
+grep -rn &quot;router\.\(get\|post\|put\|delete\)&quot; src/ --include=&quot;*.ts&quot; 2&gt;/dev/null | head -30  # Express
+
+# 5. Database schema location
+find . -name &quot;schema.ts&quot; -o -name &quot;schema.prisma&quot; -o -name &quot;models.py&quot; 2&gt;/dev/null | head -10
+
+# 6. Test infrastructure
+find . -name &quot;*.test.ts&quot; -o -name &quot;*.spec.ts&quot; -o -name &quot;test_*.py&quot; 2&gt;/dev/null | wc -l
+
+# 7. Recent significant changes (last 90 days)
+git log --oneline --since=&quot;90 days ago&quot; | grep -iE &quot;feat|refactor|breaking|migrate&quot; | head -20
+
+# 8. CI/CD configuration
+ls .github/workflows/ 2&gt;/dev/null || ls .gitlab-ci.yml 2&gt;/dev/null || echo &quot;No CI config found&quot;
+
+# 9. Environment variables referenced in code
+grep -rh &quot;process\.env\.\|os\.environ\.\|os\.getenv&quot; src/ app/ lib/ --include=&quot;*.ts&quot; --include=&quot;*.py&quot; 2&gt;/dev/null | \
+  grep -oE &quot;[A-Z_]{3,}&quot; | sort -u | head -30
+```
+
+### Phase 2: Identify Architecture Patterns
+
+Based on gathered facts, classify the project:
+
+| Signal | Architecture Pattern |
+|--------|---------------------|
+| `app/` directory with `page.tsx` | Next.js App Router (file-based routing) |
+| `src/routes/` with Express imports | Express REST API |
+| FastAPI decorators | Python REST/async API |
+| `docker-compose.yml` with multiple services | Microservices |
+| Single `main.go` with handlers | Go monolith |
+| `packages/` or `apps/` at root | Monorepo |
+| Prisma/Drizzle schema file | ORM-managed database |
+| `k8s/` or `terraform/` directories | Infrastructure as Code |
+
+### Phase 3: Generate Documentation
+
+## Architecture Overview Template
+
+```markdown
+## Architecture
+
+### System Diagram
+
+[Use the ASCII diagram pattern below — it renders in any markdown viewer]
+
+```
+Browser / Mobile App
+    │
+    v
+[API Gateway / Load Balancer]
+    │
+    ├──&gt; [Web Server: Next.js / Express / FastAPI]
+    │       ├── Authentication (JWT / OAuth)
+    │       ├── Business Logic
+    │       └── Background Jobs
+    │
+    ├──&gt; [Primary Database: PostgreSQL]
+    │       └── Migrations managed by [ORM]
+    │
+    ├──&gt; [Cache: Redis]
+    │       └── Sessions, rate limits, job queue
+    │
+    └──&gt; [Object Storage: S3 / R2]
+            └── File uploads, static assets
+
+External Integrations:
+    ├── [Stripe] — Payments
+    ├── [SendGrid / Resend] — Transactional email
+    └── [Sentry] — Error tracking
+```
+
+### Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Frontend | [framework] | [why chosen] |
+| API | [framework] | [routing, middleware] |
+| Database | [database + ORM] | [data storage, migrations] |
+| Auth | [provider] | [authentication method] |
+| Queue | [system] | [background processing] |
+| Deployment | [platform] | [hosting, CI/CD] |
+| Monitoring | [tool] | [errors, performance] |
+```
+
+## Key File Map Template
+
+```markdown
+## Key Files
+
+Priority files — read these first to understand the system:
+
+| Priority | Path | What It Does | When to Read |
+|----------|------|-------------|-------------|
+| 1 | `src/db/schema.ts` | Database schema — single source of truth for data model | First day |
+| 2 | `src/lib/auth.ts` | Authentication configuration and session handling | First day |
+| 3 | `app/api/` | All API route handlers | First week |
+| 4 | `middleware.ts` | Request middleware (auth, logging, rate limiting) | First week |
+| 5 | `.env.example` | All environment variables with descriptions | Setup day |
+
+Dangerous files — coordinate before modifying:
+
+| Path | Risk | Coordination Required |
+|------|------|----------------------|
+| `src/db/schema.ts` | Schema changes affect all services | PR review from DB owner |
+| `middleware.ts` | Affects every request | Load test after changes |
+| `lib/stripe.ts` | Payment processing | Finance team notification |
+```
+
+## Local Setup Guide Template
+
+```markdown
+## Local Setup (Target: under 10 minutes)
+
+### Prerequisites
+
+| Tool | Required Version | Install Command |
+|------|-----------------|----------------|
+| Node.js | 20+ | `nvm install 20` |
+| pnpm | 9+ | `corepack enable &amp;&amp; corepack prepare pnpm@latest` |
+| Docker | 24+ | [docker.com/get-docker](https://docker.com/get-docker) |
+| PostgreSQL | 16+ | Via Docker (see step 3) |
+
+### Steps
+
+**Step 1: Clone and install** (2 min)
+```bash
+git clone [repo-url]
+cd [repo-name]
+pnpm install
+```
+
+**Step 2: Configure environment** (1 min)
+```bash
+cp .env.example .env
+# Edit .env — minimum required values:
+#   DATABASE_URL=postgresql://dev:dev@localhost:5432/myapp
+#   APP_SECRET=$(openssl rand -base64 32)
+```
+
+**Step 3: Start infrastructure** (1 min)
+```bash
+docker compose up -d
+# Starts: PostgreSQL, Redis
+# Verify: docker compose ps (all should show &quot;running&quot;)
+```
+
+**Step 4: Set up database** (1 min)
+```bash
+pnpm db:migrate
+pnpm db:seed    # Optional: loads test data
+```
+
+**Step 5: Start dev server** (30 sec)
+```bash
+pnpm dev
+# App runs at http://localhost:3000
+```
+
+### Verify Everything Works
+
+- [ ] http://localhost:3000 loads the app
+- [ ] http://localhost:3000/api/health returns `{&quot;status&quot;: &quot;ok&quot;}`
+- [ ] `pnpm test` passes with no failures
+- [ ] You can log in with the seeded test user (see .env.example for credentials)
+```
+
+## Debugging Guide Template
+
+```markdown
+## Debugging Guide
+
+### Common Errors and Fixes
+
+**`Error: connect ECONNREFUSED 127.0.0.1:5432`**
+```
+Cause: PostgreSQL is not running
+Fix: docker compose up -d postgres
+Verify: docker compose ps postgres (should show &quot;running&quot;)
+```
+
+**`Error: relation &quot;users&quot; does not exist`**
+```
+Cause: Migrations have not been applied
+Fix: pnpm db:migrate
+Verify: pnpm db:migrate status (should show all applied)
+```
+
+**`TypeError: Cannot read property &#x27;id&#x27; of null`**
+```
+Cause: Session is null — usually a missing or expired auth token
+Fix: Check that the request includes a valid Authorization header
+Debug: Add console.log(session) in the route handler to inspect
+```
+
+### Where to Find Logs
+
+| Environment | Location | Command |
+|-------------|----------|---------|
+| Local dev | Terminal running `pnpm dev` | Scroll up in terminal |
+| Local DB | Docker logs | `docker compose logs postgres` |
+| Staging | [Platform dashboard] | [Link to staging logs] |
+| Production | [Platform dashboard] | [Link to production logs] |
+
+### Useful Diagnostic Commands
+
+```bash
+# Check database connectivity
+psql $DATABASE_URL -c &quot;SELECT 1&quot;
+
+# View active database connections
+psql $DATABASE_URL -c &quot;SELECT count(*), state FROM pg_stat_activity GROUP BY state&quot;
+
+# Check if a specific migration was applied
+pnpm db:migrate status
+
+# Clear local caches
+redis-cli FLUSHDB
+
+# Verify environment variables are loaded
+node -e &quot;console.log(process.env.DATABASE_URL ? &#x27;Set&#x27; : &#x27;MISSING&#x27;)&quot;
+```
+```
+
+## Audience-Specific Customization
+
+### Junior Developer Additions
+- Explain acronyms on first use (ORM, RLS, JWT, etc.)
+- Add &quot;read this first&quot; ordered reading list of 5 files
+- Include screenshots for UI-related flows
+- Link to external learning resources for key technologies
+- Add a &quot;glossary&quot; section for domain-specific terms
+
+### Senior Engineer Additions
+- Link to Architecture Decision Records (ADRs)
+- Include performance benchmark baselines
+- Document known technical debt and planned improvements
+- Provide security model overview with threat boundaries
+- Share scaling limits and planned capacity changes
+
+### Contractor Additions
+- Define scope boundaries (&quot;only modify files in src/features/your-feature/&quot;)
+- Specify communication channels and response expectations
+- Document access request process for required systems
+- Include time logging requirements and reporting cadence
+- List prohibited actions (direct push to main, schema changes, etc.)
+
+## Quality Verification
+
+After generating onboarding docs, validate with this checklist:
+
+1. **Fresh machine test** — can a new developer follow the setup guide verbatim on a clean machine?
+2. **10-minute target** — does local setup complete in under 10 minutes?
+3. **Error coverage** — do the documented errors match what developers actually encounter?
+4. **Link validity** — do all links to external resources and internal docs resolve?
+5. **Currency** — are all version numbers, commands, and screenshots current?
+
+## Common Pitfalls
+
+- **Docs written once, never updated** — add doc update checks to the PR template
+- **Missing &quot;why&quot; for architecture decisions** — document why, not just what
+- **Untested setup instructions** — test the docs on a fresh machine quarterly
+- **No debugging section** — the debugging guide is the most valuable section for new hires
+- **Too much detail for the wrong audience** — contractors need task-specific docs, not deep architecture
+- **Stale screenshots** — UI screenshots go stale fast; link to running instances when possible
+
+## Best Practices
+
+1. **Keep setup under 10 minutes** — if it takes longer, fix the setup process, not the docs
+2. **Test the docs** — have a new hire follow them literally and fix every gap they hit
+3. **Link, do not repeat** — reference ADRs, issues, and external docs instead of duplicating
+4. **Update docs in the same PR as code changes** — documentation drift is the number one failure mode
+5. **Version-specific notes** — call out what changed in recent versions so returning developers catch up
+6. **Runbooks over theory** — &quot;run this command&quot; is more useful than &quot;the system uses Redis for caching&quot;
+7. **Key file map is mandatory** — every project should have an annotated list of the 10-20 most important files
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated setup guide fails on fresh machine | Implicit dependencies not captured during analysis | Re-run Phase 1 gather commands on a clean environment; add every missing tool to the prerequisites table |
+| Architecture diagram does not match actual data flow | Analysis relied on stale code paths or unused modules | Cross-reference with `git log --since=&quot;90 days&quot;` to find active code paths; interview a senior engineer to validate |
+| Key file map is too large (30+ files) | No prioritization applied; every file treated equally | Limit to 15-20 files maximum; rank by edit frequency (`git log --format=&#x27;%H&#x27; -- &lt;file&gt; | wc -l`) and coupling |
+| Onboarding doc goes stale within weeks | No process ties doc updates to code changes | Add a &quot;docs&quot; checkbox to the PR template; schedule quarterly freshness reviews |
+| Audience sections feel generic | Same content served to juniors, seniors, and contractors | Generate separate docs per audience or use collapsible sections; run the audience customization checklist from this skill |
+| Debugging guide missing real errors | Errors were invented rather than collected from logs | Mine actual error messages from Sentry, CI logs, and Slack support channels before writing the guide |
+| Environment variable list is incomplete | `grep` scan missed dynamically constructed variable names | Supplement grep results with a manual review of config loader files and `.env.example`; verify against deployment manifests |
+
+## Success Criteria
+
+- **Setup completion rate**: 90%+ of new developers reach a working local environment within 10 minutes using only the generated guide (no Slack questions needed).
+- **First-commit time**: New hires make their first meaningful commit within 2 business days of starting onboarding.
+- **Error coverage**: The debugging guide covers at least 80% of errors reported in the team&#x27;s support channel over the prior 90 days.
+- **Doc freshness**: Onboarding documentation passes a quarterly freshness audit with fewer than 3 stale sections flagged.
+- **Key file accuracy**: The key file map covers all files edited in more than 5 PRs during the past quarter.
+- **Audience satisfaction**: Post-onboarding survey scores average 4.0+ out of 5.0 across junior, senior, and contractor cohorts.
+- **Link validity**: Zero broken internal or external links when validated by an automated link checker at publish time.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
+- Audience-aware documentation tailored for junior developers, senior engineers, and contractors
+- Output in Markdown, Notion, and Confluence formats
+- Quality verification checklists and freshness audit processes
+
+**This skill does NOT cover:**
+- Automated API reference generation from code annotations — see `engineering/changelog-generator` for release-oriented docs or `engineering/api-design-reviewer` for API quality
+- Continuous documentation pipelines or CI-triggered doc builds — see `engineering/ci-cd-pipeline-builder` for pipeline automation
+- Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
+- Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
+| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
+| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
+| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
+| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
+| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Codebase Onboarding&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Codebase Onboarding&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Codebase Onboarding in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Codebase Onboarding&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Codebase Onboarding&quot;
+4. Description: &quot;Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/codebase-onboarding/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Codebase Onboarding&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Codebase Onboarding
+
+**Tier:** POWERFUL
+**Category:** Engineering / Developer Experience
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Analyze any codebase and generate production-quality onboarding documentation tailored to the audience. Produces architecture overviews with system diagrams, annotated key file maps, step-by-step local setup guides, common developer task runbooks, debugging guides with real error solutions, and contribution guidelines. Supports Markdown, Notion, and Confluence output formats.
+
+## Keywords
+
+codebase onboarding, developer experience, documentation, architecture overview, setup guide, debugging guide, contribution guidelines, code walkthrough, new hire onboarding
+
+## Core Capabilities
+
+### 1. Architecture Analysis
+- Tech stack identification from manifests and lockfiles
+- System boundary mapping (services, databases, external APIs)
+- Data flow diagramming with Mermaid
+- Dependency graph visualization
+- Module ownership mapping
+
+### 2. Key File Annotation
+- Identify the 20 most important files and explain why they matter
+- Mark entry points, configuration hubs, and shared utilities
+- Flag files that are dangerous to modify without coordination
+- Link files to the architectural concepts they implement
+
+### 3. Setup Guide Generation
+- Prerequisites with exact versions and install commands
+- Step-by-step from `git clone` to running tests
+- Environment variable documentation with example values
+- Infrastructure setup (Docker, databases, caches)
+- Verification checklist (what &quot;success&quot; looks like)
+
+### 4. Task Runbooks
+- How to add a new API endpoint (full lifecycle)
+- How to run and write tests
+- How to create and apply database migrations
+- How to deploy to staging and production
+- How to add a new dependency safely
+
+### 5. Debugging Guide
+- Common errors with exact error messages and solutions
+- Log locations by environment
+- Useful SQL/CLI diagnostic queries
+- How to reproduce production issues locally
+
+## When to Use
+
+- Onboarding a new team member (junior, senior, or contractor)
+- After a major refactor that made existing docs stale
+- Before open-sourcing a project
+- Creating a team wiki page for a service you own
+- Self-documenting before a long vacation or team transition
+- Preparing for a compliance audit that requires documentation
+
+## Codebase Analysis Process
+
+### Phase 1: Gather Facts
+
+Run these analysis commands to collect data before generating any documentation.
+
+```bash
+# 1. Package manifest and scripts
+cat package.json 2&gt;/dev/null | python3 -c &quot;
+import json, sys
+pkg = json.load(sys.stdin)
+print(f\&quot;Name: {pkg.get(&#x27;name&#x27;)}\&quot;)
+print(f\&quot;Scripts: {list(pkg.get(&#x27;scripts&#x27;, {}).keys())}\&quot;)
+print(f\&quot;Deps: {len(pkg.get(&#x27;dependencies&#x27;, {}))}\&quot;)
+print(f\&quot;DevDeps: {len(pkg.get(&#x27;devDependencies&#x27;, {}))}\&quot;)
+&quot; || echo &quot;No package.json found&quot;
+
+# 2. Directory structure (top 3 levels, excluding noise)
+find . -maxdepth 3 \
+  -not -path &#x27;*/node_modules/*&#x27; \
+  -not -path &#x27;*/.git/*&#x27; \
+  -not -path &#x27;*/.next/*&#x27; \
+  -not -path &#x27;*/__pycache__/*&#x27; \
+  -not -path &#x27;*/dist/*&#x27; \
+  -not -path &#x27;*/.venv/*&#x27; | \
+  sort | head -80
+
+# 3. Largest source files (complexity indicators)
+find src/ app/ lib/ -name &quot;*.ts&quot; -o -name &quot;*.tsx&quot; -o -name &quot;*.py&quot; -o -name &quot;*.go&quot; 2&gt;/dev/null | \
+  xargs wc -l 2&gt;/dev/null | sort -rn | head -20
+
+# 4. API routes
+find . -name &quot;route.ts&quot; -path &quot;*/api/*&quot; 2&gt;/dev/null | sort  # Next.js
+grep -rn &quot;router\.\(get\|post\|put\|delete\)&quot; src/ --include=&quot;*.ts&quot; 2&gt;/dev/null | head -30  # Express
+
+# 5. Database schema location
+find . -name &quot;schema.ts&quot; -o -name &quot;schema.prisma&quot; -o -name &quot;models.py&quot; 2&gt;/dev/null | head -10
+
+# 6. Test infrastructure
+find . -name &quot;*.test.ts&quot; -o -name &quot;*.spec.ts&quot; -o -name &quot;test_*.py&quot; 2&gt;/dev/null | wc -l
+
+# 7. Recent significant changes (last 90 days)
+git log --oneline --since=&quot;90 days ago&quot; | grep -iE &quot;feat|refactor|breaking|migrate&quot; | head -20
+
+# 8. CI/CD configuration
+ls .github/workflows/ 2&gt;/dev/null || ls .gitlab-ci.yml 2&gt;/dev/null || echo &quot;No CI config found&quot;
+
+# 9. Environment variables referenced in code
+grep -rh &quot;process\.env\.\|os\.environ\.\|os\.getenv&quot; src/ app/ lib/ --include=&quot;*.ts&quot; --include=&quot;*.py&quot; 2&gt;/dev/null | \
+  grep -oE &quot;[A-Z_]{3,}&quot; | sort -u | head -30
+```
+
+### Phase 2: Identify Architecture Patterns
+
+Based on gathered facts, classify the project:
+
+| Signal | Architecture Pattern |
+|--------|---------------------|
+| `app/` directory with `page.tsx` | Next.js App Router (file-based routing) |
+| `src/routes/` with Express imports | Express REST API |
+| FastAPI decorators | Python REST/async API |
+| `docker-compose.yml` with multiple services | Microservices |
+| Single `main.go` with handlers | Go monolith |
+| `packages/` or `apps/` at root | Monorepo |
+| Prisma/Drizzle schema file | ORM-managed database |
+| `k8s/` or `terraform/` directories | Infrastructure as Code |
+
+### Phase 3: Generate Documentation
+
+## Architecture Overview Template
+
+```markdown
+## Architecture
+
+### System Diagram
+
+[Use the ASCII diagram pattern below — it renders in any markdown viewer]
+
+```
+Browser / Mobile App
+    │
+    v
+[API Gateway / Load Balancer]
+    │
+    ├──&gt; [Web Server: Next.js / Express / FastAPI]
+    │       ├── Authentication (JWT / OAuth)
+    │       ├── Business Logic
+    │       └── Background Jobs
+    │
+    ├──&gt; [Primary Database: PostgreSQL]
+    │       └── Migrations managed by [ORM]
+    │
+    ├──&gt; [Cache: Redis]
+    │       └── Sessions, rate limits, job queue
+    │
+    └──&gt; [Object Storage: S3 / R2]
+            └── File uploads, static assets
+
+External Integrations:
+    ├── [Stripe] — Payments
+    ├── [SendGrid / Resend] — Transactional email
+    └── [Sentry] — Error tracking
+```
+
+### Tech Stack
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Frontend | [framework] | [why chosen] |
+| API | [framework] | [routing, middleware] |
+| Database | [database + ORM] | [data storage, migrations] |
+| Auth | [provider] | [authentication method] |
+| Queue | [system] | [background processing] |
+| Deployment | [platform] | [hosting, CI/CD] |
+| Monitoring | [tool] | [errors, performance] |
+```
+
+## Key File Map Template
+
+```markdown
+## Key Files
+
+Priority files — read these first to understand the system:
+
+| Priority | Path | What It Does | When to Read |
+|----------|------|-------------|-------------|
+| 1 | `src/db/schema.ts` | Database schema — single source of truth for data model | First day |
+| 2 | `src/lib/auth.ts` | Authentication configuration and session handling | First day |
+| 3 | `app/api/` | All API route handlers | First week |
+| 4 | `middleware.ts` | Request middleware (auth, logging, rate limiting) | First week |
+| 5 | `.env.example` | All environment variables with descriptions | Setup day |
+
+Dangerous files — coordinate before modifying:
+
+| Path | Risk | Coordination Required |
+|------|------|----------------------|
+| `src/db/schema.ts` | Schema changes affect all services | PR review from DB owner |
+| `middleware.ts` | Affects every request | Load test after changes |
+| `lib/stripe.ts` | Payment processing | Finance team notification |
+```
+
+## Local Setup Guide Template
+
+```markdown
+## Local Setup (Target: under 10 minutes)
+
+### Prerequisites
+
+| Tool | Required Version | Install Command |
+|------|-----------------|----------------|
+| Node.js | 20+ | `nvm install 20` |
+| pnpm | 9+ | `corepack enable &amp;&amp; corepack prepare pnpm@latest` |
+| Docker | 24+ | [docker.com/get-docker](https://docker.com/get-docker) |
+| PostgreSQL | 16+ | Via Docker (see step 3) |
+
+### Steps
+
+**Step 1: Clone and install** (2 min)
+```bash
+git clone [repo-url]
+cd [repo-name]
+pnpm install
+```
+
+**Step 2: Configure environment** (1 min)
+```bash
+cp .env.example .env
+# Edit .env — minimum required values:
+#   DATABASE_URL=postgresql://dev:dev@localhost:5432/myapp
+#   APP_SECRET=$(openssl rand -base64 32)
+```
+
+**Step 3: Start infrastructure** (1 min)
+```bash
+docker compose up -d
+# Starts: PostgreSQL, Redis
+# Verify: docker compose ps (all should show &quot;running&quot;)
+```
+
+**Step 4: Set up database** (1 min)
+```bash
+pnpm db:migrate
+pnpm db:seed    # Optional: loads test data
+```
+
+**Step 5: Start dev server** (30 sec)
+```bash
+pnpm dev
+# App runs at http://localhost:3000
+```
+
+### Verify Everything Works
+
+- [ ] http://localhost:3000 loads the app
+- [ ] http://localhost:3000/api/health returns `{&quot;status&quot;: &quot;ok&quot;}`
+- [ ] `pnpm test` passes with no failures
+- [ ] You can log in with the seeded test user (see .env.example for credentials)
+```
+
+## Debugging Guide Template
+
+```markdown
+## Debugging Guide
+
+### Common Errors and Fixes
+
+**`Error: connect ECONNREFUSED 127.0.0.1:5432`**
+```
+Cause: PostgreSQL is not running
+Fix: docker compose up -d postgres
+Verify: docker compose ps postgres (should show &quot;running&quot;)
+```
+
+**`Error: relation &quot;users&quot; does not exist`**
+```
+Cause: Migrations have not been applied
+Fix: pnpm db:migrate
+Verify: pnpm db:migrate status (should show all applied)
+```
+
+**`TypeError: Cannot read property &#x27;id&#x27; of null`**
+```
+Cause: Session is null — usually a missing or expired auth token
+Fix: Check that the request includes a valid Authorization header
+Debug: Add console.log(session) in the route handler to inspect
+```
+
+### Where to Find Logs
+
+| Environment | Location | Command |
+|-------------|----------|---------|
+| Local dev | Terminal running `pnpm dev` | Scroll up in terminal |
+| Local DB | Docker logs | `docker compose logs postgres` |
+| Staging | [Platform dashboard] | [Link to staging logs] |
+| Production | [Platform dashboard] | [Link to production logs] |
+
+### Useful Diagnostic Commands
+
+```bash
+# Check database connectivity
+psql $DATABASE_URL -c &quot;SELECT 1&quot;
+
+# View active database connections
+psql $DATABASE_URL -c &quot;SELECT count(*), state FROM pg_stat_activity GROUP BY state&quot;
+
+# Check if a specific migration was applied
+pnpm db:migrate status
+
+# Clear local caches
+redis-cli FLUSHDB
+
+# Verify environment variables are loaded
+node -e &quot;console.log(process.env.DATABASE_URL ? &#x27;Set&#x27; : &#x27;MISSING&#x27;)&quot;
+```
+```
+
+## Audience-Specific Customization
+
+### Junior Developer Additions
+- Explain acronyms on first use (ORM, RLS, JWT, etc.)
+- Add &quot;read this first&quot; ordered reading list of 5 files
+- Include screenshots for UI-related flows
+- Link to external learning resources for key technologies
+- Add a &quot;glossary&quot; section for domain-specific terms
+
+### Senior Engineer Additions
+- Link to Architecture Decision Records (ADRs)
+- Include performance benchmark baselines
+- Document known technical debt and planned improvements
+- Provide security model overview with threat boundaries
+- Share scaling limits and planned capacity changes
+
+### Contractor Additions
+- Define scope boundaries (&quot;only modify files in src/features/your-feature/&quot;)
+- Specify communication channels and response expectations
+- Document access request process for required systems
+- Include time logging requirements and reporting cadence
+- List prohibited actions (direct push to main, schema changes, etc.)
+
+## Quality Verification
+
+After generating onboarding docs, validate with this checklist:
+
+1. **Fresh machine test** — can a new developer follow the setup guide verbatim on a clean machine?
+2. **10-minute target** — does local setup complete in under 10 minutes?
+3. **Error coverage** — do the documented errors match what developers actually encounter?
+4. **Link validity** — do all links to external resources and internal docs resolve?
+5. **Currency** — are all version numbers, commands, and screenshots current?
+
+## Common Pitfalls
+
+- **Docs written once, never updated** — add doc update checks to the PR template
+- **Missing &quot;why&quot; for architecture decisions** — document why, not just what
+- **Untested setup instructions** — test the docs on a fresh machine quarterly
+- **No debugging section** — the debugging guide is the most valuable section for new hires
+- **Too much detail for the wrong audience** — contractors need task-specific docs, not deep architecture
+- **Stale screenshots** — UI screenshots go stale fast; link to running instances when possible
+
+## Best Practices
+
+1. **Keep setup under 10 minutes** — if it takes longer, fix the setup process, not the docs
+2. **Test the docs** — have a new hire follow them literally and fix every gap they hit
+3. **Link, do not repeat** — reference ADRs, issues, and external docs instead of duplicating
+4. **Update docs in the same PR as code changes** — documentation drift is the number one failure mode
+5. **Version-specific notes** — call out what changed in recent versions so returning developers catch up
+6. **Runbooks over theory** — &quot;run this command&quot; is more useful than &quot;the system uses Redis for caching&quot;
+7. **Key file map is mandatory** — every project should have an annotated list of the 10-20 most important files
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Generated setup guide fails on fresh machine | Implicit dependencies not captured during analysis | Re-run Phase 1 gather commands on a clean environment; add every missing tool to the prerequisites table |
+| Architecture diagram does not match actual data flow | Analysis relied on stale code paths or unused modules | Cross-reference with `git log --since=&quot;90 days&quot;` to find active code paths; interview a senior engineer to validate |
+| Key file map is too large (30+ files) | No prioritization applied; every file treated equally | Limit to 15-20 files maximum; rank by edit frequency (`git log --format=&#x27;%H&#x27; -- &lt;file&gt; | wc -l`) and coupling |
+| Onboarding doc goes stale within weeks | No process ties doc updates to code changes | Add a &quot;docs&quot; checkbox to the PR template; schedule quarterly freshness reviews |
+| Audience sections feel generic | Same content served to juniors, seniors, and contractors | Generate separate docs per audience or use collapsible sections; run the audience customization checklist from this skill |
+| Debugging guide missing real errors | Errors were invented rather than collected from logs | Mine actual error messages from Sentry, CI logs, and Slack support channels before writing the guide |
+| Environment variable list is incomplete | `grep` scan missed dynamically constructed variable names | Supplement grep results with a manual review of config loader files and `.env.example`; verify against deployment manifests |
+
+## Success Criteria
+
+- **Setup completion rate**: 90%+ of new developers reach a working local environment within 10 minutes using only the generated guide (no Slack questions needed).
+- **First-commit time**: New hires make their first meaningful commit within 2 business days of starting onboarding.
+- **Error coverage**: The debugging guide covers at least 80% of errors reported in the team&#x27;s support channel over the prior 90 days.
+- **Doc freshness**: Onboarding documentation passes a quarterly freshness audit with fewer than 3 stale sections flagged.
+- **Key file accuracy**: The key file map covers all files edited in more than 5 PRs during the past quarter.
+- **Audience satisfaction**: Post-onboarding survey scores average 4.0+ out of 5.0 across junior, senior, and contractor cohorts.
+- **Link validity**: Zero broken internal or external links when validated by an automated link checker at publish time.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
+- Audience-aware documentation tailored for junior developers, senior engineers, and contractors
+- Output in Markdown, Notion, and Confluence formats
+- Quality verification checklists and freshness audit processes
+
+**This skill does NOT cover:**
+- Automated API reference generation from code annotations — see `engineering/changelog-generator` for release-oriented docs or `engineering/api-design-reviewer` for API quality
+- Continuous documentation pipelines or CI-triggered doc builds — see `engineering/ci-cd-pipeline-builder` for pipeline automation
+- Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
+- Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
+| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
+| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
+| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
+| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
+| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Codebase Onboarding&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Codebase Onboarding&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Codebase Onboarding in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Codebase Onboarding&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Codebase Onboarding&quot;
+4. Description: &quot;Analyze a codebase and generate comprehensive onboarding documentation including architecture overviews, key file maps, local setup guides, task runbooks, debugging guides, and contribution guidelines...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/codebase-onboarding/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

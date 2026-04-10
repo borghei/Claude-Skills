@@ -268,6 +268,57 @@ def generate_quick_prompt(skill_name, description, md_text, domain):
     return "\n".join(prompt_parts)
 
 
+def generate_install_prompt(skill_name, description, md_text, domain, skill_path):
+    """Generate a full prompt that instructs the AI to create a persistent skill/project."""
+    pretty = pretty_name(skill_name)
+    dl = domain_label(domain)
+
+    # Strip YAML frontmatter from SKILL.md for cleaner inclusion
+    content = md_text
+    if content.startswith("---"):
+        end_idx = content.find("---", 3)
+        if end_idx > 0:
+            content = content[end_idx + 3:].strip()
+
+    prompt = f"""# Create a "{pretty}" AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+{content}
+
+---
+
+## What I Need You to Do
+
+### If I'm using Claude.ai:
+1. Help me create a new **Claude Project** called "{pretty}"
+2. Tell me to go to **claude.ai > Projects > Create a project**
+3. The project name should be: "{pretty}"
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click "Add content" > "Add text content")
+5. Set these **Custom Instructions**: "You are an expert {pretty} in the {dl} domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output."
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I'm using ChatGPT:
+1. Help me create a new **Custom GPT** called "{pretty}"
+2. Tell me to go to **chatgpt.com > Explore GPTs > Create**
+3. Name: "{pretty}"
+4. Description: "{description}"
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I'm using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill's key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/{skill_path}
+"""
+    return prompt.strip()
+
+
 def _parse_frontmatter(text):
     """Simple YAML frontmatter parser (key: value pairs only)."""
     meta = {}
@@ -484,18 +535,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -805,9 +874,13 @@ def gen_skill_page(skill, catalog, all_skills_by_domain):
     if tags_html:
         tags_html = f'<div class="skill-meta" style="margin-bottom:24px">{tags_html}</div>'
 
-    # Generate the quick prompt for copy-paste
+    # Generate prompts for copy-paste
     quick_prompt = generate_quick_prompt(name, desc, md_text, domain)
-    prompt_escaped = escape(quick_prompt)
+    install_prompt = generate_install_prompt(name, desc, md_text, domain, skill_path)
+    quick_escaped = escape(quick_prompt)
+    install_escaped = escape(install_prompt)
+
+    copy_svg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
 
     # How to Use — tabbed platform selector
     skill_dir = os.path.dirname(skill_path)
@@ -821,16 +894,35 @@ def gen_skill_page(skill, catalog, all_skills_by_domain):
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
-      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="{prompt_escaped}">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="{quick_escaped}">
+        {copy_svg} <span>Copy Prompt</span>
       </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">{quick_escaped}</pre>
+      </details>
     </div>
-    <pre class="prompt-preview">{prompt_escaped}</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="{install_escaped}">
+        {copy_svg} <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">{install_escaped}</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Analytics Engineer (Data Analytics domain).
 
 Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...
@@ -387,11 +409,11 @@ https://github.com/borghei/Claude-Skills/tree/main/analytics-engineer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Analytics Engineer (Data Analytics domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Analytics Engineer (Data Analytics domain).
 
 Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...
 
@@ -409,7 +431,670 @@ https://github.com/borghei/Claude-Skills/tree/main/analytics-engineer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Analytics Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Analytics Engineer
+
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.
+
+## Workflow
+
+1. **Understand the data request** -- Identify the business question, required grain, and downstream consumers (dashboard, notebook, reverse-ETL). Confirm source tables exist and check freshness.
+2. **Design the dimensional model** -- Choose star or snowflake schema. Map source entities to dimension and fact tables at the correct grain. Document grain, primary keys, and foreign keys.
+3. **Build staging models** -- One `stg_` model per source table. Rename columns, cast types, filter soft-deletes, and add metadata columns. Validate: `dbt build --select stg_*`.
+4. **Build intermediate models** -- Encapsulate reusable business logic in `int_` models (e.g., `int_orders_enriched`). Keep each CTE single-purpose.
+5. **Build mart models** -- Create `dim_` and `fct_` models for consumption. Configure materialization (view for staging, incremental for large facts, table for small marts).
+6. **Add tests and documentation** -- Every primary key gets `unique` + `not_null`. Foreign keys get `relationships`. Add `accepted_values` for enums. Write model descriptions in YAML.
+7. **Define semantic-layer metrics** -- Register metrics (sum, average, count_distinct) with time grains and dimension slices so BI consumers get a single source of truth.
+8. **Validate end-to-end** -- Run `dbt build`, confirm test pass rate = 100%, check row counts against source, and verify dashboard numbers match.
+
+## dbt Project Structure
+
+```
+analytics/
+  dbt_project.yml
+  models/
+    staging/          # stg_&lt;source&gt;__&lt;table&gt;.sql  (one per source table)
+    intermediate/     # int_&lt;entity&gt;_&lt;verb&gt;.sql     (reusable logic)
+    marts/
+      core/           # dim_*.sql, fct_*.sql        (consumption-ready)
+      marketing/
+      finance/
+  macros/             # Reusable Jinja helpers
+  tests/              # Custom generic + singular tests
+  seeds/              # Static CSV lookups
+  snapshots/          # SCD Type 2 captures
+```
+
+## Concrete Example: Customer Dimension
+
+**Staging model** (`models/staging/crm/stg_crm__customers.sql`):
+```sql
+WITH source AS (
+    SELECT * FROM {{ source(&#x27;crm&#x27;, &#x27;customers&#x27;) }}
+),
+
+renamed AS (
+    SELECT
+        id                          AS customer_id,
+        TRIM(LOWER(name))           AS customer_name,
+        TRIM(LOWER(email))          AS email,
+        created_at::timestamp       AS created_at,
+        updated_at::timestamp       AS updated_at,
+        is_active::boolean          AS is_active,
+        _fivetran_synced            AS _loaded_at
+    FROM source
+    WHERE _fivetran_deleted = false
+)
+
+SELECT * FROM renamed
+```
+
+**Mart model** (`models/marts/core/dim_customer.sql`):
+```sql
+WITH customers AS (
+    SELECT * FROM {{ ref(&#x27;stg_crm__customers&#x27;) }}
+),
+
+customer_orders AS (
+    SELECT
+        customer_id,
+        MIN(order_date)  AS first_order_date,
+        MAX(order_date)  AS most_recent_order_date,
+        COUNT(*)         AS lifetime_orders,
+        SUM(order_amount) AS lifetime_value
+    FROM {{ ref(&#x27;stg_orders__orders&#x27;) }}
+    GROUP BY customer_id
+),
+
+final AS (
+    SELECT
+        c.customer_id,
+        c.customer_name,
+        c.email,
+        c.created_at,
+        co.first_order_date,
+        co.most_recent_order_date,
+        co.lifetime_orders,
+        co.lifetime_value,
+        CASE
+            WHEN co.lifetime_value &gt;= 10000 THEN &#x27;platinum&#x27;
+            WHEN co.lifetime_value &gt;= 5000  THEN &#x27;gold&#x27;
+            WHEN co.lifetime_value &gt;= 1000  THEN &#x27;silver&#x27;
+            ELSE &#x27;bronze&#x27;
+        END AS customer_tier
+    FROM customers c
+    LEFT JOIN customer_orders co
+        ON c.customer_id = co.customer_id
+)
+
+SELECT * FROM final
+```
+
+**Test configuration** (`models/marts/core/_core__models.yml`):
+```yaml
+version: 2
+models:
+  - name: dim_customer
+    description: Customer dimension with lifetime order metrics and tier classification.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: email
+        tests: [unique, not_null]
+      - name: customer_tier
+        tests:
+          - accepted_values:
+              values: [&#x27;platinum&#x27;, &#x27;gold&#x27;, &#x27;silver&#x27;, &#x27;bronze&#x27;]
+      - name: lifetime_value
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: &quot;&gt;= 0&quot;
+```
+
+## Incremental Fact Table Pattern
+
+```sql
+-- models/marts/core/fct_orders.sql
+{{
+    config(
+        materialized=&#x27;incremental&#x27;,
+        unique_key=&#x27;order_id&#x27;,
+        partition_by={&#x27;field&#x27;: &#x27;order_date&#x27;, &#x27;data_type&#x27;: &#x27;date&#x27;},
+        cluster_by=[&#x27;customer_id&#x27;, &#x27;product_id&#x27;]
+    )
+}}
+
+WITH orders AS (
+    SELECT * FROM {{ ref(&#x27;stg_orders__orders&#x27;) }}
+    {% if is_incremental() %}
+    WHERE order_date &gt;= (SELECT MAX(order_date) FROM {{ this }})
+    {% endif %}
+),
+
+order_items AS (
+    SELECT * FROM {{ ref(&#x27;stg_orders__order_items&#x27;) }}
+),
+
+final AS (
+    SELECT
+        o.order_id,
+        o.order_date,
+        o.customer_id,
+        oi.product_id,
+        o.store_id,
+        oi.quantity,
+        oi.unit_price,
+        oi.quantity * oi.unit_price AS line_total,
+        o.discount_amount,
+        o.tax_amount,
+        o.total_amount
+    FROM orders o
+    INNER JOIN order_items oi ON o.order_id = oi.order_id
+)
+
+SELECT * FROM final
+```
+
+## Materialization Strategy
+
+| Layer | Materialization | Rationale |
+|-------|----------------|-----------|
+| Staging | View | Thin wrappers; no storage cost |
+| Intermediate | Ephemeral / View | Business logic; referenced multiple times |
+| Marts (small) | Table | Query performance for BI tools |
+| Marts (large) | Incremental | Efficient appends for large fact tables |
+
+## Semantic-Layer Metric Definition
+
+```yaml
+# models/marts/core/_core__metrics.yml
+metrics:
+  - name: revenue
+    label: Total Revenue
+    model: ref(&#x27;fct_orders&#x27;)
+    calculation_method: sum
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month, quarter, year]
+    dimensions: [customer_tier, product_category, store_region]
+    filters:
+      - field: is_cancelled
+        operator: &#x27;=&#x27;
+        value: &#x27;false&#x27;
+
+  - name: average_order_value
+    label: Average Order Value
+    model: ref(&#x27;fct_orders&#x27;)
+    calculation_method: average
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month]
+```
+
+## Useful Macros
+
+```sql
+-- macros/cents_to_dollars.sql
+{% macro cents_to_dollars(column_name) %}
+    ({{ column_name }} / 100.0)::decimal(18,2)
+{% endmacro %}
+
+-- macros/get_incremental_filter.sql
+{% macro get_incremental_filter(column_name, lookback_days=3) %}
+    {% if is_incremental() %}
+        WHERE {{ column_name }} &gt;= (
+            SELECT DATEADD(day, -{{ lookback_days }}, MAX({{ column_name }}))
+            FROM {{ this }}
+        )
+    {% endif %}
+{% endmacro %}
+```
+
+## CI/CD: Slim CI for Pull Requests
+
+```bash
+# Only run modified models and their downstream dependents
+dbt run  --select state:modified+ --defer --state ./target-base
+dbt test --select state:modified+ --defer --state ./target-base
+```
+
+For full CI/CD pipeline configuration, see `REFERENCE.md`.
+
+## Reference Materials
+
+- `REFERENCE.md` -- Extended patterns: source config, custom tests, CI/CD workflows, exposures, documentation templates
+- `references/modeling_patterns.md` -- Data modeling best practices
+- `references/dbt_style_guide.md` -- SQL and dbt conventions
+- `references/testing_guide.md` -- Testing strategies
+- `references/optimization.md` -- Performance tuning
+
+## Scripts
+
+```bash
+python scripts/impact_analyzer.py --model dim_customer
+python scripts/schema_diff.py --source prod --target dev
+python scripts/doc_generator.py --format markdown
+python scripts/quality_scorer.py --model fct_orders
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `impact_analyzer.py` | Trace downstream impact of a dbt model via BFS on the manifest DAG | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--json` |
+| `schema_diff.py` | Compare two dbt catalog.json files to detect column additions, removals, and type changes | `--source &lt;path&gt;`, `--target &lt;path&gt;`, `--json` |
+| `doc_generator.py` | Generate markdown documentation (column dictionary, dependencies, tests) for a dbt model | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--catalog &lt;path&gt;` |
+| `quality_scorer.py` | Score a dbt model 0-100 based on documentation, testing, and layer-convention adherence | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| `dbt build` fails with &quot;relation does not exist&quot; | Upstream model was not run or materialization changed | Run `dbt build --select +&lt;model&gt;` to build the full upstream chain |
+| Incremental model produces duplicates | `unique_key` does not match the actual grain | Verify the `unique_key` config matches the primary key columns; run a full refresh with `--full-refresh` |
+| Test failures on `not_null` after deployment | Source data introduced unexpected NULLs in a previously clean column | Add a staging-layer `COALESCE` or adjust the test to `warn` severity while investigating upstream |
+| Schema drift detected by `schema_diff.py` | Upstream source changed column types or removed columns | Coordinate with the data engineering team; update staging model casts and regenerate documentation |
+| Semantic-layer metric values differ from dashboard | Dashboard applies its own filters or calculations outside the semantic layer | Move all calculation logic into the semantic layer; audit dashboard-level computed fields |
+| Slow `dbt run` on large incremental models | Lookback window is too wide or partition pruning is not engaged | Narrow the incremental filter, verify `partition_by` config, and check warehouse query plan |
+| `quality_scorer.py` reports low score despite good coverage | Staging model contains JOINs or GROUP BY operations triggering layer-violation penalties | Refactor aggregation logic into intermediate or mart models; keep staging models as thin wrappers |
+
+## Success Criteria
+
+- All dbt models pass `dbt build` with a 100% test pass rate before merging to production.
+- Every model has a YAML description and at least one test per primary key (`unique` + `not_null`).
+- Incremental models process new data in under 5 minutes for tables up to 100M rows.
+- Schema drift between prod and dev environments is detected and reviewed before each release.
+- `quality_scorer.py` reports &gt;= 80/100 for every mart model.
+- Downstream dashboards refresh within SLA (&lt; 5 s load time) after transformation runs complete.
+- Semantic-layer metrics are the single source of truth -- no ad-hoc metric calculations exist in BI tools.
+
+## Scope &amp; Limitations
+
+**In scope:** dbt project design, dimensional modeling (Kimball methodology), SQL transformation logic, data testing, semantic-layer metric definition, CI/CD for dbt, and warehouse query optimization.
+
+**Out of scope:** Raw data ingestion and extraction (ELT/ETL orchestration tools like Fivetran or Airbyte), data infrastructure provisioning, BI tool configuration beyond semantic-layer integration, and real-time streaming pipelines.
+
+**Limitations:** The Python tools operate on dbt manifest/catalog JSON artifacts and do not query the warehouse directly. Scoring heuristics in `quality_scorer.py` use rule-based deductions that may not cover every project convention. All scripts use the Python standard library only -- no external dependencies required.
+
+## Integration Points
+
+- **Data Engineer** (`engineering/senior-data-engineer`): Coordinates on source table contracts, ingestion SLAs, and schema change notifications.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Consumes mart models and semantic-layer metrics; dashboard specs reference model outputs.
+- **Data Analyst** (`data-analytics/data-analyst`): Writes ad-hoc queries against mart models; reports data quality issues back to the analytics engineer.
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Feature engineering pipelines may depend on intermediate or mart models as upstream inputs.
+- **CI/CD Workflows** (`templates/`): Slim CI patterns (`state:modified+`) integrate into GitHub Actions or similar runners for automated PR validation.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Analytics Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Analytics Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Analytics Engineer in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Analytics Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Analytics Engineer&quot;
+4. Description: &quot;Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/analytics-engineer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Analytics Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Analytics Engineer
+
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.
+
+## Workflow
+
+1. **Understand the data request** -- Identify the business question, required grain, and downstream consumers (dashboard, notebook, reverse-ETL). Confirm source tables exist and check freshness.
+2. **Design the dimensional model** -- Choose star or snowflake schema. Map source entities to dimension and fact tables at the correct grain. Document grain, primary keys, and foreign keys.
+3. **Build staging models** -- One `stg_` model per source table. Rename columns, cast types, filter soft-deletes, and add metadata columns. Validate: `dbt build --select stg_*`.
+4. **Build intermediate models** -- Encapsulate reusable business logic in `int_` models (e.g., `int_orders_enriched`). Keep each CTE single-purpose.
+5. **Build mart models** -- Create `dim_` and `fct_` models for consumption. Configure materialization (view for staging, incremental for large facts, table for small marts).
+6. **Add tests and documentation** -- Every primary key gets `unique` + `not_null`. Foreign keys get `relationships`. Add `accepted_values` for enums. Write model descriptions in YAML.
+7. **Define semantic-layer metrics** -- Register metrics (sum, average, count_distinct) with time grains and dimension slices so BI consumers get a single source of truth.
+8. **Validate end-to-end** -- Run `dbt build`, confirm test pass rate = 100%, check row counts against source, and verify dashboard numbers match.
+
+## dbt Project Structure
+
+```
+analytics/
+  dbt_project.yml
+  models/
+    staging/          # stg_&lt;source&gt;__&lt;table&gt;.sql  (one per source table)
+    intermediate/     # int_&lt;entity&gt;_&lt;verb&gt;.sql     (reusable logic)
+    marts/
+      core/           # dim_*.sql, fct_*.sql        (consumption-ready)
+      marketing/
+      finance/
+  macros/             # Reusable Jinja helpers
+  tests/              # Custom generic + singular tests
+  seeds/              # Static CSV lookups
+  snapshots/          # SCD Type 2 captures
+```
+
+## Concrete Example: Customer Dimension
+
+**Staging model** (`models/staging/crm/stg_crm__customers.sql`):
+```sql
+WITH source AS (
+    SELECT * FROM {{ source(&#x27;crm&#x27;, &#x27;customers&#x27;) }}
+),
+
+renamed AS (
+    SELECT
+        id                          AS customer_id,
+        TRIM(LOWER(name))           AS customer_name,
+        TRIM(LOWER(email))          AS email,
+        created_at::timestamp       AS created_at,
+        updated_at::timestamp       AS updated_at,
+        is_active::boolean          AS is_active,
+        _fivetran_synced            AS _loaded_at
+    FROM source
+    WHERE _fivetran_deleted = false
+)
+
+SELECT * FROM renamed
+```
+
+**Mart model** (`models/marts/core/dim_customer.sql`):
+```sql
+WITH customers AS (
+    SELECT * FROM {{ ref(&#x27;stg_crm__customers&#x27;) }}
+),
+
+customer_orders AS (
+    SELECT
+        customer_id,
+        MIN(order_date)  AS first_order_date,
+        MAX(order_date)  AS most_recent_order_date,
+        COUNT(*)         AS lifetime_orders,
+        SUM(order_amount) AS lifetime_value
+    FROM {{ ref(&#x27;stg_orders__orders&#x27;) }}
+    GROUP BY customer_id
+),
+
+final AS (
+    SELECT
+        c.customer_id,
+        c.customer_name,
+        c.email,
+        c.created_at,
+        co.first_order_date,
+        co.most_recent_order_date,
+        co.lifetime_orders,
+        co.lifetime_value,
+        CASE
+            WHEN co.lifetime_value &gt;= 10000 THEN &#x27;platinum&#x27;
+            WHEN co.lifetime_value &gt;= 5000  THEN &#x27;gold&#x27;
+            WHEN co.lifetime_value &gt;= 1000  THEN &#x27;silver&#x27;
+            ELSE &#x27;bronze&#x27;
+        END AS customer_tier
+    FROM customers c
+    LEFT JOIN customer_orders co
+        ON c.customer_id = co.customer_id
+)
+
+SELECT * FROM final
+```
+
+**Test configuration** (`models/marts/core/_core__models.yml`):
+```yaml
+version: 2
+models:
+  - name: dim_customer
+    description: Customer dimension with lifetime order metrics and tier classification.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: email
+        tests: [unique, not_null]
+      - name: customer_tier
+        tests:
+          - accepted_values:
+              values: [&#x27;platinum&#x27;, &#x27;gold&#x27;, &#x27;silver&#x27;, &#x27;bronze&#x27;]
+      - name: lifetime_value
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: &quot;&gt;= 0&quot;
+```
+
+## Incremental Fact Table Pattern
+
+```sql
+-- models/marts/core/fct_orders.sql
+{{
+    config(
+        materialized=&#x27;incremental&#x27;,
+        unique_key=&#x27;order_id&#x27;,
+        partition_by={&#x27;field&#x27;: &#x27;order_date&#x27;, &#x27;data_type&#x27;: &#x27;date&#x27;},
+        cluster_by=[&#x27;customer_id&#x27;, &#x27;product_id&#x27;]
+    )
+}}
+
+WITH orders AS (
+    SELECT * FROM {{ ref(&#x27;stg_orders__orders&#x27;) }}
+    {% if is_incremental() %}
+    WHERE order_date &gt;= (SELECT MAX(order_date) FROM {{ this }})
+    {% endif %}
+),
+
+order_items AS (
+    SELECT * FROM {{ ref(&#x27;stg_orders__order_items&#x27;) }}
+),
+
+final AS (
+    SELECT
+        o.order_id,
+        o.order_date,
+        o.customer_id,
+        oi.product_id,
+        o.store_id,
+        oi.quantity,
+        oi.unit_price,
+        oi.quantity * oi.unit_price AS line_total,
+        o.discount_amount,
+        o.tax_amount,
+        o.total_amount
+    FROM orders o
+    INNER JOIN order_items oi ON o.order_id = oi.order_id
+)
+
+SELECT * FROM final
+```
+
+## Materialization Strategy
+
+| Layer | Materialization | Rationale |
+|-------|----------------|-----------|
+| Staging | View | Thin wrappers; no storage cost |
+| Intermediate | Ephemeral / View | Business logic; referenced multiple times |
+| Marts (small) | Table | Query performance for BI tools |
+| Marts (large) | Incremental | Efficient appends for large fact tables |
+
+## Semantic-Layer Metric Definition
+
+```yaml
+# models/marts/core/_core__metrics.yml
+metrics:
+  - name: revenue
+    label: Total Revenue
+    model: ref(&#x27;fct_orders&#x27;)
+    calculation_method: sum
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month, quarter, year]
+    dimensions: [customer_tier, product_category, store_region]
+    filters:
+      - field: is_cancelled
+        operator: &#x27;=&#x27;
+        value: &#x27;false&#x27;
+
+  - name: average_order_value
+    label: Average Order Value
+    model: ref(&#x27;fct_orders&#x27;)
+    calculation_method: average
+    expression: total_amount
+    timestamp: order_date
+    time_grains: [day, week, month]
+```
+
+## Useful Macros
+
+```sql
+-- macros/cents_to_dollars.sql
+{% macro cents_to_dollars(column_name) %}
+    ({{ column_name }} / 100.0)::decimal(18,2)
+{% endmacro %}
+
+-- macros/get_incremental_filter.sql
+{% macro get_incremental_filter(column_name, lookback_days=3) %}
+    {% if is_incremental() %}
+        WHERE {{ column_name }} &gt;= (
+            SELECT DATEADD(day, -{{ lookback_days }}, MAX({{ column_name }}))
+            FROM {{ this }}
+        )
+    {% endif %}
+{% endmacro %}
+```
+
+## CI/CD: Slim CI for Pull Requests
+
+```bash
+# Only run modified models and their downstream dependents
+dbt run  --select state:modified+ --defer --state ./target-base
+dbt test --select state:modified+ --defer --state ./target-base
+```
+
+For full CI/CD pipeline configuration, see `REFERENCE.md`.
+
+## Reference Materials
+
+- `REFERENCE.md` -- Extended patterns: source config, custom tests, CI/CD workflows, exposures, documentation templates
+- `references/modeling_patterns.md` -- Data modeling best practices
+- `references/dbt_style_guide.md` -- SQL and dbt conventions
+- `references/testing_guide.md` -- Testing strategies
+- `references/optimization.md` -- Performance tuning
+
+## Scripts
+
+```bash
+python scripts/impact_analyzer.py --model dim_customer
+python scripts/schema_diff.py --source prod --target dev
+python scripts/doc_generator.py --format markdown
+python scripts/quality_scorer.py --model fct_orders
+```
+
+## Tool Reference
+
+| Tool | Purpose | Key Flags |
+|------|---------|-----------|
+| `impact_analyzer.py` | Trace downstream impact of a dbt model via BFS on the manifest DAG | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--json` |
+| `schema_diff.py` | Compare two dbt catalog.json files to detect column additions, removals, and type changes | `--source &lt;path&gt;`, `--target &lt;path&gt;`, `--json` |
+| `doc_generator.py` | Generate markdown documentation (column dictionary, dependencies, tests) for a dbt model | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--catalog &lt;path&gt;` |
+| `quality_scorer.py` | Score a dbt model 0-100 based on documentation, testing, and layer-convention adherence | `--model &lt;name&gt;`, `--manifest &lt;path&gt;`, `--json` |
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---------|-------------|------------|
+| `dbt build` fails with &quot;relation does not exist&quot; | Upstream model was not run or materialization changed | Run `dbt build --select +&lt;model&gt;` to build the full upstream chain |
+| Incremental model produces duplicates | `unique_key` does not match the actual grain | Verify the `unique_key` config matches the primary key columns; run a full refresh with `--full-refresh` |
+| Test failures on `not_null` after deployment | Source data introduced unexpected NULLs in a previously clean column | Add a staging-layer `COALESCE` or adjust the test to `warn` severity while investigating upstream |
+| Schema drift detected by `schema_diff.py` | Upstream source changed column types or removed columns | Coordinate with the data engineering team; update staging model casts and regenerate documentation |
+| Semantic-layer metric values differ from dashboard | Dashboard applies its own filters or calculations outside the semantic layer | Move all calculation logic into the semantic layer; audit dashboard-level computed fields |
+| Slow `dbt run` on large incremental models | Lookback window is too wide or partition pruning is not engaged | Narrow the incremental filter, verify `partition_by` config, and check warehouse query plan |
+| `quality_scorer.py` reports low score despite good coverage | Staging model contains JOINs or GROUP BY operations triggering layer-violation penalties | Refactor aggregation logic into intermediate or mart models; keep staging models as thin wrappers |
+
+## Success Criteria
+
+- All dbt models pass `dbt build` with a 100% test pass rate before merging to production.
+- Every model has a YAML description and at least one test per primary key (`unique` + `not_null`).
+- Incremental models process new data in under 5 minutes for tables up to 100M rows.
+- Schema drift between prod and dev environments is detected and reviewed before each release.
+- `quality_scorer.py` reports &gt;= 80/100 for every mart model.
+- Downstream dashboards refresh within SLA (&lt; 5 s load time) after transformation runs complete.
+- Semantic-layer metrics are the single source of truth -- no ad-hoc metric calculations exist in BI tools.
+
+## Scope &amp; Limitations
+
+**In scope:** dbt project design, dimensional modeling (Kimball methodology), SQL transformation logic, data testing, semantic-layer metric definition, CI/CD for dbt, and warehouse query optimization.
+
+**Out of scope:** Raw data ingestion and extraction (ELT/ETL orchestration tools like Fivetran or Airbyte), data infrastructure provisioning, BI tool configuration beyond semantic-layer integration, and real-time streaming pipelines.
+
+**Limitations:** The Python tools operate on dbt manifest/catalog JSON artifacts and do not query the warehouse directly. Scoring heuristics in `quality_scorer.py` use rule-based deductions that may not cover every project convention. All scripts use the Python standard library only -- no external dependencies required.
+
+## Integration Points
+
+- **Data Engineer** (`engineering/senior-data-engineer`): Coordinates on source table contracts, ingestion SLAs, and schema change notifications.
+- **Business Intelligence** (`data-analytics/business-intelligence`): Consumes mart models and semantic-layer metrics; dashboard specs reference model outputs.
+- **Data Analyst** (`data-analytics/data-analyst`): Writes ad-hoc queries against mart models; reports data quality issues back to the analytics engineer.
+- **MLOps Engineer** (`data-analytics/ml-ops-engineer`): Feature engineering pipelines may depend on intermediate or mart models as upstream inputs.
+- **CI/CD Workflows** (`templates/`): Slim CI patterns (`state:modified+`) integrate into GitHub Actions or similar runners for automated PR validation.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Analytics Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Analytics Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Analytics Engineer in the Data Analytics domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Analytics Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Analytics Engineer&quot;
+4. Description: &quot;Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/data-analytics/analytics-engineer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

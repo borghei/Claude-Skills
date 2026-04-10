@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Tech Stack Evaluator (Engineering domain).
 
 Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ...
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/tech-stack-evaluator
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Tech Stack Evaluator (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Tech Stack Evaluator (Engineering domain).
 
 Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ...
 
@@ -431,7 +453,1156 @@ https://github.com/borghei/Claude-Skills/tree/main/tech-stack-evaluator
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Tech Stack Evaluator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Technology Stack Evaluator
+
+Evaluate and compare technologies, frameworks, and cloud providers with data-driven analysis and actionable recommendations.
+
+## Table of Contents
+
+- [Capabilities](#capabilities)
+- [Quick Start](#quick-start)
+- [Input Formats](#input-formats)
+- [Analysis Types](#analysis-types)
+- [Scripts](#scripts)
+- [References](#references)
+
+---
+
+## Capabilities
+
+| Capability | Description |
+|------------|-------------|
+| Technology Comparison | Compare frameworks and libraries with weighted scoring |
+| TCO Analysis | Calculate 5-year total cost including hidden costs |
+| Ecosystem Health | Assess GitHub metrics, npm adoption, community strength |
+| Security Assessment | Evaluate vulnerabilities and compliance readiness |
+| Migration Analysis | Estimate effort, risks, and timeline for migrations |
+| Cloud Comparison | Compare AWS, Azure, GCP for specific workloads |
+
+---
+
+## Quick Start
+
+### Compare Two Technologies
+
+```
+Compare React vs Vue for a SaaS dashboard.
+Priorities: developer productivity (40%), ecosystem (30%), performance (30%).
+```
+
+### Calculate TCO
+
+```
+Calculate 5-year TCO for Next.js on Vercel.
+Team: 8 developers. Hosting: $2500/month. Growth: 40%/year.
+```
+
+### Assess Migration
+
+```
+Evaluate migrating from Angular.js to React.
+Codebase: 50,000 lines, 200 components. Team: 6 developers.
+```
+
+---
+
+## Input Formats
+
+The evaluator accepts three input formats:
+
+**Text** - Natural language queries
+```
+Compare PostgreSQL vs MongoDB for our e-commerce platform.
+```
+
+**YAML** - Structured input for automation
+```yaml
+comparison:
+  technologies: [&quot;React&quot;, &quot;Vue&quot;]
+  use_case: &quot;SaaS dashboard&quot;
+  weights:
+    ecosystem: 30
+    performance: 25
+    developer_experience: 45
+```
+
+**JSON** - Programmatic integration
+```json
+{
+  &quot;technologies&quot;: [&quot;React&quot;, &quot;Vue&quot;],
+  &quot;use_case&quot;: &quot;SaaS dashboard&quot;
+}
+```
+
+---
+
+## Analysis Types
+
+### Quick Comparison (200-300 tokens)
+- Weighted scores and recommendation
+- Top 3 decision factors
+- Confidence level
+
+### Standard Analysis (500-800 tokens)
+- Comparison matrix
+- TCO overview
+- Security summary
+
+### Full Report (1200-1500 tokens)
+- All metrics and calculations
+- Migration analysis
+- Detailed recommendations
+
+---
+
+## Scripts
+
+### stack_comparator.py
+
+Compare technologies with customizable weighted criteria.
+
+```bash
+python scripts/stack_comparator.py --help
+```
+
+### tco_calculator.py
+
+Calculate total cost of ownership over multi-year projections.
+
+```bash
+python scripts/tco_calculator.py --input assets/sample_input_tco.json
+```
+
+### ecosystem_analyzer.py
+
+Analyze ecosystem health from GitHub, npm, and community metrics.
+
+```bash
+python scripts/ecosystem_analyzer.py --technology react
+```
+
+### security_assessor.py
+
+Evaluate security posture and compliance readiness.
+
+```bash
+python scripts/security_assessor.py --technology express --compliance soc2,gdpr
+```
+
+### migration_analyzer.py
+
+Estimate migration complexity, effort, and risks.
+
+```bash
+python scripts/migration_analyzer.py --from angular-1.x --to react
+```
+
+---
+
+## References
+
+| Document | Content |
+|----------|---------|
+| `references/metrics.md` | Detailed scoring algorithms and calculation formulas |
+| `references/examples.md` | Input/output examples for all analysis types |
+| `references/workflows.md` | Step-by-step evaluation workflows |
+
+---
+
+## Confidence Levels
+
+| Level | Score | Interpretation |
+|-------|-------|----------------|
+| High | 80-100% | Clear winner, strong data |
+| Medium | 50-79% | Trade-offs present, moderate uncertainty |
+| Low | &lt; 50% | Close call, limited data |
+
+---
+
+## When to Use
+
+- Comparing frontend/backend frameworks for new projects
+- Evaluating cloud providers for specific workloads
+- Planning technology migrations with risk assessment
+- Calculating build vs. buy decisions with TCO
+- Assessing open-source library viability
+
+## When NOT to Use
+
+- Trivial decisions between similar tools (use team preference)
+- Mandated technology choices (decision already made)
+- Emergency production issues (use monitoring tools)
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Weighted scores all return 50.0 | Technology data dictionaries missing `score` keys under each category | Ensure each category dict contains a `score` key on a 0-100 scale (e.g., `{&quot;performance&quot;: {&quot;score&quot;: 85}}`) |
+| TCO projections look unrealistically low | Default cost parameters used when `operational_costs` or `initial_costs` are empty | Populate `monthly_hosting`, `annual_licensing`, `developer_hourly_rate`, and `maintenance_hours_per_dev_monthly` with real figures |
+| Ecosystem health score stuck at 50 for npm | `npm_data` dict is empty or not provided | Pass npm metrics (`weekly_downloads`, `version`, `dependencies_count`, `days_since_last_publish`); 50 is the neutral fallback when npm data is absent |
+| Security compliance returns &quot;Unknown standard&quot; | Unsupported standard name passed to `assess_compliance()` | Use one of the supported keys: `GDPR`, `SOC2`, `HIPAA`, `PCI_DSS` (case-sensitive) |
+| Migration complexity always shows moderate | `architecture_change_level` defaults to `moderate` when not specified | Set `architecture_change_level` explicitly to `minimal`, `moderate`, `significant`, or `complete` in `codebase_stats` |
+| Report renders ASCII tables instead of markdown | `ReportGenerator` auto-detects CLI context when stdout is a TTY | Pass `output_context=&#x27;desktop&#x27;` to force rich markdown output |
+| Format detector misclassifies YAML as text | Fewer than 50% of lines match YAML key-value patterns | Ensure input uses standard YAML syntax with `key: value` pairs and proper indentation |
+
+---
+
+## Success Criteria
+
+- **TCO variance under 15%**: Calculated TCO deviates less than 15% from actual costs when validated against real-world spending data over the projection period.
+- **Security score above 80/100**: Technologies recommended for production use achieve a minimum overall security score of 80, corresponding to grade B or higher.
+- **Ecosystem health score above 65/100**: Recommended technologies demonstrate viable long-term ecosystem health with a risk level no worse than &quot;Low-Medium.&quot;
+- **Migration effort estimate within 20%**: Person-hours and timeline estimates land within 20% of actual migration effort when measured post-completion.
+- **Comparison confidence above 70%**: Final technology recommendations carry a confidence score of 70% or higher, indicating a meaningful score gap between top candidates.
+- **Compliance readiness at &quot;Mostly Ready&quot; or above**: Technologies targeting regulated environments achieve at least 70% feature coverage against required compliance standards (GDPR, SOC2, HIPAA, PCI-DSS).
+- **Report generation under 5 seconds**: All report types (executive summary, full report) render within 5 seconds for evaluations comparing up to 5 technologies.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Weighted multi-criteria comparison of frameworks, libraries, and cloud providers
+- Multi-year TCO projections including hidden costs (technical debt, vendor lock-in, turnover)
+- Ecosystem viability assessment using GitHub, npm, and community metrics
+- Security posture scoring and compliance readiness for GDPR, SOC2, HIPAA, PCI-DSS
+
+**Does NOT cover:**
+- Live data fetching from GitHub API, npm registry, or vulnerability databases (all data must be provided as input dictionaries)
+- Performance benchmarking or load testing (use `engineering/senior-qa` for test execution)
+- Licensing legal review or contract negotiation (use `ra-qm-team` compliance skills for regulatory guidance)
+- Team hiring or organizational design decisions (use `hr-operations/talent-acquisition` for staffing analysis)
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/senior-security` | Feed security assessor output into deeper vulnerability analysis | `SecurityAssessor` results → security review input |
+| `engineering/senior-devops` | Use TCO hosting projections to inform infrastructure planning | `TCOCalculator` hosting/scaling data → DevOps capacity models |
+| `engineering/senior-qa` | Migration test coverage scores inform QA test planning | `MigrationAnalyzer` testing_requirements → QA test strategy |
+| `ra-qm-team/compliance-auditor` | Compliance readiness gaps feed into formal audit preparation | `SecurityAssessor.assess_compliance()` missing features → audit checklist |
+| `c-level-advisor/cto-advisor` | Executive summaries and TCO reports support CTO decision-making | `ReportGenerator` executive summary → strategic technology decisions |
+| `product-team/product-manager` | Ecosystem viability and migration timelines inform product roadmaps | `EcosystemAnalyzer` + `MigrationAnalyzer` → roadmap planning |
+
+---
+
+## Tool Reference
+
+### stack_comparator.py
+
+**Purpose:** Compare technologies with customizable weighted criteria across 8 evaluation categories: performance, scalability, developer experience, ecosystem, learning curve, documentation, community support, and enterprise readiness.
+
+**Usage:**
+```python
+from stack_comparator import StackComparator
+
+comparator = StackComparator({
+    &quot;technologies&quot;: [&quot;React&quot;, &quot;Vue&quot;],
+    &quot;use_case&quot;: &quot;SaaS dashboard&quot;,
+    &quot;weights&quot;: {&quot;developer_experience&quot;: 40, &quot;performance&quot;: 30, &quot;ecosystem&quot;: 30}
+})
+
+results = comparator.compare_technologies(tech_data_list)
+```
+
+**Constructor Parameters (`comparison_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technologies` | list | `[]` | Names of technologies to compare |
+| `use_case` | str | `&quot;general&quot;` | Use case context (supports `real-time`, `enterprise`, `startup` bonuses) |
+| `priorities` | dict | `{}` | Priority overrides |
+| `weights` | dict | `DEFAULT_WEIGHTS` | Category weights (auto-normalized to 100) |
+
+**Default Weights:** performance 15, scalability 15, developer_experience 20, ecosystem 15, learning_curve 10, documentation 10, community_support 10, enterprise_readiness 5.
+
+**Key Methods:**
+- `compare_technologies(tech_data_list)` -- Full comparison with scores, recommendation, confidence, and decision factors
+- `score_technology(tech_name, tech_data)` -- Score a single technology across all categories
+- `calculate_weighted_score(category_scores)` -- Calculate weighted total from category scores
+- `generate_pros_cons(tech_name, tech_scores)` -- Generate pros/cons lists from scores
+
+**Example Output:**
+```json
+{
+  &quot;technologies&quot;: {&quot;React&quot;: {&quot;weighted_total&quot;: 78.5, &quot;strengths&quot;: [...], &quot;weaknesses&quot;: [...]}},
+  &quot;recommendation&quot;: &quot;React&quot;,
+  &quot;confidence&quot;: 72.0,
+  &quot;decision_factors&quot;: [{&quot;category&quot;: &quot;developer_experience&quot;, &quot;importance&quot;: &quot;40.0%&quot;, &quot;best_performer&quot;: &quot;React&quot;}],
+  &quot;comparison_matrix&quot;: [{&quot;category&quot;: &quot;performance&quot;, &quot;weight&quot;: &quot;15.0%&quot;, &quot;scores&quot;: {&quot;React&quot;: &quot;82.0&quot;, &quot;Vue&quot;: &quot;79.0&quot;}}]
+}
+```
+
+**Output Format:** Python dictionary (serialize with `json.dumps()` for JSON output).
+
+---
+
+### tco_calculator.py
+
+**Purpose:** Calculate comprehensive Total Cost of Ownership over multi-year projections, including initial costs, operational costs, scaling costs, hidden costs (technical debt, vendor lock-in, security incidents, downtime, turnover), and developer productivity impact.
+
+**Usage:**
+```python
+from tco_calculator import TCOCalculator
+
+calculator = TCOCalculator({
+    &quot;technology&quot;: &quot;Next.js&quot;,
+    &quot;team_size&quot;: 8,
+    &quot;timeline_years&quot;: 5,
+    &quot;initial_costs&quot;: {&quot;licensing&quot;: 0, &quot;migration&quot;: 15000, &quot;developer_hourly_rate&quot;: 100},
+    &quot;operational_costs&quot;: {&quot;monthly_hosting&quot;: 2500, &quot;annual_licensing&quot;: 0, &quot;maintenance_hours_per_dev_monthly&quot;: 20},
+    &quot;scaling_params&quot;: {&quot;annual_growth_rate&quot;: 0.40, &quot;initial_users&quot;: 5000}
+})
+
+tco = calculator.calculate_total_tco()
+summary = calculator.generate_tco_summary()
+```
+
+**Constructor Parameters (`tco_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `team_size` | int | `5` | Number of developers |
+| `timeline_years` | int | `5` | Projection period in years |
+| `initial_costs` | dict | `{}` | One-time costs: `licensing`, `migration`, `setup`, `tooling`, `training_hours_per_dev`, `developer_hourly_rate`, `training_materials` |
+| `operational_costs` | dict | `{}` | Recurring costs: `monthly_hosting`, `annual_licensing`, `annual_support`, `maintenance_hours_per_dev_monthly` |
+| `scaling_params` | dict | `{}` | Growth params: `annual_growth_rate`, `initial_users`, `initial_servers`, `cost_per_server_monthly` |
+| `productivity_factors` | dict | `{}` | Productivity: `productivity_multiplier`, `time_to_market_reduction_days`, `avg_feature_time_days`, `avg_feature_value`, `technical_debt_percentage`, `vendor_lock_in_risk`, `security_incidents_per_year`, `avg_security_incident_cost`, `downtime_hours_per_year`, `downtime_cost_per_hour`, `annual_turnover_rate`, `cost_per_new_hire` |
+
+**Key Methods:**
+- `calculate_total_tco()` -- Complete TCO with all cost components
+- `generate_tco_summary()` -- Executive summary with formatted dollar amounts
+- `calculate_initial_costs()` -- One-time cost breakdown
+- `calculate_operational_costs()` -- Year-by-year operational costs
+- `calculate_scaling_costs()` -- User projections and cost-per-user analysis
+- `calculate_hidden_costs()` -- Technical debt, vendor lock-in, security, downtime, turnover
+- `calculate_productivity_impact()` -- Productivity gains and feature velocity
+
+**Output Format:** Python dictionary (all monetary values as floats; `generate_tco_summary()` returns pre-formatted dollar strings).
+
+---
+
+### ecosystem_analyzer.py
+
+**Purpose:** Analyze technology ecosystem health and long-term viability by scoring GitHub activity, npm adoption, community strength, corporate backing, and maintenance responsiveness on a 0-100 scale.
+
+**Usage:**
+```python
+from ecosystem_analyzer import EcosystemAnalyzer
+
+analyzer = EcosystemAnalyzer({
+    &quot;technology&quot;: &quot;React&quot;,
+    &quot;github&quot;: {&quot;stars&quot;: 220000, &quot;forks&quot;: 45000, &quot;contributors&quot;: 1500, &quot;commits_last_month&quot;: 120},
+    &quot;npm&quot;: {&quot;weekly_downloads&quot;: 20000000, &quot;version&quot;: &quot;18.2.0&quot;, &quot;dependencies_count&quot;: 3},
+    &quot;community&quot;: {&quot;stackoverflow_questions&quot;: 400000, &quot;job_postings&quot;: 15000},
+    &quot;corporate_backing&quot;: {&quot;type&quot;: &quot;major_tech_company&quot;}
+})
+
+report = analyzer.generate_ecosystem_report()
+viability = analyzer.assess_viability()
+```
+
+**Constructor Parameters (`ecosystem_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `github` | dict | `{}` | GitHub metrics: `stars`, `forks`, `contributors`, `commits_last_month`, `avg_issue_response_hours`, `issue_resolution_rate`, `releases_per_year`, `active_maintainers`, `open_issues` |
+| `npm` | dict | `{}` | npm metrics: `weekly_downloads`, `version`, `dependencies_count`, `days_since_last_publish` |
+| `community` | dict | `{}` | Community metrics: `stackoverflow_questions`, `job_postings`, `tutorials_count`, `forum_members` |
+| `corporate_backing` | dict | `{}` | Backing info: `type` (one of `major_tech_company`, `established_company`, `startup_backed`, `community_led`, `none`), `funding_millions` |
+
+**Health Score Weights:** github_health 25%, npm_health 20%, community_health 20%, corporate_backing 15%, maintenance_health 20%.
+
+**Key Methods:**
+- `generate_ecosystem_report()` -- Complete report with health scores, viability, and formatted metrics
+- `calculate_health_score()` -- Component scores and weighted overall score
+- `assess_viability()` -- Viability level, risk assessment, strengths, and recommendation
+
+**Output Format:** Python dictionary with nested health scores, viability assessment, and formatted metrics.
+
+---
+
+### security_assessor.py
+
+**Purpose:** Evaluate security posture and compliance readiness for technology stacks. Scores vulnerabilities, patch responsiveness, built-in security features, and track record. Assesses compliance against GDPR, SOC2, HIPAA, and PCI-DSS.
+
+**Usage:**
+```python
+from security_assessor import SecurityAssessor
+
+assessor = SecurityAssessor({
+    &quot;technology&quot;: &quot;Express&quot;,
+    &quot;vulnerabilities&quot;: {
+        &quot;critical_last_12m&quot;: 0, &quot;high_last_12m&quot;: 2,
+        &quot;avg_critical_patch_days&quot;: 7, &quot;has_security_team&quot;: True
+    },
+    &quot;security_features&quot;: {
+        &quot;encryption_in_transit&quot;: True, &quot;authentication&quot;: True,
+        &quot;input_validation&quot;: True, &quot;csrf_protection&quot;: True
+    },
+    &quot;compliance_requirements&quot;: [&quot;SOC2&quot;, &quot;GDPR&quot;]
+})
+
+report = assessor.generate_security_report()
+compliance = assessor.assess_compliance([&quot;SOC2&quot;, &quot;GDPR&quot;])
+```
+
+**Constructor Parameters (`security_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `vulnerabilities` | dict | `{}` | Vulnerability data: `critical_last_12m`, `high_last_12m`, `medium_last_12m`, `low_last_12m`, `critical_last_3y`, `high_last_3y`, `medium_last_3y`, `low_last_3y`, `avg_critical_patch_days`, `avg_high_patch_days`, `has_security_team`, `years_since_major_incident`, `has_security_certifications`, `has_bug_bounty_program`, `security_audits_per_year`, `common_vulnerability_types` |
+| `security_features` | dict | `{}` | Boolean feature flags: `encryption_at_rest`, `encryption_in_transit`, `authentication`, `authorization`, `input_validation`, `rate_limiting`, `csrf_protection`, `xss_protection`, `sql_injection_protection`, `audit_logging`, `mfa_support`, `rbac`, `secrets_management`, `security_headers`, `cors_configuration` |
+| `compliance_requirements` | list | `[]` | Standards to assess: `GDPR`, `SOC2`, `HIPAA`, `PCI_DSS` |
+
+**Security Score Weights:** vulnerability_score 30%, patch_responsiveness 25%, security_features 30%, track_record 15%.
+
+**Key Methods:**
+- `generate_security_report()` -- Full report with score, compliance, vulnerabilities, and recommendations
+- `calculate_security_score()` -- Component scores with letter grade (A-F)
+- `assess_compliance(standards)` -- Per-standard readiness with missing features list
+- `identify_vulnerabilities()` -- Categorized vulnerability report with trend analysis
+
+**Output Format:** Python dictionary with security scores, compliance assessments, and risk level.
+
+---
+
+### migration_analyzer.py
+
+**Purpose:** Analyze migration complexity, estimate effort in person-hours and calendar months, assess technical/business/team risks, and recommend a migration approach (direct, phased, or strangler pattern) based on complexity scoring.
+
+**Usage:**
+```python
+from migration_analyzer import MigrationAnalyzer
+
+analyzer = MigrationAnalyzer({
+    &quot;source_technology&quot;: &quot;Angular 1.x&quot;,
+    &quot;target_technology&quot;: &quot;React&quot;,
+    &quot;codebase_stats&quot;: {
+        &quot;lines_of_code&quot;: 50000, &quot;num_components&quot;: 200,
+        &quot;architecture_change_level&quot;: &quot;significant&quot;,
+        &quot;current_test_coverage&quot;: 0.6
+    },
+    &quot;team&quot;: {&quot;team_size&quot;: 6, &quot;target_tech_experience&quot;: &quot;low&quot;},
+    &quot;constraints&quot;: {&quot;downtime_tolerance&quot;: &quot;low&quot;}
+})
+
+plan = analyzer.generate_migration_plan()
+effort = analyzer.estimate_effort()
+risks = analyzer.assess_risks()
+```
+
+**Constructor Parameters (`migration_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `source_technology` | str | `&quot;Unknown&quot;` | Current technology |
+| `target_technology` | str | `&quot;Unknown&quot;` | Target technology |
+| `codebase_stats` | dict | `{}` | Codebase metrics: `lines_of_code`, `num_files`, `num_components`, `architecture_change_level` (`minimal`/`moderate`/`significant`/`complete`), `has_database`, `database_size_gb`, `schema_changes_required`, `data_transformation_required`, `breaking_api_changes` (`none`/`minimal`/`some`/`many`/`complete`), `num_dependencies`, `dependencies_to_replace`, `current_test_coverage` (0-1), `num_tests` |
+| `team` | dict | `{}` | Team info: `team_size`, `hours_per_week`, `target_tech_experience` (`none`/`low`/`medium`/`high`) |
+| `constraints` | dict | `{}` | Constraints: `downtime_tolerance` (`none`/`low`/`medium`/`high`) |
+
+**Complexity Score Weights:** code_volume 20%, architecture_changes 25%, data_migration 20%, api_compatibility 15%, dependency_changes 10%, testing_requirements 10%.
+
+**Key Methods:**
+- `generate_migration_plan()` -- Complete plan with complexity, effort, risks, approach, and success criteria
+- `calculate_complexity_score()` -- Per-factor complexity scores (1-10 scale)
+- `estimate_effort()` -- Person-hours, person-months, phase breakdown, and calendar timeline
+- `assess_risks()` -- Technical, business, and team risks with severity and mitigation strategies
+
+**Output Format:** Python dictionary with nested complexity analysis, effort estimation, risk assessment, and recommended approach.
+
+---
+
+### report_generator.py
+
+**Purpose:** Generate context-aware evaluation reports with progressive disclosure. Auto-detects output context (Claude Desktop vs CLI) and renders rich markdown tables or ASCII-formatted output accordingly. Supports selective section generation.
+
+**Usage:**
+```python
+from report_generator import ReportGenerator
+
+generator = ReportGenerator(report_data, output_context=&quot;desktop&quot;)
+
+executive_summary = generator.generate_executive_summary(max_tokens=300)
+full_report = generator.generate_full_report(sections=[&quot;executive_summary&quot;, &quot;comparison_matrix&quot;, &quot;tco_analysis&quot;])
+generator.export_to_file(&quot;evaluation_report.md&quot;)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `report_data` | dict | (required) | Complete evaluation data containing any combination of: `technologies`, `recommendation`, `decision_factors`, `comparison_matrix`, `tco_analysis`, `ecosystem_health`, `security_assessment`, `migration_analysis`, `performance_benchmarks`, `use_case` |
+| `output_context` | str | `None` (auto-detect) | Output format: `&quot;desktop&quot;` for rich markdown, `&quot;cli&quot;` for ASCII tables. Auto-detects via `CLAUDE_DESKTOP` env var and TTY check |
+
+**Available Report Sections:** `executive_summary`, `comparison_matrix`, `tco_analysis`, `ecosystem_health`, `security_assessment`, `migration_analysis`, `performance_benchmarks`.
+
+**Key Methods:**
+- `generate_executive_summary(max_tokens=300)` -- Concise summary with recommendation, strengths, concerns, and decision factors
+- `generate_full_report(sections=None)` -- Complete report with selected sections (all if None)
+- `export_to_file(filename, sections=None)` -- Write report to file, returns file path
+
+**Output Format:** Markdown string (desktop context) or ASCII-formatted string (CLI context).
+
+---
+
+### format_detector.py
+
+**Purpose:** Automatically detect and parse input format (JSON, YAML, URL, or natural language text) for technology evaluation requests. Extracts technology names, use cases, priorities, and analysis types from unstructured text input.
+
+**Usage:**
+```python
+from format_detector import FormatDetector
+
+detector = FormatDetector(&#x27;Compare React vs Vue for a SaaS dashboard. Priorities: performance, ecosystem.&#x27;)
+
+format_type = detector.detect_format()   # Returns: &quot;text&quot;
+parsed = detector.parse()                # Returns normalized dict
+info = detector.get_format_info()        # Returns detection metadata
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `input_data` | str | (required) | Raw input string in any supported format |
+
+**Supported Formats:**
+- **JSON** -- Valid JSON objects are detected and parsed directly
+- **YAML** -- Detected when &gt;50% of lines match key-value or list patterns (simplified parser, no PyYAML dependency)
+- **URL** -- Detected when input contains `http://` or `https://` URLs; categorizes GitHub, npm, and other URLs
+- **Text** -- Natural language fallback; extracts technologies from 30+ known keywords, identifies use cases, priorities, and analysis types
+
+**Key Methods:**
+- `detect_format()` -- Returns format string: `&quot;json&quot;`, `&quot;yaml&quot;`, `&quot;url&quot;`, or `&quot;text&quot;`
+- `parse()` -- Parse input and return normalized dictionary with standard keys: `technologies`, `use_case`, `priorities`, `analysis_type`, `format`
+- `get_format_info()` -- Detection metadata: `detected_format`, `input_length`, `line_count`, `parsing_successful`
+
+**Output Format:** Python dictionary normalized to a standard structure with keys: `technologies` (list), `use_case` (str), `priorities` (list), `analysis_type` (str), `format` (str).
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tech Stack Evaluator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tech Stack Evaluator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tech Stack Evaluator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tech Stack Evaluator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tech Stack Evaluator&quot;
+4. Description: &quot;Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/tech-stack-evaluator/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Tech Stack Evaluator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Technology Stack Evaluator
+
+Evaluate and compare technologies, frameworks, and cloud providers with data-driven analysis and actionable recommendations.
+
+## Table of Contents
+
+- [Capabilities](#capabilities)
+- [Quick Start](#quick-start)
+- [Input Formats](#input-formats)
+- [Analysis Types](#analysis-types)
+- [Scripts](#scripts)
+- [References](#references)
+
+---
+
+## Capabilities
+
+| Capability | Description |
+|------------|-------------|
+| Technology Comparison | Compare frameworks and libraries with weighted scoring |
+| TCO Analysis | Calculate 5-year total cost including hidden costs |
+| Ecosystem Health | Assess GitHub metrics, npm adoption, community strength |
+| Security Assessment | Evaluate vulnerabilities and compliance readiness |
+| Migration Analysis | Estimate effort, risks, and timeline for migrations |
+| Cloud Comparison | Compare AWS, Azure, GCP for specific workloads |
+
+---
+
+## Quick Start
+
+### Compare Two Technologies
+
+```
+Compare React vs Vue for a SaaS dashboard.
+Priorities: developer productivity (40%), ecosystem (30%), performance (30%).
+```
+
+### Calculate TCO
+
+```
+Calculate 5-year TCO for Next.js on Vercel.
+Team: 8 developers. Hosting: $2500/month. Growth: 40%/year.
+```
+
+### Assess Migration
+
+```
+Evaluate migrating from Angular.js to React.
+Codebase: 50,000 lines, 200 components. Team: 6 developers.
+```
+
+---
+
+## Input Formats
+
+The evaluator accepts three input formats:
+
+**Text** - Natural language queries
+```
+Compare PostgreSQL vs MongoDB for our e-commerce platform.
+```
+
+**YAML** - Structured input for automation
+```yaml
+comparison:
+  technologies: [&quot;React&quot;, &quot;Vue&quot;]
+  use_case: &quot;SaaS dashboard&quot;
+  weights:
+    ecosystem: 30
+    performance: 25
+    developer_experience: 45
+```
+
+**JSON** - Programmatic integration
+```json
+{
+  &quot;technologies&quot;: [&quot;React&quot;, &quot;Vue&quot;],
+  &quot;use_case&quot;: &quot;SaaS dashboard&quot;
+}
+```
+
+---
+
+## Analysis Types
+
+### Quick Comparison (200-300 tokens)
+- Weighted scores and recommendation
+- Top 3 decision factors
+- Confidence level
+
+### Standard Analysis (500-800 tokens)
+- Comparison matrix
+- TCO overview
+- Security summary
+
+### Full Report (1200-1500 tokens)
+- All metrics and calculations
+- Migration analysis
+- Detailed recommendations
+
+---
+
+## Scripts
+
+### stack_comparator.py
+
+Compare technologies with customizable weighted criteria.
+
+```bash
+python scripts/stack_comparator.py --help
+```
+
+### tco_calculator.py
+
+Calculate total cost of ownership over multi-year projections.
+
+```bash
+python scripts/tco_calculator.py --input assets/sample_input_tco.json
+```
+
+### ecosystem_analyzer.py
+
+Analyze ecosystem health from GitHub, npm, and community metrics.
+
+```bash
+python scripts/ecosystem_analyzer.py --technology react
+```
+
+### security_assessor.py
+
+Evaluate security posture and compliance readiness.
+
+```bash
+python scripts/security_assessor.py --technology express --compliance soc2,gdpr
+```
+
+### migration_analyzer.py
+
+Estimate migration complexity, effort, and risks.
+
+```bash
+python scripts/migration_analyzer.py --from angular-1.x --to react
+```
+
+---
+
+## References
+
+| Document | Content |
+|----------|---------|
+| `references/metrics.md` | Detailed scoring algorithms and calculation formulas |
+| `references/examples.md` | Input/output examples for all analysis types |
+| `references/workflows.md` | Step-by-step evaluation workflows |
+
+---
+
+## Confidence Levels
+
+| Level | Score | Interpretation |
+|-------|-------|----------------|
+| High | 80-100% | Clear winner, strong data |
+| Medium | 50-79% | Trade-offs present, moderate uncertainty |
+| Low | &lt; 50% | Close call, limited data |
+
+---
+
+## When to Use
+
+- Comparing frontend/backend frameworks for new projects
+- Evaluating cloud providers for specific workloads
+- Planning technology migrations with risk assessment
+- Calculating build vs. buy decisions with TCO
+- Assessing open-source library viability
+
+## When NOT to Use
+
+- Trivial decisions between similar tools (use team preference)
+- Mandated technology choices (decision already made)
+- Emergency production issues (use monitoring tools)
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Weighted scores all return 50.0 | Technology data dictionaries missing `score` keys under each category | Ensure each category dict contains a `score` key on a 0-100 scale (e.g., `{&quot;performance&quot;: {&quot;score&quot;: 85}}`) |
+| TCO projections look unrealistically low | Default cost parameters used when `operational_costs` or `initial_costs` are empty | Populate `monthly_hosting`, `annual_licensing`, `developer_hourly_rate`, and `maintenance_hours_per_dev_monthly` with real figures |
+| Ecosystem health score stuck at 50 for npm | `npm_data` dict is empty or not provided | Pass npm metrics (`weekly_downloads`, `version`, `dependencies_count`, `days_since_last_publish`); 50 is the neutral fallback when npm data is absent |
+| Security compliance returns &quot;Unknown standard&quot; | Unsupported standard name passed to `assess_compliance()` | Use one of the supported keys: `GDPR`, `SOC2`, `HIPAA`, `PCI_DSS` (case-sensitive) |
+| Migration complexity always shows moderate | `architecture_change_level` defaults to `moderate` when not specified | Set `architecture_change_level` explicitly to `minimal`, `moderate`, `significant`, or `complete` in `codebase_stats` |
+| Report renders ASCII tables instead of markdown | `ReportGenerator` auto-detects CLI context when stdout is a TTY | Pass `output_context=&#x27;desktop&#x27;` to force rich markdown output |
+| Format detector misclassifies YAML as text | Fewer than 50% of lines match YAML key-value patterns | Ensure input uses standard YAML syntax with `key: value` pairs and proper indentation |
+
+---
+
+## Success Criteria
+
+- **TCO variance under 15%**: Calculated TCO deviates less than 15% from actual costs when validated against real-world spending data over the projection period.
+- **Security score above 80/100**: Technologies recommended for production use achieve a minimum overall security score of 80, corresponding to grade B or higher.
+- **Ecosystem health score above 65/100**: Recommended technologies demonstrate viable long-term ecosystem health with a risk level no worse than &quot;Low-Medium.&quot;
+- **Migration effort estimate within 20%**: Person-hours and timeline estimates land within 20% of actual migration effort when measured post-completion.
+- **Comparison confidence above 70%**: Final technology recommendations carry a confidence score of 70% or higher, indicating a meaningful score gap between top candidates.
+- **Compliance readiness at &quot;Mostly Ready&quot; or above**: Technologies targeting regulated environments achieve at least 70% feature coverage against required compliance standards (GDPR, SOC2, HIPAA, PCI-DSS).
+- **Report generation under 5 seconds**: All report types (executive summary, full report) render within 5 seconds for evaluations comparing up to 5 technologies.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Weighted multi-criteria comparison of frameworks, libraries, and cloud providers
+- Multi-year TCO projections including hidden costs (technical debt, vendor lock-in, turnover)
+- Ecosystem viability assessment using GitHub, npm, and community metrics
+- Security posture scoring and compliance readiness for GDPR, SOC2, HIPAA, PCI-DSS
+
+**Does NOT cover:**
+- Live data fetching from GitHub API, npm registry, or vulnerability databases (all data must be provided as input dictionaries)
+- Performance benchmarking or load testing (use `engineering/senior-qa` for test execution)
+- Licensing legal review or contract negotiation (use `ra-qm-team` compliance skills for regulatory guidance)
+- Team hiring or organizational design decisions (use `hr-operations/talent-acquisition` for staffing analysis)
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/senior-security` | Feed security assessor output into deeper vulnerability analysis | `SecurityAssessor` results → security review input |
+| `engineering/senior-devops` | Use TCO hosting projections to inform infrastructure planning | `TCOCalculator` hosting/scaling data → DevOps capacity models |
+| `engineering/senior-qa` | Migration test coverage scores inform QA test planning | `MigrationAnalyzer` testing_requirements → QA test strategy |
+| `ra-qm-team/compliance-auditor` | Compliance readiness gaps feed into formal audit preparation | `SecurityAssessor.assess_compliance()` missing features → audit checklist |
+| `c-level-advisor/cto-advisor` | Executive summaries and TCO reports support CTO decision-making | `ReportGenerator` executive summary → strategic technology decisions |
+| `product-team/product-manager` | Ecosystem viability and migration timelines inform product roadmaps | `EcosystemAnalyzer` + `MigrationAnalyzer` → roadmap planning |
+
+---
+
+## Tool Reference
+
+### stack_comparator.py
+
+**Purpose:** Compare technologies with customizable weighted criteria across 8 evaluation categories: performance, scalability, developer experience, ecosystem, learning curve, documentation, community support, and enterprise readiness.
+
+**Usage:**
+```python
+from stack_comparator import StackComparator
+
+comparator = StackComparator({
+    &quot;technologies&quot;: [&quot;React&quot;, &quot;Vue&quot;],
+    &quot;use_case&quot;: &quot;SaaS dashboard&quot;,
+    &quot;weights&quot;: {&quot;developer_experience&quot;: 40, &quot;performance&quot;: 30, &quot;ecosystem&quot;: 30}
+})
+
+results = comparator.compare_technologies(tech_data_list)
+```
+
+**Constructor Parameters (`comparison_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technologies` | list | `[]` | Names of technologies to compare |
+| `use_case` | str | `&quot;general&quot;` | Use case context (supports `real-time`, `enterprise`, `startup` bonuses) |
+| `priorities` | dict | `{}` | Priority overrides |
+| `weights` | dict | `DEFAULT_WEIGHTS` | Category weights (auto-normalized to 100) |
+
+**Default Weights:** performance 15, scalability 15, developer_experience 20, ecosystem 15, learning_curve 10, documentation 10, community_support 10, enterprise_readiness 5.
+
+**Key Methods:**
+- `compare_technologies(tech_data_list)` -- Full comparison with scores, recommendation, confidence, and decision factors
+- `score_technology(tech_name, tech_data)` -- Score a single technology across all categories
+- `calculate_weighted_score(category_scores)` -- Calculate weighted total from category scores
+- `generate_pros_cons(tech_name, tech_scores)` -- Generate pros/cons lists from scores
+
+**Example Output:**
+```json
+{
+  &quot;technologies&quot;: {&quot;React&quot;: {&quot;weighted_total&quot;: 78.5, &quot;strengths&quot;: [...], &quot;weaknesses&quot;: [...]}},
+  &quot;recommendation&quot;: &quot;React&quot;,
+  &quot;confidence&quot;: 72.0,
+  &quot;decision_factors&quot;: [{&quot;category&quot;: &quot;developer_experience&quot;, &quot;importance&quot;: &quot;40.0%&quot;, &quot;best_performer&quot;: &quot;React&quot;}],
+  &quot;comparison_matrix&quot;: [{&quot;category&quot;: &quot;performance&quot;, &quot;weight&quot;: &quot;15.0%&quot;, &quot;scores&quot;: {&quot;React&quot;: &quot;82.0&quot;, &quot;Vue&quot;: &quot;79.0&quot;}}]
+}
+```
+
+**Output Format:** Python dictionary (serialize with `json.dumps()` for JSON output).
+
+---
+
+### tco_calculator.py
+
+**Purpose:** Calculate comprehensive Total Cost of Ownership over multi-year projections, including initial costs, operational costs, scaling costs, hidden costs (technical debt, vendor lock-in, security incidents, downtime, turnover), and developer productivity impact.
+
+**Usage:**
+```python
+from tco_calculator import TCOCalculator
+
+calculator = TCOCalculator({
+    &quot;technology&quot;: &quot;Next.js&quot;,
+    &quot;team_size&quot;: 8,
+    &quot;timeline_years&quot;: 5,
+    &quot;initial_costs&quot;: {&quot;licensing&quot;: 0, &quot;migration&quot;: 15000, &quot;developer_hourly_rate&quot;: 100},
+    &quot;operational_costs&quot;: {&quot;monthly_hosting&quot;: 2500, &quot;annual_licensing&quot;: 0, &quot;maintenance_hours_per_dev_monthly&quot;: 20},
+    &quot;scaling_params&quot;: {&quot;annual_growth_rate&quot;: 0.40, &quot;initial_users&quot;: 5000}
+})
+
+tco = calculator.calculate_total_tco()
+summary = calculator.generate_tco_summary()
+```
+
+**Constructor Parameters (`tco_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `team_size` | int | `5` | Number of developers |
+| `timeline_years` | int | `5` | Projection period in years |
+| `initial_costs` | dict | `{}` | One-time costs: `licensing`, `migration`, `setup`, `tooling`, `training_hours_per_dev`, `developer_hourly_rate`, `training_materials` |
+| `operational_costs` | dict | `{}` | Recurring costs: `monthly_hosting`, `annual_licensing`, `annual_support`, `maintenance_hours_per_dev_monthly` |
+| `scaling_params` | dict | `{}` | Growth params: `annual_growth_rate`, `initial_users`, `initial_servers`, `cost_per_server_monthly` |
+| `productivity_factors` | dict | `{}` | Productivity: `productivity_multiplier`, `time_to_market_reduction_days`, `avg_feature_time_days`, `avg_feature_value`, `technical_debt_percentage`, `vendor_lock_in_risk`, `security_incidents_per_year`, `avg_security_incident_cost`, `downtime_hours_per_year`, `downtime_cost_per_hour`, `annual_turnover_rate`, `cost_per_new_hire` |
+
+**Key Methods:**
+- `calculate_total_tco()` -- Complete TCO with all cost components
+- `generate_tco_summary()` -- Executive summary with formatted dollar amounts
+- `calculate_initial_costs()` -- One-time cost breakdown
+- `calculate_operational_costs()` -- Year-by-year operational costs
+- `calculate_scaling_costs()` -- User projections and cost-per-user analysis
+- `calculate_hidden_costs()` -- Technical debt, vendor lock-in, security, downtime, turnover
+- `calculate_productivity_impact()` -- Productivity gains and feature velocity
+
+**Output Format:** Python dictionary (all monetary values as floats; `generate_tco_summary()` returns pre-formatted dollar strings).
+
+---
+
+### ecosystem_analyzer.py
+
+**Purpose:** Analyze technology ecosystem health and long-term viability by scoring GitHub activity, npm adoption, community strength, corporate backing, and maintenance responsiveness on a 0-100 scale.
+
+**Usage:**
+```python
+from ecosystem_analyzer import EcosystemAnalyzer
+
+analyzer = EcosystemAnalyzer({
+    &quot;technology&quot;: &quot;React&quot;,
+    &quot;github&quot;: {&quot;stars&quot;: 220000, &quot;forks&quot;: 45000, &quot;contributors&quot;: 1500, &quot;commits_last_month&quot;: 120},
+    &quot;npm&quot;: {&quot;weekly_downloads&quot;: 20000000, &quot;version&quot;: &quot;18.2.0&quot;, &quot;dependencies_count&quot;: 3},
+    &quot;community&quot;: {&quot;stackoverflow_questions&quot;: 400000, &quot;job_postings&quot;: 15000},
+    &quot;corporate_backing&quot;: {&quot;type&quot;: &quot;major_tech_company&quot;}
+})
+
+report = analyzer.generate_ecosystem_report()
+viability = analyzer.assess_viability()
+```
+
+**Constructor Parameters (`ecosystem_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `github` | dict | `{}` | GitHub metrics: `stars`, `forks`, `contributors`, `commits_last_month`, `avg_issue_response_hours`, `issue_resolution_rate`, `releases_per_year`, `active_maintainers`, `open_issues` |
+| `npm` | dict | `{}` | npm metrics: `weekly_downloads`, `version`, `dependencies_count`, `days_since_last_publish` |
+| `community` | dict | `{}` | Community metrics: `stackoverflow_questions`, `job_postings`, `tutorials_count`, `forum_members` |
+| `corporate_backing` | dict | `{}` | Backing info: `type` (one of `major_tech_company`, `established_company`, `startup_backed`, `community_led`, `none`), `funding_millions` |
+
+**Health Score Weights:** github_health 25%, npm_health 20%, community_health 20%, corporate_backing 15%, maintenance_health 20%.
+
+**Key Methods:**
+- `generate_ecosystem_report()` -- Complete report with health scores, viability, and formatted metrics
+- `calculate_health_score()` -- Component scores and weighted overall score
+- `assess_viability()` -- Viability level, risk assessment, strengths, and recommendation
+
+**Output Format:** Python dictionary with nested health scores, viability assessment, and formatted metrics.
+
+---
+
+### security_assessor.py
+
+**Purpose:** Evaluate security posture and compliance readiness for technology stacks. Scores vulnerabilities, patch responsiveness, built-in security features, and track record. Assesses compliance against GDPR, SOC2, HIPAA, and PCI-DSS.
+
+**Usage:**
+```python
+from security_assessor import SecurityAssessor
+
+assessor = SecurityAssessor({
+    &quot;technology&quot;: &quot;Express&quot;,
+    &quot;vulnerabilities&quot;: {
+        &quot;critical_last_12m&quot;: 0, &quot;high_last_12m&quot;: 2,
+        &quot;avg_critical_patch_days&quot;: 7, &quot;has_security_team&quot;: True
+    },
+    &quot;security_features&quot;: {
+        &quot;encryption_in_transit&quot;: True, &quot;authentication&quot;: True,
+        &quot;input_validation&quot;: True, &quot;csrf_protection&quot;: True
+    },
+    &quot;compliance_requirements&quot;: [&quot;SOC2&quot;, &quot;GDPR&quot;]
+})
+
+report = assessor.generate_security_report()
+compliance = assessor.assess_compliance([&quot;SOC2&quot;, &quot;GDPR&quot;])
+```
+
+**Constructor Parameters (`security_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `technology` | str | `&quot;Unknown&quot;` | Technology name |
+| `vulnerabilities` | dict | `{}` | Vulnerability data: `critical_last_12m`, `high_last_12m`, `medium_last_12m`, `low_last_12m`, `critical_last_3y`, `high_last_3y`, `medium_last_3y`, `low_last_3y`, `avg_critical_patch_days`, `avg_high_patch_days`, `has_security_team`, `years_since_major_incident`, `has_security_certifications`, `has_bug_bounty_program`, `security_audits_per_year`, `common_vulnerability_types` |
+| `security_features` | dict | `{}` | Boolean feature flags: `encryption_at_rest`, `encryption_in_transit`, `authentication`, `authorization`, `input_validation`, `rate_limiting`, `csrf_protection`, `xss_protection`, `sql_injection_protection`, `audit_logging`, `mfa_support`, `rbac`, `secrets_management`, `security_headers`, `cors_configuration` |
+| `compliance_requirements` | list | `[]` | Standards to assess: `GDPR`, `SOC2`, `HIPAA`, `PCI_DSS` |
+
+**Security Score Weights:** vulnerability_score 30%, patch_responsiveness 25%, security_features 30%, track_record 15%.
+
+**Key Methods:**
+- `generate_security_report()` -- Full report with score, compliance, vulnerabilities, and recommendations
+- `calculate_security_score()` -- Component scores with letter grade (A-F)
+- `assess_compliance(standards)` -- Per-standard readiness with missing features list
+- `identify_vulnerabilities()` -- Categorized vulnerability report with trend analysis
+
+**Output Format:** Python dictionary with security scores, compliance assessments, and risk level.
+
+---
+
+### migration_analyzer.py
+
+**Purpose:** Analyze migration complexity, estimate effort in person-hours and calendar months, assess technical/business/team risks, and recommend a migration approach (direct, phased, or strangler pattern) based on complexity scoring.
+
+**Usage:**
+```python
+from migration_analyzer import MigrationAnalyzer
+
+analyzer = MigrationAnalyzer({
+    &quot;source_technology&quot;: &quot;Angular 1.x&quot;,
+    &quot;target_technology&quot;: &quot;React&quot;,
+    &quot;codebase_stats&quot;: {
+        &quot;lines_of_code&quot;: 50000, &quot;num_components&quot;: 200,
+        &quot;architecture_change_level&quot;: &quot;significant&quot;,
+        &quot;current_test_coverage&quot;: 0.6
+    },
+    &quot;team&quot;: {&quot;team_size&quot;: 6, &quot;target_tech_experience&quot;: &quot;low&quot;},
+    &quot;constraints&quot;: {&quot;downtime_tolerance&quot;: &quot;low&quot;}
+})
+
+plan = analyzer.generate_migration_plan()
+effort = analyzer.estimate_effort()
+risks = analyzer.assess_risks()
+```
+
+**Constructor Parameters (`migration_data` dict):**
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| `source_technology` | str | `&quot;Unknown&quot;` | Current technology |
+| `target_technology` | str | `&quot;Unknown&quot;` | Target technology |
+| `codebase_stats` | dict | `{}` | Codebase metrics: `lines_of_code`, `num_files`, `num_components`, `architecture_change_level` (`minimal`/`moderate`/`significant`/`complete`), `has_database`, `database_size_gb`, `schema_changes_required`, `data_transformation_required`, `breaking_api_changes` (`none`/`minimal`/`some`/`many`/`complete`), `num_dependencies`, `dependencies_to_replace`, `current_test_coverage` (0-1), `num_tests` |
+| `team` | dict | `{}` | Team info: `team_size`, `hours_per_week`, `target_tech_experience` (`none`/`low`/`medium`/`high`) |
+| `constraints` | dict | `{}` | Constraints: `downtime_tolerance` (`none`/`low`/`medium`/`high`) |
+
+**Complexity Score Weights:** code_volume 20%, architecture_changes 25%, data_migration 20%, api_compatibility 15%, dependency_changes 10%, testing_requirements 10%.
+
+**Key Methods:**
+- `generate_migration_plan()` -- Complete plan with complexity, effort, risks, approach, and success criteria
+- `calculate_complexity_score()` -- Per-factor complexity scores (1-10 scale)
+- `estimate_effort()` -- Person-hours, person-months, phase breakdown, and calendar timeline
+- `assess_risks()` -- Technical, business, and team risks with severity and mitigation strategies
+
+**Output Format:** Python dictionary with nested complexity analysis, effort estimation, risk assessment, and recommended approach.
+
+---
+
+### report_generator.py
+
+**Purpose:** Generate context-aware evaluation reports with progressive disclosure. Auto-detects output context (Claude Desktop vs CLI) and renders rich markdown tables or ASCII-formatted output accordingly. Supports selective section generation.
+
+**Usage:**
+```python
+from report_generator import ReportGenerator
+
+generator = ReportGenerator(report_data, output_context=&quot;desktop&quot;)
+
+executive_summary = generator.generate_executive_summary(max_tokens=300)
+full_report = generator.generate_full_report(sections=[&quot;executive_summary&quot;, &quot;comparison_matrix&quot;, &quot;tco_analysis&quot;])
+generator.export_to_file(&quot;evaluation_report.md&quot;)
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `report_data` | dict | (required) | Complete evaluation data containing any combination of: `technologies`, `recommendation`, `decision_factors`, `comparison_matrix`, `tco_analysis`, `ecosystem_health`, `security_assessment`, `migration_analysis`, `performance_benchmarks`, `use_case` |
+| `output_context` | str | `None` (auto-detect) | Output format: `&quot;desktop&quot;` for rich markdown, `&quot;cli&quot;` for ASCII tables. Auto-detects via `CLAUDE_DESKTOP` env var and TTY check |
+
+**Available Report Sections:** `executive_summary`, `comparison_matrix`, `tco_analysis`, `ecosystem_health`, `security_assessment`, `migration_analysis`, `performance_benchmarks`.
+
+**Key Methods:**
+- `generate_executive_summary(max_tokens=300)` -- Concise summary with recommendation, strengths, concerns, and decision factors
+- `generate_full_report(sections=None)` -- Complete report with selected sections (all if None)
+- `export_to_file(filename, sections=None)` -- Write report to file, returns file path
+
+**Output Format:** Markdown string (desktop context) or ASCII-formatted string (CLI context).
+
+---
+
+### format_detector.py
+
+**Purpose:** Automatically detect and parse input format (JSON, YAML, URL, or natural language text) for technology evaluation requests. Extracts technology names, use cases, priorities, and analysis types from unstructured text input.
+
+**Usage:**
+```python
+from format_detector import FormatDetector
+
+detector = FormatDetector(&#x27;Compare React vs Vue for a SaaS dashboard. Priorities: performance, ecosystem.&#x27;)
+
+format_type = detector.detect_format()   # Returns: &quot;text&quot;
+parsed = detector.parse()                # Returns normalized dict
+info = detector.get_format_info()        # Returns detection metadata
+```
+
+**Constructor Parameters:**
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `input_data` | str | (required) | Raw input string in any supported format |
+
+**Supported Formats:**
+- **JSON** -- Valid JSON objects are detected and parsed directly
+- **YAML** -- Detected when &gt;50% of lines match key-value or list patterns (simplified parser, no PyYAML dependency)
+- **URL** -- Detected when input contains `http://` or `https://` URLs; categorizes GitHub, npm, and other URLs
+- **Text** -- Natural language fallback; extracts technologies from 30+ known keywords, identifies use cases, priorities, and analysis types
+
+**Key Methods:**
+- `detect_format()` -- Returns format string: `&quot;json&quot;`, `&quot;yaml&quot;`, `&quot;url&quot;`, or `&quot;text&quot;`
+- `parse()` -- Parse input and return normalized dictionary with standard keys: `technologies`, `use_case`, `priorities`, `analysis_type`, `format`
+- `get_format_info()` -- Detection metadata: `detected_format`, `input_length`, `line_count`, `parsing_successful`
+
+**Output Format:** Python dictionary normalized to a standard structure with keys: `technologies` (list), `use_case` (str), `priorities` (list), `analysis_type` (str), `format` (str).
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Tech Stack Evaluator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Tech Stack Evaluator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Tech Stack Evaluator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Tech Stack Evaluator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Tech Stack Evaluator&quot;
+4. Description: &quot;Technology stack evaluation and comparison with TCO analysis, security assessment, and ecosystem health scoring. Use when comparing frameworks, evaluating technology stacks, calculating total cost of ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/tech-stack-evaluator/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

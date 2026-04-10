@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Helm Chart Builder (Engineering domain).
 
 Automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. Helps teams maintain high-quality charts with correct configurations and proper security contexts.
@@ -401,11 +423,11 @@ https://github.com/borghei/Claude-Skills/tree/main/helm-chart-builder
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Helm Chart Builder (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Helm Chart Builder (Engineering domain).
 
 Automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. Helps teams maintain high-quality charts with correct configurations and proper security contexts.
 
@@ -437,7 +459,348 @@ https://github.com/borghei/Claude-Skills/tree/main/helm-chart-builder
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Helm Chart Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Helm Chart Builder
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Kubernetes &amp; Helm
+
+## Overview
+
+The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations, proper security contexts, and complete documentation.
+
+## Quick Start
+
+```bash
+# Analyze chart structure and quality
+python scripts/chart_analyzer.py --path ./charts/my-app
+
+# Validate values.yaml against chart requirements
+python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
+
+# JSON output for CI
+python scripts/chart_analyzer.py --path ./charts/my-app --format json
+
+# Validate multiple values files
+python scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml
+```
+
+## Tools Overview
+
+### chart_analyzer.py
+
+Analyzes Helm chart structure, metadata, templates, and dependencies.
+
+| Feature | Description |
+|---------|-------------|
+| Structure validation | Checks required files exist (Chart.yaml, values.yaml, templates/) |
+| Metadata check | Validates Chart.yaml fields, version format, appVersion |
+| Template review | Inspects templates for common patterns and issues |
+| Dependency analysis | Reviews subchart dependencies and version constraints |
+| Documentation check | Verifies NOTES.txt and README presence |
+
+### values_validator.py
+
+Validates values files against chart expectations and Kubernetes best practices.
+
+| Feature | Description |
+|---------|-------------|
+| Resource limits | Checks for CPU/memory requests and limits |
+| Security context | Validates runAsNonRoot, readOnlyRootFilesystem |
+| Replica count | Checks for production-appropriate replica counts |
+| Image tags | Flags use of latest or missing image tags |
+| Ingress config | Validates ingress annotations and TLS settings |
+
+## Workflows
+
+### Chart Review Workflow
+
+1. **Analyze structure** - Run chart_analyzer.py to check chart organization
+2. **Validate defaults** - Run values_validator.py against default values.yaml
+3. **Check environments** - Validate each environment&#x27;s values file
+4. **Review findings** - Address critical issues first, then warnings
+5. **Re-check** - Confirm fixes pass validation
+
+### Pre-Release Workflow
+
+1. **Bump version** - Update Chart.yaml version and appVersion
+2. **Lint chart** - Run chart_analyzer.py in strict mode
+3. **Validate all values** - Check every environment&#x27;s values file
+4. **Check dependencies** - Ensure subchart versions are pinned
+5. **Package** - Chart is ready for helm package
+
+### CI Integration
+
+```bash
+# Structure check
+python scripts/chart_analyzer.py --path ./charts/my-app --format json --strict
+
+# Values validation for all environments
+for env in dev staging production; do
+  python scripts/values_validator.py \
+    --chart ./charts/my-app \
+    --values &quot;values-${env}.yaml&quot;
+done
+```
+
+## Reference Documentation
+
+- [Helm Best Practices](references/helm-best-practices.md) - Chart structure, templates, security, dependencies
+
+## Common Patterns Quick Reference
+
+### Required Chart Structure
+```
+my-chart/
+  Chart.yaml          # Required: chart metadata
+  values.yaml         # Required: default values
+  templates/          # Required: template directory
+    deployment.yaml
+    service.yaml
+    _helpers.tpl      # Recommended: template helpers
+    NOTES.txt         # Recommended: post-install notes
+  charts/             # Optional: subchart dependencies
+```
+
+### Values Best Practices
+| Setting | Requirement | Why |
+|---------|------------|-----|
+| resources.limits | Required | Prevents resource exhaustion |
+| resources.requests | Required | Enables proper scheduling |
+| securityContext.runAsNonRoot | Required | Security baseline |
+| image.tag | Required (not latest) | Reproducible deployments |
+| replicaCount &gt;= 2 | Recommended for prod | High availability |
+| ingress.tls | Recommended | Encrypted traffic |
+
+### Chart.yaml Required Fields
+| Field | Description |
+|-------|-------------|
+| apiVersion | v2 for Helm 3 |
+| name | Chart name (lowercase) |
+| version | SemVer chart version |
+| appVersion | Application version |
+| description | Brief chart description |
+
+### Common Issues
+| Issue | Severity | Fix |
+|-------|----------|-----|
+| Missing Chart.yaml | Critical | Add required chart metadata |
+| No resource limits | Warning | Set CPU/memory limits |
+| Latest image tag | Warning | Pin specific version |
+| No security context | Warning | Add runAsNonRoot: true |
+| Missing NOTES.txt | Info | Add post-install notes |
+| Unpinned dependencies | Warning | Pin subchart versions |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Helm Chart Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Helm Chart Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Helm Chart Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Helm Chart Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Helm Chart Builder&quot;
+4. Description: &quot;Automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. Helps teams maintain high-quality charts with correct configurations and proper security contexts.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/helm-chart-builder/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Helm Chart Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Helm Chart Builder
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Kubernetes &amp; Helm
+
+## Overview
+
+The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations, proper security contexts, and complete documentation.
+
+## Quick Start
+
+```bash
+# Analyze chart structure and quality
+python scripts/chart_analyzer.py --path ./charts/my-app
+
+# Validate values.yaml against chart requirements
+python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
+
+# JSON output for CI
+python scripts/chart_analyzer.py --path ./charts/my-app --format json
+
+# Validate multiple values files
+python scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml
+```
+
+## Tools Overview
+
+### chart_analyzer.py
+
+Analyzes Helm chart structure, metadata, templates, and dependencies.
+
+| Feature | Description |
+|---------|-------------|
+| Structure validation | Checks required files exist (Chart.yaml, values.yaml, templates/) |
+| Metadata check | Validates Chart.yaml fields, version format, appVersion |
+| Template review | Inspects templates for common patterns and issues |
+| Dependency analysis | Reviews subchart dependencies and version constraints |
+| Documentation check | Verifies NOTES.txt and README presence |
+
+### values_validator.py
+
+Validates values files against chart expectations and Kubernetes best practices.
+
+| Feature | Description |
+|---------|-------------|
+| Resource limits | Checks for CPU/memory requests and limits |
+| Security context | Validates runAsNonRoot, readOnlyRootFilesystem |
+| Replica count | Checks for production-appropriate replica counts |
+| Image tags | Flags use of latest or missing image tags |
+| Ingress config | Validates ingress annotations and TLS settings |
+
+## Workflows
+
+### Chart Review Workflow
+
+1. **Analyze structure** - Run chart_analyzer.py to check chart organization
+2. **Validate defaults** - Run values_validator.py against default values.yaml
+3. **Check environments** - Validate each environment&#x27;s values file
+4. **Review findings** - Address critical issues first, then warnings
+5. **Re-check** - Confirm fixes pass validation
+
+### Pre-Release Workflow
+
+1. **Bump version** - Update Chart.yaml version and appVersion
+2. **Lint chart** - Run chart_analyzer.py in strict mode
+3. **Validate all values** - Check every environment&#x27;s values file
+4. **Check dependencies** - Ensure subchart versions are pinned
+5. **Package** - Chart is ready for helm package
+
+### CI Integration
+
+```bash
+# Structure check
+python scripts/chart_analyzer.py --path ./charts/my-app --format json --strict
+
+# Values validation for all environments
+for env in dev staging production; do
+  python scripts/values_validator.py \
+    --chart ./charts/my-app \
+    --values &quot;values-${env}.yaml&quot;
+done
+```
+
+## Reference Documentation
+
+- [Helm Best Practices](references/helm-best-practices.md) - Chart structure, templates, security, dependencies
+
+## Common Patterns Quick Reference
+
+### Required Chart Structure
+```
+my-chart/
+  Chart.yaml          # Required: chart metadata
+  values.yaml         # Required: default values
+  templates/          # Required: template directory
+    deployment.yaml
+    service.yaml
+    _helpers.tpl      # Recommended: template helpers
+    NOTES.txt         # Recommended: post-install notes
+  charts/             # Optional: subchart dependencies
+```
+
+### Values Best Practices
+| Setting | Requirement | Why |
+|---------|------------|-----|
+| resources.limits | Required | Prevents resource exhaustion |
+| resources.requests | Required | Enables proper scheduling |
+| securityContext.runAsNonRoot | Required | Security baseline |
+| image.tag | Required (not latest) | Reproducible deployments |
+| replicaCount &gt;= 2 | Recommended for prod | High availability |
+| ingress.tls | Recommended | Encrypted traffic |
+
+### Chart.yaml Required Fields
+| Field | Description |
+|-------|-------------|
+| apiVersion | v2 for Helm 3 |
+| name | Chart name (lowercase) |
+| version | SemVer chart version |
+| appVersion | Application version |
+| description | Brief chart description |
+
+### Common Issues
+| Issue | Severity | Fix |
+|-------|----------|-----|
+| Missing Chart.yaml | Critical | Add required chart metadata |
+| No resource limits | Warning | Set CPU/memory limits |
+| Latest image tag | Warning | Pin specific version |
+| No security context | Warning | Add runAsNonRoot: true |
+| Missing NOTES.txt | Info | Add post-install notes |
+| Unpinned dependencies | Warning | Pin subchart versions |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Helm Chart Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Helm Chart Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Helm Chart Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Helm Chart Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Helm Chart Builder&quot;
+4. Description: &quot;Automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. Helps teams maintain high-quality charts with correct configurations and proper security contexts.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/helm-chart-builder/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

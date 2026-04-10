@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Marketing Strategy Pmm (Marketing domain).
 
 Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and ...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/marketing-strategy-pmm
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Marketing Strategy Pmm (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Marketing Strategy Pmm (Marketing domain).
 
 Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and ...
 
@@ -439,7 +461,962 @@ https://github.com/borghei/Claude-Skills/tree/main/marketing-strategy-pmm
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Marketing Strategy Pmm&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Marketing Strategy &amp; PMM
+
+Product marketing patterns for positioning, GTM strategy, and competitive intelligence.
+
+---
+
+## Table of Contents
+
+- [ICP Definition Workflow](#icp-definition-workflow)
+- [Positioning Development](#positioning-development)
+- [Competitive Intelligence](#competitive-intelligence)
+- [Product Launch Planning](#product-launch-planning)
+- [Sales Enablement](#sales-enablement)
+- [International Expansion](#international-expansion)
+- [Reference Documentation](#reference-documentation)
+
+---
+
+## ICP Definition Workflow
+
+Define ideal customer profile for targeting:
+
+1. Analyze existing customers (top 20% by LTV)
+2. Identify common firmographics (size, industry, revenue)
+3. Map technographics (tools, maturity, integrations)
+4. Document psychographics (pain level, motivation, risk tolerance)
+5. Define 3-5 buyer personas (economic, technical, user)
+6. Validate against sales cycle and churn data
+7. Score prospects A/B/C/D based on ICP fit
+8. **Validation:** A-fit customers have lowest churn and fastest close
+
+### Firmographics Template
+
+| Dimension | Target Range | Rationale |
+|-----------|--------------|-----------|
+| Employees | 50-5000 | Series A sweet spot |
+| Revenue | $5M-$500M | Budget available |
+| Industry | SaaS, Tech, Services | Product fit |
+| Geography | US, UK, DACH | Market priority |
+| Funding | Seed to Growth | Willing to adopt |
+
+### Buyer Personas
+
+**Economic Buyer** (signs contract):
+- Title: VP, Director, Head of [Department]
+- Goals: ROI, team productivity, cost reduction
+- Messaging: Business outcomes, ROI, case studies
+
+**Technical Buyer** (evaluates product):
+- Title: Engineer, Architect, Tech Lead
+- Goals: Technical fit, easy integration
+- Messaging: Architecture, security, documentation
+
+**User/Champion** (advocates internally):
+- Title: Manager, Team Lead, Power User
+- Goals: Makes job easier, quick wins
+- Messaging: UX, ease of use, time savings
+
+### ICP Validation Checklist
+
+- [ ] 5+ paying customers match this profile
+- [ ] Fastest sales cycles (&lt; median)
+- [ ] Highest LTV (&gt; median)
+- [ ] Lowest churn (&lt; 5% annual)
+- [ ] Strong product engagement
+- [ ] Willing to do case studies
+
+---
+
+## Positioning Development
+
+Develop positioning using April Dunford methodology:
+
+1. List competitive alternatives (direct, adjacent, status quo)
+2. Isolate unique attributes (features only you have)
+3. Map attributes to customer value (why it matters)
+4. Define best-fit customers (who cares most)
+5. Choose market category (head-to-head, niche, new category)
+6. Layer on relevant trends (timing justification)
+7. Test with 10+ customer interviews
+8. **Validation:** 7+ customers describe value unprompted
+
+### Positioning Statement Template
+
+```
+FOR [target customer]
+WHO [statement of need]
+THE [product] IS A [category]
+THAT [key benefit]
+UNLIKE [competitive alternative]
+OUR PRODUCT [primary differentiation]
+```
+
+### Value Proposition Formula
+
+Template: `[Product] helps [Target Customer] [Achieve Goal] by [Unique Approach]`
+
+Example: &quot;Acme helps mid-market SaaS teams ship 2x faster by automating project workflows with AI&quot;
+
+### Messaging Hierarchy
+
+| Level | Content | Example |
+|-------|---------|---------|
+| Headline | 5-7 words | &quot;Ship faster with AI automation&quot; |
+| Subhead | 1 sentence | &quot;Automate workflows so teams focus on what matters&quot; |
+| Benefits | 3-4 bullets | Speed, quality, collaboration, cost |
+| Features | Supporting evidence | AI automation → 10 hrs/week saved |
+| Proof | Social proof | Customer logos, stats, case studies |
+
+---
+
+## Competitive Intelligence
+
+Build competitive knowledge base:
+
+1. Identify tier 1 (direct), tier 2 (adjacent), tier 3 (status quo)
+2. Sign up for competitor products (hands-on evaluation)
+3. Monitor competitor websites, pricing, messaging
+4. Analyze sales call recordings for competitor mentions
+5. Read G2/Capterra reviews (pros and cons)
+6. Track competitor job postings (roadmap signals)
+7. Update battlecards monthly
+8. **Validation:** Sales team uses battlecards in 80%+ competitive deals
+
+### Competitive Tier Structure
+
+| Tier | Definition | Examples |
+|------|------------|----------|
+| 1 | Direct competitor, same category | [Competitor A, B] |
+| 2 | Adjacent solution, overlapping use case | [Alt Solution C, D] |
+| 3 | Status quo (what they do today) | Spreadsheets, manual, in-house |
+
+### Battlecard Template
+
+```
+COMPETITOR: [Name]
+OVERVIEW: Founded [year], Funding [stage], Size [employees]
+
+POSITIONING:
+- They say: &quot;[Their claim]&quot;
+- Reality: [Your assessment]
+
+STRENGTHS:
+1. [What they do well]
+2. [What they do well]
+
+WEAKNESSES:
+1. [Where they fall short]
+2. [Where they fall short]
+
+OUR ADVANTAGES:
+1. [Your advantage + evidence]
+2. [Your advantage + evidence]
+
+WHEN WE WIN:
+- [Scenario where you win]
+
+WHEN WE LOSE:
+- [Scenario where they win]
+
+TALK TRACK:
+Objection: &quot;[Common objection]&quot;
+Response: &quot;[Your response]&quot;
+```
+
+### Win/Loss Analysis
+
+Track monthly:
+- Win rate by competitor
+- Top win reasons (product fit, ease of use, price)
+- Top loss reasons (missing feature, price, relationship)
+- Action items for product, sales, marketing
+
+---
+
+## Product Launch Planning
+
+Plan launches by tier:
+
+| Tier | Scope | Prep Time | Budget |
+|------|-------|-----------|--------|
+| 1 | New product, major feature | 6-8 weeks | $50-100k |
+| 2 | Significant feature, integration | 3-4 weeks | $10-25k |
+| 3 | Small improvement | 1 week | &lt;$5k |
+
+### Tier 1 Launch Workflow
+
+Execute major product launch:
+
+1. Kickoff meeting with Product, Marketing, Sales, CS
+2. Define goals (pipeline $, MQLs, press coverage)
+3. Develop positioning and messaging
+4. Create sales enablement (deck, demo, battlecard)
+5. Build campaign assets (landing page, emails, ads)
+6. Train sales and CS teams
+7. Execute launch day (press, email, ads, outbound)
+8. Monitor and optimize for 30 days
+9. **Validation:** Pipeline on track to goal by week 2
+
+### Launch Day Checklist
+
+- [ ] Press release distributed
+- [ ] Email announcement sent
+- [ ] Social media posts live
+- [ ] Paid ads at full budget
+- [ ] Sales outbound blitz launched
+- [ ] In-app notification active
+- [ ] Metrics monitored every 2 hours
+
+### Launch Metrics
+
+| Metric | Leading (Daily) | Lagging (Weekly) |
+|--------|-----------------|------------------|
+| Traffic | Landing page visitors | - |
+| Engagement | Demo requests, signups | Feature adoption % |
+| Pipeline | MQLs generated | SQLs, pipeline $ |
+| Revenue | - | Deals closed, revenue |
+
+---
+
+## Sales Enablement
+
+Equip sales team with PMM assets:
+
+1. Create sales deck (15-20 slides, visual-first)
+2. Build one-pagers (product, competitive, case study)
+3. Develop demo script (30-45 min with discovery)
+4. Write email templates (outreach, follow-up, closing)
+5. Create ROI calculator (input costs, output savings)
+6. Conduct monthly enablement calls
+7. Deliver quarterly training (positioning, competitive)
+8. **Validation:** Sales uses assets in 80%+ of opportunities
+
+### Sales Deck Structure
+
+| Slide | Content |
+|-------|---------|
+| 1-2 | Title, agenda |
+| 3-4 | Company intro, problem statement |
+| 5-7 | Solution, key benefits, demo |
+| 8-10 | Differentiation, case study, pricing |
+| 11-12 | Implementation, support, next steps |
+
+### Demo Flow
+
+```
+1. Intro (2 min): Who we are, agenda
+2. Discovery (5 min): Their needs, pain points
+3. Demo (20 min): Product focused on their use case
+4. Q&amp;A (10 min): Objection handling
+5. Next steps (3 min): Trial, POC, proposal
+```
+
+### Sales-Marketing Handoff
+
+| Handoff | Frequency | Content |
+|---------|-----------|---------|
+| Weekly sync | 30 min | Win/loss, competitive, new assets |
+| Monthly enablement | 60 min | Product updates, training |
+| Quarterly review | Half-day | Results, strategy, planning |
+
+---
+
+## International Expansion
+
+Enter new markets systematically:
+
+1. Validate market demand (inbound leads, TAM analysis)
+2. Localize website, pricing, legal
+3. Establish sales coverage (hire or agency)
+4. Adapt messaging for cultural fit
+5. Build local partnerships and references
+6. Launch localized campaigns
+7. Monitor CAC and conversion by market
+8. **Validation:** 3+ paying customers from market in first 90 days
+
+### Market Priority (Series A)
+
+| Market | Timeline | Budget % | Target ARR |
+|--------|----------|----------|------------|
+| US | Months 1-6 | 50% | $1M |
+| UK | Months 4-9 | 20% | $500k |
+| DACH | Months 7-12 | 15% | $300k |
+| France | Months 10-15 | 10% | $200k |
+| Canada | Months 7-12 | 5% | $100k |
+
+### Localization Checklist
+
+- [ ] Website translation (professional, not machine)
+- [ ] Currency and pricing localized
+- [ ] Local phone number and address
+- [ ] Legal compliance (GDPR, PIPEDA)
+- [ ] Local payment methods
+- [ ] Sales coverage during local hours
+- [ ] Local case studies and references
+
+---
+
+## Reference Documentation
+
+### Positioning Frameworks
+
+`references/positioning-frameworks.md` contains:
+
+- April Dunford 5-step positioning process
+- Geoffrey Moore positioning statement template
+- Positioning validation interview protocol
+- Competitive positioning map construction
+
+### Launch Checklists
+
+`references/launch-checklists.md` contains:
+
+- Tier 1/2/3 launch checklists
+- Week-by-week launch timeline
+- Launch day runbook
+- Post-launch metrics dashboard
+
+### International GTM
+
+`references/international-gtm.md` contains:
+
+- US, UK, DACH, France, Canada playbooks
+- Market-specific channel mix and messaging
+- Localization requirements per market
+- Entry timeline and budget allocation
+
+### Messaging Templates
+
+`references/messaging-templates.md` contains:
+
+- Value proposition formulas
+- Persona-specific messaging
+- Competitive response scripts
+- Objection handling templates
+- Channel-specific copy (landing pages, emails, ads)
+
+---
+
+## PMM KPIs
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Product adoption | &gt;40% in 90 days | Feature usage after launch |
+| Win rate | &gt;30% competitive | Deals won vs. competitors |
+| Sales velocity | -20% YoY | Days from SQL to close |
+| Deal size | +25% YoY | Average contract value |
+| Launch pipeline | 3:1 ROMI | Pipeline $ : marketing spend |
+
+---
+
+## Quick Reference
+
+### PMM Monthly Rhythm
+
+| Week | Focus |
+|------|-------|
+| 1 | Review metrics, update battlecards |
+| 2 | Create assets, publish content |
+| 3 | Support launches, optimize campaigns |
+| 4 | Monthly report, plan next month |
+
+## Proactive Triggers
+
+- **No documented positioning** -- Without clear positioning, all marketing is guesswork. Start with April Dunford framework.
+- **Messaging differs across channels** -- Inconsistent story confuses buyers. Align messaging hierarchy across all touchpoints.
+- **No ICP defined** -- Selling to everyone means selling to no one. Define ICP before any campaign spend.
+- **Competitor repositioning** -- Market shift detected. Review your positioning and update battlecards.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| &quot;Position my product&quot; | Positioning framework (April Dunford method) with completed output |
+| &quot;GTM strategy&quot; | Go-to-market plan with channels, messaging, and timeline |
+| &quot;Competitive positioning&quot; | Positioning map with competitive gaps and opportunities |
+| &quot;Sales enablement&quot; | Sales deck structure, battlecards, and demo flow |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **marketing-demand-acquisition**: For executing acquisition campaigns planned by PMM.
+- **campaign-analytics**: For measuring launch and campaign effectiveness.
+- **content-creator**: For creating content assets defined in PMM strategy.
+- **social-media-analyzer**: For tracking social media performance of PMM campaigns.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning resonates internally but customers do not repeat it | Positioning built from company perspective, not customer language | Rerun April Dunford methodology starting from competitive alternatives, not from product features |
+| Win rate against specific competitor below 25% | Battlecard outdated or sales team not using it | Run win_loss_analyzer.py to identify loss patterns; update battlecard monthly; validate 80%+ sales usage |
+| GTM motion producing high MQLs but low pipeline conversion | Wrong GTM motion for ACV and buyer type; marketing-led when should be sales-led | Reassess motion using gtm_planner.py; for ACV &gt;$25K, shift to sales-led or hybrid PLG+sales |
+| Sales enablement assets gathering dust | Assets created without sales input; format does not match how sales actually works | Co-create assets with sales; survey sales on what they need; track asset usage in deal cycles |
+| International expansion burning cash with zero pipeline | Market entered without validating demand (inbound signal, TAM) | Validate 3+ paying customers from market in first 90 days; if not, pause and reassess market priority |
+| Competitive intelligence always reactive to lost deals | No proactive monitoring system; battlecards only updated post-loss | Set up monthly competitor monitoring (website, pricing, job postings, G2 reviews); update battlecards proactively |
+| Messaging differs across website, sales deck, and ads | No messaging hierarchy documented; each team creates independently | Build messaging hierarchy (headline &gt; subhead &gt; benefits &gt; features &gt; proof) and enforce across all touchpoints |
+
+---
+
+## Success Criteria
+
+- Positioning validated with 10+ customer interviews; 7+ describe value unprompted
+- Win rate above 30% in competitive deals, measured and tracked monthly
+- Sales velocity improves 20%+ YoY (days from SQL to close decreasing)
+- Sales team uses battlecards in 80%+ of competitive opportunities
+- Product adoption exceeds 40% within 90 days of launch
+- GTM plan generates 3:1 pipeline-to-marketing-spend ROMI
+- Messaging hierarchy consistent across all customer-facing touchpoints
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Product positioning (April Dunford methodology), ICP definition and validation, competitive intelligence and battlecards, GTM strategy and motion selection (PLG, sales-led, marketing-led, community-led), product launch planning, sales enablement, win/loss analysis, international expansion planning, messaging hierarchy, PMM KPIs.
+
+**Out of Scope:** Brand identity and visual design (see brand-guidelines skill), demand generation execution (see marketing-demand-acquisition skill), content creation (see content-creator skill), pricing strategy optimization, sales process design.
+
+**Limitations:** Positioning frameworks require real customer input to be effective — internally generated positioning is unreliable. Win/loss analysis requires honest deal outcome data from sales; incomplete data produces misleading patterns. GTM motion recommendations are based on ACV and buyer type heuristics; edge cases may require hybrid approaches. International expansion timelines assume US-first model and may not apply to non-US companies.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/gtm_planner.py` | Generate GTM plans with motion selection, channel strategy, and timeline | `python scripts/gtm_planner.py config.json --demo` |
+| `scripts/win_loss_analyzer.py` | Analyze deal outcomes by competitor, segment, and reason | `python scripts/win_loss_analyzer.py deals.json --demo` |
+| `scripts/battlecard_generator.py` | Generate competitive battlecards with feature comparison and objection handling | `python scripts/battlecard_generator.py competitor.json --demo` |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Marketing Strategy Pmm&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Marketing Strategy Pmm&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Marketing Strategy Pmm in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Marketing Strategy Pmm&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Marketing Strategy Pmm&quot;
+4. Description: &quot;Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/marketing-strategy-pmm/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Marketing Strategy Pmm&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Marketing Strategy &amp; PMM
+
+Product marketing patterns for positioning, GTM strategy, and competitive intelligence.
+
+---
+
+## Table of Contents
+
+- [ICP Definition Workflow](#icp-definition-workflow)
+- [Positioning Development](#positioning-development)
+- [Competitive Intelligence](#competitive-intelligence)
+- [Product Launch Planning](#product-launch-planning)
+- [Sales Enablement](#sales-enablement)
+- [International Expansion](#international-expansion)
+- [Reference Documentation](#reference-documentation)
+
+---
+
+## ICP Definition Workflow
+
+Define ideal customer profile for targeting:
+
+1. Analyze existing customers (top 20% by LTV)
+2. Identify common firmographics (size, industry, revenue)
+3. Map technographics (tools, maturity, integrations)
+4. Document psychographics (pain level, motivation, risk tolerance)
+5. Define 3-5 buyer personas (economic, technical, user)
+6. Validate against sales cycle and churn data
+7. Score prospects A/B/C/D based on ICP fit
+8. **Validation:** A-fit customers have lowest churn and fastest close
+
+### Firmographics Template
+
+| Dimension | Target Range | Rationale |
+|-----------|--------------|-----------|
+| Employees | 50-5000 | Series A sweet spot |
+| Revenue | $5M-$500M | Budget available |
+| Industry | SaaS, Tech, Services | Product fit |
+| Geography | US, UK, DACH | Market priority |
+| Funding | Seed to Growth | Willing to adopt |
+
+### Buyer Personas
+
+**Economic Buyer** (signs contract):
+- Title: VP, Director, Head of [Department]
+- Goals: ROI, team productivity, cost reduction
+- Messaging: Business outcomes, ROI, case studies
+
+**Technical Buyer** (evaluates product):
+- Title: Engineer, Architect, Tech Lead
+- Goals: Technical fit, easy integration
+- Messaging: Architecture, security, documentation
+
+**User/Champion** (advocates internally):
+- Title: Manager, Team Lead, Power User
+- Goals: Makes job easier, quick wins
+- Messaging: UX, ease of use, time savings
+
+### ICP Validation Checklist
+
+- [ ] 5+ paying customers match this profile
+- [ ] Fastest sales cycles (&lt; median)
+- [ ] Highest LTV (&gt; median)
+- [ ] Lowest churn (&lt; 5% annual)
+- [ ] Strong product engagement
+- [ ] Willing to do case studies
+
+---
+
+## Positioning Development
+
+Develop positioning using April Dunford methodology:
+
+1. List competitive alternatives (direct, adjacent, status quo)
+2. Isolate unique attributes (features only you have)
+3. Map attributes to customer value (why it matters)
+4. Define best-fit customers (who cares most)
+5. Choose market category (head-to-head, niche, new category)
+6. Layer on relevant trends (timing justification)
+7. Test with 10+ customer interviews
+8. **Validation:** 7+ customers describe value unprompted
+
+### Positioning Statement Template
+
+```
+FOR [target customer]
+WHO [statement of need]
+THE [product] IS A [category]
+THAT [key benefit]
+UNLIKE [competitive alternative]
+OUR PRODUCT [primary differentiation]
+```
+
+### Value Proposition Formula
+
+Template: `[Product] helps [Target Customer] [Achieve Goal] by [Unique Approach]`
+
+Example: &quot;Acme helps mid-market SaaS teams ship 2x faster by automating project workflows with AI&quot;
+
+### Messaging Hierarchy
+
+| Level | Content | Example |
+|-------|---------|---------|
+| Headline | 5-7 words | &quot;Ship faster with AI automation&quot; |
+| Subhead | 1 sentence | &quot;Automate workflows so teams focus on what matters&quot; |
+| Benefits | 3-4 bullets | Speed, quality, collaboration, cost |
+| Features | Supporting evidence | AI automation → 10 hrs/week saved |
+| Proof | Social proof | Customer logos, stats, case studies |
+
+---
+
+## Competitive Intelligence
+
+Build competitive knowledge base:
+
+1. Identify tier 1 (direct), tier 2 (adjacent), tier 3 (status quo)
+2. Sign up for competitor products (hands-on evaluation)
+3. Monitor competitor websites, pricing, messaging
+4. Analyze sales call recordings for competitor mentions
+5. Read G2/Capterra reviews (pros and cons)
+6. Track competitor job postings (roadmap signals)
+7. Update battlecards monthly
+8. **Validation:** Sales team uses battlecards in 80%+ competitive deals
+
+### Competitive Tier Structure
+
+| Tier | Definition | Examples |
+|------|------------|----------|
+| 1 | Direct competitor, same category | [Competitor A, B] |
+| 2 | Adjacent solution, overlapping use case | [Alt Solution C, D] |
+| 3 | Status quo (what they do today) | Spreadsheets, manual, in-house |
+
+### Battlecard Template
+
+```
+COMPETITOR: [Name]
+OVERVIEW: Founded [year], Funding [stage], Size [employees]
+
+POSITIONING:
+- They say: &quot;[Their claim]&quot;
+- Reality: [Your assessment]
+
+STRENGTHS:
+1. [What they do well]
+2. [What they do well]
+
+WEAKNESSES:
+1. [Where they fall short]
+2. [Where they fall short]
+
+OUR ADVANTAGES:
+1. [Your advantage + evidence]
+2. [Your advantage + evidence]
+
+WHEN WE WIN:
+- [Scenario where you win]
+
+WHEN WE LOSE:
+- [Scenario where they win]
+
+TALK TRACK:
+Objection: &quot;[Common objection]&quot;
+Response: &quot;[Your response]&quot;
+```
+
+### Win/Loss Analysis
+
+Track monthly:
+- Win rate by competitor
+- Top win reasons (product fit, ease of use, price)
+- Top loss reasons (missing feature, price, relationship)
+- Action items for product, sales, marketing
+
+---
+
+## Product Launch Planning
+
+Plan launches by tier:
+
+| Tier | Scope | Prep Time | Budget |
+|------|-------|-----------|--------|
+| 1 | New product, major feature | 6-8 weeks | $50-100k |
+| 2 | Significant feature, integration | 3-4 weeks | $10-25k |
+| 3 | Small improvement | 1 week | &lt;$5k |
+
+### Tier 1 Launch Workflow
+
+Execute major product launch:
+
+1. Kickoff meeting with Product, Marketing, Sales, CS
+2. Define goals (pipeline $, MQLs, press coverage)
+3. Develop positioning and messaging
+4. Create sales enablement (deck, demo, battlecard)
+5. Build campaign assets (landing page, emails, ads)
+6. Train sales and CS teams
+7. Execute launch day (press, email, ads, outbound)
+8. Monitor and optimize for 30 days
+9. **Validation:** Pipeline on track to goal by week 2
+
+### Launch Day Checklist
+
+- [ ] Press release distributed
+- [ ] Email announcement sent
+- [ ] Social media posts live
+- [ ] Paid ads at full budget
+- [ ] Sales outbound blitz launched
+- [ ] In-app notification active
+- [ ] Metrics monitored every 2 hours
+
+### Launch Metrics
+
+| Metric | Leading (Daily) | Lagging (Weekly) |
+|--------|-----------------|------------------|
+| Traffic | Landing page visitors | - |
+| Engagement | Demo requests, signups | Feature adoption % |
+| Pipeline | MQLs generated | SQLs, pipeline $ |
+| Revenue | - | Deals closed, revenue |
+
+---
+
+## Sales Enablement
+
+Equip sales team with PMM assets:
+
+1. Create sales deck (15-20 slides, visual-first)
+2. Build one-pagers (product, competitive, case study)
+3. Develop demo script (30-45 min with discovery)
+4. Write email templates (outreach, follow-up, closing)
+5. Create ROI calculator (input costs, output savings)
+6. Conduct monthly enablement calls
+7. Deliver quarterly training (positioning, competitive)
+8. **Validation:** Sales uses assets in 80%+ of opportunities
+
+### Sales Deck Structure
+
+| Slide | Content |
+|-------|---------|
+| 1-2 | Title, agenda |
+| 3-4 | Company intro, problem statement |
+| 5-7 | Solution, key benefits, demo |
+| 8-10 | Differentiation, case study, pricing |
+| 11-12 | Implementation, support, next steps |
+
+### Demo Flow
+
+```
+1. Intro (2 min): Who we are, agenda
+2. Discovery (5 min): Their needs, pain points
+3. Demo (20 min): Product focused on their use case
+4. Q&amp;A (10 min): Objection handling
+5. Next steps (3 min): Trial, POC, proposal
+```
+
+### Sales-Marketing Handoff
+
+| Handoff | Frequency | Content |
+|---------|-----------|---------|
+| Weekly sync | 30 min | Win/loss, competitive, new assets |
+| Monthly enablement | 60 min | Product updates, training |
+| Quarterly review | Half-day | Results, strategy, planning |
+
+---
+
+## International Expansion
+
+Enter new markets systematically:
+
+1. Validate market demand (inbound leads, TAM analysis)
+2. Localize website, pricing, legal
+3. Establish sales coverage (hire or agency)
+4. Adapt messaging for cultural fit
+5. Build local partnerships and references
+6. Launch localized campaigns
+7. Monitor CAC and conversion by market
+8. **Validation:** 3+ paying customers from market in first 90 days
+
+### Market Priority (Series A)
+
+| Market | Timeline | Budget % | Target ARR |
+|--------|----------|----------|------------|
+| US | Months 1-6 | 50% | $1M |
+| UK | Months 4-9 | 20% | $500k |
+| DACH | Months 7-12 | 15% | $300k |
+| France | Months 10-15 | 10% | $200k |
+| Canada | Months 7-12 | 5% | $100k |
+
+### Localization Checklist
+
+- [ ] Website translation (professional, not machine)
+- [ ] Currency and pricing localized
+- [ ] Local phone number and address
+- [ ] Legal compliance (GDPR, PIPEDA)
+- [ ] Local payment methods
+- [ ] Sales coverage during local hours
+- [ ] Local case studies and references
+
+---
+
+## Reference Documentation
+
+### Positioning Frameworks
+
+`references/positioning-frameworks.md` contains:
+
+- April Dunford 5-step positioning process
+- Geoffrey Moore positioning statement template
+- Positioning validation interview protocol
+- Competitive positioning map construction
+
+### Launch Checklists
+
+`references/launch-checklists.md` contains:
+
+- Tier 1/2/3 launch checklists
+- Week-by-week launch timeline
+- Launch day runbook
+- Post-launch metrics dashboard
+
+### International GTM
+
+`references/international-gtm.md` contains:
+
+- US, UK, DACH, France, Canada playbooks
+- Market-specific channel mix and messaging
+- Localization requirements per market
+- Entry timeline and budget allocation
+
+### Messaging Templates
+
+`references/messaging-templates.md` contains:
+
+- Value proposition formulas
+- Persona-specific messaging
+- Competitive response scripts
+- Objection handling templates
+- Channel-specific copy (landing pages, emails, ads)
+
+---
+
+## PMM KPIs
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Product adoption | &gt;40% in 90 days | Feature usage after launch |
+| Win rate | &gt;30% competitive | Deals won vs. competitors |
+| Sales velocity | -20% YoY | Days from SQL to close |
+| Deal size | +25% YoY | Average contract value |
+| Launch pipeline | 3:1 ROMI | Pipeline $ : marketing spend |
+
+---
+
+## Quick Reference
+
+### PMM Monthly Rhythm
+
+| Week | Focus |
+|------|-------|
+| 1 | Review metrics, update battlecards |
+| 2 | Create assets, publish content |
+| 3 | Support launches, optimize campaigns |
+| 4 | Monthly report, plan next month |
+
+## Proactive Triggers
+
+- **No documented positioning** -- Without clear positioning, all marketing is guesswork. Start with April Dunford framework.
+- **Messaging differs across channels** -- Inconsistent story confuses buyers. Align messaging hierarchy across all touchpoints.
+- **No ICP defined** -- Selling to everyone means selling to no one. Define ICP before any campaign spend.
+- **Competitor repositioning** -- Market shift detected. Review your positioning and update battlecards.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| &quot;Position my product&quot; | Positioning framework (April Dunford method) with completed output |
+| &quot;GTM strategy&quot; | Go-to-market plan with channels, messaging, and timeline |
+| &quot;Competitive positioning&quot; | Positioning map with competitive gaps and opportunities |
+| &quot;Sales enablement&quot; | Sales deck structure, battlecards, and demo flow |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **marketing-demand-acquisition**: For executing acquisition campaigns planned by PMM.
+- **campaign-analytics**: For measuring launch and campaign effectiveness.
+- **content-creator**: For creating content assets defined in PMM strategy.
+- **social-media-analyzer**: For tracking social media performance of PMM campaigns.
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning resonates internally but customers do not repeat it | Positioning built from company perspective, not customer language | Rerun April Dunford methodology starting from competitive alternatives, not from product features |
+| Win rate against specific competitor below 25% | Battlecard outdated or sales team not using it | Run win_loss_analyzer.py to identify loss patterns; update battlecard monthly; validate 80%+ sales usage |
+| GTM motion producing high MQLs but low pipeline conversion | Wrong GTM motion for ACV and buyer type; marketing-led when should be sales-led | Reassess motion using gtm_planner.py; for ACV &gt;$25K, shift to sales-led or hybrid PLG+sales |
+| Sales enablement assets gathering dust | Assets created without sales input; format does not match how sales actually works | Co-create assets with sales; survey sales on what they need; track asset usage in deal cycles |
+| International expansion burning cash with zero pipeline | Market entered without validating demand (inbound signal, TAM) | Validate 3+ paying customers from market in first 90 days; if not, pause and reassess market priority |
+| Competitive intelligence always reactive to lost deals | No proactive monitoring system; battlecards only updated post-loss | Set up monthly competitor monitoring (website, pricing, job postings, G2 reviews); update battlecards proactively |
+| Messaging differs across website, sales deck, and ads | No messaging hierarchy documented; each team creates independently | Build messaging hierarchy (headline &gt; subhead &gt; benefits &gt; features &gt; proof) and enforce across all touchpoints |
+
+---
+
+## Success Criteria
+
+- Positioning validated with 10+ customer interviews; 7+ describe value unprompted
+- Win rate above 30% in competitive deals, measured and tracked monthly
+- Sales velocity improves 20%+ YoY (days from SQL to close decreasing)
+- Sales team uses battlecards in 80%+ of competitive opportunities
+- Product adoption exceeds 40% within 90 days of launch
+- GTM plan generates 3:1 pipeline-to-marketing-spend ROMI
+- Messaging hierarchy consistent across all customer-facing touchpoints
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Product positioning (April Dunford methodology), ICP definition and validation, competitive intelligence and battlecards, GTM strategy and motion selection (PLG, sales-led, marketing-led, community-led), product launch planning, sales enablement, win/loss analysis, international expansion planning, messaging hierarchy, PMM KPIs.
+
+**Out of Scope:** Brand identity and visual design (see brand-guidelines skill), demand generation execution (see marketing-demand-acquisition skill), content creation (see content-creator skill), pricing strategy optimization, sales process design.
+
+**Limitations:** Positioning frameworks require real customer input to be effective — internally generated positioning is unreliable. Win/loss analysis requires honest deal outcome data from sales; incomplete data produces misleading patterns. GTM motion recommendations are based on ACV and buyer type heuristics; edge cases may require hybrid approaches. International expansion timelines assume US-first model and may not apply to non-US companies.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/gtm_planner.py` | Generate GTM plans with motion selection, channel strategy, and timeline | `python scripts/gtm_planner.py config.json --demo` |
+| `scripts/win_loss_analyzer.py` | Analyze deal outcomes by competitor, segment, and reason | `python scripts/win_loss_analyzer.py deals.json --demo` |
+| `scripts/battlecard_generator.py` | Generate competitive battlecards with feature comparison and objection handling | `python scripts/battlecard_generator.py competitor.json --demo` |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Marketing Strategy Pmm&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Marketing Strategy Pmm&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Marketing Strategy Pmm in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Marketing Strategy Pmm&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Marketing Strategy Pmm&quot;
+4. Description: &quot;Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches. Covers April Dunford positioning, ICP definition, competitive battlecards, launch playbooks, and ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/marketing-strategy-pmm/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

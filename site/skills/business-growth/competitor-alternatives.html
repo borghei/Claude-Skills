@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Competitor Alternatives (Business &amp; Growth domain).
 
 Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content archite...
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/competitor-alternatives
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Competitor Alternatives (Business &amp; Growth domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Competitor Alternatives (Business &amp; Growth domain).
 
 Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content archite...
 
@@ -431,7 +453,1004 @@ https://github.com/borghei/Claude-Skills/tree/main/competitor-alternatives
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Competitor Alternatives&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Competitor &amp; Alternative Pages
+
+Production-grade framework for creating competitor comparison and alternative pages. Covers 4 page formats, centralized competitor data architecture, deep research methodology, SEO optimization, content templates, and ongoing maintenance strategy. Designed for both SEO traffic capture and sales enablement.
+
+---
+
+## Table of Contents
+
+- [When to Use](#when-to-use)
+- [Core Principles](#core-principles)
+- [The 4 Page Formats](#the-4-page-formats)
+- [Content Architecture](#content-architecture)
+- [Research Methodology](#research-methodology)
+- [Essential Content Sections](#essential-content-sections)
+- [SEO Strategy](#seo-strategy)
+- [Maintenance and Updates](#maintenance-and-updates)
+- [Quality Standards](#quality-standards)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## When to Use
+
+| Trigger | Action |
+|---------|--------|
+| Prospects comparing you to competitors | Create vs-pages for top 3 competitors |
+| Search volume exists for &quot;[competitor] alternative&quot; | Create singular alternative pages |
+| Sales team needs battle card content | Create vs-pages with objection handling |
+| Competitor has comparison pages about you | Create counter-comparison pages |
+| SEO gap on competitor-branded keywords | Build full alternative page set |
+
+---
+
+## Core Principles
+
+### 1. Honesty Builds Trust
+- Acknowledge competitor strengths explicitly
+- Be accurate about your own limitations
+- Readers are actively comparing -- they will verify your claims
+- A dishonest comparison page damages your brand more than no page at all
+
+### 2. Help Them Decide (Not Just Sell)
+- Different tools genuinely fit different needs
+- Be explicit about who you are best for AND who the competitor is best for
+- Reduce evaluation friction -- save prospects research time
+
+### 3. Depth Over Checkbox Tables
+- Go beyond feature checklists (every competitor does those)
+- Explain WHY differences matter for specific use cases
+- Include real scenarios and workflows
+- Show, do not just tell
+
+### 4. Single Source of Truth
+- Centralize competitor data -- do not maintain facts across 10 pages
+- Updates propagate to all pages automatically
+- Track last-verified date per data point
+
+---
+
+## The 4 Page Formats
+
+### Format 1: [Competitor] Alternative (Singular)
+
+**Intent:** User is actively looking to switch FROM a specific competitor.
+
+**URL:** `/alternatives/[competitor]` or `/[competitor]-alternative`
+
+**Keywords:** &quot;[Competitor] alternative&quot;, &quot;alternative to [Competitor]&quot;, &quot;switch from [Competitor]&quot;
+
+**Page Structure:**
+
+```
+1. Why people look for alternatives (validate their pain, 2-3 paragraphs)
+2. TL;DR: You as the alternative (quick positioning, 3-4 bullets)
+3. Detailed comparison (features, pricing, support -- paragraph format, not just tables)
+4. Who should switch (and who should NOT -- be honest)
+5. Migration path (what transfers, what needs reconfiguration)
+6. Testimonials from customers who switched
+7. CTA: Start free trial or request demo
+```
+
+### Format 2: [Competitor] Alternatives (Plural)
+
+**Intent:** User is researching options broadly, earlier in the buying journey.
+
+**URL:** `/alternatives/[competitor]-alternatives` or `/best-[competitor]-alternatives`
+
+**Keywords:** &quot;[Competitor] alternatives&quot;, &quot;best [Competitor] alternatives&quot;, &quot;tools like [Competitor]&quot;
+
+**Page Structure:**
+
+```
+1. Why people look for alternatives (common pain points, 2-3 paragraphs)
+2. What to look for in an alternative (evaluation criteria framework)
+3. List of 5-7 alternatives (you first, but include real options)
+4. Summary comparison table
+5. Detailed breakdown of each alternative (150-200 words each)
+6. Recommendation by use case (&quot;Best for [X]: [Tool]&quot;)
+7. CTA
+```
+
+**Important:** Include 5-7 REAL alternatives. Being genuinely helpful ranks better and builds trust.
+
+### Format 3: You vs [Competitor]
+
+**Intent:** User is directly comparing you to a specific competitor.
+
+**URL:** `/vs/[competitor]` or `/compare/[you]-vs-[competitor]`
+
+**Keywords:** &quot;[You] vs [Competitor]&quot;, &quot;[Competitor] vs [You]&quot;
+
+**Page Structure:**
+
+```
+1. TL;DR summary (key differences in 2-3 sentences)
+2. At-a-glance comparison table (8-12 dimensions)
+3. Detailed comparison by category (paragraph format per category):
+   - Features
+   - Pricing
+   - Ease of use / UX
+   - Support and documentation
+   - Integrations
+   - Security and compliance
+4. Who [You] is best for (3-4 bullets)
+5. Who [Competitor] is best for (3-4 bullets -- be honest)
+6. What customers say (testimonials from switchers)
+7. Migration support
+8. CTA
+```
+
+### Format 4: [Competitor A] vs [Competitor B]
+
+**Intent:** User is comparing two competitors (neither is you directly).
+
+**URL:** `/compare/[competitor-a]-vs-[competitor-b]`
+
+**Page Structure:**
+
+```
+1. Overview of both products (neutral, factual)
+2. Comparison by category (same categories as Format 3)
+3. Who each is best for
+4. &quot;Consider a third option&quot; (introduce yourself naturally)
+5. Three-way comparison table (both competitors + you)
+6. CTA
+```
+
+**Why this works:** Captures competitor-branded search traffic, positions you as a knowledgeable authority, and introduces you to buyers who might not have considered you.
+
+---
+
+## Content Architecture
+
+### Centralized Competitor Data
+
+Create a single data file per competitor that feeds all comparison pages.
+
+**Competitor Data Structure:**
+
+```
+Competitor: [Name]
+Last Verified: [Date]
+Website: [URL]
+
+Positioning:
+  - Tagline: [Their tagline]
+  - Target audience: [Who they target]
+  - Primary differentiator: [What they claim is unique]
+
+Pricing:
+  - Free tier: [Yes/No, details]
+  - Entry price: [$X/mo]
+  - Mid-tier price: [$X/mo]
+  - Enterprise: [Custom / $X/mo]
+  - Billing: [Monthly, Annual, Both]
+  - Trial: [Length, CC required?]
+
+Features:
+  - [Category 1]: [Rating 1-5, notes]
+  - [Category 2]: [Rating 1-5, notes]
+  - [Category 3]: [Rating 1-5, notes]
+
+Strengths:
+  - [Strength 1 with evidence]
+  - [Strength 2 with evidence]
+
+Weaknesses:
+  - [Weakness 1 with evidence source]
+  - [Weakness 2 with evidence source]
+
+Best For: [Description of ideal customer]
+Not Ideal For: [Description of poor fit]
+
+Common Complaints (from reviews):
+  - [Complaint 1] (source: G2/Capterra/etc.)
+  - [Complaint 2]
+  - [Complaint 3]
+
+Migration Notes:
+  - Data export: [Available? Format?]
+  - API migration: [Available?]
+  - Switching time: [Estimated]
+```
+
+---
+
+## Research Methodology
+
+### Deep Research Process
+
+For each competitor:
+
+1. **Sign up and use the product** -- Create a real account, go through onboarding, test core workflows. There is no substitute for hands-on experience.
+2. **Pricing verification** -- Screenshot current pricing page. Note what is included at each tier. Check for hidden costs.
+3. **Review mining** -- Read 50+ reviews on G2, Capterra, TrustRadius. Categorize into praise themes, complaint themes, and feature requests.
+4. **Customer feedback** -- Talk to your customers who switched from (or to) this competitor. Capture switching reasons and experience quotes.
+5. **Content audit** -- Review their positioning, their comparison pages about you (if any), their changelog, their blog.
+6. **Financial/growth signals** -- Check Crunchbase for funding, LinkedIn for employee count trends, job postings for strategic direction.
+
+### Verification Schedule
+
+| Frequency | What to Verify |
+|-----------|---------------|
+| Monthly | Pricing (check for changes) |
+| Quarterly | Feature set, major product updates |
+| When notified | Customer reports competitor change |
+| Annually | Full refresh of all competitor data |
+
+---
+
+## Essential Content Sections
+
+### TL;DR Summary
+
+Every comparison page starts with a 2-3 sentence summary for scanners. This is the most-read section.
+
+**Template:** &quot;[Your product] is the better choice if you need [differentiator 1] and [differentiator 2]. [Competitor] is better if [their strength]. The biggest differences are [difference 1] and [difference 2].&quot;
+
+### Paragraph Comparisons (Not Just Tables)
+
+For each comparison dimension, write a paragraph explaining:
+- How each product handles this area
+- Why the differences matter
+- Who the difference matters most to
+
+**Tables complement paragraphs. They do not replace them.**
+
+### Pricing Comparison
+
+Include:
+- Tier-by-tier price comparison
+- What is included at each tier (not just the name)
+- Hidden costs (setup fees, overage charges, add-on pricing)
+- Total cost calculation for a sample team size (e.g., &quot;For a team of 10&quot;)
+
+### Who It Is For
+
+Be explicit about ideal customer for each option:
+
+| Product | Best For | Not Ideal For |
+|---------|----------|---------------|
+| Your product | [Specific persona/use case] | [Honest admission of limitations] |
+| Competitor | [Specific persona/use case] | [Their documented weaknesses] |
+
+### Migration Section
+
+| Element | Content |
+|---------|---------|
+| What transfers | Data, settings, integrations that migrate |
+| What needs reconfiguration | What must be set up fresh |
+| Support offered | Migration assistance, documentation |
+| Estimated time | &quot;Most teams migrate in [timeframe]&quot; |
+| Customer quote | Quote from someone who switched |
+
+---
+
+## SEO Strategy
+
+### Keyword Targeting
+
+| Format | Primary Keywords | Secondary Keywords |
+|--------|-----------------|-------------------|
+| Singular alternative | &quot;[Competitor] alternative&quot; | &quot;switch from [Competitor]&quot;, &quot;replace [Competitor]&quot; |
+| Plural alternatives | &quot;[Competitor] alternatives&quot; | &quot;best [Competitor] alternatives&quot;, &quot;tools like [Competitor]&quot; |
+| Vs page | &quot;[You] vs [Competitor]&quot; | &quot;[Competitor] vs [You]&quot;, &quot;[You] or [Competitor]&quot; |
+| Competitor vs competitor | &quot;[A] vs [B]&quot; | &quot;[B] vs [A]&quot;, &quot;[A] or [B]&quot; |
+
+### On-Page SEO
+
+- Title tag: &quot;[Your Product] vs [Competitor]: Detailed Comparison [Year]&quot;
+- Meta description: Summarize the key difference and who each is best for
+- H1: Match the primary keyword
+- Schema: Consider FAQPage schema for comparison questions
+
+### Internal Linking
+
+- Link between all competitor pages (alternative &lt;-&gt; vs page for same competitor)
+- Link from feature pages to relevant comparisons
+- Link from blog posts mentioning competitors
+- Create a hub page: `/compare/` or `/alternatives/` linking to all comparison content
+
+---
+
+## Maintenance and Updates
+
+### Update Triggers
+
+| Trigger | Action | Priority |
+|---------|--------|----------|
+| Competitor changes pricing | Update pricing comparison on all affected pages | High |
+| Competitor launches major feature | Update feature comparison + add &quot;Recent Changes&quot; note | High |
+| Your product launches feature that closes a gap | Update comparison to reflect new advantage | High |
+| New customer switching testimonial | Add to relevant comparison pages | Medium |
+| Quarterly review cycle | Verify all data points, refresh screenshots | Medium |
+
+### Freshness Signals
+
+- Include &quot;Last updated: [Month Year]&quot; on every comparison page
+- Update the date only when actual content changes are made
+- Add &quot;Recent changes&quot; section at the top when a competitor makes significant updates
+
+---
+
+## Quality Standards
+
+### Legal Safety
+
+- All claims must be verifiable from public sources or customer quotes
+- Do not make claims about competitor uptime, reliability, or security that you cannot verify
+- Use &quot;at the time of writing&quot; or &quot;as of [date]&quot; for factual claims
+- Do not copy competitor content -- summarize and analyze
+
+### Credibility Rules
+
+- Acknowledge genuine competitor strengths (do not be a hit piece)
+- Include &quot;Who [Competitor] is best for&quot; -- this builds trust
+- Use customer quotes from both sides (your customers AND competitor reviews)
+- Cite sources for data claims (review platforms, pricing pages, public reports)
+- Do not use aggressive language or disparaging tone
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Competitor Data File | Structured data per competitor | Centralized competitor profile for all pages |
+| Page Set Plan | Prioritized list | Which pages to build first, with target keywords and estimated search volume |
+| Alternative Page (Singular) | Full page copy | Complete page with all sections |
+| Vs Page | Full page copy | Comparison page with table and narrative sections |
+| Alternatives Page (Plural) | Full page copy | Multi-competitor roundup page |
+| Migration Guide | Reusable content block | Migration copy for inclusion across pages |
+| Hub Page | Linked index | Central page linking to all comparison content |
+
+---
+
+## Related Skills
+
+- **competitive-teardown** -- Use for deep competitive intelligence BEFORE creating pages. Teardown provides the data; this skill produces the content.
+- **seo-audit** -- Use to validate comparison pages meet on-page SEO requirements before publishing.
+- **page-cro** -- Use for optimizing comparison page conversion rates (CTA placement, social proof, layout).
+- **content-creator** -- Use for writing supporting competitive blog content based on comparison data.
+- **programmatic-seo** -- Use when you have 10+ competitors and want to generate comparison pages at scale using templates.
+
+---
+
+## Tool Reference
+
+### 1. comparison_page_planner.py
+
+**Purpose:** Generate a prioritized comparison page plan from competitor data with keyword targets and estimated search volume.
+
+```bash
+python scripts/comparison_page_planner.py competitors.json
+python scripts/comparison_page_planner.py competitors.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitors.json` | Yes | JSON file with competitor names and search volume estimates |
+| `--json` | No | Output results as JSON |
+| `--brand` | No | Your brand name for URL slug generation (default: &quot;your-product&quot;) |
+
+### 2. competitor_data_tracker.py
+
+**Purpose:** Track and manage centralized competitor data files with staleness detection and update reminders.
+
+```bash
+python scripts/competitor_data_tracker.py competitor_profiles/
+python scripts/competitor_data_tracker.py competitor_profiles/ --json
+python scripts/competitor_data_tracker.py competitor_profiles/ --stale-days 60
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitor_profiles/` | Yes | Directory containing competitor profile JSON files |
+| `--json` | No | Output results as JSON |
+| `--stale-days` | No | Number of days before data is considered stale (default: 90) |
+
+### 3. comparison_content_scorer.py
+
+**Purpose:** Score existing comparison page content against quality and SEO best practices.
+
+```bash
+python scripts/comparison_content_scorer.py page_content.json
+python scripts/comparison_content_scorer.py page_content.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `page_content.json` | Yes | JSON file with comparison page content and metadata |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Comparison pages not ranking for target keywords | Thin content or poor on-page SEO | Add 1500+ words of paragraph content (not just tables); ensure H1 matches primary keyword; add FAQ with schema markup |
+| Pages rank but do not convert | Missing CTA or weak value proposition | Add CTA after every major section; include migration section and risk reversal (free trial, no CC); use comparison_content_scorer.py to audit |
+| Competitor data becomes outdated quickly | No update process in place | Use competitor_data_tracker.py with --stale-days 30 for pricing, 90 for features; assign ownership for monthly checks |
+| Sales team does not use comparison content | Pages are too marketing-focused | Create sales-specific versions with objection handling, landmine questions, and talk tracks; test with 3 reps before publishing |
+| Legal pushback on competitor claims | Unverifiable or aggressive claims | Cite public sources for every claim; use &quot;as of [date]&quot; qualifiers; acknowledge competitor strengths honestly |
+| Too many competitors to cover | Trying to create pages for every competitor | Prioritize using comparison_page_planner.py; start with top 3-5 competitors by search volume and deal frequency |
+
+---
+
+## Success Criteria
+
+- Comparison pages ranking on page 1 for &quot;[competitor] alternative&quot; within 6 months
+- Each comparison page converts at 3%+ (visitor to CTA click)
+- All competitor data verified within the last 90 days (use competitor_data_tracker.py)
+- Pages include honest &quot;Who [Competitor] is best for&quot; section (builds trust, reduces bounce)
+- At least 1 customer testimonial from a switcher per comparison page
+- Hub page links to all comparison content with clear navigation
+- Quarterly content refresh with &quot;Last updated&quot; date on every page
+
+---
+
+## Scope &amp; Limitations
+
+- **In scope:** Comparison page content strategy, SEO optimization, competitor data management, content quality scoring, page planning and prioritization
+- **Out of scope:** Primary competitive intelligence gathering (use competitive-teardown), paid advertising strategy, design/development of pages
+- **Legal constraint:** All claims must be verifiable from public sources; avoid disparaging competitors; include &quot;as of [date]&quot; for factual claims
+- **SEO timeline:** Comparison pages typically take 3-6 months to rank; plan for long-term investment
+- **Maintenance cost:** Each competitor page requires ongoing updates; budget for quarterly refreshes
+
+---
+
+## Integration Points
+
+- **competitive-teardown** -- Teardown provides the raw competitive intelligence; this skill transforms it into marketing content
+- **page-cro** -- Use for optimizing comparison page conversion rates after content is published
+- **seo-audit** -- Use to validate comparison pages meet technical SEO requirements before publishing
+- **content-creator** -- Use for writing supporting blog content (competitor comparison blog posts, switching guides)
+- **customer-success-manager** -- When customers mention competitor evaluation, comparison pages can be shared proactively
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Competitor Alternatives&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Competitor Alternatives&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Competitor Alternatives in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Competitor Alternatives&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Competitor Alternatives&quot;
+4. Description: &quot;Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content archite...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/competitor-alternatives/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Competitor Alternatives&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Competitor &amp; Alternative Pages
+
+Production-grade framework for creating competitor comparison and alternative pages. Covers 4 page formats, centralized competitor data architecture, deep research methodology, SEO optimization, content templates, and ongoing maintenance strategy. Designed for both SEO traffic capture and sales enablement.
+
+---
+
+## Table of Contents
+
+- [When to Use](#when-to-use)
+- [Core Principles](#core-principles)
+- [The 4 Page Formats](#the-4-page-formats)
+- [Content Architecture](#content-architecture)
+- [Research Methodology](#research-methodology)
+- [Essential Content Sections](#essential-content-sections)
+- [SEO Strategy](#seo-strategy)
+- [Maintenance and Updates](#maintenance-and-updates)
+- [Quality Standards](#quality-standards)
+- [Output Artifacts](#output-artifacts)
+- [Related Skills](#related-skills)
+
+---
+
+## When to Use
+
+| Trigger | Action |
+|---------|--------|
+| Prospects comparing you to competitors | Create vs-pages for top 3 competitors |
+| Search volume exists for &quot;[competitor] alternative&quot; | Create singular alternative pages |
+| Sales team needs battle card content | Create vs-pages with objection handling |
+| Competitor has comparison pages about you | Create counter-comparison pages |
+| SEO gap on competitor-branded keywords | Build full alternative page set |
+
+---
+
+## Core Principles
+
+### 1. Honesty Builds Trust
+- Acknowledge competitor strengths explicitly
+- Be accurate about your own limitations
+- Readers are actively comparing -- they will verify your claims
+- A dishonest comparison page damages your brand more than no page at all
+
+### 2. Help Them Decide (Not Just Sell)
+- Different tools genuinely fit different needs
+- Be explicit about who you are best for AND who the competitor is best for
+- Reduce evaluation friction -- save prospects research time
+
+### 3. Depth Over Checkbox Tables
+- Go beyond feature checklists (every competitor does those)
+- Explain WHY differences matter for specific use cases
+- Include real scenarios and workflows
+- Show, do not just tell
+
+### 4. Single Source of Truth
+- Centralize competitor data -- do not maintain facts across 10 pages
+- Updates propagate to all pages automatically
+- Track last-verified date per data point
+
+---
+
+## The 4 Page Formats
+
+### Format 1: [Competitor] Alternative (Singular)
+
+**Intent:** User is actively looking to switch FROM a specific competitor.
+
+**URL:** `/alternatives/[competitor]` or `/[competitor]-alternative`
+
+**Keywords:** &quot;[Competitor] alternative&quot;, &quot;alternative to [Competitor]&quot;, &quot;switch from [Competitor]&quot;
+
+**Page Structure:**
+
+```
+1. Why people look for alternatives (validate their pain, 2-3 paragraphs)
+2. TL;DR: You as the alternative (quick positioning, 3-4 bullets)
+3. Detailed comparison (features, pricing, support -- paragraph format, not just tables)
+4. Who should switch (and who should NOT -- be honest)
+5. Migration path (what transfers, what needs reconfiguration)
+6. Testimonials from customers who switched
+7. CTA: Start free trial or request demo
+```
+
+### Format 2: [Competitor] Alternatives (Plural)
+
+**Intent:** User is researching options broadly, earlier in the buying journey.
+
+**URL:** `/alternatives/[competitor]-alternatives` or `/best-[competitor]-alternatives`
+
+**Keywords:** &quot;[Competitor] alternatives&quot;, &quot;best [Competitor] alternatives&quot;, &quot;tools like [Competitor]&quot;
+
+**Page Structure:**
+
+```
+1. Why people look for alternatives (common pain points, 2-3 paragraphs)
+2. What to look for in an alternative (evaluation criteria framework)
+3. List of 5-7 alternatives (you first, but include real options)
+4. Summary comparison table
+5. Detailed breakdown of each alternative (150-200 words each)
+6. Recommendation by use case (&quot;Best for [X]: [Tool]&quot;)
+7. CTA
+```
+
+**Important:** Include 5-7 REAL alternatives. Being genuinely helpful ranks better and builds trust.
+
+### Format 3: You vs [Competitor]
+
+**Intent:** User is directly comparing you to a specific competitor.
+
+**URL:** `/vs/[competitor]` or `/compare/[you]-vs-[competitor]`
+
+**Keywords:** &quot;[You] vs [Competitor]&quot;, &quot;[Competitor] vs [You]&quot;
+
+**Page Structure:**
+
+```
+1. TL;DR summary (key differences in 2-3 sentences)
+2. At-a-glance comparison table (8-12 dimensions)
+3. Detailed comparison by category (paragraph format per category):
+   - Features
+   - Pricing
+   - Ease of use / UX
+   - Support and documentation
+   - Integrations
+   - Security and compliance
+4. Who [You] is best for (3-4 bullets)
+5. Who [Competitor] is best for (3-4 bullets -- be honest)
+6. What customers say (testimonials from switchers)
+7. Migration support
+8. CTA
+```
+
+### Format 4: [Competitor A] vs [Competitor B]
+
+**Intent:** User is comparing two competitors (neither is you directly).
+
+**URL:** `/compare/[competitor-a]-vs-[competitor-b]`
+
+**Page Structure:**
+
+```
+1. Overview of both products (neutral, factual)
+2. Comparison by category (same categories as Format 3)
+3. Who each is best for
+4. &quot;Consider a third option&quot; (introduce yourself naturally)
+5. Three-way comparison table (both competitors + you)
+6. CTA
+```
+
+**Why this works:** Captures competitor-branded search traffic, positions you as a knowledgeable authority, and introduces you to buyers who might not have considered you.
+
+---
+
+## Content Architecture
+
+### Centralized Competitor Data
+
+Create a single data file per competitor that feeds all comparison pages.
+
+**Competitor Data Structure:**
+
+```
+Competitor: [Name]
+Last Verified: [Date]
+Website: [URL]
+
+Positioning:
+  - Tagline: [Their tagline]
+  - Target audience: [Who they target]
+  - Primary differentiator: [What they claim is unique]
+
+Pricing:
+  - Free tier: [Yes/No, details]
+  - Entry price: [$X/mo]
+  - Mid-tier price: [$X/mo]
+  - Enterprise: [Custom / $X/mo]
+  - Billing: [Monthly, Annual, Both]
+  - Trial: [Length, CC required?]
+
+Features:
+  - [Category 1]: [Rating 1-5, notes]
+  - [Category 2]: [Rating 1-5, notes]
+  - [Category 3]: [Rating 1-5, notes]
+
+Strengths:
+  - [Strength 1 with evidence]
+  - [Strength 2 with evidence]
+
+Weaknesses:
+  - [Weakness 1 with evidence source]
+  - [Weakness 2 with evidence source]
+
+Best For: [Description of ideal customer]
+Not Ideal For: [Description of poor fit]
+
+Common Complaints (from reviews):
+  - [Complaint 1] (source: G2/Capterra/etc.)
+  - [Complaint 2]
+  - [Complaint 3]
+
+Migration Notes:
+  - Data export: [Available? Format?]
+  - API migration: [Available?]
+  - Switching time: [Estimated]
+```
+
+---
+
+## Research Methodology
+
+### Deep Research Process
+
+For each competitor:
+
+1. **Sign up and use the product** -- Create a real account, go through onboarding, test core workflows. There is no substitute for hands-on experience.
+2. **Pricing verification** -- Screenshot current pricing page. Note what is included at each tier. Check for hidden costs.
+3. **Review mining** -- Read 50+ reviews on G2, Capterra, TrustRadius. Categorize into praise themes, complaint themes, and feature requests.
+4. **Customer feedback** -- Talk to your customers who switched from (or to) this competitor. Capture switching reasons and experience quotes.
+5. **Content audit** -- Review their positioning, their comparison pages about you (if any), their changelog, their blog.
+6. **Financial/growth signals** -- Check Crunchbase for funding, LinkedIn for employee count trends, job postings for strategic direction.
+
+### Verification Schedule
+
+| Frequency | What to Verify |
+|-----------|---------------|
+| Monthly | Pricing (check for changes) |
+| Quarterly | Feature set, major product updates |
+| When notified | Customer reports competitor change |
+| Annually | Full refresh of all competitor data |
+
+---
+
+## Essential Content Sections
+
+### TL;DR Summary
+
+Every comparison page starts with a 2-3 sentence summary for scanners. This is the most-read section.
+
+**Template:** &quot;[Your product] is the better choice if you need [differentiator 1] and [differentiator 2]. [Competitor] is better if [their strength]. The biggest differences are [difference 1] and [difference 2].&quot;
+
+### Paragraph Comparisons (Not Just Tables)
+
+For each comparison dimension, write a paragraph explaining:
+- How each product handles this area
+- Why the differences matter
+- Who the difference matters most to
+
+**Tables complement paragraphs. They do not replace them.**
+
+### Pricing Comparison
+
+Include:
+- Tier-by-tier price comparison
+- What is included at each tier (not just the name)
+- Hidden costs (setup fees, overage charges, add-on pricing)
+- Total cost calculation for a sample team size (e.g., &quot;For a team of 10&quot;)
+
+### Who It Is For
+
+Be explicit about ideal customer for each option:
+
+| Product | Best For | Not Ideal For |
+|---------|----------|---------------|
+| Your product | [Specific persona/use case] | [Honest admission of limitations] |
+| Competitor | [Specific persona/use case] | [Their documented weaknesses] |
+
+### Migration Section
+
+| Element | Content |
+|---------|---------|
+| What transfers | Data, settings, integrations that migrate |
+| What needs reconfiguration | What must be set up fresh |
+| Support offered | Migration assistance, documentation |
+| Estimated time | &quot;Most teams migrate in [timeframe]&quot; |
+| Customer quote | Quote from someone who switched |
+
+---
+
+## SEO Strategy
+
+### Keyword Targeting
+
+| Format | Primary Keywords | Secondary Keywords |
+|--------|-----------------|-------------------|
+| Singular alternative | &quot;[Competitor] alternative&quot; | &quot;switch from [Competitor]&quot;, &quot;replace [Competitor]&quot; |
+| Plural alternatives | &quot;[Competitor] alternatives&quot; | &quot;best [Competitor] alternatives&quot;, &quot;tools like [Competitor]&quot; |
+| Vs page | &quot;[You] vs [Competitor]&quot; | &quot;[Competitor] vs [You]&quot;, &quot;[You] or [Competitor]&quot; |
+| Competitor vs competitor | &quot;[A] vs [B]&quot; | &quot;[B] vs [A]&quot;, &quot;[A] or [B]&quot; |
+
+### On-Page SEO
+
+- Title tag: &quot;[Your Product] vs [Competitor]: Detailed Comparison [Year]&quot;
+- Meta description: Summarize the key difference and who each is best for
+- H1: Match the primary keyword
+- Schema: Consider FAQPage schema for comparison questions
+
+### Internal Linking
+
+- Link between all competitor pages (alternative &lt;-&gt; vs page for same competitor)
+- Link from feature pages to relevant comparisons
+- Link from blog posts mentioning competitors
+- Create a hub page: `/compare/` or `/alternatives/` linking to all comparison content
+
+---
+
+## Maintenance and Updates
+
+### Update Triggers
+
+| Trigger | Action | Priority |
+|---------|--------|----------|
+| Competitor changes pricing | Update pricing comparison on all affected pages | High |
+| Competitor launches major feature | Update feature comparison + add &quot;Recent Changes&quot; note | High |
+| Your product launches feature that closes a gap | Update comparison to reflect new advantage | High |
+| New customer switching testimonial | Add to relevant comparison pages | Medium |
+| Quarterly review cycle | Verify all data points, refresh screenshots | Medium |
+
+### Freshness Signals
+
+- Include &quot;Last updated: [Month Year]&quot; on every comparison page
+- Update the date only when actual content changes are made
+- Add &quot;Recent changes&quot; section at the top when a competitor makes significant updates
+
+---
+
+## Quality Standards
+
+### Legal Safety
+
+- All claims must be verifiable from public sources or customer quotes
+- Do not make claims about competitor uptime, reliability, or security that you cannot verify
+- Use &quot;at the time of writing&quot; or &quot;as of [date]&quot; for factual claims
+- Do not copy competitor content -- summarize and analyze
+
+### Credibility Rules
+
+- Acknowledge genuine competitor strengths (do not be a hit piece)
+- Include &quot;Who [Competitor] is best for&quot; -- this builds trust
+- Use customer quotes from both sides (your customers AND competitor reviews)
+- Cite sources for data claims (review platforms, pricing pages, public reports)
+- Do not use aggressive language or disparaging tone
+
+---
+
+## Output Artifacts
+
+| Artifact | Format | Description |
+|----------|--------|-------------|
+| Competitor Data File | Structured data per competitor | Centralized competitor profile for all pages |
+| Page Set Plan | Prioritized list | Which pages to build first, with target keywords and estimated search volume |
+| Alternative Page (Singular) | Full page copy | Complete page with all sections |
+| Vs Page | Full page copy | Comparison page with table and narrative sections |
+| Alternatives Page (Plural) | Full page copy | Multi-competitor roundup page |
+| Migration Guide | Reusable content block | Migration copy for inclusion across pages |
+| Hub Page | Linked index | Central page linking to all comparison content |
+
+---
+
+## Related Skills
+
+- **competitive-teardown** -- Use for deep competitive intelligence BEFORE creating pages. Teardown provides the data; this skill produces the content.
+- **seo-audit** -- Use to validate comparison pages meet on-page SEO requirements before publishing.
+- **page-cro** -- Use for optimizing comparison page conversion rates (CTA placement, social proof, layout).
+- **content-creator** -- Use for writing supporting competitive blog content based on comparison data.
+- **programmatic-seo** -- Use when you have 10+ competitors and want to generate comparison pages at scale using templates.
+
+---
+
+## Tool Reference
+
+### 1. comparison_page_planner.py
+
+**Purpose:** Generate a prioritized comparison page plan from competitor data with keyword targets and estimated search volume.
+
+```bash
+python scripts/comparison_page_planner.py competitors.json
+python scripts/comparison_page_planner.py competitors.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitors.json` | Yes | JSON file with competitor names and search volume estimates |
+| `--json` | No | Output results as JSON |
+| `--brand` | No | Your brand name for URL slug generation (default: &quot;your-product&quot;) |
+
+### 2. competitor_data_tracker.py
+
+**Purpose:** Track and manage centralized competitor data files with staleness detection and update reminders.
+
+```bash
+python scripts/competitor_data_tracker.py competitor_profiles/
+python scripts/competitor_data_tracker.py competitor_profiles/ --json
+python scripts/competitor_data_tracker.py competitor_profiles/ --stale-days 60
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `competitor_profiles/` | Yes | Directory containing competitor profile JSON files |
+| `--json` | No | Output results as JSON |
+| `--stale-days` | No | Number of days before data is considered stale (default: 90) |
+
+### 3. comparison_content_scorer.py
+
+**Purpose:** Score existing comparison page content against quality and SEO best practices.
+
+```bash
+python scripts/comparison_content_scorer.py page_content.json
+python scripts/comparison_content_scorer.py page_content.json --json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `page_content.json` | Yes | JSON file with comparison page content and metadata |
+| `--json` | No | Output results as JSON |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Comparison pages not ranking for target keywords | Thin content or poor on-page SEO | Add 1500+ words of paragraph content (not just tables); ensure H1 matches primary keyword; add FAQ with schema markup |
+| Pages rank but do not convert | Missing CTA or weak value proposition | Add CTA after every major section; include migration section and risk reversal (free trial, no CC); use comparison_content_scorer.py to audit |
+| Competitor data becomes outdated quickly | No update process in place | Use competitor_data_tracker.py with --stale-days 30 for pricing, 90 for features; assign ownership for monthly checks |
+| Sales team does not use comparison content | Pages are too marketing-focused | Create sales-specific versions with objection handling, landmine questions, and talk tracks; test with 3 reps before publishing |
+| Legal pushback on competitor claims | Unverifiable or aggressive claims | Cite public sources for every claim; use &quot;as of [date]&quot; qualifiers; acknowledge competitor strengths honestly |
+| Too many competitors to cover | Trying to create pages for every competitor | Prioritize using comparison_page_planner.py; start with top 3-5 competitors by search volume and deal frequency |
+
+---
+
+## Success Criteria
+
+- Comparison pages ranking on page 1 for &quot;[competitor] alternative&quot; within 6 months
+- Each comparison page converts at 3%+ (visitor to CTA click)
+- All competitor data verified within the last 90 days (use competitor_data_tracker.py)
+- Pages include honest &quot;Who [Competitor] is best for&quot; section (builds trust, reduces bounce)
+- At least 1 customer testimonial from a switcher per comparison page
+- Hub page links to all comparison content with clear navigation
+- Quarterly content refresh with &quot;Last updated&quot; date on every page
+
+---
+
+## Scope &amp; Limitations
+
+- **In scope:** Comparison page content strategy, SEO optimization, competitor data management, content quality scoring, page planning and prioritization
+- **Out of scope:** Primary competitive intelligence gathering (use competitive-teardown), paid advertising strategy, design/development of pages
+- **Legal constraint:** All claims must be verifiable from public sources; avoid disparaging competitors; include &quot;as of [date]&quot; for factual claims
+- **SEO timeline:** Comparison pages typically take 3-6 months to rank; plan for long-term investment
+- **Maintenance cost:** Each competitor page requires ongoing updates; budget for quarterly refreshes
+
+---
+
+## Integration Points
+
+- **competitive-teardown** -- Teardown provides the raw competitive intelligence; this skill transforms it into marketing content
+- **page-cro** -- Use for optimizing comparison page conversion rates after content is published
+- **seo-audit** -- Use to validate comparison pages meet technical SEO requirements before publishing
+- **content-creator** -- Use for writing supporting blog content (competitor comparison blog posts, switching guides)
+- **customer-success-manager** -- When customers mention competitor evaluation, comparison pages can be shared proactively
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Competitor Alternatives&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Competitor Alternatives&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Competitor Alternatives in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Competitor Alternatives&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Competitor Alternatives&quot;
+4. Description: &quot;Competitor comparison and alternative page creation for SEO and sales enablement. Covers 4 page formats (singular alternative, plural alternatives, vs pages, competitor vs competitor), content archite...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/competitor-alternatives/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

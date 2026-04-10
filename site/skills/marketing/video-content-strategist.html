@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Video Content Strategist (Marketing domain).
 
 Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO across YouTube, TikTok, LinkedIn, and other platforms.
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/video-content-strategist
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Video Content Strategist (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Video Content Strategist (Marketing domain).
 
 Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO across YouTube, TikTok, LinkedIn, and other platforms.
 
@@ -431,7 +453,290 @@ https://github.com/borghei/Claude-Skills/tree/main/video-content-strategist
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Video Content Strategist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Video Content Strategist Skill
+
+## Overview
+
+Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO. Designed for content creators, marketing teams, and video producers managing consistent video output across YouTube, TikTok, LinkedIn, and other platforms.
+
+## Quick Start
+
+```bash
+# Plan a video content calendar from topics and audience data
+python scripts/video_content_planner.py topics.json --weeks 8 --frequency 3
+
+# Analyze thumbnail text and composition patterns
+python scripts/thumbnail_analyzer.py thumbnails.csv
+
+# Optimize video titles, descriptions, and tags for SEO
+python scripts/video_seo_optimizer.py video_data.json --platform youtube
+```
+
+## Tools Overview
+
+| Tool | Purpose | Input | Output |
+|------|---------|-------|--------|
+| `video_content_planner.py` | Content calendar generation | JSON with topics/audience | Weekly calendar + production schedule |
+| `thumbnail_analyzer.py` | Thumbnail pattern analysis | CSV with thumbnail data | Optimization recommendations |
+| `video_seo_optimizer.py` | Video metadata SEO | JSON with video details | Optimized titles, descriptions, tags |
+
+## Workflows
+
+### Workflow 1: Monthly Video Strategy
+
+1. Define audience personas and content pillars in topics JSON
+2. Run `video_content_planner.py` to generate 4-week calendar
+3. For each planned video, run `video_seo_optimizer.py` for metadata
+4. After publishing, collect thumbnail data and run `thumbnail_analyzer.py`
+5. Feed learnings back into next month&#x27;s planning cycle
+
+### Workflow 2: YouTube Channel Optimization
+
+1. Export existing video data (titles, descriptions, tags, performance)
+2. Run `video_seo_optimizer.py` on underperforming videos to identify metadata gaps
+3. Run `thumbnail_analyzer.py` on top vs bottom performers
+4. Apply optimizations to existing videos and use patterns for new content
+
+### Workflow 3: Multi-Platform Video Strategy
+
+1. Create topics JSON with platform-specific audience data
+2. Run `video_content_planner.py` with `--platforms youtube,tiktok,linkedin`
+3. Get platform-adapted content recommendations
+4. Optimize each platform&#x27;s metadata with `video_seo_optimizer.py`
+
+## Reference Documentation
+
+See `references/video-strategy-guide.md` for comprehensive frameworks covering:
+- Content pillar strategy
+- Platform-specific best practices
+- Thumbnail design principles
+- Video SEO fundamentals
+- Production workflow optimization
+
+## Common Patterns
+
+### Pattern: Topics JSON Format
+```json
+{
+  &quot;channel&quot;: &quot;TechStartupTV&quot;,
+  &quot;audience&quot;: {
+    &quot;primary&quot;: &quot;SaaS founders, 25-45&quot;,
+    &quot;interests&quot;: [&quot;startup growth&quot;, &quot;fundraising&quot;, &quot;product development&quot;],
+    &quot;pain_points&quot;: [&quot;scaling teams&quot;, &quot;finding product-market fit&quot;, &quot;managing burn rate&quot;]
+  },
+  &quot;content_pillars&quot;: [
+    {&quot;name&quot;: &quot;Founder Stories&quot;, &quot;ratio&quot;: 0.3, &quot;format&quot;: &quot;interview&quot;, &quot;avg_length_min&quot;: 25},
+    {&quot;name&quot;: &quot;Tactical Guides&quot;, &quot;ratio&quot;: 0.4, &quot;format&quot;: &quot;tutorial&quot;, &quot;avg_length_min&quot;: 12},
+    {&quot;name&quot;: &quot;Industry Analysis&quot;, &quot;ratio&quot;: 0.2, &quot;format&quot;: &quot;commentary&quot;, &quot;avg_length_min&quot;: 8},
+    {&quot;name&quot;: &quot;Behind the Scenes&quot;, &quot;ratio&quot;: 0.1, &quot;format&quot;: &quot;vlog&quot;, &quot;avg_length_min&quot;: 5}
+  ],
+  &quot;topics&quot;: [
+    {&quot;title&quot;: &quot;How We Hit $1M ARR&quot;, &quot;pillar&quot;: &quot;Founder Stories&quot;, &quot;priority&quot;: &quot;high&quot;},
+    {&quot;title&quot;: &quot;5 Pricing Strategies That Work&quot;, &quot;pillar&quot;: &quot;Tactical Guides&quot;, &quot;priority&quot;: &quot;high&quot;},
+    {&quot;title&quot;: &quot;AI in SaaS: 2026 Trends&quot;, &quot;pillar&quot;: &quot;Industry Analysis&quot;, &quot;priority&quot;: &quot;medium&quot;}
+  ]
+}
+```
+
+### Pattern: Thumbnail CSV Format
+```csv
+video_id,title,views,ctr_pct,has_face,has_text,text_words,colors_dominant,emotion
+V001,How to Scale,15000,8.2,yes,yes,3,red-yellow,surprise
+V002,Tech Review,8500,4.1,no,yes,5,blue-white,neutral
+```
+
+### Platform Video Length Guidelines
+
+| Platform | Optimal Length | Max Recommended |
+|----------|---------------|-----------------|
+| YouTube (standard) | 8-15 min | 25 min |
+| YouTube Shorts | 30-60 sec | 60 sec |
+| TikTok | 30-90 sec | 3 min |
+| LinkedIn | 1-3 min | 10 min |
+| Instagram Reels | 15-60 sec | 90 sec |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Video Content Strategist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Video Content Strategist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Video Content Strategist in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Video Content Strategist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Video Content Strategist&quot;
+4. Description: &quot;Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO across YouTube, TikTok, LinkedIn, and other platforms.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/video-content-strategist/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Video Content Strategist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Video Content Strategist Skill
+
+## Overview
+
+Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO. Designed for content creators, marketing teams, and video producers managing consistent video output across YouTube, TikTok, LinkedIn, and other platforms.
+
+## Quick Start
+
+```bash
+# Plan a video content calendar from topics and audience data
+python scripts/video_content_planner.py topics.json --weeks 8 --frequency 3
+
+# Analyze thumbnail text and composition patterns
+python scripts/thumbnail_analyzer.py thumbnails.csv
+
+# Optimize video titles, descriptions, and tags for SEO
+python scripts/video_seo_optimizer.py video_data.json --platform youtube
+```
+
+## Tools Overview
+
+| Tool | Purpose | Input | Output |
+|------|---------|-------|--------|
+| `video_content_planner.py` | Content calendar generation | JSON with topics/audience | Weekly calendar + production schedule |
+| `thumbnail_analyzer.py` | Thumbnail pattern analysis | CSV with thumbnail data | Optimization recommendations |
+| `video_seo_optimizer.py` | Video metadata SEO | JSON with video details | Optimized titles, descriptions, tags |
+
+## Workflows
+
+### Workflow 1: Monthly Video Strategy
+
+1. Define audience personas and content pillars in topics JSON
+2. Run `video_content_planner.py` to generate 4-week calendar
+3. For each planned video, run `video_seo_optimizer.py` for metadata
+4. After publishing, collect thumbnail data and run `thumbnail_analyzer.py`
+5. Feed learnings back into next month&#x27;s planning cycle
+
+### Workflow 2: YouTube Channel Optimization
+
+1. Export existing video data (titles, descriptions, tags, performance)
+2. Run `video_seo_optimizer.py` on underperforming videos to identify metadata gaps
+3. Run `thumbnail_analyzer.py` on top vs bottom performers
+4. Apply optimizations to existing videos and use patterns for new content
+
+### Workflow 3: Multi-Platform Video Strategy
+
+1. Create topics JSON with platform-specific audience data
+2. Run `video_content_planner.py` with `--platforms youtube,tiktok,linkedin`
+3. Get platform-adapted content recommendations
+4. Optimize each platform&#x27;s metadata with `video_seo_optimizer.py`
+
+## Reference Documentation
+
+See `references/video-strategy-guide.md` for comprehensive frameworks covering:
+- Content pillar strategy
+- Platform-specific best practices
+- Thumbnail design principles
+- Video SEO fundamentals
+- Production workflow optimization
+
+## Common Patterns
+
+### Pattern: Topics JSON Format
+```json
+{
+  &quot;channel&quot;: &quot;TechStartupTV&quot;,
+  &quot;audience&quot;: {
+    &quot;primary&quot;: &quot;SaaS founders, 25-45&quot;,
+    &quot;interests&quot;: [&quot;startup growth&quot;, &quot;fundraising&quot;, &quot;product development&quot;],
+    &quot;pain_points&quot;: [&quot;scaling teams&quot;, &quot;finding product-market fit&quot;, &quot;managing burn rate&quot;]
+  },
+  &quot;content_pillars&quot;: [
+    {&quot;name&quot;: &quot;Founder Stories&quot;, &quot;ratio&quot;: 0.3, &quot;format&quot;: &quot;interview&quot;, &quot;avg_length_min&quot;: 25},
+    {&quot;name&quot;: &quot;Tactical Guides&quot;, &quot;ratio&quot;: 0.4, &quot;format&quot;: &quot;tutorial&quot;, &quot;avg_length_min&quot;: 12},
+    {&quot;name&quot;: &quot;Industry Analysis&quot;, &quot;ratio&quot;: 0.2, &quot;format&quot;: &quot;commentary&quot;, &quot;avg_length_min&quot;: 8},
+    {&quot;name&quot;: &quot;Behind the Scenes&quot;, &quot;ratio&quot;: 0.1, &quot;format&quot;: &quot;vlog&quot;, &quot;avg_length_min&quot;: 5}
+  ],
+  &quot;topics&quot;: [
+    {&quot;title&quot;: &quot;How We Hit $1M ARR&quot;, &quot;pillar&quot;: &quot;Founder Stories&quot;, &quot;priority&quot;: &quot;high&quot;},
+    {&quot;title&quot;: &quot;5 Pricing Strategies That Work&quot;, &quot;pillar&quot;: &quot;Tactical Guides&quot;, &quot;priority&quot;: &quot;high&quot;},
+    {&quot;title&quot;: &quot;AI in SaaS: 2026 Trends&quot;, &quot;pillar&quot;: &quot;Industry Analysis&quot;, &quot;priority&quot;: &quot;medium&quot;}
+  ]
+}
+```
+
+### Pattern: Thumbnail CSV Format
+```csv
+video_id,title,views,ctr_pct,has_face,has_text,text_words,colors_dominant,emotion
+V001,How to Scale,15000,8.2,yes,yes,3,red-yellow,surprise
+V002,Tech Review,8500,4.1,no,yes,5,blue-white,neutral
+```
+
+### Platform Video Length Guidelines
+
+| Platform | Optimal Length | Max Recommended |
+|----------|---------------|-----------------|
+| YouTube (standard) | 8-15 min | 25 min |
+| YouTube Shorts | 30-60 sec | 60 sec |
+| TikTok | 30-90 sec | 3 min |
+| LinkedIn | 1-3 min | 10 min |
+| Instagram Reels | 15-60 sec | 90 sec |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Video Content Strategist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Video Content Strategist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Video Content Strategist in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Video Content Strategist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Video Content Strategist&quot;
+4. Description: &quot;Production-ready video content strategy toolkit for planning content calendars, analyzing thumbnail effectiveness, and optimizing video metadata for platform SEO across YouTube, TikTok, LinkedIn, and other platforms.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/video-content-strategist/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

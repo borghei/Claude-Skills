@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Mcp Server Builder (Engineering domain).
 
 Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and P...
@@ -398,11 +420,11 @@ https://github.com/borghei/Claude-Skills/tree/main/mcp-server-builder
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Mcp Server Builder (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Mcp Server Builder (Engineering domain).
 
 Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and P...
 
@@ -431,7 +453,1222 @@ https://github.com/borghei/Claude-Skills/tree/main/mcp-server-builder
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Mcp Server Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# MCP Server Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / AI Integration
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Design and ship production-ready MCP (Model Context Protocol) servers from API contracts. Covers tool definition best practices, resource providers, prompt templates, OpenAPI-to-MCP conversion, TypeScript and Python server implementations, transport selection (stdio, SSE, StreamableHTTP), authentication patterns, testing strategies, and deployment configurations. Treats schema quality and tool discoverability as first-class concerns.
+
+## Keywords
+
+MCP, Model Context Protocol, MCP server, tool definition, resource provider, prompt template, stdio transport, SSE transport, OpenAPI to MCP, AI tool server, Claude tools
+
+## Core Capabilities
+
+### 1. Tool Design and Schema Quality
+- Verb-noun naming conventions for maximum LLM selection accuracy
+- Description engineering with usage context and return value documentation
+- Input schema design with proper types, constraints, and descriptions
+- Output formatting for LLM consumption (structured text over raw JSON)
+
+### 2. Server Implementation
+- TypeScript server with @modelcontextprotocol/sdk
+- Python server with mcp[cli] package
+- Tool, resource, and prompt registration patterns
+- Error handling with structured error responses
+- Middleware for logging, auth, and rate limiting
+
+### 3. Transport and Deployment
+- stdio for local/CLI integration (Claude Code, Cursor)
+- SSE for web-based integrations
+- StreamableHTTP for production HTTP deployments
+- Docker containerization for remote MCP servers
+- Health checking and graceful shutdown
+
+### 4. Testing and Validation
+- Tool schema validation (naming, descriptions, types)
+- Integration testing with MCP Inspector
+- Contract testing with snapshot comparisons
+- Load testing for remote server deployments
+
+## When to Use
+
+- Exposing an internal REST API to Claude, Cursor, or other MCP clients
+- Replacing brittle browser automation with typed tool interfaces
+- Building a shared MCP server for multiple teams and AI assistants
+- Converting an OpenAPI spec into MCP tools automatically
+- Creating domain-specific tool servers (database, monitoring, deployment)
+
+## Tool Schema Design
+
+### Naming Conventions
+
+```
+Pattern: verb_noun or verb_noun_qualifier
+
+GOOD names:
+  search_documents         — clear action + target
+  create_github_issue      — includes service for disambiguation
+  get_deployment_status    — standard CRUD verb
+  run_database_query       — action implies execution
+  list_pull_requests       — list for collection retrieval
+
+BAD names:
+  search                   — search what?
+  documents                — not a verb_noun
+  doSearch                 — camelCase, vague
+  handle_request           — implementation detail, not intent
+  helper                   — meaningless
+```
+
+### Description Engineering
+
+The description determines whether an LLM selects your tool. Write it for the LLM, not for humans.
+
+```
+Template: &quot;[What it does]. [What it returns]. [When to use it].&quot;
+
+EFFECTIVE:
+&quot;Search the codebase for files matching a regex pattern. Returns file paths,
+line numbers, and matching content snippets ranked by relevance. Use when
+looking for implementations, definitions, or usage of specific code patterns.&quot;
+
+INEFFECTIVE:
+&quot;Searches files.&quot;           — no return value, no usage guidance
+&quot;A powerful search tool...&quot; — marketing copy
+&quot;Wrapper around ripgrep&quot;    — implementation detail
+```
+
+### Input Schema Best Practices
+
+```json
+{
+  &quot;name&quot;: &quot;query_database&quot;,
+  &quot;description&quot;: &quot;Execute a read-only SQL query against the application database. Returns up to 100 rows as a formatted table. Use when the user needs to look up data, run reports, or investigate database state. Only SELECT statements are allowed.&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;sql&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;SQL SELECT query to execute. Must be a read-only query. Example: SELECT id, email, created_at FROM users WHERE created_at &gt; &#x27;2026-01-01&#x27; LIMIT 10&quot;
+      },
+      &quot;database&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;enum&quot;: [&quot;primary&quot;, &quot;analytics&quot;, &quot;staging&quot;],
+        &quot;default&quot;: &quot;primary&quot;,
+        &quot;description&quot;: &quot;Which database to query. Use &#x27;analytics&#x27; for reporting queries on large datasets.&quot;
+      },
+      &quot;format&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;enum&quot;: [&quot;table&quot;, &quot;json&quot;, &quot;csv&quot;],
+        &quot;default&quot;: &quot;table&quot;,
+        &quot;description&quot;: &quot;Output format. &#x27;table&#x27; is best for display, &#x27;json&#x27; for programmatic use.&quot;
+      }
+    },
+    &quot;required&quot;: [&quot;sql&quot;]
+  }
+}
+```
+
+## TypeScript MCP Server
+
+### Complete Server with Tools, Resources, and Prompts
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { StdioServerTransport } from &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;;
+import { z } from &quot;zod&quot;;
+
+const server = new McpServer({
+  name: &quot;project-tools&quot;,
+  version: &quot;1.0.0&quot;,
+});
+
+// ──── TOOLS ────
+
+server.tool(
+  &quot;search_codebase&quot;,
+  &quot;Search project files for a regex pattern. Returns file paths, line numbers, and matching lines. Use when looking for code patterns, function definitions, or usage of specific identifiers.&quot;,
+  {
+    pattern: z.string().describe(&quot;Regex pattern to search for. Example: &#x27;async function handle&#x27;&quot;),
+    file_glob: z.string().default(&quot;**/*.{ts,tsx,js,jsx}&quot;)
+      .describe(&quot;File glob pattern to filter. Example: &#x27;**/*.test.ts&#x27; for test files only&quot;),
+    max_results: z.number().int().min(1).max(100).default(20)
+      .describe(&quot;Maximum results to return&quot;),
+  },
+  async ({ pattern, file_glob, max_results }) =&gt; {
+    const { execSync } = await import(&quot;child_process&quot;);
+    try {
+      const output = execSync(
+        `rg --json -e &#x27;${pattern.replace(/&#x27;/g, &quot;\\&#x27;&quot;)}&#x27; --glob &#x27;${file_glob}&#x27; --max-count ${max_results}`,
+        { cwd: process.env.PROJECT_ROOT || &quot;.&quot;, timeout: 10000 }
+      ).toString();
+
+      const matches = output
+        .split(&quot;\n&quot;)
+        .filter(Boolean)
+        .map((line) =&gt; JSON.parse(line))
+        .filter((entry) =&gt; entry.type === &quot;match&quot;)
+        .map((entry) =&gt; ({
+          file: entry.data.path.text,
+          line: entry.data.line_number,
+          content: entry.data.lines.text.trim(),
+        }));
+
+      if (matches.length === 0) {
+        return { content: [{ type: &quot;text&quot;, text: `No matches found for pattern: ${pattern}` }] };
+      }
+
+      const formatted = matches
+        .map((m) =&gt; `${m.file}:${m.line}  ${m.content}`)
+        .join(&quot;\n&quot;);
+
+      return {
+        content: [{ type: &quot;text&quot;, text: `Found ${matches.length} matches:\n\n${formatted}` }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: &quot;text&quot;, text: `Search failed: ${error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+server.tool(
+  &quot;run_tests&quot;,
+  &quot;Run the project test suite or specific test files. Returns pass/fail results with failure details. Use when verifying code changes or checking test coverage.&quot;,
+  {
+    file_pattern: z.string().optional()
+      .describe(&quot;Optional test file pattern. Example: &#x27;auth&#x27; to run only auth-related tests&quot;),
+    coverage: z.boolean().default(false)
+      .describe(&quot;Include coverage report in output&quot;),
+  },
+  async ({ file_pattern, coverage }) =&gt; {
+    const { execSync } = await import(&quot;child_process&quot;);
+    const args = [file_pattern, coverage ? &quot;--coverage&quot; : &quot;&quot;].filter(Boolean).join(&quot; &quot;);
+
+    try {
+      const output = execSync(`pnpm test ${args}`, {
+        cwd: process.env.PROJECT_ROOT || &quot;.&quot;,
+        timeout: 120000,
+        env: { ...process.env, CI: &quot;true&quot; },
+      }).toString();
+
+      return { content: [{ type: &quot;text&quot;, text: output }] };
+    } catch (error) {
+      return {
+        content: [{ type: &quot;text&quot;, text: `Tests failed:\n\n${error.stdout?.toString() || error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// ──── RESOURCES ────
+
+server.resource(
+  &quot;project://readme&quot;,
+  &quot;project://readme&quot;,
+  async (uri) =&gt; {
+    const fs = await import(&quot;fs/promises&quot;);
+    const content = await fs.readFile(&quot;README.md&quot;, &quot;utf-8&quot;);
+    return {
+      contents: [{ uri: uri.href, mimeType: &quot;text/markdown&quot;, text: content }],
+    };
+  }
+);
+
+// ──── PROMPTS ────
+
+server.prompt(
+  &quot;review_code&quot;,
+  &quot;Generate a code review prompt for the given file&quot;,
+  { file_path: z.string().describe(&quot;Path to the file to review&quot;) },
+  async ({ file_path }) =&gt; {
+    const fs = await import(&quot;fs/promises&quot;);
+    const content = await fs.readFile(file_path, &quot;utf-8&quot;);
+    return {
+      messages: [
+        {
+          role: &quot;user&quot;,
+          content: {
+            type: &quot;text&quot;,
+            text: `Review this code for bugs, security issues, and improvement opportunities:\n\n\`\`\`\n${content}\n\`\`\``,
+          },
+        },
+      ],
+    };
+  }
+);
+
+// ──── START SERVER ────
+const transport = new StdioServerTransport();
+await server.connect(transport);
+```
+
+## Python MCP Server
+
+```python
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+import subprocess
+import json
+
+server = Server(&quot;project-tools&quot;)
+
+@server.list_tools()
+async def list_tools():
+    return [
+        Tool(
+            name=&quot;search_codebase&quot;,
+            description=&quot;Search project files for a regex pattern. Returns file paths, line numbers, and matching content. Use when looking for code patterns or definitions.&quot;,
+            inputSchema={
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;pattern&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;description&quot;: &quot;Regex pattern to search for&quot;,
+                    },
+                    &quot;file_type&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;py&quot;, &quot;ts&quot;, &quot;go&quot;, &quot;rs&quot;, &quot;all&quot;],
+                        &quot;default&quot;: &quot;all&quot;,
+                        &quot;description&quot;: &quot;Filter by file type&quot;,
+                    },
+                },
+                &quot;required&quot;: [&quot;pattern&quot;],
+            },
+        ),
+        Tool(
+            name=&quot;run_command&quot;,
+            description=&quot;Run a shell command in the project directory. Returns stdout and stderr. Use for running tests, linting, or build commands. Only allows pre-approved commands.&quot;,
+            inputSchema={
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;command&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;test&quot;, &quot;lint&quot;, &quot;build&quot;, &quot;typecheck&quot;, &quot;format&quot;],
+                        &quot;description&quot;: &quot;Pre-approved command to run&quot;,
+                    },
+                },
+                &quot;required&quot;: [&quot;command&quot;],
+            },
+        ),
+    ]
+
+@server.call_tool()
+async def call_tool(name: str, arguments: dict):
+    if name == &quot;search_codebase&quot;:
+        return await _search_codebase(arguments)
+    elif name == &quot;run_command&quot;:
+        return await _run_command(arguments)
+    else:
+        return [TextContent(type=&quot;text&quot;, text=f&quot;Unknown tool: {name}&quot;)]
+
+COMMAND_MAP = {
+    &quot;test&quot;: &quot;python -m pytest -v&quot;,
+    &quot;lint&quot;: &quot;ruff check .&quot;,
+    &quot;build&quot;: &quot;python -m build&quot;,
+    &quot;typecheck&quot;: &quot;mypy src/&quot;,
+    &quot;format&quot;: &quot;ruff format --check .&quot;,
+}
+
+async def _run_command(args: dict) -&gt; list[TextContent]:
+    cmd = COMMAND_MAP.get(args[&quot;command&quot;])
+    if not cmd:
+        return [TextContent(type=&quot;text&quot;, text=f&quot;Unknown command: {args[&#x27;command&#x27;]}&quot;)]
+    try:
+        result = subprocess.run(
+            cmd.split(), capture_output=True, text=True, timeout=120
+        )
+        output = result.stdout + (&quot;\n&quot; + result.stderr if result.stderr else &quot;&quot;)
+        return [TextContent(type=&quot;text&quot;, text=output or &quot;Command completed with no output.&quot;)]
+    except subprocess.TimeoutExpired:
+        return [TextContent(type=&quot;text&quot;, text=&quot;Command timed out after 120 seconds.&quot;)]
+
+async def main():
+    async with stdio_server() as (read, write):
+        await server.run(read, write, server.create_initialization_options())
+
+if __name__ == &quot;__main__&quot;:
+    import asyncio
+    asyncio.run(main())
+```
+
+## OpenAPI to MCP Conversion
+
+### Conversion Rules
+
+```
+OpenAPI Element          → MCP Element
+─────────────────────────────────────────────
+operationId              → Tool name (snake_case)
+summary + description    → Tool description
+parameters + requestBody → inputSchema
+responses.200            → Tool output format
+securitySchemes          → Server auth config
+servers[0].url           → Base URL for requests
+```
+
+### Conversion Script Pattern
+
+```python
+def openapi_operation_to_mcp_tool(operation: dict, path: str, method: str) -&gt; dict:
+    &quot;&quot;&quot;Convert a single OpenAPI operation to an MCP tool definition.&quot;&quot;&quot;
+    # Derive tool name from operationId or path
+    name = operation.get(&quot;operationId&quot;)
+    if not name:
+        name = f&quot;{method}_{path.replace(&#x27;/&#x27;, &#x27;_&#x27;).strip(&#x27;_&#x27;)}&quot;
+    name = name.replace(&quot;-&quot;, &quot;_&quot;).lower()
+
+    # Build description from summary + description
+    summary = operation.get(&quot;summary&quot;, &quot;&quot;)
+    description = operation.get(&quot;description&quot;, &quot;&quot;)
+    tool_description = f&quot;{summary}. {description}&quot;.strip(&quot;. &quot;) + &quot;.&quot;
+
+    # Build input schema from parameters and request body
+    properties = {}
+    required = []
+
+    for param in operation.get(&quot;parameters&quot;, []):
+        prop = {
+            &quot;type&quot;: param[&quot;schema&quot;].get(&quot;type&quot;, &quot;string&quot;),
+            &quot;description&quot;: param.get(&quot;description&quot;, &quot;&quot;),
+        }
+        if &quot;enum&quot; in param[&quot;schema&quot;]:
+            prop[&quot;enum&quot;] = param[&quot;schema&quot;][&quot;enum&quot;]
+        if &quot;default&quot; in param[&quot;schema&quot;]:
+            prop[&quot;default&quot;] = param[&quot;schema&quot;][&quot;default&quot;]
+        properties[param[&quot;name&quot;]] = prop
+        if param.get(&quot;required&quot;):
+            required.append(param[&quot;name&quot;])
+
+    # Request body properties
+    body_schema = (
+        operation.get(&quot;requestBody&quot;, {})
+        .get(&quot;content&quot;, {})
+        .get(&quot;application/json&quot;, {})
+        .get(&quot;schema&quot;, {})
+    )
+    if body_schema.get(&quot;properties&quot;):
+        properties.update(body_schema[&quot;properties&quot;])
+        required.extend(body_schema.get(&quot;required&quot;, []))
+
+    return {
+        &quot;name&quot;: name,
+        &quot;description&quot;: tool_description,
+        &quot;inputSchema&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: properties,
+            &quot;required&quot;: required,
+        },
+    }
+```
+
+## Client Configuration
+
+### Claude Code (claude_desktop_config.json)
+
+```json
+{
+  &quot;mcpServers&quot;: {
+    &quot;project-tools&quot;: {
+      &quot;command&quot;: &quot;node&quot;,
+      &quot;args&quot;: [&quot;dist/index.js&quot;],
+      &quot;cwd&quot;: &quot;/path/to/mcp-server&quot;,
+      &quot;env&quot;: {
+        &quot;PROJECT_ROOT&quot;: &quot;/path/to/project&quot;,
+        &quot;DATABASE_URL&quot;: &quot;postgresql://...&quot;
+      }
+    },
+    &quot;remote-api-tools&quot;: {
+      &quot;url&quot;: &quot;https://mcp.mycompany.com/sse&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${MCP_API_TOKEN}&quot;
+      }
+    }
+  }
+}
+```
+
+## Testing MCP Servers
+
+### Schema Validation
+
+```typescript
+function validateToolSchema(tool: { name: string; description: string; inputSchema: any }): string[] {
+  const issues: string[] = [];
+
+  // Name validation
+  if (!/^[a-z][a-z0-9_]*$/.test(tool.name)) {
+    issues.push(`Name &#x27;${tool.name}&#x27; must be snake_case`);
+  }
+
+  // Description validation
+  if (tool.description.length &lt; 30) {
+    issues.push(&quot;Description too short for reliable LLM tool selection&quot;);
+  }
+  if (!tool.description.includes(&quot;Use when&quot;) &amp;&amp; !tool.description.includes(&quot;Use for&quot;)) {
+    issues.push(&quot;Description should include usage guidance (&#x27;Use when...&#x27;)&quot;);
+  }
+
+  // Schema validation
+  const schema = tool.inputSchema;
+  if (schema.type !== &quot;object&quot;) {
+    issues.push(&quot;inputSchema.type must be &#x27;object&#x27;&quot;);
+  }
+  for (const [prop, def] of Object.entries(schema.properties || {})) {
+    if (!(def as any).description) {
+      issues.push(`Property &#x27;${prop}&#x27; missing description`);
+    }
+  }
+
+  return issues;
+}
+```
+
+### Integration Testing with MCP Inspector
+
+```bash
+# Install MCP Inspector
+npx @modelcontextprotocol/inspector
+
+# Test stdio server
+npx @modelcontextprotocol/inspector node dist/index.js
+
+# Test SSE server
+npx @modelcontextprotocol/inspector --url http://localhost:3001/sse
+```
+
+## Versioning Strategy
+
+- **Additive changes** (new tools, new optional parameters): non-breaking, bump minor version
+- **Tool removal or rename**: breaking, requires deprecation period + major version bump
+- **Required parameter addition**: breaking, consider making it optional with a default instead
+- **Response format changes**: potentially breaking, document in changelog
+
+## Common Pitfalls
+
+- **Vague tool descriptions** causing the LLM to select the wrong tool or skip yours entirely
+- **Missing property descriptions** leaving the LLM to guess what a parameter means
+- **No timeout on tool execution** allowing runaway processes to hang the server
+- **Exposing destructive operations without confirmation** — add a `confirm: true` required parameter
+- **Returning raw JSON instead of formatted text** — LLMs work better with readable text output
+- **No error handling** causing the server to crash on unexpected input
+- **Breaking changes without versioning** breaking all connected clients simultaneously
+
+## Best Practices
+
+1. **Description-first design** — write the tool description before implementing the handler
+2. **One intent per tool** — a tool that does three things confuses LLM selection
+3. **Validate inputs in the handler** — never trust that the LLM sent correct types
+4. **Return human-readable text** — format output as tables or structured text, not raw JSON
+5. **Set timeouts on all operations** — prevent runaway commands from blocking the server
+6. **Test tool selection** — present your tools to an LLM and verify it picks the right one for various prompts
+7. **Log every tool call** — capture name, inputs, outputs, duration, and errors for debugging
+8. **Version your tools** — maintain backward compatibility for at least one release cycle
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| LLM never selects my tool | Tool description is too vague or missing usage guidance | Rewrite the description using the template: &quot;[What it does]. [What it returns]. [When to use it].&quot; Ensure at least 30 characters and include &quot;Use when...&quot; phrasing |
+| Tool call returns empty or `null` | Handler returns raw `undefined` instead of a content array | Always return `{ content: [{ type: &quot;text&quot;, text: &quot;...&quot; }] }` even for empty results — never return bare `null` or `undefined` |
+| `ECONNREFUSED` when connecting to remote server | SSE/HTTP server not running or wrong port in client config | Verify the server process is listening (`curl http://localhost:&lt;port&gt;/sse`), check `url` in `claude_desktop_config.json`, and confirm no firewall rules block the port |
+| `spawn ENOENT` on stdio server startup | The `command` path in client config points to a missing binary | Use absolute paths for `command` (e.g., `/usr/local/bin/node`) or ensure the binary is on the shell PATH that the MCP host process inherits |
+| Client connects but lists zero tools | `list_tools` handler not registered or returns an empty array | Confirm `@server.list_tools()` (Python) or `server.tool()` (TypeScript) is called before `server.connect()`. Test with MCP Inspector to verify the handshake |
+| Tool execution times out | No timeout set on subprocess or HTTP calls inside the handler | Add explicit `timeout` to every `subprocess.run()`, `execSync()`, and `fetch()` call. 10-30 seconds for queries, 120 seconds max for builds |
+| Schema validation errors from the client | `inputSchema.type` is not `&quot;object&quot;` or required fields are misspelled | Validate your tool definitions with the `validateToolSchema` function from the Testing section. Every `inputSchema` must have `type: &quot;object&quot;` at the top level |
+
+## Success Criteria
+
+- **Tool selection accuracy ≥ 90%** — when presented with 10 natural-language prompts, the LLM picks the correct tool at least 9 times
+- **Schema validation passes at 100%** — every tool clears the `validateToolSchema` checks with zero issues (snake_case name, ≥30-char description, usage guidance, property descriptions)
+- **Median tool response time &lt; 2 seconds** — measured end-to-end from tool call to content response for typical queries
+- **Zero unhandled exceptions** — every tool handler catches errors and returns a structured `isError: true` response instead of crashing the server
+- **MCP Inspector green path** — the server connects, lists tools, executes each tool, and returns valid content through MCP Inspector without manual fixes
+- **Client configuration works first try** — a new developer can copy the provided `claude_desktop_config.json` snippet, start the server, and invoke a tool within 5 minutes
+- **OpenAPI conversion coverage ≥ 80%** — for a standard OpenAPI 3.x spec, at least 80% of operations convert to usable MCP tools without manual edits
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Designing tool schemas, resource providers, and prompt templates for MCP servers
+- Implementing servers in TypeScript (`@modelcontextprotocol/sdk`) and Python (`mcp[cli]`)
+- Transport selection and client configuration (stdio, SSE, StreamableHTTP)
+- OpenAPI-to-MCP conversion patterns and testing strategies
+
+**This skill does NOT cover:**
+- Building MCP clients or custom LLM orchestration layers — see `engineering/agent-workflow-designer`
+- Designing multi-agent systems that consume MCP tools — see `engineering/agent-designer`
+- API design itself (REST conventions, endpoint naming, versioning) — see `engineering/api-design-reviewer`
+- Infrastructure provisioning, container orchestration, or CI/CD pipelines for deploying MCP servers — see `engineering/ci-cd-pipeline-builder`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/api-design-reviewer` | Review the underlying REST API before converting it to MCP tools | OpenAPI spec → API review findings → refined spec → MCP conversion |
+| `engineering/api-test-suite-builder` | Generate integration tests for the HTTP endpoints that MCP tools wrap | MCP tool definitions → endpoint mapping → test suite generation |
+| `engineering/agent-designer` | Design agents that consume the MCP tools this skill produces | MCP tool schemas → agent tool inventory → agent behavior design |
+| `engineering/observability-designer` | Add structured logging, tracing, and metrics to MCP server handlers | MCP server code → instrumentation plan → logging/tracing middleware |
+| `engineering/ci-cd-pipeline-builder` | Automate build, test, and deploy pipelines for MCP server releases | MCP server repo → pipeline config → automated deploy to staging/prod |
+| `engineering/env-secrets-manager` | Manage API keys, database credentials, and tokens used in MCP server configs | MCP server env vars → secrets audit → secure injection patterns |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Mcp Server Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Mcp Server Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Mcp Server Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Mcp Server Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Mcp Server Builder&quot;
+4. Description: &quot;Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and P...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/mcp-server-builder/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Mcp Server Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# MCP Server Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / AI Integration
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Design and ship production-ready MCP (Model Context Protocol) servers from API contracts. Covers tool definition best practices, resource providers, prompt templates, OpenAPI-to-MCP conversion, TypeScript and Python server implementations, transport selection (stdio, SSE, StreamableHTTP), authentication patterns, testing strategies, and deployment configurations. Treats schema quality and tool discoverability as first-class concerns.
+
+## Keywords
+
+MCP, Model Context Protocol, MCP server, tool definition, resource provider, prompt template, stdio transport, SSE transport, OpenAPI to MCP, AI tool server, Claude tools
+
+## Core Capabilities
+
+### 1. Tool Design and Schema Quality
+- Verb-noun naming conventions for maximum LLM selection accuracy
+- Description engineering with usage context and return value documentation
+- Input schema design with proper types, constraints, and descriptions
+- Output formatting for LLM consumption (structured text over raw JSON)
+
+### 2. Server Implementation
+- TypeScript server with @modelcontextprotocol/sdk
+- Python server with mcp[cli] package
+- Tool, resource, and prompt registration patterns
+- Error handling with structured error responses
+- Middleware for logging, auth, and rate limiting
+
+### 3. Transport and Deployment
+- stdio for local/CLI integration (Claude Code, Cursor)
+- SSE for web-based integrations
+- StreamableHTTP for production HTTP deployments
+- Docker containerization for remote MCP servers
+- Health checking and graceful shutdown
+
+### 4. Testing and Validation
+- Tool schema validation (naming, descriptions, types)
+- Integration testing with MCP Inspector
+- Contract testing with snapshot comparisons
+- Load testing for remote server deployments
+
+## When to Use
+
+- Exposing an internal REST API to Claude, Cursor, or other MCP clients
+- Replacing brittle browser automation with typed tool interfaces
+- Building a shared MCP server for multiple teams and AI assistants
+- Converting an OpenAPI spec into MCP tools automatically
+- Creating domain-specific tool servers (database, monitoring, deployment)
+
+## Tool Schema Design
+
+### Naming Conventions
+
+```
+Pattern: verb_noun or verb_noun_qualifier
+
+GOOD names:
+  search_documents         — clear action + target
+  create_github_issue      — includes service for disambiguation
+  get_deployment_status    — standard CRUD verb
+  run_database_query       — action implies execution
+  list_pull_requests       — list for collection retrieval
+
+BAD names:
+  search                   — search what?
+  documents                — not a verb_noun
+  doSearch                 — camelCase, vague
+  handle_request           — implementation detail, not intent
+  helper                   — meaningless
+```
+
+### Description Engineering
+
+The description determines whether an LLM selects your tool. Write it for the LLM, not for humans.
+
+```
+Template: &quot;[What it does]. [What it returns]. [When to use it].&quot;
+
+EFFECTIVE:
+&quot;Search the codebase for files matching a regex pattern. Returns file paths,
+line numbers, and matching content snippets ranked by relevance. Use when
+looking for implementations, definitions, or usage of specific code patterns.&quot;
+
+INEFFECTIVE:
+&quot;Searches files.&quot;           — no return value, no usage guidance
+&quot;A powerful search tool...&quot; — marketing copy
+&quot;Wrapper around ripgrep&quot;    — implementation detail
+```
+
+### Input Schema Best Practices
+
+```json
+{
+  &quot;name&quot;: &quot;query_database&quot;,
+  &quot;description&quot;: &quot;Execute a read-only SQL query against the application database. Returns up to 100 rows as a formatted table. Use when the user needs to look up data, run reports, or investigate database state. Only SELECT statements are allowed.&quot;,
+  &quot;inputSchema&quot;: {
+    &quot;type&quot;: &quot;object&quot;,
+    &quot;properties&quot;: {
+      &quot;sql&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;description&quot;: &quot;SQL SELECT query to execute. Must be a read-only query. Example: SELECT id, email, created_at FROM users WHERE created_at &gt; &#x27;2026-01-01&#x27; LIMIT 10&quot;
+      },
+      &quot;database&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;enum&quot;: [&quot;primary&quot;, &quot;analytics&quot;, &quot;staging&quot;],
+        &quot;default&quot;: &quot;primary&quot;,
+        &quot;description&quot;: &quot;Which database to query. Use &#x27;analytics&#x27; for reporting queries on large datasets.&quot;
+      },
+      &quot;format&quot;: {
+        &quot;type&quot;: &quot;string&quot;,
+        &quot;enum&quot;: [&quot;table&quot;, &quot;json&quot;, &quot;csv&quot;],
+        &quot;default&quot;: &quot;table&quot;,
+        &quot;description&quot;: &quot;Output format. &#x27;table&#x27; is best for display, &#x27;json&#x27; for programmatic use.&quot;
+      }
+    },
+    &quot;required&quot;: [&quot;sql&quot;]
+  }
+}
+```
+
+## TypeScript MCP Server
+
+### Complete Server with Tools, Resources, and Prompts
+
+```typescript
+import { McpServer } from &quot;@modelcontextprotocol/sdk/server/mcp.js&quot;;
+import { StdioServerTransport } from &quot;@modelcontextprotocol/sdk/server/stdio.js&quot;;
+import { z } from &quot;zod&quot;;
+
+const server = new McpServer({
+  name: &quot;project-tools&quot;,
+  version: &quot;1.0.0&quot;,
+});
+
+// ──── TOOLS ────
+
+server.tool(
+  &quot;search_codebase&quot;,
+  &quot;Search project files for a regex pattern. Returns file paths, line numbers, and matching lines. Use when looking for code patterns, function definitions, or usage of specific identifiers.&quot;,
+  {
+    pattern: z.string().describe(&quot;Regex pattern to search for. Example: &#x27;async function handle&#x27;&quot;),
+    file_glob: z.string().default(&quot;**/*.{ts,tsx,js,jsx}&quot;)
+      .describe(&quot;File glob pattern to filter. Example: &#x27;**/*.test.ts&#x27; for test files only&quot;),
+    max_results: z.number().int().min(1).max(100).default(20)
+      .describe(&quot;Maximum results to return&quot;),
+  },
+  async ({ pattern, file_glob, max_results }) =&gt; {
+    const { execSync } = await import(&quot;child_process&quot;);
+    try {
+      const output = execSync(
+        `rg --json -e &#x27;${pattern.replace(/&#x27;/g, &quot;\\&#x27;&quot;)}&#x27; --glob &#x27;${file_glob}&#x27; --max-count ${max_results}`,
+        { cwd: process.env.PROJECT_ROOT || &quot;.&quot;, timeout: 10000 }
+      ).toString();
+
+      const matches = output
+        .split(&quot;\n&quot;)
+        .filter(Boolean)
+        .map((line) =&gt; JSON.parse(line))
+        .filter((entry) =&gt; entry.type === &quot;match&quot;)
+        .map((entry) =&gt; ({
+          file: entry.data.path.text,
+          line: entry.data.line_number,
+          content: entry.data.lines.text.trim(),
+        }));
+
+      if (matches.length === 0) {
+        return { content: [{ type: &quot;text&quot;, text: `No matches found for pattern: ${pattern}` }] };
+      }
+
+      const formatted = matches
+        .map((m) =&gt; `${m.file}:${m.line}  ${m.content}`)
+        .join(&quot;\n&quot;);
+
+      return {
+        content: [{ type: &quot;text&quot;, text: `Found ${matches.length} matches:\n\n${formatted}` }],
+      };
+    } catch (error) {
+      return {
+        content: [{ type: &quot;text&quot;, text: `Search failed: ${error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+server.tool(
+  &quot;run_tests&quot;,
+  &quot;Run the project test suite or specific test files. Returns pass/fail results with failure details. Use when verifying code changes or checking test coverage.&quot;,
+  {
+    file_pattern: z.string().optional()
+      .describe(&quot;Optional test file pattern. Example: &#x27;auth&#x27; to run only auth-related tests&quot;),
+    coverage: z.boolean().default(false)
+      .describe(&quot;Include coverage report in output&quot;),
+  },
+  async ({ file_pattern, coverage }) =&gt; {
+    const { execSync } = await import(&quot;child_process&quot;);
+    const args = [file_pattern, coverage ? &quot;--coverage&quot; : &quot;&quot;].filter(Boolean).join(&quot; &quot;);
+
+    try {
+      const output = execSync(`pnpm test ${args}`, {
+        cwd: process.env.PROJECT_ROOT || &quot;.&quot;,
+        timeout: 120000,
+        env: { ...process.env, CI: &quot;true&quot; },
+      }).toString();
+
+      return { content: [{ type: &quot;text&quot;, text: output }] };
+    } catch (error) {
+      return {
+        content: [{ type: &quot;text&quot;, text: `Tests failed:\n\n${error.stdout?.toString() || error.message}` }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// ──── RESOURCES ────
+
+server.resource(
+  &quot;project://readme&quot;,
+  &quot;project://readme&quot;,
+  async (uri) =&gt; {
+    const fs = await import(&quot;fs/promises&quot;);
+    const content = await fs.readFile(&quot;README.md&quot;, &quot;utf-8&quot;);
+    return {
+      contents: [{ uri: uri.href, mimeType: &quot;text/markdown&quot;, text: content }],
+    };
+  }
+);
+
+// ──── PROMPTS ────
+
+server.prompt(
+  &quot;review_code&quot;,
+  &quot;Generate a code review prompt for the given file&quot;,
+  { file_path: z.string().describe(&quot;Path to the file to review&quot;) },
+  async ({ file_path }) =&gt; {
+    const fs = await import(&quot;fs/promises&quot;);
+    const content = await fs.readFile(file_path, &quot;utf-8&quot;);
+    return {
+      messages: [
+        {
+          role: &quot;user&quot;,
+          content: {
+            type: &quot;text&quot;,
+            text: `Review this code for bugs, security issues, and improvement opportunities:\n\n\`\`\`\n${content}\n\`\`\``,
+          },
+        },
+      ],
+    };
+  }
+);
+
+// ──── START SERVER ────
+const transport = new StdioServerTransport();
+await server.connect(transport);
+```
+
+## Python MCP Server
+
+```python
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+import subprocess
+import json
+
+server = Server(&quot;project-tools&quot;)
+
+@server.list_tools()
+async def list_tools():
+    return [
+        Tool(
+            name=&quot;search_codebase&quot;,
+            description=&quot;Search project files for a regex pattern. Returns file paths, line numbers, and matching content. Use when looking for code patterns or definitions.&quot;,
+            inputSchema={
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;pattern&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;description&quot;: &quot;Regex pattern to search for&quot;,
+                    },
+                    &quot;file_type&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;py&quot;, &quot;ts&quot;, &quot;go&quot;, &quot;rs&quot;, &quot;all&quot;],
+                        &quot;default&quot;: &quot;all&quot;,
+                        &quot;description&quot;: &quot;Filter by file type&quot;,
+                    },
+                },
+                &quot;required&quot;: [&quot;pattern&quot;],
+            },
+        ),
+        Tool(
+            name=&quot;run_command&quot;,
+            description=&quot;Run a shell command in the project directory. Returns stdout and stderr. Use for running tests, linting, or build commands. Only allows pre-approved commands.&quot;,
+            inputSchema={
+                &quot;type&quot;: &quot;object&quot;,
+                &quot;properties&quot;: {
+                    &quot;command&quot;: {
+                        &quot;type&quot;: &quot;string&quot;,
+                        &quot;enum&quot;: [&quot;test&quot;, &quot;lint&quot;, &quot;build&quot;, &quot;typecheck&quot;, &quot;format&quot;],
+                        &quot;description&quot;: &quot;Pre-approved command to run&quot;,
+                    },
+                },
+                &quot;required&quot;: [&quot;command&quot;],
+            },
+        ),
+    ]
+
+@server.call_tool()
+async def call_tool(name: str, arguments: dict):
+    if name == &quot;search_codebase&quot;:
+        return await _search_codebase(arguments)
+    elif name == &quot;run_command&quot;:
+        return await _run_command(arguments)
+    else:
+        return [TextContent(type=&quot;text&quot;, text=f&quot;Unknown tool: {name}&quot;)]
+
+COMMAND_MAP = {
+    &quot;test&quot;: &quot;python -m pytest -v&quot;,
+    &quot;lint&quot;: &quot;ruff check .&quot;,
+    &quot;build&quot;: &quot;python -m build&quot;,
+    &quot;typecheck&quot;: &quot;mypy src/&quot;,
+    &quot;format&quot;: &quot;ruff format --check .&quot;,
+}
+
+async def _run_command(args: dict) -&gt; list[TextContent]:
+    cmd = COMMAND_MAP.get(args[&quot;command&quot;])
+    if not cmd:
+        return [TextContent(type=&quot;text&quot;, text=f&quot;Unknown command: {args[&#x27;command&#x27;]}&quot;)]
+    try:
+        result = subprocess.run(
+            cmd.split(), capture_output=True, text=True, timeout=120
+        )
+        output = result.stdout + (&quot;\n&quot; + result.stderr if result.stderr else &quot;&quot;)
+        return [TextContent(type=&quot;text&quot;, text=output or &quot;Command completed with no output.&quot;)]
+    except subprocess.TimeoutExpired:
+        return [TextContent(type=&quot;text&quot;, text=&quot;Command timed out after 120 seconds.&quot;)]
+
+async def main():
+    async with stdio_server() as (read, write):
+        await server.run(read, write, server.create_initialization_options())
+
+if __name__ == &quot;__main__&quot;:
+    import asyncio
+    asyncio.run(main())
+```
+
+## OpenAPI to MCP Conversion
+
+### Conversion Rules
+
+```
+OpenAPI Element          → MCP Element
+─────────────────────────────────────────────
+operationId              → Tool name (snake_case)
+summary + description    → Tool description
+parameters + requestBody → inputSchema
+responses.200            → Tool output format
+securitySchemes          → Server auth config
+servers[0].url           → Base URL for requests
+```
+
+### Conversion Script Pattern
+
+```python
+def openapi_operation_to_mcp_tool(operation: dict, path: str, method: str) -&gt; dict:
+    &quot;&quot;&quot;Convert a single OpenAPI operation to an MCP tool definition.&quot;&quot;&quot;
+    # Derive tool name from operationId or path
+    name = operation.get(&quot;operationId&quot;)
+    if not name:
+        name = f&quot;{method}_{path.replace(&#x27;/&#x27;, &#x27;_&#x27;).strip(&#x27;_&#x27;)}&quot;
+    name = name.replace(&quot;-&quot;, &quot;_&quot;).lower()
+
+    # Build description from summary + description
+    summary = operation.get(&quot;summary&quot;, &quot;&quot;)
+    description = operation.get(&quot;description&quot;, &quot;&quot;)
+    tool_description = f&quot;{summary}. {description}&quot;.strip(&quot;. &quot;) + &quot;.&quot;
+
+    # Build input schema from parameters and request body
+    properties = {}
+    required = []
+
+    for param in operation.get(&quot;parameters&quot;, []):
+        prop = {
+            &quot;type&quot;: param[&quot;schema&quot;].get(&quot;type&quot;, &quot;string&quot;),
+            &quot;description&quot;: param.get(&quot;description&quot;, &quot;&quot;),
+        }
+        if &quot;enum&quot; in param[&quot;schema&quot;]:
+            prop[&quot;enum&quot;] = param[&quot;schema&quot;][&quot;enum&quot;]
+        if &quot;default&quot; in param[&quot;schema&quot;]:
+            prop[&quot;default&quot;] = param[&quot;schema&quot;][&quot;default&quot;]
+        properties[param[&quot;name&quot;]] = prop
+        if param.get(&quot;required&quot;):
+            required.append(param[&quot;name&quot;])
+
+    # Request body properties
+    body_schema = (
+        operation.get(&quot;requestBody&quot;, {})
+        .get(&quot;content&quot;, {})
+        .get(&quot;application/json&quot;, {})
+        .get(&quot;schema&quot;, {})
+    )
+    if body_schema.get(&quot;properties&quot;):
+        properties.update(body_schema[&quot;properties&quot;])
+        required.extend(body_schema.get(&quot;required&quot;, []))
+
+    return {
+        &quot;name&quot;: name,
+        &quot;description&quot;: tool_description,
+        &quot;inputSchema&quot;: {
+            &quot;type&quot;: &quot;object&quot;,
+            &quot;properties&quot;: properties,
+            &quot;required&quot;: required,
+        },
+    }
+```
+
+## Client Configuration
+
+### Claude Code (claude_desktop_config.json)
+
+```json
+{
+  &quot;mcpServers&quot;: {
+    &quot;project-tools&quot;: {
+      &quot;command&quot;: &quot;node&quot;,
+      &quot;args&quot;: [&quot;dist/index.js&quot;],
+      &quot;cwd&quot;: &quot;/path/to/mcp-server&quot;,
+      &quot;env&quot;: {
+        &quot;PROJECT_ROOT&quot;: &quot;/path/to/project&quot;,
+        &quot;DATABASE_URL&quot;: &quot;postgresql://...&quot;
+      }
+    },
+    &quot;remote-api-tools&quot;: {
+      &quot;url&quot;: &quot;https://mcp.mycompany.com/sse&quot;,
+      &quot;headers&quot;: {
+        &quot;Authorization&quot;: &quot;Bearer ${MCP_API_TOKEN}&quot;
+      }
+    }
+  }
+}
+```
+
+## Testing MCP Servers
+
+### Schema Validation
+
+```typescript
+function validateToolSchema(tool: { name: string; description: string; inputSchema: any }): string[] {
+  const issues: string[] = [];
+
+  // Name validation
+  if (!/^[a-z][a-z0-9_]*$/.test(tool.name)) {
+    issues.push(`Name &#x27;${tool.name}&#x27; must be snake_case`);
+  }
+
+  // Description validation
+  if (tool.description.length &lt; 30) {
+    issues.push(&quot;Description too short for reliable LLM tool selection&quot;);
+  }
+  if (!tool.description.includes(&quot;Use when&quot;) &amp;&amp; !tool.description.includes(&quot;Use for&quot;)) {
+    issues.push(&quot;Description should include usage guidance (&#x27;Use when...&#x27;)&quot;);
+  }
+
+  // Schema validation
+  const schema = tool.inputSchema;
+  if (schema.type !== &quot;object&quot;) {
+    issues.push(&quot;inputSchema.type must be &#x27;object&#x27;&quot;);
+  }
+  for (const [prop, def] of Object.entries(schema.properties || {})) {
+    if (!(def as any).description) {
+      issues.push(`Property &#x27;${prop}&#x27; missing description`);
+    }
+  }
+
+  return issues;
+}
+```
+
+### Integration Testing with MCP Inspector
+
+```bash
+# Install MCP Inspector
+npx @modelcontextprotocol/inspector
+
+# Test stdio server
+npx @modelcontextprotocol/inspector node dist/index.js
+
+# Test SSE server
+npx @modelcontextprotocol/inspector --url http://localhost:3001/sse
+```
+
+## Versioning Strategy
+
+- **Additive changes** (new tools, new optional parameters): non-breaking, bump minor version
+- **Tool removal or rename**: breaking, requires deprecation period + major version bump
+- **Required parameter addition**: breaking, consider making it optional with a default instead
+- **Response format changes**: potentially breaking, document in changelog
+
+## Common Pitfalls
+
+- **Vague tool descriptions** causing the LLM to select the wrong tool or skip yours entirely
+- **Missing property descriptions** leaving the LLM to guess what a parameter means
+- **No timeout on tool execution** allowing runaway processes to hang the server
+- **Exposing destructive operations without confirmation** — add a `confirm: true` required parameter
+- **Returning raw JSON instead of formatted text** — LLMs work better with readable text output
+- **No error handling** causing the server to crash on unexpected input
+- **Breaking changes without versioning** breaking all connected clients simultaneously
+
+## Best Practices
+
+1. **Description-first design** — write the tool description before implementing the handler
+2. **One intent per tool** — a tool that does three things confuses LLM selection
+3. **Validate inputs in the handler** — never trust that the LLM sent correct types
+4. **Return human-readable text** — format output as tables or structured text, not raw JSON
+5. **Set timeouts on all operations** — prevent runaway commands from blocking the server
+6. **Test tool selection** — present your tools to an LLM and verify it picks the right one for various prompts
+7. **Log every tool call** — capture name, inputs, outputs, duration, and errors for debugging
+8. **Version your tools** — maintain backward compatibility for at least one release cycle
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| LLM never selects my tool | Tool description is too vague or missing usage guidance | Rewrite the description using the template: &quot;[What it does]. [What it returns]. [When to use it].&quot; Ensure at least 30 characters and include &quot;Use when...&quot; phrasing |
+| Tool call returns empty or `null` | Handler returns raw `undefined` instead of a content array | Always return `{ content: [{ type: &quot;text&quot;, text: &quot;...&quot; }] }` even for empty results — never return bare `null` or `undefined` |
+| `ECONNREFUSED` when connecting to remote server | SSE/HTTP server not running or wrong port in client config | Verify the server process is listening (`curl http://localhost:&lt;port&gt;/sse`), check `url` in `claude_desktop_config.json`, and confirm no firewall rules block the port |
+| `spawn ENOENT` on stdio server startup | The `command` path in client config points to a missing binary | Use absolute paths for `command` (e.g., `/usr/local/bin/node`) or ensure the binary is on the shell PATH that the MCP host process inherits |
+| Client connects but lists zero tools | `list_tools` handler not registered or returns an empty array | Confirm `@server.list_tools()` (Python) or `server.tool()` (TypeScript) is called before `server.connect()`. Test with MCP Inspector to verify the handshake |
+| Tool execution times out | No timeout set on subprocess or HTTP calls inside the handler | Add explicit `timeout` to every `subprocess.run()`, `execSync()`, and `fetch()` call. 10-30 seconds for queries, 120 seconds max for builds |
+| Schema validation errors from the client | `inputSchema.type` is not `&quot;object&quot;` or required fields are misspelled | Validate your tool definitions with the `validateToolSchema` function from the Testing section. Every `inputSchema` must have `type: &quot;object&quot;` at the top level |
+
+## Success Criteria
+
+- **Tool selection accuracy ≥ 90%** — when presented with 10 natural-language prompts, the LLM picks the correct tool at least 9 times
+- **Schema validation passes at 100%** — every tool clears the `validateToolSchema` checks with zero issues (snake_case name, ≥30-char description, usage guidance, property descriptions)
+- **Median tool response time &lt; 2 seconds** — measured end-to-end from tool call to content response for typical queries
+- **Zero unhandled exceptions** — every tool handler catches errors and returns a structured `isError: true` response instead of crashing the server
+- **MCP Inspector green path** — the server connects, lists tools, executes each tool, and returns valid content through MCP Inspector without manual fixes
+- **Client configuration works first try** — a new developer can copy the provided `claude_desktop_config.json` snippet, start the server, and invoke a tool within 5 minutes
+- **OpenAPI conversion coverage ≥ 80%** — for a standard OpenAPI 3.x spec, at least 80% of operations convert to usable MCP tools without manual edits
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Designing tool schemas, resource providers, and prompt templates for MCP servers
+- Implementing servers in TypeScript (`@modelcontextprotocol/sdk`) and Python (`mcp[cli]`)
+- Transport selection and client configuration (stdio, SSE, StreamableHTTP)
+- OpenAPI-to-MCP conversion patterns and testing strategies
+
+**This skill does NOT cover:**
+- Building MCP clients or custom LLM orchestration layers — see `engineering/agent-workflow-designer`
+- Designing multi-agent systems that consume MCP tools — see `engineering/agent-designer`
+- API design itself (REST conventions, endpoint naming, versioning) — see `engineering/api-design-reviewer`
+- Infrastructure provisioning, container orchestration, or CI/CD pipelines for deploying MCP servers — see `engineering/ci-cd-pipeline-builder`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/api-design-reviewer` | Review the underlying REST API before converting it to MCP tools | OpenAPI spec → API review findings → refined spec → MCP conversion |
+| `engineering/api-test-suite-builder` | Generate integration tests for the HTTP endpoints that MCP tools wrap | MCP tool definitions → endpoint mapping → test suite generation |
+| `engineering/agent-designer` | Design agents that consume the MCP tools this skill produces | MCP tool schemas → agent tool inventory → agent behavior design |
+| `engineering/observability-designer` | Add structured logging, tracing, and metrics to MCP server handlers | MCP server code → instrumentation plan → logging/tracing middleware |
+| `engineering/ci-cd-pipeline-builder` | Automate build, test, and deploy pipelines for MCP server releases | MCP server repo → pipeline config → automated deploy to staging/prod |
+| `engineering/env-secrets-manager` | Manage API keys, database credentials, and tokens used in MCP server configs | MCP server env vars → secrets audit → secure injection patterns |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Mcp Server Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Mcp Server Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Mcp Server Builder in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Mcp Server Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Mcp Server Builder&quot;
+4. Description: &quot;Build production-ready MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transport configuration. Covers OpenAPI-to-MCP conversion, TypeScript and P...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/mcp-server-builder/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

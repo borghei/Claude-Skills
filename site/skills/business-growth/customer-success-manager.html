@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Customer Success Manager (Business &amp; Growth domain).
 
 Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/customer-success-manager
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Customer Success Manager (Business &amp; Growth domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Customer Success Manager (Business &amp; Growth domain).
 
 Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success
 
@@ -439,7 +461,916 @@ https://github.com/borghei/Claude-Skills/tree/main/customer-success-manager
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Customer Success Manager&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Customer Success Manager
+
+Production-grade customer success analytics with multi-dimensional health scoring, churn risk prediction, and expansion opportunity identification. Three Python CLI tools provide deterministic, repeatable analysis using standard library only -- no external dependencies, no API calls, no ML models.
+
+---
+
+## Table of Contents
+
+- [Capabilities](#capabilities)
+- [Input Requirements](#input-requirements)
+- [Output Formats](#output-formats)
+- [How to Use](#how-to-use)
+- [Scripts](#scripts)
+- [Reference Guides](#reference-guides)
+- [Templates](#templates)
+- [Best Practices](#best-practices)
+- [Limitations](#limitations)
+
+---
+
+## Capabilities
+
+- **Customer Health Scoring**: Multi-dimensional weighted scoring across usage, engagement, support, and relationship dimensions with Red/Yellow/Green classification
+- **Churn Risk Analysis**: Behavioral signal detection with tier-based intervention playbooks and time-to-renewal urgency multipliers
+- **Expansion Opportunity Scoring**: Adoption depth analysis, whitespace mapping, and revenue opportunity estimation with effort-vs-impact prioritization
+- **Segment-Aware Benchmarking**: Configurable thresholds for Enterprise, Mid-Market, and SMB customer segments
+- **Trend Analysis**: Period-over-period comparison to detect improving or declining trajectories
+- **Executive Reporting**: QBR templates, success plans, and executive business review templates
+
+---
+
+## Input Requirements
+
+All scripts accept a JSON file as positional input argument. See `assets/sample_customer_data.json` for complete examples.
+
+### Health Score Calculator
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;usage&quot;: {
+        &quot;login_frequency&quot;: 85,
+        &quot;feature_adoption&quot;: 72,
+        &quot;dau_mau_ratio&quot;: 0.45
+      },
+      &quot;engagement&quot;: {
+        &quot;support_ticket_volume&quot;: 3,
+        &quot;meeting_attendance&quot;: 90,
+        &quot;nps_score&quot;: 8,
+        &quot;csat_score&quot;: 4.2
+      },
+      &quot;support&quot;: {
+        &quot;open_tickets&quot;: 2,
+        &quot;escalation_rate&quot;: 0.05,
+        &quot;avg_resolution_hours&quot;: 18
+      },
+      &quot;relationship&quot;: {
+        &quot;executive_sponsor_engagement&quot;: 80,
+        &quot;multi_threading_depth&quot;: 4,
+        &quot;renewal_sentiment&quot;: &quot;positive&quot;
+      },
+      &quot;previous_period&quot;: {
+        &quot;usage_score&quot;: 70,
+        &quot;engagement_score&quot;: 65,
+        &quot;support_score&quot;: 75,
+        &quot;relationship_score&quot;: 60
+      }
+    }
+  ]
+}
+```
+
+### Churn Risk Analyzer
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;contract_end_date&quot;: &quot;2026-06-30&quot;,
+      &quot;usage_decline&quot;: {
+        &quot;login_trend&quot;: -15,
+        &quot;feature_adoption_change&quot;: -10,
+        &quot;dau_mau_change&quot;: -0.08
+      },
+      &quot;engagement_drop&quot;: {
+        &quot;meeting_cancellations&quot;: 2,
+        &quot;response_time_days&quot;: 5,
+        &quot;nps_change&quot;: -3
+      },
+      &quot;support_issues&quot;: {
+        &quot;open_escalations&quot;: 1,
+        &quot;unresolved_critical&quot;: 0,
+        &quot;satisfaction_trend&quot;: &quot;declining&quot;
+      },
+      &quot;relationship_signals&quot;: {
+        &quot;champion_left&quot;: false,
+        &quot;sponsor_change&quot;: false,
+        &quot;competitor_mentions&quot;: 1
+      },
+      &quot;commercial_factors&quot;: {
+        &quot;contract_type&quot;: &quot;annual&quot;,
+        &quot;pricing_complaints&quot;: false,
+        &quot;budget_cuts_mentioned&quot;: false
+      }
+    }
+  ]
+}
+```
+
+### Expansion Opportunity Scorer
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;contract&quot;: {
+        &quot;licensed_seats&quot;: 100,
+        &quot;active_seats&quot;: 95,
+        &quot;plan_tier&quot;: &quot;professional&quot;,
+        &quot;available_tiers&quot;: [&quot;professional&quot;, &quot;enterprise&quot;, &quot;enterprise_plus&quot;]
+      },
+      &quot;product_usage&quot;: {
+        &quot;core_platform&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 85},
+        &quot;analytics_module&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 60},
+        &quot;integrations_module&quot;: {&quot;adopted&quot;: false, &quot;usage_pct&quot;: 0},
+        &quot;api_access&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 40},
+        &quot;advanced_reporting&quot;: {&quot;adopted&quot;: false, &quot;usage_pct&quot;: 0}
+      },
+      &quot;departments&quot;: {
+        &quot;current&quot;: [&quot;engineering&quot;, &quot;product&quot;],
+        &quot;potential&quot;: [&quot;marketing&quot;, &quot;sales&quot;, &quot;support&quot;]
+      }
+    }
+  ]
+}
+```
+
+---
+
+## Output Formats
+
+All scripts support two output formats via the `--format` flag:
+
+- **`text`** (default): Human-readable formatted output for terminal viewing
+- **`json`**: Machine-readable JSON output for integrations and pipelines
+
+---
+
+## How to Use
+
+### Quick Start
+
+```bash
+# Health scoring
+python scripts/health_score_calculator.py assets/sample_customer_data.json
+python scripts/health_score_calculator.py assets/sample_customer_data.json --format json
+
+# Churn risk analysis
+python scripts/churn_risk_analyzer.py assets/sample_customer_data.json
+python scripts/churn_risk_analyzer.py assets/sample_customer_data.json --format json
+
+# Expansion opportunity scoring
+python scripts/expansion_opportunity_scorer.py assets/sample_customer_data.json
+python scripts/expansion_opportunity_scorer.py assets/sample_customer_data.json --format json
+```
+
+### Workflow Integration
+
+```bash
+# 1. Score customer health across portfolio
+python scripts/health_score_calculator.py customer_portfolio.json --format json &gt; health_results.json
+
+# 2. Identify at-risk accounts
+python scripts/churn_risk_analyzer.py customer_portfolio.json --format json &gt; risk_results.json
+
+# 3. Find expansion opportunities in healthy accounts
+python scripts/expansion_opportunity_scorer.py customer_portfolio.json --format json &gt; expansion_results.json
+
+# 4. Prepare QBR using templates
+# Reference: assets/qbr_template.md
+```
+
+---
+
+## Scripts
+
+### 1. health_score_calculator.py
+
+**Purpose:** Multi-dimensional customer health scoring with trend analysis and segment-aware benchmarking.
+
+**Dimensions and Weights:**
+| Dimension | Weight | Metrics |
+|-----------|--------|---------|
+| Usage | 30% | Login frequency, feature adoption, DAU/MAU ratio |
+| Engagement | 25% | Support ticket volume, meeting attendance, NPS/CSAT |
+| Support | 20% | Open tickets, escalation rate, avg resolution time |
+| Relationship | 25% | Executive sponsor engagement, multi-threading depth, renewal sentiment |
+
+**Classification:**
+- Green (75-100): Healthy -- customer achieving value
+- Yellow (50-74): Needs attention -- monitor closely
+- Red (0-49): At risk -- immediate intervention required
+
+**Usage:**
+```bash
+python scripts/health_score_calculator.py customer_data.json
+python scripts/health_score_calculator.py customer_data.json --format json
+```
+
+### 2. churn_risk_analyzer.py
+
+**Purpose:** Identify at-risk accounts with behavioral signal detection and tier-based intervention recommendations.
+
+**Risk Signal Weights:**
+| Signal Category | Weight | Indicators |
+|----------------|--------|------------|
+| Usage Decline | 30% | Login trend, feature adoption change, DAU/MAU change |
+| Engagement Drop | 25% | Meeting cancellations, response time, NPS change |
+| Support Issues | 20% | Open escalations, unresolved critical, satisfaction trend |
+| Relationship Signals | 15% | Champion left, sponsor change, competitor mentions |
+| Commercial Factors | 10% | Contract type, pricing complaints, budget cuts |
+
+**Risk Tiers:**
+- Critical (80-100): Immediate executive escalation
+- High (60-79): Urgent CSM intervention
+- Medium (40-59): Proactive outreach
+- Low (0-39): Standard monitoring
+
+**Usage:**
+```bash
+python scripts/churn_risk_analyzer.py customer_data.json
+python scripts/churn_risk_analyzer.py customer_data.json --format json
+```
+
+### 3. expansion_opportunity_scorer.py
+
+**Purpose:** Identify upsell, cross-sell, and expansion opportunities with revenue estimation and priority ranking.
+
+**Expansion Types:**
+- **Upsell**: Upgrade to higher tier or more of existing product
+- **Cross-sell**: Add new product modules
+- **Expansion**: Additional seats or departments
+
+**Usage:**
+```bash
+python scripts/expansion_opportunity_scorer.py customer_data.json
+python scripts/expansion_opportunity_scorer.py customer_data.json --format json
+```
+
+---
+
+## Reference Guides
+
+| Reference | Description |
+|-----------|-------------|
+| `references/health-scoring-framework.md` | Complete health scoring methodology, dimension definitions, weighting rationale, threshold calibration |
+| `references/cs-playbooks.md` | Intervention playbooks for each risk tier, onboarding, renewal, expansion, and escalation procedures |
+| `references/cs-metrics-benchmarks.md` | Industry benchmarks for NRR, GRR, churn rates, health scores, expansion rates by segment and industry |
+
+---
+
+## Templates
+
+| Template | Purpose |
+|----------|---------|
+| `assets/qbr_template.md` | Quarterly Business Review presentation structure |
+| `assets/success_plan_template.md` | Customer success plan with goals, milestones, and metrics |
+| `assets/onboarding_checklist_template.md` | 90-day onboarding checklist with phase gates |
+| `assets/executive_business_review_template.md` | Executive stakeholder review for strategic accounts |
+
+---
+
+## Best Practices
+
+1. **Score regularly**: Run health scoring weekly for Enterprise, bi-weekly for Mid-Market, monthly for SMB
+2. **Act on trends, not snapshots**: A declining Green is more urgent than a stable Yellow
+3. **Combine signals**: Use all three scripts together for a complete customer picture
+4. **Calibrate thresholds**: Adjust segment benchmarks based on your product and industry
+5. **Document interventions**: Track what actions you took and outcomes for playbook refinement
+6. **Prepare with data**: Run scripts before every QBR and executive meeting
+
+---
+
+## Limitations
+
+- **No real-time data**: Scripts analyze point-in-time snapshots from JSON input files
+- **No CRM integration**: Data must be exported manually from your CRM/CS platform
+- **Deterministic only**: No predictive ML -- scoring is algorithmic based on weighted signals
+- **Threshold tuning**: Default thresholds are industry-standard but may need calibration for your business
+- **Revenue estimates**: Expansion revenue estimates are approximations based on usage patterns
+
+---
+
+---
+
+## Tool Reference
+
+### 1. health_score_calculator.py
+
+**Purpose:** Multi-dimensional customer health scoring with trend analysis and segment-aware benchmarking.
+
+```bash
+python scripts/health_score_calculator.py customer_data.json
+python scripts/health_score_calculator.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer health data (usage, engagement, support, relationship metrics) |
+| `--format` | No | Output format: text (default) or json |
+
+**Dimensions and Weights:** Usage (30%), Engagement (25%), Support (20%), Relationship (25%)
+
+**Classification:** Green (75-100), Yellow (50-74), Red (0-49) -- thresholds adjust by segment (Enterprise, Mid-Market, SMB)
+
+### 2. churn_risk_analyzer.py
+
+**Purpose:** Identify at-risk accounts with behavioral signal detection and tier-based intervention recommendations.
+
+```bash
+python scripts/churn_risk_analyzer.py customer_data.json
+python scripts/churn_risk_analyzer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with churn risk signals (usage decline, engagement drop, support issues, relationship signals, commercial factors) |
+| `--format` | No | Output format: text (default) or json |
+
+**Risk Tiers:** Critical (80-100), High (60-79), Medium (40-59), Low (0-39)
+
+**Signal Weights:** Usage Decline (30%), Engagement Drop (25%), Support Issues (20%), Relationship Signals (15%), Commercial Factors (10%)
+
+### 3. expansion_opportunity_scorer.py
+
+**Purpose:** Identify upsell, cross-sell, and expansion opportunities with revenue estimation and priority ranking.
+
+```bash
+python scripts/expansion_opportunity_scorer.py customer_data.json
+python scripts/expansion_opportunity_scorer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer contract, product usage, and department data |
+| `--format` | No | Output format: text (default) or json |
+
+**Expansion Types:** Upsell (tier upgrade), Cross-sell (new modules), Expansion (seats/departments)
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Health scores do not correlate with actual churn | Default thresholds do not match your product | Calibrate segment thresholds using historical churn data; compare 90-day retained vs churned cohorts |
+| All accounts show as Yellow | Thresholds too strict or data quality issues | Review input data completeness; adjust benchmarks in health_score_calculator.py constants for your industry |
+| Churn risk scores are uniformly low | Missing key signals (champion left, competitor mentions) | Ensure all signal categories have data; missing data defaults to low risk, which understates actual risk |
+| Expansion scores do not reflect reality | Product usage data is incomplete or stale | Verify product_usage fields cover all modules; run with fresh data exports from your product analytics |
+| Scripts error on input data | JSON format does not match expected schema | Reference the Input Requirements section for exact JSON structure; validate JSON before running |
+| Trend analysis shows no change | Previous period data not provided | Include the previous_period block in health score input for meaningful trend comparison |
+| Intervention recommendations feel generic | Segment is not specified | Always include the segment field (enterprise, mid-market, smb) for segment-appropriate playbooks |
+
+---
+
+## Success Criteria
+
+- Health scores run weekly for Enterprise, bi-weekly for Mid-Market, monthly for SMB accounts
+- Portfolio health distribution: 60%+ Green, less than 15% Red
+- Churn risk critical accounts have executive escalation within 48 hours
+- Expansion pipeline generated covers 20%+ of net retention target
+- Health score trends (improving/declining) drive proactive outreach before renewal window
+- QBR preparation includes health score, risk assessment, and expansion opportunities for every strategic account
+- Intervention playbooks followed for all High and Critical risk accounts
+
+---
+
+## Scope &amp; Limitations
+
+- **In scope:** Customer health scoring, churn risk analysis, expansion opportunity identification, segment benchmarking, trend analysis, QBR preparation
+- **Out of scope:** CRM integration, real-time monitoring, predictive ML modeling, automated outreach
+- **Data dependency:** Scripts analyze point-in-time JSON snapshots; data must be exported manually from your CRM/CS platform
+- **Deterministic scoring:** All analysis is algorithmic based on weighted signals -- no machine learning predictions
+- **Threshold tuning:** Default thresholds are industry-standard benchmarks; calibrate for your specific product and customer base
+- **Revenue estimates:** Expansion revenue estimates are approximations based on usage patterns, not binding forecasts
+
+---
+
+## Integration Points
+
+- **churn-prevention** -- High-risk accounts from churn_risk_analyzer.py should trigger cancel flow optimization and save offer review
+- **revenue-operations** -- Expansion opportunities feed into pipeline forecasting; health scores inform forecast confidence
+- **onboarding-cro** -- When health scores show low usage in early lifecycle, the root cause is often poor activation
+- **pricing-strategy** -- When expansion analysis reveals pricing as a barrier to upsell, feed into pricing-strategy for packaging review
+- **competitive-teardown** -- When churn risk signals include competitor mentions, use teardown data to build counter-positioning
+
+---
+
+**Last Updated:** March 2026
+**Tools:** 3 Python CLI tools
+**Dependencies:** Python 3.7+ standard library only
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Customer Success Manager&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Customer Success Manager&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Customer Success Manager in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Customer Success Manager&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Customer Success Manager&quot;
+4. Description: &quot;Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/customer-success-manager/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Customer Success Manager&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Customer Success Manager
+
+Production-grade customer success analytics with multi-dimensional health scoring, churn risk prediction, and expansion opportunity identification. Three Python CLI tools provide deterministic, repeatable analysis using standard library only -- no external dependencies, no API calls, no ML models.
+
+---
+
+## Table of Contents
+
+- [Capabilities](#capabilities)
+- [Input Requirements](#input-requirements)
+- [Output Formats](#output-formats)
+- [How to Use](#how-to-use)
+- [Scripts](#scripts)
+- [Reference Guides](#reference-guides)
+- [Templates](#templates)
+- [Best Practices](#best-practices)
+- [Limitations](#limitations)
+
+---
+
+## Capabilities
+
+- **Customer Health Scoring**: Multi-dimensional weighted scoring across usage, engagement, support, and relationship dimensions with Red/Yellow/Green classification
+- **Churn Risk Analysis**: Behavioral signal detection with tier-based intervention playbooks and time-to-renewal urgency multipliers
+- **Expansion Opportunity Scoring**: Adoption depth analysis, whitespace mapping, and revenue opportunity estimation with effort-vs-impact prioritization
+- **Segment-Aware Benchmarking**: Configurable thresholds for Enterprise, Mid-Market, and SMB customer segments
+- **Trend Analysis**: Period-over-period comparison to detect improving or declining trajectories
+- **Executive Reporting**: QBR templates, success plans, and executive business review templates
+
+---
+
+## Input Requirements
+
+All scripts accept a JSON file as positional input argument. See `assets/sample_customer_data.json` for complete examples.
+
+### Health Score Calculator
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;usage&quot;: {
+        &quot;login_frequency&quot;: 85,
+        &quot;feature_adoption&quot;: 72,
+        &quot;dau_mau_ratio&quot;: 0.45
+      },
+      &quot;engagement&quot;: {
+        &quot;support_ticket_volume&quot;: 3,
+        &quot;meeting_attendance&quot;: 90,
+        &quot;nps_score&quot;: 8,
+        &quot;csat_score&quot;: 4.2
+      },
+      &quot;support&quot;: {
+        &quot;open_tickets&quot;: 2,
+        &quot;escalation_rate&quot;: 0.05,
+        &quot;avg_resolution_hours&quot;: 18
+      },
+      &quot;relationship&quot;: {
+        &quot;executive_sponsor_engagement&quot;: 80,
+        &quot;multi_threading_depth&quot;: 4,
+        &quot;renewal_sentiment&quot;: &quot;positive&quot;
+      },
+      &quot;previous_period&quot;: {
+        &quot;usage_score&quot;: 70,
+        &quot;engagement_score&quot;: 65,
+        &quot;support_score&quot;: 75,
+        &quot;relationship_score&quot;: 60
+      }
+    }
+  ]
+}
+```
+
+### Churn Risk Analyzer
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;contract_end_date&quot;: &quot;2026-06-30&quot;,
+      &quot;usage_decline&quot;: {
+        &quot;login_trend&quot;: -15,
+        &quot;feature_adoption_change&quot;: -10,
+        &quot;dau_mau_change&quot;: -0.08
+      },
+      &quot;engagement_drop&quot;: {
+        &quot;meeting_cancellations&quot;: 2,
+        &quot;response_time_days&quot;: 5,
+        &quot;nps_change&quot;: -3
+      },
+      &quot;support_issues&quot;: {
+        &quot;open_escalations&quot;: 1,
+        &quot;unresolved_critical&quot;: 0,
+        &quot;satisfaction_trend&quot;: &quot;declining&quot;
+      },
+      &quot;relationship_signals&quot;: {
+        &quot;champion_left&quot;: false,
+        &quot;sponsor_change&quot;: false,
+        &quot;competitor_mentions&quot;: 1
+      },
+      &quot;commercial_factors&quot;: {
+        &quot;contract_type&quot;: &quot;annual&quot;,
+        &quot;pricing_complaints&quot;: false,
+        &quot;budget_cuts_mentioned&quot;: false
+      }
+    }
+  ]
+}
+```
+
+### Expansion Opportunity Scorer
+
+```json
+{
+  &quot;customers&quot;: [
+    {
+      &quot;customer_id&quot;: &quot;CUST-001&quot;,
+      &quot;name&quot;: &quot;Acme Corp&quot;,
+      &quot;segment&quot;: &quot;enterprise&quot;,
+      &quot;arr&quot;: 120000,
+      &quot;contract&quot;: {
+        &quot;licensed_seats&quot;: 100,
+        &quot;active_seats&quot;: 95,
+        &quot;plan_tier&quot;: &quot;professional&quot;,
+        &quot;available_tiers&quot;: [&quot;professional&quot;, &quot;enterprise&quot;, &quot;enterprise_plus&quot;]
+      },
+      &quot;product_usage&quot;: {
+        &quot;core_platform&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 85},
+        &quot;analytics_module&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 60},
+        &quot;integrations_module&quot;: {&quot;adopted&quot;: false, &quot;usage_pct&quot;: 0},
+        &quot;api_access&quot;: {&quot;adopted&quot;: true, &quot;usage_pct&quot;: 40},
+        &quot;advanced_reporting&quot;: {&quot;adopted&quot;: false, &quot;usage_pct&quot;: 0}
+      },
+      &quot;departments&quot;: {
+        &quot;current&quot;: [&quot;engineering&quot;, &quot;product&quot;],
+        &quot;potential&quot;: [&quot;marketing&quot;, &quot;sales&quot;, &quot;support&quot;]
+      }
+    }
+  ]
+}
+```
+
+---
+
+## Output Formats
+
+All scripts support two output formats via the `--format` flag:
+
+- **`text`** (default): Human-readable formatted output for terminal viewing
+- **`json`**: Machine-readable JSON output for integrations and pipelines
+
+---
+
+## How to Use
+
+### Quick Start
+
+```bash
+# Health scoring
+python scripts/health_score_calculator.py assets/sample_customer_data.json
+python scripts/health_score_calculator.py assets/sample_customer_data.json --format json
+
+# Churn risk analysis
+python scripts/churn_risk_analyzer.py assets/sample_customer_data.json
+python scripts/churn_risk_analyzer.py assets/sample_customer_data.json --format json
+
+# Expansion opportunity scoring
+python scripts/expansion_opportunity_scorer.py assets/sample_customer_data.json
+python scripts/expansion_opportunity_scorer.py assets/sample_customer_data.json --format json
+```
+
+### Workflow Integration
+
+```bash
+# 1. Score customer health across portfolio
+python scripts/health_score_calculator.py customer_portfolio.json --format json &gt; health_results.json
+
+# 2. Identify at-risk accounts
+python scripts/churn_risk_analyzer.py customer_portfolio.json --format json &gt; risk_results.json
+
+# 3. Find expansion opportunities in healthy accounts
+python scripts/expansion_opportunity_scorer.py customer_portfolio.json --format json &gt; expansion_results.json
+
+# 4. Prepare QBR using templates
+# Reference: assets/qbr_template.md
+```
+
+---
+
+## Scripts
+
+### 1. health_score_calculator.py
+
+**Purpose:** Multi-dimensional customer health scoring with trend analysis and segment-aware benchmarking.
+
+**Dimensions and Weights:**
+| Dimension | Weight | Metrics |
+|-----------|--------|---------|
+| Usage | 30% | Login frequency, feature adoption, DAU/MAU ratio |
+| Engagement | 25% | Support ticket volume, meeting attendance, NPS/CSAT |
+| Support | 20% | Open tickets, escalation rate, avg resolution time |
+| Relationship | 25% | Executive sponsor engagement, multi-threading depth, renewal sentiment |
+
+**Classification:**
+- Green (75-100): Healthy -- customer achieving value
+- Yellow (50-74): Needs attention -- monitor closely
+- Red (0-49): At risk -- immediate intervention required
+
+**Usage:**
+```bash
+python scripts/health_score_calculator.py customer_data.json
+python scripts/health_score_calculator.py customer_data.json --format json
+```
+
+### 2. churn_risk_analyzer.py
+
+**Purpose:** Identify at-risk accounts with behavioral signal detection and tier-based intervention recommendations.
+
+**Risk Signal Weights:**
+| Signal Category | Weight | Indicators |
+|----------------|--------|------------|
+| Usage Decline | 30% | Login trend, feature adoption change, DAU/MAU change |
+| Engagement Drop | 25% | Meeting cancellations, response time, NPS change |
+| Support Issues | 20% | Open escalations, unresolved critical, satisfaction trend |
+| Relationship Signals | 15% | Champion left, sponsor change, competitor mentions |
+| Commercial Factors | 10% | Contract type, pricing complaints, budget cuts |
+
+**Risk Tiers:**
+- Critical (80-100): Immediate executive escalation
+- High (60-79): Urgent CSM intervention
+- Medium (40-59): Proactive outreach
+- Low (0-39): Standard monitoring
+
+**Usage:**
+```bash
+python scripts/churn_risk_analyzer.py customer_data.json
+python scripts/churn_risk_analyzer.py customer_data.json --format json
+```
+
+### 3. expansion_opportunity_scorer.py
+
+**Purpose:** Identify upsell, cross-sell, and expansion opportunities with revenue estimation and priority ranking.
+
+**Expansion Types:**
+- **Upsell**: Upgrade to higher tier or more of existing product
+- **Cross-sell**: Add new product modules
+- **Expansion**: Additional seats or departments
+
+**Usage:**
+```bash
+python scripts/expansion_opportunity_scorer.py customer_data.json
+python scripts/expansion_opportunity_scorer.py customer_data.json --format json
+```
+
+---
+
+## Reference Guides
+
+| Reference | Description |
+|-----------|-------------|
+| `references/health-scoring-framework.md` | Complete health scoring methodology, dimension definitions, weighting rationale, threshold calibration |
+| `references/cs-playbooks.md` | Intervention playbooks for each risk tier, onboarding, renewal, expansion, and escalation procedures |
+| `references/cs-metrics-benchmarks.md` | Industry benchmarks for NRR, GRR, churn rates, health scores, expansion rates by segment and industry |
+
+---
+
+## Templates
+
+| Template | Purpose |
+|----------|---------|
+| `assets/qbr_template.md` | Quarterly Business Review presentation structure |
+| `assets/success_plan_template.md` | Customer success plan with goals, milestones, and metrics |
+| `assets/onboarding_checklist_template.md` | 90-day onboarding checklist with phase gates |
+| `assets/executive_business_review_template.md` | Executive stakeholder review for strategic accounts |
+
+---
+
+## Best Practices
+
+1. **Score regularly**: Run health scoring weekly for Enterprise, bi-weekly for Mid-Market, monthly for SMB
+2. **Act on trends, not snapshots**: A declining Green is more urgent than a stable Yellow
+3. **Combine signals**: Use all three scripts together for a complete customer picture
+4. **Calibrate thresholds**: Adjust segment benchmarks based on your product and industry
+5. **Document interventions**: Track what actions you took and outcomes for playbook refinement
+6. **Prepare with data**: Run scripts before every QBR and executive meeting
+
+---
+
+## Limitations
+
+- **No real-time data**: Scripts analyze point-in-time snapshots from JSON input files
+- **No CRM integration**: Data must be exported manually from your CRM/CS platform
+- **Deterministic only**: No predictive ML -- scoring is algorithmic based on weighted signals
+- **Threshold tuning**: Default thresholds are industry-standard but may need calibration for your business
+- **Revenue estimates**: Expansion revenue estimates are approximations based on usage patterns
+
+---
+
+---
+
+## Tool Reference
+
+### 1. health_score_calculator.py
+
+**Purpose:** Multi-dimensional customer health scoring with trend analysis and segment-aware benchmarking.
+
+```bash
+python scripts/health_score_calculator.py customer_data.json
+python scripts/health_score_calculator.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer health data (usage, engagement, support, relationship metrics) |
+| `--format` | No | Output format: text (default) or json |
+
+**Dimensions and Weights:** Usage (30%), Engagement (25%), Support (20%), Relationship (25%)
+
+**Classification:** Green (75-100), Yellow (50-74), Red (0-49) -- thresholds adjust by segment (Enterprise, Mid-Market, SMB)
+
+### 2. churn_risk_analyzer.py
+
+**Purpose:** Identify at-risk accounts with behavioral signal detection and tier-based intervention recommendations.
+
+```bash
+python scripts/churn_risk_analyzer.py customer_data.json
+python scripts/churn_risk_analyzer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with churn risk signals (usage decline, engagement drop, support issues, relationship signals, commercial factors) |
+| `--format` | No | Output format: text (default) or json |
+
+**Risk Tiers:** Critical (80-100), High (60-79), Medium (40-59), Low (0-39)
+
+**Signal Weights:** Usage Decline (30%), Engagement Drop (25%), Support Issues (20%), Relationship Signals (15%), Commercial Factors (10%)
+
+### 3. expansion_opportunity_scorer.py
+
+**Purpose:** Identify upsell, cross-sell, and expansion opportunities with revenue estimation and priority ranking.
+
+```bash
+python scripts/expansion_opportunity_scorer.py customer_data.json
+python scripts/expansion_opportunity_scorer.py customer_data.json --format json
+```
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `customer_data.json` | Yes | JSON file with customer contract, product usage, and department data |
+| `--format` | No | Output format: text (default) or json |
+
+**Expansion Types:** Upsell (tier upgrade), Cross-sell (new modules), Expansion (seats/departments)
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Health scores do not correlate with actual churn | Default thresholds do not match your product | Calibrate segment thresholds using historical churn data; compare 90-day retained vs churned cohorts |
+| All accounts show as Yellow | Thresholds too strict or data quality issues | Review input data completeness; adjust benchmarks in health_score_calculator.py constants for your industry |
+| Churn risk scores are uniformly low | Missing key signals (champion left, competitor mentions) | Ensure all signal categories have data; missing data defaults to low risk, which understates actual risk |
+| Expansion scores do not reflect reality | Product usage data is incomplete or stale | Verify product_usage fields cover all modules; run with fresh data exports from your product analytics |
+| Scripts error on input data | JSON format does not match expected schema | Reference the Input Requirements section for exact JSON structure; validate JSON before running |
+| Trend analysis shows no change | Previous period data not provided | Include the previous_period block in health score input for meaningful trend comparison |
+| Intervention recommendations feel generic | Segment is not specified | Always include the segment field (enterprise, mid-market, smb) for segment-appropriate playbooks |
+
+---
+
+## Success Criteria
+
+- Health scores run weekly for Enterprise, bi-weekly for Mid-Market, monthly for SMB accounts
+- Portfolio health distribution: 60%+ Green, less than 15% Red
+- Churn risk critical accounts have executive escalation within 48 hours
+- Expansion pipeline generated covers 20%+ of net retention target
+- Health score trends (improving/declining) drive proactive outreach before renewal window
+- QBR preparation includes health score, risk assessment, and expansion opportunities for every strategic account
+- Intervention playbooks followed for all High and Critical risk accounts
+
+---
+
+## Scope &amp; Limitations
+
+- **In scope:** Customer health scoring, churn risk analysis, expansion opportunity identification, segment benchmarking, trend analysis, QBR preparation
+- **Out of scope:** CRM integration, real-time monitoring, predictive ML modeling, automated outreach
+- **Data dependency:** Scripts analyze point-in-time JSON snapshots; data must be exported manually from your CRM/CS platform
+- **Deterministic scoring:** All analysis is algorithmic based on weighted signals -- no machine learning predictions
+- **Threshold tuning:** Default thresholds are industry-standard benchmarks; calibrate for your specific product and customer base
+- **Revenue estimates:** Expansion revenue estimates are approximations based on usage patterns, not binding forecasts
+
+---
+
+## Integration Points
+
+- **churn-prevention** -- High-risk accounts from churn_risk_analyzer.py should trigger cancel flow optimization and save offer review
+- **revenue-operations** -- Expansion opportunities feed into pipeline forecasting; health scores inform forecast confidence
+- **onboarding-cro** -- When health scores show low usage in early lifecycle, the root cause is often poor activation
+- **pricing-strategy** -- When expansion analysis reveals pricing as a barrier to upsell, feed into pricing-strategy for packaging review
+- **competitive-teardown** -- When churn risk signals include competitor mentions, use teardown data to build counter-positioning
+
+---
+
+**Last Updated:** March 2026
+**Tools:** 3 Python CLI tools
+**Dependencies:** Python 3.7+ standard library only
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Customer Success Manager&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Customer Success Manager&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Customer Success Manager in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Customer Success Manager&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Customer Success Manager&quot;
+4. Description: &quot;Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/customer-success-manager/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

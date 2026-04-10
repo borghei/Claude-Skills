@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Devops (Engineering domain).
 
 Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deploymen...
@@ -387,11 +409,11 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-devops
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Senior Devops (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Senior Devops (Engineering domain).
 
 Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deploymen...
 
@@ -409,7 +431,666 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-devops
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Senior Devops&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior DevOps Engineer
+
+The agent generates CI/CD pipelines, scaffolds Terraform infrastructure, and manages deployments with strategy selection, health checks, and rollback support.
+
+---
+
+## Quick Start
+
+```bash
+# Generate CI/CD pipeline from project analysis
+python scripts/pipeline_generator.py &lt;project-path&gt; --platform github-actions --verbose
+
+# Scaffold Terraform infrastructure
+python scripts/terraform_scaffolder.py &lt;target-path&gt; --provider aws --env production --verbose
+
+# Manage deployment with canary strategy
+python scripts/deployment_manager.py &lt;target-path&gt; --strategy canary --verbose
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `pipeline_generator.py` | Project path | CI/CD pipeline config (GitHub Actions, GitLab CI, Jenkins, CircleCI) |
+| `terraform_scaffolder.py` | Target path + provider | Terraform module structure with state config |
+| `deployment_manager.py` | Target path + strategy | Deployment plan with health checks and rollback |
+
+All tools support `--json` for machine-readable output and `--output` / `-o` for file writing.
+
+---
+
+## Workflow 1: Containerize and Deploy
+
+**Step 1 -- Build a production Dockerfile.**
+
+The agent generates multi-stage Dockerfiles following this pattern:
+
+```dockerfile
+# Stage 1: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --only=production &amp;&amp; npm cache clean --force
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:20-alpine AS production
+WORKDIR /app
+RUN addgroup -g 1001 appgroup &amp;&amp; \
+    adduser -u 1001 -G appgroup -s /bin/sh -D appuser
+COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/package.json ./
+USER appuser
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/healthz || exit 1
+CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
+```
+
+**Validation checkpoint:** Image builds with `docker build -t app:test .` and `docker run --rm app:test` returns healthy.
+
+**Step 2 -- Deploy to Kubernetes.**
+
+The agent creates a Deployment with probes, resource limits, and security context:
+
+```yaml
+spec:
+  containers:
+    - name: app
+      image: myapp:1.2.3
+      resources:
+        requests: { cpu: 250m, memory: 256Mi }
+        limits: { cpu: &quot;1&quot;, memory: 512Mi }
+      livenessProbe:
+        httpGet: { path: /healthz, port: 3000 }
+        initialDelaySeconds: 15
+        periodSeconds: 20
+      readinessProbe:
+        httpGet: { path: /ready, port: 3000 }
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      startupProbe:
+        httpGet: { path: /healthz, port: 3000 }
+        failureThreshold: 30
+        periodSeconds: 10
+```
+
+**Probe decision:**
+- **startupProbe**: Slow-starting apps (JVM, model loading). Prevents liveness from killing during startup.
+- **livenessProbe**: Detects deadlocks. Keep simple -- do not check downstream dependencies.
+- **readinessProbe**: Controls traffic routing. Include dependency checks here.
+
+**Validation checkpoint:** `kubectl get pods -l app=myapp` shows all pods Running and Ready.
+
+---
+
+## Workflow 2: Infrastructure as Code with Terraform
+
+**Step 1 -- Scaffold the module structure.**
+
+```bash
+python scripts/terraform_scaffolder.py ./infrastructure --provider aws --env production --verbose
+```
+
+The agent produces:
+```
+infrastructure/
+  modules/
+    vpc/         # main.tf, variables.tf, outputs.tf
+    eks/
+    rds/
+  environments/
+    staging/     # main.tf, terraform.tfvars, backend.tf
+    production/
+```
+
+**Step 2 -- Configure remote state.**
+
+```hcl
+terraform {
+  backend &quot;s3&quot; {
+    bucket         = &quot;mycompany-terraform-state&quot;
+    key            = &quot;production/infrastructure.tfstate&quot;
+    region         = &quot;us-east-1&quot;
+    dynamodb_table = &quot;terraform-locks&quot;
+    encrypt        = true
+  }
+}
+```
+
+**Step 3 -- Run drift detection in CI.**
+
+```bash
+terraform plan -detailed-exitcode -out=plan.tfplan
+# Exit 0 = clean, Exit 1 = error, Exit 2 = drift detected
+```
+
+**Validation checkpoint:** `terraform plan` shows no unexpected changes. Drift alerts fire within 24 hours.
+
+**Key rules:**
+- One state file per environment per component (blast radius control)
+- Never store state locally or in git
+- Run `terraform plan` in CI, `terraform apply` only after approval
+- Use directories for environment separation, modules for shared logic
+
+---
+
+## Workflow 3: CI/CD Pipeline Design
+
+```bash
+python scripts/pipeline_generator.py /path/to/project --platform github-actions --json
+```
+
+The agent generates pipelines following these principles:
+
+1. **Fail fast** -- lint and unit tests before expensive integration tests
+2. **Cache aggressively** -- node_modules, Docker layers, pip packages
+3. **Immutable artifacts** -- build once, deploy the same artifact everywhere
+4. **Gate promotions** -- manual approval or smoke tests before production
+5. **Parallel execution** -- independent test suites and security scans run concurrently
+
+**Example: GitHub Actions with matrix testing and deployment gates**
+
+```yaml
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: &quot;${{ matrix.node-version }}&quot;, cache: npm }
+      - run: npm ci &amp;&amp; npm run lint &amp;&amp; npm test -- --coverage
+
+  build:
+    needs: [test, security]
+    if: github.ref == &#x27;refs/heads/main&#x27;
+    steps:
+      - uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: &quot;${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}&quot;
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-staging:
+    needs: build
+    environment: staging
+    steps:
+      - run: helm upgrade --install app charts/myapp --set image.tag=${{ github.sha }} --wait
+
+  deploy-production:
+    needs: deploy-staging
+    environment: production  # requires manual approval
+```
+
+**Validation checkpoint:** Pipeline runs in under 15 minutes. All stages produce exit code 0.
+
+---
+
+## Deployment Strategy Selection
+
+| Strategy | Risk | Rollback Speed | Infra Cost | Best For |
+|----------|------|----------------|------------|----------|
+| **Rolling** | Medium | Minutes | 1x | Stateless services, internal APIs |
+| **Blue-Green** | Low | Seconds | 2x | Mission-critical, zero-downtime |
+| **Canary** | Low | Seconds | 1.1x | User-facing, gradual validation |
+| **Feature Flags** | Lowest | Instant | 1x | Granular control, A/B testing |
+
+**Canary promotion ladder:**
+1. Deploy at 5% traffic. Monitor error rate and latency for 10 min.
+2. Promote to 25%. Monitor 10 min.
+3. Promote to 50%. Monitor 15 min.
+4. Promote to 100%.
+5. Automated rollback if error rate exceeds baseline by 2x at any step.
+
+---
+
+## Monitoring Essentials
+
+Every service dashboard includes the **Four Golden Signals**:
+
+1. **Latency** -- P50, P90, P99 response times
+2. **Traffic** -- Requests per second by endpoint and status code
+3. **Errors** -- 5xx rate, 4xx rate, application error codes
+4. **Saturation** -- CPU, memory, connection pool, queue depth
+
+**SLO targets (example):**
+
+| Service | SLI | SLO | Error Budget |
+|---------|-----|-----|--------------|
+| API Gateway | Successful requests / Total | 99.9% (43.8 min/month downtime) | 0.1% |
+| API Latency | Requests &lt; 500ms / Total | P99 &lt; 500ms | 1% |
+
+When the error budget is exhausted, the agent recommends freezing feature deployments until the budget recovers.
+
+---
+
+## Anti-Patterns
+
+1. **Monolithic state** -- one Terraform state for everything. Split by component and environment.
+2. **`latest` tag in production** -- always use specific image tags.
+3. **Secrets in image layers** -- inject at runtime via environment or mounted secrets. Verify with `docker history --no-trunc`.
+4. **No resource limits** -- every container needs CPU/memory limits to prevent noisy-neighbor attacks.
+5. **Manual deployments** -- automate with approval gates instead.
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Terraform state lock stuck | Interrupted `terraform apply` left DynamoDB lock | `terraform force-unlock &lt;LOCK_ID&gt;` after confirming no apply running |
+| Pods in `CrashLoopBackOff` | Failing health checks or missing config/secrets | `kubectl logs &lt;pod&gt;`, verify ConfigMaps/Secrets, increase `startupProbe.failureThreshold` |
+| Docker builds slow (10+ min) | Layer cache invalidated by early COPY of changing files | Copy dependency manifests before source; use BuildKit cache mounts |
+| Helm upgrade fails &quot;another operation in progress&quot; | Previous release in pending/failed state | `helm history &lt;release&gt;`, then `helm rollback &lt;release&gt; &lt;last-good&gt;` |
+| Canary shows healthy but users report errors | Metrics aggregated across all pods mask canary errors | Use per-revision metric labels; configure Istio/Nginx to tag canary traffic |
+
+---
+
+## References
+
+| Guide | Path | Content |
+|-------|------|---------|
+| CI/CD Pipeline Guide | `references/cicd_pipeline_guide.md` | Pipeline patterns, platform comparisons, optimization |
+| Infrastructure as Code | `references/infrastructure_as_code.md` | Terraform patterns, module design, state management |
+| Deployment Strategies | `references/deployment_strategies.md` | Strategy details, rollback procedures, traffic management |
+
+See also: `references/kubernetes_patterns.md` for Helm charts, HPA/VPA/KEDA decisions, network policies, and RBAC patterns. `references/cloud_platform_guide.md` for AWS/GCP/Azure service comparison, multi-cloud strategy, and cost optimization.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `senior-secops` | Security scanning in CI/CD, container image scanning, compliance checks |
+| `senior-architect` | Infrastructure design decisions, service topology |
+| `senior-backend` | Application containerization, health endpoints, config management |
+| `code-reviewer` | Terraform plan review, pipeline config review |
+| `incident-commander` | Incident escalation, postmortem, rollback procedures |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 2.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Devops&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Devops&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Devops in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Devops&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Devops&quot;
+4. Description: &quot;Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deploymen...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-devops/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Senior Devops&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior DevOps Engineer
+
+The agent generates CI/CD pipelines, scaffolds Terraform infrastructure, and manages deployments with strategy selection, health checks, and rollback support.
+
+---
+
+## Quick Start
+
+```bash
+# Generate CI/CD pipeline from project analysis
+python scripts/pipeline_generator.py &lt;project-path&gt; --platform github-actions --verbose
+
+# Scaffold Terraform infrastructure
+python scripts/terraform_scaffolder.py &lt;target-path&gt; --provider aws --env production --verbose
+
+# Manage deployment with canary strategy
+python scripts/deployment_manager.py &lt;target-path&gt; --strategy canary --verbose
+```
+
+## Tools Overview
+
+| Tool | Input | Output |
+|------|-------|--------|
+| `pipeline_generator.py` | Project path | CI/CD pipeline config (GitHub Actions, GitLab CI, Jenkins, CircleCI) |
+| `terraform_scaffolder.py` | Target path + provider | Terraform module structure with state config |
+| `deployment_manager.py` | Target path + strategy | Deployment plan with health checks and rollback |
+
+All tools support `--json` for machine-readable output and `--output` / `-o` for file writing.
+
+---
+
+## Workflow 1: Containerize and Deploy
+
+**Step 1 -- Build a production Dockerfile.**
+
+The agent generates multi-stage Dockerfiles following this pattern:
+
+```dockerfile
+# Stage 1: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --only=production &amp;&amp; npm cache clean --force
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:20-alpine AS production
+WORKDIR /app
+RUN addgroup -g 1001 appgroup &amp;&amp; \
+    adduser -u 1001 -G appgroup -s /bin/sh -D appuser
+COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/package.json ./
+USER appuser
+EXPOSE 3000
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/healthz || exit 1
+CMD [&quot;node&quot;, &quot;dist/server.js&quot;]
+```
+
+**Validation checkpoint:** Image builds with `docker build -t app:test .` and `docker run --rm app:test` returns healthy.
+
+**Step 2 -- Deploy to Kubernetes.**
+
+The agent creates a Deployment with probes, resource limits, and security context:
+
+```yaml
+spec:
+  containers:
+    - name: app
+      image: myapp:1.2.3
+      resources:
+        requests: { cpu: 250m, memory: 256Mi }
+        limits: { cpu: &quot;1&quot;, memory: 512Mi }
+      livenessProbe:
+        httpGet: { path: /healthz, port: 3000 }
+        initialDelaySeconds: 15
+        periodSeconds: 20
+      readinessProbe:
+        httpGet: { path: /ready, port: 3000 }
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      startupProbe:
+        httpGet: { path: /healthz, port: 3000 }
+        failureThreshold: 30
+        periodSeconds: 10
+```
+
+**Probe decision:**
+- **startupProbe**: Slow-starting apps (JVM, model loading). Prevents liveness from killing during startup.
+- **livenessProbe**: Detects deadlocks. Keep simple -- do not check downstream dependencies.
+- **readinessProbe**: Controls traffic routing. Include dependency checks here.
+
+**Validation checkpoint:** `kubectl get pods -l app=myapp` shows all pods Running and Ready.
+
+---
+
+## Workflow 2: Infrastructure as Code with Terraform
+
+**Step 1 -- Scaffold the module structure.**
+
+```bash
+python scripts/terraform_scaffolder.py ./infrastructure --provider aws --env production --verbose
+```
+
+The agent produces:
+```
+infrastructure/
+  modules/
+    vpc/         # main.tf, variables.tf, outputs.tf
+    eks/
+    rds/
+  environments/
+    staging/     # main.tf, terraform.tfvars, backend.tf
+    production/
+```
+
+**Step 2 -- Configure remote state.**
+
+```hcl
+terraform {
+  backend &quot;s3&quot; {
+    bucket         = &quot;mycompany-terraform-state&quot;
+    key            = &quot;production/infrastructure.tfstate&quot;
+    region         = &quot;us-east-1&quot;
+    dynamodb_table = &quot;terraform-locks&quot;
+    encrypt        = true
+  }
+}
+```
+
+**Step 3 -- Run drift detection in CI.**
+
+```bash
+terraform plan -detailed-exitcode -out=plan.tfplan
+# Exit 0 = clean, Exit 1 = error, Exit 2 = drift detected
+```
+
+**Validation checkpoint:** `terraform plan` shows no unexpected changes. Drift alerts fire within 24 hours.
+
+**Key rules:**
+- One state file per environment per component (blast radius control)
+- Never store state locally or in git
+- Run `terraform plan` in CI, `terraform apply` only after approval
+- Use directories for environment separation, modules for shared logic
+
+---
+
+## Workflow 3: CI/CD Pipeline Design
+
+```bash
+python scripts/pipeline_generator.py /path/to/project --platform github-actions --json
+```
+
+The agent generates pipelines following these principles:
+
+1. **Fail fast** -- lint and unit tests before expensive integration tests
+2. **Cache aggressively** -- node_modules, Docker layers, pip packages
+3. **Immutable artifacts** -- build once, deploy the same artifact everywhere
+4. **Gate promotions** -- manual approval or smoke tests before production
+5. **Parallel execution** -- independent test suites and security scans run concurrently
+
+**Example: GitHub Actions with matrix testing and deployment gates**
+
+```yaml
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: &quot;${{ matrix.node-version }}&quot;, cache: npm }
+      - run: npm ci &amp;&amp; npm run lint &amp;&amp; npm test -- --coverage
+
+  build:
+    needs: [test, security]
+    if: github.ref == &#x27;refs/heads/main&#x27;
+    steps:
+      - uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: &quot;${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}&quot;
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-staging:
+    needs: build
+    environment: staging
+    steps:
+      - run: helm upgrade --install app charts/myapp --set image.tag=${{ github.sha }} --wait
+
+  deploy-production:
+    needs: deploy-staging
+    environment: production  # requires manual approval
+```
+
+**Validation checkpoint:** Pipeline runs in under 15 minutes. All stages produce exit code 0.
+
+---
+
+## Deployment Strategy Selection
+
+| Strategy | Risk | Rollback Speed | Infra Cost | Best For |
+|----------|------|----------------|------------|----------|
+| **Rolling** | Medium | Minutes | 1x | Stateless services, internal APIs |
+| **Blue-Green** | Low | Seconds | 2x | Mission-critical, zero-downtime |
+| **Canary** | Low | Seconds | 1.1x | User-facing, gradual validation |
+| **Feature Flags** | Lowest | Instant | 1x | Granular control, A/B testing |
+
+**Canary promotion ladder:**
+1. Deploy at 5% traffic. Monitor error rate and latency for 10 min.
+2. Promote to 25%. Monitor 10 min.
+3. Promote to 50%. Monitor 15 min.
+4. Promote to 100%.
+5. Automated rollback if error rate exceeds baseline by 2x at any step.
+
+---
+
+## Monitoring Essentials
+
+Every service dashboard includes the **Four Golden Signals**:
+
+1. **Latency** -- P50, P90, P99 response times
+2. **Traffic** -- Requests per second by endpoint and status code
+3. **Errors** -- 5xx rate, 4xx rate, application error codes
+4. **Saturation** -- CPU, memory, connection pool, queue depth
+
+**SLO targets (example):**
+
+| Service | SLI | SLO | Error Budget |
+|---------|-----|-----|--------------|
+| API Gateway | Successful requests / Total | 99.9% (43.8 min/month downtime) | 0.1% |
+| API Latency | Requests &lt; 500ms / Total | P99 &lt; 500ms | 1% |
+
+When the error budget is exhausted, the agent recommends freezing feature deployments until the budget recovers.
+
+---
+
+## Anti-Patterns
+
+1. **Monolithic state** -- one Terraform state for everything. Split by component and environment.
+2. **`latest` tag in production** -- always use specific image tags.
+3. **Secrets in image layers** -- inject at runtime via environment or mounted secrets. Verify with `docker history --no-trunc`.
+4. **No resource limits** -- every container needs CPU/memory limits to prevent noisy-neighbor attacks.
+5. **Manual deployments** -- automate with approval gates instead.
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Terraform state lock stuck | Interrupted `terraform apply` left DynamoDB lock | `terraform force-unlock &lt;LOCK_ID&gt;` after confirming no apply running |
+| Pods in `CrashLoopBackOff` | Failing health checks or missing config/secrets | `kubectl logs &lt;pod&gt;`, verify ConfigMaps/Secrets, increase `startupProbe.failureThreshold` |
+| Docker builds slow (10+ min) | Layer cache invalidated by early COPY of changing files | Copy dependency manifests before source; use BuildKit cache mounts |
+| Helm upgrade fails &quot;another operation in progress&quot; | Previous release in pending/failed state | `helm history &lt;release&gt;`, then `helm rollback &lt;release&gt; &lt;last-good&gt;` |
+| Canary shows healthy but users report errors | Metrics aggregated across all pods mask canary errors | Use per-revision metric labels; configure Istio/Nginx to tag canary traffic |
+
+---
+
+## References
+
+| Guide | Path | Content |
+|-------|------|---------|
+| CI/CD Pipeline Guide | `references/cicd_pipeline_guide.md` | Pipeline patterns, platform comparisons, optimization |
+| Infrastructure as Code | `references/infrastructure_as_code.md` | Terraform patterns, module design, state management |
+| Deployment Strategies | `references/deployment_strategies.md` | Strategy details, rollback procedures, traffic management |
+
+See also: `references/kubernetes_patterns.md` for Helm charts, HPA/VPA/KEDA decisions, network policies, and RBAC patterns. `references/cloud_platform_guide.md` for AWS/GCP/Azure service comparison, multi-cloud strategy, and cost optimization.
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `senior-secops` | Security scanning in CI/CD, container image scanning, compliance checks |
+| `senior-architect` | Infrastructure design decisions, service topology |
+| `senior-backend` | Application containerization, health endpoints, config management |
+| `code-reviewer` | Terraform plan review, pipeline config review |
+| `incident-commander` | Incident escalation, postmortem, rollback procedures |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 2.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Devops&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Devops&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Devops in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Devops&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Devops&quot;
+4. Description: &quot;Senior DevOps engineering skill covering CI/CD pipeline design, infrastructure as code with Terraform, container orchestration with Kubernetes, cloud platform architecture (AWS, GCP, Azure), deploymen...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-devops/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

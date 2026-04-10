@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Playwright Pro (Engineering domain).
 
 Production-grade end-to-end testing with Playwright. Covers test generation from user stories, page object patterns, locator strategy, flaky test diagnosis, Cypress/Selenium migration, CI integration,...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/playwright-pro
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Playwright Pro (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Playwright Pro (Engineering domain).
 
 Production-grade end-to-end testing with Playwright. Covers test generation from user stories, page object patterns, locator strategy, flaky test diagnosis, Cypress/Selenium migration, CI integration,...
 
@@ -425,7 +447,1106 @@ https://github.com/borghei/Claude-Skills/tree/main/playwright-pro
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Playwright Pro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Playwright Pro
+
+**Tier:** POWERFUL
+**Category:** Engineering / Testing
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Production-grade end-to-end testing with Playwright. Generate tests from user stories, implement the Page Object pattern for maintainability, apply the correct locator strategy for resilient tests, diagnose and fix flaky tests, migrate from Cypress or Selenium, integrate with CI/CD, run visual regression tests, and perform accessibility audits. Enforces the 10 golden rules that eliminate 90% of E2E test failures.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific workflow:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Init** | `skills/init.md` | Bootstrap Playwright in a project -- install, configure, create first test |
+| **Generate** | `skills/generate.md` | Generate test files from user stories or page descriptions |
+| **Fix** | `skills/fix.md` | Diagnose and fix failing or flaky tests using trace analysis |
+| **Migrate** | `skills/migrate.md` | Migrate from Cypress or Selenium to Playwright |
+| **Review** | `skills/review.md` | Audit test quality, coverage gaps, and flaky test indicators |
+| **Report** | `skills/report.md` | Generate execution reports from Playwright JSON output |
+| **Coverage** | `skills/coverage.md` | Map tests to user stories, identify coverage gaps |
+| **BrowserStack** | `skills/browserstack.md` | BrowserStack cloud integration for cross-browser testing |
+| **TestRail** | `skills/testrail.md` | TestRail integration for test case management |
+
+### Sub-Skill Flow
+
+```
+Init ──&gt; Generate ──&gt; Review ──&gt; Fix (if needed)
+                         │
+                    Coverage ──&gt; Generate (fill gaps)
+                         │
+                    Report ──&gt; BrowserStack / TestRail
+```
+
+**Typical lifecycle:** Init sets up the project, Generate creates tests from stories, Review audits quality, Fix resolves failures, Coverage identifies gaps that feed back into Generate, and Report/BrowserStack/TestRail handle reporting and integration.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/test_generator.py` | Generate Playwright test code from user story descriptions |
+| `scripts/flaky_detector.py` | Analyze multiple CI runs to detect flaky test patterns |
+| `scripts/coverage_mapper.py` | Map tests to user flows and identify coverage gaps |
+| `scripts/page_object_generator.py` | Generate Page Object classes from HTML or selector lists |
+| `scripts/test_analyzer.py` | Scan test files for anti-patterns and quality issues |
+| `scripts/test_report_parser.py` | Parse Playwright JSON reports into summaries |
+
+## Keywords
+
+Playwright, E2E testing, end-to-end testing, page objects, flaky tests, test generation, Cypress migration, Selenium migration, visual regression, accessibility testing, CI integration
+
+## 10 Golden Rules
+
+These rules are non-negotiable. Following them eliminates 90% of E2E test failures.
+
+1. **`getByRole()` over CSS/XPath** — resilient to markup changes
+2. **Never `page.waitForTimeout()`** — use web-first assertions instead
+3. **`expect(locator)` auto-retries; `expect(await locator.textContent())` does NOT**
+4. **Isolate every test** — no shared state between tests
+5. **`baseURL` in config** — zero hardcoded URLs in tests
+6. **Retries: 2 in CI, 0 locally** — retries mask flakiness in dev
+7. **Traces: `&#x27;on-first-retry&#x27;`** — rich debugging without slowdown
+8. **Fixtures over globals** — `test.extend()` for shared setup
+9. **One behavior per test** — multiple related assertions are fine
+10. **Mock external services only** — never mock your own app
+
+## Locator Priority (Most to Least Preferred)
+
+```
+1. getByRole(&#x27;button&#x27;, { name: &#x27;Submit&#x27; })     — semantic, accessible
+2. getByLabel(&#x27;Email address&#x27;)                   — form fields with labels
+3. getByText(&#x27;Welcome back&#x27;)                     — visible text content
+4. getByPlaceholder(&#x27;Enter your email&#x27;)          — inputs with placeholder
+5. getByTestId(&#x27;submit-button&#x27;)                  — when no semantic option exists
+6. page.locator(&#x27;.submit-btn&#x27;)                   — CSS as last resort
+7. page.locator(&#x27;//button[@type=&quot;submit&quot;]&#x27;)      — XPath: avoid entirely
+```
+
+### Why This Order Matters
+
+```typescript
+// FRAGILE: breaks when CSS class changes
+await page.locator(&#x27;.btn-primary-lg&#x27;).click();
+
+// FRAGILE: breaks when DOM structure changes
+await page.locator(&#x27;div &gt; form &gt; button:nth-child(2)&#x27;).click();
+
+// RESILIENT: survives refactors, tests what users see
+await page.getByRole(&#x27;button&#x27;, { name: &#x27;Create account&#x27; }).click();
+```
+
+## Configuration
+
+### playwright.config.ts
+
+```typescript
+import { defineConfig, devices } from &#x27;@playwright/test&#x27;;
+
+export default defineConfig({
+  testDir: &#x27;./tests/e2e&#x27;,
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : undefined,
+  reporter: process.env.CI
+    ? [[&#x27;html&#x27;], [&#x27;github&#x27;], [&#x27;json&#x27;, { outputFile: &#x27;test-results.json&#x27; }]]
+    : [[&#x27;html&#x27;]],
+
+  use: {
+    baseURL: process.env.BASE_URL || &#x27;http://localhost:3000&#x27;,
+    trace: &#x27;on-first-retry&#x27;,
+    screenshot: &#x27;only-on-failure&#x27;,
+    video: &#x27;retain-on-failure&#x27;,
+  },
+
+  projects: [
+    // Auth setup: runs once, shares state with all tests
+    { name: &#x27;setup&#x27;, testMatch: /.*\.setup\.ts/ },
+
+    {
+      name: &#x27;chromium&#x27;,
+      use: { ...devices[&#x27;Desktop Chrome&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+    {
+      name: &#x27;firefox&#x27;,
+      use: { ...devices[&#x27;Desktop Firefox&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+    {
+      name: &#x27;mobile-chrome&#x27;,
+      use: { ...devices[&#x27;Pixel 5&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+  ],
+
+  webServer: {
+    command: &#x27;pnpm dev&#x27;,
+    url: &#x27;http://localhost:3000&#x27;,
+    reuseExistingServer: !process.env.CI,
+    timeout: 30000,
+  },
+});
+```
+
+## Page Object Pattern
+
+```typescript
+// pages/login.page.ts
+import { type Page, type Locator, expect } from &#x27;@playwright/test&#x27;;
+
+export class LoginPage {
+  readonly page: Page;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly submitButton: Locator;
+  readonly errorMessage: Locator;
+  readonly forgotPasswordLink: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.emailInput = page.getByLabel(&#x27;Email address&#x27;);
+    this.passwordInput = page.getByLabel(&#x27;Password&#x27;);
+    this.submitButton = page.getByRole(&#x27;button&#x27;, { name: &#x27;Sign in&#x27; });
+    this.errorMessage = page.getByRole(&#x27;alert&#x27;);
+    this.forgotPasswordLink = page.getByRole(&#x27;link&#x27;, { name: &#x27;Forgot password?&#x27; });
+  }
+
+  async goto() {
+    await this.page.goto(&#x27;/login&#x27;);
+  }
+
+  async login(email: string, password: string) {
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.submitButton.click();
+  }
+
+  async expectError(message: string) {
+    await expect(this.errorMessage).toContainText(message);
+  }
+
+  async expectRedirectToDashboard() {
+    await expect(this.page).toHaveURL(/\/dashboard/);
+  }
+}
+```
+
+```typescript
+// pages/dashboard.page.ts
+import { type Page, type Locator, expect } from &#x27;@playwright/test&#x27;;
+
+export class DashboardPage {
+  readonly page: Page;
+  readonly heading: Locator;
+  readonly projectList: Locator;
+  readonly createProjectButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.heading = page.getByRole(&#x27;heading&#x27;, { name: &#x27;Dashboard&#x27; });
+    this.projectList = page.getByRole(&#x27;list&#x27;, { name: &#x27;Projects&#x27; });
+    this.createProjectButton = page.getByRole(&#x27;button&#x27;, { name: &#x27;New project&#x27; });
+  }
+
+  async expectLoaded() {
+    await expect(this.heading).toBeVisible();
+  }
+
+  async getProjectCount() {
+    return this.projectList.getByRole(&#x27;listitem&#x27;).count();
+  }
+
+  async createProject(name: string) {
+    await this.createProjectButton.click();
+    await this.page.getByLabel(&#x27;Project name&#x27;).fill(name);
+    await this.page.getByRole(&#x27;button&#x27;, { name: &#x27;Create&#x27; }).click();
+  }
+}
+```
+
+## Test Generation from User Stories
+
+Given a user story, generate tests following this pattern:
+
+```typescript
+// tests/e2e/auth/login.spec.ts
+import { test, expect } from &#x27;@playwright/test&#x27;;
+import { LoginPage } from &#x27;../../pages/login.page&#x27;;
+import { DashboardPage } from &#x27;../../pages/dashboard.page&#x27;;
+
+test.describe(&#x27;User Login&#x27;, () =&gt; {
+  let loginPage: LoginPage;
+
+  test.beforeEach(async ({ page }) =&gt; {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
+  });
+
+  test(&#x27;successful login redirects to dashboard&#x27;, async ({ page }) =&gt; {
+    await loginPage.login(&#x27;user@example.com&#x27;, &#x27;password123&#x27;);
+    const dashboard = new DashboardPage(page);
+    await dashboard.expectLoaded();
+  });
+
+  test(&#x27;shows error for invalid credentials&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;user@example.com&#x27;, &#x27;wrongpassword&#x27;);
+    await loginPage.expectError(&#x27;Invalid email or password&#x27;);
+  });
+
+  test(&#x27;shows validation error for empty email&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;&#x27;, &#x27;password123&#x27;);
+    await loginPage.expectError(&#x27;Email is required&#x27;);
+  });
+
+  test(&#x27;shows validation error for invalid email format&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;not-an-email&#x27;, &#x27;password123&#x27;);
+    await loginPage.expectError(&#x27;Enter a valid email&#x27;);
+  });
+
+  test(&#x27;forgot password link navigates to reset page&#x27;, async ({ page }) =&gt; {
+    await loginPage.forgotPasswordLink.click();
+    await expect(page).toHaveURL(/\/forgot-password/);
+  });
+});
+```
+
+## Authentication Setup (Shared State)
+
+```typescript
+// tests/e2e/auth.setup.ts
+import { test as setup, expect } from &#x27;@playwright/test&#x27;;
+
+const authFile = &#x27;playwright/.auth/user.json&#x27;;
+
+setup(&#x27;authenticate as test user&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/login&#x27;);
+  await page.getByLabel(&#x27;Email address&#x27;).fill(&#x27;test@example.com&#x27;);
+  await page.getByLabel(&#x27;Password&#x27;).fill(&#x27;password123&#x27;);
+  await page.getByRole(&#x27;button&#x27;, { name: &#x27;Sign in&#x27; }).click();
+
+  // Wait for redirect to confirm login succeeded
+  await expect(page).toHaveURL(/\/dashboard/);
+
+  // Save authentication state for reuse
+  await page.context().storageState({ path: authFile });
+});
+```
+
+## Flaky Test Diagnosis
+
+### Common Causes and Fixes
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `waitForTimeout(2000)` in test | Timing-dependent | Replace with `await expect(locator).toBeVisible()` |
+| Test passes locally, fails in CI | Race condition | Add web-first assertion before interaction |
+| Element not found after navigation | Page not loaded | `await page.waitForURL(&#x27;/expected-path&#x27;)` |
+| Stale element reference | DOM re-rendered | Use Playwright locators (auto-retry) |
+| Different data between runs | Shared test state | Isolate with `test.beforeEach` setup |
+| Flaky on slow CI runners | Insufficient timeout | Increase `expect` timeout, not `waitForTimeout` |
+
+### Diagnosis Commands
+
+```bash
+# Run with trace on every test (not just retries)
+npx playwright test --trace on
+
+# Run a specific flaky test 10 times
+for i in $(seq 1 10); do npx playwright test tests/e2e/checkout.spec.ts; done
+
+# Show test timeline
+npx playwright test --trace on
+npx playwright show-trace test-results/*/trace.zip
+
+# Run in headed mode for visual debugging
+npx playwright test --headed --retries 0
+
+# Debug a specific test interactively
+npx playwright test --debug tests/e2e/checkout.spec.ts
+```
+
+## Cypress to Playwright Migration
+
+| Cypress | Playwright |
+|---------|-----------|
+| `cy.visit(&#x27;/path&#x27;)` | `await page.goto(&#x27;/path&#x27;)` |
+| `cy.get(&#x27;.selector&#x27;)` | `page.locator(&#x27;.selector&#x27;)` |
+| `cy.contains(&#x27;text&#x27;)` | `page.getByText(&#x27;text&#x27;)` |
+| `cy.get(&#x27;[data-testid=&quot;x&quot;]&#x27;)` | `page.getByTestId(&#x27;x&#x27;)` |
+| `cy.intercept(&#x27;GET&#x27;, &#x27;/api/*&#x27;)` | `await page.route(&#x27;/api/*&#x27;, ...)` |
+| `cy.wait(&#x27;@alias&#x27;)` | `await page.waitForResponse(&#x27;/api/*&#x27;)` |
+| `cy.should(&#x27;be.visible&#x27;)` | `await expect(locator).toBeVisible()` |
+| `cy.should(&#x27;have.text&#x27;, &#x27;x&#x27;)` | `await expect(locator).toHaveText(&#x27;x&#x27;)` |
+| `cy.fixture(&#x27;data.json&#x27;)` | `JSON.parse(fs.readFileSync(...))` |
+| `beforeEach(() =&gt; { cy.login() })` | Auth setup project + storageState |
+
+## CI Integration
+
+### GitHub Actions
+
+```yaml
+name: E2E Tests
+on: [push, pull_request]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: &#x27;pnpm&#x27;
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm build  # build the app first
+      - run: pnpm exec playwright test
+        env:
+          BASE_URL: http://localhost:3000
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+```
+
+## Visual Regression Testing
+
+```typescript
+// tests/e2e/visual/dashboard.spec.ts
+import { test, expect } from &#x27;@playwright/test&#x27;;
+
+test(&#x27;dashboard matches visual snapshot&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+  await page.waitForLoadState(&#x27;networkidle&#x27;);
+
+  // Full page screenshot comparison
+  await expect(page).toHaveScreenshot(&#x27;dashboard.png&#x27;, {
+    maxDiffPixels: 50,  // allow small rendering differences
+  });
+});
+
+test(&#x27;project card component snapshot&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+  const card = page.getByTestId(&#x27;project-card&#x27;).first();
+
+  await expect(card).toHaveScreenshot(&#x27;project-card.png&#x27;, {
+    maxDiffPixelRatio: 0.01,
+  });
+});
+```
+
+```bash
+# Generate/update baseline screenshots
+npx playwright test --update-snapshots
+
+# Run visual comparison
+npx playwright test tests/e2e/visual/
+```
+
+## Accessibility Testing
+
+```typescript
+import { test, expect } from &#x27;@playwright/test&#x27;;
+import AxeBuilder from &#x27;@axe-core/playwright&#x27;;
+
+test(&#x27;login page has no accessibility violations&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/login&#x27;);
+
+  const results = await new AxeBuilder({ page })
+    .withTags([&#x27;wcag2a&#x27;, &#x27;wcag2aa&#x27;, &#x27;wcag21a&#x27;, &#x27;wcag21aa&#x27;])
+    .analyze();
+
+  expect(results.violations).toEqual([]);
+});
+
+test(&#x27;dashboard meets WCAG AA standards&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+
+  const results = await new AxeBuilder({ page })
+    .exclude(&#x27;.third-party-widget&#x27;)  // exclude elements you don&#x27;t control
+    .analyze();
+
+  // Log violations for debugging
+  for (const violation of results.violations) {
+    console.log(`${violation.impact}: ${violation.description}`);
+    for (const node of violation.nodes) {
+      console.log(`  - ${node.html}`);
+    }
+  }
+
+  expect(results.violations.filter(v =&gt; v.impact === &#x27;critical&#x27;)).toEqual([]);
+});
+```
+
+## Common Pitfalls
+
+- **`page.waitForTimeout(N)`** — the single most common cause of flaky tests; use web-first assertions
+- **CSS selectors as primary strategy** — breaks on every refactor; use role/label/text locators
+- **Shared state between tests** — one test&#x27;s data pollutes another; isolate with proper setup/teardown
+- **No trace configuration** — debugging CI failures without traces wastes hours; enable `on-first-retry`
+- **Testing third-party services** — mock external APIs; only test your own application
+- **Running all browsers in development** — test Chromium locally, full matrix in CI only
+- **No page objects** — duplicate locators across tests create maintenance nightmares
+
+## Best Practices
+
+1. **Page Object per page/component** — centralize locators, expose user-intent methods
+2. **Web-first assertions everywhere** — `expect(locator).toBeVisible()` auto-retries, `waitForTimeout` does not
+3. **Auth as a setup project** — authenticate once, reuse `storageState` across all tests
+4. **One behavior per test** — keeps failures isolated and test names meaningful
+5. **Run in CI with `--retries 2`** — but investigate any test that needs retries locally
+6. **Trace + screenshot on failure** — upload as CI artifacts for post-mortem debugging
+7. **Visual regression for critical UI** — catch unintended visual changes automatically
+8. **Accessibility tests in the suite** — WCAG compliance as a regression gate, not an afterthought
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `locator.click()` times out | Element hidden behind overlay/modal or not yet rendered | Add `await expect(locator).toBeVisible()` before clicking; check for z-index overlays blocking the target |
+| Visual snapshots fail on every CI run | Different OS font rendering between local and CI | Generate baseline screenshots inside CI (Linux), not locally (macOS); use `maxDiffPixelRatio: 0.02` for tolerance |
+| Auth setup project runs but tests get 401 | `storageState` path mismatch or expired token | Verify `storageState` path in `playwright.config.ts` matches the setup script; confirm tokens don&#x27;t expire mid-suite |
+| `page.route()` intercept never triggers | Route pattern doesn&#x27;t match the actual request URL or glob syntax error | Log requests with `page.on(&#x27;request&#x27;, r =&gt; console.log(r.url()))` to verify the exact URL; use `**` glob for subpaths |
+| Tests pass individually but fail when run together | Shared mutable state or port collision between parallel workers | Ensure test isolation via `test.beforeEach` setup; use unique test data per worker with `test.info().parallelIndex` |
+| `toHaveScreenshot()` throws &quot;missing baseline&quot; | Snapshot file not committed to version control | Run `npx playwright test --update-snapshots` and commit the generated files under the `__screenshots__` directory |
+| Accessibility audit returns false positives | Axe scanning third-party embedded widgets or iframes | Use `.exclude(&#x27;.third-party-widget&#x27;)` or `.include(&#x27;#app-root&#x27;)` to scope the audit to your own markup |
+
+## Success Criteria
+
+- **Flaky test rate below 2%** — measured over a rolling 7-day window across all CI runs; any test exceeding 5% flake rate is quarantined and fixed within 48 hours
+- **E2E suite completes within 10 minutes** — full cross-browser matrix (Chromium, Firefox, mobile) on CI with 4 parallel workers; alert if wall-clock time exceeds threshold
+- **100% of critical user journeys covered** — login, checkout, onboarding, and core CRUD workflows each have dedicated spec files with happy-path and primary error-path tests
+- **Zero `waitForTimeout()` calls in the codebase** — enforced via ESLint rule or grep-based CI check; all waits use web-first assertions
+- **Page Object coverage for every tested page** — no raw locators in spec files; all element access goes through page object classes with user-intent method names
+- **WCAG AA compliance gate passing** — accessibility tests run on every PR; zero critical or serious violations allowed to merge
+- **Visual regression baselines reviewed on every UI PR** — screenshot diffs attached to PR as artifacts; baseline updates require explicit reviewer approval
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- End-to-end test authoring, organization, and maintenance with Playwright
+- Page Object Model architecture and locator strategy best practices
+- Flaky test diagnosis, CI integration, and trace-based debugging
+- Visual regression testing and WCAG accessibility auditing
+
+**This skill does NOT cover:**
+- Unit testing or component testing in isolation (see `engineering/testing-strategy` for test pyramid guidance)
+- API contract testing or load/performance testing (see `api-test-suite-builder` for API-focused testing)
+- Test data management, database seeding, or factory patterns for test fixtures
+- Mobile native app testing (Appium, Detox); this skill targets web browsers only
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ci-cd-pipeline-builder` | E2E tests run as a pipeline stage after build and unit tests | Pipeline config triggers `playwright test`; artifacts (traces, screenshots) upload on failure |
+| `api-test-suite-builder` | API tests validate backend contracts; Playwright tests validate UI flows end-to-end | API test results confirm endpoint stability before E2E suite runs against the same environment |
+| `pr-review-expert` | PR reviews check for test coverage on UI changes and flag missing E2E specs | Review checklist references Playwright Pro golden rules; flags `waitForTimeout` or raw CSS selectors |
+| `performance-profiler` | Performance budgets complement E2E tests to catch regressions | Profiler identifies slow pages; Playwright tests add `networkidle` waits or performance assertions for flagged routes |
+| `observability-designer` | Test failures feed into observability dashboards for flake tracking | CI test results export JSON reports; observability pipelines ingest pass/fail/flake metrics over time |
+| `release-manager` | E2E suite is a release gate; green suite required before deployment proceeds | Release workflow calls Playwright CI job; blocks release tag creation on any test failure |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Playwright Pro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Playwright Pro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Playwright Pro in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Playwright Pro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Playwright Pro&quot;
+4. Description: &quot;Production-grade end-to-end testing with Playwright. Covers test generation from user stories, page object patterns, locator strategy, flaky test diagnosis, Cypress/Selenium migration, CI integration,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/playwright-pro/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Playwright Pro&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Playwright Pro
+
+**Tier:** POWERFUL
+**Category:** Engineering / Testing
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Production-grade end-to-end testing with Playwright. Generate tests from user stories, implement the Page Object pattern for maintainability, apply the correct locator strategy for resilient tests, diagnose and fix flaky tests, migrate from Cypress or Selenium, integrate with CI/CD, run visual regression tests, and perform accessibility audits. Enforces the 10 golden rules that eliminate 90% of E2E test failures.
+
+## Sub-Skills
+
+This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific workflow:
+
+| Sub-Skill | File | Purpose |
+|-----------|------|---------|
+| **Init** | `skills/init.md` | Bootstrap Playwright in a project -- install, configure, create first test |
+| **Generate** | `skills/generate.md` | Generate test files from user stories or page descriptions |
+| **Fix** | `skills/fix.md` | Diagnose and fix failing or flaky tests using trace analysis |
+| **Migrate** | `skills/migrate.md` | Migrate from Cypress or Selenium to Playwright |
+| **Review** | `skills/review.md` | Audit test quality, coverage gaps, and flaky test indicators |
+| **Report** | `skills/report.md` | Generate execution reports from Playwright JSON output |
+| **Coverage** | `skills/coverage.md` | Map tests to user stories, identify coverage gaps |
+| **BrowserStack** | `skills/browserstack.md` | BrowserStack cloud integration for cross-browser testing |
+| **TestRail** | `skills/testrail.md` | TestRail integration for test case management |
+
+### Sub-Skill Flow
+
+```
+Init ──&gt; Generate ──&gt; Review ──&gt; Fix (if needed)
+                         │
+                    Coverage ──&gt; Generate (fill gaps)
+                         │
+                    Report ──&gt; BrowserStack / TestRail
+```
+
+**Typical lifecycle:** Init sets up the project, Generate creates tests from stories, Review audits quality, Fix resolves failures, Coverage identifies gaps that feed back into Generate, and Report/BrowserStack/TestRail handle reporting and integration.
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/test_generator.py` | Generate Playwright test code from user story descriptions |
+| `scripts/flaky_detector.py` | Analyze multiple CI runs to detect flaky test patterns |
+| `scripts/coverage_mapper.py` | Map tests to user flows and identify coverage gaps |
+| `scripts/page_object_generator.py` | Generate Page Object classes from HTML or selector lists |
+| `scripts/test_analyzer.py` | Scan test files for anti-patterns and quality issues |
+| `scripts/test_report_parser.py` | Parse Playwright JSON reports into summaries |
+
+## Keywords
+
+Playwright, E2E testing, end-to-end testing, page objects, flaky tests, test generation, Cypress migration, Selenium migration, visual regression, accessibility testing, CI integration
+
+## 10 Golden Rules
+
+These rules are non-negotiable. Following them eliminates 90% of E2E test failures.
+
+1. **`getByRole()` over CSS/XPath** — resilient to markup changes
+2. **Never `page.waitForTimeout()`** — use web-first assertions instead
+3. **`expect(locator)` auto-retries; `expect(await locator.textContent())` does NOT**
+4. **Isolate every test** — no shared state between tests
+5. **`baseURL` in config** — zero hardcoded URLs in tests
+6. **Retries: 2 in CI, 0 locally** — retries mask flakiness in dev
+7. **Traces: `&#x27;on-first-retry&#x27;`** — rich debugging without slowdown
+8. **Fixtures over globals** — `test.extend()` for shared setup
+9. **One behavior per test** — multiple related assertions are fine
+10. **Mock external services only** — never mock your own app
+
+## Locator Priority (Most to Least Preferred)
+
+```
+1. getByRole(&#x27;button&#x27;, { name: &#x27;Submit&#x27; })     — semantic, accessible
+2. getByLabel(&#x27;Email address&#x27;)                   — form fields with labels
+3. getByText(&#x27;Welcome back&#x27;)                     — visible text content
+4. getByPlaceholder(&#x27;Enter your email&#x27;)          — inputs with placeholder
+5. getByTestId(&#x27;submit-button&#x27;)                  — when no semantic option exists
+6. page.locator(&#x27;.submit-btn&#x27;)                   — CSS as last resort
+7. page.locator(&#x27;//button[@type=&quot;submit&quot;]&#x27;)      — XPath: avoid entirely
+```
+
+### Why This Order Matters
+
+```typescript
+// FRAGILE: breaks when CSS class changes
+await page.locator(&#x27;.btn-primary-lg&#x27;).click();
+
+// FRAGILE: breaks when DOM structure changes
+await page.locator(&#x27;div &gt; form &gt; button:nth-child(2)&#x27;).click();
+
+// RESILIENT: survives refactors, tests what users see
+await page.getByRole(&#x27;button&#x27;, { name: &#x27;Create account&#x27; }).click();
+```
+
+## Configuration
+
+### playwright.config.ts
+
+```typescript
+import { defineConfig, devices } from &#x27;@playwright/test&#x27;;
+
+export default defineConfig({
+  testDir: &#x27;./tests/e2e&#x27;,
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : undefined,
+  reporter: process.env.CI
+    ? [[&#x27;html&#x27;], [&#x27;github&#x27;], [&#x27;json&#x27;, { outputFile: &#x27;test-results.json&#x27; }]]
+    : [[&#x27;html&#x27;]],
+
+  use: {
+    baseURL: process.env.BASE_URL || &#x27;http://localhost:3000&#x27;,
+    trace: &#x27;on-first-retry&#x27;,
+    screenshot: &#x27;only-on-failure&#x27;,
+    video: &#x27;retain-on-failure&#x27;,
+  },
+
+  projects: [
+    // Auth setup: runs once, shares state with all tests
+    { name: &#x27;setup&#x27;, testMatch: /.*\.setup\.ts/ },
+
+    {
+      name: &#x27;chromium&#x27;,
+      use: { ...devices[&#x27;Desktop Chrome&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+    {
+      name: &#x27;firefox&#x27;,
+      use: { ...devices[&#x27;Desktop Firefox&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+    {
+      name: &#x27;mobile-chrome&#x27;,
+      use: { ...devices[&#x27;Pixel 5&#x27;] },
+      dependencies: [&#x27;setup&#x27;],
+    },
+  ],
+
+  webServer: {
+    command: &#x27;pnpm dev&#x27;,
+    url: &#x27;http://localhost:3000&#x27;,
+    reuseExistingServer: !process.env.CI,
+    timeout: 30000,
+  },
+});
+```
+
+## Page Object Pattern
+
+```typescript
+// pages/login.page.ts
+import { type Page, type Locator, expect } from &#x27;@playwright/test&#x27;;
+
+export class LoginPage {
+  readonly page: Page;
+  readonly emailInput: Locator;
+  readonly passwordInput: Locator;
+  readonly submitButton: Locator;
+  readonly errorMessage: Locator;
+  readonly forgotPasswordLink: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.emailInput = page.getByLabel(&#x27;Email address&#x27;);
+    this.passwordInput = page.getByLabel(&#x27;Password&#x27;);
+    this.submitButton = page.getByRole(&#x27;button&#x27;, { name: &#x27;Sign in&#x27; });
+    this.errorMessage = page.getByRole(&#x27;alert&#x27;);
+    this.forgotPasswordLink = page.getByRole(&#x27;link&#x27;, { name: &#x27;Forgot password?&#x27; });
+  }
+
+  async goto() {
+    await this.page.goto(&#x27;/login&#x27;);
+  }
+
+  async login(email: string, password: string) {
+    await this.emailInput.fill(email);
+    await this.passwordInput.fill(password);
+    await this.submitButton.click();
+  }
+
+  async expectError(message: string) {
+    await expect(this.errorMessage).toContainText(message);
+  }
+
+  async expectRedirectToDashboard() {
+    await expect(this.page).toHaveURL(/\/dashboard/);
+  }
+}
+```
+
+```typescript
+// pages/dashboard.page.ts
+import { type Page, type Locator, expect } from &#x27;@playwright/test&#x27;;
+
+export class DashboardPage {
+  readonly page: Page;
+  readonly heading: Locator;
+  readonly projectList: Locator;
+  readonly createProjectButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.heading = page.getByRole(&#x27;heading&#x27;, { name: &#x27;Dashboard&#x27; });
+    this.projectList = page.getByRole(&#x27;list&#x27;, { name: &#x27;Projects&#x27; });
+    this.createProjectButton = page.getByRole(&#x27;button&#x27;, { name: &#x27;New project&#x27; });
+  }
+
+  async expectLoaded() {
+    await expect(this.heading).toBeVisible();
+  }
+
+  async getProjectCount() {
+    return this.projectList.getByRole(&#x27;listitem&#x27;).count();
+  }
+
+  async createProject(name: string) {
+    await this.createProjectButton.click();
+    await this.page.getByLabel(&#x27;Project name&#x27;).fill(name);
+    await this.page.getByRole(&#x27;button&#x27;, { name: &#x27;Create&#x27; }).click();
+  }
+}
+```
+
+## Test Generation from User Stories
+
+Given a user story, generate tests following this pattern:
+
+```typescript
+// tests/e2e/auth/login.spec.ts
+import { test, expect } from &#x27;@playwright/test&#x27;;
+import { LoginPage } from &#x27;../../pages/login.page&#x27;;
+import { DashboardPage } from &#x27;../../pages/dashboard.page&#x27;;
+
+test.describe(&#x27;User Login&#x27;, () =&gt; {
+  let loginPage: LoginPage;
+
+  test.beforeEach(async ({ page }) =&gt; {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
+  });
+
+  test(&#x27;successful login redirects to dashboard&#x27;, async ({ page }) =&gt; {
+    await loginPage.login(&#x27;user@example.com&#x27;, &#x27;password123&#x27;);
+    const dashboard = new DashboardPage(page);
+    await dashboard.expectLoaded();
+  });
+
+  test(&#x27;shows error for invalid credentials&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;user@example.com&#x27;, &#x27;wrongpassword&#x27;);
+    await loginPage.expectError(&#x27;Invalid email or password&#x27;);
+  });
+
+  test(&#x27;shows validation error for empty email&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;&#x27;, &#x27;password123&#x27;);
+    await loginPage.expectError(&#x27;Email is required&#x27;);
+  });
+
+  test(&#x27;shows validation error for invalid email format&#x27;, async () =&gt; {
+    await loginPage.login(&#x27;not-an-email&#x27;, &#x27;password123&#x27;);
+    await loginPage.expectError(&#x27;Enter a valid email&#x27;);
+  });
+
+  test(&#x27;forgot password link navigates to reset page&#x27;, async ({ page }) =&gt; {
+    await loginPage.forgotPasswordLink.click();
+    await expect(page).toHaveURL(/\/forgot-password/);
+  });
+});
+```
+
+## Authentication Setup (Shared State)
+
+```typescript
+// tests/e2e/auth.setup.ts
+import { test as setup, expect } from &#x27;@playwright/test&#x27;;
+
+const authFile = &#x27;playwright/.auth/user.json&#x27;;
+
+setup(&#x27;authenticate as test user&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/login&#x27;);
+  await page.getByLabel(&#x27;Email address&#x27;).fill(&#x27;test@example.com&#x27;);
+  await page.getByLabel(&#x27;Password&#x27;).fill(&#x27;password123&#x27;);
+  await page.getByRole(&#x27;button&#x27;, { name: &#x27;Sign in&#x27; }).click();
+
+  // Wait for redirect to confirm login succeeded
+  await expect(page).toHaveURL(/\/dashboard/);
+
+  // Save authentication state for reuse
+  await page.context().storageState({ path: authFile });
+});
+```
+
+## Flaky Test Diagnosis
+
+### Common Causes and Fixes
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| `waitForTimeout(2000)` in test | Timing-dependent | Replace with `await expect(locator).toBeVisible()` |
+| Test passes locally, fails in CI | Race condition | Add web-first assertion before interaction |
+| Element not found after navigation | Page not loaded | `await page.waitForURL(&#x27;/expected-path&#x27;)` |
+| Stale element reference | DOM re-rendered | Use Playwright locators (auto-retry) |
+| Different data between runs | Shared test state | Isolate with `test.beforeEach` setup |
+| Flaky on slow CI runners | Insufficient timeout | Increase `expect` timeout, not `waitForTimeout` |
+
+### Diagnosis Commands
+
+```bash
+# Run with trace on every test (not just retries)
+npx playwright test --trace on
+
+# Run a specific flaky test 10 times
+for i in $(seq 1 10); do npx playwright test tests/e2e/checkout.spec.ts; done
+
+# Show test timeline
+npx playwright test --trace on
+npx playwright show-trace test-results/*/trace.zip
+
+# Run in headed mode for visual debugging
+npx playwright test --headed --retries 0
+
+# Debug a specific test interactively
+npx playwright test --debug tests/e2e/checkout.spec.ts
+```
+
+## Cypress to Playwright Migration
+
+| Cypress | Playwright |
+|---------|-----------|
+| `cy.visit(&#x27;/path&#x27;)` | `await page.goto(&#x27;/path&#x27;)` |
+| `cy.get(&#x27;.selector&#x27;)` | `page.locator(&#x27;.selector&#x27;)` |
+| `cy.contains(&#x27;text&#x27;)` | `page.getByText(&#x27;text&#x27;)` |
+| `cy.get(&#x27;[data-testid=&quot;x&quot;]&#x27;)` | `page.getByTestId(&#x27;x&#x27;)` |
+| `cy.intercept(&#x27;GET&#x27;, &#x27;/api/*&#x27;)` | `await page.route(&#x27;/api/*&#x27;, ...)` |
+| `cy.wait(&#x27;@alias&#x27;)` | `await page.waitForResponse(&#x27;/api/*&#x27;)` |
+| `cy.should(&#x27;be.visible&#x27;)` | `await expect(locator).toBeVisible()` |
+| `cy.should(&#x27;have.text&#x27;, &#x27;x&#x27;)` | `await expect(locator).toHaveText(&#x27;x&#x27;)` |
+| `cy.fixture(&#x27;data.json&#x27;)` | `JSON.parse(fs.readFileSync(...))` |
+| `beforeEach(() =&gt; { cy.login() })` | Auth setup project + storageState |
+
+## CI Integration
+
+### GitHub Actions
+
+```yaml
+name: E2E Tests
+on: [push, pull_request]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: &#x27;pnpm&#x27;
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm build  # build the app first
+      - run: pnpm exec playwright test
+        env:
+          BASE_URL: http://localhost:3000
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+```
+
+## Visual Regression Testing
+
+```typescript
+// tests/e2e/visual/dashboard.spec.ts
+import { test, expect } from &#x27;@playwright/test&#x27;;
+
+test(&#x27;dashboard matches visual snapshot&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+  await page.waitForLoadState(&#x27;networkidle&#x27;);
+
+  // Full page screenshot comparison
+  await expect(page).toHaveScreenshot(&#x27;dashboard.png&#x27;, {
+    maxDiffPixels: 50,  // allow small rendering differences
+  });
+});
+
+test(&#x27;project card component snapshot&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+  const card = page.getByTestId(&#x27;project-card&#x27;).first();
+
+  await expect(card).toHaveScreenshot(&#x27;project-card.png&#x27;, {
+    maxDiffPixelRatio: 0.01,
+  });
+});
+```
+
+```bash
+# Generate/update baseline screenshots
+npx playwright test --update-snapshots
+
+# Run visual comparison
+npx playwright test tests/e2e/visual/
+```
+
+## Accessibility Testing
+
+```typescript
+import { test, expect } from &#x27;@playwright/test&#x27;;
+import AxeBuilder from &#x27;@axe-core/playwright&#x27;;
+
+test(&#x27;login page has no accessibility violations&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/login&#x27;);
+
+  const results = await new AxeBuilder({ page })
+    .withTags([&#x27;wcag2a&#x27;, &#x27;wcag2aa&#x27;, &#x27;wcag21a&#x27;, &#x27;wcag21aa&#x27;])
+    .analyze();
+
+  expect(results.violations).toEqual([]);
+});
+
+test(&#x27;dashboard meets WCAG AA standards&#x27;, async ({ page }) =&gt; {
+  await page.goto(&#x27;/dashboard&#x27;);
+
+  const results = await new AxeBuilder({ page })
+    .exclude(&#x27;.third-party-widget&#x27;)  // exclude elements you don&#x27;t control
+    .analyze();
+
+  // Log violations for debugging
+  for (const violation of results.violations) {
+    console.log(`${violation.impact}: ${violation.description}`);
+    for (const node of violation.nodes) {
+      console.log(`  - ${node.html}`);
+    }
+  }
+
+  expect(results.violations.filter(v =&gt; v.impact === &#x27;critical&#x27;)).toEqual([]);
+});
+```
+
+## Common Pitfalls
+
+- **`page.waitForTimeout(N)`** — the single most common cause of flaky tests; use web-first assertions
+- **CSS selectors as primary strategy** — breaks on every refactor; use role/label/text locators
+- **Shared state between tests** — one test&#x27;s data pollutes another; isolate with proper setup/teardown
+- **No trace configuration** — debugging CI failures without traces wastes hours; enable `on-first-retry`
+- **Testing third-party services** — mock external APIs; only test your own application
+- **Running all browsers in development** — test Chromium locally, full matrix in CI only
+- **No page objects** — duplicate locators across tests create maintenance nightmares
+
+## Best Practices
+
+1. **Page Object per page/component** — centralize locators, expose user-intent methods
+2. **Web-first assertions everywhere** — `expect(locator).toBeVisible()` auto-retries, `waitForTimeout` does not
+3. **Auth as a setup project** — authenticate once, reuse `storageState` across all tests
+4. **One behavior per test** — keeps failures isolated and test names meaningful
+5. **Run in CI with `--retries 2`** — but investigate any test that needs retries locally
+6. **Trace + screenshot on failure** — upload as CI artifacts for post-mortem debugging
+7. **Visual regression for critical UI** — catch unintended visual changes automatically
+8. **Accessibility tests in the suite** — WCAG compliance as a regression gate, not an afterthought
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `locator.click()` times out | Element hidden behind overlay/modal or not yet rendered | Add `await expect(locator).toBeVisible()` before clicking; check for z-index overlays blocking the target |
+| Visual snapshots fail on every CI run | Different OS font rendering between local and CI | Generate baseline screenshots inside CI (Linux), not locally (macOS); use `maxDiffPixelRatio: 0.02` for tolerance |
+| Auth setup project runs but tests get 401 | `storageState` path mismatch or expired token | Verify `storageState` path in `playwright.config.ts` matches the setup script; confirm tokens don&#x27;t expire mid-suite |
+| `page.route()` intercept never triggers | Route pattern doesn&#x27;t match the actual request URL or glob syntax error | Log requests with `page.on(&#x27;request&#x27;, r =&gt; console.log(r.url()))` to verify the exact URL; use `**` glob for subpaths |
+| Tests pass individually but fail when run together | Shared mutable state or port collision between parallel workers | Ensure test isolation via `test.beforeEach` setup; use unique test data per worker with `test.info().parallelIndex` |
+| `toHaveScreenshot()` throws &quot;missing baseline&quot; | Snapshot file not committed to version control | Run `npx playwright test --update-snapshots` and commit the generated files under the `__screenshots__` directory |
+| Accessibility audit returns false positives | Axe scanning third-party embedded widgets or iframes | Use `.exclude(&#x27;.third-party-widget&#x27;)` or `.include(&#x27;#app-root&#x27;)` to scope the audit to your own markup |
+
+## Success Criteria
+
+- **Flaky test rate below 2%** — measured over a rolling 7-day window across all CI runs; any test exceeding 5% flake rate is quarantined and fixed within 48 hours
+- **E2E suite completes within 10 minutes** — full cross-browser matrix (Chromium, Firefox, mobile) on CI with 4 parallel workers; alert if wall-clock time exceeds threshold
+- **100% of critical user journeys covered** — login, checkout, onboarding, and core CRUD workflows each have dedicated spec files with happy-path and primary error-path tests
+- **Zero `waitForTimeout()` calls in the codebase** — enforced via ESLint rule or grep-based CI check; all waits use web-first assertions
+- **Page Object coverage for every tested page** — no raw locators in spec files; all element access goes through page object classes with user-intent method names
+- **WCAG AA compliance gate passing** — accessibility tests run on every PR; zero critical or serious violations allowed to merge
+- **Visual regression baselines reviewed on every UI PR** — screenshot diffs attached to PR as artifacts; baseline updates require explicit reviewer approval
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- End-to-end test authoring, organization, and maintenance with Playwright
+- Page Object Model architecture and locator strategy best practices
+- Flaky test diagnosis, CI integration, and trace-based debugging
+- Visual regression testing and WCAG accessibility auditing
+
+**This skill does NOT cover:**
+- Unit testing or component testing in isolation (see `engineering/testing-strategy` for test pyramid guidance)
+- API contract testing or load/performance testing (see `api-test-suite-builder` for API-focused testing)
+- Test data management, database seeding, or factory patterns for test fixtures
+- Mobile native app testing (Appium, Detox); this skill targets web browsers only
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `ci-cd-pipeline-builder` | E2E tests run as a pipeline stage after build and unit tests | Pipeline config triggers `playwright test`; artifacts (traces, screenshots) upload on failure |
+| `api-test-suite-builder` | API tests validate backend contracts; Playwright tests validate UI flows end-to-end | API test results confirm endpoint stability before E2E suite runs against the same environment |
+| `pr-review-expert` | PR reviews check for test coverage on UI changes and flag missing E2E specs | Review checklist references Playwright Pro golden rules; flags `waitForTimeout` or raw CSS selectors |
+| `performance-profiler` | Performance budgets complement E2E tests to catch regressions | Profiler identifies slow pages; Playwright tests add `networkidle` waits or performance assertions for flagged routes |
+| `observability-designer` | Test failures feed into observability dashboards for flake tracking | CI test results export JSON reports; observability pipelines ingest pass/fail/flake metrics over time |
+| `release-manager` | E2E suite is a release gate; green suite required before deployment proceeds | Release workflow calls Playwright CI job; blocks release tag creation on any test failure |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Playwright Pro&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Playwright Pro&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Playwright Pro in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Playwright Pro&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Playwright Pro&quot;
+4. Description: &quot;Production-grade end-to-end testing with Playwright. Covers test generation from user stories, page object patterns, locator strategy, flaky test diagnosis, Cypress/Selenium migration, CI integration,...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/playwright-pro/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

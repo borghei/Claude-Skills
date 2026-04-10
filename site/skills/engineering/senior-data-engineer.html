@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Data Engineer (Engineering domain).
 
 Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeli...
@@ -391,11 +413,11 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-data-engineer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Senior Data Engineer (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Senior Data Engineer (Engineering domain).
 
 Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeli...
 
@@ -417,7 +439,622 @@ https://github.com/borghei/Claude-Skills/tree/main/senior-data-engineer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Senior Data Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Data Engineer
+
+The agent generates pipeline configurations (Airflow, Prefect, Dagster), validates data quality with profiling and anomaly detection, and optimizes SQL/Spark performance with actionable recommendations.
+
+---
+
+## Quick Start
+
+```bash
+# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake
+python scripts/pipeline_orchestrator.py generate \
+  --type airflow --source postgres --destination snowflake \
+  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot;
+
+# Validate data quality against a schema
+python scripts/data_quality_validator.py validate data.csv \
+  --schema schema.json --detect-anomalies --json
+
+# Profile a dataset
+python scripts/data_quality_validator.py profile data.csv --json
+
+# Optimize a slow SQL query
+python scripts/etl_performance_optimizer.py analyze-sql query.sql \
+  --warehouse snowflake --json
+
+# Estimate query cost
+python scripts/etl_performance_optimizer.py estimate-cost query.sql \
+  --warehouse bigquery --stats data_stats.json --json
+```
+
+## Tools Overview
+
+| Tool | Subcommands | Purpose |
+|------|-------------|---------|
+| `pipeline_orchestrator.py` | `generate`, `validate`, `template` | Generate Airflow/Prefect/Dagster pipeline code, validate DAGs |
+| `data_quality_validator.py` | `validate`, `profile`, `generate-suite`, `contract`, `schema` | Schema validation, profiling, anomaly detection, Great Expectations |
+| `etl_performance_optimizer.py` | `analyze-sql`, `analyze-spark`, `optimize-partition`, `estimate-cost`, `template` | SQL/Spark optimization, partition strategy, cost estimation |
+
+All subcommands support `--json` for machine-readable output and `--output` for file writing.
+
+---
+
+## Workflow 1: Batch ETL Pipeline (PostgreSQL -&gt; dbt -&gt; Snowflake)
+
+**Step 1 -- Generate extraction config.**
+
+```bash
+python scripts/pipeline_orchestrator.py generate \
+  --type airflow --source postgres --tables orders,customers,products \
+  --mode incremental --watermark updated_at --output dags/extract_source.py
+```
+
+**Step 2 -- Create dbt staging model.**
+
+```sql
+-- models/staging/stg_orders.sql
+WITH source AS (
+    SELECT * FROM {{ source(&#x27;postgres&#x27;, &#x27;orders&#x27;) }}
+)
+SELECT order_id, customer_id, order_date, total_amount, status, _extracted_at
+FROM source
+WHERE order_date &gt;= DATEADD(day, -3, CURRENT_DATE)
+```
+
+**Step 3 -- Create incremental mart model.**
+
+```sql
+-- models/marts/fct_orders.sql
+{{ config(materialized=&#x27;incremental&#x27;, unique_key=&#x27;order_id&#x27;, cluster_by=[&#x27;order_date&#x27;]) }}
+
+SELECT o.order_id, o.customer_id, c.customer_segment, o.order_date, o.total_amount, o.status
+FROM {{ ref(&#x27;stg_orders&#x27;) }} o
+LEFT JOIN {{ ref(&#x27;dim_customers&#x27;) }} c ON o.customer_id = c.customer_id
+{% if is_incremental() %}
+WHERE o._extracted_at &gt; (SELECT MAX(_extracted_at) FROM {{ this }})
+{% endif %}
+```
+
+**Step 4 -- Wire into Airflow DAG.**
+
+```python
+with DAG(&#x27;daily_etl&#x27;, schedule_interval=&#x27;0 5 * * *&#x27;, catchup=False, tags=[&#x27;etl&#x27;]) as dag:
+    extract = BashOperator(task_id=&#x27;extract&#x27;, bash_command=&#x27;python scripts/extract.py --date {{ ds }}&#x27;)
+    transform = BashOperator(task_id=&#x27;dbt_run&#x27;, bash_command=&#x27;dbt run --select marts.*&#x27;)
+    test = BashOperator(task_id=&#x27;dbt_test&#x27;, bash_command=&#x27;dbt test --select marts.*&#x27;)
+    extract &gt;&gt; transform &gt;&gt; test
+```
+
+**Step 5 -- Validate.**
+
+```bash
+python scripts/data_quality_validator.py validate --table fct_orders --checks all --output report.json
+```
+
+**Validation checkpoint:** DAG runs end-to-end. Data quality report shows 0 failures on uniqueness, completeness, and freshness.
+
+---
+
+## Workflow 2: Real-Time Streaming (Kafka -&gt; Spark -&gt; Delta Lake)
+
+**Step 1 -- Define event schema and Kafka topic.**
+
+```bash
+kafka-topics.sh --create --bootstrap-server localhost:9092 \
+  --topic user-events --partitions 12 --replication-factor 3 \
+  --config retention.ms=604800000
+```
+
+**Step 2 -- Implement Spark Structured Streaming.**
+
+```python
+events_df = spark.readStream.format(&quot;kafka&quot;) \
+    .option(&quot;kafka.bootstrap.servers&quot;, &quot;localhost:9092&quot;) \
+    .option(&quot;subscribe&quot;, &quot;user-events&quot;) \
+    .option(&quot;startingOffsets&quot;, &quot;latest&quot;).load()
+
+parsed_df = events_df.select(from_json(col(&quot;value&quot;).cast(&quot;string&quot;), schema).alias(&quot;data&quot;)).select(&quot;data.*&quot;)
+
+aggregated_df = parsed_df \
+    .withWatermark(&quot;event_timestamp&quot;, &quot;10 minutes&quot;) \
+    .groupBy(window(col(&quot;event_timestamp&quot;), &quot;5 minutes&quot;), col(&quot;event_type&quot;)) \
+    .agg(count(&quot;*&quot;).alias(&quot;event_count&quot;), approx_count_distinct(&quot;user_id&quot;).alias(&quot;unique_users&quot;))
+
+aggregated_df.writeStream.format(&quot;delta&quot;).outputMode(&quot;append&quot;) \
+    .option(&quot;checkpointLocation&quot;, &quot;/checkpoints/user-events&quot;) \
+    .trigger(processingTime=&quot;1 minute&quot;).start()
+```
+
+**Step 3 -- Handle errors with dead letter queue.**
+
+```python
+def process_with_dlq(batch_df, batch_id):
+    valid_df = batch_df.filter(col(&quot;event_id&quot;).isNotNull())
+    invalid_df = batch_df.filter(col(&quot;event_id&quot;).isNull())
+    valid_df.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/lake/user_events&quot;)
+    if invalid_df.count() &gt; 0:
+        invalid_df.withColumn(&quot;error_reason&quot;, lit(&quot;missing_event_id&quot;)) \
+            .write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/lake/dlq/user_events&quot;)
+```
+
+**Validation checkpoint:** Consumer lag stays under threshold. DLQ table has &lt; 0.1% of total events.
+
+---
+
+## Workflow 3: Data Quality Framework
+
+**Step 1 -- Generate a Great Expectations suite from data.**
+
+```bash
+python scripts/data_quality_validator.py generate-suite data.csv --output expectations.json
+```
+
+**Step 2 -- Validate against a data contract.**
+
+```yaml
+# contracts/orders_contract.yaml
+contract:
+  name: orders_data_contract
+  version: &quot;1.0.0&quot;
+schema:
+  properties:
+    order_id: { type: string, format: uuid }
+    total_amount: { type: decimal, minimum: 0 }
+    status: { type: string, enum: [pending, confirmed, shipped, delivered, cancelled] }
+sla:
+  freshness: { max_delay_hours: 1 }
+  completeness: { min_percentage: 99.9 }
+  accuracy: { duplicate_tolerance: 0.01 }
+```
+
+```bash
+python scripts/data_quality_validator.py contract data.csv --contract orders_contract.yaml --json
+```
+
+**Step 3 -- Add dbt tests for ongoing validation.**
+
+```yaml
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: total_amount
+        tests:
+          - not_null
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1000000 }
+```
+
+**Validation checkpoint:** Quality score &gt;= 95%. Zero duplicates. Freshness under SLA threshold.
+
+---
+
+## Architecture Decision Framework
+
+| Question | Batch | Streaming |
+|----------|-------|-----------|
+| Latency requirement | Hours to days | Seconds to minutes |
+| Processing complexity | Complex transforms, ML | Simple aggregations |
+| Cost sensitivity | More cost-effective | Higher infra cost |
+| Error handling | Easy reprocessing | Requires careful DLQ design |
+
+**Decision tree:**
+```
+Real-time insight needed?
+  Yes -&gt; Exactly-once needed?
+    Yes -&gt; Kafka + Flink/Spark Structured Streaming
+    No  -&gt; Kafka + consumer groups
+  No  -&gt; Daily volume &gt; 1TB?
+    Yes -&gt; Spark/Databricks
+    No  -&gt; dbt + warehouse compute
+```
+
+| Feature | Warehouse (Snowflake/BigQuery) | Lakehouse (Delta/Iceberg) |
+|---------|-------------------------------|---------------------------|
+| Best for | BI, SQL analytics | ML, unstructured data |
+| Storage cost | Higher (proprietary) | Lower (open formats) |
+| Flexibility | Schema-on-write | Schema-on-read |
+
+---
+
+## Anti-Patterns
+
+1. **Full table reload on every run** -- use incremental loads with watermark columns.
+2. **No dead letter queue** -- failed records silently dropped. Always route failures to a DLQ.
+3. **Timezone mismatch** -- normalize all timestamps to UTC at extraction.
+4. **Missing freshness checks** -- add `dbt source freshness` before transforms start.
+5. **Skipping schema drift detection** -- use `mergeSchema` option or data contracts to catch new columns.
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline silently produces zero rows | Timezone mismatch on watermark column | Normalize to UTC; add row-count assertion |
+| Spark shuffle 10x slower than expected | Data skew on join key | Salt the key or broadcast the smaller table |
+| Airflow shows &quot;no tasks to run&quot; | Circular dependency or import error | `airflow dags list-import-errors`; fix import |
+| dbt succeeds but dashboards stale | Source freshness not checked | Add `dbt source freshness` as prerequisite task |
+| Kafka consumer lag grows unbounded | Throughput &lt; producer rate | Increase partitions, scale consumers, batch `max.poll.records` |
+| Quality validator false-positive anomalies | Z-score threshold too tight | Raise threshold or switch to IQR mode |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| Pipeline Architecture | `references/data_pipeline_architecture.md` |
+| Data Modeling Patterns | `references/data_modeling_patterns.md` |
+| DataOps Best Practices | `references/dataops_best_practices.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `senior-data-scientist` | Feature engineering consumes curated mart data |
+| `senior-ml-engineer` | ML pipelines depend on feature store tables |
+| `senior-devops` | CI/CD for dbt, Airflow deployment, container orchestration |
+| `senior-architect` | Architecture reviews for lakehouse vs warehouse decisions |
+| `code-reviewer` | Pipeline code reviews for DAGs, dbt models, Spark jobs |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 1.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Data Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Data Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Data Engineer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Data Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Data Engineer&quot;
+4. Description: &quot;Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeli...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-data-engineer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Senior Data Engineer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Senior Data Engineer
+
+The agent generates pipeline configurations (Airflow, Prefect, Dagster), validates data quality with profiling and anomaly detection, and optimizes SQL/Spark performance with actionable recommendations.
+
+---
+
+## Quick Start
+
+```bash
+# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake
+python scripts/pipeline_orchestrator.py generate \
+  --type airflow --source postgres --destination snowflake \
+  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot;
+
+# Validate data quality against a schema
+python scripts/data_quality_validator.py validate data.csv \
+  --schema schema.json --detect-anomalies --json
+
+# Profile a dataset
+python scripts/data_quality_validator.py profile data.csv --json
+
+# Optimize a slow SQL query
+python scripts/etl_performance_optimizer.py analyze-sql query.sql \
+  --warehouse snowflake --json
+
+# Estimate query cost
+python scripts/etl_performance_optimizer.py estimate-cost query.sql \
+  --warehouse bigquery --stats data_stats.json --json
+```
+
+## Tools Overview
+
+| Tool | Subcommands | Purpose |
+|------|-------------|---------|
+| `pipeline_orchestrator.py` | `generate`, `validate`, `template` | Generate Airflow/Prefect/Dagster pipeline code, validate DAGs |
+| `data_quality_validator.py` | `validate`, `profile`, `generate-suite`, `contract`, `schema` | Schema validation, profiling, anomaly detection, Great Expectations |
+| `etl_performance_optimizer.py` | `analyze-sql`, `analyze-spark`, `optimize-partition`, `estimate-cost`, `template` | SQL/Spark optimization, partition strategy, cost estimation |
+
+All subcommands support `--json` for machine-readable output and `--output` for file writing.
+
+---
+
+## Workflow 1: Batch ETL Pipeline (PostgreSQL -&gt; dbt -&gt; Snowflake)
+
+**Step 1 -- Generate extraction config.**
+
+```bash
+python scripts/pipeline_orchestrator.py generate \
+  --type airflow --source postgres --tables orders,customers,products \
+  --mode incremental --watermark updated_at --output dags/extract_source.py
+```
+
+**Step 2 -- Create dbt staging model.**
+
+```sql
+-- models/staging/stg_orders.sql
+WITH source AS (
+    SELECT * FROM {{ source(&#x27;postgres&#x27;, &#x27;orders&#x27;) }}
+)
+SELECT order_id, customer_id, order_date, total_amount, status, _extracted_at
+FROM source
+WHERE order_date &gt;= DATEADD(day, -3, CURRENT_DATE)
+```
+
+**Step 3 -- Create incremental mart model.**
+
+```sql
+-- models/marts/fct_orders.sql
+{{ config(materialized=&#x27;incremental&#x27;, unique_key=&#x27;order_id&#x27;, cluster_by=[&#x27;order_date&#x27;]) }}
+
+SELECT o.order_id, o.customer_id, c.customer_segment, o.order_date, o.total_amount, o.status
+FROM {{ ref(&#x27;stg_orders&#x27;) }} o
+LEFT JOIN {{ ref(&#x27;dim_customers&#x27;) }} c ON o.customer_id = c.customer_id
+{% if is_incremental() %}
+WHERE o._extracted_at &gt; (SELECT MAX(_extracted_at) FROM {{ this }})
+{% endif %}
+```
+
+**Step 4 -- Wire into Airflow DAG.**
+
+```python
+with DAG(&#x27;daily_etl&#x27;, schedule_interval=&#x27;0 5 * * *&#x27;, catchup=False, tags=[&#x27;etl&#x27;]) as dag:
+    extract = BashOperator(task_id=&#x27;extract&#x27;, bash_command=&#x27;python scripts/extract.py --date {{ ds }}&#x27;)
+    transform = BashOperator(task_id=&#x27;dbt_run&#x27;, bash_command=&#x27;dbt run --select marts.*&#x27;)
+    test = BashOperator(task_id=&#x27;dbt_test&#x27;, bash_command=&#x27;dbt test --select marts.*&#x27;)
+    extract &gt;&gt; transform &gt;&gt; test
+```
+
+**Step 5 -- Validate.**
+
+```bash
+python scripts/data_quality_validator.py validate --table fct_orders --checks all --output report.json
+```
+
+**Validation checkpoint:** DAG runs end-to-end. Data quality report shows 0 failures on uniqueness, completeness, and freshness.
+
+---
+
+## Workflow 2: Real-Time Streaming (Kafka -&gt; Spark -&gt; Delta Lake)
+
+**Step 1 -- Define event schema and Kafka topic.**
+
+```bash
+kafka-topics.sh --create --bootstrap-server localhost:9092 \
+  --topic user-events --partitions 12 --replication-factor 3 \
+  --config retention.ms=604800000
+```
+
+**Step 2 -- Implement Spark Structured Streaming.**
+
+```python
+events_df = spark.readStream.format(&quot;kafka&quot;) \
+    .option(&quot;kafka.bootstrap.servers&quot;, &quot;localhost:9092&quot;) \
+    .option(&quot;subscribe&quot;, &quot;user-events&quot;) \
+    .option(&quot;startingOffsets&quot;, &quot;latest&quot;).load()
+
+parsed_df = events_df.select(from_json(col(&quot;value&quot;).cast(&quot;string&quot;), schema).alias(&quot;data&quot;)).select(&quot;data.*&quot;)
+
+aggregated_df = parsed_df \
+    .withWatermark(&quot;event_timestamp&quot;, &quot;10 minutes&quot;) \
+    .groupBy(window(col(&quot;event_timestamp&quot;), &quot;5 minutes&quot;), col(&quot;event_type&quot;)) \
+    .agg(count(&quot;*&quot;).alias(&quot;event_count&quot;), approx_count_distinct(&quot;user_id&quot;).alias(&quot;unique_users&quot;))
+
+aggregated_df.writeStream.format(&quot;delta&quot;).outputMode(&quot;append&quot;) \
+    .option(&quot;checkpointLocation&quot;, &quot;/checkpoints/user-events&quot;) \
+    .trigger(processingTime=&quot;1 minute&quot;).start()
+```
+
+**Step 3 -- Handle errors with dead letter queue.**
+
+```python
+def process_with_dlq(batch_df, batch_id):
+    valid_df = batch_df.filter(col(&quot;event_id&quot;).isNotNull())
+    invalid_df = batch_df.filter(col(&quot;event_id&quot;).isNull())
+    valid_df.write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/lake/user_events&quot;)
+    if invalid_df.count() &gt; 0:
+        invalid_df.withColumn(&quot;error_reason&quot;, lit(&quot;missing_event_id&quot;)) \
+            .write.format(&quot;delta&quot;).mode(&quot;append&quot;).save(&quot;/data/lake/dlq/user_events&quot;)
+```
+
+**Validation checkpoint:** Consumer lag stays under threshold. DLQ table has &lt; 0.1% of total events.
+
+---
+
+## Workflow 3: Data Quality Framework
+
+**Step 1 -- Generate a Great Expectations suite from data.**
+
+```bash
+python scripts/data_quality_validator.py generate-suite data.csv --output expectations.json
+```
+
+**Step 2 -- Validate against a data contract.**
+
+```yaml
+# contracts/orders_contract.yaml
+contract:
+  name: orders_data_contract
+  version: &quot;1.0.0&quot;
+schema:
+  properties:
+    order_id: { type: string, format: uuid }
+    total_amount: { type: decimal, minimum: 0 }
+    status: { type: string, enum: [pending, confirmed, shipped, delivered, cancelled] }
+sla:
+  freshness: { max_delay_hours: 1 }
+  completeness: { min_percentage: 99.9 }
+  accuracy: { duplicate_tolerance: 0.01 }
+```
+
+```bash
+python scripts/data_quality_validator.py contract data.csv --contract orders_contract.yaml --json
+```
+
+**Step 3 -- Add dbt tests for ongoing validation.**
+
+```yaml
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: total_amount
+        tests:
+          - not_null
+          - dbt_utils.accepted_range: { min_value: 0, max_value: 1000000 }
+```
+
+**Validation checkpoint:** Quality score &gt;= 95%. Zero duplicates. Freshness under SLA threshold.
+
+---
+
+## Architecture Decision Framework
+
+| Question | Batch | Streaming |
+|----------|-------|-----------|
+| Latency requirement | Hours to days | Seconds to minutes |
+| Processing complexity | Complex transforms, ML | Simple aggregations |
+| Cost sensitivity | More cost-effective | Higher infra cost |
+| Error handling | Easy reprocessing | Requires careful DLQ design |
+
+**Decision tree:**
+```
+Real-time insight needed?
+  Yes -&gt; Exactly-once needed?
+    Yes -&gt; Kafka + Flink/Spark Structured Streaming
+    No  -&gt; Kafka + consumer groups
+  No  -&gt; Daily volume &gt; 1TB?
+    Yes -&gt; Spark/Databricks
+    No  -&gt; dbt + warehouse compute
+```
+
+| Feature | Warehouse (Snowflake/BigQuery) | Lakehouse (Delta/Iceberg) |
+|---------|-------------------------------|---------------------------|
+| Best for | BI, SQL analytics | ML, unstructured data |
+| Storage cost | Higher (proprietary) | Lower (open formats) |
+| Flexibility | Schema-on-write | Schema-on-read |
+
+---
+
+## Anti-Patterns
+
+1. **Full table reload on every run** -- use incremental loads with watermark columns.
+2. **No dead letter queue** -- failed records silently dropped. Always route failures to a DLQ.
+3. **Timezone mismatch** -- normalize all timestamps to UTC at extraction.
+4. **Missing freshness checks** -- add `dbt source freshness` before transforms start.
+5. **Skipping schema drift detection** -- use `mergeSchema` option or data contracts to catch new columns.
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline silently produces zero rows | Timezone mismatch on watermark column | Normalize to UTC; add row-count assertion |
+| Spark shuffle 10x slower than expected | Data skew on join key | Salt the key or broadcast the smaller table |
+| Airflow shows &quot;no tasks to run&quot; | Circular dependency or import error | `airflow dags list-import-errors`; fix import |
+| dbt succeeds but dashboards stale | Source freshness not checked | Add `dbt source freshness` as prerequisite task |
+| Kafka consumer lag grows unbounded | Throughput &lt; producer rate | Increase partitions, scale consumers, batch `max.poll.records` |
+| Quality validator false-positive anomalies | Z-score threshold too tight | Raise threshold or switch to IQR mode |
+
+---
+
+## References
+
+| Guide | Path |
+|-------|------|
+| Pipeline Architecture | `references/data_pipeline_architecture.md` |
+| Data Modeling Patterns | `references/data_modeling_patterns.md` |
+| DataOps Best Practices | `references/dataops_best_practices.md` |
+
+---
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `senior-data-scientist` | Feature engineering consumes curated mart data |
+| `senior-ml-engineer` | ML pipelines depend on feature store tables |
+| `senior-devops` | CI/CD for dbt, Airflow deployment, container orchestration |
+| `senior-architect` | Architecture reviews for lakehouse vs warehouse decisions |
+| `code-reviewer` | Pipeline code reviews for DAGs, dbt models, Spark jobs |
+
+---
+
+**Last Updated:** April 2026
+**Version:** 1.1.0
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Senior Data Engineer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Senior Data Engineer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Senior Data Engineer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Senior Data Engineer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Senior Data Engineer&quot;
+4. Description: &quot;Data engineering skill for building scalable data pipelines, ETL/ELT systems, and data infrastructure. Expertise in Python, SQL, Spark, Airflow, dbt, Kafka, and modern data stack. Includes data modeli...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-data-engineer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

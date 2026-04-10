@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Privacy Compliance (Legal domain).
 
 Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA, Privacy Act, PIPL, UK GDPR compliance assessments, DPA reviews, and data subject request management.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/privacy-compliance
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Privacy Compliance (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Privacy Compliance (Legal domain).
 
 Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA, Privacy Act, PIPL, UK GDPR compliance assessments, DPA reviews, and data subject request management.
 
@@ -425,7 +447,778 @@ https://github.com/borghei/Claude-Skills/tree/main/privacy-compliance
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Privacy Compliance&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Privacy Compliance Navigator
+
+Tools and guidance for multi-regulation privacy compliance across 9 major global privacy frameworks, DPA review, and data subject request lifecycle management.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Privacy Regulation Checker](#privacy-regulation-checker)
+  - [DSR Tracker](#dsr-tracker)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Privacy Regulation Checker
+
+Determines which privacy regulations apply to an organization based on its location, data subjects, data types, and processing activities. Generates a compliance obligations matrix and flags gaps.
+
+```bash
+# Basic check — organization in Germany processing EU and US data
+python scripts/privacy_regulation_checker.py \
+  --org-location DE \
+  --data-subjects EU,US \
+  --data-types personal,sensitive,financial \
+  --processing-activities marketing,analytics,hr
+
+# JSON output for integration
+python scripts/privacy_regulation_checker.py \
+  --org-location SG \
+  --data-subjects SG,AU,CN \
+  --data-types personal,health \
+  --processing-activities healthcare,research \
+  --json
+
+# Include gap analysis against current practices
+python scripts/privacy_regulation_checker.py \
+  --org-location US-CA \
+  --data-subjects EU,US,BR \
+  --data-types personal,biometric \
+  --processing-activities ecommerce,profiling \
+  --current-practices consent_mechanism,breach_process,retention_policy
+```
+
+**Determines:**
+- Which of 9 regulations apply based on territorial scope rules
+- Key obligations per applicable regulation
+- Data subject rights required per regulation
+- Response timelines per regulation
+- Gap analysis when current practices are provided
+
+**Output:**
+- Applicable regulations list with confidence level
+- Per-regulation obligations matrix
+- Gap analysis with risk ratings
+- Recommended priority actions
+
+---
+
+### DSR Tracker
+
+Manages Data Subject Request lifecycle across multiple regulations with deadline calculation, status tracking, and overdue alerts.
+
+```bash
+# Add a new GDPR access request
+python scripts/dsr_tracker.py add \
+  --type access --regulation gdpr \
+  --subject &quot;Jane Smith&quot; --email &quot;jane@example.com&quot;
+
+# Add CCPA deletion request
+python scripts/dsr_tracker.py add \
+  --type deletion --regulation ccpa \
+  --subject &quot;John Doe&quot; --email &quot;john@example.com&quot;
+
+# List all open requests
+python scripts/dsr_tracker.py list
+
+# List overdue requests only
+python scripts/dsr_tracker.py list --overdue
+
+# Update request status
+python scripts/dsr_tracker.py update --id DSR-0001 --status verified
+
+# Dashboard view with time remaining
+python scripts/dsr_tracker.py dashboard
+
+# Export as JSON
+python scripts/dsr_tracker.py dashboard --json
+```
+
+**Supported Request Types:**
+
+| Type | GDPR Art. | CCPA Section | LGPD Art. |
+|------|-----------|-------------|-----------|
+| Access | Art. 15 | §1798.100 | Art. 18 |
+| Deletion/Erasure | Art. 17 | §1798.105 | Art. 18(VI) |
+| Correction/Rectification | Art. 16 | §1798.106 | Art. 18(III) |
+| Portability | Art. 20 | §1798.130 | Art. 18(V) |
+| Restriction | Art. 18 | — | Art. 18(IV) |
+| Objection | Art. 21 | §1798.120 | Art. 18(IV) |
+| Automated Decision Opt-Out | Art. 22 | §1798.185 | Art. 20 |
+| Withdraw Consent | Art. 7(3) | — | Art. 18(IX) |
+
+**Deadline Calculation:**
+
+| Regulation | Initial Deadline | Extension | Extension Deadline |
+|-----------|-----------------|-----------|-------------------|
+| GDPR | 30 calendar days | +60 days (complex) | 90 calendar days |
+| CCPA | 10 business days (ack) + 45 calendar days | +45 days | 90 calendar days |
+| LGPD | 15 calendar days | — | — |
+| POPIA | 30 calendar days | — | — |
+| PIPEDA | 30 calendar days | +30 days | 60 calendar days |
+| PDPA (SG) | 30 calendar days | — | — |
+| Privacy Act (AU) | 30 calendar days | +30 days | 60 calendar days |
+| PIPL | 15 calendar days | +15 days | 30 calendar days |
+| UK GDPR | 30 calendar days | +60 days | 90 calendar days |
+
+**Statuses:** received → verified → processing → completed | denied | extended
+
+---
+
+## Reference Guides
+
+### Global Privacy Regulations
+`references/global_privacy_regulations.md`
+
+Comprehensive comparison of 9 major privacy regulations covering:
+- Territorial scope and applicability criteria
+- Legal bases for processing
+- Data subject rights comparison matrix
+- Breach notification requirements and timelines
+- Cross-border transfer mechanisms
+- DPO requirements
+- Penalty structures
+
+### DPA Review Checklist
+`references/dpa_review_checklist.md`
+
+Complete Data Processing Agreement review guide:
+- Art. 28 GDPR required elements
+- 10 processor obligations with analysis points
+- International transfer mechanisms (SCCs June 2021, module selection)
+- Transfer impact assessment requirements
+- Common DPA issues with risk levels
+- Practical negotiation considerations
+
+### DSR Handling Guide
+`references/dsr_handling_guide.md`
+
+Data Subject Request handling reference:
+- 8 request types with intake procedures
+- Identity verification methods
+- Response timelines per regulation
+- Exemptions by regulation
+- 6-step response process
+- Regulatory monitoring approach
+
+---
+
+## Workflows
+
+### Workflow 1: Regulation Applicability Assessment
+
+```
+Step 1: Identify organization parameters
+        → Location, data subjects, data types, processing activities
+
+Step 2: Run regulation checker
+        → python scripts/privacy_regulation_checker.py --org-location [LOC] ...
+
+Step 3: Review applicable regulations and obligations
+        → Prioritize by risk (penalties, data volume, enforcement activity)
+
+Step 4: Gap analysis against current practices
+        → Re-run with --current-practices flag
+
+Step 5: Build remediation roadmap
+        → Address critical gaps first (missing legal basis, no breach process)
+```
+
+### Workflow 2: Data Subject Request Handling
+
+```
+Step 1: Receive and log request
+        → python scripts/dsr_tracker.py add --type [type] --regulation [reg] ...
+
+Step 2: Verify identity (proportionate to sensitivity)
+        → See references/dsr_handling_guide.md for methods
+        → python scripts/dsr_tracker.py update --id [ID] --status verified
+
+Step 3: Gather data from all systems
+        → python scripts/dsr_tracker.py update --id [ID] --status processing
+
+Step 4: Apply exemptions if applicable
+        → Check references/dsr_handling_guide.md exemptions table
+
+Step 5: Prepare and send response within deadline
+        → python scripts/dsr_tracker.py update --id [ID] --status completed
+
+Step 6: Monitor dashboard for overdue requests
+        → python scripts/dsr_tracker.py dashboard
+```
+
+### Workflow 3: DPA Review
+
+```
+Step 1: Check DPA against Art. 28 required elements
+        → Use references/dpa_review_checklist.md
+
+Step 2: Verify processor obligations (10 items)
+        → Sub-processing, deletion, audit rights, etc.
+
+Step 3: Assess international transfer provisions
+        → SCC module selection (C2P, C2C, P2P, P2C)
+        → Transfer impact assessment
+        → Supplementary measures
+
+Step 4: Review practical considerations
+        → Liability caps, insurance, termination, data locations
+
+Step 5: Document findings and negotiate amendments
+```
+
+### Workflow 4: Multi-Regulation Compliance Program
+
+```
+Step 1: Run regulation checker for full scope
+        → python scripts/privacy_regulation_checker.py [params]
+
+Step 2: Map overlapping obligations across regulations
+        → Use references/global_privacy_regulations.md comparison matrix
+
+Step 3: Build unified controls (satisfy strictest requirement)
+        → GDPR-first approach covers most other regulations
+
+Step 4: Layer regulation-specific requirements
+        → CCPA opt-out mechanisms, LGPD DPO, PIPL localization
+
+Step 5: Monitor regulatory changes
+        → See references/dsr_handling_guide.md monitoring approach
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Regulation checker flags unexpected regulation | Data subjects in jurisdiction not considered | Review data flow maps; even indirect data collection (analytics, cookies) can trigger territorial scope |
+| DSR deadline missed | Request not logged promptly or status not updated | Implement intake SLA (log within 24 hours); use dashboard daily for overdue alerts |
+| DPA missing Art. 28 elements | Template from processor is incomplete | Use DPA review checklist to identify gaps; require amendments before signing |
+| Cross-border transfer mechanism unclear | Multiple transfer layers (controller → processor → sub-processor) | Map full data flow chain; each transfer leg needs its own mechanism |
+| Conflicting obligations across regulations | Retention vs. deletion requirements differ | Document conflicts; apply strictest obligation unless local law mandates otherwise; seek legal counsel |
+| Identity verification proportionality unclear | Over-verification deters legitimate requests | Match verification to risk: low-risk data = email confirmation; high-risk = ID verification |
+
+---
+
+## Success Criteria
+
+- **All applicable regulations identified and mapped** — regulation checker confirms coverage with zero unaddressed jurisdictions where data subjects reside
+- **100% of DSRs responded within statutory deadlines** — dashboard shows zero overdue requests; extension documented where used
+- **DPAs reviewed against Art. 28 checklist before signing** — all 10 processor obligations addressed; international transfer mechanisms validated
+- **Compliance matrix maintained and current** — quarterly review of obligations per regulation with change log
+- **Regulatory monitoring active** — escalation criteria defined; new regulation applicability assessed within 30 days of enactment
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Applicability assessment for 9 major privacy regulations
+- Data subject request tracking with multi-regulation deadline calculation
+- DPA review against Art. 28 GDPR requirements
+- Cross-regulation obligation mapping
+- Gap analysis against current practices
+- International transfer mechanism assessment
+
+**Out of Scope:**
+- Legal advice on specific legal basis selection — consult qualified privacy counsel
+- Supervisory authority filings or breach notifications
+- Cookie consent implementation or consent management platform configuration
+- Binding Corporate Rules (BCR) application process
+- Sector-specific regulations (HIPAA, FERPA, GLBA) beyond the 9 covered frameworks
+- Data Protection Impact Assessments (see `dpia-assessment` skill)
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| **GDPR-only compliance** | Organizations assume GDPR covers all obligations; miss CCPA opt-out requirements, LGPD DPO mandate, PIPL data localization | Run regulation checker against all jurisdictions where data subjects reside; layer regulation-specific controls |
+| **One-size-fits-all DSR process** | Applying GDPR 30-day timeline to all regulations misses CCPA 10-business-day acknowledgment or PIPL 15-day deadline | Configure per-regulation deadlines; use DSR tracker with regulation parameter for accurate deadline calculation |
+| **Ignoring sub-processor chains in DPA review** | DPA covers direct processor but sub-processors transfer data to third countries without TIA | Map full processing chain in DPA review; require Art. 28(2) sub-processor obligations; validate each transfer leg |
+| **Treating privacy as a one-time project** | Regulations evolve; new laws enacted; enforcement priorities shift | Implement regulatory monitoring with escalation criteria; quarterly compliance reviews |
+
+---
+
+## Tool Reference
+
+### privacy_regulation_checker.py
+
+Determines applicable privacy regulations and maps obligations based on organization parameters.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--org-location &lt;code&gt;` | Yes | Organization headquarters (ISO country code, e.g., DE, US-CA, SG) |
+| `--data-subjects &lt;list&gt;` | Yes | Comma-separated locations of data subjects (EU, US, BR, ZA, CA, SG, AU, CN, UK) |
+| `--data-types &lt;list&gt;` | Yes | Comma-separated data types (personal, sensitive, financial, health, biometric, children) |
+| `--processing-activities &lt;list&gt;` | Yes | Comma-separated activities (marketing, analytics, hr, ecommerce, profiling, healthcare, research) |
+| `--current-practices &lt;list&gt;` | No | Comma-separated current practices for gap analysis |
+| `--json` | No | Output in JSON format |
+
+### dsr_tracker.py
+
+Tracks Data Subject Request lifecycle with multi-regulation deadline calculation.
+
+| Subcommand | Description |
+|------------|-------------|
+| `add` | Add new DSR (`--type`, `--regulation`, `--subject`, `--email` required) |
+| `list` | List all requests (`--overdue` for overdue only) |
+| `update` | Update request status (`--id`, `--status` required) |
+| `dashboard` | Show dashboard with time remaining and alerts |
+
+| Flag | Description |
+|------|-------------|
+| `--type &lt;type&gt;` | Request type: access, deletion, correction, portability, restriction, objection, automated_decision, withdraw_consent |
+| `--regulation &lt;reg&gt;` | Regulation: gdpr, ccpa, lgpd, popia, pipeda, pdpa, privacy_act_au, pipl, uk_gdpr |
+| `--subject &lt;name&gt;` | Data subject name |
+| `--email &lt;email&gt;` | Data subject email |
+| `--id &lt;id&gt;` | Request ID (e.g., DSR-0001) |
+| `--status &lt;status&gt;` | Status: received, verified, processing, completed, denied, extended |
+| `--overdue` | Filter to overdue requests only |
+| `--json` | Output in JSON format |
+| `--data-file &lt;path&gt;` | Custom data file path (default: dsr_requests.json) |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Privacy Compliance&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Privacy Compliance&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Privacy Compliance in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Privacy Compliance&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Privacy Compliance&quot;
+4. Description: &quot;Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA, Privacy Act, PIPL, UK GDPR compliance assessments, DPA reviews, and data subject request management.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/privacy-compliance/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Privacy Compliance&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Privacy Compliance Navigator
+
+Tools and guidance for multi-regulation privacy compliance across 9 major global privacy frameworks, DPA review, and data subject request lifecycle management.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Privacy Regulation Checker](#privacy-regulation-checker)
+  - [DSR Tracker](#dsr-tracker)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Privacy Regulation Checker
+
+Determines which privacy regulations apply to an organization based on its location, data subjects, data types, and processing activities. Generates a compliance obligations matrix and flags gaps.
+
+```bash
+# Basic check — organization in Germany processing EU and US data
+python scripts/privacy_regulation_checker.py \
+  --org-location DE \
+  --data-subjects EU,US \
+  --data-types personal,sensitive,financial \
+  --processing-activities marketing,analytics,hr
+
+# JSON output for integration
+python scripts/privacy_regulation_checker.py \
+  --org-location SG \
+  --data-subjects SG,AU,CN \
+  --data-types personal,health \
+  --processing-activities healthcare,research \
+  --json
+
+# Include gap analysis against current practices
+python scripts/privacy_regulation_checker.py \
+  --org-location US-CA \
+  --data-subjects EU,US,BR \
+  --data-types personal,biometric \
+  --processing-activities ecommerce,profiling \
+  --current-practices consent_mechanism,breach_process,retention_policy
+```
+
+**Determines:**
+- Which of 9 regulations apply based on territorial scope rules
+- Key obligations per applicable regulation
+- Data subject rights required per regulation
+- Response timelines per regulation
+- Gap analysis when current practices are provided
+
+**Output:**
+- Applicable regulations list with confidence level
+- Per-regulation obligations matrix
+- Gap analysis with risk ratings
+- Recommended priority actions
+
+---
+
+### DSR Tracker
+
+Manages Data Subject Request lifecycle across multiple regulations with deadline calculation, status tracking, and overdue alerts.
+
+```bash
+# Add a new GDPR access request
+python scripts/dsr_tracker.py add \
+  --type access --regulation gdpr \
+  --subject &quot;Jane Smith&quot; --email &quot;jane@example.com&quot;
+
+# Add CCPA deletion request
+python scripts/dsr_tracker.py add \
+  --type deletion --regulation ccpa \
+  --subject &quot;John Doe&quot; --email &quot;john@example.com&quot;
+
+# List all open requests
+python scripts/dsr_tracker.py list
+
+# List overdue requests only
+python scripts/dsr_tracker.py list --overdue
+
+# Update request status
+python scripts/dsr_tracker.py update --id DSR-0001 --status verified
+
+# Dashboard view with time remaining
+python scripts/dsr_tracker.py dashboard
+
+# Export as JSON
+python scripts/dsr_tracker.py dashboard --json
+```
+
+**Supported Request Types:**
+
+| Type | GDPR Art. | CCPA Section | LGPD Art. |
+|------|-----------|-------------|-----------|
+| Access | Art. 15 | §1798.100 | Art. 18 |
+| Deletion/Erasure | Art. 17 | §1798.105 | Art. 18(VI) |
+| Correction/Rectification | Art. 16 | §1798.106 | Art. 18(III) |
+| Portability | Art. 20 | §1798.130 | Art. 18(V) |
+| Restriction | Art. 18 | — | Art. 18(IV) |
+| Objection | Art. 21 | §1798.120 | Art. 18(IV) |
+| Automated Decision Opt-Out | Art. 22 | §1798.185 | Art. 20 |
+| Withdraw Consent | Art. 7(3) | — | Art. 18(IX) |
+
+**Deadline Calculation:**
+
+| Regulation | Initial Deadline | Extension | Extension Deadline |
+|-----------|-----------------|-----------|-------------------|
+| GDPR | 30 calendar days | +60 days (complex) | 90 calendar days |
+| CCPA | 10 business days (ack) + 45 calendar days | +45 days | 90 calendar days |
+| LGPD | 15 calendar days | — | — |
+| POPIA | 30 calendar days | — | — |
+| PIPEDA | 30 calendar days | +30 days | 60 calendar days |
+| PDPA (SG) | 30 calendar days | — | — |
+| Privacy Act (AU) | 30 calendar days | +30 days | 60 calendar days |
+| PIPL | 15 calendar days | +15 days | 30 calendar days |
+| UK GDPR | 30 calendar days | +60 days | 90 calendar days |
+
+**Statuses:** received → verified → processing → completed | denied | extended
+
+---
+
+## Reference Guides
+
+### Global Privacy Regulations
+`references/global_privacy_regulations.md`
+
+Comprehensive comparison of 9 major privacy regulations covering:
+- Territorial scope and applicability criteria
+- Legal bases for processing
+- Data subject rights comparison matrix
+- Breach notification requirements and timelines
+- Cross-border transfer mechanisms
+- DPO requirements
+- Penalty structures
+
+### DPA Review Checklist
+`references/dpa_review_checklist.md`
+
+Complete Data Processing Agreement review guide:
+- Art. 28 GDPR required elements
+- 10 processor obligations with analysis points
+- International transfer mechanisms (SCCs June 2021, module selection)
+- Transfer impact assessment requirements
+- Common DPA issues with risk levels
+- Practical negotiation considerations
+
+### DSR Handling Guide
+`references/dsr_handling_guide.md`
+
+Data Subject Request handling reference:
+- 8 request types with intake procedures
+- Identity verification methods
+- Response timelines per regulation
+- Exemptions by regulation
+- 6-step response process
+- Regulatory monitoring approach
+
+---
+
+## Workflows
+
+### Workflow 1: Regulation Applicability Assessment
+
+```
+Step 1: Identify organization parameters
+        → Location, data subjects, data types, processing activities
+
+Step 2: Run regulation checker
+        → python scripts/privacy_regulation_checker.py --org-location [LOC] ...
+
+Step 3: Review applicable regulations and obligations
+        → Prioritize by risk (penalties, data volume, enforcement activity)
+
+Step 4: Gap analysis against current practices
+        → Re-run with --current-practices flag
+
+Step 5: Build remediation roadmap
+        → Address critical gaps first (missing legal basis, no breach process)
+```
+
+### Workflow 2: Data Subject Request Handling
+
+```
+Step 1: Receive and log request
+        → python scripts/dsr_tracker.py add --type [type] --regulation [reg] ...
+
+Step 2: Verify identity (proportionate to sensitivity)
+        → See references/dsr_handling_guide.md for methods
+        → python scripts/dsr_tracker.py update --id [ID] --status verified
+
+Step 3: Gather data from all systems
+        → python scripts/dsr_tracker.py update --id [ID] --status processing
+
+Step 4: Apply exemptions if applicable
+        → Check references/dsr_handling_guide.md exemptions table
+
+Step 5: Prepare and send response within deadline
+        → python scripts/dsr_tracker.py update --id [ID] --status completed
+
+Step 6: Monitor dashboard for overdue requests
+        → python scripts/dsr_tracker.py dashboard
+```
+
+### Workflow 3: DPA Review
+
+```
+Step 1: Check DPA against Art. 28 required elements
+        → Use references/dpa_review_checklist.md
+
+Step 2: Verify processor obligations (10 items)
+        → Sub-processing, deletion, audit rights, etc.
+
+Step 3: Assess international transfer provisions
+        → SCC module selection (C2P, C2C, P2P, P2C)
+        → Transfer impact assessment
+        → Supplementary measures
+
+Step 4: Review practical considerations
+        → Liability caps, insurance, termination, data locations
+
+Step 5: Document findings and negotiate amendments
+```
+
+### Workflow 4: Multi-Regulation Compliance Program
+
+```
+Step 1: Run regulation checker for full scope
+        → python scripts/privacy_regulation_checker.py [params]
+
+Step 2: Map overlapping obligations across regulations
+        → Use references/global_privacy_regulations.md comparison matrix
+
+Step 3: Build unified controls (satisfy strictest requirement)
+        → GDPR-first approach covers most other regulations
+
+Step 4: Layer regulation-specific requirements
+        → CCPA opt-out mechanisms, LGPD DPO, PIPL localization
+
+Step 5: Monitor regulatory changes
+        → See references/dsr_handling_guide.md monitoring approach
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Regulation checker flags unexpected regulation | Data subjects in jurisdiction not considered | Review data flow maps; even indirect data collection (analytics, cookies) can trigger territorial scope |
+| DSR deadline missed | Request not logged promptly or status not updated | Implement intake SLA (log within 24 hours); use dashboard daily for overdue alerts |
+| DPA missing Art. 28 elements | Template from processor is incomplete | Use DPA review checklist to identify gaps; require amendments before signing |
+| Cross-border transfer mechanism unclear | Multiple transfer layers (controller → processor → sub-processor) | Map full data flow chain; each transfer leg needs its own mechanism |
+| Conflicting obligations across regulations | Retention vs. deletion requirements differ | Document conflicts; apply strictest obligation unless local law mandates otherwise; seek legal counsel |
+| Identity verification proportionality unclear | Over-verification deters legitimate requests | Match verification to risk: low-risk data = email confirmation; high-risk = ID verification |
+
+---
+
+## Success Criteria
+
+- **All applicable regulations identified and mapped** — regulation checker confirms coverage with zero unaddressed jurisdictions where data subjects reside
+- **100% of DSRs responded within statutory deadlines** — dashboard shows zero overdue requests; extension documented where used
+- **DPAs reviewed against Art. 28 checklist before signing** — all 10 processor obligations addressed; international transfer mechanisms validated
+- **Compliance matrix maintained and current** — quarterly review of obligations per regulation with change log
+- **Regulatory monitoring active** — escalation criteria defined; new regulation applicability assessed within 30 days of enactment
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Applicability assessment for 9 major privacy regulations
+- Data subject request tracking with multi-regulation deadline calculation
+- DPA review against Art. 28 GDPR requirements
+- Cross-regulation obligation mapping
+- Gap analysis against current practices
+- International transfer mechanism assessment
+
+**Out of Scope:**
+- Legal advice on specific legal basis selection — consult qualified privacy counsel
+- Supervisory authority filings or breach notifications
+- Cookie consent implementation or consent management platform configuration
+- Binding Corporate Rules (BCR) application process
+- Sector-specific regulations (HIPAA, FERPA, GLBA) beyond the 9 covered frameworks
+- Data Protection Impact Assessments (see `dpia-assessment` skill)
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| **GDPR-only compliance** | Organizations assume GDPR covers all obligations; miss CCPA opt-out requirements, LGPD DPO mandate, PIPL data localization | Run regulation checker against all jurisdictions where data subjects reside; layer regulation-specific controls |
+| **One-size-fits-all DSR process** | Applying GDPR 30-day timeline to all regulations misses CCPA 10-business-day acknowledgment or PIPL 15-day deadline | Configure per-regulation deadlines; use DSR tracker with regulation parameter for accurate deadline calculation |
+| **Ignoring sub-processor chains in DPA review** | DPA covers direct processor but sub-processors transfer data to third countries without TIA | Map full processing chain in DPA review; require Art. 28(2) sub-processor obligations; validate each transfer leg |
+| **Treating privacy as a one-time project** | Regulations evolve; new laws enacted; enforcement priorities shift | Implement regulatory monitoring with escalation criteria; quarterly compliance reviews |
+
+---
+
+## Tool Reference
+
+### privacy_regulation_checker.py
+
+Determines applicable privacy regulations and maps obligations based on organization parameters.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--org-location &lt;code&gt;` | Yes | Organization headquarters (ISO country code, e.g., DE, US-CA, SG) |
+| `--data-subjects &lt;list&gt;` | Yes | Comma-separated locations of data subjects (EU, US, BR, ZA, CA, SG, AU, CN, UK) |
+| `--data-types &lt;list&gt;` | Yes | Comma-separated data types (personal, sensitive, financial, health, biometric, children) |
+| `--processing-activities &lt;list&gt;` | Yes | Comma-separated activities (marketing, analytics, hr, ecommerce, profiling, healthcare, research) |
+| `--current-practices &lt;list&gt;` | No | Comma-separated current practices for gap analysis |
+| `--json` | No | Output in JSON format |
+
+### dsr_tracker.py
+
+Tracks Data Subject Request lifecycle with multi-regulation deadline calculation.
+
+| Subcommand | Description |
+|------------|-------------|
+| `add` | Add new DSR (`--type`, `--regulation`, `--subject`, `--email` required) |
+| `list` | List all requests (`--overdue` for overdue only) |
+| `update` | Update request status (`--id`, `--status` required) |
+| `dashboard` | Show dashboard with time remaining and alerts |
+
+| Flag | Description |
+|------|-------------|
+| `--type &lt;type&gt;` | Request type: access, deletion, correction, portability, restriction, objection, automated_decision, withdraw_consent |
+| `--regulation &lt;reg&gt;` | Regulation: gdpr, ccpa, lgpd, popia, pipeda, pdpa, privacy_act_au, pipl, uk_gdpr |
+| `--subject &lt;name&gt;` | Data subject name |
+| `--email &lt;email&gt;` | Data subject email |
+| `--id &lt;id&gt;` | Request ID (e.g., DSR-0001) |
+| `--status &lt;status&gt;` | Status: received, verified, processing, completed, denied, extended |
+| `--overdue` | Filter to overdue requests only |
+| `--json` | Output in JSON format |
+| `--data-file &lt;path&gt;` | Custom data file path (default: dsr_requests.json) |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Privacy Compliance&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Privacy Compliance&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Privacy Compliance in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Privacy Compliance&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Privacy Compliance&quot;
+4. Description: &quot;Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA, Privacy Act, PIPL, UK GDPR compliance assessments, DPA reviews, and data subject request management.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/privacy-compliance/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

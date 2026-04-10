@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Create Prd (Project Management domain).
 
 PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/create-prd
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Create Prd (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Create Prd (Project Management domain).
 
 PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.
 
@@ -439,7 +461,610 @@ https://github.com/borghei/Claude-Skills/tree/main/create-prd
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Create Prd&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# PRD Scaffolding Expert
+
+## Overview
+
+Structured product requirements document creation using a proven 8-section framework. This skill produces clear, jargon-free PRDs that communicate what to build, why it matters, and how success is measured. Every PRD generated follows a consistent structure that keeps engineering, design, and business stakeholders aligned.
+
+### When to Use
+
+- **New Product Initiative** -- Starting a product from scratch and need a comprehensive spec before development begins.
+- **Feature Expansion** -- Adding significant functionality to an existing product that requires cross-team alignment.
+- **Stakeholder Alignment** -- Need a single document that answers &quot;what are we building and why?&quot; for everyone involved.
+
+## Pre-PRD Techniques
+
+Before writing the PRD, use one or both of these techniques to sharpen the problem definition and align the team on value.
+
+### Technique A: Problem Framing Canvas
+
+Frame the problem from the user&#x27;s perspective before jumping to solutions. This canvas produces the narrative that feeds directly into PRD Sections 3 (Background) and 5 (Market Segments).
+
+```markdown
+## Problem Framing Canvas
+
+### Problem Framing Narrative
+
+**I am**: [Describe the key persona experiencing the problem]
+- [Key characteristic 1]
+- [Key characteristic 2]
+- [Key characteristic 3]
+
+**Trying to**: [A single sentence listing the desired outcomes]
+
+**But**:
+- [Barrier preventing outcomes 1]
+- [Barrier 2]
+- [Barrier 3]
+
+**Because**: [Root cause explanation in empathetic language]
+
+**Which makes me feel**: [Emotional impact from persona perspective]
+
+### Context &amp; Constraints
+- [Geographic, technological, time-based, organizational constraints]
+
+### Final Problem Statement
+- [Single concise, empathetic summary for stakeholder alignment]
+
+### Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+```
+
+**Next steps:** Generate testable solution hypotheses, convert into a workshop facilitation guide, or create stakeholder-specific variants (Exec, Eng, Design).
+
+### Technique B: Working Backwards Press Release
+
+Write an Amazon-style &quot;future press release&quot; announcing the product as if it already shipped. This forces you to articulate customer value before implementation.
+
+```markdown
+## Working Backwards Press Release
+
+&quot;[Product Name] by [Company] Aims to [Main Purpose/Goal]&quot;
+
+&quot;[City], [Date] --&quot;
+
+&quot;Today, [Company], a [type of organization], announced [product/feature],
+a [brief description]. This [product] is set to [main benefit], addressing
+[key issue or need].&quot;
+
+&quot;[Product] will [what it does/solves]. [Quote from key person]:
+&#x27;[customer-outcome-focused quote].&#x27; This initiative reflects [Company]&#x27;s
+commitment to [core value].&quot;
+
+&quot;In addition to [mentioned features], [product] also [additional benefits].
+According to [source], [relevant data supporting the news].&quot;
+
+**Media Contact:** [Name, Title, Email]
+```
+
+**Writing rules:**
+- Focus on customer outcomes, not feature lists.
+- Avoid hype; favor credible claims and concrete benefits.
+- If you can&#x27;t write a compelling PR, the product concept needs more work.
+
+**Next steps:** Generate an FAQ, create stakeholder-specific variants, generate objection-handling talking points, or define launch success metrics.
+
+---
+
+## PRD Framework (8 Sections)
+
+### Section 1: Summary
+
+Write 2-3 sentences that a busy executive can read in 10 seconds and understand the full scope. Answer three questions: What is this? Who is it for? Why are we doing it now?
+
+Do not use marketing language. State the product, the user, and the expected outcome plainly.
+
+### Section 2: Contacts
+
+A table of people involved in the decision:
+
+| Name | Role | Responsibility |
+|------|------|----------------|
+| ... | Product Manager | Final decision on scope |
+| ... | Engineering Lead | Technical feasibility |
+| ... | Design Lead | UX direction |
+| ... | Stakeholder | Business approval |
+
+Keep this short. Only list people who will actively contribute or approve.
+
+### Section 3: Background
+
+Answer three questions:
+
+1. **Context** -- What is the current state? What exists today?
+2. **Why now?** -- What changed in the market, technology, or business that makes this urgent?
+3. **What recently became possible?** -- New capabilities, partnerships, data, or insights that enable this initiative.
+
+This section sets the stage. A reader who skips every other section should still understand the motivation after reading Background.
+
+### Section 4: Objective
+
+State the business benefit and the customer benefit separately:
+
+- **Business benefit**: How does this move a business metric? (revenue, retention, cost reduction, market share)
+- **Customer benefit**: How does this improve the user&#x27;s life? (time saved, friction removed, new capability)
+
+Then define 2-4 SMART Key Results in OKR format:
+
+- **Objective**: [qualitative, inspirational statement]
+- **KR1**: [metric] from [current] to [target] by [date]
+- **KR2**: [metric] from [current] to [target] by [date]
+- **KR3**: [metric] from [current] to [target] by [date]
+
+### Section 5: Market Segment(s)
+
+Define segments by the problems they face or jobs they need done -- not by demographics. A segment is a group of people who share a common struggle or desired outcome.
+
+Format: &quot;[Segment name]: People who need to [job/problem] because [context].&quot;
+
+Bad: &quot;Millennials aged 25-35 in urban areas&quot;
+Good: &quot;Time-constrained professionals who need to coordinate schedules across 3+ tools because their organization lacks a unified calendar system&quot;
+
+### Section 6: Value Proposition(s)
+
+For each market segment, define:
+
+1. **Jobs addressed** -- What tasks or goals does this product help accomplish?
+2. **Gains created** -- What positive outcomes does the user experience?
+3. **Pains relieved** -- What frustrations, risks, or obstacles are removed?
+4. **Competitive advantage** -- Why is our approach better than existing alternatives?
+
+Use the **Value Curve** framework to visualize where you compete, where you exceed, and where you deliberately underinvest relative to alternatives.
+
+### Section 7: Solution
+
+Break into subsections:
+
+- **UX / Prototypes** -- Key screens, flows, or interaction patterns. Link to design files.
+- **Key Features** -- Numbered list of features with one-sentence descriptions. Mark each as P0 (must-have), P1 (important), or P2 (nice-to-have).
+- **Technology** (optional) -- Architecture decisions, integrations, or infrastructure requirements that constrain the solution.
+- **Assumptions** -- Explicit list of things you believe to be true but have not validated. Each assumption should have a plan to validate it.
+
+### Section 8: Release
+
+- **Relative timeline** -- Use T-shirt sizes (S/M/L/XL) or Now/Next/Later rather than specific dates, unless dates are firm.
+- **v1 scope** -- What ships in the first version? Draw a clear line.
+- **Future versions** -- What is explicitly deferred? List it so stakeholders know it was considered but intentionally excluded.
+- **Success criteria** -- When do we know v1 succeeded? Reference the Key Results from Section 4.
+
+## Writing Principles
+
+- **Plain language** -- No jargon, no acronyms without definition, no buzzwords.
+- **One idea per sentence** -- If a sentence has &quot;and&quot; connecting two distinct ideas, split it.
+- **Specificity over abstraction** -- &quot;Reduce onboarding from 12 steps to 4&quot; beats &quot;Simplify onboarding.&quot;
+- **Saved as**: `PRD-[product-name].md`
+
+## Workflow
+
+1. Gather context: product name, target segment, core problem.
+2. Run `scripts/prd_scaffolder.py` to generate the skeleton.
+3. Fill in each section using the guidance above and `references/prd-writing-guide.md`.
+4. Review against the checklist in `references/prd-writing-guide.md`.
+5. Share with stakeholders for feedback.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `prd_scaffolder.py` | Generate PRD skeleton | `python scripts/prd_scaffolder.py --product-name &quot;MyProduct&quot; --objective &quot;Short description&quot; --segments &quot;Segment A, Segment B&quot;` |
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| PRD scaffolder output is too generic | Only product name provided; objective and segments need specificity | Write a 1-2 sentence objective that states the outcome, not just the product category; define segments by jobs-to-be-done, not demographics |
+| Stakeholders skip reading the PRD | Document too long, too jargon-heavy, or lacks a clear Summary section | Ensure Section 1 (Summary) answers What/Who/Why in 3 sentences; cut any section beyond 1 page that is not Section 7 |
+| Engineering team builds the wrong thing | PRD focuses on solution before establishing problem context | Strengthen Section 3 (Background) and Section 5 (Market Segments); ensure problem definition precedes solution |
+| PRD assumptions never validated | Assumptions listed in Section 7 but no validation plan assigned | Add a validation plan column to the Assumptions table; link each assumption to `identify-assumptions/` or `brainstorm-experiments/` |
+| Scope creep after PRD approval | Section 8 (Release) does not clearly separate v1 from future versions | Be explicit about &quot;Explicitly Deferred&quot; items; ensure every stakeholder has seen and acknowledged the deferred list |
+| PRD becomes stale during development | Treated as a static document rather than a living reference | Update after implementation decisions change; archive final state and link to retrospective notes |
+| `--segments` flag parsing fails | Segments not properly comma-separated or contain special characters | Wrap the segments argument in quotes: `--segments &quot;Segment A, Segment B&quot;` |
+
+## Success Criteria
+
+- PRD passes the &quot;10-second executive test&quot; -- a busy executive understands scope from Section 1 alone
+- All 8 sections are complete before development begins (no placeholder sections remain)
+- Market segments defined by jobs-to-be-done, not demographics
+- Key Results in Section 4 are measurable with baselines, targets, and deadlines
+- Every assumption in Section 7 has a validation plan and owner
+- PRD reviewed by PM, Engineering Lead, Design Lead, and at least one stakeholder before commitment
+- v1 scope in Section 8 draws a clear line between what ships and what is explicitly deferred
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- 8-section PRD skeleton generation with guided placeholders
+- Section-by-section writing guidance following plain-language, specificity-over-abstraction principles
+- Market segment definition using jobs-to-be-done framework
+- Value proposition mapping with Value Curve competitive analysis
+- Release planning with Now/Next/Later and explicit deferral documentation
+
+**Out of Scope:**
+- Technical architecture or system design documents (see `engineering/` skills)
+- User story writing and backlog creation (see `execution/job-stories/` and `execution/wwas/`)
+- Detailed UX research or usability testing plans (see `product-team/` skills)
+- Financial business case modeling (see `finance/` domain skills)
+
+**Important Caveats:**
+- A PRD is a communication tool, not a contract. Treat it as a living document that evolves with implementation learning.
+- The 8-section framework is a proven structure, but lightweight agile teams may need only sections 1, 3, 4, 7, and 8. Heavyweight compliance contexts (medical devices, regulated industries) may need additional sections.
+- A 2025 Carnegie Mellon SEI study found that effective requirements management eliminates 50-80% of project defects. The investment in a clear PRD pays for itself in reduced rework.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `discovery/identify-assumptions/` | Receives from | Validated and &quot;Test Now&quot; assumptions populate PRD Section 7 with evidence |
+| `discovery/brainstorm-experiments/` | Receives from | Experiment results validate or invalidate PRD assumptions |
+| `discovery/pre-mortem/` | Receives from | Tiger mitigations become PRD risk sections |
+| `execution/brainstorm-okrs/` | Feeds into | PRD Key Results (Section 4) align with quarterly OKR targets |
+| `execution/outcome-roadmap/` | Feeds into | PRD release plan (Section 8) maps to roadmap Now/Next/Later horizons |
+| `execution/prioritization-frameworks/` | Receives from | Feature priority (P0/P1/P2) in Section 7 informed by RICE/ICE scoring |
+| `senior-pm/` | Feeds into | PRD stakeholder context feeds stakeholder mapper engagement plans |
+
+## Tool Reference
+
+### prd_scaffolder.py
+
+Generates a complete 8-section PRD markdown skeleton with guided placeholders, market segment sections, and value proposition templates.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--product-name` | string | (required) | Name of the product (used in title and headers) |
+| `--objective` | string | (required) | Short description of the product objective (1-2 sentences) |
+| `--segments` | string | (required) | Comma-separated list of market segments |
+| `--output` | string | stdout | Output file path; if omitted, prints to stdout |
+
+## References
+
+- `references/prd-writing-guide.md` -- Section-by-section writing guide and review checklist
+- `assets/prd_template.md` -- Complete PRD template ready to fill in
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Create Prd&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Create Prd&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Create Prd in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Create Prd&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Create Prd&quot;
+4. Description: &quot;PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/create-prd/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Create Prd&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# PRD Scaffolding Expert
+
+## Overview
+
+Structured product requirements document creation using a proven 8-section framework. This skill produces clear, jargon-free PRDs that communicate what to build, why it matters, and how success is measured. Every PRD generated follows a consistent structure that keeps engineering, design, and business stakeholders aligned.
+
+### When to Use
+
+- **New Product Initiative** -- Starting a product from scratch and need a comprehensive spec before development begins.
+- **Feature Expansion** -- Adding significant functionality to an existing product that requires cross-team alignment.
+- **Stakeholder Alignment** -- Need a single document that answers &quot;what are we building and why?&quot; for everyone involved.
+
+## Pre-PRD Techniques
+
+Before writing the PRD, use one or both of these techniques to sharpen the problem definition and align the team on value.
+
+### Technique A: Problem Framing Canvas
+
+Frame the problem from the user&#x27;s perspective before jumping to solutions. This canvas produces the narrative that feeds directly into PRD Sections 3 (Background) and 5 (Market Segments).
+
+```markdown
+## Problem Framing Canvas
+
+### Problem Framing Narrative
+
+**I am**: [Describe the key persona experiencing the problem]
+- [Key characteristic 1]
+- [Key characteristic 2]
+- [Key characteristic 3]
+
+**Trying to**: [A single sentence listing the desired outcomes]
+
+**But**:
+- [Barrier preventing outcomes 1]
+- [Barrier 2]
+- [Barrier 3]
+
+**Because**: [Root cause explanation in empathetic language]
+
+**Which makes me feel**: [Emotional impact from persona perspective]
+
+### Context &amp; Constraints
+- [Geographic, technological, time-based, organizational constraints]
+
+### Final Problem Statement
+- [Single concise, empathetic summary for stakeholder alignment]
+
+### Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+```
+
+**Next steps:** Generate testable solution hypotheses, convert into a workshop facilitation guide, or create stakeholder-specific variants (Exec, Eng, Design).
+
+### Technique B: Working Backwards Press Release
+
+Write an Amazon-style &quot;future press release&quot; announcing the product as if it already shipped. This forces you to articulate customer value before implementation.
+
+```markdown
+## Working Backwards Press Release
+
+&quot;[Product Name] by [Company] Aims to [Main Purpose/Goal]&quot;
+
+&quot;[City], [Date] --&quot;
+
+&quot;Today, [Company], a [type of organization], announced [product/feature],
+a [brief description]. This [product] is set to [main benefit], addressing
+[key issue or need].&quot;
+
+&quot;[Product] will [what it does/solves]. [Quote from key person]:
+&#x27;[customer-outcome-focused quote].&#x27; This initiative reflects [Company]&#x27;s
+commitment to [core value].&quot;
+
+&quot;In addition to [mentioned features], [product] also [additional benefits].
+According to [source], [relevant data supporting the news].&quot;
+
+**Media Contact:** [Name, Title, Email]
+```
+
+**Writing rules:**
+- Focus on customer outcomes, not feature lists.
+- Avoid hype; favor credible claims and concrete benefits.
+- If you can&#x27;t write a compelling PR, the product concept needs more work.
+
+**Next steps:** Generate an FAQ, create stakeholder-specific variants, generate objection-handling talking points, or define launch success metrics.
+
+---
+
+## PRD Framework (8 Sections)
+
+### Section 1: Summary
+
+Write 2-3 sentences that a busy executive can read in 10 seconds and understand the full scope. Answer three questions: What is this? Who is it for? Why are we doing it now?
+
+Do not use marketing language. State the product, the user, and the expected outcome plainly.
+
+### Section 2: Contacts
+
+A table of people involved in the decision:
+
+| Name | Role | Responsibility |
+|------|------|----------------|
+| ... | Product Manager | Final decision on scope |
+| ... | Engineering Lead | Technical feasibility |
+| ... | Design Lead | UX direction |
+| ... | Stakeholder | Business approval |
+
+Keep this short. Only list people who will actively contribute or approve.
+
+### Section 3: Background
+
+Answer three questions:
+
+1. **Context** -- What is the current state? What exists today?
+2. **Why now?** -- What changed in the market, technology, or business that makes this urgent?
+3. **What recently became possible?** -- New capabilities, partnerships, data, or insights that enable this initiative.
+
+This section sets the stage. A reader who skips every other section should still understand the motivation after reading Background.
+
+### Section 4: Objective
+
+State the business benefit and the customer benefit separately:
+
+- **Business benefit**: How does this move a business metric? (revenue, retention, cost reduction, market share)
+- **Customer benefit**: How does this improve the user&#x27;s life? (time saved, friction removed, new capability)
+
+Then define 2-4 SMART Key Results in OKR format:
+
+- **Objective**: [qualitative, inspirational statement]
+- **KR1**: [metric] from [current] to [target] by [date]
+- **KR2**: [metric] from [current] to [target] by [date]
+- **KR3**: [metric] from [current] to [target] by [date]
+
+### Section 5: Market Segment(s)
+
+Define segments by the problems they face or jobs they need done -- not by demographics. A segment is a group of people who share a common struggle or desired outcome.
+
+Format: &quot;[Segment name]: People who need to [job/problem] because [context].&quot;
+
+Bad: &quot;Millennials aged 25-35 in urban areas&quot;
+Good: &quot;Time-constrained professionals who need to coordinate schedules across 3+ tools because their organization lacks a unified calendar system&quot;
+
+### Section 6: Value Proposition(s)
+
+For each market segment, define:
+
+1. **Jobs addressed** -- What tasks or goals does this product help accomplish?
+2. **Gains created** -- What positive outcomes does the user experience?
+3. **Pains relieved** -- What frustrations, risks, or obstacles are removed?
+4. **Competitive advantage** -- Why is our approach better than existing alternatives?
+
+Use the **Value Curve** framework to visualize where you compete, where you exceed, and where you deliberately underinvest relative to alternatives.
+
+### Section 7: Solution
+
+Break into subsections:
+
+- **UX / Prototypes** -- Key screens, flows, or interaction patterns. Link to design files.
+- **Key Features** -- Numbered list of features with one-sentence descriptions. Mark each as P0 (must-have), P1 (important), or P2 (nice-to-have).
+- **Technology** (optional) -- Architecture decisions, integrations, or infrastructure requirements that constrain the solution.
+- **Assumptions** -- Explicit list of things you believe to be true but have not validated. Each assumption should have a plan to validate it.
+
+### Section 8: Release
+
+- **Relative timeline** -- Use T-shirt sizes (S/M/L/XL) or Now/Next/Later rather than specific dates, unless dates are firm.
+- **v1 scope** -- What ships in the first version? Draw a clear line.
+- **Future versions** -- What is explicitly deferred? List it so stakeholders know it was considered but intentionally excluded.
+- **Success criteria** -- When do we know v1 succeeded? Reference the Key Results from Section 4.
+
+## Writing Principles
+
+- **Plain language** -- No jargon, no acronyms without definition, no buzzwords.
+- **One idea per sentence** -- If a sentence has &quot;and&quot; connecting two distinct ideas, split it.
+- **Specificity over abstraction** -- &quot;Reduce onboarding from 12 steps to 4&quot; beats &quot;Simplify onboarding.&quot;
+- **Saved as**: `PRD-[product-name].md`
+
+## Workflow
+
+1. Gather context: product name, target segment, core problem.
+2. Run `scripts/prd_scaffolder.py` to generate the skeleton.
+3. Fill in each section using the guidance above and `references/prd-writing-guide.md`.
+4. Review against the checklist in `references/prd-writing-guide.md`.
+5. Share with stakeholders for feedback.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `prd_scaffolder.py` | Generate PRD skeleton | `python scripts/prd_scaffolder.py --product-name &quot;MyProduct&quot; --objective &quot;Short description&quot; --segments &quot;Segment A, Segment B&quot;` |
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| PRD scaffolder output is too generic | Only product name provided; objective and segments need specificity | Write a 1-2 sentence objective that states the outcome, not just the product category; define segments by jobs-to-be-done, not demographics |
+| Stakeholders skip reading the PRD | Document too long, too jargon-heavy, or lacks a clear Summary section | Ensure Section 1 (Summary) answers What/Who/Why in 3 sentences; cut any section beyond 1 page that is not Section 7 |
+| Engineering team builds the wrong thing | PRD focuses on solution before establishing problem context | Strengthen Section 3 (Background) and Section 5 (Market Segments); ensure problem definition precedes solution |
+| PRD assumptions never validated | Assumptions listed in Section 7 but no validation plan assigned | Add a validation plan column to the Assumptions table; link each assumption to `identify-assumptions/` or `brainstorm-experiments/` |
+| Scope creep after PRD approval | Section 8 (Release) does not clearly separate v1 from future versions | Be explicit about &quot;Explicitly Deferred&quot; items; ensure every stakeholder has seen and acknowledged the deferred list |
+| PRD becomes stale during development | Treated as a static document rather than a living reference | Update after implementation decisions change; archive final state and link to retrospective notes |
+| `--segments` flag parsing fails | Segments not properly comma-separated or contain special characters | Wrap the segments argument in quotes: `--segments &quot;Segment A, Segment B&quot;` |
+
+## Success Criteria
+
+- PRD passes the &quot;10-second executive test&quot; -- a busy executive understands scope from Section 1 alone
+- All 8 sections are complete before development begins (no placeholder sections remain)
+- Market segments defined by jobs-to-be-done, not demographics
+- Key Results in Section 4 are measurable with baselines, targets, and deadlines
+- Every assumption in Section 7 has a validation plan and owner
+- PRD reviewed by PM, Engineering Lead, Design Lead, and at least one stakeholder before commitment
+- v1 scope in Section 8 draws a clear line between what ships and what is explicitly deferred
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- 8-section PRD skeleton generation with guided placeholders
+- Section-by-section writing guidance following plain-language, specificity-over-abstraction principles
+- Market segment definition using jobs-to-be-done framework
+- Value proposition mapping with Value Curve competitive analysis
+- Release planning with Now/Next/Later and explicit deferral documentation
+
+**Out of Scope:**
+- Technical architecture or system design documents (see `engineering/` skills)
+- User story writing and backlog creation (see `execution/job-stories/` and `execution/wwas/`)
+- Detailed UX research or usability testing plans (see `product-team/` skills)
+- Financial business case modeling (see `finance/` domain skills)
+
+**Important Caveats:**
+- A PRD is a communication tool, not a contract. Treat it as a living document that evolves with implementation learning.
+- The 8-section framework is a proven structure, but lightweight agile teams may need only sections 1, 3, 4, 7, and 8. Heavyweight compliance contexts (medical devices, regulated industries) may need additional sections.
+- A 2025 Carnegie Mellon SEI study found that effective requirements management eliminates 50-80% of project defects. The investment in a clear PRD pays for itself in reduced rework.
+
+## Integration Points
+
+| Integration | Direction | Description |
+|------------|-----------|-------------|
+| `discovery/identify-assumptions/` | Receives from | Validated and &quot;Test Now&quot; assumptions populate PRD Section 7 with evidence |
+| `discovery/brainstorm-experiments/` | Receives from | Experiment results validate or invalidate PRD assumptions |
+| `discovery/pre-mortem/` | Receives from | Tiger mitigations become PRD risk sections |
+| `execution/brainstorm-okrs/` | Feeds into | PRD Key Results (Section 4) align with quarterly OKR targets |
+| `execution/outcome-roadmap/` | Feeds into | PRD release plan (Section 8) maps to roadmap Now/Next/Later horizons |
+| `execution/prioritization-frameworks/` | Receives from | Feature priority (P0/P1/P2) in Section 7 informed by RICE/ICE scoring |
+| `senior-pm/` | Feeds into | PRD stakeholder context feeds stakeholder mapper engagement plans |
+
+## Tool Reference
+
+### prd_scaffolder.py
+
+Generates a complete 8-section PRD markdown skeleton with guided placeholders, market segment sections, and value proposition templates.
+
+| Flag | Type | Default | Description |
+|------|------|---------|-------------|
+| `--product-name` | string | (required) | Name of the product (used in title and headers) |
+| `--objective` | string | (required) | Short description of the product objective (1-2 sentences) |
+| `--segments` | string | (required) | Comma-separated list of market segments |
+| `--output` | string | stdout | Output file path; if omitted, prints to stdout |
+
+## References
+
+- `references/prd-writing-guide.md` -- Section-by-section writing guide and review checklist
+- `assets/prd_template.md` -- Complete PRD template ready to fill in
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Create Prd&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Create Prd&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Create Prd in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Create Prd&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Create Prd&quot;
+4. Description: &quot;PRD scaffolding expert that generates structured product requirements documents using an 8-section framework.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/create-prd/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

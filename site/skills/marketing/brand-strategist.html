@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Brand Strategist (Marketing domain).
 
 Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance. Use when developing brand positioning statements, creating messa...
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/brand-strategist
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Brand Strategist (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Brand Strategist (Marketing domain).
 
 Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance. Use when developing brand positioning statements, creating messa...
 
@@ -435,7 +457,490 @@ https://github.com/borghei/Claude-Skills/tree/main/brand-strategist
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Brand Strategist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Brand Strategist
+
+The agent operates as a senior brand strategist, delivering actionable brand positioning, identity systems, messaging frameworks, and governance structures for market differentiation.
+
+## Workflow
+
+1. **Assess brand context** - Identify the brand&#x27;s category, competitive landscape, and target audience. Validate that a clear business objective exists (launch, rebrand, extension, or audit).
+2. **Develop positioning** - Apply the positioning framework to define target, category frame, key benefit, and proof points. Checkpoint: the positioning statement must pass the &quot;only-we&quot; test (no competitor could make the same claim).
+3. **Build identity system** - Define visual identity (logo, color, typography), verbal identity (voice, tone, messaging), and experiential identity. Checkpoint: every element must trace back to the positioning.
+4. **Construct messaging architecture** - Create master narrative, pillar messages, and audience-specific variants. Checkpoint: each pillar must have at least two proof points.
+5. **Select brand architecture model** - Choose Branded House, House of Brands, Endorsed, or Hybrid. Validate alignment with corporate strategy.
+6. **Establish governance** - Define brand guidelines structure, approval process, and measurement cadence. Checkpoint: brand health dashboard covers awareness, perception, and consideration.
+7. **Measure and iterate** - Set up brand tracking (NPS, unaided awareness, share of voice). Review quarterly against baselines.
+
+## Brand Positioning Framework
+
+### Positioning Statement Template
+
+```
+For [target audience]
+Who [need or opportunity]
+[Brand] is the [category]
+That [key benefit]
+Unlike [competitors]
+We [unique differentiator]
+```
+
+### Positioning Map
+
+```
+                    High Price
+                        |
+    PREMIUM         ----+----    LUXURY
+    * Quality           |        * Status
+    * Performance       |        * Exclusivity
+                        |
+    Low Innovation -----+----- High Innovation
+                        |
+    VALUE           ----+----    DISRUPTOR
+    * Accessibility     |        * New approach
+    * Affordability     |        * Category change
+                        |
+                    Low Price
+```
+
+### Competitive Positioning Matrix
+
+| Attribute | Us | Comp A | Comp B | Comp C |
+|-----------|-----|--------|--------|--------|
+| Price | $$$ | $$ | $$$$ | $ |
+| Quality | High | Medium | High | Low |
+| Innovation | High | Low | Medium | High |
+| Service | High | High | Low | Medium |
+
+## Brand Identity System
+
+```
+BRAND IDENTITY SYSTEM
++-- Visual Identity
+|   +-- Logo (primary, secondary, icon)
+|   +-- Color palette
+|   +-- Typography
+|   +-- Imagery style
+|   +-- Graphic elements
++-- Verbal Identity
+|   +-- Brand voice
+|   +-- Tone guidelines
+|   +-- Messaging framework
+|   +-- Vocabulary
++-- Experiential Identity
+    +-- Customer experience
+    +-- Physical environments
+    +-- Digital experiences
+```
+
+### Voice Framework
+
+| Context | Tone Adjustment |
+|---------|-----------------|
+| Marketing | More enthusiastic |
+| Support | More empathetic |
+| Legal | More formal |
+| Social | More casual |
+
+## Brand Architecture Models
+
+| Model | Structure | Example |
+|-------|-----------|---------|
+| Branded House | Master Brand &gt; Products | Google (Maps, Drive, Cloud) |
+| House of Brands | Parent &gt; Independent Brands | P&amp;G (Tide, Pampers, Gillette) |
+| Endorsed | Sub-brand by Master Brand | Marriott (Courtyard by Marriott) |
+| Hybrid | Mix of above | Amazon (Prime, AWS, Whole Foods) |
+
+## Example: Brand Positioning for a SaaS Startup
+
+```markdown
+# Brand Strategy: FlowMetrics
+
+## Positioning Statement
+For data-driven product managers
+Who need real-time user behavior insights without engineering support
+FlowMetrics is the self-serve analytics platform
+That delivers actionable funnels in under 5 minutes
+Unlike Amplitude and Mixpanel
+We require zero SQL and zero instrumentation code
+
+## Brand Values
+1. Clarity: Complex data, simple answers
+2. Speed: Insights in minutes, not days
+3. Autonomy: No engineering dependency
+
+## Brand Voice
+- Confident but not arrogant
+- Technical but accessible
+- Direct and concise
+
+## Proof Points
+- 90-second median time-to-first-insight
+- 4.8/5 satisfaction from non-technical PMs
+- 50% reduction in analytics engineering tickets
+```
+
+## Brand Health Measurement
+
+**Awareness:** unaided awareness, aided awareness, top-of-mind awareness
+**Perception:** brand attribute association, NPS, brand sentiment
+**Consideration:** purchase intent, preference vs. competitors, recommendation likelihood
+
+```
+Brand Health Dashboard - Q1 2026
+  Awareness: 68% (+5%)    NPS: 45 (+8)    Consideration: 72% (+3%)
+  Brand Attributes (% association)
+  Innovative: 78%    Trustworthy: 82%    Quality: 75%
+  Share of Voice: 32% (+2%)    Sentiment: 85% positive
+```
+
+## Scripts
+
+```bash
+# Brand audit analyzer
+python scripts/brand_audit.py --surveys survey_data.csv
+
+# Competitive positioning mapper
+python scripts/positioning_map.py --competitors comp_data.csv
+
+# Brand voice analyzer
+python scripts/voice_analyzer.py --content content.txt
+
+# Brand guidelines generator
+python scripts/guidelines_gen.py --config brand_config.yaml
+```
+
+## Reference Materials
+
+- `references/positioning.md` - Positioning frameworks
+- `references/identity.md` - Identity system guide
+- `references/architecture.md` - Brand architecture models
+- `references/governance.md` - Governance best practices
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning statement passes internally but customers do not repeat it | Positioning built on company perspective, not customer language | Rerun April Dunford methodology with 10+ customer interviews; use verbatim customer phrases |
+| Brand architecture confusion after acquisition | No decision framework for integrating acquired brands | Evaluate using brand_architecture_analyzer.py; score audience overlap and category fit to choose model |
+| NPS declining despite product improvements | Brand perception lagging behind product reality | Run brand health dashboard; invest in rebranding or brand awareness campaign targeting perception gap |
+| Multiple sub-brands competing for same audience | House of Brands model applied when Branded House was appropriate | Consolidate overlapping brands; use brand architecture analyzer to validate optimal model |
+| Competitive positioning feels generic | Differentiators are category requirements, not unique advantages | Apply &quot;only-we&quot; test: if a competitor could make the same claim, it is not a differentiator |
+
+---
+
+## Success Criteria
+
+- Positioning statement passes the &quot;only-we&quot; test — no competitor could make the same claim
+- 7+ out of 10 customers describe brand value unprompted in interviews
+- Brand health index scores 65+/100 across awareness, perception, consideration, and loyalty
+- Brand architecture model validated by lowest churn and fastest close among A-fit segments
+- Share of voice increases 5+ percentage points within two quarters of brand strategy execution
+- Competitive positioning map shows clear white space between brand and nearest competitor
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Brand positioning frameworks (April Dunford), brand identity system design, brand architecture model selection (Branded House, House of Brands, Endorsed, Hybrid), competitive positioning analysis, brand health measurement, brand governance structures.
+
+**Out of Scope:** Visual design execution (see brand-guidelines skill), marketing copy creation (see copywriting skill), campaign execution (see marketing-ops skill), product strategy decisions, legal trademark registration.
+
+**Limitations:** Brand strategy effectiveness depends on consistent execution across the organization. Positioning validation requires real customer interviews — internal-only positioning is unreliable. Brand architecture recommendations are based on audience overlap and category analysis; they do not account for all political or financial factors in brand portfolio decisions.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/brand_health_dashboard.py` | Calculate brand health metrics across awareness, perception, consideration, loyalty | `python scripts/brand_health_dashboard.py survey_data.json --json` |
+| `scripts/positioning_map_generator.py` | Generate competitive positioning maps with white space analysis | `python scripts/positioning_map_generator.py competitors.json --demo` |
+| `scripts/brand_architecture_analyzer.py` | Evaluate and recommend brand architecture models for a portfolio | `python scripts/brand_architecture_analyzer.py portfolio.json --json` |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Brand Strategist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Brand Strategist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Brand Strategist in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Brand Strategist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Brand Strategist&quot;
+4. Description: &quot;Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance. Use when developing brand positioning statements, creating messa...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/brand-strategist/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Brand Strategist&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Brand Strategist
+
+The agent operates as a senior brand strategist, delivering actionable brand positioning, identity systems, messaging frameworks, and governance structures for market differentiation.
+
+## Workflow
+
+1. **Assess brand context** - Identify the brand&#x27;s category, competitive landscape, and target audience. Validate that a clear business objective exists (launch, rebrand, extension, or audit).
+2. **Develop positioning** - Apply the positioning framework to define target, category frame, key benefit, and proof points. Checkpoint: the positioning statement must pass the &quot;only-we&quot; test (no competitor could make the same claim).
+3. **Build identity system** - Define visual identity (logo, color, typography), verbal identity (voice, tone, messaging), and experiential identity. Checkpoint: every element must trace back to the positioning.
+4. **Construct messaging architecture** - Create master narrative, pillar messages, and audience-specific variants. Checkpoint: each pillar must have at least two proof points.
+5. **Select brand architecture model** - Choose Branded House, House of Brands, Endorsed, or Hybrid. Validate alignment with corporate strategy.
+6. **Establish governance** - Define brand guidelines structure, approval process, and measurement cadence. Checkpoint: brand health dashboard covers awareness, perception, and consideration.
+7. **Measure and iterate** - Set up brand tracking (NPS, unaided awareness, share of voice). Review quarterly against baselines.
+
+## Brand Positioning Framework
+
+### Positioning Statement Template
+
+```
+For [target audience]
+Who [need or opportunity]
+[Brand] is the [category]
+That [key benefit]
+Unlike [competitors]
+We [unique differentiator]
+```
+
+### Positioning Map
+
+```
+                    High Price
+                        |
+    PREMIUM         ----+----    LUXURY
+    * Quality           |        * Status
+    * Performance       |        * Exclusivity
+                        |
+    Low Innovation -----+----- High Innovation
+                        |
+    VALUE           ----+----    DISRUPTOR
+    * Accessibility     |        * New approach
+    * Affordability     |        * Category change
+                        |
+                    Low Price
+```
+
+### Competitive Positioning Matrix
+
+| Attribute | Us | Comp A | Comp B | Comp C |
+|-----------|-----|--------|--------|--------|
+| Price | $$$ | $$ | $$$$ | $ |
+| Quality | High | Medium | High | Low |
+| Innovation | High | Low | Medium | High |
+| Service | High | High | Low | Medium |
+
+## Brand Identity System
+
+```
+BRAND IDENTITY SYSTEM
++-- Visual Identity
+|   +-- Logo (primary, secondary, icon)
+|   +-- Color palette
+|   +-- Typography
+|   +-- Imagery style
+|   +-- Graphic elements
++-- Verbal Identity
+|   +-- Brand voice
+|   +-- Tone guidelines
+|   +-- Messaging framework
+|   +-- Vocabulary
++-- Experiential Identity
+    +-- Customer experience
+    +-- Physical environments
+    +-- Digital experiences
+```
+
+### Voice Framework
+
+| Context | Tone Adjustment |
+|---------|-----------------|
+| Marketing | More enthusiastic |
+| Support | More empathetic |
+| Legal | More formal |
+| Social | More casual |
+
+## Brand Architecture Models
+
+| Model | Structure | Example |
+|-------|-----------|---------|
+| Branded House | Master Brand &gt; Products | Google (Maps, Drive, Cloud) |
+| House of Brands | Parent &gt; Independent Brands | P&amp;G (Tide, Pampers, Gillette) |
+| Endorsed | Sub-brand by Master Brand | Marriott (Courtyard by Marriott) |
+| Hybrid | Mix of above | Amazon (Prime, AWS, Whole Foods) |
+
+## Example: Brand Positioning for a SaaS Startup
+
+```markdown
+# Brand Strategy: FlowMetrics
+
+## Positioning Statement
+For data-driven product managers
+Who need real-time user behavior insights without engineering support
+FlowMetrics is the self-serve analytics platform
+That delivers actionable funnels in under 5 minutes
+Unlike Amplitude and Mixpanel
+We require zero SQL and zero instrumentation code
+
+## Brand Values
+1. Clarity: Complex data, simple answers
+2. Speed: Insights in minutes, not days
+3. Autonomy: No engineering dependency
+
+## Brand Voice
+- Confident but not arrogant
+- Technical but accessible
+- Direct and concise
+
+## Proof Points
+- 90-second median time-to-first-insight
+- 4.8/5 satisfaction from non-technical PMs
+- 50% reduction in analytics engineering tickets
+```
+
+## Brand Health Measurement
+
+**Awareness:** unaided awareness, aided awareness, top-of-mind awareness
+**Perception:** brand attribute association, NPS, brand sentiment
+**Consideration:** purchase intent, preference vs. competitors, recommendation likelihood
+
+```
+Brand Health Dashboard - Q1 2026
+  Awareness: 68% (+5%)    NPS: 45 (+8)    Consideration: 72% (+3%)
+  Brand Attributes (% association)
+  Innovative: 78%    Trustworthy: 82%    Quality: 75%
+  Share of Voice: 32% (+2%)    Sentiment: 85% positive
+```
+
+## Scripts
+
+```bash
+# Brand audit analyzer
+python scripts/brand_audit.py --surveys survey_data.csv
+
+# Competitive positioning mapper
+python scripts/positioning_map.py --competitors comp_data.csv
+
+# Brand voice analyzer
+python scripts/voice_analyzer.py --content content.txt
+
+# Brand guidelines generator
+python scripts/guidelines_gen.py --config brand_config.yaml
+```
+
+## Reference Materials
+
+- `references/positioning.md` - Positioning frameworks
+- `references/identity.md` - Identity system guide
+- `references/architecture.md` - Brand architecture models
+- `references/governance.md` - Governance best practices
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Resolution |
+|---------|-------------|------------|
+| Positioning statement passes internally but customers do not repeat it | Positioning built on company perspective, not customer language | Rerun April Dunford methodology with 10+ customer interviews; use verbatim customer phrases |
+| Brand architecture confusion after acquisition | No decision framework for integrating acquired brands | Evaluate using brand_architecture_analyzer.py; score audience overlap and category fit to choose model |
+| NPS declining despite product improvements | Brand perception lagging behind product reality | Run brand health dashboard; invest in rebranding or brand awareness campaign targeting perception gap |
+| Multiple sub-brands competing for same audience | House of Brands model applied when Branded House was appropriate | Consolidate overlapping brands; use brand architecture analyzer to validate optimal model |
+| Competitive positioning feels generic | Differentiators are category requirements, not unique advantages | Apply &quot;only-we&quot; test: if a competitor could make the same claim, it is not a differentiator |
+
+---
+
+## Success Criteria
+
+- Positioning statement passes the &quot;only-we&quot; test — no competitor could make the same claim
+- 7+ out of 10 customers describe brand value unprompted in interviews
+- Brand health index scores 65+/100 across awareness, perception, consideration, and loyalty
+- Brand architecture model validated by lowest churn and fastest close among A-fit segments
+- Share of voice increases 5+ percentage points within two quarters of brand strategy execution
+- Competitive positioning map shows clear white space between brand and nearest competitor
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Brand positioning frameworks (April Dunford), brand identity system design, brand architecture model selection (Branded House, House of Brands, Endorsed, Hybrid), competitive positioning analysis, brand health measurement, brand governance structures.
+
+**Out of Scope:** Visual design execution (see brand-guidelines skill), marketing copy creation (see copywriting skill), campaign execution (see marketing-ops skill), product strategy decisions, legal trademark registration.
+
+**Limitations:** Brand strategy effectiveness depends on consistent execution across the organization. Positioning validation requires real customer interviews — internal-only positioning is unreliable. Brand architecture recommendations are based on audience overlap and category analysis; they do not account for all political or financial factors in brand portfolio decisions.
+
+---
+
+## Scripts
+
+| Script | Purpose | Usage |
+|--------|---------|-------|
+| `scripts/brand_health_dashboard.py` | Calculate brand health metrics across awareness, perception, consideration, loyalty | `python scripts/brand_health_dashboard.py survey_data.json --json` |
+| `scripts/positioning_map_generator.py` | Generate competitive positioning maps with white space analysis | `python scripts/positioning_map_generator.py competitors.json --demo` |
+| `scripts/brand_architecture_analyzer.py` | Evaluate and recommend brand architecture models for a portfolio | `python scripts/brand_architecture_analyzer.py portfolio.json --json` |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Brand Strategist&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Brand Strategist&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Brand Strategist in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Brand Strategist&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Brand Strategist&quot;
+4. Description: &quot;Expert brand strategy covering brand positioning, identity development, brand architecture, messaging frameworks, and brand governance. Use when developing brand positioning statements, creating messa...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/brand-strategist/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

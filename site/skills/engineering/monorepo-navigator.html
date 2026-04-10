@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Monorepo Navigator (Engineering domain).
 
 Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, mi...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/monorepo-navigator
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Monorepo Navigator (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Monorepo Navigator (Engineering domain).
 
 Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, mi...
 
@@ -425,7 +447,1000 @@ https://github.com/borghei/Claude-Skills/tree/main/monorepo-navigator
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Monorepo Navigator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Monorepo Navigator
+
+**Tier:** POWERFUL
+**Category:** Engineering / Build Systems
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Navigate, manage, and optimize monorepos at any scale. Covers Turborepo, Nx, pnpm workspaces, and Lerna/Changesets for cross-package impact analysis, selective builds on affected packages only, dependency graph visualization, remote caching configuration, migration from multi-repo to monorepo with preserved git history, and coordinated package publishing with automated changelogs.
+
+## Keywords
+
+monorepo, Turborepo, Nx, pnpm workspaces, Changesets, dependency graph, remote cache, affected packages, selective builds, cross-package impact, npm publishing, workspace protocol
+
+## Core Capabilities
+
+### 1. Impact Analysis
+- Determine which apps break when a shared package changes
+- Trace dependency chains from leaf packages to root apps
+- Visualize impact as Mermaid dependency graphs
+- Calculate blast radius for any file change
+
+### 2. Selective Execution
+- Run tests/builds only for affected packages (not everything)
+- Filter by changed files since a git ref
+- Scope commands to specific packages and their dependents
+- Skip unchanged packages in CI for faster feedback
+
+### 3. Build Optimization
+- Remote caching with Turborepo (Vercel) or Nx Cloud
+- Incremental builds with proper input/output configuration
+- Parallel execution with dependency-aware scheduling
+- Artifact sharing between CI jobs
+
+### 4. Publishing
+- Changesets for coordinated versioning across packages
+- Automated changelog generation per package
+- Pre-release channels (alpha, beta, rc)
+- `workspace:*` protocol replacement during publish
+
+## When to Use
+
+- Multiple packages/apps share code (UI components, utils, types, API clients)
+- Build times are slow because everything rebuilds on every change
+- Migrating from multiple repos to a single monorepo
+- Publishing npm packages with coordinated versioning
+- Teams work across packages and need unified tooling
+
+## Tool Selection Decision Matrix
+
+| Requirement | Turborepo | Nx | pnpm Workspaces | Changesets |
+|-------------|-----------|-----|-----------------|------------|
+| Simple task runner | Best | Good | N/A | N/A |
+| Remote caching | Built-in | Nx Cloud | N/A | N/A |
+| Code generation | No | Best | N/A | N/A |
+| Dependency management | N/A | N/A | Best | N/A |
+| Package publishing | N/A | N/A | N/A | Best |
+| Plugin ecosystem | Limited | Extensive | N/A | N/A |
+| Config complexity | Minimal | Moderate | Minimal | Minimal |
+
+**Recommended modern stack:** pnpm workspaces + Turborepo + Changesets
+
+## Monorepo Structure
+
+```
+my-monorepo/
+├── apps/
+│   ├── web/                    # Next.js frontend
+│   │   ├── package.json        # depends on @repo/ui, @repo/utils
+│   │   └── ...
+│   ├── api/                    # Express/Fastify backend
+│   │   ├── package.json        # depends on @repo/db, @repo/utils
+│   │   └── ...
+│   └── mobile/                 # React Native app
+│       ├── package.json
+│       └── ...
+├── packages/
+│   ├── ui/                     # Shared React components
+│   │   ├── package.json        # @repo/ui
+│   │   └── ...
+│   ├── utils/                  # Shared utilities
+│   │   ├── package.json        # @repo/utils
+│   │   └── ...
+│   ├── db/                     # Database client + schema
+│   │   ├── package.json        # @repo/db
+│   │   └── ...
+│   ├── types/                  # Shared TypeScript types
+│   │   ├── package.json        # @repo/types (no runtime deps)
+│   │   └── ...
+│   └── config/                 # Shared configs (tsconfig, eslint)
+│       ├── tsconfig.base.json
+│       └── eslint.base.js
+├── turbo.json                  # Turborepo pipeline config
+├── pnpm-workspace.yaml         # Workspace package locations
+├── package.json                # Root scripts, devDependencies
+└── .changeset/                 # Changeset config
+    └── config.json
+```
+
+## Turborepo Configuration
+
+### turbo.json
+
+```json
+{
+  &quot;$schema&quot;: &quot;https://turbo.build/schema.json&quot;,
+  &quot;globalDependencies&quot;: [&quot;**/.env.*local&quot;],
+  &quot;globalEnv&quot;: [&quot;NODE_ENV&quot;, &quot;CI&quot;],
+  &quot;tasks&quot;: {
+    &quot;build&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tsconfig.json&quot;, &quot;package.json&quot;],
+      &quot;outputs&quot;: [&quot;dist/**&quot;, &quot;.next/**&quot;, &quot;!.next/cache/**&quot;],
+      &quot;env&quot;: [&quot;NEXT_PUBLIC_*&quot;]
+    },
+    &quot;test&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tests/**&quot;, &quot;vitest.config.*&quot;],
+      &quot;outputs&quot;: [&quot;coverage/**&quot;]
+    },
+    &quot;lint&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;.eslintrc.*&quot;, &quot;tsconfig.json&quot;]
+    },
+    &quot;typecheck&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tsconfig.json&quot;]
+    },
+    &quot;dev&quot;: {
+      &quot;cache&quot;: false,
+      &quot;persistent&quot;: true
+    }
+  }
+}
+```
+
+### Key Turborepo Commands
+
+```bash
+# Run all tasks
+turbo run build
+
+# Run only affected packages (compared to main)
+turbo run build test --filter=&#x27;...[origin/main]&#x27;
+
+# Run for a specific package and its dependencies
+turbo run build --filter=@repo/web...
+
+# Run for a specific package only (no deps)
+turbo run test --filter=@repo/ui
+
+# Dry run to see what would execute
+turbo run build --dry=json
+
+# View dependency graph
+turbo run build --graph=graph.html
+
+# Summarize cache usage
+turbo run build --summarize
+```
+
+## pnpm Workspace Configuration
+
+### pnpm-workspace.yaml
+
+```yaml
+packages:
+  - &#x27;apps/*&#x27;
+  - &#x27;packages/*&#x27;
+```
+
+### Cross-Package References
+
+```json
+// packages/ui/package.json
+{
+  &quot;name&quot;: &quot;@repo/ui&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;main&quot;: &quot;./src/index.ts&quot;,
+  &quot;types&quot;: &quot;./src/index.ts&quot;,
+  &quot;dependencies&quot;: {
+    &quot;@repo/types&quot;: &quot;workspace:*&quot;
+  }
+}
+
+// apps/web/package.json
+{
+  &quot;name&quot;: &quot;@repo/web&quot;,
+  &quot;dependencies&quot;: {
+    &quot;@repo/ui&quot;: &quot;workspace:*&quot;,
+    &quot;@repo/utils&quot;: &quot;workspace:*&quot;
+  }
+}
+```
+
+### Workspace Commands
+
+```bash
+# Install all workspace dependencies
+pnpm install
+
+# Add a dependency to a specific package
+pnpm add zod --filter @repo/api
+
+# Add a workspace package as dependency
+pnpm add @repo/utils --filter @repo/web --workspace
+
+# Run a script in a specific package
+pnpm --filter @repo/web dev
+
+# Run a script in all packages that have it
+pnpm -r run build
+
+# List all packages
+pnpm -r ls --depth -1
+```
+
+## Impact Analysis
+
+### Find All Dependents of a Changed Package
+
+```bash
+# Using turbo to see what depends on @repo/ui
+turbo run build --filter=&#x27;...@repo/ui&#x27; --dry=json | \
+  jq &#x27;.tasks[].package&#x27; -r | sort -u
+
+# Manual: search for imports of a package
+grep -r &quot;from &#x27;@repo/ui&#x27;&quot; apps/ packages/ --include=&quot;*.ts&quot; --include=&quot;*.tsx&quot; -l
+```
+
+### Dependency Graph Visualization
+
+```bash
+# Generate HTML visualization
+turbo run build --graph=dependency-graph.html
+
+# Generate DOT format for custom rendering
+turbo run build --graph=deps.dot
+
+# Quick Mermaid diagram from package.json files
+echo &quot;graph TD&quot;
+for pkg in packages/*/package.json apps/*/package.json; do
+  name=$(jq -r &#x27;.name&#x27; &quot;$pkg&quot;)
+  jq -r &#x27;.dependencies // {} | keys[] | select(startswith(&quot;@repo/&quot;))&#x27; &quot;$pkg&quot; | while read dep; do
+    echo &quot;  $name --&gt; $dep&quot;
+  done
+done
+```
+
+## Remote Caching
+
+### Turborepo Remote Cache (Vercel)
+
+```bash
+# Login to Vercel (one-time)
+turbo login
+
+# Link repo to Vercel team
+turbo link
+
+# CI: set environment variables
+# TURBO_TOKEN=&lt;vercel-token&gt;
+# TURBO_TEAM=&lt;team-slug&gt;
+
+# Verify remote cache works
+turbo run build --summarize
+# Look for &quot;Remote cache: hit&quot; entries
+```
+
+### Self-Hosted Remote Cache
+
+```bash
+# Using ducktape/turborepo-remote-cache
+docker run -p 3000:3000 \
+  -e STORAGE_PROVIDER=local \
+  -e STORAGE_PATH=/cache \
+  ducktape/turborepo-remote-cache
+
+# Configure turbo to use it
+# turbo.json:
+# { &quot;remoteCache&quot;: { &quot;apiUrl&quot;: &quot;http://cache-server:3000&quot; } }
+```
+
+## CI/CD with Affected Packages Only
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for --filter comparisons
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: &#x27;pnpm&#x27;
+
+      - run: pnpm install --frozen-lockfile
+
+      # Only lint/test/build affected packages
+      - run: turbo run lint test build --filter=&#x27;...[origin/main]&#x27;
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+```
+
+## Publishing with Changesets
+
+### Setup
+
+```bash
+# Install changesets
+pnpm add -D -w @changesets/cli @changesets/changelog-github
+
+# Initialize
+pnpm changeset init
+```
+
+### .changeset/config.json
+
+```json
+{
+  &quot;$schema&quot;: &quot;https://unpkg.com/@changesets/config@3.0.0/schema.json&quot;,
+  &quot;changelog&quot;: [&quot;@changesets/changelog-github&quot;, { &quot;repo&quot;: &quot;org/repo&quot; }],
+  &quot;commit&quot;: false,
+  &quot;fixed&quot;: [],
+  &quot;linked&quot;: [[&quot;@repo/ui&quot;, &quot;@repo/utils&quot;]],
+  &quot;access&quot;: &quot;public&quot;,
+  &quot;baseBranch&quot;: &quot;main&quot;,
+  &quot;updateInternalDependencies&quot;: &quot;patch&quot;
+}
+```
+
+### Publishing Workflow
+
+```bash
+# 1. Developer adds a changeset for their changes
+pnpm changeset
+# Interactive: select packages, bump type (patch/minor/major), summary
+
+# 2. Before release: consume changesets and bump versions
+pnpm changeset version
+# Updates package.json versions and CHANGELOG.md files
+
+# 3. Publish to npm
+pnpm changeset publish
+# Replaces workspace:* with real versions and publishes
+```
+
+## Migration: Multi-Repo to Monorepo
+
+```bash
+# 1. Preserve git history using filter-repo
+# In each source repo:
+git filter-repo --to-subdirectory-filter packages/ui
+git filter-repo --to-subdirectory-filter apps/api
+
+# 2. Create monorepo and merge histories
+mkdir monorepo &amp;&amp; cd monorepo &amp;&amp; git init
+git remote add ui ../old-ui-repo
+git fetch ui --no-tags
+git merge ui/main --allow-unrelated-histories
+
+git remote add api ../old-api-repo
+git fetch api --no-tags
+git merge api/main --allow-unrelated-histories
+
+# 3. Set up workspace configuration
+# Add pnpm-workspace.yaml, turbo.json, root package.json
+
+# 4. Update internal imports
+# Change &quot;ui-package&quot; imports to &quot;@repo/ui&quot;
+# Change npm versions to &quot;workspace:*&quot;
+
+# 5. Verify
+pnpm install
+turbo run build test
+```
+
+## Common Pitfalls
+
+| Pitfall | Fix |
+|---------|-----|
+| Running `turbo run build` without `--filter` on every PR | Always use `--filter=&#x27;...[origin/main]&#x27;` in CI |
+| `workspace:*` breaks npm publish | Use `pnpm changeset publish` which replaces automatically |
+| All packages rebuild when unrelated file changes | Tune `inputs` in turbo.json to exclude docs, config files |
+| Shared tsconfig breaks type-checks across packages | Each package extends root but overrides `rootDir`/`outDir` |
+| Git history lost during migration | Use `git filter-repo --to-subdirectory-filter` before merging |
+| Remote cache misses in CI | Verify TURBO_TOKEN and TURBO_TEAM; check with `--summarize` |
+| Import cycles between packages | Use `madge --circular` to detect; refactor shared code to a new package |
+
+## Best Practices
+
+1. **Root package.json has no runtime dependencies** — only devDependencies and scripts
+2. **Always scope commands with --filter in CI** — running everything defeats the monorepo purpose
+3. **Remote cache is not optional** — without it, monorepo CI is slower than multi-repo
+4. **Shared configs extend from root** — tsconfig.base.json, eslint.base.js, vitest shared config
+5. **`packages/types` is pure TypeScript** — no runtime code, no dependencies, fastest to build
+6. **Changesets over manual versioning** — never hand-edit package.json versions in a monorepo
+7. **Impact analysis before merging shared package changes** — check affected packages, communicate blast radius
+8. **Keep workspace:* for internal deps** — real version ranges are for external npm packages only
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `turbo run build` rebuilds everything despite no changes | Inputs glob is too broad or `globalDependencies` includes volatile files | Narrow `inputs` in turbo.json; exclude `.env`, docs, and test fixtures from build inputs |
+| `ERR_PNPM_PEER_DEP_ISSUES` on install | Peer dependency mismatches across workspace packages | Add `peerDependencyRules.ignoreMissing` or `peerDependencyRules.allowAny` in root `.npmrc` or `package.json` |
+| Remote cache reports 0% hit rate in CI | TURBO_TOKEN or TURBO_TEAM not set, or `inputs`/`outputs` changed between runs | Verify env vars with `turbo run build --summarize`; ensure inputs/outputs are stable across branches |
+| `workspace:*` version appears in published package | Published with `npm publish` or `pnpm publish` instead of Changesets | Always use `pnpm changeset publish` which replaces `workspace:*` with resolved versions automatically |
+| Circular dependency detected between packages | Two packages import from each other directly | Run `madge --circular` to identify the cycle; extract shared code into a new leaf package with no internal deps |
+| TypeScript `Cannot find module &#x27;@repo/ui&#x27;` in IDE | IDE TypeScript server not resolving workspace paths | Add `paths` mapping in root `tsconfig.json` or use TypeScript project references; restart TS server after changes |
+| CI takes longer after monorepo migration than multi-repo | Missing remote cache, no `--filter`, or `fetch-depth: 1` preventing git comparisons | Enable remote caching, use `--filter=&#x27;...[origin/main]&#x27;`, and set `fetch-depth: 0` in checkout action |
+
+## Success Criteria
+
+- **Build time reduction**: CI pipeline completes affected-only builds in under 50% of full-build time within 2 weeks of adoption
+- **Cache hit rate**: Remote cache achieves 70%+ hit rate on PR builds after initial warm-up period
+- **Impact visibility**: Every PR includes an affected-packages summary showing blast radius of changes
+- **Zero full rebuilds in CI**: No CI workflow runs all packages unconditionally; every pipeline uses `--filter` or equivalent
+- **Publishing reliability**: Changesets workflow produces correct versions and changelogs with zero manual `package.json` edits per release cycle
+- **Migration completeness**: Multi-repo to monorepo migration preserves 100% of git history for all migrated packages
+- **Developer onboarding**: New team members can run, build, and test any package locally within 15 minutes using documented workspace commands
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Turborepo, Nx, and pnpm workspace configuration and optimization
+- Cross-package dependency analysis and impact visualization
+- Remote caching setup (Vercel, Nx Cloud, self-hosted)
+- Changesets-based coordinated versioning and npm publishing
+
+**This skill does NOT cover:**
+- Application-level build configuration (webpack, Vite, esbuild internals) — see `performance-profiler`
+- CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
+- Git branching strategies and release flow — see `release-manager`
+- Dependency vulnerability scanning and license auditing — see `dependency-auditor`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
+| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
+| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
+| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
+| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
+| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator&#x27;s impact analysis identifies coupling hotspots that Tech Debt Tracker records |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Monorepo Navigator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Monorepo Navigator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Monorepo Navigator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Monorepo Navigator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Monorepo Navigator&quot;
+4. Description: &quot;Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, mi...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/monorepo-navigator/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Monorepo Navigator&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Monorepo Navigator
+
+**Tier:** POWERFUL
+**Category:** Engineering / Build Systems
+**Maintainer:** Claude Skills Team
+
+## Overview
+
+Navigate, manage, and optimize monorepos at any scale. Covers Turborepo, Nx, pnpm workspaces, and Lerna/Changesets for cross-package impact analysis, selective builds on affected packages only, dependency graph visualization, remote caching configuration, migration from multi-repo to monorepo with preserved git history, and coordinated package publishing with automated changelogs.
+
+## Keywords
+
+monorepo, Turborepo, Nx, pnpm workspaces, Changesets, dependency graph, remote cache, affected packages, selective builds, cross-package impact, npm publishing, workspace protocol
+
+## Core Capabilities
+
+### 1. Impact Analysis
+- Determine which apps break when a shared package changes
+- Trace dependency chains from leaf packages to root apps
+- Visualize impact as Mermaid dependency graphs
+- Calculate blast radius for any file change
+
+### 2. Selective Execution
+- Run tests/builds only for affected packages (not everything)
+- Filter by changed files since a git ref
+- Scope commands to specific packages and their dependents
+- Skip unchanged packages in CI for faster feedback
+
+### 3. Build Optimization
+- Remote caching with Turborepo (Vercel) or Nx Cloud
+- Incremental builds with proper input/output configuration
+- Parallel execution with dependency-aware scheduling
+- Artifact sharing between CI jobs
+
+### 4. Publishing
+- Changesets for coordinated versioning across packages
+- Automated changelog generation per package
+- Pre-release channels (alpha, beta, rc)
+- `workspace:*` protocol replacement during publish
+
+## When to Use
+
+- Multiple packages/apps share code (UI components, utils, types, API clients)
+- Build times are slow because everything rebuilds on every change
+- Migrating from multiple repos to a single monorepo
+- Publishing npm packages with coordinated versioning
+- Teams work across packages and need unified tooling
+
+## Tool Selection Decision Matrix
+
+| Requirement | Turborepo | Nx | pnpm Workspaces | Changesets |
+|-------------|-----------|-----|-----------------|------------|
+| Simple task runner | Best | Good | N/A | N/A |
+| Remote caching | Built-in | Nx Cloud | N/A | N/A |
+| Code generation | No | Best | N/A | N/A |
+| Dependency management | N/A | N/A | Best | N/A |
+| Package publishing | N/A | N/A | N/A | Best |
+| Plugin ecosystem | Limited | Extensive | N/A | N/A |
+| Config complexity | Minimal | Moderate | Minimal | Minimal |
+
+**Recommended modern stack:** pnpm workspaces + Turborepo + Changesets
+
+## Monorepo Structure
+
+```
+my-monorepo/
+├── apps/
+│   ├── web/                    # Next.js frontend
+│   │   ├── package.json        # depends on @repo/ui, @repo/utils
+│   │   └── ...
+│   ├── api/                    # Express/Fastify backend
+│   │   ├── package.json        # depends on @repo/db, @repo/utils
+│   │   └── ...
+│   └── mobile/                 # React Native app
+│       ├── package.json
+│       └── ...
+├── packages/
+│   ├── ui/                     # Shared React components
+│   │   ├── package.json        # @repo/ui
+│   │   └── ...
+│   ├── utils/                  # Shared utilities
+│   │   ├── package.json        # @repo/utils
+│   │   └── ...
+│   ├── db/                     # Database client + schema
+│   │   ├── package.json        # @repo/db
+│   │   └── ...
+│   ├── types/                  # Shared TypeScript types
+│   │   ├── package.json        # @repo/types (no runtime deps)
+│   │   └── ...
+│   └── config/                 # Shared configs (tsconfig, eslint)
+│       ├── tsconfig.base.json
+│       └── eslint.base.js
+├── turbo.json                  # Turborepo pipeline config
+├── pnpm-workspace.yaml         # Workspace package locations
+├── package.json                # Root scripts, devDependencies
+└── .changeset/                 # Changeset config
+    └── config.json
+```
+
+## Turborepo Configuration
+
+### turbo.json
+
+```json
+{
+  &quot;$schema&quot;: &quot;https://turbo.build/schema.json&quot;,
+  &quot;globalDependencies&quot;: [&quot;**/.env.*local&quot;],
+  &quot;globalEnv&quot;: [&quot;NODE_ENV&quot;, &quot;CI&quot;],
+  &quot;tasks&quot;: {
+    &quot;build&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tsconfig.json&quot;, &quot;package.json&quot;],
+      &quot;outputs&quot;: [&quot;dist/**&quot;, &quot;.next/**&quot;, &quot;!.next/cache/**&quot;],
+      &quot;env&quot;: [&quot;NEXT_PUBLIC_*&quot;]
+    },
+    &quot;test&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tests/**&quot;, &quot;vitest.config.*&quot;],
+      &quot;outputs&quot;: [&quot;coverage/**&quot;]
+    },
+    &quot;lint&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;.eslintrc.*&quot;, &quot;tsconfig.json&quot;]
+    },
+    &quot;typecheck&quot;: {
+      &quot;dependsOn&quot;: [&quot;^build&quot;],
+      &quot;inputs&quot;: [&quot;src/**&quot;, &quot;tsconfig.json&quot;]
+    },
+    &quot;dev&quot;: {
+      &quot;cache&quot;: false,
+      &quot;persistent&quot;: true
+    }
+  }
+}
+```
+
+### Key Turborepo Commands
+
+```bash
+# Run all tasks
+turbo run build
+
+# Run only affected packages (compared to main)
+turbo run build test --filter=&#x27;...[origin/main]&#x27;
+
+# Run for a specific package and its dependencies
+turbo run build --filter=@repo/web...
+
+# Run for a specific package only (no deps)
+turbo run test --filter=@repo/ui
+
+# Dry run to see what would execute
+turbo run build --dry=json
+
+# View dependency graph
+turbo run build --graph=graph.html
+
+# Summarize cache usage
+turbo run build --summarize
+```
+
+## pnpm Workspace Configuration
+
+### pnpm-workspace.yaml
+
+```yaml
+packages:
+  - &#x27;apps/*&#x27;
+  - &#x27;packages/*&#x27;
+```
+
+### Cross-Package References
+
+```json
+// packages/ui/package.json
+{
+  &quot;name&quot;: &quot;@repo/ui&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;main&quot;: &quot;./src/index.ts&quot;,
+  &quot;types&quot;: &quot;./src/index.ts&quot;,
+  &quot;dependencies&quot;: {
+    &quot;@repo/types&quot;: &quot;workspace:*&quot;
+  }
+}
+
+// apps/web/package.json
+{
+  &quot;name&quot;: &quot;@repo/web&quot;,
+  &quot;dependencies&quot;: {
+    &quot;@repo/ui&quot;: &quot;workspace:*&quot;,
+    &quot;@repo/utils&quot;: &quot;workspace:*&quot;
+  }
+}
+```
+
+### Workspace Commands
+
+```bash
+# Install all workspace dependencies
+pnpm install
+
+# Add a dependency to a specific package
+pnpm add zod --filter @repo/api
+
+# Add a workspace package as dependency
+pnpm add @repo/utils --filter @repo/web --workspace
+
+# Run a script in a specific package
+pnpm --filter @repo/web dev
+
+# Run a script in all packages that have it
+pnpm -r run build
+
+# List all packages
+pnpm -r ls --depth -1
+```
+
+## Impact Analysis
+
+### Find All Dependents of a Changed Package
+
+```bash
+# Using turbo to see what depends on @repo/ui
+turbo run build --filter=&#x27;...@repo/ui&#x27; --dry=json | \
+  jq &#x27;.tasks[].package&#x27; -r | sort -u
+
+# Manual: search for imports of a package
+grep -r &quot;from &#x27;@repo/ui&#x27;&quot; apps/ packages/ --include=&quot;*.ts&quot; --include=&quot;*.tsx&quot; -l
+```
+
+### Dependency Graph Visualization
+
+```bash
+# Generate HTML visualization
+turbo run build --graph=dependency-graph.html
+
+# Generate DOT format for custom rendering
+turbo run build --graph=deps.dot
+
+# Quick Mermaid diagram from package.json files
+echo &quot;graph TD&quot;
+for pkg in packages/*/package.json apps/*/package.json; do
+  name=$(jq -r &#x27;.name&#x27; &quot;$pkg&quot;)
+  jq -r &#x27;.dependencies // {} | keys[] | select(startswith(&quot;@repo/&quot;))&#x27; &quot;$pkg&quot; | while read dep; do
+    echo &quot;  $name --&gt; $dep&quot;
+  done
+done
+```
+
+## Remote Caching
+
+### Turborepo Remote Cache (Vercel)
+
+```bash
+# Login to Vercel (one-time)
+turbo login
+
+# Link repo to Vercel team
+turbo link
+
+# CI: set environment variables
+# TURBO_TOKEN=&lt;vercel-token&gt;
+# TURBO_TEAM=&lt;team-slug&gt;
+
+# Verify remote cache works
+turbo run build --summarize
+# Look for &quot;Remote cache: hit&quot; entries
+```
+
+### Self-Hosted Remote Cache
+
+```bash
+# Using ducktape/turborepo-remote-cache
+docker run -p 3000:3000 \
+  -e STORAGE_PROVIDER=local \
+  -e STORAGE_PATH=/cache \
+  ducktape/turborepo-remote-cache
+
+# Configure turbo to use it
+# turbo.json:
+# { &quot;remoteCache&quot;: { &quot;apiUrl&quot;: &quot;http://cache-server:3000&quot; } }
+```
+
+## CI/CD with Affected Packages Only
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for --filter comparisons
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: &#x27;pnpm&#x27;
+
+      - run: pnpm install --frozen-lockfile
+
+      # Only lint/test/build affected packages
+      - run: turbo run lint test build --filter=&#x27;...[origin/main]&#x27;
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+```
+
+## Publishing with Changesets
+
+### Setup
+
+```bash
+# Install changesets
+pnpm add -D -w @changesets/cli @changesets/changelog-github
+
+# Initialize
+pnpm changeset init
+```
+
+### .changeset/config.json
+
+```json
+{
+  &quot;$schema&quot;: &quot;https://unpkg.com/@changesets/config@3.0.0/schema.json&quot;,
+  &quot;changelog&quot;: [&quot;@changesets/changelog-github&quot;, { &quot;repo&quot;: &quot;org/repo&quot; }],
+  &quot;commit&quot;: false,
+  &quot;fixed&quot;: [],
+  &quot;linked&quot;: [[&quot;@repo/ui&quot;, &quot;@repo/utils&quot;]],
+  &quot;access&quot;: &quot;public&quot;,
+  &quot;baseBranch&quot;: &quot;main&quot;,
+  &quot;updateInternalDependencies&quot;: &quot;patch&quot;
+}
+```
+
+### Publishing Workflow
+
+```bash
+# 1. Developer adds a changeset for their changes
+pnpm changeset
+# Interactive: select packages, bump type (patch/minor/major), summary
+
+# 2. Before release: consume changesets and bump versions
+pnpm changeset version
+# Updates package.json versions and CHANGELOG.md files
+
+# 3. Publish to npm
+pnpm changeset publish
+# Replaces workspace:* with real versions and publishes
+```
+
+## Migration: Multi-Repo to Monorepo
+
+```bash
+# 1. Preserve git history using filter-repo
+# In each source repo:
+git filter-repo --to-subdirectory-filter packages/ui
+git filter-repo --to-subdirectory-filter apps/api
+
+# 2. Create monorepo and merge histories
+mkdir monorepo &amp;&amp; cd monorepo &amp;&amp; git init
+git remote add ui ../old-ui-repo
+git fetch ui --no-tags
+git merge ui/main --allow-unrelated-histories
+
+git remote add api ../old-api-repo
+git fetch api --no-tags
+git merge api/main --allow-unrelated-histories
+
+# 3. Set up workspace configuration
+# Add pnpm-workspace.yaml, turbo.json, root package.json
+
+# 4. Update internal imports
+# Change &quot;ui-package&quot; imports to &quot;@repo/ui&quot;
+# Change npm versions to &quot;workspace:*&quot;
+
+# 5. Verify
+pnpm install
+turbo run build test
+```
+
+## Common Pitfalls
+
+| Pitfall | Fix |
+|---------|-----|
+| Running `turbo run build` without `--filter` on every PR | Always use `--filter=&#x27;...[origin/main]&#x27;` in CI |
+| `workspace:*` breaks npm publish | Use `pnpm changeset publish` which replaces automatically |
+| All packages rebuild when unrelated file changes | Tune `inputs` in turbo.json to exclude docs, config files |
+| Shared tsconfig breaks type-checks across packages | Each package extends root but overrides `rootDir`/`outDir` |
+| Git history lost during migration | Use `git filter-repo --to-subdirectory-filter` before merging |
+| Remote cache misses in CI | Verify TURBO_TOKEN and TURBO_TEAM; check with `--summarize` |
+| Import cycles between packages | Use `madge --circular` to detect; refactor shared code to a new package |
+
+## Best Practices
+
+1. **Root package.json has no runtime dependencies** — only devDependencies and scripts
+2. **Always scope commands with --filter in CI** — running everything defeats the monorepo purpose
+3. **Remote cache is not optional** — without it, monorepo CI is slower than multi-repo
+4. **Shared configs extend from root** — tsconfig.base.json, eslint.base.js, vitest shared config
+5. **`packages/types` is pure TypeScript** — no runtime code, no dependencies, fastest to build
+6. **Changesets over manual versioning** — never hand-edit package.json versions in a monorepo
+7. **Impact analysis before merging shared package changes** — check affected packages, communicate blast radius
+8. **Keep workspace:* for internal deps** — real version ranges are for external npm packages only
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `turbo run build` rebuilds everything despite no changes | Inputs glob is too broad or `globalDependencies` includes volatile files | Narrow `inputs` in turbo.json; exclude `.env`, docs, and test fixtures from build inputs |
+| `ERR_PNPM_PEER_DEP_ISSUES` on install | Peer dependency mismatches across workspace packages | Add `peerDependencyRules.ignoreMissing` or `peerDependencyRules.allowAny` in root `.npmrc` or `package.json` |
+| Remote cache reports 0% hit rate in CI | TURBO_TOKEN or TURBO_TEAM not set, or `inputs`/`outputs` changed between runs | Verify env vars with `turbo run build --summarize`; ensure inputs/outputs are stable across branches |
+| `workspace:*` version appears in published package | Published with `npm publish` or `pnpm publish` instead of Changesets | Always use `pnpm changeset publish` which replaces `workspace:*` with resolved versions automatically |
+| Circular dependency detected between packages | Two packages import from each other directly | Run `madge --circular` to identify the cycle; extract shared code into a new leaf package with no internal deps |
+| TypeScript `Cannot find module &#x27;@repo/ui&#x27;` in IDE | IDE TypeScript server not resolving workspace paths | Add `paths` mapping in root `tsconfig.json` or use TypeScript project references; restart TS server after changes |
+| CI takes longer after monorepo migration than multi-repo | Missing remote cache, no `--filter`, or `fetch-depth: 1` preventing git comparisons | Enable remote caching, use `--filter=&#x27;...[origin/main]&#x27;`, and set `fetch-depth: 0` in checkout action |
+
+## Success Criteria
+
+- **Build time reduction**: CI pipeline completes affected-only builds in under 50% of full-build time within 2 weeks of adoption
+- **Cache hit rate**: Remote cache achieves 70%+ hit rate on PR builds after initial warm-up period
+- **Impact visibility**: Every PR includes an affected-packages summary showing blast radius of changes
+- **Zero full rebuilds in CI**: No CI workflow runs all packages unconditionally; every pipeline uses `--filter` or equivalent
+- **Publishing reliability**: Changesets workflow produces correct versions and changelogs with zero manual `package.json` edits per release cycle
+- **Migration completeness**: Multi-repo to monorepo migration preserves 100% of git history for all migrated packages
+- **Developer onboarding**: New team members can run, build, and test any package locally within 15 minutes using documented workspace commands
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Turborepo, Nx, and pnpm workspace configuration and optimization
+- Cross-package dependency analysis and impact visualization
+- Remote caching setup (Vercel, Nx Cloud, self-hosted)
+- Changesets-based coordinated versioning and npm publishing
+
+**This skill does NOT cover:**
+- Application-level build configuration (webpack, Vite, esbuild internals) — see `performance-profiler`
+- CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
+- Git branching strategies and release flow — see `release-manager`
+- Dependency vulnerability scanning and license auditing — see `dependency-auditor`
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|------------|-----------|
+| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
+| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
+| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
+| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
+| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
+| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator&#x27;s impact analysis identifies coupling hotspots that Tech Debt Tracker records |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Monorepo Navigator&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Monorepo Navigator&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Monorepo Navigator in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Monorepo Navigator&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Monorepo Navigator&quot;
+4. Description: &quot;Navigate, manage, and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Covers cross-package impact analysis, selective builds, dependency graph visualization, remote caching, mi...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/monorepo-navigator/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

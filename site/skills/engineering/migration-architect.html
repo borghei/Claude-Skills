@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Migration Architect (Engineering domain).
 
 Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or vers...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/migration-architect
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Migration Architect (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Migration Architect (Engineering domain).
 
 Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or vers...
 
@@ -425,7 +447,534 @@ https://github.com/borghei/Claude-Skills/tree/main/migration-architect
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Migration Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Migration Architect
+
+The agent generates phased migration plans with risk assessment, compatibility analysis, and rollback runbooks for database, service, infrastructure, and API migrations. It validates schema compatibility, detects breaking changes, and produces rollback procedures with trigger conditions and communication templates.
+
+## Quick Start
+
+```bash
+# Generate a phased migration plan
+python scripts/migration_planner.py --input migration_spec.json --output plan.json --format both
+
+# Check schema compatibility between versions
+python scripts/compatibility_checker.py --before v1_schema.json --after v2_schema.json --type database
+
+# Generate rollback runbook from a migration plan
+python scripts/rollback_generator.py --input plan.json --output runbook.json --format both
+```
+
+---
+
+## Core Workflows
+
+### Workflow 1: Plan a Database Migration
+
+1. Create migration spec JSON with `type: &quot;database&quot;`, source, target, constraints (data volume, max downtime, dependencies)
+2. Run `migration_planner.py` to generate phased plan with risk assessment
+3. Run `compatibility_checker.py` to detect breaking schema changes
+4. Review generated phases -- each should have validation criteria and rollback triggers
+5. **Validation checkpoint:** Zero unaddressed breaking changes; every phase has rollback steps; downtime within `max_downtime_minutes` constraint
+
+```bash
+python scripts/compatibility_checker.py --before v1.json --after v2.json --type database --format json
+python scripts/migration_planner.py --input spec.json --output plan.json
+python scripts/rollback_generator.py --input plan.json --output runbook.json
+```
+
+### Workflow 2: Plan a Service Migration (Strangler Fig)
+
+1. Define spec with `type: &quot;service&quot;`, `pattern: &quot;strangler_fig&quot;`, source/target services, and dependencies
+2. Generate migration plan with traffic routing phases (10% -&gt; 50% -&gt; 100%)
+3. Review rollback triggers at each traffic percentage gate
+4. **Validation checkpoint:** Circuit breaker thresholds defined; monitoring configured; feature flags lock rollout percentage between phases
+
+### Workflow 3: Validate Migration Compatibility
+
+1. Export before/after schemas as JSON (database or OpenAPI format)
+2. Run `compatibility_checker.py` to identify breaking changes, type mismatches, and constraint violations
+3. Review generated migration scripts and their rollback counterparts
+4. **Validation checkpoint:** All breaking changes have migration scripts; rollback scripts verified; validation queries pass
+
+---
+
+## Migration Patterns
+
+| Pattern | Type | Best For |
+|---------|------|----------|
+| Expand-Contract | Database | Zero-downtime schema evolution with backfill |
+| Dual-Write | Database | Maintaining consistency during transition |
+| Change Data Capture | Database | Large dataset migration with eventual consistency |
+| Strangler Fig | Service | Incremental service replacement via gateway routing |
+| Parallel Run | Service | Shadow traffic for correctness validation |
+| Canary Deployment | Service | Gradual traffic shift with metric monitoring |
+| Blue-Green | Infrastructure | Instant cutover with full rollback capability |
+
+---
+
+## Anti-Patterns
+
+- **Big bang migration** -- migrating everything at once maximizes blast radius; always use phased execution with validation gates
+- **Stale backups** -- taking backups at plan creation instead of immediately before execution; always create fresh backup as first execution task
+- **Skipping staging** -- production-only migration attempts have no safety net; run the full process in a staging environment first
+- **No data reconciliation** -- row counts match but data differs; use checksum validation and business logic queries on critical tables
+- **Ignoring dependent systems** -- breaking downstream consumers during cutover; map all dependencies and coordinate migration windows
+- **Feature flag drift** -- changing rollout percentage mid-phase causes inconsistent user experience; lock flags during each phase
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Compatibility checker reports false positives on type changes | Source and target schemas use vendor-specific type aliases (e.g., `serial` vs `int`) that are not in the built-in type compatibility matrix | Normalize type aliases to canonical SQL/JSON types in both schema files before running the checker |
+| Migration planner generates unrealistic duration estimates | Complexity multiplier does not account for organizational factors like change-board approvals or cross-team coordination | Adjust the `constraints` block in your input spec to include `special_requirements` entries for each non-technical blocker |
+| Rollback generator produces empty rollback steps for a phase | The phase name in the migration plan does not match any of the recognized keywords (`migration`, `cutover`, `preparation`) | Use standard phase names from the planner output, or ensure custom phase names contain one of the recognized keywords |
+| Data validation fails after migration but row counts match | Soft deletes, filtered records, or computed columns cause hash/checksum mismatches even when primary data is intact | Use business logic validation (aggregate queries on key columns) instead of full-row checksums for tables with soft deletes or generated columns |
+| Dual-write pattern causes write conflicts during cutover | Race conditions between source and target systems when replication lag exceeds the write interval | Implement idempotent writes with conflict-resolution timestamps, and increase the delta-sync frequency before the cutover window |
+| Rollback triggered but legacy database backup is stale | Backup was taken at plan creation time rather than immediately before the migration execution phase | Always create a fresh backup as the first task of the migration execution phase; reference `migration_planner.py` preparation-phase tasks |
+| Feature flag rollout causes inconsistent user experience | Hash-based routing sends the same user to different paths across sessions when the flag name or rollout percentage changes mid-migration | Lock the flag name and rollout percentage during each migration phase; only adjust between validated phase gates |
+
+## Success Criteria
+
+- **Data Integrity:** 100% of records pass post-migration checksum and referential-integrity validation with zero data loss or corruption.
+- **Downtime Within Budget:** Actual service unavailability stays within the `max_downtime_minutes` constraint defined in the migration spec (target: zero-downtime for critical systems).
+- **Performance Parity:** P95 latency and throughput on the target system are within 10% of pre-migration baseline measurements during the first 72 hours after cutover.
+- **Rollback Readiness:** Every migration phase has a tested rollback procedure that can restore the previous state within 25% of the original phase duration.
+- **Stakeholder Sign-off:** All stakeholders listed in the migration plan confirm acceptance criteria are met before legacy decommission begins.
+- **Zero Critical Defects:** No severity-critical or severity-high issues remain unresolved 48 hours after cutover; all issues are tracked with owners and ETAs.
+- **Compliance Continuity:** All regulatory and compliance controls (audit logging, access controls, encryption) remain fully operational throughout the migration and are validated in the target environment.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- End-to-end migration planning for databases, services, infrastructure, and APIs with phased execution and validation gates.
+- Automated compatibility analysis between schema versions (SQL and REST/JSON) including breaking-change detection and migration script generation.
+- Rollback runbook generation with trigger conditions, data recovery plans, escalation matrices, and communication templates.
+- Risk assessment frameworks covering technical, business, operational, and compliance risk categories.
+
+**This skill does NOT cover:**
+- Actual execution of migrations against live systems -- the tools generate plans, reports, and scripts but do not connect to databases or cloud APIs.
+- Application-level code refactoring required to support new schemas or APIs; see `engineering/api-design-reviewer` for API contract changes and `engineering/database-designer` for schema design.
+- Real-time monitoring, alerting, or dashboard provisioning during migration execution; see `engineering/observability-designer` for observability setup.
+- Cloud cost optimization or capacity planning for target infrastructure; see `engineering/ci-cd-pipeline-builder` for deployment pipeline configuration.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/database-designer` | Design target schema before migration planning | Target schema JSON feeds into `compatibility_checker.py --after` |
+| `engineering/api-design-reviewer` | Validate API contract changes for service migrations | OpenAPI spec diffs feed into `compatibility_checker.py --type api` |
+| `engineering/observability-designer` | Set up monitoring dashboards referenced in migration runbooks | Migration plan success metrics inform alerting rule definitions |
+| `engineering/ci-cd-pipeline-builder` | Embed migration validation in CI/CD stages | `compatibility_checker.py` runs as a pipeline stage; `migration_planner.py --validate` gates deployments |
+| `engineering/runbook-generator` | Extend rollback runbooks with operational procedures | `rollback_generator.py` output serves as input for detailed operational runbooks |
+| `engineering/release-manager` | Coordinate migration cutover with release schedules | Migration plan phases and timelines align with release windows and feature-flag rollout stages |
+
+## Tool Reference
+
+### migration_planner.py
+
+**Purpose:** Generates comprehensive, phased migration plans with risk assessment, rollback strategies, timeline estimates, and stakeholder communication structures from a JSON migration specification.
+
+**Usage:**
+```bash
+python scripts/migration_planner.py --input &lt;spec.json&gt; [--output &lt;plan.json&gt;] [--format &lt;format&gt;] [--validate]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--input`, `-i` | Yes | -- | Input migration specification file (JSON). Must contain `type`, `source`, and `target` fields. |
+| `--output`, `-o` | No | stdout | Output file path for the migration plan (JSON). Text output saved to same path with `.txt` extension when format includes text. |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+| `--validate` | No | false | Validate the migration specification without generating a plan. Exits with 0 if valid. |
+
+**Input Specification Fields:**
+- `type` (required): Migration type -- `database`, `service`, `infrastructure`, `data`, or `api`.
+- `source` (required): Source system identifier.
+- `target` (required): Target system identifier.
+- `pattern`: Migration pattern (e.g., `schema_change`, `data_migration`, `strangler_fig`, `parallel_run`, `cloud_migration`, `on_prem_to_cloud`).
+- `constraints.data_volume_gb`: Data volume in GB (affects complexity scoring).
+- `constraints.dependencies`: List of dependent systems.
+- `constraints.max_downtime_minutes`: Maximum allowed downtime in minutes.
+- `constraints.special_requirements`: List of additional requirements that increase complexity.
+- `constraints.compliance_requirements`: List of compliance frameworks that apply.
+
+**Example:**
+```bash
+python scripts/migration_planner.py --input migration_spec.json --output plan.json --format both
+```
+
+**Output Formats:**
+- **JSON:** Complete `MigrationPlan` object with `migration_id`, `phases` (each with tasks, validation criteria, rollback triggers), `risks` (categorized by severity), `rollback_plan`, `success_criteria`, and `stakeholders`.
+- **Text:** Human-readable report with sections for phases, risk assessment, rollback strategy, success criteria, and stakeholders.
+
+---
+
+### compatibility_checker.py
+
+**Purpose:** Analyzes schema and API compatibility between two versions, identifies breaking changes, data type mismatches, constraint violations, and generates migration script suggestions with rollback counterparts.
+
+**Usage:**
+```bash
+python scripts/compatibility_checker.py --before &lt;old.json&gt; --after &lt;new.json&gt; [--type &lt;schema_type&gt;] [--output &lt;report.json&gt;] [--format &lt;format&gt;]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--before` | Yes | -- | Path to the before/old schema file (JSON). |
+| `--after` | Yes | -- | Path to the after/new schema file (JSON). |
+| `--type` | No | `database` | Schema type to analyze. Choices: `database`, `api`. |
+| `--output`, `-o` | No | stdout | Output file path for the compatibility report (JSON). |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+
+**Input Schema Format (database):** JSON with a `tables` object where each key is a table name containing `columns` (with `type`, `nullable`, `length`, `default` per column) and `constraints` (with `primary_key`, `foreign_key`, `unique`, `check`, `index` arrays).
+
+**Input Schema Format (api):** OpenAPI-style JSON with `paths` (keyed by route, containing HTTP methods) and `components.schemas` (keyed by model name with `properties`, `required` arrays, and field `type` definitions).
+
+**Example:**
+```bash
+python scripts/compatibility_checker.py --before v1_schema.json --after v2_schema.json --type database --format json
+```
+
+**Output Formats:**
+- **JSON:** `CompatibilityReport` with `overall_compatibility` level, counts by change type (`breaking_changes_count`, `potentially_breaking_count`, `non_breaking_changes_count`, `additive_changes_count`), detailed `issues` list (each with severity, impact, suggested migration), `migration_scripts` (with rollback scripts and validation queries), `risk_assessment`, and `recommendations`.
+- **Text:** Human-readable report with color-coded severity sections, issue details, and migration script listings.
+
+---
+
+### rollback_generator.py
+
+**Purpose:** Takes a migration plan (typically the JSON output of `migration_planner.py`) and generates a comprehensive rollback runbook with phase-by-phase reversal steps, automated trigger conditions, data recovery plans, escalation matrices, and communication templates.
+
+**Usage:**
+```bash
+python scripts/rollback_generator.py --input &lt;plan.json&gt; [--output &lt;runbook.json&gt;] [--format &lt;format&gt;]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--input`, `-i` | Yes | -- | Input migration plan file (JSON). Expects output from `migration_planner.py` or any JSON with `migration_id`, `migration_type`, and `phases` fields. |
+| `--output`, `-o` | No | stdout | Output file path for the rollback runbook (JSON). |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+
+**Example:**
+```bash
+python scripts/migration_planner.py --input spec.json --output plan.json --format json
+python scripts/rollback_generator.py --input plan.json --output runbook.json --format both
+```
+
+**Output Formats:**
+- **JSON:** `RollbackRunbook` object with `runbook_id`, `rollback_phases` (each containing ordered `steps` with script content, validation commands, success criteria, and failure escalation), `trigger_conditions` (with metric thresholds and auto-execute flags), `data_recovery_plan` (backup location, recovery scripts, estimated recovery time), `communication_templates` (for technical, business, and executive audiences), `escalation_matrix`, `validation_checklist`, `post_rollback_procedures`, and `emergency_contacts`.
+- **Text:** Human-readable runbook with phase-by-phase rollback instructions, trigger condition summaries, communication templates, and a post-rollback checklist.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Migration Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Migration Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Migration Architect in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Migration Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Migration Architect&quot;
+4. Description: &quot;Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or vers...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/migration-architect/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Migration Architect&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Migration Architect
+
+The agent generates phased migration plans with risk assessment, compatibility analysis, and rollback runbooks for database, service, infrastructure, and API migrations. It validates schema compatibility, detects breaking changes, and produces rollback procedures with trigger conditions and communication templates.
+
+## Quick Start
+
+```bash
+# Generate a phased migration plan
+python scripts/migration_planner.py --input migration_spec.json --output plan.json --format both
+
+# Check schema compatibility between versions
+python scripts/compatibility_checker.py --before v1_schema.json --after v2_schema.json --type database
+
+# Generate rollback runbook from a migration plan
+python scripts/rollback_generator.py --input plan.json --output runbook.json --format both
+```
+
+---
+
+## Core Workflows
+
+### Workflow 1: Plan a Database Migration
+
+1. Create migration spec JSON with `type: &quot;database&quot;`, source, target, constraints (data volume, max downtime, dependencies)
+2. Run `migration_planner.py` to generate phased plan with risk assessment
+3. Run `compatibility_checker.py` to detect breaking schema changes
+4. Review generated phases -- each should have validation criteria and rollback triggers
+5. **Validation checkpoint:** Zero unaddressed breaking changes; every phase has rollback steps; downtime within `max_downtime_minutes` constraint
+
+```bash
+python scripts/compatibility_checker.py --before v1.json --after v2.json --type database --format json
+python scripts/migration_planner.py --input spec.json --output plan.json
+python scripts/rollback_generator.py --input plan.json --output runbook.json
+```
+
+### Workflow 2: Plan a Service Migration (Strangler Fig)
+
+1. Define spec with `type: &quot;service&quot;`, `pattern: &quot;strangler_fig&quot;`, source/target services, and dependencies
+2. Generate migration plan with traffic routing phases (10% -&gt; 50% -&gt; 100%)
+3. Review rollback triggers at each traffic percentage gate
+4. **Validation checkpoint:** Circuit breaker thresholds defined; monitoring configured; feature flags lock rollout percentage between phases
+
+### Workflow 3: Validate Migration Compatibility
+
+1. Export before/after schemas as JSON (database or OpenAPI format)
+2. Run `compatibility_checker.py` to identify breaking changes, type mismatches, and constraint violations
+3. Review generated migration scripts and their rollback counterparts
+4. **Validation checkpoint:** All breaking changes have migration scripts; rollback scripts verified; validation queries pass
+
+---
+
+## Migration Patterns
+
+| Pattern | Type | Best For |
+|---------|------|----------|
+| Expand-Contract | Database | Zero-downtime schema evolution with backfill |
+| Dual-Write | Database | Maintaining consistency during transition |
+| Change Data Capture | Database | Large dataset migration with eventual consistency |
+| Strangler Fig | Service | Incremental service replacement via gateway routing |
+| Parallel Run | Service | Shadow traffic for correctness validation |
+| Canary Deployment | Service | Gradual traffic shift with metric monitoring |
+| Blue-Green | Infrastructure | Instant cutover with full rollback capability |
+
+---
+
+## Anti-Patterns
+
+- **Big bang migration** -- migrating everything at once maximizes blast radius; always use phased execution with validation gates
+- **Stale backups** -- taking backups at plan creation instead of immediately before execution; always create fresh backup as first execution task
+- **Skipping staging** -- production-only migration attempts have no safety net; run the full process in a staging environment first
+- **No data reconciliation** -- row counts match but data differs; use checksum validation and business logic queries on critical tables
+- **Ignoring dependent systems** -- breaking downstream consumers during cutover; map all dependencies and coordinate migration windows
+- **Feature flag drift** -- changing rollout percentage mid-phase causes inconsistent user experience; lock flags during each phase
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Compatibility checker reports false positives on type changes | Source and target schemas use vendor-specific type aliases (e.g., `serial` vs `int`) that are not in the built-in type compatibility matrix | Normalize type aliases to canonical SQL/JSON types in both schema files before running the checker |
+| Migration planner generates unrealistic duration estimates | Complexity multiplier does not account for organizational factors like change-board approvals or cross-team coordination | Adjust the `constraints` block in your input spec to include `special_requirements` entries for each non-technical blocker |
+| Rollback generator produces empty rollback steps for a phase | The phase name in the migration plan does not match any of the recognized keywords (`migration`, `cutover`, `preparation`) | Use standard phase names from the planner output, or ensure custom phase names contain one of the recognized keywords |
+| Data validation fails after migration but row counts match | Soft deletes, filtered records, or computed columns cause hash/checksum mismatches even when primary data is intact | Use business logic validation (aggregate queries on key columns) instead of full-row checksums for tables with soft deletes or generated columns |
+| Dual-write pattern causes write conflicts during cutover | Race conditions between source and target systems when replication lag exceeds the write interval | Implement idempotent writes with conflict-resolution timestamps, and increase the delta-sync frequency before the cutover window |
+| Rollback triggered but legacy database backup is stale | Backup was taken at plan creation time rather than immediately before the migration execution phase | Always create a fresh backup as the first task of the migration execution phase; reference `migration_planner.py` preparation-phase tasks |
+| Feature flag rollout causes inconsistent user experience | Hash-based routing sends the same user to different paths across sessions when the flag name or rollout percentage changes mid-migration | Lock the flag name and rollout percentage during each migration phase; only adjust between validated phase gates |
+
+## Success Criteria
+
+- **Data Integrity:** 100% of records pass post-migration checksum and referential-integrity validation with zero data loss or corruption.
+- **Downtime Within Budget:** Actual service unavailability stays within the `max_downtime_minutes` constraint defined in the migration spec (target: zero-downtime for critical systems).
+- **Performance Parity:** P95 latency and throughput on the target system are within 10% of pre-migration baseline measurements during the first 72 hours after cutover.
+- **Rollback Readiness:** Every migration phase has a tested rollback procedure that can restore the previous state within 25% of the original phase duration.
+- **Stakeholder Sign-off:** All stakeholders listed in the migration plan confirm acceptance criteria are met before legacy decommission begins.
+- **Zero Critical Defects:** No severity-critical or severity-high issues remain unresolved 48 hours after cutover; all issues are tracked with owners and ETAs.
+- **Compliance Continuity:** All regulatory and compliance controls (audit logging, access controls, encryption) remain fully operational throughout the migration and are validated in the target environment.
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- End-to-end migration planning for databases, services, infrastructure, and APIs with phased execution and validation gates.
+- Automated compatibility analysis between schema versions (SQL and REST/JSON) including breaking-change detection and migration script generation.
+- Rollback runbook generation with trigger conditions, data recovery plans, escalation matrices, and communication templates.
+- Risk assessment frameworks covering technical, business, operational, and compliance risk categories.
+
+**This skill does NOT cover:**
+- Actual execution of migrations against live systems -- the tools generate plans, reports, and scripts but do not connect to databases or cloud APIs.
+- Application-level code refactoring required to support new schemas or APIs; see `engineering/api-design-reviewer` for API contract changes and `engineering/database-designer` for schema design.
+- Real-time monitoring, alerting, or dashboard provisioning during migration execution; see `engineering/observability-designer` for observability setup.
+- Cloud cost optimization or capacity planning for target infrastructure; see `engineering/ci-cd-pipeline-builder` for deployment pipeline configuration.
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/database-designer` | Design target schema before migration planning | Target schema JSON feeds into `compatibility_checker.py --after` |
+| `engineering/api-design-reviewer` | Validate API contract changes for service migrations | OpenAPI spec diffs feed into `compatibility_checker.py --type api` |
+| `engineering/observability-designer` | Set up monitoring dashboards referenced in migration runbooks | Migration plan success metrics inform alerting rule definitions |
+| `engineering/ci-cd-pipeline-builder` | Embed migration validation in CI/CD stages | `compatibility_checker.py` runs as a pipeline stage; `migration_planner.py --validate` gates deployments |
+| `engineering/runbook-generator` | Extend rollback runbooks with operational procedures | `rollback_generator.py` output serves as input for detailed operational runbooks |
+| `engineering/release-manager` | Coordinate migration cutover with release schedules | Migration plan phases and timelines align with release windows and feature-flag rollout stages |
+
+## Tool Reference
+
+### migration_planner.py
+
+**Purpose:** Generates comprehensive, phased migration plans with risk assessment, rollback strategies, timeline estimates, and stakeholder communication structures from a JSON migration specification.
+
+**Usage:**
+```bash
+python scripts/migration_planner.py --input &lt;spec.json&gt; [--output &lt;plan.json&gt;] [--format &lt;format&gt;] [--validate]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--input`, `-i` | Yes | -- | Input migration specification file (JSON). Must contain `type`, `source`, and `target` fields. |
+| `--output`, `-o` | No | stdout | Output file path for the migration plan (JSON). Text output saved to same path with `.txt` extension when format includes text. |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+| `--validate` | No | false | Validate the migration specification without generating a plan. Exits with 0 if valid. |
+
+**Input Specification Fields:**
+- `type` (required): Migration type -- `database`, `service`, `infrastructure`, `data`, or `api`.
+- `source` (required): Source system identifier.
+- `target` (required): Target system identifier.
+- `pattern`: Migration pattern (e.g., `schema_change`, `data_migration`, `strangler_fig`, `parallel_run`, `cloud_migration`, `on_prem_to_cloud`).
+- `constraints.data_volume_gb`: Data volume in GB (affects complexity scoring).
+- `constraints.dependencies`: List of dependent systems.
+- `constraints.max_downtime_minutes`: Maximum allowed downtime in minutes.
+- `constraints.special_requirements`: List of additional requirements that increase complexity.
+- `constraints.compliance_requirements`: List of compliance frameworks that apply.
+
+**Example:**
+```bash
+python scripts/migration_planner.py --input migration_spec.json --output plan.json --format both
+```
+
+**Output Formats:**
+- **JSON:** Complete `MigrationPlan` object with `migration_id`, `phases` (each with tasks, validation criteria, rollback triggers), `risks` (categorized by severity), `rollback_plan`, `success_criteria`, and `stakeholders`.
+- **Text:** Human-readable report with sections for phases, risk assessment, rollback strategy, success criteria, and stakeholders.
+
+---
+
+### compatibility_checker.py
+
+**Purpose:** Analyzes schema and API compatibility between two versions, identifies breaking changes, data type mismatches, constraint violations, and generates migration script suggestions with rollback counterparts.
+
+**Usage:**
+```bash
+python scripts/compatibility_checker.py --before &lt;old.json&gt; --after &lt;new.json&gt; [--type &lt;schema_type&gt;] [--output &lt;report.json&gt;] [--format &lt;format&gt;]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--before` | Yes | -- | Path to the before/old schema file (JSON). |
+| `--after` | Yes | -- | Path to the after/new schema file (JSON). |
+| `--type` | No | `database` | Schema type to analyze. Choices: `database`, `api`. |
+| `--output`, `-o` | No | stdout | Output file path for the compatibility report (JSON). |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+
+**Input Schema Format (database):** JSON with a `tables` object where each key is a table name containing `columns` (with `type`, `nullable`, `length`, `default` per column) and `constraints` (with `primary_key`, `foreign_key`, `unique`, `check`, `index` arrays).
+
+**Input Schema Format (api):** OpenAPI-style JSON with `paths` (keyed by route, containing HTTP methods) and `components.schemas` (keyed by model name with `properties`, `required` arrays, and field `type` definitions).
+
+**Example:**
+```bash
+python scripts/compatibility_checker.py --before v1_schema.json --after v2_schema.json --type database --format json
+```
+
+**Output Formats:**
+- **JSON:** `CompatibilityReport` with `overall_compatibility` level, counts by change type (`breaking_changes_count`, `potentially_breaking_count`, `non_breaking_changes_count`, `additive_changes_count`), detailed `issues` list (each with severity, impact, suggested migration), `migration_scripts` (with rollback scripts and validation queries), `risk_assessment`, and `recommendations`.
+- **Text:** Human-readable report with color-coded severity sections, issue details, and migration script listings.
+
+---
+
+### rollback_generator.py
+
+**Purpose:** Takes a migration plan (typically the JSON output of `migration_planner.py`) and generates a comprehensive rollback runbook with phase-by-phase reversal steps, automated trigger conditions, data recovery plans, escalation matrices, and communication templates.
+
+**Usage:**
+```bash
+python scripts/rollback_generator.py --input &lt;plan.json&gt; [--output &lt;runbook.json&gt;] [--format &lt;format&gt;]
+```
+
+**Flags/Parameters:**
+
+| Flag | Required | Default | Description |
+|------|----------|---------|-------------|
+| `--input`, `-i` | Yes | -- | Input migration plan file (JSON). Expects output from `migration_planner.py` or any JSON with `migration_id`, `migration_type`, and `phases` fields. |
+| `--output`, `-o` | No | stdout | Output file path for the rollback runbook (JSON). |
+| `--format`, `-f` | No | `both` | Output format. Choices: `json`, `text`, `both`. |
+
+**Example:**
+```bash
+python scripts/migration_planner.py --input spec.json --output plan.json --format json
+python scripts/rollback_generator.py --input plan.json --output runbook.json --format both
+```
+
+**Output Formats:**
+- **JSON:** `RollbackRunbook` object with `runbook_id`, `rollback_phases` (each containing ordered `steps` with script content, validation commands, success criteria, and failure escalation), `trigger_conditions` (with metric thresholds and auto-execute flags), `data_recovery_plan` (backup location, recovery scripts, estimated recovery time), `communication_templates` (for technical, business, and executive audiences), `escalation_matrix`, `validation_checklist`, `post_rollback_procedures`, and `emergency_contacts`.
+- **Text:** Human-readable runbook with phase-by-phase rollback instructions, trigger condition summaries, communication templates, and a post-rollback checklist.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Migration Architect&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Migration Architect&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Migration Architect in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Migration Architect&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Migration Architect&quot;
+4. Description: &quot;Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or vers...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/migration-architect/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

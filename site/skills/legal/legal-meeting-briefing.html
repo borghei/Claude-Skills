@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Legal Meeting Briefing (Legal domain).
 
 Prepare structured briefings for meetings with legal relevance and track action items. Use when prepping legal meetings.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-meeting-briefing
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Legal Meeting Briefing (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Legal Meeting Briefing (Legal domain).
 
 Prepare structured briefings for meetings with legal relevance and track action items. Use when prepping legal meetings.
 
@@ -425,7 +447,630 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-meeting-briefing
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Legal Meeting Briefing&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Meeting Briefing Skill
+
+## Overview
+
+Production-ready toolkit for preparing structured briefings for meetings with legal relevance and tracking resulting action items. Supports 8 meeting types with type-specific preparation guidance, a 13-section briefing template, and action item management with priority levels and follow-up cadence. Designed for legal teams preparing counsel, in-house attorneys, and legal operations professionals for productive meetings.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Meeting Types](#meeting-types)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Meeting Brief Generator (`scripts/meeting_brief_generator.py`)
+
+Generate a meeting briefing skeleton pre-populated with sections based on meeting type.
+
+```bash
+python scripts/meeting_brief_generator.py \
+  --type deal-review \
+  --title &quot;Series B Term Sheet Review&quot; \
+  --date 2026-04-15 \
+  --participants &#x27;[{&quot;name&quot;:&quot;Jane Smith&quot;,&quot;org&quot;:&quot;Legal&quot;,&quot;role&quot;:&quot;Lead Counsel&quot;}]&#x27;
+
+python scripts/meeting_brief_generator.py \
+  --type board \
+  --title &quot;Q1 Board Meeting&quot; \
+  --date 2026-04-20 \
+  --agenda &quot;Legal update,Risk report,Pending approvals&quot; --json
+
+python scripts/meeting_brief_generator.py \
+  --type regulatory \
+  --title &quot;FDA Pre-Submission Meeting&quot; \
+  --date 2026-05-01 \
+  --participants &#x27;[{&quot;name&quot;:&quot;Dr. Lee&quot;,&quot;org&quot;:&quot;FDA&quot;,&quot;role&quot;:&quot;Reviewer&quot;}]&#x27;
+```
+
+### 2. Action Item Tracker (`scripts/action_item_tracker.py`)
+
+Manage action items from legal meetings with priority levels, ownership, and status tracking.
+
+```bash
+python scripts/action_item_tracker.py add \
+  --title &quot;Draft NDA for Vendor X&quot; \
+  --owner &quot;Jane Smith&quot; \
+  --priority high \
+  --deadline 2026-04-20 \
+  --meeting &quot;Series B Review&quot;
+
+python scripts/action_item_tracker.py list \
+  --filter-status open \
+  --filter-priority high
+
+python scripts/action_item_tracker.py complete --id 3
+
+python scripts/action_item_tracker.py dashboard --json
+
+python scripts/action_item_tracker.py update --id 5 \
+  --status in-progress --notes &quot;Waiting for counterparty response&quot;
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/meeting_type_guides.md` | Preparation guidance for all 8 meeting types |
+| `references/briefing_templates.md` | Complete 13-section briefing template and action item tracking |
+
+## Workflows
+
+### 5-Step Briefing Methodology
+
+| Step | Action | Output |
+|------|--------|--------|
+| 1. Identify Meeting | Determine meeting type, participants, objectives | Meeting classification |
+| 2. Assess Preparation Needs | Select type-specific sections and depth | Section checklist |
+| 3. Gather Context | Collect documents, prior notes, open issues | Background materials |
+| 4. Synthesize into Briefing | Run generator; populate sections with gathered context | Draft briefing |
+| 5. Identify Preparation Gaps | Review for missing info; flag items needing follow-up | Gap list |
+
+### Meeting Type Selection
+
+| Meeting Type | Key Indicator |
+|-------------|---------------|
+| Deal Review | Transaction under consideration or in progress |
+| Board/Committee | Board of directors, audit committee, compensation committee |
+| Vendor Call | Meeting with supplier, contractor, or service provider |
+| Team Sync | Internal legal team meeting |
+| Client/Customer | External client or customer-facing meeting |
+| Regulatory/Government | Meeting with regulator, agency, or government body |
+| Litigation/Dispute | Meeting about active or potential legal dispute |
+| Cross-Functional | Meeting with stakeholders from multiple departments |
+
+### Action Item Workflow
+
+1. **Capture** -- Record action items during or immediately after meeting
+2. **Assign** -- Set owner, priority, and deadline for each item
+3. **Track** -- Monitor progress via dashboard; update status as work progresses
+4. **Follow-Up** -- Follow cadence based on priority level
+5. **Close** -- Mark complete when done; archive for audit trail
+
+### Follow-Up Cadence
+
+| Priority | Follow-Up Frequency | Escalation |
+|----------|-------------------|------------|
+| High | Daily check-in | Escalate after 2 missed days |
+| Medium | Weekly check-in | Escalate after 1 missed week |
+| Low | Monthly check-in | Escalate after 1 missed month |
+| Overdue | Immediate escalation | Notify supervisor and meeting owner |
+
+## Meeting Types
+
+### Deal Review
+
+Focus: Transaction analysis, contract review, approval requirements.
+
+| Section | Content |
+|---------|---------|
+| Deal Summary | Parties, structure, value, timeline |
+| Contract Status | Draft version, open issues, redline items |
+| Approval Requirements | Who must approve; delegated authority limits |
+| Counterparty Dynamics | Negotiation position, prior dealings, leverage |
+| Comparable Deals | Similar transactions for benchmarking terms |
+
+### Board/Committee
+
+Focus: Legal department update, risk highlights, governance.
+
+| Section | Content |
+|---------|---------|
+| Legal Department Update | Headcount, budget, key accomplishments |
+| Risk Highlights | Top legal risks with likelihood and impact |
+| Regulatory Update | Recent regulatory changes affecting the organization |
+| Pending Approvals | Items requiring board or committee action |
+| Litigation Summary | Active matters, reserves, settlement status |
+
+### Regulatory/Government
+
+Focus: Compliance posture, enforcement patterns, privilege considerations.
+
+| Section | Content |
+|---------|---------|
+| Regulatory Body Context | Agency structure, jurisdiction, enforcement priorities |
+| Enforcement Patterns | Recent enforcement actions in the sector |
+| Matter History | Prior interactions, submissions, correspondence |
+| Privilege Considerations | What is privileged; what can be shared |
+| Compliance Posture | Current compliance status; remediation progress |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Brief missing type-specific sections | Wrong meeting type selected | Review meeting type descriptions; select the most specific type |
+| Participants not formatted | JSON format error | Use valid JSON array: `&#x27;[{&quot;name&quot;:&quot;X&quot;,&quot;org&quot;:&quot;Y&quot;,&quot;role&quot;:&quot;Z&quot;}]&#x27;` |
+| Action items not persisting | Tracker uses file-based storage | Ensure write permissions in working directory; check `action_items.json` |
+| Dashboard shows stale data | Cached data from previous run | Re-run dashboard command; items are loaded fresh from storage |
+| Overdue items not flagged | Clock/timezone mismatch | Verify system date; deadlines use YYYY-MM-DD format |
+| Agenda items not populating | Comma-separated format expected | Use `--agenda &quot;Item 1,Item 2,Item 3&quot;` format |
+| Brief too generic | Minimal parameters provided | Add participants, agenda, and type-specific context |
+| Action item ID not found | Item was completed or deleted | Run `list --filter-status all` to see all items including completed |
+
+## Success Criteria
+
+- **Preparation Coverage**: Every legal meeting has a briefing covering all relevant sections for its type
+- **Action Item Capture**: 100% of action items captured with owner, deadline, and priority within 24 hours
+- **On-Time Completion**: 90%+ of action items completed by deadline
+- **Meeting Effectiveness**: Participants report improved preparation and productivity (measured by survey)
+- **Follow-Up Compliance**: High-priority items followed up daily; medium weekly; low monthly
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Meeting briefing generation with type-specific sections for 8 meeting types
+- Action item tracking with CRUD operations, filtering, and status dashboard
+- Follow-up cadence management based on priority levels
+- Preparation gap identification for pre-meeting readiness
+
+**This skill does NOT cover:**
+- Calendar integration or meeting scheduling
+- Real-time meeting notes or transcription
+- Email drafting or distribution of briefings
+- Document management or version control for meeting materials
+- Video conferencing or collaboration tool integration
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Generic briefing for all meeting types | Misses type-specific concerns; wastes prep time on irrelevant sections | Select correct meeting type; use type-specific guidance |
+| Capturing action items days after meeting | Details forgotten; ownership unclear; deadlines slip | Capture during meeting or within 2 hours; use tracker immediately |
+| Single owner for all items | Creates bottleneck; no accountability for individual tasks | Assign specific owner per item; each item has exactly one owner |
+| No follow-up on action items | Items go stale; commitments missed; trust erodes | Follow cadence: high=daily, medium=weekly, low=monthly |
+| Skipping privilege considerations for regulatory meetings | Inadvertent privilege waiver; disclosed protected communications | Always complete privilege section for regulatory/government meetings |
+
+## Tool Reference
+
+### `scripts/meeting_brief_generator.py`
+
+Generate meeting briefing skeleton from parameters.
+
+```
+usage: meeting_brief_generator.py [-h] [--json]
+                                   --type {deal-review,board,vendor,team-sync,
+                                           client,regulatory,litigation,cross-functional}
+                                   --title TITLE
+                                   --date DATE
+                                   [--participants PARTICIPANTS]
+                                   [--agenda AGENDA]
+                                   [--output OUTPUT]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --type                Meeting type (determines sections included)
+  --title               Meeting title
+  --date                Meeting date (YYYY-MM-DD)
+  --participants        JSON array of participants: [{&quot;name&quot;,&quot;org&quot;,&quot;role&quot;,&quot;interests&quot;}]
+  --agenda              Comma-separated agenda items
+  --output              Write briefing to file instead of stdout
+```
+
+### `scripts/action_item_tracker.py`
+
+Manage action items with CRUD operations and status dashboard.
+
+```
+usage: action_item_tracker.py [-h] [--json]
+                               {add,list,update,complete,dashboard} ...
+
+commands:
+  add         Add a new action item
+  list        List action items with optional filters
+  update      Update an existing action item
+  complete    Mark an action item as complete
+  dashboard   Show action item summary dashboard
+
+add options:
+  --title TITLE         Action item description (required)
+  --owner OWNER         Responsible person (required)
+  --priority {high,medium,low}  Priority level (required)
+  --deadline DEADLINE   Due date YYYY-MM-DD (required)
+  --meeting MEETING     Source meeting name
+  --notes NOTES         Additional notes
+
+list options:
+  --filter-status {open,in-progress,complete,overdue,all}
+  --filter-priority {high,medium,low,all}
+  --filter-owner OWNER
+
+update options:
+  --id ID               Action item ID (required)
+  --status {open,in-progress,complete}
+  --priority {high,medium,low}
+  --deadline DEADLINE
+  --notes NOTES
+
+complete options:
+  --id ID               Action item ID (required)
+
+dashboard options:
+  (no additional options)
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Meeting Briefing&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Meeting Briefing&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Meeting Briefing in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Meeting Briefing&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Meeting Briefing&quot;
+4. Description: &quot;Prepare structured briefings for meetings with legal relevance and track action items. Use when prepping legal meetings.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-meeting-briefing/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Legal Meeting Briefing&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Meeting Briefing Skill
+
+## Overview
+
+Production-ready toolkit for preparing structured briefings for meetings with legal relevance and tracking resulting action items. Supports 8 meeting types with type-specific preparation guidance, a 13-section briefing template, and action item management with priority levels and follow-up cadence. Designed for legal teams preparing counsel, in-house attorneys, and legal operations professionals for productive meetings.
+
+## Table of Contents
+
+- [Tools](#tools)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Meeting Types](#meeting-types)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+## Tools
+
+### 1. Meeting Brief Generator (`scripts/meeting_brief_generator.py`)
+
+Generate a meeting briefing skeleton pre-populated with sections based on meeting type.
+
+```bash
+python scripts/meeting_brief_generator.py \
+  --type deal-review \
+  --title &quot;Series B Term Sheet Review&quot; \
+  --date 2026-04-15 \
+  --participants &#x27;[{&quot;name&quot;:&quot;Jane Smith&quot;,&quot;org&quot;:&quot;Legal&quot;,&quot;role&quot;:&quot;Lead Counsel&quot;}]&#x27;
+
+python scripts/meeting_brief_generator.py \
+  --type board \
+  --title &quot;Q1 Board Meeting&quot; \
+  --date 2026-04-20 \
+  --agenda &quot;Legal update,Risk report,Pending approvals&quot; --json
+
+python scripts/meeting_brief_generator.py \
+  --type regulatory \
+  --title &quot;FDA Pre-Submission Meeting&quot; \
+  --date 2026-05-01 \
+  --participants &#x27;[{&quot;name&quot;:&quot;Dr. Lee&quot;,&quot;org&quot;:&quot;FDA&quot;,&quot;role&quot;:&quot;Reviewer&quot;}]&#x27;
+```
+
+### 2. Action Item Tracker (`scripts/action_item_tracker.py`)
+
+Manage action items from legal meetings with priority levels, ownership, and status tracking.
+
+```bash
+python scripts/action_item_tracker.py add \
+  --title &quot;Draft NDA for Vendor X&quot; \
+  --owner &quot;Jane Smith&quot; \
+  --priority high \
+  --deadline 2026-04-20 \
+  --meeting &quot;Series B Review&quot;
+
+python scripts/action_item_tracker.py list \
+  --filter-status open \
+  --filter-priority high
+
+python scripts/action_item_tracker.py complete --id 3
+
+python scripts/action_item_tracker.py dashboard --json
+
+python scripts/action_item_tracker.py update --id 5 \
+  --status in-progress --notes &quot;Waiting for counterparty response&quot;
+```
+
+## Reference Guides
+
+| Reference | Purpose |
+|-----------|---------|
+| `references/meeting_type_guides.md` | Preparation guidance for all 8 meeting types |
+| `references/briefing_templates.md` | Complete 13-section briefing template and action item tracking |
+
+## Workflows
+
+### 5-Step Briefing Methodology
+
+| Step | Action | Output |
+|------|--------|--------|
+| 1. Identify Meeting | Determine meeting type, participants, objectives | Meeting classification |
+| 2. Assess Preparation Needs | Select type-specific sections and depth | Section checklist |
+| 3. Gather Context | Collect documents, prior notes, open issues | Background materials |
+| 4. Synthesize into Briefing | Run generator; populate sections with gathered context | Draft briefing |
+| 5. Identify Preparation Gaps | Review for missing info; flag items needing follow-up | Gap list |
+
+### Meeting Type Selection
+
+| Meeting Type | Key Indicator |
+|-------------|---------------|
+| Deal Review | Transaction under consideration or in progress |
+| Board/Committee | Board of directors, audit committee, compensation committee |
+| Vendor Call | Meeting with supplier, contractor, or service provider |
+| Team Sync | Internal legal team meeting |
+| Client/Customer | External client or customer-facing meeting |
+| Regulatory/Government | Meeting with regulator, agency, or government body |
+| Litigation/Dispute | Meeting about active or potential legal dispute |
+| Cross-Functional | Meeting with stakeholders from multiple departments |
+
+### Action Item Workflow
+
+1. **Capture** -- Record action items during or immediately after meeting
+2. **Assign** -- Set owner, priority, and deadline for each item
+3. **Track** -- Monitor progress via dashboard; update status as work progresses
+4. **Follow-Up** -- Follow cadence based on priority level
+5. **Close** -- Mark complete when done; archive for audit trail
+
+### Follow-Up Cadence
+
+| Priority | Follow-Up Frequency | Escalation |
+|----------|-------------------|------------|
+| High | Daily check-in | Escalate after 2 missed days |
+| Medium | Weekly check-in | Escalate after 1 missed week |
+| Low | Monthly check-in | Escalate after 1 missed month |
+| Overdue | Immediate escalation | Notify supervisor and meeting owner |
+
+## Meeting Types
+
+### Deal Review
+
+Focus: Transaction analysis, contract review, approval requirements.
+
+| Section | Content |
+|---------|---------|
+| Deal Summary | Parties, structure, value, timeline |
+| Contract Status | Draft version, open issues, redline items |
+| Approval Requirements | Who must approve; delegated authority limits |
+| Counterparty Dynamics | Negotiation position, prior dealings, leverage |
+| Comparable Deals | Similar transactions for benchmarking terms |
+
+### Board/Committee
+
+Focus: Legal department update, risk highlights, governance.
+
+| Section | Content |
+|---------|---------|
+| Legal Department Update | Headcount, budget, key accomplishments |
+| Risk Highlights | Top legal risks with likelihood and impact |
+| Regulatory Update | Recent regulatory changes affecting the organization |
+| Pending Approvals | Items requiring board or committee action |
+| Litigation Summary | Active matters, reserves, settlement status |
+
+### Regulatory/Government
+
+Focus: Compliance posture, enforcement patterns, privilege considerations.
+
+| Section | Content |
+|---------|---------|
+| Regulatory Body Context | Agency structure, jurisdiction, enforcement priorities |
+| Enforcement Patterns | Recent enforcement actions in the sector |
+| Matter History | Prior interactions, submissions, correspondence |
+| Privilege Considerations | What is privileged; what can be shared |
+| Compliance Posture | Current compliance status; remediation progress |
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Brief missing type-specific sections | Wrong meeting type selected | Review meeting type descriptions; select the most specific type |
+| Participants not formatted | JSON format error | Use valid JSON array: `&#x27;[{&quot;name&quot;:&quot;X&quot;,&quot;org&quot;:&quot;Y&quot;,&quot;role&quot;:&quot;Z&quot;}]&#x27;` |
+| Action items not persisting | Tracker uses file-based storage | Ensure write permissions in working directory; check `action_items.json` |
+| Dashboard shows stale data | Cached data from previous run | Re-run dashboard command; items are loaded fresh from storage |
+| Overdue items not flagged | Clock/timezone mismatch | Verify system date; deadlines use YYYY-MM-DD format |
+| Agenda items not populating | Comma-separated format expected | Use `--agenda &quot;Item 1,Item 2,Item 3&quot;` format |
+| Brief too generic | Minimal parameters provided | Add participants, agenda, and type-specific context |
+| Action item ID not found | Item was completed or deleted | Run `list --filter-status all` to see all items including completed |
+
+## Success Criteria
+
+- **Preparation Coverage**: Every legal meeting has a briefing covering all relevant sections for its type
+- **Action Item Capture**: 100% of action items captured with owner, deadline, and priority within 24 hours
+- **On-Time Completion**: 90%+ of action items completed by deadline
+- **Meeting Effectiveness**: Participants report improved preparation and productivity (measured by survey)
+- **Follow-Up Compliance**: High-priority items followed up daily; medium weekly; low monthly
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Meeting briefing generation with type-specific sections for 8 meeting types
+- Action item tracking with CRUD operations, filtering, and status dashboard
+- Follow-up cadence management based on priority levels
+- Preparation gap identification for pre-meeting readiness
+
+**This skill does NOT cover:**
+- Calendar integration or meeting scheduling
+- Real-time meeting notes or transcription
+- Email drafting or distribution of briefings
+- Document management or version control for meeting materials
+- Video conferencing or collaboration tool integration
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|--------------|-------------|-----------------|
+| Generic briefing for all meeting types | Misses type-specific concerns; wastes prep time on irrelevant sections | Select correct meeting type; use type-specific guidance |
+| Capturing action items days after meeting | Details forgotten; ownership unclear; deadlines slip | Capture during meeting or within 2 hours; use tracker immediately |
+| Single owner for all items | Creates bottleneck; no accountability for individual tasks | Assign specific owner per item; each item has exactly one owner |
+| No follow-up on action items | Items go stale; commitments missed; trust erodes | Follow cadence: high=daily, medium=weekly, low=monthly |
+| Skipping privilege considerations for regulatory meetings | Inadvertent privilege waiver; disclosed protected communications | Always complete privilege section for regulatory/government meetings |
+
+## Tool Reference
+
+### `scripts/meeting_brief_generator.py`
+
+Generate meeting briefing skeleton from parameters.
+
+```
+usage: meeting_brief_generator.py [-h] [--json]
+                                   --type {deal-review,board,vendor,team-sync,
+                                           client,regulatory,litigation,cross-functional}
+                                   --title TITLE
+                                   --date DATE
+                                   [--participants PARTICIPANTS]
+                                   [--agenda AGENDA]
+                                   [--output OUTPUT]
+
+options:
+  -h, --help            Show help message and exit
+  --json                Output in JSON format
+  --type                Meeting type (determines sections included)
+  --title               Meeting title
+  --date                Meeting date (YYYY-MM-DD)
+  --participants        JSON array of participants: [{&quot;name&quot;,&quot;org&quot;,&quot;role&quot;,&quot;interests&quot;}]
+  --agenda              Comma-separated agenda items
+  --output              Write briefing to file instead of stdout
+```
+
+### `scripts/action_item_tracker.py`
+
+Manage action items with CRUD operations and status dashboard.
+
+```
+usage: action_item_tracker.py [-h] [--json]
+                               {add,list,update,complete,dashboard} ...
+
+commands:
+  add         Add a new action item
+  list        List action items with optional filters
+  update      Update an existing action item
+  complete    Mark an action item as complete
+  dashboard   Show action item summary dashboard
+
+add options:
+  --title TITLE         Action item description (required)
+  --owner OWNER         Responsible person (required)
+  --priority {high,medium,low}  Priority level (required)
+  --deadline DEADLINE   Due date YYYY-MM-DD (required)
+  --meeting MEETING     Source meeting name
+  --notes NOTES         Additional notes
+
+list options:
+  --filter-status {open,in-progress,complete,overdue,all}
+  --filter-priority {high,medium,low,all}
+  --filter-owner OWNER
+
+update options:
+  --id ID               Action item ID (required)
+  --status {open,in-progress,complete}
+  --priority {high,medium,low}
+  --deadline DEADLINE
+  --notes NOTES
+
+complete options:
+  --id ID               Action item ID (required)
+
+dashboard options:
+  (no additional options)
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Meeting Briefing&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Meeting Briefing&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Meeting Briefing in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Meeting Briefing&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Meeting Briefing&quot;
+4. Description: &quot;Prepare structured briefings for meetings with legal relevance and track action items. Use when prepping legal meetings.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-meeting-briefing/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Threat Detection (Engineering domain).
 
 Automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/threat-detection
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Threat Detection (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Threat Detection (Engineering domain).
 
 Automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators.
 
@@ -425,7 +447,284 @@ https://github.com/borghei/Claude-Skills/tree/main/threat-detection
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Threat Detection&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Threat Detection
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Security Operations
+
+## Overview
+
+The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triage log data and identify threats before they escalate.
+
+## Quick Start
+
+```bash
+# Analyze a log file for threat signals
+python scripts/threat_signal_analyzer.py --file /var/log/auth.log
+
+# Analyze with specific threat category
+python scripts/threat_signal_analyzer.py --file access.log --category injection
+
+# JSON output for SIEM integration
+python scripts/threat_signal_analyzer.py --file auth.log --format json
+
+# Set minimum severity
+python scripts/threat_signal_analyzer.py --file access.log --min-severity high
+```
+
+## Tools Overview
+
+### threat_signal_analyzer.py
+
+Analyzes log files for suspicious activity patterns across multiple threat categories.
+
+| Feature | Description |
+|---------|-------------|
+| Brute force detection | Identifies repeated failed login attempts from same source |
+| Injection scanning | Detects SQL injection, XSS, command injection in requests |
+| Access anomalies | Flags unusual access times, forbidden paths, admin probes |
+| Privilege escalation | Detects sudo abuse, role changes, permission modifications |
+| Rate analysis | Identifies request flooding and denial-of-service patterns |
+| IP reputation | Flags known-bad patterns (scanners, bots, TOR indicators) |
+
+## Workflows
+
+### Log Analysis Workflow
+
+1. **Collect** - Gather logs from auth, access, application sources
+2. **Analyze** - Run threat_signal_analyzer.py across log files
+3. **Triage** - Review critical and high severity findings first
+4. **Correlate** - Cross-reference findings across log sources
+5. **Respond** - Block IPs, reset credentials, escalate as needed
+
+### Incident Investigation Workflow
+
+1. **Scope** - Identify time window and affected systems
+2. **Scan** - Run analyzer on all relevant log files
+3. **Timeline** - Build timeline from threat signals
+4. **Impact** - Assess what was accessed or modified
+5. **Contain** - Block threat actors and patch vulnerabilities
+
+### Continuous Monitoring
+
+```bash
+# Cron job: analyze auth logs every hour
+python scripts/threat_signal_analyzer.py --file /var/log/auth.log --format json --min-severity high &gt; /tmp/threat_report.json
+
+# CI/CD: scan application logs on deployment
+python scripts/threat_signal_analyzer.py --file app.log --category injection --format json
+```
+
+## Reference Documentation
+
+- [Threat Indicators](references/threat-indicators.md) - Common attack patterns, indicators of compromise, response playbooks
+
+## Common Patterns Quick Reference
+
+### Threat Categories
+| Category | Signals | Severity |
+|----------|---------|----------|
+| Brute force | 5+ failed logins from same IP in 5 min | High |
+| SQL injection | UNION SELECT, OR 1=1, DROP TABLE in requests | Critical |
+| XSS | script tags, javascript: URIs, event handlers in input | High |
+| Path traversal | ../ sequences, /etc/passwd access attempts | High |
+| Command injection | ; cat /etc/passwd, | nc, backtick usage | Critical |
+| Admin probing | /admin, /wp-admin, /phpmyadmin access attempts | Medium |
+| Rate flooding | 100+ requests/minute from single IP | High |
+
+### Severity Levels
+- **CRITICAL** - Active exploitation attempt (injection, RCE)
+- **HIGH** - Likely attack in progress (brute force, privilege escalation)
+- **MEDIUM** - Suspicious activity requiring investigation
+- **LOW** - Informational, possible false positive
+
+### Response Actions
+| Severity | Immediate Action | Follow-Up |
+|----------|-----------------|-----------|
+| Critical | Block IP, alert SOC | Incident report, forensics |
+| High | Rate limit, monitor | Review access, check damage |
+| Medium | Log and monitor | Weekly review |
+| Low | Log only | Monthly trend analysis |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Threat Detection&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Threat Detection&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Threat Detection in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Threat Detection&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Threat Detection&quot;
+4. Description: &quot;Automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/threat-detection/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Threat Detection&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Threat Detection
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Security Operations
+
+## Overview
+
+The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triage log data and identify threats before they escalate.
+
+## Quick Start
+
+```bash
+# Analyze a log file for threat signals
+python scripts/threat_signal_analyzer.py --file /var/log/auth.log
+
+# Analyze with specific threat category
+python scripts/threat_signal_analyzer.py --file access.log --category injection
+
+# JSON output for SIEM integration
+python scripts/threat_signal_analyzer.py --file auth.log --format json
+
+# Set minimum severity
+python scripts/threat_signal_analyzer.py --file access.log --min-severity high
+```
+
+## Tools Overview
+
+### threat_signal_analyzer.py
+
+Analyzes log files for suspicious activity patterns across multiple threat categories.
+
+| Feature | Description |
+|---------|-------------|
+| Brute force detection | Identifies repeated failed login attempts from same source |
+| Injection scanning | Detects SQL injection, XSS, command injection in requests |
+| Access anomalies | Flags unusual access times, forbidden paths, admin probes |
+| Privilege escalation | Detects sudo abuse, role changes, permission modifications |
+| Rate analysis | Identifies request flooding and denial-of-service patterns |
+| IP reputation | Flags known-bad patterns (scanners, bots, TOR indicators) |
+
+## Workflows
+
+### Log Analysis Workflow
+
+1. **Collect** - Gather logs from auth, access, application sources
+2. **Analyze** - Run threat_signal_analyzer.py across log files
+3. **Triage** - Review critical and high severity findings first
+4. **Correlate** - Cross-reference findings across log sources
+5. **Respond** - Block IPs, reset credentials, escalate as needed
+
+### Incident Investigation Workflow
+
+1. **Scope** - Identify time window and affected systems
+2. **Scan** - Run analyzer on all relevant log files
+3. **Timeline** - Build timeline from threat signals
+4. **Impact** - Assess what was accessed or modified
+5. **Contain** - Block threat actors and patch vulnerabilities
+
+### Continuous Monitoring
+
+```bash
+# Cron job: analyze auth logs every hour
+python scripts/threat_signal_analyzer.py --file /var/log/auth.log --format json --min-severity high &gt; /tmp/threat_report.json
+
+# CI/CD: scan application logs on deployment
+python scripts/threat_signal_analyzer.py --file app.log --category injection --format json
+```
+
+## Reference Documentation
+
+- [Threat Indicators](references/threat-indicators.md) - Common attack patterns, indicators of compromise, response playbooks
+
+## Common Patterns Quick Reference
+
+### Threat Categories
+| Category | Signals | Severity |
+|----------|---------|----------|
+| Brute force | 5+ failed logins from same IP in 5 min | High |
+| SQL injection | UNION SELECT, OR 1=1, DROP TABLE in requests | Critical |
+| XSS | script tags, javascript: URIs, event handlers in input | High |
+| Path traversal | ../ sequences, /etc/passwd access attempts | High |
+| Command injection | ; cat /etc/passwd, | nc, backtick usage | Critical |
+| Admin probing | /admin, /wp-admin, /phpmyadmin access attempts | Medium |
+| Rate flooding | 100+ requests/minute from single IP | High |
+
+### Severity Levels
+- **CRITICAL** - Active exploitation attempt (injection, RCE)
+- **HIGH** - Likely attack in progress (brute force, privilege escalation)
+- **MEDIUM** - Suspicious activity requiring investigation
+- **LOW** - Informational, possible false positive
+
+### Response Actions
+| Severity | Immediate Action | Follow-Up |
+|----------|-----------------|-----------|
+| Critical | Block IP, alert SOC | Incident report, forensics |
+| High | Rate limit, monitor | Review access, check damage |
+| Medium | Log and monitor | Weekly review |
+| Low | Log only | Monthly trend analysis |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Threat Detection&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Threat Detection&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Threat Detection in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Threat Detection&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Threat Detection&quot;
+4. Description: &quot;Automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/threat-detection/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Agent Workflow Designer (Engineering domain).
 
 Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple speci...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/agent-workflow-designer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Agent Workflow Designer (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Agent Workflow Designer (Engineering domain).
 
 Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple speci...
 
@@ -425,7 +447,1244 @@ https://github.com/borghei/Claude-Skills/tree/main/agent-workflow-designer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Agent Workflow Designer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Agent Workflow Designer
+
+The agent designs multi-agent orchestration systems using five core patterns: sequential pipeline, parallel fan-out/fan-in, hierarchical delegation, event-driven reactor, and consensus validation. It implements agent routing strategies, circuit breaker reliability patterns, context window budgeting, and cost optimization across LangGraph, CrewAI, AutoGen, and Claude Code agent teams.
+
+## Core Capabilities
+
+### 1. Pattern Selection and Design
+- Sequential pipelines with typed handoffs
+- Parallel fan-out/fan-in with merge strategies
+- Hierarchical delegation with dynamic subtask discovery
+- Event-driven reactors with pub/sub agent triggers
+- Consensus validation with voting and arbitration
+
+### 2. Agent Routing
+- Intent-based routing with classifier agents
+- Skill-based routing using capability matching
+- Cost-aware routing (cheap models for simple tasks)
+- Load-balanced routing across agent pools
+- Fallback chains with graceful degradation
+
+### 3. State and Context Management
+- Persistent workflow state across agent hops
+- Context window budgeting and summarization
+- Checkpoint/resume for long-running workflows
+- Conflict resolution for parallel state updates
+
+### 4. Reliability Engineering
+- Circuit breakers for failing agents
+- Retry with exponential backoff and model fallback
+- Dead letter queues for unprocessable tasks
+- Timeout enforcement at every agent boundary
+- Idempotent operations for safe retries
+
+## When to Use
+
+- Building multi-step AI pipelines that exceed one agent&#x27;s capability
+- Parallelizing research, analysis, or generation tasks
+- Creating specialist agent teams with defined roles and contracts
+- Designing fault-tolerant AI workflows for production deployment
+- Optimizing cost across workflows with mixed model tiers
+
+## Pattern Selection Decision Tree
+
+```
+What does the workflow look like?
+│
+├─ Linear: step A feeds step B feeds step C
+│  └─ SEQUENTIAL PIPELINE
+│     Best for: content pipelines, code review chains, data transformation
+│
+├─ Parallel: N independent tasks, then combine
+│  └─ FAN-OUT / FAN-IN
+│     Best for: competitive research, multi-source analysis, parallel code gen
+│
+├─ Tree: orchestrator breaks work into subtasks dynamically
+│  └─ HIERARCHICAL DELEGATION
+│     Best for: complex projects, open-ended research, code generation with planning
+│
+├─ Reactive: agents respond to events/triggers
+│  └─ EVENT-DRIVEN REACTOR
+│     Best for: monitoring, alerting, continuous integration, chat workflows
+│
+└─ Verification: multiple agents must agree on output
+   └─ CONSENSUS VALIDATION
+      Best for: high-stakes decisions, code review, fact checking, safety-critical output
+```
+
+## Pattern 1: Sequential Pipeline
+
+Each stage transforms input and passes structured output to the next. Type-safe handoffs prevent data loss between stages.
+
+### LangGraph Implementation
+
+```python
+from langgraph.graph import StateGraph, END
+from typing import TypedDict, Annotated
+from langchain_anthropic import ChatAnthropic
+
+class PipelineState(TypedDict):
+    topic: str
+    research: str
+    draft: str
+    final: str
+    stage_costs: Annotated[list[dict], &quot;append&quot;]  # accumulates cost per stage
+
+def research_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-sonnet-4-20250514&quot;, max_tokens=2048)
+    result = model.invoke(
+        f&quot;Research the following topic thoroughly. Provide key facts, statistics, &quot;
+        f&quot;and expert perspectives:\n\n{state[&#x27;topic&#x27;]}&quot;
+    )
+    return {
+        &quot;research&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;research&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+def writing_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-sonnet-4-20250514&quot;, max_tokens=4096)
+    result = model.invoke(
+        f&quot;Using this research, write a compelling 800-word blog post with a hook, &quot;
+        f&quot;3 main sections, and a CTA:\n\n{state[&#x27;research&#x27;]}&quot;
+    )
+    return {
+        &quot;draft&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;writing&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+def editing_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-haiku-4-20250514&quot;, max_tokens=4096)
+    result = model.invoke(
+        f&quot;Edit this draft for clarity, flow, and grammar. Return only the improved &quot;
+        f&quot;version:\n\n{state[&#x27;draft&#x27;]}&quot;
+    )
+    return {
+        &quot;final&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;editing&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+# Build the graph
+graph = StateGraph(PipelineState)
+graph.add_node(&quot;research&quot;, research_stage)
+graph.add_node(&quot;write&quot;, writing_stage)
+graph.add_node(&quot;edit&quot;, editing_stage)
+graph.add_edge(&quot;research&quot;, &quot;write&quot;)
+graph.add_edge(&quot;write&quot;, &quot;edit&quot;)
+graph.add_edge(&quot;edit&quot;, END)
+graph.set_entry_point(&quot;research&quot;)
+
+pipeline = graph.compile()
+
+# Execute
+result = pipeline.invoke({&quot;topic&quot;: &quot;The future of AI agents in enterprise software&quot;})
+print(f&quot;Total cost: {sum(s[&#x27;tokens&#x27;] for s in result[&#x27;stage_costs&#x27;])} tokens&quot;)
+```
+
+## Pattern 2: Parallel Fan-Out / Fan-In
+
+Independent tasks run concurrently. A merge function combines results.
+
+```python
+import asyncio
+from dataclasses import dataclass
+
+@dataclass
+class FanOutTask:
+    name: str
+    system_prompt: str
+    user_message: str
+    model: str = &quot;claude-sonnet-4-20250514&quot;
+
+@dataclass
+class FanOutResult:
+    task_name: str
+    output: str
+    tokens_used: int
+    success: bool
+    error: str | None = None
+
+async def fan_out_fan_in(
+    tasks: list[FanOutTask],
+    merge_prompt: str,
+    max_concurrent: int = 5,
+    timeout_seconds: float = 60.0,
+) -&gt; dict:
+    &quot;&quot;&quot;Execute tasks in parallel with concurrency limit and timeout.&quot;&quot;&quot;
+    import anthropic
+
+    client = anthropic.AsyncAnthropic()
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async def run_one(task: FanOutTask) -&gt; FanOutResult:
+        async with semaphore:
+            try:
+                response = await asyncio.wait_for(
+                    client.messages.create(
+                        model=task.model,
+                        max_tokens=2048,
+                        system=task.system_prompt,
+                        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: task.user_message}],
+                    ),
+                    timeout=timeout_seconds,
+                )
+                return FanOutResult(
+                    task_name=task.name,
+                    output=response.content[0].text,
+                    tokens_used=response.usage.input_tokens + response.usage.output_tokens,
+                    success=True,
+                )
+            except Exception as e:
+                return FanOutResult(
+                    task_name=task.name, output=&quot;&quot;, tokens_used=0,
+                    success=False, error=str(e),
+                )
+
+    # FAN-OUT: run all tasks concurrently
+    results = await asyncio.gather(*[run_one(t) for t in tasks])
+    successful = [r for r in results if r.success]
+    failed = [r for r in results if not r.success]
+
+    if not successful:
+        raise RuntimeError(f&quot;All {len(tasks)} fan-out tasks failed: {[f.error for f in failed]}&quot;)
+
+    # FAN-IN: merge results
+    combined = &quot;\n\n---\n\n&quot;.join(
+        f&quot;## {r.task_name}\n{r.output}&quot; for r in successful
+    )
+
+    merge_response = await client.messages.create(
+        model=&quot;claude-sonnet-4-20250514&quot;,
+        max_tokens=4096,
+        system=&quot;Synthesize the following parallel analyses into a unified report.&quot;,
+        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;{merge_prompt}\n\n{combined}&quot;}],
+    )
+
+    return {
+        &quot;synthesis&quot;: merge_response.content[0].text,
+        &quot;individual_results&quot;: successful,
+        &quot;failures&quot;: failed,
+        &quot;total_tokens&quot;: sum(r.tokens_used for r in results) + merge_response.usage.input_tokens + merge_response.usage.output_tokens,
+    }
+```
+
+## Pattern 3: Hierarchical Delegation
+
+An orchestrator agent dynamically decomposes work and delegates to specialists.
+
+```python
+from typing import Literal
+
+SPECIALISTS = {
+    &quot;researcher&quot;: &quot;Find accurate information with sources. Be thorough and cite evidence.&quot;,
+    &quot;coder&quot;: &quot;Write clean, tested code. Include error handling and type hints.&quot;,
+    &quot;writer&quot;: &quot;Create clear, engaging content. Match the requested tone and format.&quot;,
+    &quot;analyst&quot;: &quot;Analyze data and produce evidence-backed conclusions with visualizations.&quot;,
+    &quot;reviewer&quot;: &quot;Review work product for quality, accuracy, and completeness.&quot;,
+}
+
+@dataclass
+class SubTask:
+    id: str
+    agent: Literal[&quot;researcher&quot;, &quot;coder&quot;, &quot;writer&quot;, &quot;analyst&quot;, &quot;reviewer&quot;]
+    task: str
+    depends_on: list[str]
+    priority: int = 0  # higher = run first when deps are equal
+
+class HierarchicalOrchestrator:
+    def __init__(self, client):
+        self.client = client
+
+    async def plan(self, request: str) -&gt; list[SubTask]:
+        &quot;&quot;&quot;Orchestrator creates an execution plan with dependencies.&quot;&quot;&quot;
+        response = await self.client.messages.create(
+            model=&quot;claude-sonnet-4-20250514&quot;,
+            max_tokens=2048,
+            system=f&quot;&quot;&quot;You are a task orchestrator. Break down the request into subtasks.
+Available specialists: {&#x27;, &#x27;.join(SPECIALISTS.keys())}
+Respond with JSON: {{&quot;subtasks&quot;: [{{&quot;id&quot;: &quot;1&quot;, &quot;agent&quot;: &quot;researcher&quot;, &quot;task&quot;: &quot;...&quot;, &quot;depends_on&quot;: []}}]}}
+Rules:
+- Minimize the number of subtasks (prefer fewer, more substantial tasks)
+- Only add dependencies when output is genuinely needed
+- Independent tasks should have empty depends_on for parallel execution&quot;&quot;&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: request}],
+        )
+        import json
+        plan = json.loads(response.content[0].text)
+        return [SubTask(**st) for st in plan[&quot;subtasks&quot;]]
+
+    async def execute(self, request: str) -&gt; str:
+        &quot;&quot;&quot;Plan, execute with dependency resolution, and synthesize.&quot;&quot;&quot;
+        subtasks = await self.plan(request)
+        results = {}
+
+        # Execute in dependency order, parallelize where possible
+        for batch in self._batch_by_dependencies(subtasks):
+            batch_results = await asyncio.gather(*[
+                self._run_specialist(st, results) for st in batch
+            ])
+            for st, result in zip(batch, batch_results):
+                results[st.id] = result
+
+        # Final synthesis
+        all_outputs = &quot;\n\n&quot;.join(f&quot;### {k}\n{v}&quot; for k, v in results.items())
+        synthesis = await self.client.messages.create(
+            model=&quot;claude-sonnet-4-20250514&quot;,
+            max_tokens=4096,
+            system=&quot;Synthesize specialist outputs into a coherent final response.&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;Request: {request}\n\nOutputs:\n{all_outputs}&quot;}],
+        )
+        return synthesis.content[0].text
+
+    def _batch_by_dependencies(self, subtasks: list[SubTask]) -&gt; list[list[SubTask]]:
+        &quot;&quot;&quot;Group subtasks into batches that can run in parallel.&quot;&quot;&quot;
+        completed = set()
+        remaining = list(subtasks)
+        batches = []
+        while remaining:
+            batch = [t for t in remaining if all(d in completed for d in t.depends_on)]
+            if not batch:
+                raise ValueError(&quot;Circular dependency detected in subtask plan&quot;)
+            batches.append(sorted(batch, key=lambda t: -t.priority))
+            completed.update(t.id for t in batch)
+            remaining = [t for t in remaining if t.id not in completed]
+        return batches
+```
+
+## Pattern 4: Event-Driven Reactor
+
+Agents react to events from a message bus. Decoupled and scalable.
+
+```python
+from collections import defaultdict
+from typing import Callable, Any
+
+class AgentEventBus:
+    &quot;&quot;&quot;Simple event bus for agent-to-agent communication.&quot;&quot;&quot;
+
+    def __init__(self):
+        self._handlers: dict[str, list[Callable]] = defaultdict(list)
+        self._history: list[dict] = []
+
+    def subscribe(self, event_type: str, handler: Callable):
+        self._handlers[event_type].append(handler)
+
+    async def publish(self, event_type: str, payload: Any, source: str):
+        event = {&quot;type&quot;: event_type, &quot;payload&quot;: payload, &quot;source&quot;: source}
+        self._history.append(event)
+        handlers = self._handlers.get(event_type, [])
+        results = await asyncio.gather(
+            *[h(event) for h in handlers],
+            return_exceptions=True,
+        )
+        errors = [(h, r) for h, r in zip(handlers, results) if isinstance(r, Exception)]
+        if errors:
+            for handler, error in errors:
+                print(f&quot;Handler {handler.__name__} failed: {error}&quot;)
+        return results
+
+# Usage: code review pipeline triggered by PR events
+bus = AgentEventBus()
+
+async def on_pr_opened(event):
+    &quot;&quot;&quot;Security agent scans PR for vulnerabilities.&quot;&quot;&quot;
+    diff = event[&quot;payload&quot;][&quot;diff&quot;]
+    # ... scan and publish results
+    await bus.publish(&quot;security_scan_complete&quot;, {&quot;findings&quot;: findings}, &quot;security-agent&quot;)
+
+async def on_security_complete(event):
+    &quot;&quot;&quot;Review agent incorporates security findings into review.&quot;&quot;&quot;
+    # ... generate review with security context
+
+bus.subscribe(&quot;pr_opened&quot;, on_pr_opened)
+bus.subscribe(&quot;security_scan_complete&quot;, on_security_complete)
+```
+
+## Pattern 5: Consensus Validation
+
+Multiple agents independently evaluate the same input. A quorum determines the final output.
+
+```python
+@dataclass
+class Vote:
+    agent: str
+    verdict: str  # &quot;approve&quot; | &quot;reject&quot; | &quot;revise&quot;
+    confidence: float  # 0.0 - 1.0
+    reasoning: str
+
+async def consensus_validate(
+    content: str,
+    validators: list[dict],  # [{&quot;name&quot;: &quot;...&quot;, &quot;system&quot;: &quot;...&quot;}]
+    quorum: float = 0.66,
+    confidence_threshold: float = 0.7,
+) -&gt; dict:
+    &quot;&quot;&quot;Run content through multiple validators and determine consensus.&quot;&quot;&quot;
+    votes: list[Vote] = []
+
+    # Collect independent votes (no agent sees another&#x27;s vote)
+    vote_tasks = []
+    for v in validators:
+        vote_tasks.append(get_agent_vote(v[&quot;name&quot;], v[&quot;system&quot;], content))
+    raw_votes = await asyncio.gather(*vote_tasks)
+    votes = [v for v in raw_votes if v is not None]
+
+    # Calculate consensus
+    approvals = [v for v in votes if v.verdict == &quot;approve&quot;]
+    approval_rate = len(approvals) / len(votes) if votes else 0
+    avg_confidence = sum(v.confidence for v in votes) / len(votes) if votes else 0
+
+    if approval_rate &gt;= quorum and avg_confidence &gt;= confidence_threshold:
+        return {&quot;decision&quot;: &quot;approved&quot;, &quot;approval_rate&quot;: approval_rate, &quot;votes&quot;: votes}
+    elif any(v.verdict == &quot;reject&quot; for v in votes):
+        rejections = [v for v in votes if v.verdict == &quot;reject&quot;]
+        return {&quot;decision&quot;: &quot;rejected&quot;, &quot;reasons&quot;: [r.reasoning for r in rejections], &quot;votes&quot;: votes}
+    else:
+        return {&quot;decision&quot;: &quot;needs_revision&quot;, &quot;feedback&quot;: [v.reasoning for v in votes], &quot;votes&quot;: votes}
+```
+
+## Agent Routing Strategies
+
+### Intent-Based Router
+
+```python
+class IntentRouter:
+    &quot;&quot;&quot;Route requests to specialized agents based on intent classification.&quot;&quot;&quot;
+
+    ROUTING_TABLE = {
+        &quot;code_generation&quot;: {&quot;agent&quot;: &quot;coder&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;code_review&quot;: {&quot;agent&quot;: &quot;reviewer&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;research&quot;: {&quot;agent&quot;: &quot;researcher&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;simple_question&quot;: {&quot;agent&quot;: &quot;assistant&quot;, &quot;model&quot;: &quot;claude-haiku-4-20250514&quot;},
+        &quot;creative_writing&quot;: {&quot;agent&quot;: &quot;writer&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;complex_analysis&quot;: {&quot;agent&quot;: &quot;analyst&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+    }
+
+    async def route(self, message: str) -&gt; dict:
+        # Use a fast, cheap model for classification
+        classification = await self.client.messages.create(
+            model=&quot;claude-haiku-4-20250514&quot;,
+            max_tokens=50,
+            system=&quot;Classify the user intent. Respond with ONLY one of: code_generation, code_review, research, simple_question, creative_writing, complex_analysis&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: message}],
+        )
+        intent = classification.content[0].text.strip().lower()
+        return self.ROUTING_TABLE.get(intent, self.ROUTING_TABLE[&quot;simple_question&quot;])
+```
+
+## Context Window Budgeting
+
+```python
+MODEL_LIMITS = {
+    &quot;claude-sonnet-4-20250514&quot;: 200_000,
+    &quot;claude-haiku-4-20250514&quot;: 200_000,
+    &quot;claude-opus-4-20250514&quot;: 200_000,
+    &quot;gpt-4o&quot;: 128_000,
+}
+
+class ContextBudget:
+    def __init__(self, model: str, pipeline_stages: int, reserve_pct: float = 0.15):
+        self.total = MODEL_LIMITS.get(model, 128_000)
+        self.reserve = int(self.total * reserve_pct)
+        self.per_stage = (self.total - self.reserve) // pipeline_stages
+        self.used = 0
+
+    def allocate(self, stage: str) -&gt; int:
+        available = self.total - self.reserve - self.used
+        allocation = min(self.per_stage, int(available * 0.6))
+        return max(allocation, 1000)  # minimum 1000 tokens per stage
+
+    def consume(self, tokens: int):
+        self.used += tokens
+
+    def summarize_if_needed(self, text: str, budget: int) -&gt; str:
+        estimated_tokens = len(text) // 4
+        if estimated_tokens &lt;= budget:
+            return text
+        # Truncate to budget with marker
+        char_limit = budget * 4
+        return text[:char_limit] + &quot;\n\n[Content truncated to fit context budget]&quot;
+```
+
+## Cost Optimization Matrix
+
+| Strategy | Cost Reduction | Quality Impact | When to Use |
+|----------|---------------|----------------|-------------|
+| Haiku for routing/classification | 85-90% | Minimal | Always for intent routing |
+| Haiku for editing/formatting | 60-70% | Low | Mechanical tasks |
+| Sonnet for most stages | Baseline | Baseline | Default choice |
+| Opus only for final synthesis | +50% on that stage | Higher quality | High-stakes output |
+| Prompt caching (system prompts) | 50-90% per call | None | Repeated system prompts |
+| Truncate intermediate outputs | 20-40% | May lose detail | Long pipelines |
+| Parallel + early termination | 30-50% | None if threshold met | Search/validation tasks |
+| Batch similar requests | Up to 50% | Increased latency | Non-real-time workloads |
+
+## Reliability Patterns
+
+### Circuit Breaker
+
+```python
+import time
+
+class CircuitBreaker:
+    &quot;&quot;&quot;Prevent cascading failures when an agent/model is down.&quot;&quot;&quot;
+
+    def __init__(self, failure_threshold: int = 5, recovery_time: float = 60.0):
+        self.failure_threshold = failure_threshold
+        self.recovery_time = recovery_time
+        self.failures = 0
+        self.state = &quot;closed&quot;  # closed = healthy, open = failing, half-open = testing
+        self.last_failure_time = 0.0
+
+    def can_execute(self) -&gt; bool:
+        if self.state == &quot;closed&quot;:
+            return True
+        if self.state == &quot;open&quot;:
+            if time.time() - self.last_failure_time &gt; self.recovery_time:
+                self.state = &quot;half-open&quot;
+                return True
+            return False
+        return True  # half-open: allow one test request
+
+    def record_success(self):
+        self.failures = 0
+        self.state = &quot;closed&quot;
+
+    def record_failure(self):
+        self.failures += 1
+        self.last_failure_time = time.time()
+        if self.failures &gt;= self.failure_threshold:
+            self.state = &quot;open&quot;
+```
+
+## Common Pitfalls
+
+- **Over-orchestration** — if a single prompt can handle it, adding agents adds cost and latency, not value
+- **Circular dependencies** in subtask graphs causing infinite loops; always validate DAG structure before execution
+- **Context bleed** — passing entire previous outputs to every stage; summarize or extract only what is needed
+- **No timeout enforcement** — a stuck agent blocks the entire pipeline; set wall-clock timeouts at every boundary
+- **Silent failures** — agent returns plausible but incorrect output; add validation stages for critical paths
+- **Ignoring cost** — 10 parallel Opus calls is expensive; model selection is a cost decision, not just a quality one
+- **Stateless retries** on stateful operations — ensure idempotency before enabling automatic retries
+- **Single point of failure** in orchestrator — if the orchestrator agent fails, the entire workflow fails
+
+## Best Practices
+
+1. **Start with a single prompt** — only add agents when you prove one cannot handle the task
+2. **Type your handoffs** — use dataclasses or TypedDicts for inter-agent data, not raw strings
+3. **Budget context upfront** — calculate token allocations before running the pipeline
+4. **Use cheap models for routing** — Haiku for classification costs 10x less than Sonnet
+5. **Validate DAG structure** at build time, not runtime
+6. **Log every agent call** with input hash, output hash, tokens, latency, and cost
+7. **Set SLAs per stage** — if research takes &gt;30s, timeout and use cached results
+8. **Test with production-scale inputs** — a pipeline that works on 100 words may fail on 10,000
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline hangs indefinitely | Missing timeout enforcement on one or more agent stages | Add `asyncio.wait_for()` with explicit `timeout_seconds` at every agent boundary; use the Circuit Breaker pattern to fail fast |
+| Circular dependency error at runtime | Subtask graph contains a cycle (e.g., task A depends on B which depends on A) | Validate DAG structure at build time with topological sort; the `_batch_by_dependencies` method catches this but validation should happen earlier |
+| Context window exceeded mid-pipeline | Intermediate outputs grow beyond the model&#x27;s token limit | Use the `ContextBudget` class to allocate tokens per stage; summarize or truncate outputs before passing to the next stage |
+| Fan-out tasks return inconsistent formats | Each parallel agent interprets the output schema differently | Define a shared `TypedDict` or `dataclass` for all fan-out results; add a validation step before the merge function |
+| Orchestrator plan creates too many subtasks | The planning prompt does not constrain subtask count, leading to over-decomposition | Add explicit constraints in the planner system prompt (e.g., &quot;maximum 5 subtasks&quot;); review and approve plans before execution in high-stakes workflows |
+| Consensus never reaches quorum | Validators disagree consistently or confidence scores are too low | Lower the `quorum` threshold, add a tiebreaker agent, or revise validator prompts to align on evaluation criteria |
+| Cost spikes on parallel workflows | Expensive models (Opus) used for all fan-out branches instead of routing by complexity | Apply cost-aware routing: use Haiku for classification and simple tasks, Sonnet for most work, Opus only for final synthesis or high-stakes decisions |
+
+## Success Criteria
+
+- Pipeline end-to-end latency stays within the defined SLA (e.g., under 60 seconds for a 5-stage workflow) with no stage exceeding its individual timeout
+- Agent routing accuracy exceeds 90% when measured against a labeled test set of at least 100 representative requests
+- Fan-out/fan-in workflows complete with fewer than 5% task failures across all parallel branches under normal operating conditions
+- Total token cost per workflow run decreases by at least 40% after applying model tiering (Haiku for routing, Sonnet for core work, Opus for synthesis)
+- Circuit breakers trigger correctly within 5 consecutive failures and recover automatically after the defined recovery window
+- Context window utilization stays below 85% of model limits at every pipeline stage, with no truncation-related quality degradation
+- All inter-agent handoffs pass schema validation with zero type errors across 100 consecutive workflow executions
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Design and implementation of five core multi-agent orchestration patterns (sequential, parallel, hierarchical, event-driven, consensus)
+- Agent routing strategies including intent-based, skill-based, and cost-aware routing
+- Reliability engineering patterns: circuit breakers, retries, timeouts, and dead letter queues
+- Context window budgeting, cost optimization, and framework-specific implementations (LangGraph, CrewAI, AutoGen)
+
+**This skill does NOT cover:**
+- Training or fine-tuning the underlying LLMs used by agents (see `engineering/ml-pipeline-architect` for ML training workflows)
+- Infrastructure provisioning, container orchestration, or deployment pipelines (see `engineering/cloud-infrastructure-designer` for cloud architecture)
+- Human-in-the-loop approval workflows or UI design for agent dashboards (see `product-team/ux-researcher` for user-facing workflow design)
+- Long-term agent memory, vector database setup, or RAG pipeline construction (see `engineering/rag-pipeline-architect` for retrieval-augmented generation)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ml-pipeline-architect` | Agent workflows that include ML inference stages use ML Pipeline Architect for model serving and batch prediction design | Workflow DAG exports stage specs to ML pipeline; ML pipeline returns inference endpoints for agent consumption |
+| `engineering/rag-pipeline-architect` | Research and retrieval agents within workflows rely on RAG pipelines for grounded knowledge access | Agent sends queries to RAG pipeline; RAG returns ranked document chunks with citations for agent context |
+| `engineering/cloud-infrastructure-designer` | Production deployment of agent workflows requires infrastructure design for scaling, queuing, and monitoring | Workflow resource requirements feed into infrastructure specs; infra returns endpoint URLs, queue ARNs, and scaling policies |
+| `engineering/api-design-architect` | Inter-agent communication contracts and external API boundaries follow API design standards | Agent handoff schemas are validated against API design specs; API architect provides OpenAPI definitions for external integrations |
+| `engineering/system-design-architect` | Overall system architecture decisions (sync vs async, monolith vs distributed) shape workflow topology choices | System design constraints (latency budgets, availability targets) inform pattern selection; workflow requirements feed back into system capacity planning |
+| `project-management/technical-project-planning` | Complex multi-agent projects require structured planning for phased rollout, risk management, and milestone tracking | Workflow complexity estimates feed into project plans; PM skill provides sprint boundaries and dependency timelines for staged deployment |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agent Workflow Designer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agent Workflow Designer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agent Workflow Designer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agent Workflow Designer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agent Workflow Designer&quot;
+4. Description: &quot;Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple speci...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agent-workflow-designer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Agent Workflow Designer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Agent Workflow Designer
+
+The agent designs multi-agent orchestration systems using five core patterns: sequential pipeline, parallel fan-out/fan-in, hierarchical delegation, event-driven reactor, and consensus validation. It implements agent routing strategies, circuit breaker reliability patterns, context window budgeting, and cost optimization across LangGraph, CrewAI, AutoGen, and Claude Code agent teams.
+
+## Core Capabilities
+
+### 1. Pattern Selection and Design
+- Sequential pipelines with typed handoffs
+- Parallel fan-out/fan-in with merge strategies
+- Hierarchical delegation with dynamic subtask discovery
+- Event-driven reactors with pub/sub agent triggers
+- Consensus validation with voting and arbitration
+
+### 2. Agent Routing
+- Intent-based routing with classifier agents
+- Skill-based routing using capability matching
+- Cost-aware routing (cheap models for simple tasks)
+- Load-balanced routing across agent pools
+- Fallback chains with graceful degradation
+
+### 3. State and Context Management
+- Persistent workflow state across agent hops
+- Context window budgeting and summarization
+- Checkpoint/resume for long-running workflows
+- Conflict resolution for parallel state updates
+
+### 4. Reliability Engineering
+- Circuit breakers for failing agents
+- Retry with exponential backoff and model fallback
+- Dead letter queues for unprocessable tasks
+- Timeout enforcement at every agent boundary
+- Idempotent operations for safe retries
+
+## When to Use
+
+- Building multi-step AI pipelines that exceed one agent&#x27;s capability
+- Parallelizing research, analysis, or generation tasks
+- Creating specialist agent teams with defined roles and contracts
+- Designing fault-tolerant AI workflows for production deployment
+- Optimizing cost across workflows with mixed model tiers
+
+## Pattern Selection Decision Tree
+
+```
+What does the workflow look like?
+│
+├─ Linear: step A feeds step B feeds step C
+│  └─ SEQUENTIAL PIPELINE
+│     Best for: content pipelines, code review chains, data transformation
+│
+├─ Parallel: N independent tasks, then combine
+│  └─ FAN-OUT / FAN-IN
+│     Best for: competitive research, multi-source analysis, parallel code gen
+│
+├─ Tree: orchestrator breaks work into subtasks dynamically
+│  └─ HIERARCHICAL DELEGATION
+│     Best for: complex projects, open-ended research, code generation with planning
+│
+├─ Reactive: agents respond to events/triggers
+│  └─ EVENT-DRIVEN REACTOR
+│     Best for: monitoring, alerting, continuous integration, chat workflows
+│
+└─ Verification: multiple agents must agree on output
+   └─ CONSENSUS VALIDATION
+      Best for: high-stakes decisions, code review, fact checking, safety-critical output
+```
+
+## Pattern 1: Sequential Pipeline
+
+Each stage transforms input and passes structured output to the next. Type-safe handoffs prevent data loss between stages.
+
+### LangGraph Implementation
+
+```python
+from langgraph.graph import StateGraph, END
+from typing import TypedDict, Annotated
+from langchain_anthropic import ChatAnthropic
+
+class PipelineState(TypedDict):
+    topic: str
+    research: str
+    draft: str
+    final: str
+    stage_costs: Annotated[list[dict], &quot;append&quot;]  # accumulates cost per stage
+
+def research_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-sonnet-4-20250514&quot;, max_tokens=2048)
+    result = model.invoke(
+        f&quot;Research the following topic thoroughly. Provide key facts, statistics, &quot;
+        f&quot;and expert perspectives:\n\n{state[&#x27;topic&#x27;]}&quot;
+    )
+    return {
+        &quot;research&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;research&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+def writing_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-sonnet-4-20250514&quot;, max_tokens=4096)
+    result = model.invoke(
+        f&quot;Using this research, write a compelling 800-word blog post with a hook, &quot;
+        f&quot;3 main sections, and a CTA:\n\n{state[&#x27;research&#x27;]}&quot;
+    )
+    return {
+        &quot;draft&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;writing&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+def editing_stage(state: PipelineState) -&gt; dict:
+    model = ChatAnthropic(model=&quot;claude-haiku-4-20250514&quot;, max_tokens=4096)
+    result = model.invoke(
+        f&quot;Edit this draft for clarity, flow, and grammar. Return only the improved &quot;
+        f&quot;version:\n\n{state[&#x27;draft&#x27;]}&quot;
+    )
+    return {
+        &quot;final&quot;: result.content,
+        &quot;stage_costs&quot;: [{&quot;stage&quot;: &quot;editing&quot;, &quot;tokens&quot;: result.usage_metadata[&quot;total_tokens&quot;]}],
+    }
+
+# Build the graph
+graph = StateGraph(PipelineState)
+graph.add_node(&quot;research&quot;, research_stage)
+graph.add_node(&quot;write&quot;, writing_stage)
+graph.add_node(&quot;edit&quot;, editing_stage)
+graph.add_edge(&quot;research&quot;, &quot;write&quot;)
+graph.add_edge(&quot;write&quot;, &quot;edit&quot;)
+graph.add_edge(&quot;edit&quot;, END)
+graph.set_entry_point(&quot;research&quot;)
+
+pipeline = graph.compile()
+
+# Execute
+result = pipeline.invoke({&quot;topic&quot;: &quot;The future of AI agents in enterprise software&quot;})
+print(f&quot;Total cost: {sum(s[&#x27;tokens&#x27;] for s in result[&#x27;stage_costs&#x27;])} tokens&quot;)
+```
+
+## Pattern 2: Parallel Fan-Out / Fan-In
+
+Independent tasks run concurrently. A merge function combines results.
+
+```python
+import asyncio
+from dataclasses import dataclass
+
+@dataclass
+class FanOutTask:
+    name: str
+    system_prompt: str
+    user_message: str
+    model: str = &quot;claude-sonnet-4-20250514&quot;
+
+@dataclass
+class FanOutResult:
+    task_name: str
+    output: str
+    tokens_used: int
+    success: bool
+    error: str | None = None
+
+async def fan_out_fan_in(
+    tasks: list[FanOutTask],
+    merge_prompt: str,
+    max_concurrent: int = 5,
+    timeout_seconds: float = 60.0,
+) -&gt; dict:
+    &quot;&quot;&quot;Execute tasks in parallel with concurrency limit and timeout.&quot;&quot;&quot;
+    import anthropic
+
+    client = anthropic.AsyncAnthropic()
+    semaphore = asyncio.Semaphore(max_concurrent)
+
+    async def run_one(task: FanOutTask) -&gt; FanOutResult:
+        async with semaphore:
+            try:
+                response = await asyncio.wait_for(
+                    client.messages.create(
+                        model=task.model,
+                        max_tokens=2048,
+                        system=task.system_prompt,
+                        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: task.user_message}],
+                    ),
+                    timeout=timeout_seconds,
+                )
+                return FanOutResult(
+                    task_name=task.name,
+                    output=response.content[0].text,
+                    tokens_used=response.usage.input_tokens + response.usage.output_tokens,
+                    success=True,
+                )
+            except Exception as e:
+                return FanOutResult(
+                    task_name=task.name, output=&quot;&quot;, tokens_used=0,
+                    success=False, error=str(e),
+                )
+
+    # FAN-OUT: run all tasks concurrently
+    results = await asyncio.gather(*[run_one(t) for t in tasks])
+    successful = [r for r in results if r.success]
+    failed = [r for r in results if not r.success]
+
+    if not successful:
+        raise RuntimeError(f&quot;All {len(tasks)} fan-out tasks failed: {[f.error for f in failed]}&quot;)
+
+    # FAN-IN: merge results
+    combined = &quot;\n\n---\n\n&quot;.join(
+        f&quot;## {r.task_name}\n{r.output}&quot; for r in successful
+    )
+
+    merge_response = await client.messages.create(
+        model=&quot;claude-sonnet-4-20250514&quot;,
+        max_tokens=4096,
+        system=&quot;Synthesize the following parallel analyses into a unified report.&quot;,
+        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;{merge_prompt}\n\n{combined}&quot;}],
+    )
+
+    return {
+        &quot;synthesis&quot;: merge_response.content[0].text,
+        &quot;individual_results&quot;: successful,
+        &quot;failures&quot;: failed,
+        &quot;total_tokens&quot;: sum(r.tokens_used for r in results) + merge_response.usage.input_tokens + merge_response.usage.output_tokens,
+    }
+```
+
+## Pattern 3: Hierarchical Delegation
+
+An orchestrator agent dynamically decomposes work and delegates to specialists.
+
+```python
+from typing import Literal
+
+SPECIALISTS = {
+    &quot;researcher&quot;: &quot;Find accurate information with sources. Be thorough and cite evidence.&quot;,
+    &quot;coder&quot;: &quot;Write clean, tested code. Include error handling and type hints.&quot;,
+    &quot;writer&quot;: &quot;Create clear, engaging content. Match the requested tone and format.&quot;,
+    &quot;analyst&quot;: &quot;Analyze data and produce evidence-backed conclusions with visualizations.&quot;,
+    &quot;reviewer&quot;: &quot;Review work product for quality, accuracy, and completeness.&quot;,
+}
+
+@dataclass
+class SubTask:
+    id: str
+    agent: Literal[&quot;researcher&quot;, &quot;coder&quot;, &quot;writer&quot;, &quot;analyst&quot;, &quot;reviewer&quot;]
+    task: str
+    depends_on: list[str]
+    priority: int = 0  # higher = run first when deps are equal
+
+class HierarchicalOrchestrator:
+    def __init__(self, client):
+        self.client = client
+
+    async def plan(self, request: str) -&gt; list[SubTask]:
+        &quot;&quot;&quot;Orchestrator creates an execution plan with dependencies.&quot;&quot;&quot;
+        response = await self.client.messages.create(
+            model=&quot;claude-sonnet-4-20250514&quot;,
+            max_tokens=2048,
+            system=f&quot;&quot;&quot;You are a task orchestrator. Break down the request into subtasks.
+Available specialists: {&#x27;, &#x27;.join(SPECIALISTS.keys())}
+Respond with JSON: {{&quot;subtasks&quot;: [{{&quot;id&quot;: &quot;1&quot;, &quot;agent&quot;: &quot;researcher&quot;, &quot;task&quot;: &quot;...&quot;, &quot;depends_on&quot;: []}}]}}
+Rules:
+- Minimize the number of subtasks (prefer fewer, more substantial tasks)
+- Only add dependencies when output is genuinely needed
+- Independent tasks should have empty depends_on for parallel execution&quot;&quot;&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: request}],
+        )
+        import json
+        plan = json.loads(response.content[0].text)
+        return [SubTask(**st) for st in plan[&quot;subtasks&quot;]]
+
+    async def execute(self, request: str) -&gt; str:
+        &quot;&quot;&quot;Plan, execute with dependency resolution, and synthesize.&quot;&quot;&quot;
+        subtasks = await self.plan(request)
+        results = {}
+
+        # Execute in dependency order, parallelize where possible
+        for batch in self._batch_by_dependencies(subtasks):
+            batch_results = await asyncio.gather(*[
+                self._run_specialist(st, results) for st in batch
+            ])
+            for st, result in zip(batch, batch_results):
+                results[st.id] = result
+
+        # Final synthesis
+        all_outputs = &quot;\n\n&quot;.join(f&quot;### {k}\n{v}&quot; for k, v in results.items())
+        synthesis = await self.client.messages.create(
+            model=&quot;claude-sonnet-4-20250514&quot;,
+            max_tokens=4096,
+            system=&quot;Synthesize specialist outputs into a coherent final response.&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;Request: {request}\n\nOutputs:\n{all_outputs}&quot;}],
+        )
+        return synthesis.content[0].text
+
+    def _batch_by_dependencies(self, subtasks: list[SubTask]) -&gt; list[list[SubTask]]:
+        &quot;&quot;&quot;Group subtasks into batches that can run in parallel.&quot;&quot;&quot;
+        completed = set()
+        remaining = list(subtasks)
+        batches = []
+        while remaining:
+            batch = [t for t in remaining if all(d in completed for d in t.depends_on)]
+            if not batch:
+                raise ValueError(&quot;Circular dependency detected in subtask plan&quot;)
+            batches.append(sorted(batch, key=lambda t: -t.priority))
+            completed.update(t.id for t in batch)
+            remaining = [t for t in remaining if t.id not in completed]
+        return batches
+```
+
+## Pattern 4: Event-Driven Reactor
+
+Agents react to events from a message bus. Decoupled and scalable.
+
+```python
+from collections import defaultdict
+from typing import Callable, Any
+
+class AgentEventBus:
+    &quot;&quot;&quot;Simple event bus for agent-to-agent communication.&quot;&quot;&quot;
+
+    def __init__(self):
+        self._handlers: dict[str, list[Callable]] = defaultdict(list)
+        self._history: list[dict] = []
+
+    def subscribe(self, event_type: str, handler: Callable):
+        self._handlers[event_type].append(handler)
+
+    async def publish(self, event_type: str, payload: Any, source: str):
+        event = {&quot;type&quot;: event_type, &quot;payload&quot;: payload, &quot;source&quot;: source}
+        self._history.append(event)
+        handlers = self._handlers.get(event_type, [])
+        results = await asyncio.gather(
+            *[h(event) for h in handlers],
+            return_exceptions=True,
+        )
+        errors = [(h, r) for h, r in zip(handlers, results) if isinstance(r, Exception)]
+        if errors:
+            for handler, error in errors:
+                print(f&quot;Handler {handler.__name__} failed: {error}&quot;)
+        return results
+
+# Usage: code review pipeline triggered by PR events
+bus = AgentEventBus()
+
+async def on_pr_opened(event):
+    &quot;&quot;&quot;Security agent scans PR for vulnerabilities.&quot;&quot;&quot;
+    diff = event[&quot;payload&quot;][&quot;diff&quot;]
+    # ... scan and publish results
+    await bus.publish(&quot;security_scan_complete&quot;, {&quot;findings&quot;: findings}, &quot;security-agent&quot;)
+
+async def on_security_complete(event):
+    &quot;&quot;&quot;Review agent incorporates security findings into review.&quot;&quot;&quot;
+    # ... generate review with security context
+
+bus.subscribe(&quot;pr_opened&quot;, on_pr_opened)
+bus.subscribe(&quot;security_scan_complete&quot;, on_security_complete)
+```
+
+## Pattern 5: Consensus Validation
+
+Multiple agents independently evaluate the same input. A quorum determines the final output.
+
+```python
+@dataclass
+class Vote:
+    agent: str
+    verdict: str  # &quot;approve&quot; | &quot;reject&quot; | &quot;revise&quot;
+    confidence: float  # 0.0 - 1.0
+    reasoning: str
+
+async def consensus_validate(
+    content: str,
+    validators: list[dict],  # [{&quot;name&quot;: &quot;...&quot;, &quot;system&quot;: &quot;...&quot;}]
+    quorum: float = 0.66,
+    confidence_threshold: float = 0.7,
+) -&gt; dict:
+    &quot;&quot;&quot;Run content through multiple validators and determine consensus.&quot;&quot;&quot;
+    votes: list[Vote] = []
+
+    # Collect independent votes (no agent sees another&#x27;s vote)
+    vote_tasks = []
+    for v in validators:
+        vote_tasks.append(get_agent_vote(v[&quot;name&quot;], v[&quot;system&quot;], content))
+    raw_votes = await asyncio.gather(*vote_tasks)
+    votes = [v for v in raw_votes if v is not None]
+
+    # Calculate consensus
+    approvals = [v for v in votes if v.verdict == &quot;approve&quot;]
+    approval_rate = len(approvals) / len(votes) if votes else 0
+    avg_confidence = sum(v.confidence for v in votes) / len(votes) if votes else 0
+
+    if approval_rate &gt;= quorum and avg_confidence &gt;= confidence_threshold:
+        return {&quot;decision&quot;: &quot;approved&quot;, &quot;approval_rate&quot;: approval_rate, &quot;votes&quot;: votes}
+    elif any(v.verdict == &quot;reject&quot; for v in votes):
+        rejections = [v for v in votes if v.verdict == &quot;reject&quot;]
+        return {&quot;decision&quot;: &quot;rejected&quot;, &quot;reasons&quot;: [r.reasoning for r in rejections], &quot;votes&quot;: votes}
+    else:
+        return {&quot;decision&quot;: &quot;needs_revision&quot;, &quot;feedback&quot;: [v.reasoning for v in votes], &quot;votes&quot;: votes}
+```
+
+## Agent Routing Strategies
+
+### Intent-Based Router
+
+```python
+class IntentRouter:
+    &quot;&quot;&quot;Route requests to specialized agents based on intent classification.&quot;&quot;&quot;
+
+    ROUTING_TABLE = {
+        &quot;code_generation&quot;: {&quot;agent&quot;: &quot;coder&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;code_review&quot;: {&quot;agent&quot;: &quot;reviewer&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;research&quot;: {&quot;agent&quot;: &quot;researcher&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;simple_question&quot;: {&quot;agent&quot;: &quot;assistant&quot;, &quot;model&quot;: &quot;claude-haiku-4-20250514&quot;},
+        &quot;creative_writing&quot;: {&quot;agent&quot;: &quot;writer&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+        &quot;complex_analysis&quot;: {&quot;agent&quot;: &quot;analyst&quot;, &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;},
+    }
+
+    async def route(self, message: str) -&gt; dict:
+        # Use a fast, cheap model for classification
+        classification = await self.client.messages.create(
+            model=&quot;claude-haiku-4-20250514&quot;,
+            max_tokens=50,
+            system=&quot;Classify the user intent. Respond with ONLY one of: code_generation, code_review, research, simple_question, creative_writing, complex_analysis&quot;,
+            messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: message}],
+        )
+        intent = classification.content[0].text.strip().lower()
+        return self.ROUTING_TABLE.get(intent, self.ROUTING_TABLE[&quot;simple_question&quot;])
+```
+
+## Context Window Budgeting
+
+```python
+MODEL_LIMITS = {
+    &quot;claude-sonnet-4-20250514&quot;: 200_000,
+    &quot;claude-haiku-4-20250514&quot;: 200_000,
+    &quot;claude-opus-4-20250514&quot;: 200_000,
+    &quot;gpt-4o&quot;: 128_000,
+}
+
+class ContextBudget:
+    def __init__(self, model: str, pipeline_stages: int, reserve_pct: float = 0.15):
+        self.total = MODEL_LIMITS.get(model, 128_000)
+        self.reserve = int(self.total * reserve_pct)
+        self.per_stage = (self.total - self.reserve) // pipeline_stages
+        self.used = 0
+
+    def allocate(self, stage: str) -&gt; int:
+        available = self.total - self.reserve - self.used
+        allocation = min(self.per_stage, int(available * 0.6))
+        return max(allocation, 1000)  # minimum 1000 tokens per stage
+
+    def consume(self, tokens: int):
+        self.used += tokens
+
+    def summarize_if_needed(self, text: str, budget: int) -&gt; str:
+        estimated_tokens = len(text) // 4
+        if estimated_tokens &lt;= budget:
+            return text
+        # Truncate to budget with marker
+        char_limit = budget * 4
+        return text[:char_limit] + &quot;\n\n[Content truncated to fit context budget]&quot;
+```
+
+## Cost Optimization Matrix
+
+| Strategy | Cost Reduction | Quality Impact | When to Use |
+|----------|---------------|----------------|-------------|
+| Haiku for routing/classification | 85-90% | Minimal | Always for intent routing |
+| Haiku for editing/formatting | 60-70% | Low | Mechanical tasks |
+| Sonnet for most stages | Baseline | Baseline | Default choice |
+| Opus only for final synthesis | +50% on that stage | Higher quality | High-stakes output |
+| Prompt caching (system prompts) | 50-90% per call | None | Repeated system prompts |
+| Truncate intermediate outputs | 20-40% | May lose detail | Long pipelines |
+| Parallel + early termination | 30-50% | None if threshold met | Search/validation tasks |
+| Batch similar requests | Up to 50% | Increased latency | Non-real-time workloads |
+
+## Reliability Patterns
+
+### Circuit Breaker
+
+```python
+import time
+
+class CircuitBreaker:
+    &quot;&quot;&quot;Prevent cascading failures when an agent/model is down.&quot;&quot;&quot;
+
+    def __init__(self, failure_threshold: int = 5, recovery_time: float = 60.0):
+        self.failure_threshold = failure_threshold
+        self.recovery_time = recovery_time
+        self.failures = 0
+        self.state = &quot;closed&quot;  # closed = healthy, open = failing, half-open = testing
+        self.last_failure_time = 0.0
+
+    def can_execute(self) -&gt; bool:
+        if self.state == &quot;closed&quot;:
+            return True
+        if self.state == &quot;open&quot;:
+            if time.time() - self.last_failure_time &gt; self.recovery_time:
+                self.state = &quot;half-open&quot;
+                return True
+            return False
+        return True  # half-open: allow one test request
+
+    def record_success(self):
+        self.failures = 0
+        self.state = &quot;closed&quot;
+
+    def record_failure(self):
+        self.failures += 1
+        self.last_failure_time = time.time()
+        if self.failures &gt;= self.failure_threshold:
+            self.state = &quot;open&quot;
+```
+
+## Common Pitfalls
+
+- **Over-orchestration** — if a single prompt can handle it, adding agents adds cost and latency, not value
+- **Circular dependencies** in subtask graphs causing infinite loops; always validate DAG structure before execution
+- **Context bleed** — passing entire previous outputs to every stage; summarize or extract only what is needed
+- **No timeout enforcement** — a stuck agent blocks the entire pipeline; set wall-clock timeouts at every boundary
+- **Silent failures** — agent returns plausible but incorrect output; add validation stages for critical paths
+- **Ignoring cost** — 10 parallel Opus calls is expensive; model selection is a cost decision, not just a quality one
+- **Stateless retries** on stateful operations — ensure idempotency before enabling automatic retries
+- **Single point of failure** in orchestrator — if the orchestrator agent fails, the entire workflow fails
+
+## Best Practices
+
+1. **Start with a single prompt** — only add agents when you prove one cannot handle the task
+2. **Type your handoffs** — use dataclasses or TypedDicts for inter-agent data, not raw strings
+3. **Budget context upfront** — calculate token allocations before running the pipeline
+4. **Use cheap models for routing** — Haiku for classification costs 10x less than Sonnet
+5. **Validate DAG structure** at build time, not runtime
+6. **Log every agent call** with input hash, output hash, tokens, latency, and cost
+7. **Set SLAs per stage** — if research takes &gt;30s, timeout and use cached results
+8. **Test with production-scale inputs** — a pipeline that works on 100 words may fail on 10,000
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Pipeline hangs indefinitely | Missing timeout enforcement on one or more agent stages | Add `asyncio.wait_for()` with explicit `timeout_seconds` at every agent boundary; use the Circuit Breaker pattern to fail fast |
+| Circular dependency error at runtime | Subtask graph contains a cycle (e.g., task A depends on B which depends on A) | Validate DAG structure at build time with topological sort; the `_batch_by_dependencies` method catches this but validation should happen earlier |
+| Context window exceeded mid-pipeline | Intermediate outputs grow beyond the model&#x27;s token limit | Use the `ContextBudget` class to allocate tokens per stage; summarize or truncate outputs before passing to the next stage |
+| Fan-out tasks return inconsistent formats | Each parallel agent interprets the output schema differently | Define a shared `TypedDict` or `dataclass` for all fan-out results; add a validation step before the merge function |
+| Orchestrator plan creates too many subtasks | The planning prompt does not constrain subtask count, leading to over-decomposition | Add explicit constraints in the planner system prompt (e.g., &quot;maximum 5 subtasks&quot;); review and approve plans before execution in high-stakes workflows |
+| Consensus never reaches quorum | Validators disagree consistently or confidence scores are too low | Lower the `quorum` threshold, add a tiebreaker agent, or revise validator prompts to align on evaluation criteria |
+| Cost spikes on parallel workflows | Expensive models (Opus) used for all fan-out branches instead of routing by complexity | Apply cost-aware routing: use Haiku for classification and simple tasks, Sonnet for most work, Opus only for final synthesis or high-stakes decisions |
+
+## Success Criteria
+
+- Pipeline end-to-end latency stays within the defined SLA (e.g., under 60 seconds for a 5-stage workflow) with no stage exceeding its individual timeout
+- Agent routing accuracy exceeds 90% when measured against a labeled test set of at least 100 representative requests
+- Fan-out/fan-in workflows complete with fewer than 5% task failures across all parallel branches under normal operating conditions
+- Total token cost per workflow run decreases by at least 40% after applying model tiering (Haiku for routing, Sonnet for core work, Opus for synthesis)
+- Circuit breakers trigger correctly within 5 consecutive failures and recover automatically after the defined recovery window
+- Context window utilization stays below 85% of model limits at every pipeline stage, with no truncation-related quality degradation
+- All inter-agent handoffs pass schema validation with zero type errors across 100 consecutive workflow executions
+
+## Scope &amp; Limitations
+
+**This skill covers:**
+- Design and implementation of five core multi-agent orchestration patterns (sequential, parallel, hierarchical, event-driven, consensus)
+- Agent routing strategies including intent-based, skill-based, and cost-aware routing
+- Reliability engineering patterns: circuit breakers, retries, timeouts, and dead letter queues
+- Context window budgeting, cost optimization, and framework-specific implementations (LangGraph, CrewAI, AutoGen)
+
+**This skill does NOT cover:**
+- Training or fine-tuning the underlying LLMs used by agents (see `engineering/ml-pipeline-architect` for ML training workflows)
+- Infrastructure provisioning, container orchestration, or deployment pipelines (see `engineering/cloud-infrastructure-designer` for cloud architecture)
+- Human-in-the-loop approval workflows or UI design for agent dashboards (see `product-team/ux-researcher` for user-facing workflow design)
+- Long-term agent memory, vector database setup, or RAG pipeline construction (see `engineering/rag-pipeline-architect` for retrieval-augmented generation)
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `engineering/ml-pipeline-architect` | Agent workflows that include ML inference stages use ML Pipeline Architect for model serving and batch prediction design | Workflow DAG exports stage specs to ML pipeline; ML pipeline returns inference endpoints for agent consumption |
+| `engineering/rag-pipeline-architect` | Research and retrieval agents within workflows rely on RAG pipelines for grounded knowledge access | Agent sends queries to RAG pipeline; RAG returns ranked document chunks with citations for agent context |
+| `engineering/cloud-infrastructure-designer` | Production deployment of agent workflows requires infrastructure design for scaling, queuing, and monitoring | Workflow resource requirements feed into infrastructure specs; infra returns endpoint URLs, queue ARNs, and scaling policies |
+| `engineering/api-design-architect` | Inter-agent communication contracts and external API boundaries follow API design standards | Agent handoff schemas are validated against API design specs; API architect provides OpenAPI definitions for external integrations |
+| `engineering/system-design-architect` | Overall system architecture decisions (sync vs async, monolith vs distributed) shape workflow topology choices | System design constraints (latency budgets, availability targets) inform pattern selection; workflow requirements feed back into system capacity planning |
+| `project-management/technical-project-planning` | Complex multi-agent projects require structured planning for phased rollout, risk management, and milestone tracking | Workflow complexity estimates feed into project plans; PM skill provides sprint boundaries and dependency timelines for staged deployment |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Agent Workflow Designer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Agent Workflow Designer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Agent Workflow Designer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Agent Workflow Designer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Agent Workflow Designer&quot;
+4. Description: &quot;Design and implement multi-agent orchestration systems with workflow DAGs, agent routing, handoff protocols, state management, and cost optimization. Use when building AI pipelines with multiple speci...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/agent-workflow-designer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

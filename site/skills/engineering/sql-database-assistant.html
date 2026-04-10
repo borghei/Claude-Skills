@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Sql Database Assistant (Engineering domain).
 
 Tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. Helps teams write efficient queries and manage database evolution safely.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/sql-database-assistant
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Sql Database Assistant (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Sql Database Assistant (Engineering domain).
 
 Tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. Helps teams write efficient queries and manage database evolution safely.
 
@@ -425,7 +447,358 @@ https://github.com/borghei/Claude-Skills/tree/main/sql-database-assistant
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Sql Database Assistant&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# SQL Database Assistant
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Database Development &amp; Optimization
+
+## Overview
+
+The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
+
+## Quick Start
+
+```bash
+# Analyze a SQL query for performance issues
+python scripts/query_optimizer.py --file slow_query.sql
+
+# Analyze inline SQL
+python scripts/query_optimizer.py --query &quot;SELECT * FROM users WHERE name LIKE &#x27;%john%&#x27;&quot;
+
+# Explore schema from DDL file
+python scripts/schema_explorer.py --file schema.sql
+
+# Generate migration from schema diff
+python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
+
+# JSON output
+python scripts/query_optimizer.py --file query.sql --format json
+```
+
+## Tools Overview
+
+### query_optimizer.py
+
+Analyzes SQL queries for performance issues and optimization opportunities.
+
+| Feature | Description |
+|---------|-------------|
+| SELECT * detection | Flags queries selecting all columns |
+| Missing index hints | Identifies WHERE/JOIN columns likely needing indexes |
+| N+1 detection | Flags correlated subquery patterns |
+| Full table scan | Detects queries without WHERE clauses on large tables |
+| JOIN analysis | Checks join conditions and types |
+| LIKE optimization | Flags leading wildcard LIKE patterns |
+
+### schema_explorer.py
+
+Generates documentation from SQL DDL (CREATE TABLE) files.
+
+| Feature | Description |
+|---------|-------------|
+| Table catalog | Lists all tables with column counts |
+| Column details | Documents types, nullability, defaults |
+| Index listing | Catalogs indexes and their columns |
+| Relationship mapping | Identifies foreign key relationships |
+| Markdown output | Generates schema documentation |
+
+### migration_generator.py
+
+Generates migration SQL by comparing two schema DDL files.
+
+| Feature | Description |
+|---------|-------------|
+| Column additions | ALTER TABLE ADD COLUMN for new columns |
+| Column removals | ALTER TABLE DROP COLUMN for removed columns |
+| Type changes | ALTER TABLE ALTER COLUMN for type modifications |
+| New tables | CREATE TABLE for entirely new tables |
+| Dropped tables | DROP TABLE for removed tables |
+| Index changes | CREATE/DROP INDEX for index differences |
+
+## Workflows
+
+### Query Optimization Workflow
+
+1. **Identify slow queries** - Collect queries from slow query log
+2. **Analyze** - Run query_optimizer.py on each query
+3. **Review findings** - Prioritize by estimated impact
+4. **Optimize** - Apply suggested improvements
+5. **Verify** - Re-analyze to confirm optimization
+
+### Schema Documentation Workflow
+
+1. **Export DDL** - Dump schema from database
+2. **Explore** - Run schema_explorer.py to generate docs
+3. **Review** - Check relationships and data types
+4. **Publish** - Include in project documentation
+
+### Migration Workflow
+
+1. **Capture current** - Export current schema DDL
+2. **Define target** - Write desired schema DDL
+3. **Generate migration** - Run migration_generator.py
+4. **Review SQL** - Check generated migration for safety
+5. **Test** - Apply to staging database first
+6. **Deploy** - Apply to production with rollback plan
+
+### CI Integration
+
+```bash
+# Lint SQL queries
+python scripts/query_optimizer.py --file queries/ --format json --strict
+
+# Generate schema docs
+python scripts/schema_explorer.py --file schema.sql --format markdown &gt; SCHEMA.md
+```
+
+## Reference Documentation
+
+- [SQL Optimization](references/sql-optimization.md) - Index strategies, query patterns, anti-patterns
+
+## Common Patterns Quick Reference
+
+### Query Anti-Patterns
+| Pattern | Issue | Fix |
+|---------|-------|-----|
+| `SELECT *` | Fetches unnecessary data | List specific columns |
+| `LIKE &#x27;%term%&#x27;` | Cannot use index | Use full-text search |
+| Correlated subquery | N+1 query pattern | Rewrite as JOIN |
+| No WHERE clause | Full table scan | Add filtering conditions |
+| `OR` in WHERE | Poor index usage | Use UNION or IN |
+| Functions on indexed columns | Prevents index use | Apply to value side |
+
+### Index Guidelines
+| Query Pattern | Index Type |
+|--------------|------------|
+| `WHERE col = value` | B-tree on col |
+| `WHERE col1 = v AND col2 = v` | Composite (col1, col2) |
+| `ORDER BY col` | B-tree on col |
+| `WHERE col LIKE &#x27;prefix%&#x27;` | B-tree on col |
+| `WHERE col IN (...)` | B-tree on col |
+| Full-text search | Full-text index |
+
+### Migration Safety
+- Always generate rollback SQL alongside forward migration
+- Test migrations against a copy of production data
+- Add columns as nullable first, then backfill, then add constraints
+- Never rename columns directly; add new, migrate data, drop old
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Sql Database Assistant&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Sql Database Assistant&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Sql Database Assistant in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Sql Database Assistant&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Sql Database Assistant&quot;
+4. Description: &quot;Tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. Helps teams write efficient queries and manage database evolution safely.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/sql-database-assistant/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Sql Database Assistant&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# SQL Database Assistant
+
+&gt; **Category:** Engineering
+&gt; **Domain:** Database Development &amp; Optimization
+
+## Overview
+
+The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
+
+## Quick Start
+
+```bash
+# Analyze a SQL query for performance issues
+python scripts/query_optimizer.py --file slow_query.sql
+
+# Analyze inline SQL
+python scripts/query_optimizer.py --query &quot;SELECT * FROM users WHERE name LIKE &#x27;%john%&#x27;&quot;
+
+# Explore schema from DDL file
+python scripts/schema_explorer.py --file schema.sql
+
+# Generate migration from schema diff
+python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
+
+# JSON output
+python scripts/query_optimizer.py --file query.sql --format json
+```
+
+## Tools Overview
+
+### query_optimizer.py
+
+Analyzes SQL queries for performance issues and optimization opportunities.
+
+| Feature | Description |
+|---------|-------------|
+| SELECT * detection | Flags queries selecting all columns |
+| Missing index hints | Identifies WHERE/JOIN columns likely needing indexes |
+| N+1 detection | Flags correlated subquery patterns |
+| Full table scan | Detects queries without WHERE clauses on large tables |
+| JOIN analysis | Checks join conditions and types |
+| LIKE optimization | Flags leading wildcard LIKE patterns |
+
+### schema_explorer.py
+
+Generates documentation from SQL DDL (CREATE TABLE) files.
+
+| Feature | Description |
+|---------|-------------|
+| Table catalog | Lists all tables with column counts |
+| Column details | Documents types, nullability, defaults |
+| Index listing | Catalogs indexes and their columns |
+| Relationship mapping | Identifies foreign key relationships |
+| Markdown output | Generates schema documentation |
+
+### migration_generator.py
+
+Generates migration SQL by comparing two schema DDL files.
+
+| Feature | Description |
+|---------|-------------|
+| Column additions | ALTER TABLE ADD COLUMN for new columns |
+| Column removals | ALTER TABLE DROP COLUMN for removed columns |
+| Type changes | ALTER TABLE ALTER COLUMN for type modifications |
+| New tables | CREATE TABLE for entirely new tables |
+| Dropped tables | DROP TABLE for removed tables |
+| Index changes | CREATE/DROP INDEX for index differences |
+
+## Workflows
+
+### Query Optimization Workflow
+
+1. **Identify slow queries** - Collect queries from slow query log
+2. **Analyze** - Run query_optimizer.py on each query
+3. **Review findings** - Prioritize by estimated impact
+4. **Optimize** - Apply suggested improvements
+5. **Verify** - Re-analyze to confirm optimization
+
+### Schema Documentation Workflow
+
+1. **Export DDL** - Dump schema from database
+2. **Explore** - Run schema_explorer.py to generate docs
+3. **Review** - Check relationships and data types
+4. **Publish** - Include in project documentation
+
+### Migration Workflow
+
+1. **Capture current** - Export current schema DDL
+2. **Define target** - Write desired schema DDL
+3. **Generate migration** - Run migration_generator.py
+4. **Review SQL** - Check generated migration for safety
+5. **Test** - Apply to staging database first
+6. **Deploy** - Apply to production with rollback plan
+
+### CI Integration
+
+```bash
+# Lint SQL queries
+python scripts/query_optimizer.py --file queries/ --format json --strict
+
+# Generate schema docs
+python scripts/schema_explorer.py --file schema.sql --format markdown &gt; SCHEMA.md
+```
+
+## Reference Documentation
+
+- [SQL Optimization](references/sql-optimization.md) - Index strategies, query patterns, anti-patterns
+
+## Common Patterns Quick Reference
+
+### Query Anti-Patterns
+| Pattern | Issue | Fix |
+|---------|-------|-----|
+| `SELECT *` | Fetches unnecessary data | List specific columns |
+| `LIKE &#x27;%term%&#x27;` | Cannot use index | Use full-text search |
+| Correlated subquery | N+1 query pattern | Rewrite as JOIN |
+| No WHERE clause | Full table scan | Add filtering conditions |
+| `OR` in WHERE | Poor index usage | Use UNION or IN |
+| Functions on indexed columns | Prevents index use | Apply to value side |
+
+### Index Guidelines
+| Query Pattern | Index Type |
+|--------------|------------|
+| `WHERE col = value` | B-tree on col |
+| `WHERE col1 = v AND col2 = v` | Composite (col1, col2) |
+| `ORDER BY col` | B-tree on col |
+| `WHERE col LIKE &#x27;prefix%&#x27;` | B-tree on col |
+| `WHERE col IN (...)` | B-tree on col |
+| Full-text search | Full-text index |
+
+### Migration Safety
+- Always generate rollback SQL alongside forward migration
+- Test migrations against a copy of production data
+- Add columns as nullable first, then backfill, then add constraints
+- Never rename columns directly; add new, migrate data, drop old
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Sql Database Assistant&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Sql Database Assistant&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Sql Database Assistant in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Sql Database Assistant&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Sql Database Assistant&quot;
+4. Description: &quot;Tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. Helps teams write efficient queries and manage database evolution safely.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/sql-database-assistant/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

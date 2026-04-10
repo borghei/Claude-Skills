@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Legal Risk Assessment (Legal domain).
 
 Structured legal risk assessment with 5x5 Severity x Likelihood matrix. Use for risk scoring, risk registers, escalation decisions, and risk memos.
@@ -400,11 +422,11 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-risk-assessment
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Legal Risk Assessment (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Legal Risk Assessment (Legal domain).
 
 Structured legal risk assessment with 5x5 Severity x Likelihood matrix. Use for risk scoring, risk registers, escalation decisions, and risk memos.
 
@@ -435,7 +457,588 @@ https://github.com/borghei/Claude-Skills/tree/main/legal-risk-assessment
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Legal Risk Assessment&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Risk Assessment
+
+Structured legal risk assessment using a quantitative 5x5 Severity x Likelihood matrix. Scores risks, maintains registers, generates assessment memos, and guides escalation decisions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Risk Scorer](#risk-scorer)
+  - [Risk Report Generator](#risk-report-generator)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Risk Scorer
+
+Calculates risk scores from severity and likelihood inputs, assigns color-coded risk levels, and generates summary statistics.
+
+```bash
+# Score a single risk
+python scripts/risk_scorer.py --severity 4 --likelihood 3 \
+  --category &quot;Contract&quot; --description &quot;Vendor SLA non-compliance&quot;
+
+# JSON output
+python scripts/risk_scorer.py --severity 4 --likelihood 3 \
+  --category &quot;Contract&quot; --description &quot;Vendor SLA breach&quot; --json
+
+# Batch mode from risk register file
+python scripts/risk_scorer.py --input risks.json --json
+
+# Batch mode with human-readable output
+python scripts/risk_scorer.py --input risks.json
+```
+
+**Input JSON format (batch mode):**
+```json
+{
+  &quot;risks&quot;: [
+    {&quot;severity&quot;: 4, &quot;likelihood&quot;: 3, &quot;category&quot;: &quot;Contract&quot;, &quot;description&quot;: &quot;Vendor SLA breach&quot;},
+    {&quot;severity&quot;: 2, &quot;likelihood&quot;: 2, &quot;category&quot;: &quot;Regulatory&quot;, &quot;description&quot;: &quot;Minor filing delay&quot;}
+  ]
+}
+```
+
+**Output includes:**
+- Risk score (Severity x Likelihood)
+- Color-coded level (GREEN / YELLOW / ORANGE / RED)
+- Recommended action (Accept / Monitor / Mitigate / Escalate)
+- Batch summary statistics (count per level, average score)
+
+---
+
+### Risk Report Generator
+
+Generates a formatted risk assessment memo in markdown from a risk register JSON file.
+
+```bash
+# Generate memo from risk register
+python scripts/risk_report_generator.py --input risk_register.json
+
+# Save to file
+python scripts/risk_report_generator.py --input risk_register.json --output memo.md
+
+# JSON metadata output
+python scripts/risk_report_generator.py --input risk_register.json --json
+```
+
+**Report includes:**
+- ASCII risk matrix visualization
+- Risk distribution summary (counts and percentages per level)
+- Top risks ranked by score
+- Recommended actions per risk with owner assignments
+- Monitoring plan suggestions
+- Escalation recommendations
+
+---
+
+## Reference Guides
+
+### Risk Framework
+`references/risk_framework.md`
+
+Complete Severity x Likelihood matrix reference:
+- Severity levels 1-5 with financial exposure percentages
+- Likelihood levels 1-5 with probability ranges
+- Risk matrix visualization
+- Risk classification (GREEN/YELLOW/ORANGE/RED) with actions
+- Documentation standards for memos and register entries
+
+### Escalation Guide
+`references/escalation_guide.md`
+
+When to engage outside counsel:
+- Mandatory engagement triggers (litigation, investigation, criminal)
+- Strongly recommended scenarios (novel issues, material exposure)
+- Consider scenarios (complex disputes, employment, data incidents)
+- Risk category definitions and contributing/mitigating factors
+
+---
+
+## Workflows
+
+### Workflow 1: New Risk Assessment
+
+```
+Step 1: Identify risk category and description
+        → Use references/risk_framework.md category definitions
+
+Step 2: Score severity (1-5) and likelihood (1-5)
+        → python scripts/risk_scorer.py --severity N --likelihood N \
+          --category &quot;Category&quot; --description &quot;Description&quot;
+
+Step 3: Review risk level and recommended action
+        → GREEN: Accept and document
+        → YELLOW: Assign owner and monitor
+        → ORANGE: Escalate to senior counsel
+        → RED: Immediate escalation, crisis management
+
+Step 4: Determine outside counsel need
+        → Consult references/escalation_guide.md
+
+Step 5: Document in risk register
+        → Add entry to register JSON file
+```
+
+### Workflow 2: Periodic Risk Register Review
+
+```
+Step 1: Load current risk register
+        → python scripts/risk_scorer.py --input register.json
+
+Step 2: Generate assessment memo
+        → python scripts/risk_report_generator.py --input register.json --output memo.md
+
+Step 3: Review top risks and distribution
+        → Focus on ORANGE and RED risks first
+
+Step 4: Update severity/likelihood for changed risks
+        → Re-score and regenerate report
+
+Step 5: Distribute memo to stakeholders
+```
+
+### Workflow 3: Escalation Decision
+
+```
+Step 1: Score the risk
+        → python scripts/risk_scorer.py --severity N --likelihood N \
+          --category &quot;Category&quot; --description &quot;Description&quot;
+
+Step 2: Check escalation triggers
+        → Mandatory: active litigation, government investigation, criminal exposure
+        → Strongly Recommended: novel issues, jurisdictional complexity, material exposure
+        → Consider: complex disputes, employment matters, data incidents
+
+Step 3: Document escalation rationale
+        → Include risk score, level, and specific trigger in memo
+
+Step 4: Select outside counsel if needed
+        → See references/escalation_guide.md criteria
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Risk score seems too low for a serious matter | Severity or likelihood underestimated; qualitative factors not captured | Review severity descriptions in risk_framework.md; consider worst-case financial exposure; add contributing factors to description |
+| Multiple risks in same category but different scores | Risks have different severity/likelihood combinations | This is expected; each risk is independent; review category-level trends in report |
+| Batch mode fails on input file | Malformed JSON or missing required fields | Verify JSON structure matches expected format; ensure each risk has severity, likelihood, category, description |
+| Report generator produces empty matrix | No risks in input file or all risks have invalid scores | Check that input JSON contains valid risks with severity 1-5 and likelihood 1-5 |
+| Escalation guide suggests outside counsel but budget is constrained | Risk score indicates material exposure | Document the budget constraint and residual risk acceptance; consider limited-scope engagement |
+| Risk register grows unwieldy | Risks not being closed or consolidated | Archive resolved risks; consolidate related risks; review register quarterly |
+
+---
+
+## Success Criteria
+
+- **All identified legal risks scored and documented** -- every risk has severity, likelihood, category, description, and recommended action in the register
+- **Risk distribution reviewed quarterly** -- memo generated and distributed to stakeholders with trend analysis
+- **ORANGE and RED risks have assigned owners and mitigation plans** -- no high-severity risk without accountability
+- **Escalation decisions documented with rationale** -- outside counsel engagement triggers clearly recorded
+- **Risk register maintained as living document** -- risks updated, resolved, or archived as status changes
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Quantitative risk scoring using 5x5 Severity x Likelihood matrix
+- Risk register management and batch processing
+- Risk assessment memo generation with matrix visualization
+- Escalation guidance for outside counsel engagement
+- Risk categorization (Contract, Regulatory, Litigation, IP, Data Privacy, Employment, Corporate)
+
+**Out of Scope:**
+- Legal advice on specific risk mitigation strategies -- consult legal counsel
+- Insurance coverage analysis or actuarial calculations
+- Regulatory filing or submission preparation
+- Contract drafting or review
+- Litigation strategy or case management
+
+---
+
+## Anti-Patterns
+
+- **Scoring by committee consensus without criteria** -- use the defined severity and likelihood scales consistently; do not negotiate scores to make stakeholders comfortable; a risk scored as 4 severity should match the framework definition
+- **Treating the risk register as a one-time exercise** -- risk registers are living documents; risks change as circumstances evolve; schedule quarterly reviews and update scores accordingly
+- **Escalating everything to outside counsel** -- the escalation guide defines specific triggers; not every YELLOW risk needs external counsel; over-escalation wastes budget and creates dependency
+- **Ignoring GREEN risks entirely** -- GREEN risks still require documentation and periodic monitoring; a GREEN risk can escalate to YELLOW or ORANGE if circumstances change
+- **Using risk scores as the sole decision factor** -- scores are inputs to judgment, not substitutes; qualitative factors like reputational impact or strategic importance may warrant action beyond what the score suggests
+
+---
+
+## Tool Reference
+
+### risk_scorer.py
+
+Calculates risk scores and assigns color-coded risk levels with recommended actions.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--severity &lt;1-5&gt;` | Yes (single mode) | Severity rating: 1=Negligible, 2=Minor, 3=Moderate, 4=Major, 5=Critical |
+| `--likelihood &lt;1-5&gt;` | Yes (single mode) | Likelihood rating: 1=Remote, 2=Unlikely, 3=Possible, 4=Likely, 5=Almost Certain |
+| `--category &lt;text&gt;` | Yes (single mode) | Risk category: Contract, Regulatory, Litigation, IP, Data Privacy, Employment, Corporate |
+| `--description &lt;text&gt;` | Yes (single mode) | Risk description |
+| `--input &lt;file&gt;` | Yes (batch mode) | Path to JSON file containing multiple risks |
+| `--json` | No | Output results in JSON format |
+
+### risk_report_generator.py
+
+Generates formatted risk assessment memo from a risk register JSON file.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input &lt;file&gt;` | Yes | Path to risk register JSON file |
+| `--output &lt;file&gt;` | No | Save memo to specified file path (markdown format) |
+| `--json` | No | Output report metadata in JSON format |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Risk Assessment&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Risk Assessment&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Risk Assessment in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Risk Assessment&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Risk Assessment&quot;
+4. Description: &quot;Structured legal risk assessment with 5x5 Severity x Likelihood matrix. Use for risk scoring, risk registers, escalation decisions, and risk memos.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-risk-assessment/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Legal Risk Assessment&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# Legal Risk Assessment
+
+Structured legal risk assessment using a quantitative 5x5 Severity x Likelihood matrix. Scores risks, maintains registers, generates assessment memos, and guides escalation decisions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [Risk Scorer](#risk-scorer)
+  - [Risk Report Generator](#risk-report-generator)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### Risk Scorer
+
+Calculates risk scores from severity and likelihood inputs, assigns color-coded risk levels, and generates summary statistics.
+
+```bash
+# Score a single risk
+python scripts/risk_scorer.py --severity 4 --likelihood 3 \
+  --category &quot;Contract&quot; --description &quot;Vendor SLA non-compliance&quot;
+
+# JSON output
+python scripts/risk_scorer.py --severity 4 --likelihood 3 \
+  --category &quot;Contract&quot; --description &quot;Vendor SLA breach&quot; --json
+
+# Batch mode from risk register file
+python scripts/risk_scorer.py --input risks.json --json
+
+# Batch mode with human-readable output
+python scripts/risk_scorer.py --input risks.json
+```
+
+**Input JSON format (batch mode):**
+```json
+{
+  &quot;risks&quot;: [
+    {&quot;severity&quot;: 4, &quot;likelihood&quot;: 3, &quot;category&quot;: &quot;Contract&quot;, &quot;description&quot;: &quot;Vendor SLA breach&quot;},
+    {&quot;severity&quot;: 2, &quot;likelihood&quot;: 2, &quot;category&quot;: &quot;Regulatory&quot;, &quot;description&quot;: &quot;Minor filing delay&quot;}
+  ]
+}
+```
+
+**Output includes:**
+- Risk score (Severity x Likelihood)
+- Color-coded level (GREEN / YELLOW / ORANGE / RED)
+- Recommended action (Accept / Monitor / Mitigate / Escalate)
+- Batch summary statistics (count per level, average score)
+
+---
+
+### Risk Report Generator
+
+Generates a formatted risk assessment memo in markdown from a risk register JSON file.
+
+```bash
+# Generate memo from risk register
+python scripts/risk_report_generator.py --input risk_register.json
+
+# Save to file
+python scripts/risk_report_generator.py --input risk_register.json --output memo.md
+
+# JSON metadata output
+python scripts/risk_report_generator.py --input risk_register.json --json
+```
+
+**Report includes:**
+- ASCII risk matrix visualization
+- Risk distribution summary (counts and percentages per level)
+- Top risks ranked by score
+- Recommended actions per risk with owner assignments
+- Monitoring plan suggestions
+- Escalation recommendations
+
+---
+
+## Reference Guides
+
+### Risk Framework
+`references/risk_framework.md`
+
+Complete Severity x Likelihood matrix reference:
+- Severity levels 1-5 with financial exposure percentages
+- Likelihood levels 1-5 with probability ranges
+- Risk matrix visualization
+- Risk classification (GREEN/YELLOW/ORANGE/RED) with actions
+- Documentation standards for memos and register entries
+
+### Escalation Guide
+`references/escalation_guide.md`
+
+When to engage outside counsel:
+- Mandatory engagement triggers (litigation, investigation, criminal)
+- Strongly recommended scenarios (novel issues, material exposure)
+- Consider scenarios (complex disputes, employment, data incidents)
+- Risk category definitions and contributing/mitigating factors
+
+---
+
+## Workflows
+
+### Workflow 1: New Risk Assessment
+
+```
+Step 1: Identify risk category and description
+        → Use references/risk_framework.md category definitions
+
+Step 2: Score severity (1-5) and likelihood (1-5)
+        → python scripts/risk_scorer.py --severity N --likelihood N \
+          --category &quot;Category&quot; --description &quot;Description&quot;
+
+Step 3: Review risk level and recommended action
+        → GREEN: Accept and document
+        → YELLOW: Assign owner and monitor
+        → ORANGE: Escalate to senior counsel
+        → RED: Immediate escalation, crisis management
+
+Step 4: Determine outside counsel need
+        → Consult references/escalation_guide.md
+
+Step 5: Document in risk register
+        → Add entry to register JSON file
+```
+
+### Workflow 2: Periodic Risk Register Review
+
+```
+Step 1: Load current risk register
+        → python scripts/risk_scorer.py --input register.json
+
+Step 2: Generate assessment memo
+        → python scripts/risk_report_generator.py --input register.json --output memo.md
+
+Step 3: Review top risks and distribution
+        → Focus on ORANGE and RED risks first
+
+Step 4: Update severity/likelihood for changed risks
+        → Re-score and regenerate report
+
+Step 5: Distribute memo to stakeholders
+```
+
+### Workflow 3: Escalation Decision
+
+```
+Step 1: Score the risk
+        → python scripts/risk_scorer.py --severity N --likelihood N \
+          --category &quot;Category&quot; --description &quot;Description&quot;
+
+Step 2: Check escalation triggers
+        → Mandatory: active litigation, government investigation, criminal exposure
+        → Strongly Recommended: novel issues, jurisdictional complexity, material exposure
+        → Consider: complex disputes, employment matters, data incidents
+
+Step 3: Document escalation rationale
+        → Include risk score, level, and specific trigger in memo
+
+Step 4: Select outside counsel if needed
+        → See references/escalation_guide.md criteria
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Possible Cause | Resolution |
+|---------|---------------|------------|
+| Risk score seems too low for a serious matter | Severity or likelihood underestimated; qualitative factors not captured | Review severity descriptions in risk_framework.md; consider worst-case financial exposure; add contributing factors to description |
+| Multiple risks in same category but different scores | Risks have different severity/likelihood combinations | This is expected; each risk is independent; review category-level trends in report |
+| Batch mode fails on input file | Malformed JSON or missing required fields | Verify JSON structure matches expected format; ensure each risk has severity, likelihood, category, description |
+| Report generator produces empty matrix | No risks in input file or all risks have invalid scores | Check that input JSON contains valid risks with severity 1-5 and likelihood 1-5 |
+| Escalation guide suggests outside counsel but budget is constrained | Risk score indicates material exposure | Document the budget constraint and residual risk acceptance; consider limited-scope engagement |
+| Risk register grows unwieldy | Risks not being closed or consolidated | Archive resolved risks; consolidate related risks; review register quarterly |
+
+---
+
+## Success Criteria
+
+- **All identified legal risks scored and documented** -- every risk has severity, likelihood, category, description, and recommended action in the register
+- **Risk distribution reviewed quarterly** -- memo generated and distributed to stakeholders with trend analysis
+- **ORANGE and RED risks have assigned owners and mitigation plans** -- no high-severity risk without accountability
+- **Escalation decisions documented with rationale** -- outside counsel engagement triggers clearly recorded
+- **Risk register maintained as living document** -- risks updated, resolved, or archived as status changes
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Quantitative risk scoring using 5x5 Severity x Likelihood matrix
+- Risk register management and batch processing
+- Risk assessment memo generation with matrix visualization
+- Escalation guidance for outside counsel engagement
+- Risk categorization (Contract, Regulatory, Litigation, IP, Data Privacy, Employment, Corporate)
+
+**Out of Scope:**
+- Legal advice on specific risk mitigation strategies -- consult legal counsel
+- Insurance coverage analysis or actuarial calculations
+- Regulatory filing or submission preparation
+- Contract drafting or review
+- Litigation strategy or case management
+
+---
+
+## Anti-Patterns
+
+- **Scoring by committee consensus without criteria** -- use the defined severity and likelihood scales consistently; do not negotiate scores to make stakeholders comfortable; a risk scored as 4 severity should match the framework definition
+- **Treating the risk register as a one-time exercise** -- risk registers are living documents; risks change as circumstances evolve; schedule quarterly reviews and update scores accordingly
+- **Escalating everything to outside counsel** -- the escalation guide defines specific triggers; not every YELLOW risk needs external counsel; over-escalation wastes budget and creates dependency
+- **Ignoring GREEN risks entirely** -- GREEN risks still require documentation and periodic monitoring; a GREEN risk can escalate to YELLOW or ORANGE if circumstances change
+- **Using risk scores as the sole decision factor** -- scores are inputs to judgment, not substitutes; qualitative factors like reputational impact or strategic importance may warrant action beyond what the score suggests
+
+---
+
+## Tool Reference
+
+### risk_scorer.py
+
+Calculates risk scores and assigns color-coded risk levels with recommended actions.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--severity &lt;1-5&gt;` | Yes (single mode) | Severity rating: 1=Negligible, 2=Minor, 3=Moderate, 4=Major, 5=Critical |
+| `--likelihood &lt;1-5&gt;` | Yes (single mode) | Likelihood rating: 1=Remote, 2=Unlikely, 3=Possible, 4=Likely, 5=Almost Certain |
+| `--category &lt;text&gt;` | Yes (single mode) | Risk category: Contract, Regulatory, Litigation, IP, Data Privacy, Employment, Corporate |
+| `--description &lt;text&gt;` | Yes (single mode) | Risk description |
+| `--input &lt;file&gt;` | Yes (batch mode) | Path to JSON file containing multiple risks |
+| `--json` | No | Output results in JSON format |
+
+### risk_report_generator.py
+
+Generates formatted risk assessment memo from a risk register JSON file.
+
+| Flag | Required | Description |
+|------|----------|-------------|
+| `--input &lt;file&gt;` | Yes | Path to risk register JSON file |
+| `--output &lt;file&gt;` | No | Save memo to specified file path (markdown format) |
+| `--json` | No | Output report metadata in JSON format |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Legal Risk Assessment&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Legal Risk Assessment&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Legal Risk Assessment in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Legal Risk Assessment&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Legal Risk Assessment&quot;
+4. Description: &quot;Structured legal risk assessment with 5x5 Severity x Likelihood matrix. Use for risk scoring, risk registers, escalation decisions, and risk memos.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/legal-risk-assessment/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

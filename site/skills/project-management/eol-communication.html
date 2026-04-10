@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Eol Communication (Project Management domain).
 
 End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.
@@ -399,11 +421,11 @@ https://github.com/borghei/Claude-Skills/tree/main/eol-communication
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Eol Communication (Project Management domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Eol Communication (Project Management domain).
 
 End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.
 
@@ -433,7 +455,496 @@ https://github.com/borghei/Claude-Skills/tree/main/eol-communication
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Eol Communication&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# EOL Communication Expert
+
+## Overview
+
+Create clear, empathetic End-of-Life (EOL) communications that preserve customer trust and facilitate smooth transitions. Sunsetting a product is a high-stakes communication challenge -- done poorly, it damages brand trust and accelerates churn across your entire portfolio. Done well, it strengthens customer relationships and drives migration to replacement solutions.
+
+### When to Use
+
+- **Product sunset** -- Discontinuing an entire product or product line.
+- **Feature deprecation** -- Removing a significant feature from an existing product.
+- **Service migration** -- Moving customers from one platform or infrastructure to another.
+- **API retirement** -- Deprecating API versions or endpoints.
+- **Pricing model change** -- Major pricing restructure that effectively ends old tiers.
+
+### When NOT to Use
+
+- Minor feature changes that don&#x27;t require customer notification.
+- Internal tooling changes with no customer impact.
+- Bug fixes or patches (use release notes instead).
+
+## EOL Communication Framework
+
+### Phase 1: Pre-Announcement Planning
+
+Before writing any communication, answer these questions:
+
+| Question | Answer Required |
+|---|---|
+| What is being discontinued? | Specific product, feature, or service name |
+| What is the replacement path? | Alternative product, migration path, or &quot;none&quot; |
+| Why is this happening? | Honest reason framed around customer benefit |
+| Who is affected? | Customer segments and estimated count |
+| What is the timeline? | Key dates (announcement, deprecation, final shutdown) |
+| What support is available? | Migration tools, documentation, customer success resources |
+| What are the risks? | High-value accounts, contractual obligations, regulatory requirements |
+
+### Phase 2: Craft the EOL Message
+
+#### EOL Messaging Template
+
+```markdown
+## Product Transition Narrative
+
+**We are**: [Company and relationship to the product being phased out]
+- [Commitment to customers]
+- [Product evolution context]
+- [Future vision]
+
+**Announcing**: [Single clear sentence stating EOL and introducing replacement]
+
+**Because**:
+- [Reason focused on customer benefit 1]
+- [Reason focused on customer benefit 2]
+- [Reason focused on customer benefit 3]
+
+**Which means for you**: [Customer-centered impact and benefit summary]
+
+## Current Product Context
+
+**[Product name]**
+- is a [brief description and primary function]
+- that has served [target customer] for [timeframe]
+- by providing [key benefits]
+
+## Customer Impact
+
+**We understand this may affect you by:**
+- [Impact 1 -- be honest about inconvenience]
+- [Impact 2 -- acknowledge disruption]
+- [Impact 3 -- recognize switching costs]
+
+## Transition Solution
+
+**For** [affected customers]
+- that currently use [discontinued product],
+- [replacement product]
+- is a [product category]
+- that [benefit statement focused on continuity and improvements].
+
+## Differentiation and Continuity
+
+- Like [discontinued product], [replacement] provides [continuity of key benefits]
+- While also offering [new benefits that justify the transition]
+
+## Support and Next Steps
+
+**To ensure a smooth transition, we will:**
+- [Support measure 1 -- e.g., free migration tool]
+- [Support measure 2 -- e.g., dedicated migration support team]
+- [Support measure 3 -- e.g., extended parallel operation period]
+
+## Timeline
+
+| Date | Milestone |
+|---|---|
+| [Date 1] | Announcement and migration tools available |
+| [Date 2] | New sign-ups disabled; existing users continue |
+| [Date 3] | Feature freeze on old product |
+| [Date 4] | Final data export deadline |
+| [Date 5] | Product shutdown |
+
+## Call to Action
+
+- [Clear next step for customers]
+- [Contact information for questions]
+- [Link to migration guide]
+```
+
+### Writing Rules
+
+1. **Lead with empathy, not defensiveness.** Acknowledge the disruption honestly.
+2. **Focus on customer continuity.** Explain what stays the same, then what improves.
+3. **Be specific about dates.** Vague timelines (&quot;coming months&quot;) create anxiety.
+4. **Provide concrete support.** Tools, documentation, and human help.
+5. **Avoid corporate euphemisms.** &quot;Sunsetting&quot; and &quot;streamlining&quot; feel dishonest. Say &quot;discontinuing&quot; or &quot;replacing.&quot;
+6. **One clear call to action.** Don&#x27;t overwhelm with options.
+
+### Phase 3: Segment and Distribute
+
+Different customer segments need different messages:
+
+| Segment | Message Emphasis | Channel |
+|---|---|---|
+| Enterprise / High-value | Personal outreach, dedicated migration support, contract review | Direct email from account manager, followed by call |
+| SMB / Mid-market | Self-serve migration tools, clear documentation | Email + in-app notification |
+| Free / Low-tier | Simple transition guide, automated migration | Email + blog post |
+| Developers / API users | Technical migration guide, deprecation timeline, SDK updates | Developer email list + docs site + changelog |
+
+### Phase 4: Support and Monitor
+
+#### Internal FAQ for Support Teams
+
+Prepare your support team with answers to likely objections:
+
+| Customer Objection | Recommended Response |
+|---|---|
+| &quot;I don&#x27;t want to switch&quot; | Acknowledge frustration; emphasize what stays the same; offer migration help |
+| &quot;I need more time&quot; | Explain timeline flexibility if any; offer extended access if possible |
+| &quot;The replacement doesn&#x27;t have feature X&quot; | Document the gap; provide workaround or roadmap commitment |
+| &quot;I want a refund&quot; | Follow refund policy; escalate if needed; preserve relationship |
+| &quot;Why wasn&#x27;t I consulted?&quot; | Explain decision process; invite feedback on replacement |
+
+#### Monitoring Checklist
+
+- [ ] Track migration rate weekly (target: 80%+ by shutdown date)
+- [ ] Monitor support ticket volume related to EOL
+- [ ] Track churn across entire portfolio (not just EOL product)
+- [ ] Monitor social media and community forums for sentiment
+- [ ] Escalation path for high-risk accounts clear and documented
+
+## EOL Timeline Best Practices
+
+| Product Type | Minimum Notice Period | Recommended |
+|---|---|---|
+| Free product / feature | 30 days | 60 days |
+| Paid product (monthly) | 60 days | 90 days |
+| Paid product (annual) | End of contract term | 6+ months |
+| Enterprise / API | 12 months | 18 months |
+| Regulated industry | Per regulatory requirement | 12+ months |
+
+## Integration with Other Skills
+
+- Use `create-prd/` to document the replacement product requirements.
+- Use `release-notes/` to communicate the final updates to the old product.
+- Use `summarize-meeting/` to document EOL decision meetings.
+- Use `senior-pm/` stakeholder mapping for high-risk account identification.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---|---|---|
+| Customer backlash on social media | Message too corporate; lacked empathy | Rewrite with customer-first language; acknowledge impact honestly |
+| Low migration rate | Migration path too complex or unclear | Simplify migration tools; offer hands-on support; extend timeline |
+| Support team overwhelmed | FAQ not prepared; team not trained on responses | Conduct support team briefing before announcement; provide response scripts |
+| Enterprise customers threaten legal action | Contractual obligations not reviewed | Involve Legal before announcement; honor contract terms |
+| Replacement product not ready | EOL announced before replacement was production-ready | Delay EOL timeline; run products in parallel until replacement is stable |
+| Internal teams learn about EOL from customers | Communication leaked before internal alignment | Brief internal teams 1-2 weeks before external announcement |
+
+## Success Criteria
+
+- EOL message reviewed by Legal, Support, and Customer Success before publication
+- 80%+ of affected customers migrated before shutdown date
+- Support ticket volume related to EOL decreases week-over-week after announcement
+- No increase in churn for non-EOL products (brand trust preserved)
+- Zero contractual violations during EOL process
+- Post-EOL retrospective conducted within 30 days of shutdown
+
+## Scope &amp; Limitations
+
+**In Scope:** EOL message creation, timeline planning, segment-specific messaging, internal FAQ preparation, migration monitoring framework, customer objection handling, support team preparation.
+
+**Out of Scope:** Replacement product development, data migration tooling implementation, legal contract review, refund processing, technical infrastructure decommissioning.
+
+**Important Caveats:** EOL communication is only as good as the transition path behind it. If the replacement product isn&#x27;t ready or the migration path is broken, the best-written message won&#x27;t prevent customer frustration. Ensure migration tooling is tested before announcing.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|---|---|---|
+| `create-prd/` | Complements | Replacement product PRD informs EOL transition narrative |
+| `release-notes/` | Feeds into | Final product updates communicated alongside EOL timeline |
+| `summarize-meeting/` | Receives from | EOL decision meeting notes inform communication content |
+| `senior-pm/` | Receives from | Stakeholder map identifies high-risk accounts for personal outreach |
+| `daci-framework/` | Complements | DACI chart clarifies who Drives the EOL decision and communication |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Eol Communication&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Eol Communication&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Eol Communication in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Eol Communication&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Eol Communication&quot;
+4. Description: &quot;End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/eol-communication/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Eol Communication&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# EOL Communication Expert
+
+## Overview
+
+Create clear, empathetic End-of-Life (EOL) communications that preserve customer trust and facilitate smooth transitions. Sunsetting a product is a high-stakes communication challenge -- done poorly, it damages brand trust and accelerates churn across your entire portfolio. Done well, it strengthens customer relationships and drives migration to replacement solutions.
+
+### When to Use
+
+- **Product sunset** -- Discontinuing an entire product or product line.
+- **Feature deprecation** -- Removing a significant feature from an existing product.
+- **Service migration** -- Moving customers from one platform or infrastructure to another.
+- **API retirement** -- Deprecating API versions or endpoints.
+- **Pricing model change** -- Major pricing restructure that effectively ends old tiers.
+
+### When NOT to Use
+
+- Minor feature changes that don&#x27;t require customer notification.
+- Internal tooling changes with no customer impact.
+- Bug fixes or patches (use release notes instead).
+
+## EOL Communication Framework
+
+### Phase 1: Pre-Announcement Planning
+
+Before writing any communication, answer these questions:
+
+| Question | Answer Required |
+|---|---|
+| What is being discontinued? | Specific product, feature, or service name |
+| What is the replacement path? | Alternative product, migration path, or &quot;none&quot; |
+| Why is this happening? | Honest reason framed around customer benefit |
+| Who is affected? | Customer segments and estimated count |
+| What is the timeline? | Key dates (announcement, deprecation, final shutdown) |
+| What support is available? | Migration tools, documentation, customer success resources |
+| What are the risks? | High-value accounts, contractual obligations, regulatory requirements |
+
+### Phase 2: Craft the EOL Message
+
+#### EOL Messaging Template
+
+```markdown
+## Product Transition Narrative
+
+**We are**: [Company and relationship to the product being phased out]
+- [Commitment to customers]
+- [Product evolution context]
+- [Future vision]
+
+**Announcing**: [Single clear sentence stating EOL and introducing replacement]
+
+**Because**:
+- [Reason focused on customer benefit 1]
+- [Reason focused on customer benefit 2]
+- [Reason focused on customer benefit 3]
+
+**Which means for you**: [Customer-centered impact and benefit summary]
+
+## Current Product Context
+
+**[Product name]**
+- is a [brief description and primary function]
+- that has served [target customer] for [timeframe]
+- by providing [key benefits]
+
+## Customer Impact
+
+**We understand this may affect you by:**
+- [Impact 1 -- be honest about inconvenience]
+- [Impact 2 -- acknowledge disruption]
+- [Impact 3 -- recognize switching costs]
+
+## Transition Solution
+
+**For** [affected customers]
+- that currently use [discontinued product],
+- [replacement product]
+- is a [product category]
+- that [benefit statement focused on continuity and improvements].
+
+## Differentiation and Continuity
+
+- Like [discontinued product], [replacement] provides [continuity of key benefits]
+- While also offering [new benefits that justify the transition]
+
+## Support and Next Steps
+
+**To ensure a smooth transition, we will:**
+- [Support measure 1 -- e.g., free migration tool]
+- [Support measure 2 -- e.g., dedicated migration support team]
+- [Support measure 3 -- e.g., extended parallel operation period]
+
+## Timeline
+
+| Date | Milestone |
+|---|---|
+| [Date 1] | Announcement and migration tools available |
+| [Date 2] | New sign-ups disabled; existing users continue |
+| [Date 3] | Feature freeze on old product |
+| [Date 4] | Final data export deadline |
+| [Date 5] | Product shutdown |
+
+## Call to Action
+
+- [Clear next step for customers]
+- [Contact information for questions]
+- [Link to migration guide]
+```
+
+### Writing Rules
+
+1. **Lead with empathy, not defensiveness.** Acknowledge the disruption honestly.
+2. **Focus on customer continuity.** Explain what stays the same, then what improves.
+3. **Be specific about dates.** Vague timelines (&quot;coming months&quot;) create anxiety.
+4. **Provide concrete support.** Tools, documentation, and human help.
+5. **Avoid corporate euphemisms.** &quot;Sunsetting&quot; and &quot;streamlining&quot; feel dishonest. Say &quot;discontinuing&quot; or &quot;replacing.&quot;
+6. **One clear call to action.** Don&#x27;t overwhelm with options.
+
+### Phase 3: Segment and Distribute
+
+Different customer segments need different messages:
+
+| Segment | Message Emphasis | Channel |
+|---|---|---|
+| Enterprise / High-value | Personal outreach, dedicated migration support, contract review | Direct email from account manager, followed by call |
+| SMB / Mid-market | Self-serve migration tools, clear documentation | Email + in-app notification |
+| Free / Low-tier | Simple transition guide, automated migration | Email + blog post |
+| Developers / API users | Technical migration guide, deprecation timeline, SDK updates | Developer email list + docs site + changelog |
+
+### Phase 4: Support and Monitor
+
+#### Internal FAQ for Support Teams
+
+Prepare your support team with answers to likely objections:
+
+| Customer Objection | Recommended Response |
+|---|---|
+| &quot;I don&#x27;t want to switch&quot; | Acknowledge frustration; emphasize what stays the same; offer migration help |
+| &quot;I need more time&quot; | Explain timeline flexibility if any; offer extended access if possible |
+| &quot;The replacement doesn&#x27;t have feature X&quot; | Document the gap; provide workaround or roadmap commitment |
+| &quot;I want a refund&quot; | Follow refund policy; escalate if needed; preserve relationship |
+| &quot;Why wasn&#x27;t I consulted?&quot; | Explain decision process; invite feedback on replacement |
+
+#### Monitoring Checklist
+
+- [ ] Track migration rate weekly (target: 80%+ by shutdown date)
+- [ ] Monitor support ticket volume related to EOL
+- [ ] Track churn across entire portfolio (not just EOL product)
+- [ ] Monitor social media and community forums for sentiment
+- [ ] Escalation path for high-risk accounts clear and documented
+
+## EOL Timeline Best Practices
+
+| Product Type | Minimum Notice Period | Recommended |
+|---|---|---|
+| Free product / feature | 30 days | 60 days |
+| Paid product (monthly) | 60 days | 90 days |
+| Paid product (annual) | End of contract term | 6+ months |
+| Enterprise / API | 12 months | 18 months |
+| Regulated industry | Per regulatory requirement | 12+ months |
+
+## Integration with Other Skills
+
+- Use `create-prd/` to document the replacement product requirements.
+- Use `release-notes/` to communicate the final updates to the old product.
+- Use `summarize-meeting/` to document EOL decision meetings.
+- Use `senior-pm/` stakeholder mapping for high-risk account identification.
+
+## Troubleshooting
+
+| Problem | Likely Cause | Resolution |
+|---|---|---|
+| Customer backlash on social media | Message too corporate; lacked empathy | Rewrite with customer-first language; acknowledge impact honestly |
+| Low migration rate | Migration path too complex or unclear | Simplify migration tools; offer hands-on support; extend timeline |
+| Support team overwhelmed | FAQ not prepared; team not trained on responses | Conduct support team briefing before announcement; provide response scripts |
+| Enterprise customers threaten legal action | Contractual obligations not reviewed | Involve Legal before announcement; honor contract terms |
+| Replacement product not ready | EOL announced before replacement was production-ready | Delay EOL timeline; run products in parallel until replacement is stable |
+| Internal teams learn about EOL from customers | Communication leaked before internal alignment | Brief internal teams 1-2 weeks before external announcement |
+
+## Success Criteria
+
+- EOL message reviewed by Legal, Support, and Customer Success before publication
+- 80%+ of affected customers migrated before shutdown date
+- Support ticket volume related to EOL decreases week-over-week after announcement
+- No increase in churn for non-EOL products (brand trust preserved)
+- Zero contractual violations during EOL process
+- Post-EOL retrospective conducted within 30 days of shutdown
+
+## Scope &amp; Limitations
+
+**In Scope:** EOL message creation, timeline planning, segment-specific messaging, internal FAQ preparation, migration monitoring framework, customer objection handling, support team preparation.
+
+**Out of Scope:** Replacement product development, data migration tooling implementation, legal contract review, refund processing, technical infrastructure decommissioning.
+
+**Important Caveats:** EOL communication is only as good as the transition path behind it. If the replacement product isn&#x27;t ready or the migration path is broken, the best-written message won&#x27;t prevent customer frustration. Ensure migration tooling is tested before announcing.
+
+## Integration Points
+
+| Integration | Direction | What Flows |
+|---|---|---|
+| `create-prd/` | Complements | Replacement product PRD informs EOL transition narrative |
+| `release-notes/` | Feeds into | Final product updates communicated alongside EOL timeline |
+| `summarize-meeting/` | Receives from | EOL decision meeting notes inform communication content |
+| `senior-pm/` | Receives from | Stakeholder map identifies high-risk accounts for personal outreach |
+| `daci-framework/` | Complements | DACI chart clarifies who Drives the EOL decision and communication |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Eol Communication&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Eol Communication&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Eol Communication in the Project Management domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Eol Communication&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Eol Communication&quot;
+4. Description: &quot;End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/eol-communication/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

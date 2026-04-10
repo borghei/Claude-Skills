@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Nda Triage (Legal domain).
 
 Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs. Use when triaging NDAs, screening non-disclosure agreements, or routing NDAs for approval.
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/nda-triage
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Nda Triage (Legal domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Nda Triage (Legal domain).
 
 Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs. Use when triaging NDAs, screening non-disclosure agreements, or routing NDAs for approval.
 
@@ -425,7 +447,702 @@ https://github.com/borghei/Claude-Skills/tree/main/nda-triage
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Nda Triage&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# NDA Triage
+
+Rapid NDA screening tool that classifies incoming NDAs as GREEN (standard approval), YELLOW (counsel review), or RED (significant issues). Uses a 10-point screening checklist to evaluate agreement structure, definitions, obligations, carveouts, and problematic provisions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [NDA Screener](#nda-screener)
+  - [NDA Checklist](#nda-checklist)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Standard NDA Triage](#standard-nda-triage)
+  - [Bulk NDA Processing](#bulk-nda-processing)
+- [Routing Recommendations](#routing-recommendations)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### NDA Screener
+
+Scans NDA text for red flags and outputs GREEN/YELLOW/RED classification with reasoning.
+
+```bash
+# Screen an NDA file
+python scripts/nda_screener.py nda_draft.txt
+
+# JSON output for integration
+python scripts/nda_screener.py incoming_nda.md --json
+
+# Save screening results
+python scripts/nda_screener.py nda_draft.txt --output screening.json --json
+```
+
+**What it detects:**
+- Missing standard carveouts (public knowledge, prior possession, independent development, third-party receipt, legal compulsion)
+- Non-solicitation and non-compete clauses
+- Perpetual confidentiality obligations
+- Overbroad definition of confidential information
+- Residuals clauses granting usage rights to ideas/concepts
+- IP assignment or license grants
+- Liquidated damages provisions
+- Unlimited audit rights
+- One-sided obligations
+
+**Classification Rules:**
+
+| Level | Criteria | Routing |
+|-------|----------|---------|
+| GREEN | All 5 carveouts present, no problematic provisions, standard structure | Business approver; no counsel needed |
+| YELLOW | 1-2 missing carveouts, minor problematic provisions, or non-standard terms | Legal counsel review within 48 hours |
+| RED | 3+ missing carveouts, non-compete/non-solicitation, IP assignment, perpetual term with no exit | Senior counsel review; do not sign |
+
+---
+
+### NDA Checklist
+
+Generates a compliance checklist for an NDA, checking all 10 screening criteria with pass/fail status.
+
+```bash
+# Generate checklist for an NDA
+python scripts/nda_checklist.py nda_draft.txt
+
+# JSON output
+python scripts/nda_checklist.py nda_draft.txt --json
+
+# Save checklist
+python scripts/nda_checklist.py nda_draft.txt --output checklist.json --json
+```
+
+**10-Point Screening Criteria:**
+
+| # | Criterion | What It Checks |
+|---|-----------|---------------|
+| 1 | Agreement Structure | Mutual vs. one-way; parties identified; purpose stated |
+| 2 | Definition of Confidential Info | Scope, specificity, marking requirements |
+| 3 | Obligations | Standard of care, use restrictions, disclosure limits |
+| 4 | Standard Carveouts | 5 required: public knowledge, prior possession, independent development, third-party receipt, legal compulsion |
+| 5 | Permitted Disclosures | Representatives, advisors, affiliates with need-to-know |
+| 6 | Term &amp; Duration | Reasonable term, survival period, obligations after expiry |
+| 7 | Return/Destruction | Obligation to return or destroy upon request/termination |
+| 8 | Remedies | Injunctive relief, damages, indemnification scope |
+| 9 | Problematic Provisions | Non-solicitation, non-compete, exclusivity, residuals, IP assignment, audit rights |
+| 10 | Governing Law | Jurisdiction, dispute resolution mechanism |
+
+---
+
+## Reference Guides
+
+### NDA Screening Criteria
+`references/nda_screening_criteria.md`
+
+Complete evaluation reference covering:
+- All 10 screening criteria with detailed sub-items
+- GREEN/YELLOW/RED classification rules with specific examples
+- Common NDA issues with standard positions
+- Redline approaches for common problems
+
+---
+
+## Workflows
+
+### Standard NDA Triage
+
+1. **Receive NDA** -- Save as `.txt` or `.md` file
+2. **Screen** -- Run `nda_screener.py` for quick RED/YELLOW/GREEN classification
+3. **Checklist** -- Run `nda_checklist.py` for detailed 10-point evaluation
+4. **Route** -- Follow routing recommendations based on classification
+5. **Track** -- Log screening result and routing decision
+
+### Bulk NDA Processing
+
+```bash
+# Screen multiple NDAs
+for nda in ndas/*.txt; do
+  echo &quot;=== $nda ===&quot;
+  python scripts/nda_screener.py &quot;$nda&quot;
+  echo &quot;&quot;
+done
+
+# Generate JSON report for all NDAs
+for nda in ndas/*.txt; do
+  python scripts/nda_screener.py &quot;$nda&quot; --json --output &quot;results/$(basename $nda .txt).json&quot;
+done
+```
+
+---
+
+## Routing Recommendations
+
+| Classification | Approver | Timeline | Escalation |
+|---------------|----------|----------|------------|
+| GREEN | Business owner or designated approver | Same day; sign within 24 hours | None required |
+| YELLOW | Legal counsel review | 48-hour turnaround | Escalate to senior counsel if no response in 72 hours |
+| RED | Senior legal counsel | 5 business day turnaround | Escalate to General Counsel if deal-critical |
+
+### GREEN Fast-Track Conditions
+
+All of the following must be true for GREEN classification:
+- Mutual NDA (both parties bound)
+- All 5 standard carveouts present
+- No non-solicitation, non-compete, or exclusivity clauses
+- No IP assignment or license grants
+- No residuals clause
+- Term is 2-5 years (not perpetual)
+- Return/destruction obligation present
+- Standard remedies (injunctive relief, no liquidated damages)
+
+### RED Escalation Triggers
+
+Any one of the following triggers RED classification:
+- Non-compete clause of any scope
+- Non-solicitation clause covering employees or customers
+- IP assignment or broad license grant
+- Missing 3 or more standard carveouts
+- Perpetual obligations with no termination right
+- Liquidated damages for breach
+- Exclusivity provision
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Screener classifies everything as YELLOW | NDA uses non-standard formatting that breaks pattern matching | Ensure NDA is clean plain text; remove PDF artifacts and headers/footers |
+| Missing carveouts false positive | Carveouts are present but use unusual language | Review the full &quot;Exceptions&quot; or &quot;Exclusions&quot; section manually; the screener checks common phrasings |
+| Non-compete not detected | Non-compete is embedded in definitions or obligations section rather than standalone | Search the full document for &quot;compete&quot;, &quot;competitive&quot;, &quot;restrict&quot; manually |
+| Checklist shows PASS but screener shows RED | Checklist evaluates presence; screener evaluates content quality | Use both tools together; the screener&#x27;s RED overrides checklist PASS |
+| Script errors on large files | NDA text exceeds expected size (&gt;100KB) | Ensure the file contains only the NDA text, not appendices or exhibits |
+
+---
+
+## Success Criteria
+
+- **NDA triage under 5 minutes:** Automated screening replaces 30-minute manual review.
+- **Zero missed RED-severity issues:** Every non-compete, IP assignment, and missing carveout is flagged.
+- **GREEN NDAs signed within 24 hours:** Fast-track routing eliminates bottleneck for standard agreements.
+- **YELLOW NDAs resolved within 48 hours:** Counsel review turnaround meets SLA.
+- **Consistent classification across reviewers:** 10-point checklist eliminates subjective &quot;looks fine&quot; approvals.
+- **100% of NDAs screened before routing:** No NDA reaches an approver without automated triage.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Pattern-based screening of NDA text for structural issues and problematic provisions
+- 10-point compliance checklist against standard NDA requirements
+- GREEN/YELLOW/RED classification with routing recommendations
+- Detection of non-solicitation, non-compete, IP assignment, residuals, and other problematic clauses
+- Missing carveout identification
+
+**Does NOT cover:**
+- **Legal advice** -- classification is a screening aid, not a legal opinion
+- **Negotiation or redlining** -- use `nda-review` for deep clause analysis and redline generation
+- **Multi-party NDAs** -- optimized for bilateral (two-party) agreements
+- **Industry-specific NDA requirements** (healthcare, defense, government) -- patterns target commercial NDAs
+- **Non-English NDAs** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Signing GREEN-classified NDAs without any human review | Automated screening cannot catch business-context risks (e.g., NDA with a direct competitor) | GREEN classification means low legal risk, not zero risk; business approver must still review |
+| Using triage as a substitute for deep NDA review on complex deals | Triage checks structure and red flags, not clause quality or negotiation position | Run `nda-review` skill for M&amp;A, joint venture, or high-value partnership NDAs |
+| Ignoring YELLOW classifications because &quot;it&#x27;s just an NDA&quot; | YELLOW items like missing carveouts or residuals clauses create real legal exposure | Route all YELLOW NDAs to counsel; missing independent development carveout alone can cost millions |
+| Treating all NDAs as equal regardless of counterparty relationship | NDA with a startup partner requires different scrutiny than NDA with a Fortune 500 vendor | Adjust review depth based on counterparty, deal value, and information sensitivity |
+
+---
+
+## Tool Reference
+
+### nda_screener.py
+
+**Purpose:** Scans NDA text for red flags and problematic provisions. Outputs GREEN/YELLOW/RED classification with detailed reasoning.
+
+**Usage:**
+
+```bash
+python scripts/nda_screener.py &lt;nda_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_nda.txt&quot;,
+  &quot;classification&quot;: &quot;YELLOW&quot;,
+  &quot;red_flags&quot;: [
+    {
+      &quot;id&quot;: &quot;missing_carveout_independent_development&quot;,
+      &quot;severity&quot;: &quot;YELLOW&quot;,
+      &quot;description&quot;: &quot;Missing independent development carveout&quot;,
+      &quot;recommendation&quot;: &quot;Add standard independent development exception&quot;
+    }
+  ],
+  &quot;carveouts&quot;: {
+    &quot;public_knowledge&quot;: true,
+    &quot;prior_possession&quot;: true,
+    &quot;independent_development&quot;: false,
+    &quot;third_party_receipt&quot;: true,
+    &quot;legal_compulsion&quot;: true
+  },
+  &quot;summary&quot;: &quot;1 missing carveout; no critical issues. Route to counsel for review.&quot;
+}
+```
+
+---
+
+### nda_checklist.py
+
+**Purpose:** Generates a 10-point compliance checklist for an NDA, evaluating each screening criterion as PASS/FAIL with notes.
+
+**Usage:**
+
+```bash
+python scripts/nda_checklist.py &lt;nda_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output:**
+
+```
+NDA COMPLIANCE CHECKLIST
+========================
+File: vendor_nda.txt
+Overall: YELLOW (8/10 PASS)
+
+ #  Criterion                    Status  Notes
+ 1  Agreement Structure          PASS    Mutual NDA; both parties identified
+ 2  Definition of Confidential   PASS    Reasonably scoped with marking requirement
+ 3  Obligations                  PASS    Standard of care; use restrictions present
+ 4  Standard Carveouts           FAIL    Missing: independent development
+ 5  Permitted Disclosures        PASS    Representatives and advisors covered
+ 6  Term &amp; Duration              PASS    3-year term with 2-year survival
+ 7  Return/Destruction           PASS    Return or destroy within 30 days
+ 8  Remedies                     PASS    Injunctive relief; no liquidated damages
+ 9  Problematic Provisions       FAIL    Residuals clause detected
+10  Governing Law                PASS    Delaware law; state courts
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Nda Triage&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Nda Triage&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Nda Triage in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Nda Triage&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Nda Triage&quot;
+4. Description: &quot;Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs. Use when triaging NDAs, screening non-disclosure agreements, or routing NDAs for approval.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/nda-triage/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Nda Triage&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+&gt; **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
+
+# NDA Triage
+
+Rapid NDA screening tool that classifies incoming NDAs as GREEN (standard approval), YELLOW (counsel review), or RED (significant issues). Uses a 10-point screening checklist to evaluate agreement structure, definitions, obligations, carveouts, and problematic provisions.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [NDA Screener](#nda-screener)
+  - [NDA Checklist](#nda-checklist)
+- [Reference Guides](#reference-guides)
+- [Workflows](#workflows)
+  - [Standard NDA Triage](#standard-nda-triage)
+  - [Bulk NDA Processing](#bulk-nda-processing)
+- [Routing Recommendations](#routing-recommendations)
+- [Troubleshooting](#troubleshooting)
+- [Success Criteria](#success-criteria)
+- [Scope &amp; Limitations](#scope--limitations)
+- [Anti-Patterns](#anti-patterns)
+- [Tool Reference](#tool-reference)
+
+---
+
+## Tools
+
+### NDA Screener
+
+Scans NDA text for red flags and outputs GREEN/YELLOW/RED classification with reasoning.
+
+```bash
+# Screen an NDA file
+python scripts/nda_screener.py nda_draft.txt
+
+# JSON output for integration
+python scripts/nda_screener.py incoming_nda.md --json
+
+# Save screening results
+python scripts/nda_screener.py nda_draft.txt --output screening.json --json
+```
+
+**What it detects:**
+- Missing standard carveouts (public knowledge, prior possession, independent development, third-party receipt, legal compulsion)
+- Non-solicitation and non-compete clauses
+- Perpetual confidentiality obligations
+- Overbroad definition of confidential information
+- Residuals clauses granting usage rights to ideas/concepts
+- IP assignment or license grants
+- Liquidated damages provisions
+- Unlimited audit rights
+- One-sided obligations
+
+**Classification Rules:**
+
+| Level | Criteria | Routing |
+|-------|----------|---------|
+| GREEN | All 5 carveouts present, no problematic provisions, standard structure | Business approver; no counsel needed |
+| YELLOW | 1-2 missing carveouts, minor problematic provisions, or non-standard terms | Legal counsel review within 48 hours |
+| RED | 3+ missing carveouts, non-compete/non-solicitation, IP assignment, perpetual term with no exit | Senior counsel review; do not sign |
+
+---
+
+### NDA Checklist
+
+Generates a compliance checklist for an NDA, checking all 10 screening criteria with pass/fail status.
+
+```bash
+# Generate checklist for an NDA
+python scripts/nda_checklist.py nda_draft.txt
+
+# JSON output
+python scripts/nda_checklist.py nda_draft.txt --json
+
+# Save checklist
+python scripts/nda_checklist.py nda_draft.txt --output checklist.json --json
+```
+
+**10-Point Screening Criteria:**
+
+| # | Criterion | What It Checks |
+|---|-----------|---------------|
+| 1 | Agreement Structure | Mutual vs. one-way; parties identified; purpose stated |
+| 2 | Definition of Confidential Info | Scope, specificity, marking requirements |
+| 3 | Obligations | Standard of care, use restrictions, disclosure limits |
+| 4 | Standard Carveouts | 5 required: public knowledge, prior possession, independent development, third-party receipt, legal compulsion |
+| 5 | Permitted Disclosures | Representatives, advisors, affiliates with need-to-know |
+| 6 | Term &amp; Duration | Reasonable term, survival period, obligations after expiry |
+| 7 | Return/Destruction | Obligation to return or destroy upon request/termination |
+| 8 | Remedies | Injunctive relief, damages, indemnification scope |
+| 9 | Problematic Provisions | Non-solicitation, non-compete, exclusivity, residuals, IP assignment, audit rights |
+| 10 | Governing Law | Jurisdiction, dispute resolution mechanism |
+
+---
+
+## Reference Guides
+
+### NDA Screening Criteria
+`references/nda_screening_criteria.md`
+
+Complete evaluation reference covering:
+- All 10 screening criteria with detailed sub-items
+- GREEN/YELLOW/RED classification rules with specific examples
+- Common NDA issues with standard positions
+- Redline approaches for common problems
+
+---
+
+## Workflows
+
+### Standard NDA Triage
+
+1. **Receive NDA** -- Save as `.txt` or `.md` file
+2. **Screen** -- Run `nda_screener.py` for quick RED/YELLOW/GREEN classification
+3. **Checklist** -- Run `nda_checklist.py` for detailed 10-point evaluation
+4. **Route** -- Follow routing recommendations based on classification
+5. **Track** -- Log screening result and routing decision
+
+### Bulk NDA Processing
+
+```bash
+# Screen multiple NDAs
+for nda in ndas/*.txt; do
+  echo &quot;=== $nda ===&quot;
+  python scripts/nda_screener.py &quot;$nda&quot;
+  echo &quot;&quot;
+done
+
+# Generate JSON report for all NDAs
+for nda in ndas/*.txt; do
+  python scripts/nda_screener.py &quot;$nda&quot; --json --output &quot;results/$(basename $nda .txt).json&quot;
+done
+```
+
+---
+
+## Routing Recommendations
+
+| Classification | Approver | Timeline | Escalation |
+|---------------|----------|----------|------------|
+| GREEN | Business owner or designated approver | Same day; sign within 24 hours | None required |
+| YELLOW | Legal counsel review | 48-hour turnaround | Escalate to senior counsel if no response in 72 hours |
+| RED | Senior legal counsel | 5 business day turnaround | Escalate to General Counsel if deal-critical |
+
+### GREEN Fast-Track Conditions
+
+All of the following must be true for GREEN classification:
+- Mutual NDA (both parties bound)
+- All 5 standard carveouts present
+- No non-solicitation, non-compete, or exclusivity clauses
+- No IP assignment or license grants
+- No residuals clause
+- Term is 2-5 years (not perpetual)
+- Return/destruction obligation present
+- Standard remedies (injunctive relief, no liquidated damages)
+
+### RED Escalation Triggers
+
+Any one of the following triggers RED classification:
+- Non-compete clause of any scope
+- Non-solicitation clause covering employees or customers
+- IP assignment or broad license grant
+- Missing 3 or more standard carveouts
+- Perpetual obligations with no termination right
+- Liquidated damages for breach
+- Exclusivity provision
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| Screener classifies everything as YELLOW | NDA uses non-standard formatting that breaks pattern matching | Ensure NDA is clean plain text; remove PDF artifacts and headers/footers |
+| Missing carveouts false positive | Carveouts are present but use unusual language | Review the full &quot;Exceptions&quot; or &quot;Exclusions&quot; section manually; the screener checks common phrasings |
+| Non-compete not detected | Non-compete is embedded in definitions or obligations section rather than standalone | Search the full document for &quot;compete&quot;, &quot;competitive&quot;, &quot;restrict&quot; manually |
+| Checklist shows PASS but screener shows RED | Checklist evaluates presence; screener evaluates content quality | Use both tools together; the screener&#x27;s RED overrides checklist PASS |
+| Script errors on large files | NDA text exceeds expected size (&gt;100KB) | Ensure the file contains only the NDA text, not appendices or exhibits |
+
+---
+
+## Success Criteria
+
+- **NDA triage under 5 minutes:** Automated screening replaces 30-minute manual review.
+- **Zero missed RED-severity issues:** Every non-compete, IP assignment, and missing carveout is flagged.
+- **GREEN NDAs signed within 24 hours:** Fast-track routing eliminates bottleneck for standard agreements.
+- **YELLOW NDAs resolved within 48 hours:** Counsel review turnaround meets SLA.
+- **Consistent classification across reviewers:** 10-point checklist eliminates subjective &quot;looks fine&quot; approvals.
+- **100% of NDAs screened before routing:** No NDA reaches an approver without automated triage.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Pattern-based screening of NDA text for structural issues and problematic provisions
+- 10-point compliance checklist against standard NDA requirements
+- GREEN/YELLOW/RED classification with routing recommendations
+- Detection of non-solicitation, non-compete, IP assignment, residuals, and other problematic clauses
+- Missing carveout identification
+
+**Does NOT cover:**
+- **Legal advice** -- classification is a screening aid, not a legal opinion
+- **Negotiation or redlining** -- use `nda-review` for deep clause analysis and redline generation
+- **Multi-party NDAs** -- optimized for bilateral (two-party) agreements
+- **Industry-specific NDA requirements** (healthcare, defense, government) -- patterns target commercial NDAs
+- **Non-English NDAs** -- pattern matching is English-language only
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Better Approach |
+|-------------|-------------|-----------------|
+| Signing GREEN-classified NDAs without any human review | Automated screening cannot catch business-context risks (e.g., NDA with a direct competitor) | GREEN classification means low legal risk, not zero risk; business approver must still review |
+| Using triage as a substitute for deep NDA review on complex deals | Triage checks structure and red flags, not clause quality or negotiation position | Run `nda-review` skill for M&amp;A, joint venture, or high-value partnership NDAs |
+| Ignoring YELLOW classifications because &quot;it&#x27;s just an NDA&quot; | YELLOW items like missing carveouts or residuals clauses create real legal exposure | Route all YELLOW NDAs to counsel; missing independent development carveout alone can cost millions |
+| Treating all NDAs as equal regardless of counterparty relationship | NDA with a startup partner requires different scrutiny than NDA with a Fortune 500 vendor | Adjust review depth based on counterparty, deal value, and information sensitivity |
+
+---
+
+## Tool Reference
+
+### nda_screener.py
+
+**Purpose:** Scans NDA text for red flags and problematic provisions. Outputs GREEN/YELLOW/RED classification with detailed reasoning.
+
+**Usage:**
+
+```bash
+python scripts/nda_screener.py &lt;nda_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output (JSON):**
+
+```json
+{
+  &quot;file&quot;: &quot;vendor_nda.txt&quot;,
+  &quot;classification&quot;: &quot;YELLOW&quot;,
+  &quot;red_flags&quot;: [
+    {
+      &quot;id&quot;: &quot;missing_carveout_independent_development&quot;,
+      &quot;severity&quot;: &quot;YELLOW&quot;,
+      &quot;description&quot;: &quot;Missing independent development carveout&quot;,
+      &quot;recommendation&quot;: &quot;Add standard independent development exception&quot;
+    }
+  ],
+  &quot;carveouts&quot;: {
+    &quot;public_knowledge&quot;: true,
+    &quot;prior_possession&quot;: true,
+    &quot;independent_development&quot;: false,
+    &quot;third_party_receipt&quot;: true,
+    &quot;legal_compulsion&quot;: true
+  },
+  &quot;summary&quot;: &quot;1 missing carveout; no critical issues. Route to counsel for review.&quot;
+}
+```
+
+---
+
+### nda_checklist.py
+
+**Purpose:** Generates a 10-point compliance checklist for an NDA, evaluating each screening criterion as PASS/FAIL with notes.
+
+**Usage:**
+
+```bash
+python scripts/nda_checklist.py &lt;nda_file&gt; [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `nda_file` | *(positional)* | | Path to NDA text file (.txt or .md) |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example Output:**
+
+```
+NDA COMPLIANCE CHECKLIST
+========================
+File: vendor_nda.txt
+Overall: YELLOW (8/10 PASS)
+
+ #  Criterion                    Status  Notes
+ 1  Agreement Structure          PASS    Mutual NDA; both parties identified
+ 2  Definition of Confidential   PASS    Reasonably scoped with marking requirement
+ 3  Obligations                  PASS    Standard of care; use restrictions present
+ 4  Standard Carveouts           FAIL    Missing: independent development
+ 5  Permitted Disclosures        PASS    Representatives and advisors covered
+ 6  Term &amp; Duration              PASS    3-year term with 2-year survival
+ 7  Return/Destruction           PASS    Return or destroy within 30 days
+ 8  Remedies                     PASS    Injunctive relief; no liquidated damages
+ 9  Problematic Provisions       FAIL    Residuals clause detected
+10  Governing Law                PASS    Delaware law; state courts
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Nda Triage&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Nda Triage&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Nda Triage in the Legal domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Nda Triage&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Nda Triage&quot;
+4. Description: &quot;Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs. Use when triaging NDAs, screening non-disclosure agreements, or routing NDAs for approval.&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/legal/nda-triage/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

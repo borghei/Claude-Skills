@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Email Template Builder (Marketing domain).
 
 Build production-grade email template systems with React Email or MJML. Covers responsive layouts, dark mode, multi-provider sending (Resend, SendGrid, Postmark, SES), i18n, spam score optimization, p...
@@ -402,11 +424,11 @@ https://github.com/borghei/Claude-Skills/tree/main/email-template-builder
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Email Template Builder (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Email Template Builder (Marketing domain).
 
 Build production-grade email template systems with React Email or MJML. Covers responsive layouts, dark mode, multi-provider sending (Resend, SendGrid, Postmark, SES), i18n, spam score optimization, p...
 
@@ -439,7 +461,1244 @@ https://github.com/borghei/Claude-Skills/tree/main/email-template-builder
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Email Template Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Email Template Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / Marketing
+**Tags:** email templates, React Email, MJML, responsive email, deliverability, transactional email, dark mode
+
+## Overview
+
+Build complete transactional email systems: component-based templates with React Email or MJML, multi-provider sending abstraction, local preview with hot reload, i18n support, dark mode, spam optimization, and UTM tracking. Outputs production-ready code for any major email provider.
+
+This skill builds the email rendering and sending infrastructure. For writing email copy and designing sequences, use email-sequence.
+
+---
+
+## Architecture Decision: React Email vs MJML
+
+| Factor | React Email | MJML |
+|--------|-----------|------|
+| **Component reuse** | Full React component model | Partial (mj-attributes) |
+| **TypeScript** | Native | Requires build step |
+| **Preview server** | Built-in (`email dev`) | Requires separate setup |
+| **Email client compatibility** | Good (renders to tables) | Excellent (battle-tested) |
+| **Dark mode** | CSS media queries | CSS media queries |
+| **Learning curve** | Low (if you know React) | Low (HTML-like syntax) |
+| **Best for** | Teams already using React | Maximum email client compat |
+
+**Recommendation:** React Email for TypeScript teams shipping SaaS. MJML for marketing teams needing maximum compatibility across Outlook, Gmail, Apple Mail, and legacy clients.
+
+---
+
+## Project Structure
+
+```
+emails/
+├── components/
+│   ├── layout/
+│   │   ├── base-layout.tsx          # Shared wrapper: header, footer, styles
+│   │   ├── button.tsx               # CTA button component
+│   │   └── divider.tsx              # Styled horizontal rule
+│   ├── blocks/
+│   │   ├── hero.tsx                 # Hero section with heading + text
+│   │   ├── feature-row.tsx          # Icon + text feature highlight
+│   │   ├── testimonial.tsx          # Quote + attribution
+│   │   └── pricing-table.tsx        # Plan comparison
+├── templates/
+│   ├── welcome.tsx                  # Welcome / confirm email
+│   ├── password-reset.tsx           # Password reset link
+│   ├── invoice.tsx                  # Payment receipt / invoice
+│   ├── trial-expiring.tsx           # Trial expiration warning
+│   ├── weekly-digest.tsx            # Activity summary
+│   └── team-invite.tsx              # Team invitation
+├── lib/
+│   ├── send.ts                      # Unified send function
+│   ├── providers/
+│   │   ├── resend.ts                # Resend adapter
+│   │   ├── sendgrid.ts              # SendGrid adapter
+│   │   ├── postmark.ts              # Postmark adapter
+│   │   └── ses.ts                   # AWS SES adapter
+│   ├── tracking.ts                  # UTM parameter injection
+│   └── render.ts                    # Template rendering
+├── i18n/
+│   ├── en.ts                        # English strings
+│   ├── de.ts                        # German strings
+│   └── types.ts                     # Typed translation keys
+└── package.json
+```
+
+---
+
+## Base Layout Component
+
+```tsx
+// emails/components/layout/base-layout.tsx
+import {
+  Body, Container, Head, Html, Img, Preview,
+  Section, Text, Hr, Font
+} from &quot;@react-email/components&quot;;
+
+interface BaseLayoutProps {
+  preview: string;
+  locale?: string;
+  children: React.ReactNode;
+}
+
+export function BaseLayout({ preview, locale = &quot;en&quot;, children }: BaseLayoutProps) {
+  return (
+    &lt;Html lang={locale}&gt;
+      &lt;Head&gt;
+        &lt;Font
+          fontFamily=&quot;Inter&quot;
+          fallbackFontFamily=&quot;Arial&quot;
+          webFont={{
+            url: &quot;https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2&quot;,
+            format: &quot;woff2&quot;,
+          }}
+          fontWeight={400}
+          fontStyle=&quot;normal&quot;
+        /&gt;
+        &lt;style&gt;{`
+          @media (prefers-color-scheme: dark) {
+            .email-body { background-color: #111827 !important; }
+            .email-container { background-color: #1f2937 !important; }
+            .email-text { color: #e5e7eb !important; }
+            .email-heading { color: #f9fafb !important; }
+            .email-muted { color: #9ca3af !important; }
+          }
+          @media only screen and (max-width: 600px) {
+            .email-container { width: 100% !important; padding: 16px !important; }
+          }
+        `}&lt;/style&gt;
+      &lt;/Head&gt;
+      &lt;Preview&gt;{preview}&lt;/Preview&gt;
+      &lt;Body className=&quot;email-body&quot; style={body}&gt;
+        &lt;Container className=&quot;email-container&quot; style={container}&gt;
+          &lt;Section style={header}&gt;
+            &lt;Img
+              src={`${process.env.ASSET_URL}/logo.png`}
+              width={120} height={36} alt=&quot;[Product]&quot;
+            /&gt;
+          &lt;/Section&gt;
+          &lt;Section style={content}&gt;{children}&lt;/Section&gt;
+          &lt;Hr className=&quot;email-muted&quot; style={divider} /&gt;
+          &lt;Section style={footer}&gt;
+            &lt;Text className=&quot;email-muted&quot; style={footerText}&gt;
+              [Company] Inc. - [Address]
+            &lt;/Text&gt;
+            &lt;Text className=&quot;email-muted&quot; style={footerText}&gt;
+              &lt;a href=&quot;{{unsubscribe_url}}&quot; style={link}&gt;Unsubscribe&lt;/a&gt;
+              {&quot; | &quot;}
+              &lt;a href=&quot;{{preferences_url}}&quot; style={link}&gt;Email Preferences&lt;/a&gt;
+              {&quot; | &quot;}
+              &lt;a href=&quot;{{privacy_url}}&quot; style={link}&gt;Privacy Policy&lt;/a&gt;
+            &lt;/Text&gt;
+          &lt;/Section&gt;
+        &lt;/Container&gt;
+      &lt;/Body&gt;
+    &lt;/Html&gt;
+  );
+}
+
+// Styles (inline for email client compatibility)
+const body = { backgroundColor: &quot;#f3f4f6&quot;, fontFamily: &quot;Inter, Arial, sans-serif&quot;, margin: 0, padding: &quot;40px 0&quot; };
+const container = { maxWidth: &quot;600px&quot;, margin: &quot;0 auto&quot;, backgroundColor: &quot;#ffffff&quot;, borderRadius: &quot;8px&quot;, overflow: &quot;hidden&quot; };
+const header = { padding: &quot;24px 32px&quot;, borderBottom: &quot;1px solid #e5e7eb&quot; };
+const content = { padding: &quot;32px&quot; };
+const divider = { borderColor: &quot;#e5e7eb&quot;, margin: &quot;0 32px&quot; };
+const footer = { padding: &quot;24px 32px&quot; };
+const footerText = { fontSize: &quot;12px&quot;, color: &quot;#6b7280&quot;, textAlign: &quot;center&quot; as const, margin: &quot;4px 0&quot;, lineHeight: &quot;1.6&quot; };
+const link = { color: &quot;#6b7280&quot;, textDecoration: &quot;underline&quot; };
+```
+
+---
+
+## Template Examples
+
+### Welcome Email
+
+```tsx
+// emails/templates/welcome.tsx
+import { Button, Heading, Text } from &quot;@react-email/components&quot;;
+import { BaseLayout } from &quot;../components/layout/base-layout&quot;;
+
+interface WelcomeProps {
+  name: string;
+  confirmUrl: string;
+  trialDays?: number;
+}
+
+export default function Welcome({ name, confirmUrl, trialDays = 14 }: WelcomeProps) {
+  return (
+    &lt;BaseLayout preview={`Welcome, ${name}! Confirm your email to get started.`}&gt;
+      &lt;Heading className=&quot;email-heading&quot; style={h1}&gt;
+        Welcome to [Product], {name}
+      &lt;/Heading&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;
+        You have {trialDays} days to explore everything -- no credit card required.
+        Confirm your email to activate your account:
+      &lt;/Text&gt;
+      &lt;Button href={confirmUrl} style={button}&gt;
+        Confirm Email Address
+      &lt;/Button&gt;
+      &lt;Text className=&quot;email-muted&quot; style={muted}&gt;
+        Button not working? Paste this link in your browser:{&quot; &quot;}
+        &lt;a href={confirmUrl} style={linkStyle}&gt;{confirmUrl}&lt;/a&gt;
+      &lt;/Text&gt;
+    &lt;/BaseLayout&gt;
+  );
+}
+
+const h1 = { fontSize: &quot;24px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, margin: &quot;0 0 16px&quot;, lineHeight: &quot;1.3&quot; };
+const text = { fontSize: &quot;16px&quot;, lineHeight: &quot;1.6&quot;, color: &quot;#374151&quot;, margin: &quot;0 0 24px&quot; };
+const button = { backgroundColor: &quot;#4f46e5&quot;, color: &quot;#ffffff&quot;, borderRadius: &quot;6px&quot;, fontSize: &quot;16px&quot;, fontWeight: &quot;600&quot;, padding: &quot;12px 24px&quot;, textDecoration: &quot;none&quot;, display: &quot;inline-block&quot; };
+const muted = { fontSize: &quot;13px&quot;, color: &quot;#6b7280&quot;, marginTop: &quot;24px&quot;, lineHeight: &quot;1.5&quot; };
+const linkStyle = { color: &quot;#4f46e5&quot;, wordBreak: &quot;break-all&quot; as const };
+```
+
+### Invoice Email
+
+```tsx
+// emails/templates/invoice.tsx
+import { Row, Column, Section, Heading, Text, Hr, Button } from &quot;@react-email/components&quot;;
+import { BaseLayout } from &quot;../components/layout/base-layout&quot;;
+
+interface LineItem { description: string; amount: number; }
+
+interface InvoiceProps {
+  name: string;
+  invoiceNumber: string;
+  date: string;
+  dueDate: string;
+  items: LineItem[];
+  total: number;
+  currency?: string;
+  downloadUrl: string;
+}
+
+export default function Invoice({
+  name, invoiceNumber, date, dueDate, items,
+  total, currency = &quot;USD&quot;, downloadUrl,
+}: InvoiceProps) {
+  const fmt = new Intl.NumberFormat(&quot;en-US&quot;, { style: &quot;currency&quot;, currency });
+
+  return (
+    &lt;BaseLayout preview={`Invoice ${invoiceNumber} -- ${fmt.format(total / 100)}`}&gt;
+      &lt;Heading className=&quot;email-heading&quot; style={h1}&gt;
+        Invoice #{invoiceNumber}
+      &lt;/Heading&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;Hi {name},&lt;/Text&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;
+        Here is your invoice. Thank you for your business.
+      &lt;/Text&gt;
+
+      {/* Meta row */}
+      &lt;Section style={metaBox}&gt;
+        &lt;Row&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Invoice Date&lt;/Text&gt;
+            &lt;Text style={metaValue}&gt;{date}&lt;/Text&gt;
+          &lt;/Column&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Due Date&lt;/Text&gt;
+            &lt;Text style={metaValue}&gt;{dueDate}&lt;/Text&gt;
+          &lt;/Column&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Amount Due&lt;/Text&gt;
+            &lt;Text style={metaValueBold}&gt;{fmt.format(total / 100)}&lt;/Text&gt;
+          &lt;/Column&gt;
+        &lt;/Row&gt;
+      &lt;/Section&gt;
+
+      {/* Line items */}
+      {items.map((item, i) =&gt; (
+        &lt;Row key={i} style={i % 2 === 0 ? rowEven : rowOdd}&gt;
+          &lt;Column&gt;&lt;Text style={cell}&gt;{item.description}&lt;/Text&gt;&lt;/Column&gt;
+          &lt;Column&gt;&lt;Text style={cellRight}&gt;{fmt.format(item.amount / 100)}&lt;/Text&gt;&lt;/Column&gt;
+        &lt;/Row&gt;
+      ))}
+      &lt;Hr style={divider} /&gt;
+      &lt;Row&gt;
+        &lt;Column&gt;&lt;Text style={totalLabel}&gt;Total&lt;/Text&gt;&lt;/Column&gt;
+        &lt;Column&gt;&lt;Text style={totalValue}&gt;{fmt.format(total / 100)}&lt;/Text&gt;&lt;/Column&gt;
+      &lt;/Row&gt;
+
+      &lt;Button href={downloadUrl} style={button}&gt;
+        Download PDF
+      &lt;/Button&gt;
+    &lt;/BaseLayout&gt;
+  );
+}
+
+const h1 = { fontSize: &quot;24px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, margin: &quot;0 0 16px&quot; };
+const text = { fontSize: &quot;15px&quot;, lineHeight: &quot;1.6&quot;, color: &quot;#374151&quot;, margin: &quot;0 0 12px&quot; };
+const metaBox = { backgroundColor: &quot;#f9fafb&quot;, borderRadius: &quot;8px&quot;, padding: &quot;16px&quot;, margin: &quot;16px 0&quot; };
+const metaLabel = { fontSize: &quot;11px&quot;, color: &quot;#6b7280&quot;, fontWeight: &quot;600&quot;, textTransform: &quot;uppercase&quot; as const, margin: &quot;0 0 4px&quot;, letterSpacing: &quot;0.05em&quot; };
+const metaValue = { fontSize: &quot;14px&quot;, color: &quot;#111827&quot;, margin: &quot;0&quot; };
+const metaValueBold = { fontSize: &quot;18px&quot;, fontWeight: &quot;700&quot;, color: &quot;#4f46e5&quot;, margin: &quot;0&quot; };
+const rowEven = { backgroundColor: &quot;#ffffff&quot; };
+const rowOdd = { backgroundColor: &quot;#f9fafb&quot; };
+const cell = { fontSize: &quot;14px&quot;, color: &quot;#374151&quot;, padding: &quot;10px 12px&quot; };
+const cellRight = { ...cell, textAlign: &quot;right&quot; as const };
+const divider = { borderColor: &quot;#e5e7eb&quot;, margin: &quot;8px 0&quot; };
+const totalLabel = { fontSize: &quot;16px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, padding: &quot;8px 12px&quot; };
+const totalValue = { ...totalLabel, textAlign: &quot;right&quot; as const };
+const button = { backgroundColor: &quot;#4f46e5&quot;, color: &quot;#ffffff&quot;, borderRadius: &quot;6px&quot;, padding: &quot;12px 24px&quot;, fontSize: &quot;15px&quot;, fontWeight: &quot;600&quot;, textDecoration: &quot;none&quot;, display: &quot;inline-block&quot;, marginTop: &quot;16px&quot; };
+```
+
+---
+
+## Multi-Provider Send Abstraction
+
+```typescript
+// emails/lib/send.ts
+import { render } from &quot;@react-email/render&quot;;
+
+interface EmailPayload {
+  to: string;
+  subject: string;
+  template: React.ReactElement;
+  tags?: Record&lt;string, string&gt;;
+}
+
+interface EmailProvider {
+  send(payload: { to: string; subject: string; html: string; text: string; tags?: Record&lt;string, string&gt; }): Promise&lt;{ id: string }&gt;;
+}
+
+// Provider factory
+function getProvider(): EmailProvider {
+  const provider = process.env.EMAIL_PROVIDER || &quot;resend&quot;;
+  switch (provider) {
+    case &quot;resend&quot;: return require(&quot;./providers/resend&quot;).default;
+    case &quot;sendgrid&quot;: return require(&quot;./providers/sendgrid&quot;).default;
+    case &quot;postmark&quot;: return require(&quot;./providers/postmark&quot;).default;
+    case &quot;ses&quot;: return require(&quot;./providers/ses&quot;).default;
+    default: throw new Error(`Unknown email provider: ${provider}`);
+  }
+}
+
+export async function sendEmail(payload: EmailPayload) {
+  const html = addTracking(render(payload.template), { campaign: payload.tags?.type || &quot;transactional&quot; });
+  const text = render(payload.template, { plainText: true });
+
+  return getProvider().send({
+    to: payload.to,
+    subject: payload.subject,
+    html,
+    text,
+    tags: payload.tags,
+  });
+}
+```
+
+---
+
+## UTM Tracking Injection
+
+```typescript
+// emails/lib/tracking.ts
+interface TrackingConfig {
+  campaign: string;
+  source?: string;
+  medium?: string;
+}
+
+export function addTracking(html: string, config: TrackingConfig): string {
+  const params = new URLSearchParams({
+    utm_source: config.source || &quot;email&quot;,
+    utm_medium: config.medium || &quot;transactional&quot;,
+    utm_campaign: config.campaign,
+  }).toString();
+
+  // Add UTM to all internal links (skip unsubscribe and external)
+  return html.replace(
+    /href=&quot;(https?:\/\/(?:www\.)?yourdomain\.com[^&quot;]*?)&quot;/g,
+    (match, url) =&gt; {
+      const sep = url.includes(&quot;?&quot;) ? &quot;&amp;&quot; : &quot;?&quot;;
+      return `href=&quot;${url}${sep}${params}&quot;`;
+    }
+  );
+}
+```
+
+---
+
+## i18n System
+
+```typescript
+// emails/i18n/types.ts
+export interface EmailStrings {
+  welcome: {
+    preview: (name: string) =&gt; string;
+    heading: (name: string) =&gt; string;
+    body: (days: number) =&gt; string;
+    cta: string;
+    fallbackLink: string;
+  };
+  invoice: {
+    preview: (number: string, amount: string) =&gt; string;
+    heading: (number: string) =&gt; string;
+    greeting: (name: string) =&gt; string;
+    downloadCta: string;
+  };
+  common: {
+    unsubscribe: string;
+    preferences: string;
+    privacy: string;
+  };
+}
+
+// emails/i18n/en.ts
+import type { EmailStrings } from &quot;./types&quot;;
+export const en: EmailStrings = {
+  welcome: {
+    preview: (name) =&gt; `Welcome, ${name}! Confirm your email to get started.`,
+    heading: (name) =&gt; `Welcome to [Product], ${name}`,
+    body: (days) =&gt; `You have ${days} days to explore everything -- no credit card required.`,
+    cta: &quot;Confirm Email Address&quot;,
+    fallbackLink: &quot;Button not working? Paste this link in your browser:&quot;,
+  },
+  // ... other templates
+};
+
+// emails/i18n/de.ts
+import type { EmailStrings } from &quot;./types&quot;;
+export const de: EmailStrings = {
+  welcome: {
+    preview: (name) =&gt; `Willkommen, ${name}! Bestaetigen Sie Ihre E-Mail.`,
+    heading: (name) =&gt; `Willkommen bei [Product], ${name}`,
+    body: (days) =&gt; `Sie haben ${days} Tage Zeit, alles zu erkunden -- keine Kreditkarte noetig.`,
+    cta: &quot;E-Mail-Adresse bestaetigen&quot;,
+    fallbackLink: &quot;Button funktioniert nicht? Fuegen Sie diesen Link in Ihren Browser ein:&quot;,
+  },
+  // ... other templates
+};
+```
+
+---
+
+## Deliverability Checklist
+
+### DNS Records (Required)
+
+- [ ] **SPF**: `v=spf1 include:_spf.provider.com ~all` on sending domain
+- [ ] **DKIM**: Provider-specific CNAME records configured
+- [ ] **DMARC**: `v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com`
+- [ ] **Return-Path**: Matches sending domain (not provider default)
+
+### Content Rules
+
+- [ ] Sender uses own domain (not `@gmail.com`)
+- [ ] Subject under 50 characters, no ALL CAPS, no spam triggers
+- [ ] Text-to-image ratio: minimum 60% text
+- [ ] Plain text version included alongside HTML
+- [ ] Unsubscribe link in every email (CAN-SPAM, GDPR, one-click)
+- [ ] Physical mailing address in footer (CAN-SPAM requirement)
+- [ ] No URL shorteners (use full branded links)
+- [ ] Single primary CTA per email
+- [ ] All images have alt text
+- [ ] HTML validates (no broken/unclosed tags)
+
+### Infrastructure
+
+- [ ] Separate sending domains for transactional vs marketing
+- [ ] Warm up new sending domains gradually (start with 50/day, increase 2x weekly)
+- [ ] Monitor bounce rates (&lt;2% hard bounces)
+- [ ] Process bounces and complaints automatically
+- [ ] Test with Mail-Tester.com before production sends (target: 9+/10)
+
+---
+
+## Email Client Compatibility
+
+### Known Quirks
+
+| Client | Quirk | Workaround |
+|--------|-------|-----------|
+| Outlook (Windows) | No CSS grid/flexbox, ignores margin on images | Use `&lt;table&gt;` layout (React Email handles this) |
+| Gmail | Strips `&lt;head&gt;` styles, limits CSS | Inline all styles (React Email handles this) |
+| Apple Mail | Best support, renders dark mode well | Standard approach works |
+| Yahoo Mail | Limited CSS support | Avoid advanced selectors |
+| Outlook.com | Strips background images | Use background-color as fallback |
+
+### Testing Matrix
+
+Test every template on these clients before production:
+
+| Priority | Client | Method |
+|----------|--------|--------|
+| Critical | Gmail (web) | Send test email |
+| Critical | Apple Mail (iOS) | Send test email |
+| Critical | Outlook (Windows, latest) | Litmus or Email on Acid |
+| High | Outlook.com (web) | Send test email |
+| High | Gmail (Android) | Send test email |
+| Medium | Yahoo Mail | Litmus |
+| Medium | Outlook (Mac) | Send test email |
+
+---
+
+## Dev Workflow
+
+```bash
+# Start preview server with hot reload
+npx email dev --dir emails/templates --port 3001
+
+# Export to static HTML (for testing with Litmus/Email on Acid)
+npx email export --dir emails/templates --outDir emails/dist
+
+# Send test email
+npx tsx emails/lib/send-test.ts --template welcome --to test@example.com
+
+# Validate HTML
+npx email lint --dir emails/templates
+```
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Consequence | Prevention |
+|---------|-------------|------------|
+| Using CSS grid/flexbox | Layout breaks in Outlook | Use `Row`/`Column` from React Email (renders to tables) |
+| Container wider than 600px | Breaks on Gmail mobile | Max-width: 600px on container |
+| Missing plain text version | Lower deliverability score | Always generate plain text with `render(template, { plainText: true })` |
+| Same domain for transactional + marketing | Marketing complaints tank transactional delivery | Separate sending domains/subdomains |
+| Skipping email warm-up | Emails go to spam | Start low, increase gradually over 2-4 weeks |
+| Dark mode ignoring | Unreadable emails for 30%+ of users | Add `prefers-color-scheme: dark` media queries with `!important` |
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **email-sequence** | Writing email copy and designing automation flows |
+| **analytics-tracking** | Setting up email engagement tracking and attribution |
+| **launch-strategy** | Coordinating email templates for product launches |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Email clipped in Gmail | HTML over 102KB | Run `render_size_analyzer.py`. Remove comments, minify, replace base64 images. |
+| Layout broken in Outlook | CSS flexbox/grid used | Use table-based layout. Run `template_validator.py` for compatibility check. |
+| Styles stripped in Gmail | Styles in `&lt;head&gt;` only | Inline all CSS. React Email handles this automatically. |
+| Unreadable in dark mode | No dark mode CSS | Add `prefers-color-scheme: dark` media queries with `!important`. |
+| Low deliverability score | Missing unsubscribe, heavy images | Run `spam_score_checker.py`. Add RFC 8058 one-click unsubscribe headers. |
+| Images not loading | Blocked by email client defaults | Add descriptive alt text. Maintain 60%+ text-to-image ratio. |
+| Template renders differently across clients | Unsupported CSS properties | Test on Gmail, Apple Mail, Outlook (Windows) before production sends. |
+
+---
+
+## Success Criteria
+
+- Spam score of 9+/10 on mail-tester.com before production sends
+- Template renders correctly on Gmail, Apple Mail, and Outlook (Windows)
+- HTML under 80KB (well under Gmail&#x27;s 102KB clip threshold)
+- Text-to-image ratio above 60%
+- Dark mode tested and readable for 30%+ of users
+- All images have alt text and explicit width/height dimensions
+- One-click unsubscribe (RFC 8058) implemented in all templates
+- Separate sending domains for transactional vs. marketing email
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Email HTML/CSS template engineering, React Email and MJML components, multi-provider sending abstraction, i18n, dark mode, deliverability infrastructure, spam score optimization.
+
+**Out of Scope:** Email copy/sequence writing (use email-sequence), marketing automation workflows, email list management, A/B test statistical analysis.
+
+---
+
+## Python Automation Tools
+
+### 1. Spam Score Checker (`scripts/spam_score_checker.py`)
+Analyzes email HTML for spam risk: text-to-image ratio, link density, spam words, unsubscribe presence, HTML structure.
+
+```bash
+python scripts/spam_score_checker.py template.html
+python scripts/spam_score_checker.py template.html --json
+```
+
+### 2. Template Validator (`scripts/template_validator.py`)
+Validates email templates for client compatibility (Outlook, Gmail), accessibility, responsive design, and inline styles.
+
+```bash
+python scripts/template_validator.py template.html
+python scripts/template_validator.py template.html --json
+```
+
+### 3. Render Size Analyzer (`scripts/render_size_analyzer.py`)
+Analyzes template file size, estimates render weight, and checks against Gmail&#x27;s 102KB clip threshold with detailed breakdown.
+
+```bash
+python scripts/render_size_analyzer.py template.html
+python scripts/render_size_analyzer.py --dir templates/ --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Email Template Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Email Template Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Email Template Builder in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Email Template Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Email Template Builder&quot;
+4. Description: &quot;Build production-grade email template systems with React Email or MJML. Covers responsive layouts, dark mode, multi-provider sending (Resend, SendGrid, Postmark, SES), i18n, spam score optimization, p...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/email-template-builder/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Email Template Builder&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Email Template Builder
+
+**Tier:** POWERFUL
+**Category:** Engineering / Marketing
+**Tags:** email templates, React Email, MJML, responsive email, deliverability, transactional email, dark mode
+
+## Overview
+
+Build complete transactional email systems: component-based templates with React Email or MJML, multi-provider sending abstraction, local preview with hot reload, i18n support, dark mode, spam optimization, and UTM tracking. Outputs production-ready code for any major email provider.
+
+This skill builds the email rendering and sending infrastructure. For writing email copy and designing sequences, use email-sequence.
+
+---
+
+## Architecture Decision: React Email vs MJML
+
+| Factor | React Email | MJML |
+|--------|-----------|------|
+| **Component reuse** | Full React component model | Partial (mj-attributes) |
+| **TypeScript** | Native | Requires build step |
+| **Preview server** | Built-in (`email dev`) | Requires separate setup |
+| **Email client compatibility** | Good (renders to tables) | Excellent (battle-tested) |
+| **Dark mode** | CSS media queries | CSS media queries |
+| **Learning curve** | Low (if you know React) | Low (HTML-like syntax) |
+| **Best for** | Teams already using React | Maximum email client compat |
+
+**Recommendation:** React Email for TypeScript teams shipping SaaS. MJML for marketing teams needing maximum compatibility across Outlook, Gmail, Apple Mail, and legacy clients.
+
+---
+
+## Project Structure
+
+```
+emails/
+├── components/
+│   ├── layout/
+│   │   ├── base-layout.tsx          # Shared wrapper: header, footer, styles
+│   │   ├── button.tsx               # CTA button component
+│   │   └── divider.tsx              # Styled horizontal rule
+│   ├── blocks/
+│   │   ├── hero.tsx                 # Hero section with heading + text
+│   │   ├── feature-row.tsx          # Icon + text feature highlight
+│   │   ├── testimonial.tsx          # Quote + attribution
+│   │   └── pricing-table.tsx        # Plan comparison
+├── templates/
+│   ├── welcome.tsx                  # Welcome / confirm email
+│   ├── password-reset.tsx           # Password reset link
+│   ├── invoice.tsx                  # Payment receipt / invoice
+│   ├── trial-expiring.tsx           # Trial expiration warning
+│   ├── weekly-digest.tsx            # Activity summary
+│   └── team-invite.tsx              # Team invitation
+├── lib/
+│   ├── send.ts                      # Unified send function
+│   ├── providers/
+│   │   ├── resend.ts                # Resend adapter
+│   │   ├── sendgrid.ts              # SendGrid adapter
+│   │   ├── postmark.ts              # Postmark adapter
+│   │   └── ses.ts                   # AWS SES adapter
+│   ├── tracking.ts                  # UTM parameter injection
+│   └── render.ts                    # Template rendering
+├── i18n/
+│   ├── en.ts                        # English strings
+│   ├── de.ts                        # German strings
+│   └── types.ts                     # Typed translation keys
+└── package.json
+```
+
+---
+
+## Base Layout Component
+
+```tsx
+// emails/components/layout/base-layout.tsx
+import {
+  Body, Container, Head, Html, Img, Preview,
+  Section, Text, Hr, Font
+} from &quot;@react-email/components&quot;;
+
+interface BaseLayoutProps {
+  preview: string;
+  locale?: string;
+  children: React.ReactNode;
+}
+
+export function BaseLayout({ preview, locale = &quot;en&quot;, children }: BaseLayoutProps) {
+  return (
+    &lt;Html lang={locale}&gt;
+      &lt;Head&gt;
+        &lt;Font
+          fontFamily=&quot;Inter&quot;
+          fallbackFontFamily=&quot;Arial&quot;
+          webFont={{
+            url: &quot;https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2&quot;,
+            format: &quot;woff2&quot;,
+          }}
+          fontWeight={400}
+          fontStyle=&quot;normal&quot;
+        /&gt;
+        &lt;style&gt;{`
+          @media (prefers-color-scheme: dark) {
+            .email-body { background-color: #111827 !important; }
+            .email-container { background-color: #1f2937 !important; }
+            .email-text { color: #e5e7eb !important; }
+            .email-heading { color: #f9fafb !important; }
+            .email-muted { color: #9ca3af !important; }
+          }
+          @media only screen and (max-width: 600px) {
+            .email-container { width: 100% !important; padding: 16px !important; }
+          }
+        `}&lt;/style&gt;
+      &lt;/Head&gt;
+      &lt;Preview&gt;{preview}&lt;/Preview&gt;
+      &lt;Body className=&quot;email-body&quot; style={body}&gt;
+        &lt;Container className=&quot;email-container&quot; style={container}&gt;
+          &lt;Section style={header}&gt;
+            &lt;Img
+              src={`${process.env.ASSET_URL}/logo.png`}
+              width={120} height={36} alt=&quot;[Product]&quot;
+            /&gt;
+          &lt;/Section&gt;
+          &lt;Section style={content}&gt;{children}&lt;/Section&gt;
+          &lt;Hr className=&quot;email-muted&quot; style={divider} /&gt;
+          &lt;Section style={footer}&gt;
+            &lt;Text className=&quot;email-muted&quot; style={footerText}&gt;
+              [Company] Inc. - [Address]
+            &lt;/Text&gt;
+            &lt;Text className=&quot;email-muted&quot; style={footerText}&gt;
+              &lt;a href=&quot;{{unsubscribe_url}}&quot; style={link}&gt;Unsubscribe&lt;/a&gt;
+              {&quot; | &quot;}
+              &lt;a href=&quot;{{preferences_url}}&quot; style={link}&gt;Email Preferences&lt;/a&gt;
+              {&quot; | &quot;}
+              &lt;a href=&quot;{{privacy_url}}&quot; style={link}&gt;Privacy Policy&lt;/a&gt;
+            &lt;/Text&gt;
+          &lt;/Section&gt;
+        &lt;/Container&gt;
+      &lt;/Body&gt;
+    &lt;/Html&gt;
+  );
+}
+
+// Styles (inline for email client compatibility)
+const body = { backgroundColor: &quot;#f3f4f6&quot;, fontFamily: &quot;Inter, Arial, sans-serif&quot;, margin: 0, padding: &quot;40px 0&quot; };
+const container = { maxWidth: &quot;600px&quot;, margin: &quot;0 auto&quot;, backgroundColor: &quot;#ffffff&quot;, borderRadius: &quot;8px&quot;, overflow: &quot;hidden&quot; };
+const header = { padding: &quot;24px 32px&quot;, borderBottom: &quot;1px solid #e5e7eb&quot; };
+const content = { padding: &quot;32px&quot; };
+const divider = { borderColor: &quot;#e5e7eb&quot;, margin: &quot;0 32px&quot; };
+const footer = { padding: &quot;24px 32px&quot; };
+const footerText = { fontSize: &quot;12px&quot;, color: &quot;#6b7280&quot;, textAlign: &quot;center&quot; as const, margin: &quot;4px 0&quot;, lineHeight: &quot;1.6&quot; };
+const link = { color: &quot;#6b7280&quot;, textDecoration: &quot;underline&quot; };
+```
+
+---
+
+## Template Examples
+
+### Welcome Email
+
+```tsx
+// emails/templates/welcome.tsx
+import { Button, Heading, Text } from &quot;@react-email/components&quot;;
+import { BaseLayout } from &quot;../components/layout/base-layout&quot;;
+
+interface WelcomeProps {
+  name: string;
+  confirmUrl: string;
+  trialDays?: number;
+}
+
+export default function Welcome({ name, confirmUrl, trialDays = 14 }: WelcomeProps) {
+  return (
+    &lt;BaseLayout preview={`Welcome, ${name}! Confirm your email to get started.`}&gt;
+      &lt;Heading className=&quot;email-heading&quot; style={h1}&gt;
+        Welcome to [Product], {name}
+      &lt;/Heading&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;
+        You have {trialDays} days to explore everything -- no credit card required.
+        Confirm your email to activate your account:
+      &lt;/Text&gt;
+      &lt;Button href={confirmUrl} style={button}&gt;
+        Confirm Email Address
+      &lt;/Button&gt;
+      &lt;Text className=&quot;email-muted&quot; style={muted}&gt;
+        Button not working? Paste this link in your browser:{&quot; &quot;}
+        &lt;a href={confirmUrl} style={linkStyle}&gt;{confirmUrl}&lt;/a&gt;
+      &lt;/Text&gt;
+    &lt;/BaseLayout&gt;
+  );
+}
+
+const h1 = { fontSize: &quot;24px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, margin: &quot;0 0 16px&quot;, lineHeight: &quot;1.3&quot; };
+const text = { fontSize: &quot;16px&quot;, lineHeight: &quot;1.6&quot;, color: &quot;#374151&quot;, margin: &quot;0 0 24px&quot; };
+const button = { backgroundColor: &quot;#4f46e5&quot;, color: &quot;#ffffff&quot;, borderRadius: &quot;6px&quot;, fontSize: &quot;16px&quot;, fontWeight: &quot;600&quot;, padding: &quot;12px 24px&quot;, textDecoration: &quot;none&quot;, display: &quot;inline-block&quot; };
+const muted = { fontSize: &quot;13px&quot;, color: &quot;#6b7280&quot;, marginTop: &quot;24px&quot;, lineHeight: &quot;1.5&quot; };
+const linkStyle = { color: &quot;#4f46e5&quot;, wordBreak: &quot;break-all&quot; as const };
+```
+
+### Invoice Email
+
+```tsx
+// emails/templates/invoice.tsx
+import { Row, Column, Section, Heading, Text, Hr, Button } from &quot;@react-email/components&quot;;
+import { BaseLayout } from &quot;../components/layout/base-layout&quot;;
+
+interface LineItem { description: string; amount: number; }
+
+interface InvoiceProps {
+  name: string;
+  invoiceNumber: string;
+  date: string;
+  dueDate: string;
+  items: LineItem[];
+  total: number;
+  currency?: string;
+  downloadUrl: string;
+}
+
+export default function Invoice({
+  name, invoiceNumber, date, dueDate, items,
+  total, currency = &quot;USD&quot;, downloadUrl,
+}: InvoiceProps) {
+  const fmt = new Intl.NumberFormat(&quot;en-US&quot;, { style: &quot;currency&quot;, currency });
+
+  return (
+    &lt;BaseLayout preview={`Invoice ${invoiceNumber} -- ${fmt.format(total / 100)}`}&gt;
+      &lt;Heading className=&quot;email-heading&quot; style={h1}&gt;
+        Invoice #{invoiceNumber}
+      &lt;/Heading&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;Hi {name},&lt;/Text&gt;
+      &lt;Text className=&quot;email-text&quot; style={text}&gt;
+        Here is your invoice. Thank you for your business.
+      &lt;/Text&gt;
+
+      {/* Meta row */}
+      &lt;Section style={metaBox}&gt;
+        &lt;Row&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Invoice Date&lt;/Text&gt;
+            &lt;Text style={metaValue}&gt;{date}&lt;/Text&gt;
+          &lt;/Column&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Due Date&lt;/Text&gt;
+            &lt;Text style={metaValue}&gt;{dueDate}&lt;/Text&gt;
+          &lt;/Column&gt;
+          &lt;Column&gt;
+            &lt;Text style={metaLabel}&gt;Amount Due&lt;/Text&gt;
+            &lt;Text style={metaValueBold}&gt;{fmt.format(total / 100)}&lt;/Text&gt;
+          &lt;/Column&gt;
+        &lt;/Row&gt;
+      &lt;/Section&gt;
+
+      {/* Line items */}
+      {items.map((item, i) =&gt; (
+        &lt;Row key={i} style={i % 2 === 0 ? rowEven : rowOdd}&gt;
+          &lt;Column&gt;&lt;Text style={cell}&gt;{item.description}&lt;/Text&gt;&lt;/Column&gt;
+          &lt;Column&gt;&lt;Text style={cellRight}&gt;{fmt.format(item.amount / 100)}&lt;/Text&gt;&lt;/Column&gt;
+        &lt;/Row&gt;
+      ))}
+      &lt;Hr style={divider} /&gt;
+      &lt;Row&gt;
+        &lt;Column&gt;&lt;Text style={totalLabel}&gt;Total&lt;/Text&gt;&lt;/Column&gt;
+        &lt;Column&gt;&lt;Text style={totalValue}&gt;{fmt.format(total / 100)}&lt;/Text&gt;&lt;/Column&gt;
+      &lt;/Row&gt;
+
+      &lt;Button href={downloadUrl} style={button}&gt;
+        Download PDF
+      &lt;/Button&gt;
+    &lt;/BaseLayout&gt;
+  );
+}
+
+const h1 = { fontSize: &quot;24px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, margin: &quot;0 0 16px&quot; };
+const text = { fontSize: &quot;15px&quot;, lineHeight: &quot;1.6&quot;, color: &quot;#374151&quot;, margin: &quot;0 0 12px&quot; };
+const metaBox = { backgroundColor: &quot;#f9fafb&quot;, borderRadius: &quot;8px&quot;, padding: &quot;16px&quot;, margin: &quot;16px 0&quot; };
+const metaLabel = { fontSize: &quot;11px&quot;, color: &quot;#6b7280&quot;, fontWeight: &quot;600&quot;, textTransform: &quot;uppercase&quot; as const, margin: &quot;0 0 4px&quot;, letterSpacing: &quot;0.05em&quot; };
+const metaValue = { fontSize: &quot;14px&quot;, color: &quot;#111827&quot;, margin: &quot;0&quot; };
+const metaValueBold = { fontSize: &quot;18px&quot;, fontWeight: &quot;700&quot;, color: &quot;#4f46e5&quot;, margin: &quot;0&quot; };
+const rowEven = { backgroundColor: &quot;#ffffff&quot; };
+const rowOdd = { backgroundColor: &quot;#f9fafb&quot; };
+const cell = { fontSize: &quot;14px&quot;, color: &quot;#374151&quot;, padding: &quot;10px 12px&quot; };
+const cellRight = { ...cell, textAlign: &quot;right&quot; as const };
+const divider = { borderColor: &quot;#e5e7eb&quot;, margin: &quot;8px 0&quot; };
+const totalLabel = { fontSize: &quot;16px&quot;, fontWeight: &quot;700&quot;, color: &quot;#111827&quot;, padding: &quot;8px 12px&quot; };
+const totalValue = { ...totalLabel, textAlign: &quot;right&quot; as const };
+const button = { backgroundColor: &quot;#4f46e5&quot;, color: &quot;#ffffff&quot;, borderRadius: &quot;6px&quot;, padding: &quot;12px 24px&quot;, fontSize: &quot;15px&quot;, fontWeight: &quot;600&quot;, textDecoration: &quot;none&quot;, display: &quot;inline-block&quot;, marginTop: &quot;16px&quot; };
+```
+
+---
+
+## Multi-Provider Send Abstraction
+
+```typescript
+// emails/lib/send.ts
+import { render } from &quot;@react-email/render&quot;;
+
+interface EmailPayload {
+  to: string;
+  subject: string;
+  template: React.ReactElement;
+  tags?: Record&lt;string, string&gt;;
+}
+
+interface EmailProvider {
+  send(payload: { to: string; subject: string; html: string; text: string; tags?: Record&lt;string, string&gt; }): Promise&lt;{ id: string }&gt;;
+}
+
+// Provider factory
+function getProvider(): EmailProvider {
+  const provider = process.env.EMAIL_PROVIDER || &quot;resend&quot;;
+  switch (provider) {
+    case &quot;resend&quot;: return require(&quot;./providers/resend&quot;).default;
+    case &quot;sendgrid&quot;: return require(&quot;./providers/sendgrid&quot;).default;
+    case &quot;postmark&quot;: return require(&quot;./providers/postmark&quot;).default;
+    case &quot;ses&quot;: return require(&quot;./providers/ses&quot;).default;
+    default: throw new Error(`Unknown email provider: ${provider}`);
+  }
+}
+
+export async function sendEmail(payload: EmailPayload) {
+  const html = addTracking(render(payload.template), { campaign: payload.tags?.type || &quot;transactional&quot; });
+  const text = render(payload.template, { plainText: true });
+
+  return getProvider().send({
+    to: payload.to,
+    subject: payload.subject,
+    html,
+    text,
+    tags: payload.tags,
+  });
+}
+```
+
+---
+
+## UTM Tracking Injection
+
+```typescript
+// emails/lib/tracking.ts
+interface TrackingConfig {
+  campaign: string;
+  source?: string;
+  medium?: string;
+}
+
+export function addTracking(html: string, config: TrackingConfig): string {
+  const params = new URLSearchParams({
+    utm_source: config.source || &quot;email&quot;,
+    utm_medium: config.medium || &quot;transactional&quot;,
+    utm_campaign: config.campaign,
+  }).toString();
+
+  // Add UTM to all internal links (skip unsubscribe and external)
+  return html.replace(
+    /href=&quot;(https?:\/\/(?:www\.)?yourdomain\.com[^&quot;]*?)&quot;/g,
+    (match, url) =&gt; {
+      const sep = url.includes(&quot;?&quot;) ? &quot;&amp;&quot; : &quot;?&quot;;
+      return `href=&quot;${url}${sep}${params}&quot;`;
+    }
+  );
+}
+```
+
+---
+
+## i18n System
+
+```typescript
+// emails/i18n/types.ts
+export interface EmailStrings {
+  welcome: {
+    preview: (name: string) =&gt; string;
+    heading: (name: string) =&gt; string;
+    body: (days: number) =&gt; string;
+    cta: string;
+    fallbackLink: string;
+  };
+  invoice: {
+    preview: (number: string, amount: string) =&gt; string;
+    heading: (number: string) =&gt; string;
+    greeting: (name: string) =&gt; string;
+    downloadCta: string;
+  };
+  common: {
+    unsubscribe: string;
+    preferences: string;
+    privacy: string;
+  };
+}
+
+// emails/i18n/en.ts
+import type { EmailStrings } from &quot;./types&quot;;
+export const en: EmailStrings = {
+  welcome: {
+    preview: (name) =&gt; `Welcome, ${name}! Confirm your email to get started.`,
+    heading: (name) =&gt; `Welcome to [Product], ${name}`,
+    body: (days) =&gt; `You have ${days} days to explore everything -- no credit card required.`,
+    cta: &quot;Confirm Email Address&quot;,
+    fallbackLink: &quot;Button not working? Paste this link in your browser:&quot;,
+  },
+  // ... other templates
+};
+
+// emails/i18n/de.ts
+import type { EmailStrings } from &quot;./types&quot;;
+export const de: EmailStrings = {
+  welcome: {
+    preview: (name) =&gt; `Willkommen, ${name}! Bestaetigen Sie Ihre E-Mail.`,
+    heading: (name) =&gt; `Willkommen bei [Product], ${name}`,
+    body: (days) =&gt; `Sie haben ${days} Tage Zeit, alles zu erkunden -- keine Kreditkarte noetig.`,
+    cta: &quot;E-Mail-Adresse bestaetigen&quot;,
+    fallbackLink: &quot;Button funktioniert nicht? Fuegen Sie diesen Link in Ihren Browser ein:&quot;,
+  },
+  // ... other templates
+};
+```
+
+---
+
+## Deliverability Checklist
+
+### DNS Records (Required)
+
+- [ ] **SPF**: `v=spf1 include:_spf.provider.com ~all` on sending domain
+- [ ] **DKIM**: Provider-specific CNAME records configured
+- [ ] **DMARC**: `v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com`
+- [ ] **Return-Path**: Matches sending domain (not provider default)
+
+### Content Rules
+
+- [ ] Sender uses own domain (not `@gmail.com`)
+- [ ] Subject under 50 characters, no ALL CAPS, no spam triggers
+- [ ] Text-to-image ratio: minimum 60% text
+- [ ] Plain text version included alongside HTML
+- [ ] Unsubscribe link in every email (CAN-SPAM, GDPR, one-click)
+- [ ] Physical mailing address in footer (CAN-SPAM requirement)
+- [ ] No URL shorteners (use full branded links)
+- [ ] Single primary CTA per email
+- [ ] All images have alt text
+- [ ] HTML validates (no broken/unclosed tags)
+
+### Infrastructure
+
+- [ ] Separate sending domains for transactional vs marketing
+- [ ] Warm up new sending domains gradually (start with 50/day, increase 2x weekly)
+- [ ] Monitor bounce rates (&lt;2% hard bounces)
+- [ ] Process bounces and complaints automatically
+- [ ] Test with Mail-Tester.com before production sends (target: 9+/10)
+
+---
+
+## Email Client Compatibility
+
+### Known Quirks
+
+| Client | Quirk | Workaround |
+|--------|-------|-----------|
+| Outlook (Windows) | No CSS grid/flexbox, ignores margin on images | Use `&lt;table&gt;` layout (React Email handles this) |
+| Gmail | Strips `&lt;head&gt;` styles, limits CSS | Inline all styles (React Email handles this) |
+| Apple Mail | Best support, renders dark mode well | Standard approach works |
+| Yahoo Mail | Limited CSS support | Avoid advanced selectors |
+| Outlook.com | Strips background images | Use background-color as fallback |
+
+### Testing Matrix
+
+Test every template on these clients before production:
+
+| Priority | Client | Method |
+|----------|--------|--------|
+| Critical | Gmail (web) | Send test email |
+| Critical | Apple Mail (iOS) | Send test email |
+| Critical | Outlook (Windows, latest) | Litmus or Email on Acid |
+| High | Outlook.com (web) | Send test email |
+| High | Gmail (Android) | Send test email |
+| Medium | Yahoo Mail | Litmus |
+| Medium | Outlook (Mac) | Send test email |
+
+---
+
+## Dev Workflow
+
+```bash
+# Start preview server with hot reload
+npx email dev --dir emails/templates --port 3001
+
+# Export to static HTML (for testing with Litmus/Email on Acid)
+npx email export --dir emails/templates --outDir emails/dist
+
+# Send test email
+npx tsx emails/lib/send-test.ts --template welcome --to test@example.com
+
+# Validate HTML
+npx email lint --dir emails/templates
+```
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Consequence | Prevention |
+|---------|-------------|------------|
+| Using CSS grid/flexbox | Layout breaks in Outlook | Use `Row`/`Column` from React Email (renders to tables) |
+| Container wider than 600px | Breaks on Gmail mobile | Max-width: 600px on container |
+| Missing plain text version | Lower deliverability score | Always generate plain text with `render(template, { plainText: true })` |
+| Same domain for transactional + marketing | Marketing complaints tank transactional delivery | Separate sending domains/subdomains |
+| Skipping email warm-up | Emails go to spam | Start low, increase gradually over 2-4 weeks |
+| Dark mode ignoring | Unreadable emails for 30%+ of users | Add `prefers-color-scheme: dark` media queries with `!important` |
+
+---
+
+## Related Skills
+
+| Skill | Use When |
+|-------|----------|
+| **email-sequence** | Writing email copy and designing automation flows |
+| **analytics-tracking** | Setting up email engagement tracking and attribution |
+| **launch-strategy** | Coordinating email templates for product launches |
+
+---
+
+## Troubleshooting
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Email clipped in Gmail | HTML over 102KB | Run `render_size_analyzer.py`. Remove comments, minify, replace base64 images. |
+| Layout broken in Outlook | CSS flexbox/grid used | Use table-based layout. Run `template_validator.py` for compatibility check. |
+| Styles stripped in Gmail | Styles in `&lt;head&gt;` only | Inline all CSS. React Email handles this automatically. |
+| Unreadable in dark mode | No dark mode CSS | Add `prefers-color-scheme: dark` media queries with `!important`. |
+| Low deliverability score | Missing unsubscribe, heavy images | Run `spam_score_checker.py`. Add RFC 8058 one-click unsubscribe headers. |
+| Images not loading | Blocked by email client defaults | Add descriptive alt text. Maintain 60%+ text-to-image ratio. |
+| Template renders differently across clients | Unsupported CSS properties | Test on Gmail, Apple Mail, Outlook (Windows) before production sends. |
+
+---
+
+## Success Criteria
+
+- Spam score of 9+/10 on mail-tester.com before production sends
+- Template renders correctly on Gmail, Apple Mail, and Outlook (Windows)
+- HTML under 80KB (well under Gmail&#x27;s 102KB clip threshold)
+- Text-to-image ratio above 60%
+- Dark mode tested and readable for 30%+ of users
+- All images have alt text and explicit width/height dimensions
+- One-click unsubscribe (RFC 8058) implemented in all templates
+- Separate sending domains for transactional vs. marketing email
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:** Email HTML/CSS template engineering, React Email and MJML components, multi-provider sending abstraction, i18n, dark mode, deliverability infrastructure, spam score optimization.
+
+**Out of Scope:** Email copy/sequence writing (use email-sequence), marketing automation workflows, email list management, A/B test statistical analysis.
+
+---
+
+## Python Automation Tools
+
+### 1. Spam Score Checker (`scripts/spam_score_checker.py`)
+Analyzes email HTML for spam risk: text-to-image ratio, link density, spam words, unsubscribe presence, HTML structure.
+
+```bash
+python scripts/spam_score_checker.py template.html
+python scripts/spam_score_checker.py template.html --json
+```
+
+### 2. Template Validator (`scripts/template_validator.py`)
+Validates email templates for client compatibility (Outlook, Gmail), accessibility, responsive design, and inline styles.
+
+```bash
+python scripts/template_validator.py template.html
+python scripts/template_validator.py template.html --json
+```
+
+### 3. Render Size Analyzer (`scripts/render_size_analyzer.py`)
+Analyzes template file size, estimates render weight, and checks against Gmail&#x27;s 102KB clip threshold with detailed breakdown.
+
+```bash
+python scripts/render_size_analyzer.py template.html
+python scripts/render_size_analyzer.py --dir templates/ --json
+```
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Email Template Builder&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Email Template Builder&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Email Template Builder in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Email Template Builder&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Email Template Builder&quot;
+4. Description: &quot;Build production-grade email template systems with React Email or MJML. Covers responsive layouts, dark mode, multi-provider sending (Resend, SendGrid, Postmark, SES), i18n, spam score optimization, p...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/email-template-builder/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

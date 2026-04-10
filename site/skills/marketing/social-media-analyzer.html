@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Social Media Analyzer (Marketing domain).
 
 Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, mea...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/social-media-analyzer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Social Media Analyzer (Marketing domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Social Media Analyzer (Marketing domain).
 
 Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, mea...
 
@@ -425,7 +447,894 @@ https://github.com/borghei/Claude-Skills/tree/main/social-media-analyzer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Social Media Analyzer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Social Media Analyzer
+
+Campaign performance analysis with engagement metrics, ROI calculations, and platform benchmarks.
+
+---
+
+## Table of Contents
+
+- [Analysis Workflow](#analysis-workflow)
+- [Engagement Metrics](#engagement-metrics)
+- [ROI Calculation](#roi-calculation)
+- [Platform Benchmarks](#platform-benchmarks)
+- [Tools](#tools)
+- [Examples](#examples)
+
+---
+
+## Analysis Workflow
+
+Analyze social media campaign performance:
+
+1. Validate input data completeness (reach &gt; 0, dates valid)
+2. Calculate engagement metrics per post
+3. Aggregate campaign-level metrics
+4. Calculate ROI if ad spend provided
+5. Compare against platform benchmarks
+6. Identify top and bottom performers
+7. Generate recommendations
+8. **Validation:** Engagement rate &lt; 100%, ROI matches spend data
+
+### Input Requirements
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| platform | Yes | instagram, facebook, twitter, linkedin, tiktok |
+| posts[] | Yes | Array of post data |
+| posts[].likes | Yes | Like/reaction count |
+| posts[].comments | Yes | Comment count |
+| posts[].reach | Yes | Unique users reached |
+| posts[].impressions | No | Total views |
+| posts[].shares | No | Share/retweet count |
+| posts[].saves | No | Save/bookmark count |
+| posts[].clicks | No | Link clicks |
+| total_spend | No | Ad spend (for ROI) |
+
+### Data Validation Checks
+
+Before analysis, verify:
+
+- [ ] Reach &gt; 0 for all posts (avoid division by zero)
+- [ ] Engagement counts are non-negative
+- [ ] Date range is valid (start &lt; end)
+- [ ] Platform is recognized
+- [ ] Spend &gt; 0 if ROI requested
+
+---
+
+## Engagement Metrics
+
+### Engagement Rate Calculation
+
+```
+Engagement Rate = (Likes + Comments + Shares + Saves) / Reach × 100
+```
+
+### Metric Definitions
+
+| Metric | Formula | Interpretation |
+|--------|---------|----------------|
+| Engagement Rate | Engagements / Reach × 100 | Audience interaction level |
+| CTR | Clicks / Impressions × 100 | Content click appeal |
+| Reach Rate | Reach / Followers × 100 | Content distribution |
+| Virality Rate | Shares / Impressions × 100 | Share-worthiness |
+| Save Rate | Saves / Reach × 100 | Content value |
+
+### Performance Categories
+
+| Rating | Engagement Rate | Action |
+|--------|-----------------|--------|
+| Excellent | &gt; 6% | Scale and replicate |
+| Good | 3-6% | Optimize and expand |
+| Average | 1-3% | Test improvements |
+| Poor | &lt; 1% | Analyze and pivot |
+
+---
+
+## ROI Calculation
+
+Calculate return on ad spend:
+
+1. Sum total engagements across posts
+2. Calculate cost per engagement (CPE)
+3. Calculate cost per click (CPC) if clicks available
+4. Estimate engagement value using benchmark rates
+5. Calculate ROI percentage
+6. **Validation:** ROI = (Value - Spend) / Spend × 100
+
+### ROI Formulas
+
+| Metric | Formula |
+|--------|---------|
+| Cost Per Engagement (CPE) | Total Spend / Total Engagements |
+| Cost Per Click (CPC) | Total Spend / Total Clicks |
+| Cost Per Thousand (CPM) | (Spend / Impressions) × 1000 |
+| Return on Ad Spend (ROAS) | Revenue / Ad Spend |
+
+### Engagement Value Estimates
+
+| Action | Value | Rationale |
+|--------|-------|-----------|
+| Like | $0.50 | Brand awareness |
+| Comment | $2.00 | Active engagement |
+| Share | $5.00 | Amplification |
+| Save | $3.00 | Intent signal |
+| Click | $1.50 | Traffic value |
+
+### ROI Interpretation
+
+| ROI % | Rating | Recommendation |
+|-------|--------|----------------|
+| &gt; 500% | Excellent | Scale budget significantly |
+| 200-500% | Good | Increase budget moderately |
+| 100-200% | Acceptable | Optimize before scaling |
+| 0-100% | Break-even | Review targeting and creative |
+| &lt; 0% | Negative | Pause and restructure |
+
+---
+
+## Platform Benchmarks
+
+### Engagement Rate by Platform
+
+| Platform | Average | Good | Excellent |
+|----------|---------|------|-----------|
+| Instagram | 1.22% | 3-6% | &gt;6% |
+| Facebook | 0.07% | 0.5-1% | &gt;1% |
+| Twitter/X | 0.05% | 0.1-0.5% | &gt;0.5% |
+| LinkedIn | 2.0% | 3-5% | &gt;5% |
+| TikTok | 5.96% | 8-15% | &gt;15% |
+
+### CTR by Platform
+
+| Platform | Average | Good | Excellent |
+|----------|---------|------|-----------|
+| Instagram | 0.22% | 0.5-1% | &gt;1% |
+| Facebook | 0.90% | 1.5-2.5% | &gt;2.5% |
+| LinkedIn | 0.44% | 1-2% | &gt;2% |
+| TikTok | 0.30% | 0.5-1% | &gt;1% |
+
+### CPC by Platform
+
+| Platform | Average | Good |
+|----------|---------|------|
+| Facebook | $0.97 | &lt;$0.50 |
+| Instagram | $1.20 | &lt;$0.70 |
+| LinkedIn | $5.26 | &lt;$3.00 |
+| TikTok | $1.00 | &lt;$0.50 |
+
+See `references/platform-benchmarks.md` for complete benchmark data.
+
+---
+
+## Tools
+
+### Calculate Metrics
+
+```bash
+python scripts/calculate_metrics.py assets/sample_input.json
+```
+
+Calculates engagement rate, CTR, reach rate for each post and campaign totals.
+
+### Analyze Performance
+
+```bash
+python scripts/analyze_performance.py assets/sample_input.json
+```
+
+Generates full performance analysis with ROI, benchmarks, and recommendations.
+
+**Output includes:**
+- Campaign-level metrics
+- Post-by-post breakdown
+- Benchmark comparisons
+- Top performers ranked
+- Actionable recommendations
+
+---
+
+## Examples
+
+### Sample Input
+
+See `assets/sample_input.json`:
+
+```json
+{
+  &quot;platform&quot;: &quot;instagram&quot;,
+  &quot;total_spend&quot;: 500,
+  &quot;posts&quot;: [
+    {
+      &quot;post_id&quot;: &quot;post_001&quot;,
+      &quot;content_type&quot;: &quot;image&quot;,
+      &quot;likes&quot;: 342,
+      &quot;comments&quot;: 28,
+      &quot;shares&quot;: 15,
+      &quot;saves&quot;: 45,
+      &quot;reach&quot;: 5200,
+      &quot;impressions&quot;: 8500,
+      &quot;clicks&quot;: 120
+    }
+  ]
+}
+```
+
+### Sample Output
+
+See `assets/expected_output.json`:
+
+```json
+{
+  &quot;campaign_metrics&quot;: {
+    &quot;total_engagements&quot;: 1521,
+    &quot;avg_engagement_rate&quot;: 8.36,
+    &quot;ctr&quot;: 1.55
+  },
+  &quot;roi_metrics&quot;: {
+    &quot;total_spend&quot;: 500.0,
+    &quot;cost_per_engagement&quot;: 0.33,
+    &quot;roi_percentage&quot;: 660.5
+  },
+  &quot;insights&quot;: {
+    &quot;overall_health&quot;: &quot;excellent&quot;,
+    &quot;benchmark_comparison&quot;: {
+      &quot;engagement_status&quot;: &quot;excellent&quot;,
+      &quot;engagement_benchmark&quot;: &quot;1.22%&quot;,
+      &quot;engagement_actual&quot;: &quot;8.36%&quot;
+    }
+  }
+}
+```
+
+### Interpretation
+
+The sample campaign shows:
+- **Engagement rate 8.36%** vs 1.22% benchmark = Excellent (6.8x above average)
+- **CTR 1.55%** vs 0.22% benchmark = Excellent (7x above average)
+- **ROI 660%** = Outstanding return on $500 spend
+- **Recommendation:** Scale budget, replicate successful elements
+
+---
+
+## Reference Documentation
+
+### Platform Benchmarks
+
+`references/platform-benchmarks.md` contains:
+
+- Engagement rate benchmarks by platform and industry
+- CTR benchmarks for organic and paid content
+- Cost benchmarks (CPC, CPM, CPE)
+- Content type performance by platform
+- Optimal posting times and frequency
+- ROI calculation formulas
+
+## Proactive Triggers
+
+- **Engagement rate below platform average** -- Content isn&#x27;t resonating. Analyze top performers for patterns to replicate.
+- **Follower growth stalled** -- Content distribution or frequency issue. Audit posting patterns and content mix.
+- **High impressions, low engagement** -- Reach without resonance. Content quality or relevance issue needs addressing.
+- **Competitor outperforming significantly** -- Content gap detected. Analyze their successful posts for format and topic insights.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| &quot;Social media audit&quot; | Performance analysis across platforms with benchmarks |
+| &quot;What&#x27;s performing?&quot; | Top content analysis with patterns and recommendations |
+| &quot;Competitor social analysis&quot; | Competitive social media comparison with gaps |
+| &quot;Campaign ROI&quot; | Full ROI calculation with engagement value estimates |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **campaign-analytics**: For cross-channel analytics including social alongside other channels.
+- **content-creator**: For creating social media content optimized by analysis findings.
+- **marketing-demand-acquisition**: For integrating social media into broader demand gen strategy.
+- **marketing-strategy-pmm**: For aligning social content with product marketing positioning.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Engagement rate appears unrealistically high (&gt;50%) | Reach value is too low relative to engagements, or reach/impressions data is swapped | Verify that `reach` represents unique users reached (not impressions). Engagement rate = (likes + comments + shares + saves) / reach. If using Instagram data from 2025+, note that Instagram shifted from &quot;impressions&quot; to &quot;views&quot; as primary metric -- ensure you are using the correct field |
+| Benchmark comparison shows &quot;no_benchmark_available&quot; | Platform name in input JSON does not match expected values | Use exact lowercase platform names: `instagram`, `facebook`, `twitter`, `linkedin`, `tiktok`. The analyzer matches against these exact strings |
+| ROI calculation shows negative despite good engagement | Engagement value estimates are too conservative for your industry | The default engagement value model uses $0.50/like, $2.00/comment, $5.00/share, $3.00/save, $1.50/click. Adjust these values in `calculate_metrics.py` for your specific vertical. B2B companies typically have higher per-engagement values than B2C |
+| TikTok metrics show low engagement compared to benchmarks | Using reach-based calculation on a platform where view-based metrics are standard | TikTok&#x27;s 2026 benchmark engagement rate of 2.50-3.70% is calculated against views, not reach. Ensure your TikTok data uses video views in the `reach` field for accurate comparison. TikTok engagement rates rose 49% YoY in 2025 |
+| LinkedIn engagement appears lower than expected | Comparing against outdated benchmarks | LinkedIn&#x27;s 2026 median engagement rate is approximately 3.85-6.1%, significantly higher than other platforms. Carousel/document posts earn the highest engagement (up to 21.77% median). If your rate is below 2%, focus on conversation-starting content rather than corporate announcements |
+| Instagram metrics declining despite consistent content quality | Algorithm and metric definition changes in 2025-2026 | Instagram shifted to &quot;Views&quot; as its primary metric across all formats (Reels, Stories, posts), replacing &quot;Impressions&quot; and &quot;Plays.&quot; Carousel posts now earn the most engagement. Meta plans to replace reach with &quot;Viewers&quot; metric in Graph API by June 2026. Adapt your data collection accordingly |
+| Campaign analysis has too few posts for reliable insights | Small sample size produces unreliable averages | Minimum 10 posts recommended for meaningful analysis. The `analyze_performance.py` script flags campaigns with fewer than 10 posts. For statistical reliability, aim for 30+ posts per analysis period |
+
+---
+
+## Success Criteria
+
+- **Engagement Rate by Platform (2026 benchmarks)**: Instagram 0.50-0.70% (average), 3-6% (good), &gt;6% (excellent). Facebook 0.06-0.09% (average), 0.5-1% (good). LinkedIn 3.85-6.1% (average), &gt;6% (good). TikTok 2.50-3.70% (average), 8-15% (good), &gt;15% (excellent). Twitter/X 0.03-0.05% (average), 0.1-0.5% (good)
+- **Click-Through Rate**: Instagram &gt;0.5% (good), Facebook &gt;1.5% (good), LinkedIn &gt;1.0% (good), TikTok &gt;0.5% (good). Featured snippets and carousels drive highest CTR across platforms
+- **Cost Per Click**: Facebook &lt;$0.50 (good), Instagram &lt;$0.70 (good), LinkedIn &lt;$3.00 (good, but averages $4-5+ for B2B), TikTok &lt;$0.50 (good). LinkedIn CPC has risen 89% since 2023
+- **ROI Threshold**: Target minimum 200% ROI on paid social. Campaigns above 500% are excellent and should be scaled. Campaigns below 100% need immediate creative or targeting revision
+- **Content Format Performance**: Prioritize high-engagement formats per platform -- carousel/document posts on LinkedIn (21.77% median engagement), Reels on Instagram, short-form video on TikTok. Test at least 3 content formats per month
+- **Posting Frequency**: Maintain consistent posting cadence: LinkedIn 3-5x/week, Instagram 4-7x/week, TikTok 3-5x/week. The LinkedIn algorithm favors content that generates meaningful engagement in the first 90 minutes
+- **Analysis Cadence**: Run full performance analysis weekly for active campaigns. Compare month-over-month trends to identify growth or decline patterns. Update benchmark baselines quarterly as platform norms shift rapidly
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Post-level and campaign-level engagement metrics (engagement rate, CTR, reach rate, virality rate, save rate)
+- ROI calculation with engagement value estimates and cost efficiency metrics (CPE, CPC, CPM, ROAS)
+- Platform benchmark comparison for Instagram, Facebook, Twitter/X, LinkedIn, and TikTok
+- Top/bottom performer identification and ranking
+- Actionable recommendations based on benchmark assessment
+
+**Out of Scope:**
+- Real-time API connections to social media platforms (scripts analyze static JSON data you export)
+- Social media scheduling, publishing, or content creation
+- Follower growth tracking or audience demographics analysis
+- Competitor social media monitoring (use dedicated social listening tools)
+- Influencer identification or collaboration management
+- Social commerce and shopping metrics
+- Video-specific analytics (watch time, completion rate, drop-off points)
+- Sentiment analysis on comments or mentions (use the app-store-optimization skill&#x27;s review_analyzer for text sentiment)
+- Cross-platform identity resolution or deduplication
+
+**Platform API Changes (2025-2026):**
+- Meta/Instagram is replacing &quot;reach&quot; with &quot;Viewers&quot; metric in Graph API by June 2026
+- Instagram shifted to &quot;Views&quot; as primary metric across all formats, replacing &quot;Impressions&quot; and &quot;Plays&quot;
+- TikTok tightened API access approval process in 2025
+- LinkedIn added AI-powered conversational search; algorithm now favors people-first content over polished corporate updates
+
+---
+
+## Integration Points
+
+| Integration | Purpose | How to Connect |
+|-------------|---------|----------------|
+| **Meta Business Suite** | Export Instagram and Facebook campaign data | Export post-level metrics (likes, comments, shares, reach, impressions, clicks) as JSON for `calculate_metrics.py` and `analyze_performance.py`. Note: &quot;Views&quot; is replacing &quot;Impressions&quot; in 2026 |
+| **LinkedIn Campaign Manager** | Export LinkedIn ad and organic performance data | Export engagement metrics per post. LinkedIn&#x27;s native analytics now includes &quot;Viewer&quot; demographics and AI search visibility data |
+| **TikTok Business Center** | Export TikTok campaign performance data | Export video-level metrics. Use video views as the reach equivalent for engagement rate calculation |
+| **Google Analytics 4 (GA4)** | Track social traffic and conversions on your website | Connect social campaign UTM parameters to GA4 to measure downstream conversions. Use `campaign-analytics` skill for full attribution |
+| **campaign-analytics skill** | Cross-channel ROI comparison | Feed social media ROI data into `campaign_roi_calculator.py` alongside other channels for unified portfolio analysis |
+| **content-creator skill** | Content optimization based on performance data | Use top-performing post analysis to inform content strategy. Apply `brand_voice_analyzer.py` to ensure social content matches brand voice |
+| **marketing-demand-acquisition skill** | Social as demand gen channel | Integrate social performance data into demand gen channel mix evaluation. Use CAC data from social alongside other acquisition channels |
+
+---
+
+## Tool Reference
+
+### calculate_metrics.py
+
+**Type:** Python library (imported, not CLI)
+
+**Classes:**
+- `SocialMediaMetricsCalculator(campaign_data: Dict)`
+
+**Constructor Input:** `{&quot;platform&quot;: &quot;instagram&quot;, &quot;total_spend&quot;: 500, &quot;posts&quot;: [{&quot;post_id&quot;: &quot;str&quot;, &quot;content_type&quot;: &quot;str&quot;, &quot;likes&quot;: int, &quot;comments&quot;: int, &quot;shares&quot;: int, &quot;saves&quot;: int, &quot;reach&quot;: int, &quot;impressions&quot;: int, &quot;clicks&quot;: int}]}`
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `calculate_engagement_rate()` | `post: Dict` (likes, comments, shares, saves, reach) | Engagement rate as percentage (float). Formula: (likes + comments + shares + saves) / reach * 100 |
+| `calculate_ctr()` | `clicks: int`, `impressions: int` | CTR as percentage (float) |
+| `calculate_campaign_metrics()` | None (uses constructor data) | Dict with platform, total_posts, total_engagements, total_reach, total_impressions, total_clicks, avg_engagement_rate, ctr |
+| `calculate_roi_metrics()` | None (uses constructor data) | Dict with total_spend, cost_per_engagement, cost_per_click, estimated_value (at $2.50/engagement default), roi_percentage |
+| `identify_top_posts()` | `metric: str = &#x27;engagement_rate&#x27;`, `limit: int = 5` | Sorted list of top posts by specified metric. Supported metrics: `engagement_rate`, `likes`, `comments`, `shares`, `clicks` |
+| `analyze_all()` | None | Combined dict of campaign_metrics, roi_metrics, and top_posts |
+
+### analyze_performance.py
+
+**Type:** Python library (imported, not CLI)
+
+**Classes:**
+- `PerformanceAnalyzer(campaign_metrics: Dict, roi_metrics: Dict)`
+
+**Built-in Benchmarks:** Engagement rate and CTR benchmarks for `facebook`, `instagram`, `twitter`, `linkedin`, `tiktok`.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `benchmark_performance()` | None | Dict with engagement_status, engagement_benchmark, engagement_actual, ctr_status, ctr_benchmark, ctr_actual. Status values: `excellent` (&gt;=1.5x benchmark), `good` (&gt;=benchmark), `below_average` |
+| `generate_recommendations()` | None | List of actionable recommendation strings based on engagement rate, CTR, CPC, ROI, and post volume thresholds |
+| `generate_insights()` | None | Dict with overall_health (`excellent`/`good`/`needs_improvement`), benchmark_comparison, recommendations, key_strengths, areas_for_improvement |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Social Media Analyzer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Social Media Analyzer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Social Media Analyzer in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Social Media Analyzer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Social Media Analyzer&quot;
+4. Description: &quot;Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, mea...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/social-media-analyzer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Social Media Analyzer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Social Media Analyzer
+
+Campaign performance analysis with engagement metrics, ROI calculations, and platform benchmarks.
+
+---
+
+## Table of Contents
+
+- [Analysis Workflow](#analysis-workflow)
+- [Engagement Metrics](#engagement-metrics)
+- [ROI Calculation](#roi-calculation)
+- [Platform Benchmarks](#platform-benchmarks)
+- [Tools](#tools)
+- [Examples](#examples)
+
+---
+
+## Analysis Workflow
+
+Analyze social media campaign performance:
+
+1. Validate input data completeness (reach &gt; 0, dates valid)
+2. Calculate engagement metrics per post
+3. Aggregate campaign-level metrics
+4. Calculate ROI if ad spend provided
+5. Compare against platform benchmarks
+6. Identify top and bottom performers
+7. Generate recommendations
+8. **Validation:** Engagement rate &lt; 100%, ROI matches spend data
+
+### Input Requirements
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| platform | Yes | instagram, facebook, twitter, linkedin, tiktok |
+| posts[] | Yes | Array of post data |
+| posts[].likes | Yes | Like/reaction count |
+| posts[].comments | Yes | Comment count |
+| posts[].reach | Yes | Unique users reached |
+| posts[].impressions | No | Total views |
+| posts[].shares | No | Share/retweet count |
+| posts[].saves | No | Save/bookmark count |
+| posts[].clicks | No | Link clicks |
+| total_spend | No | Ad spend (for ROI) |
+
+### Data Validation Checks
+
+Before analysis, verify:
+
+- [ ] Reach &gt; 0 for all posts (avoid division by zero)
+- [ ] Engagement counts are non-negative
+- [ ] Date range is valid (start &lt; end)
+- [ ] Platform is recognized
+- [ ] Spend &gt; 0 if ROI requested
+
+---
+
+## Engagement Metrics
+
+### Engagement Rate Calculation
+
+```
+Engagement Rate = (Likes + Comments + Shares + Saves) / Reach × 100
+```
+
+### Metric Definitions
+
+| Metric | Formula | Interpretation |
+|--------|---------|----------------|
+| Engagement Rate | Engagements / Reach × 100 | Audience interaction level |
+| CTR | Clicks / Impressions × 100 | Content click appeal |
+| Reach Rate | Reach / Followers × 100 | Content distribution |
+| Virality Rate | Shares / Impressions × 100 | Share-worthiness |
+| Save Rate | Saves / Reach × 100 | Content value |
+
+### Performance Categories
+
+| Rating | Engagement Rate | Action |
+|--------|-----------------|--------|
+| Excellent | &gt; 6% | Scale and replicate |
+| Good | 3-6% | Optimize and expand |
+| Average | 1-3% | Test improvements |
+| Poor | &lt; 1% | Analyze and pivot |
+
+---
+
+## ROI Calculation
+
+Calculate return on ad spend:
+
+1. Sum total engagements across posts
+2. Calculate cost per engagement (CPE)
+3. Calculate cost per click (CPC) if clicks available
+4. Estimate engagement value using benchmark rates
+5. Calculate ROI percentage
+6. **Validation:** ROI = (Value - Spend) / Spend × 100
+
+### ROI Formulas
+
+| Metric | Formula |
+|--------|---------|
+| Cost Per Engagement (CPE) | Total Spend / Total Engagements |
+| Cost Per Click (CPC) | Total Spend / Total Clicks |
+| Cost Per Thousand (CPM) | (Spend / Impressions) × 1000 |
+| Return on Ad Spend (ROAS) | Revenue / Ad Spend |
+
+### Engagement Value Estimates
+
+| Action | Value | Rationale |
+|--------|-------|-----------|
+| Like | $0.50 | Brand awareness |
+| Comment | $2.00 | Active engagement |
+| Share | $5.00 | Amplification |
+| Save | $3.00 | Intent signal |
+| Click | $1.50 | Traffic value |
+
+### ROI Interpretation
+
+| ROI % | Rating | Recommendation |
+|-------|--------|----------------|
+| &gt; 500% | Excellent | Scale budget significantly |
+| 200-500% | Good | Increase budget moderately |
+| 100-200% | Acceptable | Optimize before scaling |
+| 0-100% | Break-even | Review targeting and creative |
+| &lt; 0% | Negative | Pause and restructure |
+
+---
+
+## Platform Benchmarks
+
+### Engagement Rate by Platform
+
+| Platform | Average | Good | Excellent |
+|----------|---------|------|-----------|
+| Instagram | 1.22% | 3-6% | &gt;6% |
+| Facebook | 0.07% | 0.5-1% | &gt;1% |
+| Twitter/X | 0.05% | 0.1-0.5% | &gt;0.5% |
+| LinkedIn | 2.0% | 3-5% | &gt;5% |
+| TikTok | 5.96% | 8-15% | &gt;15% |
+
+### CTR by Platform
+
+| Platform | Average | Good | Excellent |
+|----------|---------|------|-----------|
+| Instagram | 0.22% | 0.5-1% | &gt;1% |
+| Facebook | 0.90% | 1.5-2.5% | &gt;2.5% |
+| LinkedIn | 0.44% | 1-2% | &gt;2% |
+| TikTok | 0.30% | 0.5-1% | &gt;1% |
+
+### CPC by Platform
+
+| Platform | Average | Good |
+|----------|---------|------|
+| Facebook | $0.97 | &lt;$0.50 |
+| Instagram | $1.20 | &lt;$0.70 |
+| LinkedIn | $5.26 | &lt;$3.00 |
+| TikTok | $1.00 | &lt;$0.50 |
+
+See `references/platform-benchmarks.md` for complete benchmark data.
+
+---
+
+## Tools
+
+### Calculate Metrics
+
+```bash
+python scripts/calculate_metrics.py assets/sample_input.json
+```
+
+Calculates engagement rate, CTR, reach rate for each post and campaign totals.
+
+### Analyze Performance
+
+```bash
+python scripts/analyze_performance.py assets/sample_input.json
+```
+
+Generates full performance analysis with ROI, benchmarks, and recommendations.
+
+**Output includes:**
+- Campaign-level metrics
+- Post-by-post breakdown
+- Benchmark comparisons
+- Top performers ranked
+- Actionable recommendations
+
+---
+
+## Examples
+
+### Sample Input
+
+See `assets/sample_input.json`:
+
+```json
+{
+  &quot;platform&quot;: &quot;instagram&quot;,
+  &quot;total_spend&quot;: 500,
+  &quot;posts&quot;: [
+    {
+      &quot;post_id&quot;: &quot;post_001&quot;,
+      &quot;content_type&quot;: &quot;image&quot;,
+      &quot;likes&quot;: 342,
+      &quot;comments&quot;: 28,
+      &quot;shares&quot;: 15,
+      &quot;saves&quot;: 45,
+      &quot;reach&quot;: 5200,
+      &quot;impressions&quot;: 8500,
+      &quot;clicks&quot;: 120
+    }
+  ]
+}
+```
+
+### Sample Output
+
+See `assets/expected_output.json`:
+
+```json
+{
+  &quot;campaign_metrics&quot;: {
+    &quot;total_engagements&quot;: 1521,
+    &quot;avg_engagement_rate&quot;: 8.36,
+    &quot;ctr&quot;: 1.55
+  },
+  &quot;roi_metrics&quot;: {
+    &quot;total_spend&quot;: 500.0,
+    &quot;cost_per_engagement&quot;: 0.33,
+    &quot;roi_percentage&quot;: 660.5
+  },
+  &quot;insights&quot;: {
+    &quot;overall_health&quot;: &quot;excellent&quot;,
+    &quot;benchmark_comparison&quot;: {
+      &quot;engagement_status&quot;: &quot;excellent&quot;,
+      &quot;engagement_benchmark&quot;: &quot;1.22%&quot;,
+      &quot;engagement_actual&quot;: &quot;8.36%&quot;
+    }
+  }
+}
+```
+
+### Interpretation
+
+The sample campaign shows:
+- **Engagement rate 8.36%** vs 1.22% benchmark = Excellent (6.8x above average)
+- **CTR 1.55%** vs 0.22% benchmark = Excellent (7x above average)
+- **ROI 660%** = Outstanding return on $500 spend
+- **Recommendation:** Scale budget, replicate successful elements
+
+---
+
+## Reference Documentation
+
+### Platform Benchmarks
+
+`references/platform-benchmarks.md` contains:
+
+- Engagement rate benchmarks by platform and industry
+- CTR benchmarks for organic and paid content
+- Cost benchmarks (CPC, CPM, CPE)
+- Content type performance by platform
+- Optimal posting times and frequency
+- ROI calculation formulas
+
+## Proactive Triggers
+
+- **Engagement rate below platform average** -- Content isn&#x27;t resonating. Analyze top performers for patterns to replicate.
+- **Follower growth stalled** -- Content distribution or frequency issue. Audit posting patterns and content mix.
+- **High impressions, low engagement** -- Reach without resonance. Content quality or relevance issue needs addressing.
+- **Competitor outperforming significantly** -- Content gap detected. Analyze their successful posts for format and topic insights.
+
+## Output Artifacts
+
+| When you ask for... | You get... |
+|---------------------|------------|
+| &quot;Social media audit&quot; | Performance analysis across platforms with benchmarks |
+| &quot;What&#x27;s performing?&quot; | Top content analysis with patterns and recommendations |
+| &quot;Competitor social analysis&quot; | Competitive social media comparison with gaps |
+| &quot;Campaign ROI&quot; | Full ROI calculation with engagement value estimates |
+
+## Communication
+
+All output passes quality verification:
+- Self-verify: source attribution, assumption audit, confidence scoring
+- Output format: Bottom Line first, then What (with confidence), Why, How to Act
+- Every finding tagged with confidence level: verified, medium confidence, or assumed
+
+## Related Skills
+
+- **campaign-analytics**: For cross-channel analytics including social alongside other channels.
+- **content-creator**: For creating social media content optimized by analysis findings.
+- **marketing-demand-acquisition**: For integrating social media into broader demand gen strategy.
+- **marketing-strategy-pmm**: For aligning social content with product marketing positioning.
+
+---
+
+## Troubleshooting
+
+| Problem | Likely Cause | Solution |
+|---------|-------------|----------|
+| Engagement rate appears unrealistically high (&gt;50%) | Reach value is too low relative to engagements, or reach/impressions data is swapped | Verify that `reach` represents unique users reached (not impressions). Engagement rate = (likes + comments + shares + saves) / reach. If using Instagram data from 2025+, note that Instagram shifted from &quot;impressions&quot; to &quot;views&quot; as primary metric -- ensure you are using the correct field |
+| Benchmark comparison shows &quot;no_benchmark_available&quot; | Platform name in input JSON does not match expected values | Use exact lowercase platform names: `instagram`, `facebook`, `twitter`, `linkedin`, `tiktok`. The analyzer matches against these exact strings |
+| ROI calculation shows negative despite good engagement | Engagement value estimates are too conservative for your industry | The default engagement value model uses $0.50/like, $2.00/comment, $5.00/share, $3.00/save, $1.50/click. Adjust these values in `calculate_metrics.py` for your specific vertical. B2B companies typically have higher per-engagement values than B2C |
+| TikTok metrics show low engagement compared to benchmarks | Using reach-based calculation on a platform where view-based metrics are standard | TikTok&#x27;s 2026 benchmark engagement rate of 2.50-3.70% is calculated against views, not reach. Ensure your TikTok data uses video views in the `reach` field for accurate comparison. TikTok engagement rates rose 49% YoY in 2025 |
+| LinkedIn engagement appears lower than expected | Comparing against outdated benchmarks | LinkedIn&#x27;s 2026 median engagement rate is approximately 3.85-6.1%, significantly higher than other platforms. Carousel/document posts earn the highest engagement (up to 21.77% median). If your rate is below 2%, focus on conversation-starting content rather than corporate announcements |
+| Instagram metrics declining despite consistent content quality | Algorithm and metric definition changes in 2025-2026 | Instagram shifted to &quot;Views&quot; as its primary metric across all formats (Reels, Stories, posts), replacing &quot;Impressions&quot; and &quot;Plays.&quot; Carousel posts now earn the most engagement. Meta plans to replace reach with &quot;Viewers&quot; metric in Graph API by June 2026. Adapt your data collection accordingly |
+| Campaign analysis has too few posts for reliable insights | Small sample size produces unreliable averages | Minimum 10 posts recommended for meaningful analysis. The `analyze_performance.py` script flags campaigns with fewer than 10 posts. For statistical reliability, aim for 30+ posts per analysis period |
+
+---
+
+## Success Criteria
+
+- **Engagement Rate by Platform (2026 benchmarks)**: Instagram 0.50-0.70% (average), 3-6% (good), &gt;6% (excellent). Facebook 0.06-0.09% (average), 0.5-1% (good). LinkedIn 3.85-6.1% (average), &gt;6% (good). TikTok 2.50-3.70% (average), 8-15% (good), &gt;15% (excellent). Twitter/X 0.03-0.05% (average), 0.1-0.5% (good)
+- **Click-Through Rate**: Instagram &gt;0.5% (good), Facebook &gt;1.5% (good), LinkedIn &gt;1.0% (good), TikTok &gt;0.5% (good). Featured snippets and carousels drive highest CTR across platforms
+- **Cost Per Click**: Facebook &lt;$0.50 (good), Instagram &lt;$0.70 (good), LinkedIn &lt;$3.00 (good, but averages $4-5+ for B2B), TikTok &lt;$0.50 (good). LinkedIn CPC has risen 89% since 2023
+- **ROI Threshold**: Target minimum 200% ROI on paid social. Campaigns above 500% are excellent and should be scaled. Campaigns below 100% need immediate creative or targeting revision
+- **Content Format Performance**: Prioritize high-engagement formats per platform -- carousel/document posts on LinkedIn (21.77% median engagement), Reels on Instagram, short-form video on TikTok. Test at least 3 content formats per month
+- **Posting Frequency**: Maintain consistent posting cadence: LinkedIn 3-5x/week, Instagram 4-7x/week, TikTok 3-5x/week. The LinkedIn algorithm favors content that generates meaningful engagement in the first 90 minutes
+- **Analysis Cadence**: Run full performance analysis weekly for active campaigns. Compare month-over-month trends to identify growth or decline patterns. Update benchmark baselines quarterly as platform norms shift rapidly
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Post-level and campaign-level engagement metrics (engagement rate, CTR, reach rate, virality rate, save rate)
+- ROI calculation with engagement value estimates and cost efficiency metrics (CPE, CPC, CPM, ROAS)
+- Platform benchmark comparison for Instagram, Facebook, Twitter/X, LinkedIn, and TikTok
+- Top/bottom performer identification and ranking
+- Actionable recommendations based on benchmark assessment
+
+**Out of Scope:**
+- Real-time API connections to social media platforms (scripts analyze static JSON data you export)
+- Social media scheduling, publishing, or content creation
+- Follower growth tracking or audience demographics analysis
+- Competitor social media monitoring (use dedicated social listening tools)
+- Influencer identification or collaboration management
+- Social commerce and shopping metrics
+- Video-specific analytics (watch time, completion rate, drop-off points)
+- Sentiment analysis on comments or mentions (use the app-store-optimization skill&#x27;s review_analyzer for text sentiment)
+- Cross-platform identity resolution or deduplication
+
+**Platform API Changes (2025-2026):**
+- Meta/Instagram is replacing &quot;reach&quot; with &quot;Viewers&quot; metric in Graph API by June 2026
+- Instagram shifted to &quot;Views&quot; as primary metric across all formats, replacing &quot;Impressions&quot; and &quot;Plays&quot;
+- TikTok tightened API access approval process in 2025
+- LinkedIn added AI-powered conversational search; algorithm now favors people-first content over polished corporate updates
+
+---
+
+## Integration Points
+
+| Integration | Purpose | How to Connect |
+|-------------|---------|----------------|
+| **Meta Business Suite** | Export Instagram and Facebook campaign data | Export post-level metrics (likes, comments, shares, reach, impressions, clicks) as JSON for `calculate_metrics.py` and `analyze_performance.py`. Note: &quot;Views&quot; is replacing &quot;Impressions&quot; in 2026 |
+| **LinkedIn Campaign Manager** | Export LinkedIn ad and organic performance data | Export engagement metrics per post. LinkedIn&#x27;s native analytics now includes &quot;Viewer&quot; demographics and AI search visibility data |
+| **TikTok Business Center** | Export TikTok campaign performance data | Export video-level metrics. Use video views as the reach equivalent for engagement rate calculation |
+| **Google Analytics 4 (GA4)** | Track social traffic and conversions on your website | Connect social campaign UTM parameters to GA4 to measure downstream conversions. Use `campaign-analytics` skill for full attribution |
+| **campaign-analytics skill** | Cross-channel ROI comparison | Feed social media ROI data into `campaign_roi_calculator.py` alongside other channels for unified portfolio analysis |
+| **content-creator skill** | Content optimization based on performance data | Use top-performing post analysis to inform content strategy. Apply `brand_voice_analyzer.py` to ensure social content matches brand voice |
+| **marketing-demand-acquisition skill** | Social as demand gen channel | Integrate social performance data into demand gen channel mix evaluation. Use CAC data from social alongside other acquisition channels |
+
+---
+
+## Tool Reference
+
+### calculate_metrics.py
+
+**Type:** Python library (imported, not CLI)
+
+**Classes:**
+- `SocialMediaMetricsCalculator(campaign_data: Dict)`
+
+**Constructor Input:** `{&quot;platform&quot;: &quot;instagram&quot;, &quot;total_spend&quot;: 500, &quot;posts&quot;: [{&quot;post_id&quot;: &quot;str&quot;, &quot;content_type&quot;: &quot;str&quot;, &quot;likes&quot;: int, &quot;comments&quot;: int, &quot;shares&quot;: int, &quot;saves&quot;: int, &quot;reach&quot;: int, &quot;impressions&quot;: int, &quot;clicks&quot;: int}]}`
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `calculate_engagement_rate()` | `post: Dict` (likes, comments, shares, saves, reach) | Engagement rate as percentage (float). Formula: (likes + comments + shares + saves) / reach * 100 |
+| `calculate_ctr()` | `clicks: int`, `impressions: int` | CTR as percentage (float) |
+| `calculate_campaign_metrics()` | None (uses constructor data) | Dict with platform, total_posts, total_engagements, total_reach, total_impressions, total_clicks, avg_engagement_rate, ctr |
+| `calculate_roi_metrics()` | None (uses constructor data) | Dict with total_spend, cost_per_engagement, cost_per_click, estimated_value (at $2.50/engagement default), roi_percentage |
+| `identify_top_posts()` | `metric: str = &#x27;engagement_rate&#x27;`, `limit: int = 5` | Sorted list of top posts by specified metric. Supported metrics: `engagement_rate`, `likes`, `comments`, `shares`, `clicks` |
+| `analyze_all()` | None | Combined dict of campaign_metrics, roi_metrics, and top_posts |
+
+### analyze_performance.py
+
+**Type:** Python library (imported, not CLI)
+
+**Classes:**
+- `PerformanceAnalyzer(campaign_metrics: Dict, roi_metrics: Dict)`
+
+**Built-in Benchmarks:** Engagement rate and CTR benchmarks for `facebook`, `instagram`, `twitter`, `linkedin`, `tiktok`.
+
+**Key Methods:**
+
+| Method | Parameters | Returns |
+|--------|-----------|---------|
+| `benchmark_performance()` | None | Dict with engagement_status, engagement_benchmark, engagement_actual, ctr_status, ctr_benchmark, ctr_actual. Status values: `excellent` (&gt;=1.5x benchmark), `good` (&gt;=benchmark), `below_average` |
+| `generate_recommendations()` | None | List of actionable recommendation strings based on engagement rate, CTR, CPC, ROI, and post volume thresholds |
+| `generate_insights()` | None | Dict with overall_health (`excellent`/`good`/`needs_improvement`), benchmark_comparison, recommendations, key_strengths, areas_for_improvement |
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Social Media Analyzer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Social Media Analyzer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Social Media Analyzer in the Marketing domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Social Media Analyzer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Social Media Analyzer&quot;
+4. Description: &quot;Social media campaign analysis and performance tracking. Calculates engagement rates, ROI, and benchmarks across platforms. Use for analyzing social media performance, calculating engagement rate, mea...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/marketing/social-media-analyzer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">

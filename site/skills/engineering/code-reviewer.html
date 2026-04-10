@@ -197,18 +197,36 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   margin-top: 0;
 }
 
-/* Quick Start prompt box */
-.prompt-box {
-  background: var(--white); border: 1px solid var(--border-strong);
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg); border-top: none;
-  overflow: hidden;
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
-.prompt-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 18px; background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.prompt-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
 .copy-btn {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
@@ -366,9 +384,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <button class="tab-btn" data-tab="manual">Manual</button>
 </div>
 <div class="tab-content active" id="tab-quickstart">
-  <div class="prompt-box">
-    <div class="prompt-header">
-      <span class="prompt-label">Copy this prompt into Claude.ai, ChatGPT, or any AI chat</span>
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Code Reviewer (Engineering domain).
 
 Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. ...
@@ -395,11 +417,11 @@ https://github.com/borghei/Claude-Skills/tree/main/code-reviewer
 
 ---
 Start by asking the user what they need help with.">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span>Copy Prompt</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
       </button>
-    </div>
-    <pre class="prompt-preview">You are an expert Code Reviewer (Engineering domain).
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Code Reviewer (Engineering domain).
 
 Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. ...
 
@@ -425,7 +447,896 @@ https://github.com/borghei/Claude-Skills/tree/main/code-reviewer
 
 ---
 Start by asking the user what they need help with.</pre>
-    <p class="prompt-hint">No setup needed. Just paste into any AI chat and start working.</p>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Code Reviewer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Code Reviewer
+
+Automated code review tools for analyzing pull requests, detecting code quality issues, and generating review reports.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [PR Analyzer](#pr-analyzer)
+  - [Code Quality Checker](#code-quality-checker)
+  - [Review Report Generator](#review-report-generator)
+- [Reference Guides](#reference-guides)
+- [Languages Supported](#languages-supported)
+
+---
+
+## Tools
+
+### PR Analyzer
+
+Analyzes git diff between branches to assess review complexity and identify risks.
+
+```bash
+# Analyze current branch against main
+python scripts/pr_analyzer.py /path/to/repo
+
+# Compare specific branches
+python scripts/pr_analyzer.py . --base main --head feature-branch
+
+# JSON output for integration
+python scripts/pr_analyzer.py /path/to/repo --json
+```
+
+**What it detects:**
+- Hardcoded secrets (passwords, API keys, tokens)
+- SQL injection patterns (string concatenation in queries)
+- Debug statements (debugger, console.log)
+- ESLint rule disabling
+- TypeScript `any` types
+- TODO/FIXME comments
+
+**Output includes:**
+- Complexity score (1-10)
+- Risk categorization (critical, high, medium, low)
+- File prioritization for review order
+- Commit message validation
+
+---
+
+### Code Quality Checker
+
+Analyzes source code for structural issues, code smells, and SOLID violations.
+
+```bash
+# Analyze a directory
+python scripts/code_quality_checker.py /path/to/code
+
+# Analyze specific language
+python scripts/code_quality_checker.py . --language python
+
+# JSON output
+python scripts/code_quality_checker.py /path/to/code --json
+```
+
+**What it detects:**
+- Long functions (&gt;50 lines)
+- Large files (&gt;500 lines)
+- God classes (&gt;20 methods)
+- Deep nesting (&gt;4 levels)
+- Too many parameters (&gt;5)
+- High cyclomatic complexity
+- Missing error handling
+- Unused imports
+- Magic numbers
+
+**Thresholds:**
+
+| Issue | Threshold |
+|-------|-----------|
+| Long function | &gt;50 lines |
+| Large file | &gt;500 lines |
+| God class | &gt;20 methods |
+| Too many params | &gt;5 |
+| Deep nesting | &gt;4 levels |
+| High complexity | &gt;10 branches |
+
+---
+
+### Review Report Generator
+
+Combines PR analysis and code quality findings into structured review reports.
+
+```bash
+# Generate report for current repo
+python scripts/review_report_generator.py /path/to/repo
+
+# Markdown output
+python scripts/review_report_generator.py . --format markdown --output review.md
+
+# Use pre-computed analyses
+python scripts/review_report_generator.py . \
+  --pr-analysis pr_results.json \
+  --quality-analysis quality_results.json
+```
+
+**Report includes:**
+- Review verdict (approve, request changes, block)
+- Score (0-100)
+- Prioritized action items
+- Issue summary by severity
+- Suggested review order
+
+**Verdicts:**
+
+| Score | Verdict |
+|-------|---------|
+| 90+ with no high issues | Approve |
+| 75+ with ≤2 high issues | Approve with suggestions |
+| 50-74 | Request changes |
+| &lt;50 or critical issues | Block |
+
+---
+
+## Reference Guides
+
+### Code Review Checklist
+`references/code_review_checklist.md`
+
+Systematic checklists covering:
+- Pre-review checks (build, tests, PR hygiene)
+- Correctness (logic, data handling, error handling)
+- Security (input validation, injection prevention)
+- Performance (efficiency, caching, scalability)
+- Maintainability (code quality, naming, structure)
+- Testing (coverage, quality, mocking)
+- Language-specific checks
+
+### Coding Standards
+`references/coding_standards.md`
+
+Language-specific standards for:
+- TypeScript (type annotations, null safety, async/await)
+- JavaScript (declarations, patterns, modules)
+- Python (type hints, exceptions, class design)
+- Go (error handling, structs, concurrency)
+- Swift (optionals, protocols, errors)
+- Kotlin (null safety, data classes, coroutines)
+
+### Common Antipatterns
+`references/common_antipatterns.md`
+
+Antipattern catalog with examples and fixes:
+- Structural (god class, long method, deep nesting)
+- Logic (boolean blindness, stringly typed code)
+- Security (SQL injection, hardcoded credentials)
+- Performance (N+1 queries, unbounded collections)
+- Testing (duplication, testing implementation)
+- Async (floating promises, callback hell)
+
+---
+
+## Languages Supported
+
+| Language | Extensions |
+|----------|------------|
+| Python | `.py` |
+| TypeScript | `.ts`, `.tsx` |
+| JavaScript | `.js`, `.jsx`, `.mjs` |
+| Go | `.go` |
+| Swift | `.swift` |
+| Kotlin | `.kt`, `.kts` |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `Error: /path is not a git repository` | PR Analyzer requires a `.git` directory at the target path | Run from inside a git repo or pass the correct repo root path |
+| No changes detected between branches | The `--base` and `--head` refs are identical, or the branch has no diverging commits | Verify branch names with `git branch -a`; use explicit `--base` and `--head` flags |
+| Script times out on large repositories | `git diff` or file analysis exceeds the 30-second (PR Analyzer) or 300-second (Quality Checker) subprocess timeout | Narrow the scope with `--language` filter or analyze a subdirectory instead of the repo root |
+| Unsupported file type error | Code Quality Checker only processes `.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs`, `.go`, `.swift`, `.kt`, `.kts` | Use the `--language` flag to target a supported language, or add extensions to `LANGUAGE_EXTENSIONS` in the script |
+| False-positive hardcoded secrets | Regex pattern matches test fixtures, example strings, or documentation | Review flagged lines manually; the pattern `(password\|secret\|api_key\|token)\s*[=:]\s*[&#x27;&quot;][^&#x27;&quot;]+[&#x27;&quot;]` intentionally casts a wide net to avoid misses |
+| Review Report shows score of 0 | Multiple critical and high findings compound deductions past the floor | Address critical findings first; each critical risk deducts 15 points and each high risk deducts 10 |
+| Commit message issues flagged incorrectly | PR Analyzer enforces conventional commit format (`feat:`, `fix:`, etc.) | Adopt conventional commits or ignore the `commit_issues` section if your team uses a different convention |
+
+---
+
+## Success Criteria
+
+- **Review turnaround under 4 hours:** Automated pre-screening with PR Analyzer reduces manual triage time so reviewers focus on logic, not hygiene.
+- **Zero false-positive critical findings:** Every critical-severity flag (hardcoded secrets, SQL injection) corresponds to a genuine risk requiring human verification.
+- **Code quality score above 80 on all merged PRs:** Teams gate merges on the Quality Checker score, ensuring consistent baseline quality.
+- **100% of PRs reviewed with a structured report:** Every pull request gets a Review Report with verdict, score, and prioritized action items before merge.
+- **Commit message compliance above 95%:** PR Analyzer commit validation drives adoption of conventional commit format across the team.
+- **Reduction in post-merge defects by 30%+:** Systematic detection of code smells, SOLID violations, and risky patterns catches issues before they reach production.
+- **Review order adoption by reviewers:** At least 80% of reviewers follow the suggested file priority order, ensuring security-sensitive files are inspected first.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Static pattern-based risk detection in git diffs (secrets, SQL injection, debug statements, lint bypasses)
+- Structural code quality analysis: function length, class size, cyclomatic complexity, parameter count, SOLID violations
+- PR metadata assessment: file categorization by risk priority, commit message validation, complexity scoring
+- Consolidated review reports with verdicts, scores, and prioritized action items across text, markdown, and JSON formats
+
+**Does NOT cover:**
+- **Runtime or dynamic analysis** -- use `senior-qa` for test execution and `qa-browser-automation` for end-to-end testing
+- **Security vulnerability scanning** (CVE databases, dependency audits) -- use `senior-security` or `senior-secops` for SAST/DAST and supply chain analysis
+- **Performance profiling or benchmarking** -- use `senior-backend` or `senior-fullstack` for performance optimization workflows
+- **Architecture-level review** (system design, service boundaries, API contract validation) -- use `senior-architect` for architectural decision records and design review
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-security` | Feed PR Analyzer critical findings into security review workflows for deeper SAST/DAST analysis | `pr_analyzer.py --json` output `risks.critical[]` → security assessment input |
+| `senior-qa` | Gate test execution on review report verdict; block test suites when verdict is `block` | `review_report_generator.py --json` output `summary.verdict` → QA pipeline gate |
+| `senior-architect` | Escalate high-complexity PRs (score 7+) to architecture review | `pr_analyzer.py` output `summary.complexity_score` → architecture review trigger |
+| `senior-fullstack` | Combine code quality scores with fullstack quality analyzer for end-to-end project health | `code_quality_checker.py --json` output → merged with `code_quality_analyzer.py` metrics |
+| `tdd-guide` | Cross-reference review findings with test coverage; flag untested code paths flagged by quality checker | Quality checker `smells[]` by file → TDD coverage gap analysis |
+| `senior-devops` | Integrate review reports into CI/CD pipelines as automated quality gates | `review_report_generator.py --json` output `summary.score` → pipeline pass/fail threshold |
+
+---
+
+## Tool Reference
+
+### pr_analyzer.py
+
+**Purpose:** Analyzes git diffs between branches to assess pull request complexity, detect risky patterns, prioritize files for review, and validate commit messages.
+
+**Usage:**
+
+```bash
+python scripts/pr_analyzer.py [repo_path] [--base BASE] [--head HEAD] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `repo_path` | *(positional)* | `.` | Path to git repository |
+| `--base` | `-b` | `main` | Base branch for comparison |
+| `--head` | `-h` | `HEAD` | Head branch or commit for comparison |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/pr_analyzer.py /path/to/repo --base main --head feature-branch --json
+```
+
+```json
+{
+  &quot;status&quot;: &quot;analyzed&quot;,
+  &quot;summary&quot;: {
+    &quot;files_changed&quot;: 8,
+    &quot;total_additions&quot;: 142,
+    &quot;total_deletions&quot;: 37,
+    &quot;complexity_score&quot;: 4,
+    &quot;complexity_label&quot;: &quot;Moderate&quot;,
+    &quot;commits&quot;: 3
+  },
+  &quot;risks&quot;: {
+    &quot;critical&quot;: [],
+    &quot;high&quot;: [],
+    &quot;medium&quot;: [
+      {&quot;name&quot;: &quot;console_log&quot;, &quot;severity&quot;: &quot;medium&quot;, &quot;message&quot;: &quot;Console statement found (remove for production)&quot;, &quot;file&quot;: &quot;src/api/handler.js&quot;, &quot;count&quot;: 2}
+    ],
+    &quot;low&quot;: []
+  },
+  &quot;files&quot;: [ ... ],
+  &quot;commit_issues&quot;: [],
+  &quot;review_order&quot;: [&quot;src/auth/middleware.ts&quot;, &quot;src/api/handler.js&quot;, &quot;...&quot;]
+}
+```
+
+**Output Formats:** Human-readable text report (default) or structured JSON (`--json`).
+
+---
+
+### code_quality_checker.py
+
+**Purpose:** Analyzes source files or directories for structural code quality issues, code smells (long functions, god classes, deep nesting, magic numbers, commented code), SOLID principle violations, and cyclomatic complexity.
+
+**Usage:**
+
+```bash
+python scripts/code_quality_checker.py &lt;path&gt; [--recursive] [--language LANG] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `path` | *(positional, required)* | | File or directory to analyze |
+| `--recursive` | `-r` | `true` | Recursively analyze directories |
+| `--language` | `-l` | *(all supported)* | Filter by language: `python`, `typescript`, `javascript`, `go`, `swift`, `kotlin` |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/code_quality_checker.py ./src --language typescript --json
+```
+
+```json
+{
+  &quot;directory&quot;: &quot;/absolute/path/to/src&quot;,
+  &quot;files_analyzed&quot;: 12,
+  &quot;average_score&quot;: 82.5,
+  &quot;overall_grade&quot;: &quot;B&quot;,
+  &quot;total_code_smells&quot;: 7,
+  &quot;total_solid_violations&quot;: 1,
+  &quot;files&quot;: [
+    {
+      &quot;file&quot;: &quot;src/service.ts&quot;,
+      &quot;language&quot;: &quot;typescript&quot;,
+      &quot;metrics&quot;: {
+        &quot;lines&quot;: {&quot;total&quot;: 320, &quot;code&quot;: 260, &quot;blank&quot;: 40, &quot;comment&quot;: 20},
+        &quot;functions&quot;: 14,
+        &quot;classes&quot;: 2,
+        &quot;avg_complexity&quot;: 5.3
+      },
+      &quot;quality_score&quot;: 78,
+      &quot;grade&quot;: &quot;C&quot;,
+      &quot;smells&quot;: [
+        {&quot;type&quot;: &quot;long_function&quot;, &quot;severity&quot;: &quot;medium&quot;, &quot;message&quot;: &quot;Function &#x27;processOrder&#x27; has 68 lines (max: 50)&quot;, &quot;location&quot;: &quot;processOrder&quot;}
+      ],
+      &quot;solid_violations&quot;: [],
+      &quot;function_details&quot;: [ ... ],
+      &quot;class_details&quot;: [ ... ]
+    }
+  ]
+}
+```
+
+**Output Formats:** Human-readable text report (default) or structured JSON (`--json`). Files are sorted by quality score ascending (worst first).
+
+---
+
+### review_report_generator.py
+
+**Purpose:** Generates comprehensive code review reports by combining PR analysis and code quality findings into a single structured report with verdict, score, prioritized action items, and suggested review order. Can run both sub-tools automatically or accept pre-computed JSON inputs.
+
+**Usage:**
+
+```bash
+python scripts/review_report_generator.py [repo_path] [--pr-analysis FILE] [--quality-analysis FILE] [--format FORMAT] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `repo_path` | *(positional)* | `.` | Path to repository |
+| `--pr-analysis` | | *(auto-run)* | Path to pre-computed PR analysis JSON file |
+| `--quality-analysis` | | *(auto-run)* | Path to pre-computed code quality analysis JSON file |
+| `--format` | `-f` | `text` | Output format: `text`, `markdown`, `json` |
+| `--json` | | off | Output as JSON (shortcut for `--format json`) |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/review_report_generator.py . --format markdown --output review.md
+```
+
+```
+# Code Review Report
+
+**Generated:** 2026-03-21T14:30:00
+**Repository:** /path/to/repo
+
+## Executive Summary
+
+**Verdict:** ✅ APPROVE WITH SUGGESTIONS
+**Score:** 82/100
+**Rationale:** Minor improvements recommended
+
+### Issue Summary
+
+| Severity | Count |
+|----------|-------|
+| Critical | 0     |
+| High     | 1     |
+| Medium   | 3     |
+| Low      | 2     |
+
+## Action Items
+
+1. 🟠 **[P1]** Break down function into smaller, focused units
+2. 🟡 **[P2]** Remove or replace console statements with proper logging
+...
+```
+
+**Output Formats:** Plain text (default), markdown (`--format markdown`), or structured JSON (`--format json` or `--json`). When `--pr-analysis` and `--quality-analysis` are omitted, the tool automatically invokes `pr_analyzer.py` and `code_quality_checker.py` as subprocesses.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Code Reviewer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Code Reviewer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Code Reviewer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Code Reviewer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Code Reviewer&quot;
+4. Description: &quot;Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/code-reviewer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Code Reviewer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Code Reviewer
+
+Automated code review tools for analyzing pull requests, detecting code quality issues, and generating review reports.
+
+---
+
+## Table of Contents
+
+- [Tools](#tools)
+  - [PR Analyzer](#pr-analyzer)
+  - [Code Quality Checker](#code-quality-checker)
+  - [Review Report Generator](#review-report-generator)
+- [Reference Guides](#reference-guides)
+- [Languages Supported](#languages-supported)
+
+---
+
+## Tools
+
+### PR Analyzer
+
+Analyzes git diff between branches to assess review complexity and identify risks.
+
+```bash
+# Analyze current branch against main
+python scripts/pr_analyzer.py /path/to/repo
+
+# Compare specific branches
+python scripts/pr_analyzer.py . --base main --head feature-branch
+
+# JSON output for integration
+python scripts/pr_analyzer.py /path/to/repo --json
+```
+
+**What it detects:**
+- Hardcoded secrets (passwords, API keys, tokens)
+- SQL injection patterns (string concatenation in queries)
+- Debug statements (debugger, console.log)
+- ESLint rule disabling
+- TypeScript `any` types
+- TODO/FIXME comments
+
+**Output includes:**
+- Complexity score (1-10)
+- Risk categorization (critical, high, medium, low)
+- File prioritization for review order
+- Commit message validation
+
+---
+
+### Code Quality Checker
+
+Analyzes source code for structural issues, code smells, and SOLID violations.
+
+```bash
+# Analyze a directory
+python scripts/code_quality_checker.py /path/to/code
+
+# Analyze specific language
+python scripts/code_quality_checker.py . --language python
+
+# JSON output
+python scripts/code_quality_checker.py /path/to/code --json
+```
+
+**What it detects:**
+- Long functions (&gt;50 lines)
+- Large files (&gt;500 lines)
+- God classes (&gt;20 methods)
+- Deep nesting (&gt;4 levels)
+- Too many parameters (&gt;5)
+- High cyclomatic complexity
+- Missing error handling
+- Unused imports
+- Magic numbers
+
+**Thresholds:**
+
+| Issue | Threshold |
+|-------|-----------|
+| Long function | &gt;50 lines |
+| Large file | &gt;500 lines |
+| God class | &gt;20 methods |
+| Too many params | &gt;5 |
+| Deep nesting | &gt;4 levels |
+| High complexity | &gt;10 branches |
+
+---
+
+### Review Report Generator
+
+Combines PR analysis and code quality findings into structured review reports.
+
+```bash
+# Generate report for current repo
+python scripts/review_report_generator.py /path/to/repo
+
+# Markdown output
+python scripts/review_report_generator.py . --format markdown --output review.md
+
+# Use pre-computed analyses
+python scripts/review_report_generator.py . \
+  --pr-analysis pr_results.json \
+  --quality-analysis quality_results.json
+```
+
+**Report includes:**
+- Review verdict (approve, request changes, block)
+- Score (0-100)
+- Prioritized action items
+- Issue summary by severity
+- Suggested review order
+
+**Verdicts:**
+
+| Score | Verdict |
+|-------|---------|
+| 90+ with no high issues | Approve |
+| 75+ with ≤2 high issues | Approve with suggestions |
+| 50-74 | Request changes |
+| &lt;50 or critical issues | Block |
+
+---
+
+## Reference Guides
+
+### Code Review Checklist
+`references/code_review_checklist.md`
+
+Systematic checklists covering:
+- Pre-review checks (build, tests, PR hygiene)
+- Correctness (logic, data handling, error handling)
+- Security (input validation, injection prevention)
+- Performance (efficiency, caching, scalability)
+- Maintainability (code quality, naming, structure)
+- Testing (coverage, quality, mocking)
+- Language-specific checks
+
+### Coding Standards
+`references/coding_standards.md`
+
+Language-specific standards for:
+- TypeScript (type annotations, null safety, async/await)
+- JavaScript (declarations, patterns, modules)
+- Python (type hints, exceptions, class design)
+- Go (error handling, structs, concurrency)
+- Swift (optionals, protocols, errors)
+- Kotlin (null safety, data classes, coroutines)
+
+### Common Antipatterns
+`references/common_antipatterns.md`
+
+Antipattern catalog with examples and fixes:
+- Structural (god class, long method, deep nesting)
+- Logic (boolean blindness, stringly typed code)
+- Security (SQL injection, hardcoded credentials)
+- Performance (N+1 queries, unbounded collections)
+- Testing (duplication, testing implementation)
+- Async (floating promises, callback hell)
+
+---
+
+## Languages Supported
+
+| Language | Extensions |
+|----------|------------|
+| Python | `.py` |
+| TypeScript | `.ts`, `.tsx` |
+| JavaScript | `.js`, `.jsx`, `.mjs` |
+| Go | `.go` |
+| Swift | `.swift` |
+| Kotlin | `.kt`, `.kts` |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `Error: /path is not a git repository` | PR Analyzer requires a `.git` directory at the target path | Run from inside a git repo or pass the correct repo root path |
+| No changes detected between branches | The `--base` and `--head` refs are identical, or the branch has no diverging commits | Verify branch names with `git branch -a`; use explicit `--base` and `--head` flags |
+| Script times out on large repositories | `git diff` or file analysis exceeds the 30-second (PR Analyzer) or 300-second (Quality Checker) subprocess timeout | Narrow the scope with `--language` filter or analyze a subdirectory instead of the repo root |
+| Unsupported file type error | Code Quality Checker only processes `.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs`, `.go`, `.swift`, `.kt`, `.kts` | Use the `--language` flag to target a supported language, or add extensions to `LANGUAGE_EXTENSIONS` in the script |
+| False-positive hardcoded secrets | Regex pattern matches test fixtures, example strings, or documentation | Review flagged lines manually; the pattern `(password\|secret\|api_key\|token)\s*[=:]\s*[&#x27;&quot;][^&#x27;&quot;]+[&#x27;&quot;]` intentionally casts a wide net to avoid misses |
+| Review Report shows score of 0 | Multiple critical and high findings compound deductions past the floor | Address critical findings first; each critical risk deducts 15 points and each high risk deducts 10 |
+| Commit message issues flagged incorrectly | PR Analyzer enforces conventional commit format (`feat:`, `fix:`, etc.) | Adopt conventional commits or ignore the `commit_issues` section if your team uses a different convention |
+
+---
+
+## Success Criteria
+
+- **Review turnaround under 4 hours:** Automated pre-screening with PR Analyzer reduces manual triage time so reviewers focus on logic, not hygiene.
+- **Zero false-positive critical findings:** Every critical-severity flag (hardcoded secrets, SQL injection) corresponds to a genuine risk requiring human verification.
+- **Code quality score above 80 on all merged PRs:** Teams gate merges on the Quality Checker score, ensuring consistent baseline quality.
+- **100% of PRs reviewed with a structured report:** Every pull request gets a Review Report with verdict, score, and prioritized action items before merge.
+- **Commit message compliance above 95%:** PR Analyzer commit validation drives adoption of conventional commit format across the team.
+- **Reduction in post-merge defects by 30%+:** Systematic detection of code smells, SOLID violations, and risky patterns catches issues before they reach production.
+- **Review order adoption by reviewers:** At least 80% of reviewers follow the suggested file priority order, ensuring security-sensitive files are inspected first.
+
+---
+
+## Scope &amp; Limitations
+
+**Covers:**
+- Static pattern-based risk detection in git diffs (secrets, SQL injection, debug statements, lint bypasses)
+- Structural code quality analysis: function length, class size, cyclomatic complexity, parameter count, SOLID violations
+- PR metadata assessment: file categorization by risk priority, commit message validation, complexity scoring
+- Consolidated review reports with verdicts, scores, and prioritized action items across text, markdown, and JSON formats
+
+**Does NOT cover:**
+- **Runtime or dynamic analysis** -- use `senior-qa` for test execution and `qa-browser-automation` for end-to-end testing
+- **Security vulnerability scanning** (CVE databases, dependency audits) -- use `senior-security` or `senior-secops` for SAST/DAST and supply chain analysis
+- **Performance profiling or benchmarking** -- use `senior-backend` or `senior-fullstack` for performance optimization workflows
+- **Architecture-level review** (system design, service boundaries, API contract validation) -- use `senior-architect` for architectural decision records and design review
+
+---
+
+## Integration Points
+
+| Skill | Integration | Data Flow |
+|-------|-------------|-----------|
+| `senior-security` | Feed PR Analyzer critical findings into security review workflows for deeper SAST/DAST analysis | `pr_analyzer.py --json` output `risks.critical[]` → security assessment input |
+| `senior-qa` | Gate test execution on review report verdict; block test suites when verdict is `block` | `review_report_generator.py --json` output `summary.verdict` → QA pipeline gate |
+| `senior-architect` | Escalate high-complexity PRs (score 7+) to architecture review | `pr_analyzer.py` output `summary.complexity_score` → architecture review trigger |
+| `senior-fullstack` | Combine code quality scores with fullstack quality analyzer for end-to-end project health | `code_quality_checker.py --json` output → merged with `code_quality_analyzer.py` metrics |
+| `tdd-guide` | Cross-reference review findings with test coverage; flag untested code paths flagged by quality checker | Quality checker `smells[]` by file → TDD coverage gap analysis |
+| `senior-devops` | Integrate review reports into CI/CD pipelines as automated quality gates | `review_report_generator.py --json` output `summary.score` → pipeline pass/fail threshold |
+
+---
+
+## Tool Reference
+
+### pr_analyzer.py
+
+**Purpose:** Analyzes git diffs between branches to assess pull request complexity, detect risky patterns, prioritize files for review, and validate commit messages.
+
+**Usage:**
+
+```bash
+python scripts/pr_analyzer.py [repo_path] [--base BASE] [--head HEAD] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `repo_path` | *(positional)* | `.` | Path to git repository |
+| `--base` | `-b` | `main` | Base branch for comparison |
+| `--head` | `-h` | `HEAD` | Head branch or commit for comparison |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/pr_analyzer.py /path/to/repo --base main --head feature-branch --json
+```
+
+```json
+{
+  &quot;status&quot;: &quot;analyzed&quot;,
+  &quot;summary&quot;: {
+    &quot;files_changed&quot;: 8,
+    &quot;total_additions&quot;: 142,
+    &quot;total_deletions&quot;: 37,
+    &quot;complexity_score&quot;: 4,
+    &quot;complexity_label&quot;: &quot;Moderate&quot;,
+    &quot;commits&quot;: 3
+  },
+  &quot;risks&quot;: {
+    &quot;critical&quot;: [],
+    &quot;high&quot;: [],
+    &quot;medium&quot;: [
+      {&quot;name&quot;: &quot;console_log&quot;, &quot;severity&quot;: &quot;medium&quot;, &quot;message&quot;: &quot;Console statement found (remove for production)&quot;, &quot;file&quot;: &quot;src/api/handler.js&quot;, &quot;count&quot;: 2}
+    ],
+    &quot;low&quot;: []
+  },
+  &quot;files&quot;: [ ... ],
+  &quot;commit_issues&quot;: [],
+  &quot;review_order&quot;: [&quot;src/auth/middleware.ts&quot;, &quot;src/api/handler.js&quot;, &quot;...&quot;]
+}
+```
+
+**Output Formats:** Human-readable text report (default) or structured JSON (`--json`).
+
+---
+
+### code_quality_checker.py
+
+**Purpose:** Analyzes source files or directories for structural code quality issues, code smells (long functions, god classes, deep nesting, magic numbers, commented code), SOLID principle violations, and cyclomatic complexity.
+
+**Usage:**
+
+```bash
+python scripts/code_quality_checker.py &lt;path&gt; [--recursive] [--language LANG] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `path` | *(positional, required)* | | File or directory to analyze |
+| `--recursive` | `-r` | `true` | Recursively analyze directories |
+| `--language` | `-l` | *(all supported)* | Filter by language: `python`, `typescript`, `javascript`, `go`, `swift`, `kotlin` |
+| `--json` | | off | Output in JSON format |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/code_quality_checker.py ./src --language typescript --json
+```
+
+```json
+{
+  &quot;directory&quot;: &quot;/absolute/path/to/src&quot;,
+  &quot;files_analyzed&quot;: 12,
+  &quot;average_score&quot;: 82.5,
+  &quot;overall_grade&quot;: &quot;B&quot;,
+  &quot;total_code_smells&quot;: 7,
+  &quot;total_solid_violations&quot;: 1,
+  &quot;files&quot;: [
+    {
+      &quot;file&quot;: &quot;src/service.ts&quot;,
+      &quot;language&quot;: &quot;typescript&quot;,
+      &quot;metrics&quot;: {
+        &quot;lines&quot;: {&quot;total&quot;: 320, &quot;code&quot;: 260, &quot;blank&quot;: 40, &quot;comment&quot;: 20},
+        &quot;functions&quot;: 14,
+        &quot;classes&quot;: 2,
+        &quot;avg_complexity&quot;: 5.3
+      },
+      &quot;quality_score&quot;: 78,
+      &quot;grade&quot;: &quot;C&quot;,
+      &quot;smells&quot;: [
+        {&quot;type&quot;: &quot;long_function&quot;, &quot;severity&quot;: &quot;medium&quot;, &quot;message&quot;: &quot;Function &#x27;processOrder&#x27; has 68 lines (max: 50)&quot;, &quot;location&quot;: &quot;processOrder&quot;}
+      ],
+      &quot;solid_violations&quot;: [],
+      &quot;function_details&quot;: [ ... ],
+      &quot;class_details&quot;: [ ... ]
+    }
+  ]
+}
+```
+
+**Output Formats:** Human-readable text report (default) or structured JSON (`--json`). Files are sorted by quality score ascending (worst first).
+
+---
+
+### review_report_generator.py
+
+**Purpose:** Generates comprehensive code review reports by combining PR analysis and code quality findings into a single structured report with verdict, score, prioritized action items, and suggested review order. Can run both sub-tools automatically or accept pre-computed JSON inputs.
+
+**Usage:**
+
+```bash
+python scripts/review_report_generator.py [repo_path] [--pr-analysis FILE] [--quality-analysis FILE] [--format FORMAT] [--json] [--output FILE]
+```
+
+**Flags:**
+
+| Flag | Short | Default | Description |
+|------|-------|---------|-------------|
+| `repo_path` | *(positional)* | `.` | Path to repository |
+| `--pr-analysis` | | *(auto-run)* | Path to pre-computed PR analysis JSON file |
+| `--quality-analysis` | | *(auto-run)* | Path to pre-computed code quality analysis JSON file |
+| `--format` | `-f` | `text` | Output format: `text`, `markdown`, `json` |
+| `--json` | | off | Output as JSON (shortcut for `--format json`) |
+| `--output` | `-o` | *(stdout)* | Write output to file |
+
+**Example:**
+
+```bash
+python scripts/review_report_generator.py . --format markdown --output review.md
+```
+
+```
+# Code Review Report
+
+**Generated:** 2026-03-21T14:30:00
+**Repository:** /path/to/repo
+
+## Executive Summary
+
+**Verdict:** ✅ APPROVE WITH SUGGESTIONS
+**Score:** 82/100
+**Rationale:** Minor improvements recommended
+
+### Issue Summary
+
+| Severity | Count |
+|----------|-------|
+| Critical | 0     |
+| High     | 1     |
+| Medium   | 3     |
+| Low      | 2     |
+
+## Action Items
+
+1. 🟠 **[P1]** Break down function into smaller, focused units
+2. 🟡 **[P2]** Remove or replace console statements with proper logging
+...
+```
+
+**Output Formats:** Plain text (default), markdown (`--format markdown`), or structured JSON (`--format json` or `--json`). When `--pr-analysis` and `--quality-analysis` are omitted, the tool automatically invokes `pr_analyzer.py` and `code_quality_checker.py` as subprocesses.
+
+---
+
+## What I Need You to Do
+
+### If I&#x27;m using Claude.ai:
+1. Help me create a new **Claude Project** called &quot;Code Reviewer&quot;
+2. Tell me to go to **claude.ai &gt; Projects &gt; Create a project**
+3. The project name should be: &quot;Code Reviewer&quot;
+4. Tell me to paste the skill definition above into the **Project Knowledge** section (click &quot;Add content&quot; &gt; &quot;Add text content&quot;)
+5. Set these **Custom Instructions**: &quot;You are an expert Code Reviewer in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+6. Confirm the setup is complete and show me a sample task to test it
+
+### If I&#x27;m using ChatGPT:
+1. Help me create a new **Custom GPT** called &quot;Code Reviewer&quot;
+2. Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+3. Name: &quot;Code Reviewer&quot;
+4. Description: &quot;Code review automation for TypeScript, JavaScript, Python, Go, Swift, Kotlin. Analyzes PRs for complexity and risk, checks code quality for SOLID violations and code smells, generates review reports. ...&quot;
+5. Paste the skill definition above into the **Instructions** field
+6. Save and confirm it works with a sample task
+
+### If I&#x27;m using another AI tool:
+Tell me how to add this as a custom system prompt or project in my specific tool.
+
+## After Setup
+Once I confirm the project is created, test it with me by running through one of the skill&#x27;s key workflows.
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/code-reviewer/SKILL.md</pre>
+      </details>
+    </div>
   </div>
 </div>
 <div class="tab-content" id="tab-claude">
