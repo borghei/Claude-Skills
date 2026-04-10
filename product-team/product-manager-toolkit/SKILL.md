@@ -207,6 +207,121 @@ Select from `references/prd_templates.md`:
 
 ---
 
+### Positioning Statement Framework
+
+Create a Geoffrey Moore-style positioning statement to clarify product differentiation and value. Use this before writing PRDs, go-to-market plans, or pitch decks.
+
+#### Core Positioning Template
+
+```
+For [target user/persona]
+who [underserved need or painful moment],
+[product name] is a [product category]
+that [primary outcome delivered].
+Unlike [main alternative: competitor, workaround, or status quo],
+[product name] [unique differentiation in outcome terms].
+```
+
+#### One-Sentence Value Proposition
+
+Write a single sentence a PM can reuse in docs and slides.
+
+#### Differentiation Proof Points
+
+List 3 concrete proof points that support the "unlike" claim. Focus on outcomes and evidence, not adjectives.
+
+#### Writing Rules
+
+- Use persona-first language.
+- Focus on outcomes, not feature lists.
+- Keep wording specific and testable.
+- "Unlike X" should name the real alternative, including status quo.
+- Strong differentiation is about outcomes and evidence, not adjectives.
+
+#### Optional Variants
+
+- **Executive variant:** Shorter strategic wording for board decks.
+- **Customer-facing variant:** Clear plain-language wording for marketing.
+
+#### Next Steps
+
+1. Generate 3 alternate positioning directions (Recommended)
+2. Create a competitor comparison message matrix
+3. Convert into homepage headline + subheadline options
+
+---
+
+### Recommendation Canvas
+
+Evaluate product opportunities holistically using a structured canvas that connects problem framing to solution evidence. Useful for investment decisions, portfolio reviews, and stakeholder alignment.
+
+#### Canvas Sections
+
+```markdown
+## Product Name
+[Name of the product or service]
+
+## Business Outcome
+[Direction] [Metric] [Outcome] [Context] [Acceptance criteria]
+
+## Product Outcome
+[Direction] [Metric] [Outcome] [Context] [Acceptance criteria]
+
+## Problem Statement Narrative
+[2-3 sentences telling the persona's story from their point-of-view]
+
+## Solution Hypothesis
+If we [action/solution] for [target persona],
+then we will [desirable outcome].
+
+### Tiny Acts of Discovery
+- [Small experiment focused on viability]
+- [Small experiment focused on customer value]
+
+### Proof-of-Life
+Within [timeframe], we observe:
+- [Quantitative measurable outcome]
+- [Qualitative measurable outcome]
+
+## Positioning Statement
+For [target persona] that need [underserved need],
+[product] is a [category] that [benefit].
+Unlike [competitor], [product] provides [differentiation].
+
+## Assumptions & Unknowns
+- [Assumption 1]
+- [Assumption 2]
+
+## Issues/Risks (PESTEL lens)
+- Political: [Risk]
+- Economic: [Risk]
+- Social: [Risk]
+- Technological: [Risk]
+- Environmental: [Risk]
+- Legal: [Risk]
+
+## Value Justification
+[Yes/Yes with caveats/No with alternatives/No]
+Justification: [Why this is or isn't valuable]
+
+## Success Metrics
+1. [SMART metric 1]
+2. [SMART metric 2]
+3. [SMART metric 3]
+
+## What's Next
+1. [Next step with owner]
+2. [Next step with owner]
+```
+
+#### When to Use
+
+- Evaluating whether to invest in a new product or feature.
+- Preparing for portfolio review or investment committee.
+- Aligning stakeholders on go/no-go decisions.
+
+---
+
 ## Tools Reference
 
 ### RICE Prioritizer

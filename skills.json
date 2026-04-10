@@ -1,13 +1,13 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 224 production-ready skills across 13 domains",
-  "version": "4.0.0",
+  "description": "The Universal AI Skills Library — 245 production-ready skills across 14 domains",
+  "version": "4.1.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 224,
-  "updated": "2026-04-02",
+  "total_skills": 245,
+  "updated": "2026-04-10",
   "domains": {
     "business-growth": {
       "count": 16,
@@ -52,6 +52,11 @@
     "sales-success": {
       "count": 5,
       "tools": 15
+    },
+    "legal": {
+      "count": 17,
+      "tools": 34,
+      "experimental": true
     }
   },
   "skills": [
@@ -2932,6 +2937,48 @@
       "has_assets": true
     },
     {
+      "name": "daci-framework",
+      "description": "DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.",
+      "path": "project-management/execution/daci-framework/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["daci", "decision-framework", "governance"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
+    },
+    {
+      "name": "eol-communication",
+      "description": "End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.",
+      "path": "project-management/execution/eol-communication/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["eol", "product-lifecycle", "change-communication"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
+    },
+    {
+      "name": "story-mapping",
+      "description": "Jeff Patton user story mapping for visualizing user journeys and translating strategy into prioritized, deliverable work.",
+      "path": "project-management/execution/story-mapping/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["story-mapping", "release-planning", "jeff-patton"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
+    },
+    {
       "name": "jira-expert",
       "description": "Atlassian Jira expert for creating and managing projects, planning, product discovery, JQL queries, workflows, custom fields, automation, reporting, and all Jira features. Use for Jira project setup, ...",
       "path": "project-management/jira-expert/SKILL.md",
@@ -3972,6 +4019,363 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "contract-review",
+      "description": "Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use when reviewing vendor contracts, SaaS agreements, service agreements, or generating redline suggestions.",
+      "path": "legal/contract-review/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "contract-analysis",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "contract-review",
+        "redline",
+        "negotiation",
+        "risk-assessment",
+        "legal"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "nda-triage",
+      "description": "Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs. Use when triaging NDAs, screening non-disclosure agreements, or routing NDAs for approval.",
+      "path": "legal/nda-triage/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "nda-screening",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "nda",
+        "screening",
+        "triage",
+        "non-disclosure",
+        "legal-review"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "nda-review",
+      "description": "Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log with redlines, fallbacks, rationales, owners, deadlines. Use when reviewing NDAs for negotiation or approval.",
+      "path": "legal/nda-review/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "nda-analysis",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "nda",
+        "review",
+        "clause-analysis",
+        "redline",
+        "negotiation"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "tech-contract-negotiation",
+      "description": "Negotiation frameworks for technology services agreements, B2B contracts, and professional services deals. Use when reviewing or negotiating tech contracts.",
+      "path": "legal/tech-contract-negotiation/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "contract-negotiation",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "contract-negotiation",
+        "technology-agreements",
+        "B2B",
+        "SLA",
+        "indemnification"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "privacy-compliance",
+      "description": "Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA, Privacy Act, PIPL, UK GDPR compliance assessments, DPA reviews, and data subject request management.",
+      "path": "legal/privacy-compliance/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "privacy-compliance",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "privacy",
+        "gdpr",
+        "ccpa",
+        "data-protection",
+        "compliance"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "dpia-assessment",
+      "description": "GDPR Art. 35 Data Protection Impact Assessment with threshold checking, risk registers, and EDPB criteria scoring. Use for DPIA evaluations.",
+      "path": "legal/dpia-assessment/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "data-protection",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "dpia",
+        "gdpr",
+        "data-protection",
+        "edpb",
+        "privacy-risk"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "data-breach-response",
+      "description": "Data breach incident response with ENISA severity scoring, notification timelines, and compliance tracking. Use for breach assessment and response.",
+      "path": "legal/data-breach-response/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "incident-response",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "data-breach",
+        "gdpr",
+        "enisa",
+        "incident-response",
+        "notification"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "privacy-notice-generator",
+      "description": "Draft GDPR-compliant privacy notices for EU/EEA jurisdictions. Supports 6 notice types, 9 jurisdictions, multi-layer compliance verification. Use for privacy notice drafting, compliance checking, and jurisdiction mapping.",
+      "path": "legal/privacy-notice-generator/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "privacy-notice",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "privacy-notice",
+        "gdpr",
+        "data-protection",
+        "compliance",
+        "eu-privacy"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "legal-risk-assessment",
+      "description": "Structured legal risk assessment with 5x5 Severity x Likelihood matrix. Use for risk scoring, risk registers, escalation decisions, and risk memos.",
+      "path": "legal/legal-risk-assessment/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "risk-management",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "legal-risk",
+        "risk-matrix",
+        "risk-register",
+        "escalation",
+        "compliance"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "statute-analysis",
+      "description": "Statute and regulation interpretation framework. Use when reading statutes, classifying requirements, analyzing operative keywords, applying canons of construction, or mapping compliance obligations from legislative text.",
+      "path": "legal/statute-analysis/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "statutory-interpretation",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "statute",
+        "regulation",
+        "compliance",
+        "interpretation",
+        "legal-analysis"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "mediation-analysis",
+      "description": "Dispute analysis and mediation preparation framework. Use when preparing for mediation, analyzing disputes, calculating settlement ranges, mapping party interests, or developing negotiation strategy.",
+      "path": "legal/mediation-analysis/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "dispute-resolution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "mediation",
+        "negotiation",
+        "dispute-resolution",
+        "settlement",
+        "BATNA"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "legal-red-team",
+      "description": "Adversarial verification for AI-generated legal content. Use when fact-checking legal documents, validating citations, detecting hallucinations, scoring document quality, or assessing distribution readiness.",
+      "path": "legal/legal-red-team/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "quality-assurance",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "legal-verification",
+        "fact-checking",
+        "hallucination-detection",
+        "quality-scoring",
+        "red-team"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "vendor-due-diligence",
+      "description": "Assess IT vendors and third-party partners with multi-factor risk scoring and regulatory compliance checklists. Use when evaluating technology vendors.",
+      "path": "legal/vendor-due-diligence/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "vendor-assessment",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "vendor-assessment",
+        "due-diligence",
+        "risk-scoring",
+        "compliance",
+        "third-party-risk"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "whistleblower-compliance",
+      "description": "Audit whistleblower systems and draft compliant reporting policies. Use when assessing or building whistleblower programs.",
+      "path": "legal/whistleblower-compliance/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "compliance",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "whistleblower",
+        "compliance",
+        "eu-directive-2019-1937",
+        "sox",
+        "dodd-frank"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "legal-canned-responses",
+      "description": "Generate templated responses for common legal inquiries with escalation detection. Use when drafting legal responses.",
+      "path": "legal/legal-canned-responses/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "legal-operations",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "legal-responses",
+        "templates",
+        "escalation",
+        "legal-ops",
+        "intake"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "legal-meeting-briefing",
+      "description": "Prepare structured briefings for meetings with legal relevance and track action items. Use when prepping legal meetings.",
+      "path": "legal/legal-meeting-briefing/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "legal-operations",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "meeting-briefing",
+        "legal-ops",
+        "action-items",
+        "preparation",
+        "meetings"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
+    },
+    {
+      "name": "tabular-document-review",
+      "description": "Extract structured data from multiple documents into comparison matrix with citations. Use for bulk document review.",
+      "path": "legal/tabular-document-review/SKILL.md",
+      "domain": "legal",
+      "category": "legal",
+      "subdomain": "document-review",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "document-review",
+        "extraction",
+        "comparison-matrix",
+        "contracts",
+        "bulk-review"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false,
+      "experimental": true
     }
   ]
 }

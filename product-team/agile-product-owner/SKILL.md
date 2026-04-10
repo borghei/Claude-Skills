@@ -146,7 +146,47 @@ Break epics into deliverable sprint-sized stories:
 7. Sequence stories for incremental delivery
 8. **Validation:** Each story delivers standalone value; total stories cover epic scope
 
-### Splitting Techniques
+### Story Splitting Decision Logic
+
+Apply these rules in order. Use the first rule that fits the story:
+
+| # | Split Rule | When It Applies | How to Split |
+|---|---|---|---|
+| 1 | **Workflow Steps** | Story contains multiple sequential steps | Each step becomes its own story |
+| 2 | **Business Rule Variations** | Story introduces rule variations (e.g., pricing tiers, user roles) | Each rule variation becomes its own story |
+| 3 | **Data Variations** | Story handles different data types or formats | Each data type becomes its own story |
+| 4 | **Complex Acceptance Criteria** | Story has 8+ acceptance criteria covering distinct behaviors | Each distinct behavior cluster becomes its own story |
+| 5 | **Major Effort** | Story requires significant build effort (13+ points) | Split along effort milestones (foundation → feature → polish) |
+| 6 | **External Dependencies** | Story depends on external APIs, teams, or approvals | Split dependent and independent work into separate stories |
+| 7 | **DevOps Effort** | Story requires significant infrastructure work | Split infrastructure setup from feature implementation |
+| 8 | **None Apply** | Story is already small but unclear | Use Tiny Acts of Discovery (TADs) -- small spikes to reduce uncertainty |
+
+### Split Output Format
+
+For each split, document:
+
+```markdown
+## Original Story
+As a [persona], I want to [action] so that [benefit].
+Points: 13 | Status: Too large for sprint
+
+## Suggested Splits
+
+### Split 1: By Workflow Steps
+- **Story A:** As a [persona], I want to [step 1] so that [partial benefit].
+  Points: 5 | Independently valuable: Yes
+- **Story B:** As a [persona], I want to [step 2] so that [remaining benefit].
+  Points: 5 | Independently valuable: Yes
+
+### Risks & Tradeoffs
+- [What coupling exists between the split stories]
+- [What is lost by delivering them separately]
+
+### Implementation Order
+1. Story A (foundation) → 2. Story B (builds on A)
+```
+
+### Splitting Techniques (Quick Reference)
 
 | Technique | When to Use | Example |
 |-----------|-------------|---------|
@@ -154,7 +194,10 @@ Break epics into deliverable sprint-sized stories:
 | By persona | Multiple user types | "Dashboard" → "Admin dashboard" + "User dashboard" |
 | By data type | Multiple inputs | "Import" → "Import CSV" + "Import Excel" |
 | By operation | CRUD functionality | "Manage users" → "Create" + "Edit" + "Delete" |
+| By business rule | Rule variations | "Discount" → "% discount" + "Fixed discount" + "BOGO" |
 | Happy path first | Risk reduction | "Feature" → "Basic flow" + "Error handling" + "Edge cases" |
+| By dependency | External blockers | "Integration" → "Mock integration" + "Live integration" |
+| Tiny Acts of Discovery | High uncertainty | "AI feature" → "Spike: feasibility" + "MVP implementation" |
 
 ### Epic Example
 

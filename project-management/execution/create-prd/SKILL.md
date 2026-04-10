@@ -25,6 +25,82 @@ Structured product requirements document creation using a proven 8-section frame
 - **Feature Expansion** -- Adding significant functionality to an existing product that requires cross-team alignment.
 - **Stakeholder Alignment** -- Need a single document that answers "what are we building and why?" for everyone involved.
 
+## Pre-PRD Techniques
+
+Before writing the PRD, use one or both of these techniques to sharpen the problem definition and align the team on value.
+
+### Technique A: Problem Framing Canvas
+
+Frame the problem from the user's perspective before jumping to solutions. This canvas produces the narrative that feeds directly into PRD Sections 3 (Background) and 5 (Market Segments).
+
+```markdown
+## Problem Framing Canvas
+
+### Problem Framing Narrative
+
+**I am**: [Describe the key persona experiencing the problem]
+- [Key characteristic 1]
+- [Key characteristic 2]
+- [Key characteristic 3]
+
+**Trying to**: [A single sentence listing the desired outcomes]
+
+**But**:
+- [Barrier preventing outcomes 1]
+- [Barrier 2]
+- [Barrier 3]
+
+**Because**: [Root cause explanation in empathetic language]
+
+**Which makes me feel**: [Emotional impact from persona perspective]
+
+### Context & Constraints
+- [Geographic, technological, time-based, organizational constraints]
+
+### Final Problem Statement
+- [Single concise, empathetic summary for stakeholder alignment]
+
+### Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+```
+
+**Next steps:** Generate testable solution hypotheses, convert into a workshop facilitation guide, or create stakeholder-specific variants (Exec, Eng, Design).
+
+### Technique B: Working Backwards Press Release
+
+Write an Amazon-style "future press release" announcing the product as if it already shipped. This forces you to articulate customer value before implementation.
+
+```markdown
+## Working Backwards Press Release
+
+"[Product Name] by [Company] Aims to [Main Purpose/Goal]"
+
+"[City], [Date] --"
+
+"Today, [Company], a [type of organization], announced [product/feature],
+a [brief description]. This [product] is set to [main benefit], addressing
+[key issue or need]."
+
+"[Product] will [what it does/solves]. [Quote from key person]:
+'[customer-outcome-focused quote].' This initiative reflects [Company]'s
+commitment to [core value]."
+
+"In addition to [mentioned features], [product] also [additional benefits].
+According to [source], [relevant data supporting the news]."
+
+**Media Contact:** [Name, Title, Email]
+```
+
+**Writing rules:**
+- Focus on customer outcomes, not feature lists.
+- Avoid hype; favor credible claims and concrete benefits.
+- If you can't write a compelling PR, the product concept needs more work.
+
+**Next steps:** Generate an FAQ, create stakeholder-specific variants, generate objection-handling talking points, or define launch success metrics.
+
+---
+
 ## PRD Framework (8 Sections)
 
 ### Section 1: Summary

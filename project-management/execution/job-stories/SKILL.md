@@ -29,6 +29,88 @@ Write job stories using the Jobs-to-Be-Done (JTBD) framework. Unlike traditional
 - When you need lightweight stories for a team already fluent in user story format.
 - When the work is purely technical with no direct user-facing situation.
 
+## JTBD Discovery Canvas
+
+Before writing job stories, run a Jobs-to-Be-Done discovery canvas to understand what customers are trying to achieve, where they struggle, and what outcomes they value most. This canvas produces the situational context that feeds directly into job story writing.
+
+### When to Run Discovery First
+
+- Starting a new product area with no existing user research.
+- Entering a new market segment or persona.
+- Backlog items feel disconnected from real user needs.
+- Team debates "what to build" without grounding in customer jobs.
+
+### Discovery Canvas Template
+
+#### 1. Customer Jobs
+
+**Functional Jobs:**
+- [Tasks customers need to perform — keep each bullet 4-8 words]
+
+**Social Jobs:**
+- [Ways customers want to be perceived socially]
+
+**Emotional Jobs:**
+- [Emotional states customers seek to achieve or avoid]
+
+#### 2. Pains
+
+**Challenges:**
+- [Obstacles customers face when performing their jobs]
+
+**Costliness:**
+- [What customers find too costly in time, money, or effort]
+
+**Common Mistakes:**
+- [Frequent errors customers make that could be prevented]
+
+**Unresolved Problems:**
+- [Problems not solved by current solutions]
+
+#### 3. Gains
+
+**Expectations:**
+- [Ways current solutions fail to meet expectations]
+
+**Savings:**
+- [Ways savings in time, money, or effort would delight customers]
+
+**Adoption Factors:**
+- [Factors that would increase the likelihood of adoption]
+
+**Life Improvement:**
+- [Ways a solution could make customers' lives easier or more enjoyable]
+
+#### 4. Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+- [Assumption 3]
+
+### From Canvas to Job Stories
+
+Each row in the discovery canvas maps to job story components:
+
+| Canvas Section | Maps To | Example |
+|---|---|---|
+| Customer Jobs (Functional) | **Motivation** (I want to...) | "I want to reconcile my accounts" |
+| Pains (Challenges) | **Situation** (When...) | "When I discover a discrepancy during month-end close" |
+| Gains (Expectations) | **Outcome** (So I can...) | "So I can submit accurate reports before the deadline" |
+
+**Process:**
+1. Run the discovery canvas with stakeholders or from research data.
+2. Identify the highest-impact job-pain-gain clusters.
+3. Write one job story per cluster using the When/Want/So format below.
+4. Validate assumptions before committing to build.
+
+### Next Steps After Discovery
+
+1. Generate prioritized opportunity statements from the canvas (Recommended)
+2. Convert the canvas into a value proposition draft
+3. Generate interview questions to validate top assumptions
+4. Generate a hypothesis backlog for rapid experiments
+
+---
+
 ## The Job Story Format
 
 ```

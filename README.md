@@ -6,11 +6,11 @@
 <p align="center">Production-ready AI skill packages for every coding assistant</p>
 
 <p align="center">
-  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Skills-225-brightgreen.svg" alt="225 Skills"></a>
-  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-613-blue.svg" alt="613 Tools"></a>
+  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Skills-245-brightgreen.svg" alt="245 Skills"></a>
+  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-647-blue.svg" alt="647 Tools"></a>
   <a href="#platform-support"><img src="https://img.shields.io/badge/Platforms-11-orange.svg" alt="11 Platforms"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Version-4.0.0-purple.svg" alt="v4.0.0">
+  <img src="https://img.shields.io/badge/Version-4.1.0-purple.svg" alt="v4.1.0">
 </p>
 
 ---
@@ -68,11 +68,11 @@ See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update 
 
 | Metric | Count |
 |--------|-------|
-| **Skills** | 225 |
-| **Python Tools** | 613 |
+| **Skills** | 245 |
+| **Python Tools** | 647 |
 | **Agents & Personas** | 32 |
 | **Slash Commands** | 26 |
-| **Domains** | 13 |
+| **Domains** | 14 |
 | **Platforms** | 11 |
 | **CI/CD Workflows** | 6 |
 | **Compliance Frameworks** | 18 |
@@ -89,8 +89,9 @@ See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update 
 | [**C-Level Advisory**](docs/SKILLS.md#c-level-advisory) | 26 | CEO, CTO, CFO, CISO strategic decision-making | Board governance, fundraising, tech strategy, Virtual Board of Directors |
 | [**RA/QM & Compliance**](docs/SKILLS.md#regulatory-affairs-quality-management--compliance) | 21 | Regulatory, quality, security, privacy compliance | ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, HIPAA |
 | [**Business & Growth**](docs/SKILLS.md#business-growth) | 16 | Revenue ops, customer success, pricing, churn prevention | CRO, referral programs, pricing optimization, retention analytics |
-| [**Project Management**](docs/SKILLS.md#project-management) | 10 | Agile, Scrum, Jira, Confluence, sprint planning | Sprint health, retrospectives, portfolio management, Atlassian MCP |
-| [**Product Team**](docs/SKILLS.md#product-team) | 8 | Discovery, analytics, roadmaps, UX research, design systems | RICE scoring, OKRs, PRDs, user story generation |
+| [**Legal**](docs/SKILLS.md#legal) | 17 | Contract review, NDA, privacy, DPIA, risk, compliance | Contract analysis, privacy notices, breach response, mediation |
+| [**Project Management**](docs/SKILLS.md#project-management) | 13 | Agile, Scrum, Jira, Confluence, sprint planning, DACI | Sprint health, retrospectives, story mapping, DACI governance |
+| [**Product Team**](docs/SKILLS.md#product-team) | 8 | Discovery, analytics, roadmaps, UX research, design systems | RICE, OKRs, PESTEL, positioning, TAM-SAM-SOM |
 | [**Data Analytics**](docs/SKILLS.md#data--analytics) | 5 | BI, ML ops, analytics engineering, dbt | SQL optimization, data pipelines, business intelligence |
 | [**Sales Success**](docs/SKILLS.md#sales--success) | 5 | Account exec, solutions architect, sales ops | MEDDIC, pipeline management, technical sales |
 | [**HR Operations**](docs/SKILLS.md#hr--people) | 4 | Talent acquisition, people analytics, HR business partner | Hiring loops, org design, compensation benchmarking |
@@ -228,7 +229,7 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 ---
 
 <p align="center">
-  <strong>225 skills. 613 tools. 13 domains. 32 agents. 11 platforms.</strong><br>
+  <strong>245 skills. 647 tools. 14 domains. 32 agents. 11 platforms.</strong><br>
   <a href="https://borghei.me">borghei.me</a>
 </p>
 

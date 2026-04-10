@@ -107,6 +107,53 @@ Use this skill when you need to:
 
 5. **Reference:** See `references/persona-methodology.md` for validity criteria
 
+### Proto-Persona Canvas (Lightweight Alternative)
+
+When you lack research data but need a hypothesis-driven persona to align the team, use a proto-persona canvas. Proto-personas are assumption tools -- not validated truth -- meant to be tested and refined.
+
+**Use when:** Starting a new initiative with no research budget, aligning a cross-functional team quickly, or creating a testable hypothesis about your user.
+
+**Proto-Persona Canvas Template:**
+
+```markdown
+### [Alliterative Name] (e.g., "Careful Carlos")
+
+**Bio & Demographics:**
+- Age, geography, social status, career stage
+- Online presence, leisure activities, partner status
+
+**Quotes** (what they say, feel, think):
+- "[Direct quote capturing their perspective]"
+- "[Quote revealing frustration or aspiration]"
+
+**Pains:**
+- [Pain related to the problem space]
+- [Pain related to current workarounds]
+
+**What They're Trying to Accomplish:**
+- [Observable behavior 1]
+- [Observable behavior 2]
+
+**Goals** (wants, needs, dreams):
+- [Short-term goal]
+- [Long-term aspiration]
+
+**Attitudes & Influences:**
+- Decision Making Authority: [Can they buy/adopt your solution?]
+- Decision Influencers: [Who influences their decisions?]
+- Beliefs & Attitudes: [What beliefs impact their choices?]
+
+**Assumptions to Validate:**
+- [Top assumption that must be true for this persona to be viable]
+- [Second assumption]
+- [Third assumption]
+```
+
+**Next steps after proto-persona:**
+1. Generate interview questions to validate assumptions (Recommended)
+2. Generate an anti-persona to define scope boundaries
+3. Convert into a one-page stakeholder brief
+
 ---
 
 ### Workflow 2: Create Journey Map
@@ -151,11 +198,41 @@ Use this skill when you need to:
    └── Opportunities: Where can we improve?
    ```
 
-5. **Identify opportunities**
+5. **Map three experience paths** (not just the happy path)
 
-   Priority Score = Frequency × Severity × Solvability
+   | Stage | Happy Path | Fail Path | Difficult Path |
+   |---|---|---|---|
+   | Awareness | Finds product via search | Never discovers product | Finds competitor first |
+   | Consideration | Clear value proposition | Confused by pricing | Needs manager approval |
+   | Decision | Easy signup flow | Form errors, abandons | Legal review delays |
+   | Delivery & Use | Smooth onboarding | Can't import data | Workaround needed |
+   | Loyalty | Becomes advocate | Churns silently | Stays but complains |
 
-6. **Reference:** See `references/journey-mapping-guide.md` for templates
+   - **Happy Path:** Everything works as designed.
+   - **Fail Path:** User cannot complete their goal and drops off.
+   - **Difficult Path:** User completes the goal but with friction, workarounds, or frustration.
+
+6. **Add KPIs and ownership per stage**
+
+   | Stage | Leading KPI | Lagging KPI | Team Owner |
+   |---|---|---|---|
+   | Awareness | Site visits, ad impressions | Brand recall | Marketing |
+   | Consideration | Demo requests, pricing page views | MQL conversion | Marketing/Sales |
+   | Decision | Trial starts, contract sent | Close rate | Sales |
+   | Use | Feature adoption, DAU | Retention rate | Product |
+   | Loyalty | NPS, referral count | LTV, expansion revenue | Customer Success |
+
+7. **Identify top friction points and interventions**
+
+   For each friction point, document:
+
+   | Friction Point | Why It Matters | Intervention | Expected Impact | Effort | Confidence |
+   |---|---|---|---|---|---|
+   | [Description] | [User/business impact] | [Proposed fix] | High/Med/Low | S/M/L | High/Med/Low |
+
+   Priority Score = Frequency x Severity x Solvability
+
+8. **Reference:** See `references/journey-mapping-guide.md` for templates
 
 ---
 

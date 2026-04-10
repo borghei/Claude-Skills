@@ -149,6 +149,175 @@ python scripts/okr_cascade_generator.py growth --json > q1_okrs.json
 
 ---
 
+## PESTEL Analysis Framework
+
+Evaluate macro-environment forces that impact product strategy. PESTEL is a decision lens, not a checklist -- use it to inform roadmap decisions, identify threats before they materialize, and spot opportunities competitors miss.
+
+### When to Use
+
+- Annual/quarterly strategic planning sessions.
+- Entering a new market or geography.
+- Evaluating regulatory or economic changes that affect your product.
+- Pre-investment analysis for new product lines.
+
+### PESTEL Template
+
+```markdown
+## PESTEL Analysis
+
+**Product/Company:** [Name]
+**Analysis Purpose:** [Decision this analysis informs]
+**Time Horizon:** [e.g., 12 months, 3 years]
+**Geography/Scope:** [e.g., US, EU, Global]
+
+### 1. Political Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Government policies | | | |
+| Political stability | | | |
+| Trade regulations | | | |
+| Taxation policy | | | |
+
+### 2. Economic Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Economic growth | | | |
+| Inflation rate | | | |
+| Exchange rates | | | |
+| Consumer spending | | | |
+
+### 3. Social Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Demographics | | | |
+| Cultural trends | | | |
+| Lifestyle changes | | | |
+| Consumer attitudes | | | |
+
+### 4. Technological Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Tech advancements | | | |
+| R&D activity | | | |
+| Automation | | | |
+| Digital transformation | | | |
+
+### 5. Environmental Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Climate change | | | |
+| Sustainability | | | |
+| Resource scarcity | | | |
+| Environmental regs | | | |
+
+### 6. Legal Factors
+| Factor | Impact | Opp/Threat | Product Implication |
+|---|---|---|---|
+| Compliance requirements | | | |
+| IP rights | | | |
+| Employment laws | | | |
+| Health & safety regs | | | |
+
+### Strategic Synthesis
+- **Top 3 Opportunities:** [List]
+- **Top 3 Threats:** [List]
+- **Strategic Implications for Product:** [List]
+
+### Assumptions to Validate
+- [Assumption 1]
+- [Assumption 2]
+```
+
+### Next Steps After PESTEL
+
+1. Generate a mitigation and monitoring plan (Recommended)
+2. Convert into a one-page executive risk brief
+3. Generate scenario planning for best/base/worst case
+4. Map top threats into roadmap guardrails
+
+---
+
+## TAM-SAM-SOM Market Sizing
+
+Estimate market size for product opportunities using Total Addressable Market, Serviceable Available Market, and Serviceable Obtainable Market analysis.
+
+### When to Use
+
+- Evaluating new product or feature investment.
+- Preparing investor or board presentations.
+- Comparing market opportunities across product lines.
+- Go-to-market planning and resource allocation.
+
+### Market Sizing Framework
+
+#### Step 1: Define the Problem Space
+
+Describe the problem your product solves. Be specific about the job-to-be-done, not the product category.
+
+#### Step 2: Define Geographic Scope
+
+Specify the geographic region (e.g., US, Europe, Global) and relevant data sources:
+
+| Region | Primary Data Sources |
+|---|---|
+| US | Census Bureau, BLS, industry trade orgs |
+| Europe | Eurostat, local statistical agencies |
+| Global | World Bank, IMF, global industry reports |
+
+#### Step 3: Identify Industry Segments
+
+What specific industry or market segments does this problem relate to?
+
+#### Step 4: Define Customer Profile
+
+Who are the potential customers? Define by problem characteristics, not demographics.
+
+### TAM-SAM-SOM Template
+
+```markdown
+## Market Sizing Analysis
+
+**Problem Space:** [Description]
+**Geographic Region:** [Scope]
+**Industry Segments:** [Relevant segments]
+**Customer Profile:** [Who is affected]
+
+### Total Addressable Market (TAM)
+- **Description:** The total market demand for the problem space
+- **Population Estimate:** [Number of potential users/organizations]
+- **Market Size Estimate:** $[Annual revenue opportunity]
+- **Methodology:** [Top-down from industry reports / Bottom-up from customer count]
+- **Data Sources:** [List sources]
+
+### Serviceable Available Market (SAM)
+- **Segment of TAM:** [The portion you can realistically serve]
+- **Filters Applied:** [Geography, segment, capability constraints]
+- **Population Estimate:** [Number]
+- **Market Size Estimate:** $[Amount]
+- **SAM as % of TAM:** [Percentage]
+
+### Serviceable Obtainable Market (SOM)
+- **Realistically Capturable:** [What you can win in 1-3 years]
+- **Competitive Position:** [Your share vs. alternatives]
+- **Population Estimate:** [Number]
+- **Market Size Estimate:** $[Amount]
+- **SOM as % of SAM:** [Percentage]
+
+### Assumptions & Risks
+- [Key assumption about market size]
+- [Key assumption about capture rate]
+- [Risk that could shrink the market]
+```
+
+### Market Sizing Tips
+
+- **Top-down:** Start from industry reports, narrow by filters. Good for ballpark estimates.
+- **Bottom-up:** Count potential customers, multiply by expected revenue per customer. More credible for investors.
+- **Triangulate:** Use both methods and reconcile. Significant gaps indicate wrong assumptions.
+- SOM is typically 1-5% of SAM for startups, 10-20% for established companies in year 1.
+
+---
+
 ## OKR Cascade Generator
 
 Automatically cascades company OKRs down to product and team levels with alignment tracking.
