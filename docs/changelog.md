@@ -8,10 +8,10 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
-**v4.0.0** (April 2026)
+**v4.1.0** (April 2026)
 
-- 224 production-ready skills across 13 domains
-- 613 Python automation tools
+- 242 production-ready skills across 14 domains (new: Legal — experimental)
+- 647 Python automation tools
 - 25 role-based agents + 7 personas
 - 6 Claude Code subagents
 - 12 sample CI/CD workflows

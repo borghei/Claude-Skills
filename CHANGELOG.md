@@ -5,6 +5,50 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-04-10
+
+### Added
+
+**New Domain: Legal (17 skills, EXPERIMENTAL):**
+
+> All legal skills are experimental and provided for educational/informational purposes only. They do NOT constitute legal advice. The entire responsibility for usage rests with the user.
+
+- Contract Analysis: `contract-review`, `nda-triage`, `nda-review`, `tech-contract-negotiation`
+- Privacy & Data Protection: `privacy-compliance`, `dpia-assessment`, `data-breach-response`, `privacy-notice-generator`
+- Risk & Compliance: `legal-risk-assessment`, `vendor-due-diligence`, `whistleblower-compliance`
+- Legal Methodology: `statute-analysis`, `mediation-analysis`, `legal-red-team`
+- Legal Operations: `legal-canned-responses`, `legal-meeting-briefing`, `tabular-document-review`
+
+**Python Tools (34 new):**
+- `contract_analyzer.py`, `redline_generator.py`, `nda_screener.py`, `nda_checklist.py`, `nda_clause_reviewer.py`
+- `negotiation_position_analyzer.py`, `deal_complexity_scorer.py`, `vendor_risk_scorer.py`, `vendor_comparison.py`
+- `privacy_regulation_checker.py`, `dsr_tracker.py`, `dpia_threshold_checker.py`, `dpia_risk_register.py`
+- `breach_severity_calculator.py`, `breach_timeline_tracker.py`, `privacy_notice_scaffolder.py`, `notice_compliance_checker.py`
+- `risk_scorer.py`, `risk_report_generator.py`, `statute_keyword_analyzer.py`, `requirement_classifier.py`
+- `dispute_analyzer.py`, `settlement_calculator.py`, `legal_fact_checker.py`, `legal_quality_scorer.py`
+- `whistleblower_compliance_checker.py`, `whistleblower_policy_scaffolder.py`, `response_generator.py`, `escalation_detector.py`
+- `meeting_brief_generator.py`, `action_item_tracker.py`, `document_discovery.py`, `extraction_aggregator.py`
+
+**Reference Guides (37 new):**
+- Contract law, NDA screening criteria, clause analysis, negotiation playbooks, regulatory leverage
+- Global privacy regulations (9 frameworks), DPA review checklists, DSR handling, jurisdiction requirements
+- EDPB criteria, ENISA breach methodology, notification obligations, risk scoring methodology
+- Canons of construction, mediation process, negotiation concepts, hallucination patterns
+- Vendor risk framework, regulatory checklists (8 frameworks), monitoring framework
+- Whistleblower regulatory framework, assessment checklists, response templates, escalation triggers
+
+**Documentation:**
+- `legal/CLAUDE.md` -- Domain guidance with experimental disclaimer
+- `docs/skills/legal.md` -- Website catalog page for legal domain
+- Updated skills index, skills.json catalog, root CLAUDE.md
+
+### Changed
+
+- Total skill count: 225 → 242 (across 14 domains, up from 13)
+- Total Python tools: 613 → 647
+- Total reference guides: 280+ → 317+
+- Version: 4.0.0 → 4.1.0
+
 ## [4.0.0] - 2026-04-02
 
 ### Added
