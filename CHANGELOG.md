@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Legal Methodology: `statute-analysis`, `mediation-analysis`, `legal-red-team`
 - Legal Operations: `legal-canned-responses`, `legal-meeting-briefing`, `tabular-document-review`
 
-**Python Tools (34 new):**
+**Python Tools (33 new):**
 - `contract_analyzer.py`, `redline_generator.py`, `nda_screener.py`, `nda_checklist.py`, `nda_clause_reviewer.py`
 - `negotiation_position_analyzer.py`, `deal_complexity_scorer.py`, `vendor_risk_scorer.py`, `vendor_comparison.py`
 - `privacy_regulation_checker.py`, `dsr_tracker.py`, `dpia_threshold_checker.py`, `dpia_risk_register.py`
@@ -61,7 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Total skill count: 225 → 245 (across 14 domains, up from 13)
 - PM execution skills: 8 → 11 (+3 new)
-- Total Python tools: 613 → 647
+- Total Python tools: 613 → 653
 - Total reference guides: 280+ → 317+
 - Version: 4.0.0 → 4.1.0
 
@@ -379,7 +379,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Key Changes |
 |---------|------|-------------|
-| 4.1.0 | 2026-04-10 | 245 skills, 17 legal skills, 3 new PM skills, 6 enhanced product/PM skills, 34 new Python tools |
+| 4.1.0 | 2026-04-10 | 245 skills, 17 legal skills, 3 new PM skills, 6 enhanced product/PM skills, 33 new Python tools |
 | 4.0.0 | 2026-04-02 | 225 skills, 21 new skills, 7 personas, 26 slash commands, MCP server, Gemini CLI support |
 | 2.1.0 | 2026-03-18 | 204 skills, 5 new skills (QA, release, doc-drift, retro, design), 20 new Python tools |
 | 2.0.0 | 2026-02-27 | 97+ skills, 6 subagents, 11 workflows, 3 new skills, 170+ Python tools |

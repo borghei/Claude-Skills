@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Skills-245-brightgreen.svg" alt="245 Skills"></a>
-  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-647-blue.svg" alt="647 Tools"></a>
+  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-653-blue.svg" alt="653 Tools"></a>
   <a href="#platform-support"><img src="https://img.shields.io/badge/Platforms-11-orange.svg" alt="11 Platforms"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License"></a>
   <img src="https://img.shields.io/badge/Version-4.1.0-purple.svg" alt="v4.1.0">
@@ -69,7 +69,7 @@ See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update 
 | Metric | Count |
 |--------|-------|
 | **Skills** | 245 |
-| **Python Tools** | 647 |
+| **Python Tools** | 653 |
 | **Agents & Personas** | 32 |
 | **Slash Commands** | 26 |
 | **Domains** | 14 |
@@ -222,6 +222,12 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 
 ---
 
+## Disclaimer
+
+> **This project is built with the assistance of AI tools (Claude, GPT, etc.).** While every effort is made to ensure accuracy, AI-generated content -- including skill definitions, reference guides, Python tools, frameworks, and documentation -- may contain errors, inaccuracies, or outdated information. Always verify critical information independently before using it in production, compliance, legal, financial, or safety-critical contexts. The authors accept no liability for decisions made based on the content in this repository. Use at your own risk.
+
+---
+
 ## License
 
 **MIT + Commons Clause** -- Free for open-source, personal, education, and internal business use. Cannot be sold or repackaged as a paid product. See [LICENSE](LICENSE) for full terms.
@@ -229,7 +235,7 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 ---
 
 <p align="center">
-  <strong>245 skills. 647 tools. 14 domains. 32 agents. 11 platforms.</strong><br>
+  <strong>245 skills. 653 tools. 14 domains. 32 agents. 11 platforms.</strong><br>
   <a href="https://borghei.me">borghei.me</a>
 </p>
 

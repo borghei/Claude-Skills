@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 245 production-ready skills across 14 domains with 647 Python automation tools, 32 AI agents (including 7 personas), 26 slash commands, 21 compound sub-skills, and 17 CI/CD workflows.
+**Current Scope:** 245 production-ready skills across 14 domains with 653 Python automation tools, 32 AI agents (including 7 personas), 26 slash commands, 21 compound sub-skills, and 17 CI/CD workflows.
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -161,7 +161,7 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 **Phase 1-4 Complete:** 245 production-ready skills deployed
 - Engineering (76 skills incl. 3 compound sub-skill systems), Marketing (38), Product (8), PM (10), C-Level (26), RA/QM & Compliance (21), Legal (17 — EXPERIMENTAL), Data Analytics (5), HR (4), Sales (5), Business Growth (16), Finance (3)
-- 647 Python automation tools, 317+ reference guides
+- 653 Python automation tools, 317+ reference guides
 - 32 AI agents (6 .claude/agents + 19 domain agents + 7 personas)
 - 26 slash commands, 21 compound sub-skills, 6 active CI/CD workflows + 12 templates
 - 18 compliance frameworks covered (SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS, EU AI Act, NIS2, DORA, NIST CSF 2.0, CCPA, ISO 42001, ISO 13485, ISO 14971, MDR, FDA, 21 CFR Part 11, IEC 62304, IEC 62443)
@@ -210,4 +210,4 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 **Last Updated:** April 2026
 **Version:** 4.1.0
-**Status:** 245 skills, 647 Python tools, 32 agents, 26 commands, 21 sub-skills, 14 domains, Gemini CLI support
+**Status:** 245 skills, 653 Python tools, 32 agents, 26 commands, 21 sub-skills, 14 domains, Gemini CLI support

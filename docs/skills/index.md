@@ -22,7 +22,7 @@ title: Skill Catalog
 | HR & Operations | 4 | 12 | [View all](other.md#hr--operations) |
 | Finance | 3 | 10 | [View all](business.md#finance) |
 | Legal (Experimental) | 17 | 34 | [View all](legal.md) |
-| **Total** | **245** | **647** | |
+| **Total** | **245** | **653** | |
 
 ## Skill Package Structure
 

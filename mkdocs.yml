@@ -1,7 +1,7 @@
 site_name: "Claude Skills — Universal AI Skills Library"
 site_url: https://borghei.github.io/Claude-Skills
 site_description: >-
-  245 production-ready AI skills across 14 domains with 647 Python tools,
+  245 production-ready AI skills across 14 domains with 653 Python tools,
   32 agents, and support for 11 platforms including Claude Code, Cursor,
   Codex, Copilot, Windsurf, Cline, Gemini CLI, and Aider.
 site_author: Brian Borghei
