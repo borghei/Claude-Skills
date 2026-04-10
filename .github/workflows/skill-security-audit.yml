@@ -53,8 +53,16 @@ jobs:
           done < <(find . -path '*/scripts/*.py' -type f)
           echo "Files with command injection patterns: $FOUND"
           # Fail on eval/exec (high risk); warn on others
-          if grep -rlE '(eval\(|exec\()' --include='*.py' . 2>/dev/null | grep -q 'scripts'; then
-            echo "::error::eval() or exec() found in scripts — these are blocked."
+          # Exclude security scanner tools that reference eval/exec as detection patterns
+          EVAL_HITS=$(grep -rlE '(eval\(|exec\()' --include='*.py' . 2>/dev/null \
+            | grep 'scripts' \
+            | grep -v 'security_scanner\.py' \
+            | grep -v 'ai_threat_scanner\.py' \
+            | grep -v 'code_scanner\.py' \
+            || true)
+          if [ -n "$EVAL_HITS" ]; then
+            echo "::error::eval() or exec() found in scripts — these are blocked:"
+            echo "$EVAL_HITS"
             exit 1
           fi
 
