@@ -60,6 +60,16 @@ cp -r engineering/senior-devops/ ~/.claude/skills/senior-devops
 # Or paste the SKILL.md content directly into your AI assistant's context
 ```
 
+### Option D: No setup -- just copy & paste (beginners)
+
+Every skill on the [website](https://borghei.github.io/Claude-Skills) has two one-click copy buttons:
+
+- **"Try in Chat"** -- Copies a condensed prompt. Paste it into [claude.ai](https://claude.ai), ChatGPT, or any AI chat for instant expertise. No setup, no CLI, no repo cloning. Works in one conversation.
+
+- **"Add to My AI"** -- Copies the full skill with setup instructions. Paste it into any AI chat and the AI will walk you through creating a permanent **Claude Project** or **Custom GPT** with that skill built in. Use it across all future conversations.
+
+Just browse to any skill page, click the button, and paste.
+
 See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update configuration and per-agent setup.
 
 ---
@@ -138,6 +148,17 @@ Activate with `/persona startup-cto` or by referencing the persona in conversati
 | `/focused-fix` | Minimal-blast-radius bugfix |
 
 Run `/README` in Claude Code to see the full list.
+
+### One-Click Skill Setup (No Code Required)
+
+Every skill page on the [website](https://borghei.github.io/Claude-Skills) includes copy-paste prompts for beginners:
+
+| Button | What It Does |
+|--------|-------------|
+| **Try in Chat** | Instant expertise in any AI chat -- no setup needed |
+| **Add to My AI** | Creates a permanent Claude Project or Custom GPT with the full skill. The AI guides you through setup step by step |
+
+No terminal, no git, no configuration. Browse a skill, click copy, paste into your AI, done.
 
 ### Orchestration Protocol
 
