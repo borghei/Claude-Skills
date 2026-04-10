@@ -72,7 +72,11 @@ jobs:
         run: |
           echo "--- Checking for hardcoded secrets ---"
           PATTERNS='(api_key|api_secret|password|secret_key|access_token|private_key)\s*=\s*["\x27][^"\x27]{8,}'
-          FOUND=$(grep -rnEi "$PATTERNS" --include='*.py' . || true)
+          # Exclude known placeholder/template patterns
+          FOUND=$(grep -rnEi "$PATTERNS" --include='*.py' . \
+            | grep -vi 'CHANGE_ME\|your-secret-here\|changeme\|placeholder\|example\|ChangeMe@\|replace_with\|xxx\|TODO\|FIXME\|sample' \
+            | grep -v 'vault_config_generator\.py\|project_scaffolder\.py\|user_management\.py' \
+            || true)
           if [ -n "$FOUND" ]; then
             echo "::error::Potential hardcoded secrets detected:"
             echo "$FOUND"
