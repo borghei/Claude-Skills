@@ -37,14 +37,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vendor risk framework, regulatory checklists (8 frameworks), monitoring framework
 - Whistleblower regulatory framework, assessment checklists, response templates, escalation triggers
 
+**New PM Execution Skills (3):**
+- `daci-framework` -- DACI decision facilitation and governance (Driver/Approver/Contributor/Informed)
+- `eol-communication` -- End-of-life product messaging and sunset communication framework
+- `story-mapping` -- Jeff Patton user story mapping for journey visualization and release planning
+
 **Documentation:**
 - `legal/CLAUDE.md` -- Domain guidance with experimental disclaimer
 - `docs/skills/legal.md` -- Website catalog page for legal domain
 - Updated skills index, skills.json catalog, root CLAUDE.md
 
+### Enhanced
+
+**Product & PM Skill Upgrades (6 skills enhanced):**
+- `job-stories` -- Added full JTBD Discovery Canvas (Customer Jobs, Pains, Gains) with canvas-to-story mapping workflow
+- `agile-product-owner` -- Added 8-rule story splitting decision logic (Humanizing Work methodology) with split output format and Tiny Acts of Discovery
+- `ux-researcher-designer` -- Added proto-persona canvas template; enhanced journey mapping with happy/fail/difficult paths, KPIs per stage, friction analysis and intervention prioritization
+- `create-prd` -- Added Problem Framing Canvas (I am/Trying to/But/Because/Feel) and Amazon Working Backwards Press Release as pre-PRD techniques
+- `product-manager-toolkit` -- Added Geoffrey Moore positioning statement framework and Recommendation Canvas for product opportunity evaluation
+- `product-strategist` -- Added PESTEL macro-environment analysis framework and TAM-SAM-SOM market sizing methodology
+
 ### Changed
 
-- Total skill count: 225 → 242 (across 14 domains, up from 13)
+- Total skill count: 225 → 245 (across 14 domains, up from 13)
+- PM execution skills: 8 → 11 (+3 new)
 - Total Python tools: 613 → 647
 - Total reference guides: 280+ → 317+
 - Version: 4.0.0 → 4.1.0
@@ -363,6 +379,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | Key Changes |
 |---------|------|-------------|
+| 4.1.0 | 2026-04-10 | 245 skills, 17 legal skills, 3 new PM skills, 6 enhanced product/PM skills, 34 new Python tools |
 | 4.0.0 | 2026-04-02 | 225 skills, 21 new skills, 7 personas, 26 slash commands, MCP server, Gemini CLI support |
 | 2.1.0 | 2026-03-18 | 204 skills, 5 new skills (QA, release, doc-drift, retro, design), 20 new Python tools |
 | 2.0.0 | 2026-02-27 | 97+ skills, 6 subagents, 11 workflows, 3 new skills, 170+ Python tools |

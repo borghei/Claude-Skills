@@ -77,7 +77,7 @@ Personas combine skills from multiple domains. They define a professional identi
 
 | File | Purpose |
 |---|---|
-| `skills.json` | Machine-readable catalog of all 224 skills with metadata |
+| `skills.json` | Machine-readable catalog of all 245 skills with metadata |
 | `CHANGELOG.md` | Version history and release notes |
 | `CONTRIBUTING.md` | Contribution guidelines |
 | `LICENSE` | MIT + Commons Clause license |

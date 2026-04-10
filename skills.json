@@ -1,12 +1,12 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 242 production-ready skills across 14 domains",
+  "description": "The Universal AI Skills Library — 245 production-ready skills across 14 domains",
   "version": "4.1.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 242,
+  "total_skills": 245,
   "updated": "2026-04-10",
   "domains": {
     "business-growth": {
@@ -2935,6 +2935,48 @@
       "tools": 3,
       "has_references": true,
       "has_assets": true
+    },
+    {
+      "name": "daci-framework",
+      "description": "DACI decision facilitation and governance framework for clarifying decision ownership and reducing decision thrash.",
+      "path": "project-management/execution/daci-framework/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["daci", "decision-framework", "governance"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
+    },
+    {
+      "name": "eol-communication",
+      "description": "End-of-life product messaging and sunset communication framework for preserving customer trust during transitions.",
+      "path": "project-management/execution/eol-communication/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["eol", "product-lifecycle", "change-communication"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
+    },
+    {
+      "name": "story-mapping",
+      "description": "Jeff Patton user story mapping for visualizing user journeys and translating strategy into prioritized, deliverable work.",
+      "path": "project-management/execution/story-mapping/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "pm-execution",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": ["story-mapping", "release-planning", "jeff-patton"],
+      "tools": 0,
+      "has_references": false,
+      "has_assets": false
     },
     {
       "name": "jira-expert",

@@ -4,7 +4,7 @@ title: Product & PM Skills
 
 # Product & Project Management Skills
 
-**30 skills** with **68 Python tools** covering product strategy, UX research, design systems, agile, Scrum, discovery, execution, and Atlassian tooling.
+**33 skills** with **68 Python tools** covering product strategy, UX research, design systems, agile, Scrum, discovery, execution, and Atlassian tooling.
 
 ## Product Team
 
@@ -12,18 +12,18 @@ title: Product & PM Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
-| [product-manager-toolkit](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-manager-toolkit/SKILL.md) | RICE prioritization, customer interview analysis, PRD templates, discovery frameworks | 2 |
-| [product-strategist](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-strategist/SKILL.md) | OKR cascade generation, market analysis, vision setting, team scaling | 1 |
-| [agile-product-owner](https://github.com/borghei/Claude-Skills/blob/main/product-team/agile-product-owner/SKILL.md) | User story writing, acceptance criteria, sprint planning, velocity tracking | 1 |
+| [product-manager-toolkit](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-manager-toolkit/SKILL.md) | RICE prioritization, customer interview analysis, positioning statements, recommendation canvas | 2 |
+| [product-strategist](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-strategist/SKILL.md) | OKR cascade generation, PESTEL analysis, TAM-SAM-SOM market sizing, vision setting | 1 |
+| [agile-product-owner](https://github.com/borghei/Claude-Skills/blob/main/product-team/agile-product-owner/SKILL.md) | User story writing, story splitting (8-rule logic), acceptance criteria, sprint planning | 1 |
 | [ab-test-setup](https://github.com/borghei/Claude-Skills/blob/main/product-team/ab-test-setup/SKILL.md) | Hypothesis formulation, sample size calculation, traffic allocation | 3 |
 | [product-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-designer/SKILL.md) | UI/UX design, design systems, prototyping, user research, design thinking | 3 |
 | [design-system-lead](https://github.com/borghei/Claude-Skills/blob/main/product-team/design-system-lead/SKILL.md) | Component libraries, design tokens, documentation, Figma integration | 3 |
 | [ui-design-system](https://github.com/borghei/Claude-Skills/blob/main/product-team/ui-design-system/SKILL.md) | Design token generation, responsive design calculations, developer handoff | 1 |
-| [ux-researcher-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/ux-researcher-designer/SKILL.md) | Data-driven personas, journey mapping, usability testing, research synthesis | 1 |
+| [ux-researcher-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/ux-researcher-designer/SKILL.md) | Data-driven personas, proto-persona canvas, journey mapping (happy/fail/difficult paths), usability testing | 1 |
 
 ## Project Management
 
-**22 skills** with **53 tools** for project managers, scrum masters, and agile coaches.
+**25 skills** with **53 tools** for project managers, scrum masters, and agile coaches.
 
 ### Discovery
 
@@ -38,14 +38,17 @@ title: Product & PM Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
-| [create-prd](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/create-prd/SKILL.md) | 8-section PRD scaffolding | 1 |
+| [create-prd](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/create-prd/SKILL.md) | 8-section PRD scaffolding with problem framing canvas and working backwards PR | 1 |
 | [brainstorm-okrs](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/brainstorm-okrs/SKILL.md) | OKR brainstorming with Radical Focus framework | 1 |
-| [job-stories](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/job-stories/SKILL.md) | Jobs-to-Be-Done stories focusing on situations and motivations | 3 |
+| [job-stories](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/job-stories/SKILL.md) | JTBD discovery canvas and job stories focusing on situations and motivations | 3 |
 | [outcome-roadmap](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/outcome-roadmap/SKILL.md) | Output-to-outcome roadmap transformation with Now/Next/Later framing | 1 |
 | [prioritization-frameworks](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/prioritization-frameworks/SKILL.md) | 9 prioritization methods with scoring tools and decision guidance | 1 |
 | [release-notes](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/release-notes/SKILL.md) | Technical changes to user-benefit-oriented release communication | 1 |
 | [summarize-meeting](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/summarize-meeting/SKILL.md) | Structured meeting summaries with decisions, actions, and open questions | 3 |
 | [wwas](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/wwas/SKILL.md) | Why-What-Acceptance backlog format connecting work to business objectives | 3 |
+| [daci-framework](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/daci-framework/SKILL.md) | DACI decision facilitation, governance design, role clarity | 0 |
+| [eol-communication](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/eol-communication/SKILL.md) | End-of-life product messaging and sunset communication | 0 |
+| [story-mapping](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/story-mapping/SKILL.md) | Jeff Patton user story mapping for release planning and MVP scoping | 0 |
 
 ### Agile & Scrum
 

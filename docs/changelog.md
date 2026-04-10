@@ -10,8 +10,9 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 **v4.1.0** (April 2026)
 
-- 242 production-ready skills across 14 domains (new: Legal — experimental)
+- 245 production-ready skills across 14 domains (new: Legal — experimental; 3 new PM execution skills)
 - 647 Python automation tools
+- 6 enhanced product/PM skills (JTBD canvas, story splitting, PESTEL, positioning, proto-personas, problem framing)
 - 25 role-based agents + 7 personas
 - 6 Claude Code subagents
 - 12 sample CI/CD workflows

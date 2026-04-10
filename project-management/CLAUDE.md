@@ -1,10 +1,10 @@
 # Project Management Skills - Claude Code Guidance
 
-This guide covers the 22 production-ready project management skills organized across role-based, discovery, and execution domains.
+This guide covers the 25 production-ready project management skills organized across role-based, discovery, and execution domains.
 
 ## PM Skills Overview
 
-**Available Skills (22 total):**
+**Available Skills (25 total):**
 
 ### Role-Based Skills (10)
 1. **senior-pm/** - Portfolio management, stakeholder mapping, risk analysis, executive reporting
@@ -24,15 +24,18 @@ This guide covers the 22 production-ready project management skills organized ac
 13. **identify-assumptions/** - Assumption mapping across 4-8 risk categories
 14. **pre-mortem/** - Tiger/Paper Tiger/Elephant risk classification
 
-### Execution Skills (8) — `execution/`
-15. **create-prd/** - 8-section PRD scaffolding with Python generator
+### Execution Skills (11) — `execution/`
+15. **create-prd/** - 8-section PRD scaffolding with problem framing canvas and working backwards PR
 16. **brainstorm-okrs/** - OKR brainstorming and validation (Wodtke framework)
 17. **outcome-roadmap/** - Output→outcome roadmap transformation
 18. **prioritization-frameworks/** - 9-framework reference with multi-scorer
 19. **release-notes/** - Release notes generation from tickets/changelogs
 20. **summarize-meeting/** - Structured meeting summaries with action items
-21. **job-stories/** - JTBD When/Want/So backlog format
+21. **job-stories/** - JTBD discovery canvas and When/Want/So backlog format
 22. **wwas/** - Why-What-Acceptance structured backlog items
+23. **daci-framework/** - DACI decision facilitation and governance
+24. **eol-communication/** - End-of-life product messaging and sunset communication
+25. **story-mapping/** - Jeff Patton user story mapping for release planning
 
 **Key Features:**
 - Atlassian MCP Server integration for direct Jira/Confluence operations

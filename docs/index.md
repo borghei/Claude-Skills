@@ -128,8 +128,8 @@ SQL, ML ops, dbt, BI, talent acquisition, people analytics, operations.
 
 | | |
 |---|---|
-| **224 Skills** | Production-ready expertise across 13 professional domains |
-| **613 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing -- all standard library, no ML dependencies |
+| **245 Skills** | Production-ready expertise across 14 professional domains |
+| **647 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |
