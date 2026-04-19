@@ -1,7 +1,10 @@
 {
-  "name": "claude-skills",
+  "name": "@borghei/claude-skills",
   "version": "0.1.0",
   "description": "Install any skill from the Claude Skills library into your AI assistant in one command.",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "claude",
     "claude-skills",

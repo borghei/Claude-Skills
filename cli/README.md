@@ -1,10 +1,12 @@
-# claude-skills
+# @borghei/claude-skills
 
 Install any skill from the [Claude Skills library](https://github.com/borghei/Claude-Skills) into your AI assistant in one command.
 
 ```bash
-npx claude-skills add senior-fullstack
+npx @borghei/claude-skills add senior-fullstack
 ```
+
+After a global install (`npm i -g @borghei/claude-skills`), the `claude-skills` binary is available directly.
 
 Auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose. Installs the skill into the right directory for whichever assistant you're using.
 
