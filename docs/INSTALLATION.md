@@ -1,6 +1,6 @@
 # Installation Guide - AI Skills Library
 
-Complete installation guide for all 97 production-ready skills across 13 domains, 178 Python tools, 6 subagents, and 12 sample GitHub workflows. Works with Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+Complete installation guide for all 245 production-ready skills across 14 domains, 653 Python tools, 32 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 17 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
 
 ## Table of Contents
 
@@ -22,6 +22,28 @@ Complete installation guide for all 97 production-ready skills across 13 domains
 ## Quick Start
 
 **Choose your agent:**
+
+### For Claude.ai, ChatGPT, Gemini users (no setup, free)
+
+Every skill has two one-click copy buttons on the [website](https://borghei.github.io/Claude-Skills):
+
+| Button | What it does |
+|---|---|
+| **Try in Chat** | Copies a condensed prompt. Paste into Claude.ai, ChatGPT or Gemini and the skill works for that conversation. |
+| **Add to My AI** | Copies the full skill plus setup instructions. Paste into any AI chat and it walks you through creating a permanent Claude Project or Custom GPT with the skill built in. Use it across all future conversations. |
+
+No terminal, no git, no CLI. Browse a skill page, click the button, paste.
+
+### For Claude.ai Pro/Max/Team/Enterprise (Custom Skills upload)
+
+Claude.ai paid accounts support native Custom Skills.
+
+1. On GitHub, navigate to the skill folder you want (e.g. `engineering/senior-fullstack/`)
+2. Download it as a zip. Paste the folder URL into [download-directory.github.io](https://download-directory.github.io/) to get a zip of just that folder.
+3. In Claude.ai, go to **Settings → Features → Custom Skills → Upload**
+4. Upload the zip. The skill becomes available in every conversation on that account.
+
+This does not sync to Claude Desktop or the API.
 
 ### For Claude Code Users (Recommended)
 
@@ -100,7 +122,7 @@ Install **one skill per domain group** into your project with built-in auto-upda
 ### List Available Skills
 
 ```bash
-# List all 97 skills across 13 domains
+# List all 245 skills across 14 domains
 python scripts/skill-installer.py list
 
 # List skills in a specific group
@@ -935,5 +957,5 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 ---
 
 **Last Updated:** February 2026
-**Skills Version:** 2.0 (97 production skills, 178 Python tools, 6 subagents, 12 sample workflows)
+**Skills Version:** 4.1.0 (245 production skills, 653 Python tools, 32 agents, 26 slash commands, 21 compound sub-skills, 17 CI/CD workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

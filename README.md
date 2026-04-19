@@ -3,112 +3,46 @@
 </p>
 
 <h1 align="center">Claude Skills</h1>
-<p align="center">Production-ready AI skill packages for every coding assistant</p>
+<p align="center"><b>The AI skills library for the whole company. Not just engineers.</b></p>
 
 <p align="center">
-  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Skills-245-brightgreen.svg" alt="245 Skills"></a>
-  <a href="#stats-at-a-glance"><img src="https://img.shields.io/badge/Python_Tools-653-blue.svg" alt="653 Tools"></a>
-  <a href="#platform-support"><img src="https://img.shields.io/badge/Platforms-11-orange.svg" alt="11 Platforms"></a>
+  <img src="https://img.shields.io/badge/Skills-245-brightgreen.svg" alt="245 Skills">
+  <img src="https://img.shields.io/badge/Domains-14-blue.svg" alt="14 Domains">
+  <img src="https://img.shields.io/badge/AI_Assistants-11-orange.svg" alt="11 AI Assistants">
+  <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
+  <img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License"></a>
-  <img src="https://img.shields.io/badge/Version-4.1.0-purple.svg" alt="v4.1.0">
 </p>
 
 ---
 
-## What is this?
+## How to use it
 
-Claude Skills is the universal AI skills library -- reusable, self-contained skill packages that bundle domain expertise, Python automation tools, reference knowledge bases, and ready-to-use templates. Each skill works as a standalone package you can drop into any AI coding assistant: Claude Code, Codex, Gemini CLI, Cursor, Copilot, Windsurf, Cline, Aider, Goose, and more.
+**Easiest.** Any AI chat, zero setup. Browse the [skill library](https://borghei.github.io/Claude-Skills), click **Try in Chat** on any skill, paste into Claude.ai, ChatGPT or Gemini. Works in one conversation.
 
-Skills are not plugins or extensions. They are structured knowledge packages that make your AI assistant an expert in a specific domain -- from Terraform infrastructure to SOC 2 compliance to DCF valuation.
+**In Claude Code** (native plugin):
+
+```bash
+/plugin marketplace add borghei/Claude-Skills
+```
+
+**Everywhere else** (Cursor, Codex, Copilot, Windsurf, Cline, Aider, Goose, Gemini CLI): see [docs/INSTALLATION.md](docs/INSTALLATION.md) for per-platform install.
 
 ---
 
-## Quick Start
+## Why teams use this
 
-### Option A: Clone the full library
-
-```bash
-git clone https://github.com/borghei/Claude-Skills.git
-cd Claude-Skills
-
-# Browse domains
-ls engineering/ marketing/ c-level-advisor/ ra-qm-team/
-
-# Run any Python tool directly
-python engineering/senior-fullstack/scripts/code_quality_analyzer.py /path/to/project
-```
-
-### Option B: Use the CLI tool
-
-```bash
-# Search for skills
-python scripts/cs.py search "docker"
-
-# Install a skill into your project
-python scripts/cs.py install docker-development --agent claude
-
-# See what's available
-python scripts/cs.py stats
-```
-
-### Option C: Copy a single skill
-
-```bash
-# Grab just the skill you need
-cp -r engineering/senior-devops/ ~/.claude/skills/senior-devops
-
-# Or paste the SKILL.md content directly into your AI assistant's context
-```
-
-### Option D: No setup -- just copy & paste (beginners)
-
-Every skill on the [website](https://borghei.github.io/Claude-Skills) has two one-click copy buttons:
-
-- **"Try in Chat"** -- Copies a condensed prompt. Paste it into [claude.ai](https://claude.ai), ChatGPT, or any AI chat for instant expertise. No setup, no CLI, no repo cloning. Works in one conversation.
-
-- **"Add to My AI"** -- Copies the full skill with setup instructions. Paste it into any AI chat and the AI will walk you through creating a permanent **Claude Project** or **Custom GPT** with that skill built in. Use it across all future conversations.
-
-Just browse to any skill page, click the button, and paste.
-
-See [INSTALLATION.md](INSTALLATION.md) for the full guide including auto-update configuration and per-agent setup.
+- **245 skills covering the whole org.** Engineering (76), Marketing (38), C-Level (26), Compliance (21), Legal (17), PM (13), Product (8) and 6 more domains.
+- **18 compliance frameworks built in.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA, GDPR and more. The only OSS skills library covering regulated industries.
+- **11 AI assistants supported.** One library, works across Claude Code, Cursor, Codex, Gemini, Copilot, Windsurf, Cline, Aider, Goose, OpenCode and ChatGPT/Claude.ai.
+- **653 Python tools.** Real automation, not prompts. Run `code_quality_analyzer.py`, `dcf_valuation.py`, `seo_audit.py` directly.
+- **32 agents and 7 personas.** Activate `startup-cto`, `growth-marketer` or `solo-founder` and get a multi-skill identity in one command.
 
 ---
 
-## Stats at a Glance
+## Browse skills by domain
 
-| Metric | Count |
-|--------|-------|
-| **Skills** | 245 |
-| **Python Tools** | 653 |
-| **Agents & Personas** | 32 |
-| **Slash Commands** | 26 |
-| **Domains** | 14 |
-| **Platforms** | 11 |
-| **CI/CD Workflows** | 6 |
-| **Compliance Frameworks** | 18 |
-| **Standards** | 7 |
-
----
-
-## Skill Domains
-
-| Domain | Skills | Description | Highlights |
-|--------|--------|-------------|------------|
-| [**Engineering**](docs/SKILLS.md#engineering) | 76 | Fullstack, DevOps, security, AI/ML, cloud, mobile, data | Docker, Terraform, K8s, Playwright, MCP servers, RAG, observability |
-| [**Marketing**](docs/SKILLS.md#marketing) | 38 | Content, SEO, demand gen, paid ads, CRO, social, video | SEO auditor, campaign analytics, A/B testing, X/Twitter growth |
-| [**C-Level Advisory**](docs/SKILLS.md#c-level-advisory) | 26 | CEO, CTO, CFO, CISO strategic decision-making | Board governance, fundraising, tech strategy, Virtual Board of Directors |
-| [**RA/QM & Compliance**](docs/SKILLS.md#regulatory-affairs-quality-management--compliance) | 21 | Regulatory, quality, security, privacy compliance | ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, HIPAA |
-| [**Business & Growth**](docs/SKILLS.md#business-growth) | 16 | Revenue ops, customer success, pricing, churn prevention | CRO, referral programs, pricing optimization, retention analytics |
-| [**Legal**](docs/SKILLS.md#legal) | 17 | Contract review, NDA, privacy, DPIA, risk, compliance | Contract analysis, privacy notices, breach response, mediation |
-| [**Project Management**](docs/SKILLS.md#project-management) | 13 | Agile, Scrum, Jira, Confluence, sprint planning, DACI | Sprint health, retrospectives, story mapping, DACI governance |
-| [**Product Team**](docs/SKILLS.md#product-team) | 8 | Discovery, analytics, roadmaps, UX research, design systems | RICE, OKRs, PESTEL, positioning, TAM-SAM-SOM |
-| [**Data Analytics**](docs/SKILLS.md#data--analytics) | 5 | BI, ML ops, analytics engineering, dbt | SQL optimization, data pipelines, business intelligence |
-| [**Sales Success**](docs/SKILLS.md#sales--success) | 5 | Account exec, solutions architect, sales ops | MEDDIC, pipeline management, technical sales |
-| [**HR Operations**](docs/SKILLS.md#hr--people) | 4 | Talent acquisition, people analytics, HR business partner | Hiring loops, org design, compensation benchmarking |
-| [**Finance**](docs/SKILLS.md#finance) | 3 | Financial analyst, SaaS metrics, investment advisor | DCF valuation, ratio analysis, SaaS benchmarks, budgeting |
-| [**Standards**](standards/) | 7 | Communication, quality, git, security, orchestration, authoring | Skill Authoring Standard, Orchestration Protocol |
-
-See [docs/SKILLS.md](docs/SKILLS.md) for the complete reference with descriptions and tool counts.
+[Engineering (76)](engineering/) · [Marketing (38)](marketing/) · [C-Level (26)](c-level-advisor/) · [Compliance (21)](ra-qm-team/) · [Business & Growth (16)](business-growth/) · [Legal (17)](legal/) · [PM (13)](project-management/) · [Product (8)](product-team/) · [Data (5)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Finance (3)](finance/) · [All skills →](docs/SKILLS.md)
 
 ---
 
@@ -222,7 +156,7 @@ python scripts/cs.py <command>
 - **Skills reference:** [docs/SKILLS.md](docs/SKILLS.md)
 - **Agents reference:** [docs/AGENTS.md](docs/AGENTS.md)
 - **Usage guide:** [docs/USAGE.md](docs/USAGE.md)
-- **Installation:** [INSTALLATION.md](INSTALLATION.md)
+- **Installation:** [docs/INSTALLATION.md](docs/INSTALLATION.md)
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Standards:** [standards/](standards/)
 
