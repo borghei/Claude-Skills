@@ -1,0 +1,48 @@
+{
+  "name": "claude-skills",
+  "version": "0.1.0",
+  "description": "Install any skill from the Claude Skills library into your AI assistant in one command.",
+  "keywords": [
+    "claude",
+    "claude-skills",
+    "claude-code",
+    "cursor",
+    "ai-skills",
+    "ai-agents",
+    "mcp",
+    "llm"
+  ],
+  "homepage": "https://github.com/borghei/Claude-Skills",
+  "bugs": "https://github.com/borghei/Claude-Skills/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borghei/Claude-Skills.git",
+    "directory": "cli"
+  },
+  "license": "SEE LICENSE IN ../LICENSE",
+  "author": "Brian Borghei",
+  "type": "module",
+  "bin": {
+    "claude-skills": "./bin/claude-skills.js"
+  },
+  "main": "./src/index.js",
+  "files": [
+    "bin",
+    "src",
+    "templates",
+    "skills.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node ./bin/claude-skills.js",
+    "build-manifest": "cd .. && python3 scripts/build_manifest.py",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "kleur": "^4.1.5"
+  }
+}

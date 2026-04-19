@@ -1,0 +1,52 @@
+name: Publish claude-skills to npm
+
+on:
+  push:
+    tags:
+      - "cli-v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Publish with --dry-run (no actual publish)"
+        required: false
+        default: "false"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate manifest
+        run: python3 scripts/build_manifest.py
+
+      - name: Install CLI deps
+        working-directory: cli
+        run: npm install --ignore-scripts
+
+      - name: Run tests
+        working-directory: cli
+        run: npm test
+
+      - name: Publish to npm
+        working-directory: cli
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            npm publish --dry-run --access public
+          else
+            npm publish --access public --provenance
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

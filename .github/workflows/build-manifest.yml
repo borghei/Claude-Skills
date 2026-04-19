@@ -1,0 +1,48 @@
+name: Build skills manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "engineering/**/SKILL.md"
+      - "marketing/**/SKILL.md"
+      - "c-level-advisor/**/SKILL.md"
+      - "ra-qm-team/**/SKILL.md"
+      - "business-growth/**/SKILL.md"
+      - "legal/**/SKILL.md"
+      - "project-management/**/SKILL.md"
+      - "product-team/**/SKILL.md"
+      - "data-analytics/**/SKILL.md"
+      - "sales-success/**/SKILL.md"
+      - "hr-operations/**/SKILL.md"
+      - "finance/**/SKILL.md"
+      - "scripts/build_manifest.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate cli/skills.json
+        run: python3 scripts/build_manifest.py
+
+      - name: Commit updated manifest
+        run: |
+          if git diff --quiet cli/skills.json; then
+            echo "No manifest changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cli/skills.json
+          git commit -m "chore(cli): regenerate skills manifest [skip ci]"
+          git push
