@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/Claude-Skills/">
-  <title>Claude Skills - The Universal AI Skills Library</title>
-  <meta name="description" content="245 production-ready skills, 653 Python tools, 32 agents, 26 commands. Works with every major AI coding assistant.">
-  <meta property="og:title" content="Claude Skills - The Universal AI Skills Library">
-  <meta property="og:description" content="245 skills. 653 tools. 32 agents. 11 platforms. Every major AI coding assistant.">
+  <title>Claude Skills - The AI skills library for the whole company</title>
+  <meta name="description" content="245 production-ready AI skills covering engineering, compliance (18 frameworks), C-suite, marketing and more. Works with 11 AI assistants. One-command install.">
+  <meta property="og:title" content="Claude Skills - The AI skills library for the whole company">
+  <meta property="og:description" content="245 skills. 14 domains. 18 compliance frameworks. 11 AI assistants. One-command install via npx @borghei/claude-skills.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills">
   <link rel="stylesheet" href="css/style.css">
@@ -23,8 +23,10 @@
       </button>
       <div class="nav-links" id="nav-links">
         <a href="skills/">Skills</a>
+        <a href="./#bundles">Bundles</a>
         <a href="agents/">Agents</a>
         <a href="commands/">Commands</a>
+        <a href="./#install">Install</a>
         <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
@@ -33,19 +35,22 @@
   <!-- Hero -->
   <section class="hero" id="hero">
     <div class="container">
-      <h1 class="hero-title fade-in">The Universal AI Skills Library</h1>
-      <p class="hero-subtitle fade-in">Production-ready skill packages for every AI coding assistant. Domain expertise, automation tools, and strategic frameworks in one place.</p>
+      <h1 class="hero-title fade-in">The AI skills library for the whole company.</h1>
+      <p class="hero-subtitle fade-in">Not just engineers. 245 production skills covering engineering, compliance, C-suite, marketing, legal, and more. Works with 11 AI assistants.</p>
       <div class="stats-row fade-in" id="stats">
         <span class="stat-item"><span class="stat-number" data-target="245">0</span> Skills</span>
         <span class="dot">&middot;</span>
-        <span class="stat-item"><span class="stat-number" data-target="653">0</span> Tools</span>
+        <span class="stat-item"><span class="stat-number" data-target="14">0</span> Domains</span>
         <span class="dot">&middot;</span>
-        <span class="stat-item"><span class="stat-number" data-target="32">0</span> Agents</span>
+        <span class="stat-item"><span class="stat-number" data-target="18">0</span> Compliance Frameworks</span>
         <span class="dot">&middot;</span>
-        <span class="stat-item"><span class="stat-number" data-target="11">0</span> Platforms</span>
+        <span class="stat-item"><span class="stat-number" data-target="11">0</span> AI Assistants</span>
+      </div>
+      <div class="install-block fade-in" style="margin-top: 32px;">
+        <span class="prompt">$</span><code>npx @borghei/claude-skills add senior-fullstack</code>
       </div>
       <div class="hero-buttons fade-in">
-        <a href="https://github.com/borghei/Claude-Skills" class="btn btn-primary" target="_blank" rel="noopener">Get Started</a>
+        <a href="#install" class="btn btn-primary">View install options</a>
         <a href="skills/" class="btn btn-secondary">Browse Skills</a>
       </div>
     </div>
@@ -229,6 +234,62 @@
     </div>
   </section>
 
+  <!-- Bundles -->
+  <section class="domains" id="bundles">
+    <div class="container">
+      <h2 class="section-title fade-in">Plugin Bundles</h2>
+      <p class="section-subtitle fade-in">5 curated Claude Code plugins, one install command each</p>
+      <div class="domains-grid">
+
+        <a href="https://github.com/borghei/Claude-Skills/tree/main/bundles/engineering-skills" class="domain-card fade-in" target="_blank" rel="noopener">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+          </div>
+          <h3>engineering-skills</h3>
+          <span class="badge">8 flagship</span>
+          <p>Fullstack, DevOps, security, Docker, Terraform, MCP, RAG, code review</p>
+        </a>
+
+        <a href="https://github.com/borghei/Claude-Skills/tree/main/bundles/compliance-skills" class="domain-card fade-in" target="_blank" rel="noopener">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>compliance-skills</h3>
+          <span class="badge">9 flagship</span>
+          <p>ISO 27001, SOC 2, GDPR, EU AI Act, NIS2, DORA, ISO 13485, MDR, FDA</p>
+        </a>
+
+        <a href="https://github.com/borghei/Claude-Skills/tree/main/bundles/c-level-skills" class="domain-card fade-in" target="_blank" rel="noopener">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <h3>c-level-skills</h3>
+          <span class="badge">7 flagship</span>
+          <p>CEO, CTO, CFO, CISO, CMO advisors plus board meeting and deck building</p>
+        </a>
+
+        <a href="https://github.com/borghei/Claude-Skills/tree/main/bundles/marketing-skills" class="domain-card fade-in" target="_blank" rel="noopener">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          </div>
+          <h3>marketing-skills</h3>
+          <span class="badge">6 flagship</span>
+          <p>Content, SEO audit, demand gen, analytics, landing pages, X growth</p>
+        </a>
+
+        <a href="https://github.com/borghei/Claude-Skills/tree/main/bundles/product-skills" class="domain-card fade-in" target="_blank" rel="noopener">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>product-skills</h3>
+          <span class="badge">6 flagship</span>
+          <p>Product management, strategy, agile ownership, UX research, design systems</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="features" id="features">
     <div class="container">
@@ -291,11 +352,23 @@
   <!-- Install -->
   <section class="install" id="install">
     <div class="container">
-      <h2 class="section-title fade-in">Get Started</h2>
+      <h2 class="section-title fade-in">Install in one command</h2>
+      <p class="section-subtitle fade-in">Works across Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider, Goose</p>
       <div class="install-block fade-in">
-        <span class="prompt">$</span><code>git clone https://github.com/borghei/Claude-Skills.git</code>
+        <span class="prompt">$</span><code>npx @borghei/claude-skills add senior-fullstack</code>
       </div>
-      <p class="install-hint fade-in">Or install specific skills: <code>cs install engineering/senior-backend ./</code></p>
+      <p class="install-hint fade-in">Auto-detects your AI assistant and installs the skill into the right directory. Node 18+, no Python required.</p>
+
+      <h3 class="section-title fade-in" style="font-size: 1.2rem; margin-top: 56px;">Alternative paths</h3>
+      <div class="install-block fade-in">
+        <span class="prompt">claude&gt;</span><code>/plugin marketplace add borghei/Claude-Skills</code>
+      </div>
+      <p class="install-hint fade-in">Claude Code native plugin. Install the 5 curated bundles as plugins.</p>
+
+      <div class="install-block fade-in">
+        <span class="prompt">copy</span><code>paste the skill prompt into Claude.ai, ChatGPT or Gemini</code>
+      </div>
+      <p class="install-hint fade-in">Browse any <a href="skills/">skill page</a>, click <strong>Try in Chat</strong>, paste. Works in one conversation. No setup.</p>
     </div>
   </section>
 
