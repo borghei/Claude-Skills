@@ -16,17 +16,19 @@
 
 ---
 
-## How to use it
-
-**Easiest.** Any AI chat, zero setup. Browse the [skill library](https://borghei.github.io/Claude-Skills), click **Try in Chat** on any skill, paste into Claude.ai, ChatGPT or Gemini. Works in one conversation.
-
-**In Claude Code** (native plugin):
+## Install any skill in one command
 
 ```bash
-/plugin marketplace add borghei/Claude-Skills
+npx @borghei/claude-skills add senior-fullstack
 ```
 
-**Everywhere else** (Cursor, Codex, Copilot, Windsurf, Cline, Aider, Goose, Gemini CLI): see [docs/INSTALLATION.md](docs/INSTALLATION.md) for per-platform install.
+Auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose. Drops the skill into the right directory for whichever assistant you're using. Node 18+, no Python required for end users.
+
+**Alternative paths:**
+
+- **No setup, any AI chat.** Browse the [skill library](https://borghei.github.io/Claude-Skills), click **Try in Chat** on any skill, paste into Claude.ai, ChatGPT or Gemini.
+- **Claude Code native plugin.** Run `/plugin marketplace add borghei/Claude-Skills` in Claude Code.
+- **Per-platform manual install.** See [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ---
 
