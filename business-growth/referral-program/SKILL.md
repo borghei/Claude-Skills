@@ -16,6 +16,15 @@ metadata:
 
 Production-grade referral and affiliate program framework covering the 4-stage referral loop, incentive design methodology, trigger moment optimization, share mechanics, viral coefficient modeling, affiliate program architecture, and systematic optimization playbook. Designed to build programs that compound, not collect dust.
 
+## Use when
+
+- The user asks to "design a referral program", "launch an affiliate program", or "improve viral growth"
+- The decision between customer referral vs affiliate program needs to be made
+- An existing referral program has stalled (K-factor <1, low share rate, low referred-user conversion)
+- Reward structure needs sizing against CAC, margin, or LTV
+- Trigger moments need to be identified (when to ask, which in-product events, which lifecycle emails)
+- The user says "word-of-mouth isn't working" or "we want to add a refer-a-friend flow"
+
 ---
 
 ## Table of Contents
@@ -54,11 +63,16 @@ Production-grade referral and affiliate program framework covering the 4-stage r
 
 ## The 4-Stage Referral Loop
 
-Every referral program runs on this loop. If any stage is weak, the entire program underperforms.
+Every referral program runs on this loop. If any stage is weak, the entire program underperforms. Work the stages in order — a broken Stage 1 (trigger) can't be fixed by better rewards at Stage 4.
 
 ```
 [Trigger Moment] → [Share Action] → [Referred User Converts] → [Reward Delivered] → Loop
 ```
+
+- *Validate Stage 1:* trigger fires on a real satisfaction event, not at signup or in a generic monthly email
+- *Validate Stage 2:* share friction is <3 taps/clicks and pre-filled copy is channel-specific
+- *Validate Stage 3:* referred user lands on a referral-specific page, not the generic homepage
+- *Validate Stage 4:* reward delivery is automatic and notified (manual reward ops kill the loop)
 
 ### Stage 1: Trigger Moment
 
@@ -558,6 +572,21 @@ python scripts/affiliate_commission_modeler.py affiliate.json --format json
 - **churn-prevention** -- Monitor referred customer retention separately; high referral churn wastes acquisition spend
 - **page-cro** -- Referral landing page conversion optimization follows page-cro methodology
 - **popup-cro** -- Post-purchase or post-milestone popups are natural referral trigger points
+
+---
+
+## Anti-patterns
+
+| Anti-pattern | Failure mode | Fix |
+|--------------|--------------|-----|
+| Asking at signup instead of after the aha moment | Referrer has no value experience to share; share rates under 2% | Fire the trigger after activation or milestone — never before value is delivered |
+| "Refer a friend" link buried in the account menu | Discovery rate near zero; program appears to "not work" | Surface at trigger moments in-product (modal, banner, post-action), not in settings |
+| Single-sided reward where only the referrer benefits | Referred users feel exploited; conversion on referral landing page drops | Use double-sided rewards — both sides get value, aligned with program positioning |
+| Reward sized larger than first-payment margin | Program grows but unit economics invert; CAC exceeds LTV | Cap reward at 30% of first payment (or <1 payback period); model before launch with referral_economics_calculator.py |
+| Manual reward fulfillment | Delay between referral and reward kills the loop; referrer disengages | Automate reward delivery with in-app notification; trigger within 24 hours of referred user's qualifying event |
+| Confusing affiliate program with customer referral | Wrong activation (customers don't behave like affiliates); wrong attribution (affiliates don't behave like advocates) | Decide the program type first using the Referral vs Affiliate Decision table; don't merge |
+| Ignoring K-factor, optimizing only for share count | Shares grow but referred conversions don't; false sense of progress | Track K = shares × conversion rate; optimize the weakest stage, not the most visible one |
+| Generic monthly "invite friends" email with no trigger | Becomes inbox noise; unsubscribe lift with no conversion lift | Event-triggered emails only — milestone, renewal, support-win, team-growth |
 
 ---
 

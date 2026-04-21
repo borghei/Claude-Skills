@@ -18,6 +18,15 @@ metadata:
 
 Production-ready financial analysis toolkit providing ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction. Designed for financial analysts with 3-6 years experience performing financial modeling, forecasting & budgeting, management reporting, business performance analysis, and investment analysis.
 
+## Use when
+
+- The user asks to "run financial ratios", "build a DCF", "analyze budget variance", or "build a forecast"
+- A valuation range is needed for an acquisition, fundraise, or board presentation
+- Actuals vs budget needs investigation (which variances are material, favorable/unfavorable, department breakdown)
+- A rolling 13-week cash flow or driver-based revenue forecast needs construction
+- Sensitivity analysis is required to stress-test valuation or forecast assumptions
+- The user asks about profitability, liquidity, leverage, efficiency, or valuation metrics with industry context
+
 ## 5-Phase Workflow
 
 ### Phase 1: Scoping
@@ -25,6 +34,7 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 - Identify data sources and time periods
 - Establish materiality thresholds and accuracy targets
 - Select appropriate analytical frameworks
+- *Validate:* materiality threshold is explicit (absolute $ or %), accuracy target is a number, and the decision the analysis supports is named
 
 ### Phase 2: Data Analysis & Modeling
 - Collect and validate financial data (income statement, balance sheet, cash flow)
@@ -32,18 +42,21 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 - Build DCF models with WACC and terminal value calculations
 - Construct budget variance analyses with favorable/unfavorable classification
 - Develop driver-based forecasts with scenario modeling
+- *Validate:* input JSON conforms to the expected schema (no missing statements, no mixed periods); WACC inputs sourced within the last quarter; terminal growth rate ≤ long-run GDP growth
 
 ### Phase 3: Insight Generation
 - Interpret ratio trends and benchmark against industry standards
 - Identify material variances and root causes
 - Assess valuation ranges through sensitivity analysis
 - Evaluate forecast scenarios (base/bull/bear) for decision support
+- *Validate:* every material variance has a root-cause hypothesis; DCF sensitivity range is wider than ±15% on WACC and terminal growth
 
 ### Phase 4: Reporting
 - Generate executive summaries with key findings
 - Produce detailed variance reports by department and category
 - Deliver DCF valuation reports with sensitivity tables
 - Present rolling forecasts with trend analysis
+- *Validate:* executive summary leads with the decision-relevant conclusion, not the method; assumptions appendix lists source + last-reviewed date for each
 
 ### Phase 5: Follow-up
 - Track forecast accuracy (target: +/-5% revenue, +/-3% expenses)
@@ -221,6 +234,19 @@ All scripts accept JSON input files. See `assets/sample_financial_data.json` for
 - Qualitative analysis such as management quality assessment, competitive moat evaluation, ESG scoring, or regulatory risk judgment
 - Tax optimization, transfer pricing, multi-entity consolidation, or jurisdiction-specific accounting treatments (IFRS vs GAAP reconciliation)
 - Monte Carlo simulation, options pricing (Black-Scholes), credit risk modeling, or any analysis requiring external libraries beyond the Python standard library
+
+## Anti-patterns
+
+| Anti-pattern | Failure mode | Fix |
+|--------------|--------------|-----|
+| Building a DCF on a single-scenario forecast | False precision; one number presented as a target price | Always run base/bull/bear; present valuation as a range with sensitivity tables |
+| Terminal growth rate ≥ long-run GDP growth | Valuation dominated by terminal value assuming perpetual above-economy growth | Cap terminal growth at 2-3% (long-run GDP proxy); if comps justify higher, flag explicitly |
+| WACC inputs more than a quarter old | Rate environment moved; discount rate is wrong; valuation wrong | Refresh risk-free rate, ERP, and beta quarterly; document "last reviewed" date per input |
+| Benchmarking ratios against a generic "industry average" | Peer set is wrong; conclusions are wrong | Use a specific comparable-company set (size, geography, business model) — see `references/industry-adaptations.md` |
+| Reporting every variance instead of filtering by materiality | Stakeholders tune out; real issues buried | Apply a materiality threshold (absolute $ or % of budget); below threshold goes into an appendix, not the report |
+| Favorable variance = "good"; unfavorable = "bad" | Misses revenue shortfalls masked by expense underspend; misses over-delivery hiding scope cuts | Always pair the classification with a root-cause note — direction alone is not insight |
+| Mixing forecast periods (quarterly actuals against annual budget) | Variances that don't reconcile; trust collapses | Run the tools on matched periods only; if a period is partial, annotate and use period-adjusted comparisons |
+| Treating model output as the answer | Model is a reasoning aid, not a decision | Lead the executive summary with the decision; put the model outputs in support |
 
 ## Integration Points
 

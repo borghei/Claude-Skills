@@ -16,6 +16,16 @@ metadata:
 
 Production-grade SaaS pricing framework covering the three pricing axes (value metric, packaging, price point), value-based pricing methodology, tier architecture, pricing research methods, pricing page design, price increase execution, and competitive pricing positioning. Pricing is positioning -- the right price communicates as much about your product as your marketing does.
 
+## Use when
+
+- The user asks to "design pricing", "set prices", or "choose a value metric"
+- Pricing tiers need to be restructured (Good-Better-Best, add/remove tiers, repackage features)
+- A price increase is planned and needs execution design (strategy, timing, communication, grandfathering)
+- Conversion on the pricing page is flat or declining
+- Freemium vs free trial decision needs to be made, or the freemium tier is cannibalizing paid
+- Competitor pricing shifts require a positioning response
+- The user says "our pricing feels off" or asks for a pricing audit
+
 ---
 
 ## Table of Contents
@@ -40,12 +50,15 @@ Production-grade SaaS pricing framework covering the three pricing axes (value m
 
 ### Mode 1: Design From Scratch
 No pricing exists or full rebuild needed. Work through value metric, tier structure, price points, and page design.
+- *Validate:* value metric chosen before tier design; tier design locked before price points; price points tested against the corridor before page design.
 
 ### Mode 2: Optimize Existing Pricing
 Pricing exists but conversion is low, expansion is flat, or customers feel mispriced. Audit, benchmark, and identify specific improvements.
+- *Validate:* the diagnosis names a specific failure mode (e.g., "middle tier too narrow", "value metric doesn't scale") before any change is proposed.
 
 ### Mode 3: Price Increase
 Prices need to go up. Design a strategy that increases revenue without burning customer relationships.
+- *Validate:* grandfather policy defined, communication window set (90+ days for annual customers), and expected churn modeled before sending the first notice.
 
 ---
 
@@ -483,6 +496,21 @@ python scripts/price_increase_modeler.py increase.json --format json
 - **churn-prevention** -- Churn analysis by price point and tier informs whether pricing is causing retention issues
 - **signup-flow-cro** -- Signup flow design depends on pricing model (CC-required vs free trial vs freemium)
 - **revenue-operations** -- GTM efficiency metrics (LTV:CAC, Magic Number) validate whether pricing supports unit economics
+
+---
+
+## Anti-patterns
+
+| Anti-pattern | Failure mode | Fix |
+|--------------|--------------|-----|
+| Jumping to the price point before locking the value metric | Discounts and "just lower the price" become the only lever; packaging is stuck | Work the axes in order: value metric → packaging → price point |
+| Copying a competitor's pricing model | Inherits their positioning and unit economics — which may not fit the product | Use competitor pricing as a data point for the corridor, not a template |
+| Per-seat pricing on a tool where one power user does the work | Usage grows but seats don't; revenue stalls | Switch to usage-based, hybrid (base + usage), or per-feature |
+| Raising prices to fix a churn problem | Churn accelerates; pricing gets blamed for a retention problem | Diagnose churn drivers first; if the product is the issue, price increases amplify the damage |
+| Adding a fourth tier to "capture more willingness to pay" | Paradox of choice collapses conversion; sales cycle lengthens | Keep 3 tiers public; put the fourth behind "Contact Sales" if enterprise-specific |
+| Announcing a price increase without grandfathering existing customers | Immediate churn spike; NPS collapse; public backlash | Grandfather for 6-12 months on annual plans; communicate 90+ days in advance |
+| Using MSRP or list price internally for forecasting | Actual ACV diverges from list by 20-40% due to discounts; forecasts miss | Forecast on expected-realized price net of standard discount, not list |
+| Freemium tier that gives away the core value metric | Free users never convert; paid tier cannibalized | Gate the value metric (volume, seats, integrations) — not feature access only |
 
 ---
 

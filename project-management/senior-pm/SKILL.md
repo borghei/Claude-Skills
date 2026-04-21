@@ -23,6 +23,16 @@ metadata:
 
 Strategic project management for enterprise software, SaaS, and digital transformation initiatives. This skill provides sophisticated portfolio management capabilities, quantitative analysis tools, and executive-level reporting frameworks for managing complex, multi-million dollar project portfolios.
 
+## Use when
+
+- The user asks to "run a portfolio health review", "build an executive status report", or "do a stakeholder map"
+- Multiple projects need prioritization across WSJF / RICE / ICE / MoSCoW with strategic alignment
+- A board-ready or executive-ready RAG report needs to be produced
+- Risk analysis needs EMV, Monte Carlo, or portfolio risk correlation — beyond a basic probability/impact matrix
+- Resource capacity planning is needed across multiple concurrent projects
+- A quarterly portfolio rebalancing or three-horizons review is being planned
+- The user says "our portfolio is misaligned", "executives don't trust the reports", or "we can't tell which projects are actually healthy"
+
 ### Core Expertise Areas
 
 **Portfolio Management & Strategic Alignment**
@@ -291,23 +301,24 @@ Reference: `assets/expected_output.json`
    # Update project data from JIRA, financial systems, team surveys
    python3 scripts/project_health_dashboard.py current_portfolio.json
    ```
-
+   - *Validate:* all 5 health dimensions have current-period data; no project missing more than one dimension
 2. **Risk Assessment Update**
    ```bash
    # Refresh risk probabilities and impact assessments
    python3 scripts/risk_matrix_analyzer.py current_portfolio.json
    ```
-
+   - *Validate:* every critical/high risk has an active mitigation owner; no risks aged >30 days without update
 3. **Capacity Analysis**
    ```bash  
    # Review resource utilization and bottlenecks
    python3 scripts/resource_capacity_planner.py current_portfolio.json
    ```
-
+   - *Validate:* utilization sits in the 70-85% optimal band; hotspots flagged with a named resolution action
 4. **Executive Summary Generation**
    - Synthesize outputs into executive report format
    - Highlight critical issues and recommendations
    - Prepare stakeholder communications
+   - *Validate:* one-page RAG summary fits the audience; every red status has a documented intervention plan inside 48 hours
 
 ### Monthly Strategic Review
 
@@ -454,6 +465,20 @@ Reference: `assets/expected_output.json`
 - Customer impact assessment of portfolio decisions
 
 This skill represents the pinnacle of enterprise project management capability, providing both strategic oversight and tactical execution support for complex digital transformation initiatives. The combination of quantitative analysis, sophisticated prioritization, and executive-level communication enables senior project managers to drive significant business value while managing enterprise-level risks and complexities.
+
+## Anti-patterns
+
+| Anti-pattern | Failure mode | Fix |
+|--------------|--------------|-----|
+| RAG status assigned by gut feel, not by dimension scoring | Optimism bias; reds surface too late; executives lose trust in the reports | Use `project_health_dashboard.py` thresholds and calibrate dimension weights with sponsors — don't override without documenting why |
+| Risk register full of "medium" risks | Team avoiding extreme ratings; no actionable signal | Run a calibration workshop with reference incidents; force a distribution across low/medium/high/critical |
+| Portfolio-level decisions made from project-level dashboards | Local optimization; strategic misalignment; hidden dependencies | Aggregate via portfolio view; apply WSJF/RICE across the portfolio, not per project |
+| Capacity planner shows zero gaps while teams complain of overload | Utilization excludes meeting overhead, context-switching, unplanned work | Include 15% meeting overhead and 5% context-switching; validate against team self-reports |
+| Stakeholder map classifies everyone as "Manage Closely" | Thresholds too low or scores inflated; dilutes engagement plan | Use relative ranking within the group; enforce the 4-quadrant split |
+| Executive reports written for the PM, not the executive | Attention drops; decisions delayed; report becomes an artifact not a tool | Lead with RAG + top 3 decisions needed; push dimension detail to an appendix |
+| Treating EMV as a point estimate | Planning against a single number; surprise when variance arrives | Present EMV with a confidence range; layer Monte Carlo for schedule-critical projects |
+| Ignoring risk correlation across projects | Shared dependency fails and multiple projects go red simultaneously | Run portfolio-level correlation analysis quarterly; flag shared vendors, shared teams, shared infra |
+| Rebalancing the portfolio reactively (project-by-project) instead of on a cadence | Whiplash for teams; rebalancing becomes political | Quarterly rebalancing on a fixed cadence using three horizons and efficient-frontier view |
 
 ## Troubleshooting
 
