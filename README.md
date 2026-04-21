@@ -176,6 +176,7 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 |-------------|--------|
 | Alan Pope | [@popey](https://github.com/popey) |
 | Izzy | [@weemax](https://github.com/weemax) |
+| Rohan (Tessl) | [@rohan-tessl](https://github.com/rohan-tessl) |
 
 ---
 
