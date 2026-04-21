@@ -1,8 +1,6 @@
 ---
 name: financial-analyst
-description: >
-  Performs financial ratio analysis, DCF valuation, budget variance analysis,
-  and rolling forecast construction for strategic decision-making
+description: "Performs financial ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction for strategic decision-making. Use when the user asks about financial analysis, company valuation, budget review, forecasting, financial ratios, cash flow projections, variance analysis, DCF modeling, or financial planning."
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -12,74 +10,43 @@ metadata:
   updated: 2026-03-31
   tags: [financial-analysis, dcf, budgeting, forecasting, ratios]
 ---
-# Financial Analyst Skill
 
-## Overview
+# Financial Analyst
 
-Production-ready financial analysis toolkit providing ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction. Designed for financial analysts with 3-6 years experience performing financial modeling, forecasting & budgeting, management reporting, business performance analysis, and investment analysis.
+Production-ready financial analysis toolkit providing ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction. All scripts use Python standard library only — no numpy, pandas, or scipy required.
 
-## 5-Phase Workflow
+## Core Workflow
 
-### Phase 1: Scoping
-- Define analysis objectives and stakeholder requirements
-- Identify data sources and time periods
-- Establish materiality thresholds and accuracy targets
-- Select appropriate analytical frameworks
+### 1. Define Scope and Validate Data
 
-### Phase 2: Data Analysis & Modeling
-- Collect and validate financial data (income statement, balance sheet, cash flow)
-- Calculate financial ratios across 5 categories (profitability, liquidity, leverage, efficiency, valuation)
-- Build DCF models with WACC and terminal value calculations
-- Construct budget variance analyses with favorable/unfavorable classification
-- Develop driver-based forecasts with scenario modeling
-
-### Phase 3: Insight Generation
-- Interpret ratio trends and benchmark against industry standards
-- Identify material variances and root causes
-- Assess valuation ranges through sensitivity analysis
-- Evaluate forecast scenarios (base/bull/bear) for decision support
-
-### Phase 4: Reporting
-- Generate executive summaries with key findings
-- Produce detailed variance reports by department and category
-- Deliver DCF valuation reports with sensitivity tables
-- Present rolling forecasts with trend analysis
-
-### Phase 5: Follow-up
-- Track forecast accuracy (target: +/-5% revenue, +/-3% expenses)
-- Monitor report delivery timeliness (target: 100% on time)
-- Update models with actuals as they become available
-- Refine assumptions based on variance analysis
-
-## Tools
-
-### 1. Ratio Calculator (`scripts/ratio_calculator.py`)
-
-Calculate and interpret financial ratios from financial statement data.
-
-**Ratio Categories:**
-- **Profitability:** ROE, ROA, Gross Margin, Operating Margin, Net Margin
-- **Liquidity:** Current Ratio, Quick Ratio, Cash Ratio
-- **Leverage:** Debt-to-Equity, Interest Coverage, DSCR
-- **Efficiency:** Asset Turnover, Inventory Turnover, Receivables Turnover, DSO
-- **Valuation:** P/E, P/B, P/S, EV/EBITDA, PEG Ratio
+The agent establishes analysis objectives, identifies data sources, and validates input:
 
 ```bash
-python scripts/ratio_calculator.py sample_financial_data.json
-python scripts/ratio_calculator.py sample_financial_data.json --format json
-python scripts/ratio_calculator.py sample_financial_data.json --category profitability
+# Validate JSON input before running any script
+python -m json.tool assets/sample_financial_data.json > /dev/null
 ```
 
-### 2. DCF Valuation (`scripts/dcf_valuation.py`)
+Required input sections: `income_statement`, `balance_sheet`, `cash_flow`. Optional: `market_data` (for valuation ratios).
 
-Discounted Cash Flow enterprise and equity valuation with sensitivity analysis.
+**Validate:** JSON parses without error; all required sections present with non-zero values.
 
-**Features:**
-- WACC calculation via CAPM
-- Revenue and free cash flow projections (5-year default)
-- Terminal value via perpetuity growth and exit multiple methods
-- Enterprise value and equity value derivation
-- Two-way sensitivity analysis (discount rate vs growth rate)
+### 2. Calculate Financial Ratios
+
+The agent runs ratio analysis across 5 categories:
+
+```bash
+python scripts/ratio_calculator.py assets/sample_financial_data.json
+python scripts/ratio_calculator.py assets/sample_financial_data.json --format json
+python scripts/ratio_calculator.py assets/sample_financial_data.json --category profitability
+```
+
+**Ratio categories:** Profitability (ROE, ROA, Gross/Operating/Net Margin), Liquidity (Current, Quick, Cash Ratio), Leverage (Debt-to-Equity, Interest Coverage, DSCR), Efficiency (Asset/Inventory/Receivables Turnover, DSO), Valuation (P/E, P/B, P/S, EV/EBITDA, PEG).
+
+**Validate:** No ratios return 0.00 (indicates missing data). Cross-check key ratios against industry benchmarks in `references/financial-ratios-guide.md`.
+
+### 3. Build DCF Valuation
+
+The agent constructs a discounted cash flow model:
 
 ```bash
 python scripts/dcf_valuation.py valuation_data.json
@@ -87,247 +54,122 @@ python scripts/dcf_valuation.py valuation_data.json --format json
 python scripts/dcf_valuation.py valuation_data.json --projection-years 7
 ```
 
-### 3. Budget Variance Analyzer (`scripts/budget_variance_analyzer.py`)
+The tool calculates WACC (via CAPM), projects revenue and FCF over 5 years (default), derives terminal value via perpetuity growth and exit multiple methods, and produces a two-way sensitivity table (WACC vs terminal growth rate).
 
-Analyze actual vs budget vs prior year performance with materiality filtering.
+**Validate:** Terminal growth rate < WACC (typically 2-3% vs 8-12%); equity value is positive; sensitivity table has no N/A rows.
 
-**Features:**
-- Dollar and percentage variance calculation
-- Materiality threshold filtering (default: 10% or $50K)
-- Favorable/unfavorable classification with revenue/expense logic
-- Department and category breakdown
-- Executive summary generation
+### 4. Analyze Budget Variances
+
+The agent identifies material deviations from budget:
 
 ```bash
 python scripts/budget_variance_analyzer.py budget_data.json
-python scripts/budget_variance_analyzer.py budget_data.json --format json
 python scripts/budget_variance_analyzer.py budget_data.json --threshold-pct 5 --threshold-amt 25000
 ```
 
-### 4. Forecast Builder (`scripts/forecast_builder.py`)
+The tool calculates dollar and percentage variances, classifies favorable/unfavorable, filters by materiality threshold, and generates department and category summaries.
 
-Driver-based revenue forecasting with rolling cash flow projection and scenario modeling.
+**Validate:** All material variances (exceeding threshold) have documented root-cause explanations. Cross-check revenue/expense classification (revenue favorable = actual > budget; expense favorable = actual < budget).
 
-**Features:**
-- Driver-based revenue forecast model
-- 13-week rolling cash flow projection
-- Scenario modeling (base/bull/bear cases)
-- Trend analysis using simple linear regression (standard library)
+### 5. Construct Rolling Forecast
+
+The agent builds driver-based forecasts with scenario modeling:
 
 ```bash
 python scripts/forecast_builder.py forecast_data.json
-python scripts/forecast_builder.py forecast_data.json --format json
 python scripts/forecast_builder.py forecast_data.json --scenarios base,bull,bear
 ```
 
-## Knowledge Bases
+The tool produces trend analysis (linear regression, growth rates), scenario comparison, per-period forecast detail, and 13-week rolling cash flow projection with runway calculation.
 
-| Reference | Purpose |
-|-----------|---------|
-| `references/financial-ratios-guide.md` | Ratio formulas, interpretation, industry benchmarks |
-| `references/valuation-methodology.md` | DCF methodology, WACC, terminal value, comps |
-| `references/forecasting-best-practices.md` | Driver-based forecasting, rolling forecasts, accuracy |
+**Validate:** At least 3 historical periods provided; revenue growth rate is non-zero; cash runway calculation is realistic (compare against known burn rate).
 
-## Templates
+### 6. Synthesize and Report
 
-| Template | Purpose |
-|----------|---------|
-| `assets/variance_report_template.md` | Budget variance report template |
-| `assets/dcf_analysis_template.md` | DCF valuation analysis template |
-| `assets/forecast_report_template.md` | Revenue forecast report template |
+The agent generates the final deliverable:
+- Executive summary with key findings and recommendations
+- Detailed ratio report with trend interpretation
+- DCF valuation report with sensitivity ranges
+- Variance analysis with corrective action plans
+- Rolling forecast with scenario comparisons
 
-## Industry Adaptations
+Templates: `assets/variance_report_template.md`, `assets/dcf_analysis_template.md`, `assets/forecast_report_template.md`
 
-### SaaS
-- Key metrics: MRR, ARR, CAC, LTV, Churn Rate, Net Revenue Retention
-- Revenue recognition: subscription-based, deferred revenue tracking
-- Unit economics: CAC payback period, LTV/CAC ratio
-- Cohort analysis for retention and expansion revenue
+**Validate:** Report delivery meets agreed SLA; all assumptions documented with source and rationale.
 
-### Retail
-- Key metrics: Same-store sales, Revenue per square foot, Inventory turnover
-- Seasonal adjustment factors in forecasting
-- Gross margin analysis by product category
-- Working capital cycle optimization
+## Anti-Patterns
 
-### Manufacturing
-- Key metrics: Gross margin by product line, Capacity utilization, COGS breakdown
-- Bill of materials cost analysis
-- Absorption vs variable costing impact
-- Capital expenditure planning and ROI
+1. **Running scripts on incomplete data** — Missing financial statement fields produce misleading zero ratios. The agent validates JSON input completeness before running any analysis.
+2. **Setting terminal growth rate above WACC** — This produces infinite valuations. The agent ensures terminal growth is 2-3% and always below WACC.
+3. **Ignoring materiality thresholds** — Flagging every $100 variance wastes stakeholder attention. The agent sets thresholds matching organizational materiality policy (default: 10% or $50K).
+4. **Presenting forecasts without scenario ranges** — Single-point forecasts create false precision. The agent always generates base/bull/bear scenarios.
+5. **Treating ratio benchmarks as universal** — Industry benchmarks vary significantly by vertical and company stage. The agent adjusts benchmarks using `references/financial-ratios-guide.md`.
 
-### Financial Services
-- Key metrics: Net Interest Margin, Efficiency Ratio, ROA, Tier 1 Capital
-- Regulatory capital requirements
-- Credit loss provisioning and reserves
-- Fee income analysis and diversification
+## Tools
 
-### Healthcare
-- Key metrics: Revenue per patient, Payer mix, Days in A/R, Operating margin
-- Reimbursement rate analysis by payer
-- Case mix index impact on revenue
-- Compliance cost allocation
-
-## Key Metrics & Targets
-
-| Metric | Target |
-|--------|--------|
-| Forecast accuracy (revenue) | +/-5% |
-| Forecast accuracy (expenses) | +/-3% |
-| Report delivery | 100% on time |
-| Model documentation | Complete for all assumptions |
-| Variance explanation | 100% of material variances |
-
-## Input Data Format
-
-All scripts accept JSON input files. See `assets/sample_financial_data.json` for the complete input schema covering all four tools.
-
-## Dependencies
-
-**None** - All scripts use Python standard library only (`math`, `statistics`, `json`, `argparse`, `datetime`). No numpy, pandas, or scipy required.
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| All ratios return 0.00 | Missing or zeroed financial statement fields in input JSON | Verify `income_statement`, `balance_sheet`, and `cash_flow` keys are populated with non-zero values; check field names match expected schema |
-| DCF yields negative equity value | Net debt exceeds enterprise value, or WACC is set lower than terminal growth rate | Confirm `net_debt` is accurate; ensure `terminal_growth_rate` < WACC (typically 2-3% vs 8-12%); review capital structure assumptions |
-| Sensitivity table shows "N/A" across entire row | WACC value in that row is less than or equal to every terminal growth rate in the range | Widen the gap between WACC and terminal growth; raise WACC inputs or lower the growth range in `assumptions.terminal_growth_rate` |
-| Budget variance analyzer flags every line as material | Materiality thresholds set too low relative to the data scale | Increase `--threshold-pct` (e.g., from 5 to 10) and `--threshold-amt` (e.g., from 25000 to 100000) to match organizational materiality policy |
-| Forecast builder produces flat projections | Historical data has fewer than 2 periods, or `revenue_growth_rate` is set to 0 | Provide at least 3-4 historical periods in `historical_periods`; set a non-zero `revenue_growth_rate` in `assumptions` |
-| JSON parsing error on script execution | Malformed JSON input file (trailing commas, unquoted keys, encoding issues) | Validate input with `python -m json.tool input_file.json`; ensure UTF-8 encoding; remove trailing commas and comments |
-| Valuation ratios all show "Insufficient data" | Missing `market_data` section in input JSON (share price, shares outstanding) | Add the `market_data` object with `share_price`, `shares_outstanding`, and `earnings_growth_rate` fields to the input file |
-
-## Success Criteria
-
-- **Forecast Accuracy**: Revenue forecasts land within +/-5% of actuals; expense forecasts within +/-3% over rolling 12-month periods
-- **Variance Coverage**: 100% of material variances (exceeding threshold) include documented root-cause explanations and corrective action plans
-- **Valuation Confidence**: DCF-derived equity value falls within 15% of comparable-company and precedent-transaction benchmarks, validated through sensitivity analysis
-- **Report Timeliness**: All financial analysis deliverables (ratio reports, variance analyses, forecast updates) published within agreed SLA -- target 100% on-time delivery
-- **Model Integrity**: Every assumption in DCF and forecast models is documented with source, rationale, and last-reviewed date; WACC inputs refresh quarterly against market data
-- **Stakeholder Adoption**: Financial models and dashboards referenced in at least 80% of executive budget reviews, board presentations, and investment committee decisions
-- **Analytical Efficiency**: End-to-end analysis cycle time (data collection through report delivery) reduced by 40%+ compared to manual spreadsheet workflows, measured per reporting period
-
-## Scope & Limitations
-
-**This skill covers:**
-- Quantitative financial ratio analysis across profitability, liquidity, leverage, efficiency, and valuation categories with built-in industry benchmarking
-- Discounted Cash Flow (DCF) enterprise and equity valuation using CAPM-based WACC, perpetuity growth and exit multiple terminal value methods, and two-way sensitivity analysis
-- Budget variance analysis with materiality filtering, favorable/unfavorable classification, department and category breakdowns, and executive summary generation
-- Driver-based revenue forecasting with 13-week rolling cash flow projection, base/bull/bear scenario modeling, and linear regression trend analysis
-
-**This skill does NOT cover:**
-- Real-time market data feeds, live stock price retrieval, or automated data ingestion from ERP/accounting systems (all input is via static JSON files)
-- Qualitative analysis such as management quality assessment, competitive moat evaluation, ESG scoring, or regulatory risk judgment
-- Tax optimization, transfer pricing, multi-entity consolidation, or jurisdiction-specific accounting treatments (IFRS vs GAAP reconciliation)
-- Monte Carlo simulation, options pricing (Black-Scholes), credit risk modeling, or any analysis requiring external libraries beyond the Python standard library
-
-## Integration Points
-
-| Related Skill | Domain | Integration Use Case |
-|---------------|--------|---------------------|
-| `c-level-advisor/ceo-advisor` | C-Level Advisory | Feed DCF valuation outputs and scenario comparisons into CEO strategic investment decisions and board-ready presentations |
-| `c-level-advisor/cto-advisor` | C-Level Advisory | Provide technology investment ROI analysis and CapEx forecasts to support build-vs-buy and infrastructure scaling decisions |
-| `business-growth/revenue-operations` | Business & Growth | Connect revenue forecasts and unit-economics metrics (CAC, LTV, payback period) to pipeline and go-to-market planning |
-| `product-team/product-manager` | Product Team | Supply budget variance data and RICE-weighted financial projections for feature prioritization and resource allocation |
-| `data-analytics/data-analyst` | Data Analytics | Export ratio analysis and forecast outputs as structured JSON for BI dashboard integration and trend visualization |
-| `project-management/project-financial-management` | Project Management | Align budget variance analysis with project-level cost tracking, earned value management, and milestone-based funding releases |
-
-## Tool Reference
-
-### `scripts/ratio_calculator.py`
-
-Calculate and interpret financial ratios across 5 categories with industry benchmarking.
+### ratio_calculator.py
 
 ```
 usage: ratio_calculator.py [-h] [--format {text,json}]
                            [--category {profitability,liquidity,leverage,efficiency,valuation}]
                            input_file
-
-positional arguments:
-  input_file            Path to JSON file with financial statement data
-                        (must contain income_statement, balance_sheet,
-                        cash_flow, and optionally market_data objects)
-
-options:
-  -h, --help            Show help message and exit
-  --format {text,json}  Output format (default: text)
-  --category {profitability,liquidity,leverage,efficiency,valuation}
-                        Calculate only a specific ratio category;
-                        omit to calculate all 5 categories (20 ratios)
 ```
 
-**Ratios computed:** ROE, ROA, Gross Margin, Operating Margin, Net Margin, Current Ratio, Quick Ratio, Cash Ratio, Debt-to-Equity, Interest Coverage, DSCR, Asset Turnover, Inventory Turnover, Receivables Turnover, DSO, P/E, P/B, P/S, EV/EBITDA, PEG Ratio.
+Calculates 20 financial ratios across 5 categories with interpretation and benchmarking.
 
-### `scripts/dcf_valuation.py`
-
-Discounted Cash Flow enterprise and equity valuation with WACC calculation and sensitivity analysis.
+### dcf_valuation.py
 
 ```
 usage: dcf_valuation.py [-h] [--format {text,json}]
                         [--projection-years PROJECTION_YEARS]
                         input_file
-
-positional arguments:
-  input_file            Path to JSON file with valuation data
-                        (must contain historical and assumptions objects)
-
-options:
-  -h, --help            Show help message and exit
-  --format {text,json}  Output format (default: text)
-  --projection-years PROJECTION_YEARS
-                        Number of projection years; overrides the value
-                        in the input file (default: 5)
 ```
 
-**Outputs:** WACC (CAPM), projected revenue and FCF, terminal value (perpetuity growth + exit multiple), enterprise value, equity value, value per share, and a two-way sensitivity table (WACC vs terminal growth rate).
+DCF enterprise and equity valuation with WACC, terminal value, and sensitivity analysis.
 
-### `scripts/budget_variance_analyzer.py`
-
-Analyze actual vs budget vs prior year performance with materiality filtering and executive summaries.
+### budget_variance_analyzer.py
 
 ```
 usage: budget_variance_analyzer.py [-h] [--format {text,json}]
-                                   [--threshold-pct THRESHOLD_PCT]
-                                   [--threshold-amt THRESHOLD_AMT]
+                                   [--threshold-pct PCT] [--threshold-amt AMT]
                                    input_file
-
-positional arguments:
-  input_file            Path to JSON file with budget data
-                        (must contain line_items array with actual,
-                        budget, and optionally prior_year values)
-
-options:
-  -h, --help            Show help message and exit
-  --format {text,json}  Output format (default: text)
-  --threshold-pct THRESHOLD_PCT
-                        Materiality threshold as percentage (default: 10.0)
-  --threshold-amt THRESHOLD_AMT
-                        Materiality threshold as dollar amount (default: 50000.0)
 ```
 
-**Outputs:** Executive summary (revenue/expense/net impact), all variances with favorability classification, material variances filtered by threshold, department summary, and category summary.
+Actual vs budget vs prior year analysis with materiality filtering and executive summaries.
 
-### `scripts/forecast_builder.py`
-
-Driver-based revenue forecasting with rolling cash flow projection and multi-scenario modeling.
+### forecast_builder.py
 
 ```
 usage: forecast_builder.py [-h] [--format {text,json}]
                            [--scenarios SCENARIOS]
                            input_file
-
-positional arguments:
-  input_file            Path to JSON file with forecast data
-                        (must contain historical_periods, drivers,
-                        assumptions, cash_flow_inputs, and scenarios objects)
-
-options:
-  -h, --help            Show help message and exit
-  --format {text,json}  Output format (default: text)
-  --scenarios SCENARIOS
-                        Comma-separated list of scenarios to model
-                        (default: base,bull,bear)
 ```
 
-**Outputs:** Trend analysis (linear regression, growth rates, seasonality index), scenario comparison table, per-period forecast detail (revenue, COGS, gross profit, OpEx, operating income), and 13-week rolling cash flow projection with runway calculation.
+Driver-based revenue forecasting with 13-week cash flow projection and multi-scenario modeling.
+
+## Troubleshooting
+
+| Problem | Resolution |
+|---------|------------|
+| All ratios return 0.00 | Verify `income_statement`, `balance_sheet`, and `cash_flow` keys are populated with non-zero values |
+| DCF yields negative equity value | Confirm `net_debt` is accurate; ensure `terminal_growth_rate` < WACC |
+| Sensitivity table shows N/A | Widen gap between WACC and terminal growth rate |
+| Every budget line flagged as material | Increase `--threshold-pct` and `--threshold-amt` to match organizational policy |
+| Forecast produces flat projections | Provide at least 3 historical periods; set non-zero `revenue_growth_rate` |
+| JSON parsing error | Validate with `python -m json.tool input_file.json`; ensure UTF-8 encoding |
+
+## References
+
+- [Financial Ratios Guide](references/financial-ratios-guide.md) — Ratio formulas, interpretation, and industry benchmarks
+- [Valuation Methodology](references/valuation-methodology.md) — DCF methodology, WACC derivation, terminal value approaches
+- [Forecasting Best Practices](references/forecasting-best-practices.md) — Driver-based forecasting, rolling forecasts, accuracy measurement
+- [Industry Adaptations](references/industry-adaptations.md) — SaaS, Retail, Manufacturing, Financial Services, and Healthcare-specific metrics and considerations
+
+## Integration Points
+
+| Related Skill | Use Case |
+|---------------|----------|
+| `c-level-advisor/ceo-advisor` | Feed DCF outputs into strategic investment decisions |
+| `c-level-advisor/cto-advisor` | Provide technology investment ROI and CapEx forecasts |
+| `business-growth/revenue-operations` | Connect forecasts to pipeline and GTM planning |
+| `data-analytics/data-analyst` | Export structured JSON for BI dashboard integration |
