@@ -5,6 +5,30 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.1] - 2026-04-21
+
+### Changed
+
+- Adopted the Skill Authoring Standard sections (`Use when`, phase-level validation checkpoints, and `Anti-patterns` tables) across 5 high-traffic skills for more reliable activation and tighter failure-mode coverage:
+  - `engineering/focused-fix` -- Added Use-when triggers, per-step validation in the Focused Bugfix Workflow, and 6 anti-patterns covering scope creep, symptom fixes, and dependency bundling
+  - `business-growth/pricing-strategy` -- Added Use-when triggers, mode-level validation (Design / Optimize / Price Increase), and 8 anti-patterns covering value-metric sequencing, tier sprawl, and grandfathering
+  - `business-growth/referral-program` -- Added Use-when triggers, stage-level validation across the 4-stage referral loop, and 8 anti-patterns covering trigger timing, reward sizing, and K-factor misuse
+  - `finance/financial-analyst` -- Added Use-when triggers, phase-level validation across the 5-phase workflow, and 8 anti-patterns covering DCF scenarios, terminal growth caps, WACC staleness, and materiality filtering
+  - `project-management/senior-pm` -- Added Use-when triggers, weekly-review validation checkpoints, and 9 anti-patterns covering RAG calibration, portfolio-level decisioning, and quarterly rebalancing cadence
+- Additive-only edits: no frontmatter, existing content, or script behavior changed
+
+### Fixed
+
+- `finance/financial-analyst/SKILL.md` -- Corrected broken reference link in anti-patterns table (pointed to non-existent `references/industry-adaptations.md`; now points to industry benchmarks in `references/financial-ratios-guide.md`)
+
+### Docs
+
+- `README.md` -- Added @rohan-tessl (Tessl) to the Contributors table
+
+### Meta
+
+- Version: 4.1.0 → 4.1.1 (patch — content-only improvement, no scripts or frontmatter touched)
+
 ## [4.1.0] - 2026-04-10
 
 ### Added

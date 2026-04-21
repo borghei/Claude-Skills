@@ -209,5 +209,5 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 ---
 
 **Last Updated:** April 2026
-**Version:** 4.1.0
+**Version:** 4.1.1
 **Status:** 245 skills, 653 Python tools, 32 agents, 26 commands, 21 sub-skills, 14 domains, Gemini CLI support
