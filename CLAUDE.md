@@ -29,6 +29,9 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **HR Operations** | [hr-operations/CLAUDE.md](hr-operations/CLAUDE.md) | Talent acquisition, people analytics, HR business partner |
 | **Sales Success** | [sales-success/CLAUDE.md](sales-success/CLAUDE.md) | Account executive, sales ops, solutions architect |
 | **Legal (Experimental)** | [legal/CLAUDE.md](legal/CLAUDE.md) | 17 skills: contract review, NDA, privacy, DPIA, breach response, risk assessment, mediation |
+| **Personal Productivity** | [personal-productivity/CLAUDE.md](personal-productivity/CLAUDE.md) | 10 skills: resume, lead-research, meeting-insights, naming, invoices, email triage, calendar prep, investor update, pitch deck, weekly review |
+| **Documents** | [documents/CLAUDE.md](documents/CLAUDE.md) | 4 skills: docx, pdf, pptx, xlsx audit (stdlib-only OOXML parsing) |
+| **Vertical Advisors** | [vertical-advisors/CLAUDE.md](vertical-advisors/CLAUDE.md) | 7 skills: fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace strategic advisors |
 | **Standards Library** | [standards/CLAUDE.md](standards/CLAUDE.md) | Communication, quality, git, security standards |
 | **Templates** | [templates/CLAUDE.md](templates/CLAUDE.md) | Template system usage |
 
@@ -62,6 +65,9 @@ claude-code-skills/
 ├── sales-success/             # 5 sales success skills + Python tools
 ├── finance/                   # 3 finance skills + Python tools
 ├── legal/                     # 17 legal skills (EXPERIMENTAL) + 34 Python tools
+├── personal-productivity/     # 10 personal-productivity skills (resume, leads, meetings, naming, invoices, email triage, calendar prep, investor update, pitch deck, weekly review)
+├── documents/                 # 4 document automation skills (docx, pdf, pptx, xlsx) — stdlib only
+├── vertical-advisors/         # 7 vertical advisor skills (fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace)
 ├── standards/                 # 7 standards (+ orchestration protocol, skill authoring standard)
 ├── templates/                 # Reusable templates + 12 sample GitHub workflows
 ├── documentation/             # Implementation plans, sprints, delivery
@@ -208,6 +214,9 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ---
 
-**Last Updated:** April 2026
+**Last Updated:** May 2026
 **Version:** 4.1.1
-**Status:** 245 skills, 653 Python tools, 32 agents, 26 commands, 21 sub-skills, 14 domains, Gemini CLI support
+**Status:** 266 skills, 67 cs-* agents (+ 7 personas), 26 commands, 21 sub-skills, 18 domains, Gemini CLI support
+- New domains: `personal-productivity/` (10 skills), `documents/` (4 skills, stdlib OOXML), `vertical-advisors/` (7 skills)
+- Vertical advisors: fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace — strategic, not implementation
+- Expanded `agents/`: cs-* agents across engineering (23), c-level (12), marketing (8), business-growth (3), hr (2), product (3), compliance (2), vertical (7), root (4)

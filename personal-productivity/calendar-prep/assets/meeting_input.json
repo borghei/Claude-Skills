@@ -1,0 +1,58 @@
+{
+  "_comment": "Fill in for your specific meeting. Run: python ../../scripts/meeting_prep_briefer.py meeting_input.json",
+  "meeting_title": "Quarterly review with Acme Corp",
+  "when": "Tuesday 2026-05-12, 14:00 PT",
+  "duration_minutes": 45,
+  "your_role": "Account exec leading the renewal conversation",
+  "primary_goal": "Secure verbal commitment to renew at expanded scope (+$80K ARR)",
+  "attendees": [
+    {
+      "name": "Jane Wu",
+      "role": "VP Operations, Acme",
+      "position_on_topic": "Champion — wants the renewal to happen but is budget-constrained"
+    },
+    {
+      "name": "Tom Reyes",
+      "role": "CFO, Acme",
+      "position_on_topic": "Skeptical — has questioned ROI in two prior reviews"
+    }
+  ],
+  "decisions_sought": [
+    "Verbal commitment to expanded scope by end of meeting",
+    "Confirmation of decision-maker for final signoff",
+    "Timeline for legal / procurement review"
+  ],
+  "questions_to_ask": [
+    "What changed between Q1 plan and current plan that affects budget?",
+    "Are there competing priorities competing for the same budget line this quarter?",
+    "Who else needs to be in the loop before final signoff?"
+  ],
+  "talking_points": [
+    "ROI tracker shows $312k value delivered in last 12 months — published in shared dashboard",
+    "Expanded scope addresses the marketing team's request from March QBR",
+    "Pricing held flat despite our list-price increase — grandfathering ends at renewal"
+  ],
+  "counter_arguments_to_anticipate": [
+    {
+      "argument": "We need to defer until Q3 budget cycle",
+      "response": "Grandfathered pricing expires at current term end; deferring loses ~$12k vs renewing now"
+    },
+    {
+      "argument": "We don't have headcount to use the expanded scope yet",
+      "response": "The expanded scope includes white-glove onboarding for 90 days — net headcount cost is zero"
+    }
+  ],
+  "metrics_to_reference": [
+    {"name": "Time-to-value (this account)", "value": "21 days, vs 45-day median"},
+    {"name": "Active users (this account)", "value": "47 of 60 seats — 78%"},
+    {"name": "Outcome value tracked YTD", "value": "$312,000"}
+  ],
+  "context": "Account renewing in 6 weeks. Strong product engagement; weak budget environment for the customer's parent company. Champion is in the room but CFO has been the blocker before.",
+  "last_meeting_notes": "Q1 review: Jane committed to socialize expanded scope internally. Tom raised concerns about per-seat cost; we agreed to revisit at this meeting with usage data.",
+  "supporting_links": [
+    {"title": "ROI Tracker dashboard", "url": "https://internal.example.com/dashboards/acme-roi"},
+    {"title": "Q1 review notes", "url": "https://internal.example.com/notes/acme-q1-2026"}
+  ],
+  "success_definition": "Verbal commitment to renew at expanded scope; clear path through procurement; no new objections raised that we don't have answers for.",
+  "fallback_position": "Renewal at current scope, with expanded scope deferred to mid-term mini-amendment in 90 days."
+}

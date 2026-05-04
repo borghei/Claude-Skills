@@ -1,0 +1,90 @@
+{
+  "_comment": "Each rule has a category, tax bucket, and a list of match keywords. The first matching rule wins. Edit freely — the script reads this on every run.",
+  "_tax_bucket_legend": "US Schedule C buckets used as defaults; replace if you file elsewhere. Common: software, advertising, travel, meals, office, contract_labor, utilities, rent, equipment, professional_services, banking_fees.",
+  "rules": [
+    {
+      "category": "Software / SaaS",
+      "tax_bucket": "software",
+      "match": [
+        "github", "gitlab", "vercel", "netlify", "linear", "notion",
+        "slack", "figma", "adobe", "atlassian", "jetbrains", "openai",
+        "anthropic", "aws", "amazon web services", "gcp", "google cloud",
+        "azure", "cloudflare", "1password", "datadog", "sentry",
+        "intercom", "stripe", "shopify", "subscription", "saas"
+      ]
+    },
+    {
+      "category": "Advertising & Marketing",
+      "tax_bucket": "advertising",
+      "match": [
+        "google ads", "facebook ads", "linkedin ads", "twitter ads",
+        "x ads", "tiktok ads", "advertising", "ad spend",
+        "mailchimp", "convertkit", "hubspot", "ahrefs", "semrush"
+      ]
+    },
+    {
+      "category": "Travel",
+      "tax_bucket": "travel",
+      "match": [
+        "uber", "lyft", "airbnb", "hotels.com", "booking.com",
+        "expedia", "delta", "united airlines", "lufthansa",
+        "british airways", "amtrak", "rental car", "hertz", "avis"
+      ]
+    },
+    {
+      "category": "Meals & Entertainment",
+      "tax_bucket": "meals",
+      "match": [
+        "starbucks", "restaurant", "cafe", "doordash", "uber eats",
+        "grubhub", "deliveroo", "lunch", "dinner", "coffee"
+      ]
+    },
+    {
+      "category": "Office & Supplies",
+      "tax_bucket": "office",
+      "match": [
+        "staples", "office depot", "amazon basics", "ikea",
+        "office supplies", "paper", "printer", "ink"
+      ]
+    },
+    {
+      "category": "Equipment",
+      "tax_bucket": "equipment",
+      "match": [
+        "apple store", "best buy", "dell", "lenovo", "macbook",
+        "monitor", "keyboard", "mouse", "laptop", "iphone", "headphones"
+      ]
+    },
+    {
+      "category": "Professional Services",
+      "tax_bucket": "professional_services",
+      "match": [
+        "lawyer", "attorney", "legal", "accountant", "cpa",
+        "tax preparation", "bookkeeping", "consultant", "agency"
+      ]
+    },
+    {
+      "category": "Banking & Fees",
+      "tax_bucket": "banking_fees",
+      "match": [
+        "bank fee", "wire fee", "atm fee", "fx fee", "stripe fee",
+        "paypal fee", "wise fee", "interest charge"
+      ]
+    },
+    {
+      "category": "Contract Labor",
+      "tax_bucket": "contract_labor",
+      "match": [
+        "freelancer", "upwork", "fiverr", "contractor", "consultant"
+      ]
+    },
+    {
+      "category": "Utilities",
+      "tax_bucket": "utilities",
+      "match": [
+        "internet", "verizon", "comcast", "att", "t-mobile",
+        "vodafone", "phone bill", "electric", "gas", "water"
+      ]
+    }
+  ]
+}

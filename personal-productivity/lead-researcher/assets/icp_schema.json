@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICP Definition",
+  "description": "Schema for an Ideal Customer Profile used by lead_qualifier.py",
+  "type": "object",
+  "required": ["name", "must_have"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Short label for this ICP (e.g., 'Mid-Market SaaS — Data Team Buyer')"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version tag for tracking refreshes (e.g., '2026-Q2')"
+    },
+    "must_have": {
+      "type": "array",
+      "description": "Attributes a lead MUST match. Missing one drops the lead's score significantly.",
+      "items": { "$ref": "#/definitions/rule" }
+    },
+    "nice_to_have": {
+      "type": "array",
+      "description": "Attributes that boost the lead at half-weight when matched.",
+      "items": { "$ref": "#/definitions/rule" }
+    },
+    "disqualifiers": {
+      "type": "array",
+      "description": "Any match here drops the lead entirely.",
+      "items": { "$ref": "#/definitions/rule" }
+    }
+  },
+  "definitions": {
+    "rule": {
+      "type": "object",
+      "required": ["field"],
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Lead CSV column this rule evaluates (e.g., 'industry', 'size', 'country', 'signals')"
+        },
+        "value": {
+          "description": "String or array of strings — case-insensitive substring match against the lead's field",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "min": {
+          "type": "number",
+          "description": "For numeric fields like 'size': minimum acceptable value (inclusive)"
+        },
+        "max": {
+          "type": "number",
+          "description": "For numeric fields like 'size': maximum acceptable value (inclusive)"
+        },
+        "weight": {
+          "type": "number",
+          "description": "Relative importance for scoring; defaults to 10 for must-have, 5 for nice-to-have"
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "name": "Mid-Market SaaS — Data Team Buyer",
+      "version": "2026-Q2",
+      "must_have": [
+        { "field": "industry", "value": ["saas", "software"], "weight": 20 },
+        { "field": "size", "min": 100, "max": 2000, "weight": 20 },
+        { "field": "country", "value": ["US", "UK", "DE"], "weight": 10 }
+      ],
+      "nice_to_have": [
+        { "field": "signals", "value": ["snowflake", "dbt"], "weight": 10 },
+        { "field": "signals", "value": ["series b", "series c"], "weight": 10 }
+      ],
+      "disqualifiers": [
+        { "field": "industry", "value": ["government", "defense"] }
+      ]
+    }
+  ]
+}

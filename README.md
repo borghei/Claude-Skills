@@ -6,8 +6,9 @@
 <p align="center"><b>The AI skills library for the whole company. Not just engineers.</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-245-brightgreen.svg" alt="245 Skills">
-  <img src="https://img.shields.io/badge/Domains-14-blue.svg" alt="14 Domains">
+  <img src="https://img.shields.io/badge/Skills-266-brightgreen.svg" alt="266 Skills">
+  <img src="https://img.shields.io/badge/Domains-17-blue.svg" alt="17 Domains">
+  <img src="https://img.shields.io/badge/Agents-67_cs--*-purple.svg" alt="67 cs-* agents">
   <img src="https://img.shields.io/badge/AI_Assistants-11-orange.svg" alt="11 AI Assistants">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
   <img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars">
@@ -34,17 +35,18 @@ Auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, A
 
 ## Why teams use this
 
-- **245 skills covering the whole org.** Engineering (76), Marketing (38), C-Level (26), Compliance (21), Legal (17), PM (13), Product (8) and 6 more domains.
+- **266 skills covering the whole org.** Engineering (76), Marketing (38), C-Level (26), Compliance (21), Legal (17), PM (13), Personal Productivity (10), Product (8), Vertical Advisors (7), Documents (4) and more.
 - **18 compliance frameworks built in.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA, GDPR and more. The only OSS skills library covering regulated industries.
+- **7 vertical strategic advisors.** Fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace — industry-specific frameworks for founders and operators.
 - **11 AI assistants supported.** One library, works across Claude Code, Cursor, Codex, Gemini, Copilot, Windsurf, Cline, Aider, Goose, OpenCode and ChatGPT/Claude.ai.
-- **653 Python tools.** Real automation, not prompts. Run `code_quality_analyzer.py`, `dcf_valuation.py`, `seo_audit.py` directly.
-- **32 agents and 7 personas.** Activate `startup-cto`, `growth-marketer` or `solo-founder` and get a multi-skill identity in one command.
+- **674+ Python tools.** Real automation, not prompts. Run `code_quality_analyzer.py`, `dcf_valuation.py`, `seo_audit.py`, `regulatory_trigger_checker.py` directly.
+- **67 cs-* agents and 7 personas.** Activate `cs-cto-advisor`, `cs-fintech-advisor`, `startup-cto`, `growth-marketer` or `solo-founder` and get a multi-skill identity in one command.
 
 ---
 
 ## Browse skills by domain
 
-[Engineering (76)](engineering/) · [Marketing (38)](marketing/) · [C-Level (26)](c-level-advisor/) · [Compliance (21)](ra-qm-team/) · [Business & Growth (16)](business-growth/) · [Legal (17)](legal/) · [PM (13)](project-management/) · [Product (8)](product-team/) · [Data (5)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Finance (3)](finance/) · [All skills →](docs/SKILLS.md)
+[Engineering (76)](engineering/) · [Marketing (38)](marketing/) · [C-Level (26)](c-level-advisor/) · [Compliance (21)](ra-qm-team/) · [Business & Growth (16)](business-growth/) · [Legal (17)](legal/) · [PM (13)](project-management/) · [Personal Productivity (10)](personal-productivity/) · [Product (8)](product-team/) · [Vertical Advisors (7)](vertical-advisors/) · [Data (5)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Finance (3)](finance/) · [All skills →](docs/SKILLS.md)
 
 ---
 
@@ -193,7 +195,7 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 ---
 
 <p align="center">
-  <strong>245 skills. 653 tools. 14 domains. 32 agents. 11 platforms.</strong><br>
+  <strong>266 skills. 674+ tools. 17 domains. 74 agents. 11 platforms.</strong><br>
   <a href="https://borghei.me">borghei.me</a>
 </p>
 

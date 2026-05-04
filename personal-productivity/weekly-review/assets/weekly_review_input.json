@@ -1,0 +1,55 @@
+{
+  "_comment": "Fill in your week, then run: python ../../scripts/weekly_review_synthesizer.py weekly_review_input.json",
+  "week_of": "2026-05-04",
+  "energy_level_1_to_10": 7,
+  "wins": [
+    "Closed Acme renewal at expanded scope (+$80K ARR)",
+    "Shipped onboarding-flow rebuild — saw 18% lift in activation in first 48 hours",
+    "Hired senior backend engineer (start date 2026-06-01)"
+  ],
+  "learnings": [
+    "Customer interview from Tuesday showed our pricing page is being misread — they think the 'Pro' tier excludes API access. Need to fix.",
+    "Tried a different cadence for engineering 1:1s (45 min biweekly) — felt rushed; revert to 30 min weekly."
+  ],
+  "blockers_or_risks": [
+    {
+      "item": "Q3 marketing plan is over budget without expanded headcount approval",
+      "owner": "self",
+      "mitigation": "Surface trade-off in Tuesday's exec staff meeting; have option A (cut paid) and option B (delay event)"
+    },
+    {
+      "item": "Engineering on-call rotation has only 4 people; risk of burnout if we don't expand",
+      "owner": "Pat (eng manager)",
+      "mitigation": "Add new hire to rotation in week 3 of onboarding; consider managed on-call vendor for after-hours"
+    }
+  ],
+  "okr_progress": [
+    {
+      "objective": "Reach $4M ARR by end of Q3",
+      "key_result": "Net new $200k ARR in Q2",
+      "progress": "$140k of $200k (70%)",
+      "status": "on track"
+    },
+    {
+      "objective": "Improve activation rate to 60%",
+      "key_result": "Lift week-1 activation from 42% to 60%",
+      "progress": "48% (up from 42% baseline; needs 12 more pts)",
+      "status": "at risk — investigate friction in step 3"
+    }
+  ],
+  "next_week_priorities": [
+    "Run pricing-page A/B test fix to address API-tier misread",
+    "Q3 marketing plan trade-off conversation in exec staff",
+    "Hold first 30-min engineering 1:1 with new senior backend (post-offer accept)"
+  ],
+  "open_loops_to_close": [
+    "Reply to legal counsel re: contract template revision",
+    "Approve expense report from previous week",
+    "Schedule renewal call with [Customer X]"
+  ],
+  "things_to_decline": [
+    "Optional partner conference invite — net negative for the week",
+    "External recruiter request for 'quick chat' (not hiring at executive level right now)"
+  ],
+  "journal_note": "Energy fine despite a tough Q3 marketing budget conversation looming. Watch out for the temptation to over-promise on activation OKR — better to flag risk now than scramble at quarter-end."
+}

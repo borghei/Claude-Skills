@@ -1,0 +1,15 @@
+{
+  "_comment": "Edit values for your marketplace at the smallest market unit (e.g., one city, one category). Run: python ../../scripts/marketplace_health_scorer.py marketplace_metrics_template.json",
+  "market_unit": "Bay Area food delivery",
+  "active_supply_units": 1200,
+  "active_demand_units": 18000,
+  "transactions_per_period": 45000,
+  "period_days": 30,
+  "fill_rate_pct": 88.0,
+  "search_to_purchase_pct": 12.0,
+  "buyer_repeat_rate_90d_pct": 55.0,
+  "supplier_retention_90d_pct": 78.0,
+  "take_rate_pct": 22.0,
+  "blended_supplier_margin_pct": 12.0,
+  "gmv_per_period": 6800000.00
+}

@@ -1,0 +1,16 @@
+{
+  "_comment": "Edit these values for your business. All values per single order unless labeled otherwise. Run: python ../../scripts/ecom_unit_economics_calculator.py unit_economics_template.json",
+  "channel": "DTC site",
+  "average_order_value": 80.00,
+  "units_per_order": 1,
+  "cogs_per_unit": 16.00,
+  "shipping_charged_to_customer": 5.00,
+  "shipping_actual_cost": 8.50,
+  "fulfillment_pick_pack_per_order": 3.50,
+  "payment_processing_pct": 2.9,
+  "payment_processing_fixed": 0.30,
+  "return_rate_pct": 12.0,
+  "return_cost_per_returned_order": 12.00,
+  "marketing_spend_per_acquired_customer": 38.00,
+  "repeat_orders_in_first_year": 1.4
+}

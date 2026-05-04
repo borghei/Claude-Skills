@@ -5,6 +5,69 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.0] - 2026-05-04
+
+### Added
+
+**3 new skill domains (21 new skills total):**
+
+- **`personal-productivity/` — 10 skills:**
+  - `resume-tailor` — score resume vs job description, gap analysis, bullet rewrite patterns
+  - `lead-researcher` — score leads against ICP, draft signal-led outreach
+  - `meeting-insights` — extract decisions, actions, owners, due dates, risks from transcripts
+  - `domain-name-brainstormer` — generate and score brand / domain candidates with naming-pattern playbook
+  - `invoice-organizer` — categorize receipts, detect duplicates, monthly summary
+  - `email-triage` — classify inbox into action buckets (reply now / later / archive / unsubscribe / delete)
+  - `calendar-prep` — generate one-page meeting briefings from structured input
+  - `investor-update-generator` — validate monthly investor update against rubric (highlights / lowlights / metrics / asks)
+  - `pitch-deck-reviewer` — score deck structure against YC / Sequoia / a16z heuristics
+  - `weekly-review` — Friday/Sunday weekly review synthesizer (GTD + OKR check-in)
+
+- **`documents/` — 4 skills (stdlib-only OOXML parsing, no `python-docx` / `python-pptx` / `openpyxl` / `pypdf` required):**
+  - `docx-toolkit` — audit Word documents (comments, tracked changes, heading hierarchy, style sprawl)
+  - `pdf-toolkit` — audit PDFs (metadata leakage, encryption, JavaScript, embedded files)
+  - `pptx-toolkit` — audit PowerPoint decks (slide density, hidden slides, speaker notes, animations)
+  - `xlsx-toolkit` — audit Excel workbooks (hidden sheets, external links, formula density, named ranges)
+
+- **`vertical-advisors/` — 7 skills (industry-specific strategic advisory, complementing the implementation-focused `ra-qm-team/`):**
+  - `fintech` — US/EU regulatory triggers, license-vs-partner playbook, KYC/AML basics, embedded finance patterns
+  - `healthtech` — HIPAA scope, FDA SaMD classification, payor/provider/employer GTM patterns, value-based care primer
+  - `edtech` — FERPA/COPPA/state student-data laws, K-12 vs higher ed vs corporate L&D market dynamics
+  - `ecommerce` — unit economics, fulfillment models (DTC self / 3PL / FBA / dropship / retail), channel strategy
+  - `proptech` — segments (transaction / listings / financing / management / services / data), MLS / brokerage, RESPA / fair housing
+  - `climate-tech` — climate categories, GHG accounting (Scope 1/2/3), funding stack (DOE / IRA / VC / project finance)
+  - `marketplace` — chicken-and-egg strategies, take-rate design, liquidity / network effects
+
+**41 new `cs-*` agents (32 → 67 total cs-* agents, plus 7 personas = 74 total agents):**
+
+- **Engineering specialists (21 new):** mobile-engineer, sre-engineer, platform-engineer, mlops-engineer, llm-architect, prompt-engineer, mcp-developer, data-engineer, pen-tester, qa-automation-lead, accessibility-engineer, computer-vision-engineer, data-scientist, frontend-engineer, backend-engineer, fullstack-engineer, cloud-architect, devops-engineer, secops-engineer, release-manager, database-engineer
+- **C-Level expansion (9 new):** coo-advisor, chro-advisor, cro-advisor, cpo-advisor, chief-of-staff, ma-advisor, board-secretary, fundraising-advisor, investor-relations
+- **Marketing (4 new):** developer-advocate, pr-comms-lead, community-manager, event-marketing-manager
+- **Business Growth (3 new):** customer-experience-lead, partnership-manager, competitive-intel-analyst
+- **HR (2 new):** talent-acquisition, people-ops-lead
+- **Product (2 new):** ux-researcher, learning-designer
+- **Vertical Advisors (7 new — new domain):** fintech-advisor, healthtech-advisor, edtech-strategist, ecommerce-strategist, proptech-advisor, climate-tech-advisor, marketplace-advisor
+
+**21+ new Python tools** including: `regulatory_trigger_checker.py`, `phi_scope_checker.py`, `student_data_compliance_checker.py`, `ecom_unit_economics_calculator.py`, `market_segment_classifier.py`, `carbon_impact_estimator.py`, `marketplace_health_scorer.py`, `docx_auditor.py`, `pdf_auditor.py`, `pptx_auditor.py`, `xlsx_auditor.py`, `email_classifier.py`, `meeting_prep_briefer.py`, `investor_update_validator.py`, `deck_structure_scorer.py`, `weekly_review_synthesizer.py`, plus 5 personal-productivity tools (`resume_matcher.py`, `lead_qualifier.py`, `transcript_analyzer.py`, `name_generator.py`, `invoice_categorizer.py`).
+
+### Changed
+
+- `README.md` — updated headline numbers, badges, domain index
+- `CLAUDE.md` (root) — updated Navigation Map and repository structure
+- `mkdocs.yml` — updated site description, author updated to Amin Borghei
+- `site/index.html` — updated meta tags, hero stats, added 3 new domain cards
+
+### Verification
+
+- All 41 new agent path references verified to resolve (226+ `../../` references across new agents, 0 missing)
+- All 21+ new Python tools smoke-tested with sample inputs
+- All scripts use stdlib only (no new pip dependencies)
+- All scripts support both human-readable and `--json` output
+
+### Meta
+
+- Version: 4.1.1 → 4.2.0 (minor — additive: 3 new domains, 41 new agents, no breaking changes)
+
 ## [4.1.1] - 2026-04-21
 
 ### Changed
