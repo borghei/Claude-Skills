@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-22T15:30:37+00:00",
+  "generated_at": "2026-06-22T15:47:23+00:00",
   "repository": "claude-skills",
-  "skill_count": 337,
-  "domain_count": 16,
+  "skill_count": 339,
+  "domain_count": 17,
   "domains": [
     "business-growth",
     "c-level-advisor",
@@ -20,7 +20,8 @@
     "ra-qm-team",
     "research",
     "sales-success",
-    "vertical-advisors"
+    "vertical-advisors",
+    "workflow"
   ],
   "skills": [
     {
@@ -4881,6 +4882,41 @@
       "path": "research/patent",
       "has_scripts": true,
       "has_references": true
+    },
+    {
+      "name": "handoff",
+      "domain": "workflow",
+      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "tags": [
+        "handoff",
+        "delegation",
+        "context",
+        "continuity",
+        "onboarding",
+        "async"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-22",
+      "path": "workflow/handoff",
+      "has_scripts": true,
+      "has_references": false
+    },
+    {
+      "name": "skill-router",
+      "domain": "workflow",
+      "description": "This skill should be used when the user has a vague or cross-domain request and asks \"which skill should I use\", \"is there a skill for this\", \"find the right skill\", or \"route this to the best skill\" — it matches an intent against the whole skills library and recommends the best-fit skill(s).",
+      "tags": [
+        "router",
+        "discovery",
+        "orchestration",
+        "navigation",
+        "intent-matching"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-22",
+      "path": "workflow/skill-router",
+      "has_scripts": true,
+      "has_references": false
     }
   ]
 }

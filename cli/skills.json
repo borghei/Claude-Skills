@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-22T15:34:34+00:00",
-  "skill_count": 337,
-  "domain_count": 16,
+  "generated_at": "2026-06-22T15:47:23+00:00",
+  "skill_count": 339,
+  "domain_count": 17,
   "skills": [
     {
       "name": "a11y-audit",
@@ -2410,10 +2410,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8895,6 +8896,56 @@
       "size_bytes": 53488,
       "has_scripts": true,
       "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "handoff",
+      "domain": "workflow",
+      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "tags": [
+        "handoff",
+        "delegation",
+        "context",
+        "continuity",
+        "onboarding",
+        "async"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-22",
+      "author": "borghei",
+      "path": "workflow/handoff",
+      "files": [
+        "SKILL.md",
+        "assets/handoff_template.md",
+        "scripts/handoff_context.py"
+      ],
+      "size_bytes": 9081,
+      "has_scripts": true,
+      "has_references": false,
+      "has_assets": true
+    },
+    {
+      "name": "skill-router",
+      "domain": "workflow",
+      "description": "This skill should be used when the user has a vague or cross-domain request and asks \"which skill should I use\", \"is there a skill for this\", \"find the right skill\", or \"route this to the best skill\" — it matches an intent against the whole skills library and recommends the best-fit skill(s).",
+      "tags": [
+        "router",
+        "discovery",
+        "orchestration",
+        "navigation",
+        "intent-matching"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-22",
+      "author": "borghei",
+      "path": "workflow/skill-router",
+      "files": [
+        "SKILL.md",
+        "scripts/route_skill.py"
+      ],
+      "size_bytes": 10851,
+      "has_scripts": true,
+      "has_references": false,
       "has_assets": false
     }
   ]

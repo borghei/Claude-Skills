@@ -39,6 +39,7 @@ DOMAINS = [
     "documents",
     "vertical-advisors",
     "research",
+    "workflow",
 ]
 
 
