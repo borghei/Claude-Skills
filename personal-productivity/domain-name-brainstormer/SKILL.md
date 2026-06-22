@@ -38,6 +38,18 @@ domain, domain name, naming, brand naming, product name, company name, .com, bra
 
 ---
 
+## Clarify First
+
+Before generating names, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Seed words** — 3-7 words describing the product, value, or feeling; every candidate is built from these
+- [ ] **Brand tone** — serious/technical vs playful/coined steers which patterns (blend, vowel-drop, prefix-suffix) to favor
+- [ ] **TLD preference** — .com vs .ai/.io/.co changes the shortlist and whether the `tld_suffix` pattern applies
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Generate 200 Candidates in 30 Seconds

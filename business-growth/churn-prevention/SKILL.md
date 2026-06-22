@@ -35,6 +35,17 @@ Production-grade SaaS churn reduction framework covering cancel flow architectur
 
 ---
 
+## Clarify First
+
+Before designing the churn-prevention system, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Voluntary vs involuntary churn split** — which dominates (determines whether to build cancel flow/save offers or dunning/payment recovery)
+- [ ] **Existing cancel flow vs instant/support cancellation** — sets build-from-scratch vs optimize mode
+- [ ] **Current MRR + ARPU + billing cycle** — sizes the dollar impact and the save-offer budget
+- [ ] **Payment processor** — Stripe / Braintree / Paddle / Recurly (determines card-updater and dunning retry implementation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Initial Assessment
 
 ### Required Context

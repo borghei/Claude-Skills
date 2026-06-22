@@ -36,6 +36,16 @@ Scan and audit AI agent skills for security risks before installation. Performs 
 - Reviewing skills before adding them to a team's approved list
 - Post-incident scanning of installed skills
 
+## Clarify First
+
+Before the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target path** — the skill file or directory to scan (the subject of every scanner)
+- [ ] **Scan dimensions** — code execution / prompt injection / supply chain (selects which of the three scanners run)
+- [ ] **Strict mode / gate threshold** — whether any HIGH finding forces FAIL (CI gate vs advisory report changes the verdict)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

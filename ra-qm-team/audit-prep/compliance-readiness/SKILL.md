@@ -170,6 +170,16 @@ Weeks 10-12: Audits (sequential or parallel depending on auditor capacity)
 
 ---
 
+## Clarify First
+
+Before generating the roadmap, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target frameworks** — which set (SOC 2, ISO 27001, NIST CSF, GDPR, HIPAA, DORA…) is pursued in parallel (drives the control mapping and shared-evidence strategy)
+- [ ] **Industry and region** — determines which frameworks are legally mandated vs customer-demanded, and the sequencing
+- [ ] **Initial vs renewal** — first-time certification vs annual surveillance (picks the 16-week vs 12-week sprint)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the roadmap.
+
 ## Quick start
 
 1. **Score multi-framework readiness**: `python3 scripts/multi_framework_scorer.py --config controls.yaml`

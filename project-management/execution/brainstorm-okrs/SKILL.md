@@ -32,6 +32,16 @@ The agent generates and validates outcome-focused OKR sets using Christina Wodtk
 - Aligning team goals to company objectives
 - Teaching teams the difference between outputs and outcomes
 
+## Clarify First
+
+Before generating the OKR sets, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Quarterly theme** — the single team theme for the quarter (every objective and KR must connect back to it; without it the sets are unfocused)
+- [ ] **Parent / company objective** — the higher-level priority this team supports (sets the objective framing and the top-down alignment)
+- [ ] **Current baselines** — today's values for the candidate metrics (turns KRs from aspirational guesses into measurable, gradeable targets)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

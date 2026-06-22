@@ -28,6 +28,16 @@ Implement, assess, and manage cybersecurity programs aligned with the NIST Cyber
 
 Use this skill when you hear: "NIST cybersecurity framework", "CSF 2.0", "NIST compliance", "cybersecurity risk management", "NIST controls", "NIST assessment", "cybersecurity maturity", "NIST CSF profile", "cybersecurity governance", "cybersecurity program assessment", "CSF gap analysis", or "cross-framework compliance mapping".
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target tier** — Partial, Risk Informed, Repeatable, or Adaptive goal (drives the gap analysis and remediation roadmap)
+- [ ] **Current-state data** — the present maturity scores across the 6 functions / 22 categories (the scoring depends on it)
+- [ ] **Task** — maturity assessment, profile/gap analysis, or cross-framework mapping (selects the script and any target framework)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the maturity report.
+
 ## Quick Start
 
 ```bash

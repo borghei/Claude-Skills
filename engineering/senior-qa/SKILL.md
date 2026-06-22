@@ -33,6 +33,16 @@ Test automation, coverage analysis, and quality assurance patterns for React and
 - Setting up Playwright E2E tests for a Next.js project.
 - Configuring Jest thresholds or improving overall test quality.
 
+## Clarify First
+
+Before generating tests, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Test layer** — unit (Jest+RTL) vs E2E (Playwright) (selects `test_suite_generator` vs `e2e_test_scaffolder`)
+- [ ] **Source path** — the components or Next.js routes to generate tests from (the scaffolder's input)
+- [ ] **Coverage focus** — happy path only vs interaction/state/a11y (`jest-axe`) (sets which test stubs are emitted)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

@@ -35,6 +35,17 @@ Production-grade referral and affiliate program framework covering the 4-stage r
 - Trigger moments need to be identified (when to ask, which in-product events, which lifecycle emails)
 - The user says "word-of-mouth isn't working" or "we want to add a refer-a-friend flow"
 
+## Clarify First
+
+Before designing the referral program, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Program type** — customer referral vs affiliate (enthusiastic/social customers vs team buyers) (selects the entire framework)
+- [ ] **Trigger moment** — the in-product or lifecycle point where you ask (a broken Stage 1 can't be fixed by a bigger reward at Stage 4)
+- [ ] **Reward economics** — first-payment value, margin, and CAC (caps the reward at <30% of first payment)
+- [ ] **Current referral rate (if any)** — decides single- vs double-sided incentive and which stage to fix first
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Quick Start
 
 1. **Pick the program type** — use the Referral vs Affiliate Decision table (enthusiastic/social customers → referral; team buyers → affiliate).

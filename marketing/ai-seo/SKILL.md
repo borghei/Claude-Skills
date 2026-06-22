@@ -41,6 +41,17 @@ AI SEO, generative engine optimization, GEO, AI overviews, Google SGE, ChatGPT c
 
 ---
 
+## Clarify First
+
+Before optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target queries** — the questions you want to be cited for (drives which pages to optimize and the extractable blocks to add)
+- [ ] **Target AI platform(s)** — Perplexity / ChatGPT / Google AI Overviews / Claude (crawling, indexing, and citation behavior differ per platform)
+- [ ] **Brand/entity name** — exact wording to track (drives citation testing and entity optimization)
+- [ ] **The page/content to optimize** — the URL or draft being restructured (drives extractability scoring + schema selection)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Run an AI Visibility Audit

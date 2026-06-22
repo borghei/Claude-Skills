@@ -27,6 +27,17 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 - Sensitivity analysis is required to stress-test valuation or forecast assumptions
 - The user asks about profitability, liquidity, leverage, efficiency, or valuation metrics with industry context
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — ratios, DCF valuation, budget variance, or forecast (selects the tool and the required input schema; each needs different data)
+- [ ] **The decision it supports** — acquisition, fundraise, board review, or budget reforecast (sets the executive-summary conclusion and which metrics lead)
+- [ ] **Materiality threshold** — absolute $ or % of budget (drives which variances surface vs. go to the appendix; default 10% / $50K)
+- [ ] **Key assumptions + as-of date** — WACC inputs, terminal growth, or forecast drivers and when each was last sourced (drives DCF/forecast outputs and the assumptions appendix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## 5-Phase Workflow
 
 ### Phase 1: Scoping

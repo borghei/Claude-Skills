@@ -37,6 +37,17 @@ The workshop synthesizes four JTBD schools: Christensen's *milkshake* hiring fra
 - **Stalled adoption.** Customers signed up but did not retain; switch interviews reveal which forces went wrong.
 - **Onboarding a new product team.** Create a shared mental model of what the customer is hiring the product to do.
 
+## Clarify First
+
+Before planning the workshop, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Format** — 2h validation / 4h half-day / 8h full-day (sets the agenda depth; 2h is validation, not primary discovery)
+- [ ] **Target segment** — JTBD is segment-by-job, not persona-by-demographic (defines who you study and which job hierarchy you build)
+- [ ] **Switch-interview access** — can you recruit recent (90-day) switchers (without customer voice the forces canvas and ODI scores become team-aligned fiction)
+- [ ] **Trigger/purpose** — new product / pivot / stalled adoption (shapes which of the four forces to emphasize)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.

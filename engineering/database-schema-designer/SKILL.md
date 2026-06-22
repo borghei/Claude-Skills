@@ -38,6 +38,16 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
 
+## Clarify First
+
+Before designing the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Requirements or existing DDL** — the entities/relationships in natural language, or the schema to review (the source the design is derived from)
+- [ ] **Engine & ORM** — PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format)
+- [ ] **Cross-cutting needs** — multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

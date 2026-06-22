@@ -41,6 +41,17 @@ fit, structure, narrative, budget — not boilerplate templating.
 - Budget envelope (or constraint)
 - Submission deadline
 
+## Clarify First
+
+Before generating the proposal, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Funder + specific program / RFP** — sets the mental model (NIH 5-criteria vs NSF merit+impact vs foundation mission fit); drives structure and narrative
+- [ ] **Project idea (problem, approach, outcomes)** — drives the significance/innovation narrative and the Heilmeier answers
+- [ ] **Budget envelope** — drives budget design and whether scope matches the funder's typical award size
+- [ ] **Team composition (PI, key personnel)** — drives the investigator/environment fit dimension
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Score funder fit before committing

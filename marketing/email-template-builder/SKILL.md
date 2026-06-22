@@ -29,6 +29,17 @@ This skill builds the email rendering and sending infrastructure. For writing em
 
 ---
 
+## Clarify First
+
+Before building the templates, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Framework** — React Email or MJML, and whether the team uses React/TypeScript (decides the entire codebase; see the decision table below)
+- [ ] **Templates needed** — welcome, password reset, invoice, trial-expiring, digest, team-invite, etc. (determines which template files to scaffold)
+- [ ] **Sending provider** — Resend, SendGrid, Postmark, or SES (selects which provider adapter to build)
+- [ ] **Locales & dark mode** — required languages and dark-mode support (drives the i18n system and base-layout styles)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Architecture Decision: React Email vs MJML
 
 | Factor | React Email | MJML |

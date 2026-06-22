@@ -43,6 +43,17 @@ External = outside our control (market, competition, regulation, tech shifts).
 
 The single most-common SWOT failure: confusing internal with external.
 
+## Clarify First
+
+Before building the SWOT, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Explicit scope/subject** — e.g. "entering market X" or "our position vs Competitor X" (a SWOT for "the company" produces four lists pointing in four directions)
+- [ ] **Evidence per item** — the data/quote/benchmark behind each entry (strengths must be facts, not aspirations; a SWOT with no real weaknesses signals bias)
+- [ ] **Competitor/market reference frame** — what you're comparing against (strengths and threats are relative, not absolute)
+- [ ] **TOWS actions wanted** — whether to cross-cut into SO/ST/WO/WT moves (converts the static SWOT into strategy rather than a wall of bullets)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Define the scope

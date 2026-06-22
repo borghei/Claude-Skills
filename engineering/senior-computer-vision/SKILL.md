@@ -32,6 +32,16 @@ Design end-to-end computer vision pipelines for object detection, instance/seman
 - Preparing, converting, or auditing a computer vision dataset.
 - Choosing an architecture for a speed/accuracy/deployment trade-off.
 
+## Clarify First
+
+Before generating training configs or pipelines, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — detection / instance or semantic segmentation / classification (selects the architecture and `--task`)
+- [ ] **Dataset** — location and format (COCO / YOLO / VOC) to analyze or convert (the input to `dataset_pipeline_builder.py`)
+- [ ] **Deployment target** — GPU / edge / mobile (drives architecture choice and `inference_optimizer --target`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

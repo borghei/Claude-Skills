@@ -19,6 +19,17 @@ metadata:
 
 Production-ready A/B testing toolkit for calculating sample sizes, designing rigorous test plans, and analyzing results with statistical significance testing. Designed for growth teams, product managers, and marketers who need to make data-driven decisions from controlled experiments.
 
+## Clarify First
+
+Before designing the test, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Hypothesis + primary metric** — what change you expect and the single metric that judges it (drives test plan + analysis)
+- [ ] **Baseline conversion rate** — the current rate the metric sits at today (drives sample size calculation)
+- [ ] **Minimum detectable effect (MDE)** — smallest lift worth detecting (drives required samples + duration)
+- [ ] **Daily traffic available** — eligible visitors per day per variant (determines how long the test must run)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

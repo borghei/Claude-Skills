@@ -35,6 +35,16 @@ Performs systematic 12-category UI/UX audits, detects AI-generated slop patterns
 - Validating WCAG color contrast or design-token adherence.
 - Gating deployments or PRs on minimum compliance scores.
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit type** — full design score, AI-slop detection, contrast check, or token compliance (selects `design_scorer.py` vs `ai_slop_detector.py` vs `color_contrast_checker.py` vs `design_system_validator.py`)
+- [ ] **Input artifacts** — the findings JSON, HTML/CSS, color pairs, or design-token file (the input each tool requires)
+- [ ] **Conformance level / threshold** — WCAG AA vs AAA, slop confidence threshold, and the minimum passing grade (sets `--level`, `--threshold`, and the gate)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

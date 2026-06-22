@@ -39,6 +39,19 @@ resume, CV, job application, ATS, applicant tracking system, keyword match, resu
 
 ---
 
+## Clarify First
+
+Before tailoring the resume, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target job description** — the verbatim JD; it drives keyword extraction and the entire match score
+- [ ] **Base resume content** — your actual experience and bullets; without it there is nothing to score or rewrite
+- [ ] **Target seniority / title** — IC vs lead vs exec sets which keywords matter and the altitude of rewritten bullets
+- [ ] **Truth boundary** — which listed skills you genuinely have vs. aspirational, so additions are honest rather than keyword-stuffed
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Tailor a Resume in 5 Minutes

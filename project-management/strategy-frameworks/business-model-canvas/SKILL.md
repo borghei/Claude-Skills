@@ -43,6 +43,17 @@ delivers, and captures value.
 8. **Key Partnerships** — Who helps us? (strategic alliances, JVs, supplier relationships)
 9. **Cost Structure** — Where do costs come from? (cost-driven vs value-driven; fixed vs variable)
 
+## Clarify First
+
+Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Customer segment(s)** — who you serve, specifically (drives Value Prop, Channels, Relationships, Revenue — "everyone" collapses the whole canvas)
+- [ ] **Revenue model** — how the customer pays: subscription / usage / licensing / advertising (must reconcile against Cost Structure or unit economics break)
+- [ ] **Stage** — new model / pivot / mature operating business (determines whether Lean Canvas is the better tool)
+- [ ] **Cost-driven vs value-driven posture** — shapes Cost Structure and Key Activities (trying both produces mediocre everything)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Draft per block

@@ -33,6 +33,17 @@ Pipeline analysis, forecast accuracy tracking, and GTM efficiency measurement fo
 
 ---
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — pipeline health, forecast accuracy, or GTM efficiency (selects the script and its input schema)
+- [ ] **Quota / target** — the number pipeline coverage and Magic Number are measured against
+- [ ] **Data export readiness** — deals with stage/value/age/close-date, or forecast-vs-actual periods (the tools consume specific JSON; forecast trend needs 3+ periods)
+- [ ] **Company stage + sales motion** — seed vs growth, PLG vs enterprise (benchmarks vary widely by stage and motion)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the output.
+
 ## Quick Start
 
 ```bash

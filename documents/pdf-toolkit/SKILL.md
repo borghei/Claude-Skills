@@ -39,6 +39,16 @@ pdf, pdf audit, pdf metadata, pdf review, pdf leakage, pdf security, redaction, 
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose (pre-handoff metadata scrub, inbound security triage, or bulk outbound check)** — selects which of the 3 workflows and which fields you act on
+- [ ] **Recipient / handling context (external party, managed laptop)** — sets what counts as a leak or a threat worth quarantining
+- [ ] **Expected legitimate metadata (who the author/title should be)** — without it you can't distinguish a leak from expected data
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

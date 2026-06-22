@@ -525,6 +525,16 @@ Complete coverage of all 10 minimum security measures with implementation guidan
 
 ---
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Entity scope** — sector (Annex I vs Annex II), size thresholds, and any automatic-inclusion criteria (determines Essential vs Important classification and the obligation set)
+- [ ] **Task** — scope determination, 10-measure compliance check, or supply-chain assessment (selects the tool and workflow)
+- [ ] **Member State** — which national transposition applies (the tools assess the directive baseline, not country-specific law)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Compliance Assessment Workflow
 
 ### Phase 1: Scope Determination

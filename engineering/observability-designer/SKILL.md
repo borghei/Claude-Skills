@@ -34,6 +34,17 @@ Design production-ready observability strategies that combine the three pillars 
 - Designing Grafana dashboards or role-based views.
 - Choosing a trace sampling strategy or structured log schema.
 
+## Clarify First
+
+Before designing the observability strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Service type & criticality tier** — api / pipeline / storage / ML and T1–T3 (sets SLO targets, error-budget math, and `slo_designer` flags)
+- [ ] **User-facing vs internal** — determines which golden signals become SLIs and how alert severity is routed
+- [ ] **Primary pain: alert noise vs coverage gaps** — decides whether to optimize existing alerts or design new burn-rate rules
+- [ ] **Dashboard audience** — SRE / Dev / Exec / Ops sets the role-based panel layout and hierarchy
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

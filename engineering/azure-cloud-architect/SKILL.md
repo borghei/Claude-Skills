@@ -38,6 +38,16 @@ End-to-end Azure-specific architecture: service selection, Well-Architected Fram
 | Picking compute, data store, networking, or identity | Yes — see the decision-trees reference |
 | Going to production without WAF review | Don't — run the WAF scorer first |
 
+## Clarify First
+
+Before designing or assessing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `azure_architecture_validator.py` vs `azure_cost_estimator.py` vs `azure_waf_scorer.py`)
+- [ ] **Workload spec** — the YAML workload config, or the Bicep/ARM/Terraform files (the input the scripts parse)
+- [ ] **Priority pillar** — reliability, security, cost, operational excellence, or performance (weights the WAF assessment and which recommendations lead)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

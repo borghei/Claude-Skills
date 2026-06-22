@@ -23,6 +23,16 @@ metadata:
 
 The **Prompt Governance** skill provides tools for auditing prompts for security vulnerabilities, bias, and safety issues, plus managing a versioned catalog of approved prompts. Essential for organizations deploying LLM-based applications at scale.
 
+## Clarify First
+
+Before auditing or cataloging, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target prompt(s)** — the exact file/text to audit or the catalog dir to manage (the subject of every check)
+- [ ] **Task: audit vs catalog management** — selects `prompt_auditor.py` vs `prompt_catalog_manager.py` and the whole workflow
+- [ ] **Check focus** — injection / bias / safety (sets which auditor checks run and the pass/fail bar)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

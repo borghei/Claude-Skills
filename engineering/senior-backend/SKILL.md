@@ -32,6 +32,16 @@ Scaffold and review backend services: API design and OpenAPI-driven code generat
 - Preparing an API for production or after a security review.
 - Building regression/load-test baselines for backend endpoints.
 
+## Clarify First
+
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Framework** — Express / Fastify / Koa (`--framework`; changes the generated route handlers, validators, and types)
+- [ ] **API contract source** — the OpenAPI spec or endpoint list to scaffold from (the input the scaffolder reads)
+- [ ] **Database intent** — the schema file and whether you want analysis vs migration generation (drives `database_migration_tool.py`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

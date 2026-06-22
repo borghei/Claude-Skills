@@ -87,6 +87,16 @@ Weeks 7-8: Mock inspection + final remediation + inspection prep
 
 ---
 
+## Clarify First
+
+Before running the audit-prep, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Trigger** — announced inspection, Form 483 received, Warning Letter, or annual readiness (chooses between the sprint track and the reactive 15-day response track, and sets deadlines)
+- [ ] **Framework** — legacy QSR (21 CFR 820) vs QMSR (ISO 13485-harmonized, effective Feb 2026) (changes which requirements and subparts apply)
+- [ ] **QMS maturity and known issues** — mature vs gaps, plus prior 483/WL findings (picks the 2-week vs 8-week sprint)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the readiness assessment.
+
 ## Quick start
 
 1. **Run readiness score**: `python3 scripts/qsr_readiness_score.py --config qsr-controls.yaml`

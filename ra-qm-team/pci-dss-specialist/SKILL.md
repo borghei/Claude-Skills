@@ -30,6 +30,16 @@ Implement, assess, and maintain compliance with the Payment Card Industry Data S
 
 Trigger on: "PCI DSS", "payment card security", "cardholder data", "PCI compliance", "payment security", "PCI assessment", "SAQ", "ROC", "QSA", "credit card security", "payment processing security", "tokenization", "CDE scoping", or "merchant level compliance".
 
+## Clarify First
+
+Before running the assessment or scoping, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business model / payment flow** — how cards are accepted (e-commerce, terminal, P2PE, fully outsourced/iFrame) (determines the CDE scope and correct SAQ type)
+- [ ] **Merchant / service-provider level** — annual transaction volume (sets the validation path: SAQ vs ROC)
+- [ ] **CDE scope** — which systems store, process, or transmit cardholder data plus connected systems (drives which of the 12 requirements are in scope)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the report.
+
 ## Quick Start
 
 ```bash

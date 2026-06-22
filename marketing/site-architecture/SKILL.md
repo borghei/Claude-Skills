@@ -41,6 +41,17 @@ Production-grade website architecture framework covering URL hierarchy design, i
 
 ---
 
+## Clarify First
+
+Before generating the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Operating mode** — audit current, plan new, internal-linking optimization, or URL restructuring — determines the artifact produced
+- [ ] **Site type** — SaaS, e-commerce, blog/content, local, docs, or marketplace — selects the URL pattern and architecture template
+- [ ] **Core topics / silos** — the 3-7 topic clusters the site covers — drives the hub-and-spoke and internal-linking plan
+- [ ] **Current URLs / crawl data** — sitemap or URL export — required for audits and redirect mapping
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Operating Modes
 
 ### Mode 1: Audit Current Architecture

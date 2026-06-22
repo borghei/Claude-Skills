@@ -38,6 +38,16 @@ changelog, release notes, conventional commits, semantic versioning, semver, Kee
 - When converting raw git history into user-facing notes
 - As a pre-release checklist step
 
+## Clarify First
+
+Before generating the changelog, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Commit range** — since which tag or commit (defines what history is included)
+- [ ] **Output format** — Keep a Changelog, GitHub release notes, plain markdown, or JSON (sets `changelog_formatter.py --format`)
+- [ ] **Version & scope** — the release version, and in a monorepo which package scope to filter (sets `--version` and scoped filtering)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

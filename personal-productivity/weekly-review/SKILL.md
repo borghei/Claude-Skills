@@ -27,6 +27,18 @@ weekly review, GTD, getting things done, OKR check-in, retrospective, weekly ret
 
 ---
 
+## Clarify First
+
+Before synthesizing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The week's raw inputs** — actual wins, learnings, and blockers; this is the content the review synthesizes, not invented
+- [ ] **OKR / goal progress** — current numbers vs target drives the check-in section and flags drift
+- [ ] **Next-week priorities** — the top 1-3 commitments the review must end on
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 1. Fill in `assets/weekly_review_input.json` with the past week's wins, learnings, blockers, OKR progress

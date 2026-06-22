@@ -41,6 +41,17 @@ Diagnose the STARS situation first — a Sustaining-success area rewards 60+ day
 - First week of a routine role (no major scope change) -- this is overkill.
 - Interim leadership (acting role <60 days) -- run a stability-focused playbook instead.
 
+## Clarify First
+
+Before building the onboarding plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **STARS situation** — Start-up, Turnaround, Accelerated-growth, Realignment, or Sustaining-success (sets the listen-vs-act balance; misreading it is the top new-PM mistake)
+- [ ] **Transition type** — new company, internal transfer, new scope, or return from leave (chooses full-90 vs compressed-60 vs 30-day plan)
+- [ ] **Manager's 90-day expectations** — what "success" means to them (anchors early-win selection and the whole arc)
+- [ ] **Scope and key partners** — what the PM owns and who the critical stakeholders are (drives the stakeholder tiers and first-PRD)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.

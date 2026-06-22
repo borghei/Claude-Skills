@@ -34,6 +34,16 @@ jetpack-compose, expo-router, zustand, app-store, performance, offline-first
 - Diagnosing and fixing mobile performance issues.
 - Preparing an App Store / Play Store submission.
 
+## Clarify First
+
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Platform** — react-native / flutter / ios-native / android-native (`--platform`; an entirely different scaffold)
+- [ ] **State management** — e.g. zustand (`--state`; changes the generated architecture)
+- [ ] **Task** — new project scaffold vs store-listing metadata vs performance analysis (selects `mobile_scaffold` / `store_metadata_generator` / `app_performance_analyzer`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

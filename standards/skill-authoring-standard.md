@@ -311,6 +311,43 @@ If a skill does not clear this bar, it should not be published.
 - **Thin wrapper skills** that add a few bullet points to a generic process
 - **Copy-paste skills** that repackage freely available documentation without adding structure
 
+## Pattern 11: Clarify-First Gate
+
+**Every skill that generates a deliverable must confirm its critical inputs before producing — and ask the user when an input is unknown or vague, rather than assuming.**
+
+The most common failure of AI-assisted work is *misalignment*: the agent produces a polished artifact from underspecified intent, and the user only discovers the mismatch after the work is done. A short alignment gate before generation is the highest-leverage quality lever in the library — "the rate of feedback is your speed limit" (Hunt & Thomas, *The Pragmatic Programmer*).
+
+This pattern applies to **generative skills** (those that emit an artifact: PRDs, OKRs, roadmaps, audits, contracts, financial models, content). It is optional for **advisory/reference skills** that answer questions without producing a deliverable.
+
+### Requirements
+
+- Add a `## Clarify First` section immediately before the skill's main workflow / Quick Start.
+- List only the **2–4 inputs that most change the output** — not an exhaustive intake form.
+- Phrase each as a confirmable checkbox the agent verifies, with the instruction to **ASK when unknown, never assume**.
+- Include a **stop rule** so the gate stays lightweight and never becomes an interrogation:
+  - ask at most the few inputs that materially change the output;
+  - if the user says "just draft it" (or similar), proceed using stated assumptions, listed at the top of the artifact.
+- The gate lives in the SKILL.md **body**, not the `description:` — it must not consume the 60-token description budget (P1).
+
+### Template
+
+```markdown
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **<input 1>** — <why it changes the output>
+- [ ] **<input 2>** — <why it changes the output>
+- [ ] **<input 3>** — <why it changes the output>
+
+Stop rule: ask only the 2–3 that most change the output. If the user says
+"just draft it," proceed and list your assumptions at the top of the artifact.
+```
+
+### Why this stays self-contained (P9)
+
+The gate is an inline convention each skill embeds — **not** a call to a shared "grilling" skill. This keeps every skill extractable and dependency-free while still upgrading alignment library-wide.
+
 ## Checklist
 
 Use this checklist before publishing any skill.
@@ -325,6 +362,7 @@ Use this checklist before publishing any skill.
 - [ ] Directory structure follows standard layout (P8)
 - [ ] Self-contained: no cross-skill deps, all paths resolve (P9)
 - [ ] Time savings 40%+, consistency improvement 30%+ (P10)
+- [ ] Generative skills: `## Clarify First` gate with 2–4 inputs + stop rule (P11)
 
 ## Examples
 

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-17T09:29:02+00:00",
+  "generated_at": "2026-06-22T15:30:37+00:00",
   "skill_count": 337,
   "domain_count": 16,
   "skills": [
@@ -26,7 +26,7 @@
         "scripts/a11y_scanner.py",
         "scripts/contrast_checker.py"
       ],
-      "size_bytes": 40934,
+      "size_bytes": 41587,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -58,7 +58,7 @@
         "references/troubleshooting-and-tool-reference.md",
         "tool_schema_generator.py"
       ],
-      "size_bytes": 287420,
+      "size_bytes": 288146,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -82,7 +82,7 @@
         "scripts/protocol_validator.py",
         "scripts/schema_generator.py"
       ],
-      "size_bytes": 92804,
+      "size_bytes": 93501,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -105,7 +105,7 @@
         "scripts/workflow_validator.py",
         "scripts/workflow_visualizer.py"
       ],
-      "size_bytes": 62770,
+      "size_bytes": 63458,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -143,7 +143,7 @@
         "skills/spawn.md",
         "skills/status.md"
       ],
-      "size_bytes": 83083,
+      "size_bytes": 83716,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -168,7 +168,7 @@
         "references/ai-threat-landscape.md",
         "scripts/ai_threat_scanner.py"
       ],
-      "size_bytes": 24351,
+      "size_bytes": 25048,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -192,7 +192,7 @@
         "scripts/api_scorecard.py",
         "scripts/breaking_change_detector.py"
       ],
-      "size_bytes": 200081,
+      "size_bytes": 200777,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -215,7 +215,7 @@
         "scripts/coverage_analyzer.py",
         "scripts/test_generator.py"
       ],
-      "size_bytes": 76900,
+      "size_bytes": 77540,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -247,7 +247,7 @@
         "scripts/cost_optimizer.py",
         "scripts/serverless_stack.py"
       ],
-      "size_bytes": 139347,
+      "size_bytes": 140062,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -281,7 +281,7 @@
         "scripts/azure_cost_estimator.py",
         "scripts/azure_waf_scorer.py"
       ],
-      "size_bytes": 122042,
+      "size_bytes": 122797,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -308,7 +308,7 @@
         "scripts/form_automation_builder.py",
         "scripts/scraping_toolkit.py"
       ],
-      "size_bytes": 46938,
+      "size_bytes": 47730,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -331,7 +331,7 @@
         "scripts/changelog_formatter.py",
         "scripts/commit_parser.py"
       ],
-      "size_bytes": 54331,
+      "size_bytes": 54971,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -364,7 +364,7 @@
         "scripts/chaos_experiment_designer.py",
         "scripts/gameday_planner.py"
       ],
-      "size_bytes": 127598,
+      "size_bytes": 128346,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -386,7 +386,7 @@
         "scripts/pipeline_generator.py",
         "scripts/pipeline_linter.py"
       ],
-      "size_bytes": 67906,
+      "size_bytes": 68670,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -419,7 +419,7 @@
         "scripts/context_analyzer.py",
         "scripts/skill_scaffolder.py"
       ],
-      "size_bytes": 127380,
+      "size_bytes": 128126,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -448,7 +448,7 @@
         "scripts/pr_analyzer.py",
         "scripts/review_report_generator.py"
       ],
-      "size_bytes": 102794,
+      "size_bytes": 103499,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -471,7 +471,7 @@
         "scripts/onboarding_generator.py",
         "scripts/setup_validator.py"
       ],
-      "size_bytes": 59986,
+      "size_bytes": 60575,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -502,7 +502,7 @@
         "scripts/cross_platform_validator.py",
         "scripts/skills_index_builder.py"
       ],
-      "size_bytes": 115489,
+      "size_bytes": 116187,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -526,7 +526,7 @@
         "scripts/context_pruner.py",
         "scripts/memory_indexer.py"
       ],
-      "size_bytes": 69506,
+      "size_bytes": 70188,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -562,7 +562,7 @@
         "scripts/freshness_monitor.py",
         "scripts/schema_drift_detector.py"
       ],
-      "size_bytes": 83090,
+      "size_bytes": 83777,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -594,7 +594,7 @@
         "references/workflows-and-tools.md",
         "schema_analyzer.py"
       ],
-      "size_bytes": 240864,
+      "size_bytes": 241596,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -617,7 +617,7 @@
         "scripts/migration_diffr.py",
         "scripts/schema_validator.py"
       ],
-      "size_bytes": 66108,
+      "size_bytes": 66833,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -651,7 +651,7 @@
         "test-inventory.json",
         "test-project/package.json"
       ],
-      "size_bytes": 222416,
+      "size_bytes": 223100,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -683,7 +683,7 @@
         "scripts/design_scorer.py",
         "scripts/design_system_validator.py"
       ],
-      "size_bytes": 137076,
+      "size_bytes": 137852,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -714,7 +714,7 @@
         "scripts/pipeline_analyzer.py",
         "scripts/workflow_generator.py"
       ],
-      "size_bytes": 162961,
+      "size_bytes": 163632,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -746,7 +746,7 @@
         "scripts/drift_analyzer.py",
         "scripts/link_checker.py"
       ],
-      "size_bytes": 141334,
+      "size_bytes": 142085,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -774,7 +774,7 @@
         "scripts/compose_validator.py",
         "scripts/dockerfile_analyzer.py"
       ],
-      "size_bytes": 43816,
+      "size_bytes": 44449,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -798,7 +798,7 @@
         "scripts/env_validator.py",
         "scripts/secret_scanner.py"
       ],
-      "size_bytes": 56784,
+      "size_bytes": 57450,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -830,7 +830,7 @@
         "scripts/kill_switch_runbook.py",
         "scripts/rollout_simulator.py"
       ],
-      "size_bytes": 117887,
+      "size_bytes": 118669,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -859,7 +859,7 @@
         "references/focused-fix-methodology.md",
         "scripts/change_scope_analyzer.py"
       ],
-      "size_bytes": 42564,
+      "size_bytes": 43310,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -896,7 +896,7 @@
         "scripts/gcp_caf_scorer.py",
         "scripts/gcp_cost_estimator.py"
       ],
-      "size_bytes": 115790,
+      "size_bytes": 116548,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -919,7 +919,7 @@
         "scripts/worktree_manager.py",
         "scripts/worktree_validator.py"
       ],
-      "size_bytes": 64296,
+      "size_bytes": 65020,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -946,7 +946,7 @@
         "scripts/gws_doctor.py",
         "scripts/workspace_audit.py"
       ],
-      "size_bytes": 58022,
+      "size_bytes": 58679,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -974,7 +974,7 @@
         "scripts/chart_analyzer.py",
         "scripts/values_validator.py"
       ],
-      "size_bytes": 44411,
+      "size_bytes": 45032,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1021,7 +1021,7 @@
         "scripts/severity_classifier.py",
         "scripts/timeline_reconstructor.py"
       ],
-      "size_bytes": 415824,
+      "size_bytes": 416623,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1053,7 +1053,7 @@
         "references/tool-reference.md",
         "references/workflows-and-templates.md"
       ],
-      "size_bytes": 301957,
+      "size_bytes": 302689,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -1085,7 +1085,7 @@
         "scripts/operator_scaffold.py",
         "scripts/reconciliation_audit.py"
       ],
-      "size_bytes": 132931,
+      "size_bytes": 133707,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1111,7 +1111,7 @@
         "scripts/prompt_optimizer.py",
         "scripts/token_counter.py"
       ],
-      "size_bytes": 31519,
+      "size_bytes": 32195,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1135,7 +1135,7 @@
         "scripts/server_scaffolder.py",
         "scripts/tool_linter.py"
       ],
-      "size_bytes": 63920,
+      "size_bytes": 64624,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1173,7 +1173,7 @@
         "scripts/migration_planner.py",
         "scripts/rollback_generator.py"
       ],
-      "size_bytes": 350027,
+      "size_bytes": 350780,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1195,7 +1195,7 @@
         "scripts/impact_detector.py",
         "scripts/package_analyzer.py"
       ],
-      "size_bytes": 65299,
+      "size_bytes": 65998,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1227,7 +1227,7 @@
         "scripts/tenant_setup.py",
         "scripts/user_management.py"
       ],
-      "size_bytes": 118896,
+      "size_bytes": 119573,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1259,7 +1259,7 @@
         "scripts/dashboard_generator.py",
         "scripts/slo_designer.py"
       ],
-      "size_bytes": 251499,
+      "size_bytes": 252292,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1282,7 +1282,7 @@
         "scripts/bottleneck_detector.py",
         "scripts/resource_analyzer.py"
       ],
-      "size_bytes": 62470,
+      "size_bytes": 63133,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1326,7 +1326,7 @@
         "skills/review.md",
         "skills/testrail.md"
       ],
-      "size_bytes": 125035,
+      "size_bytes": 125751,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1372,7 +1372,7 @@
         "scripts/prompt_analyzer.py",
         "scripts/prompt_diff.py"
       ],
-      "size_bytes": 59167,
+      "size_bytes": 59814,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1398,7 +1398,7 @@
         "scripts/prompt_auditor.py",
         "scripts/prompt_catalog_manager.py"
       ],
-      "size_bytes": 33320,
+      "size_bytes": 33952,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1429,7 +1429,7 @@
         "scripts/test_report_generator.py",
         "scripts/visual_regression_tracker.py"
       ],
-      "size_bytes": 124541,
+      "size_bytes": 125238,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1454,7 +1454,7 @@
         "references/tool-cli-reference.md",
         "retrieval_evaluator.py"
       ],
-      "size_bytes": 141326,
+      "size_bytes": 142110,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -1479,7 +1479,7 @@
         "references/red-team-methodology.md",
         "scripts/engagement_planner.py"
       ],
-      "size_bytes": 26036,
+      "size_bytes": 26788,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1511,7 +1511,7 @@
         "release_planner.py",
         "version_bumper.py"
       ],
-      "size_bytes": 182766,
+      "size_bytes": 183396,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -1543,7 +1543,7 @@
         "scripts/release_readiness_scorer.py",
         "scripts/version_bumper.py"
       ],
-      "size_bytes": 118960,
+      "size_bytes": 119606,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1566,7 +1566,7 @@
         "scripts/runbook_validator.py",
         "scripts/staleness_checker.py"
       ],
-      "size_bytes": 63686,
+      "size_bytes": 64404,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1589,7 +1589,7 @@
         "scripts/saas_scaffolder.py",
         "scripts/tenant_config_validator.py"
       ],
-      "size_bytes": 69022,
+      "size_bytes": 69780,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1617,7 +1617,7 @@
         "scripts/rotation_planner.py",
         "scripts/vault_config_generator.py"
       ],
-      "size_bytes": 48933,
+      "size_bytes": 49610,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1656,7 +1656,7 @@
         "skills/review.md",
         "skills/status.md"
       ],
-      "size_bytes": 123529,
+      "size_bytes": 124224,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1687,7 +1687,7 @@
         "scripts/dependency_analyzer.py",
         "scripts/project_architect.py"
       ],
-      "size_bytes": 135623,
+      "size_bytes": 136312,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1718,7 +1718,7 @@
         "scripts/api_scaffolder.py",
         "scripts/database_migration_tool.py"
       ],
-      "size_bytes": 151357,
+      "size_bytes": 152005,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1745,7 +1745,7 @@
         "references/cloud-architecture-playbooks.md",
         "references/cloud-operations.md"
       ],
-      "size_bytes": 13500,
+      "size_bytes": 14267,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -1776,7 +1776,7 @@
         "scripts/inference_optimizer.py",
         "scripts/vision_model_trainer.py"
       ],
-      "size_bytes": 211959,
+      "size_bytes": 212622,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1807,7 +1807,7 @@
         "scripts/etl_performance_optimizer.py",
         "scripts/pipeline_orchestrator.py"
       ],
-      "size_bytes": 272335,
+      "size_bytes": 272981,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1839,7 +1839,7 @@
         "scripts/feature_engineering_pipeline.py",
         "scripts/model_evaluation_suite.py"
       ],
-      "size_bytes": 31399,
+      "size_bytes": 32079,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1871,7 +1871,7 @@
         "scripts/pipeline_generator.py",
         "scripts/terraform_scaffolder.py"
       ],
-      "size_bytes": 37330,
+      "size_bytes": 37987,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1902,7 +1902,7 @@
         "scripts/component_generator.py",
         "scripts/frontend_scaffolder.py"
       ],
-      "size_bytes": 126440,
+      "size_bytes": 127084,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1931,7 +1931,7 @@
         "scripts/code_quality_analyzer.py",
         "scripts/project_scaffolder.py"
       ],
-      "size_bytes": 110973,
+      "size_bytes": 111606,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1961,7 +1961,7 @@
         "scripts/model_deployment_pipeline.py",
         "scripts/rag_system_builder.py"
       ],
-      "size_bytes": 52727,
+      "size_bytes": 53376,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1996,7 +1996,7 @@
         "scripts/mobile_scaffold.py",
         "scripts/store_metadata_generator.py"
       ],
-      "size_bytes": 196428,
+      "size_bytes": 197086,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2056,7 +2056,7 @@
         "scripts/e2e_test_scaffolder.py",
         "scripts/test_suite_generator.py"
       ],
-      "size_bytes": 171854,
+      "size_bytes": 172472,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2081,7 +2081,7 @@
         "scripts/security_scanner.py",
         "scripts/vulnerability_assessor.py"
       ],
-      "size_bytes": 161139,
+      "size_bytes": 161759,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2110,7 +2110,7 @@
         "scripts/secret_scanner.py",
         "scripts/threat_modeler.py"
       ],
-      "size_bytes": 133729,
+      "size_bytes": 134387,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2133,7 +2133,7 @@
         "scripts/prompt_injection_scanner.py",
         "scripts/supply_chain_checker.py"
       ],
-      "size_bytes": 68928,
+      "size_bytes": 69536,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2167,7 +2167,7 @@
         "scripts/script_tester.py",
         "scripts/skill_validator.py"
       ],
-      "size_bytes": 199265,
+      "size_bytes": 199887,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2192,7 +2192,7 @@
         "references/snowflake-best-practices.md",
         "scripts/snowflake_query_helper.py"
       ],
-      "size_bytes": 25692,
+      "size_bytes": 26314,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2221,7 +2221,7 @@
         "scripts/query_optimizer.py",
         "scripts/schema_explorer.py"
       ],
-      "size_bytes": 55689,
+      "size_bytes": 56312,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2245,7 +2245,7 @@
         "scripts/integration_auditor.py",
         "scripts/webhook_validator.py"
       ],
-      "size_bytes": 87236,
+      "size_bytes": 87889,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2287,7 +2287,7 @@
         "scripts/tdd_workflow.py",
         "scripts/test_generator.py"
       ],
-      "size_bytes": 191042,
+      "size_bytes": 191728,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2324,7 +2324,7 @@
         "scripts/debt_prioritizer.py",
         "scripts/debt_scanner.py"
       ],
-      "size_bytes": 344333,
+      "size_bytes": 344973,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2361,7 +2361,7 @@
         "scripts/stack_comparator.py",
         "scripts/tco_calculator.py"
       ],
-      "size_bytes": 167703,
+      "size_bytes": 168354,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2388,7 +2388,7 @@
         "scripts/tf_module_analyzer.py",
         "scripts/tf_security_scanner.py"
       ],
-      "size_bytes": 44433,
+      "size_bytes": 45102,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2410,10 +2410,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 24700,
+      "size_bytes": 32948,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2441,7 +2442,7 @@
         "scripts/sample_size_calculator.py",
         "scripts/test_designer.py"
       ],
-      "size_bytes": 49566,
+      "size_bytes": 50315,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2461,7 +2462,7 @@
         "scripts/creative_matrix_builder.py",
         "scripts/headline_generator.py"
       ],
-      "size_bytes": 40206,
+      "size_bytes": 41025,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2493,7 +2494,7 @@
         "scripts/citation_extractor.py",
         "scripts/schema_qa_generator.py"
       ],
-      "size_bytes": 72711,
+      "size_bytes": 73491,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2513,7 +2514,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 52935,
+      "size_bytes": 53723,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2533,7 +2534,7 @@
         "scripts/funnel_drop_off_analyzer.py",
         "scripts/utm_validator.py"
       ],
-      "size_bytes": 54539,
+      "size_bytes": 55344,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2575,7 +2576,7 @@
         "scripts/metadata_optimizer.py",
         "scripts/review_analyzer.py"
       ],
-      "size_bytes": 282061,
+      "size_bytes": 282808,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2595,7 +2596,7 @@
         "scripts/color_accessibility_checker.py",
         "scripts/messaging_consistency_checker.py"
       ],
-      "size_bytes": 55167,
+      "size_bytes": 55958,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2621,7 +2622,7 @@
         "scripts/brand_health_dashboard.py",
         "scripts/positioning_map_generator.py"
       ],
-      "size_bytes": 41510,
+      "size_bytes": 42298,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2649,7 +2650,7 @@
         "scripts/campaign_roi_calculator.py",
         "scripts/funnel_analyzer.py"
       ],
-      "size_bytes": 111501,
+      "size_bytes": 112260,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2669,7 +2670,7 @@
         "scripts/sequence_optimizer.py",
         "scripts/subject_line_scorer.py"
       ],
-      "size_bytes": 60622,
+      "size_bytes": 61356,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2695,7 +2696,7 @@
         "scripts/brand_voice_analyzer.py",
         "scripts/seo_optimizer.py"
       ],
-      "size_bytes": 90765,
+      "size_bytes": 91508,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2715,7 +2716,7 @@
         "scripts/content_scorer.py",
         "scripts/readability_scorer.py"
       ],
-      "size_bytes": 48672,
+      "size_bytes": 49316,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2735,7 +2736,7 @@
         "scripts/headline_analyzer.py",
         "scripts/readability_scorer.py"
       ],
-      "size_bytes": 40614,
+      "size_bytes": 41387,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2755,7 +2756,7 @@
         "scripts/content_calendar_planner.py",
         "scripts/headline_analyzer.py"
       ],
-      "size_bytes": 43743,
+      "size_bytes": 44513,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2775,7 +2776,7 @@
         "scripts/readability_scorer.py",
         "scripts/style_checker.py"
       ],
-      "size_bytes": 43243,
+      "size_bytes": 43970,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2795,7 +2796,7 @@
         "scripts/headline_scorer.py",
         "scripts/page_copy_auditor.py"
       ],
-      "size_bytes": 40082,
+      "size_bytes": 40830,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2815,7 +2816,7 @@
         "scripts/sequence_mapper.py",
         "scripts/subject_line_scorer.py"
       ],
-      "size_bytes": 39225,
+      "size_bytes": 39892,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2835,7 +2836,7 @@
         "scripts/spam_score_checker.py",
         "scripts/template_validator.py"
       ],
-      "size_bytes": 46532,
+      "size_bytes": 47342,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2881,7 +2882,7 @@
         "scripts/cta_analyzer.py",
         "scripts/page_speed_estimator.py"
       ],
-      "size_bytes": 43826,
+      "size_bytes": 44572,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2901,7 +2902,7 @@
         "scripts/launch_readiness_checker.py",
         "scripts/launch_timeline_generator.py"
       ],
-      "size_bytes": 44697,
+      "size_bytes": 45482,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2927,7 +2928,7 @@
         "scripts/cohort_analyzer.py",
         "scripts/marketing_forecast_generator.py"
       ],
-      "size_bytes": 35868,
+      "size_bytes": 36682,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3065,7 +3066,7 @@
         "scripts/gtm_planner.py",
         "scripts/win_loss_analyzer.py"
       ],
-      "size_bytes": 83460,
+      "size_bytes": 84236,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3085,7 +3086,7 @@
         "scripts/audience_sizer.py",
         "scripts/cpc_calculator.py"
       ],
-      "size_bytes": 45249,
+      "size_bytes": 46072,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3115,7 +3116,7 @@
         "scripts/keyword_pattern_miner.py",
         "scripts/template_scorer.py"
       ],
-      "size_bytes": 56488,
+      "size_bytes": 57340,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3142,7 +3143,7 @@
         "scripts/schema_generator.py",
         "scripts/schema_validator.py"
       ],
-      "size_bytes": 55326,
+      "size_bytes": 56259,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3165,7 +3166,7 @@
         "scripts/redirect_checker.py",
         "scripts/sitemap_analyzer.py"
       ],
-      "size_bytes": 64467,
+      "size_bytes": 65294,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3191,7 +3192,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 41258,
+      "size_bytes": 41947,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3211,7 +3212,7 @@
         "scripts/redirect_checker.py",
         "scripts/sitemap_analyzer.py"
       ],
-      "size_bytes": 49152,
+      "size_bytes": 49951,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3231,7 +3232,7 @@
         "scripts/hashtag_analyzer.py",
         "scripts/post_scheduler.py"
       ],
-      "size_bytes": 47227,
+      "size_bytes": 47963,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3259,7 +3260,7 @@
         "scripts/analyze_performance.py",
         "scripts/calculate_metrics.py"
       ],
-      "size_bytes": 41514,
+      "size_bytes": 42271,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -3279,7 +3280,7 @@
         "scripts/growth_tracker.py",
         "scripts/social_audit_scorer.py"
       ],
-      "size_bytes": 41720,
+      "size_bytes": 42486,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3307,7 +3308,7 @@
         "scripts/video_content_planner.py",
         "scripts/video_seo_optimizer.py"
       ],
-      "size_bytes": 47933,
+      "size_bytes": 48658,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3336,7 +3337,7 @@
         "scripts/thread_builder.py",
         "scripts/tweet_analyzer.py"
       ],
-      "size_bytes": 53797,
+      "size_bytes": 54550,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3356,7 +3357,7 @@
         "scripts/deck_structure_validator.py",
         "scripts/metrics_dashboard_generator.py"
       ],
-      "size_bytes": 53753,
+      "size_bytes": 54639,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3376,7 +3377,7 @@
         "scripts/decision_tracker.py",
         "scripts/meeting_simulator.py"
       ],
-      "size_bytes": 44367,
+      "size_bytes": 45266,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3444,7 +3445,7 @@
         "scripts/change_readiness_assessor.py",
         "scripts/communication_planner.py"
       ],
-      "size_bytes": 51881,
+      "size_bytes": 52761,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3643,7 +3644,7 @@
         "scripts/rocks_tracker.py",
         "scripts/scorecard_builder.py"
       ],
-      "size_bytes": 44127,
+      "size_bytes": 45061,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3663,7 +3664,7 @@
         "scripts/market_landscape_mapper.py",
         "scripts/swot_analyzer.py"
       ],
-      "size_bytes": 43720,
+      "size_bytes": 44593,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3788,7 +3789,7 @@
         "scripts/engagement_tracker.py",
         "scripts/values_alignment_scorer.py"
       ],
-      "size_bytes": 52528,
+      "size_bytes": 53420,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3808,7 +3809,7 @@
         "scripts/decision_tracker.py",
         "scripts/decision_tree_builder.py"
       ],
-      "size_bytes": 52042,
+      "size_bytes": 52949,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3899,7 +3900,7 @@
         "scripts/narrative_consistency_checker.py",
         "scripts/stakeholder_mapper.py"
       ],
-      "size_bytes": 53333,
+      "size_bytes": 54329,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3919,7 +3920,7 @@
         "scripts/market_readiness_scorer.py",
         "scripts/regulatory_mapper.py"
       ],
-      "size_bytes": 59332,
+      "size_bytes": 60282,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3939,7 +3940,7 @@
         "scripts/integration_planner.py",
         "scripts/synergy_calculator.py"
       ],
-      "size_bytes": 55194,
+      "size_bytes": 56094,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3959,7 +3960,7 @@
         "scripts/org_health_scorer.py",
         "scripts/span_of_control_analyzer.py"
       ],
-      "size_bytes": 45588,
+      "size_bytes": 46505,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3979,7 +3980,7 @@
         "scripts/impact_matrix_calculator.py",
         "scripts/scenario_builder.py"
       ],
-      "size_bytes": 47004,
+      "size_bytes": 47877,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3999,7 +4000,7 @@
         "scripts/okr_cascade_validator.py",
         "scripts/strategy_map_generator.py"
       ],
-      "size_bytes": 48734,
+      "size_bytes": 49648,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4061,7 +4062,7 @@
         "scripts/ai_act_readiness_score.py",
         "scripts/gpai_obligation_checker.py"
       ],
-      "size_bytes": 45918,
+      "size_bytes": 46671,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4090,7 +4091,7 @@
         "scripts/ai_impact_assessment_checker.py",
         "scripts/aims_readiness_score.py"
       ],
-      "size_bytes": 42752,
+      "size_bytes": 43444,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4123,7 +4124,7 @@
         "scripts/readiness_roadmap_generator.py",
         "scripts/shared_evidence_finder.py"
       ],
-      "size_bytes": 65616,
+      "size_bytes": 66310,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4153,7 +4154,7 @@
         "scripts/dhf_completeness_checker.py",
         "scripts/qsr_readiness_score.py"
       ],
-      "size_bytes": 48145,
+      "size_bytes": 48898,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4182,7 +4183,7 @@
         "scripts/gdpr_readiness_score.py",
         "scripts/ropa_completeness_checker.py"
       ],
-      "size_bytes": 44306,
+      "size_bytes": 45026,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4210,7 +4211,7 @@
         "scripts/evidence_gap_finder.py",
         "scripts/soc2_readiness_score.py"
       ],
-      "size_bytes": 49274,
+      "size_bytes": 50003,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4236,7 +4237,7 @@
         "references/rca-methodologies.md",
         "scripts/capa_tracker.py"
       ],
-      "size_bytes": 71850,
+      "size_bytes": 72564,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4263,7 +4264,7 @@
         "scripts/ccpa_compliance_checker.py",
         "scripts/ccpa_data_mapper.py"
       ],
-      "size_bytes": 136302,
+      "size_bytes": 137057,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4293,7 +4294,7 @@
         "scripts/dora_incident_classifier.py",
         "scripts/dora_readiness_checker.py"
       ],
-      "size_bytes": 136742,
+      "size_bytes": 137491,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4322,7 +4323,7 @@
         "scripts/ai_compliance_checker.py",
         "scripts/ai_risk_classifier.py"
       ],
-      "size_bytes": 293379,
+      "size_bytes": 294123,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4354,7 +4355,7 @@
         "scripts/hipaa_risk_assessment.py",
         "scripts/qsr_compliance_checker.py"
       ],
-      "size_bytes": 190770,
+      "size_bytes": 191506,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4383,7 +4384,7 @@
         "scripts/dpia_generator.py",
         "scripts/gdpr_compliance_checker.py"
       ],
-      "size_bytes": 116025,
+      "size_bytes": 116755,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4414,7 +4415,7 @@
         "scripts/compliance_checker.py",
         "scripts/risk_assessment.py"
       ],
-      "size_bytes": 107884,
+      "size_bytes": 108553,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4446,7 +4447,7 @@
         "scripts/dns_security_checker.py",
         "scripts/infra_audit_runner.py"
       ],
-      "size_bytes": 270181,
+      "size_bytes": 270942,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4473,7 +4474,7 @@
         "references/security-control-testing.md",
         "scripts/isms_audit_scheduler.py"
       ],
-      "size_bytes": 48326,
+      "size_bytes": 49004,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4500,7 +4501,7 @@
         "scripts/ai_impact_assessor.py",
         "scripts/aims_readiness_checker.py"
       ],
-      "size_bytes": 141944,
+      "size_bytes": 142624,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4527,7 +4528,7 @@
         "references/technical-documentation-templates.md",
         "scripts/mdr_gap_analyzer.py"
       ],
-      "size_bytes": 78849,
+      "size_bytes": 79581,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4553,7 +4554,7 @@
         "scripts/nis2_compliance_checker.py",
         "scripts/nis2_scope_analyzer.py"
       ],
-      "size_bytes": 150088,
+      "size_bytes": 150813,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4582,7 +4583,7 @@
         "scripts/csf_control_mapper.py",
         "scripts/csf_maturity_assessor.py"
       ],
-      "size_bytes": 152284,
+      "size_bytes": 152961,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4612,7 +4613,7 @@
         "scripts/pci_compliance_checker.py",
         "scripts/pci_scope_analyzer.py"
       ],
-      "size_bytes": 149873,
+      "size_bytes": 150598,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4638,7 +4639,7 @@
         "references/nonconformity-classification.md",
         "scripts/audit_schedule_optimizer.py"
       ],
-      "size_bytes": 46461,
+      "size_bytes": 47074,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4663,7 +4664,7 @@
         "references/document-control-procedures.md",
         "scripts/document_validator.py"
       ],
-      "size_bytes": 67786,
+      "size_bytes": 68488,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4689,7 +4690,7 @@
         "references/quality-kpi-framework.md",
         "scripts/management_review_tracker.py"
       ],
-      "size_bytes": 64035,
+      "size_bytes": 64782,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4713,7 +4714,7 @@
         "references/qms-process-templates.md",
         "scripts/qms_audit_checklist.py"
       ],
-      "size_bytes": 117850,
+      "size_bytes": 118566,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4741,7 +4742,7 @@
         "references/iso-regulatory-requirements.md",
         "scripts/regulatory_tracker.py"
       ],
-      "size_bytes": 59757,
+      "size_bytes": 60447,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4770,7 +4771,7 @@
         "references/templates-and-tools.md",
         "scripts/risk_matrix_calculator.py"
       ],
-      "size_bytes": 87100,
+      "size_bytes": 87751,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4799,7 +4800,7 @@
         "scripts/soc2_infrastructure_auditor.py",
         "scripts/soc2_readiness_checker.py"
       ],
-      "size_bytes": 274501,
+      "size_bytes": 275239,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4832,7 +4833,7 @@
         "scripts/channel_mix_optimizer.py",
         "scripts/partner_tier_economics.py"
       ],
-      "size_bytes": 88155,
+      "size_bytes": 89082,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4859,7 +4860,7 @@
         "scripts/dunning_sequence_analyzer.py",
         "scripts/exit_survey_analyzer.py"
       ],
-      "size_bytes": 50792,
+      "size_bytes": 51573,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4890,7 +4891,7 @@
         "scripts/policy_compliance_checker.py",
         "scripts/terms_deviation_analyzer.py"
       ],
-      "size_bytes": 85754,
+      "size_bytes": 86580,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4910,7 +4911,7 @@
         "scripts/competitor_scorer.py",
         "scripts/feature_matrix_builder.py"
       ],
-      "size_bytes": 44663,
+      "size_bytes": 45502,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4930,7 +4931,7 @@
         "scripts/comparison_page_planner.py",
         "scripts/competitor_data_tracker.py"
       ],
-      "size_bytes": 40221,
+      "size_bytes": 41062,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4950,7 +4951,7 @@
         "scripts/contract_comparison_analyzer.py",
         "scripts/proposal_cost_estimator.py"
       ],
-      "size_bytes": 50399,
+      "size_bytes": 51177,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4985,7 +4986,7 @@
         "scripts/expansion_opportunity_scorer.py",
         "scripts/health_score_calculator.py"
       ],
-      "size_bytes": 135152,
+      "size_bytes": 135919,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5016,7 +5017,7 @@
         "scripts/deal_velocity_analyzer.py",
         "scripts/discount_authority_router.py"
       ],
-      "size_bytes": 101141,
+      "size_bytes": 102041,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5042,7 +5043,7 @@
         "scripts/field_cost_analyzer.py",
         "scripts/form_scorer.py"
       ],
-      "size_bytes": 50016,
+      "size_bytes": 50764,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5062,7 +5063,7 @@
         "scripts/tool_idea_scorer.py",
         "scripts/tool_roi_calculator.py"
       ],
-      "size_bytes": 45808,
+      "size_bytes": 46590,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5082,7 +5083,7 @@
         "scripts/onboarding_checklist_scorer.py",
         "scripts/ttv_estimator.py"
       ],
-      "size_bytes": 50140,
+      "size_bytes": 50886,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5108,7 +5109,7 @@
         "scripts/headline_scorer.py",
         "scripts/page_cro_scorer.py"
       ],
-      "size_bytes": 54939,
+      "size_bytes": 55654,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5139,7 +5140,7 @@
         "scripts/partner_program_designer.py",
         "scripts/partnership_roi_modeler.py"
       ],
-      "size_bytes": 90895,
+      "size_bytes": 91805,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5166,7 +5167,7 @@
         "scripts/paywall_trigger_auditor.py",
         "scripts/upgrade_funnel_analyzer.py"
       ],
-      "size_bytes": 57858,
+      "size_bytes": 58570,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5193,7 +5194,7 @@
         "scripts/popup_roi_estimator.py",
         "scripts/popup_strategy_auditor.py"
       ],
-      "size_bytes": 49250,
+      "size_bytes": 49951,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5224,7 +5225,7 @@
         "scripts/price_sensitivity_calculator.py",
         "scripts/pricing_model_analyzer.py"
       ],
-      "size_bytes": 58971,
+      "size_bytes": 59807,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5255,7 +5256,7 @@
         "scripts/referral_economics_calculator.py",
         "scripts/referral_funnel_analyzer.py"
       ],
-      "size_bytes": 62014,
+      "size_bytes": 62807,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5291,7 +5292,7 @@
         "scripts/gtm_efficiency_calculator.py",
         "scripts/pipeline_analyzer.py"
       ],
-      "size_bytes": 121726,
+      "size_bytes": 122515,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5325,7 +5326,7 @@
         "scripts/poc_planner.py",
         "scripts/rfp_response_analyzer.py"
       ],
-      "size_bytes": 151569,
+      "size_bytes": 152344,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5351,7 +5352,7 @@
         "scripts/signup_field_auditor.py",
         "scripts/signup_flow_scorer.py"
       ],
-      "size_bytes": 58524,
+      "size_bytes": 59304,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5378,7 +5379,7 @@
         "scripts/contract_analyzer.py",
         "scripts/redline_generator.py"
       ],
-      "size_bytes": 82322,
+      "size_bytes": 83181,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5405,7 +5406,7 @@
         "scripts/breach_severity_calculator.py",
         "scripts/breach_timeline_tracker.py"
       ],
-      "size_bytes": 72812,
+      "size_bytes": 73702,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5432,7 +5433,7 @@
         "scripts/dpia_risk_register.py",
         "scripts/dpia_threshold_checker.py"
       ],
-      "size_bytes": 76035,
+      "size_bytes": 76917,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5459,7 +5460,7 @@
         "scripts/escalation_detector.py",
         "scripts/response_generator.py"
       ],
-      "size_bytes": 82275,
+      "size_bytes": 83065,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5486,7 +5487,7 @@
         "scripts/action_item_tracker.py",
         "scripts/meeting_brief_generator.py"
       ],
-      "size_bytes": 68701,
+      "size_bytes": 69568,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5513,7 +5514,7 @@
         "scripts/legal_fact_checker.py",
         "scripts/legal_quality_scorer.py"
       ],
-      "size_bytes": 87610,
+      "size_bytes": 88477,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5540,7 +5541,7 @@
         "scripts/risk_report_generator.py",
         "scripts/risk_scorer.py"
       ],
-      "size_bytes": 64472,
+      "size_bytes": 65249,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5567,7 +5568,7 @@
         "scripts/dispute_analyzer.py",
         "scripts/settlement_calculator.py"
       ],
-      "size_bytes": 77010,
+      "size_bytes": 77784,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5593,7 +5594,7 @@
         "references/nda_review_templates.md",
         "scripts/nda_clause_reviewer.py"
       ],
-      "size_bytes": 72528,
+      "size_bytes": 73274,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5619,7 +5620,7 @@
         "scripts/nda_checklist.py",
         "scripts/nda_screener.py"
       ],
-      "size_bytes": 67899,
+      "size_bytes": 68606,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5647,7 +5648,7 @@
         "scripts/dsr_tracker.py",
         "scripts/privacy_regulation_checker.py"
       ],
-      "size_bytes": 101654,
+      "size_bytes": 102508,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5675,7 +5676,7 @@
         "scripts/notice_compliance_checker.py",
         "scripts/privacy_notice_scaffolder.py"
       ],
-      "size_bytes": 112513,
+      "size_bytes": 113477,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5702,7 +5703,7 @@
         "scripts/requirement_classifier.py",
         "scripts/statute_keyword_analyzer.py"
       ],
-      "size_bytes": 79741,
+      "size_bytes": 80508,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5729,7 +5730,7 @@
         "scripts/document_discovery.py",
         "scripts/extraction_aggregator.py"
       ],
-      "size_bytes": 62904,
+      "size_bytes": 63593,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5757,7 +5758,7 @@
         "scripts/deal_complexity_scorer.py",
         "scripts/negotiation_position_analyzer.py"
       ],
-      "size_bytes": 84194,
+      "size_bytes": 85003,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5785,7 +5786,7 @@
         "scripts/vendor_comparison.py",
         "scripts/vendor_risk_scorer.py"
       ],
-      "size_bytes": 88932,
+      "size_bytes": 89748,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5812,7 +5813,7 @@
         "scripts/whistleblower_compliance_checker.py",
         "scripts/whistleblower_policy_scaffolder.py"
       ],
-      "size_bytes": 80592,
+      "size_bytes": 81493,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5904,7 +5905,7 @@
         "scripts/template_usage_analyzer.py",
         "scripts/template_validator.py"
       ],
-      "size_bytes": 73529,
+      "size_bytes": 74377,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5928,7 +5929,7 @@
         "references/one-on-one-templates.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 57018,
+      "size_bytes": 57732,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -5952,7 +5953,7 @@
         "references/ladder-rubric-detail.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 65612,
+      "size_bytes": 66393,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6002,7 +6003,7 @@
         "references/first-90-days-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 69224,
+      "size_bytes": 70091,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6063,7 +6064,7 @@
         "scripts/dependency_mapper.py",
         "scripts/risk_register.py"
       ],
-      "size_bytes": 75273,
+      "size_bytes": 76156,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -6086,7 +6087,7 @@
         "references/red-flags.md",
         "scripts/experiment_designer.py"
       ],
-      "size_bytes": 64163,
+      "size_bytes": 64997,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6111,7 +6112,7 @@
         "scripts/opportunity_tree_builder.py",
         "scripts/scamper_generator.py"
       ],
-      "size_bytes": 69443,
+      "size_bytes": 70105,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6134,7 +6135,7 @@
         "references/interviewing-methodology-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 77305,
+      "size_bytes": 78067,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6157,7 +6158,7 @@
         "references/red-flags.md",
         "scripts/assumption_tracker.py"
       ],
-      "size_bytes": 67999,
+      "size_bytes": 68725,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6181,7 +6182,7 @@
         "references/synthesis-methodology-guide.md",
         "scripts/interview_synthesizer.py"
       ],
-      "size_bytes": 80244,
+      "size_bytes": 81031,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6208,7 +6209,7 @@
         "references/jtbd-method-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 95281,
+      "size_bytes": 96106,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6229,7 +6230,7 @@
         "references/dashboard-architecture.md",
         "scripts/dashboard_designer.py"
       ],
-      "size_bytes": 30350,
+      "size_bytes": 31137,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6250,7 +6251,7 @@
         "references/ost-fundamentals.md",
         "scripts/ost_validator.py"
       ],
-      "size_bytes": 31400,
+      "size_bytes": 32143,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6273,7 +6274,7 @@
         "references/red-flags.md",
         "scripts/risk_categorizer.py"
       ],
-      "size_bytes": 74019,
+      "size_bytes": 74725,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6298,7 +6299,7 @@
         "references/red-flags.md",
         "references/value-proposition-design-guide.md"
       ],
-      "size_bytes": 80729,
+      "size_bytes": 81441,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6324,7 +6325,7 @@
         "references/red-flags.md",
         "scripts/funnel_analyzer.py"
       ],
-      "size_bytes": 97325,
+      "size_bytes": 98037,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6350,7 +6351,7 @@
         "references/eval-design-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 104673,
+      "size_bytes": 105618,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6373,7 +6374,7 @@
         "references/refinement-playbook.md",
         "scripts/refinement_scorer.py"
       ],
-      "size_bytes": 78629,
+      "size_bytes": 79365,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6398,7 +6399,7 @@
         "references/beta-program-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 71146,
+      "size_bytes": 72023,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6421,7 +6422,7 @@
         "references/red-flags.md",
         "scripts/okr_validator.py"
       ],
-      "size_bytes": 62460,
+      "size_bytes": 63179,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6444,7 +6445,7 @@
         "references/red-flags.md",
         "scripts/prd_scaffolder.py"
       ],
-      "size_bytes": 59924,
+      "size_bytes": 60609,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6477,7 +6478,7 @@
         "references/tool-reference.md",
         "scripts/feedback_triage.py"
       ],
-      "size_bytes": 111956,
+      "size_bytes": 112696,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6500,7 +6501,7 @@
         "references/red-flags.md",
         "scripts/flow_metrics.py"
       ],
-      "size_bytes": 79722,
+      "size_bytes": 80523,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6520,7 +6521,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 34085,
+      "size_bytes": 34860,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -6544,7 +6545,7 @@
         "references/red-flags.md",
         "scripts/dependency_graph.py"
       ],
-      "size_bytes": 77883,
+      "size_bytes": 78725,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6564,7 +6565,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 39803,
+      "size_bytes": 40656,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -6590,7 +6591,7 @@
         "references/rollout-execution-playbook.md",
         "references/rollout-shape-comparison-guide.md"
       ],
-      "size_bytes": 89957,
+      "size_bytes": 90813,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6615,7 +6616,7 @@
         "scripts/story_converter.py",
         "scripts/story_quality_checker.py"
       ],
-      "size_bytes": 81898,
+      "size_bytes": 82750,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6641,7 +6642,7 @@
         "references/launch-timeline-and-execution.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 76419,
+      "size_bytes": 77167,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6664,7 +6665,7 @@
         "references/red-flags.md",
         "scripts/metric_tree_builder.py"
       ],
-      "size_bytes": 75722,
+      "size_bytes": 76594,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6687,7 +6688,7 @@
         "references/red-flags.md",
         "scripts/roadmap_transformer.py"
       ],
-      "size_bytes": 66658,
+      "size_bytes": 67512,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6721,7 +6722,7 @@
         "references/post-mortem-process.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 90656,
+      "size_bytes": 91481,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6743,7 +6744,7 @@
         "references/red-flags.md",
         "references/working-backwards-guide.md"
       ],
-      "size_bytes": 60864,
+      "size_bytes": 61649,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6776,7 +6777,7 @@
         "references/pricing-prd-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 106384,
+      "size_bytes": 107224,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6800,7 +6801,7 @@
         "references/tool-and-troubleshooting.md",
         "scripts/prioritization_scorer.py"
       ],
-      "size_bytes": 64897,
+      "size_bytes": 65588,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6825,7 +6826,7 @@
         "references/vision-frameworks-guide.md",
         "references/vision-playbook.md"
       ],
-      "size_bytes": 73974,
+      "size_bytes": 74817,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6850,7 +6851,7 @@
         "references/quarterly-planning-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 72828,
+      "size_bytes": 73667,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6873,7 +6874,7 @@
         "references/release-notes-guide.md",
         "scripts/release_notes_generator.py"
       ],
-      "size_bytes": 53089,
+      "size_bytes": 53809,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6897,7 +6898,7 @@
         "references/roadmap-communication-guide.md",
         "references/roadmap-variants-playbook.md"
       ],
-      "size_bytes": 58725,
+      "size_bytes": 59484,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6918,7 +6919,7 @@
         "references/sprint-anti-patterns.md",
         "scripts/sprint_planner.py"
       ],
-      "size_bytes": 32537,
+      "size_bytes": 33403,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6939,7 +6940,7 @@
         "references/stakeholder-mapping-framework.md",
         "scripts/stakeholder_analyzer.py"
       ],
-      "size_bytes": 30850,
+      "size_bytes": 31678,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6963,7 +6964,7 @@
         "references/tool-and-troubleshooting.md",
         "scripts/status_generator.py"
       ],
-      "size_bytes": 65958,
+      "size_bytes": 66782,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6983,7 +6984,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 33788,
+      "size_bytes": 34505,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -7005,7 +7006,7 @@
         "references/splitting-patterns-guide.md",
         "references/story-splitting-procedure.md"
       ],
-      "size_bytes": 62370,
+      "size_bytes": 63106,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -7030,7 +7031,7 @@
         "scripts/decision_log_builder.py",
         "scripts/meeting_effectiveness_scorer.py"
       ],
-      "size_bytes": 60931,
+      "size_bytes": 61691,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7051,7 +7052,7 @@
         "references/scenario-categories.md",
         "scripts/test_scenario_generator.py"
       ],
-      "size_bytes": 33278,
+      "size_bytes": 34048,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7076,7 +7077,7 @@
         "scripts/invest_gate_checker.py",
         "scripts/wwas_quality_scorer.py"
       ],
-      "size_bytes": 75472,
+      "size_bytes": 76187,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7098,7 +7099,7 @@
         "references/launch-sequence-playbook.md",
         "scripts/gtm_strategy_validator.py"
       ],
-      "size_bytes": 42367,
+      "size_bytes": 43169,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7119,7 +7120,7 @@
         "references/icp-refinement-from-data.md",
         "scripts/icp_scorer.py"
       ],
-      "size_bytes": 35385,
+      "size_bytes": 36118,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7277,7 +7278,7 @@
         "scripts/portfolio_dashboard.py",
         "scripts/resource_allocator.py"
       ],
-      "size_bytes": 63975,
+      "size_bytes": 64845,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7319,7 +7320,7 @@
         "scripts/sprint_health_scorer.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 264595,
+      "size_bytes": 265437,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7357,7 +7358,7 @@
         "scripts/risk_matrix_analyzer.py",
         "scripts/stakeholder_mapper.py"
       ],
-      "size_bytes": 281673,
+      "size_bytes": 282513,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7390,7 +7391,7 @@
         "scripts/retro_report_generator.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 149452,
+      "size_bytes": 150281,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7411,7 +7412,7 @@
         "references/growth-strategy-patterns.md",
         "scripts/ansoff_growth_scorer.py"
       ],
-      "size_bytes": 32857,
+      "size_bytes": 33608,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7432,7 +7433,7 @@
         "references/examples-anti-patterns.md",
         "scripts/canvas_validator.py"
       ],
-      "size_bytes": 40923,
+      "size_bytes": 41770,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7453,7 +7454,7 @@
         "references/lean-startup-anti-patterns.md",
         "scripts/lean_canvas_validator.py"
       ],
-      "size_bytes": 34337,
+      "size_bytes": 35033,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7474,7 +7475,7 @@
         "references/five-forces-deep.md",
         "scripts/five_forces_scorer.py"
       ],
-      "size_bytes": 33169,
+      "size_bytes": 33949,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7495,7 +7496,7 @@
         "references/swot-framework.md",
         "scripts/swot_scorer.py"
       ],
-      "size_bytes": 29226,
+      "size_bytes": 30111,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7524,7 +7525,7 @@
         "scripts/experiment_planner.py",
         "scripts/sample_size_calculator.py"
       ],
-      "size_bytes": 72757,
+      "size_bytes": 73601,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7550,7 +7551,7 @@
         "references/user-story-templates.md",
         "scripts/user_story_generator.py"
       ],
-      "size_bytes": 50260,
+      "size_bytes": 50941,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7610,7 +7611,7 @@
         "scripts/component_scaffold.py",
         "scripts/token_gen.py"
       ],
-      "size_bytes": 54210,
+      "size_bytes": 54885,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7642,7 +7643,7 @@
         "scripts/metric_tree_designer.py",
         "scripts/retention_cohort_analyzer.py"
       ],
-      "size_bytes": 62594,
+      "size_bytes": 63278,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7669,7 +7670,7 @@
         "scripts/journey_mapper.py",
         "scripts/usability_scorer.py"
       ],
-      "size_bytes": 55115,
+      "size_bytes": 55786,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7696,7 +7697,7 @@
         "scripts/customer_interview_analyzer.py",
         "scripts/rice_prioritizer.py"
       ],
-      "size_bytes": 75252,
+      "size_bytes": 76021,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7722,7 +7723,7 @@
         "references/strategy_types.md",
         "scripts/okr_cascade_generator.py"
       ],
-      "size_bytes": 75647,
+      "size_bytes": 76270,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7752,7 +7753,7 @@
         "scripts/insight_quality_scorer.py",
         "scripts/research_synthesis_organizer.py"
       ],
-      "size_bytes": 48725,
+      "size_bytes": 49398,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7783,7 +7784,7 @@
         "scripts/roadmap_audience_translator.py",
         "scripts/roadmap_diff_reporter.py"
       ],
-      "size_bytes": 49711,
+      "size_bytes": 50389,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7813,7 +7814,7 @@
         "scripts/pr_scope_analyzer.py",
         "scripts/prd_to_tickets_decomposer.py"
       ],
-      "size_bytes": 50364,
+      "size_bytes": 51082,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7840,7 +7841,7 @@
         "references/token-generation.md",
         "scripts/design_token_generator.py"
       ],
-      "size_bytes": 72210,
+      "size_bytes": 72854,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7867,7 +7868,7 @@
         "references/usability-testing-frameworks.md",
         "scripts/persona_generator.py"
       ],
-      "size_bytes": 97037,
+      "size_bytes": 97754,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7897,7 +7898,7 @@
         "scripts/quality_scorer.py",
         "scripts/schema_diff.py"
       ],
-      "size_bytes": 48905,
+      "size_bytes": 49651,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7923,7 +7924,7 @@
         "scripts/kpi_tracker.py",
         "scripts/metric_validator.py"
       ],
-      "size_bytes": 37063,
+      "size_bytes": 37794,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7949,7 +7950,7 @@
         "scripts/query_optimizer.py",
         "scripts/report_generator.py"
       ],
-      "size_bytes": 35790,
+      "size_bytes": 36618,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7975,7 +7976,7 @@
         "scripts/feature_selector.py",
         "scripts/hypothesis_tester.py"
       ],
-      "size_bytes": 41963,
+      "size_bytes": 42849,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8002,7 +8003,7 @@
         "scripts/model_registry.py",
         "scripts/pipeline_validator.py"
       ],
-      "size_bytes": 47665,
+      "size_bytes": 48468,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8028,7 +8029,7 @@
         "scripts/pipeline_analyzer.py",
         "scripts/win_loss_analyzer.py"
       ],
-      "size_bytes": 42292,
+      "size_bytes": 43128,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8054,7 +8055,7 @@
         "scripts/health_scorer.py",
         "scripts/qbr_generator.py"
       ],
-      "size_bytes": 46848,
+      "size_bytes": 47699,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8081,7 +8082,7 @@
         "scripts/rfp_analyzer.py",
         "scripts/technical_qualifier.py"
       ],
-      "size_bytes": 49384,
+      "size_bytes": 50170,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8107,7 +8108,7 @@
         "scripts/quota_calculator.py",
         "scripts/territory_planner.py"
       ],
-      "size_bytes": 50745,
+      "size_bytes": 51579,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8133,7 +8134,7 @@
         "scripts/migration_assessor.py",
         "scripts/sizing_calculator.py"
       ],
-      "size_bytes": 56530,
+      "size_bytes": 57371,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8159,7 +8160,7 @@
         "scripts/org_health_scorer.py",
         "scripts/workforce_dashboard.py"
       ],
-      "size_bytes": 64008,
+      "size_bytes": 64751,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8185,7 +8186,7 @@
         "scripts/process_mapper.py",
         "scripts/sla_tracker.py"
       ],
-      "size_bytes": 60297,
+      "size_bytes": 61115,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8211,7 +8212,7 @@
         "scripts/headcount_planner.py",
         "scripts/survey_analyzer.py"
       ],
-      "size_bytes": 58887,
+      "size_bytes": 59674,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8237,7 +8238,7 @@
         "scripts/interview_scorecard.py",
         "scripts/job_posting_analyzer.py"
       ],
-      "size_bytes": 62915,
+      "size_bytes": 63658,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8267,7 +8268,7 @@
         "scripts/investment_screener.py",
         "scripts/portfolio_analyzer.py"
       ],
-      "size_bytes": 57774,
+      "size_bytes": 58609,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8302,7 +8303,7 @@
         "scripts/forecast_builder.py",
         "scripts/ratio_calculator.py"
       ],
-      "size_bytes": 140358,
+      "size_bytes": 141265,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8334,7 +8335,7 @@
         "scripts/mrr_calculator.py",
         "scripts/unit_economics.py"
       ],
-      "size_bytes": 51598,
+      "size_bytes": 52406,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8354,7 +8355,7 @@
         "references/briefing_methodology.md",
         "scripts/meeting_prep_briefer.py"
       ],
-      "size_bytes": 14188,
+      "size_bytes": 14811,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8373,7 +8374,7 @@
         "references/naming_framework.md",
         "scripts/name_generator.py"
       ],
-      "size_bytes": 16367,
+      "size_bytes": 17001,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8393,7 +8394,7 @@
         "references/inbox_zero_method.md",
         "scripts/email_classifier.py"
       ],
-      "size_bytes": 15808,
+      "size_bytes": 16435,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8413,7 +8414,7 @@
         "references/what_makes_good_updates.md",
         "scripts/investor_update_validator.py"
       ],
-      "size_bytes": 17057,
+      "size_bytes": 17785,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8434,7 +8435,7 @@
         "references/expense_categorization_guide.md",
         "scripts/invoice_categorizer.py"
       ],
-      "size_bytes": 22940,
+      "size_bytes": 23579,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8455,7 +8456,7 @@
         "references/icp_framework.md",
         "scripts/lead_qualifier.py"
       ],
-      "size_bytes": 20781,
+      "size_bytes": 21399,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8475,7 +8476,7 @@
         "references/insight_extraction_patterns.md",
         "scripts/transcript_analyzer.py"
       ],
-      "size_bytes": 17782,
+      "size_bytes": 18439,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8495,7 +8496,7 @@
         "references/pitch_deck_heuristics.md",
         "scripts/deck_structure_scorer.py"
       ],
-      "size_bytes": 18842,
+      "size_bytes": 19495,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8516,7 +8517,7 @@
         "references/bullet_rewrite_patterns.md",
         "scripts/resume_matcher.py"
       ],
-      "size_bytes": 20933,
+      "size_bytes": 21703,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8536,7 +8537,7 @@
         "references/weekly_review_methodology.md",
         "scripts/weekly_review_synthesizer.py"
       ],
-      "size_bytes": 15132,
+      "size_bytes": 15733,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8557,7 +8558,7 @@
         "references/docx_review_checklist.md",
         "scripts/docx_auditor.py"
       ],
-      "size_bytes": 17190,
+      "size_bytes": 17856,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8577,7 +8578,7 @@
         "references/pdf_handoff_guide.md",
         "scripts/pdf_auditor.py"
       ],
-      "size_bytes": 18091,
+      "size_bytes": 18800,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8597,7 +8598,7 @@
         "references/deck_density_rubric.md",
         "scripts/pptx_auditor.py"
       ],
-      "size_bytes": 17769,
+      "size_bytes": 18465,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8617,7 +8618,7 @@
         "references/financial_model_audit_guide.md",
         "scripts/xlsx_auditor.py"
       ],
-      "size_bytes": 20249,
+      "size_bytes": 20920,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8660,7 +8661,7 @@
         "references/fulfillment_models.md",
         "scripts/ecom_unit_economics_calculator.py"
       ],
-      "size_bytes": 25531,
+      "size_bytes": 26366,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8748,7 +8749,7 @@
         "references/take_rate_design.md",
         "scripts/marketplace_health_scorer.py"
       ],
-      "size_bytes": 27337,
+      "size_bytes": 28211,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8799,7 +8800,7 @@
         "scripts/fact_inference_separator.py",
         "scripts/source_triangulation_validator.py"
       ],
-      "size_bytes": 50854,
+      "size_bytes": 51584,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8831,7 +8832,7 @@
         "scripts/funder_fit_scorer.py",
         "scripts/proposal_structure_validator.py"
       ],
-      "size_bytes": 54882,
+      "size_bytes": 55662,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8861,7 +8862,7 @@
         "scripts/source_quality_scorer.py",
         "scripts/thematic_synthesis_builder.py"
       ],
-      "size_bytes": 49613,
+      "size_bytes": 50391,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8892,7 +8893,7 @@
         "scripts/patentability_scorer.py",
         "scripts/prior_art_search_planner.py"
       ],
-      "size_bytes": 52716,
+      "size_bytes": 53488,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false

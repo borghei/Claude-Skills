@@ -35,6 +35,16 @@ The agent performs STRIDE threat analysis with DREAD risk scoring, designs defen
 - Scanning a codebase for hardcoded secrets and credentials.
 - Running a vulnerability assessment or planning incident response.
 
+## Clarify First
+
+Before the threat model or scan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target component/system** — what to threat-model or scan (`--component`; defines the STRIDE analysis scope)
+- [ ] **Assets & trust boundaries** — what is being protected and where untrusted input enters (drives DREAD scoring and mitigations)
+- [ ] **Task** — threat model / code vuln review / secret scan / incident-response plan (selects the tool and the output)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

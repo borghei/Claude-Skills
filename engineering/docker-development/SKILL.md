@@ -22,6 +22,16 @@ metadata:
 
 The **Docker Development** skill provides automated analysis of Dockerfiles and docker-compose configurations. It identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations. Use this skill to enforce container standards across your team and catch issues before they reach production.
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target file** — which Dockerfile or docker-compose.yml to analyze (sets `--file` and which tool runs)
+- [ ] **Focus** — full analysis vs security-only, and whether to check port conflicts (sets `--security-only`/`--check-ports`)
+- [ ] **Output mode** — human-readable vs JSON for CI (sets `--format json` and whether findings gate a pipeline)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

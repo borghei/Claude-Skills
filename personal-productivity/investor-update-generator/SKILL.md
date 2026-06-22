@@ -27,6 +27,19 @@ investor update, monthly update, founder update, investor communication, fundrai
 
 ---
 
+## Clarify First
+
+Before generating the update, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Stage & cadence** — early-stage monthly vs later-stage quarterly changes which sections the rubric expects
+- [ ] **This period's metrics** — the same defined set every month; re-defining metrics signals dishonest reporting
+- [ ] **Specific asks** — what you need from investors (intros, hires, advice); the highest-leverage section
+- [ ] **Bad news / risks** — strong updates lead with these, so they must be surfaced, not buried
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 1. Draft your update as `update.md`

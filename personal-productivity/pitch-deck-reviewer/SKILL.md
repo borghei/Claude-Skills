@@ -29,6 +29,18 @@ pitch deck, pitch, fundraise, fundraising, seed deck, Series A deck, investor de
 
 ---
 
+## Clarify First
+
+Before scoring the deck, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Funding stage** — seed vs Series A sets the required-slide rubric (`--stage` flag) and what counts as a gap
+- [ ] **Slide-by-slide summary** — one bullet per slide (number + title + 1-2 sentences); vague summaries produce false gaps
+- [ ] **Round context** — amount raising and traction stage, so the "ask" and "traction" slides are judged against the right bar
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 1. Summarize each slide as one bullet in `deck_summary.md` (slide number + title + 1-2 sentences of content)

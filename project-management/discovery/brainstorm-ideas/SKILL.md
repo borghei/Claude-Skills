@@ -32,6 +32,16 @@ Structured product ideation for both new product creation and existing product e
 - **New Product Ideation** -- Exploring greenfield opportunities where the focus is on core value delivery, speed to validate, and market differentiation.
 - **Existing Product Enhancement** -- Identifying opportunities within a live product using the Opportunity Solution Tree to connect desired outcomes to concrete solutions.
 
+## Clarify First
+
+Before ideating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **New vs existing product** — selects the approach (new-product lenses vs Opportunity Solution Tree mapping)
+- [ ] **Target outcome or problem** — the desired outcome the session is anchored to (ungrounded ideation produces random ideas, not prioritizable ones)
+- [ ] **Hard constraints** — tech stack, timeline, budget limits (bound the feasibility and speed scores in prioritization)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

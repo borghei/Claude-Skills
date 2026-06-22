@@ -22,6 +22,16 @@ metadata:
 
 The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
 
+## Clarify First
+
+Before analyzing or generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — query optimization / schema documentation / migration generation (selects the script)
+- [ ] **SQL input** — the query, the DDL file, or the from/to schema pair to operate on (the script's actual input)
+- [ ] **Target database / dialect** — Postgres / MySQL / etc. (changes index recommendations and migration SQL syntax)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

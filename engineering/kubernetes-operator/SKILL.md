@@ -40,6 +40,16 @@ End-to-end Kubernetes operator design and construction. Covers the operator patt
 | Debugging a controller that "isn't reconciling" | Yes — use **reconciliation troubleshooting** |
 | Just running someone else's operator (Postgres, Kafka, etc.) | Partially — useful for understanding what it does and how to monitor it |
 
+## Clarify First
+
+Before scaffolding or auditing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — scaffold an operator, validate a CRD, or audit a controller (selects `operator_scaffold.py` vs `crd_validator.py` vs `reconciliation_audit.py`)
+- [ ] **Resource identity** — for scaffolding: the operator name, API group, and kind (sets `--name`/`--group`/`--kind`); for validation/audit: the CRD YAML or controller path (the input the scripts read)
+- [ ] **Framework** — controller-runtime/Kubebuilder/operator-SDK (Go), or KOPF/JOSDK/kube-rs (drives the scaffold patterns)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

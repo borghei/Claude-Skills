@@ -34,6 +34,16 @@ Generate pipeline configurations (Airflow, Prefect, Dagster), validate data qual
 - Adding data-quality checks or data contracts.
 - Optimizing slow ETL/ELT queries or troubleshooting pipeline failures.
 
+## Clarify First
+
+Before generating pipelines, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Orchestrator** — Airflow / Prefect / Dagster (`--type`; changes the generated DAG code)
+- [ ] **Source, destination & load mode** — systems involved and batch vs incremental (`--source`/`--destination`/`--mode`; shapes the pipeline)
+- [ ] **Data-quality expectations** — the schema and contracts to enforce (drives the Great Expectations suite generation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

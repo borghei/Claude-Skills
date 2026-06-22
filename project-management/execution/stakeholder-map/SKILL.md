@@ -44,6 +44,17 @@ match communication cadence to influence.
 - **Keep informed (LP/HI):** advocates and detractors who care. Use them.
 - **Monitor (LP/LI):** light touch.
 
+## Clarify First
+
+Before mapping, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The initiative being mapped** — the specific launch/deal/re-org/roadmap change (defines who counts as a stakeholder at all, Step 1)
+- [ ] **Each stakeholder's power source** — hierarchy vs veto vs budget vs domain expertise (a compliance lead may outrank a VP; drives the Power axis in Step 2)
+- [ ] **Each stakeholder's stance** — champion → supporter → neutral → skeptic → blocker (drives Step 3 and the conversion plans in Step 6)
+- [ ] **Decision/launch deadline** — when the verdict lands (sets engagement cadence per quadrant, Step 5)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — List all stakeholders

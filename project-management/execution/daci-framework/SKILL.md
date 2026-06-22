@@ -35,6 +35,16 @@ The four roles in brief: **Driver** (exactly one, drives to closure), **Approver
 - Individual contributor work allocation (use sprint planning).
 - Truly one-person decisions (no governance overhead needed).
 
+## Clarify First
+
+Before building the DACI chart, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The specific decisions to map** — the 3-5 high-impact decisions, not "everything" (each becomes a chart row; mapping too much at once is the top failure mode)
+- [ ] **Candidate people and their real authority** — who can actually approve or veto (drives the Driver and Approver assignments; without genuine authority the chart is fiction)
+- [ ] **Current pain points** — where decisions stall or thrash today (drives the current→target-state gap and the 30/60/90 transition plan)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 - **[references/playbook.md](references/playbook.md)** — read this when building or running a DACI chart: role definitions and rules, the 7-step build sequence (working group → roles → decisions → current-state map → pain points → target-state → transition plan), governance health metrics, troubleshooting, and success criteria.

@@ -33,6 +33,16 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 - Generating a structured review report or review checklist.
 - Gating merges in CI/CD on a quality score or review verdict.
 
+## Clarify First
+
+Before producing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **What to review** — the git diff/branch (base and head) or a source directory (sets `--base`/`--head` or the path the analyzers scan)
+- [ ] **Language** — TypeScript, JavaScript, Python, Go, Swift, or Kotlin (selects the rules `code_quality_checker.py` applies via `--language`)
+- [ ] **Output & gate** — report format (text/markdown/JSON) and any pass/fail score threshold (sets the artifact format and CI verdict)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

@@ -31,6 +31,16 @@ Backlog management and sprint execution toolkit for product owners, including us
 
 ---
 
+## Clarify First
+
+Before generating stories or a sprint plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Persona who benefits** — the specific user the story serves (drives the "As a..." clause and acceptance criteria)
+- [ ] **The requirement or epic scope** — the capability and its success condition (drives story breakdown and INVEST validation)
+- [ ] **Team velocity and availability** — rolling average points and PTO/holidays this sprint (sets committed vs stretch capacity)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## User Story Generation Workflow
 
 Create INVEST-compliant user stories from requirements:

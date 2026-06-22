@@ -87,6 +87,16 @@ Each force is rated **low / medium / high** based on specific factors:
 - High exit barriers
 - Strategic stakes high
 
+## Clarify First
+
+Before scoring the forces, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Precise industry definition** — narrow enough to be specific, broad enough to catch substitutes (too broad/narrow is the #1 error and sets the entire analysis scope)
+- [ ] **Evidence per force** — the data/facts behind each low/medium/high rating (a score without evidence is just opinion)
+- [ ] **Purpose** — market entry / margin-pressure diagnosis / positioning audit (frames which dominant force matters and the strategy translation; margin diagnosis also needs a then-vs-now comparison)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Define the industry

@@ -36,6 +36,17 @@ Tools and guidance for multi-regulation privacy compliance across 9 major global
 
 ---
 
+## Clarify First
+
+Before the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Org location + where your data subjects are** — sets which of the 9 regulations apply via territorial scope (the entire obligations matrix)
+- [ ] **Data types processed** — personal, sensitive, financial, health, biometric, children — drives obligations and special-category triggers
+- [ ] **Processing activities** — marketing, analytics, HR, profiling, healthcare — affects applicability and which obligations attach
+- [ ] **Current practices** (if you want a gap analysis) — needed to flag gaps; without them you get an obligations matrix only, no gap report
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Tools
 
 ### Privacy Regulation Checker

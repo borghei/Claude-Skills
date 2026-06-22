@@ -38,6 +38,16 @@ Analyze any codebase and generate production-quality onboarding documentation ta
 - Self-documenting before a long vacation or team transition
 - Preparing for a compliance audit that requires documentation
 
+## Clarify First
+
+Before generating the docs, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target codebase path** — which project to analyze (the input all three scripts scan)
+- [ ] **Audience** — junior developer, senior engineer, or contractor (tailors which sections appear and at what depth)
+- [ ] **Output format** — Markdown, Notion, or Confluence (sets the generated document format)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

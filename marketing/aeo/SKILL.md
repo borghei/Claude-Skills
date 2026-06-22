@@ -125,6 +125,17 @@ See [references/llm-content-structuring.md](references/llm-content-structuring.m
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target queries** — the actual questions customers ask LLMs about your category (drives which content to audit and restructure)
+- [ ] **Your brand name** — exact wording to track in answers vs competitors (drives citation extraction)
+- [ ] **Target LLM surface** — ChatGPT / Claude / Perplexity / Gemini (citation behavior and trust signals differ per provider)
+- [ ] **Canonical page/content** — the high-value page to be the authoritative source (drives schema generation + pattern restructuring)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick start
 
 1. **Audit existing content**: `python3 scripts/aeo_content_auditor.py --path ./content`

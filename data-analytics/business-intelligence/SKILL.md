@@ -16,6 +16,16 @@ metadata:
 
 The agent operates as a senior BI specialist, designing dashboards, defining KPI frameworks, automating reporting pipelines, and translating data into executive-ready narratives.
 
+## Clarify First
+
+Before designing the dashboard, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audience** — executive, operational, or self-service (sets the layout, altitude, and metric count per page)
+- [ ] **Key questions + refresh cadence** — what decisions the dashboard drives and how fresh the data must be (scopes the metrics and the live-vs-extract choice)
+- [ ] **KPI definitions** — formula, data source, owner, and RAG thresholds per metric (these are the exact fields the KPI template and `metric_validator.py` require)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Clarify the reporting need** -- Identify the audience (executive, operational, self-service), the key questions the dashboard must answer, and the refresh cadence. Validate that required data sources exist and are accessible.

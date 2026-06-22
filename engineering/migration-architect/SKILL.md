@@ -31,6 +31,16 @@ Generates phased migration plans with risk assessment, compatibility analysis, a
 - Validating schema/API compatibility and detecting breaking changes before cutover.
 - Building rollback runbooks and zero-downtime execution plans.
 
+## Clarify First
+
+Before planning the migration, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **What's migrating** — database, API, infrastructure, or service (sets `--type` and which pattern catalog applies)
+- [ ] **Deliverable** — phased plan, compatibility diff, or rollback runbook (selects `migration_planner.py` vs `compatibility_checker.py` vs `rollback_generator.py`)
+- [ ] **Downtime budget & pattern** — zero-downtime requirement and which pattern (expand-contract, dual-write, strangler fig, blue-green) (drives the phases and cutover technique)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

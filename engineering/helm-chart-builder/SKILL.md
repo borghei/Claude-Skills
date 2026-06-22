@@ -22,6 +22,16 @@ metadata:
 
 The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations, proper security contexts, and complete documentation.
 
+## Clarify First
+
+Before analyzing the chart, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Chart path** — which chart directory to analyze (sets `--path`/`--chart`)
+- [ ] **Values files** — which environment values files to validate (sets `--values` and what gets checked against best practices)
+- [ ] **Strictness** — strict/lint mode and JSON for CI (sets `--strict --format json` and whether findings gate the pipeline)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

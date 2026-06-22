@@ -144,6 +144,16 @@ Step-by-step implementation guidance:
 
 ---
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Applicability** — whether the business meets a CCPA threshold ($25M revenue, 100K+ consumers/households, or 50%+ revenue from selling/sharing PI) (determines whether obligations apply at all)
+- [ ] **Entity role** — business, service provider, contractor, or third party (determines which obligation set applies)
+- [ ] **Assessment goal** — compliance readiness, data mapping, consumer-request handling, or privacy-policy review (selects the tool and workflow)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Workflows
 
 ### Workflow 1: Initial CCPA/CPRA Compliance Assessment

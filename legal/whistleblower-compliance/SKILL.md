@@ -30,6 +30,17 @@ Production-ready whistleblower compliance toolkit for auditing existing reportin
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before generating output, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Mode: assess an existing system or draft a policy** — Mode A runs a 56-checkpoint audit with gap scoring; Mode B produces a policy skeleton — completely different artifacts
+- [ ] **Jurisdiction** — EU, US, or UK — sets which regulation's requirements, thresholds, and timelines apply (EU 7-day ack / 3-month feedback vs SOX 180-day filing)
+- [ ] **Headcount + org type** — EU thresholds differ (private 50+, public sector all); determines applicability and which sections are mandatory
+- [ ] **Sector** — financial, healthcare, defense, nuclear, transport — triggers the Phase 8 sector-specific requirements
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the output.
+
 ## Tools
 
 ### 1. Compliance Checker (`scripts/whistleblower_compliance_checker.py`)

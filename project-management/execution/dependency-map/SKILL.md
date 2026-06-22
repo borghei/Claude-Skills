@@ -39,6 +39,17 @@ Most cross-team programs fail at dependency management, not execution. The teams
 
 **When NOT to use:** single-team backlogs (use `wwas/` or `job-stories/`), pure technical dependencies inside one codebase (use Git), or stakeholder relationships (use `senior-pm/stakeholder_mapper.py`).
 
+## Clarify First
+
+Before mapping dependencies, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Teams / workstreams in scope** — the from/to pairs become the nodes; the wrong set produces a graph that maps the wrong program
+- [ ] **Needed-by and expected-delivery dates per dependency** — these drive slack, so they determine the critical path and the entire risk ordering
+- [ ] **Current status of each dependency** — not-started / in-progress / at-risk / done drives the risk-ordered blocker list and the weekly sync agenda
+- [ ] **Named owner per dependency** — an ownerless dependency cannot be walked weekly; owners populate the sync agenda
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

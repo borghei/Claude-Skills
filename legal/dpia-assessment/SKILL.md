@@ -37,6 +37,17 @@ GDPR Article 35 Data Protection Impact Assessment tooling. Evaluates whether a D
 
 ---
 
+## Clarify First
+
+Before the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Processing activity description** — purpose, data types, automation level, scale — drives the Art. 35(3) trigger matches and EDPB criteria scoring (the whole verdict)
+- [ ] **Special-category data + scale** — determines the Art. 35(3)(b) trigger, the Art. 9 cumulative-basis requirement, and the large-scale four-factor test
+- [ ] **Jurisdiction(s)** — which national blacklists apply (DE/FR/IE/BE/NL/IT/PL); the most restrictive governs
+- [ ] **Whether an AI system is involved** — triggers dual-phase (training/inference) analysis per EDPB Opinion 28/2024 and the separate FRIA distinction
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Tools
 
 ### DPIA Threshold Checker

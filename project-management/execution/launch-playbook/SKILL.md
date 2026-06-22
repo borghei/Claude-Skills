@@ -38,6 +38,17 @@ Most failed launches are not failed builds; they are failed coordination. Engine
 
 **When NOT to use:** continuous-delivery bug fixes and minor improvements (use `release-notes/` only); internal-only changes with no external comms (use a release runbook); product sunsets and deprecations (use `eol-communication/`).
 
+## Clarify First
+
+Before building the launch plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Launch date (T-0)** — anchors the entire T-30→T+30 timeline and every artifact deadline
+- [ ] **Launch type** — big bang / progressive rollout / dark launch drives the run-of-show and the rollback plan
+- [ ] **Cross-functional owners (RACI)** — every workstream named across PM/Eng/PMM/Sales/Support/Legal; a missing owner is the #1 cause of failed launches
+- [ ] **Exec sponsor** — holds go/no-go authority and receives the T-1/T+1/T+7/T+30 updates
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. **Kickoff at T-30.** Confirm date, launch type, and exec sponsor; open the run-of-show and internal comms plan assets.

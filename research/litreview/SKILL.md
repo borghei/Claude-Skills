@@ -39,6 +39,17 @@ thematic synthesis patterns.
 - Source types accepted (peer-reviewed, gray literature, conference)
 - Existing seed sources (if any)
 
+## Clarify First
+
+Before building the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Research question (PICO frame)** — makes search and synthesis tractable; vague questions yield unfocused reviews
+- [ ] **Review type (systematic, scoping, or narrative)** — sets rigor, criteria stringency, and output structure (e.g. whether a PRISMA flow is needed)
+- [ ] **Inclusion / exclusion criteria (year range, source type, methodology)** — drives screening and reproducibility
+- [ ] **Synthesis goal (answer a specific question vs map a field)** — selects the synthesis approach
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Plan and execute the search

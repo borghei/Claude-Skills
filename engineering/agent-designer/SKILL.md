@@ -35,6 +35,16 @@ A toolkit for designing, architecting, and evaluating multi-agent systems. It pr
 - Selecting an architecture pattern for a new system.
 - Evaluating agent performance from execution logs.
 
+## Clarify First
+
+Before designing the system, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **System goal & scale** — the task the agents perform and expected load (drives which architecture pattern: single, supervisor, swarm, hierarchical, or pipeline)
+- [ ] **Tool protocol target** — OpenAI function calling vs Anthropic tool use (sets the schema format `tool_schema_generator.py` emits)
+- [ ] **Optimization priority** — cost, latency, or quality (determines agent roles, model tiers, and which metrics the evaluator weights)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

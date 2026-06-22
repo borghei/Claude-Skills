@@ -70,6 +70,19 @@ Result: Effort spent, strategy not advanced.
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable is needed** (full diagnostic, cascade map, silo diagnosis, communication-gap analysis, or workshop agenda) — each uses a different step of the framework
+- [ ] **The current strategy stated in one sentence** — alignment is tested against the source; if the strategy itself is vague, fix that before cascading
+- [ ] **The actual goals/OKRs at company, team, and individual levels** — orphan, conflict, and coverage-gap detection needs the real cascade, not a hypothetical one
+- [ ] **Company size and structure** — the 5-person test and hierarchical cascade assumptions need adapting for large or matrixed orgs
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Step 1: Strategy Articulation Test
 
 Before checking cascade, check the source.

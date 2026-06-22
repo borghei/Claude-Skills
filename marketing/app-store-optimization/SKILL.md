@@ -33,6 +33,17 @@ ASO tools for researching keywords, optimizing metadata, analyzing competitors, 
 - Planning an app launch or running a store-listing A/B test
 - Analyzing reviews or planning multi-market localization
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Platform** — Apple App Store vs Google Play (different character limits, keyword field vs description indexing, ranking factors)
+- [ ] **App category + seed keywords** — the app's space and starting terms (drives keyword research + scoring)
+- [ ] **Primary goal** — ranking visibility vs conversion rate (shapes metadata, title/subtitle, and screenshot priorities)
+- [ ] **Target market/locale** — which storefronts (drives localization + keyword volume estimates)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

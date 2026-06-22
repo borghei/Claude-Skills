@@ -33,6 +33,16 @@ Manage parallel development workflows using Git worktrees with deterministic nam
 - Your current branch is blocked but a hotfix is urgent.
 - You want automated cleanup instead of manual `rm -rf` operations.
 
+## Clarify First
+
+Before managing worktrees, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Operation** — create, list, remove, or clean up worktrees (selects the `worktree_manager.py` action vs `port_allocator.py` vs `worktree_validator.py`)
+- [ ] **Branch & base** — which branch(es) the worktree(s) track and from what base (drives worktree naming and isolation)
+- [ ] **Port/service needs** — whether dev servers or Docker need allocated ports (drives the deterministic port block and the Docker Compose override generated)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

@@ -39,6 +39,17 @@ copy editing, editorial review, copy feedback, proofreading, content polishing, 
 
 ---
 
+## Clarify First
+
+Before editing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Goal & desired action** — what the copy must get the reader to do (prioritizes the CTA / Zero Risk sweep)
+- [ ] **Target audience** — who reads it and their awareness level (calibrates the So What, Specificity, and Emotion sweeps)
+- [ ] **Voice & style standard** — brand voice or an existing style guide (drives the Voice and Style Consistency sweeps)
+- [ ] **Edit depth** — full Seven Sweeps or a quick polish pass (sets the scope of the review)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Full Copy Review (Seven Sweeps)

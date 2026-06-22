@@ -32,6 +32,16 @@ The agent generates production-ready PowerShell scripts for M365 tenant setup, b
 - Bulk user provisioning or secure offboarding.
 - License planning and quarterly utilization review.
 
+## Clarify First
+
+Before generating scripts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — tenant setup, security audit/hardening, bulk provisioning, or offboarding (selects `tenant_setup.py` vs `powershell_generator.py` vs `user_management.py`)
+- [ ] **Tenant inputs** — the domain, the user CSV, or the role/department data (the input the modules consume)
+- [ ] **Compliance regime** — GDPR/HIPAA or none (adjusts license SKU recommendations and the security baseline)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 The scripts are importable Python modules (instantiate a class, not a CLI). Full API, parameters, and worked examples are in [references/tools-and-workflows.md](references/tools-and-workflows.md).

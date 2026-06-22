@@ -42,6 +42,16 @@ Deep clause-by-clause NDA review tool that analyzes agreements from Recipient or
 
 ---
 
+## Clarify First
+
+Before reviewing the NDA, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Your perspective: Recipient or Discloser** — flips every risk rating and the direction of each redline (the core `--perspective` input)
+- [ ] **Deal context** — M&A, employment, VC/fundraising, or standard commercial — triggers the variation callouts (standstill, invention assignment, portfolio conflicts)
+- [ ] **What you cannot accept** — non-compete, IP grant, perpetual term — sets which of the 7 immediate red flags force escalation vs negotiation
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the issue log.
+
 ## Tools
 
 ### NDA Clause Reviewer

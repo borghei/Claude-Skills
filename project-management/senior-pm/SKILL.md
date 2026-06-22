@@ -40,6 +40,17 @@ Strategic project management for enterprise software, SaaS, and digital transfor
 - **Resource capacity planning** — utilization optimization (70-85% band), skill matching, bottleneck identification, scenario planning
 - **Executive communication & governance** — board-ready RAG reports, RACI matrices, escalation paths, risk-adjusted ROI/NPV
 
+## Clarify First
+
+Before generating the report or analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which artifact** — portfolio health review, executive status report, stakeholder map, or risk/capacity analysis (each maps to a different tool and structure)
+- [ ] **Audience** — board, exec staff, or delivery team (sets the altitude, RAG framing, and level of detail)
+- [ ] **Portfolio scope and data** — which projects and what timeline/budget/risk data exists (scores and dashboards are only as good as the inputs)
+- [ ] **Prioritization model** — WSJF, RICE, ICE, or MoSCoW, when ranking projects (each produces a different order)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

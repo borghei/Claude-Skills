@@ -227,6 +227,17 @@ EXPIRED:     Review date passed without renewal
 
 ---
 
+## Clarify First
+
+Before logging a decision, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The exact decision statement** (one clear sentence of what was decided) — this is the heart of the record; a vague statement makes the log useless for future conflict detection
+- [ ] **Owner and deadline** — every decision record needs a single accountable person and a date, or it cannot be tracked or surfaced as overdue
+- [ ] **Rejected alternatives and why** — these become DO_NOT_RESURFACE entries that prevent rejected ideas from re-entering future deliberations
+- [ ] **Whether this supersedes a prior decision on the same topic** — drives conflict detection and supersession tracking against the existing log
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Logging Workflow
 
 ### Post-Decision Logging (after Board Meeting Phase 5)

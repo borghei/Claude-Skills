@@ -42,6 +42,16 @@ This skill produces three variants of the same underlying roadmap, each tailored
 - For tactical sprint planning (use `../scrum-master/` outputs).
 - For incident communication or in-flight project status (use `status-update-generator/`).
 
+## Clarify First
+
+Before generating the variants, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target audience(s)** — executive, customer, internal, or all three (each is a distinct variant with different detail, framing, and risk language)
+- [ ] **The roadmap source of truth** — Now/Next/Later items with owners and dates (the internal variant is authored first; exec/customer derive from it)
+- [ ] **Date-commitment policy** — what you can promise customers publicly (the customer variant strips firm dates; the exec variant gets confidence ratings instead)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.

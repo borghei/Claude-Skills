@@ -25,6 +25,19 @@ Launch Strategy provides the complete playbook for launching products and featur
 
 ---
 
+## Clarify First
+
+Before planning the launch, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Launch tier** — Tier 1 major / 2 feature / 3 update / 4 changelog (sets effort level, channel mix, and timeline length)
+- [ ] **Launch date** — the target go-live (anchors the week-by-week pre-launch timeline and Product Hunt window)
+- [ ] **Primary audience segment** — who cares most about this release (drives positioning and ORB channel selection)
+- [ ] **One-sentence value prop** — what is launching and why anyone should care (drives the positioning template and announcement copy)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Launch Tiers
 
 Not every release deserves the same effort. Classify first.

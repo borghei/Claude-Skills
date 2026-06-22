@@ -23,6 +23,16 @@ metadata:
 
 The **LLM Cost Optimizer** skill provides tools for counting tokens, estimating costs across different LLM providers, and optimizing prompts to reduce token usage without sacrificing quality. Essential for teams managing LLM API budgets at scale.
 
+## Clarify First
+
+Before estimating or optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Input prompt/text** — the prompt file or text to count or optimize (the input via `--file`/`--text`/`--stdin`)
+- [ ] **Target models** — which models to estimate cost for (sets `--models` and the pricing comparison)
+- [ ] **Goal** — cost estimation vs prompt optimization, and any target reduction (selects `token_counter.py` vs `prompt_optimizer.py` and sets `--target-reduction`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

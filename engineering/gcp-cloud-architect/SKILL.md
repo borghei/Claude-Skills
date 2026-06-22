@@ -42,6 +42,16 @@ End-to-end GCP-specific architecture: service selection, Google Cloud Architectu
 | Picking Cloud SQL vs Spanner vs Firestore vs BigQuery | Yes — see **data store decision tree** |
 | Going to production without CAF review | Don't — run the CAF scorer first |
 
+## Clarify First
+
+Before designing or assessing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `gcp_architecture_validator.py` vs `gcp_cost_estimator.py` vs `gcp_caf_scorer.py`)
+- [ ] **Workload spec** — the YAML workload config, or the Terraform/Deployment Manager files (the input the scripts parse)
+- [ ] **Priority pillar** — reliability, security, cost, operational excellence, or performance (weights the CAF assessment and which recommendations lead)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

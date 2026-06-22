@@ -139,6 +139,16 @@ End-to-end AI system lifecycle guidance:
 
 ---
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **AIMS scope** — which AI systems and organizational boundaries are in scope (drives the readiness assessment and per-system impact assessments)
+- [ ] **Task** — AIMS readiness assessment vs per-system AI impact assessment (selects the tool and workflow)
+- [ ] **Certification target** — initial certification, surveillance, or internal-only (sets the score threshold and evidence depth)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Workflows
 
 ### Workflow 1: ISO 42001 Readiness Assessment

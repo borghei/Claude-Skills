@@ -23,6 +23,16 @@ metadata:
 
 The **Secrets Vault Manager** skill provides tools for generating HashiCorp Vault configurations, planning and scheduling secret rotation cycles, and analyzing vault audit logs for suspicious access patterns. Essential for teams managing secrets at scale.
 
+## Clarify First
+
+Before generating configs or plans, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — config generation / rotation planning / audit-log analysis (selects the script and the entire workflow)
+- [ ] **Environment & secrets engines** — e.g. production + kv/database/transit (`--env`, `--secrets-engines`; shapes the generated HCL)
+- [ ] **Secrets inventory & classification** — Critical/High/Medium/Low per secret (drives rotation frequencies and the schedule)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

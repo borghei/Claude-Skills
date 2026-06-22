@@ -29,6 +29,17 @@ This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/
 - **Mid-quarter check-in** -- carry / kill / pivot / escalate decisions at week 6
 - **Close retro** -- 0.0-1.0 OKR scoring, learning extraction, and next-cycle seeding
 
+## Clarify First
+
+Before running a phase, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which phase** — pre-quarter/kickoff vs mid-quarter check-in vs close retro (selects the agenda and artifacts produced)
+- [ ] **Position in the 13-week cycle** — what week you're in (the carry/kill/pivot check belongs at ~week 6, the retro at week 13)
+- [ ] **Existing OKRs & strategy** — the committed Objective and the annual strategy it serves (the kickoff commits OKRs; every Objective must trace to a vision pillar)
+- [ ] **Real team capacity** — honest capacity after PTO/on-call (a stretch slate dressed as commitments is the #1 cadence failure)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## The Quarterly Cycle
 
 ```

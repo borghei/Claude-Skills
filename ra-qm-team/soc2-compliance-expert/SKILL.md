@@ -51,6 +51,16 @@ For detailed control requirements per category, see [REFERENCE.md](REFERENCE.md)
 
 ---
 
+## Clarify First
+
+Before running the readiness assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Report type** — Type I (design at a point in time) vs Type II (operating effectiveness over a period) (sets the observation-period requirement and timeline)
+- [ ] **TSC scope** — which criteria beyond mandatory Security (Availability, Processing Integrity, Confidentiality, Privacy) (drives which controls and evidence are needed)
+- [ ] **Subservice organizations** — carve-out vs inclusive (affects the scope and system description)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Readiness Assessment Workflow
 
 The agent guides organizations through SOC 2 readiness from gap analysis through audit completion.

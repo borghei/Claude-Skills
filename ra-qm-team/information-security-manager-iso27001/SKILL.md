@@ -29,6 +29,16 @@ Implement and manage Information Security Management Systems (ISMS) aligned with
 
 Use this skill when you hear: "implement ISO 27001", "ISMS implementation", "security risk assessment", "information security policy", "ISO 27001 certification", "security controls implementation", "incident response plan", "healthcare data security", "medical device cybersecurity", or "security compliance audit".
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **ISMS scope** — which systems, locations, and data are inside the boundary (drives the Statement of Applicability and risk assessment)
+- [ ] **Task** — ISMS implementation, risk assessment, gap analysis, or incident response (picks the workflow and script)
+- [ ] **Threat context** — general, healthcare, or cloud (selects the threat catalog and changes the risk register inputs)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the report.
+
 ## Quick Start
 
 ```bash

@@ -38,6 +38,17 @@ Production-grade framework for in-product upgrade flows. Covers feature gate des
 
 ---
 
+## Clarify First
+
+Before designing the paywall, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Upgrade model** — freemium-to-paid, trial-to-paid, or tier upgrade (determines the paywall type and trigger architecture)
+- [ ] **Free vs paid boundary** — what is gated (defines the value gap the paywall communicates)
+- [ ] **Aha moment** — so triggers fire only after value is experienced (the value-first principle)
+- [ ] **Platform** — web, iOS, or Android (IAP rules and commissions constrain web vs app flows)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Initial Assessment
 
 ### Required Context

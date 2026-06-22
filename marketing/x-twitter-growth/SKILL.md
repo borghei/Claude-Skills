@@ -19,6 +19,17 @@ metadata:
 
 Production-ready X/Twitter growth toolkit for analyzing tweet performance patterns, structuring optimal threads, and tracking engagement metrics. Designed for creators, marketers, and brand accounts looking to grow audience and engagement systematically through data-driven content decisions.
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Deliverable** — content performance audit, thread building, or growth review — selects which tool runs
+- [ ] **Data or source content** — exported tweet/analytics CSV (for audits) or the long-form draft (for threads) — required input for the chosen tool
+- [ ] **Niche & audience** — the one topic and who you're growing — shapes the hook and content pillars
+- [ ] **Growth goal** — followers, engagement, or replies — sets which benchmark and CTA to optimize for
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

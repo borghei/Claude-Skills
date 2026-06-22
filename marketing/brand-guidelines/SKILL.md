@@ -40,6 +40,17 @@ brand guidelines, brand identity, style guide, brand voice, tone of voice, visua
 
 ---
 
+## Clarify First
+
+Before building the guidelines, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Brand foundation** — purpose, values, and brand promise (the strategic layer every voice and visual choice traces back to)
+- [ ] **Brand archetype/personality** — Expert / Guide / Innovator / Friend / etc. (sets voice attributes and tone calibration)
+- [ ] **Existing visual assets** — current colors, fonts, and logo, if any (determines build-new vs document-existing)
+- [ ] **Channels in scope** — web, email, social, sales, support (drives which cross-channel application sections to produce)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Create Brand Guidelines from Scratch

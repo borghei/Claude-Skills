@@ -35,6 +35,17 @@ Production-grade structured data implementation covering 20+ schema types, rich 
 
 ---
 
+## Clarify First
+
+Before generating the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Page type & operating mode** — audit existing, implement new, or fix errors; and on what page type (Article, Product, FAQPage, LocalBusiness…) — selects the schema type and workflow
+- [ ] **Target rich result or AI-search goal** — which rich result or citation you want to win — sets the required-field checklist and eligibility rules
+- [ ] **CMS / deployment platform** — WordPress, Webflow, Shopify, Next.js, or static — drives the deployment method and known warnings (e.g. GTM injection)
+- [ ] **Source page content** — the real headline/author/price/Q&A to populate — schema must match visible content or Google penalizes it
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Operating Modes
 
 ### Mode 1: Audit Existing Markup

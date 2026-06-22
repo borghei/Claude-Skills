@@ -41,6 +41,16 @@ content humanizer, AI content, humanize writing, AI detection, natural writing, 
 
 ---
 
+## Clarify First
+
+Before humanizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Mode** — audit-only (annotated report) or full humanization rewrite (sets the deliverable and how invasive edits are)
+- [ ] **Content type** — docs, blog post, marketing copy, or email (determines how much personality to inject vs. preserve clarity)
+- [ ] **Brand voice** — guidelines or one example of writing they love (without it, voice injection is guesswork)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Detect AI Patterns in Content

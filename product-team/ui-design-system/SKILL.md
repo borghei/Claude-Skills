@@ -54,6 +54,16 @@ Use this skill when you need to:
 
 ---
 
+## Clarify First
+
+Before generating the tokens or system, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Brand primary color (hex)** — the seed for the full palette (drives the color scale and WCAG contrast checks)
+- [ ] **Style preset** — modern, classic, or playful (sets fonts, border radius, and shadow style)
+- [ ] **Output format and framework** — CSS, SCSS, or JSON for Tailwind/styled-components/Figma (drives export and developer handoff)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1: Generate Design Tokens

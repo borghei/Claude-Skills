@@ -36,6 +36,17 @@ Generate a complete, production-ready SaaS application boilerplate including aut
 - Adding workspace/organization tenancy with role-based access and plan gating.
 - Generating a baseline `.env.example`, schema, and API routes for a Next.js stack.
 
+## Clarify First
+
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Auth provider** — NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated)
+- [ ] **Payments provider** — Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler)
+- [ ] **Tenancy model** — workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries)
+- [ ] **Database** — Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

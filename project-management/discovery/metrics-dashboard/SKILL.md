@@ -41,6 +41,17 @@ nobody opens.
 A dashboard ≠ all metrics. A dashboard = these 11-22 metrics presented
 for fast decision-making.
 
+## Clarify First
+
+Before designing the dashboard, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **North Star metric** — defined or not (it is the root of all 4 layers; if undefined, define it first via `north-star-metric`)
+- [ ] **Audience** — board/exec / functional team / all-hands / IC (sets the max top-level metric count, 5-8 down to 1-3)
+- [ ] **Team structure** — which teams act on this (operational metrics are 4-8 per team with named owners)
+- [ ] **Available instrumentation** — what data you actually capture (you can't show a metric you don't measure; bounds refresh cadence)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Confirm the North Star

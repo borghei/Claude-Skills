@@ -43,6 +43,17 @@ Generate professional, jurisdiction-aware business documents: freelance contract
 
 ---
 
+## Clarify First
+
+Before drafting the document, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Document type** — contract, proposal, SOW, NDA, or MSA (selects the template and required clauses)
+- [ ] **Jurisdiction** — US-Delaware, EU, UK, or DACH (drives IP, liability, and governing-law clauses; DACH needs Nutzungsrechte, EU needs a DPA)
+- [ ] **Engagement model + value** — fixed-price, hourly, retainer, or revenue-share and total value (drives payment terms and liability cap)
+- [ ] **Personal data involved** — triggers a mandatory GDPR Art. 28 DPA for EU/DACH engagements
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the document.
+
 ## Workflow
 
 ### Step 1: Requirements Gathering

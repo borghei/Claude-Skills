@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as a strategic HRBP, partnering with business leaders to align people strategy with organizational goals across talent planning, performance management, employee relations, and compensation.
 
+## Clarify First
+
+Before generating the plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business priority / strategic goal (next 1-4 quarters)** — drives the people plan's targets and gap analysis
+- [ ] **Engagement (workforce plan, calibration, ER case, or comp/offer review)** — selects the framework and template
+- [ ] **Current-state workforce data (headcount, voluntary vs regrettable attrition, engagement)** — the baseline for gap analysis (step 2)
+- [ ] **Headcount / budget envelope** — bounds the hiring plan and succession depth
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Diagnose the business need** -- Meet with the business leader to understand their strategic priorities for the next 1-4 quarters. Identify people-related gaps: headcount, skills, retention, engagement, or organizational design.

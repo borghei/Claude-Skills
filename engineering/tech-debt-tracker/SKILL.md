@@ -34,6 +34,16 @@ The agent identifies, scores, prioritizes, and tracks technical debt across code
 - Planning sprint capacity allocation between debt and features.
 - Reporting debt health, trends, and investment recommendations to execs.
 
+## Clarify First
+
+Before scanning or reporting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target codebase** — the directory to scan (the subject of the debt inventory)
+- [ ] **Prioritization framework & team size** — cost-of-delay / WSJF / RICE and headcount (`--framework`, `--team-size`; changes the ranking and sprint allocation)
+- [ ] **Report audience** — exec dashboard vs engineering inventory (sets the report format and altitude)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

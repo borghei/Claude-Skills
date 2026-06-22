@@ -19,6 +19,16 @@ Regulatory strategy development, submission management, and global market access
 
 ---
 
+## Clarify First
+
+Before developing the regulatory strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Device classification and intended use** — risk level and what the device does (drives the pathway: 510(k)/De Novo/PMA and MDR class)
+- [ ] **Target markets** — US, EU, Canada, Japan, China… (determines which regulations apply and the submission sequencing)
+- [ ] **Predicate availability** — whether a suitable predicate exists or the device is novel (selects 510(k) vs De Novo/PMA)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the strategy.
+
 ## Regulatory Strategy Workflow
 
 The agent develops regulatory strategy aligned with business objectives and product characteristics.

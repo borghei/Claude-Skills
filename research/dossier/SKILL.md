@@ -38,6 +38,17 @@ market-entry, or an investor reads before due diligence.
 - Known starting sources
 - Sensitive areas to dig into
 
+## Clarify First
+
+Before building the dossier, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Subject + subject type (company / person / market)** — selects the outline template and which sections apply
+- [ ] **Purpose (deal-prep, due diligence, briefing, market-entry)** — drives depth, emphasis, and the Implications section
+- [ ] **Audience (exec, board, working team)** — sets altitude and length of the executive summary
+- [ ] **Key decision or risk to inform** — drives the Risks + Open Questions and Recommendations sections
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Generate dossier outline

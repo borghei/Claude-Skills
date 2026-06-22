@@ -33,6 +33,16 @@ A comprehensive reference to 9 prioritization frameworks with automated scoring,
 - **Stakeholder Alignment** -- Need a structured way to resolve competing priorities.
 - **Feature Triage** -- Quick sorting of a long list into actionable categories.
 
+## Clarify First
+
+Before scoring, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **What you're ranking** — problems/opportunities vs features vs personal tasks (the decision tree picks the framework from this)
+- [ ] **Framework** — rice / ice / opportunity / moscow / weighted (each requires different score fields and emits different rankings)
+- [ ] **Quality of the estimates** — measured data vs guesses for reach/impact (guesses make RICE/ICE precision misleading; switch to a coarser method)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 | Tool | Purpose | Command |

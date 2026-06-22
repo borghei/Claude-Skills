@@ -39,6 +39,16 @@ Rapid NDA screening tool that classifies incoming NDAs as GREEN (standard approv
 
 ---
 
+## Clarify First
+
+Before triaging the NDA, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Counterparty relationship** — a direct competitor or a Fortune-500 vendor changes routing and scrutiny even when the text scores GREEN
+- [ ] **Mutual vs one-way** — GREEN fast-track requires a mutual NDA; a one-way NDA where you are the recipient warrants closer review
+- [ ] **Your role (discloser or recipient)** — determines whether missing carveouts and broad definitions actually hurt you, and how to route the result
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the output.
+
 ## Tools
 
 ### NDA Screener

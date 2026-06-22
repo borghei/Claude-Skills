@@ -33,6 +33,16 @@ The agent guides red-green-refactor TDD workflows, generates framework-specific 
 - Converting tests between frameworks or scaffolding fixtures/mocks
 - Assessing test quality and detecting smells before merge
 
+## Clarify First
+
+Before generating tests or analyzing coverage, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Framework & language** — Jest / Vitest / Pytest / JUnit / Mocha (changes the generated stubs and any conversion)
+- [ ] **Task** — generate from requirements / analyze coverage / guide a red-green-refactor cycle / convert tests (selects the tool)
+- [ ] **Source input** — the user story / acceptance criteria, or the coverage report (LCOV/JSON/XML) to parse (the script's input)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -37,6 +37,17 @@ The script structure draws from four canonical sources: Steve Portigal's *Interv
 - **Churn or win/loss** -- understand why customers left, stayed, or chose a competitor.
 - **Continuous discovery cadence** -- weekly customer touchpoints to keep the team grounded in evidence.
 
+## Clarify First
+
+Before building the interview script, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Interview type** — problem discovery / solution validation / journey / churn-win-loss (selects the question bank and phase emphasis)
+- [ ] **Must-answer questions** — the 2-3 assumptions you go in to test (drives the custom story-collection prompts)
+- [ ] **Time slot** — 45 / 60 / 90 minutes (sets the per-phase timing)
+- [ ] **Participant recency** — how recently they did the job (story-based probing degrades past ~90 days, which weakens the script's core)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.

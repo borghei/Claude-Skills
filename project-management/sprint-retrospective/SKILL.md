@@ -39,6 +39,17 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 - Tracking follow-through on action items from previous retros
 - Automating retrospectives on a CI/CD schedule
 
+## Clarify First
+
+Before generating the retro report, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Time window** — sprint length via `--days` or `--since/--until` (defines which commits count; the wrong window skews velocity and cycle-time)
+- [ ] **Repo and merge style** — which repo/branch and whether squash-merges are used (squash merges lose branch-level cycle-time data)
+- [ ] **Prior snapshot** — whether a previous retro snapshot exists (enables sprint-over-sprint deltas and action-item carry-over)
+- [ ] **Audience** — team retrospective vs executive sprint summary (sets the narrative depth and which dashboards lead)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

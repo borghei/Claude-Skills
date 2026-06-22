@@ -54,6 +54,16 @@ Every AI-generated legal document must be checked across 6 categories.
 
 ---
 
+## Clarify First
+
+Before the verification, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Claimed jurisdiction(s) and legal domain** — sets which official source each citation is checked against (EUR-Lex vs congress.gov vs legislation.gov.uk); a document mixing jurisdictions is itself a HIGH finding
+- [ ] **Distribution context / audience** — internal note vs client-facing vs regulator-facing sets the quality-score gate (4/5) and how strict the disclaimer review must be
+- [ ] **Whether live source verification is available** — Step 2 requires checking citations against official sources; if unavailable, every citation is flagged "unverifiable" rather than confirmed
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the report.
+
 ## Tools
 
 ### Legal Fact Checker

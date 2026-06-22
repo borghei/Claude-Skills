@@ -38,6 +38,17 @@ Production-grade popup optimization framework covering format selection, trigger
 
 ---
 
+## Clarify First
+
+Before designing the popup, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Popup purpose** — lead capture, promotion, announcement, or feedback (selects format and trigger)
+- [ ] **Existing popups running** — needed for multi-popup conflict and priority resolution
+- [ ] **Visitor + device mix** — new vs returning, mobile vs desktop (drives targeting and mobile-safe format choice)
+- [ ] **Compliance regime** — GDPR/CCPA consent requirements (constrains data capture and consent UX)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the strategy.
+
 ## Initial Assessment
 
 ### Required Context

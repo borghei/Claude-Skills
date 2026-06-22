@@ -29,6 +29,16 @@ Cross-cutting infrastructure security audit across ALL compliance frameworks. Re
 
 Reach for this skill on: "infrastructure audit", "cloud security audit", "infrastructure compliance", "DNS security audit", "TLS audit", "endpoint security", "access control audit", "network security assessment", "infrastructure security", "cloud compliance", "Vanta alternative", "compliance automation", "security posture assessment", "hardware security keys", or "YubiKey compliance".
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit domains** — which of the 11 (cloud, DNS, TLS, endpoints, access, network, container, CI/CD, secrets, logging, physical) are in scope (determines which checks run)
+- [ ] **Target frameworks** — which standards to map findings to (SOC 2, ISO 27001, HIPAA, PCI-DSS, NIS2…) (drives the control mapping and report)
+- [ ] **Infrastructure config** — the JSON describing actual state, including cloud provider (AWS/Azure/GCP) (the checks and CIS baseline depend on it)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit report.
+
 ## Quick Start
 
 ### Run Full Infrastructure Audit

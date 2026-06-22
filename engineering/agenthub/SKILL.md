@@ -34,6 +34,16 @@ The core insight: complex tasks decompose better than they scale. A 10-step sequ
 - A single agent hits context limits or quality degradation on a long task.
 - You need quality gates and merge strategies across agent outputs.
 
+## Clarify First
+
+Before designing the workflow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task decomposition** — how the work splits into agent sub-tasks and their dependencies (defines the DAG nodes and edges in Init)
+- [ ] **Parallelism budget** — how many agents may run concurrently (sets `max_parallel` scheduling)
+- [ ] **Merge strategy** — synthesize, rank-select, or chain (determines how the Merge stage combines outputs)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Sub-Skills
 
 This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a stage of the orchestration lifecycle:

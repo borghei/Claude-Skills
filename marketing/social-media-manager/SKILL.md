@@ -27,6 +27,17 @@ This skill handles strategy and management. For writing individual social posts,
 
 ---
 
+## Clarify First
+
+Before building the strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Operating mode** — build from scratch, audit & optimize, or scale & systematize — sets the workflow and deliverables
+- [ ] **Business type & audience** — B2B SaaS, developer tools, or consumer/SMB — drives platform selection and content pillars
+- [ ] **Platforms in scope** — which 1-2 platforms (and current presence) — focuses the strategy and cadence
+- [ ] **Primary business goal** — awareness, leads, recruiting, or community — sets the metrics and pillar mix
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Operating Modes
 
 ### Mode 1: Build From Scratch

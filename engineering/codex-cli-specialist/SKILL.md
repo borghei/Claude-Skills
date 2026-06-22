@@ -34,6 +34,16 @@ The agent converts Claude Code skills to Codex-compatible format, validates cros
 - Validating a skill for dual-platform compatibility.
 - Building a `skills-index.json` for a skill library.
 
+## Clarify First
+
+Before converting or building, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — convert a skill, validate cross-platform compatibility, or build a skills index (selects `codex_skill_converter.py` vs `cross_platform_validator.py` vs `skills_index_builder.py`)
+- [ ] **Source path** — the SKILL.md or skill directory to operate on (the input the scripts read)
+- [ ] **Strictness** — strict validation mode and whether to fail on warnings (sets `--strict` and the pass/fail gate)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

@@ -37,6 +37,17 @@ Production-grade end-to-end testing with Playwright. Generate tests from user st
 - Adding visual regression or WCAG accessibility gates.
 - Setting up Playwright CI integration and reporting.
 
+## Clarify First
+
+Before generating tests, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task / sub-skill** — init, generate, fix-flaky, migrate, or review (routes the entire workflow)
+- [ ] **User story or flow to cover** — the happy + error paths the spec must assert (drives test generation)
+- [ ] **Locator surface** — whether the app exposes roles/labels/`data-testid` (sets locator strategy and POM resilience)
+- [ ] **Source framework (if migrating)** — Cypress or Selenium (selects the command-mapping table)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Sub-Skills
 
 This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific workflow:

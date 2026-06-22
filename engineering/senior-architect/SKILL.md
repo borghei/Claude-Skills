@@ -33,6 +33,16 @@ Architecture design and analysis tools for making informed technical decisions: 
 - Writing an ADR, planning for scalability, or reviewing a system design.
 - Generating architecture diagrams for documentation or team review.
 
+## Clarify First
+
+Before generating diagrams or an assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Project root** — the codebase directory to analyze (drives pattern detection, dependency scoring, and diagram contents)
+- [ ] **Diagram type & format** — component / layer / deployment in Mermaid / PlantUML / ASCII (sets what the generator emits)
+- [ ] **Architecture decision in question** — e.g. database choice or monolith vs microservices (selects the decision workflow and ADR)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

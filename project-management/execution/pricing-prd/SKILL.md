@@ -42,6 +42,17 @@ This skill is opinionated about the structure of a pricing PRD (distinct from a 
 
 **When NOT to use:** for the strategic question "should we change pricing at all?" (use `business-growth/pricing-strategy/`); for the financial-modeling side (use `finance/` skills); for SKU/billing implementation (engineering tickets generated from this PRD).
 
+## Clarify First
+
+Before generating the pricing PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Pricing model change** — tier / usage / hybrid / per-seat / outcome-based shift (drives the pricing-model + packaging sections)
+- [ ] **Existing customers' fate** — the grandfathering policy (drives the most-skipped grandfathering + communication sections that cause the most damage)
+- [ ] **Experiment vs hard launch** — A/B test or direct rollout (drives the experiment-design section: hypothesis, MDE, holdout)
+- [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.

@@ -22,6 +22,16 @@ metadata:
 
 The **Terraform Patterns** skill provides automated analysis of Terraform configurations for module complexity, security misconfigurations, and infrastructure best practices. It catches open ports, public buckets, missing encryption, and overly permissive IAM policies before they reach production.
 
+## Clarify First
+
+Before analyzing or scanning, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target path** — the module or environment directory to analyze (`--path`; the subject)
+- [ ] **Task** — module complexity/quality analysis vs security misconfiguration scan (selects `tf_module_analyzer` vs `tf_security_scanner`)
+- [ ] **Minimum severity / gate** — the severity bar for findings and whether it blocks a PR (`--min-severity`; changes the report and CI pass/fail)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -41,6 +41,16 @@ This skill answers four questions: **what to inject, where to inject it, how to 
 | Compliance evidence (SOC 2 A1 / DORA Art. 25) | Yes — chaos runs produce auditable resilience-testing evidence |
 | Improving SLOs / error budgets | Pair with `engineering/observability-designer` — chaos surfaces SLO violations |
 
+## Clarify First
+
+Before designing the experiment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target & fault type** — the service and what to inject (dependency-timeout, network, pod-kill, resource exhaustion) (drives the experiment doc via `--target`/`--fault`)
+- [ ] **Steady-state hypothesis** — the metric that defines "healthy" and the expected behavior under fault (the hypothesis the experiment tests)
+- [ ] **Blast radius caps** — user count, % targeted, duration, and abort triggers (sizes the experiment via `blast_radius_calculator.py`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

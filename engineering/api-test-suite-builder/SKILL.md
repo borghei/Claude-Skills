@@ -34,6 +34,16 @@ Scan API route definitions across frameworks (Next.js App Router, Express, FastA
 - Security audit — generate adversarial input tests.
 - Performance validation — create load-test baselines.
 
+## Clarify First
+
+Before generating the suite, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target framework** — Vitest+Supertest, Pytest+httpx, or k6 (determines the emitted test-file format via `--framework`)
+- [ ] **Spec or routes source** — an OpenAPI spec or the source files to scan (the input the generator parses)
+- [ ] **Test scope** — auth, input validation, contract, load, or the full matrix (which test categories get generated)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

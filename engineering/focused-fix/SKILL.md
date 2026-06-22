@@ -31,6 +31,16 @@ The **Focused Fix** skill enforces a disciplined minimal-change approach to bug 
 - A hotfix or release-blocker needs a low-risk, reviewable change set
 - The user asks "what is the minimal change to fix X?" or "which files do I need to touch for this bug?"
 
+## Clarify First
+
+Before scoping the fix, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Observable failure** — the exact symptom, repro steps, and expected vs actual behavior (the bug description the analyzer matches against, and what the fix must resolve — not a guess at the cause)
+- [ ] **Codebase path & file types** — which directory and extensions to search (sets `--path`/`--extensions`)
+- [ ] **Minimal vs structural** — confirm this is a focused fix, not a refactor (determines whether out-of-scope "while I'm here" changes are rejected)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

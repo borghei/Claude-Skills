@@ -39,6 +39,17 @@ spec actually ship.
 - Risk profile (greenfield vs production-impacting)
 - Feature-flag and rollout posture
 
+## Clarify First
+
+Before generating the repo plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The PRD or spec** — the user-facing capabilities to decompose (drives the epic→ticket tree)
+- [ ] **Target ship window** — one sprint, month, or quarter (drives ticket sizing and PR sequencing)
+- [ ] **Team composition** — FE, BE, ML, mobile (decides parallel paths and vertical-slice tickets)
+- [ ] **Feature-flag and rollout posture** — flagged/dark-launch vs direct ship (drives PR sequencing and definition-of-done)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Decompose a PRD into tickets

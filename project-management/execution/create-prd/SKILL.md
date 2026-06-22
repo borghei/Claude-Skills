@@ -33,6 +33,17 @@ Structured product requirements document creation using a proven 8-section frame
 - **Feature Expansion** -- Adding significant functionality to an existing product that requires cross-team alignment.
 - **Stakeholder Alignment** -- Need a single document that answers "what are we building and why?" for everyone involved.
 
+## Clarify First
+
+Before generating the PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Core problem** — one sentence in the user's words; who hurts and how (drives Background + Objective)
+- [ ] **Target reader** — exec, engineering, or mixed (sets altitude and which of the 8 sections matter most)
+- [ ] **Success metric** — the SMART KR that defines "it worked" (drives Objective)
+- [ ] **Scope boundary** — what is explicitly NOT in this release (drives Solution P0/P1/P2 + Release)
+
+Stop rule: ask only the 2–3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the PRD.
+
 ## Quick Start
 
 ```bash

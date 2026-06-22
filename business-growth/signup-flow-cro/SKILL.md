@@ -37,6 +37,17 @@ Production-grade signup and registration optimization framework covering authent
 
 ---
 
+## Clarify First
+
+Before optimizing the signup flow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Flow type** — free trial, freemium, paid, or waitlist (determines friction tolerance and minimum field set)
+- [ ] **B2B or B2C** — B2B tolerates more fields; B2C needs minimal friction (sets SSO priority and field count)
+- [ ] **Current fields + completion rate + drop-off** — baseline and the friction point to cut (each removed field ~+10%)
+- [ ] **Data truly needed before first product use** — separates must-have fields from those to defer or enrich (the "Before First Use" test)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit.
+
 ## Initial Assessment
 
 ### Required Context

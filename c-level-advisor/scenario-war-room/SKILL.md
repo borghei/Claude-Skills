@@ -43,6 +43,19 @@ The Scenario War Room models cascading what-if scenarios across all business fun
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The (maximum 3) variables that actually keep leadership awake** — the entire model is built around these; the wrong variables produce a useless scenario
+- [ ] **Probability, timeline, and quantified impact for each variable** — "revenue drops" is not actionable; "$420K ARR at risk over 60 days" is, and severity levels depend on it
+- [ ] **Current baseline** (ARR, runway in months, headcount) — cascade and severity math (e.g., runway going 14→8 months) requires the starting numbers
+- [ ] **Company stage** — common scenario patterns and what counts as existential differ by stage
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## The 6-Step Cascade Model
 
 ### Step 1: Define Scenario Variables (Maximum 3)

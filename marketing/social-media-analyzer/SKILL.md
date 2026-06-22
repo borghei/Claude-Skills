@@ -30,6 +30,17 @@ Campaign performance analysis with engagement metrics, ROI calculations, and pla
 
 ---
 
+## Clarify First
+
+Before analyzing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Platform** — Instagram, Facebook, Twitter/X, LinkedIn, or TikTok — selects the correct benchmark set for comparison
+- [ ] **Post/campaign data** — likes, comments, shares, saves, reach per post — required; reach must be unique users, not impressions
+- [ ] **Ad spend** — total spend for the period — determines whether ROI/CPE/ROAS is calculated
+- [ ] **Analysis goal** — full audit, top-performer patterns, ROI, or competitor comparison — focuses the output artifact
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Analysis Workflow
 
 Analyze social media campaign performance:

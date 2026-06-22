@@ -42,6 +42,16 @@ The single most common reason teams fail to deliver predictably is that stories 
 - The team is splitting horizontally by layer (DB, API, UI) -- that produces non-shippable slices and defeats the point.
 - The work is a spike (timeboxed investigation); spikes are intentionally not user-facing.
 
+## Clarify First
+
+Before splitting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The original story's user value in one sentence** — no clear value means reframe the problem (`create-prd/`), not split (gates the whole procedure, Step 1)
+- [ ] **What ships next** — beta cohort vs general availability (changes which pattern applies: happy-path-only vs full business rules)
+- [ ] **Why it's too big** — exceeds cycle time, fails INVEST-S, or has been "almost done" for sprints (points to the first applicable pattern in the decision tree)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. **State the user value** of the original story in one sentence. (No clear value? Reframe the problem via `create-prd/`, don't split.)

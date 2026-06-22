@@ -36,6 +36,17 @@ cost-optimization, disaster-recovery, multi-region, iam, security, migration
 - Auditing security posture against CIS benchmarks.
 - Comparing AWS / GCP / Azure for a workload.
 
+## Clarify First
+
+Before designing the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target cloud(s)** — AWS / GCP / Azure or multi-cloud (every topology, service mapping, and Terraform differs)
+- [ ] **Workload profile & scale** — traffic, statefulness, and compute type (drives the VPC / compute / database topology and sizing)
+- [ ] **RTO/RPO targets** — recovery objectives (selects Backup / Pilot Light / Warm Standby / Multi-Site DR)
+- [ ] **Budget / cost constraint** — the spend ceiling (drives right-sizing and Reserved vs Savings Plan vs Spot)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

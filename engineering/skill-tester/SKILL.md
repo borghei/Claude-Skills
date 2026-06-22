@@ -31,6 +31,16 @@ Validate skill packages for structure compliance, test Python scripts for syntax
 - Auditing an existing skill's structure, scripts, and quality.
 - Embedding a quality gate into a CI/CD pipeline.
 
+## Clarify First
+
+Before validating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target skill path** — the skill directory to validate, test, and score (the subject of all three tools)
+- [ ] **Target tier** — BASIC / STANDARD / POWERFUL (`--tier`; sets the required sections, script count, and structural thresholds)
+- [ ] **Pass bar** — the minimum quality score / whether failures gate CI (`--minimum-score`, exit codes)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

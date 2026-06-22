@@ -48,6 +48,16 @@ Plus when applicable:
 - Localization (RTL, long-string, currency, date format)
 - Cross-platform (browsers, devices, OS versions)
 
+## Clarify First
+
+Before generating scenarios, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Feature type** — form, browse/list, real-time/collab, file upload, payment, or bulk operation (drives the scenario count per category in the coverage rubric)
+- [ ] **Risk / sensitivity profile** — auth, payment, or PII involved (scales up security and concurrency coverage in the risk-weighted selection)
+- [ ] **The spec's inputs, outputs, and side effects** — what users provide, expect, and what changes in the system (drives edge cases in Step 3 and error handling in Step 4)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Spec read

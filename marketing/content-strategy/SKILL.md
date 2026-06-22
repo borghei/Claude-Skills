@@ -41,6 +41,17 @@ content strategy, content planning, content pillars, topic clusters, content cal
 
 ---
 
+## Clarify First
+
+Before building the strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business goal for content** — traffic, leads, brand awareness, or thought leadership (drives pillar selection and funnel balance)
+- [ ] **ICP / target audience** — industry, role, seniority (drives audience research and topic prioritization)
+- [ ] **Current content state** — starting fresh, some content, or mature library (sets strategy-from-scratch vs. audit path)
+- [ ] **Publishing capacity** — writers and cadence available per week/month (drives the editorial calendar)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Build a Content Strategy from Scratch

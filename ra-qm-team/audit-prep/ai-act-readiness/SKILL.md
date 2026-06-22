@@ -123,6 +123,16 @@ Additional requirements:
 
 ---
 
+## Clarify First
+
+Before running the readiness assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **AI system risk class** — high-risk (Annex III), GPAI, or limited-risk (determines whether to run the 8-week high-risk sprint or the 4-week GPAI sprint, and which checklist applies)
+- [ ] **Trigger event** — Aug 2026 high-risk deadline, scheduled notified-body conformity assessment, GPAI obligations, or annual review (sets sprint length and scope)
+- [ ] **Your role** — provider, deployer, or importer (determines which obligation set is assessed)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Quick start
 
 1. **Run readiness score**: `python3 scripts/ai_act_readiness_score.py --config ai-system.yaml`

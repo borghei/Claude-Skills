@@ -41,6 +41,16 @@ This complements `wwas/` (Why-What-Acceptance format) and `job-stories/` (JTBD f
 
 **When NOT to use:** pure technical task lists with no user-facing outcome (use a simpler checklist); ad-hoc bug triage (different lifecycle); unscoped work (send to `discovery/` first).
 
+## Clarify First
+
+Before grading the backlog, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The stories** — the actual backlog items in the user's words, with their acceptance criteria (drives every INVEST score and which slicing recipe applies)
+- [ ] **Team's Definition of Ready** — what "ready" means for THIS team (DoR must be team-authored to be enforced; sets the promote/refine/return gate)
+- [ ] **Sprint size / "small enough" bar** — sprint length and rough capacity (sets how far a story must be split before it counts as Small)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -31,6 +31,16 @@ Corrective and Preventive Action (CAPA) management within Quality Management Sys
 
 ---
 
+## Clarify First
+
+Before starting a CAPA investigation, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Trigger event and objective evidence** — what happened, where/when, and what records exist (drives the problem statement and RCA scope)
+- [ ] **Severity classification** — Critical, Major, or Minor (sets investigation team composition, action depth, and verification timeline)
+- [ ] **Source** — complaint, audit finding, recurring NC, or trend (determines whether a CAPA is required and the regulatory linkage)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the CAPA record.
+
 ## CAPA Investigation Workflow
 
 Conduct systematic CAPA investigation from initiation through closure:

@@ -34,6 +34,16 @@ Design scalable, cost-effective AWS architectures for startups with infrastructu
 - Setting up CI/CD (CodePipeline, CodeBuild) or migrating workloads to AWS.
 - Hardening IAM, VPC, encryption, Cognito, WAF, or planning monitoring (CloudWatch, X-Ray).
 
+## Clarify First
+
+Before designing the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **App type & scale** — workload type and expected traffic (selects the pattern: serverless, three-tier, microservices, data-pipeline, or multi-region)
+- [ ] **IaC target** — CloudFormation/SAM, CDK, or Terraform (sets the template format `serverless_stack.py` generates)
+- [ ] **Budget & compliance constraints** — cost ceiling and any regulatory needs (drive service selection and the cost-optimization recommendations)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 These are Python classes imported from `scripts/` (no CLI). See [references/tool-reference.md](references/tool-reference.md) for full parameters, methods, and examples.

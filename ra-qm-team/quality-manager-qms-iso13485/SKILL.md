@@ -39,6 +39,16 @@ ISO 13485:2016 Quality Management System implementation, maintenance, and certif
 - Modernizing to a digital/electronic QMS (Part 11 / Annex 11)
 - Integrating AI-enabled device or cybersecurity requirements into the QMS
 
+## Clarify First
+
+Before building or assessing the QMS, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — QMS implementation/gap analysis, internal audit, process validation, or supplier qualification (picks the workflow and script)
+- [ ] **Standard scope** — ISO 13485 only, FDA QMSR transition, or digital QMS (Part 11 / Annex 11) (determines which requirements and retained FDA items apply)
+- [ ] **Certification stage** — building from scratch, remediating gaps, or certification readiness (sets the depth)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Quick Start
 
 ```bash

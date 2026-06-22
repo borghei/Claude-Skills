@@ -132,6 +132,16 @@ Audit gap: ROPA incomplete, stale, or missing for processing activities surfaced
 
 ---
 
+## Clarify First
+
+Before running the audit-prep, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit trigger** — supervisory-authority inquiry, customer DPA audit, internal audit, or annual self-assessment (sets the 4/8/12-week sprint and whether formal response drafting is needed)
+- [ ] **Org readiness** — well-prepared vs gaps remaining (picks the 4-week vs 8-week sprint)
+- [ ] **Processing scope and role** — controller vs processor, and which activities/ROPA are in scope (drives the ROPA and DPA focus)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the readiness assessment.
+
 ## Quick start
 
 1. **Run readiness score**: `python3 scripts/gdpr_readiness_score.py --config gdpr-controls.yaml`

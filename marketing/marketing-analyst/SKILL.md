@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as a senior marketing analyst, delivering campaign performance analysis, multi-touch attribution, marketing mix modeling, ROI measurement, and data-driven budget optimization.
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Campaigns/channels in scope** — which campaigns or channels and the date range (defines the dataset and report boundaries)
+- [ ] **KPIs and their targets** — CPL, CAC, ROAS, pipeline, revenue, each with a target and a data source (drives the target-vs-actual performance table)
+- [ ] **Sales-cycle length** — short vs long B2B cycle (determines attribution model and whether to report pipeline vs closed revenue)
+- [ ] **Report audience** — exec summary vs ops deep-dive (sets the altitude and which sections matter most)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Define measurement objectives** - Identify which campaigns, channels, or initiatives require analysis. Confirm KPIs (CPL, CAC, ROAS, pipeline, revenue). Checkpoint: every KPI has a target and a data source.

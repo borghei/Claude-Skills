@@ -39,6 +39,18 @@ lead, leads, prospect, prospecting, sales, outbound, ICP, ideal customer profile
 
 ---
 
+## Clarify First
+
+Before scoring leads, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **ICP definition** — the must-have / nice-to-have / disqualifier attributes; this IS the scoring model
+- [ ] **Lead list columns** — company, industry, size, country at minimum; missing fields mean no usable score
+- [ ] **GTM motion** — PLG vs sales-led vs channel changes which signals weight highest and the outreach-hook framing
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Score a Lead List in 10 Minutes

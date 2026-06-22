@@ -34,6 +34,17 @@ Production-grade SaaS pricing framework covering the three pricing axes (value m
 - Competitor pricing shifts require a positioning response
 - The user says "our pricing feels off" or asks for a pricing audit
 
+## Clarify First
+
+Before designing the pricing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Operating mode** — design from scratch, optimize existing, or price increase (each has a different validation gate and workflow)
+- [ ] **Value metric** — how price scales (seats, usage, etc.) (must be locked before tiers and price points)
+- [ ] **Current pricing + the symptom** — existing tiers and the specific failure, e.g. "middle tier too narrow" (optimize mode needs a named failure mode before any change)
+- [ ] **Target segment + willingness-to-pay** — SMB vs enterprise price sensitivity (sets the value corridor and price points)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Operating Modes
 
 - **Mode 1 — Design From Scratch:** No pricing exists or full rebuild needed. Work value metric → tier structure → price points → page design. *Validate:* value metric chosen before tier design; tiers locked before price points; price points tested against the corridor before page design.

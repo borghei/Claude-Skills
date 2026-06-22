@@ -36,6 +36,16 @@ The canvas has two sides. The **Customer Profile** describes the customer's worl
 - **Pricing and packaging** -- pains/gains rank-ordering informs which features go in which tier.
 - **Sales enablement** -- pain relievers and gain creators become talking points and proof points.
 
+## Clarify First
+
+Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The one segment** — the VPC is segment-level; one canvas per segment (defines whose Customer Profile you fill)
+- [ ] **Customer evidence source** — interviews/synthesis vs team assumptions (jobs/pains/gains in the team's own words is the #1 way the canvas becomes fiction)
+- [ ] **Which fit level** — problem-solution / product-market / business-model (sets the validation method: interviews vs behavior vs unit economics)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Pick one segment; run 5-7 interviews via `discovery/customer-interview-script/`.

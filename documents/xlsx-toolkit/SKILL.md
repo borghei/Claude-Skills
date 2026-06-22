@@ -40,6 +40,16 @@ xlsx, Excel, spreadsheet, workbook, financial model, formula audit, hidden sheet
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose (pre-send leak check, financial-model review, or handoff portability check)** — selects the workflow and what you flag
+- [ ] **Recipient context (external partner, another team, their machine)** — sets the tolerance for hidden sheets and external links
+- [ ] **Which sheets are inputs vs calculations (for model review)** — drives where to focus formula-density reading
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

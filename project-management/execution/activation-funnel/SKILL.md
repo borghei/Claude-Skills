@@ -42,6 +42,16 @@ The activation step is the centerpiece. Sean Ellis defined the "activated user" 
 
 **When NOT to use:** pre-PMF discovery (use `discovery/`); top-of-funnel channel attribution (marketing tools); revenue-cohort retention (data-analytics domain); when events are not instrumented.
 
+## Clarify First
+
+Before analyzing the funnel, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Stages + counts** — the actual events and the user count at each step (drives every conversion/drop-off number and the bottleneck call-out)
+- [ ] **Activation event** — the Sean Ellis "aha" event that defines an activated user (sets the funnel's centerpiece stage and the activation rate)
+- [ ] **Cohort window** — the time period the counts are drawn from (snapshot funnels mix cohorts and lie; this scopes every number)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

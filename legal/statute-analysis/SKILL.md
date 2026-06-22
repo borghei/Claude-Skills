@@ -58,6 +58,16 @@ Understanding the source hierarchy is the foundation of statutory analysis.
 
 ---
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The exact statute/regulation and its in-force version** — analyzing a superseded or repealed version yields wrong obligations; verify currency before extracting anything
+- [ ] **Your role under it** — provider vs deployer, controller vs processor — determines which obligations actually bind you and which to extract
+- [ ] **Jurisdiction(s) in scope** — needed to flag cross-jurisdictional conflicts and preemption; definitions differ across regimes and must not be cross-pollinated
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the analysis.
+
 ## Preliminary Steps
 
 Before interpreting any statutory provision, complete these checks:

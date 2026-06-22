@@ -35,6 +35,16 @@ Architectural patterns for AI agents that get better with use. Most agents are s
 - Designing self-correcting feedback loops and regression alarms for agent behavior.
 - Graduating recurring solutions into reusable skill packages.
 
+## Clarify First
+
+Before capturing or promoting learnings, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Loop stage** — remember / extract / promote / review (routes the sub-skill and the whole workflow)
+- [ ] **Source data** — which session logs, `MEMORY.md`, and rules dir to operate on (the subject the tools read and write)
+- [ ] **Promotion bar** — min occurrences / confidence threshold for graduating a learning into an enforced rule (`--min-occurrences`; decides what is kept vs discarded)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Sub-Skills
 
 Compound sub-skill architecture — each file in `skills/` handles one step of the improvement loop:

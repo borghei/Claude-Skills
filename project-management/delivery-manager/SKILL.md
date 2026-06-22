@@ -33,6 +33,17 @@ The agent acts as an expert delivery manager coordinating continuous software de
 - Evaluating a change request or calculating SLA/error-budget burn
 - Assessing delivery maturity or interpreting DORA metrics
 
+## Clarify First
+
+Before generating the plan or report, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which task** — release readiness/Go-No-Go, deployment strategy, incident response, or SLA/error-budget tracking (each is a different workflow and artifact)
+- [ ] **Exit criteria or SLA target** — the bar the release or service is measured against (Go/No-Go requires all criteria met; SLA math needs the target)
+- [ ] **Deployment strategy** — blue-green, canary, rolling, or big-bang, when shipping (sets the rollout gates and rollback path)
+- [ ] **Incident severity** — SEV-1 through SEV-4, when responding (sets response time, escalation, and whether a post-mortem is mandatory)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

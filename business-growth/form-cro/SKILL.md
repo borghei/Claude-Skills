@@ -36,6 +36,17 @@ Production-grade form optimization framework covering field-cost analysis, layou
 
 ---
 
+## Clarify First
+
+Before optimizing the form, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Form type** — lead capture, contact, demo, application, or checkout (sets the optimal field count and playbook)
+- [ ] **Current fields + which are used in follow-up** — reveals which fields to cut or enrich (the core of field-cost analysis)
+- [ ] **Current completion rate + where users abandon** — baseline and the specific friction point to target
+- [ ] **Compliance requirements** — GDPR/HIPAA fields that cannot be removed (constrains the field reduction)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit.
+
 ## Initial Assessment
 
 ### Required Context

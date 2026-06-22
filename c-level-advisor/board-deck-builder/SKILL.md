@@ -45,6 +45,19 @@ board deck, investor update, board meeting, board pack, investor relations, quar
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Deck type and audience** (quarterly board, monthly update, fundraising, emergency) — sets slide count, structure, and which sections appear
+- [ ] **The headline message this period** (beat plan / missed plan / need a decision) — drives the opening frame and whether the SOUF bad-news structure is needed
+- [ ] **Which metrics the board actually tracks** (and their targets) — the metrics dashboard should show only these, with RAG status against targets
+- [ ] **Specific asks or decisions needed from the board** — the asks section is the highest-value slide and must be concrete and owner-assigned
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Deck Types and Structure
 
 ### Deck Type Selection

@@ -49,6 +49,19 @@ M&A, mergers and acquisitions, due diligence, acquisition, acqui-hire, integrati
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which side of the deal** (acquiring vs. being acquired) — the entire playbook, checklists, and red flags differ by side
+- [ ] **Which deliverable is needed** (strategic rationale, due diligence, valuation, deal structure, 100-day integration, or sell-side prep) — each has its own framework
+- [ ] **What you are really buying or selling** (talent, technology, customers, or market access) — drives the rationale test, the buy-vs-build call, and where DD focuses
+- [ ] **The target's core financials** (ARR, growth rate, NRR, customer concentration) — valuation multiples and adjustment factors are keyed to these
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Acquiring: Decision Framework
 
 ### Strategic Rationale Decision Tree

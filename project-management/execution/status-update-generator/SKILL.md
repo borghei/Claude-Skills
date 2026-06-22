@@ -37,6 +37,17 @@ Weekly status updates eat 30-90 minutes of every PM's Friday afternoon and they 
 
 **When NOT to use:** real-time incident response (use `delivery-manager/` incident skills), deep retrospectives (use `sprint-retrospective/`), or one-to-one stakeholder reporting needing custom framing (use `roadmap-communication/`).
 
+## Clarify First
+
+Before generating the update, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Traffic-light verdict (R/Y/G)** — the human judgment the tool will not infer; sets the whole frame and must be defensible (prevents watermelon status)
+- [ ] **Audience** — sponsor, VP, or steering committee (sets altitude and what belongs in Highlights vs Asks)
+- [ ] **This period's wins + blockers with real numbers** — quantitative claims must come from telemetry, not ticket titles (fills Highlights and Blockers)
+- [ ] **The asks** — the specific decisions or help you need from the reader this week (drives the Asks section)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 | Tool | Purpose | Command |

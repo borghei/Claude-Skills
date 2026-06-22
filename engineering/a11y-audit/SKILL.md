@@ -22,6 +22,16 @@ metadata:
 
 The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inputs, and insufficient color contrast early in development.
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target & scope** — which HTML files, directory, or CSS to scan (determines what gets checked and the `--file`/`--dir`/`--css` arguments)
+- [ ] **Conformance level** — A, AA, or AAA target (sets contrast thresholds and which violations are CRITICAL vs WARNING vs INFO)
+- [ ] **Use context** — one-off remediation vs CI gate (drives `--strict` gating and JSON output)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -21,6 +21,17 @@ Create clear, empathetic End-of-Life (EOL) communications that preserve customer
 
 The work runs in four phases: **(1) Pre-announcement planning** (what, why, who, when, what support, what risks), **(2) Craft the message** (transition narrative, customer impact, transition solution, timeline, one CTA), **(3) Segment and distribute** (different message and channel per segment), **(4) Support and monitor** (support FAQ, migration tracking, churn watch). See the playbook reference for the full framework, templates, and timeline guidance.
 
+## Clarify First
+
+Before crafting the EOL communication, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **What is being sunset and why** — drives the transition narrative and Phase 1 planning; a vague "why" reads as abandonment
+- [ ] **Replacement / migration path** — drives the transition solution and the single CTA; if it is broken or absent, do not announce yet
+- [ ] **Timeline and key dates** — drives the timeline section and varies sharply by product type (API vs paid product vs free feature)
+- [ ] **Customer segments affected** — drives the Phase 3 segment/channel matrix; high-value accounts need different message and outreach than self-serve
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## When to Use
 
 - **Product sunset** -- Discontinuing an entire product or product line.

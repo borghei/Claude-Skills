@@ -43,6 +43,19 @@ board meeting, executive deliberation, strategic decision, C-suite, multi-agent,
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The exact decision to be made** (stated in one sentence) — the whole protocol synthesizes toward a single decision; a fuzzy topic produces a fuzzy synthesis
+- [ ] **Which roles to activate** — the role-activation matrix decides whose perspectives appear in Phase 2; the wrong roster means a missing voice or noise
+- [ ] **What data and context is available** vs. assumed — Phase 2 contributions tag confidence and source, so known facts must be separated from guesses
+- [ ] **Reversibility and stakes of the decision** — drives whether the full 6-phase protocol or an abbreviated advisory meeting is appropriate
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## The 6-Phase Protocol
 
 ```

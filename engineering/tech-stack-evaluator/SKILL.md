@@ -36,6 +36,16 @@ Evaluate and compare technologies, frameworks, and cloud providers with data-dri
 
 **When NOT to use:** trivial decisions between similar tools (use team preference), mandated technology choices (decision already made), emergency production issues (use monitoring tools).
 
+## Clarify First
+
+Before the evaluation, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Candidates** — the specific frameworks / libraries / cloud providers to compare (the subject of the analysis)
+- [ ] **Analysis type** — comparison / TCO / ecosystem health / security / migration (selects which module runs)
+- [ ] **Decision criteria & weights** — which of the 8 categories matter most for this context (drives the weighted scoring and recommendation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 All scripts are Python library modules — import the class and call its methods. See `references/tool-reference.md` for full parameters and outputs.

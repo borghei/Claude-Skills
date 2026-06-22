@@ -35,6 +35,16 @@ scikit-learn, pytorch, tensorflow, spark, airflow
 - Training, evaluating, or deploying an ML model.
 - Estimating treatment effects from observational data.
 
+## Clarify First
+
+Before running an analysis or pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — A/B test design / feature engineering / model evaluation / causal inference (selects the script and workflow)
+- [ ] **Dataset & target variable** — what you are modeling or measuring (drives feature generation and leakage validation)
+- [ ] **Decision metric & minimum effect** — the metric and the smallest effect worth detecting (drives power analysis and sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Script | Purpose |

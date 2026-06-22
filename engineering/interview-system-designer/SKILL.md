@@ -31,6 +31,16 @@ Design role-specific interview loops, generate competency-based question banks w
 - Generating scorecards, debrief guides, or interviewer assignments.
 - Analyzing interviewer bias or calibration drift across candidates and time.
 
+## Clarify First
+
+Before designing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — design an interview loop, generate a question bank, or calibrate hiring (selects `loop_designer.py` vs `question_bank_generator.py` vs `hiring_calibrator.py`)
+- [ ] **Role & level** — the role and seniority (junior/senior/staff+) (drives loop rounds, time allocation, and rubric calibration via `--role`/`--level`)
+- [ ] **Competencies** — which competencies the loop or questions must cover (sets `--competencies` and the question-bank scope)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 The Python tools live at the skill root (not in `scripts/`). All support `--help`, JSON/text output.

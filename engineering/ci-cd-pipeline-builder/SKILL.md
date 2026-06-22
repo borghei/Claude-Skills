@@ -37,6 +37,16 @@ Generate production-grade CI/CD pipelines from detected project stack signals. A
 - Implementing security scanning in the pipeline
 - Setting up multi-environment deployment (staging, production)
 
+## Clarify First
+
+Before generating the pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target platform** — GitHub Actions, GitLab CI, CircleCI, or Buildkite (sets the YAML dialect `pipeline_generator.py` emits via `--platform`)
+- [ ] **Project stack** — language/runtime, package manager, and whether Docker/K8s/Terraform are present (drives stack detection, caching, and which stages are generated)
+- [ ] **Deployment strategy & gates** — blue-green, canary, rolling, or CI-only, plus any manual approval gates (determines the deploy stages and conditions)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

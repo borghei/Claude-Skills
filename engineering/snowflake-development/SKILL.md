@@ -23,6 +23,16 @@ metadata:
 
 The **Snowflake Development** skill provides tools for analyzing and optimizing Snowflake SQL queries, recommending warehouse sizing, and enforcing Snowflake-specific best practices. Helps data engineers reduce costs and improve query performance.
 
+## Clarify First
+
+Before analyzing or sizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Action** — analyze / optimize / warehouse-sizing (`--action`; selects the workflow)
+- [ ] **SQL file or query** — the specific query(ies) to optimize (`--file`; the subject of the analysis)
+- [ ] **Workload type & data volume** — ETL / BI / ad-hoc and the GB scale (`--workload`/`--data-volume`; drives the warehouse recommendation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -32,6 +32,17 @@ The agent acts as an expert program manager coordinating complex multi-project i
 - Tracking benefits realization against the original business case.
 - Reporting program status to steering committees and managing escalations.
 
+## Clarify First
+
+Before generating the program artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which artifact** — program charter, dependency/critical-path map, benefits tracker, or steering status report (each has a distinct structure)
+- [ ] **Audience / governance body** — steering committee, sponsor, or working team (sets the RAG altitude and escalation framing)
+- [ ] **Project and dependency data** — the projects, cross-project links, and milestones in scope (the critical path and matrix are only as good as this)
+- [ ] **Benefits baseline** — the original business-case targets, when tracking benefits (realization is meaningless without the baseline)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

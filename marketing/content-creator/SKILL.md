@@ -38,6 +38,17 @@ content creation, blog posts, SEO, brand voice, social media, content calendar, 
 
 ---
 
+## Clarify First
+
+Before creating the content, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Primary keyword & topic** — the search target and angle (drives SEO optimization and blog structure)
+- [ ] **Content type & platform** — blog post, LinkedIn, X, Instagram (selects the framework template and length)
+- [ ] **Brand voice** — archetype + formality/tone, or sample content to baseline against (keeps voice consistent across pieces)
+- [ ] **Target audience** — who they are and their expertise level (sets readability target and messaging)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Brand Voice Development

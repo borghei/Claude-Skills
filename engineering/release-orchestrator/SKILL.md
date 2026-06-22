@@ -36,6 +36,16 @@ The agent runs pre-flight validation, generates changelogs from conventional com
 - Scoring deployment readiness across tests, quality, security, and rollback.
 - Wiring release validation into a CI/CD pipeline or pre-push hook.
 
+## Clarify First
+
+Before orchestrating the release, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Base branch & ref range** — what HEAD is compared against (drives pre-flight branch-sync and the changelog `--from`/`--to`)
+- [ ] **Release type** — hotfix / patch / minor / major / pre-release (sets the branch pattern and bump rule)
+- [ ] **Gate strictness** — block on CONDITIONAL (60-79) or only on NO-GO (<60) (decides whether the pipeline halts)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

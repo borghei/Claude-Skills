@@ -36,6 +36,17 @@ Tools and guidance for drafting GDPR-compliant privacy notices across EU/EEA jur
 
 ---
 
+## Clarify First
+
+Before generating the notice, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Notice type** — website, applicant, employee, b2b, b2c, or combined — selects which sections and audience-specific content appear (e.g. works council/monitoring for employee, Art. 14 source disclosure for b2b)
+- [ ] **Jurisdiction** — DE/FR/AT/IT/ES/NL/BE/IE/UK — adds local requirements (DE Widerspruchsrecht/TDDDG, FR CNIL, UK ICO) that the compliance checker scores
+- [ ] **Legal basis per processing purpose** — Art. 13(1)(c) requires a specific basis per purpose; a generic "applicable law" statement fails the check
+- [ ] **Special features: cookies / AI / international transfers** — toggle sections 6, 12, and 13 and the AI Act Art. 50 transparency disclosures
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the notice.
+
 ## Tools
 
 ### Privacy Notice Scaffolder

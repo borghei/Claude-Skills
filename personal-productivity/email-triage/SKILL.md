@@ -27,6 +27,18 @@ email, inbox, inbox zero, triage, unsubscribe, mailing list, mailbox, gmail, out
 
 ---
 
+## Clarify First
+
+Before triaging, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Inbox export fields** — subject, sender, snippet drive classification accuracy; missing columns degrade the buckets
+- [ ] **Priority / VIP senders** — who always routes to reply_now regardless of content
+- [ ] **Unsubscribe tolerance** — purge all marketing vs keep newsletters you value; sets how aggressive the unsubscribe/delete buckets are
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 1. Export inbox to CSV with columns: `subject,sender,snippet,received_at`

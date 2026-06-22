@@ -54,6 +54,19 @@ operating system, EOS, Entrepreneurial Operating System, Scaling Up, Rockefeller
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Company size and stage** — the framework recommendation (EOS / Scaling Up / OKR-native / Holacracy) and implementation timeline are driven primarily by headcount
+- [ ] **What is actually broken** (no scorecard, misaligned priorities, recurring unresolved issues, meeting overload) — determines which of the six components to build first
+- [ ] **Founder operating style** (operational vs. visionary) and whether the company is engineering-led or sales-led — tips the framework choice within a given size band
+- [ ] **What rhythms and metrics already exist** — so the new OS replaces meetings rather than stacking on top and causing meeting fatigue
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Operating System Selection
 
 ### Decision Tree

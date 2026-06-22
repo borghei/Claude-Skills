@@ -43,6 +43,17 @@ The synthesis approach is grounded in Teresa Torres' Continuous Discovery Habits
 - Usability test debriefs -- use a UX research-specific workflow.
 - Sales call analysis for win/loss -- use `business-growth/` skills.
 
+## Clarify First
+
+Before synthesizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The transcripts** — how many (3-20) and their quality (synthesis is bounded by interview quality; thin input yields thin themes)
+- [ ] **Target outcome** — the measurable outcome that becomes the root of the opportunity solution tree
+- [ ] **Evidence threshold** — what counts as a theme (default ≥3 snippets from ≥2 participants; raising/lowering it changes which clusters surface)
+- [ ] **Output consumer** — markdown / mermaid / Notion / Linear (sets the `--format` and shape of the deliverable)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

@@ -27,6 +27,17 @@ marketplace, two-sided market, three-sided market, multi-sided market, supply, d
 
 ---
 
+## Clarify First
+
+Before scoring, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Measurement unit** — whole marketplace or one liquid segment (city/category)? Liquidity beats GMV; a blended global number can hide a broken core (sets what the score actually describes)
+- [ ] **Category + take rate** — benchmarks vary widely (Etsy ~6.5% vs Uber ~25-30%), so the take-rate-sustainability dimension is meaningless without the category
+- [ ] **Supply, demand, and fill rate** — drive the liquidity and balance dimensions, usually the binding constraint
+- [ ] **Repeat rate** — drives repeat-strength; a low repeat often signals off-platform leakage rather than a healthy marketplace
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the score.
+
 ## Quick Start
 
 ```bash

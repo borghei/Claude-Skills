@@ -34,6 +34,17 @@ The agent transforms output-based roadmaps ("build feature X") into outcome-driv
 - Running quarterly planning and aligning teams around impact rather than deliverables.
 - Anchoring roadmap items to customer value and OKRs.
 
+## Clarify First
+
+Before transforming the roadmap, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Customer segment + business impact per item** — fills the "Enable [segment] to [outcome] so that [impact]" statement; without it the tool only emits placeholder templates
+- [ ] **Target quarter per initiative** — drives Now/Next/Later horizon placement and the detail/commitment level
+- [ ] **Initiative type** — feature / improvement / infrastructure drives the strategic-question and metric suggestions
+- [ ] **Success metric per Now/Next item** — the primary/secondary/counter-metrics; Later items intentionally stay metric-light to avoid false precision
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

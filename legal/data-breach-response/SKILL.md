@@ -37,6 +37,17 @@ Incident response and legal compliance for personal data breaches under GDPR Art
 
 ---
 
+## Clarify First
+
+Before assessing the breach, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **T0 — the moment of awareness** — starts the 72h clock; every deadline and "time remaining" in the timeline is calculated from it
+- [ ] **Your role: controller or processor** — determines whether you notify the SA/data subjects (Art. 33/34) or only the controller (Art. 33(2))
+- [ ] **Data categories, scale, and ease of identification** — these are the DPC/EI inputs that drive the ENISA severity score and verdict (LOW/MEDIUM/HIGH/VERY HIGH)
+- [ ] **Which regulations apply** — GDPR, CCPA, HIPAA, PCI DSS, NIS2, AI Act — sets which notification deadlines and authorities the matrix produces
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Tools
 
 ### Breach Severity Calculator

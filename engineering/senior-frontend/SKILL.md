@@ -34,6 +34,16 @@ Frontend development patterns, performance optimization, and automation tools fo
 - Implementing accessible, performant Server/Client Component architecture.
 - Reviewing frontend code against React/TypeScript/a11y best practices.
 
+## Clarify First
+
+Before scaffolding or generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Template** — Next.js (App Router) vs React+Vite (`--template`; produces a different project structure)
+- [ ] **Features** — auth / api / forms / testing / storybook (`--features`; decides what gets generated)
+- [ ] **Generation target** — a new project vs a component/hook in an existing app (selects `frontend_scaffolder` vs `component_generator`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

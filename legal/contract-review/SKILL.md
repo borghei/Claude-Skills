@@ -38,6 +38,17 @@ Automated contract review tools that analyze agreements against organizational p
 
 ---
 
+## Clarify First
+
+Before reviewing the contract, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which side you represent** — customer/buyer vs vendor/provider flips which clauses are favorable and reverses the direction of every redline
+- [ ] **Contract type** — SaaS, services, vendor/supply, or license — sets the standard-clause baseline and which missing clauses get flagged
+- [ ] **Risk tolerance / playbook positions** — what your org treats as a deal-breaker — defines the RED vs YELLOW cutoff and the Must-Have vs Nice-to-Have tiering
+- [ ] **Deal leverage / value** — calibrates which redlines are walkaway (Tier 1) vs tradeable concessions (Tier 3)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the review.
+
 ## Tools
 
 ### Contract Analyzer

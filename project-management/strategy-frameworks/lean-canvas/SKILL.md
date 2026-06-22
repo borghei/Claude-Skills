@@ -54,6 +54,16 @@ startup-focused ones (Problem, Solution, Key Metrics, Unfair Advantage).
 Same outer shape; different inner emphasis. Use Lean when problem +
 unfair advantage matter more than ops detail.
 
+## Clarify First
+
+Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The specific early-adopter segment** — named, not "everyone" (the Problem, UVP, and Channels blocks all hinge on a concrete early adopter)
+- [ ] **The top 3 problems** — for that segment (the Problem block; if you can't name them you have an idea, not a startup)
+- [ ] **Existing alternatives** — how customers solve this today (signals whether the problem is real; "they live with it" is important signal)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Problem-Segment first

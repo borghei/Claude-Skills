@@ -34,6 +34,16 @@ A story map is a 2D grid: the **backbone** (activities → steps) runs left-to-r
 - The team already has a well-prioritized, context-rich backlog.
 - Single-feature work that doesn't span multiple user activities.
 
+## Clarify First
+
+Before building the map, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The user and their end-to-end journey** — who travels it and the activities → steps in order (defines the backbone, the left-to-right spine of the map)
+- [ ] **The target release / MVP** — what must ship first vs can wait (sets where the MVP line is drawn between Release 1 and later)
+- [ ] **The map's goal** — MVP definition vs release sequencing vs cross-team alignment (changes how the body tasks are sliced and prioritized)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 - **[references/playbook.md](references/playbook.md)** — read this when building a map: story-map anatomy, the 6-step build sequence, the artifact template, map patterns (walking skeleton / thick slice / progressive enhancement), the workshop facilitation guide, troubleshooting, and success criteria.

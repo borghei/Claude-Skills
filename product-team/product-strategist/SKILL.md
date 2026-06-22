@@ -33,6 +33,16 @@ Strategic toolkit for Head of Product to drive vision, alignment, and organizati
 
 ---
 
+## Clarify First
+
+Before generating the OKRs or analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Strategy type** — growth, retention, revenue, innovation, or operational (selects the OKR template and objectives)
+- [ ] **Current and target metrics** — e.g. MAU 100k→150k, NPS 40→60 (drives measurable key results)
+- [ ] **Team structure** — the teams receiving cascaded OKRs (drives the cascade and balance scoring)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Generate OKRs for Your Team

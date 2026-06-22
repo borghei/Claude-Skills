@@ -175,6 +175,17 @@ All scripts support two output formats via the `--format` flag:
 
 ---
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — health score, churn risk, or expansion opportunity (selects which of the three scripts and its input schema)
+- [ ] **Customer segment** — Enterprise / Mid-Market / SMB (segment-aware thresholds change every Red/Yellow/Green and risk-tier cutoff)
+- [ ] **Previous-period data availability** — without it, trend analysis (declining vs improving) cannot run
+- [ ] **Renewal date / contract end** — drives the time-to-renewal urgency multiplier in churn scoring
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the output.
+
 ## How to Use
 
 ### Quick Start

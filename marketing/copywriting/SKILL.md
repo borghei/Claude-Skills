@@ -41,6 +41,17 @@ copywriting, marketing copy, conversion copy, headline writing, CTA copy, landin
 
 ---
 
+## Clarify First
+
+Before writing the copy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Page type** — homepage, landing, pricing, feature, or product page (selects the page structure template)
+- [ ] **Desired action / CTA goal** — the single action the page drives (write the CTA first; everything leads to it)
+- [ ] **Target audience & awareness level** — who they are and what they know (selects the framework PAS/AIDA/BAB and CTA friction)
+- [ ] **Core value prop / differentiator** — the one benefit to lead with (drives the headline and hero)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Write Page Copy

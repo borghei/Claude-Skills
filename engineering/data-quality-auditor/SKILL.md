@@ -42,6 +42,16 @@ This skill is audit-focused, not pipeline-focused. For pipeline design, ETL, Spa
 | Compliance evidence (SOC 2 PI1, GDPR, ISO 27001) | Yes — checks produce auditable artifacts |
 | Building data pipelines for the first time | Use `engineering/senior-data-engineer` first |
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Dataset & target** — which table, pipeline, or store to audit (the data the scripts read via `--data`)
+- [ ] **Which check** — DQ rule checks, schema drift, or freshness SLA (selects `dq_check_runner.py` vs `schema_drift_detector.py` vs `freshness_monitor.py`)
+- [ ] **Thresholds & SLAs** — per-dimension pass thresholds and the freshness max-age budget (sets the pass/fail line and `--max-age-min`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## The six DQ dimensions
 
 Industry-standard taxonomy. Every dataset should have at least one check per dimension when at production stage.

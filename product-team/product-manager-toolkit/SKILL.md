@@ -35,6 +35,17 @@ Essential tools and frameworks for modern product management, from discovery to 
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — RICE prioritization, interview synthesis, PRD, or positioning statement (sets which workflow, template, and inputs apply)
+- [ ] **The core problem and who has it** — one sentence in the user's words (drives the PRD problem statement and JTBD)
+- [ ] **Success metric** — the measurable outcome that defines "it worked" (drives PRD success metrics and RICE impact)
+- [ ] **Scope boundary** — what is explicitly out (drives RICE effort estimates and PRD out-of-scope)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### For Feature Prioritization

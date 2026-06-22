@@ -42,6 +42,17 @@ landing page, landing page design, conversion optimization, lead capture page, c
 
 ---
 
+## Clarify First
+
+Before generating the page, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Conversion goal & offer** — the single action and what the visitor gets (every page has one goal and one CTA)
+- [ ] **Target audience & awareness level** — who they are and what they know (selects the copy framework PAS/AIDA/BAB)
+- [ ] **Key pain point & key benefit** — the problem and the primary outcome (drives the hero headline and Problem/Solution sections)
+- [ ] **Traffic source** — ads, email, or organic (sets message match and page adaptation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Generate a Landing Page

@@ -42,6 +42,17 @@ Same fact. Five narratives needed. The skill is maintaining truth while serving 
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The situation type** (routine update, all-hands, investor update, pivot/reorg, or crisis) — determines which framework and template you use and the urgency of the cadence
+- [ ] **Which audiences must hear this** (employees, investors, customers, candidates, partners) — each gets its own column in the translation matrix with a different frame of the same fact
+- [ ] **The core facts and current state** (honest metrics, what changed, what's good and bad) — every audience narrative derives from one true core; vague facts produce hollow narrative
+- [ ] **Any prior public statements on this topic** (last investor update, last all-hands) — needed to run contradiction detection before the new communication ships
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Framework
 
 ### Step 1: Build the Core Narrative

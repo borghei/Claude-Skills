@@ -22,6 +22,16 @@ metadata:
 
 The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triage log data and identify threats before they escalate.
 
+## Clarify First
+
+Before analyzing logs, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Log file & source type** — auth / access / application logs to analyze (`--file`; the subject of detection)
+- [ ] **Threat category** — brute force / injection / access anomaly / privilege escalation (`--category`; focuses the scan)
+- [ ] **Minimum severity** — the reporting/alert threshold (`--min-severity`; changes which signals surface and any SIEM/CI gate)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

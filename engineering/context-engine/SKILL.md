@@ -35,6 +35,16 @@ Context Engine provides production-grade patterns for managing what AI agents kn
 - Designing a RAG pipeline for code retrieval.
 - Coordinating context across multiple collaborating agents.
 
+## Clarify First
+
+Before designing or analyzing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which task** — bootstrap context for a codebase, optimize for a specific task, design persistent memory, or build a code RAG (selects the analyzer/pruner/indexer and the playbook)
+- [ ] **Token budget** — the context-window ceiling (sets `--budget` and which packing strategy applies)
+- [ ] **Source content** — the files/codebase or knowledge base to index (the input the scripts process)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

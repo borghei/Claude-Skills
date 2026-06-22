@@ -31,6 +31,16 @@ Production-ready toolkit for extracting structured data from multiple legal docu
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The extraction columns** — define exactly what each cell holds; a vague "Date" matches dozens of dates, while "Effective Date" with guidance does not
+- [ ] **Document set location and formats** — drives discovery and how many parallel agents to allocate (ceil(N/10), max 10)
+- [ ] **Document type** — contracts, NDAs, employment, leases — selects the pre-defined column set and per-column extraction guidance
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the matrix.
+
 ## Tools
 
 ### 1. Document Discovery (`scripts/document_discovery.py`)

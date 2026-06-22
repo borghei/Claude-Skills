@@ -39,6 +39,17 @@ pre-sprint review that prevents mid-sprint surprises.
 6. **Risks** — what could derail; mitigation per risk
 7. **Definition of done** — when is each item "done"?
 
+## Clarify First
+
+Before generating the sprint plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Sprint goal** — the one-sentence outcome this sprint exists to achieve (element 1; lets you scope and say no to off-goal asks)
+- [ ] **Real team capacity** — working days minus PTO/on-call/meetings/interrupts × focus factor (element 2; sizes the commit and prevents the 100%-fill miss)
+- [ ] **Backlog readiness** — are candidate items refined, estimated, and ≤5 days (unrefined items are ineligible and blow estimates mid-sprint)
+- [ ] **Known dependencies** — cross-team/external blockers with owners (element 5; unconfirmed assumptions become mid-sprint crises)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Define the sprint goal

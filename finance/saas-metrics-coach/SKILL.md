@@ -19,6 +19,17 @@ metadata:
 
 Production-ready SaaS metrics toolkit for calculating MRR/ARR, analyzing cohort retention, and evaluating unit economics. Designed for SaaS founders, finance teams, and growth operators who need precise subscription revenue analysis without spreadsheet gymnastics.
 
+## Clarify First
+
+Before calculating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which metric set** — MRR/ARR growth, cohort retention, or unit economics (selects the script and the input format: subscription CSV, activity CSV, or metrics JSON)
+- [ ] **Reporting period + currency handling** — the window and how multi-currency MRR is normalized (changes every revenue and churn figure)
+- [ ] **Gross margin** — the margin to apply (drives LTV and CAC payback; LTV = ARPU x margin / churn)
+- [ ] **Churn definition** — gross vs. net, logo vs. revenue (changes churn rate, NRR, and the health-flag verdict)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

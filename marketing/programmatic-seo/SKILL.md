@@ -39,6 +39,17 @@ Production-grade framework for building SEO page sets at scale. Covers the full 
 - You lack a data source and would be generating thin placeholder content
 - Your domain authority is below DR 20 and competitors are DR 60+
 
+## Clarify First
+
+Before scoping the build, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Keyword pattern** — the repeating `[variable]` structure with 50+ variations (drives keyword mining and template variables)
+- [ ] **Structured data source** — the dataset that populates pages and its quality tier (drives the data pipeline and the 3-of-5 uniqueness rule; thin-content risk)
+- [ ] **Search intent** — whether intent is consistent across all variations (drives playbook selection and template architecture)
+- [ ] **Domain authority & scale** — your DR vs competitors and target page count (drives the build-vs-skip decision and indexation strategy)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

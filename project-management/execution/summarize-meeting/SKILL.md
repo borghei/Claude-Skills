@@ -34,6 +34,16 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 - **Stakeholder meetings** -- steering committees, executive reviews, client calls.
 - **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
 
+## Clarify First
+
+Before summarizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The source material and its fidelity** — raw notes, transcript, or recording (summary quality is bounded by input; missing owners/dates for action items cannot be invented)
+- [ ] **Meeting type** — planning, retro, steering committee, or client call (tailors discussion synthesis and which decisions matter)
+- [ ] **Distribution scope + confidentiality** — attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

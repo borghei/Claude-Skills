@@ -40,6 +40,17 @@ ICP, motion, channels, messaging, success metrics, and launch sequence.
 6. **Success metrics** — what we measure
 7. **Launch sequence** — what happens in what order
 
+## Clarify First
+
+Before building the GTM strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **ACV / price point** — determines the motion and channel mix (motion-ACV mismatch, e.g. sales-led on $50/mo, breaks unit economics)
+- [ ] **ICP and beachhead segment** — the one concentrated market to win first (drives targeting, channels, and messaging; "everyone" dilutes all seven components)
+- [ ] **Self-serve readiness** — can the product activate without a human (PLG vs sales-led/committee buying)
+- [ ] **Launch trigger and timeline** — what's launching and when (sets the T-90 → T+90 sequence)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Define ICP precisely

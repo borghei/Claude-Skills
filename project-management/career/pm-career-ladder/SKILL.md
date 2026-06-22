@@ -36,6 +36,17 @@ A consolidated, opinionated PM career ladder for ICs from APM to Group PM and ma
 
 **When NOT to use:** interview prep (use `pm-interview-prep/`), new-role onboarding (use `pm-onboarding/`), 1:1 templates (use `pm-1on1s/`).
 
+## Clarify First
+
+Before generating the assessment or plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Current and target level** — APM, PM, Sr PM, Group PM, Director, or VP/CPO (sets which rubric bar to score against)
+- [ ] **Artifact** — gap analysis, 6-month growth plan, or promo packet (each uses a different template and depth)
+- [ ] **Track** — IC ladder (APM-GPM) vs management ladder (Director-VP/CPO) (shifts which of the 5 dimensions dominate)
+- [ ] **Evidence base** — quantified impact + partner quotes on hand (a promo packet without evidence is just a self-claim)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Self-score the 5x6 rubric for your current and next level; have your manager score independently.

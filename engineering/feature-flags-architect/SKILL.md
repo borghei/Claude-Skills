@@ -52,6 +52,16 @@ Every flag belongs to exactly one of these four types. The type determines the l
 - Defining who in the org can flip production flags — use the **governance** matrix.
 - Building entitlements / paid-tier gating — use this for flag mechanics; `business-growth/paywall-upgrade-cro` for the UX.
 
+## Clarify First
+
+Before designing or operating flags, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Flag type** — release, ops, experiment, or permission (sets the lifecycle, who can flip it, and auto-expiry — the root decision)
+- [ ] **Task** — design a taxonomy, simulate a rollout ramp, generate a kill-switch runbook, or audit flag debt (selects `flag_audit.py` vs `rollout_simulator.py` vs `kill_switch_runbook.py`)
+- [ ] **Blast radius / population** — user count and ramp profile, or the dependency a kill switch guards (drives `--users`/`--profile` and the runbook content)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

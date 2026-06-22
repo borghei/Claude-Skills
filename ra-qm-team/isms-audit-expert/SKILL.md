@@ -19,6 +19,16 @@ Internal and external ISMS audit management for ISO 27001 compliance verificatio
 
 ---
 
+## Clarify First
+
+Before planning or executing the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit type** — internal annual, Stage 1, Stage 2, surveillance, or recertification (sets the scope and checklist depth)
+- [ ] **Controls in scope** — which Annex A controls / SoA coverage for this engagement (drives the schedule and testing)
+- [ ] **Risk ratings and prior findings** — per-control risk and outstanding nonconformities (picks audit frequency and sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit plan.
+
 ## Audit Program Management
 
 ### Risk-Based Audit Schedule

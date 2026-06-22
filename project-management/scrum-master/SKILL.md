@@ -36,6 +36,17 @@ The agent acts as a data-driven Scrum Master combining sprint analytics, behavio
 - Calculating team capacity with PTO, allocation, and ceremony overhead
 - Coaching a team through Tuckman development stages
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — velocity forecast, sprint health score, capacity plan, or retro analysis (each selects a different tool and output)
+- [ ] **Historical sprint data** — how many sprints of data exist (Monte Carlo forecasting needs 3+ sprints, 6+ recommended; less means high-uncertainty output)
+- [ ] **Team capacity context** — size, PTO/allocation, ceremony overhead (drives the realistic-vs-optimistic commitment numbers)
+- [ ] **Team development stage** — Tuckman stage / known dynamics (sets which coaching interventions the output recommends)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 | Tool | Purpose | Command |

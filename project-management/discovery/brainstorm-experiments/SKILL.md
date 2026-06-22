@@ -33,6 +33,17 @@ Design fast, low-cost experiments to validate product hypotheses before committi
 - You want to test willingness to pay or genuine user interest, not just stated preference.
 - You need to choose the right experiment method for your context (new vs. existing product).
 
+## Clarify First
+
+Before designing the experiment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Hypothesis to test** — the specific belief stated as "At least X% of Y will do Z" (drives `hypothesis_text` and the pass/fail threshold)
+- [ ] **Product type** — new vs existing (selects the method catalog: landing page / pre-order / concierge vs fake door / feature stub / A-B test)
+- [ ] **Target segment** — who "Y" is in the hypothesis (drives the metric and who you expose the test to)
+- [ ] **Available SITG signal** — what skin-in-the-game you can capture (money, time, reputation) given budget/tooling (narrows realistic methods)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

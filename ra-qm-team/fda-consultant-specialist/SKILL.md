@@ -29,6 +29,16 @@ FDA regulatory consulting for medical device manufacturers covering submission p
 
 ---
 
+## Clarify First
+
+Before selecting a pathway or assessing compliance, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Device class and predicate** — Class I/II/III and whether a predicate device exists (drives 510(k) vs De Novo vs PMA)
+- [ ] **Intended use / indications** — what the device claims and its use environment (sets the substantial-equivalence argument and clinical-evidence needs)
+- [ ] **Software/AI nature** — SaMD, adaptive AI needing a PCCP, or connected device (cybersecurity/SBOM) (changes the required documentation set)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the analysis.
+
 ## FDA Pathway Selection
 
 Determine the appropriate FDA regulatory pathway based on device classification and predicate availability.

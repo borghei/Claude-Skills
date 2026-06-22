@@ -30,6 +30,16 @@ ISO 13485 internal audit methodology for medical device quality management syste
 
 ---
 
+## Clarify First
+
+Before planning or executing the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose** — internal scheduled audit, external/certification prep, or mock audit (sets the scope and formality)
+- [ ] **Processes/clauses in scope** — which ISO 13485 clauses (drives the checklist and frequency)
+- [ ] **Risk level and prior findings per process** — picks audit frequency and sample size
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit plan.
+
 ## Audit Planning Workflow
 
 Plan risk-based internal audit program:

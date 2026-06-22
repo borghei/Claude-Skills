@@ -39,6 +39,16 @@ pptx, PowerPoint, slide deck, presentation, board deck, sales deck, deck review,
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Deck purpose (board/investor, sales, or conference talk)** — sets the density caps, speaker-notes coverage, and animation limits (the rubric differs per type)
+- [ ] **Delivery context (sent to be read vs presented live from notes)** — changes whether bare slides and animations are acceptable
+- [ ] **Whether hidden slides should ship** — distinguishes intentional backup slides from leftover narrative cruft
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

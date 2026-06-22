@@ -49,6 +49,16 @@ sales for qualification, and product for prioritization.
 
 Use ICP for "which companies." Use persona for "which humans within ICP."
 
+## Clarify First
+
+Before defining the ICP, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Existing customers vs greenfield** — refine from closed-won/best-customer patterns vs design-partner proxy (the real ICP comes from data, not a guess)
+- [ ] **The JTBD the product solves** — what customers are trying to accomplish (anchors firmographics, alternatives, and trigger events)
+- [ ] **Reachable channels you have** — paid / outbound / events / content / partners (an ICP you can't reach is academic; drives the Reachability dimension)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Start from your best customers

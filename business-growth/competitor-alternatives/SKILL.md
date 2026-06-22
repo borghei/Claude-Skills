@@ -52,6 +52,17 @@ Production-grade framework for creating competitor comparison and alternative pa
 
 ---
 
+## Clarify First
+
+Before writing the comparison content, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Page format** — singular alternative, plural alternatives, you-vs-competitor, or competitor-vs-competitor (selects the page structure template)
+- [ ] **Primary goal** — SEO traffic capture vs sales enablement (changes tone, depth, and whether to include objection handling)
+- [ ] **Target competitor + data freshness** — who, and how recent the pricing/feature data is (every claim must be verifiable)
+- [ ] **Honest positioning** — who you genuinely win for and who the competitor wins for (drives the trust-building "who it's for" sections)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the page.
+
 ## Core Principles
 
 ### 1. Honesty Builds Trust

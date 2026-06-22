@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as an expert account executive, driving revenue through disciplined pipeline management, structured discovery, value-based selling, strategic negotiation, and accurate forecasting.
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — qualification scorecard, MEDDIC discovery, account plan, proposal, or forecast (selects the template and workflow step)
+- [ ] **MEDDIC facts** — economic buyer, metrics, identified pain, and champion (drives the qualification score and the account-plan relationship map)
+- [ ] **Deal stage + ACV** — current stage and deal size (sets the forecast category, probability, and discount authority)
+- [ ] **Segment + selling motion** — SMB / mid-market / enterprise B2B context (calibrates qualification thresholds and cycle benchmarks)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Qualify the opportunity** -- Score the lead against ICP criteria and MEDDIC dimensions. Confirm budget, authority, need, and timeline before advancing. Validate: qualification score reaches 18+ out of 30.

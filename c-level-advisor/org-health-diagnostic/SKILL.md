@@ -43,6 +43,19 @@ org health, organizational health, health diagnostic, health dashboard, health c
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Company stage** (Seed / Series A / B / C+) — sets both the dimension weighting and the stage-adjusted benchmarks; a Seed company is not held to Series C standards
+- [ ] **Which dimensions have data and the actual metric values** — the diagnostic degrades gracefully, but it must know what's measured vs. missing to avoid scoring on guesses
+- [ ] **The purpose and audience** (internal prioritization, board review, QoQ comparison) — determines depth, whether cascade analysis is included, and the output format
+- [ ] **Any known problem areas or recent shocks** — focuses cascade analysis on where failures are likely propagating
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## The 8 Dimensions
 
 ### Dimension Overview

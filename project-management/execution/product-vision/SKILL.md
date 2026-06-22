@@ -37,6 +37,17 @@ A vision is *not* a mission, *not* a strategy, *not* a roadmap. A mission says w
 - **Stakeholder misalignment.** Engineering, design, and exec are pulling in different directions; re-articulating the vision surfaces the disagreement.
 - **Hiring at scale.** You need a vision compelling enough that prospective hires can decide whether to join. Vague visions repel strong talent.
 
+## Clarify First
+
+Before generating the vision, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target customer + their core need** — who and what pain (drives the Pichler Board audience/needs blocks and Moore's "for [customer]")
+- [ ] **Format** — Pichler Board / Moore elevator pitch / Raskin narrative / Cagan 10-year (sets the entire structure of the artifact)
+- [ ] **Time horizon** — 5 vs 10 years out (calibrates ambition; Cagan 10-year demands a different altitude than a near-term board)
+- [ ] **Why now — the change** — the shift that makes this inevitable (drives the Raskin narrative's opening act and the vision's differentiation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Gather inputs: customer interviews, JTBD hierarchy, value proposition canvas, competitive landscape.

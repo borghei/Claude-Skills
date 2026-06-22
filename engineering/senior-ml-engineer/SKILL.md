@@ -33,6 +33,16 @@ Production ML engineering patterns for model deployment, MLOps infrastructure, a
 - Building a RAG pipeline (vector DB + chunking + retrieval + reranking).
 - Setting up drift detection and model-health alerting.
 
+## Clarify First
+
+Before generating artifacts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — model deployment / RAG pipeline build / monitoring setup (selects the script and workflow)
+- [ ] **Serving target & rollout** — container vs K8s and canary vs direct (drives the generated Dockerfile/manifests and health gates)
+- [ ] **Model or data interface** — the input/output contract, and for RAG the corpus + vector store (shapes the scaffold)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

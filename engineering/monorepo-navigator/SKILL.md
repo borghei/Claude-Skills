@@ -35,6 +35,16 @@ Navigate, manage, and optimize monorepos at any scale. Covers Turborepo, Nx, pnp
 - Publishing npm packages with coordinated versioning
 - Teams work across packages and need unified tooling
 
+## Clarify First
+
+Before analyzing or configuring, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Tooling** — Turborepo, Nx, pnpm workspaces, or Changesets (drives the config and commands generated)
+- [ ] **Task** — impact/dependency analysis, build optimization, or publishing setup (selects `dependency_graph.py` vs `impact_detector.py` vs `package_analyzer.py`)
+- [ ] **Repo root & git ref** — the monorepo path and the baseline ref for "affected" detection (sets `--ref` and what counts as changed)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

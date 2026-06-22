@@ -31,6 +31,16 @@ Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, sub
 - Configuring hooks for automated quality, security, or workflow steps.
 - Auditing and reducing context-window consumption.
 
+## Clarify First
+
+Before scaffolding or optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which task** — scaffold a new skill, optimize a CLAUDE.md, create a subagent, or analyze context budget (selects `skill_scaffolder.py` vs `claudemd_optimizer.py` vs `context_analyzer.py`)
+- [ ] **Target identity** — for a new skill: its name, domain, and one-line description; for optimization: the file or project path (the inputs the scripts require)
+- [ ] **Token budget** — the target ceiling (sets `--token-limit` and what counts as over-budget)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

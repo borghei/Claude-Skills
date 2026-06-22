@@ -56,6 +56,16 @@ will validate or invalidate candidate solutions.
 3. **Solutions** — candidate ways to address each opportunity
 4. **Assumption tests** — experiments validating that the solution will deliver
 
+## Clarify First
+
+Before building the tree, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The one outcome** — a single, measurable, bounded outcome (the tree root; "ship X" or "make users happy" produces an invalid tree)
+- [ ] **Customer evidence source** — interviews / tickets / analytics that populate the opportunity layer (opportunities must come from research, not the team's imagination)
+- [ ] **Engagement type** — net-new tree vs auditing an existing roadmap (net-new builds top-down; an audit maps current solutions back onto outcomes)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 ### Step 1 — Pick ONE outcome

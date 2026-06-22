@@ -35,6 +35,16 @@ Transform raw technical changes -- tickets, changelogs, git logs, PRDs -- into c
 - **Audience tone guidance** — B2B/enterprise, consumer, developer/API, internal
 - **Automated generation** — `release_notes_generator.py` groups entries, formats markdown/JSON, and flags technical language for rewrite
 
+## Clarify First
+
+Before generating the release notes, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audience** — B2B/enterprise, consumer, developer/API, or internal (sets the entire tone matrix and how much detail to include)
+- [ ] **Source changes** — the tickets/PRs/changelog to translate, classified into the 5 categories (nothing generates without these)
+- [ ] **Breaking changes & deprecations** — what changed, the required action, and by when (forces the mandatory breaking-change fields that protect user trust)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

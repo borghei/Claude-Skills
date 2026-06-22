@@ -34,6 +34,16 @@ Use this skill when you hear:
 - "analyze code quality" / "check for security issues in codebase"
 - "what stack should I use"
 
+## Clarify First
+
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Stack** — Next.js / FastAPI+React / MERN / Django+React (selects the scaffold template and entire file tree)
+- [ ] **App name & output path** — where the project is written (`project_scaffolder` positional args)
+- [ ] **Task** — scaffold a new project vs analyze an existing codebase's quality (selects `project_scaffolder` vs `code_quality_analyzer`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

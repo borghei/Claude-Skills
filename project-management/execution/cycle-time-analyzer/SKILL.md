@@ -42,6 +42,16 @@ Flow metrics are the most useful diagnostic for team and process health, far mor
 - For sprint capacity calculation, use `scrum-master/sprint_capacity_calculator.py`.
 - For per-person performance evaluation -- flow metrics are team-level signals; using them to rank individuals destroys the team behavior they measure.
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Issue history with status transitions** — per-item timestamps for when work started and finished (every metric is derived from these; missing transitions invalidate the numbers)
+- [ ] **Workflow states that count as "in progress" vs "done"** — your board's actual status names (defines where cycle time starts/stops, which changes every result)
+- [ ] **Analysis window** — the rolling period (e.g. last 6-8 weeks) and any type filter (scopes throughput trend and which in-flight items are flagged as aging WIP)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

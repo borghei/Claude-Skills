@@ -35,6 +35,16 @@ Structured legal risk assessment using a quantitative 5x5 Severity x Likelihood 
 
 ---
 
+## Clarify First
+
+Before scoring the risk, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Severity and likelihood basis** — the worst-case exposure and the probability behind the 1-5 ratings; together they set the score and the GREEN/YELLOW/ORANGE/RED level
+- [ ] **Risk category** — Contract, Regulatory, Litigation, IP, Data Privacy, Employment, Corporate — drives owner assignment and which escalation guide applies
+- [ ] **Mandatory escalation triggers** — active litigation, government investigation, or criminal exposure override the score and force outside-counsel engagement
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the memo.
+
 ## Tools
 
 ### Risk Scorer

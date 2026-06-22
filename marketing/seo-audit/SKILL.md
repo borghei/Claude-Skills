@@ -40,6 +40,17 @@ Pick the operating mode that matches the situation:
 - **Pre-Migration Audit** — for planned URL changes, platform switches, or redesigns; establishes baseline and redirect mapping.
 - **Traffic Drop Diagnosis** — emergency diagnostic when organic traffic drops; follows the traffic-drop decision tree to isolate cause.
 
+## Clarify First
+
+Before auditing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit mode** — full site, single-dimension focused, pre-migration, or traffic-drop diagnosis — sets scope and which of the 8 dimensions to run
+- [ ] **Site URL + available data** — GSC, analytics, and crawl exports on hand — determines what can be verified vs. assumed in the findings
+- [ ] **Primary symptom or goal** — e.g. ranking drop, indexation gap, failing Core Web Vitals — focuses the diagnostic deep-dives and remediation priority
+- [ ] **Competitor set** — the 3 sites to benchmark against — drives the competitive gap analysis
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

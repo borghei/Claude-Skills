@@ -38,6 +38,17 @@ The format is `When [situation], I want to [motivation], so I can [outcome].` Re
 - When you need lightweight stories for a team already fluent in user story format.
 - When the work is purely technical with no direct user-facing situation.
 
+## Clarify First
+
+Before writing job stories, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Situation / trigger** — the "When" anchors the entire story; a vague situation produces a persona-style story in disguise
+- [ ] **Underlying job & motivation** — the functional/social/emotional job behind the "I want to"; without it the story encodes a solution, not a need
+- [ ] **Desired outcome / progress** — the "so I can" the user is trying to reach; drives the outcome-focused acceptance criteria
+- [ ] **Source of user research** — interviews/observation/support data vs guesswork; without grounding, situations get invented and may not reflect reality
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```

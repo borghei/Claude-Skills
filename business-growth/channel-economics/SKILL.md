@@ -207,6 +207,17 @@ See [references/channel-conflict-resolution.md](references/channel-conflict-reso
 
 ---
 
+## Clarify First
+
+Before modeling the channel economics, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Channel model(s) in scope** — direct, reseller/VAR, distributor, marketplace, OEM, or MSP (sets which decision-tree branch and TCO comparison to run)
+- [ ] **Target ACV / price point** — sub-$10k vs mid-market vs enterprise (selects the viable channel branch and sizes per-deal margin)
+- [ ] **Fully-loaded cost lines** — COGS %, allocated sales/marketing/ops/support costs (drives the TCO contribution-margin model, not just the headline discount)
+- [ ] **Partner contribution + tier intent** — what the partner does (lead, sell, implement) and whether you're designing tiers/rebates (drives tier economics + rebate/SPIFF mix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the model.
+
 ## End-to-end workflows
 
 ### Workflow: Design a new partner program

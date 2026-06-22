@@ -61,6 +61,19 @@ If your values say "transparency" but you punish bearers of bad news, your real 
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable is needed** (values + behaviors, culture code, health survey, ritual calendar, culture-debt audit, or M&A integration) — each has its own template
+- [ ] **Company stage and headcount** — rituals and transmission mechanisms that work at 15 people break at 150; the ritual matrix is stage-keyed
+- [ ] **What is actually rewarded, tolerated, and celebrated today** — culture is descriptive, not aspirational; without the honest current state you produce wall-poster platitudes
+- [ ] **Work model** (in-person, remote, hybrid) — determines which operating principles and meeting rules apply
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Culture Diagnostic Decision Tree
 
 ```

@@ -32,6 +32,16 @@ Tools and guidance for Regulation (EU) 2022/2554 on digital operational resilien
 - Designing a digital operational resilience testing program (basic + TLPT)
 - Determining whether and how DORA applies to your entity
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Entity scope** — whether the organization is one of DORA's 20 financial-entity types (determines applicability and proportionality)
+- [ ] **Task** — 5-pillar readiness, incident classification, third-party register, or testing-program design (picks the tool and workflow)
+- [ ] **Incident facts (if classifying)** — clients affected, duration, data loss, criticality, economic impact (drives major-incident determination and the 4h/72h/1-month deadlines)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Quick Start
 
 ```bash

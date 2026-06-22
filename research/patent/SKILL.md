@@ -39,6 +39,17 @@ patent attorney.
 - Competitor list
 - Timeline pressure (filing deadline, product launch)
 
+## Clarify First
+
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Analysis type (prior-art search, patentability, FTO, or landscape)** — these are different deliverables with different methods and outputs
+- [ ] **Invention description (problem, solution, novelty)** — drives the claims and search classifications
+- [ ] **Target jurisdictions (US, EU, JP, CN)** — IP is jurisdictional; changes FTO scope and filing strategy
+- [ ] **Technology area + CPC/IPC classifications** — drives a search beyond keywords (which misses synonyms/translations)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Plan a prior-art search

@@ -22,6 +22,16 @@ metadata:
 
 The **Google Workspace CLI** skill provides tools for auditing Google Workspace configurations, generating authentication setup documentation, and diagnosing common GWS issues. It helps IT administrators maintain secure, well-configured Workspace environments without needing to navigate complex admin consoles.
 
+## Clarify First
+
+Before running, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — security audit, auth setup guide, or diagnostics (selects `workspace_audit.py` vs `auth_setup_guide.py` vs `gws_doctor.py`)
+- [ ] **Config export or auth method** — the GWS config JSON to audit, or the auth method and scopes for a setup guide (sets `--config` or `--method`/`--scopes`)
+- [ ] **Output mode** — human-readable vs JSON for automation (sets `--format json`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

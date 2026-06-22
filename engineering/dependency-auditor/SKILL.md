@@ -35,6 +35,16 @@ A multi-language toolkit for analyzing, auditing, and managing dependencies. It 
 - Adding a dependency security gate to CI/CD.
 - Cleaning up unused or redundant dependencies.
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Project & ecosystem** — the project path and which manifests/lockfiles (the input the scanner parses)
+- [ ] **Audit focus** — vulnerabilities, license compliance, or upgrade planning (selects `dep_scanner.py` vs `license_checker.py` vs `upgrade_planner.py`)
+- [ ] **Policy & gate** — license policy strictness and fail-on-severity threshold (sets `--policy`, `--fail-on-high`, and the CI verdict)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

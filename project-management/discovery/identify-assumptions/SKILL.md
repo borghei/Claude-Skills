@@ -35,6 +35,16 @@ Systematically identify, categorize, and prioritize the assumptions underlying y
 - When the team disagrees on risk or priority -- assumptions make disagreements explicit.
 - Before designing experiments -- test the riskiest assumptions first.
 
+## Clarify First
+
+Before mapping assumptions, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The decision or idea being mapped** — the specific product bet whose assumptions you surface (without it the map has no subject)
+- [ ] **Product type** — new vs existing (determines whether to use the 4 core categories or the full 8-category model)
+- [ ] **Impact and confidence basis** — what evidence sets each `impact` (1-10) and `confidence` (high/med/low) (drives `Risk Score = Impact × (1 − Confidence)` and quadrant placement)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

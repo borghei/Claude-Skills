@@ -33,6 +33,16 @@ ISO 14971:2019 risk management implementation throughout the medical device life
 - Extending risk management to AI/ML devices, cybersecurity, or supply chain
 - Setting up post-production risk monitoring and Risk Management File update triggers
 
+## Clarify First
+
+Before running the risk assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Device and intended use** — what it is and its use context (drives the hazard categories and benefit-risk analysis)
+- [ ] **Lifecycle stage** — planning, hazard analysis, risk control, or post-production (picks the workflow)
+- [ ] **Acceptability criteria** — the 5x5 matrix thresholds and ALARP definition (determines the risk-evaluation outcomes)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the risk register.
+
 ## Quick Start
 
 ```bash

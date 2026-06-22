@@ -147,6 +147,16 @@ See [references/soc2-pre-audit-punch-list.md](references/soc2-pre-audit-punch-li
 
 ---
 
+## Clarify First
+
+Before running the audit-prep sprint, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit type** — Type I (point-in-time) vs Type II (observation period) (sets the 4/8 vs 12-week sprint and the evidence-over-time requirement)
+- [ ] **TSC scope** — which Trust Services Criteria beyond mandatory Security (Availability, Processing Integrity, Confidentiality, Privacy) (determines which punch-list sections apply)
+- [ ] **Readiness score / gap level** — picks the 4-week vs 8-week vs 12-week sprint (or postpone)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the sprint plan.
+
 ## Quick start
 
 1. **Run readiness score**: `python3 scripts/soc2_readiness_score.py --config controls.yaml`

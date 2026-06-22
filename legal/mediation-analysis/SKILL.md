@@ -39,6 +39,16 @@ Production-ready framework for analyzing disputes and preparing mediation strate
 
 ---
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which party you represent** — frames the positions, interests, and BATNA/WATNA from your side; a neutral framing produces a different analysis
+- [ ] **Claimed amount, each side's litigation costs, and success probability** — these are the settlement-calculator inputs; BATNA, WATNA, and ZOPA all derive from them
+- [ ] **Whether there is an ongoing relationship** — determines whether the analysis weights an interest-based or package-deal scenario over a straightforward monetary compromise
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the analysis.
+
 ## Operating Modes
 
 ### Mode 1: Guided Information Gathering

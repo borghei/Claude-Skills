@@ -42,6 +42,17 @@ This skill operationalizes the Google SRE blameless post-mortem template, the Et
 
 If the incident is below the severity threshold and the team has seen the same class of failure recently, document the recurrence in the existing post-mortem rather than producing a new one.
 
+## Clarify First
+
+Before authoring the post-mortem, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Severity level** — Sev 0-4 / near-miss sets the template depth, the SLA window, and whether 5 Whys or a Causal Tree is required
+- [ ] **Incident timeline / chat transcript** — the source for the Timeline and Impact sections; without it the reconstruction is guesswork
+- [ ] **Customer / business impact** — scope, duration, and who was affected drives both the Impact section and the severity itself
+- [ ] **Root-cause method** — 5 Whys for a clear single chain vs Causal Tree for multi-factor Sev 0/1/2; drives the RCA section
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. At incident close, the incident commander assigns an author who opens `assets/post_mortem_template.md`.

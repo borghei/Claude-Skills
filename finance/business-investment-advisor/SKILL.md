@@ -19,6 +19,17 @@ metadata:
 
 Production-ready investment analysis toolkit for screening opportunities, analyzing portfolio composition, and generating due diligence checklists. Designed for business owners, angel investors, and corporate development teams evaluating investments from $50K to $50M.
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which task** — screen opportunities, analyze a portfolio, or generate a DD checklist (selects the script and the required input JSON)
+- [ ] **Screening thresholds** — minimum ROI, maximum payback, and acceptable risk level (drives which opportunities pass and how they rank)
+- [ ] **Target profile for DD** — investment type, stage, and check size (drives which items and weights the due-diligence checklist generates)
+- [ ] **Risk tolerance / concentration limits** — max exposure per holding or sector (drives portfolio rebalancing recommendations)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

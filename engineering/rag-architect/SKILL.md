@@ -34,6 +34,17 @@ The agent designs, implements, and optimizes production-grade RAG pipelines, fro
 - Optimizing retrieval quality or adding reranking.
 - Evaluating a pipeline with RAGAS or IR metrics.
 
+## Clarify First
+
+Before designing the pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Corpus characteristics** — size, document structure, and domain (drives the chunking-strategy selection and parameters)
+- [ ] **Scale / latency / cost constraints** — query volume and budget (selects the embedding model and vector DB)
+- [ ] **Retrieval precision target** — the accuracy bar (precision >0.85 forces hybrid retrieval + cross-encoder reranking)
+- [ ] **Query types** — ambiguous, multi-hop, or style-mismatched (decides which query transforms: HyDE / multi-query / step-back)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 Python tools live at the skill root (no `scripts/` dir). Full flags/output formats: [references/tool-cli-reference.md](references/tool-cli-reference.md).

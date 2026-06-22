@@ -49,6 +49,16 @@ The frameworks behind it are Marty Cagan's separation of *request* from *opportu
 - For prioritizing already-triaged items against each other (that is `prioritization-frameworks/`).
 - For bug triage (use the bug triage process in your tracker — though the workflow here applies to feature-request items).
 
+## Clarify First
+
+Before triaging the feedback, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Feedback items with channel + segment tags** — the verbatims and where each came from (drives clustering, volume counts, and the Kano guess)
+- [ ] **Segment weights** — which customer segments count more (sets `segment_weight` in the score, i.e. whether enterprise asks outrank long-tail volume)
+- [ ] **Strategic alignment definition** — what current strategy a request must match (sets the `strategic_alignment` term that boosts on-strategy asks)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

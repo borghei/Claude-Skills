@@ -33,6 +33,16 @@ The agent designs multi-agent orchestration systems using five core patterns: se
 - Designing fault-tolerant AI workflows for production deployment
 - Optimizing cost across workflows with mixed model tiers
 
+## Clarify First
+
+Before designing the workflow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Workflow topology** — linear, parallel, tree/delegation, reactive, or consensus (selects which of the five orchestration patterns)
+- [ ] **Framework target** — LangGraph, CrewAI, AutoGen, or Claude agent teams (determines the implementation code emitted)
+- [ ] **Reliability & cost constraints** — failure tolerance and budget (drives circuit breakers, retries, timeouts, and model-tier routing)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Pattern Selection Decision Tree
 
 ```

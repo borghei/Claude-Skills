@@ -41,6 +41,16 @@ This skill writes the sequences. For email HTML templates and rendering infrastr
 
 ---
 
+## Clarify First
+
+Before designing the sequence, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Sequence type & trigger** — welcome, trial expiration, nurture, re-engagement, sales (selects the blueprint, length, and cadence)
+- [ ] **Primary conversion goal** — the single action the sequence drives (sets every email's CTA and the emotional journey)
+- [ ] **Audience & product context** — SaaS/B2B persona and awareness level (drives copy, benchmarks, and segmentation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Design Process
 
 ### Step 1: Define Sequence Architecture

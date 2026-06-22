@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations.
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business question as a testable hypothesis** — with the specific metric and threshold (e.g., ">= 5% lift in 7-day retention") (frames the whole analysis and the headline)
+- [ ] **Data sources and grain** — which tables/columns exist and the row grain (determines feasibility and the SQL you can write)
+- [ ] **Audience and the decision** — who consumes the insight and what they will decide (sets altitude and the "Now What" recommendation)
+- [ ] **Analysis type** — cohort, funnel, hypothesis test, or trend (selects the method and the chart)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Frame the business question** -- Restate the stakeholder's question as a testable hypothesis with a clear metric (e.g., "Did campaign X increase 7-day retention by >= 5%?"). Identify required data sources.

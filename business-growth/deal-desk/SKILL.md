@@ -273,6 +273,17 @@ See [references/discount-and-concession-playbook.md](references/discount-and-con
 
 ---
 
+## Clarify First
+
+Before generating the deal-desk artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task type** — standing up the desk (charter + matrix) vs reviewing one deal (packet) (determines which template you produce)
+- [ ] **Deal specifics: ACV + requested deviation** — discount %, term, payment, custom SLA/legal (sets the Standard-vs-Requested table and which approvers the matrix requires)
+- [ ] **Approval authority structure** — who can approve what (Rep→Manager→Director→VP→CRO/CFO/CEO + Legal) (drives the threshold matrix and routing)
+- [ ] **Strategic value + risk** — logo/reference value, credit/compliance risk (drives the packet's justification and recommendation)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## End-to-end workflows
 
 ### Workflow: A rep submits a non-standard deal

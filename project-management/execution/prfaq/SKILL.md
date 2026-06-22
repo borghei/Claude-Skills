@@ -38,6 +38,17 @@ Use this skill when you need a high-fidelity narrative artifact for funding revi
 
 **When NOT to use:** incremental features on an existing product (use `wwas/` or `job-stories/`); a signed-off PRD mid-build; pure technical infrastructure with no end-customer narrative.
 
+## Clarify First
+
+Before generating the PR/FAQ, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Customer + problem** — the "for [customer]" and the pain they feel today (drives the one-liner and press-release lead)
+- [ ] **What makes it newsworthy** — the genuinely-new outcome (drives the headline and the Press Release Test pass/fail)
+- [ ] **Hardest internal objection** — the CFO/eng/legal question you most fear (sets which of the 9 internal-FAQ categories to load)
+- [ ] **Decision being made** — funding gate vs concept stress-test vs reframe (sets the bar and the primary reader)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Complete the one-liner: "We are announcing \[product\] for \[customer\] that does \[outcome\]."

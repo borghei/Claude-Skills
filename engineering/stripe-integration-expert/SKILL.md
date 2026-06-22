@@ -35,6 +35,16 @@ The agent builds production-grade Stripe integrations for SaaS billing: subscrip
 - Implementing metered/usage-based billing or feature gating by plan
 - Adding dunning recovery or European SCA/3D Secure compliance
 
+## Clarify First
+
+Before building the integration, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Framework** — Next.js / Express / Django (the handler and client patterns differ per stack)
+- [ ] **Billing model** — flat subscription / metered usage-based / trials + proration (shapes the subscription state machine and code)
+- [ ] **Scope** — which piece: Checkout, idempotent webhooks, dunning, or SCA/3D Secure (selects the reference and code generated)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

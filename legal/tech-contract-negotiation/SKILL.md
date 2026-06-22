@@ -31,6 +31,17 @@ Production-ready negotiation toolkit for technology services agreements, profess
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which side you are on** — provider vs client — the `--perspective` input that flips position classification and your target positions
+- [ ] **Deal value + complexity parameters** — drive the deal tier (1-5), expected timeline, and number of rounds
+- [ ] **Your bright lines / non-negotiables** — define what cannot be conceded vs what can be traded in the concession roadmap
+- [ ] **Applicable regulations** — GDPR, DORA, NIS2, SOX — determine which regulatory-leverage arguments are genuine vs would destroy credibility
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the analysis.
+
 ## Tools
 
 ### 1. Negotiation Position Analyzer (`scripts/negotiation_position_analyzer.py`)

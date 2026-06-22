@@ -36,6 +36,16 @@ The agent generates CI/CD pipelines, scaffolds Terraform infrastructure, and man
 - Choosing and executing a deployment strategy (blue-green/canary).
 - Handling an infrastructure incident or rollback.
 
+## Clarify First
+
+Before generating pipelines or infra, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **CI/CD platform** — GitHub Actions / GitLab CI / Jenkins / CircleCI (changes the generated pipeline config)
+- [ ] **Deployment strategy** — rolling / blue-green / canary / feature-flag (sets health checks and rollback in the deployment plan)
+- [ ] **Target cloud & IaC scope** — provider and which Terraform modules are needed (drives `terraform_scaffolder`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

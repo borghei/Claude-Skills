@@ -35,6 +35,16 @@ Analyze a codebase and generate production-grade operational runbooks with copy-
 - Preparing for an incident response drill.
 - Post-incident improvement: updating runbooks with lessons learned.
 
+## Clarify First
+
+Before generating the runbook, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Runbook type** — deployment / incident response / database maintenance / scaling / monitoring (selects the template and step structure)
+- [ ] **Actual stack** — CI/CD platform, database, hosting, and orchestration (every copy-paste command and rollback step is stack-specific)
+- [ ] **Escalation contacts & severity routing** — who is paged at each level (fills the escalation table; a runbook without it is unusable on-call)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

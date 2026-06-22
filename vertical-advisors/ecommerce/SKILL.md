@@ -27,6 +27,17 @@ ecommerce, e-commerce, DTC, direct-to-consumer, Shopify, Amazon, retail, wholesa
 
 ---
 
+## Clarify First
+
+Before building the model, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Single channel or blended** — model each channel (DTC, Amazon, wholesale) separately; a blended model hides an unprofitable channel and makes contribution margin meaningless
+- [ ] **AOV and COGS** — average order value and landed cost of goods (drives gross margin, the top line of the model)
+- [ ] **Returns/refund rate** — returns eat margin twice (the sale plus reverse logistics), so this swings contribution margin
+- [ ] **CAC basis** — true paid/blended CAC and what ad spend is counted (drives CAC payback period and break-even repeat rate)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the model.
+
 ## Quick Start
 
 ```bash

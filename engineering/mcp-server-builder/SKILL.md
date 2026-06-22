@@ -43,6 +43,16 @@ MCP, Model Context Protocol, MCP server, tool definition, resource provider, pro
 - Converting an OpenAPI spec into MCP tools automatically
 - Creating domain-specific tool servers (database, monitoring, deployment)
 
+## Clarify First
+
+Before building the server, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Source contract** — the OpenAPI spec or API to expose, or whether building tools from scratch (the input the tool definitions and conversion derive from)
+- [ ] **Language** — TypeScript (`@modelcontextprotocol/sdk`) or Python (`mcp[cli]`) (sets the server implementation generated)
+- [ ] **Transport** — stdio (local/CLI), SSE (web), or StreamableHTTP (production) (drives transport, auth, and deployment patterns)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

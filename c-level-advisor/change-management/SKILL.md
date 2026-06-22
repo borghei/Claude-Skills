@@ -49,6 +49,19 @@ change management, ADKAR, organizational change, reorg, process change, tool mig
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The change type** (process, org/reorg, strategy pivot, or culture) — selects the playbook, timeline, and which ADKAR phase is hardest
+- [ ] **What is changing and the honest business WHY** — the WHY anchors every communication; without it the rollout reads as arbitrary and breeds resistance
+- [ ] **Who is affected and how** (directly affected vs. broader org) — drives communication sequencing and the order in which audiences hear it
+- [ ] **How many other changes are already active** — if 3+ changes are running and under-absorbed, the plan must address change fatigue before adding more
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Change Type Selection
 
 ```

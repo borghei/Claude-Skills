@@ -32,6 +32,17 @@ Product marketing patterns for positioning, GTM strategy, and competitive intell
 
 ---
 
+## Clarify First
+
+Before building the PMM artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Deliverable type** — positioning statement, GTM plan, battlecard, or sales enablement (determines which workflow runs)
+- [ ] **Target customer / ICP** — best-fit segment, ideally top 20% by LTV (drives the FOR clause and targeting)
+- [ ] **Competitive alternatives** — direct, adjacent, and status-quo options (drives the UNLIKE clause and battlecards)
+- [ ] **Unique differentiation** — what only you do and why it matters (drives the positioning differentiator and value prop)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## ICP Definition Workflow
 
 Define ideal customer profile for targeting:

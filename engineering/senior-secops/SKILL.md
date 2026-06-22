@@ -37,6 +37,16 @@ The agent scans source code for security vulnerabilities (hardcoded secrets, SQL
 - Meeting SOC 2, PCI-DSS, HIPAA, or GDPR compliance requirements.
 - Wiring SAST/dependency/compliance gates into CI/CD.
 
+## Clarify First
+
+Before the security pass, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target path** — the codebase or dependency manifest to scan (the subject of every scanner)
+- [ ] **Compliance framework** — SOC 2 / PCI-DSS / HIPAA / GDPR (`--framework`; changes which controls are verified)
+- [ ] **Severity threshold** — the minimum severity to report or gate on (`--severity`; changes the report and CI pass/fail)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

@@ -32,6 +32,16 @@ Production-ready toolkit for generating templated responses to common legal inqu
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before generating the response, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Inquiry category + sub-type** — DSR-acknowledgment vs subpoena-objection select completely different templates
+- [ ] **The raw inquiry text** — required to run escalation detection first; a litigation, regulator, law-enforcement, or press trigger means STOP and route to counsel, not a templated reply
+- [ ] **Substitution variables** — requestor name, dates, matter, and regulation — populate the response; missing values leave placeholders and the wrong timelines (GDPR 30-day vs CCPA 45-day)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the response.
+
 ## Tools
 
 ### 1. Response Generator (`scripts/response_generator.py`)

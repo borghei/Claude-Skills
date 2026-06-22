@@ -245,6 +245,17 @@ Use `scripts/partnership_roi_modeler.py --partnership partnership.yaml` for the 
 
 ---
 
+## Clarify First
+
+Before designing the partnership, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Partnership goal + type** — distribution, embed (OEM/ISV), better-together (tech/integration), market presence, or strategic (selects the decision-tree branch and deal structure)
+- [ ] **Single deal vs scaled program** — structuring one partnership vs designing tiers/portfolio (determines deal-structure vs program-design output)
+- [ ] **Partner specifics for evaluation** — their pipeline expectation, commitment, and credibility (feeds the 6-dimension scorer and green/yellow/red call)
+- [ ] **ROI inputs** — expected revenue and the real costs (headcount, integration, MDF) (drives the 3-year P&L payback)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## End-to-end workflows
 
 ### Workflow: Evaluate a new partner opportunity

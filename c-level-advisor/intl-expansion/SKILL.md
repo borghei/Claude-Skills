@@ -49,6 +49,19 @@ international expansion, market entry, localization, go-to-market, GTM, regional
 
 ---
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable is needed** (market scoring, entry-mode recommendation, localization plan, regulatory map, pricing, or launch plan) — each follows a different framework
+- [ ] **The target market(s) under consideration** — regional regulatory, cultural-distance, and pricing guidance is country-specific
+- [ ] **Existing traction in that market** (inbound demand, current ARR from it) — the entry-mode graduation path is gated on revenue thresholds; pull vs. push changes the go/no-go
+- [ ] **Product type and home-market model** (B2B SaaS vs. other; PLG vs. sales-led) — the frameworks are tuned for B2B SaaS and the GTM adaptation depends on the current model
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Decision Sequence
 
 ```

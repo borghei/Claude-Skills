@@ -39,6 +39,17 @@ This skill produces an **AI Feature PRD** that extends the standard 8-section PR
 
 **When NOT to use:** for a non-AI feature (use `create-prd/`); for pure model R&D with no product surface (use a research design doc); for a one-off internal prompt or batch script that does not ship to users (a Notion page is fine); when the AI feature has no production traffic plan.
 
+## Clarify First
+
+Before drafting the AI PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **AI task & surface** — what the model does and where it appears to the user (drives Section 9 model selection + architecture pattern: prompt vs RAG vs fine-tune vs agent)
+- [ ] **Quality & safety bar** — the acceptance / hallucination / refusal / latency targets that define "good enough" (drives Section 10's eval criteria and golden set)
+- [ ] **Risk / regulatory tier** — EU AI Act tier or regulated context (health, finance, legal) (drives Section 10.7 ethical review and where human-in-the-loop is mandatory)
+- [ ] **Cost & traffic envelope** — expected volume and cost-per-call ceiling (drives Section 11's cost model and the deployment ramp gates)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.

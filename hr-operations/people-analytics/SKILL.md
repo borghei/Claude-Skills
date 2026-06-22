@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices.
 
+## Clarify First
+
+Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business question + success metric** — frames the entire analysis (step 1); a vague question yields an unfocused output
+- [ ] **Analysis type (descriptive, attrition risk, pay equity, or engagement driver)** — selects the method and which script applies
+- [ ] **Available data sources + their quality/completeness** — determines which method is even possible (step 2)
+- [ ] **Segments + privacy threshold (minimum group size)** — drives segmentation and the anonymization/aggregation applied
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Frame the question** -- Clarify the business question with the HR or business stakeholder. Examples: "Why is Sales attrition 2x the company average?" or "Are we paying equitably across gender?" Define the success metric for the analysis.

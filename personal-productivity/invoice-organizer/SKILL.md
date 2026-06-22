@@ -39,6 +39,18 @@ invoice, invoices, receipt, receipts, expense, expenses, bookkeeping, accounting
 
 ---
 
+## Clarify First
+
+Before categorizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Receipt CSV fields** — date, vendor, description, amount drive categorization and duplicate detection
+- [ ] **Tax bucket scheme** — US Schedule C vs UK self-employment vs generic sets which categories the summary maps to
+- [ ] **Recurring-vendor rules** — known vendor→category mappings to seed `category_rules.json` and cut the uncategorized bucket
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Categorize 200 Receipts in 1 Minute

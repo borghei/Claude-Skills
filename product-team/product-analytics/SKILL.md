@@ -41,6 +41,16 @@ product changes.
 - Top product questions you can't answer today
 - Org expectations: who consumes analytics, at what cadence
 
+## Clarify First
+
+Before designing the metric tree or audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Product type** — B2B SaaS, consumer, marketplace, etc. (drives the North Star pattern and input metrics)
+- [ ] **The value moment** — what "delivered value" looks like for a user (defines the North Star and activation event)
+- [ ] **Current analytics stack and event taxonomy** — Amplitude/Mixpanel/GA4/Segment plus existing events (drives the instrumentation audit and gap list)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflows
 
 ### Workflow 1 — Design the metric tree

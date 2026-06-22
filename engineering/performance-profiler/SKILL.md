@@ -37,6 +37,16 @@ Systematic performance profiling for Node.js, Python, and Go applications. Ident
 - Preparing for a traffic spike (load test before launch).
 - Database queries taking >100ms, or verifying no regressions after a dependency upgrade.
 
+## Clarify First
+
+Before profiling, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Runtime & symptom** — Node / Python / Go and CPU / memory / bundle / query / load-spike (selects the profiler and toolchain)
+- [ ] **Baseline + SLA target** — current numbers and the P95/P99 (or size) threshold to beat (measure-first needs both to verify a delta)
+- [ ] **Environment** — local / staging / prod determines the safe profiling method and whether load testing is allowed
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

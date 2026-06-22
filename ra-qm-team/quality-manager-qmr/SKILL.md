@@ -54,6 +54,16 @@ Quality system accountability, management review leadership, and regulatory comp
 
 ---
 
+## Clarify First
+
+Before preparing a quality artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — management review, quality objectives, KPI framework, or culture assessment (each has a distinct workflow and output)
+- [ ] **Review period and organizational scope** — the quarter/period and which sites/jurisdictions (drives which inputs and metrics are collected)
+- [ ] **Clause 5.6.2 inputs available** — audit results, customer feedback, CAPA status, prior actions (determines whether the management review is complete)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Management Review Workflow
 
 The agent conducts management reviews per ISO 13485 Clause 5.6 requirements.

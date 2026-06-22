@@ -41,6 +41,17 @@ A production-ready skill package for pre-sales engineering that bridges technica
 | Customer Engagement Score | Stakeholder participation in evaluation | >75% |
 | RFP Coverage Score | Requirements fully addressed | >80% |
 
+## Clarify First
+
+Before producing the deliverable, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — RFP/RFI coverage analysis, competitive matrix, or POC plan (selects the tool and phase)
+- [ ] **Customer requirements + priorities** — the must/should/nice-to-have list (drives weighted coverage and the bid/no-bid call)
+- [ ] **Competitor(s) in the deal** — needed for the feature matrix, differentiators, and battlecard
+- [ ] **POC scope + success criteria** — when planning a POC, the use cases and measurable go/no-go bar (prevents an unbounded POC)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## 5-Phase Workflow
 
 ### Phase 1: Discovery & Research

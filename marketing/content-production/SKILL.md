@@ -40,6 +40,17 @@ content production, blog writing, article drafting, content pipeline, editorial 
 
 ---
 
+## Clarify First
+
+Before producing the content, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Primary keyword & search intent** — the target query and whether it is informational/commercial (drives the brief Target + SEO pass)
+- [ ] **Unique angle / core thesis** — the one argument this piece makes (one angle per piece; drives the Angle section)
+- [ ] **Target audience & awareness level** — who reads it and what they already know (sets altitude and the Audience section)
+- [ ] **Target word count** — comprehensive guide vs. supporting post (drives scope and structure)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Write a Blog Post End-to-End

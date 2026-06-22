@@ -43,6 +43,17 @@ paid ads, PPC, pay-per-click, Google Ads, Meta Ads, Facebook Ads, Instagram Ads,
 
 ---
 
+## Clarify First
+
+Before building the campaign, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Campaign objective** — leads, sales, traffic, or awareness (drives platform selection, campaign type, bid strategy, and success metrics)
+- [ ] **Target audience** — who they are and their intent signal (drives platform selection and targeting setup)
+- [ ] **Monthly budget** — total spend available (determines viable platforms, bid-strategy stage, and budget-phase allocation)
+- [ ] **Conversion action & offer** — the action you are paying for and the offer behind it (drives campaign structure, tracking, and ad-to-page match)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Launch a Campaign

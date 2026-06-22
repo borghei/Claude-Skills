@@ -39,6 +39,18 @@ meeting, meetings, transcript, notes, minutes, action items, decisions, decision
 
 ---
 
+## Clarify First
+
+Before extracting insights, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Transcript with speaker labels** — `Speaker: text` format drives owner attribution on action items
+- [ ] **Meeting type** — recap vs customer interview vs decision log changes which extractions matter (decisions/actions vs pains/quotes)
+- [ ] **Output target** — recap email, append-only decision log, or interview synthesis sets the structure of the deliverable
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Process a Transcript in 5 Minutes

@@ -42,6 +42,17 @@ This is the first artifact a team should produce after defining strategy and bef
 
 **When NOT to use:** very early-stage discovery (use `discovery/` first — you don't yet know what value you deliver); pure infrastructure work with an indirect user-value chain; before the org has aligned on strategy (the NSM exposes disagreement but does not resolve it).
 
+## Clarify First
+
+Before defining the NSM, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Core customer value the product delivers** — drives NSM candidate selection; the NSM must be a proxy for this, not a revenue lagging metric
+- [ ] **Business archetype** — attention / transaction / productivity / marketplace / engagement sets the Amplitude archetype and the input-metric formula (multiplicative/additive/funnel/ratio)
+- [ ] **Input metrics the team can directly influence** — the 3-5 nodes of the tree; if the team can't move them, the tree is decoration
+- [ ] **Anti-/counter-metrics to guard** — the thresholds that protect customer and business against a gamed NSM
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

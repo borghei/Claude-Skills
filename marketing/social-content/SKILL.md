@@ -42,6 +42,17 @@ social content, social media, LinkedIn post, Twitter thread, Instagram carousel,
 
 ---
 
+## Clarify First
+
+Before creating the post, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Platform** — LinkedIn, X, Instagram, TikTok, or Facebook — sets format, length limits, and posting rules
+- [ ] **Goal & CTA** — engagement, traffic, or conversion — determines the hook formula and call-to-action
+- [ ] **Audience & content pillar** — who it's for and which pillar (educational, BTS, promo…) — shapes topic and tone
+- [ ] **Format** — single post, thread, carousel, or short video — drives the platform-specific structure
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Create a Social Post

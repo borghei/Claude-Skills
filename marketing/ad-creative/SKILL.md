@@ -40,6 +40,17 @@ ad creative, ad copy, headline generation, RSA headlines, Meta ad copy, LinkedIn
 
 ---
 
+## Clarify First
+
+Before generating the copy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Product/offer + value proposition** — one sentence on what changes in the customer's life (drives every headline + body line)
+- [ ] **Target audience + awareness level** — who they are and how they describe the problem (sets language and creative framework)
+- [ ] **Platform + ad format** — Google / Meta / LinkedIn / Twitter/X / TikTok and placement (sets character limits, tone, compliance rules)
+- [ ] **Funnel stage** — awareness, consideration, or decision (selects the framework: problem-led vs solution-led vs proof-led)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ### Generate Ad Copy from Scratch

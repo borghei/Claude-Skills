@@ -32,6 +32,16 @@ The agent automates release management by parsing conventional commits into stru
 - Shipping a hotfix — expedited fix, pre-release versioning, tested rollback.
 - Auditing commit hygiene — confirm conventional commits drive clean changelogs.
 
+## Clarify First
+
+Before preparing the release, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Last release tag / commit range** — defines the changelog window and the basis for the version-bump decision
+- [ ] **Release type** — standard / hotfix / pre-release (alpha→beta→rc) (selects the workflow and versioning track)
+- [ ] **Target ecosystem** — npm / Python / Rust / Git / Docker (determines which bump commands are emitted)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

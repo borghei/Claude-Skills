@@ -30,6 +30,16 @@ Comprehensive analysis and review of REST API designs against conventions, best 
 - Managing API versioning and detecting breaking changes between releases.
 - Gating deployments on API design quality in CI.
 
+## Clarify First
+
+Before producing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which output** — lint report, design scorecard, or breaking-change detection (selects `api_linter.py`, `api_scorecard.py`, or `breaking_change_detector.py`)
+- [ ] **Spec file(s)** — the OpenAPI/Swagger JSON, or the two versions to diff (the input the tools parse)
+- [ ] **Quality bar / CI gate** — minimum grade or fail-on-breaking (sets `--min-grade` / `--exit-on-breaking` and how strict the verdict is)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

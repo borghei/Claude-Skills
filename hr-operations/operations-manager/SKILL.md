@@ -16,6 +16,17 @@ metadata:
 
 The agent operates as a senior operations manager, applying Lean Six Sigma, PDCA, and capacity-planning frameworks to drive measurable efficiency gains.
 
+## Clarify First
+
+Before generating the plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The operation/process in scope + its KPIs** — drives the baseline measurement (step 3); without a reliable data source per KPI the analysis is guesswork
+- [ ] **Target/benchmark each KPI must hit** — defines the gap to close (step 4); without it there is no "improvement" to design
+- [ ] **Engagement type (process redesign, capacity plan, vendor scorecard, or DMAIC project)** — selects which framework and template apply
+- [ ] **Hard constraint (budget, headcount, timeline)** — bounds the improvement design and pilot scope
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Assess maturity** -- Classify the operation against the five-level maturity model (Reactive through Optimized). Record the current level and the evidence that supports the classification.

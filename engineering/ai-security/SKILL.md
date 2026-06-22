@@ -23,6 +23,16 @@ metadata:
 
 The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and insecure model serving configurations.
 
+## Clarify First
+
+Before running the scan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Scan target & path** — which codebase or directory to analyze (sets `--path` and what gets scanned)
+- [ ] **Threat categories** — all, or specific (prompt-injection, data-poisoning, model-extraction, adversarial-input, insecure-serving) (sets `--category`)
+- [ ] **Severity threshold & context** — full audit vs pre-deployment gate (sets `--min-severity` and whether zero high/critical findings is a hard gate)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

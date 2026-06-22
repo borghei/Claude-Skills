@@ -58,6 +58,17 @@ Production-grade framework for building free tools that generate traffic, leads,
 
 ---
 
+## Clarify First
+
+Before designing the free tool, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Tool concept + type** — calculator, generator, checker, grader, converter, template, or visualization (drives build complexity and lead-capture fit)
+- [ ] **Target keyword + search volume** — the "free [tool]" search demand (a core factor in the 6-factor go/no-go score)
+- [ ] **Primary goal** — leads, SEO traffic, backlinks, or brand (selects the tool type and gate strategy)
+- [ ] **Connection to your paid product** — without it, leads won't convert (determines whether to build at all)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the plan.
+
 ## Tool Type Selection
 
 | Tool Type | What It Does | Build Complexity | Lead Capture Fit | SEO Value | Example |

@@ -35,6 +35,16 @@ The complete lifecycle for production prompts: design patterns that work, testin
 - Versioning prompts and gating changes on test scores.
 - Debugging a degraded prompt or migrating prompts across models.
 
+## Clarify First
+
+Before designing or testing the prompt, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task & definition of "good"** — what the prompt must produce and how success is judged (drives the 5-dimension evaluation rubric)
+- [ ] **Target model** — calibration (temperature, few-shot count) and migration paths differ by model
+- [ ] **Lifecycle stage** — design new / debug a degraded prompt / migrate to a new model (selects the workflow)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

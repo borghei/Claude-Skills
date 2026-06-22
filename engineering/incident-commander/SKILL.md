@@ -36,6 +36,16 @@ Classify incident severity, reconstruct timelines from heterogeneous event sourc
 - Managing escalation — apply technical and business escalation paths by severity and elapsed time.
 - Building or auditing response playbooks, comms templates, or SLA/error-budget policy.
 
+## Clarify First
+
+Before producing the artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task & deliverable** — classify severity, reconstruct a timeline, or generate a PIR/postmortem (selects `severity_classifier.py` vs `timeline_reconstructor.py` vs `pir_generator.py`/`postmortem_generator.py`)
+- [ ] **Incident input data** — the incident/events JSON with severity dimensions (revenue, user scope, data/security risk, blast radius) (the input the scripts parse)
+- [ ] **RCA method** — 5 Whys, Fishbone, Timeline, or Bow Tie (sets `pir_generator.py --rca-method` and the postmortem structure)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Tools
 
 | Tool | Purpose | Command |

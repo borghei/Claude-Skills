@@ -32,6 +32,17 @@ Specialist in creating, modifying, and managing reusable templates and files for
 - Migrating teams off ad-hoc, from-scratch pages toward standardized templates
 - Diagnosing low template adoption, broken macros, or version confusion
 
+## Clarify First
+
+Before building the template, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Target tool & artifact** — Confluence page template, Jira issue template, or multi-page blueprint (sets which macros/fields are available and the structure)
+- [ ] **Template type** — meeting notes, PRD, charter, bug report, decision log, etc. (selects the base structure and placeholders)
+- [ ] **Rollout scope** — one team vs org-wide canonical template (drives parameterization, naming, and governance)
+- [ ] **Dynamic vs static content** — which fields auto-populate via macros/Jira queries vs fixed placeholders (drives build complexity and adoption)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. **Discover** stakeholder needs and review existing content patterns

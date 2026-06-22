@@ -40,6 +40,17 @@ A good closed beta runs 4-8 weeks, recruits 10-30 participants from three concen
 - Pure usability testing with 5-7 participants (use a research protocol, not a beta program).
 - Internal-only dogfooding (run a 2-week alpha with engineering and customer-facing staff).
 
+## Clarify First
+
+Before building the beta plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Beta hypothesis & headline outcome** — what you are trying to learn and the one result that matters (drives the whole plan and which exit gates you set)
+- [ ] **Exit gates** — the quantitative + qualitative success criteria, agreed *before* recruiting (resolve to Greenlight / Extend / Pivot / Kill — the decision rule of the program)
+- [ ] **Target cohort & size** — Friends / Family / Fanatics mix and participant count (drives the recruitment script and how you weight feedback)
+- [ ] **Duration** — the 4-8 week window (drives the weekly cadence and when the exit memo is due)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Frame the beta hypothesis, target cohort, and headline outcome (from `create-prd/`).

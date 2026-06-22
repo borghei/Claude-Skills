@@ -43,6 +43,17 @@ Production-grade user onboarding optimization framework covering activation defi
 
 ---
 
+## Clarify First
+
+Before designing the onboarding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Product type** — B2B SaaS, B2C app, marketplace, or content platform (selects the onboarding pattern)
+- [ ] **Activation event (aha moment)** — the action correlated with 30-day retention (defines what the whole flow drives toward)
+- [ ] **Current activation rate + where users drop off** — baseline and the biggest funnel bottleneck to fix
+- [ ] **Day-1/7/30 retention** — sets urgency and whether the problem is onboarding vs product-market fit
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+
 ## Initial Assessment
 
 ### Required Context

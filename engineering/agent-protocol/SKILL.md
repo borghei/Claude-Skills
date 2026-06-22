@@ -34,6 +34,16 @@ The agent designs tool schemas for MCP, Google A2A, and OpenAI Function Calling 
 - Standardizing tool calling patterns across a team or organization
 - Debugging agent tool selection failures
 
+## Clarify First
+
+Before designing the protocol, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Protocol target** — MCP, A2A, OpenAI Function Calling, or LangChain Tools (drives the entire schema and transport design via the Decision Framework below)
+- [ ] **Transport & client** — which client consumes it (stdio/SSE/WebSocket for MCP, HTTP+JSON-RPC for A2A)
+- [ ] **Auth & trust boundary** — in-process vs cross-organization (determines OAuth 2.1 vs API key vs none, plus rate limiting and signing)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Decision Framework
 
 ```

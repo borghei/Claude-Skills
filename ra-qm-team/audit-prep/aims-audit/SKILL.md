@@ -169,6 +169,16 @@ Week 8: Stage 2 audit
 
 ---
 
+## Clarify First
+
+Before running the audit-prep, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit type and stage** — Stage 1 documentation review, Stage 2 operational, surveillance, or internal (sets sprint length and whether the focus is documentation or operational evidence)
+- [ ] **AIMS maturity** — mature system vs building from gaps (picks the 4-week vs 8-week sprint)
+- [ ] **AI systems in scope** — which systems and how many (drives the AIIA count and Annex A coverage)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the readiness assessment.
+
 ## Quick start
 
 1. **Run readiness score**: `python3 scripts/aims_readiness_score.py --config aims-controls.yaml`

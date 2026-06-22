@@ -31,6 +31,16 @@ Production-ready framework for assessing IT service providers, technology vendor
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before scoring the vendor, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Is the service critical/essential** — the `--critical` flag applies a 2x weight to security and compliance, which can flip the composite score and the Approve/Reject recommendation
+- [ ] **Applicable regulatory frameworks** — GDPR, DORA, NIS2, SOX, PCI DSS, ISO 27001/SOC 2, HIPAA, FedRAMP — selects which compliance checklists run
+- [ ] **Questionnaire responses + independent evidence** — the 6-dimension scores; self-reported-only data inflates scores, so confirm whether SOC 2 / pen-test / financial evidence backs them
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Tools
 
 ### 1. Vendor Risk Scorer (`scripts/vendor_risk_scorer.py`)

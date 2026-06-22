@@ -23,6 +23,17 @@ metadata:
 
 The **Red Team** skill provides tools for planning and scoping security engagements. It helps define rules of engagement, select methodologies, scope targets, plan attack phases, and generate engagement documentation.
 
+## Clarify First
+
+Before planning the engagement, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Authorization & ROE owner** — who has signed off and the escalation contacts (no engagement plan without confirmed authorization)
+- [ ] **In-scope targets & boundaries** — the exact assets in and explicitly out of bounds (drives scope and `--target`)
+- [ ] **Engagement type** — red-team / pentest / purple / bug-bounty (sets stealth, methodology, and `--type`)
+- [ ] **Compliance framework** — e.g. pci-dss (maps test cases to controls via `--compliance`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

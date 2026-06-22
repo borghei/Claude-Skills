@@ -31,6 +31,16 @@ EU MDR compliance patterns for medical device classification, technical document
 
 ---
 
+## Clarify First
+
+Before classifying the device or analyzing gaps, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Device characteristics** — duration, invasiveness, body-system contact, and whether it is active/software (drives the Annex VIII classification)
+- [ ] **Intended purpose** — the device's claimed clinical purpose (sets the applicable rule and clinical-evidence level)
+- [ ] **Software/AI nature** — whether it is software as a medical device (MDCG 2019-11) or AI/ML (changes classification and the documentation set)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the classification.
+
 ## Device Classification Workflow
 
 Classify device under MDR Annex VIII:

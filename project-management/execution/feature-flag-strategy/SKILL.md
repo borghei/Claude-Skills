@@ -40,6 +40,17 @@ This skill is the **PM-facing** rollout playbook. It does not describe how to wi
 
 **When NOT to use:** one-time data migrations (use a script with `--dry-run`), environment configuration, permanent A/B variants that never converge (that is personalization), or flag-flagging every change (cost > value when overused).
 
+## Clarify First
+
+Before drafting the rollout plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Flag type** — release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary)
+- [ ] **Rollout shape** — linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp
+- [ ] **Kill-switch threshold + authority** — the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag
+- [ ] **Retirement date** — for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.

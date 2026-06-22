@@ -19,6 +19,16 @@ Production-ready compliance patterns for Regulation (EU) 2024/1689 -- the EU Art
 
 ---
 
+## Clarify First
+
+Before classifying or mapping obligations, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Intended purpose and domain** — what the system does and its Annex III area (drives the risk classification and which obligations apply)
+- [ ] **Role** — provider, deployer, GPAI provider, or importer (determines the obligation set)
+- [ ] **Biometric / GPAI characteristics** — uses biometrics, is a GPAI model, or trained with >10^25 FLOPs (drives the prohibited / high-risk / systemic-risk path and the conformity-assessment route)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the classification.
+
 ## AI System Inventory and Classification Workflow
 
 The agent classifies AI systems under the EU AI Act's risk-based framework and maps applicable obligations.

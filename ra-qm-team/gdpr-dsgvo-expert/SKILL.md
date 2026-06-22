@@ -168,6 +168,16 @@ Step-by-step DPIA process:
 
 ---
 
+## Clarify First
+
+Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Task** — codebase compliance scan, DPIA generation, or data-subject-rights tracking (selects the tool and workflow)
+- [ ] **Role and jurisdiction** — controller vs processor; GDPR-only vs German BDSG applies (BDSG adds the DPO threshold, §26 employment, and §4 video rules)
+- [ ] **Processing characteristics** — high-risk processing such as profiling, AI, or large-scale special-category data (determines whether a DPIA is required)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+
 ## Workflows
 
 ### Workflow 1: New Processing Activity Assessment

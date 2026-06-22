@@ -31,6 +31,17 @@ Production-ready toolkit for preparing structured briefings for meetings with le
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
 
+## Clarify First
+
+Before generating the briefing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Meeting type** — deal-review, board, regulatory, litigation, etc. — selects which type-specific sections appear (e.g. privilege considerations only for regulatory/litigation)
+- [ ] **Participants with orgs and roles** — populate the counterparty-dynamics and interests sections; without them the brief is generic
+- [ ] **Objective / agenda** — sets the depth and which sections matter; drives the preparation-gap list
+- [ ] **Privilege sensitivity** — for regulatory/government or litigation meetings, determines what goes in the privilege section vs what can be shared
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the briefing.
+
 ## Tools
 
 ### 1. Meeting Brief Generator (`scripts/meeting_brief_generator.py`)

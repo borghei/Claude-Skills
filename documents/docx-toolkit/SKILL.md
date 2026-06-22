@@ -40,6 +40,16 @@ docx, Word, Microsoft Word, document, document review, comments, tracked changes
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose (pre-handoff cleanup, contract-review triage, or style-guide enforcement)** — selects the workflow and the thresholds you apply
+- [ ] **Recipient (external customer, opposing counsel, internal)** — sets the tolerance for leftover comments and tracked changes
+- [ ] **Allowed style set (for style-guide enforcement)** — defines what counts as a non-conforming style
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash

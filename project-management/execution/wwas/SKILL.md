@@ -37,6 +37,16 @@ Before an item enters a sprint, it must pass the **INVEST** gates (Independent, 
 - A pure technical task with no strategic context (use a simple task description).
 - The team prefers traditional user stories and strategic context is well-understood.
 
+## Clarify First
+
+Before writing the item, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The strategic objective / OKR it connects to** — drives the **Why**; without it the Why is a forced exercise and the item should not be prioritized
+- [ ] **The refinement discussion or design link** — becomes the **What** (a reminder of the discussion, not a specification)
+- [ ] **The observable done-state** — drives the **Acceptance Criteria** (outcomes a user or system can observe, not implementation steps or test scripts)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+
 ## References
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.
