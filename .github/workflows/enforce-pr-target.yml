@@ -2,10 +2,10 @@
 # Enforce PR Target — Prevent PRs to wrong branches
 # ============================================================================
 # Branch governance:
-#   feature/* → must target dev (not main)
-#   dev       → may target main
-#   hotfix/*  → may target main (emergency fixes)
-#   All other → must target dev
+#   feature/*, feat/* → may target dev OR main (ship-to-main allowed)
+#   dev               → may target main
+#   hotfix/*          → may target main (emergency fixes)
+#   All other         → must target dev
 # ============================================================================
 
 name: Enforce PR Target
@@ -27,21 +27,16 @@ jobs:
         run: |
           echo "PR #${PR_NUMBER}: ${HEAD} → ${BASE}"
 
-          # Rule 1: feature/* branches must target dev, never main
-          if [[ "$HEAD" == feature/* && "$BASE" == "main" ]]; then
-            echo "::error::Feature branches must target 'dev', not 'main'."
+          # Rule 1: Only dev, hotfix/*, feature/*, and feat/* branches may target main
+          if [[ "$BASE" == "main" \
+                && "$HEAD" != "dev" \
+                && "$HEAD" != hotfix/* \
+                && "$HEAD" != feature/* \
+                && "$HEAD" != feat/* ]]; then
+            echo "::error::Branch '${HEAD}' may not target 'main'."
             echo ""
-            echo "Please update PR #${PR_NUMBER} to target the 'dev' branch."
-            echo "Workflow: feature/* → dev → main"
-            exit 1
-          fi
-
-          # Rule 2: Only dev and hotfix/* branches may target main
-          if [[ "$BASE" == "main" && "$HEAD" != "dev" && "$HEAD" != hotfix/* ]]; then
-            echo "::error::Only 'dev' and 'hotfix/*' branches may target 'main'."
-            echo ""
-            echo "Branch '${HEAD}' should target 'dev' instead."
-            echo "Allowed paths to main: dev → main, hotfix/* → main"
+            echo "Allowed paths to main: dev, hotfix/*, feature/*, feat/* → main"
+            echo "Other branches should target 'dev' instead."
             exit 1
           fi
 
