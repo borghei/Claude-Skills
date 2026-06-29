@@ -98,39 +98,37 @@ skill-name/
 
 ## Git Workflow
 
-**Branch Strategy:** feature → dev → main (PR only)
+**Branch Strategy:** single-trunk — a short-lived type-branch → `main` via PR. There is no `dev` branch.
 
-**Branch Protection Active:** Main branch requires PR approval. Direct pushes blocked.
+Name branches with a Conventional-Commit type prefix (`feat/`, `fix/`, `chore/`, `docs/`, `ci/`, `perf/`, `refactor/`, …). PRs target `main` directly.
 
 ### Quick Start
 
 ```bash
-# 1. Always start from dev
-git checkout dev
-git pull origin dev
+# 1. Start from an up-to-date main
+git checkout main
+git pull origin main
 
-# 2. Create feature branch
-git checkout -b feature/agents-{name}
+# 2. Create a type-prefixed branch
+git checkout -b feat/agents-{name}
 
-# 3. Work and commit (conventional commits)
-feat(agents): implement cs-{agent-name}
-fix(tool): correct calculation logic
-docs(workflow): update branch strategy
+# 3. Work and commit (Conventional Commits)
+#   feat(agents): implement cs-{agent-name}
+#   fix(tool): correct calculation logic
+#   docs(workflow): update branch strategy
 
-# 4. Push and create PR to dev
-git push origin feature/agents-{name}
-gh pr create --base dev --head feature/agents-{name}
+# 4. Push and open a PR against main
+git push -u origin feat/agents-{name}
+gh pr create --base main --head feat/agents-{name}
 
-# 5. After approval, PR merges to dev
-# 6. Periodically, dev merges to main via PR
+# 5. After review/CI, squash-merge to main (delete the branch)
 ```
 
-**Branch Protection Rules:**
-- ✅ Main: Requires PR approval, no direct push
-- ✅ Dev: Unprotected, but PRs recommended
-- ✅ All: Conventional commits enforced
+**Conventions:**
+- `main` is the single integration branch; merge via PR (squash preferred).
+- Branch names use a Conventional-Commit type prefix; commit messages follow `type(scope): summary`.
+- After adding/removing/renaming a skill, regenerate the manifests: `python scripts/build_manifest.py` (CI also does this).
 
-See [documentation/WORKFLOW.md](documentation/WORKFLOW.md) for complete workflow guide.
 See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standards.md) for commit standards.
 
 ## Development Environment
