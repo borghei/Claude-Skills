@@ -6,12 +6,12 @@ description: >
   patterns, or implementing fault-tolerant workflows.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: ai-orchestration
   tier: POWERFUL
-  updated: 2026-06-15
+  updated: 2026-06-29
   frameworks: langgraph, crewai, autogen, claude-agent-teams
 ---
 # Agent Workflow Designer
@@ -76,6 +76,20 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/orchestration-patterns.md](references/orchestration-patterns.md)** — full implementations of all five patterns (LangGraph sequential pipeline, async fan-out/fan-in, hierarchical orchestrator with dependency batching, event bus, consensus validation). Read after picking a topology from the decision tree.
 - **[references/routing-and-cost.md](references/routing-and-cost.md)** — intent-based router, context window budgeting (`ContextBudget`), and the cost optimization matrix. Read when deciding how requests reach agents and how to control spend.
 - **[references/reliability-and-troubleshooting.md](references/reliability-and-troubleshooting.md)** — circuit breaker, common pitfalls, best practices, troubleshooting table, and success criteria. Read when hardening for production or diagnosing failures.
+- **[references/subagent-scoping-and-orchestration.md](references/subagent-scoping-and-orchestration.md)** — when to split work into scoped subagents vs one loop; scoping a subagent (minimal tool allow-list, focused instructions, isolated context, return contract); the lead→parallel-specialists→merge pattern on a shared workspace; failure isolation/retries; and multi-agent vs single-agent cost/latency tradeoffs. Read when designing a lead that delegates to specialist subagents.
+
+## Tools Overview
+
+Stdlib-only Python CLIs in `scripts/` (run with `python3`, support `--json` and human-readable output):
+
+- **`cost_estimator.py`** — per-step token/cost estimate for a workflow DAG with model-tier what-ifs.
+- **`multi_agent_cost_estimator.py`** — compares a **lead + scoped subagents** design (per-role price tier, call counts, token sizes, reasoning-effort multiplier) against a **single strong agent** baseline, with a per-role breakdown and total-cost projection. Prices are user-supplied with neutral placeholder defaults — pass `--price tier=input/output` or a JSON `price_tiers` block with your real rates.
+- **`workflow_validator.py`** / **`workflow_visualizer.py`** — validate and render workflow DAGs.
+
+## Common Patterns
+
+- **Scoped subagents** — split a job into specialists only where responsibilities are genuinely independent; give each a minimal tool allow-list, one-job instructions, an isolated context, and a small return contract, then merge their contracts in the lead on a shared workspace (see `references/subagent-scoping-and-orchestration.md`).
+- **Multi-model routing** — run the orchestrator on a stronger tier and narrow subagents on cheaper tiers, matching reasoning effort to each role; estimate both topologies with `scripts/multi_agent_cost_estimator.py` before committing, and keep the single loop if the multi-agent design isn't meaningfully cheaper or faster.
 
 ## Scope & Limitations
 

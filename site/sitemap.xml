@@ -121,6 +121,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>
@@ -142,6 +147,11 @@
   </url>
   <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/azure-cloud-architect.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/batch-api-orchestrator.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>
   </url>
@@ -182,6 +192,11 @@
   </url>
   <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/codex-cli-specialist.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/computer-use-automation.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>
   </url>
@@ -232,6 +247,11 @@
   </url>
   <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/env-secrets-manager.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/extended-thinking-architect.html</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>
   </url>

@@ -1,6 +1,6 @@
 # Skills Reference
 
-Complete reference for **339 skills across 17 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **343 skills across 17 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are historical and not yet fully regenerated after recent expansions. For canonical skill listings, browse each domain folder directly. Recent additions are summarized below.
 

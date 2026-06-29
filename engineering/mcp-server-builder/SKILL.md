@@ -6,12 +6,12 @@ description: >
   converting OpenAPI to MCP, or creating MCP integrations.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: ai-integration
   tier: POWERFUL
-  updated: 2026-06-15
+  updated: 2026-06-29
   frameworks: mcp-sdk, typescript, python, openapi
 ---
 # MCP Server Builder
@@ -61,6 +61,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/server-implementation.md](references/server-implementation.md)** — complete TypeScript and Python server code (tools, resources, prompts) plus the OpenAPI-to-MCP conversion rules and script. Read when writing the server.
 - **[references/transport-and-deployment.md](references/transport-and-deployment.md)** — client configuration (`claude_desktop_config.json` for stdio and remote) and the tool versioning strategy. Read when connecting clients or planning releases.
 - **[references/testing-and-troubleshooting.md](references/testing-and-troubleshooting.md)** — schema validation function, MCP Inspector commands, common pitfalls, best practices, troubleshooting table, and success criteria. Read when validating, hardening for production, or diagnosing failures.
+- **[references/streaming-batch-and-computer-use.md](references/streaming-batch-and-computer-use.md)** — progress/streaming and cancellation for long-running tools, wrapping computer-use/browser/desktop actions (granularity, returning state, safety gates), and batch-friendly tool design (arrays, idempotency, partial-failure results, pagination). Read when a tool runs long, drives a live surface, or processes many items.
+
+## Common Patterns
+
+- **Streaming long-running tools** — when a call routinely exceeds a few seconds (builds, crawls, automation), emit throttled progress updates with a stable correlation handle, stream semantically whole chunks ending in an explicit terminal signal, and honor cancellation by aborting the real work and cleaning up sessions. The final response must stand alone. See `references/streaming-batch-and-computer-use.md`.
+- **Batch-friendly tools** — when an operation is naturally repeated, accept a bounded array instead of forcing one chatty call per item; make operations idempotent (or take an idempotency key) and return per-item success/failure results so the agent retries only what failed. List/read tools must paginate with a documented cap and a cursor. Run `scripts/tool_schema_linter.py` to flag chatty single-item tools and missing pagination.
+- **Computer-use via MCP** — expose intent-level actions (`navigate`, `click`, `read_page`) rather than raw pixel primitives, return current observable state (text-first, screenshots only when layout matters), and gate destructive/irreversible actions behind a `confirm`/`dry_run` param scoped to an allowlist with secrets redacted. For the automation engine itself, see the `computer-use-automation` skill.
 
 ## Scope & Limitations
 

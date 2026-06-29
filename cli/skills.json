@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-29T18:17:58+00:00",
-  "skill_count": 339,
+  "generated_at": "2026-06-29T18:39:05+00:00",
+  "skill_count": 343,
   "domain_count": 17,
   "skills": [
     {
@@ -104,8 +104,8 @@
       "domain": "engineering",
       "description": "Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state management. Use when building pipelines of specialized agents, designing fan-out/fan-in patterns, or implementing fault-tolerant workflows.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-15",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -116,12 +116,14 @@
         "references/orchestration-patterns.md",
         "references/reliability-and-troubleshooting.md",
         "references/routing-and-cost.md",
+        "references/subagent-scoping-and-orchestration.md",
         "scripts/cost_estimator.py",
+        "scripts/multi_agent_cost_estimator.py",
         "scripts/workflow_validator.py",
         "scripts/workflow_visualizer.py"
       ],
-      "size_bytes": 63458,
-      "tools_count": 3,
+      "size_bytes": 96002,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -164,6 +166,37 @@
       ],
       "size_bytes": 83716,
       "tools_count": 4,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "agentic-evaluation-framework",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".",
+      "tags": [
+        "evaluation",
+        "llm-as-judge",
+        "rubrics",
+        "agents",
+        "quality"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/agentic-evaluation-framework",
+      "files": [
+        "SKILL.md",
+        "references/eval-pitfalls.md",
+        "references/llm-judge-methodology.md",
+        "scripts/pairwise_ranking.py",
+        "scripts/rubric_scorer.py"
+      ],
+      "size_bytes": 35245,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -322,6 +355,37 @@
       ],
       "size_bytes": 122797,
       "tools_count": 3,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "batch-api-orchestrator",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".",
+      "tags": [
+        "batch-api",
+        "llm",
+        "cost-optimization",
+        "throughput",
+        "async"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/batch-api-orchestrator",
+      "files": [
+        "SKILL.md",
+        "references/batch-patterns-and-decision-tree.md",
+        "references/cost-and-throughput-economics.md",
+        "scripts/batch_cost_estimator.py",
+        "scripts/batch_job_planner.py"
+      ],
+      "size_bytes": 29533,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -580,12 +644,42 @@
       "has_assets": true
     },
     {
+      "name": "computer-use-automation",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"build a computer-use agent\", \"automate a GUI with an AI agent\", \"when to use computer use vs an API\", \"make browser automation reliable\", or \"design screenshot-driven agent actions\".",
+      "tags": [
+        "computer-use",
+        "browser-automation",
+        "agents",
+        "gui",
+        "reliability"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/computer-use-automation",
+      "files": [
+        "SKILL.md",
+        "references/computer-use-patterns.md",
+        "scripts/action_safety_linter.py",
+        "scripts/tool_choice_advisor.py"
+      ],
+      "size_bytes": 32420,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
       "name": "context-engine",
       "domain": "engineering",
       "description": "Context management engine for AI coding agents. Use when building agent memory systems, optimizing context windows, allocating token budgets, designing RAG pipelines for code, or managing persistent multi-session agent state.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -595,14 +689,17 @@
         "SKILL.md",
         "references/code-retrieval-patterns.md",
         "references/context-window-strategies.md",
+        "references/long-context-strategies.md",
+        "references/memory-and-context-editing.md",
         "references/memory-architecture-guide.md",
         "references/workflows-and-quality.md",
         "scripts/context_analyzer.py",
+        "scripts/context_budget_planner.py",
         "scripts/context_pruner.py",
         "scripts/memory_indexer.py"
       ],
-      "size_bytes": 70188,
-      "tools_count": 3,
+      "size_bytes": 97016,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -911,6 +1008,37 @@
       ],
       "size_bytes": 57450,
       "tools_count": 3,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "extended-thinking-architect",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".",
+      "tags": [
+        "extended-thinking",
+        "reasoning-effort",
+        "llm",
+        "cost-optimization",
+        "agents"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/extended-thinking-architect",
+      "files": [
+        "SKILL.md",
+        "references/reasoning-budget-patterns.md",
+        "references/when-to-use-extended-thinking.md",
+        "scripts/reasoning_budget_advisor.py",
+        "scripts/reasoning_loop_allocator.py"
+      ],
+      "size_bytes": 38865,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1249,8 +1377,8 @@
         "prompt-engineering",
         "pricing"
       ],
-      "version": "1.0.0",
-      "updated": "2026-04-02",
+      "version": "1.1.0",
+      "updated": "2026-06-29",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -1258,12 +1386,14 @@
       "path": "engineering/llm-cost-optimizer",
       "files": [
         "SKILL.md",
+        "references/caching-and-batch-economics.md",
         "references/llm-pricing-guide.md",
+        "scripts/cache_savings_calculator.py",
         "scripts/prompt_optimizer.py",
         "scripts/token_counter.py"
       ],
-      "size_bytes": 32195,
-      "tools_count": 2,
+      "size_bytes": 50428,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1273,8 +1403,8 @@
       "domain": "engineering",
       "description": "Build MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transports. Use when exposing APIs to AI agents, building tool servers, converting OpenAPI to MCP, or creating MCP integrations.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-15",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -1283,15 +1413,17 @@
       "files": [
         "SKILL.md",
         "references/server-implementation.md",
+        "references/streaming-batch-and-computer-use.md",
         "references/testing-and-troubleshooting.md",
         "references/tool-schema-design.md",
         "references/transport-and-deployment.md",
         "scripts/openapi_converter.py",
         "scripts/server_scaffolder.py",
-        "scripts/tool_linter.py"
+        "scripts/tool_linter.py",
+        "scripts/tool_schema_linter.py"
       ],
-      "size_bytes": 64624,
-      "tools_count": 3,
+      "size_bytes": 88734,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2737,10 +2869,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,

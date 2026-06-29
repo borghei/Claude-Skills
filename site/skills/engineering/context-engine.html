@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Context Engine</h1>
     <p class="page-subtitle">Context management engine for AI coding agents. Use when building agent memory systems, optimizing context windows, allocating token budgets, designing RAG pipelines for code, or managing persistent multi-session agent state.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -456,6 +456,8 @@ Context Engine provides production-grade patterns for managing what AI agents kn
 - **Code retrieval** — file-level, chunk-level (RAG), and dependency-aware retrieval with code chunking and embedding guidance.
 - **Knowledge graph construction** — codebase graph schema (nodes + edges) and graph queries that resolve agent questions.
 - **Window optimization patterns** — sliding window with anchors, progressive summarization, selective tool-result caching.
+- **Memory tool &amp; context editing** — file-backed persistent memory across sessions, plus context compaction (evict stale tool outputs, summarize-and-replace history) to keep a long loop from exhausting the window.
+- **Long-context strategies** — when to use a 1M-token window vs. RAG vs. a hybrid agent loop, budget allocation across a big window, and position/attention effects.
 - **Multi-agent context sharing** — shared context bus and a five-element handoff protocol.
 
 ## When to Use
@@ -483,6 +485,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 | `context_analyzer.py` | Analyze files/prompts for token usage, relevance, and optimization suggestions | `python scripts/context_analyzer.py src/ --budget 128000 --json` |
 | `context_pruner.py` | Prune low-relevance content, redundancy, and verbose patterns from context | `python scripts/context_pruner.py src/main.py --aggressive --json` |
 | `memory_indexer.py` | Index and search a memory/knowledge base with TF-IDF relevance scoring | `python scripts/memory_indexer.py docs/ --query &#x27;auth middleware&#x27; --top 5` |
+| `context_budget_planner.py` | Allocate a window across components, flag overflow, and suggest what to compact/evict first | `python scripts/context_budget_planner.py --window-size 200000 --system 4000 --history 60000 --tools 90000 --rag 40000 --reserve-output 8000` |
 
 ## References
 
@@ -491,6 +494,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/context-window-strategies.md](references/context-window-strategies.md)** — budget allocation, packing strategies, and window-optimization patterns. Read when planning budgets or optimizing a long conversation.
 - **[references/memory-architecture-guide.md](references/memory-architecture-guide.md)** — three-layer memory model, promotion protocol, staleness detection, shared context bus + handoff protocol. Read when designing persistent memory or coordinating agents.
 - **[references/code-retrieval-patterns.md](references/code-retrieval-patterns.md)** — file/chunk/dependency-aware retrieval, chunking/embedding guidance, knowledge-graph schema and queries. Read when building RAG for code.
+- **[references/memory-and-context-editing.md](references/memory-and-context-editing.md)** — the memory-tool pattern (file-backed memory, what to store vs. recompute, retention, security) and context editing/compaction (eviction priority, summarize-and-replace, token-savings payoff) and how both weave into the agent loop. Read when persisting state across sessions or keeping a long loop from exhausting the window.
+- **[references/long-context-strategies.md](references/long-context-strategies.md)** — long-context vs. RAG vs. hybrid decision-making, budget allocation across a 1M-token window, position/attention effects, and when a bigger window hurts (cost, latency, distraction). Read when choosing a window-vs-retrieval strategy.
 - **[references/workflows-and-quality.md](references/workflows-and-quality.md)** — the three workflows, anti-patterns, evaluation metrics, troubleshooting, and success criteria. Read before running a workflow and before shipping.
 
 ## Scope &amp; Limitations
@@ -578,6 +583,8 @@ Context Engine provides production-grade patterns for managing what AI agents kn
 - **Code retrieval** — file-level, chunk-level (RAG), and dependency-aware retrieval with code chunking and embedding guidance.
 - **Knowledge graph construction** — codebase graph schema (nodes + edges) and graph queries that resolve agent questions.
 - **Window optimization patterns** — sliding window with anchors, progressive summarization, selective tool-result caching.
+- **Memory tool &amp; context editing** — file-backed persistent memory across sessions, plus context compaction (evict stale tool outputs, summarize-and-replace history) to keep a long loop from exhausting the window.
+- **Long-context strategies** — when to use a 1M-token window vs. RAG vs. a hybrid agent loop, budget allocation across a big window, and position/attention effects.
 - **Multi-agent context sharing** — shared context bus and a five-element handoff protocol.
 
 ## When to Use
@@ -605,6 +612,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 | `context_analyzer.py` | Analyze files/prompts for token usage, relevance, and optimization suggestions | `python scripts/context_analyzer.py src/ --budget 128000 --json` |
 | `context_pruner.py` | Prune low-relevance content, redundancy, and verbose patterns from context | `python scripts/context_pruner.py src/main.py --aggressive --json` |
 | `memory_indexer.py` | Index and search a memory/knowledge base with TF-IDF relevance scoring | `python scripts/memory_indexer.py docs/ --query &#x27;auth middleware&#x27; --top 5` |
+| `context_budget_planner.py` | Allocate a window across components, flag overflow, and suggest what to compact/evict first | `python scripts/context_budget_planner.py --window-size 200000 --system 4000 --history 60000 --tools 90000 --rag 40000 --reserve-output 8000` |
 
 ## References
 
@@ -613,6 +621,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/context-window-strategies.md](references/context-window-strategies.md)** — budget allocation, packing strategies, and window-optimization patterns. Read when planning budgets or optimizing a long conversation.
 - **[references/memory-architecture-guide.md](references/memory-architecture-guide.md)** — three-layer memory model, promotion protocol, staleness detection, shared context bus + handoff protocol. Read when designing persistent memory or coordinating agents.
 - **[references/code-retrieval-patterns.md](references/code-retrieval-patterns.md)** — file/chunk/dependency-aware retrieval, chunking/embedding guidance, knowledge-graph schema and queries. Read when building RAG for code.
+- **[references/memory-and-context-editing.md](references/memory-and-context-editing.md)** — the memory-tool pattern (file-backed memory, what to store vs. recompute, retention, security) and context editing/compaction (eviction priority, summarize-and-replace, token-savings payoff) and how both weave into the agent loop. Read when persisting state across sessions or keeping a long loop from exhausting the window.
+- **[references/long-context-strategies.md](references/long-context-strategies.md)** — long-context vs. RAG vs. hybrid decision-making, budget allocation across a 1M-token window, position/attention effects, and when a bigger window hurts (cost, latency, distraction). Read when choosing a window-vs-retrieval strategy.
 - **[references/workflows-and-quality.md](references/workflows-and-quality.md)** — the three workflows, anti-patterns, evaluation metrics, troubleshooting, and success criteria. Read before running a workflow and before shipping.
 
 ## Scope &amp; Limitations
@@ -727,7 +737,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/context-engine/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html" class="skill-card" style="text-decoration:none"><h3>Agentic Evaluation Framework</h3><p>This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/context-engine/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

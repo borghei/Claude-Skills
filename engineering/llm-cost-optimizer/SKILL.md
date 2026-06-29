@@ -6,11 +6,11 @@ description: >
   "compare model pricing", or "reduce LLM API costs".
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: engineering
   domain: ai-cost-management
-  updated: 2026-04-02
+  updated: 2026-06-29
   tags: [llm, tokens, cost-optimization, prompt-engineering, pricing]
 ---
 
@@ -55,6 +55,7 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 |------|---------|-----------|
 | `token_counter.py` | Count tokens and estimate costs across models | `--file`, `--text`, `--stdin`, `--models` |
 | `prompt_optimizer.py` | Analyze prompts for token reduction opportunities | `--file`, `--target-reduction`, `--format` |
+| `cache_savings_calculator.py` | Model prompt-cache economics: naive vs cached cost, break-even reuse, % savings | `--requests`, `--cached-tokens`, `--cache-write-multiplier`, `--cache-read-multiplier`, `--base-input-price`, `--json` |
 
 ## Workflows
 
@@ -74,6 +75,7 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 ## Reference Documentation
 
 - [LLM Pricing Guide](references/llm-pricing-guide.md) - Current pricing for major LLM providers, token estimation methods
+- [Caching & Batch Economics](references/caching-and-batch-economics.md) - Prompt/context caching break-even math, batch-API cost tradeoff, reasoning-effort cost impact, structured-output token overhead (model-agnostic, user-supplied rates)
 
 ## Common Patterns
 
@@ -90,3 +92,5 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 - Reserve large models for complex reasoning
 - Implement model routing based on query complexity
 - Cache responses for identical or similar queries
+- Cache the stable system-prompt/context/schema prefix (most-stable first, volatile last) and check the reuse break-even with `cache_savings_calculator.py`
+- Route bulk, non-interactive work to the batch API (~half cost for added latency); right-size reasoning effort per route — high only where accuracy demands it

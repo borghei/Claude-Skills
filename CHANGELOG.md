@@ -5,6 +5,30 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.11.0] - 2026-06-29 (AI-skills modernization — 2026 agentic capabilities)
+
+Closes the biggest coverage gap surfaced by an audit of the library's AI/LLM skills: the newest agentic capabilities (reasoning effort, the memory tool, context editing, batch processing, computer use, LLM-as-judge) had near-zero coverage. **343 skills · 17 domains · 786 Python tools** (engineering 82 → 86).
+
+### Added
+
+Four new engineering skills, each with stdlib-only Python tools and reference knowledge bases:
+
+- **`extended-thinking-architect`** — decide reasoning effort / thinking budgets: when reasoning pays off vs. a cheaper model + better prompt, per-phase budget allocation across an agent loop, cost/quality/latency tradeoffs, overthinking guards. Tools: `reasoning_budget_advisor.py`, `reasoning_loop_allocator.py`.
+- **`batch-api-orchestrator`** — batch vs. realtime/streaming decisions, bulk job design (chunking, idempotency, partial-failure reconciliation), the ~half-cost-for-latency tradeoff. Tools: `batch_cost_estimator.py`, `batch_job_planner.py`.
+- **`computer-use-automation`** — the screenshot→reason→action loop, computer-use vs. structured-tool/MCP decision matrix, reliability & safety patterns. Tools: `tool_choice_advisor.py`, `action_safety_linter.py`.
+- **`agentic-evaluation-framework`** — LLM-as-judge rubric design, bias mitigation, pairwise ranking (Elo + Bradley-Terry). Tools: `rubric_scorer.py`, `pairwise_ranking.py`.
+
+### Changed
+
+Four existing AI skills upgraded with modern coverage (each adds references + a tool and bumps its version):
+
+- **`llm-cost-optimizer`** — prompt-caching economics, batch tradeoff, reasoning-effort cost, structured-output overhead (+ `cache_savings_calculator.py`).
+- **`context-engine`** — the memory-tool pattern, context editing/compaction, explicit 1M-context strategies (+ `context_budget_planner.py`).
+- **`agent-workflow-designer`** — subagent scoping/creation (tool allow-lists, isolated context, return contracts) and multi-model cost estimation (+ `multi_agent_cost_estimator.py`).
+- **`mcp-server-builder`** — streaming/progress for long tools, computer-use-via-MCP, batch-friendly tool design (+ `tool_schema_linter.py`).
+
+All content is model-agnostic and principle-focused (no hardcoded vendor prices or invented API signatures); all tools are standard-library-only with `--json` output. Manifests, website, and prose surfaces regenerated to 343/17/786.
+
 ## [4.10.0] - 2026-06-29 (Cross-platform surface refresh + single-source manifests)
 
 Realigns every assistant-facing surface with the real library (**339 skills · 17 domains · 774 Python tools**) and unifies the machine catalogs behind one generator so they can no longer drift independently.

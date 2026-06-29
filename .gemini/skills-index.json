@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-06-29T18:17:35+00:00",
-  "total_skills": 339,
+  "updated": "2026-06-29T18:39:05+00:00",
+  "total_skills": 343,
   "skills": [
     {
       "name": "a11y-audit",
@@ -47,6 +47,7 @@
       "path": "engineering/agent-workflow-designer/SKILL.md",
       "tools": [
         "cost_estimator.py",
+        "multi_agent_cost_estimator.py",
         "workflow_validator.py",
         "workflow_visualizer.py"
       ],
@@ -70,6 +71,23 @@
         "workflow",
         "parallel",
         "agent-hub"
+      ]
+    },
+    {
+      "name": "agentic-evaluation-framework",
+      "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".",
+      "domain": "engineering",
+      "path": "engineering/agentic-evaluation-framework/SKILL.md",
+      "tools": [
+        "pairwise_ranking.py",
+        "rubric_scorer.py"
+      ],
+      "tags": [
+        "evaluation",
+        "llm-as-judge",
+        "rubrics",
+        "agents",
+        "quality"
       ]
     },
     {
@@ -148,6 +166,23 @@
         "entra-id",
         "networking",
         "cost-optimization"
+      ]
+    },
+    {
+      "name": "batch-api-orchestrator",
+      "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".",
+      "domain": "engineering",
+      "path": "engineering/batch-api-orchestrator/SKILL.md",
+      "tools": [
+        "batch_cost_estimator.py",
+        "batch_job_planner.py"
+      ],
+      "tags": [
+        "batch-api",
+        "llm",
+        "cost-optimization",
+        "throughput",
+        "async"
       ]
     },
     {
@@ -276,12 +311,30 @@
       ]
     },
     {
+      "name": "computer-use-automation",
+      "description": "This skill should be used when the user asks to \"build a computer-use agent\", \"automate a GUI with an AI agent\", \"when to use computer use vs an API\", \"make browser automation reliable\", or \"design screenshot-driven agent actions\".",
+      "domain": "engineering",
+      "path": "engineering/computer-use-automation/SKILL.md",
+      "tools": [
+        "action_safety_linter.py",
+        "tool_choice_advisor.py"
+      ],
+      "tags": [
+        "computer-use",
+        "browser-automation",
+        "agents",
+        "gui",
+        "reliability"
+      ]
+    },
+    {
       "name": "context-engine",
       "description": "Context management engine for AI coding agents. Use when building agent memory systems, optimizing context windows, allocating token budgets, designing RAG pipelines for code, or managing persistent multi-session agent state.",
       "domain": "engineering",
       "path": "engineering/context-engine/SKILL.md",
       "tools": [
         "context_analyzer.py",
+        "context_budget_planner.py",
         "context_pruner.py",
         "memory_indexer.py"
       ],
@@ -422,6 +475,23 @@
         "secret_scanner.py"
       ],
       "tags": []
+    },
+    {
+      "name": "extended-thinking-architect",
+      "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".",
+      "domain": "engineering",
+      "path": "engineering/extended-thinking-architect/SKILL.md",
+      "tools": [
+        "reasoning_budget_advisor.py",
+        "reasoning_loop_allocator.py"
+      ],
+      "tags": [
+        "extended-thinking",
+        "reasoning-effort",
+        "llm",
+        "cost-optimization",
+        "agents"
+      ]
     },
     {
       "name": "feature-flags-architect",
@@ -583,6 +653,7 @@
       "domain": "engineering",
       "path": "engineering/llm-cost-optimizer/SKILL.md",
       "tools": [
+        "cache_savings_calculator.py",
         "prompt_optimizer.py",
         "token_counter.py"
       ],
@@ -602,7 +673,8 @@
       "tools": [
         "openapi_converter.py",
         "server_scaffolder.py",
-        "tool_linter.py"
+        "tool_linter.py",
+        "tool_schema_linter.py"
       ],
       "tags": []
     },

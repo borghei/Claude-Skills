@@ -18,7 +18,7 @@ Claude-Skills/
 │   ├── marketing/            # Content creator, demand gen, SEO
 │   ├── product/              # Product manager
 │   └── personas/             # 7 cross-functional personas
-├── engineering/              # 82 engineering skills + 233 tools
+├── engineering/              # 86 engineering skills + 245 tools
 ├── marketing/                # 38 marketing skills + 115 tools
 ├── c-level-advisor/          # 26 C-level skills + 73 tools
 ├── product-team/             # 8 product skills + 15 tools
@@ -77,7 +77,7 @@ Personas combine skills from multiple domains. They define a professional identi
 
 | File | Purpose |
 |---|---|
-| `skills.json` | Machine-readable catalog of all 339 skills with metadata |
+| `skills.json` | Machine-readable catalog of all 343 skills with metadata |
 | `CHANGELOG.md` | Version history and release notes |
 | `CONTRIBUTING.md` | Contribution guidelines |
 | `LICENSE` | MIT + Commons Clause license |

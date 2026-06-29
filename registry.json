@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-29T18:17:35+00:00",
+  "generated_at": "2026-06-29T18:39:05+00:00",
   "repository": "claude-skills",
-  "skill_count": 339,
+  "skill_count": 343,
   "domain_count": 17,
   "domains": [
     "business-growth",
@@ -68,8 +68,8 @@
       "domain": "engineering",
       "description": "Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state management. Use when building pipelines of specialized agents, designing fan-out/fan-in patterns, or implementing fault-tolerant workflows.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-15",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "path": "engineering/agent-workflow-designer",
       "has_scripts": true,
       "has_references": true
@@ -89,6 +89,23 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "path": "engineering/agenthub",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "agentic-evaluation-framework",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".",
+      "tags": [
+        "evaluation",
+        "llm-as-judge",
+        "rubrics",
+        "agents",
+        "quality"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "path": "engineering/agentic-evaluation-framework",
       "has_scripts": true,
       "has_references": true
     },
@@ -164,6 +181,23 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "path": "engineering/azure-cloud-architect",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "batch-api-orchestrator",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".",
+      "tags": [
+        "batch-api",
+        "llm",
+        "cost-optimization",
+        "throughput",
+        "async"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "path": "engineering/batch-api-orchestrator",
       "has_scripts": true,
       "has_references": true
     },
@@ -285,12 +319,29 @@
       "has_references": true
     },
     {
+      "name": "computer-use-automation",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"build a computer-use agent\", \"automate a GUI with an AI agent\", \"when to use computer use vs an API\", \"make browser automation reliable\", or \"design screenshot-driven agent actions\".",
+      "tags": [
+        "computer-use",
+        "browser-automation",
+        "agents",
+        "gui",
+        "reliability"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "path": "engineering/computer-use-automation",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "context-engine",
       "domain": "engineering",
       "description": "Context management engine for AI coding agents. Use when building agent memory systems, optimizing context windows, allocating token budgets, designing RAG pipelines for code, or managing persistent multi-session agent state.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "path": "engineering/context-engine",
       "has_scripts": true,
       "has_references": true
@@ -422,6 +473,23 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "path": "engineering/env-secrets-manager",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "extended-thinking-architect",
+      "domain": "engineering",
+      "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".",
+      "tags": [
+        "extended-thinking",
+        "reasoning-effort",
+        "llm",
+        "cost-optimization",
+        "agents"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-06-29",
+      "path": "engineering/extended-thinking-architect",
       "has_scripts": true,
       "has_references": true
     },
@@ -585,8 +653,8 @@
         "prompt-engineering",
         "pricing"
       ],
-      "version": "1.0.0",
-      "updated": "2026-04-02",
+      "version": "1.1.0",
+      "updated": "2026-06-29",
       "path": "engineering/llm-cost-optimizer",
       "has_scripts": true,
       "has_references": true
@@ -596,8 +664,8 @@
       "domain": "engineering",
       "description": "Build MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transports. Use when exposing APIs to AI agents, building tool servers, converting OpenAPI to MCP, or creating MCP integrations.",
       "tags": [],
-      "version": "1.1.0",
-      "updated": "2026-06-15",
+      "version": "1.2.0",
+      "updated": "2026-06-29",
       "path": "engineering/mcp-server-builder",
       "has_scripts": true,
       "has_references": true

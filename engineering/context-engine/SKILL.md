@@ -6,12 +6,12 @@ description: >
   managing persistent multi-session agent state.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: ai-agents
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-06-29
   frameworks: context-window-optimization, memory-architecture, knowledge-graphs
 ---
 # Context Engine - AI Agent Context Management
@@ -25,6 +25,8 @@ Context Engine provides production-grade patterns for managing what AI agents kn
 - **Code retrieval** — file-level, chunk-level (RAG), and dependency-aware retrieval with code chunking and embedding guidance.
 - **Knowledge graph construction** — codebase graph schema (nodes + edges) and graph queries that resolve agent questions.
 - **Window optimization patterns** — sliding window with anchors, progressive summarization, selective tool-result caching.
+- **Memory tool & context editing** — file-backed persistent memory across sessions, plus context compaction (evict stale tool outputs, summarize-and-replace history) to keep a long loop from exhausting the window.
+- **Long-context strategies** — when to use a 1M-token window vs. RAG vs. a hybrid agent loop, budget allocation across a big window, and position/attention effects.
 - **Multi-agent context sharing** — shared context bus and a five-element handoff protocol.
 
 ## When to Use
@@ -52,6 +54,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 | `context_analyzer.py` | Analyze files/prompts for token usage, relevance, and optimization suggestions | `python scripts/context_analyzer.py src/ --budget 128000 --json` |
 | `context_pruner.py` | Prune low-relevance content, redundancy, and verbose patterns from context | `python scripts/context_pruner.py src/main.py --aggressive --json` |
 | `memory_indexer.py` | Index and search a memory/knowledge base with TF-IDF relevance scoring | `python scripts/memory_indexer.py docs/ --query 'auth middleware' --top 5` |
+| `context_budget_planner.py` | Allocate a window across components, flag overflow, and suggest what to compact/evict first | `python scripts/context_budget_planner.py --window-size 200000 --system 4000 --history 60000 --tools 90000 --rag 40000 --reserve-output 8000` |
 
 ## References
 
@@ -60,6 +63,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/context-window-strategies.md](references/context-window-strategies.md)** — budget allocation, packing strategies, and window-optimization patterns. Read when planning budgets or optimizing a long conversation.
 - **[references/memory-architecture-guide.md](references/memory-architecture-guide.md)** — three-layer memory model, promotion protocol, staleness detection, shared context bus + handoff protocol. Read when designing persistent memory or coordinating agents.
 - **[references/code-retrieval-patterns.md](references/code-retrieval-patterns.md)** — file/chunk/dependency-aware retrieval, chunking/embedding guidance, knowledge-graph schema and queries. Read when building RAG for code.
+- **[references/memory-and-context-editing.md](references/memory-and-context-editing.md)** — the memory-tool pattern (file-backed memory, what to store vs. recompute, retention, security) and context editing/compaction (eviction priority, summarize-and-replace, token-savings payoff) and how both weave into the agent loop. Read when persisting state across sessions or keeping a long loop from exhausting the window.
+- **[references/long-context-strategies.md](references/long-context-strategies.md)** — long-context vs. RAG vs. hybrid decision-making, budget allocation across a 1M-token window, position/attention effects, and when a bigger window hurts (cost, latency, distraction). Read when choosing a window-vs-retrieval strategy.
 - **[references/workflows-and-quality.md](references/workflows-and-quality.md)** — the three workflows, anti-patterns, evaluation metrics, troubleshooting, and success criteria. Read before running a workflow and before shipping.
 
 ## Scope & Limitations

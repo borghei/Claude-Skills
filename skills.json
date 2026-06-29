@@ -1,12 +1,12 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 339 production-ready skills across 17 domains. Project Management is the most-used domain (66 skills).",
-  "version": "4.10.0",
+  "description": "The Universal AI Skills Library — 343 production-ready skills across 17 domains. Project Management is the most-used domain (66 skills).",
+  "version": "4.11.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 339,
+  "total_skills": 343,
   "updated": "2026-06-29",
   "domains": {
     "business-growth": {
@@ -26,8 +26,8 @@
       "tools": 4
     },
     "engineering": {
-      "count": 82,
-      "tools": 233
+      "count": 86,
+      "tools": 245
     },
     "finance": {
       "count": 3,
@@ -134,10 +134,10 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "license": "MIT + Commons Clause",
       "tags": [],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
       "has_assets": false
     },
@@ -159,6 +159,26 @@
         "agent-hub"
       ],
       "tools": 4,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "agentic-evaluation-framework",
+      "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".",
+      "path": "engineering/agentic-evaluation-framework/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "evaluation",
+        "llm-as-judge",
+        "rubrics",
+        "agents",
+        "quality"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": false
     },
@@ -249,6 +269,26 @@
         "cost-optimization"
       ],
       "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "batch-api-orchestrator",
+      "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".",
+      "path": "engineering/batch-api-orchestrator/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "batch-api",
+        "llm",
+        "cost-optimization",
+        "throughput",
+        "async"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": false
     },
@@ -394,16 +434,36 @@
       "has_assets": true
     },
     {
+      "name": "computer-use-automation",
+      "description": "This skill should be used when the user asks to \"build a computer-use agent\", \"automate a GUI with an AI agent\", \"when to use computer use vs an API\", \"make browser automation reliable\", or \"design screenshot-driven agent actions\".",
+      "path": "engineering/computer-use-automation/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "computer-use",
+        "browser-automation",
+        "agents",
+        "gui",
+        "reliability"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
       "name": "context-engine",
       "description": "Context management engine for AI coding agents. Use when building agent memory systems, optimizing context windows, allocating token budgets, designing RAG pipelines for code, or managing persistent multi-session agent state.",
       "path": "engineering/context-engine/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "license": "MIT + Commons Clause",
       "tags": [],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
       "has_assets": false
     },
@@ -561,6 +621,26 @@
       "license": "MIT + Commons Clause",
       "tags": [],
       "tools": 3,
+      "has_references": true,
+      "has_assets": false
+    },
+    {
+      "name": "extended-thinking-architect",
+      "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".",
+      "path": "engineering/extended-thinking-architect/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "extended-thinking",
+        "reasoning-effort",
+        "llm",
+        "cost-optimization",
+        "agents"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": false
     },
@@ -747,7 +827,7 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "llm",
@@ -756,7 +836,7 @@
         "prompt-engineering",
         "pricing"
       ],
-      "tools": 2,
+      "tools": 3,
       "has_references": true,
       "has_assets": false
     },
@@ -767,10 +847,10 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "license": "MIT + Commons Clause",
       "tags": [],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
       "has_assets": false
     },
