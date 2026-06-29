@@ -38,4 +38,15 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add $CATALOGS
           git commit -m "chore(cli): regenerate skills manifests [skip ci]"
-          git push
+          # Another workflow (e.g. Sync Codex Skills) may push to main between
+          # our checkout and push — rebase and retry instead of failing red.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt ${attempt}."
+              exit 0
+            fi
+            echo "Push rejected (attempt ${attempt}); rebasing onto origin/main…"
+            git pull --rebase --autostash origin main || true
+          done
+          echo "::error::Could not push catalogs after 5 attempts."
+          exit 1

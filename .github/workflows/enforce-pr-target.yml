@@ -2,10 +2,10 @@
 # Enforce PR Target — Prevent PRs to wrong branches
 # ============================================================================
 # Branch governance:
-#   feature/*, feat/* → may target dev OR main (ship-to-main allowed)
-#   dev               → may target main
-#   hotfix/*          → may target main (emergency fixes)
-#   All other         → must target dev
+#   Conventional-Commit type branches (feat/, fix/, chore/, docs/, ci/, perf/,
+#   refactor/, test/, build/, style/, revert/), plus feature/, hotfix/, and dev
+#   → may target main (this repo ships type-branches straight to main).
+#   Anything else → must target dev.
 # ============================================================================
 
 name: Enforce PR Target
@@ -27,15 +27,13 @@ jobs:
         run: |
           echo "PR #${PR_NUMBER}: ${HEAD} → ${BASE}"
 
-          # Rule 1: Only dev, hotfix/*, feature/*, and feat/* branches may target main
-          if [[ "$BASE" == "main" \
-                && "$HEAD" != "dev" \
-                && "$HEAD" != hotfix/* \
-                && "$HEAD" != feature/* \
-                && "$HEAD" != feat/* ]]; then
+          # Rule 1: dev, feature/*, hotfix/*, and Conventional-Commit type
+          # branches may target main. Everything else should go via dev.
+          ALLOWED='^(dev$|feature/|hotfix/|feat/|fix/|chore/|docs/|ci/|perf/|refactor/|test/|build/|style/|revert/)'
+          if [[ "$BASE" == "main" && ! "$HEAD" =~ $ALLOWED ]]; then
             echo "::error::Branch '${HEAD}' may not target 'main'."
             echo ""
-            echo "Allowed paths to main: dev, hotfix/*, feature/*, feat/* → main"
+            echo "Allowed to main: dev, feature/*, hotfix/*, and feat|fix|chore|docs|ci|perf|refactor|test|build|style|revert/*"
             echo "Other branches should target 'dev' instead."
             exit 1
           fi
