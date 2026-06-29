@@ -4,18 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "engineering/**/SKILL.md"
-      - "marketing/**/SKILL.md"
-      - "c-level-advisor/**/SKILL.md"
-      - "ra-qm-team/**/SKILL.md"
-      - "business-growth/**/SKILL.md"
-      - "legal/**/SKILL.md"
-      - "project-management/**/SKILL.md"
-      - "product-team/**/SKILL.md"
-      - "data-analytics/**/SKILL.md"
-      - "sales-success/**/SKILL.md"
-      - "hr-operations/**/SKILL.md"
-      - "finance/**/SKILL.md"
+      # Any skill in any domain, plus the generator itself.
+      - "**/SKILL.md"
       - "scripts/build_manifest.py"
   workflow_dispatch:
 
@@ -32,17 +22,20 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Regenerate cli/skills.json
+      - name: Regenerate all machine catalogs
+        # One run rewrites every catalog so they cannot drift apart:
+        # cli/skills.json, registry.json, .gemini/skills-index.json, skills.json
         run: python3 scripts/build_manifest.py
 
-      - name: Commit updated manifest
+      - name: Commit updated catalogs
         run: |
-          if git diff --quiet cli/skills.json; then
-            echo "No manifest changes."
+          CATALOGS="cli/skills.json registry.json .gemini/skills-index.json skills.json"
+          if git diff --quiet -- $CATALOGS; then
+            echo "No catalog changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cli/skills.json
-          git commit -m "chore(cli): regenerate skills manifest [skip ci]"
+          git add $CATALOGS
+          git commit -m "chore(cli): regenerate skills manifests [skip ci]"
           git push
