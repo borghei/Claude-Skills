@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-22T15:47:23+00:00",
+  "generated_at": "2026-06-29T17:54:28+00:00",
   "skill_count": 339,
   "domain_count": 17,
   "skills": [
@@ -2862,7 +2862,7 @@
         "scripts/growth_loop_modeler.py",
         "scripts/viral_coefficient_calculator.py"
       ],
-      "size_bytes": 38420,
+      "size_bytes": 39305,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3425,7 +3425,7 @@
         "scripts/financial_health_scorer.py",
         "scripts/scenario_modeler.py"
       ],
-      "size_bytes": 48952,
+      "size_bytes": 49903,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false

@@ -21,6 +21,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = REPO_ROOT / "cli" / "skills.json"
 REGISTRY_PATH = REPO_ROOT / "registry.json"
+GEMINI_INDEX_PATH = REPO_ROOT / ".gemini" / "skills-index.json"
 
 DOMAINS = [
     "engineering",
@@ -251,11 +252,43 @@ def main(argv: list[str]) -> int:
         encoding="utf-8",
     )
 
+    if GEMINI_INDEX_PATH.parent.is_dir():
+        gemini_index = {
+            "version": "1.0.0",
+            "updated": generated_at,
+            "total_skills": len(skills),
+            "skills": [_gemini_entry(s) for s in skills],
+        }
+        GEMINI_INDEX_PATH.write_text(
+            json.dumps(gemini_index, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+
     print(f"Wrote {MANIFEST_PATH.relative_to(REPO_ROOT)}")
     print(f"  skills: {manifest['skill_count']}")
     print(f"  domains: {manifest['domain_count']}")
     print(f"Wrote {REGISTRY_PATH.relative_to(REPO_ROOT)} (public registry)")
+    if GEMINI_INDEX_PATH.parent.is_dir():
+        print(f"Wrote {GEMINI_INDEX_PATH.relative_to(REPO_ROOT)} (Gemini CLI index)")
     return 0
+
+
+def _gemini_entry(skill: dict) -> dict:
+    """Gemini CLI skills-index.json shape — name, description, domain, path,
+    tools (script filenames), tags."""
+    tools = sorted(
+        f.split("/", 1)[1]
+        for f in skill.get("files", [])
+        if f.startswith("scripts/") and f.endswith(".py") and "/" in f
+    )
+    return {
+        "name": skill["name"],
+        "description": skill.get("description", ""),
+        "domain": skill["domain"],
+        "path": f"{skill['path']}/SKILL.md",
+        "tools": tools,
+        "tags": skill.get("tags", []),
+    }
 
 
 REGISTRY_FIELDS = ("name", "domain", "description", "tags", "version", "updated", "path")

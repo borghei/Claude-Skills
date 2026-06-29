@@ -1,0 +1,40 @@
+---
+description: What the AI Skills Library is, its structure, and core principles. Apply when reasoning about the repo as a whole.
+alwaysApply: true
+---
+
+# AI Skills Library
+
+This is the **universal AI skills library** — **339 production-ready skill packages across 17 domains** with **787 Python automation tools**, 76 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant.
+
+**This is NOT a traditional application.** It is a library of self-contained skill packages meant to be extracted and deployed into user workflows. There is no build system or test framework — that is intentional, for portability.
+
+## Domains (folder → skill count)
+
+`engineering/` 82 · `project-management/` 66 · `marketing/` 39 · `c-level-advisor/` 31 · `ra-qm-team/` 27 · `business-growth/` 20 · `legal/` 17 (experimental) · `product-team/` 13 · `personal-productivity/` 10 · `vertical-advisors/` 7 · `data-analytics/` 5 · `sales-success/` 5 · `documents/` 4 · `hr-operations/` 4 · `research/` 4 · `finance/` 3 · `workflow/` 2 (meta-skills: skill-router, handoff)
+
+## Each skill is a self-contained package
+
+```
+skill-name/
+├── SKILL.md       # Master doc with workflows (progressive disclosure)
+├── scripts/       # Python CLI tools (stdlib only, no ML/LLM calls)
+├── references/    # Expert knowledge bases
+└── assets/        # User-facing templates
+```
+
+Knowledge flows: `references/` → `SKILL.md` workflows → `scripts/` execution → `assets/` templates.
+
+## Principles
+
+1. Skills are products — each deployable as a standalone package.
+2. Documentation-driven — clear, actionable docs over generic advice.
+3. Algorithm over AI — deterministic Python analysis, never LLM calls in scripts.
+4. Template-heavy — ready-to-use templates users customize.
+5. Self-contained — no dependencies between skills.
+
+## Cross-platform surface (keep in sync)
+
+The same library is exposed to every assistant. When skills or counts change, update: `cli/skills.json` + `registry.json` + `.gemini/skills-index.json` (all via `python scripts/build_manifest.py`), `.claude-plugin/marketplace.json` (+ per-domain `plugin.json`), and the prose configs `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `.windsurfrules`, `.clinerules`, `.goosehints`.
+
+Commits: Conventional Commits — `feat(domain):`, `fix(tool):`, `docs(skill):`.

@@ -1,0 +1,36 @@
+---
+description: Conventions for the Python automation tools that ship inside skills.
+globs: **/scripts/*.py
+---
+
+# Skill Python tools
+
+Scripts under a skill's `scripts/` directory are deterministic automation helpers, not AI.
+
+## Hard rules
+
+- **Standard library only.** No third-party packages, no `pip install`. If a script truly needs a dependency, document it in the skill's `SKILL.md` — but prefer a stdlib implementation.
+- **No ML/LLM calls.** Scripts use deterministic analysis (parsing, scoring, math). Calling an LLM defeats the portability and speed the library guarantees.
+- **CLI-first.** Use `argparse`. Support both `--json` (machine-readable) and a human-readable default output.
+- **No build system.** Scripts run directly: `python3 <domain>/<skill>/scripts/<tool>.py …`.
+
+## Shape
+
+```python
+#!/usr/bin/env python3
+"""One-line purpose. Standard library only."""
+import argparse, json, sys
+
+def main(argv):
+    p = argparse.ArgumentParser(description="…")
+    p.add_argument("--json", action="store_true", help="emit JSON")
+    args = p.parse_args(argv)
+    result = {...}
+    print(json.dumps(result, indent=2) if args.json else render(result))
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
+```
+
+Keep output stable and parseable — these tools are meant to be chained and run in CI.

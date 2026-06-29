@@ -1,6 +1,6 @@
 {
   "name": "engineering-advanced-skills",
-  "description": "11 advanced engineering skills covering tech debt tracking, API design review, database design, dependency auditing, release management, RAG architecture, agent design, migration planning, observability, interview system design, and skill testing",
+  "description": "82 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
   "version": "1.0.0",
   "author": {
     "name": "borghei",

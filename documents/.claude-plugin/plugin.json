@@ -1,0 +1,13 @@
+{
+  "name": "documents-skills",
+  "description": "4 documents skills: docx, pdf, pptx, and xlsx audit toolkits using stdlib-only OOXML parsing",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/documents",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

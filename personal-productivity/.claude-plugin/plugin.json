@@ -1,0 +1,13 @@
+{
+  "name": "personal-productivity-skills",
+  "description": "10 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, and weekly review",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/personal-productivity",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

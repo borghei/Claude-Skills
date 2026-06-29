@@ -1,0 +1,13 @@
+{
+  "name": "vertical-advisor-skills",
+  "description": "7 vertical advisors skills: strategic advisors for fintech, healthtech, edtech, ecommerce, proptech, climate-tech, and marketplace businesses",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/vertical-advisors",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

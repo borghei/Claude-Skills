@@ -1,0 +1,13 @@
+{
+  "name": "sales-success-skills",
+  "description": "5 sales success skills: account executive, sales operations, and solutions architect playbooks",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/sales-success",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

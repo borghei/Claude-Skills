@@ -1,0 +1,13 @@
+{
+  "name": "research-skills",
+  "description": "4 research skills: systematic literature review, grant proposals, patent prior-art/landscape, and intelligence dossiers",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/research",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

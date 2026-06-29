@@ -1,0 +1,13 @@
+{
+  "name": "data-analytics-skills",
+  "description": "5 data analytics skills: data analysis, business intelligence, data science, ML ops, and analytics engineering",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/data-analytics",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — 204 production-ready skill packages across 13 professional domains with 559 Python automation tools, 17 AI agents, and 12 sample CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — **339 production-ready skill packages across 17 professional domains** with **787 Python automation tools**, 76 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex / ChatGPT, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -10,35 +10,44 @@ This is the **universal AI skills library** — 204 production-ready skill packa
 
 | Platform | Config File | Status |
 |----------|------------|--------|
-| Claude Code | `CLAUDE.md` | Primary |
-| OpenAI Codex | `AGENTS.md` | Full |
-| Cursor | `.cursorrules` | Full |
+| Claude Code | `CLAUDE.md` + `.claude-plugin/marketplace.json` | Primary |
+| OpenAI Codex / ChatGPT | `AGENTS.md` (root + nested per-domain) | Full |
+| Cursor | `.cursor/rules/*.mdc` (+ legacy `.cursorrules`) | Full |
+| Gemini CLI | `GEMINI.md` + `.gemini/skills-index.json` | Full |
 | GitHub Copilot | `.github/copilot-instructions.md` | Full |
 | Windsurf | `.windsurfrules` | Full |
 | Cline | `.clinerules` | Full |
 | Goose | `.goosehints` | Full |
-| Aider | `AGENTS.md` | Full |
-| Jules | `AGENTS.md` | Full |
-| RooCode / Kilo Code | `AGENTS.md` | Full |
+| Aider · Jules · RooCode / Kilo Code | `AGENTS.md` | Full |
 
-## Repository Structure
+> Codex and other AGENTS.md-aware agents also read **nested `AGENTS.md`/`CLAUDE.md` files** inside each
+> domain folder for scoped guidance (e.g. `engineering/CLAUDE.md`, `project-management/CLAUDE.md`).
+
+## Repository Structure (domain → skill count)
 
 ```
-├── engineering/          # 61 engineering skills + 177 Python tools
-├── marketing/      # 35 marketing skills + 106 Python tools
-├── product-team/         # 8 product skills + 15 Python tools
-├── project-management/   # 25 PM skills + 53 Python tools
-├── c-level-advisor/      # 26 C-level advisory skills + 73 Python tools
-├── ra-qm-team/           # 21 regulatory/quality/compliance skills + 38 Python tools
-├── business-growth/      # 17 business & growth skills + 48 Python tools
-├── data-analytics/       # 5 data analytics skills + 16 Python tools
-├── hr-operations/        # 4 HR operations skills + 12 Python tools
-├── sales-success/        # 5 sales success skills + 15 Python tools
-├── finance/              # 1 finance skill + 4 Python tools
-├── agents/               # 11 production skill agents
-├── scripts/              # Skill installer + utility scripts
-├── standards/            # Best practices library
-└── templates/            # Reusable templates + 12 sample workflows
+├── engineering/            # 82 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
+├── project-management/     # 66 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
+├── marketing/              # 39 skills — content, SEO/AEO, demand gen, brand, analytics
+├── c-level-advisor/        # 31 skills — CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE
+├── ra-qm-team/             # 27 skills — ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF
+├── business-growth/        # 20 skills — CRO, pricing, revenue ops, commercial
+├── legal/                  # 17 skills — EXPERIMENTAL: contracts, NDA, privacy, DPIA, breach response
+├── product-team/           # 13 skills — RICE, OKRs, UX research, product analytics, Apple HIG
+├── personal-productivity/  # 10 skills — resume, leads, meetings, invoices, email triage
+├── vertical-advisors/      # 7 skills  — fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace
+├── data-analytics/         # 5 skills  — analysis, BI, data science, ML ops
+├── sales-success/          # 5 skills  — account exec, sales ops, solutions architect
+├── documents/              # 4 skills  — docx, pdf, pptx, xlsx (stdlib OOXML)
+├── hr-operations/          # 4 skills  — talent, people analytics, HRBP
+├── research/               # 4 skills  — litreview, grants, patent, dossier
+├── finance/                # 3 skills  — financial analysis, DCF, forecasting
+├── workflow/               # 2 skills  — skill-router, handoff (meta-skills)
+├── agents/                 # 68 cs-* domain agents + 8 cross-domain personas
+├── scripts/                # Manifest builder (build_manifest.py) + skill installer
+├── standards/              # Best-practices library
+├── templates/              # Reusable templates + sample workflows
+└── cli/skills.json         # Machine-readable manifest (regenerated by build_manifest.py)
 ```
 
 ## Skill Package Pattern
@@ -47,7 +56,7 @@ Every skill follows the same structure:
 
 ```
 skill-name/
-├── SKILL.md       # Master documentation with workflows
+├── SKILL.md       # Master documentation with workflows (progressive disclosure: lean Tier-1 + on-demand references)
 ├── scripts/       # Python CLI tools (standard library, no ML/LLM calls)
 ├── references/    # Expert knowledge bases
 └── assets/        # User-facing templates
@@ -64,16 +73,22 @@ python scripts/skill-installer.py list
 # Install a skill
 python scripts/skill-installer.py install senior-fullstack --agent claude
 python scripts/skill-installer.py install content-creator --agent cursor
-python scripts/skill-installer.py install ceo-advisor --agent vscode
+python scripts/skill-installer.py install ceo-advisor --agent codex
 
 # Keep skills up to date
 python scripts/skill-installer.py update
 ```
 
+After adding/removing/renaming any skill, regenerate the manifest so every platform surface stays in sync:
+
+```bash
+python scripts/build_manifest.py   # rewrites cli/skills.json + registry.json
+```
+
 ## Code Style
 
 - **Python scripts:** Standard library only, CLI-first with argparse, JSON + human-readable output
-- **Markdown:** YAML frontmatter on all SKILL.md files, consistent formatting
+- **Markdown:** YAML frontmatter on all SKILL.md files, descriptions ≤ ~60 tokens, consistent formatting
 - **Commits:** Conventional commits — `feat(domain):`, `fix(tool):`, `docs(skill):`
 
 ## Key Principles

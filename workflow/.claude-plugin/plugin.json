@@ -1,0 +1,13 @@
+{
+  "name": "workflow-skills",
+  "description": "2 workflow skills: meta-skills for routing to the right skill (skill-router) and handing off context between skills (handoff)",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/workflow",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

@@ -4,167 +4,323 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant - 97 expert skills across marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
+  "description": "Production-ready AI skill packages for every coding assistant \u2014 339 expert skills across 17 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, finance, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "97 production-ready AI skill packages for every coding assistant across 13 domains: marketing, engineering, product, C-level advisory, project management, regulatory compliance, business growth, finance, data analytics, HR operations, and sales success",
-    "version": "2.0.0"
+    "description": "339 production-ready AI skill packages across 17 domains, installable per-domain as Claude Code plugins",
+    "version": "3.0.0"
   },
   "plugins": [
     {
-      "name": "marketings",
-      "source": "./marketing",
-      "description": "10 marketing skills: content creator, demand generation, product marketing, ASO, social media analytics, campaign analytics, brand strategist, growth marketer, marketing analyst, SEO specialist",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["marketing", "content", "seo", "demand-gen", "social-media"],
-      "category": "marketing"
-    },
-    {
-      "name": "engineering-skills",
+      "name": "engineering-advanced-skills",
       "source": "./engineering",
-      "description": "30 engineering skills: architecture, frontend, backend, fullstack, QA, DevOps, security, AI/ML, data engineering",
+      "description": "82 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["engineering", "architecture", "frontend", "backend", "devops", "security", "ai", "ml", "data"],
+      "keywords": [
+        "engineering",
+        "architecture",
+        "frontend",
+        "backend",
+        "devops",
+        "security",
+        "ai",
+        "ml",
+        "data"
+      ],
       "category": "development"
-    },
-    {
-      "name": "product-skills",
-      "source": "./product-team",
-      "description": "7 product skills: product manager toolkit, agile product owner, product strategist, UX researcher, UI design system, product designer, design system lead",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["product", "pm", "agile", "ux", "design-system"],
-      "category": "product"
-    },
-    {
-      "name": "c-level-skills",
-      "source": "./c-level-advisor",
-      "description": "5 C-level advisory skills: CEO advisor, CTO advisor, CFO advisor, CMO advisor, COO advisor",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["ceo", "cto", "executive", "strategy", "leadership"],
-      "category": "leadership"
     },
     {
       "name": "pm-skills",
       "source": "./project-management",
-      "description": "9 project management skills: senior PM, scrum master, Jira expert, Confluence expert, Atlassian admin, templates, agile coach, delivery manager, program manager",
+      "description": "66 project management skills: discovery, delivery, career growth, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), GTM, and Jira/Linear/Notion/Confluence integration",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["project-management", "scrum", "agile", "jira", "confluence", "atlassian"],
+      "keywords": [
+        "project-management",
+        "scrum",
+        "agile",
+        "jira",
+        "linear",
+        "notion",
+        "gtm",
+        "strategy"
+      ],
       "category": "project-management"
+    },
+    {
+      "name": "marketings",
+      "source": "./marketing",
+      "description": "39 marketing skills: content creation, SEO/AEO, demand generation, product marketing, brand strategy, and campaign analytics",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "marketing",
+        "content",
+        "seo",
+        "aeo",
+        "demand-gen",
+        "social-media",
+        "brand"
+      ],
+      "category": "marketing"
+    },
+    {
+      "name": "c-level-skills",
+      "source": "./c-level-advisor",
+      "description": "31 c level advisor skills: CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO advisors plus CAIO, CDO, CCO, General Counsel, and VP Engineering",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "ceo",
+        "cto",
+        "cfo",
+        "cmo",
+        "executive",
+        "strategy",
+        "leadership"
+      ],
+      "category": "leadership"
     },
     {
       "name": "ra-qm-skills",
       "source": "./ra-qm-team",
-      "description": "12 regulatory affairs & quality management skills for HealthTech/MedTech: ISO 13485, MDR, FDA, GDPR, ISO 27001 compliance",
+      "description": "27 ra qm team skills: ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF, PCI-DSS, CCPA, ISO 42001 plus audit-prep playbooks",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["regulatory", "quality", "compliance", "iso-13485", "mdr", "fda", "gdpr", "medtech"],
+      "keywords": [
+        "regulatory",
+        "quality",
+        "compliance",
+        "iso-13485",
+        "mdr",
+        "fda",
+        "gdpr",
+        "soc2",
+        "ai-act"
+      ],
       "category": "compliance"
     },
     {
       "name": "business-growth-skills",
       "source": "./business-growth",
-      "description": "3 business & growth skills: customer success manager, sales engineer, revenue operations",
+      "description": "20 business growth skills: conversion-rate optimization, pricing, referrals, revenue operations, and commercial strategy (deal desk, channel economics, partnerships)",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["customer-success", "sales-engineering", "revenue-operations", "business-growth"],
+      "keywords": [
+        "customer-success",
+        "sales-engineering",
+        "revenue-operations",
+        "cro",
+        "pricing",
+        "commercial"
+      ],
       "category": "business-growth"
+    },
+    {
+      "name": "legal-skills",
+      "source": "./legal",
+      "description": "17 legal skills: EXPERIMENTAL: contract review, NDA, privacy, DPIA, breach response, risk assessment, and mediation",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "legal",
+        "contracts",
+        "nda",
+        "privacy",
+        "dpia",
+        "gdpr",
+        "risk"
+      ],
+      "category": "legal"
+    },
+    {
+      "name": "product-skills",
+      "source": "./product-team",
+      "description": "13 product team skills: product management, RICE/OKRs, UX research, product analytics, Apple HIG, research synthesis, and spec-to-repo",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "product",
+        "pm",
+        "ux",
+        "design-system",
+        "analytics",
+        "apple-hig"
+      ],
+      "category": "product"
+    },
+    {
+      "name": "personal-productivity-skills",
+      "source": "./personal-productivity",
+      "description": "10 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, and weekly review",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "resume",
+        "leads",
+        "meetings",
+        "invoices",
+        "email",
+        "calendar",
+        "weekly-review"
+      ],
+      "category": "productivity"
+    },
+    {
+      "name": "vertical-advisor-skills",
+      "source": "./vertical-advisors",
+      "description": "7 vertical advisors skills: strategic advisors for fintech, healthtech, edtech, ecommerce, proptech, climate-tech, and marketplace businesses",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "fintech",
+        "healthtech",
+        "edtech",
+        "ecommerce",
+        "proptech",
+        "climate-tech",
+        "marketplace"
+      ],
+      "category": "leadership"
+    },
+    {
+      "name": "data-analytics-skills",
+      "source": "./data-analytics",
+      "description": "5 data analytics skills: data analysis, business intelligence, data science, ML ops, and analytics engineering",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "data",
+        "analytics",
+        "bi",
+        "data-science",
+        "ml-ops"
+      ],
+      "category": "data"
+    },
+    {
+      "name": "sales-success-skills",
+      "source": "./sales-success",
+      "description": "5 sales success skills: account executive, sales operations, and solutions architect playbooks",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "sales",
+        "account-executive",
+        "sales-ops",
+        "solutions-architect"
+      ],
+      "category": "sales"
+    },
+    {
+      "name": "documents-skills",
+      "source": "./documents",
+      "description": "4 documents skills: docx, pdf, pptx, and xlsx audit toolkits using stdlib-only OOXML parsing",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "docx",
+        "pdf",
+        "pptx",
+        "xlsx",
+        "ooxml"
+      ],
+      "category": "productivity"
+    },
+    {
+      "name": "hr-operations-skills",
+      "source": "./hr-operations",
+      "description": "4 hr operations skills: talent acquisition, people analytics, and HR business partner toolkits",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "hr",
+        "talent-acquisition",
+        "people-analytics",
+        "hrbp"
+      ],
+      "category": "hr"
+    },
+    {
+      "name": "research-skills",
+      "source": "./research",
+      "description": "4 research skills: systematic literature review, grant proposals, patent prior-art/landscape, and intelligence dossiers",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "research",
+        "litreview",
+        "grants",
+        "patent",
+        "dossier"
+      ],
+      "category": "research"
     },
     {
       "name": "finance-skills",
       "source": "./finance",
-      "description": "1 finance skill: financial analyst with ratio analysis, DCF valuation, budgeting, and forecasting",
+      "description": "3 finance skills: financial analysis with ratio analysis, DCF valuation, budgeting, and forecasting",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["finance", "dcf", "valuation", "budgeting", "forecasting"],
+      "keywords": [
+        "finance",
+        "dcf",
+        "valuation",
+        "budgeting",
+        "forecasting"
+      ],
       "category": "finance"
     },
     {
-      "name": "content-creator",
-      "source": "./marketing/content-creator",
-      "description": "Brand voice analysis, SEO optimization, content frameworks for marketing content creation",
+      "name": "workflow-skills",
+      "source": "./workflow",
+      "description": "2 workflow skills: meta-skills for routing to the right skill (skill-router) and handing off context between skills (handoff)",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
       },
-      "keywords": ["content", "seo", "brand-voice", "marketing"],
-      "category": "marketing"
-    },
-    {
-      "name": "demand-gen",
-      "source": "./marketing/marketing-demand-acquisition",
-      "description": "Demand generation, paid media, SEO, partnerships for Series A+ startups",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["demand-gen", "paid-media", "acquisition", "marketing"],
-      "category": "marketing"
-    },
-    {
-      "name": "fullstack-engineer",
-      "source": "./engineering/senior-fullstack",
-      "description": "End-to-end application development with Next.js, GraphQL, PostgreSQL",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["fullstack", "nextjs", "graphql", "postgresql"],
-      "category": "development"
-    },
-    {
-      "name": "aws-architect",
-      "source": "./engineering/aws-solution-architect",
-      "description": "AWS solution architecture with serverless, cost optimization, and security best practices",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["aws", "cloud", "serverless", "architecture"],
-      "category": "development"
-    },
-    {
-      "name": "product-manager",
-      "source": "./product-team/product-manager-toolkit",
-      "description": "RICE prioritization, customer interview analysis, PRD templates for product managers",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["product-management", "rice", "prd", "prioritization"],
-      "category": "product"
-    },
-    {
-      "name": "scrum-master",
-      "source": "./project-management/scrum-master",
-      "description": "Agile facilitation, sprint planning, retrospectives for Scrum teams",
-      "version": "1.0.0",
-      "author": {
-        "name": "borghei"
-      },
-      "keywords": ["scrum", "agile", "sprint", "retrospective"],
-      "category": "project-management"
+      "keywords": [
+        "workflow",
+        "routing",
+        "handoff",
+        "orchestration",
+        "meta-skills"
+      ],
+      "category": "workflow"
     }
   ]
 }

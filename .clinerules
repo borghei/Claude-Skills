@@ -2,25 +2,22 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — 204 production-ready skill packages across 13 professional domains with 559 Python automation tools and 12 sample CI/CD workflows. It works with every major AI coding assistant.
+This is the **universal AI skills library** — **339 production-ready skill packages across 17 professional domains** with **787 Python automation tools**, 76 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 
-## Repository Structure
+## Repository Structure (domain → skill count)
 
-- `engineering-team/` — 28 core engineering skills + 95 Python tools
-- `engineering/` — 33 advanced architecture skills + 94 Python tools
-- `marketing-skill/` — 35 marketing skills + 106 Python tools
-- `product-team/` — 8 product skills + 15 Python tools
-- `project-management/` — 23 PM skills + 51 Python tools
-- `c-level-advisor/` — 26 C-level advisory skills + 75 Python tools
-- `ra-qm-team/` — 21 regulatory/quality/compliance skills + 38 Python tools
-- `business-growth/` — 16 business & growth skills + 48 Python tools
-- `data-analytics/` — 5 data analytics skills + 16 Python tools
-- `hr-operations/` — 4 HR operations skills + 12 Python tools
-- `sales-success/` — 5 sales success skills + 15 Python tools
-- `finance/` — 1 finance skill + 4 Python tools
-- `scripts/` — Skill installer + utility scripts
+- `engineering/` — 82 skills (architecture, fullstack, DevOps, security, AI/ML, data, agent tooling)
+- `project-management/` — 66 skills (discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion)
+- `marketing/` — 39 skills (content, SEO/AEO, demand gen, brand, analytics)
+- `c-level-advisor/` — 31 skills (CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE)
+- `ra-qm-team/` — 27 skills (ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF)
+- `business-growth/` — 20 skills · `legal/` — 17 skills (EXPERIMENTAL) · `product-team/` — 13 skills
+- `personal-productivity/` — 10 skills · `vertical-advisors/` — 7 skills · `data-analytics/` — 5 skills
+- `sales-success/` — 5 skills · `documents/` — 4 skills · `hr-operations/` — 4 skills · `research/` — 4 skills
+- `finance/` — 3 skills · `workflow/` — 2 skills (skill-router, handoff)
+- `scripts/` — manifest builder + skill installer · `standards/` — best-practices library · `cli/skills.json` — manifest
 
 ## Skill Package Pattern
 
@@ -28,7 +25,7 @@ Every skill follows this structure:
 
 ```
 skill-name/
-├── SKILL.md       # Master documentation with workflows
+├── SKILL.md       # Master documentation with workflows (progressive disclosure)
 ├── scripts/       # Python CLI tools (standard library only, no ML/LLM calls)
 ├── references/    # Expert knowledge bases
 └── assets/        # User-facing templates
@@ -64,3 +61,5 @@ python scripts/skill-installer.py list
 python scripts/skill-installer.py install <skill-name> --agent cline
 python scripts/skill-installer.py update
 ```
+
+After adding/removing/renaming any skill, regenerate the manifest: `python scripts/build_manifest.py`.
