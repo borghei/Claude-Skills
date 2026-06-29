@@ -146,12 +146,12 @@ find {domain}/{skill-name} -name "*[A-Z]*"
 
 **Branch Strategy:**
 ```bash
-# Always start from dev
-git checkout dev
-git pull origin dev
+# Always start from an up-to-date main
+git checkout main
+git pull origin main
 
-# Create feature branch
-git checkout -b feature/skill-{skill-name}
+# Create a type-prefixed branch
+git checkout -b feat/skill-{skill-name}
 
 # Make changes, then commit
 git add {domain}/{skill-name}/
@@ -174,8 +174,8 @@ Updates:
 - PYTHON_TOOLS_AUDIT.md: Added {N} tools ({X} lines)"
 
 # Push and create PR
-git push origin feature/skill-{skill-name}
-gh pr create --base dev --title "feat(skills): Add {Skill Name} skill" \
+git push -u origin feat/skill-{skill-name}
+gh pr create --base main --title "feat(skills): Add {Skill Name} skill" \
   --body "## Summary
 - New {domain} skill: {Skill Name}
 - {N} Python tools, {N} references, {N} templates

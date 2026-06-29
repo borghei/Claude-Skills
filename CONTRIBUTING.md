@@ -22,13 +22,13 @@ gh repo fork <owner>/Claude-Skills --clone
 cd Claude-Skills
 ```
 
-### 2. Branch from dev
+### 2. Branch from main
 
-All work branches from `dev`. Direct pushes to `main` are blocked by branch protection.
+All work branches from `main` (single-trunk — there is no `dev` branch). Direct pushes to `main` are blocked by branch protection, so changes land via PR.
 
 ```bash
-git checkout dev
-git pull origin dev
+git checkout main
+git pull origin main
 git checkout -b <branch-name>
 ```
 
@@ -288,7 +288,7 @@ Use this checklist before submitting any PR:
 [ ] No secrets, API keys, or credentials
 [ ] /review gate passed
 [ ] /security-scan passed
-[ ] PR targets dev branch
+[ ] PR targets main branch
 [ ] One skill per PR
 ```
 

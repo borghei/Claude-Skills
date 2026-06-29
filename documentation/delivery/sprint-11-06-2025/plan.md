@@ -1,5 +1,11 @@
 # Sprint Plan: CS- Orchestrator Framework Implementation
 
+> **Historical record (November 2025).** This plan predates the move to a
+> single-trunk git flow. Its `git checkout dev` / `--base dev` steps reflect the
+> feature → dev → main model in use at the time. The repo now branches from
+> `main` and PRs back to `main` — see [WORKFLOW.md](../../WORKFLOW.md). This
+> archive is left as-written.
+
 **Sprint:** sprint-11-06-2025
 **Duration:** 5 working days (November 6-10, 2025)
 **Target Completion:** Day 5 (November 10) with Day 5 as buffer

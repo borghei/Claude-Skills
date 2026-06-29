@@ -36,7 +36,7 @@ chore(deps): update Python dependencies
 ### Branch Strategy
 
 ```
-feature/topic-name → dev → main (PR only)
+feat/topic-name → main (PR only; single-trunk, no dev branch)
 ```
 
 - **Main:** Protected. Requires PR approval. No direct pushes.

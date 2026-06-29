@@ -59,38 +59,28 @@ ci(workflows): add documentation quality check workflow
 
 ### 3. Branch Strategy
 ```
-main (protected - PR only)
-  └── dev (integration branch)
-       ├── feature/skill-name
-       ├── fix/bug-description
-       ├── docs/update-description
-       └── ci/workflow-name
+main (protected - PR only; single-trunk, no dev branch)
+  ├── feat/skill-name
+  ├── fix/bug-description
+  ├── docs/update-description
+  └── ci/workflow-name
 ```
+Short-lived type-branches branch from `main` and PR back to `main`.
 
 ### 4. PR Creation
 When creating PRs:
 - Title: Under 70 characters, descriptive
 - Body: Summary, changes list, test plan
 - Labels: Add appropriate labels
-- Base: Usually `dev`, sometimes `main` for hotfixes
+- Base: `main` (always)
 
 ### 5. Release Workflow
 ```bash
-# 1. Ensure dev is up to date
-git checkout dev && git pull
+# 1. Land the release content on main via PR (CHANGELOG, version refs),
+#    then ensure main is up to date
+git checkout main && git pull
 
-# 2. Create release branch
-git checkout -b release/vX.Y.Z
-
-# 3. Update version references
-# - CHANGELOG.md
-# - README.md version badge
-# - package.json / pyproject.toml if applicable
-
-# 4. Create PR to main
-gh pr create --base main --title "Release vX.Y.Z"
-
-# 5. After merge, tag release
+# 2. Tag the release on main (no separate dev/release branch)
 git tag -a vX.Y.Z -m "Release vX.Y.Z"
 git push origin vX.Y.Z
 ```
