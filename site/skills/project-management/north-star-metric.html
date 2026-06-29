@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">North Star Metric</h1>
     <p class="page-subtitle">Define a North Star Metric (NSM) and its input metric tree, with leading indicators, anti-metrics, and counter-metrics. Includes a Python tool that renders the metric tree as a Mermaid diagram.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">north-star</span><span class="tag">input-metrics</span><span class="tag">leading-indicators</span><span class="tag">counter-metrics</span><span class="tag">omtm</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,20 +397,6 @@ Define a North Star Metric (NSM) and its input metric tree, with leading indicat
 
 A North Star Metric (NSM) is the single number that best represents the value your product delivers to its customers. Sean Ellis popularized the framing; Amplitude codified the playbook; Lean Analytics calls a related concept the &quot;One Metric That Matters&quot; (OMTM). The NSM is **one** number, not a das
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- NSM archetypes (Amplitude framework)
-- NSM examples (real companies)
-- Structure
-- Input metrics: the math matters
-
-## Frameworks &amp; Templates You Know
-- NSM archetypes (Amplitude framework)
-- - NSM selection across 5 archetypes (Amplitude framework)
-- &quot;Templates opened by new users&quot;,
-- I2 --&gt; L2a[&quot;Lead: Templates opened&quot;]
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -432,20 +418,6 @@ Start by asking the user what they need help with.">
 Define a North Star Metric (NSM) and its input metric tree, with leading indicators, anti-metrics, and counter-metrics. Includes a Python tool that renders the metric tree as a Mermaid diagram.
 
 A North Star Metric (NSM) is the single number that best represents the value your product delivers to its customers. Sean Ellis popularized the framing; Amplitude codified the playbook; Lean Analytics calls a related concept the &quot;One Metric That Matters&quot; (OMTM). The NSM is **one** number, not a das
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- NSM archetypes (Amplitude framework)
-- NSM examples (real companies)
-- Structure
-- Input metrics: the math matters
-
-## Frameworks &amp; Templates You Know
-- NSM archetypes (Amplitude framework)
-- - NSM selection across 5 archetypes (Amplitude framework)
-- &quot;Templates opened by new users&quot;,
-- I2 --&gt; L2a[&quot;Lead: Templates opened&quot;]
 
 ## How to Help
 When the user asks for help in this domain:
@@ -479,200 +451,62 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A North Star Metric (NSM) is the single number that best represents the value your product delivers to its customers. Sean Ellis popularized the framing; Amplitude codified the playbook; Lean Analytics calls a related concept the &quot;One Metric That Matters&quot; (OMTM). The NSM is **one** number, not a dashboard. Its job is to align the entire team -- engineering, marketing, sales, support -- on a shared definition of &quot;we won this quarter.&quot;
 
-This skill produces a complete NSM specification: the NSM itself, 3-5 **input metrics** that the team can directly influence, the **leading indicators** that move days or weeks before the inputs do, the **anti-metrics** (things that must NOT move in the wrong direction), and **counter-metrics** that guard against gaming the NSM. The Python tool (`metric_tree_builder.py`) emits the spec as JSON, Markdown, or a Mermaid tree diagram suitable for a README or a Confluence page.
+This skill produces a complete NSM specification: the NSM itself, 3-5 **input metrics** the team can directly influence, the **leading indicators** that move days or weeks before the inputs, the **anti-metrics** (things that must NOT move in the wrong direction), and **counter-metrics** that guard against gaming. The Python tool (`metric_tree_builder.py`) emits the spec as JSON, Markdown, or a Mermaid tree diagram for a README or Confluence page.
 
-This is the first artifact a team should produce after defining its strategy and before writing OKRs. Once the NSM is set, OKRs typically map directly to moving the input metrics, and roadmaps justify themselves by which input metric they target.
+This is the first artifact a team should produce after defining strategy and before writing OKRs. Once the NSM is set, OKRs map directly to moving the input metrics, and roadmaps justify themselves by which input metric they target.
 
-### When to Use
+## Core Capabilities
 
-- **New product or new strategic direction** -- before OKRs, before roadmap, define the NSM and inputs.
-- **Strategic re-alignment** -- the existing dashboard has 47 metrics and no one knows which to optimize.
-- **Cross-functional friction** -- marketing optimizes acquisition, product optimizes activation, neither agrees on success.
-- **Investor or board reporting** -- the NSM becomes the headline metric in monthly/quarterly reviews.
-- **A/B experimentation guardrails** -- every test reports the NSM impact plus the counter-metric impact.
+- **NSM selection** — score candidates against the five tests (customer value, strategic alignment, leading, single number, movable) and the five Amplitude archetypes.
+- **Metric-tree decomposition** — break the NSM into 3-5 input metrics with an explicit formula (multiplicative / additive / funnel / ratio).
+- **Leading indicators** — assign 2-3 per input that move before the input does (the daily/weekly dashboard).
+- **Guardrails** — anti-metrics (protect the customer) and counter-metrics (protect the business), each with explicit thresholds.
+- **Rendering** — Mermaid tree, JSON dashboard config, or Markdown via the Python tool.
 
-### When NOT to Use
+## When to Use
 
-- For very early-stage discovery (use `discovery/brainstorm-ideas/` and `discovery/identify-assumptions/` first; you do not yet know what value you deliver).
-- For pure technical infrastructure work where the user-value chain is too indirect.
-- When the organization has not aligned on strategy -- the NSM exposes strategic disagreement but does not resolve it.
+- **New product or strategic direction** -- before OKRs and roadmap, define the NSM and inputs.
+- **Strategic re-alignment** -- the dashboard has 47 metrics and no one knows which to optimize.
+- **Cross-functional friction** -- marketing, product, and growth disagree on what &quot;success&quot; means.
+- **Investor / board reporting** -- the NSM becomes the headline metric.
+- **A/B experimentation guardrails** -- every test reports NSM impact plus counter-metric impact.
 
-## What makes a good North Star Metric
+**When NOT to use:** very early-stage discovery (use `discovery/` first — you don&#x27;t yet know what value you deliver); pure infrastructure work with an indirect user-value chain; before the org has aligned on strategy (the NSM exposes disagreement but does not resolve it).
 
-A defensible NSM passes five tests:
+## Clarify First
 
-| Test | Question | If it fails... |
-|------|----------|---------------|
-| **Customer value** | Does this number going up mean a customer got more value? | Pick a different metric (e.g., move from &quot;MAUs&quot; to &quot;weekly active accounts that completed a task&quot;) |
-| **Strategic alignment** | Does it match how the company makes money? | Pick a metric closer to monetization (e.g., &quot;paid weekly active&quot; not &quot;weekly active&quot;) |
-| **Leading, not lagging** | Does it predict long-term success, not just measure last quarter? | Move upstream: revenue lags; activation leads |
-| **Single number** | Can it be a single number on a dashboard? | Compress: &quot;DAU/MAU ratio&quot; is one number; &quot;DAU and MAU separately&quot; is two |
-| **Movable** | Can the team affect it within a quarter? | Decompose into input metrics the team can move |
+Before defining the NSM, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### NSM archetypes (Amplitude framework)
+- [ ] **Core customer value the product delivers** — drives NSM candidate selection; the NSM must be a proxy for this, not a revenue lagging metric
+- [ ] **Business archetype** — attention / transaction / productivity / marketplace / engagement sets the Amplitude archetype and the input-metric formula (multiplicative/additive/funnel/ratio)
+- [ ] **Input metrics the team can directly influence** — the 3-5 nodes of the tree; if the team can&#x27;t move them, the tree is decoration
+- [ ] **Anti-/counter-metrics to guard** — the thresholds that protect customer and business against a gamed NSM
 
-| Archetype | What value is | NSM example | Used by (kind of company) |
-|-----------|---------------|-------------|---------------------------|
-| **Attention** | Time spent or engagement depth | Time spent reading, video minutes watched | Media, social networks |
-| **Transaction** | Purchases or trades | Gross merchandise volume, rides booked | Marketplaces, e-commerce |
-| **Productivity** | Tasks completed | Weekly active teams creating &gt;=1 deliverable | SaaS productivity tools |
-| **Communication** | Messages or interactions | Messages sent per WAU | Messaging, social |
-| **Subscriber** | Recurring revenue retention | Paid weekly active subscribers | Subscription products |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-Pick the archetype that matches your business model. Mixing archetypes (e.g., chasing both &quot;messages sent&quot; and &quot;subscribers&quot;) produces incoherent priorities.
+## Quick Start
 
-### NSM examples (real companies)
-
-| Company | NSM (publicly discussed) |
-|---------|--------------------------|
-| Airbnb | Nights booked |
-| Spotify | Time spent listening |
-| Slack | Active accounts sending &gt;=2000 messages |
-| Facebook (historically) | Daily active users with 7 friends in 10 days |
-| Quora | Number of questions answered |
-
-Each NSM directly represents the value the customer is getting -- not what the company is doing.
-
-## The metric tree
-
-An NSM alone is not actionable. It must decompose into **input metrics** the team can directly move. The metric tree formalizes this decomposition.
-
-### Structure
-
-```
-                     North Star Metric
-                            |
-        ----------------------------------------
-        |             |             |          |
-    Input #1     Input #2     Input #3    Input #4
-        |             |
-   --------     --------
-   |      |     |      |
- Lead   Lead  Lead   Lead
+```bash
+python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid   # render the metric tree
+python scripts/metric_tree_builder.py --demo --format markdown                 # worked SaaS productivity NSM
 ```
 
-- **NSM at the top** -- the single number
-- **Input metrics (3-5)** -- the levers the team can pull. These multiply or sum to the NSM
-- **Leading indicators (2-3 per input)** -- the earliest measurable signals that an input is moving
+## References
 
-### Input metrics: the math matters
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Input metrics should have an explicit mathematical relationship to the NSM. The most common patterns:
-
-| Pattern | Example |
-|---------|---------|
-| **Multiplicative** | Active users x Sessions per user x Actions per session = Total actions (NSM) |
-| **Additive** | Web signups + Mobile signups + API signups = Total signups (NSM) |
-| **Funnel** | Visitors -&gt; Signups -&gt; Activated -&gt; Retained (each step is an input that gates the next) |
-| **Ratio** | Engaged users / Total users = Engagement rate (NSM); inputs are engagement events and user counts |
-
-Write the formula explicitly: `NSM = Input_1 * Input_2 * Input_3`. If you cannot write the formula, the inputs are not really inputs -- they are loosely related metrics.
-
-### Leading indicators
-
-A leading indicator is a metric that moves **before** an input metric does. It gives the team an early-warning signal.
-
-| Input metric | Lagging signal | Leading indicator |
-|--------------|----------------|-------------------|
-| Weekly retention | Measured at day 7 | Day-1 retention; first-day session count |
-| New paid users | Conversion at day 30 of trial | Day-3 activation; trial usage depth |
-| Support ticket resolution | Average days to close | First-response time; auto-deflect rate |
-| Revenue per account | Quarterly billing | Expansion features adopted; seats added |
-
-Leading indicators are the team&#x27;s daily/weekly dashboard. Inputs are the monthly review. The NSM is the quarterly headline.
-
-## Anti-metrics and counter-metrics
-
-The NSM is a powerful lever -- which means it can be gamed. Two guardrails prevent this.
-
-### Anti-metrics
-
-An **anti-metric** is a number that must NOT move (or must move in a specific bounded direction) while the NSM moves up. They protect customer outcomes that the NSM might inadvertently degrade.
-
-Examples:
-
-- **NSM: video minutes watched** -- Anti-metrics: complaint rate, time-to-skip, churn within 30 days of first watch
-- **NSM: messages sent per WAU** -- Anti-metrics: messages reported as spam, abuse reports, blocked users
-- **NSM: nights booked** -- Anti-metrics: cancellation rate, host complaints, &quot;would not book again&quot; rate
-
-Set explicit thresholds. &quot;Churn must not exceed 4%&quot; is enforceable; &quot;churn must stay low&quot; is not.
-
-### Counter-metrics
-
-A **counter-metric** is the metric the team owns ensuring does NOT degrade because the NSM is chasing the wrong thing. Where anti-metrics protect the customer, counter-metrics protect the business.
-
-Examples:
-
-- **NSM: signups** -- Counter-metric: paid conversion rate (signups are useless if they do not convert)
-- **NSM: time on site** -- Counter-metric: revenue per visit (time spent without purchase is loss)
-- **NSM: messages sent** -- Counter-metric: server costs per message (engagement at infinite cost is bankruptcy)
-
-Every NSM should ship with at least 2 anti-metrics and at least 1 counter-metric.
-
-## Workflow
-
-1. **Confirm the archetype.** Use the Amplitude framework to pick attention / transaction / productivity / communication / subscriber.
-2. **Draft 3 candidate NSMs.** Score each against the five tests (Customer value / Strategic alignment / Leading / Single number / Movable).
-3. **Pick the winner.** The team commits to one. Document the decision and the rejected alternatives.
-4. **Decompose into 3-5 input metrics.** Write the explicit formula relating inputs to the NSM.
-5. **Assign 2-3 leading indicators per input.** These become the daily dashboard.
-6. **Define anti-metrics and counter-metrics.** At least 2 anti + 1 counter, each with an explicit threshold.
-7. **Run `metric_tree_builder.py`.** Produce the Mermaid tree for the team wiki and the JSON for the dashboard config.
-8. **Wire OKRs.** Each KR should target moving one input metric. The Objective is the NSM movement.
-9. **Re-review quarterly.** NSMs are durable but not eternal; revisit when strategy shifts.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `metric_tree_builder.py` | Build the NSM + inputs + leaders + anti/counter metric spec; render as Mermaid, JSON, or Markdown | `python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid` |
-| `metric_tree_builder.py --demo` | Inspect a worked example for a SaaS productivity NSM | `python scripts/metric_tree_builder.py --demo --format markdown` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Team has 5+ &quot;NSM candidates&quot; and cannot pick | Strategic disagreement, not metric ambiguity | Resolve the strategy decision first; the NSM debate is a proxy for &quot;what business are we in&quot; |
-| NSM is going up but customers report dissatisfaction | NSM is being gamed; anti-metrics missing or not enforced | Add explicit anti-metrics with thresholds; review weekly alongside the NSM |
-| Input metrics do not actually multiply/sum to the NSM | Inputs are loosely related, not mathematically derived | Rewrite the explicit formula; replace inputs that do not fit the formula |
-| Leading indicators are the same as input metrics | Team confused lagging vs leading | A leading indicator must move BEFORE the input metric (in time); move upstream in the funnel |
-| OKRs do not connect to NSM movement | OKRs set independently of the NSM | Rewrite Key Results so each one moves a specific input metric; the Objective is the NSM |
-| NSM is &quot;revenue&quot; | Revenue is the lagging financial outcome, not the value delivered | Pick a metric closer to customer value (e.g., paid weekly active accounts); revenue follows |
-| NSM changes every quarter | Team is not committing; or strategy is genuinely changing every quarter (deeper problem) | Commit to the NSM for at least 4 quarters; if strategy genuinely shifts that fast, the NSM exercise is premature |
-
-## Success Criteria
-
-- The team can state the NSM in one sentence with no hedging
-- The NSM passes all 5 tests (customer value, strategic, leading, single number, movable)
-- Inputs have an explicit mathematical relationship to the NSM (formula documented)
-- Each input has 2-3 leading indicators that move days/weeks before the input
-- At least 2 anti-metrics and 1 counter-metric, each with explicit thresholds
-- Every OKR Key Result targets moving one input metric
-- The NSM appears in every weekly status update and every quarterly review
-- A new hire can explain the NSM and one path to move it within their first month
+- **[references/nsm-playbook.md](references/nsm-playbook.md)** — the five quality tests, Amplitude archetypes + real company examples, the metric-tree structure and input math, leading indicators, anti-/counter-metrics with thresholds, the step-by-step workflow, the `metric_tree_builder.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when selecting an NSM or building the tree.
+- **[references/nsm-framework-guide.md](references/nsm-framework-guide.md)** — deep dive on three overlapping frameworks (Sean Ellis NSM, Amplitude NSM, Lean Analytics OMTM), input-metric math, and worked examples across five business archetypes. Read when comparing frameworks or working a specific archetype.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how NSM specs go wrong, why they&#x27;re bad, and how to fix them. Read when reviewing an NSM or diagnosing a gamed/lagging metric.
+- **assets/nsm_spec_template.md** — fill-in template for an NSM specification matching the tool&#x27;s JSON shape. Use when drafting a spec.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- NSM selection across 5 archetypes (Amplitude framework)
-- Input metric tree decomposition with explicit math
-- Leading indicator selection per input
-- Anti-metric and counter-metric definition with thresholds
-- Python tool rendering the tree as Mermaid / JSON / Markdown
-- Handoff to OKR drafting and roadmap prioritization
+**In Scope:** NSM selection across 5 archetypes; input-metric tree decomposition with explicit math; leading-indicator selection per input; anti-/counter-metric definition with thresholds; the Python rendering tool; handoff to OKR drafting and roadmap prioritization.
 
-**Out of Scope:**
-- Building actual analytics dashboards (use BI tools; this skill produces the spec)
-- Statistical experiment design (use `discovery/brainstorm-experiments/`)
-- Financial planning or revenue forecasting (use `finance/` domain)
-- OKR drafting (use `brainstorm-okrs/`)
-- Long-running data quality validation (use `data-analytics/` domain)
+**Out of Scope:** building actual analytics dashboards (BI tools — this produces the spec); statistical experiment design (`discovery/brainstorm-experiments/`); financial/revenue forecasting (`finance/`); OKR drafting (`brainstorm-okrs/`); data quality validation (`data-analytics/`).
 
-**Important Caveats:**
-- An NSM exposes strategic disagreement but does not resolve it. If two teams disagree on the NSM, escalate the strategy decision, not the metric debate.
-- NSMs that are pure financial outputs (revenue, ARR) are usually too lagging to be actionable. Pick a customer-value proxy that revenue follows from.
-- The NSM is a North Star, not the only star. Teams still need component metrics for diagnostic purposes. The NSM aligns; component metrics inform.
-- A team without analytics instrumentation cannot operate against an NSM. Spend on telemetry first; the NSM is downstream of measurement.
+**Caveats:** an NSM exposes strategic disagreement but does not resolve it — escalate the strategy decision, not the metric debate. Pure financial outputs (revenue, ARR) are usually too lagging; pick a customer-value proxy that revenue follows from. The NSM aligns; teams still need component metrics for diagnostics. A team without instrumentation cannot operate against an NSM — spend on telemetry first.
 
 ## Integration Points
 
@@ -686,81 +520,6 @@ Every NSM should ship with at least 2 anti-metrics and at least 1 counter-metric
 | `execution/status-update-generator/` | Feeds into | NSM and input movements feature in Highlights of weekly updates |
 | `data-analytics/` (domain) | Pairs with | NSM spec becomes the schema for dashboards and event taxonomies |
 | `executive-reporting/` (senior-pm) | Feeds into | Monthly board packets lead with NSM trend |
-
-## Tool Reference
-
-### metric_tree_builder.py
-
-Builds a Mermaid tree of the NSM + inputs + leading indicators + anti-metrics + counter-metrics. Also outputs the spec as JSON or formatted Markdown.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON NSM spec file |
-| `--demo` | flag | false | Use built-in SaaS productivity demo NSM |
-| `--format` | choice | mermaid | Output: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-
-### Input JSON shape
-
-```json
-{
-  &quot;nsm&quot;: {
-    &quot;name&quot;: &quot;Weekly active accounts that publish &gt;=1 deliverable&quot;,
-    &quot;archetype&quot;: &quot;productivity&quot;,
-    &quot;formula&quot;: &quot;WAA * (publishers / WAA)&quot;,
-    &quot;current&quot;: 12400,
-    &quot;target&quot;: 22000,
-    &quot;due&quot;: &quot;2026-09-30&quot;
-  },
-  &quot;inputs&quot;: [
-    {
-      &quot;name&quot;: &quot;Weekly active accounts (WAA)&quot;,
-      &quot;formula_role&quot;: &quot;WAA&quot;,
-      &quot;current&quot;: 28000,
-      &quot;target&quot;: 40000,
-      &quot;leading_indicators&quot;: [
-        &quot;Day-1 session count for new signups&quot;,
-        &quot;Returning signups in week 1&quot;
-      ]
-    },
-    {
-      &quot;name&quot;: &quot;Publisher rate (publishers / WAA)&quot;,
-      &quot;formula_role&quot;: &quot;publishers / WAA&quot;,
-      &quot;current&quot;: 0.44,
-      &quot;target&quot;: 0.55,
-      &quot;leading_indicators&quot;: [
-        &quot;Templates opened by new users&quot;,
-        &quot;First-deliverable started within session 1&quot;
-      ]
-    }
-  ],
-  &quot;anti_metrics&quot;: [
-    {&quot;name&quot;: &quot;Weekly churn&quot;, &quot;threshold&quot;: &quot;must stay below 4.0%&quot;},
-    {&quot;name&quot;: &quot;Time to publish (median)&quot;, &quot;threshold&quot;: &quot;must stay below 22 minutes&quot;}
-  ],
-  &quot;counter_metrics&quot;: [
-    {&quot;name&quot;: &quot;Server cost per published deliverable&quot;, &quot;threshold&quot;: &quot;must stay below $0.08&quot;}
-  ]
-}
-```
-
-### Mermaid output sample
-
-```mermaid
-graph TD
-    NSM[&quot;NSM: Weekly active accounts publishing &gt;=1 deliverable&lt;br/&gt;Target: 22000 by 2026-09-30&quot;]
-    NSM --&gt; I1[&quot;Input: Weekly active accounts (WAA)&quot;]
-    NSM --&gt; I2[&quot;Input: Publisher rate&quot;]
-    I1 --&gt; L1a[&quot;Lead: Day-1 session count&quot;]
-    I1 --&gt; L1b[&quot;Lead: Returning signups in week 1&quot;]
-    I2 --&gt; L2a[&quot;Lead: Templates opened&quot;]
-    I2 --&gt; L2b[&quot;Lead: First-deliverable in session 1&quot;]
-```
-
-## References
-
-- `references/nsm-framework-guide.md` -- Sean Ellis NSM, Amplitude framework, OMTM (Lean Analytics), and worked examples
-- `assets/nsm_spec_template.md` -- Fill-in template for an NSM specification matching the tool&#x27;s JSON shape
 
 ---
 
@@ -817,200 +576,62 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A North Star Metric (NSM) is the single number that best represents the value your product delivers to its customers. Sean Ellis popularized the framing; Amplitude codified the playbook; Lean Analytics calls a related concept the &quot;One Metric That Matters&quot; (OMTM). The NSM is **one** number, not a dashboard. Its job is to align the entire team -- engineering, marketing, sales, support -- on a shared definition of &quot;we won this quarter.&quot;
 
-This skill produces a complete NSM specification: the NSM itself, 3-5 **input metrics** that the team can directly influence, the **leading indicators** that move days or weeks before the inputs do, the **anti-metrics** (things that must NOT move in the wrong direction), and **counter-metrics** that guard against gaming the NSM. The Python tool (`metric_tree_builder.py`) emits the spec as JSON, Markdown, or a Mermaid tree diagram suitable for a README or a Confluence page.
+This skill produces a complete NSM specification: the NSM itself, 3-5 **input metrics** the team can directly influence, the **leading indicators** that move days or weeks before the inputs, the **anti-metrics** (things that must NOT move in the wrong direction), and **counter-metrics** that guard against gaming. The Python tool (`metric_tree_builder.py`) emits the spec as JSON, Markdown, or a Mermaid tree diagram for a README or Confluence page.
 
-This is the first artifact a team should produce after defining its strategy and before writing OKRs. Once the NSM is set, OKRs typically map directly to moving the input metrics, and roadmaps justify themselves by which input metric they target.
+This is the first artifact a team should produce after defining strategy and before writing OKRs. Once the NSM is set, OKRs map directly to moving the input metrics, and roadmaps justify themselves by which input metric they target.
 
-### When to Use
+## Core Capabilities
 
-- **New product or new strategic direction** -- before OKRs, before roadmap, define the NSM and inputs.
-- **Strategic re-alignment** -- the existing dashboard has 47 metrics and no one knows which to optimize.
-- **Cross-functional friction** -- marketing optimizes acquisition, product optimizes activation, neither agrees on success.
-- **Investor or board reporting** -- the NSM becomes the headline metric in monthly/quarterly reviews.
-- **A/B experimentation guardrails** -- every test reports the NSM impact plus the counter-metric impact.
+- **NSM selection** — score candidates against the five tests (customer value, strategic alignment, leading, single number, movable) and the five Amplitude archetypes.
+- **Metric-tree decomposition** — break the NSM into 3-5 input metrics with an explicit formula (multiplicative / additive / funnel / ratio).
+- **Leading indicators** — assign 2-3 per input that move before the input does (the daily/weekly dashboard).
+- **Guardrails** — anti-metrics (protect the customer) and counter-metrics (protect the business), each with explicit thresholds.
+- **Rendering** — Mermaid tree, JSON dashboard config, or Markdown via the Python tool.
 
-### When NOT to Use
+## When to Use
 
-- For very early-stage discovery (use `discovery/brainstorm-ideas/` and `discovery/identify-assumptions/` first; you do not yet know what value you deliver).
-- For pure technical infrastructure work where the user-value chain is too indirect.
-- When the organization has not aligned on strategy -- the NSM exposes strategic disagreement but does not resolve it.
+- **New product or strategic direction** -- before OKRs and roadmap, define the NSM and inputs.
+- **Strategic re-alignment** -- the dashboard has 47 metrics and no one knows which to optimize.
+- **Cross-functional friction** -- marketing, product, and growth disagree on what &quot;success&quot; means.
+- **Investor / board reporting** -- the NSM becomes the headline metric.
+- **A/B experimentation guardrails** -- every test reports NSM impact plus counter-metric impact.
 
-## What makes a good North Star Metric
+**When NOT to use:** very early-stage discovery (use `discovery/` first — you don&#x27;t yet know what value you deliver); pure infrastructure work with an indirect user-value chain; before the org has aligned on strategy (the NSM exposes disagreement but does not resolve it).
 
-A defensible NSM passes five tests:
+## Clarify First
 
-| Test | Question | If it fails... |
-|------|----------|---------------|
-| **Customer value** | Does this number going up mean a customer got more value? | Pick a different metric (e.g., move from &quot;MAUs&quot; to &quot;weekly active accounts that completed a task&quot;) |
-| **Strategic alignment** | Does it match how the company makes money? | Pick a metric closer to monetization (e.g., &quot;paid weekly active&quot; not &quot;weekly active&quot;) |
-| **Leading, not lagging** | Does it predict long-term success, not just measure last quarter? | Move upstream: revenue lags; activation leads |
-| **Single number** | Can it be a single number on a dashboard? | Compress: &quot;DAU/MAU ratio&quot; is one number; &quot;DAU and MAU separately&quot; is two |
-| **Movable** | Can the team affect it within a quarter? | Decompose into input metrics the team can move |
+Before defining the NSM, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### NSM archetypes (Amplitude framework)
+- [ ] **Core customer value the product delivers** — drives NSM candidate selection; the NSM must be a proxy for this, not a revenue lagging metric
+- [ ] **Business archetype** — attention / transaction / productivity / marketplace / engagement sets the Amplitude archetype and the input-metric formula (multiplicative/additive/funnel/ratio)
+- [ ] **Input metrics the team can directly influence** — the 3-5 nodes of the tree; if the team can&#x27;t move them, the tree is decoration
+- [ ] **Anti-/counter-metrics to guard** — the thresholds that protect customer and business against a gamed NSM
 
-| Archetype | What value is | NSM example | Used by (kind of company) |
-|-----------|---------------|-------------|---------------------------|
-| **Attention** | Time spent or engagement depth | Time spent reading, video minutes watched | Media, social networks |
-| **Transaction** | Purchases or trades | Gross merchandise volume, rides booked | Marketplaces, e-commerce |
-| **Productivity** | Tasks completed | Weekly active teams creating &gt;=1 deliverable | SaaS productivity tools |
-| **Communication** | Messages or interactions | Messages sent per WAU | Messaging, social |
-| **Subscriber** | Recurring revenue retention | Paid weekly active subscribers | Subscription products |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-Pick the archetype that matches your business model. Mixing archetypes (e.g., chasing both &quot;messages sent&quot; and &quot;subscribers&quot;) produces incoherent priorities.
+## Quick Start
 
-### NSM examples (real companies)
-
-| Company | NSM (publicly discussed) |
-|---------|--------------------------|
-| Airbnb | Nights booked |
-| Spotify | Time spent listening |
-| Slack | Active accounts sending &gt;=2000 messages |
-| Facebook (historically) | Daily active users with 7 friends in 10 days |
-| Quora | Number of questions answered |
-
-Each NSM directly represents the value the customer is getting -- not what the company is doing.
-
-## The metric tree
-
-An NSM alone is not actionable. It must decompose into **input metrics** the team can directly move. The metric tree formalizes this decomposition.
-
-### Structure
-
-```
-                     North Star Metric
-                            |
-        ----------------------------------------
-        |             |             |          |
-    Input #1     Input #2     Input #3    Input #4
-        |             |
-   --------     --------
-   |      |     |      |
- Lead   Lead  Lead   Lead
+```bash
+python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid   # render the metric tree
+python scripts/metric_tree_builder.py --demo --format markdown                 # worked SaaS productivity NSM
 ```
 
-- **NSM at the top** -- the single number
-- **Input metrics (3-5)** -- the levers the team can pull. These multiply or sum to the NSM
-- **Leading indicators (2-3 per input)** -- the earliest measurable signals that an input is moving
+## References
 
-### Input metrics: the math matters
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Input metrics should have an explicit mathematical relationship to the NSM. The most common patterns:
-
-| Pattern | Example |
-|---------|---------|
-| **Multiplicative** | Active users x Sessions per user x Actions per session = Total actions (NSM) |
-| **Additive** | Web signups + Mobile signups + API signups = Total signups (NSM) |
-| **Funnel** | Visitors -&gt; Signups -&gt; Activated -&gt; Retained (each step is an input that gates the next) |
-| **Ratio** | Engaged users / Total users = Engagement rate (NSM); inputs are engagement events and user counts |
-
-Write the formula explicitly: `NSM = Input_1 * Input_2 * Input_3`. If you cannot write the formula, the inputs are not really inputs -- they are loosely related metrics.
-
-### Leading indicators
-
-A leading indicator is a metric that moves **before** an input metric does. It gives the team an early-warning signal.
-
-| Input metric | Lagging signal | Leading indicator |
-|--------------|----------------|-------------------|
-| Weekly retention | Measured at day 7 | Day-1 retention; first-day session count |
-| New paid users | Conversion at day 30 of trial | Day-3 activation; trial usage depth |
-| Support ticket resolution | Average days to close | First-response time; auto-deflect rate |
-| Revenue per account | Quarterly billing | Expansion features adopted; seats added |
-
-Leading indicators are the team&#x27;s daily/weekly dashboard. Inputs are the monthly review. The NSM is the quarterly headline.
-
-## Anti-metrics and counter-metrics
-
-The NSM is a powerful lever -- which means it can be gamed. Two guardrails prevent this.
-
-### Anti-metrics
-
-An **anti-metric** is a number that must NOT move (or must move in a specific bounded direction) while the NSM moves up. They protect customer outcomes that the NSM might inadvertently degrade.
-
-Examples:
-
-- **NSM: video minutes watched** -- Anti-metrics: complaint rate, time-to-skip, churn within 30 days of first watch
-- **NSM: messages sent per WAU** -- Anti-metrics: messages reported as spam, abuse reports, blocked users
-- **NSM: nights booked** -- Anti-metrics: cancellation rate, host complaints, &quot;would not book again&quot; rate
-
-Set explicit thresholds. &quot;Churn must not exceed 4%&quot; is enforceable; &quot;churn must stay low&quot; is not.
-
-### Counter-metrics
-
-A **counter-metric** is the metric the team owns ensuring does NOT degrade because the NSM is chasing the wrong thing. Where anti-metrics protect the customer, counter-metrics protect the business.
-
-Examples:
-
-- **NSM: signups** -- Counter-metric: paid conversion rate (signups are useless if they do not convert)
-- **NSM: time on site** -- Counter-metric: revenue per visit (time spent without purchase is loss)
-- **NSM: messages sent** -- Counter-metric: server costs per message (engagement at infinite cost is bankruptcy)
-
-Every NSM should ship with at least 2 anti-metrics and at least 1 counter-metric.
-
-## Workflow
-
-1. **Confirm the archetype.** Use the Amplitude framework to pick attention / transaction / productivity / communication / subscriber.
-2. **Draft 3 candidate NSMs.** Score each against the five tests (Customer value / Strategic alignment / Leading / Single number / Movable).
-3. **Pick the winner.** The team commits to one. Document the decision and the rejected alternatives.
-4. **Decompose into 3-5 input metrics.** Write the explicit formula relating inputs to the NSM.
-5. **Assign 2-3 leading indicators per input.** These become the daily dashboard.
-6. **Define anti-metrics and counter-metrics.** At least 2 anti + 1 counter, each with an explicit threshold.
-7. **Run `metric_tree_builder.py`.** Produce the Mermaid tree for the team wiki and the JSON for the dashboard config.
-8. **Wire OKRs.** Each KR should target moving one input metric. The Objective is the NSM movement.
-9. **Re-review quarterly.** NSMs are durable but not eternal; revisit when strategy shifts.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `metric_tree_builder.py` | Build the NSM + inputs + leaders + anti/counter metric spec; render as Mermaid, JSON, or Markdown | `python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid` |
-| `metric_tree_builder.py --demo` | Inspect a worked example for a SaaS productivity NSM | `python scripts/metric_tree_builder.py --demo --format markdown` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Team has 5+ &quot;NSM candidates&quot; and cannot pick | Strategic disagreement, not metric ambiguity | Resolve the strategy decision first; the NSM debate is a proxy for &quot;what business are we in&quot; |
-| NSM is going up but customers report dissatisfaction | NSM is being gamed; anti-metrics missing or not enforced | Add explicit anti-metrics with thresholds; review weekly alongside the NSM |
-| Input metrics do not actually multiply/sum to the NSM | Inputs are loosely related, not mathematically derived | Rewrite the explicit formula; replace inputs that do not fit the formula |
-| Leading indicators are the same as input metrics | Team confused lagging vs leading | A leading indicator must move BEFORE the input metric (in time); move upstream in the funnel |
-| OKRs do not connect to NSM movement | OKRs set independently of the NSM | Rewrite Key Results so each one moves a specific input metric; the Objective is the NSM |
-| NSM is &quot;revenue&quot; | Revenue is the lagging financial outcome, not the value delivered | Pick a metric closer to customer value (e.g., paid weekly active accounts); revenue follows |
-| NSM changes every quarter | Team is not committing; or strategy is genuinely changing every quarter (deeper problem) | Commit to the NSM for at least 4 quarters; if strategy genuinely shifts that fast, the NSM exercise is premature |
-
-## Success Criteria
-
-- The team can state the NSM in one sentence with no hedging
-- The NSM passes all 5 tests (customer value, strategic, leading, single number, movable)
-- Inputs have an explicit mathematical relationship to the NSM (formula documented)
-- Each input has 2-3 leading indicators that move days/weeks before the input
-- At least 2 anti-metrics and 1 counter-metric, each with explicit thresholds
-- Every OKR Key Result targets moving one input metric
-- The NSM appears in every weekly status update and every quarterly review
-- A new hire can explain the NSM and one path to move it within their first month
+- **[references/nsm-playbook.md](references/nsm-playbook.md)** — the five quality tests, Amplitude archetypes + real company examples, the metric-tree structure and input math, leading indicators, anti-/counter-metrics with thresholds, the step-by-step workflow, the `metric_tree_builder.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when selecting an NSM or building the tree.
+- **[references/nsm-framework-guide.md](references/nsm-framework-guide.md)** — deep dive on three overlapping frameworks (Sean Ellis NSM, Amplitude NSM, Lean Analytics OMTM), input-metric math, and worked examples across five business archetypes. Read when comparing frameworks or working a specific archetype.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how NSM specs go wrong, why they&#x27;re bad, and how to fix them. Read when reviewing an NSM or diagnosing a gamed/lagging metric.
+- **assets/nsm_spec_template.md** — fill-in template for an NSM specification matching the tool&#x27;s JSON shape. Use when drafting a spec.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- NSM selection across 5 archetypes (Amplitude framework)
-- Input metric tree decomposition with explicit math
-- Leading indicator selection per input
-- Anti-metric and counter-metric definition with thresholds
-- Python tool rendering the tree as Mermaid / JSON / Markdown
-- Handoff to OKR drafting and roadmap prioritization
+**In Scope:** NSM selection across 5 archetypes; input-metric tree decomposition with explicit math; leading-indicator selection per input; anti-/counter-metric definition with thresholds; the Python rendering tool; handoff to OKR drafting and roadmap prioritization.
 
-**Out of Scope:**
-- Building actual analytics dashboards (use BI tools; this skill produces the spec)
-- Statistical experiment design (use `discovery/brainstorm-experiments/`)
-- Financial planning or revenue forecasting (use `finance/` domain)
-- OKR drafting (use `brainstorm-okrs/`)
-- Long-running data quality validation (use `data-analytics/` domain)
+**Out of Scope:** building actual analytics dashboards (BI tools — this produces the spec); statistical experiment design (`discovery/brainstorm-experiments/`); financial/revenue forecasting (`finance/`); OKR drafting (`brainstorm-okrs/`); data quality validation (`data-analytics/`).
 
-**Important Caveats:**
-- An NSM exposes strategic disagreement but does not resolve it. If two teams disagree on the NSM, escalate the strategy decision, not the metric debate.
-- NSMs that are pure financial outputs (revenue, ARR) are usually too lagging to be actionable. Pick a customer-value proxy that revenue follows from.
-- The NSM is a North Star, not the only star. Teams still need component metrics for diagnostic purposes. The NSM aligns; component metrics inform.
-- A team without analytics instrumentation cannot operate against an NSM. Spend on telemetry first; the NSM is downstream of measurement.
+**Caveats:** an NSM exposes strategic disagreement but does not resolve it — escalate the strategy decision, not the metric debate. Pure financial outputs (revenue, ARR) are usually too lagging; pick a customer-value proxy that revenue follows from. The NSM aligns; teams still need component metrics for diagnostics. A team without instrumentation cannot operate against an NSM — spend on telemetry first.
 
 ## Integration Points
 
@@ -1024,81 +645,6 @@ Every NSM should ship with at least 2 anti-metrics and at least 1 counter-metric
 | `execution/status-update-generator/` | Feeds into | NSM and input movements feature in Highlights of weekly updates |
 | `data-analytics/` (domain) | Pairs with | NSM spec becomes the schema for dashboards and event taxonomies |
 | `executive-reporting/` (senior-pm) | Feeds into | Monthly board packets lead with NSM trend |
-
-## Tool Reference
-
-### metric_tree_builder.py
-
-Builds a Mermaid tree of the NSM + inputs + leading indicators + anti-metrics + counter-metrics. Also outputs the spec as JSON or formatted Markdown.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON NSM spec file |
-| `--demo` | flag | false | Use built-in SaaS productivity demo NSM |
-| `--format` | choice | mermaid | Output: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-
-### Input JSON shape
-
-```json
-{
-  &quot;nsm&quot;: {
-    &quot;name&quot;: &quot;Weekly active accounts that publish &gt;=1 deliverable&quot;,
-    &quot;archetype&quot;: &quot;productivity&quot;,
-    &quot;formula&quot;: &quot;WAA * (publishers / WAA)&quot;,
-    &quot;current&quot;: 12400,
-    &quot;target&quot;: 22000,
-    &quot;due&quot;: &quot;2026-09-30&quot;
-  },
-  &quot;inputs&quot;: [
-    {
-      &quot;name&quot;: &quot;Weekly active accounts (WAA)&quot;,
-      &quot;formula_role&quot;: &quot;WAA&quot;,
-      &quot;current&quot;: 28000,
-      &quot;target&quot;: 40000,
-      &quot;leading_indicators&quot;: [
-        &quot;Day-1 session count for new signups&quot;,
-        &quot;Returning signups in week 1&quot;
-      ]
-    },
-    {
-      &quot;name&quot;: &quot;Publisher rate (publishers / WAA)&quot;,
-      &quot;formula_role&quot;: &quot;publishers / WAA&quot;,
-      &quot;current&quot;: 0.44,
-      &quot;target&quot;: 0.55,
-      &quot;leading_indicators&quot;: [
-        &quot;Templates opened by new users&quot;,
-        &quot;First-deliverable started within session 1&quot;
-      ]
-    }
-  ],
-  &quot;anti_metrics&quot;: [
-    {&quot;name&quot;: &quot;Weekly churn&quot;, &quot;threshold&quot;: &quot;must stay below 4.0%&quot;},
-    {&quot;name&quot;: &quot;Time to publish (median)&quot;, &quot;threshold&quot;: &quot;must stay below 22 minutes&quot;}
-  ],
-  &quot;counter_metrics&quot;: [
-    {&quot;name&quot;: &quot;Server cost per published deliverable&quot;, &quot;threshold&quot;: &quot;must stay below $0.08&quot;}
-  ]
-}
-```
-
-### Mermaid output sample
-
-```mermaid
-graph TD
-    NSM[&quot;NSM: Weekly active accounts publishing &gt;=1 deliverable&lt;br/&gt;Target: 22000 by 2026-09-30&quot;]
-    NSM --&gt; I1[&quot;Input: Weekly active accounts (WAA)&quot;]
-    NSM --&gt; I2[&quot;Input: Publisher rate&quot;]
-    I1 --&gt; L1a[&quot;Lead: Day-1 session count&quot;]
-    I1 --&gt; L1b[&quot;Lead: Returning signups in week 1&quot;]
-    I2 --&gt; L2a[&quot;Lead: Templates opened&quot;]
-    I2 --&gt; L2b[&quot;Lead: First-deliverable in session 1&quot;]
-```
-
-## References
-
-- `references/nsm-framework-guide.md` -- Sean Ellis NSM, Amplitude framework, OMTM (Lean Analytics), and worked examples
-- `assets/nsm_spec_template.md` -- Fill-in template for an NSM specification matching the tool&#x27;s JSON shape
 
 ---
 
@@ -1186,8 +732,10 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/north-star-metric/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid   # render the metric tree
+python scripts/metric_tree_builder.py --demo --format markdown                 # worked SaaS productivity NSM
+</code></pre>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/north-star-metric/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

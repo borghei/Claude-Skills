@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-29T18:03:37+00:00",
+  "generated_at": "2026-06-29T18:08:06+00:00",
   "skill_count": 339,
   "domain_count": 17,
   "skills": [
@@ -18,6 +18,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/a11y-audit",
       "files": [
         "SKILL.md",
@@ -27,6 +30,7 @@
         "scripts/contrast_checker.py"
       ],
       "size_bytes": 41587,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -39,6 +43,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/agent-designer",
       "files": [
         "README.md",
@@ -59,6 +66,7 @@
         "tool_schema_generator.py"
       ],
       "size_bytes": 288146,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -71,6 +79,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/agent-protocol",
       "files": [
         "SKILL.md",
@@ -83,6 +94,7 @@
         "scripts/schema_generator.py"
       ],
       "size_bytes": 93501,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -95,6 +107,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/agent-workflow-designer",
       "files": [
         "SKILL.md",
@@ -106,6 +121,7 @@
         "scripts/workflow_visualizer.py"
       ],
       "size_bytes": 63458,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -125,6 +141,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/agenthub",
       "files": [
         "SKILL.md",
@@ -144,6 +163,7 @@
         "skills/status.md"
       ],
       "size_bytes": 83716,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -162,6 +182,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/ai-security",
       "files": [
         "SKILL.md",
@@ -169,6 +192,7 @@
         "scripts/ai_threat_scanner.py"
       ],
       "size_bytes": 25048,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -181,6 +205,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/api-design-reviewer",
       "files": [
         "SKILL.md",
@@ -193,6 +220,7 @@
         "scripts/breaking_change_detector.py"
       ],
       "size_bytes": 200777,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -205,6 +233,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/api-test-suite-builder",
       "files": [
         "SKILL.md",
@@ -216,6 +247,7 @@
         "scripts/test_generator.py"
       ],
       "size_bytes": 77540,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -233,6 +265,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/aws-solution-architect",
       "files": [
         "SKILL.md",
@@ -248,6 +283,7 @@
         "scripts/serverless_stack.py"
       ],
       "size_bytes": 140062,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -269,6 +305,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/azure-cloud-architect",
       "files": [
         "SKILL.md",
@@ -282,6 +321,7 @@
         "scripts/azure_waf_scorer.py"
       ],
       "size_bytes": 122797,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -300,6 +340,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/browser-automation",
       "files": [
         "SKILL.md",
@@ -309,6 +352,7 @@
         "scripts/scraping_toolkit.py"
       ],
       "size_bytes": 47730,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -321,6 +365,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/changelog-generator",
       "files": [
         "SKILL.md",
@@ -332,6 +379,7 @@
         "scripts/commit_parser.py"
       ],
       "size_bytes": 54971,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -352,6 +400,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/chaos-engineering",
       "files": [
         "SKILL.md",
@@ -365,6 +416,7 @@
         "scripts/gameday_planner.py"
       ],
       "size_bytes": 128346,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -377,6 +429,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/ci-cd-pipeline-builder",
       "files": [
         "SKILL.md",
@@ -387,6 +442,7 @@
         "scripts/pipeline_linter.py"
       ],
       "size_bytes": 68670,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -404,6 +460,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/claude-code-mastery",
       "files": [
         "SKILL.md",
@@ -420,6 +479,7 @@
         "scripts/skill_scaffolder.py"
       ],
       "size_bytes": 128126,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -437,6 +497,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/code-reviewer",
       "files": [
         "SKILL.md",
@@ -449,6 +512,7 @@
         "scripts/review_report_generator.py"
       ],
       "size_bytes": 103499,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -461,6 +525,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/codebase-onboarding",
       "files": [
         "SKILL.md",
@@ -472,6 +539,7 @@
         "scripts/setup_validator.py"
       ],
       "size_bytes": 60575,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -489,6 +557,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/codex-cli-specialist",
       "files": [
         "SKILL.md",
@@ -503,6 +574,7 @@
         "scripts/skills_index_builder.py"
       ],
       "size_bytes": 116187,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -515,6 +587,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/context-engine",
       "files": [
         "SKILL.md",
@@ -527,6 +602,7 @@
         "scripts/memory_indexer.py"
       ],
       "size_bytes": 70188,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -549,6 +625,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/data-quality-auditor",
       "files": [
         "SKILL.md",
@@ -563,6 +642,7 @@
         "scripts/schema_drift_detector.py"
       ],
       "size_bytes": 83777,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -575,6 +655,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/database-designer",
       "files": [
         "README.md",
@@ -595,6 +678,7 @@
         "schema_analyzer.py"
       ],
       "size_bytes": 241596,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -607,6 +691,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/database-schema-designer",
       "files": [
         "SKILL.md",
@@ -618,6 +705,7 @@
         "scripts/schema_validator.py"
       ],
       "size_bytes": 66833,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -630,6 +718,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/dependency-auditor",
       "files": [
         "README.md",
@@ -652,6 +743,7 @@
         "test-project/package.json"
       ],
       "size_bytes": 223100,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -669,6 +761,9 @@
       "version": "2.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/design-auditor",
       "files": [
         "SKILL.md",
@@ -684,6 +779,7 @@
         "scripts/design_system_validator.py"
       ],
       "size_bytes": 137852,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -701,6 +797,9 @@
       "version": "1.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/devops-workflow-engineer",
       "files": [
         "SKILL.md",
@@ -715,6 +814,7 @@
         "scripts/workflow_generator.py"
       ],
       "size_bytes": 163632,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -732,6 +832,9 @@
       "version": "2.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/doc-drift-detector",
       "files": [
         "SKILL.md",
@@ -747,6 +850,7 @@
         "scripts/link_checker.py"
       ],
       "size_bytes": 142085,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -765,6 +869,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/docker-development",
       "files": [
         "SKILL.md",
@@ -775,6 +882,7 @@
         "scripts/dockerfile_analyzer.py"
       ],
       "size_bytes": 44449,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -787,6 +895,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/env-secrets-manager",
       "files": [
         "SKILL.md",
@@ -799,6 +910,7 @@
         "scripts/secret_scanner.py"
       ],
       "size_bytes": 57450,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -819,6 +931,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/feature-flags-architect",
       "files": [
         "SKILL.md",
@@ -831,6 +946,7 @@
         "scripts/rollout_simulator.py"
       ],
       "size_bytes": 118669,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -849,6 +965,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/focused-fix",
       "files": [
         "SKILL.md",
@@ -860,6 +979,7 @@
         "scripts/change_scope_analyzer.py"
       ],
       "size_bytes": 43310,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -883,6 +1003,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/gcp-cloud-architect",
       "files": [
         "SKILL.md",
@@ -897,6 +1020,7 @@
         "scripts/gcp_cost_estimator.py"
       ],
       "size_bytes": 116548,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -909,6 +1033,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/git-worktree-manager",
       "files": [
         "SKILL.md",
@@ -920,6 +1047,7 @@
         "scripts/worktree_validator.py"
       ],
       "size_bytes": 65020,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -938,6 +1066,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/google-workspace-cli",
       "files": [
         "SKILL.md",
@@ -947,6 +1078,7 @@
         "scripts/workspace_audit.py"
       ],
       "size_bytes": 58679,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -965,6 +1097,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/helm-chart-builder",
       "files": [
         "SKILL.md",
@@ -975,6 +1110,7 @@
         "scripts/values_validator.py"
       ],
       "size_bytes": 45032,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -992,6 +1128,9 @@
       "version": "1.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/incident-commander",
       "files": [
         "README.md",
@@ -1022,6 +1161,7 @@
         "scripts/timeline_reconstructor.py"
       ],
       "size_bytes": 416623,
+      "tools_count": 6,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1034,6 +1174,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/interview-system-designer",
       "files": [
         "README.md",
@@ -1054,6 +1197,7 @@
         "references/workflows-and-templates.md"
       ],
       "size_bytes": 302689,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -1074,6 +1218,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/kubernetes-operator",
       "files": [
         "SKILL.md",
@@ -1086,6 +1233,7 @@
         "scripts/reconciliation_audit.py"
       ],
       "size_bytes": 133707,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1104,6 +1252,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/llm-cost-optimizer",
       "files": [
         "SKILL.md",
@@ -1112,6 +1263,7 @@
         "scripts/token_counter.py"
       ],
       "size_bytes": 32195,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1124,6 +1276,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/mcp-server-builder",
       "files": [
         "SKILL.md",
@@ -1136,6 +1291,7 @@
         "scripts/tool_linter.py"
       ],
       "size_bytes": 64624,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1148,6 +1304,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/migration-architect",
       "files": [
         "README.md",
@@ -1174,6 +1333,7 @@
         "scripts/rollback_generator.py"
       ],
       "size_bytes": 350780,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1186,6 +1346,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/monorepo-navigator",
       "files": [
         "SKILL.md",
@@ -1196,6 +1359,7 @@
         "scripts/package_analyzer.py"
       ],
       "size_bytes": 65998,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1213,6 +1377,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/ms365-tenant-manager",
       "files": [
         "SKILL.md",
@@ -1228,6 +1395,7 @@
         "scripts/user_management.py"
       ],
       "size_bytes": 119573,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1240,6 +1408,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/observability-designer",
       "files": [
         "README.md",
@@ -1260,6 +1431,7 @@
         "scripts/slo_designer.py"
       ],
       "size_bytes": 252292,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1272,6 +1444,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/performance-profiler",
       "files": [
         "SKILL.md",
@@ -1283,6 +1458,7 @@
         "scripts/resource_analyzer.py"
       ],
       "size_bytes": 63133,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1304,6 +1480,9 @@
       "version": "2.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/playwright-pro",
       "files": [
         "SKILL.md",
@@ -1327,6 +1506,7 @@
         "skills/testrail.md"
       ],
       "size_bytes": 125751,
+      "tools_count": 6,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1339,6 +1519,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/pr-review-expert",
       "files": [
         "SKILL.md",
@@ -1350,6 +1533,7 @@
         "scripts/review_checklist_generator.py"
       ],
       "size_bytes": 61096,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1362,6 +1546,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/prompt-engineer-toolkit",
       "files": [
         "SKILL.md",
@@ -1373,6 +1560,7 @@
         "scripts/prompt_diff.py"
       ],
       "size_bytes": 59814,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1391,6 +1579,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/prompt-governance",
       "files": [
         "SKILL.md",
@@ -1399,6 +1590,7 @@
         "scripts/prompt_catalog_manager.py"
       ],
       "size_bytes": 33952,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1416,6 +1608,9 @@
       "version": "2.1.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/qa-browser-automation",
       "files": [
         "SKILL.md",
@@ -1430,6 +1625,7 @@
         "scripts/visual_regression_tracker.py"
       ],
       "size_bytes": 125238,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1442,6 +1638,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/rag-architect",
       "files": [
         "SKILL.md",
@@ -1455,6 +1654,7 @@
         "retrieval_evaluator.py"
       ],
       "size_bytes": 142110,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -1473,6 +1673,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/red-team",
       "files": [
         "SKILL.md",
@@ -1480,6 +1683,7 @@
         "scripts/engagement_planner.py"
       ],
       "size_bytes": 26788,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1492,6 +1696,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/release-manager",
       "files": [
         "README.md",
@@ -1512,6 +1719,7 @@
         "version_bumper.py"
       ],
       "size_bytes": 183396,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -1529,6 +1737,9 @@
       "version": "2.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/release-orchestrator",
       "files": [
         "SKILL.md",
@@ -1544,6 +1755,7 @@
         "scripts/version_bumper.py"
       ],
       "size_bytes": 119606,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -1556,6 +1768,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/runbook-generator",
       "files": [
         "SKILL.md",
@@ -1567,6 +1782,7 @@
         "scripts/staleness_checker.py"
       ],
       "size_bytes": 64404,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1579,6 +1795,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/saas-scaffolder",
       "files": [
         "SKILL.md",
@@ -1590,6 +1809,7 @@
         "scripts/tenant_config_validator.py"
       ],
       "size_bytes": 69780,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1609,6 +1829,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/secrets-vault-manager",
       "files": [
         "SKILL.md",
@@ -1618,6 +1841,7 @@
         "scripts/vault_config_generator.py"
       ],
       "size_bytes": 49610,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1637,6 +1861,9 @@
       "version": "2.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/self-improving-agent",
       "files": [
         "SKILL.md",
@@ -1657,6 +1884,7 @@
         "skills/status.md"
       ],
       "size_bytes": 124224,
+      "tools_count": 6,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1675,6 +1903,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-architect",
       "files": [
         "SKILL.md",
@@ -1688,6 +1919,7 @@
         "scripts/project_architect.py"
       ],
       "size_bytes": 136312,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1706,6 +1938,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-backend",
       "files": [
         "SKILL.md",
@@ -1719,6 +1954,7 @@
         "scripts/database_migration_tool.py"
       ],
       "size_bytes": 152005,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1739,6 +1975,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-cloud-architect",
       "files": [
         "SKILL.md",
@@ -1746,6 +1985,7 @@
         "references/cloud-operations.md"
       ],
       "size_bytes": 14267,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -1763,6 +2003,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-computer-vision",
       "files": [
         "SKILL.md",
@@ -1777,6 +2020,7 @@
         "scripts/vision_model_trainer.py"
       ],
       "size_bytes": 212622,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1795,6 +2039,9 @@
       "version": "1.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-data-engineer",
       "files": [
         "SKILL.md",
@@ -1808,6 +2055,7 @@
         "scripts/pipeline_orchestrator.py"
       ],
       "size_bytes": 272981,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1827,6 +2075,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-data-scientist",
       "files": [
         "SKILL.md",
@@ -1840,6 +2091,7 @@
         "scripts/model_evaluation_suite.py"
       ],
       "size_bytes": 32079,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1858,6 +2110,9 @@
       "version": "2.2.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-devops",
       "files": [
         "SKILL.md",
@@ -1872,6 +2127,7 @@
         "scripts/terraform_scaffolder.py"
       ],
       "size_bytes": 37987,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1890,6 +2146,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-frontend",
       "files": [
         "SKILL.md",
@@ -1903,6 +2162,7 @@
         "scripts/frontend_scaffolder.py"
       ],
       "size_bytes": 127084,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1921,6 +2181,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-fullstack",
       "files": [
         "SKILL.md",
@@ -1932,6 +2195,7 @@
         "scripts/project_scaffolder.py"
       ],
       "size_bytes": 111606,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1949,6 +2213,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-ml-engineer",
       "files": [
         "SKILL.md",
@@ -1962,6 +2229,7 @@
         "scripts/rag_system_builder.py"
       ],
       "size_bytes": 53376,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -1982,6 +2250,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-mobile",
       "files": [
         "REFERENCE.md",
@@ -1997,6 +2268,7 @@
         "scripts/store_metadata_generator.py"
       ],
       "size_bytes": 197086,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2014,6 +2286,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-prompt-engineer",
       "files": [
         "SKILL.md",
@@ -2026,6 +2301,7 @@
         "scripts/rag_evaluator.py"
       ],
       "size_bytes": 132477,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2043,6 +2319,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-qa",
       "files": [
         "README.md",
@@ -2057,6 +2336,7 @@
         "scripts/test_suite_generator.py"
       ],
       "size_bytes": 172472,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2069,6 +2349,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-secops",
       "files": [
         "SKILL.md",
@@ -2082,6 +2365,7 @@
         "scripts/vulnerability_assessor.py"
       ],
       "size_bytes": 161759,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2099,6 +2383,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/senior-security",
       "files": [
         "SKILL.md",
@@ -2111,6 +2398,7 @@
         "scripts/threat_modeler.py"
       ],
       "size_bytes": 134387,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2123,6 +2411,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/skill-security-auditor",
       "files": [
         "SKILL.md",
@@ -2134,6 +2425,7 @@
         "scripts/supply_chain_checker.py"
       ],
       "size_bytes": 69536,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2146,6 +2438,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/skill-tester",
       "files": [
         "README.md",
@@ -2168,6 +2463,7 @@
         "scripts/skill_validator.py"
       ],
       "size_bytes": 199887,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2186,6 +2482,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/snowflake-development",
       "files": [
         "SKILL.md",
@@ -2193,6 +2492,7 @@
         "scripts/snowflake_query_helper.py"
       ],
       "size_bytes": 26314,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2211,6 +2511,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/sql-database-assistant",
       "files": [
         "SKILL.md",
@@ -2222,6 +2525,7 @@
         "scripts/schema_explorer.py"
       ],
       "size_bytes": 56312,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2234,6 +2538,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/stripe-integration-expert",
       "files": [
         "SKILL.md",
@@ -2246,6 +2553,7 @@
         "scripts/webhook_validator.py"
       ],
       "size_bytes": 87889,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2263,6 +2571,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/tdd-guide",
       "files": [
         "HOW_TO_USE.md",
@@ -2288,6 +2599,7 @@
         "scripts/test_generator.py"
       ],
       "size_bytes": 191728,
+      "tools_count": 8,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2300,6 +2612,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/tech-debt-tracker",
       "files": [
         "README.md",
@@ -2325,6 +2640,7 @@
         "scripts/debt_scanner.py"
       ],
       "size_bytes": 344973,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2341,6 +2657,9 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/tech-stack-evaluator",
       "files": [
         "SKILL.md",
@@ -2362,6 +2681,7 @@
         "scripts/tco_calculator.py"
       ],
       "size_bytes": 168354,
+      "tools_count": 7,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2380,6 +2700,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/terraform-patterns",
       "files": [
         "SKILL.md",
@@ -2389,6 +2712,7 @@
         "scripts/tf_security_scanner.py"
       ],
       "size_bytes": 45102,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2407,6 +2731,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
@@ -2415,6 +2742,7 @@
         "scripts/threat_signal_analyzer.py"
       ],
       "size_bytes": 32948,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2433,6 +2761,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/ab-test-setup",
       "files": [
         "SKILL.md",
@@ -2443,6 +2774,7 @@
         "scripts/test_designer.py"
       ],
       "size_bytes": 50315,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2455,6 +2787,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/ad-creative",
       "files": [
         "SKILL.md",
@@ -2463,6 +2798,7 @@
         "scripts/headline_generator.py"
       ],
       "size_bytes": 41025,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2484,6 +2820,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/aeo",
       "files": [
         "SKILL.md",
@@ -2495,6 +2834,7 @@
         "scripts/schema_qa_generator.py"
       ],
       "size_bytes": 73491,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2507,6 +2847,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/ai-seo",
       "files": [
         "SKILL.md",
@@ -2515,6 +2858,7 @@
         "scripts/serp_simulator.py"
       ],
       "size_bytes": 53723,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2527,6 +2871,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/analytics-tracking",
       "files": [
         "SKILL.md",
@@ -2535,6 +2882,7 @@
         "scripts/utm_validator.py"
       ],
       "size_bytes": 55344,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2553,6 +2901,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/app-store-optimization",
       "files": [
         "HOW_TO_USE.md",
@@ -2577,6 +2928,7 @@
         "scripts/review_analyzer.py"
       ],
       "size_bytes": 282808,
+      "tools_count": 8,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2589,6 +2941,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/brand-guidelines",
       "files": [
         "SKILL.md",
@@ -2597,6 +2952,7 @@
         "scripts/messaging_consistency_checker.py"
       ],
       "size_bytes": 55958,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2615,6 +2971,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/brand-strategist",
       "files": [
         "SKILL.md",
@@ -2623,6 +2982,7 @@
         "scripts/positioning_map_generator.py"
       ],
       "size_bytes": 42298,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2635,6 +2995,9 @@
       "version": "1.0.0",
       "updated": "2026-02-06",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/campaign-analytics",
       "files": [
         "SKILL.md",
@@ -2651,6 +3014,7 @@
         "scripts/funnel_analyzer.py"
       ],
       "size_bytes": 112260,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2663,6 +3027,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/cold-email",
       "files": [
         "SKILL.md",
@@ -2671,6 +3038,7 @@
         "scripts/subject_line_scorer.py"
       ],
       "size_bytes": 61356,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2683,6 +3051,9 @@
       "version": "1.0.0",
       "updated": "2025-10-20",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/content-creator",
       "files": [
         "SKILL.md",
@@ -2697,6 +3068,7 @@
         "scripts/seo_optimizer.py"
       ],
       "size_bytes": 91508,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -2709,6 +3081,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/content-humanizer",
       "files": [
         "SKILL.md",
@@ -2717,6 +3092,7 @@
         "scripts/readability_scorer.py"
       ],
       "size_bytes": 49316,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2729,6 +3105,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/content-production",
       "files": [
         "SKILL.md",
@@ -2737,6 +3116,7 @@
         "scripts/readability_scorer.py"
       ],
       "size_bytes": 41387,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2749,6 +3129,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/content-strategy",
       "files": [
         "SKILL.md",
@@ -2757,6 +3140,7 @@
         "scripts/headline_analyzer.py"
       ],
       "size_bytes": 44513,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2769,6 +3153,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/copy-editing",
       "files": [
         "SKILL.md",
@@ -2777,6 +3164,7 @@
         "scripts/style_checker.py"
       ],
       "size_bytes": 43970,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2789,6 +3177,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/copywriting",
       "files": [
         "SKILL.md",
@@ -2797,6 +3188,7 @@
         "scripts/page_copy_auditor.py"
       ],
       "size_bytes": 40830,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2809,6 +3201,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/email-sequence",
       "files": [
         "SKILL.md",
@@ -2817,6 +3212,7 @@
         "scripts/subject_line_scorer.py"
       ],
       "size_bytes": 39892,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2829,6 +3225,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/email-template-builder",
       "files": [
         "SKILL.md",
@@ -2837,6 +3236,7 @@
         "scripts/template_validator.py"
       ],
       "size_bytes": 47342,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2855,6 +3255,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/growth-marketer",
       "files": [
         "SKILL.md",
@@ -2863,6 +3266,7 @@
         "scripts/viral_coefficient_calculator.py"
       ],
       "size_bytes": 39305,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2875,6 +3279,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/landing-page-generator",
       "files": [
         "SKILL.md",
@@ -2883,6 +3290,7 @@
         "scripts/page_speed_estimator.py"
       ],
       "size_bytes": 44572,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2895,6 +3303,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/launch-strategy",
       "files": [
         "SKILL.md",
@@ -2903,6 +3314,7 @@
         "scripts/launch_timeline_generator.py"
       ],
       "size_bytes": 45482,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2921,6 +3333,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/marketing-analyst",
       "files": [
         "SKILL.md",
@@ -2929,6 +3344,7 @@
         "scripts/marketing_forecast_generator.py"
       ],
       "size_bytes": 36682,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2941,6 +3357,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-context",
       "files": [
         "SKILL.md",
@@ -2949,6 +3368,7 @@
         "scripts/icp_fit_scorer.py"
       ],
       "size_bytes": 46148,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -2961,6 +3381,9 @@
       "version": "1.1.0",
       "updated": "2025-01",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-demand-acquisition",
       "files": [
         "SKILL.md",
@@ -2971,6 +3394,7 @@
         "scripts/calculate_cac.py"
       ],
       "size_bytes": 43481,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -2983,6 +3407,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-ideas",
       "files": [
         "SKILL.md",
@@ -2994,6 +3421,7 @@
         "scripts/trend_evaluator.py"
       ],
       "size_bytes": 50871,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3006,6 +3434,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-ops",
       "files": [
         "SKILL.md",
@@ -3014,6 +3445,7 @@
         "scripts/martech_stack_auditor.py"
       ],
       "size_bytes": 49846,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3026,6 +3458,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-psychology",
       "files": [
         "SKILL.md",
@@ -3037,6 +3472,7 @@
         "scripts/pricing_psychology_analyzer.py"
       ],
       "size_bytes": 53003,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3055,6 +3491,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/marketing-strategy-pmm",
       "files": [
         "SKILL.md",
@@ -3067,6 +3506,7 @@
         "scripts/win_loss_analyzer.py"
       ],
       "size_bytes": 84236,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3079,6 +3519,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/paid-ads",
       "files": [
         "SKILL.md",
@@ -3087,6 +3530,7 @@
         "scripts/cpc_calculator.py"
       ],
       "size_bytes": 46072,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3105,6 +3549,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/programmatic-seo",
       "files": [
         "SKILL.md",
@@ -3117,6 +3564,7 @@
         "scripts/template_scorer.py"
       ],
       "size_bytes": 57340,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3136,6 +3584,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/schema-markup",
       "files": [
         "SKILL.md",
@@ -3144,6 +3595,7 @@
         "scripts/schema_validator.py"
       ],
       "size_bytes": 56259,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3156,6 +3608,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/seo-audit",
       "files": [
         "SKILL.md",
@@ -3167,6 +3622,7 @@
         "scripts/sitemap_analyzer.py"
       ],
       "size_bytes": 65294,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3185,6 +3641,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/seo-specialist",
       "files": [
         "SKILL.md",
@@ -3193,6 +3652,7 @@
         "scripts/serp_simulator.py"
       ],
       "size_bytes": 41947,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3205,6 +3665,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing-growth",
+      "subdomain": "",
       "path": "marketing/site-architecture",
       "files": [
         "SKILL.md",
@@ -3213,6 +3676,7 @@
         "scripts/sitemap_analyzer.py"
       ],
       "size_bytes": 49951,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3225,6 +3689,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/social-content",
       "files": [
         "SKILL.md",
@@ -3233,6 +3700,7 @@
         "scripts/post_scheduler.py"
       ],
       "size_bytes": 47963,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3250,6 +3718,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/social-media-analyzer",
       "files": [
         "HOW_TO_USE.md",
@@ -3261,6 +3732,7 @@
         "scripts/calculate_metrics.py"
       ],
       "size_bytes": 42271,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -3273,6 +3745,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/social-media-manager",
       "files": [
         "SKILL.md",
@@ -3281,6 +3756,7 @@
         "scripts/social_audit_scorer.py"
       ],
       "size_bytes": 42486,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3300,6 +3776,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/video-content-strategist",
       "files": [
         "SKILL.md",
@@ -3309,6 +3788,7 @@
         "scripts/video_seo_optimizer.py"
       ],
       "size_bytes": 48658,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3328,6 +3808,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
       "path": "marketing/x-twitter-growth",
       "files": [
         "SKILL.md",
@@ -3338,6 +3821,7 @@
         "scripts/tweet_analyzer.py"
       ],
       "size_bytes": 54550,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3350,6 +3834,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/board-deck-builder",
       "files": [
         "SKILL.md",
@@ -3358,6 +3845,7 @@
         "scripts/metrics_dashboard_generator.py"
       ],
       "size_bytes": 54639,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3370,6 +3858,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/board-meeting",
       "files": [
         "SKILL.md",
@@ -3378,6 +3869,7 @@
         "scripts/meeting_simulator.py"
       ],
       "size_bytes": 45266,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3390,6 +3882,9 @@
       "version": "1.0.0",
       "updated": "2025-10-20",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/ceo-advisor",
       "files": [
         "SKILL.md",
@@ -3400,6 +3895,7 @@
         "scripts/strategy_analyzer.py"
       ],
       "size_bytes": 94252,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3418,6 +3914,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/cfo-advisor",
       "files": [
         "SKILL.md",
@@ -3426,6 +3925,7 @@
         "scripts/scenario_modeler.py"
       ],
       "size_bytes": 49903,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3438,6 +3938,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/change-management",
       "files": [
         "SKILL.md",
@@ -3446,6 +3949,7 @@
         "scripts/communication_planner.py"
       ],
       "size_bytes": 52761,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3466,6 +3970,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/chief-ai-officer-advisor",
       "files": [
         "SKILL.md",
@@ -3477,6 +3984,7 @@
         "scripts/ai_risk_register_generator.py"
       ],
       "size_bytes": 86903,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3497,6 +4005,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/chief-customer-officer-advisor",
       "files": [
         "SKILL.md",
@@ -3508,6 +4019,7 @@
         "scripts/voc_program_designer.py"
       ],
       "size_bytes": 73705,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3528,6 +4040,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/chief-data-officer-advisor",
       "files": [
         "SKILL.md",
@@ -3539,6 +4054,7 @@
         "scripts/data_platform_evaluator.py"
       ],
       "size_bytes": 77838,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3551,6 +4067,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/chief-of-staff",
       "files": [
         "SKILL.md",
@@ -3559,6 +4078,7 @@
         "scripts/synthesis_generator.py"
       ],
       "size_bytes": 47302,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3571,6 +4091,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/chro-advisor",
       "files": [
         "SKILL.md",
@@ -3579,6 +4102,7 @@
         "scripts/retention_risk_scorer.py"
       ],
       "size_bytes": 49329,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3591,6 +4115,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/ciso-advisor",
       "files": [
         "SKILL.md",
@@ -3599,6 +4126,7 @@
         "scripts/security_posture_scorer.py"
       ],
       "size_bytes": 58016,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3617,6 +4145,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/cmo-advisor",
       "files": [
         "SKILL.md",
@@ -3625,6 +4156,7 @@
         "scripts/marketing_roi_calculator.py"
       ],
       "size_bytes": 41740,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3637,6 +4169,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/company-os",
       "files": [
         "SKILL.md",
@@ -3645,6 +4180,7 @@
         "scripts/scorecard_builder.py"
       ],
       "size_bytes": 45061,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3657,6 +4193,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/competitive-intel",
       "files": [
         "SKILL.md",
@@ -3665,6 +4204,7 @@
         "scripts/swot_analyzer.py"
       ],
       "size_bytes": 44593,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3683,6 +4223,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/coo-advisor",
       "files": [
         "SKILL.md",
@@ -3691,6 +4234,7 @@
         "scripts/process_efficiency_scorer.py"
       ],
       "size_bytes": 41891,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3703,6 +4247,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/cpo-advisor",
       "files": [
         "SKILL.md",
@@ -3711,6 +4258,7 @@
         "scripts/product_portfolio_analyzer.py"
       ],
       "size_bytes": 48309,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3723,6 +4271,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/cro-advisor",
       "files": [
         "SKILL.md",
@@ -3731,6 +4282,7 @@
         "scripts/sales_efficiency_scorer.py"
       ],
       "size_bytes": 50062,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3743,11 +4295,15 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/cs-onboard",
       "files": [
         "SKILL.md"
       ],
       "size_bytes": 19016,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": false,
       "has_assets": false
@@ -3760,6 +4316,9 @@
       "version": "1.0.0",
       "updated": "2025-10-20",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/cto-advisor",
       "files": [
         "SKILL.md",
@@ -3770,6 +4329,7 @@
         "scripts/tech_debt_analyzer.py"
       ],
       "size_bytes": 82978,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3782,6 +4342,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/culture-architect",
       "files": [
         "SKILL.md",
@@ -3790,6 +4353,7 @@
         "scripts/values_alignment_scorer.py"
       ],
       "size_bytes": 53420,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3802,6 +4366,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/decision-logger",
       "files": [
         "SKILL.md",
@@ -3810,6 +4377,7 @@
         "scripts/decision_tree_builder.py"
       ],
       "size_bytes": 52949,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3822,6 +4390,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/executive-mentor",
       "files": [
         "SKILL.md",
@@ -3830,6 +4401,7 @@
         "scripts/leadership_assessment.py"
       ],
       "size_bytes": 64598,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3842,6 +4414,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/founder-coach",
       "files": [
         "SKILL.md",
@@ -3850,6 +4425,7 @@
         "scripts/startup_stage_assessor.py"
       ],
       "size_bytes": 55286,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3870,6 +4446,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/general-counsel-advisor",
       "files": [
         "SKILL.md",
@@ -3881,6 +4460,7 @@
         "scripts/regulatory_calendar_generator.py"
       ],
       "size_bytes": 66344,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -3893,6 +4473,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/internal-narrative",
       "files": [
         "SKILL.md",
@@ -3901,6 +4484,7 @@
         "scripts/stakeholder_mapper.py"
       ],
       "size_bytes": 54329,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3913,6 +4497,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/intl-expansion",
       "files": [
         "SKILL.md",
@@ -3921,6 +4508,7 @@
         "scripts/regulatory_mapper.py"
       ],
       "size_bytes": 60282,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3933,6 +4521,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/ma-playbook",
       "files": [
         "SKILL.md",
@@ -3941,6 +4532,7 @@
         "scripts/synergy_calculator.py"
       ],
       "size_bytes": 56094,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3953,6 +4545,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/org-health-diagnostic",
       "files": [
         "SKILL.md",
@@ -3961,6 +4556,7 @@
         "scripts/span_of_control_analyzer.py"
       ],
       "size_bytes": 46505,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3973,6 +4569,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/scenario-war-room",
       "files": [
         "SKILL.md",
@@ -3981,6 +4580,7 @@
         "scripts/scenario_builder.py"
       ],
       "size_bytes": 47877,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -3993,6 +4593,9 @@
       "version": "2.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "c-level",
+      "subdomain": "",
       "path": "c-level-advisor/strategic-alignment",
       "files": [
         "SKILL.md",
@@ -4001,6 +4604,7 @@
         "scripts/strategy_map_generator.py"
       ],
       "size_bytes": 49648,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4023,6 +4627,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "executive-leadership",
+      "subdomain": "",
       "path": "c-level-advisor/vpe-advisor",
       "files": [
         "SKILL.md",
@@ -4034,6 +4641,7 @@
         "scripts/eng_productivity_dashboard.py"
       ],
       "size_bytes": 77000,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4054,6 +4662,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/ai-act-readiness",
       "files": [
         "SKILL.md",
@@ -4063,6 +4674,7 @@
         "scripts/gpai_obligation_checker.py"
       ],
       "size_bytes": 46671,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4083,6 +4695,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/aims-audit",
       "files": [
         "SKILL.md",
@@ -4092,6 +4707,7 @@
         "scripts/aims_readiness_score.py"
       ],
       "size_bytes": 43444,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4114,6 +4730,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/compliance-readiness",
       "files": [
         "SKILL.md",
@@ -4125,6 +4744,7 @@
         "scripts/shared_evidence_finder.py"
       ],
       "size_bytes": 66310,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4146,6 +4766,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/fda-qsr-audit-prep",
       "files": [
         "SKILL.md",
@@ -4155,6 +4778,7 @@
         "scripts/qsr_readiness_score.py"
       ],
       "size_bytes": 48898,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4175,6 +4799,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/gdpr-audit-prep",
       "files": [
         "SKILL.md",
@@ -4184,6 +4811,7 @@
         "scripts/ropa_completeness_checker.py"
       ],
       "size_bytes": 45026,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4203,6 +4831,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/audit-prep/soc2-audit-prep",
       "files": [
         "SKILL.md",
@@ -4212,6 +4843,7 @@
         "scripts/soc2_readiness_score.py"
       ],
       "size_bytes": 50003,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4230,6 +4862,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/capa-officer",
       "files": [
         "SKILL.md",
@@ -4238,6 +4873,7 @@
         "scripts/capa_tracker.py"
       ],
       "size_bytes": 72564,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4256,6 +4892,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/ccpa-cpra-privacy-expert",
       "files": [
         "SKILL.md",
@@ -4265,6 +4904,7 @@
         "scripts/ccpa_data_mapper.py"
       ],
       "size_bytes": 137057,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4282,6 +4922,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/dora-compliance-expert",
       "files": [
         "SKILL.md",
@@ -4295,6 +4938,7 @@
         "scripts/dora_readiness_checker.py"
       ],
       "size_bytes": 137491,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4313,6 +4957,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/eu-ai-act-specialist",
       "files": [
         "SKILL.md",
@@ -4324,6 +4971,7 @@
         "scripts/ai_risk_classifier.py"
       ],
       "size_bytes": 294123,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4343,6 +4991,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/fda-consultant-specialist",
       "files": [
         "SKILL.md",
@@ -4356,6 +5007,7 @@
         "scripts/qsr_compliance_checker.py"
       ],
       "size_bytes": 191506,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4374,6 +5026,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/gdpr-dsgvo-expert",
       "files": [
         "SKILL.md",
@@ -4385,6 +5040,7 @@
         "scripts/gdpr_compliance_checker.py"
       ],
       "size_bytes": 116755,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4403,6 +5059,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/information-security-manager-iso27001",
       "files": [
         "SKILL.md",
@@ -4416,6 +5075,7 @@
         "scripts/risk_assessment.py"
       ],
       "size_bytes": 108553,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4434,6 +5094,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/infrastructure-compliance-auditor",
       "files": [
         "SKILL.md",
@@ -4448,6 +5111,7 @@
         "scripts/infra_audit_runner.py"
       ],
       "size_bytes": 270942,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4466,6 +5130,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/isms-audit-expert",
       "files": [
         "SKILL.md",
@@ -4475,6 +5142,7 @@
         "scripts/isms_audit_scheduler.py"
       ],
       "size_bytes": 49004,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4493,6 +5161,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/iso42001-ai-management",
       "files": [
         "SKILL.md",
@@ -4502,6 +5173,7 @@
         "scripts/aims_readiness_checker.py"
       ],
       "size_bytes": 142624,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4520,6 +5192,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/mdr-745-specialist",
       "files": [
         "SKILL.md",
@@ -4529,6 +5204,7 @@
         "scripts/mdr_gap_analyzer.py"
       ],
       "size_bytes": 79581,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4546,6 +5222,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/nis2-directive-specialist",
       "files": [
         "SKILL.md",
@@ -4555,6 +5234,7 @@
         "scripts/nis2_scope_analyzer.py"
       ],
       "size_bytes": 150813,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4572,6 +5252,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/nist-csf-specialist",
       "files": [
         "SKILL.md",
@@ -4584,6 +5267,7 @@
         "scripts/csf_maturity_assessor.py"
       ],
       "size_bytes": 152961,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4601,6 +5285,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/pci-dss-specialist",
       "files": [
         "SKILL.md",
@@ -4614,6 +5301,7 @@
         "scripts/pci_scope_analyzer.py"
       ],
       "size_bytes": 150598,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4632,6 +5320,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/qms-audit-expert",
       "files": [
         "SKILL.md",
@@ -4640,6 +5331,7 @@
         "scripts/audit_schedule_optimizer.py"
       ],
       "size_bytes": 47074,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4657,6 +5349,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/quality-documentation-manager",
       "files": [
         "SKILL.md",
@@ -4665,6 +5360,7 @@
         "scripts/document_validator.py"
       ],
       "size_bytes": 68488,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4683,6 +5379,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/quality-manager-qmr",
       "files": [
         "SKILL.md",
@@ -4691,6 +5390,7 @@
         "scripts/management_review_tracker.py"
       ],
       "size_bytes": 64782,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4703,6 +5403,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/quality-manager-qms-iso13485",
       "files": [
         "SKILL.md",
@@ -4715,6 +5418,7 @@
         "scripts/qms_audit_checklist.py"
       ],
       "size_bytes": 118566,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4733,6 +5437,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/regulatory-affairs-head",
       "files": [
         "SKILL.md",
@@ -4743,6 +5450,7 @@
         "scripts/regulatory_tracker.py"
       ],
       "size_bytes": 60447,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4761,6 +5469,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/risk-management-specialist",
       "files": [
         "SKILL.md",
@@ -4772,6 +5483,7 @@
         "scripts/risk_matrix_calculator.py"
       ],
       "size_bytes": 87751,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4789,6 +5501,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "compliance",
+      "subdomain": "",
       "path": "ra-qm-team/soc2-compliance-expert",
       "files": [
         "REFERENCE.md",
@@ -4801,6 +5516,7 @@
         "scripts/soc2_readiness_checker.py"
       ],
       "size_bytes": 275239,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4823,6 +5539,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "commercial",
+      "subdomain": "",
       "path": "business-growth/channel-economics",
       "files": [
         "SKILL.md",
@@ -4834,6 +5553,7 @@
         "scripts/partner_tier_economics.py"
       ],
       "size_bytes": 89082,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4853,6 +5573,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/churn-prevention",
       "files": [
         "SKILL.md",
@@ -4861,6 +5584,7 @@
         "scripts/exit_survey_analyzer.py"
       ],
       "size_bytes": 51573,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4881,6 +5605,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "commercial",
+      "subdomain": "",
       "path": "business-growth/commercial-policy",
       "files": [
         "SKILL.md",
@@ -4892,6 +5619,7 @@
         "scripts/terms_deviation_analyzer.py"
       ],
       "size_bytes": 86580,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -4904,6 +5632,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/competitive-teardown",
       "files": [
         "SKILL.md",
@@ -4912,6 +5643,7 @@
         "scripts/feature_matrix_builder.py"
       ],
       "size_bytes": 45502,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4924,6 +5656,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/competitor-alternatives",
       "files": [
         "SKILL.md",
@@ -4932,6 +5667,7 @@
         "scripts/competitor_data_tracker.py"
       ],
       "size_bytes": 41062,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4944,6 +5680,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/contract-and-proposal-writer",
       "files": [
         "SKILL.md",
@@ -4952,6 +5691,7 @@
         "scripts/proposal_cost_estimator.py"
       ],
       "size_bytes": 51177,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -4970,6 +5710,9 @@
       "version": "1.0.0",
       "updated": "2026-02-06",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/customer-success-manager",
       "files": [
         "SKILL.md",
@@ -4987,6 +5730,7 @@
         "scripts/health_score_calculator.py"
       ],
       "size_bytes": 135919,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5007,6 +5751,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "commercial",
+      "subdomain": "",
       "path": "business-growth/deal-desk",
       "files": [
         "SKILL.md",
@@ -5018,6 +5765,7 @@
         "scripts/discount_authority_router.py"
       ],
       "size_bytes": 102041,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5036,6 +5784,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/form-cro",
       "files": [
         "SKILL.md",
@@ -5044,6 +5795,7 @@
         "scripts/form_scorer.py"
       ],
       "size_bytes": 50764,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5056,6 +5808,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/free-tool-strategy",
       "files": [
         "SKILL.md",
@@ -5064,6 +5819,7 @@
         "scripts/tool_roi_calculator.py"
       ],
       "size_bytes": 46590,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5076,6 +5832,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/onboarding-cro",
       "files": [
         "SKILL.md",
@@ -5084,6 +5843,7 @@
         "scripts/ttv_estimator.py"
       ],
       "size_bytes": 50886,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5102,6 +5862,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/page-cro",
       "files": [
         "SKILL.md",
@@ -5110,6 +5873,7 @@
         "scripts/page_cro_scorer.py"
       ],
       "size_bytes": 55654,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5130,6 +5894,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "commercial",
+      "subdomain": "",
       "path": "business-growth/partnerships-architect",
       "files": [
         "SKILL.md",
@@ -5141,6 +5908,7 @@
         "scripts/partnership_roi_modeler.py"
       ],
       "size_bytes": 91805,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5160,6 +5928,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/paywall-upgrade-cro",
       "files": [
         "SKILL.md",
@@ -5168,6 +5939,7 @@
         "scripts/upgrade_funnel_analyzer.py"
       ],
       "size_bytes": 58570,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5187,6 +5959,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/popup-cro",
       "files": [
         "SKILL.md",
@@ -5195,6 +5970,7 @@
         "scripts/popup_strategy_auditor.py"
       ],
       "size_bytes": 49951,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5214,6 +5990,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/pricing-strategy",
       "files": [
         "SKILL.md",
@@ -5226,6 +6005,7 @@
         "scripts/pricing_model_analyzer.py"
       ],
       "size_bytes": 59807,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5245,6 +6025,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/referral-program",
       "files": [
         "SKILL.md",
@@ -5257,6 +6040,7 @@
         "scripts/referral_funnel_analyzer.py"
       ],
       "size_bytes": 62807,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5275,6 +6059,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/revenue-operations",
       "files": [
         "SKILL.md",
@@ -5293,6 +6080,7 @@
         "scripts/pipeline_analyzer.py"
       ],
       "size_bytes": 122515,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5311,6 +6099,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/sales-engineer",
       "files": [
         "SKILL.md",
@@ -5327,6 +6118,7 @@
         "scripts/rfp_response_analyzer.py"
       ],
       "size_bytes": 152344,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -5345,6 +6137,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
       "path": "business-growth/signup-flow-cro",
       "files": [
         "SKILL.md",
@@ -5353,6 +6148,7 @@
         "scripts/signup_flow_scorer.py"
       ],
       "size_bytes": 59304,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -5371,6 +6167,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/contract-review",
       "files": [
         "SKILL.md",
@@ -5380,6 +6179,7 @@
         "scripts/redline_generator.py"
       ],
       "size_bytes": 83181,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5398,6 +6198,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/data-breach-response",
       "files": [
         "SKILL.md",
@@ -5407,6 +6210,7 @@
         "scripts/breach_timeline_tracker.py"
       ],
       "size_bytes": 73702,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5425,6 +6229,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/dpia-assessment",
       "files": [
         "SKILL.md",
@@ -5434,6 +6241,7 @@
         "scripts/dpia_threshold_checker.py"
       ],
       "size_bytes": 76917,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5452,6 +6260,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/legal-canned-responses",
       "files": [
         "SKILL.md",
@@ -5461,6 +6272,7 @@
         "scripts/response_generator.py"
       ],
       "size_bytes": 83065,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5479,6 +6291,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/legal-meeting-briefing",
       "files": [
         "SKILL.md",
@@ -5488,6 +6303,7 @@
         "scripts/meeting_brief_generator.py"
       ],
       "size_bytes": 69568,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5506,6 +6322,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/legal-red-team",
       "files": [
         "SKILL.md",
@@ -5515,6 +6334,7 @@
         "scripts/legal_quality_scorer.py"
       ],
       "size_bytes": 88477,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5533,6 +6353,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/legal-risk-assessment",
       "files": [
         "SKILL.md",
@@ -5542,6 +6365,7 @@
         "scripts/risk_scorer.py"
       ],
       "size_bytes": 65249,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5560,6 +6384,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/mediation-analysis",
       "files": [
         "SKILL.md",
@@ -5569,6 +6396,7 @@
         "scripts/settlement_calculator.py"
       ],
       "size_bytes": 77784,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5587,6 +6415,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/nda-review",
       "files": [
         "SKILL.md",
@@ -5595,6 +6426,7 @@
         "scripts/nda_clause_reviewer.py"
       ],
       "size_bytes": 73274,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5613,6 +6445,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/nda-triage",
       "files": [
         "SKILL.md",
@@ -5621,6 +6456,7 @@
         "scripts/nda_screener.py"
       ],
       "size_bytes": 68606,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5639,6 +6475,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/privacy-compliance",
       "files": [
         "SKILL.md",
@@ -5649,6 +6488,7 @@
         "scripts/privacy_regulation_checker.py"
       ],
       "size_bytes": 102508,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5667,6 +6507,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/privacy-notice-generator",
       "files": [
         "SKILL.md",
@@ -5677,6 +6520,7 @@
         "scripts/privacy_notice_scaffolder.py"
       ],
       "size_bytes": 113477,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5695,6 +6539,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/statute-analysis",
       "files": [
         "SKILL.md",
@@ -5704,6 +6551,7 @@
         "scripts/statute_keyword_analyzer.py"
       ],
       "size_bytes": 80508,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5722,6 +6570,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/tabular-document-review",
       "files": [
         "SKILL.md",
@@ -5731,6 +6582,7 @@
         "scripts/extraction_aggregator.py"
       ],
       "size_bytes": 63593,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5749,6 +6601,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/tech-contract-negotiation",
       "files": [
         "SKILL.md",
@@ -5759,6 +6614,7 @@
         "scripts/negotiation_position_analyzer.py"
       ],
       "size_bytes": 85003,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5777,6 +6633,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/vendor-due-diligence",
       "files": [
         "SKILL.md",
@@ -5787,6 +6646,7 @@
         "scripts/vendor_risk_scorer.py"
       ],
       "size_bytes": 89748,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5805,6 +6665,9 @@
       "version": "1.0.0",
       "updated": "2026-04-10",
       "author": "The Glass Room",
+      "license": "MIT + Commons Clause",
+      "category": "legal",
+      "subdomain": "",
       "path": "legal/whistleblower-compliance",
       "files": [
         "SKILL.md",
@@ -5814,6 +6677,7 @@
         "scripts/whistleblower_policy_scaffolder.py"
       ],
       "size_bytes": 81493,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5832,6 +6696,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-ops",
+      "subdomain": "",
       "path": "project-management/agile-coach",
       "files": [
         "SKILL.md",
@@ -5846,6 +6713,7 @@
         "scripts/velocity_analyzer.py"
       ],
       "size_bytes": 67667,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5864,6 +6732,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/atlassian-admin",
       "files": [
         "SKILL.md",
@@ -5875,6 +6746,7 @@
         "scripts/system_health_checker.py"
       ],
       "size_bytes": 71794,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5892,6 +6764,9 @@
       "version": "1.1.0",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/atlassian-templates",
       "files": [
         "SKILL.md",
@@ -5906,6 +6781,7 @@
         "scripts/template_validator.py"
       ],
       "size_bytes": 74377,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -5918,6 +6794,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/career/pm-1on1s",
       "files": [
         "SKILL.md",
@@ -5930,6 +6809,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 57732,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -5942,6 +6822,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/career/pm-career-ladder",
       "files": [
         "SKILL.md",
@@ -5954,6 +6837,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 66393,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -5966,6 +6850,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/career/pm-interview-prep",
       "files": [
         "SKILL.md",
@@ -5979,6 +6866,7 @@
         "references/round-frameworks-and-prep.md"
       ],
       "size_bytes": 73176,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -5991,6 +6879,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/career/pm-onboarding",
       "files": [
         "SKILL.md",
@@ -6004,6 +6895,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 70091,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6021,6 +6913,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/confluence-expert",
       "files": [
         "SKILL.md",
@@ -6033,6 +6928,7 @@
         "scripts/space_structure_analyzer.py"
       ],
       "size_bytes": 81903,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -6051,6 +6947,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-ops",
+      "subdomain": "",
       "path": "project-management/delivery-manager",
       "files": [
         "SKILL.md",
@@ -6065,6 +6964,7 @@
         "scripts/risk_register.py"
       ],
       "size_bytes": 76156,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -6077,6 +6977,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/brainstorm-experiments",
       "files": [
         "SKILL.md",
@@ -6088,6 +6991,7 @@
         "scripts/experiment_designer.py"
       ],
       "size_bytes": 64997,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6100,6 +7004,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/brainstorm-ideas",
       "files": [
         "SKILL.md",
@@ -6113,6 +7020,7 @@
         "scripts/scamper_generator.py"
       ],
       "size_bytes": 70105,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6125,6 +7033,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/customer-interview-script",
       "files": [
         "SKILL.md",
@@ -6136,6 +7047,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 78067,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6148,6 +7060,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/identify-assumptions",
       "files": [
         "SKILL.md",
@@ -6159,6 +7074,7 @@
         "scripts/assumption_tracker.py"
       ],
       "size_bytes": 68725,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6171,6 +7087,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/interview-synthesis",
       "files": [
         "SKILL.md",
@@ -6183,6 +7102,7 @@
         "scripts/interview_synthesizer.py"
       ],
       "size_bytes": 81031,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6195,6 +7115,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/jtbd-workshop",
       "files": [
         "SKILL.md",
@@ -6210,6 +7133,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 96106,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6222,6 +7146,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/metrics-dashboard",
       "files": [
         "SKILL.md",
@@ -6231,6 +7158,7 @@
         "scripts/dashboard_designer.py"
       ],
       "size_bytes": 31137,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6243,6 +7171,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/opportunity-solution-tree",
       "files": [
         "SKILL.md",
@@ -6252,6 +7183,7 @@
         "scripts/ost_validator.py"
       ],
       "size_bytes": 32143,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6264,6 +7196,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/pre-mortem",
       "files": [
         "SKILL.md",
@@ -6275,6 +7210,7 @@
         "scripts/risk_categorizer.py"
       ],
       "size_bytes": 74725,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6287,6 +7223,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/discovery/value-proposition-canvas",
       "files": [
         "SKILL.md",
@@ -6300,6 +7239,7 @@
         "references/value-proposition-design-guide.md"
       ],
       "size_bytes": 81441,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6312,6 +7252,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/activation-funnel",
       "files": [
         "SKILL.md",
@@ -6326,6 +7269,7 @@
         "scripts/funnel_analyzer.py"
       ],
       "size_bytes": 98037,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6338,6 +7282,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/ai-feature-prd",
       "files": [
         "SKILL.md",
@@ -6352,6 +7299,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 105618,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6364,6 +7312,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/backlog-refinement",
       "files": [
         "SKILL.md",
@@ -6375,6 +7326,7 @@
         "scripts/refinement_scorer.py"
       ],
       "size_bytes": 79365,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6387,6 +7339,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/beta-program",
       "files": [
         "SKILL.md",
@@ -6400,6 +7355,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 72023,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6412,6 +7368,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/brainstorm-okrs",
       "files": [
         "SKILL.md",
@@ -6423,6 +7382,7 @@
         "scripts/okr_validator.py"
       ],
       "size_bytes": 63179,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6435,6 +7395,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/create-prd",
       "files": [
         "SKILL.md",
@@ -6446,6 +7409,7 @@
         "scripts/prd_scaffolder.py"
       ],
       "size_bytes": 60609,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6465,6 +7429,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/customer-feedback-triage",
       "files": [
         "SKILL.md",
@@ -6479,6 +7446,7 @@
         "scripts/feedback_triage.py"
       ],
       "size_bytes": 112696,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6491,6 +7459,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/cycle-time-analyzer",
       "files": [
         "SKILL.md",
@@ -6502,6 +7473,7 @@
         "scripts/flow_metrics.py"
       ],
       "size_bytes": 80523,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6514,6 +7486,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/daci-framework",
       "files": [
         "SKILL.md",
@@ -6522,6 +7497,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 34860,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -6534,6 +7510,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/dependency-map",
       "files": [
         "SKILL.md",
@@ -6546,6 +7525,7 @@
         "scripts/dependency_graph.py"
       ],
       "size_bytes": 78725,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6558,6 +7538,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/eol-communication",
       "files": [
         "SKILL.md",
@@ -6566,6 +7549,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 40656,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -6578,6 +7562,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/feature-flag-strategy",
       "files": [
         "SKILL.md",
@@ -6592,6 +7579,7 @@
         "references/rollout-shape-comparison-guide.md"
       ],
       "size_bytes": 90813,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6604,6 +7592,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/job-stories",
       "files": [
         "SKILL.md",
@@ -6617,6 +7608,7 @@
         "scripts/story_quality_checker.py"
       ],
       "size_bytes": 82750,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6629,6 +7621,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/launch-playbook",
       "files": [
         "SKILL.md",
@@ -6643,6 +7638,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 77167,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6655,6 +7651,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/north-star-metric",
       "files": [
         "SKILL.md",
@@ -6666,6 +7665,7 @@
         "scripts/metric_tree_builder.py"
       ],
       "size_bytes": 76594,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6678,6 +7678,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/outcome-roadmap",
       "files": [
         "SKILL.md",
@@ -6689,6 +7692,7 @@
         "scripts/roadmap_transformer.py"
       ],
       "size_bytes": 67512,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6709,6 +7713,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/post-mortem",
       "files": [
         "SKILL.md",
@@ -6723,6 +7730,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 91481,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6735,6 +7743,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/prfaq",
       "files": [
         "SKILL.md",
@@ -6745,6 +7756,7 @@
         "references/working-backwards-guide.md"
       ],
       "size_bytes": 61649,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6764,6 +7776,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/pricing-prd",
       "files": [
         "SKILL.md",
@@ -6778,6 +7793,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 107224,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6790,6 +7806,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/prioritization-frameworks",
       "files": [
         "SKILL.md",
@@ -6802,6 +7821,7 @@
         "scripts/prioritization_scorer.py"
       ],
       "size_bytes": 65588,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6814,6 +7834,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/product-vision",
       "files": [
         "SKILL.md",
@@ -6827,6 +7850,7 @@
         "references/vision-playbook.md"
       ],
       "size_bytes": 74817,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6839,6 +7863,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/quarterly-planning",
       "files": [
         "SKILL.md",
@@ -6852,6 +7879,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 73667,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6864,6 +7892,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/release-notes",
       "files": [
         "SKILL.md",
@@ -6875,6 +7906,7 @@
         "scripts/release_notes_generator.py"
       ],
       "size_bytes": 53809,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6887,6 +7919,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/roadmap-communication",
       "files": [
         "SKILL.md",
@@ -6899,6 +7934,7 @@
         "references/roadmap-variants-playbook.md"
       ],
       "size_bytes": 59484,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -6911,6 +7947,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/sprint-plan",
       "files": [
         "SKILL.md",
@@ -6920,6 +7959,7 @@
         "scripts/sprint_planner.py"
       ],
       "size_bytes": 33403,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6932,6 +7972,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/stakeholder-map",
       "files": [
         "SKILL.md",
@@ -6941,6 +7984,7 @@
         "scripts/stakeholder_analyzer.py"
       ],
       "size_bytes": 31678,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6953,6 +7997,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/status-update-generator",
       "files": [
         "SKILL.md",
@@ -6965,6 +8012,7 @@
         "scripts/status_generator.py"
       ],
       "size_bytes": 66782,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -6977,6 +8025,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/story-mapping",
       "files": [
         "SKILL.md",
@@ -6985,6 +8036,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 34505,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": false
@@ -6997,6 +8049,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/story-splitting",
       "files": [
         "SKILL.md",
@@ -7007,6 +8062,7 @@
         "references/story-splitting-procedure.md"
       ],
       "size_bytes": 63106,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -7019,6 +8075,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/summarize-meeting",
       "files": [
         "SKILL.md",
@@ -7032,6 +8091,7 @@
         "scripts/meeting_effectiveness_scorer.py"
       ],
       "size_bytes": 61691,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7044,6 +8104,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/test-scenarios",
       "files": [
         "SKILL.md",
@@ -7053,6 +8116,7 @@
         "scripts/test_scenario_generator.py"
       ],
       "size_bytes": 34048,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7065,6 +8129,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/execution/wwas",
       "files": [
         "SKILL.md",
@@ -7078,6 +8145,7 @@
         "scripts/wwas_quality_scorer.py"
       ],
       "size_bytes": 76187,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7090,6 +8158,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/gtm/gtm-strategy",
       "files": [
         "SKILL.md",
@@ -7100,6 +8171,7 @@
         "scripts/gtm_strategy_validator.py"
       ],
       "size_bytes": 43169,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7112,6 +8184,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/gtm/ideal-customer-profile",
       "files": [
         "SKILL.md",
@@ -7121,6 +8196,7 @@
         "scripts/icp_scorer.py"
       ],
       "size_bytes": 36118,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7139,6 +8215,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/jira-expert",
       "files": [
         "SKILL.md",
@@ -7152,6 +8231,7 @@
         "scripts/workflow_analyzer.py"
       ],
       "size_bytes": 83296,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7172,6 +8252,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/linear-expert",
       "files": [
         "SKILL.md",
@@ -7184,6 +8267,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 72265,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -7203,6 +8287,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/notion-pm",
       "files": [
         "SKILL.md",
@@ -7216,6 +8303,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 81972,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -7237,6 +8325,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/productboard-expert",
       "files": [
         "SKILL.md",
@@ -7250,6 +8341,7 @@
         "references/red-flags.md"
       ],
       "size_bytes": 95545,
+      "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
       "has_assets": true
@@ -7268,6 +8360,9 @@
       "version": "1.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-ops",
+      "subdomain": "",
       "path": "project-management/program-manager",
       "files": [
         "SKILL.md",
@@ -7279,6 +8374,7 @@
         "scripts/resource_allocator.py"
       ],
       "size_bytes": 64845,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7297,6 +8393,9 @@
       "version": "2.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/scrum-master",
       "files": [
         "SKILL.md",
@@ -7321,6 +8420,7 @@
         "scripts/velocity_analyzer.py"
       ],
       "size_bytes": 265437,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7338,6 +8438,9 @@
       "version": "2.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/senior-pm",
       "files": [
         "SKILL.md",
@@ -7359,6 +8462,7 @@
         "scripts/stakeholder_mapper.py"
       ],
       "size_bytes": 282513,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7376,6 +8480,9 @@
       "version": "2.0.1",
       "updated": "2026-06-15",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/sprint-retrospective",
       "files": [
         "SKILL.md",
@@ -7392,6 +8499,7 @@
         "scripts/velocity_analyzer.py"
       ],
       "size_bytes": 150281,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7404,6 +8512,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/strategy-frameworks/ansoff-matrix",
       "files": [
         "SKILL.md",
@@ -7413,6 +8524,7 @@
         "scripts/ansoff_growth_scorer.py"
       ],
       "size_bytes": 33608,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7425,6 +8537,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/strategy-frameworks/business-model-canvas",
       "files": [
         "SKILL.md",
@@ -7434,6 +8549,7 @@
         "scripts/canvas_validator.py"
       ],
       "size_bytes": 41770,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7446,6 +8562,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/strategy-frameworks/lean-canvas",
       "files": [
         "SKILL.md",
@@ -7455,6 +8574,7 @@
         "scripts/lean_canvas_validator.py"
       ],
       "size_bytes": 35033,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7467,6 +8587,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/strategy-frameworks/porters-five-forces",
       "files": [
         "SKILL.md",
@@ -7476,6 +8599,7 @@
         "scripts/five_forces_scorer.py"
       ],
       "size_bytes": 33949,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7488,6 +8612,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
       "path": "project-management/strategy-frameworks/swot-analysis",
       "files": [
         "SKILL.md",
@@ -7497,6 +8624,7 @@
         "scripts/swot_scorer.py"
       ],
       "size_bytes": 30111,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7514,6 +8642,9 @@
       "version": "1.0.0",
       "updated": "2026-03-09",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/ab-test-setup",
       "files": [
         "SKILL.md",
@@ -7526,6 +8657,7 @@
         "scripts/sample_size_calculator.py"
       ],
       "size_bytes": 73601,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7544,6 +8676,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product",
+      "subdomain": "",
       "path": "product-team/agile-product-owner",
       "files": [
         "SKILL.md",
@@ -7552,6 +8687,7 @@
         "scripts/user_story_generator.py"
       ],
       "size_bytes": 50941,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7575,6 +8711,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/apple-hig-expert",
       "files": [
         "SKILL.md",
@@ -7586,6 +8725,7 @@
         "scripts/hig_compliance_checker.py"
       ],
       "size_bytes": 56993,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7604,6 +8744,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-design",
+      "subdomain": "",
       "path": "product-team/design-system-lead",
       "files": [
         "SKILL.md",
@@ -7612,6 +8755,7 @@
         "scripts/token_gen.py"
       ],
       "size_bytes": 54885,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7633,6 +8777,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/product-analytics",
       "files": [
         "SKILL.md",
@@ -7644,6 +8791,7 @@
         "scripts/retention_cohort_analyzer.py"
       ],
       "size_bytes": 63278,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7663,6 +8811,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-design",
+      "subdomain": "",
       "path": "product-team/product-designer",
       "files": [
         "SKILL.md",
@@ -7671,6 +8822,7 @@
         "scripts/usability_scorer.py"
       ],
       "size_bytes": 55786,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7689,6 +8841,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product",
+      "subdomain": "",
       "path": "product-team/product-manager-toolkit",
       "files": [
         "SKILL.md",
@@ -7698,6 +8853,7 @@
         "scripts/rice_prioritizer.py"
       ],
       "size_bytes": 76021,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7715,6 +8871,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product",
+      "subdomain": "",
       "path": "product-team/product-strategist",
       "files": [
         "SKILL.md",
@@ -7724,6 +8883,7 @@
         "scripts/okr_cascade_generator.py"
       ],
       "size_bytes": 76270,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7743,6 +8903,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/research-summarizer",
       "files": [
         "SKILL.md",
@@ -7754,6 +8917,7 @@
         "scripts/research_synthesis_organizer.py"
       ],
       "size_bytes": 49398,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7774,6 +8938,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/roadmap-communicator",
       "files": [
         "SKILL.md",
@@ -7785,6 +8952,7 @@
         "scripts/roadmap_diff_reporter.py"
       ],
       "size_bytes": 50389,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7804,6 +8972,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product-team",
+      "subdomain": "",
       "path": "product-team/spec-to-repo",
       "files": [
         "SKILL.md",
@@ -7815,6 +8986,7 @@
         "scripts/prd_to_tickets_decomposer.py"
       ],
       "size_bytes": 51082,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7832,6 +9004,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product",
+      "subdomain": "",
       "path": "product-team/ui-design-system",
       "files": [
         "SKILL.md",
@@ -7842,6 +9017,7 @@
         "scripts/design_token_generator.py"
       ],
       "size_bytes": 72854,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7859,6 +9035,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "product",
+      "subdomain": "",
       "path": "product-team/ux-researcher-designer",
       "files": [
         "SKILL.md",
@@ -7869,6 +9048,7 @@
         "scripts/persona_generator.py"
       ],
       "size_bytes": 97754,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -7881,6 +9061,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "data-analytics",
+      "subdomain": "",
       "path": "data-analytics/analytics-engineer",
       "files": [
         "REFERENCE.md",
@@ -7899,6 +9082,7 @@
         "scripts/schema_diff.py"
       ],
       "size_bytes": 49651,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -7917,6 +9101,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "data-analytics",
+      "subdomain": "",
       "path": "data-analytics/business-intelligence",
       "files": [
         "SKILL.md",
@@ -7925,6 +9112,7 @@
         "scripts/metric_validator.py"
       ],
       "size_bytes": 37794,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7943,6 +9131,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "data-analytics",
+      "subdomain": "",
       "path": "data-analytics/data-analyst",
       "files": [
         "SKILL.md",
@@ -7951,6 +9142,7 @@
         "scripts/report_generator.py"
       ],
       "size_bytes": 36618,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7969,6 +9161,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "data-analytics",
+      "subdomain": "",
       "path": "data-analytics/data-scientist",
       "files": [
         "SKILL.md",
@@ -7977,6 +9172,7 @@
         "scripts/hypothesis_tester.py"
       ],
       "size_bytes": 42849,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -7995,6 +9191,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "data-analytics",
+      "subdomain": "",
       "path": "data-analytics/ml-ops-engineer",
       "files": [
         "REFERENCE.md",
@@ -8004,6 +9203,7 @@
         "scripts/pipeline_validator.py"
       ],
       "size_bytes": 48468,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8022,6 +9222,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "sales-success",
+      "subdomain": "",
       "path": "sales-success/account-executive",
       "files": [
         "SKILL.md",
@@ -8030,6 +9233,7 @@
         "scripts/win_loss_analyzer.py"
       ],
       "size_bytes": 43128,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8048,6 +9252,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "sales-success",
+      "subdomain": "",
       "path": "sales-success/customer-success-manager",
       "files": [
         "SKILL.md",
@@ -8056,6 +9263,7 @@
         "scripts/qbr_generator.py"
       ],
       "size_bytes": 47699,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8075,6 +9283,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "sales-success",
+      "subdomain": "",
       "path": "sales-success/sales-engineer",
       "files": [
         "SKILL.md",
@@ -8083,6 +9294,7 @@
         "scripts/technical_qualifier.py"
       ],
       "size_bytes": 50170,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8101,6 +9313,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "sales-success",
+      "subdomain": "",
       "path": "sales-success/sales-operations",
       "files": [
         "SKILL.md",
@@ -8109,6 +9324,7 @@
         "scripts/territory_planner.py"
       ],
       "size_bytes": 51579,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8127,6 +9343,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "sales-success",
+      "subdomain": "",
       "path": "sales-success/solutions-architect",
       "files": [
         "SKILL.md",
@@ -8135,6 +9354,7 @@
         "scripts/sizing_calculator.py"
       ],
       "size_bytes": 57371,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8153,6 +9373,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "hr-operations",
+      "subdomain": "",
       "path": "hr-operations/hr-business-partner",
       "files": [
         "SKILL.md",
@@ -8161,6 +9384,7 @@
         "scripts/workforce_dashboard.py"
       ],
       "size_bytes": 64751,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8179,6 +9403,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "hr-operations",
+      "subdomain": "",
       "path": "hr-operations/operations-manager",
       "files": [
         "SKILL.md",
@@ -8187,6 +9414,7 @@
         "scripts/sla_tracker.py"
       ],
       "size_bytes": 61115,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8205,6 +9433,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "hr-operations",
+      "subdomain": "",
       "path": "hr-operations/people-analytics",
       "files": [
         "SKILL.md",
@@ -8213,6 +9444,7 @@
         "scripts/survey_analyzer.py"
       ],
       "size_bytes": 59674,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8231,6 +9463,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "hr-operations",
+      "subdomain": "",
       "path": "hr-operations/talent-acquisition",
       "files": [
         "SKILL.md",
@@ -8239,6 +9474,7 @@
         "scripts/job_posting_analyzer.py"
       ],
       "size_bytes": 63658,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
@@ -8258,6 +9494,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "finance",
+      "subdomain": "",
       "path": "finance/business-investment-advisor",
       "files": [
         "SKILL.md",
@@ -8269,6 +9508,7 @@
         "scripts/portfolio_analyzer.py"
       ],
       "size_bytes": 58609,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8287,6 +9527,9 @@
       "version": "1.0.0",
       "updated": "2026-03-31",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "finance",
+      "subdomain": "",
       "path": "finance/financial-analyst",
       "files": [
         "SKILL.md",
@@ -8304,6 +9547,7 @@
         "scripts/ratio_calculator.py"
       ],
       "size_bytes": 141265,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8325,6 +9569,9 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "finance",
+      "subdomain": "",
       "path": "finance/saas-metrics-coach",
       "files": [
         "SKILL.md",
@@ -8336,6 +9583,7 @@
         "scripts/unit_economics.py"
       ],
       "size_bytes": 52406,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8348,6 +9596,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/calendar-prep",
       "files": [
         "SKILL.md",
@@ -8356,6 +9607,7 @@
         "scripts/meeting_prep_briefer.py"
       ],
       "size_bytes": 14811,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8368,6 +9620,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/domain-name-brainstormer",
       "files": [
         "SKILL.md",
@@ -8375,6 +9630,7 @@
         "scripts/name_generator.py"
       ],
       "size_bytes": 17001,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8387,6 +9643,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/email-triage",
       "files": [
         "SKILL.md",
@@ -8395,6 +9654,7 @@
         "scripts/email_classifier.py"
       ],
       "size_bytes": 16435,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8407,6 +9667,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/investor-update-generator",
       "files": [
         "SKILL.md",
@@ -8415,6 +9678,7 @@
         "scripts/investor_update_validator.py"
       ],
       "size_bytes": 17785,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8427,6 +9691,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/invoice-organizer",
       "files": [
         "SKILL.md",
@@ -8436,6 +9703,7 @@
         "scripts/invoice_categorizer.py"
       ],
       "size_bytes": 23579,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8448,6 +9716,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/lead-researcher",
       "files": [
         "SKILL.md",
@@ -8457,6 +9728,7 @@
         "scripts/lead_qualifier.py"
       ],
       "size_bytes": 21399,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8469,6 +9741,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/meeting-insights",
       "files": [
         "SKILL.md",
@@ -8477,6 +9752,7 @@
         "scripts/transcript_analyzer.py"
       ],
       "size_bytes": 18439,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8489,6 +9765,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/pitch-deck-reviewer",
       "files": [
         "SKILL.md",
@@ -8497,6 +9776,7 @@
         "scripts/deck_structure_scorer.py"
       ],
       "size_bytes": 19495,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8509,6 +9789,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/resume-tailor",
       "files": [
         "SKILL.md",
@@ -8518,6 +9801,7 @@
         "scripts/resume_matcher.py"
       ],
       "size_bytes": 21703,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8530,6 +9814,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
       "path": "personal-productivity/weekly-review",
       "files": [
         "SKILL.md",
@@ -8538,6 +9825,7 @@
         "scripts/weekly_review_synthesizer.py"
       ],
       "size_bytes": 15733,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8550,6 +9838,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "documents",
+      "subdomain": "",
       "path": "documents/docx-toolkit",
       "files": [
         "SKILL.md",
@@ -8559,6 +9850,7 @@
         "scripts/docx_auditor.py"
       ],
       "size_bytes": 17856,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8571,6 +9863,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "documents",
+      "subdomain": "",
       "path": "documents/pdf-toolkit",
       "files": [
         "SKILL.md",
@@ -8579,6 +9874,7 @@
         "scripts/pdf_auditor.py"
       ],
       "size_bytes": 18800,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8591,6 +9887,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "documents",
+      "subdomain": "",
       "path": "documents/pptx-toolkit",
       "files": [
         "SKILL.md",
@@ -8599,6 +9898,7 @@
         "scripts/pptx_auditor.py"
       ],
       "size_bytes": 18465,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8611,6 +9911,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "documents",
+      "subdomain": "",
       "path": "documents/xlsx-toolkit",
       "files": [
         "SKILL.md",
@@ -8619,6 +9922,7 @@
         "scripts/xlsx_auditor.py"
       ],
       "size_bytes": 20920,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8631,6 +9935,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/climate-tech",
       "files": [
         "SKILL.md",
@@ -8641,6 +9948,7 @@
         "scripts/carbon_impact_estimator.py"
       ],
       "size_bytes": 39204,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8653,6 +9961,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/ecommerce",
       "files": [
         "SKILL.md",
@@ -8662,6 +9973,7 @@
         "scripts/ecom_unit_economics_calculator.py"
       ],
       "size_bytes": 26366,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8674,6 +9986,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/edtech",
       "files": [
         "SKILL.md",
@@ -8683,6 +9998,7 @@
         "scripts/student_data_compliance_checker.py"
       ],
       "size_bytes": 27347,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8695,6 +10011,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/fintech",
       "files": [
         "SKILL.md",
@@ -8706,6 +10025,7 @@
         "scripts/regulatory_trigger_checker.py"
       ],
       "size_bytes": 46056,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8718,6 +10038,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/healthtech",
       "files": [
         "SKILL.md",
@@ -8729,6 +10052,7 @@
         "scripts/phi_scope_checker.py"
       ],
       "size_bytes": 47018,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8741,6 +10065,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/marketplace",
       "files": [
         "SKILL.md",
@@ -8750,6 +10077,7 @@
         "scripts/marketplace_health_scorer.py"
       ],
       "size_bytes": 28211,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8762,6 +10090,9 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "vertical-advisors",
+      "subdomain": "",
       "path": "vertical-advisors/proptech",
       "files": [
         "SKILL.md",
@@ -8771,6 +10102,7 @@
         "scripts/market_segment_classifier.py"
       ],
       "size_bytes": 28766,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -8790,6 +10122,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "research",
+      "subdomain": "",
       "path": "research/dossier",
       "files": [
         "SKILL.md",
@@ -8801,6 +10136,7 @@
         "scripts/source_triangulation_validator.py"
       ],
       "size_bytes": 51584,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8822,6 +10158,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "research",
+      "subdomain": "",
       "path": "research/grants",
       "files": [
         "SKILL.md",
@@ -8833,6 +10172,7 @@
         "scripts/proposal_structure_validator.py"
       ],
       "size_bytes": 55662,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8852,6 +10192,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "research",
+      "subdomain": "",
       "path": "research/litreview",
       "files": [
         "SKILL.md",
@@ -8863,6 +10206,7 @@
         "scripts/thematic_synthesis_builder.py"
       ],
       "size_bytes": 50391,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8883,6 +10227,9 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "research",
+      "subdomain": "",
       "path": "research/patent",
       "files": [
         "SKILL.md",
@@ -8894,6 +10241,7 @@
         "scripts/prior_art_search_planner.py"
       ],
       "size_bytes": 53488,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
@@ -8913,6 +10261,9 @@
       "version": "1.0.0",
       "updated": "2026-06-22",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "workflow",
+      "subdomain": "",
       "path": "workflow/handoff",
       "files": [
         "SKILL.md",
@@ -8920,6 +10271,7 @@
         "scripts/handoff_context.py"
       ],
       "size_bytes": 9081,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": false,
       "has_assets": true
@@ -8938,12 +10290,16 @@
       "version": "1.0.0",
       "updated": "2026-06-22",
       "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "workflow",
+      "subdomain": "",
       "path": "workflow/skill-router",
       "files": [
         "SKILL.md",
         "scripts/route_skill.py"
       ],
       "size_bytes": 10851,
+      "tools_count": 1,
       "has_scripts": true,
       "has_references": false,
       "has_assets": false

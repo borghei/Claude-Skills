@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ms365 Tenant Manager - Claude Skills</title>
-  <meta name="description" content="Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se">
+  <meta name="description" content="Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and Po">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/ms365-tenant-manager.html">
   <meta property="og:title" content="Ms365 Tenant Manager - Claude Skills">
-  <meta property="og:description" content="Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se">
+  <meta property="og:description" content="Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and Po">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/ms365-tenant-manager.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ms365 Tenant Manager", "description": "Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/ms365-tenant-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ms365 Tenant Manager", "description": "Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/ms365-tenant-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Ms365 Tenant Manager</h1>
-    <p class="page-subtitle">Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Cloud Administration</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">microsoft-365</span><span class="tag">azure-ad</span><span class="tag">office-365</span><span class="tag">administration</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,21 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ms365 Tenant Manager (Engineering domain).
 
-Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...
+Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.
 
 The agent generates production-ready PowerShell scripts for M365 tenant setup, bulk user provisioning, Conditional Access policies, security audits, and license management. It automates user lifecycle operations (onboarding, offboarding), recommends license SKUs by role, and produces 7-category secu
-
-## Your Key Capabilities
-- Generate Security Audit Script
-- Create Bulk User Provisioning Script
-- Configure Conditional Access Policy
-- powershell_generator.py
-- user_management.py
-- tenant_setup.py
-
-## Frameworks &amp; Templates You Know
-- **references/powershell-templates.md**
-- - Ready-to-use script templates
 
 ## How to Help
 When the user asks for help in this domain:
@@ -427,21 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Ms365 Tenant Manager (Engineering domain).
 
-Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...
+Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.
 
 The agent generates production-ready PowerShell scripts for M365 tenant setup, bulk user provisioning, Conditional Access policies, security audits, and license management. It automates user lifecycle operations (onboarding, offboarding), recommends license SKUs by role, and produces 7-category secu
-
-## Your Key Capabilities
-- Generate Security Audit Script
-- Create Bulk User Provisioning Script
-- Configure Conditional Access Policy
-- powershell_generator.py
-- user_management.py
-- tenant_setup.py
-
-## Frameworks &amp; Templates You Know
-- **references/powershell-templates.md**
-- - Ready-to-use script templates
 
 ## How to Help
 When the user asks for help in this domain:
@@ -473,321 +449,66 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent generates production-ready PowerShell scripts for M365 tenant setup, bulk user provisioning, Conditional Access policies, security audits, and license management. It automates user lifecycle operations (onboarding, offboarding), recommends license SKUs by role, and produces 7-category security audit reports via Microsoft Graph.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Tenant lifecycle** — setup checklists, domain verification, DNS record generation, security baseline, and PowerShell setup scripts for Exchange, SharePoint, Teams.
+- **User lifecycle automation** — bulk provisioning from CSV, secure 11-step offboarding, license recommendations by role/department, group membership suggestions, data validation.
+- **Security &amp; compliance** — Conditional Access policy generation (report-only first), MFA enforcement, and 7-category security audits (MFA, admin roles, inactive users, guests, licenses, mailbox delegations, CA policies).
+- **License management** — SKU recommendations and distribution/cost estimates adjusted for GDPR/HIPAA compliance requirements.
+- **PowerShell generation** — Microsoft Graph-based scripts with error handling, logging, and `-WhatIf` support.
 
-### Generate Security Audit Script
+## When to Use
 
-```bash
-python scripts/powershell_generator.py --action audit --output audit_script.ps1
-```
+- New tenant setup — generate phased checklist, DNS records, and baseline scripts.
+- Security hardening — run audits and stand up Conditional Access / MFA policies.
+- Bulk user provisioning or secure offboarding.
+- License planning and quarterly utilization review.
 
-### Create Bulk User Provisioning Script
+## Clarify First
 
-```bash
-python scripts/user_management.py --action provision --csv users.csv --license E3
-```
+Before generating scripts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### Configure Conditional Access Policy
+- [ ] **Task** — tenant setup, security audit/hardening, bulk provisioning, or offboarding (selects `tenant_setup.py` vs `powershell_generator.py` vs `user_management.py`)
+- [ ] **Tenant inputs** — the domain, the user CSV, or the role/department data (the input the modules consume)
+- [ ] **Compliance regime** — GDPR/HIPAA or none (adjusts license SKU recommendations and the security baseline)
 
-```bash
-python scripts/powershell_generator.py --action conditional-access --require-mfa --include-admins
-```
-
----
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
-### powershell_generator.py
-
-Generates ready-to-use PowerShell scripts for Microsoft 365 administration.
-
-**Usage:**
-
-```bash
-# Generate security audit script
-python scripts/powershell_generator.py --action audit
-
-# Generate Conditional Access policy script
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name &quot;Require MFA for Admins&quot; \
-  --require-mfa \
-  --include-users &quot;All&quot;
-
-# Generate bulk license assignment script
-python scripts/powershell_generator.py --action license \
-  --csv users.csv \
-  --sku &quot;ENTERPRISEPACK&quot;
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Script type: `audit`, `conditional-access`, `license`, `users` |
-| `--policy-name` | No | Name for Conditional Access policy |
-| `--require-mfa` | No | Require MFA in policy |
-| `--include-users` | No | Users to include: `All` or specific UPNs |
-| `--csv` | No | CSV file path for bulk operations |
-| `--sku` | No | License SKU for assignment |
-| `--output` | No | Output file path (default: stdout) |
-
-**Output:** Complete PowerShell scripts with error handling, logging, and best practices.
-
-### user_management.py
-
-Automates user lifecycle operations and bulk provisioning.
-
-**Usage:**
-
-```bash
-# Provision users from CSV
-python scripts/user_management.py --action provision --csv new_users.csv
-
-# Offboard user securely
-python scripts/user_management.py --action offboard --user john.doe@company.com
-
-# Generate inactive users report
-python scripts/user_management.py --action report-inactive --days 90
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Operation: `provision`, `offboard`, `report-inactive`, `sync` |
-| `--csv` | No | CSV file for bulk operations |
-| `--user` | No | Single user UPN |
-| `--days` | No | Days for inactivity threshold (default: 90) |
-| `--license` | No | License SKU to assign |
-
-### tenant_setup.py
-
-Initial tenant configuration and service provisioning automation.
-
-**Usage:**
-
-```bash
-# Generate tenant setup checklist
-python scripts/tenant_setup.py --action checklist --company &quot;Acme Inc&quot; --users 50
-
-# Generate DNS records configuration
-python scripts/tenant_setup.py --action dns --domain acme.com
-
-# Generate security baseline script
-python scripts/tenant_setup.py --action security-baseline
-```
-
----
-
-## Workflows
-
-### Workflow 1: New Tenant Setup
-
-**Step 1: Generate Setup Checklist**
-
-```bash
-python scripts/tenant_setup.py --action checklist --company &quot;Company Name&quot; --users 100
-```
-
-**Step 2: Configure DNS Records**
-
-```bash
-python scripts/tenant_setup.py --action dns --domain company.com
-```
-
-**Step 3: Apply Security Baseline**
-
-```bash
-python scripts/powershell_generator.py --action audit &gt; initial_audit.ps1
-```
-
-**Step 4: Provision Users**
-
-```bash
-python scripts/user_management.py --action provision --csv employees.csv --license E3
-```
-
-### Workflow 2: Security Hardening
-
-**Step 1: Run Security Audit**
-
-```bash
-python scripts/powershell_generator.py --action audit --output security_audit.ps1
-```
-
-**Step 2: Create MFA Policy**
-
-```bash
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name &quot;Require MFA All Users&quot; \
-  --require-mfa \
-  --include-users &quot;All&quot;
-```
-
-**Step 3: Review Results**
-
-Execute generated scripts and review CSV reports in output directory.
-
-### Workflow 3: User Offboarding
-
-**Step 1: Generate Offboarding Script**
-
-```bash
-python scripts/user_management.py --action offboard --user departing.user@company.com
-```
-
-**Step 2: Execute Script with -WhatIf**
-
-```powershell
-.\offboard_user.ps1 -WhatIf
-```
-
-**Step 3: Execute for Real**
-
-```powershell
-.\offboard_user.ps1 -Confirm:$false
-```
-
----
-
-## Best Practices
-
-### Tenant Setup
-
-1. Enable MFA before adding users
-2. Configure named locations for Conditional Access
-3. Use separate admin accounts with PIM
-4. Verify custom domains before bulk user creation
-5. Apply Microsoft Secure Score recommendations
-
-### Security Operations
-
-1. Start Conditional Access policies in report-only mode
-2. Use `-WhatIf` parameter before executing scripts
-3. Never hardcode credentials in scripts
-4. Enable audit logging for all operations
-5. Regular quarterly security reviews
-
-### PowerShell Automation
-
-1. Prefer Microsoft Graph over legacy MSOnline modules
-2. Include try/catch blocks for error handling
-3. Implement logging for audit trails
-4. Use Azure Key Vault for credential management
-5. Test in non-production tenant first
-
----
-
-## Reference Guides
-
-### When to Use Each Reference
-
-**references/powershell-templates.md**
-
-- Ready-to-use script templates
-- Conditional Access policy examples
-- Bulk user provisioning scripts
-- Security audit scripts
-
-**references/security-policies.md**
-
-- Conditional Access configuration
-- MFA enforcement strategies
-- DLP and retention policies
-- Security baseline settings
-
-**references/troubleshooting.md**
-
-- Common error resolutions
-- PowerShell module issues
-- Permission troubleshooting
-- DNS propagation problems
-
----
-
-## Limitations
-
-| Constraint | Impact |
-|------------|--------|
-| Global Admin required | Full tenant setup needs highest privilege |
-| API rate limits | Bulk operations may be throttled |
-| License dependencies | E3/E5 required for advanced features |
-| Hybrid scenarios | On-premises AD needs additional configuration |
-| PowerShell prerequisites | Microsoft.Graph module required |
-
-### Required PowerShell Modules
-
-```powershell
-Install-Module Microsoft.Graph -Scope CurrentUser
-Install-Module ExchangeOnlineManagement -Scope CurrentUser
-Install-Module MicrosoftTeams -Scope CurrentUser
-```
-
-### Required Permissions
-
-- **Global Administrator** - Full tenant setup
-- **User Administrator** - User management
-- **Security Administrator** - Security policies
-- **Exchange Administrator** - Mailbox management
-
----
-
-## Anti-Patterns
-
-- **Using admin accounts for daily work** -- Global Admin accounts should use PIM (Privileged Identity Management) with JIT activation; use separate accounts for daily tasks
-- **Skipping report-only mode** -- deploying Conditional Access policies directly to enforcement blocks legitimate users; always validate in report-only mode first
-- **Hardcoding credentials in scripts** -- PowerShell scripts with embedded passwords are security incidents waiting to happen; use Azure Key Vault or environment variables
-- **Using legacy MSOnline module** -- MSOnline is deprecated; all new scripts should use Microsoft Graph (`Connect-MgGraph`)
-- **No break-glass account** -- excluding zero accounts from CA policies means a misconfiguration can lock out all admins; maintain at least one excluded emergency access account
-- **Bulk operations without -WhatIf** -- running bulk user creation or license assignment without dry-run risks mass misconfiguration; always test with `-WhatIf` first
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `Connect-MgGraph` fails with &quot;Insufficient privileges&quot; | App registration missing required API permissions | Grant `Directory.ReadWrite.All`, `User.ReadWrite.All`, and `Policy.ReadWrite.ConditionalAccess` in Azure AD &gt; App Registrations &gt; API Permissions, then admin-consent |
-| Bulk user creation silently skips users | CSV `UserPrincipalName` column missing or domain not verified in tenant | Verify custom domain is added and set as default; ensure CSV header matches exactly `UserPrincipalName` |
-| License assignment returns &quot;No available licenses&quot; | All purchased seats consumed or SKU part number misspelled | Run `Get-MgSubscribedSku -All` to confirm `SkuPartNumber` and check `PrepaidUnits.Enabled - ConsumedUnits &gt; 0` |
-| Conditional Access policy created but not enforcing MFA | Policy state defaults to `enabledForReportingButNotEnforced` (report-only) | After validating sign-in logs, update policy state to `enabled` in Azure AD &gt; Security &gt; Conditional Access |
-| Offboarding script fails at mailbox conversion | Exchange Online Management module not connected or mailbox already shared | Run `Connect-ExchangeOnline` before executing; check mailbox type with `Get-Mailbox -Identity user@domain.com` |
-| DNS records configured but mail not flowing | MX record DNS propagation incomplete or SPF record missing `-all` suffix | Wait up to 48 hours for propagation; validate with `nslookup -type=MX domain.com` and confirm SPF ends with `-all` |
-| Security audit reports empty CSV files | Microsoft Graph scopes not consented or audit log ingestion not enabled | Run `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` and re-consent scopes with `Connect-MgGraph -Scopes &quot;AuditLog.Read.All&quot;` |
-
----
-
-## Success Criteria
-
-- 100% of provisioned users have correct license SKU assigned matching their role and department
-- Zero orphaned accounts: every disabled user has licenses removed, mailbox converted to shared, and sessions revoked within 24 hours of offboarding
-- MFA enforcement covers 100% of enabled user accounts, verified by security audit script output showing zero users without MFA
-- DNS records pass validation for all five service types (MX, SPF, DKIM, autodiscover, device registration) with zero propagation errors
-- Conditional Access policies achieve report-only validation with less than 1% false-positive block rate before enforcement
-- License utilization stays above 90% across all SKUs, with unused licenses identified and reclaimed quarterly
-- Security audit generates complete CSV reports for all 7 audit categories (MFA, admin roles, inactive users, guests, licenses, mailbox delegations, Conditional Access) with zero script errors
-
----
+The scripts are importable Python modules (instantiate a class, not a CLI). Full API, parameters, and worked examples are in [references/tools-and-workflows.md](references/tools-and-workflows.md).
+
+| Tool | Purpose | Entry point |
+|------|---------|-------------|
+| `powershell_generator.py` | Security audit, Conditional Access, and bulk license scripts | `from powershell_generator import PowerShellScriptGenerator` |
+| `user_management.py` | Provisioning, offboarding, license/group recommendations, validation | `from user_management import UserLifecycleManager` |
+| `tenant_setup.py` | Setup checklist, DNS records, setup script, license distribution | `from tenant_setup import TenantSetupManager` |
+
+## References
+
+Load the reference that matches the task — keep this file lean and pull detail on demand:
+
+- **[references/tools-and-workflows.md](references/tools-and-workflows.md)** — Quick Start commands, per-tool usage/parameters, the 3 end-to-end workflows (setup, hardening, offboarding), and the full Python module API for all three scripts. Read when running the tools or wiring up the API.
+- **[references/operations-and-best-practices.md](references/operations-and-best-practices.md)** — best practices, limitations, required modules/permissions, anti-patterns, the troubleshooting table, and success criteria. Read before hardening a tenant or shipping scripts.
+- **[references/powershell-templates.md](references/powershell-templates.md)** — ready-to-use script templates: Conditional Access policy examples, bulk user provisioning, and security audit scripts.
+- **[references/security-policies.md](references/security-policies.md)** — Conditional Access configuration, MFA enforcement strategies, DLP/retention policies, and security baseline settings.
+- **[references/troubleshooting.md](references/troubleshooting.md)** — common error resolutions, PowerShell module issues, permission troubleshooting, and DNS propagation problems.
 
 ## Scope &amp; Limitations
 
-### What This Skill Covers
+**What This Skill Covers**
 
 - **Tenant lifecycle management** -- initial setup, domain verification, DNS configuration, security baseline, and service provisioning for Exchange Online, SharePoint, Teams, and OneDrive
 - **User lifecycle automation** -- bulk provisioning from CSV, license assignment by role/department, group membership recommendations, secure offboarding with mailbox preservation
 - **Security and compliance** -- Conditional Access policy generation, MFA enforcement, comprehensive 7-category security audits, and audit log enablement
 - **PowerShell script generation** -- production-ready scripts with error handling, logging, `-WhatIf` support, and Microsoft Graph best practices
 
-### What This Skill Does NOT Cover
+**What This Skill Does NOT Cover**
 
 - **Hybrid identity (AD Connect)** -- on-premises Active Directory synchronization and pass-through authentication require the `senior-devops` skill and Microsoft AD Connect tooling
 - **Intune device management** -- endpoint compliance policies, app deployment, and mobile device management are outside scope; see `senior-secops` for device security posture
 - **Power Platform administration** -- Power Apps, Power Automate, and Power BI tenant-level governance fall under separate platform administration
 - **Third-party SSO and SCIM provisioning** -- integration with non-Microsoft identity providers (Okta, Ping, Auth0) requires dedicated identity engineering
-
----
 
 ## Integration Points
 
@@ -799,304 +520,6 @@ Install-Module MicrosoftTeams -Scope CurrentUser
 | `code-reviewer` | Generated PowerShell scripts can be reviewed for security anti-patterns and credential handling | PowerShell script output → code review for hardcoded secrets, missing error handling |
 | `aws-solution-architect` | Multi-cloud identity federation between Azure AD and AWS IAM for organizations using both platforms | Azure AD tenant configuration → cross-cloud SSO and role mapping |
 | `senior-security` | Conditional Access policies and MFA enforcement align with broader organizational security posture | CA policy configurations and security audit results → security policy compliance validation |
-
----
-
-## Tool Reference
-
-### powershell_generator.py
-
-**Purpose:** Generates production-ready PowerShell scripts for Microsoft 365 administration including security audits, Conditional Access policies, and bulk license assignment.
-
-**Module:** `PowerShellScriptGenerator` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from powershell_generator import PowerShellScriptGenerator
-
-generator = PowerShellScriptGenerator(tenant_domain=&quot;company.com&quot;)
-```
-
-**Methods:**
-
-#### `generate_security_audit_script()`
-
-Generates a comprehensive 7-category security audit PowerShell script that checks MFA status, admin role assignments, inactive users, guest users, license usage, mailbox delegations, and Conditional Access policies.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `tenant_domain` from constructor |
-
-**Example:**
-
-```python
-generator = PowerShellScriptGenerator(&quot;company.com&quot;)
-script = generator.generate_security_audit_script()
-print(script)  # Complete PowerShell script with Connect-MgGraph, 7 audit checks, CSV export
-```
-
-**Output:** PowerShell script string that produces CSV reports in a timestamped `SecurityAudit_` directory: `MFA_Status.csv`, `Admin_Roles.csv`, `Inactive_Users.csv`, `Guest_Users.csv`, `License_Usage.csv`, `Mailbox_Delegations.csv`, `ConditionalAccess_Policies.csv`.
-
-#### `generate_conditional_access_policy_script(policy_config)`
-
-Generates a PowerShell script to create a Conditional Access policy in report-only mode.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `policy_config` | Yes | `Dict[str, Any]` | Policy configuration dictionary |
-| `policy_config[&quot;name&quot;]` | No | `str` | Policy display name (default: `&quot;MFA Policy&quot;`) |
-| `policy_config[&quot;require_mfa&quot;]` | No | `bool` | Whether to require MFA (default: `True`) |
-| `policy_config[&quot;include_users&quot;]` | No | `str` | Users to include (default: `&quot;All&quot;`) |
-| `policy_config[&quot;exclude_users&quot;]` | No | `List[str]` | UPNs to exclude (default: `[]`) |
-
-**Example:**
-
-```python
-script = generator.generate_conditional_access_policy_script({
-    &quot;name&quot;: &quot;Require MFA for Admins&quot;,
-    &quot;require_mfa&quot;: True,
-    &quot;include_users&quot;: &quot;All&quot;,
-    &quot;exclude_users&quot;: [&quot;breakglass@company.com&quot;]
-})
-```
-
-**Output:** PowerShell script string that creates a Conditional Access policy via `New-MgIdentityConditionalAccessPolicy` in `enabledForReportingButNotEnforced` state.
-
-#### `generate_bulk_license_assignment_script(users_csv_path, license_sku)`
-
-Generates a PowerShell script for assigning a license SKU to users listed in a CSV file.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `users_csv_path` | Yes | `str` | Path to CSV file (must contain `UserPrincipalName` column) |
-| `license_sku` | Yes | `str` | License SKU part number (e.g., `&quot;ENTERPRISEPACK&quot;` for E3) |
-
-**Example:**
-
-```python
-script = generator.generate_bulk_license_assignment_script(&quot;users.csv&quot;, &quot;ENTERPRISEPACK&quot;)
-```
-
-**Output:** PowerShell script string that imports the CSV, checks for existing licenses, assigns the specified SKU, and exports results to `LicenseAssignment_Results_&lt;timestamp&gt;.csv` with `Status` and `Message` columns.
-
----
-
-### user_management.py
-
-**Purpose:** Manages user lifecycle operations including bulk provisioning, secure offboarding, license recommendations, group membership, and data validation.
-
-**Module:** `UserLifecycleManager` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from user_management import UserLifecycleManager
-
-manager = UserLifecycleManager(domain=&quot;company.com&quot;)
-```
-
-**Methods:**
-
-#### `generate_user_creation_script(users)`
-
-Generates a PowerShell script for bulk user provisioning with license assignment.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `users` | Yes | `List[Dict[str, Any]]` | List of user dictionaries |
-| `users[].username` | Yes | `str` | Username (without domain) |
-| `users[].display_name` | Yes | `str` | Full display name |
-| `users[].first_name` | Yes | `str` | Given name |
-| `users[].last_name` | Yes | `str` | Surname |
-| `users[].job_title` | No | `str` | Job title |
-| `users[].department` | No | `str` | Department name |
-| `users[].license_sku` | No | `str` | License SKU (default: `&quot;Microsoft_365_Business_Standard&quot;`) |
-
-**Example:**
-
-```python
-script = manager.generate_user_creation_script([
-    {&quot;username&quot;: &quot;jdoe&quot;, &quot;display_name&quot;: &quot;Jane Doe&quot;, &quot;first_name&quot;: &quot;Jane&quot;,
-     &quot;last_name&quot;: &quot;Doe&quot;, &quot;job_title&quot;: &quot;Engineer&quot;, &quot;department&quot;: &quot;Engineering&quot;,
-     &quot;license_sku&quot;: &quot;ENTERPRISEPACK&quot;}
-])
-```
-
-**Output:** PowerShell script string that creates users via `New-MgUser`, assigns licenses, and exports results to `UserCreation_Results_&lt;timestamp&gt;.csv`.
-
-#### `generate_user_offboarding_script(user_email)`
-
-Generates a comprehensive 11-step secure offboarding PowerShell script.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_email` | Yes | `str` | UPN of the user to offboard |
-
-**Example:**
-
-```python
-script = manager.generate_user_offboarding_script(&quot;john.doe@company.com&quot;)
-```
-
-**Output:** PowerShell script string that disables sign-in, revokes sessions, removes group memberships, removes devices, converts mailbox to shared, sets auto-reply, removes licenses, hides from GAL, and exports an offboarding report CSV.
-
-#### `generate_license_assignment_recommendations(user_role, department)`
-
-Returns license recommendation based on role and department matching.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_role` | Yes | `str` | Job title or role (matched against keywords: CEO, CTO, admin, manager, contractor, etc.) |
-| `department` | Yes | `str` | Department name (matched against: legal, finance, hr, accounting) |
-
-**Example:**
-
-```python
-rec = manager.generate_license_assignment_recommendations(&quot;Security Analyst&quot;, &quot;IT&quot;)
-# Returns: {&quot;recommended_license&quot;: &quot;Microsoft 365 E5&quot;, &quot;justification&quot;: &quot;...&quot;, &quot;features_needed&quot;: [...], &quot;monthly_cost&quot;: 57.00}
-```
-
-**Output:** Dictionary with `recommended_license`, `justification`, `features_needed` (list), and `monthly_cost` (float).
-
-#### `generate_group_membership_recommendations(user)`
-
-Recommends security and distribution groups based on user attributes.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user` | Yes | `Dict[str, Any]` | User dictionary with `department`, `location`, `job_title`, `needs_sharepoint_access`, `needs_project_access` |
-
-**Example:**
-
-```python
-groups = manager.generate_group_membership_recommendations({
-    &quot;department&quot;: &quot;Engineering&quot;, &quot;location&quot;: &quot;NYC&quot;, &quot;job_title&quot;: &quot;Director of Engineering&quot;
-})
-# Returns: [&quot;DL-Engineering&quot;, &quot;SG-Engineering&quot;, &quot;SG-Location-Nyc&quot;, &quot;SG-Management&quot;]
-```
-
-**Output:** List of recommended group name strings using naming conventions `DL-` (distribution list), `SG-` (security group).
-
-#### `validate_user_data(user_data)`
-
-Validates user data before provisioning, checking required fields, username format, and email format.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_data` | Yes | `Dict[str, Any]` | Dictionary with `first_name`, `last_name`, `username` (required); `email`, `display_name`, `license_sku` (optional) |
-
-**Example:**
-
-```python
-result = manager.validate_user_data({&quot;first_name&quot;: &quot;Jane&quot;, &quot;last_name&quot;: &quot;Doe&quot;, &quot;username&quot;: &quot;jdoe&quot;})
-# Returns: {&quot;is_valid&quot;: True, &quot;errors&quot;: [], &quot;warnings&quot;: [&quot;Display name not provided, will use: Jane Doe&quot;, ...]}
-```
-
-**Output:** Dictionary with `is_valid` (bool), `errors` (list of strings), and `warnings` (list of strings).
-
----
-
-### tenant_setup.py
-
-**Purpose:** Manages initial Microsoft 365 tenant configuration including setup checklists, DNS record generation, PowerShell setup scripts, and license distribution recommendations.
-
-**Module:** `TenantSetupManager` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from tenant_setup import TenantSetupManager
-
-manager = TenantSetupManager(tenant_config={
-    &quot;company_name&quot;: &quot;Acme Inc&quot;,
-    &quot;domain_name&quot;: &quot;acme.com&quot;,
-    &quot;user_count&quot;: 50,
-    &quot;industry&quot;: &quot;technology&quot;,
-    &quot;compliance_requirements&quot;: [&quot;GDPR&quot;],  # optional: &quot;GDPR&quot;, &quot;HIPAA&quot;
-    &quot;licenses&quot;: {}
-})
-```
-
-| Config Key | Required | Type | Description |
-|------------|----------|------|-------------|
-| `company_name` | Yes | `str` | Organization display name |
-| `domain_name` | Yes | `str` | Primary custom domain |
-| `user_count` | Yes | `int` | Total expected user count |
-| `industry` | No | `str` | Industry vertical (default: `&quot;general&quot;`) |
-| `compliance_requirements` | No | `List[str]` | Compliance frameworks: `&quot;GDPR&quot;`, `&quot;HIPAA&quot;` |
-| `licenses` | No | `Dict` | Existing license inventory |
-
-**Methods:**
-
-#### `generate_setup_checklist()`
-
-Generates a phased tenant setup checklist (4-5 phases depending on compliance requirements).
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses constructor config |
-
-**Example:**
-
-```python
-checklist = manager.generate_setup_checklist()
-# Returns list of phase dicts, each with &quot;phase&quot;, &quot;name&quot;, &quot;priority&quot;, &quot;tasks&quot;
-```
-
-**Output:** List of dictionaries. Each phase contains `phase` (int), `name` (str), `priority` (`&quot;critical&quot;` or `&quot;high&quot;`), and `tasks` (list of dicts with `task`, `details`, `estimated_time`). Phases: Initial Configuration, Custom Domain, Security Baseline, Service Configuration, and optionally Compliance Configuration.
-
-#### `generate_dns_records()`
-
-Generates all required DNS records for Microsoft 365 services.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `domain_name` from constructor |
-
-**Example:**
-
-```python
-records = manager.generate_dns_records()
-# Keys: &quot;mx_records&quot;, &quot;txt_records&quot;, &quot;cname_records&quot;, &quot;srv_records&quot;
-```
-
-**Output:** Dictionary with four keys, each containing a list of record dictionaries with `type`, `name`, `value`, `ttl`, `purpose`, and record-type-specific fields (`priority` for MX/SRV, `port`/`weight` for SRV).
-
-#### `generate_powershell_setup_script()`
-
-Generates a complete PowerShell script for initial tenant configuration covering Graph, Exchange Online, SharePoint, and Teams.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses constructor config |
-
-**Example:**
-
-```python
-script = manager.generate_powershell_setup_script()
-print(script)  # PowerShell script connecting to Graph, Exchange, Teams with 7 setup steps
-```
-
-**Output:** PowerShell script string that connects to Microsoft Graph, Exchange Online, and Teams; configures organization settings, security defaults, audit logging, Exchange policies, and Teams messaging policies.
-
-#### `get_license_recommendations()`
-
-Calculates license distribution recommendations and cost estimates based on user count and compliance requirements.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `user_count` and `compliance_requirements` from constructor |
-
-**Example:**
-
-```python
-recs = manager.get_license_recommendations()
-# Returns: {&quot;recommendations&quot;: {...}, &quot;suggested_distribution&quot;: {&quot;E5&quot;: 5, &quot;E3&quot;: 10, ...},
-#           &quot;estimated_monthly_cost&quot;: 1234.50, &quot;estimated_annual_cost&quot;: 14814.00}
-```
-
-**Output:** Dictionary with `recommendations` (license tier details), `suggested_distribution` (dict mapping SKU tier to user count), `estimated_monthly_cost` (float), and `estimated_annual_cost` (float). Distribution adjusts automatically when compliance requirements are specified.
 
 ---
 
@@ -1124,7 +547,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ms365 Tenant Manager&quot;**
-   - Description: &quot;Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...&quot;
+   - Description: &quot;Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1151,321 +574,66 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent generates production-ready PowerShell scripts for M365 tenant setup, bulk user provisioning, Conditional Access policies, security audits, and license management. It automates user lifecycle operations (onboarding, offboarding), recommends license SKUs by role, and produces 7-category security audit reports via Microsoft Graph.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Tenant lifecycle** — setup checklists, domain verification, DNS record generation, security baseline, and PowerShell setup scripts for Exchange, SharePoint, Teams.
+- **User lifecycle automation** — bulk provisioning from CSV, secure 11-step offboarding, license recommendations by role/department, group membership suggestions, data validation.
+- **Security &amp; compliance** — Conditional Access policy generation (report-only first), MFA enforcement, and 7-category security audits (MFA, admin roles, inactive users, guests, licenses, mailbox delegations, CA policies).
+- **License management** — SKU recommendations and distribution/cost estimates adjusted for GDPR/HIPAA compliance requirements.
+- **PowerShell generation** — Microsoft Graph-based scripts with error handling, logging, and `-WhatIf` support.
 
-### Generate Security Audit Script
+## When to Use
 
-```bash
-python scripts/powershell_generator.py --action audit --output audit_script.ps1
-```
+- New tenant setup — generate phased checklist, DNS records, and baseline scripts.
+- Security hardening — run audits and stand up Conditional Access / MFA policies.
+- Bulk user provisioning or secure offboarding.
+- License planning and quarterly utilization review.
 
-### Create Bulk User Provisioning Script
+## Clarify First
 
-```bash
-python scripts/user_management.py --action provision --csv users.csv --license E3
-```
+Before generating scripts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### Configure Conditional Access Policy
+- [ ] **Task** — tenant setup, security audit/hardening, bulk provisioning, or offboarding (selects `tenant_setup.py` vs `powershell_generator.py` vs `user_management.py`)
+- [ ] **Tenant inputs** — the domain, the user CSV, or the role/department data (the input the modules consume)
+- [ ] **Compliance regime** — GDPR/HIPAA or none (adjusts license SKU recommendations and the security baseline)
 
-```bash
-python scripts/powershell_generator.py --action conditional-access --require-mfa --include-admins
-```
-
----
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
-### powershell_generator.py
-
-Generates ready-to-use PowerShell scripts for Microsoft 365 administration.
-
-**Usage:**
-
-```bash
-# Generate security audit script
-python scripts/powershell_generator.py --action audit
-
-# Generate Conditional Access policy script
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name &quot;Require MFA for Admins&quot; \
-  --require-mfa \
-  --include-users &quot;All&quot;
-
-# Generate bulk license assignment script
-python scripts/powershell_generator.py --action license \
-  --csv users.csv \
-  --sku &quot;ENTERPRISEPACK&quot;
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Script type: `audit`, `conditional-access`, `license`, `users` |
-| `--policy-name` | No | Name for Conditional Access policy |
-| `--require-mfa` | No | Require MFA in policy |
-| `--include-users` | No | Users to include: `All` or specific UPNs |
-| `--csv` | No | CSV file path for bulk operations |
-| `--sku` | No | License SKU for assignment |
-| `--output` | No | Output file path (default: stdout) |
-
-**Output:** Complete PowerShell scripts with error handling, logging, and best practices.
-
-### user_management.py
-
-Automates user lifecycle operations and bulk provisioning.
-
-**Usage:**
-
-```bash
-# Provision users from CSV
-python scripts/user_management.py --action provision --csv new_users.csv
-
-# Offboard user securely
-python scripts/user_management.py --action offboard --user john.doe@company.com
-
-# Generate inactive users report
-python scripts/user_management.py --action report-inactive --days 90
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Operation: `provision`, `offboard`, `report-inactive`, `sync` |
-| `--csv` | No | CSV file for bulk operations |
-| `--user` | No | Single user UPN |
-| `--days` | No | Days for inactivity threshold (default: 90) |
-| `--license` | No | License SKU to assign |
-
-### tenant_setup.py
-
-Initial tenant configuration and service provisioning automation.
-
-**Usage:**
-
-```bash
-# Generate tenant setup checklist
-python scripts/tenant_setup.py --action checklist --company &quot;Acme Inc&quot; --users 50
-
-# Generate DNS records configuration
-python scripts/tenant_setup.py --action dns --domain acme.com
-
-# Generate security baseline script
-python scripts/tenant_setup.py --action security-baseline
-```
-
----
-
-## Workflows
-
-### Workflow 1: New Tenant Setup
-
-**Step 1: Generate Setup Checklist**
-
-```bash
-python scripts/tenant_setup.py --action checklist --company &quot;Company Name&quot; --users 100
-```
-
-**Step 2: Configure DNS Records**
-
-```bash
-python scripts/tenant_setup.py --action dns --domain company.com
-```
-
-**Step 3: Apply Security Baseline**
-
-```bash
-python scripts/powershell_generator.py --action audit &gt; initial_audit.ps1
-```
-
-**Step 4: Provision Users**
-
-```bash
-python scripts/user_management.py --action provision --csv employees.csv --license E3
-```
-
-### Workflow 2: Security Hardening
-
-**Step 1: Run Security Audit**
-
-```bash
-python scripts/powershell_generator.py --action audit --output security_audit.ps1
-```
-
-**Step 2: Create MFA Policy**
-
-```bash
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name &quot;Require MFA All Users&quot; \
-  --require-mfa \
-  --include-users &quot;All&quot;
-```
-
-**Step 3: Review Results**
-
-Execute generated scripts and review CSV reports in output directory.
-
-### Workflow 3: User Offboarding
-
-**Step 1: Generate Offboarding Script**
-
-```bash
-python scripts/user_management.py --action offboard --user departing.user@company.com
-```
-
-**Step 2: Execute Script with -WhatIf**
-
-```powershell
-.\offboard_user.ps1 -WhatIf
-```
-
-**Step 3: Execute for Real**
-
-```powershell
-.\offboard_user.ps1 -Confirm:$false
-```
-
----
-
-## Best Practices
-
-### Tenant Setup
-
-1. Enable MFA before adding users
-2. Configure named locations for Conditional Access
-3. Use separate admin accounts with PIM
-4. Verify custom domains before bulk user creation
-5. Apply Microsoft Secure Score recommendations
-
-### Security Operations
-
-1. Start Conditional Access policies in report-only mode
-2. Use `-WhatIf` parameter before executing scripts
-3. Never hardcode credentials in scripts
-4. Enable audit logging for all operations
-5. Regular quarterly security reviews
-
-### PowerShell Automation
-
-1. Prefer Microsoft Graph over legacy MSOnline modules
-2. Include try/catch blocks for error handling
-3. Implement logging for audit trails
-4. Use Azure Key Vault for credential management
-5. Test in non-production tenant first
-
----
-
-## Reference Guides
-
-### When to Use Each Reference
-
-**references/powershell-templates.md**
-
-- Ready-to-use script templates
-- Conditional Access policy examples
-- Bulk user provisioning scripts
-- Security audit scripts
-
-**references/security-policies.md**
-
-- Conditional Access configuration
-- MFA enforcement strategies
-- DLP and retention policies
-- Security baseline settings
-
-**references/troubleshooting.md**
-
-- Common error resolutions
-- PowerShell module issues
-- Permission troubleshooting
-- DNS propagation problems
-
----
-
-## Limitations
-
-| Constraint | Impact |
-|------------|--------|
-| Global Admin required | Full tenant setup needs highest privilege |
-| API rate limits | Bulk operations may be throttled |
-| License dependencies | E3/E5 required for advanced features |
-| Hybrid scenarios | On-premises AD needs additional configuration |
-| PowerShell prerequisites | Microsoft.Graph module required |
-
-### Required PowerShell Modules
-
-```powershell
-Install-Module Microsoft.Graph -Scope CurrentUser
-Install-Module ExchangeOnlineManagement -Scope CurrentUser
-Install-Module MicrosoftTeams -Scope CurrentUser
-```
-
-### Required Permissions
-
-- **Global Administrator** - Full tenant setup
-- **User Administrator** - User management
-- **Security Administrator** - Security policies
-- **Exchange Administrator** - Mailbox management
-
----
-
-## Anti-Patterns
-
-- **Using admin accounts for daily work** -- Global Admin accounts should use PIM (Privileged Identity Management) with JIT activation; use separate accounts for daily tasks
-- **Skipping report-only mode** -- deploying Conditional Access policies directly to enforcement blocks legitimate users; always validate in report-only mode first
-- **Hardcoding credentials in scripts** -- PowerShell scripts with embedded passwords are security incidents waiting to happen; use Azure Key Vault or environment variables
-- **Using legacy MSOnline module** -- MSOnline is deprecated; all new scripts should use Microsoft Graph (`Connect-MgGraph`)
-- **No break-glass account** -- excluding zero accounts from CA policies means a misconfiguration can lock out all admins; maintain at least one excluded emergency access account
-- **Bulk operations without -WhatIf** -- running bulk user creation or license assignment without dry-run risks mass misconfiguration; always test with `-WhatIf` first
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `Connect-MgGraph` fails with &quot;Insufficient privileges&quot; | App registration missing required API permissions | Grant `Directory.ReadWrite.All`, `User.ReadWrite.All`, and `Policy.ReadWrite.ConditionalAccess` in Azure AD &gt; App Registrations &gt; API Permissions, then admin-consent |
-| Bulk user creation silently skips users | CSV `UserPrincipalName` column missing or domain not verified in tenant | Verify custom domain is added and set as default; ensure CSV header matches exactly `UserPrincipalName` |
-| License assignment returns &quot;No available licenses&quot; | All purchased seats consumed or SKU part number misspelled | Run `Get-MgSubscribedSku -All` to confirm `SkuPartNumber` and check `PrepaidUnits.Enabled - ConsumedUnits &gt; 0` |
-| Conditional Access policy created but not enforcing MFA | Policy state defaults to `enabledForReportingButNotEnforced` (report-only) | After validating sign-in logs, update policy state to `enabled` in Azure AD &gt; Security &gt; Conditional Access |
-| Offboarding script fails at mailbox conversion | Exchange Online Management module not connected or mailbox already shared | Run `Connect-ExchangeOnline` before executing; check mailbox type with `Get-Mailbox -Identity user@domain.com` |
-| DNS records configured but mail not flowing | MX record DNS propagation incomplete or SPF record missing `-all` suffix | Wait up to 48 hours for propagation; validate with `nslookup -type=MX domain.com` and confirm SPF ends with `-all` |
-| Security audit reports empty CSV files | Microsoft Graph scopes not consented or audit log ingestion not enabled | Run `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true` and re-consent scopes with `Connect-MgGraph -Scopes &quot;AuditLog.Read.All&quot;` |
-
----
-
-## Success Criteria
-
-- 100% of provisioned users have correct license SKU assigned matching their role and department
-- Zero orphaned accounts: every disabled user has licenses removed, mailbox converted to shared, and sessions revoked within 24 hours of offboarding
-- MFA enforcement covers 100% of enabled user accounts, verified by security audit script output showing zero users without MFA
-- DNS records pass validation for all five service types (MX, SPF, DKIM, autodiscover, device registration) with zero propagation errors
-- Conditional Access policies achieve report-only validation with less than 1% false-positive block rate before enforcement
-- License utilization stays above 90% across all SKUs, with unused licenses identified and reclaimed quarterly
-- Security audit generates complete CSV reports for all 7 audit categories (MFA, admin roles, inactive users, guests, licenses, mailbox delegations, Conditional Access) with zero script errors
-
----
+The scripts are importable Python modules (instantiate a class, not a CLI). Full API, parameters, and worked examples are in [references/tools-and-workflows.md](references/tools-and-workflows.md).
+
+| Tool | Purpose | Entry point |
+|------|---------|-------------|
+| `powershell_generator.py` | Security audit, Conditional Access, and bulk license scripts | `from powershell_generator import PowerShellScriptGenerator` |
+| `user_management.py` | Provisioning, offboarding, license/group recommendations, validation | `from user_management import UserLifecycleManager` |
+| `tenant_setup.py` | Setup checklist, DNS records, setup script, license distribution | `from tenant_setup import TenantSetupManager` |
+
+## References
+
+Load the reference that matches the task — keep this file lean and pull detail on demand:
+
+- **[references/tools-and-workflows.md](references/tools-and-workflows.md)** — Quick Start commands, per-tool usage/parameters, the 3 end-to-end workflows (setup, hardening, offboarding), and the full Python module API for all three scripts. Read when running the tools or wiring up the API.
+- **[references/operations-and-best-practices.md](references/operations-and-best-practices.md)** — best practices, limitations, required modules/permissions, anti-patterns, the troubleshooting table, and success criteria. Read before hardening a tenant or shipping scripts.
+- **[references/powershell-templates.md](references/powershell-templates.md)** — ready-to-use script templates: Conditional Access policy examples, bulk user provisioning, and security audit scripts.
+- **[references/security-policies.md](references/security-policies.md)** — Conditional Access configuration, MFA enforcement strategies, DLP/retention policies, and security baseline settings.
+- **[references/troubleshooting.md](references/troubleshooting.md)** — common error resolutions, PowerShell module issues, permission troubleshooting, and DNS propagation problems.
 
 ## Scope &amp; Limitations
 
-### What This Skill Covers
+**What This Skill Covers**
 
 - **Tenant lifecycle management** -- initial setup, domain verification, DNS configuration, security baseline, and service provisioning for Exchange Online, SharePoint, Teams, and OneDrive
 - **User lifecycle automation** -- bulk provisioning from CSV, license assignment by role/department, group membership recommendations, secure offboarding with mailbox preservation
 - **Security and compliance** -- Conditional Access policy generation, MFA enforcement, comprehensive 7-category security audits, and audit log enablement
 - **PowerShell script generation** -- production-ready scripts with error handling, logging, `-WhatIf` support, and Microsoft Graph best practices
 
-### What This Skill Does NOT Cover
+**What This Skill Does NOT Cover**
 
 - **Hybrid identity (AD Connect)** -- on-premises Active Directory synchronization and pass-through authentication require the `senior-devops` skill and Microsoft AD Connect tooling
 - **Intune device management** -- endpoint compliance policies, app deployment, and mobile device management are outside scope; see `senior-secops` for device security posture
 - **Power Platform administration** -- Power Apps, Power Automate, and Power BI tenant-level governance fall under separate platform administration
 - **Third-party SSO and SCIM provisioning** -- integration with non-Microsoft identity providers (Okta, Ping, Auth0) requires dedicated identity engineering
-
----
 
 ## Integration Points
 
@@ -1477,304 +645,6 @@ Install-Module MicrosoftTeams -Scope CurrentUser
 | `code-reviewer` | Generated PowerShell scripts can be reviewed for security anti-patterns and credential handling | PowerShell script output → code review for hardcoded secrets, missing error handling |
 | `aws-solution-architect` | Multi-cloud identity federation between Azure AD and AWS IAM for organizations using both platforms | Azure AD tenant configuration → cross-cloud SSO and role mapping |
 | `senior-security` | Conditional Access policies and MFA enforcement align with broader organizational security posture | CA policy configurations and security audit results → security policy compliance validation |
-
----
-
-## Tool Reference
-
-### powershell_generator.py
-
-**Purpose:** Generates production-ready PowerShell scripts for Microsoft 365 administration including security audits, Conditional Access policies, and bulk license assignment.
-
-**Module:** `PowerShellScriptGenerator` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from powershell_generator import PowerShellScriptGenerator
-
-generator = PowerShellScriptGenerator(tenant_domain=&quot;company.com&quot;)
-```
-
-**Methods:**
-
-#### `generate_security_audit_script()`
-
-Generates a comprehensive 7-category security audit PowerShell script that checks MFA status, admin role assignments, inactive users, guest users, license usage, mailbox delegations, and Conditional Access policies.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `tenant_domain` from constructor |
-
-**Example:**
-
-```python
-generator = PowerShellScriptGenerator(&quot;company.com&quot;)
-script = generator.generate_security_audit_script()
-print(script)  # Complete PowerShell script with Connect-MgGraph, 7 audit checks, CSV export
-```
-
-**Output:** PowerShell script string that produces CSV reports in a timestamped `SecurityAudit_` directory: `MFA_Status.csv`, `Admin_Roles.csv`, `Inactive_Users.csv`, `Guest_Users.csv`, `License_Usage.csv`, `Mailbox_Delegations.csv`, `ConditionalAccess_Policies.csv`.
-
-#### `generate_conditional_access_policy_script(policy_config)`
-
-Generates a PowerShell script to create a Conditional Access policy in report-only mode.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `policy_config` | Yes | `Dict[str, Any]` | Policy configuration dictionary |
-| `policy_config[&quot;name&quot;]` | No | `str` | Policy display name (default: `&quot;MFA Policy&quot;`) |
-| `policy_config[&quot;require_mfa&quot;]` | No | `bool` | Whether to require MFA (default: `True`) |
-| `policy_config[&quot;include_users&quot;]` | No | `str` | Users to include (default: `&quot;All&quot;`) |
-| `policy_config[&quot;exclude_users&quot;]` | No | `List[str]` | UPNs to exclude (default: `[]`) |
-
-**Example:**
-
-```python
-script = generator.generate_conditional_access_policy_script({
-    &quot;name&quot;: &quot;Require MFA for Admins&quot;,
-    &quot;require_mfa&quot;: True,
-    &quot;include_users&quot;: &quot;All&quot;,
-    &quot;exclude_users&quot;: [&quot;breakglass@company.com&quot;]
-})
-```
-
-**Output:** PowerShell script string that creates a Conditional Access policy via `New-MgIdentityConditionalAccessPolicy` in `enabledForReportingButNotEnforced` state.
-
-#### `generate_bulk_license_assignment_script(users_csv_path, license_sku)`
-
-Generates a PowerShell script for assigning a license SKU to users listed in a CSV file.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `users_csv_path` | Yes | `str` | Path to CSV file (must contain `UserPrincipalName` column) |
-| `license_sku` | Yes | `str` | License SKU part number (e.g., `&quot;ENTERPRISEPACK&quot;` for E3) |
-
-**Example:**
-
-```python
-script = generator.generate_bulk_license_assignment_script(&quot;users.csv&quot;, &quot;ENTERPRISEPACK&quot;)
-```
-
-**Output:** PowerShell script string that imports the CSV, checks for existing licenses, assigns the specified SKU, and exports results to `LicenseAssignment_Results_&lt;timestamp&gt;.csv` with `Status` and `Message` columns.
-
----
-
-### user_management.py
-
-**Purpose:** Manages user lifecycle operations including bulk provisioning, secure offboarding, license recommendations, group membership, and data validation.
-
-**Module:** `UserLifecycleManager` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from user_management import UserLifecycleManager
-
-manager = UserLifecycleManager(domain=&quot;company.com&quot;)
-```
-
-**Methods:**
-
-#### `generate_user_creation_script(users)`
-
-Generates a PowerShell script for bulk user provisioning with license assignment.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `users` | Yes | `List[Dict[str, Any]]` | List of user dictionaries |
-| `users[].username` | Yes | `str` | Username (without domain) |
-| `users[].display_name` | Yes | `str` | Full display name |
-| `users[].first_name` | Yes | `str` | Given name |
-| `users[].last_name` | Yes | `str` | Surname |
-| `users[].job_title` | No | `str` | Job title |
-| `users[].department` | No | `str` | Department name |
-| `users[].license_sku` | No | `str` | License SKU (default: `&quot;Microsoft_365_Business_Standard&quot;`) |
-
-**Example:**
-
-```python
-script = manager.generate_user_creation_script([
-    {&quot;username&quot;: &quot;jdoe&quot;, &quot;display_name&quot;: &quot;Jane Doe&quot;, &quot;first_name&quot;: &quot;Jane&quot;,
-     &quot;last_name&quot;: &quot;Doe&quot;, &quot;job_title&quot;: &quot;Engineer&quot;, &quot;department&quot;: &quot;Engineering&quot;,
-     &quot;license_sku&quot;: &quot;ENTERPRISEPACK&quot;}
-])
-```
-
-**Output:** PowerShell script string that creates users via `New-MgUser`, assigns licenses, and exports results to `UserCreation_Results_&lt;timestamp&gt;.csv`.
-
-#### `generate_user_offboarding_script(user_email)`
-
-Generates a comprehensive 11-step secure offboarding PowerShell script.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_email` | Yes | `str` | UPN of the user to offboard |
-
-**Example:**
-
-```python
-script = manager.generate_user_offboarding_script(&quot;john.doe@company.com&quot;)
-```
-
-**Output:** PowerShell script string that disables sign-in, revokes sessions, removes group memberships, removes devices, converts mailbox to shared, sets auto-reply, removes licenses, hides from GAL, and exports an offboarding report CSV.
-
-#### `generate_license_assignment_recommendations(user_role, department)`
-
-Returns license recommendation based on role and department matching.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_role` | Yes | `str` | Job title or role (matched against keywords: CEO, CTO, admin, manager, contractor, etc.) |
-| `department` | Yes | `str` | Department name (matched against: legal, finance, hr, accounting) |
-
-**Example:**
-
-```python
-rec = manager.generate_license_assignment_recommendations(&quot;Security Analyst&quot;, &quot;IT&quot;)
-# Returns: {&quot;recommended_license&quot;: &quot;Microsoft 365 E5&quot;, &quot;justification&quot;: &quot;...&quot;, &quot;features_needed&quot;: [...], &quot;monthly_cost&quot;: 57.00}
-```
-
-**Output:** Dictionary with `recommended_license`, `justification`, `features_needed` (list), and `monthly_cost` (float).
-
-#### `generate_group_membership_recommendations(user)`
-
-Recommends security and distribution groups based on user attributes.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user` | Yes | `Dict[str, Any]` | User dictionary with `department`, `location`, `job_title`, `needs_sharepoint_access`, `needs_project_access` |
-
-**Example:**
-
-```python
-groups = manager.generate_group_membership_recommendations({
-    &quot;department&quot;: &quot;Engineering&quot;, &quot;location&quot;: &quot;NYC&quot;, &quot;job_title&quot;: &quot;Director of Engineering&quot;
-})
-# Returns: [&quot;DL-Engineering&quot;, &quot;SG-Engineering&quot;, &quot;SG-Location-Nyc&quot;, &quot;SG-Management&quot;]
-```
-
-**Output:** List of recommended group name strings using naming conventions `DL-` (distribution list), `SG-` (security group).
-
-#### `validate_user_data(user_data)`
-
-Validates user data before provisioning, checking required fields, username format, and email format.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| `user_data` | Yes | `Dict[str, Any]` | Dictionary with `first_name`, `last_name`, `username` (required); `email`, `display_name`, `license_sku` (optional) |
-
-**Example:**
-
-```python
-result = manager.validate_user_data({&quot;first_name&quot;: &quot;Jane&quot;, &quot;last_name&quot;: &quot;Doe&quot;, &quot;username&quot;: &quot;jdoe&quot;})
-# Returns: {&quot;is_valid&quot;: True, &quot;errors&quot;: [], &quot;warnings&quot;: [&quot;Display name not provided, will use: Jane Doe&quot;, ...]}
-```
-
-**Output:** Dictionary with `is_valid` (bool), `errors` (list of strings), and `warnings` (list of strings).
-
----
-
-### tenant_setup.py
-
-**Purpose:** Manages initial Microsoft 365 tenant configuration including setup checklists, DNS record generation, PowerShell setup scripts, and license distribution recommendations.
-
-**Module:** `TenantSetupManager` class (import and instantiate, not a CLI tool)
-
-**Initialization:**
-
-```python
-from tenant_setup import TenantSetupManager
-
-manager = TenantSetupManager(tenant_config={
-    &quot;company_name&quot;: &quot;Acme Inc&quot;,
-    &quot;domain_name&quot;: &quot;acme.com&quot;,
-    &quot;user_count&quot;: 50,
-    &quot;industry&quot;: &quot;technology&quot;,
-    &quot;compliance_requirements&quot;: [&quot;GDPR&quot;],  # optional: &quot;GDPR&quot;, &quot;HIPAA&quot;
-    &quot;licenses&quot;: {}
-})
-```
-
-| Config Key | Required | Type | Description |
-|------------|----------|------|-------------|
-| `company_name` | Yes | `str` | Organization display name |
-| `domain_name` | Yes | `str` | Primary custom domain |
-| `user_count` | Yes | `int` | Total expected user count |
-| `industry` | No | `str` | Industry vertical (default: `&quot;general&quot;`) |
-| `compliance_requirements` | No | `List[str]` | Compliance frameworks: `&quot;GDPR&quot;`, `&quot;HIPAA&quot;` |
-| `licenses` | No | `Dict` | Existing license inventory |
-
-**Methods:**
-
-#### `generate_setup_checklist()`
-
-Generates a phased tenant setup checklist (4-5 phases depending on compliance requirements).
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses constructor config |
-
-**Example:**
-
-```python
-checklist = manager.generate_setup_checklist()
-# Returns list of phase dicts, each with &quot;phase&quot;, &quot;name&quot;, &quot;priority&quot;, &quot;tasks&quot;
-```
-
-**Output:** List of dictionaries. Each phase contains `phase` (int), `name` (str), `priority` (`&quot;critical&quot;` or `&quot;high&quot;`), and `tasks` (list of dicts with `task`, `details`, `estimated_time`). Phases: Initial Configuration, Custom Domain, Security Baseline, Service Configuration, and optionally Compliance Configuration.
-
-#### `generate_dns_records()`
-
-Generates all required DNS records for Microsoft 365 services.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `domain_name` from constructor |
-
-**Example:**
-
-```python
-records = manager.generate_dns_records()
-# Keys: &quot;mx_records&quot;, &quot;txt_records&quot;, &quot;cname_records&quot;, &quot;srv_records&quot;
-```
-
-**Output:** Dictionary with four keys, each containing a list of record dictionaries with `type`, `name`, `value`, `ttl`, `purpose`, and record-type-specific fields (`priority` for MX/SRV, `port`/`weight` for SRV).
-
-#### `generate_powershell_setup_script()`
-
-Generates a complete PowerShell script for initial tenant configuration covering Graph, Exchange Online, SharePoint, and Teams.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses constructor config |
-
-**Example:**
-
-```python
-script = manager.generate_powershell_setup_script()
-print(script)  # PowerShell script connecting to Graph, Exchange, Teams with 7 setup steps
-```
-
-**Output:** PowerShell script string that connects to Microsoft Graph, Exchange Online, and Teams; configures organization settings, security defaults, audit logging, Exchange policies, and Teams messaging policies.
-
-#### `get_license_recommendations()`
-
-Calculates license distribution recommendations and cost estimates based on user count and compliance requirements.
-
-| Parameter | Required | Type | Description |
-|-----------|----------|------|-------------|
-| *(none)* | -- | -- | Uses `user_count` and `compliance_requirements` from constructor |
-
-**Example:**
-
-```python
-recs = manager.get_license_recommendations()
-# Returns: {&quot;recommendations&quot;: {...}, &quot;suggested_distribution&quot;: {&quot;E5&quot;: 5, &quot;E3&quot;: 10, ...},
-#           &quot;estimated_monthly_cost&quot;: 1234.50, &quot;estimated_annual_cost&quot;: 14814.00}
-```
-
-**Output:** Dictionary with `recommendations` (license tier details), `suggested_distribution` (dict mapping SKU tier to user count), `estimated_monthly_cost` (float), and `estimated_annual_cost` (float). Distribution adjusts automatically when compliance requirements are specified.
 
 ---
 
@@ -1802,7 +672,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ms365 Tenant Manager&quot;**
-   - Description: &quot;Microsoft 365 tenant administration for Global Administrators. Automate M365 tenant setup, Office 365 admin tasks, Azure AD user management, Exchange Online configuration, Teams administration, and se...&quot;
+   - Description: &quot;Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1862,23 +732,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/ms365-tenant-manager/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2>### Generate Security Audit Script
-
-<pre><code>python scripts/powershell_generator.py --action audit --output audit_script.ps1
-</code></pre>
-
-### Create Bulk User Provisioning Script
-
-<pre><code>python scripts/user_management.py --action provision --csv users.csv --license E3
-</code></pre>
-
-### Configure Conditional Access Policy
-
-<pre><code>python scripts/powershell_generator.py --action conditional-access --require-mfa --include-admins
-</code></pre>
-
----
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/ms365-tenant-manager/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

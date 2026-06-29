@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Release Orchestrator - Claude Skills</title>
-  <meta name="description" content="End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation">
+  <meta name="description" content="Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanni">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html">
   <meta property="og:title" content="Release Orchestrator - Claude Skills">
-  <meta property="og:description" content="End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation">
+  <meta property="og:description" content="Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanni">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Release Orchestrator", "description": "End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Release Orchestrator", "description": "Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Release Orchestrator</h1>
-    <p class="page-subtitle">End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Release Engineering</span> <span class="badge badge-version">v2.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">release-pipeline</span><span class="tag">versioning</span><span class="tag">pre-flight</span><span class="tag">readiness</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Release Orchestrator (Engineering domain).
 
-End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation
+Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.
 
-The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. ```bash python scripts/preflight_checker.py --repo . --base main --verbose
+The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. - **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/G
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Release Orchestrator (Engineering domain).
 
-End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation
+Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.
 
-The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. ```bash python scripts/preflight_checker.py --repo . --base main --verbose
+The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. - **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/G
 
 ## How to Help
 When the user asks for help in this domain:
@@ -449,218 +449,58 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/GCP/GitHub/Stripe/JWT), gitignore coverage, conventional commits, dependency lock consistency.
+- **Version management** — auto-detect semver bump (PATCH/MINOR/MAJOR) from commit history across `package.json`, `pyproject.toml`, `Cargo.toml`, etc.; pre-release tags (`--pre alpha|beta|rc`).
+- **Changelog generation** — Keep a Changelog markdown grouped by type (Added/Changed/Fixed/Security/Breaking) with hashes and `@author` attribution.
+- **Deployment readiness** — weighted score across 7 categories (Tests, Code Quality, Docs, Security, Breaking Changes, Dependencies, Rollback) → GO (80+) / CONDITIONAL (60-79) / NO-GO (&lt;60), with single-category blocker at &lt;40.
+- **End-to-end pipeline** — chain all tools non-interactively; blocks on pre-flight failure, test failure, or NO-GO. CI/CD steps and pre-push git hook provided.
+- **Release types** — hotfix, patch, minor, major, and pre-release flows with branch patterns and bump rules.
 
-```bash
-# Pre-flight: branch sync, secrets, conflicts, commits, deps
-python scripts/preflight_checker.py --repo . --base main --verbose
+## When to Use
 
-# Changelog from conventional commits
-python scripts/changelog_generator.py --repo . --from v1.2.0 --to HEAD
+- Running pre-release validation or gating a release with secret scanning and GO/NO-GO checks.
+- Generating a changelog from conventional commits before tagging.
+- Auto-bumping a semantic version from commit history.
+- Scoring deployment readiness across tests, quality, security, and rollback.
+- Wiring release validation into a CI/CD pipeline or pre-push hook.
 
-# Auto-detect version bump from commit history
-python scripts/version_bumper.py --repo . --dry-run
+## Clarify First
 
-# Score deployment readiness (7 categories, weighted)
-python scripts/release_readiness_scorer.py --input release_data.json --json
-```
+Before orchestrating the release, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-## Tools Overview
+- [ ] **Base branch &amp; ref range** — what HEAD is compared against (drives pre-flight branch-sync and the changelog `--from`/`--to`)
+- [ ] **Release type** — hotfix / patch / minor / major / pre-release (sets the branch pattern and bump rule)
+- [ ] **Gate strictness** — block on CONDITIONAL (60-79) or only on NO-GO (&lt;60) (decides whether the pipeline halts)
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `preflight_checker.py` | Repo path + base branch | Pass/fail on 7 checks (sync, conflicts, secrets, commits, deps) |
-| `changelog_generator.py` | Git repo + ref range | Keep a Changelog markdown with commit grouping |
-| `version_bumper.py` | Repo path | Next semver from commit analysis; updates version files |
-| `release_readiness_scorer.py` | Release data JSON | Score 0-100, GO/CONDITIONAL/NO-GO decision |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `preflight_checker.py` | Run 7 pre-release checks (sync, conflicts, secrets, commits, deps) | `python scripts/preflight_checker.py --repo . --base main --json` |
+| `changelog_generator.py` | Generate Keep a Changelog markdown from a ref range | `python scripts/changelog_generator.py --repo . --from v1.2.0 --to HEAD --output CHANGELOG.md` |
+| `version_bumper.py` | Auto-detect next semver from commits; write version files | `python scripts/version_bumper.py --repo . --dry-run --json` |
+| `release_readiness_scorer.py` | Score readiness 0-100 with GO/CONDITIONAL/NO-GO decision | `python scripts/release_readiness_scorer.py --input release_data.json --json` |
 
 All tools support `--json` for machine output. Exit code 0 = pass, 1 = fail (CI-friendly).
 
----
-
-## Workflow 1: Pre-Flight Validation
-
-```bash
-python scripts/preflight_checker.py --repo . --base main --json
-```
-
-The agent runs seven automated checks:
-
-1. **Branch sync** -- local branch up to date with remote base
-2. **Merge conflicts** -- dry-run merge to detect conflicts
-3. **Uncommitted changes** -- fail if working tree is dirty
-4. **Secret scanning** -- pattern-match for API keys, tokens, passwords (AWS, GCP, GitHub, Stripe, JWT)
-5. **Gitignore validation** -- `.env`, credential files covered
-6. **Conventional commits** -- recent commits follow `type(scope): description`
-7. **Dependency audit** -- lock file consistency (package-lock.json, poetry.lock, etc.)
-
-**Validation checkpoint:** All 7 checks pass. Exit code 0.
-
----
-
-## Workflow 2: Version Management and Changelog
-
-**Step 1 -- Auto-detect version bump.**
-
-```bash
-python scripts/version_bumper.py --repo . --dry-run --json
-```
-
-| Commit Type | Bump | Example |
-|---|---|---|
-| `fix:` | PATCH (0.0.x) | `fix(auth): handle expired tokens` |
-| `feat:` | MINOR (0.x.0) | `feat(api): add pagination` |
-| `feat!:` or `BREAKING CHANGE` | MAJOR (x.0.0) | `feat!: redesign auth flow` |
-| `docs:`, `chore:`, `test:` | No bump | `docs: update README` |
-
-Reads from: `package.json`, `pyproject.toml`, `setup.py`, `setup.cfg`, `Cargo.toml`, `VERSION` file.
-Pre-release support: `--pre alpha|beta|rc` produces `1.3.0-rc.1`.
-
-**Step 2 -- Generate changelog.**
-
-```bash
-python scripts/changelog_generator.py --repo . --from latest --to HEAD --output CHANGELOG.md --full
-```
-
-Groups commits by type (Added, Changed, Fixed, Security, Breaking Changes) with hashes and `@author` attribution.
-
-**Step 3 -- Apply version bump.**
-
-```bash
-python scripts/version_bumper.py --repo .  # writes to all discovered version files
-```
-
-**Validation checkpoint:** `--dry-run` shows expected version. Changelog covers 100% of commits.
-
----
-
-## Workflow 3: Deployment Readiness
-
-```bash
-python scripts/release_readiness_scorer.py --input release_data.json --json
-```
-
-The agent scores across 7 weighted categories:
-
-| Category | Weight | Measures |
-|----------|--------|----------|
-| Tests | 25% | Pass rate, coverage, flaky count |
-| Code Quality | 20% | Lint errors, type errors, complexity, duplication |
-| Documentation | 15% | README, API docs, changelog, migration guide |
-| Security | 15% | No secrets, no critical CVEs, SAST clean |
-| Breaking Changes | 10% | Documented, migration path, deprecation notices |
-| Dependencies | 10% | Lock files consistent, no yanked packages |
-| Rollback Plan | 5% | Procedure documented, DB migration reversible, feature flags |
-
-**Decision thresholds:**
-
-| Score | Decision | Action |
-|---|---|---|
-| 80-100 | **GO** | Proceed with deployment |
-| 60-79 | **CONDITIONAL** | Proceed with mitigations documented |
-| 0-59 | **NO-GO** | Address blockers first |
-
-Any single category below 40 triggers a mandatory blocker regardless of overall score.
-
-**Validation checkpoint:** Score &gt;= 80 (GO). Zero category blockers.
-
----
-
-## End-to-End Release Pipeline
-
-Chain all workflows into a single automated pipeline:
-
-```bash
-#!/bin/bash
-set -e
-
-# Phase 1: Pre-flight
-python scripts/preflight_checker.py --repo . --base main --json &gt; /tmp/preflight.json
-
-# Phase 2: Tests (project-specific)
-python -m pytest --cov=src --cov-report=json:coverage.json -v
-
-# Phase 3: Version bump (dry-run)
-python scripts/version_bumper.py --repo . --dry-run --json &gt; /tmp/version.json
-
-# Phase 4: Changelog
-python scripts/changelog_generator.py --repo . --from latest --to HEAD
-
-# Phase 5: Readiness assessment
-python scripts/release_readiness_scorer.py --input release_data.json --json &gt; /tmp/readiness.json
-DECISION=$(python -c &quot;import json; print(json.load(open(&#x27;/tmp/readiness.json&#x27;))[&#x27;decision&#x27;])&quot;)
-echo &quot;Decision: $DECISION&quot;
-```
-
-Non-interactive by default. Blocks on: pre-flight failure, test failure, or NO-GO readiness.
-
----
-
-## Release Types
-
-| Type | Branch Pattern | Bump | Notes |
-|------|---------------|------|-------|
-| **Hotfix** | `hotfix/v1.2.1` from tag | PATCH | Minimal fix, branches from release tag |
-| **Patch** | Standard flow | PATCH | Accumulated bug fixes |
-| **Minor** | Standard flow | MINOR | New features, backward compatible |
-| **Major** | Standard flow | MAJOR | Breaking changes, needs migration docs |
-| **Pre-release** | Standard flow | `--pre alpha\|beta\|rc` | `1.3.0-alpha.1` for testing |
-
----
-
-## CI/CD Integration
-
-```yaml
-- name: Pre-flight Check
-  run: python scripts/preflight_checker.py --repo . --base main --json &gt; preflight.json
-
-- name: Version Bump
-  run: python scripts/version_bumper.py --repo . --dry-run --json &gt; version.json
-
-- name: Changelog
-  run: python scripts/changelog_generator.py --repo . --from latest --to HEAD --output CHANGELOG.md
-
-- name: Readiness Score
-  run: python scripts/release_readiness_scorer.py --input release_data.json
-```
-
-Git hook: `python scripts/preflight_checker.py --repo . --base main` in `.git/hooks/pre-push`.
-
----
-
-## Anti-Patterns
-
-1. **Skipping pre-flight** -- secrets ship to production. Always run pre-flight before any release work.
-2. **Manual version bumping** -- leads to inconsistencies. Let commit history drive the version.
-3. **No rollback plan** -- every release needs documented rollback (git revert, feature flags, or DB migration down).
-4. **Ignoring single-category blockers** -- a 95 overall score with 35 Security = NO-GO.
-5. **Changelog after release** -- generate before tagging so reviewers can validate.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Pre-flight &quot;HEAD is detached&quot; | CI checked out specific commit | Check out a named branch first |
-| Changelog &quot;No commits found&quot; | `--from` ref does not exist | Verify tag with `git tag -l`; use `--since` date range |
-| Version bumper cannot parse version | Non-semver format (e.g., `1.0`) | Use `MAJOR.MINOR.PATCH` in all manifest files |
-| Readiness scorer exits 1 despite high score | Single category below 40-point blocker | Check BLOCKERS section; fix failing category |
-| Secret scan false positives on test fixtures | Pattern matches example tokens | Lines with &quot;example&quot;/&quot;placeholder&quot; are skipped; move fixtures to non-tracked dir |
-
----
-
 ## References
 
-| Guide | Path |
-|-------|------|
-| Release Engineering Guide | `references/release_engineering_guide.md` |
-| Rollback Strategies | `references/rollback_strategies.md` |
-| CI/CD Best Practices | `references/ci_cd_best_practices.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/release-workflows-and-operations.md](references/release-workflows-and-operations.md)** — quick-start commands, the three core workflows (pre-flight, version/changelog, readiness) with their checkpoint tables, the end-to-end pipeline script, release-type matrix, CI/CD integration YAML, anti-patterns, and the troubleshooting table. Read when running or chaining any workflow.
+- **[references/release_engineering_guide.md](references/release_engineering_guide.md)** — release strategies (rolling, blue-green, canary) and release engineering practice. Read when choosing a deployment strategy.
+- **[references/rollback_strategies.md](references/rollback_strategies.md)** — database migration rollbacks, reversible-migration rules, and rollback playbooks. Read when planning the rollback portion of a release.
+- **[references/ci_cd_best_practices.md](references/ci_cd_best_practices.md)** — pipeline design patterns (stage-gate, fan-out/fan-in) and CI/CD best practices. Read when designing the surrounding pipeline.
+
+## Scope &amp; Limitations
+
+**This skill covers:** pre-flight validation, semantic version bumping, changelog generation, deployment-readiness scoring, and gating releases with GO/NO-GO decisions for git + conventional-commits projects.
+
+**This skill does NOT cover:** the actual deploy/orchestration execution (handled by `senior-devops` / `devops-workflow-engineer`), test authoring (`senior-qa`), or deep security scanning beyond secret pattern-matching (`senior-secops`).
 
 ## Integration Points
 
@@ -671,11 +511,6 @@ Git hook: `python scripts/preflight_checker.py --repo . --base main` in `.git/ho
 | `senior-secops` | Secret scan and CVE counts feed Security category (15%) |
 | `code-reviewer` | Code quality metrics feed Code Quality category (20%) |
 | `devops-workflow-engineer` | Workflow YAML calls tools as pipeline steps |
-
----
-
-**Last Updated:** April 2026
-**Version:** 2.1.0
 
 ---
 
@@ -703,7 +538,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Release Orchestrator&quot;**
-   - Description: &quot;End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation&quot;
+   - Description: &quot;Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -730,218 +565,58 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/GCP/GitHub/Stripe/JWT), gitignore coverage, conventional commits, dependency lock consistency.
+- **Version management** — auto-detect semver bump (PATCH/MINOR/MAJOR) from commit history across `package.json`, `pyproject.toml`, `Cargo.toml`, etc.; pre-release tags (`--pre alpha|beta|rc`).
+- **Changelog generation** — Keep a Changelog markdown grouped by type (Added/Changed/Fixed/Security/Breaking) with hashes and `@author` attribution.
+- **Deployment readiness** — weighted score across 7 categories (Tests, Code Quality, Docs, Security, Breaking Changes, Dependencies, Rollback) → GO (80+) / CONDITIONAL (60-79) / NO-GO (&lt;60), with single-category blocker at &lt;40.
+- **End-to-end pipeline** — chain all tools non-interactively; blocks on pre-flight failure, test failure, or NO-GO. CI/CD steps and pre-push git hook provided.
+- **Release types** — hotfix, patch, minor, major, and pre-release flows with branch patterns and bump rules.
 
-```bash
-# Pre-flight: branch sync, secrets, conflicts, commits, deps
-python scripts/preflight_checker.py --repo . --base main --verbose
+## When to Use
 
-# Changelog from conventional commits
-python scripts/changelog_generator.py --repo . --from v1.2.0 --to HEAD
+- Running pre-release validation or gating a release with secret scanning and GO/NO-GO checks.
+- Generating a changelog from conventional commits before tagging.
+- Auto-bumping a semantic version from commit history.
+- Scoring deployment readiness across tests, quality, security, and rollback.
+- Wiring release validation into a CI/CD pipeline or pre-push hook.
 
-# Auto-detect version bump from commit history
-python scripts/version_bumper.py --repo . --dry-run
+## Clarify First
 
-# Score deployment readiness (7 categories, weighted)
-python scripts/release_readiness_scorer.py --input release_data.json --json
-```
+Before orchestrating the release, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-## Tools Overview
+- [ ] **Base branch &amp; ref range** — what HEAD is compared against (drives pre-flight branch-sync and the changelog `--from`/`--to`)
+- [ ] **Release type** — hotfix / patch / minor / major / pre-release (sets the branch pattern and bump rule)
+- [ ] **Gate strictness** — block on CONDITIONAL (60-79) or only on NO-GO (&lt;60) (decides whether the pipeline halts)
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `preflight_checker.py` | Repo path + base branch | Pass/fail on 7 checks (sync, conflicts, secrets, commits, deps) |
-| `changelog_generator.py` | Git repo + ref range | Keep a Changelog markdown with commit grouping |
-| `version_bumper.py` | Repo path | Next semver from commit analysis; updates version files |
-| `release_readiness_scorer.py` | Release data JSON | Score 0-100, GO/CONDITIONAL/NO-GO decision |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `preflight_checker.py` | Run 7 pre-release checks (sync, conflicts, secrets, commits, deps) | `python scripts/preflight_checker.py --repo . --base main --json` |
+| `changelog_generator.py` | Generate Keep a Changelog markdown from a ref range | `python scripts/changelog_generator.py --repo . --from v1.2.0 --to HEAD --output CHANGELOG.md` |
+| `version_bumper.py` | Auto-detect next semver from commits; write version files | `python scripts/version_bumper.py --repo . --dry-run --json` |
+| `release_readiness_scorer.py` | Score readiness 0-100 with GO/CONDITIONAL/NO-GO decision | `python scripts/release_readiness_scorer.py --input release_data.json --json` |
 
 All tools support `--json` for machine output. Exit code 0 = pass, 1 = fail (CI-friendly).
 
----
-
-## Workflow 1: Pre-Flight Validation
-
-```bash
-python scripts/preflight_checker.py --repo . --base main --json
-```
-
-The agent runs seven automated checks:
-
-1. **Branch sync** -- local branch up to date with remote base
-2. **Merge conflicts** -- dry-run merge to detect conflicts
-3. **Uncommitted changes** -- fail if working tree is dirty
-4. **Secret scanning** -- pattern-match for API keys, tokens, passwords (AWS, GCP, GitHub, Stripe, JWT)
-5. **Gitignore validation** -- `.env`, credential files covered
-6. **Conventional commits** -- recent commits follow `type(scope): description`
-7. **Dependency audit** -- lock file consistency (package-lock.json, poetry.lock, etc.)
-
-**Validation checkpoint:** All 7 checks pass. Exit code 0.
-
----
-
-## Workflow 2: Version Management and Changelog
-
-**Step 1 -- Auto-detect version bump.**
-
-```bash
-python scripts/version_bumper.py --repo . --dry-run --json
-```
-
-| Commit Type | Bump | Example |
-|---|---|---|
-| `fix:` | PATCH (0.0.x) | `fix(auth): handle expired tokens` |
-| `feat:` | MINOR (0.x.0) | `feat(api): add pagination` |
-| `feat!:` or `BREAKING CHANGE` | MAJOR (x.0.0) | `feat!: redesign auth flow` |
-| `docs:`, `chore:`, `test:` | No bump | `docs: update README` |
-
-Reads from: `package.json`, `pyproject.toml`, `setup.py`, `setup.cfg`, `Cargo.toml`, `VERSION` file.
-Pre-release support: `--pre alpha|beta|rc` produces `1.3.0-rc.1`.
-
-**Step 2 -- Generate changelog.**
-
-```bash
-python scripts/changelog_generator.py --repo . --from latest --to HEAD --output CHANGELOG.md --full
-```
-
-Groups commits by type (Added, Changed, Fixed, Security, Breaking Changes) with hashes and `@author` attribution.
-
-**Step 3 -- Apply version bump.**
-
-```bash
-python scripts/version_bumper.py --repo .  # writes to all discovered version files
-```
-
-**Validation checkpoint:** `--dry-run` shows expected version. Changelog covers 100% of commits.
-
----
-
-## Workflow 3: Deployment Readiness
-
-```bash
-python scripts/release_readiness_scorer.py --input release_data.json --json
-```
-
-The agent scores across 7 weighted categories:
-
-| Category | Weight | Measures |
-|----------|--------|----------|
-| Tests | 25% | Pass rate, coverage, flaky count |
-| Code Quality | 20% | Lint errors, type errors, complexity, duplication |
-| Documentation | 15% | README, API docs, changelog, migration guide |
-| Security | 15% | No secrets, no critical CVEs, SAST clean |
-| Breaking Changes | 10% | Documented, migration path, deprecation notices |
-| Dependencies | 10% | Lock files consistent, no yanked packages |
-| Rollback Plan | 5% | Procedure documented, DB migration reversible, feature flags |
-
-**Decision thresholds:**
-
-| Score | Decision | Action |
-|---|---|---|
-| 80-100 | **GO** | Proceed with deployment |
-| 60-79 | **CONDITIONAL** | Proceed with mitigations documented |
-| 0-59 | **NO-GO** | Address blockers first |
-
-Any single category below 40 triggers a mandatory blocker regardless of overall score.
-
-**Validation checkpoint:** Score &gt;= 80 (GO). Zero category blockers.
-
----
-
-## End-to-End Release Pipeline
-
-Chain all workflows into a single automated pipeline:
-
-```bash
-#!/bin/bash
-set -e
-
-# Phase 1: Pre-flight
-python scripts/preflight_checker.py --repo . --base main --json &gt; /tmp/preflight.json
-
-# Phase 2: Tests (project-specific)
-python -m pytest --cov=src --cov-report=json:coverage.json -v
-
-# Phase 3: Version bump (dry-run)
-python scripts/version_bumper.py --repo . --dry-run --json &gt; /tmp/version.json
-
-# Phase 4: Changelog
-python scripts/changelog_generator.py --repo . --from latest --to HEAD
-
-# Phase 5: Readiness assessment
-python scripts/release_readiness_scorer.py --input release_data.json --json &gt; /tmp/readiness.json
-DECISION=$(python -c &quot;import json; print(json.load(open(&#x27;/tmp/readiness.json&#x27;))[&#x27;decision&#x27;])&quot;)
-echo &quot;Decision: $DECISION&quot;
-```
-
-Non-interactive by default. Blocks on: pre-flight failure, test failure, or NO-GO readiness.
-
----
-
-## Release Types
-
-| Type | Branch Pattern | Bump | Notes |
-|------|---------------|------|-------|
-| **Hotfix** | `hotfix/v1.2.1` from tag | PATCH | Minimal fix, branches from release tag |
-| **Patch** | Standard flow | PATCH | Accumulated bug fixes |
-| **Minor** | Standard flow | MINOR | New features, backward compatible |
-| **Major** | Standard flow | MAJOR | Breaking changes, needs migration docs |
-| **Pre-release** | Standard flow | `--pre alpha\|beta\|rc` | `1.3.0-alpha.1` for testing |
-
----
-
-## CI/CD Integration
-
-```yaml
-- name: Pre-flight Check
-  run: python scripts/preflight_checker.py --repo . --base main --json &gt; preflight.json
-
-- name: Version Bump
-  run: python scripts/version_bumper.py --repo . --dry-run --json &gt; version.json
-
-- name: Changelog
-  run: python scripts/changelog_generator.py --repo . --from latest --to HEAD --output CHANGELOG.md
-
-- name: Readiness Score
-  run: python scripts/release_readiness_scorer.py --input release_data.json
-```
-
-Git hook: `python scripts/preflight_checker.py --repo . --base main` in `.git/hooks/pre-push`.
-
----
-
-## Anti-Patterns
-
-1. **Skipping pre-flight** -- secrets ship to production. Always run pre-flight before any release work.
-2. **Manual version bumping** -- leads to inconsistencies. Let commit history drive the version.
-3. **No rollback plan** -- every release needs documented rollback (git revert, feature flags, or DB migration down).
-4. **Ignoring single-category blockers** -- a 95 overall score with 35 Security = NO-GO.
-5. **Changelog after release** -- generate before tagging so reviewers can validate.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Pre-flight &quot;HEAD is detached&quot; | CI checked out specific commit | Check out a named branch first |
-| Changelog &quot;No commits found&quot; | `--from` ref does not exist | Verify tag with `git tag -l`; use `--since` date range |
-| Version bumper cannot parse version | Non-semver format (e.g., `1.0`) | Use `MAJOR.MINOR.PATCH` in all manifest files |
-| Readiness scorer exits 1 despite high score | Single category below 40-point blocker | Check BLOCKERS section; fix failing category |
-| Secret scan false positives on test fixtures | Pattern matches example tokens | Lines with &quot;example&quot;/&quot;placeholder&quot; are skipped; move fixtures to non-tracked dir |
-
----
-
 ## References
 
-| Guide | Path |
-|-------|------|
-| Release Engineering Guide | `references/release_engineering_guide.md` |
-| Rollback Strategies | `references/rollback_strategies.md` |
-| CI/CD Best Practices | `references/ci_cd_best_practices.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/release-workflows-and-operations.md](references/release-workflows-and-operations.md)** — quick-start commands, the three core workflows (pre-flight, version/changelog, readiness) with their checkpoint tables, the end-to-end pipeline script, release-type matrix, CI/CD integration YAML, anti-patterns, and the troubleshooting table. Read when running or chaining any workflow.
+- **[references/release_engineering_guide.md](references/release_engineering_guide.md)** — release strategies (rolling, blue-green, canary) and release engineering practice. Read when choosing a deployment strategy.
+- **[references/rollback_strategies.md](references/rollback_strategies.md)** — database migration rollbacks, reversible-migration rules, and rollback playbooks. Read when planning the rollback portion of a release.
+- **[references/ci_cd_best_practices.md](references/ci_cd_best_practices.md)** — pipeline design patterns (stage-gate, fan-out/fan-in) and CI/CD best practices. Read when designing the surrounding pipeline.
+
+## Scope &amp; Limitations
+
+**This skill covers:** pre-flight validation, semantic version bumping, changelog generation, deployment-readiness scoring, and gating releases with GO/NO-GO decisions for git + conventional-commits projects.
+
+**This skill does NOT cover:** the actual deploy/orchestration execution (handled by `senior-devops` / `devops-workflow-engineer`), test authoring (`senior-qa`), or deep security scanning beyond secret pattern-matching (`senior-secops`).
 
 ## Integration Points
 
@@ -952,11 +627,6 @@ Git hook: `python scripts/preflight_checker.py --repo . --base main` in `.git/ho
 | `senior-secops` | Secret scan and CVE counts feed Security category (15%) |
 | `code-reviewer` | Code quality metrics feed Code Quality category (20%) |
 | `devops-workflow-engineer` | Workflow YAML calls tools as pipeline steps |
-
----
-
-**Last Updated:** April 2026
-**Version:** 2.1.0
 
 ---
 
@@ -984,7 +654,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Release Orchestrator&quot;**
-   - Description: &quot;End-to-end release pipeline automation with pre-flight checks, test orchestration, semantic versioning, changelog generation, and deployment readiness validation&quot;
+   - Description: &quot;Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1044,19 +714,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/release-orchestrator/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Pre-flight: branch sync, secrets, conflicts, commits, deps
-python scripts/preflight_checker.py --repo . --base main --verbose
-
-# Changelog from conventional commits
-python scripts/changelog_generator.py --repo . --from v1.2.0 --to HEAD
-
-# Auto-detect version bump from commit history
-python scripts/version_bumper.py --repo . --dry-run
-
-# Score deployment readiness (7 categories, weighted)
-python scripts/release_readiness_scorer.py --input release_data.json --json
-</code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/release-orchestrator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

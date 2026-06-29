@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Pm Onboarding</h1>
     <p class="page-subtitle">30-60-90 day plan for a new PM joining a company or team, grounded in Michael Watkins&#x27; First 90 Days framework and the STARS situational diagnosis. Includes week-by-week plan, stakeholder map, 1:1 question bank, and first-PRD template.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Career</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">pm-onboarding</span><span class="tag">30-60-90</span><span class="tag">first-90-days</span><span class="tag">stars-framework</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -398,19 +398,14 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 A new PM&#x27;s first 90 days are disproportionately important. Trust earned in the first quarter compounds; missteps in the first quarter haunt for the next year. This skill is a structured 30-60-90 day plan that helps a new PM diagnose the situation, build relationships, identify early wins, and arrive
 
 ## Your Key Capabilities
+- The arc in brief
 - When to Use
 - When NOT to Use
-- How to diagnose
-- Days 1-30: Learn
-- Days 31-60: Plan
-- Days 61-90: Deliver
 
 ## Frameworks &amp; Templates You Know
-- See `assets/stakeholder_map.md` for the full template.
-- See `assets/first_prd_template.md`.
-- - First-PRD template calibrated for new-PM constraints
-- - `assets/30_60_90_plan.md` -- Editable 30-60-90 plan template
-- - `assets/stakeholder_map.md` -- Onboarding stakeholder map template
+- - `assets/30_60_90_plan.md` — editable 30-60-90 plan template.
+- - `assets/stakeholder_map.md` — onboarding stakeholder map template.
+- - `assets/first_prd_template.md` — tighter PRD template for new-PM constraints.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -435,19 +430,14 @@ Start by asking the user what they need help with.">
 A new PM&#x27;s first 90 days are disproportionately important. Trust earned in the first quarter compounds; missteps in the first quarter haunt for the next year. This skill is a structured 30-60-90 day plan that helps a new PM diagnose the situation, build relationships, identify early wins, and arrive
 
 ## Your Key Capabilities
+- The arc in brief
 - When to Use
 - When NOT to Use
-- How to diagnose
-- Days 1-30: Learn
-- Days 31-60: Plan
-- Days 61-90: Deliver
 
 ## Frameworks &amp; Templates You Know
-- See `assets/stakeholder_map.md` for the full template.
-- See `assets/first_prd_template.md`.
-- - First-PRD template calibrated for new-PM constraints
-- - `assets/30_60_90_plan.md` -- Editable 30-60-90 plan template
-- - `assets/stakeholder_map.md` -- Onboarding stakeholder map template
+- - `assets/30_60_90_plan.md` — editable 30-60-90 plan template.
+- - `assets/stakeholder_map.md` — onboarding stakeholder map template.
+- - `assets/first_prd_template.md` — tighter PRD template for new-PM constraints.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -481,191 +471,60 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A new PM&#x27;s first 90 days are disproportionately important. Trust earned in the first quarter compounds; missteps in the first quarter haunt for the next year. This skill is a structured 30-60-90 day plan that helps a new PM diagnose the situation, build relationships, identify early wins, and arrive at the end of the quarter with credibility and a clear point of view.
 
-The skill draws on Michael Watkins&#x27; *The First 90 Days*, the STARS situational diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success), and the public PM onboarding patterns popularized by Lenny Rachitsky and other senior product leaders.
+The skill draws on Michael Watkins&#x27; *The First 90 Days*, the STARS situational diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success), and the public PM onboarding patterns popularized by senior product leaders.
+
+### The arc in brief
+
+- **Days 1-30 (Learn):** build context; no major decisions, no big PRDs. End with a 1-page &quot;What I&#x27;m learning&quot; memo (STARS diagnosis + top-3 going well + top-3 risks).
+- **Days 31-60 (Plan):** form a point of view; interview customers yourself; identify 1-2 early wins; align manager + stakeholders. End with a first PRD/strategy memo and draft 6-month roadmap.
+- **Days 61-90 (Deliver):** ship the early win; set the operating cadence; write the 90-day retro memo.
+
+Diagnose the STARS situation first — a Sustaining-success area rewards 60+ days of listening; a Turnaround needs decisive action within 30. Misreading the situation is the most common new-PM mistake.
 
 ### When to Use
 
-- **New job at a new company** -- Use the full 90-day plan from week 1.
-- **Internal transfer to a new team** -- Compress to 60 days but keep the structure.
-- **New scope within the same team** -- Use the 30-day learning sprint only.
-- **Returning from extended leave (3+ months)** -- Use a modified 30-day plan to re-orient.
+- **New job at a new company** -- use the full 90-day plan from week 1.
+- **Internal transfer to a new team** -- compress to 60 days but keep the structure.
+- **New scope within the same team** -- use the 30-day learning sprint only.
+- **Returning from extended leave (3+ months)** -- use a modified 30-day plan to re-orient.
 
 ### When NOT to Use
 
 - First week of a routine role (no major scope change) -- this is overkill.
-- Interim leadership (acting role &lt;60 days) -- run a different playbook focused on stability, not learning.
+- Interim leadership (acting role &lt;60 days) -- run a stability-focused playbook instead.
 
-## STARS: Diagnose the Situation Before Acting
+## Clarify First
 
-Watkins&#x27; STARS framework forces you to ask: *what kind of situation am I entering?* The answer determines what early actions are appropriate.
+Before building the onboarding plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Type | What it means | First-90-day priorities |
-|------|---------------|-------------------------|
-| **S**tart-up | Building from scratch (new product, new team) | Move fast, hire, set direction, prove the idea |
-| **T**urnaround | Failing product / team that needs rescue | Diagnose, cut, set a new direction, change personnel if needed |
-| **A**ccelerated growth | Working, growing fast, breaking under scale | Build operating muscle, hire, design org for growth |
-| **R**ealignment | Apparently successful but losing ground | Confront denial, align on the gap, make incremental change |
-| **S**ustaining success | Working well, must be preserved and refined | Listen long before acting, do no harm, preserve trust |
+- [ ] **STARS situation** — Start-up, Turnaround, Accelerated-growth, Realignment, or Sustaining-success (sets the listen-vs-act balance; misreading it is the top new-PM mistake)
+- [ ] **Transition type** — new company, internal transfer, new scope, or return from leave (chooses full-90 vs compressed-60 vs 30-day plan)
+- [ ] **Manager&#x27;s 90-day expectations** — what &quot;success&quot; means to them (anchors early-win selection and the whole arc)
+- [ ] **Scope and key partners** — what the PM owns and who the critical stakeholders are (drives the stakeholder tiers and first-PRD)
 
-**Why this matters:** A new PM walking into a Sustaining-success area should listen for at least 60 days. The same PM in a Turnaround should act within 30. Misreading the situation is the most common new-PM mistake.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### How to diagnose
+## References
 
-In your first two weeks, ask every stakeholder:
+Load the reference that matches the task; keep this file lean and pull detail on demand.
 
-1. &quot;What is going well that you most want to preserve?&quot;
-2. &quot;What is broken or breaking?&quot;
-3. &quot;What changes would you most want from this role?&quot;
-4. &quot;What would derail me in the first six months?&quot;
-5. &quot;Who else should I be talking to about this?&quot;
+- **[references/30-60-90-plan-and-tactics.md](references/30-60-90-plan-and-tactics.md)** — full STARS diagnostic table and diagnosis questions, the week-by-week 30-60-90 plan with outputs, the early-wins playbook, onboarding stakeholder tiers, the first-PRD rules, the run-the-quarter workflow, troubleshooting, and success criteria. Read this when actually building or running the plan.
+- **[references/first-90-days-playbook.md](references/first-90-days-playbook.md)** — Watkins-grounded deep dive: the transition trap, STARS in depth, securing early wins, the five-conversations framework, remote/hybrid onboarding, and the 90-day retro memo structure. Read for the underlying theory.
+- **[references/red-flags.md](references/red-flags.md)** — bad-vs-good examples of early-tenure decisions. Scan after producing a 30-60-90 plan, stakeholder map, or onboarding artifact.
+- `assets/30_60_90_plan.md` — editable 30-60-90 plan template.
+- `assets/stakeholder_map.md` — onboarding stakeholder map template.
+- `assets/onboarding_1on1_questions.md` — question bank for the first 30 days of 1:1s.
+- `assets/first_prd_template.md` — tighter PRD template for new-PM constraints.
 
-Patterns across 8-12 conversations reveal the STARS type.
-
-## The 30-60-90 Day Plan
-
-### Days 1-30: Learn
-
-**Goal:** Build context. No major decisions. No big PRDs. Listen, observe, ask.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 1 | Logistics, manager 1:1, team intros | Calendar set up, stakeholder shortlist, manager-aligned 90-day plan draft |
-| Week 2 | Customer immersion: read research, listen to sales/support calls | Customer-segment map, top-5 customer pain hypotheses |
-| Week 3 | Product immersion: use the product daily, read PRDs, walk the metrics tree | Product-area map, baseline metrics dashboard |
-| Week 4 | Team immersion: 1:1 with every engineer and designer in the immediate team | Team strength/gap map, draft of STARS diagnosis |
-
-**End-of-30 deliverable:** A 1-page &quot;What I&#x27;m learning&quot; memo to your manager. Includes your STARS diagnosis, top-3 things going well, top-3 risks, and questions you still need to answer.
-
-### Days 31-60: Plan
-
-**Goal:** Build a point of view. Identify the early-win candidates. Start to align stakeholders on direction.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 5 | Deepen customer evidence: interview 3-5 customers yourself | Customer insight memo |
-| Week 6 | Competitive scan + market context | Competitive 2x2 or summary |
-| Week 7 | Identify 1-2 early wins (visible, achievable in &lt;90 days) | Early-win proposal with cost/effort |
-| Week 8 | Align manager + key stakeholders on early wins and 6-month direction | Aligned roadmap proposal |
-
-**End-of-60 deliverable:** A first PRD or strategy memo for the early win, plus a draft 6-month roadmap. Share with manager and 2-3 key stakeholders for feedback before going wider.
-
-### Days 61-90: Deliver
-
-**Goal:** Deliver the early win. Set the operating cadence. Establish credibility.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 9-10 | Ship the early win (or be in delivery with visible progress) | First shipped artifact under your name |
-| Week 11 | Establish operating cadence: standups, planning, review, metrics | Cadence calendar published |
-| Week 12 | Write the 90-day retro: what worked, what changed, what&#x27;s next | 90-day retro memo |
-
-**End-of-90 deliverable:** A retrospective memo. What you learned, what changed in your thinking from days 1-30, what your point of view is now, what the next 90 days look like.
-
-## Early Wins: The Single Most Important Lever
-
-In Watkins&#x27; framework, early wins are how new leaders build credibility. A good early win is:
-
-- **Visible** -- People know it happened
-- **Aligned** -- It moves something the org already cares about
-- **Achievable** -- Within 90 days with available resources
-- **Yours** -- Your fingerprints are on it (no claiming team-default work)
-
-**Bad early wins:**
-
-- A reorg in week 6 (too soon, no trust earned)
-- A long-term strategy doc that lives on a wiki (not visible)
-- &quot;Cleaning up the backlog&quot; (invisible to anyone but the team)
-
-**Good early wins:**
-
-- Shipping a previously-stalled feature
-- Killing a project that everyone knew was zombie
-- Running a customer research project whose results land in an exec readout
-- Publishing a sharp competitive memo that becomes the team&#x27;s reference
-
-Identify candidates by week 6. Commit to one or two by week 8. Ship by week 12.
-
-## Stakeholder Mapping for Onboarding
-
-New-PM stakeholder mapping is different from steady-state mapping. The new PM is mapping *who knows what* and *whose trust matters*, not just *who has decision rights*.
-
-Three-tier model:
-
-| Tier | Description | Action |
-|------|-------------|--------|
-| Tier 1 | Direct manager, your team&#x27;s eng/design lead, your 1-2 most-engaged cross-functional partners | Weekly 1:1 for first 90 days |
-| Tier 2 | Skip-level, adjacent PM peers, key cross-functional stakeholders (sales, support, legal, marketing) | One 1:1 within first 30 days, monthly afterward |
-| Tier 3 | Anyone else useful for context (former PM of the area, customer success leads, exec sponsors) | One 1:1 within first 60 days |
-
-Aim for **25-35 distinct conversations** in the first 60 days. Less is too little context; more is performance.
-
-See `assets/stakeholder_map.md` for the full template.
-
-## The First-PRD Trap
-
-New PMs often want to author a big PRD in week 4 to &quot;make their mark&quot;. Don&#x27;t. A first PRD has unique requirements:
-
-1. **Smaller than you think.** Pick a tight scope you can ship inside the 90-day window.
-2. **Heavily co-authored.** Engineering and design leads should review the first draft before week 6.
-3. **Customer-evidenced.** Cite 2-3 customer interviews you ran yourself.
-4. **Aligned to existing strategy.** Don&#x27;t propose a left-turn in your first PRD; do that in months 6-9.
-5. **Short.** A great first PRD is 2-4 pages, not 10.
-
-See `assets/first_prd_template.md`.
-
-## Workflow
-
-1. **Pre-start (1-2 weeks before day 1).** Read public materials about the company, product, market. Reach out to your future manager for a 30-minute call.
-2. **Day 1.** Get logistics done. Send a &quot;what to expect from me / what I&#x27;d love from you&quot; intro note to the team.
-3. **Week 1.** Set up your stakeholder map. Schedule 1:1s with everyone in Tier 1. Get on customer calls.
-4. **Week 2-4.** Run the 30-day learning sprint. Resist the urge to make big proposals.
-5. **End of week 4.** Send the &quot;What I&#x27;m learning&quot; memo to your manager.
-6. **Week 5-8.** Build the point of view. Identify and align on early wins.
-7. **Week 9-12.** Deliver the early win. Set the cadence.
-8. **End of week 12.** Send the 90-day retro memo. Schedule the cycle-1 check-in with your manager.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| You feel pressure to &quot;make a mark&quot; in week 2 | Manager or skip-level signaled urgency early | Renegotiate the timeline; share Watkins&#x27; early-win principle; commit to a 90-day visible outcome rather than week-2 declarations |
-| You inherit a roadmap you don&#x27;t agree with | Predecessor committed to work before you arrived | Honor existing commitments through your learning period; propose adjustments in week 8 with evidence, not in week 2 with opinion |
-| Stakeholders give you conflicting accounts of &quot;what&#x27;s broken&quot; | Normal in months 1-2; reveals organizational tensions | Triangulate across 8-12 conversations before forming a view; the truth is usually the intersection |
-| You haven&#x27;t met your skip-level by week 4 | Calendar friction; new PM hesitant to ask | Ask your manager to introduce or directly request 30 minutes; skip-level visibility in the first 60 days is essential |
-| You spend all your time in meetings and can&#x27;t think | Over-scheduled in the learning phase | Block 2-hour daily focus windows; reduce 1:1 cadence to 30 min where possible; protect a &quot;no meetings&quot; half-day per week |
-| Your STARS diagnosis is wrong (e.g., you thought Turnaround but it&#x27;s Sustaining success) | Misread early signals; missed long-tenured staff voices | Re-interview 3-5 senior people in week 6; explicitly ask &quot;what should I not change in my first year?&quot;; revise diagnosis |
-| The early win you committed to is at risk of slipping | Over-scoped or hit unexpected dependencies | Cut scope ruthlessly; ship a smaller version on time rather than a bigger version late; the timeline is the win, not the size |
-| You haven&#x27;t sent the 90-day retro because it feels self-indulgent | Imposter syndrome around &quot;what did I actually do&quot; | Send it anyway; it forces clarity, signals to your manager that you self-reflect, and creates the artifact you&#x27;ll need for year-end review |
-
-## Success Criteria
-
-- By end of week 1: stakeholder map drafted, Tier 1 1:1s scheduled
-- By end of week 4: &quot;What I&#x27;m learning&quot; memo delivered to manager
-- By end of week 8: 25-35 stakeholder conversations completed; STARS diagnosis confirmed; early-win candidates aligned
-- By end of week 12: early win shipped or in visible delivery; operating cadence published; 90-day retro memo delivered
-- By end of 90 days: your manager can articulate your point of view in 2 sentences; at least 3 cross-functional partners would proactively recommend working with you
-- Your first PRD is short, customer-evidenced, and on the smaller end of scope you considered
+External: Watkins, M. *The First 90 Days* (HBR Press, 2013); Bock, L. *Work Rules!* (onboarding at scale).
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- 30-60-90 day plan for new PM roles
-- STARS situational diagnosis
-- Stakeholder mapping for onboarding
-- 1:1 question banks for the first quarter
-- First-PRD template calibrated for new-PM constraints
-- Early-win identification and execution
+**In Scope:** 30-60-90 day plan for new PM roles; STARS situational diagnosis; onboarding stakeholder mapping; first-quarter 1:1 question banks; first-PRD template; early-win identification and execution.
 
-**Out of Scope:**
-- Job-search or offer-evaluation prep -- use `personal-productivity/` and other career skills
-- Compensation negotiation -- separate workflow
-- Long-term career planning beyond the first 90 days -- use `pm-career-ladder/`
-- Onboarding for non-PM roles -- the structure transfers but specifics differ
+**Out of Scope:** Job-search or offer-evaluation prep (use `personal-productivity/`); compensation negotiation; long-term career planning beyond 90 days (`pm-career-ladder/`); onboarding for non-PM roles.
 
-**Important Caveats:**
-- The 90-day plan is a planning artifact, not a contract. Adjust as you learn.
-- &quot;Early wins&quot; must be calibrated to the company&#x27;s pace. A 90-day early win at a startup might be a 180-day early win at a 5,000-person enterprise.
-- Your manager&#x27;s expectations matter most. Align on the plan with them in week 1; do not surprise them in week 6 with a different direction.
+**Caveats:** The 90-day plan is a planning artifact, not a contract — adjust as you learn. Calibrate &quot;early wins&quot; to the company&#x27;s pace (a startup&#x27;s 90-day win may be an enterprise&#x27;s 180-day win). Your manager&#x27;s expectations matter most: align in week 1, do not surprise them in week 6.
 
 ## Integration Points
 
@@ -677,20 +536,6 @@ See `assets/first_prd_template.md`.
 | `senior-pm/stakeholder-mapper/` | Reuses | The stakeholder mapping technique scales beyond onboarding into steady-state |
 | `execution/create-prd/` | Feeds into | First-PRD template is a tighter version of the full PRD skill |
 | `discovery/interview-synthesis/` | Reuses | Customer interviews in week 5 use the same synthesis discipline as steady-state discovery |
-
-## References
-
-- `references/first-90-days-playbook.md` -- Watkins-grounded deep dive on STARS, early wins, securing wins
-- `assets/30_60_90_plan.md` -- Editable 30-60-90 plan template
-- `assets/stakeholder_map.md` -- Onboarding stakeholder map template
-- `assets/onboarding_1on1_questions.md` -- Question bank for the first 30 days of 1:1s
-- `assets/first_prd_template.md` -- Tighter PRD template for new-PM constraints
-
-External:
-
-- Watkins, M. (2013). *The First 90 Days*. Harvard Business Review Press.
-- Rachitsky, L. *Lenny&#x27;s Newsletter* -- PM onboarding posts and templates
-- Bock, L. *Work Rules!* -- onboarding at scale (Google&#x27;s approach)
 
 ---
 
@@ -747,191 +592,60 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A new PM&#x27;s first 90 days are disproportionately important. Trust earned in the first quarter compounds; missteps in the first quarter haunt for the next year. This skill is a structured 30-60-90 day plan that helps a new PM diagnose the situation, build relationships, identify early wins, and arrive at the end of the quarter with credibility and a clear point of view.
 
-The skill draws on Michael Watkins&#x27; *The First 90 Days*, the STARS situational diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success), and the public PM onboarding patterns popularized by Lenny Rachitsky and other senior product leaders.
+The skill draws on Michael Watkins&#x27; *The First 90 Days*, the STARS situational diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success), and the public PM onboarding patterns popularized by senior product leaders.
+
+### The arc in brief
+
+- **Days 1-30 (Learn):** build context; no major decisions, no big PRDs. End with a 1-page &quot;What I&#x27;m learning&quot; memo (STARS diagnosis + top-3 going well + top-3 risks).
+- **Days 31-60 (Plan):** form a point of view; interview customers yourself; identify 1-2 early wins; align manager + stakeholders. End with a first PRD/strategy memo and draft 6-month roadmap.
+- **Days 61-90 (Deliver):** ship the early win; set the operating cadence; write the 90-day retro memo.
+
+Diagnose the STARS situation first — a Sustaining-success area rewards 60+ days of listening; a Turnaround needs decisive action within 30. Misreading the situation is the most common new-PM mistake.
 
 ### When to Use
 
-- **New job at a new company** -- Use the full 90-day plan from week 1.
-- **Internal transfer to a new team** -- Compress to 60 days but keep the structure.
-- **New scope within the same team** -- Use the 30-day learning sprint only.
-- **Returning from extended leave (3+ months)** -- Use a modified 30-day plan to re-orient.
+- **New job at a new company** -- use the full 90-day plan from week 1.
+- **Internal transfer to a new team** -- compress to 60 days but keep the structure.
+- **New scope within the same team** -- use the 30-day learning sprint only.
+- **Returning from extended leave (3+ months)** -- use a modified 30-day plan to re-orient.
 
 ### When NOT to Use
 
 - First week of a routine role (no major scope change) -- this is overkill.
-- Interim leadership (acting role &lt;60 days) -- run a different playbook focused on stability, not learning.
+- Interim leadership (acting role &lt;60 days) -- run a stability-focused playbook instead.
 
-## STARS: Diagnose the Situation Before Acting
+## Clarify First
 
-Watkins&#x27; STARS framework forces you to ask: *what kind of situation am I entering?* The answer determines what early actions are appropriate.
+Before building the onboarding plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Type | What it means | First-90-day priorities |
-|------|---------------|-------------------------|
-| **S**tart-up | Building from scratch (new product, new team) | Move fast, hire, set direction, prove the idea |
-| **T**urnaround | Failing product / team that needs rescue | Diagnose, cut, set a new direction, change personnel if needed |
-| **A**ccelerated growth | Working, growing fast, breaking under scale | Build operating muscle, hire, design org for growth |
-| **R**ealignment | Apparently successful but losing ground | Confront denial, align on the gap, make incremental change |
-| **S**ustaining success | Working well, must be preserved and refined | Listen long before acting, do no harm, preserve trust |
+- [ ] **STARS situation** — Start-up, Turnaround, Accelerated-growth, Realignment, or Sustaining-success (sets the listen-vs-act balance; misreading it is the top new-PM mistake)
+- [ ] **Transition type** — new company, internal transfer, new scope, or return from leave (chooses full-90 vs compressed-60 vs 30-day plan)
+- [ ] **Manager&#x27;s 90-day expectations** — what &quot;success&quot; means to them (anchors early-win selection and the whole arc)
+- [ ] **Scope and key partners** — what the PM owns and who the critical stakeholders are (drives the stakeholder tiers and first-PRD)
 
-**Why this matters:** A new PM walking into a Sustaining-success area should listen for at least 60 days. The same PM in a Turnaround should act within 30. Misreading the situation is the most common new-PM mistake.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### How to diagnose
+## References
 
-In your first two weeks, ask every stakeholder:
+Load the reference that matches the task; keep this file lean and pull detail on demand.
 
-1. &quot;What is going well that you most want to preserve?&quot;
-2. &quot;What is broken or breaking?&quot;
-3. &quot;What changes would you most want from this role?&quot;
-4. &quot;What would derail me in the first six months?&quot;
-5. &quot;Who else should I be talking to about this?&quot;
+- **[references/30-60-90-plan-and-tactics.md](references/30-60-90-plan-and-tactics.md)** — full STARS diagnostic table and diagnosis questions, the week-by-week 30-60-90 plan with outputs, the early-wins playbook, onboarding stakeholder tiers, the first-PRD rules, the run-the-quarter workflow, troubleshooting, and success criteria. Read this when actually building or running the plan.
+- **[references/first-90-days-playbook.md](references/first-90-days-playbook.md)** — Watkins-grounded deep dive: the transition trap, STARS in depth, securing early wins, the five-conversations framework, remote/hybrid onboarding, and the 90-day retro memo structure. Read for the underlying theory.
+- **[references/red-flags.md](references/red-flags.md)** — bad-vs-good examples of early-tenure decisions. Scan after producing a 30-60-90 plan, stakeholder map, or onboarding artifact.
+- `assets/30_60_90_plan.md` — editable 30-60-90 plan template.
+- `assets/stakeholder_map.md` — onboarding stakeholder map template.
+- `assets/onboarding_1on1_questions.md` — question bank for the first 30 days of 1:1s.
+- `assets/first_prd_template.md` — tighter PRD template for new-PM constraints.
 
-Patterns across 8-12 conversations reveal the STARS type.
-
-## The 30-60-90 Day Plan
-
-### Days 1-30: Learn
-
-**Goal:** Build context. No major decisions. No big PRDs. Listen, observe, ask.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 1 | Logistics, manager 1:1, team intros | Calendar set up, stakeholder shortlist, manager-aligned 90-day plan draft |
-| Week 2 | Customer immersion: read research, listen to sales/support calls | Customer-segment map, top-5 customer pain hypotheses |
-| Week 3 | Product immersion: use the product daily, read PRDs, walk the metrics tree | Product-area map, baseline metrics dashboard |
-| Week 4 | Team immersion: 1:1 with every engineer and designer in the immediate team | Team strength/gap map, draft of STARS diagnosis |
-
-**End-of-30 deliverable:** A 1-page &quot;What I&#x27;m learning&quot; memo to your manager. Includes your STARS diagnosis, top-3 things going well, top-3 risks, and questions you still need to answer.
-
-### Days 31-60: Plan
-
-**Goal:** Build a point of view. Identify the early-win candidates. Start to align stakeholders on direction.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 5 | Deepen customer evidence: interview 3-5 customers yourself | Customer insight memo |
-| Week 6 | Competitive scan + market context | Competitive 2x2 or summary |
-| Week 7 | Identify 1-2 early wins (visible, achievable in &lt;90 days) | Early-win proposal with cost/effort |
-| Week 8 | Align manager + key stakeholders on early wins and 6-month direction | Aligned roadmap proposal |
-
-**End-of-60 deliverable:** A first PRD or strategy memo for the early win, plus a draft 6-month roadmap. Share with manager and 2-3 key stakeholders for feedback before going wider.
-
-### Days 61-90: Deliver
-
-**Goal:** Deliver the early win. Set the operating cadence. Establish credibility.
-
-| Week | Focus | Outputs |
-|------|-------|---------|
-| Week 9-10 | Ship the early win (or be in delivery with visible progress) | First shipped artifact under your name |
-| Week 11 | Establish operating cadence: standups, planning, review, metrics | Cadence calendar published |
-| Week 12 | Write the 90-day retro: what worked, what changed, what&#x27;s next | 90-day retro memo |
-
-**End-of-90 deliverable:** A retrospective memo. What you learned, what changed in your thinking from days 1-30, what your point of view is now, what the next 90 days look like.
-
-## Early Wins: The Single Most Important Lever
-
-In Watkins&#x27; framework, early wins are how new leaders build credibility. A good early win is:
-
-- **Visible** -- People know it happened
-- **Aligned** -- It moves something the org already cares about
-- **Achievable** -- Within 90 days with available resources
-- **Yours** -- Your fingerprints are on it (no claiming team-default work)
-
-**Bad early wins:**
-
-- A reorg in week 6 (too soon, no trust earned)
-- A long-term strategy doc that lives on a wiki (not visible)
-- &quot;Cleaning up the backlog&quot; (invisible to anyone but the team)
-
-**Good early wins:**
-
-- Shipping a previously-stalled feature
-- Killing a project that everyone knew was zombie
-- Running a customer research project whose results land in an exec readout
-- Publishing a sharp competitive memo that becomes the team&#x27;s reference
-
-Identify candidates by week 6. Commit to one or two by week 8. Ship by week 12.
-
-## Stakeholder Mapping for Onboarding
-
-New-PM stakeholder mapping is different from steady-state mapping. The new PM is mapping *who knows what* and *whose trust matters*, not just *who has decision rights*.
-
-Three-tier model:
-
-| Tier | Description | Action |
-|------|-------------|--------|
-| Tier 1 | Direct manager, your team&#x27;s eng/design lead, your 1-2 most-engaged cross-functional partners | Weekly 1:1 for first 90 days |
-| Tier 2 | Skip-level, adjacent PM peers, key cross-functional stakeholders (sales, support, legal, marketing) | One 1:1 within first 30 days, monthly afterward |
-| Tier 3 | Anyone else useful for context (former PM of the area, customer success leads, exec sponsors) | One 1:1 within first 60 days |
-
-Aim for **25-35 distinct conversations** in the first 60 days. Less is too little context; more is performance.
-
-See `assets/stakeholder_map.md` for the full template.
-
-## The First-PRD Trap
-
-New PMs often want to author a big PRD in week 4 to &quot;make their mark&quot;. Don&#x27;t. A first PRD has unique requirements:
-
-1. **Smaller than you think.** Pick a tight scope you can ship inside the 90-day window.
-2. **Heavily co-authored.** Engineering and design leads should review the first draft before week 6.
-3. **Customer-evidenced.** Cite 2-3 customer interviews you ran yourself.
-4. **Aligned to existing strategy.** Don&#x27;t propose a left-turn in your first PRD; do that in months 6-9.
-5. **Short.** A great first PRD is 2-4 pages, not 10.
-
-See `assets/first_prd_template.md`.
-
-## Workflow
-
-1. **Pre-start (1-2 weeks before day 1).** Read public materials about the company, product, market. Reach out to your future manager for a 30-minute call.
-2. **Day 1.** Get logistics done. Send a &quot;what to expect from me / what I&#x27;d love from you&quot; intro note to the team.
-3. **Week 1.** Set up your stakeholder map. Schedule 1:1s with everyone in Tier 1. Get on customer calls.
-4. **Week 2-4.** Run the 30-day learning sprint. Resist the urge to make big proposals.
-5. **End of week 4.** Send the &quot;What I&#x27;m learning&quot; memo to your manager.
-6. **Week 5-8.** Build the point of view. Identify and align on early wins.
-7. **Week 9-12.** Deliver the early win. Set the cadence.
-8. **End of week 12.** Send the 90-day retro memo. Schedule the cycle-1 check-in with your manager.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| You feel pressure to &quot;make a mark&quot; in week 2 | Manager or skip-level signaled urgency early | Renegotiate the timeline; share Watkins&#x27; early-win principle; commit to a 90-day visible outcome rather than week-2 declarations |
-| You inherit a roadmap you don&#x27;t agree with | Predecessor committed to work before you arrived | Honor existing commitments through your learning period; propose adjustments in week 8 with evidence, not in week 2 with opinion |
-| Stakeholders give you conflicting accounts of &quot;what&#x27;s broken&quot; | Normal in months 1-2; reveals organizational tensions | Triangulate across 8-12 conversations before forming a view; the truth is usually the intersection |
-| You haven&#x27;t met your skip-level by week 4 | Calendar friction; new PM hesitant to ask | Ask your manager to introduce or directly request 30 minutes; skip-level visibility in the first 60 days is essential |
-| You spend all your time in meetings and can&#x27;t think | Over-scheduled in the learning phase | Block 2-hour daily focus windows; reduce 1:1 cadence to 30 min where possible; protect a &quot;no meetings&quot; half-day per week |
-| Your STARS diagnosis is wrong (e.g., you thought Turnaround but it&#x27;s Sustaining success) | Misread early signals; missed long-tenured staff voices | Re-interview 3-5 senior people in week 6; explicitly ask &quot;what should I not change in my first year?&quot;; revise diagnosis |
-| The early win you committed to is at risk of slipping | Over-scoped or hit unexpected dependencies | Cut scope ruthlessly; ship a smaller version on time rather than a bigger version late; the timeline is the win, not the size |
-| You haven&#x27;t sent the 90-day retro because it feels self-indulgent | Imposter syndrome around &quot;what did I actually do&quot; | Send it anyway; it forces clarity, signals to your manager that you self-reflect, and creates the artifact you&#x27;ll need for year-end review |
-
-## Success Criteria
-
-- By end of week 1: stakeholder map drafted, Tier 1 1:1s scheduled
-- By end of week 4: &quot;What I&#x27;m learning&quot; memo delivered to manager
-- By end of week 8: 25-35 stakeholder conversations completed; STARS diagnosis confirmed; early-win candidates aligned
-- By end of week 12: early win shipped or in visible delivery; operating cadence published; 90-day retro memo delivered
-- By end of 90 days: your manager can articulate your point of view in 2 sentences; at least 3 cross-functional partners would proactively recommend working with you
-- Your first PRD is short, customer-evidenced, and on the smaller end of scope you considered
+External: Watkins, M. *The First 90 Days* (HBR Press, 2013); Bock, L. *Work Rules!* (onboarding at scale).
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- 30-60-90 day plan for new PM roles
-- STARS situational diagnosis
-- Stakeholder mapping for onboarding
-- 1:1 question banks for the first quarter
-- First-PRD template calibrated for new-PM constraints
-- Early-win identification and execution
+**In Scope:** 30-60-90 day plan for new PM roles; STARS situational diagnosis; onboarding stakeholder mapping; first-quarter 1:1 question banks; first-PRD template; early-win identification and execution.
 
-**Out of Scope:**
-- Job-search or offer-evaluation prep -- use `personal-productivity/` and other career skills
-- Compensation negotiation -- separate workflow
-- Long-term career planning beyond the first 90 days -- use `pm-career-ladder/`
-- Onboarding for non-PM roles -- the structure transfers but specifics differ
+**Out of Scope:** Job-search or offer-evaluation prep (use `personal-productivity/`); compensation negotiation; long-term career planning beyond 90 days (`pm-career-ladder/`); onboarding for non-PM roles.
 
-**Important Caveats:**
-- The 90-day plan is a planning artifact, not a contract. Adjust as you learn.
-- &quot;Early wins&quot; must be calibrated to the company&#x27;s pace. A 90-day early win at a startup might be a 180-day early win at a 5,000-person enterprise.
-- Your manager&#x27;s expectations matter most. Align on the plan with them in week 1; do not surprise them in week 6 with a different direction.
+**Caveats:** The 90-day plan is a planning artifact, not a contract — adjust as you learn. Calibrate &quot;early wins&quot; to the company&#x27;s pace (a startup&#x27;s 90-day win may be an enterprise&#x27;s 180-day win). Your manager&#x27;s expectations matter most: align in week 1, do not surprise them in week 6.
 
 ## Integration Points
 
@@ -943,20 +657,6 @@ See `assets/first_prd_template.md`.
 | `senior-pm/stakeholder-mapper/` | Reuses | The stakeholder mapping technique scales beyond onboarding into steady-state |
 | `execution/create-prd/` | Feeds into | First-PRD template is a tighter version of the full PRD skill |
 | `discovery/interview-synthesis/` | Reuses | Customer interviews in week 5 use the same synthesis discipline as steady-state discovery |
-
-## References
-
-- `references/first-90-days-playbook.md` -- Watkins-grounded deep dive on STARS, early wins, securing wins
-- `assets/30_60_90_plan.md` -- Editable 30-60-90 plan template
-- `assets/stakeholder_map.md` -- Onboarding stakeholder map template
-- `assets/onboarding_1on1_questions.md` -- Question bank for the first 30 days of 1:1s
-- `assets/first_prd_template.md` -- Tighter PRD template for new-PM constraints
-
-External:
-
-- Watkins, M. (2013). *The First 90 Days*. Harvard Business Review Press.
-- Rachitsky, L. *Lenny&#x27;s Newsletter* -- PM onboarding posts and templates
-- Bock, L. *Work Rules!* -- onboarding at scale (Google&#x27;s approach)
 
 ---
 
@@ -1043,7 +743,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-onboarding/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

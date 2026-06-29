@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Prioritization Frameworks</h1>
     <p class="page-subtitle">Comprehensive prioritization framework expert covering 9 methods with scoring tools and decision guidance for product managers.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Pm Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -397,20 +397,10 @@ Comprehensive prioritization framework expert covering 9 methods with scoring to
 
 A comprehensive reference to 9 prioritization frameworks with automated scoring, ranking, and guidance on which framework to use in which situation. The core principle: prioritize problems (opportunities), not features. Features are solutions to problems. If you prioritize features directly, you ski
 
-## Your Key Capabilities
-- When to Use
-- 1. Opportunity Score (Recommended for Customer Problems)
-- 2. ICE -- Impact x Confidence x Ease
-- 3. RICE -- (Reach x Impact x Confidence) / Effort
-- 4. Eisenhower Matrix
-- 5. Impact vs Effort (2x2 Matrix)
-
 ## Frameworks &amp; Templates You Know
 - Prioritization Framework Expert
-- Framework Decision Tree
-- Use this to pick the right framework for your situation:
-- The 9 Frameworks
-- Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
+- - Framework selection guidance via Decision Tree
+- - Demo data for each framework to illustrate input/output formats
 
 ## How to Help
 When the user asks for help in this domain:
@@ -434,20 +424,10 @@ Comprehensive prioritization framework expert covering 9 methods with scoring to
 
 A comprehensive reference to 9 prioritization frameworks with automated scoring, ranking, and guidance on which framework to use in which situation. The core principle: prioritize problems (opportunities), not features. Features are solutions to problems. If you prioritize features directly, you ski
 
-## Your Key Capabilities
-- When to Use
-- 1. Opportunity Score (Recommended for Customer Problems)
-- 2. ICE -- Impact x Confidence x Ease
-- 3. RICE -- (Reach x Impact x Confidence) / Effort
-- 4. Eisenhower Matrix
-- 5. Impact vs Effort (2x2 Matrix)
-
 ## Frameworks &amp; Templates You Know
 - Prioritization Framework Expert
-- Framework Decision Tree
-- Use this to pick the right framework for your situation:
-- The 9 Frameworks
-- Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
+- - Framework selection guidance via Decision Tree
+- - Demo data for each framework to illustrate input/output formats
 
 ## How to Help
 When the user asks for help in this domain:
@@ -481,226 +461,48 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A comprehensive reference to 9 prioritization frameworks with automated scoring, ranking, and guidance on which framework to use in which situation. The core principle: prioritize problems (opportunities), not features. Features are solutions to problems. If you prioritize features directly, you skip the step of understanding whether the problem is worth solving.
 
-### When to Use
+## Core Capabilities
+
+- **9 frameworks** — RICE, ICE, Opportunity Score, Eisenhower, Impact vs Effort, Risk vs Reward, Kano, Weighted Decision Matrix, MoSCoW (full definitions, formulas, and worked examples in `references/frameworks-catalog.md`).
+- **Framework selection** — a decision tree maps the thing you are prioritizing (problems, features, personal tasks, high-uncertainty bets) to the right method.
+- **Automated scoring** — `prioritization_scorer.py` ranks items for RICE, ICE, Opportunity, MoSCoW, and Weighted Decision Matrix.
+- **Two-step discipline** — prioritize problems first (Opportunity Score), then prioritize solutions (RICE/ICE).
+
+## When to Use
 
 - **Backlog Grooming** -- Too many items, need to rank them objectively.
 - **Quarterly Planning** -- Deciding which initiatives to invest in.
 - **Stakeholder Alignment** -- Need a structured way to resolve competing priorities.
 - **Feature Triage** -- Quick sorting of a long list into actionable categories.
 
-## Framework Decision Tree
+## Clarify First
 
-Use this to pick the right framework for your situation:
+Before scoring, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-```
-START: What are you prioritizing?
-  |
-  +-- Customer problems/opportunities
-  |     -&gt; Opportunity Score (recommended)
-  |
-  +-- Features or initiatives
-  |     |
-  |     +-- Need a quick sort (&lt; 15 items)?
-  |     |     -&gt; ICE or Impact vs Effort
-  |     |
-  |     +-- Need rigorous scoring (15+ items)?
-  |     |     -&gt; RICE
-  |     |
-  |     +-- Need stakeholder buy-in on criteria?
-  |     |     -&gt; Weighted Decision Matrix
-  |     |
-  |     +-- Need to categorize requirements?
-  |           -&gt; MoSCoW
-  |
-  +-- Personal PM tasks
-  |     -&gt; Eisenhower Matrix
-  |
-  +-- High-uncertainty initiatives
-  |     -&gt; Risk vs Reward
-  |
-  +-- Understanding user expectations (not prioritizing)
-        -&gt; Kano Model
-```
+- [ ] **What you&#x27;re ranking** — problems/opportunities vs features vs personal tasks (the decision tree picks the framework from this)
+- [ ] **Framework** — rice / ice / opportunity / moscow / weighted (each requires different score fields and emits different rankings)
+- [ ] **Quality of the estimates** — measured data vs guesses for reach/impact (guesses make RICE/ICE precision misleading; switch to a coarser method)
 
-## The 9 Frameworks
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### 1. Opportunity Score (Recommended for Customer Problems)
-
-**Source:** Dan Olsen, *Lean Product Playbook*
-
-**Formula:** `Score = Importance x (1 - Satisfaction)`
-
-- **Importance** (0-10): How important is this problem to the customer?
-- **Satisfaction** (0-1): How well do existing solutions satisfy this need? (0 = not at all, 1 = perfectly)
-
-**Why it works:** It identifies the biggest gaps between what customers need and what they currently have. High importance + low satisfaction = high opportunity.
-
-**Example:**
-
-| Problem | Importance | Satisfaction | Score |
-|---------|-----------|-------------|-------|
-| Finding products quickly | 9 | 0.3 | 6.3 |
-| Comparing prices | 7 | 0.8 | 1.4 |
-| Tracking order status | 8 | 0.6 | 3.2 |
-
-&quot;Finding products quickly&quot; scores highest because it is very important and poorly solved today.
-
-### 2. ICE -- Impact x Confidence x Ease
-
-**Best for:** Quick prioritization of a short list (under 15 items).
-
-**Formula:** `Score = Impact x Confidence x Ease`
-
-All three scored 1-10:
-- **Impact:** How much will this move the target metric?
-- **Confidence:** How sure are we about the impact estimate?
-- **Ease:** How easy is this to implement? (10 = trivial, 1 = massive effort)
-
-**Strengths:** Fast, simple, includes uncertainty.
-**Weakness:** Subjective. Different people give different scores. Best used as a starting point for discussion, not a final answer.
-
-### 3. RICE -- (Reach x Impact x Confidence) / Effort
-
-**Best for:** Rigorous prioritization of a longer list.
-
-**Formula:** `Score = (Reach x Impact x Confidence) / Effort`
-
-- **Reach:** How many users/customers will this affect in a given time period? (number)
-- **Impact:** How much will it affect each user? (3 = massive, 2 = high, 1 = medium, 0.5 = low, 0.25 = minimal)
-- **Confidence:** How sure are we? (100% = high, 80% = medium, 50% = low)
-- **Effort:** Person-months of work required (number)
-
-**Strengths:** Reach adds a dimension that ICE misses. Effort is estimated in real units, not abstract scores.
-**Weakness:** Requires more data (reach estimates, effort sizing).
-
-### 4. Eisenhower Matrix
-
-**Best for:** Personal task management for PMs, not product prioritization.
-
-**Quadrants:**
-
-|  | Urgent | Not Urgent |
-|--|--------|------------|
-| **Important** | Do First | Schedule |
-| **Not Important** | Delegate | Eliminate |
-
-- **Q1 (Do First):** Crisis, deadline-driven. Handle immediately.
-- **Q2 (Schedule):** Strategic work, planning, prevention. This is where PMs should spend most of their time.
-- **Q3 (Delegate):** Interruptions, some meetings, some emails. Hand off if possible.
-- **Q4 (Eliminate):** Time-wasters, unnecessary meetings. Stop doing these.
-
-### 5. Impact vs Effort (2x2 Matrix)
-
-**Best for:** Quick visual triage in a group setting.
-
-**Quadrants:**
-
-|  | Low Effort | High Effort |
-|--|-----------|-------------|
-| **High Impact** | Quick Wins (do first) | Major Projects (plan carefully) |
-| **Low Impact** | Fill-ins (do if time allows) | Money Pits (avoid) |
-
-**How to use:** Plot items on a whiteboard. Discuss placement. The conversation matters more than the exact position.
-
-### 6. Risk vs Reward
-
-**Best for:** Initiatives with significant uncertainty.
-
-**Extension of Impact vs Effort** that adds an uncertainty dimension:
-
-- **Reward** = Expected impact if successful
-- **Risk** = Probability of failure x cost of failure
-
-**Quadrants:**
-
-|  | Low Risk | High Risk |
-|--|---------|-----------|
-| **High Reward** | Safe Bets (prioritize) | Bold Bets (invest selectively) |
-| **Low Reward** | Incremental (batch) | Avoid |
-
-### 7. Kano Model
-
-**Best for:** Understanding customer expectations. Not for prioritization directly.
-
-**Categories:**
-
-- **Must-Be (Basic):** Customers expect these. Absence causes dissatisfaction. Presence does not cause delight. (Example: a login page works.)
-- **One-Dimensional (Performance):** More is better, linearly. (Example: faster page loads = happier users.)
-- **Attractive (Delighters):** Unexpected features that create excitement. Absence does not cause dissatisfaction. (Example: automatic dark mode based on system setting.)
-- **Indifferent:** Customers do not care either way.
-- **Reverse:** Some customers actively dislike this feature.
-
-**Use Kano to understand**, then use another framework (RICE, ICE) to prioritize.
-
-### 8. Weighted Decision Matrix
-
-**Best for:** Multi-factor decisions that need stakeholder buy-in.
-
-**Process:**
-1. Define criteria (e.g., customer impact, revenue potential, technical feasibility, strategic alignment).
-2. Assign weights to each criterion (must sum to 100%).
-3. Score each option against each criterion (1-5 or 1-10).
-4. Multiply scores by weights and sum.
-5. Rank by total weighted score.
-
-**Strengths:** Transparent, auditable, gets stakeholders to agree on criteria before scoring.
-**Weakness:** Time-consuming. Best for 5-10 high-stakes decisions, not 50-item backlogs.
-
-### 9. MoSCoW
-
-**Best for:** Requirements categorization within a fixed scope.
-
-**Categories:**
-- **Must Have:** Non-negotiable. Without these, the release has no value.
-- **Should Have:** Important but not critical. Painful to leave out but the release still works.
-- **Could Have:** Desirable. Include if time and resources allow.
-- **Won&#x27;t Have (this time):** Explicitly out of scope. Acknowledged but deferred.
-
-**Rule of thumb:** Must-Haves should be no more than 60% of the total effort. If everything is a Must-Have, nothing is.
-
-## Core Principle: Prioritize Problems, Not Features
-
-Features are solutions. Problems are what matter. Two teams can build different features to solve the same problem. If you prioritize features, you lock in a solution before understanding the problem space.
-
-**Workflow:**
-1. List customer problems (use Opportunity Score to rank them).
-2. Pick the top problems to solve.
-3. Generate multiple solution ideas for each problem.
-4. Prioritize solutions using RICE or ICE.
-5. Build the highest-scoring solutions.
-
-This two-step approach (prioritize problems, then prioritize solutions) produces better outcomes than a single pass over a feature list.
-
-## Tools
+## Quick Start
 
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `prioritization_scorer.py` | Score and rank items | `python scripts/prioritization_scorer.py --input items.json --framework rice` |
 | `prioritization_scorer.py` | Demo with sample data | `python scripts/prioritization_scorer.py --demo --framework rice` |
 
-Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
+Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`. See `references/tool-and-troubleshooting.md` for input JSON schemas and flags.
 
-## Troubleshooting
+## References
 
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| RICE scores dominated by high-reach items regardless of impact | Reach values vary by orders of magnitude, drowning out other factors | Normalize reach to a consistent time window (e.g., users per quarter); consider log-scale for extreme ranges |
-| ICE scores feel arbitrary and inconsistent across raters | No calibration on 1-10 scale definitions; different people use different anchors | Define what 1, 5, and 10 mean for each dimension; score independently first, then discuss outliers |
-| MoSCoW results in 80% Must-Haves | Team reluctant to deprioritize anything, or no effort constraint applied | Enforce the rule: Must-Haves should be no more than 60% of total effort; make the constraint visible |
-| Opportunity Score returns 0 for satisfied needs | Satisfaction scored at 1.0 (fully satisfied), zeroing out the score | Verify satisfaction is on 0-1 scale; values above 1 are auto-converted from 0-10 scale |
-| Weighted Decision Matrix produces tied scores | Criteria weights are too evenly distributed, or scoring lacks variance | Increase weight differentiation; force-rank criteria by importance; use the full 1-10 scoring range |
-| Framework selection is itself a bottleneck | Team spends time debating which framework to use instead of scoring | Use the Decision Tree in this skill; default to RICE for 15+ items with data, ICE for quick sorts under 15 items |
-| Stakeholders disagree with prioritization results | Framework selected does not match stakeholder values, or inputs not transparent | Use Weighted Decision Matrix when multiple stakeholder groups are involved; agree on criteria and weights before scoring |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Success Criteria
-
-- Prioritization framework selected using the Decision Tree, not by habit or preference
-- All items scored with consistent definitions for each dimension (documented before scoring begins)
-- Results reviewed and discussed as a team, not treated as a mechanical ranking
-- Top-priority items have clear next steps (assigned to sprints, PRDs, or experiments)
-- Prioritization is repeated at least quarterly, or when significant new information arrives
-- The two-step approach is followed: prioritize problems first (Opportunity Score), then prioritize solutions (RICE/ICE)
-- MoSCoW Must-Haves never exceed 60% of total effort for a release
+- **[references/frameworks-catalog.md](references/frameworks-catalog.md)** — full definitions, formulas, strengths/weaknesses, and worked examples for all 9 frameworks, the framework decision tree, and the &quot;prioritize problems, not features&quot; principle. Read when choosing or applying a specific framework.
+- **[references/prioritization-guide.md](references/prioritization-guide.md)** — detailed formulas, decision tree, and facilitation tips. Read when facilitating a scoring session with a group.
+- **[references/red-flags.md](references/red-flags.md)** — anti-patterns and warning signs in prioritization practice. Read when a process feels off or results are being gamed.
+- **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `prioritization_scorer.py` flags, per-framework input JSON schemas, troubleshooting table, and success criteria. Read when running the tool or diagnosing scoring problems.
+- **[assets/prioritization_matrix_template.md](assets/prioritization_matrix_template.md)** — scoring templates for each framework. Use when capturing a manual scoring exercise.
 
 ## Scope &amp; Limitations
 
@@ -719,7 +521,7 @@ Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
 **Important Caveats:**
 - No framework produces a &quot;correct&quot; answer. Prioritization frameworks are decision-support tools that structure conversation, not algorithms that replace judgment.
 - RICE and ICE are best for data-rich environments. If your reach and impact estimates are pure guesses, the precision of the formula is misleading.
-- The most successful teams combine frameworks: start with Opportunity Score to identify the right problems, then use RICE to rank solutions. Single-framework teams often prioritize solutions to the wrong problems.
+- The most successful teams combine frameworks: start with Opportunity Score to identify the right problems, then use RICE to rank solutions.
 - For teams with 50+ people or multiple stakeholder groups, use WSJF or Weighted Decision Matrix with agreed criteria to ensure buy-in.
 
 ## Integration Points
@@ -732,32 +534,6 @@ Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
 | `discovery/identify-assumptions/` | Receives from | Assumption risk scores inform item confidence ratings in RICE/ICE |
 | `scrum-master/` | Feeds into | Prioritized backlog items feed sprint planning commitment decisions |
 | `senior-pm/` | Receives from | Portfolio-level WSJF or strategic priorities constrain team-level prioritization |
-
-## Tool Reference
-
-### prioritization_scorer.py
-
-Scores and ranks items using 5 supported prioritization frameworks. Outputs sorted results with scores, formulas, and category breakdowns.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required, mutually exclusive with --demo) | Path to JSON file containing items to score |
-| `--demo` | flag | off | Run scoring on built-in demo data for the selected framework |
-| `--framework` | choice | (required) | Framework to use: `rice`, `ice`, `opportunity`, `moscow`, `weighted` |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input JSON schema by framework:**
-
-- **RICE:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;reach&quot;: N, &quot;impact&quot;: N, &quot;confidence&quot;: N, &quot;effort&quot;: N}]}`
-- **ICE:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;impact&quot;: N, &quot;confidence&quot;: N, &quot;ease&quot;: N}]}`
-- **Opportunity:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;importance&quot;: N, &quot;satisfaction&quot;: N}]}`
-- **MoSCoW:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;category&quot;: &quot;must|should|could|wont&quot;, &quot;effort&quot;: N}]}`
-- **Weighted:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;scores&quot;: {&quot;criterion&quot;: N}}], &quot;criteria&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;weight&quot;: N}]}`
-
-## References
-
-- `references/prioritization-guide.md` -- Detailed formulas, decision tree, and facilitation tips
-- `assets/prioritization_matrix_template.md` -- Scoring templates for each framework
 
 ---
 
@@ -814,226 +590,48 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A comprehensive reference to 9 prioritization frameworks with automated scoring, ranking, and guidance on which framework to use in which situation. The core principle: prioritize problems (opportunities), not features. Features are solutions to problems. If you prioritize features directly, you skip the step of understanding whether the problem is worth solving.
 
-### When to Use
+## Core Capabilities
+
+- **9 frameworks** — RICE, ICE, Opportunity Score, Eisenhower, Impact vs Effort, Risk vs Reward, Kano, Weighted Decision Matrix, MoSCoW (full definitions, formulas, and worked examples in `references/frameworks-catalog.md`).
+- **Framework selection** — a decision tree maps the thing you are prioritizing (problems, features, personal tasks, high-uncertainty bets) to the right method.
+- **Automated scoring** — `prioritization_scorer.py` ranks items for RICE, ICE, Opportunity, MoSCoW, and Weighted Decision Matrix.
+- **Two-step discipline** — prioritize problems first (Opportunity Score), then prioritize solutions (RICE/ICE).
+
+## When to Use
 
 - **Backlog Grooming** -- Too many items, need to rank them objectively.
 - **Quarterly Planning** -- Deciding which initiatives to invest in.
 - **Stakeholder Alignment** -- Need a structured way to resolve competing priorities.
 - **Feature Triage** -- Quick sorting of a long list into actionable categories.
 
-## Framework Decision Tree
+## Clarify First
 
-Use this to pick the right framework for your situation:
+Before scoring, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-```
-START: What are you prioritizing?
-  |
-  +-- Customer problems/opportunities
-  |     -&gt; Opportunity Score (recommended)
-  |
-  +-- Features or initiatives
-  |     |
-  |     +-- Need a quick sort (&lt; 15 items)?
-  |     |     -&gt; ICE or Impact vs Effort
-  |     |
-  |     +-- Need rigorous scoring (15+ items)?
-  |     |     -&gt; RICE
-  |     |
-  |     +-- Need stakeholder buy-in on criteria?
-  |     |     -&gt; Weighted Decision Matrix
-  |     |
-  |     +-- Need to categorize requirements?
-  |           -&gt; MoSCoW
-  |
-  +-- Personal PM tasks
-  |     -&gt; Eisenhower Matrix
-  |
-  +-- High-uncertainty initiatives
-  |     -&gt; Risk vs Reward
-  |
-  +-- Understanding user expectations (not prioritizing)
-        -&gt; Kano Model
-```
+- [ ] **What you&#x27;re ranking** — problems/opportunities vs features vs personal tasks (the decision tree picks the framework from this)
+- [ ] **Framework** — rice / ice / opportunity / moscow / weighted (each requires different score fields and emits different rankings)
+- [ ] **Quality of the estimates** — measured data vs guesses for reach/impact (guesses make RICE/ICE precision misleading; switch to a coarser method)
 
-## The 9 Frameworks
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### 1. Opportunity Score (Recommended for Customer Problems)
-
-**Source:** Dan Olsen, *Lean Product Playbook*
-
-**Formula:** `Score = Importance x (1 - Satisfaction)`
-
-- **Importance** (0-10): How important is this problem to the customer?
-- **Satisfaction** (0-1): How well do existing solutions satisfy this need? (0 = not at all, 1 = perfectly)
-
-**Why it works:** It identifies the biggest gaps between what customers need and what they currently have. High importance + low satisfaction = high opportunity.
-
-**Example:**
-
-| Problem | Importance | Satisfaction | Score |
-|---------|-----------|-------------|-------|
-| Finding products quickly | 9 | 0.3 | 6.3 |
-| Comparing prices | 7 | 0.8 | 1.4 |
-| Tracking order status | 8 | 0.6 | 3.2 |
-
-&quot;Finding products quickly&quot; scores highest because it is very important and poorly solved today.
-
-### 2. ICE -- Impact x Confidence x Ease
-
-**Best for:** Quick prioritization of a short list (under 15 items).
-
-**Formula:** `Score = Impact x Confidence x Ease`
-
-All three scored 1-10:
-- **Impact:** How much will this move the target metric?
-- **Confidence:** How sure are we about the impact estimate?
-- **Ease:** How easy is this to implement? (10 = trivial, 1 = massive effort)
-
-**Strengths:** Fast, simple, includes uncertainty.
-**Weakness:** Subjective. Different people give different scores. Best used as a starting point for discussion, not a final answer.
-
-### 3. RICE -- (Reach x Impact x Confidence) / Effort
-
-**Best for:** Rigorous prioritization of a longer list.
-
-**Formula:** `Score = (Reach x Impact x Confidence) / Effort`
-
-- **Reach:** How many users/customers will this affect in a given time period? (number)
-- **Impact:** How much will it affect each user? (3 = massive, 2 = high, 1 = medium, 0.5 = low, 0.25 = minimal)
-- **Confidence:** How sure are we? (100% = high, 80% = medium, 50% = low)
-- **Effort:** Person-months of work required (number)
-
-**Strengths:** Reach adds a dimension that ICE misses. Effort is estimated in real units, not abstract scores.
-**Weakness:** Requires more data (reach estimates, effort sizing).
-
-### 4. Eisenhower Matrix
-
-**Best for:** Personal task management for PMs, not product prioritization.
-
-**Quadrants:**
-
-|  | Urgent | Not Urgent |
-|--|--------|------------|
-| **Important** | Do First | Schedule |
-| **Not Important** | Delegate | Eliminate |
-
-- **Q1 (Do First):** Crisis, deadline-driven. Handle immediately.
-- **Q2 (Schedule):** Strategic work, planning, prevention. This is where PMs should spend most of their time.
-- **Q3 (Delegate):** Interruptions, some meetings, some emails. Hand off if possible.
-- **Q4 (Eliminate):** Time-wasters, unnecessary meetings. Stop doing these.
-
-### 5. Impact vs Effort (2x2 Matrix)
-
-**Best for:** Quick visual triage in a group setting.
-
-**Quadrants:**
-
-|  | Low Effort | High Effort |
-|--|-----------|-------------|
-| **High Impact** | Quick Wins (do first) | Major Projects (plan carefully) |
-| **Low Impact** | Fill-ins (do if time allows) | Money Pits (avoid) |
-
-**How to use:** Plot items on a whiteboard. Discuss placement. The conversation matters more than the exact position.
-
-### 6. Risk vs Reward
-
-**Best for:** Initiatives with significant uncertainty.
-
-**Extension of Impact vs Effort** that adds an uncertainty dimension:
-
-- **Reward** = Expected impact if successful
-- **Risk** = Probability of failure x cost of failure
-
-**Quadrants:**
-
-|  | Low Risk | High Risk |
-|--|---------|-----------|
-| **High Reward** | Safe Bets (prioritize) | Bold Bets (invest selectively) |
-| **Low Reward** | Incremental (batch) | Avoid |
-
-### 7. Kano Model
-
-**Best for:** Understanding customer expectations. Not for prioritization directly.
-
-**Categories:**
-
-- **Must-Be (Basic):** Customers expect these. Absence causes dissatisfaction. Presence does not cause delight. (Example: a login page works.)
-- **One-Dimensional (Performance):** More is better, linearly. (Example: faster page loads = happier users.)
-- **Attractive (Delighters):** Unexpected features that create excitement. Absence does not cause dissatisfaction. (Example: automatic dark mode based on system setting.)
-- **Indifferent:** Customers do not care either way.
-- **Reverse:** Some customers actively dislike this feature.
-
-**Use Kano to understand**, then use another framework (RICE, ICE) to prioritize.
-
-### 8. Weighted Decision Matrix
-
-**Best for:** Multi-factor decisions that need stakeholder buy-in.
-
-**Process:**
-1. Define criteria (e.g., customer impact, revenue potential, technical feasibility, strategic alignment).
-2. Assign weights to each criterion (must sum to 100%).
-3. Score each option against each criterion (1-5 or 1-10).
-4. Multiply scores by weights and sum.
-5. Rank by total weighted score.
-
-**Strengths:** Transparent, auditable, gets stakeholders to agree on criteria before scoring.
-**Weakness:** Time-consuming. Best for 5-10 high-stakes decisions, not 50-item backlogs.
-
-### 9. MoSCoW
-
-**Best for:** Requirements categorization within a fixed scope.
-
-**Categories:**
-- **Must Have:** Non-negotiable. Without these, the release has no value.
-- **Should Have:** Important but not critical. Painful to leave out but the release still works.
-- **Could Have:** Desirable. Include if time and resources allow.
-- **Won&#x27;t Have (this time):** Explicitly out of scope. Acknowledged but deferred.
-
-**Rule of thumb:** Must-Haves should be no more than 60% of the total effort. If everything is a Must-Have, nothing is.
-
-## Core Principle: Prioritize Problems, Not Features
-
-Features are solutions. Problems are what matter. Two teams can build different features to solve the same problem. If you prioritize features, you lock in a solution before understanding the problem space.
-
-**Workflow:**
-1. List customer problems (use Opportunity Score to rank them).
-2. Pick the top problems to solve.
-3. Generate multiple solution ideas for each problem.
-4. Prioritize solutions using RICE or ICE.
-5. Build the highest-scoring solutions.
-
-This two-step approach (prioritize problems, then prioritize solutions) produces better outcomes than a single pass over a feature list.
-
-## Tools
+## Quick Start
 
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `prioritization_scorer.py` | Score and rank items | `python scripts/prioritization_scorer.py --input items.json --framework rice` |
 | `prioritization_scorer.py` | Demo with sample data | `python scripts/prioritization_scorer.py --demo --framework rice` |
 
-Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
+Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`. See `references/tool-and-troubleshooting.md` for input JSON schemas and flags.
 
-## Troubleshooting
+## References
 
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| RICE scores dominated by high-reach items regardless of impact | Reach values vary by orders of magnitude, drowning out other factors | Normalize reach to a consistent time window (e.g., users per quarter); consider log-scale for extreme ranges |
-| ICE scores feel arbitrary and inconsistent across raters | No calibration on 1-10 scale definitions; different people use different anchors | Define what 1, 5, and 10 mean for each dimension; score independently first, then discuss outliers |
-| MoSCoW results in 80% Must-Haves | Team reluctant to deprioritize anything, or no effort constraint applied | Enforce the rule: Must-Haves should be no more than 60% of total effort; make the constraint visible |
-| Opportunity Score returns 0 for satisfied needs | Satisfaction scored at 1.0 (fully satisfied), zeroing out the score | Verify satisfaction is on 0-1 scale; values above 1 are auto-converted from 0-10 scale |
-| Weighted Decision Matrix produces tied scores | Criteria weights are too evenly distributed, or scoring lacks variance | Increase weight differentiation; force-rank criteria by importance; use the full 1-10 scoring range |
-| Framework selection is itself a bottleneck | Team spends time debating which framework to use instead of scoring | Use the Decision Tree in this skill; default to RICE for 15+ items with data, ICE for quick sorts under 15 items |
-| Stakeholders disagree with prioritization results | Framework selected does not match stakeholder values, or inputs not transparent | Use Weighted Decision Matrix when multiple stakeholder groups are involved; agree on criteria and weights before scoring |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Success Criteria
-
-- Prioritization framework selected using the Decision Tree, not by habit or preference
-- All items scored with consistent definitions for each dimension (documented before scoring begins)
-- Results reviewed and discussed as a team, not treated as a mechanical ranking
-- Top-priority items have clear next steps (assigned to sprints, PRDs, or experiments)
-- Prioritization is repeated at least quarterly, or when significant new information arrives
-- The two-step approach is followed: prioritize problems first (Opportunity Score), then prioritize solutions (RICE/ICE)
-- MoSCoW Must-Haves never exceed 60% of total effort for a release
+- **[references/frameworks-catalog.md](references/frameworks-catalog.md)** — full definitions, formulas, strengths/weaknesses, and worked examples for all 9 frameworks, the framework decision tree, and the &quot;prioritize problems, not features&quot; principle. Read when choosing or applying a specific framework.
+- **[references/prioritization-guide.md](references/prioritization-guide.md)** — detailed formulas, decision tree, and facilitation tips. Read when facilitating a scoring session with a group.
+- **[references/red-flags.md](references/red-flags.md)** — anti-patterns and warning signs in prioritization practice. Read when a process feels off or results are being gamed.
+- **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `prioritization_scorer.py` flags, per-framework input JSON schemas, troubleshooting table, and success criteria. Read when running the tool or diagnosing scoring problems.
+- **[assets/prioritization_matrix_template.md](assets/prioritization_matrix_template.md)** — scoring templates for each framework. Use when capturing a manual scoring exercise.
 
 ## Scope &amp; Limitations
 
@@ -1052,7 +650,7 @@ Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
 **Important Caveats:**
 - No framework produces a &quot;correct&quot; answer. Prioritization frameworks are decision-support tools that structure conversation, not algorithms that replace judgment.
 - RICE and ICE are best for data-rich environments. If your reach and impact estimates are pure guesses, the precision of the formula is misleading.
-- The most successful teams combine frameworks: start with Opportunity Score to identify the right problems, then use RICE to rank solutions. Single-framework teams often prioritize solutions to the wrong problems.
+- The most successful teams combine frameworks: start with Opportunity Score to identify the right problems, then use RICE to rank solutions.
 - For teams with 50+ people or multiple stakeholder groups, use WSJF or Weighted Decision Matrix with agreed criteria to ensure buy-in.
 
 ## Integration Points
@@ -1065,32 +663,6 @@ Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`
 | `discovery/identify-assumptions/` | Receives from | Assumption risk scores inform item confidence ratings in RICE/ICE |
 | `scrum-master/` | Feeds into | Prioritized backlog items feed sprint planning commitment decisions |
 | `senior-pm/` | Receives from | Portfolio-level WSJF or strategic priorities constrain team-level prioritization |
-
-## Tool Reference
-
-### prioritization_scorer.py
-
-Scores and ranks items using 5 supported prioritization frameworks. Outputs sorted results with scores, formulas, and category breakdowns.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required, mutually exclusive with --demo) | Path to JSON file containing items to score |
-| `--demo` | flag | off | Run scoring on built-in demo data for the selected framework |
-| `--framework` | choice | (required) | Framework to use: `rice`, `ice`, `opportunity`, `moscow`, `weighted` |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input JSON schema by framework:**
-
-- **RICE:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;reach&quot;: N, &quot;impact&quot;: N, &quot;confidence&quot;: N, &quot;effort&quot;: N}]}`
-- **ICE:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;impact&quot;: N, &quot;confidence&quot;: N, &quot;ease&quot;: N}]}`
-- **Opportunity:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;importance&quot;: N, &quot;satisfaction&quot;: N}]}`
-- **MoSCoW:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;category&quot;: &quot;must|should|could|wont&quot;, &quot;effort&quot;: N}]}`
-- **Weighted:** `{&quot;items&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;scores&quot;: {&quot;criterion&quot;: N}}], &quot;criteria&quot;: [{&quot;name&quot;: &quot;...&quot;, &quot;weight&quot;: N}]}`
-
-## References
-
-- `references/prioritization-guide.md` -- Detailed formulas, decision tree, and facilitation tips
-- `assets/prioritization_matrix_template.md` -- Scoring templates for each framework
 
 ---
 
@@ -1178,8 +750,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/prioritization-frameworks/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2>| Tool | Purpose | Command |
+|------|---------|---------|
+| `prioritization_scorer.py` | Score and rank items | `python scripts/prioritization_scorer.py --input items.json --framework rice` |
+| `prioritization_scorer.py` | Demo with sample data | `python scripts/prioritization_scorer.py --demo --framework rice` |
+
+Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`. See `references/tool-and-troubleshooting.md` for input JSON schemas and flags.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prioritization-frameworks/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

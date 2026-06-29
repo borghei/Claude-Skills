@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Self Improving Agent - Claude Skills</title>
-  <meta name="description" content="Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext">
+  <meta name="description" content="Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html">
   <meta property="og:title" content="Self Improving Agent - Claude Skills">
-  <meta property="og:description" content="Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext">
+  <meta property="og:description" content="Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Self Improving Agent", "description": "Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Self Improving Agent", "description": "Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Self Improving Agent</h1>
-    <p class="page-subtitle">Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Ai Agents</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
-    
+    <p class="page-subtitle">Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 6 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">self-improvement</span><span class="tag">ai-agents</span><span class="tag">feedback-loops</span><span class="tag">auto-memory</span><span class="tag">meta-learning</span><span class="tag">memory-curation</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,21 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Self Improving Agent (Engineering domain).
 
-Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...
+Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.
 
-**Tier:** POWERFUL **Category:** Engineering **Tags:** self-improvement, AI agents, feedback loops, auto-memory, meta-learning, performance tracking
-
-## Your Key Capabilities
-- Sub-Skill Flow
-- The Improvement Loop
-- Improvement Maturity Levels
-- 1. Memory Curation System
-- 2. Feedback Loop Design
-- 3. Performance Regression Detection
-
-## Frameworks &amp; Templates You Know
-- Feedback Capture Template
-- - Add assets/ for templates
+Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight
 
 ## How to Help
 When the user asks for help in this domain:
@@ -427,21 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Self Improving Agent (Engineering domain).
 
-Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...
+Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.
 
-**Tier:** POWERFUL **Category:** Engineering **Tags:** self-improvement, AI agents, feedback loops, auto-memory, meta-learning, performance tracking
-
-## Your Key Capabilities
-- Sub-Skill Flow
-- The Improvement Loop
-- Improvement Maturity Levels
-- 1. Memory Curation System
-- 2. Feedback Loop Design
-- 3. Performance Regression Detection
-
-## Frameworks &amp; Templates You Know
-- Feedback Capture Template
-- - Add assets/ for templates
+Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight
 
 ## How to Help
 When the user asks for help in this domain:
@@ -471,19 +447,37 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Self-Improving Agent - Autonomous Learning Patterns
 
-**Tier:** POWERFUL
-**Category:** Engineering
-**Tags:** self-improvement, AI agents, feedback loops, auto-memory, meta-learning, performance tracking
+Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight: auto-memory captures everything, but **curation** turns noise into knowledge.
 
-## Overview
+## Core Capabilities
 
-Self-Improving Agent provides architectural patterns for AI agents that get better with use. Most agents are stateless -- they make the same mistakes repeatedly because they lack mechanisms to learn from their own execution. This skill addresses that gap with concrete patterns for feedback capture, memory curation, skill extraction, and regression detection.
+- **Memory curation** — a layered memory stack (CLAUDE.md → MEMORY.md → session), review protocol, and promotion criteria for graduating learnings into enforced rules.
+- **Feedback loops** — outcome classification, signal extraction, and a capture template that turn every task result into a structured learning.
+- **Regression detection** — metrics, thresholds, and a response protocol that flags performance degradation within a few sessions.
+- **Skill extraction** — criteria and a 4-step process to graduate proven patterns into standalone skill packages.
+- **Meta-learning** — adaptive capture strategy and anti-pattern detection so the agent learns *what* is worth learning.
+- **Continuous calibration** — confidence scoring and belief revision for resolving contradictions across learned knowledge.
 
-The key insight: auto-memory captures everything, but curation is what turns noise into knowledge.
+## When to Use
+
+- Building agents intended to improve over time rather than stay stateless.
+- Managing auto-memory (MEMORY.md) and deciding what to keep, promote, or retire.
+- Designing self-correcting feedback loops and regression alarms for agent behavior.
+- Graduating recurring solutions into reusable skill packages.
+
+## Clarify First
+
+Before capturing or promoting learnings, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Loop stage** — remember / extract / promote / review (routes the sub-skill and the whole workflow)
+- [ ] **Source data** — which session logs, `MEMORY.md`, and rules dir to operate on (the subject the tools read and write)
+- [ ] **Promotion bar** — min occurrences / confidence threshold for graduating a learning into an enforced rule (`--min-occurrences`; decides what is kept vs discarded)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Sub-Skills
 
-This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific step of the improvement loop:
+Compound sub-skill architecture — each file in `skills/` handles one step of the improvement loop:
 
 | Sub-Skill | File | Purpose |
 |-----------|------|---------|
@@ -493,400 +487,27 @@ This skill uses compound sub-skill architecture. Each sub-skill in `skills/` han
 | **Review** | `skills/review.md` | Audit memory health, prune stale entries |
 | **Status** | `skills/status.md` | Dashboard showing memory state and learning progress |
 
-### Sub-Skill Flow
-
-```
-Remember ──&gt; Extract ──&gt; Promote ──&gt; Review
-    ^                                  │
-    └──────────── Status ◄─────────────┘
-```
-
-**The improvement cycle:** Remember captures events during work, Extract identifies patterns across sessions, Promote graduates proven patterns to rules, Review maintains memory health, and Status provides visibility into the entire system.
-
-## Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/pattern_extractor.py` | Extract reusable patterns from session logs |
-| `scripts/memory_health_checker.py` | Audit memory for stale, duplicate, and promotable entries |
-| `scripts/rule_promoter.py` | Validate and apply promotions from memory to rules |
-| `scripts/feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities |
-| `scripts/regression_detector.py` | Compare baseline vs current performance metrics |
-| `scripts/rule_manager.py` | Manage a learned rules knowledge base with CRUD |
-
-## Core Architecture
-
-### The Improvement Loop
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                   SELF-IMPROVEMENT CYCLE                  │
-│                                                          │
-│  ┌─────────┐    ┌──────────┐    ┌─────────────┐        │
-│  │ Execute  │───▶│ Evaluate │───▶│ Extract     │        │
-│  │ Task     │    │ Outcome  │    │ Learnings   │        │
-│  └─────────┘    └──────────┘    └─────────────┘        │
-│       ▲                               │                  │
-│       │                               ▼                  │
-│  ┌─────────┐    ┌──────────┐    ┌─────────────┐        │
-│  │ Apply   │◀───│ Promote  │◀───│ Validate    │        │
-│  │ Rules   │    │ to Rules │    │ Learnings   │        │
-│  └─────────┘    └──────────┘    └─────────────┘        │
-│                                                          │
-└──────────────────────────────────────────────────────────┘
-```
-
-### Improvement Maturity Levels
-
-| Level | Name | Mechanism | Example |
-|-------|------|-----------|---------|
-| 0 | Stateless | No memory between sessions | Default agent behavior |
-| 1 | Recording | Captures observations, no action | Auto-memory logging |
-| 2 | Curating | Organizes and deduplicates observations | Memory review + cleanup |
-| 3 | Promoting | Graduates patterns to enforced rules | MEMORY.md entries become CLAUDE.md rules |
-| 4 | Extracting | Creates reusable skills from proven patterns | Recurring solutions become skill packages |
-| 5 | Meta-Learning | Adapts learning strategy itself | Adjusts what to capture based on what proved useful |
-
-Most agents operate at Level 0-1. This skill provides the machinery for Levels 2-5.
-
-## Core Capabilities
-
-### 1. Memory Curation System
-
-#### The Memory Stack
-
-```
-┌─────────────────────────────────────────────────┐
-│  CLAUDE.md / .claude/rules/                      │
-│  Highest authority. Enforced every session.       │
-│  Capacity: Unlimited. Load: Full file.           │
-├─────────────────────────────────────────────────┤
-│  MEMORY.md (auto-memory)                         │
-│  Project learnings. Auto-captured by Claude.     │
-│  Capacity: First 200 lines loaded. Overflow to   │
-│  topic files.                                    │
-├─────────────────────────────────────────────────┤
-│  Session Context                                  │
-│  Current conversation. Ephemeral.                │
-│  Capacity: Context window.                       │
-└─────────────────────────────────────────────────┘
-```
-
-#### Memory Review Protocol
-
-Run periodically (weekly or after every 10 sessions):
-
-```
-Step 1: Read MEMORY.md and all topic files
-Step 2: Classify each entry
-
-  Categories:
-  - PROMOTE: Pattern proven 3+ times, should be a rule
-  - CONSOLIDATE: Multiple entries saying the same thing
-  - STALE: References deleted files, old patterns, resolved issues
-  - KEEP: Still relevant, not yet proven enough to promote
-  - EXTRACT: Recurring solution that should be a reusable skill
-
-Step 3: Execute actions
-  - PROMOTE entries → move to CLAUDE.md or .claude/rules/
-  - CONSOLIDATE entries → merge into single clear entry
-  - STALE entries → delete
-  - EXTRACT entries → create skill package (see Skill Extraction)
-
-Step 4: Verify MEMORY.md is under 200 lines
-  - If over 200: move topic-specific entries to topic files
-  - Topic files: ~/.claude/projects/&lt;path&gt;/memory/&lt;topic&gt;.md
-```
-
-#### Promotion Criteria
-
-An entry is ready for promotion when:
-
-| Criterion | Threshold | Why |
-|-----------|-----------|-----|
-| Recurrence | Seen in 3+ sessions | Not a one-off |
-| Consistency | Same solution every time | Not context-dependent |
-| Impact | Prevented errors or saved significant time | Worth enforcing |
-| Stability | Underlying code/system unchanged | Won&#x27;t immediately become stale |
-| Clarity | Can be stated in 1-2 sentences | Rules must be unambiguous |
-
-#### Promotion Targets
-
-| Pattern Type | Promote To | Example |
-|-------------|-----------|---------|
-| Coding convention | `.claude/rules/&lt;area&gt;.md` | &quot;Always use `type` not `interface` for object shapes&quot; |
-| Project architecture | `CLAUDE.md` | &quot;All API routes go through middleware chain&quot; |
-| Tool preference | `CLAUDE.md` | &quot;Use pnpm, not npm&quot; |
-| Debugging pattern | `.claude/rules/debugging.md` | &quot;When tests fail, check env vars first&quot; |
-| File-scoped rule | `.claude/rules/&lt;scope&gt;.md` with `paths:` | &quot;In migrations/, always add down migration&quot; |
-
-### 2. Feedback Loop Design
-
-#### Outcome Classification
-
-Every agent task produces an outcome. Classify it:
-
-```
-SUCCESS         - Task completed, user accepted result
-PARTIAL         - Task completed but required corrections
-FAILURE         - Task failed, user had to redo
-REJECTION       - User explicitly rejected approach
-TIMEOUT         - Task exceeded time/token budget
-ERROR           - Technical error (tool failure, API error)
-```
-
-#### Signal Extraction from Outcomes
-
-| Outcome | Signal | Memory Action |
-|---------|--------|---------------|
-| SUCCESS (first try) | Approach works well | Reinforce (increment confidence) |
-| SUCCESS (after correction) | Initial approach had gap | Log the correction pattern |
-| PARTIAL (user edited result) | Output format or content gap | Log what user changed |
-| FAILURE | Approach fundamentally wrong | Log anti-pattern with context |
-| REJECTION | Misunderstood requirements | Log clarification pattern |
-| Repeated ERROR | Tool or environment issue | Log workaround or fix |
-
-#### Feedback Capture Template
-
-```markdown
-## Learning: [Short description]
-
-**Context:** [What task was being performed]
-**What happened:** [Outcome description]
-**Root cause:** [Why the outcome occurred]
-**Correct approach:** [What should have been done]
-**Confidence:** [High/Medium/Low]
-**Recurrence:** [First time / Seen N times]
-**Action:** [KEEP / PROMOTE / EXTRACT]
-```
-
-### 3. Performance Regression Detection
-
-#### Metrics to Track
-
-| Metric | Measurement | Regression Signal |
-|--------|-------------|-------------------|
-| First-attempt success rate | Tasks accepted without correction | Dropping below 70% |
-| Correction count per task | User edits after agent output | Rising above 2 per task |
-| Tool error rate | Failed tool calls / total calls | Rising above 5% |
-| Context relevance | Retrieved context actually used | Dropping below 60% |
-| Task completion time | Turns to complete task | Rising trend over 5 sessions |
-
-#### Regression Response Protocol
-
-```
-1. DETECT: Metric crosses threshold
-2. DIAGNOSE: Compare recent sessions vs baseline
-   - What changed? (New code? New patterns? New tools?)
-   - Which task types are affected?
-   - Is it a memory issue or a capability issue?
-3. RESPOND:
-   - Memory issue → Review and curate MEMORY.md
-   - Stale rules → Update CLAUDE.md
-   - New code patterns → Add rules for new patterns
-   - Capability gap → Extract as skill request
-4. VERIFY: Track metric for next 3 sessions
-```
-
-### 4. Skill Extraction
-
-When a solution pattern is proven and reusable, extract it into a standalone skill.
-
-#### Extraction Criteria
-
-```
-A pattern is ready for extraction when:
-- Used successfully 5+ times across different contexts
-- Solution is generalizable (not project-specific)
-- Takes more than trivial effort to recreate from scratch
-- Would benefit other projects/users
-```
-
-#### Extraction Process
-
-```
-Step 1: Document the pattern
-  - What problem does it solve?
-  - What&#x27;s the step-by-step approach?
-  - What are the inputs and outputs?
-  - What are the edge cases?
-
-Step 2: Generalize
-  - Remove project-specific details
-  - Identify configurable parameters
-  - Add handling for common variations
-
-Step 3: Package as skill
-  - Create SKILL.md with frontmatter
-  - Add references/ for knowledge bases
-  - Add scripts/ if automatable
-  - Add assets/ for templates
-
-Step 4: Validate
-  - Test on a different project
-  - Have another person/agent use it
-  - Iterate on unclear instructions
-```
-
-### 5. Meta-Learning Patterns
-
-#### Adaptive Capture Strategy
-
-Not all observations are equally valuable. Adjust what gets captured based on what proved useful:
-
-```
-Initial strategy: Capture everything
-After 10 sessions: Analyze which captured items led to promotions
-After 20 sessions: Adjust capture to focus on high-value categories
-
-High-value categories (typically):
-  - Error resolutions (80% promotion rate)
-  - User corrections (70% promotion rate)
-  - Tool preferences (60% promotion rate)
-
-Low-value categories (typically):
-  - File structure observations (10% promotion rate)
-  - One-off workarounds (5% promotion rate)
-```
-
-#### Anti-Pattern Detection
-
-Beyond capturing what works, actively detect what fails:
-
-| Anti-Pattern | Detection Signal | Response |
-|-------------|-----------------|----------|
-| Repeated wrong import path | Same correction 3+ times | Add to CLAUDE.md as rule |
-| Wrong test framework used | User always changes test approach | Add testing rules |
-| Incorrect API usage | Same API error pattern | Add API usage notes |
-| Style guide violations | User reformats same patterns | Add style rules |
-| Wrong branch workflow | User corrects git operations | Add git workflow rules |
-
-### 6. Continuous Calibration
-
-#### Confidence Scoring
-
-Every piece of learned knowledge carries a confidence score:
-
-```
-Confidence = base_score * recency_factor * consistency_factor
-
-base_score:
-  - User explicitly stated: 1.0
-  - Observed from successful outcome: 0.8
-  - Inferred from pattern: 0.6
-  - Guessed from context: 0.3
-
-recency_factor:
-  - Last 7 days: 1.0
-  - 7-30 days: 0.9
-  - 30-90 days: 0.7
-  - 90+ days: 0.5
-
-consistency_factor:
-  - Never contradicted: 1.0
-  - Contradicted once, reaffirmed: 0.9
-  - Contradicted, not reaffirmed: 0.5
-  - Actively contradicted: 0.0 (delete)
-```
-
-#### Belief Revision
-
-When new information contradicts existing knowledge:
-
-```
-1. Compare confidence scores
-2. If new info higher confidence → update knowledge
-3. If roughly equal → flag for user confirmation
-4. If new info lower confidence → keep existing, note conflict
-5. Always log the conflict for review
-```
-
-## Workflows
-
-### Workflow 1: Weekly Memory Health Check
-
-```
-1. Read all memory files (MEMORY.md + topic files)
-2. Count total entries and lines
-3. For each entry, classify: PROMOTE / CONSOLIDATE / STALE / KEEP / EXTRACT
-4. Execute promotions (with user confirmation)
-5. Execute consolidations
-6. Delete stale entries
-7. Verify under 200-line limit
-8. Report: entries promoted, consolidated, deleted, remaining
-```
-
-### Workflow 2: Post-Session Learning Capture
-
-```
-1. Review session outcomes (successes, corrections, failures)
-2. For each correction: log what was wrong and what was right
-3. For each failure: log root cause and correct approach
-4. Check existing memory for related entries
-5. If related entry exists: increment recurrence count
-6. If new: add entry with context
-7. If recurrence threshold met: flag for promotion
-```
-
-### Workflow 3: Regression Investigation
-
-```
-1. Identify the degraded metric
-2. Pull last 5 sessions&#x27; outcomes for that task type
-3. Compare against baseline (first 5 sessions)
-4. Identify what changed: memory, code, rules, environment
-5. Propose fix: update rule, add rule, retrain pattern
-6. Apply fix
-7. Monitor next 3 sessions
-```
-
-## Common Pitfalls
-
-| Pitfall | Why It Happens | Fix |
-|---------|---------------|-----|
-| Memory bloat | Auto-capture without curation | Weekly review, enforce 200-line limit |
-| Stale rules | Code changes, rules don&#x27;t update | Timestamp rules, periodic re-verification |
-| Over-promotion | Promoting one-off patterns as rules | Require 3+ recurrences before promotion |
-| Silent regression | No metrics tracking | Implement outcome classification |
-| Cargo cult rules | Copying rules without understanding | Each rule must have a &quot;why&quot; annotation |
-| Contradiction spirals | New rules conflict with old rules | Belief revision protocol |
-
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| **context-engine** | Context Engine manages what the agent sees; Self-Improving Agent manages what the agent remembers |
-| **agent-designer** | Agent Designer defines agent architecture; Self-Improving Agent adds the learning layer |
-| **prompt-engineer-toolkit** | Prompts that degrade over time are a regression; track and test them |
-| **observability-designer** | Monitor agent performance metrics alongside system metrics |
+Flow: `Remember → Extract → Promote → Review`, with `Status` providing visibility back into the cycle.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `pattern_extractor.py` | Extract reusable patterns from session logs | `python scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
+| `memory_health_checker.py` | Audit memory for line counts, stale, and promotable entries | `python scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
+| `rule_promoter.py` | Validate and apply promotions from memory to rules | `python scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
+| `feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities | `python scripts/feedback_analyzer.py analyze` |
+| `regression_detector.py` | Compare baseline vs current performance metrics | `python scripts/regression_detector.py compare` |
+| `rule_manager.py` | Manage a learned rules knowledge base with CRUD | `python scripts/rule_manager.py list` |
 
 ## References
 
-- `references/feedback-loop-patterns.md` - Detailed feedback capture and analysis patterns
-- `references/memory-curation-guide.md` - Step-by-step memory review and promotion procedures
-- `references/meta-learning-architectures.md` - Advanced patterns for agents that learn how to learn
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| MEMORY.md exceeds 200 lines and keeps growing | Auto-capture enabled without scheduled curation | Run the Weekly Memory Health Check workflow; split topic-specific entries into `memory/&lt;topic&gt;.md` files |
-| Promoted rules contradict each other | Two conflicting patterns both crossed the 3-recurrence threshold | Apply the Belief Revision protocol -- compare confidence scores, resolve the conflict, delete the weaker rule |
-| Agent performance degrades after a promotion batch | Newly promoted rules interact badly or are overly prescriptive | Roll back the most recent promotions, re-validate each rule in isolation, and promote incrementally |
-| Skill extraction produces a package that only works on the original project | Generalization step was skipped or rushed | Revisit Extraction Process Step 2 -- strip project-specific details, parameterize hardcoded values, test on a second project before packaging |
-| Feedback loop captures noise (trivial observations dominate) | Capture strategy has not been calibrated with the Adaptive Capture Strategy | After 10 sessions, analyze promotion rates by category and restrict capture to high-value categories (error resolutions, user corrections, tool preferences) |
-| Regression Detection flags false positives | Thresholds set too aggressively for early-stage projects | Widen thresholds during the first 20 sessions (e.g., first-attempt success 60% instead of 70%), then tighten once a stable baseline exists |
-| Confidence scores decay too fast on valid long-term rules | Recency factor penalizes rules that are infrequently encountered but still correct | For rules explicitly confirmed by the user, override the recency factor to 1.0 regardless of age |
-
-## Success Criteria
-
-- **First-attempt success rate above 80%** after 20 sessions of active self-improvement, measured as tasks accepted without user correction.
-- **Memory size stays under 200 lines** in MEMORY.md at all times, with overflow correctly routed to topic files.
-- **Promotion rate of 15-25%** of captured observations within 30 days, indicating the capture strategy targets high-value signals.
-- **Zero stale rules** remaining after each Weekly Memory Health Check -- every rule references current code, tools, and workflows.
-- **Regression detection latency under 3 sessions** -- performance degradation is flagged within 3 sessions of onset, not discovered weeks later.
-- **Extracted skills reusable across 2+ projects** without modification, validating that the generalization step produces genuinely portable packages.
-- **Contradiction resolution within 1 session** -- conflicting rules are detected and resolved via the Belief Revision protocol before they cause downstream errors.
+- **[references/memory-curation-guide.md](references/memory-curation-guide.md)** — the memory stack, review protocol, promotion criteria/targets, the Weekly Memory Health Check workflow, and the continuous-calibration (confidence scoring + belief revision) machinery. Read when curating MEMORY.md or promoting learnings to rules.
+- **[references/feedback-loop-patterns.md](references/feedback-loop-patterns.md)** — the core improvement-loop architecture and maturity levels, outcome classification + signal extraction, the capture template, regression metrics/response, the post-session and regression-investigation workflows, common pitfalls, troubleshooting, and the success-criteria bar. Read when designing feedback capture or diagnosing a regression.
+- **[references/meta-learning-architectures.md](references/meta-learning-architectures.md)** — skill-extraction criteria and process, the adaptive capture strategy, and anti-pattern detection. Read when the agent should adapt its own learning strategy or extract a proven pattern into a skill.
+- **[references/self-improvement-methodology.md](references/self-improvement-methodology.md)** — the five layers of agent learning, the confidence-scoring model, the promotion decision tree, the memory-curation checklist, anti-patterns, and the metrics/thresholds table. Read for the end-to-end methodology overview.
 
 ## Scope &amp; Limitations
 
@@ -897,21 +518,21 @@ When new information contradicts existing knowledge:
 - Skill extraction methodology for graduating proven patterns into reusable, standalone packages.
 
 **This skill does NOT cover:**
-- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol` for those patterns.
-- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit` for prompt lifecycle management.
-- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer` for system-level monitoring.
-- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer` for foundational agent design decisions.
+- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol`.
+- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit`.
+- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer`.
+- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer`.
 
 ## Integration Points
 
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
-| **context-engine** | Context Engine controls what the agent sees per session; Self-Improving Agent decides what is worth remembering long-term | Promoted rules and curated memory flow into context retrieval; context relevance metrics flow back for regression tracking |
-| **agent-designer** | Agent Designer defines the agent&#x27;s architecture and capabilities; Self-Improving Agent layers learning infrastructure on top | Architecture constraints inform what feedback loops are possible; extracted skills feed back as new agent capabilities |
-| **prompt-engineer-toolkit** | Prompts degrade over time as codebases evolve; Self-Improving Agent detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as rule changes in CLAUDE.md |
-| **observability-designer** | Observability provides system-level metrics; Self-Improving Agent provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent performance metrics can be exported to observability dashboards |
-| **tech-debt-tracker** | Stale rules and bloated memory are a form of technical debt; Tech Debt Tracker can surface them alongside code debt | Memory health metrics feed into debt scoring; debt prioritization informs which stale rules to retire first |
-| **agent-workflow-designer** | Multi-step agent workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted workflow optimizations flow back as updated workflow definitions |
+| **context-engine** | Controls what the agent sees per session; this skill decides what is worth remembering long-term | Promoted rules and curated memory feed context retrieval; context relevance metrics flow back for regression tracking |
+| **agent-designer** | Defines the agent&#x27;s architecture and capabilities; this skill layers learning infrastructure on top | Architecture constraints inform possible feedback loops; extracted skills feed back as new capabilities |
+| **prompt-engineer-toolkit** | Prompts degrade as codebases evolve; this skill detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as CLAUDE.md rule changes |
+| **observability-designer** | Provides system-level metrics; this skill provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent metrics export to observability dashboards |
+| **tech-debt-tracker** | Stale rules and bloated memory are technical debt this can surface alongside code debt | Memory health metrics feed debt scoring; debt prioritization informs which stale rules to retire |
+| **agent-workflow-designer** | Multi-step workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted optimizations update workflow definitions |
 
 ---
 
@@ -939,7 +560,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Self Improving Agent&quot;**
-   - Description: &quot;Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...&quot;
+   - Description: &quot;Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -964,19 +585,37 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Self-Improving Agent - Autonomous Learning Patterns
 
-**Tier:** POWERFUL
-**Category:** Engineering
-**Tags:** self-improvement, AI agents, feedback loops, auto-memory, meta-learning, performance tracking
+Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight: auto-memory captures everything, but **curation** turns noise into knowledge.
 
-## Overview
+## Core Capabilities
 
-Self-Improving Agent provides architectural patterns for AI agents that get better with use. Most agents are stateless -- they make the same mistakes repeatedly because they lack mechanisms to learn from their own execution. This skill addresses that gap with concrete patterns for feedback capture, memory curation, skill extraction, and regression detection.
+- **Memory curation** — a layered memory stack (CLAUDE.md → MEMORY.md → session), review protocol, and promotion criteria for graduating learnings into enforced rules.
+- **Feedback loops** — outcome classification, signal extraction, and a capture template that turn every task result into a structured learning.
+- **Regression detection** — metrics, thresholds, and a response protocol that flags performance degradation within a few sessions.
+- **Skill extraction** — criteria and a 4-step process to graduate proven patterns into standalone skill packages.
+- **Meta-learning** — adaptive capture strategy and anti-pattern detection so the agent learns *what* is worth learning.
+- **Continuous calibration** — confidence scoring and belief revision for resolving contradictions across learned knowledge.
 
-The key insight: auto-memory captures everything, but curation is what turns noise into knowledge.
+## When to Use
+
+- Building agents intended to improve over time rather than stay stateless.
+- Managing auto-memory (MEMORY.md) and deciding what to keep, promote, or retire.
+- Designing self-correcting feedback loops and regression alarms for agent behavior.
+- Graduating recurring solutions into reusable skill packages.
+
+## Clarify First
+
+Before capturing or promoting learnings, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Loop stage** — remember / extract / promote / review (routes the sub-skill and the whole workflow)
+- [ ] **Source data** — which session logs, `MEMORY.md`, and rules dir to operate on (the subject the tools read and write)
+- [ ] **Promotion bar** — min occurrences / confidence threshold for graduating a learning into an enforced rule (`--min-occurrences`; decides what is kept vs discarded)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Sub-Skills
 
-This skill uses compound sub-skill architecture. Each sub-skill in `skills/` handles a specific step of the improvement loop:
+Compound sub-skill architecture — each file in `skills/` handles one step of the improvement loop:
 
 | Sub-Skill | File | Purpose |
 |-----------|------|---------|
@@ -986,400 +625,27 @@ This skill uses compound sub-skill architecture. Each sub-skill in `skills/` han
 | **Review** | `skills/review.md` | Audit memory health, prune stale entries |
 | **Status** | `skills/status.md` | Dashboard showing memory state and learning progress |
 
-### Sub-Skill Flow
-
-```
-Remember ──&gt; Extract ──&gt; Promote ──&gt; Review
-    ^                                  │
-    └──────────── Status ◄─────────────┘
-```
-
-**The improvement cycle:** Remember captures events during work, Extract identifies patterns across sessions, Promote graduates proven patterns to rules, Review maintains memory health, and Status provides visibility into the entire system.
-
-## Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/pattern_extractor.py` | Extract reusable patterns from session logs |
-| `scripts/memory_health_checker.py` | Audit memory for stale, duplicate, and promotable entries |
-| `scripts/rule_promoter.py` | Validate and apply promotions from memory to rules |
-| `scripts/feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities |
-| `scripts/regression_detector.py` | Compare baseline vs current performance metrics |
-| `scripts/rule_manager.py` | Manage a learned rules knowledge base with CRUD |
-
-## Core Architecture
-
-### The Improvement Loop
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                   SELF-IMPROVEMENT CYCLE                  │
-│                                                          │
-│  ┌─────────┐    ┌──────────┐    ┌─────────────┐        │
-│  │ Execute  │───▶│ Evaluate │───▶│ Extract     │        │
-│  │ Task     │    │ Outcome  │    │ Learnings   │        │
-│  └─────────┘    └──────────┘    └─────────────┘        │
-│       ▲                               │                  │
-│       │                               ▼                  │
-│  ┌─────────┐    ┌──────────┐    ┌─────────────┐        │
-│  │ Apply   │◀───│ Promote  │◀───│ Validate    │        │
-│  │ Rules   │    │ to Rules │    │ Learnings   │        │
-│  └─────────┘    └──────────┘    └─────────────┘        │
-│                                                          │
-└──────────────────────────────────────────────────────────┘
-```
-
-### Improvement Maturity Levels
-
-| Level | Name | Mechanism | Example |
-|-------|------|-----------|---------|
-| 0 | Stateless | No memory between sessions | Default agent behavior |
-| 1 | Recording | Captures observations, no action | Auto-memory logging |
-| 2 | Curating | Organizes and deduplicates observations | Memory review + cleanup |
-| 3 | Promoting | Graduates patterns to enforced rules | MEMORY.md entries become CLAUDE.md rules |
-| 4 | Extracting | Creates reusable skills from proven patterns | Recurring solutions become skill packages |
-| 5 | Meta-Learning | Adapts learning strategy itself | Adjusts what to capture based on what proved useful |
-
-Most agents operate at Level 0-1. This skill provides the machinery for Levels 2-5.
-
-## Core Capabilities
-
-### 1. Memory Curation System
-
-#### The Memory Stack
-
-```
-┌─────────────────────────────────────────────────┐
-│  CLAUDE.md / .claude/rules/                      │
-│  Highest authority. Enforced every session.       │
-│  Capacity: Unlimited. Load: Full file.           │
-├─────────────────────────────────────────────────┤
-│  MEMORY.md (auto-memory)                         │
-│  Project learnings. Auto-captured by Claude.     │
-│  Capacity: First 200 lines loaded. Overflow to   │
-│  topic files.                                    │
-├─────────────────────────────────────────────────┤
-│  Session Context                                  │
-│  Current conversation. Ephemeral.                │
-│  Capacity: Context window.                       │
-└─────────────────────────────────────────────────┘
-```
-
-#### Memory Review Protocol
-
-Run periodically (weekly or after every 10 sessions):
-
-```
-Step 1: Read MEMORY.md and all topic files
-Step 2: Classify each entry
-
-  Categories:
-  - PROMOTE: Pattern proven 3+ times, should be a rule
-  - CONSOLIDATE: Multiple entries saying the same thing
-  - STALE: References deleted files, old patterns, resolved issues
-  - KEEP: Still relevant, not yet proven enough to promote
-  - EXTRACT: Recurring solution that should be a reusable skill
-
-Step 3: Execute actions
-  - PROMOTE entries → move to CLAUDE.md or .claude/rules/
-  - CONSOLIDATE entries → merge into single clear entry
-  - STALE entries → delete
-  - EXTRACT entries → create skill package (see Skill Extraction)
-
-Step 4: Verify MEMORY.md is under 200 lines
-  - If over 200: move topic-specific entries to topic files
-  - Topic files: ~/.claude/projects/&lt;path&gt;/memory/&lt;topic&gt;.md
-```
-
-#### Promotion Criteria
-
-An entry is ready for promotion when:
-
-| Criterion | Threshold | Why |
-|-----------|-----------|-----|
-| Recurrence | Seen in 3+ sessions | Not a one-off |
-| Consistency | Same solution every time | Not context-dependent |
-| Impact | Prevented errors or saved significant time | Worth enforcing |
-| Stability | Underlying code/system unchanged | Won&#x27;t immediately become stale |
-| Clarity | Can be stated in 1-2 sentences | Rules must be unambiguous |
-
-#### Promotion Targets
-
-| Pattern Type | Promote To | Example |
-|-------------|-----------|---------|
-| Coding convention | `.claude/rules/&lt;area&gt;.md` | &quot;Always use `type` not `interface` for object shapes&quot; |
-| Project architecture | `CLAUDE.md` | &quot;All API routes go through middleware chain&quot; |
-| Tool preference | `CLAUDE.md` | &quot;Use pnpm, not npm&quot; |
-| Debugging pattern | `.claude/rules/debugging.md` | &quot;When tests fail, check env vars first&quot; |
-| File-scoped rule | `.claude/rules/&lt;scope&gt;.md` with `paths:` | &quot;In migrations/, always add down migration&quot; |
-
-### 2. Feedback Loop Design
-
-#### Outcome Classification
-
-Every agent task produces an outcome. Classify it:
-
-```
-SUCCESS         - Task completed, user accepted result
-PARTIAL         - Task completed but required corrections
-FAILURE         - Task failed, user had to redo
-REJECTION       - User explicitly rejected approach
-TIMEOUT         - Task exceeded time/token budget
-ERROR           - Technical error (tool failure, API error)
-```
-
-#### Signal Extraction from Outcomes
-
-| Outcome | Signal | Memory Action |
-|---------|--------|---------------|
-| SUCCESS (first try) | Approach works well | Reinforce (increment confidence) |
-| SUCCESS (after correction) | Initial approach had gap | Log the correction pattern |
-| PARTIAL (user edited result) | Output format or content gap | Log what user changed |
-| FAILURE | Approach fundamentally wrong | Log anti-pattern with context |
-| REJECTION | Misunderstood requirements | Log clarification pattern |
-| Repeated ERROR | Tool or environment issue | Log workaround or fix |
-
-#### Feedback Capture Template
-
-```markdown
-## Learning: [Short description]
-
-**Context:** [What task was being performed]
-**What happened:** [Outcome description]
-**Root cause:** [Why the outcome occurred]
-**Correct approach:** [What should have been done]
-**Confidence:** [High/Medium/Low]
-**Recurrence:** [First time / Seen N times]
-**Action:** [KEEP / PROMOTE / EXTRACT]
-```
-
-### 3. Performance Regression Detection
-
-#### Metrics to Track
-
-| Metric | Measurement | Regression Signal |
-|--------|-------------|-------------------|
-| First-attempt success rate | Tasks accepted without correction | Dropping below 70% |
-| Correction count per task | User edits after agent output | Rising above 2 per task |
-| Tool error rate | Failed tool calls / total calls | Rising above 5% |
-| Context relevance | Retrieved context actually used | Dropping below 60% |
-| Task completion time | Turns to complete task | Rising trend over 5 sessions |
-
-#### Regression Response Protocol
-
-```
-1. DETECT: Metric crosses threshold
-2. DIAGNOSE: Compare recent sessions vs baseline
-   - What changed? (New code? New patterns? New tools?)
-   - Which task types are affected?
-   - Is it a memory issue or a capability issue?
-3. RESPOND:
-   - Memory issue → Review and curate MEMORY.md
-   - Stale rules → Update CLAUDE.md
-   - New code patterns → Add rules for new patterns
-   - Capability gap → Extract as skill request
-4. VERIFY: Track metric for next 3 sessions
-```
-
-### 4. Skill Extraction
-
-When a solution pattern is proven and reusable, extract it into a standalone skill.
-
-#### Extraction Criteria
-
-```
-A pattern is ready for extraction when:
-- Used successfully 5+ times across different contexts
-- Solution is generalizable (not project-specific)
-- Takes more than trivial effort to recreate from scratch
-- Would benefit other projects/users
-```
-
-#### Extraction Process
-
-```
-Step 1: Document the pattern
-  - What problem does it solve?
-  - What&#x27;s the step-by-step approach?
-  - What are the inputs and outputs?
-  - What are the edge cases?
-
-Step 2: Generalize
-  - Remove project-specific details
-  - Identify configurable parameters
-  - Add handling for common variations
-
-Step 3: Package as skill
-  - Create SKILL.md with frontmatter
-  - Add references/ for knowledge bases
-  - Add scripts/ if automatable
-  - Add assets/ for templates
-
-Step 4: Validate
-  - Test on a different project
-  - Have another person/agent use it
-  - Iterate on unclear instructions
-```
-
-### 5. Meta-Learning Patterns
-
-#### Adaptive Capture Strategy
-
-Not all observations are equally valuable. Adjust what gets captured based on what proved useful:
-
-```
-Initial strategy: Capture everything
-After 10 sessions: Analyze which captured items led to promotions
-After 20 sessions: Adjust capture to focus on high-value categories
-
-High-value categories (typically):
-  - Error resolutions (80% promotion rate)
-  - User corrections (70% promotion rate)
-  - Tool preferences (60% promotion rate)
-
-Low-value categories (typically):
-  - File structure observations (10% promotion rate)
-  - One-off workarounds (5% promotion rate)
-```
-
-#### Anti-Pattern Detection
-
-Beyond capturing what works, actively detect what fails:
-
-| Anti-Pattern | Detection Signal | Response |
-|-------------|-----------------|----------|
-| Repeated wrong import path | Same correction 3+ times | Add to CLAUDE.md as rule |
-| Wrong test framework used | User always changes test approach | Add testing rules |
-| Incorrect API usage | Same API error pattern | Add API usage notes |
-| Style guide violations | User reformats same patterns | Add style rules |
-| Wrong branch workflow | User corrects git operations | Add git workflow rules |
-
-### 6. Continuous Calibration
-
-#### Confidence Scoring
-
-Every piece of learned knowledge carries a confidence score:
-
-```
-Confidence = base_score * recency_factor * consistency_factor
-
-base_score:
-  - User explicitly stated: 1.0
-  - Observed from successful outcome: 0.8
-  - Inferred from pattern: 0.6
-  - Guessed from context: 0.3
-
-recency_factor:
-  - Last 7 days: 1.0
-  - 7-30 days: 0.9
-  - 30-90 days: 0.7
-  - 90+ days: 0.5
-
-consistency_factor:
-  - Never contradicted: 1.0
-  - Contradicted once, reaffirmed: 0.9
-  - Contradicted, not reaffirmed: 0.5
-  - Actively contradicted: 0.0 (delete)
-```
-
-#### Belief Revision
-
-When new information contradicts existing knowledge:
-
-```
-1. Compare confidence scores
-2. If new info higher confidence → update knowledge
-3. If roughly equal → flag for user confirmation
-4. If new info lower confidence → keep existing, note conflict
-5. Always log the conflict for review
-```
-
-## Workflows
-
-### Workflow 1: Weekly Memory Health Check
-
-```
-1. Read all memory files (MEMORY.md + topic files)
-2. Count total entries and lines
-3. For each entry, classify: PROMOTE / CONSOLIDATE / STALE / KEEP / EXTRACT
-4. Execute promotions (with user confirmation)
-5. Execute consolidations
-6. Delete stale entries
-7. Verify under 200-line limit
-8. Report: entries promoted, consolidated, deleted, remaining
-```
-
-### Workflow 2: Post-Session Learning Capture
-
-```
-1. Review session outcomes (successes, corrections, failures)
-2. For each correction: log what was wrong and what was right
-3. For each failure: log root cause and correct approach
-4. Check existing memory for related entries
-5. If related entry exists: increment recurrence count
-6. If new: add entry with context
-7. If recurrence threshold met: flag for promotion
-```
-
-### Workflow 3: Regression Investigation
-
-```
-1. Identify the degraded metric
-2. Pull last 5 sessions&#x27; outcomes for that task type
-3. Compare against baseline (first 5 sessions)
-4. Identify what changed: memory, code, rules, environment
-5. Propose fix: update rule, add rule, retrain pattern
-6. Apply fix
-7. Monitor next 3 sessions
-```
-
-## Common Pitfalls
-
-| Pitfall | Why It Happens | Fix |
-|---------|---------------|-----|
-| Memory bloat | Auto-capture without curation | Weekly review, enforce 200-line limit |
-| Stale rules | Code changes, rules don&#x27;t update | Timestamp rules, periodic re-verification |
-| Over-promotion | Promoting one-off patterns as rules | Require 3+ recurrences before promotion |
-| Silent regression | No metrics tracking | Implement outcome classification |
-| Cargo cult rules | Copying rules without understanding | Each rule must have a &quot;why&quot; annotation |
-| Contradiction spirals | New rules conflict with old rules | Belief revision protocol |
-
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| **context-engine** | Context Engine manages what the agent sees; Self-Improving Agent manages what the agent remembers |
-| **agent-designer** | Agent Designer defines agent architecture; Self-Improving Agent adds the learning layer |
-| **prompt-engineer-toolkit** | Prompts that degrade over time are a regression; track and test them |
-| **observability-designer** | Monitor agent performance metrics alongside system metrics |
+Flow: `Remember → Extract → Promote → Review`, with `Status` providing visibility back into the cycle.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `pattern_extractor.py` | Extract reusable patterns from session logs | `python scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
+| `memory_health_checker.py` | Audit memory for line counts, stale, and promotable entries | `python scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
+| `rule_promoter.py` | Validate and apply promotions from memory to rules | `python scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
+| `feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities | `python scripts/feedback_analyzer.py analyze` |
+| `regression_detector.py` | Compare baseline vs current performance metrics | `python scripts/regression_detector.py compare` |
+| `rule_manager.py` | Manage a learned rules knowledge base with CRUD | `python scripts/rule_manager.py list` |
 
 ## References
 
-- `references/feedback-loop-patterns.md` - Detailed feedback capture and analysis patterns
-- `references/memory-curation-guide.md` - Step-by-step memory review and promotion procedures
-- `references/meta-learning-architectures.md` - Advanced patterns for agents that learn how to learn
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| MEMORY.md exceeds 200 lines and keeps growing | Auto-capture enabled without scheduled curation | Run the Weekly Memory Health Check workflow; split topic-specific entries into `memory/&lt;topic&gt;.md` files |
-| Promoted rules contradict each other | Two conflicting patterns both crossed the 3-recurrence threshold | Apply the Belief Revision protocol -- compare confidence scores, resolve the conflict, delete the weaker rule |
-| Agent performance degrades after a promotion batch | Newly promoted rules interact badly or are overly prescriptive | Roll back the most recent promotions, re-validate each rule in isolation, and promote incrementally |
-| Skill extraction produces a package that only works on the original project | Generalization step was skipped or rushed | Revisit Extraction Process Step 2 -- strip project-specific details, parameterize hardcoded values, test on a second project before packaging |
-| Feedback loop captures noise (trivial observations dominate) | Capture strategy has not been calibrated with the Adaptive Capture Strategy | After 10 sessions, analyze promotion rates by category and restrict capture to high-value categories (error resolutions, user corrections, tool preferences) |
-| Regression Detection flags false positives | Thresholds set too aggressively for early-stage projects | Widen thresholds during the first 20 sessions (e.g., first-attempt success 60% instead of 70%), then tighten once a stable baseline exists |
-| Confidence scores decay too fast on valid long-term rules | Recency factor penalizes rules that are infrequently encountered but still correct | For rules explicitly confirmed by the user, override the recency factor to 1.0 regardless of age |
-
-## Success Criteria
-
-- **First-attempt success rate above 80%** after 20 sessions of active self-improvement, measured as tasks accepted without user correction.
-- **Memory size stays under 200 lines** in MEMORY.md at all times, with overflow correctly routed to topic files.
-- **Promotion rate of 15-25%** of captured observations within 30 days, indicating the capture strategy targets high-value signals.
-- **Zero stale rules** remaining after each Weekly Memory Health Check -- every rule references current code, tools, and workflows.
-- **Regression detection latency under 3 sessions** -- performance degradation is flagged within 3 sessions of onset, not discovered weeks later.
-- **Extracted skills reusable across 2+ projects** without modification, validating that the generalization step produces genuinely portable packages.
-- **Contradiction resolution within 1 session** -- conflicting rules are detected and resolved via the Belief Revision protocol before they cause downstream errors.
+- **[references/memory-curation-guide.md](references/memory-curation-guide.md)** — the memory stack, review protocol, promotion criteria/targets, the Weekly Memory Health Check workflow, and the continuous-calibration (confidence scoring + belief revision) machinery. Read when curating MEMORY.md or promoting learnings to rules.
+- **[references/feedback-loop-patterns.md](references/feedback-loop-patterns.md)** — the core improvement-loop architecture and maturity levels, outcome classification + signal extraction, the capture template, regression metrics/response, the post-session and regression-investigation workflows, common pitfalls, troubleshooting, and the success-criteria bar. Read when designing feedback capture or diagnosing a regression.
+- **[references/meta-learning-architectures.md](references/meta-learning-architectures.md)** — skill-extraction criteria and process, the adaptive capture strategy, and anti-pattern detection. Read when the agent should adapt its own learning strategy or extract a proven pattern into a skill.
+- **[references/self-improvement-methodology.md](references/self-improvement-methodology.md)** — the five layers of agent learning, the confidence-scoring model, the promotion decision tree, the memory-curation checklist, anti-patterns, and the metrics/thresholds table. Read for the end-to-end methodology overview.
 
 ## Scope &amp; Limitations
 
@@ -1390,21 +656,21 @@ When new information contradicts existing knowledge:
 - Skill extraction methodology for graduating proven patterns into reusable, standalone packages.
 
 **This skill does NOT cover:**
-- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol` for those patterns.
-- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit` for prompt lifecycle management.
-- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer` for system-level monitoring.
-- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer` for foundational agent design decisions.
+- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol`.
+- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit`.
+- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer`.
+- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer`.
 
 ## Integration Points
 
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
-| **context-engine** | Context Engine controls what the agent sees per session; Self-Improving Agent decides what is worth remembering long-term | Promoted rules and curated memory flow into context retrieval; context relevance metrics flow back for regression tracking |
-| **agent-designer** | Agent Designer defines the agent&#x27;s architecture and capabilities; Self-Improving Agent layers learning infrastructure on top | Architecture constraints inform what feedback loops are possible; extracted skills feed back as new agent capabilities |
-| **prompt-engineer-toolkit** | Prompts degrade over time as codebases evolve; Self-Improving Agent detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as rule changes in CLAUDE.md |
-| **observability-designer** | Observability provides system-level metrics; Self-Improving Agent provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent performance metrics can be exported to observability dashboards |
-| **tech-debt-tracker** | Stale rules and bloated memory are a form of technical debt; Tech Debt Tracker can surface them alongside code debt | Memory health metrics feed into debt scoring; debt prioritization informs which stale rules to retire first |
-| **agent-workflow-designer** | Multi-step agent workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted workflow optimizations flow back as updated workflow definitions |
+| **context-engine** | Controls what the agent sees per session; this skill decides what is worth remembering long-term | Promoted rules and curated memory feed context retrieval; context relevance metrics flow back for regression tracking |
+| **agent-designer** | Defines the agent&#x27;s architecture and capabilities; this skill layers learning infrastructure on top | Architecture constraints inform possible feedback loops; extracted skills feed back as new capabilities |
+| **prompt-engineer-toolkit** | Prompts degrade as codebases evolve; this skill detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as CLAUDE.md rule changes |
+| **observability-designer** | Provides system-level metrics; this skill provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent metrics export to observability dashboards |
+| **tech-debt-tracker** | Stale rules and bloated memory are technical debt this can surface alongside code debt | Memory health metrics feed debt scoring; debt prioritization informs which stale rules to retire |
+| **agent-workflow-designer** | Multi-step workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted optimizations update workflow definitions |
 
 ---
 
@@ -1432,7 +698,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Self Improving Agent&quot;**
-   - Description: &quot;Patterns for building AI agents that learn from their own execution, detect failure modes, and improve autonomously. Covers feedback loops, performance regression detection, memory curation, skill ext...&quot;
+   - Description: &quot;Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1493,7 +759,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/self-improving-agent/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/self-improving-agent/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

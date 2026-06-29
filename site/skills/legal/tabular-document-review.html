@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Tabular Document Review</h1>
     <p class="page-subtitle">Extract structured data from multiple documents into comparison matrix with citations. Use for bulk document review.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Legal</span> <span class="badge badge-subdomain">Document Review</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Legal</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">document-review</span><span class="tag">extraction</span><span class="tag">comparison-matrix</span><span class="tag">contracts</span><span class="tag">bulk-review</span></div>
   </div>
   <h2>How to Use</h2>
@@ -486,6 +486,16 @@ Production-ready toolkit for extracting structured data from multiple legal docu
 - [Scope &amp; Limitations](#scope--limitations)
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
+
+## Clarify First
+
+Before the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The extraction columns** — define exactly what each cell holds; a vague &quot;Date&quot; matches dozens of dates, while &quot;Effective Date&quot; with guidance does not
+- [ ] **Document set location and formats** — drives discovery and how many parallel agents to allocate (ceil(N/10), max 10)
+- [ ] **Document type** — contracts, NDAs, employment, leases — selects the pre-defined column set and per-column extraction guidance
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the matrix.
 
 ## Tools
 
@@ -788,6 +798,16 @@ Production-ready toolkit for extracting structured data from multiple legal docu
 - [Scope &amp; Limitations](#scope--limitations)
 - [Anti-Patterns](#anti-patterns)
 - [Tool Reference](#tool-reference)
+
+## Clarify First
+
+Before the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The extraction columns** — define exactly what each cell holds; a vague &quot;Date&quot; matches dozens of dates, while &quot;Effective Date&quot; with guidance does not
+- [ ] **Document set location and formats** — drives discovery and how many parallel agents to allocate (ceil(N/10), max 10)
+- [ ] **Document type** — contracts, NDAs, employment, leases — selects the pre-defined column set and per-column extraction guidance
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the matrix.
 
 ## Tools
 
@@ -1109,7 +1129,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python legal/tabular-document-review/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Legal</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/legal/contract-review.html" class="skill-card" style="text-decoration:none"><h3>Contract Review</h3><p>Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/nda-triage.html" class="skill-card" style="text-decoration:none"><h3>Nda Triage</h3><p>Rapid NDA screening with GREEN/YELLOW/RED classification. 10-point checklist for incoming NDAs....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/nda-review.html" class="skill-card" style="text-decoration:none"><h3>Nda Review</h3><p>Deep clause-by-clause NDA review from Recipient or Discloser perspective. Produces issue log...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/tech-contract-negotiation.html" class="skill-card" style="text-decoration:none"><h3>Tech Contract Negotiation</h3><p>Negotiation frameworks for technology services agreements, B2B contracts, and professional...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/privacy-compliance.html" class="skill-card" style="text-decoration:none"><h3>Privacy Compliance</h3><p>Multi-regulation privacy compliance navigator. Use for GDPR, CCPA, LGPD, POPIA, PIPEDA, PDPA,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/dpia-assessment.html" class="skill-card" style="text-decoration:none"><h3>Dpia Assessment</h3><p>GDPR Art. 35 Data Protection Impact Assessment with threshold checking, risk registers, and EDPB...</p></a></div>
+  <h2>Related Skills in Legal</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/legal/contract-review.html" class="skill-card" style="text-decoration:none"><h3>Contract Review</h3><p>Contract review assistant analyzing agreements against playbooks. GREEN/YELLOW/RED severity. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/data-breach-response.html" class="skill-card" style="text-decoration:none"><h3>Data Breach Response</h3><p>Data breach incident response with ENISA severity scoring, notification timelines, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/dpia-assessment.html" class="skill-card" style="text-decoration:none"><h3>Dpia Assessment</h3><p>GDPR Art. 35 Data Protection Impact Assessment with threshold checking, risk registers, and EDPB...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/legal-canned-responses.html" class="skill-card" style="text-decoration:none"><h3>Legal Canned Responses</h3><p>Generate templated responses for common legal inquiries with escalation detection. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/legal-meeting-briefing.html" class="skill-card" style="text-decoration:none"><h3>Legal Meeting Briefing</h3><p>Prepare structured briefings for meetings with legal relevance and track action items. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/legal/legal-red-team.html" class="skill-card" style="text-decoration:none"><h3>Legal Red Team</h3><p>Adversarial verification for AI-generated legal content. Use when fact-checking legal documents,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/legal/tabular-document-review/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

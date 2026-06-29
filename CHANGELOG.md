@@ -5,6 +5,26 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.10.0] - 2026-06-29 (Cross-platform surface refresh + single-source manifests)
+
+Realigns every assistant-facing surface with the real library (**339 skills · 17 domains · 774 Python tools**) and unifies the machine catalogs behind one generator so they can no longer drift independently.
+
+### Added
+
+- **Cursor Project Rules** — `.cursor/rules/*.mdc` (modern replacement for `.cursorrules`): `repo-overview.mdc` (always-on), `skill-authoring.mdc` (auto-attaches on `**/SKILL.md`), `python-tools.mdc` (auto-attaches on `**/scripts/*.py`).
+- **Per-domain Claude Code plugins** — `plugin.json` for the 9 domains that lacked one (legal, data-analytics, hr-operations, sales-success, personal-productivity, documents, vertical-advisors, research, workflow); all 17 domains now install as plugins.
+- **`build_manifest.py` now emits every machine catalog from one source** — in addition to `cli/skills.json` and `registry.json`, it regenerates `.gemini/skills-index.json` (was stale at 203) and the website catalog `skills.json` (was stale at 294). Per-skill entries gained `license`, `category`, `subdomain`, and `tools_count`.
+
+### Changed
+
+- **`.claude-plugin/marketplace.json` → v3.0.0** — corrected per-plugin counts and expanded from 8 to all 17 domain plugins.
+- **Prose configs refreshed** — `AGENTS.md`, `GEMINI.md`, `.cursorrules`, `.windsurfrules`, `.clinerules`, `.goosehints`, `CLAUDE.md`, `README.md`, `mkdocs.yml`, and `docs/` updated to 339/17/774; removed references to dead directories (`engineering-team/`, `marketing-skill/`).
+- **Website regenerated** — all 339 skill pages, 17 domain pages, `llms.txt`, agents/commands catalogs, and sitemap rebuilt from the refreshed catalog.
+
+### Fixed
+
+- Eliminated count drift across platform surfaces (skills had been reported as 204, 294, 312, and 338 in different files; domains as 13, 15, and 16; tools as 559, 681, 730, and 784).
+
 ## [4.9.0] - 2026-06-15 (Token efficiency — progressive disclosure)
 
 Behavior-preserving refactor that cuts the per-invocation token cost of the heaviest skills by moving deep content into load-on-demand `references/` files, following the Anthropic Agent Skills three-tier loading model (description always resident → SKILL.md body on trigger → references on demand).

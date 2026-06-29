@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Senior Data Scientist</h1>
     <p class="page-subtitle"></p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Data Science</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">data-science</span><span class="tag">ml</span><span class="tag">statistics</span><span class="tag">experimentation</span><span class="tag">python</span><span class="tag">mlops</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,15 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Data Scientist (Engineering domain).
 
-Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making. data-science, machine-learning, statistics, a-b-testing, causal-inference,
-
-## Your Key Capabilities
-- experiment_designer.py
-- feature_engineering_pipeline.py
-- model_evaluation_suite.py
-
-## Frameworks &amp; Templates You Know
-- | ML Frameworks | PyTorch, TensorFlow, Scikit-learn, XGBoost |
+Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference. data-science, machine-learning, statistics, a-b-testing, causal-i
 
 ## How to Help
 When the user asks for help in this domain:
@@ -421,15 +413,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Senior Data Scientist (Engineering domain).
 
-Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making. data-science, machine-learning, statistics, a-b-testing, causal-inference,
-
-## Your Key Capabilities
-- experiment_designer.py
-- feature_engineering_pipeline.py
-- model_evaluation_suite.py
-
-## Frameworks &amp; Templates You Know
-- | ML Frameworks | PyTorch, TensorFlow, Scikit-learn, XGBoost |
+Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference. data-science, machine-learning, statistics, a-b-testing, causal-i
 
 ## How to Help
 When the user asks for help in this domain:
@@ -459,8 +443,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Data Scientist
 
-Expert data science for statistical modeling, experimentation, ML deployment,
-and data-driven decision making.
+Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference.
 
 ## Keywords
 
@@ -468,25 +451,30 @@ data-science, machine-learning, statistics, a-b-testing, causal-inference,
 feature-engineering, mlops, experiment-design, model-deployment, python,
 scikit-learn, pytorch, tensorflow, spark, airflow
 
----
+## Core Capabilities
 
-## Quick Start
+- **Experiment design &amp; analysis** — hypothesis framing, power analysis and sample sizing, randomization, SRM monitoring, and post-hoc significance testing.
+- **Feature engineering** — profiling, candidate generation (temporal/aggregation/interaction/text), selection (variance, correlation, SHAP/RFE), and leakage validation.
+- **Model training &amp; evaluation** — stratified/temporal splits, baselines, hyperparameter tuning, cross-validation, calibration, and fairness checks.
+- **Production deployment** — containerized serving, input/output drift monitoring (KS/PSI), canary rollouts, and latency/error SLAs.
+- **Causal inference** — propensity score matching, difference-in-differences, regression discontinuity, instrumental variables, and assumption/placebo testing.
 
-```bash
-# Design an experiment with power analysis
-python scripts/experiment_designer.py --input data/ --output results/
+## When to Use
 
-# Run feature engineering pipeline
-python scripts/feature_engineering_pipeline.py --target project/ --analyze
+- Designing or analyzing an A/B test.
+- Building a feature engineering pipeline.
+- Training, evaluating, or deploying an ML model.
+- Estimating treatment effects from observational data.
 
-# Evaluate model performance
-python scripts/model_evaluation_suite.py --config config.yaml --deploy
+## Clarify First
 
-# Statistical analysis
-python scripts/statistical_analyzer.py --data input.csv --test ttest --output report.json
-```
+Before running an analysis or pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Task** — A/B test design / feature engineering / model evaluation / causal inference (selects the script and workflow)
+- [ ] **Dataset &amp; target variable** — what you are modeling or measuring (drives feature generation and leakage validation)
+- [ ] **Decision metric &amp; minimum effect** — the metric and the smallest effect worth detecting (drives power analysis and sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
@@ -497,176 +485,17 @@ python scripts/statistical_analyzer.py --data input.csv --test ttest --output re
 | `scripts/statistical_analyzer.py` | Hypothesis testing, causal inference, regression analysis |
 | `scripts/model_evaluation_suite.py` | Model comparison, cross-validation, deployment readiness checks |
 
----
+&gt; `statistical_analyzer.py` is referenced but not yet present in the repo — see the note in [references/ds-operations.md](references/ds-operations.md). Use inline scipy/statsmodels in the meantime.
 
-## Tech Stack
+## References
 
-| Category | Tools |
-|----------|-------|
-| Languages | Python, SQL, R, Scala |
-| ML Frameworks | PyTorch, TensorFlow, Scikit-learn, XGBoost |
-| Data Processing | Spark, Airflow, dbt, Kafka, Databricks |
-| Deployment | Docker, Kubernetes, AWS SageMaker, GCP Vertex AI |
-| Experiment Tracking | MLflow, Weights &amp; Biases |
-| Databases | PostgreSQL, BigQuery, Snowflake, Pinecone |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
-
-## Workflow 1: Design and Analyze an A/B Test
-
-1. **Define hypothesis** -- State the null and alternative hypotheses. Identify the primary metric (e.g., conversion rate, revenue per user).
-2. **Calculate sample size** -- `python scripts/experiment_designer.py --input data/ --output results/`
-   - Specify minimum detectable effect (MDE), significance level (alpha=0.05), and power (0.80).
-   - Example: For baseline conversion 5%, MDE 10% relative lift, need ~31,000 users per variant.
-3. **Randomize assignment** -- Use hash-based assignment on user ID for deterministic, reproducible splits.
-4. **Run experiment** -- Monitor for sample ratio mismatch (SRM) daily. Flag if observed ratio deviates &gt;1% from expected.
-5. **Analyze results:**
-   ```python
-   from scipy import stats
-
-   # Two-proportion z-test for conversion rates
-   control_conv = control_successes / control_total
-   treatment_conv = treatment_successes / treatment_total
-   z_stat, p_value = stats.proportions_ztest(
-       [treatment_successes, control_successes],
-       [treatment_total, control_total],
-       alternative=&#x27;two-sided&#x27;
-   )
-   # Reject H0 if p_value &lt; 0.05
-   ```
-6. **Validate** -- Check for novelty effects, Simpson&#x27;s paradox across segments, and pre-experiment balance on covariates.
-
-## Workflow 2: Build a Feature Engineering Pipeline
-
-1. **Profile raw data** -- `python scripts/feature_engineering_pipeline.py --target project/ --analyze`
-   - Identify null rates, cardinality, distributions, and data types.
-2. **Generate candidate features:**
-   - Temporal: day-of-week, hour, recency, frequency, monetary (RFM)
-   - Aggregation: rolling means/sums over 7d/30d/90d windows
-   - Interaction: ratio features, polynomial combinations
-   - Text: TF-IDF, embedding vectors
-3. **Select features** -- Remove features with &gt;95% null rate, near-zero variance, or &gt;0.95 pairwise correlation. Use recursive feature elimination or SHAP importance.
-4. **Validate** -- Confirm no target leakage (no features derived from post-outcome data). Check train/test distribution alignment.
-5. **Register** -- Store features in feature store with versioning and lineage metadata.
-
-## Workflow 3: Train and Evaluate a Model
-
-1. **Split data** -- Stratified train/validation/test split (70/15/15). For time series, use temporal split (no future leakage).
-2. **Train baseline** -- Start with a simple model (logistic regression, gradient boosted trees) to establish a benchmark.
-3. **Tune hyperparameters** -- Use Optuna or cross-validated grid search. Log all runs to MLflow.
-4. **Evaluate on held-out test set:**
-   ```python
-   from sklearn.metrics import classification_report, roc_auc_score
-
-   y_pred = model.predict(X_test)
-   y_prob = model.predict_proba(X_test)[:, 1]
-
-   print(classification_report(y_test, y_pred))
-   print(f&quot;AUC-ROC: {roc_auc_score(y_test, y_prob):.4f}&quot;)
-   ```
-5. **Validate** -- Check calibration (predicted probabilities match observed rates). Evaluate fairness metrics across protected groups. Confirm no overfitting (train vs test gap &lt;5%).
-
-## Workflow 4: Deploy a Model to Production
-
-1. **Containerize** -- Package model with inference dependencies in Docker:
-   ```bash
-   docker build -t model-service:v1 .
-   ```
-2. **Set up serving** -- Deploy behind a REST API with health check, input validation, and structured error responses.
-3. **Configure monitoring:**
-   - Input drift: compare incoming feature distributions to training baseline (KS test, PSI)
-   - Output drift: monitor prediction distribution shifts
-   - Performance: track latency P50/P95/P99 targets (&lt;50ms / &lt;100ms / &lt;200ms)
-4. **Enable canary deployment** -- Route 5% traffic to new model, compare metrics against baseline for 24-48 hours.
-5. **Validate** -- `python scripts/model_evaluation_suite.py --config config.yaml --deploy` confirms serving latency, error rate &lt;0.1%, and model outputs match offline evaluation.
-
-## Workflow 5: Perform Causal Inference
-
-1. **Assess assignment mechanism** -- Determine if treatment was randomized (use experiment analysis) or observational (use causal methods below).
-2. **Select method** based on data structure:
-   - **Propensity Score Matching**: when treatment is binary, many covariates available
-   - **Difference-in-Differences**: when pre/post data available for treatment and control groups
-   - **Regression Discontinuity**: when treatment assigned by threshold on running variable
-   - **Instrumental Variables**: when unobserved confounding present but valid instrument exists
-3. **Check assumptions** -- Parallel trends (DiD), overlap/positivity (PSM), continuity (RDD).
-4. **Estimate treatment effect** and compute confidence intervals.
-5. **Validate** -- Run placebo tests (apply method to pre-treatment period, expect null effect). Sensitivity analysis for unobserved confounding.
-
----
-
-## Performance Targets
-
-| Metric | Target |
-|--------|--------|
-| P50 latency | &lt; 50ms |
-| P95 latency | &lt; 100ms |
-| P99 latency | &lt; 200ms |
-| Throughput | &gt; 1,000 req/s |
-| Availability | 99.9% |
-| Error rate | &lt; 0.1% |
-
----
-
-## Common Commands
-
-```bash
-# Development
-python -m pytest tests/ -v --cov
-python -m black src/
-python -m pylint src/
-
-# Training
-python scripts/train.py --config prod.yaml
-python scripts/evaluate.py --model best.pth
-
-# Deployment
-docker build -t service:v1 .
-kubectl apply -f k8s/
-helm upgrade service ./charts/
-
-# Monitoring
-kubectl logs -f deployment/service
-python scripts/health_check.py
-```
-
----
-
-## Reference Documentation
-
-| Document | Path |
-|----------|------|
-| Statistical Methods | [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md) |
-| Experiment Design Frameworks | [references/experiment_design_frameworks.md](references/experiment_design_frameworks.md) |
-| Feature Engineering Patterns | [references/feature_engineering_patterns.md](references/feature_engineering_patterns.md) |
-| Automation Scripts | `scripts/` directory |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Sample size calculation returns unreasonably large numbers | Minimum detectable effect (MDE) is set too small relative to baseline variance | Increase MDE to a practically meaningful threshold or accept longer experiment duration |
-| Feature pipeline reports high null rates across all generated features | Source data contains upstream ingestion gaps or schema drift | Validate raw data completeness before running the pipeline; check ETL logs for failed loads |
-| Model AUC drops significantly on validation vs. training set | Overfitting due to high-cardinality features or insufficient regularization | Apply stronger regularization, reduce feature set, or increase training data volume |
-| Experiment shows significant results but large confidence intervals | Insufficient sample size or high metric variance | Extend experiment runtime, increase traffic allocation, or switch to a variance-reduction technique (CUPED) |
-| Deployed model latency exceeds P95 targets | Model complexity too high for serving infrastructure or missing batching | Quantize the model, reduce input feature count, or enable request batching on the serving layer |
-| Feature importance scores are unstable across cross-validation folds | Correlated features cause importance to shift between redundant predictors | Remove highly correlated features (&gt;0.95) before training or use permutation importance with repeated runs |
-| Causal inference estimates show implausible treatment effects | Violation of parallel trends assumption (DiD) or poor covariate overlap (PSM) | Run diagnostic tests (placebo checks, overlap histograms) and consider alternative identification strategies |
-
----
-
-## Success Criteria
-
-- **Model discrimination**: AUC-ROC above 0.85 on held-out test set for classification tasks
-- **Calibration quality**: Brier score below 0.15; predicted probabilities within 5% of observed rates across decile bins
-- **Feature coverage**: Feature importance analysis accounts for at least 90% of cumulative model importance
-- **Experiment power**: All A/B tests designed with statistical power of 0.80 or higher at the specified MDE
-- **Deployment readiness**: Model serving latency under 100ms at P95; error rate below 0.1%
-- **Reproducibility**: All experiments and training runs logged with full parameter tracking; results reproducible from logged artifacts
-- **Data quality**: Input feature pipelines maintain less than 2% null rate on critical features after imputation
-
----
+- **[references/ds-workflows.md](references/ds-workflows.md)** — quick-start commands, tech stack, the five end-to-end workflows (A/B testing, feature pipeline, train/evaluate, deploy, causal inference) with Python snippets, performance targets, and common commands. Read when executing any data-science task.
+- **[references/ds-operations.md](references/ds-operations.md)** — troubleshooting table, success criteria, and the full CLI flag reference for each script. Read when diagnosing issues or running the tools.
+- **[references/statistical_methods_advanced.md](references/statistical_methods_advanced.md)** — advanced statistical methods reference (hypothesis testing, causal inference, regression). Read for statistical depth.
+- **[references/experiment_design_frameworks.md](references/experiment_design_frameworks.md)** — experiment design frameworks and power-analysis foundations. Read when designing rigorous experiments.
+- **[references/feature_engineering_patterns.md](references/feature_engineering_patterns.md)** — feature engineering patterns and selection techniques. Read when building features.
 
 ## Scope &amp; Limitations
 
@@ -682,8 +511,6 @@ python scripts/health_check.py
 - Prompt engineering, RAG systems, and LLM fine-tuning workflows -- see `senior-prompt-engineer`
 - Computer vision pipelines (object detection, segmentation, video processing) -- see `senior-computer-vision`
 
----
-
 ## Integration Points
 
 | Skill | Integration | Data Flow |
@@ -694,115 +521,6 @@ python scripts/health_check.py
 | `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --&gt; deployment topology --&gt; monitoring dashboards |
 | `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --&gt; backend service layer --&gt; client applications |
 | `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --&gt; Kubernetes manifests --&gt; production clusters |
-
----
-
-## Tool Reference
-
-### experiment_designer.py
-
-**Purpose:** A/B test design, statistical power analysis, and sample size calculation. Validates experiment configuration and produces structured results with timestamps.
-
-**Usage:**
-```bash
-python scripts/experiment_designer.py --input data/ --output results/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing experiment data) |
-| `--output` | `-o` | Yes | Output path (directory for results) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/experiment_designer.py -i data/experiment_config/ -o results/power_analysis/ -c config.yaml -v
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
----
-
-### feature_engineering_pipeline.py
-
-**Purpose:** Automated feature generation, correlation analysis, and feature selection. Profiles raw data, generates candidate features, and validates for target leakage.
-
-**Usage:**
-```bash
-python scripts/feature_engineering_pipeline.py --input data/ --output features/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing raw data) |
-| `--output` | `-o` | Yes | Output path (directory for generated features) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/feature_engineering_pipeline.py -i data/raw/ -o features/v2/ -v
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
----
-
-### model_evaluation_suite.py
-
-**Purpose:** Model comparison, cross-validation, and deployment readiness checks. Validates serving latency, error rates, and confirms model outputs match offline evaluation.
-
-**Usage:**
-```bash
-python scripts/model_evaluation_suite.py --input models/ --output evaluation/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing model artifacts) |
-| `--output` | `-o` | Yes | Output path (directory for evaluation results) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/model_evaluation_suite.py -i models/xgb_v3/ -o evaluation/report/ -c prod_config.yaml
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
-&gt; **Note:** The Tools table references `scripts/statistical_analyzer.py` but this script does not yet exist in the repository. Statistical analysis workflows described in the SKILL.md can be performed using inline Python (scipy, statsmodels) as shown in Workflow 1 and Workflow 5.
 
 ---
 
@@ -855,8 +573,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Data Scientist
 
-Expert data science for statistical modeling, experimentation, ML deployment,
-and data-driven decision making.
+Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference.
 
 ## Keywords
 
@@ -864,25 +581,30 @@ data-science, machine-learning, statistics, a-b-testing, causal-inference,
 feature-engineering, mlops, experiment-design, model-deployment, python,
 scikit-learn, pytorch, tensorflow, spark, airflow
 
----
+## Core Capabilities
 
-## Quick Start
+- **Experiment design &amp; analysis** — hypothesis framing, power analysis and sample sizing, randomization, SRM monitoring, and post-hoc significance testing.
+- **Feature engineering** — profiling, candidate generation (temporal/aggregation/interaction/text), selection (variance, correlation, SHAP/RFE), and leakage validation.
+- **Model training &amp; evaluation** — stratified/temporal splits, baselines, hyperparameter tuning, cross-validation, calibration, and fairness checks.
+- **Production deployment** — containerized serving, input/output drift monitoring (KS/PSI), canary rollouts, and latency/error SLAs.
+- **Causal inference** — propensity score matching, difference-in-differences, regression discontinuity, instrumental variables, and assumption/placebo testing.
 
-```bash
-# Design an experiment with power analysis
-python scripts/experiment_designer.py --input data/ --output results/
+## When to Use
 
-# Run feature engineering pipeline
-python scripts/feature_engineering_pipeline.py --target project/ --analyze
+- Designing or analyzing an A/B test.
+- Building a feature engineering pipeline.
+- Training, evaluating, or deploying an ML model.
+- Estimating treatment effects from observational data.
 
-# Evaluate model performance
-python scripts/model_evaluation_suite.py --config config.yaml --deploy
+## Clarify First
 
-# Statistical analysis
-python scripts/statistical_analyzer.py --data input.csv --test ttest --output report.json
-```
+Before running an analysis or pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Task** — A/B test design / feature engineering / model evaluation / causal inference (selects the script and workflow)
+- [ ] **Dataset &amp; target variable** — what you are modeling or measuring (drives feature generation and leakage validation)
+- [ ] **Decision metric &amp; minimum effect** — the metric and the smallest effect worth detecting (drives power analysis and sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
@@ -893,176 +615,17 @@ python scripts/statistical_analyzer.py --data input.csv --test ttest --output re
 | `scripts/statistical_analyzer.py` | Hypothesis testing, causal inference, regression analysis |
 | `scripts/model_evaluation_suite.py` | Model comparison, cross-validation, deployment readiness checks |
 
----
+&gt; `statistical_analyzer.py` is referenced but not yet present in the repo — see the note in [references/ds-operations.md](references/ds-operations.md). Use inline scipy/statsmodels in the meantime.
 
-## Tech Stack
+## References
 
-| Category | Tools |
-|----------|-------|
-| Languages | Python, SQL, R, Scala |
-| ML Frameworks | PyTorch, TensorFlow, Scikit-learn, XGBoost |
-| Data Processing | Spark, Airflow, dbt, Kafka, Databricks |
-| Deployment | Docker, Kubernetes, AWS SageMaker, GCP Vertex AI |
-| Experiment Tracking | MLflow, Weights &amp; Biases |
-| Databases | PostgreSQL, BigQuery, Snowflake, Pinecone |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
-
-## Workflow 1: Design and Analyze an A/B Test
-
-1. **Define hypothesis** -- State the null and alternative hypotheses. Identify the primary metric (e.g., conversion rate, revenue per user).
-2. **Calculate sample size** -- `python scripts/experiment_designer.py --input data/ --output results/`
-   - Specify minimum detectable effect (MDE), significance level (alpha=0.05), and power (0.80).
-   - Example: For baseline conversion 5%, MDE 10% relative lift, need ~31,000 users per variant.
-3. **Randomize assignment** -- Use hash-based assignment on user ID for deterministic, reproducible splits.
-4. **Run experiment** -- Monitor for sample ratio mismatch (SRM) daily. Flag if observed ratio deviates &gt;1% from expected.
-5. **Analyze results:**
-   ```python
-   from scipy import stats
-
-   # Two-proportion z-test for conversion rates
-   control_conv = control_successes / control_total
-   treatment_conv = treatment_successes / treatment_total
-   z_stat, p_value = stats.proportions_ztest(
-       [treatment_successes, control_successes],
-       [treatment_total, control_total],
-       alternative=&#x27;two-sided&#x27;
-   )
-   # Reject H0 if p_value &lt; 0.05
-   ```
-6. **Validate** -- Check for novelty effects, Simpson&#x27;s paradox across segments, and pre-experiment balance on covariates.
-
-## Workflow 2: Build a Feature Engineering Pipeline
-
-1. **Profile raw data** -- `python scripts/feature_engineering_pipeline.py --target project/ --analyze`
-   - Identify null rates, cardinality, distributions, and data types.
-2. **Generate candidate features:**
-   - Temporal: day-of-week, hour, recency, frequency, monetary (RFM)
-   - Aggregation: rolling means/sums over 7d/30d/90d windows
-   - Interaction: ratio features, polynomial combinations
-   - Text: TF-IDF, embedding vectors
-3. **Select features** -- Remove features with &gt;95% null rate, near-zero variance, or &gt;0.95 pairwise correlation. Use recursive feature elimination or SHAP importance.
-4. **Validate** -- Confirm no target leakage (no features derived from post-outcome data). Check train/test distribution alignment.
-5. **Register** -- Store features in feature store with versioning and lineage metadata.
-
-## Workflow 3: Train and Evaluate a Model
-
-1. **Split data** -- Stratified train/validation/test split (70/15/15). For time series, use temporal split (no future leakage).
-2. **Train baseline** -- Start with a simple model (logistic regression, gradient boosted trees) to establish a benchmark.
-3. **Tune hyperparameters** -- Use Optuna or cross-validated grid search. Log all runs to MLflow.
-4. **Evaluate on held-out test set:**
-   ```python
-   from sklearn.metrics import classification_report, roc_auc_score
-
-   y_pred = model.predict(X_test)
-   y_prob = model.predict_proba(X_test)[:, 1]
-
-   print(classification_report(y_test, y_pred))
-   print(f&quot;AUC-ROC: {roc_auc_score(y_test, y_prob):.4f}&quot;)
-   ```
-5. **Validate** -- Check calibration (predicted probabilities match observed rates). Evaluate fairness metrics across protected groups. Confirm no overfitting (train vs test gap &lt;5%).
-
-## Workflow 4: Deploy a Model to Production
-
-1. **Containerize** -- Package model with inference dependencies in Docker:
-   ```bash
-   docker build -t model-service:v1 .
-   ```
-2. **Set up serving** -- Deploy behind a REST API with health check, input validation, and structured error responses.
-3. **Configure monitoring:**
-   - Input drift: compare incoming feature distributions to training baseline (KS test, PSI)
-   - Output drift: monitor prediction distribution shifts
-   - Performance: track latency P50/P95/P99 targets (&lt;50ms / &lt;100ms / &lt;200ms)
-4. **Enable canary deployment** -- Route 5% traffic to new model, compare metrics against baseline for 24-48 hours.
-5. **Validate** -- `python scripts/model_evaluation_suite.py --config config.yaml --deploy` confirms serving latency, error rate &lt;0.1%, and model outputs match offline evaluation.
-
-## Workflow 5: Perform Causal Inference
-
-1. **Assess assignment mechanism** -- Determine if treatment was randomized (use experiment analysis) or observational (use causal methods below).
-2. **Select method** based on data structure:
-   - **Propensity Score Matching**: when treatment is binary, many covariates available
-   - **Difference-in-Differences**: when pre/post data available for treatment and control groups
-   - **Regression Discontinuity**: when treatment assigned by threshold on running variable
-   - **Instrumental Variables**: when unobserved confounding present but valid instrument exists
-3. **Check assumptions** -- Parallel trends (DiD), overlap/positivity (PSM), continuity (RDD).
-4. **Estimate treatment effect** and compute confidence intervals.
-5. **Validate** -- Run placebo tests (apply method to pre-treatment period, expect null effect). Sensitivity analysis for unobserved confounding.
-
----
-
-## Performance Targets
-
-| Metric | Target |
-|--------|--------|
-| P50 latency | &lt; 50ms |
-| P95 latency | &lt; 100ms |
-| P99 latency | &lt; 200ms |
-| Throughput | &gt; 1,000 req/s |
-| Availability | 99.9% |
-| Error rate | &lt; 0.1% |
-
----
-
-## Common Commands
-
-```bash
-# Development
-python -m pytest tests/ -v --cov
-python -m black src/
-python -m pylint src/
-
-# Training
-python scripts/train.py --config prod.yaml
-python scripts/evaluate.py --model best.pth
-
-# Deployment
-docker build -t service:v1 .
-kubectl apply -f k8s/
-helm upgrade service ./charts/
-
-# Monitoring
-kubectl logs -f deployment/service
-python scripts/health_check.py
-```
-
----
-
-## Reference Documentation
-
-| Document | Path |
-|----------|------|
-| Statistical Methods | [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md) |
-| Experiment Design Frameworks | [references/experiment_design_frameworks.md](references/experiment_design_frameworks.md) |
-| Feature Engineering Patterns | [references/feature_engineering_patterns.md](references/feature_engineering_patterns.md) |
-| Automation Scripts | `scripts/` directory |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Sample size calculation returns unreasonably large numbers | Minimum detectable effect (MDE) is set too small relative to baseline variance | Increase MDE to a practically meaningful threshold or accept longer experiment duration |
-| Feature pipeline reports high null rates across all generated features | Source data contains upstream ingestion gaps or schema drift | Validate raw data completeness before running the pipeline; check ETL logs for failed loads |
-| Model AUC drops significantly on validation vs. training set | Overfitting due to high-cardinality features or insufficient regularization | Apply stronger regularization, reduce feature set, or increase training data volume |
-| Experiment shows significant results but large confidence intervals | Insufficient sample size or high metric variance | Extend experiment runtime, increase traffic allocation, or switch to a variance-reduction technique (CUPED) |
-| Deployed model latency exceeds P95 targets | Model complexity too high for serving infrastructure or missing batching | Quantize the model, reduce input feature count, or enable request batching on the serving layer |
-| Feature importance scores are unstable across cross-validation folds | Correlated features cause importance to shift between redundant predictors | Remove highly correlated features (&gt;0.95) before training or use permutation importance with repeated runs |
-| Causal inference estimates show implausible treatment effects | Violation of parallel trends assumption (DiD) or poor covariate overlap (PSM) | Run diagnostic tests (placebo checks, overlap histograms) and consider alternative identification strategies |
-
----
-
-## Success Criteria
-
-- **Model discrimination**: AUC-ROC above 0.85 on held-out test set for classification tasks
-- **Calibration quality**: Brier score below 0.15; predicted probabilities within 5% of observed rates across decile bins
-- **Feature coverage**: Feature importance analysis accounts for at least 90% of cumulative model importance
-- **Experiment power**: All A/B tests designed with statistical power of 0.80 or higher at the specified MDE
-- **Deployment readiness**: Model serving latency under 100ms at P95; error rate below 0.1%
-- **Reproducibility**: All experiments and training runs logged with full parameter tracking; results reproducible from logged artifacts
-- **Data quality**: Input feature pipelines maintain less than 2% null rate on critical features after imputation
-
----
+- **[references/ds-workflows.md](references/ds-workflows.md)** — quick-start commands, tech stack, the five end-to-end workflows (A/B testing, feature pipeline, train/evaluate, deploy, causal inference) with Python snippets, performance targets, and common commands. Read when executing any data-science task.
+- **[references/ds-operations.md](references/ds-operations.md)** — troubleshooting table, success criteria, and the full CLI flag reference for each script. Read when diagnosing issues or running the tools.
+- **[references/statistical_methods_advanced.md](references/statistical_methods_advanced.md)** — advanced statistical methods reference (hypothesis testing, causal inference, regression). Read for statistical depth.
+- **[references/experiment_design_frameworks.md](references/experiment_design_frameworks.md)** — experiment design frameworks and power-analysis foundations. Read when designing rigorous experiments.
+- **[references/feature_engineering_patterns.md](references/feature_engineering_patterns.md)** — feature engineering patterns and selection techniques. Read when building features.
 
 ## Scope &amp; Limitations
 
@@ -1078,8 +641,6 @@ python scripts/health_check.py
 - Prompt engineering, RAG systems, and LLM fine-tuning workflows -- see `senior-prompt-engineer`
 - Computer vision pipelines (object detection, segmentation, video processing) -- see `senior-computer-vision`
 
----
-
 ## Integration Points
 
 | Skill | Integration | Data Flow |
@@ -1090,115 +651,6 @@ python scripts/health_check.py
 | `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --&gt; deployment topology --&gt; monitoring dashboards |
 | `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --&gt; backend service layer --&gt; client applications |
 | `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --&gt; Kubernetes manifests --&gt; production clusters |
-
----
-
-## Tool Reference
-
-### experiment_designer.py
-
-**Purpose:** A/B test design, statistical power analysis, and sample size calculation. Validates experiment configuration and produces structured results with timestamps.
-
-**Usage:**
-```bash
-python scripts/experiment_designer.py --input data/ --output results/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing experiment data) |
-| `--output` | `-o` | Yes | Output path (directory for results) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/experiment_designer.py -i data/experiment_config/ -o results/power_analysis/ -c config.yaml -v
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
----
-
-### feature_engineering_pipeline.py
-
-**Purpose:** Automated feature generation, correlation analysis, and feature selection. Profiles raw data, generates candidate features, and validates for target leakage.
-
-**Usage:**
-```bash
-python scripts/feature_engineering_pipeline.py --input data/ --output features/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing raw data) |
-| `--output` | `-o` | Yes | Output path (directory for generated features) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/feature_engineering_pipeline.py -i data/raw/ -o features/v2/ -v
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
----
-
-### model_evaluation_suite.py
-
-**Purpose:** Model comparison, cross-validation, and deployment readiness checks. Validates serving latency, error rates, and confirms model outputs match offline evaluation.
-
-**Usage:**
-```bash
-python scripts/model_evaluation_suite.py --input models/ --output evaluation/
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input path (directory or file containing model artifacts) |
-| `--output` | `-o` | Yes | Output path (directory for evaluation results) |
-| `--config` | `-c` | No | Path to configuration file (YAML or JSON) |
-| `--verbose` | `-v` | No | Enable verbose (DEBUG-level) logging output |
-
-**Example:**
-```bash
-python scripts/model_evaluation_suite.py -i models/xgb_v3/ -o evaluation/report/ -c prod_config.yaml
-```
-
-**Output Format:** JSON to stdout with the following structure:
-```json
-{
-  &quot;status&quot;: &quot;completed&quot;,
-  &quot;start_time&quot;: &quot;2026-03-21T10:00:00.000000&quot;,
-  &quot;processed_items&quot;: 0,
-  &quot;end_time&quot;: &quot;2026-03-21T10:00:01.000000&quot;
-}
-```
-
-&gt; **Note:** The Tools table references `scripts/statistical_analyzer.py` but this script does not yet exist in the repository. Statistical analysis workflows described in the SKILL.md can be performed using inline Python (scipy, statsmodels) as shown in Workflow 1 and Workflow 5.
 
 ---
 
@@ -1286,21 +738,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/senior-data-scientist/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Design an experiment with power analysis
-python scripts/experiment_designer.py --input data/ --output results/
-
-# Run feature engineering pipeline
-python scripts/feature_engineering_pipeline.py --target project/ --analyze
-
-# Evaluate model performance
-python scripts/model_evaluation_suite.py --config config.yaml --deploy
-
-# Statistical analysis
-python scripts/statistical_analyzer.py --data input.csv --test ttest --output report.json
-</code></pre>
-
----
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-data-scientist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

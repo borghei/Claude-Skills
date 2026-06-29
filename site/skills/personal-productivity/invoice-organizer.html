@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invoice Organizer - Claude Skills</title>
-  <meta name="description" content="Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or wh">
+  <meta name="description" content="Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/invoice-organizer.html">
   <meta property="og:title" content="Invoice Organizer - Claude Skills">
-  <meta property="og:description" content="Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or wh">
+  <meta property="og:description" content="Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/personal-productivity/invoice-organizer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Invoice Organizer", "description": "Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.", "applicationCategory": "Personal Productivity", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/personal-productivity/invoice-organizer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Invoice Organizer", "description": "Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.", "applicationCategory": "Personal Productivity", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/personal-productivity/invoice-organizer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Invoice Organizer</h1>
-    <p class="page-subtitle">Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.</p>
+    <p class="page-subtitle">Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.</p>
     <div class="badge-bar"><span class="badge badge-domain">Personal Productivity</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">bookkeeping</span><span class="tag">tax</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Invoice Organizer (Personal Productivity domain).
 
-Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.
+Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.
 
 Bulk-categorize a CSV of invoices or receipts, detect duplicates, and produce a tax-ready monthly summary. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -427,7 +427,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Invoice Organizer (Personal Productivity domain).
 
-Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.
+Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.
 
 Bulk-categorize a CSV of invoices or receipts, detect duplicates, and produce a tax-ready monthly summary. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -493,6 +493,18 @@ invoice, invoices, receipt, receipts, expense, expenses, bookkeeping, accounting
 
 ---
 
+## Clarify First
+
+Before categorizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Receipt CSV fields** — date, vendor, description, amount drive categorization and duplicate detection
+- [ ] **Tax bucket scheme** — US Schedule C vs UK self-employment vs generic sets which categories the summary maps to
+- [ ] **Recurring-vendor rules** — known vendor→category mappings to seed `category_rules.json` and cut the uncategorized bucket
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Categorize 200 Receipts in 1 Minute
@@ -637,7 +649,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Invoice Organizer&quot;**
-   - Description: &quot;Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.&quot;
+   - Description: &quot;Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -684,6 +696,18 @@ invoice, invoices, receipt, receipts, expense, expenses, bookkeeping, accounting
 
 ---
 
+## Clarify First
+
+Before categorizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Receipt CSV fields** — date, vendor, description, amount drive categorization and duplicate detection
+- [ ] **Tax bucket scheme** — US Schedule C vs UK self-employment vs generic sets which categories the summary maps to
+- [ ] **Recurring-vendor rules** — known vendor→category mappings to seed `category_rules.json` and cut the uncategorized bucket
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+---
+
 ## Quick Start
 
 ### Categorize 200 Receipts in 1 Minute
@@ -828,7 +852,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Invoice Organizer&quot;**
-   - Description: &quot;Categorize invoices and receipts by vendor, expense category, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, expense reimbursement, or when the user mentions receipts, invoices, expenses, bookkeeping, or tax categorization.&quot;
+   - Description: &quot;Categorize invoices and receipts by vendor, expense, and tax bucket, detect duplicates, and produce a tax-ready monthly summary. Use during bookkeeping, tax prep, or expense reimbursement.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -898,7 +922,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 4. Export the monthly summary for handoff to your accountant
 
 ---
-  <h2>Related Skills in Personal Productivity</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/calendar-prep.html" class="skill-card" style="text-decoration:none"><h3>Calendar Prep</h3><p>Generate one-page meeting briefings from a structured input (attendees, prior context, decisions...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/domain-name-brainstormer.html" class="skill-card" style="text-decoration:none"><h3>Domain Name Brainstormer</h3><p>Generate candidate brand and product names by combining seed words with prefixes, suffixes,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/email-triage.html" class="skill-card" style="text-decoration:none"><h3>Email Triage</h3><p>Classify a batch of email subjects/snippets into action categories (reply now / reply later /...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/investor-update-generator.html" class="skill-card" style="text-decoration:none"><h3>Investor Update Generator</h3><p>Validate that a monthly investor update has the structural sections that separate strong updates...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/lead-researcher.html" class="skill-card" style="text-decoration:none"><h3>Lead Researcher</h3><p>Qualify and prioritize sales leads against an ICP definition, score lead lists for outreach...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/meeting-insights.html" class="skill-card" style="text-decoration:none"><h3>Meeting Insights</h3><p>Analyze meeting transcripts to extract decisions, action items, owners, due dates, open...</p></a></div>
+  <h2>Related Skills in Personal Productivity</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/calendar-prep.html" class="skill-card" style="text-decoration:none"><h3>Calendar Prep</h3><p>Generate one-page meeting briefings from structured input (attendees, prior context, decisions...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/domain-name-brainstormer.html" class="skill-card" style="text-decoration:none"><h3>Domain Name Brainstormer</h3><p>Generate and score candidate brand, product, and domain names for memorability and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/email-triage.html" class="skill-card" style="text-decoration:none"><h3>Email Triage</h3><p>Classify a batch of emails into action categories (reply now, reply later, archive, delete,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/investor-update-generator.html" class="skill-card" style="text-decoration:none"><h3>Investor Update Generator</h3><p>Validate a monthly investor update against a rubric of strong-update sections (transparency,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/lead-researcher.html" class="skill-card" style="text-decoration:none"><h3>Lead Researcher</h3><p>Qualify and prioritize sales leads against an ICP, score lead lists, and draft personalized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/personal-productivity/meeting-insights.html" class="skill-card" style="text-decoration:none"><h3>Meeting Insights</h3><p>Analyze meeting transcripts to extract decisions, action items, owners, due dates, open...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/personal-productivity/invoice-organizer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Activation Funnel</h1>
     <p class="page-subtitle">Design and analyze activation funnels (AARRR / AAARRR Pirate Metrics) with conversion + drop-off math, bottleneck detection, and Mermaid funnel diagrams. Includes a stdlib Python tool that emits all 6 shared PM output formats.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">aarrr</span><span class="tag">pirate-metrics</span><span class="tag">activation</span><span class="tag">conversion-funnel</span><span class="tag">growth</span><span class="tag">north-star</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,20 +397,6 @@ Design and analyze activation funnels (AARRR / AAARRR Pirate Metrics) with conve
 
 A funnel is the single most useful diagnostic tool a growth or onboarding PM owns. It turns a fuzzy product story (&quot;users drop off somewhere&quot;) into a numbered, actionable picture (&quot;76% land, 41% start setup, 9% finish setup, 4% take the activation action -- the biggest drop is between start and fini
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- AAARRR (Awareness-prefixed)
-- Real activation events (publicly discussed)
-- Conversion rate
-- Drop-off (absolute)
-
-## Frameworks &amp; Templates You Know
-- Pirate Metrics framework (AARRR)
-- - Activation event selection guidance (Sean Ellis framework)
-- &quot;framework&quot;: &quot;AARRR&quot;,
-- - `assets/funnel_design_canvas.md` -- Workshop canvas for defining the funnel
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -432,20 +418,6 @@ Start by asking the user what they need help with.">
 Design and analyze activation funnels (AARRR / AAARRR Pirate Metrics) with conversion + drop-off math, bottleneck detection, and Mermaid funnel diagrams. Includes a stdlib Python tool that emits all 6 shared PM output formats.
 
 A funnel is the single most useful diagnostic tool a growth or onboarding PM owns. It turns a fuzzy product story (&quot;users drop off somewhere&quot;) into a numbered, actionable picture (&quot;76% land, 41% start setup, 9% finish setup, 4% take the activation action -- the biggest drop is between start and fini
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- AAARRR (Awareness-prefixed)
-- Real activation events (publicly discussed)
-- Conversion rate
-- Drop-off (absolute)
-
-## Frameworks &amp; Templates You Know
-- Pirate Metrics framework (AARRR)
-- - Activation event selection guidance (Sean Ellis framework)
-- &quot;framework&quot;: &quot;AARRR&quot;,
-- - `assets/funnel_design_canvas.md` -- Workshop canvas for defining the funnel
 
 ## How to Help
 When the user asks for help in this domain:
@@ -479,195 +451,64 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A funnel is the single most useful diagnostic tool a growth or onboarding PM owns. It turns a fuzzy product story (&quot;users drop off somewhere&quot;) into a numbered, actionable picture (&quot;76% land, 41% start setup, 9% finish setup, 4% take the activation action -- the biggest drop is between start and finish setup at 32 percentage points&quot;).
 
-This skill specifies funnel structures using **Dave McClure&#x27;s AARRR** (Acquisition, Activation, Retention, Revenue, Referral) and its broader cousin **AAARRR** (which adds Awareness on the front), and analyzes them with a stdlib Python tool (`funnel_analyzer.py`). The tool ingests a JSON funnel definition (stages with counts), and outputs (a) stage-by-stage conversion and drop-off, (b) a Mermaid flowchart with conversion percentages on each arrow, (c) a bottleneck call-out for the largest absolute drop. It supports all six SHARED_OUTPUT_SCHEMA formats so the analysis travels into Jira, Linear, Confluence, Notion, or a PR.
+This skill specifies funnel structures using **Dave McClure&#x27;s AARRR** (Acquisition, Activation, Retention, Revenue, Referral) and its broader cousin **AAARRR** (which adds Awareness on the front), and analyzes them with a stdlib Python tool (`funnel_analyzer.py`). The tool ingests a JSON funnel definition (stages with counts) and outputs stage-by-stage conversion and drop-off, a Mermaid flowchart, and a bottleneck call-out — in all six SHARED_OUTPUT_SCHEMA formats so the analysis travels into Jira, Linear, Confluence, Notion, or a PR.
 
-The activation step is the centerpiece. Sean Ellis defined &quot;activated user&quot; as a user who has done the thing that, statistically, predicts retention. Slack&#x27;s classic 2000-messages-per-team activation event, Facebook&#x27;s &quot;7 friends in 10 days&quot;, and Dropbox&#x27;s &quot;1 file in 1 folder on 1 device&quot; are all activation definitions, not retention metrics. Pin the activation event before you optimize the funnel that leads to it.
+The activation step is the centerpiece. Sean Ellis defined the &quot;activated user&quot; as one who has done the thing that statistically predicts retention (Slack&#x27;s 2000 messages, Facebook&#x27;s &quot;7 friends in 10 days&quot;, Dropbox&#x27;s &quot;1 file in 1 folder on 1 device&quot;). Pin the activation event before you optimize the funnel that leads to it.
 
-### When to Use
+## Core Capabilities
 
-- **New onboarding design** -- you are designing the user journey from signup to value and need to specify the funnel events.
-- **Drop-off diagnosis** -- onboarding completion is flat but signups grow; where is the leak?
-- **Activation metric definition** -- the team needs to pick the &quot;aha&quot; event that predicts long-term retention.
-- **Cross-functional alignment** -- marketing optimizes acquisition, product optimizes activation, neither agrees on the funnel definition.
-- **Quarterly business review** -- one canonical funnel chart drives the QBR conversation about growth.
-- **A/B test design** -- a funnel makes the experiment&#x27;s primary and counter-metric obvious.
+- **Funnel structure** — define stages as events using AARRR or AAARRR; compress to 4-7 stages.
+- **Conversion + drop-off math** — per-stage conversion, absolute and relative drop, cumulative conversion, bottleneck detection (largest absolute vs largest relative drop).
+- **Activation event definition** — Sean Ellis framework to pin the predictive &quot;aha&quot; event (count + window + action).
+- **Counter-metric pairing** — guard every stage against gaming; leading-vs-lagging indicator design.
+- **Six-format output** — render the analysis + Mermaid diagram for Jira, Linear, Confluence, Notion, or a PR.
 
-### When NOT to Use
+## When to Use
 
-- For pre-product-market-fit discovery (use `discovery/brainstorm-ideas/`, `discovery/identify-assumptions/`; funnels presume a stable user journey).
-- For pure top-of-funnel marketing-channel attribution (use marketing-side tools).
-- For revenue-cohort retention analysis specifically (use the data-analytics domain; funnels capture single-flow conversion, cohorts capture time-based retention).
-- When the team has not instrumented the events -- a funnel without telemetry is wishful thinking.
+- **New onboarding design** -- specify the funnel events from signup to value.
+- **Drop-off diagnosis** -- signups grow but completion is flat; where is the leak?
+- **Activation metric definition** -- pick the &quot;aha&quot; event that predicts long-term retention.
+- **Cross-functional alignment** -- get marketing, product, and growth to agree on one funnel definition.
+- **QBR / A/B test design** -- one canonical funnel drives the conversation and makes primary + counter-metrics obvious.
 
-## Pirate Metrics framework (AARRR)
+**When NOT to use:** pre-PMF discovery (use `discovery/`); top-of-funnel channel attribution (marketing tools); revenue-cohort retention (data-analytics domain); when events are not instrumented.
 
-Dave McClure proposed Pirate Metrics in 2007 as a five-stage growth funnel:
+## Clarify First
 
-| Stage | What it measures | Typical events |
-|---|---|---|
-| **Acquisition** | Users find you | Landing-page visit, ad click, organic search visit |
-| **Activation** | First good experience | Signup, profile complete, &quot;aha&quot; event |
-| **Retention** | They come back | D1, D7, D30 active; weekly active |
-| **Revenue** | They pay | Trial-to-paid, upgrade, expansion |
-| **Referral** | They tell others | Invite sent, invite accepted, share rate |
+Before analyzing the funnel, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-McClure&#x27;s insight was that most teams obsess over Acquisition (the top) and Revenue (the bottom), while the leverage is usually in Activation and Retention. A 5-point improvement in activation flows through to retention, revenue, and referral; a 5-point improvement in acquisition often gets eaten by churn.
+- [ ] **Stages + counts** — the actual events and the user count at each step (drives every conversion/drop-off number and the bottleneck call-out)
+- [ ] **Activation event** — the Sean Ellis &quot;aha&quot; event that defines an activated user (sets the funnel&#x27;s centerpiece stage and the activation rate)
+- [ ] **Cohort window** — the time period the counts are drawn from (snapshot funnels mix cohorts and lie; this scopes every number)
 
-### AAARRR (Awareness-prefixed)
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-Some teams add **Awareness** at the front: how many people know your product exists at all? AAARRR is useful when the brand is new or the category is undefined; AARRR is fine when product-market fit is established.
+## Quick Start
 
-| Stage | Question |
-|---|---|
-| **Awareness** | Do they know you exist? (impressions, mentions, branded search) |
-| **Acquisition** | Do they visit you? (visits, signups-started) |
-| **Activation** | Do they get value? (the aha event) |
-| **Retention** | Do they come back? (D1, D7, D30) |
-| **Revenue** | Do they pay? (trial-to-paid) |
-| **Referral** | Do they bring friends? (invites, shares) |
+```bash
+python scripts/funnel_analyzer.py --input funnel.json --format markdown   # conversion + drop-off + bottleneck
+python scripts/funnel_analyzer.py --demo --format mermaid                 # worked SaaS funnel diagram
+```
 
-## Defining activation: the &quot;aha&quot; event
+## References
 
-Sean Ellis introduced the **activation-rate framework**: the activation event is the action that, statistically, separates users who retain from users who churn. Find it by:
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-1. Identify the cohort of users who are still active at D30 (or your retention horizon).
-2. Look at what they did in their first session / first week that the churned cohort did not do.
-3. The behavior with the highest correlation to D30 retention is the activation event candidate.
-
-### Real activation events (publicly discussed)
-
-| Product | Activation event |
-|---|---|
-| Slack | A team sends 2,000 messages |
-| Facebook | A user adds 7 friends in 10 days |
-| Dropbox | A user puts 1 file in 1 folder on 1 device |
-| Airbnb (host) | A host books their first guest |
-| Airbnb (guest) | A guest books their first trip |
-| Notion | A user creates 3+ pages and invites 1+ collaborator |
-| Spotify | A user listens to 25+ minutes in their first week |
-| Duolingo | A user completes 1 lesson in 3 of their first 7 days |
-| Twitter | A user follows 30+ accounts |
-| HubSpot | A user adds 5 contacts and 2 deals |
-| Pinterest | A user follows 5 boards and saves 1 pin |
-| LinkedIn | A user adds 5 connections in their first week |
-| Figma | A user creates a file and adds 2+ collaborators |
-| Canva | A user creates a design and downloads or shares it |
-
-The pattern: a **specific count + a specific time window + a specific action**. Vague &quot;completed onboarding&quot; is not an activation event -- it is an output. A good activation event is observable, instrumented, and predictive of long-term value.
-
-## Funnel math
-
-### Conversion rate
-
-For each stage transition: `conversion[i] = users[i+1] / users[i]`
-
-### Drop-off (absolute)
-
-`drop[i] = users[i] - users[i+1]`
-
-### Drop-off (rate)
-
-`drop_rate[i] = 1 - conversion[i]`
-
-### Cumulative conversion
-
-`cumulative[i] = users[i] / users[0]`
-
-The largest absolute drop is where the funnel leaks the most users. The largest *relative* drop (worst conversion rate) is where the stage is most broken. Both signals matter; this skill&#x27;s tool surfaces both.
-
-## Counter-metric pairing
-
-Funnel optimization is famously easy to game. If you measure only conversion, you can boost it by lowering the bar at each stage:
-
-- Drop email verification -&gt; signup conversion goes up; fake-account problem goes up too.
-- Auto-import data -&gt; &quot;activation&quot; rate climbs; users feel nothing happened.
-- Add a &quot;skip&quot; button -&gt; setup completion climbs; D7 retention drops.
-
-For every funnel stage, declare a **counter-metric** that must not degrade. The pair (conversion, counter-metric) is what gets reviewed -- not conversion alone.
-
-| Funnel stage | Primary metric | Counter-metric |
-|---|---|---|
-| Acquisition | Signups / visitors | Quality signup rate (e.g., real-email %) |
-| Activation | Activation rate | D7 retention of activated users |
-| Retention | D30 retention | Engagement depth (events / active user) |
-| Revenue | Trial-to-paid | First-month churn |
-| Referral | Invite acceptance | Quality of referred user (do they activate?) |
-
-## Leading vs lagging activation indicators
-
-| Indicator | Timing | Use |
-|---|---|---|
-| **Leading** | Hours / days into use | Daily dashboard, on-call signal (e.g., &quot;step 2 completion in first session&quot;) |
-| **Activation** | First N days | The headline activation rate |
-| **Lagging** | D30 retention of activated users | Quarterly truth check (is the activation event still predictive?) |
-
-Leading indicators move first, so they are what the team optimizes. The activation rate is the headline. The lagging indicator audits whether the activation definition is still correct.
-
-## Workflow
-
-1. **Pick the framework.** AARRR for established product, AAARRR if the category is undefined.
-2. **Define each stage as an event.** Each transition is `event A -&gt; event B`. No vague stages.
-3. **Pin the activation event.** Use Ellis&#x27;s framework: find the behavior that separates retained from churned users.
-4. **Instrument.** Telemetry must capture each stage event with a tenant / user / session id. Without instrumentation, the funnel is a guess.
-5. **Pull stage counts** over a fixed window (week, month, or cohort). Note: a funnel for a cohort is more honest than a snapshot across cohorts.
-6. **Run `funnel_analyzer.py`** to get conversion, drop-off, bottleneck, and the Mermaid diagram.
-7. **Pair every stage with a counter-metric.** Document and review.
-8. **Identify the bottleneck.** The largest absolute drop is usually where to invest. Use `prioritization-frameworks/` to rank fix-the-funnel projects.
-9. **Wire the funnel into reporting.** Funnel deltas appear in weekly status (`status-update-generator/`) and quarterly review.
-
-## Tools
-
-| Tool | Purpose | Command |
-|---|---|---|
-| `funnel_analyzer.py` | Compute funnel conversions + drop-off + bottleneck; render in 6 formats | `python scripts/funnel_analyzer.py --input funnel.json --format markdown` |
-| `funnel_analyzer.py --demo` | Inspect a worked SaaS activation funnel | `python scripts/funnel_analyzer.py --demo --format mermaid` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Funnel conversion looks great but D30 retention is flat | Activation event is too easy / not predictive of retention | Re-run Ellis&#x27;s framework on the latest cohort; pick a harder + more predictive event |
-| Stage counts do not add up; later stages exceed earlier ones | Multi-session or multi-tenant double-counting; events are not properly scoped | Constrain analysis to a single-cohort, single-user funnel; deduplicate by user_id; check event timestamps |
-| Team optimizes acquisition; nothing improves downstream | The bottleneck is downstream, not at the top | Run the tool, look at absolute drop sizes, redirect investment to the largest drop stage |
-| Activation rate jumps after a UX change but engagement drops | Counter-metric not paired; the funnel is being gamed | Add a counter-metric per stage; review the pair, not the conversion alone |
-| Funnel looks different every week | Snapshot funnel across mixed cohorts | Switch to cohort-based funnel: pick a signup cohort, follow it through stages over the same N days |
-| Funnel only covers the happy path | Edge cases and re-entries not modeled | List the 3-5 most common alternative paths; instrument them as parallel funnels or recovery loops |
-| Stakeholders ignore the funnel chart | Chart has 12 stages and reads as a wall of numbers | Compress to 4-6 stages; the deeper drill-down lives in a dashboard, not the headline funnel |
-
-## Success Criteria
-
-- The funnel has 4-7 stages (5 is the sweet spot). Each stage is a specific event.
-- The activation event is specific (count + window + action) and statistically predictive of retention.
-- Every stage has a paired counter-metric documented.
-- The analysis is cohort-based, not snapshot-based.
-- The largest absolute drop is identified and assigned an owner.
-- The funnel is reviewed weekly during build, monthly during steady-state.
-- A new hire can name the activation event and the current funnel&#x27;s biggest leak within their first week.
+- **[references/funnel-analysis-playbook.md](references/funnel-analysis-playbook.md)** — full AARRR/AAARRR stage tables, the aha-event definition method, conversion/drop-off math, counter-metric pairing, leading-vs-lagging indicators, the step-by-step workflow, the `funnel_analyzer.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when building or analyzing a funnel.
+- **[references/pirate-metrics-deep-dive.md](references/pirate-metrics-deep-dive.md)** — McClure&#x27;s AARRR + AAARRR, Andrew Chen funnel mechanics, the Reforge growth model, and NSM-funnel linkage. Read when designing the overall growth model around the funnel.
+- **[references/activation-aha-moment-patterns.md](references/activation-aha-moment-patterns.md)** — Ellis&#x27;s framework plus 12 worked activation-event examples (Slack, FB, Dropbox, Airbnb, Notion, Spotify, Duolingo, Twitter, HubSpot, Pinterest, LinkedIn, Figma). Read when choosing or validating the activation event.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how funnel output goes wrong, why it&#x27;s bad, and how to fix it. Read when reviewing a funnel analysis or diagnosing a misleading chart.
+- **assets/funnel_design_canvas.md** — workshop canvas for defining the funnel. Use in a design session.
+- **assets/activation_metric_worksheet.md** — worksheet for picking the activation event. Use when pinning the aha event.
+- **assets/sample_funnel.json** — a working JSON example matching the tool input. Use as a starting template.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Funnel definition (events, stages, transitions) using AARRR / AAARRR frameworks
-- Conversion + drop-off math, bottleneck detection
-- Mermaid flowchart rendering with conversion percentages on each transition
-- Activation event selection guidance (Sean Ellis framework)
-- Counter-metric pairing per stage
-- Cohort vs snapshot funnel distinction
-- All 6 SHARED_OUTPUT_SCHEMA formats for the analysis output
+**In Scope:** funnel definition (events, stages, transitions) via AARRR/AAARRR; conversion + drop-off math and bottleneck detection; Mermaid rendering; activation-event selection (Ellis); counter-metric pairing; cohort-vs-snapshot distinction; all 6 output formats.
 
-**Out of Scope:**
-- Pulling raw event data from analytics tools -- input is JSON; use Amplitude/Mixpanel/PostHog/Looker to produce the JSON
-- Statistical significance testing on funnel deltas (use `discovery/brainstorm-experiments/` for experiment design; data-analytics domain for stats)
-- Cohort-retention analysis (a different kind of analysis -- see data-analytics)
-- Channel-attribution modeling (marketing-side tools)
-- Building the actual UX or A/B test (this skill specifies the funnel and the leak; engineering builds the fix)
-- Forecasting (this is descriptive analysis, not predictive modeling)
+**Out of Scope:** pulling raw event data (input is JSON — use Amplitude/Mixpanel/PostHog/Looker); statistical significance testing (`discovery/brainstorm-experiments/`, data-analytics); cohort-retention analysis; channel attribution (marketing tools); building the UX/A/B test; forecasting.
 
-**Important Caveats:**
-- A funnel implies a linear flow. Real products have branches, re-entries, and recovery loops. Use the funnel as the headline; complement it with branched analysis when needed.
-- Snapshot funnels mix cohorts and lie. Always specify the cohort window in the JSON input.
-- Conversion improvements at top stages amplify downstream, so they look large in absolute users; this can mislead investment decisions away from genuinely-broken downstream stages. Look at *both* absolute and relative drop.
-- An activation event that worked 12 months ago may no longer be predictive. Re-validate against the latest retention cohorts every 1-2 quarters.
+**Caveats:** a funnel implies a linear flow — real products branch and re-enter, so complement with branched analysis. Snapshot funnels mix cohorts and lie; always specify the cohort window. Top-stage gains amplify downstream and can mislead investment — look at both absolute and relative drop. Re-validate the activation event against fresh retention cohorts every 1-2 quarters.
 
 ## Integration Points
 
@@ -682,62 +523,6 @@ Leading indicators move first, so they are what the team optimizes. The activati
 | `outcome-roadmap/` | Pairs with | Roadmap items justify themselves by which funnel stage they target |
 | `cycle-time-analyzer/` | Pairs with | Cycle time to fix funnel leaks is part of flow analysis |
 | `data-analytics/` (domain) | Pairs with | Telemetry instrumentation; cohort analysis; stat sig |
-
-## Tool Reference
-
-### funnel_analyzer.py
-
-Analyzes a funnel from a JSON definition. Computes per-stage conversion + absolute and relative drop-off + bottleneck. Renders in 6 formats. Mermaid output uses `flowchart LR` with conversion % on each arrow.
-
-| Flag | Type | Default | Description |
-|---|---|---|---|
-| `--input` | string | (required unless `--demo`) | Path to JSON funnel definition |
-| `--demo` | flag | false | Use a built-in SaaS activation funnel |
-| `--format` | choice | markdown | Output: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--name` | string | (from input) | Override funnel name |
-| `--cohort` | string | (from input) | Override cohort label |
-
-### Input JSON shape
-
-```json
-{
-  &quot;name&quot;: &quot;SaaS Free Trial Activation&quot;,
-  &quot;cohort&quot;: &quot;Cohort: signups in week of 2026-05-04&quot;,
-  &quot;framework&quot;: &quot;AARRR&quot;,
-  &quot;stages&quot;: [
-    {&quot;name&quot;: &quot;Landing visit&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 10000, &quot;counter_metric&quot;: &quot;Bounce rate &lt; 60%&quot;},
-    {&quot;name&quot;: &quot;Signup started&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 2400, &quot;counter_metric&quot;: &quot;Signup-to-real-email &gt; 90%&quot;},
-    {&quot;name&quot;: &quot;Email verified&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 1800, &quot;counter_metric&quot;: null},
-    {&quot;name&quot;: &quot;First workspace created&quot;, &quot;stage&quot;: &quot;activation&quot;, &quot;count&quot;: 1100, &quot;counter_metric&quot;: null},
-    {&quot;name&quot;: &quot;Aha event: 3 docs created + 1 collaborator&quot;, &quot;stage&quot;: &quot;activation&quot;, &quot;count&quot;: 410, &quot;counter_metric&quot;: &quot;D7 retention of activated &gt; 55%&quot;},
-    {&quot;name&quot;: &quot;D30 retention&quot;, &quot;stage&quot;: &quot;retention&quot;, &quot;count&quot;: 290, &quot;counter_metric&quot;: &quot;Engagement events/day &gt; 4&quot;},
-    {&quot;name&quot;: &quot;Paid&quot;, &quot;stage&quot;: &quot;revenue&quot;, &quot;count&quot;: 180, &quot;counter_metric&quot;: &quot;First-month churn &lt; 8%&quot;}
-  ]
-}
-```
-
-### Mermaid output sample
-
-```mermaid
-flowchart LR
-    S0[&quot;Landing visit&lt;br/&gt;10000&quot;] --&gt;|24.0%| S1[&quot;Signup started&lt;br/&gt;2400&quot;]
-    S1 --&gt;|75.0%| S2[&quot;Email verified&lt;br/&gt;1800&quot;]
-    S2 --&gt;|61.1%| S3[&quot;First workspace created&lt;br/&gt;1100&quot;]
-    S3 --&gt;|37.3%| S4[&quot;Aha event&lt;br/&gt;410&quot;]
-    S4 --&gt;|70.7%| S5[&quot;D30 retention&lt;br/&gt;290&quot;]
-    S5 --&gt;|62.1%| S6[&quot;Paid&lt;br/&gt;180&quot;]
-```
-
-The tool flags the largest absolute drop with a callout in the rendered output. In the demo above, the biggest leak in absolute users is at Landing -&gt; Signup (7600 users), but the biggest *rate* drop is at First workspace -&gt; Aha (37.3% conversion). Both get surfaced.
-
-## References
-
-- `references/pirate-metrics-deep-dive.md` -- McClure&#x27;s AARRR + AAARRR, Andrew Chen funnel mechanics, Reforge growth model, NSM-funnel linkage
-- `references/activation-aha-moment-patterns.md` -- Ellis&#x27;s framework + 12 worked activation-event examples (Slack, FB, Dropbox, Airbnb, Notion, Spotify, Duolingo, Twitter, HubSpot, Pinterest, LinkedIn, Figma)
-- `assets/funnel_design_canvas.md` -- Workshop canvas for defining the funnel
-- `assets/activation_metric_worksheet.md` -- Worksheet for picking the activation event
-- `assets/sample_funnel.json` -- A working JSON example matching the tool input
 
 ---
 
@@ -794,195 +579,64 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A funnel is the single most useful diagnostic tool a growth or onboarding PM owns. It turns a fuzzy product story (&quot;users drop off somewhere&quot;) into a numbered, actionable picture (&quot;76% land, 41% start setup, 9% finish setup, 4% take the activation action -- the biggest drop is between start and finish setup at 32 percentage points&quot;).
 
-This skill specifies funnel structures using **Dave McClure&#x27;s AARRR** (Acquisition, Activation, Retention, Revenue, Referral) and its broader cousin **AAARRR** (which adds Awareness on the front), and analyzes them with a stdlib Python tool (`funnel_analyzer.py`). The tool ingests a JSON funnel definition (stages with counts), and outputs (a) stage-by-stage conversion and drop-off, (b) a Mermaid flowchart with conversion percentages on each arrow, (c) a bottleneck call-out for the largest absolute drop. It supports all six SHARED_OUTPUT_SCHEMA formats so the analysis travels into Jira, Linear, Confluence, Notion, or a PR.
+This skill specifies funnel structures using **Dave McClure&#x27;s AARRR** (Acquisition, Activation, Retention, Revenue, Referral) and its broader cousin **AAARRR** (which adds Awareness on the front), and analyzes them with a stdlib Python tool (`funnel_analyzer.py`). The tool ingests a JSON funnel definition (stages with counts) and outputs stage-by-stage conversion and drop-off, a Mermaid flowchart, and a bottleneck call-out — in all six SHARED_OUTPUT_SCHEMA formats so the analysis travels into Jira, Linear, Confluence, Notion, or a PR.
 
-The activation step is the centerpiece. Sean Ellis defined &quot;activated user&quot; as a user who has done the thing that, statistically, predicts retention. Slack&#x27;s classic 2000-messages-per-team activation event, Facebook&#x27;s &quot;7 friends in 10 days&quot;, and Dropbox&#x27;s &quot;1 file in 1 folder on 1 device&quot; are all activation definitions, not retention metrics. Pin the activation event before you optimize the funnel that leads to it.
+The activation step is the centerpiece. Sean Ellis defined the &quot;activated user&quot; as one who has done the thing that statistically predicts retention (Slack&#x27;s 2000 messages, Facebook&#x27;s &quot;7 friends in 10 days&quot;, Dropbox&#x27;s &quot;1 file in 1 folder on 1 device&quot;). Pin the activation event before you optimize the funnel that leads to it.
 
-### When to Use
+## Core Capabilities
 
-- **New onboarding design** -- you are designing the user journey from signup to value and need to specify the funnel events.
-- **Drop-off diagnosis** -- onboarding completion is flat but signups grow; where is the leak?
-- **Activation metric definition** -- the team needs to pick the &quot;aha&quot; event that predicts long-term retention.
-- **Cross-functional alignment** -- marketing optimizes acquisition, product optimizes activation, neither agrees on the funnel definition.
-- **Quarterly business review** -- one canonical funnel chart drives the QBR conversation about growth.
-- **A/B test design** -- a funnel makes the experiment&#x27;s primary and counter-metric obvious.
+- **Funnel structure** — define stages as events using AARRR or AAARRR; compress to 4-7 stages.
+- **Conversion + drop-off math** — per-stage conversion, absolute and relative drop, cumulative conversion, bottleneck detection (largest absolute vs largest relative drop).
+- **Activation event definition** — Sean Ellis framework to pin the predictive &quot;aha&quot; event (count + window + action).
+- **Counter-metric pairing** — guard every stage against gaming; leading-vs-lagging indicator design.
+- **Six-format output** — render the analysis + Mermaid diagram for Jira, Linear, Confluence, Notion, or a PR.
 
-### When NOT to Use
+## When to Use
 
-- For pre-product-market-fit discovery (use `discovery/brainstorm-ideas/`, `discovery/identify-assumptions/`; funnels presume a stable user journey).
-- For pure top-of-funnel marketing-channel attribution (use marketing-side tools).
-- For revenue-cohort retention analysis specifically (use the data-analytics domain; funnels capture single-flow conversion, cohorts capture time-based retention).
-- When the team has not instrumented the events -- a funnel without telemetry is wishful thinking.
+- **New onboarding design** -- specify the funnel events from signup to value.
+- **Drop-off diagnosis** -- signups grow but completion is flat; where is the leak?
+- **Activation metric definition** -- pick the &quot;aha&quot; event that predicts long-term retention.
+- **Cross-functional alignment** -- get marketing, product, and growth to agree on one funnel definition.
+- **QBR / A/B test design** -- one canonical funnel drives the conversation and makes primary + counter-metrics obvious.
 
-## Pirate Metrics framework (AARRR)
+**When NOT to use:** pre-PMF discovery (use `discovery/`); top-of-funnel channel attribution (marketing tools); revenue-cohort retention (data-analytics domain); when events are not instrumented.
 
-Dave McClure proposed Pirate Metrics in 2007 as a five-stage growth funnel:
+## Clarify First
 
-| Stage | What it measures | Typical events |
-|---|---|---|
-| **Acquisition** | Users find you | Landing-page visit, ad click, organic search visit |
-| **Activation** | First good experience | Signup, profile complete, &quot;aha&quot; event |
-| **Retention** | They come back | D1, D7, D30 active; weekly active |
-| **Revenue** | They pay | Trial-to-paid, upgrade, expansion |
-| **Referral** | They tell others | Invite sent, invite accepted, share rate |
+Before analyzing the funnel, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-McClure&#x27;s insight was that most teams obsess over Acquisition (the top) and Revenue (the bottom), while the leverage is usually in Activation and Retention. A 5-point improvement in activation flows through to retention, revenue, and referral; a 5-point improvement in acquisition often gets eaten by churn.
+- [ ] **Stages + counts** — the actual events and the user count at each step (drives every conversion/drop-off number and the bottleneck call-out)
+- [ ] **Activation event** — the Sean Ellis &quot;aha&quot; event that defines an activated user (sets the funnel&#x27;s centerpiece stage and the activation rate)
+- [ ] **Cohort window** — the time period the counts are drawn from (snapshot funnels mix cohorts and lie; this scopes every number)
 
-### AAARRR (Awareness-prefixed)
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-Some teams add **Awareness** at the front: how many people know your product exists at all? AAARRR is useful when the brand is new or the category is undefined; AARRR is fine when product-market fit is established.
+## Quick Start
 
-| Stage | Question |
-|---|---|
-| **Awareness** | Do they know you exist? (impressions, mentions, branded search) |
-| **Acquisition** | Do they visit you? (visits, signups-started) |
-| **Activation** | Do they get value? (the aha event) |
-| **Retention** | Do they come back? (D1, D7, D30) |
-| **Revenue** | Do they pay? (trial-to-paid) |
-| **Referral** | Do they bring friends? (invites, shares) |
+```bash
+python scripts/funnel_analyzer.py --input funnel.json --format markdown   # conversion + drop-off + bottleneck
+python scripts/funnel_analyzer.py --demo --format mermaid                 # worked SaaS funnel diagram
+```
 
-## Defining activation: the &quot;aha&quot; event
+## References
 
-Sean Ellis introduced the **activation-rate framework**: the activation event is the action that, statistically, separates users who retain from users who churn. Find it by:
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-1. Identify the cohort of users who are still active at D30 (or your retention horizon).
-2. Look at what they did in their first session / first week that the churned cohort did not do.
-3. The behavior with the highest correlation to D30 retention is the activation event candidate.
-
-### Real activation events (publicly discussed)
-
-| Product | Activation event |
-|---|---|
-| Slack | A team sends 2,000 messages |
-| Facebook | A user adds 7 friends in 10 days |
-| Dropbox | A user puts 1 file in 1 folder on 1 device |
-| Airbnb (host) | A host books their first guest |
-| Airbnb (guest) | A guest books their first trip |
-| Notion | A user creates 3+ pages and invites 1+ collaborator |
-| Spotify | A user listens to 25+ minutes in their first week |
-| Duolingo | A user completes 1 lesson in 3 of their first 7 days |
-| Twitter | A user follows 30+ accounts |
-| HubSpot | A user adds 5 contacts and 2 deals |
-| Pinterest | A user follows 5 boards and saves 1 pin |
-| LinkedIn | A user adds 5 connections in their first week |
-| Figma | A user creates a file and adds 2+ collaborators |
-| Canva | A user creates a design and downloads or shares it |
-
-The pattern: a **specific count + a specific time window + a specific action**. Vague &quot;completed onboarding&quot; is not an activation event -- it is an output. A good activation event is observable, instrumented, and predictive of long-term value.
-
-## Funnel math
-
-### Conversion rate
-
-For each stage transition: `conversion[i] = users[i+1] / users[i]`
-
-### Drop-off (absolute)
-
-`drop[i] = users[i] - users[i+1]`
-
-### Drop-off (rate)
-
-`drop_rate[i] = 1 - conversion[i]`
-
-### Cumulative conversion
-
-`cumulative[i] = users[i] / users[0]`
-
-The largest absolute drop is where the funnel leaks the most users. The largest *relative* drop (worst conversion rate) is where the stage is most broken. Both signals matter; this skill&#x27;s tool surfaces both.
-
-## Counter-metric pairing
-
-Funnel optimization is famously easy to game. If you measure only conversion, you can boost it by lowering the bar at each stage:
-
-- Drop email verification -&gt; signup conversion goes up; fake-account problem goes up too.
-- Auto-import data -&gt; &quot;activation&quot; rate climbs; users feel nothing happened.
-- Add a &quot;skip&quot; button -&gt; setup completion climbs; D7 retention drops.
-
-For every funnel stage, declare a **counter-metric** that must not degrade. The pair (conversion, counter-metric) is what gets reviewed -- not conversion alone.
-
-| Funnel stage | Primary metric | Counter-metric |
-|---|---|---|
-| Acquisition | Signups / visitors | Quality signup rate (e.g., real-email %) |
-| Activation | Activation rate | D7 retention of activated users |
-| Retention | D30 retention | Engagement depth (events / active user) |
-| Revenue | Trial-to-paid | First-month churn |
-| Referral | Invite acceptance | Quality of referred user (do they activate?) |
-
-## Leading vs lagging activation indicators
-
-| Indicator | Timing | Use |
-|---|---|---|
-| **Leading** | Hours / days into use | Daily dashboard, on-call signal (e.g., &quot;step 2 completion in first session&quot;) |
-| **Activation** | First N days | The headline activation rate |
-| **Lagging** | D30 retention of activated users | Quarterly truth check (is the activation event still predictive?) |
-
-Leading indicators move first, so they are what the team optimizes. The activation rate is the headline. The lagging indicator audits whether the activation definition is still correct.
-
-## Workflow
-
-1. **Pick the framework.** AARRR for established product, AAARRR if the category is undefined.
-2. **Define each stage as an event.** Each transition is `event A -&gt; event B`. No vague stages.
-3. **Pin the activation event.** Use Ellis&#x27;s framework: find the behavior that separates retained from churned users.
-4. **Instrument.** Telemetry must capture each stage event with a tenant / user / session id. Without instrumentation, the funnel is a guess.
-5. **Pull stage counts** over a fixed window (week, month, or cohort). Note: a funnel for a cohort is more honest than a snapshot across cohorts.
-6. **Run `funnel_analyzer.py`** to get conversion, drop-off, bottleneck, and the Mermaid diagram.
-7. **Pair every stage with a counter-metric.** Document and review.
-8. **Identify the bottleneck.** The largest absolute drop is usually where to invest. Use `prioritization-frameworks/` to rank fix-the-funnel projects.
-9. **Wire the funnel into reporting.** Funnel deltas appear in weekly status (`status-update-generator/`) and quarterly review.
-
-## Tools
-
-| Tool | Purpose | Command |
-|---|---|---|
-| `funnel_analyzer.py` | Compute funnel conversions + drop-off + bottleneck; render in 6 formats | `python scripts/funnel_analyzer.py --input funnel.json --format markdown` |
-| `funnel_analyzer.py --demo` | Inspect a worked SaaS activation funnel | `python scripts/funnel_analyzer.py --demo --format mermaid` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Funnel conversion looks great but D30 retention is flat | Activation event is too easy / not predictive of retention | Re-run Ellis&#x27;s framework on the latest cohort; pick a harder + more predictive event |
-| Stage counts do not add up; later stages exceed earlier ones | Multi-session or multi-tenant double-counting; events are not properly scoped | Constrain analysis to a single-cohort, single-user funnel; deduplicate by user_id; check event timestamps |
-| Team optimizes acquisition; nothing improves downstream | The bottleneck is downstream, not at the top | Run the tool, look at absolute drop sizes, redirect investment to the largest drop stage |
-| Activation rate jumps after a UX change but engagement drops | Counter-metric not paired; the funnel is being gamed | Add a counter-metric per stage; review the pair, not the conversion alone |
-| Funnel looks different every week | Snapshot funnel across mixed cohorts | Switch to cohort-based funnel: pick a signup cohort, follow it through stages over the same N days |
-| Funnel only covers the happy path | Edge cases and re-entries not modeled | List the 3-5 most common alternative paths; instrument them as parallel funnels or recovery loops |
-| Stakeholders ignore the funnel chart | Chart has 12 stages and reads as a wall of numbers | Compress to 4-6 stages; the deeper drill-down lives in a dashboard, not the headline funnel |
-
-## Success Criteria
-
-- The funnel has 4-7 stages (5 is the sweet spot). Each stage is a specific event.
-- The activation event is specific (count + window + action) and statistically predictive of retention.
-- Every stage has a paired counter-metric documented.
-- The analysis is cohort-based, not snapshot-based.
-- The largest absolute drop is identified and assigned an owner.
-- The funnel is reviewed weekly during build, monthly during steady-state.
-- A new hire can name the activation event and the current funnel&#x27;s biggest leak within their first week.
+- **[references/funnel-analysis-playbook.md](references/funnel-analysis-playbook.md)** — full AARRR/AAARRR stage tables, the aha-event definition method, conversion/drop-off math, counter-metric pairing, leading-vs-lagging indicators, the step-by-step workflow, the `funnel_analyzer.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when building or analyzing a funnel.
+- **[references/pirate-metrics-deep-dive.md](references/pirate-metrics-deep-dive.md)** — McClure&#x27;s AARRR + AAARRR, Andrew Chen funnel mechanics, the Reforge growth model, and NSM-funnel linkage. Read when designing the overall growth model around the funnel.
+- **[references/activation-aha-moment-patterns.md](references/activation-aha-moment-patterns.md)** — Ellis&#x27;s framework plus 12 worked activation-event examples (Slack, FB, Dropbox, Airbnb, Notion, Spotify, Duolingo, Twitter, HubSpot, Pinterest, LinkedIn, Figma). Read when choosing or validating the activation event.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how funnel output goes wrong, why it&#x27;s bad, and how to fix it. Read when reviewing a funnel analysis or diagnosing a misleading chart.
+- **assets/funnel_design_canvas.md** — workshop canvas for defining the funnel. Use in a design session.
+- **assets/activation_metric_worksheet.md** — worksheet for picking the activation event. Use when pinning the aha event.
+- **assets/sample_funnel.json** — a working JSON example matching the tool input. Use as a starting template.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Funnel definition (events, stages, transitions) using AARRR / AAARRR frameworks
-- Conversion + drop-off math, bottleneck detection
-- Mermaid flowchart rendering with conversion percentages on each transition
-- Activation event selection guidance (Sean Ellis framework)
-- Counter-metric pairing per stage
-- Cohort vs snapshot funnel distinction
-- All 6 SHARED_OUTPUT_SCHEMA formats for the analysis output
+**In Scope:** funnel definition (events, stages, transitions) via AARRR/AAARRR; conversion + drop-off math and bottleneck detection; Mermaid rendering; activation-event selection (Ellis); counter-metric pairing; cohort-vs-snapshot distinction; all 6 output formats.
 
-**Out of Scope:**
-- Pulling raw event data from analytics tools -- input is JSON; use Amplitude/Mixpanel/PostHog/Looker to produce the JSON
-- Statistical significance testing on funnel deltas (use `discovery/brainstorm-experiments/` for experiment design; data-analytics domain for stats)
-- Cohort-retention analysis (a different kind of analysis -- see data-analytics)
-- Channel-attribution modeling (marketing-side tools)
-- Building the actual UX or A/B test (this skill specifies the funnel and the leak; engineering builds the fix)
-- Forecasting (this is descriptive analysis, not predictive modeling)
+**Out of Scope:** pulling raw event data (input is JSON — use Amplitude/Mixpanel/PostHog/Looker); statistical significance testing (`discovery/brainstorm-experiments/`, data-analytics); cohort-retention analysis; channel attribution (marketing tools); building the UX/A/B test; forecasting.
 
-**Important Caveats:**
-- A funnel implies a linear flow. Real products have branches, re-entries, and recovery loops. Use the funnel as the headline; complement it with branched analysis when needed.
-- Snapshot funnels mix cohorts and lie. Always specify the cohort window in the JSON input.
-- Conversion improvements at top stages amplify downstream, so they look large in absolute users; this can mislead investment decisions away from genuinely-broken downstream stages. Look at *both* absolute and relative drop.
-- An activation event that worked 12 months ago may no longer be predictive. Re-validate against the latest retention cohorts every 1-2 quarters.
+**Caveats:** a funnel implies a linear flow — real products branch and re-enter, so complement with branched analysis. Snapshot funnels mix cohorts and lie; always specify the cohort window. Top-stage gains amplify downstream and can mislead investment — look at both absolute and relative drop. Re-validate the activation event against fresh retention cohorts every 1-2 quarters.
 
 ## Integration Points
 
@@ -997,62 +651,6 @@ Leading indicators move first, so they are what the team optimizes. The activati
 | `outcome-roadmap/` | Pairs with | Roadmap items justify themselves by which funnel stage they target |
 | `cycle-time-analyzer/` | Pairs with | Cycle time to fix funnel leaks is part of flow analysis |
 | `data-analytics/` (domain) | Pairs with | Telemetry instrumentation; cohort analysis; stat sig |
-
-## Tool Reference
-
-### funnel_analyzer.py
-
-Analyzes a funnel from a JSON definition. Computes per-stage conversion + absolute and relative drop-off + bottleneck. Renders in 6 formats. Mermaid output uses `flowchart LR` with conversion % on each arrow.
-
-| Flag | Type | Default | Description |
-|---|---|---|---|
-| `--input` | string | (required unless `--demo`) | Path to JSON funnel definition |
-| `--demo` | flag | false | Use a built-in SaaS activation funnel |
-| `--format` | choice | markdown | Output: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--name` | string | (from input) | Override funnel name |
-| `--cohort` | string | (from input) | Override cohort label |
-
-### Input JSON shape
-
-```json
-{
-  &quot;name&quot;: &quot;SaaS Free Trial Activation&quot;,
-  &quot;cohort&quot;: &quot;Cohort: signups in week of 2026-05-04&quot;,
-  &quot;framework&quot;: &quot;AARRR&quot;,
-  &quot;stages&quot;: [
-    {&quot;name&quot;: &quot;Landing visit&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 10000, &quot;counter_metric&quot;: &quot;Bounce rate &lt; 60%&quot;},
-    {&quot;name&quot;: &quot;Signup started&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 2400, &quot;counter_metric&quot;: &quot;Signup-to-real-email &gt; 90%&quot;},
-    {&quot;name&quot;: &quot;Email verified&quot;, &quot;stage&quot;: &quot;acquisition&quot;, &quot;count&quot;: 1800, &quot;counter_metric&quot;: null},
-    {&quot;name&quot;: &quot;First workspace created&quot;, &quot;stage&quot;: &quot;activation&quot;, &quot;count&quot;: 1100, &quot;counter_metric&quot;: null},
-    {&quot;name&quot;: &quot;Aha event: 3 docs created + 1 collaborator&quot;, &quot;stage&quot;: &quot;activation&quot;, &quot;count&quot;: 410, &quot;counter_metric&quot;: &quot;D7 retention of activated &gt; 55%&quot;},
-    {&quot;name&quot;: &quot;D30 retention&quot;, &quot;stage&quot;: &quot;retention&quot;, &quot;count&quot;: 290, &quot;counter_metric&quot;: &quot;Engagement events/day &gt; 4&quot;},
-    {&quot;name&quot;: &quot;Paid&quot;, &quot;stage&quot;: &quot;revenue&quot;, &quot;count&quot;: 180, &quot;counter_metric&quot;: &quot;First-month churn &lt; 8%&quot;}
-  ]
-}
-```
-
-### Mermaid output sample
-
-```mermaid
-flowchart LR
-    S0[&quot;Landing visit&lt;br/&gt;10000&quot;] --&gt;|24.0%| S1[&quot;Signup started&lt;br/&gt;2400&quot;]
-    S1 --&gt;|75.0%| S2[&quot;Email verified&lt;br/&gt;1800&quot;]
-    S2 --&gt;|61.1%| S3[&quot;First workspace created&lt;br/&gt;1100&quot;]
-    S3 --&gt;|37.3%| S4[&quot;Aha event&lt;br/&gt;410&quot;]
-    S4 --&gt;|70.7%| S5[&quot;D30 retention&lt;br/&gt;290&quot;]
-    S5 --&gt;|62.1%| S6[&quot;Paid&lt;br/&gt;180&quot;]
-```
-
-The tool flags the largest absolute drop with a callout in the rendered output. In the demo above, the biggest leak in absolute users is at Landing -&gt; Signup (7600 users), but the biggest *rate* drop is at First workspace -&gt; Aha (37.3% conversion). Both get surfaced.
-
-## References
-
-- `references/pirate-metrics-deep-dive.md` -- McClure&#x27;s AARRR + AAARRR, Andrew Chen funnel mechanics, Reforge growth model, NSM-funnel linkage
-- `references/activation-aha-moment-patterns.md` -- Ellis&#x27;s framework + 12 worked activation-event examples (Slack, FB, Dropbox, Airbnb, Notion, Spotify, Duolingo, Twitter, HubSpot, Pinterest, LinkedIn, Figma)
-- `assets/funnel_design_canvas.md` -- Workshop canvas for defining the funnel
-- `assets/activation_metric_worksheet.md` -- Worksheet for picking the activation event
-- `assets/sample_funnel.json` -- A working JSON example matching the tool input
 
 ---
 
@@ -1140,8 +738,10 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/activation-funnel/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python scripts/funnel_analyzer.py --input funnel.json --format markdown   # conversion + drop-off + bottleneck
+python scripts/funnel_analyzer.py --demo --format mermaid                 # worked SaaS funnel diagram
+</code></pre>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/activation-funnel/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

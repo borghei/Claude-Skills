@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Senior Mobile</h1>
     <p class="page-subtitle"></p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Mobile Development</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">mobile</span><span class="tag">ios</span><span class="tag">android</span><span class="tag">react-native</span><span class="tag">flutter</span><span class="tag">swift</span><span class="tag">kotlin</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,15 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Mobile (Engineering domain).
 
-Expert mobile application development across iOS, Android, React Native, and Flutter. mobile, ios, android, react-native, flutter, swift, kotlin, swiftui, jetpack-compose, expo-router, zustand, app-store, performance, offline-first
-
-## Your Key Capabilities
-- `mobile_scaffold.py`
-- `store_metadata_generator.py`
-- `app_performance_analyzer.py`
-
-## Frameworks &amp; Templates You Know
-- | UI Framework | SwiftUI/UIKit | Compose/XML | React | Widgets |
+Expert mobile application development across iOS, Android, React Native, and Flutter — scaffolding production projects, building MVVM features (SwiftUI, Jetpack Compose, Expo Router), static performance analysis, and App Store / Play Store submission. mobile, ios, android, react-native, flutter, swi
 
 ## How to Help
 When the user asks for help in this domain:
@@ -421,15 +413,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Senior Mobile (Engineering domain).
 
-Expert mobile application development across iOS, Android, React Native, and Flutter. mobile, ios, android, react-native, flutter, swift, kotlin, swiftui, jetpack-compose, expo-router, zustand, app-store, performance, offline-first
-
-## Your Key Capabilities
-- `mobile_scaffold.py`
-- `store_metadata_generator.py`
-- `app_performance_analyzer.py`
-
-## Frameworks &amp; Templates You Know
-- | UI Framework | SwiftUI/UIKit | Compose/XML | React | Widgets |
+Expert mobile application development across iOS, Android, React Native, and Flutter — scaffolding production projects, building MVVM features (SwiftUI, Jetpack Compose, Expo Router), static performance analysis, and App Store / Play Store submission. mobile, ios, android, react-native, flutter, swi
 
 ## How to Help
 When the user asks for help in this domain:
@@ -459,209 +443,57 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Mobile Developer
 
-Expert mobile application development across iOS, Android, React Native, and Flutter.
+Expert mobile application development across iOS, Android, React Native, and Flutter — scaffolding production projects, building MVVM features (SwiftUI, Jetpack Compose, Expo Router), static performance analysis, and App Store / Play Store submission.
 
 ## Keywords
 
 mobile, ios, android, react-native, flutter, swift, kotlin, swiftui,
 jetpack-compose, expo-router, zustand, app-store, performance, offline-first
 
----
+## Core Capabilities
 
-## Quick Start
+- **Project scaffolding** — production-ready structure, navigation, and state management for React Native (Expo Router), Flutter, iOS native (SwiftUI), and Android native (Jetpack Compose).
+- **Platform selection** — decision matrix across native iOS/Android, React Native, and Flutter by language, performance, and code-sharing.
+- **Feature architecture** — MVVM patterns: SwiftUI `@MainActor` ViewModels, Compose sealed `UiState` + `StateFlow`, Zustand stores.
+- **Performance optimization** — static analysis of image assets, re-renders, memory leaks, bundle size, plus FlatList/RecyclerView/collection-view tuning.
+- **Store submission** — metadata, keywords, privacy labels, age ratings, and submission checklists for both stores.
 
-```bash
-# Scaffold a React Native project
-python scripts/mobile_scaffold.py --platform react-native --name MyApp
+## When to Use
 
-# Build for production
-python scripts/build.py --platform ios --env production
+- Starting a new mobile app and choosing a platform.
+- Building a SwiftUI, Jetpack Compose, or React Native feature with clean architecture.
+- Diagnosing and fixing mobile performance issues.
+- Preparing an App Store / Play Store submission.
 
-# Generate App Store metadata
-python scripts/store_metadata.py --screenshots ./screenshots
+## Clarify First
 
-# Profile rendering performance
-python scripts/profile.py --platform android --output report.html
-```
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Platform** — react-native / flutter / ios-native / android-native (`--platform`; an entirely different scaffold)
+- [ ] **State management** — e.g. zustand (`--state`; changes the generated architecture)
+- [ ] **Task** — new project scaffold vs store-listing metadata vs performance analysis (selects `mobile_scaffold` / `store_metadata_generator` / `app_performance_analyzer`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/mobile_scaffold.py` | Scaffold project for react-native, ios, android, or flutter |
-| `scripts/build.py` | Build automation with environment and platform flags |
-| `scripts/store_metadata.py` | Generate App Store / Play Store listing metadata |
-| `scripts/profile.py` | Profile rendering, memory, and startup performance |
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `mobile_scaffold.py` | Scaffold a project for react-native, flutter, ios-native, or android-native | `python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand` |
+| `store_metadata_generator.py` | Generate App Store / Play Store listing metadata | `python scripts/store_metadata_generator.py --app-name FitTrack --category health --features &quot;workout,tracking&quot;` |
+| `app_performance_analyzer.py` | Static performance analysis (score, issues, bundle estimate) | `python scripts/app_performance_analyzer.py ./my-app --platform react-native` |
 
----
+## References
 
-## Platform Decision Matrix
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-| Aspect | Native iOS | Native Android | React Native | Flutter |
-|--------|-----------|----------------|--------------|---------|
-| Language | Swift | Kotlin | TypeScript | Dart |
-| UI Framework | SwiftUI/UIKit | Compose/XML | React | Widgets |
-| Performance | Best | Best | Good | Very Good |
-| Code Sharing | None | None | ~80% | ~95% |
-| Best For | iOS-only, hardware-heavy | Android-only, hardware-heavy | Web team, shared logic | Maximum code sharing |
-
----
-
-## Workflow 1: Scaffold a React Native App (Expo Router)
-
-1. **Generate project** -- `python scripts/mobile_scaffold.py --platform react-native --name MyApp`
-2. **Verify directory structure** matches this layout:
-   ```
-   src/
-   ├── app/              # Expo Router file-based routes
-   │   ├── (tabs)/       # Tab navigation group
-   │   ├── auth/         # Auth screens
-   │   └── _layout.tsx   # Root layout
-   ├── components/
-   │   ├── ui/           # Reusable primitives (Button, Input, Card)
-   │   └── features/     # Domain components (ProductCard, UserAvatar)
-   ├── hooks/            # Custom hooks (useAuth, useApi)
-   ├── services/         # API clients and storage
-   ├── stores/           # Zustand state stores
-   └── utils/            # Helpers
-   ```
-3. **Configure navigation** in `app/_layout.tsx` with Stack and Tabs.
-4. **Set up state management** with Zustand + AsyncStorage persistence.
-5. **Validate** -- Run the app on both iOS simulator and Android emulator. Confirm navigation and state persistence work.
-
-## Workflow 2: Build a SwiftUI Feature (iOS)
-
-1. **Create the View** using `NavigationStack`, `@StateObject` for ViewModel binding, and `.task` for async data loading.
-2. **Create the ViewModel** as `@MainActor class` with `@Published` properties. Inject services via protocol for testability.
-3. **Wire data flow**: View observes ViewModel -&gt; ViewModel calls Service -&gt; Service returns data -&gt; ViewModel updates `@Published` -&gt; View re-renders.
-4. **Add search/refresh**: `.searchable(text:)` for filtering, `.refreshable` for pull-to-refresh.
-5. **Validate** -- Run in Xcode previews first, then simulator. Confirm async loading, error states, and empty states all render correctly.
-
-### Example: SwiftUI ViewModel Pattern
-
-```swift
-@MainActor
-class ProductListViewModel: ObservableObject {
-    @Published private(set) var products: [Product] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
-
-    private let service: ProductServiceProtocol
-
-    init(service: ProductServiceProtocol = ProductService()) {
-        self.service = service
-    }
-
-    func loadProducts() async {
-        isLoading = true
-        error = nil
-        do {
-            products = try await service.fetchProducts()
-        } catch {
-            self.error = error
-        }
-        isLoading = false
-    }
-}
-```
-
-## Workflow 3: Build a Jetpack Compose Feature (Android)
-
-1. **Create the Composable screen** with `Scaffold`, `TopAppBar`, and state collection via `collectAsStateWithLifecycle()`.
-2. **Handle UI states** with a sealed interface: `Loading`, `Success&lt;T&gt;`, `Error`.
-3. **Create the ViewModel** with `@HiltViewModel`, `MutableStateFlow`, and repository injection.
-4. **Build list UI** using `LazyColumn` with `key` parameter for stable identity and `Arrangement.spacedBy()` for spacing.
-5. **Validate** -- Run on emulator. Confirm state transitions (loading -&gt; success, loading -&gt; error -&gt; retry) work correctly.
-
-### Example: Compose UiState Pattern
-
-```kotlin
-sealed interface UiState&lt;out T&gt; {
-    data object Loading : UiState&lt;Nothing&gt;
-    data class Success&lt;T&gt;(val data: T) : UiState&lt;T&gt;
-    data class Error(val message: String) : UiState&lt;Nothing&gt;
-}
-
-@HiltViewModel
-class ProductListViewModel @Inject constructor(
-    private val repository: ProductRepository
-) : ViewModel() {
-    private val _uiState = MutableStateFlow&lt;UiState&lt;List&lt;Product&gt;&gt;&gt;(UiState.Loading)
-    val uiState: StateFlow&lt;UiState&lt;List&lt;Product&gt;&gt;&gt; = _uiState.asStateFlow()
-
-    fun loadProducts() {
-        viewModelScope.launch {
-            _uiState.value = UiState.Loading
-            repository.getProducts()
-                .catch { e -&gt; _uiState.value = UiState.Error(e.message ?: &quot;Unknown error&quot;) }
-                .collect { products -&gt; _uiState.value = UiState.Success(products) }
-        }
-    }
-}
-```
-
-## Workflow 4: Optimize Mobile Performance
-
-1. **Profile** -- `python scripts/profile.py --platform &lt;ios|android&gt; --output report.html`
-2. **Apply React Native optimizations:**
-   - Use `FlatList` with `keyExtractor`, `initialNumToRender=10`, `windowSize=5`, `removeClippedSubviews=true`
-   - Memoize components with `React.memo` and handlers with `useCallback`
-   - Supply `getItemLayout` for fixed-height rows to skip measurement
-3. **Apply native iOS optimizations:**
-   - Implement `prefetchItemsAt` for image pre-loading in collection views
-4. **Apply native Android optimizations:**
-   - Set `setHasFixedSize(true)` and `setItemViewCacheSize(20)` on RecyclerViews
-5. **Validate** -- Re-run profiler and confirm frame drops reduced and startup time improved.
-
-## Workflow 5: Submit to App Store / Play Store
-
-1. **Generate metadata** -- `python scripts/store_metadata.py --screenshots ./screenshots`
-2. **Build release** -- `python scripts/build.py --platform ios --env production`
-3. **Review** the generated listing (title, description, keywords, screenshots).
-4. **Upload** via Xcode (iOS) or Play Console (Android).
-5. **Validate** -- Monitor review status and address any rejection feedback.
-
----
-
-## Reference Materials
-
-| Document | Path |
-|----------|------|
-| React Native Guide | [references/react_native_guide.md](references/react_native_guide.md) |
-| iOS Patterns | [references/ios_patterns.md](references/ios_patterns.md) |
-| Android Patterns | [references/android_patterns.md](references/android_patterns.md) |
-| App Store Guide | [references/app_store_guide.md](references/app_store_guide.md) |
-| Full Code Examples | [REFERENCE.md](REFERENCE.md) |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| App crashes on launch after adding a new dependency | Incompatible native module version or missing pod install / gradle sync | Run `npx pod-install` (iOS) or `cd android &amp;&amp; ./gradlew clean` (Android). Verify dependency version compatibility in the changelog. |
-| FlatList renders blank or flickers | Missing `keyExtractor`, unstable keys, or inline `renderItem` causing full re-renders | Add a stable `keyExtractor`, wrap `renderItem` in `useCallback`, and supply `getItemLayout` for fixed-height rows. |
-| iOS build fails with &quot;signing&quot; error | Provisioning profile mismatch or expired certificate | Open Xcode &gt; Signing &amp; Capabilities, select the correct team and profile. Run `security find-identity -v -p codesigning` to verify certificates. |
-| Android build OOM during dexing | Insufficient JVM heap for large projects | Add `org.gradle.jvmargs=-Xmx4096m` to `gradle.properties`. Enable `dexOptions { javaMaxHeapSize &quot;4g&quot; }` in `build.gradle`. |
-| App Store rejection for missing privacy manifest | Apple requires PrivacyInfo.xcprivacy for apps using required reason APIs (UserDefaults, file timestamp, etc.) | Add a `PrivacyInfo.xcprivacy` file declaring each required reason API. Run `store_metadata_generator.py` to review privacy label guidance. |
-| Slow cold start time (&gt;3 seconds) | Too many synchronous operations on the main thread at launch, large bundle size, or unoptimized images | Defer non-critical initialization, lazy-load modules, compress images, and use `app_performance_analyzer.py` to identify bottlenecks. |
-| Hot reload / fast refresh stops working | Syntax error in a module boundary, anonymous default export, or class component state | Check terminal for error messages, ensure named exports, and restart the Metro bundler or Flutter daemon with a cache clear. |
-
----
-
-## Success Criteria
-
-- **App startup time under 2 seconds** on cold launch (measured on mid-range devices, both iOS and Android).
-- **Crash-free rate above 99.5%** across all supported OS versions, tracked via Crashlytics or Sentry.
-- **Frame rendering at 60 fps** (16ms per frame) for scrolling lists and animations, with zero jank frames during typical user flows.
-- **Bundle size under 50 MB** for the initial download (excluding on-demand resources), verified before each release.
-- **Performance analyzer score of 75+** (Grade B or above) when running `app_performance_analyzer.py` against the project.
-- **Zero critical issues** and fewer than 5 warnings reported by the performance analyzer before submitting to app stores.
-- **App Store / Play Store approval on first submission** with complete metadata, correct privacy labels, and proper age rating, validated using `store_metadata_generator.py`.
-
----
+- **[references/workflows.md](references/workflows.md)** — the platform decision matrix and all five end-to-end workflows (React Native scaffold, SwiftUI feature, Jetpack Compose feature, performance optimization, store submission) with SwiftUI/Compose code examples. Read when executing any workflow.
+- **[references/tool-reference.md](references/tool-reference.md)** — full parameter tables, examples, and output formats for the three scripts. Read when running the scripts.
+- **[references/troubleshooting-and-success.md](references/troubleshooting-and-success.md)** — the build/render/submission troubleshooting table and the success-criteria bar. Read when debugging or validating quality.
+- **[references/react-native-patterns.md](references/react-native-patterns.md)** — production React Native: navigation, state management, performance, testing, native modules, OTA updates. Read for deep RN work.
+- **[references/ios-android-patterns.md](references/ios-android-patterns.md)** — native iOS/Android architecture, UI frameworks, concurrency, platform UX guidelines, and CI/CD. Read for deep native work.
+- **[references/mobile-security-guide.md](references/mobile-security-guide.md)** — secure storage, network security, authentication, code protection, and OWASP Mobile Top 10 compliance. Read when hardening an app.
+- **[REFERENCE.md](REFERENCE.md)** — extended code examples for the workflows above. Read when you need fuller worked code.
 
 ## Scope &amp; Limitations
 
@@ -677,8 +509,6 @@ class ProductListViewModel @Inject constructor(
 - UI/UX design systems, accessibility auditing, or design token management (see `senior-frontend` and `design-auditor` skills).
 - Runtime profiling with native tools (Xcode Instruments, Android Studio Profiler) -- the analyzer performs static code analysis only, not live device profiling.
 
----
-
 ## Integration Points
 
 | Skill | Integration | Data Flow |
@@ -689,115 +519,6 @@ class ProductListViewModel @Inject constructor(
 | `senior-qa` | Test strategy alignment, device matrix coverage, and E2E testing patterns for mobile screens | QA test plans drive device coverage; mobile scaffold includes test directory structure |
 | `senior-security` | Secure storage patterns (Keychain/Keystore), certificate pinning, and data encryption for mobile apps | Security requirements inform Keychain helper implementation and network client configuration |
 | `release-orchestrator` | Version bumping, changelog generation, and coordinated release across iOS and Android | Release metadata and version info flow from orchestrator into store submission workflow |
-
----
-
-## Tool Reference
-
-### `mobile_scaffold.py`
-
-**Purpose:** Scaffold a production-ready mobile project with proper directory structure, navigation setup, state management, and base configuration files.
-
-**Usage:**
-```bash
-python scripts/mobile_scaffold.py &lt;name&gt; --platform &lt;platform&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `name` | positional | Yes | -- | Project name, used as the directory name |
-| `--platform`, `-p` | choice | Yes | -- | Target platform: `android-native`, `flutter`, `ios-native`, `react-native` |
-| `--typescript`, `-t` | flag | No | `False` (auto-enabled for react-native) | Use TypeScript (React Native only) |
-| `--state`, `-s` | string | No | `none` | State management library. React Native: `zustand`, `redux`, `jotai`, `none`. Flutter: `riverpod`, `bloc`, `provider`, `none`. Not applicable for native platforms. |
-| `--output-dir`, `-o` | path | No | `.` (current directory) | Parent directory for the generated project |
-| `--json` | flag | No | `False` | Output result as JSON instead of human-readable summary |
-
-**Example:**
-```bash
-# Scaffold a React Native app with Zustand state management
-python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand
-
-# Scaffold a Flutter app with Riverpod, output as JSON
-python scripts/mobile_scaffold.py my-flutter-app --platform flutter --state riverpod --json
-
-# Scaffold an iOS native app in a specific directory
-python scripts/mobile_scaffold.py HealthTracker --platform ios-native --output-dir ~/Projects
-```
-
-**Output Formats:**
-- **Human-readable (default):** Prints the project name, platform, state management choice, created directory path, and a list of all generated files.
-- **JSON (`--json`):** Returns a JSON object with `project_name`, `platform`, `typescript`, `state_management`, `output_directory`, `files_created`, and `generated_at` fields.
-
----
-
-### `store_metadata_generator.py`
-
-**Purpose:** Generate structured metadata for App Store (iOS) and Google Play Store (Android) submissions, including title variants, keywords, category recommendations, privacy labels, age rating guidance, and submission checklists.
-
-**Usage:**
-```bash
-python scripts/store_metadata_generator.py --app-name &lt;name&gt; --category &lt;category&gt; --features &lt;features&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `--app-name` | string | Yes | -- | The app name for store listings |
-| `--category` | choice | Yes | -- | Primary app category. Choices: `business`, `education`, `entertainment`, `finance`, `food`, `games`, `health`, `lifestyle`, `music`, `navigation`, `news`, `photo`, `productivity`, `shopping`, `social`, `sports`, `travel`, `utilities`, `weather` |
-| `--features` | string | Yes | -- | Comma-separated list of features (e.g., `&quot;offline,sync,biometric&quot;`). Recognized features expand into keywords and trigger privacy/age-rating guidance. |
-| `--description` | string | No | `&quot;&quot;` | Short app description used in generated store copy |
-| `--json` | flag | No | `False` | Output results as JSON |
-
-**Example:**
-```bash
-# Generate metadata for a health app
-python scripts/store_metadata_generator.py --app-name &quot;FitTrack&quot; --category health --features &quot;workout,tracking,social&quot; --description &quot;Track your workouts&quot;
-
-# JSON output for CI integration
-python scripts/store_metadata_generator.py --app-name &quot;BudgetPal&quot; --category finance --features &quot;payment,offline,biometric,push&quot; --json
-```
-
-**Output Formats:**
-- **Human-readable (default):** Formatted report with sections for Title Variants, Keywords (with iOS 100-char field), Store Categories, Privacy Labels / Data Safety, Age Rating Guidance, and Submission Checklist.
-- **JSON (`--json`):** Full metadata object including `titles`, `keywords`, `categories`, `descriptions`, `privacy_labels`, `age_rating`, `screenshot_specs`, and `submission_checklist`.
-
----
-
-### `app_performance_analyzer.py`
-
-**Purpose:** Analyze a mobile project directory for common performance issues including oversized image assets, re-render patterns, memory leak patterns, bundle size estimation, and platform-specific anti-patterns.
-
-**Usage:**
-```bash
-python scripts/app_performance_analyzer.py &lt;project_dir&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `project_dir` | positional | Yes | -- | Path to the mobile project directory to analyze |
-| `--platform`, `-p` | choice | No | Auto-detected | Target platform: `react-native`, `flutter`, `ios-native`, `android-native`. Auto-detected from project files if omitted. |
-| `--json` | flag | No | `False` | Output results as JSON |
-
-**Example:**
-```bash
-# Analyze with auto-detected platform
-python scripts/app_performance_analyzer.py ./my-app
-
-# Analyze a React Native project explicitly
-python scripts/app_performance_analyzer.py ./my-app --platform react-native
-
-# JSON output for CI pipeline integration
-python scripts/app_performance_analyzer.py ./my-app --platform flutter --json
-```
-
-**Output Formats:**
-- **Human-readable (default):** Performance score (0-100 with letter grade), issue summary (critical/warning/info counts), bundle size estimate, detailed issues grouped by category, and platform-specific recommendations.
-- **JSON (`--json`):** Full report object including `performance_score`, `summary`, `bundle_estimate` (source code size, asset size, file counts), `issues_by_category`, and the flat `issues` array with `category`, `severity`, `file`, `line`, and `message` per issue.
 
 ---
 
@@ -850,209 +571,57 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Mobile Developer
 
-Expert mobile application development across iOS, Android, React Native, and Flutter.
+Expert mobile application development across iOS, Android, React Native, and Flutter — scaffolding production projects, building MVVM features (SwiftUI, Jetpack Compose, Expo Router), static performance analysis, and App Store / Play Store submission.
 
 ## Keywords
 
 mobile, ios, android, react-native, flutter, swift, kotlin, swiftui,
 jetpack-compose, expo-router, zustand, app-store, performance, offline-first
 
----
+## Core Capabilities
 
-## Quick Start
+- **Project scaffolding** — production-ready structure, navigation, and state management for React Native (Expo Router), Flutter, iOS native (SwiftUI), and Android native (Jetpack Compose).
+- **Platform selection** — decision matrix across native iOS/Android, React Native, and Flutter by language, performance, and code-sharing.
+- **Feature architecture** — MVVM patterns: SwiftUI `@MainActor` ViewModels, Compose sealed `UiState` + `StateFlow`, Zustand stores.
+- **Performance optimization** — static analysis of image assets, re-renders, memory leaks, bundle size, plus FlatList/RecyclerView/collection-view tuning.
+- **Store submission** — metadata, keywords, privacy labels, age ratings, and submission checklists for both stores.
 
-```bash
-# Scaffold a React Native project
-python scripts/mobile_scaffold.py --platform react-native --name MyApp
+## When to Use
 
-# Build for production
-python scripts/build.py --platform ios --env production
+- Starting a new mobile app and choosing a platform.
+- Building a SwiftUI, Jetpack Compose, or React Native feature with clean architecture.
+- Diagnosing and fixing mobile performance issues.
+- Preparing an App Store / Play Store submission.
 
-# Generate App Store metadata
-python scripts/store_metadata.py --screenshots ./screenshots
+## Clarify First
 
-# Profile rendering performance
-python scripts/profile.py --platform android --output report.html
-```
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Platform** — react-native / flutter / ios-native / android-native (`--platform`; an entirely different scaffold)
+- [ ] **State management** — e.g. zustand (`--state`; changes the generated architecture)
+- [ ] **Task** — new project scaffold vs store-listing metadata vs performance analysis (selects `mobile_scaffold` / `store_metadata_generator` / `app_performance_analyzer`)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## Tools
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/mobile_scaffold.py` | Scaffold project for react-native, ios, android, or flutter |
-| `scripts/build.py` | Build automation with environment and platform flags |
-| `scripts/store_metadata.py` | Generate App Store / Play Store listing metadata |
-| `scripts/profile.py` | Profile rendering, memory, and startup performance |
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `mobile_scaffold.py` | Scaffold a project for react-native, flutter, ios-native, or android-native | `python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand` |
+| `store_metadata_generator.py` | Generate App Store / Play Store listing metadata | `python scripts/store_metadata_generator.py --app-name FitTrack --category health --features &quot;workout,tracking&quot;` |
+| `app_performance_analyzer.py` | Static performance analysis (score, issues, bundle estimate) | `python scripts/app_performance_analyzer.py ./my-app --platform react-native` |
 
----
+## References
 
-## Platform Decision Matrix
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-| Aspect | Native iOS | Native Android | React Native | Flutter |
-|--------|-----------|----------------|--------------|---------|
-| Language | Swift | Kotlin | TypeScript | Dart |
-| UI Framework | SwiftUI/UIKit | Compose/XML | React | Widgets |
-| Performance | Best | Best | Good | Very Good |
-| Code Sharing | None | None | ~80% | ~95% |
-| Best For | iOS-only, hardware-heavy | Android-only, hardware-heavy | Web team, shared logic | Maximum code sharing |
-
----
-
-## Workflow 1: Scaffold a React Native App (Expo Router)
-
-1. **Generate project** -- `python scripts/mobile_scaffold.py --platform react-native --name MyApp`
-2. **Verify directory structure** matches this layout:
-   ```
-   src/
-   ├── app/              # Expo Router file-based routes
-   │   ├── (tabs)/       # Tab navigation group
-   │   ├── auth/         # Auth screens
-   │   └── _layout.tsx   # Root layout
-   ├── components/
-   │   ├── ui/           # Reusable primitives (Button, Input, Card)
-   │   └── features/     # Domain components (ProductCard, UserAvatar)
-   ├── hooks/            # Custom hooks (useAuth, useApi)
-   ├── services/         # API clients and storage
-   ├── stores/           # Zustand state stores
-   └── utils/            # Helpers
-   ```
-3. **Configure navigation** in `app/_layout.tsx` with Stack and Tabs.
-4. **Set up state management** with Zustand + AsyncStorage persistence.
-5. **Validate** -- Run the app on both iOS simulator and Android emulator. Confirm navigation and state persistence work.
-
-## Workflow 2: Build a SwiftUI Feature (iOS)
-
-1. **Create the View** using `NavigationStack`, `@StateObject` for ViewModel binding, and `.task` for async data loading.
-2. **Create the ViewModel** as `@MainActor class` with `@Published` properties. Inject services via protocol for testability.
-3. **Wire data flow**: View observes ViewModel -&gt; ViewModel calls Service -&gt; Service returns data -&gt; ViewModel updates `@Published` -&gt; View re-renders.
-4. **Add search/refresh**: `.searchable(text:)` for filtering, `.refreshable` for pull-to-refresh.
-5. **Validate** -- Run in Xcode previews first, then simulator. Confirm async loading, error states, and empty states all render correctly.
-
-### Example: SwiftUI ViewModel Pattern
-
-```swift
-@MainActor
-class ProductListViewModel: ObservableObject {
-    @Published private(set) var products: [Product] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
-
-    private let service: ProductServiceProtocol
-
-    init(service: ProductServiceProtocol = ProductService()) {
-        self.service = service
-    }
-
-    func loadProducts() async {
-        isLoading = true
-        error = nil
-        do {
-            products = try await service.fetchProducts()
-        } catch {
-            self.error = error
-        }
-        isLoading = false
-    }
-}
-```
-
-## Workflow 3: Build a Jetpack Compose Feature (Android)
-
-1. **Create the Composable screen** with `Scaffold`, `TopAppBar`, and state collection via `collectAsStateWithLifecycle()`.
-2. **Handle UI states** with a sealed interface: `Loading`, `Success&lt;T&gt;`, `Error`.
-3. **Create the ViewModel** with `@HiltViewModel`, `MutableStateFlow`, and repository injection.
-4. **Build list UI** using `LazyColumn` with `key` parameter for stable identity and `Arrangement.spacedBy()` for spacing.
-5. **Validate** -- Run on emulator. Confirm state transitions (loading -&gt; success, loading -&gt; error -&gt; retry) work correctly.
-
-### Example: Compose UiState Pattern
-
-```kotlin
-sealed interface UiState&lt;out T&gt; {
-    data object Loading : UiState&lt;Nothing&gt;
-    data class Success&lt;T&gt;(val data: T) : UiState&lt;T&gt;
-    data class Error(val message: String) : UiState&lt;Nothing&gt;
-}
-
-@HiltViewModel
-class ProductListViewModel @Inject constructor(
-    private val repository: ProductRepository
-) : ViewModel() {
-    private val _uiState = MutableStateFlow&lt;UiState&lt;List&lt;Product&gt;&gt;&gt;(UiState.Loading)
-    val uiState: StateFlow&lt;UiState&lt;List&lt;Product&gt;&gt;&gt; = _uiState.asStateFlow()
-
-    fun loadProducts() {
-        viewModelScope.launch {
-            _uiState.value = UiState.Loading
-            repository.getProducts()
-                .catch { e -&gt; _uiState.value = UiState.Error(e.message ?: &quot;Unknown error&quot;) }
-                .collect { products -&gt; _uiState.value = UiState.Success(products) }
-        }
-    }
-}
-```
-
-## Workflow 4: Optimize Mobile Performance
-
-1. **Profile** -- `python scripts/profile.py --platform &lt;ios|android&gt; --output report.html`
-2. **Apply React Native optimizations:**
-   - Use `FlatList` with `keyExtractor`, `initialNumToRender=10`, `windowSize=5`, `removeClippedSubviews=true`
-   - Memoize components with `React.memo` and handlers with `useCallback`
-   - Supply `getItemLayout` for fixed-height rows to skip measurement
-3. **Apply native iOS optimizations:**
-   - Implement `prefetchItemsAt` for image pre-loading in collection views
-4. **Apply native Android optimizations:**
-   - Set `setHasFixedSize(true)` and `setItemViewCacheSize(20)` on RecyclerViews
-5. **Validate** -- Re-run profiler and confirm frame drops reduced and startup time improved.
-
-## Workflow 5: Submit to App Store / Play Store
-
-1. **Generate metadata** -- `python scripts/store_metadata.py --screenshots ./screenshots`
-2. **Build release** -- `python scripts/build.py --platform ios --env production`
-3. **Review** the generated listing (title, description, keywords, screenshots).
-4. **Upload** via Xcode (iOS) or Play Console (Android).
-5. **Validate** -- Monitor review status and address any rejection feedback.
-
----
-
-## Reference Materials
-
-| Document | Path |
-|----------|------|
-| React Native Guide | [references/react_native_guide.md](references/react_native_guide.md) |
-| iOS Patterns | [references/ios_patterns.md](references/ios_patterns.md) |
-| Android Patterns | [references/android_patterns.md](references/android_patterns.md) |
-| App Store Guide | [references/app_store_guide.md](references/app_store_guide.md) |
-| Full Code Examples | [REFERENCE.md](REFERENCE.md) |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| App crashes on launch after adding a new dependency | Incompatible native module version or missing pod install / gradle sync | Run `npx pod-install` (iOS) or `cd android &amp;&amp; ./gradlew clean` (Android). Verify dependency version compatibility in the changelog. |
-| FlatList renders blank or flickers | Missing `keyExtractor`, unstable keys, or inline `renderItem` causing full re-renders | Add a stable `keyExtractor`, wrap `renderItem` in `useCallback`, and supply `getItemLayout` for fixed-height rows. |
-| iOS build fails with &quot;signing&quot; error | Provisioning profile mismatch or expired certificate | Open Xcode &gt; Signing &amp; Capabilities, select the correct team and profile. Run `security find-identity -v -p codesigning` to verify certificates. |
-| Android build OOM during dexing | Insufficient JVM heap for large projects | Add `org.gradle.jvmargs=-Xmx4096m` to `gradle.properties`. Enable `dexOptions { javaMaxHeapSize &quot;4g&quot; }` in `build.gradle`. |
-| App Store rejection for missing privacy manifest | Apple requires PrivacyInfo.xcprivacy for apps using required reason APIs (UserDefaults, file timestamp, etc.) | Add a `PrivacyInfo.xcprivacy` file declaring each required reason API. Run `store_metadata_generator.py` to review privacy label guidance. |
-| Slow cold start time (&gt;3 seconds) | Too many synchronous operations on the main thread at launch, large bundle size, or unoptimized images | Defer non-critical initialization, lazy-load modules, compress images, and use `app_performance_analyzer.py` to identify bottlenecks. |
-| Hot reload / fast refresh stops working | Syntax error in a module boundary, anonymous default export, or class component state | Check terminal for error messages, ensure named exports, and restart the Metro bundler or Flutter daemon with a cache clear. |
-
----
-
-## Success Criteria
-
-- **App startup time under 2 seconds** on cold launch (measured on mid-range devices, both iOS and Android).
-- **Crash-free rate above 99.5%** across all supported OS versions, tracked via Crashlytics or Sentry.
-- **Frame rendering at 60 fps** (16ms per frame) for scrolling lists and animations, with zero jank frames during typical user flows.
-- **Bundle size under 50 MB** for the initial download (excluding on-demand resources), verified before each release.
-- **Performance analyzer score of 75+** (Grade B or above) when running `app_performance_analyzer.py` against the project.
-- **Zero critical issues** and fewer than 5 warnings reported by the performance analyzer before submitting to app stores.
-- **App Store / Play Store approval on first submission** with complete metadata, correct privacy labels, and proper age rating, validated using `store_metadata_generator.py`.
-
----
+- **[references/workflows.md](references/workflows.md)** — the platform decision matrix and all five end-to-end workflows (React Native scaffold, SwiftUI feature, Jetpack Compose feature, performance optimization, store submission) with SwiftUI/Compose code examples. Read when executing any workflow.
+- **[references/tool-reference.md](references/tool-reference.md)** — full parameter tables, examples, and output formats for the three scripts. Read when running the scripts.
+- **[references/troubleshooting-and-success.md](references/troubleshooting-and-success.md)** — the build/render/submission troubleshooting table and the success-criteria bar. Read when debugging or validating quality.
+- **[references/react-native-patterns.md](references/react-native-patterns.md)** — production React Native: navigation, state management, performance, testing, native modules, OTA updates. Read for deep RN work.
+- **[references/ios-android-patterns.md](references/ios-android-patterns.md)** — native iOS/Android architecture, UI frameworks, concurrency, platform UX guidelines, and CI/CD. Read for deep native work.
+- **[references/mobile-security-guide.md](references/mobile-security-guide.md)** — secure storage, network security, authentication, code protection, and OWASP Mobile Top 10 compliance. Read when hardening an app.
+- **[REFERENCE.md](REFERENCE.md)** — extended code examples for the workflows above. Read when you need fuller worked code.
 
 ## Scope &amp; Limitations
 
@@ -1068,8 +637,6 @@ class ProductListViewModel @Inject constructor(
 - UI/UX design systems, accessibility auditing, or design token management (see `senior-frontend` and `design-auditor` skills).
 - Runtime profiling with native tools (Xcode Instruments, Android Studio Profiler) -- the analyzer performs static code analysis only, not live device profiling.
 
----
-
 ## Integration Points
 
 | Skill | Integration | Data Flow |
@@ -1080,115 +647,6 @@ class ProductListViewModel @Inject constructor(
 | `senior-qa` | Test strategy alignment, device matrix coverage, and E2E testing patterns for mobile screens | QA test plans drive device coverage; mobile scaffold includes test directory structure |
 | `senior-security` | Secure storage patterns (Keychain/Keystore), certificate pinning, and data encryption for mobile apps | Security requirements inform Keychain helper implementation and network client configuration |
 | `release-orchestrator` | Version bumping, changelog generation, and coordinated release across iOS and Android | Release metadata and version info flow from orchestrator into store submission workflow |
-
----
-
-## Tool Reference
-
-### `mobile_scaffold.py`
-
-**Purpose:** Scaffold a production-ready mobile project with proper directory structure, navigation setup, state management, and base configuration files.
-
-**Usage:**
-```bash
-python scripts/mobile_scaffold.py &lt;name&gt; --platform &lt;platform&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `name` | positional | Yes | -- | Project name, used as the directory name |
-| `--platform`, `-p` | choice | Yes | -- | Target platform: `android-native`, `flutter`, `ios-native`, `react-native` |
-| `--typescript`, `-t` | flag | No | `False` (auto-enabled for react-native) | Use TypeScript (React Native only) |
-| `--state`, `-s` | string | No | `none` | State management library. React Native: `zustand`, `redux`, `jotai`, `none`. Flutter: `riverpod`, `bloc`, `provider`, `none`. Not applicable for native platforms. |
-| `--output-dir`, `-o` | path | No | `.` (current directory) | Parent directory for the generated project |
-| `--json` | flag | No | `False` | Output result as JSON instead of human-readable summary |
-
-**Example:**
-```bash
-# Scaffold a React Native app with Zustand state management
-python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand
-
-# Scaffold a Flutter app with Riverpod, output as JSON
-python scripts/mobile_scaffold.py my-flutter-app --platform flutter --state riverpod --json
-
-# Scaffold an iOS native app in a specific directory
-python scripts/mobile_scaffold.py HealthTracker --platform ios-native --output-dir ~/Projects
-```
-
-**Output Formats:**
-- **Human-readable (default):** Prints the project name, platform, state management choice, created directory path, and a list of all generated files.
-- **JSON (`--json`):** Returns a JSON object with `project_name`, `platform`, `typescript`, `state_management`, `output_directory`, `files_created`, and `generated_at` fields.
-
----
-
-### `store_metadata_generator.py`
-
-**Purpose:** Generate structured metadata for App Store (iOS) and Google Play Store (Android) submissions, including title variants, keywords, category recommendations, privacy labels, age rating guidance, and submission checklists.
-
-**Usage:**
-```bash
-python scripts/store_metadata_generator.py --app-name &lt;name&gt; --category &lt;category&gt; --features &lt;features&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `--app-name` | string | Yes | -- | The app name for store listings |
-| `--category` | choice | Yes | -- | Primary app category. Choices: `business`, `education`, `entertainment`, `finance`, `food`, `games`, `health`, `lifestyle`, `music`, `navigation`, `news`, `photo`, `productivity`, `shopping`, `social`, `sports`, `travel`, `utilities`, `weather` |
-| `--features` | string | Yes | -- | Comma-separated list of features (e.g., `&quot;offline,sync,biometric&quot;`). Recognized features expand into keywords and trigger privacy/age-rating guidance. |
-| `--description` | string | No | `&quot;&quot;` | Short app description used in generated store copy |
-| `--json` | flag | No | `False` | Output results as JSON |
-
-**Example:**
-```bash
-# Generate metadata for a health app
-python scripts/store_metadata_generator.py --app-name &quot;FitTrack&quot; --category health --features &quot;workout,tracking,social&quot; --description &quot;Track your workouts&quot;
-
-# JSON output for CI integration
-python scripts/store_metadata_generator.py --app-name &quot;BudgetPal&quot; --category finance --features &quot;payment,offline,biometric,push&quot; --json
-```
-
-**Output Formats:**
-- **Human-readable (default):** Formatted report with sections for Title Variants, Keywords (with iOS 100-char field), Store Categories, Privacy Labels / Data Safety, Age Rating Guidance, and Submission Checklist.
-- **JSON (`--json`):** Full metadata object including `titles`, `keywords`, `categories`, `descriptions`, `privacy_labels`, `age_rating`, `screenshot_specs`, and `submission_checklist`.
-
----
-
-### `app_performance_analyzer.py`
-
-**Purpose:** Analyze a mobile project directory for common performance issues including oversized image assets, re-render patterns, memory leak patterns, bundle size estimation, and platform-specific anti-patterns.
-
-**Usage:**
-```bash
-python scripts/app_performance_analyzer.py &lt;project_dir&gt; [options]
-```
-
-**Parameters:**
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `project_dir` | positional | Yes | -- | Path to the mobile project directory to analyze |
-| `--platform`, `-p` | choice | No | Auto-detected | Target platform: `react-native`, `flutter`, `ios-native`, `android-native`. Auto-detected from project files if omitted. |
-| `--json` | flag | No | `False` | Output results as JSON |
-
-**Example:**
-```bash
-# Analyze with auto-detected platform
-python scripts/app_performance_analyzer.py ./my-app
-
-# Analyze a React Native project explicitly
-python scripts/app_performance_analyzer.py ./my-app --platform react-native
-
-# JSON output for CI pipeline integration
-python scripts/app_performance_analyzer.py ./my-app --platform flutter --json
-```
-
-**Output Formats:**
-- **Human-readable (default):** Performance score (0-100 with letter grade), issue summary (critical/warning/info counts), bundle size estimate, detailed issues grouped by category, and platform-specific recommendations.
-- **JSON (`--json`):** Full report object including `performance_score`, `summary`, `bundle_estimate` (source code size, asset size, file counts), `issues_by_category`, and the flat `issues` array with `category`, `severity`, `file`, `line`, and `message` per issue.
 
 ---
 
@@ -1276,21 +734,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/senior-mobile/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Scaffold a React Native project
-python scripts/mobile_scaffold.py --platform react-native --name MyApp
-
-# Build for production
-python scripts/build.py --platform ios --env production
-
-# Generate App Store metadata
-python scripts/store_metadata.py --screenshots ./screenshots
-
-# Profile rendering performance
-python scripts/profile.py --platform android --output report.html
-</code></pre>
-
----
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-mobile/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

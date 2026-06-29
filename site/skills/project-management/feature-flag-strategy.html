@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Feature Flag Strategy</h1>
     <p class="page-subtitle">PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">feature-flags</span><span class="tag">dark-launch</span><span class="tag">kill-switch</span><span class="tag">rollout</span><span class="tag">holdout</span><span class="tag">ab-test</span><span class="tag">launchdarkly</span><span class="tag">statsig</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,19 +397,6 @@ PM-facing playbook for phased rollouts with feature flags -- taxonomy (release /
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done p
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Shape A: Linear ramp
-- Shape B: Segmented (audience-first)
-- Shape C: Geographic / regulatory-aware
-- Shape D: A/B split with holdout
-
-## Frameworks &amp; Templates You Know
-- This skill is template-based; no Python tool. Artifacts are markdown plans.
-- | Template | Purpose |
-- - `assets/rollout_plan_template.md` -- Per-feature rollout plan
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -431,19 +418,6 @@ Start by asking the user what they need help with.">
 PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done p
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Shape A: Linear ramp
-- Shape B: Segmented (audience-first)
-- Shape C: Geographic / regulatory-aware
-- Shape D: A/B split with holdout
-
-## Frameworks &amp; Templates You Know
-- This skill is template-based; no Python tool. Artifacts are markdown plans.
-- | Template | Purpose |
-- - `assets/rollout_plan_template.md` -- Per-feature rollout plan
 
 ## How to Help
 When the user asks for help in this domain:
@@ -477,332 +451,78 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done poorly, flags become permanent technical debt: hundreds of dead toggles in code, conflicting flag states across environments, and nobody remembering what the flag controls.
 
-This skill is the **PM-facing** rollout playbook. It does not describe how to wire a flag library into your codebase (that is the engineering side, e.g. `engineering/feature-flag-architect/` if it exists, or your LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature install). It describes how a PM plans a phased rollout: what kind of flag this is, how it ramps, what the gate criteria are between stages, who can flip the kill-switch, when the flag retires, and how it is named so the team can find it six months later.
+This skill is the **PM-facing** rollout playbook. It does not describe how to wire a flag library into your codebase (that is the engineering side, e.g. your LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature install). It describes how a PM plans a phased rollout: what kind of flag this is, how it ramps, what the gate criteria are between stages, who can flip the kill-switch, when the flag retires, and how it is named so the team can find it six months later. The frameworks behind it are Martin Fowler&#x27;s &quot;Feature Toggles&quot; taxonomy, LaunchDarkly&#x27;s rollout best practices, Optimizely / Statsig experiment playbooks, and Reforge experimentation foundations.
 
-The frameworks behind it are Martin Fowler&#x27;s &quot;Feature Toggles&quot; taxonomy (release vs experiment vs ops vs permission, each with very different lifespans), LaunchDarkly&#x27;s rollout best practices, Optimizely / Statsig experiment playbooks, and Reforge experimentation foundations.
+## Core Capabilities
 
-### When to Use
+- **Flag classification** -- release / experiment / ops / permission, each with its own lifespan and ownership rules.
+- **Rollout shape selection** -- linear, segmented, geographic, A/B-with-holdout, dark launch, reverse ramp, mobile forced-upgrade.
+- **Kill-switch design** -- pre-agreed thresholds per surface and single-config-change rollback authority for on-call.
+- **Holdout design** -- short-term and global holdouts for long-term lift attribution.
+- **Flag-debt governance** -- retirement dates, retirement checklist, quarterly audit, naming conventions, dependency chains.
 
-- **Planning a launch larger than a small team can ship cold.** Anything customer-facing usually warrants a flag.
-- **Risk-y change to a high-traffic surface.** Search, checkout, auth, billing -- always behind a flag with a kill-switch.
-- **Experiments (A/B tests).** Experiment toggles are a special kind of flag with hold-out and statistical-significance gates.
-- **Permission rollouts.** New feature available only to enterprise tenants, beta participants, or a specific role.
-- **Operational levers.** Throttles, circuit breakers, degrade-modes -- flags that protect the system under load.
-- **Migration of a deterministic feature to AI.** Pair with `ai-feature-prd/` for the deployment ramp; pair with `engineering/llm-cost-optimizer/` for cost gates.
+## When to Use
 
-### When NOT to Use
+- Planning a launch larger than a small team can ship cold (anything customer-facing usually warrants a flag).
+- Risky changes to high-traffic surfaces (search, checkout, auth, billing -- always behind a kill-switch).
+- Experiments (A/B tests) with hold-out and statistical-significance gates.
+- Permission rollouts (enterprise tenants, beta participants, a specific role).
+- Operational levers (throttles, circuit breakers, degrade-modes).
+- Migration of a deterministic feature to AI (pair with `ai-feature-prd/`; cost gates via `engineering/llm-cost-optimizer/`).
 
-- For one-time data migrations (use a script with a `--dry-run` flag, not a feature flag).
-- For configuration that changes between environments (use environment config, not a feature flag).
-- For permanent A/B variants that never converge (this is a personalization system, not a flag system).
-- For feature-flagging every change (cost of flags &gt; value when overused; reserve for genuinely risky surfaces).
+**When NOT to use:** one-time data migrations (use a script with `--dry-run`), environment configuration, permanent A/B variants that never converge (that is personalization), or flag-flagging every change (cost &gt; value when overused).
 
-## Flag taxonomy (Fowler)
+## Clarify First
 
-Martin Fowler&#x27;s taxonomy classifies flags by **purpose** because lifespan and ownership differ dramatically.
+Before drafting the rollout plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Flag type | Purpose | Lifespan | Ownership | Examples |
-|---|---|---|---|---|
-| **Release toggle** | Deploy code before release; decouple ship from launch | Days to weeks; **must retire after launch** | Owning team (Eng + PM) | &quot;new_checkout_flow_v2&quot;, &quot;search_relevance_v3&quot; |
-| **Experiment toggle** | A/B test variants; decide based on stat-sig | Days to weeks; **must retire when experiment concludes** | Owning team + analytics | &quot;checkout_button_color_test&quot;, &quot;onboarding_v2_experiment&quot; |
-| **Ops toggle** | Operational control: throttle, circuit-break, degrade-mode | Permanent or long-lived | Infra / SRE | &quot;search_circuit_breaker&quot;, &quot;rate_limit_premium_tier&quot; |
-| **Permission toggle** | Gate features by user, plan, role, tenant | Permanent (lives with the product) | Product + Eng | &quot;enterprise_admin_panel&quot;, &quot;beta_program_access&quot; |
+- [ ] **Flag type** — release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary)
+- [ ] **Rollout shape** — linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp
+- [ ] **Kill-switch threshold + authority** — the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag
+- [ ] **Retirement date** — for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues
 
-The error mode is treating a release toggle as a permission toggle (&quot;we never turned it off, so it&#x27;s now permanent&quot;). The result is **flag debt**: thousands of dead branches in code, conflicting flag combinations, mystery behaviors.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-**Rule:** every release toggle and experiment toggle has a *retirement date* set at creation. Operationally, a flag without a retirement date is treated as a defect.
+## Quick Start
 
-## Rollout shapes
+1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
+2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a &quot;green pass&quot; gate metric per step; retire the flag at stable GA; audit inventory quarterly.
 
-The shape of a ramp tells the team how much risk they are absorbing per step.
+See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
-### Shape A: Linear ramp
+## References
 
-```
-0% -&gt; 1% -&gt; 5% -&gt; 10% -&gt; 25% -&gt; 50% -&gt; 100%
-```
-
-The default. Each step held for 1-3 days while metrics settle. Use for new features without strong segment hypotheses.
-
-### Shape B: Segmented (audience-first)
-
-```
-Internal employees -&gt; Friends-and-family -&gt; Beta opt-in -&gt; Free tier -&gt; Paid tier -&gt; All
-```
-
-Use when you have explicit risk gradients across segments -- enterprise customers wait until pro customers have validated; consumer flagship waits for ToS-aware beta opt-in.
-
-### Shape C: Geographic / regulatory-aware
-
-```
-Single low-risk region -&gt; Region cluster -&gt; Global, excluding regulated regions -&gt; Global, all regions
-```
-
-Use for features with regulatory variance (EU AI Act, GDPR-specific UI, payment-method constraints, age-verification rules).
-
-### Shape D: A/B split with holdout
-
-```
-Variant A (control): 50%
-Variant B (test): 45%
-Holdout (no exposure): 5%
-```
-
-Use for experiments. The holdout group is never exposed even after rollout, so the team can measure long-term lift weeks after the experiment concludes.
-
-### Shape E: Dark launch (shadow)
-
-```
-Code shipped to 100% -- no user-visible behavior
-Backend runs the new path in shadow; results discarded but logged
-```
-
-Use to validate performance, error rate, and side effects before any user sees the new behavior. Standard for high-traffic system changes; also standard for AI features (pair with `ai-feature-prd/` Section 11.3).
-
-### Shape F: Reverse ramp (sunset)
-
-```
-100% -&gt; 75% -&gt; 50% -&gt; 25% -&gt; 10% -&gt; 0%
-```
-
-Use for retiring a feature. The ramp gives users time to migrate; analytics monitor whether users are healthy on the new path. Pair with `eol-communication/`.
-
-### Shape G: Forced-upgrade (mobile)
-
-```
-Server-side flag check -&gt; app refuses to start on old client -&gt; user must upgrade
-```
-
-Special case for mobile when the new feature requires a client version. Always have a transition window; never flag-flip on day 1 of release.
-
-## Kill-switch decision tree
-
-A kill-switch is the on-call&#x27;s emergency control. Three rules:
-
-1. **Every release toggle has a kill-switch path.** &quot;Turn the flag off&quot; must be a single config change, not a code rollback.
-2. **The kill-switch threshold is pre-agreed.** Define it during planning, not in the heat of incident.
-3. **The on-call has authority to flip without escalation.** If the rollback requires VP sign-off, the system is too slow.
-
-### Decision tree
-
-```
-Incident detected.
-|
-+-- Customer impact? -- No --&gt; Monitor; document; do not flip.
-|        |
-|        Yes
-|        |
-|        v
-+-- Within feature-flagged surface? -- No --&gt; Standard incident response.
-|        |
-|        Yes
-|        |
-|        v
-+-- Error rate &gt; threshold OR major-customer-blocked? -- No --&gt; Throttle / partial degrade.
-|        |
-|        Yes
-|        |
-|        v
-+-- Flip kill-switch -- 0% rollout -- Notify owner + customers.
-         |
-         v
-   Post-incident: root cause; flag stays off until fix lands; never re-enable without re-ramp.
-```
-
-### Kill-switch thresholds (defaults to tune per surface)
-
-| Surface | Default threshold |
-|---|---|
-| Critical (checkout, auth, billing) | Error rate &gt; 0.5% sustained for 5 min |
-| Core (search, signup, dashboard) | Error rate &gt; 2% sustained for 10 min OR top-tier-customer blocked |
-| Non-critical | Error rate &gt; 5% sustained for 15 min |
-| Latency | p95 &gt; 2x baseline for 10 min |
-| Customer reports | &gt;= 3 independent reports of the same issue from paid customers |
-
-## Holdouts
-
-A holdout is a slice of users (typically 1-10%) who never see the feature, even after general availability. Two uses:
-
-**Short-term holdout** -- to measure the lift of the feature with statistical confidence over time. Required for any experiment where the team wants to attribute long-term impact.
-
-**Long-term (&quot;global&quot;) holdout** -- a slice that never sees *any* of the team&#x27;s experiments for a quarter. Allows leadership to attribute aggregate lift to the team. Reforge and most experimentation-mature orgs run a global holdout.
-
-### Holdout governance
-
-- **Size**: 1-10%; smaller holdouts have less statistical power but cost less in lost feature exposure.
-- **Composition**: random or stratified (by segment, geo, plan tier).
-- **Duration**: at least one full retention horizon (D30 or D60); often 1-2 quarters.
-- **Documentation**: holdout configuration in source control; never modified mid-experiment.
-- **Re-exposure**: when the holdout ends, members are merged back; the team should plan for the conversion event.
-
-## Flag debt and retirement
-
-Every feature flag is technical debt by default. A live flag has a maintenance cost (test matrix, code branches, config integrity). Successful teams treat flag retirement as a first-class engineering activity.
-
-### Retirement checklist (release toggle)
-
-- [ ] Feature is at 100% for at least 2 weeks with stable metrics.
-- [ ] No regression has been triaged that the flag would mitigate.
-- [ ] Flag owner has filed a retirement PR removing both branches of code.
-- [ ] Test matrix updated to remove the flag combinations.
-- [ ] Config entry removed from the flag service.
-- [ ] Documentation updated (runbook, customer-facing docs if any).
-- [ ] Final state archived (what the flag controlled, when it retired, who owned it).
-
-### Retirement signals
-
-- Flag has been at 100% for 30+ days -&gt; retire.
-- Flag has been at 0% for 30+ days and the feature is dead -&gt; retire.
-- Flag has not been flipped in 60+ days and no plan to flip -&gt; investigate and retire or convert to a permission/ops flag with explicit ownership.
-- Flag is referenced in fewer than 3 places in code -&gt; trivially retirable; remove.
-
-### Flag-debt audit cadence
-
-Run a flag audit at least quarterly:
-- List of all live flags.
-- For each: type, owner, last toggle date, retirement date.
-- Flag count delta vs last quarter.
-- &quot;Aged flag&quot; report: flags older than 90 days that are not Ops or Permission.
-
-## Naming conventions
-
-A flag name is read more often than it is written. Conventions:
-
-```
-&lt;scope&gt;__&lt;feature&gt;__&lt;purpose&gt;__&lt;version&gt;
-```
-
-Examples:
-- `web__checkout__new_flow__v2` (release toggle on web for new checkout flow v2)
-- `api__search__relevance__experiment_q3` (experiment toggle in API)
-- `infra__search__circuit_breaker` (ops toggle, permanent)
-- `product__enterprise_admin__permission` (permission toggle, permanent)
-
-Rules:
-- **Scope first** -- web / mobile / api / infra. Lets you search &quot;all checkout flags on web.&quot;
-- **Feature second** -- the system surface, not the marketing name.
-- **Purpose third** -- release / experiment / ops / permission. Often baked into name (`__test`, `__experiment`, `__permission`, `__rollout`).
-- **Version when applicable** -- experiments and major UX redesigns benefit from version suffixes.
-- **No team names in the flag name** -- teams reorg; flags outlive the team.
-- **No customer names** -- exception: enterprise-specific permission flags can include the tenant id.
-- **lowercase + underscores or double-underscores** -- avoid camelCase to keep search predictable.
-
-## Dependency chains
-
-A flag depends on another when feature A only makes sense if feature B is also enabled. Two rules:
-
-1. **The dependency is encoded explicitly** in the flag service (e.g., LaunchDarkly prerequisites) or in code with a clear check.
-2. **The rollout plan reflects the dependency** -- ramp the parent flag first, hold until stable, then ramp the child.
-
-Dependency chains beyond 2-3 levels become unmanageable. If a flag depends on three other flags, the rollout plan needs flattening.
-
-## Approval and audit trail
-
-Flag flips on critical surfaces should require:
-- **Pre-approved owner** -- who can flip without further sign-off (usually the team&#x27;s PM + the on-call engineer).
-- **Change log entry** -- automatic; every flip logged with who, when, what, why.
-- **Two-person rule** for high-tier surfaces -- billing, auth, data deletion. One person proposes, another approves before flip.
-- **Audit retention** -- 90+ days of flag-change history available to the on-call.
-
-## Workflow
-
-1. **Classify the flag** (release / experiment / ops / permission). The lifespan and ownership follow.
-2. **Pick the rollout shape** (A-G above) and the gate criteria between stages.
-3. **Define the kill-switch** thresholds and authority.
-4. **Set the retirement date** (release/experiment toggles only). Add it to the team&#x27;s flag-audit list.
-5. **Name the flag** using the convention.
-6. **Document the plan** in the `assets/rollout_plan_template.md`. Share with eng, on-call, sponsor.
-7. **Wire the flag** (engineering side; PM does not do this).
-8. **Ramp** through the stages, holding each step long enough for metrics to settle.
-9. **Monitor**. Watch the same dashboard for each step. Declare each step a &quot;green pass&quot; before advancing.
-10. **Retire** the flag when GA is stable. Add to next sprint&#x27;s retirement PRs.
-11. **Audit** flag inventory quarterly; remove stragglers.
-
-## Tools
-
-This skill is template-based; no Python tool. Artifacts are markdown plans.
-
-| Template | Purpose |
-|---|---|
-| `assets/rollout_plan_template.md` | Per-feature rollout plan with stages, gates, owners, dates |
-| `assets/kill_switch_decision_tree.md` | Pre-incident thresholds + authority + flip steps |
-| `assets/flag_debt_retirement_checklist.md` | Flag-retirement workflow + quarterly audit |
-| `assets/flag_naming_convention.md` | Naming sheet for the team |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Flag inventory has 200+ live flags | No retirement discipline; release toggles never deleted | Run a quarterly audit; mass-retire anything 100% &gt; 30 days; lock new flag creation behind a retirement-date requirement |
-| Rollback during incident requires a code revert | Flag is on but the rollback path is not wired | Every release toggle has a kill-switch path (single config change); rehearse the flip in non-prod once a quarter |
-| Mobile feature flag broke users on old app version | Flag flipped before client adoption; no version gate | Always gate mobile flags on minimum client version; transition window of at least one release cycle |
-| Two flags interact in unexpected ways | Implicit dependency; flag combinations not tested | Encode dependencies in the flag service; cover the cross-product in test matrix; flatten dependency chains &gt; 2 levels |
-| Experiment &quot;shipped&quot; but holdout was killed | Holdout retired with the experiment; no long-term measurement | Keep the holdout open for at least one retention horizon after launch; document re-exposure as a separate step |
-| Owner of a flag has left the company | No ownership succession on flags | Flag ownership is by team, not by individual; team owner reviews the flag list during onboarding |
-| Flag-flip incident: wrong person flipped | Permissions too loose; no two-person rule on critical flags | Critical surfaces require two-person approval; rotate the kill-switch authority to the on-call rota |
-| Feature ramped to 100% but metrics never validated | No gate criteria between stages | Pre-agree the gate metrics; do not advance without a &quot;green pass&quot; from the owner |
-
-## Success Criteria
-
-- Every release / experiment toggle has a documented type, owner, kill-switch threshold, and retirement date.
-- The rollout plan names the gate metric between each stage.
-- The kill-switch can be flipped by the on-call without escalation.
-- Mobile flags are gated on a minimum client version.
-- Quarterly flag audit runs; flag count is stable or decreasing over time.
-- Naming convention is enforced (linter or PR review).
-- Experiments include a holdout that survives launch.
-- Flag-debt retirement is part of every sprint, not a periodic cleanup.
+- `references/rollout-execution-playbook.md` -- read this when planning a rollout end-to-end: flag taxonomy, all 7 rollout shapes, kill-switch decision tree + thresholds, holdouts, flag-debt retirement, naming, dependency chains, approval/audit, workflow, troubleshooting, success criteria.
+- `references/fowler-feature-toggle-taxonomy-guide.md` -- read this for the deep dive on Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them.
+- `references/rollout-shape-comparison-guide.md` -- read this for the worked comparison of the 7 rollout shapes with example use cases and risk profiles.
+- `references/red-flags.md` -- read this when reviewing a rollout plan for anti-patterns and failure modes before sign-off.
+- `assets/rollout_plan_template.md` -- per-feature rollout plan with stages, gates, owners, dates.
+- `assets/kill_switch_decision_tree.md` -- pre-incident kill-switch thresholds + authority + flip steps.
+- `assets/flag_debt_retirement_checklist.md` -- retirement workflow + quarterly audit.
+- `assets/flag_naming_convention.md` -- team naming sheet.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Flag taxonomy (release / experiment / ops / permission) and lifespan rules
-- Rollout shapes (linear, segmented, geo, A/B with holdout, dark launch, reverse, mobile forced-upgrade)
-- Kill-switch decision tree and pre-agreed thresholds
-- Holdout design (short-term and global)
-- Flag-debt retirement workflow + quarterly audit
-- Naming conventions and dependency-chain governance
-- Approval, audit-trail, and two-person-rule patterns
+**In scope:** flag taxonomy and lifespan rules; rollout shapes; kill-switch decision tree and thresholds; holdout design; flag-debt retirement workflow + audit; naming and dependency-chain governance; approval, audit-trail, and two-person-rule patterns.
 
-**Out of Scope:**
-- Wiring flag SDKs into a codebase (engineering side; LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature)
-- Statistical analysis of experiments (pair with `discovery/brainstorm-experiments/` for design; data-analytics domain for stats)
-- Building the analytics dashboards that gate each rollout stage (BI tooling)
-- Customer communications around launches (use `launch-playbook/`, `prfaq/`, `release-notes/`)
-- End-of-life narrative (use `eol-communication/`)
-- Code rollback strategy (use git revert and deployment pipelines; flags reduce but do not eliminate the need)
+**Out of scope:** wiring flag SDKs into a codebase (engineering side); statistical analysis of experiments (pair with `discovery/brainstorm-experiments/` for design; data-analytics for stats); building gating dashboards (BI tooling); customer launch comms (`launch-playbook/`, `prfaq/`, `release-notes/`); end-of-life narrative (`eol-communication/`); code rollback strategy (git revert + deployment pipelines).
 
-**Important Caveats:**
-- Flags reduce launch risk but do not eliminate it. A flag with a broken kill-switch is worse than no flag.
-- Flag debt is real and grows with team velocity. A team shipping 20 features/quarter without retirement discipline will have 100+ live flags in a year.
-- Permission and Ops flags are permanent; release and experiment flags are temporary. Conflating the two is the most common failure mode.
-- Holdouts are politically hard to maintain because someone always wants to &quot;give that group access too.&quot; Document the holdout policy explicitly with leadership sign-off.
-- On mobile, flags are not free -- forced-upgrade flows are user-hostile. Plan around adoption curves of older client versions.
+**Caveats:** flags reduce launch risk but do not eliminate it -- a flag with a broken kill-switch is worse than no flag. Flag debt grows with velocity. Permission/Ops flags are permanent; release/experiment flags are temporary, and conflating the two is the most common failure mode. Holdouts are politically hard to maintain -- document the policy with leadership sign-off. On mobile, forced-upgrade flows are user-hostile; plan around adoption curves.
 
 ## Integration Points
 
 | Integration | Direction | Description |
 |---|---|---|
 | `launch-playbook/` | Pairs with | Rollout plan is the deployment ramp inside the broader launch playbook |
-| `cycle-time-analyzer/` | Pairs with | Cycle time of rollout stages is a flow metric; long-stuck ramps are a leading indicator of risk |
-| `prfaq/` | Pairs with | PR/FAQ explains the launch externally; the rollout plan explains it operationally |
-| `release-notes/` | Pairs with | Release notes are written for the GA step; the rollout plan is what produced them |
-| `eol-communication/` | Pairs with | Reverse-ramp (Shape F) is the operational side of a sunset narrative |
+| `cycle-time-analyzer/` | Pairs with | Long-stuck ramps are a leading indicator of risk |
+| `prfaq/` / `release-notes/` | Pairs with | External launch narrative vs the operational rollout plan that produced it |
+| `eol-communication/` | Pairs with | Reverse-ramp (Shape F) is the operational side of a sunset |
 | `ai-feature-prd/` | Pairs with | The AI PRD&#x27;s deployment ramp (Section 11.3) executes via this skill |
 | `discovery/brainstorm-experiments/` | Pairs with | Experiment toggles operationalize Lean experiments |
 | `discovery/pre-mortem/` | Pairs with | Pre-mortem risks inform kill-switch thresholds |
-| `engineering/feature-flag-architect/` (if it exists) | Pairs with | Engineering-side flag library design and code patterns |
 | `engineering/llm-cost-optimizer/` | Pairs with | AI ramp gate: cost budget per stage |
 | `status-update-generator/` | Feeds into | Rollout-stage pace + gates appear in weekly status |
-
-## References
-
-- `references/fowler-feature-toggle-taxonomy-guide.md` -- Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them
-- `references/rollout-shape-comparison-guide.md` -- Worked comparison of the 7 rollout shapes with example use cases and risk profiles
-- `assets/rollout_plan_template.md` -- Per-feature rollout plan
-- `assets/kill_switch_decision_tree.md` -- Pre-incident kill-switch playbook
-- `assets/flag_debt_retirement_checklist.md` -- Retirement workflow + audit
-- `assets/flag_naming_convention.md` -- Team naming sheet
 
 ---
 
@@ -859,332 +579,78 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done poorly, flags become permanent technical debt: hundreds of dead toggles in code, conflicting flag states across environments, and nobody remembering what the flag controls.
 
-This skill is the **PM-facing** rollout playbook. It does not describe how to wire a flag library into your codebase (that is the engineering side, e.g. `engineering/feature-flag-architect/` if it exists, or your LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature install). It describes how a PM plans a phased rollout: what kind of flag this is, how it ramps, what the gate criteria are between stages, who can flip the kill-switch, when the flag retires, and how it is named so the team can find it six months later.
+This skill is the **PM-facing** rollout playbook. It does not describe how to wire a flag library into your codebase (that is the engineering side, e.g. your LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature install). It describes how a PM plans a phased rollout: what kind of flag this is, how it ramps, what the gate criteria are between stages, who can flip the kill-switch, when the flag retires, and how it is named so the team can find it six months later. The frameworks behind it are Martin Fowler&#x27;s &quot;Feature Toggles&quot; taxonomy, LaunchDarkly&#x27;s rollout best practices, Optimizely / Statsig experiment playbooks, and Reforge experimentation foundations.
 
-The frameworks behind it are Martin Fowler&#x27;s &quot;Feature Toggles&quot; taxonomy (release vs experiment vs ops vs permission, each with very different lifespans), LaunchDarkly&#x27;s rollout best practices, Optimizely / Statsig experiment playbooks, and Reforge experimentation foundations.
+## Core Capabilities
 
-### When to Use
+- **Flag classification** -- release / experiment / ops / permission, each with its own lifespan and ownership rules.
+- **Rollout shape selection** -- linear, segmented, geographic, A/B-with-holdout, dark launch, reverse ramp, mobile forced-upgrade.
+- **Kill-switch design** -- pre-agreed thresholds per surface and single-config-change rollback authority for on-call.
+- **Holdout design** -- short-term and global holdouts for long-term lift attribution.
+- **Flag-debt governance** -- retirement dates, retirement checklist, quarterly audit, naming conventions, dependency chains.
 
-- **Planning a launch larger than a small team can ship cold.** Anything customer-facing usually warrants a flag.
-- **Risk-y change to a high-traffic surface.** Search, checkout, auth, billing -- always behind a flag with a kill-switch.
-- **Experiments (A/B tests).** Experiment toggles are a special kind of flag with hold-out and statistical-significance gates.
-- **Permission rollouts.** New feature available only to enterprise tenants, beta participants, or a specific role.
-- **Operational levers.** Throttles, circuit breakers, degrade-modes -- flags that protect the system under load.
-- **Migration of a deterministic feature to AI.** Pair with `ai-feature-prd/` for the deployment ramp; pair with `engineering/llm-cost-optimizer/` for cost gates.
+## When to Use
 
-### When NOT to Use
+- Planning a launch larger than a small team can ship cold (anything customer-facing usually warrants a flag).
+- Risky changes to high-traffic surfaces (search, checkout, auth, billing -- always behind a kill-switch).
+- Experiments (A/B tests) with hold-out and statistical-significance gates.
+- Permission rollouts (enterprise tenants, beta participants, a specific role).
+- Operational levers (throttles, circuit breakers, degrade-modes).
+- Migration of a deterministic feature to AI (pair with `ai-feature-prd/`; cost gates via `engineering/llm-cost-optimizer/`).
 
-- For one-time data migrations (use a script with a `--dry-run` flag, not a feature flag).
-- For configuration that changes between environments (use environment config, not a feature flag).
-- For permanent A/B variants that never converge (this is a personalization system, not a flag system).
-- For feature-flagging every change (cost of flags &gt; value when overused; reserve for genuinely risky surfaces).
+**When NOT to use:** one-time data migrations (use a script with `--dry-run`), environment configuration, permanent A/B variants that never converge (that is personalization), or flag-flagging every change (cost &gt; value when overused).
 
-## Flag taxonomy (Fowler)
+## Clarify First
 
-Martin Fowler&#x27;s taxonomy classifies flags by **purpose** because lifespan and ownership differ dramatically.
+Before drafting the rollout plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Flag type | Purpose | Lifespan | Ownership | Examples |
-|---|---|---|---|---|
-| **Release toggle** | Deploy code before release; decouple ship from launch | Days to weeks; **must retire after launch** | Owning team (Eng + PM) | &quot;new_checkout_flow_v2&quot;, &quot;search_relevance_v3&quot; |
-| **Experiment toggle** | A/B test variants; decide based on stat-sig | Days to weeks; **must retire when experiment concludes** | Owning team + analytics | &quot;checkout_button_color_test&quot;, &quot;onboarding_v2_experiment&quot; |
-| **Ops toggle** | Operational control: throttle, circuit-break, degrade-mode | Permanent or long-lived | Infra / SRE | &quot;search_circuit_breaker&quot;, &quot;rate_limit_premium_tier&quot; |
-| **Permission toggle** | Gate features by user, plan, role, tenant | Permanent (lives with the product) | Product + Eng | &quot;enterprise_admin_panel&quot;, &quot;beta_program_access&quot; |
+- [ ] **Flag type** — release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary)
+- [ ] **Rollout shape** — linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp
+- [ ] **Kill-switch threshold + authority** — the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag
+- [ ] **Retirement date** — for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues
 
-The error mode is treating a release toggle as a permission toggle (&quot;we never turned it off, so it&#x27;s now permanent&quot;). The result is **flag debt**: thousands of dead branches in code, conflicting flag combinations, mystery behaviors.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-**Rule:** every release toggle and experiment toggle has a *retirement date* set at creation. Operationally, a flag without a retirement date is treated as a defect.
+## Quick Start
 
-## Rollout shapes
+1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
+2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a &quot;green pass&quot; gate metric per step; retire the flag at stable GA; audit inventory quarterly.
 
-The shape of a ramp tells the team how much risk they are absorbing per step.
+See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
-### Shape A: Linear ramp
+## References
 
-```
-0% -&gt; 1% -&gt; 5% -&gt; 10% -&gt; 25% -&gt; 50% -&gt; 100%
-```
-
-The default. Each step held for 1-3 days while metrics settle. Use for new features without strong segment hypotheses.
-
-### Shape B: Segmented (audience-first)
-
-```
-Internal employees -&gt; Friends-and-family -&gt; Beta opt-in -&gt; Free tier -&gt; Paid tier -&gt; All
-```
-
-Use when you have explicit risk gradients across segments -- enterprise customers wait until pro customers have validated; consumer flagship waits for ToS-aware beta opt-in.
-
-### Shape C: Geographic / regulatory-aware
-
-```
-Single low-risk region -&gt; Region cluster -&gt; Global, excluding regulated regions -&gt; Global, all regions
-```
-
-Use for features with regulatory variance (EU AI Act, GDPR-specific UI, payment-method constraints, age-verification rules).
-
-### Shape D: A/B split with holdout
-
-```
-Variant A (control): 50%
-Variant B (test): 45%
-Holdout (no exposure): 5%
-```
-
-Use for experiments. The holdout group is never exposed even after rollout, so the team can measure long-term lift weeks after the experiment concludes.
-
-### Shape E: Dark launch (shadow)
-
-```
-Code shipped to 100% -- no user-visible behavior
-Backend runs the new path in shadow; results discarded but logged
-```
-
-Use to validate performance, error rate, and side effects before any user sees the new behavior. Standard for high-traffic system changes; also standard for AI features (pair with `ai-feature-prd/` Section 11.3).
-
-### Shape F: Reverse ramp (sunset)
-
-```
-100% -&gt; 75% -&gt; 50% -&gt; 25% -&gt; 10% -&gt; 0%
-```
-
-Use for retiring a feature. The ramp gives users time to migrate; analytics monitor whether users are healthy on the new path. Pair with `eol-communication/`.
-
-### Shape G: Forced-upgrade (mobile)
-
-```
-Server-side flag check -&gt; app refuses to start on old client -&gt; user must upgrade
-```
-
-Special case for mobile when the new feature requires a client version. Always have a transition window; never flag-flip on day 1 of release.
-
-## Kill-switch decision tree
-
-A kill-switch is the on-call&#x27;s emergency control. Three rules:
-
-1. **Every release toggle has a kill-switch path.** &quot;Turn the flag off&quot; must be a single config change, not a code rollback.
-2. **The kill-switch threshold is pre-agreed.** Define it during planning, not in the heat of incident.
-3. **The on-call has authority to flip without escalation.** If the rollback requires VP sign-off, the system is too slow.
-
-### Decision tree
-
-```
-Incident detected.
-|
-+-- Customer impact? -- No --&gt; Monitor; document; do not flip.
-|        |
-|        Yes
-|        |
-|        v
-+-- Within feature-flagged surface? -- No --&gt; Standard incident response.
-|        |
-|        Yes
-|        |
-|        v
-+-- Error rate &gt; threshold OR major-customer-blocked? -- No --&gt; Throttle / partial degrade.
-|        |
-|        Yes
-|        |
-|        v
-+-- Flip kill-switch -- 0% rollout -- Notify owner + customers.
-         |
-         v
-   Post-incident: root cause; flag stays off until fix lands; never re-enable without re-ramp.
-```
-
-### Kill-switch thresholds (defaults to tune per surface)
-
-| Surface | Default threshold |
-|---|---|
-| Critical (checkout, auth, billing) | Error rate &gt; 0.5% sustained for 5 min |
-| Core (search, signup, dashboard) | Error rate &gt; 2% sustained for 10 min OR top-tier-customer blocked |
-| Non-critical | Error rate &gt; 5% sustained for 15 min |
-| Latency | p95 &gt; 2x baseline for 10 min |
-| Customer reports | &gt;= 3 independent reports of the same issue from paid customers |
-
-## Holdouts
-
-A holdout is a slice of users (typically 1-10%) who never see the feature, even after general availability. Two uses:
-
-**Short-term holdout** -- to measure the lift of the feature with statistical confidence over time. Required for any experiment where the team wants to attribute long-term impact.
-
-**Long-term (&quot;global&quot;) holdout** -- a slice that never sees *any* of the team&#x27;s experiments for a quarter. Allows leadership to attribute aggregate lift to the team. Reforge and most experimentation-mature orgs run a global holdout.
-
-### Holdout governance
-
-- **Size**: 1-10%; smaller holdouts have less statistical power but cost less in lost feature exposure.
-- **Composition**: random or stratified (by segment, geo, plan tier).
-- **Duration**: at least one full retention horizon (D30 or D60); often 1-2 quarters.
-- **Documentation**: holdout configuration in source control; never modified mid-experiment.
-- **Re-exposure**: when the holdout ends, members are merged back; the team should plan for the conversion event.
-
-## Flag debt and retirement
-
-Every feature flag is technical debt by default. A live flag has a maintenance cost (test matrix, code branches, config integrity). Successful teams treat flag retirement as a first-class engineering activity.
-
-### Retirement checklist (release toggle)
-
-- [ ] Feature is at 100% for at least 2 weeks with stable metrics.
-- [ ] No regression has been triaged that the flag would mitigate.
-- [ ] Flag owner has filed a retirement PR removing both branches of code.
-- [ ] Test matrix updated to remove the flag combinations.
-- [ ] Config entry removed from the flag service.
-- [ ] Documentation updated (runbook, customer-facing docs if any).
-- [ ] Final state archived (what the flag controlled, when it retired, who owned it).
-
-### Retirement signals
-
-- Flag has been at 100% for 30+ days -&gt; retire.
-- Flag has been at 0% for 30+ days and the feature is dead -&gt; retire.
-- Flag has not been flipped in 60+ days and no plan to flip -&gt; investigate and retire or convert to a permission/ops flag with explicit ownership.
-- Flag is referenced in fewer than 3 places in code -&gt; trivially retirable; remove.
-
-### Flag-debt audit cadence
-
-Run a flag audit at least quarterly:
-- List of all live flags.
-- For each: type, owner, last toggle date, retirement date.
-- Flag count delta vs last quarter.
-- &quot;Aged flag&quot; report: flags older than 90 days that are not Ops or Permission.
-
-## Naming conventions
-
-A flag name is read more often than it is written. Conventions:
-
-```
-&lt;scope&gt;__&lt;feature&gt;__&lt;purpose&gt;__&lt;version&gt;
-```
-
-Examples:
-- `web__checkout__new_flow__v2` (release toggle on web for new checkout flow v2)
-- `api__search__relevance__experiment_q3` (experiment toggle in API)
-- `infra__search__circuit_breaker` (ops toggle, permanent)
-- `product__enterprise_admin__permission` (permission toggle, permanent)
-
-Rules:
-- **Scope first** -- web / mobile / api / infra. Lets you search &quot;all checkout flags on web.&quot;
-- **Feature second** -- the system surface, not the marketing name.
-- **Purpose third** -- release / experiment / ops / permission. Often baked into name (`__test`, `__experiment`, `__permission`, `__rollout`).
-- **Version when applicable** -- experiments and major UX redesigns benefit from version suffixes.
-- **No team names in the flag name** -- teams reorg; flags outlive the team.
-- **No customer names** -- exception: enterprise-specific permission flags can include the tenant id.
-- **lowercase + underscores or double-underscores** -- avoid camelCase to keep search predictable.
-
-## Dependency chains
-
-A flag depends on another when feature A only makes sense if feature B is also enabled. Two rules:
-
-1. **The dependency is encoded explicitly** in the flag service (e.g., LaunchDarkly prerequisites) or in code with a clear check.
-2. **The rollout plan reflects the dependency** -- ramp the parent flag first, hold until stable, then ramp the child.
-
-Dependency chains beyond 2-3 levels become unmanageable. If a flag depends on three other flags, the rollout plan needs flattening.
-
-## Approval and audit trail
-
-Flag flips on critical surfaces should require:
-- **Pre-approved owner** -- who can flip without further sign-off (usually the team&#x27;s PM + the on-call engineer).
-- **Change log entry** -- automatic; every flip logged with who, when, what, why.
-- **Two-person rule** for high-tier surfaces -- billing, auth, data deletion. One person proposes, another approves before flip.
-- **Audit retention** -- 90+ days of flag-change history available to the on-call.
-
-## Workflow
-
-1. **Classify the flag** (release / experiment / ops / permission). The lifespan and ownership follow.
-2. **Pick the rollout shape** (A-G above) and the gate criteria between stages.
-3. **Define the kill-switch** thresholds and authority.
-4. **Set the retirement date** (release/experiment toggles only). Add it to the team&#x27;s flag-audit list.
-5. **Name the flag** using the convention.
-6. **Document the plan** in the `assets/rollout_plan_template.md`. Share with eng, on-call, sponsor.
-7. **Wire the flag** (engineering side; PM does not do this).
-8. **Ramp** through the stages, holding each step long enough for metrics to settle.
-9. **Monitor**. Watch the same dashboard for each step. Declare each step a &quot;green pass&quot; before advancing.
-10. **Retire** the flag when GA is stable. Add to next sprint&#x27;s retirement PRs.
-11. **Audit** flag inventory quarterly; remove stragglers.
-
-## Tools
-
-This skill is template-based; no Python tool. Artifacts are markdown plans.
-
-| Template | Purpose |
-|---|---|
-| `assets/rollout_plan_template.md` | Per-feature rollout plan with stages, gates, owners, dates |
-| `assets/kill_switch_decision_tree.md` | Pre-incident thresholds + authority + flip steps |
-| `assets/flag_debt_retirement_checklist.md` | Flag-retirement workflow + quarterly audit |
-| `assets/flag_naming_convention.md` | Naming sheet for the team |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Flag inventory has 200+ live flags | No retirement discipline; release toggles never deleted | Run a quarterly audit; mass-retire anything 100% &gt; 30 days; lock new flag creation behind a retirement-date requirement |
-| Rollback during incident requires a code revert | Flag is on but the rollback path is not wired | Every release toggle has a kill-switch path (single config change); rehearse the flip in non-prod once a quarter |
-| Mobile feature flag broke users on old app version | Flag flipped before client adoption; no version gate | Always gate mobile flags on minimum client version; transition window of at least one release cycle |
-| Two flags interact in unexpected ways | Implicit dependency; flag combinations not tested | Encode dependencies in the flag service; cover the cross-product in test matrix; flatten dependency chains &gt; 2 levels |
-| Experiment &quot;shipped&quot; but holdout was killed | Holdout retired with the experiment; no long-term measurement | Keep the holdout open for at least one retention horizon after launch; document re-exposure as a separate step |
-| Owner of a flag has left the company | No ownership succession on flags | Flag ownership is by team, not by individual; team owner reviews the flag list during onboarding |
-| Flag-flip incident: wrong person flipped | Permissions too loose; no two-person rule on critical flags | Critical surfaces require two-person approval; rotate the kill-switch authority to the on-call rota |
-| Feature ramped to 100% but metrics never validated | No gate criteria between stages | Pre-agree the gate metrics; do not advance without a &quot;green pass&quot; from the owner |
-
-## Success Criteria
-
-- Every release / experiment toggle has a documented type, owner, kill-switch threshold, and retirement date.
-- The rollout plan names the gate metric between each stage.
-- The kill-switch can be flipped by the on-call without escalation.
-- Mobile flags are gated on a minimum client version.
-- Quarterly flag audit runs; flag count is stable or decreasing over time.
-- Naming convention is enforced (linter or PR review).
-- Experiments include a holdout that survives launch.
-- Flag-debt retirement is part of every sprint, not a periodic cleanup.
+- `references/rollout-execution-playbook.md` -- read this when planning a rollout end-to-end: flag taxonomy, all 7 rollout shapes, kill-switch decision tree + thresholds, holdouts, flag-debt retirement, naming, dependency chains, approval/audit, workflow, troubleshooting, success criteria.
+- `references/fowler-feature-toggle-taxonomy-guide.md` -- read this for the deep dive on Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them.
+- `references/rollout-shape-comparison-guide.md` -- read this for the worked comparison of the 7 rollout shapes with example use cases and risk profiles.
+- `references/red-flags.md` -- read this when reviewing a rollout plan for anti-patterns and failure modes before sign-off.
+- `assets/rollout_plan_template.md` -- per-feature rollout plan with stages, gates, owners, dates.
+- `assets/kill_switch_decision_tree.md` -- pre-incident kill-switch thresholds + authority + flip steps.
+- `assets/flag_debt_retirement_checklist.md` -- retirement workflow + quarterly audit.
+- `assets/flag_naming_convention.md` -- team naming sheet.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Flag taxonomy (release / experiment / ops / permission) and lifespan rules
-- Rollout shapes (linear, segmented, geo, A/B with holdout, dark launch, reverse, mobile forced-upgrade)
-- Kill-switch decision tree and pre-agreed thresholds
-- Holdout design (short-term and global)
-- Flag-debt retirement workflow + quarterly audit
-- Naming conventions and dependency-chain governance
-- Approval, audit-trail, and two-person-rule patterns
+**In scope:** flag taxonomy and lifespan rules; rollout shapes; kill-switch decision tree and thresholds; holdout design; flag-debt retirement workflow + audit; naming and dependency-chain governance; approval, audit-trail, and two-person-rule patterns.
 
-**Out of Scope:**
-- Wiring flag SDKs into a codebase (engineering side; LaunchDarkly / Statsig / Optimizely / Unleash / OpenFeature)
-- Statistical analysis of experiments (pair with `discovery/brainstorm-experiments/` for design; data-analytics domain for stats)
-- Building the analytics dashboards that gate each rollout stage (BI tooling)
-- Customer communications around launches (use `launch-playbook/`, `prfaq/`, `release-notes/`)
-- End-of-life narrative (use `eol-communication/`)
-- Code rollback strategy (use git revert and deployment pipelines; flags reduce but do not eliminate the need)
+**Out of scope:** wiring flag SDKs into a codebase (engineering side); statistical analysis of experiments (pair with `discovery/brainstorm-experiments/` for design; data-analytics for stats); building gating dashboards (BI tooling); customer launch comms (`launch-playbook/`, `prfaq/`, `release-notes/`); end-of-life narrative (`eol-communication/`); code rollback strategy (git revert + deployment pipelines).
 
-**Important Caveats:**
-- Flags reduce launch risk but do not eliminate it. A flag with a broken kill-switch is worse than no flag.
-- Flag debt is real and grows with team velocity. A team shipping 20 features/quarter without retirement discipline will have 100+ live flags in a year.
-- Permission and Ops flags are permanent; release and experiment flags are temporary. Conflating the two is the most common failure mode.
-- Holdouts are politically hard to maintain because someone always wants to &quot;give that group access too.&quot; Document the holdout policy explicitly with leadership sign-off.
-- On mobile, flags are not free -- forced-upgrade flows are user-hostile. Plan around adoption curves of older client versions.
+**Caveats:** flags reduce launch risk but do not eliminate it -- a flag with a broken kill-switch is worse than no flag. Flag debt grows with velocity. Permission/Ops flags are permanent; release/experiment flags are temporary, and conflating the two is the most common failure mode. Holdouts are politically hard to maintain -- document the policy with leadership sign-off. On mobile, forced-upgrade flows are user-hostile; plan around adoption curves.
 
 ## Integration Points
 
 | Integration | Direction | Description |
 |---|---|---|
 | `launch-playbook/` | Pairs with | Rollout plan is the deployment ramp inside the broader launch playbook |
-| `cycle-time-analyzer/` | Pairs with | Cycle time of rollout stages is a flow metric; long-stuck ramps are a leading indicator of risk |
-| `prfaq/` | Pairs with | PR/FAQ explains the launch externally; the rollout plan explains it operationally |
-| `release-notes/` | Pairs with | Release notes are written for the GA step; the rollout plan is what produced them |
-| `eol-communication/` | Pairs with | Reverse-ramp (Shape F) is the operational side of a sunset narrative |
+| `cycle-time-analyzer/` | Pairs with | Long-stuck ramps are a leading indicator of risk |
+| `prfaq/` / `release-notes/` | Pairs with | External launch narrative vs the operational rollout plan that produced it |
+| `eol-communication/` | Pairs with | Reverse-ramp (Shape F) is the operational side of a sunset |
 | `ai-feature-prd/` | Pairs with | The AI PRD&#x27;s deployment ramp (Section 11.3) executes via this skill |
 | `discovery/brainstorm-experiments/` | Pairs with | Experiment toggles operationalize Lean experiments |
 | `discovery/pre-mortem/` | Pairs with | Pre-mortem risks inform kill-switch thresholds |
-| `engineering/feature-flag-architect/` (if it exists) | Pairs with | Engineering-side flag library design and code patterns |
 | `engineering/llm-cost-optimizer/` | Pairs with | AI ramp gate: cost budget per stage |
 | `status-update-generator/` | Feeds into | Rollout-stage pace + gates appear in weekly status |
-
-## References
-
-- `references/fowler-feature-toggle-taxonomy-guide.md` -- Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them
-- `references/rollout-shape-comparison-guide.md` -- Worked comparison of the 7 rollout shapes with example use cases and risk profiles
-- `assets/rollout_plan_template.md` -- Per-feature rollout plan
-- `assets/kill_switch_decision_tree.md` -- Pre-incident kill-switch playbook
-- `assets/flag_debt_retirement_checklist.md` -- Retirement workflow + audit
-- `assets/flag_naming_convention.md` -- Team naming sheet
 
 ---
 
@@ -1270,8 +736,12 @@ cp -r Claude-Skills/project-management/execution/feature-flag-strategy your-proj
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/feature-flag-strategy</code></pre>
 </div>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2>1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
+2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a "green pass" gate metric per step; retire the flag at stable GA; audit inventory quarterly.
+
+See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/feature-flag-strategy/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

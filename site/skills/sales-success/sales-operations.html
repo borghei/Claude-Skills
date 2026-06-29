@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sales Operations - Claude Skills</title>
-  <meta name="description" content="Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ">
+  <meta name="description" content="Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quali">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/sales-success/sales-operations.html">
   <meta property="og:title" content="Sales Operations - Claude Skills">
-  <meta property="og:description" content="Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ">
+  <meta property="og:description" content="Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quali">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/sales-success/sales-operations.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Sales Operations", "description": "Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...", "applicationCategory": "Sales", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/sales-success/sales-operations.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Sales Operations", "description": "Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.", "applicationCategory": "Sales", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/sales-success/sales-operations.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Sales Operations</h1>
-    <p class="page-subtitle">Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...</p>
+    <p class="page-subtitle">Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.</p>
     <div class="badge-bar"><span class="badge badge-domain">Sales</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">sales-ops</span><span class="tag">crm</span><span class="tag">analytics</span><span class="tag">territory</span><span class="tag">compensation</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Sales Operations (Sales domain).
 
-Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...
+Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.
 
-The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization. 1. **Assess current state** -- Audit CRM data quality, pipeline coverage, and rep performance bas
+The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization. Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
 
 ## Your Key Capabilities
 - Top-Down Model
@@ -425,9 +425,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Sales Operations (Sales domain).
 
-Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...
+Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.
 
-The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization. 1. **Assess current state** -- Audit CRM data quality, pipeline coverage, and rep performance bas
+The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization. Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
 
 ## Your Key Capabilities
 - Top-Down Model
@@ -469,6 +469,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization.
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — pipeline report, territory design, quota model, comp plan, or forecast (selects the script and the input data)
+- [ ] **Revenue target + rep capacity** — the company number and ramped headcount (drives top-down quota and coverage math)
+- [ ] **Selling motion + company stage** — new-business vs. expansion mix, segment, and growth rate (shapes comp splits, accelerators, and territory balance)
+- [ ] **Historical actuals** — prior win rates, stage conversion, and cycle times (calibrate forecast weights and quota risk-adjustment)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Assess current state** -- Audit CRM data quality, pipeline coverage, and rep performance baselines. Validate that required fields are populated and stage dates are current.
@@ -787,7 +798,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Sales Operations&quot;**
-   - Description: &quot;Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...&quot;
+   - Description: &quot;Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -814,6 +825,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as an expert sales operations professional, delivering revenue infrastructure through analytics, territory design, quota modeling, compensation architecture, and process optimization.
 
+## Clarify First
+
+Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which deliverable** — pipeline report, territory design, quota model, comp plan, or forecast (selects the script and the input data)
+- [ ] **Revenue target + rep capacity** — the company number and ramped headcount (drives top-down quota and coverage math)
+- [ ] **Selling motion + company stage** — new-business vs. expansion mix, segment, and growth rate (shapes comp splits, accelerators, and territory balance)
+- [ ] **Historical actuals** — prior win rates, stage conversion, and cycle times (calibrate forecast weights and quota risk-adjustment)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Assess current state** -- Audit CRM data quality, pipeline coverage, and rep performance baselines. Validate that required fields are populated and stage dates are current.
@@ -1132,7 +1154,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Sales Operations&quot;**
-   - Description: &quot;Expert sales operations covering CRM management, sales analytics, territory planning, compensation design, and process optimization. Use when building pipeline reports, designing territories, setting ...&quot;
+   - Description: &quot;Sales operations across CRM, analytics, territory planning, and compensation. Use when building pipeline reports, designing territories, setting quotas, creating comp plans, or auditing CRM data quality.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1193,7 +1215,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python sales-success/sales-operations/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Sales</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/account-executive.html" class="skill-card" style="text-decoration:none"><h3>Account Executive</h3><p>Expert sales execution covering pipeline management, discovery, demos, negotiation, and deal...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/customer-success-manager.html" class="skill-card" style="text-decoration:none"><h3>Customer Success Manager</h3><p>Expert customer success covering onboarding, adoption, retention, expansion, health scoring, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/sales-engineer.html" class="skill-card" style="text-decoration:none"><h3>Sales Engineer</h3><p>Expert sales engineering covering technical demos, solution design, RFP responses, POC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/solutions-architect.html" class="skill-card" style="text-decoration:none"><h3>Solutions Architect</h3><p>Expert solutions architecture covering technical requirements, solution design, integration...</p></a></div>
+  <h2>Related Skills in Sales</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/account-executive.html" class="skill-card" style="text-decoration:none"><h3>Account Executive</h3><p>Sales execution across pipeline, discovery, demos, negotiation, and closing. Use when qualifying...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/customer-success-manager.html" class="skill-card" style="text-decoration:none"><h3>Customer Success Manager</h3><p>Customer success across onboarding, adoption, retention, and expansion. Use when designing...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/sales-engineer.html" class="skill-card" style="text-decoration:none"><h3>Sales Engineer</h3><p>Technical sales engineering: demos, solution design, RFP responses, and POC management. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/sales-success/solutions-architect.html" class="skill-card" style="text-decoration:none"><h3>Solutions Architect</h3><p>Solutions architecture for technical pre-sales. Use when running technical discovery, designing...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/sales-success/sales-operations/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

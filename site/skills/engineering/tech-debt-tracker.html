@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Debt Tracker - Claude Skills</title>
-  <meta name="description" content="Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal">
+  <meta name="description" content="Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning spr">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/tech-debt-tracker.html">
   <meta property="og:title" content="Tech Debt Tracker - Claude Skills">
-  <meta property="og:description" content="Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal">
+  <meta property="og:description" content="Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning spr">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/tech-debt-tracker.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Tech Debt Tracker", "description": "Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/tech-debt-tracker.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Tech Debt Tracker", "description": "Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/tech-debt-tracker.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Tech Debt Tracker</h1>
-    <p class="page-subtitle">Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Code Quality</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -393,20 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Tech Debt Tracker (Engineering domain).
 
-Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...
+Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.
 
-The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards. 1. **Scan codebase** -- Run the Debt Scanner against the target repository. It uses AST parsing and pattern matching to detect debt signals across al
-
-## Your Key Capabilities
-- WSJF Alternative
-- Debt Scanner (`debt_scanner.py`)
-- Debt Prioritizer (`debt_prioritizer.py`)
-- Debt Dashboard (`debt_dashboard.py`)
-- Debt Scanner (`scripts/debt_scanner.py`)
-- Debt Prioritizer (`scripts/debt_prioritizer.py`)
-
-## Frameworks &amp; Templates You Know
-- Severity Scoring Framework
+The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards. - **Detection** — AST parsing (Python) and regex pattern matching (all languages) across six debt categories: code, architecture, test, documentation
 
 ## How to Help
 When the user asks for help in this domain:
@@ -426,20 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Tech Debt Tracker (Engineering domain).
 
-Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...
+Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.
 
-The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards. 1. **Scan codebase** -- Run the Debt Scanner against the target repository. It uses AST parsing and pattern matching to detect debt signals across al
-
-## Your Key Capabilities
-- WSJF Alternative
-- Debt Scanner (`debt_scanner.py`)
-- Debt Prioritizer (`debt_prioritizer.py`)
-- Debt Dashboard (`debt_dashboard.py`)
-- Debt Scanner (`scripts/debt_scanner.py`)
-- Debt Prioritizer (`scripts/debt_prioritizer.py`)
-
-## Frameworks &amp; Templates You Know
-- Severity Scoring Framework
+The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards. - **Detection** — AST parsing (Python) and regex pattern matching (all languages) across six debt categories: code, architecture, test, documentation
 
 ## How to Help
 When the user asks for help in this domain:
@@ -471,205 +449,53 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards.
 
-## Workflow
+## Core Capabilities
 
-1. **Scan codebase** -- Run the Debt Scanner against the target repository. It uses AST parsing and pattern matching to detect debt signals across all six categories (code, architecture, test, documentation, dependency, infrastructure).
-2. **Score each item** -- Apply the Severity Scoring Framework. Rate each item on velocity impact, quality impact, productivity impact, and business impact (1-10 each). Estimate effort (XS-XL) and risk level.
-3. **Calculate interest rate** -- For each item, compute `Interest Rate = Impact Score x Frequency of Encounter` per sprint. Calculate `Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier`.
-4. **Prioritize** -- Plot items on the Cost-of-Delay vs Effort matrix. Assign priority: Immediate (high cost, low effort), Planned (high cost, high effort), Opportunistic (low cost, low effort), Backlog (low cost, high effort).
-5. **Allocate sprint capacity** -- Apply the Debt-to-Feature Ratio based on current team velocity. Reserve the recommended percentage for debt work.
-6. **Generate reports** -- Produce the Executive Dashboard (health score, trend, top risks, investment recommendation) and the Engineering Dashboard (daily new/resolved, interest rate by component, hotspots).
-7. **Track trends** -- Compare current scan against previous baselines. Alert if debt accumulation rate exceeds paydown rate for two consecutive sprints.
+- **Detection** — AST parsing (Python) and regex pattern matching (all languages) across six debt categories: code, architecture, test, documentation, dependency, infrastructure.
+- **Severity scoring** — rate each item on velocity, quality, productivity, and business impact (1-10) plus effort sizing (XS-XL) and risk.
+- **Cost-of-delay** — compute interest rate (`Impact x Frequency`) and cost of delay (`Interest x Sprints x Team Multiplier`); also WSJF and RICE frameworks.
+- **Prioritization** — plot on the Cost-of-Delay vs Effort matrix (Immediate / Planned / Opportunistic / Backlog).
+- **Sprint allocation** — apply the Debt-to-Feature ratio by team velocity; reserve capacity for debt work.
+- **Refactoring strategies** — Strangler Fig, Branch by Abstraction, Feature Toggles, Parallel Run.
+- **Reporting** — executive and engineering dashboards, trend analysis, velocity tracking, and forecasts from scan snapshots.
 
-## Debt Classification
+## When to Use
 
-| Category | Key Indicators | Detection Method |
-|----------|---------------|-----------------|
-| Code | Functions &gt; 50 lines, nesting &gt; 4 levels, cyclomatic complexity &gt; 10, duplicate blocks &gt; 3 | AST parsing, complexity metrics |
-| Architecture | Circular dependencies, tight coupling, missing abstraction layers, monolithic components | Dependency analysis, coupling metrics |
-| Test | Coverage &lt; 80% on critical paths, flaky tests, test suite &gt; 10 min | Coverage reports, failure pattern analysis |
-| Documentation | Missing API docs, outdated READMEs, no ADRs, stale comments | Coverage analysis, freshness checking |
-| Dependency | Known CVEs, deprecated APIs, unused packages, version conflicts | Vulnerability scanning, usage analysis |
-| Infrastructure | Manual deploys, missing monitoring, env inconsistencies, no DR plan | Audit checklists, config drift detection |
+- Tracking and quantifying technical debt across a repository.
+- Prioritizing refactoring work and calculating cost-of-delay.
+- Planning sprint capacity allocation between debt and features.
+- Reporting debt health, trends, and investment recommendations to execs.
 
-## Severity Scoring Framework
+## Clarify First
 
-Rate each dimension 1-10:
+Before scanning or reporting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Dimension | 1-2 | 5-6 | 9-10 |
-|-----------|-----|-----|------|
-| Velocity Impact | Negligible | Affects some features | Blocks new development |
-| Quality Impact | No defect increase | Moderate defect increase | Critical reliability problems |
-| Productivity Impact | No team impact | Regular complaints | Causing developer turnover |
-| Business Impact | No customer impact | Moderate performance hit | Revenue-impacting issues |
+- [ ] **Target codebase** — the directory to scan (the subject of the debt inventory)
+- [ ] **Prioritization framework &amp; team size** — cost-of-delay / WSJF / RICE and headcount (`--framework`, `--team-size`; changes the ranking and sprint allocation)
+- [ ] **Report audience** — exec dashboard vs engineering inventory (sets the report format and altitude)
 
-**Effort sizing**: XS (1-4 hrs), S (1-2 days), M (3-5 days), L (1-2 weeks), XL (3+ weeks)
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Interest Rate and Cost of Delay
+## Tools
 
-```
-Interest Rate = Impact Score x Frequency of Encounter (per sprint)
-Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier
-
-Example:
-  Legacy auth module with poor error handling
-  Impact: 7  |  Frequency: 15 encounters/sprint  |  Team: 8 devs
-  Planned fix: sprint 4 (3 sprints away)
-
-  Interest Rate = 7 x 15 = 105 points/sprint
-  Cost of Delay = 105 x 3 x 1.2 = 378 total cost points
-```
-
-## Prioritization Matrix
-
-| Quadrant | Cost of Delay | Effort | Action |
-|----------|--------------|--------|--------|
-| Immediate (quick wins) | High | Low | Do first |
-| Planned (major initiatives) | High | High | Schedule dedicated sprints |
-| Opportunistic | Low | Low | Fix when touching related code |
-| Backlog | Low | High | Reconsider quarterly |
-
-### WSJF Alternative
-
-```
-WSJF = (Business Value + Time Criticality + Risk Reduction) / Effort
-```
-
-Each component scored 1-10. Highest WSJF items are prioritized first.
-
-## Sprint Allocation (Debt-to-Feature Ratio)
-
-| Team Velocity | Debt % | Feature % | Strategy |
-|--------------|--------|-----------|----------|
-| &lt; 70% of capacity | 60% | 40% | Remove major blockers |
-| 70-85% of capacity | 30% | 70% | Balanced maintenance |
-| &gt; 85% of capacity | 15% | 85% | Opportunistic only |
-
-**Sprint planning rule**: Reserve 20% of sprint capacity for debt. Prioritize items with the highest interest rates. Add &quot;debt tax&quot; to feature estimates when working in high-debt areas.
-
-## Debt Item Data Structure
-
-```json
-{
-  &quot;id&quot;: &quot;DEBT-2024-001&quot;,
-  &quot;title&quot;: &quot;Legacy user authentication module&quot;,
-  &quot;category&quot;: &quot;code&quot;,
-  &quot;subcategory&quot;: &quot;error_handling&quot;,
-  &quot;location&quot;: &quot;src/auth/legacy_auth.py:45-120&quot;,
-  &quot;description&quot;: &quot;Authentication error handling uses generic exceptions&quot;,
-  &quot;impact&quot;: { &quot;velocity&quot;: 7, &quot;quality&quot;: 8, &quot;productivity&quot;: 6, &quot;business&quot;: 5 },
-  &quot;effort&quot;: { &quot;size&quot;: &quot;M&quot;, &quot;risk&quot;: &quot;medium&quot;, &quot;skill_required&quot;: &quot;mid&quot; },
-  &quot;interest_rate&quot;: 105,
-  &quot;cost_of_delay&quot;: 378,
-  &quot;priority&quot;: &quot;high&quot;,
-  &quot;status&quot;: &quot;identified&quot;,
-  &quot;tags&quot;: [&quot;security&quot;, &quot;user-experience&quot;, &quot;maintainability&quot;]
-}
-```
-
-**Status lifecycle**: Identified &gt; Analyzed &gt; Prioritized &gt; Planned &gt; In Progress &gt; Review &gt; Done | Won&#x27;t Fix
-
-## Refactoring Strategies
-
-| Strategy | When to Use | How It Works |
-|----------|-------------|-------------|
-| Strangler Fig | Large monoliths, high-risk migrations | Build new around old; gradually redirect traffic; remove old |
-| Branch by Abstraction | Need old + new running in parallel | Create interface; implement both behind it; switch via config |
-| Feature Toggles | Gradual rollout of refactored components | Add toggle at decision points; test both paths; remove old |
-| Parallel Run | Critical business logic changes | Run both implementations; compare outputs; build confidence |
-
-## Executive Dashboard
-
-```
-TECH DEBT HEALTH
-  Overall Score: [0-100]  |  Trend: [improving/declining]
-  Cost of Delayed Fixes: [X development days]
-  High-Risk Items: [count]
-
-MONTHLY REPORT:
-  1. Executive Summary (3 bullet points)
-  2. Health Score Trend (6-month view)
-  3. Top 3 Risk Items (business impact focus)
-  4. Investment Recommendation (resource allocation)
-  5. Success Stories (debt resolved last month)
-```
-
-## Engineering Dashboard
-
-```
-DAILY:
-  New items identified  |  Items resolved  |  Interest rate by component
-
-SPRINT REVIEW:
-  Debt points completed vs planned  |  Velocity impact
-  Newly discovered debt  |  Team code quality sentiment
-```
-
-## Example: Scanning a Python Microservice
-
-```bash
-# Run debt scanner
-python scripts/debt_scanner.py --repo ./payment-service --output debt_inventory.json
-
-# Output summary:
-#   Total items found: 47
-#   Critical: 3  |  High: 8  |  Medium: 21  |  Low: 15
-#
-#   Top 3 by cost-of-delay:
-#     1. DEBT-001: payment_processor.py - nested exception handling (CoD: 420)
-#     2. DEBT-002: db/migrations/ - 12 unapplied migrations (CoD: 315)
-#     3. DEBT-003: tests/ - 62% coverage on payment flow (CoD: 280)
-
-# Prioritize items
-python scripts/debt_prioritizer.py --inventory debt_inventory.json --sprint-capacity 40
-
-# Generate executive report
-python scripts/debt_dashboard.py --inventory debt_inventory.json --baseline previous_scan.json
-```
-
-## Quarterly Planning
-
-1. Identify 1-2 major debt themes per quarter
-2. Allocate dedicated sprints for large-scale refactoring
-3. Plan debt work around major feature releases
-4. Track: debt interest rate reduction, velocity improvements, defect rate reduction, code review cycle time
-
-## Scripts
-
-### Debt Scanner (`debt_scanner.py`)
-Scans codebase using AST parsing and pattern matching. Detects all six debt categories. Outputs structured JSON inventory.
-
-### Debt Prioritizer (`debt_prioritizer.py`)
-Analyses debt inventory using cost-of-delay and WSJF frameworks. Outputs prioritized backlog with sprint allocation recommendations.
-
-### Debt Dashboard (`debt_dashboard.py`)
-Generates trend reports comparing current scan against baselines. Produces executive and engineering dashboard views.
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `debt_scanner.py` | Scan a directory for debt signals; output JSON inventory + text report | `python scripts/debt_scanner.py &lt;dir&gt; --output scan_results --format both` |
+| `debt_prioritizer.py` | Enrich inventory with cost-of-delay/WSJF/RICE and sprint allocation | `python scripts/debt_prioritizer.py scan_results.json --framework wsjf --team-size 8` |
+| `debt_dashboard.py` | Trend analysis, velocity, forecasts, and exec summary across snapshots | `python scripts/debt_dashboard.py --input-dir ./debt_scans/ --period quarterly` |
 
 ## References
 
-See `REFERENCE.md` for the complete Technical Debt Quadrant (Fowler), detailed detection heuristics per category, and implementation roadmap phases.
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Troubleshooting
+- **[references/methodology.md](references/methodology.md)** — the 7-step workflow, debt-classification table, severity scoring framework, interest-rate/cost-of-delay formulas, prioritization matrix, WSJF, sprint allocation ratios, the debt-item JSON schema, refactoring strategies, and quarterly planning. Read when scoring, prioritizing, or planning.
+- **[references/tool-reference.md](references/tool-reference.md)** — full parameter tables, examples, and output-format details for all three scripts plus the troubleshooting table. Read when running the scripts or debugging output.
+- **[references/dashboards-and-examples.md](references/dashboards-and-examples.md)** — executive and engineering dashboard layouts, a worked Python-microservice scan example, and the success-criteria bar. Read when generating reports or validating quality.
+- **[references/debt-classification-taxonomy.md](references/debt-classification-taxonomy.md)** — comprehensive taxonomy for classifying debt across dimensions with detection heuristics per category. Read when calibrating detection or labeling items.
+- **[references/prioritization-framework.md](references/prioritization-framework.md)** — deep prioritization approaches based on business value, risk, effort, and strategic alignment. Read when designing a prioritization rubric.
+- **[references/stakeholder-communication-templates.md](references/stakeholder-communication-templates.md)** — templates and guidelines for communicating debt status, impact, and recommendations to different stakeholder groups. Read when reporting to execs or product.
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Scanner finds zero debt items | Target directory contains no recognized file extensions, or all files match ignore patterns | Verify the directory path is correct and contains source files. Check `--config` to ensure `file_extensions` and `ignore_patterns` are appropriate for your stack. |
-| AST parsing errors on valid Python files | Files use syntax from a newer Python version than the runtime executing the scanner | Run the scanner with the same Python version the target codebase requires (e.g., `python3.12 scripts/debt_scanner.py`). |
-| Duplicate code detection is slow on large repos | The scanner hashes every N-line sliding window across all files, which scales quadratically with file count | Reduce scope by scanning one service directory at a time, or increase `min_duplicate_lines` in the config to reduce candidate blocks. |
-| Prioritizer produces all-zero cost-of-delay scores | Input inventory lacks `severity` or `type` fields that the enrichment step depends on | Ensure the inventory JSON was produced by `debt_scanner.py` or follows the Debt Item Data Structure documented above. Manual inventories must include `type` and `severity` per item. |
-| Dashboard shows &quot;No valid data files loaded&quot; | Files passed as arguments are not valid JSON, or the JSON structure is unrecognized | The dashboard accepts scanner output (`debt_items` key), prioritizer output (`prioritized_backlog` key), or a raw JSON array of debt items. Validate file contents with `python -m json.tool &lt;file&gt;`. |
-| Health score is unexpectedly low despite few critical items | High debt density (items per file) dominates the health formula even when individual severities are low | Review the density contribution: health penalizes 10 points per item-per-file. Break large files into smaller modules or resolve low-severity bulk items like `todo_comment` and `missing_docstring`. |
-| Sprint allocation plan shows hundreds of sprints | Default debt capacity is 20% of `--sprint-capacity`, which may be too low for a large backlog | Increase `--sprint-capacity` to reflect actual team hours, or filter the inventory to high-priority items before running the prioritizer. |
-
-## Success Criteria
-
-- Scan completes in under 60 seconds for repositories up to 100,000 lines of code.
-- Every detected debt item includes a unique ID, file path, line number (where applicable), severity, and debt type -- no fields left as null or unknown.
-- Health score correlates with manual code review assessments within 15 points on the 0-100 scale when validated against a senior engineer&#x27;s judgment.
-- Prioritized backlog produces a clear top-10 list where the first item has at least 2x the priority score of the tenth item, confirming meaningful differentiation.
-- Sprint allocation recommendations fit within the configured capacity (no single sprint exceeds 100% of debt budget) and cover all high-priority items within the first 3 sprints.
-- Dashboard trend analysis correctly identifies improving, declining, or stable directions when compared against at least 3 historical snapshots with known trajectories.
-- Cost-of-delay calculations produce actionable dollar-equivalent values that engineering managers can use directly in sprint planning and quarterly roadmap discussions.
+Also see the skill-root `REFERENCE.md` for the Technical Debt Quadrant (Fowler) and the implementation roadmap phases.
 
 ## Scope &amp; Limitations
 
@@ -695,97 +521,6 @@ See `REFERENCE.md` for the complete Technical Debt Quadrant (Fowler), detailed d
 | `engineering/pr-review-expert` | Surface relevant debt items during code review by querying the debt inventory for files touched in a pull request. | PR changed-files list -&gt; filter `debt_inventory.json` by `file_path` |
 | `engineering/observability-designer` | Map infrastructure debt items (missing monitoring, env inconsistencies) to observability gaps identified by the observability skill. | Dashboard `category_distribution` -&gt; observability gap analysis |
 | `engineering/migration-architect` | Use the prioritized backlog to scope and sequence large-scale migration efforts, especially for architecture-category debt rated as planned initiatives. | Prioritizer `sprint_allocation` -&gt; migration planning timeline |
-
-## Tool Reference
-
-### Debt Scanner (`scripts/debt_scanner.py`)
-
-**Purpose:** Scans a codebase directory for technical debt signals using AST parsing (Python files) and regex pattern matching (all languages). Detects code smells, large functions, high complexity, duplicate code, TODO comments, and common anti-patterns. Produces a structured JSON inventory and a human-readable text report.
-
-**Usage:**
-```bash
-python scripts/debt_scanner.py &lt;directory&gt; [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `directory` | positional, required | -- | Path to the directory to scan. |
-| `--config` | string | None | Path to a JSON configuration file that overrides default thresholds (e.g., `max_function_length`, `max_complexity`, `ignore_patterns`). |
-| `--output` | string | None | Output file path. When set, writes report to file instead of stdout. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-
-**Example:**
-```bash
-python scripts/debt_scanner.py ./src --config custom_thresholds.json --output scan_results --format both
-```
-
-**Output Formats:**
-- **JSON:** Contains `scan_metadata`, `summary` (files scanned, lines scanned, health score, debt density, priority/type breakdowns), `debt_items` (array of debt objects with id, type, description, file_path, severity, metadata, priority_score, priority), `file_statistics`, and `recommendations`.
-- **Text:** Human-readable report with header, summary statistics, priority breakdown, top 10 debt items, and numbered recommendations.
-
----
-
-### Debt Prioritizer (`scripts/debt_prioritizer.py`)
-
-**Purpose:** Takes a debt inventory (from the scanner or a manual JSON file) and enriches each item with effort estimates, business impact scores, interest rate calculations, and cost-of-delay values. Produces a prioritized backlog with sprint allocation recommendations using one of three frameworks: cost-of-delay, WSJF, or RICE.
-
-**Usage:**
-```bash
-python scripts/debt_prioritizer.py &lt;inventory_file&gt; [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `inventory_file` | positional, required | -- | Path to debt inventory JSON file (scanner output, prioritizer output, or raw array of debt items). |
-| `--output` | string | None | Output file path. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-| `--framework` | choice | `cost_of_delay` | Prioritization framework: `cost_of_delay`, `wsjf`, or `rice`. |
-| `--team-size` | integer | `5` | Number of developers on the team. Affects interest rate team impact multiplier and RICE reach calculation. |
-| `--sprint-capacity` | integer | `80` | Total sprint capacity in hours. 20% is allocated to debt work by default. Used for sprint allocation planning. |
-
-**Example:**
-```bash
-python scripts/debt_prioritizer.py scan_results.json --framework wsjf --team-size 8 --sprint-capacity 120 --output prioritized --format json
-```
-
-**Output Formats:**
-- **JSON:** Contains `metadata` (analysis date, framework, team size, sprint capacity), `prioritized_backlog` (enriched items sorted by priority score, each with `effort_estimate`, `business_impact`, `interest_rate`, `cost_of_delay`, `category`, `impact_tags`), `sprint_allocation` (total debt hours, capacity per sprint, sprint plan with item assignments), `insights` (category distribution, effort breakdown, quick wins count, cost totals), `charts_data` (scatter, pie, timeline, interest trend arrays), and `recommendations`.
-- **Text:** Executive summary with total effort and cost-of-delay, sprint allocation plan (first 3 sprints with top items), top 10 priority items with scores and tags, and numbered recommendations.
-
----
-
-### Debt Dashboard (`scripts/debt_dashboard.py`)
-
-**Purpose:** Takes one or more historical debt inventory files (from the scanner or prioritizer) and generates trend analysis, debt velocity tracking (accruing vs. paying down), health score timelines, forecasts, and an executive summary. Supports loading files individually or from a directory.
-
-**Usage:**
-```bash
-python scripts/debt_dashboard.py [files...] [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `files` | positional, optional | -- | One or more debt inventory JSON file paths. Accepts scanner output, prioritizer output, or raw arrays. |
-| `--input-dir` | string | None | Directory containing debt inventory JSON files. All `*.json` files in the directory are loaded. Mutually exclusive usage with positional `files`. |
-| `--output` | string | None | Output file path. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-| `--period` | choice | `monthly` | Analysis period for trend grouping: `weekly`, `monthly`, or `quarterly`. |
-| `--team-size` | integer | `5` | Number of developers on the team. Used for velocity impact estimation. |
-
-**Example:**
-```bash
-python scripts/debt_dashboard.py --input-dir ./debt_scans/ --period quarterly --team-size 10 --output dashboard --format both
-```
-
-**Output Formats:**
-- **JSON:** Contains `metadata` (generated date, period, snapshot count, date range, team size), `executive_summary` (overall status, health score, status message, key insights, total debt items, effort hours, high priority count, velocity impact percent), `current_health` (overall score, debt density, velocity impact, quality score, maintainability score, technical risk score), `trend_analysis` (per-metric trend direction, change rate, correlation strength, forecast, confidence interval), `debt_velocity` (per-period new/resolved items, net change, velocity ratio, effort hours added/resolved), `forecasts` (3-month and 6-month projections for health, debt count, risk), `recommendations` (prioritized strategic actions with category, impact, effort), `visualizations` (health timeline, debt accumulation, category distribution, velocity chart, effort trend arrays), and `detailed_metrics`.
-- **Text:** Executive summary with status and key metrics, current health metrics, trend analysis with directional indicators, and top 5 strategic recommendations with priority, impact, and effort ratings.
 
 ---
 
@@ -813,7 +548,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Tech Debt Tracker&quot;**
-   - Description: &quot;Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...&quot;
+   - Description: &quot;Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -840,205 +575,53 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent identifies, scores, prioritizes, and tracks technical debt across codebases using AST parsing, cost-of-delay analysis, and trend dashboards.
 
-## Workflow
+## Core Capabilities
 
-1. **Scan codebase** -- Run the Debt Scanner against the target repository. It uses AST parsing and pattern matching to detect debt signals across all six categories (code, architecture, test, documentation, dependency, infrastructure).
-2. **Score each item** -- Apply the Severity Scoring Framework. Rate each item on velocity impact, quality impact, productivity impact, and business impact (1-10 each). Estimate effort (XS-XL) and risk level.
-3. **Calculate interest rate** -- For each item, compute `Interest Rate = Impact Score x Frequency of Encounter` per sprint. Calculate `Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier`.
-4. **Prioritize** -- Plot items on the Cost-of-Delay vs Effort matrix. Assign priority: Immediate (high cost, low effort), Planned (high cost, high effort), Opportunistic (low cost, low effort), Backlog (low cost, high effort).
-5. **Allocate sprint capacity** -- Apply the Debt-to-Feature Ratio based on current team velocity. Reserve the recommended percentage for debt work.
-6. **Generate reports** -- Produce the Executive Dashboard (health score, trend, top risks, investment recommendation) and the Engineering Dashboard (daily new/resolved, interest rate by component, hotspots).
-7. **Track trends** -- Compare current scan against previous baselines. Alert if debt accumulation rate exceeds paydown rate for two consecutive sprints.
+- **Detection** — AST parsing (Python) and regex pattern matching (all languages) across six debt categories: code, architecture, test, documentation, dependency, infrastructure.
+- **Severity scoring** — rate each item on velocity, quality, productivity, and business impact (1-10) plus effort sizing (XS-XL) and risk.
+- **Cost-of-delay** — compute interest rate (`Impact x Frequency`) and cost of delay (`Interest x Sprints x Team Multiplier`); also WSJF and RICE frameworks.
+- **Prioritization** — plot on the Cost-of-Delay vs Effort matrix (Immediate / Planned / Opportunistic / Backlog).
+- **Sprint allocation** — apply the Debt-to-Feature ratio by team velocity; reserve capacity for debt work.
+- **Refactoring strategies** — Strangler Fig, Branch by Abstraction, Feature Toggles, Parallel Run.
+- **Reporting** — executive and engineering dashboards, trend analysis, velocity tracking, and forecasts from scan snapshots.
 
-## Debt Classification
+## When to Use
 
-| Category | Key Indicators | Detection Method |
-|----------|---------------|-----------------|
-| Code | Functions &gt; 50 lines, nesting &gt; 4 levels, cyclomatic complexity &gt; 10, duplicate blocks &gt; 3 | AST parsing, complexity metrics |
-| Architecture | Circular dependencies, tight coupling, missing abstraction layers, monolithic components | Dependency analysis, coupling metrics |
-| Test | Coverage &lt; 80% on critical paths, flaky tests, test suite &gt; 10 min | Coverage reports, failure pattern analysis |
-| Documentation | Missing API docs, outdated READMEs, no ADRs, stale comments | Coverage analysis, freshness checking |
-| Dependency | Known CVEs, deprecated APIs, unused packages, version conflicts | Vulnerability scanning, usage analysis |
-| Infrastructure | Manual deploys, missing monitoring, env inconsistencies, no DR plan | Audit checklists, config drift detection |
+- Tracking and quantifying technical debt across a repository.
+- Prioritizing refactoring work and calculating cost-of-delay.
+- Planning sprint capacity allocation between debt and features.
+- Reporting debt health, trends, and investment recommendations to execs.
 
-## Severity Scoring Framework
+## Clarify First
 
-Rate each dimension 1-10:
+Before scanning or reporting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-| Dimension | 1-2 | 5-6 | 9-10 |
-|-----------|-----|-----|------|
-| Velocity Impact | Negligible | Affects some features | Blocks new development |
-| Quality Impact | No defect increase | Moderate defect increase | Critical reliability problems |
-| Productivity Impact | No team impact | Regular complaints | Causing developer turnover |
-| Business Impact | No customer impact | Moderate performance hit | Revenue-impacting issues |
+- [ ] **Target codebase** — the directory to scan (the subject of the debt inventory)
+- [ ] **Prioritization framework &amp; team size** — cost-of-delay / WSJF / RICE and headcount (`--framework`, `--team-size`; changes the ranking and sprint allocation)
+- [ ] **Report audience** — exec dashboard vs engineering inventory (sets the report format and altitude)
 
-**Effort sizing**: XS (1-4 hrs), S (1-2 days), M (3-5 days), L (1-2 weeks), XL (3+ weeks)
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Interest Rate and Cost of Delay
+## Tools
 
-```
-Interest Rate = Impact Score x Frequency of Encounter (per sprint)
-Cost of Delay = Interest Rate x Sprints Until Fix x Team Size Multiplier
-
-Example:
-  Legacy auth module with poor error handling
-  Impact: 7  |  Frequency: 15 encounters/sprint  |  Team: 8 devs
-  Planned fix: sprint 4 (3 sprints away)
-
-  Interest Rate = 7 x 15 = 105 points/sprint
-  Cost of Delay = 105 x 3 x 1.2 = 378 total cost points
-```
-
-## Prioritization Matrix
-
-| Quadrant | Cost of Delay | Effort | Action |
-|----------|--------------|--------|--------|
-| Immediate (quick wins) | High | Low | Do first |
-| Planned (major initiatives) | High | High | Schedule dedicated sprints |
-| Opportunistic | Low | Low | Fix when touching related code |
-| Backlog | Low | High | Reconsider quarterly |
-
-### WSJF Alternative
-
-```
-WSJF = (Business Value + Time Criticality + Risk Reduction) / Effort
-```
-
-Each component scored 1-10. Highest WSJF items are prioritized first.
-
-## Sprint Allocation (Debt-to-Feature Ratio)
-
-| Team Velocity | Debt % | Feature % | Strategy |
-|--------------|--------|-----------|----------|
-| &lt; 70% of capacity | 60% | 40% | Remove major blockers |
-| 70-85% of capacity | 30% | 70% | Balanced maintenance |
-| &gt; 85% of capacity | 15% | 85% | Opportunistic only |
-
-**Sprint planning rule**: Reserve 20% of sprint capacity for debt. Prioritize items with the highest interest rates. Add &quot;debt tax&quot; to feature estimates when working in high-debt areas.
-
-## Debt Item Data Structure
-
-```json
-{
-  &quot;id&quot;: &quot;DEBT-2024-001&quot;,
-  &quot;title&quot;: &quot;Legacy user authentication module&quot;,
-  &quot;category&quot;: &quot;code&quot;,
-  &quot;subcategory&quot;: &quot;error_handling&quot;,
-  &quot;location&quot;: &quot;src/auth/legacy_auth.py:45-120&quot;,
-  &quot;description&quot;: &quot;Authentication error handling uses generic exceptions&quot;,
-  &quot;impact&quot;: { &quot;velocity&quot;: 7, &quot;quality&quot;: 8, &quot;productivity&quot;: 6, &quot;business&quot;: 5 },
-  &quot;effort&quot;: { &quot;size&quot;: &quot;M&quot;, &quot;risk&quot;: &quot;medium&quot;, &quot;skill_required&quot;: &quot;mid&quot; },
-  &quot;interest_rate&quot;: 105,
-  &quot;cost_of_delay&quot;: 378,
-  &quot;priority&quot;: &quot;high&quot;,
-  &quot;status&quot;: &quot;identified&quot;,
-  &quot;tags&quot;: [&quot;security&quot;, &quot;user-experience&quot;, &quot;maintainability&quot;]
-}
-```
-
-**Status lifecycle**: Identified &gt; Analyzed &gt; Prioritized &gt; Planned &gt; In Progress &gt; Review &gt; Done | Won&#x27;t Fix
-
-## Refactoring Strategies
-
-| Strategy | When to Use | How It Works |
-|----------|-------------|-------------|
-| Strangler Fig | Large monoliths, high-risk migrations | Build new around old; gradually redirect traffic; remove old |
-| Branch by Abstraction | Need old + new running in parallel | Create interface; implement both behind it; switch via config |
-| Feature Toggles | Gradual rollout of refactored components | Add toggle at decision points; test both paths; remove old |
-| Parallel Run | Critical business logic changes | Run both implementations; compare outputs; build confidence |
-
-## Executive Dashboard
-
-```
-TECH DEBT HEALTH
-  Overall Score: [0-100]  |  Trend: [improving/declining]
-  Cost of Delayed Fixes: [X development days]
-  High-Risk Items: [count]
-
-MONTHLY REPORT:
-  1. Executive Summary (3 bullet points)
-  2. Health Score Trend (6-month view)
-  3. Top 3 Risk Items (business impact focus)
-  4. Investment Recommendation (resource allocation)
-  5. Success Stories (debt resolved last month)
-```
-
-## Engineering Dashboard
-
-```
-DAILY:
-  New items identified  |  Items resolved  |  Interest rate by component
-
-SPRINT REVIEW:
-  Debt points completed vs planned  |  Velocity impact
-  Newly discovered debt  |  Team code quality sentiment
-```
-
-## Example: Scanning a Python Microservice
-
-```bash
-# Run debt scanner
-python scripts/debt_scanner.py --repo ./payment-service --output debt_inventory.json
-
-# Output summary:
-#   Total items found: 47
-#   Critical: 3  |  High: 8  |  Medium: 21  |  Low: 15
-#
-#   Top 3 by cost-of-delay:
-#     1. DEBT-001: payment_processor.py - nested exception handling (CoD: 420)
-#     2. DEBT-002: db/migrations/ - 12 unapplied migrations (CoD: 315)
-#     3. DEBT-003: tests/ - 62% coverage on payment flow (CoD: 280)
-
-# Prioritize items
-python scripts/debt_prioritizer.py --inventory debt_inventory.json --sprint-capacity 40
-
-# Generate executive report
-python scripts/debt_dashboard.py --inventory debt_inventory.json --baseline previous_scan.json
-```
-
-## Quarterly Planning
-
-1. Identify 1-2 major debt themes per quarter
-2. Allocate dedicated sprints for large-scale refactoring
-3. Plan debt work around major feature releases
-4. Track: debt interest rate reduction, velocity improvements, defect rate reduction, code review cycle time
-
-## Scripts
-
-### Debt Scanner (`debt_scanner.py`)
-Scans codebase using AST parsing and pattern matching. Detects all six debt categories. Outputs structured JSON inventory.
-
-### Debt Prioritizer (`debt_prioritizer.py`)
-Analyses debt inventory using cost-of-delay and WSJF frameworks. Outputs prioritized backlog with sprint allocation recommendations.
-
-### Debt Dashboard (`debt_dashboard.py`)
-Generates trend reports comparing current scan against baselines. Produces executive and engineering dashboard views.
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `debt_scanner.py` | Scan a directory for debt signals; output JSON inventory + text report | `python scripts/debt_scanner.py &lt;dir&gt; --output scan_results --format both` |
+| `debt_prioritizer.py` | Enrich inventory with cost-of-delay/WSJF/RICE and sprint allocation | `python scripts/debt_prioritizer.py scan_results.json --framework wsjf --team-size 8` |
+| `debt_dashboard.py` | Trend analysis, velocity, forecasts, and exec summary across snapshots | `python scripts/debt_dashboard.py --input-dir ./debt_scans/ --period quarterly` |
 
 ## References
 
-See `REFERENCE.md` for the complete Technical Debt Quadrant (Fowler), detailed detection heuristics per category, and implementation roadmap phases.
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Troubleshooting
+- **[references/methodology.md](references/methodology.md)** — the 7-step workflow, debt-classification table, severity scoring framework, interest-rate/cost-of-delay formulas, prioritization matrix, WSJF, sprint allocation ratios, the debt-item JSON schema, refactoring strategies, and quarterly planning. Read when scoring, prioritizing, or planning.
+- **[references/tool-reference.md](references/tool-reference.md)** — full parameter tables, examples, and output-format details for all three scripts plus the troubleshooting table. Read when running the scripts or debugging output.
+- **[references/dashboards-and-examples.md](references/dashboards-and-examples.md)** — executive and engineering dashboard layouts, a worked Python-microservice scan example, and the success-criteria bar. Read when generating reports or validating quality.
+- **[references/debt-classification-taxonomy.md](references/debt-classification-taxonomy.md)** — comprehensive taxonomy for classifying debt across dimensions with detection heuristics per category. Read when calibrating detection or labeling items.
+- **[references/prioritization-framework.md](references/prioritization-framework.md)** — deep prioritization approaches based on business value, risk, effort, and strategic alignment. Read when designing a prioritization rubric.
+- **[references/stakeholder-communication-templates.md](references/stakeholder-communication-templates.md)** — templates and guidelines for communicating debt status, impact, and recommendations to different stakeholder groups. Read when reporting to execs or product.
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Scanner finds zero debt items | Target directory contains no recognized file extensions, or all files match ignore patterns | Verify the directory path is correct and contains source files. Check `--config` to ensure `file_extensions` and `ignore_patterns` are appropriate for your stack. |
-| AST parsing errors on valid Python files | Files use syntax from a newer Python version than the runtime executing the scanner | Run the scanner with the same Python version the target codebase requires (e.g., `python3.12 scripts/debt_scanner.py`). |
-| Duplicate code detection is slow on large repos | The scanner hashes every N-line sliding window across all files, which scales quadratically with file count | Reduce scope by scanning one service directory at a time, or increase `min_duplicate_lines` in the config to reduce candidate blocks. |
-| Prioritizer produces all-zero cost-of-delay scores | Input inventory lacks `severity` or `type` fields that the enrichment step depends on | Ensure the inventory JSON was produced by `debt_scanner.py` or follows the Debt Item Data Structure documented above. Manual inventories must include `type` and `severity` per item. |
-| Dashboard shows &quot;No valid data files loaded&quot; | Files passed as arguments are not valid JSON, or the JSON structure is unrecognized | The dashboard accepts scanner output (`debt_items` key), prioritizer output (`prioritized_backlog` key), or a raw JSON array of debt items. Validate file contents with `python -m json.tool &lt;file&gt;`. |
-| Health score is unexpectedly low despite few critical items | High debt density (items per file) dominates the health formula even when individual severities are low | Review the density contribution: health penalizes 10 points per item-per-file. Break large files into smaller modules or resolve low-severity bulk items like `todo_comment` and `missing_docstring`. |
-| Sprint allocation plan shows hundreds of sprints | Default debt capacity is 20% of `--sprint-capacity`, which may be too low for a large backlog | Increase `--sprint-capacity` to reflect actual team hours, or filter the inventory to high-priority items before running the prioritizer. |
-
-## Success Criteria
-
-- Scan completes in under 60 seconds for repositories up to 100,000 lines of code.
-- Every detected debt item includes a unique ID, file path, line number (where applicable), severity, and debt type -- no fields left as null or unknown.
-- Health score correlates with manual code review assessments within 15 points on the 0-100 scale when validated against a senior engineer&#x27;s judgment.
-- Prioritized backlog produces a clear top-10 list where the first item has at least 2x the priority score of the tenth item, confirming meaningful differentiation.
-- Sprint allocation recommendations fit within the configured capacity (no single sprint exceeds 100% of debt budget) and cover all high-priority items within the first 3 sprints.
-- Dashboard trend analysis correctly identifies improving, declining, or stable directions when compared against at least 3 historical snapshots with known trajectories.
-- Cost-of-delay calculations produce actionable dollar-equivalent values that engineering managers can use directly in sprint planning and quarterly roadmap discussions.
+Also see the skill-root `REFERENCE.md` for the Technical Debt Quadrant (Fowler) and the implementation roadmap phases.
 
 ## Scope &amp; Limitations
 
@@ -1064,97 +647,6 @@ See `REFERENCE.md` for the complete Technical Debt Quadrant (Fowler), detailed d
 | `engineering/pr-review-expert` | Surface relevant debt items during code review by querying the debt inventory for files touched in a pull request. | PR changed-files list -&gt; filter `debt_inventory.json` by `file_path` |
 | `engineering/observability-designer` | Map infrastructure debt items (missing monitoring, env inconsistencies) to observability gaps identified by the observability skill. | Dashboard `category_distribution` -&gt; observability gap analysis |
 | `engineering/migration-architect` | Use the prioritized backlog to scope and sequence large-scale migration efforts, especially for architecture-category debt rated as planned initiatives. | Prioritizer `sprint_allocation` -&gt; migration planning timeline |
-
-## Tool Reference
-
-### Debt Scanner (`scripts/debt_scanner.py`)
-
-**Purpose:** Scans a codebase directory for technical debt signals using AST parsing (Python files) and regex pattern matching (all languages). Detects code smells, large functions, high complexity, duplicate code, TODO comments, and common anti-patterns. Produces a structured JSON inventory and a human-readable text report.
-
-**Usage:**
-```bash
-python scripts/debt_scanner.py &lt;directory&gt; [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `directory` | positional, required | -- | Path to the directory to scan. |
-| `--config` | string | None | Path to a JSON configuration file that overrides default thresholds (e.g., `max_function_length`, `max_complexity`, `ignore_patterns`). |
-| `--output` | string | None | Output file path. When set, writes report to file instead of stdout. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-
-**Example:**
-```bash
-python scripts/debt_scanner.py ./src --config custom_thresholds.json --output scan_results --format both
-```
-
-**Output Formats:**
-- **JSON:** Contains `scan_metadata`, `summary` (files scanned, lines scanned, health score, debt density, priority/type breakdowns), `debt_items` (array of debt objects with id, type, description, file_path, severity, metadata, priority_score, priority), `file_statistics`, and `recommendations`.
-- **Text:** Human-readable report with header, summary statistics, priority breakdown, top 10 debt items, and numbered recommendations.
-
----
-
-### Debt Prioritizer (`scripts/debt_prioritizer.py`)
-
-**Purpose:** Takes a debt inventory (from the scanner or a manual JSON file) and enriches each item with effort estimates, business impact scores, interest rate calculations, and cost-of-delay values. Produces a prioritized backlog with sprint allocation recommendations using one of three frameworks: cost-of-delay, WSJF, or RICE.
-
-**Usage:**
-```bash
-python scripts/debt_prioritizer.py &lt;inventory_file&gt; [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `inventory_file` | positional, required | -- | Path to debt inventory JSON file (scanner output, prioritizer output, or raw array of debt items). |
-| `--output` | string | None | Output file path. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-| `--framework` | choice | `cost_of_delay` | Prioritization framework: `cost_of_delay`, `wsjf`, or `rice`. |
-| `--team-size` | integer | `5` | Number of developers on the team. Affects interest rate team impact multiplier and RICE reach calculation. |
-| `--sprint-capacity` | integer | `80` | Total sprint capacity in hours. 20% is allocated to debt work by default. Used for sprint allocation planning. |
-
-**Example:**
-```bash
-python scripts/debt_prioritizer.py scan_results.json --framework wsjf --team-size 8 --sprint-capacity 120 --output prioritized --format json
-```
-
-**Output Formats:**
-- **JSON:** Contains `metadata` (analysis date, framework, team size, sprint capacity), `prioritized_backlog` (enriched items sorted by priority score, each with `effort_estimate`, `business_impact`, `interest_rate`, `cost_of_delay`, `category`, `impact_tags`), `sprint_allocation` (total debt hours, capacity per sprint, sprint plan with item assignments), `insights` (category distribution, effort breakdown, quick wins count, cost totals), `charts_data` (scatter, pie, timeline, interest trend arrays), and `recommendations`.
-- **Text:** Executive summary with total effort and cost-of-delay, sprint allocation plan (first 3 sprints with top items), top 10 priority items with scores and tags, and numbered recommendations.
-
----
-
-### Debt Dashboard (`scripts/debt_dashboard.py`)
-
-**Purpose:** Takes one or more historical debt inventory files (from the scanner or prioritizer) and generates trend analysis, debt velocity tracking (accruing vs. paying down), health score timelines, forecasts, and an executive summary. Supports loading files individually or from a directory.
-
-**Usage:**
-```bash
-python scripts/debt_dashboard.py [files...] [options]
-```
-
-**Parameters:**
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `files` | positional, optional | -- | One or more debt inventory JSON file paths. Accepts scanner output, prioritizer output, or raw arrays. |
-| `--input-dir` | string | None | Directory containing debt inventory JSON files. All `*.json` files in the directory are loaded. Mutually exclusive usage with positional `files`. |
-| `--output` | string | None | Output file path. JSON output appends `.json`, text output appends `.txt`. |
-| `--format` | choice | `both` | Output format: `json`, `text`, or `both`. |
-| `--period` | choice | `monthly` | Analysis period for trend grouping: `weekly`, `monthly`, or `quarterly`. |
-| `--team-size` | integer | `5` | Number of developers on the team. Used for velocity impact estimation. |
-
-**Example:**
-```bash
-python scripts/debt_dashboard.py --input-dir ./debt_scans/ --period quarterly --team-size 10 --output dashboard --format both
-```
-
-**Output Formats:**
-- **JSON:** Contains `metadata` (generated date, period, snapshot count, date range, team size), `executive_summary` (overall status, health score, status message, key insights, total debt items, effort hours, high priority count, velocity impact percent), `current_health` (overall score, debt density, velocity impact, quality score, maintainability score, technical risk score), `trend_analysis` (per-metric trend direction, change rate, correlation strength, forecast, confidence interval), `debt_velocity` (per-period new/resolved items, net change, velocity ratio, effort hours added/resolved), `forecasts` (3-month and 6-month projections for health, debt count, risk), `recommendations` (prioritized strategic actions with category, impact, effort), `visualizations` (health timeline, debt accumulation, category distribution, velocity chart, effort trend arrays), and `detailed_metrics`.
-- **Text:** Executive summary with status and key metrics, current health metrics, trend analysis with directional indicators, and top 5 strategic recommendations with priority, impact, and effort ratings.
 
 ---
 
@@ -1182,7 +674,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Tech Debt Tracker&quot;**
-   - Description: &quot;Scans codebases for technical debt with AST parsing, prioritizes debt items by impact, and generates trend dashboards. Use when tracking tech debt across a codebase, prioritizing refactoring work, cal...&quot;
+   - Description: &quot;Scan codebases for technical debt with AST parsing, prioritize by impact, and generate trend dashboards. Use when tracking tech debt, prioritizing refactoring, calculating cost-of- delay, planning sprint debt, or reporting debt to execs.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1243,7 +735,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/tech-debt-tracker/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/tech-debt-tracker/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

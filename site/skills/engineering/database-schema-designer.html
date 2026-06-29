@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Database Schema Designer - Claude Skills</title>
-  <meta name="description" content="Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite">
+  <meta name="description" content="Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or ad">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html">
   <meta property="og:title" content="Database Schema Designer - Claude Skills">
-  <meta property="og:description" content="Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite">
+  <meta property="og:description" content="Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or ad">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Schema Designer", "description": "Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Schema Designer", "description": "Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Database Schema Designer</h1>
-    <p class="page-subtitle">Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Data Architecture</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
+    <p class="page-subtitle">Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -393,20 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Database Schema Designer (Engineering domain).
 
-Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...
+Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.
 
-**Tier:** POWERFUL **Category:** Engineering / Data Architecture **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- 1. Schema Design from Requirements
-- 2. Migration Planning
-- 3. Index Strategy
-- 4. Type Generation
-- 5. Security
-- Index Anti-Patterns
-
-## Frameworks &amp; Templates You Know
-- Index Strategy Decision Framework
+Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -426,20 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Database Schema Designer (Engineering domain).
 
-Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...
+Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.
 
-**Tier:** POWERFUL **Category:** Engineering / Data Architecture **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- 1. Schema Design from Requirements
-- 2. Migration Planning
-- 3. Index Strategy
-- 4. Type Generation
-- 5. Security
-- Index Anti-Patterns
-
-## Frameworks &amp; Templates You Know
-- Index Strategy Decision Framework
+Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -469,12 +447,6 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Database Schema Designer
 
-**Tier:** POWERFUL
-**Category:** Engineering / Data Architecture
-**Maintainer:** Claude Skills Team
-
-## Overview
-
 Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal data patterns. Supports PostgreSQL, MySQL, and SQLite with Drizzle, Prisma, TypeORM, and Alembic.
 
 ## Keywords
@@ -483,34 +455,11 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 
 ## Core Capabilities
 
-### 1. Schema Design from Requirements
-- Extract entities and relationships from natural language requirements
-- Apply normalization rules (1NF through 3NF with denormalization guidance)
-- Add cross-cutting concerns: timestamps, soft deletes, audit, versioning
-- Generate complete DDL with constraints, defaults, and comments
-
-### 2. Migration Planning
-- Generate forward and rollback migrations
-- Plan zero-downtime migrations for large tables
-- Handle column additions, type changes, and data backfills
-- Support Drizzle, Prisma, TypeORM, Alembic, and raw SQL
-
-### 3. Index Strategy
-- Composite indexes for common query patterns
-- Partial indexes for filtered queries (e.g., active records only)
-- Covering indexes to eliminate table lookups
-- GIN/GiST indexes for full-text search and JSONB
-- Index bloat detection and maintenance
-
-### 4. Type Generation
-- TypeScript interfaces and Zod schemas from DB schema
-- Python dataclasses and Pydantic models
-- Enums as string unions (not database enums for migration safety)
-
-### 5. Security
-- Row-Level Security policies for multi-tenant isolation
-- Column-level encryption for PII
-- Audit logging with before/after JSON snapshots
+- **Schema design from requirements** — extract entities/relationships from natural language, apply 1NF–3NF normalization, add timestamps/soft-delete/audit/versioning, generate complete DDL.
+- **Migration planning** — forward and rollback migrations, zero-downtime patterns for large tables, column additions/type changes/backfills across Drizzle, Prisma, TypeORM, Alembic, and raw SQL.
+- **Index strategy** — composite, partial, covering, and GIN/GiST indexes mapped to query patterns; bloat detection and maintenance.
+- **Type generation** — TypeScript interfaces + Zod schemas and Python dataclasses + Pydantic models from the DB schema (enums as string unions).
+- **Security** — Row-Level Security for multi-tenant isolation, column-level PII encryption, audit logging with before/after JSON snapshots.
 
 ## When to Use
 
@@ -520,352 +469,31 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
 
-## Schema Design Process
+## Clarify First
 
-### Step 1: Requirements to Entities
+Before designing the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Given requirements like:
-&gt; &quot;Users can create workspaces. Each workspace has projects. Projects contain tasks with assignees, labels, and due dates. We need audit trails and multi-tenant isolation.&quot;
+- [ ] **Requirements or existing DDL** — the entities/relationships in natural language, or the schema to review (the source the design is derived from)
+- [ ] **Engine &amp; ORM** — PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format)
+- [ ] **Cross-cutting needs** — multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated)
 
-Extract entities:
-```
-User, Workspace, WorkspaceMember, Project, Task, TaskAssignment,
-Label, TaskLabel (junction), AuditLog
-```
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Step 2: Identify Relationships
+## Tools
 
-```
-User 1──* WorkspaceMember *──1 Workspace
-Workspace 1──* Project
-Project 1──* Task
-Task *──* User          (via TaskAssignment)
-Task *──* Label         (via TaskLabel)
-User 1──* AuditLog
-```
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `erd_generator.py` | Parse SQL DDL and generate a Mermaid ER diagram | `python scripts/erd_generator.py schema.sql -o erd.mmd` |
+| `migration_diffr.py` | Diff two SQL schemas into migration ALTER statements (with rollback) | `python scripts/migration_diffr.py old.sql new.sql` |
+| `schema_validator.py` | Validate DDL for normalization violations, missing indexes, naming | `python scripts/schema_validator.py schema.sql --strict` |
 
-### Step 3: Add Cross-Cutting Concerns
+## References
 
-Every table gets:
-- `id` — CUID2 or UUIDv7 (sortable, non-sequential)
-- `created_at` — TIMESTAMPTZ, server-side default
-- `updated_at` — TIMESTAMPTZ, updated on every write
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Tenant-scoped tables additionally get:
-- `workspace_id` — FK to workspaces, included in every query
-- RLS policy enforcing workspace isolation
-
-Auditable tables additionally get:
-- `created_by_id` — FK to users
-- `updated_by_id` — FK to users
-- `deleted_at` — TIMESTAMPTZ for soft deletes
-- `version` — INTEGER for optimistic locking
-
-### Step 4: Full Schema (Drizzle ORM)
-
-```typescript
-import {
-  pgTable, text, timestamp, integer, boolean, uniqueIndex, index, pgEnum
-} from &#x27;drizzle-orm/pg-core&#x27;
-import { createId } from &#x27;@paralleldrive/cuid2&#x27;
-
-// Enums as pgEnum for type safety, but string columns also acceptable
-export const taskStatusEnum = pgEnum(&#x27;task_status&#x27;, [&#x27;todo&#x27;, &#x27;in_progress&#x27;, &#x27;in_review&#x27;, &#x27;done&#x27;])
-export const taskPriorityEnum = pgEnum(&#x27;task_priority&#x27;, [&#x27;low&#x27;, &#x27;medium&#x27;, &#x27;high&#x27;, &#x27;urgent&#x27;])
-export const memberRoleEnum = pgEnum(&#x27;member_role&#x27;, [&#x27;owner&#x27;, &#x27;admin&#x27;, &#x27;member&#x27;, &#x27;viewer&#x27;])
-
-// ──── WORKSPACES ────
-export const workspaces = pgTable(&#x27;workspaces&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  name: text(&#x27;name&#x27;).notNull(),
-  slug: text(&#x27;slug&#x27;).notNull(),
-  plan: text(&#x27;plan&#x27;).notNull().default(&#x27;free&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspaces_slug_idx&#x27;).on(t.slug),
-])
-
-// ──── USERS ────
-export const users = pgTable(&#x27;users&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  email: text(&#x27;email&#x27;).notNull(),
-  name: text(&#x27;name&#x27;),
-  avatarUrl: text(&#x27;avatar_url&#x27;),
-  passwordHash: text(&#x27;password_hash&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;users_email_idx&#x27;).on(t.email),
-])
-
-// ──── WORKSPACE MEMBERS ────
-export const workspaceMembers = pgTable(&#x27;workspace_members&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  role: memberRoleEnum(&#x27;role&#x27;).notNull().default(&#x27;member&#x27;),
-  joinedAt: timestamp(&#x27;joined_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspace_members_unique&#x27;).on(t.workspaceId, t.userId),
-  index(&#x27;workspace_members_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;workspace_members_user_idx&#x27;).on(t.userId),
-])
-
-// ──── PROJECTS ────
-export const projects = pgTable(&#x27;projects&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  name: text(&#x27;name&#x27;).notNull(),
-  description: text(&#x27;description&#x27;),
-  status: text(&#x27;status&#x27;).notNull().default(&#x27;active&#x27;),
-  ownerId: text(&#x27;owner_id&#x27;).notNull().references(() =&gt; users.id),
-  createdById: text(&#x27;created_by_id&#x27;).references(() =&gt; users.id),
-  updatedById: text(&#x27;updated_by_id&#x27;).references(() =&gt; users.id),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  deletedAt: timestamp(&#x27;deleted_at&#x27;, { withTimezone: true }),
-}, (t) =&gt; [
-  index(&#x27;projects_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;projects_workspace_status_idx&#x27;).on(t.workspaceId, t.status),
-])
-
-// ──── TASKS ────
-export const tasks = pgTable(&#x27;tasks&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  projectId: text(&#x27;project_id&#x27;).notNull().references(() =&gt; projects.id, { onDelete: &#x27;cascade&#x27; }),
-  title: text(&#x27;title&#x27;).notNull(),
-  description: text(&#x27;description&#x27;),
-  status: taskStatusEnum(&#x27;status&#x27;).notNull().default(&#x27;todo&#x27;),
-  priority: taskPriorityEnum(&#x27;priority&#x27;).notNull().default(&#x27;medium&#x27;),
-  position: integer(&#x27;position&#x27;).notNull().default(0),
-  dueDate: timestamp(&#x27;due_date&#x27;, { withTimezone: true }),
-  version: integer(&#x27;version&#x27;).notNull().default(1),
-  createdById: text(&#x27;created_by_id&#x27;).notNull().references(() =&gt; users.id),
-  updatedById: text(&#x27;updated_by_id&#x27;).references(() =&gt; users.id),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  deletedAt: timestamp(&#x27;deleted_at&#x27;, { withTimezone: true }),
-}, (t) =&gt; [
-  index(&#x27;tasks_project_idx&#x27;).on(t.projectId),
-  index(&#x27;tasks_project_status_idx&#x27;).on(t.projectId, t.status),
-  index(&#x27;tasks_due_date_idx&#x27;).on(t.dueDate).where(sql`deleted_at IS NULL`),
-])
-
-// ──── AUDIT LOG ────
-export const auditLog = pgTable(&#x27;audit_log&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id),
-  action: text(&#x27;action&#x27;).notNull(), // &#x27;create&#x27; | &#x27;update&#x27; | &#x27;delete&#x27;
-  entityType: text(&#x27;entity_type&#x27;).notNull(), // &#x27;task&#x27; | &#x27;project&#x27; | etc.
-  entityId: text(&#x27;entity_id&#x27;).notNull(),
-  before: text(&#x27;before&#x27;), // JSON snapshot
-  after: text(&#x27;after&#x27;),   // JSON snapshot
-  ipAddress: text(&#x27;ip_address&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  index(&#x27;audit_log_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;audit_log_entity_idx&#x27;).on(t.entityType, t.entityId),
-  index(&#x27;audit_log_user_idx&#x27;).on(t.userId),
-  index(&#x27;audit_log_created_idx&#x27;).on(t.createdAt),
-])
-```
-
-## Row-Level Security (PostgreSQL)
-
-```sql
--- Enable RLS on tenant-scoped tables
-ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
-
--- Create application role
-CREATE ROLE app_user;
-
--- Projects: users can only see projects in their workspace
-CREATE POLICY projects_workspace_isolation ON projects
-  FOR ALL TO app_user
-  USING (
-    workspace_id IN (
-      SELECT wm.workspace_id FROM workspace_members wm
-      WHERE wm.user_id = current_setting(&#x27;app.current_user_id&#x27;)::text
-    )
-  );
-
--- Tasks: access through project&#x27;s workspace membership
-CREATE POLICY tasks_workspace_isolation ON tasks
-  FOR ALL TO app_user
-  USING (
-    project_id IN (
-      SELECT p.id FROM projects p
-      JOIN workspace_members wm ON wm.workspace_id = p.workspace_id
-      WHERE wm.user_id = current_setting(&#x27;app.current_user_id&#x27;)::text
-    )
-  );
-
--- Soft delete filter: never show deleted records to app users
-CREATE POLICY tasks_hide_deleted ON tasks
-  FOR SELECT TO app_user
-  USING (deleted_at IS NULL);
-
--- Set user context at request start (in middleware)
--- SELECT set_config(&#x27;app.current_user_id&#x27;, $1, true);
-```
-
-## Index Strategy Decision Framework
-
-```
-Query Pattern                          → Index Type
-─────────────────────────────────────────────────────
-WHERE col = value                      → B-tree (default)
-WHERE col1 = v1 AND col2 = v2         → Composite B-tree (col1, col2)
-WHERE col = value AND deleted_at IS NULL → Partial index with WHERE clause
-WHERE col IN (v1, v2, v3)             → B-tree (handles IN efficiently)
-WHERE col LIKE &#x27;prefix%&#x27;              → B-tree (prefix match only)
-WHERE col LIKE &#x27;%substring%&#x27;          → GIN with pg_trgm extension
-WHERE jsonb_col @&gt; &#x27;{&quot;key&quot;: &quot;val&quot;}&#x27;   → GIN on JSONB column
-WHERE to_tsvector(col) @@ query       → GIN on tsvector
-ORDER BY col DESC LIMIT N             → B-tree DESC
-SELECT a, b WHERE a = v               → Covering index INCLUDE(b)
-```
-
-### Index Anti-Patterns
-
-| Anti-Pattern | Why It Hurts | Fix |
-|-------------|-------------|-----|
-| Index on every column | Write overhead, storage bloat | Index only queried columns |
-| No index on foreign keys | Slow JOINs and CASCADE deletes | Always index FK columns |
-| Missing partial index for soft deletes | Full table scan on `WHERE deleted_at IS NULL` | Add `WHERE deleted_at IS NULL` to index |
-| Composite index in wrong order | Index unused for prefix queries | Put most selective / equality column first |
-| No index maintenance | Bloated indexes, slow queries | Schedule REINDEX CONCURRENTLY |
-
-## Zero-Downtime Migration Patterns
-
-### Adding a NOT NULL Column to a Large Table
-
-```sql
--- WRONG: locks table for duration of ALTER
-ALTER TABLE tasks ADD COLUMN assignee_id TEXT NOT NULL;
-
--- RIGHT: three-phase migration
--- Phase 1: Add nullable column (instant, no lock)
-ALTER TABLE tasks ADD COLUMN assignee_id TEXT;
-
--- Phase 2: Backfill in batches (no lock)
-UPDATE tasks SET assignee_id = created_by_id
-WHERE assignee_id IS NULL AND id &gt; $last_processed_id
-LIMIT 10000;
--- Repeat until all rows backfilled
-
--- Phase 3: Add NOT NULL constraint (brief lock, but validates existing data)
-ALTER TABLE tasks ALTER COLUMN assignee_id SET NOT NULL;
-```
-
-### Renaming a Column Safely
-
-```sql
--- WRONG: ALTER TABLE RENAME COLUMN breaks all running code instantly
-
--- RIGHT: expand-contract pattern
--- Phase 1: Add new column, write to both
-ALTER TABLE tasks ADD COLUMN assignee_user_id TEXT;
--- Deploy code that writes to BOTH old_name and new_name
-
--- Phase 2: Backfill
-UPDATE tasks SET assignee_user_id = old_assignee WHERE assignee_user_id IS NULL;
-
--- Phase 3: Switch reads to new column
--- Deploy code that reads from new_name only
-
--- Phase 4: Drop old column (after all deployments use new name)
-ALTER TABLE tasks DROP COLUMN old_assignee;
-```
-
-## ERD Generation (Mermaid)
-
-```mermaid
-erDiagram
-    Workspace ||--o{ WorkspaceMember : has
-    Workspace ||--o{ Project : contains
-    User ||--o{ WorkspaceMember : joins
-    User ||--o{ Task : creates
-    Project ||--o{ Task : contains
-    Task ||--o{ TaskAssignment : has
-    Task ||--o{ TaskLabel : has
-    Label ||--o{ TaskLabel : tags
-    User ||--o{ TaskAssignment : assigned
-
-    Workspace {
-        text id PK
-        text name
-        text slug UK
-        text plan
-    }
-    User {
-        text id PK
-        text email UK
-        text name
-    }
-    Project {
-        text id PK
-        text workspace_id FK
-        text name
-        text status
-    }
-    Task {
-        text id PK
-        text project_id FK
-        text title
-        enum status
-        enum priority
-        int version
-        timestamp deleted_at
-    }
-```
-
-## Common Pitfalls
-
-- **No index on foreign keys** — every FK column needs an index for JOIN and CASCADE performance
-- **Soft deletes without partial index** — `WHERE deleted_at IS NULL` without index causes full table scans
-- **Sequential integer IDs exposed in URLs** — reveals entity count; use CUID2 or UUIDv7 instead
-- **Adding NOT NULL to a large table** — locks the table; use the three-phase pattern above
-- **Database enums for status fields** — altering enums requires migration; use text with CHECK constraint
-- **No optimistic locking** — concurrent updates silently overwrite each other; add a `version` column
-- **RLS not tested** — always test RLS policies with a non-superuser role in staging
-- **Missing updated_at trigger** — without a trigger, updated_at only updates when application code remembers to set it
-
-## Best Practices
-
-1. **Timestamps on every table** — `created_at` and `updated_at` as TIMESTAMPTZ with server defaults
-2. **Soft deletes for user-facing data** — `deleted_at` instead of hard DELETE for audit and recovery
-3. **CUID2 or UUIDv7 as primary keys** — sortable, non-sequential, globally unique
-4. **Index every foreign key column** — required for JOIN performance and CASCADE operations
-5. **Partial indexes for filtered queries** — `WHERE deleted_at IS NULL` saves significant scan time
-6. **RLS over application-level filtering** — the database enforces tenancy, not just application code
-7. **Version column for optimistic locking** — `WHERE version = $expected_version` prevents lost updates
-8. **Audit log with JSON snapshots** — store before/after state for compliance and debugging
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Migration locks table for minutes | Adding NOT NULL column or index on large table without batching | Use the three-phase migration pattern: add nullable, backfill in batches, then set NOT NULL |
-| RLS policies silently return empty results | `current_setting(&#x27;app.current_user_id&#x27;)` not set before query | Verify middleware calls `set_config` at the start of every request; add a test that queries as a non-superuser role |
-| Composite index not used by query planner | Columns in the WHERE clause do not match the index prefix order | Reorder index columns so equality predicates come first, then range predicates; run `EXPLAIN ANALYZE` to confirm |
-| Soft-deleted records appear in API responses | Application queries missing `WHERE deleted_at IS NULL` filter | Add a default scope or database view that excludes soft-deleted rows; prefer RLS policy for enforcement |
-| Optimistic locking conflicts spike after deploy | New code path writes without incrementing the `version` column | Audit all UPDATE statements to include `SET version = version + 1` and `WHERE version = $expected` |
-| Foreign key CASCADE deletes are slow | Missing index on the child table&#x27;s FK column | Add a B-tree index on every FK column; verify with `EXPLAIN` on a DELETE of the parent row |
-| CUID2/UUIDv7 IDs cause index bloat over time | Text-based IDs are wider than integers, increasing B-tree page splits | Schedule `REINDEX CONCURRENTLY` during low-traffic windows; monitor `pg_stat_user_indexes` for bloat ratio |
-
-## Success Criteria
-
-- **Schema passes 3NF validation** — no transitive dependencies remain unless documented as intentional denormalization for read performance
-- **All foreign key columns are indexed** — zero FK columns without a corresponding B-tree index, verified via `pg_indexes` query
-- **Zero-downtime migrations verified** — every migration executes without `ACCESS EXCLUSIVE` locks exceeding 5 seconds on tables with 100K+ rows
-- **RLS policies tested with non-superuser role** — at least one integration test per tenant-scoped table confirms cross-tenant data isolation
-- **Type generation matches schema** — generated TypeScript interfaces or Pydantic models have zero drift from the current DDL, validated in CI
-- **Query performance meets SLA** — 95th percentile query latency under 50ms for indexed queries on tables up to 10M rows
-- **Audit log captures all mutations** — every INSERT, UPDATE, and DELETE on auditable tables produces a corresponding audit_log entry with before/after snapshots
+- **[references/schema-design-and-security.md](references/schema-design-and-security.md)** — the 4-step requirements-to-schema process, the full Drizzle ORM schema example, cross-cutting concerns, and PostgreSQL Row-Level Security policies. Read when designing a new schema or adding multi-tenancy.
+- **[references/indexes-and-migrations.md](references/indexes-and-migrations.md)** — the index-type decision framework, index anti-patterns, zero-downtime migration patterns (add NOT NULL column, rename column), and Mermaid ERD generation. Read when choosing indexes or planning a safe migration.
+- **[references/best-practices-and-troubleshooting.md](references/best-practices-and-troubleshooting.md)** — common pitfalls, best practices, the troubleshooting table, and the success-criteria bar. Read before shipping a schema or when diagnosing a problem.
 
 ## Scope &amp; Limitations
 
@@ -918,7 +546,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Schema Designer&quot;**
-   - Description: &quot;Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...&quot;
+   - Description: &quot;Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -943,12 +571,6 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Database Schema Designer
 
-**Tier:** POWERFUL
-**Category:** Engineering / Data Architecture
-**Maintainer:** Claude Skills Team
-
-## Overview
-
 Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal data patterns. Supports PostgreSQL, MySQL, and SQLite with Drizzle, Prisma, TypeORM, and Alembic.
 
 ## Keywords
@@ -957,34 +579,11 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 
 ## Core Capabilities
 
-### 1. Schema Design from Requirements
-- Extract entities and relationships from natural language requirements
-- Apply normalization rules (1NF through 3NF with denormalization guidance)
-- Add cross-cutting concerns: timestamps, soft deletes, audit, versioning
-- Generate complete DDL with constraints, defaults, and comments
-
-### 2. Migration Planning
-- Generate forward and rollback migrations
-- Plan zero-downtime migrations for large tables
-- Handle column additions, type changes, and data backfills
-- Support Drizzle, Prisma, TypeORM, Alembic, and raw SQL
-
-### 3. Index Strategy
-- Composite indexes for common query patterns
-- Partial indexes for filtered queries (e.g., active records only)
-- Covering indexes to eliminate table lookups
-- GIN/GiST indexes for full-text search and JSONB
-- Index bloat detection and maintenance
-
-### 4. Type Generation
-- TypeScript interfaces and Zod schemas from DB schema
-- Python dataclasses and Pydantic models
-- Enums as string unions (not database enums for migration safety)
-
-### 5. Security
-- Row-Level Security policies for multi-tenant isolation
-- Column-level encryption for PII
-- Audit logging with before/after JSON snapshots
+- **Schema design from requirements** — extract entities/relationships from natural language, apply 1NF–3NF normalization, add timestamps/soft-delete/audit/versioning, generate complete DDL.
+- **Migration planning** — forward and rollback migrations, zero-downtime patterns for large tables, column additions/type changes/backfills across Drizzle, Prisma, TypeORM, Alembic, and raw SQL.
+- **Index strategy** — composite, partial, covering, and GIN/GiST indexes mapped to query patterns; bloat detection and maintenance.
+- **Type generation** — TypeScript interfaces + Zod schemas and Python dataclasses + Pydantic models from the DB schema (enums as string unions).
+- **Security** — Row-Level Security for multi-tenant isolation, column-level PII encryption, audit logging with before/after JSON snapshots.
 
 ## When to Use
 
@@ -994,352 +593,31 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
 
-## Schema Design Process
+## Clarify First
 
-### Step 1: Requirements to Entities
+Before designing the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Given requirements like:
-&gt; &quot;Users can create workspaces. Each workspace has projects. Projects contain tasks with assignees, labels, and due dates. We need audit trails and multi-tenant isolation.&quot;
+- [ ] **Requirements or existing DDL** — the entities/relationships in natural language, or the schema to review (the source the design is derived from)
+- [ ] **Engine &amp; ORM** — PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format)
+- [ ] **Cross-cutting needs** — multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated)
 
-Extract entities:
-```
-User, Workspace, WorkspaceMember, Project, Task, TaskAssignment,
-Label, TaskLabel (junction), AuditLog
-```
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Step 2: Identify Relationships
+## Tools
 
-```
-User 1──* WorkspaceMember *──1 Workspace
-Workspace 1──* Project
-Project 1──* Task
-Task *──* User          (via TaskAssignment)
-Task *──* Label         (via TaskLabel)
-User 1──* AuditLog
-```
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `erd_generator.py` | Parse SQL DDL and generate a Mermaid ER diagram | `python scripts/erd_generator.py schema.sql -o erd.mmd` |
+| `migration_diffr.py` | Diff two SQL schemas into migration ALTER statements (with rollback) | `python scripts/migration_diffr.py old.sql new.sql` |
+| `schema_validator.py` | Validate DDL for normalization violations, missing indexes, naming | `python scripts/schema_validator.py schema.sql --strict` |
 
-### Step 3: Add Cross-Cutting Concerns
+## References
 
-Every table gets:
-- `id` — CUID2 or UUIDv7 (sortable, non-sequential)
-- `created_at` — TIMESTAMPTZ, server-side default
-- `updated_at` — TIMESTAMPTZ, updated on every write
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Tenant-scoped tables additionally get:
-- `workspace_id` — FK to workspaces, included in every query
-- RLS policy enforcing workspace isolation
-
-Auditable tables additionally get:
-- `created_by_id` — FK to users
-- `updated_by_id` — FK to users
-- `deleted_at` — TIMESTAMPTZ for soft deletes
-- `version` — INTEGER for optimistic locking
-
-### Step 4: Full Schema (Drizzle ORM)
-
-```typescript
-import {
-  pgTable, text, timestamp, integer, boolean, uniqueIndex, index, pgEnum
-} from &#x27;drizzle-orm/pg-core&#x27;
-import { createId } from &#x27;@paralleldrive/cuid2&#x27;
-
-// Enums as pgEnum for type safety, but string columns also acceptable
-export const taskStatusEnum = pgEnum(&#x27;task_status&#x27;, [&#x27;todo&#x27;, &#x27;in_progress&#x27;, &#x27;in_review&#x27;, &#x27;done&#x27;])
-export const taskPriorityEnum = pgEnum(&#x27;task_priority&#x27;, [&#x27;low&#x27;, &#x27;medium&#x27;, &#x27;high&#x27;, &#x27;urgent&#x27;])
-export const memberRoleEnum = pgEnum(&#x27;member_role&#x27;, [&#x27;owner&#x27;, &#x27;admin&#x27;, &#x27;member&#x27;, &#x27;viewer&#x27;])
-
-// ──── WORKSPACES ────
-export const workspaces = pgTable(&#x27;workspaces&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  name: text(&#x27;name&#x27;).notNull(),
-  slug: text(&#x27;slug&#x27;).notNull(),
-  plan: text(&#x27;plan&#x27;).notNull().default(&#x27;free&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspaces_slug_idx&#x27;).on(t.slug),
-])
-
-// ──── USERS ────
-export const users = pgTable(&#x27;users&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  email: text(&#x27;email&#x27;).notNull(),
-  name: text(&#x27;name&#x27;),
-  avatarUrl: text(&#x27;avatar_url&#x27;),
-  passwordHash: text(&#x27;password_hash&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;users_email_idx&#x27;).on(t.email),
-])
-
-// ──── WORKSPACE MEMBERS ────
-export const workspaceMembers = pgTable(&#x27;workspace_members&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  role: memberRoleEnum(&#x27;role&#x27;).notNull().default(&#x27;member&#x27;),
-  joinedAt: timestamp(&#x27;joined_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspace_members_unique&#x27;).on(t.workspaceId, t.userId),
-  index(&#x27;workspace_members_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;workspace_members_user_idx&#x27;).on(t.userId),
-])
-
-// ──── PROJECTS ────
-export const projects = pgTable(&#x27;projects&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  name: text(&#x27;name&#x27;).notNull(),
-  description: text(&#x27;description&#x27;),
-  status: text(&#x27;status&#x27;).notNull().default(&#x27;active&#x27;),
-  ownerId: text(&#x27;owner_id&#x27;).notNull().references(() =&gt; users.id),
-  createdById: text(&#x27;created_by_id&#x27;).references(() =&gt; users.id),
-  updatedById: text(&#x27;updated_by_id&#x27;).references(() =&gt; users.id),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  deletedAt: timestamp(&#x27;deleted_at&#x27;, { withTimezone: true }),
-}, (t) =&gt; [
-  index(&#x27;projects_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;projects_workspace_status_idx&#x27;).on(t.workspaceId, t.status),
-])
-
-// ──── TASKS ────
-export const tasks = pgTable(&#x27;tasks&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  projectId: text(&#x27;project_id&#x27;).notNull().references(() =&gt; projects.id, { onDelete: &#x27;cascade&#x27; }),
-  title: text(&#x27;title&#x27;).notNull(),
-  description: text(&#x27;description&#x27;),
-  status: taskStatusEnum(&#x27;status&#x27;).notNull().default(&#x27;todo&#x27;),
-  priority: taskPriorityEnum(&#x27;priority&#x27;).notNull().default(&#x27;medium&#x27;),
-  position: integer(&#x27;position&#x27;).notNull().default(0),
-  dueDate: timestamp(&#x27;due_date&#x27;, { withTimezone: true }),
-  version: integer(&#x27;version&#x27;).notNull().default(1),
-  createdById: text(&#x27;created_by_id&#x27;).notNull().references(() =&gt; users.id),
-  updatedById: text(&#x27;updated_by_id&#x27;).references(() =&gt; users.id),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  deletedAt: timestamp(&#x27;deleted_at&#x27;, { withTimezone: true }),
-}, (t) =&gt; [
-  index(&#x27;tasks_project_idx&#x27;).on(t.projectId),
-  index(&#x27;tasks_project_status_idx&#x27;).on(t.projectId, t.status),
-  index(&#x27;tasks_due_date_idx&#x27;).on(t.dueDate).where(sql`deleted_at IS NULL`),
-])
-
-// ──── AUDIT LOG ────
-export const auditLog = pgTable(&#x27;audit_log&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id),
-  action: text(&#x27;action&#x27;).notNull(), // &#x27;create&#x27; | &#x27;update&#x27; | &#x27;delete&#x27;
-  entityType: text(&#x27;entity_type&#x27;).notNull(), // &#x27;task&#x27; | &#x27;project&#x27; | etc.
-  entityId: text(&#x27;entity_id&#x27;).notNull(),
-  before: text(&#x27;before&#x27;), // JSON snapshot
-  after: text(&#x27;after&#x27;),   // JSON snapshot
-  ipAddress: text(&#x27;ip_address&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  index(&#x27;audit_log_workspace_idx&#x27;).on(t.workspaceId),
-  index(&#x27;audit_log_entity_idx&#x27;).on(t.entityType, t.entityId),
-  index(&#x27;audit_log_user_idx&#x27;).on(t.userId),
-  index(&#x27;audit_log_created_idx&#x27;).on(t.createdAt),
-])
-```
-
-## Row-Level Security (PostgreSQL)
-
-```sql
--- Enable RLS on tenant-scoped tables
-ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
-
--- Create application role
-CREATE ROLE app_user;
-
--- Projects: users can only see projects in their workspace
-CREATE POLICY projects_workspace_isolation ON projects
-  FOR ALL TO app_user
-  USING (
-    workspace_id IN (
-      SELECT wm.workspace_id FROM workspace_members wm
-      WHERE wm.user_id = current_setting(&#x27;app.current_user_id&#x27;)::text
-    )
-  );
-
--- Tasks: access through project&#x27;s workspace membership
-CREATE POLICY tasks_workspace_isolation ON tasks
-  FOR ALL TO app_user
-  USING (
-    project_id IN (
-      SELECT p.id FROM projects p
-      JOIN workspace_members wm ON wm.workspace_id = p.workspace_id
-      WHERE wm.user_id = current_setting(&#x27;app.current_user_id&#x27;)::text
-    )
-  );
-
--- Soft delete filter: never show deleted records to app users
-CREATE POLICY tasks_hide_deleted ON tasks
-  FOR SELECT TO app_user
-  USING (deleted_at IS NULL);
-
--- Set user context at request start (in middleware)
--- SELECT set_config(&#x27;app.current_user_id&#x27;, $1, true);
-```
-
-## Index Strategy Decision Framework
-
-```
-Query Pattern                          → Index Type
-─────────────────────────────────────────────────────
-WHERE col = value                      → B-tree (default)
-WHERE col1 = v1 AND col2 = v2         → Composite B-tree (col1, col2)
-WHERE col = value AND deleted_at IS NULL → Partial index with WHERE clause
-WHERE col IN (v1, v2, v3)             → B-tree (handles IN efficiently)
-WHERE col LIKE &#x27;prefix%&#x27;              → B-tree (prefix match only)
-WHERE col LIKE &#x27;%substring%&#x27;          → GIN with pg_trgm extension
-WHERE jsonb_col @&gt; &#x27;{&quot;key&quot;: &quot;val&quot;}&#x27;   → GIN on JSONB column
-WHERE to_tsvector(col) @@ query       → GIN on tsvector
-ORDER BY col DESC LIMIT N             → B-tree DESC
-SELECT a, b WHERE a = v               → Covering index INCLUDE(b)
-```
-
-### Index Anti-Patterns
-
-| Anti-Pattern | Why It Hurts | Fix |
-|-------------|-------------|-----|
-| Index on every column | Write overhead, storage bloat | Index only queried columns |
-| No index on foreign keys | Slow JOINs and CASCADE deletes | Always index FK columns |
-| Missing partial index for soft deletes | Full table scan on `WHERE deleted_at IS NULL` | Add `WHERE deleted_at IS NULL` to index |
-| Composite index in wrong order | Index unused for prefix queries | Put most selective / equality column first |
-| No index maintenance | Bloated indexes, slow queries | Schedule REINDEX CONCURRENTLY |
-
-## Zero-Downtime Migration Patterns
-
-### Adding a NOT NULL Column to a Large Table
-
-```sql
--- WRONG: locks table for duration of ALTER
-ALTER TABLE tasks ADD COLUMN assignee_id TEXT NOT NULL;
-
--- RIGHT: three-phase migration
--- Phase 1: Add nullable column (instant, no lock)
-ALTER TABLE tasks ADD COLUMN assignee_id TEXT;
-
--- Phase 2: Backfill in batches (no lock)
-UPDATE tasks SET assignee_id = created_by_id
-WHERE assignee_id IS NULL AND id &gt; $last_processed_id
-LIMIT 10000;
--- Repeat until all rows backfilled
-
--- Phase 3: Add NOT NULL constraint (brief lock, but validates existing data)
-ALTER TABLE tasks ALTER COLUMN assignee_id SET NOT NULL;
-```
-
-### Renaming a Column Safely
-
-```sql
--- WRONG: ALTER TABLE RENAME COLUMN breaks all running code instantly
-
--- RIGHT: expand-contract pattern
--- Phase 1: Add new column, write to both
-ALTER TABLE tasks ADD COLUMN assignee_user_id TEXT;
--- Deploy code that writes to BOTH old_name and new_name
-
--- Phase 2: Backfill
-UPDATE tasks SET assignee_user_id = old_assignee WHERE assignee_user_id IS NULL;
-
--- Phase 3: Switch reads to new column
--- Deploy code that reads from new_name only
-
--- Phase 4: Drop old column (after all deployments use new name)
-ALTER TABLE tasks DROP COLUMN old_assignee;
-```
-
-## ERD Generation (Mermaid)
-
-```mermaid
-erDiagram
-    Workspace ||--o{ WorkspaceMember : has
-    Workspace ||--o{ Project : contains
-    User ||--o{ WorkspaceMember : joins
-    User ||--o{ Task : creates
-    Project ||--o{ Task : contains
-    Task ||--o{ TaskAssignment : has
-    Task ||--o{ TaskLabel : has
-    Label ||--o{ TaskLabel : tags
-    User ||--o{ TaskAssignment : assigned
-
-    Workspace {
-        text id PK
-        text name
-        text slug UK
-        text plan
-    }
-    User {
-        text id PK
-        text email UK
-        text name
-    }
-    Project {
-        text id PK
-        text workspace_id FK
-        text name
-        text status
-    }
-    Task {
-        text id PK
-        text project_id FK
-        text title
-        enum status
-        enum priority
-        int version
-        timestamp deleted_at
-    }
-```
-
-## Common Pitfalls
-
-- **No index on foreign keys** — every FK column needs an index for JOIN and CASCADE performance
-- **Soft deletes without partial index** — `WHERE deleted_at IS NULL` without index causes full table scans
-- **Sequential integer IDs exposed in URLs** — reveals entity count; use CUID2 or UUIDv7 instead
-- **Adding NOT NULL to a large table** — locks the table; use the three-phase pattern above
-- **Database enums for status fields** — altering enums requires migration; use text with CHECK constraint
-- **No optimistic locking** — concurrent updates silently overwrite each other; add a `version` column
-- **RLS not tested** — always test RLS policies with a non-superuser role in staging
-- **Missing updated_at trigger** — without a trigger, updated_at only updates when application code remembers to set it
-
-## Best Practices
-
-1. **Timestamps on every table** — `created_at` and `updated_at` as TIMESTAMPTZ with server defaults
-2. **Soft deletes for user-facing data** — `deleted_at` instead of hard DELETE for audit and recovery
-3. **CUID2 or UUIDv7 as primary keys** — sortable, non-sequential, globally unique
-4. **Index every foreign key column** — required for JOIN performance and CASCADE operations
-5. **Partial indexes for filtered queries** — `WHERE deleted_at IS NULL` saves significant scan time
-6. **RLS over application-level filtering** — the database enforces tenancy, not just application code
-7. **Version column for optimistic locking** — `WHERE version = $expected_version` prevents lost updates
-8. **Audit log with JSON snapshots** — store before/after state for compliance and debugging
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Migration locks table for minutes | Adding NOT NULL column or index on large table without batching | Use the three-phase migration pattern: add nullable, backfill in batches, then set NOT NULL |
-| RLS policies silently return empty results | `current_setting(&#x27;app.current_user_id&#x27;)` not set before query | Verify middleware calls `set_config` at the start of every request; add a test that queries as a non-superuser role |
-| Composite index not used by query planner | Columns in the WHERE clause do not match the index prefix order | Reorder index columns so equality predicates come first, then range predicates; run `EXPLAIN ANALYZE` to confirm |
-| Soft-deleted records appear in API responses | Application queries missing `WHERE deleted_at IS NULL` filter | Add a default scope or database view that excludes soft-deleted rows; prefer RLS policy for enforcement |
-| Optimistic locking conflicts spike after deploy | New code path writes without incrementing the `version` column | Audit all UPDATE statements to include `SET version = version + 1` and `WHERE version = $expected` |
-| Foreign key CASCADE deletes are slow | Missing index on the child table&#x27;s FK column | Add a B-tree index on every FK column; verify with `EXPLAIN` on a DELETE of the parent row |
-| CUID2/UUIDv7 IDs cause index bloat over time | Text-based IDs are wider than integers, increasing B-tree page splits | Schedule `REINDEX CONCURRENTLY` during low-traffic windows; monitor `pg_stat_user_indexes` for bloat ratio |
-
-## Success Criteria
-
-- **Schema passes 3NF validation** — no transitive dependencies remain unless documented as intentional denormalization for read performance
-- **All foreign key columns are indexed** — zero FK columns without a corresponding B-tree index, verified via `pg_indexes` query
-- **Zero-downtime migrations verified** — every migration executes without `ACCESS EXCLUSIVE` locks exceeding 5 seconds on tables with 100K+ rows
-- **RLS policies tested with non-superuser role** — at least one integration test per tenant-scoped table confirms cross-tenant data isolation
-- **Type generation matches schema** — generated TypeScript interfaces or Pydantic models have zero drift from the current DDL, validated in CI
-- **Query performance meets SLA** — 95th percentile query latency under 50ms for indexed queries on tables up to 10M rows
-- **Audit log captures all mutations** — every INSERT, UPDATE, and DELETE on auditable tables produces a corresponding audit_log entry with before/after snapshots
+- **[references/schema-design-and-security.md](references/schema-design-and-security.md)** — the 4-step requirements-to-schema process, the full Drizzle ORM schema example, cross-cutting concerns, and PostgreSQL Row-Level Security policies. Read when designing a new schema or adding multi-tenancy.
+- **[references/indexes-and-migrations.md](references/indexes-and-migrations.md)** — the index-type decision framework, index anti-patterns, zero-downtime migration patterns (add NOT NULL column, rename column), and Mermaid ERD generation. Read when choosing indexes or planning a safe migration.
+- **[references/best-practices-and-troubleshooting.md](references/best-practices-and-troubleshooting.md)** — common pitfalls, best practices, the troubleshooting table, and the success-criteria bar. Read before shipping a schema or when diagnosing a problem.
 
 ## Scope &amp; Limitations
 
@@ -1392,7 +670,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Schema Designer&quot;**
-   - Description: &quot;Design relational database schemas from requirements with normalization, migration planning, ERD generation, RLS policies, index strategies, and type generation. Supports PostgreSQL, MySQL, and SQLite...&quot;
+   - Description: &quot;Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1453,7 +731,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/database-schema-designer/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/database-schema-designer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Senior Cloud Architect</h1>
     <p class="page-subtitle"></p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Cloud Architecture</span> <span class="badge badge-version">v1.0.0</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">cloud</span><span class="tag">aws</span><span class="tag">gcp</span><span class="tag">azure</span><span class="tag">architecture</span><span class="tag">infrastructure</span><span class="tag">terraform</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,13 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Cloud Architect (Engineering domain).
 
-Expert cloud architecture and infrastructure design across AWS, GCP, and Azure. cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda, cost-optimization, disaster-recovery, multi-region, iam, security, migration
-
-## Your Key Capabilities
-- Reference Architecture
-
-## Frameworks &amp; Templates You Know
-- python scripts/security_audit.py --framework cis --output report.html
+Expert cloud architecture and infrastructure design across AWS, GCP, and Azure — production-grade VPC/compute/database topologies, cost optimization, disaster recovery, and security posture auditing. cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda, cost-optimization, disaste
 
 ## How to Help
 When the user asks for help in this domain:
@@ -419,13 +413,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Senior Cloud Architect (Engineering domain).
 
-Expert cloud architecture and infrastructure design across AWS, GCP, and Azure. cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda, cost-optimization, disaster-recovery, multi-region, iam, security, migration
-
-## Your Key Capabilities
-- Reference Architecture
-
-## Frameworks &amp; Templates You Know
-- python scripts/security_audit.py --framework cis --output report.html
+Expert cloud architecture and infrastructure design across AWS, GCP, and Azure — production-grade VPC/compute/database topologies, cost optimization, disaster recovery, and security posture auditing. cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda, cost-optimization, disaste
 
 ## How to Help
 When the user asks for help in this domain:
@@ -455,199 +443,47 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Cloud Architect
 
-Expert cloud architecture and infrastructure design across AWS, GCP, and Azure.
+Expert cloud architecture and infrastructure design across AWS, GCP, and Azure — production-grade VPC/compute/database topologies, cost optimization, disaster recovery, and security posture auditing.
 
 ## Keywords
 
 cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda,
 cost-optimization, disaster-recovery, multi-region, iam, security, migration
 
----
+## Core Capabilities
 
-## Quick Start
+- **Production architecture design** — Terraform VPC, multi-AZ ECS/EKS behind ALB, RDS Multi-AZ, ElastiCache, layered WAF/NACL/SG security.
+- **Multi-cloud comparison** — map equivalent compute, serverless, storage, database, ML, and CDN services across AWS, GCP, and Azure.
+- **Cost optimization** — right-sizing, Reserved Instances/Savings Plans/Spot selection, cost-allocation tagging, budget alerting.
+- **Disaster recovery** — Backup/Pilot Light/Warm Standby/Multi-Site strategy selection against RTO/RPO, cross-region replication, Route 53 failover.
+- **Security posture** — CIS benchmark audits, network segmentation, least-privilege IAM with conditions, encryption at rest and in transit.
+- **Well-Architected reviews** — checklist across all six pillars (operational excellence, security, reliability, performance, cost, sustainability).
 
-```bash
-# Analyze infrastructure costs
-python scripts/cost_analyzer.py --account production --period monthly
+## When to Use
 
-# Run DR validation
-python scripts/dr_test.py --region us-west-2 --type failover
+- Designing a new production cloud architecture or migration.
+- Reducing cloud spend or planning reserved capacity.
+- Planning or testing disaster recovery and failover.
+- Auditing security posture against CIS benchmarks.
+- Comparing AWS / GCP / Azure for a workload.
 
-# Audit security posture
-python scripts/security_audit.py --framework cis --output report.html
+## Clarify First
 
-# Generate resource inventory
-python scripts/inventory.py --accounts all --format csv
-```
+Before designing the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Target cloud(s)** — AWS / GCP / Azure or multi-cloud (every topology, service mapping, and Terraform differs)
+- [ ] **Workload profile &amp; scale** — traffic, statefulness, and compute type (drives the VPC / compute / database topology and sizing)
+- [ ] **RTO/RPO targets** — recovery objectives (selects Backup / Pilot Light / Warm Standby / Multi-Site DR)
+- [ ] **Budget / cost constraint** — the spend ceiling (drives right-sizing and Reserved vs Savings Plan vs Spot)
 
-## Tools
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/cost_analyzer.py` | Analyze cloud spend by service, environment, and tag |
-| `scripts/dr_test.py` | Validate disaster recovery failover procedures |
-| `scripts/security_audit.py` | Audit against CIS benchmarks and compliance frameworks |
-| `scripts/inventory.py` | Inventory all resources across accounts and regions |
+## References
 
----
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Cloud Platform Comparison
-
-| Service | AWS | GCP | Azure |
-|---------|-----|-----|-------|
-| Compute | EC2, ECS, EKS | GCE, GKE | VMs, AKS |
-| Serverless | Lambda | Cloud Functions | Azure Functions |
-| Storage | S3 | Cloud Storage | Blob Storage |
-| Database | RDS, DynamoDB | Cloud SQL, Spanner | SQL DB, CosmosDB |
-| ML | SageMaker | Vertex AI | Azure ML |
-| CDN | CloudFront | Cloud CDN | Azure CDN |
-
----
-
-## Workflow 1: Design a Production AWS Architecture
-
-1. **Define requirements** -- Identify compute, storage, database, and networking needs. Determine RTO/RPO targets.
-2. **Provision VPC with Terraform:**
-   ```hcl
-   module &quot;vpc&quot; {
-     source  = &quot;terraform-aws-modules/vpc/aws&quot;
-     version = &quot;~&gt; 5.0&quot;
-     name    = &quot;${var.project}-${var.environment}&quot;
-     cidr    = var.vpc_cidr
-     azs             = [&quot;${var.region}a&quot;, &quot;${var.region}b&quot;, &quot;${var.region}c&quot;]
-     private_subnets = var.private_subnets
-     public_subnets  = var.public_subnets
-     enable_nat_gateway   = true
-     single_nat_gateway   = var.environment != &quot;production&quot;
-     enable_dns_hostnames = true
-     tags = local.common_tags
-   }
-   ```
-3. **Deploy compute** -- ECS/EKS in private subnets behind an ALB in public subnets. Use at least 2 AZs for redundancy.
-4. **Configure database** -- RDS Multi-AZ for production, single-AZ for staging. Set backup retention to 30 days (production) or 7 days (non-production).
-5. **Add caching layer** -- ElastiCache (Redis) between application and database.
-6. **Layer security** -- WAF on CloudFront, NACLs on subnets, security groups on instances. Apply least-privilege IAM.
-7. **Validate** -- Run `python scripts/security_audit.py --framework cis` and resolve all high-severity findings.
-
-### Reference Architecture
-
-```
-Route 53 (DNS) -&gt; CloudFront + WAF -&gt; ALB
-  -&gt; ECS/EKS Cluster (AZ-a) + ECS/EKS Cluster (AZ-b)
-    -&gt; ElastiCache (Redis)
-      -&gt; RDS Multi-AZ (Primary + Standby)
-```
-
-## Workflow 2: Optimize Cloud Costs
-
-1. **Audit current spend** -- `python scripts/cost_analyzer.py --account production --period monthly`
-2. **Right-size instances** -- Identify instances with avg CPU &lt;10% and max CPU &lt;30% as downsize candidates:
-   ```python
-   # Pseudocode for right-sizing logic
-   if avg_cpu &lt; 10 and max_cpu &lt; 30:
-       recommendation = &#x27;downsize&#x27;
-   elif avg_cpu &gt; 80:
-       recommendation = &#x27;upsize&#x27;
-   else:
-       recommendation = &#x27;optimal&#x27;
-   ```
-3. **Convert steady-state workloads** to Reserved Instances or Savings Plans:
-   | Type | Discount | Commitment | Use Case |
-   |------|----------|------------|----------|
-   | On-Demand | 0% | None | Variable workloads |
-   | Reserved | 30-72% | 1-3 years | Steady-state |
-   | Savings Plans | 30-72% | 1-3 years | Flexible compute |
-   | Spot | 60-90% | None | Fault-tolerant batch |
-4. **Enforce cost allocation tags** -- Require `Environment`, `Project`, `Owner`, `CostCenter` on all resources. Alert on untagged resources after 24 hours.
-5. **Validate** -- Re-run cost analyzer and confirm savings target achieved.
-
-## Workflow 3: Plan Disaster Recovery
-
-1. **Select DR strategy** based on RTO/RPO requirements:
-   | Strategy | RTO | RPO | Cost |
-   |----------|-----|-----|------|
-   | Backup &amp; Restore | Hours | Hours | $ |
-   | Pilot Light | Minutes | Minutes | $$ |
-   | Warm Standby | Minutes | Seconds | $$$ |
-   | Multi-Site Active | Seconds | Near-zero | $$$$ |
-2. **Configure cross-region replication** -- Database replication to secondary region. S3 cross-region replication for object storage.
-3. **Set up Route 53 failover routing** -- Health checks on primary. Automatic DNS failover to secondary.
-4. **Define backup policy:**
-   - Database: continuous replication, 35-day retention, cross-region, encrypted
-   - Application data: daily, 90-day retention, lifecycle to IA at 30d, Glacier at 90d
-   - Configuration: on-change via git + S3, unlimited retention
-5. **Test** -- `python scripts/dr_test.py --region us-west-2 --type failover` and confirm RTO/RPO targets met.
-
-## Workflow 4: Audit Security Posture
-
-1. **Run audit** -- `python scripts/security_audit.py --framework cis --output report.html`
-2. **Review network segmentation** -- Public subnets contain only NAT GW, ALB, bastion. Private subnets contain application tier. Data subnets contain RDS, Redis, Elasticsearch.
-3. **Enforce least-privilege IAM** -- Every policy scoped to specific resources and conditions:
-   ```json
-   {
-     &quot;Effect&quot;: &quot;Allow&quot;,
-     &quot;Action&quot;: [&quot;s3:GetObject&quot;, &quot;s3:PutObject&quot;],
-     &quot;Resource&quot;: &quot;arn:aws:s3:::my-bucket/uploads/*&quot;,
-     &quot;Condition&quot;: {
-       &quot;StringEquals&quot;: { &quot;aws:PrincipalTag/Team&quot;: &quot;engineering&quot; },
-       &quot;IpAddress&quot;: { &quot;aws:SourceIp&quot;: [&quot;10.0.0.0/8&quot;] }
-     }
-   }
-   ```
-4. **Verify encryption** -- Data encrypted at rest (KMS) and in transit (TLS 1.2+).
-5. **Validate** -- Re-run audit and confirm all critical and high findings resolved.
-
----
-
-## AWS Well-Architected Pillars (Decision Checklist)
-
-- **Operational Excellence**: IaC everywhere? Monitoring and alerting? Runbooks for incidents?
-- **Security**: Least-privilege IAM? Encryption at rest and in transit? VPC segmentation?
-- **Reliability**: Multi-AZ? Auto-scaling? DR tested?
-- **Performance**: Right-sized instances? Caching layer? CDN for static assets?
-- **Cost Optimization**: Reserved capacity for steady-state? Spot for batch? Unused resources cleaned?
-- **Sustainability**: Efficient regions? Right-sized compute? Data lifecycle policies?
-
----
-
-## Reference Materials
-
-| Document | Path |
-|----------|------|
-| AWS Patterns | [references/aws_patterns.md](references/aws_patterns.md) |
-| GCP Patterns | [references/gcp_patterns.md](references/gcp_patterns.md) |
-| Multi-Cloud Strategies | [references/multi_cloud.md](references/multi_cloud.md) |
-| Cost Optimization Guide | [references/cost_optimization.md](references/cost_optimization.md) |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Cross-region latency exceeds 200ms | No regional caching or CDN configured | Deploy CloudFront/Cloud CDN with edge locations closest to user base; enable regional API Gateway caches |
-| Terraform state lock conflicts across teams | Shared state backend without proper locking | Use DynamoDB (AWS) or GCS (GCP) state locking with per-team state file partitioning via workspaces |
-| Multi-cloud DNS failover not triggering | Health check thresholds too lenient or misconfigured endpoints | Set health check interval to 10s, failure threshold to 3, and verify endpoint returns 200 on the exact path monitored |
-| IAM permission errors after cross-account migration | Trust policies not updated for new account IDs | Update AssumeRole trust policies with correct account principals and external IDs; validate with `aws sts assume-role` |
-| Cloud costs spike unexpectedly after scaling event | Auto-scaling max limits set too high or no budget alerts | Set hard max instance counts per ASG, configure billing alerts at 80%/100%/120% thresholds, and review Spot fallback behavior |
-| VPC peering routes not propagating between clouds | Route tables missing entries for peered CIDR ranges | Add explicit route entries in both VPCs pointing peered CIDRs to the peering connection; verify no overlapping CIDRs |
-| DR failover test fails with data inconsistency | Replication lag between primary and secondary regions | Switch to synchronous replication for critical databases or implement application-level consistency checks pre-failover |
-
----
-
-## Success Criteria
-
-- **99.99% availability SLA met** across all production workloads with documented uptime reports
-- **Cost optimization savings above 25%** compared to on-demand baseline through Reserved Instances, Savings Plans, and right-sizing
-- **RTO &lt; 15 minutes and RPO &lt; 1 minute** validated through quarterly DR failover tests
-- **Zero critical CIS benchmark findings** in production accounts after security audit remediation
-- **Infrastructure drift &lt; 2%** measured by Terraform plan diffs on scheduled compliance scans
-- **Cross-region failover completes within 60 seconds** with automated Route 53 health check validation
-- **100% resource tagging compliance** enforced via automated policy checks with no untagged resources older than 24 hours
-
----
+- **[references/cloud-architecture-playbooks.md](references/cloud-architecture-playbooks.md)** — quick-start commands, the cloud platform comparison matrix, the four end-to-end workflows (AWS architecture, cost optimization, DR planning, security audit) with Terraform/IAM/cost code, and the AWS Well-Architected checklist. Read when designing, optimizing, or auditing an architecture.
+- **[references/cloud-operations.md](references/cloud-operations.md)** — troubleshooting table (latency, state locks, failover, IAM, cost spikes, peering, replication) and the architecture success criteria. Read when diagnosing an issue or defining the quality bar.
 
 ## Scope &amp; Limitations
 
@@ -662,8 +498,6 @@ Route 53 (DNS) -&gt; CloudFront + WAF -&gt; ALB
 - Kubernetes cluster internals, pod scheduling, or service mesh configuration (see `senior-devops`)
 - Security compliance frameworks beyond CIS benchmarks such as SOC 2, HIPAA, or GDPR (see `ra-qm-team/` compliance skills)
 - CI/CD pipeline design, build automation, or deployment workflows (see `senior-devops`)
-
----
 
 ## Integration Points
 
@@ -727,199 +561,47 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior Cloud Architect
 
-Expert cloud architecture and infrastructure design across AWS, GCP, and Azure.
+Expert cloud architecture and infrastructure design across AWS, GCP, and Azure — production-grade VPC/compute/database topologies, cost optimization, disaster recovery, and security posture auditing.
 
 ## Keywords
 
 cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda,
 cost-optimization, disaster-recovery, multi-region, iam, security, migration
 
----
+## Core Capabilities
 
-## Quick Start
+- **Production architecture design** — Terraform VPC, multi-AZ ECS/EKS behind ALB, RDS Multi-AZ, ElastiCache, layered WAF/NACL/SG security.
+- **Multi-cloud comparison** — map equivalent compute, serverless, storage, database, ML, and CDN services across AWS, GCP, and Azure.
+- **Cost optimization** — right-sizing, Reserved Instances/Savings Plans/Spot selection, cost-allocation tagging, budget alerting.
+- **Disaster recovery** — Backup/Pilot Light/Warm Standby/Multi-Site strategy selection against RTO/RPO, cross-region replication, Route 53 failover.
+- **Security posture** — CIS benchmark audits, network segmentation, least-privilege IAM with conditions, encryption at rest and in transit.
+- **Well-Architected reviews** — checklist across all six pillars (operational excellence, security, reliability, performance, cost, sustainability).
 
-```bash
-# Analyze infrastructure costs
-python scripts/cost_analyzer.py --account production --period monthly
+## When to Use
 
-# Run DR validation
-python scripts/dr_test.py --region us-west-2 --type failover
+- Designing a new production cloud architecture or migration.
+- Reducing cloud spend or planning reserved capacity.
+- Planning or testing disaster recovery and failover.
+- Auditing security posture against CIS benchmarks.
+- Comparing AWS / GCP / Azure for a workload.
 
-# Audit security posture
-python scripts/security_audit.py --framework cis --output report.html
+## Clarify First
 
-# Generate resource inventory
-python scripts/inventory.py --accounts all --format csv
-```
+Before designing the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
----
+- [ ] **Target cloud(s)** — AWS / GCP / Azure or multi-cloud (every topology, service mapping, and Terraform differs)
+- [ ] **Workload profile &amp; scale** — traffic, statefulness, and compute type (drives the VPC / compute / database topology and sizing)
+- [ ] **RTO/RPO targets** — recovery objectives (selects Backup / Pilot Light / Warm Standby / Multi-Site DR)
+- [ ] **Budget / cost constraint** — the spend ceiling (drives right-sizing and Reserved vs Savings Plan vs Spot)
 
-## Tools
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/cost_analyzer.py` | Analyze cloud spend by service, environment, and tag |
-| `scripts/dr_test.py` | Validate disaster recovery failover procedures |
-| `scripts/security_audit.py` | Audit against CIS benchmarks and compliance frameworks |
-| `scripts/inventory.py` | Inventory all resources across accounts and regions |
+## References
 
----
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Cloud Platform Comparison
-
-| Service | AWS | GCP | Azure |
-|---------|-----|-----|-------|
-| Compute | EC2, ECS, EKS | GCE, GKE | VMs, AKS |
-| Serverless | Lambda | Cloud Functions | Azure Functions |
-| Storage | S3 | Cloud Storage | Blob Storage |
-| Database | RDS, DynamoDB | Cloud SQL, Spanner | SQL DB, CosmosDB |
-| ML | SageMaker | Vertex AI | Azure ML |
-| CDN | CloudFront | Cloud CDN | Azure CDN |
-
----
-
-## Workflow 1: Design a Production AWS Architecture
-
-1. **Define requirements** -- Identify compute, storage, database, and networking needs. Determine RTO/RPO targets.
-2. **Provision VPC with Terraform:**
-   ```hcl
-   module &quot;vpc&quot; {
-     source  = &quot;terraform-aws-modules/vpc/aws&quot;
-     version = &quot;~&gt; 5.0&quot;
-     name    = &quot;${var.project}-${var.environment}&quot;
-     cidr    = var.vpc_cidr
-     azs             = [&quot;${var.region}a&quot;, &quot;${var.region}b&quot;, &quot;${var.region}c&quot;]
-     private_subnets = var.private_subnets
-     public_subnets  = var.public_subnets
-     enable_nat_gateway   = true
-     single_nat_gateway   = var.environment != &quot;production&quot;
-     enable_dns_hostnames = true
-     tags = local.common_tags
-   }
-   ```
-3. **Deploy compute** -- ECS/EKS in private subnets behind an ALB in public subnets. Use at least 2 AZs for redundancy.
-4. **Configure database** -- RDS Multi-AZ for production, single-AZ for staging. Set backup retention to 30 days (production) or 7 days (non-production).
-5. **Add caching layer** -- ElastiCache (Redis) between application and database.
-6. **Layer security** -- WAF on CloudFront, NACLs on subnets, security groups on instances. Apply least-privilege IAM.
-7. **Validate** -- Run `python scripts/security_audit.py --framework cis` and resolve all high-severity findings.
-
-### Reference Architecture
-
-```
-Route 53 (DNS) -&gt; CloudFront + WAF -&gt; ALB
-  -&gt; ECS/EKS Cluster (AZ-a) + ECS/EKS Cluster (AZ-b)
-    -&gt; ElastiCache (Redis)
-      -&gt; RDS Multi-AZ (Primary + Standby)
-```
-
-## Workflow 2: Optimize Cloud Costs
-
-1. **Audit current spend** -- `python scripts/cost_analyzer.py --account production --period monthly`
-2. **Right-size instances** -- Identify instances with avg CPU &lt;10% and max CPU &lt;30% as downsize candidates:
-   ```python
-   # Pseudocode for right-sizing logic
-   if avg_cpu &lt; 10 and max_cpu &lt; 30:
-       recommendation = &#x27;downsize&#x27;
-   elif avg_cpu &gt; 80:
-       recommendation = &#x27;upsize&#x27;
-   else:
-       recommendation = &#x27;optimal&#x27;
-   ```
-3. **Convert steady-state workloads** to Reserved Instances or Savings Plans:
-   | Type | Discount | Commitment | Use Case |
-   |------|----------|------------|----------|
-   | On-Demand | 0% | None | Variable workloads |
-   | Reserved | 30-72% | 1-3 years | Steady-state |
-   | Savings Plans | 30-72% | 1-3 years | Flexible compute |
-   | Spot | 60-90% | None | Fault-tolerant batch |
-4. **Enforce cost allocation tags** -- Require `Environment`, `Project`, `Owner`, `CostCenter` on all resources. Alert on untagged resources after 24 hours.
-5. **Validate** -- Re-run cost analyzer and confirm savings target achieved.
-
-## Workflow 3: Plan Disaster Recovery
-
-1. **Select DR strategy** based on RTO/RPO requirements:
-   | Strategy | RTO | RPO | Cost |
-   |----------|-----|-----|------|
-   | Backup &amp; Restore | Hours | Hours | $ |
-   | Pilot Light | Minutes | Minutes | $$ |
-   | Warm Standby | Minutes | Seconds | $$$ |
-   | Multi-Site Active | Seconds | Near-zero | $$$$ |
-2. **Configure cross-region replication** -- Database replication to secondary region. S3 cross-region replication for object storage.
-3. **Set up Route 53 failover routing** -- Health checks on primary. Automatic DNS failover to secondary.
-4. **Define backup policy:**
-   - Database: continuous replication, 35-day retention, cross-region, encrypted
-   - Application data: daily, 90-day retention, lifecycle to IA at 30d, Glacier at 90d
-   - Configuration: on-change via git + S3, unlimited retention
-5. **Test** -- `python scripts/dr_test.py --region us-west-2 --type failover` and confirm RTO/RPO targets met.
-
-## Workflow 4: Audit Security Posture
-
-1. **Run audit** -- `python scripts/security_audit.py --framework cis --output report.html`
-2. **Review network segmentation** -- Public subnets contain only NAT GW, ALB, bastion. Private subnets contain application tier. Data subnets contain RDS, Redis, Elasticsearch.
-3. **Enforce least-privilege IAM** -- Every policy scoped to specific resources and conditions:
-   ```json
-   {
-     &quot;Effect&quot;: &quot;Allow&quot;,
-     &quot;Action&quot;: [&quot;s3:GetObject&quot;, &quot;s3:PutObject&quot;],
-     &quot;Resource&quot;: &quot;arn:aws:s3:::my-bucket/uploads/*&quot;,
-     &quot;Condition&quot;: {
-       &quot;StringEquals&quot;: { &quot;aws:PrincipalTag/Team&quot;: &quot;engineering&quot; },
-       &quot;IpAddress&quot;: { &quot;aws:SourceIp&quot;: [&quot;10.0.0.0/8&quot;] }
-     }
-   }
-   ```
-4. **Verify encryption** -- Data encrypted at rest (KMS) and in transit (TLS 1.2+).
-5. **Validate** -- Re-run audit and confirm all critical and high findings resolved.
-
----
-
-## AWS Well-Architected Pillars (Decision Checklist)
-
-- **Operational Excellence**: IaC everywhere? Monitoring and alerting? Runbooks for incidents?
-- **Security**: Least-privilege IAM? Encryption at rest and in transit? VPC segmentation?
-- **Reliability**: Multi-AZ? Auto-scaling? DR tested?
-- **Performance**: Right-sized instances? Caching layer? CDN for static assets?
-- **Cost Optimization**: Reserved capacity for steady-state? Spot for batch? Unused resources cleaned?
-- **Sustainability**: Efficient regions? Right-sized compute? Data lifecycle policies?
-
----
-
-## Reference Materials
-
-| Document | Path |
-|----------|------|
-| AWS Patterns | [references/aws_patterns.md](references/aws_patterns.md) |
-| GCP Patterns | [references/gcp_patterns.md](references/gcp_patterns.md) |
-| Multi-Cloud Strategies | [references/multi_cloud.md](references/multi_cloud.md) |
-| Cost Optimization Guide | [references/cost_optimization.md](references/cost_optimization.md) |
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Cross-region latency exceeds 200ms | No regional caching or CDN configured | Deploy CloudFront/Cloud CDN with edge locations closest to user base; enable regional API Gateway caches |
-| Terraform state lock conflicts across teams | Shared state backend without proper locking | Use DynamoDB (AWS) or GCS (GCP) state locking with per-team state file partitioning via workspaces |
-| Multi-cloud DNS failover not triggering | Health check thresholds too lenient or misconfigured endpoints | Set health check interval to 10s, failure threshold to 3, and verify endpoint returns 200 on the exact path monitored |
-| IAM permission errors after cross-account migration | Trust policies not updated for new account IDs | Update AssumeRole trust policies with correct account principals and external IDs; validate with `aws sts assume-role` |
-| Cloud costs spike unexpectedly after scaling event | Auto-scaling max limits set too high or no budget alerts | Set hard max instance counts per ASG, configure billing alerts at 80%/100%/120% thresholds, and review Spot fallback behavior |
-| VPC peering routes not propagating between clouds | Route tables missing entries for peered CIDR ranges | Add explicit route entries in both VPCs pointing peered CIDRs to the peering connection; verify no overlapping CIDRs |
-| DR failover test fails with data inconsistency | Replication lag between primary and secondary regions | Switch to synchronous replication for critical databases or implement application-level consistency checks pre-failover |
-
----
-
-## Success Criteria
-
-- **99.99% availability SLA met** across all production workloads with documented uptime reports
-- **Cost optimization savings above 25%** compared to on-demand baseline through Reserved Instances, Savings Plans, and right-sizing
-- **RTO &lt; 15 minutes and RPO &lt; 1 minute** validated through quarterly DR failover tests
-- **Zero critical CIS benchmark findings** in production accounts after security audit remediation
-- **Infrastructure drift &lt; 2%** measured by Terraform plan diffs on scheduled compliance scans
-- **Cross-region failover completes within 60 seconds** with automated Route 53 health check validation
-- **100% resource tagging compliance** enforced via automated policy checks with no untagged resources older than 24 hours
-
----
+- **[references/cloud-architecture-playbooks.md](references/cloud-architecture-playbooks.md)** — quick-start commands, the cloud platform comparison matrix, the four end-to-end workflows (AWS architecture, cost optimization, DR planning, security audit) with Terraform/IAM/cost code, and the AWS Well-Architected checklist. Read when designing, optimizing, or auditing an architecture.
+- **[references/cloud-operations.md](references/cloud-operations.md)** — troubleshooting table (latency, state locks, failover, IAM, cost spikes, peering, replication) and the architecture success criteria. Read when diagnosing an issue or defining the quality bar.
 
 ## Scope &amp; Limitations
 
@@ -934,8 +616,6 @@ Route 53 (DNS) -&gt; CloudFront + WAF -&gt; ALB
 - Kubernetes cluster internals, pod scheduling, or service mesh configuration (see `senior-devops`)
 - Security compliance frameworks beyond CIS benchmarks such as SOC 2, HIPAA, or GDPR (see `ra-qm-team/` compliance skills)
 - CI/CD pipeline design, build automation, or deployment workflows (see `senior-devops`)
-
----
 
 ## Integration Points
 
@@ -1032,21 +712,8 @@ cp -r Claude-Skills/engineering/senior-cloud-architect your-project/
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/engineering/senior-cloud-architect</code></pre>
 </div>
   
-  <h2>Quick Start</h2><pre><code># Analyze infrastructure costs
-python scripts/cost_analyzer.py --account production --period monthly
-
-# Run DR validation
-python scripts/dr_test.py --region us-west-2 --type failover
-
-# Audit security posture
-python scripts/security_audit.py --framework cis --output report.html
-
-# Generate resource inventory
-python scripts/inventory.py --accounts all --format csv
-</code></pre>
-
----
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-cloud-architect/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Database Designer - Claude Skills</title>
-  <meta name="description" content="Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer">
+  <meta name="description" content="Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/database-designer.html">
   <meta property="og:title" content="Database Designer - Claude Skills">
-  <meta property="og:description" content="Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer">
+  <meta property="og:description" content="Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/database-designer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Designer", "description": "Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Designer", "description": "Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Database Designer</h1>
-    <p class="page-subtitle">Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Databases</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -393,17 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Database Designer (Engineering domain).
 
-Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...
+Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.
 
 The agent analyzes SQL schemas for normalization compliance, recommends optimal indexes based on query patterns, and generates safe migration scripts with rollback procedures. It produces Mermaid ERDs, detects redundant indexes, and implements zero-downtime expand-contract migration patterns for Pos
-
-## Your Key Capabilities
-- Analyze and Optimize a Schema
-- Generate a Safe Migration
-- Index Optimization for Query Patterns
-- schema_analyzer.py
-- index_optimizer.py
-- migration_generator.py
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,17 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Database Designer (Engineering domain).
 
-Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...
+Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.
 
 The agent analyzes SQL schemas for normalization compliance, recommends optimal indexes based on query patterns, and generates safe migration scripts with rollback procedures. It produces Mermaid ERDs, detects redundant indexes, and implements zero-downtime expand-contract migration patterns for Pos
-
-## Your Key Capabilities
-- Analyze and Optimize a Schema
-- Generate a Safe Migration
-- Index Optimization for Query Patterns
-- schema_analyzer.py
-- index_optimizer.py
-- migration_generator.py
 
 ## How to Help
 When the user asks for help in this domain:
@@ -465,100 +449,42 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent analyzes SQL schemas for normalization compliance, recommends optimal indexes based on query patterns, and generates safe migration scripts with rollback procedures. It produces Mermaid ERDs, detects redundant indexes, and implements zero-downtime expand-contract migration patterns for PostgreSQL and MySQL.
 
-## Quick Start
+## Core Capabilities
 
-```bash
-# Analyze a schema for normalization issues and generate ERD
-python schema_analyzer.py --input schema.sql --generate-erd --output-format json
+- **Schema analysis** — detect normalization violations (1NF-BCNF), missing constraints, naming issues, and data-type problems from DDL or JSON.
+- **ERD generation** — produce valid Mermaid entity-relationship diagrams from declared relationships.
+- **Index optimization** — recommend indexes from query patterns, order composite columns by selectivity, detect redundant/overlapping indexes, and find covering-index opportunities.
+- **Migration generation** — forward + rollback SQL between schema versions, with validation queries.
+- **Zero-downtime migrations** — expand-contract pattern with safe backfill for tables with 10M+ rows.
+- **Database selection guidance** — match workload requirements to PostgreSQL, MySQL, MongoDB, or DynamoDB.
 
-# Recommend indexes based on query patterns
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
+## When to Use
 
-# Generate migration scripts between schema versions
-python migration_generator.py --current current.json --target target.json --zero-downtime
-```
+- Designing or reviewing a new schema for normalization and constraints.
+- Optimizing queries by recommending or pruning indexes.
+- Planning a safe (optionally zero-downtime) migration between schema versions.
+- Analyzing database performance and relationship structure (ERD).
+- Choosing the right database technology for a workload.
 
----
+## Clarify First
 
-## Core Workflows
+Before designing or migrating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### Workflow 1: Analyze and Optimize a Schema
+- [ ] **Task** — schema analysis/ERD, index optimization, or migration generation (selects `schema_analyzer.py` vs `index_optimizer.py` vs `migration_generator.py`)
+- [ ] **Engine** — PostgreSQL, MySQL, MongoDB, or DynamoDB (drives the DDL dialect and selection guidance)
+- [ ] **Schema input &amp; query patterns** — the DDL/JSON schema and the queries to optimize for (the input the tools analyze; index recommendations depend on the query patterns)
 
-1. Provide DDL (SQL) or JSON schema definition
-2. Run `schema_analyzer.py` to detect normalization violations (1NF-BCNF), missing constraints, and naming issues
-3. Review generated Mermaid ERD for relationship visualization
-4. Run `index_optimizer.py` with query patterns to get index recommendations
-5. **Validation checkpoint:** All 1NF-3NF violations addressed; foreign keys declared; no redundant indexes
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-```bash
-python schema_analyzer.py -i schema.sql -f json -e -o report.json
-python index_optimizer.py -s schema.json -q queries.json -e -p 2 -o index_report.json
-```
+## References
 
-### Workflow 2: Generate a Safe Migration
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-1. Export current and target schemas as JSON
-2. Run `migration_generator.py` to produce forward and rollback SQL
-3. For large tables (10M+ rows), add `--zero-downtime` for expand-contract pattern
-4. Review validation queries that confirm migration success
-5. **Validation checkpoint:** Every forward step has a rollback counterpart; validation queries pass on test data
-
-```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o plan.json
-```
-
-### Workflow 3: Index Optimization for Query Patterns
-
-1. Document top 10 query patterns as JSON (WHERE clauses, JOINs, ORDER BY)
-2. Run `index_optimizer.py` with `--analyze-existing` to find redundancies
-3. Review composite index column ordering (most selective first)
-4. Check for covering index opportunities
-5. **Validation checkpoint:** Query patterns covered; no overlapping indexes; estimated 40%+ query time reduction
-
----
-
-## Index Type Selection
-
-| Index Type | Best For | Example |
-|------------|----------|---------|
-| B-tree | Range queries, sorting, equality | `CREATE INDEX idx ON tasks (status, created_date)` |
-| Partial | Subset queries on hot data | `CREATE INDEX idx ON users (email) WHERE status = &#x27;active&#x27;` |
-| Covering | Avoiding table lookups | `CREATE INDEX idx ON users (email) INCLUDE (name, status)` |
-| Hash | Exact match only | Primary keys, cache keys |
-| GIN | JSONB, array, full-text | `CREATE INDEX idx ON docs USING GIN (data)` |
-
----
-
-## Anti-Patterns
-
-- **Over-indexing** -- every column indexed wastes write performance and storage; index only columns appearing in WHERE, JOIN, and ORDER BY
-- **Missing foreign keys** -- relying on application-layer referential integrity leads to orphaned records; always declare FK constraints
-- **VARCHAR(255) everywhere** -- oversized columns waste memory in indexes; right-size columns based on actual data
-- **Premature denormalization** -- denormalize only when EXPLAIN ANALYZE shows join-related bottlenecks, not preemptively
-- **Direct ALTER on large tables** -- `ALTER TABLE ... SET NOT NULL` on a 100M-row table locks the table; use expand-contract pattern
-- **No validation queries in migrations** -- migrations without post-step validation risk silent data corruption
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Schema analyzer reports false 1NF violations | JSON or array columns detected as multi-valued fields | Review flagged columns; intentional JSONB/array usage is valid for document-style storage patterns |
-| Index optimizer recommends indexes on low-selectivity columns | Boolean or status columns appear in frequent WHERE clauses | Use partial indexes (`WHERE status = &#x27;active&#x27;`) instead of full-column indexes to reduce overhead |
-| Migration generator produces high-risk steps for column type changes | Direct `ALTER COLUMN ... TYPE` can lock tables and fail on incompatible data | Use the `--zero-downtime` flag to generate expand-contract migration patterns with safe backfill steps |
-| ERD output missing relationships | Foreign key constraints not declared in DDL or JSON input | Ensure all FK relationships are explicitly defined; the analyzer only detects declared constraints |
-| Composite index column order seems wrong | Optimizer orders by estimated selectivity, not query clause order | Verify cardinality estimates in the schema JSON; provide `cardinality_estimate` per column for accurate ordering |
-| Redundancy analysis flags covering indexes as overlapping | Overlap ratio calculation uses Jaccard similarity on column sets | Review flagged pairs manually; covering indexes with INCLUDE columns serve a different purpose than their subsets |
-| Validation queries fail after migration | Target schema JSON does not match actual post-migration state | Run `--validate-only` before and after migration; ensure the target JSON reflects all intended changes precisely |
-
-## Success Criteria
-
-- Schema analysis detects 90%+ of normalization violations (1NF through BCNF) when provided complete DDL input
-- Index recommendations reduce query execution time by 40%+ for analyzed query patterns (measured via EXPLAIN ANALYZE before/after)
-- Migration scripts execute with zero data loss and include verified rollback for every forward step
-- ERD generation produces valid Mermaid diagrams that render correctly for schemas with up to 50 tables
-- Redundant index detection identifies 95%+ of duplicate and overlapping indexes with less than 5% false positive rate
-- Zero-downtime migrations maintain full application availability during schema changes on tables with 10M+ rows
-- Generated SQL statements are syntactically valid and compatible with PostgreSQL 14+ and MySQL 8.0+
+- **[references/workflows-and-tools.md](references/workflows-and-tools.md)** — the Quick Start, three core workflows (analyze/optimize, safe migration, index optimization), and the full CLI reference (flags, usage, output formats) for `schema_analyzer.py`, `index_optimizer.py`, and `migration_generator.py`. Read when running the tools end-to-end.
+- **[references/patterns-and-troubleshooting.md](references/patterns-and-troubleshooting.md)** — index-type selection table, anti-patterns, the troubleshooting table for tool output, and the success-criteria quality bar. Read when picking an index type, avoiding mistakes, debugging output, or checking your work.
+- **[references/database_selection_decision_tree.md](references/database_selection_decision_tree.md)** — systematic database-technology selection based on requirements, data patterns, and operational constraints. Read when choosing between SQL and NoSQL engines.
+- **[references/index_strategy_patterns.md](references/index_strategy_patterns.md)** — proven patterns for index design, optimization strategies, and pitfalls to avoid. Read when designing an indexing strategy in depth.
+- **[references/normalization_guide.md](references/normalization_guide.md)** — normal forms (1NF-BCNF), decomposition to eliminate anomalies, and integrity trade-offs. Read when normalizing or deliberately denormalizing a schema.
 
 ## Scope &amp; Limitations
 
@@ -584,109 +510,6 @@ python migration_generator.py -c current.json -t target.json -z --include-valida
 | `api-design-reviewer` | Alignment between database schema and API resource contracts | Database Designer defines table structures; API Design Reviewer validates that endpoint schemas match underlying data models |
 | `ci-cd-pipeline-builder` | Automated migration execution in deployment pipelines | Database Designer generates migration scripts; CI/CD Pipeline Builder integrates them into deployment stages with validation gates |
 | `observability-designer` | Database performance monitoring and alerting post-optimization | Database Designer identifies query patterns; Observability Designer configures slow query alerts and index usage dashboards |
-
-## Tool Reference
-
-### schema_analyzer.py
-
-**Purpose:** Analyzes SQL DDL statements and JSON schema definitions for normalization compliance, missing constraints, data type issues, naming convention violations, and relationship mapping. Generates Mermaid ERD diagrams.
-
-**Usage:**
-```bash
-python schema_analyzer.py --input schema.sql --output-format json
-python schema_analyzer.py --input schema.json --output-format text
-python schema_analyzer.py --input schema.sql --generate-erd --output analysis.json
-python schema_analyzer.py --input schema.sql --erd-only
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input file path (SQL DDL or JSON schema) |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--output-format` | `-f` | No | Output format: `json` or `text` (default: `text`) |
-| `--generate-erd` | `-e` | No | Include Mermaid ERD diagram in output |
-| `--erd-only` | | No | Output only the Mermaid ERD diagram |
-
-**Example:**
-```bash
-python schema_analyzer.py -i my_schema.sql -f json -e -o report.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable report with normalization findings, constraint issues, data type recommendations, and naming violations
-- `json` -- Structured JSON with `normalization_issues`, `constraint_issues`, `data_type_issues`, `naming_issues`, `relationships`, and optional `erd_diagram` fields
-
----
-
-### index_optimizer.py
-
-**Purpose:** Analyzes schema definitions and query patterns to recommend optimal indexes. Identifies missing indexes, detects redundant and overlapping indexes, suggests composite index column ordering, estimates selectivity, and generates CREATE INDEX statements.
-
-**Usage:**
-```bash
-python index_optimizer.py --schema schema.json --queries queries.json --format text
-python index_optimizer.py --schema schema.json --queries queries.json --output recommendations.json --format json
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
-python index_optimizer.py --schema schema.json --queries queries.json --min-priority 2
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--schema` | `-s` | Yes | Schema definition JSON file |
-| `--queries` | `-q` | Yes | Query patterns JSON file |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--format` | `-f` | No | Output format: `json` or `text` (default: `text`) |
-| `--analyze-existing` | `-e` | No | Include analysis of existing indexes for redundancy |
-| `--min-priority` | `-p` | No | Minimum priority level to include: 1=highest, 4=lowest (default: `4`) |
-
-**Example:**
-```bash
-python index_optimizer.py -s schema.json -q queries.json -f json -e -p 2 -o index_report.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable report with analysis summary, high-priority recommendations, redundancy issues, performance impact analysis, and CREATE INDEX statements
-- `json` -- Structured JSON with `analysis_summary`, `index_recommendations` (by priority), `redundancy_analysis`, `size_estimates`, `sql_statements`, and `performance_impact` fields
-
----
-
-### migration_generator.py
-
-**Purpose:** Generates safe migration scripts between schema versions. Compares current and target schemas, produces ALTER TABLE statements, implements zero-downtime expand-contract patterns, creates rollback scripts, and generates validation queries.
-
-**Usage:**
-```bash
-python migration_generator.py --current current.json --target target.json --format text
-python migration_generator.py --current current.json --target target.json --output migration.sql --format sql
-python migration_generator.py --current current.json --target target.json --zero-downtime --format json
-python migration_generator.py --current current.json --target target.json --validate-only
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--current` | `-c` | Yes | Current schema JSON file |
-| `--target` | `-t` | Yes | Target schema JSON file |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--format` | `-f` | No | Output format: `json`, `text`, or `sql` (default: `text`) |
-| `--zero-downtime` | `-z` | No | Generate zero-downtime migration using expand-contract pattern |
-| `--validate-only` | `-v` | No | Only generate validation queries, skip migration steps |
-| `--include-validations` | | No | Include validation queries in migration output |
-
-**Example:**
-```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o migration_plan.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable migration plan with ordered steps, forward SQL, rollback SQL, risk levels, and execution timeline
-- `json` -- Structured JSON with `migration_id`, `steps` (each with `sql_forward`, `sql_rollback`, `validation_sql`, `risk_level`, `zero_downtime_phase`), `summary`, `execution_order`, and `rollback_order`
-- `sql` -- Raw SQL output with forward migration statements, suitable for direct execution or piping into a database client
 
 ---
 
@@ -714,7 +537,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Designer&quot;**
-   - Description: &quot;Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...&quot;
+   - Description: &quot;Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -741,100 +564,42 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent analyzes SQL schemas for normalization compliance, recommends optimal indexes based on query patterns, and generates safe migration scripts with rollback procedures. It produces Mermaid ERDs, detects redundant indexes, and implements zero-downtime expand-contract migration patterns for PostgreSQL and MySQL.
 
-## Quick Start
+## Core Capabilities
 
-```bash
-# Analyze a schema for normalization issues and generate ERD
-python schema_analyzer.py --input schema.sql --generate-erd --output-format json
+- **Schema analysis** — detect normalization violations (1NF-BCNF), missing constraints, naming issues, and data-type problems from DDL or JSON.
+- **ERD generation** — produce valid Mermaid entity-relationship diagrams from declared relationships.
+- **Index optimization** — recommend indexes from query patterns, order composite columns by selectivity, detect redundant/overlapping indexes, and find covering-index opportunities.
+- **Migration generation** — forward + rollback SQL between schema versions, with validation queries.
+- **Zero-downtime migrations** — expand-contract pattern with safe backfill for tables with 10M+ rows.
+- **Database selection guidance** — match workload requirements to PostgreSQL, MySQL, MongoDB, or DynamoDB.
 
-# Recommend indexes based on query patterns
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
+## When to Use
 
-# Generate migration scripts between schema versions
-python migration_generator.py --current current.json --target target.json --zero-downtime
-```
+- Designing or reviewing a new schema for normalization and constraints.
+- Optimizing queries by recommending or pruning indexes.
+- Planning a safe (optionally zero-downtime) migration between schema versions.
+- Analyzing database performance and relationship structure (ERD).
+- Choosing the right database technology for a workload.
 
----
+## Clarify First
 
-## Core Workflows
+Before designing or migrating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### Workflow 1: Analyze and Optimize a Schema
+- [ ] **Task** — schema analysis/ERD, index optimization, or migration generation (selects `schema_analyzer.py` vs `index_optimizer.py` vs `migration_generator.py`)
+- [ ] **Engine** — PostgreSQL, MySQL, MongoDB, or DynamoDB (drives the DDL dialect and selection guidance)
+- [ ] **Schema input &amp; query patterns** — the DDL/JSON schema and the queries to optimize for (the input the tools analyze; index recommendations depend on the query patterns)
 
-1. Provide DDL (SQL) or JSON schema definition
-2. Run `schema_analyzer.py` to detect normalization violations (1NF-BCNF), missing constraints, and naming issues
-3. Review generated Mermaid ERD for relationship visualization
-4. Run `index_optimizer.py` with query patterns to get index recommendations
-5. **Validation checkpoint:** All 1NF-3NF violations addressed; foreign keys declared; no redundant indexes
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-```bash
-python schema_analyzer.py -i schema.sql -f json -e -o report.json
-python index_optimizer.py -s schema.json -q queries.json -e -p 2 -o index_report.json
-```
+## References
 
-### Workflow 2: Generate a Safe Migration
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-1. Export current and target schemas as JSON
-2. Run `migration_generator.py` to produce forward and rollback SQL
-3. For large tables (10M+ rows), add `--zero-downtime` for expand-contract pattern
-4. Review validation queries that confirm migration success
-5. **Validation checkpoint:** Every forward step has a rollback counterpart; validation queries pass on test data
-
-```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o plan.json
-```
-
-### Workflow 3: Index Optimization for Query Patterns
-
-1. Document top 10 query patterns as JSON (WHERE clauses, JOINs, ORDER BY)
-2. Run `index_optimizer.py` with `--analyze-existing` to find redundancies
-3. Review composite index column ordering (most selective first)
-4. Check for covering index opportunities
-5. **Validation checkpoint:** Query patterns covered; no overlapping indexes; estimated 40%+ query time reduction
-
----
-
-## Index Type Selection
-
-| Index Type | Best For | Example |
-|------------|----------|---------|
-| B-tree | Range queries, sorting, equality | `CREATE INDEX idx ON tasks (status, created_date)` |
-| Partial | Subset queries on hot data | `CREATE INDEX idx ON users (email) WHERE status = &#x27;active&#x27;` |
-| Covering | Avoiding table lookups | `CREATE INDEX idx ON users (email) INCLUDE (name, status)` |
-| Hash | Exact match only | Primary keys, cache keys |
-| GIN | JSONB, array, full-text | `CREATE INDEX idx ON docs USING GIN (data)` |
-
----
-
-## Anti-Patterns
-
-- **Over-indexing** -- every column indexed wastes write performance and storage; index only columns appearing in WHERE, JOIN, and ORDER BY
-- **Missing foreign keys** -- relying on application-layer referential integrity leads to orphaned records; always declare FK constraints
-- **VARCHAR(255) everywhere** -- oversized columns waste memory in indexes; right-size columns based on actual data
-- **Premature denormalization** -- denormalize only when EXPLAIN ANALYZE shows join-related bottlenecks, not preemptively
-- **Direct ALTER on large tables** -- `ALTER TABLE ... SET NOT NULL` on a 100M-row table locks the table; use expand-contract pattern
-- **No validation queries in migrations** -- migrations without post-step validation risk silent data corruption
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Schema analyzer reports false 1NF violations | JSON or array columns detected as multi-valued fields | Review flagged columns; intentional JSONB/array usage is valid for document-style storage patterns |
-| Index optimizer recommends indexes on low-selectivity columns | Boolean or status columns appear in frequent WHERE clauses | Use partial indexes (`WHERE status = &#x27;active&#x27;`) instead of full-column indexes to reduce overhead |
-| Migration generator produces high-risk steps for column type changes | Direct `ALTER COLUMN ... TYPE` can lock tables and fail on incompatible data | Use the `--zero-downtime` flag to generate expand-contract migration patterns with safe backfill steps |
-| ERD output missing relationships | Foreign key constraints not declared in DDL or JSON input | Ensure all FK relationships are explicitly defined; the analyzer only detects declared constraints |
-| Composite index column order seems wrong | Optimizer orders by estimated selectivity, not query clause order | Verify cardinality estimates in the schema JSON; provide `cardinality_estimate` per column for accurate ordering |
-| Redundancy analysis flags covering indexes as overlapping | Overlap ratio calculation uses Jaccard similarity on column sets | Review flagged pairs manually; covering indexes with INCLUDE columns serve a different purpose than their subsets |
-| Validation queries fail after migration | Target schema JSON does not match actual post-migration state | Run `--validate-only` before and after migration; ensure the target JSON reflects all intended changes precisely |
-
-## Success Criteria
-
-- Schema analysis detects 90%+ of normalization violations (1NF through BCNF) when provided complete DDL input
-- Index recommendations reduce query execution time by 40%+ for analyzed query patterns (measured via EXPLAIN ANALYZE before/after)
-- Migration scripts execute with zero data loss and include verified rollback for every forward step
-- ERD generation produces valid Mermaid diagrams that render correctly for schemas with up to 50 tables
-- Redundant index detection identifies 95%+ of duplicate and overlapping indexes with less than 5% false positive rate
-- Zero-downtime migrations maintain full application availability during schema changes on tables with 10M+ rows
-- Generated SQL statements are syntactically valid and compatible with PostgreSQL 14+ and MySQL 8.0+
+- **[references/workflows-and-tools.md](references/workflows-and-tools.md)** — the Quick Start, three core workflows (analyze/optimize, safe migration, index optimization), and the full CLI reference (flags, usage, output formats) for `schema_analyzer.py`, `index_optimizer.py`, and `migration_generator.py`. Read when running the tools end-to-end.
+- **[references/patterns-and-troubleshooting.md](references/patterns-and-troubleshooting.md)** — index-type selection table, anti-patterns, the troubleshooting table for tool output, and the success-criteria quality bar. Read when picking an index type, avoiding mistakes, debugging output, or checking your work.
+- **[references/database_selection_decision_tree.md](references/database_selection_decision_tree.md)** — systematic database-technology selection based on requirements, data patterns, and operational constraints. Read when choosing between SQL and NoSQL engines.
+- **[references/index_strategy_patterns.md](references/index_strategy_patterns.md)** — proven patterns for index design, optimization strategies, and pitfalls to avoid. Read when designing an indexing strategy in depth.
+- **[references/normalization_guide.md](references/normalization_guide.md)** — normal forms (1NF-BCNF), decomposition to eliminate anomalies, and integrity trade-offs. Read when normalizing or deliberately denormalizing a schema.
 
 ## Scope &amp; Limitations
 
@@ -860,109 +625,6 @@ python migration_generator.py -c current.json -t target.json -z --include-valida
 | `api-design-reviewer` | Alignment between database schema and API resource contracts | Database Designer defines table structures; API Design Reviewer validates that endpoint schemas match underlying data models |
 | `ci-cd-pipeline-builder` | Automated migration execution in deployment pipelines | Database Designer generates migration scripts; CI/CD Pipeline Builder integrates them into deployment stages with validation gates |
 | `observability-designer` | Database performance monitoring and alerting post-optimization | Database Designer identifies query patterns; Observability Designer configures slow query alerts and index usage dashboards |
-
-## Tool Reference
-
-### schema_analyzer.py
-
-**Purpose:** Analyzes SQL DDL statements and JSON schema definitions for normalization compliance, missing constraints, data type issues, naming convention violations, and relationship mapping. Generates Mermaid ERD diagrams.
-
-**Usage:**
-```bash
-python schema_analyzer.py --input schema.sql --output-format json
-python schema_analyzer.py --input schema.json --output-format text
-python schema_analyzer.py --input schema.sql --generate-erd --output analysis.json
-python schema_analyzer.py --input schema.sql --erd-only
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--input` | `-i` | Yes | Input file path (SQL DDL or JSON schema) |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--output-format` | `-f` | No | Output format: `json` or `text` (default: `text`) |
-| `--generate-erd` | `-e` | No | Include Mermaid ERD diagram in output |
-| `--erd-only` | | No | Output only the Mermaid ERD diagram |
-
-**Example:**
-```bash
-python schema_analyzer.py -i my_schema.sql -f json -e -o report.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable report with normalization findings, constraint issues, data type recommendations, and naming violations
-- `json` -- Structured JSON with `normalization_issues`, `constraint_issues`, `data_type_issues`, `naming_issues`, `relationships`, and optional `erd_diagram` fields
-
----
-
-### index_optimizer.py
-
-**Purpose:** Analyzes schema definitions and query patterns to recommend optimal indexes. Identifies missing indexes, detects redundant and overlapping indexes, suggests composite index column ordering, estimates selectivity, and generates CREATE INDEX statements.
-
-**Usage:**
-```bash
-python index_optimizer.py --schema schema.json --queries queries.json --format text
-python index_optimizer.py --schema schema.json --queries queries.json --output recommendations.json --format json
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
-python index_optimizer.py --schema schema.json --queries queries.json --min-priority 2
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--schema` | `-s` | Yes | Schema definition JSON file |
-| `--queries` | `-q` | Yes | Query patterns JSON file |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--format` | `-f` | No | Output format: `json` or `text` (default: `text`) |
-| `--analyze-existing` | `-e` | No | Include analysis of existing indexes for redundancy |
-| `--min-priority` | `-p` | No | Minimum priority level to include: 1=highest, 4=lowest (default: `4`) |
-
-**Example:**
-```bash
-python index_optimizer.py -s schema.json -q queries.json -f json -e -p 2 -o index_report.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable report with analysis summary, high-priority recommendations, redundancy issues, performance impact analysis, and CREATE INDEX statements
-- `json` -- Structured JSON with `analysis_summary`, `index_recommendations` (by priority), `redundancy_analysis`, `size_estimates`, `sql_statements`, and `performance_impact` fields
-
----
-
-### migration_generator.py
-
-**Purpose:** Generates safe migration scripts between schema versions. Compares current and target schemas, produces ALTER TABLE statements, implements zero-downtime expand-contract patterns, creates rollback scripts, and generates validation queries.
-
-**Usage:**
-```bash
-python migration_generator.py --current current.json --target target.json --format text
-python migration_generator.py --current current.json --target target.json --output migration.sql --format sql
-python migration_generator.py --current current.json --target target.json --zero-downtime --format json
-python migration_generator.py --current current.json --target target.json --validate-only
-```
-
-**Flags/Parameters:**
-
-| Flag | Short | Required | Description |
-|------|-------|----------|-------------|
-| `--current` | `-c` | Yes | Current schema JSON file |
-| `--target` | `-t` | Yes | Target schema JSON file |
-| `--output` | `-o` | No | Output file path (default: stdout) |
-| `--format` | `-f` | No | Output format: `json`, `text`, or `sql` (default: `text`) |
-| `--zero-downtime` | `-z` | No | Generate zero-downtime migration using expand-contract pattern |
-| `--validate-only` | `-v` | No | Only generate validation queries, skip migration steps |
-| `--include-validations` | | No | Include validation queries in migration output |
-
-**Example:**
-```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o migration_plan.json
-```
-
-**Output Formats:**
-- `text` -- Human-readable migration plan with ordered steps, forward SQL, rollback SQL, risk levels, and execution timeline
-- `json` -- Structured JSON with `migration_id`, `steps` (each with `sql_forward`, `sql_rollback`, `validation_sql`, `risk_level`, `zero_downtime_phase`), `summary`, `execution_order`, and `rollback_order`
-- `sql` -- Raw SQL output with forward migration statements, suitable for direct execution or piping into a database client
 
 ---
 
@@ -990,7 +652,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Designer&quot;**
-   - Description: &quot;Provides expert-level database design with schema analysis, index optimization, and migration generation. Supports PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing quer...&quot;
+   - Description: &quot;Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1047,21 +709,9 @@ cp -r Claude-Skills/engineering/database-designer your-project/
 # Or download just this skill
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/engineering/database-designer</code></pre>
 </div>
-<h3>Run Python Tools</h3>
-<pre><code>python engineering/database-designer/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Analyze a schema for normalization issues and generate ERD
-python schema_analyzer.py --input schema.sql --generate-erd --output-format json
-
-# Recommend indexes based on query patterns
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
-
-# Generate migration scripts between schema versions
-python migration_generator.py --current current.json --target target.json --zero-downtime
-</code></pre>
-
----
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/database-designer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

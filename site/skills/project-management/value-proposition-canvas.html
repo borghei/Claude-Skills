@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Value Proposition Canvas - Claude Skills</title>
-  <meta name="description" content="Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.">
+  <meta name="description" content="Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, an">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/value-proposition-canvas.html">
   <meta property="og:title" content="Value Proposition Canvas - Claude Skills">
-  <meta property="og:description" content="Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.">
+  <meta property="og:description" content="Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, an">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/value-proposition-canvas.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Value Proposition Canvas", "description": "Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/value-proposition-canvas.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Value Proposition Canvas", "description": "Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/value-proposition-canvas.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Value Proposition Canvas</h1>
-    <p class="page-subtitle">Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Discovery</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">value-proposition</span><span class="tag">jobs-to-be-done</span><span class="tag">strategyzer</span><span class="tag">product-market-fit</span></div>
+    <p class="page-subtitle">Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,24 +393,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Value Proposition Canvas (Project Management domain).
 
-Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.
+Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.
 
 The Value Proposition Canvas (VPC) is the canonical Strategyzer tool for designing and testing the fit between what customers care about and what your product offers. It is the &quot;zoom-in&quot; companion to the Business Model Canvas, focused on the two most failure-prone blocks: Customer Segments and Value
 
-## Your Key Capabilities
-- When to Use
-- Side 1: Customer Profile (the circle)
-- Side 2: Value Map (the square)
-- Level 1: Problem-Solution Fit
-- Level 2: Product-Market Fit
-- Level 3: Business Model Fit
-
 ## Frameworks &amp; Templates You Know
 - Value Proposition Canvas Expert
-- The Two Sides of the Canvas
-- Canvas Template (Markdown Table Form)
-- Value Proposition Canvas: [Segment Name]
-- - Each canvas covers exactly one segment (no &quot;all customers&quot; canvases)
+- - `assets/vpc_template.md` -- markdown canvas template.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -430,24 +419,13 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Value Proposition Canvas (Project Management domain).
 
-Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.
+Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.
 
 The Value Proposition Canvas (VPC) is the canonical Strategyzer tool for designing and testing the fit between what customers care about and what your product offers. It is the &quot;zoom-in&quot; companion to the Business Model Canvas, focused on the two most failure-prone blocks: Customer Segments and Value
 
-## Your Key Capabilities
-- When to Use
-- Side 1: Customer Profile (the circle)
-- Side 2: Value Map (the square)
-- Level 1: Problem-Solution Fit
-- Level 2: Product-Market Fit
-- Level 3: Business Model Fit
-
 ## Frameworks &amp; Templates You Know
 - Value Proposition Canvas Expert
-- The Two Sides of the Canvas
-- Canvas Template (Markdown Table Form)
-- Value Proposition Canvas: [Segment Name]
-- - Each canvas covers exactly one segment (no &quot;all customers&quot; canvases)
+- - `assets/vpc_template.md` -- markdown canvas template.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -481,297 +459,58 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The Value Proposition Canvas (VPC) is the canonical Strategyzer tool for designing and testing the fit between what customers care about and what your product offers. It is the &quot;zoom-in&quot; companion to the Business Model Canvas, focused on the two most failure-prone blocks: Customer Segments and Value Propositions. Where the Business Model Canvas asks &quot;is this a viable business?&quot;, the VPC asks &quot;are we building something customers actually want?&quot;
 
-The canvas has two sides. The **Customer Profile** describes the customer&#x27;s world in their language -- jobs they are trying to do, pains they experience, and gains they aspire to. The **Value Map** describes the product&#x27;s response -- the products and services offered, the pain relievers they include, and the gain creators they enable. Fit is achieved when the Value Map mirrors the Customer Profile element-by-element.
+The canvas has two sides. The **Customer Profile** describes the customer&#x27;s world in their language -- jobs they are trying to do, pains they experience, and gains they aspire to. The **Value Map** describes the product&#x27;s response -- the products and services offered, the pain relievers they include, and the gain creators they enable. Fit is achieved when the Value Map mirrors the Customer Profile element-by-element. The method follows Alexander Osterwalder and Yves Pigneur&#x27;s *Value Proposition Design* (2014).
 
-This skill walks through both sides of the canvas, defines the three levels of fit (problem-solution, product-market, business model), and provides validation checklists drawn directly from Alexander Osterwalder and Yves Pigneur&#x27;s *Value Proposition Design* (2014).
+## Core Capabilities
 
-### When to Use
+- **Customer Profile construction** -- jobs (functional/social/emotional), pains, and gains, each ranked (importance, severity x frequency, desirability).
+- **Value Map construction** -- products &amp; services, pain relievers, and gain creators, each mapped to a specific profile element.
+- **Three-level fit validation** -- problem-solution fit (interviews), product-market fit (behavior), business-model fit (unit economics).
+- **Artifacts** -- markdown canvas template, worked example, and a fit-validation checklist that flags strong/partial/absent fit.
 
-- **Pre-PRD framing** -- Before writing requirements, validate that the value proposition is real and the customer profile is well-understood.
-- **Solution refinement** -- You have a working product but unclear traction; use the VPC to diagnose whether the issue is the Customer Profile (wrong segment) or the Value Map (right segment, wrong response).
-- **New segment expansion** -- Entering a new customer segment with an existing product; build a separate VPC for each segment to test fit.
-- **Pricing and packaging decisions** -- Pains and gains rank-ordering informs which features go in which tier.
-- **Sales enablement** -- Pain relievers and gain creators become the talking points and proof points for the sales team.
+## When to Use
 
-## The Two Sides of the Canvas
+- **Pre-PRD framing** -- validate the value proposition and customer profile before writing requirements.
+- **Solution refinement** -- diagnose whether weak traction is a wrong-segment (Customer Profile) or wrong-response (Value Map) problem.
+- **New segment expansion** -- build a separate VPC per segment to test fit.
+- **Pricing and packaging** -- pains/gains rank-ordering informs which features go in which tier.
+- **Sales enablement** -- pain relievers and gain creators become talking points and proof points.
 
-### Side 1: Customer Profile (the circle)
+## Clarify First
 
-The Customer Profile describes the customer&#x27;s world. It has three sections.
+Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-#### Jobs (Customer Jobs)
+- [ ] **The one segment** — the VPC is segment-level; one canvas per segment (defines whose Customer Profile you fill)
+- [ ] **Customer evidence source** — interviews/synthesis vs team assumptions (jobs/pains/gains in the team&#x27;s own words is the #1 way the canvas becomes fiction)
+- [ ] **Which fit level** — problem-solution / product-market / business-model (sets the validation method: interviews vs behavior vs unit economics)
 
-What is the customer trying to get done? Three flavors:
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-- **Functional jobs** -- A task to be completed. &quot;Reconcile Stripe payments to QuickBooks invoices.&quot;
-- **Social jobs** -- How the customer wants to be perceived. &quot;Look competent in front of the finance director.&quot;
-- **Emotional jobs** -- How the customer wants to feel. &quot;Avoid the dread of month-end close.&quot;
+## Quick Start
 
-Jobs are written from the customer&#x27;s perspective, in their language. They are not features (&quot;automated reconciliation tool&quot;) -- they are outcomes (&quot;close the books in 2 days without errors&quot;).
+1. Pick one segment; run 5-7 interviews via `discovery/customer-interview-script/`.
+2. Fill the Customer Profile (jobs/pains/gains, ranked) from `discovery/interview-synthesis/` themes; then draft the Value Map so each top item has a pain reliever or gain creator.
+3. Run `assets/fit_validation_checklist.md`, list the top unaddressed pains/gains, and feed the canvas into `execution/create-prd/` Sections 5-6.
 
-**Job ranking:** Order jobs by *importance* to the customer. An unimportant job that is perfectly done has zero traction.
+See `references/canvas-construction-playbook.md` for the full two-side method, three fit levels, template, worked example, and troubleshooting.
 
-#### Pains
+## References
 
-Bad outcomes, risks, and obstacles related to the jobs. Three flavors:
-
-- **Undesired outcomes** -- &quot;The reconciliation report has wrong numbers&quot;
-- **Obstacles** -- &quot;I can&#x27;t get the data out of the source system&quot;
-- **Risks** -- &quot;If I close the books wrong, the auditor will catch it&quot;
-
-Pains are described concretely. &quot;Reconciliation is hard&quot; is weak. &quot;Reconciliation takes 11 hours per close because I have to manually match 2,400 rows&quot; is strong.
-
-**Pain ranking:** Order pains by *severity* (how bad it is when it happens) and *frequency* (how often it happens). High-severity high-frequency pains are the priority.
-
-#### Gains
-
-Outcomes and benefits the customer wants. Four flavors:
-
-- **Required gains** -- Without these, the solution does not work (&quot;the report has to be accurate&quot;)
-- **Expected gains** -- Customers assume these exist (&quot;the data is encrypted in transit&quot;)
-- **Desired gains** -- Customers explicitly want these (&quot;the report exports to PDF for the auditor&quot;)
-- **Unexpected gains** -- Things customers do not yet know to ask for, but love when delivered (&quot;a Slack alert when reconciliation completes&quot;)
-
-**Gain ranking:** Order gains by *desirability* and *relevance to the job*. Unexpected gains drive delight; required gains drive table stakes.
-
-### Side 2: Value Map (the square)
-
-The Value Map describes the product&#x27;s response to the Customer Profile.
-
-#### Products &amp; Services
-
-The bundle of things you offer. This is the *what*. Concrete listing -- a feature, a service, a subscription tier, an integration.
-
-#### Pain Relievers
-
-How your products and services *eliminate or reduce* the customer&#x27;s pains. Each pain reliever should reference a specific pain from the Customer Profile.
-
-Example pain: &quot;Reconciliation takes 11 hours per close.&quot;
-Pain reliever: &quot;Automated rule-based matching that processes 2,400 rows in under 60 seconds.&quot;
-
-#### Gain Creators
-
-How your products and services *create* the customer&#x27;s gains. Each gain creator should reference a specific gain.
-
-Example gain: &quot;Slack alert when reconciliation completes.&quot;
-Gain creator: &quot;Real-time Slack notifications via webhook integration; one alert per completed run.&quot;
-
-## The Three Levels of Fit
-
-Osterwalder defines fit as a three-stage validation process. Each stage requires evidence; do not skip.
-
-### Level 1: Problem-Solution Fit
-
-**Question:** Have we designed value-creating products and services that customers want?
-
-**Test:** For each top-ranked job, pain, and gain in the Customer Profile, can you point to a specific pain reliever or gain creator that addresses it?
-
-**Evidence required:** Customer interviews (`discovery/customer-interview-script/` + `discovery/interview-synthesis/`) confirming the jobs, pains, and gains are real. Concept tests confirming the value proposition resonates.
-
-**Anti-pattern:** Designing pain relievers for pains that customers do not actually have. The Value Map mirrors the team&#x27;s assumptions, not the Customer Profile&#x27;s reality.
-
-### Level 2: Product-Market Fit
-
-**Question:** Have we found evidence that customers want our products and services and will pay for them?
-
-**Test:** Are customers using the product? Are they retaining? Are they referring? Is the cost of acquisition lower than the lifetime value?
-
-**Evidence required:** Behavioral data -- activation, retention, expansion, willingness-to-pay. The Sean Ellis test (40%+ would be &quot;very disappointed&quot; without the product) is one signal.
-
-**Anti-pattern:** Confusing problem-solution fit with product-market fit. Interviews can validate problem-solution; only behavior can validate product-market.
-
-### Level 3: Business Model Fit
-
-**Question:** Have we found a business model that is scalable and profitable?
-
-**Test:** Does the unit economics work? Can the channels scale? Are the costs structurally aligned with the revenue?
-
-**Evidence required:** Cohort LTV/CAC analysis, channel economics, gross margin trends. This level lives mostly in `finance/` skills -- the VPC informs it but does not validate it alone.
-
-## Canvas Template (Markdown Table Form)
-
-```markdown
-## Value Proposition Canvas: [Segment Name]
-
-### Customer Profile
-
-**Customer Jobs** (ranked by importance, 1 = most important)
-
-| # | Job | Type | Notes |
-|---|-----|------|-------|
-| 1 | [Job statement in customer language] | Functional/Social/Emotional | [context] |
-| 2 | [Job statement] | ... | ... |
-
-**Pains** (ranked by severity x frequency)
-
-| # | Pain | Severity (1-5) | Frequency (1-5) | Notes |
-|---|------|----------------|------------------|-------|
-| 1 | [Pain statement] | 5 | 5 | [evidence] |
-| 2 | [Pain statement] | 4 | 3 | ... |
-
-**Gains** (ranked by desirability)
-
-| # | Gain | Type | Notes |
-|---|------|------|-------|
-| 1 | [Gain statement] | Required/Expected/Desired/Unexpected | [...] |
-| 2 | [Gain statement] | ... | ... |
-
-### Value Map
-
-**Products &amp; Services**
-
-| # | Item | Type |
-|---|------|------|
-| 1 | [Feature, service, or offering] | Feature/Service/Tier |
-| 2 | [...] | ... |
-
-**Pain Relievers** (each maps to a Pain above)
-
-| # | Pain Reliever | Addresses Pain # | How |
-|---|---------------|-------------------|-----|
-| 1 | [How the product reduces or eliminates a pain] | 1 | [mechanism] |
-| 2 | [...] | 2 | ... |
-
-**Gain Creators** (each maps to a Gain above)
-
-| # | Gain Creator | Addresses Gain # | How |
-|---|--------------|-------------------|-----|
-| 1 | [How the product creates a gain] | 1 | [mechanism] |
-| 2 | [...] | 2 | ... |
-
-### Fit Validation
-
-| Top Job/Pain/Gain | Value Map Response | Evidence | Fit Status |
-|--------------------|---------------------|----------|------------|
-| Job #1 | [Pain reliever / gain creator] | [interview, behavior, sale] | Strong / Partial / None |
-| Pain #1 | [Pain reliever] | [evidence] | Strong / Partial / None |
-| Gain #1 | [Gain creator] | [evidence] | Strong / Partial / None |
-```
-
-## Worked Example: Finance Reconciliation SaaS
-
-### Customer Profile (Finance Lead at 100-500 person B2B SaaS)
-
-**Customer Jobs:**
-
-1. **Functional:** Close the books accurately within 5 days of month-end
-2. **Functional:** Reconcile payment processor (Stripe) to accounting (QuickBooks)
-3. **Social:** Look prepared in front of the CFO during month-end review
-4. **Emotional:** Avoid the dread of month-end close week
-
-**Pains:**
-
-1. Manual reconciliation takes 11 hours per close (severity 5, frequency 5)
-2. Mismatched rows produce audit findings the following quarter (severity 5, frequency 2)
-3. The current spreadsheet workaround breaks when transaction volume crosses 5,000/month (severity 4, frequency 3)
-4. Finance lead has no audit trail for matches made manually (severity 3, frequency 5)
-
-**Gains:**
-
-1. Close the books in &lt;2 days (Required)
-2. Audit trail for every match (Required)
-3. Automated re-run when source data updates (Desired)
-4. Slack alert when reconciliation completes (Unexpected -- delight)
-
-### Value Map
-
-**Products &amp; Services:**
-
-1. Rule-based matching engine
-2. Audit log
-3. QuickBooks + Stripe + Xero integrations
-4. Slack + email notifications
-5. Monthly &quot;Close Health&quot; report
-
-**Pain Relievers:**
-
-1. Matching engine processes 10K rows in 60 seconds -&gt; addresses Pain #1 (manual hours)
-2. Audit log captures every match with rule reference and timestamp -&gt; addresses Pain #2 (audit findings)
-3. Engine scales to 100K rows -&gt; addresses Pain #3 (spreadsheet break)
-4. Audit log is exportable to CSV/PDF -&gt; addresses Pain #4 (no audit trail)
-
-**Gain Creators:**
-
-1. End-to-end pipeline closes books in &lt;2 days -&gt; creates Gain #1
-2. Per-row audit log -&gt; creates Gain #2
-3. Webhook re-runs on source updates -&gt; creates Gain #3
-4. Slack integration with completion alerts -&gt; creates Gain #4 (delight)
-
-### Fit Validation
-
-| Customer Profile Item | Value Map Response | Evidence | Fit |
-|------------------------|---------------------|----------|-----|
-| Job: Close books in 5 days | &lt;2 day close pipeline | 12 interviews + 4 paying customers | Strong |
-| Pain: 11hr manual reconciliation | 60sec engine | 4 customers retained for 6+ months | Strong |
-| Pain: Audit findings | Audit log | 1 customer cited in renewal | Partial (need more cases) |
-| Gain: Slack alert | Slack integration | 2/4 customers use; 1 cited at renewal | Strong (delighter) |
-
-## Common Mistakes
-
-| Mistake | Why It Happens | Fix |
-|---------|---------------|-----|
-| Customer Profile written in the team&#x27;s language, not the customer&#x27;s | Internal jargon leaks in during workshops | Copy quotes verbatim from interview transcripts |
-| Pains and gains are restated job descriptions | Conflation of the three sections | Pains = what&#x27;s bad now; Gains = what would be good; Jobs = what they&#x27;re trying to do |
-| Value Map listed before Customer Profile | Solution-mode bias | Always finish the Customer Profile (and validate it) before writing the Value Map |
-| Every pain has a &quot;pain reliever&quot; -- forced 1:1 mapping | Team forces fit | Acknowledge that some pains are unaddressed; that is honest, not a failure |
-| Confusing problem-solution fit with product-market fit | Interview success treated as product success | Require behavioral evidence (usage, retention, payment) for product-market fit |
-| One canvas for &quot;all customers&quot; | Segment dilution | Build a separate canvas for each distinct segment; jobs and pains differ |
-| Gains list is aspirational, not customer-validated | Marketing language creeps in | Each gain must trace to a specific customer quote or behavior |
-
-## Workflow
-
-1. **Pick the segment.** Define one segment per canvas. If you have three segments, build three canvases.
-2. **Run interviews.** Use `discovery/customer-interview-script/` to collect 5-7 interviews per segment.
-3. **Fill the Customer Profile.** Use `discovery/interview-synthesis/` themes to populate jobs, pains, gains. Rank by importance/severity/desirability.
-4. **Draft the Value Map.** List products/services. For each top job, pain, gain in the Customer Profile, write the pain reliever or gain creator.
-5. **Run the fit-validation checklist.** Use `assets/fit_validation_checklist.md` to mark which fit signals are strong, partial, or absent.
-6. **Identify gaps.** Where pains or gains have no Value Map response, decide: add to roadmap, defer, or accept as out-of-scope.
-7. **Feed into PRD.** Use the canvas to populate `execution/create-prd/` Sections 5 (Market Segments) and 6 (Value Propositions).
-8. **Revisit quarterly.** Customer Profile shifts as the market matures; Value Map shifts as the product evolves.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Canvas feels generic and could describe any product | Insufficient interview evidence; team wrote it from imagination | Run 5+ customer interviews per segment; populate the Customer Profile from `discovery/interview-synthesis/` themes |
-| Pain relievers and gain creators are aspirational, not built | Team conflated roadmap with current state | Mark each Value Map item as &quot;Built / In progress / Roadmap&quot;; the canvas reflects current state by default |
-| One canvas tries to cover multiple segments and feels muddled | Segment definition too broad | Split into one canvas per distinct segment (by job, not demographics) |
-| Customer retention low despite strong canvas | Confused problem-solution fit with product-market fit | Require behavioral evidence (cohort retention) for product-market fit, not just interview validation |
-| Sales team cannot remember the value proposition | Canvas not translated into sales-ready language | Use the canvas to write a 2-sentence elevator pitch and a 5-bullet talk track |
-| Pains and gains are restated job descriptions | Sections collapsed during workshop | Re-do as three separate exercises: jobs first, then pains, then gains -- with a 5-minute break between |
-| Canvas reviewed once and never updated | Treated as a one-shot artifact | Schedule quarterly canvas review; flag drift as input changes (new segment, new competitor, new product line) |
-
-## Success Criteria
-
-- Each canvas covers exactly one segment (no &quot;all customers&quot; canvases)
-- Customer Profile populated from &gt;=5 customer interviews per segment
-- Jobs, pains, and gains use verbatim customer language (not internal jargon)
-- Every pain reliever and gain creator references a specific pain/gain by number
-- Fit validation checklist completed with evidence column filled
-- Top 3 unaddressed pains/gains explicitly listed (either accepted as out-of-scope or added to roadmap)
-- Canvas reviewed quarterly with diffs documented
+- `references/canvas-construction-playbook.md` -- read this when building a canvas end-to-end: both sides in detail, the three levels of fit, the markdown canvas template, a full worked example (Finance Reconciliation SaaS), common mistakes, workflow, troubleshooting, and success criteria.
+- `references/value-proposition-design-guide.md` -- read this for the deep Strategyzer methodology with additional worked examples.
+- `references/red-flags.md` -- read this when reviewing a completed canvas for anti-patterns (team-language, forced fit, fit-level confusion) before relying on it.
+- `assets/vpc_template.md` -- markdown canvas template.
+- `assets/customer_profile_worksheet.md` -- jobs/pains/gains capture worksheet.
+- `assets/value_map_worksheet.md` -- products/pain-relievers/gain-creators capture worksheet.
+- `assets/fit_validation_checklist.md` -- three-level fit validation checklist.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Customer Profile (jobs, pains, gains) construction and ranking
-- Value Map (products/services, pain relievers, gain creators) construction
-- Problem-solution fit validation
-- Mapping the canvas into PRD inputs (Sections 5 and 6 of `execution/create-prd/`)
-- Sales enablement translation (talk tracks from pain relievers and gain creators)
+**In scope:** Customer Profile (jobs, pains, gains) construction and ranking; Value Map construction; problem-solution fit validation; mapping the canvas into PRD inputs (`execution/create-prd/` Sections 5 and 6); sales-enablement translation.
 
-**Out of Scope:**
-- Business Model Canvas (sister tool; covers 9 blocks vs. VPC&#x27;s 2)
-- Unit economics and business model fit (see `finance/` skills)
-- Detailed financial modeling, LTV/CAC analysis
-- Persona generation -- the VPC is segment-level, not persona-level
-- Competitive positioning (see `marketing/` or `c-level-advisor/competitive-strategy/`)
+**Out of scope:** Business Model Canvas (sister tool, 9 blocks); unit economics and business-model fit (`finance/` skills); detailed financial modeling, LTV/CAC; persona generation (the VPC is segment-level); competitive positioning (`marketing/` or `c-level-advisor/competitive-strategy/`).
 
-**Important Caveats:**
-- The VPC is a thinking aid, not a roadmap. Solutions still need experimentation (`discovery/brainstorm-experiments/`).
-- Problem-solution fit is the *minimum* bar -- it is necessary but not sufficient for product-market fit.
-- The Strategyzer methodology is licensed under Creative Commons (CC-BY-SA). Attribution to Strategyzer / Osterwalder is appropriate when sharing externally.
-- A canvas is only as good as the evidence behind it. A beautifully filled canvas with no customer interviews is fiction.
+**Caveats:** the VPC is a thinking aid, not a roadmap -- solutions still need experimentation (`discovery/brainstorm-experiments/`). Problem-solution fit is the minimum bar, necessary but not sufficient for product-market fit. Strategyzer methodology is CC-BY-SA; attribute to Strategyzer / Osterwalder when sharing externally. A beautifully filled canvas with no customer interviews is fiction.
 
 ## Integration Points
 
@@ -782,17 +521,9 @@ Osterwalder defines fit as a three-stage validation process. Each stage requires
 | `discovery/jtbd-workshop/` | Complementary | JTBD workshop produces the job hierarchy; VPC adds pains and gains |
 | `discovery/identify-assumptions/` | Bidirectional | Unaddressed pains become risk assumptions; assumptions inform validation focus |
 | `execution/create-prd/` | Feeds into | Canvas populates PRD Section 5 (Market Segments) and Section 6 (Value Propositions) |
-| `execution/product-vision/` | Bidirectional | Product Vision defines the long-term promise; VPC validates the current-day delivery |
-| `execution/prioritization-frameworks/` | Feeds into | Unaddressed top pains and gains become candidate features for prioritization |
+| `execution/product-vision/` | Bidirectional | Vision defines the long-term promise; VPC validates current-day delivery |
+| `execution/prioritization-frameworks/` | Feeds into | Unaddressed top pains and gains become candidate features |
 | `marketing/` | Feeds into | Pain relievers and gain creators become marketing talking points and proof points |
-
-## References
-
-- `references/value-proposition-design-guide.md` -- Full Strategyzer methodology with worked examples
-- `assets/vpc_template.md` -- Markdown canvas template
-- `assets/customer_profile_worksheet.md` -- Jobs/Pains/Gains capture worksheet
-- `assets/value_map_worksheet.md` -- Products/Pain-Relievers/Gain-Creators capture worksheet
-- `assets/fit_validation_checklist.md` -- Three-level fit validation checklist
 
 ---
 
@@ -820,7 +551,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Value Proposition Canvas&quot;**
-   - Description: &quot;Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.&quot;
+   - Description: &quot;Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -849,297 +580,58 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The Value Proposition Canvas (VPC) is the canonical Strategyzer tool for designing and testing the fit between what customers care about and what your product offers. It is the &quot;zoom-in&quot; companion to the Business Model Canvas, focused on the two most failure-prone blocks: Customer Segments and Value Propositions. Where the Business Model Canvas asks &quot;is this a viable business?&quot;, the VPC asks &quot;are we building something customers actually want?&quot;
 
-The canvas has two sides. The **Customer Profile** describes the customer&#x27;s world in their language -- jobs they are trying to do, pains they experience, and gains they aspire to. The **Value Map** describes the product&#x27;s response -- the products and services offered, the pain relievers they include, and the gain creators they enable. Fit is achieved when the Value Map mirrors the Customer Profile element-by-element.
+The canvas has two sides. The **Customer Profile** describes the customer&#x27;s world in their language -- jobs they are trying to do, pains they experience, and gains they aspire to. The **Value Map** describes the product&#x27;s response -- the products and services offered, the pain relievers they include, and the gain creators they enable. Fit is achieved when the Value Map mirrors the Customer Profile element-by-element. The method follows Alexander Osterwalder and Yves Pigneur&#x27;s *Value Proposition Design* (2014).
 
-This skill walks through both sides of the canvas, defines the three levels of fit (problem-solution, product-market, business model), and provides validation checklists drawn directly from Alexander Osterwalder and Yves Pigneur&#x27;s *Value Proposition Design* (2014).
+## Core Capabilities
 
-### When to Use
+- **Customer Profile construction** -- jobs (functional/social/emotional), pains, and gains, each ranked (importance, severity x frequency, desirability).
+- **Value Map construction** -- products &amp; services, pain relievers, and gain creators, each mapped to a specific profile element.
+- **Three-level fit validation** -- problem-solution fit (interviews), product-market fit (behavior), business-model fit (unit economics).
+- **Artifacts** -- markdown canvas template, worked example, and a fit-validation checklist that flags strong/partial/absent fit.
 
-- **Pre-PRD framing** -- Before writing requirements, validate that the value proposition is real and the customer profile is well-understood.
-- **Solution refinement** -- You have a working product but unclear traction; use the VPC to diagnose whether the issue is the Customer Profile (wrong segment) or the Value Map (right segment, wrong response).
-- **New segment expansion** -- Entering a new customer segment with an existing product; build a separate VPC for each segment to test fit.
-- **Pricing and packaging decisions** -- Pains and gains rank-ordering informs which features go in which tier.
-- **Sales enablement** -- Pain relievers and gain creators become the talking points and proof points for the sales team.
+## When to Use
 
-## The Two Sides of the Canvas
+- **Pre-PRD framing** -- validate the value proposition and customer profile before writing requirements.
+- **Solution refinement** -- diagnose whether weak traction is a wrong-segment (Customer Profile) or wrong-response (Value Map) problem.
+- **New segment expansion** -- build a separate VPC per segment to test fit.
+- **Pricing and packaging** -- pains/gains rank-ordering informs which features go in which tier.
+- **Sales enablement** -- pain relievers and gain creators become talking points and proof points.
 
-### Side 1: Customer Profile (the circle)
+## Clarify First
 
-The Customer Profile describes the customer&#x27;s world. It has three sections.
+Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-#### Jobs (Customer Jobs)
+- [ ] **The one segment** — the VPC is segment-level; one canvas per segment (defines whose Customer Profile you fill)
+- [ ] **Customer evidence source** — interviews/synthesis vs team assumptions (jobs/pains/gains in the team&#x27;s own words is the #1 way the canvas becomes fiction)
+- [ ] **Which fit level** — problem-solution / product-market / business-model (sets the validation method: interviews vs behavior vs unit economics)
 
-What is the customer trying to get done? Three flavors:
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-- **Functional jobs** -- A task to be completed. &quot;Reconcile Stripe payments to QuickBooks invoices.&quot;
-- **Social jobs** -- How the customer wants to be perceived. &quot;Look competent in front of the finance director.&quot;
-- **Emotional jobs** -- How the customer wants to feel. &quot;Avoid the dread of month-end close.&quot;
+## Quick Start
 
-Jobs are written from the customer&#x27;s perspective, in their language. They are not features (&quot;automated reconciliation tool&quot;) -- they are outcomes (&quot;close the books in 2 days without errors&quot;).
+1. Pick one segment; run 5-7 interviews via `discovery/customer-interview-script/`.
+2. Fill the Customer Profile (jobs/pains/gains, ranked) from `discovery/interview-synthesis/` themes; then draft the Value Map so each top item has a pain reliever or gain creator.
+3. Run `assets/fit_validation_checklist.md`, list the top unaddressed pains/gains, and feed the canvas into `execution/create-prd/` Sections 5-6.
 
-**Job ranking:** Order jobs by *importance* to the customer. An unimportant job that is perfectly done has zero traction.
+See `references/canvas-construction-playbook.md` for the full two-side method, three fit levels, template, worked example, and troubleshooting.
 
-#### Pains
+## References
 
-Bad outcomes, risks, and obstacles related to the jobs. Three flavors:
-
-- **Undesired outcomes** -- &quot;The reconciliation report has wrong numbers&quot;
-- **Obstacles** -- &quot;I can&#x27;t get the data out of the source system&quot;
-- **Risks** -- &quot;If I close the books wrong, the auditor will catch it&quot;
-
-Pains are described concretely. &quot;Reconciliation is hard&quot; is weak. &quot;Reconciliation takes 11 hours per close because I have to manually match 2,400 rows&quot; is strong.
-
-**Pain ranking:** Order pains by *severity* (how bad it is when it happens) and *frequency* (how often it happens). High-severity high-frequency pains are the priority.
-
-#### Gains
-
-Outcomes and benefits the customer wants. Four flavors:
-
-- **Required gains** -- Without these, the solution does not work (&quot;the report has to be accurate&quot;)
-- **Expected gains** -- Customers assume these exist (&quot;the data is encrypted in transit&quot;)
-- **Desired gains** -- Customers explicitly want these (&quot;the report exports to PDF for the auditor&quot;)
-- **Unexpected gains** -- Things customers do not yet know to ask for, but love when delivered (&quot;a Slack alert when reconciliation completes&quot;)
-
-**Gain ranking:** Order gains by *desirability* and *relevance to the job*. Unexpected gains drive delight; required gains drive table stakes.
-
-### Side 2: Value Map (the square)
-
-The Value Map describes the product&#x27;s response to the Customer Profile.
-
-#### Products &amp; Services
-
-The bundle of things you offer. This is the *what*. Concrete listing -- a feature, a service, a subscription tier, an integration.
-
-#### Pain Relievers
-
-How your products and services *eliminate or reduce* the customer&#x27;s pains. Each pain reliever should reference a specific pain from the Customer Profile.
-
-Example pain: &quot;Reconciliation takes 11 hours per close.&quot;
-Pain reliever: &quot;Automated rule-based matching that processes 2,400 rows in under 60 seconds.&quot;
-
-#### Gain Creators
-
-How your products and services *create* the customer&#x27;s gains. Each gain creator should reference a specific gain.
-
-Example gain: &quot;Slack alert when reconciliation completes.&quot;
-Gain creator: &quot;Real-time Slack notifications via webhook integration; one alert per completed run.&quot;
-
-## The Three Levels of Fit
-
-Osterwalder defines fit as a three-stage validation process. Each stage requires evidence; do not skip.
-
-### Level 1: Problem-Solution Fit
-
-**Question:** Have we designed value-creating products and services that customers want?
-
-**Test:** For each top-ranked job, pain, and gain in the Customer Profile, can you point to a specific pain reliever or gain creator that addresses it?
-
-**Evidence required:** Customer interviews (`discovery/customer-interview-script/` + `discovery/interview-synthesis/`) confirming the jobs, pains, and gains are real. Concept tests confirming the value proposition resonates.
-
-**Anti-pattern:** Designing pain relievers for pains that customers do not actually have. The Value Map mirrors the team&#x27;s assumptions, not the Customer Profile&#x27;s reality.
-
-### Level 2: Product-Market Fit
-
-**Question:** Have we found evidence that customers want our products and services and will pay for them?
-
-**Test:** Are customers using the product? Are they retaining? Are they referring? Is the cost of acquisition lower than the lifetime value?
-
-**Evidence required:** Behavioral data -- activation, retention, expansion, willingness-to-pay. The Sean Ellis test (40%+ would be &quot;very disappointed&quot; without the product) is one signal.
-
-**Anti-pattern:** Confusing problem-solution fit with product-market fit. Interviews can validate problem-solution; only behavior can validate product-market.
-
-### Level 3: Business Model Fit
-
-**Question:** Have we found a business model that is scalable and profitable?
-
-**Test:** Does the unit economics work? Can the channels scale? Are the costs structurally aligned with the revenue?
-
-**Evidence required:** Cohort LTV/CAC analysis, channel economics, gross margin trends. This level lives mostly in `finance/` skills -- the VPC informs it but does not validate it alone.
-
-## Canvas Template (Markdown Table Form)
-
-```markdown
-## Value Proposition Canvas: [Segment Name]
-
-### Customer Profile
-
-**Customer Jobs** (ranked by importance, 1 = most important)
-
-| # | Job | Type | Notes |
-|---|-----|------|-------|
-| 1 | [Job statement in customer language] | Functional/Social/Emotional | [context] |
-| 2 | [Job statement] | ... | ... |
-
-**Pains** (ranked by severity x frequency)
-
-| # | Pain | Severity (1-5) | Frequency (1-5) | Notes |
-|---|------|----------------|------------------|-------|
-| 1 | [Pain statement] | 5 | 5 | [evidence] |
-| 2 | [Pain statement] | 4 | 3 | ... |
-
-**Gains** (ranked by desirability)
-
-| # | Gain | Type | Notes |
-|---|------|------|-------|
-| 1 | [Gain statement] | Required/Expected/Desired/Unexpected | [...] |
-| 2 | [Gain statement] | ... | ... |
-
-### Value Map
-
-**Products &amp; Services**
-
-| # | Item | Type |
-|---|------|------|
-| 1 | [Feature, service, or offering] | Feature/Service/Tier |
-| 2 | [...] | ... |
-
-**Pain Relievers** (each maps to a Pain above)
-
-| # | Pain Reliever | Addresses Pain # | How |
-|---|---------------|-------------------|-----|
-| 1 | [How the product reduces or eliminates a pain] | 1 | [mechanism] |
-| 2 | [...] | 2 | ... |
-
-**Gain Creators** (each maps to a Gain above)
-
-| # | Gain Creator | Addresses Gain # | How |
-|---|--------------|-------------------|-----|
-| 1 | [How the product creates a gain] | 1 | [mechanism] |
-| 2 | [...] | 2 | ... |
-
-### Fit Validation
-
-| Top Job/Pain/Gain | Value Map Response | Evidence | Fit Status |
-|--------------------|---------------------|----------|------------|
-| Job #1 | [Pain reliever / gain creator] | [interview, behavior, sale] | Strong / Partial / None |
-| Pain #1 | [Pain reliever] | [evidence] | Strong / Partial / None |
-| Gain #1 | [Gain creator] | [evidence] | Strong / Partial / None |
-```
-
-## Worked Example: Finance Reconciliation SaaS
-
-### Customer Profile (Finance Lead at 100-500 person B2B SaaS)
-
-**Customer Jobs:**
-
-1. **Functional:** Close the books accurately within 5 days of month-end
-2. **Functional:** Reconcile payment processor (Stripe) to accounting (QuickBooks)
-3. **Social:** Look prepared in front of the CFO during month-end review
-4. **Emotional:** Avoid the dread of month-end close week
-
-**Pains:**
-
-1. Manual reconciliation takes 11 hours per close (severity 5, frequency 5)
-2. Mismatched rows produce audit findings the following quarter (severity 5, frequency 2)
-3. The current spreadsheet workaround breaks when transaction volume crosses 5,000/month (severity 4, frequency 3)
-4. Finance lead has no audit trail for matches made manually (severity 3, frequency 5)
-
-**Gains:**
-
-1. Close the books in &lt;2 days (Required)
-2. Audit trail for every match (Required)
-3. Automated re-run when source data updates (Desired)
-4. Slack alert when reconciliation completes (Unexpected -- delight)
-
-### Value Map
-
-**Products &amp; Services:**
-
-1. Rule-based matching engine
-2. Audit log
-3. QuickBooks + Stripe + Xero integrations
-4. Slack + email notifications
-5. Monthly &quot;Close Health&quot; report
-
-**Pain Relievers:**
-
-1. Matching engine processes 10K rows in 60 seconds -&gt; addresses Pain #1 (manual hours)
-2. Audit log captures every match with rule reference and timestamp -&gt; addresses Pain #2 (audit findings)
-3. Engine scales to 100K rows -&gt; addresses Pain #3 (spreadsheet break)
-4. Audit log is exportable to CSV/PDF -&gt; addresses Pain #4 (no audit trail)
-
-**Gain Creators:**
-
-1. End-to-end pipeline closes books in &lt;2 days -&gt; creates Gain #1
-2. Per-row audit log -&gt; creates Gain #2
-3. Webhook re-runs on source updates -&gt; creates Gain #3
-4. Slack integration with completion alerts -&gt; creates Gain #4 (delight)
-
-### Fit Validation
-
-| Customer Profile Item | Value Map Response | Evidence | Fit |
-|------------------------|---------------------|----------|-----|
-| Job: Close books in 5 days | &lt;2 day close pipeline | 12 interviews + 4 paying customers | Strong |
-| Pain: 11hr manual reconciliation | 60sec engine | 4 customers retained for 6+ months | Strong |
-| Pain: Audit findings | Audit log | 1 customer cited in renewal | Partial (need more cases) |
-| Gain: Slack alert | Slack integration | 2/4 customers use; 1 cited at renewal | Strong (delighter) |
-
-## Common Mistakes
-
-| Mistake | Why It Happens | Fix |
-|---------|---------------|-----|
-| Customer Profile written in the team&#x27;s language, not the customer&#x27;s | Internal jargon leaks in during workshops | Copy quotes verbatim from interview transcripts |
-| Pains and gains are restated job descriptions | Conflation of the three sections | Pains = what&#x27;s bad now; Gains = what would be good; Jobs = what they&#x27;re trying to do |
-| Value Map listed before Customer Profile | Solution-mode bias | Always finish the Customer Profile (and validate it) before writing the Value Map |
-| Every pain has a &quot;pain reliever&quot; -- forced 1:1 mapping | Team forces fit | Acknowledge that some pains are unaddressed; that is honest, not a failure |
-| Confusing problem-solution fit with product-market fit | Interview success treated as product success | Require behavioral evidence (usage, retention, payment) for product-market fit |
-| One canvas for &quot;all customers&quot; | Segment dilution | Build a separate canvas for each distinct segment; jobs and pains differ |
-| Gains list is aspirational, not customer-validated | Marketing language creeps in | Each gain must trace to a specific customer quote or behavior |
-
-## Workflow
-
-1. **Pick the segment.** Define one segment per canvas. If you have three segments, build three canvases.
-2. **Run interviews.** Use `discovery/customer-interview-script/` to collect 5-7 interviews per segment.
-3. **Fill the Customer Profile.** Use `discovery/interview-synthesis/` themes to populate jobs, pains, gains. Rank by importance/severity/desirability.
-4. **Draft the Value Map.** List products/services. For each top job, pain, gain in the Customer Profile, write the pain reliever or gain creator.
-5. **Run the fit-validation checklist.** Use `assets/fit_validation_checklist.md` to mark which fit signals are strong, partial, or absent.
-6. **Identify gaps.** Where pains or gains have no Value Map response, decide: add to roadmap, defer, or accept as out-of-scope.
-7. **Feed into PRD.** Use the canvas to populate `execution/create-prd/` Sections 5 (Market Segments) and 6 (Value Propositions).
-8. **Revisit quarterly.** Customer Profile shifts as the market matures; Value Map shifts as the product evolves.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Canvas feels generic and could describe any product | Insufficient interview evidence; team wrote it from imagination | Run 5+ customer interviews per segment; populate the Customer Profile from `discovery/interview-synthesis/` themes |
-| Pain relievers and gain creators are aspirational, not built | Team conflated roadmap with current state | Mark each Value Map item as &quot;Built / In progress / Roadmap&quot;; the canvas reflects current state by default |
-| One canvas tries to cover multiple segments and feels muddled | Segment definition too broad | Split into one canvas per distinct segment (by job, not demographics) |
-| Customer retention low despite strong canvas | Confused problem-solution fit with product-market fit | Require behavioral evidence (cohort retention) for product-market fit, not just interview validation |
-| Sales team cannot remember the value proposition | Canvas not translated into sales-ready language | Use the canvas to write a 2-sentence elevator pitch and a 5-bullet talk track |
-| Pains and gains are restated job descriptions | Sections collapsed during workshop | Re-do as three separate exercises: jobs first, then pains, then gains -- with a 5-minute break between |
-| Canvas reviewed once and never updated | Treated as a one-shot artifact | Schedule quarterly canvas review; flag drift as input changes (new segment, new competitor, new product line) |
-
-## Success Criteria
-
-- Each canvas covers exactly one segment (no &quot;all customers&quot; canvases)
-- Customer Profile populated from &gt;=5 customer interviews per segment
-- Jobs, pains, and gains use verbatim customer language (not internal jargon)
-- Every pain reliever and gain creator references a specific pain/gain by number
-- Fit validation checklist completed with evidence column filled
-- Top 3 unaddressed pains/gains explicitly listed (either accepted as out-of-scope or added to roadmap)
-- Canvas reviewed quarterly with diffs documented
+- `references/canvas-construction-playbook.md` -- read this when building a canvas end-to-end: both sides in detail, the three levels of fit, the markdown canvas template, a full worked example (Finance Reconciliation SaaS), common mistakes, workflow, troubleshooting, and success criteria.
+- `references/value-proposition-design-guide.md` -- read this for the deep Strategyzer methodology with additional worked examples.
+- `references/red-flags.md` -- read this when reviewing a completed canvas for anti-patterns (team-language, forced fit, fit-level confusion) before relying on it.
+- `assets/vpc_template.md` -- markdown canvas template.
+- `assets/customer_profile_worksheet.md` -- jobs/pains/gains capture worksheet.
+- `assets/value_map_worksheet.md` -- products/pain-relievers/gain-creators capture worksheet.
+- `assets/fit_validation_checklist.md` -- three-level fit validation checklist.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Customer Profile (jobs, pains, gains) construction and ranking
-- Value Map (products/services, pain relievers, gain creators) construction
-- Problem-solution fit validation
-- Mapping the canvas into PRD inputs (Sections 5 and 6 of `execution/create-prd/`)
-- Sales enablement translation (talk tracks from pain relievers and gain creators)
+**In scope:** Customer Profile (jobs, pains, gains) construction and ranking; Value Map construction; problem-solution fit validation; mapping the canvas into PRD inputs (`execution/create-prd/` Sections 5 and 6); sales-enablement translation.
 
-**Out of Scope:**
-- Business Model Canvas (sister tool; covers 9 blocks vs. VPC&#x27;s 2)
-- Unit economics and business model fit (see `finance/` skills)
-- Detailed financial modeling, LTV/CAC analysis
-- Persona generation -- the VPC is segment-level, not persona-level
-- Competitive positioning (see `marketing/` or `c-level-advisor/competitive-strategy/`)
+**Out of scope:** Business Model Canvas (sister tool, 9 blocks); unit economics and business-model fit (`finance/` skills); detailed financial modeling, LTV/CAC; persona generation (the VPC is segment-level); competitive positioning (`marketing/` or `c-level-advisor/competitive-strategy/`).
 
-**Important Caveats:**
-- The VPC is a thinking aid, not a roadmap. Solutions still need experimentation (`discovery/brainstorm-experiments/`).
-- Problem-solution fit is the *minimum* bar -- it is necessary but not sufficient for product-market fit.
-- The Strategyzer methodology is licensed under Creative Commons (CC-BY-SA). Attribution to Strategyzer / Osterwalder is appropriate when sharing externally.
-- A canvas is only as good as the evidence behind it. A beautifully filled canvas with no customer interviews is fiction.
+**Caveats:** the VPC is a thinking aid, not a roadmap -- solutions still need experimentation (`discovery/brainstorm-experiments/`). Problem-solution fit is the minimum bar, necessary but not sufficient for product-market fit. Strategyzer methodology is CC-BY-SA; attribute to Strategyzer / Osterwalder when sharing externally. A beautifully filled canvas with no customer interviews is fiction.
 
 ## Integration Points
 
@@ -1150,17 +642,9 @@ Osterwalder defines fit as a three-stage validation process. Each stage requires
 | `discovery/jtbd-workshop/` | Complementary | JTBD workshop produces the job hierarchy; VPC adds pains and gains |
 | `discovery/identify-assumptions/` | Bidirectional | Unaddressed pains become risk assumptions; assumptions inform validation focus |
 | `execution/create-prd/` | Feeds into | Canvas populates PRD Section 5 (Market Segments) and Section 6 (Value Propositions) |
-| `execution/product-vision/` | Bidirectional | Product Vision defines the long-term promise; VPC validates the current-day delivery |
-| `execution/prioritization-frameworks/` | Feeds into | Unaddressed top pains and gains become candidate features for prioritization |
+| `execution/product-vision/` | Bidirectional | Vision defines the long-term promise; VPC validates current-day delivery |
+| `execution/prioritization-frameworks/` | Feeds into | Unaddressed top pains and gains become candidate features |
 | `marketing/` | Feeds into | Pain relievers and gain creators become marketing talking points and proof points |
-
-## References
-
-- `references/value-proposition-design-guide.md` -- Full Strategyzer methodology with worked examples
-- `assets/vpc_template.md` -- Markdown canvas template
-- `assets/customer_profile_worksheet.md` -- Jobs/Pains/Gains capture worksheet
-- `assets/value_map_worksheet.md` -- Products/Pain-Relievers/Gain-Creators capture worksheet
-- `assets/fit_validation_checklist.md` -- Three-level fit validation checklist
 
 ---
 
@@ -1188,7 +672,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Value Proposition Canvas&quot;**
-   - Description: &quot;Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution and product-market dimensions.&quot;
+   - Description: &quot;Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1246,8 +730,12 @@ cp -r Claude-Skills/project-management/discovery/value-proposition-canvas your-p
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/discovery/value-proposition-canvas</code></pre>
 </div>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2>1. Pick one segment; run 5-7 interviews via `discovery/customer-interview-script/`.
+2. Fill the Customer Profile (jobs/pains/gains, ranked) from `discovery/interview-synthesis/` themes; then draft the Value Map so each top item has a pain reliever or gain creator.
+3. Run `assets/fit_validation_checklist.md`, list the top unaddressed pains/gains, and feed the canvas into `execution/create-prd/` Sections 5-6.
+
+See `references/canvas-construction-playbook.md` for the full two-side method, three fit levels, template, worked example, and troubleshooting.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/value-proposition-canvas/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

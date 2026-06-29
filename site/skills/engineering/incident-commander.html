@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Incident Commander - Claude Skills</title>
-  <meta name="description" content="Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,">
+  <meta name="description" content="Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/incident-commander.html">
   <meta property="og:title" content="Incident Commander - Claude Skills">
-  <meta property="og:description" content="Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,">
+  <meta property="og:description" content="Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/incident-commander.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Incident Commander", "description": "Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/incident-commander.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Incident Commander", "description": "Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/incident-commander.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Incident Commander</h1>
-    <p class="page-subtitle">Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Incident Response</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 6 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 6 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">incident-response</span><span class="tag">severity-classification</span><span class="tag">rca</span><span class="tag">postmortem</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,16 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Incident Commander (Engineering domain).
 
-Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...
+Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.
 
-The agent classifies incident severity, reconstructs timelines from heterogeneous event sources, and generates structured post-incident reviews with root cause analysis and action items. ```bash echo &#x27;{&quot;description&quot;: &quot;Database connections timing out&quot;, &quot;affected_users&quot;: &quot;80%&quot;, &quot;business_impact&quot;: &quot;hig
-
-## Frameworks &amp; Templates You Know
-- - Sends initial notification using generated template
-- **Decision framework for SEV-1/SEV-2:**
-- The agent generates three communication templates per severity:
-- | Incident Response Framework | `references/incident-response-framework.md` |
-- | Communication Templates | `references/communication_templates.md` |
+Classify incident severity, reconstruct timelines from heterogeneous event sources, and generate structured post-incident reviews with root cause analysis and action items. Codifies PagerDuty, Google SRE, and Atlassian incident-management practices into severity scoring, escalation matrices, communi
 
 ## How to Help
 When the user asks for help in this domain:
@@ -422,16 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Incident Commander (Engineering domain).
 
-Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...
+Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.
 
-The agent classifies incident severity, reconstructs timelines from heterogeneous event sources, and generates structured post-incident reviews with root cause analysis and action items. ```bash echo &#x27;{&quot;description&quot;: &quot;Database connections timing out&quot;, &quot;affected_users&quot;: &quot;80%&quot;, &quot;business_impact&quot;: &quot;hig
-
-## Frameworks &amp; Templates You Know
-- - Sends initial notification using generated template
-- **Decision framework for SEV-1/SEV-2:**
-- The agent generates three communication templates per severity:
-- | Incident Response Framework | `references/incident-response-framework.md` |
-- | Communication Templates | `references/communication_templates.md` |
+Classify incident severity, reconstruct timelines from heterogeneous event sources, and generate structured post-incident reviews with root cause analysis and action items. Codifies PagerDuty, Google SRE, and Atlassian incident-management practices into severity scoring, escalation matrices, communi
 
 ## How to Help
 When the user asks for help in this domain:
@@ -461,206 +447,61 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Incident Commander
 
-The agent classifies incident severity, reconstructs timelines from heterogeneous event sources, and generates structured post-incident reviews with root cause analysis and action items.
+Classify incident severity, reconstruct timelines from heterogeneous event sources, and generate structured post-incident reviews with root cause analysis and action items. Codifies PagerDuty, Google SRE, and Atlassian incident-management practices into severity scoring, escalation matrices, communication templates, RCA frameworks, and SLA/error-budget tracking.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Severity classification** — multi-dimensional scoring (revenue, user scope, data/security risk, service criticality, blast radius) into SEV-1 to SEV-4 with confidence and escalation paths.
+- **Timeline reconstruction** — chronological timelines from logs, alerts, Slack, and deploy events with phase detection and gap analysis.
+- **Post-incident review** — PIRs with 5 Whys, Fishbone, Timeline, or Bow Tie RCA plus categorized action items (owner, priority, deadline).
+- **Postmortem quality** — coverage-gap detection, action-item quality scoring, MTTD/MTTR benchmarking.
+- **Communication &amp; escalation** — severity-specific internal/executive/customer/status-page templates; technical (L1-L4) and business escalation matrices with time-based triggers.
+- **SLA / error-budget tracking** — SLI/SLO/SLA hierarchy, error budgets, burn-rate alerting, and breach handling.
 
-```bash
-# Classify an incident (JSON or stdin)
-echo &#x27;{&quot;description&quot;: &quot;Database connections timing out&quot;, &quot;affected_users&quot;: &quot;80%&quot;, &quot;business_impact&quot;: &quot;high&quot;}&#x27; \
-  | python scripts/incident_classifier.py --format text
+## When to Use
 
-# Multi-dimensional severity scoring
-python scripts/severity_classifier.py incident.json --format markdown
+- Handling an active incident — classify severity, establish command, mitigate, communicate.
+- Running a post-incident review — reconstruct timeline, perform RCA, assign action items.
+- Managing escalation — apply technical and business escalation paths by severity and elapsed time.
+- Building or auditing response playbooks, comms templates, or SLA/error-budget policy.
 
-# Reconstruct timeline with phase detection and gap analysis
-python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown
+## Clarify First
 
-# Build structured timeline with MTTD/MTTR metrics
-python scripts/incident_timeline_builder.py incident_data.json --format markdown
+Before producing the artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-# Generate Post-Incident Review
-python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items --format markdown
+- [ ] **Task &amp; deliverable** — classify severity, reconstruct a timeline, or generate a PIR/postmortem (selects `severity_classifier.py` vs `timeline_reconstructor.py` vs `pir_generator.py`/`postmortem_generator.py`)
+- [ ] **Incident input data** — the incident/events JSON with severity dimensions (revenue, user scope, data/security risk, blast radius) (the input the scripts parse)
+- [ ] **RCA method** — 5 Whys, Fishbone, Timeline, or Bow Tie (sets `pir_generator.py --rca-method` and the postmortem structure)
 
-# Generate postmortem with benchmark comparisons
-python scripts/postmortem_generator.py incident_data.json --format markdown
-```
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Tools Overview
+## Tools
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `incident_classifier.py` | Incident description JSON | Severity level, response teams, communication templates |
-| `severity_classifier.py` | Incident data with impact/signals | Multi-dimensional score across 5 weighted dimensions |
-| `timeline_reconstructor.py` | Timestamped events array | Chronological timeline with phases and gap analysis |
-| `incident_timeline_builder.py` | Incident + events JSON | Timeline with MTTD/MTTR, phase distribution, comms templates |
-| `pir_generator.py` | Incident data + optional timeline | PIR document with RCA (5 Whys, Fishbone, Timeline, Bow Tie) |
-| `postmortem_generator.py` | Incident + resolution + action items | Postmortem with benchmarks, factor analysis, coverage gaps |
-
----
-
-## Workflow 1: Incident Response (Detection to Resolution)
-
-**Step 1 -- Classify severity.**
-
-```bash
-python scripts/severity_classifier.py incident.json --format json
-```
-
-The agent scores across five dimensions: revenue impact (25%), user scope (25%), data/security risk (20%), service criticality (15%), blast radius (15%).
-
-| Severity | Definition | Response Time | Comms Cadence |
-|----------|-----------|---------------|---------------|
-| **SEV-1** | Complete outage, data loss, security breach | 15 min | Every 15 min |
-| **SEV-2** | Partial degradation, &gt;25% users affected | 30 min | Every 30 min |
-| **SEV-3** | Single feature affected, workaround available | 2 hours | At milestones |
-| **SEV-4** | Cosmetic, dev/test only, no user impact | Next business day | Standard cycle |
-
-**Validation checkpoint:** Severity classification includes confidence score and recommended escalation path.
-
-**Step 2 -- Establish command.**
-
-The Incident Commander:
-- Assigns within 5 min (SEV-1) or 30 min (SEV-2)
-- Creates war room and incident tracking ticket
-- Sends initial notification using generated template
-- Coordinates between technical teams and stakeholders
-- Shields responders from external distractions
-
-**Step 3 -- Investigate and mitigate.**
-
-The agent generates targeted investigation commands based on the affected service:
-
-```bash
-kubectl get pods -n production -l app=&lt;service&gt;
-kubectl logs -l app=&lt;service&gt; --tail=100
-helm history &lt;service&gt; -n production
-```
-
-**Decision framework for SEV-1/SEV-2:**
-- Bias toward action over analysis
-- Prefer rollbacks to risky fixes under pressure
-- Document every decision for later review
-- Consult SMEs but do not block on them
-
-**Step 4 -- Communicate.**
-
-The agent generates three communication templates per severity:
-1. **Internal notification** -- technical details, response team, war room link
-2. **Executive summary** -- business impact, ETA, leadership actions required
-3. **Customer communication** -- impact scope, what is being done, next update time
-
-**Validation checkpoint:** All stakeholders notified within committed timeframes.
-
----
-
-## Workflow 2: Post-Incident Review
-
-**Step 1 -- Reconstruct the timeline.**
-
-```bash
-python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown
-```
-
-The agent accepts events from logs, alerts, Slack messages, and deployment systems. Each event needs a `timestamp` and `description`. Optional fields: `source`, `type`, `actor`, `severity`.
-
-**Supported phases:** detection, declaration, escalation, investigation, mitigation, communication, resolution.
-
-**Step 2 -- Perform root cause analysis.**
-
-```bash
-python scripts/pir_generator.py --incident incident.json --timeline timeline.json --rca-method five_whys --action-items
-```
-
-Available RCA methods:
-
-| Method | Best For |
-|--------|----------|
-| `five_whys` | Linear causal chains, quick analysis |
-| `fishbone` | Multi-category analysis (People, Process, Technology, Environment) |
-| `timeline` | Identifying missed decision points and delays |
-| `bow_tie` | Barriers analysis, prevention and mitigation controls |
-
-**Step 3 -- Generate action items.**
-
-The agent categorizes action items as: `immediate_fix`, `process_improvement`, `monitoring_alerting`, `documentation`, `training`, `architectural`, `tooling`.
-
-Each action item includes: title, owner, priority, deadline, success criteria, and dependencies.
-
-**Step 4 -- Validate postmortem quality.**
-
-```bash
-python scripts/postmortem_generator.py incident_data.json --format json
-```
-
-The agent checks:
-- Every contributing factor has at least one action item (coverage gap detection)
-- Action items have quality scores (0-100) based on specificity
-- MTTD/MTTR benchmarked against industry standards
-- Missing actions suggested for uncovered themes
-
-**Validation checkpoint:** Zero coverage gaps. All P0 action items have owners and deadlines within 48 hours.
-
----
-
-## Workflow 3: Escalation Management
-
-**Technical escalation path:**
-
-| Level | Role | SEV-1 Trigger | SEV-2 Trigger |
-|-------|------|---------------|---------------|
-| L1 | On-call engineer | Immediate | 15 min |
-| L2 | Senior engineer / Team lead | 30 min | 1 hour |
-| L3 | Engineering Manager / Staff | 45 min | 2 hours |
-| L4 | Director / CTO | 1 hour | 4 hours |
-
-**Business escalation:**
-
-| Severity | Duration | Escalate To |
-|----------|----------|-------------|
-| SEV-1 | Immediate | VP Engineering |
-| SEV-1 | 30 min | CTO + Customer Success VP |
-| SEV-1 | 1 hour | CEO + Full Executive Team |
-| SEV-2 | 2 hours | VP Engineering |
-| SEV-2 | 4 hours | CTO |
-
----
-
-## Anti-Patterns
-
-1. **Individual blame in postmortems** -- focus on system failures. &quot;Why did the process allow this?&quot; not &quot;Why did Alice do this?&quot;
-2. **Skipping PIR for SEV-2** -- every SEV-1 and SEV-2 gets a postmortem within 3 business days.
-3. **Action items without owners** -- every item needs a specific person and deadline.
-4. **Deploying fixes under pressure without validation** -- validate fixes before declaring resolution; plan for secondary failures.
-5. **Communication gaps** -- provide updates even when there is no new information.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Classifier assigns SEV1 to minor issues | Description keywords trigger high severity without impact data | Provide `affected_users` percentage and `business_impact` fields |
-| Timeline shows &quot;No valid events found&quot; | Timestamps in unsupported format or missing `timestamp` key | Use ISO-8601, `YYYY-MM-DD HH:MM:SS`, or Unix epoch |
-| PIR produces shallow 5 Whys | Incident data lacks detail | Enrich input with `affected_services`, `customer_impact`; supply timeline via `--timeline` |
-| Postmortem marks all action items invalid | Missing required fields | Each action item needs `title`, `owner`, `priority`, `deadline` |
-| Severity score seems too low | Flat description without structured impact data | Provide full schema with `impact`, `signals`, `context` keys |
-
----
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `incident_classifier.py` | Classify severity, recommend response teams and comms templates | `python scripts/incident_classifier.py --input incident.json --format text` |
+| `severity_classifier.py` | Multi-dimensional severity score with escalation path | `python scripts/severity_classifier.py incident.json --format markdown` |
+| `timeline_reconstructor.py` | Reconstruct timeline from timestamped events with phase + gap analysis | `python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown` |
+| `incident_timeline_builder.py` | Build structured timeline with MTTD/MTTR and comms templates | `python scripts/incident_timeline_builder.py incident_data.json --format markdown` |
+| `pir_generator.py` | Generate Post-Incident Review with RCA and action items | `python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items` |
+| `postmortem_generator.py` | Generate postmortem with 5-Whys, benchmarks, coverage gaps | `python scripts/postmortem_generator.py incident_data.json --format markdown` |
 
 ## References
 
-| Guide | Path |
-|-------|------|
-| Incident Response Framework | `references/incident-response-framework.md` |
-| Severity Matrix | `references/incident_severity_matrix.md` |
-| Communication Templates | `references/communication_templates.md` |
-| RCA Frameworks Guide | `references/rca_frameworks_guide.md` |
-| SLA Management | `references/sla-management-guide.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/response-playbooks.md](references/response-playbooks.md)** — quick-start commands, the detection-to-resolution and post-incident-review workflows, escalation management, anti-patterns, and tool troubleshooting. Read when running an incident end-to-end or using the scripts.
+- **[references/incident-response-framework.md](references/incident-response-framework.md)** — PagerDuty/Google SRE/Atlassian framework comparison, role definitions (IC, Comms, Ops, Scribe, SME, Liaison), communication protocols, escalation matrix, and the 7-phase incident lifecycle. Read when designing the response process or assigning roles.
+- **[references/incident_severity_matrix.md](references/incident_severity_matrix.md)** — full SEV-1 to SEV-4 impact criteria, response requirements, escalation paths, classification guidelines, decision tree, and examples. Read when classifying or calibrating severity.
+- **[references/communication_templates.md](references/communication_templates.md)** — ready-to-use internal, executive, customer, status-page, escalation, and resolution templates by severity. Read when drafting any incident communication.
+- **[references/rca_frameworks_guide.md](references/rca_frameworks_guide.md)** — step-by-step 5 Whys, Fishbone, Timeline, and Bow Tie frameworks with templates, selection guidance, and anti-patterns. Read when performing root cause analysis.
+- **[references/sla-management-guide.md](references/sla-management-guide.md)** — SLI/SLO/SLA hierarchy, error-budget policy, burn-rate alerting, breach handling, and incident-to-SLA mapping with worked examples. Read when assessing or communicating SLA impact.
+
+## Scope &amp; Limitations
+
+**Covers:** severity classification, timeline reconstruction, PIR/postmortem generation, RCA frameworks, escalation matrices, communication templates, and SLA/error-budget tracking. Tools are deterministic stdlib Python (no ML/LLM calls), accepting JSON input and emitting text/JSON/markdown.
+
+**Does NOT cover:** live monitoring/alerting infrastructure (feeds in from `senior-devops`), security forensics (see `senior-secops`), or deployment/rollback execution (see `release-orchestrator`).
 
 ## Integration Points
 
@@ -671,11 +512,6 @@ The agent checks:
 | `release-orchestrator` | Deployment events feed timeline; rollback data informs release gates |
 | `senior-architect` | Architectural root causes escalate to architecture review |
 | `code-reviewer` | PIR action items route to code review workflows |
-
----
-
-**Last Updated:** April 2026
-**Version:** 1.1.0
 
 ---
 
@@ -703,7 +539,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Incident Commander&quot;**
-   - Description: &quot;Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...&quot;
+   - Description: &quot;Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -728,206 +564,61 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Incident Commander
 
-The agent classifies incident severity, reconstructs timelines from heterogeneous event sources, and generates structured post-incident reviews with root cause analysis and action items.
+Classify incident severity, reconstruct timelines from heterogeneous event sources, and generate structured post-incident reviews with root cause analysis and action items. Codifies PagerDuty, Google SRE, and Atlassian incident-management practices into severity scoring, escalation matrices, communication templates, RCA frameworks, and SLA/error-budget tracking.
 
----
+## Core Capabilities
 
-## Quick Start
+- **Severity classification** — multi-dimensional scoring (revenue, user scope, data/security risk, service criticality, blast radius) into SEV-1 to SEV-4 with confidence and escalation paths.
+- **Timeline reconstruction** — chronological timelines from logs, alerts, Slack, and deploy events with phase detection and gap analysis.
+- **Post-incident review** — PIRs with 5 Whys, Fishbone, Timeline, or Bow Tie RCA plus categorized action items (owner, priority, deadline).
+- **Postmortem quality** — coverage-gap detection, action-item quality scoring, MTTD/MTTR benchmarking.
+- **Communication &amp; escalation** — severity-specific internal/executive/customer/status-page templates; technical (L1-L4) and business escalation matrices with time-based triggers.
+- **SLA / error-budget tracking** — SLI/SLO/SLA hierarchy, error budgets, burn-rate alerting, and breach handling.
 
-```bash
-# Classify an incident (JSON or stdin)
-echo &#x27;{&quot;description&quot;: &quot;Database connections timing out&quot;, &quot;affected_users&quot;: &quot;80%&quot;, &quot;business_impact&quot;: &quot;high&quot;}&#x27; \
-  | python scripts/incident_classifier.py --format text
+## When to Use
 
-# Multi-dimensional severity scoring
-python scripts/severity_classifier.py incident.json --format markdown
+- Handling an active incident — classify severity, establish command, mitigate, communicate.
+- Running a post-incident review — reconstruct timeline, perform RCA, assign action items.
+- Managing escalation — apply technical and business escalation paths by severity and elapsed time.
+- Building or auditing response playbooks, comms templates, or SLA/error-budget policy.
 
-# Reconstruct timeline with phase detection and gap analysis
-python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown
+## Clarify First
 
-# Build structured timeline with MTTD/MTTR metrics
-python scripts/incident_timeline_builder.py incident_data.json --format markdown
+Before producing the artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-# Generate Post-Incident Review
-python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items --format markdown
+- [ ] **Task &amp; deliverable** — classify severity, reconstruct a timeline, or generate a PIR/postmortem (selects `severity_classifier.py` vs `timeline_reconstructor.py` vs `pir_generator.py`/`postmortem_generator.py`)
+- [ ] **Incident input data** — the incident/events JSON with severity dimensions (revenue, user scope, data/security risk, blast radius) (the input the scripts parse)
+- [ ] **RCA method** — 5 Whys, Fishbone, Timeline, or Bow Tie (sets `pir_generator.py --rca-method` and the postmortem structure)
 
-# Generate postmortem with benchmark comparisons
-python scripts/postmortem_generator.py incident_data.json --format markdown
-```
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Tools Overview
+## Tools
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `incident_classifier.py` | Incident description JSON | Severity level, response teams, communication templates |
-| `severity_classifier.py` | Incident data with impact/signals | Multi-dimensional score across 5 weighted dimensions |
-| `timeline_reconstructor.py` | Timestamped events array | Chronological timeline with phases and gap analysis |
-| `incident_timeline_builder.py` | Incident + events JSON | Timeline with MTTD/MTTR, phase distribution, comms templates |
-| `pir_generator.py` | Incident data + optional timeline | PIR document with RCA (5 Whys, Fishbone, Timeline, Bow Tie) |
-| `postmortem_generator.py` | Incident + resolution + action items | Postmortem with benchmarks, factor analysis, coverage gaps |
-
----
-
-## Workflow 1: Incident Response (Detection to Resolution)
-
-**Step 1 -- Classify severity.**
-
-```bash
-python scripts/severity_classifier.py incident.json --format json
-```
-
-The agent scores across five dimensions: revenue impact (25%), user scope (25%), data/security risk (20%), service criticality (15%), blast radius (15%).
-
-| Severity | Definition | Response Time | Comms Cadence |
-|----------|-----------|---------------|---------------|
-| **SEV-1** | Complete outage, data loss, security breach | 15 min | Every 15 min |
-| **SEV-2** | Partial degradation, &gt;25% users affected | 30 min | Every 30 min |
-| **SEV-3** | Single feature affected, workaround available | 2 hours | At milestones |
-| **SEV-4** | Cosmetic, dev/test only, no user impact | Next business day | Standard cycle |
-
-**Validation checkpoint:** Severity classification includes confidence score and recommended escalation path.
-
-**Step 2 -- Establish command.**
-
-The Incident Commander:
-- Assigns within 5 min (SEV-1) or 30 min (SEV-2)
-- Creates war room and incident tracking ticket
-- Sends initial notification using generated template
-- Coordinates between technical teams and stakeholders
-- Shields responders from external distractions
-
-**Step 3 -- Investigate and mitigate.**
-
-The agent generates targeted investigation commands based on the affected service:
-
-```bash
-kubectl get pods -n production -l app=&lt;service&gt;
-kubectl logs -l app=&lt;service&gt; --tail=100
-helm history &lt;service&gt; -n production
-```
-
-**Decision framework for SEV-1/SEV-2:**
-- Bias toward action over analysis
-- Prefer rollbacks to risky fixes under pressure
-- Document every decision for later review
-- Consult SMEs but do not block on them
-
-**Step 4 -- Communicate.**
-
-The agent generates three communication templates per severity:
-1. **Internal notification** -- technical details, response team, war room link
-2. **Executive summary** -- business impact, ETA, leadership actions required
-3. **Customer communication** -- impact scope, what is being done, next update time
-
-**Validation checkpoint:** All stakeholders notified within committed timeframes.
-
----
-
-## Workflow 2: Post-Incident Review
-
-**Step 1 -- Reconstruct the timeline.**
-
-```bash
-python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown
-```
-
-The agent accepts events from logs, alerts, Slack messages, and deployment systems. Each event needs a `timestamp` and `description`. Optional fields: `source`, `type`, `actor`, `severity`.
-
-**Supported phases:** detection, declaration, escalation, investigation, mitigation, communication, resolution.
-
-**Step 2 -- Perform root cause analysis.**
-
-```bash
-python scripts/pir_generator.py --incident incident.json --timeline timeline.json --rca-method five_whys --action-items
-```
-
-Available RCA methods:
-
-| Method | Best For |
-|--------|----------|
-| `five_whys` | Linear causal chains, quick analysis |
-| `fishbone` | Multi-category analysis (People, Process, Technology, Environment) |
-| `timeline` | Identifying missed decision points and delays |
-| `bow_tie` | Barriers analysis, prevention and mitigation controls |
-
-**Step 3 -- Generate action items.**
-
-The agent categorizes action items as: `immediate_fix`, `process_improvement`, `monitoring_alerting`, `documentation`, `training`, `architectural`, `tooling`.
-
-Each action item includes: title, owner, priority, deadline, success criteria, and dependencies.
-
-**Step 4 -- Validate postmortem quality.**
-
-```bash
-python scripts/postmortem_generator.py incident_data.json --format json
-```
-
-The agent checks:
-- Every contributing factor has at least one action item (coverage gap detection)
-- Action items have quality scores (0-100) based on specificity
-- MTTD/MTTR benchmarked against industry standards
-- Missing actions suggested for uncovered themes
-
-**Validation checkpoint:** Zero coverage gaps. All P0 action items have owners and deadlines within 48 hours.
-
----
-
-## Workflow 3: Escalation Management
-
-**Technical escalation path:**
-
-| Level | Role | SEV-1 Trigger | SEV-2 Trigger |
-|-------|------|---------------|---------------|
-| L1 | On-call engineer | Immediate | 15 min |
-| L2 | Senior engineer / Team lead | 30 min | 1 hour |
-| L3 | Engineering Manager / Staff | 45 min | 2 hours |
-| L4 | Director / CTO | 1 hour | 4 hours |
-
-**Business escalation:**
-
-| Severity | Duration | Escalate To |
-|----------|----------|-------------|
-| SEV-1 | Immediate | VP Engineering |
-| SEV-1 | 30 min | CTO + Customer Success VP |
-| SEV-1 | 1 hour | CEO + Full Executive Team |
-| SEV-2 | 2 hours | VP Engineering |
-| SEV-2 | 4 hours | CTO |
-
----
-
-## Anti-Patterns
-
-1. **Individual blame in postmortems** -- focus on system failures. &quot;Why did the process allow this?&quot; not &quot;Why did Alice do this?&quot;
-2. **Skipping PIR for SEV-2** -- every SEV-1 and SEV-2 gets a postmortem within 3 business days.
-3. **Action items without owners** -- every item needs a specific person and deadline.
-4. **Deploying fixes under pressure without validation** -- validate fixes before declaring resolution; plan for secondary failures.
-5. **Communication gaps** -- provide updates even when there is no new information.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Classifier assigns SEV1 to minor issues | Description keywords trigger high severity without impact data | Provide `affected_users` percentage and `business_impact` fields |
-| Timeline shows &quot;No valid events found&quot; | Timestamps in unsupported format or missing `timestamp` key | Use ISO-8601, `YYYY-MM-DD HH:MM:SS`, or Unix epoch |
-| PIR produces shallow 5 Whys | Incident data lacks detail | Enrich input with `affected_services`, `customer_impact`; supply timeline via `--timeline` |
-| Postmortem marks all action items invalid | Missing required fields | Each action item needs `title`, `owner`, `priority`, `deadline` |
-| Severity score seems too low | Flat description without structured impact data | Provide full schema with `impact`, `signals`, `context` keys |
-
----
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `incident_classifier.py` | Classify severity, recommend response teams and comms templates | `python scripts/incident_classifier.py --input incident.json --format text` |
+| `severity_classifier.py` | Multi-dimensional severity score with escalation path | `python scripts/severity_classifier.py incident.json --format markdown` |
+| `timeline_reconstructor.py` | Reconstruct timeline from timestamped events with phase + gap analysis | `python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown` |
+| `incident_timeline_builder.py` | Build structured timeline with MTTD/MTTR and comms templates | `python scripts/incident_timeline_builder.py incident_data.json --format markdown` |
+| `pir_generator.py` | Generate Post-Incident Review with RCA and action items | `python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items` |
+| `postmortem_generator.py` | Generate postmortem with 5-Whys, benchmarks, coverage gaps | `python scripts/postmortem_generator.py incident_data.json --format markdown` |
 
 ## References
 
-| Guide | Path |
-|-------|------|
-| Incident Response Framework | `references/incident-response-framework.md` |
-| Severity Matrix | `references/incident_severity_matrix.md` |
-| Communication Templates | `references/communication_templates.md` |
-| RCA Frameworks Guide | `references/rca_frameworks_guide.md` |
-| SLA Management | `references/sla-management-guide.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/response-playbooks.md](references/response-playbooks.md)** — quick-start commands, the detection-to-resolution and post-incident-review workflows, escalation management, anti-patterns, and tool troubleshooting. Read when running an incident end-to-end or using the scripts.
+- **[references/incident-response-framework.md](references/incident-response-framework.md)** — PagerDuty/Google SRE/Atlassian framework comparison, role definitions (IC, Comms, Ops, Scribe, SME, Liaison), communication protocols, escalation matrix, and the 7-phase incident lifecycle. Read when designing the response process or assigning roles.
+- **[references/incident_severity_matrix.md](references/incident_severity_matrix.md)** — full SEV-1 to SEV-4 impact criteria, response requirements, escalation paths, classification guidelines, decision tree, and examples. Read when classifying or calibrating severity.
+- **[references/communication_templates.md](references/communication_templates.md)** — ready-to-use internal, executive, customer, status-page, escalation, and resolution templates by severity. Read when drafting any incident communication.
+- **[references/rca_frameworks_guide.md](references/rca_frameworks_guide.md)** — step-by-step 5 Whys, Fishbone, Timeline, and Bow Tie frameworks with templates, selection guidance, and anti-patterns. Read when performing root cause analysis.
+- **[references/sla-management-guide.md](references/sla-management-guide.md)** — SLI/SLO/SLA hierarchy, error-budget policy, burn-rate alerting, breach handling, and incident-to-SLA mapping with worked examples. Read when assessing or communicating SLA impact.
+
+## Scope &amp; Limitations
+
+**Covers:** severity classification, timeline reconstruction, PIR/postmortem generation, RCA frameworks, escalation matrices, communication templates, and SLA/error-budget tracking. Tools are deterministic stdlib Python (no ML/LLM calls), accepting JSON input and emitting text/JSON/markdown.
+
+**Does NOT cover:** live monitoring/alerting infrastructure (feeds in from `senior-devops`), security forensics (see `senior-secops`), or deployment/rollback execution (see `release-orchestrator`).
 
 ## Integration Points
 
@@ -938,11 +629,6 @@ The agent checks:
 | `release-orchestrator` | Deployment events feed timeline; rollback data informs release gates |
 | `senior-architect` | Architectural root causes escalate to architecture review |
 | `code-reviewer` | PIR action items route to code review workflows |
-
----
-
-**Last Updated:** April 2026
-**Version:** 1.1.0
 
 ---
 
@@ -970,7 +656,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Incident Commander&quot;**
-   - Description: &quot;Manages incident response with severity classification, timeline reconstruction, and post-incident review generation. Use when handling production incidents, writing postmortems, classifying severity,...&quot;
+   - Description: &quot;Production incident response. Use when handling incidents, classifying severity, reconstructing timelines, writing postmortems, generating comms templates, or building response playbooks with severity scoring and RCA frameworks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1030,26 +716,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/incident-commander/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Classify an incident (JSON or stdin)
-echo &#x27;{&quot;description&quot;: &quot;Database connections timing out&quot;, &quot;affected_users&quot;: &quot;80%&quot;, &quot;business_impact&quot;: &quot;high&quot;}&#x27; \
-  | python scripts/incident_classifier.py --format text
-
-# Multi-dimensional severity scoring
-python scripts/severity_classifier.py incident.json --format markdown
-
-# Reconstruct timeline with phase detection and gap analysis
-python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown
-
-# Build structured timeline with MTTD/MTTR metrics
-python scripts/incident_timeline_builder.py incident_data.json --format markdown
-
-# Generate Post-Incident Review
-python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items --format markdown
-
-# Generate postmortem with benchmark comparisons
-python scripts/postmortem_generator.py incident_data.json --format markdown
-</code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/incident-commander/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pr Review Expert - Claude Skills</title>
-  <meta name="description" content="Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che">
+  <meta name="description" content="Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or s">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/pr-review-expert.html">
   <meta property="og:title" content="Pr Review Expert - Claude Skills">
-  <meta property="og:description" content="Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che">
+  <meta property="og:description" content="Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or s">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/pr-review-expert.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Pr Review Expert", "description": "Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/pr-review-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Pr Review Expert", "description": "Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/pr-review-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Pr Review Expert</h1>
-    <p class="page-subtitle">Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Code Review</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
+    <p class="page-subtitle">Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -393,17 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Pr Review Expert (Engineering domain).
 
-Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...
+Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.
 
-**Tier:** POWERFUL **Category:** Engineering / Quality Assurance **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- 1. Blast Radius Analysis
-- 2. Security Scanning
-- 3. Breaking Change Detection
-- 4. Test Coverage Analysis
-- 5. Performance Assessment
-- MUST FIX (Blocking)
+Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast-radius analysis, security vulnerability scanning, breaking-change detection, test-coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,17 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Pr Review Expert (Engineering domain).
 
-Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...
+Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.
 
-**Tier:** POWERFUL **Category:** Engineering / Quality Assurance **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- 1. Blast Radius Analysis
-- 2. Security Scanning
-- 3. Breaking Change Detection
-- 4. Test Coverage Analysis
-- 5. Performance Assessment
-- MUST FIX (Blocking)
+Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast-radius analysis, security vulnerability scanning, breaking-change detection, test-coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -463,381 +447,42 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # PR Review Expert
 
-**Tier:** POWERFUL
-**Category:** Engineering / Quality Assurance
-**Maintainer:** Claude Skills Team
+Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast-radius analysis, security vulnerability scanning, breaking-change detection, test-coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized findings categorized as must-fix, should-fix, and suggestions.
 
-## Overview
-
-Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast radius analysis, security vulnerability scanning, breaking change detection, test coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized findings categorized as must-fix, should-fix, and suggestions.
-
-## Keywords
-
-PR review, code review, pull request, merge request, blast radius, security scan, breaking changes, test coverage, review checklist, code quality
+**Keywords:** PR review, code review, pull request, merge request, blast radius, security scan, breaking changes, test coverage, review checklist, code quality
 
 ## Core Capabilities
 
-### 1. Blast Radius Analysis
-- Trace which files, services, and downstream consumers could break
-- Identify shared libraries, types, and API contracts in the diff
-- Map cross-service dependencies in monorepos
-- Quantify impact severity (CRITICAL / HIGH / MEDIUM / LOW)
-
-### 2. Security Scanning
-- SQL injection via string interpolation
-- XSS vectors (innerHTML, dangerouslySetInnerHTML)
-- Hardcoded secrets and credentials
-- Auth bypass patterns
-- Insecure cryptographic functions
-- Path traversal risks
-- Prototype pollution
-
-### 3. Breaking Change Detection
-- API endpoint removals or renames
-- Response schema modifications
-- Required field additions
-- Database column removals
-- Environment variable changes
-- TypeScript interface modifications
-
-### 4. Test Coverage Analysis
-- New code vs new test ratio
-- Missing tests for new public functions
-- Deleted tests without deleted code
-- Coverage delta calculation
-
-### 5. Performance Assessment
-- N+1 query pattern detection
-- Bundle size regression indicators
-- Unbounded queries without LIMIT
-- Missing database indexes for new query patterns
+- **Blast radius analysis** — trace which files, services, and downstream consumers a diff could break; quantify severity CRITICAL/HIGH/MEDIUM/LOW.
+- **Security scanning** — detect SQL injection, XSS vectors, hardcoded secrets, auth bypass, insecure crypto, path traversal, and prototype pollution in the diff.
+- **Breaking-change detection** — flag API removals/renames, response-schema and required-field changes, DB column removals, env-var changes, and TS interface edits.
+- **Test coverage analysis** — new-code vs new-test ratio, missing tests for new public functions, deleted tests without deleted code, coverage delta.
+- **Performance assessment** — N+1 query patterns, bundle-size regressions, unbounded queries, missing indexes.
+- **Reviewer-ready output** — prioritized must-fix / should-fix / suggestion report, a 35-item checklist, and consistent comment labels.
 
 ## When to Use
 
-- Before merging any PR that touches shared libraries, APIs, or database schemas
-- When a PR is large (&gt;200 lines changed) and needs structured review
-- For PRs in security-sensitive code paths (auth, payments, PII handling)
-- After an incident to proactively review similar code changes
-- For onboarding new contributors whose PRs need thorough feedback
-
-## Review Workflow
-
-### Step 1: Gather Context
-
-```bash
-PR=123
-
-# PR metadata
-gh pr view $PR --json title,body,labels,milestone,assignees | jq .
-
-# Files changed
-gh pr diff $PR --name-only
-
-# Full diff for analysis
-gh pr diff $PR &gt; /tmp/pr-$PR.diff
-
-# CI status
-gh pr checks $PR
-```
-
-### Step 2: Blast Radius Analysis
-
-For each changed file, determine its impact scope:
-
-```bash
-DIFF_FILES=$(gh pr diff $PR --name-only)
-
-# Find all files that import changed modules
-for file in $DIFF_FILES; do
-  module=$(basename &quot;$file&quot; .ts | sed &#x27;s/\..*$//&#x27;)
-  echo &quot;=== Dependents of $file ===&quot;
-  grep -rl &quot;from.*$module\|import.*$module\|require.*$module&quot; src/ --include=&quot;*.ts&quot; --include=&quot;*.tsx&quot; -l 2&gt;/dev/null
-done
-
-# Check if changes span multiple services (monorepo)
-echo &quot;$DIFF_FILES&quot; | cut -d/ -f1-2 | sort -u
-
-# Identify shared contracts
-echo &quot;$DIFF_FILES&quot; | grep -E &quot;types/|interfaces/|schemas/|models/|shared/&quot;
-```
-
-**Blast Radius Severity:**
-
-| Severity | Criteria | Examples |
-|----------|----------|---------|
-| CRITICAL | Shared library used by 5+ consumers | `packages/utils/`, auth middleware, DB schema |
-| HIGH | Cross-service impact, shared config | API contracts, env vars, shared types |
-| MEDIUM | Single service internal change | Service handler, utility function |
-| LOW | Isolated change, no dependents | UI component, test file, documentation |
-
-### Step 3: Security Scan
-
-```bash
-DIFF=/tmp/pr-$PR.diff
-
-# SQL injection — raw string interpolation in queries
-grep -n &quot;query\|execute\|raw(&quot; $DIFF | grep -E &#x27;\$\{|f&quot;|%s|format\(&#x27; | grep &quot;^+&quot;
-
-# Hardcoded secrets
-grep -nE &quot;(password|secret|api_key|token|private_key)\s*=\s*[&#x27;\&quot;][^&#x27;\&quot;]{8,}&quot; $DIFF | grep &quot;^+&quot;
-
-# AWS keys
-grep -nE &quot;AKIA[0-9A-Z]{16}&quot; $DIFF
-
-# XSS vectors
-grep -n &quot;dangerouslySetInnerHTML\|innerHTML\s*=&quot; $DIFF | grep &quot;^+&quot;
-
-# Auth bypass indicators
-grep -n &quot;bypass\|skip.*auth\|noauth\|TODO.*auth&quot; $DIFF | grep &quot;^+&quot;
-
-# Insecure crypto
-grep -nE &quot;md5\(|sha1\(|createHash\([&#x27;\&quot;]md5|createHash\([&#x27;\&quot;]sha1&quot; $DIFF | grep &quot;^+&quot;
-
-# eval/exec
-grep -nE &quot;\beval\(|\bexec\(|\bsubprocess\.call\(&quot; $DIFF | grep &quot;^+&quot;
-
-# Path traversal
-grep -nE &quot;path\.join\(.*req\.|readFile\(.*req\.&quot; $DIFF | grep &quot;^+&quot;
-
-# Prototype pollution
-grep -n &quot;__proto__\|constructor\[&quot; $DIFF | grep &quot;^+&quot;
-
-# Sensitive data in logs
-grep -nE &quot;console\.(log|info|warn|error).*password\|console\.(log|info|warn|error).*token\|console\.(log|info|warn|error).*secret&quot; $DIFF | grep &quot;^+&quot;
-```
-
-### Step 4: Breaking Change Detection
-
-```bash
-# API endpoint removals
-grep &quot;^-&quot; $DIFF | grep -E &quot;router\.(get|post|put|delete|patch)\(|@app\.(get|post|put|delete)&quot;
-
-# TypeScript interface/type removals
-grep &quot;^-&quot; $DIFF | grep -E &quot;^-\s*(export\s+)?(interface|type) &quot;
-
-# Required field additions to existing types
-grep &quot;^+&quot; $DIFF | grep -E &quot;:\s*(string|number|boolean)\s*$&quot; | grep -v &quot;?&quot; # non-optional additions
-
-# Database migrations: destructive operations
-grep -E &quot;DROP TABLE|DROP COLUMN|ALTER.*NOT NULL|TRUNCATE&quot; $DIFF
-
-# Index removals
-grep -E &quot;DROP INDEX|remove_index&quot; $DIFF
-
-# Removed env vars
-grep &quot;^-&quot; $DIFF | grep -oE &quot;process\.env\.[A-Z_]+&quot; | sort -u
-
-# New env vars (may not be set in production)
-grep &quot;^+&quot; $DIFF | grep -oE &quot;process\.env\.[A-Z_]+&quot; | sort -u
-```
-
-### Step 5: Test Coverage Delta
-
-```bash
-# Count source vs test changes
-SRC_FILES=$(gh pr diff $PR --name-only | grep -vE &quot;\.test\.|\.spec\.|__tests__|\.stories\.&quot;)
-TEST_FILES=$(gh pr diff $PR --name-only | grep -E &quot;\.test\.|\.spec\.|__tests__&quot;)
-
-echo &quot;Source files changed: $(echo &quot;$SRC_FILES&quot; | grep -c .)&quot;
-echo &quot;Test files changed:   $(echo &quot;$TEST_FILES&quot; | grep -c .)&quot;
-
-# New lines of logic vs test
-LOGIC_LINES=$(grep &quot;^+&quot; $DIFF | grep -v &quot;^+++&quot; | grep -v &quot;\.test\.\|\.spec\.&quot; | wc -l)
-TEST_LINES=$(grep &quot;^+&quot; $DIFF | grep -v &quot;^+++&quot; | grep &quot;\.test\.\|\.spec\.&quot; | wc -l)
-echo &quot;New logic lines: $LOGIC_LINES&quot;
-echo &quot;New test lines:  $TEST_LINES&quot;
-```
-
-**Coverage Rules:**
-- New public function without tests: flag as must-fix
-- Deleted tests without deleted code: flag as must-fix
-- Coverage drop &gt;5%: block merge
-- Auth/payments paths: require near-100% coverage
-
-### Step 6: Performance Impact
-
-```bash
-# N+1 patterns: DB calls that might be inside loops
-grep -n &quot;\.find\|\.findOne\|\.query\|db\.&quot; $DIFF | grep &quot;^+&quot; | head -20
-
-# Heavy new dependencies
-grep &quot;^+&quot; $DIFF | grep -E &#x27;&quot;[a-z@].*&quot;:\s*&quot;[0-9^~]&#x27; | head -10
-
-# Unbounded loops
-grep -n &quot;while (true\|while(true&quot; $DIFF | grep &quot;^+&quot;
-
-# Missing await (accidentally sequential)
-grep -n &quot;await.*await&quot; $DIFF | grep &quot;^+&quot;
-
-# Large allocations
-grep -n &quot;new Array([0-9]\{4,\}\|Buffer\.alloc&quot; $DIFF | grep &quot;^+&quot;
-```
-
-## Review Report Format
-
-Structure every review using this format:
-
-```markdown
-## PR Review: [PR Title] (#NUMBER)
-
-**Blast Radius:** HIGH — changes `lib/auth` used by 5 services
-**Security:** 1 finding (medium severity)
-**Tests:** Coverage delta +2% (3 new tests for 5 new functions)
-**Breaking Changes:** None detected
-
----
-
-### MUST FIX (Blocking)
-
-**1. SQL Injection risk in `src/db/users.ts:42`**
-Raw string interpolation in WHERE clause.
-```diff
-- const user = await db.query(`SELECT * FROM users WHERE id = &#x27;${userId}&#x27;`)
-+ const user = await db.query(&#x27;SELECT * FROM users WHERE id = $1&#x27;, [userId])
-```
-
-**2. Missing auth check on `POST /api/admin/reset`**
-No role verification before destructive operation.
-Add `requireRole(&#x27;admin&#x27;)` middleware.
-
----
-
-### SHOULD FIX (Non-blocking)
-
-**3. N+1 pattern in `src/services/reports.ts:88`**
-`findUser()` called inside `results.map()` — batch with `findManyUsers(ids)`.
-
-**4. New env var `FEATURE_FLAG_X` not in `.env.example`**
-Add to `.env.example` with description so other developers know about it.
-
----
-
-### SUGGESTIONS
-
-**5. Consider pagination for `GET /api/projects`**
-Currently returns all projects without limit. Add `?limit=20&amp;offset=0`.
-
----
-
-### LOOKS GOOD
-- Auth flow for new OAuth provider is thorough
-- DB migration has proper rollback (`down()` method)
-- Error handling is consistent with rest of codebase
-- Test names clearly describe what they verify
-```
-
-## Complete Review Checklist (35 Items)
-
-```markdown
-### Scope and Context
-- [ ] PR title accurately describes the change
-- [ ] PR description explains WHY, not just WHAT
-- [ ] Linked ticket exists and matches scope
-- [ ] No unrelated changes (scope creep)
-- [ ] Breaking changes documented in PR body
-
-### Blast Radius
-- [ ] All files importing changed modules identified
-- [ ] Cross-service dependencies checked
-- [ ] Shared types/interfaces reviewed for breakage
-- [ ] New env vars documented in .env.example
-- [ ] DB migrations are reversible (have rollback)
-
-### Security
-- [ ] No hardcoded secrets or API keys
-- [ ] SQL queries use parameterized inputs
-- [ ] User inputs validated and sanitized
-- [ ] Auth/authorization on all new endpoints
-- [ ] No XSS vectors (innerHTML, dangerouslySetInnerHTML)
-- [ ] New dependencies checked for known CVEs
-- [ ] No sensitive data in logs (PII, tokens, passwords)
-- [ ] File uploads validated (type, size, content)
-- [ ] CORS configured correctly for new endpoints
-
-### Testing
-- [ ] New public functions have unit tests
-- [ ] Edge cases covered (empty, null, max values)
-- [ ] Error paths tested (not just happy path)
-- [ ] Integration tests for API endpoint changes
-- [ ] No tests deleted without clear justification
-- [ ] Test names describe what they verify
-
-### Breaking Changes
-- [ ] No API endpoints removed without deprecation
-- [ ] No required fields added to existing responses
-- [ ] No DB columns removed without migration plan
-- [ ] No env vars removed that may be in production
-- [ ] Backward-compatible for external consumers
-
-### Performance
-- [ ] No N+1 query patterns introduced
-- [ ] DB indexes added for new query patterns
-- [ ] No unbounded loops on large datasets
-- [ ] No heavy new dependencies without justification
-- [ ] Async operations correctly awaited
-- [ ] Caching considered for expensive operations
-
-### Code Quality
-- [ ] No dead code or unused imports
-- [ ] Error handling present (no empty catch blocks)
-- [ ] Consistent with existing patterns
-- [ ] Complex logic has explanatory comments
-```
-
-## Comment Labels
-
-Use consistent labels so authors can quickly prioritize:
-
-| Label | Meaning | Action Required |
-|-------|---------|-----------------|
-| `must:` | Blocking issue | Must fix before merge |
-| `should:` | Important improvement | Should fix, but not blocking |
-| `nit:` | Style/preference | Take it or leave it |
-| `question:` | Need clarification | Respond before merge |
-| `suggestion:` | Alternative approach | Consider, no action needed |
-| `praise:` | Good pattern | No action needed |
-
-## Common Pitfalls
-
-- **Reviewing style over substance** — let the linter handle formatting; focus on logic, security, correctness
-- **Missing blast radius** — a 5-line change in a shared utility can break 20 services
-- **Approving untested happy paths** — always check that error paths have coverage
-- **Ignoring migration risk** — NOT NULL additions need a default or two-phase migration
-- **Indirect secret exposure** — secrets in error messages and logs, not just hardcoded values
-- **Skipping large PRs** — if too large to review properly, request it be split
-- **Trickle feedback** — batch all comments in one review round; do not drip-feed over hours
-
-## Best Practices
-
-1. **Read the linked ticket first** — context prevents false positives in the review
-2. **Check CI before reviewing** — do not review code that fails to build
-3. **Prioritize blast radius and security over style** — these are where real bugs live
-4. **Label every comment** — `must:`, `nit:`, `question:` so authors know what matters
-5. **Batch all comments in one round** — multiple partial reviews frustrate authors
-6. **Acknowledge good patterns** — specific praise improves code quality culture
-7. **Reproduce locally for non-trivial changes** — especially auth and performance-sensitive code
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Blast radius analysis misses dependents | `grep` only searches `src/` by default | Expand search paths to include `packages/`, `libs/`, and monorepo service directories |
-| Security scan produces false positives on test files | Diff includes test fixtures with fake secrets | Filter scan output to exclude `*.test.*`, `*.spec.*`, `__tests__/`, and `fixtures/` paths |
-| Breaking change detection flags internal-only types | No distinction between exported and internal interfaces | Check whether flagged types are re-exported from the package entry point before reporting |
-| Test coverage delta shows 0 when tests exist | Test files use non-standard naming conventions | Adjust the `grep -E` pattern in Step 5 to match your project&#x27;s test file naming (e.g., `*.unit.*`, `*_test.*`) |
-| `gh pr diff` returns empty output | PR has no commits yet or branch is not pushed | Verify the PR has at least one commit pushed to the remote with `gh pr view $PR --json commits` |
-| N+1 detection flags ORM eager-loaded queries | Pattern matching cannot distinguish eager vs lazy loading | Cross-reference flagged lines with ORM configuration to confirm whether relations are pre-loaded |
-| Review report is too long for PR comment | PR touches 50+ files across multiple services | Split the review into per-service comments or request the author break the PR into smaller scoped PRs |
-
-## Success Criteria
-
-- Review turnaround time under 30 minutes for PRs with fewer than 500 changed lines
-- Zero post-merge security findings on PRs that received a full review using this skill
-- Blast radius severity rating matches actual production impact in 90%+ of cases
-- All must-fix items are resolved before merge with no exceptions
-- Test coverage delta is calculated and reported on every reviewed PR
-- Breaking changes are detected before merge in 95%+ of cases, validated against deployment incidents
-- Reviewer feedback is batched into a single review round at least 90% of the time
+- Before merging any PR that touches shared libraries, APIs, or database schemas.
+- When a PR is large (&gt;200 lines changed) and needs structured review.
+- For PRs in security-sensitive code paths (auth, payments, PII handling).
+- After an incident, to proactively review similar code changes.
+- For onboarding new contributors whose PRs need thorough feedback.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `blast_radius_calculator.py` | Calculate PR blast radius from import chains / dependency trees of changed files | `git diff --name-only main...HEAD \| python scripts/blast_radius_calculator.py --root src` |
+| `diff_analyzer.py` | Analyze a diff for risk indicators (large files, sensitive paths, config/breaking/security patterns) | `gh pr diff $PR \| python scripts/diff_analyzer.py --json` |
+| `review_checklist_generator.py` | Generate a tailored review checklist from changed file types/patterns | `git diff --name-only main...HEAD \| python scripts/review_checklist_generator.py` |
+
+## References
+
+Load the reference that matches the task — keep this file lean and pull detail on demand:
+
+- **[references/review-workflow-commands.md](references/review-workflow-commands.md)** — the 6-step review workflow with the exact `gh`/`grep` command catalog for context gathering, blast radius, security scan, breaking-change detection, coverage delta, and performance impact (plus the blast-radius severity table and coverage rules). Read when actually performing a review.
+- **[references/writeup-format-and-checklist.md](references/writeup-format-and-checklist.md)** — the review report template with worked examples, the complete 35-item review checklist, and the comment-label taxonomy. Read when writing up findings.
+- **[references/best-practices-and-troubleshooting.md](references/best-practices-and-troubleshooting.md)** — common reviewer pitfalls, best-practice habits, the troubleshooting table, and the success-criteria bar. Read before and after a review for quality control.
 
 ## Scope &amp; Limitations
 
@@ -890,7 +535,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Pr Review Expert&quot;**
-   - Description: &quot;Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...&quot;
+   - Description: &quot;Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -915,381 +560,42 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # PR Review Expert
 
-**Tier:** POWERFUL
-**Category:** Engineering / Quality Assurance
-**Maintainer:** Claude Skills Team
+Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast-radius analysis, security vulnerability scanning, breaking-change detection, test-coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized findings categorized as must-fix, should-fix, and suggestions.
 
-## Overview
-
-Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond style nits to perform blast radius analysis, security vulnerability scanning, breaking change detection, test coverage delta calculation, and performance impact assessment. Produces reviewer-ready reports with prioritized findings categorized as must-fix, should-fix, and suggestions.
-
-## Keywords
-
-PR review, code review, pull request, merge request, blast radius, security scan, breaking changes, test coverage, review checklist, code quality
+**Keywords:** PR review, code review, pull request, merge request, blast radius, security scan, breaking changes, test coverage, review checklist, code quality
 
 ## Core Capabilities
 
-### 1. Blast Radius Analysis
-- Trace which files, services, and downstream consumers could break
-- Identify shared libraries, types, and API contracts in the diff
-- Map cross-service dependencies in monorepos
-- Quantify impact severity (CRITICAL / HIGH / MEDIUM / LOW)
-
-### 2. Security Scanning
-- SQL injection via string interpolation
-- XSS vectors (innerHTML, dangerouslySetInnerHTML)
-- Hardcoded secrets and credentials
-- Auth bypass patterns
-- Insecure cryptographic functions
-- Path traversal risks
-- Prototype pollution
-
-### 3. Breaking Change Detection
-- API endpoint removals or renames
-- Response schema modifications
-- Required field additions
-- Database column removals
-- Environment variable changes
-- TypeScript interface modifications
-
-### 4. Test Coverage Analysis
-- New code vs new test ratio
-- Missing tests for new public functions
-- Deleted tests without deleted code
-- Coverage delta calculation
-
-### 5. Performance Assessment
-- N+1 query pattern detection
-- Bundle size regression indicators
-- Unbounded queries without LIMIT
-- Missing database indexes for new query patterns
+- **Blast radius analysis** — trace which files, services, and downstream consumers a diff could break; quantify severity CRITICAL/HIGH/MEDIUM/LOW.
+- **Security scanning** — detect SQL injection, XSS vectors, hardcoded secrets, auth bypass, insecure crypto, path traversal, and prototype pollution in the diff.
+- **Breaking-change detection** — flag API removals/renames, response-schema and required-field changes, DB column removals, env-var changes, and TS interface edits.
+- **Test coverage analysis** — new-code vs new-test ratio, missing tests for new public functions, deleted tests without deleted code, coverage delta.
+- **Performance assessment** — N+1 query patterns, bundle-size regressions, unbounded queries, missing indexes.
+- **Reviewer-ready output** — prioritized must-fix / should-fix / suggestion report, a 35-item checklist, and consistent comment labels.
 
 ## When to Use
 
-- Before merging any PR that touches shared libraries, APIs, or database schemas
-- When a PR is large (&gt;200 lines changed) and needs structured review
-- For PRs in security-sensitive code paths (auth, payments, PII handling)
-- After an incident to proactively review similar code changes
-- For onboarding new contributors whose PRs need thorough feedback
-
-## Review Workflow
-
-### Step 1: Gather Context
-
-```bash
-PR=123
-
-# PR metadata
-gh pr view $PR --json title,body,labels,milestone,assignees | jq .
-
-# Files changed
-gh pr diff $PR --name-only
-
-# Full diff for analysis
-gh pr diff $PR &gt; /tmp/pr-$PR.diff
-
-# CI status
-gh pr checks $PR
-```
-
-### Step 2: Blast Radius Analysis
-
-For each changed file, determine its impact scope:
-
-```bash
-DIFF_FILES=$(gh pr diff $PR --name-only)
-
-# Find all files that import changed modules
-for file in $DIFF_FILES; do
-  module=$(basename &quot;$file&quot; .ts | sed &#x27;s/\..*$//&#x27;)
-  echo &quot;=== Dependents of $file ===&quot;
-  grep -rl &quot;from.*$module\|import.*$module\|require.*$module&quot; src/ --include=&quot;*.ts&quot; --include=&quot;*.tsx&quot; -l 2&gt;/dev/null
-done
-
-# Check if changes span multiple services (monorepo)
-echo &quot;$DIFF_FILES&quot; | cut -d/ -f1-2 | sort -u
-
-# Identify shared contracts
-echo &quot;$DIFF_FILES&quot; | grep -E &quot;types/|interfaces/|schemas/|models/|shared/&quot;
-```
-
-**Blast Radius Severity:**
-
-| Severity | Criteria | Examples |
-|----------|----------|---------|
-| CRITICAL | Shared library used by 5+ consumers | `packages/utils/`, auth middleware, DB schema |
-| HIGH | Cross-service impact, shared config | API contracts, env vars, shared types |
-| MEDIUM | Single service internal change | Service handler, utility function |
-| LOW | Isolated change, no dependents | UI component, test file, documentation |
-
-### Step 3: Security Scan
-
-```bash
-DIFF=/tmp/pr-$PR.diff
-
-# SQL injection — raw string interpolation in queries
-grep -n &quot;query\|execute\|raw(&quot; $DIFF | grep -E &#x27;\$\{|f&quot;|%s|format\(&#x27; | grep &quot;^+&quot;
-
-# Hardcoded secrets
-grep -nE &quot;(password|secret|api_key|token|private_key)\s*=\s*[&#x27;\&quot;][^&#x27;\&quot;]{8,}&quot; $DIFF | grep &quot;^+&quot;
-
-# AWS keys
-grep -nE &quot;AKIA[0-9A-Z]{16}&quot; $DIFF
-
-# XSS vectors
-grep -n &quot;dangerouslySetInnerHTML\|innerHTML\s*=&quot; $DIFF | grep &quot;^+&quot;
-
-# Auth bypass indicators
-grep -n &quot;bypass\|skip.*auth\|noauth\|TODO.*auth&quot; $DIFF | grep &quot;^+&quot;
-
-# Insecure crypto
-grep -nE &quot;md5\(|sha1\(|createHash\([&#x27;\&quot;]md5|createHash\([&#x27;\&quot;]sha1&quot; $DIFF | grep &quot;^+&quot;
-
-# eval/exec
-grep -nE &quot;\beval\(|\bexec\(|\bsubprocess\.call\(&quot; $DIFF | grep &quot;^+&quot;
-
-# Path traversal
-grep -nE &quot;path\.join\(.*req\.|readFile\(.*req\.&quot; $DIFF | grep &quot;^+&quot;
-
-# Prototype pollution
-grep -n &quot;__proto__\|constructor\[&quot; $DIFF | grep &quot;^+&quot;
-
-# Sensitive data in logs
-grep -nE &quot;console\.(log|info|warn|error).*password\|console\.(log|info|warn|error).*token\|console\.(log|info|warn|error).*secret&quot; $DIFF | grep &quot;^+&quot;
-```
-
-### Step 4: Breaking Change Detection
-
-```bash
-# API endpoint removals
-grep &quot;^-&quot; $DIFF | grep -E &quot;router\.(get|post|put|delete|patch)\(|@app\.(get|post|put|delete)&quot;
-
-# TypeScript interface/type removals
-grep &quot;^-&quot; $DIFF | grep -E &quot;^-\s*(export\s+)?(interface|type) &quot;
-
-# Required field additions to existing types
-grep &quot;^+&quot; $DIFF | grep -E &quot;:\s*(string|number|boolean)\s*$&quot; | grep -v &quot;?&quot; # non-optional additions
-
-# Database migrations: destructive operations
-grep -E &quot;DROP TABLE|DROP COLUMN|ALTER.*NOT NULL|TRUNCATE&quot; $DIFF
-
-# Index removals
-grep -E &quot;DROP INDEX|remove_index&quot; $DIFF
-
-# Removed env vars
-grep &quot;^-&quot; $DIFF | grep -oE &quot;process\.env\.[A-Z_]+&quot; | sort -u
-
-# New env vars (may not be set in production)
-grep &quot;^+&quot; $DIFF | grep -oE &quot;process\.env\.[A-Z_]+&quot; | sort -u
-```
-
-### Step 5: Test Coverage Delta
-
-```bash
-# Count source vs test changes
-SRC_FILES=$(gh pr diff $PR --name-only | grep -vE &quot;\.test\.|\.spec\.|__tests__|\.stories\.&quot;)
-TEST_FILES=$(gh pr diff $PR --name-only | grep -E &quot;\.test\.|\.spec\.|__tests__&quot;)
-
-echo &quot;Source files changed: $(echo &quot;$SRC_FILES&quot; | grep -c .)&quot;
-echo &quot;Test files changed:   $(echo &quot;$TEST_FILES&quot; | grep -c .)&quot;
-
-# New lines of logic vs test
-LOGIC_LINES=$(grep &quot;^+&quot; $DIFF | grep -v &quot;^+++&quot; | grep -v &quot;\.test\.\|\.spec\.&quot; | wc -l)
-TEST_LINES=$(grep &quot;^+&quot; $DIFF | grep -v &quot;^+++&quot; | grep &quot;\.test\.\|\.spec\.&quot; | wc -l)
-echo &quot;New logic lines: $LOGIC_LINES&quot;
-echo &quot;New test lines:  $TEST_LINES&quot;
-```
-
-**Coverage Rules:**
-- New public function without tests: flag as must-fix
-- Deleted tests without deleted code: flag as must-fix
-- Coverage drop &gt;5%: block merge
-- Auth/payments paths: require near-100% coverage
-
-### Step 6: Performance Impact
-
-```bash
-# N+1 patterns: DB calls that might be inside loops
-grep -n &quot;\.find\|\.findOne\|\.query\|db\.&quot; $DIFF | grep &quot;^+&quot; | head -20
-
-# Heavy new dependencies
-grep &quot;^+&quot; $DIFF | grep -E &#x27;&quot;[a-z@].*&quot;:\s*&quot;[0-9^~]&#x27; | head -10
-
-# Unbounded loops
-grep -n &quot;while (true\|while(true&quot; $DIFF | grep &quot;^+&quot;
-
-# Missing await (accidentally sequential)
-grep -n &quot;await.*await&quot; $DIFF | grep &quot;^+&quot;
-
-# Large allocations
-grep -n &quot;new Array([0-9]\{4,\}\|Buffer\.alloc&quot; $DIFF | grep &quot;^+&quot;
-```
-
-## Review Report Format
-
-Structure every review using this format:
-
-```markdown
-## PR Review: [PR Title] (#NUMBER)
-
-**Blast Radius:** HIGH — changes `lib/auth` used by 5 services
-**Security:** 1 finding (medium severity)
-**Tests:** Coverage delta +2% (3 new tests for 5 new functions)
-**Breaking Changes:** None detected
-
----
-
-### MUST FIX (Blocking)
-
-**1. SQL Injection risk in `src/db/users.ts:42`**
-Raw string interpolation in WHERE clause.
-```diff
-- const user = await db.query(`SELECT * FROM users WHERE id = &#x27;${userId}&#x27;`)
-+ const user = await db.query(&#x27;SELECT * FROM users WHERE id = $1&#x27;, [userId])
-```
-
-**2. Missing auth check on `POST /api/admin/reset`**
-No role verification before destructive operation.
-Add `requireRole(&#x27;admin&#x27;)` middleware.
-
----
-
-### SHOULD FIX (Non-blocking)
-
-**3. N+1 pattern in `src/services/reports.ts:88`**
-`findUser()` called inside `results.map()` — batch with `findManyUsers(ids)`.
-
-**4. New env var `FEATURE_FLAG_X` not in `.env.example`**
-Add to `.env.example` with description so other developers know about it.
-
----
-
-### SUGGESTIONS
-
-**5. Consider pagination for `GET /api/projects`**
-Currently returns all projects without limit. Add `?limit=20&amp;offset=0`.
-
----
-
-### LOOKS GOOD
-- Auth flow for new OAuth provider is thorough
-- DB migration has proper rollback (`down()` method)
-- Error handling is consistent with rest of codebase
-- Test names clearly describe what they verify
-```
-
-## Complete Review Checklist (35 Items)
-
-```markdown
-### Scope and Context
-- [ ] PR title accurately describes the change
-- [ ] PR description explains WHY, not just WHAT
-- [ ] Linked ticket exists and matches scope
-- [ ] No unrelated changes (scope creep)
-- [ ] Breaking changes documented in PR body
-
-### Blast Radius
-- [ ] All files importing changed modules identified
-- [ ] Cross-service dependencies checked
-- [ ] Shared types/interfaces reviewed for breakage
-- [ ] New env vars documented in .env.example
-- [ ] DB migrations are reversible (have rollback)
-
-### Security
-- [ ] No hardcoded secrets or API keys
-- [ ] SQL queries use parameterized inputs
-- [ ] User inputs validated and sanitized
-- [ ] Auth/authorization on all new endpoints
-- [ ] No XSS vectors (innerHTML, dangerouslySetInnerHTML)
-- [ ] New dependencies checked for known CVEs
-- [ ] No sensitive data in logs (PII, tokens, passwords)
-- [ ] File uploads validated (type, size, content)
-- [ ] CORS configured correctly for new endpoints
-
-### Testing
-- [ ] New public functions have unit tests
-- [ ] Edge cases covered (empty, null, max values)
-- [ ] Error paths tested (not just happy path)
-- [ ] Integration tests for API endpoint changes
-- [ ] No tests deleted without clear justification
-- [ ] Test names describe what they verify
-
-### Breaking Changes
-- [ ] No API endpoints removed without deprecation
-- [ ] No required fields added to existing responses
-- [ ] No DB columns removed without migration plan
-- [ ] No env vars removed that may be in production
-- [ ] Backward-compatible for external consumers
-
-### Performance
-- [ ] No N+1 query patterns introduced
-- [ ] DB indexes added for new query patterns
-- [ ] No unbounded loops on large datasets
-- [ ] No heavy new dependencies without justification
-- [ ] Async operations correctly awaited
-- [ ] Caching considered for expensive operations
-
-### Code Quality
-- [ ] No dead code or unused imports
-- [ ] Error handling present (no empty catch blocks)
-- [ ] Consistent with existing patterns
-- [ ] Complex logic has explanatory comments
-```
-
-## Comment Labels
-
-Use consistent labels so authors can quickly prioritize:
-
-| Label | Meaning | Action Required |
-|-------|---------|-----------------|
-| `must:` | Blocking issue | Must fix before merge |
-| `should:` | Important improvement | Should fix, but not blocking |
-| `nit:` | Style/preference | Take it or leave it |
-| `question:` | Need clarification | Respond before merge |
-| `suggestion:` | Alternative approach | Consider, no action needed |
-| `praise:` | Good pattern | No action needed |
-
-## Common Pitfalls
-
-- **Reviewing style over substance** — let the linter handle formatting; focus on logic, security, correctness
-- **Missing blast radius** — a 5-line change in a shared utility can break 20 services
-- **Approving untested happy paths** — always check that error paths have coverage
-- **Ignoring migration risk** — NOT NULL additions need a default or two-phase migration
-- **Indirect secret exposure** — secrets in error messages and logs, not just hardcoded values
-- **Skipping large PRs** — if too large to review properly, request it be split
-- **Trickle feedback** — batch all comments in one review round; do not drip-feed over hours
-
-## Best Practices
-
-1. **Read the linked ticket first** — context prevents false positives in the review
-2. **Check CI before reviewing** — do not review code that fails to build
-3. **Prioritize blast radius and security over style** — these are where real bugs live
-4. **Label every comment** — `must:`, `nit:`, `question:` so authors know what matters
-5. **Batch all comments in one round** — multiple partial reviews frustrate authors
-6. **Acknowledge good patterns** — specific praise improves code quality culture
-7. **Reproduce locally for non-trivial changes** — especially auth and performance-sensitive code
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Blast radius analysis misses dependents | `grep` only searches `src/` by default | Expand search paths to include `packages/`, `libs/`, and monorepo service directories |
-| Security scan produces false positives on test files | Diff includes test fixtures with fake secrets | Filter scan output to exclude `*.test.*`, `*.spec.*`, `__tests__/`, and `fixtures/` paths |
-| Breaking change detection flags internal-only types | No distinction between exported and internal interfaces | Check whether flagged types are re-exported from the package entry point before reporting |
-| Test coverage delta shows 0 when tests exist | Test files use non-standard naming conventions | Adjust the `grep -E` pattern in Step 5 to match your project&#x27;s test file naming (e.g., `*.unit.*`, `*_test.*`) |
-| `gh pr diff` returns empty output | PR has no commits yet or branch is not pushed | Verify the PR has at least one commit pushed to the remote with `gh pr view $PR --json commits` |
-| N+1 detection flags ORM eager-loaded queries | Pattern matching cannot distinguish eager vs lazy loading | Cross-reference flagged lines with ORM configuration to confirm whether relations are pre-loaded |
-| Review report is too long for PR comment | PR touches 50+ files across multiple services | Split the review into per-service comments or request the author break the PR into smaller scoped PRs |
-
-## Success Criteria
-
-- Review turnaround time under 30 minutes for PRs with fewer than 500 changed lines
-- Zero post-merge security findings on PRs that received a full review using this skill
-- Blast radius severity rating matches actual production impact in 90%+ of cases
-- All must-fix items are resolved before merge with no exceptions
-- Test coverage delta is calculated and reported on every reviewed PR
-- Breaking changes are detected before merge in 95%+ of cases, validated against deployment incidents
-- Reviewer feedback is batched into a single review round at least 90% of the time
+- Before merging any PR that touches shared libraries, APIs, or database schemas.
+- When a PR is large (&gt;200 lines changed) and needs structured review.
+- For PRs in security-sensitive code paths (auth, payments, PII handling).
+- After an incident, to proactively review similar code changes.
+- For onboarding new contributors whose PRs need thorough feedback.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `blast_radius_calculator.py` | Calculate PR blast radius from import chains / dependency trees of changed files | `git diff --name-only main...HEAD \| python scripts/blast_radius_calculator.py --root src` |
+| `diff_analyzer.py` | Analyze a diff for risk indicators (large files, sensitive paths, config/breaking/security patterns) | `gh pr diff $PR \| python scripts/diff_analyzer.py --json` |
+| `review_checklist_generator.py` | Generate a tailored review checklist from changed file types/patterns | `git diff --name-only main...HEAD \| python scripts/review_checklist_generator.py` |
+
+## References
+
+Load the reference that matches the task — keep this file lean and pull detail on demand:
+
+- **[references/review-workflow-commands.md](references/review-workflow-commands.md)** — the 6-step review workflow with the exact `gh`/`grep` command catalog for context gathering, blast radius, security scan, breaking-change detection, coverage delta, and performance impact (plus the blast-radius severity table and coverage rules). Read when actually performing a review.
+- **[references/writeup-format-and-checklist.md](references/writeup-format-and-checklist.md)** — the review report template with worked examples, the complete 35-item review checklist, and the comment-label taxonomy. Read when writing up findings.
+- **[references/best-practices-and-troubleshooting.md](references/best-practices-and-troubleshooting.md)** — common reviewer pitfalls, best-practice habits, the troubleshooting table, and the success-criteria bar. Read before and after a review for quality control.
 
 ## Scope &amp; Limitations
 
@@ -1342,7 +648,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Pr Review Expert&quot;**
-   - Description: &quot;Systematic PR review with blast radius analysis, security scanning, breaking change detection, test coverage delta, and performance impact assessment. Produces prioritized findings with a 35+ item che...&quot;
+   - Description: &quot;Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1403,7 +709,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/pr-review-expert/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/pr-review-expert/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

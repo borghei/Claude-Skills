@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Pricing Prd</h1>
     <p class="page-subtitle">Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with business-growth/pricing-strategy. Covers packaging, willingness-to-pay, grandfathering, A/B design, rollback, regional pricing, and UX.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">pricing-prd</span><span class="tag">ab-testing</span><span class="tag">packaging</span><span class="tag">van-westendorp</span><span class="tag">monetizing-innovation</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">pricing</span><span class="tag">prd</span><span class="tag">packaging</span><span class="tag">ab-test</span><span class="tag">grandfathering</span><span class="tag">monetization</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,20 +397,6 @@ Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with bu
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rol
 
-## Your Key Capabilities
-- When to Use
-- When not to use
-- Tier vs Usage vs Hybrid
-- Common pricing-model anti-patterns
-- Van Westendorp Price Sensitivity Meter
-- Conjoint analysis
-
-## Frameworks &amp; Templates You Know
-- This skill is template-driven. No Python automation. The artifacts are:
-- | `assets/pricing_prd_template.md` | Full 13-section pricing PRD template |
-- - `assets/pricing_prd_template.md` — 13-section pricing PRD template
-- - `assets/grandfathering_communication_template.md` — Customer email template
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -432,20 +418,6 @@ Start by asking the user what they need help with.">
 Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with business-growth/pricing-strategy. Covers packaging, willingness-to-pay, grandfathering, A/B design, rollback, regional pricing, and UX.
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rol
-
-## Your Key Capabilities
-- When to Use
-- When not to use
-- Tier vs Usage vs Hybrid
-- Common pricing-model anti-patterns
-- Van Westendorp Price Sensitivity Meter
-- Conjoint analysis
-
-## Frameworks &amp; Templates You Know
-- This skill is template-driven. No Python automation. The artifacts are:
-- | `assets/pricing_prd_template.md` | Full 13-section pricing PRD template |
-- - `assets/pricing_prd_template.md` — 13-section pricing PRD template
-- - `assets/grandfathering_communication_template.md` — Customer email template
 
 ## How to Help
 When the user asks for help in this domain:
@@ -479,17 +451,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rollback&quot;. Most PMs underinvest in this artifact — they treat pricing as a marketing problem until the rollout breaks revenue.
 
-This skill addresses the underinvestment. It is opinionated about:
+This skill is opinionated about the structure of a pricing PRD (distinct from a feature PRD), the discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts), grandfathering and communication (the most-often-skipped sections that cause the most damage), A/B testing pricing without confusing customers or violating consumer-law principles, and rollback criteria written in advance rather than improvised under pressure. The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quot;, Ramanujam&#x27;s *Monetizing Innovation*, Van Westendorp&#x27;s Price Sensitivity Meter, Reforge pricing experimentation, and Stripe&#x27;s pricing-page patterns.
 
-- The structure of a pricing PRD (different from a feature PRD).
-- The discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts).
-- Grandfathering and communication (the most-often-skipped sections that cause the most damage).
-- A/B testing pricing without confusing customer or accidentally violating consumer-law principles in some jurisdictions.
-- Rollback criteria written in advance, not improvised under pressure.
+## Core Capabilities
 
-The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quot; (ProfitWell / Paddle), Madhavan Ramanujam&#x27;s *Monetizing Innovation*, Van Westendorp&#x27;s Price Sensitivity Meter, Reforge pricing experimentation, Stripe&#x27;s published pricing-page patterns, and Gabriel Weinberg&#x27;s *Traction*.
+- **PRD structure** — the 13-section pricing PRD: pricing model, packaging, grandfathering, communication plan, A/B design, rollback, regional pricing, on top of the standard PRD spine.
+- **Pricing model &amp; packaging decisions** — tier / usage / hybrid / per-seat / outcome-based selection with rationale; value carriers, tier boundaries, trial mechanisms.
+- **Willingness-to-pay research** — Van Westendorp, conjoint, and revealed-preference experiments.
+- **Experiment discipline** — hypothesis, primary metric, MDE, sample size, holdout, stop conditions, mix-shift detection.
+- **Risk management** — grandfathering policy, multi-channel communication plan, pre-written rollback thresholds, regional/compliance decisions.
 
-### When to Use
+## When to Use
 
 - Launching a new pricing model or tier
 - Updating prices on existing packages
@@ -499,284 +471,31 @@ The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quo
 - Localizing prices to a new region or currency
 - Splitting self-serve and enterprise pricing surfaces
 
-### When not to use
+**When NOT to use:** for the strategic question &quot;should we change pricing at all?&quot; (use `business-growth/pricing-strategy/`); for the financial-modeling side (use `finance/` skills); for SKU/billing implementation (engineering tickets generated from this PRD).
 
-- For the strategic question &quot;should we change pricing at all?&quot; — that&#x27;s `business-growth/pricing-strategy/`.
-- For the financial-modeling side of a pricing change — that&#x27;s `finance/` skills.
-- For SKU/billing implementation details — those live in engineering tickets generated from this PRD.
+## Clarify First
 
-## Pricing PRD vs Feature PRD
+Before generating the pricing PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A pricing PRD shares some sections with the standard 8-section PRD (`create-prd/`) but has critical additions:
+- [ ] **Pricing model change** — tier / usage / hybrid / per-seat / outcome-based shift (drives the pricing-model + packaging sections)
+- [ ] **Existing customers&#x27; fate** — the grandfathering policy (drives the most-skipped grandfathering + communication sections that cause the most damage)
+- [ ] **Experiment vs hard launch** — A/B test or direct rollout (drives the experiment-design section: hypothesis, MDE, holdout)
+- [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
 
-| Section | Feature PRD | Pricing PRD |
-|---|---|---|
-| Summary | Same | Same |
-| Background | Why now | Plus market context: competitor pricing moves, willingness-to-pay research |
-| Objective | KRs (engagement, retention) | KRs explicitly named: ARPU, conversion rate, gross margin, churn |
-| Market segments | JTBD-based | Plus willingness-to-pay band per segment |
-| Solution | Features | Pricing model + packaging + page design |
-| Release | T-shirt sizes | Cohort strategy, grandfathering, rollback, holdout |
-| **NEW: Pricing model** | n/a | Tier/usage/hybrid decision with rationale |
-| **NEW: Packaging** | n/a | What features in what tier, with rationale |
-| **NEW: Grandfathering** | n/a | Existing customer treatment |
-| **NEW: Communication plan** | n/a | Customer email, in-app, status page, sales enablement |
-| **NEW: A/B design** | n/a | Test/control split, primary metric, MDE, holdout |
-| **NEW: Rollback criteria** | n/a | Defined thresholds at which the rollout is reversed |
-| **NEW: Regional pricing** | n/a | Currency, tax inclusion, PPP, compliance |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Pricing Model Decision
+## References
 
-### Tier vs Usage vs Hybrid
+Pull the reference that matches the task; keep this file lean and load detail on demand.
 
-| Model | When it fits | Risks |
-|---|---|---|
-| **Tier (Good/Better/Best)** | Predictable value per customer, clear packaging boundaries, B2B sales-led motion | Cliffs at tier boundaries; customers downgrade rather than upgrade |
-| **Usage-based** | Value scales with usage (API calls, GB, events), self-serve, technical buyer | Revenue unpredictability, billing surprises, customer churn from bill shock |
-| **Hybrid (platform fee + usage)** | Multi-product, predictable platform value + variable feature value | Complexity in pricing communication; customers confused about expected cost |
-| **Per-seat** | Collaboration product, value scales linearly with users | Discourages adoption (gating new users behind expansion); declining in 2025-2026 |
-| **Outcome-based** | Vendor confident in measurable outcome (e.g. revenue lift, leads generated) | Hard to define; risk of customer disputing outcome measurement |
-
-Ramanujam&#x27;s *Monetizing Innovation* argues that the pricing model decision should precede the feature design, not follow it: &quot;design the product around the price, not the price around the product&quot;. The PRD should state which model was chosen and why other models were rejected.
-
-### Common pricing-model anti-patterns
-
-- **Per-seat for an AI product**: AI value does not scale with seats; per-seat punishes adoption.
-- **Usage-based without a floor**: customers can drop to $0 in a slow month; cash flow becomes volatile.
-- **Tier with one feature differentiating Good from Better**: customers shop around the differentiator; either bundle more value into Better or merge tiers.
-- **Public enterprise pricing**: enterprise pricing should be sales-led; publishing it leaves negotiation room on the table and creates floor effects.
-
-## Willingness-to-Pay Research
-
-Three methods, ranked from quickest to most rigorous:
-
-### Van Westendorp Price Sensitivity Meter
-
-A four-question survey administered to 50-200 prospects/customers per segment:
-
-1. At what price would you consider this product **too expensive** to consider buying?
-2. At what price would you consider this product **too cheap** to be of high quality?
-3. At what price would you consider this product to be **getting expensive** but you might still consider buying?
-4. At what price would you consider this product to be a **bargain**?
-
-The intersections of the cumulative response curves yield:
-
-- **Range of Acceptable Pricing (RAP)**: between the &quot;too cheap&quot; and &quot;too expensive&quot; curve intersections.
-- **Optimal Price Point (OPP)**: where &quot;too cheap&quot; and &quot;too expensive&quot; cross.
-- **Indifference Price Point (IPP)**: where &quot;expensive&quot; and &quot;bargain&quot; cross — the price the median customer perceives as fair.
-
-Limits: stated preference, not revealed; ignores feature dimensions; works best at the price-point level, not the packaging level.
-
-### Conjoint analysis
-
-A pairwise-choice survey that asks customers to choose between bundle configurations at different price points. Yields willingness-to-pay per feature.
-
-Stronger than Van Westendorp because it captures the feature-price tradeoff. Weaker for cost-of-survey: typically requires 200-500 respondents per segment and statistical analysis software.
-
-### Pricing experiments (revealed preference)
-
-A live A/B test of two price points against new sign-ups. The strongest evidence — revealed willingness to pay — but only available once the team is willing to deploy the change. See &quot;A/B Testing Pricing&quot; below.
-
-## Packaging Decisions
-
-Packaging is which features go in which tier. The decisions are:
-
-1. **What goes in the entry tier?** Enough to deliver the core promise; not so much that customers never upgrade.
-2. **What is the value carrier in each tier?** Each tier should have one or two &quot;headline&quot; features that justify the price.
-3. **Where are the boundaries?** The boundary between tiers should map to a measurable usage characteristic (number of seats, number of integrations, support level), not to a feature toggle that feels arbitrary.
-4. **What is the trial mechanism?** Time-bound (14 days), feature-limited (free tier with caps), reverse-trial (start on Pro, downgrade if usage is low).
-
-### Reforge packaging principles (paraphrased)
-
-- Each tier should have a clear customer archetype. Good = solo / SMB; Better = small team / growing; Best = scaling org / enterprise.
-- The &quot;value gap&quot; between tiers should be at least 2x. If Better is 1.5x the price of Good, the customer hesitates; if it&#x27;s 2-3x the price with 3-5x the value, the upgrade is clear.
-- Avoid more than 4 tiers. Customers cannot evaluate more than 4-5 options without choice paralysis.
-
-## Grandfathering Policy
-
-The most-often-skipped section of a pricing PRD. Existing customers were promised a price at sign-up; raising it without a plan is a contract violation in some jurisdictions and a trust violation everywhere.
-
-Three grandfathering strategies:
-
-| Strategy | Description | Use when |
-|---|---|---|
-| **Permanent grandfathering** | Existing customers keep their original price indefinitely | Brand-sensitive customer base; small enough that revenue impact is bearable |
-| **Time-bounded grandfathering** | Existing customers keep price for N months/years, then migrate | Common pattern; 12-month grandfathering is typical |
-| **No grandfathering** | All customers migrate to new pricing on a stated date | Use only if old pricing was clearly a beta / launch promo |
-
-A grandfathering decision must:
-
-- State the duration in writing (in the PRD and in the customer communication).
-- State the migration mechanism (auto, opt-in, opt-out) and the customer&#x27;s choices.
-- Include a rate-limit on how quickly customers can be moved (e.g. &quot;no customer pays more than 25% more YoY without explicit re-signature&quot;).
-- Be reviewed by Legal in regulated regions (EU consumer law, California subscription auto-renewal laws, etc.).
-
-See `assets/grandfathering_communication_template.md` for a worked customer email.
-
-## Communication Plan
-
-Every pricing change requires a communication plan with at least these channels:
-
-| Channel | Audience | Lead time | Content |
-|---|---|---|---|
-| **Internal: sales enablement** | AEs, SDRs, CSMs | 2-4 weeks before launch | Battle card, FAQ, talk-track for objections |
-| **Internal: support enablement** | Support agents | 1-2 weeks before launch | Macro responses, escalation paths |
-| **Customer email (existing)** | All paying customers | 4-8 weeks before any price increase | Honest explanation, new price, grandfathering terms, opt-out mechanism if any |
-| **In-app banner / modal** | Logged-in users | At launch | New pricing visible, link to FAQ |
-| **Pricing page** | Public | At launch | New page live |
-| **Status page** | Public | At launch | Note of pricing change, link to FAQ |
-| **Press / blog post** | External | At launch (or 24h before) | If the change is strategic — new tier, new model — write the story |
-
-Pricing changes that omit any of these channels typically generate support ticket spikes, public Twitter complaints, and trust erosion. The communication plan is not optional.
-
-## A/B Testing Pricing
-
-### The legal and ethical question
-
-Showing different prices to different customers raises consumer-protection concerns in some jurisdictions. Common safeguards:
-
-- Test new prices **only to prospects who have not yet seen the existing price** (new sign-ups, anonymous visitors). Avoid testing on existing customers without explicit consent.
-- Do not segment by personal attribute (age, gender, ethnicity, geography in some regions) without legal review.
-- Be prepared to honor whichever price was shown to the customer at the moment of decision — do not retroactively change it.
-- Disclose pricing experiments in your Terms of Service or pricing FAQ if the volume is material.
-
-When in doubt, run pricing tests on anonymous visitors only, not on returning users with an account.
-
-### Test design
-
-A pricing experiment needs:
-
-| Element | Detail |
-|---|---|
-| **Hypothesis** | Stated in advance: &quot;raising the Pro tier from $29 to $39 will increase ARPU by ≥ 15% without dropping conversion below the 95% CI lower bound of current rate.&quot; |
-| **Primary metric** | Choose one. Usually ARPU (revenue per visitor) or conversion-to-paid rate. |
-| **Secondary metrics** | Watch but do not optimize. Activation rate, trial-to-paid, downgrade rate, churn at 30 days. |
-| **MDE (minimum detectable effect)** | Stated in advance with statistical power. Typical: 80% power, 5% significance, MDE of 5-10% relative. |
-| **Sample size** | Computed before launch. Pricing tests typically need 5,000-50,000 visitors per arm depending on baseline conversion. |
-| **Test duration** | Minimum 2 weeks (to cover weekly seasonality); maximum 12 weeks (to avoid drift in customer mix). |
-| **Holdout** | A small permanent control group on the old price (e.g. 5-10%) for 90 days post-rollout to measure cohort retention. |
-| **Stop conditions** | Stated in advance: &quot;stop early if churn in the variant arm exceeds the control arm by 3+ percentage points.&quot; |
-
-### Common A/B test pitfalls
-
-- **Vanity-metric optimization**: optimizing conversion at the expense of ARPU. Higher conversion at a lower price can be worse net revenue.
-- **Short-window readout**: pricing effects often surface at the 30-90 day mark (renewal, downgrade) rather than at sign-up.
-- **Mix shift**: a lower price attracts a different customer mix (more SMB, less enterprise). The treatment &quot;works&quot; in the test but degrades unit economics.
-- **Selection bias from traffic source**: paid acquisition customers behave differently from organic; ensure the test runs across the traffic mix.
-- **Sample-size cargo-culting**: copying another team&#x27;s &quot;we ran for 4 weeks&quot; without computing the required sample size for your baseline.
-
-## Rollback Criteria
-
-Define before launch the conditions under which the team will reverse the rollout. Examples:
-
-| Condition | Threshold | Action |
-|---|---|---|
-| New-sign-up conversion drops | &gt; 10 percentage points relative for &gt; 5 business days | Pause new traffic to new pricing; investigate |
-| Existing-customer churn spikes | &gt; 2x baseline 30-day churn rate | Pause communication; offer 6-month price freeze to affected cohort |
-| Customer support volume spikes | &gt; 3x baseline for &gt; 3 business days | Add support capacity; reassess communication |
-| Twitter / public sentiment | Sustained negative coverage, &gt;100 mentions in 24 hours | PR / leadership response; consider price freeze |
-| Revenue net impact | Below the lower-bound projection in the financial model | Re-evaluate with finance |
-
-A rollout that hits a rollback threshold should not be argued mid-incident. The conditions were written in advance precisely to remove debate.
-
-## Regional Pricing
-
-For multi-region products, the PRD should specify:
-
-| Decision | Options |
-|---|---|
-| Currency | USD only, local currency, customer choice |
-| Tax inclusion | VAT-inclusive (EU norm), VAT-exclusive (US norm), per-region |
-| Purchasing-power parity (PPP) adjustment | None, manual per-region, formulaic |
-| Subscription terms by region | Auto-renewal disclosure (EU), 7-day cancellation right (EU), CCPA-required disclosures (CA) |
-| Payment methods by region | Card, ACH, SEPA, iDEAL, regional wallets |
-| Pricing localization tier | Same tier names globally, region-specific tier structure |
-
-PPP-adjusted pricing can substantially increase emerging-market revenue but risks arbitrage if currency conversions favor migration. Most teams that try PPP-adjusted pricing add geo-IP + payment-method controls to discourage arbitrage.
-
-## Pricing-Page UX Checklist
-
-A pricing page is the conversion surface. The checklist in `assets/pricing_page_checklist.md` covers:
-
-- Headline value proposition above the tiers
-- 3-4 tier maximum on the primary view
-- Most-popular tier visually highlighted
-- Feature-comparison table below the tiers
-- Per-feature explanation on hover/click
-- FAQ section addressing top 5 objections
-- Trust signals (customer logos, security badges, testimonials)
-- CTA per tier with verb-led copy (&quot;Start free trial&quot;, not &quot;Sign up&quot;)
-- Pricing toggle (monthly / annual) with annual discount visible
-- Currency toggle (if multi-region)
-- Tax-inclusive / -exclusive disclosure visible
-- Contact-sales path for enterprise
-
-## Pricing Anti-Patterns
-
-Common mistakes the PRD should explicitly guard against:
-
-| Anti-pattern | What goes wrong |
-|---|---|
-| **Cliffs** | Pricing tiers with steep jumps cause customers to downgrade rather than upgrade |
-| **Hidden fees** | Setup fees, overage charges, &quot;starting at&quot; pricing — corrode trust at billing time |
-| **Decoy effect gone wrong** | Adding a &quot;deliberately-worse&quot; middle tier to push customers to a target tier backfires if customers notice |
-| **Unbundling everything** | Per-feature pricing creates choice paralysis and a long sales cycle |
-| **Bundling everything** | Single-tier pricing leaves money on the table for high-value customers |
-| **Price-anchoring on cost** | Pricing to cover engineering cost ignores customer willingness-to-pay (Ramanujam&#x27;s main critique) |
-| **Round numbers obsession** | $29 → $30 feels different despite being only $1 change; respect the price-point psychology but don&#x27;t obsess |
-| **&quot;Limited-time&quot; pricing forever** | Customers stop believing in promotions; train them to expect discounts |
-| **Pricing-page redesign without test** | Treating the pricing page as a marketing asset rather than a conversion asset |
-
-## Workflow
-
-1. **Strategy → Tactic**: confirm that `business-growth/pricing-strategy/` has run and produced a strategic direction. The pricing PRD operationalizes that direction.
-2. **Willingness-to-pay**: gather data (Van Westendorp survey, conjoint, or competitor benchmarks). Document in PRD.
-3. **Packaging**: decide tiers, value carriers, boundaries, trial mechanism.
-4. **Grandfathering**: decide policy; review with legal in regulated regions.
-5. **Communication plan**: draft all channels with copy.
-6. **A/B design**: hypothesis, primary metric, MDE, sample size, holdout, stop conditions.
-7. **Rollback criteria**: thresholds and actions, signed off by leadership.
-8. **Regional**: currencies, tax, PPP, payment methods.
-9. **Pricing page UX**: design the page; review against checklist.
-10. **Sign-off**: PM + Finance + Legal + Marketing + Sales.
-11. **Launch**: execute communication plan; monitor metrics dashboard daily for first 2 weeks, weekly for first quarter.
-12. **Post-launch retro**: 90 days after launch, write a retrospective covering predicted vs actual on ARPU, conversion, churn.
-
-## Tools
-
-This skill is template-driven. No Python automation. The artifacts are:
-
-| Artifact | Purpose |
-|---|---|
-| `assets/pricing_prd_template.md` | Full 13-section pricing PRD template |
-| `assets/pricing_experiment_design.md` | A/B test design worksheet with hypothesis, MDE, holdout |
-| `assets/pricing_page_checklist.md` | UX review checklist for the pricing page |
-| `assets/grandfathering_communication_template.md` | Customer email for grandfathering communication |
-| `references/pricing-experimentation-guide.md` | Deep guide on pricing A/B tests, mix-shift detection |
-| `references/packaging-frameworks.md` | Tier/usage/hybrid frameworks, Ramanujam-style packaging |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| A/B test shows revenue lift but churn rises 90 days later | Short readout window; treatment attracted a worse-fitting customer mix | Extend readout to 90+ days; add cohort retention to primary metrics; consider re-running on a different acquisition channel mix |
-| Existing customers revolt after price increase | Grandfathering communication came too late or felt impersonal | Personalize the comm (from a real exec); offer a longer grandfathering window or one-time renewal discount; publish the rationale |
-| Sales reports &quot;customers asking why we&#x27;re more expensive than X&quot; | Pricing page does not communicate differentiated value | Strengthen value carrier per tier; add competitive comparison table; ensure sales has fresh battle card |
-| Conversion drops in the lower tier after raising the upper tier | Customers anchored on the new upper-tier price and downgraded | This is sometimes desirable (margin shift). If not, narrow the value gap by adding to the lower tier |
-| PPP-adjusted pricing creates arbitrage (customers using VPNs) | Geo-IP and payment-method controls not in place | Add billing-country verification at payment time; require local payment method for local price |
-| Sales team continues quoting old pricing weeks after launch | Sales enablement was a memo, not a process | Run a mandatory enablement session; gate quoting tools to new pricing only; track price-realized vs price-listed |
-| A/B test never reaches significance | Underpowered (sample too small for the effect size) | Recompute MDE for the realistic effect size; extend test duration; consider that the effect may genuinely be too small to detect — that&#x27;s a finding |
-
-## Success Criteria
-
-- Every pricing change ships with a written PRD covering all 13 sections (no section skipped)
-- Grandfathering policy is decided and communicated before any customer sees the new price
-- A/B tests have hypothesis, primary metric, MDE, and rollback criteria stated in writing before launch
-- Communication plan is executed across all required channels with documented copy
-- 90-day post-launch retro is written and compared against pre-launch projections
-- Customer support volume returns to baseline within 30 days of launch
-- ARPU and conversion changes are within ± 20% of the financial model projection at 90 days
-- Sales enablement is completed before launch; sales-quoted price matches listed price 95%+ of the time
+- **[references/pricing-prd-playbook.md](references/pricing-prd-playbook.md)** — the full end-to-end playbook: pricing-PRD-vs-feature-PRD table, model decision, willingness-to-pay methods, packaging, grandfathering, communication plan, A/B test design, rollback criteria, regional pricing, UX checklist, anti-patterns, 12-step workflow, tools/assets table, troubleshooting, success criteria, and source frameworks. Read when authoring any pricing PRD.
+- **[references/pricing-experimentation-guide.md](references/pricing-experimentation-guide.md)** — deep guide on pricing A/B tests, mix-shift detection, and readout windows. Read when designing or reading out a pricing experiment.
+- **[references/packaging-frameworks.md](references/packaging-frameworks.md)** — tier vs usage vs hybrid frameworks and Ramanujam-style packaging. Read when deciding what goes in which tier.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how pricing PRDs go wrong and how to fix them. Read when reviewing a draft for quality.
+- **assets/pricing_prd_template.md** — 13-section pricing PRD template. Use to author the artifact.
+- **assets/pricing_experiment_design.md** — A/B test design worksheet (hypothesis, MDE, holdout). Use when planning a test.
+- **assets/pricing_page_checklist.md** — UX review checklist for the pricing page. Use before shipping the page.
+- **assets/grandfathering_communication_template.md** — customer email for grandfathering communication. Use when drafting the comm plan.
 
 ## Scope &amp; Limitations
 
@@ -789,7 +508,6 @@ This skill is template-driven. No Python automation. The artifacts are:
 - A/B testing pricing on identified customers carries consumer-law risk in some jurisdictions. When in doubt, test on anonymous visitors only and consult legal.
 - The Van Westendorp method has known limitations — stated preference rather than revealed, feature-blind, segment-aggregated. Use as one input among three, not as the answer.
 - Pricing-page UX changes can be confounded with pricing-model changes in A/B tests. Run UX-only experiments separately from model-change experiments to attribute the lift correctly.
-- Reforge, ProfitWell, and other practitioners publish strong empirical guidance on pricing; this skill is opinionated about the structure, not about the specific numbers. Numbers are context-dependent and need primary research per product.
 
 ## Integration Points
 
@@ -805,22 +523,6 @@ This skill is template-driven. No Python automation. The artifacts are:
 | `prfaq/` | Feeds into | A new pricing model often warrants a PR/FAQ for internal alignment |
 | `eol-communication/` | Pattern overlap | EOL of a pricing tier uses similar grandfathering and communication patterns |
 | `launch-playbook/` | Feeds into | Pricing-page launch follows standard launch playbook for internal/external comm coordination |
-
-## References
-
-- `references/pricing-experimentation-guide.md` — A/B test design for pricing, mix-shift detection, readout windows
-- `references/packaging-frameworks.md` — Tier vs usage vs hybrid, Ramanujam packaging principles
-- `assets/pricing_prd_template.md` — 13-section pricing PRD template
-- `assets/pricing_experiment_design.md` — A/B test design worksheet
-- `assets/pricing_page_checklist.md` — UX review checklist
-- `assets/grandfathering_communication_template.md` — Customer email template
-- Madhavan Ramanujam &amp; Georg Tacke, *Monetizing Innovation: How Smart Companies Design the Product Around the Price* (2016)
-- Patrick Campbell (ProfitWell / Paddle), &quot;Pricing as a feature&quot; — https://www.paddle.com/
-- Peter Van Westendorp, &quot;NSS-Price Sensitivity Meter&quot; (1976) — original methodology
-- Reforge, &quot;Pricing &amp; Monetization&quot; curriculum — https://www.reforge.com/programs/pricing-monetization
-- Gabriel Weinberg &amp; Justin Mares, *Traction* (2015) — chapter on pricing as a channel
-- Stripe, &quot;Atlas Guide to Pricing&quot; — https://stripe.com/atlas/guides/pricing
-- Hermann Simon, *Confessions of the Pricing Man* (2015) — strategic pricing context
 
 ---
 
@@ -877,17 +579,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rollback&quot;. Most PMs underinvest in this artifact — they treat pricing as a marketing problem until the rollout breaks revenue.
 
-This skill addresses the underinvestment. It is opinionated about:
+This skill is opinionated about the structure of a pricing PRD (distinct from a feature PRD), the discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts), grandfathering and communication (the most-often-skipped sections that cause the most damage), A/B testing pricing without confusing customers or violating consumer-law principles, and rollback criteria written in advance rather than improvised under pressure. The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quot;, Ramanujam&#x27;s *Monetizing Innovation*, Van Westendorp&#x27;s Price Sensitivity Meter, Reforge pricing experimentation, and Stripe&#x27;s pricing-page patterns.
 
-- The structure of a pricing PRD (different from a feature PRD).
-- The discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts).
-- Grandfathering and communication (the most-often-skipped sections that cause the most damage).
-- A/B testing pricing without confusing customer or accidentally violating consumer-law principles in some jurisdictions.
-- Rollback criteria written in advance, not improvised under pressure.
+## Core Capabilities
 
-The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quot; (ProfitWell / Paddle), Madhavan Ramanujam&#x27;s *Monetizing Innovation*, Van Westendorp&#x27;s Price Sensitivity Meter, Reforge pricing experimentation, Stripe&#x27;s published pricing-page patterns, and Gabriel Weinberg&#x27;s *Traction*.
+- **PRD structure** — the 13-section pricing PRD: pricing model, packaging, grandfathering, communication plan, A/B design, rollback, regional pricing, on top of the standard PRD spine.
+- **Pricing model &amp; packaging decisions** — tier / usage / hybrid / per-seat / outcome-based selection with rationale; value carriers, tier boundaries, trial mechanisms.
+- **Willingness-to-pay research** — Van Westendorp, conjoint, and revealed-preference experiments.
+- **Experiment discipline** — hypothesis, primary metric, MDE, sample size, holdout, stop conditions, mix-shift detection.
+- **Risk management** — grandfathering policy, multi-channel communication plan, pre-written rollback thresholds, regional/compliance decisions.
 
-### When to Use
+## When to Use
 
 - Launching a new pricing model or tier
 - Updating prices on existing packages
@@ -897,284 +599,31 @@ The frameworks behind it: Patrick Campbell&#x27;s &quot;Pricing as a feature&quo
 - Localizing prices to a new region or currency
 - Splitting self-serve and enterprise pricing surfaces
 
-### When not to use
+**When NOT to use:** for the strategic question &quot;should we change pricing at all?&quot; (use `business-growth/pricing-strategy/`); for the financial-modeling side (use `finance/` skills); for SKU/billing implementation (engineering tickets generated from this PRD).
 
-- For the strategic question &quot;should we change pricing at all?&quot; — that&#x27;s `business-growth/pricing-strategy/`.
-- For the financial-modeling side of a pricing change — that&#x27;s `finance/` skills.
-- For SKU/billing implementation details — those live in engineering tickets generated from this PRD.
+## Clarify First
 
-## Pricing PRD vs Feature PRD
+Before generating the pricing PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A pricing PRD shares some sections with the standard 8-section PRD (`create-prd/`) but has critical additions:
+- [ ] **Pricing model change** — tier / usage / hybrid / per-seat / outcome-based shift (drives the pricing-model + packaging sections)
+- [ ] **Existing customers&#x27; fate** — the grandfathering policy (drives the most-skipped grandfathering + communication sections that cause the most damage)
+- [ ] **Experiment vs hard launch** — A/B test or direct rollout (drives the experiment-design section: hypothesis, MDE, holdout)
+- [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
 
-| Section | Feature PRD | Pricing PRD |
-|---|---|---|
-| Summary | Same | Same |
-| Background | Why now | Plus market context: competitor pricing moves, willingness-to-pay research |
-| Objective | KRs (engagement, retention) | KRs explicitly named: ARPU, conversion rate, gross margin, churn |
-| Market segments | JTBD-based | Plus willingness-to-pay band per segment |
-| Solution | Features | Pricing model + packaging + page design |
-| Release | T-shirt sizes | Cohort strategy, grandfathering, rollback, holdout |
-| **NEW: Pricing model** | n/a | Tier/usage/hybrid decision with rationale |
-| **NEW: Packaging** | n/a | What features in what tier, with rationale |
-| **NEW: Grandfathering** | n/a | Existing customer treatment |
-| **NEW: Communication plan** | n/a | Customer email, in-app, status page, sales enablement |
-| **NEW: A/B design** | n/a | Test/control split, primary metric, MDE, holdout |
-| **NEW: Rollback criteria** | n/a | Defined thresholds at which the rollout is reversed |
-| **NEW: Regional pricing** | n/a | Currency, tax inclusion, PPP, compliance |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Pricing Model Decision
+## References
 
-### Tier vs Usage vs Hybrid
+Pull the reference that matches the task; keep this file lean and load detail on demand.
 
-| Model | When it fits | Risks |
-|---|---|---|
-| **Tier (Good/Better/Best)** | Predictable value per customer, clear packaging boundaries, B2B sales-led motion | Cliffs at tier boundaries; customers downgrade rather than upgrade |
-| **Usage-based** | Value scales with usage (API calls, GB, events), self-serve, technical buyer | Revenue unpredictability, billing surprises, customer churn from bill shock |
-| **Hybrid (platform fee + usage)** | Multi-product, predictable platform value + variable feature value | Complexity in pricing communication; customers confused about expected cost |
-| **Per-seat** | Collaboration product, value scales linearly with users | Discourages adoption (gating new users behind expansion); declining in 2025-2026 |
-| **Outcome-based** | Vendor confident in measurable outcome (e.g. revenue lift, leads generated) | Hard to define; risk of customer disputing outcome measurement |
-
-Ramanujam&#x27;s *Monetizing Innovation* argues that the pricing model decision should precede the feature design, not follow it: &quot;design the product around the price, not the price around the product&quot;. The PRD should state which model was chosen and why other models were rejected.
-
-### Common pricing-model anti-patterns
-
-- **Per-seat for an AI product**: AI value does not scale with seats; per-seat punishes adoption.
-- **Usage-based without a floor**: customers can drop to $0 in a slow month; cash flow becomes volatile.
-- **Tier with one feature differentiating Good from Better**: customers shop around the differentiator; either bundle more value into Better or merge tiers.
-- **Public enterprise pricing**: enterprise pricing should be sales-led; publishing it leaves negotiation room on the table and creates floor effects.
-
-## Willingness-to-Pay Research
-
-Three methods, ranked from quickest to most rigorous:
-
-### Van Westendorp Price Sensitivity Meter
-
-A four-question survey administered to 50-200 prospects/customers per segment:
-
-1. At what price would you consider this product **too expensive** to consider buying?
-2. At what price would you consider this product **too cheap** to be of high quality?
-3. At what price would you consider this product to be **getting expensive** but you might still consider buying?
-4. At what price would you consider this product to be a **bargain**?
-
-The intersections of the cumulative response curves yield:
-
-- **Range of Acceptable Pricing (RAP)**: between the &quot;too cheap&quot; and &quot;too expensive&quot; curve intersections.
-- **Optimal Price Point (OPP)**: where &quot;too cheap&quot; and &quot;too expensive&quot; cross.
-- **Indifference Price Point (IPP)**: where &quot;expensive&quot; and &quot;bargain&quot; cross — the price the median customer perceives as fair.
-
-Limits: stated preference, not revealed; ignores feature dimensions; works best at the price-point level, not the packaging level.
-
-### Conjoint analysis
-
-A pairwise-choice survey that asks customers to choose between bundle configurations at different price points. Yields willingness-to-pay per feature.
-
-Stronger than Van Westendorp because it captures the feature-price tradeoff. Weaker for cost-of-survey: typically requires 200-500 respondents per segment and statistical analysis software.
-
-### Pricing experiments (revealed preference)
-
-A live A/B test of two price points against new sign-ups. The strongest evidence — revealed willingness to pay — but only available once the team is willing to deploy the change. See &quot;A/B Testing Pricing&quot; below.
-
-## Packaging Decisions
-
-Packaging is which features go in which tier. The decisions are:
-
-1. **What goes in the entry tier?** Enough to deliver the core promise; not so much that customers never upgrade.
-2. **What is the value carrier in each tier?** Each tier should have one or two &quot;headline&quot; features that justify the price.
-3. **Where are the boundaries?** The boundary between tiers should map to a measurable usage characteristic (number of seats, number of integrations, support level), not to a feature toggle that feels arbitrary.
-4. **What is the trial mechanism?** Time-bound (14 days), feature-limited (free tier with caps), reverse-trial (start on Pro, downgrade if usage is low).
-
-### Reforge packaging principles (paraphrased)
-
-- Each tier should have a clear customer archetype. Good = solo / SMB; Better = small team / growing; Best = scaling org / enterprise.
-- The &quot;value gap&quot; between tiers should be at least 2x. If Better is 1.5x the price of Good, the customer hesitates; if it&#x27;s 2-3x the price with 3-5x the value, the upgrade is clear.
-- Avoid more than 4 tiers. Customers cannot evaluate more than 4-5 options without choice paralysis.
-
-## Grandfathering Policy
-
-The most-often-skipped section of a pricing PRD. Existing customers were promised a price at sign-up; raising it without a plan is a contract violation in some jurisdictions and a trust violation everywhere.
-
-Three grandfathering strategies:
-
-| Strategy | Description | Use when |
-|---|---|---|
-| **Permanent grandfathering** | Existing customers keep their original price indefinitely | Brand-sensitive customer base; small enough that revenue impact is bearable |
-| **Time-bounded grandfathering** | Existing customers keep price for N months/years, then migrate | Common pattern; 12-month grandfathering is typical |
-| **No grandfathering** | All customers migrate to new pricing on a stated date | Use only if old pricing was clearly a beta / launch promo |
-
-A grandfathering decision must:
-
-- State the duration in writing (in the PRD and in the customer communication).
-- State the migration mechanism (auto, opt-in, opt-out) and the customer&#x27;s choices.
-- Include a rate-limit on how quickly customers can be moved (e.g. &quot;no customer pays more than 25% more YoY without explicit re-signature&quot;).
-- Be reviewed by Legal in regulated regions (EU consumer law, California subscription auto-renewal laws, etc.).
-
-See `assets/grandfathering_communication_template.md` for a worked customer email.
-
-## Communication Plan
-
-Every pricing change requires a communication plan with at least these channels:
-
-| Channel | Audience | Lead time | Content |
-|---|---|---|---|
-| **Internal: sales enablement** | AEs, SDRs, CSMs | 2-4 weeks before launch | Battle card, FAQ, talk-track for objections |
-| **Internal: support enablement** | Support agents | 1-2 weeks before launch | Macro responses, escalation paths |
-| **Customer email (existing)** | All paying customers | 4-8 weeks before any price increase | Honest explanation, new price, grandfathering terms, opt-out mechanism if any |
-| **In-app banner / modal** | Logged-in users | At launch | New pricing visible, link to FAQ |
-| **Pricing page** | Public | At launch | New page live |
-| **Status page** | Public | At launch | Note of pricing change, link to FAQ |
-| **Press / blog post** | External | At launch (or 24h before) | If the change is strategic — new tier, new model — write the story |
-
-Pricing changes that omit any of these channels typically generate support ticket spikes, public Twitter complaints, and trust erosion. The communication plan is not optional.
-
-## A/B Testing Pricing
-
-### The legal and ethical question
-
-Showing different prices to different customers raises consumer-protection concerns in some jurisdictions. Common safeguards:
-
-- Test new prices **only to prospects who have not yet seen the existing price** (new sign-ups, anonymous visitors). Avoid testing on existing customers without explicit consent.
-- Do not segment by personal attribute (age, gender, ethnicity, geography in some regions) without legal review.
-- Be prepared to honor whichever price was shown to the customer at the moment of decision — do not retroactively change it.
-- Disclose pricing experiments in your Terms of Service or pricing FAQ if the volume is material.
-
-When in doubt, run pricing tests on anonymous visitors only, not on returning users with an account.
-
-### Test design
-
-A pricing experiment needs:
-
-| Element | Detail |
-|---|---|
-| **Hypothesis** | Stated in advance: &quot;raising the Pro tier from $29 to $39 will increase ARPU by ≥ 15% without dropping conversion below the 95% CI lower bound of current rate.&quot; |
-| **Primary metric** | Choose one. Usually ARPU (revenue per visitor) or conversion-to-paid rate. |
-| **Secondary metrics** | Watch but do not optimize. Activation rate, trial-to-paid, downgrade rate, churn at 30 days. |
-| **MDE (minimum detectable effect)** | Stated in advance with statistical power. Typical: 80% power, 5% significance, MDE of 5-10% relative. |
-| **Sample size** | Computed before launch. Pricing tests typically need 5,000-50,000 visitors per arm depending on baseline conversion. |
-| **Test duration** | Minimum 2 weeks (to cover weekly seasonality); maximum 12 weeks (to avoid drift in customer mix). |
-| **Holdout** | A small permanent control group on the old price (e.g. 5-10%) for 90 days post-rollout to measure cohort retention. |
-| **Stop conditions** | Stated in advance: &quot;stop early if churn in the variant arm exceeds the control arm by 3+ percentage points.&quot; |
-
-### Common A/B test pitfalls
-
-- **Vanity-metric optimization**: optimizing conversion at the expense of ARPU. Higher conversion at a lower price can be worse net revenue.
-- **Short-window readout**: pricing effects often surface at the 30-90 day mark (renewal, downgrade) rather than at sign-up.
-- **Mix shift**: a lower price attracts a different customer mix (more SMB, less enterprise). The treatment &quot;works&quot; in the test but degrades unit economics.
-- **Selection bias from traffic source**: paid acquisition customers behave differently from organic; ensure the test runs across the traffic mix.
-- **Sample-size cargo-culting**: copying another team&#x27;s &quot;we ran for 4 weeks&quot; without computing the required sample size for your baseline.
-
-## Rollback Criteria
-
-Define before launch the conditions under which the team will reverse the rollout. Examples:
-
-| Condition | Threshold | Action |
-|---|---|---|
-| New-sign-up conversion drops | &gt; 10 percentage points relative for &gt; 5 business days | Pause new traffic to new pricing; investigate |
-| Existing-customer churn spikes | &gt; 2x baseline 30-day churn rate | Pause communication; offer 6-month price freeze to affected cohort |
-| Customer support volume spikes | &gt; 3x baseline for &gt; 3 business days | Add support capacity; reassess communication |
-| Twitter / public sentiment | Sustained negative coverage, &gt;100 mentions in 24 hours | PR / leadership response; consider price freeze |
-| Revenue net impact | Below the lower-bound projection in the financial model | Re-evaluate with finance |
-
-A rollout that hits a rollback threshold should not be argued mid-incident. The conditions were written in advance precisely to remove debate.
-
-## Regional Pricing
-
-For multi-region products, the PRD should specify:
-
-| Decision | Options |
-|---|---|
-| Currency | USD only, local currency, customer choice |
-| Tax inclusion | VAT-inclusive (EU norm), VAT-exclusive (US norm), per-region |
-| Purchasing-power parity (PPP) adjustment | None, manual per-region, formulaic |
-| Subscription terms by region | Auto-renewal disclosure (EU), 7-day cancellation right (EU), CCPA-required disclosures (CA) |
-| Payment methods by region | Card, ACH, SEPA, iDEAL, regional wallets |
-| Pricing localization tier | Same tier names globally, region-specific tier structure |
-
-PPP-adjusted pricing can substantially increase emerging-market revenue but risks arbitrage if currency conversions favor migration. Most teams that try PPP-adjusted pricing add geo-IP + payment-method controls to discourage arbitrage.
-
-## Pricing-Page UX Checklist
-
-A pricing page is the conversion surface. The checklist in `assets/pricing_page_checklist.md` covers:
-
-- Headline value proposition above the tiers
-- 3-4 tier maximum on the primary view
-- Most-popular tier visually highlighted
-- Feature-comparison table below the tiers
-- Per-feature explanation on hover/click
-- FAQ section addressing top 5 objections
-- Trust signals (customer logos, security badges, testimonials)
-- CTA per tier with verb-led copy (&quot;Start free trial&quot;, not &quot;Sign up&quot;)
-- Pricing toggle (monthly / annual) with annual discount visible
-- Currency toggle (if multi-region)
-- Tax-inclusive / -exclusive disclosure visible
-- Contact-sales path for enterprise
-
-## Pricing Anti-Patterns
-
-Common mistakes the PRD should explicitly guard against:
-
-| Anti-pattern | What goes wrong |
-|---|---|
-| **Cliffs** | Pricing tiers with steep jumps cause customers to downgrade rather than upgrade |
-| **Hidden fees** | Setup fees, overage charges, &quot;starting at&quot; pricing — corrode trust at billing time |
-| **Decoy effect gone wrong** | Adding a &quot;deliberately-worse&quot; middle tier to push customers to a target tier backfires if customers notice |
-| **Unbundling everything** | Per-feature pricing creates choice paralysis and a long sales cycle |
-| **Bundling everything** | Single-tier pricing leaves money on the table for high-value customers |
-| **Price-anchoring on cost** | Pricing to cover engineering cost ignores customer willingness-to-pay (Ramanujam&#x27;s main critique) |
-| **Round numbers obsession** | $29 → $30 feels different despite being only $1 change; respect the price-point psychology but don&#x27;t obsess |
-| **&quot;Limited-time&quot; pricing forever** | Customers stop believing in promotions; train them to expect discounts |
-| **Pricing-page redesign without test** | Treating the pricing page as a marketing asset rather than a conversion asset |
-
-## Workflow
-
-1. **Strategy → Tactic**: confirm that `business-growth/pricing-strategy/` has run and produced a strategic direction. The pricing PRD operationalizes that direction.
-2. **Willingness-to-pay**: gather data (Van Westendorp survey, conjoint, or competitor benchmarks). Document in PRD.
-3. **Packaging**: decide tiers, value carriers, boundaries, trial mechanism.
-4. **Grandfathering**: decide policy; review with legal in regulated regions.
-5. **Communication plan**: draft all channels with copy.
-6. **A/B design**: hypothesis, primary metric, MDE, sample size, holdout, stop conditions.
-7. **Rollback criteria**: thresholds and actions, signed off by leadership.
-8. **Regional**: currencies, tax, PPP, payment methods.
-9. **Pricing page UX**: design the page; review against checklist.
-10. **Sign-off**: PM + Finance + Legal + Marketing + Sales.
-11. **Launch**: execute communication plan; monitor metrics dashboard daily for first 2 weeks, weekly for first quarter.
-12. **Post-launch retro**: 90 days after launch, write a retrospective covering predicted vs actual on ARPU, conversion, churn.
-
-## Tools
-
-This skill is template-driven. No Python automation. The artifacts are:
-
-| Artifact | Purpose |
-|---|---|
-| `assets/pricing_prd_template.md` | Full 13-section pricing PRD template |
-| `assets/pricing_experiment_design.md` | A/B test design worksheet with hypothesis, MDE, holdout |
-| `assets/pricing_page_checklist.md` | UX review checklist for the pricing page |
-| `assets/grandfathering_communication_template.md` | Customer email for grandfathering communication |
-| `references/pricing-experimentation-guide.md` | Deep guide on pricing A/B tests, mix-shift detection |
-| `references/packaging-frameworks.md` | Tier/usage/hybrid frameworks, Ramanujam-style packaging |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| A/B test shows revenue lift but churn rises 90 days later | Short readout window; treatment attracted a worse-fitting customer mix | Extend readout to 90+ days; add cohort retention to primary metrics; consider re-running on a different acquisition channel mix |
-| Existing customers revolt after price increase | Grandfathering communication came too late or felt impersonal | Personalize the comm (from a real exec); offer a longer grandfathering window or one-time renewal discount; publish the rationale |
-| Sales reports &quot;customers asking why we&#x27;re more expensive than X&quot; | Pricing page does not communicate differentiated value | Strengthen value carrier per tier; add competitive comparison table; ensure sales has fresh battle card |
-| Conversion drops in the lower tier after raising the upper tier | Customers anchored on the new upper-tier price and downgraded | This is sometimes desirable (margin shift). If not, narrow the value gap by adding to the lower tier |
-| PPP-adjusted pricing creates arbitrage (customers using VPNs) | Geo-IP and payment-method controls not in place | Add billing-country verification at payment time; require local payment method for local price |
-| Sales team continues quoting old pricing weeks after launch | Sales enablement was a memo, not a process | Run a mandatory enablement session; gate quoting tools to new pricing only; track price-realized vs price-listed |
-| A/B test never reaches significance | Underpowered (sample too small for the effect size) | Recompute MDE for the realistic effect size; extend test duration; consider that the effect may genuinely be too small to detect — that&#x27;s a finding |
-
-## Success Criteria
-
-- Every pricing change ships with a written PRD covering all 13 sections (no section skipped)
-- Grandfathering policy is decided and communicated before any customer sees the new price
-- A/B tests have hypothesis, primary metric, MDE, and rollback criteria stated in writing before launch
-- Communication plan is executed across all required channels with documented copy
-- 90-day post-launch retro is written and compared against pre-launch projections
-- Customer support volume returns to baseline within 30 days of launch
-- ARPU and conversion changes are within ± 20% of the financial model projection at 90 days
-- Sales enablement is completed before launch; sales-quoted price matches listed price 95%+ of the time
+- **[references/pricing-prd-playbook.md](references/pricing-prd-playbook.md)** — the full end-to-end playbook: pricing-PRD-vs-feature-PRD table, model decision, willingness-to-pay methods, packaging, grandfathering, communication plan, A/B test design, rollback criteria, regional pricing, UX checklist, anti-patterns, 12-step workflow, tools/assets table, troubleshooting, success criteria, and source frameworks. Read when authoring any pricing PRD.
+- **[references/pricing-experimentation-guide.md](references/pricing-experimentation-guide.md)** — deep guide on pricing A/B tests, mix-shift detection, and readout windows. Read when designing or reading out a pricing experiment.
+- **[references/packaging-frameworks.md](references/packaging-frameworks.md)** — tier vs usage vs hybrid frameworks and Ramanujam-style packaging. Read when deciding what goes in which tier.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how pricing PRDs go wrong and how to fix them. Read when reviewing a draft for quality.
+- **assets/pricing_prd_template.md** — 13-section pricing PRD template. Use to author the artifact.
+- **assets/pricing_experiment_design.md** — A/B test design worksheet (hypothesis, MDE, holdout). Use when planning a test.
+- **assets/pricing_page_checklist.md** — UX review checklist for the pricing page. Use before shipping the page.
+- **assets/grandfathering_communication_template.md** — customer email for grandfathering communication. Use when drafting the comm plan.
 
 ## Scope &amp; Limitations
 
@@ -1187,7 +636,6 @@ This skill is template-driven. No Python automation. The artifacts are:
 - A/B testing pricing on identified customers carries consumer-law risk in some jurisdictions. When in doubt, test on anonymous visitors only and consult legal.
 - The Van Westendorp method has known limitations — stated preference rather than revealed, feature-blind, segment-aggregated. Use as one input among three, not as the answer.
 - Pricing-page UX changes can be confounded with pricing-model changes in A/B tests. Run UX-only experiments separately from model-change experiments to attribute the lift correctly.
-- Reforge, ProfitWell, and other practitioners publish strong empirical guidance on pricing; this skill is opinionated about the structure, not about the specific numbers. Numbers are context-dependent and need primary research per product.
 
 ## Integration Points
 
@@ -1203,22 +651,6 @@ This skill is template-driven. No Python automation. The artifacts are:
 | `prfaq/` | Feeds into | A new pricing model often warrants a PR/FAQ for internal alignment |
 | `eol-communication/` | Pattern overlap | EOL of a pricing tier uses similar grandfathering and communication patterns |
 | `launch-playbook/` | Feeds into | Pricing-page launch follows standard launch playbook for internal/external comm coordination |
-
-## References
-
-- `references/pricing-experimentation-guide.md` — A/B test design for pricing, mix-shift detection, readout windows
-- `references/packaging-frameworks.md` — Tier vs usage vs hybrid, Ramanujam packaging principles
-- `assets/pricing_prd_template.md` — 13-section pricing PRD template
-- `assets/pricing_experiment_design.md` — A/B test design worksheet
-- `assets/pricing_page_checklist.md` — UX review checklist
-- `assets/grandfathering_communication_template.md` — Customer email template
-- Madhavan Ramanujam &amp; Georg Tacke, *Monetizing Innovation: How Smart Companies Design the Product Around the Price* (2016)
-- Patrick Campbell (ProfitWell / Paddle), &quot;Pricing as a feature&quot; — https://www.paddle.com/
-- Peter Van Westendorp, &quot;NSS-Price Sensitivity Meter&quot; (1976) — original methodology
-- Reforge, &quot;Pricing &amp; Monetization&quot; curriculum — https://www.reforge.com/programs/pricing-monetization
-- Gabriel Weinberg &amp; Justin Mares, *Traction* (2015) — chapter on pricing as a channel
-- Stripe, &quot;Atlas Guide to Pricing&quot; — https://stripe.com/atlas/guides/pricing
-- Hermann Simon, *Confessions of the Pricing Man* (2015) — strategic pricing context
 
 ---
 
@@ -1305,7 +737,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/pricing-prd/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Identify Assumptions</h1>
     <p class="page-subtitle">Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Product Discovery</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -397,17 +397,6 @@ Assumption mapping expert that identifies, categorizes, and prioritizes product 
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
 
-## Your Key Capabilities
-- When to Use
-- Core 4 Categories (Existing Products)
-- Extended 8 Categories (New Products)
-- Phase 1: Devil&#x27;s Advocate Assumption Surfacing
-- Phase 2: Categorize Each Assumption
-- Phase 3: Prioritize Using Impact x Risk Matrix
-
-## Frameworks &amp; Templates You Know
-- Use `assets/assumption_map_template.md` for the full template.
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -429,17 +418,6 @@ Start by asking the user what they need help with.">
 Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
-
-## Your Key Capabilities
-- When to Use
-- Core 4 Categories (Existing Products)
-- Extended 8 Categories (New Products)
-- Phase 1: Devil&#x27;s Advocate Assumption Surfacing
-- Phase 2: Categorize Each Assumption
-- Phase 3: Prioritize Using Impact x Risk Matrix
-
-## Frameworks &amp; Templates You Know
-- Use `assets/assumption_map_template.md` for the full template.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -473,238 +451,56 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface hidden assumptions.
 
-### When to Use
+## Core Capabilities
+
+- **4-8 category risk model** — Value, Usability, Viability, Feasibility (Torres core) plus Ethics, Go-to-Market, Strategy, Team for new products.
+- **Devil&#x27;s advocate surfacing** — adversarial PM, Designer, and Engineer perspectives expose hidden assumptions.
+- **Impact x Risk scoring** — `Risk Score = Impact x (1 - Confidence)` ranks what to test first.
+- **Quadrant classification** — Test Now / Proceed / Investigate / Defer with category-matched validation methods.
+- **Automated tracking** — `assumption_tracker.py` sorts by priority and suggests next actions.
+
+## When to Use
 
 - After ideation, before committing to build.
 - When a product decision &quot;feels right&quot; but has not been validated.
 - When the team disagrees on risk or priority -- assumptions make disagreements explicit.
 - Before designing experiments -- test the riskiest assumptions first.
 
-## Risk Categories
+## Clarify First
 
-### Core 4 Categories (Existing Products)
+Before mapping assumptions, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-These four categories come from Teresa Torres&#x27; *Continuous Discovery Habits* and cover the primary risks for features within an established product:
+- [ ] **The decision or idea being mapped** — the specific product bet whose assumptions you surface (without it the map has no subject)
+- [ ] **Product type** — new vs existing (determines whether to use the 4 core categories or the full 8-category model)
+- [ ] **Impact and confidence basis** — what evidence sets each `impact` (1-10) and `confidence` (high/med/low) (drives `Risk Score = Impact × (1 − Confidence)` and quadrant placement)
 
-| Category | Question It Answers | Example Assumption |
-|----------|--------------------|--------------------|
-| **Value** | Will customers want this? | &quot;Users will prefer AI-generated summaries over manual note-taking.&quot; |
-| **Usability** | Can customers figure out how to use it? | &quot;Users will understand the drag-and-drop interface without a tutorial.&quot; |
-| **Viability** | Can the business sustain this? | &quot;The feature will generate enough upgrades to justify the engineering cost.&quot; |
-| **Feasibility** | Can we build this? | &quot;Our current infrastructure can handle real-time processing at scale.&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Extended 8 Categories (New Products)
-
-For new products, four additional risk categories become critical:
-
-| Category | Question It Answers | Example Assumption |
-|----------|--------------------|--------------------|
-| **Ethics** | Should we build this? Are there unintended harms? | &quot;Collecting location data will not create privacy concerns for our target segment.&quot; |
-| **Go-to-Market** | Can we reach and acquire customers? | &quot;Our target segment actively searches for solutions on Google, making SEO viable.&quot; |
-| **Strategy &amp; Objectives** | Does this align with where we want to go? | &quot;Entering the SMB market will not dilute our enterprise positioning.&quot; |
-| **Team** | Do we have the right people and skills? | &quot;Our team can learn the required ML skills within the project timeline.&quot; |
-
-## Methodology
-
-### Phase 1: Devil&#x27;s Advocate Assumption Surfacing
-
-For each product idea or decision, adopt three adversarial perspectives:
-
-**PM Devil&#x27;s Advocate**
-&quot;I challenge whether this is worth building.&quot;
-- Is there real demand, or are we projecting our own preferences?
-- Will this move the metric we care about?
-- Can we sustain this economically?
-- Does this align with strategy, or is it a distraction?
-
-**Designer Devil&#x27;s Advocate**
-&quot;I challenge whether users will actually use this.&quot;
-- Will users discover this feature?
-- Can they complete the task without help?
-- Does this add complexity that hurts the overall experience?
-- Are we designing for edge cases and assuming they are common?
-
-**Engineer Devil&#x27;s Advocate**
-&quot;I challenge whether we can build and maintain this.&quot;
-- Do we have the technical skills and infrastructure?
-- What are the hidden dependencies and integration risks?
-- Can this scale if it succeeds?
-- What is the ongoing maintenance burden?
-
-### Phase 2: Categorize Each Assumption
-
-For each assumption surfaced, assign:
-
-| Field | Options |
-|-------|---------|
-| **Description** | Clear, specific statement of what must be true |
-| **Risk Category** | Value / Usability / Viability / Feasibility / Ethics / Go-to-Market / Strategy / Team |
-| **Confidence** | High (we have strong evidence) / Medium (some evidence, not conclusive) / Low (gut feeling or no evidence) |
-| **Impact** | 1-10 scale (if this assumption is wrong, how bad is it?) |
-
-### Phase 3: Prioritize Using Impact x Risk Matrix
-
-Calculate a risk score for each assumption:
-
-```
-Risk Score = Impact x (1 - Confidence)
-```
-
-Where confidence maps to: High = 0.8, Medium = 0.5, Low = 0.2
-
-| Impact | Confidence | Risk Score | Meaning |
-|--------|-----------|------------|---------|
-| 9 | Low (0.2) | 7.2 | Critical -- test immediately |
-| 9 | High (0.8) | 1.8 | Important but well-understood |
-| 3 | Low (0.2) | 2.4 | Low priority |
-| 3 | High (0.8) | 0.6 | Ignore |
-
-### Phase 4: Classify into Quadrants
-
-Place each assumption on a 2x2 matrix:
-
-```
-                    HIGH IMPACT
-                        |
-     Proceed with       |     Test Now
-     Confidence         |     (highest priority)
-                        |
-  ──────────────────────┼──────────────────────
-                        |
-     Defer              |     Investigate
-     (low priority)     |     (may be important)
-                        |
-                    LOW IMPACT
-
-         LOW RISK ◄─────┼─────► HIGH RISK
-```
-
-| Quadrant | Impact | Risk | Action |
-|----------|--------|------|--------|
-| **Test Now** | High | High | Design an experiment immediately |
-| **Proceed** | High | Low | Move forward with monitoring |
-| **Investigate** | Low | High | Gather more data, may upgrade to Test Now |
-| **Defer** | Low | Low | Accept the risk, revisit if context changes |
-
-### Phase 5: Suggest Tests
-
-For each &quot;Test Now&quot; assumption, recommend a validation approach:
-
-| Assumption Type | Suggested Test Methods |
-|----------------|----------------------|
-| Value assumptions | Customer interviews, fake door test, landing page test |
-| Usability assumptions | Usability test (5 users), prototype walkthrough |
-| Viability assumptions | Financial modeling, pricing experiment, unit economics analysis |
-| Feasibility assumptions | Technical spike, proof of concept, architecture review |
-| Ethics assumptions | Ethics review board, user consent study, regulatory consultation |
-| Go-to-Market assumptions | Channel experiment, SEO keyword test, paid ad test |
-| Strategy assumptions | Strategy review with leadership, competitive analysis |
-| Team assumptions | Skills assessment, hiring timeline analysis, training feasibility |
-
-## Python Tool: assumption_tracker.py
-
-Track and prioritize assumptions using the CLI tool:
+## Quick Start
 
 ```bash
-# Run with demo data
-python3 scripts/assumption_tracker.py --demo
-
-# Run with custom input
-python3 scripts/assumption_tracker.py input.json
-
-# Output as JSON
+python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
+python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
 python3 scripts/assumption_tracker.py input.json --format json
 ```
 
-### Input Format
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
 
-```json
-{
-  &quot;assumptions&quot;: [
-    {
-      &quot;description&quot;: &quot;Users will prefer AI summaries over manual notes&quot;,
-      &quot;category&quot;: &quot;value&quot;,
-      &quot;confidence&quot;: &quot;low&quot;,
-      &quot;impact&quot;: 9
-    }
-  ]
-}
-```
+## References
 
-### Output
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Sorted by risk priority with quadrant classification and suggested actions.
-
-See `scripts/assumption_tracker.py` for full documentation.
-
-## Output Format
-
-### Assumption Registry
-
-| # | Assumption | Category | Confidence | Impact | Risk Score | Quadrant |
-|---|-----------|----------|-----------|--------|-----------|----------|
-| 1 | ... | Value | Low | 9 | 7.2 | Test Now |
-| 2 | ... | Feasibility | Medium | 8 | 4.0 | Test Now |
-| 3 | ... | Usability | High | 7 | 1.4 | Proceed |
-| 4 | ... | GTM | Low | 3 | 2.4 | Investigate |
-
-### Action Plan for &quot;Test Now&quot; Assumptions
-
-For each assumption in the Test Now quadrant, document:
-- Assumption description
-- Why it is high risk
-- Suggested validation method
-- Owner and timeline
-
-Use `assets/assumption_map_template.md` for the full template.
-
-## Integration with Other Discovery Skills
-
-- Use `brainstorm-ideas/` to generate ideas whose assumptions you will map.
-- Feed &quot;Test Now&quot; assumptions into `brainstorm-experiments/` for experiment design.
-- Run `pre-mortem/` to catch risks that assumption mapping might miss (especially elephants).
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| All assumptions classified as &quot;Test Now&quot; | Impact scores inflated or confidence levels consistently set to &quot;low&quot; | Calibrate impact scoring with team; use relative ranking (force distribution across quadrants) |
-| Validation fails with category error | Category string does not match valid set exactly | Use lowercase: `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team` |
-| Risk scores cluster around the same value | Impact and confidence values lack variance across assumptions | Use the full 1-10 impact scale; challenge the team to differentiate high vs. medium vs. low confidence with evidence |
-| Team generates fewer than 10 assumptions | Devil&#x27;s Advocate perspectives not applied systematically | Run all three perspectives (PM, Designer, Engineer) independently before combining; use the prompts in Phase 1 |
-| &quot;Defer&quot; quadrant is empty | All assumptions scored as high impact, or low-impact assumptions not captured | Include operational and edge-case assumptions; not every assumption is existential |
-| Suggested tests are too generic | Tool uses category-level test suggestions, not assumption-specific ones | Use the category suggestion as a starting point; tailor the test method using `brainstorm-experiments/` skill |
-| Assumptions not updated after experiments | No feedback loop from experiment results back to assumption tracker | Re-run `assumption_tracker.py` with updated confidence levels after each experiment completes |
-
-## Success Criteria
-
-- All product decisions have at least 8-15 explicit assumptions documented before build commitment
-- Every &quot;Test Now&quot; assumption has an assigned owner, validation method, and timeline
-- Risk scores are calculated consistently using the Impact x (1 - Confidence) formula
-- Assumptions are re-scored after each validation experiment (confidence levels update)
-- At least 80% of &quot;Test Now&quot; assumptions are validated or invalidated before major build decisions
-- Assumption map is reviewed and updated at every product discovery cycle (weekly or bi-weekly)
-- The team can articulate the top 3 riskiest assumptions for any active initiative
+- **[references/methodology-and-tools.md](references/methodology-and-tools.md)** — the full 4-8 category tables with examples, the devil&#x27;s advocate prompts, the 5-phase scoring/quadrant process, `assumption_tracker.py` usage and flags, output formats, troubleshooting, success criteria, and bibliography. Read when mapping or scripting assumptions.
+- **[references/assumption-mapping-guide.md](references/assumption-mapping-guide.md)** — deep theory: Torres&#x27; four risks and the extended 8-category model with red flags per category, confidence calibration techniques (evidence-based, Five Whys, pre-mortem check), the prioritization matrix with tripwires, and assumption-to-experiment mapping. Read for the underlying framework.
+- **[references/red-flags.md](references/red-flags.md)** — anti-patterns (assumption inflation, miscategorization, confidence without evidence) with bad/good examples anchored in Torres&#x27; categories. Read before sharing an assumption map.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Systematic assumption identification using PM/Designer/Engineer devil&#x27;s advocate perspectives
-- 8-category risk classification (Value, Usability, Viability, Feasibility, Ethics, Go-to-Market, Strategy, Team)
-- Quantitative risk scoring using Impact x (1 - Confidence) formula
-- Quadrant classification (Test Now, Proceed, Investigate, Defer) with suggested validation methods
-- Assumption registry with priority sorting and action plan generation
+**In Scope:** systematic assumption identification using PM/Designer/Engineer devil&#x27;s advocate perspectives; 8-category risk classification; quantitative scoring with Impact x (1 - Confidence); quadrant classification with suggested validation methods; assumption registry with priority sorting and action plans.
 
-**Out of Scope:**
-- Running validation experiments (see `brainstorm-experiments/` skill)
-- Product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
-- Technical feasibility deep-dives or architecture reviews (see `engineering/` skills)
-- Financial modeling for viability assumptions (see `finance/` domain skills)
+**Out of Scope:** running validation experiments (`brainstorm-experiments/`); product strategy or roadmap decisions (`execution/outcome-roadmap/`); technical feasibility deep-dives (`engineering/` skills); financial modeling for viability (`finance/` skills).
 
-**Important Caveats:**
-- Confidence levels (high/medium/low) map to fixed numeric values (0.8/0.5/0.2). This is a simplification; real confidence is continuous.
-- The quadrant threshold for &quot;high impact&quot; is set at 7/10. Adjust this threshold for your risk tolerance.
-- Assumption mapping is most effective when done collaboratively (Product Trio), not by a single person.
+**Important Caveats:** confidence levels map to fixed numeric values (0.8/0.5/0.2) — a simplification of continuous confidence; the &quot;high impact&quot; threshold is 7/10, adjustable for your risk tolerance; assumption mapping works best collaboratively (Product Trio), not solo.
 
 ## Integration Points
 
@@ -716,31 +512,6 @@ Use `assets/assumption_map_template.md` for the full template.
 | `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
 | `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
 | `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
-
-## Tool Reference
-
-### assumption_tracker.py
-
-Tracks, scores, and prioritizes product assumptions using an Impact x Risk matrix with quadrant classification.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `input_file` | positional | (optional) | Path to JSON file with assumptions array |
-| `--demo` | flag | off | Run with built-in sample data (8 assumptions across all categories) |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input fields per assumption:**
-- `description` (required): Clear statement of what must be true
-- `category` (required): One of `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team`
-- `confidence` (required): One of `high`, `medium`, `low`
-- `impact` (required): Integer 1-10
-
-## References
-
-- Teresa Torres, *Continuous Discovery Habits* (2021)
-- David J. Bland &amp; Alexander Osterwalder, *Testing Business Ideas* (2019)
-- Ash Maurya, *Running Lean* (2012)
-- Marty Cagan, *Inspired* (2018)
 
 ---
 
@@ -797,238 +568,56 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface hidden assumptions.
 
-### When to Use
+## Core Capabilities
+
+- **4-8 category risk model** — Value, Usability, Viability, Feasibility (Torres core) plus Ethics, Go-to-Market, Strategy, Team for new products.
+- **Devil&#x27;s advocate surfacing** — adversarial PM, Designer, and Engineer perspectives expose hidden assumptions.
+- **Impact x Risk scoring** — `Risk Score = Impact x (1 - Confidence)` ranks what to test first.
+- **Quadrant classification** — Test Now / Proceed / Investigate / Defer with category-matched validation methods.
+- **Automated tracking** — `assumption_tracker.py` sorts by priority and suggests next actions.
+
+## When to Use
 
 - After ideation, before committing to build.
 - When a product decision &quot;feels right&quot; but has not been validated.
 - When the team disagrees on risk or priority -- assumptions make disagreements explicit.
 - Before designing experiments -- test the riskiest assumptions first.
 
-## Risk Categories
+## Clarify First
 
-### Core 4 Categories (Existing Products)
+Before mapping assumptions, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-These four categories come from Teresa Torres&#x27; *Continuous Discovery Habits* and cover the primary risks for features within an established product:
+- [ ] **The decision or idea being mapped** — the specific product bet whose assumptions you surface (without it the map has no subject)
+- [ ] **Product type** — new vs existing (determines whether to use the 4 core categories or the full 8-category model)
+- [ ] **Impact and confidence basis** — what evidence sets each `impact` (1-10) and `confidence` (high/med/low) (drives `Risk Score = Impact × (1 − Confidence)` and quadrant placement)
 
-| Category | Question It Answers | Example Assumption |
-|----------|--------------------|--------------------|
-| **Value** | Will customers want this? | &quot;Users will prefer AI-generated summaries over manual note-taking.&quot; |
-| **Usability** | Can customers figure out how to use it? | &quot;Users will understand the drag-and-drop interface without a tutorial.&quot; |
-| **Viability** | Can the business sustain this? | &quot;The feature will generate enough upgrades to justify the engineering cost.&quot; |
-| **Feasibility** | Can we build this? | &quot;Our current infrastructure can handle real-time processing at scale.&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Extended 8 Categories (New Products)
-
-For new products, four additional risk categories become critical:
-
-| Category | Question It Answers | Example Assumption |
-|----------|--------------------|--------------------|
-| **Ethics** | Should we build this? Are there unintended harms? | &quot;Collecting location data will not create privacy concerns for our target segment.&quot; |
-| **Go-to-Market** | Can we reach and acquire customers? | &quot;Our target segment actively searches for solutions on Google, making SEO viable.&quot; |
-| **Strategy &amp; Objectives** | Does this align with where we want to go? | &quot;Entering the SMB market will not dilute our enterprise positioning.&quot; |
-| **Team** | Do we have the right people and skills? | &quot;Our team can learn the required ML skills within the project timeline.&quot; |
-
-## Methodology
-
-### Phase 1: Devil&#x27;s Advocate Assumption Surfacing
-
-For each product idea or decision, adopt three adversarial perspectives:
-
-**PM Devil&#x27;s Advocate**
-&quot;I challenge whether this is worth building.&quot;
-- Is there real demand, or are we projecting our own preferences?
-- Will this move the metric we care about?
-- Can we sustain this economically?
-- Does this align with strategy, or is it a distraction?
-
-**Designer Devil&#x27;s Advocate**
-&quot;I challenge whether users will actually use this.&quot;
-- Will users discover this feature?
-- Can they complete the task without help?
-- Does this add complexity that hurts the overall experience?
-- Are we designing for edge cases and assuming they are common?
-
-**Engineer Devil&#x27;s Advocate**
-&quot;I challenge whether we can build and maintain this.&quot;
-- Do we have the technical skills and infrastructure?
-- What are the hidden dependencies and integration risks?
-- Can this scale if it succeeds?
-- What is the ongoing maintenance burden?
-
-### Phase 2: Categorize Each Assumption
-
-For each assumption surfaced, assign:
-
-| Field | Options |
-|-------|---------|
-| **Description** | Clear, specific statement of what must be true |
-| **Risk Category** | Value / Usability / Viability / Feasibility / Ethics / Go-to-Market / Strategy / Team |
-| **Confidence** | High (we have strong evidence) / Medium (some evidence, not conclusive) / Low (gut feeling or no evidence) |
-| **Impact** | 1-10 scale (if this assumption is wrong, how bad is it?) |
-
-### Phase 3: Prioritize Using Impact x Risk Matrix
-
-Calculate a risk score for each assumption:
-
-```
-Risk Score = Impact x (1 - Confidence)
-```
-
-Where confidence maps to: High = 0.8, Medium = 0.5, Low = 0.2
-
-| Impact | Confidence | Risk Score | Meaning |
-|--------|-----------|------------|---------|
-| 9 | Low (0.2) | 7.2 | Critical -- test immediately |
-| 9 | High (0.8) | 1.8 | Important but well-understood |
-| 3 | Low (0.2) | 2.4 | Low priority |
-| 3 | High (0.8) | 0.6 | Ignore |
-
-### Phase 4: Classify into Quadrants
-
-Place each assumption on a 2x2 matrix:
-
-```
-                    HIGH IMPACT
-                        |
-     Proceed with       |     Test Now
-     Confidence         |     (highest priority)
-                        |
-  ──────────────────────┼──────────────────────
-                        |
-     Defer              |     Investigate
-     (low priority)     |     (may be important)
-                        |
-                    LOW IMPACT
-
-         LOW RISK ◄─────┼─────► HIGH RISK
-```
-
-| Quadrant | Impact | Risk | Action |
-|----------|--------|------|--------|
-| **Test Now** | High | High | Design an experiment immediately |
-| **Proceed** | High | Low | Move forward with monitoring |
-| **Investigate** | Low | High | Gather more data, may upgrade to Test Now |
-| **Defer** | Low | Low | Accept the risk, revisit if context changes |
-
-### Phase 5: Suggest Tests
-
-For each &quot;Test Now&quot; assumption, recommend a validation approach:
-
-| Assumption Type | Suggested Test Methods |
-|----------------|----------------------|
-| Value assumptions | Customer interviews, fake door test, landing page test |
-| Usability assumptions | Usability test (5 users), prototype walkthrough |
-| Viability assumptions | Financial modeling, pricing experiment, unit economics analysis |
-| Feasibility assumptions | Technical spike, proof of concept, architecture review |
-| Ethics assumptions | Ethics review board, user consent study, regulatory consultation |
-| Go-to-Market assumptions | Channel experiment, SEO keyword test, paid ad test |
-| Strategy assumptions | Strategy review with leadership, competitive analysis |
-| Team assumptions | Skills assessment, hiring timeline analysis, training feasibility |
-
-## Python Tool: assumption_tracker.py
-
-Track and prioritize assumptions using the CLI tool:
+## Quick Start
 
 ```bash
-# Run with demo data
-python3 scripts/assumption_tracker.py --demo
-
-# Run with custom input
-python3 scripts/assumption_tracker.py input.json
-
-# Output as JSON
+python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
+python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
 python3 scripts/assumption_tracker.py input.json --format json
 ```
 
-### Input Format
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
 
-```json
-{
-  &quot;assumptions&quot;: [
-    {
-      &quot;description&quot;: &quot;Users will prefer AI summaries over manual notes&quot;,
-      &quot;category&quot;: &quot;value&quot;,
-      &quot;confidence&quot;: &quot;low&quot;,
-      &quot;impact&quot;: 9
-    }
-  ]
-}
-```
+## References
 
-### Output
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Sorted by risk priority with quadrant classification and suggested actions.
-
-See `scripts/assumption_tracker.py` for full documentation.
-
-## Output Format
-
-### Assumption Registry
-
-| # | Assumption | Category | Confidence | Impact | Risk Score | Quadrant |
-|---|-----------|----------|-----------|--------|-----------|----------|
-| 1 | ... | Value | Low | 9 | 7.2 | Test Now |
-| 2 | ... | Feasibility | Medium | 8 | 4.0 | Test Now |
-| 3 | ... | Usability | High | 7 | 1.4 | Proceed |
-| 4 | ... | GTM | Low | 3 | 2.4 | Investigate |
-
-### Action Plan for &quot;Test Now&quot; Assumptions
-
-For each assumption in the Test Now quadrant, document:
-- Assumption description
-- Why it is high risk
-- Suggested validation method
-- Owner and timeline
-
-Use `assets/assumption_map_template.md` for the full template.
-
-## Integration with Other Discovery Skills
-
-- Use `brainstorm-ideas/` to generate ideas whose assumptions you will map.
-- Feed &quot;Test Now&quot; assumptions into `brainstorm-experiments/` for experiment design.
-- Run `pre-mortem/` to catch risks that assumption mapping might miss (especially elephants).
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| All assumptions classified as &quot;Test Now&quot; | Impact scores inflated or confidence levels consistently set to &quot;low&quot; | Calibrate impact scoring with team; use relative ranking (force distribution across quadrants) |
-| Validation fails with category error | Category string does not match valid set exactly | Use lowercase: `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team` |
-| Risk scores cluster around the same value | Impact and confidence values lack variance across assumptions | Use the full 1-10 impact scale; challenge the team to differentiate high vs. medium vs. low confidence with evidence |
-| Team generates fewer than 10 assumptions | Devil&#x27;s Advocate perspectives not applied systematically | Run all three perspectives (PM, Designer, Engineer) independently before combining; use the prompts in Phase 1 |
-| &quot;Defer&quot; quadrant is empty | All assumptions scored as high impact, or low-impact assumptions not captured | Include operational and edge-case assumptions; not every assumption is existential |
-| Suggested tests are too generic | Tool uses category-level test suggestions, not assumption-specific ones | Use the category suggestion as a starting point; tailor the test method using `brainstorm-experiments/` skill |
-| Assumptions not updated after experiments | No feedback loop from experiment results back to assumption tracker | Re-run `assumption_tracker.py` with updated confidence levels after each experiment completes |
-
-## Success Criteria
-
-- All product decisions have at least 8-15 explicit assumptions documented before build commitment
-- Every &quot;Test Now&quot; assumption has an assigned owner, validation method, and timeline
-- Risk scores are calculated consistently using the Impact x (1 - Confidence) formula
-- Assumptions are re-scored after each validation experiment (confidence levels update)
-- At least 80% of &quot;Test Now&quot; assumptions are validated or invalidated before major build decisions
-- Assumption map is reviewed and updated at every product discovery cycle (weekly or bi-weekly)
-- The team can articulate the top 3 riskiest assumptions for any active initiative
+- **[references/methodology-and-tools.md](references/methodology-and-tools.md)** — the full 4-8 category tables with examples, the devil&#x27;s advocate prompts, the 5-phase scoring/quadrant process, `assumption_tracker.py` usage and flags, output formats, troubleshooting, success criteria, and bibliography. Read when mapping or scripting assumptions.
+- **[references/assumption-mapping-guide.md](references/assumption-mapping-guide.md)** — deep theory: Torres&#x27; four risks and the extended 8-category model with red flags per category, confidence calibration techniques (evidence-based, Five Whys, pre-mortem check), the prioritization matrix with tripwires, and assumption-to-experiment mapping. Read for the underlying framework.
+- **[references/red-flags.md](references/red-flags.md)** — anti-patterns (assumption inflation, miscategorization, confidence without evidence) with bad/good examples anchored in Torres&#x27; categories. Read before sharing an assumption map.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Systematic assumption identification using PM/Designer/Engineer devil&#x27;s advocate perspectives
-- 8-category risk classification (Value, Usability, Viability, Feasibility, Ethics, Go-to-Market, Strategy, Team)
-- Quantitative risk scoring using Impact x (1 - Confidence) formula
-- Quadrant classification (Test Now, Proceed, Investigate, Defer) with suggested validation methods
-- Assumption registry with priority sorting and action plan generation
+**In Scope:** systematic assumption identification using PM/Designer/Engineer devil&#x27;s advocate perspectives; 8-category risk classification; quantitative scoring with Impact x (1 - Confidence); quadrant classification with suggested validation methods; assumption registry with priority sorting and action plans.
 
-**Out of Scope:**
-- Running validation experiments (see `brainstorm-experiments/` skill)
-- Product strategy or roadmap decisions (see `execution/outcome-roadmap/`)
-- Technical feasibility deep-dives or architecture reviews (see `engineering/` skills)
-- Financial modeling for viability assumptions (see `finance/` domain skills)
+**Out of Scope:** running validation experiments (`brainstorm-experiments/`); product strategy or roadmap decisions (`execution/outcome-roadmap/`); technical feasibility deep-dives (`engineering/` skills); financial modeling for viability (`finance/` skills).
 
-**Important Caveats:**
-- Confidence levels (high/medium/low) map to fixed numeric values (0.8/0.5/0.2). This is a simplification; real confidence is continuous.
-- The quadrant threshold for &quot;high impact&quot; is set at 7/10. Adjust this threshold for your risk tolerance.
-- Assumption mapping is most effective when done collaboratively (Product Trio), not by a single person.
+**Important Caveats:** confidence levels map to fixed numeric values (0.8/0.5/0.2) — a simplification of continuous confidence; the &quot;high impact&quot; threshold is 7/10, adjustable for your risk tolerance; assumption mapping works best collaboratively (Product Trio), not solo.
 
 ## Integration Points
 
@@ -1040,31 +629,6 @@ Use `assets/assumption_map_template.md` for the full template.
 | `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
 | `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
 | `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
-
-## Tool Reference
-
-### assumption_tracker.py
-
-Tracks, scores, and prioritizes product assumptions using an Impact x Risk matrix with quadrant classification.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `input_file` | positional | (optional) | Path to JSON file with assumptions array |
-| `--demo` | flag | off | Run with built-in sample data (8 assumptions across all categories) |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input fields per assumption:**
-- `description` (required): Clear statement of what must be true
-- `category` (required): One of `value`, `usability`, `viability`, `feasibility`, `ethics`, `gtm`, `strategy`, `team`
-- `confidence` (required): One of `high`, `medium`, `low`
-- `impact` (required): Integer 1-10
-
-## References
-
-- Teresa Torres, *Continuous Discovery Habits* (2021)
-- David J. Bland &amp; Alexander Osterwalder, *Testing Business Ideas* (2019)
-- Ash Maurya, *Running Lean* (2012)
-- Marty Cagan, *Inspired* (2018)
 
 ---
 
@@ -1152,8 +716,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/discovery/identify-assumptions/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
+python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
+python3 scripts/assumption_tracker.py input.json --format json
+</code></pre>
+
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/identify-assumptions/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

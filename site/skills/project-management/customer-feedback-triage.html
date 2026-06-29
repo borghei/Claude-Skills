@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Feedback Triage - Claude Skills</title>
-  <meta name="description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritizat">
+  <meta name="description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal int">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html">
   <meta property="og:title" content="Customer Feedback Triage - Claude Skills">
-  <meta property="og:description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritizat">
+  <meta property="og:description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal int">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Feedback Triage", "description": "Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Feedback Triage", "description": "Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Customer Feedback Triage</h1>
-    <p class="page-subtitle">Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">kano-model</span><span class="tag">jtbd</span><span class="tag">rice</span><span class="tag">request-management</span><span class="tag">marty-cagan</span></div>
+    <p class="page-subtitle">Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">feedback</span><span class="tag">triage</span><span class="tag">kano</span><span class="tag">requests</span><span class="tag">voice-of-customer</span><span class="tag">intake</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,22 +393,12 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Customer Feedback Triage (Project Management domain).
 
-Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.
+Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.
 
 Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales call notes, CSAT comments, NPS verbatims, in-app feedback widgets, partner emails, exec one-liners — and have no system for converting that stream into prioritization signal. The default mode is reactive: whoever shouts lou
 
 ## Your Key Capabilities
-- When to Use
 - When not to use
-- Marty Cagan: Request → Opportunity → Solution
-- Kano Model (Noriaki Kano, 1984)
-- Reforge: Layered customer development
-- ProductPlan: Request management
-
-## Frameworks &amp; Templates You Know
-- Frameworks
-- | Template | When | Tone |
-- &quot;template&quot;: &quot;exploring&quot;,
 
 ## How to Help
 When the user asks for help in this domain:
@@ -428,22 +418,12 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Customer Feedback Triage (Project Management domain).
 
-Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.
+Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.
 
 Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales call notes, CSAT comments, NPS verbatims, in-app feedback widgets, partner emails, exec one-liners — and have no system for converting that stream into prioritization signal. The default mode is reactive: whoever shouts lou
 
 ## Your Key Capabilities
-- When to Use
 - When not to use
-- Marty Cagan: Request → Opportunity → Solution
-- Kano Model (Noriaki Kano, 1984)
-- Reforge: Layered customer development
-- ProductPlan: Request management
-
-## Frameworks &amp; Templates You Know
-- Frameworks
-- | Template | When | Tone |
-- &quot;template&quot;: &quot;exploring&quot;,
 
 ## How to Help
 When the user asks for help in this domain:
@@ -479,9 +459,18 @@ Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales c
 
 This skill provides a workflow and a Python tool for handling that stream. Inputs are raw feedback items from many channels. Outputs are deduplicated, categorized, scored, and routed items, plus acknowledgment responses for the customers who sent them.
 
-The frameworks behind it are Marty Cagan&#x27;s discovery-techniques separation of *request* from *opportunity* from *solution*, Noriaki Kano&#x27;s model of feature-quality categories, Reforge&#x27;s customer-development model, and ProductPlan&#x27;s request-management playbook.
+The frameworks behind it are Marty Cagan&#x27;s separation of *request* from *opportunity* from *solution*, Noriaki Kano&#x27;s model of feature-quality categories, Reforge&#x27;s customer-development model, and ProductPlan&#x27;s request-management playbook. Detail lives in the references below.
 
-### When to Use
+## Core Capabilities
+
+- **Intake &amp; normalization** — one verbatim record per ask across 8 channels (support, sales, social, NPS, in-app, exec, partner, interview)
+- **Dedup &amp; clustering** — group items by underlying opportunity even when literal requests differ
+- **Kano + Cagan classification** — Basic/Performance/Delight/Indifferent/Reverse, and Request → Opportunity → Solution
+- **Segment-aware scoring** — `kano_weight × log10(volume+1) × segment_weight × (1 + strategic_alignment)` as a coarse router (not a final RICE)
+- **Response discipline** — Will-build / Exploring / Won&#x27;t-build templates; always acknowledge, sometimes commit, rarely promise
+- **Feed-forward routing** — to prioritization, discovery, backlog, bug tracker, or strategy
+
+## When to Use
 
 - You have a backlog of customer feedback that is not being processed.
 - Sales or Customer Success is constantly forwarding feature requests and expecting a per-request answer.
@@ -496,195 +485,38 @@ The frameworks behind it are Marty Cagan&#x27;s discovery-techniques separation 
 - For prioritizing already-triaged items against each other (that is `prioritization-frameworks/`).
 - For bug triage (use the bug triage process in your tracker — though the workflow here applies to feature-request items).
 
-## Frameworks
+## Clarify First
 
-### Marty Cagan: Request → Opportunity → Solution
+Before triaging the feedback, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Cagan separates three things customers and the inbound stream conflate:
+- [ ] **Feedback items with channel + segment tags** — the verbatims and where each came from (drives clustering, volume counts, and the Kano guess)
+- [ ] **Segment weights** — which customer segments count more (sets `segment_weight` in the score, i.e. whether enterprise asks outrank long-tail volume)
+- [ ] **Strategic alignment definition** — what current strategy a request must match (sets the `strategic_alignment` term that boosts on-strategy asks)
 
-| Layer | What it is | Example |
-|---|---|---|
-| **Request** | What the customer literally asked for | &quot;Add an export to PDF button&quot; |
-| **Opportunity** | The underlying job or problem | &quot;I need to share results with my CFO who doesn&#x27;t have a login&quot; |
-| **Solution** | The chosen response | &quot;Shareable read-only link&quot; or &quot;PDF export&quot; or &quot;CSV + email digest&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-The triage workflow&#x27;s job is to convert each Request into an Opportunity and route the Opportunity to the appropriate discovery / prioritization process. The literal Request is rarely the right thing to build.
+## Quick Start
 
-### Kano Model (Noriaki Kano, 1984)
+```bash
+# Triage a JSON queue of inbound feedback
+python scripts/feedback_triage.py --input queue.json --format markdown
 
-Kano classifies features by how their presence or absence affects customer satisfaction. The five categories:
-
-| Category | Effect of having it | Effect of missing it | Example (SaaS analytics tool) |
-|---|---|---|---|
-| **Basic / Must-be** | Expected; satisfaction does not increase | Severe dissatisfaction | Login works; data export exists |
-| **Performance / One-dimensional** | More is linearly better | Less is linearly worse | Query speed; dashboard load time |
-| **Delight / Attractive** | Disproportionate satisfaction | Customer does not miss it | Natural-language query; collaborative cursors |
-| **Indifferent** | No effect | No effect | Theme color picker (for most users) |
-| **Reverse** | Causes dissatisfaction | Improves satisfaction | An overly chatty AI assistant |
-
-Kano categories shift over time: today&#x27;s delighter becomes tomorrow&#x27;s basic. The categorization in this triage workflow is the team&#x27;s current snapshot.
-
-### Reforge: Layered customer development
-
-Reforge frames customer development as concentric rings: stated needs → revealed jobs → underlying motivations. The triage workflow operates at the first ring (stated needs, captured in the request text). It explicitly routes high-signal items into deeper discovery work to surface the second and third rings.
-
-### ProductPlan: Request management
-
-Three principles, drawn from ProductPlan&#x27;s request-management practice and adopted here:
-
-1. **Always acknowledge.** Every request, even ones that get a &quot;no&quot;, gets a response. Customer silence is the fastest path to lost trust.
-2. **Sometimes commit.** Commit only when the item is scored, prioritized, and on the roadmap with a date the team will actually hit.
-3. **Rarely promise.** Avoid &quot;we&#x27;ll definitely build that&quot; in any external channel until the item is funded, scoped, and started.
-
-## Workflow
-
-### Phase 1: Intake &amp; normalization
-
-For every inbound feedback item, capture a normalized record with these fields:
-
-| Field | Required | Notes |
-|---|---|---|
-| `id` | yes | Internal ID |
-| `channel` | yes | One of: support, sales, social, nps, in_app, exec_ask, partner, customer_interview |
-| `customer_id` | yes | Anonymous OK; needed for dedup and segment analysis |
-| `segment` | recommended | e.g. SMB, mid-market, enterprise, prosumer |
-| `raw_text` | yes | The verbatim ask — do not paraphrase at intake |
-| `received_at` | yes | ISO-8601 |
-| `submitter` | yes | The internal person who logged it (Support agent, AE, PM) |
-| `opportunity_area` | optional | Coarse area, populated at triage (e.g. onboarding, reporting, integrations) |
-
-Normalization rules:
-
-- Capture the verbatim. Paraphrasing at intake loses signal. The PM can paraphrase at triage.
-- One request per record. If a customer email contains 3 asks, create 3 records.
-- Do not pre-judge at intake. Even off-topic items get logged and triaged later (they are signal about channel hygiene).
-
-### Phase 2: Triage (run `feedback_triage.py`)
-
-The Python tool ingests the normalized intake JSON and produces:
-
-1. **Deduplicated clusters** — items grouped by similar opportunity, even if the literal requests differ.
-2. **Kano category guess** — heuristic based on keyword signals (transparent and documented; the PM should override).
-3. **Categorization** — Bug / Feature / Question / Strategy.
-4. **Priority score** — combined Kano weight × volume × segment × strategic-alignment.
-5. **Suggested response template** — Will-build / Won&#x27;t-build / Exploring, parameterized by request and customer name.
-
-### Phase 3: Categorization
-
-For each clustered item, categorize:
-
-| Category | Definition | Action |
-|---|---|---|
-| **Bug** | Existing functionality is broken | Route to engineering bug queue, not PM backlog |
-| **Feature request** | New functionality | Continue to scoring |
-| **Question** | Customer needs help, not a product change | Route to support / docs; flag if recurring (it&#x27;s a doc gap) |
-| **Strategy** | Item implies a strategic direction (new market, new pricing model) | Route to leadership, not the backlog |
-
-### Phase 4: Scoring
-
-Each Feature request gets three scores:
-
-| Dimension | Range | Source |
-|---|---|---|
-| **Kano category** | basic / performance / delight / indifferent / reverse | Heuristic + PM override |
-| **Volume** | count of customer requests | Tool aggregates after dedup |
-| **Segment weight** | enterprise=4, mid-market=2, SMB=1 (configurable) | From customer record |
-| **Strategic alignment** | 0-2 | Manual; does it advance current strategic theme? |
-
-The composite priority is:
-
-```
-priority = (kano_weight × log10(volume + 1) × max_segment_weight × (1 + strategic_alignment))
+# See a sample triage queue across all 6 output formats
+python scripts/feedback_triage.py --demo --format markdown
 ```
 
-Where Kano weights default to:
-- Basic = 4 (gaps here are existential)
-- Performance = 2
-- Delight = 3
-- Indifferent = 0
-- Reverse = -3 (negative — actively avoid building)
+The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
 
-This is a coarse score for triage routing, not a final RICE/ICE. Items above a threshold get routed to `prioritization-frameworks/` for proper scoring.
+## References
 
-### Phase 5: Response
-
-Every customer who submitted a request gets a response, even for &quot;won&#x27;t build&quot;. Three response templates (in `assets/response_templates.md`):
-
-| Template | When | Tone |
-|---|---|---|
-| **Will-build** | Item is scored, prioritized, on roadmap with date | Specific, dated, conservative |
-| **Exploring** | Item is interesting, not yet scoped | Acknowledge, do not commit, invite follow-up |
-| **Won&#x27;t-build** | Item is out of scope or low-signal | Respectful, explanation, sometimes offer workaround |
-
-The response is sent by the channel originator (support agent, AE, CSM) — not the PM directly — so the customer relationship stays with the existing owner.
-
-### Phase 6: Feed forward
-
-| Output | Destination |
-|---|---|
-| High-priority Feature requests | `prioritization-frameworks/` for RICE/ICE scoring |
-| Recurring opportunity themes | `discovery/identify-assumptions/` to surface implicit assumptions |
-| Top customer voices for an opportunity | `discovery/interview-synthesis/` (target list for follow-up interviews) |
-| Backlog-ready items | `wwas/` or `job-stories/` for backlog format |
-| Bugs | engineering bug tracker |
-| Strategic items | exec channel or `c-level-advisor/` |
-
-## Common Traps
-
-### Squeaky-wheel bias
-
-The loudest customer is rarely the average customer. One enterprise account screaming for a feature does not equal demand. The volume score (count of distinct customers requesting) is the antidote; segment weight prevents under-counting enterprise asks, but does not let one enterprise ask dominate alone.
-
-### Sales-driven roadmap
-
-A common pattern: every closed-won deal comes with a list of &quot;promised&quot; features. The roadmap fills with one-off enterprise asks that benefit single customers. Mitigations:
-
-- Sales-channel requests count toward volume only if the customer is willing to be quoted as wanting it (filters tire-kickers).
-- A request with a single customer behind it scores low even with high segment weight.
-- Track sales-promised features separately from PM-prioritized features; report monthly on the gap.
-
-### HiPPO override
-
-Highest-Paid Person&#x27;s Opinion. An exec sends a one-liner request and it jumps the queue. The `exec_ask` channel is a real channel — execs do have customer context — but the request should run through the same triage as everything else. Use the response policy: acknowledge, sometimes commit, rarely promise.
-
-### Confusing requests with discovery
-
-A high-volume request for &quot;X&quot; does not mean X is the right solution. It is signal that an opportunity exists in the area of X. Discovery (interviews, prototypes, experiments) determines the actual solution. The triage routes signal into discovery — it does not replace discovery.
-
-### Acknowledgment debt
-
-Failing to respond to inbound requests teaches customers that submitting feedback is futile. The compounding cost is loss of signal volume — fewer customers bother submitting next quarter. Acknowledgment is non-negotiable, even for items the team will not build.
-
-## Tools
-
-| Tool | Purpose | Command |
-|---|---|---|
-| `feedback_triage.py` | Triage a JSON queue of inbound feedback | `python scripts/feedback_triage.py --input queue.json --format markdown` |
-| `feedback_triage.py --demo` | Produce a sample triage queue across all 6 output formats | `python scripts/feedback_triage.py --demo --format markdown` |
-
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Same customer appears in multiple clusters with different requests | Customer submitted multiple distinct opportunities; correct behavior | Confirm one record per ask is the intake rule; review whether the asks are genuinely distinct or whether the customer is fishing |
-| Kano heuristic mis-categorizes a delighter as performance | The keyword heuristic is intentionally coarse | The Kano column is a starting guess; PM should override during review. Document overrides for future heuristic tuning |
-| Volume score dominates over enterprise signal | Single enterprise asks have volume = 1 and lose to consumer-volume asks | Raise the segment weight for enterprise (default 4); if a single enterprise ask is strategically critical, route it via the `strategic_alignment` boost rather than overriding volume |
-| Exec asks bypass triage | Cultural pattern; not a tool problem | Route every exec ask through the same intake form; report monthly on exec-channel volume and conversion to roadmap; surface the cost of HiPPO override quantitatively |
-| Won&#x27;t-build responses get hostile customer pushback | Tone too dismissive, or the response failed to explain the rationale | Use the Won&#x27;t-build template&#x27;s explanation pattern: acknowledge the underlying job, explain the tradeoff, offer the closest workaround |
-| Triage queue grows faster than throughput | Intake is wider than triage capacity; PM is the bottleneck | Cap triage to a weekly batch; auto-acknowledge at intake with a 2-week response SLA; train Support/CSM to pre-categorize obvious bugs |
-| Tool exits with input validation error | Required fields (`id`, `channel`, `customer_id`, `raw_text`, `received_at`) missing in JSON input | Confirm input matches the schema in Tool Reference below; run `--demo` to see a valid example |
-
-## Success Criteria
-
-- 100% of inbound feedback items receive an acknowledgment within 14 days
-- Feature-request response distribution roughly: 10-20% will-build, 20-30% exploring, 50-70% won&#x27;t-build (a roadmap is mostly &quot;no&quot;)
-- Deduplication reduces raw request volume by 30-60% (varies by channel mix and product maturity)
-- Sales-promised feature delta from PM-prioritized list is reported monthly to leadership
-- HiPPO exec-channel items are processed through triage at the same rate as other channels; exec-channel conversion rate to roadmap is tracked
-- At least one customer interview per quarter is sourced from triage clusters (closing the loop from triage to discovery)
-- Triage cadence is regular: at minimum monthly, ideally weekly for active products
+- **[references/customer-feedback-triage-guide.md](references/customer-feedback-triage-guide.md)** — the full workflow with the 4 frameworks (Cagan, Kano, Reforge, ProductPlan), the 6-phase process, week-over-week cadence, channel-by-channel intake norms, and the weekly triage meeting agenda. Read when running or setting up the triage process.
+- **[references/kano-model-deep-dive.md](references/kano-model-deep-dive.md)** — categorization heuristics, edge cases, and time-dynamics of Kano categories. Read when overriding the tool&#x27;s Kano guess.
+- **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (squeaky-wheel, sales-driven roadmap, HiPPO, treating requests literally...), plus the common traps, troubleshooting table, and success criteria. Read before the weekly triage meeting and when output looks off.
+- **[references/tool-reference.md](references/tool-reference.md)** — `feedback_triage.py` flags, input schema, and all output schemas. Read when scripting or debugging the tool.
+- **[assets/triage_template.md](assets/triage_template.md)** — manual triage worksheet for teams not running the Python tool.
+- **[assets/response_templates.md](assets/response_templates.md)** — Will-build / Exploring / Won&#x27;t-build templates with three variants each.
+- **[assets/kano_quick_reference.md](assets/kano_quick_reference.md)** — one-page reference card for the five Kano categories.
+- Marty Cagan, *Inspired* (2nd ed., 2017) and *Empowered* (2020); Noriaki Kano et al., &quot;Attractive Quality and Must-Be Quality&quot; (1984); Reforge &quot;Customer Development&quot;; ProductPlan, &quot;How to Manage Product Feedback&quot;.
 
 ## Scope &amp; Limitations
 
@@ -692,11 +524,7 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 
 **Out of Scope:** Bug triage (use the team&#x27;s bug tracker process). User research and interview-driven discovery (see `discovery/interview-synthesis/`). Detailed prioritization scoring with RICE/ICE/WSJF (see `prioritization-frameworks/`). Customer-relationship management (CRM is the system of record for the customer, this skill is the system of record for the request). NPS analysis methodology (this skill ingests NPS verbatims as one channel among many).
 
-**Important Caveats:**
-- The Kano category guess is a keyword heuristic, transparently documented. It is not ML and does not learn over time. The PM should treat it as a hint, not a verdict, and override liberally.
-- The clustering algorithm is a simple word-overlap heuristic, intentional to keep the tool stdlib-only and inspectable. For production volumes (&gt; ~500 items / month), consider augmenting with semantic clustering through a separate offline process.
-- The scoring formula is coarse. Its purpose is to route items into downstream prioritization, not to substitute for it. Items above the threshold should still be RICE/ICE scored before going on the roadmap.
-- &quot;Acknowledge, sometimes commit, rarely promise&quot; is a discipline, not a tool feature. The templates support the discipline; they do not enforce it. Sales and CS partners need explicit training to avoid promising in customer conversations.
+**Important Caveats:** The Kano guess and clustering are transparent keyword/word-overlap heuristics — not ML; override liberally and, above ~500 items/month, augment with semantic clustering offline. The scoring formula is a coarse router, not a substitute for RICE/ICE. &quot;Acknowledge, sometimes commit, rarely promise&quot; is a discipline the templates support but cannot enforce; Sales and CS need explicit training to avoid promising in customer conversations.
 
 ## Integration Points
 
@@ -711,100 +539,6 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 | `senior-pm/` | Bidirectional | Stakeholder map informs segment weights; triage output informs stakeholder updates |
 | `business-growth/customer-success/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
 | `sales-success/` | Bidirectional | Sales is the intake source for sales-channel asks; receives won&#x27;t-build rationale |
-
-## Tool Reference
-
-### feedback_triage.py
-
-Ingest a JSON queue of inbound feedback. Produce deduplicated clusters, Kano categorization, priority scores, and suggested response templates.
-
-| Flag | Type | Default | Description |
-|---|---|---|---|
-| `--input` | string | (required unless `--demo`) | Path to JSON file with feedback items |
-| `--demo` | flag | off | Run with built-in 12-item sample queue |
-| `--format` | choice | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | string | stdout | File path to write output |
-| `--segment-weights` | string | `enterprise=4,mid_market=2,smb=1,prosumer=1` | Override default segment weights |
-| `--threshold` | float | `4.0` | Minimum priority score to route into prioritization-frameworks |
-
-### Input schema
-
-```json
-{
-  &quot;items&quot;: [
-    {
-      &quot;id&quot;: &quot;FB-2026-0001&quot;,
-      &quot;channel&quot;: &quot;support&quot;,
-      &quot;customer_id&quot;: &quot;cust-1234&quot;,
-      &quot;segment&quot;: &quot;enterprise&quot;,
-      &quot;raw_text&quot;: &quot;We really need a way to export results to PDF for our weekly board pack&quot;,
-      &quot;received_at&quot;: &quot;2026-05-12T14:23:00Z&quot;,
-      &quot;submitter&quot;: &quot;support-agent-jane&quot;,
-      &quot;opportunity_area&quot;: &quot;reporting&quot;
-    }
-  ]
-}
-```
-
-### Output schemas
-
-**JSON** (`pm/customer-feedback-triage/v1`):
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/customer-feedback-triage/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-22T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;clusters&quot;: [
-      {
-        &quot;cluster_id&quot;: &quot;C-001&quot;,
-        &quot;opportunity_label&quot;: &quot;Share results with non-licensed stakeholders&quot;,
-        &quot;kano_category&quot;: &quot;performance&quot;,
-        &quot;category&quot;: &quot;feature_request&quot;,
-        &quot;request_count&quot;: 5,
-        &quot;distinct_customers&quot;: 4,
-        &quot;segment_breakdown&quot;: {&quot;enterprise&quot;: 2, &quot;mid_market&quot;: 2},
-        &quot;priority_score&quot;: 12.4,
-        &quot;above_threshold&quot;: true,
-        &quot;items&quot;: [&quot;FB-2026-0001&quot;, &quot;FB-2026-0007&quot;, &quot;...&quot;]
-      }
-    ],
-    &quot;routing&quot;: {
-      &quot;to_prioritization&quot;: [&quot;C-001&quot;],
-      &quot;to_bug_tracker&quot;: [&quot;C-008&quot;],
-      &quot;to_strategy&quot;: [&quot;C-012&quot;],
-      &quot;to_docs&quot;: [&quot;C-005&quot;]
-    },
-    &quot;responses&quot;: [
-      {
-        &quot;item_id&quot;: &quot;FB-2026-0001&quot;,
-        &quot;template&quot;: &quot;exploring&quot;,
-        &quot;body_markdown&quot;: &quot;...&quot;
-      }
-    ]
-  }
-}
-```
-
-**Markdown** (default): a triage-board document with sections per cluster, routing summary, and response drafts.
-
-**Mermaid**: a `flowchart TD` of clusters → routing destinations.
-
-**Confluence / Notion / Linear**: storage-format-appropriate variants of the markdown output.
-
-## References
-
-- `references/customer-feedback-triage-guide.md` — full workflow with examples per channel
-- `references/kano-model-deep-dive.md` — categorization heuristics, edge cases, time-dynamics
-- `assets/triage_template.md` — manual triage worksheet for teams not running the Python tool
-- `assets/response_templates.md` — Will-build / Exploring / Won&#x27;t-build response templates with three variants each
-- `assets/kano_quick_reference.md` — one-page reference card for the five Kano categories
-- Marty Cagan, *Inspired: How to Create Tech Products Customers Love* (2nd ed., 2017) — request vs opportunity vs solution
-- Marty Cagan, *Empowered* (2020) — discovery vs delivery separation
-- Noriaki Kano et al., &quot;Attractive Quality and Must-Be Quality&quot; (1984)
-- Patrick Campbell (ProfitWell) on Voice-of-Customer prioritization — https://www.profitwell.com/
-- Reforge, &quot;Customer Development&quot; curriculum — https://www.reforge.com/
-- ProductPlan, &quot;How to Manage Product Feedback&quot; — https://www.productplan.com/learn/product-feedback/
 
 ---
 
@@ -832,7 +566,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Feedback Triage&quot;**
-   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.&quot;
+   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -863,9 +597,18 @@ Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales c
 
 This skill provides a workflow and a Python tool for handling that stream. Inputs are raw feedback items from many channels. Outputs are deduplicated, categorized, scored, and routed items, plus acknowledgment responses for the customers who sent them.
 
-The frameworks behind it are Marty Cagan&#x27;s discovery-techniques separation of *request* from *opportunity* from *solution*, Noriaki Kano&#x27;s model of feature-quality categories, Reforge&#x27;s customer-development model, and ProductPlan&#x27;s request-management playbook.
+The frameworks behind it are Marty Cagan&#x27;s separation of *request* from *opportunity* from *solution*, Noriaki Kano&#x27;s model of feature-quality categories, Reforge&#x27;s customer-development model, and ProductPlan&#x27;s request-management playbook. Detail lives in the references below.
 
-### When to Use
+## Core Capabilities
+
+- **Intake &amp; normalization** — one verbatim record per ask across 8 channels (support, sales, social, NPS, in-app, exec, partner, interview)
+- **Dedup &amp; clustering** — group items by underlying opportunity even when literal requests differ
+- **Kano + Cagan classification** — Basic/Performance/Delight/Indifferent/Reverse, and Request → Opportunity → Solution
+- **Segment-aware scoring** — `kano_weight × log10(volume+1) × segment_weight × (1 + strategic_alignment)` as a coarse router (not a final RICE)
+- **Response discipline** — Will-build / Exploring / Won&#x27;t-build templates; always acknowledge, sometimes commit, rarely promise
+- **Feed-forward routing** — to prioritization, discovery, backlog, bug tracker, or strategy
+
+## When to Use
 
 - You have a backlog of customer feedback that is not being processed.
 - Sales or Customer Success is constantly forwarding feature requests and expecting a per-request answer.
@@ -880,195 +623,38 @@ The frameworks behind it are Marty Cagan&#x27;s discovery-techniques separation 
 - For prioritizing already-triaged items against each other (that is `prioritization-frameworks/`).
 - For bug triage (use the bug triage process in your tracker — though the workflow here applies to feature-request items).
 
-## Frameworks
+## Clarify First
 
-### Marty Cagan: Request → Opportunity → Solution
+Before triaging the feedback, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Cagan separates three things customers and the inbound stream conflate:
+- [ ] **Feedback items with channel + segment tags** — the verbatims and where each came from (drives clustering, volume counts, and the Kano guess)
+- [ ] **Segment weights** — which customer segments count more (sets `segment_weight` in the score, i.e. whether enterprise asks outrank long-tail volume)
+- [ ] **Strategic alignment definition** — what current strategy a request must match (sets the `strategic_alignment` term that boosts on-strategy asks)
 
-| Layer | What it is | Example |
-|---|---|---|
-| **Request** | What the customer literally asked for | &quot;Add an export to PDF button&quot; |
-| **Opportunity** | The underlying job or problem | &quot;I need to share results with my CFO who doesn&#x27;t have a login&quot; |
-| **Solution** | The chosen response | &quot;Shareable read-only link&quot; or &quot;PDF export&quot; or &quot;CSV + email digest&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-The triage workflow&#x27;s job is to convert each Request into an Opportunity and route the Opportunity to the appropriate discovery / prioritization process. The literal Request is rarely the right thing to build.
+## Quick Start
 
-### Kano Model (Noriaki Kano, 1984)
+```bash
+# Triage a JSON queue of inbound feedback
+python scripts/feedback_triage.py --input queue.json --format markdown
 
-Kano classifies features by how their presence or absence affects customer satisfaction. The five categories:
-
-| Category | Effect of having it | Effect of missing it | Example (SaaS analytics tool) |
-|---|---|---|---|
-| **Basic / Must-be** | Expected; satisfaction does not increase | Severe dissatisfaction | Login works; data export exists |
-| **Performance / One-dimensional** | More is linearly better | Less is linearly worse | Query speed; dashboard load time |
-| **Delight / Attractive** | Disproportionate satisfaction | Customer does not miss it | Natural-language query; collaborative cursors |
-| **Indifferent** | No effect | No effect | Theme color picker (for most users) |
-| **Reverse** | Causes dissatisfaction | Improves satisfaction | An overly chatty AI assistant |
-
-Kano categories shift over time: today&#x27;s delighter becomes tomorrow&#x27;s basic. The categorization in this triage workflow is the team&#x27;s current snapshot.
-
-### Reforge: Layered customer development
-
-Reforge frames customer development as concentric rings: stated needs → revealed jobs → underlying motivations. The triage workflow operates at the first ring (stated needs, captured in the request text). It explicitly routes high-signal items into deeper discovery work to surface the second and third rings.
-
-### ProductPlan: Request management
-
-Three principles, drawn from ProductPlan&#x27;s request-management practice and adopted here:
-
-1. **Always acknowledge.** Every request, even ones that get a &quot;no&quot;, gets a response. Customer silence is the fastest path to lost trust.
-2. **Sometimes commit.** Commit only when the item is scored, prioritized, and on the roadmap with a date the team will actually hit.
-3. **Rarely promise.** Avoid &quot;we&#x27;ll definitely build that&quot; in any external channel until the item is funded, scoped, and started.
-
-## Workflow
-
-### Phase 1: Intake &amp; normalization
-
-For every inbound feedback item, capture a normalized record with these fields:
-
-| Field | Required | Notes |
-|---|---|---|
-| `id` | yes | Internal ID |
-| `channel` | yes | One of: support, sales, social, nps, in_app, exec_ask, partner, customer_interview |
-| `customer_id` | yes | Anonymous OK; needed for dedup and segment analysis |
-| `segment` | recommended | e.g. SMB, mid-market, enterprise, prosumer |
-| `raw_text` | yes | The verbatim ask — do not paraphrase at intake |
-| `received_at` | yes | ISO-8601 |
-| `submitter` | yes | The internal person who logged it (Support agent, AE, PM) |
-| `opportunity_area` | optional | Coarse area, populated at triage (e.g. onboarding, reporting, integrations) |
-
-Normalization rules:
-
-- Capture the verbatim. Paraphrasing at intake loses signal. The PM can paraphrase at triage.
-- One request per record. If a customer email contains 3 asks, create 3 records.
-- Do not pre-judge at intake. Even off-topic items get logged and triaged later (they are signal about channel hygiene).
-
-### Phase 2: Triage (run `feedback_triage.py`)
-
-The Python tool ingests the normalized intake JSON and produces:
-
-1. **Deduplicated clusters** — items grouped by similar opportunity, even if the literal requests differ.
-2. **Kano category guess** — heuristic based on keyword signals (transparent and documented; the PM should override).
-3. **Categorization** — Bug / Feature / Question / Strategy.
-4. **Priority score** — combined Kano weight × volume × segment × strategic-alignment.
-5. **Suggested response template** — Will-build / Won&#x27;t-build / Exploring, parameterized by request and customer name.
-
-### Phase 3: Categorization
-
-For each clustered item, categorize:
-
-| Category | Definition | Action |
-|---|---|---|
-| **Bug** | Existing functionality is broken | Route to engineering bug queue, not PM backlog |
-| **Feature request** | New functionality | Continue to scoring |
-| **Question** | Customer needs help, not a product change | Route to support / docs; flag if recurring (it&#x27;s a doc gap) |
-| **Strategy** | Item implies a strategic direction (new market, new pricing model) | Route to leadership, not the backlog |
-
-### Phase 4: Scoring
-
-Each Feature request gets three scores:
-
-| Dimension | Range | Source |
-|---|---|---|
-| **Kano category** | basic / performance / delight / indifferent / reverse | Heuristic + PM override |
-| **Volume** | count of customer requests | Tool aggregates after dedup |
-| **Segment weight** | enterprise=4, mid-market=2, SMB=1 (configurable) | From customer record |
-| **Strategic alignment** | 0-2 | Manual; does it advance current strategic theme? |
-
-The composite priority is:
-
-```
-priority = (kano_weight × log10(volume + 1) × max_segment_weight × (1 + strategic_alignment))
+# See a sample triage queue across all 6 output formats
+python scripts/feedback_triage.py --demo --format markdown
 ```
 
-Where Kano weights default to:
-- Basic = 4 (gaps here are existential)
-- Performance = 2
-- Delight = 3
-- Indifferent = 0
-- Reverse = -3 (negative — actively avoid building)
+The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
 
-This is a coarse score for triage routing, not a final RICE/ICE. Items above a threshold get routed to `prioritization-frameworks/` for proper scoring.
+## References
 
-### Phase 5: Response
-
-Every customer who submitted a request gets a response, even for &quot;won&#x27;t build&quot;. Three response templates (in `assets/response_templates.md`):
-
-| Template | When | Tone |
-|---|---|---|
-| **Will-build** | Item is scored, prioritized, on roadmap with date | Specific, dated, conservative |
-| **Exploring** | Item is interesting, not yet scoped | Acknowledge, do not commit, invite follow-up |
-| **Won&#x27;t-build** | Item is out of scope or low-signal | Respectful, explanation, sometimes offer workaround |
-
-The response is sent by the channel originator (support agent, AE, CSM) — not the PM directly — so the customer relationship stays with the existing owner.
-
-### Phase 6: Feed forward
-
-| Output | Destination |
-|---|---|
-| High-priority Feature requests | `prioritization-frameworks/` for RICE/ICE scoring |
-| Recurring opportunity themes | `discovery/identify-assumptions/` to surface implicit assumptions |
-| Top customer voices for an opportunity | `discovery/interview-synthesis/` (target list for follow-up interviews) |
-| Backlog-ready items | `wwas/` or `job-stories/` for backlog format |
-| Bugs | engineering bug tracker |
-| Strategic items | exec channel or `c-level-advisor/` |
-
-## Common Traps
-
-### Squeaky-wheel bias
-
-The loudest customer is rarely the average customer. One enterprise account screaming for a feature does not equal demand. The volume score (count of distinct customers requesting) is the antidote; segment weight prevents under-counting enterprise asks, but does not let one enterprise ask dominate alone.
-
-### Sales-driven roadmap
-
-A common pattern: every closed-won deal comes with a list of &quot;promised&quot; features. The roadmap fills with one-off enterprise asks that benefit single customers. Mitigations:
-
-- Sales-channel requests count toward volume only if the customer is willing to be quoted as wanting it (filters tire-kickers).
-- A request with a single customer behind it scores low even with high segment weight.
-- Track sales-promised features separately from PM-prioritized features; report monthly on the gap.
-
-### HiPPO override
-
-Highest-Paid Person&#x27;s Opinion. An exec sends a one-liner request and it jumps the queue. The `exec_ask` channel is a real channel — execs do have customer context — but the request should run through the same triage as everything else. Use the response policy: acknowledge, sometimes commit, rarely promise.
-
-### Confusing requests with discovery
-
-A high-volume request for &quot;X&quot; does not mean X is the right solution. It is signal that an opportunity exists in the area of X. Discovery (interviews, prototypes, experiments) determines the actual solution. The triage routes signal into discovery — it does not replace discovery.
-
-### Acknowledgment debt
-
-Failing to respond to inbound requests teaches customers that submitting feedback is futile. The compounding cost is loss of signal volume — fewer customers bother submitting next quarter. Acknowledgment is non-negotiable, even for items the team will not build.
-
-## Tools
-
-| Tool | Purpose | Command |
-|---|---|---|
-| `feedback_triage.py` | Triage a JSON queue of inbound feedback | `python scripts/feedback_triage.py --input queue.json --format markdown` |
-| `feedback_triage.py --demo` | Produce a sample triage queue across all 6 output formats | `python scripts/feedback_triage.py --demo --format markdown` |
-
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---|---|---|
-| Same customer appears in multiple clusters with different requests | Customer submitted multiple distinct opportunities; correct behavior | Confirm one record per ask is the intake rule; review whether the asks are genuinely distinct or whether the customer is fishing |
-| Kano heuristic mis-categorizes a delighter as performance | The keyword heuristic is intentionally coarse | The Kano column is a starting guess; PM should override during review. Document overrides for future heuristic tuning |
-| Volume score dominates over enterprise signal | Single enterprise asks have volume = 1 and lose to consumer-volume asks | Raise the segment weight for enterprise (default 4); if a single enterprise ask is strategically critical, route it via the `strategic_alignment` boost rather than overriding volume |
-| Exec asks bypass triage | Cultural pattern; not a tool problem | Route every exec ask through the same intake form; report monthly on exec-channel volume and conversion to roadmap; surface the cost of HiPPO override quantitatively |
-| Won&#x27;t-build responses get hostile customer pushback | Tone too dismissive, or the response failed to explain the rationale | Use the Won&#x27;t-build template&#x27;s explanation pattern: acknowledge the underlying job, explain the tradeoff, offer the closest workaround |
-| Triage queue grows faster than throughput | Intake is wider than triage capacity; PM is the bottleneck | Cap triage to a weekly batch; auto-acknowledge at intake with a 2-week response SLA; train Support/CSM to pre-categorize obvious bugs |
-| Tool exits with input validation error | Required fields (`id`, `channel`, `customer_id`, `raw_text`, `received_at`) missing in JSON input | Confirm input matches the schema in Tool Reference below; run `--demo` to see a valid example |
-
-## Success Criteria
-
-- 100% of inbound feedback items receive an acknowledgment within 14 days
-- Feature-request response distribution roughly: 10-20% will-build, 20-30% exploring, 50-70% won&#x27;t-build (a roadmap is mostly &quot;no&quot;)
-- Deduplication reduces raw request volume by 30-60% (varies by channel mix and product maturity)
-- Sales-promised feature delta from PM-prioritized list is reported monthly to leadership
-- HiPPO exec-channel items are processed through triage at the same rate as other channels; exec-channel conversion rate to roadmap is tracked
-- At least one customer interview per quarter is sourced from triage clusters (closing the loop from triage to discovery)
-- Triage cadence is regular: at minimum monthly, ideally weekly for active products
+- **[references/customer-feedback-triage-guide.md](references/customer-feedback-triage-guide.md)** — the full workflow with the 4 frameworks (Cagan, Kano, Reforge, ProductPlan), the 6-phase process, week-over-week cadence, channel-by-channel intake norms, and the weekly triage meeting agenda. Read when running or setting up the triage process.
+- **[references/kano-model-deep-dive.md](references/kano-model-deep-dive.md)** — categorization heuristics, edge cases, and time-dynamics of Kano categories. Read when overriding the tool&#x27;s Kano guess.
+- **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (squeaky-wheel, sales-driven roadmap, HiPPO, treating requests literally...), plus the common traps, troubleshooting table, and success criteria. Read before the weekly triage meeting and when output looks off.
+- **[references/tool-reference.md](references/tool-reference.md)** — `feedback_triage.py` flags, input schema, and all output schemas. Read when scripting or debugging the tool.
+- **[assets/triage_template.md](assets/triage_template.md)** — manual triage worksheet for teams not running the Python tool.
+- **[assets/response_templates.md](assets/response_templates.md)** — Will-build / Exploring / Won&#x27;t-build templates with three variants each.
+- **[assets/kano_quick_reference.md](assets/kano_quick_reference.md)** — one-page reference card for the five Kano categories.
+- Marty Cagan, *Inspired* (2nd ed., 2017) and *Empowered* (2020); Noriaki Kano et al., &quot;Attractive Quality and Must-Be Quality&quot; (1984); Reforge &quot;Customer Development&quot;; ProductPlan, &quot;How to Manage Product Feedback&quot;.
 
 ## Scope &amp; Limitations
 
@@ -1076,11 +662,7 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 
 **Out of Scope:** Bug triage (use the team&#x27;s bug tracker process). User research and interview-driven discovery (see `discovery/interview-synthesis/`). Detailed prioritization scoring with RICE/ICE/WSJF (see `prioritization-frameworks/`). Customer-relationship management (CRM is the system of record for the customer, this skill is the system of record for the request). NPS analysis methodology (this skill ingests NPS verbatims as one channel among many).
 
-**Important Caveats:**
-- The Kano category guess is a keyword heuristic, transparently documented. It is not ML and does not learn over time. The PM should treat it as a hint, not a verdict, and override liberally.
-- The clustering algorithm is a simple word-overlap heuristic, intentional to keep the tool stdlib-only and inspectable. For production volumes (&gt; ~500 items / month), consider augmenting with semantic clustering through a separate offline process.
-- The scoring formula is coarse. Its purpose is to route items into downstream prioritization, not to substitute for it. Items above the threshold should still be RICE/ICE scored before going on the roadmap.
-- &quot;Acknowledge, sometimes commit, rarely promise&quot; is a discipline, not a tool feature. The templates support the discipline; they do not enforce it. Sales and CS partners need explicit training to avoid promising in customer conversations.
+**Important Caveats:** The Kano guess and clustering are transparent keyword/word-overlap heuristics — not ML; override liberally and, above ~500 items/month, augment with semantic clustering offline. The scoring formula is a coarse router, not a substitute for RICE/ICE. &quot;Acknowledge, sometimes commit, rarely promise&quot; is a discipline the templates support but cannot enforce; Sales and CS need explicit training to avoid promising in customer conversations.
 
 ## Integration Points
 
@@ -1095,100 +677,6 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 | `senior-pm/` | Bidirectional | Stakeholder map informs segment weights; triage output informs stakeholder updates |
 | `business-growth/customer-success/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
 | `sales-success/` | Bidirectional | Sales is the intake source for sales-channel asks; receives won&#x27;t-build rationale |
-
-## Tool Reference
-
-### feedback_triage.py
-
-Ingest a JSON queue of inbound feedback. Produce deduplicated clusters, Kano categorization, priority scores, and suggested response templates.
-
-| Flag | Type | Default | Description |
-|---|---|---|---|
-| `--input` | string | (required unless `--demo`) | Path to JSON file with feedback items |
-| `--demo` | flag | off | Run with built-in 12-item sample queue |
-| `--format` | choice | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | string | stdout | File path to write output |
-| `--segment-weights` | string | `enterprise=4,mid_market=2,smb=1,prosumer=1` | Override default segment weights |
-| `--threshold` | float | `4.0` | Minimum priority score to route into prioritization-frameworks |
-
-### Input schema
-
-```json
-{
-  &quot;items&quot;: [
-    {
-      &quot;id&quot;: &quot;FB-2026-0001&quot;,
-      &quot;channel&quot;: &quot;support&quot;,
-      &quot;customer_id&quot;: &quot;cust-1234&quot;,
-      &quot;segment&quot;: &quot;enterprise&quot;,
-      &quot;raw_text&quot;: &quot;We really need a way to export results to PDF for our weekly board pack&quot;,
-      &quot;received_at&quot;: &quot;2026-05-12T14:23:00Z&quot;,
-      &quot;submitter&quot;: &quot;support-agent-jane&quot;,
-      &quot;opportunity_area&quot;: &quot;reporting&quot;
-    }
-  ]
-}
-```
-
-### Output schemas
-
-**JSON** (`pm/customer-feedback-triage/v1`):
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/customer-feedback-triage/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-22T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;clusters&quot;: [
-      {
-        &quot;cluster_id&quot;: &quot;C-001&quot;,
-        &quot;opportunity_label&quot;: &quot;Share results with non-licensed stakeholders&quot;,
-        &quot;kano_category&quot;: &quot;performance&quot;,
-        &quot;category&quot;: &quot;feature_request&quot;,
-        &quot;request_count&quot;: 5,
-        &quot;distinct_customers&quot;: 4,
-        &quot;segment_breakdown&quot;: {&quot;enterprise&quot;: 2, &quot;mid_market&quot;: 2},
-        &quot;priority_score&quot;: 12.4,
-        &quot;above_threshold&quot;: true,
-        &quot;items&quot;: [&quot;FB-2026-0001&quot;, &quot;FB-2026-0007&quot;, &quot;...&quot;]
-      }
-    ],
-    &quot;routing&quot;: {
-      &quot;to_prioritization&quot;: [&quot;C-001&quot;],
-      &quot;to_bug_tracker&quot;: [&quot;C-008&quot;],
-      &quot;to_strategy&quot;: [&quot;C-012&quot;],
-      &quot;to_docs&quot;: [&quot;C-005&quot;]
-    },
-    &quot;responses&quot;: [
-      {
-        &quot;item_id&quot;: &quot;FB-2026-0001&quot;,
-        &quot;template&quot;: &quot;exploring&quot;,
-        &quot;body_markdown&quot;: &quot;...&quot;
-      }
-    ]
-  }
-}
-```
-
-**Markdown** (default): a triage-board document with sections per cluster, routing summary, and response drafts.
-
-**Mermaid**: a `flowchart TD` of clusters → routing destinations.
-
-**Confluence / Notion / Linear**: storage-format-appropriate variants of the markdown output.
-
-## References
-
-- `references/customer-feedback-triage-guide.md` — full workflow with examples per channel
-- `references/kano-model-deep-dive.md` — categorization heuristics, edge cases, time-dynamics
-- `assets/triage_template.md` — manual triage worksheet for teams not running the Python tool
-- `assets/response_templates.md` — Will-build / Exploring / Won&#x27;t-build response templates with three variants each
-- `assets/kano_quick_reference.md` — one-page reference card for the five Kano categories
-- Marty Cagan, *Inspired: How to Create Tech Products Customers Love* (2nd ed., 2017) — request vs opportunity vs solution
-- Marty Cagan, *Empowered* (2020) — discovery vs delivery separation
-- Noriaki Kano et al., &quot;Attractive Quality and Must-Be Quality&quot; (1984)
-- Patrick Campbell (ProfitWell) on Voice-of-Customer prioritization — https://www.profitwell.com/
-- Reforge, &quot;Customer Development&quot; curriculum — https://www.reforge.com/
-- ProductPlan, &quot;How to Manage Product Feedback&quot; — https://www.productplan.com/learn/product-feedback/
 
 ---
 
@@ -1216,7 +704,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Feedback Triage&quot;**
-   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks. Feeds a clean signal into prioritization-frameworks.&quot;
+   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1276,8 +764,15 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/customer-feedback-triage/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code># Triage a JSON queue of inbound feedback
+python scripts/feedback_triage.py --input queue.json --format markdown
+
+# See a sample triage queue across all 6 output formats
+python scripts/feedback_triage.py --demo --format markdown
+</code></pre>
+
+The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/customer-feedback-triage/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

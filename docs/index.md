@@ -146,7 +146,7 @@ SQL, ML ops, dbt, BI, talent acquisition, people analytics, operations.
 
 | | |
 |---|---|
-| **294 Skills** | Production-ready expertise across 15 professional domains. Project Management is the most-used (54 skills). |
+| **339 Skills** | Production-ready expertise across 17 professional domains. Project Management is the most-used (66 skills). |
 | **720+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, status updates, activation funnels, feedback triage -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Saas Scaffolder - Claude Skills</title>
-  <meta name="description" content="Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports">
+  <meta name="description" content="Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscri">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/saas-scaffolder.html">
   <meta property="og:title" content="Saas Scaffolder - Claude Skills">
-  <meta property="og:description" content="Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports">
+  <meta property="og:description" content="Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscri">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/saas-scaffolder.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Saas Scaffolder", "description": "Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/saas-scaffolder.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Saas Scaffolder", "description": "Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/saas-scaffolder.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Saas Scaffolder</h1>
-    <p class="page-subtitle">Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Full Stack</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
+    <p class="page-subtitle">Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -393,17 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Saas Scaffolder (Engineering domain).
 
-Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...
+Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.
 
-**Tier:** POWERFUL **Category:** Engineering / Full-Stack **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- Checkout Session
-- Webhook Handler
-- Phase 1: Foundation
-- Phase 2: Database
-- Phase 3: Authentication
-- Phase 4: Billing
+Generate a complete, production-ready SaaS application boilerplate including authentication (NextAuth, Clerk, or Supabase Auth), database schemas with multi-tenancy, billing integration (Stripe or Lemon Squeezy), API routes with validation, dashboard UI with shadcn/ui, and deployment configuration. 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,17 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Saas Scaffolder (Engineering domain).
 
-Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...
+Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.
 
-**Tier:** POWERFUL **Category:** Engineering / Full-Stack **Maintainer:** Claude Skills Team
-
-## Your Key Capabilities
-- Checkout Session
-- Webhook Handler
-- Phase 1: Foundation
-- Phase 2: Database
-- Phase 3: Authentication
-- Phase 4: Billing
+Generate a complete, production-ready SaaS application boilerplate including authentication (NextAuth, Clerk, or Supabase Auth), database schemas with multi-tenancy, billing integration (Stripe or Lemon Squeezy), API routes with validation, dashboard UI with shadcn/ui, and deployment configuration. 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -463,511 +447,52 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # SaaS Scaffolder
 
-**Tier:** POWERFUL
-**Category:** Engineering / Full-Stack
-**Maintainer:** Claude Skills Team
-
-## Overview
-
 Generate a complete, production-ready SaaS application boilerplate including authentication (NextAuth, Clerk, or Supabase Auth), database schemas with multi-tenancy, billing integration (Stripe or Lemon Squeezy), API routes with validation, dashboard UI with shadcn/ui, and deployment configuration. Produces a working application from a product specification in under 30 minutes.
 
-## Keywords
+## Core Capabilities
 
-SaaS, boilerplate, scaffolding, Next.js, authentication, Stripe, billing, multi-tenancy, subscription, starter template, NextAuth, Drizzle ORM, shadcn/ui
+- **Spec-driven scaffolding** — produce a full Next.js App Router + TypeScript + Tailwind + shadcn/ui file tree from a short product spec (auth/db/payments/tenancy/features).
+- **Multi-tenant database schema** — Drizzle ORM schema with workspaces (tenancy boundary), users, members, OAuth accounts, and sessions, with proper indexes and cascade rules.
+- **Authentication** — NextAuth v5 with Drizzle adapter, OAuth (Google/GitHub) and magic-link (Resend) providers, route-protection middleware.
+- **Stripe billing** — checkout session, customer portal, and signature-verified webhook handler keeping subscription state in sync.
+- **Multi-tenancy patterns** — workspace-scoped queries and plan-based feature gating (free/pro/enterprise).
+- **Phased build + quality bar** — 5 ordered scaffolding phases with per-phase validation, pitfalls, best practices, troubleshooting, and success criteria.
 
-## Input Specification
+**Keywords:** SaaS, boilerplate, scaffolding, Next.js, authentication, Stripe, billing, multi-tenancy, subscription, starter template, NextAuth, Drizzle ORM, shadcn/ui
 
-```
-Product: [name]
-Description: [1-3 sentences]
-Auth: nextauth | clerk | supabase
-Database: neondb | supabase | planetscale | turso
-Payments: stripe | lemonsqueezy | none
-Multi-tenancy: workspace | organization | none
-Features: [comma-separated list]
-```
+## When to Use
 
-## Generated File Tree
+- Starting a new SaaS product, subscription app, or multi-tenant platform.
+- Standing up auth + billing + tenancy boilerplate quickly before building product features.
+- Adding workspace/organization tenancy with role-based access and plan gating.
+- Generating a baseline `.env.example`, schema, and API routes for a Next.js stack.
 
-```
-my-saas/
-├── app/
-│   ├── (auth)/
-│   │   ├── login/page.tsx
-│   │   ├── register/page.tsx
-│   │   ├── forgot-password/page.tsx
-│   │   └── layout.tsx
-│   ├── (dashboard)/
-│   │   ├── dashboard/page.tsx
-│   │   ├── settings/
-│   │   │   ├── page.tsx              # Profile settings
-│   │   │   ├── billing/page.tsx      # Subscription management
-│   │   │   └── team/page.tsx         # Team/workspace settings
-│   │   └── layout.tsx                # Dashboard shell (sidebar + header)
-│   ├── (marketing)/
-│   │   ├── page.tsx                  # Landing page
-│   │   ├── pricing/page.tsx          # Pricing tiers
-│   │   └── layout.tsx
-│   ├── api/
-│   │   ├── auth/[...nextauth]/route.ts
-│   │   ├── webhooks/stripe/route.ts
-│   │   ├── billing/
-│   │   │   ├── checkout/route.ts
-│   │   │   └── portal/route.ts
-│   │   └── health/route.ts
-│   ├── layout.tsx                    # Root layout
-│   └── not-found.tsx
-├── components/
-│   ├── ui/                           # shadcn/ui components
-│   ├── auth/
-│   │   ├── login-form.tsx
-│   │   └── register-form.tsx
-│   ├── dashboard/
-│   │   ├── sidebar.tsx
-│   │   ├── header.tsx
-│   │   └── stats-card.tsx
-│   ├── marketing/
-│   │   ├── hero.tsx
-│   │   ├── features.tsx
-│   │   ├── pricing-card.tsx
-│   │   └── footer.tsx
-│   └── billing/
-│       ├── plan-card.tsx
-│       └── usage-meter.tsx
-├── lib/
-│   ├── auth.ts                       # Auth configuration
-│   ├── db.ts                         # Database client singleton
-│   ├── stripe.ts                     # Stripe client
-│   ├── validations.ts                # Zod schemas
-│   └── utils.ts                      # Shared utilities
-├── db/
-│   ├── schema.ts                     # Drizzle schema
-│   ├── migrations/                   # Generated migrations
-│   └── seed.ts                       # Development seed data
-├── hooks/
-│   ├── use-subscription.ts
-│   └── use-current-user.ts
-├── types/
-│   └── index.ts                      # Shared TypeScript types
-├── middleware.ts                      # Auth + rate limiting
-├── .env.example
-├── drizzle.config.ts
-├── tailwind.config.ts
-└── next.config.ts
-```
+## Clarify First
 
-## Database Schema (Multi-Tenant)
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-```typescript
-// db/schema.ts
-import { pgTable, text, timestamp, integer, boolean, uniqueIndex, index } from &#x27;drizzle-orm/pg-core&#x27;
-import { createId } from &#x27;@paralleldrive/cuid2&#x27;
+- [ ] **Auth provider** — NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated)
+- [ ] **Payments provider** — Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler)
+- [ ] **Tenancy model** — workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries)
+- [ ] **Database** — Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config)
 
-// ──── WORKSPACES (Tenancy boundary) ────
-export const workspaces = pgTable(&#x27;workspaces&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  name: text(&#x27;name&#x27;).notNull(),
-  slug: text(&#x27;slug&#x27;).notNull(),
-  plan: text(&#x27;plan&#x27;).notNull().default(&#x27;free&#x27;),  // free | pro | enterprise
-  stripeCustomerId: text(&#x27;stripe_customer_id&#x27;).unique(),
-  stripeSubscriptionId: text(&#x27;stripe_subscription_id&#x27;),
-  stripePriceId: text(&#x27;stripe_price_id&#x27;),
-  stripeCurrentPeriodEnd: timestamp(&#x27;stripe_current_period_end&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspaces_slug_idx&#x27;).on(t.slug),
-])
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-// ──── USERS ────
-export const users = pgTable(&#x27;users&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  email: text(&#x27;email&#x27;).notNull().unique(),
-  name: text(&#x27;name&#x27;),
-  avatarUrl: text(&#x27;avatar_url&#x27;),
-  emailVerified: timestamp(&#x27;email_verified&#x27;, { withTimezone: true }),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-})
+## Tools
 
-// ──── WORKSPACE MEMBERS ────
-export const workspaceMembers = pgTable(&#x27;workspace_members&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  role: text(&#x27;role&#x27;).notNull().default(&#x27;member&#x27;), // owner | admin | member
-  joinedAt: timestamp(&#x27;joined_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspace_members_unique&#x27;).on(t.workspaceId, t.userId),
-  index(&#x27;workspace_members_workspace_idx&#x27;).on(t.workspaceId),
-])
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `saas_scaffolder.py` | Generate a production-ready SaaS project structure (auth, billing, tenancy) | `python scripts/saas_scaffolder.py --name my-saas --auth nextauth --db neondb --payments stripe --tenancy workspace` |
+| `feature_flag_manager.py` | CRUD + evaluate feature flags on a JSON store | `python scripts/feature_flag_manager.py evaluate --key dark-mode --environment production --plan pro` |
+| `tenant_config_validator.py` | Validate multi-tenant config and scan source for missing tenant scoping / isolation issues | `python scripts/tenant_config_validator.py --config tenant_config.json --src ./app` |
 
-// ──── ACCOUNTS (OAuth) ────
-export const accounts = pgTable(&#x27;accounts&#x27;, {
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  type: text(&#x27;type&#x27;).notNull(),
-  provider: text(&#x27;provider&#x27;).notNull(),
-  providerAccountId: text(&#x27;provider_account_id&#x27;).notNull(),
-  refreshToken: text(&#x27;refresh_token&#x27;),
-  accessToken: text(&#x27;access_token&#x27;),
-  expiresAt: integer(&#x27;expires_at&#x27;),
-})
+## References
 
-// ──── SESSIONS ────
-export const sessions = pgTable(&#x27;sessions&#x27;, {
-  sessionToken: text(&#x27;session_token&#x27;).primaryKey(),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  expires: timestamp(&#x27;expires&#x27;, { withTimezone: true }).notNull(),
-})
-```
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Authentication Configuration
-
-```typescript
-// lib/auth.ts
-import { DrizzleAdapter } from &#x27;@auth/drizzle-adapter&#x27;
-import NextAuth from &#x27;next-auth&#x27;
-import Google from &#x27;next-auth/providers/google&#x27;
-import GitHub from &#x27;next-auth/providers/github&#x27;
-import Resend from &#x27;next-auth/providers/resend&#x27;
-import { db } from &#x27;./db&#x27;
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db),
-  providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    }),
-    Resend({
-      from: &#x27;noreply@myapp.com&#x27;,
-    }),
-  ],
-  callbacks: {
-    session: async ({ session, user }) =&gt; ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
-  pages: {
-    signIn: &#x27;/login&#x27;,
-    error: &#x27;/login&#x27;,
-  },
-})
-```
-
-## Stripe Billing Integration
-
-### Checkout Session
-
-```typescript
-// app/api/billing/checkout/route.ts
-import { NextResponse } from &#x27;next/server&#x27;
-import { auth } from &#x27;@/lib/auth&#x27;
-import { stripe } from &#x27;@/lib/stripe&#x27;
-import { db } from &#x27;@/lib/db&#x27;
-import { workspaces } from &#x27;@/db/schema&#x27;
-import { eq } from &#x27;drizzle-orm&#x27;
-
-export async function POST(req: Request) {
-  const session = await auth()
-  if (!session?.user) {
-    return NextResponse.json({ error: &#x27;Unauthorized&#x27; }, { status: 401 })
-  }
-
-  const { priceId, workspaceId } = await req.json()
-
-  // Get or create Stripe customer
-  const [workspace] = await db.select().from(workspaces).where(eq(workspaces.id, workspaceId))
-  if (!workspace) {
-    return NextResponse.json({ error: &#x27;Workspace not found&#x27; }, { status: 404 })
-  }
-
-  let customerId = workspace.stripeCustomerId
-  if (!customerId) {
-    const customer = await stripe.customers.create({
-      email: session.user.email!,
-      metadata: { workspaceId },
-    })
-    customerId = customer.id
-    await db.update(workspaces)
-      .set({ stripeCustomerId: customerId })
-      .where(eq(workspaces.id, workspaceId))
-  }
-
-  const checkoutSession = await stripe.checkout.sessions.create({
-    customer: customerId,
-    mode: &#x27;subscription&#x27;,
-    payment_method_types: [&#x27;card&#x27;],
-    line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/settings/billing?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
-    subscription_data: { trial_period_days: 14 },
-    metadata: { workspaceId },
-  })
-
-  return NextResponse.json({ url: checkoutSession.url })
-}
-```
-
-### Webhook Handler
-
-```typescript
-// app/api/webhooks/stripe/route.ts
-import { headers } from &#x27;next/headers&#x27;
-import { stripe } from &#x27;@/lib/stripe&#x27;
-import { db } from &#x27;@/lib/db&#x27;
-import { workspaces } from &#x27;@/db/schema&#x27;
-import { eq } from &#x27;drizzle-orm&#x27;
-
-export async function POST(req: Request) {
-  const body = await req.text()
-  const signature = (await headers()).get(&#x27;Stripe-Signature&#x27;)!
-
-  let event
-  try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch (err) {
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 })
-  }
-
-  switch (event.type) {
-    case &#x27;checkout.session.completed&#x27;: {
-      const session = event.data.object
-      const subscription = await stripe.subscriptions.retrieve(session.subscription as string)
-      await db.update(workspaces).set({
-        stripeSubscriptionId: subscription.id,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      }).where(eq(workspaces.stripeCustomerId, session.customer as string))
-      break
-    }
-
-    case &#x27;invoice.payment_succeeded&#x27;: {
-      const invoice = event.data.object
-      const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
-      await db.update(workspaces).set({
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      }).where(eq(workspaces.stripeCustomerId, invoice.customer as string))
-      break
-    }
-
-    case &#x27;customer.subscription.deleted&#x27;: {
-      const subscription = event.data.object
-      await db.update(workspaces).set({
-        plan: &#x27;free&#x27;,
-        stripeSubscriptionId: null,
-        stripePriceId: null,
-        stripeCurrentPeriodEnd: null,
-      }).where(eq(workspaces.stripeCustomerId, subscription.customer as string))
-      break
-    }
-  }
-
-  return new Response(&#x27;OK&#x27;, { status: 200 })
-}
-```
-
-## Middleware (Auth + Rate Limiting)
-
-```typescript
-// middleware.ts
-import { auth } from &#x27;@/lib/auth&#x27;
-import { NextResponse } from &#x27;next/server&#x27;
-
-export default auth((req) =&gt; {
-  const { pathname } = req.nextUrl
-  const isAuthenticated = !!req.auth
-
-  // Protected routes
-  if (pathname.startsWith(&#x27;/dashboard&#x27;) || pathname.startsWith(&#x27;/settings&#x27;)) {
-    if (!isAuthenticated) {
-      return NextResponse.redirect(new URL(&#x27;/login&#x27;, req.url))
-    }
-  }
-
-  // Redirect logged-in users away from auth pages
-  if ((pathname === &#x27;/login&#x27; || pathname === &#x27;/register&#x27;) &amp;&amp; isAuthenticated) {
-    return NextResponse.redirect(new URL(&#x27;/dashboard&#x27;, req.url))
-  }
-
-  return NextResponse.next()
-})
-
-export const config = {
-  matcher: [&#x27;/dashboard/:path*&#x27;, &#x27;/settings/:path*&#x27;, &#x27;/login&#x27;, &#x27;/register&#x27;],
-}
-```
-
-## Environment Variables
-
-```bash
-# .env.example
-
-# ─── App ───
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXTAUTH_SECRET=           # openssl rand -base64 32
-NEXTAUTH_URL=http://localhost:3000
-
-# ─── Database ───
-DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require
-
-# ─── OAuth Providers ───
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-
-# ─── Stripe ───
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-STRIPE_PRO_MONTHLY_PRICE_ID=price_...
-STRIPE_PRO_YEARLY_PRICE_ID=price_...
-
-# ─── Email ───
-RESEND_API_KEY=re_...
-
-# ─── Monitoring (optional) ───
-SENTRY_DSN=
-```
-
-## Scaffolding Phases
-
-Execute these phases in order. Validate at the end of each phase.
-
-### Phase 1: Foundation
-1. Initialize Next.js with TypeScript and App Router
-2. Configure Tailwind CSS with custom theme
-3. Install and configure shadcn/ui
-4. Set up ESLint and Prettier
-5. Create `.env.example`
-
-**Validate:** `pnpm build` completes without errors.
-
-### Phase 2: Database
-6. Install and configure Drizzle ORM
-7. Write schema (users, accounts, sessions, workspaces, members)
-8. Generate and apply initial migration
-9. Export DB client singleton from `lib/db.ts`
-10. Create seed script with test data
-
-**Validate:** `pnpm db:push` succeeds and `pnpm db:seed` creates test data.
-
-### Phase 3: Authentication
-11. Install and configure NextAuth v5 with Drizzle adapter
-12. Set up OAuth providers (Google, GitHub)
-13. Create auth API route
-14. Implement middleware for route protection
-15. Build login and register pages
-
-**Validate:** OAuth login works, session persists, protected routes redirect.
-
-### Phase 4: Billing
-16. Initialize Stripe client
-17. Create checkout session API route
-18. Create customer portal API route
-19. Implement webhook handler with signature verification
-20. Build pricing page and billing settings page
-
-**Validate:** Complete a test checkout with card `4242 4242 4242 4242`. Verify subscription data written to DB. Replay webhook event and confirm idempotency.
-
-### Phase 5: UI and Polish
-21. Build landing page (hero, features, pricing, footer)
-22. Build dashboard layout (sidebar, header, stats)
-23. Build settings pages (profile, billing, team)
-24. Add loading states, error boundaries, and not-found pages
-25. Configure deployment (Vercel/Railway)
-
-**Validate:** `pnpm build` succeeds. All routes render correctly. No hydration errors.
-
-## Multi-Tenancy Patterns
-
-### Workspace-Scoped Queries
-
-```typescript
-// Every data query must be scoped to the current workspace
-export async function getProjects(workspaceId: string) {
-  return db.query.projects.findMany({
-    where: eq(projects.workspaceId, workspaceId),
-    orderBy: [desc(projects.updatedAt)],
-  })
-}
-
-// Middleware: resolve workspace from URL or session
-export function getCurrentWorkspace(req: Request) {
-  // Option A: workspace slug in URL (/workspace/acme/dashboard)
-  // Option B: workspace ID in session/cookie
-  // Option C: header (X-Workspace-Id) for API calls
-}
-```
-
-### Plan-Based Feature Gating
-
-```typescript
-export function canAccessFeature(workspace: Workspace, feature: string): boolean {
-  const PLAN_FEATURES: Record&lt;string, string[]&gt; = {
-    free: [&#x27;basic_dashboard&#x27;, &#x27;up_to_3_members&#x27;],
-    pro: [&#x27;advanced_analytics&#x27;, &#x27;up_to_20_members&#x27;, &#x27;custom_domain&#x27;, &#x27;api_access&#x27;],
-    enterprise: [&#x27;sso&#x27;, &#x27;unlimited_members&#x27;, &#x27;audit_log&#x27;, &#x27;sla&#x27;],
-  }
-
-  const isActive = workspace.stripeCurrentPeriodEnd
-    ? workspace.stripeCurrentPeriodEnd &gt; new Date()
-    : workspace.plan === &#x27;free&#x27;
-
-  if (!isActive) return PLAN_FEATURES.free.includes(feature)
-  return PLAN_FEATURES[workspace.plan]?.includes(feature) ?? false
-}
-```
-
-## Common Pitfalls
-
-- **Missing `NEXTAUTH_SECRET` in production** — causes session errors; generate with `openssl rand -base64 32`
-- **Webhook signature verification skipped** — always verify Stripe webhook signatures; test with `stripe listen`
-- **`workspace:*` in session but not refreshed** — stale subscription data; recheck on billing pages
-- **Edge Runtime conflicts with Drizzle** — Drizzle needs Node.js runtime; set `export const runtime = &#x27;nodejs&#x27;` on API routes
-- **No idempotent webhook handling** — Stripe may send duplicate events; use `event.id` for deduplication
-- **Hardcoded Stripe price IDs** — store in env vars, not in code; prices change between test and live mode
-
-## Best Practices
-
-1. **Stripe singleton** — create the client once in `lib/stripe.ts`, import everywhere
-2. **Server actions for form mutations** — use Next.js Server Actions instead of API routes for forms
-3. **Idempotent webhook handlers** — check if the event was already processed before writing to DB
-4. **Suspense boundaries for async data** — wrap dashboard data in `&lt;Suspense&gt;` with loading skeletons
-5. **Feature gating at the server level** — check `stripeCurrentPeriodEnd` on the server, not the client
-6. **Rate limiting on auth routes** — prevent brute force with Upstash Redis + `@upstash/ratelimit`
-7. **Workspace context in every query** — never query without scoping to the current workspace
-8. **Test with Stripe CLI** — `stripe listen --forward-to localhost:3000/api/webhooks/stripe` for local development
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `NEXTAUTH_URL` mismatch errors in production | Environment variable not updated from localhost default | Set `NEXTAUTH_URL` to your actual production domain; omit trailing slash |
-| Stripe webhook returns 400 on every event | Raw body is consumed before signature verification | Ensure the webhook route uses `req.text()` before any JSON parsing; do not use body-parser middleware on the webhook endpoint |
-| Drizzle migrations fail with &quot;relation already exists&quot; | Migration was partially applied or schema drifted from migration history | Run `pnpm drizzle-kit drop` to reset the migration journal, then regenerate with `pnpm drizzle-kit generate` and reapply |
-| OAuth callback redirects to wrong URL | Redirect URI registered in provider console does not match `NEXTAUTH_URL` | Update the authorized redirect URI in Google/GitHub developer console to match your deployment URL exactly |
-| Multi-tenant queries return data from other workspaces | Missing `workspaceId` filter in a database query | Audit all `db.query` and `db.select` calls to ensure every query includes a `where` clause scoped to the current workspace |
-| Hydration mismatch on dashboard pages | Server-rendered HTML differs from client due to conditional auth checks | Move auth-dependent rendering into client components or wrap with `&lt;Suspense&gt;`; avoid reading session in server components that also render on the client |
-| Stripe test mode charges succeed but live mode fails | Live mode price IDs differ from test mode IDs | Use separate environment variables for test vs. live Stripe keys and price IDs; verify `.env.production` references the correct live values |
-
-## Success Criteria
-
-- Scaffolded project passes `pnpm build` with zero errors and zero TypeScript warnings on first run
-- End-to-end authentication flow (register, login, logout, password reset) completes in under 60 seconds of manual testing
-- Stripe checkout creates a subscription and webhook handler updates the database within 5 seconds of payment completion
-- Multi-tenant data isolation verified: queries scoped to Workspace A return zero rows belonging to Workspace B
-- Lighthouse performance score on the landing page is 90+ on mobile with no accessibility violations at the AA level
-- Time from `git clone` to running local dev server with seeded data is under 10 minutes following the generated README
-- All environment variables are documented in `.env.example` with descriptions, and the app fails fast with clear error messages when required variables are missing
+- **[references/project-structure-and-schema.md](references/project-structure-and-schema.md)** — input spec format, the full generated file tree, the multi-tenant Drizzle schema, and the `.env.example` variables. Read when defining the spec, laying out files, or writing the schema/env config.
+- **[references/auth-billing-and-tenancy.md](references/auth-billing-and-tenancy.md)** — complete NextAuth config, Stripe checkout + webhook handlers, route-protection middleware, and workspace-scoped query / plan-gating code. Read when wiring auth, billing, or tenancy.
+- **[references/workflow-and-quality.md](references/workflow-and-quality.md)** — the 5 ordered scaffolding phases with per-phase validation, common pitfalls, best practices, the troubleshooting table, and success criteria. Read before scaffolding and before shipping.
 
 ## Scope &amp; Limitations
 
@@ -1020,7 +545,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Saas Scaffolder&quot;**
-   - Description: &quot;Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...&quot;
+   - Description: &quot;Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1045,511 +570,52 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # SaaS Scaffolder
 
-**Tier:** POWERFUL
-**Category:** Engineering / Full-Stack
-**Maintainer:** Claude Skills Team
-
-## Overview
-
 Generate a complete, production-ready SaaS application boilerplate including authentication (NextAuth, Clerk, or Supabase Auth), database schemas with multi-tenancy, billing integration (Stripe or Lemon Squeezy), API routes with validation, dashboard UI with shadcn/ui, and deployment configuration. Produces a working application from a product specification in under 30 minutes.
 
-## Keywords
+## Core Capabilities
 
-SaaS, boilerplate, scaffolding, Next.js, authentication, Stripe, billing, multi-tenancy, subscription, starter template, NextAuth, Drizzle ORM, shadcn/ui
+- **Spec-driven scaffolding** — produce a full Next.js App Router + TypeScript + Tailwind + shadcn/ui file tree from a short product spec (auth/db/payments/tenancy/features).
+- **Multi-tenant database schema** — Drizzle ORM schema with workspaces (tenancy boundary), users, members, OAuth accounts, and sessions, with proper indexes and cascade rules.
+- **Authentication** — NextAuth v5 with Drizzle adapter, OAuth (Google/GitHub) and magic-link (Resend) providers, route-protection middleware.
+- **Stripe billing** — checkout session, customer portal, and signature-verified webhook handler keeping subscription state in sync.
+- **Multi-tenancy patterns** — workspace-scoped queries and plan-based feature gating (free/pro/enterprise).
+- **Phased build + quality bar** — 5 ordered scaffolding phases with per-phase validation, pitfalls, best practices, troubleshooting, and success criteria.
 
-## Input Specification
+**Keywords:** SaaS, boilerplate, scaffolding, Next.js, authentication, Stripe, billing, multi-tenancy, subscription, starter template, NextAuth, Drizzle ORM, shadcn/ui
 
-```
-Product: [name]
-Description: [1-3 sentences]
-Auth: nextauth | clerk | supabase
-Database: neondb | supabase | planetscale | turso
-Payments: stripe | lemonsqueezy | none
-Multi-tenancy: workspace | organization | none
-Features: [comma-separated list]
-```
+## When to Use
 
-## Generated File Tree
+- Starting a new SaaS product, subscription app, or multi-tenant platform.
+- Standing up auth + billing + tenancy boilerplate quickly before building product features.
+- Adding workspace/organization tenancy with role-based access and plan gating.
+- Generating a baseline `.env.example`, schema, and API routes for a Next.js stack.
 
-```
-my-saas/
-├── app/
-│   ├── (auth)/
-│   │   ├── login/page.tsx
-│   │   ├── register/page.tsx
-│   │   ├── forgot-password/page.tsx
-│   │   └── layout.tsx
-│   ├── (dashboard)/
-│   │   ├── dashboard/page.tsx
-│   │   ├── settings/
-│   │   │   ├── page.tsx              # Profile settings
-│   │   │   ├── billing/page.tsx      # Subscription management
-│   │   │   └── team/page.tsx         # Team/workspace settings
-│   │   └── layout.tsx                # Dashboard shell (sidebar + header)
-│   ├── (marketing)/
-│   │   ├── page.tsx                  # Landing page
-│   │   ├── pricing/page.tsx          # Pricing tiers
-│   │   └── layout.tsx
-│   ├── api/
-│   │   ├── auth/[...nextauth]/route.ts
-│   │   ├── webhooks/stripe/route.ts
-│   │   ├── billing/
-│   │   │   ├── checkout/route.ts
-│   │   │   └── portal/route.ts
-│   │   └── health/route.ts
-│   ├── layout.tsx                    # Root layout
-│   └── not-found.tsx
-├── components/
-│   ├── ui/                           # shadcn/ui components
-│   ├── auth/
-│   │   ├── login-form.tsx
-│   │   └── register-form.tsx
-│   ├── dashboard/
-│   │   ├── sidebar.tsx
-│   │   ├── header.tsx
-│   │   └── stats-card.tsx
-│   ├── marketing/
-│   │   ├── hero.tsx
-│   │   ├── features.tsx
-│   │   ├── pricing-card.tsx
-│   │   └── footer.tsx
-│   └── billing/
-│       ├── plan-card.tsx
-│       └── usage-meter.tsx
-├── lib/
-│   ├── auth.ts                       # Auth configuration
-│   ├── db.ts                         # Database client singleton
-│   ├── stripe.ts                     # Stripe client
-│   ├── validations.ts                # Zod schemas
-│   └── utils.ts                      # Shared utilities
-├── db/
-│   ├── schema.ts                     # Drizzle schema
-│   ├── migrations/                   # Generated migrations
-│   └── seed.ts                       # Development seed data
-├── hooks/
-│   ├── use-subscription.ts
-│   └── use-current-user.ts
-├── types/
-│   └── index.ts                      # Shared TypeScript types
-├── middleware.ts                      # Auth + rate limiting
-├── .env.example
-├── drizzle.config.ts
-├── tailwind.config.ts
-└── next.config.ts
-```
+## Clarify First
 
-## Database Schema (Multi-Tenant)
+Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-```typescript
-// db/schema.ts
-import { pgTable, text, timestamp, integer, boolean, uniqueIndex, index } from &#x27;drizzle-orm/pg-core&#x27;
-import { createId } from &#x27;@paralleldrive/cuid2&#x27;
+- [ ] **Auth provider** — NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated)
+- [ ] **Payments provider** — Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler)
+- [ ] **Tenancy model** — workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries)
+- [ ] **Database** — Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config)
 
-// ──── WORKSPACES (Tenancy boundary) ────
-export const workspaces = pgTable(&#x27;workspaces&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  name: text(&#x27;name&#x27;).notNull(),
-  slug: text(&#x27;slug&#x27;).notNull(),
-  plan: text(&#x27;plan&#x27;).notNull().default(&#x27;free&#x27;),  // free | pro | enterprise
-  stripeCustomerId: text(&#x27;stripe_customer_id&#x27;).unique(),
-  stripeSubscriptionId: text(&#x27;stripe_subscription_id&#x27;),
-  stripePriceId: text(&#x27;stripe_price_id&#x27;),
-  stripeCurrentPeriodEnd: timestamp(&#x27;stripe_current_period_end&#x27;),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp(&#x27;updated_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspaces_slug_idx&#x27;).on(t.slug),
-])
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-// ──── USERS ────
-export const users = pgTable(&#x27;users&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  email: text(&#x27;email&#x27;).notNull().unique(),
-  name: text(&#x27;name&#x27;),
-  avatarUrl: text(&#x27;avatar_url&#x27;),
-  emailVerified: timestamp(&#x27;email_verified&#x27;, { withTimezone: true }),
-  createdAt: timestamp(&#x27;created_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-})
+## Tools
 
-// ──── WORKSPACE MEMBERS ────
-export const workspaceMembers = pgTable(&#x27;workspace_members&#x27;, {
-  id: text(&#x27;id&#x27;).primaryKey().$defaultFn(createId),
-  workspaceId: text(&#x27;workspace_id&#x27;).notNull().references(() =&gt; workspaces.id, { onDelete: &#x27;cascade&#x27; }),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  role: text(&#x27;role&#x27;).notNull().default(&#x27;member&#x27;), // owner | admin | member
-  joinedAt: timestamp(&#x27;joined_at&#x27;, { withTimezone: true }).defaultNow().notNull(),
-}, (t) =&gt; [
-  uniqueIndex(&#x27;workspace_members_unique&#x27;).on(t.workspaceId, t.userId),
-  index(&#x27;workspace_members_workspace_idx&#x27;).on(t.workspaceId),
-])
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `saas_scaffolder.py` | Generate a production-ready SaaS project structure (auth, billing, tenancy) | `python scripts/saas_scaffolder.py --name my-saas --auth nextauth --db neondb --payments stripe --tenancy workspace` |
+| `feature_flag_manager.py` | CRUD + evaluate feature flags on a JSON store | `python scripts/feature_flag_manager.py evaluate --key dark-mode --environment production --plan pro` |
+| `tenant_config_validator.py` | Validate multi-tenant config and scan source for missing tenant scoping / isolation issues | `python scripts/tenant_config_validator.py --config tenant_config.json --src ./app` |
 
-// ──── ACCOUNTS (OAuth) ────
-export const accounts = pgTable(&#x27;accounts&#x27;, {
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  type: text(&#x27;type&#x27;).notNull(),
-  provider: text(&#x27;provider&#x27;).notNull(),
-  providerAccountId: text(&#x27;provider_account_id&#x27;).notNull(),
-  refreshToken: text(&#x27;refresh_token&#x27;),
-  accessToken: text(&#x27;access_token&#x27;),
-  expiresAt: integer(&#x27;expires_at&#x27;),
-})
+## References
 
-// ──── SESSIONS ────
-export const sessions = pgTable(&#x27;sessions&#x27;, {
-  sessionToken: text(&#x27;session_token&#x27;).primaryKey(),
-  userId: text(&#x27;user_id&#x27;).notNull().references(() =&gt; users.id, { onDelete: &#x27;cascade&#x27; }),
-  expires: timestamp(&#x27;expires&#x27;, { withTimezone: true }).notNull(),
-})
-```
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-## Authentication Configuration
-
-```typescript
-// lib/auth.ts
-import { DrizzleAdapter } from &#x27;@auth/drizzle-adapter&#x27;
-import NextAuth from &#x27;next-auth&#x27;
-import Google from &#x27;next-auth/providers/google&#x27;
-import GitHub from &#x27;next-auth/providers/github&#x27;
-import Resend from &#x27;next-auth/providers/resend&#x27;
-import { db } from &#x27;./db&#x27;
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: DrizzleAdapter(db),
-  providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    }),
-    Resend({
-      from: &#x27;noreply@myapp.com&#x27;,
-    }),
-  ],
-  callbacks: {
-    session: async ({ session, user }) =&gt; ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
-  pages: {
-    signIn: &#x27;/login&#x27;,
-    error: &#x27;/login&#x27;,
-  },
-})
-```
-
-## Stripe Billing Integration
-
-### Checkout Session
-
-```typescript
-// app/api/billing/checkout/route.ts
-import { NextResponse } from &#x27;next/server&#x27;
-import { auth } from &#x27;@/lib/auth&#x27;
-import { stripe } from &#x27;@/lib/stripe&#x27;
-import { db } from &#x27;@/lib/db&#x27;
-import { workspaces } from &#x27;@/db/schema&#x27;
-import { eq } from &#x27;drizzle-orm&#x27;
-
-export async function POST(req: Request) {
-  const session = await auth()
-  if (!session?.user) {
-    return NextResponse.json({ error: &#x27;Unauthorized&#x27; }, { status: 401 })
-  }
-
-  const { priceId, workspaceId } = await req.json()
-
-  // Get or create Stripe customer
-  const [workspace] = await db.select().from(workspaces).where(eq(workspaces.id, workspaceId))
-  if (!workspace) {
-    return NextResponse.json({ error: &#x27;Workspace not found&#x27; }, { status: 404 })
-  }
-
-  let customerId = workspace.stripeCustomerId
-  if (!customerId) {
-    const customer = await stripe.customers.create({
-      email: session.user.email!,
-      metadata: { workspaceId },
-    })
-    customerId = customer.id
-    await db.update(workspaces)
-      .set({ stripeCustomerId: customerId })
-      .where(eq(workspaces.id, workspaceId))
-  }
-
-  const checkoutSession = await stripe.checkout.sessions.create({
-    customer: customerId,
-    mode: &#x27;subscription&#x27;,
-    payment_method_types: [&#x27;card&#x27;],
-    line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/settings/billing?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing`,
-    subscription_data: { trial_period_days: 14 },
-    metadata: { workspaceId },
-  })
-
-  return NextResponse.json({ url: checkoutSession.url })
-}
-```
-
-### Webhook Handler
-
-```typescript
-// app/api/webhooks/stripe/route.ts
-import { headers } from &#x27;next/headers&#x27;
-import { stripe } from &#x27;@/lib/stripe&#x27;
-import { db } from &#x27;@/lib/db&#x27;
-import { workspaces } from &#x27;@/db/schema&#x27;
-import { eq } from &#x27;drizzle-orm&#x27;
-
-export async function POST(req: Request) {
-  const body = await req.text()
-  const signature = (await headers()).get(&#x27;Stripe-Signature&#x27;)!
-
-  let event
-  try {
-    event = stripe.webhooks.constructEvent(body, signature, process.env.STRIPE_WEBHOOK_SECRET!)
-  } catch (err) {
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 })
-  }
-
-  switch (event.type) {
-    case &#x27;checkout.session.completed&#x27;: {
-      const session = event.data.object
-      const subscription = await stripe.subscriptions.retrieve(session.subscription as string)
-      await db.update(workspaces).set({
-        stripeSubscriptionId: subscription.id,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      }).where(eq(workspaces.stripeCustomerId, session.customer as string))
-      break
-    }
-
-    case &#x27;invoice.payment_succeeded&#x27;: {
-      const invoice = event.data.object
-      const subscription = await stripe.subscriptions.retrieve(invoice.subscription as string)
-      await db.update(workspaces).set({
-        stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      }).where(eq(workspaces.stripeCustomerId, invoice.customer as string))
-      break
-    }
-
-    case &#x27;customer.subscription.deleted&#x27;: {
-      const subscription = event.data.object
-      await db.update(workspaces).set({
-        plan: &#x27;free&#x27;,
-        stripeSubscriptionId: null,
-        stripePriceId: null,
-        stripeCurrentPeriodEnd: null,
-      }).where(eq(workspaces.stripeCustomerId, subscription.customer as string))
-      break
-    }
-  }
-
-  return new Response(&#x27;OK&#x27;, { status: 200 })
-}
-```
-
-## Middleware (Auth + Rate Limiting)
-
-```typescript
-// middleware.ts
-import { auth } from &#x27;@/lib/auth&#x27;
-import { NextResponse } from &#x27;next/server&#x27;
-
-export default auth((req) =&gt; {
-  const { pathname } = req.nextUrl
-  const isAuthenticated = !!req.auth
-
-  // Protected routes
-  if (pathname.startsWith(&#x27;/dashboard&#x27;) || pathname.startsWith(&#x27;/settings&#x27;)) {
-    if (!isAuthenticated) {
-      return NextResponse.redirect(new URL(&#x27;/login&#x27;, req.url))
-    }
-  }
-
-  // Redirect logged-in users away from auth pages
-  if ((pathname === &#x27;/login&#x27; || pathname === &#x27;/register&#x27;) &amp;&amp; isAuthenticated) {
-    return NextResponse.redirect(new URL(&#x27;/dashboard&#x27;, req.url))
-  }
-
-  return NextResponse.next()
-})
-
-export const config = {
-  matcher: [&#x27;/dashboard/:path*&#x27;, &#x27;/settings/:path*&#x27;, &#x27;/login&#x27;, &#x27;/register&#x27;],
-}
-```
-
-## Environment Variables
-
-```bash
-# .env.example
-
-# ─── App ───
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXTAUTH_SECRET=           # openssl rand -base64 32
-NEXTAUTH_URL=http://localhost:3000
-
-# ─── Database ───
-DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require
-
-# ─── OAuth Providers ───
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
-
-# ─── Stripe ───
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-STRIPE_PRO_MONTHLY_PRICE_ID=price_...
-STRIPE_PRO_YEARLY_PRICE_ID=price_...
-
-# ─── Email ───
-RESEND_API_KEY=re_...
-
-# ─── Monitoring (optional) ───
-SENTRY_DSN=
-```
-
-## Scaffolding Phases
-
-Execute these phases in order. Validate at the end of each phase.
-
-### Phase 1: Foundation
-1. Initialize Next.js with TypeScript and App Router
-2. Configure Tailwind CSS with custom theme
-3. Install and configure shadcn/ui
-4. Set up ESLint and Prettier
-5. Create `.env.example`
-
-**Validate:** `pnpm build` completes without errors.
-
-### Phase 2: Database
-6. Install and configure Drizzle ORM
-7. Write schema (users, accounts, sessions, workspaces, members)
-8. Generate and apply initial migration
-9. Export DB client singleton from `lib/db.ts`
-10. Create seed script with test data
-
-**Validate:** `pnpm db:push` succeeds and `pnpm db:seed` creates test data.
-
-### Phase 3: Authentication
-11. Install and configure NextAuth v5 with Drizzle adapter
-12. Set up OAuth providers (Google, GitHub)
-13. Create auth API route
-14. Implement middleware for route protection
-15. Build login and register pages
-
-**Validate:** OAuth login works, session persists, protected routes redirect.
-
-### Phase 4: Billing
-16. Initialize Stripe client
-17. Create checkout session API route
-18. Create customer portal API route
-19. Implement webhook handler with signature verification
-20. Build pricing page and billing settings page
-
-**Validate:** Complete a test checkout with card `4242 4242 4242 4242`. Verify subscription data written to DB. Replay webhook event and confirm idempotency.
-
-### Phase 5: UI and Polish
-21. Build landing page (hero, features, pricing, footer)
-22. Build dashboard layout (sidebar, header, stats)
-23. Build settings pages (profile, billing, team)
-24. Add loading states, error boundaries, and not-found pages
-25. Configure deployment (Vercel/Railway)
-
-**Validate:** `pnpm build` succeeds. All routes render correctly. No hydration errors.
-
-## Multi-Tenancy Patterns
-
-### Workspace-Scoped Queries
-
-```typescript
-// Every data query must be scoped to the current workspace
-export async function getProjects(workspaceId: string) {
-  return db.query.projects.findMany({
-    where: eq(projects.workspaceId, workspaceId),
-    orderBy: [desc(projects.updatedAt)],
-  })
-}
-
-// Middleware: resolve workspace from URL or session
-export function getCurrentWorkspace(req: Request) {
-  // Option A: workspace slug in URL (/workspace/acme/dashboard)
-  // Option B: workspace ID in session/cookie
-  // Option C: header (X-Workspace-Id) for API calls
-}
-```
-
-### Plan-Based Feature Gating
-
-```typescript
-export function canAccessFeature(workspace: Workspace, feature: string): boolean {
-  const PLAN_FEATURES: Record&lt;string, string[]&gt; = {
-    free: [&#x27;basic_dashboard&#x27;, &#x27;up_to_3_members&#x27;],
-    pro: [&#x27;advanced_analytics&#x27;, &#x27;up_to_20_members&#x27;, &#x27;custom_domain&#x27;, &#x27;api_access&#x27;],
-    enterprise: [&#x27;sso&#x27;, &#x27;unlimited_members&#x27;, &#x27;audit_log&#x27;, &#x27;sla&#x27;],
-  }
-
-  const isActive = workspace.stripeCurrentPeriodEnd
-    ? workspace.stripeCurrentPeriodEnd &gt; new Date()
-    : workspace.plan === &#x27;free&#x27;
-
-  if (!isActive) return PLAN_FEATURES.free.includes(feature)
-  return PLAN_FEATURES[workspace.plan]?.includes(feature) ?? false
-}
-```
-
-## Common Pitfalls
-
-- **Missing `NEXTAUTH_SECRET` in production** — causes session errors; generate with `openssl rand -base64 32`
-- **Webhook signature verification skipped** — always verify Stripe webhook signatures; test with `stripe listen`
-- **`workspace:*` in session but not refreshed** — stale subscription data; recheck on billing pages
-- **Edge Runtime conflicts with Drizzle** — Drizzle needs Node.js runtime; set `export const runtime = &#x27;nodejs&#x27;` on API routes
-- **No idempotent webhook handling** — Stripe may send duplicate events; use `event.id` for deduplication
-- **Hardcoded Stripe price IDs** — store in env vars, not in code; prices change between test and live mode
-
-## Best Practices
-
-1. **Stripe singleton** — create the client once in `lib/stripe.ts`, import everywhere
-2. **Server actions for form mutations** — use Next.js Server Actions instead of API routes for forms
-3. **Idempotent webhook handlers** — check if the event was already processed before writing to DB
-4. **Suspense boundaries for async data** — wrap dashboard data in `&lt;Suspense&gt;` with loading skeletons
-5. **Feature gating at the server level** — check `stripeCurrentPeriodEnd` on the server, not the client
-6. **Rate limiting on auth routes** — prevent brute force with Upstash Redis + `@upstash/ratelimit`
-7. **Workspace context in every query** — never query without scoping to the current workspace
-8. **Test with Stripe CLI** — `stripe listen --forward-to localhost:3000/api/webhooks/stripe` for local development
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `NEXTAUTH_URL` mismatch errors in production | Environment variable not updated from localhost default | Set `NEXTAUTH_URL` to your actual production domain; omit trailing slash |
-| Stripe webhook returns 400 on every event | Raw body is consumed before signature verification | Ensure the webhook route uses `req.text()` before any JSON parsing; do not use body-parser middleware on the webhook endpoint |
-| Drizzle migrations fail with &quot;relation already exists&quot; | Migration was partially applied or schema drifted from migration history | Run `pnpm drizzle-kit drop` to reset the migration journal, then regenerate with `pnpm drizzle-kit generate` and reapply |
-| OAuth callback redirects to wrong URL | Redirect URI registered in provider console does not match `NEXTAUTH_URL` | Update the authorized redirect URI in Google/GitHub developer console to match your deployment URL exactly |
-| Multi-tenant queries return data from other workspaces | Missing `workspaceId` filter in a database query | Audit all `db.query` and `db.select` calls to ensure every query includes a `where` clause scoped to the current workspace |
-| Hydration mismatch on dashboard pages | Server-rendered HTML differs from client due to conditional auth checks | Move auth-dependent rendering into client components or wrap with `&lt;Suspense&gt;`; avoid reading session in server components that also render on the client |
-| Stripe test mode charges succeed but live mode fails | Live mode price IDs differ from test mode IDs | Use separate environment variables for test vs. live Stripe keys and price IDs; verify `.env.production` references the correct live values |
-
-## Success Criteria
-
-- Scaffolded project passes `pnpm build` with zero errors and zero TypeScript warnings on first run
-- End-to-end authentication flow (register, login, logout, password reset) completes in under 60 seconds of manual testing
-- Stripe checkout creates a subscription and webhook handler updates the database within 5 seconds of payment completion
-- Multi-tenant data isolation verified: queries scoped to Workspace A return zero rows belonging to Workspace B
-- Lighthouse performance score on the landing page is 90+ on mobile with no accessibility violations at the AA level
-- Time from `git clone` to running local dev server with seeded data is under 10 minutes following the generated README
-- All environment variables are documented in `.env.example` with descriptions, and the app fails fast with clear error messages when required variables are missing
+- **[references/project-structure-and-schema.md](references/project-structure-and-schema.md)** — input spec format, the full generated file tree, the multi-tenant Drizzle schema, and the `.env.example` variables. Read when defining the spec, laying out files, or writing the schema/env config.
+- **[references/auth-billing-and-tenancy.md](references/auth-billing-and-tenancy.md)** — complete NextAuth config, Stripe checkout + webhook handlers, route-protection middleware, and workspace-scoped query / plan-gating code. Read when wiring auth, billing, or tenancy.
+- **[references/workflow-and-quality.md](references/workflow-and-quality.md)** — the 5 ordered scaffolding phases with per-phase validation, common pitfalls, best practices, the troubleshooting table, and success criteria. Read before scaffolding and before shipping.
 
 ## Scope &amp; Limitations
 
@@ -1602,7 +668,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Saas Scaffolder&quot;**
-   - Description: &quot;Generate complete production-ready SaaS boilerplate with authentication, database schemas, billing integration (Stripe), multi-tenancy, API routes, dashboard UI, and deployment configuration. Supports...&quot;
+   - Description: &quot;Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1663,7 +729,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/saas-scaffolder/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/saas-scaffolder/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

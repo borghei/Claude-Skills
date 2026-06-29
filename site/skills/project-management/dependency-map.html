@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Dependency Map</h1>
     <p class="page-subtitle">Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">dependencies</span><span class="tag">critical-path</span><span class="tag">dsm</span><span class="tag">conway</span><span class="tag">mermaid</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,18 +397,6 @@ Cross-team dependency tracking with critical path analysis and Mermaid dependenc
 
 Dependency tracking for multi-team initiatives: who is blocking whom, what is on the critical path, what is at risk, and what to coordinate this week. The output is a Mermaid dependency diagram, a critical-path list, a risk-ordered blocker list, and a weekly cross-team sync agenda -- all generated f
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Slack and Risk
-- Critical Path
-- dependency_graph.py
-- Input JSON schema
-
-## Frameworks &amp; Templates You Know
-- 2. **Populate the JSON.** Use the schema in `assets/dependency-template.json`.
-- - Sprint-level backlog ordering (use `prioritization-frameworks/`)
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -430,18 +418,6 @@ Start by asking the user what they need help with.">
 Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.
 
 Dependency tracking for multi-team initiatives: who is blocking whom, what is on the critical path, what is at risk, and what to coordinate this week. The output is a Mermaid dependency diagram, a critical-path list, a risk-ordered blocker list, and a weekly cross-team sync agenda -- all generated f
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Slack and Risk
-- Critical Path
-- dependency_graph.py
-- Input JSON schema
-
-## Frameworks &amp; Templates You Know
-- 2. **Populate the JSON.** Use the schema in `assets/dependency-template.json`.
-- - Sprint-level backlog ordering (use `prioritization-frameworks/`)
 
 ## How to Help
 When the user asks for help in this domain:
@@ -475,11 +451,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Dependency tracking for multi-team initiatives: who is blocking whom, what is on the critical path, what is at risk, and what to coordinate this week. The output is a Mermaid dependency diagram, a critical-path list, a risk-ordered blocker list, and a weekly cross-team sync agenda -- all generated from a single JSON file you maintain instead of a sprawling spreadsheet.
 
-Most cross-team programs fail at dependency management, not execution. The teams individually do good work; the gaps are at the seams. This skill makes those seams visible, prioritizes them by criticality, and produces the communication artifacts that keep them visible week over week. The underlying model uses the Critical Path Method (CPM, Kelley and Walker, 1959) for sequencing, optional DSM (Design Structure Matrix) thinking for cluster identification, and Conway&#x27;s Law (Conway, 1968) framing for the organizational source of recurring dependency patterns.
+Most cross-team programs fail at dependency management, not execution. The teams individually do good work; the gaps are at the seams. This skill makes those seams visible, prioritizes them by criticality, and produces the communication artifacts that keep them visible week over week. The underlying model uses the Critical Path Method (CPM, Kelley and Walker, 1959) for sequencing, optional DSM (Design Structure Matrix) thinking for cluster identification, and Conway&#x27;s Law (Conway, 1968) framing for the organizational source of recurring dependency patterns. All outputs follow the six standard PM formats per `SHARED_OUTPUT_SCHEMA.md`.
 
-The Python tool ingests a dependency JSON (team A blocks team B on date X, with expected resolution date Y) and emits all outputs in the six standard PM formats per `SHARED_OUTPUT_SCHEMA.md`. The Mermaid `graph LR` rendering is ready to drop into a README, Notion page, or Confluence page.
+## Core Capabilities
 
-### When to Use
+- **Dependency capture** — a six-field model (from/to team, description, needed-by, expected-delivery, status) maintained as one JSON file.
+- **Critical-path analysis** — CPM computation of the longest zero-slack chain plus near-critical siblings.
+- **Risk ordering** — slack and status combine into a risk-ranked blocker list.
+- **Visualization &amp; comms** — Mermaid `graph LR` rendering plus a weekly cross-team sync agenda.
+- **Org diagnosis** — Conway&#x27;s Law framing for recurring team-pair dependencies.
+
+## When to Use
 
 - **Multi-team feature** -- A feature requires platform, mobile, and data teams to coordinate.
 - **Program management** -- Tracking 5-20 dependent workstreams across a quarter (see `program-manager/`).
@@ -487,119 +469,45 @@ The Python tool ingests a dependency JSON (team A blocks team B on date X, with 
 - **Quarterly planning** -- Identifying which dependencies threaten quarterly OKR commitments.
 - **Org-design diagnosis** -- Recurring dependencies between the same two teams may signal a structural problem (Conway&#x27;s Law).
 
-### When NOT to Use
+**When NOT to use:** single-team backlogs (use `wwas/` or `job-stories/`), pure technical dependencies inside one codebase (use Git), or stakeholder relationships (use `senior-pm/stakeholder_mapper.py`).
 
-- Single-team backlogs (use `wwas/` or `job-stories/`; intra-team dependencies are normal sequencing).
-- Pure technical dependencies inside one codebase (use Git, not a dependency map).
-- Stakeholder relationships (use `senior-pm/stakeholder_mapper.py`).
+## Clarify First
 
-## The Dependency Model
+Before mapping dependencies, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A **dependency** has six attributes:
+- [ ] **Teams / workstreams in scope** — the from/to pairs become the nodes; the wrong set produces a graph that maps the wrong program
+- [ ] **Needed-by and expected-delivery dates per dependency** — these drive slack, so they determine the critical path and the entire risk ordering
+- [ ] **Current status of each dependency** — not-started / in-progress / at-risk / done drives the risk-ordered blocker list and the weekly sync agenda
+- [ ] **Named owner per dependency** — an ownerless dependency cannot be walked weekly; owners populate the sync agenda
 
-| Field | Required | Notes |
-|-------|:--------:|-------|
-| `id` | Yes | Stable identifier (e.g., `DEP-014`) |
-| `from_team` | Yes | The team that NEEDS the work (the consumer/blocked party) |
-| `to_team` | Yes | The team that OWES the work (the producer/blocker) |
-| `description` | Yes | One sentence: what is needed |
-| `needed_by` | Yes | ISO date when the consumer needs it |
-| `expected_delivery` | Yes | ISO date when the producer expects to deliver |
-| `status` | Yes | `not_started` / `in_progress` / `at_risk` / `blocked` / `done` |
-| `criticality` | Optional | `critical` / `high` / `medium` / `low` (default `medium`) |
-| `notes` | Optional | Free text context, links, decisions |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Slack and Risk
+## Quick Start
 
-For each dependency:
+```bash
+python scripts/dependency_graph.py --input deps.json --format markdown   # full report
+python scripts/dependency_graph.py --input deps.json --format mermaid     # graph LR for README/Notion/Confluence
+python scripts/dependency_graph.py --demo --format markdown               # sample output, no input
+```
 
-- **Slack** = `expected_delivery - needed_by`. Negative slack = the dependency is late or will be.
-- **Risk** is derived from `status` and `slack`:
-    - `done`: no risk
-    - `blocked`: highest risk (work has stopped)
-    - `at_risk` or `slack &lt; 0`: high risk
-    - `in_progress` with positive slack: medium
-    - `not_started` more than 14 days before `needed_by`: low
-    - `not_started` within 14 days of `needed_by`: high
+Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, give every critical-path item a named owner, and walk it weekly with `assets/weekly-sync-agenda.md`. Update the JSON *before* each sync.
 
-### Critical Path
+## References
 
-The **critical path** is the longest dependency chain through the program -- the sequence whose total duration determines the earliest possible completion. Any delay on the critical path delays the entire program. Any delay off it does not (until it consumes the slack and becomes critical).
-
-This tool computes the critical path by building a directed graph from dependencies, ordering by `needed_by` dates, and identifying the chain of nodes with zero slack. The output lists the critical chain plus its near-critical sibling chains (slack &lt; 7 days).
-
-## Conway&#x27;s Law and Recurring Dependencies
-
-Melvin Conway, 1968: &quot;Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations.&quot;
-
-Practical consequence for dependency mapping: if you find the same two teams generating dependencies every quarter, the org structure is the dependency. Three responses, in order of preference:
-
-1. **Merge the teams** if the volume of dependencies justifies it.
-2. **Create a permanent interface** (API contract, service-level agreement, scheduled sync) that reduces ad-hoc coordination.
-3. **Add a permanent program manager** for the seam (see `program-manager/`).
-
-## Workflow
-
-1. **Inventory dependencies.** With each team&#x27;s lead, list every cross-team need for the planning period. One sentence per dependency. Date both `needed_by` and `expected_delivery`.
-2. **Populate the JSON.** Use the schema in `assets/dependency-template.json`.
-3. **Run the analyzer.** `python scripts/dependency_graph.py --input deps.json --format markdown` for the full report.
-4. **Generate the Mermaid graph.** `--format mermaid` -- paste into README, Notion, Confluence.
-5. **Identify the critical path.** Review the critical path list. Every item on it gets a named owner and weekly status.
-6. **Run the weekly sync.** Use `assets/weekly-sync-agenda.md`. Walk the critical path, then the at-risk items, then anything newly added.
-7. **Update the JSON after every sync.** The map is only useful if it reflects current state. Stale maps are worse than no map.
-8. **Quarterly review.** Look at recurring dependencies between the same two teams. If volume is high, consider Conway&#x27;s Law responses.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `dependency_graph.py` | Compute critical path, render dependency graph, list risks | `python scripts/dependency_graph.py --input deps.json --format mermaid` |
-
-Demo mode: `python scripts/dependency_graph.py --demo --format markdown` produces sample output without input.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Critical path is empty | All dependencies have generous slack (positive `expected_delivery - needed_by`) | Verify dates are realistic; ask teams whether their `expected_delivery` reflects current capacity |
-| Same two teams appear in 60% of dependencies | Org structure is the dependency (Conway&#x27;s Law) | Quarterly review; consider merging teams, adding a permanent interface, or adding a program manager |
-| Map goes stale within 2 weeks | No clear update cadence; map lives in nobody&#x27;s daily routine | Make the JSON the single source of truth; require update before the weekly sync |
-| Dependencies modeled at task level become unmaintainable | Granularity too fine; dozens of items per team per sprint | Aggregate at the epic level; only model cross-team blocks, not within-team sequencing |
-| Status field always reads `at_risk` for every dep | Teams use it as a generic &quot;this is hard&quot; signal | Define explicit thresholds for `at_risk`; require dates to back the label |
-| Mermaid diagram unreadable with 30+ nodes | Too many dependencies on one diagram | Filter by criticality (`--criticality critical,high`) or by team |
-| Critical-path item has no named owner | Owner field optional and skipped | Make the weekly sync require an owner for every critical-path dependency |
-
-## Success Criteria
-
-- Every cross-team dependency is captured in the JSON with all required fields.
-- A weekly cross-team sync walks the critical path and at-risk dependencies.
-- Mermaid dependency diagram is published in a shared location and updated weekly.
-- Every critical-path dependency has a named owner and a weekly status.
-- Recurring dependencies are reviewed quarterly for Conway&#x27;s Law responses.
-- The dependency JSON is the single source of truth; spreadsheets and side documents are retired.
-- Map is updated before, not after, the weekly sync.
+- **[references/dependency-map-operations.md](references/dependency-map-operations.md)** — read this for the operational detail: the six-field model, slack/risk derivation, critical-path computation, the 8-step weekly workflow, tool flags, input/output JSON schemas, troubleshooting, and success criteria.
+- **[references/dependency-management-guide.md](references/dependency-management-guide.md)** — read this for the CPM walkthrough, DSM intro, Conway&#x27;s Law applied, and recurring-dependency diagnosis.
+- **[references/red-flags.md](references/red-flags.md)** — read this to see the common ways dependency-map output goes wrong (with fixes) before publishing a map.
+- `assets/dependency-template.json` — starter JSON with the full schema and one worked example per status.
+- `assets/weekly-sync-agenda.md` — standard agenda for the cross-team weekly sync.
+- Kelley &amp; Walker, &quot;Critical-Path Planning and Scheduling&quot; (1959); Conway, &quot;How Do Committees Invent?&quot; (1968); Steward, &quot;The Design Structure System&quot; (1981).
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Cross-team dependency capture and visualization
-- Critical Path Method (CPM) analysis
-- Risk-ordered blocker list
-- Mermaid `graph LR` rendering
-- Conway&#x27;s Law-aware quarterly review
-- All six formats per `SHARED_OUTPUT_SCHEMA.md`
+**In Scope:** cross-team dependency capture and visualization, Critical Path Method analysis, risk-ordered blocker list, Mermaid `graph LR` rendering, Conway&#x27;s Law-aware quarterly review, all six formats per `SHARED_OUTPUT_SCHEMA.md`.
 
-**Out of Scope:**
-- Resource capacity planning (use `senior-pm/resource_capacity_planner.py`)
-- Stakeholder mapping (use `senior-pm/stakeholder_mapper.py`)
-- Sprint-level backlog ordering (use `prioritization-frameworks/`)
-- Detailed Gantt charting (use a dedicated PM tool for visuals beyond critical path)
-- Risk register beyond dependency blockers (use `pre-mortem/`)
+**Out of Scope:** resource capacity planning (`senior-pm/resource_capacity_planner.py`), stakeholder mapping (`senior-pm/stakeholder_mapper.py`), sprint-level backlog ordering (`prioritization-frameworks/`), detailed Gantt charting, risk register beyond dependency blockers (`pre-mortem/`).
 
-**Important Caveats:**
-- Dependency maps degrade fast without weekly updates. A 2-week-old map is misleading; a 4-week-old map is harmful.
-- The critical path identifies the *currently longest* chain. Adding a single new dependency can shift it. Re-run on every change.
-- This skill does not replace conversation. It surfaces what to talk about; the talking still has to happen.
+**Important Caveats:** dependency maps degrade fast without weekly updates (a 4-week-old map is harmful); the critical path identifies the *currently longest* chain and can shift when a single dependency is added (re-run on every change); this skill surfaces what to talk about but does not replace the conversation.
 
 ## Integration Points
 
@@ -613,75 +521,6 @@ Demo mode: `python scripts/dependency_graph.py --demo --format markdown` produce
 | `launch-playbook/` | Feeds into | Launch RACI references the dependency map for cross-team owners |
 | `status-update-generator/` | Feeds into | Weekly status pulls critical-path summary |
 | `summarize-meeting/` | Feeds into | Weekly sync notes become structured summaries |
-
-## Tool Reference
-
-### dependency_graph.py
-
-Computes critical path, lists risks, and renders the dependency graph from a JSON file of cross-team dependencies.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | path | (required unless `--demo`) | JSON file with dependencies |
-| `--demo` | flag | off | Use built-in demo data |
-| `--format` | string | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | path | stdout | Output file path |
-| `--criticality` | string | (all) | Comma-separated filter: `critical,high,medium,low` |
-| `--team` | string (repeatable) | (none) | Filter to dependencies involving these team names |
-| `--as-of` | ISO date | today | Reference date for slack and risk calculations |
-
-### Input JSON schema
-
-```json
-{
-  &quot;program&quot;: &quot;Q3 Mobile Launch&quot;,
-  &quot;dependencies&quot;: [
-    {
-      &quot;id&quot;: &quot;DEP-001&quot;,
-      &quot;from_team&quot;: &quot;Mobile&quot;,
-      &quot;to_team&quot;: &quot;Platform&quot;,
-      &quot;description&quot;: &quot;OAuth refresh token rotation API&quot;,
-      &quot;needed_by&quot;: &quot;2026-06-15&quot;,
-      &quot;expected_delivery&quot;: &quot;2026-06-10&quot;,
-      &quot;status&quot;: &quot;in_progress&quot;,
-      &quot;criticality&quot;: &quot;critical&quot;,
-      &quot;owner&quot;: &quot;Alex Lee&quot;,
-      &quot;notes&quot;: &quot;Blocking iOS auth refactor&quot;
-    }
-  ]
-}
-```
-
-### Output JSON schema (envelope per `SHARED_OUTPUT_SCHEMA.md`)
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/dependency-map/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-21T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;program&quot;: &quot;Q3 Mobile Launch&quot;,
-    &quot;as_of&quot;: &quot;2026-05-21&quot;,
-    &quot;summary&quot;: {
-      &quot;total_dependencies&quot;: 12,
-      &quot;done&quot;: 3, &quot;blocked&quot;: 1, &quot;at_risk&quot;: 2,
-      &quot;critical_path_length&quot;: 5
-    },
-    &quot;critical_path&quot;: [ { &quot;id&quot;: &quot;DEP-001&quot;, &quot;from_team&quot;: &quot;...&quot;, &quot;to_team&quot;: &quot;...&quot;, &quot;slack_days&quot;: 0 } ],
-    &quot;at_risk&quot;: [ ... ],
-    &quot;by_team_pair&quot;: [ { &quot;from_team&quot;: &quot;...&quot;, &quot;to_team&quot;: &quot;...&quot;, &quot;count&quot;: 4 } ],
-    &quot;all_dependencies&quot;: [ ... ]
-  }
-}
-```
-
-## References
-
-- `references/dependency-management-guide.md` -- CPM walkthrough, DSM intro, Conway&#x27;s Law applied, recurring-dependency diagnosis.
-- `assets/dependency-template.json` -- Starter JSON file with the full schema and one worked example per status.
-- `assets/weekly-sync-agenda.md` -- Standard agenda for the cross-team weekly sync.
-- Kelley, James E., and Morgan R. Walker. &quot;Critical-Path Planning and Scheduling.&quot; Eastern Joint IRE-AIEE-ACM Computer Conference, 1959.
-- Conway, Melvin E. &quot;How Do Committees Invent?&quot; Datamation, 1968.
-- Steward, Donald V. &quot;The Design Structure System: A Method for Managing the Design of Complex Systems.&quot; IEEE Transactions on Engineering Management, 1981.
 
 ---
 
@@ -738,11 +577,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Dependency tracking for multi-team initiatives: who is blocking whom, what is on the critical path, what is at risk, and what to coordinate this week. The output is a Mermaid dependency diagram, a critical-path list, a risk-ordered blocker list, and a weekly cross-team sync agenda -- all generated from a single JSON file you maintain instead of a sprawling spreadsheet.
 
-Most cross-team programs fail at dependency management, not execution. The teams individually do good work; the gaps are at the seams. This skill makes those seams visible, prioritizes them by criticality, and produces the communication artifacts that keep them visible week over week. The underlying model uses the Critical Path Method (CPM, Kelley and Walker, 1959) for sequencing, optional DSM (Design Structure Matrix) thinking for cluster identification, and Conway&#x27;s Law (Conway, 1968) framing for the organizational source of recurring dependency patterns.
+Most cross-team programs fail at dependency management, not execution. The teams individually do good work; the gaps are at the seams. This skill makes those seams visible, prioritizes them by criticality, and produces the communication artifacts that keep them visible week over week. The underlying model uses the Critical Path Method (CPM, Kelley and Walker, 1959) for sequencing, optional DSM (Design Structure Matrix) thinking for cluster identification, and Conway&#x27;s Law (Conway, 1968) framing for the organizational source of recurring dependency patterns. All outputs follow the six standard PM formats per `SHARED_OUTPUT_SCHEMA.md`.
 
-The Python tool ingests a dependency JSON (team A blocks team B on date X, with expected resolution date Y) and emits all outputs in the six standard PM formats per `SHARED_OUTPUT_SCHEMA.md`. The Mermaid `graph LR` rendering is ready to drop into a README, Notion page, or Confluence page.
+## Core Capabilities
 
-### When to Use
+- **Dependency capture** — a six-field model (from/to team, description, needed-by, expected-delivery, status) maintained as one JSON file.
+- **Critical-path analysis** — CPM computation of the longest zero-slack chain plus near-critical siblings.
+- **Risk ordering** — slack and status combine into a risk-ranked blocker list.
+- **Visualization &amp; comms** — Mermaid `graph LR` rendering plus a weekly cross-team sync agenda.
+- **Org diagnosis** — Conway&#x27;s Law framing for recurring team-pair dependencies.
+
+## When to Use
 
 - **Multi-team feature** -- A feature requires platform, mobile, and data teams to coordinate.
 - **Program management** -- Tracking 5-20 dependent workstreams across a quarter (see `program-manager/`).
@@ -750,119 +595,45 @@ The Python tool ingests a dependency JSON (team A blocks team B on date X, with 
 - **Quarterly planning** -- Identifying which dependencies threaten quarterly OKR commitments.
 - **Org-design diagnosis** -- Recurring dependencies between the same two teams may signal a structural problem (Conway&#x27;s Law).
 
-### When NOT to Use
+**When NOT to use:** single-team backlogs (use `wwas/` or `job-stories/`), pure technical dependencies inside one codebase (use Git), or stakeholder relationships (use `senior-pm/stakeholder_mapper.py`).
 
-- Single-team backlogs (use `wwas/` or `job-stories/`; intra-team dependencies are normal sequencing).
-- Pure technical dependencies inside one codebase (use Git, not a dependency map).
-- Stakeholder relationships (use `senior-pm/stakeholder_mapper.py`).
+## Clarify First
 
-## The Dependency Model
+Before mapping dependencies, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A **dependency** has six attributes:
+- [ ] **Teams / workstreams in scope** — the from/to pairs become the nodes; the wrong set produces a graph that maps the wrong program
+- [ ] **Needed-by and expected-delivery dates per dependency** — these drive slack, so they determine the critical path and the entire risk ordering
+- [ ] **Current status of each dependency** — not-started / in-progress / at-risk / done drives the risk-ordered blocker list and the weekly sync agenda
+- [ ] **Named owner per dependency** — an ownerless dependency cannot be walked weekly; owners populate the sync agenda
 
-| Field | Required | Notes |
-|-------|:--------:|-------|
-| `id` | Yes | Stable identifier (e.g., `DEP-014`) |
-| `from_team` | Yes | The team that NEEDS the work (the consumer/blocked party) |
-| `to_team` | Yes | The team that OWES the work (the producer/blocker) |
-| `description` | Yes | One sentence: what is needed |
-| `needed_by` | Yes | ISO date when the consumer needs it |
-| `expected_delivery` | Yes | ISO date when the producer expects to deliver |
-| `status` | Yes | `not_started` / `in_progress` / `at_risk` / `blocked` / `done` |
-| `criticality` | Optional | `critical` / `high` / `medium` / `low` (default `medium`) |
-| `notes` | Optional | Free text context, links, decisions |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Slack and Risk
+## Quick Start
 
-For each dependency:
+```bash
+python scripts/dependency_graph.py --input deps.json --format markdown   # full report
+python scripts/dependency_graph.py --input deps.json --format mermaid     # graph LR for README/Notion/Confluence
+python scripts/dependency_graph.py --demo --format markdown               # sample output, no input
+```
 
-- **Slack** = `expected_delivery - needed_by`. Negative slack = the dependency is late or will be.
-- **Risk** is derived from `status` and `slack`:
-    - `done`: no risk
-    - `blocked`: highest risk (work has stopped)
-    - `at_risk` or `slack &lt; 0`: high risk
-    - `in_progress` with positive slack: medium
-    - `not_started` more than 14 days before `needed_by`: low
-    - `not_started` within 14 days of `needed_by`: high
+Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, give every critical-path item a named owner, and walk it weekly with `assets/weekly-sync-agenda.md`. Update the JSON *before* each sync.
 
-### Critical Path
+## References
 
-The **critical path** is the longest dependency chain through the program -- the sequence whose total duration determines the earliest possible completion. Any delay on the critical path delays the entire program. Any delay off it does not (until it consumes the slack and becomes critical).
-
-This tool computes the critical path by building a directed graph from dependencies, ordering by `needed_by` dates, and identifying the chain of nodes with zero slack. The output lists the critical chain plus its near-critical sibling chains (slack &lt; 7 days).
-
-## Conway&#x27;s Law and Recurring Dependencies
-
-Melvin Conway, 1968: &quot;Organizations which design systems are constrained to produce designs which are copies of the communication structures of these organizations.&quot;
-
-Practical consequence for dependency mapping: if you find the same two teams generating dependencies every quarter, the org structure is the dependency. Three responses, in order of preference:
-
-1. **Merge the teams** if the volume of dependencies justifies it.
-2. **Create a permanent interface** (API contract, service-level agreement, scheduled sync) that reduces ad-hoc coordination.
-3. **Add a permanent program manager** for the seam (see `program-manager/`).
-
-## Workflow
-
-1. **Inventory dependencies.** With each team&#x27;s lead, list every cross-team need for the planning period. One sentence per dependency. Date both `needed_by` and `expected_delivery`.
-2. **Populate the JSON.** Use the schema in `assets/dependency-template.json`.
-3. **Run the analyzer.** `python scripts/dependency_graph.py --input deps.json --format markdown` for the full report.
-4. **Generate the Mermaid graph.** `--format mermaid` -- paste into README, Notion, Confluence.
-5. **Identify the critical path.** Review the critical path list. Every item on it gets a named owner and weekly status.
-6. **Run the weekly sync.** Use `assets/weekly-sync-agenda.md`. Walk the critical path, then the at-risk items, then anything newly added.
-7. **Update the JSON after every sync.** The map is only useful if it reflects current state. Stale maps are worse than no map.
-8. **Quarterly review.** Look at recurring dependencies between the same two teams. If volume is high, consider Conway&#x27;s Law responses.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `dependency_graph.py` | Compute critical path, render dependency graph, list risks | `python scripts/dependency_graph.py --input deps.json --format mermaid` |
-
-Demo mode: `python scripts/dependency_graph.py --demo --format markdown` produces sample output without input.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Critical path is empty | All dependencies have generous slack (positive `expected_delivery - needed_by`) | Verify dates are realistic; ask teams whether their `expected_delivery` reflects current capacity |
-| Same two teams appear in 60% of dependencies | Org structure is the dependency (Conway&#x27;s Law) | Quarterly review; consider merging teams, adding a permanent interface, or adding a program manager |
-| Map goes stale within 2 weeks | No clear update cadence; map lives in nobody&#x27;s daily routine | Make the JSON the single source of truth; require update before the weekly sync |
-| Dependencies modeled at task level become unmaintainable | Granularity too fine; dozens of items per team per sprint | Aggregate at the epic level; only model cross-team blocks, not within-team sequencing |
-| Status field always reads `at_risk` for every dep | Teams use it as a generic &quot;this is hard&quot; signal | Define explicit thresholds for `at_risk`; require dates to back the label |
-| Mermaid diagram unreadable with 30+ nodes | Too many dependencies on one diagram | Filter by criticality (`--criticality critical,high`) or by team |
-| Critical-path item has no named owner | Owner field optional and skipped | Make the weekly sync require an owner for every critical-path dependency |
-
-## Success Criteria
-
-- Every cross-team dependency is captured in the JSON with all required fields.
-- A weekly cross-team sync walks the critical path and at-risk dependencies.
-- Mermaid dependency diagram is published in a shared location and updated weekly.
-- Every critical-path dependency has a named owner and a weekly status.
-- Recurring dependencies are reviewed quarterly for Conway&#x27;s Law responses.
-- The dependency JSON is the single source of truth; spreadsheets and side documents are retired.
-- Map is updated before, not after, the weekly sync.
+- **[references/dependency-map-operations.md](references/dependency-map-operations.md)** — read this for the operational detail: the six-field model, slack/risk derivation, critical-path computation, the 8-step weekly workflow, tool flags, input/output JSON schemas, troubleshooting, and success criteria.
+- **[references/dependency-management-guide.md](references/dependency-management-guide.md)** — read this for the CPM walkthrough, DSM intro, Conway&#x27;s Law applied, and recurring-dependency diagnosis.
+- **[references/red-flags.md](references/red-flags.md)** — read this to see the common ways dependency-map output goes wrong (with fixes) before publishing a map.
+- `assets/dependency-template.json` — starter JSON with the full schema and one worked example per status.
+- `assets/weekly-sync-agenda.md` — standard agenda for the cross-team weekly sync.
+- Kelley &amp; Walker, &quot;Critical-Path Planning and Scheduling&quot; (1959); Conway, &quot;How Do Committees Invent?&quot; (1968); Steward, &quot;The Design Structure System&quot; (1981).
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Cross-team dependency capture and visualization
-- Critical Path Method (CPM) analysis
-- Risk-ordered blocker list
-- Mermaid `graph LR` rendering
-- Conway&#x27;s Law-aware quarterly review
-- All six formats per `SHARED_OUTPUT_SCHEMA.md`
+**In Scope:** cross-team dependency capture and visualization, Critical Path Method analysis, risk-ordered blocker list, Mermaid `graph LR` rendering, Conway&#x27;s Law-aware quarterly review, all six formats per `SHARED_OUTPUT_SCHEMA.md`.
 
-**Out of Scope:**
-- Resource capacity planning (use `senior-pm/resource_capacity_planner.py`)
-- Stakeholder mapping (use `senior-pm/stakeholder_mapper.py`)
-- Sprint-level backlog ordering (use `prioritization-frameworks/`)
-- Detailed Gantt charting (use a dedicated PM tool for visuals beyond critical path)
-- Risk register beyond dependency blockers (use `pre-mortem/`)
+**Out of Scope:** resource capacity planning (`senior-pm/resource_capacity_planner.py`), stakeholder mapping (`senior-pm/stakeholder_mapper.py`), sprint-level backlog ordering (`prioritization-frameworks/`), detailed Gantt charting, risk register beyond dependency blockers (`pre-mortem/`).
 
-**Important Caveats:**
-- Dependency maps degrade fast without weekly updates. A 2-week-old map is misleading; a 4-week-old map is harmful.
-- The critical path identifies the *currently longest* chain. Adding a single new dependency can shift it. Re-run on every change.
-- This skill does not replace conversation. It surfaces what to talk about; the talking still has to happen.
+**Important Caveats:** dependency maps degrade fast without weekly updates (a 4-week-old map is harmful); the critical path identifies the *currently longest* chain and can shift when a single dependency is added (re-run on every change); this skill surfaces what to talk about but does not replace the conversation.
 
 ## Integration Points
 
@@ -876,75 +647,6 @@ Demo mode: `python scripts/dependency_graph.py --demo --format markdown` produce
 | `launch-playbook/` | Feeds into | Launch RACI references the dependency map for cross-team owners |
 | `status-update-generator/` | Feeds into | Weekly status pulls critical-path summary |
 | `summarize-meeting/` | Feeds into | Weekly sync notes become structured summaries |
-
-## Tool Reference
-
-### dependency_graph.py
-
-Computes critical path, lists risks, and renders the dependency graph from a JSON file of cross-team dependencies.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | path | (required unless `--demo`) | JSON file with dependencies |
-| `--demo` | flag | off | Use built-in demo data |
-| `--format` | string | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | path | stdout | Output file path |
-| `--criticality` | string | (all) | Comma-separated filter: `critical,high,medium,low` |
-| `--team` | string (repeatable) | (none) | Filter to dependencies involving these team names |
-| `--as-of` | ISO date | today | Reference date for slack and risk calculations |
-
-### Input JSON schema
-
-```json
-{
-  &quot;program&quot;: &quot;Q3 Mobile Launch&quot;,
-  &quot;dependencies&quot;: [
-    {
-      &quot;id&quot;: &quot;DEP-001&quot;,
-      &quot;from_team&quot;: &quot;Mobile&quot;,
-      &quot;to_team&quot;: &quot;Platform&quot;,
-      &quot;description&quot;: &quot;OAuth refresh token rotation API&quot;,
-      &quot;needed_by&quot;: &quot;2026-06-15&quot;,
-      &quot;expected_delivery&quot;: &quot;2026-06-10&quot;,
-      &quot;status&quot;: &quot;in_progress&quot;,
-      &quot;criticality&quot;: &quot;critical&quot;,
-      &quot;owner&quot;: &quot;Alex Lee&quot;,
-      &quot;notes&quot;: &quot;Blocking iOS auth refactor&quot;
-    }
-  ]
-}
-```
-
-### Output JSON schema (envelope per `SHARED_OUTPUT_SCHEMA.md`)
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/dependency-map/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-21T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;program&quot;: &quot;Q3 Mobile Launch&quot;,
-    &quot;as_of&quot;: &quot;2026-05-21&quot;,
-    &quot;summary&quot;: {
-      &quot;total_dependencies&quot;: 12,
-      &quot;done&quot;: 3, &quot;blocked&quot;: 1, &quot;at_risk&quot;: 2,
-      &quot;critical_path_length&quot;: 5
-    },
-    &quot;critical_path&quot;: [ { &quot;id&quot;: &quot;DEP-001&quot;, &quot;from_team&quot;: &quot;...&quot;, &quot;to_team&quot;: &quot;...&quot;, &quot;slack_days&quot;: 0 } ],
-    &quot;at_risk&quot;: [ ... ],
-    &quot;by_team_pair&quot;: [ { &quot;from_team&quot;: &quot;...&quot;, &quot;to_team&quot;: &quot;...&quot;, &quot;count&quot;: 4 } ],
-    &quot;all_dependencies&quot;: [ ... ]
-  }
-}
-```
-
-## References
-
-- `references/dependency-management-guide.md` -- CPM walkthrough, DSM intro, Conway&#x27;s Law applied, recurring-dependency diagnosis.
-- `assets/dependency-template.json` -- Starter JSON file with the full schema and one worked example per status.
-- `assets/weekly-sync-agenda.md` -- Standard agenda for the cross-team weekly sync.
-- Kelley, James E., and Morgan R. Walker. &quot;Critical-Path Planning and Scheduling.&quot; Eastern Joint IRE-AIEE-ACM Computer Conference, 1959.
-- Conway, Melvin E. &quot;How Do Committees Invent?&quot; Datamation, 1968.
-- Steward, Donald V. &quot;The Design Structure System: A Method for Managing the Design of Complex Systems.&quot; IEEE Transactions on Engineering Management, 1981.
 
 ---
 
@@ -1032,8 +734,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/dependency-map/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python scripts/dependency_graph.py --input deps.json --format markdown   # full report
+python scripts/dependency_graph.py --input deps.json --format mermaid     # graph LR for README/Notion/Confluence
+python scripts/dependency_graph.py --demo --format markdown               # sample output, no input
+</code></pre>
+
+Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, give every critical-path item a named owner, and walk it weekly with `assets/weekly-sync-agenda.md`. Update the JSON *before* each sync.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/dependency-map/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

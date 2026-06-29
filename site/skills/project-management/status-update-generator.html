@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Status Update Generator</h1>
     <p class="page-subtitle">Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">jira</span><span class="tag">linear</span><span class="tag">weekly-status</span><span class="tag">executive-reporting</span><span class="tag">sbnr</span><span class="tag">r-y-g</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,14 +397,6 @@ Generate weekly executive status updates from Jira/Linear data exports. Produces
 
 Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, B
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Section 1: Header
-- Section 2: Highlights
-- Section 3: Blockers
-- Section 4: Risks
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -426,14 +418,6 @@ Start by asking the user what they need help with.">
 Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.
 
 Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, B
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- Section 1: Header
-- Section 2: Highlights
-- Section 3: Blockers
-- Section 4: Risks
 
 ## How to Help
 When the user asks for help in this domain:
@@ -465,13 +449,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, Blockers, Risks, Asks, What&#x27;s Next -- plus a traffic-light status (Red / Yellow / Green) for the period.
+Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, Blockers, Risks, Asks, What&#x27;s Next -- plus a traffic-light status (Red / Yellow / Green) for the period. The structure follows **SBNR** (Status / Blockers / Next / Risks) and a condensed Amazon **6-pager** narrative for Highlights; the stoplight verdict follows classic R/Y/G reporting.
 
-The skill ships with `status_generator.py`, a standard-library Python tool that ingests a JSON file representing a week of ticket state (or accepts the output of a Jira/Linear export) and renders the update in all six formats from the shared PM output schema (`markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`). Use `--demo` to see the format.
+## Core Capabilities
 
-The structure follows two well-known patterns: **SBNR** (Status / Blockers / Next / Risks) -- the operational shorthand many engineering orgs use -- and a condensed version of Amazon&#x27;s **6-pager** for the narrative framing of the Highlights section. The traffic-light status is from classic stoplight reporting -- Green = on track, Yellow = at risk with a known mitigation, Red = needs intervention now.
+- **Six-section template** — Header, Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
+- **Traffic-light discipline** — Green / Yellow / Red rules plus anti-patterns (watermelon status, always-yellow, color creep).
+- **Multi-format rendering** — `status_generator.py` emits all six SHARED_OUTPUT_SCHEMA formats: `markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`.
+- **SBNR mapping** — compressed async-standup variant mapped to the weekly sections.
 
-### When to Use
+## When to Use
 
 - **Weekly exec status update** -- the standard Friday/Monday cadence brief sent to a sponsor, VP, or steering committee.
 - **Monthly board / leadership packet** -- aggregate four weekly updates into a monthly view.
@@ -479,130 +466,37 @@ The structure follows two well-known patterns: **SBNR** (Status / Blockers / Nex
 - **Cross-team async standup** -- distributed teams where a written async update replaces a sync meeting.
 - **Project kickoff status baseline** -- the first status update establishes the template and traffic-light baseline.
 
-### When NOT to Use
+**When NOT to use:** real-time incident response (use `delivery-manager/` incident skills), deep retrospectives (use `sprint-retrospective/`), or one-to-one stakeholder reporting needing custom framing (use `roadmap-communication/`).
 
-- For real-time incident response (use `delivery-manager/` incident skills).
-- For deep retrospectives (use `sprint-retrospective/`).
-- For one-to-one stakeholder reporting where the audience needs custom framing (use `roadmap-communication/` for that).
+## Clarify First
 
-## The status update structure
+Before generating the update, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Every update produced by this skill has the same six sections, in this order. Consistency is the point -- exec readers should be able to scan to the section they care about in under 5 seconds.
+- [ ] **Traffic-light verdict (R/Y/G)** — the human judgment the tool will not infer; sets the whole frame and must be defensible (prevents watermelon status)
+- [ ] **Audience** — sponsor, VP, or steering committee (sets altitude and what belongs in Highlights vs Asks)
+- [ ] **This period&#x27;s wins + blockers with real numbers** — quantitative claims must come from telemetry, not ticket titles (fills Highlights and Blockers)
+- [ ] **The asks** — the specific decisions or help you need from the reader this week (drives the Asks section)
 
-### Section 1: Header
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-- **Period**: the date range covered (e.g., &quot;Week of 2026-05-18&quot;)
-- **Project / team**: the name of the team or initiative
-- **Author**: the PM or engineering lead
-- **Status (R / Y / G)**: the single overall traffic-light verdict
-- **Status rationale**: one sentence explaining why this color
-
-### Section 2: Highlights
-
-Three to five bullet points describing the most important things that shipped, decided, or moved this week. Highlights are **outcome-led**: name what changed for the user or the business, not the activity.
-
-**Bad:** &quot;Shipped PR-1234&quot;
-**Good:** &quot;Search latency dropped from 480ms p95 to 210ms p95 after the index rebuild (PR-1234)&quot;
-
-Each highlight should pass the **&quot;so what?&quot; test**: a busy exec who reads only this bullet should understand why it matters.
-
-### Section 3: Blockers
-
-Things currently stopping the team. Each blocker has three parts:
-
-- **What is blocked**: the work item or workstream
-- **Who/what is blocking**: the team, vendor, decision, or dependency
-- **What we need**: a specific ask or decision
-
-A blocker without a specific ask is a complaint, not a blocker. Promote it to Risks or strike it.
-
-### Section 4: Risks
-
-Things that could become blockers if we do not act. Each risk follows the format:
-
-`&lt;Risk&gt; -- Likelihood (H/M/L) x Impact (H/M/L) -- Mitigation: &lt;action&gt; -- Owner: &lt;name&gt; -- Due: &lt;date&gt;`
-
-This is the format used by `senior-pm/risk_matrix_analyzer.py` so risks can be lifted directly into the portfolio risk register.
-
-### Section 5: Asks
-
-Specific decisions, approvals, resources, or introductions needed from the audience. Each ask names:
-
-- **What you want**
-- **By when**
-- **From whom**
-- **Consequence of delay**
-
-An update without an &quot;Asks&quot; section trains readers that updates require no action. Always include the section, even if the answer is &quot;none this week.&quot;
-
-### Section 6: What&#x27;s Next
-
-The 3-5 most important things planned for the coming week. Same outcome-led style as Highlights. This is the closing read -- it sets expectations for next week&#x27;s update.
-
-## Traffic-light status (R / Y / G)
-
-| Color | Definition | Rule |
-|-------|------------|------|
-| **Green** | On track. No active blockers; risks are manageable; commitments will be met. | Use sparingly. Two consecutive Green updates with no new highlights is suspicious. |
-| **Yellow** | At risk. There is an issue, but the team has a credible mitigation in flight. | The Risks section must name the mitigation, the owner, and the deadline. |
-| **Red** | Off track. Intervention from leadership is required. | A Red update requires an explicit Ask. Red without an Ask means the PM has not done their job. |
-
-### Anti-patterns
-
-- **Watermelon status** -- Green outside, Red inside. The most common failure. Surface the bad news in the rationale sentence.
-- **Always-Yellow** -- if every update is Yellow, the team has not made the decision to commit (Green) or to escalate (Red).
-- **Color creep** -- the bar for Red should not move week to week. Document the criteria in the team wiki.
-
-## SBNR shorthand
-
-Some teams use SBNR (Status / Blockers / Next / Risks) as a compressed version for daily or async standup. SBNR maps to this skill&#x27;s sections as follows:
-
-| SBNR field | Section in this skill |
-|------------|----------------------|
-| **S**tatus | Section 1 (Header) + Section 2 (Highlights) |
-| **B**lockers | Section 3 (Blockers) |
-| **N**ext | Section 6 (What&#x27;s Next) |
-| **R**isks | Section 4 (Risks) |
-
-The Asks section is unique to the weekly executive variant -- daily SBNR typically does not include explicit asks.
-
-## Workflow
-
-1. **Export ticket data.** Pull from Jira (via JQL or the Atlassian MCP), Linear (via GraphQL or the Linear MCP), or any source that can emit JSON matching the input schema (see Tool Reference).
-2. **Augment with narrative.** The PM adds 1-2 sentences of context to each highlight that goes beyond what the ticket title says.
-3. **Run `status_generator.py`.** Use `--input status_data.json --format markdown` to render the update. Use `--format confluence` or `--format notion` to push directly to a wiki.
-4. **Set the traffic-light status.** This is a human judgment, not a calculation. Document the rationale.
-5. **Distribute.** Send via the agreed channel. Always include the Asks section, even if &quot;none this week.&quot;
-6. **Archive.** Save dated copies. The weekly archive becomes the monthly packet and the quarterly retrospective input.
-
-## Tools
+## Quick Start
 
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
 | `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
 
-## Troubleshooting
+The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
 
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Exec readers say &quot;I do not know what changed this week&quot; | Highlights are activity-led (&quot;Shipped PR-1234&quot;), not outcome-led | Rewrite each highlight to name the user or business outcome; quantify wherever possible |
-| Same blockers appear week after week with no resolution | Blockers documented but no escalation; PM is hoping leadership notices | Promote chronic blockers to Asks with a specific decision request and a deadline |
-| Every update is Yellow status | Team has not decided to commit (Green) or to escalate (Red); risk aversion in the PM | Force a decision: name the action that moves to Green OR the intervention needed to address Red |
-| Update is 4+ pages long | Highlights and What&#x27;s Next are too verbose; sections lack a cap | Limit to 5 bullets per section; cap at 1 page or 500 words |
-| No one acts on Asks | Asks are vague or missing a consequence-of-delay | Each Ask must name the decision-maker, the deadline, and what happens if not delivered |
-| Traffic-light reads &quot;Green&quot; but downstream sees crisis | Watermelon status -- bad news buried in the body | Surface the bad news in the status-rationale sentence; if it changes the color, change the color |
-| Tool output does not match Confluence rendering | `--format confluence` requires storage format; some macros do not render in older Confluence | Test in a draft page first; fall back to `--format markdown` for older instances |
+## References
 
-## Success Criteria
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- The full update fits on one screen (or one page printed)
-- Every Highlight passes the &quot;so what?&quot; test -- the outcome is named, not the activity
-- The traffic-light color matches the rationale sentence and the body
-- The Asks section is present every week (even if &quot;None this week&quot;)
-- Each Risk has a named owner and a date
-- The update is sent on a predictable cadence (same day, same time, every week)
-- Stakeholders can answer &quot;what changed and what do you need&quot; without asking follow-up questions
+- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of each of the six sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
+- **[references/status-update-style-guide.md](references/status-update-style-guide.md)** — voice, structural rules, traffic-light discipline, and 5 worked examples (Green / Yellow / Red across team types). Read when coaching writing quality or seeing full examples.
+- **[references/red-flags.md](references/red-flags.md)** — warning signs and failure modes in status reporting practice. Read when an update process feels performative or untrusted.
+- **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `status_generator.py` flags, input JSON shape, Mermaid output, troubleshooting table, and success criteria. Read when running the tool or diagnosing a problem.
+- **[assets/weekly_status_template.md](assets/weekly_status_template.md)** — fill-in template matching the tool&#x27;s input JSON structure. Use to draft an update by hand.
 
 ## Scope &amp; Limitations
 
@@ -637,90 +531,6 @@ The Asks section is unique to the weekly executive variant -- daily SBNR typical
 | `sprint-retrospective/` | Feeds into | Four weeks of status archives become retrospective input |
 | `../program-manager/` | Feeds into | Cross-team status aggregation rolls up multiple team updates |
 | `../delivery-manager/` | Pairs with | Release windows and incident references show up in Highlights and Risks |
-
-## Tool Reference
-
-### status_generator.py
-
-Generates a structured weekly status update from JSON input. Supports all six SHARED_OUTPUT_SCHEMA formats.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON file with status data |
-| `--demo` | flag | false | Use the built-in demo data |
-| `--format` | choice | markdown | Output format: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--period` | string | (from input) | Override the period label (e.g., &quot;Week of 2026-05-18&quot;) |
-| `--status` | choice | (from input) | Override the traffic light: green, yellow, red |
-
-### Input JSON shape
-
-```json
-{
-  &quot;period&quot;: &quot;Week of 2026-05-18&quot;,
-  &quot;project&quot;: &quot;Acme Search Platform&quot;,
-  &quot;author&quot;: &quot;PM Name&quot;,
-  &quot;status&quot;: &quot;yellow&quot;,
-  &quot;status_rationale&quot;: &quot;Index rebuild succeeded; awaiting security review for Phase 2 rollout.&quot;,
-  &quot;highlights&quot;: [
-    {
-      &quot;title&quot;: &quot;Search latency p95 down to 210ms&quot;,
-      &quot;detail&quot;: &quot;Index rebuild dropped p95 from 480ms to 210ms. Customer reports of slow search resolved.&quot;,
-      &quot;ticket&quot;: &quot;PROJ-1234&quot;
-    }
-  ],
-  &quot;blockers&quot;: [
-    {
-      &quot;what&quot;: &quot;Phase 2 rollout to enterprise tenants&quot;,
-      &quot;blocked_by&quot;: &quot;Security review (InfoSec team)&quot;,
-      &quot;need&quot;: &quot;Schedule the threat-model review before Friday so rollout can begin next sprint.&quot;
-    }
-  ],
-  &quot;risks&quot;: [
-    {
-      &quot;risk&quot;: &quot;Cost overrun on infra during traffic ramp&quot;,
-      &quot;likelihood&quot;: &quot;M&quot;,
-      &quot;impact&quot;: &quot;M&quot;,
-      &quot;mitigation&quot;: &quot;Add auto-scale ceiling; alert at 80% budget&quot;,
-      &quot;owner&quot;: &quot;SRE lead&quot;,
-      &quot;due&quot;: &quot;2026-05-30&quot;
-    }
-  ],
-  &quot;asks&quot;: [
-    {
-      &quot;what&quot;: &quot;Approval to onboard 3 pilot enterprise tenants&quot;,
-      &quot;by_when&quot;: &quot;2026-05-24&quot;,
-      &quot;from_whom&quot;: &quot;VP Sales&quot;,
-      &quot;consequence&quot;: &quot;Slips the Q2 enterprise revenue target by ~$80K&quot;
-    }
-  ],
-  &quot;next&quot;: [
-    {
-      &quot;title&quot;: &quot;Complete security review and start Phase 2 rollout&quot;,
-      &quot;detail&quot;: &quot;Begin with the 3 pilot tenants pending VP Sales sign-off.&quot;
-    }
-  ]
-}
-```
-
-### Mermaid output
-
-`--format mermaid` produces a stoplight summary chart:
-
-```mermaid
-pie title Status this week
-    &quot;Highlights&quot; : 4
-    &quot;Blockers&quot; : 1
-    &quot;Risks&quot; : 2
-    &quot;Asks&quot; : 1
-```
-
-This is useful as a &quot;summary widget&quot; embedded in a longer Confluence/Notion page.
-
-## References
-
-- `references/status-update-style-guide.md` -- Voice, structure, and 5 worked examples (Green / Yellow / Red across different team types)
-- `assets/weekly_status_template.md` -- Fill-in template that matches the tool&#x27;s input JSON structure
 
 ---
 
@@ -775,13 +585,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, Blockers, Risks, Asks, What&#x27;s Next -- plus a traffic-light status (Red / Yellow / Green) for the period.
+Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, Blockers, Risks, Asks, What&#x27;s Next -- plus a traffic-light status (Red / Yellow / Green) for the period. The structure follows **SBNR** (Status / Blockers / Next / Risks) and a condensed Amazon **6-pager** narrative for Highlights; the stoplight verdict follows classic R/Y/G reporting.
 
-The skill ships with `status_generator.py`, a standard-library Python tool that ingests a JSON file representing a week of ticket state (or accepts the output of a Jira/Linear export) and renders the update in all six formats from the shared PM output schema (`markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`). Use `--demo` to see the format.
+## Core Capabilities
 
-The structure follows two well-known patterns: **SBNR** (Status / Blockers / Next / Risks) -- the operational shorthand many engineering orgs use -- and a condensed version of Amazon&#x27;s **6-pager** for the narrative framing of the Highlights section. The traffic-light status is from classic stoplight reporting -- Green = on track, Yellow = at risk with a known mitigation, Red = needs intervention now.
+- **Six-section template** — Header, Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
+- **Traffic-light discipline** — Green / Yellow / Red rules plus anti-patterns (watermelon status, always-yellow, color creep).
+- **Multi-format rendering** — `status_generator.py` emits all six SHARED_OUTPUT_SCHEMA formats: `markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`.
+- **SBNR mapping** — compressed async-standup variant mapped to the weekly sections.
 
-### When to Use
+## When to Use
 
 - **Weekly exec status update** -- the standard Friday/Monday cadence brief sent to a sponsor, VP, or steering committee.
 - **Monthly board / leadership packet** -- aggregate four weekly updates into a monthly view.
@@ -789,130 +602,37 @@ The structure follows two well-known patterns: **SBNR** (Status / Blockers / Nex
 - **Cross-team async standup** -- distributed teams where a written async update replaces a sync meeting.
 - **Project kickoff status baseline** -- the first status update establishes the template and traffic-light baseline.
 
-### When NOT to Use
+**When NOT to use:** real-time incident response (use `delivery-manager/` incident skills), deep retrospectives (use `sprint-retrospective/`), or one-to-one stakeholder reporting needing custom framing (use `roadmap-communication/`).
 
-- For real-time incident response (use `delivery-manager/` incident skills).
-- For deep retrospectives (use `sprint-retrospective/`).
-- For one-to-one stakeholder reporting where the audience needs custom framing (use `roadmap-communication/` for that).
+## Clarify First
 
-## The status update structure
+Before generating the update, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Every update produced by this skill has the same six sections, in this order. Consistency is the point -- exec readers should be able to scan to the section they care about in under 5 seconds.
+- [ ] **Traffic-light verdict (R/Y/G)** — the human judgment the tool will not infer; sets the whole frame and must be defensible (prevents watermelon status)
+- [ ] **Audience** — sponsor, VP, or steering committee (sets altitude and what belongs in Highlights vs Asks)
+- [ ] **This period&#x27;s wins + blockers with real numbers** — quantitative claims must come from telemetry, not ticket titles (fills Highlights and Blockers)
+- [ ] **The asks** — the specific decisions or help you need from the reader this week (drives the Asks section)
 
-### Section 1: Header
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-- **Period**: the date range covered (e.g., &quot;Week of 2026-05-18&quot;)
-- **Project / team**: the name of the team or initiative
-- **Author**: the PM or engineering lead
-- **Status (R / Y / G)**: the single overall traffic-light verdict
-- **Status rationale**: one sentence explaining why this color
-
-### Section 2: Highlights
-
-Three to five bullet points describing the most important things that shipped, decided, or moved this week. Highlights are **outcome-led**: name what changed for the user or the business, not the activity.
-
-**Bad:** &quot;Shipped PR-1234&quot;
-**Good:** &quot;Search latency dropped from 480ms p95 to 210ms p95 after the index rebuild (PR-1234)&quot;
-
-Each highlight should pass the **&quot;so what?&quot; test**: a busy exec who reads only this bullet should understand why it matters.
-
-### Section 3: Blockers
-
-Things currently stopping the team. Each blocker has three parts:
-
-- **What is blocked**: the work item or workstream
-- **Who/what is blocking**: the team, vendor, decision, or dependency
-- **What we need**: a specific ask or decision
-
-A blocker without a specific ask is a complaint, not a blocker. Promote it to Risks or strike it.
-
-### Section 4: Risks
-
-Things that could become blockers if we do not act. Each risk follows the format:
-
-`&lt;Risk&gt; -- Likelihood (H/M/L) x Impact (H/M/L) -- Mitigation: &lt;action&gt; -- Owner: &lt;name&gt; -- Due: &lt;date&gt;`
-
-This is the format used by `senior-pm/risk_matrix_analyzer.py` so risks can be lifted directly into the portfolio risk register.
-
-### Section 5: Asks
-
-Specific decisions, approvals, resources, or introductions needed from the audience. Each ask names:
-
-- **What you want**
-- **By when**
-- **From whom**
-- **Consequence of delay**
-
-An update without an &quot;Asks&quot; section trains readers that updates require no action. Always include the section, even if the answer is &quot;none this week.&quot;
-
-### Section 6: What&#x27;s Next
-
-The 3-5 most important things planned for the coming week. Same outcome-led style as Highlights. This is the closing read -- it sets expectations for next week&#x27;s update.
-
-## Traffic-light status (R / Y / G)
-
-| Color | Definition | Rule |
-|-------|------------|------|
-| **Green** | On track. No active blockers; risks are manageable; commitments will be met. | Use sparingly. Two consecutive Green updates with no new highlights is suspicious. |
-| **Yellow** | At risk. There is an issue, but the team has a credible mitigation in flight. | The Risks section must name the mitigation, the owner, and the deadline. |
-| **Red** | Off track. Intervention from leadership is required. | A Red update requires an explicit Ask. Red without an Ask means the PM has not done their job. |
-
-### Anti-patterns
-
-- **Watermelon status** -- Green outside, Red inside. The most common failure. Surface the bad news in the rationale sentence.
-- **Always-Yellow** -- if every update is Yellow, the team has not made the decision to commit (Green) or to escalate (Red).
-- **Color creep** -- the bar for Red should not move week to week. Document the criteria in the team wiki.
-
-## SBNR shorthand
-
-Some teams use SBNR (Status / Blockers / Next / Risks) as a compressed version for daily or async standup. SBNR maps to this skill&#x27;s sections as follows:
-
-| SBNR field | Section in this skill |
-|------------|----------------------|
-| **S**tatus | Section 1 (Header) + Section 2 (Highlights) |
-| **B**lockers | Section 3 (Blockers) |
-| **N**ext | Section 6 (What&#x27;s Next) |
-| **R**isks | Section 4 (Risks) |
-
-The Asks section is unique to the weekly executive variant -- daily SBNR typically does not include explicit asks.
-
-## Workflow
-
-1. **Export ticket data.** Pull from Jira (via JQL or the Atlassian MCP), Linear (via GraphQL or the Linear MCP), or any source that can emit JSON matching the input schema (see Tool Reference).
-2. **Augment with narrative.** The PM adds 1-2 sentences of context to each highlight that goes beyond what the ticket title says.
-3. **Run `status_generator.py`.** Use `--input status_data.json --format markdown` to render the update. Use `--format confluence` or `--format notion` to push directly to a wiki.
-4. **Set the traffic-light status.** This is a human judgment, not a calculation. Document the rationale.
-5. **Distribute.** Send via the agreed channel. Always include the Asks section, even if &quot;none this week.&quot;
-6. **Archive.** Save dated copies. The weekly archive becomes the monthly packet and the quarterly retrospective input.
-
-## Tools
+## Quick Start
 
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
 | `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
 
-## Troubleshooting
+The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
 
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Exec readers say &quot;I do not know what changed this week&quot; | Highlights are activity-led (&quot;Shipped PR-1234&quot;), not outcome-led | Rewrite each highlight to name the user or business outcome; quantify wherever possible |
-| Same blockers appear week after week with no resolution | Blockers documented but no escalation; PM is hoping leadership notices | Promote chronic blockers to Asks with a specific decision request and a deadline |
-| Every update is Yellow status | Team has not decided to commit (Green) or to escalate (Red); risk aversion in the PM | Force a decision: name the action that moves to Green OR the intervention needed to address Red |
-| Update is 4+ pages long | Highlights and What&#x27;s Next are too verbose; sections lack a cap | Limit to 5 bullets per section; cap at 1 page or 500 words |
-| No one acts on Asks | Asks are vague or missing a consequence-of-delay | Each Ask must name the decision-maker, the deadline, and what happens if not delivered |
-| Traffic-light reads &quot;Green&quot; but downstream sees crisis | Watermelon status -- bad news buried in the body | Surface the bad news in the status-rationale sentence; if it changes the color, change the color |
-| Tool output does not match Confluence rendering | `--format confluence` requires storage format; some macros do not render in older Confluence | Test in a draft page first; fall back to `--format markdown` for older instances |
+## References
 
-## Success Criteria
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- The full update fits on one screen (or one page printed)
-- Every Highlight passes the &quot;so what?&quot; test -- the outcome is named, not the activity
-- The traffic-light color matches the rationale sentence and the body
-- The Asks section is present every week (even if &quot;None this week&quot;)
-- Each Risk has a named owner and a date
-- The update is sent on a predictable cadence (same day, same time, every week)
-- Stakeholders can answer &quot;what changed and what do you need&quot; without asking follow-up questions
+- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of each of the six sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
+- **[references/status-update-style-guide.md](references/status-update-style-guide.md)** — voice, structural rules, traffic-light discipline, and 5 worked examples (Green / Yellow / Red across team types). Read when coaching writing quality or seeing full examples.
+- **[references/red-flags.md](references/red-flags.md)** — warning signs and failure modes in status reporting practice. Read when an update process feels performative or untrusted.
+- **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `status_generator.py` flags, input JSON shape, Mermaid output, troubleshooting table, and success criteria. Read when running the tool or diagnosing a problem.
+- **[assets/weekly_status_template.md](assets/weekly_status_template.md)** — fill-in template matching the tool&#x27;s input JSON structure. Use to draft an update by hand.
 
 ## Scope &amp; Limitations
 
@@ -947,90 +667,6 @@ The Asks section is unique to the weekly executive variant -- daily SBNR typical
 | `sprint-retrospective/` | Feeds into | Four weeks of status archives become retrospective input |
 | `../program-manager/` | Feeds into | Cross-team status aggregation rolls up multiple team updates |
 | `../delivery-manager/` | Pairs with | Release windows and incident references show up in Highlights and Risks |
-
-## Tool Reference
-
-### status_generator.py
-
-Generates a structured weekly status update from JSON input. Supports all six SHARED_OUTPUT_SCHEMA formats.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON file with status data |
-| `--demo` | flag | false | Use the built-in demo data |
-| `--format` | choice | markdown | Output format: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--period` | string | (from input) | Override the period label (e.g., &quot;Week of 2026-05-18&quot;) |
-| `--status` | choice | (from input) | Override the traffic light: green, yellow, red |
-
-### Input JSON shape
-
-```json
-{
-  &quot;period&quot;: &quot;Week of 2026-05-18&quot;,
-  &quot;project&quot;: &quot;Acme Search Platform&quot;,
-  &quot;author&quot;: &quot;PM Name&quot;,
-  &quot;status&quot;: &quot;yellow&quot;,
-  &quot;status_rationale&quot;: &quot;Index rebuild succeeded; awaiting security review for Phase 2 rollout.&quot;,
-  &quot;highlights&quot;: [
-    {
-      &quot;title&quot;: &quot;Search latency p95 down to 210ms&quot;,
-      &quot;detail&quot;: &quot;Index rebuild dropped p95 from 480ms to 210ms. Customer reports of slow search resolved.&quot;,
-      &quot;ticket&quot;: &quot;PROJ-1234&quot;
-    }
-  ],
-  &quot;blockers&quot;: [
-    {
-      &quot;what&quot;: &quot;Phase 2 rollout to enterprise tenants&quot;,
-      &quot;blocked_by&quot;: &quot;Security review (InfoSec team)&quot;,
-      &quot;need&quot;: &quot;Schedule the threat-model review before Friday so rollout can begin next sprint.&quot;
-    }
-  ],
-  &quot;risks&quot;: [
-    {
-      &quot;risk&quot;: &quot;Cost overrun on infra during traffic ramp&quot;,
-      &quot;likelihood&quot;: &quot;M&quot;,
-      &quot;impact&quot;: &quot;M&quot;,
-      &quot;mitigation&quot;: &quot;Add auto-scale ceiling; alert at 80% budget&quot;,
-      &quot;owner&quot;: &quot;SRE lead&quot;,
-      &quot;due&quot;: &quot;2026-05-30&quot;
-    }
-  ],
-  &quot;asks&quot;: [
-    {
-      &quot;what&quot;: &quot;Approval to onboard 3 pilot enterprise tenants&quot;,
-      &quot;by_when&quot;: &quot;2026-05-24&quot;,
-      &quot;from_whom&quot;: &quot;VP Sales&quot;,
-      &quot;consequence&quot;: &quot;Slips the Q2 enterprise revenue target by ~$80K&quot;
-    }
-  ],
-  &quot;next&quot;: [
-    {
-      &quot;title&quot;: &quot;Complete security review and start Phase 2 rollout&quot;,
-      &quot;detail&quot;: &quot;Begin with the 3 pilot tenants pending VP Sales sign-off.&quot;
-    }
-  ]
-}
-```
-
-### Mermaid output
-
-`--format mermaid` produces a stoplight summary chart:
-
-```mermaid
-pie title Status this week
-    &quot;Highlights&quot; : 4
-    &quot;Blockers&quot; : 1
-    &quot;Risks&quot; : 2
-    &quot;Asks&quot; : 1
-```
-
-This is useful as a &quot;summary widget&quot; embedded in a longer Confluence/Notion page.
-
-## References
-
-- `references/status-update-style-guide.md` -- Voice, structure, and 5 worked examples (Green / Yellow / Red across different team types)
-- `assets/weekly_status_template.md` -- Fill-in template that matches the tool&#x27;s input JSON structure
 
 ---
 
@@ -1118,8 +754,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/status-update-generator/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2>| Tool | Purpose | Command |
+|------|---------|---------|
+| `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
+| `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
+
+The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/status-update-generator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

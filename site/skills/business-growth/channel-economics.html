@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Channel Economics - Claude Skills</title>
+  <meta name="description" content="Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzin">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/business-growth/channel-economics.html">
+  <meta property="og:title" content="Channel Economics - Claude Skills">
+  <meta property="og:description" content="Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzin">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/business-growth/channel-economics.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Channel Economics", "description": "Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.", "applicationCategory": "Business & Growth", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/business-growth/channel-economics.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/">Business &amp; Growth</a><span class=sep>/</span><span>Channel Economics</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Channel Economics</h1>
+    <p class="page-subtitle">Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Business &amp; Growth</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">channel-economics</span><span class="tag">channel-strategy</span><span class="tag">partner-program</span><span class="tag">margin-analysis</span><span class="tag">gtm</span><span class="tag">reseller</span><span class="tag">distributor</span><span class="tag">marketplace</span><span class="tag">msp</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Channel Economics (Business &amp; Growth domain).
+
+Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.
+
+End-to-end financial modeling and design of go-to-market channels: direct sales economics, reseller / distributor margin structures, marketplace fees, partner tier economics, channel conflict resolution, and the TCO frameworks that compare channel options apples-to-apples. This skill provides the fi
+
+## Your Key Capabilities
+- True channel TCO formula
+- Side-by-side comparison
+- Standard tier structure
+- Tier design principles
+- Front-end discount
+- Back-end rebate
+
+## Frameworks &amp; Templates You Know
+- Margin and TCO framework
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/channel-economics
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Channel Economics (Business &amp; Growth domain).
+
+Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.
+
+End-to-end financial modeling and design of go-to-market channels: direct sales economics, reseller / distributor margin structures, marketplace fees, partner tier economics, channel conflict resolution, and the TCO frameworks that compare channel options apples-to-apples. This skill provides the fi
+
+## Your Key Capabilities
+- True channel TCO formula
+- Side-by-side comparison
+- Standard tier structure
+- Tier design principles
+- Front-end discount
+- Back-end rebate
+
+## Frameworks &amp; Templates You Know
+- Margin and TCO framework
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/channel-economics
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Channel Economics&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Channel Economics
+
+End-to-end financial modeling and design of go-to-market channels: direct sales economics, reseller / distributor margin structures, marketplace fees, partner tier economics, channel conflict resolution, and the TCO frameworks that compare channel options apples-to-apples.
+
+This skill provides the financial backbone for channel strategy. For strategic partnership design (which channel to invest in, how to structure the partnership), see `business-growth/partnerships-architect`. For partner-deal-level approval mechanics, see `business-growth/deal-desk`.
+
+---
+
+## When to use this skill
+
+| Situation | Skill applies |
+|-----------|---------------|
+| Deciding direct vs partner-led for a new product | Yes — start with **channel model decision tree** |
+| Designing a partner tier structure (silver/gold/platinum) | Yes — see **partner tier economics** |
+| Modeling a specific partner deal&#x27;s margin / payback | Yes — `scripts/channel_margin_calculator.py` |
+| Analyzing channel conflict (overlapping direct + partner deals) | Yes — see **channel conflict** + `scripts/channel_mix_optimizer.py` |
+| Building a partner program rebate / SPIFF structure | Yes — see **rebate design** |
+| Comparing AWS Marketplace vs direct list-price economics | Yes — `scripts/channel_margin_calculator.py --channel marketplace` |
+| Negotiating a specific partner contract | Use `business-growth/contract-and-proposal-writer` for the contract; this for the economics |
+| Strategic partnership design (joint go-to-market, OEM, white-label) | Use `business-growth/partnerships-architect` first |
+
+---
+
+## The channel model decision tree
+
+Six core channel models. Most companies use a mix.
+
+```
+What&#x27;s the product&#x27;s complexity + price point?
+
+Low complexity, low price (&lt; $10k ACV):
+├── Self-serve / PLG → no channel
+├── E-commerce → direct via web
+└── Marketplace (AWS / Azure / GCP / Salesforce AppExchange) → if buyer already there
+
+Medium complexity, mid-market price ($10k - $250k ACV):
+├── Inside sales / SDR-led direct → if buyer journey is well-understood
+├── Reseller / VAR (Value-Added Reseller) → if local presence / language matters
+├── Marketplace → if buyer prefers procurement via existing relationship
+└── Embedded / OEM → if your product is a component in someone else&#x27;s offering
+
+High complexity, enterprise ($250k+ ACV):
+├── Direct field sales → standard for high-touch enterprise
+├── Strategic SI / Integrator (Accenture, Deloitte, etc.) → if implementation is a substantial project
+├── ISV / Embedded → if you&#x27;re a feature in a larger platform
+└── Reseller / Distributor → for regional or vertical specialty
+
+Operational / managed-service buyer:
+└── MSP (Managed Service Provider) → if customer wants outsourced operations
+```
+
+See [references/channel-models-direct-partner-marketplace.md](references/channel-models-direct-partner-marketplace.md) for each model in depth: economic structure, typical margin splits, when each works / fails, contract patterns.
+
+---
+
+## Margin and TCO framework
+
+Apples-to-apples channel comparison requires a consistent TCO model. The naive comparison (&quot;direct gets 100%, reseller gets 70%&quot;) misses critical costs.
+
+### True channel TCO formula
+
+```
+Channel Contribution Margin
+  = Channel-attributed Revenue
+  − COGS
+  − Partner Discount/Commission
+  − Channel-specific Sales Cost (allocated)
+  − Channel-specific Marketing Cost (MDF, co-marketing)
+  − Partner Enablement Cost (training, certification)
+  − Channel Operations Cost (channel manager headcount)
+  − Channel-specific Support Cost (T1 partner support)
+```
+
+### Side-by-side comparison
+
+For a $100k ACV deal:
+
+| Component | Direct | Reseller (30% off) | AWS Marketplace |
+|-----------|--------|---------------------|-----------------|
+| Customer payment | $100,000 | $100,000 | $100,000 |
+| Reseller / marketplace fee | $0 | -$30,000 (30% discount) | -$3,000 (3% AWS fee) |
+| Revenue to us | $100,000 | $70,000 | $97,000 |
+| COGS (15%) | -$15,000 | -$10,500 | -$14,550 |
+| Sales cost (allocated CAC) | -$25,000 | -$5,000 | -$8,000 |
+| Marketing cost (MDF / listing) | -$2,000 | -$8,000 | -$5,000 |
+| Partner enablement (amortized) | $0 | -$3,000 | -$1,500 |
+| Channel ops (amortized) | $0 | -$2,000 | -$1,000 |
+| Support cost | -$5,000 | -$3,000 | -$5,000 |
+| **Net contribution** | **$53,000** | **$38,500** | **$61,950** |
+| **% of ACV** | 53% | 38.5% | 62% |
+
+The &quot;30% discount&quot; reseller deal is more like 14.5% margin difference once everything&#x27;s counted. Marketplace can look better than direct on per-deal basis (Amazon&#x27;s sales team brings the buyer) — but volume varies.
+
+Use `scripts/channel_margin_calculator.py --deal deal.yaml --channel &lt;type&gt;` to model this for any deal.
+
+See [references/margin-and-tco-frameworks.md](references/margin-and-tco-frameworks.md) for the full TCO framework, per-cost-line guidance, and how to allocate &quot;fully-loaded&quot; sales / marketing / ops costs.
+
+---
+
+## Partner tier economics
+
+Multi-tier partner programs (Authorized → Silver → Gold → Platinum) are common. Designed badly, they reward effort that isn&#x27;t valuable; designed well, they reward outcomes that drive growth.
+
+### Standard tier structure
+
+| Tier | Annual revenue threshold | Discount % | Other benefits | Requirements |
+|------|-------------------------|------------|----------------|--------------|
+| Authorized | None | 10% | Standard support | Sign partner agreement; 1 certified person |
+| Silver | $100k | 15% | Co-marketing eligible (limited MDF) | $100k achieved; 3 certified people; 2 customer wins |
+| Gold | $500k | 20% + 5% rebate at threshold | Dedicated channel manager; MDF; deal registration; lead sharing | $500k achieved; 5 certified; 5 wins; 80% renewal rate |
+| Platinum | $2M | 25% + 7% rebate at threshold | Top-tier support; joint roadmap; preferred status; press release rights | $2M achieved; 10 certified; 10 wins; 90% renewal; participation in advisory board |
+
+### Tier design principles
+
+1. **Outcome-based, not effort-based.** Reward revenue + retention, not training hours or marketing event count.
+2. **Achievable but stretching.** Each tier should be a 12-18 month stretch from the prior.
+3. **Differentiable benefits.** Each tier needs benefits a partner actively wants (not just &quot;more support&quot;).
+4. **Renewable status.** Tiers re-evaluated annually. Partners can move down if they don&#x27;t maintain.
+5. **Anti-gaming protection.** Discount-stacking, registration gaming, transfer pricing — design out.
+
+Use `scripts/partner_tier_economics.py --tiers tiers.yaml` to model tier economics: gross margin per tier, partner-side incentive, break-even revenue per partner per tier.
+
+---
+
+## Rebate / SPIFF design
+
+Three common reward structures, each with trade-offs:
+
+### Front-end discount
+
+Partner buys from you at a discount; sells to customer at list (or close). Margin = the spread.
+
+**Pros:** Simple. Cash flow goes to partner immediately.
+**Cons:** Hard to incentivize specific behaviors. Discount is locked in regardless of performance.
+
+### Back-end rebate
+
+Partner pays full price (or near it); earns rebate quarterly / annually based on revenue / tier achievement.
+
+**Pros:** Ties reward to actual achievement; behaviors can be incentivized (e.g., bonus for selling new products).
+**Cons:** Cash-flow burden on partner. Complex to administer.
+
+### MDF (Marketing Development Funds) / SPIFF
+
+Per-deal or per-period bonuses for specific actions: bring leads, attend events, certify staff.
+
+**Pros:** Highly targetable. Rewards specific behaviors you want.
+**Cons:** Easy to game; admin overhead high; partners often expect it without producing.
+
+### Typical mix
+
+| Partner type | Front-end | Back-end | MDF/SPIFF |
+|--------------|-----------|----------|-----------|
+| Reseller (transactional) | 70-80% of total comp | 10-20% | 5-10% |
+| VAR (consultative selling) | 50-60% | 20-30% | 10-20% |
+| Distributor (volume play) | 80-90% | 5-15% | 5% |
+| ISV / Embedded | n/a (rev share) | 100% | 0 |
+| MSP | 40-60% | 20-30% | 10-30% |
+
+---
+
+## Channel conflict
+
+Channel conflict happens when multiple sales paths chase the same customer. Common forms:
+
+### Direct-vs-partner conflict
+
+| Scenario | Resolution pattern |
+|----------|---------------------|
+| Direct rep finds opportunity also touched by partner | Deal registration: first to register wins; partner gets credit if they brought it |
+| Partner finds direct customer | If direct is already engaged: partner deferred (with consolation MDF perhaps); if not: partner leads |
+| Customer asks for direct after partner-led pilot | Honor partner relationship for term; transition at next renewal if appropriate |
+
+### Partner-vs-partner conflict
+
+| Scenario | Resolution pattern |
+|----------|---------------------|
+| Two resellers both pursuing same account | First-registered wins; second is offered alternative leads / regional swap |
+| Vertical specialist vs geographic | Vertical wins (customer values vertical expertise more) |
+| New partner pursues incumbent partner&#x27;s customer | Incumbent has right of first refusal for 90 days |
+
+### Marketplace-vs-direct conflict
+
+Customer can buy via AWS Marketplace OR direct. If price is lower direct, customer feels gamed. If price is same, why not just use marketplace? Common resolution:
+
+- **Same price** direct vs marketplace (customer doesn&#x27;t get punished for procurement choice)
+- **Quota credit** to the direct rep when customer chooses marketplace (so rep isn&#x27;t disincentivized)
+- **Marketplace listing visibility** as a value-add, not as a different pricing channel
+
+See [references/channel-conflict-resolution.md](references/channel-conflict-resolution.md) for the full conflict-resolution playbook including deal registration process, neutral arbitration, conflict-of-interest disclosure.
+
+---
+
+## Clarify First
+
+Before modeling the channel economics, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Channel model(s) in scope** — direct, reseller/VAR, distributor, marketplace, OEM, or MSP (sets which decision-tree branch and TCO comparison to run)
+- [ ] **Target ACV / price point** — sub-$10k vs mid-market vs enterprise (selects the viable channel branch and sizes per-deal margin)
+- [ ] **Fully-loaded cost lines** — COGS %, allocated sales/marketing/ops/support costs (drives the TCO contribution-margin model, not just the headline discount)
+- [ ] **Partner contribution + tier intent** — what the partner does (lead, sell, implement) and whether you&#x27;re designing tiers/rebates (drives tier economics + rebate/SPIFF mix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the model.
+
+## End-to-end workflows
+
+### Workflow: Design a new partner program
+
+1. **Pick channel models** — direct + reseller? marketplace? OEM? — using the decision tree
+2. **Model the economics** — `scripts/channel_margin_calculator.py` per channel option at expected ACV
+3. **Design tier structure** — `scripts/partner_tier_economics.py` to size the gates and benefits
+4. **Define rebate / SPIFF mix** — per tier and partner type
+5. **Write the partner agreement** (with `business-growth/contract-and-proposal-writer`)
+6. **Build channel ops** — deal registration, MDF approval, certification tracking
+7. **Hire channel manager(s)** — usually 1 manager per 10-15 active partners
+8. **Pilot with 3-5 partners** — measure, iterate, then scale
+
+### Workflow: Evaluate a specific partner deal
+
+1. **Inputs**: ACV, partner discount %, expected close, partner&#x27;s contribution (lead source? sales effort? implementation?)
+2. **Calculate net contribution** — `scripts/channel_margin_calculator.py --deal deal.yaml --channel partner`
+3. **Compare to direct alternative** — would this deal have closed direct? at what cost?
+4. **Decide**: approve / counter / decline (often via deal desk if it&#x27;s a non-standard partner discount)
+
+### Workflow: Channel mix analysis
+
+1. **Inputs**: actual revenue by channel for last 4 quarters
+2. **Run mix optimizer** — `scripts/channel_mix_optimizer.py --revenue revenue.csv` examines contribution margin per channel + identifies under-/over-invested channels
+3. **Recommend rebalancing** — e.g., &quot;Reseller channel: 20% of revenue, 8% of contribution margin — reduce investment; marketplace: 15% of revenue, 25% of contribution — increase listing visibility&quot;
+4. **Quarterly review**: present to CRO / CFO
+
+### Workflow: Resolve a channel conflict
+
+1. **Document the conflict** — accounts involved, parties, history
+2. **Apply the registration rule** — first-registered partner wins absent overriding facts
+3. **Consider exceptions** — strategic logo, customer preference, vertical expertise
+4. **Communicate decision** — both parties, with reasoning, in writing
+5. **Compensate the loser** — alternative leads, MDF, regional swap; preserve the relationship
+
+---
+
+## Anti-patterns
+
+- **Direct + partner at same price.** Customer feels punished for not using direct (or vice versa); kills partner motivation. Price-to-customer must be consistent across channels.
+- **Discount-only partner program.** Partners that only get a discount have no skin in your success; treat you as another vendor; switch easily.
+- **Endless partner expansion without enablement.** Signing 200 partners that don&#x27;t sell anything; channel manager headcount can&#x27;t scale; partners stale.
+- **Marketplace as afterthought.** Listing on AWS Marketplace without dedicated investment (listing optimization, co-sell programs) = marketplace generates nothing.
+- **Channel manager as glorified email forwarder.** CM should drive partner pipeline, not just relay leads.
+- **Rebates with no audit.** Partner self-reports revenue; you trust it; reality is 20% off. Build verification.
+- **MDF spent on activities that don&#x27;t drive pipeline.** Partner runs a great event, generates no pipeline. MDF should require pipeline outcome.
+- **Channel conflict policy that isn&#x27;t followed.** Policy says first-registered wins, but exec overrides every time → policy is theater.
+- **Different commission per channel for same deal.** Direct rep gets 8% on $100k deal, channel rep gets 6% on $100k deal — direct rep refuses partner help; channel rep undercut.
+- **OEM / embedded deals priced like resale.** OEM = customer doesn&#x27;t see you at all; ASP can be 50-80% of list. Resale = customer sees you. Different economics; different price points.
+
+---
+
+## Tooling outputs
+
+| Script | Input | Output |
+|--------|-------|--------|
+| `scripts/channel_margin_calculator.py` | Deal spec YAML + channel type | Per-channel net contribution margin, cost line breakdown, comparison vs direct baseline |
+| `scripts/partner_tier_economics.py` | Tier definitions YAML | Per-tier: gross margin to us, gross margin to partner, partner break-even, tier graduation incentive analysis |
+| `scripts/channel_mix_optimizer.py` | Revenue CSV (by channel + quarter) | Per-channel revenue contribution, per-channel margin contribution, recommended rebalancing |
+
+All scripts: stdlib only, argparse CLI, JSON or markdown output.
+
+---
+
+## References
+
+- [channel-models-direct-partner-marketplace.md](references/channel-models-direct-partner-marketplace.md) — 6 channel models in depth + economic structure + when each works
+- [margin-and-tco-frameworks.md](references/margin-and-tco-frameworks.md) — full TCO framework, allocation guidance, per-channel cost models
+- [channel-conflict-resolution.md](references/channel-conflict-resolution.md) — registration process, conflict patterns, arbitration
+
+---
+
+## Related skills
+
+- `business-growth/partnerships-architect` — strategic partnership design (this skill = the economics; that one = the strategy)
+- `business-growth/deal-desk` — approval mechanics for partner deals (this skill = &quot;what does it cost&quot;; deal desk = &quot;should we approve&quot;)
+- `business-growth/pricing-strategy` — sets list pricing that channel economics deviates from
+- `business-growth/revenue-operations` — channel revenue is segmented in RevOps reporting
+- `business-growth/contract-and-proposal-writer` — drafts partner agreements
+- `sales-success/sales-operations` — runs channel ops (deal registration, MDF approval, certification tracking)
+- `c-level-advisor/cs-cro-advisor` — strategic channel-mix decisions are CRO-level
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Channel Economics&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Channel Economics in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Channel Economics&quot;**
+   - Description: &quot;Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/channel-economics/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Channel Economics&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Channel Economics
+
+End-to-end financial modeling and design of go-to-market channels: direct sales economics, reseller / distributor margin structures, marketplace fees, partner tier economics, channel conflict resolution, and the TCO frameworks that compare channel options apples-to-apples.
+
+This skill provides the financial backbone for channel strategy. For strategic partnership design (which channel to invest in, how to structure the partnership), see `business-growth/partnerships-architect`. For partner-deal-level approval mechanics, see `business-growth/deal-desk`.
+
+---
+
+## When to use this skill
+
+| Situation | Skill applies |
+|-----------|---------------|
+| Deciding direct vs partner-led for a new product | Yes — start with **channel model decision tree** |
+| Designing a partner tier structure (silver/gold/platinum) | Yes — see **partner tier economics** |
+| Modeling a specific partner deal&#x27;s margin / payback | Yes — `scripts/channel_margin_calculator.py` |
+| Analyzing channel conflict (overlapping direct + partner deals) | Yes — see **channel conflict** + `scripts/channel_mix_optimizer.py` |
+| Building a partner program rebate / SPIFF structure | Yes — see **rebate design** |
+| Comparing AWS Marketplace vs direct list-price economics | Yes — `scripts/channel_margin_calculator.py --channel marketplace` |
+| Negotiating a specific partner contract | Use `business-growth/contract-and-proposal-writer` for the contract; this for the economics |
+| Strategic partnership design (joint go-to-market, OEM, white-label) | Use `business-growth/partnerships-architect` first |
+
+---
+
+## The channel model decision tree
+
+Six core channel models. Most companies use a mix.
+
+```
+What&#x27;s the product&#x27;s complexity + price point?
+
+Low complexity, low price (&lt; $10k ACV):
+├── Self-serve / PLG → no channel
+├── E-commerce → direct via web
+└── Marketplace (AWS / Azure / GCP / Salesforce AppExchange) → if buyer already there
+
+Medium complexity, mid-market price ($10k - $250k ACV):
+├── Inside sales / SDR-led direct → if buyer journey is well-understood
+├── Reseller / VAR (Value-Added Reseller) → if local presence / language matters
+├── Marketplace → if buyer prefers procurement via existing relationship
+└── Embedded / OEM → if your product is a component in someone else&#x27;s offering
+
+High complexity, enterprise ($250k+ ACV):
+├── Direct field sales → standard for high-touch enterprise
+├── Strategic SI / Integrator (Accenture, Deloitte, etc.) → if implementation is a substantial project
+├── ISV / Embedded → if you&#x27;re a feature in a larger platform
+└── Reseller / Distributor → for regional or vertical specialty
+
+Operational / managed-service buyer:
+└── MSP (Managed Service Provider) → if customer wants outsourced operations
+```
+
+See [references/channel-models-direct-partner-marketplace.md](references/channel-models-direct-partner-marketplace.md) for each model in depth: economic structure, typical margin splits, when each works / fails, contract patterns.
+
+---
+
+## Margin and TCO framework
+
+Apples-to-apples channel comparison requires a consistent TCO model. The naive comparison (&quot;direct gets 100%, reseller gets 70%&quot;) misses critical costs.
+
+### True channel TCO formula
+
+```
+Channel Contribution Margin
+  = Channel-attributed Revenue
+  − COGS
+  − Partner Discount/Commission
+  − Channel-specific Sales Cost (allocated)
+  − Channel-specific Marketing Cost (MDF, co-marketing)
+  − Partner Enablement Cost (training, certification)
+  − Channel Operations Cost (channel manager headcount)
+  − Channel-specific Support Cost (T1 partner support)
+```
+
+### Side-by-side comparison
+
+For a $100k ACV deal:
+
+| Component | Direct | Reseller (30% off) | AWS Marketplace |
+|-----------|--------|---------------------|-----------------|
+| Customer payment | $100,000 | $100,000 | $100,000 |
+| Reseller / marketplace fee | $0 | -$30,000 (30% discount) | -$3,000 (3% AWS fee) |
+| Revenue to us | $100,000 | $70,000 | $97,000 |
+| COGS (15%) | -$15,000 | -$10,500 | -$14,550 |
+| Sales cost (allocated CAC) | -$25,000 | -$5,000 | -$8,000 |
+| Marketing cost (MDF / listing) | -$2,000 | -$8,000 | -$5,000 |
+| Partner enablement (amortized) | $0 | -$3,000 | -$1,500 |
+| Channel ops (amortized) | $0 | -$2,000 | -$1,000 |
+| Support cost | -$5,000 | -$3,000 | -$5,000 |
+| **Net contribution** | **$53,000** | **$38,500** | **$61,950** |
+| **% of ACV** | 53% | 38.5% | 62% |
+
+The &quot;30% discount&quot; reseller deal is more like 14.5% margin difference once everything&#x27;s counted. Marketplace can look better than direct on per-deal basis (Amazon&#x27;s sales team brings the buyer) — but volume varies.
+
+Use `scripts/channel_margin_calculator.py --deal deal.yaml --channel &lt;type&gt;` to model this for any deal.
+
+See [references/margin-and-tco-frameworks.md](references/margin-and-tco-frameworks.md) for the full TCO framework, per-cost-line guidance, and how to allocate &quot;fully-loaded&quot; sales / marketing / ops costs.
+
+---
+
+## Partner tier economics
+
+Multi-tier partner programs (Authorized → Silver → Gold → Platinum) are common. Designed badly, they reward effort that isn&#x27;t valuable; designed well, they reward outcomes that drive growth.
+
+### Standard tier structure
+
+| Tier | Annual revenue threshold | Discount % | Other benefits | Requirements |
+|------|-------------------------|------------|----------------|--------------|
+| Authorized | None | 10% | Standard support | Sign partner agreement; 1 certified person |
+| Silver | $100k | 15% | Co-marketing eligible (limited MDF) | $100k achieved; 3 certified people; 2 customer wins |
+| Gold | $500k | 20% + 5% rebate at threshold | Dedicated channel manager; MDF; deal registration; lead sharing | $500k achieved; 5 certified; 5 wins; 80% renewal rate |
+| Platinum | $2M | 25% + 7% rebate at threshold | Top-tier support; joint roadmap; preferred status; press release rights | $2M achieved; 10 certified; 10 wins; 90% renewal; participation in advisory board |
+
+### Tier design principles
+
+1. **Outcome-based, not effort-based.** Reward revenue + retention, not training hours or marketing event count.
+2. **Achievable but stretching.** Each tier should be a 12-18 month stretch from the prior.
+3. **Differentiable benefits.** Each tier needs benefits a partner actively wants (not just &quot;more support&quot;).
+4. **Renewable status.** Tiers re-evaluated annually. Partners can move down if they don&#x27;t maintain.
+5. **Anti-gaming protection.** Discount-stacking, registration gaming, transfer pricing — design out.
+
+Use `scripts/partner_tier_economics.py --tiers tiers.yaml` to model tier economics: gross margin per tier, partner-side incentive, break-even revenue per partner per tier.
+
+---
+
+## Rebate / SPIFF design
+
+Three common reward structures, each with trade-offs:
+
+### Front-end discount
+
+Partner buys from you at a discount; sells to customer at list (or close). Margin = the spread.
+
+**Pros:** Simple. Cash flow goes to partner immediately.
+**Cons:** Hard to incentivize specific behaviors. Discount is locked in regardless of performance.
+
+### Back-end rebate
+
+Partner pays full price (or near it); earns rebate quarterly / annually based on revenue / tier achievement.
+
+**Pros:** Ties reward to actual achievement; behaviors can be incentivized (e.g., bonus for selling new products).
+**Cons:** Cash-flow burden on partner. Complex to administer.
+
+### MDF (Marketing Development Funds) / SPIFF
+
+Per-deal or per-period bonuses for specific actions: bring leads, attend events, certify staff.
+
+**Pros:** Highly targetable. Rewards specific behaviors you want.
+**Cons:** Easy to game; admin overhead high; partners often expect it without producing.
+
+### Typical mix
+
+| Partner type | Front-end | Back-end | MDF/SPIFF |
+|--------------|-----------|----------|-----------|
+| Reseller (transactional) | 70-80% of total comp | 10-20% | 5-10% |
+| VAR (consultative selling) | 50-60% | 20-30% | 10-20% |
+| Distributor (volume play) | 80-90% | 5-15% | 5% |
+| ISV / Embedded | n/a (rev share) | 100% | 0 |
+| MSP | 40-60% | 20-30% | 10-30% |
+
+---
+
+## Channel conflict
+
+Channel conflict happens when multiple sales paths chase the same customer. Common forms:
+
+### Direct-vs-partner conflict
+
+| Scenario | Resolution pattern |
+|----------|---------------------|
+| Direct rep finds opportunity also touched by partner | Deal registration: first to register wins; partner gets credit if they brought it |
+| Partner finds direct customer | If direct is already engaged: partner deferred (with consolation MDF perhaps); if not: partner leads |
+| Customer asks for direct after partner-led pilot | Honor partner relationship for term; transition at next renewal if appropriate |
+
+### Partner-vs-partner conflict
+
+| Scenario | Resolution pattern |
+|----------|---------------------|
+| Two resellers both pursuing same account | First-registered wins; second is offered alternative leads / regional swap |
+| Vertical specialist vs geographic | Vertical wins (customer values vertical expertise more) |
+| New partner pursues incumbent partner&#x27;s customer | Incumbent has right of first refusal for 90 days |
+
+### Marketplace-vs-direct conflict
+
+Customer can buy via AWS Marketplace OR direct. If price is lower direct, customer feels gamed. If price is same, why not just use marketplace? Common resolution:
+
+- **Same price** direct vs marketplace (customer doesn&#x27;t get punished for procurement choice)
+- **Quota credit** to the direct rep when customer chooses marketplace (so rep isn&#x27;t disincentivized)
+- **Marketplace listing visibility** as a value-add, not as a different pricing channel
+
+See [references/channel-conflict-resolution.md](references/channel-conflict-resolution.md) for the full conflict-resolution playbook including deal registration process, neutral arbitration, conflict-of-interest disclosure.
+
+---
+
+## Clarify First
+
+Before modeling the channel economics, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Channel model(s) in scope** — direct, reseller/VAR, distributor, marketplace, OEM, or MSP (sets which decision-tree branch and TCO comparison to run)
+- [ ] **Target ACV / price point** — sub-$10k vs mid-market vs enterprise (selects the viable channel branch and sizes per-deal margin)
+- [ ] **Fully-loaded cost lines** — COGS %, allocated sales/marketing/ops/support costs (drives the TCO contribution-margin model, not just the headline discount)
+- [ ] **Partner contribution + tier intent** — what the partner does (lead, sell, implement) and whether you&#x27;re designing tiers/rebates (drives tier economics + rebate/SPIFF mix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the model.
+
+## End-to-end workflows
+
+### Workflow: Design a new partner program
+
+1. **Pick channel models** — direct + reseller? marketplace? OEM? — using the decision tree
+2. **Model the economics** — `scripts/channel_margin_calculator.py` per channel option at expected ACV
+3. **Design tier structure** — `scripts/partner_tier_economics.py` to size the gates and benefits
+4. **Define rebate / SPIFF mix** — per tier and partner type
+5. **Write the partner agreement** (with `business-growth/contract-and-proposal-writer`)
+6. **Build channel ops** — deal registration, MDF approval, certification tracking
+7. **Hire channel manager(s)** — usually 1 manager per 10-15 active partners
+8. **Pilot with 3-5 partners** — measure, iterate, then scale
+
+### Workflow: Evaluate a specific partner deal
+
+1. **Inputs**: ACV, partner discount %, expected close, partner&#x27;s contribution (lead source? sales effort? implementation?)
+2. **Calculate net contribution** — `scripts/channel_margin_calculator.py --deal deal.yaml --channel partner`
+3. **Compare to direct alternative** — would this deal have closed direct? at what cost?
+4. **Decide**: approve / counter / decline (often via deal desk if it&#x27;s a non-standard partner discount)
+
+### Workflow: Channel mix analysis
+
+1. **Inputs**: actual revenue by channel for last 4 quarters
+2. **Run mix optimizer** — `scripts/channel_mix_optimizer.py --revenue revenue.csv` examines contribution margin per channel + identifies under-/over-invested channels
+3. **Recommend rebalancing** — e.g., &quot;Reseller channel: 20% of revenue, 8% of contribution margin — reduce investment; marketplace: 15% of revenue, 25% of contribution — increase listing visibility&quot;
+4. **Quarterly review**: present to CRO / CFO
+
+### Workflow: Resolve a channel conflict
+
+1. **Document the conflict** — accounts involved, parties, history
+2. **Apply the registration rule** — first-registered partner wins absent overriding facts
+3. **Consider exceptions** — strategic logo, customer preference, vertical expertise
+4. **Communicate decision** — both parties, with reasoning, in writing
+5. **Compensate the loser** — alternative leads, MDF, regional swap; preserve the relationship
+
+---
+
+## Anti-patterns
+
+- **Direct + partner at same price.** Customer feels punished for not using direct (or vice versa); kills partner motivation. Price-to-customer must be consistent across channels.
+- **Discount-only partner program.** Partners that only get a discount have no skin in your success; treat you as another vendor; switch easily.
+- **Endless partner expansion without enablement.** Signing 200 partners that don&#x27;t sell anything; channel manager headcount can&#x27;t scale; partners stale.
+- **Marketplace as afterthought.** Listing on AWS Marketplace without dedicated investment (listing optimization, co-sell programs) = marketplace generates nothing.
+- **Channel manager as glorified email forwarder.** CM should drive partner pipeline, not just relay leads.
+- **Rebates with no audit.** Partner self-reports revenue; you trust it; reality is 20% off. Build verification.
+- **MDF spent on activities that don&#x27;t drive pipeline.** Partner runs a great event, generates no pipeline. MDF should require pipeline outcome.
+- **Channel conflict policy that isn&#x27;t followed.** Policy says first-registered wins, but exec overrides every time → policy is theater.
+- **Different commission per channel for same deal.** Direct rep gets 8% on $100k deal, channel rep gets 6% on $100k deal — direct rep refuses partner help; channel rep undercut.
+- **OEM / embedded deals priced like resale.** OEM = customer doesn&#x27;t see you at all; ASP can be 50-80% of list. Resale = customer sees you. Different economics; different price points.
+
+---
+
+## Tooling outputs
+
+| Script | Input | Output |
+|--------|-------|--------|
+| `scripts/channel_margin_calculator.py` | Deal spec YAML + channel type | Per-channel net contribution margin, cost line breakdown, comparison vs direct baseline |
+| `scripts/partner_tier_economics.py` | Tier definitions YAML | Per-tier: gross margin to us, gross margin to partner, partner break-even, tier graduation incentive analysis |
+| `scripts/channel_mix_optimizer.py` | Revenue CSV (by channel + quarter) | Per-channel revenue contribution, per-channel margin contribution, recommended rebalancing |
+
+All scripts: stdlib only, argparse CLI, JSON or markdown output.
+
+---
+
+## References
+
+- [channel-models-direct-partner-marketplace.md](references/channel-models-direct-partner-marketplace.md) — 6 channel models in depth + economic structure + when each works
+- [margin-and-tco-frameworks.md](references/margin-and-tco-frameworks.md) — full TCO framework, allocation guidance, per-channel cost models
+- [channel-conflict-resolution.md](references/channel-conflict-resolution.md) — registration process, conflict patterns, arbitration
+
+---
+
+## Related skills
+
+- `business-growth/partnerships-architect` — strategic partnership design (this skill = the economics; that one = the strategy)
+- `business-growth/deal-desk` — approval mechanics for partner deals (this skill = &quot;what does it cost&quot;; deal desk = &quot;should we approve&quot;)
+- `business-growth/pricing-strategy` — sets list pricing that channel economics deviates from
+- `business-growth/revenue-operations` — channel revenue is segmented in RevOps reporting
+- `business-growth/contract-and-proposal-writer` — drafts partner agreements
+- `sales-success/sales-operations` — runs channel ops (deal registration, MDF approval, certification tracking)
+- `c-level-advisor/cs-cro-advisor` — strategic channel-mix decisions are CRO-level
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Channel Economics&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Channel Economics in the Business &amp; Growth domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Channel Economics&quot;**
+   - Description: &quot;Channel economics: design and analyze the financial structure of go-to-market channels. Use when picking a channel mix, modeling partner margin or TCO, designing partner tiers and rebates, or analyzing channel conflict.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/business-growth/channel-economics/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install business-growth/channel-economics ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/business-growth/channel-economics your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/channel-economics/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/channel-economics your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/channel-economics/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/channel-economics your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: business-growth/channel-economics/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/business-growth/channel-economics your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/business-growth/channel-economics your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/business-growth/channel-economics</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python business-growth/channel-economics/scripts/tool_name.py --help</code></pre>
+  
+  
+  <h2>Related Skills in Business &amp; Growth</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/churn-prevention.html" class="skill-card" style="text-decoration:none"><h3>Churn Prevention</h3><p>SaaS churn reduction covering cancel flow design, dynamic save offers, exit survey architecture,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/commercial-policy.html" class="skill-card" style="text-decoration:none"><h3>Commercial Policy</h3><p>Commercial policy: the governance framework defining what terms sales can offer and what...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/competitive-teardown.html" class="skill-card" style="text-decoration:none"><h3>Competitive Teardown</h3><p>Systematic competitor analysis covering product teardowns, 12-dimension scoring rubric, feature...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/competitor-alternatives.html" class="skill-card" style="text-decoration:none"><h3>Competitor Alternatives</h3><p>Create competitor comparison and alternative pages for SEO and sales enablement. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/contract-and-proposal-writer.html" class="skill-card" style="text-decoration:none"><h3>Contract And Proposal Writer</h3><p>Generate business documents — contracts, proposals, SOWs, NDAs, MSAs — with jurisdiction-aware...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/business-growth/customer-success-manager.html" class="skill-card" style="text-decoration:none"><h3>Customer Success Manager</h3><p>Monitors customer health, predicts churn risk, and identifies expansion opportunities using...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/business-growth/channel-economics/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roadmap Communication - Claude Skills</title>
-  <meta name="description" content="Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.">
+  <meta name="description" content="Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board pac">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html">
   <meta property="og:title" content="Roadmap Communication - Claude Skills">
-  <meta property="og:description" content="Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.">
+  <meta property="og:description" content="Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board pac">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Roadmap Communication", "description": "Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Roadmap Communication", "description": "Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Roadmap Communication</h1>
-    <p class="page-subtitle">Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">roadmap</span><span class="tag">communication</span><span class="tag">now-next-later</span><span class="tag">outcome-roadmap</span><span class="tag">marty-cagan</span></div>
+    <p class="page-subtitle">Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,14 +393,12 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Roadmap Communication (Project Management domain).
 
-Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.
+Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- eit
 
 ## Your Key Capabilities
-- When to Use
 - When NOT to Use
-- What changes across variants
 
 ## Frameworks &amp; Templates You Know
 - - Templates for each variant
@@ -424,14 +422,12 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Roadmap Communication (Project Management domain).
 
-Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.
+Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- eit
 
 ## Your Key Capabilities
-- When to Use
 - When NOT to Use
-- What changes across variants
 
 ## Frameworks &amp; Templates You Know
 - - Templates for each variant
@@ -469,11 +465,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- either the executives are bored, customers feel misled, or engineers feel managed.
 
-This skill produces three variants of the same underlying roadmap, each tailored to its audience. The underlying source of truth -- the roadmap data -- stays single. The framing, the level of detail, the risk language, and the visualization all change. The variants share names and identifiers so a customer reference can be traced back through the internal variant to the actual ticket.
+This skill produces three variants of the same underlying roadmap, each tailored to its audience. The underlying source of truth -- the roadmap data -- stays single; the framing, level of detail, risk language, and visualization all change. The variants share names and identifiers so a customer reference can be traced back through the internal variant to the actual ticket. The structural backbone is **Now / Next / Later** (Janna Bastow, ProdPad), which Marty Cagan calls &quot;right-sizing the roadmap&quot; -- forecast confidence decreases with time horizon, so commit explicitly to &quot;Now,&quot; name &quot;Next&quot; by theme, and keep &quot;Later&quot; deliberately fuzzy.
 
-The structural backbone is **Now / Next / Later** (popularized by Janna Bastow at ProdPad and now used widely), which Marty Cagan calls &quot;right-sizing the roadmap&quot; -- forecast confidence decreases with time horizon, so commit explicitly to &quot;Now&quot; items, name &quot;Next&quot; items by theme, and keep &quot;Later&quot; deliberately fuzzy. Each variant exposes a different slice of that backbone.
+## Core Capabilities
 
-### When to Use
+- **Three audience variants** — executive (outcome-led, confidence-rated, 1 page), customer (theme-led, benefit-framed, no firm dates), and internal (feature-led with owners, dependencies, and explicit risk).
+- **Now / Next / Later right-sizing** — encode the confidence gradient and calibrate it per audience.
+- **Outcome-vs-feature framing** — translate features into customer outcomes for the executive and customer variants.
+- **Triangulation check** — trace one Now item across all three variants to guarantee consistent identity and framing.
+
+## When to Use
 
 - **Quarterly roadmap publication** -- the regular cadence where you communicate to multiple audiences.
 - **Pre-board meeting** -- the executive variant feeds the board packet.
@@ -487,149 +488,33 @@ The structural backbone is **Now / Next / Later** (popularized by Janna Bastow a
 - For tactical sprint planning (use `../scrum-master/` outputs).
 - For incident communication or in-flight project status (use `status-update-generator/`).
 
-## The three variants
+## Clarify First
 
-| Variant | Audience | Time horizon detail | Risk framing | Format |
-|---------|----------|---------------------|--------------|--------|
-| **Executive** | Board, exec team, investors | Outcome-led; quarterly | Confidence levels (high/med/low) | 1-page narrative + simple visual |
-| **Customer** | Customers, partners, sales prospects | Theme-led; &quot;this year / later this year / next year&quot; | No risk language; &quot;exploring&quot;, &quot;in development&quot;, &quot;shipping soon&quot; | Themes + benefit statements, no dates beyond current quarter |
-| **Internal** | Engineering, design, support, account teams | Feature-led with dependencies | Explicit risks with mitigations | Detailed table with owners, dependencies, links to PRDs |
+Before generating the variants, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### What changes across variants
+- [ ] **Target audience(s)** — executive, customer, internal, or all three (each is a distinct variant with different detail, framing, and risk language)
+- [ ] **The roadmap source of truth** — Now/Next/Later items with owners and dates (the internal variant is authored first; exec/customer derive from it)
+- [ ] **Date-commitment policy** — what you can promise customers publicly (the customer variant strips firm dates; the exec variant gets confidence ratings instead)
 
-| Element | Executive | Customer | Internal |
-|---------|-----------|----------|----------|
-| **Granularity** | Outcomes (3-7 items) | Themes (5-10 items) | Features (15-50 items) |
-| **Time horizon** | This quarter / next quarter / H2 | Now / Next / Later (themes only) | Sprint-by-sprint for &quot;Now&quot;; quarter for &quot;Next&quot; |
-| **Dates** | Quarter only | Quarter only for &quot;Now&quot;; &quot;later this year&quot; for &quot;Next&quot; | Specific sprint and release dates for &quot;Now&quot; |
-| **Risk** | Confidence per outcome | None (use language like &quot;exploring&quot; / &quot;shipping soon&quot;) | Explicit: tigers, mitigations, dependencies |
-| **Owner** | Exec sponsor per outcome | None | PM, EM, design lead per feature |
-| **Metric** | Outcome metric + target | Benefit statement | KR + leading indicator |
-| **What&#x27;s NOT here** | Implementation detail, risk discussion | Risk, dependencies, internal team names | Marketing language, exec framing |
-| **Visual** | Now/Next/Later 3-column or Gantt-summary | Themed cards or simple Now/Next/Later | Detailed table or Gantt |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## The &quot;right-size the roadmap&quot; principle
+## Quick Start
 
-Marty Cagan&#x27;s observation: **forecast confidence drops sharply with time horizon**. A 2-week commitment can be 90% confident. A 1-quarter commitment is maybe 70%. A 1-year commitment is 30% at best. Pretending otherwise (by promising features 9 months out) trains customers to disbelieve every roadmap you publish.
+1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
+2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
+3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use &quot;exploring / in development / shipping soon.&quot; Use `assets/customer_roadmap_template.md`.
+4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
 
-The Now / Next / Later structure encodes this honesty:
+## References
 
-- **Now (this quarter):** Specific features with committed dates. Build is in flight or starting imminently. High confidence.
-- **Next (next 1-2 quarters):** Themes with named outcomes, but specific features are not committed. Medium confidence.
-- **Later (beyond):** Directions, hypotheses, big bets. Deliberately fuzzy. Low confidence by design.
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Each audience needs this honesty calibrated:
-
-- **Executives** want confidence ratings on each item (so they can plan).
-- **Customers** want forward visibility without firm dates (so they can buy with confidence in the direction).
-- **Internal teams** want explicit dependencies and risks (so they can execute).
-
-## Outcome-based vs feature-based roadmaps
-
-A second axis: **outcomes vs features**. Cagan and Torres both argue for outcome-based roadmaps -- the roadmap promises a customer outcome (&quot;reduce onboarding from 14 days to 3 days&quot;), not a feature (&quot;ship guided onboarding wizard&quot;). Outcomes survive scope changes; features become commitments that bind you to wrong solutions.
-
-| Variant | Default orientation |
-|---------|---------------------|
-| Executive | Outcome-based always |
-| Customer | Mix: themes (outcomes) for Next/Later; specific features for Now (when they are committed) |
-| Internal | Feature-based for execution, but each feature must trace to an outcome |
-
-The translation from feature to outcome is the highest-leverage move a PM can make in roadmap communication. &quot;We are shipping X&quot; is a feature. &quot;Customers can now achieve Y&quot; is an outcome.
-
-## Variant 1: Executive Roadmap
-
-**Purpose:** Build confidence that the team is solving the right problems and is on track.
-
-**Length:** 1 page (slide or memo).
-
-**Structure:**
-
-1. **Header:** Quarter, sponsor, the one-sentence strategy this roadmap serves.
-2. **Now (this quarter) -- 3-5 outcomes:** Each outcome named, with metric target, confidence rating (High/Med/Low), and lead PM.
-3. **Next (next quarter) -- 3-5 outcomes:** Theme-level. No specific features. Confidence is implicit (Medium).
-4. **Later (H2 directions) -- 2-3 big bets:** One line each. Deliberately fuzzy.
-5. **What we are explicitly NOT doing this period:** 2-3 items. Builds credibility by showing tradeoffs.
-
-**Voice:** Direct, plain, confident-but-honest. No marketing adjectives. No &quot;leveraging&quot; or &quot;synergizing.&quot; Bezos memo style.
-
-**Visualization:** Now/Next/Later 3-column or a slim Gantt of the 3-5 Now-quarter outcomes. Avoid swim-lane explosions.
-
-## Variant 2: Customer Roadmap
-
-**Purpose:** Help customers and prospects make confident purchase or expansion decisions; help sales sell direction without overcommitting.
-
-**Length:** 2-5 themed cards (web page or 1-2 slides).
-
-**Structure:**
-
-1. **Header:** &quot;What&#x27;s coming in [year]&quot; -- positions roadmap as a window, not a contract.
-2. **Now (this quarter) -- 3-5 themes with named features:** &quot;Workflow automation: Connect tasks to your CRM with built-in triggers. Available this quarter.&quot;
-3. **Next -- 3-5 themes, features unnamed:** &quot;Reporting: deeper drill-down across teams and saved-view collaboration. Coming later this year.&quot;
-4. **Exploring (Later) -- 2-3 directions:** &quot;Exploring: AI-assisted task creation from meeting notes. Early experiments underway.&quot;
-
-**Voice:** Benefits-led, customer-perspective. No internal team names. No release versions. No risk language. Use directional language (&quot;exploring&quot;, &quot;in development&quot;, &quot;shipping soon&quot;) instead of dates beyond the current quarter.
-
-**Visualization:** Themed cards (Notion / Productboard / Cards format). Avoid Gantt -- it reads as a commitment.
-
-**Important caveats to repeat on the page:**
-
-- &quot;This roadmap is directional and may change as we learn from customers.&quot;
-- &quot;Items in &#x27;Exploring&#x27; are not commitments.&quot;
-- &quot;Dates are based on current planning and may shift.&quot;
-
-## Variant 3: Internal Roadmap
-
-**Purpose:** Coordinate execution across teams; surface risks, dependencies, and capacity issues; enable detailed sprint planning.
-
-**Length:** Detailed table or multi-tab spreadsheet/wiki. No length limit.
-
-**Structure:**
-
-1. **Header:** Quarter, sponsor, strategy reference, link to NSM and OKRs.
-2. **Now (this quarter) -- features by team:**
-   - Feature name, PM, EM, design lead, status, target sprint/release, KR mapped, dependencies, risks
-3. **Next (next 1-2 quarters) -- themes with candidate features:**
-   - Theme, PM, EM, target quarter, dependencies expected, open questions
-4. **Later (H2) -- directions and hypotheses:**
-   - Direction, sponsor, what we&#x27;d need to be true to commit
-5. **Cross-cutting dependencies:** Platform changes, infra work, external vendor work
-6. **Capacity view:** Team commitment vs available capacity per quarter
-
-**Voice:** Direct, candid, complete. Risks named explicitly. Mitigations specified. Dependencies traced. This document trains trust internally and is the source of truth for the other two variants.
-
-**Visualization:** Detailed table (sortable by team, quarter, status). Cross-link to PRDs (`create-prd/`), OKRs (`brainstorm-okrs/`), NSM (`north-star-metric/`), and PR/FAQs (`prfaq/`).
-
-## Workflow
-
-1. **Author the internal variant first.** This is the source of truth. All fields, all risks, all dependencies. Use the template in `assets/internal_roadmap_template.md`.
-2. **Derive the executive variant.** Strip implementation; promote each Now item to its parent outcome; assign confidence ratings; remove dependencies; cap at 1 page.
-3. **Derive the customer variant.** Translate features into customer benefits; strip dates beyond current quarter; remove risk language; use &quot;exploring / in development / shipping soon.&quot;
-4. **Run a triangulation check.** Pick one item in the Now bucket. Trace it from the internal feature to the executive outcome to the customer benefit. The three should be consistent -- different framings of the same thing.
-5. **Distribute with named recipients.** Each variant has a distribution list. The internal variant is wiki-published; executive is in the board packet; customer goes on the public site or in sales decks.
-6. **Re-publish on a fixed cadence.** Quarterly is standard; monthly for fast-moving startups.
-7. **Update the customer variant LAST.** Customer-facing language outlives the items; surprise changes erode trust more than slow updates would.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Sales reps quote internal roadmap dates to prospects | One roadmap is being used by all audiences | Publish three variants; restrict internal-variant access; train sales on the customer variant |
-| Executives say &quot;I do not understand what&#x27;s changing&quot; between roadmap updates | Executive variant is feature-level instead of outcome-level | Rewrite Now items as outcomes; cap at 5 items per quarter |
-| Customers feel misled when a &quot;Later&quot; item never ships | Customer variant uses commitment language for Later items | Use exploratory language (&quot;exploring&quot;, &quot;early experiments&quot;); add the standard caveats line |
-| Engineers feel managed by the customer variant | Customer variant lacks risk and the team feels accountable for the marketing version | Make the internal variant the operational source of truth; route engineering planning off internal only |
-| The three variants drift apart over the quarter | No re-publication cadence; only updated when there&#x27;s &quot;news&quot; | Publish on a fixed quarterly cadence; force the triangulation check at each update |
-| Customer variant has 30 items | Mistaking comprehensiveness for transparency | Cap at 5-10 themes. More items dilute the signal and increase the surface area for &quot;we never shipped X&quot; |
-| Internal variant lacks owners/dates | Created as a marketing asset, not as an execution tool | Make ownership and dates mandatory fields; reject roadmap entries without them |
-
-## Success Criteria
-
-- Every Now-quarter item exists in all three variants with consistent identity (same ID, different framing)
-- The executive variant fits on one page and has 3-5 outcome items per Now-quarter
-- The customer variant uses no internal team names, no dates beyond current quarter, and includes the directional caveats
-- The internal variant has owner, dependencies, risks, and KR mapping for every Now item
-- The triangulation check passes for every published roadmap (each item traces consistently across variants)
-- Roadmaps are republished on a predictable cadence (quarterly minimum)
-- A customer reading the customer variant 6 months later does not feel misled
+- **[references/roadmap-variants-playbook.md](references/roadmap-variants-playbook.md)** — the variant comparison tables, the &quot;right-size the roadmap&quot; principle, outcome-vs-feature framing, the detailed structure for each of the three variants, the authoring workflow, troubleshooting, and success criteria. Read when building or reviewing the variants.
+- **[references/roadmap-communication-guide.md](references/roadmap-communication-guide.md)** — the origin of Now/Next/Later (Bastow), Cagan&#x27;s right-size principle, the outcome-vs-feature debate (Cagan, Torres), and worked examples of all three variants for the same project. Read for theory and full examples.
+- **[references/red-flags.md](references/red-flags.md)** — common ways roadmap artifacts go wrong, each with bad/good examples. Read before publishing any variant.
+- **[assets/executive_roadmap_template.md](assets/executive_roadmap_template.md)** — fill-in template for the executive variant.
+- **[assets/customer_roadmap_template.md](assets/customer_roadmap_template.md)** — fill-in template for the customer variant.
+- **[assets/internal_roadmap_template.md](assets/internal_roadmap_template.md)** — fill-in template for the internal variant (the source of truth).
 
 ## Scope &amp; Limitations
 
@@ -671,13 +556,6 @@ The translation from feature to outcome is the highest-leverage move a PM can ma
 | `../senior-pm/` | Feeds into | Portfolio roll-ups aggregate executive variants across teams |
 | `marketing/` (skills domain) | Hands off to | Customer variant feeds product marketing content calendars and launch comms |
 
-## References
-
-- `references/roadmap-communication-guide.md` -- Now/Next/Later origin, &quot;right-size the roadmap&quot; (Cagan), outcome vs feature roadmaps, and worked examples of all three variants for the same project
-- `assets/executive_roadmap_template.md` -- Fill-in template for the executive variant
-- `assets/customer_roadmap_template.md` -- Fill-in template for the customer variant
-- `assets/internal_roadmap_template.md` -- Fill-in template for the internal variant
-
 ---
 
 ## What I Need You to Do
@@ -704,7 +582,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Roadmap Communication&quot;**
-   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.&quot;
+   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -733,11 +611,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- either the executives are bored, customers feel misled, or engineers feel managed.
 
-This skill produces three variants of the same underlying roadmap, each tailored to its audience. The underlying source of truth -- the roadmap data -- stays single. The framing, the level of detail, the risk language, and the visualization all change. The variants share names and identifiers so a customer reference can be traced back through the internal variant to the actual ticket.
+This skill produces three variants of the same underlying roadmap, each tailored to its audience. The underlying source of truth -- the roadmap data -- stays single; the framing, level of detail, risk language, and visualization all change. The variants share names and identifiers so a customer reference can be traced back through the internal variant to the actual ticket. The structural backbone is **Now / Next / Later** (Janna Bastow, ProdPad), which Marty Cagan calls &quot;right-sizing the roadmap&quot; -- forecast confidence decreases with time horizon, so commit explicitly to &quot;Now,&quot; name &quot;Next&quot; by theme, and keep &quot;Later&quot; deliberately fuzzy.
 
-The structural backbone is **Now / Next / Later** (popularized by Janna Bastow at ProdPad and now used widely), which Marty Cagan calls &quot;right-sizing the roadmap&quot; -- forecast confidence decreases with time horizon, so commit explicitly to &quot;Now&quot; items, name &quot;Next&quot; items by theme, and keep &quot;Later&quot; deliberately fuzzy. Each variant exposes a different slice of that backbone.
+## Core Capabilities
 
-### When to Use
+- **Three audience variants** — executive (outcome-led, confidence-rated, 1 page), customer (theme-led, benefit-framed, no firm dates), and internal (feature-led with owners, dependencies, and explicit risk).
+- **Now / Next / Later right-sizing** — encode the confidence gradient and calibrate it per audience.
+- **Outcome-vs-feature framing** — translate features into customer outcomes for the executive and customer variants.
+- **Triangulation check** — trace one Now item across all three variants to guarantee consistent identity and framing.
+
+## When to Use
 
 - **Quarterly roadmap publication** -- the regular cadence where you communicate to multiple audiences.
 - **Pre-board meeting** -- the executive variant feeds the board packet.
@@ -751,149 +634,33 @@ The structural backbone is **Now / Next / Later** (popularized by Janna Bastow a
 - For tactical sprint planning (use `../scrum-master/` outputs).
 - For incident communication or in-flight project status (use `status-update-generator/`).
 
-## The three variants
+## Clarify First
 
-| Variant | Audience | Time horizon detail | Risk framing | Format |
-|---------|----------|---------------------|--------------|--------|
-| **Executive** | Board, exec team, investors | Outcome-led; quarterly | Confidence levels (high/med/low) | 1-page narrative + simple visual |
-| **Customer** | Customers, partners, sales prospects | Theme-led; &quot;this year / later this year / next year&quot; | No risk language; &quot;exploring&quot;, &quot;in development&quot;, &quot;shipping soon&quot; | Themes + benefit statements, no dates beyond current quarter |
-| **Internal** | Engineering, design, support, account teams | Feature-led with dependencies | Explicit risks with mitigations | Detailed table with owners, dependencies, links to PRDs |
+Before generating the variants, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-### What changes across variants
+- [ ] **Target audience(s)** — executive, customer, internal, or all three (each is a distinct variant with different detail, framing, and risk language)
+- [ ] **The roadmap source of truth** — Now/Next/Later items with owners and dates (the internal variant is authored first; exec/customer derive from it)
+- [ ] **Date-commitment policy** — what you can promise customers publicly (the customer variant strips firm dates; the exec variant gets confidence ratings instead)
 
-| Element | Executive | Customer | Internal |
-|---------|-----------|----------|----------|
-| **Granularity** | Outcomes (3-7 items) | Themes (5-10 items) | Features (15-50 items) |
-| **Time horizon** | This quarter / next quarter / H2 | Now / Next / Later (themes only) | Sprint-by-sprint for &quot;Now&quot;; quarter for &quot;Next&quot; |
-| **Dates** | Quarter only | Quarter only for &quot;Now&quot;; &quot;later this year&quot; for &quot;Next&quot; | Specific sprint and release dates for &quot;Now&quot; |
-| **Risk** | Confidence per outcome | None (use language like &quot;exploring&quot; / &quot;shipping soon&quot;) | Explicit: tigers, mitigations, dependencies |
-| **Owner** | Exec sponsor per outcome | None | PM, EM, design lead per feature |
-| **Metric** | Outcome metric + target | Benefit statement | KR + leading indicator |
-| **What&#x27;s NOT here** | Implementation detail, risk discussion | Risk, dependencies, internal team names | Marketing language, exec framing |
-| **Visual** | Now/Next/Later 3-column or Gantt-summary | Themed cards or simple Now/Next/Later | Detailed table or Gantt |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## The &quot;right-size the roadmap&quot; principle
+## Quick Start
 
-Marty Cagan&#x27;s observation: **forecast confidence drops sharply with time horizon**. A 2-week commitment can be 90% confident. A 1-quarter commitment is maybe 70%. A 1-year commitment is 30% at best. Pretending otherwise (by promising features 9 months out) trains customers to disbelieve every roadmap you publish.
+1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
+2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
+3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use &quot;exploring / in development / shipping soon.&quot; Use `assets/customer_roadmap_template.md`.
+4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
 
-The Now / Next / Later structure encodes this honesty:
+## References
 
-- **Now (this quarter):** Specific features with committed dates. Build is in flight or starting imminently. High confidence.
-- **Next (next 1-2 quarters):** Themes with named outcomes, but specific features are not committed. Medium confidence.
-- **Later (beyond):** Directions, hypotheses, big bets. Deliberately fuzzy. Low confidence by design.
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Each audience needs this honesty calibrated:
-
-- **Executives** want confidence ratings on each item (so they can plan).
-- **Customers** want forward visibility without firm dates (so they can buy with confidence in the direction).
-- **Internal teams** want explicit dependencies and risks (so they can execute).
-
-## Outcome-based vs feature-based roadmaps
-
-A second axis: **outcomes vs features**. Cagan and Torres both argue for outcome-based roadmaps -- the roadmap promises a customer outcome (&quot;reduce onboarding from 14 days to 3 days&quot;), not a feature (&quot;ship guided onboarding wizard&quot;). Outcomes survive scope changes; features become commitments that bind you to wrong solutions.
-
-| Variant | Default orientation |
-|---------|---------------------|
-| Executive | Outcome-based always |
-| Customer | Mix: themes (outcomes) for Next/Later; specific features for Now (when they are committed) |
-| Internal | Feature-based for execution, but each feature must trace to an outcome |
-
-The translation from feature to outcome is the highest-leverage move a PM can make in roadmap communication. &quot;We are shipping X&quot; is a feature. &quot;Customers can now achieve Y&quot; is an outcome.
-
-## Variant 1: Executive Roadmap
-
-**Purpose:** Build confidence that the team is solving the right problems and is on track.
-
-**Length:** 1 page (slide or memo).
-
-**Structure:**
-
-1. **Header:** Quarter, sponsor, the one-sentence strategy this roadmap serves.
-2. **Now (this quarter) -- 3-5 outcomes:** Each outcome named, with metric target, confidence rating (High/Med/Low), and lead PM.
-3. **Next (next quarter) -- 3-5 outcomes:** Theme-level. No specific features. Confidence is implicit (Medium).
-4. **Later (H2 directions) -- 2-3 big bets:** One line each. Deliberately fuzzy.
-5. **What we are explicitly NOT doing this period:** 2-3 items. Builds credibility by showing tradeoffs.
-
-**Voice:** Direct, plain, confident-but-honest. No marketing adjectives. No &quot;leveraging&quot; or &quot;synergizing.&quot; Bezos memo style.
-
-**Visualization:** Now/Next/Later 3-column or a slim Gantt of the 3-5 Now-quarter outcomes. Avoid swim-lane explosions.
-
-## Variant 2: Customer Roadmap
-
-**Purpose:** Help customers and prospects make confident purchase or expansion decisions; help sales sell direction without overcommitting.
-
-**Length:** 2-5 themed cards (web page or 1-2 slides).
-
-**Structure:**
-
-1. **Header:** &quot;What&#x27;s coming in [year]&quot; -- positions roadmap as a window, not a contract.
-2. **Now (this quarter) -- 3-5 themes with named features:** &quot;Workflow automation: Connect tasks to your CRM with built-in triggers. Available this quarter.&quot;
-3. **Next -- 3-5 themes, features unnamed:** &quot;Reporting: deeper drill-down across teams and saved-view collaboration. Coming later this year.&quot;
-4. **Exploring (Later) -- 2-3 directions:** &quot;Exploring: AI-assisted task creation from meeting notes. Early experiments underway.&quot;
-
-**Voice:** Benefits-led, customer-perspective. No internal team names. No release versions. No risk language. Use directional language (&quot;exploring&quot;, &quot;in development&quot;, &quot;shipping soon&quot;) instead of dates beyond the current quarter.
-
-**Visualization:** Themed cards (Notion / Productboard / Cards format). Avoid Gantt -- it reads as a commitment.
-
-**Important caveats to repeat on the page:**
-
-- &quot;This roadmap is directional and may change as we learn from customers.&quot;
-- &quot;Items in &#x27;Exploring&#x27; are not commitments.&quot;
-- &quot;Dates are based on current planning and may shift.&quot;
-
-## Variant 3: Internal Roadmap
-
-**Purpose:** Coordinate execution across teams; surface risks, dependencies, and capacity issues; enable detailed sprint planning.
-
-**Length:** Detailed table or multi-tab spreadsheet/wiki. No length limit.
-
-**Structure:**
-
-1. **Header:** Quarter, sponsor, strategy reference, link to NSM and OKRs.
-2. **Now (this quarter) -- features by team:**
-   - Feature name, PM, EM, design lead, status, target sprint/release, KR mapped, dependencies, risks
-3. **Next (next 1-2 quarters) -- themes with candidate features:**
-   - Theme, PM, EM, target quarter, dependencies expected, open questions
-4. **Later (H2) -- directions and hypotheses:**
-   - Direction, sponsor, what we&#x27;d need to be true to commit
-5. **Cross-cutting dependencies:** Platform changes, infra work, external vendor work
-6. **Capacity view:** Team commitment vs available capacity per quarter
-
-**Voice:** Direct, candid, complete. Risks named explicitly. Mitigations specified. Dependencies traced. This document trains trust internally and is the source of truth for the other two variants.
-
-**Visualization:** Detailed table (sortable by team, quarter, status). Cross-link to PRDs (`create-prd/`), OKRs (`brainstorm-okrs/`), NSM (`north-star-metric/`), and PR/FAQs (`prfaq/`).
-
-## Workflow
-
-1. **Author the internal variant first.** This is the source of truth. All fields, all risks, all dependencies. Use the template in `assets/internal_roadmap_template.md`.
-2. **Derive the executive variant.** Strip implementation; promote each Now item to its parent outcome; assign confidence ratings; remove dependencies; cap at 1 page.
-3. **Derive the customer variant.** Translate features into customer benefits; strip dates beyond current quarter; remove risk language; use &quot;exploring / in development / shipping soon.&quot;
-4. **Run a triangulation check.** Pick one item in the Now bucket. Trace it from the internal feature to the executive outcome to the customer benefit. The three should be consistent -- different framings of the same thing.
-5. **Distribute with named recipients.** Each variant has a distribution list. The internal variant is wiki-published; executive is in the board packet; customer goes on the public site or in sales decks.
-6. **Re-publish on a fixed cadence.** Quarterly is standard; monthly for fast-moving startups.
-7. **Update the customer variant LAST.** Customer-facing language outlives the items; surprise changes erode trust more than slow updates would.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Sales reps quote internal roadmap dates to prospects | One roadmap is being used by all audiences | Publish three variants; restrict internal-variant access; train sales on the customer variant |
-| Executives say &quot;I do not understand what&#x27;s changing&quot; between roadmap updates | Executive variant is feature-level instead of outcome-level | Rewrite Now items as outcomes; cap at 5 items per quarter |
-| Customers feel misled when a &quot;Later&quot; item never ships | Customer variant uses commitment language for Later items | Use exploratory language (&quot;exploring&quot;, &quot;early experiments&quot;); add the standard caveats line |
-| Engineers feel managed by the customer variant | Customer variant lacks risk and the team feels accountable for the marketing version | Make the internal variant the operational source of truth; route engineering planning off internal only |
-| The three variants drift apart over the quarter | No re-publication cadence; only updated when there&#x27;s &quot;news&quot; | Publish on a fixed quarterly cadence; force the triangulation check at each update |
-| Customer variant has 30 items | Mistaking comprehensiveness for transparency | Cap at 5-10 themes. More items dilute the signal and increase the surface area for &quot;we never shipped X&quot; |
-| Internal variant lacks owners/dates | Created as a marketing asset, not as an execution tool | Make ownership and dates mandatory fields; reject roadmap entries without them |
-
-## Success Criteria
-
-- Every Now-quarter item exists in all three variants with consistent identity (same ID, different framing)
-- The executive variant fits on one page and has 3-5 outcome items per Now-quarter
-- The customer variant uses no internal team names, no dates beyond current quarter, and includes the directional caveats
-- The internal variant has owner, dependencies, risks, and KR mapping for every Now item
-- The triangulation check passes for every published roadmap (each item traces consistently across variants)
-- Roadmaps are republished on a predictable cadence (quarterly minimum)
-- A customer reading the customer variant 6 months later does not feel misled
+- **[references/roadmap-variants-playbook.md](references/roadmap-variants-playbook.md)** — the variant comparison tables, the &quot;right-size the roadmap&quot; principle, outcome-vs-feature framing, the detailed structure for each of the three variants, the authoring workflow, troubleshooting, and success criteria. Read when building or reviewing the variants.
+- **[references/roadmap-communication-guide.md](references/roadmap-communication-guide.md)** — the origin of Now/Next/Later (Bastow), Cagan&#x27;s right-size principle, the outcome-vs-feature debate (Cagan, Torres), and worked examples of all three variants for the same project. Read for theory and full examples.
+- **[references/red-flags.md](references/red-flags.md)** — common ways roadmap artifacts go wrong, each with bad/good examples. Read before publishing any variant.
+- **[assets/executive_roadmap_template.md](assets/executive_roadmap_template.md)** — fill-in template for the executive variant.
+- **[assets/customer_roadmap_template.md](assets/customer_roadmap_template.md)** — fill-in template for the customer variant.
+- **[assets/internal_roadmap_template.md](assets/internal_roadmap_template.md)** — fill-in template for the internal variant (the source of truth).
 
 ## Scope &amp; Limitations
 
@@ -935,13 +702,6 @@ The translation from feature to outcome is the highest-leverage move a PM can ma
 | `../senior-pm/` | Feeds into | Portfolio roll-ups aggregate executive variants across teams |
 | `marketing/` (skills domain) | Hands off to | Customer variant feeds product marketing content calendars and launch comms |
 
-## References
-
-- `references/roadmap-communication-guide.md` -- Now/Next/Later origin, &quot;right-size the roadmap&quot; (Cagan), outcome vs feature roadmaps, and worked examples of all three variants for the same project
-- `assets/executive_roadmap_template.md` -- Fill-in template for the executive variant
-- `assets/customer_roadmap_template.md` -- Fill-in template for the customer variant
-- `assets/internal_roadmap_template.md` -- Fill-in template for the internal variant
-
 ---
 
 ## What I Need You to Do
@@ -968,7 +728,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Roadmap Communication&quot;**
-   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal variants of a single roadmap with appropriate framing, detail level, and risk language for each.&quot;
+   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1026,8 +786,11 @@ cp -r Claude-Skills/project-management/execution/roadmap-communication your-proj
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/roadmap-communication</code></pre>
 </div>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2>1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
+2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
+3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use "exploring / in development / shipping soon." Use `assets/customer_roadmap_template.md`.
+4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/roadmap-communication/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

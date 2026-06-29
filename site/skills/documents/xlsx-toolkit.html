@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xlsx Toolkit - Claude Skills</title>
-  <meta name="description" content="Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model,">
+  <meta name="description" content="Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally,">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html">
   <meta property="og:title" content="Xlsx Toolkit - Claude Skills">
-  <meta property="og:description" content="Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model,">
+  <meta property="og:description" content="Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally,">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Xlsx Toolkit", "description": "Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.", "applicationCategory": "Documents", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Xlsx Toolkit", "description": "Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.", "applicationCategory": "Documents", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Xlsx Toolkit</h1>
-    <p class="page-subtitle">Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.</p>
+    <p class="page-subtitle">Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.</p>
     <div class="badge-bar"><span class="badge badge-domain">Documents</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">xlsx</span><span class="tag">OOXML</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Xlsx Toolkit (Documents domain).
 
-Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.
+Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.
 
 Audit `.xlsx` files using the standard library only — no `openpyxl` required. Reads OOXML directly via `zipfile` + `xml.etree`. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -425,7 +425,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Xlsx Toolkit (Documents domain).
 
-Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.
+Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.
 
 Audit `.xlsx` files using the standard library only — no `openpyxl` required. Reads OOXML directly via `zipfile` + `xml.etree`. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -489,6 +489,16 @@ xlsx, Excel, spreadsheet, workbook, financial model, formula audit, hidden sheet
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose (pre-send leak check, financial-model review, or handoff portability check)** — selects the workflow and what you flag
+- [ ] **Recipient context (external partner, another team, their machine)** — sets the tolerance for hidden sheets and external links
+- [ ] **Which sheets are inputs vs calculations (for model review)** — drives where to focus formula-density reading
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash
@@ -620,7 +630,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Xlsx Toolkit&quot;**
-   - Description: &quot;Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.&quot;
+   - Description: &quot;Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -667,6 +677,16 @@ xlsx, Excel, spreadsheet, workbook, financial model, formula audit, hidden sheet
 
 ---
 
+## Clarify First
+
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit purpose (pre-send leak check, financial-model review, or handoff portability check)** — selects the workflow and what you flag
+- [ ] **Recipient context (external partner, another team, their machine)** — sets the tolerance for hidden sheets and external links
+- [ ] **Which sheets are inputs vs calculations (for model review)** — drives where to focus formula-density reading
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Quick Start
 
 ```bash
@@ -798,7 +818,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Xlsx Toolkit&quot;**
-   - Description: &quot;Audit Microsoft Excel (.xlsx) workbooks for sheet count, cell count, formula density, external references, named ranges, hidden sheets, and data validation rules. Use when reviewing a financial model, sharing a workbook externally, or when the user mentions xlsx audit, spreadsheet review, formula audit, or workbook leakage check.&quot;
+   - Description: &quot;Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges, hidden sheets, and data validation. Use when reviewing a financial model, sharing a workbook externally, or checking for data leakage.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -864,7 +884,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 Outputs: sheet count and names, hidden-sheet count, cell count per sheet, formula count per sheet, external link count, named range count, data validation rule count.
 
 ---
-  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for word count, heading hierarchy, comments, tracked...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density per slide, embedded images,...</p></a></div>
+  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density, embedded images and fonts, hidden...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/documents/xlsx-toolkit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

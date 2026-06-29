@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Backlog Refinement</h1>
     <p class="page-subtitle">Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">invest</span><span class="tag">story-splitting</span><span class="tag">definition-of-ready</span><span class="tag">definition-of-done</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -395,21 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.
 
-Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: how to grade stories again
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- The 9 splitting recipes (Richard Lawrence)
-- The SPIDR alternative (Mike Cohn)
-- Splitting anti-patterns to avoid
-- Recommended DoR template
-
-## Frameworks &amp; Templates You Know
-- Recommended DoR template
-- Recommended DoD template
-- - Definition of Ready and Definition of Done templates and enforcement protocol
-- - Backlog prioritization or sequencing (use `prioritization-frameworks/`)
+Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: grade stories against INVE
 
 ## How to Help
 When the user asks for help in this domain:
@@ -431,21 +417,7 @@ Start by asking the user what they need help with.">
 
 Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.
 
-Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: how to grade stories again
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- The 9 splitting recipes (Richard Lawrence)
-- The SPIDR alternative (Mike Cohn)
-- Splitting anti-patterns to avoid
-- Recommended DoR template
-
-## Frameworks &amp; Templates You Know
-- Recommended DoR template
-- Recommended DoD template
-- - Definition of Ready and Definition of Done templates and enforcement protocol
-- - Backlog prioritization or sequencing (use `prioritization-frameworks/`)
+Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: grade stories against INVE
 
 ## How to Help
 When the user asks for help in this domain:
@@ -477,187 +449,64 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: how to grade stories against INVEST, how to split stories vertically (so each slice ships value end-to-end), and how to keep a working Definition of Ready and Definition of Done that prevent half-baked work from entering or leaving a sprint.
+Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: grade stories against INVEST, split them vertically (so each slice ships value end-to-end), and keep a working Definition of Ready and Definition of Done that prevent half-baked work from entering or leaving a sprint.
 
-The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog file against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are sprint-ready; 3-4 need targeted refinement; below 3 need to be reworked or returned to discovery.
+The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are sprint-ready; 3-4 need targeted refinement; below 3 go back to discovery.
 
-This is a complement to `wwas/` (the Why-What-Acceptance format) and `job-stories/` (the JTBD format). Either format produces stories; this skill grades them and gets them sprint-ready.
+This complements `wwas/` (Why-What-Acceptance format) and `job-stories/` (JTBD format). Either format produces stories; this skill grades them and gets them sprint-ready.
 
-### When to Use
+## Core Capabilities
 
-- **Weekly refinement session** -- Standard ritual: grade next-sprint candidates against INVEST and split anything too large.
-- **Backlog hygiene sweep** -- Quarterly: re-grade the top 30 backlog items and retire what no longer connects to current strategy.
-- **Sprint planning input** -- Before planning: confirm all candidates pass DoR.
-- **New team onboarding** -- A new team needs a shared definition of &quot;ready&quot; and &quot;done&quot; to ship predictably.
-- **Velocity diagnosis** -- If sprint completion is erratic, refinement quality is usually the cause; this skill is the diagnostic.
+- **INVEST grading** — score each story across Independent, Negotiable, Valuable, Estimable, Small, Testable (0-6) and triage by score.
+- **Vertical story splitting** — the 9 Lawrence recipes + SPIDR taxonomy; avoid horizontal (layer/team/sprint) splits.
+- **Definition of Ready / Done** — input and output quality gates with enforceable templates.
+- **Refinement session structure** — cadence, candidate volume, triage routing into discovery or planning.
 
-### When NOT to Use
+## When to Use
 
-- For pure technical task lists with no user-facing outcome -- INVEST applies loosely; use a simpler checklist.
-- For ad-hoc bug triage -- bugs follow a different lifecycle (triage &gt; prioritize &gt; fix) than feature stories.
-- When the work has not been scoped yet -- send it back to `discovery/` skills before refining.
+- **Weekly refinement session** -- grade next-sprint candidates against INVEST and split anything too large.
+- **Backlog hygiene sweep** -- re-grade the top 30 items and retire what no longer connects to strategy.
+- **Sprint planning input** -- confirm all candidates pass DoR before planning.
+- **New team onboarding** -- establish a shared definition of &quot;ready&quot; and &quot;done.&quot;
+- **Velocity diagnosis** -- erratic sprint completion usually traces to refinement quality.
 
-## The INVEST Criteria
+**When NOT to use:** pure technical task lists with no user-facing outcome (use a simpler checklist); ad-hoc bug triage (different lifecycle); unscoped work (send to `discovery/` first).
 
-Bill Wake&#x27;s INVEST acronym (2003) defines the six properties of a high-quality story:
+## Clarify First
 
-| Letter | Property | What it means | Quick test |
-|--------|----------|---------------|------------|
-| **I** | **Independent** | Can be delivered without waiting for another story | &quot;Can this ship alone? If no, what is the dependency?&quot; |
-| **N** | **Negotiable** | Implementation is open to discussion | &quot;Does this prescribe HOW, or only WHAT and WHY?&quot; |
-| **V** | **Valuable** | Delivers value to a user or business | &quot;If we built only this and nothing else, who benefits?&quot; |
-| **E** | **Estimable** | The team can size effort with reasonable confidence | &quot;Can two engineers independently estimate within ~2x?&quot; |
-| **S** | **Small** | Fits within one sprint (typically 1-5 days of effort) | &quot;Can a pair finish this in &lt;5 days?&quot; |
-| **T** | **Testable** | Acceptance criteria are observable and verifiable | &quot;How would QA prove this is done?&quot; |
+Before grading the backlog, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A story scoring 6/6 is sprint-ready. A story scoring 5/6 with a soft fail on one criterion is usually safe to admit if the team agrees on the gap. Anything 4 or below needs a refinement pass.
+- [ ] **The stories** — the actual backlog items in the user&#x27;s words, with their acceptance criteria (drives every INVEST score and which slicing recipe applies)
+- [ ] **Team&#x27;s Definition of Ready** — what &quot;ready&quot; means for THIS team (DoR must be team-authored to be enforced; sets the promote/refine/return gate)
+- [ ] **Sprint size / &quot;small enough&quot; bar** — sprint length and rough capacity (sets how far a story must be split before it counts as Small)
 
-## Vertical Slicing and Story Splitting
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-The most common refinement failure is **horizontal slicing** -- splitting a story by layer (DB, API, UI, infra) rather than by user outcome. Horizontal slices fail INVEST-V (no slice delivers user value alone) and INVEST-I (every slice depends on the others).
+## Quick Start
 
-**Vertical slices** cut through every layer to deliver an end-to-end thin sliver of user value. Each slice is independently shippable and independently valuable.
+```bash
+python scripts/refinement_scorer.py --input backlog.json --format markdown   # grade a backlog
+python scripts/refinement_scorer.py --demo --format markdown                 # inspect demo + output
+```
 
-### The 9 splitting recipes (Richard Lawrence)
+Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing criteria, **0-2** send back to discovery.
 
-Richard Lawrence&#x27;s Story Splitting Flowchart enumerates 9 reliable patterns. Use them in this priority order:
+## References
 
-| # | Pattern | Use when | Example |
-|---|---------|----------|---------|
-| 1 | **Workflow steps** | The story spans a multi-step process | &quot;Checkout&quot; → &quot;Add to cart&quot; / &quot;Pay&quot; / &quot;Confirm&quot; |
-| 2 | **Business rule variations** | The story covers many rules | &quot;Discount&quot; → &quot;Loyalty discount&quot; / &quot;Volume discount&quot; / &quot;Promo code&quot; |
-| 3 | **Happy / unhappy paths** | Error handling adds complexity | &quot;Submit form&quot; → &quot;Submit valid form&quot; / &quot;Handle validation errors&quot; |
-| 4 | **Input options / platforms** | Multiple inputs or platforms | &quot;Search&quot; → &quot;Search via keyword&quot; / &quot;Search via filters&quot; / &quot;Search via voice&quot; |
-| 5 | **Data types or parameters** | Multiple data variations | &quot;Export report&quot; → &quot;Export CSV&quot; / &quot;Export PDF&quot; / &quot;Export XLSX&quot; |
-| 6 | **Operations (CRUD)** | The story covers multiple ops | &quot;Manage users&quot; → &quot;Create user&quot; / &quot;Edit user&quot; / &quot;Delete user&quot; |
-| 7 | **Test scenarios / cases** | Test plan reveals natural splits | &quot;Login&quot; → &quot;Login with email&quot; / &quot;Login with SSO&quot; / &quot;Login with MFA&quot; |
-| 8 | **Defer performance** | The simple version works | &quot;Search 1M records&quot; → &quot;Search basic&quot; (v1) / &quot;Optimize search&quot; (v2) |
-| 9 | **Spike (last resort)** | The team cannot estimate | A time-boxed investigation, then re-split |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-### The SPIDR alternative (Mike Cohn)
-
-Mike Cohn&#x27;s SPIDR mnemonic covers a similar space with five buckets: **S**pikes, **P**aths, **I**nterfaces, **D**ata, **R**ules. Use whichever taxonomy your team finds memorable; the patterns overlap.
-
-### Splitting anti-patterns to avoid
-
-- **Splitting by layer.** &quot;Backend API&quot; / &quot;Frontend UI&quot; / &quot;Database migration&quot; are tasks, not stories. They violate INVEST-V.
-- **Splitting by team.** If only &quot;the backend team&quot; can deliver a slice, the slice is not independently valuable.
-- **Splitting by sprint.** Forcing a 10-day story into &quot;Sprint 1 part&quot; and &quot;Sprint 2 part&quot; is scheduling, not splitting.
-- **Splitting too thin.** A 2-hour story is not a story; it is a task. Roll it back up.
-
-## Definition of Ready (DoR)
-
-The DoR is the team&#x27;s agreement on what a story must satisfy before it can enter a sprint. It is the **input quality gate**.
-
-### Recommended DoR template
-
-A story is Ready when:
-
-- [ ] Title is descriptive and specific (no &quot;Implement X&quot;)
-- [ ] Why statement references a specific objective, OKR, or customer outcome
-- [ ] Description is 1-2 paragraphs and serves as a reminder of the refinement discussion
-- [ ] Acceptance criteria: at least 4, each describing an observable user-facing outcome
-- [ ] INVEST score &gt;= 5/6 (verified by `refinement_scorer.py` or facilitated review)
-- [ ] Dependencies on other stories or teams are identified and noted
-- [ ] Design assets linked (or marked &quot;TBD by [date]&quot; with owner)
-- [ ] Estimated by the team using their preferred unit (story points, t-shirt, days)
-- [ ] No open blocker questions
-- [ ] Tagged with sprint goal it contributes to
-
-### DoR anti-patterns
-
-- **Too strict** -- a 20-item DoR creates a backlog of &quot;almost ready&quot; stories. Cap at 10.
-- **Unenforced** -- a DoR that planning ignores is theater. Enforce: stories that fail DoR are removed from the sprint candidate list, not &quot;negotiated in.&quot;
-- **One-size-fits-all** -- spikes, bugs, and feature stories have different DoRs. Keep three short checklists rather than one long one.
-
-## Definition of Done (DoD)
-
-The DoD is the team&#x27;s agreement on what a story must satisfy before it can be called complete. It is the **output quality gate** and is typically uniform across all stories.
-
-### Recommended DoD template
-
-A story is Done when:
-
-- [ ] All acceptance criteria pass in the deployed environment
-- [ ] Code merged to main branch (or release branch per release process)
-- [ ] Automated tests written and passing (unit + integration for changed paths)
-- [ ] Code reviewed and approved by at least one other engineer
-- [ ] Manual QA pass (or QA sign-off if separate QA exists)
-- [ ] Documentation updated (help center, internal runbook, API docs, as applicable)
-- [ ] Feature flag wired (if behind a flag) or release-notes entry drafted
-- [ ] Analytics or telemetry events instrumented (so we can measure the outcome)
-- [ ] Accessibility check pass (WCAG AA for user-facing UI)
-- [ ] Product owner has accepted the story
-
-### DoD anti-patterns
-
-- **&quot;Done&quot; but not deployed** -- a story that is merged but not in front of a user is not done. Require deployment in the DoD.
-- **No instrumentation** -- shipping without telemetry means you cannot measure the outcome. Require analytics for any value-claim story.
-- **Skipping accessibility** -- a11y debt compounds. Require WCAG AA on every user-facing change.
-
-## Workflow
-
-1. **Pull candidates from the backlog.** Aim for 1.5x the team&#x27;s velocity in candidates per refinement session.
-2. **Score each candidate with `refinement_scorer.py`.** Use `--input backlog.json --format markdown` to get a per-story INVEST grade.
-3. **Triage by score:**
-   - **5-6:** Promote to &quot;Refined&quot; lane.
-   - **3-4:** Discuss in session, address the failing criteria.
-   - **0-2:** Send back to discovery (`discovery/brainstorm-ideas/` or `discovery/identify-assumptions/`) -- the work has not been scoped enough.
-4. **Split oversized stories.** Apply the 9 Lawrence patterns in priority order. Each new slice must independently pass INVEST-V and INVEST-S.
-5. **Enforce the DoR.** Anything failing DoR at planning is removed from the candidate list, not &quot;negotiated in.&quot;
-6. **Enforce the DoD at review.** Stories that miss any DoD bullet are not &quot;almost done&quot; -- they roll to the next sprint.
-7. **Hand off refined stories to sprint planning.** A well-refined backlog reduces planning to: pick the top N stories that fit capacity.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `refinement_scorer.py` | Grade stories against INVEST and emit readiness verdicts | `python scripts/refinement_scorer.py --input backlog.json --format markdown` |
-| `refinement_scorer.py --demo` | Inspect demo data and output format | `python scripts/refinement_scorer.py --demo --format markdown` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Refinement sessions run long and produce few refined stories | Too many candidates per session; team trying to refine everything at once | Cap at 1.5x velocity in candidates; spend max 2 minutes per story on initial INVEST grade; deep-refine only those scoring 3-4 |
-| Same stories appear in 3+ refinement sessions without progress | Story is too vague; team lacks information; or story belongs in discovery | Apply the &quot;3-strike rule&quot; -- if a story fails to refine three sessions in a row, send to `discovery/identify-assumptions/` to reframe |
-| Sprint planning becomes the refinement session | DoR is not enforced; pressure to &quot;make the sprint full&quot; overrides quality | Empower the team to leave the sprint under-full rather than admit DoR-failing stories; track planning duration as a velocity proxy |
-| Splits produce horizontal slices (API / UI / DB) | Team defaults to architecture decomposition; PM does not push back | Use the 9 Lawrence patterns explicitly; require each slice to answer &quot;who benefits if this is the only thing we ship?&quot; |
-| Stories pass DoD but value does not materialize | Acceptance criteria describe activity, not outcome; no telemetry | Rewrite acceptance criteria as observable user outcomes; require telemetry/analytics in the DoD |
-| Estimates vary wildly across the team | INVEST-Estimable failure; story too vague or too large | Re-refine with a spike if needed; split into smaller slices that two engineers can size within 2x of each other |
-| `refinement_scorer.py` gives 6/6 but story still feels risky | Score covers form, not substance; risk is in the assumptions, not the format | Use `discovery/identify-assumptions/` and `discovery/pre-mortem/` for substantive risk; INVEST is necessary but not sufficient |
-
-## Success Criteria
-
-- 80%+ of stories entering sprint planning score 5/6 or 6/6 on INVEST
-- Refinement session length stays under 60 minutes per week, per team
-- DoR and DoD are reviewed and updated at least once per quarter
-- Story splits produce vertical slices in 90%+ of cases (each slice independently valuable)
-- Sprint planning meetings take less than half the duration of refinement (because refinement did the work)
-- Rolled-over story rate (stories that miss the sprint) below 15% sustained
-- Stories scoring below 3 on INVEST are sent back to discovery rather than forced into a sprint
+- **[references/refinement-playbook.md](references/refinement-playbook.md)** — full INVEST table, the 9 splitting recipes + SPIDR, DoR/DoD templates and anti-patterns, the step-by-step workflow, the `refinement_scorer.py` reference (flags, input JSON, scoring rubric), troubleshooting, and success criteria. Read when running a refinement session or wiring the scorer.
+- **[references/invest-and-splitting-guide.md](references/invest-and-splitting-guide.md)** — deep dive on INVEST (Wake), the 9 Lawrence patterns, SPIDR (Cohn), and worked horizontal-vs-vertical split examples. Read when a story is hard to split or a slice feels wrong.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how refinement output goes wrong, why it&#x27;s bad, and how to fix it. Read when reviewing a refined backlog or diagnosing recurring quality issues.
+- **assets/refinement_checklist.md** — ready-to-use DoR and DoD checklists plus a refinement session agenda. Use during a live session.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- INVEST quality grading of individual stories
-- Vertical story splitting using the 9 Lawrence patterns and SPIDR taxonomy
-- Definition of Ready and Definition of Done templates and enforcement protocol
-- Refinement session structure and cadence guidance
-- Python tool that grades backlog JSON against INVEST and emits per-story verdicts
+**In Scope:** INVEST grading of individual stories; vertical splitting (9 Lawrence patterns + SPIDR); DoR/DoD templates and enforcement; refinement session structure and cadence; the Python scorer.
 
-**Out of Scope:**
-- Authoring stories from scratch (use `wwas/` or `job-stories/`)
-- Backlog prioritization or sequencing (use `prioritization-frameworks/`)
-- Sprint planning, capacity calculation, or velocity forecasting (use `../scrum-master/`)
-- Discovery, problem framing, or opportunity definition (use `discovery/` skills)
-- Story estimation techniques (Planning Poker, Affinity Estimation -- covered in `agile-coach/`)
+**Out of Scope:** authoring stories from scratch (`wwas/`, `job-stories/`); prioritization/sequencing (`prioritization-frameworks/`); sprint planning/capacity/velocity (`../scrum-master/`); discovery and problem framing (`discovery/`); estimation techniques (`agile-coach/`).
 
-**Important Caveats:**
-- INVEST is a heuristic, not a guarantee. A story can score 6/6 and still be the wrong story to build. Use this skill alongside `prioritization-frameworks/` and `discovery/identify-assumptions/` for full coverage.
-- The 9 Lawrence patterns work for product stories. Pure technical infrastructure work may follow different splitting heuristics (component boundaries, deployment risk).
-- DoR and DoD must be team-authored to be enforced. Imposing an external DoR/DoD without team buy-in produces theater, not quality.
-- The Python scorer grades structural form (does the story have a Why, a What, and 4+ ACs?), not strategic substance. A 6/6 story can still be misaligned with strategy.
+**Caveats:** INVEST is a heuristic — a 6/6 story can still be the wrong story (pair with `prioritization-frameworks/` and `discovery/identify-assumptions/`). DoR/DoD must be team-authored to be enforced. The scorer grades structural form, not strategic substance.
 
 ## Integration Points
 
@@ -665,66 +514,12 @@ A story is Done when:
 |-------------|-----------|-------------|
 | `execution/wwas/` | Receives from | WWAS-format stories enter refinement to be graded and split |
 | `execution/job-stories/` | Receives from | Job stories enter refinement to be graded and split |
-| `execution/prioritization-frameworks/` | Pairs with | Prioritization sets the sequence; refinement makes the top N actually executable |
-| `discovery/identify-assumptions/` | Sends to | Stories scoring 0-2 are sent back to discovery for assumption mapping |
+| `execution/prioritization-frameworks/` | Pairs with | Prioritization sets the sequence; refinement makes the top N executable |
+| `discovery/identify-assumptions/` | Sends to | Stories scoring 0-2 are sent back for assumption mapping |
 | `discovery/brainstorm-experiments/` | Sends to | Stories with unvalidated assumptions become experiment candidates |
 | `../scrum-master/` | Feeds into | Refined stories feed sprint planning; refinement quality drives velocity stability |
 | `execution/status-update-generator/` | Indirect | DoD compliance feeds the &quot;what&#x27;s done this week&quot; section of status updates |
 | `../jira-expert/` | Pairs with | Refined stories become Jira tickets with structured fields and DoR/DoD checklists |
-
-## Tool Reference
-
-### refinement_scorer.py
-
-Grades each story in a JSON backlog file against the six INVEST criteria and emits a readiness score (0-6) per story plus an aggregate readiness summary for the backlog.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON file containing backlog items |
-| `--demo` | flag | false | Use built-in demo backlog data |
-| `--format` | choice | markdown | Output format: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--threshold` | int | 5 | Minimum score for a story to be flagged &quot;READY&quot; (default 5/6) |
-
-### Input JSON shape
-
-```json
-{
-  &quot;stories&quot;: [
-    {
-      &quot;id&quot;: &quot;STORY-1&quot;,
-      &quot;title&quot;: &quot;Add SSO login for enterprise users&quot;,
-      &quot;why&quot;: &quot;Enterprise customers cite missing SSO as the #1 blocker; supports $2M ARR expansion target&quot;,
-      &quot;what&quot;: &quot;Add SAML 2.0 SSO option to the login page. Users with company email domains see SSO as the primary login method; password login remains as fallback.&quot;,
-      &quot;acceptance_criteria&quot;: [
-        &quot;Users with configured domains see SSO as primary login option&quot;,
-        &quot;SAML 2.0 IdP-initiated flow works for Okta and Azure AD&quot;,
-        &quot;Failed SSO falls back to password with helpful error&quot;,
-        &quot;Audit log records every SSO login attempt&quot;
-      ],
-      &quot;estimate_days&quot;: 4,
-      &quot;has_design&quot;: true,
-      &quot;dependencies&quot;: []
-    }
-  ]
-}
-```
-
-### Scoring rubric
-
-| Criterion | Passes if... |
-|-----------|--------------|
-| Independent | `dependencies` field is empty or omitted |
-| Negotiable | `what` field is present and under 800 characters (long whats prescribe implementation) |
-| Valuable | `why` field is present and references a metric, OKR, customer, or business outcome (heuristic) |
-| Estimable | `estimate_days` field is present and is a positive number |
-| Small | `estimate_days` is between 1 and 5 |
-| Testable | `acceptance_criteria` field contains at least 4 items |
-
-## References
-
-- `references/invest-and-splitting-guide.md` -- Deep dive on INVEST, the 9 Lawrence patterns, SPIDR, and worked split examples
-- `assets/refinement_checklist.md` -- Ready-to-use DoR and DoD checklists plus a refinement session agenda
 
 ---
 
@@ -779,187 +574,64 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: how to grade stories against INVEST, how to split stories vertically (so each slice ships value end-to-end), and how to keep a working Definition of Ready and Definition of Done that prevent half-baked work from entering or leaving a sprint.
+Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: grade stories against INVEST, split them vertically (so each slice ships value end-to-end), and keep a working Definition of Ready and Definition of Done that prevent half-baked work from entering or leaving a sprint.
 
-The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog file against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are sprint-ready; 3-4 need targeted refinement; below 3 need to be reworked or returned to discovery.
+The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are sprint-ready; 3-4 need targeted refinement; below 3 go back to discovery.
 
-This is a complement to `wwas/` (the Why-What-Acceptance format) and `job-stories/` (the JTBD format). Either format produces stories; this skill grades them and gets them sprint-ready.
+This complements `wwas/` (Why-What-Acceptance format) and `job-stories/` (JTBD format). Either format produces stories; this skill grades them and gets them sprint-ready.
 
-### When to Use
+## Core Capabilities
 
-- **Weekly refinement session** -- Standard ritual: grade next-sprint candidates against INVEST and split anything too large.
-- **Backlog hygiene sweep** -- Quarterly: re-grade the top 30 backlog items and retire what no longer connects to current strategy.
-- **Sprint planning input** -- Before planning: confirm all candidates pass DoR.
-- **New team onboarding** -- A new team needs a shared definition of &quot;ready&quot; and &quot;done&quot; to ship predictably.
-- **Velocity diagnosis** -- If sprint completion is erratic, refinement quality is usually the cause; this skill is the diagnostic.
+- **INVEST grading** — score each story across Independent, Negotiable, Valuable, Estimable, Small, Testable (0-6) and triage by score.
+- **Vertical story splitting** — the 9 Lawrence recipes + SPIDR taxonomy; avoid horizontal (layer/team/sprint) splits.
+- **Definition of Ready / Done** — input and output quality gates with enforceable templates.
+- **Refinement session structure** — cadence, candidate volume, triage routing into discovery or planning.
 
-### When NOT to Use
+## When to Use
 
-- For pure technical task lists with no user-facing outcome -- INVEST applies loosely; use a simpler checklist.
-- For ad-hoc bug triage -- bugs follow a different lifecycle (triage &gt; prioritize &gt; fix) than feature stories.
-- When the work has not been scoped yet -- send it back to `discovery/` skills before refining.
+- **Weekly refinement session** -- grade next-sprint candidates against INVEST and split anything too large.
+- **Backlog hygiene sweep** -- re-grade the top 30 items and retire what no longer connects to strategy.
+- **Sprint planning input** -- confirm all candidates pass DoR before planning.
+- **New team onboarding** -- establish a shared definition of &quot;ready&quot; and &quot;done.&quot;
+- **Velocity diagnosis** -- erratic sprint completion usually traces to refinement quality.
 
-## The INVEST Criteria
+**When NOT to use:** pure technical task lists with no user-facing outcome (use a simpler checklist); ad-hoc bug triage (different lifecycle); unscoped work (send to `discovery/` first).
 
-Bill Wake&#x27;s INVEST acronym (2003) defines the six properties of a high-quality story:
+## Clarify First
 
-| Letter | Property | What it means | Quick test |
-|--------|----------|---------------|------------|
-| **I** | **Independent** | Can be delivered without waiting for another story | &quot;Can this ship alone? If no, what is the dependency?&quot; |
-| **N** | **Negotiable** | Implementation is open to discussion | &quot;Does this prescribe HOW, or only WHAT and WHY?&quot; |
-| **V** | **Valuable** | Delivers value to a user or business | &quot;If we built only this and nothing else, who benefits?&quot; |
-| **E** | **Estimable** | The team can size effort with reasonable confidence | &quot;Can two engineers independently estimate within ~2x?&quot; |
-| **S** | **Small** | Fits within one sprint (typically 1-5 days of effort) | &quot;Can a pair finish this in &lt;5 days?&quot; |
-| **T** | **Testable** | Acceptance criteria are observable and verifiable | &quot;How would QA prove this is done?&quot; |
+Before grading the backlog, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-A story scoring 6/6 is sprint-ready. A story scoring 5/6 with a soft fail on one criterion is usually safe to admit if the team agrees on the gap. Anything 4 or below needs a refinement pass.
+- [ ] **The stories** — the actual backlog items in the user&#x27;s words, with their acceptance criteria (drives every INVEST score and which slicing recipe applies)
+- [ ] **Team&#x27;s Definition of Ready** — what &quot;ready&quot; means for THIS team (DoR must be team-authored to be enforced; sets the promote/refine/return gate)
+- [ ] **Sprint size / &quot;small enough&quot; bar** — sprint length and rough capacity (sets how far a story must be split before it counts as Small)
 
-## Vertical Slicing and Story Splitting
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-The most common refinement failure is **horizontal slicing** -- splitting a story by layer (DB, API, UI, infra) rather than by user outcome. Horizontal slices fail INVEST-V (no slice delivers user value alone) and INVEST-I (every slice depends on the others).
+## Quick Start
 
-**Vertical slices** cut through every layer to deliver an end-to-end thin sliver of user value. Each slice is independently shippable and independently valuable.
+```bash
+python scripts/refinement_scorer.py --input backlog.json --format markdown   # grade a backlog
+python scripts/refinement_scorer.py --demo --format markdown                 # inspect demo + output
+```
 
-### The 9 splitting recipes (Richard Lawrence)
+Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing criteria, **0-2** send back to discovery.
 
-Richard Lawrence&#x27;s Story Splitting Flowchart enumerates 9 reliable patterns. Use them in this priority order:
+## References
 
-| # | Pattern | Use when | Example |
-|---|---------|----------|---------|
-| 1 | **Workflow steps** | The story spans a multi-step process | &quot;Checkout&quot; → &quot;Add to cart&quot; / &quot;Pay&quot; / &quot;Confirm&quot; |
-| 2 | **Business rule variations** | The story covers many rules | &quot;Discount&quot; → &quot;Loyalty discount&quot; / &quot;Volume discount&quot; / &quot;Promo code&quot; |
-| 3 | **Happy / unhappy paths** | Error handling adds complexity | &quot;Submit form&quot; → &quot;Submit valid form&quot; / &quot;Handle validation errors&quot; |
-| 4 | **Input options / platforms** | Multiple inputs or platforms | &quot;Search&quot; → &quot;Search via keyword&quot; / &quot;Search via filters&quot; / &quot;Search via voice&quot; |
-| 5 | **Data types or parameters** | Multiple data variations | &quot;Export report&quot; → &quot;Export CSV&quot; / &quot;Export PDF&quot; / &quot;Export XLSX&quot; |
-| 6 | **Operations (CRUD)** | The story covers multiple ops | &quot;Manage users&quot; → &quot;Create user&quot; / &quot;Edit user&quot; / &quot;Delete user&quot; |
-| 7 | **Test scenarios / cases** | Test plan reveals natural splits | &quot;Login&quot; → &quot;Login with email&quot; / &quot;Login with SSO&quot; / &quot;Login with MFA&quot; |
-| 8 | **Defer performance** | The simple version works | &quot;Search 1M records&quot; → &quot;Search basic&quot; (v1) / &quot;Optimize search&quot; (v2) |
-| 9 | **Spike (last resort)** | The team cannot estimate | A time-boxed investigation, then re-split |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-### The SPIDR alternative (Mike Cohn)
-
-Mike Cohn&#x27;s SPIDR mnemonic covers a similar space with five buckets: **S**pikes, **P**aths, **I**nterfaces, **D**ata, **R**ules. Use whichever taxonomy your team finds memorable; the patterns overlap.
-
-### Splitting anti-patterns to avoid
-
-- **Splitting by layer.** &quot;Backend API&quot; / &quot;Frontend UI&quot; / &quot;Database migration&quot; are tasks, not stories. They violate INVEST-V.
-- **Splitting by team.** If only &quot;the backend team&quot; can deliver a slice, the slice is not independently valuable.
-- **Splitting by sprint.** Forcing a 10-day story into &quot;Sprint 1 part&quot; and &quot;Sprint 2 part&quot; is scheduling, not splitting.
-- **Splitting too thin.** A 2-hour story is not a story; it is a task. Roll it back up.
-
-## Definition of Ready (DoR)
-
-The DoR is the team&#x27;s agreement on what a story must satisfy before it can enter a sprint. It is the **input quality gate**.
-
-### Recommended DoR template
-
-A story is Ready when:
-
-- [ ] Title is descriptive and specific (no &quot;Implement X&quot;)
-- [ ] Why statement references a specific objective, OKR, or customer outcome
-- [ ] Description is 1-2 paragraphs and serves as a reminder of the refinement discussion
-- [ ] Acceptance criteria: at least 4, each describing an observable user-facing outcome
-- [ ] INVEST score &gt;= 5/6 (verified by `refinement_scorer.py` or facilitated review)
-- [ ] Dependencies on other stories or teams are identified and noted
-- [ ] Design assets linked (or marked &quot;TBD by [date]&quot; with owner)
-- [ ] Estimated by the team using their preferred unit (story points, t-shirt, days)
-- [ ] No open blocker questions
-- [ ] Tagged with sprint goal it contributes to
-
-### DoR anti-patterns
-
-- **Too strict** -- a 20-item DoR creates a backlog of &quot;almost ready&quot; stories. Cap at 10.
-- **Unenforced** -- a DoR that planning ignores is theater. Enforce: stories that fail DoR are removed from the sprint candidate list, not &quot;negotiated in.&quot;
-- **One-size-fits-all** -- spikes, bugs, and feature stories have different DoRs. Keep three short checklists rather than one long one.
-
-## Definition of Done (DoD)
-
-The DoD is the team&#x27;s agreement on what a story must satisfy before it can be called complete. It is the **output quality gate** and is typically uniform across all stories.
-
-### Recommended DoD template
-
-A story is Done when:
-
-- [ ] All acceptance criteria pass in the deployed environment
-- [ ] Code merged to main branch (or release branch per release process)
-- [ ] Automated tests written and passing (unit + integration for changed paths)
-- [ ] Code reviewed and approved by at least one other engineer
-- [ ] Manual QA pass (or QA sign-off if separate QA exists)
-- [ ] Documentation updated (help center, internal runbook, API docs, as applicable)
-- [ ] Feature flag wired (if behind a flag) or release-notes entry drafted
-- [ ] Analytics or telemetry events instrumented (so we can measure the outcome)
-- [ ] Accessibility check pass (WCAG AA for user-facing UI)
-- [ ] Product owner has accepted the story
-
-### DoD anti-patterns
-
-- **&quot;Done&quot; but not deployed** -- a story that is merged but not in front of a user is not done. Require deployment in the DoD.
-- **No instrumentation** -- shipping without telemetry means you cannot measure the outcome. Require analytics for any value-claim story.
-- **Skipping accessibility** -- a11y debt compounds. Require WCAG AA on every user-facing change.
-
-## Workflow
-
-1. **Pull candidates from the backlog.** Aim for 1.5x the team&#x27;s velocity in candidates per refinement session.
-2. **Score each candidate with `refinement_scorer.py`.** Use `--input backlog.json --format markdown` to get a per-story INVEST grade.
-3. **Triage by score:**
-   - **5-6:** Promote to &quot;Refined&quot; lane.
-   - **3-4:** Discuss in session, address the failing criteria.
-   - **0-2:** Send back to discovery (`discovery/brainstorm-ideas/` or `discovery/identify-assumptions/`) -- the work has not been scoped enough.
-4. **Split oversized stories.** Apply the 9 Lawrence patterns in priority order. Each new slice must independently pass INVEST-V and INVEST-S.
-5. **Enforce the DoR.** Anything failing DoR at planning is removed from the candidate list, not &quot;negotiated in.&quot;
-6. **Enforce the DoD at review.** Stories that miss any DoD bullet are not &quot;almost done&quot; -- they roll to the next sprint.
-7. **Hand off refined stories to sprint planning.** A well-refined backlog reduces planning to: pick the top N stories that fit capacity.
-
-## Tools
-
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `refinement_scorer.py` | Grade stories against INVEST and emit readiness verdicts | `python scripts/refinement_scorer.py --input backlog.json --format markdown` |
-| `refinement_scorer.py --demo` | Inspect demo data and output format | `python scripts/refinement_scorer.py --demo --format markdown` |
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Refinement sessions run long and produce few refined stories | Too many candidates per session; team trying to refine everything at once | Cap at 1.5x velocity in candidates; spend max 2 minutes per story on initial INVEST grade; deep-refine only those scoring 3-4 |
-| Same stories appear in 3+ refinement sessions without progress | Story is too vague; team lacks information; or story belongs in discovery | Apply the &quot;3-strike rule&quot; -- if a story fails to refine three sessions in a row, send to `discovery/identify-assumptions/` to reframe |
-| Sprint planning becomes the refinement session | DoR is not enforced; pressure to &quot;make the sprint full&quot; overrides quality | Empower the team to leave the sprint under-full rather than admit DoR-failing stories; track planning duration as a velocity proxy |
-| Splits produce horizontal slices (API / UI / DB) | Team defaults to architecture decomposition; PM does not push back | Use the 9 Lawrence patterns explicitly; require each slice to answer &quot;who benefits if this is the only thing we ship?&quot; |
-| Stories pass DoD but value does not materialize | Acceptance criteria describe activity, not outcome; no telemetry | Rewrite acceptance criteria as observable user outcomes; require telemetry/analytics in the DoD |
-| Estimates vary wildly across the team | INVEST-Estimable failure; story too vague or too large | Re-refine with a spike if needed; split into smaller slices that two engineers can size within 2x of each other |
-| `refinement_scorer.py` gives 6/6 but story still feels risky | Score covers form, not substance; risk is in the assumptions, not the format | Use `discovery/identify-assumptions/` and `discovery/pre-mortem/` for substantive risk; INVEST is necessary but not sufficient |
-
-## Success Criteria
-
-- 80%+ of stories entering sprint planning score 5/6 or 6/6 on INVEST
-- Refinement session length stays under 60 minutes per week, per team
-- DoR and DoD are reviewed and updated at least once per quarter
-- Story splits produce vertical slices in 90%+ of cases (each slice independently valuable)
-- Sprint planning meetings take less than half the duration of refinement (because refinement did the work)
-- Rolled-over story rate (stories that miss the sprint) below 15% sustained
-- Stories scoring below 3 on INVEST are sent back to discovery rather than forced into a sprint
+- **[references/refinement-playbook.md](references/refinement-playbook.md)** — full INVEST table, the 9 splitting recipes + SPIDR, DoR/DoD templates and anti-patterns, the step-by-step workflow, the `refinement_scorer.py` reference (flags, input JSON, scoring rubric), troubleshooting, and success criteria. Read when running a refinement session or wiring the scorer.
+- **[references/invest-and-splitting-guide.md](references/invest-and-splitting-guide.md)** — deep dive on INVEST (Wake), the 9 Lawrence patterns, SPIDR (Cohn), and worked horizontal-vs-vertical split examples. Read when a story is hard to split or a slice feels wrong.
+- **[references/red-flags.md](references/red-flags.md)** — concrete examples of how refinement output goes wrong, why it&#x27;s bad, and how to fix it. Read when reviewing a refined backlog or diagnosing recurring quality issues.
+- **assets/refinement_checklist.md** — ready-to-use DoR and DoD checklists plus a refinement session agenda. Use during a live session.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- INVEST quality grading of individual stories
-- Vertical story splitting using the 9 Lawrence patterns and SPIDR taxonomy
-- Definition of Ready and Definition of Done templates and enforcement protocol
-- Refinement session structure and cadence guidance
-- Python tool that grades backlog JSON against INVEST and emits per-story verdicts
+**In Scope:** INVEST grading of individual stories; vertical splitting (9 Lawrence patterns + SPIDR); DoR/DoD templates and enforcement; refinement session structure and cadence; the Python scorer.
 
-**Out of Scope:**
-- Authoring stories from scratch (use `wwas/` or `job-stories/`)
-- Backlog prioritization or sequencing (use `prioritization-frameworks/`)
-- Sprint planning, capacity calculation, or velocity forecasting (use `../scrum-master/`)
-- Discovery, problem framing, or opportunity definition (use `discovery/` skills)
-- Story estimation techniques (Planning Poker, Affinity Estimation -- covered in `agile-coach/`)
+**Out of Scope:** authoring stories from scratch (`wwas/`, `job-stories/`); prioritization/sequencing (`prioritization-frameworks/`); sprint planning/capacity/velocity (`../scrum-master/`); discovery and problem framing (`discovery/`); estimation techniques (`agile-coach/`).
 
-**Important Caveats:**
-- INVEST is a heuristic, not a guarantee. A story can score 6/6 and still be the wrong story to build. Use this skill alongside `prioritization-frameworks/` and `discovery/identify-assumptions/` for full coverage.
-- The 9 Lawrence patterns work for product stories. Pure technical infrastructure work may follow different splitting heuristics (component boundaries, deployment risk).
-- DoR and DoD must be team-authored to be enforced. Imposing an external DoR/DoD without team buy-in produces theater, not quality.
-- The Python scorer grades structural form (does the story have a Why, a What, and 4+ ACs?), not strategic substance. A 6/6 story can still be misaligned with strategy.
+**Caveats:** INVEST is a heuristic — a 6/6 story can still be the wrong story (pair with `prioritization-frameworks/` and `discovery/identify-assumptions/`). DoR/DoD must be team-authored to be enforced. The scorer grades structural form, not strategic substance.
 
 ## Integration Points
 
@@ -967,66 +639,12 @@ A story is Done when:
 |-------------|-----------|-------------|
 | `execution/wwas/` | Receives from | WWAS-format stories enter refinement to be graded and split |
 | `execution/job-stories/` | Receives from | Job stories enter refinement to be graded and split |
-| `execution/prioritization-frameworks/` | Pairs with | Prioritization sets the sequence; refinement makes the top N actually executable |
-| `discovery/identify-assumptions/` | Sends to | Stories scoring 0-2 are sent back to discovery for assumption mapping |
+| `execution/prioritization-frameworks/` | Pairs with | Prioritization sets the sequence; refinement makes the top N executable |
+| `discovery/identify-assumptions/` | Sends to | Stories scoring 0-2 are sent back for assumption mapping |
 | `discovery/brainstorm-experiments/` | Sends to | Stories with unvalidated assumptions become experiment candidates |
 | `../scrum-master/` | Feeds into | Refined stories feed sprint planning; refinement quality drives velocity stability |
 | `execution/status-update-generator/` | Indirect | DoD compliance feeds the &quot;what&#x27;s done this week&quot; section of status updates |
 | `../jira-expert/` | Pairs with | Refined stories become Jira tickets with structured fields and DoR/DoD checklists |
-
-## Tool Reference
-
-### refinement_scorer.py
-
-Grades each story in a JSON backlog file against the six INVEST criteria and emits a readiness score (0-6) per story plus an aggregate readiness summary for the backlog.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required unless `--demo`) | Path to JSON file containing backlog items |
-| `--demo` | flag | false | Use built-in demo backlog data |
-| `--format` | choice | markdown | Output format: json, markdown, mermaid, confluence, notion, linear |
-| `--output` | string | stdout | Output file path |
-| `--threshold` | int | 5 | Minimum score for a story to be flagged &quot;READY&quot; (default 5/6) |
-
-### Input JSON shape
-
-```json
-{
-  &quot;stories&quot;: [
-    {
-      &quot;id&quot;: &quot;STORY-1&quot;,
-      &quot;title&quot;: &quot;Add SSO login for enterprise users&quot;,
-      &quot;why&quot;: &quot;Enterprise customers cite missing SSO as the #1 blocker; supports $2M ARR expansion target&quot;,
-      &quot;what&quot;: &quot;Add SAML 2.0 SSO option to the login page. Users with company email domains see SSO as the primary login method; password login remains as fallback.&quot;,
-      &quot;acceptance_criteria&quot;: [
-        &quot;Users with configured domains see SSO as primary login option&quot;,
-        &quot;SAML 2.0 IdP-initiated flow works for Okta and Azure AD&quot;,
-        &quot;Failed SSO falls back to password with helpful error&quot;,
-        &quot;Audit log records every SSO login attempt&quot;
-      ],
-      &quot;estimate_days&quot;: 4,
-      &quot;has_design&quot;: true,
-      &quot;dependencies&quot;: []
-    }
-  ]
-}
-```
-
-### Scoring rubric
-
-| Criterion | Passes if... |
-|-----------|--------------|
-| Independent | `dependencies` field is empty or omitted |
-| Negotiable | `what` field is present and under 800 characters (long whats prescribe implementation) |
-| Valuable | `why` field is present and references a metric, OKR, customer, or business outcome (heuristic) |
-| Estimable | `estimate_days` field is present and is a positive number |
-| Small | `estimate_days` is between 1 and 5 |
-| Testable | `acceptance_criteria` field contains at least 4 items |
-
-## References
-
-- `references/invest-and-splitting-guide.md` -- Deep dive on INVEST, the 9 Lawrence patterns, SPIDR, and worked split examples
-- `assets/refinement_checklist.md` -- Ready-to-use DoR and DoD checklists plus a refinement session agenda
 
 ---
 
@@ -1114,8 +732,12 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/backlog-refinement/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python scripts/refinement_scorer.py --input backlog.json --format markdown   # grade a backlog
+python scripts/refinement_scorer.py --demo --format markdown                 # inspect demo + output
+</code></pre>
+
+Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing criteria, **0-2** send back to discovery.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/backlog-refinement/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Cycle Time Analyzer</h1>
     <p class="page-subtitle">Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">kanban</span><span class="tag">flow-metrics</span><span class="tag">cfd</span><span class="tag">littles-law</span><span class="tag">aging-wip</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -397,14 +397,6 @@ Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sp
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, exe
 
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- 1. Lead Time
-- 2. Cycle Time
-- 3. Throughput
-- 4. Work-In-Progress (WIP)
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -426,14 +418,6 @@ Start by asking the user what they need help with.">
 Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, exe
-
-## Your Key Capabilities
-- When to Use
-- When NOT to Use
-- 1. Lead Time
-- 2. Cycle Time
-- 3. Throughput
-- 4. Work-In-Progress (WIP)
 
 ## How to Help
 When the user asks for help in this domain:
@@ -467,11 +451,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, executive reporting, and bottleneck analysis, plus a Mermaid cumulative flow diagram that visualizes work accumulation over time.
 
-Flow metrics are the most useful diagnostic for team and process health, far more so than velocity or story points. Daniel Vacanti&#x27;s body of work (notably *Actionable Agile Metrics for Predictability*, 2015) makes the case that a team&#x27;s predictability and throughput are governed by Little&#x27;s Law (`Throughput = WIP / Cycle Time`), and that the most reliable way to improve delivery is to lower WIP and stabilize cycle time -- not to estimate harder.
+Flow metrics are the most useful diagnostic for team and process health, far more so than velocity or story points. Daniel Vacanti&#x27;s work (*Actionable Agile Metrics for Predictability*, 2015) shows that predictability and throughput are governed by Little&#x27;s Law (`Throughput = WIP / Cycle Time`), and that the most reliable way to improve delivery is to lower WIP and stabilize cycle time -- not to estimate harder. This skill also reports aging WIP (in-flight work older than the team&#x27;s 85th-percentile cycle time -- the items most at risk) and supports the shared `--format` schema (json, markdown, mermaid, confluence, notion, linear).
 
-This skill ingests a JSON file of issues with status transition history and produces all four flow metrics plus aging WIP (the work-in-progress that is older than the team&#x27;s 85th percentile cycle time -- the items most at risk). All outputs support the shared `--format` schema (json, markdown, mermaid, confluence, notion, linear).
+## Core Capabilities
 
-### When to Use
+- **Four flow metrics** — lead time, cycle time (as a distribution, never an average), throughput, and WIP, tied together by Little&#x27;s Law.
+- **Aging WIP** — flags in-flight items older than the 85th-percentile cycle time as at-risk; the most actionable daily metric.
+- **Cumulative flow diagram** — Mermaid CFD for retrospectives and exec reports.
+- **Per-type filtering &amp; trends** — bug/feature/spike breakdowns over rolling 6-8 week windows across all six output formats.
+
+## When to Use
 
 - **Sprint retrospective** -- A team wants data-driven discussion of why some sprints feel slow.
 - **Bottleneck investigation** -- Throughput has fallen and the team needs to identify the constraining step.
@@ -479,63 +468,31 @@ This skill ingests a JSON file of issues with status transition history and prod
 - **Predictability analysis** -- Stakeholders want delivery forecasts grounded in actual cycle time distributions (use with Monte Carlo via `scrum-master/`).
 - **WIP-limit calibration** -- A Kanban team is setting WIP limits and needs a baseline of current behavior.
 
-### When NOT to Use
+## When NOT to Use
 
 - For story-point velocity tracking, use `scrum-master/velocity_analyzer.py`.
 - For sprint capacity calculation, use `scrum-master/sprint_capacity_calculator.py`.
 - For per-person performance evaluation -- flow metrics are team-level signals; using them to rank individuals destroys the team behavior they measure.
 
-## The Four Flow Metrics (Vacanti)
+## Clarify First
 
-### 1. Lead Time
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-The total elapsed time from the moment a work item is committed (created or moved out of backlog into &quot;Ready&quot;) to the moment it is delivered (closed / deployed / accepted).
+- [ ] **Issue history with status transitions** — per-item timestamps for when work started and finished (every metric is derived from these; missing transitions invalidate the numbers)
+- [ ] **Workflow states that count as &quot;in progress&quot; vs &quot;done&quot;** — your board&#x27;s actual status names (defines where cycle time starts/stops, which changes every result)
+- [ ] **Analysis window** — the rolling period (e.g. last 6-8 weeks) and any type filter (scopes throughput trend and which in-flight items are flagged as aging WIP)
 
-Lead time is the customer&#x27;s view: &quot;how long from when I asked to when I got it?&quot;
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### 2. Cycle Time
+## Quick Start
 
-The elapsed time from when work actively started (item moves to &quot;In Progress&quot;) to delivery. Cycle time excludes time the item sat in &quot;Ready&quot; or &quot;To Do.&quot;
-
-Cycle time is the team&#x27;s view: &quot;how long does it take us to finish what we start?&quot;
-
-Always report cycle time as a distribution (50th, 85th, 95th percentile), never as an average. Averages hide variability and lead to over-confident commitments.
-
-### 3. Throughput
-
-The count of items completed per unit time (typically per week or per sprint). Throughput is the team&#x27;s delivery rate.
-
-Throughput is more reliable than story-point velocity because it counts atomic units (one completed thing = one), avoiding estimation bias.
-
-### 4. Work-In-Progress (WIP)
-
-The count of items started but not yet finished at a point in time. WIP includes everything in any &quot;in flight&quot; state (In Progress, In Review, Blocked, etc.).
-
-### Little&#x27;s Law
-
-The relationship that ties the four together (John D. C. Little, 1961):
-
-```
-Average Cycle Time = Average WIP / Average Throughput
+```bash
+python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
+python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
+python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
 ```
 
-The practical implication: **the fastest way to reduce cycle time is to reduce WIP.** Working on fewer things at once forces finishing before starting and exposes the bottlenecks.
-
-### Aging WIP
-
-The aging WIP report lists every item currently in flight and its age (days since started). Items older than the team&#x27;s 85th-percentile cycle time are flagged as &quot;at risk&quot; -- they are statistical outliers and warrant explicit attention in standups and refinements.
-
-Aging WIP is the single most actionable flow metric for daily use. Most teams ignore it. Most teams have a few items quietly aging in the corners.
-
-## Workflow
-
-1. **Export issue history** from your tracker as JSON. Required fields per issue: `id`, `title`, `created_at`, `status_history` (list of `{status, entered_at}`), and ideally `team` and `type`. See `references/flow-metrics-guide.md` for tracker-specific export instructions.
-2. **Define your states.** Tell the tool which status names map to &quot;Ready&quot; (commitment), &quot;In Progress&quot; (active work start), and &quot;Done&quot; (delivery). Defaults: `Ready`/`To Do`, `In Progress`, `Done`.
-3. **Run the analyzer.** `python scripts/flow_metrics.py --input issues.json --format markdown`
-4. **Review the distribution.** Look at 85th-percentile cycle time, not the average. Identify aging WIP that exceeds it.
-5. **Generate the CFD.** Use `--format mermaid` to produce a cumulative flow diagram for share-back in retrospectives or exec reports.
-6. **Calibrate WIP limits.** Use the WIP histogram to set per-state WIP limits at roughly the team&#x27;s current 50th percentile.
-7. **Re-run weekly.** Track the trend, not the snapshot. Flow metrics drift; only sustained changes are meaningful.
+Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
 
 ## Tools
 
@@ -543,29 +500,15 @@ Aging WIP is the single most actionable flow metric for daily use. Most teams ig
 |------|---------|---------|
 | `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
 
-Demo mode: `python scripts/flow_metrics.py --demo --format markdown` produces sample output without input data.
+## References
 
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Cycle time looks great but team feels slow | &quot;In Progress&quot; defined too narrowly; long &quot;In Review&quot; or &quot;Blocked&quot; time excluded | Map all in-flight states to the active set; verify with the team that the boundary matches &quot;start&quot; and &quot;finish&quot; reality |
-| Throughput is unstable week-over-week | Sprint commitment volume changes; team-size changes; vacation periods | Report a rolling 6-8 week trend; annotate the chart with known events |
-| Lead time is enormous compared to cycle time | Items sit in backlog for months before commitment | Either accept (lead time is bounded by intake, not delivery) or close stale backlog items; report lead time only for items committed within the last quarter |
-| Aging WIP list is enormous | Stale items left &quot;In Progress&quot; without movement | Triage during standup; close, split, or restart each item; consider a WIP limit to prevent recurrence |
-| 85th percentile cycle time differs sharply between work types | Mixed bugs, features, spikes in one stream | Filter by `type` and report per-type cycle time; predictability comes from like-with-like comparison |
-| CFD lines flatten then jump | Status transitions logged in batch (end-of-day or weekly sync) rather than real-time | Either accept the visual artifact or migrate to real-time updates in the tracker |
-| Tool errors on missing `status_history` | Tracker export incomplete; some issues lack transition data | Use `--ignore-missing` to skip incomplete items; investigate the export query |
-
-## Success Criteria
-
-- All four flow metrics are computed and reported with both central tendency (median) and tail (85th percentile).
-- The cumulative flow diagram is generated and shared in at least one retrospective per sprint.
-- Aging WIP list is reviewed at least weekly; items exceeding 85th percentile cycle time get explicit attention.
-- WIP limits are set per state based on observed flow rather than guessed.
-- Trend reporting uses rolling windows (6-8 weeks), not single snapshots.
-- Cycle time distribution is reported, never just an average.
-- Flow metrics are used at the team level only; never for individual performance ranking.
+- `references/metrics-and-tool-reference.md` -- Precise definitions of the four metrics, Little&#x27;s Law, aging WIP, the 7-step workflow, troubleshooting matrix, success criteria, and the full `flow_metrics.py` CLI flags + input/output JSON schemas. Read when running an analysis or wiring up the tool.
+- `references/flow-metrics-guide.md` -- Vacanti-style deep dive: lead vs cycle, distributions vs averages, Little&#x27;s Law, aging WIP, common anti-patterns. Read for narrative depth and tracker-specific export instructions.
+- `references/red-flags.md` -- Bad-vs-good examples of flow-metric reporting. Read this to sanity-check a dashboard before sharing it.
+- Vacanti, Daniel S. *Actionable Agile Metrics for Predictability*. ActionableAgile Press, 2015.
+- Vacanti, Daniel S. *When Will It Be Done?* ActionableAgile Press, 2020.
+- Little, John D. C. &quot;A Proof for the Queuing Formula: L = λW.&quot; Operations Research, 1961.
+- Anderson, David J. *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press, 2010.
 
 ## Scope &amp; Limitations
 
@@ -597,85 +540,6 @@ Demo mode: `python scripts/flow_metrics.py --demo --format markdown` produces sa
 | `senior-pm/project_health_dashboard.py` | Feeds into | Throughput trends feed portfolio health |
 | `status-update-generator/` | Feeds into | Weekly status includes throughput and aging WIP highlights |
 | `agile-coach/` | Used by | Coaches use flow metrics to assess team maturity |
-
-## Tool Reference
-
-### flow_metrics.py
-
-Computes the four core flow metrics plus aging WIP and a Mermaid cumulative flow diagram from issue status-transition history.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | path | (required unless `--demo`) | JSON file with issue history |
-| `--demo` | flag | off | Use built-in sample data instead of `--input` |
-| `--format` | string | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | path | stdout | Output file path |
-| `--ready-state` | string (repeatable) | `Ready`, `To Do` | Status name(s) representing committed-not-started |
-| `--in-progress-state` | string (repeatable) | `In Progress`, `In Review` | Status name(s) representing active work |
-| `--done-state` | string (repeatable) | `Done`, `Closed` | Status name(s) representing delivered |
-| `--type` | string | (none) | Filter by issue type (e.g., `bug`, `feature`) |
-| `--window-days` | int | 60 | Trailing window in days for throughput trend |
-| `--ignore-missing` | flag | off | Skip issues that lack required fields |
-| `--as-of` | ISO date | today | Compute metrics as of this date (for historical review) |
-
-### Input JSON schema
-
-```json
-{
-  &quot;issues&quot;: [
-    {
-      &quot;id&quot;: &quot;ENG-101&quot;,
-      &quot;title&quot;: &quot;Add CSV export&quot;,
-      &quot;type&quot;: &quot;feature&quot;,
-      &quot;team&quot;: &quot;platform&quot;,
-      &quot;created_at&quot;: &quot;2026-04-01T10:00:00Z&quot;,
-      &quot;status_history&quot;: [
-        {&quot;status&quot;: &quot;Backlog&quot;,     &quot;entered_at&quot;: &quot;2026-04-01T10:00:00Z&quot;},
-        {&quot;status&quot;: &quot;Ready&quot;,       &quot;entered_at&quot;: &quot;2026-04-15T09:00:00Z&quot;},
-        {&quot;status&quot;: &quot;In Progress&quot;, &quot;entered_at&quot;: &quot;2026-04-17T11:30:00Z&quot;},
-        {&quot;status&quot;: &quot;In Review&quot;,   &quot;entered_at&quot;: &quot;2026-04-22T16:00:00Z&quot;},
-        {&quot;status&quot;: &quot;Done&quot;,        &quot;entered_at&quot;: &quot;2026-04-24T10:00:00Z&quot;}
-      ]
-    }
-  ]
-}
-```
-
-### Output JSON schema
-
-Wrapped per `SHARED_OUTPUT_SCHEMA.md`:
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/cycle-time-analyzer/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-21T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;as_of&quot;: &quot;2026-05-21&quot;,
-    &quot;summary&quot;: {
-      &quot;lead_time_p50_days&quot;: 9.5,
-      &quot;lead_time_p85_days&quot;: 22.1,
-      &quot;cycle_time_p50_days&quot;: 4.2,
-      &quot;cycle_time_p85_days&quot;: 11.0,
-      &quot;throughput_per_week&quot;: 6.4,
-      &quot;wip_count&quot;: 12
-    },
-    &quot;aging_wip&quot;: [
-      {&quot;id&quot;: &quot;ENG-117&quot;, &quot;title&quot;: &quot;...&quot;, &quot;age_days&quot;: 14.2, &quot;status&quot;: &quot;In Progress&quot;}
-    ],
-    &quot;cumulative_flow&quot;: [
-      {&quot;date&quot;: &quot;2026-04-01&quot;, &quot;Backlog&quot;: 32, &quot;Ready&quot;: 6, &quot;In Progress&quot;: 4, &quot;In Review&quot;: 1, &quot;Done&quot;: 18}
-    ]
-  }
-}
-```
-
-## References
-
-- `references/flow-metrics-guide.md` -- Vacanti-style deep dive: lead vs cycle, distributions vs averages, Little&#x27;s Law, aging WIP, common anti-patterns.
-- Vacanti, Daniel S. *Actionable Agile Metrics for Predictability*. ActionableAgile Press, 2015.
-- Vacanti, Daniel S. *When Will It Be Done?* ActionableAgile Press, 2020.
-- Little, John D. C. &quot;A Proof for the Queuing Formula: L = λW.&quot; Operations Research, 1961.
-- Anderson, David J. *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press, 2010.
 
 ---
 
@@ -732,11 +596,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, executive reporting, and bottleneck analysis, plus a Mermaid cumulative flow diagram that visualizes work accumulation over time.
 
-Flow metrics are the most useful diagnostic for team and process health, far more so than velocity or story points. Daniel Vacanti&#x27;s body of work (notably *Actionable Agile Metrics for Predictability*, 2015) makes the case that a team&#x27;s predictability and throughput are governed by Little&#x27;s Law (`Throughput = WIP / Cycle Time`), and that the most reliable way to improve delivery is to lower WIP and stabilize cycle time -- not to estimate harder.
+Flow metrics are the most useful diagnostic for team and process health, far more so than velocity or story points. Daniel Vacanti&#x27;s work (*Actionable Agile Metrics for Predictability*, 2015) shows that predictability and throughput are governed by Little&#x27;s Law (`Throughput = WIP / Cycle Time`), and that the most reliable way to improve delivery is to lower WIP and stabilize cycle time -- not to estimate harder. This skill also reports aging WIP (in-flight work older than the team&#x27;s 85th-percentile cycle time -- the items most at risk) and supports the shared `--format` schema (json, markdown, mermaid, confluence, notion, linear).
 
-This skill ingests a JSON file of issues with status transition history and produces all four flow metrics plus aging WIP (the work-in-progress that is older than the team&#x27;s 85th percentile cycle time -- the items most at risk). All outputs support the shared `--format` schema (json, markdown, mermaid, confluence, notion, linear).
+## Core Capabilities
 
-### When to Use
+- **Four flow metrics** — lead time, cycle time (as a distribution, never an average), throughput, and WIP, tied together by Little&#x27;s Law.
+- **Aging WIP** — flags in-flight items older than the 85th-percentile cycle time as at-risk; the most actionable daily metric.
+- **Cumulative flow diagram** — Mermaid CFD for retrospectives and exec reports.
+- **Per-type filtering &amp; trends** — bug/feature/spike breakdowns over rolling 6-8 week windows across all six output formats.
+
+## When to Use
 
 - **Sprint retrospective** -- A team wants data-driven discussion of why some sprints feel slow.
 - **Bottleneck investigation** -- Throughput has fallen and the team needs to identify the constraining step.
@@ -744,63 +613,31 @@ This skill ingests a JSON file of issues with status transition history and prod
 - **Predictability analysis** -- Stakeholders want delivery forecasts grounded in actual cycle time distributions (use with Monte Carlo via `scrum-master/`).
 - **WIP-limit calibration** -- A Kanban team is setting WIP limits and needs a baseline of current behavior.
 
-### When NOT to Use
+## When NOT to Use
 
 - For story-point velocity tracking, use `scrum-master/velocity_analyzer.py`.
 - For sprint capacity calculation, use `scrum-master/sprint_capacity_calculator.py`.
 - For per-person performance evaluation -- flow metrics are team-level signals; using them to rank individuals destroys the team behavior they measure.
 
-## The Four Flow Metrics (Vacanti)
+## Clarify First
 
-### 1. Lead Time
+Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-The total elapsed time from the moment a work item is committed (created or moved out of backlog into &quot;Ready&quot;) to the moment it is delivered (closed / deployed / accepted).
+- [ ] **Issue history with status transitions** — per-item timestamps for when work started and finished (every metric is derived from these; missing transitions invalidate the numbers)
+- [ ] **Workflow states that count as &quot;in progress&quot; vs &quot;done&quot;** — your board&#x27;s actual status names (defines where cycle time starts/stops, which changes every result)
+- [ ] **Analysis window** — the rolling period (e.g. last 6-8 weeks) and any type filter (scopes throughput trend and which in-flight items are flagged as aging WIP)
 
-Lead time is the customer&#x27;s view: &quot;how long from when I asked to when I got it?&quot;
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### 2. Cycle Time
+## Quick Start
 
-The elapsed time from when work actively started (item moves to &quot;In Progress&quot;) to delivery. Cycle time excludes time the item sat in &quot;Ready&quot; or &quot;To Do.&quot;
-
-Cycle time is the team&#x27;s view: &quot;how long does it take us to finish what we start?&quot;
-
-Always report cycle time as a distribution (50th, 85th, 95th percentile), never as an average. Averages hide variability and lead to over-confident commitments.
-
-### 3. Throughput
-
-The count of items completed per unit time (typically per week or per sprint). Throughput is the team&#x27;s delivery rate.
-
-Throughput is more reliable than story-point velocity because it counts atomic units (one completed thing = one), avoiding estimation bias.
-
-### 4. Work-In-Progress (WIP)
-
-The count of items started but not yet finished at a point in time. WIP includes everything in any &quot;in flight&quot; state (In Progress, In Review, Blocked, etc.).
-
-### Little&#x27;s Law
-
-The relationship that ties the four together (John D. C. Little, 1961):
-
-```
-Average Cycle Time = Average WIP / Average Throughput
+```bash
+python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
+python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
+python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
 ```
 
-The practical implication: **the fastest way to reduce cycle time is to reduce WIP.** Working on fewer things at once forces finishing before starting and exposes the bottlenecks.
-
-### Aging WIP
-
-The aging WIP report lists every item currently in flight and its age (days since started). Items older than the team&#x27;s 85th-percentile cycle time are flagged as &quot;at risk&quot; -- they are statistical outliers and warrant explicit attention in standups and refinements.
-
-Aging WIP is the single most actionable flow metric for daily use. Most teams ignore it. Most teams have a few items quietly aging in the corners.
-
-## Workflow
-
-1. **Export issue history** from your tracker as JSON. Required fields per issue: `id`, `title`, `created_at`, `status_history` (list of `{status, entered_at}`), and ideally `team` and `type`. See `references/flow-metrics-guide.md` for tracker-specific export instructions.
-2. **Define your states.** Tell the tool which status names map to &quot;Ready&quot; (commitment), &quot;In Progress&quot; (active work start), and &quot;Done&quot; (delivery). Defaults: `Ready`/`To Do`, `In Progress`, `Done`.
-3. **Run the analyzer.** `python scripts/flow_metrics.py --input issues.json --format markdown`
-4. **Review the distribution.** Look at 85th-percentile cycle time, not the average. Identify aging WIP that exceeds it.
-5. **Generate the CFD.** Use `--format mermaid` to produce a cumulative flow diagram for share-back in retrospectives or exec reports.
-6. **Calibrate WIP limits.** Use the WIP histogram to set per-state WIP limits at roughly the team&#x27;s current 50th percentile.
-7. **Re-run weekly.** Track the trend, not the snapshot. Flow metrics drift; only sustained changes are meaningful.
+Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
 
 ## Tools
 
@@ -808,29 +645,15 @@ Aging WIP is the single most actionable flow metric for daily use. Most teams ig
 |------|---------|---------|
 | `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
 
-Demo mode: `python scripts/flow_metrics.py --demo --format markdown` produces sample output without input data.
+## References
 
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|--------------|------------|
-| Cycle time looks great but team feels slow | &quot;In Progress&quot; defined too narrowly; long &quot;In Review&quot; or &quot;Blocked&quot; time excluded | Map all in-flight states to the active set; verify with the team that the boundary matches &quot;start&quot; and &quot;finish&quot; reality |
-| Throughput is unstable week-over-week | Sprint commitment volume changes; team-size changes; vacation periods | Report a rolling 6-8 week trend; annotate the chart with known events |
-| Lead time is enormous compared to cycle time | Items sit in backlog for months before commitment | Either accept (lead time is bounded by intake, not delivery) or close stale backlog items; report lead time only for items committed within the last quarter |
-| Aging WIP list is enormous | Stale items left &quot;In Progress&quot; without movement | Triage during standup; close, split, or restart each item; consider a WIP limit to prevent recurrence |
-| 85th percentile cycle time differs sharply between work types | Mixed bugs, features, spikes in one stream | Filter by `type` and report per-type cycle time; predictability comes from like-with-like comparison |
-| CFD lines flatten then jump | Status transitions logged in batch (end-of-day or weekly sync) rather than real-time | Either accept the visual artifact or migrate to real-time updates in the tracker |
-| Tool errors on missing `status_history` | Tracker export incomplete; some issues lack transition data | Use `--ignore-missing` to skip incomplete items; investigate the export query |
-
-## Success Criteria
-
-- All four flow metrics are computed and reported with both central tendency (median) and tail (85th percentile).
-- The cumulative flow diagram is generated and shared in at least one retrospective per sprint.
-- Aging WIP list is reviewed at least weekly; items exceeding 85th percentile cycle time get explicit attention.
-- WIP limits are set per state based on observed flow rather than guessed.
-- Trend reporting uses rolling windows (6-8 weeks), not single snapshots.
-- Cycle time distribution is reported, never just an average.
-- Flow metrics are used at the team level only; never for individual performance ranking.
+- `references/metrics-and-tool-reference.md` -- Precise definitions of the four metrics, Little&#x27;s Law, aging WIP, the 7-step workflow, troubleshooting matrix, success criteria, and the full `flow_metrics.py` CLI flags + input/output JSON schemas. Read when running an analysis or wiring up the tool.
+- `references/flow-metrics-guide.md` -- Vacanti-style deep dive: lead vs cycle, distributions vs averages, Little&#x27;s Law, aging WIP, common anti-patterns. Read for narrative depth and tracker-specific export instructions.
+- `references/red-flags.md` -- Bad-vs-good examples of flow-metric reporting. Read this to sanity-check a dashboard before sharing it.
+- Vacanti, Daniel S. *Actionable Agile Metrics for Predictability*. ActionableAgile Press, 2015.
+- Vacanti, Daniel S. *When Will It Be Done?* ActionableAgile Press, 2020.
+- Little, John D. C. &quot;A Proof for the Queuing Formula: L = λW.&quot; Operations Research, 1961.
+- Anderson, David J. *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press, 2010.
 
 ## Scope &amp; Limitations
 
@@ -862,85 +685,6 @@ Demo mode: `python scripts/flow_metrics.py --demo --format markdown` produces sa
 | `senior-pm/project_health_dashboard.py` | Feeds into | Throughput trends feed portfolio health |
 | `status-update-generator/` | Feeds into | Weekly status includes throughput and aging WIP highlights |
 | `agile-coach/` | Used by | Coaches use flow metrics to assess team maturity |
-
-## Tool Reference
-
-### flow_metrics.py
-
-Computes the four core flow metrics plus aging WIP and a Mermaid cumulative flow diagram from issue status-transition history.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | path | (required unless `--demo`) | JSON file with issue history |
-| `--demo` | flag | off | Use built-in sample data instead of `--input` |
-| `--format` | string | `markdown` | One of `json`, `markdown`, `mermaid`, `confluence`, `notion`, `linear` |
-| `--output` | path | stdout | Output file path |
-| `--ready-state` | string (repeatable) | `Ready`, `To Do` | Status name(s) representing committed-not-started |
-| `--in-progress-state` | string (repeatable) | `In Progress`, `In Review` | Status name(s) representing active work |
-| `--done-state` | string (repeatable) | `Done`, `Closed` | Status name(s) representing delivered |
-| `--type` | string | (none) | Filter by issue type (e.g., `bug`, `feature`) |
-| `--window-days` | int | 60 | Trailing window in days for throughput trend |
-| `--ignore-missing` | flag | off | Skip issues that lack required fields |
-| `--as-of` | ISO date | today | Compute metrics as of this date (for historical review) |
-
-### Input JSON schema
-
-```json
-{
-  &quot;issues&quot;: [
-    {
-      &quot;id&quot;: &quot;ENG-101&quot;,
-      &quot;title&quot;: &quot;Add CSV export&quot;,
-      &quot;type&quot;: &quot;feature&quot;,
-      &quot;team&quot;: &quot;platform&quot;,
-      &quot;created_at&quot;: &quot;2026-04-01T10:00:00Z&quot;,
-      &quot;status_history&quot;: [
-        {&quot;status&quot;: &quot;Backlog&quot;,     &quot;entered_at&quot;: &quot;2026-04-01T10:00:00Z&quot;},
-        {&quot;status&quot;: &quot;Ready&quot;,       &quot;entered_at&quot;: &quot;2026-04-15T09:00:00Z&quot;},
-        {&quot;status&quot;: &quot;In Progress&quot;, &quot;entered_at&quot;: &quot;2026-04-17T11:30:00Z&quot;},
-        {&quot;status&quot;: &quot;In Review&quot;,   &quot;entered_at&quot;: &quot;2026-04-22T16:00:00Z&quot;},
-        {&quot;status&quot;: &quot;Done&quot;,        &quot;entered_at&quot;: &quot;2026-04-24T10:00:00Z&quot;}
-      ]
-    }
-  ]
-}
-```
-
-### Output JSON schema
-
-Wrapped per `SHARED_OUTPUT_SCHEMA.md`:
-
-```json
-{
-  &quot;schema&quot;: &quot;pm/cycle-time-analyzer/v1&quot;,
-  &quot;generated_at&quot;: &quot;2026-05-21T00:00:00Z&quot;,
-  &quot;data&quot;: {
-    &quot;as_of&quot;: &quot;2026-05-21&quot;,
-    &quot;summary&quot;: {
-      &quot;lead_time_p50_days&quot;: 9.5,
-      &quot;lead_time_p85_days&quot;: 22.1,
-      &quot;cycle_time_p50_days&quot;: 4.2,
-      &quot;cycle_time_p85_days&quot;: 11.0,
-      &quot;throughput_per_week&quot;: 6.4,
-      &quot;wip_count&quot;: 12
-    },
-    &quot;aging_wip&quot;: [
-      {&quot;id&quot;: &quot;ENG-117&quot;, &quot;title&quot;: &quot;...&quot;, &quot;age_days&quot;: 14.2, &quot;status&quot;: &quot;In Progress&quot;}
-    ],
-    &quot;cumulative_flow&quot;: [
-      {&quot;date&quot;: &quot;2026-04-01&quot;, &quot;Backlog&quot;: 32, &quot;Ready&quot;: 6, &quot;In Progress&quot;: 4, &quot;In Review&quot;: 1, &quot;Done&quot;: 18}
-    ]
-  }
-}
-```
-
-## References
-
-- `references/flow-metrics-guide.md` -- Vacanti-style deep dive: lead vs cycle, distributions vs averages, Little&#x27;s Law, aging WIP, common anti-patterns.
-- Vacanti, Daniel S. *Actionable Agile Metrics for Predictability*. ActionableAgile Press, 2015.
-- Vacanti, Daniel S. *When Will It Be Done?* ActionableAgile Press, 2020.
-- Little, John D. C. &quot;A Proof for the Queuing Formula: L = λW.&quot; Operations Research, 1961.
-- Anderson, David J. *Kanban: Successful Evolutionary Change for Your Technology Business*. Blue Hole Press, 2010.
 
 ---
 
@@ -1028,8 +772,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/cycle-time-analyzer/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
+python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
+python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
+</code></pre>
+
+Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/cycle-time-analyzer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

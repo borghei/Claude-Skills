@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Scientist - Claude Skills</title>
-  <meta name="description" content="Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/">
+  <meta name="description" content="Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building ">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html">
   <meta property="og:title" content="Data Scientist - Claude Skills">
-  <meta property="og:description" content="Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/">
+  <meta property="og:description" content="Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building ">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Data Scientist", "description": "Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...", "applicationCategory": "Data Analytics", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Data Scientist", "description": "Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.", "applicationCategory": "Data Analytics", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Data Scientist</h1>
-    <p class="page-subtitle">Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...</p>
+    <p class="page-subtitle">Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.</p>
     <div class="badge-bar"><span class="badge badge-domain">Data Analytics</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">data-science</span><span class="tag">machine-learning</span><span class="tag">statistics</span><span class="tag">modeling</span><span class="tag">analytics</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Data Scientist (Data Analytics domain).
 
-Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...
+Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.
 
-The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact. 1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clust
+The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact. Before modeling, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] **ML task + primary met
 
 ## Frameworks &amp; Templates You Know
 - Project Template
@@ -418,9 +418,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Data Scientist (Data Analytics domain).
 
-Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...
+Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.
 
-The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact. 1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clust
+The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact. Before modeling, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] **ML task + primary met
 
 ## Frameworks &amp; Templates You Know
 - Project Template
@@ -455,6 +455,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact.
 
+## Clarify First
+
+Before modeling, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **ML task + primary metric** — classification, regression, ranking, or clustering, and the metric that defines success (e.g., F1, RMSE) (drives algorithm selection and evaluation)
+- [ ] **Constraints** — latency, interpretability, and data volume (decides where on the simple→complex model ladder to land)
+- [ ] **Target variable and label quality** — what is being predicted and how clean/balanced the labels are (drives feature engineering and imbalance handling)
+- [ ] **For an A/B test: baseline rate + MDE** — current conversion and the smallest lift worth detecting (drives the required sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clustering). Define the primary evaluation metric (e.g., F1 for imbalanced classification, RMSE for regression). Document constraints (latency, interpretability, data volume).
@@ -690,7 +701,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Data Scientist&quot;**
-   - Description: &quot;Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...&quot;
+   - Description: &quot;Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -717,6 +728,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior data scientist, selecting algorithms, engineering features, designing experiments, evaluating models, and translating predictions into business impact.
 
+## Clarify First
+
+Before modeling, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **ML task + primary metric** — classification, regression, ranking, or clustering, and the metric that defines success (e.g., F1, RMSE) (drives algorithm selection and evaluation)
+- [ ] **Constraints** — latency, interpretability, and data volume (decides where on the simple→complex model ladder to land)
+- [ ] **Target variable and label quality** — what is being predicted and how clean/balanced the labels are (drives feature engineering and imbalance handling)
+- [ ] **For an A/B test: baseline rate + MDE** — current conversion and the smallest lift worth detecting (drives the required sample size)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Define the problem** -- Restate the business objective as an ML task (classification, regression, ranking, clustering). Define the primary evaluation metric (e.g., F1 for imbalanced classification, RMSE for regression). Document constraints (latency, interpretability, data volume).
@@ -952,7 +974,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Data Scientist&quot;**
-   - Description: &quot;Expert data science covering machine learning, statistical modeling, experimentation, predictive analytics, and advanced analytics. Use when selecting ML algorithms, engineering features, designing A/...&quot;
+   - Description: &quot;Data science across machine learning, statistical modeling, and experimentation. Use when selecting ML algorithms, engineering features, designing A/B tests, evaluating model performance, or building predictive pipelines.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1013,7 +1035,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python data-analytics/data-scientist/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Data Analytics</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html" class="skill-card" style="text-decoration:none"><h3>Analytics Engineer</h3><p>Expert analytics engineering covering data modeling, dbt development, data transformation, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/business-intelligence.html" class="skill-card" style="text-decoration:none"><h3>Business Intelligence</h3><p>Expert business intelligence covering dashboard design, data visualization, reporting...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-analyst.html" class="skill-card" style="text-decoration:none"><h3>Data Analyst</h3><p>Expert data analysis covering SQL querying, data visualization, statistical analysis, business...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/ml-ops-engineer.html" class="skill-card" style="text-decoration:none"><h3>Ml Ops Engineer</h3><p>Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature...</p></a></div>
+  <h2>Related Skills in Data Analytics</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html" class="skill-card" style="text-decoration:none"><h3>Analytics Engineer</h3><p>Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/business-intelligence.html" class="skill-card" style="text-decoration:none"><h3>Business Intelligence</h3><p>Business intelligence across dashboard design, visualization, and reporting automation. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-analyst.html" class="skill-card" style="text-decoration:none"><h3>Data Analyst</h3><p>Data analysis across SQL, visualization, statistics, and reporting. Use when writing SQL...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/ml-ops-engineer.html" class="skill-card" style="text-decoration:none"><h3>Ml Ops Engineer</h3><p>MLOps across model deployment, ML pipelines, monitoring, and feature stores. Use when deploying...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/data-analytics/data-scientist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

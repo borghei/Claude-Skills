@@ -22,6 +22,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = REPO_ROOT / "cli" / "skills.json"
 REGISTRY_PATH = REPO_ROOT / "registry.json"
 GEMINI_INDEX_PATH = REPO_ROOT / ".gemini" / "skills-index.json"
+# Root catalog consumed by scripts/generate_site.py to build the public website.
+SITE_CATALOG_PATH = REPO_ROOT / "skills.json"
 
 DOMAINS = [
     "engineering",
@@ -179,6 +181,9 @@ def build_skill_entry(domain: str, skill_dir: Path, rel_path: str | None = None)
 
     files, size_bytes = walk_skill_dir(skill_dir)
     path_suffix = rel_path if rel_path is not None else skill_dir.name
+    tools_count = sum(
+        1 for f in files if f.startswith("scripts/") and f.endswith(".py")
+    )
 
     return {
         "name": name,
@@ -188,9 +193,13 @@ def build_skill_entry(domain: str, skill_dir: Path, rel_path: str | None = None)
         "version": metadata.get("version", "1.0.0"),
         "updated": metadata.get("updated", ""),
         "author": metadata.get("author", ""),
+        "license": fm.get("license", ""),
+        "category": metadata.get("category", domain),
+        "subdomain": metadata.get("subdomain", ""),
         "path": f"{domain}/{path_suffix}",
         "files": files,
         "size_bytes": size_bytes,
+        "tools_count": tools_count,
         "has_scripts": "scripts" in {f.split("/", 1)[0] for f in files},
         "has_references": "references" in {f.split("/", 1)[0] for f in files},
         "has_assets": "assets" in {f.split("/", 1)[0] for f in files},
@@ -264,13 +273,68 @@ def main(argv: list[str]) -> int:
             encoding="utf-8",
         )
 
+    # Root catalog for the website generator (richer per-skill shape + per-domain rollup)
+    domain_rollup: dict = {}
+    for s in skills:
+        d = domain_rollup.setdefault(s["domain"], {"count": 0, "tools": 0})
+        d["count"] += 1
+        d["tools"] += s.get("tools_count", 0)
+    pm_count = domain_rollup.get("project-management", {}).get("count", 0)
+    existing = {}
+    if SITE_CATALOG_PATH.exists():
+        try:
+            existing = json.loads(SITE_CATALOG_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            existing = {}
+    site_catalog = {
+        "name": existing.get("name", "claude-skills"),
+        "description": (
+            f"The Universal AI Skills Library — {len(skills)} production-ready skills "
+            f"across {len(domain_rollup)} domains. Project Management is the "
+            f"most-used domain ({pm_count} skills)."
+        ),
+        "version": existing.get("version", "1.0.0"),
+        "repository": existing.get("repository", "https://github.com/borghei/Claude-Skills"),
+        "website": existing.get("website", "https://borghei.github.io/Claude-Skills"),
+        "author": existing.get("author", "borghei"),
+        "license": existing.get("license", "MIT + Commons Clause"),
+        "total_skills": len(skills),
+        "updated": generated_at[:10],
+        "domains": {k: domain_rollup[k] for k in sorted(domain_rollup)},
+        "skills": [_site_entry(s) for s in skills],
+    }
+    SITE_CATALOG_PATH.write_text(
+        json.dumps(site_catalog, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
     print(f"Wrote {MANIFEST_PATH.relative_to(REPO_ROOT)}")
     print(f"  skills: {manifest['skill_count']}")
     print(f"  domains: {manifest['domain_count']}")
     print(f"Wrote {REGISTRY_PATH.relative_to(REPO_ROOT)} (public registry)")
     if GEMINI_INDEX_PATH.parent.is_dir():
         print(f"Wrote {GEMINI_INDEX_PATH.relative_to(REPO_ROOT)} (Gemini CLI index)")
+    print(f"Wrote {SITE_CATALOG_PATH.relative_to(REPO_ROOT)} (website catalog)")
     return 0
+
+
+def _site_entry(skill: dict) -> dict:
+    """Root skills.json shape consumed by generate_site.py — per-skill tool
+    counts (not file lists) plus category/subdomain/license."""
+    return {
+        "name": skill["name"],
+        "description": skill.get("description", ""),
+        "path": f"{skill['path']}/SKILL.md",
+        "domain": skill["domain"],
+        "category": skill.get("category") or skill["domain"],
+        "subdomain": skill.get("subdomain", ""),
+        "version": skill.get("version", "1.0.0"),
+        "license": skill.get("license") or "MIT + Commons Clause",
+        "tags": skill.get("tags", []),
+        "tools": skill.get("tools_count", 0),
+        "has_references": skill.get("has_references", False),
+        "has_assets": skill.get("has_assets", False),
+    }
 
 
 def _gemini_entry(skill: dict) -> dict:

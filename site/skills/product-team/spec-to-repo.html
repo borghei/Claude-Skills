@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spec To Repo - Claude Skills</title>
+  <meta name="description" content="Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequ">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/product-team/spec-to-repo.html">
+  <meta property="og:title" content="Spec To Repo - Claude Skills">
+  <meta property="og:description" content="Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequ">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/product-team/spec-to-repo.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Spec To Repo", "description": "Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.", "applicationCategory": "Product", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/product-team/spec-to-repo.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/product-team/">Product</a><span class=sep>/</span><span>Spec To Repo</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Spec To Repo</h1>
+    <p class="page-subtitle">Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Product</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">prd</span><span class="tag">ticket-decomposition</span><span class="tag">branch-strategy</span><span class="tag">pr</span><span class="tag">definition-of-done</span><span class="tag">delivery</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Spec To Repo (Product domain).
+
+Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.
+
+A delivery-focused skill that bridges product spec to repository work. Where PRD-writing skills focus on what to build, this skill focuses on **how to break it down for execution** — the ticket decomposition,
+
+## Your Key Capabilities
+- — Decompose a PRD into tickets
+- — Validate the branch and PR plan
+- — Lint branch names against convention
+- Ticket sizing
+- The ticket tree
+- The &quot;vertical slice&quot;
+
+## Frameworks &amp; Templates You Know
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/spec-to-repo
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Spec To Repo (Product domain).
+
+Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.
+
+A delivery-focused skill that bridges product spec to repository work. Where PRD-writing skills focus on what to build, this skill focuses on **how to break it down for execution** — the ticket decomposition,
+
+## Your Key Capabilities
+- — Decompose a PRD into tickets
+- — Validate the branch and PR plan
+- — Lint branch names against convention
+- Ticket sizing
+- The ticket tree
+- The &quot;vertical slice&quot;
+
+## Frameworks &amp; Templates You Know
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/spec-to-repo
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Spec To Repo&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Spec to Repo
+
+A delivery-focused skill that bridges product spec to repository work.
+Where PRD-writing skills focus on what to build, this skill focuses on
+**how to break it down for execution** — the ticket decomposition,
+branch strategy, PR sequencing, and acceptance criteria that make a
+spec actually ship.
+
+## When to use this skill
+
+- Translating a **PRD or feature brief** into a sequence of tickets
+- Designing the **branch + PR sequence** for a multi-week feature
+- Auditing an existing **ticket decomposition** for risk (big tickets, hidden dependencies)
+- Defining **definition-of-done** that covers code, tests, docs, telemetry
+- Planning **incremental shipping** (feature flags, canaries, dark-launch)
+- Reviewing a **decomposition before sprint planning** to avoid mid-sprint surprises
+
+## Inputs the advisor expects
+
+- The PRD or spec document
+- Target ship window (1 sprint? 1 month? 1 quarter?)
+- Engineering team size + composition (FE, BE, ML, mobile)
+- Risk profile (greenfield vs production-impacting)
+- Feature-flag and rollout posture
+
+## Clarify First
+
+Before generating the repo plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The PRD or spec** — the user-facing capabilities to decompose (drives the epic→ticket tree)
+- [ ] **Target ship window** — one sprint, month, or quarter (drives ticket sizing and PR sequencing)
+- [ ] **Team composition** — FE, BE, ML, mobile (decides parallel paths and vertical-slice tickets)
+- [ ] **Feature-flag and rollout posture** — flagged/dark-launch vs direct ship (drives PR sequencing and definition-of-done)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Workflows
+
+### Workflow 1 — Decompose a PRD into tickets
+
+1. Pull the PRD; identify the user-facing capabilities.
+2. Run `prd_to_tickets_decomposer.py` with the user stories + technical
+   notes to surface a candidate ticket tree (epic → tickets → subtasks)
+   with size estimates and dependencies.
+3. Manually review; tune for team-specific patterns.
+
+```bash
+python3 spec-to-repo/scripts/prd_to_tickets_decomposer.py \
+  --input prd.json --format markdown
+```
+
+### Workflow 2 — Validate the branch and PR plan
+
+1. Capture proposed branch + PR sequence.
+2. Run `pr_scope_analyzer.py` to flag oversized PRs, missing tests,
+   missing telemetry, and risky merges.
+3. Adjust before opening PRs.
+
+```bash
+python3 spec-to-repo/scripts/pr_scope_analyzer.py \
+  --input pr_plan.json --format markdown
+```
+
+### Workflow 3 — Lint branch names against convention
+
+1. Capture branch list (e.g., `git branch --list`).
+2. Run `branch_naming_validator.py` to flag non-conformant names.
+
+```bash
+python3 spec-to-repo/scripts/branch_naming_validator.py \
+  --input branches.txt --format markdown
+```
+
+## Decision frameworks
+
+### Ticket sizing
+
+| Size | Effort | Description |
+|------|--------|-------------|
+| XS | &lt; 0.5 day | Trivial; usually skip ticketing |
+| S | 0.5–1 day | One simple change |
+| M | 1–3 days | Single feature, well-scoped |
+| L | 3–5 days | Multi-day work; should split if possible |
+| XL | &gt; 5 days | Always split — too big for confident estimate |
+
+A ticket that&#x27;s L or XL almost always hides a missing decomposition. Push
+back on yourself.
+
+### The ticket tree
+
+```
+Epic — large product feature (&quot;Notifications v2&quot;)
+├── Story — user-facing capability (&quot;As a user I can mute by channel&quot;)
+│   ├── Ticket — one engineering work item (backend, frontend, infra)
+│   │   └── Subtask — atomic step (optional)
+```
+
+Most orgs:
+- Epic ≈ PRD-sized scope
+- Story ≈ one user-facing slice
+- Ticket ≈ one PR (or pair of PRs: BE + FE)
+
+### The &quot;vertical slice&quot;
+
+Best ticket: ships a small user-visible improvement end-to-end.
+- Backend change + frontend change + tests + telemetry + docs in one ship
+- Better than: BE-only ticket waiting for FE-only ticket waiting for QA
+
+When you can&#x27;t slice vertically (e.g., backend is weeks before frontend):
+- Use feature flags to ship behind a switch
+- Dark-launch backend to validate before frontend
+- Communicate the lag explicitly
+
+### PR sequencing
+
+For a multi-PR feature:
+
+1. **PR 1 — Infrastructure / scaffolding** (no behavior change)
+2. **PR 2 — Backend changes** (behind flag; no frontend uses it)
+3. **PR 3 — Frontend changes** (behind flag; tests pass with flag on/off)
+4. **PR 4 — Telemetry + analytics events**
+5. **PR 5 — Documentation + runbook**
+6. **PR 6 — Flag enablement** (small change; reviewable cleanly)
+
+Each PR &lt; 400 lines if possible. Reviewability collapses above 400.
+
+### Definition of done
+
+Per ticket:
+- Code: written, reviewed, merged
+- Tests: unit + integration as appropriate
+- Telemetry: events fired (and verified)
+- Docs: README / runbook / API doc updated as needed
+- Accessibility: meets the project bar
+- Feature flag: configured (if applicable)
+- Rollout plan: defined for non-flagged ships
+
+Per epic:
+- All tickets complete
+- Feature behind flag in production for 1+ week (if risky)
+- Flag enabled for X% (canary), then ramped
+- Telemetry shows expected behavior
+- Customer-facing comms drafted (if applicable)
+
+## Common engagements
+
+### &quot;Help me decompose this PRD&quot;
+1. List user-facing capabilities (1-line each).
+2. For each, list the backend, frontend, infra, telemetry, docs work.
+3. Estimate; flag anything &gt; 3 days for further breakdown.
+4. Sequence: scaffolding first, behavior next, flag enablement last.
+5. Identify cross-team dependencies; engage before sprint start.
+
+### &quot;Our team is shipping huge PRs&quot;
+1. Audit the last 10 PRs: median size, P95 size.
+2. Identify the patterns: monolithic services + flag-less work + slow review.
+3. Pilot: feature flags + ticket-first decomposition + PR size SLA.
+4. Track: median PR size + lead time week-over-week.
+
+### &quot;Help me plan the rollout&quot;
+1. Define a successful launch criterion (e.g., &lt; 0.5% error rate at 50%).
+2. Identify the kill switch (feature flag or quick-revert).
+3. Plan ramps: 1% → 5% → 25% → 50% → 100% with bake time.
+4. Define rollback criteria + comms plan.
+5. Coordinate with on-call + support.
+
+## Anti-patterns to avoid
+
+- **Decomposition as wishful thinking.** &quot;3-day estimate&quot; with no break-down is a 2-week-actual.
+- **Sequential ticket tree (everyone waits).** Plan parallel paths.
+- **Hidden dependencies on other teams.** Surface them in decomposition.
+- **No feature flag.** Shippable in chunks but every change goes to all users immediately.
+- **PRs &gt; 1000 lines.** Reviewability dies; bugs hide.
+- **DoD that&#x27;s just &quot;code merged.&quot;** Forgets tests, docs, telemetry.
+- **Ticket = a day of work.** Sometimes tickets are 30 minutes; sometimes 3 days.
+
+## References
+
+- `references/spec-to-ticket-decomposition.md` — patterns for breaking specs into tickets
+- `references/branch-strategy-for-features.md` — branching, feature flags, dark-launch
+- `references/pr-discipline-and-conventions.md` — PR size, review, definition-of-done
+
+## Related skills
+
+- `product-team/agile-product-owner` — sprint planning, prioritization
+- `engineering/feature-flags-architect` — flag strategy
+- `engineering/observability-designer` — SLO / telemetry
+- `c-level-advisor/vpe-advisor` — broader delivery context
+- `project-management/` skills — ticket / sprint management tooling
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Spec To Repo&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Spec To Repo in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Spec To Repo&quot;**
+   - Description: &quot;Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/spec-to-repo/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Spec To Repo&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Spec to Repo
+
+A delivery-focused skill that bridges product spec to repository work.
+Where PRD-writing skills focus on what to build, this skill focuses on
+**how to break it down for execution** — the ticket decomposition,
+branch strategy, PR sequencing, and acceptance criteria that make a
+spec actually ship.
+
+## When to use this skill
+
+- Translating a **PRD or feature brief** into a sequence of tickets
+- Designing the **branch + PR sequence** for a multi-week feature
+- Auditing an existing **ticket decomposition** for risk (big tickets, hidden dependencies)
+- Defining **definition-of-done** that covers code, tests, docs, telemetry
+- Planning **incremental shipping** (feature flags, canaries, dark-launch)
+- Reviewing a **decomposition before sprint planning** to avoid mid-sprint surprises
+
+## Inputs the advisor expects
+
+- The PRD or spec document
+- Target ship window (1 sprint? 1 month? 1 quarter?)
+- Engineering team size + composition (FE, BE, ML, mobile)
+- Risk profile (greenfield vs production-impacting)
+- Feature-flag and rollout posture
+
+## Clarify First
+
+Before generating the repo plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The PRD or spec** — the user-facing capabilities to decompose (drives the epic→ticket tree)
+- [ ] **Target ship window** — one sprint, month, or quarter (drives ticket sizing and PR sequencing)
+- [ ] **Team composition** — FE, BE, ML, mobile (decides parallel paths and vertical-slice tickets)
+- [ ] **Feature-flag and rollout posture** — flagged/dark-launch vs direct ship (drives PR sequencing and definition-of-done)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Workflows
+
+### Workflow 1 — Decompose a PRD into tickets
+
+1. Pull the PRD; identify the user-facing capabilities.
+2. Run `prd_to_tickets_decomposer.py` with the user stories + technical
+   notes to surface a candidate ticket tree (epic → tickets → subtasks)
+   with size estimates and dependencies.
+3. Manually review; tune for team-specific patterns.
+
+```bash
+python3 spec-to-repo/scripts/prd_to_tickets_decomposer.py \
+  --input prd.json --format markdown
+```
+
+### Workflow 2 — Validate the branch and PR plan
+
+1. Capture proposed branch + PR sequence.
+2. Run `pr_scope_analyzer.py` to flag oversized PRs, missing tests,
+   missing telemetry, and risky merges.
+3. Adjust before opening PRs.
+
+```bash
+python3 spec-to-repo/scripts/pr_scope_analyzer.py \
+  --input pr_plan.json --format markdown
+```
+
+### Workflow 3 — Lint branch names against convention
+
+1. Capture branch list (e.g., `git branch --list`).
+2. Run `branch_naming_validator.py` to flag non-conformant names.
+
+```bash
+python3 spec-to-repo/scripts/branch_naming_validator.py \
+  --input branches.txt --format markdown
+```
+
+## Decision frameworks
+
+### Ticket sizing
+
+| Size | Effort | Description |
+|------|--------|-------------|
+| XS | &lt; 0.5 day | Trivial; usually skip ticketing |
+| S | 0.5–1 day | One simple change |
+| M | 1–3 days | Single feature, well-scoped |
+| L | 3–5 days | Multi-day work; should split if possible |
+| XL | &gt; 5 days | Always split — too big for confident estimate |
+
+A ticket that&#x27;s L or XL almost always hides a missing decomposition. Push
+back on yourself.
+
+### The ticket tree
+
+```
+Epic — large product feature (&quot;Notifications v2&quot;)
+├── Story — user-facing capability (&quot;As a user I can mute by channel&quot;)
+│   ├── Ticket — one engineering work item (backend, frontend, infra)
+│   │   └── Subtask — atomic step (optional)
+```
+
+Most orgs:
+- Epic ≈ PRD-sized scope
+- Story ≈ one user-facing slice
+- Ticket ≈ one PR (or pair of PRs: BE + FE)
+
+### The &quot;vertical slice&quot;
+
+Best ticket: ships a small user-visible improvement end-to-end.
+- Backend change + frontend change + tests + telemetry + docs in one ship
+- Better than: BE-only ticket waiting for FE-only ticket waiting for QA
+
+When you can&#x27;t slice vertically (e.g., backend is weeks before frontend):
+- Use feature flags to ship behind a switch
+- Dark-launch backend to validate before frontend
+- Communicate the lag explicitly
+
+### PR sequencing
+
+For a multi-PR feature:
+
+1. **PR 1 — Infrastructure / scaffolding** (no behavior change)
+2. **PR 2 — Backend changes** (behind flag; no frontend uses it)
+3. **PR 3 — Frontend changes** (behind flag; tests pass with flag on/off)
+4. **PR 4 — Telemetry + analytics events**
+5. **PR 5 — Documentation + runbook**
+6. **PR 6 — Flag enablement** (small change; reviewable cleanly)
+
+Each PR &lt; 400 lines if possible. Reviewability collapses above 400.
+
+### Definition of done
+
+Per ticket:
+- Code: written, reviewed, merged
+- Tests: unit + integration as appropriate
+- Telemetry: events fired (and verified)
+- Docs: README / runbook / API doc updated as needed
+- Accessibility: meets the project bar
+- Feature flag: configured (if applicable)
+- Rollout plan: defined for non-flagged ships
+
+Per epic:
+- All tickets complete
+- Feature behind flag in production for 1+ week (if risky)
+- Flag enabled for X% (canary), then ramped
+- Telemetry shows expected behavior
+- Customer-facing comms drafted (if applicable)
+
+## Common engagements
+
+### &quot;Help me decompose this PRD&quot;
+1. List user-facing capabilities (1-line each).
+2. For each, list the backend, frontend, infra, telemetry, docs work.
+3. Estimate; flag anything &gt; 3 days for further breakdown.
+4. Sequence: scaffolding first, behavior next, flag enablement last.
+5. Identify cross-team dependencies; engage before sprint start.
+
+### &quot;Our team is shipping huge PRs&quot;
+1. Audit the last 10 PRs: median size, P95 size.
+2. Identify the patterns: monolithic services + flag-less work + slow review.
+3. Pilot: feature flags + ticket-first decomposition + PR size SLA.
+4. Track: median PR size + lead time week-over-week.
+
+### &quot;Help me plan the rollout&quot;
+1. Define a successful launch criterion (e.g., &lt; 0.5% error rate at 50%).
+2. Identify the kill switch (feature flag or quick-revert).
+3. Plan ramps: 1% → 5% → 25% → 50% → 100% with bake time.
+4. Define rollback criteria + comms plan.
+5. Coordinate with on-call + support.
+
+## Anti-patterns to avoid
+
+- **Decomposition as wishful thinking.** &quot;3-day estimate&quot; with no break-down is a 2-week-actual.
+- **Sequential ticket tree (everyone waits).** Plan parallel paths.
+- **Hidden dependencies on other teams.** Surface them in decomposition.
+- **No feature flag.** Shippable in chunks but every change goes to all users immediately.
+- **PRs &gt; 1000 lines.** Reviewability dies; bugs hide.
+- **DoD that&#x27;s just &quot;code merged.&quot;** Forgets tests, docs, telemetry.
+- **Ticket = a day of work.** Sometimes tickets are 30 minutes; sometimes 3 days.
+
+## References
+
+- `references/spec-to-ticket-decomposition.md` — patterns for breaking specs into tickets
+- `references/branch-strategy-for-features.md` — branching, feature flags, dark-launch
+- `references/pr-discipline-and-conventions.md` — PR size, review, definition-of-done
+
+## Related skills
+
+- `product-team/agile-product-owner` — sprint planning, prioritization
+- `engineering/feature-flags-architect` — flag strategy
+- `engineering/observability-designer` — SLO / telemetry
+- `c-level-advisor/vpe-advisor` — broader delivery context
+- `project-management/` skills — ticket / sprint management tooling
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Spec To Repo&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Spec To Repo in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Spec To Repo&quot;**
+   - Description: &quot;Translate product specs (PRDs, user stories) into a ship-ready repo plan: ticket decomposition, branch strategy, and PR sequencing. Use when breaking a PRD into tickets or designing the branch/PR sequence.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/spec-to-repo/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install product-team/spec-to-repo ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/spec-to-repo your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/spec-to-repo/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/spec-to-repo your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/spec-to-repo/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/spec-to-repo your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: product-team/spec-to-repo/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/spec-to-repo your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/spec-to-repo your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/product-team/spec-to-repo</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python product-team/spec-to-repo/scripts/tool_name.py --help</code></pre>
+  
+  
+  <h2>Related Skills in Product</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/product-team/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and run statistically rigorous A/B tests and experiments. Use when planning experiments,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/agile-product-owner.html" class="skill-card" style="text-decoration:none"><h3>Agile Product Owner</h3><p>Agile product ownership for backlog management and sprint execution. Use for writing user...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/apple-hig-expert.html" class="skill-card" style="text-decoration:none"><h3>Apple Hig Expert</h3><p>Apple Human Interface Guidelines expert across iOS, iPadOS, macOS, watchOS, tvOS, and visionOS....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/design-system-lead.html" class="skill-card" style="text-decoration:none"><h3>Design System Lead</h3><p>Design systems leadership across component libraries, design tokens, and design-dev...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/product-analytics.html" class="skill-card" style="text-decoration:none"><h3>Product Analytics</h3><p>Product analytics for instrumenting products, defining metrics, and building retention funnels....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html" class="skill-card" style="text-decoration:none"><h3>Product Designer</h3><p>Product design across UI/UX, design systems, prototyping, and user research. Use when creating...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/product-team/spec-to-repo/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

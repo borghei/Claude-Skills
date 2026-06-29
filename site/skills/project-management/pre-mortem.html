@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Pre Mortem</h1>
     <p class="page-subtitle">Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Product Discovery</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -397,17 +397,6 @@ Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, a
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before lau
 
-## Your Key Capabilities
-- When to Use
-- The Thought Experiment
-- Tigers (Real Risks)
-- Paper Tigers (Look Scary but Unlikely)
-- Elephants (Unspoken Concerns)
-- Phase 1: Set the Scene (5 minutes)
-
-## Frameworks &amp; Templates You Know
-- Use `assets/pre_mortem_template.md` for the full document template.
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -429,17 +418,6 @@ Start by asking the user what they need help with.">
 Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before lau
-
-## Your Key Capabilities
-- When to Use
-- The Thought Experiment
-- Tigers (Real Risks)
-- Paper Tigers (Look Scary but Unlikely)
-- Elephants (Unspoken Concerns)
-- Phase 1: Set the Scene (5 minutes)
-
-## Frameworks &amp; Templates You Know
-- Use `assets/pre_mortem_template.md` for the full document template.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -473,247 +451,56 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before launch while avoiding wasted effort on unlikely risks.
 
-### When to Use
+## Core Capabilities
+
+- **Prospective hindsight framing** — &quot;It is 14 days after launch, and we failed. Why?&quot; surfaces specific, honest risks.
+- **Tiger / Paper Tiger / Elephant classification** — separate real evidenced risks (Tigers) from anxiety (Paper Tigers) and unspoken concerns (Elephants).
+- **Urgency triage** — tag each Tiger Launch-Blocking, Fast-Follow, or Track with owner and decision date.
+- **6-phase facilitation** — scene-setting, silent generation, cluster, classify, mitigate, address elephants in 60-90 minutes.
+- **Automated categorization** — `risk_categorizer.py` summarizes distribution and flags elephants needing escalation.
+
+## When to Use
 
 - Before committing significant resources to build (post-ideation, post-validation).
 - Before a major launch, migration, or architectural change.
 - When the team has &quot;a bad feeling&quot; they cannot articulate.
 - When stakeholder confidence is high and you need to stress-test it.
 
-## Core Concept
+## Clarify First
 
-### The Thought Experiment
+Before running the pre-mortem, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-&gt; &quot;It is 14 days after launch. The product has failed. What went wrong?&quot;
+- [ ] **The thing being stress-tested** — the specific launch/build/migration that &quot;failed 14 days after launch&quot; (anchors the prospective-hindsight framing)
+- [ ] **Failure horizon** — the date/milestone you imagine looking back from (a vague horizon produces vague risks)
+- [ ] **Who&#x27;s in the room** — the 4-8 participants and whether psychological safety exists (elephants only surface with candor and the right people)
 
-This framing exploits a cognitive bias: people are better at explaining past events than predicting future ones. By placing the failure in the &quot;past&quot; (even fictitiously), participants generate more specific and honest risk assessments.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Risk Classification
-
-### Tigers (Real Risks)
-
-Tigers are real, evidence-backed risks that could cause serious harm if not addressed.
-
-**Characteristics:**
-- Supported by data, past experience, or observable trends.
-- The team can describe a plausible failure scenario in concrete terms.
-- Ignoring them would be negligent.
-
-**Examples:**
-- &quot;Our authentication service went down 3 times last month. A launch-day outage is plausible.&quot;
-- &quot;We have zero customers in the enterprise segment. Our sales team has no enterprise relationships.&quot;
-- &quot;The EU regulation takes effect in 60 days. We have not started compliance work.&quot;
-
-### Paper Tigers (Look Scary but Unlikely)
-
-Paper Tigers are risks that sound alarming but, on closer inspection, are unlikely or have minimal real impact.
-
-**Characteristics:**
-- Based on hypothetical scenarios without supporting evidence.
-- The probability is very low, or the impact would be manageable.
-- Often raised because of general anxiety rather than specific knowledge.
-
-**Examples:**
-- &quot;A competitor might copy our feature&quot; -- possible, but their execution timeline is 6-12 months.
-- &quot;The server might not handle 100x traffic&quot; -- but our realistic projection is 5x, with auto-scaling.
-- &quot;Users might hate the new UI&quot; -- but usability testing with 8 users showed high satisfaction.
-
-### Elephants (Unspoken Concerns)
-
-Elephants are the risks everyone knows about but nobody talks about. They are the &quot;elephant in the room.&quot;
-
-**Characteristics:**
-- The team avoids discussing them due to politics, hierarchy, or discomfort.
-- Often involve people, process, or organizational issues rather than technical ones.
-- Frequently the actual cause of failure when projects fail.
-
-**Examples:**
-- &quot;The tech lead does not believe in this project and has been disengaged for weeks.&quot;
-- &quot;The CEO&#x27;s pet feature is driving the roadmap, but customers have not asked for it.&quot;
-- &quot;We do not have a plan for what happens when the contractor&#x27;s contract ends next month.&quot;
-
-## Tiger Urgency Classification
-
-Once a risk is classified as a Tiger, assign an urgency level:
-
-| Urgency | Definition | Action Required |
-|---------|-----------|----------------|
-| **Launch-Blocking** | If unresolved, the launch should not proceed. | Concrete mitigation plan, assigned owner, decision date before launch. |
-| **Fast-Follow** | Must be addressed within 2 weeks after launch. | Documented plan, assigned owner, scheduled for first post-launch sprint. |
-| **Track** | Should be monitored and addressed if it escalates. | Added to risk register, reviewed at regular cadence. |
-
-## Methodology
-
-### Phase 1: Set the Scene (5 minutes)
-
-The facilitator reads this prompt to the group:
-
-&gt; &quot;Imagine it is 14 days after our launch. The product has failed. Users are not adopting it, key metrics are down, and leadership is asking what went wrong. Take 10 minutes to write down every reason you can think of for why we failed. Be specific. Be honest. Nothing is off limits.&quot;
-
-**Ground rules:**
-- Anonymous contributions (sticky notes or digital equivalent).
-- No attribution, no blame, no judgment.
-- Quantity over quality in the first round.
-
-### Phase 2: Generate Risks (10 minutes)
-
-Each participant independently writes down failure scenarios. One risk per sticky note. Aim for 5-10 per person.
-
-**Prompts to stimulate thinking:**
-- What technical system is most likely to break?
-- What customer objection have we not addressed?
-- What team dynamic could derail us?
-- What external event could change our assumptions?
-- What are we pretending is not a problem?
-- What decision are we avoiding?
-
-### Phase 3: Share and Cluster (15 minutes)
-
-1. Read each risk aloud (without attribution).
-2. Place on the board.
-3. Group similar risks together.
-4. Merge duplicates.
-
-### Phase 4: Classify (15 minutes)
-
-For each cluster, the group decides:
-
-| Classification | Criteria |
-|---------------|----------|
-| **Tiger** | Supported by evidence. Plausible failure scenario. |
-| **Paper Tiger** | Sounds scary but unlikely or low-impact on inspection. |
-| **Elephant** | The room got quiet when this was read. People exchanged glances. |
-
-For each Tiger, assign urgency: Launch-Blocking, Fast-Follow, or Track.
-
-### Phase 5: Mitigation Plans (15 minutes)
-
-For each **Launch-Blocking Tiger**, complete:
-
-| Field | Description |
-|-------|-------------|
-| **Risk** | Clear description of the risk |
-| **Evidence** | What data or experience supports this being a real risk? |
-| **Mitigation** | Specific, concrete action to reduce the risk |
-| **Owner** | Single person accountable |
-| **Decision Date** | Date by which the mitigation must be complete or the launch decision revisited |
-
-### Phase 6: Address Elephants (10 minutes)
-
-Elephants require a different approach than Tigers:
-
-1. **Acknowledge** -- Name the elephant explicitly. &quot;The team is concerned that...&quot;
-2. **Assess** -- Is this actually a Tiger in disguise? If so, reclassify.
-3. **Decide** -- Either address it (assign an owner) or consciously accept it (document the acceptance and rationale).
-
-## Python Tool: risk_categorizer.py
-
-Categorize and analyze risks using the CLI tool:
+## Quick Start
 
 ```bash
-# Run with demo data
-python3 scripts/risk_categorizer.py --demo
-
-# Run with custom input
-python3 scripts/risk_categorizer.py input.json
-
-# Output as JSON
+python3 scripts/risk_categorizer.py --demo            # built-in sample (7 risks)
+python3 scripts/risk_categorizer.py input.json        # categorize your risks
 python3 scripts/risk_categorizer.py input.json --format json
 ```
 
-### Input Format
+Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
 
-```json
-{
-  &quot;risks&quot;: [
-    {
-      &quot;description&quot;: &quot;Authentication service has had 3 outages in the last month&quot;,
-      &quot;category&quot;: &quot;tiger&quot;,
-      &quot;evidence&quot;: &quot;Incident reports from last 30 days&quot;,
-      &quot;urgency&quot;: &quot;launch_blocking&quot;
-    }
-  ]
-}
-```
+## References
 
-### Output
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Risk distribution summary, action plans for launch-blocking tigers, and flags for elephants that may need investigation.
-
-See `scripts/risk_categorizer.py` for full documentation.
-
-## Output Format
-
-### Pre-Mortem Summary
-
-```
-Pre-Mortem Analysis: [Product/Feature Name]
-Date: YYYY-MM-DD
-Participants: [list]
-Total risks identified: N
-  - Tigers: X (Launch-Blocking: A, Fast-Follow: B, Track: C)
-  - Paper Tigers: Y
-  - Elephants: Z
-```
-
-### Risk Registry
-
-| # | Risk | Category | Urgency | Evidence | Mitigation | Owner | Decision Date |
-|---|------|----------|---------|----------|-----------|-------|--------------|
-| 1 | ... | Tiger | Launch-Blocking | ... | ... | ... | ... |
-| 2 | ... | Tiger | Fast-Follow | ... | ... | ... | ... |
-| 3 | ... | Paper Tiger | -- | ... | -- | -- | -- |
-| 4 | ... | Elephant | TBD | ... | ... | ... | ... |
-
-Use `assets/pre_mortem_template.md` for the full document template.
-
-## Integration with Other Discovery Skills
-
-- Use after `brainstorm-ideas/` and `brainstorm-experiments/` -- pre-mortem is the final check before committing to build.
-- Feed launch-blocking Tiger mitigations back into `identify-assumptions/` if they surface new assumptions.
-- Elephants often reveal assumptions that the team has been avoiding.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Team generates mostly paper tigers | Risk aversion or surface-level thinking; team not fully immersing in the failure scenario | Re-read the thought experiment prompt slowly; extend silent writing time from 10 to 15 minutes; use specific prompts |
-| No elephants surfaced | Psychological safety too low, or facilitator is a manager creating power dynamics | Use anonymous contribution (sticky notes or digital tools); consider an external facilitator; separate session from performance reviews |
-| All risks classified as tigers | Team lacks calibration on what constitutes real evidence vs. anxiety | Require concrete evidence for each tiger; if evidence is hypothetical, reclassify as paper tiger |
-| Elephant escalation check flags too many false positives | ESCALATION_KEYWORDS list is broad, matching common words in non-critical contexts | Review matched keywords in output; refine escalation thresholds; use the recommendation as a prompt, not a verdict |
-| Launch-blocking tigers have no owners assigned | Pre-mortem session ended without Phase 5 mitigation planning | Always reserve 15 minutes for mitigation plans; do not skip Phase 5 even if the session runs long |
-| Validation errors on input JSON | Missing required fields (`description`, `evidence`, `category`) or invalid urgency for tigers | Check that every tiger has `urgency` set to one of: `launch_blocking`, `fast_follow`, `track` |
-
-## Success Criteria
-
-- Pre-mortem conducted before every major launch, migration, or significant resource commitment
-- At least 5-10 risks generated per person during the silent writing phase
-- Risk distribution includes all three categories (not all tigers, not all paper tigers)
-- Every launch-blocking tiger has an assigned owner, concrete mitigation plan, and decision date
-- Elephants are explicitly named and either addressed or consciously accepted with documented rationale
-- Pre-mortem findings are reviewed against actual outcomes post-launch to calibrate future sessions
-- Session duration stays within 60-90 minutes total across all 6 phases
+- **[references/methodology-and-tools.md](references/methodology-and-tools.md)** — the thought experiment, full Tiger/Paper Tiger/Elephant classification with examples, urgency table, the 6-phase facilitation script, `risk_categorizer.py` usage and flags, output formats, troubleshooting, success criteria, and bibliography. Read when running or scripting a session.
+- **[references/pre-mortem-guide.md](references/pre-mortem-guide.md)** — Gary Klein&#x27;s origin and why pre-mortems work, when (and when not) to run one, deep classification criteria across domains, the facilitation timeline, and a worked SaaS launch example. Read for the theory and a full example.
+- **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (mitigation theater, groupthink, vague risks, over-mitigated elephants, late pre-mortems, missing owners) with bad/good examples and one-line checks. Read before sharing pre-mortem output.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Prospective hindsight exercises using the &quot;14 days after launch failure&quot; framing
-- Tiger / Paper Tiger / Elephant risk classification with urgency levels
-- Automated elephant escalation detection based on keyword signals
-- Risk registry generation with category distribution and action plans
-- Facilitation methodology for both in-person and remote teams
+**In Scope:** prospective hindsight using the &quot;14 days after launch failure&quot; framing; Tiger / Paper Tiger / Elephant classification with urgency levels; automated elephant escalation detection; risk registry generation; facilitation methodology for in-person and remote teams.
 
-**Out of Scope:**
-- Ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`)
-- Quantitative risk analysis with probability/impact scoring (see `senior-pm/` skill)
-- Product discovery and hypothesis validation (see `brainstorm-experiments/`)
-- Technical architecture risk assessment (see `engineering/` skills)
+**Out of Scope:** ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`); quantitative probability/impact scoring (`senior-pm/`); product discovery and hypothesis validation (`brainstorm-experiments/`); technical architecture risk assessment (`engineering/` skills).
 
-**Important Caveats:**
-- Pre-mortems are most effective with 4-8 participants. Fewer than 4 limits perspective diversity; more than 10 makes classification unwieldy.
-- The elephant escalation keyword check is a heuristic. It catches common patterns but cannot detect all political or organizational risks.
-- Pre-mortems complement, not replace, assumption mapping. Use `identify-assumptions/` for systematic risk categorization and `pre-mortem/` for surfacing unspoken concerns.
-- Psychological safety is a prerequisite. If the team cannot speak honestly, the pre-mortem will produce sanitized results.
+**Important Caveats:** most effective with 4-8 participants; the elephant escalation keyword check is a heuristic; pre-mortems complement, not replace, assumption mapping (`identify-assumptions/`); psychological safety is a prerequisite.
 
 ## Integration Points
 
@@ -725,31 +512,6 @@ Use `assets/pre_mortem_template.md` for the full document template.
 | `execution/create-prd/` | Feeds into | Tiger mitigations become PRD risk sections and assumption validation plans |
 | `senior-pm/` | Feeds into | Launch-blocking tigers escalate into portfolio risk registers via `risk_matrix_analyzer.py` |
 | `scrum-master/` | Feeds into | Fast-follow tigers become sprint backlog items with mitigation-focused stories |
-
-## Tool Reference
-
-### risk_categorizer.py
-
-Categorizes pre-mortem risks as Tigers, Paper Tigers, or Elephants. Generates action plans for launch-blocking tigers and flags elephants with escalation signals.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `input_file` | positional | (optional) | Path to JSON file with risks array |
-| `--demo` | flag | off | Run with built-in sample data (7 risks across all categories) |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input fields per risk:**
-- `description` (required): Clear description of the risk scenario
-- `category` (required): One of `tiger`, `paper_tiger`, `elephant`
-- `evidence` (required): Supporting data or observations
-- `urgency` (required for tigers): One of `launch_blocking`, `fast_follow`, `track`
-
-## References
-
-- Gary Klein, &quot;Performing a Project Pre-Mortem,&quot; *Harvard Business Review* (2007)
-- Daniel Kahneman, *Thinking, Fast and Slow* (2011) -- prospective hindsight
-- Chip Heath &amp; Dan Heath, *Decisive* (2013) -- decision-making under uncertainty
-- Amy Edmondson, *The Fearless Organization* (2018) -- psychological safety for surfacing elephants
 
 ---
 
@@ -806,247 +568,56 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before launch while avoiding wasted effort on unlikely risks.
 
-### When to Use
+## Core Capabilities
+
+- **Prospective hindsight framing** — &quot;It is 14 days after launch, and we failed. Why?&quot; surfaces specific, honest risks.
+- **Tiger / Paper Tiger / Elephant classification** — separate real evidenced risks (Tigers) from anxiety (Paper Tigers) and unspoken concerns (Elephants).
+- **Urgency triage** — tag each Tiger Launch-Blocking, Fast-Follow, or Track with owner and decision date.
+- **6-phase facilitation** — scene-setting, silent generation, cluster, classify, mitigate, address elephants in 60-90 minutes.
+- **Automated categorization** — `risk_categorizer.py` summarizes distribution and flags elephants needing escalation.
+
+## When to Use
 
 - Before committing significant resources to build (post-ideation, post-validation).
 - Before a major launch, migration, or architectural change.
 - When the team has &quot;a bad feeling&quot; they cannot articulate.
 - When stakeholder confidence is high and you need to stress-test it.
 
-## Core Concept
+## Clarify First
 
-### The Thought Experiment
+Before running the pre-mortem, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-&gt; &quot;It is 14 days after launch. The product has failed. What went wrong?&quot;
+- [ ] **The thing being stress-tested** — the specific launch/build/migration that &quot;failed 14 days after launch&quot; (anchors the prospective-hindsight framing)
+- [ ] **Failure horizon** — the date/milestone you imagine looking back from (a vague horizon produces vague risks)
+- [ ] **Who&#x27;s in the room** — the 4-8 participants and whether psychological safety exists (elephants only surface with candor and the right people)
 
-This framing exploits a cognitive bias: people are better at explaining past events than predicting future ones. By placing the failure in the &quot;past&quot; (even fictitiously), participants generate more specific and honest risk assessments.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-## Risk Classification
-
-### Tigers (Real Risks)
-
-Tigers are real, evidence-backed risks that could cause serious harm if not addressed.
-
-**Characteristics:**
-- Supported by data, past experience, or observable trends.
-- The team can describe a plausible failure scenario in concrete terms.
-- Ignoring them would be negligent.
-
-**Examples:**
-- &quot;Our authentication service went down 3 times last month. A launch-day outage is plausible.&quot;
-- &quot;We have zero customers in the enterprise segment. Our sales team has no enterprise relationships.&quot;
-- &quot;The EU regulation takes effect in 60 days. We have not started compliance work.&quot;
-
-### Paper Tigers (Look Scary but Unlikely)
-
-Paper Tigers are risks that sound alarming but, on closer inspection, are unlikely or have minimal real impact.
-
-**Characteristics:**
-- Based on hypothetical scenarios without supporting evidence.
-- The probability is very low, or the impact would be manageable.
-- Often raised because of general anxiety rather than specific knowledge.
-
-**Examples:**
-- &quot;A competitor might copy our feature&quot; -- possible, but their execution timeline is 6-12 months.
-- &quot;The server might not handle 100x traffic&quot; -- but our realistic projection is 5x, with auto-scaling.
-- &quot;Users might hate the new UI&quot; -- but usability testing with 8 users showed high satisfaction.
-
-### Elephants (Unspoken Concerns)
-
-Elephants are the risks everyone knows about but nobody talks about. They are the &quot;elephant in the room.&quot;
-
-**Characteristics:**
-- The team avoids discussing them due to politics, hierarchy, or discomfort.
-- Often involve people, process, or organizational issues rather than technical ones.
-- Frequently the actual cause of failure when projects fail.
-
-**Examples:**
-- &quot;The tech lead does not believe in this project and has been disengaged for weeks.&quot;
-- &quot;The CEO&#x27;s pet feature is driving the roadmap, but customers have not asked for it.&quot;
-- &quot;We do not have a plan for what happens when the contractor&#x27;s contract ends next month.&quot;
-
-## Tiger Urgency Classification
-
-Once a risk is classified as a Tiger, assign an urgency level:
-
-| Urgency | Definition | Action Required |
-|---------|-----------|----------------|
-| **Launch-Blocking** | If unresolved, the launch should not proceed. | Concrete mitigation plan, assigned owner, decision date before launch. |
-| **Fast-Follow** | Must be addressed within 2 weeks after launch. | Documented plan, assigned owner, scheduled for first post-launch sprint. |
-| **Track** | Should be monitored and addressed if it escalates. | Added to risk register, reviewed at regular cadence. |
-
-## Methodology
-
-### Phase 1: Set the Scene (5 minutes)
-
-The facilitator reads this prompt to the group:
-
-&gt; &quot;Imagine it is 14 days after our launch. The product has failed. Users are not adopting it, key metrics are down, and leadership is asking what went wrong. Take 10 minutes to write down every reason you can think of for why we failed. Be specific. Be honest. Nothing is off limits.&quot;
-
-**Ground rules:**
-- Anonymous contributions (sticky notes or digital equivalent).
-- No attribution, no blame, no judgment.
-- Quantity over quality in the first round.
-
-### Phase 2: Generate Risks (10 minutes)
-
-Each participant independently writes down failure scenarios. One risk per sticky note. Aim for 5-10 per person.
-
-**Prompts to stimulate thinking:**
-- What technical system is most likely to break?
-- What customer objection have we not addressed?
-- What team dynamic could derail us?
-- What external event could change our assumptions?
-- What are we pretending is not a problem?
-- What decision are we avoiding?
-
-### Phase 3: Share and Cluster (15 minutes)
-
-1. Read each risk aloud (without attribution).
-2. Place on the board.
-3. Group similar risks together.
-4. Merge duplicates.
-
-### Phase 4: Classify (15 minutes)
-
-For each cluster, the group decides:
-
-| Classification | Criteria |
-|---------------|----------|
-| **Tiger** | Supported by evidence. Plausible failure scenario. |
-| **Paper Tiger** | Sounds scary but unlikely or low-impact on inspection. |
-| **Elephant** | The room got quiet when this was read. People exchanged glances. |
-
-For each Tiger, assign urgency: Launch-Blocking, Fast-Follow, or Track.
-
-### Phase 5: Mitigation Plans (15 minutes)
-
-For each **Launch-Blocking Tiger**, complete:
-
-| Field | Description |
-|-------|-------------|
-| **Risk** | Clear description of the risk |
-| **Evidence** | What data or experience supports this being a real risk? |
-| **Mitigation** | Specific, concrete action to reduce the risk |
-| **Owner** | Single person accountable |
-| **Decision Date** | Date by which the mitigation must be complete or the launch decision revisited |
-
-### Phase 6: Address Elephants (10 minutes)
-
-Elephants require a different approach than Tigers:
-
-1. **Acknowledge** -- Name the elephant explicitly. &quot;The team is concerned that...&quot;
-2. **Assess** -- Is this actually a Tiger in disguise? If so, reclassify.
-3. **Decide** -- Either address it (assign an owner) or consciously accept it (document the acceptance and rationale).
-
-## Python Tool: risk_categorizer.py
-
-Categorize and analyze risks using the CLI tool:
+## Quick Start
 
 ```bash
-# Run with demo data
-python3 scripts/risk_categorizer.py --demo
-
-# Run with custom input
-python3 scripts/risk_categorizer.py input.json
-
-# Output as JSON
+python3 scripts/risk_categorizer.py --demo            # built-in sample (7 risks)
+python3 scripts/risk_categorizer.py input.json        # categorize your risks
 python3 scripts/risk_categorizer.py input.json --format json
 ```
 
-### Input Format
+Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
 
-```json
-{
-  &quot;risks&quot;: [
-    {
-      &quot;description&quot;: &quot;Authentication service has had 3 outages in the last month&quot;,
-      &quot;category&quot;: &quot;tiger&quot;,
-      &quot;evidence&quot;: &quot;Incident reports from last 30 days&quot;,
-      &quot;urgency&quot;: &quot;launch_blocking&quot;
-    }
-  ]
-}
-```
+## References
 
-### Output
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-Risk distribution summary, action plans for launch-blocking tigers, and flags for elephants that may need investigation.
-
-See `scripts/risk_categorizer.py` for full documentation.
-
-## Output Format
-
-### Pre-Mortem Summary
-
-```
-Pre-Mortem Analysis: [Product/Feature Name]
-Date: YYYY-MM-DD
-Participants: [list]
-Total risks identified: N
-  - Tigers: X (Launch-Blocking: A, Fast-Follow: B, Track: C)
-  - Paper Tigers: Y
-  - Elephants: Z
-```
-
-### Risk Registry
-
-| # | Risk | Category | Urgency | Evidence | Mitigation | Owner | Decision Date |
-|---|------|----------|---------|----------|-----------|-------|--------------|
-| 1 | ... | Tiger | Launch-Blocking | ... | ... | ... | ... |
-| 2 | ... | Tiger | Fast-Follow | ... | ... | ... | ... |
-| 3 | ... | Paper Tiger | -- | ... | -- | -- | -- |
-| 4 | ... | Elephant | TBD | ... | ... | ... | ... |
-
-Use `assets/pre_mortem_template.md` for the full document template.
-
-## Integration with Other Discovery Skills
-
-- Use after `brainstorm-ideas/` and `brainstorm-experiments/` -- pre-mortem is the final check before committing to build.
-- Feed launch-blocking Tiger mitigations back into `identify-assumptions/` if they surface new assumptions.
-- Elephants often reveal assumptions that the team has been avoiding.
-
-## Troubleshooting
-
-| Symptom | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Team generates mostly paper tigers | Risk aversion or surface-level thinking; team not fully immersing in the failure scenario | Re-read the thought experiment prompt slowly; extend silent writing time from 10 to 15 minutes; use specific prompts |
-| No elephants surfaced | Psychological safety too low, or facilitator is a manager creating power dynamics | Use anonymous contribution (sticky notes or digital tools); consider an external facilitator; separate session from performance reviews |
-| All risks classified as tigers | Team lacks calibration on what constitutes real evidence vs. anxiety | Require concrete evidence for each tiger; if evidence is hypothetical, reclassify as paper tiger |
-| Elephant escalation check flags too many false positives | ESCALATION_KEYWORDS list is broad, matching common words in non-critical contexts | Review matched keywords in output; refine escalation thresholds; use the recommendation as a prompt, not a verdict |
-| Launch-blocking tigers have no owners assigned | Pre-mortem session ended without Phase 5 mitigation planning | Always reserve 15 minutes for mitigation plans; do not skip Phase 5 even if the session runs long |
-| Validation errors on input JSON | Missing required fields (`description`, `evidence`, `category`) or invalid urgency for tigers | Check that every tiger has `urgency` set to one of: `launch_blocking`, `fast_follow`, `track` |
-
-## Success Criteria
-
-- Pre-mortem conducted before every major launch, migration, or significant resource commitment
-- At least 5-10 risks generated per person during the silent writing phase
-- Risk distribution includes all three categories (not all tigers, not all paper tigers)
-- Every launch-blocking tiger has an assigned owner, concrete mitigation plan, and decision date
-- Elephants are explicitly named and either addressed or consciously accepted with documented rationale
-- Pre-mortem findings are reviewed against actual outcomes post-launch to calibrate future sessions
-- Session duration stays within 60-90 minutes total across all 6 phases
+- **[references/methodology-and-tools.md](references/methodology-and-tools.md)** — the thought experiment, full Tiger/Paper Tiger/Elephant classification with examples, urgency table, the 6-phase facilitation script, `risk_categorizer.py` usage and flags, output formats, troubleshooting, success criteria, and bibliography. Read when running or scripting a session.
+- **[references/pre-mortem-guide.md](references/pre-mortem-guide.md)** — Gary Klein&#x27;s origin and why pre-mortems work, when (and when not) to run one, deep classification criteria across domains, the facilitation timeline, and a worked SaaS launch example. Read for the theory and a full example.
+- **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (mitigation theater, groupthink, vague risks, over-mitigated elephants, late pre-mortems, missing owners) with bad/good examples and one-line checks. Read before sharing pre-mortem output.
 
 ## Scope &amp; Limitations
 
-**In Scope:**
-- Prospective hindsight exercises using the &quot;14 days after launch failure&quot; framing
-- Tiger / Paper Tiger / Elephant risk classification with urgency levels
-- Automated elephant escalation detection based on keyword signals
-- Risk registry generation with category distribution and action plans
-- Facilitation methodology for both in-person and remote teams
+**In Scope:** prospective hindsight using the &quot;14 days after launch failure&quot; framing; Tiger / Paper Tiger / Elephant classification with urgency levels; automated elephant escalation detection; risk registry generation; facilitation methodology for in-person and remote teams.
 
-**Out of Scope:**
-- Ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`)
-- Quantitative risk analysis with probability/impact scoring (see `senior-pm/` skill)
-- Product discovery and hypothesis validation (see `brainstorm-experiments/`)
-- Technical architecture risk assessment (see `engineering/` skills)
+**Out of Scope:** ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`); quantitative probability/impact scoring (`senior-pm/`); product discovery and hypothesis validation (`brainstorm-experiments/`); technical architecture risk assessment (`engineering/` skills).
 
-**Important Caveats:**
-- Pre-mortems are most effective with 4-8 participants. Fewer than 4 limits perspective diversity; more than 10 makes classification unwieldy.
-- The elephant escalation keyword check is a heuristic. It catches common patterns but cannot detect all political or organizational risks.
-- Pre-mortems complement, not replace, assumption mapping. Use `identify-assumptions/` for systematic risk categorization and `pre-mortem/` for surfacing unspoken concerns.
-- Psychological safety is a prerequisite. If the team cannot speak honestly, the pre-mortem will produce sanitized results.
+**Important Caveats:** most effective with 4-8 participants; the elephant escalation keyword check is a heuristic; pre-mortems complement, not replace, assumption mapping (`identify-assumptions/`); psychological safety is a prerequisite.
 
 ## Integration Points
 
@@ -1058,31 +629,6 @@ Use `assets/pre_mortem_template.md` for the full document template.
 | `execution/create-prd/` | Feeds into | Tiger mitigations become PRD risk sections and assumption validation plans |
 | `senior-pm/` | Feeds into | Launch-blocking tigers escalate into portfolio risk registers via `risk_matrix_analyzer.py` |
 | `scrum-master/` | Feeds into | Fast-follow tigers become sprint backlog items with mitigation-focused stories |
-
-## Tool Reference
-
-### risk_categorizer.py
-
-Categorizes pre-mortem risks as Tigers, Paper Tigers, or Elephants. Generates action plans for launch-blocking tigers and flags elephants with escalation signals.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `input_file` | positional | (optional) | Path to JSON file with risks array |
-| `--demo` | flag | off | Run with built-in sample data (7 risks across all categories) |
-| `--format` | choice | `text` | Output format: `text` or `json` |
-
-**Input fields per risk:**
-- `description` (required): Clear description of the risk scenario
-- `category` (required): One of `tiger`, `paper_tiger`, `elephant`
-- `evidence` (required): Supporting data or observations
-- `urgency` (required for tigers): One of `launch_blocking`, `fast_follow`, `track`
-
-## References
-
-- Gary Klein, &quot;Performing a Project Pre-Mortem,&quot; *Harvard Business Review* (2007)
-- Daniel Kahneman, *Thinking, Fast and Slow* (2011) -- prospective hindsight
-- Chip Heath &amp; Dan Heath, *Decisive* (2013) -- decision-making under uncertainty
-- Amy Edmondson, *The Fearless Organization* (2018) -- psychological safety for surfacing elephants
 
 ---
 
@@ -1170,8 +716,13 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/discovery/pre-mortem/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python3 scripts/risk_categorizer.py --demo            # built-in sample (7 risks)
+python3 scripts/risk_categorizer.py input.json        # categorize your risks
+python3 scripts/risk_categorizer.py input.json --format json
+</code></pre>
+
+Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/pre-mortem/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

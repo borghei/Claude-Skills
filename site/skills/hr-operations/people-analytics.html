@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>People Analytics - Claude Skills</title>
-  <meta name="description" content="Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme">
+  <meta name="description" content="People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring fligh">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/hr-operations/people-analytics.html">
   <meta property="og:title" content="People Analytics - Claude Skills">
-  <meta property="og:description" content="Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme">
+  <meta property="og:description" content="People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring fligh">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/hr-operations/people-analytics.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "People Analytics", "description": "Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...", "applicationCategory": "HR Operations", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/hr-operations/people-analytics.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "People Analytics", "description": "People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.", "applicationCategory": "HR Operations", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/hr-operations/people-analytics.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">People Analytics</h1>
-    <p class="page-subtitle">Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...</p>
+    <p class="page-subtitle">People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.</p>
     <div class="badge-bar"><span class="badge badge-domain">HR Operations</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">people-analytics</span><span class="tag">hr-metrics</span><span class="tag">workforce</span><span class="tag">insights</span><span class="tag">predictive</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert People Analytics (HR Operations domain).
 
-Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...
+People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.
 
-The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices. 1. **Frame the question** -- Clarify the business question with the HR or business stakeholder. Examples
+The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices. Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume: -
 
 ## Your Key Capabilities
 - Workforce Metrics
@@ -424,9 +424,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert People Analytics (HR Operations domain).
 
-Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...
+People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.
 
-The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices. 1. **Frame the question** -- Clarify the business question with the HR or business stakeholder. Examples
+The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices. Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume: -
 
 ## Your Key Capabilities
 - Workforce Metrics
@@ -467,6 +467,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices.
 
+## Clarify First
+
+Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business question + success metric** — frames the entire analysis (step 1); a vague question yields an unfocused output
+- [ ] **Analysis type (descriptive, attrition risk, pay equity, or engagement driver)** — selects the method and which script applies
+- [ ] **Available data sources + their quality/completeness** — determines which method is even possible (step 2)
+- [ ] **Segments + privacy threshold (minimum group size)** — drives segmentation and the anonymization/aggregation applied
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Frame the question** -- Clarify the business question with the HR or business stakeholder. Examples: &quot;Why is Sales attrition 2x the company average?&quot; or &quot;Are we paying equitably across gender?&quot; Define the success metric for the analysis.
@@ -811,7 +822,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;People Analytics&quot;**
-   - Description: &quot;Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...&quot;
+   - Description: &quot;People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -838,6 +849,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior people analytics partner, translating workforce data into actionable insights using statistical modeling, segmentation analysis, and data governance best practices.
 
+## Clarify First
+
+Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Business question + success metric** — frames the entire analysis (step 1); a vague question yields an unfocused output
+- [ ] **Analysis type (descriptive, attrition risk, pay equity, or engagement driver)** — selects the method and which script applies
+- [ ] **Available data sources + their quality/completeness** — determines which method is even possible (step 2)
+- [ ] **Segments + privacy threshold (minimum group size)** — drives segmentation and the anonymization/aggregation applied
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Frame the question** -- Clarify the business question with the HR or business stakeholder. Examples: &quot;Why is Sales attrition 2x the company average?&quot; or &quot;Are we paying equitably across gender?&quot; Define the success metric for the analysis.
@@ -1182,7 +1204,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;People Analytics&quot;**
-   - Description: &quot;Expert people analytics covering workforce analytics, HR metrics, predictive modeling, employee insights, and data-driven HR decisions. Use when building turnover prediction models, analyzing engageme...&quot;
+   - Description: &quot;People analytics across workforce metrics, predictive modeling, and employee insights. Use when building turnover models, analyzing engagement surveys, running pay equity regressions, or scoring flight risk.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1243,7 +1265,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python hr-operations/people-analytics/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in HR Operations</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/hr-business-partner.html" class="skill-card" style="text-decoration:none"><h3>Hr Business Partner</h3><p>Expert HR business partnership covering talent strategy, organizational development, employee...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/operations-manager.html" class="skill-card" style="text-decoration:none"><h3>Operations Manager</h3><p>Expert operations management covering process optimization, operational efficiency, resource...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/talent-acquisition.html" class="skill-card" style="text-decoration:none"><h3>Talent Acquisition</h3><p>Expert talent acquisition covering recruiting strategy, candidate sourcing, interview design,...</p></a></div>
+  <h2>Related Skills in HR Operations</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/hr-business-partner.html" class="skill-card" style="text-decoration:none"><h3>Hr Business Partner</h3><p>HR business partnership across talent strategy, org development, and employee relations. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/operations-manager.html" class="skill-card" style="text-decoration:none"><h3>Operations Manager</h3><p>Operations management across process optimization, efficiency, and continuous improvement. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/hr-operations/talent-acquisition.html" class="skill-card" style="text-decoration:none"><h3>Talent Acquisition</h3><p>Talent acquisition across recruiting strategy, sourcing, interviews, and hiring analytics. Use...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/hr-operations/people-analytics/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

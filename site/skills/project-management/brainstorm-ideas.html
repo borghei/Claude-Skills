@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Brainstorm Ideas</h1>
     <p class="page-subtitle">Product ideation expert using Product Trio approach and Opportunity Solution Trees for both new and existing products.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Product Discovery</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -397,17 +397,6 @@ Product ideation expert using Product Trio approach and Opportunity Solution Tre
 
 Structured product ideation for both new product creation and existing product enhancement. This skill combines the Product Trio approach (PM + Designer + Engineer perspectives) with Teresa Torres&#x27; Opportunity Solution Tree framework to generate, evaluate, and prioritize product ideas systematically
 
-## Your Key Capabilities
-- When to Use
-- Phase 1: Frame the Problem Space
-- Phase 2: Product Trio Ideation
-- Phase 3: Approach by Product Type
-- Phase 4: Prioritize Top 5
-- Phase 5: Document Each Idea
-
-## Frameworks &amp; Templates You Know
-- Follow Teresa Torres&#x27; Continuous Discovery Habits framework:
-
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -429,17 +418,6 @@ Start by asking the user what they need help with.">
 Product ideation expert using Product Trio approach and Opportunity Solution Trees for both new and existing products.
 
 Structured product ideation for both new product creation and existing product enhancement. This skill combines the Product Trio approach (PM + Designer + Engineer perspectives) with Teresa Torres&#x27; Opportunity Solution Tree framework to generate, evaluate, and prioritize product ideas systematically
-
-## Your Key Capabilities
-- When to Use
-- Phase 1: Frame the Problem Space
-- Phase 2: Product Trio Ideation
-- Phase 3: Approach by Product Type
-- Phase 4: Prioritize Top 5
-- Phase 5: Document Each Idea
-
-## Frameworks &amp; Templates You Know
-- Follow Teresa Torres&#x27; Continuous Discovery Habits framework:
 
 ## How to Help
 When the user asks for help in this domain:
@@ -473,175 +451,43 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Structured product ideation for both new product creation and existing product enhancement. This skill combines the Product Trio approach (PM + Designer + Engineer perspectives) with Teresa Torres&#x27; Opportunity Solution Tree framework to generate, evaluate, and prioritize product ideas systematically.
 
-### When to Use
+## Core Capabilities
+
+- **Product Trio ideation** — generate ideas from PM, Designer, and Engineer perspectives (15+ per session)
+- **Opportunity Solution Trees** — map desired outcomes → opportunities → solutions for existing products
+- **New-product lenses** — core value, speed to validate, differentiation, market timing, scalability
+- **Weighted prioritization** — score and rank the top 5 ideas across impact, alignment, feasibility, speed, differentiation
+- **Idea documentation** — riskiest-assumption and validation plan per idea, ready for handoff
+- **Supplementary techniques** — SCAMPER, How Might We, Crazy 8s, Worst Possible Idea
+
+## When to Use
 
 - **New Product Ideation** -- Exploring greenfield opportunities where the focus is on core value delivery, speed to validate, and market differentiation.
 - **Existing Product Enhancement** -- Identifying opportunities within a live product using the Opportunity Solution Tree to connect desired outcomes to concrete solutions.
 
-## Methodology
+## Clarify First
 
-### Phase 1: Frame the Problem Space
+Before ideating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Before generating ideas, establish clarity on the context:
+- [ ] **New vs existing product** — selects the approach (new-product lenses vs Opportunity Solution Tree mapping)
+- [ ] **Target outcome or problem** — the desired outcome the session is anchored to (ungrounded ideation produces random ideas, not prioritizable ones)
+- [ ] **Hard constraints** — tech stack, timeline, budget limits (bound the feasibility and speed scores in prioritization)
 
-1. **Define the Target Outcome** -- What measurable result are we trying to achieve? (e.g., increase activation rate by 15%, reduce churn by 10%)
-2. **Identify the Target Segment** -- Who specifically are we solving for? Include behavioral and situational context, not just demographics.
-3. **Map Known Constraints** -- Budget, timeline, technical platform, regulatory requirements, team capacity.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Phase 2: Product Trio Ideation
+## References
 
-Generate 5 ideas from each of the three perspectives (15 total):
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-**Product Manager Perspective (5 ideas)**
-Focus: Business value, market positioning, customer pain points, strategic alignment
-- What problems do customers report most frequently?
-- Where are competitors weak that we could be strong?
-- Which segments are underserved by current solutions?
-- What would make customers willing to pay more or switch?
-- How does this connect to our strategic objectives?
-
-**Designer Perspective (5 ideas)**
-Focus: User experience, workflows, accessibility, delight, friction reduction
-- Where do users drop off or struggle in current flows?
-- What tasks take too many steps or too much cognitive load?
-- How could we surprise users with unexpected value?
-- What accessibility gaps exist that exclude potential users?
-- Where can we reduce time-to-value for new users?
-
-**Engineer Perspective (5 ideas)**
-Focus: Technical feasibility, scalability, platform capabilities, integration opportunities
-- What new capabilities does our tech stack enable?
-- Which features could we build quickly with high impact?
-- Where could automation replace manual processes?
-- What data do we have that we are not leveraging?
-- Which technical debt, if resolved, would unlock new possibilities?
-
-### Phase 3: Approach by Product Type
-
-#### For New Products
-
-Apply these lenses to each idea:
-
-| Lens | Question |
-|------|----------|
-| **Core Value** | Does this idea deliver a single, clear value proposition? |
-| **Speed to Validate** | Can we test the core assumption in under 2 weeks? |
-| **Differentiation** | Why would someone choose this over existing alternatives? |
-| **Market Timing** | Is the market ready for this? What tailwinds exist? |
-| **Scalability** | Can this grow beyond the initial use case? |
-
-#### For Existing Products (Opportunity Solution Tree)
-
-Follow Teresa Torres&#x27; Continuous Discovery Habits framework:
-
-```
-Desired Outcome
-├── Opportunity 1 (unmet need / pain point / desire)
-│   ├── Solution A
-│   ├── Solution B
-│   └── Solution C
-├── Opportunity 2
-│   ├── Solution D
-│   └── Solution E
-└── Opportunity 3
-    ├── Solution F
-    └── Solution G
-```
-
-1. **Start with the outcome** -- The metric or business result you want to move.
-2. **Map opportunities** -- Interview-driven insights about what customers need, want, or struggle with.
-3. **Generate solutions per opportunity** -- Each opportunity gets multiple potential solutions.
-4. **Compare and select** -- Evaluate solutions within the same opportunity branch, not across branches.
-
-### Phase 4: Prioritize Top 5
-
-From the 15 generated ideas, select the top 5 using this scoring model:
-
-| Criterion | Weight | Scale |
-|-----------|--------|-------|
-| Customer Impact | 30% | 1-10 |
-| Strategic Alignment | 25% | 1-10 |
-| Feasibility | 20% | 1-10 |
-| Speed to Validate | 15% | 1-10 |
-| Differentiation | 10% | 1-10 |
-
-**Weighted Score** = (Impact x 0.30) + (Strategy x 0.25) + (Feasibility x 0.20) + (Speed x 0.15) + (Differentiation x 0.10)
-
-### Phase 5: Document Each Idea
-
-For each of the top 5 prioritized ideas, produce:
-
-| Field | Description |
-|-------|-------------|
-| **Name** | Short, memorable name for the idea |
-| **Description** | 2-3 sentence summary of what it is |
-| **Reasoning** | Why this idea ranks highly -- connect to outcome and evidence |
-| **Source Perspective** | PM, Designer, or Engineer |
-| **Key Assumptions** | 2-3 assumptions that must be true for this to succeed |
-| **Suggested Validation** | How to test the riskiest assumption first |
-| **Effort Estimate** | T-shirt size (XS / S / M / L / XL) |
-
-## Output Format
-
-### Prioritized Ideas Table
-
-| Rank | Name | Source | Score | Effort | Top Assumption |
-|------|------|--------|-------|--------|----------------|
-| 1 | ... | PM | 8.4 | M | ... |
-| 2 | ... | Design | 7.9 | S | ... |
-| 3 | ... | Eng | 7.6 | L | ... |
-| 4 | ... | PM | 7.2 | S | ... |
-| 5 | ... | Design | 6.8 | M | ... |
-
-### Detailed Idea Cards
-
-For each idea, fill in the template from `assets/ideation_workshop_template.md`.
-
-## Supplementary Techniques
-
-When the trio needs additional stimulus:
-
-- **SCAMPER** -- Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse. Apply to existing products or competitor features.
-- **How Might We (HMW)** -- Reframe problems as opportunity questions. &quot;Users churn after trial&quot; becomes &quot;How might we demonstrate value before the trial ends?&quot;
-- **Crazy 8s** -- 8 sketches in 8 minutes per person. Forces breadth over depth.
-- **Worst Possible Idea** -- Generate deliberately bad ideas, then invert them to find hidden good ones.
-
-See `references/ideation-frameworks.md` for detailed descriptions of each technique.
+- **[references/ideation-process.md](references/ideation-process.md)** — the full five-phase methodology (frame → trio → product-type approach → prioritize → document), output formats, supplementary techniques, troubleshooting table, success criteria, and further reading. Read when running a session end to end.
+- **[references/ideation-frameworks.md](references/ideation-frameworks.md)** — deep descriptions of the Product Trio methodology and each supplementary technique (SCAMPER, HMW, Crazy 8s, Worst Possible Idea). Read when you need technique detail or facilitation mechanics.
+- **[references/red-flags.md](references/red-flags.md)** — common ways ideation output goes wrong with bad/good examples. Read before publishing the idea list or moving to prioritization.
 
 ## Integration with Other Discovery Skills
 
 - After ideation, move top ideas to `identify-assumptions/` to map and prioritize assumptions.
 - Use `brainstorm-experiments/` to design validation experiments for key assumptions.
 - Run `pre-mortem/` before committing to build, to surface hidden risks.
-
-## References
-
-- Teresa Torres, *Continuous Discovery Habits* (2021)
-- Marty Cagan, *Inspired* (2018)
-- Jake Knapp, *Sprint* (2016)
-- Michael Michalko, *Thinkertoys* (2006) -- SCAMPER origin
-
-## Troubleshooting
-
-| Problem | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Ideation session produces only incremental ideas, no breakthrough thinking | Anchoring bias -- team defaults to what they know; PM perspective dominates | Explicitly rotate perspectives (Designer first, then Engineer); use &quot;Worst Possible Idea&quot; technique to break anchoring; invite an outsider to challenge assumptions |
-| Prioritization scores cluster tightly, making ranking impossible | Scoring criteria are too similar, or the team is avoiding differentiation | Add a forced-rank step after weighted scoring; increase weight spread between criteria; use pairwise comparison for the top 5 |
-| Opportunity Solution Tree has too many branches to be actionable | Team brainstormed opportunities without filtering by evidence | Require each opportunity to link to at least 2 user interview quotes or data points; prune branches without evidence |
-| Stakeholders reject prioritized ideas because &quot;the real problem is different&quot; | Problem framing was done without stakeholder input; target outcome not validated | Run a problem framing workshop with stakeholders before ideation; validate the target outcome with data before generating solutions |
-| Same ideas keep resurfacing across sessions | Previous ideation results not documented or accessible; no &quot;already considered&quot; registry | Maintain an idea backlog with status (explored, parked, rejected with rationale); review it at the start of each session |
-| Engineer perspective ideas are too implementation-focused | Engineers default to &quot;how to build&quot; rather than &quot;what to build&quot; | Reframe the prompt: &quot;What new capability would our tech stack enable for users?&quot; rather than &quot;What should we build next?&quot; |
-| Validation suggestions are too expensive or slow | Team defaults to full A/B tests when lighter methods exist | Introduce pretotyping and Wizard-of-Oz as first validation options; use the `brainstorm-experiments/` skill for experiment design |
-
-## Success Criteria
-
-- Each ideation session produces at least 15 ideas across all three Product Trio perspectives (minimum 3 per perspective)
-- Top 5 prioritized ideas each have a documented riskiest assumption and a validation plan
-- At least 60% of prioritized ideas can begin validation within 2 weeks using lightweight methods
-- Stakeholders rate the ideation output as &quot;relevant to strategic objectives&quot; at 4+/5
-- Ideas that proceed to validation have a clear connection to the target outcome (traceable through the Opportunity Solution Tree)
-- Ideation cadence is maintained (at minimum quarterly for existing products, monthly during new product exploration)
-- At least 1 idea per quarter advances from ideation through validation to backlog commitment
 
 ## Scope &amp; Limitations
 
@@ -717,175 +563,43 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Structured product ideation for both new product creation and existing product enhancement. This skill combines the Product Trio approach (PM + Designer + Engineer perspectives) with Teresa Torres&#x27; Opportunity Solution Tree framework to generate, evaluate, and prioritize product ideas systematically.
 
-### When to Use
+## Core Capabilities
+
+- **Product Trio ideation** — generate ideas from PM, Designer, and Engineer perspectives (15+ per session)
+- **Opportunity Solution Trees** — map desired outcomes → opportunities → solutions for existing products
+- **New-product lenses** — core value, speed to validate, differentiation, market timing, scalability
+- **Weighted prioritization** — score and rank the top 5 ideas across impact, alignment, feasibility, speed, differentiation
+- **Idea documentation** — riskiest-assumption and validation plan per idea, ready for handoff
+- **Supplementary techniques** — SCAMPER, How Might We, Crazy 8s, Worst Possible Idea
+
+## When to Use
 
 - **New Product Ideation** -- Exploring greenfield opportunities where the focus is on core value delivery, speed to validate, and market differentiation.
 - **Existing Product Enhancement** -- Identifying opportunities within a live product using the Opportunity Solution Tree to connect desired outcomes to concrete solutions.
 
-## Methodology
+## Clarify First
 
-### Phase 1: Frame the Problem Space
+Before ideating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Before generating ideas, establish clarity on the context:
+- [ ] **New vs existing product** — selects the approach (new-product lenses vs Opportunity Solution Tree mapping)
+- [ ] **Target outcome or problem** — the desired outcome the session is anchored to (ungrounded ideation produces random ideas, not prioritizable ones)
+- [ ] **Hard constraints** — tech stack, timeline, budget limits (bound the feasibility and speed scores in prioritization)
 
-1. **Define the Target Outcome** -- What measurable result are we trying to achieve? (e.g., increase activation rate by 15%, reduce churn by 10%)
-2. **Identify the Target Segment** -- Who specifically are we solving for? Include behavioral and situational context, not just demographics.
-3. **Map Known Constraints** -- Budget, timeline, technical platform, regulatory requirements, team capacity.
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Phase 2: Product Trio Ideation
+## References
 
-Generate 5 ideas from each of the three perspectives (15 total):
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-**Product Manager Perspective (5 ideas)**
-Focus: Business value, market positioning, customer pain points, strategic alignment
-- What problems do customers report most frequently?
-- Where are competitors weak that we could be strong?
-- Which segments are underserved by current solutions?
-- What would make customers willing to pay more or switch?
-- How does this connect to our strategic objectives?
-
-**Designer Perspective (5 ideas)**
-Focus: User experience, workflows, accessibility, delight, friction reduction
-- Where do users drop off or struggle in current flows?
-- What tasks take too many steps or too much cognitive load?
-- How could we surprise users with unexpected value?
-- What accessibility gaps exist that exclude potential users?
-- Where can we reduce time-to-value for new users?
-
-**Engineer Perspective (5 ideas)**
-Focus: Technical feasibility, scalability, platform capabilities, integration opportunities
-- What new capabilities does our tech stack enable?
-- Which features could we build quickly with high impact?
-- Where could automation replace manual processes?
-- What data do we have that we are not leveraging?
-- Which technical debt, if resolved, would unlock new possibilities?
-
-### Phase 3: Approach by Product Type
-
-#### For New Products
-
-Apply these lenses to each idea:
-
-| Lens | Question |
-|------|----------|
-| **Core Value** | Does this idea deliver a single, clear value proposition? |
-| **Speed to Validate** | Can we test the core assumption in under 2 weeks? |
-| **Differentiation** | Why would someone choose this over existing alternatives? |
-| **Market Timing** | Is the market ready for this? What tailwinds exist? |
-| **Scalability** | Can this grow beyond the initial use case? |
-
-#### For Existing Products (Opportunity Solution Tree)
-
-Follow Teresa Torres&#x27; Continuous Discovery Habits framework:
-
-```
-Desired Outcome
-├── Opportunity 1 (unmet need / pain point / desire)
-│   ├── Solution A
-│   ├── Solution B
-│   └── Solution C
-├── Opportunity 2
-│   ├── Solution D
-│   └── Solution E
-└── Opportunity 3
-    ├── Solution F
-    └── Solution G
-```
-
-1. **Start with the outcome** -- The metric or business result you want to move.
-2. **Map opportunities** -- Interview-driven insights about what customers need, want, or struggle with.
-3. **Generate solutions per opportunity** -- Each opportunity gets multiple potential solutions.
-4. **Compare and select** -- Evaluate solutions within the same opportunity branch, not across branches.
-
-### Phase 4: Prioritize Top 5
-
-From the 15 generated ideas, select the top 5 using this scoring model:
-
-| Criterion | Weight | Scale |
-|-----------|--------|-------|
-| Customer Impact | 30% | 1-10 |
-| Strategic Alignment | 25% | 1-10 |
-| Feasibility | 20% | 1-10 |
-| Speed to Validate | 15% | 1-10 |
-| Differentiation | 10% | 1-10 |
-
-**Weighted Score** = (Impact x 0.30) + (Strategy x 0.25) + (Feasibility x 0.20) + (Speed x 0.15) + (Differentiation x 0.10)
-
-### Phase 5: Document Each Idea
-
-For each of the top 5 prioritized ideas, produce:
-
-| Field | Description |
-|-------|-------------|
-| **Name** | Short, memorable name for the idea |
-| **Description** | 2-3 sentence summary of what it is |
-| **Reasoning** | Why this idea ranks highly -- connect to outcome and evidence |
-| **Source Perspective** | PM, Designer, or Engineer |
-| **Key Assumptions** | 2-3 assumptions that must be true for this to succeed |
-| **Suggested Validation** | How to test the riskiest assumption first |
-| **Effort Estimate** | T-shirt size (XS / S / M / L / XL) |
-
-## Output Format
-
-### Prioritized Ideas Table
-
-| Rank | Name | Source | Score | Effort | Top Assumption |
-|------|------|--------|-------|--------|----------------|
-| 1 | ... | PM | 8.4 | M | ... |
-| 2 | ... | Design | 7.9 | S | ... |
-| 3 | ... | Eng | 7.6 | L | ... |
-| 4 | ... | PM | 7.2 | S | ... |
-| 5 | ... | Design | 6.8 | M | ... |
-
-### Detailed Idea Cards
-
-For each idea, fill in the template from `assets/ideation_workshop_template.md`.
-
-## Supplementary Techniques
-
-When the trio needs additional stimulus:
-
-- **SCAMPER** -- Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse. Apply to existing products or competitor features.
-- **How Might We (HMW)** -- Reframe problems as opportunity questions. &quot;Users churn after trial&quot; becomes &quot;How might we demonstrate value before the trial ends?&quot;
-- **Crazy 8s** -- 8 sketches in 8 minutes per person. Forces breadth over depth.
-- **Worst Possible Idea** -- Generate deliberately bad ideas, then invert them to find hidden good ones.
-
-See `references/ideation-frameworks.md` for detailed descriptions of each technique.
+- **[references/ideation-process.md](references/ideation-process.md)** — the full five-phase methodology (frame → trio → product-type approach → prioritize → document), output formats, supplementary techniques, troubleshooting table, success criteria, and further reading. Read when running a session end to end.
+- **[references/ideation-frameworks.md](references/ideation-frameworks.md)** — deep descriptions of the Product Trio methodology and each supplementary technique (SCAMPER, HMW, Crazy 8s, Worst Possible Idea). Read when you need technique detail or facilitation mechanics.
+- **[references/red-flags.md](references/red-flags.md)** — common ways ideation output goes wrong with bad/good examples. Read before publishing the idea list or moving to prioritization.
 
 ## Integration with Other Discovery Skills
 
 - After ideation, move top ideas to `identify-assumptions/` to map and prioritize assumptions.
 - Use `brainstorm-experiments/` to design validation experiments for key assumptions.
 - Run `pre-mortem/` before committing to build, to surface hidden risks.
-
-## References
-
-- Teresa Torres, *Continuous Discovery Habits* (2021)
-- Marty Cagan, *Inspired* (2018)
-- Jake Knapp, *Sprint* (2016)
-- Michael Michalko, *Thinkertoys* (2006) -- SCAMPER origin
-
-## Troubleshooting
-
-| Problem | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Ideation session produces only incremental ideas, no breakthrough thinking | Anchoring bias -- team defaults to what they know; PM perspective dominates | Explicitly rotate perspectives (Designer first, then Engineer); use &quot;Worst Possible Idea&quot; technique to break anchoring; invite an outsider to challenge assumptions |
-| Prioritization scores cluster tightly, making ranking impossible | Scoring criteria are too similar, or the team is avoiding differentiation | Add a forced-rank step after weighted scoring; increase weight spread between criteria; use pairwise comparison for the top 5 |
-| Opportunity Solution Tree has too many branches to be actionable | Team brainstormed opportunities without filtering by evidence | Require each opportunity to link to at least 2 user interview quotes or data points; prune branches without evidence |
-| Stakeholders reject prioritized ideas because &quot;the real problem is different&quot; | Problem framing was done without stakeholder input; target outcome not validated | Run a problem framing workshop with stakeholders before ideation; validate the target outcome with data before generating solutions |
-| Same ideas keep resurfacing across sessions | Previous ideation results not documented or accessible; no &quot;already considered&quot; registry | Maintain an idea backlog with status (explored, parked, rejected with rationale); review it at the start of each session |
-| Engineer perspective ideas are too implementation-focused | Engineers default to &quot;how to build&quot; rather than &quot;what to build&quot; | Reframe the prompt: &quot;What new capability would our tech stack enable for users?&quot; rather than &quot;What should we build next?&quot; |
-| Validation suggestions are too expensive or slow | Team defaults to full A/B tests when lighter methods exist | Introduce pretotyping and Wizard-of-Oz as first validation options; use the `brainstorm-experiments/` skill for experiment design |
-
-## Success Criteria
-
-- Each ideation session produces at least 15 ideas across all three Product Trio perspectives (minimum 3 per perspective)
-- Top 5 prioritized ideas each have a documented riskiest assumption and a validation plan
-- At least 60% of prioritized ideas can begin validation within 2 weeks using lightweight methods
-- Stakeholders rate the ideation output as &quot;relevant to strategic objectives&quot; at 4+/5
-- Ideas that proceed to validation have a clear connection to the target outcome (traceable through the Opportunity Solution Tree)
-- Ideation cadence is maintained (at minimum quarterly for existing products, monthly during new product exploration)
-- At least 1 idea per quarter advances from ideation through validation to backlog commitment
 
 ## Scope &amp; Limitations
 
@@ -993,7 +707,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/discovery/brainstorm-ideas/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-ideas/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

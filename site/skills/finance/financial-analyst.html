@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Financial Analyst</h1>
     <p class="page-subtitle">Performs financial ratio analysis, DCF valuation, budget variance analysis, and rolling forecast construction for strategic decision-making</p>
-    <div class="badge-bar"><span class="badge badge-domain">Finance</span> <span class="badge badge-subdomain">Financial Analysis</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Finance</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">financial-analysis</span><span class="tag">dcf</span><span class="tag">budgeting</span><span class="tag">forecasting</span><span class="tag">ratios</span></div>
   </div>
   <h2>How to Use</h2>
@@ -489,6 +489,17 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 - A rolling 13-week cash flow or driver-based revenue forecast needs construction
 - Sensitivity analysis is required to stress-test valuation or forecast assumptions
 - The user asks about profitability, liquidity, leverage, efficiency, or valuation metrics with industry context
+
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — ratios, DCF valuation, budget variance, or forecast (selects the tool and the required input schema; each needs different data)
+- [ ] **The decision it supports** — acquisition, fundraise, board review, or budget reforecast (sets the executive-summary conclusion and which metrics lead)
+- [ ] **Materiality threshold** — absolute $ or % of budget (drives which variances surface vs. go to the appendix; default 10% / $50K)
+- [ ] **Key assumptions + as-of date** — WACC inputs, terminal growth, or forecast drivers and when each was last sourced (drives DCF/forecast outputs and the assumptions appendix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## 5-Phase Workflow
 
@@ -884,6 +895,17 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 - A rolling 13-week cash flow or driver-based revenue forecast needs construction
 - Sensitivity analysis is required to stress-test valuation or forecast assumptions
 - The user asks about profitability, liquidity, leverage, efficiency, or valuation metrics with industry context
+
+## Clarify First
+
+Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which analysis** — ratios, DCF valuation, budget variance, or forecast (selects the tool and the required input schema; each needs different data)
+- [ ] **The decision it supports** — acquisition, fundraise, board review, or budget reforecast (sets the executive-summary conclusion and which metrics lead)
+- [ ] **Materiality threshold** — absolute $ or % of budget (drives which variances surface vs. go to the appendix; default 10% / $50K)
+- [ ] **Key assumptions + as-of date** — WACC inputs, terminal growth, or forecast drivers and when each was last sourced (drives DCF/forecast outputs and the assumptions appendix)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
 ## 5-Phase Workflow
 
@@ -1303,7 +1325,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python finance/financial-analyst/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Finance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/finance/saas-metrics-coach.html" class="skill-card" style="text-decoration:none"><h3>Saas Metrics Coach</h3><p>Production-ready SaaS metrics toolkit for calculating MRR/ARR, analyzing cohort retention, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/finance/business-investment-advisor.html" class="skill-card" style="text-decoration:none"><h3>Business Investment Advisor</h3><p>Production-ready investment analysis toolkit for screening opportunities, analyzing portfolio...</p></a></div>
+  <h2>Related Skills in Finance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/finance/business-investment-advisor.html" class="skill-card" style="text-decoration:none"><h3>Business Investment Advisor</h3><p>This skill should be used when the user asks to &quot;screen investments&quot;, &quot;analyze a portfolio&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/finance/saas-metrics-coach.html" class="skill-card" style="text-decoration:none"><h3>Saas Metrics Coach</h3><p>This skill should be used when the user asks to &quot;calculate MRR&quot;, &quot;analyze churn&quot;, &quot;compute SaaS...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/finance/financial-analyst/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

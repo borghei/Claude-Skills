@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Design Auditor - Claude Skills</title>
-  <meta name="description" content="Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations">
+  <meta name="description" content="Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing re">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/design-auditor.html">
   <meta property="og:title" content="Design Auditor - Claude Skills">
-  <meta property="og:description" content="Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations">
+  <meta property="og:description" content="Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing re">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/design-auditor.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Design Auditor", "description": "Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/design-auditor.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Design Auditor", "description": "Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/design-auditor.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Design Auditor</h1>
-    <p class="page-subtitle">Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-subdomain">Design Engineering</span> <span class="badge badge-version">v2.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">design-audit</span><span class="tag">ai-slop</span><span class="tag">color-contrast</span><span class="tag">accessibility</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,13 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Design Auditor (Engineering domain).
 
-Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations
+Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.
 
-The agent performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F). ```bash python scripts/design_scorer.py --inp
-
-## Frameworks &amp; Templates You Know
-- | D | 60-69 | Heavily templated | Significant gaps |
-- - Template ordering: Hero &gt; Features &gt; Social Proof &gt; Pricing &gt; CTA &gt; Footer
+Performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F). - **Full design audit** — score 12 weighted categories 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -419,13 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Design Auditor (Engineering domain).
 
-Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations
+Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.
 
-The agent performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F). ```bash python scripts/design_scorer.py --inp
-
-## Frameworks &amp; Templates You Know
-- | D | 60-69 | Heavily templated | Significant gaps |
-- - Template ordering: Hero &gt; Features &gt; Social Proof &gt; Pricing &gt; CTA &gt; Footer
+Performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F). - **Full design audit** — score 12 weighted categories 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -455,209 +447,57 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Design Auditor
 
-The agent performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F).
+Performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F).
 
----
+## Core Capabilities
 
-## Quick Start
+- **Full design audit** — score 12 weighted categories in five passes into a Design grade with prioritized recommendations and baseline comparison.
+- **AI slop detection** — flag visual, copy, and structural slop in HTML/CSS with confidence scores and per-finding remediation.
+- **Accessibility audit** — WCAG color-contrast checking (AA/AAA) with closest-compliant-color suggestions.
+- **Design-system compliance** — detect hardcoded colors, spacing, fonts, radii, shadows, z-indices, and transitions that deviate from tokens; report compliance percentage.
+- **Three independent grades** — Design (weighted aggregate), AI Slop (inverted), Accessibility (WCAG), each A–F.
+- **Operating system** — 10 design principles, fix-session rules with a risk accumulator, and CI/CD gating.
 
-```bash
-# Score a full design audit (12 categories -&gt; 3 grades)
-python scripts/design_scorer.py --input findings.json --output report.json --verbose
+## When to Use
 
-# Detect AI-generated slop in HTML/CSS
-python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6
+- Reviewing a UI/UX design for quality, originality, and accessibility.
+- Detecting AI-generated slop patterns in HTML/CSS.
+- Validating WCAG color contrast or design-token adherence.
+- Gating deployments or PRs on minimum compliance scores.
 
-# Check color contrast (single pair or batch)
-python scripts/color_contrast_checker.py --fg &quot;#333&quot; --bg &quot;#fff&quot; --level AA
-python scripts/color_contrast_checker.py --input color-pairs.json --level AAA --suggest-fixes
+## Clarify First
 
-# Validate design system token compliance
-python scripts/design_system_validator.py --tokens tokens.json --input src/styles/
-```
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-## Tools Overview
+- [ ] **Audit type** — full design score, AI-slop detection, contrast check, or token compliance (selects `design_scorer.py` vs `ai_slop_detector.py` vs `color_contrast_checker.py` vs `design_system_validator.py`)
+- [ ] **Input artifacts** — the findings JSON, HTML/CSS, color pairs, or design-token file (the input each tool requires)
+- [ ] **Conformance level / threshold** — WCAG AA vs AAA, slop confidence threshold, and the minimum passing grade (sets `--level`, `--threshold`, and the gate)
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `design_scorer.py` | 12-category audit findings JSON | Three grades, category breakdown, prioritized recommendations |
-| `ai_slop_detector.py` | HTML + optional CSS file | Findings with confidence scores (0.0-1.0), slop grade |
-| `color_contrast_checker.py` | Color pairs (hex/rgb/hsl/named) | WCAG pass/fail, ratios, compliant color suggestions |
-| `design_system_validator.py` | Design tokens JSON + CSS files | Compliance percentage, violations with token suggestions |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `design_scorer.py` | Score 12-category audit findings into three grades | `python scripts/design_scorer.py --input findings.json --output report.json --verbose` |
+| `ai_slop_detector.py` | Detect AI-generated slop in HTML/CSS | `python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6` |
+| `color_contrast_checker.py` | Check WCAG color contrast (single/batch) | `python scripts/color_contrast_checker.py --input color-pairs.json --level AA --suggest-fixes` |
+| `design_system_validator.py` | Validate CSS against design tokens | `python scripts/design_system_validator.py --tokens tokens.json --input src/styles/` |
 
 All tools support `--format json|text` and `--output` for file writing.
 
----
-
-## Workflow 1: Full Design Audit
-
-The agent evaluates 12 weighted categories in five passes:
-
-1. **Visual Pass** -- Visual Hierarchy (10%), Typography (8%), Color &amp; Contrast (8%), Spacing &amp; Layout (8%)
-2. **Interaction Pass** -- Interaction States (10%), Navigation &amp; IA (8%)
-3. **Platform Pass** -- Responsive Design (8%), Accessibility/WCAG (12%)
-4. **Polish Pass** -- Motion &amp; Animation (5%), Content &amp; Microcopy (5%)
-5. **Integrity Pass** -- AI Slop Indicators (8%), Performance as Design (5%), Coherence Bonus (5%)
-
-```bash
-python scripts/design_scorer.py --input audit_findings.json --baseline last_sprint.json --format text --verbose
-```
-
-**Three independent grades:**
-
-| Grade | Design (weighted aggregate) | AI Slop (inverted) | Accessibility (WCAG) |
-|-------|----|----|----|
-| A+ | 95-100 | Highly original | AAA compliant |
-| A | 90-94 | No detectable patterns | Full AA compliant |
-| B | 80-89 | 1-2 minor patterns | Mostly AA, 1-3 minor violations |
-| C | 70-79 | Several AI patterns | Partial AA |
-| D | 60-69 | Heavily templated | Significant gaps |
-| F | 0-59 | Pure AI-generated slop | Fundamental failures |
-
-**Validation checkpoint:** Release gate requires minimum B Design grade and A Accessibility grade.
-
----
-
-## Workflow 2: AI Slop Detection
-
-```bash
-python scripts/ai_slop_detector.py --input index.html --css styles.css --threshold 0.6 --format json
-```
-
-The agent detects patterns across three categories:
-
-**Visual slop** (confidence 0.4-0.9):
-- Generic hero section (full-width, centered text, gradient)
-- Stock gradients (trending purple-blue, pink-orange)
-- 3-column feature grid (icon + heading + paragraph x3)
-- Shadow/blur overuse on &gt;60% of containers
-
-**Copy slop** (confidence 0.5-1.0):
-- Vague CTAs: &quot;Get Started&quot;, &quot;Learn More&quot; without context
-- Buzzword clustering: &quot;Seamless&quot;, &quot;Powerful&quot;, &quot;Revolutionary&quot;
-- Lorem ipsum residue or uniform paragraph lengths
-
-**Structural slop** (confidence 0.4-0.8):
-- Template ordering: Hero &gt; Features &gt; Social Proof &gt; Pricing &gt; CTA &gt; Footer
-- Cookie-cutter pricing (3 tiers, middle highlighted)
-
-Each finding includes a remediation suggestion for making the element more intentional.
-
----
-
-## Workflow 3: Accessibility &amp; Design System Compliance
-
-**Color contrast audit:**
-
-```bash
-python scripts/color_contrast_checker.py --input brand-colors.json --level AA --suggest-fixes --format text
-```
-
-Input format:
-```json
-[
-  {&quot;foreground&quot;: &quot;#666666&quot;, &quot;background&quot;: &quot;#ffffff&quot;, &quot;label&quot;: &quot;body text&quot;},
-  {&quot;foreground&quot;: &quot;#999999&quot;, &quot;background&quot;: &quot;#f5f5f5&quot;, &quot;label&quot;: &quot;muted text&quot;}
-]
-```
-
-The agent checks against WCAG thresholds (4.5:1 normal text, 3:1 large text) and suggests the closest compliant alternative for failing pairs.
-
-**Design system validation:**
-
-```bash
-python scripts/design_system_validator.py --tokens design-tokens.json --input src/styles/ --glob &quot;*.scss&quot;
-```
-
-Token file format:
-```json
-{
-  &quot;colors&quot;: {&quot;primary&quot;: &quot;#1a73e8&quot;, &quot;secondary&quot;: &quot;#5f6368&quot;, &quot;error&quot;: &quot;#d93025&quot;},
-  &quot;spacing&quot;: [0, 4, 8, 12, 16, 24, 32, 48, 64],
-  &quot;typography&quot;: {&quot;body&quot;: &quot;16px&quot;, &quot;h1&quot;: &quot;32px&quot;, &quot;h2&quot;: &quot;24px&quot;},
-  &quot;radii&quot;: [0, 4, 8, 16, 9999]
-}
-```
-
-Detects hardcoded colors, spacing, fonts, radii, shadows, z-indices, and transitions that deviate from tokens. Reports compliance percentage and suggests nearest token for each violation.
-
-**Validation checkpoint:** Token compliance &gt;= 90%. Zero off-system colors in production CSS.
-
----
-
-## Design Principles (Audit Operating System)
-
-These 10 principles drive every finding evaluation:
-
-1. **Specificity over vibes** -- &quot;Clean UI&quot; is banned. Name the font, spacing scale, color system.
-2. **Empty states are features** -- &quot;No items found&quot; is a bug. Guide users to first action.
-3. **Subtraction default** -- every element must earn its place. When in doubt, remove it.
-4. **Edge cases are user experiences** -- 47-character names, zero results, slow networks, stale state.
-5. **Four shadow paths** -- happy path, nil input, empty input, error upstream. Blank screen = Critical.
-6. **Loading states earn trust** -- skeleton screens &gt; spinners &gt; blank pages.
-7. **Consistency compounds** -- one off-system color erodes the entire design language. Tokens are contracts.
-8. **Motion has meaning** -- decorative animation without purpose is noise.
-9. **Accessibility is baseline** -- WCAG AA is the floor. Accessibility findings are never &quot;Low&quot; priority.
-10. **Performance is perceived design** -- 3-second load feels broken regardless of visual quality.
-
----
-
-## Fix Session Rules
-
-- **One issue = one question** -- never batch multiple findings.
-- **AUTO-FIX**: Cosmetic -- spacing token mismatches, off-system colors to nearest token.
-- **ASK**: Structural -- layout changes, component swaps, navigation restructuring.
-- **Max 30 fixes per session.** Hard stop, then generate report.
-- **Risk accumulator**: component (+5), global style (+8), layout (+10), revert (+15). Stop at 20% of budget.
-- **Revert on regression** -- if fix breaks visual tests or introduces Critical finding, `git revert` immediately.
-
----
-
-## CI/CD Integration
-
-```yaml
-jobs:
-  design-checks:
-    steps:
-      - run: python scripts/color_contrast_checker.py --input color-pairs.json --level AA
-      - run: |
-          python scripts/design_system_validator.py --tokens tokens.json --input src/styles/ --format json &gt; compliance.json
-          python -c &quot;import json; exit(0 if json.load(open(&#x27;compliance.json&#x27;)).get(&#x27;compliance_percentage&#x27;,0)&gt;=90 else 1)&quot;
-      - run: python scripts/ai_slop_detector.py --input dist/index.html --threshold 0.7 --format json
-```
-
----
-
-## Anti-Patterns
-
-1. **Scoring categories too high relative to findings** -- if there are 4 accessibility findings, the score should not be 8/10.
-2. **Ignoring interaction states** -- every interactive element needs: default, hover, focus, active, disabled, loading, error, empty, success.
-3. **Color as sole information carrier** -- information must not be conveyed by color alone.
-4. **Skipping edge cases** -- test with long names, empty data, error states, not just the happy path.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `design_scorer.py` exits &quot;Missing category&quot; | Input JSON missing required keys | Ensure all 12 keys present under `categories` |
-| Color checker rejects value | Unsupported format | Use hex, `rgb()`, `hsl()`, or named colors |
-| AI slop detector finds zero on templated page | Threshold too high | Lower `--threshold` to 0.3 |
-| Validator reports &quot;No CSS files found&quot; | SCSS not matched | Pass `--glob &quot;*.scss&quot;` |
-| Scores seem inflated | Author-provided scores too generous | Re-evaluate each 0-10 score against finding count and severity |
-
----
-
 ## References
 
-| Guide | Path |
-|-------|------|
-| Audit Methodology | `references/design_audit_methodology.md` |
-| AI Slop Patterns Catalog | `references/ai_slop_patterns.md` |
-| WCAG 2.1 Checklist | `references/accessibility_checklist.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/audit-workflows-and-operations.md](references/audit-workflows-and-operations.md)** — quick-start commands, tools-overview table, the three workflows (full audit, slop detection, accessibility/token compliance), grade tables, the 10 design principles, fix-session rules, CI/CD integration, anti-patterns, and troubleshooting. Read when running an audit end to end.
+- **[references/design_audit_methodology.md](references/design_audit_methodology.md)** — systematic audit approach, heuristic evaluation, Gestalt principles, critique frameworks, and anti-patterns. Read when designing the evaluation pass.
+- **[references/ai_slop_patterns.md](references/ai_slop_patterns.md)** — comprehensive catalog of AI-generated UI patterns and remediation guidance. Read when judging originality.
+- **[references/accessibility_checklist.md](references/accessibility_checklist.md)** — full WCAG 2.1 Level A/AA/AAA checklist organized by POUR with testing methodology and fixes. Read when auditing accessibility.
+
+## Scope &amp; Limitations
+
+Covers static design quality, AI-slop, WCAG contrast, and design-token compliance auditing for web UI (HTML/CSS). Does not run live browsers, render-test layouts, or replace manual usability research. Accessibility findings are never &quot;Low&quot; priority; WCAG AA is the floor.
 
 ## Integration Points
 
@@ -671,8 +511,8 @@ jobs:
 
 ---
 
-**Last Updated:** April 2026
-**Version:** 2.1.0
+**Last Updated:** June 2026
+**Version:** 2.2.0
 
 ---
 
@@ -700,7 +540,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Design Auditor&quot;**
-   - Description: &quot;Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations&quot;
+   - Description: &quot;Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -725,209 +565,57 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Design Auditor
 
-The agent performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F).
+Performs systematic 12-category UI/UX audits, detects AI-generated slop patterns, validates WCAG color contrast, and checks design system token compliance. Produces three independent grades: Design (A-F), AI Slop (A-F), and Accessibility (A-F).
 
----
+## Core Capabilities
 
-## Quick Start
+- **Full design audit** — score 12 weighted categories in five passes into a Design grade with prioritized recommendations and baseline comparison.
+- **AI slop detection** — flag visual, copy, and structural slop in HTML/CSS with confidence scores and per-finding remediation.
+- **Accessibility audit** — WCAG color-contrast checking (AA/AAA) with closest-compliant-color suggestions.
+- **Design-system compliance** — detect hardcoded colors, spacing, fonts, radii, shadows, z-indices, and transitions that deviate from tokens; report compliance percentage.
+- **Three independent grades** — Design (weighted aggregate), AI Slop (inverted), Accessibility (WCAG), each A–F.
+- **Operating system** — 10 design principles, fix-session rules with a risk accumulator, and CI/CD gating.
 
-```bash
-# Score a full design audit (12 categories -&gt; 3 grades)
-python scripts/design_scorer.py --input findings.json --output report.json --verbose
+## When to Use
 
-# Detect AI-generated slop in HTML/CSS
-python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6
+- Reviewing a UI/UX design for quality, originality, and accessibility.
+- Detecting AI-generated slop patterns in HTML/CSS.
+- Validating WCAG color contrast or design-token adherence.
+- Gating deployments or PRs on minimum compliance scores.
 
-# Check color contrast (single pair or batch)
-python scripts/color_contrast_checker.py --fg &quot;#333&quot; --bg &quot;#fff&quot; --level AA
-python scripts/color_contrast_checker.py --input color-pairs.json --level AAA --suggest-fixes
+## Clarify First
 
-# Validate design system token compliance
-python scripts/design_system_validator.py --tokens tokens.json --input src/styles/
-```
+Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-## Tools Overview
+- [ ] **Audit type** — full design score, AI-slop detection, contrast check, or token compliance (selects `design_scorer.py` vs `ai_slop_detector.py` vs `color_contrast_checker.py` vs `design_system_validator.py`)
+- [ ] **Input artifacts** — the findings JSON, HTML/CSS, color pairs, or design-token file (the input each tool requires)
+- [ ] **Conformance level / threshold** — WCAG AA vs AAA, slop confidence threshold, and the minimum passing grade (sets `--level`, `--threshold`, and the gate)
 
-| Tool | Input | Output |
-|------|-------|--------|
-| `design_scorer.py` | 12-category audit findings JSON | Three grades, category breakdown, prioritized recommendations |
-| `ai_slop_detector.py` | HTML + optional CSS file | Findings with confidence scores (0.0-1.0), slop grade |
-| `color_contrast_checker.py` | Color pairs (hex/rgb/hsl/named) | WCAG pass/fail, ratios, compliant color suggestions |
-| `design_system_validator.py` | Design tokens JSON + CSS files | Compliance percentage, violations with token suggestions |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Tools
+
+| Tool | Purpose | Command |
+|------|---------|---------|
+| `design_scorer.py` | Score 12-category audit findings into three grades | `python scripts/design_scorer.py --input findings.json --output report.json --verbose` |
+| `ai_slop_detector.py` | Detect AI-generated slop in HTML/CSS | `python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6` |
+| `color_contrast_checker.py` | Check WCAG color contrast (single/batch) | `python scripts/color_contrast_checker.py --input color-pairs.json --level AA --suggest-fixes` |
+| `design_system_validator.py` | Validate CSS against design tokens | `python scripts/design_system_validator.py --tokens tokens.json --input src/styles/` |
 
 All tools support `--format json|text` and `--output` for file writing.
 
----
-
-## Workflow 1: Full Design Audit
-
-The agent evaluates 12 weighted categories in five passes:
-
-1. **Visual Pass** -- Visual Hierarchy (10%), Typography (8%), Color &amp; Contrast (8%), Spacing &amp; Layout (8%)
-2. **Interaction Pass** -- Interaction States (10%), Navigation &amp; IA (8%)
-3. **Platform Pass** -- Responsive Design (8%), Accessibility/WCAG (12%)
-4. **Polish Pass** -- Motion &amp; Animation (5%), Content &amp; Microcopy (5%)
-5. **Integrity Pass** -- AI Slop Indicators (8%), Performance as Design (5%), Coherence Bonus (5%)
-
-```bash
-python scripts/design_scorer.py --input audit_findings.json --baseline last_sprint.json --format text --verbose
-```
-
-**Three independent grades:**
-
-| Grade | Design (weighted aggregate) | AI Slop (inverted) | Accessibility (WCAG) |
-|-------|----|----|----|
-| A+ | 95-100 | Highly original | AAA compliant |
-| A | 90-94 | No detectable patterns | Full AA compliant |
-| B | 80-89 | 1-2 minor patterns | Mostly AA, 1-3 minor violations |
-| C | 70-79 | Several AI patterns | Partial AA |
-| D | 60-69 | Heavily templated | Significant gaps |
-| F | 0-59 | Pure AI-generated slop | Fundamental failures |
-
-**Validation checkpoint:** Release gate requires minimum B Design grade and A Accessibility grade.
-
----
-
-## Workflow 2: AI Slop Detection
-
-```bash
-python scripts/ai_slop_detector.py --input index.html --css styles.css --threshold 0.6 --format json
-```
-
-The agent detects patterns across three categories:
-
-**Visual slop** (confidence 0.4-0.9):
-- Generic hero section (full-width, centered text, gradient)
-- Stock gradients (trending purple-blue, pink-orange)
-- 3-column feature grid (icon + heading + paragraph x3)
-- Shadow/blur overuse on &gt;60% of containers
-
-**Copy slop** (confidence 0.5-1.0):
-- Vague CTAs: &quot;Get Started&quot;, &quot;Learn More&quot; without context
-- Buzzword clustering: &quot;Seamless&quot;, &quot;Powerful&quot;, &quot;Revolutionary&quot;
-- Lorem ipsum residue or uniform paragraph lengths
-
-**Structural slop** (confidence 0.4-0.8):
-- Template ordering: Hero &gt; Features &gt; Social Proof &gt; Pricing &gt; CTA &gt; Footer
-- Cookie-cutter pricing (3 tiers, middle highlighted)
-
-Each finding includes a remediation suggestion for making the element more intentional.
-
----
-
-## Workflow 3: Accessibility &amp; Design System Compliance
-
-**Color contrast audit:**
-
-```bash
-python scripts/color_contrast_checker.py --input brand-colors.json --level AA --suggest-fixes --format text
-```
-
-Input format:
-```json
-[
-  {&quot;foreground&quot;: &quot;#666666&quot;, &quot;background&quot;: &quot;#ffffff&quot;, &quot;label&quot;: &quot;body text&quot;},
-  {&quot;foreground&quot;: &quot;#999999&quot;, &quot;background&quot;: &quot;#f5f5f5&quot;, &quot;label&quot;: &quot;muted text&quot;}
-]
-```
-
-The agent checks against WCAG thresholds (4.5:1 normal text, 3:1 large text) and suggests the closest compliant alternative for failing pairs.
-
-**Design system validation:**
-
-```bash
-python scripts/design_system_validator.py --tokens design-tokens.json --input src/styles/ --glob &quot;*.scss&quot;
-```
-
-Token file format:
-```json
-{
-  &quot;colors&quot;: {&quot;primary&quot;: &quot;#1a73e8&quot;, &quot;secondary&quot;: &quot;#5f6368&quot;, &quot;error&quot;: &quot;#d93025&quot;},
-  &quot;spacing&quot;: [0, 4, 8, 12, 16, 24, 32, 48, 64],
-  &quot;typography&quot;: {&quot;body&quot;: &quot;16px&quot;, &quot;h1&quot;: &quot;32px&quot;, &quot;h2&quot;: &quot;24px&quot;},
-  &quot;radii&quot;: [0, 4, 8, 16, 9999]
-}
-```
-
-Detects hardcoded colors, spacing, fonts, radii, shadows, z-indices, and transitions that deviate from tokens. Reports compliance percentage and suggests nearest token for each violation.
-
-**Validation checkpoint:** Token compliance &gt;= 90%. Zero off-system colors in production CSS.
-
----
-
-## Design Principles (Audit Operating System)
-
-These 10 principles drive every finding evaluation:
-
-1. **Specificity over vibes** -- &quot;Clean UI&quot; is banned. Name the font, spacing scale, color system.
-2. **Empty states are features** -- &quot;No items found&quot; is a bug. Guide users to first action.
-3. **Subtraction default** -- every element must earn its place. When in doubt, remove it.
-4. **Edge cases are user experiences** -- 47-character names, zero results, slow networks, stale state.
-5. **Four shadow paths** -- happy path, nil input, empty input, error upstream. Blank screen = Critical.
-6. **Loading states earn trust** -- skeleton screens &gt; spinners &gt; blank pages.
-7. **Consistency compounds** -- one off-system color erodes the entire design language. Tokens are contracts.
-8. **Motion has meaning** -- decorative animation without purpose is noise.
-9. **Accessibility is baseline** -- WCAG AA is the floor. Accessibility findings are never &quot;Low&quot; priority.
-10. **Performance is perceived design** -- 3-second load feels broken regardless of visual quality.
-
----
-
-## Fix Session Rules
-
-- **One issue = one question** -- never batch multiple findings.
-- **AUTO-FIX**: Cosmetic -- spacing token mismatches, off-system colors to nearest token.
-- **ASK**: Structural -- layout changes, component swaps, navigation restructuring.
-- **Max 30 fixes per session.** Hard stop, then generate report.
-- **Risk accumulator**: component (+5), global style (+8), layout (+10), revert (+15). Stop at 20% of budget.
-- **Revert on regression** -- if fix breaks visual tests or introduces Critical finding, `git revert` immediately.
-
----
-
-## CI/CD Integration
-
-```yaml
-jobs:
-  design-checks:
-    steps:
-      - run: python scripts/color_contrast_checker.py --input color-pairs.json --level AA
-      - run: |
-          python scripts/design_system_validator.py --tokens tokens.json --input src/styles/ --format json &gt; compliance.json
-          python -c &quot;import json; exit(0 if json.load(open(&#x27;compliance.json&#x27;)).get(&#x27;compliance_percentage&#x27;,0)&gt;=90 else 1)&quot;
-      - run: python scripts/ai_slop_detector.py --input dist/index.html --threshold 0.7 --format json
-```
-
----
-
-## Anti-Patterns
-
-1. **Scoring categories too high relative to findings** -- if there are 4 accessibility findings, the score should not be 8/10.
-2. **Ignoring interaction states** -- every interactive element needs: default, hover, focus, active, disabled, loading, error, empty, success.
-3. **Color as sole information carrier** -- information must not be conveyed by color alone.
-4. **Skipping edge cases** -- test with long names, empty data, error states, not just the happy path.
-
----
-
-## Troubleshooting
-
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| `design_scorer.py` exits &quot;Missing category&quot; | Input JSON missing required keys | Ensure all 12 keys present under `categories` |
-| Color checker rejects value | Unsupported format | Use hex, `rgb()`, `hsl()`, or named colors |
-| AI slop detector finds zero on templated page | Threshold too high | Lower `--threshold` to 0.3 |
-| Validator reports &quot;No CSS files found&quot; | SCSS not matched | Pass `--glob &quot;*.scss&quot;` |
-| Scores seem inflated | Author-provided scores too generous | Re-evaluate each 0-10 score against finding count and severity |
-
----
-
 ## References
 
-| Guide | Path |
-|-------|------|
-| Audit Methodology | `references/design_audit_methodology.md` |
-| AI Slop Patterns Catalog | `references/ai_slop_patterns.md` |
-| WCAG 2.1 Checklist | `references/accessibility_checklist.md` |
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
----
+- **[references/audit-workflows-and-operations.md](references/audit-workflows-and-operations.md)** — quick-start commands, tools-overview table, the three workflows (full audit, slop detection, accessibility/token compliance), grade tables, the 10 design principles, fix-session rules, CI/CD integration, anti-patterns, and troubleshooting. Read when running an audit end to end.
+- **[references/design_audit_methodology.md](references/design_audit_methodology.md)** — systematic audit approach, heuristic evaluation, Gestalt principles, critique frameworks, and anti-patterns. Read when designing the evaluation pass.
+- **[references/ai_slop_patterns.md](references/ai_slop_patterns.md)** — comprehensive catalog of AI-generated UI patterns and remediation guidance. Read when judging originality.
+- **[references/accessibility_checklist.md](references/accessibility_checklist.md)** — full WCAG 2.1 Level A/AA/AAA checklist organized by POUR with testing methodology and fixes. Read when auditing accessibility.
+
+## Scope &amp; Limitations
+
+Covers static design quality, AI-slop, WCAG contrast, and design-token compliance auditing for web UI (HTML/CSS). Does not run live browsers, render-test layouts, or replace manual usability research. Accessibility findings are never &quot;Low&quot; priority; WCAG AA is the floor.
 
 ## Integration Points
 
@@ -941,8 +629,8 @@ jobs:
 
 ---
 
-**Last Updated:** April 2026
-**Version:** 2.1.0
+**Last Updated:** June 2026
+**Version:** 2.2.0
 
 ---
 
@@ -970,7 +658,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Design Auditor&quot;**
-   - Description: &quot;Comprehensive UI/UX design audit with 12-category scoring, AI slop detection, WCAG accessibility validation, design system compliance, and automated fix recommendations&quot;
+   - Description: &quot;Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1030,20 +718,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/design-auditor/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Score a full design audit (12 categories -&gt; 3 grades)
-python scripts/design_scorer.py --input findings.json --output report.json --verbose
-
-# Detect AI-generated slop in HTML/CSS
-python scripts/ai_slop_detector.py --input page.html --css styles.css --threshold 0.6
-
-# Check color contrast (single pair or batch)
-python scripts/color_contrast_checker.py --fg &quot;#333&quot; --bg &quot;#fff&quot; --level AA
-python scripts/color_contrast_checker.py --input color-pairs.json --level AAA --suggest-fixes
-
-# Validate design system token compliance
-python scripts/design_system_validator.py --tokens tokens.json --input src/styles/
-</code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design and implement AI agent communication protocols including MCP tool schemas, Google A2A...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design and implement multi-agent orchestration systems with workflow DAGs, agent routing,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-design-reviewer.html" class="skill-card" style="text-decoration:none"><h3>Api Design Reviewer</h3><p>Reviews REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/api-test-suite-builder.html" class="skill-card" style="text-decoration:none"><h3>Api Test Suite Builder</h3><p>Generate comprehensive API test suites from route definitions across frameworks. Covers auth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/aws-solution-architect.html" class="skill-card" style="text-decoration:none"><h3>Aws Solution Architect</h3><p>Design AWS architectures for startups using serverless patterns and IaC templates. Use when...</p></a></div>
+  
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html" class="skill-card" style="text-decoration:none"><h3>Ai Security</h3><p>This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/design-auditor/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

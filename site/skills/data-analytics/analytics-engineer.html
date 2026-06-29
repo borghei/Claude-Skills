@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Analytics Engineer - Claude Skills</title>
-  <meta name="description" content="Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ">
+  <meta name="description" content="Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or opti">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html">
   <meta property="og:title" content="Analytics Engineer - Claude Skills">
-  <meta property="og:description" content="Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ">
+  <meta property="og:description" content="Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or opti">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Analytics Engineer", "description": "Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...", "applicationCategory": "Data Analytics", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Analytics Engineer", "description": "Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.", "applicationCategory": "Data Analytics", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/data-analytics/analytics-engineer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Analytics Engineer</h1>
-    <p class="page-subtitle">Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...</p>
+    <p class="page-subtitle">Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.</p>
     <div class="badge-bar"><span class="badge badge-domain">Data Analytics</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">analytics-engineering</span><span class="tag">dbt</span><span class="tag">data-modeling</span><span class="tag">transformation</span><span class="tag">semantic-layer</span></div>
+    
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Analytics Engineer (Data Analytics domain).
 
-Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...
+Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.
 
-The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. 1. **Understand the data request** -- Identify the business question, required grain, and downstream consu
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Analytics Engineer (Data Analytics domain).
 
-Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...
+Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.
 
-The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. 1. **Understand the data request** -- Identify the business question, required grain, and downstream consu
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
 
 ## How to Help
 When the user asks for help in this domain:
@@ -449,6 +449,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.
 
+## Clarify First
+
+Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Required grain + downstream consumers** — the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization)
+- [ ] **Source tables and freshness** — which sources exist, their keys, and load cadence (determines staging models and incremental logic)
+- [ ] **Data volume + refresh SLA** — table size and how often it must rebuild (selects view vs. table vs. incremental materialization)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Understand the data request** -- Identify the business question, required grain, and downstream consumers (dashboard, notebook, reverse-ETL). Confirm source tables exist and check freshness.
@@ -763,7 +773,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Analytics Engineer&quot;**
-   - Description: &quot;Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...&quot;
+   - Description: &quot;Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -790,6 +800,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions.
 
+## Clarify First
+
+Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Required grain + downstream consumers** — the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization)
+- [ ] **Source tables and freshness** — which sources exist, their keys, and load cadence (determines staging models and incremental logic)
+- [ ] **Data volume + refresh SLA** — table size and how often it must rebuild (selects view vs. table vs. incremental materialization)
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
 ## Workflow
 
 1. **Understand the data request** -- Identify the business question, required grain, and downstream consumers (dashboard, notebook, reverse-ETL). Confirm source tables exist and check freshness.
@@ -1104,7 +1124,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Analytics Engineer&quot;**
-   - Description: &quot;Expert analytics engineering covering data modeling, dbt development, data transformation, and semantic layer management. Use when building dbt models, designing star schemas, writing staging or mart ...&quot;
+   - Description: &quot;Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1165,7 +1185,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python data-analytics/analytics-engineer/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Data Analytics</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/business-intelligence.html" class="skill-card" style="text-decoration:none"><h3>Business Intelligence</h3><p>Expert business intelligence covering dashboard design, data visualization, reporting...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-analyst.html" class="skill-card" style="text-decoration:none"><h3>Data Analyst</h3><p>Expert data analysis covering SQL querying, data visualization, statistical analysis, business...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html" class="skill-card" style="text-decoration:none"><h3>Data Scientist</h3><p>Expert data science covering machine learning, statistical modeling, experimentation, predictive...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/ml-ops-engineer.html" class="skill-card" style="text-decoration:none"><h3>Ml Ops Engineer</h3><p>Expert MLOps engineering covering model deployment, ML pipelines, model monitoring, feature...</p></a></div>
+  <h2>Related Skills in Data Analytics</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/business-intelligence.html" class="skill-card" style="text-decoration:none"><h3>Business Intelligence</h3><p>Business intelligence across dashboard design, visualization, and reporting automation. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-analyst.html" class="skill-card" style="text-decoration:none"><h3>Data Analyst</h3><p>Data analysis across SQL, visualization, statistics, and reporting. Use when writing SQL...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/data-scientist.html" class="skill-card" style="text-decoration:none"><h3>Data Scientist</h3><p>Data science across machine learning, statistical modeling, and experimentation. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/data-analytics/ml-ops-engineer.html" class="skill-card" style="text-decoration:none"><h3>Ml Ops Engineer</h3><p>MLOps across model deployment, ML pipelines, monitoring, and feature stores. Use when deploying...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/data-analytics/analytics-engineer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

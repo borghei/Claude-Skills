@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Summarize Meeting</h1>
     <p class="page-subtitle">Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-subdomain">Pm Execution</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     
   </div>
   <h2>How to Use</h2>
@@ -395,15 +395,10 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
 
-Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **After any meeting** where
-
-## Your Key Capabilities
-- When to Use
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **Metadata capture** — date
 
 ## Frameworks &amp; Templates You Know
-- Output Template
 - - Document recurring meeting outcomes in `../confluence-expert/` templates.
-- - See `assets/meeting_summary_template.md` for ready-to-use templates.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -425,15 +420,10 @@ Start by asking the user what they need help with.">
 
 Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
 
-Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **After any meeting** where
-
-## Your Key Capabilities
-- When to Use
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **Metadata capture** — date
 
 ## Frameworks &amp; Templates You Know
-- Output Template
 - - Document recurring meeting outcomes in `../confluence-expert/` templates.
-- - See `assets/meeting_summary_template.md` for ready-to-use templates.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -467,175 +457,46 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
 
-### When to Use
+## Core Capabilities
+
+- **Metadata capture** — date, time, participants with roles, topic, location
+- **Discussion synthesis** — summarize substantive topics in plain language; note disagreements and resolutions
+- **Action extraction** — one owner, concrete deliverable, and a specific calendar due date per item
+- **Decision logging** — numbered decisions with rationale and decision-maker
+- **Open-question tracking** — unresolved items with owner and target date
+- **Consistent output** — fixed template plus naming convention and 24-hour distribution discipline
+
+## When to Use
 
 - **After any meeting** where decisions were made or actions were assigned.
 - **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
 - **Stakeholder meetings** -- steering committees, executive reviews, client calls.
 - **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
 
-## Methodology
+## Clarify First
 
-### Step 1: Capture Meeting Metadata
+Before summarizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Record the essential context:
+- [ ] **The source material and its fidelity** — raw notes, transcript, or recording (summary quality is bounded by input; missing owners/dates for action items cannot be invented)
+- [ ] **Meeting type** — planning, retro, steering committee, or client call (tailors discussion synthesis and which decisions matter)
+- [ ] **Distribution scope + confidentiality** — attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies)
 
-| Field | Description |
-|-------|-------------|
-| **Date** | Meeting date (YYYY-MM-DD) |
-| **Time** | Start and end time with timezone |
-| **Participants** | Names and roles (e.g., &quot;Sarah Chen, Product Lead&quot;) |
-| **Topic** | One-line meeting purpose |
-| **Location** | Room name, video link, or &quot;async&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Step 2: Extract Key Discussion Points
+## References
 
-From the raw notes or transcript, identify the substantive topics discussed. Guidelines:
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- **Summarize, do not transcribe.** Capture the essence of each topic in 1-3 bullet points.
-- **Use plain language.** Avoid jargon. Anyone reading the summary should understand the points without having attended.
-- **Focus on what matters.** Skip small talk, repeated points, and tangential discussions.
-- **Note disagreements.** If there was significant debate, capture the key positions and how they were resolved (or not).
-
-### Step 3: Extract Action Items
-
-Every action item must answer three questions:
-
-1. **Who** is responsible? (Single owner, not a team)
-2. **What** specifically must they do? (Concrete, observable deliverable)
-3. **By when?** (Specific date, not &quot;soon&quot; or &quot;next sprint&quot;)
-
-Format as a table:
-
-| Due Date | Owner | Action |
-|----------|-------|--------|
-| 2026-03-10 | Sarah Chen | Share revised wireframes with the design team |
-| 2026-03-07 | James Park | Schedule load test for the staging environment |
-
-**Action item quality checks:**
-
-- Each action has exactly one owner (not &quot;Sarah and James&quot;)
-- The deliverable is specific enough to verify completion
-- The due date is a calendar date, not a relative timeframe
-- Actions use active verbs: &quot;share,&quot; &quot;schedule,&quot; &quot;draft,&quot; &quot;review,&quot; &quot;decide&quot;
-
-### Step 4: Record Decisions
-
-List each decision made during the meeting as a numbered item. Include enough context that someone who was not present understands the decision and its rationale.
-
-**Format:**
-
-1. **[Decision]** -- [Brief rationale or context]. Decided by [who].
-2. **[Decision]** -- [Brief rationale or context]. Decided by [who].
-
-**Examples:**
-
-1. **Launch date set for April 15** -- Allows two full sprints for QA after feature freeze on March 28. Decided by steering committee.
-2. **Use PostgreSQL instead of MongoDB for the analytics service** -- Team consensus based on query pattern analysis showing 80% relational queries. Decided by engineering leads.
-
-### Step 5: Capture Open Questions
-
-List unresolved questions that need follow-up. For each question, note who is expected to provide an answer and by when, if known.
-
-1. Do we need a separate staging environment for the new analytics service? (James to investigate by March 10)
-2. What is the budget ceiling for the Q2 marketing campaign? (Pending finance review)
-
-### Step 6: Save and Distribute
-
-**File naming convention:** `Meeting-Summary-[YYYY-MM-DD]-[topic-slug].md`
-
-Examples:
-- `Meeting-Summary-2026-03-04-sprint-planning.md`
-- `Meeting-Summary-2026-03-04-q2-roadmap-review.md`
-
-**Distribution:**
-- Share the summary within 24 hours of the meeting.
-- Send to all participants and relevant stakeholders who were not present.
-- Store in the team&#x27;s shared documentation space (Confluence, Notion, shared drive).
-
-## Output Template
-
-```markdown
-# Meeting Summary
-
-## Metadata
-
-| Field | Value |
-|-------|-------|
-| **Date** | [YYYY-MM-DD] |
-| **Time** | [HH:MM] - [HH:MM] [TZ] |
-| **Participants** | [Name, Role]; [Name, Role]; ... |
-| **Topic** | [One-line meeting purpose] |
-
-## Summary
-
-- [Key discussion point 1]
-- [Key discussion point 2]
-- [Key discussion point 3]
-
-## Action Items
-
-| Due Date | Owner | Action |
-|----------|-------|--------|
-| [YYYY-MM-DD] | [Name] | [Specific, verifiable action] |
-
-## Decisions Made
-
-1. **[Decision]** -- [Rationale]. Decided by [who].
-
-## Open Questions
-
-1. [Question]? ([Who is expected to answer, by when])
-```
-
-## What to Focus On
-
-When summarizing, prioritize:
-
-- **Decisions that affect roadmap or strategy** -- These have the broadest impact and are most likely to be referenced later.
-- **Who does what by when** -- Accountability is the primary value of a meeting summary.
-- **Blockers and risks surfaced** -- These need visibility beyond the meeting room.
-- **Changes to previously agreed plans** -- These create confusion if not documented.
-
-When summarizing, deprioritize:
-
-- Status updates that are available elsewhere (Jira, dashboards)
-- Repetition of information already documented
-- Social conversation and small talk
-- Detailed technical discussions better captured in design docs
+- **[references/summarization-process.md](references/summarization-process.md)** — the full six-step methodology (metadata → discussion → actions → decisions → open questions → distribute), the output template, focus priorities, troubleshooting table, and success criteria. Read when producing a summary.
+- **[references/meeting-facilitation-guide.md](references/meeting-facilitation-guide.md)** — meeting types, note-taking strategies, and anti-patterns. Read to tailor the summary to the meeting type or improve input quality.
+- **[references/red-flags.md](references/red-flags.md)** — common ways summaries go wrong with bad/good examples. Read before posting, emailing, or linking a summary.
+- **[assets/meeting_summary_template.md](assets/meeting_summary_template.md)** — ready-to-use fill-in template. Use to draft the summary directly.
 
 ## Integration with Other Skills
 
 - Feed decisions into `wwas/` to create backlog items with strategic context.
 - Use action items to create tickets via `../jira-expert/`.
 - Document recurring meeting outcomes in `../confluence-expert/` templates.
-
-## References
-
-- See `references/meeting-facilitation-guide.md` for meeting types, note-taking strategies, and anti-patterns.
-- See `assets/meeting_summary_template.md` for ready-to-use templates.
-
-## Troubleshooting
-
-| Problem | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Action items are assigned to teams instead of individuals | Culture avoids individual accountability; facilitator does not press for a single owner | Enforce the &quot;one owner&quot; rule during the meeting; if a team is named, ask &quot;Who on that team is the single point of contact?&quot; |
-| Summaries are too long and nobody reads them | Summarizer includes too much detail; tries to capture everything | Apply the &quot;would someone who missed the meeting need this?&quot; filter to every bullet point; target 1 page maximum for 1-hour meetings |
-| Decisions are not documented, leading to re-litigation in future meetings | Meeting moved quickly; facilitator focused on discussion, not decisions | Pause after each decision and state it aloud: &quot;Let me confirm: we decided X because Y&quot;; add decision capture as a facilitator checklist item |
-| Action items have vague due dates (&quot;soon&quot;, &quot;next sprint&quot;) | Facilitator does not push for specificity; team uncomfortable committing to dates | Require a calendar date for every action; if the team cannot commit, set a date to decide the date |
-| Summaries are distributed days after the meeting | Summarizer is overburdened or perfectionist | Set a 24-hour distribution rule; use a structured template to reduce writing effort; assign summary responsibility before the meeting |
-| Open questions from previous meetings are never resolved | No follow-up mechanism; questions captured but not tracked | Add &quot;Previous Open Questions&quot; as a standing agenda item; assign each question an owner and a resolution date |
-| Attendees disagree with the summary after distribution | Summary reflects summarizer&#x27;s interpretation, not group consensus | Share key decisions and action items verbally at the meeting close; invite corrections within 24 hours of distribution |
-
-## Success Criteria
-
-- 100% of meetings with decisions or action items produce a written summary within 24 hours
-- Every action item has a single named owner and a specific calendar due date
-- Action item completion rate exceeds 80% by the stated due date
-- Summaries are 1 page or less for meetings under 1 hour
-- Decisions are documented with enough context that a non-attendee can understand the rationale
-- Open questions from previous meetings are tracked and resolved within 2 meeting cycles
-- Meeting summary satisfaction (from periodic team survey) averages 4+/5
 
 ## Scope &amp; Limitations
 
@@ -711,175 +572,46 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
 
-### When to Use
+## Core Capabilities
+
+- **Metadata capture** — date, time, participants with roles, topic, location
+- **Discussion synthesis** — summarize substantive topics in plain language; note disagreements and resolutions
+- **Action extraction** — one owner, concrete deliverable, and a specific calendar due date per item
+- **Decision logging** — numbered decisions with rationale and decision-maker
+- **Open-question tracking** — unresolved items with owner and target date
+- **Consistent output** — fixed template plus naming convention and 24-hour distribution discipline
+
+## When to Use
 
 - **After any meeting** where decisions were made or actions were assigned.
 - **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
 - **Stakeholder meetings** -- steering committees, executive reviews, client calls.
 - **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
 
-## Methodology
+## Clarify First
 
-### Step 1: Capture Meeting Metadata
+Before summarizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
 
-Record the essential context:
+- [ ] **The source material and its fidelity** — raw notes, transcript, or recording (summary quality is bounded by input; missing owners/dates for action items cannot be invented)
+- [ ] **Meeting type** — planning, retro, steering committee, or client call (tailors discussion synthesis and which decisions matter)
+- [ ] **Distribution scope + confidentiality** — attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies)
 
-| Field | Description |
-|-------|-------------|
-| **Date** | Meeting date (YYYY-MM-DD) |
-| **Time** | Start and end time with timezone |
-| **Participants** | Names and roles (e.g., &quot;Sarah Chen, Product Lead&quot;) |
-| **Topic** | One-line meeting purpose |
-| **Location** | Room name, video link, or &quot;async&quot; |
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
 
-### Step 2: Extract Key Discussion Points
+## References
 
-From the raw notes or transcript, identify the substantive topics discussed. Guidelines:
+Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- **Summarize, do not transcribe.** Capture the essence of each topic in 1-3 bullet points.
-- **Use plain language.** Avoid jargon. Anyone reading the summary should understand the points without having attended.
-- **Focus on what matters.** Skip small talk, repeated points, and tangential discussions.
-- **Note disagreements.** If there was significant debate, capture the key positions and how they were resolved (or not).
-
-### Step 3: Extract Action Items
-
-Every action item must answer three questions:
-
-1. **Who** is responsible? (Single owner, not a team)
-2. **What** specifically must they do? (Concrete, observable deliverable)
-3. **By when?** (Specific date, not &quot;soon&quot; or &quot;next sprint&quot;)
-
-Format as a table:
-
-| Due Date | Owner | Action |
-|----------|-------|--------|
-| 2026-03-10 | Sarah Chen | Share revised wireframes with the design team |
-| 2026-03-07 | James Park | Schedule load test for the staging environment |
-
-**Action item quality checks:**
-
-- Each action has exactly one owner (not &quot;Sarah and James&quot;)
-- The deliverable is specific enough to verify completion
-- The due date is a calendar date, not a relative timeframe
-- Actions use active verbs: &quot;share,&quot; &quot;schedule,&quot; &quot;draft,&quot; &quot;review,&quot; &quot;decide&quot;
-
-### Step 4: Record Decisions
-
-List each decision made during the meeting as a numbered item. Include enough context that someone who was not present understands the decision and its rationale.
-
-**Format:**
-
-1. **[Decision]** -- [Brief rationale or context]. Decided by [who].
-2. **[Decision]** -- [Brief rationale or context]. Decided by [who].
-
-**Examples:**
-
-1. **Launch date set for April 15** -- Allows two full sprints for QA after feature freeze on March 28. Decided by steering committee.
-2. **Use PostgreSQL instead of MongoDB for the analytics service** -- Team consensus based on query pattern analysis showing 80% relational queries. Decided by engineering leads.
-
-### Step 5: Capture Open Questions
-
-List unresolved questions that need follow-up. For each question, note who is expected to provide an answer and by when, if known.
-
-1. Do we need a separate staging environment for the new analytics service? (James to investigate by March 10)
-2. What is the budget ceiling for the Q2 marketing campaign? (Pending finance review)
-
-### Step 6: Save and Distribute
-
-**File naming convention:** `Meeting-Summary-[YYYY-MM-DD]-[topic-slug].md`
-
-Examples:
-- `Meeting-Summary-2026-03-04-sprint-planning.md`
-- `Meeting-Summary-2026-03-04-q2-roadmap-review.md`
-
-**Distribution:**
-- Share the summary within 24 hours of the meeting.
-- Send to all participants and relevant stakeholders who were not present.
-- Store in the team&#x27;s shared documentation space (Confluence, Notion, shared drive).
-
-## Output Template
-
-```markdown
-# Meeting Summary
-
-## Metadata
-
-| Field | Value |
-|-------|-------|
-| **Date** | [YYYY-MM-DD] |
-| **Time** | [HH:MM] - [HH:MM] [TZ] |
-| **Participants** | [Name, Role]; [Name, Role]; ... |
-| **Topic** | [One-line meeting purpose] |
-
-## Summary
-
-- [Key discussion point 1]
-- [Key discussion point 2]
-- [Key discussion point 3]
-
-## Action Items
-
-| Due Date | Owner | Action |
-|----------|-------|--------|
-| [YYYY-MM-DD] | [Name] | [Specific, verifiable action] |
-
-## Decisions Made
-
-1. **[Decision]** -- [Rationale]. Decided by [who].
-
-## Open Questions
-
-1. [Question]? ([Who is expected to answer, by when])
-```
-
-## What to Focus On
-
-When summarizing, prioritize:
-
-- **Decisions that affect roadmap or strategy** -- These have the broadest impact and are most likely to be referenced later.
-- **Who does what by when** -- Accountability is the primary value of a meeting summary.
-- **Blockers and risks surfaced** -- These need visibility beyond the meeting room.
-- **Changes to previously agreed plans** -- These create confusion if not documented.
-
-When summarizing, deprioritize:
-
-- Status updates that are available elsewhere (Jira, dashboards)
-- Repetition of information already documented
-- Social conversation and small talk
-- Detailed technical discussions better captured in design docs
+- **[references/summarization-process.md](references/summarization-process.md)** — the full six-step methodology (metadata → discussion → actions → decisions → open questions → distribute), the output template, focus priorities, troubleshooting table, and success criteria. Read when producing a summary.
+- **[references/meeting-facilitation-guide.md](references/meeting-facilitation-guide.md)** — meeting types, note-taking strategies, and anti-patterns. Read to tailor the summary to the meeting type or improve input quality.
+- **[references/red-flags.md](references/red-flags.md)** — common ways summaries go wrong with bad/good examples. Read before posting, emailing, or linking a summary.
+- **[assets/meeting_summary_template.md](assets/meeting_summary_template.md)** — ready-to-use fill-in template. Use to draft the summary directly.
 
 ## Integration with Other Skills
 
 - Feed decisions into `wwas/` to create backlog items with strategic context.
 - Use action items to create tickets via `../jira-expert/`.
 - Document recurring meeting outcomes in `../confluence-expert/` templates.
-
-## References
-
-- See `references/meeting-facilitation-guide.md` for meeting types, note-taking strategies, and anti-patterns.
-- See `assets/meeting_summary_template.md` for ready-to-use templates.
-
-## Troubleshooting
-
-| Problem | Likely Cause | Resolution |
-|---------|-------------|------------|
-| Action items are assigned to teams instead of individuals | Culture avoids individual accountability; facilitator does not press for a single owner | Enforce the &quot;one owner&quot; rule during the meeting; if a team is named, ask &quot;Who on that team is the single point of contact?&quot; |
-| Summaries are too long and nobody reads them | Summarizer includes too much detail; tries to capture everything | Apply the &quot;would someone who missed the meeting need this?&quot; filter to every bullet point; target 1 page maximum for 1-hour meetings |
-| Decisions are not documented, leading to re-litigation in future meetings | Meeting moved quickly; facilitator focused on discussion, not decisions | Pause after each decision and state it aloud: &quot;Let me confirm: we decided X because Y&quot;; add decision capture as a facilitator checklist item |
-| Action items have vague due dates (&quot;soon&quot;, &quot;next sprint&quot;) | Facilitator does not push for specificity; team uncomfortable committing to dates | Require a calendar date for every action; if the team cannot commit, set a date to decide the date |
-| Summaries are distributed days after the meeting | Summarizer is overburdened or perfectionist | Set a 24-hour distribution rule; use a structured template to reduce writing effort; assign summary responsibility before the meeting |
-| Open questions from previous meetings are never resolved | No follow-up mechanism; questions captured but not tracked | Add &quot;Previous Open Questions&quot; as a standing agenda item; assign each question an owner and a resolution date |
-| Attendees disagree with the summary after distribution | Summary reflects summarizer&#x27;s interpretation, not group consensus | Share key decisions and action items verbally at the meeting close; invite corrections within 24 hours of distribution |
-
-## Success Criteria
-
-- 100% of meetings with decisions or action items produce a written summary within 24 hours
-- Every action item has a single named owner and a specific calendar due date
-- Action item completion rate exceeds 80% by the stated due date
-- Summaries are 1 page or less for meetings under 1 hour
-- Decisions are documented with enough context that a non-attendee can understand the rationale
-- Open questions from previous meetings are tracked and resolved within 2 meeting cycles
-- Meeting summary satisfaction (from periodic team survey) averages 4+/5
 
 ## Scope &amp; Limitations
 
@@ -987,7 +719,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/execution/summarize-meeting/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching for team transformation, framework selection, maturity assessment, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Atlassian Administrator for managing and organizing Atlassian products, users, customization of...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Atlassian Template and Files Creator/Modifier expert for creating, modifying, and managing Jira...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/confluence-expert.html" class="skill-card" style="text-decoration:none"><h3>Confluence Expert</h3><p>Atlassian Confluence expert for creating and managing spaces, knowledge bases, documentation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html" class="skill-card" style="text-decoration:none"><h3>Delivery Manager</h3><p>Expert delivery management for release planning, deployment coordination, incident response,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html" class="skill-card" style="text-decoration:none"><h3>Brainstorm Experiments</h3><p>Experiment design expert using pretotyping and lean validation for both new product concepts and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>
