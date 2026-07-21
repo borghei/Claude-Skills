@@ -56,7 +56,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for the Claude Code plugin, MCP
 - **Scripts that actually run, not just prompt templates.** 859 Python tools you can pipe into CI, MCP servers, or your own scripts. Standard library only, no pip cliffs.
 - **Call one persona, get a stack of skills behind it.** `startup-cto`, `growth-marketer`, `solo-founder`, `cs-cto-advisor`, `cs-fintech-advisor`, and more. 76 expert identities ready out of the box.
 - **Works with your AI assistant.** Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider, Goose, OpenCode, and ChatGPT / Claude.ai.
-- **Discovery → delivery → career for product teams.** Project Management is the deepest domain — 66 skills, and every one ships with a worked example, an anti-pattern library, and a deterministic scoring rubric. 15 PM skills callable as MCP tools. 5 chain pipelines, 3 live data adapters. Jira / Linear / Notion / Productboard / Confluence. Tier 3 adds strategy frameworks (BMC, Lean Canvas, SWOT, Porter's, Ansoff) and GTM (gtm-strategy, ICP).
+- **Discovery → delivery → career for product teams.** Project Management is the deepest domain — 68 skills, and every one ships with a worked example, an anti-pattern library, and a deterministic scoring rubric. 15 PM skills callable as MCP tools. 5 chain pipelines, 3 live data adapters. Jira / Linear / Notion / Productboard / Confluence. Tier 3 adds strategy frameworks (BMC, Lean Canvas, SWOT, Porter's, Ansoff) and GTM (gtm-strategy, ICP).
+- **Runs the business, not just the codebase.** Business operations (capacity planning, process mapping, vendor and procurement management), applied research ops (market, product, clinical study design, research finance), and a stdlib-only markdown→HTML publishing pipeline with a CI-ready review gate.
 
 *Supporting evidence:* 368 skills · 859 Python tools · 76 agents · 18 compliance frameworks · 20 domains · 11 platforms.
 
@@ -64,9 +65,9 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for the Claude Code plugin, MCP
 
 ## Browse skills by domain
 
-**[Project Management (66) ★](project-management/)** *(most-visited domain. Discovery, delivery, career growth, strategy frameworks, GTM, Jira / Linear / Notion / Confluence.)*
+**[Project Management (68) ★](project-management/)** *(most-visited domain. Discovery, delivery, career growth, strategy frameworks, GTM, Jira / Linear / Notion / Confluence.)*
 
-[Engineering (87)](engineering/) · [Marketing (39)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (10)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Data (5)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/SKILLS.md)
+[Engineering (91)](engineering/) · [Marketing (39)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (13)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Business Operations (6)](business-operations/) · [Data (6)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Markdown-HTML (4)](markdown-html/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/SKILLS.md)
 
 ---
 

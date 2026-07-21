@@ -1,8 +1,40 @@
 # Skills Reference
 
-Complete reference for **343 skills across 17 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **368 skills across 20 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
-> **Note:** The per-domain tables below are historical and not yet fully regenerated after recent expansions. For canonical skill listings, browse each domain folder directly. Recent additions are summarized below.
+> **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
+
+---
+
+## Jul 2026 Additions (25 new skills, 3 new domains)
+
+Three new domains plus fill-in across engineering, PM, productivity, marketing, data and finance.
+
+### Business Operations — NEW DOMAIN (+6)
+- [capacity-planner](../business-operations/capacity-planner/SKILL.md) — Effective capacity from raw headcount; hire/contract/defer scenarios (3 tools)
+- [process-mapper](../business-operations/process-mapper/SKILL.md) — SIPOC + swimlane capture, cycle-time and bottleneck analysis (3 tools)
+- [vendor-management](../business-operations/vendor-management/SKILL.md) — Selection scorecards, risk tiering, renewal tracking (3 tools)
+- [internal-comms](../business-operations/internal-comms/SKILL.md) — Sequence and pressure-test internal announcements (3 tools)
+- [knowledge-ops](../business-operations/knowledge-ops/SKILL.md) — Wiki staleness, ownership gaps, orphans, findability (3 tools)
+- [procurement-optimizer](../business-operations/procurement-optimizer/SKILL.md) — Seat utilisation, redundant tools, renewal leverage (3 tools)
+
+### Research Ops — NEW DOMAIN (+4)
+- [market-research](../research-ops/market-research/SKILL.md) — TAM/SAM/SOM reconciled top-down and bottom-up (3 tools)
+- [product-research](../research-ops/product-research/SKILL.md) — Method selection, recruiting, interview guides, evidence scoring (3 tools)
+- [clinical-research](../research-ops/clinical-research/SKILL.md) — Protocol structure, endpoints, power planning, site feasibility (5 tools)
+- [research-finance](../research-ops/research-finance/SKILL.md) — Study budgets, cost per insight, burn against milestones (3 tools)
+
+### Markdown-HTML — NEW DOMAIN (+4)
+- [md-document](../markdown-html/md-document/SKILL.md) — Markdown → self-contained HTML report with TOC and cross-refs (4 tools)
+- [md-slides](../markdown-html/md-slides/SKILL.md) — Markdown → HTML deck with speaker notes and density linter (4 tools)
+- [md-review](../markdown-html/md-review/SKILL.md) — Pre-publication gate: structure, links, readability, a11y (3 tools)
+- [design-system](../markdown-html/design-system/SKILL.md) — Design tokens, light/dark theming, WCAG contrast validation (3 tools)
+
+### Fill-in across existing domains (+11)
+- Engineering: [code-tour](../engineering/code-tour/SKILL.md), [spec-driven-workflow](../engineering/spec-driven-workflow/SKILL.md), [write-a-skill](../engineering/write-a-skill/SKILL.md), [agent-harness](../engineering/agent-harness/SKILL.md), [cloud-security](../engineering/cloud-security/SKILL.md)
+- Project Management: [meeting-analyzer](../project-management/meeting-analyzer/SKILL.md), [team-communications](../project-management/team-communications/SKILL.md)
+- Personal Productivity: [capture](../personal-productivity/capture/SKILL.md), [deep-work](../personal-productivity/deep-work/SKILL.md), [reflect](../personal-productivity/reflect/SKILL.md)
+- Data & Analytics: [statistical-analyst](../data-analytics/statistical-analyst/SKILL.md)
 
 ---
 
@@ -89,9 +121,11 @@ Atomic PM skills covering classic strategy frameworks, GTM, and execution. Adds 
 
 ---
 
-## Engineering (82)
+## Engineering (91)
 
 Core software engineering expertise with Python automation tools.
+
+### Core Engineering (28)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -124,7 +158,7 @@ Core software engineering expertise with Python automation tools.
 | [doc-drift-detector](../engineering/doc-drift-detector/SKILL.md) | Documentation drift analysis, staleness scoring, API doc validation | 4 |
 | [design-auditor](../engineering/design-auditor/SKILL.md) | 12-category design audit, AI slop detection, color contrast checking | 4 |
 
-## Advanced Engineering (33)
+### Advanced Engineering (32)
 
 Enterprise-grade skills with sophisticated analysis tooling.
 
@@ -163,7 +197,63 @@ Enterprise-grade skills with sophisticated analysis tooling.
 | [prompt-engineer-toolkit](../engineering/prompt-engineer-toolkit/SKILL.md) | Prompt engineering frameworks, evaluation, optimization | - |
 | [stripe-integration-expert](../engineering/stripe-integration-expert/SKILL.md) | Stripe API, payment flows, subscriptions, webhooks | - |
 
-## C-Level Advisory (26)
+### Cloud, Infrastructure & Reliability (8)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [azure-cloud-architect](../engineering/azure-cloud-architect/SKILL.md) | Azure service selection, Well-Architected Framework, cost | 3 |
+| [gcp-cloud-architect](../engineering/gcp-cloud-architect/SKILL.md) | GCP service selection, Cloud Adoption Framework, cost | 3 |
+| [kubernetes-operator](../engineering/kubernetes-operator/SKILL.md) | Operator pattern, CRDs, reconciliation, finalizers | 3 |
+| [helm-chart-builder](../engineering/helm-chart-builder/SKILL.md) | Helm chart analysis, values validation, dependency audit | 2 |
+| [terraform-patterns](../engineering/terraform-patterns/SKILL.md) | Terraform module analysis, IaC misconfiguration scanning | 2 |
+| [docker-development](../engineering/docker-development/SKILL.md) | Dockerfile analysis, layer optimization, compose validation | 2 |
+| [chaos-engineering](../engineering/chaos-engineering/SKILL.md) | Hypothesis-driven fault injection, gameday playbooks, maturity model | 3 |
+| [secrets-vault-manager](../engineering/secrets-vault-manager/SKILL.md) | Vault configuration, secret rotation planning, audit log analysis | 3 |
+
+### Security & Threat (4)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [cloud-security](../engineering/cloud-security/SKILL.md) | AWS/Azure/GCP posture: IAM least privilege, exposure, encryption, logging | 4 |
+| [ai-security](../engineering/ai-security/SKILL.md) | AI/ML pipeline security, prompt injection, data poisoning risk | 1 |
+| [red-team](../engineering/red-team/SKILL.md) | Engagement scoping, rules of engagement, adversary simulation planning | 1 |
+| [threat-detection](../engineering/threat-detection/SKILL.md) | Log threat analysis, brute force and injection detection, access anomalies | 1 |
+
+### Data & Databases (3)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [sql-database-assistant](../engineering/sql-database-assistant/SKILL.md) | Query optimization, schema exploration, migration SQL generation | 3 |
+| [snowflake-development](../engineering/snowflake-development/SKILL.md) | Snowflake query performance, warehouse sizing, cost troubleshooting | 1 |
+| [data-quality-auditor](../engineering/data-quality-auditor/SKILL.md) | DQ dimensions, check catalog, incident response | 3 |
+
+### AI Systems, Agents & LLM Ops (8)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [agenthub](../engineering/agenthub/SKILL.md) | Multi-agent DAG orchestration, agent spawning, output merging | 4 |
+| [agent-harness](../engineering/agent-harness/SKILL.md) | Agent eval harness: scenario suites, deterministic replay, regression diffing | 2 |
+| [agentic-evaluation-framework](../engineering/agentic-evaluation-framework/SKILL.md) | LLM-as-judge, eval rubrics, pairwise comparison, agent quality | 2 |
+| [extended-thinking-architect](../engineering/extended-thinking-architect/SKILL.md) | Reasoning effort, thinking budgets, reasoning-vs-cost tuning | 2 |
+| [batch-api-orchestrator](../engineering/batch-api-orchestrator/SKILL.md) | Batch vs realtime cost modelling, bulk LLM job design | 2 |
+| [llm-cost-optimizer](../engineering/llm-cost-optimizer/SKILL.md) | Token counting, prompt cost estimation, model pricing comparison | 3 |
+| [computer-use-automation](../engineering/computer-use-automation/SKILL.md) | Computer-use agents, screenshot-driven actions, GUI vs API tradeoffs | 2 |
+| [prompt-governance](../engineering/prompt-governance/SKILL.md) | Prompt catalog, versioning, injection audit, quality and compliance review | 2 |
+
+### Developer Workflow & Quality (8)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [write-a-skill](../engineering/write-a-skill/SKILL.md) | Author, lint, and publish skill packages against the authoring standard | 4 |
+| [spec-driven-workflow](../engineering/spec-driven-workflow/SKILL.md) | Executable specs, traceable requirement IDs, merge-time coverage gates | 3 |
+| [code-tour](../engineering/code-tour/SKILL.md) | Ordered annotated codebase tours with anchors that resist rot | 3 |
+| [focused-fix](../engineering/focused-fix/SKILL.md) | Minimal-blast-radius bugfixes, change scope analysis | 1 |
+| [feature-flags-architect](../engineering/feature-flags-architect/SKILL.md) | Flag types, rollout playbooks, kill switches, debt cleanup | 3 |
+| [a11y-audit](../engineering/a11y-audit/SKILL.md) | WCAG compliance scanning, HTML a11y violations, color contrast | 2 |
+| [browser-automation](../engineering/browser-automation/SKILL.md) | Web automation scripts, scraping, form filling, detection checks | 3 |
+| [google-workspace-cli](../engineering/google-workspace-cli/SKILL.md) | Google Workspace audit, security settings, admin configuration review | 3 |
+
+## C-Level Advisory (31)
 
 Strategic decision-making for executive leadership.
 
@@ -195,8 +285,13 @@ Strategic decision-making for executive leadership.
 | [internal-narrative](../c-level-advisor/internal-narrative/SKILL.md) | Internal communications, all-hands, company narratives | - |
 | [scenario-war-room](../c-level-advisor/scenario-war-room/SKILL.md) | Scenario planning, war gaming, crisis simulation | - |
 | [cs-onboard](../c-level-advisor/cs-onboard/SKILL.md) | C-suite onboarding, first 90 days, stakeholder mapping | - |
+| [chief-ai-officer-advisor](../c-level-advisor/chief-ai-officer-advisor/SKILL.md) | AI strategy, governance, risk register, investment planning, maturity | 3 |
+| [chief-data-officer-advisor](../c-level-advisor/chief-data-officer-advisor/SKILL.md) | Data strategy, DAMA-DMBOK governance audit, platform evaluation | 3 |
+| [chief-customer-officer-advisor](../c-level-advisor/chief-customer-officer-advisor/SKILL.md) | CX strategy, churn intervention, VoC program design, CX maturity | 3 |
+| [general-counsel-advisor](../c-level-advisor/general-counsel-advisor/SKILL.md) | Legal risk register, contract portfolio analysis, regulatory calendar | 3 |
+| [vpe-advisor](../c-level-advisor/vpe-advisor/SKILL.md) | Engineering org health, DORA/DevEx dashboards, capacity planning | 3 |
 
-## Marketing (35)
+## Marketing (39)
 
 Data-driven marketing with Python automation tools.
 
@@ -237,8 +332,12 @@ Data-driven marketing with Python automation tools.
 | [email-template-builder](../marketing/email-template-builder/SKILL.md) | Email HTML templates, responsive design, deliverability | - |
 | [social-media-manager](../marketing/social-media-manager/SKILL.md) | Social media management, scheduling, community management | - |
 | [launch-strategy](../marketing/launch-strategy/SKILL.md) | Product launch playbooks, pre/post-launch analysis | - |
+| [aeo](../marketing/aeo/SKILL.md) | Answer Engine Optimization for LLM citation and AI-assistant answers | 3 |
+| [ab-test-setup](../marketing/ab-test-setup/SKILL.md) | Sample size, test duration, significance for conversion experiments | 3 |
+| [video-content-strategist](../marketing/video-content-strategist/SKILL.md) | Video calendars, video SEO, thumbnail and title optimization | 3 |
+| [x-twitter-growth](../marketing/x-twitter-growth/SKILL.md) | Tweet analysis, thread building, posting schedule, follower growth | 3 |
 
-## Product Team (8)
+## Product Team (13)
 
 User-centered product development with automation tools.
 
@@ -252,12 +351,17 @@ User-centered product development with automation tools.
 | [product-designer](../product-team/product-designer/SKILL.md) | UI/UX design, prototyping, user research, design systems | - |
 | [design-system-lead](../product-team/design-system-lead/SKILL.md) | Design tokens, component libraries, documentation | - |
 | [ab-test-setup](../product-team/ab-test-setup/SKILL.md) | A/B testing design, statistical significance, feature flags | - |
+| [product-analytics](../product-team/product-analytics/SKILL.md) | Metric tree designer, event taxonomy auditor, retention cohorts | 3 |
+| [apple-hig-expert](../product-team/apple-hig-expert/SKILL.md) | HIG compliance checking, component patterns, accessibility audit | 3 |
+| [research-summarizer](../product-team/research-summarizer/SKILL.md) | Synthesis organizer, insight quality scoring, findings briefs | 3 |
+| [spec-to-repo](../product-team/spec-to-repo/SKILL.md) | PRD-to-tickets decomposition, branch naming, PR scope analysis | 3 |
+| [roadmap-communicator](../product-team/roadmap-communicator/SKILL.md) | Audience translation, confidence bands, roadmap diff reporting | 3 |
 
-## Project Management (42) ★ most-visited domain
+## Project Management (68) ★ most-visited domain
 
 Delivery excellence with discovery, execution frameworks, career growth, and Jira / Linear / Notion / Confluence integration. See [Quick Start by role](../project-management/README.md#quick-start-by-role).
 
-### Role-Based Skills (12)
+### Role-Based Skills (15)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -273,8 +377,11 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [agile-coach](../project-management/agile-coach/SKILL.md) | Transformation, framework implementation, coaching | - |
 | [program-manager](../project-management/program-manager/SKILL.md) | Multi-project coordination, portfolio governance | - |
 | [sprint-retrospective](../project-management/sprint-retrospective/SKILL.md) | Data-driven sprint retros, velocity analytics, code churn, trend tracking | 4 |
+| [productboard-expert](../project-management/productboard-expert/SKILL.md) | Insight-to-Feature triage, Driver scoring, Releases, REST API automation | - |
+| [meeting-analyzer](../project-management/meeting-analyzer/SKILL.md) | Decisions, actions and open questions register; ownerless-item flagging | 3 |
+| [team-communications](../project-management/team-communications/SKILL.md) | Channel routing, meeting-load reduction, escalation SLAs, timezone norms | 3 |
 
-### Discovery Skills (5)
+### Discovery Skills (10)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -283,8 +390,13 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [identify-assumptions](../project-management/discovery/identify-assumptions/SKILL.md) | Assumption mapping across 4-8 risk categories | 1 |
 | [pre-mortem](../project-management/discovery/pre-mortem/SKILL.md) | Tiger/Paper Tiger/Elephant risk classification | 1 |
 | [interview-synthesis](../project-management/discovery/interview-synthesis/SKILL.md) ★ NEW | Interview transcripts → opportunity solution tree | 1 |
+| [opportunity-solution-tree](../project-management/discovery/opportunity-solution-tree/SKILL.md) | Outcome → opportunity → solution → test | 1 |
+| [metrics-dashboard](../project-management/discovery/metrics-dashboard/SKILL.md) | North star + inputs + guardrails; anti-vanity audit | 1 |
+| [customer-interview-script](../project-management/discovery/customer-interview-script/SKILL.md) | Scripted question hierarchy, behavior-over-opinion probes | - |
+| [jtbd-workshop](../project-management/discovery/jtbd-workshop/SKILL.md) | Switch interviews, forces of progress, ODI outcome scoring | - |
+| [value-proposition-canvas](../project-management/discovery/value-proposition-canvas/SKILL.md) | Customer Profile + Value Map with fit validation | - |
 
-### Execution Skills (21)
+### Execution Skills (32)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -309,6 +421,17 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [launch-playbook](../project-management/execution/launch-playbook/SKILL.md) ★ NEW | Internal + external launch coordination | - |
 | [release-notes](../project-management/execution/release-notes/SKILL.md) | Release notes from tickets/changelogs | 1 |
 | [eol-communication](../project-management/execution/eol-communication/SKILL.md) | End-of-life messaging and sunset | - |
+| [product-vision](../project-management/execution/product-vision/SKILL.md) | Durable 5-10 year narrative above the north-star metric | - |
+| [quarterly-planning](../project-management/execution/quarterly-planning/SKILL.md) | Pre-quarter homework → kickoff → weekly rhythm → close retro | - |
+| [ai-feature-prd](../project-management/execution/ai-feature-prd/SKILL.md) | AI/ML PRD sections: model selection, evals, guardrails, HITL, cost | - |
+| [pricing-prd](../project-management/execution/pricing-prd/SKILL.md) | Packaging, willingness-to-pay, grandfathering, A/B design, rollback | - |
+| [activation-funnel](../project-management/execution/activation-funnel/SKILL.md) | AARRR funnel math, drop-off and bottleneck detection | 1 |
+| [customer-feedback-triage](../project-management/execution/customer-feedback-triage/SKILL.md) | Categorize, dedupe and score inbound feature requests | 1 |
+| [feature-flag-strategy](../project-management/execution/feature-flag-strategy/SKILL.md) | Flag taxonomy, rollout shapes, kill-switch tree, flag debt | - |
+| [post-mortem](../project-management/execution/post-mortem/SKILL.md) | Blameless post-mortems for incidents, escalations, failed experiments | - |
+| [stakeholder-map](../project-management/execution/stakeholder-map/SKILL.md) | Power × Interest 2x2 + DACI + blocker conversion plans | 1 |
+| [test-scenarios](../project-management/execution/test-scenarios/SKILL.md) | 7-category coverage (happy / edge / error / empty / concurrent / a11y / security) | 1 |
+| [sprint-plan](../project-management/execution/sprint-plan/SKILL.md) | Capacity math, commit/stretch discipline, DoD audit | 1 |
 
 ### Career Skills (4) ★ NEW
 
@@ -321,7 +444,24 @@ PM career growth — interview prep, ladder rubrics, onboarding, 1:1s. Unique to
 | [pm-onboarding](../project-management/career/pm-onboarding/SKILL.md) | 30-60-90 day plan (Watkins + STARS) | - |
 | [pm-1on1s](../project-management/career/pm-1on1s/SKILL.md) | 1:1 templates by partner type (EM, designer, IC, manager) | - |
 
-## Regulatory Affairs, Quality Management & Compliance (21)
+### Strategy Frameworks (5)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [business-model-canvas](../project-management/strategy-frameworks/business-model-canvas/SKILL.md) | 9-block canvas + cross-block coherence validator | 1 |
+| [lean-canvas](../project-management/strategy-frameworks/lean-canvas/SKILL.md) | Startup canvas + unfair-advantage discipline | 1 |
+| [swot-analysis](../project-management/strategy-frameworks/swot-analysis/SKILL.md) | SWOT + TOWS matrix + evidence audit | 1 |
+| [porters-five-forces](../project-management/strategy-frameworks/porters-five-forces/SKILL.md) | Industry analysis + strategy translation | 1 |
+| [ansoff-matrix](../project-management/strategy-frameworks/ansoff-matrix/SKILL.md) | Growth quadrants + stage-appropriate investment mix | 1 |
+
+### Go-to-Market (2)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [gtm-strategy](../project-management/gtm/gtm-strategy/SKILL.md) | ICP × motion × channels × messaging + T-90 → T+90 sequence | 1 |
+| [ideal-customer-profile](../project-management/gtm/ideal-customer-profile/SKILL.md) | 8-dimension ICP + qualification rubric + scoring | 1 |
+
+## Regulatory Affairs, Quality Management & Compliance (27)
 
 Enterprise compliance across 18 frameworks.
 
@@ -371,7 +511,18 @@ Enterprise compliance across 18 frameworks.
 |-------|-------------|-------|
 | [infrastructure-compliance-auditor](../ra-qm-team/infrastructure-compliance-auditor/SKILL.md) | Cross-framework infrastructure security audit (cloud, DNS, TLS, endpoints, CI/CD) | 4 |
 
-## Business Growth (16)
+### Audit-Prep Playbooks (6)
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [soc2-audit-prep](../ra-qm-team/audit-prep/soc2-audit-prep/SKILL.md) | 4/8/12-week SOC 2 readiness sprint | 2 |
+| [gdpr-audit-prep](../ra-qm-team/audit-prep/gdpr-audit-prep/SKILL.md) | DPA inquiry + customer audit response | 2 |
+| [fda-qsr-audit-prep](../ra-qm-team/audit-prep/fda-qsr-audit-prep/SKILL.md) | 21 CFR 820 / QMSR + 483 and warning-letter response | 2 |
+| [ai-act-readiness](../ra-qm-team/audit-prep/ai-act-readiness/SKILL.md) | EU AI Act conformity prep + GPAI obligations | 2 |
+| [aims-audit](../ra-qm-team/audit-prep/aims-audit/SKILL.md) | ISO 42001 AIMS certification prep | 2 |
+| [compliance-readiness](../ra-qm-team/audit-prep/compliance-readiness/SKILL.md) | Multi-framework orchestrator with shared evidence | 3 |
+
+## Business Growth (20)
 
 Revenue optimization, CRO, pricing strategy, and customer success.
 
@@ -393,16 +544,22 @@ Revenue optimization, CRO, pricing strategy, and customer success.
 | [pricing-strategy](../business-growth/pricing-strategy/SKILL.md) | Pricing models, value-based pricing, packaging | - |
 | [referral-program](../business-growth/referral-program/SKILL.md) | Referral mechanics, viral loops, incentive design | - |
 | [contract-and-proposal-writer](../business-growth/contract-and-proposal-writer/SKILL.md) | Contract templates, proposals, SOW, MSA | - |
+| [deal-desk](../business-growth/deal-desk/SKILL.md) | Deal desk charter, approval matrix, deal packet, velocity | 3 |
+| [channel-economics](../business-growth/channel-economics/SKILL.md) | Channel models, TCO, tier economics, channel mix | 3 |
+| [partnerships-architect](../business-growth/partnerships-architect/SKILL.md) | Partnership types, deal structures, evaluation, ROI | 3 |
+| [commercial-policy](../business-growth/commercial-policy/SKILL.md) | Policy charter, compliance, deviation handling, generator | 3 |
 
-## Finance (1)
+## Finance (3)
 
 Financial analysis and valuation.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
 | [financial-analyst](../finance/financial-analyst/SKILL.md) | DCF valuation, ratio analysis, budget variance, forecasting | 4 |
+| [saas-metrics-coach](../finance/saas-metrics-coach/SKILL.md) | MRR, churn, cohort retention, LTV/CAC, unit economics | 3 |
+| [business-investment-advisor](../finance/business-investment-advisor/SKILL.md) | Investment screening, portfolio analysis, due diligence, ROI | 3 |
 
-## Data & Analytics (5)
+## Data & Analytics (6)
 
 Data-driven insights and ML operations.
 
@@ -413,6 +570,7 @@ Data-driven insights and ML operations.
 | [business-intelligence](../data-analytics/business-intelligence/SKILL.md) | Dashboard design, KPI development, data storytelling | - |
 | [analytics-engineer](../data-analytics/analytics-engineer/SKILL.md) | dbt, data modeling, transformation, semantic layer | 4 |
 | [ml-ops-engineer](../data-analytics/ml-ops-engineer/SKILL.md) | Model deployment, monitoring, feature stores, pipelines | - |
+| [statistical-analyst](../data-analytics/statistical-analyst/SKILL.md) | Test selection, assumption checks, power planning, effect sizes | 4 |
 
 ## Sales & Success (5)
 
@@ -436,3 +594,127 @@ People operations and workforce analytics.
 | [talent-acquisition](../hr-operations/talent-acquisition/SKILL.md) | Recruiting, sourcing, employer branding, hiring analytics | - |
 | [operations-manager](../hr-operations/operations-manager/SKILL.md) | Process optimization, resource management, efficiency | - |
 | [people-analytics](../hr-operations/people-analytics/SKILL.md) | Workforce analytics, predictive modeling, survey analysis | - |
+
+## Legal (17) — EXPERIMENTAL
+
+Contract, privacy, and dispute workflows. Output is decision support, not legal advice.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [contract-review](../legal/contract-review/SKILL.md) | Playbook-based agreement review with GREEN/YELLOW/RED severity | 2 |
+| [nda-review](../legal/nda-review/SKILL.md) | Clause-by-clause NDA review with redlines, fallbacks, owners | 1 |
+| [nda-triage](../legal/nda-triage/SKILL.md) | Rapid NDA screening, 10-point checklist, approval routing | 2 |
+| [tech-contract-negotiation](../legal/tech-contract-negotiation/SKILL.md) | Negotiation frameworks for tech services and B2B agreements | 2 |
+| [vendor-due-diligence](../legal/vendor-due-diligence/SKILL.md) | IT vendor risk scoring and regulatory compliance checklists | 2 |
+| [privacy-compliance](../legal/privacy-compliance/SKILL.md) | Multi-regulation navigator (GDPR, CCPA, LGPD, PIPL, UK GDPR, …) | 2 |
+| [privacy-notice-generator](../legal/privacy-notice-generator/SKILL.md) | GDPR privacy notices — 6 types, 9 jurisdictions, layered checks | 2 |
+| [dpia-assessment](../legal/dpia-assessment/SKILL.md) | GDPR Art. 35 DPIA with threshold checks and EDPB criteria scoring | 2 |
+| [data-breach-response](../legal/data-breach-response/SKILL.md) | ENISA severity scoring, notification timelines, compliance tracking | 2 |
+| [legal-risk-assessment](../legal/legal-risk-assessment/SKILL.md) | 5x5 severity × likelihood matrix, risk registers, escalation memos | 2 |
+| [statute-analysis](../legal/statute-analysis/SKILL.md) | Statute interpretation, operative keywords, canons of construction | 2 |
+| [mediation-analysis](../legal/mediation-analysis/SKILL.md) | Dispute analysis, settlement ranges, interest mapping, strategy | 2 |
+| [tabular-document-review](../legal/tabular-document-review/SKILL.md) | Bulk document extraction into a cited comparison matrix | 2 |
+| [legal-red-team](../legal/legal-red-team/SKILL.md) | Adversarial verification of AI-generated legal content, citation checks | 2 |
+| [legal-canned-responses](../legal/legal-canned-responses/SKILL.md) | Templated responses to common inquiries with escalation detection | 2 |
+| [legal-meeting-briefing](../legal/legal-meeting-briefing/SKILL.md) | Structured briefings for legally relevant meetings, action tracking | 2 |
+| [whistleblower-compliance](../legal/whistleblower-compliance/SKILL.md) | Whistleblower system audits and compliant reporting policies | 2 |
+
+## Personal Productivity (13)
+
+Individual operating system — capture, focus, review, and the recurring personal deliverables.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [capture](../personal-productivity/capture/SKILL.md) | Trusted capture-and-triage front door so no commitment lives in your head | 2 |
+| [deep-work](../personal-productivity/deep-work/SKILL.md) | Block defence, session structure, interruption budgets, deep-work ratio | 2 |
+| [weekly-review](../personal-productivity/weekly-review/SKILL.md) | Calendar/tasks/journal → wins, learnings, blockers, next-week priorities | 1 |
+| [reflect](../personal-productivity/reflect/SKILL.md) | Score predictions against outcomes; track whether commitments held | 3 |
+| [email-triage](../personal-productivity/email-triage/SKILL.md) | Batch email classification and unsubscribe candidates | 1 |
+| [calendar-prep](../personal-productivity/calendar-prep/SKILL.md) | One-page meeting briefings from attendees, context, decisions needed | 1 |
+| [meeting-insights](../personal-productivity/meeting-insights/SKILL.md) | Transcripts → decisions, actions, owners, due dates, risks | 1 |
+| [resume-tailor](../personal-productivity/resume-tailor/SKILL.md) | Keyword extraction, match scoring, impact-rewritten bullets | 1 |
+| [lead-researcher](../personal-productivity/lead-researcher/SKILL.md) | ICP qualification, lead-list scoring, personalized outreach hooks | 1 |
+| [invoice-organizer](../personal-productivity/invoice-organizer/SKILL.md) | Vendor/expense/tax categorization, duplicate detection, monthly summary | 1 |
+| [investor-update-generator](../personal-productivity/investor-update-generator/SKILL.md) | Rubric check for transparency, decision-relevance, specific asks | 1 |
+| [pitch-deck-reviewer](../personal-productivity/pitch-deck-reviewer/SKILL.md) | Structure and content scoring against well-known investor heuristics | 1 |
+| [domain-name-brainstormer](../personal-productivity/domain-name-brainstormer/SKILL.md) | Generate and score names for memorability and pronounceability | 1 |
+
+## Vertical Advisors (7)
+
+Strategic, not implementation — regulatory triggers, business models, and GTM per vertical.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [fintech](../vertical-advisors/fintech/SKILL.md) | US/EU regulatory triggers, license-vs-partner, KYC/AML, embedded finance | 1 |
+| [healthtech](../vertical-advisors/healthtech/SKILL.md) | HIPAA scope, FDA SaMD classification, EHR integration, payor/provider GTM | 1 |
+| [edtech](../vertical-advisors/edtech/SKILL.md) | FERPA/COPPA, K-12 vs higher-ed vs L&D, district sales, pricing | 1 |
+| [ecommerce](../vertical-advisors/ecommerce/SKILL.md) | Unit economics, fulfillment models, payments, channel strategy | 1 |
+| [proptech](../vertical-advisors/proptech/SKILL.md) | Real-estate segments, MLS/brokerage models, licensing, business models | 1 |
+| [climate-tech](../vertical-advisors/climate-tech/SKILL.md) | Carbon markets, GHG accounting, climate regulation, funding | 1 |
+| [marketplace](../vertical-advisors/marketplace/SKILL.md) | Chicken-and-egg, take rates, liquidity, network effects | 1 |
+
+## Business Operations (6)
+
+Internal operating machinery — capacity, process, vendors, spend, and internal knowledge flow.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [capacity-planner](../business-operations/capacity-planner/SKILL.md) | Effective capacity from headcount; hire/contract/defer scenarios; gap reports | 3 |
+| [process-mapper](../business-operations/process-mapper/SKILL.md) | SIPOC and swimlane capture, cycle-time and bottleneck analysis | 3 |
+| [vendor-management](../business-operations/vendor-management/SKILL.md) | Selection scorecards, risk tiering, renewal deadlines, spend concentration | 3 |
+| [procurement-optimizer](../business-operations/procurement-optimizer/SKILL.md) | Seat utilisation, redundant-tool detection, renewal-timing leverage | 3 |
+| [internal-comms](../business-operations/internal-comms/SKILL.md) | Sequence and pressure-test reorg, policy, and product announcements | 3 |
+| [knowledge-ops](../business-operations/knowledge-ops/SKILL.md) | Knowledge-base staleness, ownership gaps, orphans, duplication, findability | 3 |
+
+## Research (4)
+
+Academic and formal research work — systematic reviews, funding, IP, and intelligence briefings. Distinct from [Research Ops](#research-ops-4), which is the applied/operational side.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [litreview](../research/litreview/SKILL.md) | PRISMA-aligned search strategy, source quality scoring, thematic synthesis | 3 |
+| [grants](../research/grants/SKILL.md) | Funder fit scoring, proposal structure validation, budget realism checks | 3 |
+| [patent](../research/patent/SKILL.md) | Prior-art search planning, claim landscape mapping, patentability scoring | 3 |
+| [dossier](../research/dossier/SKILL.md) | Dossier outlines, source triangulation, fact/inference separation | 3 |
+
+## Research Ops (4)
+
+Applied and operational research — sizing markets, running discovery, and budgeting studies. Distinct from the academic [Research](#research-4) domain above.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [market-research](../research-ops/market-research/SKILL.md) | TAM/SAM/SOM top-down and bottom-up reconciled, segmentation, survey design | 3 |
+| [product-research](../research-ops/product-research/SKILL.md) | Method selection, recruiting and screening, interview guides, evidence scoring | 3 |
+| [clinical-research](../research-ops/clinical-research/SKILL.md) | Protocol structure, endpoints, eligibility, power planning, site feasibility | 5 |
+| [research-finance](../research-ops/research-finance/SKILL.md) | Study budgets, cost per participant and per insight, burn vs milestones | 3 |
+
+## Documents (4)
+
+Audit tooling for Office and PDF files — stdlib-only OOXML/PDF parsing, no conversion services.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [docx-toolkit](../documents/docx-toolkit/SKILL.md) | Heading hierarchy, comments, tracked changes, cross-refs, style consistency | 1 |
+| [xlsx-toolkit](../documents/xlsx-toolkit/SKILL.md) | Formula density, external refs, named ranges, hidden sheets, validation | 1 |
+| [pptx-toolkit](../documents/pptx-toolkit/SKILL.md) | Slide count, text density, embedded assets, hidden slides, speaker notes | 1 |
+| [pdf-toolkit](../documents/pdf-toolkit/SKILL.md) | Metadata leakage, encryption, JavaScript, embedded files, version | 1 |
+
+## Markdown-HTML (4)
+
+The markdown → HTML publishing pipeline: authored Markdown becomes a self-contained document or deck. Stdlib-only with zero network calls — distinct from [Documents](#documents-4), which parses existing OOXML and PDF files.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [md-document](../markdown-html/md-document/SKILL.md) | Self-contained HTML report: TOC, numbered figures/tables, footnotes, print CSS | 4 |
+| [md-slides](../markdown-html/md-slides/SKILL.md) | Self-contained HTML deck: layouts, speaker notes, keyboard nav, density linter | 4 |
+| [md-review](../markdown-html/md-review/SKILL.md) | Pre-publication gate: heading structure, link resolution, readability, a11y | 3 |
+| [design-system](../markdown-html/design-system/SKILL.md) | Design tokens, light/dark theming, WCAG contrast, one inlinable CSS bundle | 3 |
+
+## Workflow (2)
+
+Meta-skills for routing work and handing it off.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [skill-router](../workflow/skill-router/SKILL.md) | Match a vague or cross-domain request to the right skill | 1 |
+| [handoff](../workflow/handoff/SKILL.md) | Package in-flight work as a context doc for another person or agent | 1 |

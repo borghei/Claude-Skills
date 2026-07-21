@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 368 production-ready skills across 20 domains with 859 Python automation tools, 76 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (66 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 368 production-ready skills across 20 domains with 859 Python automation tools, 76 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (68 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -137,6 +137,35 @@ gh pr create --base main --head feat/agents-{name}
 
 See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standards.md) for commit standards.
 
+## Website Build Order (important)
+
+`site/` is **not** a single generator's output. Three things write into it, and
+the order matters — getting it wrong silently destroys the landing page.
+
+```bash
+mkdocs build                                  # 1. docs/ -> site/  (CLEANS site/ first)
+git checkout HEAD -- site/index.html \
+                     site/css/style.css \
+                     site/js/main.js          # 2. restore the hand-maintained landing page
+python3 scripts/generate_site.py              # 3. skills.json -> 368 skill + 20 domain pages
+```
+
+- **`mkdocs build` wipes `site/` before writing.** It must run first, never last.
+- **`site/index.html`, `site/css/style.css` and `site/js/main.js` are hand-maintained
+  with no source file elsewhere in the repo.** MkDocs overwrites `index.html` with its
+  render of `docs/index.md` and deletes the css/js. They must be restored from git after
+  every `mkdocs build`, then re-edited if counts changed.
+- `generate_site.py` reads the root `skills.json` (regenerate via `build_manifest.py`
+  first if skills changed) and writes only `site/skills/`, `site/agents/`,
+  `site/commands/`, plus sitemap/robots/llms.txt. It never touches `index.html`.
+- `.github/workflows/pages.yml` deploys the committed `site/` directory on any
+  `site/**` change. Nothing is built in CI — what you commit is what ships.
+
+When counts change, update them in `README.md`, `CLAUDE.md`, `mkdocs.yml`,
+`docs/index.md`, `docs/skills/index.md`, `docs/SKILLS.md`, `docs/INSTALLATION.md`,
+`docs/getting-started/installation.md`, `docs/reference/architecture.md`, and the
+hand-maintained `site/index.html`.
+
 ## Development Environment
 
 **No build system or test frameworks** - intentional design choice for portability.
@@ -222,7 +251,7 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 **Last Updated:** July 2026
 **Version:** 4.11.0
-**Status:** 368 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 20 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 17 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 66 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+**Status:** 368 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 20 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 20 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 68 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
 - **Recent additions (July 2026) — 25 skills, 3 new domains:** `business-operations/` (capacity-planner, process-mapper, vendor-management, internal-comms, knowledge-ops, procurement-optimizer), `research-ops/` (market-research, product-research, clinical-research, research-finance — applied/operational, distinct from academic `research/`), and `markdown-html/` (md-document, md-slides, md-review, design-system — stdlib-only markdown→HTML with zero network calls). Plus 5 engineering skills (write-a-skill, spec-driven-workflow, code-tour, agent-harness, cloud-security), data-analytics/statistical-analyst, 2 PM skills (team-communications, meeting-analyzer), and 3 personal-productivity skills (capture, deep-work, reflect). 44 new stdlib Python tools. Several tools ship deliberate CI gates that exit non-zero on flawed sample data — see each SKILL.md's exit-code contract.
 - **Recent Tier-3 additions (May 2026):** 12 PM skills in new subfolders `strategy-frameworks/` (business-model-canvas, lean-canvas, swot-analysis, porters-five-forces, ansoff-matrix) and `gtm/` (gtm-strategy, ideal-customer-profile), plus discovery additions (opportunity-solution-tree, metrics-dashboard) and execution additions (stakeholder-map, test-scenarios, sprint-plan). 12 stdlib Python validators, ~12K lines.
 - **Recent Tier-2 additions (May 2026):** 5 C-suite advisors (chief-ai-officer-advisor, chief-data-officer-advisor, chief-customer-officer-advisor, general-counsel-advisor, vpe-advisor); 5 product skills (product-analytics, apple-hig-expert, research-summarizer, spec-to-repo, roadmap-communicator); new `research/` domain with 4 skills (litreview, grants, patent, dossier). 14 deep skills, 42 stdlib Python scripts, ~24K lines.

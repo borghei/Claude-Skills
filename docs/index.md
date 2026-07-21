@@ -10,23 +10,23 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 
 <div class="stats" markdown>
 <div class="stat">
-<div class="number">224</div>
+<div class="number">368</div>
 <div class="label">Skills</div>
 </div>
 <div class="stat">
-<div class="number">613</div>
+<div class="number">859</div>
 <div class="label">Python Tools</div>
 </div>
 <div class="stat">
-<div class="number">13</div>
+<div class="number">20</div>
 <div class="label">Domains</div>
 </div>
 <div class="stat">
-<div class="number">25</div>
+<div class="number">76</div>
 <div class="label">Agents</div>
 </div>
 <div class="stat">
-<div class="number">10</div>
+<div class="number">11</div>
 <div class="label">Platforms</div>
 </div>
 </div>
@@ -59,7 +59,7 @@ See [Installation](getting-started/installation.md) for per-skill install, auto-
 
 <div class="card" markdown>
 ### :material-cog: Engineering
-**82 skills** &middot; 248+ tools
+**91 skills** &middot; 248+ tools
 
 Fullstack, DevOps, security, mobile, ML, cloud (AWS/Azure/GCP), MCP servers, CI/CD, observability, chaos engineering, feature flags, kubernetes operators, data quality.
 
@@ -95,7 +95,7 @@ ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF, PCI-DSS, plus
 
 <div class="card" markdown>
 ### :material-clipboard-check: ★ Project Management
-**66 skills** &middot; 82+ tools &middot; *most-used domain*
+**68 skills** &middot; 82+ tools &middot; *most-used domain*
 
 PRDs (incl. AI features), OKRs, NSM, roadmaps, retros, story splitting, post-mortems, activation funnels, feature flags, career growth, strategy frameworks (BMC/Lean/SWOT/Porter's/Ansoff), GTM. Jira / Linear / Notion / Productboard / Confluence.
 
@@ -131,11 +131,38 @@ Literature review (PRISMA), grant proposals (NIH/NSF/SBIR), patent landscape, in
 
 <div class="card" markdown>
 ### :material-database: Data & HR
-**9 skills** &middot; 28 tools
+**10 skills** &middot; 28 tools
 
 SQL, ML ops, dbt, BI, talent acquisition, people analytics, operations.
 
 [:octicons-arrow-right-24: Browse skills](skills/other.md)
+</div>
+
+<div class="card" markdown>
+### :material-office-building-cog: Business Operations
+**6 skills** &middot; 18 tools &middot; *new domain*
+
+Capacity planning, process mapping, vendor lifecycle, internal comms, knowledge base health, SaaS spend optimisation.
+
+[:octicons-arrow-right-24: Browse skills](skills/business-operations.md)
+</div>
+
+<div class="card" markdown>
+### :material-flask-outline: Research Ops
+**4 skills** &middot; 12 tools &middot; *new domain*
+
+Market sizing (TAM/SAM/SOM), product discovery operations, clinical study operations, research budgeting and portfolio funding.
+
+[:octicons-arrow-right-24: Browse skills](skills/research-ops.md)
+</div>
+
+<div class="card" markdown>
+### :material-language-markdown: Markdown & HTML
+**4 skills** &middot; 14 tools &middot; *new domain*
+
+Self-contained HTML documents and slide decks from markdown, a pre-publication review gate, and document design tokens.
+
+[:octicons-arrow-right-24: Browse skills](skills/markdown-html.md)
 </div>
 
 </div>
@@ -146,8 +173,8 @@ SQL, ML ops, dbt, BI, talent acquisition, people analytics, operations.
 
 | | |
 |---|---|
-| **343 Skills** | Production-ready expertise across 17 professional domains. Project Management is the most-used (66 skills). |
-| **720+ Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, status updates, activation funnels, feedback triage -- all standard library, no ML dependencies |
+| **368 Skills** | Production-ready expertise across 20 professional domains. Project Management is the most-used (68 skills). |
+| **859 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |

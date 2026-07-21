@@ -4,14 +4,14 @@ title: Skill Catalog
 
 # Skill Catalog
 
-343 production-ready skills across 17 domains, each with Python CLI tools, reference guides, and templates.
+368 production-ready skills across 20 domains, each with Python CLI tools, reference guides, and templates.
 
 ## Domains at a Glance
 
 | Domain | Skills | Tools | Page |
 |---|:---:|:---:|---|
-| **★ Project Management** (most-used) | **66** | **82+** | **[View all](project-management.md)** |
-| Engineering | 86 | 245 | [View all](engineering.md) |
+| **★ Project Management** (most-used) | **68** | **82+** | **[View all](project-management.md)** |
+| Engineering | 91 | 248 | [View all](engineering.md) |
 | Marketing | 39 | 118+ | [View all](marketing.md) |
 | C-Level Advisory | 31 | 88+ | [View all](c-level.md) |
 | RA/QM & Compliance | 27 | 50+ | [View all](compliance.md) |
@@ -19,15 +19,18 @@ title: Skill Catalog
 | Legal (Experimental) | 17 | 34 | [View all](legal.md) |
 | Product Team | 13 | 30+ | [View all](product.md) |
 | Research (new) | 4 | 12 | [View all](research.md) |
-| Personal Productivity | 10 | — | [View all](other.md) |
+| Personal Productivity | 13 | 30+ | [View all](other.md) |
 | Vertical Advisors | 7 | — | [View all](other.md) |
-| Data & Analytics | 5 | 16 | [View all](other.md#data--analytics) |
+| Data & Analytics | 6 | 19 | [View all](other.md#data--analytics) |
 | Sales & Success | 5 | 15 | [View all](business.md#sales--success) |
 | HR & Operations | 4 | 12 | [View all](other.md#hr--operations) |
 | Documents | 4 | — | [View all](other.md) |
+| Business Operations (new) | 6 | 18 | [View all](business-operations.md) |
+| Research Ops (new) | 4 | 12 | [View all](research-ops.md) |
+| Markdown & HTML (new) | 4 | 14 | [View all](markdown-html.md) |
 | Finance | 3 | 10 | [View all](business.md#finance) |
 | Workflow (meta-skills) | 2 | — | [View all](other.md) |
-| **Total** | **343** | **786** | |
+| **Total** | **368** | **859** | |
 
 ## Skill Package Structure
 
