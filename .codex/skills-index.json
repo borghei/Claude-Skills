@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 226,
+  "total_skills": 233,
   "skills": [
     {
       "name": "channel-economics",
@@ -324,6 +324,12 @@
       "description": ">"
     },
     {
+      "name": "agent-harness",
+      "source": "../../engineering/agent-harness",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "agent-protocol",
       "source": "../../engineering/agent-protocol",
       "category": "engineering",
@@ -414,8 +420,20 @@
       "description": "Skill from engineering"
     },
     {
+      "name": "cloud-security",
+      "source": "../../engineering/cloud-security",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "code-reviewer",
       "source": "../../engineering/code-reviewer",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "code-tour",
+      "source": "../../engineering/code-tour",
       "category": "engineering",
       "description": ">"
     },
@@ -786,6 +804,12 @@
       "description": ">"
     },
     {
+      "name": "spec-driven-workflow",
+      "source": "../../engineering/spec-driven-workflow",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "sql-database-assistant",
       "source": "../../engineering/sql-database-assistant",
       "category": "engineering",
@@ -824,6 +848,12 @@
     {
       "name": "threat-detection",
       "source": "../../engineering/threat-detection",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "write-a-skill",
+      "source": "../../engineering/write-a-skill",
       "category": "engineering",
       "description": ">"
     },
@@ -1200,6 +1230,12 @@
       "description": ">"
     },
     {
+      "name": "meeting-analyzer",
+      "source": "../../project-management/meeting-analyzer",
+      "category": "project-management",
+      "description": ">"
+    },
+    {
       "name": "notion-pm",
       "source": "../../project-management/notion-pm",
       "category": "project-management",
@@ -1232,6 +1268,12 @@
     {
       "name": "sprint-retrospective",
       "source": "../../project-management/sprint-retrospective",
+      "category": "project-management",
+      "description": ">"
+    },
+    {
+      "name": "team-communications",
+      "source": "../../project-management/team-communications",
       "category": "project-management",
       "description": ">"
     },
@@ -1374,7 +1416,7 @@
       "description": "Executive leadership and advisory skills"
     },
     "engineering": {
-      "count": 86,
+      "count": 91,
       "source": "../../engineering",
       "description": "Software engineering and technical skills"
     },
@@ -1394,7 +1436,7 @@
       "description": "Product management and design skills"
     },
     "project-management": {
-      "count": 13,
+      "count": 15,
       "source": "../../project-management",
       "description": "Project management and Atlassian skills"
     },
