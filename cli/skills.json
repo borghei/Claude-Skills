@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T12:27:20+00:00",
+  "generated_at": "2026-07-21T12:29:54+00:00",
   "skill_count": 368,
   "domain_count": 20,
   "skills": [
@@ -3014,11 +3014,10 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
-        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 32948,
+      "size_bytes": 25347,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -10068,7 +10067,7 @@
         "scripts/capture_audit.py",
         "scripts/capture_triage.py"
       ],
-      "size_bytes": 71827,
+      "size_bytes": 71848,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -10103,7 +10102,7 @@
         "scripts/calendar_fragmentation.py",
         "scripts/session_log_analyzer.py"
       ],
-      "size_bytes": 87375,
+      "size_bytes": 87396,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -10813,7 +10812,7 @@
         "scripts/sample_size_calculator.py",
         "scripts/site_feasibility_scorer.py"
       ],
-      "size_bytes": 118173,
+      "size_bytes": 111878,
       "tools_count": 5,
       "has_scripts": true,
       "has_references": true,
