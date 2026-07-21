@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T12:48:30+00:00",
+  "generated_at": "2026-07-21T13:23:54+00:00",
   "skill_count": 368,
   "domain_count": 20,
   "skills": [
@@ -3014,10 +3014,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -10471,7 +10472,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/climate-tech",
+      "path": "vertical-advisors/climate-tech-advisor",
       "files": [
         "SKILL.md",
         "assets/climate_impact_assessment.md",
@@ -10497,7 +10498,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/ecommerce",
+      "path": "vertical-advisors/ecommerce-advisor",
       "files": [
         "SKILL.md",
         "assets/unit_economics_template.json",
@@ -10522,7 +10523,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/edtech",
+      "path": "vertical-advisors/edtech-advisor",
       "files": [
         "SKILL.md",
         "assets/sdpa_inventory_template.md",
@@ -10547,7 +10548,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/fintech",
+      "path": "vertical-advisors/fintech-advisor",
       "files": [
         "SKILL.md",
         "assets/regulatory_architecture_template.md",
@@ -10574,7 +10575,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/healthtech",
+      "path": "vertical-advisors/healthtech-advisor",
       "files": [
         "SKILL.md",
         "assets/hipaa_scope_template.md",
@@ -10601,7 +10602,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/marketplace",
+      "path": "vertical-advisors/marketplace-advisor",
       "files": [
         "SKILL.md",
         "assets/marketplace_metrics_template.json",
@@ -10626,7 +10627,7 @@
       "license": "MIT + Commons Clause",
       "category": "vertical-advisors",
       "subdomain": "",
-      "path": "vertical-advisors/proptech",
+      "path": "vertical-advisors/proptech-advisor",
       "files": [
         "SKILL.md",
         "assets/proptech_segment_assessment.md",

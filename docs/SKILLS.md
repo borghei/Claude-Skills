@@ -645,13 +645,13 @@ Strategic, not implementation — regulatory triggers, business models, and GTM 
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
-| [fintech](../vertical-advisors/fintech/SKILL.md) | US/EU regulatory triggers, license-vs-partner, KYC/AML, embedded finance | 1 |
-| [healthtech](../vertical-advisors/healthtech/SKILL.md) | HIPAA scope, FDA SaMD classification, EHR integration, payor/provider GTM | 1 |
-| [edtech](../vertical-advisors/edtech/SKILL.md) | FERPA/COPPA, K-12 vs higher-ed vs L&D, district sales, pricing | 1 |
-| [ecommerce](../vertical-advisors/ecommerce/SKILL.md) | Unit economics, fulfillment models, payments, channel strategy | 1 |
-| [proptech](../vertical-advisors/proptech/SKILL.md) | Real-estate segments, MLS/brokerage models, licensing, business models | 1 |
-| [climate-tech](../vertical-advisors/climate-tech/SKILL.md) | Carbon markets, GHG accounting, climate regulation, funding | 1 |
-| [marketplace](../vertical-advisors/marketplace/SKILL.md) | Chicken-and-egg, take rates, liquidity, network effects | 1 |
+| [fintech-advisor](../vertical-advisors/fintech-advisor/SKILL.md) | US/EU regulatory triggers, license-vs-partner, KYC/AML, embedded finance | 1 |
+| [healthtech-advisor](../vertical-advisors/healthtech-advisor/SKILL.md) | HIPAA scope, FDA SaMD classification, EHR integration, payor/provider GTM | 1 |
+| [edtech-advisor](../vertical-advisors/edtech-advisor/SKILL.md) | FERPA/COPPA, K-12 vs higher-ed vs L&D, district sales, pricing | 1 |
+| [ecommerce-advisor](../vertical-advisors/ecommerce-advisor/SKILL.md) | Unit economics, fulfillment models, payments, channel strategy | 1 |
+| [proptech-advisor](../vertical-advisors/proptech-advisor/SKILL.md) | Real-estate segments, MLS/brokerage models, licensing, business models | 1 |
+| [climate-tech-advisor](../vertical-advisors/climate-tech-advisor/SKILL.md) | Carbon markets, GHG accounting, climate regulation, funding | 1 |
+| [marketplace-advisor](../vertical-advisors/marketplace-advisor/SKILL.md) | Chicken-and-egg, take rates, liquidity, network effects | 1 |
 
 ## Business Operations (6)
 

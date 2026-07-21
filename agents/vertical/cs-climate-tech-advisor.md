@@ -1,7 +1,7 @@
 ---
 name: cs-climate-tech-advisor
 description: Strategic vertical advisor for climate-tech founders covering category classification, GHG accounting (Scope 1/2/3), funding stack (DOE / IRA / VC / project finance), and MRV / verification
-skills: vertical-advisors/climate-tech
+skills: vertical-advisors/climate-tech-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -23,26 +23,26 @@ Frameworks only. Climate compliance, carbon accounting, and verification require
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/climate-tech/`
+**Skill Location:** `../../vertical-advisors/climate-tech-advisor/`
 
 ### Python Tools
 
-1. **Carbon Impact Estimator (categorization)** — `../../vertical-advisors/climate-tech/scripts/carbon_impact_estimator.py`
+1. **Carbon Impact Estimator (categorization)** — `../../vertical-advisors/climate-tech-advisor/scripts/carbon_impact_estimator.py`
 
 ### Knowledge Bases
 
-1. **Climate Categories** — `../../vertical-advisors/climate-tech/references/climate_categories.md`
-2. **Climate Funding Sources** — `../../vertical-advisors/climate-tech/references/climate_funding_sources.md`
-3. **GHG Accounting Basics** — `../../vertical-advisors/climate-tech/references/ghg_accounting_basics.md`
+1. **Climate Categories** — `../../vertical-advisors/climate-tech-advisor/references/climate_categories.md`
+2. **Climate Funding Sources** — `../../vertical-advisors/climate-tech-advisor/references/climate_funding_sources.md`
+3. **GHG Accounting Basics** — `../../vertical-advisors/climate-tech-advisor/references/ghg_accounting_basics.md`
 
 ### Templates
 
-1. **Climate Impact Assessment** — `../../vertical-advisors/climate-tech/assets/climate_impact_assessment.md`
+1. **Climate Impact Assessment** — `../../vertical-advisors/climate-tech-advisor/assets/climate_impact_assessment.md`
 
 ## Workflows
 
 ### Workflow 1: Category and Impact Sizing
-1. Run: `python ../../vertical-advisors/climate-tech/scripts/carbon_impact_estimator.py description.txt`
+1. Run: `python ../../vertical-advisors/climate-tech-advisor/scripts/carbon_impact_estimator.py description.txt`
 2. Cross-reference with `climate_categories.md`
 3. Capture in `climate_impact_assessment.md`
 4. GHG specialist review of impact mechanism and scope alignment
@@ -69,7 +69,7 @@ Frameworks only. Climate compliance, carbon accounting, and verification require
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/climate-tech/scripts/carbon_impact_estimator.py product.txt
+python ../../vertical-advisors/climate-tech-advisor/scripts/carbon_impact_estimator.py product.txt
 ```
 
 ## Success Metrics
@@ -84,5 +84,5 @@ python ../../vertical-advisors/climate-tech/scripts/carbon_impact_estimator.py p
 - [cs-pr-comms-lead](../marketing/cs-pr-comms-lead.md) — Avoid greenwashing in claims
 
 ## References
-- **Climate-Tech Advisor Skill:** [../../vertical-advisors/climate-tech/SKILL.md](../../vertical-advisors/climate-tech/SKILL.md)
+- **Climate-Tech Advisor Skill:** [../../vertical-advisors/climate-tech-advisor/SKILL.md](../../vertical-advisors/climate-tech-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

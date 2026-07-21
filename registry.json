@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T12:48:30+00:00",
+  "generated_at": "2026-07-21T13:23:54+00:00",
   "repository": "claude-skills",
   "skill_count": 368,
   "domain_count": 20,
@@ -4997,7 +4997,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/climate-tech",
+      "path": "vertical-advisors/climate-tech-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5008,7 +5008,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/ecommerce",
+      "path": "vertical-advisors/ecommerce-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5019,7 +5019,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/edtech",
+      "path": "vertical-advisors/edtech-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5030,7 +5030,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/fintech",
+      "path": "vertical-advisors/fintech-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5041,7 +5041,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/healthtech",
+      "path": "vertical-advisors/healthtech-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5052,7 +5052,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/marketplace",
+      "path": "vertical-advisors/marketplace-advisor",
       "has_scripts": true,
       "has_references": true
     },
@@ -5063,7 +5063,7 @@
       "tags": [],
       "version": "1.0.0",
       "updated": "2026-05-04",
-      "path": "vertical-advisors/proptech",
+      "path": "vertical-advisors/proptech-advisor",
       "has_scripts": true,
       "has_references": true
     },

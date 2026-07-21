@@ -1,7 +1,7 @@
 ---
 name: cs-fintech-advisor
 description: Strategic vertical advisor for fintech founders and operators covering regulatory triggers, license-vs-partner, KYC/AML program design, and embedded finance patterns
-skills: vertical-advisors/fintech
+skills: vertical-advisors/fintech-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -23,28 +23,28 @@ This agent provides frameworks and orientation. It is **not** legal, regulatory,
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/fintech/`
+**Skill Location:** `../../vertical-advisors/fintech-advisor/`
 
 ### Python Tools
 
-1. **Regulatory Trigger Checker** — `../../vertical-advisors/fintech/scripts/regulatory_trigger_checker.py`
+1. **Regulatory Trigger Checker** — `../../vertical-advisors/fintech-advisor/scripts/regulatory_trigger_checker.py`
 
 ### Knowledge Bases
 
-1. **Regulatory Landscape** — `../../vertical-advisors/fintech/references/regulatory_landscape.md`
-2. **License vs. Partner Playbook** — `../../vertical-advisors/fintech/references/license_vs_partner_playbook.md`
-3. **KYC/AML Basics** — `../../vertical-advisors/fintech/references/kyc_aml_basics.md`
-4. **Embedded Finance Patterns** — `../../vertical-advisors/fintech/references/embedded_finance_patterns.md`
+1. **Regulatory Landscape** — `../../vertical-advisors/fintech-advisor/references/regulatory_landscape.md`
+2. **License vs. Partner Playbook** — `../../vertical-advisors/fintech-advisor/references/license_vs_partner_playbook.md`
+3. **KYC/AML Basics** — `../../vertical-advisors/fintech-advisor/references/kyc_aml_basics.md`
+4. **Embedded Finance Patterns** — `../../vertical-advisors/fintech-advisor/references/embedded_finance_patterns.md`
 
 ### Templates
 
-1. **Regulatory Architecture Template** — `../../vertical-advisors/fintech/assets/regulatory_architecture_template.md`
+1. **Regulatory Architecture Template** — `../../vertical-advisors/fintech-advisor/assets/regulatory_architecture_template.md`
 
 ## Workflows
 
 ### Workflow 1: Initial Regulatory Triage
 1. Capture business description (who pays whom, what is held by whom, where)
-2. Run trigger checker: `python ../../vertical-advisors/fintech/scripts/regulatory_trigger_checker.py description.txt`
+2. Run trigger checker: `python ../../vertical-advisors/fintech-advisor/scripts/regulatory_trigger_checker.py description.txt`
 3. Cross-reference each detected trigger with `regulatory_landscape.md`
 4. Hand findings to counsel for confirmation; capture confirmed regime list in `regulatory_architecture_template.md`
 5. Use confirmed regime list to inform architecture and partner decisions
@@ -72,7 +72,7 @@ This agent provides frameworks and orientation. It is **not** legal, regulatory,
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/fintech/scripts/regulatory_trigger_checker.py business.txt
+python ../../vertical-advisors/fintech-advisor/scripts/regulatory_trigger_checker.py business.txt
 # Then: review findings with counsel; populate regulatory_architecture_template.md
 ```
 
@@ -90,5 +90,5 @@ python ../../vertical-advisors/fintech/scripts/regulatory_trigger_checker.py bus
 - [cs-cfo-advisor](../c-level/cs-cfo-advisor.md) — Float, capital, and economics
 
 ## References
-- **Fintech Advisor Skill:** [../../vertical-advisors/fintech/SKILL.md](../../vertical-advisors/fintech/SKILL.md)
+- **Fintech Advisor Skill:** [../../vertical-advisors/fintech-advisor/SKILL.md](../../vertical-advisors/fintech-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

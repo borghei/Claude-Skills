@@ -6080,7 +6080,7 @@
     {
       "name": "climate-tech-advisor",
       "description": "Strategic advisory for climate-tech founders on carbon markets, GHG accounting, climate regulation, and funding. Use when scoping a climate-tech idea or picking a category, or mentioning climate, carbon, GHG, ESG, IRA, DOE, or net-zero.",
-      "path": "vertical-advisors/climate-tech/SKILL.md",
+      "path": "vertical-advisors/climate-tech-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6094,7 +6094,7 @@
     {
       "name": "ecommerce-advisor",
       "description": "Strategic advisory for e-commerce founders on unit economics, fulfillment models, payments, and channel strategy. Use when evaluating an ecommerce idea or modeling unit economics, or mentioning DTC, Shopify, Amazon, 3PL, or CAC.",
-      "path": "vertical-advisors/ecommerce/SKILL.md",
+      "path": "vertical-advisors/ecommerce-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6108,7 +6108,7 @@
     {
       "name": "edtech-advisor",
       "description": "Strategic advisory for edtech founders on FERPA/COPPA compliance, K-12 vs higher-ed vs L&D dynamics, district sales, and pricing. Use when scoping an edtech product or navigating procurement, or mentioning edtech, K-12, FERPA, COPPA, or LMS.",
-      "path": "vertical-advisors/edtech/SKILL.md",
+      "path": "vertical-advisors/edtech-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6122,7 +6122,7 @@
     {
       "name": "fintech-advisor",
       "description": "Strategic advisory for fintech founders on US/EU regulatory triggers, license-vs-partner, KYC/AML, and embedded finance. Use when scoping a fintech idea or regulatory exposure, or mentioning fintech, money transmitter, neobank, KYC, or PSD2.",
-      "path": "vertical-advisors/fintech/SKILL.md",
+      "path": "vertical-advisors/fintech-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6136,7 +6136,7 @@
     {
       "name": "healthtech-advisor",
       "description": "Strategic advisory for digital health founders on HIPAA scope, FDA SaMD classification, EHR integration, and payor/provider GTM. Use when scoping a healthtech idea, classifying PHI, or mentioning HIPAA, FDA SaMD, EHR, or telehealth.",
-      "path": "vertical-advisors/healthtech/SKILL.md",
+      "path": "vertical-advisors/healthtech-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6150,7 +6150,7 @@
     {
       "name": "marketplace-advisor",
       "description": "Strategic advisory for two-sided marketplace founders on chicken-and-egg, take rates, liquidity, and network effects. Use when scoping a marketplace idea or scoring health, or mentioning marketplace, take rate, liquidity, or network effects.",
-      "path": "vertical-advisors/marketplace/SKILL.md",
+      "path": "vertical-advisors/marketplace-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",
@@ -6164,7 +6164,7 @@
     {
       "name": "proptech-advisor",
       "description": "Strategic advisory for proptech founders on real-estate segments, MLS/brokerage models, licensing, and business models. Use when scoping a proptech idea or when the user mentions proptech, MLS, brokerage, iBuyer, or RESPA.",
-      "path": "vertical-advisors/proptech/SKILL.md",
+      "path": "vertical-advisors/proptech-advisor/SKILL.md",
       "domain": "vertical-advisors",
       "category": "vertical-advisors",
       "subdomain": "",

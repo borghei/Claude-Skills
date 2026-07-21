@@ -1,7 +1,7 @@
 ---
 name: cs-ecommerce-strategist
 description: Strategic vertical advisor for ecommerce founders covering unit economics, fulfillment models (DTC self / 3PL / FBA / dropship / retail), and channel strategy (DTC / Amazon / wholesale / retail)
-skills: vertical-advisors/ecommerce
+skills: vertical-advisors/ecommerce-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -19,26 +19,26 @@ The cs-ecommerce-strategist agent is most valuable for (1) per-channel unit econ
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/ecommerce/`
+**Skill Location:** `../../vertical-advisors/ecommerce-advisor/`
 
 ### Python Tools
 
-1. **Ecom Unit Economics Calculator** — `../../vertical-advisors/ecommerce/scripts/ecom_unit_economics_calculator.py`
+1. **Ecom Unit Economics Calculator** — `../../vertical-advisors/ecommerce-advisor/scripts/ecom_unit_economics_calculator.py`
 
 ### Knowledge Bases
 
-1. **Fulfillment Models** — `../../vertical-advisors/ecommerce/references/fulfillment_models.md`
-2. **Channel Strategy** — `../../vertical-advisors/ecommerce/references/channel_strategy.md`
+1. **Fulfillment Models** — `../../vertical-advisors/ecommerce-advisor/references/fulfillment_models.md`
+2. **Channel Strategy** — `../../vertical-advisors/ecommerce-advisor/references/channel_strategy.md`
 
 ### Templates
 
-1. **Unit Economics Template** — `../../vertical-advisors/ecommerce/assets/unit_economics_template.json`
+1. **Unit Economics Template** — `../../vertical-advisors/ecommerce-advisor/assets/unit_economics_template.json`
 
 ## Workflows
 
 ### Workflow 1: Unit Economics Model
 1. Build a JSON config from the template (per channel)
-2. Run: `python ../../vertical-advisors/ecommerce/scripts/ecom_unit_economics_calculator.py model.json`
+2. Run: `python ../../vertical-advisors/ecommerce-advisor/scripts/ecom_unit_economics_calculator.py model.json`
 3. Identify margin-eating line items
 4. Decide remediation: cost cuts, price up, channel mix change, SKU pruning
 
@@ -63,7 +63,7 @@ The cs-ecommerce-strategist agent is most valuable for (1) per-channel unit econ
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/ecommerce/scripts/ecom_unit_economics_calculator.py model.json
+python ../../vertical-advisors/ecommerce-advisor/scripts/ecom_unit_economics_calculator.py model.json
 ```
 
 ## Success Metrics
@@ -78,5 +78,5 @@ python ../../vertical-advisors/ecommerce/scripts/ecom_unit_economics_calculator.
 - [cs-fundraising-advisor](../c-level/cs-fundraising-advisor.md) — Ecommerce investor expectations
 
 ## References
-- **Ecommerce Advisor Skill:** [../../vertical-advisors/ecommerce/SKILL.md](../../vertical-advisors/ecommerce/SKILL.md)
+- **Ecommerce Advisor Skill:** [../../vertical-advisors/ecommerce-advisor/SKILL.md](../../vertical-advisors/ecommerce-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

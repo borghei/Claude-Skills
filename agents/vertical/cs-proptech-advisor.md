@@ -1,7 +1,7 @@
 ---
 name: cs-proptech-advisor
 description: Strategic vertical advisor for proptech founders covering market segments (transaction / listings / financing / management / services / data), MLS and brokerage strategy, and state-by-state regulatory exposure
-skills: vertical-advisors/proptech
+skills: vertical-advisors/proptech-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -23,25 +23,25 @@ Frameworks only. Real estate is heavily regulated state-by-state. Engage real-es
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/proptech/`
+**Skill Location:** `../../vertical-advisors/proptech-advisor/`
 
 ### Python Tools
 
-1. **Market Segment Classifier** — `../../vertical-advisors/proptech/scripts/market_segment_classifier.py`
+1. **Market Segment Classifier** — `../../vertical-advisors/proptech-advisor/scripts/market_segment_classifier.py`
 
 ### Knowledge Bases
 
-1. **Proptech Segments** — `../../vertical-advisors/proptech/references/proptech_segments.md`
-2. **MLS and Brokerage** — `../../vertical-advisors/proptech/references/mls_and_brokerage.md`
+1. **Proptech Segments** — `../../vertical-advisors/proptech-advisor/references/proptech_segments.md`
+2. **MLS and Brokerage** — `../../vertical-advisors/proptech-advisor/references/mls_and_brokerage.md`
 
 ### Templates
 
-1. **Segment Assessment Template** — `../../vertical-advisors/proptech/assets/proptech_segment_assessment.md`
+1. **Segment Assessment Template** — `../../vertical-advisors/proptech-advisor/assets/proptech_segment_assessment.md`
 
 ## Workflows
 
 ### Workflow 1: Segment Classification
-1. Run: `python ../../vertical-advisors/proptech/scripts/market_segment_classifier.py description.txt`
+1. Run: `python ../../vertical-advisors/proptech-advisor/scripts/market_segment_classifier.py description.txt`
 2. Cross-reference with `proptech_segments.md`
 3. Capture segment, regulatory exposure, business model in `proptech_segment_assessment.md`
 4. Counsel review before architecture decisions
@@ -67,7 +67,7 @@ Frameworks only. Real estate is heavily regulated state-by-state. Engage real-es
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/proptech/scripts/market_segment_classifier.py product.txt
+python ../../vertical-advisors/proptech-advisor/scripts/market_segment_classifier.py product.txt
 ```
 
 ## Success Metrics
@@ -82,5 +82,5 @@ python ../../vertical-advisors/proptech/scripts/market_segment_classifier.py pro
 - [cs-fintech-advisor](cs-fintech-advisor.md) — Mortgage / financing overlap
 
 ## References
-- **Proptech Advisor Skill:** [../../vertical-advisors/proptech/SKILL.md](../../vertical-advisors/proptech/SKILL.md)
+- **Proptech Advisor Skill:** [../../vertical-advisors/proptech-advisor/SKILL.md](../../vertical-advisors/proptech-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

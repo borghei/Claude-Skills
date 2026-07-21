@@ -1,7 +1,7 @@
 ---
 name: cs-edtech-strategist
 description: Strategic vertical advisor for edtech founders covering FERPA / COPPA / state student-data laws, K-12 vs higher-ed vs corporate L&D market selection, and district sales motion
-skills: vertical-advisors/edtech
+skills: vertical-advisors/edtech-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -23,25 +23,25 @@ Frameworks and orientation only. Not legal advice. Edtech compliance (FERPA, COP
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/edtech/`
+**Skill Location:** `../../vertical-advisors/edtech-advisor/`
 
 ### Python Tools
 
-1. **Student Data Compliance Checker** — `../../vertical-advisors/edtech/scripts/student_data_compliance_checker.py`
+1. **Student Data Compliance Checker** — `../../vertical-advisors/edtech-advisor/scripts/student_data_compliance_checker.py`
 
 ### Knowledge Bases
 
-1. **Student Data Privacy** — `../../vertical-advisors/edtech/references/student_data_privacy.md`
-2. **Edtech Market Dynamics** — `../../vertical-advisors/edtech/references/edtech_market_dynamics.md`
+1. **Student Data Privacy** — `../../vertical-advisors/edtech-advisor/references/student_data_privacy.md`
+2. **Edtech Market Dynamics** — `../../vertical-advisors/edtech-advisor/references/edtech_market_dynamics.md`
 
 ### Templates
 
-1. **SDPA Inventory Template** — `../../vertical-advisors/edtech/assets/sdpa_inventory_template.md`
+1. **SDPA Inventory Template** — `../../vertical-advisors/edtech-advisor/assets/sdpa_inventory_template.md`
 
 ## Workflows
 
 ### Workflow 1: Student Data Compliance Scoping
-1. Run: `python ../../vertical-advisors/edtech/scripts/student_data_compliance_checker.py description.txt`
+1. Run: `python ../../vertical-advisors/edtech-advisor/scripts/student_data_compliance_checker.py description.txt`
 2. Cross-reference with `student_data_privacy.md`
 3. Counsel review; populate `sdpa_inventory_template.md`
 4. Pick baseline SDPA (NDPA recommended for US K-12)
@@ -67,7 +67,7 @@ Frameworks and orientation only. Not legal advice. Edtech compliance (FERPA, COP
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/edtech/scripts/student_data_compliance_checker.py product.txt
+python ../../vertical-advisors/edtech-advisor/scripts/student_data_compliance_checker.py product.txt
 ```
 
 ## Success Metrics
@@ -82,5 +82,5 @@ python ../../vertical-advisors/edtech/scripts/student_data_compliance_checker.py
 - [cs-customer-experience-lead](../business-growth/cs-customer-experience-lead.md) — District onboarding (PD-heavy)
 
 ## References
-- **Edtech Advisor Skill:** [../../vertical-advisors/edtech/SKILL.md](../../vertical-advisors/edtech/SKILL.md)
+- **Edtech Advisor Skill:** [../../vertical-advisors/edtech-advisor/SKILL.md](../../vertical-advisors/edtech-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

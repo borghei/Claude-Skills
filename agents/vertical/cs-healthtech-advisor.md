@@ -1,7 +1,7 @@
 ---
 name: cs-healthtech-advisor
 description: Strategic vertical advisor for healthtech founders covering HIPAA scope, FDA SaMD classification, EHR integration, payor/provider/employer GTM, and value-based care models
-skills: vertical-advisors/healthtech
+skills: vertical-advisors/healthtech-advisor
 domain: vertical
 model: sonnet
 tools: [Read, Write, Bash, Grep, Glob]
@@ -23,28 +23,28 @@ This agent provides frameworks and orientation. It is **not** legal, regulatory,
 
 ## Skill Integration
 
-**Skill Location:** `../../vertical-advisors/healthtech/`
+**Skill Location:** `../../vertical-advisors/healthtech-advisor/`
 
 ### Python Tools
 
-1. **PHI Scope Checker** — `../../vertical-advisors/healthtech/scripts/phi_scope_checker.py`
+1. **PHI Scope Checker** — `../../vertical-advisors/healthtech-advisor/scripts/phi_scope_checker.py`
 
 ### Knowledge Bases
 
-1. **HIPAA Basics** — `../../vertical-advisors/healthtech/references/hipaa_basics.md`
-2. **FDA SaMD Basics** — `../../vertical-advisors/healthtech/references/fda_samd_basics.md`
-3. **GTM Patterns** — `../../vertical-advisors/healthtech/references/gtm_patterns.md`
-4. **Value-Based Care Primer** — `../../vertical-advisors/healthtech/references/value_based_care_primer.md`
+1. **HIPAA Basics** — `../../vertical-advisors/healthtech-advisor/references/hipaa_basics.md`
+2. **FDA SaMD Basics** — `../../vertical-advisors/healthtech-advisor/references/fda_samd_basics.md`
+3. **GTM Patterns** — `../../vertical-advisors/healthtech-advisor/references/gtm_patterns.md`
+4. **Value-Based Care Primer** — `../../vertical-advisors/healthtech-advisor/references/value_based_care_primer.md`
 
 ### Templates
 
-1. **HIPAA Scope Template** — `../../vertical-advisors/healthtech/assets/hipaa_scope_template.md`
+1. **HIPAA Scope Template** — `../../vertical-advisors/healthtech-advisor/assets/hipaa_scope_template.md`
 
 ## Workflows
 
 ### Workflow 1: HIPAA Scope and BAA Strategy
 1. Capture product description (what data, who handles it, in what context)
-2. Run scope checker: `python ../../vertical-advisors/healthtech/scripts/phi_scope_checker.py description.txt`
+2. Run scope checker: `python ../../vertical-advisors/healthtech-advisor/scripts/phi_scope_checker.py description.txt`
 3. Cross-reference with `hipaa_basics.md` to confirm role (CE / BA / consumer)
 4. Hand findings to HIPAA-specialist counsel; capture scope in `hipaa_scope_template.md`
 5. Build BAA inventory: with each CE customer + each subcontractor handling PHI
@@ -72,7 +72,7 @@ This agent provides frameworks and orientation. It is **not** legal, regulatory,
 ## Integration Examples
 
 ```bash
-python ../../vertical-advisors/healthtech/scripts/phi_scope_checker.py product_description.txt
+python ../../vertical-advisors/healthtech-advisor/scripts/phi_scope_checker.py product_description.txt
 # Then: review with HIPAA counsel; populate hipaa_scope_template.md
 ```
 
@@ -90,5 +90,5 @@ python ../../vertical-advisors/healthtech/scripts/phi_scope_checker.py product_d
 - [cs-cfo-advisor](../c-level/cs-cfo-advisor.md) — PMPM / capitation / reimbursement modeling
 
 ## References
-- **Healthtech Advisor Skill:** [../../vertical-advisors/healthtech/SKILL.md](../../vertical-advisors/healthtech/SKILL.md)
+- **Healthtech Advisor Skill:** [../../vertical-advisors/healthtech-advisor/SKILL.md](../../vertical-advisors/healthtech-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
