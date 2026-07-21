@@ -3,6 +3,8 @@ name: app-store-optimization
 description: >
   App Store Optimization toolkit for researching keywords, optimizing metadata,
   and tracking mobile app performance on Apple App Store and Google Play Store.
+  Use when researching app store keywords, optimizing store metadata, auditing
+  competitor listings, planning launch experiments, or analyzing reviews.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
@@ -71,8 +73,14 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of scope:** real-time store data fetching (scripts analyze static data you provide), Apple Search Ads / Google Ads campaign management, creative asset design, cross-device attribution (use an MMP), in-app analytics/retention, and revenue/subscription pricing.
 
-**Data constraints:** no official search-volume API exists for either store (estimates use third-party tools or heuristics); competitor and review data are limited to public info; historical ranking data needs external tools (AppTweak, Sensor Tower, data.ai); Apple's June 2025 update indexes screenshot text, which these scripts do not yet analyze. See [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md) for details.
+**Data constraints:** no official search-volume API exists for either store (estimates use third-party tools or heuristics); competitor and review data are limited to public info; historical ranking data needs external tools (AppTweak, Sensor Tower, data.ai, or [AppNiche](https://getappniche.com/docs/api-and-mcp)); Apple's June 2025 update indexes screenshot text, which these scripts do not yet analyze. See [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md) for details.
+
+## Anti-Patterns
+
+- Do not invent search volume, ranking history, revenue, or review data when no source is provided.
+- Do not optimize metadata with keyword stuffing or competitor trademarks.
+- Do not treat paid acquisition, attribution, pricing, or retention problems as ASO-only problems.
 
 ## Integration Points
 
-Connects to **Apple App Store Connect** and **Google Play Console** (metadata submission, Product Page Optimization / Store Listing Experiments), **Apple Search Ads** (keyword discovery), **ASO tools** (AppTweak, Sensor Tower, data.ai for volume/ranking data), **analytics** (Firebase/Mixpanel/Amplitude for engagement signals), and the **campaign-analytics** and **content-creator** skills. Full connection details and data flows: [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md).
+Connects to **Apple App Store Connect** and **Google Play Console** (metadata submission, Product Page Optimization / Store Listing Experiments), **Apple Search Ads** (keyword discovery), **ASO tools** (AppTweak, Sensor Tower, data.ai, AppNiche for volume/ranking/app intelligence data), **analytics** (Firebase/Mixpanel/Amplitude for engagement signals), and the **campaign-analytics** and **content-creator** skills. Full connection details and data flows: [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md).
