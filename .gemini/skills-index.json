@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-07-21T12:06:36+00:00",
+  "updated": "2026-07-21T12:27:20+00:00",
   "total_skills": 368,
   "skills": [
     {
@@ -288,7 +288,9 @@
       "path": "engineering/cloud-security/SKILL.md",
       "tools": [
         "iam_least_privilege.py",
-        "posture_auditor.py"
+        "iam_rules.py",
+        "posture_auditor.py",
+        "posture_rules.py"
       ],
       "tags": [
         "cloud-security",
@@ -1433,6 +1435,7 @@
       "path": "engineering/write-a-skill/SKILL.md",
       "tools": [
         "description_audit.py",
+        "lint_checks.py",
         "skill_lint.py",
         "skill_scaffold.py"
       ],
@@ -4623,6 +4626,7 @@
       "tools": [
         "run_test.py",
         "stats_core.py",
+        "test_impl.py",
         "test_selector.py"
       ],
       "tags": [
@@ -4975,6 +4979,7 @@
       "domain": "personal-productivity",
       "path": "personal-productivity/reflect/SKILL.md",
       "tools": [
+        "calibration_core.py",
         "calibration_scorer.py",
         "reflection_prompt_generator.py"
       ],
@@ -5201,7 +5206,9 @@
       "domain": "research-ops",
       "path": "research-ops/clinical-research/SKILL.md",
       "tools": [
+        "power_formulas.py",
         "protocol_auditor.py",
+        "protocol_rules.py",
         "sample_size_calculator.py",
         "site_feasibility_scorer.py"
       ],

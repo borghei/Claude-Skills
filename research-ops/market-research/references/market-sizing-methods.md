@@ -6,6 +6,7 @@ finance partner, or a competitor's analyst.
 
 ## 1. What each layer actually means
 
+
 The three-layer model is used loosely everywhere, which is why sizing arguments
 so often talk past each other. Fix the definitions before you compute anything.
 
@@ -38,6 +39,7 @@ hardware amortises over replacement cycle. Transaction take rates multiply
 annual volume, not cumulative volume.
 
 ## 2. Top-down construction
+
 
 ### The anchor
 
@@ -93,6 +95,7 @@ marginals.
 
 ## 3. Bottom-up construction
 
+
 ### The unit base
 
 Bottom-up starts from a countable population. The strength of the whole build
@@ -145,6 +148,7 @@ most often left out of the model entirely.
 
 ## 4. Reconciliation
 
+
 Building both chains is not busywork — the gap between them is the most
 informative output of the exercise.
 
@@ -170,6 +174,7 @@ sizing different markets and the number is not ready to present.
 
 ## 5. Growth bridges
 
+
 An anchor with a vintage older than about 18 months needs an explicit bridge to
 the current period.
 
@@ -189,6 +194,7 @@ Rules for the bridge:
   bottom-up instead.
 
 ## 6. Segmentation that changes decisions
+
 
 A segmentation is only useful if the segments differ on something that changes
 what you do. Test every proposed cut against three criteria:
@@ -216,6 +222,7 @@ events by instrumenting the funnel to capture why each deal started.
 
 ## 7. Presenting the number
 
+
 The sizing memo should let a reviewer reconstruct the number without asking you
 a question. Minimum contents:
 
@@ -242,7 +249,103 @@ years, base case €11M." A single number implies a precision the method does no
 have, and reviewers who know that will discount the whole memo. A band
 communicates the same central estimate while being honest about the method.
 
-## 8. Failure modes checklist
+## 8. Growth and forecast modelling
+
+
+A market size is a snapshot. Most decisions need a trajectory.
+
+### Three forecast approaches
+
+| Approach | Mechanism | Best for |
+|----------|-----------|----------|
+| **Category CAGR applied** | Grow the whole market at a published rate | Established categories with credible published growth |
+| **Adoption curve** | Model penetration over time toward a ceiling | New categories replacing an existing behaviour |
+| **Driver-based** | Model the underlying units and value separately | When units and price move independently |
+
+**[RECOMMENDED]** Driver-based wherever you can get the inputs. Applying a single
+CAGR hides the case where unit growth is strong and price is collapsing — which
+is common in software categories and completely changes the investment case.
+
+### Adoption ceilings
+
+A penetration model needs a ceiling, and the ceiling is usually not 100%. Some
+share of any market will never adopt: they lack the trigger, are contractually
+locked in, or the alternative genuinely suits them better.
+
+Setting the ceiling from a comparable category's observed plateau is more
+defensible than assuming full penetration. State it explicitly — an unstated
+ceiling of 100% is a large hidden assumption.
+
+## 9. Competitive structure
+
+
+Market size alone does not tell you whether the market is worth entering. Two
+markets of identical size behave completely differently depending on structure.
+
+| Structure | Signal | Implication |
+|-----------|--------|-------------|
+| **Fragmented** | No player above ~10% share | Entry is easy, differentiation is hard, consolidation may be the play |
+| **Consolidating** | Top 3 gaining share | Window is closing; entry needs a wedge |
+| **Concentrated** | Top 2 above 60% combined | Entry requires displacing an incumbent; budget accordingly |
+| **Monopolistic** | One player above 70% | Only viable via an underserved segment or a regulatory shift |
+
+### Estimating share without published data
+
+- **Sum the knowable.** Public company disclosures plus credible private
+  estimates give a floor. The residual is the long tail.
+- **Employee-count proxy.** Competitor headcount in revenue-generating roles,
+  times a plausible revenue-per-head for the category, gives an order of
+  magnitude.
+- **Customer-count proxy.** Public logo counts times a plausible average contract
+  value.
+- **Win/loss data.** Your own funnel tells you who you actually meet in deals,
+  which is a better read on the *addressable* competitive set than any market
+  report.
+
+That last one is undervalued. Analyst competitive sets and the competitors you
+actually encounter in deals frequently differ, and yours is the one that matters
+for your SOM.
+
+## 10. Pricing and value capture
+
+
+SOM depends on the price you can hold, not the price you list.
+
+| Consideration | Effect on sizing |
+|---------------|------------------|
+| **Discounting reality** | Model at realised price, not list. A category discounting 20-30% has a SOM 20-30% below the list-price model |
+| **Land-and-expand** | Initial contract value understates account value; model both first-year and steady-state |
+| **Seat vs consumption pricing** | Consumption revenue grows with customer usage; seat revenue does not. Different growth profiles from the same customer count |
+| **Multi-year discounts** | Convert to annual value; do not book total contract value as annual |
+| **Channel margin** | Partner-sold revenue nets down by the partner's margin. Model net, and say which you are reporting |
+
+Channel margin is the most commonly missed. A SOM built on gross customer spend
+through a channel that takes 25-40% overstates your revenue by that margin.
+
+## 11. Sanity checks before you present
+
+
+Run all of these. Each has caught a materially wrong number.
+
+- **Reverse the arithmetic.** Divide SOM by your average contract value. Is that
+  customer count plausible given your channel capacity and sales headcount?
+- **Compare to a known player.** Does your TAM imply the largest incumbent has an
+  implausibly small or large share?
+- **Check per-unit spend against reality.** Does your value-per-unit imply a
+  buyer spending more on this category than they plausibly spend on all software?
+- **Check the growth implied.** Does hitting SOM require a growth rate no company
+  in the category has achieved?
+- **Ask what the number would be if you halved your weakest assumption.** If SOM
+  falls by more than half, the memo needs to lead with that sensitivity.
+- **Show it to someone hostile.** The reviewer most likely to challenge it should
+  see it before the audience that will act on it.
+
+The reverse-arithmetic check is the highest-yield of these. Converting a currency
+figure back into customers, and then into sales capacity, exposes implausibility
+that no amount of staring at the currency figure will.
+
+## 12. Failure modes checklist
+
 
 Run this before the number leaves your machine.
 

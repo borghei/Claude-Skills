@@ -187,6 +187,8 @@ score below a threshold while one public database sits unremarked.
 |------|---------|
 | `scripts/posture_auditor.py` | Audits a normalized cloud inventory for public exposure, open ingress, unencrypted stores, missing logging, absent backups, and account guardrail gaps; severity-scored with provider-specific remediation |
 | `scripts/iam_least_privilege.py` | Reviews IAM principals for wildcard grants, privilege-escalation paths, over-broad trust, stale credentials, and missing MFA; ranks principals by risk with an effective-privilege tier |
+| `scripts/posture_rules.py` | Rule data behind the posture auditor — severity weights, sensitive-port and data-store vocabularies, account-level guardrail checks, and the provider-specific remediation catalog; `--list-rules` prints them |
+| `scripts/iam_rules.py` | Rule data behind the IAM review — severity weights, admin-grant and write-verb vocabularies, the privilege-escalation path catalog, and the policy-flattening and privilege-tier primitives; `--list-rules` prints them |
 | `references/cloud-control-catalog.md` | Controls mapped across AWS/Azure/GCP for identity, network, encryption, logging, and resilience, with passing thresholds and severity calibration |
 | `references/landing-zone-and-guardrails.md` | Account topology, preventive vs detective controls, the guardrail baseline per provider, and a five-level posture maturity model |
 | `assets/sample_inventory.json` | Seven-resource AWS inventory exercising every posture check |

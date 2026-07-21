@@ -6,6 +6,7 @@ items that are reliably forgotten.
 
 ## 1. The four cost blocks
 
+
 Every research budget decomposes into four blocks. Most under-budgeting comes
 from putting a cost in the wrong block, not from omitting it entirely.
 
@@ -25,6 +26,7 @@ The second most common is **monitoring billed as fixed** when it scales with
 both sites and duration.
 
 ## 2. Screening and yield
+
 
 Participant-stage costs divide into those incurred on **everyone screened** and
 those incurred only on **those enrolled**.
@@ -61,6 +63,7 @@ Multiply these through: reaching 8 attended sessions typically means several
 hundred invitations. Budget the funnel, not the sessions.
 
 ## 3. Cost drivers by method
+
 
 ### Interview-based research
 
@@ -125,6 +128,7 @@ systematically distorted in favour of experiments.
 
 ## 4. Contingency, overhead, and escalation
 
+
 ### Contingency
 
 | Study type | Recommended contingency |
@@ -158,6 +162,7 @@ fixed at year-one rates is short by the time it reaches close-out.
 
 ## 5. Cost per insight
 
+
 Cost per insight is blunt but forces a comparison across methods that otherwise
 get evaluated in isolation.
 
@@ -190,6 +195,7 @@ evidence is commissioned?** In most organisations the answer is no.
 
 ## 6. Commonly omitted line items
 
+
 Run this list against any draft budget.
 
 - [ ] Screening costs grossed up for screen failure
@@ -216,7 +222,109 @@ The last-third of that list — close-out, retention, reporting — is where stu
 most often run out of money, because it falls at the end when the budget is
 already committed and the appetite for a supplementary request is lowest.
 
-## 7. Budget review checklist
+## 7. Build versus buy for research capability
+
+
+| Capability | Build in-house when | Buy when |
+|-----------|--------------------|----------|
+| Recruiting | You have an owned list and recurring need | Hard-to-reach audience, or one-off study |
+| Moderation | Research runs continuously | Specialist domain or language needed |
+| Survey panel | Never — panel access is not worth building | Always |
+| Transcription | Never | Always; it is cheap and it is not your differentiator |
+| Analysis | Always — this is the capability worth owning | Only for specialist statistical work |
+| Clinical monitoring | Large ongoing programme | Single study or few sites |
+| Data management / EDC | Rarely; validated systems are expensive to build | Almost always |
+
+The general rule: **buy the infrastructure, build the judgement.** Panels, EDC
+systems, and transcription are commodities with real economies of scale. The
+ability to choose the right method and interpret the result is the capability
+that compounds, and outsourcing it hollows out the function.
+
+## 8. Rate benchmarking
+
+
+Rates vary widely by geography, seniority, and specialism, so treat these as
+structural guidance rather than as figures to quote.
+
+| Cost | Scales primarily with |
+|------|----------------------|
+| Participant incentive | Seniority and session length. Executive and clinical-professional incentives are multiples of consumer rates. |
+| Recruiting fee | Incidence and reachability, not sample size. A low-incidence B2B audience can cost several times a general-population recruit per participant. |
+| Panel complete | Incidence and instrument length. Screening out non-qualifiers is billed. |
+| Site grant per participant | Visit count and procedure intensity, not therapeutic area alone. |
+| Monitoring visit | Travel and site count; risk-based monitoring reduces frequency, not unit cost. |
+| Statistical work | Design complexity and number of analyses, not sample size. |
+
+### Getting comparable quotes
+
+Vendors scope differently, which makes headline quotes non-comparable. Fix the
+scope before requesting quotes:
+
+- State the exact deliverable, not the activity ("8 completed 60-minute sessions
+  with recordings, transcripts, and a themed summary" — not "user research")
+- State who owns recruiting and who pays incentives
+- State the number of revision rounds included
+- State the data ownership and retention terms
+- Ask for the price of one additional unit (session, complete, site) so you can
+  model scope changes without re-quoting
+
+That last item is the most useful and the most often omitted. Marginal unit
+pricing is what lets you decide mid-study whether two more sessions are worth it.
+
+## 9. Cost control during the study
+
+
+| Control | Mechanism |
+|---------|-----------|
+| **Scope freeze after fielding starts** | Instrument and protocol changes mid-field invalidate collected data and cost twice |
+| **Marginal-unit pricing agreed up front** | Lets you scale within a study without re-negotiating |
+| **Invoice against milestones, not calendar** | A vendor invoicing monthly for a stalled workstream is a cost with no delivery |
+| **Cap revision rounds contractually** | Unlimited revisions are where fixed-price research work overruns |
+| **Weekly recruiting-funnel review** | Recruiting shortfalls are cheap to fix in week one and expensive in week four |
+| **Single named budget owner** | Diffuse ownership is the most reliable predictor of overrun |
+
+### When to stop spending
+
+Define these thresholds before the study starts:
+
+- **Saturation reached** — two consecutive sessions with no new theme. Continuing
+  to fill a booked schedule past saturation is pure cost.
+- **Question answered** — if the evidence is already decisive, stop. Studies
+  routinely run to their planned n after the answer is unambiguous.
+- **Question superseded** — the decision was made, deferred, or the situation
+  changed. Stop immediately.
+- **Recruiting failure** — if the funnel cannot deliver the sample, re-plan
+  rather than extending indefinitely at full burn.
+
+The saturation stop is the most commonly missed. Sessions 9 through 12 of a
+homogeneous-segment study frequently produce no new themes and full cost.
+
+## 10. Attributing shared costs
+
+
+Research functions carry costs that no single study owns: panel subscriptions,
+research repositories, analysis tooling, and the research-ops staff themselves.
+
+Three allocation approaches:
+
+| Approach | Mechanism | Best for |
+|----------|-----------|----------|
+| **Central overhead** | Held centrally, not charged to studies | Small portfolios; keeps study budgets simple |
+| **Per-study allocation** | Divided by study count or by study cost | Medium portfolios; makes true study cost visible |
+| **Usage-based** | Charged by sessions, seats, or participants consumed | Large portfolios; drives efficient consumption |
+
+**[RECOMMENDED]** Per-study allocation by study cost for most organisations. It
+makes the true cost of a study visible without the administrative overhead of
+usage metering, and visible true cost is what makes the cost-per-insight
+comparison across methods honest.
+
+Whichever you choose, be consistent, and state the method alongside any
+cost-per-insight figure. A number computed excluding shared costs is not
+comparable with one that includes them, and mixing the two invalidates exactly
+the cross-method comparison the metric exists to support.
+
+## 11. Budget review checklist
+
 
 - [ ] Every cost assigned to the correct block (participant / site / site-month / fixed)
 - [ ] Screening costs grossed up by 1/(1 − screen failure rate)

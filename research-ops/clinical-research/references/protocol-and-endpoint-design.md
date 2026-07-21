@@ -11,6 +11,7 @@ study unaccruable.
 
 ## 1. Protocol contents
 
+
 ICH E6 sets out the contents a protocol is expected to cover. The auditor script
 uses these as its required-section list.
 
@@ -38,6 +39,7 @@ are assumed to live in a separate agreement. That is acceptable if the agreement
 exists and the protocol says so; it is a finding if neither is true.
 
 ## 2. Endpoints
+
 
 ### The four things every endpoint needs
 
@@ -106,6 +108,7 @@ study duration permits.
 
 ## 3. Eligibility criteria
 
+
 ### The trade-off
 
 Each criterion buys internal validity and costs accrual and generalisability.
@@ -149,6 +152,7 @@ Each criterion buys internal validity and costs accrual and generalisability.
 
 ## 4. Withdrawal and missing data
 
+
 Pre-specify, in the protocol, before enrolment:
 
 - **Withdrawal criteria** — what causes a participant to come off treatment, and
@@ -179,6 +183,7 @@ introduces exactly the confounding randomisation exists to remove.
 
 ## 5. Safety and oversight
 
+
 - **AE and SAE definitions** must be stated verbatim, not referenced loosely.
 - **SAE reporting window** to the sponsor is immediate — within 24 hours is the
   standard expectation.
@@ -190,6 +195,7 @@ introduces exactly the confounding randomisation exists to remove.
   is documented, and how the trial's integrity is preserved afterward.
 
 ## 6. Documentation readiness
+
 
 Before a protocol goes to an ethics committee, these should exist in draft:
 
@@ -209,7 +215,125 @@ The CRF-to-protocol alignment check is the one most often skipped and the one
 that most reliably generates protocol deviations: any assessment in the schedule
 without a matching CRF field will be collected inconsistently or not at all.
 
-## 7. Protocol review checklist
+## 7. Randomisation and blinding
+
+
+### Randomisation methods
+
+| Method | Mechanism | Use when |
+|--------|-----------|----------|
+| **Simple** | Each participant allocated independently | Large trials (>200); risks imbalance in smaller ones |
+| **Block** | Allocation balanced within blocks | **[PROVEN]** Default. Keep block size varied and concealed, or allocation becomes predictable at block end |
+| **Stratified block** | Blocks within strata (site, prognostic factor) | Known strong prognostic factors; keep strata few |
+| **Minimisation** | Allocates to minimise imbalance across several factors | Small trials with multiple important covariates |
+
+Two rules that prevent most randomisation failures:
+
+1. **Allocation concealment is distinct from blinding.** Concealment protects the
+   allocation sequence up to the moment of assignment; blinding protects
+   knowledge afterwards. A trial can be unblinded by necessity and still require
+   strict concealment.
+2. **Do not stratify on many factors.** Each stratum needs enough participants to
+   fill blocks. More than two or three stratification factors in a moderate
+   trial produces many sparse strata and defeats the purpose.
+
+### Blinding levels
+
+| Level | Blinded | Notes |
+|-------|---------|-------|
+| Open-label | Nobody | Acceptable where blinding is impossible; expect performance and detection bias |
+| Single-blind | Participant | Assessor bias remains |
+| Double-blind | Participant and investigator | Standard where feasible |
+| Triple-blind | Plus outcome assessor or analyst | Strongest, particularly for subjective endpoints |
+
+Where blinding is impossible (surgical, behavioural, device interventions),
+**blind the outcome assessor**. It is nearly always feasible, it is the single
+most effective bias control available in an open-label trial, and it is
+frequently overlooked.
+
+## 8. Schedule of assessments
+
+
+The schedule is the operational core of the protocol. Every row costs site time,
+participant burden, and money.
+
+Build it as a matrix: visits across the top, assessments down the side. Then
+challenge every cell against three questions:
+
+1. **Which endpoint or safety requirement does this serve?** A cell serving
+   neither is unfunded curiosity and should be cut.
+2. **Does the CRF have a field for it?** Anything collected without a field is
+   collected inconsistently or lost.
+3. **What is the visit window?** An assessment with no window is applied
+   differently at every site and generates deviations.
+
+### Burden control
+
+| Signal | Consequence |
+|--------|-------------|
+| Visit duration over 3 hours | Dropout rises sharply |
+| More than monthly visits over a long study | Retention falls |
+| Long travel with no reimbursement | Systematic exclusion of lower-income participants, harming generalisability |
+| Multiple lengthy questionnaires per visit | Later-instrument data quality degrades measurably |
+
+Participant burden is a scientific issue, not only an ethical one. Burden drives
+dropout, dropout drives missing data, and missing data is the most common threat
+to a trial's primary analysis.
+
+## 9. Protocol amendments
+
+
+Amendments are expensive: re-submission to every ethics committee, re-consent
+where the change affects participants, site retraining, and CRF changes.
+
+| Amendment type | Typical trigger | Avoidable? |
+|----------------|-----------------|-----------|
+| Eligibility relaxation | Accrual below plan | Often — realistic feasibility assessment up front |
+| Endpoint clarification | Ambiguity found during collection | Usually — the four-attribute endpoint test catches it |
+| Visit window widening | Sites cannot meet windows | Usually — pilot the schedule with one site first |
+| Safety update | New safety information | No — this is the system working |
+| Sample size increase | Assumptions proved optimistic | Sometimes — conservative variance assumptions help |
+
+**[RECOMMENDED]** Pilot the full protocol at one site before opening the rest.
+The first site reliably surfaces the schedule, CRF, and eligibility problems
+that would otherwise become an amendment across every site.
+
+Track amendment count as a quality metric. More than two substantial amendments
+in a study usually indicates the protocol was finalised before the operational
+detail was worked through.
+
+## 10. Data quality and monitoring
+
+
+### Risk-based monitoring
+
+100% source data verification is expensive and does not correlate well with
+finding the errors that matter. Concentrate effort on:
+
+- **Critical data** — primary endpoint, key safety variables, eligibility,
+  consent
+- **High-risk sites** — new sites, high enrollers, sites with prior findings
+- **Early participants at each site** — errors are systematic, and catching them
+  in the first few participants prevents them recurring across all of them
+
+That last point is the highest-yield monitoring practice available. Site errors
+are almost never random; they are a consistent misunderstanding that repeats
+until someone catches it.
+
+### Deviation categories
+
+| Category | Examples | Response |
+|----------|----------|----------|
+| **Critical** | Consent not obtained, ineligible participant enrolled, safety reporting failure | Immediate escalation, root-cause analysis, possible site suspension |
+| **Major** | Primary endpoint assessment missed, visit outside window affecting endpoint | Documented, trended, retrained |
+| **Minor** | Non-critical assessment missed, minor window excursion | Documented and trended |
+
+Trend deviations by site and by type. A rising rate at one site indicates a
+training or capacity problem; a rising rate across all sites indicates a protocol
+problem — usually a schedule the study asked for and the sites cannot deliver.
+
+## 11. Protocol review checklist
+
 
 - [ ] All ICH E6 sections present, or explicitly deferred to a named agreement
 - [ ] Exactly one primary endpoint, unless co-primaries are intentional and adjusted

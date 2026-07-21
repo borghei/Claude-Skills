@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T12:06:36+00:00",
+  "generated_at": "2026-07-21T12:27:20+00:00",
   "skill_count": 368,
   "domain_count": 20,
   "skills": [
@@ -613,10 +613,12 @@
         "references/cloud-control-catalog.md",
         "references/landing-zone-and-guardrails.md",
         "scripts/iam_least_privilege.py",
-        "scripts/posture_auditor.py"
+        "scripts/iam_rules.py",
+        "scripts/posture_auditor.py",
+        "scripts/posture_rules.py"
       ],
-      "size_bytes": 79483,
-      "tools_count": 2,
+      "size_bytes": 85901,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -3049,11 +3051,12 @@
         "references/authoring-playbook.md",
         "references/pattern-checklist.md",
         "scripts/description_audit.py",
+        "scripts/lint_checks.py",
         "scripts/skill_lint.py",
         "scripts/skill_scaffold.py"
       ],
-      "size_bytes": 72206,
-      "tools_count": 3,
+      "size_bytes": 77622,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -9624,10 +9627,11 @@
         "references/test-selection-and-assumptions.md",
         "scripts/run_test.py",
         "scripts/stats_core.py",
+        "scripts/test_impl.py",
         "scripts/test_selector.py"
       ],
-      "size_bytes": 78051,
-      "tools_count": 3,
+      "size_bytes": 82714,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -10301,11 +10305,12 @@
         "assets/sample_predictions.json",
         "references/calibration-and-forecasting.md",
         "references/reflection-cadences.md",
+        "scripts/calibration_core.py",
         "scripts/calibration_scorer.py",
         "scripts/reflection_prompt_generator.py"
       ],
-      "size_bytes": 94216,
-      "tools_count": 2,
+      "size_bytes": 95248,
+      "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -10802,12 +10807,14 @@
         "assets/sample_sites.json",
         "references/protocol-and-endpoint-design.md",
         "references/statistical-planning.md",
+        "scripts/power_formulas.py",
         "scripts/protocol_auditor.py",
+        "scripts/protocol_rules.py",
         "scripts/sample_size_calculator.py",
         "scripts/site_feasibility_scorer.py"
       ],
-      "size_bytes": 93420,
-      "tools_count": 3,
+      "size_bytes": 118173,
+      "tools_count": 5,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -10844,7 +10851,7 @@
         "scripts/survey_instrument_auditor.py",
         "scripts/tam_sam_som_builder.py"
       ],
-      "size_bytes": 85144,
+      "size_bytes": 94428,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -10881,7 +10888,7 @@
         "scripts/method_recommender.py",
         "scripts/screener_validator.py"
       ],
-      "size_bytes": 81193,
+      "size_bytes": 92000,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -10918,7 +10925,7 @@
         "scripts/portfolio_prioritizer.py",
         "scripts/study_budget_builder.py"
       ],
-      "size_bytes": 82057,
+      "size_bytes": 92573,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -11207,7 +11214,7 @@
         "scripts/md_to_html.py",
         "scripts/print_profile.py"
       ],
-      "size_bytes": 86198,
+      "size_bytes": 86702,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,

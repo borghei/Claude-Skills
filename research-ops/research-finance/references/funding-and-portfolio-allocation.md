@@ -6,6 +6,7 @@ decision value rather than by cost or by advocacy.
 
 ## 1. Funding sources and what each optimises for
 
+
 | Source | Optimises for | Budget conventions | Reporting burden |
 |--------|---------------|--------------------|------------------|
 | **Internal opex** | Speed to decision | Whatever finance accepts; often no overhead | Low — usually a monthly actuals line |
@@ -25,6 +26,7 @@ Two practical consequences:
   organisation. Know who is absorbing it before accepting the award.
 
 ## 2. Grant budget conventions
+
 
 Most grant budgets use a standard category structure. Names vary; the structure
 does not.
@@ -55,6 +57,7 @@ Deriving the number visibly is what makes it defensible. A round number with no
 derivation reads as an estimate that was chosen rather than computed.
 
 ## 3. Value of information
+
 
 The core question in portfolio allocation is not "how much does this study
 cost" but "how much is it worth knowing this before we decide."
@@ -128,6 +131,7 @@ Two conditions make a study worth nothing regardless of every other input:
 
 ## 4. Allocation mechanics
 
+
 Rank by expected decision value per unit cost, then fund greedily down the list
 until the budget is exhausted. Three refinements the greedy rank does not
 capture:
@@ -161,6 +165,7 @@ committed portfolio cannot respond to any of them without cancelling something
 mid-flight.
 
 ## 5. Portfolio governance
+
 
 ### Review cadence
 
@@ -203,7 +208,113 @@ investment, and the awkwardness of the conversation all push toward continuing,
 and each of those is easier to overcome when the rule was agreed in advance by
 the same people now sitting in the room.
 
-## 6. Allocation checklist
+## 6. Staged funding and tranching
+
+
+Full up-front funding of a long study transfers all the risk to the funder and
+removes every natural decision point. Stage the release instead.
+
+| Stage gate | Released at | Withheld if |
+|-----------|-------------|-------------|
+| **Setup** | Approval | — |
+| **Pilot / first site** | Protocol final, first site live | Protocol still in revision |
+| **Scale** | First 10-15% of target enrolled at plan rate | Accrual below half of plan |
+| **Completion** | Enrolment complete | Data quality issues unresolved |
+| **Reporting** | Database lock | Analysis plan not finalised pre-lock |
+
+The scale gate is the important one. It is the last point at which a study
+running at half the planned accrual can be re-planned cheaply, and it is
+routinely skipped because the setup money is already spent and stopping feels
+wasteful. Releasing the scale tranche against an accrual test converts that
+sunk-cost pressure into an explicit decision.
+
+**[RECOMMENDED]** Tie tranches to delivery evidence, not to elapsed time. A
+calendar-based tranche releases money to a stalled study automatically, which is
+precisely the failure the staging was meant to prevent.
+
+## 7. Cost-share and matched funding
+
+
+Consortium and grant funding frequently requires the recipient to contribute a
+share. Two traps:
+
+- **In-kind contributions must be evidenced.** Staff time counted as cost-share
+  needs timesheets or an auditable allocation basis. "Approximately 0.3 FTE" is
+  not evidence, and it is a common audit finding.
+- **The same contribution cannot be counted twice.** Staff time already charged
+  to another funded project cannot also serve as cost-share here. Track the
+  denominator — each person's total committed effort across all funded work —
+  not just each project's numerator.
+
+Maintain a single effort-commitment register across the whole portfolio. Without
+it, over-commitment is invisible until an audit or until someone genuinely runs
+out of hours, and both discoveries are expensive.
+
+## 8. Reallocating mid-flight
+
+
+When a study stops, is descoped, or underspends, the released money should be
+reallocated deliberately rather than absorbed.
+
+Order of preference:
+
+1. **Fund the highest-ranked deferred study** from the last portfolio review.
+   The ranking already exists; use it.
+2. **Top up the reserve** if it has been drawn down below 10%.
+3. **Accelerate an in-flight study** whose constraint is money rather than time.
+4. **Return it.** If none of the above applies, returning the money is a better
+   outcome than spending it on the next-cheapest available study, and it
+   materially strengthens the next funding request.
+
+The failure mode is the fourth option never being considered. Underspend that
+gets absorbed into marginal work teaches finance that the original request was
+padded, which is paid back with interest at the next budget cycle.
+
+## 9. Defending the research budget
+
+
+Research is a cost centre on the P&L and an investment in the decision log. The
+gap between those two framings is where research budgets are lost.
+
+What survives a cost review:
+
+- **A decision log.** Every study, the decision it informed, and what changed as
+  a result. Maintained continuously — it cannot be reconstructed under pressure.
+- **Named avoided costs.** "The pricing study changed the tier structure before
+  launch; the rejected structure would have cost an estimated X in the affected
+  base." Estimates are fine if the basis is stated.
+- **Cost per decision-ready insight**, trended over time. A falling number
+  demonstrates an improving function.
+- **The counterfactual.** What the organisation decided without evidence in the
+  same period, and what those decisions cost when they went wrong.
+
+What does not survive: activity metrics. Studies run, participants interviewed,
+reports published, and sessions moderated all measure effort, not value, and
+presenting them invites the reviewer to treat research as overhead to be
+minimised.
+
+**[PROVEN]** The single highest-leverage habit is recording, at the moment a
+decision is made, which research informed it and what would have been decided
+otherwise. Retrospective reconstruction of that record is unconvincing precisely
+because it is retrospective.
+
+## 10. Multi-year and multi-currency programmes
+
+
+| Risk | Mitigation |
+|------|-----------|
+| Salary escalation | Explicit annual escalation line; do not absorb it into contingency |
+| Vendor rate increases | Fix rates in the contract for the study duration where possible |
+| Currency movement on cross-border sites | Budget in the currency of spend; state the assumed rate and the exposure |
+| Funder disbursement delay | Model the working-capital gap; a grant paid in arrears needs bridge funding |
+| Scope drift across years | Annual re-baseline against the original decision value |
+
+The annual re-baseline is the one most often skipped. A three-year programme
+approved against a decision that has since been made, deferred, or superseded
+should be stopped or re-scoped — and only an explicit annual check surfaces that.
+
+## 11. Allocation checklist
+
 
 - [ ] Every study states the decision it informs and who makes it
 - [ ] Decision value estimated as the cost of getting it wrong

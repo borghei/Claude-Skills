@@ -111,6 +111,18 @@ python3 engineering/write-a-skill/scripts/skill_lint.py \
   --strict --format json
 ```
 
+The linter distinguishes **tools** from **helper modules**. A `scripts/*.py` file that
+a sibling script imports and that has no `__main__` guard is a library, so the argparse
+/ `--format` / guard requirements are not applied to it; it is still checked for
+stdlib-only imports and the line-count budget. Imports that resolve to a
+`.py` file in the same `scripts/` directory are permitted under Pattern 9 — reaching
+into a *different* skill's directory stays an error. Verify both behaviours with the
+built-in fixtures before shipping a linter change:
+
+```bash
+python3 engineering/write-a-skill/scripts/skill_lint.py --selftest
+```
+
 ## Decision frameworks
 
 ### Where does this content go?
@@ -188,13 +200,14 @@ someone who just cloned the repo.
 ### The Cross-Skill Dependency
 **Mistake:** Writing "see the X skill for the scoring model" or importing a helper from `../other-skill/scripts/`.
 **Why it happens:** Duplication feels wrong to engineers, and DRY is a deeply trained instinct.
-**Instead:** Copy the helper. Skills are distributed as individual folders, so a cross-skill import is a broken package the moment someone extracts one directory. `standards/` is the only permitted outbound reference, because it applies to every skill everywhere.
+**Instead:** Copy the helper. Skills are distributed as individual folders, so a cross-skill import is a broken package the moment someone extracts one directory. A helper module inside the skill's *own* `scripts/` directory is fine — that ships with the folder. `standards/` is the only permitted outbound reference, because it applies to every skill everywhere.
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings, exit 1 on error |
+| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings, exit 1 on error. `--selftest` runs the built-in helper/dependency fixtures |
+| `scripts/lint_checks.py` | Helper library for `skill_lint.py` — rule set, frontmatter parser, SKILL.md and structure checks. No CLI by design |
 | `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed |
 | `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs |
 | `references/authoring-playbook.md` | Section-by-section guidance, worked description rewrites, and the content-routing rules |

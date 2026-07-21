@@ -120,9 +120,10 @@ with someone you respect.
    below 15% means you are filtering too early at capture time.
 
 ```bash
+mkdir -p build
 python3 personal-productivity/capture/scripts/capture_triage.py \
   --input personal-productivity/capture/assets/sample_capture_log.json \
-  --today 2026-07-21 --format json > triaged.json
+  --today 2026-07-21 --format json > build/triaged.json
 ```
 
 ## Decision frameworks

@@ -17,7 +17,8 @@ Usage:
 Input schema (see assets/sample_protocol.json for a complete example):
 {
   "title": str, "protocol_id": str, "phase": str,
-  "sections_present": [str],          # keys from REQUIRED_SECTIONS below
+  "sections_present": [str],          # keys from REQUIRED_SECTIONS, see
+                                      # protocol_rules.py
   "endpoints": [{"name", "role", "measure", "timepoint", "analysis_population"}],
   "eligibility": {"inclusion": [str], "exclusion": [str]},
   "statistics": {"sample_size_justified", "analysis_populations",
@@ -36,50 +37,22 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-# Protocol contents expected by ICH E6, normalised to short keys.
-REQUIRED_SECTIONS: dict[str, str] = {
-    "general_information": "Protocol ID, sponsor, investigators, sites",
-    "background": "Rationale, prior data, benefit-risk justification",
-    "objectives": "Primary and secondary objectives",
-    "design": "Trial design, randomisation, blinding, duration",
-    "eligibility": "Selection and withdrawal of subjects",
-    "treatment": "Treatment of subjects, dose, concomitant medication rules",
-    "efficacy_assessment": "Efficacy endpoints, methods, timing",
-    "safety_assessment": "Safety parameters, AE definitions and reporting",
-    "statistics": "Statistical methods, sample size, analysis populations",
-    "source_data_access": "Direct access to source data and documents",
-    "quality_control": "Quality control and quality assurance",
-    "ethics": "Ethics committee review, informed consent",
-    "data_handling": "Data handling and record keeping, retention period",
-    "financing_insurance": "Financing and insurance arrangements",
-    "publication_policy": "Publication policy",
-}
-
-VAGUE_MEASURE_TERMS = ("improvement", "benefit", "efficacy", "effectiveness",
-                       "response", "success", "outcome", "quality")
-PHASES_REQUIRING_DSMB = ("3", "III", "4", "IV")
-MAX_SAE_WINDOW_HOURS = 24
-
-
-@dataclass
-class Finding:
-    """A defect or gap detected in the protocol outline."""
-
-    severity: str
-    area: str
-    message: str
-
-
-class Findings(list):
-    """Accumulator for findings, so each check reads as one line per rule."""
-
-    def add(self, severity: str, area: str, message: str) -> None:
-        """Record one finding."""
-        self.append(Finding(severity, area, message))
+# What a protocol must contain lives in its own module so clinical and
+# regulatory readers can revise the domain content without touching the
+# traversal and reporting logic here. Same-skill sibling import.
+from protocol_rules import (
+    DISCLAIMER,
+    MAX_SAE_WINDOW_HOURS,
+    PHASES_REQUIRING_DSMB,
+    REQUIRED_SECTIONS,
+    SEVERITY_ORDER,
+    VAGUE_MEASURE_TERMS,
+    Finding,
+    Findings,
+)
 
 
 def check_sections(present: list[str]) -> Findings:
@@ -246,9 +219,7 @@ def audit(protocol: dict[str, Any]) -> dict[str, Any]:
         "severity_counts": counts,
         "findings": [{"severity": f.severity, "area": f.area, "message": f.message}
                      for f in findings],
-        "disclaimer": ("Structural and consistency check only. Not a regulatory "
-                       "review; requires qualified regulatory affairs and clinical "
-                       "sign-off before submission."),
+        "disclaimer": DISCLAIMER,
     }
 
 
@@ -262,8 +233,8 @@ def render_text(report: dict[str, Any]) -> str:
     lines.append(f"Findings: {counts.get('fail', 0)} fail, {counts.get('warn', 0)} warn")
     if not report["findings"]:
         lines.append("  none")
-    order = {"fail": 0, "warn": 1}
-    for f in sorted(report["findings"], key=lambda x: (order.get(x["severity"], 9), x["area"])):
+    for f in sorted(report["findings"],
+                    key=lambda x: (SEVERITY_ORDER.get(x["severity"], 9), x["area"])):
         lines.append(f"  [{f['severity'].upper():4}] {f['area']}: {f['message']}")
     lines.append("")
     lines.append(f"NOTE: {report['disclaimer']}")

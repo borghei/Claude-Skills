@@ -6,6 +6,7 @@ has requested a method before anyone has written the question down.
 
 ## 1. The selection sequence
 
+
 Work these in order. Skipping step 1 causes most method errors.
 
 1. **Write the question in interrogative form.** If it begins "should we," it is
@@ -26,6 +27,7 @@ Work these in order. Skipping step 1 causes most method errors.
 
 ## 2. Question types
 
+
 | Type | Form | What it needs |
 |------|------|---------------|
 | **Generative** | "How do people currently...?" | Depth. Small n, rich observation. |
@@ -42,6 +44,7 @@ affected — six people cannot represent a proportion. Surveys cannot tell you w
 — people confabulate reasons for their own behaviour with impressive fluency.
 
 ## 3. Method profiles
+
 
 ### Semi-structured interviews
 
@@ -170,6 +173,7 @@ affected — six people cannot represent a proportion. Surveys cannot tell you w
 
 ## 4. Sample size reasoning
 
+
 ### Qualitative: saturation, not statistics
 
 Qualitative sample size is governed by theme saturation — the point at which new
@@ -208,6 +212,7 @@ technically detectable.
 
 ## 5. Mixed-method combinations
 
+
 For decisions above the reversible-in-a-quarter bar, one method is not enough.
 The combinations that earn their cost:
 
@@ -225,6 +230,7 @@ a survey written from internal assumptions measures your assumptions.
 
 ## 6. Methods to be sceptical of
 
+
 | Method | Problem |
 |--------|---------|
 | **Focus groups** | Group dynamics dominate. One confident participant sets the tone and the rest converge. Individual interviews cost the same per participant and yield uncontaminated data. |
@@ -234,7 +240,106 @@ a survey written from internal assumptions measures your assumptions.
 | **Asking users to design** | People are reliable reporters of their experience and unreliable designers of solutions. |
 | **Internal-stakeholder "user" interviews** | Your colleagues' model of the user is not the user. Useful for surfacing internal assumptions to test — never as evidence about users. |
 
-## 7. Selection checklist
+## 7. Recruiting
+
+
+Recruiting is the constraint that decides whether a study happens, and it is
+consistently the last thing teams plan.
+
+### Sources ranked
+
+| Source | Speed | Quality | Bias risk |
+|--------|-------|---------|-----------|
+| **Own customers (in-product intercept)** | Fast | High | Skews to engaged, frequent users |
+| **Own customers (email to a segment)** | Moderate | High | Skews to responsive, satisfied users |
+| **Churned customer list** | Slow | Very high value | Hard to reach; worth several times a happy user |
+| **Sales pipeline (lost deals)** | Moderate | Very high value | Requires sales cooperation |
+| **B2B research panel** | Fast | Variable | Professional respondents; needs a trap item |
+| **Community or association list** | Slow | High | Skews to the engaged and vocal |
+| **Personal and colleague networks** | Fast | Low for research | Strong social-desirability bias; avoid |
+
+**[PROVEN]** The highest-value participants are the hardest to recruit: churned
+users, lost deals, and people who evaluated you and chose otherwise. Budget more
+per session for them. A single lost-deal conversation frequently outweighs three
+sessions with satisfied power users, because satisfied users cannot tell you why
+anyone leaves.
+
+### Incentives
+
+Set the incentive against the participant's time value, not against a standard
+rate. Under-incentivising hard-to-reach audiences does not save money; it means
+the study does not field.
+
+| Audience | Relative incentive |
+|----------|-------------------|
+| Consumer, 30 minutes | Baseline |
+| Professional, 60 minutes | 3-5x baseline |
+| Senior professional or clinician | 8-15x baseline |
+| Own customers with a stake in the outcome | Often lower; some decline entirely |
+
+Where incentives are prohibited (some public sector, some clinical contexts),
+offer a charitable donation or early access to findings.
+
+## 8. Sequencing a discovery programme
+
+
+For a new problem space, this order reliably wastes the least money:
+
+1. **Mine what you already own** (1-3 days) — tickets, sales calls, churn
+   surveys, session replays. Free, immediate, and it sharpens everything after.
+2. **Instrument and measure** (2-5 days) — establish what is happening and at
+   what scale. Now you know which segment matters.
+3. **Interview for the why** (1-2 weeks) — 6-8 sessions in the segment the data
+   pointed at.
+4. **Size the finding** (1-2 weeks, optional) — survey if the decision needs a
+   proportion rather than a mechanism.
+5. **Test the solution** (ongoing) — experiment or usability test.
+
+Skipping step 1 is the most common and most expensive error. Skipping step 2 leads
+to interviewing the wrong segment thoroughly.
+
+## 9. Reading a method's weaknesses
+
+
+Every method has a structural blind spot. Know each one before you cite the result.
+
+| Method | Blind spot |
+|--------|-----------|
+| Interviews | Says nothing about prevalence. Six people cannot represent a proportion. |
+| Usability tests | Measures learnability in an artificial task, not sustained real use |
+| Surveys | Captures stated attitude, not behaviour; non-response bias exceeds sampling error |
+| Experiments | Cannot explain why; measures only the variants you thought to build |
+| Analytics | Silent on people who never arrived, and on why anyone did anything |
+| Support tickets | Only problems severe enough to complain about; systematically silent majority |
+| Sales calls | Filtered through what the prospect will admit to a salesperson |
+| Diary studies | Heavy attrition; self-report quality declines over the study |
+
+The practical consequence: **any decision resting on a single method inherits
+that method's blind spot unexamined.** For decisions above the
+reversible-in-a-quarter bar, pair methods whose blind spots differ — which is
+what "mixed methods" actually means in practice.
+
+## 10. Communicating method limits
+
+
+A finding is only as good as the audience's understanding of its limits. Three
+sentences belong in every readout:
+
+1. **Who was in the sample** — "8 support leads at companies with 200+ employees,
+   all existing customers, recruited by email."
+2. **Who was not** — "No churned customers and no companies under 200 employees.
+   Findings should not be extended to those groups."
+3. **What the method can and cannot establish** — "This tells us why agents
+   re-triage, not how many are affected. The prevalence question needs
+   instrumentation."
+
+Point 3 is the one that prevents the most downstream damage. Qualitative findings
+get quantified in retelling — "users re-triage constantly" becomes "most users
+re-triage" by the third meeting. Stating the limit explicitly in the readout is
+the only reliable defence, and it costs one sentence.
+
+## 11. Selection checklist
+
 
 - [ ] Question is written in interrogative form, not as a decision
 - [ ] Question is classified into one of the seven types

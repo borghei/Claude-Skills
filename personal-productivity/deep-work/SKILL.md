@@ -116,9 +116,10 @@ When you need a manager or team to concede structural change.
    what turns a one-off concession into a standing arrangement.
 
 ```bash
+mkdir -p build
 python3 personal-productivity/deep-work/scripts/calendar_fragmentation.py \
   --input personal-productivity/deep-work/assets/sample_calendar_manager_4weeks.json \
-  --target 0.40 --format json > fragmentation.json
+  --target 0.40 --format json > build/fragmentation.json
 ```
 
 ## Decision frameworks

@@ -240,8 +240,10 @@ integrity even when nothing is acted on.
 
 | File | Purpose |
 |------|---------|
-| `scripts/sample_size_calculator.py` | Sample size and power for two-proportion, two-mean, and log-rank designs, with dropout inflation |
+| `scripts/sample_size_calculator.py` | Sample size and power CLI: input validation, dropout inflation, planning warnings, and reporting |
+| `scripts/power_formulas.py` | Design formulas imported by `sample_size_calculator.py`: the two-proportion, two-mean (with t-correction), and log-rank sample-size calculations, the achieved-power inversions, and the method notes reported with every result. Edit here to revise the statistics |
 | `scripts/protocol_auditor.py` | Audits a protocol outline against ICH E6 elements, endpoint definitions, and eligibility consistency |
+| `scripts/protocol_rules.py` | Rule definitions imported by `protocol_auditor.py`: the ICH E6 required-section table and its guidance strings, vague-measure and DSMB-phase thresholds, the SAE reporting window, severity ordering, and the finding accumulator. Edit here to revise what the audit expects |
 | `scripts/site_feasibility_scorer.py` | Discounts site accrual estimates and tests the network against the enrolment target |
 | `references/protocol-and-endpoint-design.md` | ICH E6 protocol contents, endpoint hierarchies, eligibility design, estimand framing |
 | `references/statistical-planning.md` | Formulas, worked examples, design effects, interim analysis, and when to escalate to a statistician |

@@ -23,7 +23,7 @@
     },
     "data-analytics": {
       "count": 6,
-      "tools": 19
+      "tools": 20
     },
     "documents": {
       "count": 4,
@@ -31,7 +31,7 @@
     },
     "engineering": {
       "count": 91,
-      "tools": 258
+      "tools": 261
     },
     "finance": {
       "count": 3,
@@ -55,7 +55,7 @@
     },
     "personal-productivity": {
       "count": 13,
-      "tools": 16
+      "tools": 17
     },
     "product-team": {
       "count": 13,
@@ -75,7 +75,7 @@
     },
     "research-ops": {
       "count": 4,
-      "tools": 12
+      "tools": 14
     },
     "sales-success": {
       "count": 5,
@@ -429,7 +429,7 @@
         "landing-zone",
         "posture-management"
       ],
-      "tools": 2,
+      "tools": 4,
       "has_references": true,
       "has_assets": true
     },
@@ -1731,7 +1731,7 @@
         "standards",
         "packaging"
       ],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
       "has_assets": true
     },
@@ -5572,7 +5572,7 @@
         "power-analysis",
         "experimentation"
       ],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
       "has_assets": true
     },
@@ -5989,7 +5989,7 @@
         "forecasting",
         "commitments"
       ],
-      "tools": 2,
+      "tools": 3,
       "has_references": true,
       "has_assets": true
     },
@@ -6279,7 +6279,7 @@
         "site-feasibility",
         "ich-gcp"
       ],
-      "tools": 3,
+      "tools": 5,
       "has_references": true,
       "has_assets": true
     },

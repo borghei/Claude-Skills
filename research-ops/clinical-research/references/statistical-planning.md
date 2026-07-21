@@ -12,6 +12,7 @@ formulas do not apply and a statistician is required.
 
 ## 1. When these formulas do NOT apply
 
+
 Escalate to a statistician immediately if any of the following is true. This is
 the most important section in this file.
 
@@ -31,6 +32,7 @@ the most important section in this file.
 | **Multi-arm trials** | Both multiplicity and allocation strategy change the calculation. |
 
 ## 2. Two independent proportions
+
 
 For a binary endpoint compared between two arms, with allocation ratio
 k = n_treatment / n_control:
@@ -80,29 +82,56 @@ control rate estimate is uncertain and near 0.5, size for the worst case.
 For a continuous endpoint:
 
 ```
-n_control = (1 + 1/k) * (z_(1-α/s) + z_(1-β))^2 * σ^2 / δ^2
+n_control = (1 + 1/k) * (z_(1-α/s) + z_(1-β))^2 * σ^2 / δ^2   + z_(1-α/s)^2 / 4
 ```
+
+### The t-correction
+
+The first term is the normal approximation. A t-test must **estimate** the
+variance rather than assume it known, so it needs marginally more participants.
+The `+ z²/4` term is the conventional closed-form correction for this.
+
+For α = 0.05 it adds 0.96 — effectively one participant per arm. That sounds
+trivial, and the reason to include it is not statistical but practical: study
+planners cross-check sample sizes against a stats package, and an unexplained
+one-per-arm discrepancy costs a round of correspondence. The correction tracks a
+full noncentral-t calculation to within 0.05 across the usual range.
+
+The calculator applies it to the two-mean design only. It does not apply to
+two-proportion (a z-test is correct there) or to log-rank.
+
+> The **power** figure the calculator reports for a *planned* n still uses the
+> normal approximation, because a t-based power calculation needs the noncentral
+> t distribution, which is not in the Python standard library. That figure is
+> therefore marginally optimistic — by well under a percentage point at
+> realistic sample sizes. The tool states this in its `method_note`.
 
 ### Worked example
 
 δ = 4.0, σ = 12.0, α = 0.05 two-sided, power = 80%, k = 1.
 
 - (z + z)² = (1.960 + 0.842)² = 7.849
-- n = 2 × 7.849 × 144 / 16 = **142 per group**
+- normal approximation = 2 × 7.849 × 144 / 16 = 141.28
+- t-correction = 1.960² / 4 = 0.96
+- n = ⌈142.24⌉ = **143 per group**
 
 ### Standardised effect size shortcut
 
 With equal allocation, α = 0.05 two-sided, the required n per group is
-approximately `15.7 / d²` at 80% power and `21.0 / d²` at 90%, where d = δ/σ.
+approximately `15.7 / d² + 1` at 80% power and `21.0 / d² + 1` at 90%,
+where d = δ/σ.
 
-| d (δ/σ) | n per group, 80% | n per group, 90% |
-|---------|------------------|------------------|
-| 0.20 | 393 | 526 |
-| 0.30 | 175 | 234 |
-| 0.35 | 129 | 172 |
-| 0.40 | 99 | 132 |
-| 0.50 | 63 | 85 |
-| 0.80 | 25 | 33 |
+| d (δ/σ) | 80% power | 90% power |
+|---------|-----------|-----------|
+| 0.20 | 394 | 527 |
+| 0.30 | 176 | 235 |
+| 0.35 | 130 | 173 |
+| 0.40 | 100 | 133 |
+| 0.50 | 64 | 86 |
+| 0.80 | 26 | 34 |
+
+These are t-corrected and match a standard statistical package. Subtract one per
+arm for the raw normal-approximation figure.
 
 **Going from 80% to 90% power costs about 34% more participants.** That is
 usually a better use of budget than it looks, because an under-powered negative
@@ -115,6 +144,7 @@ under-powers the study. Add roughly 10-15% to n, or use an upper confidence
 bound on σ rather than the point estimate.
 
 ## 4. Time-to-event (log-rank)
+
 
 Time-to-event designs are driven by the **number of events**, not the number of
 participants. Enrolment is only the means of generating events.
@@ -190,6 +220,7 @@ substantially, at the cost of a longer study. Model both before defaulting to
 
 ## 5. Dropout inflation
 
+
 ```
 n_enrol = n_analysed / (1 - dropout_rate)
 ```
@@ -214,6 +245,7 @@ discontinuation.
 
 ## 6. Design effect for clustering
 
+
 If randomisation is at a cluster level (site, ward, practice) but the endpoint is
 measured on individuals:
 
@@ -236,6 +268,7 @@ randomises anything other than individual participants, this applies to you.
 
 ## 7. Interim analyses
 
+
 Repeated significance testing on accumulating data inflates type I error:
 
 | Unadjusted looks | Actual type I error (nominal 0.05) |
@@ -257,7 +290,128 @@ in common use:
 Futility monitoring is separate from efficacy monitoring and does not inflate
 type I error, but it does reduce power. Both must be pre-specified.
 
-## 8. Planning checklist
+## 8. Non-inferiority and equivalence
+
+
+A superiority trial asks whether the new treatment is better. A non-inferiority
+trial asks whether it is not meaningfully worse — usually because it offers some
+other advantage (cheaper, safer, easier to administer).
+
+These designs differ from superiority in ways that catch people out:
+
+| Aspect | Superiority | Non-inferiority |
+|--------|-------------|-----------------|
+| Hypothesis | Difference ≠ 0 | Difference within margin M |
+| Margin | Not applicable | Must be pre-specified and clinically justified |
+| Primary population | ITT | **Both** ITT and per-protocol; conclusions must agree |
+| Effect of sloppiness | Biases toward the null (harder to show an effect) | Biases toward the alternative (easier to falsely conclude non-inferiority) |
+| Typical sample size | Baseline | Usually larger, often much larger |
+
+The reversal in the third and fourth rows is the important part. In a superiority
+trial, poor conduct makes it harder to find an effect. In a non-inferiority
+trial, poor conduct — dropouts, non-compliance, measurement error — pushes the
+arms together and makes non-inferiority *easier* to declare. Quality of conduct
+is therefore a stronger requirement, not a weaker one.
+
+The margin M cannot be chosen for convenience. It must be justified as the
+largest difference that would be clinically acceptable, referencing the effect
+size the active comparator itself demonstrated against placebo. A margin chosen
+to make the sample size affordable is the same failure as back-solved power.
+
+Sample size for non-inferiority replaces the effect size with the margin:
+
+```
+n_control = (1 + 1/k) * (z_(1-α) + z_(1-β))^2 * σ^2 / M^2
+```
+
+Note that non-inferiority conventionally uses a one-sided α, typically 0.025.
+
+## 9. Multiplicity
+
+
+Every additional statistical comparison inflates the chance of a false positive.
+
+| Comparisons | P(at least one false positive) at α = 0.05 |
+|-------------|-------------------------------------------|
+| 1 | 0.05 |
+| 2 | 0.10 |
+| 5 | 0.23 |
+| 10 | 0.40 |
+| 20 | 0.64 |
+
+### Adjustment methods
+
+| Method | Mechanism | Notes |
+|--------|-----------|-------|
+| **Bonferroni** | α / number of comparisons | Simple, conservative, always valid |
+| **Holm** | Sequential Bonferroni | Uniformly more powerful than Bonferroni; no reason to prefer plain Bonferroni |
+| **Hierarchical (fixed-sequence)** | Test in pre-specified order; stop at first failure | **[RECOMMENDED]** No power loss, but the order must be pre-specified and a single early failure blocks everything after |
+| **Hochberg / Benjamini-Hochberg** | Controls false discovery rate | Appropriate for exploratory work, not for confirmatory claims |
+
+Multiplicity applies to secondary endpoints tested for claims, multiple
+treatment arms, multiple timepoints, and subgroup analyses. It does not apply to
+purely descriptive summaries or to exploratory endpoints labelled as such — but
+"exploratory" then genuinely means no efficacy claim may rest on it.
+
+## 10. Subgroup analyses
+
+
+Subgroup analyses are the most abused analysis in clinical research. A trial with
+ten subgroups has roughly a 40% chance of at least one spuriously significant
+subgroup effect even when the treatment has an identical effect everywhere.
+
+Discipline that keeps them useful:
+
+- **Pre-specify** every subgroup, in the protocol, with a rationale
+- **Test the interaction**, not the subgroup separately. A significant result in
+  one subgroup and not another is not evidence of a differential effect; only a
+  significant interaction term is
+- **Power is far lower** — a trial powered for the overall effect is
+  substantially under-powered for any subgroup
+- **Report all pre-specified subgroups**, including null results
+- **Label post-hoc subgroups as hypothesis-generating**, always, without exception
+
+## 11. Analysis-set and estimand interactions
+
+
+The sample size assumes an analysis population. Two adjustments follow:
+
+- **ITT with dropouts** — participants lost to follow-up contribute no endpoint
+  data. This is what the dropout inflation covers.
+- **Treatment-policy estimand** — participants who discontinue treatment are
+  still followed and analysed. Fewer participants are lost, so less inflation is
+  needed, but the observed effect is diluted by non-adherence, requiring a
+  smaller assumed effect size.
+
+These pull in opposite directions and are frequently confused. Decide the
+estimand first; the sample size follows from it, not the reverse.
+
+## 12. Reporting a sample size justification
+
+
+A protocol's sample-size paragraph must let a reviewer reproduce the number. It
+needs all of:
+
+1. The primary endpoint and its type
+2. The assumed control-arm value (rate, mean, or median survival) and its source
+3. The target effect size and why it is clinically meaningful
+4. Alpha, sidedness, and any multiplicity adjustment
+5. Target power
+6. Allocation ratio
+7. The assumed variance and its source
+8. Dropout rate and its source
+9. The resulting analysed n and enrolled n
+10. The software or formula used
+11. For time-to-event: required events, accrual period, follow-up period
+12. Statistician name and date
+
+Item 3 is the one reviewers challenge most and protocols justify least. "A 15%
+absolute improvement" is a number; "a 15% absolute improvement, which is the
+smallest difference clinicians in the steering committee agreed would change
+practice" is a justification.
+
+## 13. Planning checklist
+
 
 - [ ] Endpoint type identified: binary, continuous, time-to-event, or other
 - [ ] Effect size stated with its source, and discounted if from a different population

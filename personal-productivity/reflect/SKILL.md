@@ -230,7 +230,8 @@ resolution cycle, most immediate payoff in planning.
 
 | File | Purpose |
 |---|---|
-| `scripts/calibration_scorer.py` | Brier score, Murphy decomposition (exact — grouped on distinct forecast values), bucketed calibration table, per-domain breakdown, skill score vs base rate, worst-calls list, and `--selftest` asserting 11 scoring invariants |
+| `scripts/calibration_scorer.py` | CLI entry point: assembles the report (Brier, Murphy decomposition, calibration table, per-domain breakdown, skill score vs base rate, worst-calls list), renders text/JSON, and runs `--selftest` asserting 12 scoring invariants |
+| `scripts/calibration_core.py` | Scoring internals imported by `calibration_scorer.py`: log loading, record normalisation, Murphy decomposition (exact — grouped on distinct forecast values, independent of `--buckets`), bucketing, per-domain stats, and the significance thresholds |
 | `scripts/reflection_prompt_generator.py` | Cadence-specific prompt sets with per-commitment accountability prompts, keep-rate interpretation, and a closing requirement |
 | `references/calibration-and-forecasting.md` | Writing scoreable predictions, Brier and skill-score interpretation, Murphy decomposition, domain-specific bias table, correction protocols |
 | `references/reflection-cadences.md` | Daily/weekly/quarterly prompt sets, the boundary with the weekly operating review, three-cycle rule, keep-rate bands, what makes reflection fail |

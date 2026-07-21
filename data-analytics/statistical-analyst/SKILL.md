@@ -199,6 +199,7 @@ underpowered studies get written up as "no difference."
 |------|---------|
 | `scripts/test_selector.py` | Recommends one test from question type, outcome type, group structure, and distribution; returns assumptions, fallback, required sample size for a stated MDE, and design warnings |
 | `scripts/run_test.py` | Runs two-proportion z, Welch's t, chi-square, and Mann-Whitney with effect sizes, confidence intervals, Bonferroni-adjusted thresholds, and assumption warnings |
+| `scripts/test_impl.py` | The four test implementations behind `run_test.py`, with their effect-size magnitude readings; `--selftest` verifies each against a worked example |
 | `scripts/stats_core.py` | Normal, Student's t, and chi-square distributions plus the Wilson interval, in stdlib `math` only; `--selftest` verifies all 18 against published reference values |
 | `references/test-selection-and-assumptions.md` | Selection tree, which assumptions are load-bearing and how each fails, power formulas and sizing tables, multiple-comparison corrections, sequential testing |
 | `references/effect-sizes-and-communication.md` | Effect sizes per test with thresholds, interval choice and interpretation, language for non-statisticians, practical-vs-statistical significance, reporting checklist |

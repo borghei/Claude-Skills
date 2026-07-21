@@ -7,6 +7,7 @@ psychometrician.
 
 ## 1. Decide whether a survey is the right instrument
 
+
 Surveys measure **stated** attitudes and **recalled** behaviour. They do not
 measure future behaviour, and they measure past behaviour only as well as
 respondents remember it.
@@ -28,6 +29,7 @@ categories. Use intent only to **rank** options against each other within the
 same instrument, never as an absolute rate.
 
 ## 2. Sampling
+
 
 ### Frame
 
@@ -119,6 +121,7 @@ margin, changing mode, or abandoning the subgroup analysis.
 
 ## 3. Non-response bias
 
+
 Non-response bias is a larger threat than sampling error in almost every
 practical study, and unlike sampling error it does not shrink with sample size.
 
@@ -140,6 +143,7 @@ Mitigations, in order of effectiveness:
    above about 4x on any cell make the estimate unstable.
 
 ## 4. Question construction
+
 
 ### The core rule
 
@@ -215,6 +219,7 @@ or three per instrument and place them where the answer will actually be read.
 
 ## 5. Screening and quality control
 
+
 ### Screener design
 
 The screener qualifies respondents into the frame. Two failure modes:
@@ -250,6 +255,7 @@ reproducible.
 
 ## 6. Analysis discipline
 
+
 - **Report n for every figure**, including subgroup figures. A percentage
   without an n is not a finding.
 - **Report the margin of error** on headline figures, and the wider subgroup
@@ -264,7 +270,126 @@ reproducible.
   respondents said they would consider switching" is a defensible sentence.
   "62% of the market will switch" is not.
 
-## 7. Pre-field checklist
+## 7. Willingness-to-pay methods
+
+
+Direct WTP questions overstate realised price substantially. Where a pricing
+decision genuinely needs survey input, use a structured method.
+
+| Method | Mechanism | Strength | Weakness |
+|--------|-----------|----------|----------|
+| **Direct open WTP** | "What would you pay?" | Simple | Least reliable; anchors on nothing |
+| **Price ladder** | Would you buy at X? then X±step | Simple, gives a curve | Sensitive to the starting anchor |
+| **Van Westendorp** | Four price-perception questions | Gives an acceptable range, easy to field | Measures perception, not demand; no volume |
+| **Gabor-Granger** | Purchase intent at several prices | Yields a demand curve | Intent overstates purchase |
+| **Discrete choice / conjoint** | Forced choices among feature-price bundles | **[RECOMMENDED]** Best survey-based method; trade-offs are realistic | Complex to design and analyse |
+
+**[PROVEN]** No survey method beats observed behaviour. If you can test price in a
+live funnel, do that instead. Use survey WTP to narrow the range you will test,
+never to set the price.
+
+Whatever method you use, report WTP as a range with the method named. A single
+WTP figure without its method is uninterpretable.
+
+## 8. Instrument testing before field
+
+
+Never field an instrument that has not been through all three of these. Each
+catches problems the others do not.
+
+### Cognitive interviews (5-8 people from the target population)
+
+Have participants think aloud while answering. You are testing comprehension, not
+collecting data.
+
+- Do they interpret each item as intended?
+- Do they have the information the item asks for?
+- Does the response set contain their actual answer?
+- Ask them to restate each item in their own words — divergence from your intent
+  is the defect.
+
+This is the single highest-yield instrument test and the most frequently skipped.
+It routinely surfaces items where every respondent would have answered a
+different question than the one you thought you asked.
+
+### Soft launch (10% of target sample)
+
+Field to a small tranche, then stop and inspect before releasing the rest.
+
+- Completion rate and median duration against estimate
+- Drop-off point distribution — a spike marks the offending item
+- Straight-lining and speeding rates
+- Open-text quality — gibberish indicates a panel-quality problem
+- Whether screener qualification rates match expectation
+
+### Technical check
+
+- Every skip and display rule exercised
+- Piped text renders correctly in every branch
+- Mobile rendering — a large share of responses arrive on phones
+- Accessibility: keyboard navigation and screen-reader labels
+- Data export produces the variables the analysis plan needs
+
+That last item saves real pain. Discovering after fielding that a grid exported
+in a shape your analysis cannot use means re-coding under time pressure.
+
+## 9. Weighting
+
+
+Weighting corrects known imbalance between the sample and the frame. It cannot
+correct unknown imbalance, and it is frequently over-applied.
+
+Rules:
+
+- **Weight only on variables where you know the frame distribution.** Weighting to
+  a guess adds error while appearing to remove it.
+- **Weight on few variables.** Two or three. Each added variable creates smaller
+  cells and more extreme weights.
+- **Cap extreme weights.** Any respondent weighted above about 4x is
+  disproportionately driving the estimate. Cap and report the cap.
+- **Report both weighted and unweighted results.** A large divergence is itself a
+  finding about your sample.
+- **Report the effective sample size.** Weighting reduces it — sometimes
+  substantially — and the margin of error should be computed on the effective n,
+  not the raw count.
+
+That final point is routinely omitted. A weighted sample of 400 with an effective
+n of 260 has the margin of error of 260, and reporting the 400-based margin
+overstates precision.
+
+## 10. Reporting
+
+
+### What every survey report must state
+
+- Target population, frame, and known exclusions
+- Recruitment mode and dates fielded
+- Invitations sent, completes, and response rate
+- Screening exclusions with counts and reasons
+- Weighting variables, source of targets, and effective sample size
+- Margin of error at the headline level and for each reported subgroup
+- The instrument itself, as an appendix
+
+The instrument appendix is the one most often dropped and the one that makes the
+study reproducible. Any finding whose exact wording cannot be checked is a
+finding that cannot be properly evaluated.
+
+### Language discipline
+
+| Do not write | Write |
+|--------------|-------|
+| "62% of the market will switch" | "62% of respondents said they would consider switching" |
+| "Users want X" | "Respondents ranked X first among the five options presented" |
+| "Demand is strong" | "71% (±5%) reported the problem occurring at least weekly" |
+| "Segment A prefers B" | "Segment A ranked B higher than segment C did; the difference is outside the margin (n=140, n=155)" |
+
+The pattern: **name the respondents, not the market; name the stated behaviour,
+not the inferred intention; attach the n and the band to every number.** Survey
+findings drift toward overstatement in retelling, and precise language in the
+report is the only thing that slows it down.
+
+## 11. Pre-field checklist
+
 
 - [ ] The market decision this survey feeds is written at the top of the instrument
 - [ ] Target population, frame, and known exclusions are documented separately

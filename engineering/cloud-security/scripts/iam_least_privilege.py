@@ -16,52 +16,12 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Tuple
+from typing import Any, Dict, List
 
-SEVERITY_RANK = {"critical": 0, "high": 1, "medium": 2, "low": 3}
-SEVERITY_WEIGHT = {"critical": 40, "high": 20, "medium": 8, "low": 3}
-
-ADMIN_GRANTS = {"*", "*:*", "owner", "roles/owner", "roles/editor",
-                "microsoft.authorization/*", "contributor", "administrator"}
-WRITE_VERBS = ("create", "delete", "update", "put", "write", "modify", "attach",
-               "detach", "set", "remove", "terminate", "invoke")
-
-ESCALATION_PATHS: List[Dict[str, Any]] = [
-    {"name": "PassRole to compute",
-     "all_of": [["iam:passrole"],
-                ["ec2:runinstances", "lambda:createfunction", "ecs:runtask",
-                 "glue:createdevendpoint", "cloudformation:createstack"]],
-     "why": "The principal can hand an existing high-privilege role to a compute "
-            "resource it launches, then act as that role."},
-    {"name": "Managed-policy version rewrite",
-     "all_of": [["iam:createpolicyversion", "iam:setdefaultpolicyversion"]],
-     "why": "The principal can publish a new default version of any attached "
-            "policy, granting itself arbitrary permissions."},
-    {"name": "Self-attach admin policy",
-     "all_of": [["iam:attachuserpolicy", "iam:attachrolepolicy",
-                 "iam:putuserpolicy", "iam:putrolepolicy"]],
-     "why": "The principal can attach AdministratorAccess to itself."},
-    {"name": "Trust-policy rewrite",
-     "all_of": [["iam:updateassumerolepolicy"]],
-     "why": "The principal can make any role assumable by itself or an external "
-            "account."},
-    {"name": "Function code overwrite",
-     "all_of": [["lambda:updatefunctioncode"], ["iam:passrole"]],
-     "why": "The principal can replace the code of a function running under a "
-            "higher-privileged execution role."},
-    {"name": "Service-account impersonation",
-     "all_of": [["iam.serviceaccounts.actas", "iam.serviceaccounts.getaccesstoken",
-                 "iam.serviceaccountkeys.create"]],
-     "why": "The principal can mint credentials for a higher-privileged service "
-            "account."},
-    {"name": "Project IAM policy rewrite",
-     "all_of": [["resourcemanager.projects.setiampolicy",
-                 "resourcemanager.folders.setiampolicy"]],
-     "why": "The principal can grant itself any role on the project or folder."},
-    {"name": "Role-assignment write",
-     "all_of": [["microsoft.authorization/roleassignments/write"]],
-     "why": "The principal can assign itself Owner on any scope it can reach."},
-]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from iam_rules import (  # noqa: E402
+    SEVERITY_RANK, SEVERITY_WEIGHT, WRITE_VERBS, finding, granted_actions,
+    matched_escalations, privilege_tier)
 
 
 def load_export(path: Path) -> Dict[str, Any]:
@@ -82,53 +42,6 @@ def load_export(path: Path) -> Dict[str, Any]:
               file=sys.stderr)
         sys.exit(1)
     return data
-
-
-def granted_actions(principal: Dict[str, Any]) -> List[Tuple[str, List[str], Dict[str, Any]]]:
-    """Flatten a principal's allow statements into (action, resources, conditions)."""
-    flat: List[Tuple[str, List[str], Dict[str, Any]]] = []
-    for policy in principal.get("policies", []) or []:
-        for stmt in policy.get("statements", []) or []:
-            if str(stmt.get("effect", "allow")).lower() != "allow":
-                continue
-            resources = [str(r) for r in stmt.get("resources", ["*"])]
-            conditions = stmt.get("conditions", {}) or {}
-            for action in stmt.get("actions", []) or []:
-                flat.append((str(action).lower(), resources, conditions))
-    return flat
-
-
-def action_matches(granted: str, target: str) -> bool:
-    """Return True if a granted action pattern covers a specific target action."""
-    if granted in {"*", "*:*"}:
-        return True
-    if granted.endswith("*"):
-        return target.startswith(granted[:-1])
-    return granted == target
-
-
-def privilege_tier(actions: Iterable[Tuple[str, List[str], Dict[str, Any]]]) -> str:
-    """Classify a principal's effective privilege into a coarse tier."""
-    actions = list(actions)
-    for action, resources, _ in actions:
-        if action in ADMIN_GRANTS and any(r == "*" for r in resources):
-            return "admin"
-    if any(action in ADMIN_GRANTS for action, _, _ in actions):
-        return "admin-scoped"
-    broad_write = [a for a, res, _ in actions
-                   if any(v in a for v in WRITE_VERBS) and "*" in res]
-    if broad_write:
-        return "write-broad"
-    if any(a.endswith("*") for a, _, _ in actions):
-        return "write-scoped"
-    return "narrow"
-
-
-def finding(fid: str, severity: str, principal: str, title: str,
-            evidence: str, remediation: str) -> Dict[str, Any]:
-    """Build one normalized IAM finding record."""
-    return {"id": fid, "severity": severity, "principal": principal, "title": title,
-            "evidence": evidence, "remediation": remediation}
 
 
 def check_principal(principal: Dict[str, Any], stale_days: int) -> List[Dict[str, Any]]:
@@ -164,25 +77,13 @@ def check_principal(principal: Dict[str, Any], stale_days: int) -> List[Dict[str
                 "Add a resource scope, or at minimum a condition on tag, region, "
                 "or source network."))
 
-    # A principal that already holds unrestricted admin satisfies every path;
-    # reporting eight escalation findings on top of IAM-001 is noise, not signal.
-    has_full_admin = any(a in {"*", "*:*"} for a in action_set)
-    for path in [] if has_full_admin else ESCALATION_PATHS:
-        matched: List[str] = []
-        for group in path["all_of"]:
-            hit = next((granted for granted in action_set for target in group
-                        if action_matches(granted, target)), None)
-            if hit is None:
-                matched = []
-                break
-            matched.append(hit)
-        if matched:
-            out.append(finding(
-                "IAM-010", "critical", name,
-                f"Privilege-escalation path: {path['name']}",
-                f"granted via {' + '.join(matched)}",
-                f"{path['why']} Remove one leg of the path, or constrain it with a "
-                "permission boundary and a resource condition."))
+    for path, matched in matched_escalations(action_set):
+        out.append(finding(
+            "IAM-010", "critical", name,
+            f"Privilege-escalation path: {path['name']}",
+            f"granted via {' + '.join(matched)}",
+            f"{path['why']} Remove one leg of the path, or constrain it with a "
+            "permission boundary and a resource condition."))
 
     trust = principal.get("trust", {}) or {}
     trusted = [str(p) for p in trust.get("principals", []) or []]

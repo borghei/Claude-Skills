@@ -6,6 +6,7 @@ scrutiny.
 
 ## 1. The guide is a structure, not a script
 
+
 A semi-structured guide fixes the **topics and their order**, not the wording.
 Fixing the wording produces a survey administered aloud, which wastes the one
 thing an interview offers: the ability to follow a surprise.
@@ -22,6 +23,7 @@ What the guide must leave free: everything else. Moderators should feel licensed
 to spend ten minutes on an unplanned thread if it is producing new information.
 
 ## 2. Guide structure
+
 
 ### Warm-up (3-5 minutes)
 
@@ -102,6 +104,7 @@ guide, and it costs nothing.
 
 ## 3. Probing
 
+
 The core probes, in order of usefulness:
 
 | Probe | Use |
@@ -129,6 +132,7 @@ The core probes, in order of usefulness:
 
 ## 4. Running the session
 
+
 - **Two people per session** where possible: one moderates, one takes notes and
   tracks which guide topics remain uncovered.
 - **Record with explicit consent**, and say what will happen to the recording,
@@ -143,6 +147,7 @@ The core probes, in order of usefulness:
   guessing at it.
 
 ## 5. Synthesis
+
 
 ### Sequence
 
@@ -204,6 +209,7 @@ all of them equally, including the well-evidenced ones.
 
 ## 6. The readout
 
+
 Structure that survives an executive audience:
 
 1. **The decision this informs** — one line, at the top
@@ -218,7 +224,114 @@ Section 7 is the one most often cut and the one that most protects the work. If
 your sample was all power users, saying so explicitly prevents the finding from
 being over-applied six months later by someone who never read the method.
 
-## 7. Session checklist
+## 7. Remote and in-person sessions
+
+
+| Factor | Remote | In-person |
+|--------|--------|-----------|
+| Recruiting reach | Wide — geography is not a constraint | Narrow |
+| Cost per session | Low | High once travel is counted |
+| Observing the environment | Poor — you see what the camera shows | Excellent |
+| Artefact discovery | Weak; you must ask | Strong; you notice |
+| Rapport | Adequate; slower to build | Stronger |
+| Scheduling | Easy | Hard |
+
+**[RECOMMENDED]** Default to remote for interviews and in-person for contextual
+inquiry. Remote is good enough for narrative and cheap enough to do more of;
+contextual inquiry loses its central advantage — seeing the environment and the
+artefacts people never mention — when mediated by a webcam.
+
+For remote sessions specifically:
+
+- Ask participants to share their screen and walk through the real thing rather
+  than describing it. A screen share recovers much of what remote loses.
+- Send the consent form in advance and confirm verbally at the start.
+- Budget five minutes for setup problems in every session, and have a phone
+  fallback ready.
+- Watch for the participant reading their own notes. Prepared answers are a sign
+  the invitation revealed too much about what you wanted to hear.
+
+## 8. Ethics and participant care
+
+
+Discovery research puts you in contact with people's working lives and sometimes
+their difficulties. Three obligations:
+
+1. **Informed consent that is actually informed.** Say what the session is for,
+   who will see the recording, how long it is kept, and that they may stop at any
+   time. Consent obtained by reading a paragraph quickly is not consent.
+2. **Data minimisation.** Do not collect personal data you do not need. If you
+   need it for scheduling only, delete it after the session. Store recordings
+   with access limited to the people who need them.
+3. **Do no harm in the writeup.** Participants can be identifiable from role
+   plus company plus a distinctive quote even without a name. Aggregate, and
+   check with fresh eyes whether any single participant is identifiable.
+
+If a participant discloses distress, harassment, or wrongdoing, stop the research
+frame. Do not probe it for insight. Acknowledge it, offer to pause or end, and
+follow whatever escalation path your organisation has.
+
+## 9. Building a continuous cadence
+
+
+Project-based research produces bursts of insight separated by long silences.
+Continuous discovery produces a steady flow that keeps decisions evidenced.
+
+A workable weekly rhythm:
+
+| Cadence | Activity | Owner |
+|---------|----------|-------|
+| Weekly | 2-3 participant conversations | Rotating: PM, designer, engineer |
+| Weekly | 30-minute synthesis session | Whole trio |
+| Fortnightly | Update the opportunity map | PM |
+| Monthly | Review which decisions used evidence | PM + lead |
+| Quarterly | Retire stale insights | Whole team |
+
+Four things make it survive contact with a real roadmap:
+
+- **A standing recruiting pipeline.** The reason continuous discovery stops is
+  always recruiting. Keep a rolling pool with participants scheduled two weeks
+  ahead so a busy week does not break the chain.
+- **Engineers in sessions.** An engineer who has watched three users struggle
+  needs no persuading later. This is the highest-return habit available and the
+  first one dropped under delivery pressure.
+- **A shared repository.** Insights that live in one person's notes are lost when
+  they change team. Tag by theme and by decision so they are findable later.
+- **A staleness policy.** Insights decay. Anything older than about 12 months
+  should be re-validated before it is cited, and anything about a flow that has
+  since changed should be retired outright.
+
+## 10. Handling difficult sessions
+
+
+| Situation | Response |
+|-----------|----------|
+| **Participant gives one-word answers** | Slow down. Go back to a concrete past event and walk the timeline step by step. Silence helps more than another question. |
+| **Participant wants to give feedback on your product** | Note it, thank them, redirect: "That's useful — before we get there, can you tell me how you handle it today?" |
+| **Participant is clearly the wrong fit** | Continue politely and briefly, pay the incentive, exclude from analysis, and fix the screener. Never make them feel they failed a test. |
+| **Participant is a colleague's contact and is performing** | Acknowledge the relationship openly and say that critical feedback is the useful kind. |
+| **A senior stakeholder joins and starts pitching** | Agree the rules before the session: observers stay muted and ask questions only at the end. Enforce it. |
+| **Participant becomes upset about a work situation** | Stop the research frame. Offer to pause or stop. Do not mine it. |
+| **You realise mid-session the question is wrong** | Change it. That is what semi-structured means. Note the change for the next session. |
+
+## 11. Common synthesis errors
+
+
+| Error | Why it happens | Correction |
+|-------|---------------|------------|
+| **Counting statements rather than participants** | One talkative participant produces many quotes | Count distinct participants per theme |
+| **Theming by topic rather than by behaviour** | Topics are easier to name | Group by underlying behaviour and cause |
+| **Losing the negative cases** | They complicate a clean story | Report them; a theme with three exceptions out of eight is not a pattern |
+| **Promoting an inference to a finding** | The inference feels obvious after ten sessions | Keep the evidence-kind tag through to the readout |
+| **Synthesising too early** | Pressure to report after session three | Do not synthesise before four sessions in a segment |
+| **Anchoring on the first session** | It was the most surprising | Re-read the first session's notes last, after the themes are set |
+
+That final trick is worth adopting as habit. The first session disproportionately
+shapes how every later one is heard; re-reading it at the end, against themes
+built from the others, reliably surfaces where you over-fitted to it.
+
+## 12. Session checklist
+
 
 **Before**
 - [ ] Guide has topics and probes, not a fixed script
