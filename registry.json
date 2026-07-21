@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T12:29:54+00:00",
+  "generated_at": "2026-07-21T12:47:54+00:00",
   "repository": "claude-skills",
   "skill_count": 368,
   "domain_count": 20,
@@ -4910,7 +4910,7 @@
     {
       "name": "reflect",
       "domain": "personal-productivity",
-      "description": "Turn reflection into decisions by scoring predictions against outcomes and tracking whether commitments held. Use for quarterly review, calibration scoring, or when reflection keeps producing notes instead of change.",
+      "description": "Turn reflection into decisions by scoring predictions against outcomes and tracking whether commitments held. Use when running a quarterly review, scoring forecast calibration, or reflection keeps producing notes instead of change.",
       "tags": [
         "reflection",
         "calibration",

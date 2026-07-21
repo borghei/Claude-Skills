@@ -2,8 +2,8 @@
 name: reflect
 description: >
   Turn reflection into decisions by scoring predictions against outcomes and
-  tracking whether commitments held. Use for quarterly review, calibration
-  scoring, or when reflection keeps producing notes instead of change.
+  tracking whether commitments held. Use when running a quarterly review, scoring
+  forecast calibration, or reflection keeps producing notes instead of change.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0

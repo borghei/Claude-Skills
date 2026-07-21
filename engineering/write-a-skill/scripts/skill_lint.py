@@ -44,6 +44,8 @@ SELFTEST_CASES = (
     ("sibling helper import is not a dependency", "tool.py: non-stdlib import 'helper'", False),
     ("helper needs no argparse CLI", "helper.py: no argparse CLI", False),
     ("helper needs no __main__ guard", "helper.py: missing __main__ guard", False),
+    ("helper is exempt from the line floor", "helper.py: 7 lines (under", False),
+    ("entry-point tool still hits the line floor", "tool.py: 12 lines (under", True),
     ("third-party import still errors", "rogue.py: non-stdlib import 'requests'", True),
     ("cross-skill import still errors", "reacher.py: relative import", True),
 )
@@ -93,11 +95,15 @@ def check_scripts(skill: Path, rules: Dict[str, Any]) -> List[Finding]:
     for script in scripts:
         text = texts[script]
         count = len(text.splitlines())
-        if count < rules["script_min_lines"]:
+        is_helper = script.stem in helpers and MAIN_GUARD not in text
+        # The floor exists to catch thin-wrapper *tools* that add nothing a user
+        # could not do by hand. A helper is sized by the thing it holds — a
+        # complete 75-line rule table is not missing functionality. The ceiling
+        # still applies: an oversized helper should be split like anything else.
+        if count < rules["script_min_lines"] and not is_helper:
             out.append(Finding("P7", "warn", f"{script.name}: {count} lines (under {rules['script_min_lines']})"))
         if count > rules["script_max_lines"]:
             out.append(Finding("P7", "error", f"{script.name}: {count} lines (over {rules['script_max_lines']})"))
-        is_helper = script.stem in helpers and MAIN_GUARD not in text
         for token, severity, label in (() if is_helper else CLI_CHECKS):
             if token not in text:
                 out.append(Finding("P7", severity, f"{script.name}: {label}"))
@@ -120,7 +126,10 @@ def run_selftest() -> Dict[str, Any]:
         scripts.mkdir(parents=True)
         for name, body in SELFTEST_FILES.items():
             (scripts / name).write_text(body, encoding="utf-8")
-        found = [f.message for f in check_scripts(Path(tmp), DEFAULT_RULES) if f.severity == "error"]
+        # Collect every severity: some behaviour under test (the line floor, the
+        # --format flag) is reported as a warning, and filtering to errors here
+        # would silently make those cases unfalsifiable.
+        found = [f.message for f in check_scripts(Path(tmp), DEFAULT_RULES)]
     cases = [{"case": label, "expected": expected, "passed": any(needle in m for m in found) == expected}
              for label, needle, expected in SELFTEST_CASES]
     passed = all(case["passed"] for case in cases)
