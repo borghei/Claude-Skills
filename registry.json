@@ -1,11 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-06-29T18:59:10+00:00",
+  "generated_at": "2026-07-21T12:06:36+00:00",
   "repository": "claude-skills",
-  "skill_count": 343,
-  "domain_count": 17,
+  "skill_count": 368,
+  "domain_count": 20,
   "domains": [
     "business-growth",
+    "business-operations",
     "c-level-advisor",
     "data-analytics",
     "documents",
@@ -13,12 +14,14 @@
     "finance",
     "hr-operations",
     "legal",
+    "markdown-html",
     "marketing",
     "personal-productivity",
     "product-team",
     "project-management",
     "ra-qm-team",
     "research",
+    "research-ops",
     "sales-success",
     "vertical-advisors",
     "workflow"
@@ -50,6 +53,23 @@
       "updated": "2026-06-17",
       "path": "engineering/agent-designer",
       "has_scripts": false,
+      "has_references": true
+    },
+    {
+      "name": "agent-harness",
+      "domain": "engineering",
+      "description": "Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression diffing, cost and latency budgets. Use when agent quality is vibe-checked, before shipping a prompt or model change, or when evals drift.",
+      "tags": [
+        "agent-eval",
+        "regression-testing",
+        "harness",
+        "replay",
+        "llm-testing"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "engineering/agent-harness",
+      "has_scripts": true,
       "has_references": true
     },
     {
@@ -276,6 +296,23 @@
       "has_references": true
     },
     {
+      "name": "cloud-security",
+      "domain": "engineering",
+      "description": "Cloud posture security across AWS, Azure, and GCP — IAM least privilege, public exposure, encryption, logging coverage, landing-zone guardrails. Use when auditing a cloud account, before a production launch, or after a scan.",
+      "tags": [
+        "cloud-security",
+        "iam",
+        "least-privilege",
+        "landing-zone",
+        "posture-management"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "engineering/cloud-security",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "code-reviewer",
       "domain": "engineering",
       "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.",
@@ -288,6 +325,23 @@
       "version": "1.1.0",
       "updated": "2026-06-17",
       "path": "engineering/code-reviewer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "code-tour",
+      "domain": "engineering",
+      "description": "Build ordered, annotated tours of an unfamiliar codebase and keep the anchors from rotting. Use when onboarding an engineer, handing off a service, or explaining a subsystem before a review.",
+      "tags": [
+        "onboarding",
+        "code-reading",
+        "documentation",
+        "developer-experience",
+        "handoff"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "engineering/code-tour",
       "has_scripts": true,
       "has_references": true
     },
@@ -1207,6 +1261,23 @@
       "has_references": true
     },
     {
+      "name": "spec-driven-workflow",
+      "domain": "engineering",
+      "description": "Run development from an executable specification with traceable requirement IDs and merge-time coverage gates. Use when starting a greenfield feature, reviving a stale spec, or gating merges on requirement coverage.",
+      "tags": [
+        "specification",
+        "requirements",
+        "traceability",
+        "acceptance-criteria",
+        "process"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "engineering/spec-driven-workflow",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "sql-database-assistant",
       "domain": "engineering",
       "description": "This skill should be used when the user asks to \"optimize SQL queries\", \"explore database schemas\", \"generate migration SQL\", \"analyze query performance\", or \"document database structure\".",
@@ -1307,6 +1378,23 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "path": "engineering/threat-detection",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "write-a-skill",
+      "domain": "engineering",
+      "description": "Author, lint, and publish skill packages that satisfy the library authoring standard. Use when creating a new skill, reviewing a skill PR, or fixing one that never activates.",
+      "tags": [
+        "authoring",
+        "meta-skill",
+        "linting",
+        "standards",
+        "packaging"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "engineering/write-a-skill",
       "has_scripts": true,
       "has_references": true
     },
@@ -3969,6 +4057,23 @@
       "has_references": true
     },
     {
+      "name": "meeting-analyzer",
+      "domain": "project-management",
+      "description": "Turn meeting notes into an accountable register — extract decisions, actions and open questions, flag ownerless items, track follow-through. Use when commitments get dropped or a recurring meeting decides nothing.",
+      "tags": [
+        "meeting-notes",
+        "action-items",
+        "accountability",
+        "decision-log",
+        "meeting-health"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "project-management/meeting-analyzer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "notion-pm",
       "domain": "project-management",
       "description": "Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.",
@@ -4124,6 +4229,24 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "path": "project-management/strategy-frameworks/swot-analysis",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "team-communications",
+      "domain": "project-management",
+      "description": "Design a delivery team's communication system — channel routing, meeting-load reduction, status structure, escalation SLAs, timezone norms. Use when the calendar is full, updates go unread, or blockers surface late.",
+      "tags": [
+        "async",
+        "meeting-load",
+        "status-updates",
+        "escalation",
+        "timezones",
+        "team-operations"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "project-management/team-communications",
       "has_scripts": true,
       "has_references": true
     },
@@ -4437,6 +4560,23 @@
       "has_references": false
     },
     {
+      "name": "statistical-analyst",
+      "domain": "data-analytics",
+      "description": "Applied statistics for business and product questions — test selection, assumption checks, power planning, effect sizes with intervals, multiplicity correction. Use when interpreting an experiment, sizing a study, or vetting a claim.",
+      "tags": [
+        "statistics",
+        "hypothesis-testing",
+        "effect-size",
+        "power-analysis",
+        "experimentation"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "data-analytics/statistical-analyst",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "account-executive",
       "domain": "sales-success",
       "description": "Sales execution across pipeline, discovery, demos, negotiation, and closing. Use when qualifying opportunities, running MEDDIC discovery, building account plans, handling objections, structuring proposals, or forecasting pipeline.",
@@ -4657,6 +4797,40 @@
       "has_references": true
     },
     {
+      "name": "capture",
+      "domain": "personal-productivity",
+      "description": "Build a trusted capture-and-triage front door so no commitment lives in your head. Use when open loops keep slipping, an inbox has become a backlog, or vague notes never turn into action.",
+      "tags": [
+        "capture",
+        "triage",
+        "inbox-zero",
+        "next-action",
+        "gtd"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "personal-productivity/capture",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "deep-work",
+      "domain": "personal-productivity",
+      "description": "Protect, design, and measure focused work — block defence, session structure, interruption budgets, and deep-work ratio. Use when the calendar is fragmented, focus blocks keep getting eaten, or output has stalled.",
+      "tags": [
+        "deep-work",
+        "focus",
+        "calendar",
+        "fragmentation",
+        "interruptions"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "personal-productivity/deep-work",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "domain-name-brainstormer",
       "domain": "personal-productivity",
       "description": "Generate and score candidate brand, product, and domain names for memorability and pronounceability. Use when naming a new product, company, or feature, brainstorming brand names, or finding an available .com.",
@@ -4730,6 +4904,23 @@
       "version": "1.0.0",
       "updated": "2026-05-04",
       "path": "personal-productivity/pitch-deck-reviewer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "reflect",
+      "domain": "personal-productivity",
+      "description": "Turn reflection into decisions by scoring predictions against outcomes and tracking whether commitments held. Use for quarterly review, calibration scoring, or when reflection keeps producing notes instead of change.",
+      "tags": [
+        "reflection",
+        "calibration",
+        "brier-score",
+        "forecasting",
+        "commitments"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "personal-productivity/reflect",
       "has_scripts": true,
       "has_references": true
     },
@@ -4948,6 +5139,254 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "path": "research/patent",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "clinical-research",
+      "domain": "research-ops",
+      "description": "Clinical study operations — protocol structure, endpoint selection, eligibility design, sample-size and power planning, site feasibility, and documentation readiness. Use when planning, auditing, or costing a study.",
+      "tags": [
+        "protocol",
+        "endpoints",
+        "sample-size",
+        "power",
+        "site-feasibility",
+        "ich-gcp"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "research-ops/clinical-research",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "market-research",
+      "domain": "research-ops",
+      "description": "Market sizing and market structure work — TAM/SAM/SOM built top-down and bottom-up then reconciled, segmentation, demand triangulation, and survey design. Use when sizing a market, writing a sizing memo, or fielding a survey.",
+      "tags": [
+        "tam",
+        "sam",
+        "som",
+        "market-sizing",
+        "segmentation",
+        "survey-design",
+        "demand"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "research-ops/market-research",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "product-research",
+      "domain": "research-ops",
+      "description": "Continuous product discovery research operations — picking the method that fits the question, recruiting and screening participants, building interview guides, and scoring evidence into insights. Use when planning or running discovery.",
+      "tags": [
+        "discovery",
+        "user-research",
+        "interviews",
+        "screener",
+        "synthesis",
+        "research-ops"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "research-ops/product-research",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "research-finance",
+      "domain": "research-ops",
+      "description": "Research budgeting and funding operations — study budget construction, cost per participant and per insight, burn against milestones, and portfolio prioritisation by decision value. Use when costing, tracking, or ranking research.",
+      "tags": [
+        "budget",
+        "burn-rate",
+        "earned-value",
+        "portfolio",
+        "funding",
+        "cost-per-insight"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "research-ops/research-finance",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "capacity-planner",
+      "domain": "business-operations",
+      "description": "Headcount and delivery-capacity planning — effective capacity from raw headcount, hire/contract/defer scenarios, and capacity-vs-commitment gap reports. Use when planning a quarter, sizing a hiring ask, or testing whether a roadmap fits.",
+      "tags": [
+        "capacity-planning",
+        "headcount",
+        "resource-planning",
+        "hiring",
+        "forecasting"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/capacity-planner",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "internal-comms",
+      "domain": "business-operations",
+      "description": "Plan, sequence, and pressure-test internal announcements before they send. Use when announcing a reorg, policy, or product change, drafting an all-hands or exec update, or deciding who hears what and in which order.",
+      "tags": [
+        "internal-comms",
+        "change-management",
+        "announcements",
+        "all-hands",
+        "stakeholder-sequencing"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/internal-comms",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "knowledge-ops",
+      "domain": "business-operations",
+      "description": "Audit and repair an internal knowledge base — staleness, ownership gaps, orphans, duplication, and findability. Use when the wiki is untrusted, docs are out of date, nobody owns pages, or search returns the wrong answer.",
+      "tags": [
+        "knowledge-base",
+        "documentation",
+        "information-architecture",
+        "doc-ownership",
+        "findability"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/knowledge-ops",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "process-mapper",
+      "domain": "business-operations",
+      "description": "Map, measure and improve business processes — SIPOC and swimlane capture, cycle-time and bottleneck analysis, handoff diagnosis, and a payback-ranked improvement backlog. Use when a process is slow, error-prone, or crosses too many teams.",
+      "tags": [
+        "process-mapping",
+        "lean",
+        "cycle-time",
+        "bottleneck",
+        "continuous-improvement"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/process-mapper",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "procurement-optimizer",
+      "domain": "business-operations",
+      "description": "Cut software and services spend through seat-utilisation analysis, redundant-tool detection, and renewal-timing leverage. Use when auditing SaaS spend, preparing a renewal negotiation, or hunting a budget-reduction target.",
+      "tags": [
+        "saas-spend",
+        "procurement",
+        "license-optimization",
+        "vendor-negotiation",
+        "renewals"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/procurement-optimizer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "vendor-management",
+      "domain": "business-operations",
+      "description": "Vendor lifecycle — weighted selection scorecards, risk tiering, renewal and notice-deadline tracking, spend concentration, and SLA credits. Use when selecting a vendor, preparing a renewal, or reviewing a vendor portfolio.",
+      "tags": [
+        "vendor-management",
+        "procurement",
+        "sla",
+        "renewal",
+        "third-party-risk"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "business-operations/vendor-management",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "design-system",
+      "domain": "markdown-html",
+      "description": "Design tokens, light/dark theming, and WCAG contrast validation for HTML documents and decks, compiled into one inlinable CSS bundle. Use when theming a report or deck, auditing contrast, or fixing dark-mode color drift.",
+      "tags": [
+        "design-tokens",
+        "wcag",
+        "contrast",
+        "dark-mode",
+        "css",
+        "typography"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "markdown-html/design-system",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "md-document",
+      "domain": "markdown-html",
+      "description": "Convert authored markdown into a polished self-contained HTML document with a table of contents, numbered figures and tables, cross-references, footnotes, and print-ready CSS. Use when publishing a report, whitepaper, or memo.",
+      "tags": [
+        "markdown",
+        "html",
+        "publishing",
+        "pdf",
+        "cross-references",
+        "typography"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "markdown-html/md-document",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "md-review",
+      "domain": "markdown-html",
+      "description": "Pre-publication quality gate for authored Markdown — heading structure, on-disk link resolution, readability, accessibility, terminology. Use when reviewing docs before publishing, wiring a docs CI gate, or auditing a Markdown corpus.",
+      "tags": [
+        "markdown",
+        "review",
+        "accessibility",
+        "readability",
+        "ci-gate",
+        "wcag",
+        "documentation"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "markdown-html/md-review",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "md-slides",
+      "domain": "markdown-html",
+      "description": "Convert markdown into a self-contained HTML slide deck with layouts, speaker notes, keyboard navigation, and a content-density linter. Use when building a deck from markdown, cutting an overloaded deck, or timing a talk.",
+      "tags": [
+        "slides",
+        "presentation",
+        "markdown",
+        "html",
+        "speaker-notes",
+        "accessibility"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-07-21",
+      "path": "markdown-html/md-slides",
       "has_scripts": true,
       "has_references": true
     },

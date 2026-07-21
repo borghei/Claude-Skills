@@ -1,0 +1,26 @@
+{
+  "title": "<what this tour teaches, phrased as the question it answers>",
+  "repo": ".",
+  "audience": "<who is reading — backend engineer, frontend engineer, SRE, contractor>",
+  "duration_minutes": 30,
+  "orientation": "Two to four sentences the reader takes in before opening any file: what the system does, what ordering principle the stops follow, and what they should be able to do at the end. Say here if the tour can be run locally.",
+  "prerequisites": [
+    "<tool or access needed to follow along>",
+    "<document to read first, if any>"
+  ],
+  "stops": [
+    {
+      "stop": 1,
+      "title": "<what the reader learns here, not the filename>",
+      "path": "<path/from/repo/root.py>",
+      "anchor": "<function_or_class_name>",
+      "line": 0,
+      "fingerprint": "",
+      "read_first": "<optional: what to look at before the note makes sense>",
+      "note": "Why this code is the way it is. Answer at least one of: why does this exist, why this way and not the obvious alternative, what breaks if you change it. Aim for 50-80 words. Do not describe what the code does — the reader can see that.",
+      "question": "<a question the reader can only answer by reading the code at this stop>",
+      "gotcha": "<optional: the thing that surprises everyone here>"
+    }
+  ],
+  "after": "<what to do next — a first task, a script to run, a second tour>"
+}

@@ -1,0 +1,27 @@
+{
+  "programme": "DAS-301 adjunctive digital adherence support",
+  "currency": "EUR",
+  "budget_at_completion": 2650000,
+  "as_of_period": 8,
+  "milestones": [
+    { "name": "Protocol approved", "weight": 0.05, "complete": 1.0, "planned_period": 2 },
+    { "name": "Ethics approvals obtained", "weight": 0.05, "complete": 1.0, "planned_period": 4 },
+    { "name": "First site activated", "weight": 0.05, "complete": 1.0, "planned_period": 5 },
+    { "name": "All sites activated", "weight": 0.05, "complete": 0.5, "planned_period": 8 },
+    { "name": "First participant enrolled", "weight": 0.03, "complete": 1.0, "planned_period": 6 },
+    { "name": "50% enrolment", "weight": 0.22, "complete": 0.15, "planned_period": 14 },
+    { "name": "Last participant enrolled", "weight": 0.25, "complete": 0.0, "planned_period": 24 },
+    { "name": "Database lock", "weight": 0.15, "complete": 0.0, "planned_period": 28 },
+    { "name": "Clinical study report delivered", "weight": 0.15, "complete": 0.0, "planned_period": 30 }
+  ],
+  "periods": [
+    { "period": 1, "planned_spend": 55000, "actual_spend": 61000 },
+    { "period": 2, "planned_spend": 72000, "actual_spend": 88000 },
+    { "period": 3, "planned_spend": 90000, "actual_spend": 104000 },
+    { "period": 4, "planned_spend": 95000, "actual_spend": 118000 },
+    { "period": 5, "planned_spend": 110000, "actual_spend": 132000 },
+    { "period": 6, "planned_spend": 115000, "actual_spend": 140000 },
+    { "period": 7, "planned_spend": 118000, "actual_spend": 151000 },
+    { "period": 8, "planned_spend": 120000, "actual_spend": 158000 }
+  ]
+}

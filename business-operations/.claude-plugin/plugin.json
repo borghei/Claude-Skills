@@ -1,0 +1,13 @@
+{
+  "name": "business-operations-skills",
+  "description": "6 business operations skills: capacity planning, process mapping, vendor management, internal comms, knowledge ops, and procurement optimization",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/business-operations",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

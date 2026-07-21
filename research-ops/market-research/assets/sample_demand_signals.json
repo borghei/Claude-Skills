@@ -1,0 +1,76 @@
+{
+  "market": "Practice management software for EU multi-chair dental clinics",
+  "period": "2026-H1",
+  "signals": [
+    {
+      "id": "S1",
+      "name": "Inbound demo requests, trailing 6 months",
+      "source_class": "first_party",
+      "direction": "up",
+      "strength": 0.72,
+      "observations": 6,
+      "segment": "all",
+      "derived_from": null
+    },
+    {
+      "id": "S2",
+      "name": "Win rate against incumbent suites",
+      "source_class": "first_party",
+      "direction": "up",
+      "strength": 0.45,
+      "observations": 4,
+      "segment": "multi_site",
+      "derived_from": null
+    },
+    {
+      "id": "S3",
+      "name": "Category search volume, EU-27",
+      "source_class": "third_party",
+      "direction": "flat",
+      "strength": 0.3,
+      "observations": 6,
+      "segment": "all",
+      "derived_from": null
+    },
+    {
+      "id": "S4",
+      "name": "Analyst-published category CAGR",
+      "source_class": "analyst",
+      "direction": "up",
+      "strength": 0.55,
+      "observations": 2,
+      "segment": "all",
+      "derived_from": null
+    },
+    {
+      "id": "S5",
+      "name": "Single-site clinic renewal rate",
+      "source_class": "first_party",
+      "direction": "down",
+      "strength": 0.6,
+      "observations": 5,
+      "segment": "single_site",
+      "derived_from": null
+    },
+    {
+      "id": "S6",
+      "name": "Trade-press articles citing the analyst report",
+      "source_class": "third_party",
+      "direction": "up",
+      "strength": 0.4,
+      "observations": 3,
+      "segment": "all",
+      "derived_from": "S4"
+    },
+    {
+      "id": "S7",
+      "name": "Competitor sales-team headcount growth",
+      "source_class": "third_party",
+      "direction": "up",
+      "strength": 0.5,
+      "observations": 3,
+      "segment": "multi_site",
+      "derived_from": null
+    }
+  ]
+}

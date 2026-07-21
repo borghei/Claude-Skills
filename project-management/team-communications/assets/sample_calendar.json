@@ -1,0 +1,65 @@
+{
+  "team": "Payments Platform",
+  "currency": "USD",
+  "default_hourly_cost": 95,
+  "people": [
+    { "id": "amara",  "name": "Amara O.",   "role": "staff engineer",   "hourly_cost": 118, "timezone": "Europe/Berlin",   "utc_offset": 2 },
+    { "id": "dev",    "name": "Dev R.",     "role": "engineer",         "hourly_cost": 92,  "timezone": "Asia/Kolkata",    "utc_offset": 5.5 },
+    { "id": "priya",  "name": "Priya S.",   "role": "engineering mgr",  "hourly_cost": 135, "timezone": "Europe/London",   "utc_offset": 1 },
+    { "id": "kai",    "name": "Kai T.",     "role": "product manager",  "hourly_cost": 122, "timezone": "America/New_York","utc_offset": -4 },
+    { "id": "noor",   "name": "Noor H.",    "role": "designer",         "hourly_cost": 98,  "timezone": "Europe/Berlin",   "utc_offset": 2 },
+    { "id": "sam",    "name": "Sam W.",     "role": "engineer",         "hourly_cost": 92,  "timezone": "America/Denver",  "utc_offset": -6 },
+    { "id": "lena",   "name": "Lena K.",    "role": "data analyst",     "hourly_cost": 96,  "timezone": "Europe/London",   "utc_offset": 1 },
+    { "id": "tomas",  "name": "Tomas B.",   "role": "director",         "hourly_cost": 165, "timezone": "America/New_York","utc_offset": -4 }
+  ],
+  "meetings": [
+    {
+      "id": "m1", "title": "Payments daily standup", "type": "sync-up",
+      "occurrences_per_week": 5, "duration_min": 15, "day": "mon", "start_utc": "13:00",
+      "attendees": ["amara", "dev", "priya", "sam", "noor"],
+      "has_agenda": true, "has_notes": true, "decisions_last_month": 4
+    },
+    {
+      "id": "m2", "title": "Weekly platform sync", "type": "working-session",
+      "occurrences_per_week": 1, "duration_min": 60, "day": "tue", "start_utc": "14:00",
+      "attendees": ["amara", "dev", "priya", "kai", "sam", "lena"],
+      "has_agenda": true, "has_notes": true, "decisions_last_month": 5
+    },
+    {
+      "id": "m3", "title": "Payments + Risk alignment", "type": "working-session",
+      "occurrences_per_week": 1, "duration_min": 60, "day": "tue", "start_utc": "14:30",
+      "attendees": ["amara", "priya", "kai", "sam", "lena"],
+      "has_agenda": false, "has_notes": false, "decisions_last_month": 1
+    },
+    {
+      "id": "m4", "title": "Roadmap review (all hands)", "type": "working-session",
+      "occurrences_per_week": 0.25, "duration_min": 90, "day": "thu", "start_utc": "15:00",
+      "attendees": ["amara", "dev", "priya", "kai", "noor", "sam", "lena", "tomas"],
+      "has_agenda": true, "has_notes": true, "decisions_last_month": 2
+    },
+    {
+      "id": "m5", "title": "Design/eng pairing hour", "type": "working-session",
+      "occurrences_per_week": 2, "duration_min": 45, "day": "wed", "start_utc": "12:00",
+      "attendees": ["noor", "amara"],
+      "has_agenda": false, "has_notes": true, "decisions_last_month": 3
+    },
+    {
+      "id": "m6", "title": "Status roundup", "type": "broadcast",
+      "occurrences_per_week": 1, "duration_min": 30, "day": "fri", "start_utc": "15:00",
+      "attendees": ["amara", "dev", "priya", "kai", "noor", "sam", "lena", "tomas"],
+      "has_agenda": false, "has_notes": false, "decisions_last_month": 0
+    },
+    {
+      "id": "m7", "title": "Metrics review", "type": "working-session",
+      "occurrences_per_week": 1, "duration_min": 45, "day": "thu", "start_utc": "13:00",
+      "attendees": ["kai", "lena", "priya"],
+      "has_agenda": true, "has_notes": false, "decisions_last_month": 2
+    },
+    {
+      "id": "m8", "title": "Backlog grooming", "type": "working-session",
+      "occurrences_per_week": 1, "duration_min": 60, "day": "wed", "start_utc": "12:30",
+      "attendees": ["kai", "amara", "dev", "sam"],
+      "has_agenda": true, "has_notes": true, "decisions_last_month": 6
+    }
+  ]
+}

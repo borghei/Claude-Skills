@@ -1,0 +1,95 @@
+{
+  "study": "Ticket triage discovery",
+  "insights": [
+    {
+      "id": "I1",
+      "claim": "Agents manually re-triage tickets because the automatic assignment ignores account tier, so enterprise tickets land in the general queue.",
+      "evidence": [
+        {
+          "participant": "P1",
+          "source": "interview",
+          "kind": "observed",
+          "note": "Reassigned 4 of 6 tickets during the session, all enterprise accounts"
+        },
+        {
+          "participant": "P3",
+          "source": "interview",
+          "kind": "observed",
+          "note": "Kept a personal browser tab filtered to enterprise accounts"
+        },
+        {
+          "participant": "P4",
+          "source": "interview",
+          "kind": "reported",
+          "note": "Described re-triage as the first thing done each morning"
+        },
+        {
+          "participant": "P2",
+          "source": "support_tickets",
+          "kind": "artefact",
+          "note": "17 reassignment events in one week, 14 to enterprise accounts"
+        },
+        {
+          "participant": "P6",
+          "source": "analytics",
+          "kind": "artefact",
+          "note": "Median time-to-first-response 3.1x higher for misrouted enterprise tickets"
+        }
+      ]
+    },
+    {
+      "id": "I2",
+      "claim": "Team leads distrust the auto-triage confidence score and ignore it entirely.",
+      "evidence": [
+        {
+          "participant": "P3",
+          "source": "interview",
+          "kind": "reported",
+          "note": "Said the score 'has been wrong enough times that I stopped looking'"
+        },
+        {
+          "participant": "P5",
+          "source": "interview",
+          "kind": "reported",
+          "note": "Could not recall what the score meant"
+        }
+      ]
+    },
+    {
+      "id": "I3",
+      "claim": "Agents would prefer a bulk re-assignment action over a smarter routing rule.",
+      "evidence": [
+        {
+          "participant": "P1",
+          "source": "interview",
+          "kind": "reported",
+          "note": "Asked for a multi-select and 'move all' button"
+        }
+      ]
+    },
+    {
+      "id": "I4",
+      "claim": "Ticket volume spikes on Monday mornings overwhelm the triage step.",
+      "evidence": [
+        {
+          "participant": "P2",
+          "source": "analytics",
+          "kind": "artefact",
+          "note": "Monday inbound is 2.4x the weekday median across 12 weeks"
+        },
+        {
+          "participant": "P4",
+          "source": "interview",
+          "kind": "reported",
+          "note": "Described Monday as 'the day triage does not happen'"
+        },
+        {
+          "participant": "P6",
+          "source": "support_tickets",
+          "kind": "artefact",
+          "note": "Monday tickets show the longest untriaged dwell time"
+        }
+      ]
+    }
+  ]
+}

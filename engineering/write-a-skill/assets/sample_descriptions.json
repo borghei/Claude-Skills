@@ -1,0 +1,24 @@
+{
+  "skills": [
+    {
+      "name": "spec-driven-workflow",
+      "description": "Run development from an executable specification with traceable requirement IDs and merge-time coverage gates. Use when starting a greenfield feature, reviving a stale spec, or gating merges on requirement coverage."
+    },
+    {
+      "name": "code-tour",
+      "description": "Build ordered, annotated tours of an unfamiliar codebase and keep the anchors from rotting. Use when onboarding an engineer, handing off a service, or explaining a subsystem in review."
+    },
+    {
+      "name": "vague-helper",
+      "description": "This skill helps with development tasks."
+    },
+    {
+      "name": "bloated-advisor",
+      "description": "The bloated advisor skill is a comprehensive, world-class, enterprise-grade solution that leverages advanced state-of-the-art methodology to deliver robust, seamless, best-in-class outcomes across planning, delivery, reporting, analytics, governance, and stakeholder alignment for teams of every size. Pairs with the roadmap skill."
+    },
+    {
+      "name": "requirements-tracer",
+      "description": "Trace requirement IDs from a specification through to tests and code, reporting coverage gaps. Use when gating merges on requirement coverage, auditing a spec, or reviving a stale specification."
+    }
+  ]
+}

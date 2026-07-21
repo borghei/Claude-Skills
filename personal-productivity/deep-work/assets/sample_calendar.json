@@ -1,0 +1,25 @@
+{
+  "events": [
+    {"date": "2026-07-13", "start": "09:30", "end": "10:00", "title": "Standup", "fixed": true},
+    {"date": "2026-07-13", "start": "11:30", "end": "12:00", "title": "1:1 with Dana"},
+    {"date": "2026-07-13", "start": "14:00", "end": "15:00", "title": "Design review"},
+
+    {"date": "2026-07-14", "start": "09:30", "end": "10:00", "title": "Standup", "fixed": true},
+    {"date": "2026-07-14", "start": "10:30", "end": "11:00", "title": "Vendor sync"},
+    {"date": "2026-07-14", "start": "12:00", "end": "12:30", "title": "Hiring debrief"},
+    {"date": "2026-07-14", "start": "13:30", "end": "14:00", "title": "Support escalation"},
+    {"date": "2026-07-14", "start": "15:00", "end": "16:00", "title": "Roadmap workshop"},
+
+    {"date": "2026-07-15", "start": "09:30", "end": "10:00", "title": "Standup", "fixed": true},
+    {"date": "2026-07-15", "start": "15:30", "end": "16:30", "title": "Architecture review"},
+
+    {"date": "2026-07-16", "start": "09:30", "end": "10:00", "title": "Standup", "fixed": true},
+    {"date": "2026-07-16", "start": "11:00", "end": "11:30", "title": "Recruiter screen"},
+    {"date": "2026-07-16", "start": "13:00", "end": "14:00", "title": "Customer call", "fixed": true},
+    {"date": "2026-07-16", "start": "16:00", "end": "16:30", "title": "Metrics review"},
+
+    {"date": "2026-07-17", "start": "09:30", "end": "10:00", "title": "Standup", "fixed": true},
+    {"date": "2026-07-17", "start": "10:00", "end": "11:00", "title": "Incident retro"},
+    {"date": "2026-07-17", "start": "14:30", "end": "15:00", "title": "Weekly review", "fixed": true}
+  ]
+}

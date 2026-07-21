@@ -1,0 +1,84 @@
+{
+  "quarter": "2026-Q3",
+  "working_days_in_quarter": 63,
+  "hours_per_day": 8,
+  "team": [
+    {
+      "name": "A. Okonkwo",
+      "discipline": "engineering",
+      "seniority": "staff",
+      "fte": 1.0,
+      "tenure_months": 34,
+      "pto_days": 5,
+      "oncall_weeks": 2,
+      "meeting_load_pct": 22,
+      "overhead_pct": 12
+    },
+    {
+      "name": "B. Lindqvist",
+      "discipline": "engineering",
+      "seniority": "senior",
+      "fte": 1.0,
+      "tenure_months": 19,
+      "pto_days": 8,
+      "oncall_weeks": 2,
+      "meeting_load_pct": 15,
+      "overhead_pct": 10
+    },
+    {
+      "name": "C. Ferreira",
+      "discipline": "engineering",
+      "seniority": "mid",
+      "fte": 1.0,
+      "tenure_months": 1,
+      "pto_days": 0,
+      "oncall_weeks": 0,
+      "meeting_load_pct": 18,
+      "overhead_pct": 10
+    },
+    {
+      "name": "D. Haruna",
+      "discipline": "engineering",
+      "seniority": "junior",
+      "fte": 1.0,
+      "tenure_months": -1,
+      "pto_days": 0,
+      "oncall_weeks": 0,
+      "meeting_load_pct": 18,
+      "overhead_pct": 12
+    },
+    {
+      "name": "E. Novak",
+      "discipline": "engineering",
+      "seniority": "senior",
+      "fte": 0.8,
+      "tenure_months": 41,
+      "pto_days": 10,
+      "oncall_weeks": 2,
+      "meeting_load_pct": 15,
+      "overhead_pct": 10
+    },
+    {
+      "name": "F. Baptiste",
+      "discipline": "design",
+      "seniority": "senior",
+      "fte": 1.0,
+      "tenure_months": 26,
+      "pto_days": 6,
+      "oncall_weeks": 0,
+      "meeting_load_pct": 25,
+      "overhead_pct": 10
+    },
+    {
+      "name": "G. Salcedo",
+      "discipline": "qa",
+      "seniority": "mid",
+      "fte": 1.0,
+      "tenure_months": 12,
+      "pto_days": 5,
+      "oncall_weeks": 0,
+      "meeting_load_pct": 12,
+      "overhead_pct": 15
+    }
+  ]
+}

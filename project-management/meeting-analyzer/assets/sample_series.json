@@ -1,0 +1,27 @@
+{
+  "title": "Payments + Risk alignment (weekly, 60 min)",
+  "invited": 6,
+  "owner": "Priya S.",
+  "occurrences": [
+    { "date": "2026-05-12", "duration_min": 60, "attended": 6, "decisions": 1, "actions": 3, "agenda_posted": true,  "notes_published": true,
+      "topics": ["fraud-scoring ownership", "shared on-call", "q3 roadmap"] },
+    { "date": "2026-05-19", "duration_min": 60, "attended": 6, "decisions": 0, "actions": 2, "agenda_posted": true,  "notes_published": false,
+      "topics": ["fraud-scoring ownership", "chargeback SLA"] },
+    { "date": "2026-05-26", "duration_min": 60, "attended": 5, "decisions": 1, "actions": 1, "agenda_posted": false, "notes_published": false,
+      "topics": ["chargeback SLA", "shared on-call"] },
+    { "date": "2026-06-02", "duration_min": 60, "attended": 5, "decisions": 0, "actions": 0, "agenda_posted": false, "notes_published": false,
+      "topics": ["fraud-scoring ownership", "q3 roadmap"] },
+    { "date": "2026-06-09", "duration_min": 60, "attended": 4, "decisions": 0, "actions": 2, "agenda_posted": false, "notes_published": true,
+      "topics": ["fraud-scoring ownership", "data-sharing agreement"] },
+    { "date": "2026-06-16", "duration_min": 60, "attended": 4, "decisions": 0, "actions": 0, "agenda_posted": false, "notes_published": false,
+      "topics": ["data-sharing agreement", "q3 roadmap"] },
+    { "date": "2026-06-23", "duration_min": 60, "attended": 5, "decisions": 1, "actions": 2, "agenda_posted": true,  "notes_published": true,
+      "topics": ["fraud-scoring ownership", "chargeback SLA"] },
+    { "date": "2026-06-30", "duration_min": 60, "attended": 3, "decisions": 0, "actions": 1, "agenda_posted": false, "notes_published": false,
+      "topics": ["data-sharing agreement", "q3 roadmap"] },
+    { "date": "2026-07-07", "duration_min": 60, "attended": 3, "decisions": 0, "actions": 0, "agenda_posted": false, "notes_published": false,
+      "topics": ["fraud-scoring ownership", "q3 roadmap"] },
+    { "date": "2026-07-14", "duration_min": 60, "attended": 4, "decisions": 0, "actions": 1, "agenda_posted": false, "notes_published": false,
+      "topics": ["fraud-scoring ownership", "data-sharing agreement"] }
+  ]
+}

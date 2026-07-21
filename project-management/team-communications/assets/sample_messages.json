@@ -1,0 +1,84 @@
+{
+  "team": "Payments Platform",
+  "core_overlap_hours": 3,
+  "messages": [
+    {
+      "id": "c1",
+      "summary": "Choose the ledger schema for multi-currency settlement (migration is one-way)",
+      "reversibility": "one_way",
+      "stakeholders": 5,
+      "needs_decision": true,
+      "urgency_hours": 96,
+      "context_shared": "high",
+      "emotional_load": "low",
+      "timezones_spanned": 3
+    },
+    {
+      "id": "c2",
+      "summary": "Pick the retry backoff constant for the payout worker",
+      "reversibility": "two_way",
+      "stakeholders": 3,
+      "needs_decision": true,
+      "urgency_hours": 48,
+      "context_shared": "high",
+      "emotional_load": "low",
+      "timezones_spanned": 2
+    },
+    {
+      "id": "c3",
+      "summary": "Tell Dev their promotion case is deferred to the next cycle",
+      "reversibility": "two_way",
+      "stakeholders": 1,
+      "needs_decision": false,
+      "urgency_hours": 24,
+      "context_shared": "high",
+      "emotional_load": "high",
+      "personal": true,
+      "timezones_spanned": 1
+    },
+    {
+      "id": "c4",
+      "summary": "Announce the Q3 on-call rotation change to the whole department",
+      "reversibility": "two_way",
+      "stakeholders": 22,
+      "needs_decision": false,
+      "urgency_hours": 120,
+      "context_shared": "medium",
+      "emotional_load": "low",
+      "timezones_spanned": 4
+    },
+    {
+      "id": "c5",
+      "summary": "Agree how Payments and Risk split ownership of the fraud-scoring service",
+      "reversibility": "one_way",
+      "stakeholders": 6,
+      "needs_decision": true,
+      "urgency_hours": 72,
+      "context_shared": "low",
+      "emotional_load": "low",
+      "timezones_spanned": 3
+    },
+    {
+      "id": "c6",
+      "summary": "Production settlement job is failing; decide whether to roll back tonight",
+      "reversibility": "two_way",
+      "stakeholders": 4,
+      "needs_decision": true,
+      "urgency_hours": 4,
+      "context_shared": "medium",
+      "emotional_load": "low",
+      "timezones_spanned": 3
+    },
+    {
+      "id": "c7",
+      "summary": "Share last week's payout latency numbers with the team",
+      "reversibility": "two_way",
+      "stakeholders": 6,
+      "needs_decision": false,
+      "urgency_hours": 96,
+      "context_shared": "high",
+      "emotional_load": "low",
+      "timezones_spanned": 3
+    }
+  ]
+}

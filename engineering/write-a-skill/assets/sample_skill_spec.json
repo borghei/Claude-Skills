@@ -1,0 +1,26 @@
+{
+  "name": "release-notes-writer",
+  "title": "Release Notes Writer",
+  "description": "Turn merged PRs and commit history into audience-segmented release notes. Use when cutting a release, writing changelog entries, or preparing a customer-facing what's-new post.",
+  "category": "engineering",
+  "domain": "developer-experience",
+  "version": "1.0.0",
+  "author": "borghei",
+  "updated": "2026-07-21",
+  "generative": true,
+  "tags": ["release", "changelog", "communication", "versioning", "developer-experience"],
+  "use_when": [
+    "Cutting a versioned release and needing notes in under an hour",
+    "Translating engineering commits into customer-readable value statements",
+    "Splitting one release into developer, admin, and end-user notes",
+    "Auditing a draft changelog for missing breaking-change callouts",
+    "Backfilling notes for releases that shipped undocumented"
+  ],
+  "inputs": [
+    "Version range or tag boundary (e.g. v2.3.0..v2.4.0)",
+    "Audience segments the notes must serve",
+    "Product vocabulary — the names customers actually use",
+    "Breaking-change and deprecation policy"
+  ],
+  "scripts": ["commit_classifier.py", "notes_generator.py", "breaking_change_auditor.py"]
+}

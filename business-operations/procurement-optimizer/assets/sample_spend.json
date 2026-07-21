@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-07-21",
+  "currency": "USD",
+  "headcount": 420,
+  "tools": [
+    {"name": "Nimbus CRM", "category": "crm", "annual_cost": 288000,
+     "seats_purchased": 240, "seats_assigned": 231, "seats_active_30d": 198,
+     "renewal_date": "2026-11-30", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 60, "owner": "rev-ops", "criticality": "critical",
+     "has_alternative": false},
+
+    {"name": "Wavelength Analytics", "category": "product-analytics",
+     "annual_cost": 96000, "seats_purchased": 150, "seats_assigned": 88,
+     "seats_active_30d": 41, "renewal_date": "2026-09-15", "term_months": 12,
+     "auto_renew": true, "notice_period_days": 30, "owner": "product",
+     "criticality": "core", "has_alternative": true},
+
+    {"name": "Fathom Insights", "category": "product-analytics",
+     "annual_cost": 54000, "seats_purchased": 60, "seats_assigned": 34,
+     "seats_active_30d": 12, "renewal_date": "2027-02-28", "term_months": 12,
+     "auto_renew": true, "notice_period_days": 30, "owner": "growth",
+     "criticality": "reference", "has_alternative": true},
+
+    {"name": "Beacon BI", "category": "product-analytics", "annual_cost": 42000,
+     "seats_purchased": 45, "seats_assigned": 40, "seats_active_30d": 36,
+     "renewal_date": "2026-12-31", "term_months": 12, "auto_renew": false,
+     "notice_period_days": 30, "owner": "data", "criticality": "core",
+     "has_alternative": true},
+
+    {"name": "Relay Chat", "category": "chat", "annual_cost": 151200,
+     "seats_purchased": 420, "seats_assigned": 418, "seats_active_30d": 402,
+     "renewal_date": "2027-01-31", "term_months": 36, "auto_renew": true,
+     "notice_period_days": 90, "owner": "it", "criticality": "critical",
+     "has_alternative": false},
+
+    {"name": "Docket Wiki", "category": "knowledge-base", "annual_cost": 63000,
+     "seats_purchased": 420, "seats_assigned": 380, "seats_active_30d": 145,
+     "renewal_date": "2026-08-20", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 30, "owner": "it", "criticality": "core",
+     "has_alternative": true},
+
+    {"name": "Quarry Design", "category": "design", "annual_cost": 38400,
+     "seats_purchased": 80, "seats_assigned": 32, "seats_active_30d": 24,
+     "renewal_date": "2026-10-05", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 45, "owner": "design", "criticality": "core",
+     "has_alternative": false},
+
+    {"name": "Stackline CI", "category": "developer-tools", "annual_cost": 72000,
+     "seats_purchased": 120, "seats_assigned": 112, "seats_active_30d": 104,
+     "renewal_date": "2026-09-01", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 30, "owner": "engineering", "criticality": "critical",
+     "has_alternative": true},
+
+    {"name": "Pinnacle Secrets", "category": "security", "annual_cost": 45000,
+     "seats_purchased": 420, "seats_assigned": 410, "seats_active_30d": 388,
+     "renewal_date": "2027-04-15", "term_months": 24, "auto_renew": true,
+     "notice_period_days": 60, "owner": "security", "criticality": "critical",
+     "has_alternative": false},
+
+    {"name": "Trailhead LMS", "category": "hr", "annual_cost": 28800,
+     "seats_purchased": 420, "seats_assigned": 300, "seats_active_30d": 38,
+     "renewal_date": "2026-08-05", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 30, "owner": "people", "criticality": "reference",
+     "has_alternative": true},
+
+    {"name": "Ledgerly Close", "category": "finance", "annual_cost": 66000,
+     "seats_purchased": 25, "seats_assigned": 22, "seats_active_30d": 21,
+     "renewal_date": "2026-12-01", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 90, "owner": "finance", "criticality": "critical",
+     "has_alternative": false},
+
+    {"name": "Signalpost Support", "category": "support", "annual_cost": 84000,
+     "seats_purchased": 70, "seats_assigned": 65, "seats_active_30d": 62,
+     "renewal_date": "2026-08-31", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 30, "owner": "support", "criticality": "critical",
+     "has_alternative": true},
+
+    {"name": "Meridian Whiteboard", "category": "whiteboard",
+     "annual_cost": 25200, "seats_purchased": 420, "seats_assigned": 210,
+     "seats_active_30d": 31, "renewal_date": "2026-11-10", "term_months": 12,
+     "auto_renew": true, "notice_period_days": 30, "owner": "it",
+     "criticality": "reference", "has_alternative": true},
+
+    {"name": "Corkboard Notes", "category": "knowledge-base", "annual_cost": 31500,
+     "seats_purchased": 200, "seats_assigned": 96, "seats_active_30d": 44,
+     "renewal_date": "2026-09-28", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 30, "owner": "product", "criticality": "reference",
+     "has_alternative": true},
+
+    {"name": "Cobalt Contracts", "category": "legal", "annual_cost": 36000,
+     "seats_purchased": 15, "seats_assigned": 9, "seats_active_30d": 7,
+     "renewal_date": "2027-03-20", "term_months": 12, "auto_renew": true,
+     "notice_period_days": 45, "owner": "legal", "criticality": "core",
+     "has_alternative": true}
+  ]
+}

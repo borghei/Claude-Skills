@@ -1,0 +1,79 @@
+{
+  "vendor": "Northwind Data Cloud",
+  "period": "2026-Q2",
+  "annual_contract_value": 240000,
+  "periods_per_year": 4,
+  "credit_cap_pct": 20,
+  "slas": [
+    {
+      "metric": "Platform uptime",
+      "unit": "%",
+      "direction": "higher_is_better",
+      "target": 99.9,
+      "actual": 99.42,
+      "business_impact": "Ingestion pauses; downstream dashboards stale",
+      "credit_tiers": [
+        { "threshold": 99.9, "credit_pct": 5 },
+        { "threshold": 99.5, "credit_pct": 10 },
+        { "threshold": 99.0, "credit_pct": 20 }
+      ],
+      "history": [
+        { "period": "2025-Q3", "actual": 99.95 },
+        { "period": "2025-Q4", "actual": 99.88 },
+        { "period": "2026-Q1", "actual": 99.71 }
+      ]
+    },
+    {
+      "metric": "P1 response time",
+      "unit": "min",
+      "direction": "lower_is_better",
+      "target": 30,
+      "actual": 47,
+      "business_impact": "Incident acknowledgement delayed past our own SLA to customers",
+      "credit_tiers": [
+        { "threshold": 30, "credit_pct": 3 },
+        { "threshold": 60, "credit_pct": 8 }
+      ],
+      "history": [
+        { "period": "2025-Q3", "actual": 22 },
+        { "period": "2025-Q4", "actual": 28 },
+        { "period": "2026-Q1", "actual": 39 }
+      ]
+    },
+    {
+      "metric": "P1 resolution time",
+      "unit": "h",
+      "direction": "lower_is_better",
+      "target": 8,
+      "actual": 7.2,
+      "business_impact": "",
+      "credit_tiers": [{ "threshold": 8, "credit_pct": 5 }],
+      "history": [
+        { "period": "2025-Q4", "actual": 7.6 },
+        { "period": "2026-Q1", "actual": 7.4 }
+      ]
+    },
+    {
+      "metric": "Data freshness lag",
+      "unit": "min",
+      "direction": "lower_is_better",
+      "target": 15,
+      "actual": 15.2,
+      "business_impact": "Marginal; within tolerance for current use cases",
+      "credit_tiers": []
+    },
+    {
+      "metric": "Support ticket first-contact resolution",
+      "unit": "%",
+      "direction": "higher_is_better",
+      "target": 70,
+      "actual": 74,
+      "business_impact": "",
+      "credit_tiers": [{ "threshold": 70, "credit_pct": 2 }],
+      "history": [
+        { "period": "2025-Q4", "actual": 71 },
+        { "period": "2026-Q1", "actual": 72 }
+      ]
+    }
+  ]
+}

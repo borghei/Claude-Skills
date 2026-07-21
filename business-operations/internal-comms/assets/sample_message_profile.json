@@ -1,0 +1,11 @@
+{
+  "message": {
+    "name": "Q3 restructure announcement",
+    "urgency": 4,
+    "complexity": 4,
+    "sensitivity": 5,
+    "audience_size": 240,
+    "needs_discussion": true,
+    "needs_record": true
+  }
+}

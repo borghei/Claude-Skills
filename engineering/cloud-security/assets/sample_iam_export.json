@@ -1,0 +1,86 @@
+{
+  "provider": "aws",
+  "account_id": "412900771003",
+  "exported": "2026-07-18",
+  "principals": [
+    {
+      "name": "legacy-terraform-runner",
+      "type": "role",
+      "last_used_days": 12,
+      "mfa": false,
+      "trust": {"principals": ["account:412900771003"], "approved": ["account:412900771003"], "external_id": false},
+      "policies": [
+        {"name": "inline-admin", "statements": [
+          {"effect": "allow", "actions": ["*"], "resources": ["*"]}
+        ]}
+      ]
+    },
+    {
+      "name": "ci-deployer",
+      "type": "role",
+      "last_used_days": 2,
+      "mfa": false,
+      "trust": {"principals": ["*"], "approved": [], "external_id": false},
+      "policies": [
+        {"name": "deploy", "statements": [
+          {"effect": "allow", "actions": ["iam:PassRole", "ec2:RunInstances", "lambda:UpdateFunctionCode"], "resources": ["*"]},
+          {"effect": "allow", "actions": ["s3:GetObject", "s3:PutObject"], "resources": ["arn:aws:s3:::acme-artifacts/*"]}
+        ]}
+      ]
+    },
+    {
+      "name": "analytics-readonly",
+      "type": "role",
+      "last_used_days": 5,
+      "mfa": false,
+      "permission_boundary": "boundary/data-read",
+      "trust": {"principals": ["account:412900771003"], "approved": ["account:412900771003"], "external_id": false},
+      "policies": [
+        {"name": "read", "statements": [
+          {"effect": "allow", "actions": ["s3:GetObject", "athena:StartQueryExecution"],
+           "resources": ["arn:aws:s3:::acme-lake/*"], "conditions": {"aws:SourceVpce": "vpce-0a1b2c"}}
+        ]}
+      ]
+    },
+    {
+      "name": "vendor-integration",
+      "type": "role",
+      "last_used_days": 214,
+      "mfa": false,
+      "trust": {"principals": ["account:998877665544"], "approved": ["account:412900771003"], "external_id": true},
+      "policies": [
+        {"name": "integration", "statements": [
+          {"effect": "allow", "actions": ["s3:*"], "resources": ["*"]}
+        ]}
+      ]
+    },
+    {
+      "name": "j.okonkwo",
+      "type": "user",
+      "last_used_days": 1,
+      "mfa": false,
+      "access_key_age_days": 412,
+      "trust": {},
+      "policies": [
+        {"name": "power", "statements": [
+          {"effect": "allow", "actions": ["iam:AttachRolePolicy", "ec2:TerminateInstances"], "resources": ["*"]}
+        ]}
+      ]
+    },
+    {
+      "name": "app-runtime",
+      "type": "service",
+      "last_used_days": 1,
+      "mfa": false,
+      "permission_boundary": "boundary/app-runtime",
+      "trust": {"principals": ["service:lambda.amazonaws.com"], "approved": ["service:lambda.amazonaws.com"], "external_id": false},
+      "policies": [
+        {"name": "runtime", "statements": [
+          {"effect": "allow", "actions": ["secretsmanager:GetSecretValue"],
+           "resources": ["arn:aws:secretsmanager:us-east-1:412900771003:secret:prod/app*"],
+           "conditions": {"aws:RequestedRegion": "us-east-1"}}
+        ]}
+      ]
+    }
+  ]
+}

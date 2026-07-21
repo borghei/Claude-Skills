@@ -1,0 +1,16 @@
+{
+  "question": "Did the redesigned checkout flow increase completed purchases?",
+  "question_type": "comparison",
+  "outcome_type": "binary",
+  "groups": 2,
+  "paired": false,
+  "randomized": true,
+  "peeked": false,
+  "comparisons": 3,
+  "sample_size_per_group": 4000,
+  "baseline_rate": 0.082,
+  "mde_relative": 0.08,
+  "distribution": "unknown",
+  "outliers": false,
+  "notes": "Three variants were tested against control, so this is a family of 3 comparisons."
+}

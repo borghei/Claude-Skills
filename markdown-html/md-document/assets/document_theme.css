@@ -1,0 +1,210 @@
+/* theme: slate-report */
+:root {
+  --font-size-xs: 10.88px;
+  --font-size-sm: 13.6px;
+  --font-size-base: 17.0px;
+  --font-size-md: 21.25px;
+  --font-size-lg: 26.56px;
+  --font-size-xl: 33.2px;
+  --font-size-2xl: 41.5px;
+  --font-size-3xl: 51.88px;
+  --space-0: 0.0px;
+  --space-0_5: 4.0px;
+  --space-1: 8.0px;
+  --space-1_5: 12.0px;
+  --space-2: 16.0px;
+  --space-3: 24.0px;
+  --space-4: 32.0px;
+  --space-6: 48.0px;
+  --space-8: 64.0px;
+  --space-12: 96.0px;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --measure: 72ch;
+  --line-height-body: 1.65;
+  --line-height-heading: 1.2;
+  --font-body: Charter, 'Bitstream Charter', 'Iowan Old Style', Georgia, serif;
+  --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-border: #94a3b8;
+  --color-link: #0369a1;
+  --color-accent: #0369a1;
+  --color-code-surface: #f1f5f9;
+  --color-code-text: #1e293b;
+  --color-warn: #b45309;
+  --color-danger: #b91c1c;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+  --color-surface: #020617;
+  --color-surface-raised: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+  --color-link: #7dd3fc;
+  --color-accent: #7dd3fc;
+  --color-code-surface: #1e293b;
+  --color-code-text: #f1f5f9;
+  --color-warn: #fcd34d;
+  --color-danger: #fca5a5;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-surface: #020617;
+  --color-surface-raised: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+  --color-link: #7dd3fc;
+  --color-accent: #7dd3fc;
+  --color-code-surface: #1e293b;
+  --color-code-text: #f1f5f9;
+  --color-warn: #fcd34d;
+  --color-danger: #fca5a5;
+}
+
+:root[data-theme="light"] {
+  --color-surface: #ffffff;
+  --color-surface-raised: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-border: #94a3b8;
+  --color-link: #0369a1;
+  --color-accent: #0369a1;
+  --color-code-surface: #f1f5f9;
+  --color-code-text: #1e293b;
+  --color-warn: #b45309;
+  --color-danger: #b91c1c;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: var(--space-4) var(--space-3);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body, serif);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+}
+main { max-width: var(--measure); margin: 0 auto; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading, sans-serif);
+  line-height: var(--line-height-heading);
+  margin: var(--space-4) 0 var(--space-2);
+  text-wrap: balance;
+}
+h1 { font-size: var(--font-size-3xl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+p, ul, ol, table, figure, blockquote, pre { margin: 0 0 var(--space-2); }
+a { color: var(--color-link); }
+small, .muted { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+hr { border: 0; border-top: 1px solid var(--color-border); margin: var(--space-4) 0; }
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-2);
+  color: var(--color-text-muted);
+}
+code, pre { font-family: var(--font-mono, monospace); font-size: var(--font-size-sm); }
+pre {
+  background: var(--color-code-surface);
+  color: var(--color-code-text);
+  padding: var(--space-2);
+  border-radius: var(--radius-md, 6px);
+  overflow-x: auto;
+}
+code { background: var(--color-code-surface); padding: 0 0.25em; border-radius: var(--radius-sm, 3px); }
+pre code { background: none; padding: 0; }
+img { max-width: 100%; height: auto; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: var(--font-size-sm); }
+th, td { border-bottom: 1px solid var(--color-border); padding: var(--space-1) var(--space-1_5, 8px); text-align: left; }
+th { font-family: var(--font-heading, sans-serif); }
+figure figcaption { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.callout-warn { border-left: 3px solid var(--color-warn); padding-left: var(--space-2); }
+.callout-danger { border-left: 3px solid var(--color-danger); padding-left: var(--space-2); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+
+/* ---- document layer: TOC, figures, footnotes, cross-references ---- */
+.toc {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-2) var(--space-3);
+  margin: var(--space-4) 0;
+  background: var(--color-surface-raised);
+}
+.toc h2 { margin-top: 0; font-size: var(--font-size-md); }
+.toc ol { list-style: none; padding-left: 0; margin: 0; }
+.toc li { margin: var(--space-0_5) 0; }
+.toc .toc-l3 { padding-left: var(--space-3); font-size: var(--font-size-sm); }
+.toc .toc-l4 { padding-left: var(--space-6); font-size: var(--font-size-sm); }
+
+figure { margin: var(--space-3) 0; }
+figure img { display: block; }
+figcaption { margin-top: var(--space-1); }
+caption {
+  caption-side: bottom;
+  text-align: left;
+  padding-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.xref { text-decoration: none; font-variant-numeric: tabular-nums; }
+.xref-broken {
+  background: var(--color-danger);
+  color: var(--color-surface);
+  padding: 0 0.3em;
+  border-radius: var(--radius-sm, 3px);
+}
+
+sup.fn a { text-decoration: none; padding: 0 0.1em; }
+.footnotes {
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.footnotes h2 { font-size: var(--font-size-md); }
+.fn-back { text-decoration: none; }
+
+/* Inline links carry a non-color cue (WCAG 1.4.1) */
+main p a, main li a { text-decoration: underline; text-underline-offset: 2px; }
+.toc a, .xref, .fn-back { text-decoration: none; }
+
+/* ---- print / PDF ---- */
+@media print {
+  /* Never let dark mode reach paper. */
+  :root {
+    --color-surface: #ffffff;
+    --color-surface-raised: #f1f5f9;
+    --color-text: #0f172a;
+    --color-text-muted: #475569;
+    --color-border: #94a3b8;
+    --color-link: #0369a1;
+    --color-accent: #0369a1;
+    --color-code-surface: #f1f5f9;
+    --color-code-text: #1e293b;
+  }
+  @page { size: A4; margin: 20mm 18mm; }
+  body { font-size: 11pt; padding: 0; }
+  main { max-width: none; }
+  h1, h2, h3 { break-after: avoid-page; }
+  p, blockquote, li { orphans: 3; widows: 3; }
+  figure, table, pre, blockquote { break-inside: avoid; }
+  .toc { break-after: page; border: 0; background: none; padding: 0; }
+  /* Expose link targets that the reader cannot click on paper. */
+  main p a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; word-break: break-all; }
+  .xref::after, .toc a::after { content: none; }
+}

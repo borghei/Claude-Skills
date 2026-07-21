@@ -1,0 +1,96 @@
+{
+  "provider": "aws",
+  "account_id": "412900771003",
+  "environment": "production",
+  "exported": "2026-07-18",
+  "account_settings": {
+    "audit_log_enabled": false,
+    "root_mfa": true,
+    "threat_detection_enabled": false,
+    "config_recorder_enabled": true,
+    "org_guardrails_enabled": true,
+    "log_archive_isolated": false
+  },
+  "resources": [
+    {
+      "id": "arn:aws:s3:::acme-customer-exports",
+      "name": "acme-customer-exports",
+      "type": "storage_bucket",
+      "region": "us-east-1",
+      "public": true,
+      "encryption": {"at_rest": true, "customer_managed_key": false, "in_transit_enforced": false},
+      "logging": {"access_logs": false},
+      "backup": {"enabled": true, "retention_days": 30},
+      "tags": {"env": "prod", "owner": "data-platform", "data_classification": "confidential"}
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:412900771003:db:billing-primary",
+      "name": "billing-primary",
+      "type": "database",
+      "region": "us-east-1",
+      "public": false,
+      "encryption": {"at_rest": true, "customer_managed_key": true, "in_transit_enforced": true},
+      "logging": {"access_logs": true},
+      "backup": {"enabled": true, "retention_days": 35},
+      "network": {"ingress": [{"protocol": "tcp", "ports": "5432", "source": "10.20.0.0/16"}]},
+      "tags": {"env": "prod", "owner": "payments", "data_classification": "pci"}
+    },
+    {
+      "id": "arn:aws:rds:us-east-1:412900771003:db:analytics-replica",
+      "name": "analytics-replica",
+      "type": "database",
+      "region": "us-east-1",
+      "public": false,
+      "encryption": {"at_rest": false, "customer_managed_key": false, "in_transit_enforced": false},
+      "logging": {"access_logs": false},
+      "backup": {"enabled": false},
+      "network": {"ingress": [{"protocol": "tcp", "ports": "5432", "source": "0.0.0.0/0"}]},
+      "tags": {"env": "prod", "owner": "analytics", "data_classification": "confidential"}
+    },
+    {
+      "id": "i-0af31c9920bb1e4d7",
+      "name": "legacy-batch-runner",
+      "type": "compute_instance",
+      "region": "us-east-1",
+      "public": true,
+      "encryption": {"at_rest": true, "in_transit_enforced": true},
+      "logging": {"access_logs": true},
+      "network": {"ingress": [
+        {"protocol": "tcp", "ports": "22", "source": "0.0.0.0/0"},
+        {"protocol": "tcp", "ports": "8080", "source": "0.0.0.0/0"}
+      ]},
+      "tags": {"env": "prod"}
+    },
+    {
+      "id": "arn:aws:elasticloadbalancing:us-east-1:412900771003:loadbalancer/app/public-edge",
+      "name": "public-edge",
+      "type": "load_balancer",
+      "region": "us-east-1",
+      "public": true,
+      "encryption": {"at_rest": true, "in_transit_enforced": true},
+      "logging": {"access_logs": true},
+      "network": {"ingress": [{"protocol": "tcp", "ports": "443", "source": "0.0.0.0/0"}]},
+      "tags": {"env": "prod", "owner": "platform"}
+    },
+    {
+      "id": "arn:aws:secretsmanager:us-east-1:412900771003:secret:prod/app",
+      "name": "prod-app-secrets",
+      "type": "secret_store",
+      "region": "us-east-1",
+      "public": false,
+      "encryption": {"at_rest": true, "customer_managed_key": true, "in_transit_enforced": true},
+      "logging": {"access_logs": true},
+      "tags": {"env": "prod", "owner": "platform", "data_classification": "restricted"}
+    },
+    {
+      "id": "arn:aws:sqs:us-east-1:412900771003:events-ingest",
+      "name": "events-ingest",
+      "type": "queue",
+      "region": "us-east-1",
+      "public": false,
+      "encryption": {"at_rest": true, "customer_managed_key": false, "in_transit_enforced": true},
+      "logging": {"access_logs": true},
+      "tags": {"env": "prod", "owner": "platform"}
+    }
+  ]
+}

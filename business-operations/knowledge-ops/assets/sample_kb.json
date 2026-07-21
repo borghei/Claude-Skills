@@ -1,0 +1,77 @@
+{
+  "as_of": "2026-07-21",
+  "docs": [
+    {"path": "runbooks/oncall-escalation.md", "title": "On-call escalation runbook",
+     "owner": "priya.raman", "updated": "2026-06-30", "tier": "critical",
+     "word_count": 1250, "views_90d": 940,
+     "links_to": ["runbooks/severity-levels.md", "runbooks/paging.md"]},
+
+    {"path": "runbooks/severity-levels.md", "title": "Incident severity levels",
+     "owner": "priya.raman", "updated": "2025-11-02", "tier": "critical",
+     "word_count": 640, "views_90d": 610,
+     "links_to": ["runbooks/oncall-escalation.md"]},
+
+    {"path": "runbooks/paging.md", "title": "Paging and alert routing",
+     "owner": "", "updated": "2025-08-14", "tier": "critical",
+     "word_count": 430, "views_90d": 210, "links_to": []},
+
+    {"path": "onboarding/first-week.md", "title": "Your first week",
+     "owner": "sam.oyelaran", "updated": "2026-05-19", "tier": "core",
+     "word_count": 1800, "views_90d": 320,
+     "links_to": ["onboarding/tooling-setup.md", "eng/architecture-overview.md",
+                  "onboarding/glossary.md", "runbooks/oncall-escalation.md"]},
+
+    {"path": "onboarding/tooling-setup.md", "title": "Tooling setup",
+     "owner": "sam.oyelaran", "updated": "2026-02-11", "tier": "core",
+     "word_count": 950, "views_90d": 280, "links_to": ["onboarding/glossary.md"]},
+
+    {"path": "onboarding/glossary.md", "title": "Glossary",
+     "owner": "sam.oyelaran", "updated": "2026-01-08", "tier": "reference",
+     "word_count": 2100, "views_90d": 460, "links_to": []},
+
+    {"path": "onboarding/dev-environment.md", "title": "Tooling setup",
+     "owner": "", "updated": "2024-09-30", "tier": "core",
+     "word_count": 720, "views_90d": 85, "links_to": ["onboarding/glossary.md"]},
+
+    {"path": "eng/architecture-overview.md", "title": "Architecture overview",
+     "owner": "dana.whitfield", "updated": "2025-12-01", "tier": "core",
+     "word_count": 3400, "views_90d": 510,
+     "links_to": ["eng/service-catalog.md", "eng/data-model.md"]},
+
+    {"path": "eng/service-catalog.md", "title": "Service catalog",
+     "owner": "dana.whitfield", "updated": "2026-07-01", "tier": "core",
+     "word_count": 1600, "views_90d": 390, "links_to": ["eng/architecture-overview.md"]},
+
+    {"path": "eng/data-model.md", "title": "Data model",
+     "owner": "", "updated": "2024-04-22", "tier": "core",
+     "word_count": 210, "views_90d": 140, "links_to": ["eng/deprecated-schema.md"]},
+
+    {"path": "eng/release-process.md", "title": "Release process",
+     "owner": "marco.li", "updated": "2026-03-15", "tier": "core",
+     "word_count": 1100, "views_90d": 430, "links_to": ["eng/service-catalog.md"]},
+
+    {"path": "how-to/reset-vpn.md", "title": "Reset your VPN certificate",
+     "owner": "it-helpdesk", "updated": "2025-03-04", "tier": "reference",
+     "word_count": 380, "views_90d": 720, "links_to": []},
+
+    {"path": "how-to/expense-claims.md", "title": "Submitting expense claims",
+     "owner": "", "updated": "2024-11-18", "tier": "reference",
+     "word_count": 540, "views_90d": 0, "links_to": []},
+
+    {"path": "how-to/old-expense-claims.md", "title": "Submitting expense claims",
+     "owner": "", "updated": "2023-06-02", "tier": "reference",
+     "word_count": 490, "views_90d": 0, "links_to": []},
+
+    {"path": "retros/2024-q3-platform.md", "title": "Q3 2024 platform retro",
+     "owner": "dana.whitfield", "updated": "2024-10-05", "tier": "archive",
+     "word_count": 880, "views_90d": 3, "links_to": []},
+
+    {"path": "sec/access-review.md", "title": "Quarterly access review procedure",
+     "owner": "nadia.kessler", "updated": "2026-01-20", "tier": "critical",
+     "word_count": 1400, "views_90d": 95, "links_to": ["sec/joiners-leavers.md"]},
+
+    {"path": "sec/joiners-leavers.md", "title": "Joiners, movers, leavers",
+     "owner": "nadia.kessler", "updated": "2026-06-11", "tier": "critical",
+     "word_count": 1650, "views_90d": 180, "links_to": ["sec/access-review.md"]}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "question": "How do support agents currently triage inbound tickets, and what makes them override the automatic assignment?",
+  "question_type": "generative",
+  "decision": "Whether to build an account-tier-aware auto-triage queue",
+  "reversibility": "costly",
+  "timeline_days": 14,
+  "participant_access": "existing_customers",
+  "has_instrumentation": true,
+  "traffic_per_week": 400
+}

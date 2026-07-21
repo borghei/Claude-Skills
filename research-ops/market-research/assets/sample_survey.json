@@ -1,0 +1,62 @@
+{
+  "study": "Category willingness-to-pay, EU multi-chair dental clinics",
+  "population_size": 40000,
+  "target_margin_of_error": 0.05,
+  "confidence_level": 0.95,
+  "planned_sample": 300,
+  "expected_response_rate": 0.12,
+  "items": [
+    {
+      "id": "Q1",
+      "text": "How many chairs does your clinic operate?",
+      "type": "numeric"
+    },
+    {
+      "id": "Q2",
+      "text": "In the last full month, how many hours did clinic staff spend on scheduling and billing admin?",
+      "type": "numeric"
+    },
+    {
+      "id": "Q3",
+      "text": "How valuable would an automated scheduling and billing feature be to your clinic?",
+      "type": "scale",
+      "scale_points": 5,
+      "options": [
+        "Not valuable",
+        "Slightly valuable",
+        "Moderately valuable",
+        "Very valuable",
+        "Extremely valuable"
+      ]
+    },
+    {
+      "id": "Q4",
+      "text": "Which system do you currently use for scheduling and for billing, and how satisfied are you with it overall?",
+      "type": "single_choice",
+      "options": [
+        "A single integrated system",
+        "Two separate systems",
+        "Paper or spreadsheets",
+        "Don't know"
+      ]
+    },
+    {
+      "id": "Q5",
+      "text": "Our clinic always completes end-of-day reconciliation before closing.",
+      "type": "scale",
+      "scale_points": 5,
+      "options": [
+        "Strongly disagree",
+        "Disagree",
+        "Neither",
+        "Agree",
+        "Strongly agree"
+      ]
+    },
+    {
+      "id": "Q6",
+      "text": "What is the maximum monthly amount per chair your clinic would pay for a system that removed that admin time?",
+      "type": "numeric"
+    }
+  ]
+}

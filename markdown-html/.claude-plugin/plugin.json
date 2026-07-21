@@ -1,0 +1,13 @@
+{
+  "name": "markdown-html-skills",
+  "description": "4 markdown-to-HTML publishing skills: document rendering, slide decks, pre-publication review gate, and the shared design-token system",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/markdown-html",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

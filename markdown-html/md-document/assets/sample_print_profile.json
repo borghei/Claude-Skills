@@ -1,0 +1,40 @@
+{
+  "name": "a4-report",
+  "page": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margin_top": "22mm",
+    "margin_bottom": "20mm",
+    "margin_inner": "20mm",
+    "margin_outer": "18mm",
+    "double_sided": true
+  },
+  "typography": {
+    "body_pt": 11,
+    "line_height": 1.45,
+    "orphans": 3,
+    "widows": 3,
+    "hyphenate": true
+  },
+  "running_head": {
+    "left": "Storage Tiering Review",
+    "right": "Platform Engineering",
+    "show_on_first_page": false
+  },
+  "page_numbers": {
+    "position": "bottom-center",
+    "format": "counter",
+    "start_at": 1
+  },
+  "breaks": {
+    "page_break_before": ["h1"],
+    "avoid_break_after": ["h1", "h2", "h3"],
+    "avoid_break_inside": ["figure", "table", "pre", "blockquote", ".callout-warn"],
+    "toc_break_after": true
+  },
+  "link_urls": {
+    "expand_external": true,
+    "skip_selectors": [".toc a", ".xref", ".fn-back"]
+  },
+  "force_light_theme": true
+}

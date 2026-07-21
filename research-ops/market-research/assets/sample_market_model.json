@@ -1,0 +1,47 @@
+{
+  "market": "Practice management software for EU multi-chair dental clinics",
+  "currency": "EUR",
+  "horizon_years": 3,
+  "top_down": {
+    "anchor_source": "Global dental practice software category report, 2025 edition",
+    "anchor_vintage_years": 1,
+    "total_market_value": 4200000000,
+    "sam_filters": [
+      {
+        "name": "EU-27 only",
+        "retention": 0.28,
+        "basis": "regional revenue split published in the same report"
+      },
+      {
+        "name": "clinics with 3+ chairs",
+        "retention": 0.45,
+        "basis": "national dental association registries, weighted by country"
+      },
+      {
+        "name": "cloud-replaceable installed base",
+        "retention": 0.62,
+        "basis": "excludes clinics on hardware-bound legacy suites under contract"
+      }
+    ],
+    "som_filters": [
+      {
+        "name": "reachable via existing distributor network",
+        "retention": 0.19,
+        "basis": "distributor coverage map, 6 of 27 markets"
+      },
+      {
+        "name": "expected competitive win rate",
+        "retention": 0.24,
+        "basis": "observed win rate in the two pilot markets"
+      }
+    ]
+  },
+  "bottom_up": {
+    "unit_name": "dental clinic",
+    "total_units": 118000,
+    "qualified_unit_ratio": 0.34,
+    "annual_value_per_unit": 4800,
+    "reachable_unit_ratio": 0.19,
+    "expected_win_rate": 0.24
+  }
+}

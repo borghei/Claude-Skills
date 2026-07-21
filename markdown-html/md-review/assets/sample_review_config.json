@@ -1,0 +1,93 @@
+{
+  "profile_name": "docs-site-default",
+  "description": "Default pre-publication review profile for technical documentation authored in Markdown and converted to HTML.",
+  "frontmatter": {
+    "required_fields": ["title", "description", "author", "date", "tags"],
+    "field_types": {
+      "title": "string",
+      "description": "string",
+      "author": "string",
+      "date": "date",
+      "tags": "list"
+    },
+    "max_lengths": {
+      "title": 60,
+      "description": 160
+    }
+  },
+  "structure": {
+    "require_single_h1": true,
+    "require_h1_first": true,
+    "allow_skipped_levels": false,
+    "max_heading_depth": 4,
+    "max_section_words": 400,
+    "min_section_words": 15,
+    "heading_case": "sentence",
+    "max_consecutive_headings": 2
+  },
+  "accessibility": {
+    "min_alt_text_chars": 10,
+    "max_alt_text_chars": 150,
+    "placeholder_alt_text": [
+      "image",
+      "img",
+      "photo",
+      "picture",
+      "screenshot",
+      "graphic",
+      "figure",
+      "alt",
+      "alt text",
+      "todo",
+      "tbd",
+      "diagram"
+    ],
+    "non_descriptive_link_text": [
+      "click here",
+      "here",
+      "read more",
+      "more",
+      "this link",
+      "link",
+      "this",
+      "learn more",
+      "see more",
+      "download"
+    ],
+    "require_table_headers": true,
+    "flag_bare_urls_as_link_text": true
+  },
+  "readability": {
+    "audience": "general-technical",
+    "target_flesch_min": 50.0,
+    "target_flesch_max": 70.0,
+    "max_grade_level": 12.0,
+    "long_sentence_words": 30,
+    "very_long_sentence_words": 45,
+    "max_long_sentence_pct": 10.0,
+    "max_passive_pct": 15.0
+  },
+  "terminology": {
+    "front-end": ["frontend", "front end"],
+    "back-end": ["backend", "back end"],
+    "email": ["e-mail", "E-Mail"],
+    "website": ["web site", "web-site"],
+    "sign in": ["signin", "log in", "login to"],
+    "open source": ["opensource", "open-source software"],
+    "JavaScript": ["Javascript", "javascript", "JS script"],
+    "GitHub": ["Github", "github.com repository"],
+    "internet": ["Internet"],
+    "setup": ["set-up"]
+  },
+  "severity_overrides": {
+    "structure.heading-case-inconsistent": "warning",
+    "readability.grade-level-high": "warning",
+    "terminology.disallowed-term": "warning",
+    "structure.section-too-long": "info"
+  },
+  "gate": {
+    "fail_on": "error",
+    "max_errors": 0,
+    "max_warnings": 25
+  }
+}

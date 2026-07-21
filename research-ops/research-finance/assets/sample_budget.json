@@ -1,0 +1,35 @@
+{
+  "study": "DAS-301 adjunctive digital adherence support",
+  "currency": "EUR",
+  "participants_enrolled": 408,
+  "screen_failure_rate": 0.25,
+  "sites": 6,
+  "duration_months": 30,
+  "expected_insights": 9,
+  "per_participant": {
+    "screening_assessment": 320,
+    "visit_schedule": 1150,
+    "participant_incentive": 150,
+    "central_lab": 480
+  },
+  "per_participant_screened_only": {
+    "screening_assessment": true
+  },
+  "per_site": {
+    "site_startup_and_training": 12000,
+    "site_closeout": 4000
+  },
+  "per_site_month": {
+    "site_coordination": 900
+  },
+  "fixed": {
+    "protocol_development": 45000,
+    "biostatistics": 38000,
+    "data_management_and_edc": 52000,
+    "monitoring": 90000,
+    "regulatory_and_ethics_submissions": 28000,
+    "clinical_study_report": 35000
+  },
+  "contingency_rate": 0.1,
+  "overhead_rate": 0.2
+}

@@ -1,0 +1,142 @@
+{
+  "process_name": "Enterprise order to service activation",
+  "demand_per_month": 140,
+  "steps": [
+    {
+      "id": "s1",
+      "name": "Rep submits signed order form",
+      "owner": "Sales",
+      "value_type": "business_value_added",
+      "process_time_min": 20,
+      "wait_time_min": 0,
+      "rework_rate": 0.0,
+      "system": "CRM",
+      "automated": false
+    },
+    {
+      "id": "s2",
+      "name": "Deal desk checks pricing + terms",
+      "owner": "Deal Desk",
+      "value_type": "business_value_added",
+      "process_time_min": 35,
+      "wait_time_min": 420,
+      "rework_rate": 0.22,
+      "rework_to": "s1",
+      "system": "CRM",
+      "automated": false
+    },
+    {
+      "id": "s3",
+      "name": "Finance credit check",
+      "owner": "Finance",
+      "value_type": "business_value_added",
+      "process_time_min": 25,
+      "wait_time_min": 960,
+      "rework_rate": 0.05,
+      "system": "ERP",
+      "automated": false
+    },
+    {
+      "id": "s4",
+      "name": "Re-key order into billing system",
+      "owner": "Finance",
+      "value_type": "non_value_added",
+      "process_time_min": 45,
+      "wait_time_min": 60,
+      "rework_rate": 0.14,
+      "system": "Billing",
+      "automated": false
+    },
+    {
+      "id": "s5",
+      "name": "Legal reviews non-standard clauses",
+      "owner": "Legal",
+      "value_type": "business_value_added",
+      "process_time_min": 60,
+      "wait_time_min": 1440,
+      "rework_rate": 0.08,
+      "rework_to": "s2",
+      "system": "DMS",
+      "automated": false
+    },
+    {
+      "id": "s6",
+      "name": "Provisioning ticket created",
+      "owner": "Deal Desk",
+      "value_type": "non_value_added",
+      "process_time_min": 15,
+      "wait_time_min": 180,
+      "rework_rate": 0.0,
+      "system": "ITSM",
+      "automated": false
+    },
+    {
+      "id": "s7",
+      "name": "Environment provisioned",
+      "owner": "Platform Ops",
+      "value_type": "value_added",
+      "process_time_min": 90,
+      "wait_time_min": 480,
+      "rework_rate": 0.06,
+      "system": "ITSM",
+      "automated": true
+    },
+    {
+      "id": "s8",
+      "name": "Customer data migrated",
+      "owner": "Platform Ops",
+      "value_type": "value_added",
+      "process_time_min": 180,
+      "wait_time_min": 120,
+      "rework_rate": 0.12,
+      "rework_to": "s7",
+      "system": "ITSM",
+      "automated": false
+    },
+    {
+      "id": "s9",
+      "name": "Security review of tenant config",
+      "owner": "Security",
+      "value_type": "business_value_added",
+      "process_time_min": 40,
+      "wait_time_min": 720,
+      "rework_rate": 0.10,
+      "rework_to": "s7",
+      "system": "ITSM",
+      "automated": false
+    },
+    {
+      "id": "s10",
+      "name": "Onboarding session scheduled",
+      "owner": "Customer Success",
+      "value_type": "value_added",
+      "process_time_min": 30,
+      "wait_time_min": 600,
+      "rework_rate": 0.0,
+      "system": "CRM",
+      "automated": false
+    },
+    {
+      "id": "s11",
+      "name": "Account activated + credentials sent",
+      "owner": "Customer Success",
+      "value_type": "value_added",
+      "process_time_min": 25,
+      "wait_time_min": 60,
+      "rework_rate": 0.04,
+      "system": "CRM",
+      "automated": false
+    },
+    {
+      "id": "s12",
+      "name": "Deal marked closed-won in CRM",
+      "owner": "Sales",
+      "value_type": "non_value_added",
+      "process_time_min": 10,
+      "wait_time_min": 240,
+      "rework_rate": 0.0,
+      "system": "CRM",
+      "automated": false
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "files_scanned": 24,
+  "source": {
+    "REQ-KEY-ISSUANCE-01": ["src/keys/issuance.py"],
+    "REQ-KEY-ISSUANCE-02": ["src/keys/issuance.py", "src/keys/quota.py"],
+    "REQ-ROTATION-01": ["src/keys/rotation_job.py"],
+    "REQ-ROTATION-02": ["src/keys/notifier.py"],
+    "REQ-REVOCATION-01": ["src/keys/revocation.py"],
+    "REQ-REVOCATION-02": ["src/audit/writer.py"],
+    "REQ-NON-FUNCTIONAL-01": ["src/keys/rotation_job.py"],
+    "REQ-LEGACY-KEYS-07": ["src/keys/legacy_import.py"]
+  },
+  "tests": {
+    "REQ-KEY-ISSUANCE-01": ["tests/test_issuance.py"],
+    "REQ-KEY-ISSUANCE-02": ["tests/test_quota.py"],
+    "REQ-ROTATION-01": ["tests/test_rotation_job.py"],
+    "REQ-REVOCATION-01": ["tests/test_revocation.py"],
+    "REQ-REVOCATION-03": ["tests/test_revocation.py"],
+    "REQ-NON-FUNCTIONAL-01": ["tests/perf/test_sweep.py"],
+    "REQ-LEGACY-KEYS-07": ["tests/test_legacy_import.py"]
+  }
+}

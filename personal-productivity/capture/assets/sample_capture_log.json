@@ -1,0 +1,18 @@
+{
+  "items": [
+    {"id": "C1", "text": "Call the dentist to move Thursday's appointment", "captured_at": "2026-07-20", "source": "phone-voice-memo"},
+    {"id": "C2", "text": "Reply to Dana about the contract redline", "captured_at": "2026-07-21", "source": "inbox"},
+    {"id": "C3", "text": "Launch the new onboarding flow", "captured_at": "2026-07-06", "source": "notebook"},
+    {"id": "C4", "text": "taxes", "captured_at": "2026-06-01", "source": "notebook"},
+    {"id": "C5", "text": "Think about the pricing page rewrite", "captured_at": "2026-05-28", "source": "shower-thought"},
+    {"id": "C6", "text": "https://example.org/paper-on-attention-residue", "captured_at": "2026-07-19", "source": "browser"},
+    {"id": "C7", "text": "Someday learn to sail", "captured_at": "2026-04-02", "source": "notebook"},
+    {"id": "C8", "text": "Follow up with the landlord", "captured_at": "2026-07-02", "source": "phone-voice-memo"},
+    {"id": "C9", "text": "Book flights and reserve the conference hotel", "captured_at": "2026-07-18", "source": "inbox"},
+    {"id": "C10", "text": "Sign the insurance renewal", "captured_at": "2026-07-21", "source": "inbox"},
+    {"id": "C11", "text": "nvm — the vendor already cancelled the invoice", "captured_at": "2026-07-15", "source": "inbox"},
+    {"id": "C12", "text": "Q3 offsite stuff", "captured_at": "2026-06-20", "source": "meeting"},
+    {"id": "C13", "text": "Read the incident write-up from Tuesday", "captured_at": "2026-07-17", "source": "slack"},
+    {"id": "C14", "text": "Sort out the CI flakiness", "captured_at": "2026-05-19", "source": "slack"}
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "decision": "Customer data platform replacement",
+  "must_haves": [
+    "SOC 2 Type II",
+    "EU data residency",
+    "SSO via SAML",
+    "Documented exit / data export"
+  ],
+  "criteria": [
+    { "name": "Functional fit", "weight": 30 },
+    { "name": "Security + compliance", "weight": 20 },
+    { "name": "Integration effort", "weight": 15 },
+    { "name": "Support quality", "weight": 10 },
+    { "name": "Roadmap + viability", "weight": 15 },
+    { "name": "Exit cost", "weight": 10 }
+  ],
+  "vendors": [
+    {
+      "name": "Northwind Data Cloud",
+      "annual_cost": 240000,
+      "meets_must_haves": {
+        "SOC 2 Type II": true,
+        "EU data residency": true,
+        "SSO via SAML": true,
+        "Documented exit / data export": true
+      },
+      "scores": {
+        "Functional fit": 9,
+        "Security + compliance": 8,
+        "Integration effort": 6,
+        "Support quality": 7,
+        "Roadmap + viability": 9,
+        "Exit cost": 4
+      },
+      "notes": "Strongest functionally; proprietary query layer raises exit cost."
+    },
+    {
+      "name": "Meridian Platform",
+      "annual_cost": 165000,
+      "meets_must_haves": {
+        "SOC 2 Type II": true,
+        "EU data residency": true,
+        "SSO via SAML": true,
+        "Documented exit / data export": true
+      },
+      "scores": {
+        "Functional fit": 8,
+        "Security + compliance": 8,
+        "Integration effort": 8,
+        "Support quality": 6,
+        "Roadmap + viability": 6,
+        "Exit cost": 8
+      },
+      "notes": "Open formats throughout; support is business-hours only in EU. Smaller company, thinner roadmap."
+    },
+    {
+      "name": "Kestrel Analytics",
+      "annual_cost": 98000,
+      "meets_must_haves": {
+        "SOC 2 Type II": true,
+        "EU data residency": false,
+        "SSO via SAML": true,
+        "Documented exit / data export": true
+      },
+      "scores": {
+        "Functional fit": 7,
+        "Security + compliance": 5,
+        "Integration effort": 9,
+        "Support quality": 7,
+        "Roadmap + viability": 5,
+        "Exit cost": 8
+      },
+      "notes": "Cheapest and easiest to integrate; US-only regions rule it out."
+    },
+    {
+      "name": "Atlas Enterprise Suite",
+      "annual_cost": 310000,
+      "meets_must_haves": {
+        "SOC 2 Type II": true,
+        "EU data residency": true,
+        "SSO via SAML": true,
+        "Documented exit / data export": true
+      },
+      "scores": {
+        "Functional fit": 8,
+        "Security + compliance": 9,
+        "Integration effort": 4,
+        "Support quality": 9,
+        "Roadmap + viability": 8,
+        "Exit cost": 3
+      },
+      "notes": "Best support and compliance posture; heaviest lock-in and cost."
+    }
+  ]
+}

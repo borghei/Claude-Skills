@@ -1,0 +1,56 @@
+Payments Platform / Reconciliation sync
+2026-07-16, 14:00-14:25 UTC
+Present: Priya (EM), Sam (eng), Lena (data), Kai (PM)
+
+[14:02] PRIYA: Purpose of this one is narrow. We need to close out the stopgap
+importer scope and decide whether the September cutover date holds. Sam, you had
+the estimate.
+
+[14:03] SAM: Four days if we only handle the six currencies Treasury already
+exports. Nine days if we handle all eleven, because three of them have a
+different rounding convention and I'd need to write the reconciliation rules
+from scratch.
+
+[14:05] KAI: Do we need all eleven for the cutover?
+
+[14:05] SAM: No. Six covers 94% of settlement volume.
+
+[14:06] LENA: I can confirm the 94% number, it's from the June volume cut.
+
+[14:07] PRIYA: Then we scope it to six.
+
+DECISION: Stopgap importer covers six currencies only, not eleven. Approver:
+Priya. Rationale: six currencies cover 94% of settlement volume and cut the
+estimate from nine days to four. The remaining five currencies go through the
+Treasury export when it lands.
+
+ACTION: Sam to open the importer PR by 2026-07-22.
+ACTION: Lena to publish the June volume-by-currency cut to the wiki by 2026-07-20.
+
+[14:12] KAI: On the cutover date. If the importer is four days and starts
+Monday, we're done the 24th. Reconciliation testing is a week. That still lands
+before the September freeze.
+
+[14:14] PRIYA: What breaks the September date?
+
+[14:14] SAM: Only if the rounding rules for the six turn out to be wrong. I'd
+know within two days of starting.
+
+[14:15] PRIYA: Fine. We're holding September.
+
+DECISION: September cutover date holds. Approver: Priya. Review trigger: if
+Sam finds the rounding rules wrong in the first two days, we re-open the date
+immediately rather than at the next weekly.
+
+ACTION: Priya to confirm the September date with Treasury by 2026-07-21.
+
+[14:19] LENA: One thing that isn't decided — do we need the provider SLA signed
+before cutover or can it come after? I've asked twice now.
+
+[14:20] KAI: That's a vendor conversation, not ours.
+
+OPEN QUESTION: Does the downstream provider SLA need to be signed before the
+September cutover, or can it follow? Owner: Kai. Needs an answer by 2026-08-01
+so it does not become a cutover blocker.
+
+[14:22] PRIYA: Anything else? No. Back nine minutes early.

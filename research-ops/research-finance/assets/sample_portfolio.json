@@ -1,0 +1,84 @@
+{
+  "portfolio": "FY27 research programme",
+  "currency": "EUR",
+  "available_budget": 400000,
+  "studies": [
+    {
+      "id": "R1",
+      "name": "Pricing sensitivity study ahead of the tier restructure",
+      "cost": 85000,
+      "decision_value": 1200000,
+      "probability_changes_decision": 0.35,
+      "decision_reversibility": "costly",
+      "months_to_answer": 3,
+      "decision_deadline_months": 6,
+      "decision_already_made": false
+    },
+    {
+      "id": "R2",
+      "name": "Market entry feasibility, Nordics",
+      "cost": 140000,
+      "decision_value": 4000000,
+      "probability_changes_decision": 0.3,
+      "decision_reversibility": "one_way_door",
+      "months_to_answer": 5,
+      "decision_deadline_months": 9,
+      "decision_already_made": false
+    },
+    {
+      "id": "R3",
+      "name": "Onboarding copy variant preference test",
+      "cost": 30000,
+      "decision_value": 180000,
+      "probability_changes_decision": 0.5,
+      "decision_reversibility": "sprint",
+      "months_to_answer": 2,
+      "decision_deadline_months": 4,
+      "decision_already_made": false
+    },
+    {
+      "id": "R4",
+      "name": "Post-hoc validation of the platform migration already approved",
+      "cost": 60000,
+      "decision_value": 2500000,
+      "probability_changes_decision": 0.2,
+      "decision_reversibility": "one_way_door",
+      "months_to_answer": 4,
+      "decision_deadline_months": 12,
+      "decision_already_made": true
+    },
+    {
+      "id": "R5",
+      "name": "Enterprise churn driver study",
+      "cost": 95000,
+      "decision_value": 2200000,
+      "probability_changes_decision": 0.4,
+      "decision_reversibility": "costly",
+      "months_to_answer": 4,
+      "decision_deadline_months": 8,
+      "decision_already_made": false
+    },
+    {
+      "id": "R6",
+      "name": "Regulatory readiness assessment for the new data residency rule",
+      "cost": 55000,
+      "decision_value": 900000,
+      "probability_changes_decision": 0.45,
+      "decision_reversibility": "costly",
+      "months_to_answer": 7,
+      "decision_deadline_months": 5,
+      "decision_already_made": false
+    },
+    {
+      "id": "R7",
+      "name": "Brand perception tracker refresh",
+      "cost": 120000,
+      "decision_value": 250000,
+      "probability_changes_decision": 0.25,
+      "decision_reversibility": "quarter",
+      "months_to_answer": 3,
+      "decision_deadline_months": 10,
+      "decision_already_made": false
+    }
+  ]
+}

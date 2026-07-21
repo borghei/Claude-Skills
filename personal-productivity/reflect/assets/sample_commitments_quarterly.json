@@ -1,0 +1,22 @@
+{
+  "commitments": [
+    {"id": "Q1", "text": "Ship the platform migration to production", "made_on": "2026-04-06", "due": "2026-06-30", "status": "partial"},
+    {"id": "Q2", "text": "Hire a staff engineer", "made_on": "2026-04-06", "due": "2026-06-30", "status": "missed", "carried_cycles": 2},
+    {"id": "Q3", "text": "Set up the customer advisory board", "made_on": "2026-04-06", "due": "2026-06-15", "status": "open", "carried_cycles": 5},
+    {"id": "Q4", "text": "Cut cloud spend by 15%", "made_on": "2026-04-06", "due": "2026-06-30", "status": "kept"},
+    {"id": "Q5", "text": "Run the SOC 2 readiness assessment", "made_on": "2026-04-08", "due": "2026-05-31", "status": "kept"},
+    {"id": "Q6", "text": "Publish the engineering career ladder", "made_on": "2026-04-10", "due": "2026-06-30", "status": "missed", "carried_cycles": 4},
+    {"id": "Q7", "text": "Move the team to trunk-based development", "made_on": "2026-04-13", "due": "2026-06-01", "status": "kept"},
+    {"id": "Q8", "text": "Replace the weekly status meeting with a written update", "made_on": "2026-04-20", "due": "2026-05-15", "status": "kept"},
+    {"id": "Q9", "text": "Define and instrument the activation metric", "made_on": "2026-04-27", "due": "2026-06-15", "status": "partial"},
+    {"id": "Q10", "text": "Write the quarterly performance reviews", "made_on": "2026-05-04", "due": "2026-06-20", "status": "missed", "carried_cycles": 3},
+    {"id": "Q11", "text": "Renegotiate the observability vendor contract", "made_on": "2026-05-11", "due": "2026-07-01", "status": "open"},
+    {"id": "Q12", "text": "Reduce p95 checkout latency below 400ms", "made_on": "2026-05-11", "due": "2026-06-30", "status": "kept"},
+    {"id": "Q13", "text": "Document the on-call escalation path", "made_on": "2026-05-18", "due": "2026-06-05", "status": "kept"},
+    {"id": "Q14", "text": "Start the monthly architecture forum", "made_on": "2026-05-25", "due": "2026-06-30", "status": "missed", "carried_cycles": 3},
+    {"id": "Q15", "text": "Complete the data retention policy review", "made_on": "2026-06-01", "due": "2026-07-15", "status": "open"},
+    {"id": "Q16", "text": "Run a post-mortem on the June outage", "made_on": "2026-06-08", "due": "2026-06-22", "status": "kept"},
+    {"id": "Q17", "text": "Draft the H2 technical strategy", "made_on": "2026-06-15", "due": "2026-07-10", "status": "open"},
+    {"id": "Q18", "text": "Decommission the legacy reporting service", "made_on": "2026-06-22", "due": "2026-07-31", "status": "open", "carried_cycles": 2}
+  ]
+}

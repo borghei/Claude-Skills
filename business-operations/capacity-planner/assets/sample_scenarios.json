@@ -1,0 +1,43 @@
+{
+  "_comment": "Engineering-only view. Baseline is the engineering effective_hours from capacity_model.py on sample_team.json; hours_per_fte_quarter is effective hours a fully-ramped FTE delivers per quarter.",
+  "horizon_quarters": 4,
+  "baseline_effective_hours_per_quarter": 1067,
+  "hours_per_fte_quarter": 300,
+  "demand_hours_per_quarter": [1350, 1500, 1650, 1700],
+  "scenarios": [
+    {
+      "name": "Hire 2 mid engineers",
+      "type": "hire",
+      "count": 2,
+      "start_quarter": 1,
+      "seniority": "mid",
+      "annual_cost_per_head": 165000,
+      "recruiting_cost_per_head": 28000,
+      "loading_multiplier": 1.3
+    },
+    {
+      "name": "Hire 1 senior engineer",
+      "type": "hire",
+      "count": 1,
+      "start_quarter": 1,
+      "seniority": "senior",
+      "annual_cost_per_head": 210000,
+      "recruiting_cost_per_head": 35000,
+      "loading_multiplier": 1.3
+    },
+    {
+      "name": "Contract 2 engineers",
+      "type": "contract",
+      "count": 2,
+      "start_quarter": 0,
+      "hourly_rate": 115
+    },
+    {
+      "name": "Defer 400h/qtr of scope",
+      "type": "defer",
+      "count": 0,
+      "start_quarter": 0,
+      "deferred_hours_per_quarter": 400
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Payments Platform — week of 13 July",
+  "audience": "exec",
+  "body": "## This week\n\nThe team continued to make progress against the multi-currency settlement workstream and we leveraged the new ledger abstraction to reduce the amount of bespoke currency handling in the payout path, which should be fine for the September cutover assuming the reconciliation work lands roughly on the schedule we discussed at the last roadmap review with the risk and treasury stakeholders.\n\n- Shipped the ledger abstraction behind a flag; 3 of 11 currencies migrated\n- Payout p95 latency down from 840ms to 610ms\n\n## Risks\n\nReconciliation tooling is blocked on a Treasury data export that has slipped twice. We think it is probably recoverable but the September date is at risk if the export does not arrive by 25 July.\n\n## Next\n\nMigrate the remaining 8 currencies and close out reconciliation.\n"
+}

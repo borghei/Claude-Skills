@@ -16,6 +16,9 @@ Utility skills for individual workflows that don't fit cleanly into a single bus
 | Investor Update Generator | `investor-update-generator/` | `investor_update_validator.py` | Validate monthly investor update against rubric |
 | Pitch Deck Reviewer | `pitch-deck-reviewer/` | `deck_structure_scorer.py` | Score pitch deck structure vs YC/Sequoia/a16z heuristics |
 | Weekly Review | `weekly-review/` | `weekly_review_synthesizer.py` | Friday/Sunday review synthesizer (GTD + OKR check-in) |
+| Capture | `capture/` | `capture_triage.py` | Triage a capture log into actions/projects/reference/drop; audit habit health |
+| Deep Work | `deep-work/` | `calendar_fragmentation.py` | Measure calendar fragmentation, propose reschedules, track session trends |
+| Reflect | `reflect/` | `calibration_scorer.py` | Score prediction calibration (Brier); generate cadence-appropriate reflection prompts |
 
 ## Design Notes
 

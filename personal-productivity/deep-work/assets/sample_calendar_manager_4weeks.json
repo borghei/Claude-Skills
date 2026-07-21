@@ -1,0 +1,660 @@
+{
+  "events": [
+    {
+      "date": "2026-06-22",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-22",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Staff meeting",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-22",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Dana"
+    },
+    {
+      "date": "2026-06-22",
+      "start": "13:00",
+      "end": "13:30",
+      "title": "1:1 Priya"
+    },
+    {
+      "date": "2026-06-22",
+      "start": "14:00",
+      "end": "14:30",
+      "title": "1:1 Marco"
+    },
+    {
+      "date": "2026-06-22",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Roadmap sync"
+    },
+    {
+      "date": "2026-06-22",
+      "start": "16:30",
+      "end": "17:00",
+      "title": "Board prep"
+    },
+    {
+      "date": "2026-06-23",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-23",
+      "start": "10:30",
+      "end": "11:00",
+      "title": "1:1 Sam"
+    },
+    {
+      "date": "2026-06-23",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Ola"
+    },
+    {
+      "date": "2026-06-23",
+      "start": "13:30",
+      "end": "14:30",
+      "title": "Design review"
+    },
+    {
+      "date": "2026-06-23",
+      "start": "15:30",
+      "end": "16:00",
+      "title": "Vendor sync"
+    },
+    {
+      "date": "2026-06-24",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-24",
+      "start": "11:00",
+      "end": "11:30",
+      "title": "Hiring debrief"
+    },
+    {
+      "date": "2026-06-24",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Architecture review"
+    },
+    {
+      "date": "2026-06-25",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-25",
+      "start": "10:00",
+      "end": "10:30",
+      "title": "Support escalation"
+    },
+    {
+      "date": "2026-06-25",
+      "start": "11:00",
+      "end": "12:00",
+      "title": "Product sync"
+    },
+    {
+      "date": "2026-06-25",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Customer call",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-25",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Recruiter screen"
+    },
+    {
+      "date": "2026-06-25",
+      "start": "16:00",
+      "end": "16:30",
+      "title": "Metrics review"
+    },
+    {
+      "date": "2026-06-26",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-26",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Incident retro"
+    },
+    {
+      "date": "2026-06-26",
+      "start": "12:00",
+      "end": "12:30",
+      "title": "Skip-level"
+    },
+    {
+      "date": "2026-06-26",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Weekly review",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-29",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-29",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Staff meeting",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-29",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Dana"
+    },
+    {
+      "date": "2026-06-29",
+      "start": "13:00",
+      "end": "13:30",
+      "title": "1:1 Priya"
+    },
+    {
+      "date": "2026-06-29",
+      "start": "14:00",
+      "end": "14:30",
+      "title": "1:1 Marco"
+    },
+    {
+      "date": "2026-06-29",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Roadmap sync"
+    },
+    {
+      "date": "2026-06-30",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-06-30",
+      "start": "10:30",
+      "end": "11:00",
+      "title": "1:1 Sam"
+    },
+    {
+      "date": "2026-06-30",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Ola"
+    },
+    {
+      "date": "2026-06-30",
+      "start": "13:30",
+      "end": "14:30",
+      "title": "Design review"
+    },
+    {
+      "date": "2026-06-30",
+      "start": "15:30",
+      "end": "16:00",
+      "title": "Vendor sync"
+    },
+    {
+      "date": "2026-07-01",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-01",
+      "start": "11:00",
+      "end": "11:30",
+      "title": "Hiring debrief"
+    },
+    {
+      "date": "2026-07-01",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Quarterly planning"
+    },
+    {
+      "date": "2026-07-01",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Architecture review"
+    },
+    {
+      "date": "2026-07-02",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-02",
+      "start": "10:00",
+      "end": "10:30",
+      "title": "Support escalation"
+    },
+    {
+      "date": "2026-07-02",
+      "start": "11:00",
+      "end": "12:00",
+      "title": "Product sync"
+    },
+    {
+      "date": "2026-07-02",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Customer call",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-02",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Recruiter screen"
+    },
+    {
+      "date": "2026-07-02",
+      "start": "15:30",
+      "end": "16:00",
+      "title": "Partner intro"
+    },
+    {
+      "date": "2026-07-02",
+      "start": "16:00",
+      "end": "16:30",
+      "title": "Metrics review"
+    },
+    {
+      "date": "2026-07-03",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-03",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Incident retro"
+    },
+    {
+      "date": "2026-07-03",
+      "start": "12:00",
+      "end": "12:30",
+      "title": "Skip-level"
+    },
+    {
+      "date": "2026-07-03",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Weekly review",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-06",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-06",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Staff meeting",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-06",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Dana"
+    },
+    {
+      "date": "2026-07-06",
+      "start": "13:00",
+      "end": "13:30",
+      "title": "1:1 Priya"
+    },
+    {
+      "date": "2026-07-06",
+      "start": "14:00",
+      "end": "14:30",
+      "title": "1:1 Marco"
+    },
+    {
+      "date": "2026-07-06",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Roadmap sync"
+    },
+    {
+      "date": "2026-07-07",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-07",
+      "start": "10:30",
+      "end": "11:00",
+      "title": "1:1 Sam"
+    },
+    {
+      "date": "2026-07-07",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Ola"
+    },
+    {
+      "date": "2026-07-07",
+      "start": "13:30",
+      "end": "14:30",
+      "title": "Design review"
+    },
+    {
+      "date": "2026-07-07",
+      "start": "14:45",
+      "end": "15:15",
+      "title": "Perf calibration"
+    },
+    {
+      "date": "2026-07-07",
+      "start": "15:30",
+      "end": "16:00",
+      "title": "Vendor sync"
+    },
+    {
+      "date": "2026-07-08",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-08",
+      "start": "11:00",
+      "end": "11:30",
+      "title": "Hiring debrief"
+    },
+    {
+      "date": "2026-07-08",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Architecture review"
+    },
+    {
+      "date": "2026-07-09",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-09",
+      "start": "10:00",
+      "end": "10:30",
+      "title": "Support escalation"
+    },
+    {
+      "date": "2026-07-09",
+      "start": "11:00",
+      "end": "12:00",
+      "title": "Product sync"
+    },
+    {
+      "date": "2026-07-09",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Customer call",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-09",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Recruiter screen"
+    },
+    {
+      "date": "2026-07-09",
+      "start": "16:00",
+      "end": "16:30",
+      "title": "Metrics review"
+    },
+    {
+      "date": "2026-07-10",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-10",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Incident retro"
+    },
+    {
+      "date": "2026-07-10",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "Offsite logistics"
+    },
+    {
+      "date": "2026-07-10",
+      "start": "12:00",
+      "end": "12:30",
+      "title": "Skip-level"
+    },
+    {
+      "date": "2026-07-10",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Weekly review",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-13",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-13",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Staff meeting",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-13",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Dana"
+    },
+    {
+      "date": "2026-07-13",
+      "start": "12:30",
+      "end": "13:00",
+      "title": "Budget review"
+    },
+    {
+      "date": "2026-07-13",
+      "start": "13:00",
+      "end": "13:30",
+      "title": "1:1 Priya"
+    },
+    {
+      "date": "2026-07-13",
+      "start": "14:00",
+      "end": "14:30",
+      "title": "1:1 Marco"
+    },
+    {
+      "date": "2026-07-13",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Roadmap sync"
+    },
+    {
+      "date": "2026-07-14",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-14",
+      "start": "10:30",
+      "end": "11:00",
+      "title": "1:1 Sam"
+    },
+    {
+      "date": "2026-07-14",
+      "start": "11:30",
+      "end": "12:00",
+      "title": "1:1 Ola"
+    },
+    {
+      "date": "2026-07-14",
+      "start": "13:30",
+      "end": "14:30",
+      "title": "Design review"
+    },
+    {
+      "date": "2026-07-14",
+      "start": "15:30",
+      "end": "16:00",
+      "title": "Vendor sync"
+    },
+    {
+      "date": "2026-07-15",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-15",
+      "start": "10:00",
+      "end": "10:30",
+      "title": "Security briefing"
+    },
+    {
+      "date": "2026-07-15",
+      "start": "11:00",
+      "end": "11:30",
+      "title": "Hiring debrief"
+    },
+    {
+      "date": "2026-07-15",
+      "start": "15:00",
+      "end": "16:00",
+      "title": "Architecture review"
+    },
+    {
+      "date": "2026-07-16",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-16",
+      "start": "10:00",
+      "end": "10:30",
+      "title": "Support escalation"
+    },
+    {
+      "date": "2026-07-16",
+      "start": "11:00",
+      "end": "12:00",
+      "title": "Product sync"
+    },
+    {
+      "date": "2026-07-16",
+      "start": "13:00",
+      "end": "14:00",
+      "title": "Customer call",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-16",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Recruiter screen"
+    },
+    {
+      "date": "2026-07-16",
+      "start": "16:00",
+      "end": "16:30",
+      "title": "Metrics review"
+    },
+    {
+      "date": "2026-07-17",
+      "start": "09:30",
+      "end": "09:45",
+      "title": "Standup",
+      "fixed": true
+    },
+    {
+      "date": "2026-07-17",
+      "start": "10:00",
+      "end": "11:00",
+      "title": "Incident retro"
+    },
+    {
+      "date": "2026-07-17",
+      "start": "12:00",
+      "end": "12:30",
+      "title": "Skip-level"
+    },
+    {
+      "date": "2026-07-17",
+      "start": "13:00",
+      "end": "13:30",
+      "title": "Interview loop debrief"
+    },
+    {
+      "date": "2026-07-17",
+      "start": "14:30",
+      "end": "15:00",
+      "title": "Weekly review",
+      "fixed": true
+    }
+  ]
+}

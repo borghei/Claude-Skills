@@ -1,0 +1,78 @@
+{
+  "title": "Adjunctive digital adherence support versus standard of care in adults initiating oral therapy",
+  "protocol_id": "DAS-301",
+  "phase": "3",
+  "sections_present": [
+    "general_information",
+    "background",
+    "objectives",
+    "design",
+    "eligibility",
+    "treatment",
+    "efficacy_assessment",
+    "safety_assessment",
+    "statistics",
+    "source_data_access",
+    "ethics",
+    "data_handling"
+  ],
+  "endpoints": [
+    {
+      "name": "Proportion adherent at week 12",
+      "role": "primary",
+      "measure": "Proportion of participants with pill-count adherence of 80% or greater",
+      "timepoint": "week 12",
+      "analysis_population": "ITT"
+    },
+    {
+      "name": "Change in symptom score",
+      "role": "secondary",
+      "measure": "Change from baseline in validated 24-item symptom scale",
+      "timepoint": "week 24",
+      "analysis_population": "ITT"
+    },
+    {
+      "name": "Participant-reported benefit",
+      "role": "secondary",
+      "measure": "benefit",
+      "timepoint": null,
+      "analysis_population": null
+    }
+  ],
+  "eligibility": {
+    "inclusion": [
+      "Age 18 to 75 years inclusive",
+      "Confirmed diagnosis within the last 12 months",
+      "Initiating oral therapy at randomisation",
+      "Owns a smartphone capable of running the study application",
+      "Able to provide written informed consent"
+    ],
+    "exclusion": [
+      "Pregnancy or breastfeeding",
+      "Participation in another interventional study within 30 days",
+      "Known contraindication to the index therapy",
+      "Cognitive impairment preventing use of the study application",
+      "Not able to provide written informed consent"
+    ]
+  },
+  "statistics": {
+    "sample_size_justified": true,
+    "analysis_populations": ["ITT", "PP", "Safety"],
+    "missing_data_strategy": "Multiple imputation under missing-at-random, with tipping-point sensitivity analysis",
+    "interim_analyses": 1,
+    "alpha_spending_function": null,
+    "multiple_primary_comparisons": false,
+    "multiplicity_adjustment": null
+  },
+  "safety": {
+    "ae_reporting_defined": true,
+    "sae_reporting_window_hours": 24,
+    "dsmb": true,
+    "stopping_rules_defined": false
+  },
+  "governance": {
+    "ethics_submission_planned": true,
+    "registered": false,
+    "informed_consent_process_described": true
+  }
+}

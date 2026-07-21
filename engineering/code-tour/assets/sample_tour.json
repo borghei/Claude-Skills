@@ -1,0 +1,75 @@
+{
+  "title": "Code Tour — how a repository becomes a tour, and how the tour stays true",
+  "repo": ".",
+  "audience": "engineer picking up maintenance of this skill",
+  "duration_minutes": 30,
+  "orientation": "Three scripts run in pipeline order: propose candidate stops, render and audit the notes, then validate the anchors against the tree. Read them in that order — each one assumes the output of the last. Nothing here touches a network or a database, so you can run every stop locally as you read it.",
+  "prerequisites": [
+    "Python 3.10+ on your path",
+    "Run scripts/tour_propose.py --repo scripts --max-stops 3 first, so you have seen the output the rest of the pipeline consumes"
+  ],
+  "stops": [
+    {
+      "stop": 1,
+      "title": "Why role classification reads path components, not the path string",
+      "path": "scripts/tour_propose.py",
+      "anchor": "classify",
+      "line": 109,
+      "read_first": "The TEST_DIRS set and TEST_FILE_RE pattern above the function.",
+      "note": "An earlier version substring-matched hints against the whole relative path, which meant any repository with 'spec' or 'test' in a directory name had its entire source tree classified as tests and excluded from the tour. Matching against path components and a filename regex instead keeps the signal while removing the false positives, at the cost of missing unconventional test layouts — a trade worth taking, because a tour missing a stop is recoverable and a tour proposing nothing is not.",
+      "question": "What happens to a file at src/api/testing_utils.py? Trace both the TEST_DIRS and TEST_FILE_RE branches.",
+      "gotcha": "Boundary hints match on tokens split from the stem, so payment_handler.py is a boundary but paymenthandler.py is not.",
+      "fingerprint": "e8efad70"
+    },
+    {
+      "stop": 2,
+      "title": "Two fan-in strategies, and why the weaker one still ships",
+      "path": "scripts/tour_propose.py",
+      "anchor": "python_fan_in",
+      "line": 59,
+      "note": "Python fan-in is computed from the real AST import graph and is trustworthy. Everything else falls back to counting filename references in quotes, which over-counts common stems like index or utils. Shipping the weak heuristic rather than refusing to rank non-Python repositories is deliberate: the output is a shortlist a human curates, not a verdict, so a noisy ranking still beats alphabetical order.",
+      "question": "Why does the AST walk collect alias names from ImportFrom as well as the module name?",
+      "fingerprint": "4337d44a"
+    },
+    {
+      "stop": 3,
+      "title": "How the renderer detects a note that explains nothing",
+      "path": "scripts/tour_render.py",
+      "anchor": "audit_note",
+      "line": 45,
+      "read_first": "WHAT_ONLY_RE and WHY_MARKERS above the function.",
+      "note": "The audit is three cheap heuristics rather than anything semantic, because the failure it catches is blunt: notes that open by restating what the code does, notes too short to carry reasoning, and notes with no causal language at all. It will pass a well-phrased note that says nothing, and that is accepted — the goal is to catch the author who described behaviour on autopilot, not to grade prose.",
+      "question": "Which of the three checks would fire on the note you are reading right now?",
+      "gotcha": "A note can pass the audit and still be wrong. The audit checks shape, never truth.",
+      "fingerprint": "bdd572d5"
+    },
+    {
+      "stop": 4,
+      "title": "The whole thesis: anchors resolve by symbol, not by line",
+      "path": "scripts/tour_validate.py",
+      "anchor": "anchor_span",
+      "line": 46,
+      "note": "Tours here survive refactoring because of this resolution step. Python anchors resolve through the AST, so a stop keeps working after the file is reformatted, grows by 200 lines, or has the function moved within it — none of which a line number survives. Non-Python falls back to first-line text search, which is weaker but still immune to edits above the anchor. The recorded line is output, never identity.",
+      "question": "Why does the fallback branch return a 20-line window rather than a single line?",
+      "fingerprint": "04e718a2"
+    },
+    {
+      "stop": 5,
+      "title": "Fingerprinting",
+      "path": "scripts/tour_validate.py",
+      "anchor": "fingerprint",
+      "line": 77,
+      "note": "This function hashes the body.",
+      "fingerprint": "4871a7e4"
+    },
+    {
+      "stop": 6,
+      "title": "A stop that has since moved",
+      "path": "scripts/tour_export.py",
+      "anchor": "render_confluence",
+      "line": 12,
+      "note": "Included deliberately so the validator has a deleted anchor to report against this very package. Real tours accumulate these within weeks, because the code moves and the tour does not follow it unless something forces the issue — which is the entire reason validation runs in CI rather than on request."
+    }
+  ],
+  "after": "Run the three scripts in pipeline order against this skill's own directory: propose stops from scripts/, render this tour with --audit-only, then validate it. Stop 5 fails the note audit and stop 6 fails validation, both on purpose — every finding path is exercised by the sample."
+}

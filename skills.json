@@ -1,33 +1,37 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 343 production-ready skills across 17 domains. Project Management is the most-used domain (66 skills).",
+  "description": "The Universal AI Skills Library — 368 production-ready skills across 20 domains. Project Management is the most-used domain (68 skills).",
   "version": "4.11.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 343,
-  "updated": "2026-06-29",
+  "total_skills": 368,
+  "updated": "2026-07-21",
   "domains": {
     "business-growth": {
       "count": 20,
       "tools": 60
+    },
+    "business-operations": {
+      "count": 6,
+      "tools": 18
     },
     "c-level-advisor": {
       "count": 31,
       "tools": 88
     },
     "data-analytics": {
-      "count": 5,
-      "tools": 16
+      "count": 6,
+      "tools": 19
     },
     "documents": {
       "count": 4,
       "tools": 4
     },
     "engineering": {
-      "count": 86,
-      "tools": 245
+      "count": 91,
+      "tools": 258
     },
     "finance": {
       "count": 3,
@@ -41,27 +45,35 @@
       "count": 17,
       "tools": 33
     },
+    "markdown-html": {
+      "count": 4,
+      "tools": 14
+    },
     "marketing": {
       "count": 39,
       "tools": 118
     },
     "personal-productivity": {
-      "count": 10,
-      "tools": 10
+      "count": 13,
+      "tools": 16
     },
     "product-team": {
       "count": 13,
       "tools": 30
     },
     "project-management": {
-      "count": 66,
-      "tools": 73
+      "count": 68,
+      "tools": 79
     },
     "ra-qm-team": {
       "count": 27,
       "tools": 51
     },
     "research": {
+      "count": 4,
+      "tools": 12
+    },
+    "research-ops": {
       "count": 4,
       "tools": 12
     },
@@ -110,6 +122,26 @@
       "license": "MIT + Commons Clause",
       "tags": [],
       "tools": 0,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "agent-harness",
+      "description": "Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression diffing, cost and latency budgets. Use when agent quality is vibe-checked, before shipping a prompt or model change, or when evals drift.",
+      "path": "engineering/agent-harness/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "agent-eval",
+        "regression-testing",
+        "harness",
+        "replay",
+        "llm-testing"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },
@@ -382,6 +414,26 @@
       "has_assets": true
     },
     {
+      "name": "cloud-security",
+      "description": "Cloud posture security across AWS, Azure, and GCP — IAM least privilege, public exposure, encryption, logging coverage, landing-zone guardrails. Use when auditing a cloud account, before a production launch, or after a scan.",
+      "path": "engineering/cloud-security/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "cloud-security",
+        "iam",
+        "least-privilege",
+        "landing-zone",
+        "posture-management"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "code-reviewer",
       "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.",
       "path": "engineering/code-reviewer/SKILL.md",
@@ -399,6 +451,26 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "code-tour",
+      "description": "Build ordered, annotated tours of an unfamiliar codebase and keep the anchors from rotting. Use when onboarding an engineer, handing off a service, or explaining a subsystem before a review.",
+      "path": "engineering/code-tour/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "onboarding",
+        "code-reading",
+        "documentation",
+        "developer-experience",
+        "handoff"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "codebase-onboarding",
@@ -1499,6 +1571,26 @@
       "has_assets": false
     },
     {
+      "name": "spec-driven-workflow",
+      "description": "Run development from an executable specification with traceable requirement IDs and merge-time coverage gates. Use when starting a greenfield feature, reviving a stale spec, or gating merges on requirement coverage.",
+      "path": "engineering/spec-driven-workflow/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "specification",
+        "requirements",
+        "traceability",
+        "acceptance-criteria",
+        "process"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "sql-database-assistant",
       "description": "This skill should be used when the user asks to \"optimize SQL queries\", \"explore database schemas\", \"generate migration SQL\", \"analyze query performance\", or \"document database structure\".",
       "path": "engineering/sql-database-assistant/SKILL.md",
@@ -1622,6 +1714,26 @@
       "tools": 1,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "write-a-skill",
+      "description": "Author, lint, and publish skill packages that satisfy the library authoring standard. Use when creating a new skill, reviewing a skill PR, or fixing one that never activates.",
+      "path": "engineering/write-a-skill/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "authoring",
+        "meta-skill",
+        "linting",
+        "standards",
+        "packaging"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "ab-test-setup",
@@ -4849,6 +4961,26 @@
       "has_assets": true
     },
     {
+      "name": "meeting-analyzer",
+      "description": "Turn meeting notes into an accountable register — extract decisions, actions and open questions, flag ownerless items, track follow-through. Use when commitments get dropped or a recurring meeting decides nothing.",
+      "path": "project-management/meeting-analyzer/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "meeting-notes",
+        "action-items",
+        "accountability",
+        "decision-log",
+        "meeting-health"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "notion-pm",
       "description": "Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.",
       "path": "project-management/notion-pm/SKILL.md",
@@ -5037,6 +5169,27 @@
       "license": "MIT + Commons Clause",
       "tags": [],
       "tools": 1,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "team-communications",
+      "description": "Design a delivery team's communication system — channel routing, meeting-load reduction, status structure, escalation SLAs, timezone norms. Use when the calendar is full, updates go unread, or blockers surface late.",
+      "path": "project-management/team-communications/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "async",
+        "meeting-load",
+        "status-updates",
+        "escalation",
+        "timezones",
+        "team-operations"
+      ],
+      "tools": 3,
       "has_references": true,
       "has_assets": true
     },
@@ -5404,6 +5557,26 @@
       "has_assets": false
     },
     {
+      "name": "statistical-analyst",
+      "description": "Applied statistics for business and product questions — test selection, assumption checks, power planning, effect sizes with intervals, multiplicity correction. Use when interpreting an experiment, sizing a study, or vetting a claim.",
+      "path": "data-analytics/statistical-analyst/SKILL.md",
+      "domain": "data-analytics",
+      "category": "data-analytics",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "statistics",
+        "hypothesis-testing",
+        "effect-size",
+        "power-analysis",
+        "experimentation"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "account-executive",
       "description": "Sales execution across pipeline, discovery, demos, negotiation, and closing. Use when qualifying opportunities, running MEDDIC discovery, building account plans, handling objections, structuring proposals, or forecasting pipeline.",
       "path": "sales-success/account-executive/SKILL.md",
@@ -5663,6 +5836,46 @@
       "has_assets": true
     },
     {
+      "name": "capture",
+      "description": "Build a trusted capture-and-triage front door so no commitment lives in your head. Use when open loops keep slipping, an inbox has become a backlog, or vague notes never turn into action.",
+      "path": "personal-productivity/capture/SKILL.md",
+      "domain": "personal-productivity",
+      "category": "personal-productivity",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "capture",
+        "triage",
+        "inbox-zero",
+        "next-action",
+        "gtd"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "deep-work",
+      "description": "Protect, design, and measure focused work — block defence, session structure, interruption budgets, and deep-work ratio. Use when the calendar is fragmented, focus blocks keep getting eaten, or output has stalled.",
+      "path": "personal-productivity/deep-work/SKILL.md",
+      "domain": "personal-productivity",
+      "category": "personal-productivity",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "deep-work",
+        "focus",
+        "calendar",
+        "fragmentation",
+        "interruptions"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "domain-name-brainstormer",
       "description": "Generate and score candidate brand, product, and domain names for memorability and pronounceability. Use when naming a new product, company, or feature, brainstorming brand names, or finding an available .com.",
       "path": "personal-productivity/domain-name-brainstormer/SKILL.md",
@@ -5757,6 +5970,26 @@
       "license": "MIT + Commons Clause",
       "tags": [],
       "tools": 1,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "reflect",
+      "description": "Turn reflection into decisions by scoring predictions against outcomes and tracking whether commitments held. Use for quarterly review, calibration scoring, or when reflection keeps producing notes instead of change.",
+      "path": "personal-productivity/reflect/SKILL.md",
+      "domain": "personal-productivity",
+      "category": "personal-productivity",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "reflection",
+        "calibration",
+        "brier-score",
+        "forecasting",
+        "commitments"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },
@@ -6028,6 +6261,296 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "clinical-research",
+      "description": "Clinical study operations — protocol structure, endpoint selection, eligibility design, sample-size and power planning, site feasibility, and documentation readiness. Use when planning, auditing, or costing a study.",
+      "path": "research-ops/clinical-research/SKILL.md",
+      "domain": "research-ops",
+      "category": "research-ops",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "protocol",
+        "endpoints",
+        "sample-size",
+        "power",
+        "site-feasibility",
+        "ich-gcp"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "market-research",
+      "description": "Market sizing and market structure work — TAM/SAM/SOM built top-down and bottom-up then reconciled, segmentation, demand triangulation, and survey design. Use when sizing a market, writing a sizing memo, or fielding a survey.",
+      "path": "research-ops/market-research/SKILL.md",
+      "domain": "research-ops",
+      "category": "research-ops",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "tam",
+        "sam",
+        "som",
+        "market-sizing",
+        "segmentation",
+        "survey-design",
+        "demand"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "product-research",
+      "description": "Continuous product discovery research operations — picking the method that fits the question, recruiting and screening participants, building interview guides, and scoring evidence into insights. Use when planning or running discovery.",
+      "path": "research-ops/product-research/SKILL.md",
+      "domain": "research-ops",
+      "category": "research-ops",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "discovery",
+        "user-research",
+        "interviews",
+        "screener",
+        "synthesis",
+        "research-ops"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "research-finance",
+      "description": "Research budgeting and funding operations — study budget construction, cost per participant and per insight, burn against milestones, and portfolio prioritisation by decision value. Use when costing, tracking, or ranking research.",
+      "path": "research-ops/research-finance/SKILL.md",
+      "domain": "research-ops",
+      "category": "research-ops",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "budget",
+        "burn-rate",
+        "earned-value",
+        "portfolio",
+        "funding",
+        "cost-per-insight"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "capacity-planner",
+      "description": "Headcount and delivery-capacity planning — effective capacity from raw headcount, hire/contract/defer scenarios, and capacity-vs-commitment gap reports. Use when planning a quarter, sizing a hiring ask, or testing whether a roadmap fits.",
+      "path": "business-operations/capacity-planner/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "capacity-planning",
+        "headcount",
+        "resource-planning",
+        "hiring",
+        "forecasting"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "internal-comms",
+      "description": "Plan, sequence, and pressure-test internal announcements before they send. Use when announcing a reorg, policy, or product change, drafting an all-hands or exec update, or deciding who hears what and in which order.",
+      "path": "business-operations/internal-comms/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "internal-comms",
+        "change-management",
+        "announcements",
+        "all-hands",
+        "stakeholder-sequencing"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "knowledge-ops",
+      "description": "Audit and repair an internal knowledge base — staleness, ownership gaps, orphans, duplication, and findability. Use when the wiki is untrusted, docs are out of date, nobody owns pages, or search returns the wrong answer.",
+      "path": "business-operations/knowledge-ops/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "knowledge-base",
+        "documentation",
+        "information-architecture",
+        "doc-ownership",
+        "findability"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "process-mapper",
+      "description": "Map, measure and improve business processes — SIPOC and swimlane capture, cycle-time and bottleneck analysis, handoff diagnosis, and a payback-ranked improvement backlog. Use when a process is slow, error-prone, or crosses too many teams.",
+      "path": "business-operations/process-mapper/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "process-mapping",
+        "lean",
+        "cycle-time",
+        "bottleneck",
+        "continuous-improvement"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "procurement-optimizer",
+      "description": "Cut software and services spend through seat-utilisation analysis, redundant-tool detection, and renewal-timing leverage. Use when auditing SaaS spend, preparing a renewal negotiation, or hunting a budget-reduction target.",
+      "path": "business-operations/procurement-optimizer/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "saas-spend",
+        "procurement",
+        "license-optimization",
+        "vendor-negotiation",
+        "renewals"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "vendor-management",
+      "description": "Vendor lifecycle — weighted selection scorecards, risk tiering, renewal and notice-deadline tracking, spend concentration, and SLA credits. Use when selecting a vendor, preparing a renewal, or reviewing a vendor portfolio.",
+      "path": "business-operations/vendor-management/SKILL.md",
+      "domain": "business-operations",
+      "category": "business-operations",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "vendor-management",
+        "procurement",
+        "sla",
+        "renewal",
+        "third-party-risk"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "design-system",
+      "description": "Design tokens, light/dark theming, and WCAG contrast validation for HTML documents and decks, compiled into one inlinable CSS bundle. Use when theming a report or deck, auditing contrast, or fixing dark-mode color drift.",
+      "path": "markdown-html/design-system/SKILL.md",
+      "domain": "markdown-html",
+      "category": "markdown-html",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "design-tokens",
+        "wcag",
+        "contrast",
+        "dark-mode",
+        "css",
+        "typography"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "md-document",
+      "description": "Convert authored markdown into a polished self-contained HTML document with a table of contents, numbered figures and tables, cross-references, footnotes, and print-ready CSS. Use when publishing a report, whitepaper, or memo.",
+      "path": "markdown-html/md-document/SKILL.md",
+      "domain": "markdown-html",
+      "category": "markdown-html",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "markdown",
+        "html",
+        "publishing",
+        "pdf",
+        "cross-references",
+        "typography"
+      ],
+      "tools": 4,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "md-review",
+      "description": "Pre-publication quality gate for authored Markdown — heading structure, on-disk link resolution, readability, accessibility, terminology. Use when reviewing docs before publishing, wiring a docs CI gate, or auditing a Markdown corpus.",
+      "path": "markdown-html/md-review/SKILL.md",
+      "domain": "markdown-html",
+      "category": "markdown-html",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "markdown",
+        "review",
+        "accessibility",
+        "readability",
+        "ci-gate",
+        "wcag",
+        "documentation"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "md-slides",
+      "description": "Convert markdown into a self-contained HTML slide deck with layouts, speaker notes, keyboard navigation, and a content-density linter. Use when building a deck from markdown, cutting an overloaded deck, or timing a talk.",
+      "path": "markdown-html/md-slides/SKILL.md",
+      "domain": "markdown-html",
+      "category": "markdown-html",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "slides",
+        "presentation",
+        "markdown",
+        "html",
+        "speaker-notes",
+        "accessibility"
+      ],
+      "tools": 4,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "handoff",

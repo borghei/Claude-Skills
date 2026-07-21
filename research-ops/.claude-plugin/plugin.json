@@ -1,0 +1,13 @@
+{
+  "name": "research-ops-skills",
+  "description": "4 applied research operations skills: market research, product research, clinical research operations, and research finance",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/research-ops",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

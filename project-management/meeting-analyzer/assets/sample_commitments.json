@@ -1,0 +1,24 @@
+{
+  "team": "Payments Platform",
+  "period": "2026-06-01 to 2026-07-21",
+  "actions": [
+    { "id": "a-001", "meeting": "Weekly working session", "text": "Scope the stopgap importer and post the estimate", "owner": "Sam",   "created": "2026-07-14", "due": "2026-07-17", "closed": "2026-07-16", "status": "done", "carried_over": 0 },
+    { "id": "a-002", "meeting": "Weekly working session", "text": "Confirm the backfill schema matches importer output", "owner": "Lena",  "created": "2026-07-14", "due": "2026-07-18", "closed": null, "status": "in_progress", "carried_over": 0 },
+    { "id": "a-003", "meeting": "Weekly working session", "text": "Tell Treasury we are unblocking ourselves", "owner": null, "created": "2026-07-14", "due": null, "closed": null, "status": "open", "carried_over": 0 },
+    { "id": "a-004", "meeting": "Weekly working session", "text": "Produce a weekday-only p95 breakdown", "owner": "Lena", "created": "2026-07-14", "due": null, "closed": null, "status": "open", "carried_over": 1 },
+    { "id": "a-005", "meeting": "Weekly working session", "text": "Open a ticket with the downstream provider on timeouts", "owner": "Amara", "created": "2026-07-07", "due": "2026-07-14", "closed": null, "status": "open", "carried_over": 2 },
+    { "id": "a-006", "meeting": "Weekly working session", "text": "Take provider SLA question to the vendor conversation", "owner": "Kai", "created": "2026-07-07", "due": null, "closed": null, "status": "open", "carried_over": 2 },
+    { "id": "a-007", "meeting": "Metrics review", "text": "Rebuild the settlement funnel dashboard", "owner": "Lena", "created": "2026-06-11", "due": "2026-06-25", "closed": "2026-07-02", "status": "done", "carried_over": 1 },
+    { "id": "a-008", "meeting": "Metrics review", "text": "Define the payout-failure alert threshold", "owner": "Kai", "created": "2026-06-11", "due": "2026-06-18", "closed": null, "status": "blocked", "carried_over": 4 },
+    { "id": "a-009", "meeting": "Metrics review", "text": "Document metric definitions in the wiki", "owner": null, "created": "2026-06-18", "due": null, "closed": null, "status": "open", "carried_over": 3 },
+    { "id": "a-010", "meeting": "Payments + Risk alignment", "text": "Draft the fraud-scoring interface contract", "owner": "Amara", "created": "2026-06-23", "due": "2026-07-07", "closed": null, "status": "open", "carried_over": 2 },
+    { "id": "a-011", "meeting": "Payments + Risk alignment", "text": "Agree ownership boundary with Risk EM", "owner": "Priya", "created": "2026-06-23", "due": "2026-07-10", "closed": null, "status": "in_progress", "carried_over": 2 },
+    { "id": "a-012", "meeting": "Payments + Risk alignment", "text": "Share the scoring latency numbers with Risk", "owner": "Lena", "created": "2026-06-30", "due": "2026-07-03", "closed": "2026-07-03", "status": "done", "carried_over": 0 },
+    { "id": "a-013", "meeting": "Backlog grooming", "text": "Split the reconciliation epic into shippable slices", "owner": "Kai", "created": "2026-07-01", "due": "2026-07-08", "closed": "2026-07-08", "status": "done", "carried_over": 0 },
+    { "id": "a-014", "meeting": "Backlog grooming", "text": "Add acceptance criteria to the top 8 backlog items", "owner": "Kai", "created": "2026-07-08", "due": "2026-07-15", "closed": "2026-07-15", "status": "done", "carried_over": 0 },
+    { "id": "a-015", "meeting": "Backlog grooming", "text": "Estimate the currency-migration remainder", "owner": "Sam", "created": "2026-07-08", "due": "2026-07-15", "closed": "2026-07-14", "status": "done", "carried_over": 0 },
+    { "id": "a-016", "meeting": "Roadmap review", "text": "Update the Q4 roadmap deck with the cutover date", "owner": "Kai", "created": "2026-06-25", "due": "2026-07-02", "closed": "2026-07-09", "status": "done", "carried_over": 1 },
+    { "id": "a-017", "meeting": "Roadmap review", "text": "Socialise the sequencing change with Treasury", "owner": "Priya", "created": "2026-06-25", "due": null, "closed": null, "status": "open", "carried_over": 3 },
+    { "id": "a-018", "meeting": "Roadmap review", "text": "Confirm headcount for the reconciliation workstream", "owner": "Priya", "created": "2026-06-04", "due": "2026-06-30", "closed": null, "status": "blocked", "carried_over": 5 }
+  ]
+}

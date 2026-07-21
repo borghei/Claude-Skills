@@ -1,0 +1,68 @@
+{
+  "name": "legacy-inherited",
+  "description": "A deliberately damaged token file for Workflow 3. It carries the four failures an inherited theme usually has: a ramp that brightens mid-way, a role defined in only one mode, roles pinned to literal hex instead of palette stops, and a dark accent that never got re-anchored. Run the linter and the validator against it to see each one reported.",
+  "typography": {
+    "base_px": 15,
+    "ratio": 1.75,
+    "measure_ch": 96,
+    "line_height_body": 1.35,
+    "line_height_heading": 1.2,
+    "steps": ["sm", "base", "lg", "xl"],
+    "fonts": {
+      "body": "Georgia, serif",
+      "heading": "Helvetica, Arial, sans-serif",
+      "mono": "Menlo, monospace"
+    }
+  },
+  "spacing": {
+    "base_px": 5,
+    "steps": [0, 1, 2, 3, 7, 6, 12]
+  },
+  "radius": {
+    "md": "6px"
+  },
+  "palette": {
+    "neutral": {
+      "0": "#ffffff",
+      "100": "#f1f5f9",
+      "200": "#cbd5e1",
+      "300": "#e2e8f0",
+      "600": "#475569",
+      "800": "#1e293b",
+      "900": "#0f172a",
+      "1000": "#020617"
+    },
+    "accent": {
+      "300": "#7dd3fc",
+      "600": "#0369a1"
+    }
+  },
+  "roles": {
+    "light": {
+      "surface": "neutral.0",
+      "surface-raised": "neutral.100",
+      "text": "neutral.900",
+      "text-muted": "#8b9bb0",
+      "border": "neutral.200",
+      "link": "accent.600",
+      "accent": "accent.600",
+      "codeBackground": "neutral.100"
+    },
+    "dark": {
+      "surface": "neutral.1000",
+      "surface-raised": "neutral.800",
+      "text": "neutral.100",
+      "text-muted": "neutral.600",
+      "border": "neutral.600",
+      "link": "accent.600",
+      "accent": "accent.600"
+    }
+  },
+  "pairings": [
+    {"fg": "text", "bg": "surface", "usage": "body"},
+    {"fg": "text-muted", "bg": "surface", "usage": "body"},
+    {"fg": "link", "bg": "surface", "usage": "body"},
+    {"fg": "accent", "bg": "surface", "usage": "large"},
+    {"fg": "border", "bg": "surface", "usage": "decor"}
+  ]
+}

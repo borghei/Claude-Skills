@@ -4,11 +4,11 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant \u2014 339 expert skills across 17 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, finance, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 368 expert skills across 20 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "339 production-ready AI skill packages across 17 domains, installable per-domain as Claude Code plugins",
+    "description": "368 production-ready AI skill packages across 20 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
@@ -321,6 +321,60 @@
         "meta-skills"
       ],
       "category": "workflow"
+    },
+    {
+      "name": "business-operations-skills",
+      "source": "./business-operations",
+      "description": "6 business operations skills: capacity planning, process mapping, vendor management, internal comms, knowledge ops, and procurement optimization",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "business-operations",
+        "bizops",
+        "capacity",
+        "process",
+        "vendors",
+        "procurement",
+        "knowledge"
+      ],
+      "category": "business"
+    },
+    {
+      "name": "research-ops-skills",
+      "source": "./research-ops",
+      "description": "4 applied research operations skills: market research, product research, clinical research operations, and research finance",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "research-ops",
+        "market-research",
+        "product-research",
+        "clinical",
+        "research-finance"
+      ],
+      "category": "research"
+    },
+    {
+      "name": "markdown-html-skills",
+      "source": "./markdown-html",
+      "description": "4 markdown-to-HTML publishing skills: document rendering, slide decks, pre-publication review gate, and the shared design-token system",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "markdown",
+        "html",
+        "documents",
+        "slides",
+        "design-tokens",
+        "publishing"
+      ],
+      "category": "documentation"
     }
   ]
 }

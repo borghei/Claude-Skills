@@ -1,0 +1,83 @@
+{
+  "quarter": "2026-Q3",
+  "_comment": "capacity values are the effective_hours produced by capacity_model.py on sample_team.json",
+  "capacity": {
+    "engineering": 1067,
+    "design": 296,
+    "qa": 339
+  },
+  "commitments": [
+    {
+      "name": "SSO + SCIM for enterprise tier",
+      "discipline": "engineering",
+      "estimate_hours": 320,
+      "confidence": "medium",
+      "priority": 1,
+      "committed": true
+    },
+    {
+      "name": "Billing migration to usage-based",
+      "discipline": "engineering",
+      "estimate_hours": 260,
+      "confidence": "low",
+      "priority": 2,
+      "committed": true
+    },
+    {
+      "name": "Search relevance rework",
+      "discipline": "engineering",
+      "estimate_hours": 180,
+      "confidence": "high",
+      "priority": 3,
+      "committed": false
+    },
+    {
+      "name": "Mobile offline mode",
+      "discipline": "engineering",
+      "estimate_hours": 240,
+      "confidence": "low",
+      "priority": 4,
+      "committed": false
+    },
+    {
+      "name": "Admin console redesign",
+      "discipline": "engineering",
+      "estimate_hours": 150,
+      "confidence": "medium",
+      "priority": 5,
+      "committed": true
+    },
+    {
+      "name": "Design system v2 tokens",
+      "discipline": "design",
+      "estimate_hours": 90,
+      "confidence": "high",
+      "priority": 2,
+      "committed": false
+    },
+    {
+      "name": "Admin console visual design",
+      "discipline": "design",
+      "estimate_hours": 110,
+      "confidence": "medium",
+      "priority": 5,
+      "committed": true
+    },
+    {
+      "name": "Billing regression suite",
+      "discipline": "qa",
+      "estimate_hours": 140,
+      "confidence": "medium",
+      "priority": 2,
+      "committed": true
+    },
+    {
+      "name": "Mobile device lab coverage",
+      "discipline": "qa",
+      "estimate_hours": 90,
+      "confidence": "low",
+      "priority": 4,
+      "committed": false
+    }
+  ]
+}

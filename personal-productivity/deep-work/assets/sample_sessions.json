@@ -1,0 +1,25 @@
+{
+  "sessions": [
+    {"date": "2026-06-22", "planned_min": 120, "actual_min": 115, "interruptions": 1, "artefact": "pricing-model.xlsx", "focus_rating": 4},
+    {"date": "2026-06-23", "planned_min": 120, "actual_min": 90, "interruptions": 2, "artefact": "pricing-model.xlsx", "focus_rating": 3},
+    {"date": "2026-06-24", "planned_min": 90, "actual_min": 45, "interruptions": 3, "artefacts": ["pricing-model.xlsx", "inbox"], "focus_rating": 2},
+    {"date": "2026-06-25", "planned_min": 120, "actual_min": 120, "interruptions": 0, "artefact": "pricing-model.xlsx", "focus_rating": 5},
+    {"date": "2026-06-26", "planned_min": 90, "actual_min": 60, "interruptions": 2, "artefact": "board-deck.key", "focus_rating": 3},
+
+    {"date": "2026-06-29", "planned_min": 120, "actual_min": 100, "interruptions": 1, "artefact": "board-deck.key", "focus_rating": 4},
+    {"date": "2026-06-30", "planned_min": 120, "actual_min": 120, "interruptions": 0, "artefact": "board-deck.key", "focus_rating": 5},
+    {"date": "2026-07-01", "planned_min": 90, "actual_min": 30, "interruptions": 4, "artefacts": ["board-deck.key", "support-queue"], "focus_rating": 1},
+    {"date": "2026-07-02", "planned_min": 120, "actual_min": 95, "interruptions": 2, "artefact": "board-deck.key", "focus_rating": 3},
+
+    {"date": "2026-07-06", "planned_min": 120, "actual_min": 120, "interruptions": 0, "artefact": "architecture-rfc.md", "focus_rating": 5},
+    {"date": "2026-07-07", "planned_min": 150, "actual_min": 140, "interruptions": 1, "artefact": "architecture-rfc.md", "focus_rating": 4},
+    {"date": "2026-07-08", "planned_min": 120, "actual_min": 110, "interruptions": 1, "artefact": "architecture-rfc.md", "focus_rating": 4},
+    {"date": "2026-07-09", "planned_min": 90, "actual_min": 90, "interruptions": 0, "artefact": "architecture-rfc.md", "focus_rating": 5},
+    {"date": "2026-07-10", "planned_min": 120, "actual_min": 105, "interruptions": 1, "artefact": "architecture-rfc.md", "focus_rating": 4},
+
+    {"date": "2026-07-13", "planned_min": 120, "actual_min": 120, "interruptions": 0, "artefact": "migration-plan.md", "focus_rating": 5},
+    {"date": "2026-07-15", "planned_min": 180, "actual_min": 175, "interruptions": 1, "artefact": "migration-plan.md", "focus_rating": 5},
+    {"date": "2026-07-16", "planned_min": 120, "actual_min": 100, "interruptions": 2, "artefact": "migration-plan.md", "focus_rating": 3},
+    {"date": "2026-07-17", "planned_min": 120, "actual_min": 115, "interruptions": 1, "artefact": "migration-plan.md", "focus_rating": 4}
+  ]
+}

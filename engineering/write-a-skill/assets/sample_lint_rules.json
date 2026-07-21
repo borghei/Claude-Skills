@@ -1,0 +1,16 @@
+{
+  "description_max_chars": 240,
+  "skill_md_max_lines": 500,
+  "reference_max_lines": 800,
+  "script_min_lines": 150,
+  "script_max_lines": 300,
+  "min_anti_patterns": 3,
+  "required_sections": [
+    "when to use",
+    "inputs the skill expects",
+    "workflow",
+    "decision framework",
+    "anti-pattern",
+    "files"
+  ]
+}

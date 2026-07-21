@@ -1,0 +1,18 @@
+{
+  "change": {
+    "name": "Platform and Infrastructure team merge",
+    "type": "reorg",
+    "reversible": false,
+    "embargoed": false,
+    "effective_date": "2026-09-01"
+  },
+  "audiences": [
+    {"name": "Executive team", "impact": "medium", "headcount": 8, "role": "exec"},
+    {"name": "Engineering managers", "impact": "high", "headcount": 14, "role": "manager"},
+    {"name": "Platform engineers", "impact": "high", "headcount": 26, "role": "ic"},
+    {"name": "Infrastructure engineers", "impact": "high", "headcount": 19, "role": "ic"},
+    {"name": "Support and solutions", "impact": "medium", "headcount": 33, "role": "customer-facing"},
+    {"name": "Rest of engineering", "impact": "low", "headcount": 140, "role": "ic"},
+    {"name": "Managed-service customers", "impact": "low", "headcount": 60, "role": "external"}
+  ]
+}

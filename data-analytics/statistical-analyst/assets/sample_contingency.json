@@ -1,0 +1,35 @@
+{
+  "test": "chi_square",
+  "description": "Support ticket category by customer plan tier.",
+  "row_labels": [
+    "free",
+    "pro",
+    "enterprise"
+  ],
+  "col_labels": [
+    "billing",
+    "bug",
+    "how-to",
+    "feature-request"
+  ],
+  "table": [
+    [
+      142,
+      310,
+      588,
+      96
+    ],
+    [
+      118,
+      264,
+      331,
+      154
+    ],
+    [
+      61,
+      148,
+      122,
+      189
+    ]
+  ]
+}

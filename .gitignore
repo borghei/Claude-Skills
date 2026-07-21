@@ -31,3 +31,6 @@ node_modules/
 
 # Scratch / agent working dir
 .cache/
+
+# Generated output from markdown-html workflow examples
+build/

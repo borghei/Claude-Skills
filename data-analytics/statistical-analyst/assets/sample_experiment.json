@@ -1,0 +1,8 @@
+{
+  "test": "two_proportion",
+  "description": "Checkout redesign A/B test, 14-day fixed horizon, one unit per user.",
+  "groups": {
+    "control": {"successes": 412, "trials": 5000},
+    "variant": {"successes": 471, "trials": 5000}
+  }
+}

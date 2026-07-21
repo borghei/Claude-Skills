@@ -1,0 +1,24 @@
+{
+  "study": "Adjunctive digital adherence support vs standard of care",
+  "design": "two_proportion",
+  "alpha": 0.05,
+  "sided": 2,
+  "power": 0.8,
+  "allocation_ratio": 1.0,
+  "dropout_rate": 0.15,
+  "planned_n_per_group": 160,
+  "two_proportion": {
+    "p_control": 0.4,
+    "p_treatment": 0.55
+  },
+  "two_mean": {
+    "mean_difference": 4.0,
+    "std_dev": 12.0
+  },
+  "survival": {
+    "hazard_ratio": 0.7,
+    "median_survival_control_months": 18.0,
+    "accrual_months": 24.0,
+    "followup_months": 12.0
+  }
+}

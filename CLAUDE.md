@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 343 production-ready skills across 17 domains with 786 Python automation tools, 76 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (66 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 368 production-ready skills across 20 domains with 859 Python automation tools, 76 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (66 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -33,6 +33,9 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **Documents** | [documents/CLAUDE.md](documents/CLAUDE.md) | 4 skills: docx, pdf, pptx, xlsx audit (stdlib-only OOXML parsing) |
 | **Vertical Advisors** | [vertical-advisors/CLAUDE.md](vertical-advisors/CLAUDE.md) | 7 skills: fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace strategic advisors |
 | **Research** | [research/CLAUDE.md](research/CLAUDE.md) | 4 skills: litreview (systematic reviews), grants (proposal architecture), patent (prior art + landscape), dossier (intelligence briefings) |
+| **Research Ops** | [research-ops/CLAUDE.md](research-ops/CLAUDE.md) | 4 skills: market research, product research, clinical research operations, research finance — applied/operational, distinct from academic `research/` |
+| **Business Operations** | [business-operations/CLAUDE.md](business-operations/CLAUDE.md) | 6 skills: capacity planning, process mapping, vendor management, internal comms, knowledge ops, procurement optimization |
+| **Markdown-HTML** | [markdown-html/CLAUDE.md](markdown-html/CLAUDE.md) | 4 skills: md-document, md-slides, md-review gate, design-system — markdown→HTML publishing (stdlib only, zero network) |
 | **Standards Library** | [standards/CLAUDE.md](standards/CLAUDE.md) | Communication, quality, git, security standards |
 | **Templates** | [templates/CLAUDE.md](templates/CLAUDE.md) | Template system usage |
 
@@ -60,6 +63,9 @@ claude-code-skills/
 ├── project-management/        # 66 PM skills (most-used domain) — role-based, discovery/, execution/, career/, strategy-frameworks/ (Tier 3), gtm/ (Tier 3), linear-expert, notion-pm
 ├── c-level-advisor/           # 31 C-level advisory skills + Python tools (Tier 2: CAIO, CDO, CCO, GC, VPE advisors)
 ├── research/                  # 4 research skills (Tier 2) — litreview, grants, patent, dossier
+├── research-ops/              # 4 applied research ops skills — market, product, clinical, research-finance
+├── business-operations/       # 6 business ops skills — capacity, process, vendor, comms, knowledge, procurement
+├── markdown-html/             # 4 markdown→HTML publishing skills — document, slides, review gate, design-system
 ├── ra-qm-team/                # 27 RA/QM compliance skills (incl. audit-prep/ subfolder)
 ├── business-growth/           # 20 business & growth skills (incl. commercial: deal-desk, channel-economics, partnerships-architect, commercial-policy)
 ├── data-analytics/            # 5 data analytics skills + Python tools
@@ -214,9 +220,10 @@ See [standards/git/git-workflow-standards.md](standards/git/git-workflow-standar
 
 ---
 
-**Last Updated:** June 2026
-**Version:** 4.10.0
-**Status:** 343 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 17 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 17 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 66 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+**Last Updated:** July 2026
+**Version:** 4.11.0
+**Status:** 368 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 20 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 17 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 66 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+- **Recent additions (July 2026) — 25 skills, 3 new domains:** `business-operations/` (capacity-planner, process-mapper, vendor-management, internal-comms, knowledge-ops, procurement-optimizer), `research-ops/` (market-research, product-research, clinical-research, research-finance — applied/operational, distinct from academic `research/`), and `markdown-html/` (md-document, md-slides, md-review, design-system — stdlib-only markdown→HTML with zero network calls). Plus 5 engineering skills (write-a-skill, spec-driven-workflow, code-tour, agent-harness, cloud-security), data-analytics/statistical-analyst, 2 PM skills (team-communications, meeting-analyzer), and 3 personal-productivity skills (capture, deep-work, reflect). 44 new stdlib Python tools. Several tools ship deliberate CI gates that exit non-zero on flawed sample data — see each SKILL.md's exit-code contract.
 - **Recent Tier-3 additions (May 2026):** 12 PM skills in new subfolders `strategy-frameworks/` (business-model-canvas, lean-canvas, swot-analysis, porters-five-forces, ansoff-matrix) and `gtm/` (gtm-strategy, ideal-customer-profile), plus discovery additions (opportunity-solution-tree, metrics-dashboard) and execution additions (stakeholder-map, test-scenarios, sprint-plan). 12 stdlib Python validators, ~12K lines.
 - **Recent Tier-2 additions (May 2026):** 5 C-suite advisors (chief-ai-officer-advisor, chief-data-officer-advisor, chief-customer-officer-advisor, general-counsel-advisor, vpe-advisor); 5 product skills (product-analytics, apple-hig-expert, research-summarizer, spec-to-repo, roadmap-communicator); new `research/` domain with 4 skills (litreview, grants, patent, dossier). 14 deep skills, 42 stdlib Python scripts, ~24K lines.
 - **Tier-1 additions (Apr 2026):** 6 engineering skills (feature-flags-architect, chaos-engineering, kubernetes-operator, azure-cloud-architect, gcp-cloud-architect, data-quality-auditor); 4 commercial skills in business-growth (deal-desk, channel-economics, partnerships-architect, commercial-policy); 6 audit-prep playbooks in ra-qm-team/audit-prep/ (soc2/gdpr/fda-qsr/ai-act/aims/compliance-readiness); 1 marketing skill (aeo).

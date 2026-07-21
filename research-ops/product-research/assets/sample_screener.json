@@ -1,0 +1,95 @@
+{
+  "study": "Ticket triage discovery",
+  "target_sessions": 8,
+  "incentive_value": 120,
+  "recruiting_source": "existing_customers",
+  "criteria": [
+    {
+      "id": "C1",
+      "description": "Personally triages inbound tickets at least weekly",
+      "kind": "qualify",
+      "tested_by": ["Q2"]
+    },
+    {
+      "id": "C2",
+      "description": "Team handles more than 200 tickets per week",
+      "kind": "qualify",
+      "tested_by": ["Q3"]
+    },
+    {
+      "id": "C3",
+      "description": "Works for a direct competitor",
+      "kind": "disqualify",
+      "tested_by": ["Q4"]
+    },
+    {
+      "id": "C4",
+      "description": "Participated in one of our studies in the last 6 months",
+      "kind": "disqualify",
+      "tested_by": ["Q5"]
+    }
+  ],
+  "items": [
+    {
+      "id": "Q1",
+      "text": "What is your role on the support team?",
+      "options": [
+        "Support agent",
+        "Support team lead",
+        "Support operations",
+        "Engineering",
+        "Something else"
+      ],
+      "qualifying_options": [
+        "Support agent",
+        "Support team lead",
+        "Support operations"
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "In a typical week, which of these tasks do you personally perform?",
+      "options": [
+        "Writing help centre articles",
+        "Managing billing disputes",
+        "Triaging inbound tickets",
+        "Running team retrospectives",
+        "None of these"
+      ],
+      "qualifying_options": ["Triaging inbound tickets"]
+    },
+    {
+      "id": "Q3",
+      "text": "Roughly how many tickets does your team receive in a typical week?",
+      "type": "numeric"
+    },
+    {
+      "id": "Q4",
+      "text": "Which of these helpdesk products has your team evaluated in the last year?",
+      "options": [
+        "Product A",
+        "Product B",
+        "Verrolane Deskflow",
+        "Product C",
+        "None of these"
+      ],
+      "qualifying_options": [
+        "Product A",
+        "Product B",
+        "Product C",
+        "None of these"
+      ],
+      "is_trap": true
+    },
+    {
+      "id": "Q5",
+      "text": "Have you taken part in a paid research session with us in the last six months?",
+      "options": ["Yes", "No", "Not sure"],
+      "qualifying_options": ["No"]
+    }
+  ],
+  "quotas": [
+    { "segment": "high_volume_team", "target": 4 },
+    { "segment": "low_volume_team", "target": 4 }
+  ]
+}

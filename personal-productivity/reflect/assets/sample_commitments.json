@@ -1,0 +1,14 @@
+{
+  "commitments": [
+    {"id": "K1", "text": "Ship the migration RFC for review", "made_on": "2026-07-13", "due": "2026-07-17", "status": "kept"},
+    {"id": "K2", "text": "Hold two 2-hour deep-work blocks", "made_on": "2026-07-13", "due": "2026-07-17", "status": "kept"},
+    {"id": "K3", "text": "Decline the standing Thursday sync", "made_on": "2026-07-13", "due": "2026-07-16", "status": "missed"},
+    {"id": "K4", "text": "Draft the Q3 headcount plan", "made_on": "2026-07-13", "due": "2026-07-18", "status": "partial"},
+    {"id": "K5", "text": "Write the performance review for Priya", "made_on": "2026-07-06", "due": "2026-07-15", "status": "missed", "carried_cycles": 3},
+    {"id": "K6", "text": "Set up the customer advisory board", "made_on": "2026-05-11", "due": "2026-07-10", "status": "open", "carried_cycles": 5},
+    {"id": "K7", "text": "Review the vendor security questionnaire", "made_on": "2026-07-14", "due": "2026-07-19", "status": "open"},
+    {"id": "K8", "text": "Cut the weekly metrics email to one paragraph", "made_on": "2026-07-13", "due": "2026-07-17", "status": "kept"},
+    {"id": "K9", "text": "Book the Q3 offsite venue", "made_on": "2026-07-08", "due": "2026-07-20", "status": "open"},
+    {"id": "K10", "text": "Interview three staff-engineer candidates", "made_on": "2026-07-13", "due": "2026-07-24", "status": "open"}
+  ]
+}

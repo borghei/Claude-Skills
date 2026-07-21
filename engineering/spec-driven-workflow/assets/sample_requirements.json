@@ -1,0 +1,170 @@
+{
+  "spec": "assets/sample_spec.md",
+  "summary": {
+    "total": 13,
+    "by_modality": {
+      "mandatory": 10,
+      "recommended": 3
+    },
+    "without_acceptance_criteria": [
+      "REQ-KEY-ISSUANCE-03",
+      "REQ-KEY-ISSUANCE-04",
+      "REQ-ROTATION-03",
+      "REQ-ROTATION-04",
+      "REQ-REVOCATION-03",
+      "REQ-NON-FUNCTIONAL-02"
+    ],
+    "mandatory_without_acceptance_criteria": [
+      "REQ-KEY-ISSUANCE-03",
+      "REQ-ROTATION-04",
+      "REQ-REVOCATION-03"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "REQ-KEY-ISSUANCE-01",
+      "section": "Key Issuance",
+      "line": 8,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The issuance service must generate a 32-byte key using a CSPRNG and return it exactly once.",
+      "fingerprint": "9020045f",
+      "acceptance_criteria": [
+        "Given a valid tenant, when POST /keys is called, then a 32-byte key is returned with status 201.",
+        "Given the same key, when GET /keys/{id} is called, then the secret is absent from the response."
+      ]
+    },
+    {
+      "id": "REQ-KEY-ISSUANCE-02",
+      "section": "Key Issuance",
+      "line": 11,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The issuance service must reject requests from tenants holding 10 or more active keys with status 429.",
+      "fingerprint": "4b1a59f2",
+      "acceptance_criteria": [
+        "Given a tenant with 10 active keys, when POST /keys is called, then status 429 is returned."
+      ]
+    },
+    {
+      "id": "REQ-KEY-ISSUANCE-03",
+      "section": "Key Issuance",
+      "line": 13,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "Keys must be fast to generate.",
+      "fingerprint": "2ea22007",
+      "acceptance_criteria": []
+    },
+    {
+      "id": "REQ-KEY-ISSUANCE-04",
+      "section": "Key Issuance",
+      "line": 14,
+      "modality": "recommended",
+      "keyword": "should",
+      "text": "The system should be user-friendly and secure.",
+      "fingerprint": "448dc0a9",
+      "acceptance_criteria": []
+    },
+    {
+      "id": "REQ-ROTATION-01",
+      "section": "Rotation",
+      "line": 18,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The rotation job must mark a key as pending-revocation 14 days before its expiry timestamp.",
+      "fingerprint": "183e4e5d",
+      "acceptance_criteria": [
+        "Given a key expiring in 14 days, when the rotation job runs, then its state is pending-revocation."
+      ]
+    },
+    {
+      "id": "REQ-ROTATION-02",
+      "section": "Rotation",
+      "line": 20,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The rotation job must send one notification per pending-revocation transition, at most once per key.",
+      "fingerprint": "09021a85",
+      "acceptance_criteria": [
+        "Given a key already notified, when the rotation job runs again, then no second notification is sent."
+      ]
+    },
+    {
+      "id": "REQ-ROTATION-03",
+      "section": "Rotation",
+      "line": 22,
+      "modality": "recommended",
+      "keyword": "should",
+      "text": "Notifications should be delivered.",
+      "fingerprint": "8fd977df",
+      "acceptance_criteria": []
+    },
+    {
+      "id": "REQ-ROTATION-04",
+      "section": "Rotation",
+      "line": 23,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "It must handle several edge cases and/or retries appropriately.",
+      "fingerprint": "13cd88d1",
+      "acceptance_criteria": []
+    },
+    {
+      "id": "REQ-REVOCATION-01",
+      "section": "Revocation",
+      "line": 27,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The revocation endpoint must invalidate a key within 5 seconds of the call returning 204.",
+      "fingerprint": "cb7cec01",
+      "acceptance_criteria": [
+        "Given a revoked key, when it is used within 5 seconds, then status 401 is returned."
+      ]
+    },
+    {
+      "id": "REQ-REVOCATION-02",
+      "section": "Revocation",
+      "line": 29,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "Audit records must be written for every revocation by the audit service.",
+      "fingerprint": "bb3b17a3",
+      "acceptance_criteria": [
+        "Given a revocation, when the audit log is queried, then a record with actor and timestamp exists."
+      ]
+    },
+    {
+      "id": "REQ-REVOCATION-03",
+      "section": "Revocation",
+      "line": 31,
+      "modality": "mandatory",
+      "keyword": "must not",
+      "text": "Revoked keys must not be reissued. TBD whether reuse of the key ID is permitted.",
+      "fingerprint": "7b41575c",
+      "acceptance_criteria": []
+    },
+    {
+      "id": "REQ-NON-FUNCTIONAL-01",
+      "section": "Non-Functional",
+      "line": 35,
+      "modality": "mandatory",
+      "keyword": "must",
+      "text": "The rotation job must complete a 100,000-key sweep in under 90 seconds at p95.",
+      "fingerprint": "0975f475",
+      "acceptance_criteria": [
+        "Given 100,000 keys, when the sweep runs, then p95 wall time is under 90 seconds."
+      ]
+    },
+    {
+      "id": "REQ-NON-FUNCTIONAL-02",
+      "section": "Non-Functional",
+      "line": 37,
+      "modality": "recommended",
+      "keyword": "should",
+      "text": "The service should be scalable and performant under load.",
+      "fingerprint": "5058077c",
+      "acceptance_criteria": []
+    }
+  ]
+}

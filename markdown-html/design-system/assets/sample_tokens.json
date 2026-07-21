@@ -1,0 +1,95 @@
+{
+  "name": "slate-report",
+  "description": "Default document theme for long-form HTML reports and decks.",
+  "typography": {
+    "base_px": 17,
+    "ratio": 1.25,
+    "measure_ch": 72,
+    "line_height_body": 1.65,
+    "line_height_heading": 1.2,
+    "steps": ["xs", "sm", "base", "md", "lg", "xl", "2xl", "3xl"],
+    "fonts": {
+      "body": "Charter, 'Bitstream Charter', 'Iowan Old Style', Georgia, serif",
+      "heading": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+      "mono": "'SF Mono', SFMono-Regular, Menlo, Consolas, monospace"
+    }
+  },
+  "spacing": {
+    "base_px": 8,
+    "steps": [0, 0.5, 1, 1.5, 2, 3, 4, 6, 8, 12]
+  },
+  "radius": {
+    "sm": "3px",
+    "md": "6px",
+    "lg": "12px"
+  },
+  "palette": {
+    "neutral": {
+      "0": "#ffffff",
+      "50": "#f8fafc",
+      "100": "#f1f5f9",
+      "200": "#e2e8f0",
+      "300": "#cbd5e1",
+      "400": "#94a3b8",
+      "600": "#475569",
+      "700": "#334155",
+      "800": "#1e293b",
+      "900": "#0f172a",
+      "1000": "#020617"
+    },
+    "accent": {
+      "300": "#7dd3fc",
+      "500": "#0284c7",
+      "600": "#0369a1",
+      "700": "#075985"
+    },
+    "warn": {
+      "300": "#fcd34d",
+      "600": "#b45309"
+    },
+    "danger": {
+      "300": "#fca5a5",
+      "600": "#b91c1c"
+    }
+  },
+  "roles": {
+    "light": {
+      "surface": "neutral.0",
+      "surface-raised": "neutral.100",
+      "text": "neutral.900",
+      "text-muted": "neutral.600",
+      "border": "neutral.400",
+      "link": "accent.600",
+      "accent": "accent.600",
+      "code-surface": "neutral.100",
+      "code-text": "neutral.800",
+      "warn": "warn.600",
+      "danger": "danger.600"
+    },
+    "dark": {
+      "surface": "neutral.1000",
+      "surface-raised": "neutral.800",
+      "text": "neutral.100",
+      "text-muted": "neutral.400",
+      "border": "neutral.700",
+      "link": "accent.300",
+      "accent": "accent.300",
+      "code-surface": "neutral.800",
+      "code-text": "neutral.100",
+      "warn": "warn.300",
+      "danger": "danger.300"
+    }
+  },
+  "pairings": [
+    {"fg": "text", "bg": "surface", "usage": "body"},
+    {"fg": "text-muted", "bg": "surface", "usage": "body"},
+    {"fg": "link", "bg": "surface", "usage": "body"},
+    {"fg": "accent", "bg": "surface", "usage": "large"},
+    {"fg": "text", "bg": "surface-raised", "usage": "body"},
+    {"fg": "text-muted", "bg": "surface-raised", "usage": "body"},
+    {"fg": "code-text", "bg": "code-surface", "usage": "body"},
+    {"fg": "warn", "bg": "surface", "usage": "body"},
+    {"fg": "danger", "bg": "surface", "usage": "body"},
+    {"fg": "border", "bg": "surface", "usage": "decor"}
+  ]
+}
