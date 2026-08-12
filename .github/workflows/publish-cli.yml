@@ -36,9 +36,13 @@ jobs:
         working-directory: cli
         run: npm install --ignore-scripts
 
-      - name: Run tests
-        working-directory: cli
-        run: npm test
+      # The CLI test suite was REMOVED from here: `node --test test/*.test.js` runs
+      # locally, so running it again on a tag push is duplicated cost and a second
+      # source of truth. /ship's local QA gate blocks the release commit — and the
+      # `cli-v*` tag that fires this workflow — until it is green.
+      #
+      # CI deploys and publishes; it does not test. Kept only where a test CANNOT
+      # run locally (cross-platform matrices, migration rehearsal, artifact smoke).
 
       - name: Publish to npm
         working-directory: cli
