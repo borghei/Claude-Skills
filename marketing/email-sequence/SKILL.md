@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: marketing
   domain: email-marketing
-  updated: 2026-03-09
+  updated: 2026-09-21
   frameworks: email-automation, lifecycle-marketing, drip-campaigns
 ---
 # Email Sequence Design
@@ -226,20 +226,22 @@ After Email 4:
 
 | Metric | Welcome | Nurture | Re-engagement | Trial Expiration |
 |--------|---------|---------|---------------|------------------|
-| Open rate | 50-70% | 25-40% | 15-25% | 40-60% |
+| Open rate (directional only) | 50-70% | 25-40% | 15-25% | 40-60% |
 | Click rate | 10-20% | 3-8% | 2-5% | 8-15% |
 | Conversion rate | 5-15% | 1-3% | 3-8% | 10-25% |
 | Unsubscribe rate | <0.5% | <0.3% | 1-3% | <0.5% |
+
+**Open rates are inflated and unreliable.** Apple Mail Privacy Protection downloads remote content (including tracking pixels) in the background by default, whether or not the recipient reads the email ([Apple — Mail Privacy Protection](https://www.apple.com/legal/privacy/data/en/mail-privacy-protection/)). Opens from Apple Mail users register as "opens" regardless of engagement, and some security scanners do the same. Treat opens as a directional signal only; judge sequences on clicks, replies, conversions, unsubscribes/complaints, and inbox placement. Exclude machine opens (where your ESP flags them) before comparing to any open-rate benchmark.
 
 ### Health Indicators
 
 | Signal | Meaning | Action |
 |--------|---------|--------|
-| Open rate declining across sequence | Fatigue or irrelevance | Shorten sequence or improve subject lines |
-| High opens, low clicks | Subject works, body/CTA doesn't | Rewrite body copy, simplify CTA |
+| Click rate declining across sequence | Fatigue or irrelevance | Shorten sequence, sharpen each email's single CTA |
+| High opens, low clicks | Body/CTA doesn't land — or opens are machine-inflated (Apple MPP) | Check opens excluding machine opens; rewrite body copy, simplify CTA |
 | High click rate, low conversion | Landing page problem | Audit post-click experience |
 | Rising unsubscribes after Email 3 | Too frequent or too salesy | Increase spacing, add more value |
-| Email 1 open rate below 40% | Deliverability issue | Check sender reputation, authentication |
+| Email 1 low clicks and replies, or rising spam-folder placement | Deliverability issue | Run an inbox placement / seed test, check sender reputation (e.g., Google Postmaster Tools) and SPF/DKIM/DMARC |
 
 ---
 
@@ -276,7 +278,7 @@ After Email 4:
 - [ ] Unsubscribe handling confirmed (one-click, CAN-SPAM compliant)
 - [ ] Plain text version created for each email
 - [ ] Send time optimized for recipient timezone
-- [ ] Metrics dashboard configured (opens, clicks, conversions, unsubs)
+- [ ] Metrics dashboard configured (clicks, replies, conversions, unsubs, complaints; opens as directional only)
 - [ ] 30-day post-launch review scheduled
 
 ---
@@ -307,9 +309,9 @@ After Email 4:
 
 | Symptom | Likely Cause | Fix |
 |---------|-------------|-----|
-| Welcome email open rate below 40% | Deliverability issue or weak subject line | Check sender reputation and SPF/DKIM/DMARC. Test subject variants. |
-| Open rates declining across sequence | Fatigue or irrelevance | Shorten sequence, improve subject lines, or add more value per email. |
-| High opens, low clicks | Body copy or CTA is weak | Rewrite body with stronger benefit and simplify CTA to one action. |
+| Welcome email low click rate or poor inbox placement | Deliverability issue or weak subject/offer | Run an inbox placement test; check sender reputation and SPF/DKIM/DMARC. Test subject variants and judge them on clicks, not opens. |
+| Clicks declining across sequence | Fatigue or irrelevance | Shorten sequence, improve subject lines, or add more value per email. |
+| High opens, low clicks | Body copy or CTA is weak, or opens inflated by Apple MPP | Check machine-open-excluded opens; rewrite body with stronger benefit and simplify CTA to one action. |
 | High click rate, low conversion | Landing page problem | Audit post-click experience: message match, page speed, form friction. |
 | Rising unsubscribes after email 3 | Too frequent or too salesy | Increase spacing between emails and add more educational content. |
 | Emails clipped by Gmail | HTML template over 102KB | Use `render_size_analyzer.py` from email-template-builder to reduce size. |
@@ -319,7 +321,8 @@ After Email 4:
 
 ## Success Criteria
 
-- Welcome sequence open rate above 50% (benchmark: 50-70%)
+- Welcome sequence click rate above 10% (benchmark: 10-20%); opens tracked directionally only (inflated by Apple Mail Privacy Protection)
+- Inbox placement verified with a seed/placement test before launch and after major volume changes
 - Nurture sequence click-through rate above 3% (benchmark: 3-8%)
 - Trial expiration conversion rate above 10% (benchmark: 10-25%)
 - Unsubscribe rate below 0.5% per email (below 0.3% for nurture)

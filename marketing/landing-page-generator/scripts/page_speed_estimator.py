@@ -19,7 +19,8 @@ from pathlib import Path
 CWV_TARGETS = {
     "lcp": {"good": 2.5, "needs_improvement": 4.0, "unit": "seconds"},
     "cls": {"good": 0.1, "needs_improvement": 0.25, "unit": "score"},
-    "fid": {"good": 100, "needs_improvement": 300, "unit": "ms"},
+    # INP replaced FID as a Core Web Vital on March 12, 2024 (good <= 200 ms, poor > 500 ms).
+    "inp": {"good": 200, "needs_improvement": 500, "unit": "ms"},
     "ttfb": {"good": 600, "needs_improvement": 1200, "unit": "ms"},
 }
 
