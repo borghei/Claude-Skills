@@ -579,7 +579,7 @@ Diagnostic checklist when you lose a citation:
 - **Entity recognition**: Brand appears in Google Knowledge Panel and is recognized as an entity on Wikidata
 - **Schema coverage**: 100% of content pages have JSON-LD schema matching the page type (e.g., Article, Product, Organization, BreadcrumbList) validated without errors
 - **Freshness cadence**: All key pages updated within the last 90 days with current dateModified signals
-- **CTR from AI Overviews**: Maintain organic CTR above 0.8% for queries where AI Overviews appear (benchmark: average drops to 0.61% with AI Overviews per 2026 data)
+- **CTR from AI Overviews**: Track organic CTR separately for queries where AI Overviews appear and hold it at or above your own pre-optimization baseline for those queries in Search Console
 
 ---
 
@@ -606,7 +606,7 @@ Diagnostic checklist when you lose a citation:
 - Citation algorithms are opaque and change frequently without notice
 - Blocking AI training while allowing citation works per vendor via separate user agents (OpenAI, Anthropic, Perplexity); Google AI Overviews / AI Mode use Googlebot, so appearance there is controlled in Search Console, not robots.txt
 - User-initiated fetchers (`ChatGPT-User`, `Perplexity-User`) may not honor robots.txt
-- AI Overviews reduce traditional organic CTR by approximately 42-47% (2026 benchmarks), and this cannot be fully mitigated
+- AI summaries are reported to reduce clicks on traditional results (Pew Research Center, July 2025: users clicked a traditional result in 8% of visits with an AI summary vs. 15% without; Google reports overall organic click volume as relatively stable), and this cannot be fully mitigated
 
 ---
 
