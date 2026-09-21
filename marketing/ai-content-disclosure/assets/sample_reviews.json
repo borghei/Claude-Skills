@@ -1,0 +1,68 @@
+{
+  "_note": "Sample data - intentionally contains violations so the gate exits 2. Fields: id, text, date, source (customer | employee | officer | agent | agency | family | owner | ai_tool | agency_written | purchased | unknown_vendor), presented_as (customer_review | brand_content), generated_by_ai, incentive (none | free_product | discount | payment | contest_entry | loyalty_points), incentive_conditioned_on_sentiment, disclosure_text, edited_by_business (none | minor | substantive), suppressed, reused_from_other_product, verified_purchase.",
+  "reviews": [
+    {
+      "id": "r-001",
+      "text": "Bought the 2L kettle in March. Boils fast, the lid hinge squeaks a little after a month. Would buy again.",
+      "date": "2026-08-02",
+      "source": "customer",
+      "incentive": "none",
+      "verified_purchase": true
+    },
+    {
+      "id": "r-002",
+      "text": "This kettle is an absolute game-changer for my morning routine. Elegant design, lightning-fast boiling, and whisper-quiet operation. Highly recommend!",
+      "date": "2026-08-14",
+      "source": "ai_tool",
+      "generated_by_ai": true,
+      "incentive": "none"
+    },
+    {
+      "id": "r-003",
+      "text": "This kettle is an absolute game-changer for my kitchen routine. Elegant design, lightning-fast boiling, and whisper-quiet operation. Five stars!",
+      "date": "2026-08-14",
+      "source": "unknown_vendor",
+      "incentive": "none"
+    },
+    {
+      "id": "r-004",
+      "text": "Best kettle on the market, full stop. The team really nailed it.",
+      "date": "2026-08-14",
+      "source": "employee",
+      "incentive": "none"
+    },
+    {
+      "id": "r-005",
+      "text": "Solid kettle, nice temperature presets.",
+      "date": "2026-08-14",
+      "source": "customer",
+      "incentive": "discount",
+      "incentive_conditioned_on_sentiment": true,
+      "verified_purchase": true
+    },
+    {
+      "id": "r-006",
+      "text": "I received this kettle free from the brand in exchange for an honest review. Heats evenly; the handle gets warm.",
+      "date": "2026-08-20",
+      "source": "customer",
+      "incentive": "free_product",
+      "verified_purchase": false
+    },
+    {
+      "id": "r-007",
+      "text": "Stopped working after two weeks and support never replied.",
+      "date": "2026-08-22",
+      "source": "customer",
+      "incentive": "none",
+      "suppressed": true,
+      "verified_purchase": true
+    },
+    {
+      "id": "r-008",
+      "text": "As an AI language model I don't have personal experience, but this kettle is great for families.",
+      "date": "2026-08-14",
+      "source": "customer",
+      "incentive": "none"
+    }
+  ]
+}
