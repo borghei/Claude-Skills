@@ -1,0 +1,25 @@
+{
+  "initiative": "AI meeting recap for sales teams",
+  "as_of": "2026-09-21",
+  "prototype_link": "https://example.internal/prototypes/call-recap",
+  "disposition": "use as the starting codebase",
+  "problem": "Reps spend too long writing call notes.",
+  "success_metrics": [
+    {"name": "Time spent on call notes", "baseline": "", "target": "less"}
+  ],
+  "validated_findings": [
+    {"hypothesis": "Reps love the recap", "participants": 0, "result": "Everyone in the demo said it looked great", "threshold": ""}
+  ],
+  "throwaway_list": [],
+  "acceptance_criteria": [
+    "Recap should be good",
+    "Sync works nicely with the CRM"
+  ],
+  "data_privacy": {
+    "real_customer_data_used": true,
+    "approval_ref": "",
+    "notes": "Uploaded 12 real call recordings to the prototype tool to make the demo realistic"
+  },
+  "security": "",
+  "accessibility": ""
+}

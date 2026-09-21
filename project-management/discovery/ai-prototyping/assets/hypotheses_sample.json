@@ -1,0 +1,53 @@
+{
+  "initiative": "Expense approvals on mobile",
+  "as_of": "2026-09-21",
+  "constraints": {
+    "real_data_approved": false,
+    "max_days": 10
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "Approvers will clear pending expenses from a mobile push notification instead of waiting for the weekly desktop session",
+      "uncertainty": "desirability",
+      "impact": 5,
+      "evidence": "anecdotal",
+      "interactive_flow": true,
+      "target_segment": "Finance approvers at 50-500 employee customers",
+      "success_metric": "Approvers who opt in to the mobile pilot waitlist after the concept test",
+      "threshold": "at least 6 of 10"
+    },
+    {
+      "id": "H2",
+      "statement": "Approvers can review a receipt, spot a policy violation and approve or reject in under 60 seconds on a phone",
+      "uncertainty": "usability",
+      "impact": 4,
+      "evidence": "none",
+      "dynamic_states": true,
+      "target_segment": "Finance approvers at 50-500 employee customers",
+      "success_metric": "Unassisted task success on the 'reject an out-of-policy receipt' task",
+      "threshold": "at least 5 of 6 participants, median under 60 seconds"
+    },
+    {
+      "id": "H3",
+      "statement": "Receipt OCR plus policy rules can flag out-of-policy lines with acceptable accuracy",
+      "uncertainty": "feasibility",
+      "impact": 4,
+      "evidence": "qualitative",
+      "needs_real_data": true,
+      "target_segment": "Engineering spike (no users)",
+      "success_metric": "Precision of out-of-policy flags on a 200-receipt synthetic set",
+      "threshold": "at least 90 percent precision"
+    },
+    {
+      "id": "H4",
+      "statement": "Customers will pay for mobile approvals as part of the Business tier upgrade",
+      "uncertainty": "viability",
+      "impact": 3,
+      "evidence": "none",
+      "target_segment": "Economic buyers on the Standard tier",
+      "success_metric": "Upgrade intent in pricing conversations",
+      "threshold": "at least 3 of 8 buyers ask for a quote"
+    }
+  ]
+}
