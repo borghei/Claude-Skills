@@ -9,7 +9,7 @@ metadata:
   author: borghei
   category: marketing
   domain: campaign-analytics
-  updated: 2026-02-06
+  updated: 2026-09-21
   python-tools: attribution_analyzer.py, funnel_analyzer.py, campaign_roi_calculator.py
   tech-stack: marketing-analytics, attribution-modeling
 ---
@@ -171,6 +171,18 @@ Implements five industry-standard attribution models to allocate conversion cred
 | Linear | Equal credit to all touchpoints | Balanced multi-channel evaluation |
 | Time-Decay | More credit to recent touchpoints | Short sales cycles |
 | Position-Based | 40/20/40 split (first/middle/last) | Full-funnel marketing |
+
+**AI assistant channel:** before modeling, touchpoints are reclassified to `ai_assistant` when the channel label is GA4's `ai-assistant` medium or when an optional `referrer`, `source`, or `utm_source` field matches a known AI assistant domain (chatgpt.com, chat.openai.com, perplexity.ai, gemini.google.com, claude.ai, copilot.microsoft.com, chat.deepseek.com, grok.com, meta.ai, chat.mistral.ai, and others). The summary reports `ai_assistant_reclassified` when any were found. Use `--no-ai-reclassify` to keep the original labels.
+
+```json
+{"channel": "referral", "referrer": "https://chatgpt.com/", "timestamp": "2026-09-01T10:00:00"}
+```
+
+**AI referral gaps to keep in mind (as of September 2026):**
+- GA4 has a default **AI Assistant** channel since May 2026 (medium `ai-assistant`), but it is not retroactive — older sessions sit in Referral. Export `referrer`/`source` so this script can reclassify them.
+- Google AI Overviews / AI Mode clicks come from google.com and count as Organic Search; they are not reclassified. Use Search Console for AI-feature impressions.
+- Visits with no referrer (app handoffs, copy-paste) land in Direct and cannot be recovered — under-count, not zero.
+- `campaign_roi_calculator.py` has no `ai_assistant` benchmark; it falls back to `default` benchmarks.
 
 ### 2. funnel_analyzer.py
 

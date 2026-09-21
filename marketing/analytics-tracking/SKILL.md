@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: marketing
   domain: analytics-implementation
-  updated: 2026-03-09
+  updated: 2026-09-21
   frameworks: ga4, gtm, event-taxonomy, conversion-tracking
 ---
 # Analytics Tracking - Implementation & Auditing
@@ -138,19 +138,21 @@ integration_connected        (params: integration_name)
 4. Configure domains: add all subdomains in your funnel
 5. Data retention: Set to 14 months (maximum for free GA4)
 
-### Conversion Events
+### Key Events (formerly "Conversions")
 
-Mark as conversions in GA4 Admin > Conversions:
+GA4 renamed "conversions" to **key events** in March 2024; "conversions" now refers to key events imported into Google Ads. Mark as key events in GA4 Admin > Data display > Events (star icon):
 - `signup_completed`
 - `checkout_completed`
 - `demo_requested`
 - `trial_started`
 
 **Rules:**
-- Maximum 30 conversion events per property -- curate carefully
-- GA4 conversions are retroactive for 6 months when enabled
-- Do not mark micro-conversions as conversions unless optimizing ad campaigns for them
-- Conversion counting: set to "once per session" for lead events, "every" for purchase events
+- Maximum 30 key events per standard property (50 on Analytics 360) -- curate carefully
+- Marking a key event is not retroactive -- it affects reports from the time it is marked, not historic data
+- Do not mark micro-conversions as key events unless optimizing ad campaigns for them
+- Counting method: set to "once per session" for lead events, "every" for purchase events
+
+Source: [Mark events as key events](https://support.google.com/analytics/answer/13128484) (as of September 2026).
 
 ### Custom Dimensions
 
@@ -250,7 +252,7 @@ router.events.on('routeChangeComplete', (url) => {
 
 1. Link GA4 and Google Ads accounts
 2. In Google Ads > Goals > Conversions > Import > Google Analytics
-3. Select GA4 conversion events to import
+3. Select GA4 key events to import (they become Google Ads conversions)
 4. Set attribution model: Data-driven (if 50+ conversions/month), otherwise Last-click
 5. Conversion window: 30 days for lead gen, 90 days for high-consideration B2B
 
@@ -295,8 +297,38 @@ router.events.on('routeChangeComplete', (url) => {
 |---------|---------|---------------------|
 | GA4 | 30 days | 30-90 days (match your sales cycle) |
 | Google Ads | 30 days | 30 days (trial), 90 days (enterprise) |
-| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates) |
+| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates; 7-/28-day view windows were removed Jan 2026) |
 | LinkedIn | 30 days | 30 days |
+
+---
+
+## AI Referral Traffic
+
+Visits from AI assistants (ChatGPT, Gemini, Claude, Copilot, Perplexity, etc.) are a growing, distinct acquisition source. Measure them explicitly instead of letting them blur into Referral or Direct.
+
+### GA4 "AI Assistant" Channel (as of September 2026)
+
+Since May 13, 2026, GA4's Default Channel Group includes an **AI Assistant** channel. When the referrer matches Google's list of recognized AI assistants, GA4 sets medium = `ai-assistant` and campaign = `(ai-assistant)`, and the session is grouped under AI Assistant. No configuration is needed. The rule is evaluated before Referral. Sources: [Default channel group](https://support.google.com/analytics/answer/9756891), [What's new in Google Analytics](https://support.google.com/analytics/answer/9164320).
+
+### Known Gaps
+
+| Gap | What happens | Mitigation |
+|-----|--------------|------------|
+| Not retroactive | Sessions before the rollout stay in Referral | Use the custom channel group below for historical comparison |
+| Unrecognized assistants | AI tools not on Google's list still land in Referral | Custom channel group with your own regex |
+| Google AI Overviews / AI Mode clicks | Excluded from AI Assistant; they arrive from google.com and count as Organic Search | Use Search Console (Web search type + Generative AI report) — GA4 cannot isolate them |
+| Referrer stripped | Many app and copy-paste visits arrive with no referrer and fall into Direct | Add UTMs to links you control (e.g., in llms.txt, docs, GPT/app listings); watch Direct landing pages that match AI-cited pages |
+| Assistant-added UTMs | Some assistants append their own UTM (ChatGPT adds `utm_source=chatgpt.com` to referral links, per [OpenAI's publisher FAQ](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)), which changes how source/medium are recorded | Match on session source (which the UTM sets) rather than referrer alone |
+
+### Fallback: Custom Channel Group
+
+Create a custom channel group in GA4 (Admin > Data display > Channel groups), add an "AI Assistant (custom)" channel **above** Referral, with the condition *Session source matches regex*:
+
+```
+^(chatgpt\.com|chat\.openai\.com|openai\.com|perplexity\.ai|www\.perplexity\.ai|gemini\.google\.com|bard\.google\.com|claude\.ai|copilot\.microsoft\.com|edgeservices\.bing\.com|chat\.deepseek\.com|grok\.com|meta\.ai|chat\.mistral\.ai|you\.com|phind\.com)$
+```
+
+Keep the list in version control and review it quarterly; assistant domains change. The campaign-analytics attribution script uses the same list to classify an `ai_assistant` channel.
 
 ---
 
