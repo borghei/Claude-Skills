@@ -1,0 +1,26 @@
+{
+  "_note": "Sample brief. With this budget the Copilot arm is underpowered, so the planner exits 2 on purpose - raise monthly_budget, extend test_weeks or drop a platform to get exit 0.",
+  "product": "Trailhead 2 waterproof hiking boot",
+  "category": "retail",
+  "regions": ["US", "CA"],
+  "language": "en",
+  "monthly_budget": 12000,
+  "currency": "USD",
+  "target_cpa": 60,
+  "avg_order_value": 165,
+  "test_weeks": 6,
+  "can_geo_split": true,
+  "uses_broad_match_pmax_or_shopping": true,
+  "has_conversion_tracking": true,
+  "has_product_feed": true,
+  "landing_pages_answer_first": false,
+  "has_utm_convention": true,
+  "has_logo_asset": true,
+  "intents": [
+    {"prompt": "what are the best waterproof hiking boots for wide feet", "stage": "research", "weight": 3},
+    {"prompt": "trailhead 2 vs summitline ridge 4 for muddy trails", "stage": "compare", "weight": 2},
+    {"prompt": "lightweight hiking boots under $200 that ship fast", "stage": "purchase", "weight": 2},
+    {"prompt": "how do I break in new leather hiking boots", "stage": "support", "weight": 1},
+    {"prompt": "hiking boots for ankle pain after an injury, symptom relief", "stage": "research", "weight": 1}
+  ]
+}
