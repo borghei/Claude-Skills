@@ -173,59 +173,71 @@ integration:
 
 ### Productboard REST API patterns
 
-#### Pull all open Insights tagged for Bookings
+These snippets target Productboard Public API v2 (as of September 2026; v1 and its `X-Version` header were scheduled to sunset on 2026-07-08). Standard library only.
+
+#### Pull all unprocessed Insights tagged for Bookings
 
 ```python
-import requests
+import json
+import urllib.request
 
-PB_API = "https://api.productboard.com"
+PB_API = "https://api.productboard.com/v2"
 HEADERS = {
     "Authorization": f"Bearer {PB_TOKEN}",
-    "X-Version": "1",
+    "Accept": "application/json",
     "Content-Type": "application/json",
 }
 
-def list_insights(component_id):
-    params = {"componentId": component_id, "status": "open"}
-    res = requests.get(f"{PB_API}/notes", headers=HEADERS, params=params)
-    return res.json()["data"]
+def _call(method, url, body=None):
+    data = json.dumps(body).encode() if body is not None else None
+    req = urllib.request.Request(url, data=data, headers=HEADERS, method=method)
+    with urllib.request.urlopen(req) as res:
+        return json.loads(res.read() or b"{}")
+
+def list_unprocessed_insights(tag="bookings"):
+    url = f"{PB_API}/notes?processed=false&fields[]=name&fields[]=tags"
+    notes = []
+    while url:  # follow links.next until null
+        page = _call("GET", url)
+        notes += page["data"]
+        url = page.get("links", {}).get("next")
+    # tag filtering is done client-side (see api-patterns "Not carried over to v2")
+    return [n for n in notes
+            if any(t.get("name") == tag for t in n["fields"].get("tags", []))]
 ```
 
 #### Create a Feature programmatically (when migrating from a spreadsheet)
 
 ```python
-def create_feature(name, description, component_id):
+def create_feature(name, description_html, component_id):
     body = {
         "data": {
-            "name": name,
-            "description": description,
-            "componentId": component_id,
-            "status": {"name": "candidate"},
+            "type": "feature",
+            "fields": {
+                "name": name,
+                "description": description_html,
+                "status": {"name": "Candidate"},
+            },
+            "relationships": [
+                {"type": "parent", "target": {"id": component_id}},
+            ],
         }
     }
-    res = requests.post(f"{PB_API}/features", headers=HEADERS, json=body)
-    return res.json()["data"]
+    # v2 returns only {id, type, links.self}; GET links.self for the full record
+    return _call("POST", f"{PB_API}/entities", body)["data"]
 ```
 
 #### Push a feature into a Release
 
 ```python
 def add_to_release(feature_id, release_id):
-    body = {"data": {"releaseId": release_id}}
-    res = requests.patch(f"{PB_API}/features/{feature_id}", headers=HEADERS, json=body)
-    return res.json()
+    body = {"data": {"type": "link", "target": {"id": release_id}}}
+    return _call("POST", f"{PB_API}/entities/{feature_id}/relationships", body)
 ```
 
 #### Driver-scoring update (weekly sync from analytics)
 
-```python
-def update_driver_score(feature_id, driver_id, score, comment):
-    body = {"data": {"value": score, "note": comment}}
-    requests.patch(
-        f"{PB_API}/features/{feature_id}/drivers/{driver_id}",
-        headers=HEADERS, json=body,
-    )
-```
+Not mappable to API v2 as of September 2026: the v2 reference exposes no Driver entity or Driver-score endpoint. Wayfinder runs this step in the Productboard UI during the Wednesday sync; if the score lives in a number custom field instead, update it with `PATCH /v2/entities/{feature_id}` and `{"data": {"fields": {"<field-uuid>": score}}}`.
 
 ### Weekly cadence
 
