@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 233,
+  "total_skills": 235,
   "skills": [
     {
       "name": "channel-economics",
@@ -894,6 +894,12 @@
       "description": ">"
     },
     {
+      "name": "ai-content-disclosure",
+      "source": "../../marketing/ai-content-disclosure",
+      "category": "marketing",
+      "description": ">"
+    },
+    {
       "name": "ai-seo",
       "source": "../../marketing/ai-seo",
       "category": "marketing",
@@ -956,6 +962,12 @@
     {
       "name": "content-strategy",
       "source": "../../marketing/content-strategy",
+      "category": "marketing",
+      "description": ">"
+    },
+    {
+      "name": "conversational-ads",
+      "source": "../../marketing/conversational-ads",
       "category": "marketing",
       "description": ">"
     },
@@ -1426,7 +1438,7 @@
       "description": "Financial analysis, valuation, and forecasting skills"
     },
     "marketing": {
-      "count": 39,
+      "count": 41,
       "source": "../../marketing",
       "description": "Marketing, content, and demand generation skills"
     },
