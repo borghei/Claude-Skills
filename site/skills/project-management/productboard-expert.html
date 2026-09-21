@@ -490,7 +490,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Engineering-side Jira/Linear configuration (see `jira-expert/`, `linear-expert/`). Strategic prioritization framework selection (see `execution/prioritization-frameworks/`). PRD authoring (see `execution/create-prd/`). Customer interview synthesis (see `discovery/interview-synthesis/`).
 
-**Limitations:** API rate limits are workspace-wide; aggressive scripts can starve the UI. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
+**Limitations:** API recipes target Public API v2 (`/v2/...`); v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08, and a few v1 capabilities (note followers, feedback forms, company field-definition management) have no v2 equivalent as of September 2026. API rate limits apply per access token (documented default 50 requests/second); aggressive scripts still compete with integrations sharing that token. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
 
 ## Integration Points
 
@@ -603,7 +603,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Engineering-side Jira/Linear configuration (see `jira-expert/`, `linear-expert/`). Strategic prioritization framework selection (see `execution/prioritization-frameworks/`). PRD authoring (see `execution/create-prd/`). Customer interview synthesis (see `discovery/interview-synthesis/`).
 
-**Limitations:** API rate limits are workspace-wide; aggressive scripts can starve the UI. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
+**Limitations:** API recipes target Public API v2 (`/v2/...`); v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08, and a few v1 capabilities (note followers, feedback forms, company field-definition management) have no v2 equivalent as of September 2026. API rate limits apply per access token (documented default 50 requests/second); aggressive scripts still compete with integrations sharing that token. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
 
 ## Integration Points
 

@@ -486,6 +486,15 @@ python3 scripts/experiment_designer.py input.json --format json
 
 Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
 
+## Prototype-First Experiments
+
+AI app builders, AI design tools, and AI coding assistants can produce a clickable or working prototype in hours. Treat it as one more experiment method, with the same XYZ hypothesis and pre-set threshold:
+
+- **Use it when** the riskiest assumption is usability or desirability of a specific interaction. For demand (&quot;will anyone want this at all?&quot;), a landing page, fake door, or pre-order is still cheaper and more honest.
+- **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
+- **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
+- **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
@@ -602,6 +611,15 @@ python3 scripts/experiment_designer.py input.json --format json
 ```
 
 Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
+
+## Prototype-First Experiments
+
+AI app builders, AI design tools, and AI coding assistants can produce a clickable or working prototype in hours. Treat it as one more experiment method, with the same XYZ hypothesis and pre-set threshold:
+
+- **Use it when** the riskiest assumption is usability or desirability of a specific interaction. For demand (&quot;will anyone want this at all?&quot;), a landing page, fake door, or pre-order is still cheaper and more honest.
+- **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
+- **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
+- **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
 
 ## References
 

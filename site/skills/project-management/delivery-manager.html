@@ -493,6 +493,7 @@ python scripts/incident_report.py --id INC-2024-0125           # incident report
 | `deploy.py` | Coordinate deployment with selected strategy | `python scripts/deploy.py --env production --strategy canary` |
 | `sla_calculator.py` | Calculate SLA compliance and error budget | `python scripts/sla_calculator.py --service portal --period month` |
 | `incident_report.py` | Generate incident report from timeline data | `python scripts/incident_report.py --id INC-2024-0125` |
+| `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
 
 ## References
 
@@ -501,6 +502,23 @@ python scripts/incident_report.py --id INC-2024-0125           # incident report
 - `references/incident_management.md` -- Severity matrix (SEV-1–SEV-4), the 5-step incident workflow, and post-mortem requirements. Read during incident triage and response.
 - `references/sla_management.md` -- SLA framework, error-budget calculation example, and burn-rate freeze thresholds. Read when tracking reliability budgets.
 - `references/red-flags.md` -- Bad-vs-good examples of delivery-management output. Read this to review a release/incident plan before committing to it.
+
+## AI-Assisted Delivery
+
+AI coding assistants change the shape of the delivery pipeline: more code arrives faster, and the constraint moves to review, testing, and recovery. What DORA&#x27;s research says (as of September 2026):
+
+- **2024 report:** every 25% increase in AI adoption was associated with an estimated 1.5% reduction in delivery throughput and 7.2% reduction in delivery stability, even as documentation quality, code quality, and review speed improved ([2024 report](https://dora.dev/research/2024/dora-report/)).
+- **2025 report (&quot;State of AI-assisted Software Development&quot;):** 90% of respondents use AI at work and more than 80% believe it has raised their productivity, while 30% report little or no trust in AI-generated code. AI adoption now shows a positive relationship with throughput but still a negative one with stability. DORA&#x27;s framing is that AI is an amplifier of an organization&#x27;s existing strengths and weaknesses ([announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)).
+- **DORA AI Capabilities Model** (2025): seven capabilities that amplify AI&#x27;s benefit: clear and communicated AI stance, healthy data ecosystems, AI-accessible internal data, strong version control practices, working in small batches, user-centric focus, and quality internal platforms ([dora.dev](https://dora.dev/ai/capabilities-model/report/)).
+- **Team profiles:** the 2025 report groups teams into seven profiles (for example &quot;foundational challenges&quot;, &quot;legacy bottleneck&quot;, &quot;harmonious high achievers&quot;) rather than leading with the Elite-to-Low levels. Use the profile to find the constraint before rolling out more AI tooling.
+
+What to do as a delivery manager:
+
+1. **Track instability, not just speed.** Report change fail rate and deployment rework rate (`delivery_metrics_tracker.py`, `&quot;rework&quot;: true` on unplanned fix deploys) next to deployment frequency. Rising throughput with rising rework is the AI failure mode DORA describes.
+2. **Measure review load.** PR count per reviewer, review wait time, and PR size. AI-generated volume that outruns review capacity shows up as longer lead time or weaker review, not as faster delivery.
+3. **Keep batches small.** Hold PR size and release scope limits regardless of how fast code is produced; small batches are both a DORA capability and the main guard against AI-driven instability.
+4. **Guard stability explicitly.** Canary or feature-flag every AI-heavy change set, keep rollback rehearsed, and treat a rising rework rate as a trigger to slow intake, not to add more AI.
+5. **Keep a human accountable.** Every change, AI-assisted or not, has a named human owner who meets the same Definition of Done and review bar.
 
 ## Scope &amp; Limitations
 
@@ -618,6 +636,7 @@ python scripts/incident_report.py --id INC-2024-0125           # incident report
 | `deploy.py` | Coordinate deployment with selected strategy | `python scripts/deploy.py --env production --strategy canary` |
 | `sla_calculator.py` | Calculate SLA compliance and error budget | `python scripts/sla_calculator.py --service portal --period month` |
 | `incident_report.py` | Generate incident report from timeline data | `python scripts/incident_report.py --id INC-2024-0125` |
+| `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
 
 ## References
 
@@ -626,6 +645,23 @@ python scripts/incident_report.py --id INC-2024-0125           # incident report
 - `references/incident_management.md` -- Severity matrix (SEV-1–SEV-4), the 5-step incident workflow, and post-mortem requirements. Read during incident triage and response.
 - `references/sla_management.md` -- SLA framework, error-budget calculation example, and burn-rate freeze thresholds. Read when tracking reliability budgets.
 - `references/red-flags.md` -- Bad-vs-good examples of delivery-management output. Read this to review a release/incident plan before committing to it.
+
+## AI-Assisted Delivery
+
+AI coding assistants change the shape of the delivery pipeline: more code arrives faster, and the constraint moves to review, testing, and recovery. What DORA&#x27;s research says (as of September 2026):
+
+- **2024 report:** every 25% increase in AI adoption was associated with an estimated 1.5% reduction in delivery throughput and 7.2% reduction in delivery stability, even as documentation quality, code quality, and review speed improved ([2024 report](https://dora.dev/research/2024/dora-report/)).
+- **2025 report (&quot;State of AI-assisted Software Development&quot;):** 90% of respondents use AI at work and more than 80% believe it has raised their productivity, while 30% report little or no trust in AI-generated code. AI adoption now shows a positive relationship with throughput but still a negative one with stability. DORA&#x27;s framing is that AI is an amplifier of an organization&#x27;s existing strengths and weaknesses ([announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)).
+- **DORA AI Capabilities Model** (2025): seven capabilities that amplify AI&#x27;s benefit: clear and communicated AI stance, healthy data ecosystems, AI-accessible internal data, strong version control practices, working in small batches, user-centric focus, and quality internal platforms ([dora.dev](https://dora.dev/ai/capabilities-model/report/)).
+- **Team profiles:** the 2025 report groups teams into seven profiles (for example &quot;foundational challenges&quot;, &quot;legacy bottleneck&quot;, &quot;harmonious high achievers&quot;) rather than leading with the Elite-to-Low levels. Use the profile to find the constraint before rolling out more AI tooling.
+
+What to do as a delivery manager:
+
+1. **Track instability, not just speed.** Report change fail rate and deployment rework rate (`delivery_metrics_tracker.py`, `&quot;rework&quot;: true` on unplanned fix deploys) next to deployment frequency. Rising throughput with rising rework is the AI failure mode DORA describes.
+2. **Measure review load.** PR count per reviewer, review wait time, and PR size. AI-generated volume that outruns review capacity shows up as longer lead time or weaker review, not as faster delivery.
+3. **Keep batches small.** Hold PR size and release scope limits regardless of how fast code is produced; small batches are both a DORA capability and the main guard against AI-driven instability.
+4. **Guard stability explicitly.** Canary or feature-flag every AI-heavy change set, keep rollback rehearsed, and treat a rising rework rate as a trigger to slow intake, not to add more AI.
+5. **Keep a human accountable.** Every change, AI-assisted or not, has a named human owner who meets the same Definition of Done and review bar.
 
 ## Scope &amp; Limitations
 
