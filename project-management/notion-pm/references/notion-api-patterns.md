@@ -1,6 +1,6 @@
 # Notion REST API Patterns
 
-Canonical Notion API calls for PM workflows. Endpoint base: `https://api.notion.com/v1/`. Auth: `Authorization: Bearer secret_...` (internal integration token) or OAuth2. Every request must include `Notion-Version: 2022-06-28` (or the current pinned version your client uses).
+Canonical Notion API calls for PM workflows. Endpoint base: `https://api.notion.com/v1/`. Auth: `Authorization: Bearer secret_...` (internal integration token) or OAuth2. Every request must include a `Notion-Version` header. These recipes target **`2025-09-03`**, the version that introduced **data sources** (as of September 2026; a newer version, `2026-03-11`, also exists — see the version note below).
 
 All examples use `curl` for clarity; the same JSON bodies apply to any HTTP client.
 
@@ -10,7 +10,7 @@ All examples use `curl` for clarity; the same JSON bodies apply to any HTTP clie
 
 ```bash
 export NOTION_TOKEN="secret_..."
-export NOTION_VERSION="2022-06-28"
+export NOTION_VERSION="2025-09-03"
 
 NOTION_HEADERS=(
   -H "Authorization: Bearer $NOTION_TOKEN"
@@ -21,24 +21,56 @@ NOTION_HEADERS=(
 
 An integration only sees pages and databases that have been **explicitly shared** with it (open the database → "..." → Add connections). 404s are almost always a missing share.
 
+### Version note — databases vs. data sources (as of September 2026)
+
+From `Notion-Version: 2025-09-03`, a **database** is a container that holds one or more **data sources**; the rows, the property schema and queries live on the data source. What changed versus `2022-06-28`:
+
+| Task | `2022-06-28` | `2025-09-03` |
+|---|---|---|
+| Query rows | `POST /v1/databases/{database_id}/query` | `POST /v1/data_sources/{data_source_id}/query` |
+| Read property schema | `GET /v1/databases/{database_id}` | `GET /v1/data_sources/{data_source_id}` |
+| Change property schema | `PATCH /v1/databases/{database_id}` | `PATCH /v1/data_sources/{data_source_id}` |
+| Create a row (page) | `"parent": { "database_id": ... }` | `"parent": { "type": "data_source_id", "data_source_id": ... }` |
+| Search filter for DBs | `"value": "database"` | `"value": "data_source"` |
+| Create a database | `properties` at top level | `properties` nested under `initial_data_source` |
+| Webhook events | `database.content_updated`, `database.schema_updated` | `data_source.content_updated`, `data_source.schema_updated` |
+
+`PATCH /v1/databases/{database_id}` still exists but now only covers database-level fields (`parent`, `title`, `is_inline`, `icon`, `cover`, `in_trash`). Relation properties must reference a `data_source_id`; `database_id` is no longer accepted in requests. Always send the version header explicitly — do not mix versions within one integration.
+
+`2026-03-11` is the latest version as of September 2026. Its breaking changes: `archived` replaced by `in_trash`, the append-children `after` parameter replaced by a `position` object, and the `transcription` block type renamed to `meeting_notes`. The recipes below do not use any of those fields. Notion states it has no current plans to stop supporting older versions.
+
+Sources: https://developers.notion.com/docs/upgrade-guide-2025-09-03 · https://developers.notion.com/docs/upgrade-guide-2026-03-11 · https://developers.notion.com/reference/versioning
+
 ---
 
 ## 2. Discovery — IDs You Need First
 
 Notion IDs are 32-char hex (sometimes hyphenated). The API accepts both forms.
 
-**Retrieve a database schema**:
+**Resolve a database to its data source ID** (required before querying or creating rows):
 ```bash
 curl -X GET "https://api.notion.com/v1/databases/<db_id>" "${NOTION_HEADERS[@]}"
 ```
-Use the response to inspect property names, types, and the exact option strings for `select` / `status` / `multi_select` properties. Selectable options are **case-sensitive** when set via the API.
+The response lists the database's data sources:
+```json
+"data_sources": [
+  { "id": "<data_source_id>", "name": "PRDs" }
+]
+```
+Most PM databases have exactly one data source; cache its `id`. If a database has several, pick by `name` — never assume index 0.
 
-**Search for a database by title**:
+**Retrieve the property schema** (lives on the data source):
+```bash
+curl -X GET "https://api.notion.com/v1/data_sources/<data_source_id>" "${NOTION_HEADERS[@]}"
+```
+Use the `properties` in the response to inspect property names, types, and the exact option strings for `select` / `status` / `multi_select` properties. Selectable options are **case-sensitive** when set via the API.
+
+**Search for a database by title** (returns data source objects on `2025-09-03`):
 ```bash
 curl -X POST "https://api.notion.com/v1/search" "${NOTION_HEADERS[@]}" \
   -d '{
     "query": "PRDs",
-    "filter": { "value": "database", "property": "object" }
+    "filter": { "value": "data_source", "property": "object" }
   }'
 ```
 
@@ -50,11 +82,11 @@ Cache user IDs; they are stable.
 
 ---
 
-## 3. Querying Databases
+## 3. Querying Databases (via their data source)
 
 **Basic query**:
 ```bash
-curl -X POST "https://api.notion.com/v1/databases/<db_id>/query" "${NOTION_HEADERS[@]}" \
+curl -X POST "https://api.notion.com/v1/data_sources/<data_source_id>/query" "${NOTION_HEADERS[@]}" \
   -d '{
     "filter": { "property": "Status", "status": { "equals": "In Review" } },
     "sorts":  [{ "property": "Target Date", "direction": "ascending" }],
@@ -106,7 +138,7 @@ Loop while `has_more` is true, passing `next_cursor` as the next `start_cursor`.
 ```bash
 curl -X POST "https://api.notion.com/v1/pages" "${NOTION_HEADERS[@]}" \
   -d '{
-    "parent": { "database_id": "<prd_db_id>" },
+    "parent": { "type": "data_source_id", "data_source_id": "<prd_data_source_id>" },
     "properties": {
       "Title":   { "title":  [{ "text": { "content": "PRD: Self-Serve Signup" } }] },
       "Status":  { "status": { "name": "Draft" } },
@@ -158,16 +190,17 @@ curl -X PATCH "https://api.notion.com/v1/pages/<page_id>" "${NOTION_HEADERS[@]}"
   }'
 ```
 
-**Archive a page** (Notion's "delete"):
+**Move a page to trash** (Notion's "delete"):
 ```bash
 curl -X PATCH "https://api.notion.com/v1/pages/<page_id>" "${NOTION_HEADERS[@]}" \
-  -d '{ "archived": true }'
+  -d '{ "in_trash": true }'
 ```
 
-**Unarchive**:
+**Restore from trash**:
 ```json
-{ "archived": false }
+{ "in_trash": false }
 ```
+Use `in_trash` rather than the older `archived` field — `2026-03-11` removes `archived`.
 
 ---
 
@@ -244,19 +277,22 @@ curl -X POST "https://api.notion.com/v1/databases" "${NOTION_HEADERS[@]}" \
   -d '{
     "parent": { "type": "page_id", "page_id": "<parent_page_id>" },
     "title":  [{ "type": "text", "text": { "content": "Decisions" } }],
-    "properties": {
-      "Title":   { "title": {} },
-      "Status":  { "select": { "options": [
-        { "name": "Proposed",   "color": "yellow" },
-        { "name": "Approved",   "color": "green"  },
-        { "name": "Superseded", "color": "gray"   }
-      ]}},
-      "Date":    { "date": {} },
-      "Owner":   { "people": {} },
-      "ID":      { "unique_id": { "prefix": "DEC" } }
+    "initial_data_source": {
+      "properties": {
+        "Title":   { "title": {} },
+        "Status":  { "select": { "options": [
+          { "name": "Proposed",   "color": "yellow" },
+          { "name": "Approved",   "color": "green"  },
+          { "name": "Superseded", "color": "gray"   }
+        ]}},
+        "Date":    { "date": {} },
+        "Owner":   { "people": {} },
+        "ID":      { "unique_id": { "prefix": "DEC" } }
+      }
     }
   }'
 ```
+On `2025-09-03` the schema goes under `initial_data_source.properties`. The response includes the new database's `data_sources[]` — store that `id` for later queries and page creation.
 
 ---
 
@@ -321,7 +357,7 @@ Mentions (a date):
 
 1. GitHub Action on push to `main` matching `docs/adr/*.md`.
 2. Parse the ADR front matter (title, status, date, drivers).
-3. POST to Notion's pages endpoint with `parent.database_id = <decisions_db_id>`.
+3. POST to Notion's pages endpoint with `parent: { "type": "data_source_id", "data_source_id": "<decisions_data_source_id>" }`.
 
 ---
 
@@ -331,16 +367,18 @@ Mentions (a date):
 - On `429`, response includes `Retry-After` header (seconds). Honor it.
 - For bulk writes, batch and sleep 300-500ms between calls.
 - Wrap mutating calls in idempotency checks where possible (search by title before create).
-- Cache database schemas; refresh only when a 400 indicates a property mismatch.
+- Cache data source IDs and schemas; refresh only when a 400 indicates a property mismatch.
 
 ## 11. Quick Reference
 
 | Operation | Method | Endpoint |
 |---|---|---|
-| Query DB | POST | `/v1/databases/{id}/query` |
-| Get DB schema | GET | `/v1/databases/{id}` |
-| Create DB | POST | `/v1/databases` |
-| Update DB schema | PATCH | `/v1/databases/{id}` |
+| Get DB (→ `data_sources[].id`) | GET | `/v1/databases/{database_id}` |
+| Query rows | POST | `/v1/data_sources/{data_source_id}/query` |
+| Get property schema | GET | `/v1/data_sources/{data_source_id}` |
+| Update property schema | PATCH | `/v1/data_sources/{data_source_id}` |
+| Create DB | POST | `/v1/databases` (schema in `initial_data_source`) |
+| Update DB title/icon/parent | PATCH | `/v1/databases/{database_id}` |
 | Get page | GET | `/v1/pages/{id}` |
 | Create page | POST | `/v1/pages` |
 | Update page props | PATCH | `/v1/pages/{id}` |
@@ -352,4 +390,4 @@ Mentions (a date):
 | List users | GET | `/v1/users` |
 | Search | POST | `/v1/search` |
 
-Full reference: https://developers.notion.com/reference/intro
+Endpoints above are for `Notion-Version: 2025-09-03` (as of September 2026). Full reference: https://developers.notion.com/reference/intro
