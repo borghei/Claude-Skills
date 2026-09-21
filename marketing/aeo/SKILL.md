@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: marketing
   domain: marketing
-  updated: 2026-05-27
+  updated: 2026-09-21
   tags: [aeo, answer-engine-optimization, llm-citation, generative-search, ai-content, schema-qa, geo, llm-seo]
 ---
 
@@ -154,7 +154,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 3. **Audit your existing content** — score current content for AEO patterns: `scripts/aeo_content_auditor.py`
 4. **Prioritize 10-20 high-value pages** — those that should be the canonical source
 5. **Restructure per AEO patterns** — definitional content, tables, step-by-step, statistics
-6. **Add structured data** — `scripts/schema_qa_generator.py` generates FAQ schema
+6. **Add structured data (optional)** — `scripts/schema_qa_generator.py` generates FAQ schema; the visible Q&A structure matters more than the markup (Google retired FAQ rich results in May 2026 and says no special schema is needed for AI features)
 7. **Build authority signals** — backlinks, citations, mentions
 8. **Monitor monthly** — track citation rate trend
 
@@ -164,7 +164,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 2. Review per-pattern scoring (5 patterns above)
 3. Identify gaps: missing definition, no table, no clear steps, no stats, no list
 4. Restructure to add 2-3 missing patterns
-5. Add FAQ schema with `scripts/schema_qa_generator.py`
+5. Optionally add FAQ schema with `scripts/schema_qa_generator.py` (no Google rich result; low impact)
 6. Re-audit to confirm improvements
 
 ### Workflow: Competitive citation analysis
@@ -193,7 +193,7 @@ See [references/citation-tracking-and-measurement.md](references/citation-tracki
 - **Optimizing only for Google SERP**: misses the LLM citation surface entirely
 - **Generic content without specific claims**: LLMs prefer specific, factual content over generic explanation
 - **No structure markers** (headings, lists, tables): LLMs can't extract specific information
-- **No FAQ schema**: missed opportunity for Q&A surfacing in AI Overviews
+- **No visible Q&A structure**: answers buried in prose instead of question headings with direct answers (the markup alone does not help — Google states no special schema is required for AI Overviews / AI Mode, as of September 2026)
 - **Stuffed keyword content**: LLMs prefer natural language with clear meaning
 - **No authority signals**: LLMs avoid citing low-trust sources
 - **Outdated content**: LLMs prefer recent, current content

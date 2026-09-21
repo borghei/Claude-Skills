@@ -113,7 +113,7 @@ LLMs (their training and grounding pipelines) systematically de-prioritize:
 
 **With browsing/search:** Cites with inline links when answer requires recent / specific information. Browsing typically engaged for time-sensitive or specific factual queries.
 
-**SearchGPT** (when available): More explicit citation, similar to Perplexity model.
+**ChatGPT search** (the SearchGPT prototype was folded into ChatGPT in 2024): More explicit inline citations with source links, similar to the Perplexity model. Served from the `OAI-SearchBot` index.
 
 ### Claude (Anthropic)
 
@@ -190,7 +190,7 @@ Observed patterns in LLM citations:
 
 | Investment level | Activities | Quarterly time |
 |------------------|------------|----------------|
-| Minimal | FAQ schema on existing pages; monitor citation | 4-8 hours |
+| Minimal | Direct answers + visible Q&A on existing top pages; monitor citation | 4-8 hours |
 | Standard | Top-20-pages restructuring per AEO patterns; monthly tracking | 40-60 hours |
 | Comprehensive | Content strategy + production + monitoring + competitive analysis | 100-200 hours |
 | Strategic | Above + brand-positioning campaigns (PR / partnerships) | 300+ hours |
@@ -261,7 +261,7 @@ Balance:
 | Which LLM to optimize for? | All, simultaneously — techniques overlap |
 | AEO vs SEO investment split? | 60-70% SEO foundation; 20-30% AEO restructuring + measurement |
 | Time to see results? | 3-6 months for content updates to be indexed + reflected in LLM citations |
-| Most-impactful single tactic? | FAQ schema on top 20 pages |
+| Most-impactful single tactic? | Direct 1-2 sentence answers at the top of your top 20 pages |
 | How to measure? | Citation extraction from saved LLM queries; brand mention rate |
 | When does AEO replace SEO? | It doesn't; it's a parallel channel |
 | Does AEO help conversions? | Indirectly — brand mention in LLM answer drives brand awareness; conversion comes later |

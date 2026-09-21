@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: marketing
   domain: seo
-  updated: 2026-03-09
+  updated: 2026-09-21
 ---
 # AI SEO
 
@@ -56,7 +56,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 ### Run an AI Visibility Audit
 
-1. Check robots.txt for AI bot access (GPTBot, PerplexityBot, ClaudeBot)
+1. Check robots.txt for AI bot access — the search/retrieval crawlers first (OAI-SearchBot, Claude-SearchBot, PerplexityBot, Googlebot), then the training crawlers (GPTBot, ClaudeBot, Google-Extended)
 2. Test top 10 target queries on Perplexity, ChatGPT, and Google AI Overviews
 3. Document which queries cite you, which cite competitors, and what content format wins
 4. Score key pages against the Extractability Checklist
@@ -68,7 +68,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 2. Structure content with self-contained H2 sections that can be extracted independently
 3. Add numbered steps for process queries, comparison tables for "X vs Y" queries
 4. Replace all vague claims with attributed statistics ("According to [Source], [Year]")
-5. Implement FAQPage, HowTo, or Article schema markup
+5. Implement schema that matches the page type (Article, Product, Organization, BreadcrumbList) — for accurate entity understanding, not as an AI-citation shortcut (Google states no special schema is needed for AI features)
 6. Verify AI bots are allowed in robots.txt
 
 ---
@@ -101,7 +101,7 @@ Traditional SEO gets your page ranked. AI SEO gets your content cited. These are
 - Keyword density matters less than answer clarity and directness
 - Page-level optimization expands to section-level and paragraph-level optimization
 - Internal linking serves discoverability for AI crawlers, not just PageRank flow
-- Structured data becomes a primary signal, not a nice-to-have
+- Structured data helps machines disambiguate entities and page type, but it is not a gate: Google states there is no special schema.org markup required to appear in AI Overviews or AI Mode (as of September 2026)
 
 ---
 
@@ -159,17 +159,19 @@ AI systems must be able to find and index your content.
 Check robots.txt for AI crawler permissions:
 
 ```
-# These bots must NOT be blocked for AI visibility:
-GPTBot          # OpenAI / ChatGPT
-PerplexityBot   # Perplexity
-ClaudeBot       # Anthropic / Claude
-Google-Extended # Google AI Overviews
-anthropic-ai    # Anthropic (alternate)
-Applebot-Extended  # Apple Intelligence
-cohere-ai       # Cohere
+# Search / retrieval crawlers — blocking these removes you from that platform's AI answers:
+Googlebot         # Google Search, incl. AI Overviews and AI Mode
+OAI-SearchBot     # ChatGPT search
+Claude-SearchBot  # Claude search
+PerplexityBot     # Perplexity search
+# Training crawlers — blocking these does NOT remove you from AI search answers:
+GPTBot            # OpenAI model training
+ClaudeBot         # Anthropic model training
+Google-Extended   # Gemini training + grounding (not AI Overviews / AI Mode)
+Applebot-Extended # Apple Intelligence training
 ```
 
-If any AI bot is blocked, that is the single highest priority fix. Zero visibility on that platform until resolved.
+If a search/retrieval crawler is blocked, that is the single highest priority fix — zero visibility on that platform until resolved. A blocked training crawler is a policy choice, not a visibility bug. See [Bot Access Configuration](#bot-access-configuration) for the full matrix.
 
 **Step 2: Citation Testing**
 
@@ -193,7 +195,7 @@ Score each key page (0-7):
 - [ ] Statistics cited with source name and year
 - [ ] Comparisons in table format (not narrative)
 - [ ] H1 phrased as an answer or direct statement
-- [ ] Schema markup present (FAQPage, HowTo, Article)
+- [ ] Valid schema markup matching the page type (Article, Product, Organization, BreadcrumbList)
 
 Interpretation: 0-3 = needs major restructuring. 4-5 = good baseline. 6-7 = strong.
 
@@ -242,14 +244,17 @@ Find and replace every vague claim:
 
 Implement JSON-LD in the page head:
 
-| Content Type | Schema | Impact |
+| Content Type | Schema | Impact (as of September 2026) |
 |-------------|--------|--------|
-| FAQ sections | FAQPage | High — AI extracts Q&A pairs directly |
-| Step-by-step guides | HowTo | High — AI uses step structure |
-| Articles and posts | Article | Medium — establishes content authority |
-| Product pages | Product | Medium — product comparison queries |
-| Author pages | Person | Medium — author credibility signal |
-| Company pages | Organization | Medium — entity authority |
+| Articles and posts | Article | Medium — Article rich result + clear author/date signals |
+| Product pages | Product (+ Review snippet) | Medium — Product rich results; product comparison queries |
+| Company pages | Organization | Medium — entity authority, logo/knowledge panel signals |
+| All pages | BreadcrumbList | Low-Medium — Breadcrumb rich result, site hierarchy |
+| Author pages | Person / ProfilePage | Low-Medium — author credibility signal |
+| FAQ sections | FAQPage | Low — FAQ rich results removed from Google Search (May 2026); valid vocabulary, no Google search feature |
+| Step-by-step guides | HowTo | Low — HowTo rich results removed from Google Search (2023); no Google search feature |
+
+The visible on-page structure (Q&A headings, numbered steps) is what AI systems extract. Google states no special schema is required for AI features — do not sell FAQPage/HowTo markup as an AI-citation lever.
 
 ### Workflow 3: Entity Optimization
 
@@ -323,7 +328,7 @@ Explicit Q&A pairs. Questions should match natural language queries:
 [Step-by-step explanation.]
 ```
 
-Mark up with FAQPage schema for maximum discoverability.
+The visible Q&A structure is what matters for extraction. FAQPage markup is optional — Google no longer shows FAQ rich results (removed May 2026).
 
 ### Pattern 5: Attributed Statistics
 
@@ -347,7 +352,9 @@ Named experts with credentials produce citable units AI systems pick up.
 
 ### Priority Implementations
 
-**FAQPage Schema (highest impact for informational queries):**
+Google states that no special schema.org markup is needed to appear in AI Overviews or AI Mode ([AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)). Prioritize schema that still produces Google rich results or clarifies entities (Article, Product, Organization, BreadcrumbList); treat FAQPage and HowTo as optional vocabulary.
+
+**FAQPage Schema (optional — FAQ rich results removed from Google Search in May 2026):**
 
 ```json
 {
@@ -366,7 +373,7 @@ Named experts with credentials produce citable units AI systems pick up.
 }
 ```
 
-**HowTo Schema (high impact for process queries):**
+**HowTo Schema (optional — HowTo rich results removed from Google Search in 2023):**
 
 ```json
 {
@@ -383,7 +390,7 @@ Named experts with credentials produce citable units AI systems pick up.
 }
 ```
 
-**Article Schema (medium impact, establishes authority):**
+**Article Schema (still eligible for rich results; establishes author and date signals):**
 
 ```json
 {
@@ -406,14 +413,50 @@ Validate all schema at schema.org/validator before deployment.
 
 ## Bot Access Configuration
 
+### AI Crawler Matrix (as of September 2026)
+
+The major AI vendors now split crawling by purpose, so search visibility and training can be controlled separately.
+
+| Vendor | User agent | Purpose | Blocking it means | Honors robots.txt |
+|--------|-----------|---------|-------------------|-------------------|
+| OpenAI | `GPTBot` | Model training | Content excluded from future training | Yes |
+| OpenAI | `OAI-SearchBot` | ChatGPT search index | Not surfaced/cited in ChatGPT search answers | Yes |
+| OpenAI | `ChatGPT-User` | Fetches a page when a user's request needs it | User-initiated; OpenAI says robots.txt rules "may not apply" | Not guaranteed |
+| Anthropic | `ClaudeBot` | Model training | Future content excluded from training | Yes |
+| Anthropic | `Claude-SearchBot` | Claude search index | Reduced visibility in Claude search answers | Yes |
+| Anthropic | `Claude-User` | Fetches a page when a Claude user asks | Claude cannot retrieve your page for users | Yes |
+| Perplexity | `PerplexityBot` | Perplexity search index | Not surfaced/linked in Perplexity answers | Yes |
+| Perplexity | `Perplexity-User` | Fetches a page for a user's question | Perplexity says this fetcher generally ignores robots.txt | No |
+| Google | `Googlebot` | Google Search, **including AI Overviews and AI Mode** | Removes you from Google Search entirely | Yes |
+| Google | `Google-Extended` (robots.txt token, not a separate crawler) | Gemini training and grounding in some Google systems; also limits training of the models behind Search generative AI features | Does not remove you from Google Search, ranking, AI Overviews or AI Mode | Yes |
+
+Sources: [OpenAI crawlers](https://developers.openai.com/api/docs/bots), [Anthropic crawlers](https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler), [Perplexity crawlers](https://docs.perplexity.ai/guides/bots), [Google common crawlers](https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers).
+
+**Google AI Overviews / AI Mode opt-out:** `Google-Extended` does not control appearance in them — they are served from Googlebot's index. Your options (as of September 2026):
+
+- **Search Console "Search generative AI" control** (Settings > Search generative AI; rolled out to all sites August 31, 2026) — excludes the site's links and content from AI Overviews, AI Mode, and generative AI features in Discover, without affecting ranking or inclusion in the rest of Search. Takes effect within a few days ([help](https://support.google.com/webmasters/answer/16908024)).
+- **Page-level snippet controls** — `nosnippet`, `data-nosnippet`, `max-snippet` limit what can be shown, but also limit how the page appears in regular Search results.
+- **`noindex`** — removes the page from Google Search entirely.
+
 ### Recommended robots.txt Configuration
 
 ```
-# Allow all AI search crawlers
-User-agent: GPTBot
+# Allow AI search / retrieval crawlers (visibility)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
 Allow: /
 
 User-agent: PerplexityBot
+Allow: /
+
+# Training crawlers — Allow or Disallow per your content policy;
+# this choice does not affect AI search citation
+User-agent: GPTBot
 Allow: /
 
 User-agent: ClaudeBot
@@ -424,19 +467,15 @@ Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
-
-User-agent: cohere-ai
-Allow: /
 ```
 
 ### Training vs. Citation Access
 
-Some organizations want to allow AI citation but block training. This distinction is difficult to enforce because:
-- Most AI crawlers use the same bot for both indexing and training
-- Blocking the bot blocks both citation and training
-- There is no industry-standard mechanism to allow one and block the other
+Allowing AI citation while blocking training is enforceable for OpenAI, Anthropic, and Perplexity: allow the search crawler (`OAI-SearchBot`, `Claude-SearchBot`, `PerplexityBot`) and disallow the training crawler (`GPTBot`, `ClaudeBot`). Blocking one does not block the other.
 
-Recommendation: Allow AI bots if you want AI citation visibility. The citation benefits outweigh the training concerns for most commercial content.
+Google works differently: `Google-Extended` limits training and Gemini grounding but not appearance in AI Overviews or AI Mode. To keep regular Search visibility but leave AI Overviews / AI Mode, use the Search Console Search generative AI control (as of September 2026); snippet controls and `noindex` also work but cost regular Search presentation.
+
+Recommendation: Always allow the search/retrieval crawlers if you want AI citation visibility; decide on training crawlers as a separate content-licensing policy.
 
 ---
 
@@ -450,12 +489,16 @@ Test top 10 target queries on Perplexity and ChatGPT:
 - What text was used from your content?
 - Any new competitors appearing?
 
-### Google Search Console for AI Overviews
+### Google Search Console for AI Overviews and AI Mode
 
-Use the "Search type: AI Overviews" filter in Google Search Console:
-- Which queries trigger AI Overview impressions for your site
-- Click-through rate from AI Overviews (typically 50-70% lower than organic)
-- Which pages get cited most frequently
+There is no "AI Overviews" search-type filter in the Performance report. Clicks and impressions from AI Overviews and AI Mode are counted inside the standard **Web** search type, blended with regular results ([AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)).
+
+As of September 2026, Search Console also has a dedicated **Generative AI performance report** (announced June 2026, rolled out to all sites by August 31, 2026; sites need enough impressions to see data) ([announcement](https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports), [help](https://support.google.com/webmasters/answer/16984139)):
+- Impressions only — no click data — for links to your site shown in AI Overviews and AI Mode
+- Group by page, country, device, and date to see which pages get surfaced most
+- Standard Performance-report limits apply (1,000-row cap, preliminary recent data)
+
+For clicks, use the Web search type in the Performance report plus landing-page analytics; AI-feature clicks cannot be isolated there.
 
 ### Monthly Monitoring Checklist
 
@@ -463,7 +506,7 @@ Use the "Search type: AI Overviews" filter in Google Search Console:
 |--------|---------------|------|
 | Perplexity citations | Top 10 queries | Manual testing |
 | ChatGPT citations | Top 10 queries | Manual testing |
-| Google AI Overviews | Impressions and clicks | Google Search Console |
+| Google AI Overviews / AI Mode | Impressions (Generative AI report); clicks only blended into Web search type | Google Search Console |
 | Copilot citations | Top 5 queries | Manual testing |
 | AI bot crawl activity | Crawl frequency and pages | Server logs / Cloudflare |
 | Competitor citations | Who is getting cited for your queries | Manual testing |
@@ -500,7 +543,7 @@ Diagnostic checklist when you lose a citation:
 
 9. **Avoid JavaScript-rendered content for key answers** — AI crawlers may not execute JavaScript. Ensure important content is in the initial HTML.
 
-10. **Implement schema early** — FAQPage and HowTo schema are quick wins with outsized impact on AI discoverability.
+10. **Implement schema accurately, not as a hack** — Article, Product, Organization, and BreadcrumbList markup that matches visible content helps entity understanding. Google says no special schema is required for AI features, and FAQ/HowTo rich results no longer display.
 
 ---
 
@@ -522,7 +565,7 @@ Diagnostic checklist when you lose a citation:
 | Cited on Perplexity but not ChatGPT | Different crawling and indexing pipelines per platform | Verify bot access for all AI crawlers; test rendering without JavaScript |
 | AI Overview shows competitor instead | Competitor has more extractable, better-attributed content | Audit competitor's cited content format and match or exceed specificity |
 | Citation dropped after site update | Page restructure broke the extraction pattern AI was using | Compare old vs new page structure; restore extractable blocks |
-| GPTBot blocked in robots.txt unknowingly | CMS update or security plugin overwrote robots.txt | Audit robots.txt after every CMS or plugin update; set up monitoring |
+| OAI-SearchBot / PerplexityBot blocked in robots.txt unknowingly | CMS update or security plugin overwrote robots.txt | Audit robots.txt after every CMS or plugin update; set up monitoring |
 | Schema markup present but no rich results | Missing required fields or content-markup mismatch | Validate with Google Rich Results Test; ensure schema matches visible page content |
 | AI cites your data but not your brand | Missing entity signals — no Organization schema or sameAs links | Implement Organization schema with sameAs to Wikidata, LinkedIn, and social profiles |
 
@@ -532,9 +575,9 @@ Diagnostic checklist when you lose a citation:
 
 - **AI citation rate**: Achieve citation in 30%+ of target queries across Perplexity, ChatGPT, and Google AI Overviews within 90 days of optimization
 - **Extractability score**: Score 6-7 out of 7 on the Content Extractability Scoring checklist for all key pages
-- **Bot access**: Zero AI crawlers blocked in robots.txt — verified monthly with automated monitoring
+- **Bot access**: Zero AI search/retrieval crawlers blocked in robots.txt (training crawlers per documented policy) — verified monthly with automated monitoring
 - **Entity recognition**: Brand appears in Google Knowledge Panel and is recognized as an entity on Wikidata
-- **Schema coverage**: 100% of content pages have appropriate JSON-LD schema (Article, FAQPage, or HowTo) validated without errors
+- **Schema coverage**: 100% of content pages have JSON-LD schema matching the page type (e.g., Article, Product, Organization, BreadcrumbList) validated without errors
 - **Freshness cadence**: All key pages updated within the last 90 days with current dateModified signals
 - **CTR from AI Overviews**: Maintain organic CTR above 0.8% for queries where AI Overviews appear (benchmark: average drops to 0.61% with AI Overviews per 2026 data)
 
@@ -561,7 +604,8 @@ Diagnostic checklist when you lose a citation:
 **Known limitations:**
 - AI citation tracking is largely manual — no standardized API exists across platforms
 - Citation algorithms are opaque and change frequently without notice
-- Blocking AI training while allowing citation is not technically enforceable with current bot protocols
+- Blocking AI training while allowing citation works per vendor via separate user agents (OpenAI, Anthropic, Perplexity); Google AI Overviews / AI Mode use Googlebot, so appearance there is controlled in Search Console, not robots.txt
+- User-initiated fetchers (`ChatGPT-User`, `Perplexity-User`) may not honor robots.txt
 - AI Overviews reduce traditional organic CTR by approximately 42-47% (2026 benchmarks), and this cannot be fully mitigated
 
 ---
