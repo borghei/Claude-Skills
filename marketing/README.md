@@ -55,6 +55,12 @@ npx ai-agent-skills install borghei/Claude-Skills/marketing/social-media-analyze
 
 # Campaign Analytics
 npx ai-agent-skills install borghei/Claude-Skills/marketing/campaign-analytics
+
+# AI Content Disclosure (EU AI Act Art. 50, FTC reviews/endorsements, platform AI labels)
+npx ai-agent-skills install borghei/Claude-Skills/marketing/ai-content-disclosure
+
+# Conversational Ads (ChatGPT Ads, Google AI Overviews / AI Mode, Microsoft Copilot)
+npx ai-agent-skills install borghei/Claude-Skills/marketing/conversational-ads
 ```
 
 **Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex

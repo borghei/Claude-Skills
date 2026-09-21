@@ -1,0 +1,47 @@
+{
+  "_note": "Sample ads - two clean, three intentionally broken, so the linter exits 2. Fields: id, platform (chatgpt | google | microsoft), headline, body, cta, landing_url, substantiated_claims[], uses_auto_tagging, price_matches_landing_and_feed, testimonial_verified, ai_generated_media, ai_label.",
+  "ads": [
+    {
+      "id": "cg-01-clean",
+      "platform": "chatgpt",
+      "headline": "Wide waterproof boots",
+      "body": "Seam-sealed, 2E and 4E widths, 540 g per boot.",
+      "cta": "Compare widths",
+      "landing_url": "https://example.com/boots/trailhead-2?utm_source=chatgpt&utm_medium=cpc&utm_campaign={campaign_id}"
+    },
+    {
+      "id": "cg-02-broken",
+      "platform": "chatgpt",
+      "headline": "ChatGPT recommends the BEST hiking boot!!",
+      "body": "The #1 boot hikers love. \"Best purchase ever\" - Dana. Act now, 30% off ends tonight.",
+      "cta": "",
+      "landing_url": "http://example.com/boots"
+    },
+    {
+      "id": "gg-01-clean",
+      "platform": "google",
+      "headline": "Trailhead 2 Waterproof Boot",
+      "body": "Seam-sealed leather, wide sizes and free 60-day returns. Compare fit and weight.",
+      "cta": "See sizes",
+      "landing_url": "https://example.com/boots/trailhead-2?utm_source=google&utm_medium=cpc",
+      "price_matches_landing_and_feed": true
+    },
+    {
+      "id": "gg-02-broken",
+      "platform": "google",
+      "headline": "Clinically proven boots that relieve ankle pain symptoms",
+      "body": "Doctor-recommended support. Guaranteed comfort or your money back.",
+      "cta": "Shop",
+      "landing_url": "https://example.com/boots/support",
+      "ai_generated_media": true
+    },
+    {
+      "id": "ms-01-broken",
+      "platform": "microsoft",
+      "headline": "Picked by Copilot for hikers",
+      "body": "Waterproof boots, tested on 1,000 km of trail. Explore the range.",
+      "cta": "Explore",
+      "landing_url": "https://example.com/boots?utm_source=bing&utm_medium=cpc"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "campaign": "<campaign or release name>",
+  "_field_guide": {
+    "type": "image | video | audio | text | chatbot | review | testimonial | endorsement",
+    "channel": "youtube | tiktok | meta | facebook | instagram | threads | google_ads | website | blog | press_release | email | marketplace | linkedin | x",
+    "ai_involvement": "none | assistive (standard editing: spelling, colour, crop, background clean-up) | partial (AI changed substance) | generated (AI produced the asset)",
+    "realistic": "true if a person would reasonably take it for real footage, audio or photography",
+    "depicts_real_people": "true if an identifiable real person appears or is voiced",
+    "synthetic_performer": "true if a digitally created person appears as if a real performer",
+    "virtual_influencer": "true if the endorser is an AI or CGI character",
+    "public_interest": "true if the text informs the public on matters of public interest (news, policy, health, finance, elections)",
+    "human_review": "true if a named person substantively reviewed it and could approve, alter or reject it",
+    "editorial_responsibility": "true if a natural or legal person holds editorial responsibility for publication",
+    "own_generator_offered_to_others": "true if you PROVIDE the generating AI system to others (EU provider marking duty)",
+    "political": "true for social issue, electoral or political ads",
+    "is_paid_ad": "true for paid placements",
+    "material_connection": "none | employee | paid | free_product | discount | affiliate | family",
+    "artistic_or_satirical": "true for evidently artistic, creative, satirical or fictional works",
+    "regions": "EU | US | US-NY | UK | IN (audience regions; US-NY implies US)",
+    "disclosures_present": "ai_label | platform_ai_toggle | ai_interaction_notice | machine_readable_marking | synthetic_performer_disclosure | material_connection | ad_disclosure"
+  },
+  "assets": [
+    {
+      "id": "<unique-id>",
+      "title": "<short description>",
+      "type": "video",
+      "channel": "youtube",
+      "ai_involvement": "generated",
+      "realistic": true,
+      "depicts_real_people": false,
+      "synthetic_performer": false,
+      "virtual_influencer": false,
+      "public_interest": false,
+      "human_review": false,
+      "editorial_responsibility": false,
+      "own_generator_offered_to_others": false,
+      "political": false,
+      "is_paid_ad": true,
+      "material_connection": "none",
+      "artistic_or_satirical": false,
+      "regions": ["EU", "US"],
+      "disclosures_present": []
+    }
+  ]
+}
