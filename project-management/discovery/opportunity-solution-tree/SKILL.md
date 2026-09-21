@@ -195,6 +195,8 @@ For each solution, the cheapest test first:
 
 Spend the minimum to learn the most.
 
+**AI-generated prototypes compress rungs 4-5.** With AI app builders, AI design tools, and AI coding assistants, a clickable or working prototype can take hours rather than weeks. That makes it tempting to skip rungs 1-3 — don't: a polished prototype of the wrong opportunity is still waste. Use a generated prototype when the assumption under test is usability or desirability, generate 2-3 variants (one per candidate solution) rather than one, and test with real target users against a pre-set threshold. Record the result on the tree node; the winning solution then goes to `execution/create-prd/` (see its Prototype-First Path) for the problem, metrics, constraints, non-goals, and risks the prototype cannot carry.
+
 ## Common engagements
 
 ### "Help me set up an OST for our team this quarter"
