@@ -83,7 +83,7 @@ Packaging is which features go in which tier. The decisions are:
 3. **Where are the boundaries?** The boundary between tiers should map to a measurable usage characteristic (number of seats, number of integrations, support level), not to a feature toggle that feels arbitrary.
 4. **What is the trial mechanism?** Time-bound (14 days), feature-limited (free tier with caps), reverse-trial (start on Pro, downgrade if usage is low).
 
-### Reforge packaging principles (paraphrased)
+### Packaging principles
 
 - Each tier should have a clear customer archetype. Good = solo / SMB; Better = small team / growing; Best = scaling org / enterprise.
 - The "value gap" between tiers should be at least 2x. If Better is 1.5x the price of Good, the customer hesitates; if it's 2-3x the price with 3-5x the value, the upgrade is clear.
@@ -278,9 +278,8 @@ This skill is template-driven. No Python automation. The artifacts are:
 ## Sources & Frameworks
 
 - Madhavan Ramanujam & Georg Tacke, *Monetizing Innovation: How Smart Companies Design the Product Around the Price* (2016)
-- Patrick Campbell (ProfitWell / Paddle), "Pricing as a feature" — https://www.paddle.com/
+- Patrick Campbell, "Pricing as a feature"
 - Peter Van Westendorp, "NSS-Price Sensitivity Meter" (1976) — original methodology
-- Reforge, "Pricing & Monetization" curriculum — https://www.reforge.com/programs/pricing-monetization
 - Gabriel Weinberg & Justin Mares, *Traction* (2015) — chapter on pricing as a channel
 - Stripe, "Atlas Guide to Pricing" — https://stripe.com/atlas/guides/pricing
 - Hermann Simon, *Confessions of the Pricing Man* (2015) — strategic pricing context

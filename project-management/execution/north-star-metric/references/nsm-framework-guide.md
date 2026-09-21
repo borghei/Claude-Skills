@@ -8,7 +8,7 @@ A reference on three overlapping NSM frameworks (Sean Ellis NSM, Amplitude NSM, 
 
 ### Sean Ellis (NSM)
 
-Sean Ellis (founder of GrowthHackers, popularizer of "growth hacking") introduced the NSM as the single metric that best captures the core value your product delivers. The core idea: if every team optimizes against the NSM, they will collectively move the business forward without coordination overhead.
+Sean Ellis (who coined "growth hacking") introduced the NSM as the single metric that best captures the core value your product delivers. The core idea: if every team optimizes against the NSM, they will collectively move the business forward without coordination overhead.
 
 Key rules from Ellis:
 - One metric, not a "balanced scorecard"
@@ -245,7 +245,6 @@ Each NSM should ship with at least 2 anti-metrics and 1 counter-metric.
 ## Further reading
 
 - Sean Ellis, "Hacking Growth" (Crown Business, 2017)
-- John Cutler's writing on NSMs (Amplitude blog)
 - Alistair Croll and Benjamin Yoskovitz, "Lean Analytics" (O'Reilly, 2013)
 - Amplitude's "North Star Playbook" (free download)
 - "The Hard Thing About Hard Things" -- Ben Horowitz on the perils of mismeasuring product

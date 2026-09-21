@@ -130,7 +130,7 @@ A holdout is a slice of users (typically 1-10%) who never see the feature, even 
 
 **Short-term holdout** -- to measure the lift of the feature with statistical confidence over time. Required for any experiment where the team wants to attribute long-term impact.
 
-**Long-term ("global") holdout** -- a slice that never sees *any* of the team's experiments for a quarter. Allows leadership to attribute aggregate lift to the team. Reforge and most experimentation-mature orgs run a global holdout.
+**Long-term ("global") holdout** -- a slice that never sees *any* of the team's experiments for a quarter. Allows leadership to attribute aggregate lift to the team. Most experimentation-mature orgs run a global holdout.
 
 ### Holdout governance
 

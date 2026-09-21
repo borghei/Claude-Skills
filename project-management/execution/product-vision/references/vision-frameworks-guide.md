@@ -175,7 +175,7 @@ Your product is what overcomes the obstacles. Not the only path to the promised 
 
 ## 5. Marty Cagan: The 10-Year Horizon
 
-Marty Cagan (Silicon Valley Product Group; *Inspired*, *Empowered*, *Transformed*) argues that a product vision should look 10 years into the future. The 10-year horizon does three things that shorter horizons cannot:
+Marty Cagan (*Inspired*, *Empowered*, *Transformed*) argues that a product vision should look 10 years into the future. The 10-year horizon does three things that shorter horizons cannot:
 
 1. **Forces abstraction from current technology.** What you can build in 2036 cannot rely on 2026 stack assumptions. The vision must survive the unknown.
 2. **Outlasts strategy cycles.** Strategy shifts every 2-3 years as competitive landscape changes. A 10-year vision is more durable than any single strategy.
@@ -275,7 +275,7 @@ A vision can update. The discipline is to update formally -- with documented rea
 
 - Pichler, Roman. *Strategize: Product Strategy and Product Roadmap Practices for the Digital Age*. Pichler Consulting, 2016 (and revised editions).
 - Moore, Geoffrey A. *Crossing the Chasm*. HarperBusiness, 3rd ed. 2014.
-- Raskin, Andy. *The Greatest Sales Deck I've Ever Seen* (Medium post, 2016). See also *A Story-Powered Pitch* (medium.com/strategic-narrative).
+- Raskin, Andy. *The Greatest Sales Deck I've Ever Seen* (2016) -- origin of the strategic-narrative format.
 - Cagan, Marty. *Inspired: How to Create Tech Products Customers Love*. Wiley, 2nd ed. 2017.
 - Cagan, Marty & Jones, Chris. *Empowered: Ordinary People, Extraordinary Products*. Wiley, 2020.
 - Bryar, Colin & Carr, Bill. *Working Backwards: Insights, Stories, and Secrets from Inside Amazon*. St. Martin's Press, 2021.

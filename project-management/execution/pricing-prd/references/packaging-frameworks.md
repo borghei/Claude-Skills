@@ -2,7 +2,7 @@
 
 Packaging is the decision about which features belong to which tier, what is included by default, what is a paid add-on, and where the boundaries fall. Pricing is the number on each tier; packaging is the shape of the offering. Most companies treat packaging as the easier of the two — and lose far more revenue to bad packaging than to bad pricing.
 
-This guide synthesizes Madhavan Ramanujam's *Monetizing Innovation*, Patrick Campbell's published packaging research, Reforge's pricing-monetization curriculum, and Stripe's documented patterns.
+This guide synthesizes Madhavan Ramanujam's *Monetizing Innovation*, Hermann Simon's *Confessions of the Pricing Man*, and Stripe's documented patterns.
 
 ## The packaging decision
 
@@ -159,7 +159,5 @@ Migrating from per-seat to per-usage (or vice versa) is one of the most disrupti
 ## References
 
 - Madhavan Ramanujam & Georg Tacke, *Monetizing Innovation* (2016)
-- Patrick Campbell, "Packaging is the leverage point" — ProfitWell / Paddle research
-- Reforge "Pricing & Monetization" — packaging curriculum
 - Hermann Simon, *Confessions of the Pricing Man* (2015)
 - Stripe Atlas, "Pricing" guide — https://stripe.com/atlas/guides/pricing

@@ -155,6 +155,4 @@ Most pricing changes warrant a combination: survey to narrow the band, test the 
 
 - Ronny Kohavi, Diane Tang, Ya Xu, *Trustworthy Online Controlled Experiments* (2020) — Chapter 18 specifically addresses pricing experiments
 - Madhavan Ramanujam, *Monetizing Innovation* (2016)
-- Patrick Campbell talks on pricing experimentation — ProfitWell / Paddle
-- Reforge "Pricing & Monetization" — experiment design module
 - Stripe's published pricing experiment guidance — https://stripe.com/atlas/guides/pricing

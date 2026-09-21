@@ -1,6 +1,6 @@
 # Quarterly Planning Guide
 
-A reference for the quarterly planning cycle. Combines Wodtke's *Radical Focus* (the weekly rhythm), Cagan's product strategy cycle (the strategic context), the Reforge product strategy framework (the upstream choices), and the RAD ritual (Reflect-Align-Decide, the meeting format).
+A reference for the quarterly planning cycle. Combines Wodtke's *Radical Focus* (the weekly rhythm), Cagan's product strategy cycle (the strategic context), a product strategy cycle (the upstream choices), and the RAD ritual (Reflect-Align-Decide, the meeting format).
 
 ---
 
@@ -88,9 +88,9 @@ If any of these has shifted, the quarter starts with strategy revision -- not ju
 
 ---
 
-## 4. Reforge: The Product Strategy Cycle
+## 4. The Product Strategy Cycle
 
-Reforge's product strategy framework (published in various courses and articles by Casey Winters, Brian Balfour, and Crystal Widjaja) frames quarterly planning as one node in a continuous strategy cycle:
+A product strategy cycle frames quarterly planning as one node in a continuous strategy cycle:
 
 ```
 Inputs:                    Process:               Outputs:
@@ -105,7 +105,7 @@ Quarterly planning is when the team makes (or re-confirms) the strategy choices.
 
 ### Strategy choices to make explicit
 
-Reforge emphasizes naming the strategy choices, not just the OKRs:
+Name the strategy choices, not just the OKRs:
 
 - **Build vs. buy vs. partner.** For each major capability, what is the path?
 - **Grow vs. retain.** Where is the team investing -- new logo acquisition or existing-customer expansion?
@@ -334,5 +334,3 @@ Learnings:
 - Cagan, Marty & Jones, Chris. *Empowered: Ordinary People, Extraordinary Products*. Wiley, 2020.
 - Doerr, John. *Measure What Matters*. Portfolio, 2018 (the canonical OKR origin text).
 - Grove, Andrew S. *High Output Management*. Vintage, 1983 (foundational management cadence text).
-- Reforge product strategy materials (multiple authors: Brian Balfour, Casey Winters, Crystal Widjaja). reforge.com
-- Lemkin, Jason. *Various SaaStr posts on quarterly cadence and board reporting* (saastr.com).

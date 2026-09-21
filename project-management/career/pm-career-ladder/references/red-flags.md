@@ -31,7 +31,7 @@ When you have just produced a self-assessment, gap analysis, growth plan, or pro
 **Why it's bad.** Vague growth plans are aspirations, not plans. They allow the PM and their manager to feel productive without producing learning. The next 6-month review will be a copy-paste of this one.
 
 **Bad example:**
-> "Growth area: Strategy. Plan: read 2 strategy books, attend Reforge course, sync with my manager more."
+> "Growth area: Strategy. Plan: read 2 strategy books, attend a strategy course, sync with my manager more."
 
 **Good example:**
 > "Growth area: Strategy. Plan: (a) Draft a 2-page strategy memo for the team by Week 4 and present it; success = manager + EM rate it 4/5 on clarity. (b) Lead the Q3 prioritization debate; success = decision documented and team aligned. (c) Run one 6-month forward look in QBR. Manager reviews monthly."
