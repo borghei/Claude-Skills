@@ -54,6 +54,15 @@ async function readJson(path) {
   }
 }
 
+// The bundled copy is the last resort, so it fails loudly instead of returning null.
+async function readBundled() {
+  const m = JSON.parse(await readFile(BUNDLED_PATH, "utf8"));
+  if (!isValidManifest(m)) {
+    throw new Error(`Bundled skill catalog is invalid: ${BUNDLED_PATH}. Reinstall @borghei/claude-skills.`);
+  }
+  return m;
+}
+
 async function readCache({ freshOnly }) {
   const path = cacheFile();
   try {
@@ -95,7 +104,7 @@ async function writeCache(manifest) {
 export async function loadManifest() {
   if (cached) return cached;
   if (isOffline()) {
-    cached = await readJson(BUNDLED_PATH);
+    cached = await readBundled();
     return cached;
   }
   cached = await readCache({ freshOnly: true });
@@ -107,7 +116,7 @@ export async function loadManifest() {
     cached = remote;
     return cached;
   }
-  cached = (await readCache({ freshOnly: false })) || (await readJson(BUNDLED_PATH));
+  cached = (await readCache({ freshOnly: false })) || (await readBundled());
   return cached;
 }
 
