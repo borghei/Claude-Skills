@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: marketing
   domain: advertising
-  updated: 2026-03-09
+  updated: 2026-09-21
 ---
 # Ad Creative
 
@@ -24,6 +24,7 @@ Production-grade ad creative design, iteration, and optimization across all majo
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Platform Specifications](#platform-specifications)
+- [Creative for Automated Campaigns](#creative-for-automated-campaigns)
 - [Creative Frameworks by Funnel Stage](#creative-frameworks-by-funnel-stage)
 - [Headline Formula Library](#headline-formula-library)
 - [Iteration Methodology](#iteration-methodology)
@@ -179,7 +180,7 @@ Reformat (not rewrite from scratch):
 | Google RSA | Search | 30 chars x 15 | 90 chars x 4 descriptions | Max 3 pinned positions |
 | Google Display | Display | 30 chars x 5 short, 90 chars x 1 long | 90 chars x 5 | Requires 5+ images |
 | Google Performance Max | Multi | 30 chars x 5 short, 90 chars x 5 long | 90 chars x 5 | Auto-placement |
-| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Image text < 20% |
+| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Keep image text light (< 20% recommended, not enforced) |
 | Meta Stories | Vertical | 40 chars | 125 chars | 9:16 aspect ratio |
 | LinkedIn Sponsored | Content | 70 chars headline | 150 chars intro text | No clickbait policies |
 | LinkedIn Message | InMail | 60 chars subject | 1,500 chars body | Personalization required |
@@ -197,17 +198,41 @@ Reformat (not rewrite from scratch):
 - Gimmicky formatting (s.p.a.c.e.d letters)
 
 **Meta Ads:**
-- Image text exceeding 20% of image area
 - Before/after body transformation images
 - Personal attributes assumptions ("Are you overweight?")
 - Fake UI elements (play buttons, notifications)
 - Sensationalized content
+
+*Note: Meta's old 20% image-text rule was removed in 2020 — there is no longer a limit on text in ad images. Meta still says images with less than 20% text tend to perform better, so treat it as a creative best practice, not a rejection trigger ([About text in ad images](https://www.facebook.com/business/help/980593475366490)).*
 
 **LinkedIn Ads:**
 - Clickbait headlines
 - Misleading claims about job opportunities
 - Profanity or inappropriate language
 - Targeting by sensitive categories
+
+---
+
+## Creative for Automated Campaigns
+
+Meta Advantage+ (sales, app, and leads campaigns), Google Performance Max, AI Max for Search, and Demand Gen assemble ads from the assets you supply and may generate or adapt text themselves. Creative becomes the main lever you still control. (As of September 2026 — verify current asset specs in each platform's help center.)
+
+| Campaign type | What the system does with creative | What to supply |
+|---------------|-----------------------------------|----------------|
+| Meta Advantage+ sales / app / leads | Mixes creatives, placements, and optional creative enhancements per person | Several distinct concepts (not tiny variants), in 1:1, 4:5, and 9:16; multiple primary texts and headlines |
+| Google Performance Max | Builds ads across Search, Shopping, YouTube, Display, Discover, Gmail, Maps from an asset group | Full asset group: multiple headlines, long headlines, descriptions, landscape/square/portrait images, logos, and your own videos (otherwise Google may auto-generate video) |
+| Google AI Max for Search | Text customization generates headlines/descriptions from your landing page, ads, and keywords; final URL expansion can change the landing page | Strong RSA assets as the base; brand and message rules; decide whether text customization and URL expansion stay on |
+| Google Demand Gen | Image and video ads on YouTube (incl. Shorts), Discover, Gmail | Vertical and horizontal video, square and landscape images, thumb-stopping first frames |
+| Ads in Google AI Overviews / AI Mode | Existing Search, Shopping, and PMax ads are matched to the AI answer context automatically | Clear, specific assets that answer the query; no separate format to build |
+
+**Creative guardrails:**
+- Review auto-generated or customized text before and after launch; remove assets that make claims you cannot support
+- Turn off Meta creative enhancements or Google text customization / final URL expansion where regulated claims or legal review apply
+- Use URL exclusions for pages that should never be landing pages (careers, legal, support)
+- Keep brand-safety rules in one place (claims allowed, banned words) and check generated variants against it
+- Track performance by asset and concept, not only by campaign — automated campaigns hide which creative drove results unless you look at asset reports
+
+See the paid-ads skill for campaign structure, audience signals, and bidding guardrails.
 
 ---
 
@@ -421,7 +446,7 @@ After 7-14 days with statistical significance:
 - [ ] No trademarked competitor names in restricted positions
 - [ ] No platform name references in copy ("Facebook," "Google")
 - [ ] No fake UI elements in images
-- [ ] Image text ratio under 20% for Meta
+- [ ] Image text kept light for Meta (under ~20% recommended for performance; no longer a policy limit)
 
 **Copy Quality:**
 - [ ] Headline makes sense standalone without description

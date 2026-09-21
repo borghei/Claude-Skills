@@ -191,7 +191,7 @@ Platform-specific best practices, algorithm factors, content optimization strate
 - **File Size**: Under 5MB for faster loading
 - **Alt Text**: Always include for accessibility
 - **Branding**: Consistent filters/overlays
-- **Text Overlay**: Less than 20% of image
+- **Text Overlay**: Keep it light — under ~20% of the image is a creative best practice (Meta removed its 20% text rule in 2020; it is no longer enforced)
 
 #### Video Optimization
 - **Captions**: Always include (85% watch without sound)
