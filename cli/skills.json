@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-21T21:39:19+00:00",
+  "generated_at": "2026-09-21T21:54:56+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -3014,10 +3014,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3210,7 +3211,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 60594,
+      "size_bytes": 60784,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3280,7 +3281,7 @@
         "scripts/metadata_optimizer.py",
         "scripts/review_analyzer.py"
       ],
-      "size_bytes": 282904,
+      "size_bytes": 283058,
       "tools_count": 8,
       "has_scripts": true,
       "has_references": true,
@@ -3420,7 +3421,7 @@
         "scripts/brand_voice_analyzer.py",
         "scripts/seo_optimizer.py"
       ],
-      "size_bytes": 91709,
+      "size_bytes": 91683,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -3784,7 +3785,7 @@
         "references/international-playbooks.md",
         "scripts/calculate_cac.py"
       ],
-      "size_bytes": 43980,
+      "size_bytes": 43987,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7227,7 +7228,7 @@
         "references/ladder-rubric-detail.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 66393,
+      "size_bytes": 66300,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7524,7 +7525,7 @@
         "references/synthesis-methodology-guide.md",
         "scripts/interview_synthesizer.py"
       ],
-      "size_bytes": 81031,
+      "size_bytes": 80882,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7691,7 +7692,7 @@
         "references/red-flags.md",
         "scripts/funnel_analyzer.py"
       ],
-      "size_bytes": 98037,
+      "size_bytes": 97670,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7754,7 +7755,7 @@
         "references/eval-design-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 107408,
+      "size_bytes": 106847,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7810,7 +7811,7 @@
         "references/beta-program-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 72023,
+      "size_bytes": 71980,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7864,7 +7865,7 @@
         "references/red-flags.md",
         "scripts/prd_scaffolder.py"
       ],
-      "size_bytes": 62508,
+      "size_bytes": 62536,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7901,7 +7902,7 @@
         "references/tool-reference.md",
         "scripts/feedback_triage.py"
       ],
-      "size_bytes": 112696,
+      "size_bytes": 112224,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8034,7 +8035,7 @@
         "references/rollout-execution-playbook.md",
         "references/rollout-shape-comparison-guide.md"
       ],
-      "size_bytes": 90813,
+      "size_bytes": 90652,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8063,7 +8064,7 @@
         "scripts/story_converter.py",
         "scripts/story_quality_checker.py"
       ],
-      "size_bytes": 82750,
+      "size_bytes": 82715,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8120,7 +8121,7 @@
         "references/red-flags.md",
         "scripts/metric_tree_builder.py"
       ],
-      "size_bytes": 76594,
+      "size_bytes": 76515,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8185,7 +8186,7 @@
         "references/post-mortem-process.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 91481,
+      "size_bytes": 91352,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8248,7 +8249,7 @@
         "references/pricing-prd-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 107353,
+      "size_bytes": 106803,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8305,7 +8306,7 @@
         "references/vision-frameworks-guide.md",
         "references/vision-playbook.md"
       ],
-      "size_bytes": 74817,
+      "size_bytes": 74751,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8314,7 +8315,7 @@
     {
       "name": "quarterly-planning",
       "domain": "project-management",
-      "description": "Run the full quarterly planning cycle -- pre-quarter homework, kickoff, weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical Focus, Cagan strategy, and the Reforge cycle around your OKRs.",
+      "description": "Run the full quarterly planning cycle -- pre-quarter homework, kickoff, weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical Focus, Cagan strategy, and a fixed planning cadence around your OKRs.",
       "tags": [],
       "version": "1.0.1",
       "updated": "2026-06-15",
@@ -8334,7 +8335,7 @@
         "references/quarterly-planning-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 73667,
+      "size_bytes": 73347,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8389,7 +8390,7 @@
         "references/roadmap-communication-guide.md",
         "references/roadmap-variants-playbook.md"
       ],
-      "size_bytes": 59484,
+      "size_bytes": 59459,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,

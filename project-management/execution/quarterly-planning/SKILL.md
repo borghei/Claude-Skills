@@ -3,7 +3,7 @@ name: quarterly-planning
 description: >
   Run the full quarterly planning cycle -- pre-quarter homework, kickoff,
   weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical
-  Focus, Cagan strategy, and the Reforge cycle around your OKRs.
+  Focus, Cagan strategy, and a fixed planning cadence around your OKRs.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1

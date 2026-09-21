@@ -1033,18 +1033,6 @@ What makes these marketing skills world-class:
 - "The Cold Start Problem" by Andrew Chen (Network effects, PLG)
 - "Traction" by Gabriel Weinberg (Channel strategy)
 
-### Industry Benchmarks
-- OpenView SaaS Benchmarks Report
-- SaaS Capital Survey
-- Pacific Crest SaaS Survey
-- KeyBanc Capital Markets Survey
-
-### Communities
-- SaaS Marketing Slack communities
-- Product Marketing Alliance
-- Demand Gen Report
-- Content Marketing Institute
-
 ---
 
 ## 🎊 Summary
