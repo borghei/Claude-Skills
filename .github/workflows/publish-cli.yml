@@ -47,10 +47,11 @@ jobs:
       - name: Publish to npm
         working-directory: cli
         run: |
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             npm publish --dry-run --access public
           else
             npm publish --access public --provenance
           fi
         env:
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

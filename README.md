@@ -149,6 +149,10 @@ Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Fo
 | Izzy | [@weemax](https://github.com/weemax) |
 | Rohan (Tessl) | [@rohan-tessl](https://github.com/rohan-tessl) |
 
+### Security acknowledgments
+
+Thanks to [@rishaankgupta](https://github.com/rishaankgupta) for responsibly disclosing a shell-injection vulnerability (CWE-78) in the `claude-code-review.yml` workflow template. The fix hardened every workflow template against the same pattern.
+
 ---
 
 ## Disclaimer

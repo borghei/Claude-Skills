@@ -51,6 +51,11 @@ jobs:
             fi
       - name: Determine Sync Direction
         id: check
+        # Untrusted event data goes through env, never ${{ }} inside run (CWE-78)
+        env:
+          LABEL: ${{ github.event.label.name }}
+          INPUT_DIRECTION: ${{ github.event.inputs.direction }}
+          INPUT_ISSUE_NUMBER: ${{ github.event.inputs.issue_number }}
         run: |
           # Check which event triggered this workflow
           if [ "${{ github.event_name }}" = "issues" ]; then
@@ -60,7 +65,6 @@ jobs:
 
             # Only sync on status label changes or state changes
             ACTION="${{ github.event.action }}"
-            LABEL="${{ github.event.label.name }}"
             if { [ "$ACTION" = "labeled" ] && echo "$LABEL" | grep -q "^status:"; } || \
                [ "$ACTION" = "closed" ] || \
                [ "$ACTION" = "reopened" ]; then
@@ -73,10 +77,10 @@ jobs:
 
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             # Manual trigger
-            echo "direction=${{ github.event.inputs.direction }}" >> "$GITHUB_OUTPUT"
-            echo "issue_number=${{ github.event.inputs.issue_number }}" >> "$GITHUB_OUTPUT"
+            echo "direction=$INPUT_DIRECTION" >> "$GITHUB_OUTPUT"
+            echo "issue_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
             echo "should_sync=true" >> "$GITHUB_OUTPUT"
-            echo "Will sync: Manual trigger (${{ github.event.inputs.direction }})"
+            echo "Will sync: Manual trigger ($INPUT_DIRECTION)"
 
           else
             echo "should_sync=false" >> "$GITHUB_OUTPUT"
