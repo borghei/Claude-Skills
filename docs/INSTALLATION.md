@@ -962,6 +962,6 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 
 ---
 
-**Last Updated:** February 2026
-**Skills Version:** 4.11.0 (372 production skills, 867 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 8 CI/CD workflows)
+**Last Updated:** September 2026
+**Skills Version:** 4.12.0 (372 production skills, 867 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 8 CI/CD workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

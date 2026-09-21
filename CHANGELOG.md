@@ -5,7 +5,9 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.12.0] - 2026-09-22 (2026 refresh — AI-era marketing and PM, security hardening)
+
+**372 skills · 20 domains · 867 Python tools.**
 
 ### Added
 
@@ -13,21 +15,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `marketing/ai-content-disclosure` — disclosure checks for AI-generated or AI-assisted content and reviews: EU AI Act Art. 50, FTC Consumer Reviews and Testimonials Rule (16 CFR 465), FTC Endorsement Guides, platform AI labels. Tools: `disclosure_checker.py`, `review_authenticity_linter.py`.
   - `marketing/conversational-ads` — ads in ChatGPT, Google AI Overviews / AI Mode and Microsoft Copilot: placement mix, holdout test plan, copy linting. Tools: `conversational_ad_planner.py`, `answer_adjacent_copy_linter.py`.
   - `project-management/discovery/ai-prototyping` — idea → AI-generated prototype → user validation → engineering handoff. Tools: `prototype_plan.py`, `prototype_handoff_checker.py`.
-  - `project-management/execution/agents-in-the-team` — delegation policy, review-capacity gate and agent vs human delivery metrics. Tools: `agent_delegation_scorer.py`, `agent_delivery_metrics.py`.
+  - `project-management/execution/agents-in-the-team` — delegation policy, review-capacity gate and agent vs human delivery metrics. Tools: `agent_delegation_scorer.py`, `agent_delivery_metrics.py`. (#39)
 - **July 2026: 25 skills across 3 new domains** — `business-operations/`, `research-ops/`, `markdown-html/`, plus engineering, PM, personal-productivity and data-analytics fill-ins.
 - README **Security acknowledgments** section.
 
 ### Changed
 
-- **Marketing refresh (2025–2026 changes):** FAQ/HowTo rich results and the sitelinks search box marked retired (`schema_auditor.py` no longer scores them); AI crawler matrix and the Search Console generative-AI opt-out; Search Console generative AI report; Meta Advantage+, Performance Max, AI Max, Demand Gen and ads in AI Overviews / AI Mode; GA4 AI Assistant channel and an `ai_assistant` channel in `attribution_analyzer.py`; INP replaces FID; GA4 key events; email metrics de-emphasize Apple-inflated opens; Chrome third-party-cookie status; Instagram and X limits.
-- **PM refresh:** Productboard recipes on Public API v2; Jira recipes on `/rest/api/3/search/jql`; Notion recipes on API version 2025-09-03 (data sources); `delivery_metrics_tracker.py` on DORA 2024 benchmarks with failed deployment recovery time and optional rework rate; EU AI Act timeline per the AI Omnibus (Regulation (EU) 2026/1744); Atlassian Data Center end-of-life and the official Rovo MCP tool names; Linear rate limits; prototype-first path in PRD and discovery skills; AI-assisted delivery guidance.
-- Docs, catalogs and counts updated to **372 skills · 20 domains · 867 Python tools**; domain READMEs use the first-party CLI and plugin install commands; the PM and marketing catalogs list every skill.
+- **Marketing refresh (2025–2026 changes, #37):** FAQ/HowTo rich results and the sitelinks search box marked retired (`schema_auditor.py` no longer scores them); AI crawler matrix and the Search Console generative-AI opt-out; Search Console generative AI report; Meta Advantage+, Performance Max, AI Max, Demand Gen and ads in AI Overviews / AI Mode; GA4 AI Assistant channel and an `ai_assistant` channel in `attribution_analyzer.py`; INP replaces FID; GA4 key events; email metrics de-emphasize Apple-inflated opens; Chrome third-party-cookie status; Instagram and X limits.
+- **PM refresh (#36):** Productboard recipes on Public API v2; Jira recipes on `/rest/api/3/search/jql`; Notion recipes on API version 2025-09-03 (data sources); `delivery_metrics_tracker.py` on DORA 2024 benchmarks with failed deployment recovery time and optional rework rate; EU AI Act timeline per the AI Omnibus (Regulation (EU) 2026/1744); Atlassian Data Center end-of-life and the official Rovo MCP tool names; Linear rate limits; prototype-first path in PRD and discovery skills; AI-assisted delivery guidance.
+- Docs, catalogs and counts updated to **372 skills · 20 domains · 867 Python tools**; domain READMEs use the first-party CLI and plugin install commands; the PM and marketing catalogs list every skill (#40). The full skills and agents references now publish on the website (#41).
 
 ### Fixed
 
-- **Security:** shell injection (CWE-78) in workflow templates — untrusted event data (PR titles, labels, branch names, dispatch inputs) now passes through `env:` instead of `${{ }}` inside `run:`. Reported by @rishaankgupta.
+- **Security:** shell injection (CWE-78) in workflow templates — untrusted event data (PR titles, labels, branch names, dispatch inputs) now passes through `env:` instead of `${{ }}` inside `run:`. Reported by @rishaankgupta. (#35)
 - `aws-solution-architect`: DynamoDB on-demand pricing updated to post-November-2024 rates (#32).
-- Build-manifest workflow no longer fails when two merges land seconds apart.
+- Build-manifest workflow no longer fails when two merges land seconds apart. (#38)
 - `content-humanizer`: removed advice on evading AI-watermark detection.
 
 ## [4.11.0] - 2026-06-29 (AI-skills modernization — 2026 agentic capabilities)

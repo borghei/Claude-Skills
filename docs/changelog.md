@@ -8,19 +8,19 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
-**v4.1.0** (April 2026)
+**v4.12.0** (September 2026)
 
-- 245 production-ready skills across 14 domains (new: Legal — experimental; 3 new PM execution skills)
-- 653 Python automation tools
-- 6 enhanced product/PM skills (JTBD canvas, story splitting, PESTEL, positioning, proto-personas, problem framing)
-- 25 role-based agents + 7 personas
-- 6 Claude Code subagents
-- 12 sample CI/CD workflows
-- 10 platform support (Claude Code, Cursor, Copilot, Codex, Windsurf, Cline, Aider, Goose, Jules, RooCode)
-- Machine-readable `skills.json` catalog
-- MkDocs Material documentation site
+- 372 production-ready skills across 20 domains, 867 Python automation tools, 76 agents
+- 4 new AI-era skills: `ai-content-disclosure` and `conversational-ads` (marketing), `ai-prototyping` and `agents-in-the-team` (project management)
+- Marketing and PM skills refreshed against 2025–2026 changes: retired rich results, AI crawler and Search Console AI controls, Advantage+ / AI Max, GA4 AI Assistant channel, Productboard API v2, Jira enhanced search, Notion data sources, DORA 2024 benchmarks, EU AI Act Omnibus
+- Workflow templates hardened against shell injection (CWE-78)
+- Full skills and agents references published on the site; complete PM and marketing catalogs
 
 ## Previous Releases
+
+### v4.1.0 – v4.11.0
+
+April to June 2026: PM depth tiers, the research domain, C-suite Tier 2 advisors, progressive disclosure, cross-platform manifests and AI-modernization engineering skills. See [CHANGELOG.md](https://github.com/borghei/Claude-Skills/blob/main/CHANGELOG.md).
 
 ### v3.0.0
 
