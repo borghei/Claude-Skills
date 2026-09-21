@@ -32,6 +32,12 @@ jobs:
       - name: Regenerate manifest
         run: python3 scripts/build_manifest.py
 
+      # npm Trusted Publishing (OIDC, no stored token) needs npm >= 11.5.1;
+      # Node 20 ships npm 10. With a trusted publisher configured on npmjs.com
+      # the NPM_TOKEN secret is not needed.
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@^11.5.1
+
       - name: Install CLI deps
         working-directory: cli
         run: npm install --ignore-scripts

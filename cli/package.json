@@ -1,6 +1,6 @@
 {
   "name": "@borghei/claude-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Install any skill from the Claude Skills library into your AI assistant in one command.",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,8 @@
     "src",
     "templates",
     "skills.json",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=18.0.0"
