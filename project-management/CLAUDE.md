@@ -4,7 +4,7 @@ This guide covers the **66 production-ready project management skills** organize
 
 ## PM Skills Overview
 
-**Available Skills (66 total):**
+**Available Skills (70 total):**
 
 **Tier 3 additions (May 2026, 12 new skills):**
 

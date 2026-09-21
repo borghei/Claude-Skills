@@ -1,12 +1,12 @@
 ---
 title: Project Management Skills
-description: 66 PM skills with worked examples, red-flag libraries, MCP tools, runnable pipelines, live data adapters, a deterministic eval harness, classic strategy frameworks (BMC / Lean / SWOT / Porter's / Ansoff), and full GTM (gtm-strategy / ICP). The most-used domain in Claude Skills.
+description: 70 PM skills with worked examples, red-flag libraries, MCP tools, runnable pipelines, live data adapters, a deterministic eval harness, classic strategy frameworks (BMC / Lean / SWOT / Porter's / Ansoff), and full GTM (gtm-strategy / ICP). The most-used domain in Claude Skills.
 ---
 
 # Project Management Skills
 
 !!! success "★ The most-visited domain in Claude Skills"
-    **66 production-ready PM skills** spanning discovery, execution, career growth, strategy frameworks, GTM, and tool integrations. PMs from APM to CPO use these daily to ship faster with fewer meetings.
+    **70 production-ready PM skills** spanning discovery, execution, career growth, strategy frameworks, GTM, and tool integrations. PMs from APM to CPO use these daily to ship faster with fewer meetings.
 
 The PM domain is a complete operating system for product and project work. Every artifact a PM produces (PRD, OKR, roadmap, status update, retro, decision log) has a skill that scaffolds it, with portable output to Jira, Linear, Notion, Productboard, or Confluence.
 

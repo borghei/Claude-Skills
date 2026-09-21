@@ -10,11 +10,11 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 
 <div class="stats" markdown>
 <div class="stat">
-<div class="number">368</div>
+<div class="number">372</div>
 <div class="label">Skills</div>
 </div>
 <div class="stat">
-<div class="number">859</div>
+<div class="number">867</div>
 <div class="label">Python Tools</div>
 </div>
 <div class="stat">
@@ -68,7 +68,7 @@ Fullstack, DevOps, security, mobile, ML, cloud (AWS/Azure/GCP), MCP servers, CI/
 
 <div class="card" markdown>
 ### :material-bullhorn: Marketing
-**39 skills** &middot; 118+ tools
+**41 skills** &middot; 118+ tools
 
 Content, SEO, AEO, demand gen, paid ads, CRO, email, social, brand, analytics.
 
@@ -95,7 +95,7 @@ ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF, PCI-DSS, plus
 
 <div class="card" markdown>
 ### :material-clipboard-check: ★ Project Management
-**68 skills** &middot; 82+ tools &middot; *most-used domain*
+**70 skills** &middot; 82+ tools &middot; *most-used domain*
 
 PRDs (incl. AI features), OKRs, NSM, roadmaps, retros, story splitting, post-mortems, activation funnels, feature flags, career growth, strategy frameworks (BMC/Lean/SWOT/Porter's/Ansoff), GTM. Jira / Linear / Notion / Productboard / Confluence.
 
@@ -173,8 +173,8 @@ Self-contained HTML documents and slide decks from markdown, a pre-publication r
 
 | | |
 |---|---|
-| **368 Skills** | Production-ready expertise across 20 professional domains. Project Management is the most-used (68 skills). |
-| **859 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
+| **372 Skills** | Production-ready expertise across 20 professional domains. Project Management is the most-used (70 skills). |
+| **867 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |

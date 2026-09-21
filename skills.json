@@ -1,12 +1,12 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 368 production-ready skills across 20 domains. Project Management is the most-used domain (68 skills).",
+  "description": "The Universal AI Skills Library — 372 production-ready skills across 20 domains. Project Management is the most-used domain (70 skills).",
   "version": "4.11.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 368,
+  "total_skills": 372,
   "updated": "2026-09-21",
   "domains": {
     "business-growth": {
@@ -50,8 +50,8 @@
       "tools": 14
     },
     "marketing": {
-      "count": 39,
-      "tools": 118
+      "count": 41,
+      "tools": 122
     },
     "personal-productivity": {
       "count": 13,
@@ -62,8 +62,8 @@
       "tools": 30
     },
     "project-management": {
-      "count": 68,
-      "tools": 79
+      "count": 70,
+      "tools": 83
     },
     "ra-qm-team": {
       "count": 27,
@@ -1793,6 +1793,29 @@
       "has_assets": false
     },
     {
+      "name": "ai-content-disclosure",
+      "description": "Check AI-generated marketing content and reviews for required disclosures under the EU AI Act, FTC rules and platform AI-label policies. Use when labelling AI ads, deepfakes, chatbots, influencer posts or testimonials.",
+      "path": "marketing/ai-content-disclosure/SKILL.md",
+      "domain": "marketing",
+      "category": "marketing",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "ai-disclosure",
+        "eu-ai-act",
+        "ftc",
+        "fake-reviews",
+        "endorsements",
+        "deepfake-labels",
+        "synthetic-media",
+        "ad-compliance"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "ai-seo",
       "description": "Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative engine optimization (GEO), citability audits, and schema markup. Use when optimizing for AI search, generative search, or LLM visibility.",
       "path": "marketing/ai-seo/SKILL.md",
@@ -1957,6 +1980,29 @@
       "tools": 3,
       "has_references": false,
       "has_assets": false
+    },
+    {
+      "name": "conversational-ads",
+      "description": "Plan, write and measure ads inside AI assistants and AI search (ChatGPT Ads, Google AI Overviews and AI Mode, Microsoft Copilot). Use when testing ChatGPT ads, answer-adjacent copy, or incrementality for AI placements.",
+      "path": "marketing/conversational-ads/SKILL.md",
+      "domain": "marketing",
+      "category": "marketing",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "chatgpt-ads",
+        "ai-overviews-ads",
+        "ai-mode",
+        "copilot-ads",
+        "conversational-ads",
+        "incrementality",
+        "paid-media",
+        "ad-copy"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "copy-editing",
@@ -4281,6 +4327,20 @@
       "has_assets": false
     },
     {
+      "name": "ai-prototyping",
+      "description": "Idea to AI-generated prototype to customer validation to engineering handoff. Use when deciding prototype vs spec, choosing fidelity, briefing AI prototyping tools, testing with users, or handing a prototype to engineering.",
+      "path": "project-management/discovery/ai-prototyping/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "brainstorm-experiments",
       "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.",
       "path": "project-management/discovery/brainstorm-experiments/SKILL.md",
@@ -4431,6 +4491,20 @@
       "license": "MIT + Commons Clause",
       "tags": [],
       "tools": 1,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "agents-in-the-team",
+      "description": "Run delivery when AI coding and ops agents take tickets. Use when setting agent delegation policy, writing agent-ready tickets, planning review capacity, measuring agent vs human delivery, or rolling agents out safely.",
+      "path": "project-management/execution/agents-in-the-team/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },

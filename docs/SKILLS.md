@@ -1,6 +1,6 @@
 # Skills Reference
 
-Complete reference for **368 skills across 20 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **372 skills across 20 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
 
@@ -291,7 +291,7 @@ Strategic decision-making for executive leadership.
 | [general-counsel-advisor](../c-level-advisor/general-counsel-advisor/SKILL.md) | Legal risk register, contract portfolio analysis, regulatory calendar | 3 |
 | [vpe-advisor](../c-level-advisor/vpe-advisor/SKILL.md) | Engineering org health, DORA/DevEx dashboards, capacity planning | 3 |
 
-## Marketing (39)
+## Marketing (41)
 
 Data-driven marketing with Python automation tools.
 
@@ -357,7 +357,7 @@ User-centered product development with automation tools.
 | [spec-to-repo](../product-team/spec-to-repo/SKILL.md) | PRD-to-tickets decomposition, branch naming, PR scope analysis | 3 |
 | [roadmap-communicator](../product-team/roadmap-communicator/SKILL.md) | Audience translation, confidence bands, roadmap diff reporting | 3 |
 
-## Project Management (68) ★ most-visited domain
+## Project Management (70) ★ most-visited domain
 
 Delivery excellence with discovery, execution frameworks, career growth, and Jira / Linear / Notion / Confluence integration. See [Quick Start by role](../project-management/README.md#quick-start-by-role).
 

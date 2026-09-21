@@ -6,7 +6,7 @@
 <p align="center"><b>AI skills for every team, not just engineering.</b></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-368-brightgreen.svg" alt="368 Skills">
+  <img src="https://img.shields.io/badge/Skills-372-brightgreen.svg" alt="372 Skills">
   <img src="https://img.shields.io/badge/Domains-20-blue.svg" alt="20 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-76-purple.svg" alt="76 Expert Agents">
   <img src="https://img.shields.io/badge/AI_Assistants-11-orange.svg" alt="11 AI Assistants">
@@ -31,7 +31,7 @@ In the Claude desktop app:
 2. Go to **Browse plugins**
 3. Enter: `borghei/Claude-Skills`
 
-All 368 skills become available across your Claude conversations.
+All 372 skills become available across your Claude conversations.
 
 <!-- TODO: add install GIF at .docs/images/claude-skills-install.gif — recording recipe in .docs/images/README.md -->
 
@@ -53,21 +53,21 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for the Claude Code plugin, MCP
 **Ship a SOC 2 audit. Run a sprint retro. Draft a board update. Spin up a fintech compliance program.** Real workflows you can finish today, not prompt templates that need a prompt engineer to drive them.
 
 - **The only OSS skills library covering regulated industries.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA, GDPR. 18 compliance frameworks with checklists, gap analyses, and audit-ready outputs.
-- **Scripts that actually run, not just prompt templates.** 859 Python tools you can pipe into CI, MCP servers, or your own scripts. Standard library only, no pip cliffs.
+- **Scripts that actually run, not just prompt templates.** 867 Python tools you can pipe into CI, MCP servers, or your own scripts. Standard library only, no pip cliffs.
 - **Call one persona, get a stack of skills behind it.** `startup-cto`, `growth-marketer`, `solo-founder`, `cs-cto-advisor`, `cs-fintech-advisor`, and more. 76 expert identities ready out of the box.
 - **Works with your AI assistant.** Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider, Goose, OpenCode, and ChatGPT / Claude.ai.
-- **Discovery → delivery → career for product teams.** Project Management is the deepest domain — 68 skills, and every one ships with a worked example, an anti-pattern library, and a deterministic scoring rubric. 15 PM skills callable as MCP tools. 5 chain pipelines, 3 live data adapters. Jira / Linear / Notion / Productboard / Confluence. Tier 3 adds strategy frameworks (BMC, Lean Canvas, SWOT, Porter's, Ansoff) and GTM (gtm-strategy, ICP).
+- **Discovery → delivery → career for product teams.** Project Management is the deepest domain — 70 skills, and every one ships with a worked example, an anti-pattern library, and a deterministic scoring rubric. 15 PM skills callable as MCP tools. 5 chain pipelines, 3 live data adapters. Jira / Linear / Notion / Productboard / Confluence. Tier 3 adds strategy frameworks (BMC, Lean Canvas, SWOT, Porter's, Ansoff) and GTM (gtm-strategy, ICP).
 - **Runs the business, not just the codebase.** Business operations (capacity planning, process mapping, vendor and procurement management), applied research ops (market, product, clinical study design, research finance), and a stdlib-only markdown→HTML publishing pipeline with a CI-ready review gate.
 
-*Supporting evidence:* 368 skills · 859 Python tools · 76 agents · 18 compliance frameworks · 20 domains · 11 platforms.
+*Supporting evidence:* 372 skills · 867 Python tools · 76 agents · 18 compliance frameworks · 20 domains · 11 platforms.
 
 ---
 
 ## Browse skills by domain
 
-**[Project Management (68) ★](project-management/)** *(most-visited domain. Discovery, delivery, career growth, strategy frameworks, GTM, Jira / Linear / Notion / Confluence.)*
+**[Project Management (70) ★](project-management/)** *(most-visited domain. Discovery, delivery, career growth, strategy frameworks, GTM, Jira / Linear / Notion / Confluence.)*
 
-[Engineering (91)](engineering/) · [Marketing (39)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (13)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Business Operations (6)](business-operations/) · [Data (6)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Markdown-HTML (4)](markdown-html/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/SKILLS.md)
+[Engineering (91)](engineering/) · [Marketing (41)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (13)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Business Operations (6)](business-operations/) · [Data (6)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Markdown-HTML (4)](markdown-html/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/SKILLS.md)
 
 ---
 
@@ -168,7 +168,7 @@ Thanks to [@rishaankgupta](https://github.com/rishaankgupta) for responsibly dis
 ---
 
 <p align="center">
-  <strong>368 skills · 859 tools · 20 domains · 76 agents · 11 platforms.</strong><br>
+  <strong>372 skills · 867 tools · 20 domains · 76 agents · 11 platforms.</strong><br>
   <a href="https://borghei.me">borghei.me</a>
 </p>
 
