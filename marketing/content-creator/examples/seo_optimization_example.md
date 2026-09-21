@@ -231,8 +231,8 @@ The compounding effect of quality content creates sustainable business growth:
 
 ### The ROI of Strategic Content
 
-According to Content Marketing Institute research, businesses with documented
-content strategies are 313% more likely to report success than those without.
+Industry surveys consistently find that businesses with a documented content
+strategy report more success than those without one.
 
 [Continue for 1,500+ words with detailed sections...]
 
