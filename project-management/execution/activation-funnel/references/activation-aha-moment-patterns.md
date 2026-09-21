@@ -187,11 +187,7 @@ Canva activation is "user created a design and either downloaded it or shared it
 ## Reading list
 
 - Sean Ellis + Morgan Brown, *Hacking Growth*, Chapters 4-5 (activation)
-- Brian Balfour, "User Onboarding: The Activation Playbook" (Reforge)
-- Casey Winters, "The Activation Curve" (caseyaccidental.com)
-- Lenny Rachitsky, "What is your activation metric?" (Lenny's Newsletter)
 - Amplitude, *North Star Playbook* -- activation section
-- Andrew Chen, "The Power User Curve" (andrewchen.com)
 
 ---
 **Last Updated:** 2026-05-22

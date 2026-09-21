@@ -32,7 +32,7 @@ Use AARRR (no awareness) when:
 - The category is known.
 - The funnel starts at "visit to your site" because demand-gen lives in a separate funnel.
 
-## 3. Brian Balfour's "Four Fits" (Reforge)
+## 3. Brian Balfour's "Four Fits"
 
 Brian Balfour's "Four Fits" framework adds the channel-product and model-channel layers around AARRR. Useful when AARRR alone is not surfacing the real failure:
 
@@ -45,7 +45,7 @@ If activation is fine but acquisition is failing, the leak is usually channel-pr
 
 ## 4. Andrew Chen on funnel design
 
-Andrew Chen (a16z; formerly Uber Rider Growth) writes that effective funnels are:
+Andrew Chen (formerly Uber Rider Growth) argues that effective funnels are:
 
 - **Built from real cohorts**, not snapshots. A snapshot funnel pools users at different lifecycle stages and lies.
 - **Specific to a single journey**. A "general activation funnel" that tries to cover all user types ends up vague.
@@ -56,7 +56,7 @@ Chen's "Law of Shitty Clickthroughs" is also relevant: the conversion rate of an
 
 ## 5. Sean Ellis: activation as the leverage point
 
-Sean Ellis (coined "growth hacking"; founder of GrowthHackers and PMF Survey) is the primary source for the activation-rate framing.
+Sean Ellis (coined "growth hacking"; creator of the PMF survey) is the primary source for the activation-rate framing.
 
 His method:
 1. Identify the cohort of users who are still active (or paying) at a meaningful retention horizon (often D30 or D90).
@@ -142,7 +142,7 @@ A common mistake is treating the activation event as the lagging metric. Activat
 
 ## 11. Hooks, loops, and the modern view
 
-In 2023-2026 growth literature, the linear funnel is increasingly paired with **loops** (Reforge "growth loops", Sangeet Paul Choudary "platform loops"). A loop is a self-reinforcing cycle where the output of one stage becomes the input to another -- typical examples: content loops (users create content -> content draws new users), invite loops (activated users invite others), data loops (more usage -> better recommendations -> more usage).
+In 2023-2026 growth literature, the linear funnel is increasingly paired with **loops** ("growth loops", Sangeet Paul Choudary's "platform loops"). A loop is a self-reinforcing cycle where the output of one stage becomes the input to another -- typical examples: content loops (users create content -> content draws new users), invite loops (activated users invite others), data loops (more usage -> better recommendations -> more usage).
 
 Linear funnel + loops is the full picture:
 - The funnel describes the user's journey from awareness to revenue.
@@ -167,10 +167,10 @@ A modern PM owns both. This skill is the funnel half; opportunity-tree skills li
 - Dave McClure, "Startup Metrics for Pirates" (2007 talk, multiple updated versions)
 - Sean Ellis + Morgan Brown, *Hacking Growth* (2017)
 - Alistair Croll + Benjamin Yoskovitz, *Lean Analytics* (2013)
-- Brian Balfour, "Four Fits Framework" (Reforge essays)
-- Andrew Chen, "The Law of Shitty Clickthroughs" + "Growth Loops" (andrewchen.com)
+- Brian Balfour, "Four Fits" framework
+- Andrew Chen, "The Law of Shitty Clickthroughs"
 - Amplitude, *North Star Playbook* (2019, latest 2024)
-- Sangeet Paul Choudary, *Platform Revolution* (2016) and "Platform Loops" essays
+- Sangeet Paul Choudary, *Platform Revolution* (2016)
 
 ---
 **Last Updated:** 2026-05-22

@@ -142,4 +142,3 @@ The cluster's majority category is attractive (delight). But the segment matters
 - Berger, C., Blauth, R., Boger, D., et al. (1993). "Kano's Methods for Understanding Customer-defined Quality". *Center for Quality Management Journal*, 2(4).
 - Folmer, E., & Bosch, J. (2004). "Architecting for Usability: A Survey". *Journal of Systems and Software*, 70(1-2).
 - Marty Cagan, *Inspired*, chapter on prioritization techniques — Kano framing applied to product
-- "The Complete Guide to the Kano Model" — Daniel Zacarias — https://foldingburritos.com/blog/kano-model/

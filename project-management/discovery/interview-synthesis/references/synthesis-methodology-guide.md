@@ -193,5 +193,3 @@ The synthesis produces three artifacts that flow into downstream PM skills:
 - Torres, T. (2021). *Continuous Discovery Habits*. Product Talk LLC.
 - Portigal, S. (2013, 2nd ed. 2023). *Interviewing Users*. Rosenfeld Media.
 - Klement, A. (2018). *When Coffee and Kale Compete*. NYC Publishing.
-- Torres, T. "Why Outcomes Are the Key to Discovery". *Product Talk* blog.
-- Klement, A. "Replacing the User Story with the Job Story". *JTBD.info*.

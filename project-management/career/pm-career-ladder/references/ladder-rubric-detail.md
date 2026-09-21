@@ -114,7 +114,7 @@ For each of the five dimensions, this document expands the rubric across all lev
 
 ### Senior PM
 - **Looks like:** Connects area strategy to company strategy; defends trade-offs to leadership; identifies strategic risks proactively.
-- **Anti-pattern:** Strategy is "I read Lenny's newsletter". Sr PM bar is "I have an original POV grounded in evidence".
+- **Anti-pattern:** Strategy is "I read a PM newsletter". Sr PM bar is "I have an original POV grounded in evidence".
 - **Promotion signal:** Has shaped the company's strategy in their area.
 
 ### Group PM

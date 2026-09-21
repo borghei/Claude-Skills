@@ -75,7 +75,7 @@ State a primary, a fallback, and a switch trigger. "Model lock-in" is the most e
 | RLHF / preference fine-tune | Subjective quality the base model gets wrong | High | High |
 | Agentic / tool use | Multi-step task requiring tool invocation | High (per-tool-call) | High |
 
-Pick one (or a combination) and **state the rejected alternatives with reasons**. The Reforge AI PM curriculum is explicit: 80% of "we need a fine-tune" decisions are actually "we need better prompts and retrieval first."
+Pick one (or a combination) and **state the rejected alternatives with reasons**. Prompt-first discipline applies: most "we need a fine-tune" decisions turn out to be "we need better prompts and retrieval first."
 
 **9.3 Data flow**
 

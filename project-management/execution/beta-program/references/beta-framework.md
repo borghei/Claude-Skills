@@ -6,7 +6,7 @@ Read this when you are building the beta plan, setting exit gates, running the w
 
 ### Cohort Design: Friends, Family, Fanatics
 
-A widely-used pattern (popularized by early-stage operators including Y Combinator partners) for sequencing beta recruitment in three concentric rings of decreasing trust and increasing signal.
+A widely-used pattern among early-stage operators for sequencing beta recruitment in three concentric rings of decreasing trust and increasing signal.
 
 | Cohort | Who | Goal | Typical Size | Tolerance for Rough Edges |
 |--------|-----|------|--------------|---------------------------|

@@ -144,8 +144,6 @@ Prevention:
 - Pete Hodgson, "Feature Toggles (aka Feature Flags)" (martinfowler.com, 2017, updated 2020)
 - "Trunk-Based Development" -- trunkbaseddevelopment.com (the flag practice goes hand-in-hand with TBD)
 - LaunchDarkly, "Effective Feature Management Engineering" (free e-book, multiple editions)
-- Statsig, "Experimentation Foundations" (statsig.com/blog)
-- Reforge, "Experimentation Foundations" curriculum
 - OpenFeature, "Specification" (openfeature.dev)
 - "Accelerate" (Forsgren, Humble, Kim) -- references feature flagging as a deployment-decoupling practice
 

@@ -1,6 +1,6 @@
 # Quarterly Planning Cycle Playbook
 
-Read this when you are running any phase of the quarterly cycle and need the detailed pre-quarter homework structure, the kickoff / mid-quarter / close meeting agendas, the weekly Wodtke rhythm scripts, the anti-pattern and troubleshooting tables, the artifacts-produced map, or the success criteria. `quarterly-planning-guide.md` carries the framework theory (Wodtke, Cagan, Reforge, RAD) with worked examples.
+Read this when you are running any phase of the quarterly cycle and need the detailed pre-quarter homework structure, the kickoff / mid-quarter / close meeting agendas, the weekly Wodtke rhythm scripts, the anti-pattern and troubleshooting tables, the artifacts-produced map, or the success criteria. `quarterly-planning-guide.md` carries the framework theory (Wodtke, Cagan, strategy cycle, RAD) with worked examples.
 
 ## The Quarterly Cycle
 
@@ -10,7 +10,7 @@ Week -3      -2       -1       0        1-5      6        7-12     13
   |   Pre-quarter     |     Kickoff      |   Mid-quarter   |     Close
   |   homework        |     (start)      |   check-in      |     retro
   |                   |                  |                 |
-  +---Reforge / Cagan-+--- Wodtke weekly Mon/Fri rhythm ---+
+  +--Strategy / Cagan-+--- Wodtke weekly Mon/Fri rhythm ---+
 ```
 
 ### Pre-Quarter Homework (Weeks -3 to -1)

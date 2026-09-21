@@ -22,7 +22,7 @@ Hugo has 4 hours blocked to run a feedback triage sweep over 30 inbound items co
 3. **Kano category** assigned by Hugo + a CSM, 5 min per item.
 4. **RICE scored** at the opportunity level (not request level) -- this is the key Cagan move.
 5. **Routed each item** to one of: backlog (build), discovery (investigate), watch (track signal), decline (politely).
-6. **Drafted acknowledgment responses** for all 30 customers, per the ProductPlan principle of "always acknowledge".
+6. **Drafted acknowledgment responses** for all 30 customers, per the request-management principle of "always acknowledge".
 
 Key decision quoted: *"The CEO's 'just build what Acme has' request becomes opportunity OP-7 -- routed to discovery, not to build. Sponsorship is not prioritization."*
 
@@ -215,7 +215,7 @@ Stored in Notion at `Triage Decisions` DB:
 
 ## Why this works
 
-- Every item gets an acknowledgment -- ProductPlan's "always acknowledge" rule, applied uniformly across channels including the CEO.
+- Every item gets an acknowledgment -- the "always acknowledge" rule, applied uniformly across channels including the CEO.
 - Cagan's separation (Request -> Opportunity) collapsed 4 PDF-export requests into one opportunity, exposing the real job.
 - Kano labeling caught two items (voice control, white-label portal) that would have eaten roadmap slots if scored at the request level.
 - The CEO request was routed to discovery with a 2-week timebox -- treats sponsorship as input, not a prioritization override.
