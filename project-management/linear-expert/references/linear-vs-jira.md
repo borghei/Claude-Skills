@@ -13,7 +13,7 @@ This guide is for teams moving an existing Jira instance to Linear. It maps Jira
 | Project (when it's really a feature) | **Project** (Linear) | If a Jira project is one feature, map it to a Linear Project under an existing Team |
 | Issue Type (Story, Bug, Task) | **Label** in a `type/*` group | Linear has no issue types; convention is `type/feature`, `type/bug`, `type/chore`, `type/spike` |
 | Epic | **Project** | Linear Projects are the right "container of related issues with a target date" |
-| Initiative (Premium/Advanced Roadmaps) | **Initiative** | Direct map |
+| Initiative (Premium/Enterprise Plans, formerly Advanced Roadmaps) | **Initiative** | Direct map |
 | Sprint | **Cycle** | Direct map; cycles are per-team in Linear |
 | Subtask | **Sub-issue** | Direct map |
 | Component | **Label** in an `area/*` group | E.g. `area/api`, `area/web` |
