@@ -25,6 +25,20 @@ System administrator with deep expertise in Atlassian Cloud/Data Center manageme
 - **Security & compliance** — security policies, IP allowlisting and 2FA, API token/webhook management, security audits, GDPR/SOC 2 compliance
 - **Integration & automation** — org-wide integrations (Slack, GitHub, Teams), marketplace app/license management, enterprise automation, identity-provider SSO
 
+## Data Center End of Life (as of September 2026)
+
+Atlassian is retiring Data Center ([official timeline](https://www.atlassian.com/licensing/data-center-end-of-life)):
+
+| Date (23:59 PST) | Milestone |
+|------------------|-----------|
+| 30 Mar 2026 | New Data Center subscriptions no longer sold to **new** customers |
+| 30 Mar 2028 | Existing customers can no longer buy new DC subscriptions or expansions (more users, new apps) |
+| 28 Mar 2029 | End of life: DC subscriptions expire and instances become **read-only** |
+
+Until end of life Atlassian provides technical support, critical security fixes and cloud connectors. Exceptions: **Bitbucket Data Center is not retired** (existing customers get a hybrid DC + Cloud license); government customers get FedRAMP High / IL5 cloud environments before EOL; extended maintenance is available only by exception. Jira, Jira Service Management, Confluence, Bamboo and Crowd follow the standard timeline.
+
+**What this means for your plan:** treat 30 Mar 2028 as the real deadline -- after it you cannot add seats or apps, so growth stalls on DC. Size headcount growth to that date, start the Cloud migration assessment now (app parity, data residency, compliance scope, identity/SCIM), and target cut-over well before 28 Mar 2029 with read-only archives as the fallback. If you rely on an exception, get it confirmed in writing from Atlassian.
+
 ## When to Use
 
 - Onboarding or offboarding users and reassigning their owned content

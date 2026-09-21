@@ -475,16 +475,16 @@ Expected outcomes and impacts
 
 ## Atlassian MCP Integration
 
-**Primary Tool**: Confluence MCP Server
+**Primary Tool**: Atlassian Rovo MCP Server (Atlassian's official remote MCP server for Cloud; endpoint `https://mcp.atlassian.com/v2/mcp`). Tool names below are from Atlassian's [supported tools](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) list as of September 2026 -- re-check it, the list changes.
 
-**Key Operations**:
-- Create and manage spaces
-- Create, update, and delete pages
-- Apply templates and macros
-- Manage page hierarchies
-- Configure permissions
-- Search content
-- Extract documentation for analysis
+**Key Operations** (Confluence tools):
+- Create and manage spaces -- `createConfluenceSpace`, `listConfluenceSpaces`, `getConfluenceSpace`
+- Create and update pages (and other content types) -- `createConfluenceContent`, `updateConfluenceContent`
+- Manage page hierarchies -- `moveConfluenceContent`, `copyConfluenceContent`, `archiveConfluenceContent`
+- Read templates -- `listConfluenceTemplates`, `getConfluenceTemplate`
+- Configure page permissions and restrictions -- `addConfluenceContentPermissions`, `setConfluenceContentRestrictionState`
+- Search content with CQL -- `searchConfluence`
+- Extract documentation for analysis -- `getConfluenceContent`, `exportConfluenceContent`, `getContentFormatGuide` (body format rules)
 
 **Integration Points**:
 - Create documentation for Senior PM projects

@@ -180,7 +180,7 @@ import requests, json
 NOTION_TOKEN = "secret_..."
 HEADERS = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
-    "Notion-Version": "2022-06-28",
+    "Notion-Version": "2025-09-03",  # data sources API (as of September 2026)
     "Content-Type": "application/json",
 }
 
@@ -191,9 +191,17 @@ DB_IDS = {
     "Decisions": "db-id-decisions",
 }
 
+def data_source_id(db_id):
+    """From 2025-09-03, rows live on a database's data source; resolve it once and cache."""
+    r = requests.get(f"https://api.notion.com/v1/databases/{db_id}", headers=HEADERS)
+    r.raise_for_status()
+    return r.json()["data_sources"][0]["id"]  # each Helix DB has a single data source
+
+DS_IDS = {name: data_source_id(db_id) for name, db_id in DB_IDS.items()}
+
 def create_prd_page(prd_dict):
     payload = {
-        "parent": {"database_id": DB_IDS["PRDs"]},
+        "parent": {"type": "data_source_id", "data_source_id": DS_IDS["PRDs"]},
         "properties": {
             "Title": {"title": [{"text": {"content": prd_dict["title"]}}]},
             "Status": {"select": {"name": prd_dict.get("status", "Draft")}},

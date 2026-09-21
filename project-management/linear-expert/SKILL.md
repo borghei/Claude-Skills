@@ -77,7 +77,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Jira-side configuration and migration freeze (hand off to `jira-expert/`); Notion documentation pages for Linear roadmaps (hand off to `notion-pm/`); strategic prioritization and OKR setting (hand off to `senior-pm/`, `execution/brainstorm-okrs/`); sprint coaching and team health (hand off to `scrum-master/`); release notes generation from Linear issues (hand off to `execution/release-notes/`).
 
-**Limitations:** Linear has no custom fields; all extension happens through labels, descriptions, or external systems. The free tier caps at 250 issues per workspace and excludes Initiatives and SAML. API rate limits are workspace-wide and shared across all keys; heavy automation may require coordination. Importers preserve most history but cannot recreate Jira's custom workflow states; mapping is many-to-five. GraphQL schema evolves continuously; pin client code to the deprecation calendar.
+**Limitations:** Linear has no custom fields; all extension happens through labels, descriptions, or external systems. As of September 2026 the Free plan caps at 250 issues and 2 teams; Initiatives are on every plan, but sub-initiatives and SAML/SCIM are Enterprise-only and team initiatives need Business or Enterprise (verify on linear.app/pricing). API rate limits depend on auth type, not plan: API keys get 2,500 requests/hour per user, OAuth apps 5,000/hour, each with an hourly complexity budget; heavy automation may require coordination. Importers preserve most history but cannot recreate Jira's custom workflow states; mapping is many-to-five. GraphQL schema evolves continuously; pin client code to the deprecation calendar.
 
 ## Integration Points
 

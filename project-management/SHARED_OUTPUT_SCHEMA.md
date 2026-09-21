@@ -82,7 +82,7 @@ Confluence storage format. Use:
 - `<ac:structured-macro ac:name="code">` for code blocks
 - `<ac:link><ri:page ri:content-title="..."/></ac:link>` for cross-page links
 
-Tools should produce raw storage format suitable for `mcp__atlassian__create_page` body.
+Tools should produce raw storage format suitable for a Confluence page body (REST API, or the Atlassian Rovo MCP Server `createConfluenceContent` tool -- check its `getContentFormatGuide` tool for the body formats it accepts).
 
 ### `notion`
 

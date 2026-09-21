@@ -1,8 +1,23 @@
 #!/usr/bin/env python3
 """Delivery Metrics Tracker - Track DORA metrics and delivery health over time.
 
-Reads deployment and incident data, calculates the four DORA metrics, and
-classifies the team against industry benchmarks (Elite/High/Medium/Low).
+Reads deployment and incident data, calculates the four classic DORA metrics
+(deployment frequency, change lead time, change fail rate, failed deployment
+recovery time) and classifies the team against the 2024 DORA report
+performance levels (Elite/High/Medium/Low).
+
+Optionally computes DORA's fifth metric, deployment rework rate, when the
+input marks deployments with "rework": true (unplanned deploys made to fix a
+user-facing bug / production incident). Rework rate is reported only, never
+classified, because DORA publishes no per-level benchmark for it.
+
+Notes:
+- "Failed deployment recovery time" is DORA's current name for the metric
+  previously called MTTR / time to restore service. The JSON output keeps the
+  legacy "mttr" key as an alias so existing consumers do not break.
+- The 2025 DORA report ("State of AI-assisted Software Development") presents
+  seven team profiles rather than leading with these four levels. The levels below remain
+  the most recent published cut-offs (2024 report, v. 2024.3).
 
 Usage:
     python delivery_metrics_tracker.py --data delivery.json
@@ -16,32 +31,43 @@ import sys
 from datetime import datetime, timedelta
 
 
+# Source: 2024 Accelerate State of DevOps Report (DORA), "Performance levels".
+# The report gives cluster descriptions, not hard cut-offs; the numeric
+# thresholds here are the band edges those descriptions imply.
+# Change fail rate cluster values in 2024 were Elite 5%, High 20%, Medium 10%,
+# Low 40% (not monotonic). The tool uses monotonic bands at 5/10/20% so a
+# lower fail rate never scores worse.
 DORA_BENCHMARKS = {
     "deployment_frequency": {
-        "elite": {"label": "Multiple per day", "threshold_per_week": 5},
-        "high": {"label": "Weekly to daily", "threshold_per_week": 1},
-        "medium": {"label": "Monthly to weekly", "threshold_per_week": 0.25},
-        "low": {"label": "Less than monthly", "threshold_per_week": 0},
+        # On demand = multiple deploys per day; ~10/week = 2 per working day
+        "elite": {"label": "On demand (multiple deploys per day)", "threshold_per_week": 10},
+        "high": {"label": "Between once per day and once per week", "threshold_per_week": 1},
+        "medium": {"label": "Between once per week and once per month", "threshold_per_week": 0.25},
+        "low": {"label": "Between once per month and once every six months", "threshold_per_week": 0},
     },
     "lead_time_hours": {
-        "elite": {"label": "Less than 1 hour", "threshold": 1},
-        "high": {"label": "1 hour to 1 day", "threshold": 24},
-        "medium": {"label": "1 day to 1 week", "threshold": 168},
-        "low": {"label": "More than 1 week", "threshold": float("inf")},
+        "elite": {"label": "Less than one day", "threshold": 24},
+        "high": {"label": "Between one day and one week", "threshold": 168},
+        "medium": {"label": "Between one week and one month", "threshold": 720},
+        "low": {"label": "Between one month and six months", "threshold": float("inf")},
     },
     "change_failure_rate_pct": {
-        "elite": {"label": "0-5%", "threshold": 5},
-        "high": {"label": "5-10%", "threshold": 10},
-        "medium": {"label": "10-15%", "threshold": 15},
-        "low": {"label": "15%+", "threshold": 100},
+        "elite": {"label": "5% or less", "threshold": 5},
+        "high": {"label": "5-10% (tool band)", "threshold": 10},
+        "medium": {"label": "10-20% (tool band)", "threshold": 20},
+        "low": {"label": "Over 20% (2024 Low cluster: 40%)", "threshold": 100},
     },
-    "mttr_hours": {
-        "elite": {"label": "Less than 1 hour", "threshold": 1},
-        "high": {"label": "1-4 hours", "threshold": 4},
-        "medium": {"label": "4-24 hours", "threshold": 24},
-        "low": {"label": "More than 1 day", "threshold": float("inf")},
+    "failed_deployment_recovery_hours": {
+        "elite": {"label": "Less than one hour", "threshold": 1},
+        "high": {"label": "Less than one day", "threshold": 24},
+        # 2024 Medium cluster was also "less than one day"; the tool treats
+        # one day to one week as Medium to avoid a gap before Low.
+        "medium": {"label": "One day to one week (tool band)", "threshold": 168},
+        "low": {"label": "Between one week and one month or longer", "threshold": float("inf")},
     },
 }
+# Legacy alias kept for any code importing DORA_BENCHMARKS["mttr_hours"].
+DORA_BENCHMARKS["mttr_hours"] = DORA_BENCHMARKS["failed_deployment_recovery_hours"]
 
 
 def load_data(path: str) -> dict:
@@ -133,7 +159,7 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
     failed = sum(1 for d in period_deployments if d.get("failed", False) or d.get("rolled_back", False))
     cfr = round(failed / deploy_count * 100, 1) if deploy_count > 0 else 0
 
-    # 4. Mean Time to Recovery
+    # 4. Failed Deployment Recovery Time (formerly MTTR)
     recovery_times = []
     for inc in period_incidents:
         if "detected" in inc and "resolved" in inc:
@@ -146,6 +172,18 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
             except ValueError:
                 pass
     avg_mttr = round(sum(recovery_times) / len(recovery_times), 1) if recovery_times else 0
+
+    # 5. Deployment Rework Rate (optional) - only when the data marks rework
+    rework_rate = None
+    if any("rework" in d for d in period_deployments):
+        rework_count = sum(1 for d in period_deployments if d.get("rework", False))
+        rework_rate = {
+            "value": round(rework_count / deploy_count * 100, 1) if deploy_count > 0 else 0,
+            "unit": "%",
+            "rework_deploys": rework_count,
+            "total_deploys": deploy_count,
+            "classification": "Not classified (no published DORA benchmark)",
+        }
 
     # Classifications
     metrics = {
@@ -169,17 +207,23 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
             "total_deploys": deploy_count,
             "classification": classify("change_failure_rate_pct", cfr),
         },
-        "mttr": {
+        "failed_deployment_recovery_time": {
             "value": avg_mttr,
             "unit": "hours",
             "incidents_in_period": len(period_incidents),
             "sample_size": len(recovery_times),
-            "classification": classify("mttr_hours", avg_mttr),
+            "classification": classify("failed_deployment_recovery_hours", avg_mttr),
         },
     }
+    # Legacy alias: same object under the old key for existing consumers.
+    metrics["mttr"] = metrics["failed_deployment_recovery_time"]
+    if rework_rate is not None:
+        metrics["deployment_rework_rate"] = rework_rate
 
-    # Overall classification
-    classifications = [m["classification"] for m in metrics.values()]
+    # Overall classification (the four classified metrics only)
+    classified = ["deployment_frequency", "lead_time", "change_failure_rate",
+                  "failed_deployment_recovery_time"]
+    classifications = [metrics[k]["classification"] for k in classified]
     class_scores = {"Elite": 4, "High": 3, "Medium": 2, "Low": 1}
     avg_class = sum(class_scores.get(c, 1) for c in classifications) / len(classifications)
     if avg_class >= 3.5:
@@ -193,7 +237,8 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
 
     # Recommendations
     recs = []
-    for name, m in metrics.items():
+    for name in classified:
+        m = metrics[name]
         if m["classification"] in ("Low", "Medium"):
             if name == "deployment_frequency":
                 recs.append("Increase deployment frequency by reducing batch size and automating the release pipeline.")
@@ -201,8 +246,8 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
                 recs.append("Reduce lead time by improving CI/CD pipeline speed, automating testing, and reducing approval gates.")
             elif name == "change_failure_rate":
                 recs.append("Lower change failure rate by improving test coverage, adding canary deployments, and enhancing code review practices.")
-            elif name == "mttr":
-                recs.append("Improve MTTR by investing in observability (logging, tracing, alerting) and pre-defined runbooks.")
+            elif name == "failed_deployment_recovery_time":
+                recs.append("Improve failed deployment recovery time (formerly MTTR) by investing in observability (logging, tracing, alerting) and pre-defined runbooks.")
 
     return {
         "service": service,
@@ -235,9 +280,14 @@ def print_report(result: dict) -> None:
     print(f"Change Failure Rate:    {cfr['value']}% ({cfr['failed_deploys']}/{cfr['total_deploys']} failed)")
     print(f"  Classification: {cfr['classification']}")
 
-    mttr = m["mttr"]
-    print(f"MTTR:                   {mttr['value']}h avg ({mttr['incidents_in_period']} incidents)")
+    mttr = m["failed_deployment_recovery_time"]
+    print(f"Failed Deploy Recovery: {mttr['value']}h avg ({mttr['incidents_in_period']} incidents) [formerly MTTR]")
     print(f"  Classification: {mttr['classification']}")
+
+    rw = m.get("deployment_rework_rate")
+    if rw is not None:
+        print(f"Deployment Rework Rate: {rw['value']}% ({rw['rework_deploys']}/{rw['total_deploys']} unplanned fix deploys)")
+        print(f"  Classification: {rw['classification']}")
 
     if result["recommendations"]:
         print(f"\nRecommendations:")
@@ -254,6 +304,7 @@ def print_example() -> None:
             {"date": "2026-03-18", "commit_time": "2026-03-18T09:00:00", "deploy_time": "2026-03-18T11:30:00", "failed": False},
             {"date": "2026-03-15", "commit_time": "2026-03-14T14:00:00", "deploy_time": "2026-03-15T10:00:00", "failed": False},
             {"date": "2026-03-12", "commit_time": "2026-03-11T16:00:00", "deploy_time": "2026-03-12T09:30:00", "rolled_back": True},
+            {"date": "2026-03-12", "commit_time": "2026-03-12T10:15:00", "deploy_time": "2026-03-12T12:00:00", "failed": False, "rework": True},
             {"date": "2026-03-08", "commit_time": "2026-03-07T10:00:00", "deploy_time": "2026-03-08T14:00:00", "failed": False},
         ],
         "incidents": [

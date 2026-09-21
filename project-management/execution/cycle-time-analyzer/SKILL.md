@@ -96,6 +96,7 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 - Flow metrics depend on accurate status transitions. If your team batch-updates the board once a day, the cycle time data will be discretized by that batch interval.
 - A team that gamifies flow metrics will produce better-looking numbers without changing real delivery. Use these metrics as a diagnostic, not a target. (Goodhart's Law.)
 - Cycle time is a team property, not an individual property. Resist the urge to compute per-assignee cycle time -- it will incentivize hand-offs that hurt the team.
+- AI-assisted teams: faster coding often shifts the wait into review and test states. Watch time-in-review and aging WIP there, not just total cycle time, and pair flow metrics with DORA rework rate. See the "AI-Assisted Delivery" sections in `delivery-manager/` and `scrum-master/`.
 
 ## Integration Points
 

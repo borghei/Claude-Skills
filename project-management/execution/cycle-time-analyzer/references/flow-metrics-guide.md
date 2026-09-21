@@ -230,11 +230,20 @@ Both are useful; they answer different questions.
 Use the `jira-python` library or the REST API:
 
 ```bash
-# Pseudocode
-GET /rest/api/3/search?jql=project=ENG&expand=changelog
+# Pseudocode (Jira Cloud, as of September 2026)
+# 1) Find the issues -- enhanced JQL search, token pagination
+GET /rest/api/3/search/jql?jql=project=ENG AND updated >= -90d&fields=key,created,resolutiondate&maxResults=100
+#    repeat with &nextPageToken=<token> until the response has no nextPageToken
+
+# 2) Pull full status history in bulk (up to 1000 issues per request)
+POST /rest/api/3/changelog/bulkfetch
+{"issueIdsOrKeys": ["ENG-1", "ENG-2"], "fieldIds": ["status"]}
+#    paginate with nextPageToken
 ```
 
-Map `changelog.histories` -> `status_history` in the input JSON. Each `history` entry with `field == "status"` is a transition.
+The legacy `/rest/api/3/search` (and `/rest/api/2/search`) endpoint is deprecated and being removed (Atlassian changelog CHANGE-2046). The replacement returns no `total`, has no `startAt`, and returns only `id` unless you list `fields` explicitly. `expand=changelog` on search returns only *recent* updates, so use the changelog endpoints above for complete cycle-time history. Queries must be bounded (include a restriction such as a project or date). See the [Issue search](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/) and [Issues](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/) API reference.
+
+Map each `issueChangeLogs[].changeHistories[].items` entry with `field == "status"` (its `fromString` -> `toString`, timestamped by the history's `created`) to `status_history` in the input JSON.
 
 ### Linear
 

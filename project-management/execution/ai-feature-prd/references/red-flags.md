@@ -140,7 +140,7 @@ Scan before sharing the artifact. Each red flag shows the *bad* version next to 
 
 **Symptom.** Section 10.7 ethical checklist skips the EU AI Act tier declaration ("Minimal / Limited / High / Unacceptable"). Or marks it "Minimal" without justification.
 
-**Why it's bad.** A High-risk classification adds materially to scope (conformity assessment, post-market monitoring, data governance documentation). Discovering this at the eleventh hour from Legal kills launches.
+**Why it's bad.** A High-risk classification adds materially to scope (conformity assessment, post-market monitoring, data governance documentation). Discovering this at the eleventh hour from Legal kills launches. The dates matter too (as of September 2026): Limited-risk transparency duties apply from 2 August 2026; Annex III High-risk obligations from 2 December 2027 and Annex I (product-embedded) from 2 August 2028, after the Digital Omnibus deferral. A PRD that says "High-risk, but not until 2026" is working from the pre-Omnibus timeline -- see `ai-pm-frameworks-guide.md` Section 4.
 
 **Bad example:**
 > "Ethical checklist: [ ] Have we considered the EU AI Act? -- Yes, we think this is Minimal risk."

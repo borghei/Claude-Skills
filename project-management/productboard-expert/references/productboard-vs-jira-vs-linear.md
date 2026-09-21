@@ -88,15 +88,15 @@ Rare; usually a transitional state during a Jira → Linear migration. Productbo
 | Product / Workspace | Project | Team |
 | Component (hierarchy) | Component or Epic (parent) | Project or Label |
 | Feature | Epic | Project (cross-cycle) or Issue (within-cycle) |
-| Parent Feature | Epic with child Epics (Plans) or hierarchy via Advanced Roadmaps | Project containing Issues |
+| Parent Feature | Epic with child Epics, or a custom hierarchy in Plans (formerly Advanced Roadmaps) | Project containing Issues |
 | Child Feature | Story | Issue or Sub-issue |
 | Insight / Note | (no native concept; teams use Jira Service Management or custom fields) | (no native concept; teams use Triage or descriptions) |
 | Customer | (no native concept; tracked in linked Salesforce / Jira customer portal) | (no native concept) |
 | Driver | Custom field (e.g. RICE score components) | Custom field (limited; labels often substitute) |
-| Objective | Strategic Initiative (Advanced Roadmaps) | Initiative (top of Linear hierarchy) |
+| Objective | Strategic Initiative (Plans) | Initiative (top of Linear hierarchy) |
 | Release | Version | Cycle, Project (with target date), Milestone |
 | Release Group | Release version pattern | Cycle group (informal) |
-| Roadmap view | Advanced Roadmaps timeline | Roadmap view (filtered Projects) |
+| Roadmap view | Plans timeline | Roadmap view (filtered Projects) |
 | Feature status (Idea → Planned → In Progress → Done) | Issue status workflow (any custom) | Issue state (backlog/unstarted/started/completed/canceled) |
 
 ## Migration scenarios

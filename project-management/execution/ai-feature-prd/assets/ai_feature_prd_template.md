@@ -214,6 +214,7 @@ Refusal-policy ownership: [Safety reviewer name]. Policy reviewed every [cadence
 - [ ] We tested with users from affected demographic groups.
 - [ ] We considered the cost of a wrong answer in this domain.
 - [ ] EU AI Act risk tier declared: [Minimal / Limited / High / Unacceptable] -- see `ra-qm-team/eu-ai-act-specialist/`.
+- [ ] EU AI Act application date for this tier confirmed (as of Sept 2026: transparency 2 Aug 2026; high-risk Annex III 2 Dec 2027; Annex I 2 Aug 2028) -- see `references/ai-pm-frameworks-guide.md` Section 4.
 - [ ] GDPR / HIPAA / COPPA / ADA reviewed for the data flow.
 - [ ] Training-data provenance documented (if fine-tuning).
 - [ ] Users informed they are interacting with AI.

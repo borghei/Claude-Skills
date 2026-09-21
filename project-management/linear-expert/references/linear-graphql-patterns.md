@@ -373,10 +373,17 @@ Best practice: respond 2xx within 5 seconds; queue the work asynchronously.
 
 ## 9. Rate Limits
 
-- Free plan: ~1,500 requests / hour per API key.
-- Paid plans: 5,000 requests / hour per API key.
-- Burst limit: ~50 requests / second.
-- On `429`, the response includes `Retry-After` (seconds). Honor it with exponential backoff.
+Limits depend on the authentication type, not the plan (as of September 2026; source: [linear.app/developers/rate-limiting](https://linear.app/developers/rate-limiting)):
+
+| Auth type | Requests / hour | Complexity points / hour | Scope |
+|---|---|---|---|
+| API key | 2,500 | 3,000,000 | Per user |
+| OAuth app | 5,000 | 2,000,000 | Per user or app user |
+| Unauthenticated | 600 | 100,000 | Per IP address |
+
+- A single query may not exceed 10,000 complexity points.
+- Limits use a leaky bucket: tokens refill at a constant rate (limit / period), so a steady pace beats bursts.
+- A rate-limited request returns HTTP 400 with the `RATELIMITED` error code in `errors[].extensions` (not a `429`). Read `X-RateLimit-Requests-Remaining` / `X-RateLimit-Requests-Reset` and `X-RateLimit-Complexity-Remaining` / `X-RateLimit-Complexity-Reset` (the cost of each query comes back in `X-Complexity`), and back off exponentially until the reset time.
 
 For long-running scripts, prefer:
 - Batched mutations (`issueBatchUpdate`) over per-issue loops.

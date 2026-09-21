@@ -57,6 +57,27 @@ python scripts/prd_scaffolder.py --product-name "MyProduct" \
 3. Run the scaffolder to generate the skeleton, then fill each of the 8 sections.
 4. Review against the checklist in `references/prd-writing-guide.md`, then share for feedback.
 
+## Prototype-First Path
+
+AI app builders, AI design tools, and AI coding assistants make a clickable or working prototype cheaper than a long spec for some work. Use the prototype to learn; keep the PRD to decide.
+
+**Build a prototype first (or alongside the spec) when:**
+- The core risk is usability or desirability ("will they understand / want this?"), not feasibility or policy.
+- The interaction is hard to describe in prose (new workflow, dense UI, conversational flow).
+- Stakeholders are debating opinions that a 20-minute user session would settle.
+
+**Write the spec first when:** the risk is regulatory, data, security, pricing, or cross-team dependency; or the change is a well-understood extension of an existing flow.
+
+**Testing the prototype with users:**
+1. Write the hypothesis and pass threshold before the session (see `discovery/brainstorm-experiments/`).
+2. Run 5-8 task-based sessions with the target segment; observe, don't demo.
+3. Use realistic but synthetic data — never paste customer PII into third-party prototyping tools without approval.
+4. Log what users did (task success, errors, time) separately from what they said.
+
+**The PRD still must contain:** the problem and who has it (Background), success metrics (Objective KRs), constraints (technical, legal, budget, timeline), explicit non-goals, and risks/open questions. Link the prototype and the test findings in Section 7 (Solution) — the prototype illustrates the solution, it does not replace the requirements.
+
+**Handoff to engineering:** label the prototype as throwaway or as a starting point, and say which. Generated prototype code is not production code by default — list what it skips (auth, error states, accessibility, performance, security review, data model) so engineering scopes the real build. Hand over the prototype link, the tested flows, the findings, and the P0/P1/P2 scope together.
+
 ## References
 
 - `references/prd-framework.md` — read this while writing: the two pre-PRD techniques, full 8-section framework with per-section guidance, writing principles, scaffolder flag reference, troubleshooting, and success criteria.

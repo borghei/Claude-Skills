@@ -211,9 +211,9 @@ python execution/release-notes/scripts/release_notes_generator.py \
 Every artifact above can be pushed to Jira/Linear/Notion/Confluence directly:
 
 ```bash
-# Push PRD to Confluence
-mcp__atlassian__create_page space="PROD" title="PRD: Shared Dashboards" \
-  body="$(cat PRD-shared-dashboards.md)"
+# Push PRD to Confluence -- ask your agent to call the Atlassian Rovo MCP Server
+# tool createConfluenceContent (space PROD, title "PRD: Shared Dashboards",
+# body from PRD-shared-dashboards.md)
 
 # Push backlog to Linear
 python execution/prioritization-frameworks/scripts/prioritization_scorer.py \

@@ -216,14 +216,14 @@ See `references/notion-api-patterns.md` for the API calls these patterns use.
 
 ## API / Query Patterns
 
-The Notion API is REST, served at `https://api.notion.com/v1/`. Auth is via integration tokens (`Authorization: Bearer secret_...`). Every request must include `Notion-Version: 2022-06-28` (or the current version). See `references/notion-api-patterns.md` for the full library.
+The Notion API is REST, served at `https://api.notion.com/v1/`. Auth is via integration tokens (`Authorization: Bearer secret_...`). Every request must include a `Notion-Version` header; these examples use `2025-09-03`, which splits each database into one or more **data sources** (as of September 2026; `2026-03-11` is the newest version). Rows are queried and created against the data source, so first resolve it: `GET /v1/databases/<db_id>` returns `data_sources[].id`. See `references/notion-api-patterns.md` for the full library and the version-change table.
 
-**Query a database** (find all PRDs in review):
+**Query a database** (find all PRDs in review — via its data source):
 ```bash
-curl -X POST https://api.notion.com/v1/databases/<db_id>/query \
+curl -X POST https://api.notion.com/v1/data_sources/<data_source_id>/query \
   -H "Authorization: Bearer $NOTION_TOKEN" \
   -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
+  -H "Notion-Version: 2025-09-03" \
   -d '{
     "filter": {
       "property": "Status",
@@ -238,9 +238,9 @@ curl -X POST https://api.notion.com/v1/databases/<db_id>/query \
 curl -X POST https://api.notion.com/v1/pages \
   -H "Authorization: Bearer $NOTION_TOKEN" \
   -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
+  -H "Notion-Version: 2025-09-03" \
   -d '{
-    "parent": { "database_id": "<prd_db_id>" },
+    "parent": { "type": "data_source_id", "data_source_id": "<prd_data_source_id>" },
     "properties": {
       "Title":   { "title":  [{ "text": { "content": "PRD: Self-Serve Signup" } }] },
       "Status":  { "status": { "name": "Draft" } },
@@ -261,7 +261,7 @@ curl -X POST https://api.notion.com/v1/pages \
 curl -X PATCH https://api.notion.com/v1/pages/<page_id> \
   -H "Authorization: Bearer $NOTION_TOKEN" \
   -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
+  -H "Notion-Version: 2025-09-03" \
   -d '{
     "properties": {
       "Status":      { "status": { "name": "Approved" } },
@@ -275,7 +275,7 @@ curl -X PATCH https://api.notion.com/v1/pages/<page_id> \
 curl -X PATCH https://api.notion.com/v1/blocks/<page_id>/children \
   -H "Authorization: Bearer $NOTION_TOKEN" \
   -H "Content-Type: application/json" \
-  -H "Notion-Version: 2022-06-28" \
+  -H "Notion-Version: 2025-09-03" \
   -d '{
     "children": [
       { "object": "block", "type": "callout",
@@ -291,7 +291,7 @@ curl -X PATCH https://api.notion.com/v1/blocks/<page_id>/children \
 **Paginate through a large database** (handle `has_more`):
 ```bash
 # Pass `start_cursor` from the previous response on each subsequent call
-curl -X POST https://api.notion.com/v1/databases/<db_id>/query \
+curl -X POST https://api.notion.com/v1/data_sources/<data_source_id>/query \
   -d '{ "page_size": 100, "start_cursor": "<cursor>" }'
 ```
 
@@ -334,7 +334,7 @@ Notion rate-limits at ~3 requests/second per integration with bursts permitted. 
 - Permissions at the Teamspace level whenever possible; avoid per-page overrides.
 
 **API hygiene**
-- Cache database IDs, property IDs, and user IDs.
+- Cache database IDs, data source IDs, property IDs, and user IDs.
 - Always set `Notion-Version` header explicitly to avoid silent breaks.
 - Use webhooks (via Notion's official webhooks where available, or Zapier/Make as fallback) instead of polling.
 

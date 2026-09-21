@@ -170,25 +170,25 @@ API patterns are detailed in `references/productboard-api-patterns.md`.
 
 ## API Patterns
 
-Productboard's REST API is at `https://api.productboard.com` (versioned via the `X-Version` header; latest at time of writing is version 1). Authentication is via Bearer token (`Authorization: Bearer <token>`). All API access requires a paid plan tier.
+Productboard's REST API is **Public API v2** at `https://api.productboard.com/v2` (as of September 2026). v2 became generally available on 2026-04-09 and v1 — the un-prefixed paths called with an `X-Version: 1` header — was scheduled to sunset on 2026-07-08 ([changelog](https://developer.productboard.com/changelog/2026-04-09)). v2 needs no `X-Version` header. Authentication is via Bearer token (`Authorization: Bearer <token>`) plus `Accept: application/json`. API tokens are available on the Pro plan and higher.
 
-Full reference: https://developer.productboard.com/
+Full reference: https://developer.productboard.com/ — migration guide: https://developer.productboard.com/reference/migration-guide
 
 ### Authentication
 
 ```bash
 export PB_TOKEN="<personal-access-token>"
-curl -s -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
-  https://api.productboard.com/features
+curl -s -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
+  "https://api.productboard.com/v2/entities?type[]=feature"
 ```
 
 ### List Features
 
+Features, components, products, releases, objectives, initiatives, companies and users all live under one endpoint, `/v2/entities`, filtered by `type[]`:
+
 ```bash
-curl -s -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
-  "https://api.productboard.com/features?pageLimit=100"
+curl -s -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
+  "https://api.productboard.com/v2/entities?type[]=feature&fields[]=name&fields[]=status&fields[]=owner"
 ```
 
 Response shape:
@@ -197,112 +197,104 @@ Response shape:
 {
   "data": [
     {
-      "id": "feat-abc-123",
-      "name": "Shareable read-only dashboard view",
-      "description": { "plainText": "...", "html": "..." },
-      "status": { "id": "status-1", "name": "Planned" },
-      "component": { "id": "comp-1", "name": "Reporting" },
-      "parent": { "id": "feat-parent-1", "type": "feature" },
-      "owner": { "email": "pm@company.com" },
+      "id": "3f1c2a9e-6b1d-4d0e-9a51-1b2c3d4e5f60",
+      "type": "feature",
+      "fields": {
+        "name": "Shareable read-only dashboard view",
+        "status": { "id": "447eb060-...", "name": "Planned" },
+        "owner": { "id": "56caede9-...", "email": "pm@company.com" }
+      },
+      "relationships": [ { "type": "parent", "target": { "id": "9b8c7d6e-...", "type": "component" } } ],
+      "links": { "self": "https://api.productboard.com/v2/entities/3f1c2a9e-...", "html": "https://..." },
       "createdAt": "2026-04-01T12:00:00Z",
       "updatedAt": "2026-05-20T15:30:00Z"
     }
   ],
-  "pageCursor": "eyJ..."
+  "links": { "next": "https://api.productboard.com/v2/entities?pageCursor=..." }
 }
 ```
 
-Paginate using `pageCursor`.
+Paginate by following `links.next` until it is `null`. Page size cannot be set in v2 (v1's `pageLimit` is gone).
 
 ### Create a Feature
 
 ```bash
-curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -d '{
     "data": {
-      "name": "Shareable read-only dashboard view",
-      "description": {
-        "plainText": "Customers want to share dashboards with stakeholders who do not have an account, especially CFO/board readers."
-      },
       "type": "feature",
-      "parent": { "component": { "id": "comp-reporting" } },
-      "status": { "id": "status-idea" }
+      "fields": {
+        "name": "Shareable read-only dashboard view",
+        "description": "<p>Customers want to share dashboards with stakeholders who do not have an account, especially CFO/board readers.</p>",
+        "status": { "name": "New idea" }
+      },
+      "relationships": [ { "type": "parent", "target": { "id": "<component-uuid>" } } ]
     }
   }' \
-  https://api.productboard.com/features
+  https://api.productboard.com/v2/entities
 ```
+
+Creates and updates return only `id`, `type` and `links.self`; GET `links.self` for the full record.
 
 ### Create an Insight (note)
 
 ```bash
-curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Acme Corp wants PDF export for board pack",
-    "content": "On QBR call, CFO at Acme Corp asked for a way to share dashboards with their board. PDF export was mentioned as a workaround they would accept.",
-    "source": { "origin": "Salesforce", "record_id": "opp-12345" },
-    "customer_email": "cfo@acme.com",
-    "tags": ["enterprise", "reporting", "quarterly-business-review"]
+    "data": {
+      "type": "textNote",
+      "fields": {
+        "name": "Acme Corp wants PDF export for board pack",
+        "content": "On QBR call, CFO at Acme Corp asked for a way to share dashboards with their board. PDF export was mentioned as a workaround they would accept.",
+        "tags": [ { "name": "enterprise" }, { "name": "reporting" }, { "name": "quarterly-business-review" } ]
+      },
+      "metadata": { "source": { "system": "Salesforce", "recordId": "opp-12345" } },
+      "relationships": [ { "type": "customer", "target": { "type": "user", "email": "cfo@acme.com" } } ]
+    }
   }' \
-  https://api.productboard.com/notes
+  https://api.productboard.com/v2/notes
 ```
 
-(The exact endpoint may be `/notes` depending on plan tier — confirm via Productboard's developer documentation.)
+v2 does **not** auto-create the user or company (v1 did): an unknown email returns 404. Create the user first (`POST /v2/entities` with `type: "user"`), then retry.
 
 ### Link an Insight to a Feature
 
 ```bash
-curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -d '{
-    "data": {
-      "feature": { "id": "feat-abc-123" },
-      "note": { "id": "note-xyz-789" }
-    }
-  }' \
-  https://api.productboard.com/notes/feature-links
+  -d '{ "data": { "type": "link", "target": { "id": "<feature-uuid>", "type": "link" } } }' \
+  https://api.productboard.com/v2/notes/<note-uuid>/relationships
 ```
 
 ### List Releases
 
 ```bash
-curl -s -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
-  https://api.productboard.com/releases
+curl -s -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
+  "https://api.productboard.com/v2/entities?type[]=release"
 ```
 
 ### Add a Feature to a Release
 
+v1's `/release-assignments` is replaced by a `link` relationship from the feature to the release:
+
 ```bash
-curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -d '{
-    "data": {
-      "release": { "id": "rel-q3-2026" },
-      "feature": { "id": "feat-abc-123" },
-      "state": "planned"
-    }
-  }' \
-  https://api.productboard.com/release-assignments
+  -d '{ "data": { "type": "link", "target": { "id": "<release-uuid>" } } }' \
+  https://api.productboard.com/v2/entities/<feature-uuid>/relationships
 ```
 
 ### Update a Custom Field on a Feature
 
+Custom fields are ordinary entity fields keyed by their UUID (discover them with `GET /v2/entities/configurations/feature`):
+
 ```bash
-curl -s -X PUT -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X PATCH -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -d '{
-    "data": {
-      "value": "Large"
-    }
-  }' \
-  https://api.productboard.com/hierarchy-entities/custom-fields-values/cfv-tshirt-feat-abc-123
+  -d '{ "data": { "fields": { "<tshirt-field-uuid>": { "name": "Large" } } } }' \
+  https://api.productboard.com/v2/entities/<feature-uuid>
 ```
 
 ### Webhook subscription
@@ -310,34 +302,41 @@ curl -s -X PUT -H "Authorization: Bearer $PB_TOKEN" \
 Subscribe to events for outbound automation:
 
 ```bash
-curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" \
-  -H "X-Version: 1" \
+curl -s -X POST -H "Authorization: Bearer $PB_TOKEN" -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -d '{
     "data": {
-      "events": [
-        { "eventType": "feature.created" },
-        { "eventType": "feature.updated" },
-        { "eventType": "note.created" }
-      ],
-      "notification": {
-        "url": "https://your-app.example.com/webhooks/productboard",
-        "version": 1
+      "fields": {
+        "name": "PM automation",
+        "events": [
+          { "eventType": "feature.created" },
+          { "eventType": "feature.updated" },
+          { "eventType": "note.created" }
+        ],
+        "notification": {
+          "url": "https://your-app.example.com/webhooks/productboard",
+          "version": 1,
+          "headers": { "authorization": "Bearer <shared-secret>" }
+        }
       }
     }
   }' \
-  https://api.productboard.com/webhooks
+  https://api.productboard.com/v2/webhooks
 ```
 
-Verify webhook signatures with the workspace secret.
+Productboard sends the configured `headers.authorization` value with every notification; reject requests that do not carry it.
+
+### Not available in v2 (as of September 2026)
+
+Note followers and feedback-form endpoints were removed permanently; company custom-field *definition* management and tag filters on notes search are listed as future work; Driver scores are not exposed. See the "Not carried over to v2" section of `references/productboard-api-patterns.md`.
 
 ### Rate limits
 
-Productboard rate-limits at the workspace level. The published guidance (subject to change) is ~50 requests per minute on lower tiers and higher on Enterprise. The `Retry-After` header is returned on 429; back off accordingly.
+The documented default is 50 requests per second per access token (as of September 2026). `X-RateLimit-Limit` / `X-RateLimit-Remaining` headers are returned, and `Retry-After` (seconds) on 429; back off accordingly.
 
 ### Pagination
 
-Most list endpoints use cursor-based pagination via `pageCursor`. Always paginate; do not assume a single page returns everything.
+List endpoints use cursor-based pagination: follow `links.next` (which carries a `pageCursor`) until it is `null`. Always paginate; do not assume a single page returns everything.
 
 ## Best Practices
 
@@ -373,9 +372,9 @@ Most list endpoints use cursor-based pagination via `pageCursor`. Always paginat
 
 ### API hygiene
 
-- Cache Workspace-level IDs (Component IDs, Driver IDs, Custom Field IDs, Status IDs). Looking them up by name on every call wastes rate-limit budget.
+- Cache Workspace-level IDs (Component IDs, Custom Field UUIDs from `/v2/entities/configurations`, Status IDs). Looking them up by name on every call wastes rate-limit budget.
 - Use webhooks for event-driven workflows. Polling is expensive and slow.
-- Always include `X-Version: 1` (or current version); APIs evolve and unversioned calls may break.
+- Call the `/v2/...` paths only; v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08. Watch the developer changelog for additive v2 changes.
 - Implement idempotency for bulk-create operations (use external IDs to prevent duplicates on retry).
 
 ### Governance

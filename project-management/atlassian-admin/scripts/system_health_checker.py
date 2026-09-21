@@ -148,7 +148,7 @@ def analyze_health(data: dict) -> dict:
         elif issue["check"] == "response_time":
             recs.append(f"{issue['product']}: Response times elevated ({issue['value']}ms). Check for heavy JQL queries or misbehaving apps.")
         elif issue["check"] == "automation":
-            recs.append(f"{issue['product']}: Automation executions nearing limit. Optimize rules or upgrade plan tier.")
+            recs.append(f"{issue['product']}: Automation step usage nearing allowance (pooled org-wide on Cloud). Optimize rules, review other apps drawing on the pool, or change plan tier.")
 
     if not recs:
         recs.append("All systems healthy. Continue regular monitoring.")
@@ -189,7 +189,14 @@ def print_report(result: dict) -> None:
 
 
 def print_example() -> None:
-    """Print example health data JSON."""
+    """Print example health data JSON.
+
+    Automation figures are monthly automation *steps*. As of September 2026,
+    Atlassian Cloud allowances are usage-based and pooled at the organization
+    level (e.g. Jira Standard: 400 steps per user; Confluence Standard: 100 per
+    user) -- see support.atlassian.com/cloud-automation/docs/how-is-my-usage-calculated/.
+    The sample splits the pooled allowance per product for readability.
+    """
     example = {
         "organization": "Acme Corp",
         "products": [
@@ -199,7 +206,7 @@ def print_example() -> None:
                     "storage_total_gb": 50, "storage_used_gb": 38,
                     "api_rate_limit": 100000, "api_rate_used": 72000,
                     "avg_response_ms": 1200, "error_rate_pct": 0.3,
-                    "automation_limit_monthly": 1500, "automation_used_monthly": 1350,
+                    "automation_limit_monthly": 48000, "automation_used_monthly": 43200,
                     "active_users_daily": 85, "active_users_monthly": 120,
                     "issues_created_30d": 450,
                 },
@@ -210,7 +217,7 @@ def print_example() -> None:
                     "storage_total_gb": 30, "storage_used_gb": 12,
                     "api_rate_limit": 50000, "api_rate_used": 8000,
                     "avg_response_ms": 800, "error_rate_pct": 0.1,
-                    "automation_limit_monthly": 500, "automation_used_monthly": 100,
+                    "automation_limit_monthly": 9500, "automation_used_monthly": 1900,
                     "active_users_daily": 45, "active_users_monthly": 95,
                     "pages_created_30d": 120,
                 },

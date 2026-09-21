@@ -88,7 +88,7 @@ Scan every Notion database design, relation, or API integration before adopting 
 
 ## Red Flag 7: Notion API Pagination Ignored
 
-**Symptom.** Script fetches database entries via `POST /v1/databases/{id}/query`; returns 100 results; treats it as 'all results'.
+**Symptom.** Script fetches database entries via `POST /v1/data_sources/{data_source_id}/query` (or the pre-`2025-09-03` `POST /v1/databases/{id}/query`); returns 100 results; treats it as 'all results'.
 **Why it's bad.** Notion API paginates at 100 items by default. Without honoring `has_more` + `next_cursor`, scripts silently miss data. The org thinks it has 100 PRDs; in reality there are 340 -- and decisions get made on a 30% sample.
 **Bad example:**
 > "response = requests.post(url, json={...}).json()

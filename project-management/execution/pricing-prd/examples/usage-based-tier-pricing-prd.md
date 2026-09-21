@@ -67,7 +67,7 @@ Van Westendorp PSM study (n=180) for the proposed Scale tier:
 - Indifference Price Point (IPP): $109/mo
 - Range of Acceptable Pricing: $89 - $199
 
-Competitor anchors: GitHub Copilot for Teams $19/seat-mo; Linear Standard $14/seat-mo; Cursor for Teams $15/seat-mo. Our value prop differs (workspace, not seat), so direct comparison is loose.
+Competitor anchors (Linear and Cursor list prices as of September 2026): GitHub Copilot for Teams $19/seat-mo; Linear Basic $10/user-mo and Business $16/user-mo (billed yearly); Cursor Teams Standard seat $40/user-mo (Premium seat $120/user-mo). Our value prop differs (workspace, not seat), so direct comparison is loose.
 
 ## 4. Objective
 

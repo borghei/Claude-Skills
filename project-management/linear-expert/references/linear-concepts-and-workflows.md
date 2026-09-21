@@ -96,7 +96,7 @@ Linear's GitHub integration is bidirectional and the highest-leverage automation
 Bulk edits go through the API for anything beyond ~50 issues. Strategy:
 1. Build a GraphQL query to fetch the issue IDs matching the criteria.
 2. Loop in batches of 50; call `issueUpdate` mutation for each.
-3. Rate limit: stay under 1,500 requests / hour per API key on free tier, 5,000 on paid.
+3. Rate limit (as of September 2026, per [Linear's rate-limiting docs](https://linear.app/developers/rate-limiting)): API keys get 2,500 requests / hour and 3,000,000 complexity points / hour per user; OAuth apps get 5,000 requests / hour and 2,000,000 complexity points / hour per user or app user; a single query may not exceed 10,000 complexity points. Limits are set by auth type, not by plan.
 4. Always include an `--dry-run` mode in scripts; print the full list of issues that will change before mutating.
 5. Use `issueBatchUpdate` mutation (where available) to update up to 100 issues per call.
 
@@ -134,7 +134,7 @@ Linear ships a first-party Jira importer that covers ~80% of cases. For the rema
 **API hygiene**
 - Cache the team and label UUIDs your scripts use; never look them up by name on every call.
 - Use webhooks instead of polling. Linear's webhook system covers nearly every entity.
-- Respect rate limits; back off on `429` responses with the `Retry-After` header.
+- Respect rate limits; a rate-limited request returns HTTP 400 with a `RATELIMITED` error code in `errors[].extensions`. Back off until the time in `X-RateLimit-Requests-Reset` / `X-RateLimit-Complexity-Reset`.
 
 **Governance**
 - Restrict who can create teams (admins only on larger workspaces).
@@ -149,5 +149,5 @@ Linear ships a first-party Jira importer that covers ~80% of cases. For the rema
 - Every active Project has a Lead, a target date, and a status update within the last 14 days
 - Initiatives have a clear owner and a monthly update; no Initiative carries more than 10 Projects
 - GitHub PRs auto-close their linked Linear issues in 95%+ of merges
-- API/automation scripts respect rate limits; no script triggers more than 5 `429` responses per day
+- API/automation scripts respect rate limits; no script triggers more than 5 `RATELIMITED` responses per day
 - Jira-to-Linear migrations cut over with zero loss of comment history and 100% of identifiers redirected
