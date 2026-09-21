@@ -128,13 +128,18 @@ When generating outputs for a PM artifact, always consider which format the cons
 - Generate reports and dashboards
 - Bulk operations on issues
 
-**Setup:** Atlassian MCP server configured in Claude Code settings
+**Setup:** Atlassian's official **Rovo MCP Server** (Cloud only) -- remote endpoint `https://mcp.atlassian.com/v2/mcp`, OAuth 2.1 by default (API token if your org admin allows it). In Claude Code: `claude mcp add --transport http atlassian https://mcp.atlassian.com/v2/mcp`, then `/mcp` to authenticate. See [Get started](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/).
 
-**Usage Pattern:**
-```bash
-mcp__atlassian__create_issue project="PROJ" summary="New feature" type="Story"
-mcp__atlassian__create_page space="TEAM" title="Sprint Retrospective"
-```
+**Usage Pattern:** tools are called by the agent, not from a shell. Names are from Atlassian's [supported tools](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) list as of September 2026 (your client may prefix them with the server name, e.g. `mcp__atlassian__createJiraIssue`):
+
+| Task | Rovo MCP tool |
+|------|---------------|
+| Create / edit an issue | `createJiraIssue`, `editJiraIssue` |
+| JQL search | `searchJiraIssuesUsingJql` |
+| Transition an issue | `transitionJiraIssue` |
+| Create / start / close a sprint | `manageJiraSprint` |
+| Create / update a Confluence page | `createConfluenceContent`, `updateConfluenceContent` |
+| CQL search | `searchConfluence` |
 
 ## Linear Integration (linear-expert/)
 
@@ -162,12 +167,16 @@ Notion API is REST. PM workflows center on DB-driven artifacts:
 # Create a PRD page in the PRDs database
 curl -X POST https://api.notion.com/v1/pages \
   -H "Authorization: Bearer $NOTION_TOKEN" \
+  -H "Notion-Version: 2025-09-03" \
+  -H "Content-Type: application/json" \
   -d '{
-    "parent": { "database_id": "<prd-db-id>" },
+    "parent": { "type": "data_source_id", "data_source_id": "<prd-data-source-id>" },
     "properties": { ... },
     "children": [ <blocks from prd_scaffolder.py --format notion> ]
   }'
 ```
+
+Resolve `<prd-data-source-id>` via `GET /v1/databases/<prd-db-id>` → `data_sources[].id` (Notion-Version 2025-09-03, as of September 2026).
 
 See `notion-pm/references/notion-api-patterns.md` for full library.
 
@@ -265,7 +274,7 @@ python scrum-master/scripts/sprint_capacity_calculator.py team.json
 python scrum-master/scripts/velocity_analyzer.py sprints.json
 python execution/prioritization-frameworks/scripts/prioritization_scorer.py backlog.json --framework rice
 python execution/cycle-time-analyzer/scripts/flow_metrics.py issues.json
-mcp__atlassian__create_sprint board="TEAM-board" name="Sprint 23"
+# then, via the Atlassian Rovo MCP Server: manageJiraSprint (create "Sprint 23" on the team board)
 ```
 
 ### Pattern 3: Cross-Team Coordination
@@ -274,7 +283,7 @@ mcp__atlassian__create_sprint board="TEAM-board" name="Sprint 23"
 python execution/dependency-map/scripts/dependency_graph.py deps.json --format mermaid
 python execution/daci-framework/...  # Document decision rights
 python execution/status-update-generator/scripts/status_generator.py --format confluence
-mcp__atlassian__create_page space="PROG" title="Weekly status" body="$(...)"
+# then, via the Atlassian Rovo MCP Server: createConfluenceContent (space PROG, title "Weekly status")
 ```
 
 ### Pattern 4: Customer Discovery → Roadmap

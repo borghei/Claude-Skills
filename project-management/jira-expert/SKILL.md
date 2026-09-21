@@ -17,6 +17,8 @@ metadata:
 
 Master-level expertise in Jira configuration, project management, JQL, workflows, automation, and reporting. Handles all technical and operational aspects of Jira.
 
+> **Terminology (Jira Cloud, as of September 2026):** Jira "projects" are now called **spaces** and "issues" **work items** in the UI -- a naming change only ([announcement](https://jirareleases.atlassian.com/announcements/jira-spaces-a-new-name-that-matches-how-you-really-work)). Existing JQL keeps working, and if a new term is not yet accepted in JQL, use the old one (`project`, `issuetype`) ([JQL fields](https://support.atlassian.com/jira-software-cloud/docs/jql-fields/)); REST paths are unchanged (`/rest/api/3/project`). Advanced Roadmaps is now **Plans** (Jira Premium and Enterprise, [docs](https://support.atlassian.com/jira-software-cloud/docs/what-is-advanced-roadmaps/)). This skill uses "project" and "space" interchangeably.
+
 ## Core Capabilities
 
 - **Project configuration** — create Scrum/Kanban/custom projects, design custom workflows, configure issue types/fields/screens, set permission and security schemes
@@ -47,7 +49,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Org-wide Atlassian administration (hand off to `atlassian-admin/`), Confluence space management (hand off to `confluence-expert/`), sprint execution and team coaching (hand off to `scrum-master/`), strategic project prioritization (hand off to `senior-pm/`).
 
-**Limitations:** Jira Cloud automation has monthly execution limits per plan tier. Complex JQL on large instances (>100K issues) may hit performance ceilings. Workflow changes to active projects require careful migration planning -- retroactive changes do not apply to in-flight issues.
+**Limitations:** Jira Cloud automation is metered as usage-based automation steps, with per-plan allowances pooled at the organization level ([usage](https://support.atlassian.com/cloud-automation/docs/how-is-my-usage-calculated/), as of September 2026). Jira Data Center reaches end of life on 28 Mar 2029 (no new/expanded DC licenses after 30 Mar 2028) -- see `atlassian-admin/` and Atlassian's [DC end-of-life page](https://www.atlassian.com/licensing/data-center-end-of-life). Complex JQL on large instances (>100K issues) may hit performance ceilings. Workflow changes to active projects require careful migration planning -- retroactive changes do not apply to in-flight issues.
 
 ## Integration Points
 

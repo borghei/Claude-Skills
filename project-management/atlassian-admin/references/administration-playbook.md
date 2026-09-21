@@ -391,15 +391,15 @@
 
 ## Atlassian MCP Integration
 
-**Primary Tools**: Jira MCP, Confluence MCP
+**Primary Tools**: Atlassian Rovo MCP Server (Atlassian's official remote MCP server for Cloud; endpoint `https://mcp.atlassian.com/v2/mcp`). See Atlassian's [supported tools](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) list (as of September 2026).
 
 **Admin Operations**:
-- User and group management via API
-- Bulk permission updates
-- Configuration audits
-- Usage reporting
-- System health monitoring
-- Automated compliance checks
+- Read-side audits through MCP -- `getAccessibleAtlassianResources`, `listJiraProjects`, `listConfluenceSpaces`, `getConfluenceContentPermissions`, `lookupJiraAccountId`
+- Space setup -- `createJiraProject`, `updateJiraProject`, `createConfluenceSpace`
+- User and group management, SSO, bulk permission updates, usage reporting and audit logs are **not** MCP tools -- use Atlassian Administration or the organization/user-management REST APIs
+- Automated compliance checks and health monitoring -- export data, then run `scripts/` against it
+
+In Atlassian Administration (Rovo > Rovo MCP server), admins set which client domains may connect, whether API-token authentication is allowed, and which actions (for example create/edit) the server may perform -- review these as part of access governance ([Control Atlassian Rovo MCP server settings](https://support.atlassian.com/security-and-access-policies/docs/control-atlassian-rovo-mcp-server-settings/)).
 
 **Integration Points**:
 - Support all roles with admin capabilities

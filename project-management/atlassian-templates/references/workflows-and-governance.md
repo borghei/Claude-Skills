@@ -147,14 +147,13 @@ Read this when you need the full step-by-step processes for creating, modifying,
 
 ## Atlassian MCP Integration
 
-**Primary Tools**: Jira MCP, Confluence MCP
+**Primary Tools**: Atlassian Rovo MCP Server (Atlassian's official remote MCP server for Cloud; endpoint `https://mcp.atlassian.com/v2/mcp`). See Atlassian's [supported tools](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) list (as of September 2026).
 
 **Template Operations**:
-- Create page templates in Confluence
-- Deploy issue description templates in Jira
-- Build automated template deployment scripts
-- Track template usage via analytics
-- Update templates programmatically
+- Read existing Confluence templates -- `listConfluenceTemplates`, `getConfluenceTemplate`
+- Create pages from template content -- `createConfluenceContent` (check `getContentFormatGuide` for body format)
+- Pre-fill Jira issue descriptions from templates -- `createJiraIssue`, `editJiraIssue`
+- Build automated template deployment scripts (Confluence/Jira REST API -- creating or editing templates themselves is not an MCP tool)
 - Version control template content
 
 **Integration Points**:

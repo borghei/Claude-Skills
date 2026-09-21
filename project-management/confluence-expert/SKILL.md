@@ -48,7 +48,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Global Atlassian administration (hand off to `atlassian-admin/`), Jira project configuration (hand off to `jira-expert/`), template design and governance (hand off to `atlassian-templates/`), sprint execution artifacts (hand off to `scrum-master/`).
 
-**Limitations:** Confluence Cloud has storage limits per plan tier that affect attachment-heavy spaces. Advanced analytics (page view trends, contributor activity) require Confluence Premium or marketplace apps. Space-level permissions cannot override more restrictive org-wide security policies set by `atlassian-admin/`. Content migration between spaces can break internal links and require manual fixup.
+**Limitations:** Confluence Cloud has storage limits per plan tier that affect attachment-heavy spaces. Advanced analytics (page view trends, contributor activity) require Confluence Premium or marketplace apps. Space-level permissions cannot override more restrictive org-wide security policies set by `atlassian-admin/`. Content migration between spaces can break internal links and require manual fixup. Confluence Data Center reaches end of life on 28 Mar 2029 (read-only; no new/expanded DC licenses after 30 Mar 2028) -- plan space restructuring around a Cloud migration rather than on DC ([timeline](https://www.atlassian.com/licensing/data-center-end-of-life); see `atlassian-admin/`).
 
 ## Integration Points
 

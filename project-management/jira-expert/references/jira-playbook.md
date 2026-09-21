@@ -296,16 +296,18 @@ priority = Blocker AND status != Done
 
 ## Atlassian MCP Integration
 
-**Primary Tool**: Jira MCP Server
+**Primary Tool**: Atlassian Rovo MCP Server (Atlassian's official remote MCP server for Cloud; endpoint `https://mcp.atlassian.com/v2/mcp`, OAuth 2.1 or API token). Tool names below are from Atlassian's [supported tools](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/) list as of September 2026 -- re-check it, the list changes.
 
-**Key Operations**:
-- Create and configure projects
-- Execute JQL queries for data extraction
-- Update issue fields and statuses
-- Create and manage sprints
-- Generate reports and dashboards
-- Configure workflows and automation
-- Manage boards and filters
+**Key Operations** (Jira tools):
+- Execute JQL queries for data extraction -- `searchJiraIssuesUsingJql`
+- Create and update issues -- `createJiraIssue`, `editJiraIssue`, `addOrEditJiraIssueComment`
+- Move issues through the workflow -- `listJiraIssueTransitions`, `transitionJiraIssue`
+- Create and manage sprints and boards -- `manageJiraSprint`, `listJiraBoardSprints`, `getJiraBoardSprintData`, `createJiraBoard`
+- Create or update spaces (formerly "projects") -- `createJiraProject`, `updateJiraProject`
+- Pull history for flow metrics -- `listJiraIssueChangelogs`
+- Read filters and dashboards -- `listJiraFilters`, `listJiraDashboards`
+
+Workflow schemes, automation rules, permission schemes and custom-field configuration are **not** exposed as MCP tools -- configure those in Jira admin (or via the REST API) and document the change.
 
 **Integration Points**:
 - Pull metrics for Senior PM reporting
