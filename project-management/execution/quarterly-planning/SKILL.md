@@ -3,7 +3,7 @@ name: quarterly-planning
 description: >
   Run the full quarterly planning cycle -- pre-quarter homework, kickoff,
   weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical
-  Focus, Cagan strategy, and the Reforge cycle around your OKRs.
+  Focus, Cagan strategy, and a fixed planning cadence around your OKRs.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
@@ -19,7 +19,7 @@ metadata:
 
 Quarterly planning is the operating cadence that turns annual strategy into quarterly outcomes. Done well, it produces aligned OKRs, a roadmap that delivers them, a capacity plan that respects reality, and a tracking ritual that catches drift before it compounds. Done poorly, it produces OKR theater -- a slide deck of objectives that nobody references after week two.
 
-This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/`. Where `brainstorm-okrs/` covers how to write good OKRs, this skill covers the full quarterly cycle around them: pre-quarter homework, kickoff agenda, mid-quarter check-in, close-of-quarter retro, and the weekly/biweekly tracking cadence. The framework synthesizes four sources: Wodtke's *Radical Focus* (Monday-commit / Friday-celebrate rhythm, one OKR per quarter), Reforge's product strategy cycle, Cagan's quarterly product strategy, and the RAD ritual (Reflect-Align-Decide) used inside each meeting.
+This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/`. Where `brainstorm-okrs/` covers how to write good OKRs, this skill covers the full quarterly cycle around them: pre-quarter homework, kickoff agenda, mid-quarter check-in, close-of-quarter retro, and the weekly/biweekly tracking cadence. The framework synthesizes four sources: Wodtke's *Radical Focus* (Monday-commit / Friday-celebrate rhythm, one OKR per quarter), a product strategy cycle (explicit upstream strategy choices), Cagan's quarterly product strategy, and the RAD ritual (Reflect-Align-Decide) used inside each meeting.
 
 ## Core Capabilities
 
@@ -46,7 +46,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 Week -3   -1     0       1-5    6      7-12    13
   | Pre-quarter | Kickoff |  Mid-quarter  | Close
   |  homework   | (start) |   check-in    | retro
-  +--Reforge/Cagan--+-- Wodtke weekly Mon/Fri rhythm --+
+  +-Strategy/Cagan--+-- Wodtke weekly Mon/Fri rhythm --+
 ```
 
 - **Pre-quarter (weeks -3 to -1):** run the homework and kickoff to commit OKRs and roadmap.
@@ -66,7 +66,7 @@ Week -3   -1     0       1-5    6      7-12    13
 Load the reference that matches the task -- keep this file lean and pull detail on demand:
 
 - **[references/cycle-playbook.md](references/cycle-playbook.md)** -- the full operational playbook: pre-quarter homework + kickoff brief template, kickoff / mid-quarter / close agendas, the weekly Wodtke rhythm scripts, anti-patterns, artifacts-produced map, troubleshooting, and success criteria. Read this when running any phase of the cycle.
-- **[references/quarterly-planning-guide.md](references/quarterly-planning-guide.md)** -- the framework theory (Wodtke Radical Focus, Cagan product strategy, Reforge cycle, RAD ritual) with a worked Reconcile Q3 example. Read this when you need the reasoning behind the rituals.
+- **[references/quarterly-planning-guide.md](references/quarterly-planning-guide.md)** -- the framework theory (Wodtke Radical Focus, Cagan product strategy, strategy cycle, RAD ritual) with a worked Reconcile Q3 example. Read this when you need the reasoning behind the rituals.
 - **[references/red-flags.md](references/red-flags.md)** -- 11 quarterly-planning anti-patterns (OKR theater, capacity in story points, stretch goals as committed slate) with symptoms and fixes. Read this when reviewing a quarter's plan or diagnosing a failing cadence.
 
 Templates live in `assets/`: `kickoff_agenda_template.md`, `mid_quarter_check_in_template.md`, `close_retro_template.md`, `quarterly_review_deck_outline.md`.

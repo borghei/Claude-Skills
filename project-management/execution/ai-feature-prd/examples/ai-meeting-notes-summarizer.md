@@ -24,7 +24,7 @@ The PM (Priya, Senior PM, Customer Workflows) needs an AI Feature PRD that survi
 1. **Declared EU AI Act tier first.** Pulled in `ra-qm-team/eu-ai-act-specialist/`. The feature is **Limited Risk** (transparency obligation, no automated decisions about people). Locked this before model choice so the eval bar would reflect it.
 2. **Defined the golden set before any prompt.** PM + Trust & Safety curated 200 transcripts: 140 common cases, 40 edge cases (multi-speaker, accents, off-topic chat), 20 adversarial (PII-laden, prompt-injection attempts).
 3. **Filled the 11 sections** from `assets/ai_feature_prd_template.md`. Sections 1-8 followed `create-prd/` patterns; 9-11 were the heavy lift.
-4. **Forced the model alternatives table.** Engineering wanted to start with a fine-tune. The Reforge prompt-first heuristic won the room: prompt + RAG over the user's prior QBR notes for tone matching. Fine-tune deferred to v2.
+4. **Forced the model alternatives table.** Engineering wanted to start with a fine-tune. The prompt-first heuristic won the room: prompt + RAG over the user's prior QBR notes for tone matching. Fine-tune deferred to v2.
 5. **Locked numeric eval thresholds** before any prompt was written. Acceptance >= 90% on golden set, hallucination <= 2%, p95 latency < 2.0s, cost per summary < $0.05.
 6. **Wired the deployment ramp** to `feature-flag-strategy/` shape A (linear) with a shadow stage and an internal-only stage gated on acceptance >= 85%.
 7. **Pre-mortemed the AI-specific failure modes** with `discovery/pre-mortem/` (hallucinated action items, prompt-injection from a hostile transcript, model outage during a high-volume QBR week).
@@ -140,7 +140,7 @@ Chosen: **Prompt + RAG**. Retrieval over the customer's prior 4 QBR summaries (i
 
 Rejected:
 - Pure prompt -- loses continuity across QBRs.
-- Fine-tune -- 200-transcript dataset too small; Reforge prompt-first principle applies.
+- Fine-tune -- 200-transcript dataset too small; prompt-first principle applies.
 - Agentic tool use -- no multi-step task; over-engineering.
 
 ### 9.3 Data flow

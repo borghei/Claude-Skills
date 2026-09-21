@@ -207,31 +207,37 @@ This adds the skills library to your available marketplaces.
 ### Install Skill Bundles
 
 ```bash
-# Install by domain (bundles of skills)
-/plugin install marketings@claude-code-skills     # 6 marketing skills
-/plugin install engineering-skills@claude-code-skills   # 18 engineering skills
-/plugin install product-skills@claude-code-skills       # 5 product skills
-/plugin install c-level-skills@claude-code-skills       # 2 C-level advisory skills
-/plugin install pm-skills@claude-code-skills            # 6 project management skills
-/plugin install ra-qm-skills@claude-code-skills         # 12 regulatory/quality skills
+# Install by domain — one plugin per domain (skill counts as of September 2026)
+/plugin install pm-skills@claude-code-skills                   # 70 project management skills
+/plugin install engineering-advanced-skills@claude-code-skills # 91 engineering skills
+/plugin install marketings@claude-code-skills                  # 41 marketing skills
+/plugin install c-level-skills@claude-code-skills              # 31 C-level advisory skills
+/plugin install ra-qm-skills@claude-code-skills                # 27 regulatory/quality skills
+/plugin install business-growth-skills@claude-code-skills      # 20 business & growth skills
+/plugin install legal-skills@claude-code-skills                # 17 legal skills (experimental)
+/plugin install product-skills@claude-code-skills              # 13 product skills
+/plugin install personal-productivity-skills@claude-code-skills # 13 personal productivity skills
+/plugin install vertical-advisor-skills@claude-code-skills     # 7 vertical advisors
+/plugin install data-analytics-skills@claude-code-skills       # 6 data analytics skills
+/plugin install business-operations-skills@claude-code-skills  # 6 business operations skills
+/plugin install sales-success-skills@claude-code-skills        # 5 sales success skills
+/plugin install documents-skills@claude-code-skills            # 4 document skills
+/plugin install hr-operations-skills@claude-code-skills        # 4 HR operations skills
+/plugin install research-skills@claude-code-skills             # 4 research skills
+/plugin install research-ops-skills@claude-code-skills         # 4 research ops skills
+/plugin install markdown-html-skills@claude-code-skills        # 4 markdown→HTML skills
+/plugin install finance-skills@claude-code-skills              # 3 finance skills
+/plugin install workflow-skills@claude-code-skills             # 2 workflow meta-skills
 ```
 
 ### Install Individual Skills
 
+Plugins install a whole domain. To install a single skill, use the CLI:
+
 ```bash
-# Marketing
-/plugin install content-creator@claude-code-skills
-/plugin install demand-gen@claude-code-skills
-
-# Engineering
-/plugin install fullstack-engineer@claude-code-skills
-/plugin install aws-architect@claude-code-skills
-
-# Product
-/plugin install product-manager@claude-code-skills
-
-# Project Management
-/plugin install scrum-master@claude-code-skills
+npx @borghei/claude-skills add content-creator
+npx @borghei/claude-skills add scrum-master
+npx @borghei/claude-skills add ai-content-disclosure
 ```
 
 ### Update Skills

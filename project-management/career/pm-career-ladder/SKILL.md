@@ -65,7 +65,7 @@ See `references/ladder-playbook.md` for the full ladder table, rubric detail, ga
 - `assets/growth_plan.md` — 6-month growth plan template.
 - `assets/promo_packet.md` — promotion packet template.
 
-External: Square's published PM ladder; Rachitsky, L. *Lenny's Newsletter* (PM rubric/growth essays); Reforge *PM Growth Framework*; Wodtke, C. *Radical Focus*.
+External: Square's published PM ladder; Wodtke, C. *Radical Focus*.
 
 ## Scope & Limitations
 

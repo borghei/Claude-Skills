@@ -23,7 +23,7 @@ Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales c
 
 This skill provides a workflow and a Python tool for handling that stream. Inputs are raw feedback items from many channels. Outputs are deduplicated, categorized, scored, and routed items, plus acknowledgment responses for the customers who sent them.
 
-The frameworks behind it are Marty Cagan's separation of *request* from *opportunity* from *solution*, Noriaki Kano's model of feature-quality categories, Reforge's customer-development model, and ProductPlan's request-management playbook. Detail lives in the references below.
+The frameworks behind it are Marty Cagan's separation of *request* from *opportunity* from *solution*, Noriaki Kano's model of feature-quality categories, a layered customer-development model, and an acknowledge/commit/promise request-management discipline. Detail lives in the references below.
 
 ## Core Capabilities
 
@@ -73,14 +73,14 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 
 ## References
 
-- **[references/customer-feedback-triage-guide.md](references/customer-feedback-triage-guide.md)** — the full workflow with the 4 frameworks (Cagan, Kano, Reforge, ProductPlan), the 6-phase process, week-over-week cadence, channel-by-channel intake norms, and the weekly triage meeting agenda. Read when running or setting up the triage process.
+- **[references/customer-feedback-triage-guide.md](references/customer-feedback-triage-guide.md)** — the full workflow with the 4 frameworks (Cagan, Kano, layered customer development, request management), the 6-phase process, week-over-week cadence, channel-by-channel intake norms, and the weekly triage meeting agenda. Read when running or setting up the triage process.
 - **[references/kano-model-deep-dive.md](references/kano-model-deep-dive.md)** — categorization heuristics, edge cases, and time-dynamics of Kano categories. Read when overriding the tool's Kano guess.
 - **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (squeaky-wheel, sales-driven roadmap, HiPPO, treating requests literally...), plus the common traps, troubleshooting table, and success criteria. Read before the weekly triage meeting and when output looks off.
 - **[references/tool-reference.md](references/tool-reference.md)** — `feedback_triage.py` flags, input schema, and all output schemas. Read when scripting or debugging the tool.
 - **[assets/triage_template.md](assets/triage_template.md)** — manual triage worksheet for teams not running the Python tool.
 - **[assets/response_templates.md](assets/response_templates.md)** — Will-build / Exploring / Won't-build templates with three variants each.
 - **[assets/kano_quick_reference.md](assets/kano_quick_reference.md)** — one-page reference card for the five Kano categories.
-- Marty Cagan, *Inspired* (2nd ed., 2017) and *Empowered* (2020); Noriaki Kano et al., "Attractive Quality and Must-Be Quality" (1984); Reforge "Customer Development"; ProductPlan, "How to Manage Product Feedback".
+- Marty Cagan, *Inspired* (2nd ed., 2017) and *Empowered* (2020); Noriaki Kano et al., "Attractive Quality and Must-Be Quality" (1984).
 
 ## Scope & Limitations
 

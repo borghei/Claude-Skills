@@ -183,4 +183,4 @@ Deliver the simple version first, then enhance.
 - Tony Ulwick, *Jobs to Be Done: Theory to Practice* (2016)
 - Alan Klement, *When Coffee and Kale Compete* (2018)
 - Bob Moesta and Chris Spiek, *Demand-Side Sales 101* (2020)
-- intercom.com/blog/using-job-stories-design-features-ui-ux -- Original job stories blog post
+- Intercom (2013) -- where the job-story format originated

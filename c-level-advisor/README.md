@@ -1,6 +1,6 @@
 # C-Level Advisory Skills Collection
 
-**Complete suite of 2 executive leadership skills** covering CEO and CTO strategic decision-making and organizational leadership.
+**31 C-level advisory skills** — CEO, CTO, CFO, CMO, CRO, CPO, COO, CHRO, CISO and Tier 2 advisors (CAIO, CDO, CCO, GC, VPE). This guide covers the CEO and CTO advisors in depth; the full list is in the [C-Level catalog](../docs/skills/c-level.md).
 
 ---
 
@@ -17,34 +17,24 @@
 
 ## ⚡ Installation
 
-### Quick Install (Recommended)
-
-Install all C-Level advisory skills with one command:
+### Whole domain (Claude Code plugin)
 
 ```bash
-# Install all C-Level skills to all supported agents
-npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor
-
-# Install to Claude Code only
-npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor --agent claude
-
-# Install to Cursor only
-npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor --agent cursor
+# In Claude Code:
+/plugin marketplace add borghei/Claude-Skills
+/plugin install c-level-skills@claude-code-skills
 ```
 
-### Install Individual Skills
+### Individual skills (any assistant)
 
 ```bash
-# CEO Advisor
-npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor/ceo-advisor
-
-# CTO Advisor
-npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor/cto-advisor
+npx @borghei/claude-skills add ceo-advisor
+npx @borghei/claude-skills add cto-advisor
 ```
 
-**Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
+The CLI auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose (`--to <target>` to force one). Browse every skill with `npx @borghei/claude-skills list --domain c-level-advisor`.
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+**Complete Installation Guide:** See [docs/INSTALLATION.md](../docs/INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
 
 ---
 
@@ -53,7 +43,7 @@ npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor/cto-advisor
 This C-Level advisory skills collection provides executive leadership guidance for strategic decision-making, organizational development, and stakeholder management.
 
 **What's Included:**
-- **2 executive-level skills** for CEO and CTO roles
+- **31 executive-level skills**; the CEO and CTO advisors are covered in depth below
 - **6 Python analysis tools** for strategy, finance, tech debt, and team scaling
 - **Comprehensive frameworks** for executive decision-making, board governance, and technology leadership
 - **Ready-to-use templates** for board presentations, ADRs, and strategic planning
@@ -148,7 +138,7 @@ This C-Level advisory skills collection provides executive leadership guidance f
 
 1. **Install CEO Advisor:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor/ceo-advisor
+   npx @borghei/claude-skills add ceo-advisor
    ```
 
 2. **Evaluate Strategic Initiative:**
@@ -170,7 +160,7 @@ This C-Level advisory skills collection provides executive leadership guidance f
 
 1. **Install CTO Advisor:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/c-level-advisor/cto-advisor
+   npx @borghei/claude-skills add cto-advisor
    ```
 
 2. **Analyze Technical Debt:**
@@ -371,7 +361,7 @@ This C-Level advisory skills collection provides executive leadership guidance f
 
 - **CLAUDE.md:** [c-level-advisor/CLAUDE.md](CLAUDE.md) - Claude Code specific guidance (if exists)
 - **Main Documentation:** [../CLAUDE.md](../CLAUDE.md)
-- **Installation Guide:** [../INSTALLATION.md](../INSTALLATION.md)
+- **Installation Guide:** [docs/INSTALLATION.md](../docs/INSTALLATION.md)
 
 ---
 

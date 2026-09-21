@@ -1,6 +1,6 @@
 # Product Team Skills Collection
 
-**Complete suite of 5 expert product skills** covering product management, agile delivery, strategy, UX research, and design systems.
+**13 product skills** covering product management, agile delivery, strategy, UX research, design systems, product analytics, Apple HIG, research synthesis, spec-to-repo and roadmap communication. This guide covers the 5 core skills in depth; the full list is in the [Product catalog](../docs/skills/product.md). Project management has its own domain: [project-management/](../project-management/).
 
 ---
 
@@ -18,43 +18,27 @@
 
 ## ⚡ Installation
 
-### Quick Install (Recommended)
-
-Install all product team skills with one command:
+### Whole domain (Claude Code plugin)
 
 ```bash
-# Install all product skills to all supported agents
-npx ai-agent-skills install borghei/Claude-Skills/product-team
-
-# Install to Claude Code only
-npx ai-agent-skills install borghei/Claude-Skills/product-team --agent claude
-
-# Install to Cursor only
-npx ai-agent-skills install borghei/Claude-Skills/product-team --agent cursor
+# In Claude Code:
+/plugin marketplace add borghei/Claude-Skills
+/plugin install product-skills@claude-code-skills
 ```
 
-### Install Individual Skills
+### Individual skills (any assistant)
 
 ```bash
-# Product Manager Toolkit
-npx ai-agent-skills install borghei/Claude-Skills/product-team/product-manager-toolkit
-
-# Agile Product Owner
-npx ai-agent-skills install borghei/Claude-Skills/product-team/agile-product-owner
-
-# Product Strategist
-npx ai-agent-skills install borghei/Claude-Skills/product-team/product-strategist
-
-# UX Researcher Designer
-npx ai-agent-skills install borghei/Claude-Skills/product-team/ux-researcher-designer
-
-# UI Design System
-npx ai-agent-skills install borghei/Claude-Skills/product-team/ui-design-system
+npx @borghei/claude-skills add product-manager-toolkit
+npx @borghei/claude-skills add agile-product-owner
+npx @borghei/claude-skills add product-strategist
+npx @borghei/claude-skills add ux-researcher-designer
+npx @borghei/claude-skills add ui-design-system
 ```
 
-**Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
+The CLI auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose (`--to <target>` to force one). Browse every skill with `npx @borghei/claude-skills list --domain product-team`.
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+**Complete Installation Guide:** See [docs/INSTALLATION.md](../docs/INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
 
 ---
 
@@ -63,7 +47,7 @@ npx ai-agent-skills install borghei/Claude-Skills/product-team/ui-design-system
 This product team skills collection provides comprehensive product management capabilities from discovery through delivery, covering strategy, execution, research, and design.
 
 **What's Included:**
-- **5 expert-level skills** covering product management, agile, strategy, UX, and design
+- **13 skills**; the 5 core skills (product management, agile, strategy, UX, design) are covered in depth below
 - **15+ Python automation tools** for prioritization, analysis, and generation
 - **Comprehensive frameworks** for discovery, delivery, research, and design systems
 - **Ready-to-use templates** for PRDs, user stories, OKRs, personas, and design tokens
@@ -203,7 +187,7 @@ This product team skills collection provides comprehensive product management ca
 
 1. **Install Product Manager Toolkit:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/product-team/product-manager-toolkit
+   npx @borghei/claude-skills add product-manager-toolkit
    ```
 
 2. **Prioritize Your Backlog:**
@@ -220,7 +204,7 @@ This product team skills collection provides comprehensive product management ca
 
 1. **Install Agile Product Owner:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/product-team/agile-product-owner
+   npx @borghei/claude-skills add agile-product-owner
    ```
 
 2. **Generate User Stories:**
@@ -237,7 +221,7 @@ This product team skills collection provides comprehensive product management ca
 
 1. **Install Product Strategist:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/product-team/product-strategist
+   npx @borghei/claude-skills add product-strategist
    ```
 
 2. **Generate OKR Cascade:**
@@ -249,7 +233,7 @@ This product team skills collection provides comprehensive product management ca
 
 1. **Install UX Researcher Designer:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/product-team/ux-researcher-designer
+   npx @borghei/claude-skills add ux-researcher-designer
    ```
 
 2. **Create Personas:**
@@ -261,7 +245,7 @@ This product team skills collection provides comprehensive product management ca
 
 1. **Install UI Design System:**
    ```bash
-   npx ai-agent-skills install borghei/Claude-Skills/product-team/ui-design-system
+   npx @borghei/claude-skills add ui-design-system
    ```
 
 2. **Generate Design Tokens:**
@@ -439,7 +423,7 @@ This product team skills collection provides comprehensive product management ca
 - **Product Team Guide:** `product_team_implementation_guide.md` (if exists)
 - **CLAUDE.md:** [product-team/CLAUDE.md](CLAUDE.md) - Claude Code specific guidance
 - **Main Documentation:** [../CLAUDE.md](../CLAUDE.md)
-- **Installation Guide:** [../INSTALLATION.md](../INSTALLATION.md)
+- **Installation Guide:** [docs/INSTALLATION.md](../docs/INSTALLATION.md)
 
 ---
 

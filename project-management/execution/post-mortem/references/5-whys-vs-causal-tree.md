@@ -153,7 +153,7 @@ This gives the team the speed and narrative clarity of 5 Whys plus the structura
 
 - Taiichi Ohno, *Toyota Production System: Beyond Large-Scale Production* (1988)
 - Richard Cook, "How Complex Systems Fail" (1998)
-- John Allspaw, "Etsy's Debriefing Facilitation Guide" — https://github.com/etsy/DebriefingFacilitationGuide
+- John Allspaw, *Debriefing Facilitation Guide* (Etsy)
 - Charles Perrow, *Normal Accidents* (1984) — for the theoretical grounding on why single-cause framing fails in complex systems
 - Sidney Dekker, *The Field Guide to Understanding "Human Error"* (3rd ed., 2014)
 

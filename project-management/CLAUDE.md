@@ -1,6 +1,6 @@
 # Project Management Skills - Claude Code Guidance
 
-This guide covers the **66 production-ready project management skills** organized across role-based, discovery, execution, career, integration, strategy-frameworks (Tier 3), and GTM (Tier 3) domains. PM is the most-used domain in this library.
+This guide covers the **70 production-ready project management skills** organized across role-based, discovery, execution, career, integration, strategy-frameworks (Tier 3), and GTM (Tier 3) domains. PM is the most-used domain in this library.
 
 ## PM Skills Overview
 

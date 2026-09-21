@@ -8,7 +8,7 @@
 
 ## Why PMs choose this
 
-- **54 production-ready skills** covering every stage: discovery, definition, execution, delivery, launch, career growth
+- **70 production-ready skills** covering every stage: discovery, definition, execution, delivery, launch, career growth
 - **Portable artifacts** — generate once, push to Jira, Linear, Notion, Confluence, or GitHub Projects
 - **Real automation, not prompts** — 15+ Python tools you can pipe into CI, scripts, MCP servers
 - **Exec-ready outputs** — PRDs, roadmaps, status updates that don't read like AI slop
@@ -88,7 +88,7 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 
 ---
 
-## Complete catalog (54 skills)
+## Complete catalog (70 skills)
 
 ### Role-Based Skills (10)
 
@@ -105,6 +105,13 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`atlassian-templates/`](atlassian-templates/) | Ready-to-use Jira/Confluence templates | — |
 | [`sprint-retrospective/`](sprint-retrospective/) | Data-driven retros | — |
 
+### Team Operations (2)
+
+| Skill | Focus |
+|---|---|
+| [`meeting-analyzer/`](meeting-analyzer/) | Meeting notes → decision/action register, ownerless-item flags, follow-through tracking |
+| [`team-communications/`](team-communications/) | Channel routing, meeting-load reduction, escalation SLAs, timezone norms |
+
 ### Integration Skills (3)
 
 | Skill | Focus |
@@ -113,7 +120,7 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`notion-pm/`](notion-pm/) | Notion DBs for PRDs/OKRs/Roadmap/Decisions, API patterns |
 | [`productboard-expert/`](productboard-expert/) ★ NEW | Productboard admin, Insight inbox triage, Driver scoring, REST API |
 
-### Discovery Skills (8) — `discovery/`
+### Discovery Skills (11) — `discovery/`
 
 | Skill | Focus | Framework |
 |---|---|---|
@@ -125,20 +132,22 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`customer-interview-script/`](discovery/customer-interview-script/) ★ NEW | How to RUN a discovery interview | Portigal + Fitzpatrick + Torres |
 | [`value-proposition-canvas/`](discovery/value-proposition-canvas/) ★ NEW | Strategyzer VPC (Customer Profile + Value Map) | Osterwalder + Strategyzer |
 | [`jtbd-workshop/`](discovery/jtbd-workshop/) ★ NEW | Full Jobs-To-Be-Done workshop | Christensen + Ulwick + Moesta + Klement |
-| [`ai-prototyping/`](discovery/ai-prototyping/) | Idea → AI prototype → user validation → handoff | Uncertainty-type decision + F0-F4 fidelity ladder |
+| [`opportunity-solution-tree/`](discovery/opportunity-solution-tree/) | Outcome → opportunities → solutions → assumption tests | Opportunity Solution Tree (Torres) |
+| [`metrics-dashboard/`](discovery/metrics-dashboard/) | Decision-grade dashboard: North Star, inputs, guardrails | Metric layers + owners + cadence |
+| [`ai-prototyping/`](discovery/ai-prototyping/) ★ NEW | Idea → AI prototype → user validation → handoff | Uncertainty-type decision + F0-F4 fidelity ladder |
 
-### Execution Skills (29) — `execution/`
+### Execution Skills (33) — `execution/`
 
 | Skill | Focus | Framework |
 |---|---|---|
 | [`create-prd/`](execution/create-prd/) | 8-section PRD scaffolding | PRD canonical |
 | [`prfaq/`](execution/prfaq/) | Working Backwards PR/FAQ | Amazon Bezos PRFAQ |
-| [`ai-feature-prd/`](execution/ai-feature-prd/) ★ NEW | PRDs for AI/ML features | Karpathy + Anthropic RSP + Reforge AI PM |
+| [`ai-feature-prd/`](execution/ai-feature-prd/) ★ NEW | PRDs for AI/ML features | Karpathy + Anthropic RSP + AI eval practice |
 | [`pricing-prd/`](execution/pricing-prd/) ★ NEW | Pricing experiments and pricing-page PRDs | Ramanujam + Campbell + Westendorp PSM |
 | [`product-vision/`](execution/product-vision/) ★ NEW | Vision document (above NSM) | Pichler + Moore + Raskin + Cagan |
 | [`brainstorm-okrs/`](execution/brainstorm-okrs/) | OKR brainstorming | Wodtke "Radical Focus" |
 | [`north-star-metric/`](execution/north-star-metric/) | NSM + input metric tree | Ellis + Amplitude framework |
-| [`quarterly-planning/`](execution/quarterly-planning/) ★ NEW | Full Q1 cycle (kickoff → mid-Q → close) | Wodtke + Cagan + Reforge + RAD |
+| [`quarterly-planning/`](execution/quarterly-planning/) ★ NEW | Full Q1 cycle (kickoff → mid-Q → close) | Wodtke + Cagan + RAD |
 | [`outcome-roadmap/`](execution/outcome-roadmap/) | Output → outcome roadmap | Now/Next/Later |
 | [`roadmap-communication/`](execution/roadmap-communication/) | Exec/customer/internal variants | Cagan right-sizing |
 | [`prioritization-frameworks/`](execution/prioritization-frameworks/) | 9-framework scoring | RICE, ICE, Opportunity, MoSCoW, Weighted |
@@ -148,8 +157,8 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`job-stories/`](execution/job-stories/) | JTBD backlog format | When/Want/So (Klement) |
 | [`wwas/`](execution/wwas/) | Why-What-Acceptance backlog | WWAS |
 | [`customer-feedback-triage/`](execution/customer-feedback-triage/) ★ NEW | Inbound feedback → categorize → score → backlog | Kano + Cagan request-to-opportunity |
-| [`activation-funnel/`](execution/activation-funnel/) ★ NEW | AARRR funnel design + analyzer | McClure + Ellis + Chen + Reforge |
-| [`feature-flag-strategy/`](execution/feature-flag-strategy/) ★ NEW | Phased rollouts, kill-switches, flag debt | Fowler toggle taxonomy + Reforge |
+| [`activation-funnel/`](execution/activation-funnel/) ★ NEW | AARRR funnel design + analyzer | McClure + Ellis + Chen |
+| [`feature-flag-strategy/`](execution/feature-flag-strategy/) ★ NEW | Phased rollouts, kill-switches, flag debt | Fowler toggle taxonomy |
 | [`cycle-time-analyzer/`](execution/cycle-time-analyzer/) | Flow metrics, CFD, Little's Law | Vacanti Kanban metrics |
 | [`dependency-map/`](execution/dependency-map/) | Cross-team blockers, critical path | CPM + DSM + Conway's Law |
 | [`status-update-generator/`](execution/status-update-generator/) | Weekly exec update | SBNR + traffic-light |
@@ -160,18 +169,38 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`post-mortem/`](execution/post-mortem/) ★ NEW | Blameless incident RCA | Google SRE + Allspaw + Dekker + Perrow |
 | [`release-notes/`](execution/release-notes/) | Release notes from tickets | Category-based |
 | [`eol-communication/`](execution/eol-communication/) | End-of-life messaging | Sunset playbook |
-| [`agents-in-the-team/`](execution/agents-in-the-team/) | Delivery when AI agents take tickets | DORA metrics + Scrum Guide Expansion Pack (AI) |
+| [`sprint-plan/`](execution/sprint-plan/) | Capacity, commitment vs stretch, sprint risks | Capacity planning |
+| [`stakeholder-map/`](execution/stakeholder-map/) | Power × interest map + comms plan | Power/interest grid |
+| [`test-scenarios/`](execution/test-scenarios/) | Spec → test scenario coverage with gap analyzer | Happy/edge/error/a11y/security/perf |
+| [`agents-in-the-team/`](execution/agents-in-the-team/) ★ NEW | Delivery when AI agents take tickets | DORA metrics + Scrum Guide Expansion Pack (AI) |
+
+### Strategy Frameworks (5) — `strategy-frameworks/`
+
+| Skill | Focus | Framework |
+|---|---|---|
+| [`business-model-canvas/`](strategy-frameworks/business-model-canvas/) | Build and stress-test all 9 blocks | Business Model Canvas (Osterwalder) |
+| [`lean-canvas/`](strategy-frameworks/lean-canvas/) | 1-page model for idea / pre-PMF / pivot | Lean Canvas (Maurya) |
+| [`swot-analysis/`](strategy-frameworks/swot-analysis/) | Strategic positioning | SWOT + TOWS |
+| [`porters-five-forces/`](strategy-frameworks/porters-five-forces/) | Industry attractiveness and margin pressure | Porter's Five Forces |
+| [`ansoff-matrix/`](strategy-frameworks/ansoff-matrix/) | Growth options and their risk | Ansoff Matrix |
+
+### Go-to-Market (2) — `gtm/`
+
+| Skill | Focus |
+|---|---|
+| [`gtm-strategy/`](gtm/gtm-strategy/) | ICP, motion, channels, messaging, metrics, launch plan |
+| [`ideal-customer-profile/`](gtm/ideal-customer-profile/) | Firmographics, behavioral signals, JTBD, buyer persona |
 
 ### Career Skills (4) — `career/`
 
 | Skill | Focus | Framework |
 |---|---|---|
 | [`pm-interview-prep/`](career/pm-interview-prep/) | APM → Group PM interview prep | CIRCLES (Lin) + STAR + Decode and Conquer |
-| [`pm-career-ladder/`](career/pm-career-ladder/) | Rubrics + growth + promo packets | Square/Stripe ladders + Reforge |
+| [`pm-career-ladder/`](career/pm-career-ladder/) | Rubrics + growth + promo packets | Square/Stripe ladders |
 | [`pm-onboarding/`](career/pm-onboarding/) | 30-60-90 day plan | Watkins "First 90 Days" + STARS |
 | [`pm-1on1s/`](career/pm-1on1s/) | 1:1 templates by partner type | Radical Candor + GROW + Manager Tools |
 
-★ NEW = added in the 2026-05-22 expansion (12 new skills: 3 discovery, 8 execution, 1 integration)
+★ NEW = added in the 2026-05-22 expansion (12 skills) or the 2026-09 refresh (`ai-prototyping`, `agents-in-the-team`)
 
 ---
 

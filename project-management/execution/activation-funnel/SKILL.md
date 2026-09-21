@@ -64,7 +64,7 @@ python scripts/funnel_analyzer.py --demo --format mermaid                 # work
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/funnel-analysis-playbook.md](references/funnel-analysis-playbook.md)** — full AARRR/AAARRR stage tables, the aha-event definition method, conversion/drop-off math, counter-metric pairing, leading-vs-lagging indicators, the step-by-step workflow, the `funnel_analyzer.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when building or analyzing a funnel.
-- **[references/pirate-metrics-deep-dive.md](references/pirate-metrics-deep-dive.md)** — McClure's AARRR + AAARRR, Andrew Chen funnel mechanics, the Reforge growth model, and NSM-funnel linkage. Read when designing the overall growth model around the funnel.
+- **[references/pirate-metrics-deep-dive.md](references/pirate-metrics-deep-dive.md)** — McClure's AARRR + AAARRR, Andrew Chen funnel mechanics, Balfour's Four Fits, growth loops, and NSM-funnel linkage. Read when designing the overall growth model around the funnel.
 - **[references/activation-aha-moment-patterns.md](references/activation-aha-moment-patterns.md)** — Ellis's framework plus 12 worked activation-event examples (Slack, FB, Dropbox, Airbnb, Notion, Spotify, Duolingo, Twitter, HubSpot, Pinterest, LinkedIn, Figma). Read when choosing or validating the activation event.
 - **[references/red-flags.md](references/red-flags.md)** — concrete examples of how funnel output goes wrong, why it's bad, and how to fix it. Read when reviewing a funnel analysis or diagnosing a misleading chart.
 - **assets/funnel_design_canvas.md** — workshop canvas for defining the funnel. Use in a design session.

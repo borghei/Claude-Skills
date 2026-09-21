@@ -316,8 +316,8 @@ Required:
 | Problem | Likely Cause | Solution |
 |---------|-------------|----------|
 | CAC exceeding LTV ratio (below 3:1) | Over-spending on high-cost channels without sufficient conversion optimization | Audit channel-specific CAC against benchmarks. Cut or pause channels with CAC >$400 for B2B SaaS. Shift budget toward lower-CAC channels (SEO, email, organic social). A 3:1 LTV:CAC ratio is the minimum for sustainability; below 2:1 indicates immediate problems |
-| LinkedIn Ads delivering low CTR (<0.4%) | Audience too broad, creative fatigue, or wrong ad format | Narrow targeting to Director+ titles at 50-5,000 employee companies. Refresh creative every 2-3 weeks. Test Thought Leader Ads before scaling standard formats -- they deliver 10-20% CTR at premium CPMs, which frequently beats standard LinkedIn ads' 0.5-1% rates |
-| Google Ads CPA rising above target | Insufficient conversion data for automated bidding, or keyword competition increasing | Stay on Manual CPC until you have 50+ conversions, then switch to Target CPA. Google Ads CPC increased 164% from 2019-2024. Expand negative keyword list (maintain 100+). Focus on long-tail, high-intent keywords to reduce competition |
+| LinkedIn Ads delivering low CTR (<0.4%) | Audience too broad, creative fatigue, or wrong ad format | Narrow targeting to Director+ titles at 50-5,000 employee companies. Refresh creative every 2-3 weeks. Test Thought Leader Ads before scaling standard formats -- they often earn higher engagement at premium CPMs; compare against your own standard-format baseline before scaling |
+| Google Ads CPA rising above target | Insufficient conversion data for automated bidding, or keyword competition increasing | Stay on Manual CPC until you have 50+ conversions, then switch to Target CPA. Search CPCs in competitive B2B categories have trended upward for years, so budget for it. Expand negative keyword list (maintain 100+). Focus on long-tail, high-intent keywords to reduce competition |
 | MQL-to-SQL conversion rate below 15% | Lead scoring too loose, or MQL criteria not aligned with sales expectations | Tighten MQL scoring criteria. Require minimum engagement score (demo request or equivalent high-intent action). Align with sales on SQL criteria: Director+ title, 50-5,000 employees, $10k+ budget, buying within 90 days |
 | UTM parameters not appearing in HubSpot contact records | Tracking script not firing, form stripping UTM values, or redirect losing parameters | Verify HubSpot tracking code is on all pages. Ensure forms pass hidden UTM fields. Test by clicking a UTM-tagged link and checking the contact record. Use server-side UTM capture if client-side tracking is blocked by privacy tools |
 | Partner channel not generating pipeline | Partner enablement insufficient, or wrong partner tier selection | Ensure partners have completed demo training and have access to co-branded assets. Focus on Tier 1 strategic integration partners (high effort, very high ROI) before scaling to Tier 2 affiliates. Set clear success metrics and revenue model before launch |
@@ -327,9 +327,9 @@ Required:
 
 ## Success Criteria
 
-- **Blended CAC**: Target <$300 for B2B SaaS Series A (2026 benchmark). Channel-specific targets: LinkedIn $150-400, Google Search $80-250, SEO/Organic $50-150, Email $20-80. Average B2B SaaS CAC reached $1,200 in 2026 for all segments; self-serve targets $100-500 while enterprise can reach $5,000+
-- **CAC Payback Period**: Achieve payback within 6-12 months (2026 median). Elite performers reach payback in under 80 days. Payback exceeding 18 months signals unsustainable unit economics
-- **LTV:CAC Ratio**: Maintain minimum 3:1 ratio. Below 2:1 requires immediate intervention. Top-quartile SaaS companies spend $1.10 or less to acquire $1 of new ARR; median spends $2 per $1 ARR
+- **Blended CAC**: Target <$300 for B2B SaaS Series A (planning target). Channel-specific targets: LinkedIn $150-400, Google Search $80-250, SEO/Organic $50-150, Email $20-80. CAC varies widely by motion: self-serve runs far lower than enterprise, where it can reach the thousands of dollars
+- **CAC Payback Period**: Achieve payback within 6-12 months. Payback exceeding 18 months signals unsustainable unit economics
+- **LTV:CAC Ratio**: Maintain minimum 3:1 ratio. Below 2:1 requires immediate intervention. Also trend sales-and-marketing spend per $1 of new ARR quarter over quarter
 - **MQL-to-SQL Conversion**: Target 15-25% for Google Search, 12-22% for SEO, 10-20% for LinkedIn, 8-15% for email. Overall blended target >15%
 - **Pipeline Velocity**: Close marketing-sourced deals within 60 days average. SDR response to MQL within 4 hours, AE demo booking within 24 hours, first demo within 3 business days
 - **Channel Diversification**: No single channel should represent more than 40% of pipeline. Maintain active campaigns across minimum 3 channels. LinkedIn generates highest quality B2B leads (40% of marketers cite it as most effective)
@@ -358,8 +358,8 @@ Required:
 - Brand marketing and awareness campaigns without direct pipeline attribution
 
 **Market Context (2026):**
-- CAC is rising 40-60% since 2023 across B2B SaaS
-- Google Ads CPC increased 164% from 2019-2024; LinkedIn costs up 89%
+- B2B SaaS CAC is widely reported to have risen in recent years
+- Paid search and paid social media costs have trended upward, so channel CAC targets need regular re-checking
 - Privacy regulations, consent requirements, ad blockers, and browser tracking limits (Safari and Firefox block third-party cookies by default) are reducing attribution accuracy. Chrome did not deprecate third-party cookies — it kept user choice and is retiring most Privacy Sandbox APIs (as of September 2026, [Privacy Sandbox update](https://privacysandbox.google.com/blog/update-on-plans-for-privacy-sandbox-technologies)) — so plan around consent mode, server-side tagging, and conversion APIs (Meta CAPI, Google Enhanced Conversions), not a cookie cutoff date
 - AI-enhanced bidding strategies (Google Performance Max, LinkedIn Maximize Conversions) are becoming standard
 
@@ -417,4 +417,4 @@ example_data = [
 - Partnerships: $100-$300
 - Blended Target: <$300
 
-**2026 Context:** These benchmarks reflect Series A B2B SaaS. Overall B2B SaaS CAC has risen to $1,200 average across all segments (up 40-60% since 2023). Self-serve models target $100-500; enterprise segments can exceed $5,000. The median SaaS company spends $2 to acquire $1 of new ARR.
+**2026 Context:** These benchmarks reflect Series A B2B SaaS. B2B SaaS CAC is widely reported to have risen in recent years and varies widely by motion: self-serve models run far lower than enterprise segments. Re-check the targets against your own trailing data each quarter.

@@ -1,10 +1,8 @@
 # AI PM Frameworks Guide
 
-A working reference for the frameworks, mental models, and policies that inform a 2026-era AI Feature PRD. Each entry includes attribution, the core idea, and the slot where it shows up in the PRD.
+A working reference for the frameworks, mental models, and policies that inform a 2026-era AI Feature PRD. Each entry includes its source (where an official one exists), the core idea, and the slot where it shows up in the PRD.
 
 ## 1. Software 2.0 (Andrej Karpathy)
-
-**Source:** Karpathy, "Software 2.0", 2017 (Medium), with updates through his 2024 "Intro to LLMs" talk.
 
 **Core idea:** In Software 1.0, the spec is human-written code. In Software 2.0, the spec is the dataset and the loss function -- the model weights are *compiled* from data. The PRD must spec **the data, the metric, and the eval**, not just the function signature.
 
@@ -58,21 +56,17 @@ Official sources: the Commission's AI Act policy page (digital-strategy.ec.europ
 
 **Practical implication:** If the product is sold or used in the EU, the tier determines your audit, documentation, and human-oversight obligations. The deferral moves the high-risk deadline, not the classification: a feature that is High-risk still needs its conformity work scoped now, and Limited-risk transparency duties already apply. Pair with `ra-qm-team/eu-ai-act-specialist/` for the full conformity assessment.
 
-## 5. Reforge AI PM Curriculum (Aakash Gupta + Reforge)
+## 5. The AI PM Job: Four Responsibilities
 
-**Source:** Reforge "AI for Product Managers" curriculum (2024-2025), Aakash Gupta's "Product Growth" essays on AI PM.
-
-**Core idea:** The AI PM job sits at the intersection of (a) defining the eval, (b) selecting the right architecture (prompt vs RAG vs fine-tune vs agent), (c) managing the cost-quality-latency Pareto, and (d) handling non-determinism in UX. The "80/20" thesis: 80% of teams jumping to fine-tuning should have iterated on prompts and retrieval first.
+**Core idea:** The AI PM job sits at the intersection of (a) defining the eval, (b) selecting the right architecture (prompt vs RAG vs fine-tune vs agent), (c) managing the cost-quality-latency Pareto, and (d) handling non-determinism in UX. A common failure: teams jump to fine-tuning before they have iterated on prompts and retrieval.
 
 **PRD slot:** Section 9.2 (architecture choice with rejected alternatives) and Section 7 (UX patterns for non-determinism, such as cite-source, regenerate, undo).
 
 **Practical implication:** The PRD must justify the architecture choice against the cheaper alternative. "We need a fine-tune because the prompt does not work" is a hypothesis -- the PRD captures the eval evidence that supports or refutes it.
 
-## 6. Lenny's AI PM Templates (Lenny Rachitsky + community)
+## 6. Conventional AI PRD Structure
 
-**Source:** Lenny's Newsletter and the AI PM community templates (Lenny.ai, various PM Slack communities, 2024-2026).
-
-**Core idea:** AI feature PRDs are converging on a shared structure: a model card section, an eval section, a guardrails section, and a deployment-ramp section. The community has settled on patterns; reuse them.
+**Core idea:** AI feature PRDs are converging on a shared structure: a model card section, an eval section, a guardrails section, and a deployment-ramp section. The patterns are settled; reuse them.
 
 **PRD slot:** All of Sections 9-11.
 
@@ -167,16 +161,13 @@ Bad answers (these are tells that the team is AI-washing):
 
 If you cannot write a credible "AI premium" paragraph, the feature should be deterministic.
 
-## Reading list
+## Official sources
 
-- Andrej Karpathy, "Software 2.0" (2017)
 - OpenAI, "Model Spec" (latest version)
 - Anthropic, "Responsible Scaling Policy" (latest version)
 - Regulation (EU) 2024/1689 ("EU AI Act"), as amended by Regulation (EU) 2026/1744 (Digital Omnibus on AI)
 - NIST AI RMF 1.0 + Generative AI Profile
 - ISO/IEC 42001:2023
-- Aakash Gupta, "Product Growth" essays on AI PM (2024-2026)
-- Lenny Rachitsky, "Lenny's Newsletter" AI PM series
 
 ---
 **Last Updated:** 2026-09-21

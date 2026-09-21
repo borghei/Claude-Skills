@@ -27,7 +27,7 @@ It worked because it made the **confidence gradient explicit**. A team can commi
 
 ## Part 2: Cagan's "right-size the roadmap"
 
-Marty Cagan (Silicon Valley Product Group) argues that the right format for a roadmap depends on **how confident the team can be** at each horizon. His rule of thumb:
+Marty Cagan argues that the right format for a roadmap depends on **how confident the team can be** at each horizon. His rule of thumb:
 
 | Horizon | Confidence | Right level of commitment |
 |---------|------------|---------------------------|
@@ -222,7 +222,7 @@ Skip the executive variant and instead present the customer variant + an exec-on
 
 ## Further reading
 
-- Janna Bastow, "The Now-Next-Later Roadmap" (ProdPad blog)
+- Janna Bastow -- originator of the Now-Next-Later roadmap format
 - Marty Cagan, "Empowered" (Wiley, 2020) -- Chapter on right-sized roadmaps
 - Teresa Torres, "Continuous Discovery Habits" (2021) -- Opportunity Solution Trees as outcome inputs
 - C. Todd Lombardo et al., "Product Roadmaps Relaunched" (O'Reilly, 2017)

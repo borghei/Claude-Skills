@@ -26,6 +26,7 @@ title: Marketing Skills
 |---|---|:---:|
 | [seo-specialist](https://github.com/borghei/Claude-Skills/blob/main/marketing/seo-specialist/SKILL.md) | Technical SEO, content optimization, link building, keyword research | 3 |
 | [seo-audit](https://github.com/borghei/Claude-Skills/blob/main/marketing/seo-audit/SKILL.md) | 85-point technical SEO audit -- crawlability, Core Web Vitals, content quality | 3 |
+| [aeo](https://github.com/borghei/Claude-Skills/blob/main/marketing/aeo/SKILL.md) | Answer Engine Optimization -- get cited in ChatGPT, Claude, Perplexity and Gemini answers | 3 |
 | [ai-seo](https://github.com/borghei/Claude-Skills/blob/main/marketing/ai-seo/SKILL.md) | Optimize for AI search engines -- Google AI Overviews, ChatGPT, Perplexity | 3 |
 | [programmatic-seo](https://github.com/borghei/Claude-Skills/blob/main/marketing/programmatic-seo/SKILL.md) | Template-based page generation at scale with data pipelines | 3 |
 | [schema-markup](https://github.com/borghei/Claude-Skills/blob/main/marketing/schema-markup/SKILL.md) | JSON-LD for 20+ schema types, rich snippets, Knowledge Graph optimization | 3 |
@@ -37,6 +38,7 @@ title: Marketing Skills
 | Skill | Description | Tools |
 |---|---|:---:|
 | [paid-ads](https://github.com/borghei/Claude-Skills/blob/main/marketing/paid-ads/SKILL.md) | Google Ads, Meta, LinkedIn, Twitter/X, TikTok campaign management | 3 |
+| [conversational-ads](https://github.com/borghei/Claude-Skills/blob/main/marketing/conversational-ads/SKILL.md) | Ads in ChatGPT, Google AI Overviews / AI Mode and Copilot -- placement mix, holdout tests, copy linting | 2 |
 | [ad-creative](https://github.com/borghei/Claude-Skills/blob/main/marketing/ad-creative/SKILL.md) | Platform-specific ad creative with A/B testing frameworks | 3 |
 | [marketing-demand-acquisition](https://github.com/borghei/Claude-Skills/blob/main/marketing/marketing-demand-acquisition/SKILL.md) | Multi-channel demand gen, paid media optimization, partnership programs | 1 |
 | [marketing-strategy-pmm](https://github.com/borghei/Claude-Skills/blob/main/marketing/marketing-strategy-pmm/SKILL.md) | Product marketing -- positioning, GTM strategy, competitive battlecards | 3 |
@@ -73,3 +75,9 @@ title: Marketing Skills
 | [brand-guidelines](https://github.com/borghei/Claude-Skills/blob/main/marketing/brand-guidelines/SKILL.md) | Visual identity, voice and tone, typography, color systems, logo usage | 3 |
 | [growth-marketer](https://github.com/borghei/Claude-Skills/blob/main/marketing/growth-marketer/SKILL.md) | Experimentation, AARRR funnel optimization, acquisition channels | 3 |
 | [ab-test-setup](https://github.com/borghei/Claude-Skills/blob/main/marketing/ab-test-setup/SKILL.md) | Sample size calculation, test design, statistical significance analysis | 3 |
+
+## Compliance
+
+| Skill | Description | Tools |
+|---|---|:---:|
+| [ai-content-disclosure](https://github.com/borghei/Claude-Skills/blob/main/marketing/ai-content-disclosure/SKILL.md) | AI-content and review disclosure checks -- EU AI Act Art. 50, FTC reviews rule and Endorsement Guides, platform AI labels | 2 |

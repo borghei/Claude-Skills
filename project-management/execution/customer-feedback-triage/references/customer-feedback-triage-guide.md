@@ -153,9 +153,6 @@ A triage program is working when:
 - Marty Cagan, *Inspired: How to Create Tech Products Customers Love* (2nd ed., 2017)
 - Marty Cagan, *Empowered* (2020)
 - Noriaki Kano et al., "Attractive Quality and Must-Be Quality," *Journal of the Japanese Society for Quality Control*, 14(2), 1984
-- Reforge "Customer Development" — https://www.reforge.com/programs/customer-development
-- ProductPlan, "How to Manage Product Feedback" — https://www.productplan.com/learn/product-feedback/
-- Patrick Campbell (ProfitWell), "Pricing and Voice of Customer" — https://www.profitwell.com/
 
 ---
 
@@ -187,13 +184,13 @@ Kano classifies features by how their presence or absence affects customer satis
 
 Kano categories shift over time: today's delighter becomes tomorrow's basic. The categorization in this triage workflow is the team's current snapshot.
 
-### Reforge: Layered customer development
+### Layered customer development
 
-Reforge frames customer development as concentric rings: stated needs → revealed jobs → underlying motivations. The triage workflow operates at the first ring (stated needs, captured in the request text). It explicitly routes high-signal items into deeper discovery work to surface the second and third rings.
+Customer development can be framed as concentric rings: stated needs → revealed jobs → underlying motivations. The triage workflow operates at the first ring (stated needs, captured in the request text). It explicitly routes high-signal items into deeper discovery work to surface the second and third rings.
 
-### ProductPlan: Request management
+### Request management
 
-Three principles, drawn from ProductPlan's request-management practice and adopted here:
+Three principles of request management, adopted here:
 
 1. **Always acknowledge.** Every request, even ones that get a "no", gets a response. Customer silence is the fastest path to lost trust.
 2. **Sometimes commit.** Commit only when the item is scored, prioritized, and on the roadmap with a date the team will actually hit.

@@ -97,7 +97,7 @@ The mantra: blameless in the post-mortem, accountable in the action items, perfo
 
 ## References
 
-- John Allspaw, "Blameless PostMortems and a Just Culture" (Etsy Code as Craft, 2012) — https://www.etsy.com/codeascraft/blameless-postmortems
+- John Allspaw, "Blameless PostMortems and a Just Culture" (Etsy, 2012)
 - Richard Cook, "How Complex Systems Fail" (1998) — short paper, essential reading
 - Sidney Dekker, *The Field Guide to Understanding "Human Error"* (3rd ed., 2014)
 - Sidney Dekker, *Just Culture* (3rd ed., 2017)

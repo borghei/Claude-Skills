@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-09-21T21:39:19+00:00",
+  "updated": "2026-09-21T21:54:56+00:00",
   "total_skills": 372,
   "skills": [
     {
@@ -4011,7 +4011,7 @@
     },
     {
       "name": "quarterly-planning",
-      "description": "Run the full quarterly planning cycle -- pre-quarter homework, kickoff, weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical Focus, Cagan strategy, and the Reforge cycle around your OKRs.",
+      "description": "Run the full quarterly planning cycle -- pre-quarter homework, kickoff, weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical Focus, Cagan strategy, and a fixed planning cadence around your OKRs.",
       "domain": "project-management",
       "path": "project-management/execution/quarterly-planning/SKILL.md",
       "tools": [],

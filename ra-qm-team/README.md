@@ -1,6 +1,6 @@
 # Regulatory Affairs & Quality Management Skills Collection
 
-**Complete suite of 12 world-class expert skills** for HealthTech and MedTech organizations covering regulatory compliance, quality management, risk management, security, and audit excellence.
+**27 regulatory, quality and compliance skills** (including 6 audit-prep playbooks) for HealthTech, MedTech and regulated SaaS organizations covering regulatory compliance, quality management, risk management, security, and audit excellence.
 
 ---
 
@@ -21,50 +21,34 @@
 
 ## ⚡ Installation
 
-### Quick Install (Recommended)
-
-Install all RA/QM skills with one command:
+### Whole domain (Claude Code plugin)
 
 ```bash
-# Install all RA/QM skills to all supported agents
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team
-
-# Install to Claude Code only
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team --agent claude
-
-# Install to Cursor only
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team --agent cursor
+# In Claude Code:
+/plugin marketplace add borghei/Claude-Skills
+/plugin install ra-qm-skills@claude-code-skills
 ```
 
-### Install Individual Skills
+### Individual skills (any assistant)
 
 ```bash
-# Strategic Leadership
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/regulatory-affairs-head
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/quality-manager-qmr
-
-# Quality Systems
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/quality-manager-qms-iso13485
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/capa-officer
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/quality-documentation-manager
-
-# Risk & Security
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/risk-management-specialist
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/information-security-manager-iso27001
-
-# Regulatory Specialists
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/mdr-745-specialist
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/fda-consultant-specialist
-
-# Audit & Compliance
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/qms-audit-expert
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/isms-audit-expert
-npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/gdpr-dsgvo-expert
+npx @borghei/claude-skills add regulatory-affairs-head
+npx @borghei/claude-skills add quality-manager-qmr
+npx @borghei/claude-skills add quality-manager-qms-iso13485
+npx @borghei/claude-skills add capa-officer
+npx @borghei/claude-skills add quality-documentation-manager
+npx @borghei/claude-skills add risk-management-specialist
+npx @borghei/claude-skills add information-security-manager-iso27001
+npx @borghei/claude-skills add mdr-745-specialist
+npx @borghei/claude-skills add fda-consultant-specialist
+npx @borghei/claude-skills add qms-audit-expert
+npx @borghei/claude-skills add isms-audit-expert
+npx @borghei/claude-skills add gdpr-dsgvo-expert
 ```
 
-**Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
+The CLI auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose (`--to <target>` to force one). Browse every skill with `npx @borghei/claude-skills list --domain ra-qm-team`.
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+**Complete Installation Guide:** See [docs/INSTALLATION.md](../docs/INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
 
 ---
 
@@ -73,7 +57,7 @@ npx ai-agent-skills install borghei/Claude-Skills/ra-qm-team/gdpr-dsgvo-expert
 This comprehensive skills collection provides **world-class regulatory affairs and quality management capabilities** for HealthTech and MedTech organizations navigating complex global regulatory landscapes.
 
 **What's Included:**
-- **12 expert-level skills** across 5 specialized layers
+- **27 skills**; the 12 core RA/QM skills across 5 specialized layers are covered in depth below (full list: [Compliance catalog](../docs/skills/compliance.md))
 - **36 Python automation tools** for compliance tracking and reporting
 - **36 comprehensive reference guides** with regulatory frameworks
 - **Complete coverage** of EU MDR, FDA, ISO 13485, ISO 27001, GDPR compliance

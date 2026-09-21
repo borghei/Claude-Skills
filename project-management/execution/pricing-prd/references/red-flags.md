@@ -4,7 +4,7 @@
 
 ## How to use this document
 
-Scan the pricing PRD before review with Finance / Legal / Marketing / Sales. Each red flag shows the *bad* version next to the *good* version, anchored to Ramanujam's *Monetizing Innovation*, Van Westendorp's PSM, and Reforge pricing experimentation discipline.
+Scan the pricing PRD before review with Finance / Legal / Marketing / Sales. Each red flag shows the *bad* version next to the *good* version, anchored to Ramanujam's *Monetizing Innovation*, Van Westendorp's PSM, and controlled pricing-experiment discipline.
 
 ---
 
@@ -197,7 +197,7 @@ Scan the pricing PRD before review with Finance / Legal / Marketing / Sales. Eac
 
 **Symptom.** Pricing tiers: Starter $9, Pro $99, Business $999. Customers at Pro who outgrow it downgrade rather than upgrade because the jump is too steep.
 
-**Why it's bad.** Reforge's packaging principle: value gap between tiers should be at least 2x; price gap should match. A 10x price jump (Pro→Business here) with only a 2-3x value increase causes customers to fall off the upgrade ramp.
+**Why it's bad.** Packaging principle: value gap between tiers should be at least 2x; price gap should match. A 10x price jump (Pro→Business here) with only a 2-3x value increase causes customers to fall off the upgrade ramp.
 
 **Bad example:**
 > "Starter $9 (1 user), Pro $99 (5 users), Business $999 (20 users). Pro customers wanting 6 users: downgrade rather than pay $999."
@@ -241,7 +241,7 @@ Scan the pricing PRD before review with Finance / Legal / Marketing / Sales. Eac
 
 **Good example:**
 > "AI assistant: per-conversation usage-based pricing ($0.30 per conversation) with a $99/mo platform fee. Per-seat option: only as an unlimited-conversation enterprise tier ($999/mo for orgs that prefer predictability).
-> Per-conversation aligns price with value: more usage → more value delivered → more revenue. No adoption disincentive. Reforge research showed Anthropic Claude API, OpenAI, and most modern AI products converged on usage-based; per-seat AI products declined in 2025-2026."
+> Per-conversation aligns price with value: more usage → more value delivered → more revenue. No adoption disincentive. Model APIs (Anthropic, OpenAI) are priced on usage, so our cost scales with usage too; per-seat pricing leaves that cost unhedged."
 
 **How to catch it.** Is the product AI-mediated, and is pricing per-seat? If yes, value-to-price alignment is broken.
 
@@ -270,7 +270,7 @@ Scan the pricing PRD before review with Finance / Legal / Marketing / Sales. Eac
 - references/pricing-experimentation-guide.md
 - references/packaging-frameworks.md
 - Madhavan Ramanujam & Georg Tacke, *Monetizing Innovation* (2016)
-- Patrick Campbell (ProfitWell/Paddle), "Pricing as a feature"
+- Patrick Campbell, "Pricing as a feature"
 - Peter Van Westendorp, "NSS-Price Sensitivity Meter" (1976)
 - `business-growth/pricing-strategy/` (strategic input)
 - `feature-flag-strategy/` (rollout mechanics)

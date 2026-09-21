@@ -4,7 +4,7 @@
 
 ## How to use this document
 
-Scan the triage queue, the `feedback_triage.py` output, and the response distribution before the weekly triage meeting. Each red flag shows the *bad* version next to the *good* version, anchored to Marty Cagan's Request/Opportunity/Solution separation, Noriaki Kano's model, and ProductPlan's request-management discipline.
+Scan the triage queue, the `feedback_triage.py` output, and the response distribution before the weekly triage meeting. Each red flag shows the *bad* version next to the *good* version, anchored to Marty Cagan's Request/Opportunity/Solution separation, Noriaki Kano's model, and the acknowledge/commit/promise request-management discipline.
 
 ---
 
@@ -76,7 +76,7 @@ Scan the triage queue, the `feedback_triage.py` output, and the response distrib
 
 **Symptom.** A customer submits feedback via the in-app widget. They never receive a response. Six months later, they don't bother submitting again.
 
-**Why it's bad.** Acknowledgment debt is the fastest path to lost signal volume. The ProductPlan discipline: "always acknowledge, sometimes commit, rarely promise". A non-acknowledgment teaches customers that feedback is futile. The cost compounds — next quarter, fewer customers submit.
+**Why it's bad.** Acknowledgment debt is the fastest path to lost signal volume. The request-management discipline: "always acknowledge, sometimes commit, rarely promise". A non-acknowledgment teaches customers that feedback is futile. The cost compounds — next quarter, fewer customers submit.
 
 **Bad example:**
 > "Last quarter: 340 inbound feedback items. Items with acknowledgment: 120 (35%). The other 220 were logged and triaged but no customer-facing response."
