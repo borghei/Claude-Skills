@@ -128,67 +128,117 @@ Pick your role and start with the 3-4 skills that match your daily work:
 
 ## Skill catalog
 
-### Role-based (12 skills)
+### Role-Based Skills (10)
 
-| Skill | Focus | Python tools |
-|---|---|:---:|
-| [senior-pm](https://github.com/borghei/Claude-Skills/tree/main/project-management/senior-pm) | Portfolio, stakeholder mapping, EMV risk | 4 |
-| [scrum-master](https://github.com/borghei/Claude-Skills/tree/main/project-management/scrum-master) | Sprint analytics, velocity, team health | 4 |
-| [delivery-manager](https://github.com/borghei/Claude-Skills/tree/main/project-management/delivery-manager) | Release management, incident response | — |
-| [program-manager](https://github.com/borghei/Claude-Skills/tree/main/project-management/program-manager) | Multi-project coordination | — |
-| [agile-coach](https://github.com/borghei/Claude-Skills/tree/main/project-management/agile-coach) | Agile transformation, coaching | — |
+| Skill | Focus | Python Tools |
+|---|---|---|
+| [senior-pm](https://github.com/borghei/Claude-Skills/tree/main/project-management/senior-pm) | Portfolio, stakeholder mapping, EMV risk | 4 scripts |
+| [scrum-master](https://github.com/borghei/Claude-Skills/tree/main/project-management/scrum-master) | Sprint analytics, velocity, team health | 4 scripts |
+| [delivery-manager](https://github.com/borghei/Claude-Skills/tree/main/project-management/delivery-manager) | Release, deployment, incident response | — |
+| [program-manager](https://github.com/borghei/Claude-Skills/tree/main/project-management/program-manager) | Multi-project coordination, dependencies | — |
+| [agile-coach](https://github.com/borghei/Claude-Skills/tree/main/project-management/agile-coach) | Agile transformation, maturity assessment | — |
 | [jira-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/jira-expert) | Jira admin, JQL, automation | — |
-| [linear-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/linear-expert) ★ NEW | Linear GraphQL, Jira → Linear migration | — |
 | [confluence-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/confluence-expert) | Documentation, knowledge management | — |
-| [notion-pm](https://github.com/borghei/Claude-Skills/tree/main/project-management/notion-pm) ★ NEW | Notion DBs for PRDs/OKRs/Roadmap/Decisions | — |
-| [atlassian-admin](https://github.com/borghei/Claude-Skills/tree/main/project-management/atlassian-admin) | Atlassian suite administration | — |
-| [atlassian-templates](https://github.com/borghei/Claude-Skills/tree/main/project-management/atlassian-templates) | Jira/Confluence templates | — |
-| [sprint-retrospective](https://github.com/borghei/Claude-Skills/tree/main/project-management/sprint-retrospective) | Data-driven sprint retros | 4 |
+| [atlassian-admin](https://github.com/borghei/Claude-Skills/tree/main/project-management/atlassian-admin) | Suite administration | — |
+| [atlassian-templates](https://github.com/borghei/Claude-Skills/tree/main/project-management/atlassian-templates) | Ready-to-use Jira/Confluence templates | — |
+| [sprint-retrospective](https://github.com/borghei/Claude-Skills/tree/main/project-management/sprint-retrospective) | Data-driven retros | — |
 
-### Discovery (5 skills)
+### Team Operations (2)
+
+| Skill | Focus |
+|---|---|
+| [meeting-analyzer](https://github.com/borghei/Claude-Skills/tree/main/project-management/meeting-analyzer) | Meeting notes → decision/action register, ownerless-item flags, follow-through tracking |
+| [team-communications](https://github.com/borghei/Claude-Skills/tree/main/project-management/team-communications) | Channel routing, meeting-load reduction, escalation SLAs, timezone norms |
+
+### Integration Skills (3)
+
+| Skill | Focus |
+|---|---|
+| [linear-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/linear-expert) | Linear admin, GraphQL queries, Jira → Linear migration |
+| [notion-pm](https://github.com/borghei/Claude-Skills/tree/main/project-management/notion-pm) | Notion DBs for PRDs/OKRs/Roadmap/Decisions, API patterns |
+| [productboard-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/productboard-expert) ★ NEW | Productboard admin, Insight inbox triage, Driver scoring, REST API |
+
+### Discovery Skills (11) — `discovery/`
 
 | Skill | Focus | Framework |
 |---|---|---|
-| [brainstorm-ideas](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-ideas) | Product Trio ideation | Opportunity Solution Tree |
-| [brainstorm-experiments](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments) | Lean experiment design | XYZ Hypothesis |
-| [identify-assumptions](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/identify-assumptions) | Assumption mapping | 4-8 risk categories |
-| [pre-mortem](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/pre-mortem) | Pre-launch risk analysis | Tiger/Paper Tiger/Elephant |
-| [interview-synthesis](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/interview-synthesis) ★ NEW | Interview → opportunity tree | JTBD + Opportunity tree |
+| [brainstorm-ideas](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-ideas) | Product Trio ideation | Opportunity Solution Tree (Torres) |
+| [brainstorm-experiments](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments) | Lean experiment design | XYZ Hypothesis (Savoia) |
+| [identify-assumptions](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/identify-assumptions) | Assumption mapping | Torres 4-8 risk categories |
+| [pre-mortem](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/pre-mortem) | Pre-launch risk analysis | Tiger/Paper Tiger/Elephant (Klein) |
+| [interview-synthesis](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/interview-synthesis) | Interview → opportunity tree | Torres + Portigal + Klement |
+| [customer-interview-script](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/customer-interview-script) ★ NEW | How to RUN a discovery interview | Portigal + Fitzpatrick + Torres |
+| [value-proposition-canvas](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/value-proposition-canvas) ★ NEW | Strategyzer VPC (Customer Profile + Value Map) | Osterwalder + Strategyzer |
+| [jtbd-workshop](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/jtbd-workshop) ★ NEW | Full Jobs-To-Be-Done workshop | Christensen + Ulwick + Moesta + Klement |
+| [opportunity-solution-tree](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/opportunity-solution-tree) | Outcome → opportunities → solutions → assumption tests | Opportunity Solution Tree (Torres) |
+| [metrics-dashboard](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/metrics-dashboard) | Decision-grade dashboard: North Star, inputs, guardrails | Metric layers + owners + cadence |
+| [ai-prototyping](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/ai-prototyping) ★ NEW | Idea → AI prototype → user validation → handoff | Uncertainty-type decision + F0-F4 fidelity ladder |
 
-### Execution (21 skills)
+### Execution Skills (33) — `execution/`
 
 | Skill | Focus | Framework |
 |---|---|---|
 | [create-prd](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/create-prd) | 8-section PRD scaffolding | PRD canonical |
-| [prfaq](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prfaq) ★ NEW | Working Backwards PR/FAQ | Amazon Bezos PRFAQ |
-| [brainstorm-okrs](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/brainstorm-okrs) | OKR brainstorming | Wodtke Radical Focus |
-| [north-star-metric](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/north-star-metric) ★ NEW | NSM + input metric tree | Ellis + Amplitude |
+| [prfaq](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prfaq) | Working Backwards PR/FAQ | Amazon Bezos PRFAQ |
+| [ai-feature-prd](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/ai-feature-prd) ★ NEW | PRDs for AI/ML features | Karpathy + Anthropic RSP + AI eval practice |
+| [pricing-prd](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/pricing-prd) ★ NEW | Pricing experiments and pricing-page PRDs | Ramanujam + Campbell + Westendorp PSM |
+| [product-vision](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/product-vision) ★ NEW | Vision document (above NSM) | Pichler + Moore + Raskin + Cagan |
+| [brainstorm-okrs](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/brainstorm-okrs) | OKR brainstorming | Wodtke "Radical Focus" |
+| [north-star-metric](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/north-star-metric) | NSM + input metric tree | Ellis + Amplitude framework |
+| [quarterly-planning](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/quarterly-planning) ★ NEW | Full Q1 cycle (kickoff → mid-Q → close) | Wodtke + Cagan + RAD |
 | [outcome-roadmap](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/outcome-roadmap) | Output → outcome roadmap | Now/Next/Later |
-| [roadmap-communication](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/roadmap-communication) ★ NEW | Exec/customer/internal variants | Cagan right-sizing |
-| [prioritization-frameworks](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prioritization-frameworks) | 9-framework scoring | RICE, ICE, MoSCoW, ... |
-| [backlog-refinement](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/backlog-refinement) ★ NEW | INVEST + DoR/DoD + splitting | INVEST (Wake) |
-| [story-splitting](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/story-splitting) ★ NEW | Vertical slicing patterns | Lawrence's 9 patterns |
+| [roadmap-communication](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/roadmap-communication) | Exec/customer/internal variants | Cagan right-sizing |
+| [prioritization-frameworks](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prioritization-frameworks) | 9-framework scoring | RICE, ICE, Opportunity, MoSCoW, Weighted |
+| [backlog-refinement](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/backlog-refinement) | INVEST + DoR/DoD + splitting | INVEST (Wake) |
+| [story-splitting](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/story-splitting) | Vertical slicing patterns | Lawrence 9 patterns |
 | [story-mapping](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/story-mapping) | User story mapping | Jeff Patton |
 | [job-stories](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/job-stories) | JTBD backlog format | When/Want/So (Klement) |
-| [wwas](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/wwas) | Why-What-Acceptance | WWAS |
-| [cycle-time-analyzer](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/cycle-time-analyzer) ★ NEW | Flow metrics, CFD, Little's Law | Vacanti Kanban metrics |
-| [dependency-map](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/dependency-map) ★ NEW | Cross-team blockers, critical path | CPM + DSM + Conway |
-| [status-update-generator](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/status-update-generator) ★ NEW | Weekly exec update | SBNR + R/Y/G |
-| [summarize-meeting](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting) | Meeting summaries | Actions + decisions |
+| [wwas](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/wwas) | Why-What-Acceptance backlog | WWAS |
+| [customer-feedback-triage](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/customer-feedback-triage) ★ NEW | Inbound feedback → categorize → score → backlog | Kano + Cagan request-to-opportunity |
+| [activation-funnel](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/activation-funnel) ★ NEW | AARRR funnel design + analyzer | McClure + Ellis + Chen |
+| [feature-flag-strategy](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/feature-flag-strategy) ★ NEW | Phased rollouts, kill-switches, flag debt | Fowler toggle taxonomy |
+| [cycle-time-analyzer](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/cycle-time-analyzer) | Flow metrics, CFD, Little's Law | Vacanti Kanban metrics |
+| [dependency-map](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/dependency-map) | Cross-team blockers, critical path | CPM + DSM + Conway's Law |
+| [status-update-generator](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/status-update-generator) | Weekly exec update | SBNR + traffic-light |
+| [summarize-meeting](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting) | Meeting summaries | Action items + decisions |
 | [daci-framework](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/daci-framework) | Decision facilitation | DACI |
-| [beta-program](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/beta-program) ★ NEW | Closed beta playbook | Kano + cohort design |
-| [launch-playbook](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/launch-playbook) ★ NEW | Launch coordination | Alpha/beta/GA + RACI |
-| [release-notes](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/release-notes) | Release notes generation | Category-based |
+| [beta-program](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/beta-program) | Closed beta playbook | Kano + cohort design |
+| [launch-playbook](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/launch-playbook) | Launch coordination | Alpha/beta/GA + RACI |
+| [post-mortem](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/post-mortem) ★ NEW | Blameless incident RCA | Google SRE + Allspaw + Dekker + Perrow |
+| [release-notes](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/release-notes) | Release notes from tickets | Category-based |
 | [eol-communication](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/eol-communication) | End-of-life messaging | Sunset playbook |
+| [sprint-plan](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/sprint-plan) | Capacity, commitment vs stretch, sprint risks | Capacity planning |
+| [stakeholder-map](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/stakeholder-map) | Power × interest map + comms plan | Power/interest grid |
+| [test-scenarios](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/test-scenarios) | Spec → test scenario coverage with gap analyzer | Happy/edge/error/a11y/security/perf |
+| [agents-in-the-team](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/agents-in-the-team) ★ NEW | Delivery when AI agents take tickets | DORA metrics + Scrum Guide Expansion Pack (AI) |
 
-### Career growth (4 skills) — ★ NEW sub-domain
+### Strategy Frameworks (5) — `strategy-frameworks/`
 
 | Skill | Focus | Framework |
 |---|---|---|
-| [pm-interview-prep](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-interview-prep) | APM → Group PM interview prep | CIRCLES + STAR + Decode and Conquer |
+| [business-model-canvas](https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/business-model-canvas) | Build and stress-test all 9 blocks | Business Model Canvas (Osterwalder) |
+| [lean-canvas](https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/lean-canvas) | 1-page model for idea / pre-PMF / pivot | Lean Canvas (Maurya) |
+| [swot-analysis](https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/swot-analysis) | Strategic positioning | SWOT + TOWS |
+| [porters-five-forces](https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/porters-five-forces) | Industry attractiveness and margin pressure | Porter's Five Forces |
+| [ansoff-matrix](https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/ansoff-matrix) | Growth options and their risk | Ansoff Matrix |
+
+### Go-to-Market (2) — `gtm/`
+
+| Skill | Focus |
+|---|---|
+| [gtm-strategy](https://github.com/borghei/Claude-Skills/tree/main/project-management/gtm/gtm-strategy) | ICP, motion, channels, messaging, metrics, launch plan |
+| [ideal-customer-profile](https://github.com/borghei/Claude-Skills/tree/main/project-management/gtm/ideal-customer-profile) | Firmographics, behavioral signals, JTBD, buyer persona |
+
+### Career Skills (4) — `career/`
+
+| Skill | Focus | Framework |
+|---|---|---|
+| [pm-interview-prep](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-interview-prep) | APM → Group PM interview prep | CIRCLES (Lin) + STAR + Decode and Conquer |
 | [pm-career-ladder](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-career-ladder) | Rubrics + growth + promo packets | Square/Stripe ladders |
-| [pm-onboarding](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-onboarding) | 30-60-90 day plan | Watkins First 90 Days + STARS |
-| [pm-1on1s](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-1on1s) | 1:1 templates by partner type | Radical Candor + GROW |
+| [pm-onboarding](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-onboarding) | 30-60-90 day plan | Watkins "First 90 Days" + STARS |
+| [pm-1on1s](https://github.com/borghei/Claude-Skills/tree/main/project-management/career/pm-1on1s) | 1:1 templates by partner type | Radical Candor + GROW + Manager Tools |
+
+★ NEW = added in the May 2026 expansion or the September 2026 refresh.
 
 ---
 

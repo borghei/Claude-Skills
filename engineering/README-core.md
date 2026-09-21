@@ -4,54 +4,40 @@ Complete set of 18 engineering role skills tailored to your tech stack (ReactJS,
 
 ## ⚡ Installation
 
-### Quick Install (Recommended)
-
-Install all engineering skills with one command:
+### Whole domain (Claude Code plugin)
 
 ```bash
-# Install all engineering skills to all supported agents
-npx ai-agent-skills install borghei/Claude-Skills/engineering
-
-# Install to Claude Code only
-npx ai-agent-skills install borghei/Claude-Skills/engineering --agent claude
-
-# Install to Cursor only
-npx ai-agent-skills install borghei/Claude-Skills/engineering --agent cursor
+# In Claude Code:
+/plugin marketplace add borghei/Claude-Skills
+/plugin install engineering-advanced-skills@claude-code-skills
 ```
 
-### Install Individual Skills
+### Individual skills (any assistant)
 
 ```bash
-# Core Engineering
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-architect
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-frontend
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-backend
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-fullstack
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-qa
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-devops
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-secops
-npx ai-agent-skills install borghei/Claude-Skills/engineering/code-reviewer
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-security
-
-# Cloud & Enterprise
-npx ai-agent-skills install borghei/Claude-Skills/engineering/aws-solution-architect
-npx ai-agent-skills install borghei/Claude-Skills/engineering/ms365-tenant-manager
-
-# Development Tools
-npx ai-agent-skills install borghei/Claude-Skills/engineering/tdd-guide
-npx ai-agent-skills install borghei/Claude-Skills/engineering/tech-stack-evaluator
-
-# AI/ML/Data
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-data-scientist
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-data-engineer
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-ml-engineer
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-prompt-engineer
-npx ai-agent-skills install borghei/Claude-Skills/engineering/senior-computer-vision
+npx @borghei/claude-skills add senior-architect
+npx @borghei/claude-skills add senior-frontend
+npx @borghei/claude-skills add senior-backend
+npx @borghei/claude-skills add senior-fullstack
+npx @borghei/claude-skills add senior-qa
+npx @borghei/claude-skills add senior-devops
+npx @borghei/claude-skills add senior-secops
+npx @borghei/claude-skills add code-reviewer
+npx @borghei/claude-skills add senior-security
+npx @borghei/claude-skills add aws-solution-architect
+npx @borghei/claude-skills add ms365-tenant-manager
+npx @borghei/claude-skills add tdd-guide
+npx @borghei/claude-skills add tech-stack-evaluator
+npx @borghei/claude-skills add senior-data-scientist
+npx @borghei/claude-skills add senior-data-engineer
+npx @borghei/claude-skills add senior-ml-engineer
+npx @borghei/claude-skills add senior-prompt-engineer
+npx @borghei/claude-skills add senior-computer-vision
 ```
 
-**Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
+The CLI auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose (`--to <target>` to force one). Browse every skill with `npx @borghei/claude-skills list --domain engineering`.
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+**Complete Installation Guide:** See [docs/INSTALLATION.md](../docs/INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
 
 ---
 
@@ -565,7 +551,7 @@ Edit markdown files to add:
 
 ## 🎯 Summary
 
-You now have **9 comprehensive engineering skills** that match your tech stack:
+You now have the **core engineering skills** that match your tech stack:
 
 1. ✅ **Senior Architect** - System design and architecture
 2. ✅ **Senior Frontend** - React/Next.js development

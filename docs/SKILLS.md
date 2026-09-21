@@ -6,6 +6,17 @@ Complete reference for **372 skills across 20 domains**. Each skill is a self-co
 
 ---
 
+## Sep 2026 Additions (4 new skills) and 2026 refresh
+
+AI-era skills for marketing and PM, plus a refresh of existing marketing and PM skills against 2025–2026 platform, API and regulatory changes (retired rich results, AI crawler controls, Productboard API v2, Jira enhanced search, Notion data sources, DORA 2024 benchmarks, EU AI Act Omnibus).
+
+- [ai-content-disclosure](../marketing/ai-content-disclosure/SKILL.md) — AI-content and review disclosure checks: EU AI Act Art. 50, FTC reviews rule, platform AI labels (2 tools)
+- [conversational-ads](../marketing/conversational-ads/SKILL.md) — Ads in ChatGPT, Google AI Overviews / AI Mode and Copilot (2 tools)
+- [ai-prototyping](../project-management/discovery/ai-prototyping/SKILL.md) — Idea → AI prototype → user validation → handoff gate (2 tools)
+- [agents-in-the-team](../project-management/execution/agents-in-the-team/SKILL.md) — Delivery when AI agents take tickets: delegation, review capacity, metrics (2 tools)
+
+---
+
 ## Jul 2026 Additions (25 new skills, 3 new domains)
 
 Three new domains plus fill-in across engineering, PM, productivity, marketing, data and finance.
@@ -336,6 +347,8 @@ Data-driven marketing with Python automation tools.
 | [ab-test-setup](../marketing/ab-test-setup/SKILL.md) | Sample size, test duration, significance for conversion experiments | 3 |
 | [video-content-strategist](../marketing/video-content-strategist/SKILL.md) | Video calendars, video SEO, thumbnail and title optimization | 3 |
 | [x-twitter-growth](../marketing/x-twitter-growth/SKILL.md) | Tweet analysis, thread building, posting schedule, follower growth | 3 |
+| [ai-content-disclosure](../marketing/ai-content-disclosure/SKILL.md) ★ NEW | AI-content and review disclosure checks: EU AI Act Art. 50, FTC reviews rule, platform AI labels | 2 |
+| [conversational-ads](../marketing/conversational-ads/SKILL.md) ★ NEW | Ads in ChatGPT, Google AI Overviews / AI Mode and Copilot: placement mix, holdout tests, copy linting | 2 |
 
 ## Product Team (13)
 
@@ -394,6 +407,7 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [metrics-dashboard](../project-management/discovery/metrics-dashboard/SKILL.md) | North star + inputs + guardrails; anti-vanity audit | 1 |
 | [customer-interview-script](../project-management/discovery/customer-interview-script/SKILL.md) | Scripted question hierarchy, behavior-over-opinion probes | - |
 | [jtbd-workshop](../project-management/discovery/jtbd-workshop/SKILL.md) | Switch interviews, forces of progress, ODI outcome scoring | - |
+| [ai-prototyping](../project-management/discovery/ai-prototyping/SKILL.md) ★ NEW | Idea → AI prototype → user validation → handoff gate | 2 |
 | [value-proposition-canvas](../project-management/discovery/value-proposition-canvas/SKILL.md) | Customer Profile + Value Map with fit validation | - |
 
 ### Execution Skills (32)
@@ -429,6 +443,7 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [customer-feedback-triage](../project-management/execution/customer-feedback-triage/SKILL.md) | Categorize, dedupe and score inbound feature requests | 1 |
 | [feature-flag-strategy](../project-management/execution/feature-flag-strategy/SKILL.md) | Flag taxonomy, rollout shapes, kill-switch tree, flag debt | - |
 | [post-mortem](../project-management/execution/post-mortem/SKILL.md) | Blameless post-mortems for incidents, escalations, failed experiments | - |
+| [agents-in-the-team](../project-management/execution/agents-in-the-team/SKILL.md) ★ NEW | Delegation policy, review capacity and agent vs human delivery metrics | 2 |
 | [stakeholder-map](../project-management/execution/stakeholder-map/SKILL.md) | Power × Interest 2x2 + DACI + blocker conversion plans | 1 |
 | [test-scenarios](../project-management/execution/test-scenarios/SKILL.md) | 7-category coverage (happy / edge / error / empty / concurrent / a11y / security) | 1 |
 | [sprint-plan](../project-management/execution/sprint-plan/SKILL.md) | Capacity math, commit/stretch discipline, DoD audit | 1 |

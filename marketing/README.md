@@ -1,6 +1,6 @@
 # Marketing Team Skills Collection
 
-**Complete suite of 6 expert marketing skills** for scaling tech companies covering content creation, demand generation, and product marketing strategy.
+**41 marketing skills** for scaling tech companies: content, SEO/AEO and AI search, paid and conversational ads, email, social, CRO, analytics, brand and product marketing, plus AI-content disclosure compliance. The [Skills Catalog](#skills-catalog) lists all 41; the flagship skills are covered in depth below.
 
 ---
 
@@ -20,52 +20,30 @@
 
 ## ⚡ Installation
 
-### Quick Install (Recommended)
-
-Install all marketing skills with one command:
+### Whole domain (Claude Code plugin)
 
 ```bash
-# Install all marketing skills to all supported agents
-npx ai-agent-skills install borghei/Claude-Skills/marketing
-
-# Install to Claude Code only
-npx ai-agent-skills install borghei/Claude-Skills/marketing --agent claude
-
-# Install to Cursor only
-npx ai-agent-skills install borghei/Claude-Skills/marketing --agent cursor
+# In Claude Code:
+/plugin marketplace add borghei/Claude-Skills
+/plugin install marketings@claude-code-skills
 ```
 
-### Install Individual Skills
+### Individual skills (any assistant)
 
 ```bash
-# Content Creator
-npx ai-agent-skills install borghei/Claude-Skills/marketing/content-creator
-
-# Demand Generation & Acquisition
-npx ai-agent-skills install borghei/Claude-Skills/marketing/marketing-demand-acquisition
-
-# Product Marketing Strategy
-npx ai-agent-skills install borghei/Claude-Skills/marketing/marketing-strategy-pmm
-
-# App Store Optimization
-npx ai-agent-skills install borghei/Claude-Skills/marketing/app-store-optimization
-
-# Social Media Analyzer
-npx ai-agent-skills install borghei/Claude-Skills/marketing/social-media-analyzer
-
-# Campaign Analytics
-npx ai-agent-skills install borghei/Claude-Skills/marketing/campaign-analytics
-
-# AI Content Disclosure (EU AI Act Art. 50, FTC reviews/endorsements, platform AI labels)
-npx ai-agent-skills install borghei/Claude-Skills/marketing/ai-content-disclosure
-
-# Conversational Ads (ChatGPT Ads, Google AI Overviews / AI Mode, Microsoft Copilot)
-npx ai-agent-skills install borghei/Claude-Skills/marketing/conversational-ads
+npx @borghei/claude-skills add content-creator
+npx @borghei/claude-skills add marketing-demand-acquisition
+npx @borghei/claude-skills add marketing-strategy-pmm
+npx @borghei/claude-skills add app-store-optimization
+npx @borghei/claude-skills add social-media-analyzer
+npx @borghei/claude-skills add campaign-analytics
+npx @borghei/claude-skills add ai-content-disclosure
+npx @borghei/claude-skills add conversational-ads
 ```
 
-**Supported Agents:** Claude Code, Cursor, VS Code, Copilot, Goose, Amp, Codex
+The CLI auto-detects Claude Code, Cursor, Codex, Gemini CLI, Copilot, Windsurf, Cline, Aider and Goose (`--to <target>` to force one). Browse every skill with `npx @borghei/claude-skills list --domain marketing`.
 
-**Complete Installation Guide:** See [../INSTALLATION.md](../INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
+**Complete Installation Guide:** See [docs/INSTALLATION.md](../docs/INSTALLATION.md) for detailed instructions, troubleshooting, and manual installation.
 
 ---
 
@@ -74,7 +52,7 @@ npx ai-agent-skills install borghei/Claude-Skills/marketing/conversational-ads
 This marketing skills collection provides comprehensive marketing capabilities from content creation through demand generation and strategic product marketing.
 
 **What's Included:**
-- **6 expert-level skills** covering content, acquisition, and strategy
+- **41 skills** covering content, search, acquisition, analytics, brand, strategy and compliance
 - **8+ Python automation tools** for content analysis and optimization
 - **Comprehensive frameworks** for demand gen, SEO, and product marketing
 - **Platform-specific playbooks** for LinkedIn, Google, Meta, and organic channels
@@ -94,6 +72,96 @@ This marketing skills collection provides comprehensive marketing capabilities f
 ---
 
 ## 📦 Skills Catalog
+
+All 41 marketing skills. Install one with `npx @borghei/claude-skills add <skill>`.
+
+#### Content & copy (7)
+
+| Skill | What it does |
+|---|---|
+| [`content-creator/`](content-creator/) | Create SEO-optimized marketing content with consistent brand voice, using a brand voice analyzer, SEO optimizer, and content frameworks |
+| [`content-strategy/`](content-strategy/) | Plan content strategy: content pillars, audience research, topic clustering, funnel mapping, and content audits |
+| [`content-production/`](content-production/) | Full content production pipeline from blank page to publish-ready piece: research, briefs, drafting, SEO, readability, and editorial gates |
+| [`content-humanizer/`](content-humanizer/) | Transform AI-generated content into human-sounding writing via AI pattern detection, rhythm restoration, and authenticity scoring |
+| [`copywriting/`](copywriting/) | Write persuasive marketing copy for homepages, landing, pricing, feature, and product pages using headline formulas, CTA frameworks, and… |
+| [`copy-editing/`](copy-editing/) | Systematic copy editing through focused passes (the Seven Sweeps Framework) covering clarity, voice, proof, specificity, and friction… |
+| [`video-content-strategist/`](video-content-strategist/) | Video content planning: content calendars, video SEO, platform formats, and performance analysis |
+
+#### SEO & AI search (7)
+
+| Skill | What it does |
+|---|---|
+| [`seo-specialist/`](seo-specialist/) | SEO covering technical SEO, content optimization, link building, keyword research, and search analytics |
+| [`seo-audit/`](seo-audit/) | Technical SEO auditing covering crawlability, indexation, Core Web Vitals, on-page optimization, and competitive gaps, with an 85-point… |
+| [`programmatic-seo/`](programmatic-seo/) | Programmatic page generation at scale using template-based SEO and data |
+| [`ai-seo/`](ai-seo/) | Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative engine optimization (GEO), citability… |
+| [`aeo/`](aeo/) | Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude, Perplexity, Gemini) in their answers |
+| [`schema-markup/`](schema-markup/) | Structured data implementation, validation, and optimization |
+| [`site-architecture/`](site-architecture/) | Information architecture, URL hierarchy, internal linking strategy, navigation design, and silo structure for websites |
+
+#### Paid & conversational ads (3)
+
+| Skill | What it does |
+|---|---|
+| [`paid-ads/`](paid-ads/) | Plan, execute, and optimize paid ad campaigns across Google, Meta, LinkedIn, Twitter/X, and TikTok, covering targeting, budget, bid… |
+| [`ad-creative/`](ad-creative/) | Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format specs, headline formulas, and A/B testing |
+| [`conversational-ads/`](conversational-ads/) | Plan, write and measure ads inside AI assistants and AI search (ChatGPT Ads, Google AI Overviews and AI Mode, Microsoft Copilot) |
+
+#### Demand gen, growth & launch (8)
+
+| Skill | What it does |
+|---|---|
+| [`marketing-demand-acquisition/`](marketing-demand-acquisition/) | Multi-channel demand generation, paid media optimization, SEO strategy, and partnership programs for Series A+ startups |
+| [`growth-marketer/`](growth-marketer/) | Growth marketing covering experimentation, funnel optimization, acquisition channels, retention, and viral growth |
+| [`launch-strategy/`](launch-strategy/) | Plan and execute product launches and feature announcements: phased plans (alpha, beta, GA), channel strategy, Product Hunt playbooks,… |
+| [`marketing-ideas/`](marketing-ideas/) | Library of 139+ proven marketing strategies organized by category, stage, budget, and timeline across content, SEO, paid, social, email,… |
+| [`marketing-psychology/`](marketing-psychology/) | Apply behavioral psychology, cognitive biases, and 70+ mental models to marketing for conversion optimization, pricing, copy, and campaigns |
+| [`landing-page-generator/`](landing-page-generator/) | Generate high-converting landing pages with page structure, copy frameworks (PAS, AIDA, BAB), CTA strategy, SEO meta, and Core Web… |
+| [`ab-test-setup/`](ab-test-setup/) | Design and analyze A/B tests: sample size, test duration, and statistical significance for conversion experiments |
+| [`app-store-optimization/`](app-store-optimization/) | App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking mobile app performance on Apple App Store and… |
+
+#### Email & outreach (3)
+
+| Skill | What it does |
+|---|---|
+| [`email-sequence/`](email-sequence/) | Design and write email automation sequences (welcome/onboarding, nurture, re-engagement, trial expiration, sales) for SaaS and B2B, with… |
+| [`email-template-builder/`](email-template-builder/) | Build email template systems with React Email or MJML: responsive layouts, dark mode, multi-provider sending, and spam score optimization |
+| [`cold-email/`](cold-email/) | Write and optimize B2B cold email outreach sequences that get replies, covering personalization, follow-up cadence, deliverability, and… |
+
+#### Social (4)
+
+| Skill | What it does |
+|---|---|
+| [`social-content/`](social-content/) | Create social media content across LinkedIn, Twitter/X, Instagram, TikTok, and Facebook with platform formats, hook formulas, and… |
+| [`social-media-manager/`](social-media-manager/) | Strategic social media management for B2B SaaS: platform selection, content pillars, editorial calendars, community engagement, and… |
+| [`social-media-analyzer/`](social-media-analyzer/) | Social media campaign analysis and performance tracking that calculates engagement rates, ROI, and cross-platform benchmarks |
+| [`x-twitter-growth/`](x-twitter-growth/) | This skill should be used when the user asks to "analyze tweets", "grow on Twitter", "build Twitter threads", "optimize X posting… |
+
+#### Analytics & ops (5)
+
+| Skill | What it does |
+|---|---|
+| [`analytics-tracking/`](analytics-tracking/) | End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy, conversion tracking, and UTM strategy |
+| [`campaign-analytics/`](campaign-analytics/) | Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization |
+| [`marketing-analyst/`](marketing-analyst/) | Marketing analytics covering campaign analysis, attribution and marketing mix modeling, ROI measurement, and performance reporting |
+| [`marketing-ops/`](marketing-ops/) | Central marketing operations hub for MarTech stack, automation, attribution, campaign orchestration, and skill routing |
+| [`marketing-context/`](marketing-context/) | Create and maintain the foundational context doc (positioning, ICP, competitive landscape, brand voice, customer language) that other… |
+
+#### Brand & product marketing (3)
+
+| Skill | What it does |
+|---|---|
+| [`brand-strategist/`](brand-strategist/) | Brand strategy covering positioning, identity, brand architecture, messaging frameworks, and governance |
+| [`brand-guidelines/`](brand-guidelines/) | Build and enforce brand identity systems: visual identity, voice and tone, typography, color, and cross-channel consistency |
+| [`marketing-strategy-pmm/`](marketing-strategy-pmm/) | Product marketing skill for positioning, GTM strategy, competitive intelligence, and product launches |
+
+#### Compliance (1)
+
+| Skill | What it does |
+|---|---|
+| [`ai-content-disclosure/`](ai-content-disclosure/) | Check AI-generated marketing content and reviews for required disclosures under the EU AI Act, FTC rules and platform AI-label policies |
+
+### Flagship skill deep dives
 
 ### 1. Content Creator
 **Package:** `content-creator.zip` | **Status:** ✅ Production Ready | **Version:** 1.0
@@ -981,7 +1049,7 @@ What makes these marketing skills world-class:
 
 ## 🎊 Summary
 
-You now have **6 comprehensive marketing skills** providing complete marketing capabilities:
+You now have **41 marketing skills** providing complete marketing capabilities:
 
 ✅ **Content Creator** - Brand voice, SEO, social media, content frameworks
 ✅ **Demand & Acquisition** - Multi-channel campaigns, paid media, SEO, partnerships
