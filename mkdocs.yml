@@ -137,4 +137,6 @@ nav:
     - reference/cli.md
     - Standards: reference/standards.md
     - Architecture: reference/architecture.md
+    - All Skills (full list): skills-reference.md
+    - All Agents (full list): agents-reference.md
   - Changelog: changelog.md
