@@ -51,13 +51,16 @@ import requests
 JIRA_BASE = "https://northwind.atlassian.net"
 auth = (USERNAME, API_TOKEN)
 
-# Count issues by status across all projects
+# Count issues across the spaces being migrated.
+# The enhanced search (/rest/api/3/search/jql) returns no `total`, so use the
+# approximate-count endpoint for sizing (as of September 2026).
 jql = "project in (TREAS, ACT, COMP, INF, SEARCH)"
-res = requests.get(f"{JIRA_BASE}/rest/api/3/search", auth=auth, params={
-    "jql": jql, "fields": "status,project,customfield_*", "maxResults": 0
-})
-print(res.json()["total"])  # 6,200
+res = requests.post(f"{JIRA_BASE}/rest/api/3/search/approximate-count",
+                    auth=auth, json={"jql": jql})
+print(res.json()["count"])  # ~6,200 (estimate)
 ```
+
+> The legacy `/rest/api/3/search` and `/rest/api/2/search` endpoints are deprecated and being removed (Atlassian changelog CHANGE-2046). Use `GET`/`POST /rest/api/3/search/jql`: cursor pagination via `nextPageToken`, no `startAt`/`total`, and `fields` defaults to `id` only, so request the fields you need explicitly. See the [Issue search API reference](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/).
 
 **Audit findings (full table at decision-time):**
 
@@ -120,13 +123,18 @@ Collapsed from 7 to 6 states; "Won't Do" maps to Linear's native Cancelled.
 ```python
 import requests, time
 
-# 1) Pull batch from Jira
-def pull_jira_batch(project_key, start_at, page=100):
+# 1) Pull batch from Jira (enhanced JQL search, token pagination)
+FIELDS = "summary,description,status,priority,components,customfield_10010"
+
+def pull_jira_batch(project_key, next_page_token=None, page=100):
     jql = f'project = "{project_key}" ORDER BY created ASC'
-    res = requests.get(f"{JIRA_BASE}/rest/api/3/search", auth=auth, params={
-        "jql": jql, "fields": "*all", "startAt": start_at, "maxResults": page
-    })
-    return res.json()["issues"]
+    params = {"jql": jql, "fields": FIELDS, "maxResults": page}
+    if next_page_token:
+        params["nextPageToken"] = next_page_token
+    res = requests.get(f"{JIRA_BASE}/rest/api/3/search/jql", auth=auth, params=params)
+    body = res.json()
+    # nextPageToken is absent on the last page
+    return body["issues"], body.get("nextPageToken")
 
 # 2) Transform a Jira issue to a Linear issueCreate input
 def transform(jira_issue, linear_team_id):
@@ -162,16 +170,16 @@ def push_to_linear(input_obj):
 
 # 4) Loop with rate-limit handling
 for project in ACTIVE_PROJECTS:
-    start = 0
+    token = None
     while True:
-        batch = pull_jira_batch(project["jira_key"], start)
-        if not batch: break
+        batch, token = pull_jira_batch(project["jira_key"], token)
         for issue in batch:
             input_obj = transform(issue, project["linear_team_id"])
             result = push_to_linear(input_obj)
             log_migration_mapping(issue["key"], result["data"]["issueCreate"]["issue"]["identifier"])
             time.sleep(0.15)  # ~6 req/s, well below Linear's limit
-        start += 100
+        if not token:
+            break
 ```
 
 #### Mapping table preserved during migration
