@@ -156,15 +156,15 @@ When you have just produced a release plan, incident response, change-request ev
 
 **Symptom.** Team reports "we deploy 50 times per week" but lead time from commit to production is 8 days.
 
-**Why it's bad.** Deploy frequency without lead time hides the real bottleneck. DORA's four metrics work together: deploy frequency, lead time, change failure rate, MTTR. Reporting one without the others paints a misleading picture.
+**Why it's bad.** Deploy frequency without lead time hides the real bottleneck. DORA's metrics work together: deployment frequency, change lead time, change fail rate, failed deployment recovery time (formerly MTTR), and, since the 2024 report, deployment rework rate. Reporting one without the others paints a misleading picture.
 
 **Bad example:**
 > Quarterly delivery report: "Deployments: 287 (industry-leading). Reliability: high."
 
 **Good example:**
-> Quarterly delivery report (DORA): Deploys per week = 50, lead time p50 = 8 days (target 3), change failure rate = 12% (target <15%), MTTR = 42 min (target <60). Improvement area: lead time — root cause is review queue depth, action plan in place."
+> Quarterly delivery report (DORA): Deploys per week = 50, lead time p50 = 8 days (target 3), change failure rate = 12% (target <15%), failed deployment recovery time = 42 min (target <60), rework rate = 6% of deploys. Improvement area: lead time — root cause is review queue depth, action plan in place."
 
-**How to catch it.** Does your delivery report show all four DORA metrics? If not, one or more is being hidden.
+**How to catch it.** Does your delivery report show all the DORA metrics (the classic four, plus rework rate if you track it)? If not, one or more is being hidden.
 
 ---
 
@@ -213,7 +213,7 @@ When you have just produced a release plan, incident response, change-request ev
 | 7 | Severity Inflation/Deflation | 80%+ of declared severities match rubric? |
 | 8 | Stale Runbook | Last end-to-end execution under 6 months? |
 | 9 | Feature Flag Debt | Flags over 12 months under 20 total? |
-| 10 | Deploy Frequency Without Lead Time | All 4 DORA metrics reported together? |
+| 10 | Deploy Frequency Without Lead Time | All DORA metrics reported together? |
 | 11 | SLA Beyond Capacity | Contractual SLA aligned with engineering capacity? |
 | 12 | Maturity Score Inflation | Each level claim has specific evidence? |
 

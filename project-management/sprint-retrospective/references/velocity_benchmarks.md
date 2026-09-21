@@ -4,7 +4,7 @@ Industry benchmarks, healthy patterns, and guidance for interpreting sprint velo
 
 ## Benchmarks by Team Size
 
-These benchmarks represent median ranges from industry surveys (DORA, State of DevOps, Accelerate). They are guidelines, not targets — every team's context is different.
+These are practitioner heuristics for git-activity metrics (commits, PR counts and sizes, review and cycle times), not published survey benchmarks. DORA's research does not publish commits/day or PR-size benchmarks; its published measures are deployment frequency, change lead time, change fail rate, failed deployment recovery time and deployment rework rate. Treat the ranges as guidelines, not targets — every team's context is different.
 
 ### Small Team (2-4 engineers)
 
@@ -133,7 +133,7 @@ Instead of velocity alone, consider:
 | Throughput + Cycle Time | Are we delivering more items faster? |
 | Commit Count + Test Ratio | Are we building features with quality? |
 | LOC + Churn Rate | Are we adding stable code? |
-| Deploy Frequency + MTTR | How fast do we ship and recover? |
+| Deploy Frequency + Failed Deployment Recovery Time (MTTR) | How fast do we ship and recover? |
 
 ---
 
