@@ -34,9 +34,11 @@ jobs:
           fi
       - name: Check for Review Bypass
         id: bypass
+        # Untrusted PR data goes through env, never ${{ }} inside run (CWE-78)
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          PR_LABELS="${{ toJSON(github.event.pull_request.labels.*.name) }}"
 
           # Check for bypass markers in PR title
           if echo "$PR_TITLE" | grep -qE '\[EMERGENCY\]|\[SKIP REVIEW\]|\[HOTFIX\]'; then

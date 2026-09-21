@@ -101,8 +101,8 @@ jobs:
         if: github.event_name == 'push'
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ github.event.inputs.version || 'next' }}
         run: |
-          VERSION="${{ github.event.inputs.version || 'next' }}"
 
           # Check for existing draft — use --json to reliably get the tag name
           EXISTING_TAG=$(gh release list --limit 10 --json tagName,isDraft --jq '.[] | select(.isDraft==true) | .tagName' | head -1 || true)
