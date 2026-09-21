@@ -90,12 +90,12 @@ Platform-specific best practices, algorithm factors, content optimization strate
 - **Feed Posts**: Square (1:1) or vertical (4:5)
 - **Stories**: 15 seconds max, vertical (9:16)
 - **Reels**: 15-90 seconds, vertical (9:16)
-- **Carousels**: 2-10 images/videos
+- **Carousels**: 2-20 images/videos (limit raised from 10 to 20 in 2024)
 - **IGTV/Video**: 1-60 minutes
 
 #### Optimization Tips
 - First sentence crucial (caption preview)
-- Use up to 30 hashtags (5-10 in caption, rest in comment)
+- Use up to 5 specific hashtags (Instagram capped posts and Reels at 5 in December 2025; as of September 2026)
 - Carousel posts get highest engagement
 - Stories with polls/questions boost views
 - Reels get maximum organic reach
@@ -178,7 +178,7 @@ Platform-specific best practices, algorithm factors, content optimization strate
 - 30% Low-volume/Niche (<100K posts)
 
 #### Platform-Specific Guidelines
-- **Instagram**: 10-30 hashtags (mix in caption and first comment)
+- **Instagram**: 3-5 hashtags (5 is the cap since December 2025)
 - **LinkedIn**: 3-5 professional hashtags
 - **Twitter**: 1-2 hashtags max
 - **Facebook**: 1-3 hashtags
