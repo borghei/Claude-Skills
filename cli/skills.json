@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T13:25:20+00:00",
+  "generated_at": "2026-09-21T21:15:47+00:00",
   "skill_count": 368,
   "domain_count": 20,
   "skills": [
@@ -353,7 +353,7 @@
         "scripts/cost_optimizer.py",
         "scripts/serverless_stack.py"
       ],
-      "size_bytes": 140062,
+      "size_bytes": 140064,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3098,7 +3098,7 @@
       "description": "Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format specs, headline formulas, and A/B testing. Use when writing ad copy, generating headline variations, creating ad sets, or validating creative.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT",
       "category": "marketing",
@@ -3110,7 +3110,7 @@
         "scripts/creative_matrix_builder.py",
         "scripts/headline_generator.py"
       ],
-      "size_bytes": 41025,
+      "size_bytes": 43935,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3131,7 +3131,7 @@
         "llm-seo"
       ],
       "version": "1.0.0",
-      "updated": "2026-05-27",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "marketing",
@@ -3146,7 +3146,7 @@
         "scripts/citation_extractor.py",
         "scripts/schema_qa_generator.py"
       ],
-      "size_bytes": 73491,
+      "size_bytes": 74806,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3158,7 +3158,7 @@
       "description": "Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative engine optimization (GEO), citability audits, and schema markup. Use when optimizing for AI search, generative search, or LLM visibility.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT",
       "category": "marketing",
@@ -3170,7 +3170,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 53723,
+      "size_bytes": 60594,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3182,7 +3182,7 @@
       "description": "End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy, conversion tracking, and UTM strategy. Use when building a tracking plan, debugging missing events, setting up GTM, or auditing existing analytics.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "marketing",
@@ -3194,7 +3194,7 @@
         "scripts/funnel_drop_off_analyzer.py",
         "scripts/utm_validator.py"
       ],
-      "size_bytes": 55344,
+      "size_bytes": 58377,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3240,7 +3240,7 @@
         "scripts/metadata_optimizer.py",
         "scripts/review_analyzer.py"
       ],
-      "size_bytes": 282808,
+      "size_bytes": 282904,
       "tools_count": 8,
       "has_scripts": true,
       "has_references": true,
@@ -3306,7 +3306,7 @@
       "description": "Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-02-06",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "marketing",
@@ -3326,7 +3326,7 @@
         "scripts/campaign_roi_calculator.py",
         "scripts/funnel_analyzer.py"
       ],
-      "size_bytes": 112260,
+      "size_bytes": 116814,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3380,7 +3380,7 @@
         "scripts/brand_voice_analyzer.py",
         "scripts/seo_optimizer.py"
       ],
-      "size_bytes": 91508,
+      "size_bytes": 91709,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -3392,7 +3392,7 @@
       "description": "Transform AI-generated content into human-sounding writing via AI pattern detection, rhythm restoration, and authenticity scoring. Use when content sounds robotic, uses AI cliches, or the user wants to humanize or fix AI writing.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT",
       "category": "marketing",
@@ -3404,7 +3404,7 @@
         "scripts/content_scorer.py",
         "scripts/readability_scorer.py"
       ],
-      "size_bytes": 49316,
+      "size_bytes": 50548,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3512,7 +3512,7 @@
       "description": "Design and write email automation sequences (welcome/onboarding, nurture, re-engagement, trial expiration, sales) for SaaS and B2B, with subject lines, copy, CTAs, and timing. Use when building drip campaigns or designing lifecycle email.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "marketing",
@@ -3524,7 +3524,7 @@
         "scripts/sequence_mapper.py",
         "scripts/subject_line_scorer.py"
       ],
-      "size_bytes": 39892,
+      "size_bytes": 41125,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3602,7 +3602,7 @@
         "scripts/cta_analyzer.py",
         "scripts/page_speed_estimator.py"
       ],
-      "size_bytes": 44572,
+      "size_bytes": 44730,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3706,7 +3706,7 @@
         "references/international-playbooks.md",
         "scripts/calculate_cac.py"
       ],
-      "size_bytes": 43481,
+      "size_bytes": 43980,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3830,7 +3830,7 @@
       "description": "Plan, execute, and optimize paid ad campaigns across Google, Meta, LinkedIn, Twitter/X, and TikTok, covering targeting, budget, bid strategies, and retargeting. Use when running PPC campaigns, setting up ad accounts, or optimizing ROAS/CPA.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT",
       "category": "marketing",
@@ -3842,7 +3842,7 @@
         "scripts/audience_sizer.py",
         "scripts/cpc_calculator.py"
       ],
-      "size_bytes": 46072,
+      "size_bytes": 51781,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3895,7 +3895,7 @@
         "knowledge-graph"
       ],
       "version": "1.0.0",
-      "updated": "2026-03-31",
+      "updated": "2026-09-21",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "marketing-growth",
@@ -3907,7 +3907,7 @@
         "scripts/schema_generator.py",
         "scripts/schema_validator.py"
       ],
-      "size_bytes": 56259,
+      "size_bytes": 58641,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3964,7 +3964,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 41947,
+      "size_bytes": 42002,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4012,7 +4012,7 @@
         "scripts/hashtag_analyzer.py",
         "scripts/post_scheduler.py"
       ],
-      "size_bytes": 47963,
+      "size_bytes": 48391,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4133,7 +4133,7 @@
         "scripts/thread_builder.py",
         "scripts/tweet_analyzer.py"
       ],
-      "size_bytes": 54550,
+      "size_bytes": 56017,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7058,7 +7058,7 @@
         "scripts/permission_auditor.py",
         "scripts/system_health_checker.py"
       ],
-      "size_bytes": 71794,
+      "size_bytes": 74698,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7093,7 +7093,7 @@
         "scripts/template_usage_analyzer.py",
         "scripts/template_validator.py"
       ],
-      "size_bytes": 74377,
+      "size_bytes": 74844,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7240,7 +7240,7 @@
         "scripts/label_taxonomy_analyzer.py",
         "scripts/space_structure_analyzer.py"
       ],
-      "size_bytes": 81903,
+      "size_bytes": 83001,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7276,7 +7276,7 @@
         "scripts/dependency_mapper.py",
         "scripts/risk_register.py"
       ],
-      "size_bytes": 76156,
+      "size_bytes": 84901,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7303,7 +7303,7 @@
         "references/red-flags.md",
         "scripts/experiment_designer.py"
       ],
-      "size_bytes": 64997,
+      "size_bytes": 65930,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7495,7 +7495,7 @@
         "references/ost-fundamentals.md",
         "scripts/ost_validator.py"
       ],
-      "size_bytes": 32143,
+      "size_bytes": 32867,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7611,7 +7611,7 @@
         "references/eval-design-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 105618,
+      "size_bytes": 107408,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7721,7 +7721,7 @@
         "references/red-flags.md",
         "scripts/prd_scaffolder.py"
       ],
-      "size_bytes": 60609,
+      "size_bytes": 62508,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7785,7 +7785,7 @@
         "references/red-flags.md",
         "scripts/flow_metrics.py"
       ],
-      "size_bytes": 80523,
+      "size_bytes": 81981,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8105,7 +8105,7 @@
         "references/pricing-prd-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 107224,
+      "size_bytes": 107353,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8543,7 +8543,7 @@
         "scripts/issue_quality_checker.py",
         "scripts/workflow_analyzer.py"
       ],
-      "size_bytes": 83296,
+      "size_bytes": 85351,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8579,7 +8579,7 @@
         "references/linear-vs-jira.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 72265,
+      "size_bytes": 74871,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8652,7 +8652,7 @@
         "references/notion-pm-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 81972,
+      "size_bytes": 86475,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8690,7 +8690,7 @@
         "references/productboard-vs-jira-vs-linear.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 95545,
+      "size_bytes": 108549,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8769,7 +8769,7 @@
         "scripts/sprint_health_scorer.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 265437,
+      "size_bytes": 267353,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
@@ -8848,7 +8848,7 @@
         "scripts/retro_report_generator.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 150281,
+      "size_bytes": 150587,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,

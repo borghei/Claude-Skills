@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-07-21T13:25:20+00:00",
+  "generated_at": "2026-09-21T21:15:47+00:00",
   "repository": "claude-skills",
   "skill_count": 368,
   "domain_count": 20,
@@ -1421,7 +1421,7 @@
       "description": "Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format specs, headline formulas, and A/B testing. Use when writing ad copy, generating headline variations, creating ad sets, or validating creative.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/ad-creative",
       "has_scripts": true,
       "has_references": false
@@ -1441,7 +1441,7 @@
         "llm-seo"
       ],
       "version": "1.0.0",
-      "updated": "2026-05-27",
+      "updated": "2026-09-21",
       "path": "marketing/aeo",
       "has_scripts": true,
       "has_references": true
@@ -1452,7 +1452,7 @@
       "description": "Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative engine optimization (GEO), citability audits, and schema markup. Use when optimizing for AI search, generative search, or LLM visibility.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/ai-seo",
       "has_scripts": true,
       "has_references": false
@@ -1463,7 +1463,7 @@
       "description": "End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy, conversion tracking, and UTM strategy. Use when building a tracking plan, debugging missing events, setting up GTM, or auditing existing analytics.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/analytics-tracking",
       "has_scripts": true,
       "has_references": false
@@ -1519,7 +1519,7 @@
       "description": "Analyzes campaign performance with multi-touch attribution, funnel conversion, and ROI calculation for marketing optimization",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-02-06",
+      "updated": "2026-09-21",
       "path": "marketing/campaign-analytics",
       "has_scripts": true,
       "has_references": true
@@ -1552,7 +1552,7 @@
       "description": "Transform AI-generated content into human-sounding writing via AI pattern detection, rhythm restoration, and authenticity scoring. Use when content sounds robotic, uses AI cliches, or the user wants to humanize or fix AI writing.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/content-humanizer",
       "has_scripts": true,
       "has_references": false
@@ -1607,7 +1607,7 @@
       "description": "Design and write email automation sequences (welcome/onboarding, nurture, re-engagement, trial expiration, sales) for SaaS and B2B, with subject lines, copy, CTAs, and timing. Use when building drip campaigns or designing lifecycle email.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/email-sequence",
       "has_scripts": true,
       "has_references": false
@@ -1757,7 +1757,7 @@
       "description": "Plan, execute, and optimize paid ad campaigns across Google, Meta, LinkedIn, Twitter/X, and TikTok, covering targeting, budget, bid strategies, and retargeting. Use when running PPC campaigns, setting up ad accounts, or optimizing ROAS/CPA.",
       "tags": [],
       "version": "1.0.0",
-      "updated": "2026-03-09",
+      "updated": "2026-09-21",
       "path": "marketing/paid-ads",
       "has_scripts": true,
       "has_references": false
@@ -1792,7 +1792,7 @@
         "knowledge-graph"
       ],
       "version": "1.0.0",
-      "updated": "2026-03-31",
+      "updated": "2026-09-21",
       "path": "marketing/schema-markup",
       "has_scripts": true,
       "has_references": false
