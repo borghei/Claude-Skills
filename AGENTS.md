@@ -27,8 +27,8 @@ This is the **universal AI skills library** — **339 production-ready skill pac
 
 ```
 ├── engineering/            # 82 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
-├── project-management/     # 66 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
-├── marketing/              # 39 skills — content, SEO/AEO, demand gen, brand, analytics
+├── project-management/     # 70 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
+├── marketing/              # 41 skills — content, SEO/AEO, demand gen, brand, analytics
 ├── c-level-advisor/        # 31 skills — CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE
 ├── ra-qm-team/             # 27 skills — ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF
 ├── business-growth/        # 20 skills — CRO, pricing, revenue ops, commercial

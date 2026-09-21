@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-09-21T21:30:33+00:00",
-  "total_skills": 368,
+  "updated": "2026-09-21T21:37:22+00:00",
+  "total_skills": 372,
   "skills": [
     {
       "name": "a11y-audit",
@@ -1499,6 +1499,26 @@
       ]
     },
     {
+      "name": "ai-content-disclosure",
+      "description": "Check AI-generated marketing content and reviews for required disclosures under the EU AI Act, FTC rules and platform AI-label policies. Use when labelling AI ads, deepfakes, chatbots, influencer posts or testimonials.",
+      "domain": "marketing",
+      "path": "marketing/ai-content-disclosure/SKILL.md",
+      "tools": [
+        "disclosure_checker.py",
+        "review_authenticity_linter.py"
+      ],
+      "tags": [
+        "ai-disclosure",
+        "eu-ai-act",
+        "ftc",
+        "fake-reviews",
+        "endorsements",
+        "deepfake-labels",
+        "synthetic-media",
+        "ad-compliance"
+      ]
+    },
+    {
       "name": "ai-seo",
       "description": "Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative engine optimization (GEO), citability audits, and schema markup. Use when optimizing for AI search, generative search, or LLM visibility.",
       "domain": "marketing",
@@ -1645,6 +1665,26 @@
         "headline_analyzer.py"
       ],
       "tags": []
+    },
+    {
+      "name": "conversational-ads",
+      "description": "Plan, write and measure ads inside AI assistants and AI search (ChatGPT Ads, Google AI Overviews and AI Mode, Microsoft Copilot). Use when testing ChatGPT ads, answer-adjacent copy, or incrementality for AI placements.",
+      "domain": "marketing",
+      "path": "marketing/conversational-ads/SKILL.md",
+      "tools": [
+        "answer_adjacent_copy_linter.py",
+        "conversational_ad_planner.py"
+      ],
+      "tags": [
+        "chatgpt-ads",
+        "ai-overviews-ads",
+        "ai-mode",
+        "copilot-ads",
+        "conversational-ads",
+        "incrementality",
+        "paid-media",
+        "ad-copy"
+      ]
     },
     {
       "name": "copy-editing",
@@ -3638,6 +3678,17 @@
       ]
     },
     {
+      "name": "ai-prototyping",
+      "description": "Idea to AI-generated prototype to customer validation to engineering handoff. Use when deciding prototype vs spec, choosing fidelity, briefing AI prototyping tools, testing with users, or handing a prototype to engineering.",
+      "domain": "project-management",
+      "path": "project-management/discovery/ai-prototyping/SKILL.md",
+      "tools": [
+        "prototype_handoff_checker.py",
+        "prototype_plan.py"
+      ],
+      "tags": []
+    },
+    {
       "name": "brainstorm-experiments",
       "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.",
       "domain": "project-management",
@@ -3740,6 +3791,17 @@
       "path": "project-management/execution/activation-funnel/SKILL.md",
       "tools": [
         "funnel_analyzer.py"
+      ],
+      "tags": []
+    },
+    {
+      "name": "agents-in-the-team",
+      "description": "Run delivery when AI coding and ops agents take tickets. Use when setting agent delegation policy, writing agent-ready tickets, planning review capacity, measuring agent vs human delivery, or rolling agents out safely.",
+      "domain": "project-management",
+      "path": "project-management/execution/agents-in-the-team/SKILL.md",
+      "tools": [
+        "agent_delegation_scorer.py",
+        "agent_delivery_metrics.py"
       ],
       "tags": []
     },

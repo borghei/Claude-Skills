@@ -489,7 +489,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 | Metric | Good | Needs Improvement | Poor |
 |--------|------|-------------------|------|
 | LCP (Largest Contentful Paint) | &lt; 2.5s | 2.5s - 4s | &gt; 4s |
-| FID (First Input Delay) | &lt; 100ms | 100 - 300ms | &gt; 300ms |
+| INP (Interaction to Next Paint) | ≤ 200ms | 200 - 500ms | &gt; 500ms |
 | CLS (Cumulative Layout Shift) | &lt; 0.1 | 0.1 - 0.25 | &gt; 0.25 |
 
 **Structure:**
@@ -625,7 +625,7 @@ python scripts/backlink_analyzer.py --domain example.com --output links.csv
 |---------|-------------|-----|
 | Rankings dropped after Google core update | E-E-A-T signals insufficient or content quality below new thresholds | Audit content against December 2025 / March 2026 core update criteria — add experience signals, author credentials, original data |
 | High impressions but low CTR | Title tags and meta descriptions not compelling enough for the SERP | Rewrite titles with numbers, power words, and clear value props; test meta descriptions with hooks |
-| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers; 43% of sites still fail INP in 2026 |
+| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers. INP replaced FID as a Core Web Vital on March 12, 2024 (&quot;good&quot; = 200 ms or less) |
 | Indexed pages declining in Search Console | Google tightening quality bar — deindexing thin or duplicate content | Consolidate thin pages, add unique content, improve E-E-A-T signals on remaining pages |
 | AI Overviews stealing clicks from position 1 | Google AI Overviews now appear in 50%+ of queries, reducing organic CTR by ~42% | Optimize for AI citation (extractable content blocks), add FAQ schema, target queries less likely to trigger AI Overviews |
 | Keyword cannibalization across blog and product pages | Multiple pages competing for same keyword with conflicting intent | Map one primary keyword per page, consolidate or redirect competing pages, differentiate intent |
@@ -780,7 +780,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 | Metric | Good | Needs Improvement | Poor |
 |--------|------|-------------------|------|
 | LCP (Largest Contentful Paint) | &lt; 2.5s | 2.5s - 4s | &gt; 4s |
-| FID (First Input Delay) | &lt; 100ms | 100 - 300ms | &gt; 300ms |
+| INP (Interaction to Next Paint) | ≤ 200ms | 200 - 500ms | &gt; 500ms |
 | CLS (Cumulative Layout Shift) | &lt; 0.1 | 0.1 - 0.25 | &gt; 0.25 |
 
 **Structure:**
@@ -916,7 +916,7 @@ python scripts/backlink_analyzer.py --domain example.com --output links.csv
 |---------|-------------|-----|
 | Rankings dropped after Google core update | E-E-A-T signals insufficient or content quality below new thresholds | Audit content against December 2025 / March 2026 core update criteria — add experience signals, author credentials, original data |
 | High impressions but low CTR | Title tags and meta descriptions not compelling enough for the SERP | Rewrite titles with numbers, power words, and clear value props; test meta descriptions with hooks |
-| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers; 43% of sites still fail INP in 2026 |
+| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers. INP replaced FID as a Core Web Vital on March 12, 2024 (&quot;good&quot; = 200 ms or less) |
 | Indexed pages declining in Search Console | Google tightening quality bar — deindexing thin or duplicate content | Consolidate thin pages, add unique content, improve E-E-A-T signals on remaining pages |
 | AI Overviews stealing clicks from position 1 | Google AI Overviews now appear in 50%+ of queries, reducing organic CTR by ~42% | Optimize for AI citation (extractable content blocks), add FAQ schema, target queries less likely to trigger AI Overviews |
 | Keyword cannibalization across blog and product pages | Multiple pages competing for same keyword with conflicting intent | Map one primary keyword per page, consolidate or redirect competing pages, differentiate intent |
@@ -1073,7 +1073,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python marketing/seo-specialist/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ad-creative.html" class="skill-card" style="text-decoration:none"><h3>Ad Creative</h3><p>Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/analytics-tracking.html" class="skill-card" style="text-decoration:none"><h3>Analytics Tracking</h3><p>End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/app-store-optimization.html" class="skill-card" style="text-decoration:none"><h3>App Store Optimization</h3><p>App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking...</p></a></div>
+  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ad-creative.html" class="skill-card" style="text-decoration:none"><h3>Ad Creative</h3><p>Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-content-disclosure.html" class="skill-card" style="text-decoration:none"><h3>Ai Content Disclosure</h3><p>Check AI-generated marketing content and reviews for required disclosures under the EU AI Act,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/analytics-tracking.html" class="skill-card" style="text-decoration:none"><h3>Analytics Tracking</h3><p>End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/marketing/seo-specialist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

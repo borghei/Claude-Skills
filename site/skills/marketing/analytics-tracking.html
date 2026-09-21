@@ -585,19 +585,21 @@ integration_connected        (params: integration_name)
 4. Configure domains: add all subdomains in your funnel
 5. Data retention: Set to 14 months (maximum for free GA4)
 
-### Conversion Events
+### Key Events (formerly &quot;Conversions&quot;)
 
-Mark as conversions in GA4 Admin &gt; Conversions:
+GA4 renamed &quot;conversions&quot; to **key events** in March 2024; &quot;conversions&quot; now refers to key events imported into Google Ads. Mark as key events in GA4 Admin &gt; Data display &gt; Events (star icon):
 - `signup_completed`
 - `checkout_completed`
 - `demo_requested`
 - `trial_started`
 
 **Rules:**
-- Maximum 30 conversion events per property -- curate carefully
-- GA4 conversions are retroactive for 6 months when enabled
-- Do not mark micro-conversions as conversions unless optimizing ad campaigns for them
-- Conversion counting: set to &quot;once per session&quot; for lead events, &quot;every&quot; for purchase events
+- Maximum 30 key events per standard property (50 on Analytics 360) -- curate carefully
+- Marking a key event is not retroactive -- it affects reports from the time it is marked, not historic data
+- Do not mark micro-conversions as key events unless optimizing ad campaigns for them
+- Counting method: set to &quot;once per session&quot; for lead events, &quot;every&quot; for purchase events
+
+Source: [Mark events as key events](https://support.google.com/analytics/answer/13128484) (as of September 2026).
 
 ### Custom Dimensions
 
@@ -697,7 +699,7 @@ router.events.on(&#x27;routeChangeComplete&#x27;, (url) =&gt; {
 
 1. Link GA4 and Google Ads accounts
 2. In Google Ads &gt; Goals &gt; Conversions &gt; Import &gt; Google Analytics
-3. Select GA4 conversion events to import
+3. Select GA4 key events to import (they become Google Ads conversions)
 4. Set attribution model: Data-driven (if 50+ conversions/month), otherwise Last-click
 5. Conversion window: 30 days for lead gen, 90 days for high-consideration B2B
 
@@ -742,8 +744,38 @@ router.events.on(&#x27;routeChangeComplete&#x27;, (url) =&gt; {
 |---------|---------|---------------------|
 | GA4 | 30 days | 30-90 days (match your sales cycle) |
 | Google Ads | 30 days | 30 days (trial), 90 days (enterprise) |
-| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates) |
+| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates; 7-/28-day view windows were removed Jan 2026) |
 | LinkedIn | 30 days | 30 days |
+
+---
+
+## AI Referral Traffic
+
+Visits from AI assistants (ChatGPT, Gemini, Claude, Copilot, Perplexity, etc.) are a growing, distinct acquisition source. Measure them explicitly instead of letting them blur into Referral or Direct.
+
+### GA4 &quot;AI Assistant&quot; Channel (as of September 2026)
+
+Since May 13, 2026, GA4&#x27;s Default Channel Group includes an **AI Assistant** channel. When the referrer matches Google&#x27;s list of recognized AI assistants, GA4 sets medium = `ai-assistant` and campaign = `(ai-assistant)`, and the session is grouped under AI Assistant. No configuration is needed. The rule is evaluated before Referral. Sources: [Default channel group](https://support.google.com/analytics/answer/9756891), [What&#x27;s new in Google Analytics](https://support.google.com/analytics/answer/9164320).
+
+### Known Gaps
+
+| Gap | What happens | Mitigation |
+|-----|--------------|------------|
+| Not retroactive | Sessions before the rollout stay in Referral | Use the custom channel group below for historical comparison |
+| Unrecognized assistants | AI tools not on Google&#x27;s list still land in Referral | Custom channel group with your own regex |
+| Google AI Overviews / AI Mode clicks | Excluded from AI Assistant; they arrive from google.com and count as Organic Search | Use Search Console (Web search type + Generative AI report) — GA4 cannot isolate them |
+| Referrer stripped | Many app and copy-paste visits arrive with no referrer and fall into Direct | Add UTMs to links you control (e.g., in llms.txt, docs, GPT/app listings); watch Direct landing pages that match AI-cited pages |
+| Assistant-added UTMs | Some assistants append their own UTM (ChatGPT adds `utm_source=chatgpt.com` to referral links, per [OpenAI&#x27;s publisher FAQ](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)), which changes how source/medium are recorded | Match on session source (which the UTM sets) rather than referrer alone |
+
+### Fallback: Custom Channel Group
+
+Create a custom channel group in GA4 (Admin &gt; Data display &gt; Channel groups), add an &quot;AI Assistant (custom)&quot; channel **above** Referral, with the condition *Session source matches regex*:
+
+```
+^(chatgpt\.com|chat\.openai\.com|openai\.com|perplexity\.ai|www\.perplexity\.ai|gemini\.google\.com|bard\.google\.com|claude\.ai|copilot\.microsoft\.com|edgeservices\.bing\.com|chat\.deepseek\.com|grok\.com|meta\.ai|chat\.mistral\.ai|you\.com|phind\.com)$
+```
+
+Keep the list in version control and review it quarterly; assistant domains change. The campaign-analytics attribution script uses the same list to classify an `ai_assistant` channel.
 
 ---
 
@@ -1094,19 +1126,21 @@ integration_connected        (params: integration_name)
 4. Configure domains: add all subdomains in your funnel
 5. Data retention: Set to 14 months (maximum for free GA4)
 
-### Conversion Events
+### Key Events (formerly &quot;Conversions&quot;)
 
-Mark as conversions in GA4 Admin &gt; Conversions:
+GA4 renamed &quot;conversions&quot; to **key events** in March 2024; &quot;conversions&quot; now refers to key events imported into Google Ads. Mark as key events in GA4 Admin &gt; Data display &gt; Events (star icon):
 - `signup_completed`
 - `checkout_completed`
 - `demo_requested`
 - `trial_started`
 
 **Rules:**
-- Maximum 30 conversion events per property -- curate carefully
-- GA4 conversions are retroactive for 6 months when enabled
-- Do not mark micro-conversions as conversions unless optimizing ad campaigns for them
-- Conversion counting: set to &quot;once per session&quot; for lead events, &quot;every&quot; for purchase events
+- Maximum 30 key events per standard property (50 on Analytics 360) -- curate carefully
+- Marking a key event is not retroactive -- it affects reports from the time it is marked, not historic data
+- Do not mark micro-conversions as key events unless optimizing ad campaigns for them
+- Counting method: set to &quot;once per session&quot; for lead events, &quot;every&quot; for purchase events
+
+Source: [Mark events as key events](https://support.google.com/analytics/answer/13128484) (as of September 2026).
 
 ### Custom Dimensions
 
@@ -1206,7 +1240,7 @@ router.events.on(&#x27;routeChangeComplete&#x27;, (url) =&gt; {
 
 1. Link GA4 and Google Ads accounts
 2. In Google Ads &gt; Goals &gt; Conversions &gt; Import &gt; Google Analytics
-3. Select GA4 conversion events to import
+3. Select GA4 key events to import (they become Google Ads conversions)
 4. Set attribution model: Data-driven (if 50+ conversions/month), otherwise Last-click
 5. Conversion window: 30 days for lead gen, 90 days for high-consideration B2B
 
@@ -1251,8 +1285,38 @@ router.events.on(&#x27;routeChangeComplete&#x27;, (url) =&gt; {
 |---------|---------|---------------------|
 | GA4 | 30 days | 30-90 days (match your sales cycle) |
 | Google Ads | 30 days | 30 days (trial), 90 days (enterprise) |
-| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates) |
+| Meta | 7-day click, 1-day view | 7-day click only (view-through inflates; 7-/28-day view windows were removed Jan 2026) |
 | LinkedIn | 30 days | 30 days |
+
+---
+
+## AI Referral Traffic
+
+Visits from AI assistants (ChatGPT, Gemini, Claude, Copilot, Perplexity, etc.) are a growing, distinct acquisition source. Measure them explicitly instead of letting them blur into Referral or Direct.
+
+### GA4 &quot;AI Assistant&quot; Channel (as of September 2026)
+
+Since May 13, 2026, GA4&#x27;s Default Channel Group includes an **AI Assistant** channel. When the referrer matches Google&#x27;s list of recognized AI assistants, GA4 sets medium = `ai-assistant` and campaign = `(ai-assistant)`, and the session is grouped under AI Assistant. No configuration is needed. The rule is evaluated before Referral. Sources: [Default channel group](https://support.google.com/analytics/answer/9756891), [What&#x27;s new in Google Analytics](https://support.google.com/analytics/answer/9164320).
+
+### Known Gaps
+
+| Gap | What happens | Mitigation |
+|-----|--------------|------------|
+| Not retroactive | Sessions before the rollout stay in Referral | Use the custom channel group below for historical comparison |
+| Unrecognized assistants | AI tools not on Google&#x27;s list still land in Referral | Custom channel group with your own regex |
+| Google AI Overviews / AI Mode clicks | Excluded from AI Assistant; they arrive from google.com and count as Organic Search | Use Search Console (Web search type + Generative AI report) — GA4 cannot isolate them |
+| Referrer stripped | Many app and copy-paste visits arrive with no referrer and fall into Direct | Add UTMs to links you control (e.g., in llms.txt, docs, GPT/app listings); watch Direct landing pages that match AI-cited pages |
+| Assistant-added UTMs | Some assistants append their own UTM (ChatGPT adds `utm_source=chatgpt.com` to referral links, per [OpenAI&#x27;s publisher FAQ](https://help.openai.com/en/articles/12627856-publishers-and-developers-faq)), which changes how source/medium are recorded | Match on session source (which the UTM sets) rather than referrer alone |
+
+### Fallback: Custom Channel Group
+
+Create a custom channel group in GA4 (Admin &gt; Data display &gt; Channel groups), add an &quot;AI Assistant (custom)&quot; channel **above** Referral, with the condition *Session source matches regex*:
+
+```
+^(chatgpt\.com|chat\.openai\.com|openai\.com|perplexity\.ai|www\.perplexity\.ai|gemini\.google\.com|bard\.google\.com|claude\.ai|copilot\.microsoft\.com|edgeservices\.bing\.com|chat\.deepseek\.com|grok\.com|meta\.ai|chat\.mistral\.ai|you\.com|phind\.com)$
+```
+
+Keep the list in version control and review it quarterly; assistant domains change. The campaign-analytics attribution script uses the same list to classify an `ai_assistant` channel.
 
 ---
 
@@ -1517,7 +1581,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python marketing/analytics-tracking/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ad-creative.html" class="skill-card" style="text-decoration:none"><h3>Ad Creative</h3><p>Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/app-store-optimization.html" class="skill-card" style="text-decoration:none"><h3>App Store Optimization</h3><p>App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/brand-guidelines.html" class="skill-card" style="text-decoration:none"><h3>Brand Guidelines</h3><p>Build and enforce brand identity systems: visual identity, voice and tone, typography, color,...</p></a></div>
+  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ad-creative.html" class="skill-card" style="text-decoration:none"><h3>Ad Creative</h3><p>Design ad creative across Google, Meta, LinkedIn, Twitter/X, and TikTok with platform format...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-content-disclosure.html" class="skill-card" style="text-decoration:none"><h3>Ai Content Disclosure</h3><p>Check AI-generated marketing content and reviews for required disclosures under the EU AI Act,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/app-store-optimization.html" class="skill-card" style="text-decoration:none"><h3>App Store Optimization</h3><p>App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/marketing/analytics-tracking/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

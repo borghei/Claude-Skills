@@ -1,8 +1,8 @@
 # Marketing Skills - Claude Code Guidance
 
-This guide covers the 39 production-ready marketing skills across content, SEO/AEO, demand gen, growth, PR, and analytics, plus Python automation tools.
+This guide covers the 41 production-ready marketing skills across content, SEO/AEO, demand gen, growth, PR, and analytics, plus Python automation tools.
 
-## Marketing Skills Overview (39 skills)
+## Marketing Skills Overview (41 skills)
 
 **Core (highlighted; full inventory under `marketing/`):**
 1. **content-creator/** - Content creation, brand voice, SEO optimization (2 Python tools)
@@ -13,6 +13,10 @@ This guide covers the 39 production-ready marketing skills across content, SEO/A
 **SEO / AI search:**
 - **seo-specialist/**, **seo-audit/**, **programmatic-seo/**, **ai-seo/** (AI search ranking — Perplexity, AI Overviews)
 - **aeo/** *(Apr 2026)* — Answer Engine Optimization (LLM citation in ChatGPT/Claude/Gemini answers); distinct from ai-seo (3 Python tools: content auditor, citation extractor, Q&A schema generator)
+
+**AI-era compliance & paid AI placements:**
+- **ai-content-disclosure/** *(Sep 2026)* — Disclosure checks for AI-generated/assisted marketing content and reviews: EU AI Act Art. 50, FTC Reviews Rule (16 CFR 465) and Endorsement Guides, EU/UK fake-review law, New York synthetic performer law, platform AI labels (2 Python tools: disclosure checker, review authenticity linter — both exit 2 on unresolved high-risk items; not legal advice)
+- **conversational-ads/** *(Sep 2026)* — Planning, copy and incrementality measurement for ads in ChatGPT, Google AI Overviews / AI Mode and Microsoft Copilot (2 Python tools: conversational ad planner, answer-adjacent copy linter — both exit 2 on blockers/errors)
 
 **Total Tools:** 35+ Python automation tools, 30+ knowledge bases, 25+ templates
 
@@ -280,6 +284,14 @@ python marketing-demand-acquisition/scripts/demand_gen_analyzer.py data.csv
 python campaign-analytics/scripts/attribution_analyzer.py campaign_data.json
 python campaign-analytics/scripts/funnel_analyzer.py funnel_data.json
 python campaign-analytics/scripts/campaign_roi_calculator.py campaign_data.json
+
+# AI content disclosure (exit 2 = unresolved high-risk item)
+python ai-content-disclosure/scripts/disclosure_checker.py ai-content-disclosure/assets/sample_content_manifest.json
+python ai-content-disclosure/scripts/review_authenticity_linter.py ai-content-disclosure/assets/sample_reviews.json
+
+# Conversational ads (exit 2 = blocker / copy error)
+python conversational-ads/scripts/conversational_ad_planner.py conversational-ads/assets/sample_plan_input.json
+python conversational-ads/scripts/answer_adjacent_copy_linter.py conversational-ads/assets/sample_ad_copy.json
 ```
 
 ## Quality Standards

@@ -4,11 +4,11 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant — 368 expert skills across 20 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 372 expert skills across 20 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "368 production-ready AI skill packages across 20 domains, installable per-domain as Claude Code plugins",
+    "description": "372 production-ready AI skill packages across 20 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
@@ -36,7 +36,7 @@
     {
       "name": "pm-skills",
       "source": "./project-management",
-      "description": "66 project management skills: discovery, delivery, career growth, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), GTM, and Jira/Linear/Notion/Confluence integration",
+      "description": "70 project management skills: discovery, delivery, career growth, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), GTM, and Jira/Linear/Notion/Confluence integration",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -56,7 +56,7 @@
     {
       "name": "marketings",
       "source": "./marketing",
-      "description": "39 marketing skills: content creation, SEO/AEO, demand generation, product marketing, brand strategy, and campaign analytics",
+      "description": "41 marketing skills: content creation, SEO/AEO, demand generation, product marketing, brand strategy, and campaign analytics",
       "version": "1.0.0",
       "author": {
         "name": "borghei"

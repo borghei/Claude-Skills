@@ -7,7 +7,7 @@ title: Product Team Skills
 **13 skills** with **30+ Python tools** for product managers, designers, and UX researchers. Covers core product (RICE / OKRs / strategy / UX research / design systems / A/B tests) plus modern additions: product analytics (metric trees / cohorts / event taxonomy), Apple HIG depth, research synthesis (insight quality + findings briefs), spec-to-repo (PRD → tickets → PRs), and audience-tailored roadmap communication.
 
 !!! tip "Looking for Project Management?"
-    PM skills are on their own dedicated page → **[Project Management ★ (66 skills)](project-management.md)** — the most-used domain in the library, covering discovery, delivery, career growth, strategy frameworks, GTM, and Jira / Linear / Notion / Confluence integration.
+    PM skills are on their own dedicated page → **[Project Management ★ (70 skills)](project-management.md)** — the most-used domain in the library, covering discovery, delivery, career growth, strategy frameworks, GTM, and Jira / Linear / Notion / Confluence integration.
 
 ---
 

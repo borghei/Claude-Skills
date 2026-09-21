@@ -1,0 +1,92 @@
+{
+  "campaign": "Autumn 2026 product launch (sample data - intentionally contains violations)",
+  "assets": [
+    {
+      "id": "hero-video-eu",
+      "title": "Launch hero video with AI-generated city scene",
+      "type": "video",
+      "channel": "youtube",
+      "ai_involvement": "generated",
+      "realistic": true,
+      "depicts_real_people": false,
+      "regions": ["EU", "US"],
+      "is_paid_ad": true,
+      "disclosures_present": ["platform_ai_toggle"]
+    },
+    {
+      "id": "tiktok-avatar-ad",
+      "title": "TikTok ad using an AI avatar spokesperson",
+      "type": "video",
+      "channel": "tiktok",
+      "ai_involvement": "generated",
+      "realistic": true,
+      "synthetic_performer": true,
+      "regions": ["US-NY"],
+      "is_paid_ad": true,
+      "disclosures_present": ["platform_ai_toggle", "synthetic_performer_disclosure"]
+    },
+    {
+      "id": "blog-energy-regulation",
+      "title": "AI-drafted article on new energy-price regulation, edited by the content lead",
+      "type": "text",
+      "channel": "blog",
+      "ai_involvement": "generated",
+      "public_interest": true,
+      "human_review": true,
+      "editorial_responsibility": true,
+      "regions": ["EU"],
+      "disclosures_present": []
+    },
+    {
+      "id": "press-note-ai",
+      "title": "AI-written press note on data-breach response, not reviewed",
+      "type": "text",
+      "channel": "press_release",
+      "ai_involvement": "generated",
+      "public_interest": true,
+      "human_review": false,
+      "regions": ["EU"],
+      "disclosures_present": []
+    },
+    {
+      "id": "site-testimonials",
+      "title": "Homepage testimonial carousel written by AI from survey themes",
+      "type": "testimonial",
+      "channel": "website",
+      "ai_involvement": "generated",
+      "regions": ["US", "EU"],
+      "material_connection": "none",
+      "disclosures_present": []
+    },
+    {
+      "id": "employee-review",
+      "title": "Marketplace review posted by a product manager",
+      "type": "review",
+      "channel": "marketplace",
+      "ai_involvement": "none",
+      "regions": ["US", "UK"],
+      "material_connection": "employee",
+      "disclosures_present": []
+    },
+    {
+      "id": "sales-assistant",
+      "title": "Website sales assistant chatbot",
+      "type": "chatbot",
+      "channel": "website",
+      "ai_involvement": "generated",
+      "regions": ["EU"],
+      "disclosures_present": ["ai_interaction_notice"]
+    },
+    {
+      "id": "retouched-product-shot",
+      "title": "Product photo with AI background clean-up",
+      "type": "image",
+      "channel": "google_ads",
+      "ai_involvement": "assistive",
+      "realistic": true,
+      "regions": ["EU", "US"],
+      "is_paid_ad": true,
+      "disclosures_present": []
+    }
+  ]
+}

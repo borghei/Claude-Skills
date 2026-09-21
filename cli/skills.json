@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-21T21:30:33+00:00",
-  "skill_count": 368,
+  "generated_at": "2026-09-21T21:37:22+00:00",
+  "skill_count": 372,
   "domain_count": 20,
   "skills": [
     {
@@ -3014,10 +3014,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3151,6 +3152,46 @@
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "ai-content-disclosure",
+      "domain": "marketing",
+      "description": "Check AI-generated marketing content and reviews for required disclosures under the EU AI Act, FTC rules and platform AI-label policies. Use when labelling AI ads, deepfakes, chatbots, influencer posts or testimonials.",
+      "tags": [
+        "ai-disclosure",
+        "eu-ai-act",
+        "ftc",
+        "fake-reviews",
+        "endorsements",
+        "deepfake-labels",
+        "synthetic-media",
+        "ad-compliance"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-09-21",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
+      "path": "marketing/ai-content-disclosure",
+      "files": [
+        "SKILL.md",
+        "assets/content_manifest_template.json",
+        "assets/disclosure-label-templates.md",
+        "assets/sample_content_manifest.json",
+        "assets/sample_reviews.json",
+        "references/disclosure-decision-tree.md",
+        "references/disclosure-wording-library.md",
+        "references/platform-ai-label-policies.md",
+        "references/regulation-summaries.md",
+        "scripts/disclosure_checker.py",
+        "scripts/review_authenticity_linter.py"
+      ],
+      "size_bytes": 80575,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "ai-seo",
@@ -3457,6 +3498,44 @@
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
+    },
+    {
+      "name": "conversational-ads",
+      "domain": "marketing",
+      "description": "Plan, write and measure ads inside AI assistants and AI search (ChatGPT Ads, Google AI Overviews and AI Mode, Microsoft Copilot). Use when testing ChatGPT ads, answer-adjacent copy, or incrementality for AI placements.",
+      "tags": [
+        "chatgpt-ads",
+        "ai-overviews-ads",
+        "ai-mode",
+        "copilot-ads",
+        "conversational-ads",
+        "incrementality",
+        "paid-media",
+        "ad-copy"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-09-21",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "marketing",
+      "subdomain": "",
+      "path": "marketing/conversational-ads",
+      "files": [
+        "SKILL.md",
+        "assets/sample_ad_copy.json",
+        "assets/sample_plan_input.json",
+        "assets/test-plan-template.md",
+        "references/anti-patterns.md",
+        "references/conversational-ads-playbook.md",
+        "references/platform-specs.md",
+        "scripts/answer_adjacent_copy_linter.py",
+        "scripts/conversational_ad_planner.py"
+      ],
+      "size_bytes": 61178,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "copy-editing",
@@ -7283,6 +7362,38 @@
       "has_assets": false
     },
     {
+      "name": "ai-prototyping",
+      "domain": "project-management",
+      "description": "Idea to AI-generated prototype to customer validation to engineering handoff. Use when deciding prototype vs spec, choosing fidelity, briefing AI prototyping tools, testing with users, or handing a prototype to engineering.",
+      "tags": [],
+      "version": "1.0.0",
+      "updated": "2026-09-21",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/discovery/ai-prototyping",
+      "files": [
+        "SKILL.md",
+        "assets/handoff_complete.json",
+        "assets/handoff_incomplete.json",
+        "assets/handoff_template.md",
+        "assets/hypotheses_sample.json",
+        "assets/hypotheses_untestable.json",
+        "assets/prototype_brief_template.md",
+        "examples/mobile-expense-approvals.md",
+        "references/prototype-decision-guide.md",
+        "references/testing-handoff-governance.md",
+        "scripts/prototype_handoff_checker.py",
+        "scripts/prototype_plan.py"
+      ],
+      "size_bytes": 70200,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "brainstorm-experiments",
       "domain": "project-management",
       "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.",
@@ -7583,6 +7694,39 @@
       ],
       "size_bytes": 98037,
       "tools_count": 1,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "agents-in-the-team",
+      "domain": "project-management",
+      "description": "Run delivery when AI coding and ops agents take tickets. Use when setting agent delegation policy, writing agent-ready tickets, planning review capacity, measuring agent vs human delivery, or rolling agents out safely.",
+      "tags": [],
+      "version": "1.0.0",
+      "updated": "2026-09-21",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/execution/agents-in-the-team",
+      "files": [
+        "SKILL.md",
+        "assets/agent_ticket_template.md",
+        "assets/backlog_sample.json",
+        "assets/backlog_within_capacity.json",
+        "assets/delegation_policy_template.md",
+        "assets/delivery_records_sample.json",
+        "assets/rollout_plan_template.md",
+        "examples/payments-platform-sprint.md",
+        "references/delegation-and-accountability.md",
+        "references/metrics-and-capacity.md",
+        "references/security-and-rollout.md",
+        "scripts/agent_delegation_scorer.py",
+        "scripts/agent_delivery_metrics.py"
+      ],
+      "size_bytes": 87708,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true

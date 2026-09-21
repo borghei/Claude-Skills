@@ -487,6 +487,7 @@ Production-grade ad creative design, iteration, and optimization across all majo
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Platform Specifications](#platform-specifications)
+- [Creative for Automated Campaigns](#creative-for-automated-campaigns)
 - [Creative Frameworks by Funnel Stage](#creative-frameworks-by-funnel-stage)
 - [Headline Formula Library](#headline-formula-library)
 - [Iteration Methodology](#iteration-methodology)
@@ -642,7 +643,7 @@ Reformat (not rewrite from scratch):
 | Google RSA | Search | 30 chars x 15 | 90 chars x 4 descriptions | Max 3 pinned positions |
 | Google Display | Display | 30 chars x 5 short, 90 chars x 1 long | 90 chars x 5 | Requires 5+ images |
 | Google Performance Max | Multi | 30 chars x 5 short, 90 chars x 5 long | 90 chars x 5 | Auto-placement |
-| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Image text &lt; 20% |
+| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Keep image text light (&lt; 20% recommended, not enforced) |
 | Meta Stories | Vertical | 40 chars | 125 chars | 9:16 aspect ratio |
 | LinkedIn Sponsored | Content | 70 chars headline | 150 chars intro text | No clickbait policies |
 | LinkedIn Message | InMail | 60 chars subject | 1,500 chars body | Personalization required |
@@ -660,17 +661,41 @@ Reformat (not rewrite from scratch):
 - Gimmicky formatting (s.p.a.c.e.d letters)
 
 **Meta Ads:**
-- Image text exceeding 20% of image area
 - Before/after body transformation images
 - Personal attributes assumptions (&quot;Are you overweight?&quot;)
 - Fake UI elements (play buttons, notifications)
 - Sensationalized content
+
+*Note: Meta&#x27;s old 20% image-text rule was removed in 2020 — there is no longer a limit on text in ad images. Meta still says images with less than 20% text tend to perform better, so treat it as a creative best practice, not a rejection trigger ([About text in ad images](https://www.facebook.com/business/help/980593475366490)).*
 
 **LinkedIn Ads:**
 - Clickbait headlines
 - Misleading claims about job opportunities
 - Profanity or inappropriate language
 - Targeting by sensitive categories
+
+---
+
+## Creative for Automated Campaigns
+
+Meta Advantage+ (sales, app, and leads campaigns), Google Performance Max, AI Max for Search, and Demand Gen assemble ads from the assets you supply and may generate or adapt text themselves. Creative becomes the main lever you still control. (As of September 2026 — verify current asset specs in each platform&#x27;s help center.)
+
+| Campaign type | What the system does with creative | What to supply |
+|---------------|-----------------------------------|----------------|
+| Meta Advantage+ sales / app / leads | Mixes creatives, placements, and optional creative enhancements per person | Several distinct concepts (not tiny variants), in 1:1, 4:5, and 9:16; multiple primary texts and headlines |
+| Google Performance Max | Builds ads across Search, Shopping, YouTube, Display, Discover, Gmail, Maps from an asset group | Full asset group: multiple headlines, long headlines, descriptions, landscape/square/portrait images, logos, and your own videos (otherwise Google may auto-generate video) |
+| Google AI Max for Search | Text customization generates headlines/descriptions from your landing page, ads, and keywords; final URL expansion can change the landing page | Strong RSA assets as the base; brand and message rules; decide whether text customization and URL expansion stay on |
+| Google Demand Gen | Image and video ads on YouTube (incl. Shorts), Discover, Gmail | Vertical and horizontal video, square and landscape images, thumb-stopping first frames |
+| Ads in Google AI Overviews / AI Mode | Existing Search, Shopping, and PMax ads are matched to the AI answer context automatically | Clear, specific assets that answer the query; no separate format to build |
+
+**Creative guardrails:**
+- Review auto-generated or customized text before and after launch; remove assets that make claims you cannot support
+- Turn off Meta creative enhancements or Google text customization / final URL expansion where regulated claims or legal review apply
+- Use URL exclusions for pages that should never be landing pages (careers, legal, support)
+- Keep brand-safety rules in one place (claims allowed, banned words) and check generated variants against it
+- Track performance by asset and concept, not only by campaign — automated campaigns hide which creative drove results unless you look at asset reports
+
+See the paid-ads skill for campaign structure, audience signals, and bidding guardrails.
 
 ---
 
@@ -884,7 +909,7 @@ After 7-14 days with statistical significance:
 - [ ] No trademarked competitor names in restricted positions
 - [ ] No platform name references in copy (&quot;Facebook,&quot; &quot;Google&quot;)
 - [ ] No fake UI elements in images
-- [ ] Image text ratio under 20% for Meta
+- [ ] Image text kept light for Meta (under ~20% recommended for performance; no longer a policy limit)
 
 **Copy Quality:**
 - [ ] Headline makes sense standalone without description
@@ -1062,6 +1087,7 @@ Production-grade ad creative design, iteration, and optimization across all majo
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Platform Specifications](#platform-specifications)
+- [Creative for Automated Campaigns](#creative-for-automated-campaigns)
 - [Creative Frameworks by Funnel Stage](#creative-frameworks-by-funnel-stage)
 - [Headline Formula Library](#headline-formula-library)
 - [Iteration Methodology](#iteration-methodology)
@@ -1217,7 +1243,7 @@ Reformat (not rewrite from scratch):
 | Google RSA | Search | 30 chars x 15 | 90 chars x 4 descriptions | Max 3 pinned positions |
 | Google Display | Display | 30 chars x 5 short, 90 chars x 1 long | 90 chars x 5 | Requires 5+ images |
 | Google Performance Max | Multi | 30 chars x 5 short, 90 chars x 5 long | 90 chars x 5 | Auto-placement |
-| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Image text &lt; 20% |
+| Meta Feed | Image/Video | 40 chars headline | 125 chars primary text (recommended) | Keep image text light (&lt; 20% recommended, not enforced) |
 | Meta Stories | Vertical | 40 chars | 125 chars | 9:16 aspect ratio |
 | LinkedIn Sponsored | Content | 70 chars headline | 150 chars intro text | No clickbait policies |
 | LinkedIn Message | InMail | 60 chars subject | 1,500 chars body | Personalization required |
@@ -1235,17 +1261,41 @@ Reformat (not rewrite from scratch):
 - Gimmicky formatting (s.p.a.c.e.d letters)
 
 **Meta Ads:**
-- Image text exceeding 20% of image area
 - Before/after body transformation images
 - Personal attributes assumptions (&quot;Are you overweight?&quot;)
 - Fake UI elements (play buttons, notifications)
 - Sensationalized content
+
+*Note: Meta&#x27;s old 20% image-text rule was removed in 2020 — there is no longer a limit on text in ad images. Meta still says images with less than 20% text tend to perform better, so treat it as a creative best practice, not a rejection trigger ([About text in ad images](https://www.facebook.com/business/help/980593475366490)).*
 
 **LinkedIn Ads:**
 - Clickbait headlines
 - Misleading claims about job opportunities
 - Profanity or inappropriate language
 - Targeting by sensitive categories
+
+---
+
+## Creative for Automated Campaigns
+
+Meta Advantage+ (sales, app, and leads campaigns), Google Performance Max, AI Max for Search, and Demand Gen assemble ads from the assets you supply and may generate or adapt text themselves. Creative becomes the main lever you still control. (As of September 2026 — verify current asset specs in each platform&#x27;s help center.)
+
+| Campaign type | What the system does with creative | What to supply |
+|---------------|-----------------------------------|----------------|
+| Meta Advantage+ sales / app / leads | Mixes creatives, placements, and optional creative enhancements per person | Several distinct concepts (not tiny variants), in 1:1, 4:5, and 9:16; multiple primary texts and headlines |
+| Google Performance Max | Builds ads across Search, Shopping, YouTube, Display, Discover, Gmail, Maps from an asset group | Full asset group: multiple headlines, long headlines, descriptions, landscape/square/portrait images, logos, and your own videos (otherwise Google may auto-generate video) |
+| Google AI Max for Search | Text customization generates headlines/descriptions from your landing page, ads, and keywords; final URL expansion can change the landing page | Strong RSA assets as the base; brand and message rules; decide whether text customization and URL expansion stay on |
+| Google Demand Gen | Image and video ads on YouTube (incl. Shorts), Discover, Gmail | Vertical and horizontal video, square and landscape images, thumb-stopping first frames |
+| Ads in Google AI Overviews / AI Mode | Existing Search, Shopping, and PMax ads are matched to the AI answer context automatically | Clear, specific assets that answer the query; no separate format to build |
+
+**Creative guardrails:**
+- Review auto-generated or customized text before and after launch; remove assets that make claims you cannot support
+- Turn off Meta creative enhancements or Google text customization / final URL expansion where regulated claims or legal review apply
+- Use URL exclusions for pages that should never be landing pages (careers, legal, support)
+- Keep brand-safety rules in one place (claims allowed, banned words) and check generated variants against it
+- Track performance by asset and concept, not only by campaign — automated campaigns hide which creative drove results unless you look at asset reports
+
+See the paid-ads skill for campaign structure, audience signals, and bidding guardrails.
 
 ---
 
@@ -1459,7 +1509,7 @@ After 7-14 days with statistical significance:
 - [ ] No trademarked competitor names in restricted positions
 - [ ] No platform name references in copy (&quot;Facebook,&quot; &quot;Google&quot;)
 - [ ] No fake UI elements in images
-- [ ] Image text ratio under 20% for Meta
+- [ ] Image text kept light for Meta (under ~20% recommended for performance; no longer a policy limit)
 
 **Copy Quality:**
 - [ ] Headline makes sense standalone without description
@@ -1680,7 +1730,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 5. Validate all copy against platform compliance rules
 
 ---
-  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/analytics-tracking.html" class="skill-card" style="text-decoration:none"><h3>Analytics Tracking</h3><p>End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/app-store-optimization.html" class="skill-card" style="text-decoration:none"><h3>App Store Optimization</h3><p>App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/brand-guidelines.html" class="skill-card" style="text-decoration:none"><h3>Brand Guidelines</h3><p>Build and enforce brand identity systems: visual identity, voice and tone, typography, color,...</p></a></div>
+  <h2>Related Skills in Marketing</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and analyze A/B tests: sample size, test duration, and statistical significance for...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/aeo.html" class="skill-card" style="text-decoration:none"><h3>Aeo</h3><p>Answer Engine Optimization (AEO): optimize content to be cited by LLMs (ChatGPT, Claude,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-content-disclosure.html" class="skill-card" style="text-decoration:none"><h3>Ai Content Disclosure</h3><p>Check AI-generated marketing content and reviews for required disclosures under the EU AI Act,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/ai-seo.html" class="skill-card" style="text-decoration:none"><h3>Ai Seo</h3><p>Optimize content to rank in AI search engines (AI Overviews, Perplexity, ChatGPT) via generative...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/analytics-tracking.html" class="skill-card" style="text-decoration:none"><h3>Analytics Tracking</h3><p>End-to-end analytics implementation for web and SaaS: GA4, Google Tag Manager, event taxonomy,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/marketing/app-store-optimization.html" class="skill-card" style="text-decoration:none"><h3>App Store Optimization</h3><p>App Store Optimization toolkit for researching keywords, optimizing metadata, and tracking...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/marketing/ad-creative/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

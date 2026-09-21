@@ -125,6 +125,7 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`customer-interview-script/`](discovery/customer-interview-script/) ★ NEW | How to RUN a discovery interview | Portigal + Fitzpatrick + Torres |
 | [`value-proposition-canvas/`](discovery/value-proposition-canvas/) ★ NEW | Strategyzer VPC (Customer Profile + Value Map) | Osterwalder + Strategyzer |
 | [`jtbd-workshop/`](discovery/jtbd-workshop/) ★ NEW | Full Jobs-To-Be-Done workshop | Christensen + Ulwick + Moesta + Klement |
+| [`ai-prototyping/`](discovery/ai-prototyping/) | Idea → AI prototype → user validation → handoff | Uncertainty-type decision + F0-F4 fidelity ladder |
 
 ### Execution Skills (29) — `execution/`
 
@@ -159,6 +160,7 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 | [`post-mortem/`](execution/post-mortem/) ★ NEW | Blameless incident RCA | Google SRE + Allspaw + Dekker + Perrow |
 | [`release-notes/`](execution/release-notes/) | Release notes from tickets | Category-based |
 | [`eol-communication/`](execution/eol-communication/) | End-of-life messaging | Sunset playbook |
+| [`agents-in-the-team/`](execution/agents-in-the-team/) | Delivery when AI agents take tickets | DORA metrics + Scrum Guide Expansion Pack (AI) |
 
 ### Career Skills (4) — `career/`
 
