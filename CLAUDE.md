@@ -162,7 +162,7 @@ python3 scripts/generate_site.py              # 3. skills.json -> 372 skill + 20
   `site/**` change. Nothing is built in CI — what you commit is what ships.
 
 When counts change, update them in `README.md`, `CLAUDE.md`, `mkdocs.yml`,
-`docs/index.md`, `docs/skills/index.md`, `docs/SKILLS.md`, `docs/INSTALLATION.md`,
+`docs/index.md`, `docs/skills/index.md`, `docs/skills-reference.md`, `docs/INSTALLATION.md`,
 `docs/getting-started/installation.md`, `docs/reference/architecture.md`, and the
 hand-maintained `site/index.html`.
 

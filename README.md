@@ -68,7 +68,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for the Claude Code plugin, MCP
 
 **[Project Management (70) ★](project-management/)** *(most-visited domain. Discovery, delivery, career growth, strategy frameworks, GTM, Jira / Linear / Notion / Confluence.)*
 
-[Engineering (91)](engineering/) · [Marketing (41)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (13)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Business Operations (6)](business-operations/) · [Data (6)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Markdown-HTML (4)](markdown-html/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/SKILLS.md)
+[Engineering (91)](engineering/) · [Marketing (41)](marketing/) · [C-Level (31)](c-level-advisor/) · [Compliance (27)](ra-qm-team/) · [Business & Growth (20)](business-growth/) · [Legal (17)](legal/) · [Product Team (13)](product-team/) · [Personal Productivity (13)](personal-productivity/) · [Vertical Advisors (7)](vertical-advisors/) · [Business Operations (6)](business-operations/) · [Data (6)](data-analytics/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Documents (4)](documents/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Markdown-HTML (4)](markdown-html/) · [Finance (3)](finance/) · [Workflow (2)](workflow/) · [All skills →](docs/skills-reference.md)
 
 ---
 
@@ -127,8 +127,8 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for per-platform setup.
 ## Documentation
 
 - **Full docs site:** [borghei.github.io/Claude-Skills](https://borghei.github.io/Claude-Skills)
-- **Skills reference:** [docs/SKILLS.md](docs/SKILLS.md)
-- **Agents reference:** [docs/AGENTS.md](docs/AGENTS.md)
+- **Skills reference:** [docs/skills-reference.md](docs/skills-reference.md)
+- **Agents reference:** [docs/agents-reference.md](docs/agents-reference.md)
 - **Usage guide:** [docs/USAGE.md](docs/USAGE.md)
 - **Installation:** [docs/INSTALLATION.md](docs/INSTALLATION.md)
 - **Contributing:** [CONTRIBUTING.md](CONTRIBUTING.md)
