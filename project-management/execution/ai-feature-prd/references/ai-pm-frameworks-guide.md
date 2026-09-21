@@ -34,7 +34,19 @@ A working reference for the frameworks, mental models, and policies that inform 
 
 ## 4. EU AI Act Risk Tiers
 
-**Source:** Regulation (EU) 2024/1689 -- the EU Artificial Intelligence Act. Phased compliance through 2026-2027.
+**Source:** Regulation (EU) 2024/1689 -- the EU Artificial Intelligence Act, as amended by the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026). Phased compliance through 2028.
+
+**Application timeline (as of September 2026 -- re-check the Commission's AI Act page before relying on a date):**
+
+| Obligation | Applies from |
+|---|---|
+| Prohibited practices + AI literacy | 2 February 2025 |
+| General-purpose AI (GPAI) model obligations | 2 August 2025 |
+| Transparency obligations (Art. 50: chatbots, deepfakes, AI-generated content) | 2 August 2026 |
+| High-risk systems in Annex III areas (employment, education, credit, etc.) | 2 December 2027 (moved from 2 August 2026 by the Omnibus) |
+| High-risk systems embedded in products under EU product-safety law (Annex I) | 2 August 2028 (moved from 2 August 2027 by the Omnibus) |
+
+Official sources: the Commission's AI Act policy page (digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai) and the Omnibus text in the Official Journal (eur-lex.europa.eu, OJ L 2026/1744).
 
 **Core idea:** Four risk tiers:
 - **Unacceptable risk** -- banned (social scoring, manipulative behavioral systems, certain biometric uses).
@@ -44,7 +56,7 @@ A working reference for the frameworks, mental models, and policies that inform 
 
 **PRD slot:** Section 10.7 (ethical review checklist) and Section 5 (excluded segments). State the tier on page one.
 
-**Practical implication:** If the product is sold or used in the EU, the tier determines your audit, documentation, and human-oversight obligations. Pair with `ra-qm-team/eu-ai-act-specialist/` for the full conformity assessment.
+**Practical implication:** If the product is sold or used in the EU, the tier determines your audit, documentation, and human-oversight obligations. The deferral moves the high-risk deadline, not the classification: a feature that is High-risk still needs its conformity work scoped now, and Limited-risk transparency duties already apply. Pair with `ra-qm-team/eu-ai-act-specialist/` for the full conformity assessment.
 
 ## 5. Reforge AI PM Curriculum (Aakash Gupta + Reforge)
 
@@ -160,11 +172,11 @@ If you cannot write a credible "AI premium" paragraph, the feature should be det
 - Andrej Karpathy, "Software 2.0" (2017)
 - OpenAI, "Model Spec" (latest version)
 - Anthropic, "Responsible Scaling Policy" (latest version)
-- Regulation (EU) 2024/1689 ("EU AI Act")
+- Regulation (EU) 2024/1689 ("EU AI Act"), as amended by Regulation (EU) 2026/1744 (Digital Omnibus on AI)
 - NIST AI RMF 1.0 + Generative AI Profile
 - ISO/IEC 42001:2023
 - Aakash Gupta, "Product Growth" essays on AI PM (2024-2026)
 - Lenny Rachitsky, "Lenny's Newsletter" AI PM series
 
 ---
-**Last Updated:** 2026-05-22
+**Last Updated:** 2026-09-21
