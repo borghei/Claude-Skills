@@ -375,7 +375,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Generate a complet
 - Store algorithms are proprietary and change without notice
 
 ### Scope
-- Does not include paid user acquisition (Apple Search Ads, Google Ads)
+- Does not include paid user acquisition (Apple Ads, formerly Apple Search Ads; Google Ads)
 - Does not cover in-app analytics implementation
 - Does not handle technical app development
 - Focuses on organic discovery and conversion optimization

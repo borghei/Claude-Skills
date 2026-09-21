@@ -19,7 +19,7 @@ from pathlib import Path
 PLATFORM_LIMITS = {
     "linkedin": {"max": 5, "optimal": (3, 5), "note": "3-5 hashtags. Algorithm deprioritizes posts with 10+."},
     "twitter": {"max": 3, "optimal": (1, 2), "note": "1-2 hashtags. More than 3 looks spammy."},
-    "instagram": {"max": 30, "optimal": (3, 5), "note": "3-5 relevant hashtags in 2026. Algorithm change reduced hashtag importance."},
+    "instagram": {"max": 5, "optimal": (3, 5), "note": "Instagram caps posts and Reels at 5 hashtags (since Dec 2025). Use 3-5 specific tags."},
     "tiktok": {"max": 5, "optimal": (3, 5), "note": "3-5 relevant hashtags. Mix niche and trending."},
     "facebook": {"max": 5, "optimal": (1, 3), "note": "1-3 hashtags maximum. Low impact on reach."},
 }

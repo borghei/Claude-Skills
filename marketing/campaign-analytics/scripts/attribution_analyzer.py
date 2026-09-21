@@ -14,6 +14,15 @@ Usage:
     python attribution_analyzer.py data.json --model time-decay
     python attribution_analyzer.py data.json --model time-decay --half-life 14
     python attribution_analyzer.py data.json --format json
+
+AI assistant traffic:
+  Touchpoints are reclassified to the ``ai_assistant`` channel when their
+  ``referrer``, ``source`` or ``utm_source`` field (or the channel label itself)
+  matches a known AI assistant domain (chatgpt.com, perplexity.ai,
+  gemini.google.com, claude.ai, copilot.microsoft.com, ...) or GA4's
+  ``ai-assistant`` medium. Google AI Overviews / AI Mode clicks arrive from
+  google.com and are NOT reclassified (GA4 counts them as Organic Search).
+  Disable with --no-ai-reclassify.
 """
 
 import argparse
@@ -21,9 +30,74 @@ import json
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
 
 MODELS = ["first-touch", "last-touch", "linear", "time-decay", "position-based"]
+
+AI_ASSISTANT_CHANNEL = "ai_assistant"
+
+# Known AI assistant referrer hosts (as of September 2026). Subdomains match too.
+# Review quarterly -- assistant domains change.
+AI_ASSISTANT_DOMAINS = (
+    "chatgpt.com",
+    "chat.openai.com",
+    "perplexity.ai",
+    "gemini.google.com",
+    "bard.google.com",
+    "claude.ai",
+    "copilot.microsoft.com",
+    "chat.deepseek.com",
+    "grok.com",
+    "meta.ai",
+    "chat.mistral.ai",
+    "you.com",
+    "phind.com",
+)
+
+# Channel labels that already mean "AI assistant" (e.g., GA4 medium "ai-assistant").
+AI_ASSISTANT_ALIASES = {"ai_assistant", "ai-assistant", "ai assistant", "(ai-assistant)"}
+
+
+def _host(value: str) -> str:
+    """Return a lowercase host from a URL or bare domain string ('' if none)."""
+    value = (value or "").strip().lower()
+    if not value:
+        return ""
+    if "://" not in value:
+        value = "//" + value
+    host = urlparse(value).hostname or ""
+    return host[4:] if host.startswith("www.") else host
+
+
+def is_ai_assistant_source(value: str) -> bool:
+    """True if value is an AI assistant alias or a URL/domain on the known list."""
+    if not value:
+        return False
+    if value.strip().lower() in AI_ASSISTANT_ALIASES:
+        return True
+    host = _host(value)
+    return any(host == d or host.endswith("." + d) for d in AI_ASSISTANT_DOMAINS)
+
+
+def classify_ai_assistant(journeys: List[Dict]) -> int:
+    """Reclassify AI assistant touchpoints to the ai_assistant channel in place.
+
+    Checks the channel label plus optional referrer / source / utm_source fields.
+    Returns the number of touchpoints reclassified.
+    """
+    changed = 0
+    for journey in journeys:
+        for tp in journey.get("touchpoints", []):
+            if tp.get("channel") == AI_ASSISTANT_CHANNEL:
+                continue
+            candidates = [tp.get("channel", "")] + [
+                tp.get(k, "") for k in ("referrer", "source", "utm_source")
+            ]
+            if any(isinstance(c, str) and is_ai_assistant_source(c) for c in candidates):
+                tp["channel"] = AI_ASSISTANT_CHANNEL
+                changed += 1
+    return changed
 
 
 def safe_divide(numerator: float, denominator: float, default: float = 0.0) -> float:
@@ -220,6 +294,8 @@ def format_text(results: Dict[str, Any]) -> str:
     lines.append(f"  Conversion Rate:    {summary['conversion_rate']}%")
     lines.append(f"  Total Revenue:      ${summary['total_revenue']:,.2f}")
     lines.append(f"  Channels Observed:  {', '.join(summary['channels_observed'])}")
+    if summary.get("ai_assistant_reclassified"):
+        lines.append(f"  AI Assistant:       {summary['ai_assistant_reclassified']} touchpoint(s) reclassified to '{AI_ASSISTANT_CHANNEL}'")
 
     for model_name, credits in results["models"].items():
         lines.append("")
@@ -303,6 +379,11 @@ def main() -> None:
         dest="output_format",
         help="Output format (default: text)",
     )
+    parser.add_argument(
+        "--no-ai-reclassify",
+        action="store_true",
+        help="Do not reclassify AI assistant referrals (chatgpt.com, perplexity.ai, ...) to 'ai_assistant'",
+    )
 
     args = parser.parse_args()
 
@@ -322,6 +403,8 @@ def main() -> None:
         print("Error: No 'journeys' array found in input data.", file=sys.stderr)
         sys.exit(1)
 
+    ai_reclassified = 0 if args.no_ai_reclassify else classify_ai_assistant(journeys)
+
     # Determine which models to run
     models_to_run = [args.model] if args.model else MODELS
 
@@ -332,8 +415,11 @@ def main() -> None:
         model_results[model_name] = {ch: round(v, 2) for ch, v in credits.items()}
 
     # Build output
+    summary = compute_summary(journeys)
+    if ai_reclassified:
+        summary["ai_assistant_reclassified"] = ai_reclassified
     results: Dict[str, Any] = {
-        "summary": compute_summary(journeys),
+        "summary": summary,
         "models": model_results,
     }
 

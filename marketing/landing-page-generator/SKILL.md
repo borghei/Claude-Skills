@@ -415,7 +415,7 @@ Below the button, reduce friction:
 |--------|--------|---------------|
 | Largest Contentful Paint (LCP) | Under 2.5 seconds | Optimize hero image, use modern formats (WebP/AVIF) |
 | Cumulative Layout Shift (CLS) | Under 0.1 | Set explicit dimensions on all images and embeds |
-| First Input Delay (FID) | Under 100ms | Defer non-critical JavaScript |
+| Interaction to Next Paint (INP) | 200ms or less | Defer non-critical JavaScript, break up long tasks (INP replaced FID in March 2024) |
 | Time to First Byte (TTFB) | Under 600ms | Use CDN, server-side rendering, or static generation |
 | Total page weight | Under 1MB | Compress images, minimize JavaScript bundles |
 

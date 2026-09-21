@@ -69,10 +69,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **In scope:** keyword research, metadata optimization and character-limit validation, competitor ASO analysis (public data), A/B test planning with significance math, launch/seasonal/localization planning, and review sentiment analysis for Apple App Store and Google Play Store.
 
-**Out of scope:** real-time store data fetching (scripts analyze static data you provide), Apple Search Ads / Google Ads campaign management, creative asset design, cross-device attribution (use an MMP), in-app analytics/retention, and revenue/subscription pricing.
+**Out of scope:** real-time store data fetching (scripts analyze static data you provide), Apple Ads (formerly Apple Search Ads) / Google Ads campaign management, creative asset design, cross-device attribution (use an MMP), in-app analytics/retention, and revenue/subscription pricing.
 
 **Data constraints:** no official search-volume API exists for either store (estimates use third-party tools or heuristics); competitor and review data are limited to public info; historical ranking data needs external tools (AppTweak, Sensor Tower, data.ai); Apple's June 2025 update indexes screenshot text, which these scripts do not yet analyze. See [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md) for details.
 
 ## Integration Points
 
-Connects to **Apple App Store Connect** and **Google Play Console** (metadata submission, Product Page Optimization / Store Listing Experiments), **Apple Search Ads** (keyword discovery), **ASO tools** (AppTweak, Sensor Tower, data.ai for volume/ranking data), **analytics** (Firebase/Mixpanel/Amplitude for engagement signals), and the **campaign-analytics** and **content-creator** skills. Full connection details and data flows: [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md).
+Connects to **Apple App Store Connect** and **Google Play Console** (metadata submission, Product Page Optimization / Store Listing Experiments), **Apple Ads** (formerly Apple Search Ads; keyword discovery), **ASO tools** (AppTweak, Sensor Tower, data.ai for volume/ranking data), **analytics** (Firebase/Mixpanel/Amplitude for engagement signals), and the **campaign-analytics** and **content-creator** skills. Full connection details and data flows: [references/operations-and-benchmarks.md](references/operations-and-benchmarks.md).

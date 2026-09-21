@@ -14,7 +14,7 @@ Read this when diagnosing ASO problems, setting performance targets, understandi
 | Ratings declining after update | New bugs introduced, or rating prompt timing is poor | Analyze recent negative reviews for patterns. Fix critical bugs in a hotfix release. Adjust in-app rating prompt to trigger after positive user actions (e.g., completing a task), not on app launch |
 | Competitor outranking despite weaker metadata | Competitor has stronger engagement metrics (installs, retention, rating velocity) | Focus on improving post-install engagement and retention. Apple and Google now weight behavioral signals (session length, uninstall rate, rating velocity) alongside metadata relevance |
 | Localized listing underperforming | Direct translation without cultural keyword adaptation | Use native speakers for keyword research in each market. Adapt keywords to local search behavior rather than translating English terms. German compound words and Japanese katakana/kanji mixing require specialized ASO |
-| Apple Search Ads not delivering impressions | Bid too low, relevance score poor, or audience too narrow | Increase bid to match category benchmarks. Improve metadata relevance for target keywords (Apple will not show irrelevant ads regardless of bid). Broaden audience targeting or enable Search Match |
+| Apple Ads (formerly Apple Search Ads) not delivering impressions | Bid too low, relevance score poor, or audience too narrow | Increase bid to match category benchmarks. Improve metadata relevance for target keywords (Apple will not show irrelevant ads regardless of bid). Broaden audience targeting or enable Search Match |
 
 ---
 
@@ -26,7 +26,7 @@ Read this when diagnosing ASO problems, setting performance targets, understandi
 - **Metadata Utilization**: Use 90%+ of available character space in title, subtitle (iOS), short description (Android), and keyword field (iOS). Under-utilized metadata is wasted ranking potential
 - **A/B Test Velocity**: Run at least one store listing experiment per month. Achieve statistical significance (95% confidence) before implementing winners. Target 5-15% conversion lift per successful test cycle
 - **Localization Coverage**: Localize metadata for at least 5 priority markets (US, China, Japan, Germany, UK) with native-speaker keyword research. Localized apps see 15-30% download increases in target markets
-- **Apple Search Ads Efficiency**: Maintain a tap-through rate (TTR) above 5% and cost-per-acquisition (CPA) below category median. In 2026, Apple is expanding search ad inventory with additional inline placements -- optimize for the new Maximize Conversions bidding option
+- **Apple Ads Efficiency**: Maintain a tap-through rate (TTR) above 5% and cost-per-acquisition (CPA) below category median. In 2026, Apple is expanding search ad inventory with additional inline placements -- optimize for the new Maximize Conversions bidding option
 
 ---
 
@@ -107,7 +107,7 @@ All output passes quality verification:
 |-------------|---------|----------------|
 | **Apple App Store Connect** | Metadata submission, Product Page Optimization A/B tests, analytics | Upload optimized metadata from this skill's output directly into App Store Connect. Use Product Page Optimization for A/B tests planned by `ab_test_planner.py` |
 | **Google Play Console** | Metadata submission, Store Listing Experiments, performance reports | Apply metadata recommendations in Play Console. Use Store Listing Experiments for A/B tests. Export conversion data for `aso_scorer.py` input |
-| **Apple Search Ads** | Paid keyword discovery, Search Match insights | Use keyword data from `keyword_analyzer.py` to build Search Ads campaigns. Import Search Ads search term reports back into keyword research workflow. In 2026, leverage new inline ad placements and Maximize Conversions bidding |
+| **Apple Ads** (formerly Apple Search Ads) | Paid keyword discovery, Search Match insights | Use keyword data from `keyword_analyzer.py` to build Search Ads campaigns. Import Search Ads search term reports back into keyword research workflow. In 2026, leverage new inline ad placements and Maximize Conversions bidding |
 | **ASO Tools (AppTweak, Sensor Tower, data.ai)** | Search volume data, ranking tracking, competitor intelligence | Export keyword volume and competitor data from ASO tools as input for `keyword_analyzer.py` and `competitor_analyzer.py`. Feed ranking history into `aso_scorer.py` |
 | **Firebase / Mixpanel / Amplitude** | Post-install analytics, retention metrics | Use retention and engagement data to inform ASO scoring (engagement signals affect store rankings). Feed conversion funnel data into `aso_scorer.py` conversion metrics |
 | **campaign-analytics skill** | Attribution modeling for app install campaigns | Combine ASO organic data with paid campaign attribution from `attribution_analyzer.py` to understand full acquisition picture |

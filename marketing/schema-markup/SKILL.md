@@ -9,7 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: marketing-growth
-  updated: 2026-03-31
+  updated: 2026-09-21
   tags: [seo, schema, structured-data, json-ld, rich-snippets, knowledge-graph]
 ---
 # Schema Markup Implementation
@@ -76,10 +76,10 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 | Page Type | Primary Schema | Supporting Schema | Rich Result Type |
 |-----------|---------------|-------------------|-----------------|
-| Homepage | Organization | WebSite + SearchAction | Sitelinks search box |
+| Homepage | Organization | WebSite (site name) | Site name, logo / knowledge panel signals (sitelinks search box retired Nov 2024) |
 | Blog post | Article | BreadcrumbList, Person (author), ImageObject | Article card |
-| How-to guide | HowTo | Article, BreadcrumbList, ImageObject | How-to steps |
-| FAQ page | FAQPage | BreadcrumbList | FAQ dropdowns |
+| How-to guide | Article | BreadcrumbList, ImageObject (HowTo optional) | Article (HowTo rich results removed Sept 2023) |
+| FAQ page | WebPage / Article | BreadcrumbList (FAQPage optional) | -- (FAQ rich results removed May 2026) |
 | Product page | Product | Offer, AggregateRating, Review, BreadcrumbList | Product card |
 | Local business | LocalBusiness | OpeningHoursSpecification, GeoCoordinates, PostalAddress | Local pack |
 | Video page | VideoObject | Article (if embedded) | Video card |
@@ -107,7 +107,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 - Article + BreadcrumbList + Person + ImageObject (blog posts)
 - Product + Offer + AggregateRating + BreadcrumbList (product pages)
 - LocalBusiness + OpeningHoursSpecification + GeoCoordinates + Review (local pages)
-- HowTo + Article + BreadcrumbList + ImageObject (guides)
+- Article + BreadcrumbList + ImageObject (guides; HowTo markup optional, no rich result)
 
 **Never combine:**
 - Product on a page that does not sell a product (Google penalizes misuse)
@@ -159,8 +159,8 @@ Multiple `<script type="application/ld+json">` blocks per page are valid. Use se
 
 | Scope | Schema | Placement |
 |-------|--------|-----------|
-| Site-wide | Organization, WebSite + SearchAction | Homepage template header |
-| Per-page | Article, Product, HowTo, FAQPage | Page-specific head injection |
+| Site-wide | Organization, WebSite | Homepage template header |
+| Per-page | Article, Product, VideoObject, Event | Page-specific head injection |
 | Per-element | BreadcrumbList | Every non-homepage |
 | Conditional | Event, JobPosting | Only on pages with that content type |
 
@@ -168,7 +168,15 @@ Multiple `<script type="application/ld+json">` blocks per page are valid. Use se
 
 ## Rich Result Eligibility Rules
 
-Google does not give rich results for all valid schema. These are the current requirements (as of 2026):
+Google does not give rich results for all valid schema. These are the current requirements (as of September 2026). Check the live [Search Gallery](https://developers.google.com/search/docs/appearance/structured-data/search-gallery) before promising a rich result — types get retired.
+
+**Retired Google rich results (markup is still valid schema.org, but produces no Google search feature):**
+
+| Feature | Status | Source |
+|---------|--------|--------|
+| HowTo rich results | Restricted Aug 2023; no longer shown on any device from Sept 13, 2023 | [Search Central blog](https://developers.google.com/search/blog/2023/08/howto-faq-changes) |
+| FAQ rich results | Restricted to authoritative government/health sites Aug 2023; removed from Google Search May 7, 2026 | [FAQPage docs changelog](https://developers.google.com/search/updates) |
+| Sitelinks search box (WebSite + SearchAction) | Removed Nov 21, 2024; leaving the markup in place causes no issues | [Search Central blog](https://developers.google.com/search/blog/2024/10/sitelinks-search-box) |
 
 ### Article Rich Result
 
@@ -196,36 +204,20 @@ Google does not give rich results for all valid schema. These are the current re
 | aggregateRating.reviewCount | Recommended | Integer |
 | review | Recommended | At least 1 review |
 
-### FAQPage Rich Result
+### FAQPage and HowTo (no Google rich result)
 
-| Field | Required | Notes |
-|-------|----------|-------|
-| mainEntity | Yes | Array of Question items |
-| Question.name | Yes | The question text |
-| Question.acceptedAnswer.text | Yes | The answer text |
-| Visible on page | Yes | Q&A must be visible to users, not hidden |
-
-### HowTo Rich Result
-
-| Field | Required | Notes |
-|-------|----------|-------|
-| name | Yes | Title of the how-to |
-| step | Yes | Array of HowToStep items |
-| step.name | Yes | Step title |
-| step.text | Yes | Step description |
-| image | Recommended | Per-step or overall |
-| totalTime | Recommended | ISO 8601 duration |
+If you still emit FAQPage or HowTo for other consumers, keep it valid and honest: `mainEntity` as an array of `Question` items with `acceptedAnswer.text` (FAQPage), `step` as an array of `HowToStep` items (HowTo), and every Q&A pair or step visible on the page. Do not report these as rich-result wins.
 
 ---
 
 ## AI Search Optimization
 
-AI search systems (Google AI Overviews, Perplexity, ChatGPT Search, Bing Copilot) use structured data for content understanding, citation decisions, and entity recognition.
+AI search systems (Google AI Overviews, Perplexity, ChatGPT Search, Bing Copilot) may use structured data for content understanding and entity recognition. Google states that no special schema.org markup is required to appear in AI Overviews or AI Mode ([AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), as of September 2026) — schema supports understanding; it is not an AI-citation switch.
 
 ### Why Schema Matters for AI Search
 
 1. **Content type classification** -- AI systems use `@type` to determine if content is a how-to, product listing, FAQ, or opinion piece
-2. **Citation eligibility** -- FAQPage and HowTo schema increase citation likelihood because AI systems can extract structured Q&A and step-by-step content directly
+2. **Extractable structure lives on the page** -- AI systems extract visible Q&A and step-by-step content; FAQPage/HowTo markup is optional and has no demonstrated citation lift from Google's side
 3. **Freshness signals** -- `datePublished` and `dateModified` help AI systems filter by recency
 4. **Authority signals** -- `author` with `sameAs` links to known profiles boosts entity recognition
 5. **Entity connection** -- `Organization` with `sameAs` links to Wikidata, LinkedIn, and social profiles strengthens entity resolution
@@ -234,11 +226,11 @@ AI search systems (Google AI Overviews, Perplexity, ChatGPT Search, Bing Copilot
 
 | Action | Priority | Impact |
 |--------|----------|--------|
-| Add FAQPage schema to any page with Q&A content (even 3 questions) | High | Direct citation in AI answers |
 | Add author Person schema with sameAs to LinkedIn, Twitter, Google Scholar | High | Author entity recognition |
 | Add Organization with sameAs to Wikidata, LinkedIn, Crunchbase | High | Brand entity recognition |
 | Keep dateModified accurate on every content update | Medium | Freshness filtering |
-| Add HowTo schema to process/tutorial content | Medium | Step-by-step citation |
+| Keep Article, Product, BreadcrumbList schema accurate and matching visible content | Medium | Rich results + content-type clarity |
+| FAQPage / HowTo markup on Q&A or tutorial content | Low | Optional; no Google rich result, no special AI-feature treatment |
 | Add SoftwareApplication schema to tool/product pages | Medium | Product recognition in AI answers |
 
 ---
@@ -284,7 +276,7 @@ Getting into Google's Knowledge Graph means your entity (person, company, produc
 ## CMS Deployment Guide
 
 ### WordPress
-- **Yoast SEO / Rank Math**: Auto-generate Article, Organization, BreadcrumbList. Add custom schema via their blocks for HowTo and FAQPage.
+- **Yoast SEO / Rank Math**: Auto-generate Article, Organization, BreadcrumbList. Their FAQ/HowTo blocks still emit markup, but it no longer yields Google rich results.
 - **Custom schema**: Add via `wp_head` action hook or a custom plugin.
 - **Avoid**: Plugins that inject schema via JavaScript (Google may not render it).
 
@@ -384,7 +376,7 @@ Test every schema implementation with all three tools before deployment:
 | Schema Audit Report | Scored table | Per-page schema inventory, completeness score, priority fixes |
 | JSON-LD Implementation | Copy-paste code blocks | Complete schema for each page type, populated with placeholder values marked clearly |
 | Error Fix Log | Before/after JSON-LD | Each fix explained with root cause and prevention |
-| AI Search Gap Analysis | Recommendation table | Missing entity markup, FAQPage opportunities, sameAs gaps |
+| AI Search Gap Analysis | Recommendation table | Missing entity markup, sameAs gaps, content-type mismatches |
 | CMS Implementation Guide | Step-by-step instructions | Platform-specific deployment instructions |
 | Rich Result Eligibility Matrix | Page type x schema x eligibility | Which pages qualify for which rich result types |
 
@@ -404,7 +396,7 @@ Test every schema implementation with all three tools before deployment:
 | Problem | Likely Cause | Fix |
 |---------|-------------|-----|
 | Schema passes validation but no rich results appear | Missing required fields for rich result eligibility, or Google has not recrawled | Verify against Google Rich Results Test (not just schema.org validator); request reindexing via GSC |
-| FAQPage schema not generating FAQ dropdowns | Questions not visible to users on the page, or site lacks sufficient authority | Ensure Q&A content is visible in page HTML, not hidden behind tabs or JS toggles |
+| FAQPage schema not generating FAQ dropdowns | FAQ rich results were removed from Google Search in May 2026 (HowTo in Sept 2023) | Expected behavior — nothing to fix; keep the markup valid or remove it, and stop tracking it as a rich-result KPI |
 | Product schema shows "missing field" warnings in GSC | Required fields (price, availability, review) absent or malformed | Add all required Product + Offer fields; use ISO 4217 for currency, schema.org/InStock for availability |
 | GTM-injected schema not being indexed | Client-side rendering — Google may not execute GTM JavaScript for schema | Move schema from GTM to server-side `<head>` injection; GTM schema is unreliable for indexing |
 | dateModified older than datePublished | Data entry error or CMS auto-populating incorrectly | Ensure dateModified >= datePublished; audit CMS date field logic |
@@ -418,7 +410,7 @@ Test every schema implementation with all three tools before deployment:
 - **Rich result eligibility**: 100% of content pages with appropriate schema types eligible for rich results per Google Rich Results Test
 - **Validation pass rate**: Zero errors in Google Search Console Enhancements reports across all schema types
 - **Rich result CTR boost**: Structured data pages achieving 20-35% higher CTR than non-structured pages (2026 benchmark from SearchPilot testing)
-- **AI citation impact**: FAQPage and HowTo schema present on all informational content pages to maximize AI extraction
+- **AI readiness**: Entity markup (Organization, Person with sameAs) and accurate Article dates on all informational pages; answers visible in the HTML for extraction
 - **Entity recognition**: Organization schema with 5+ sameAs links deployed site-wide; brand appearing in Knowledge Graph
 - **Coverage breadth**: Schema implemented on 95%+ of indexable pages (BreadcrumbList minimum, content-specific types on relevant pages)
 - **Freshness accuracy**: dateModified updated within 24 hours of every content change across all Article schema
@@ -447,7 +439,7 @@ Test every schema implementation with all three tools before deployment:
 - Google does not guarantee rich results even with valid schema — authority and content quality also factor in
 - GTM-injected schema is frequently not indexed — server-side deployment is required for reliability
 - Schema.org spec updates faster than Google's support — not all valid types generate rich results
-- Rich result types can be deprecated with minimal notice (e.g., HowTo rich results were restricted in 2023)
+- Rich result types can be deprecated with minimal notice (e.g., HowTo removed in 2023, sitelinks search box in 2024, FAQ in 2026)
 - Structured data CTR impact varies by industry and SERP features present
 
 ---

@@ -10,6 +10,11 @@ Usage:
     python schema_auditor.py --directory ./pages/
     python schema_auditor.py --files page1.html page2.html page3.html --json
     python schema_auditor.py --directory ./site/ --report coverage
+
+Impact scoring (as of September 2026): FAQPage and HowTo are no longer
+recommended as "missing" schema because Google retired both rich results
+(HowTo Sept 2023, FAQ May 2026) and states no special schema is needed for
+AI features. Pages that carry them get an Info note (no score deduction).
 """
 
 import argparse
@@ -87,14 +92,21 @@ def classify_page_type(filepath, html):
 RECOMMENDED_SCHEMA = {
     "homepage": ["Organization", "WebSite"],
     "blog_post": ["Article", "BreadcrumbList"],
-    "faq": ["FAQPage", "BreadcrumbList"],
-    "howto": ["HowTo", "BreadcrumbList", "Article"],
+    "faq": ["Article", "BreadcrumbList"],
+    "howto": ["Article", "BreadcrumbList"],
     "product": ["Product", "BreadcrumbList"],
     "about": ["Organization", "BreadcrumbList"],
     "contact": ["LocalBusiness", "BreadcrumbList"],
     "event": ["Event", "BreadcrumbList"],
     "author": ["Person", "BreadcrumbList"],
     "content": ["Article", "BreadcrumbList"],
+}
+
+# Valid schema.org types whose Google rich result has been retired.
+# Present markup is harmless; it just no longer earns a search feature.
+RETIRED_RICH_RESULTS = {
+    "FAQPage": "FAQ rich results removed from Google Search (May 2026)",
+    "HowTo": "HowTo rich results removed from Google Search (Sept 2023)",
 }
 
 
@@ -119,9 +131,16 @@ def audit_page(filepath):
     for m in missing:
         issues.append({
             "type": "missing_schema",
-            "severity": "High" if m in ("Article", "Product", "FAQPage") else "Medium",
+            "severity": "High" if m in ("Article", "Product") else "Medium",
             "detail": f"Missing recommended {m} schema for {page_type} page",
         })
+    for t in found_types:
+        if t in RETIRED_RICH_RESULTS:
+            issues.append({
+                "type": "retired_rich_result",
+                "severity": "Info",
+                "detail": f"{t} is valid but earns no Google rich result: {RETIRED_RICH_RESULTS[t]}",
+            })
     if not found_types:
         issues.append({
             "type": "no_schema",

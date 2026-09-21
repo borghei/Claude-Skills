@@ -360,7 +360,7 @@ Required:
 **Market Context (2026):**
 - CAC is rising 40-60% since 2023 across B2B SaaS
 - Google Ads CPC increased 164% from 2019-2024; LinkedIn costs up 89%
-- Privacy regulations and cookie deprecation are reducing attribution accuracy
+- Privacy regulations, consent requirements, ad blockers, and browser tracking limits (Safari and Firefox block third-party cookies by default) are reducing attribution accuracy. Chrome did not deprecate third-party cookies — it kept user choice and is retiring most Privacy Sandbox APIs (as of September 2026, [Privacy Sandbox update](https://privacysandbox.google.com/blog/update-on-plans-for-privacy-sandbox-technologies)) — so plan around consent mode, server-side tagging, and conversion APIs (Meta CAPI, Google Enhanced Conversions), not a cookie cutoff date
 - AI-enhanced bidding strategies (Google Performance Max, LinkedIn Maximize Conversions) are becoming standard
 
 ---

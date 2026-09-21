@@ -25,7 +25,7 @@ Reference for measuring AEO performance: citation rate, brand mention rate, sent
 | **Citation distribution by surface** | Which LLM cites you most (ChatGPT vs Claude vs Perplexity etc.) |
 | **Query coverage** | % of in-category queries where you appear |
 | **Long-tail vs head citation** | Citations for high-volume vs niche queries |
-| **Schema markup rate** | % of your content with FAQ / QAPage / HowTo schema |
+| **Schema markup rate** | % of your content with valid, page-appropriate schema (FAQ / QAPage / HowTo optional — low impact, no Google rich result for FAQ/HowTo) |
 
 ---
 
@@ -303,7 +303,7 @@ Quarterly AEO investment by stage:
 | Stage | Investment | Activities |
 |-------|------------|-----------|
 | Pre-PMF | $0 | Focus on PMF; AEO can wait |
-| Early growth | $5k-$15k/quarter | Audit + restructure top 10 pages; FAQ schema; basic tracking |
+| Early growth | $5k-$15k/quarter | Audit + restructure top 10 pages; visible Q&A blocks; basic tracking |
 | Growth | $20k-$50k/quarter | Content production + tracking + competitive analysis |
 | Scale | $50k-$200k/quarter | Strategic AEO program + brand-positioning campaigns |
 | Category leader | $200k+ | Continuous + dominate citation in category |

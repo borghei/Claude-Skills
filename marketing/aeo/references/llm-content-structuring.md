@@ -161,7 +161,13 @@ For example:
 
 ## FAQ / QAPage / HowTo schema (JSON-LD)
 
-Structured data helps LLMs (and search engines) extract Q&A content from your pages. Three relevant schemas:
+Structured data can help machines classify Q&A content, but treat it as optional and low impact (as of September 2026):
+
+- Google retired HowTo rich results (Sept 2023) and FAQ rich results (May 2026); the markup is still valid schema.org but earns no Google search feature.
+- Google states that no special schema.org markup is required to appear in AI Overviews or AI Mode ([AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)).
+- No major LLM provider documents FAQ/HowTo markup as a citation signal. The visible Q&A and step structure is what gets extracted.
+
+If you still add it, keep it accurate and matching visible content. Three relevant schemas:
 
 ### FAQPage schema
 
@@ -410,7 +416,7 @@ Existing content audit checklist:
 - [ ] Are there extractable tables, lists, or step-by-steps?
 - [ ] Are statistics attributed?
 - [ ] Is there an FAQ section?
-- [ ] Is FAQ schema added?
+- [ ] (Optional) Is FAQ schema valid and matching visible Q&A?
 - [ ] Is the last-updated date visible?
 - [ ] Is author attribution visible?
 - [ ] Are images alt-texted?
@@ -426,7 +432,7 @@ Run through this for each priority page.
 | Question | Answer |
 |----------|--------|
 | Most impactful single change? | Add 1-2 sentence definition / direct answer at top of page |
-| Add FAQ schema everywhere? | On pages with Q&A content; not on all pages |
+| Add FAQ schema everywhere? | No — optional and low impact; only where visible Q&A exists. Visible structure matters more |
 | Length sweet spot? | 1500-2500 words for most content types |
 | Bullet vs numbered? | Numbered for sequential; bullet for parallel |
 | Tables in images? | Never. Always HTML / Markdown |

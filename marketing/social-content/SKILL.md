@@ -98,7 +98,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 - Best posting times: Tuesday-Thursday, 7-9 AM in target timezone
 
 **Twitter/X:**
-- 280 characters per tweet, threads for longer content
+- 280 characters per post for free accounts; X Premium subscribers can publish longer posts up to 25,000 characters ([X Help](https://help.x.com/en/using-x/x-premium), as of September 2026). Threads still work well for skimmable, multi-part content
 - First tweet of thread is the hook — it determines everything
 - Quote tweets with added insight outperform plain retweets
 - No more than 2-3 hashtags (fewer is better)
@@ -107,9 +107,9 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 **Instagram:**
 - Feed posts: square (1:1) or vertical (4:5)
 - Reels: vertical (9:16), 15-90 seconds
-- Carousels: up to 10 slides, first slide is the hook
+- Carousels: up to 20 photos/videos ([Instagram Help](https://help.instagram.com/269314186824048/)), first slide is the hook
 - Stories: 24-hour content, polls/questions drive engagement
-- Hashtags: 3-5 relevant ones (algorithm change in 2025 reduced hashtag importance)
+- Hashtags: up to 5 per post or Reel — Instagram capped hashtags at 5 in December 2025 (announced by Instagram's @creators account; as of September 2026). Use a few specific, relevant tags; they label content more than they drive reach
 
 **TikTok:**
 - Video length: 15-60 seconds optimal (up to 10 minutes)

@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: marketing
   domain: advertising
-  updated: 2026-03-09
+  updated: 2026-09-21
 ---
 # Paid Ads
 
@@ -26,6 +26,7 @@ Campaign strategy, audience targeting, budget optimization, and performance mana
 - [Platform Selection Guide](#platform-selection-guide)
 - [Campaign Structure Framework](#campaign-structure-framework)
 - [Audience Targeting by Platform](#audience-targeting-by-platform)
+- [Automated Campaign Types](#automated-campaign-types)
 - [Budget Allocation Strategy](#budget-allocation-strategy)
 - [Bid Strategy Progression](#bid-strategy-progression)
 - [Retargeting Playbook](#retargeting-playbook)
@@ -158,7 +159,7 @@ TIKTOK_Aware_18-34-Tech_BrandVideo_Mar26
 | Audience targeting | Layering intent signals | In-market, affinity, custom intent |
 | RLSA | Retargeting in search | Website visitor lists on search campaigns |
 | Customer Match | Targeting known contacts | Upload email lists for matched targeting |
-| Similar audiences | Expanding from known customers | Google's lookalike from customer lists |
+| Optimized targeting / audience signals | Expanding from known customers | Similar audiences were retired in Aug 2023. Use optimized targeting (Display, Demand Gen), audience signals (Performance Max), or Lookalike segments seeded from Customer Match / site visitors (Demand Gen, Video) |
 
 **Keyword match type strategy:**
 - **Exact match** [keyword]: Highest intent, lowest volume, highest CPC
@@ -170,9 +171,9 @@ TIKTOK_Aware_18-34-Tech_BrandVideo_Mar26
 | Targeting Type | Use When | How |
 |---------------|----------|-----|
 | Interest targeting | Cold prospecting | Layer 2-3 related interests |
-| Lookalike audiences | Expanding from customers | 1-3% lookalike from best customers (by LTV) |
+| Lookalike audiences | Expanding from customers | 1-3% lookalike from best customers (by LTV); in Advantage+ audience, lookalikes act as suggestions, not hard limits |
 | Custom audiences | Retargeting | Website visitors, email lists, video viewers |
-| Broad targeting | Trusting Meta's ML | No targeting restrictions, let the algorithm find converters |
+| Broad targeting / Advantage+ audience | Trusting Meta's ML | Only audience controls (location, minimum age, language, custom audience exclusions) are hard limits; everything else is a suggestion |
 | Detailed targeting | Narrow audience needed | Combine demographics + interests + behaviors |
 
 **Lookalike best practices:**
@@ -196,6 +197,44 @@ TIKTOK_Aware_18-34-Tech_BrandVideo_Mar26
 - Minimum audience size: 50,000 for awareness, 20,000 for conversion
 - Layer 2-3 targeting dimensions maximum (more layers = too narrow)
 - Exclude competitors, agencies, and job seekers if not relevant
+
+---
+
+## Automated Campaign Types
+
+Both Google and Meta now default new campaigns toward AI-driven, goal-based formats. Treat them as a trade: you give up placement, query, and audience control in exchange for reach and machine optimization. Feed them good inputs and set guardrails. (As of September 2026 — these products change frequently; check each platform's help center before launch.)
+
+| Campaign type | Platform | What it does | What you give up |
+|---------------|----------|--------------|------------------|
+| **Advantage+ sales / app / leads campaigns** | Meta | End-to-end automation of audience, placements, budget, and creative combinations for the sales, app promotion, and leads objectives | Detailed targeting becomes suggestions; placement and budget split handled by Meta |
+| **Advantage+ audience** | Meta | Uses your audience inputs as suggestions and expands beyond them when likely to improve results | Interests/lookalikes are no longer limits — only location, minimum age, language, and custom audience exclusions are hard controls |
+| **Performance Max** | Google | One goal-based campaign across Search, Shopping, YouTube, Display, Discover, Gmail, and Maps | Channel mix and most placement choice; audience signals guide learning but are not targeting |
+| **AI Max for Search** (2025) | Google | Optimization layer on a Search campaign: search term matching beyond your keywords (broad match + keywordless), text customization, final URL expansion | Exact query control; generated headlines/descriptions; landing-page choice (if URL expansion is on) |
+| **Demand Gen** | Google | Visual/video campaigns on YouTube (incl. Shorts), Discover, Gmail, and Display with Lookalike segments and optimized targeting | Fine placement control; lookalike reach can extend past seed similarity |
+
+**Ads in AI Overviews and AI Mode (Google):** there is no separate campaign type and no direct placement targeting. Text and Shopping ads from Search (with broad match or AI Max), Shopping, and Performance Max campaigns are eligible automatically; you cannot opt out, and Google Ads does not segment AI Overview ad reporting. Ads *within* AI Overviews are limited to English in a subset of countries (incl. the US), while ads above/below AI Overviews run in all AI Overview markets. ([About ads and AI Overviews](https://support.google.com/google-ads/answer/16297775))
+
+**When to use automated campaigns:**
+- Conversion tracking is verified and the account has steady conversion volume (automation learns from your conversion data)
+- You can supply creative volume (multiple images, videos, headlines per asset group / ad set)
+- You have a tested manual baseline to compare against — run as an experiment where the platform supports it (e.g., AI Max experiments)
+
+**How to feed them:**
+- **Conversion quality** — optimize for the event that correlates with revenue (qualified lead, purchase, value), not cheap proxies (page views, form starts). Pass values and import offline conversions / CAPI events so the model learns from real outcomes.
+- **Creative volume and variety** — supply all asset types; refresh fatigued assets rather than restarting campaigns.
+- **Audience signals** — Customer Match lists, converters, and site-visitor lists as signals (Google) or suggestions (Meta).
+
+**Guardrails:**
+
+| Guardrail | Google | Meta |
+|-----------|--------|------|
+| Brand traffic | Brand exclusions (PMax, Search/AI Max); brand inclusions in AI Max | Exclude existing-customer custom audiences |
+| Query control | Account- and campaign-level negative keywords (PMax negatives apply to Search/Shopping inventory) | n/a |
+| Landing pages | Turn off final URL expansion or use URL exclusions / URL inclusions | Set destination per ad |
+| Audience limits | Location and language settings | Audience controls: location, minimum age, language, custom audience exclusions |
+| Reporting | PMax channel performance and search terms reports; AI Max search terms reporting | Breakdowns by placement/age/gender |
+
+Sources: [About Performance Max](https://support.google.com/google-ads/answer/10724817), [About AI Max for Search](https://support.google.com/google-ads/answer/15910366), [How AI Max works](https://support.google.com/google-ads/answer/15910187), [Brand exclusions](https://support.google.com/google-ads/answer/14505308), [Demand Gen Lookalike segments](https://support.google.com/google-ads/answer/13541369), [Meta Advantage+](https://www.facebook.com/business/ads/meta-advantage-plus), [Advantage+ audience](https://www.facebook.com/business/help/273363992030035).
 
 ---
 
@@ -366,6 +405,8 @@ Is CPA above target?
 | Last-click attribution | Ignores all touchpoints before the final click |
 | View-through conversions | Often just people who would have converted regardless |
 
+**Meta attribution windows (as of September 2026):** Meta stopped returning the 7-day view and 28-day view windows on January 12, 2026. The remaining windows are 1-day click, 7-day click, 28-day click (Insights API), 1-day engaged view, and 1-day view ([Meta for Developers, Oct 2025](https://developers.facebook.com/blog/post/2025/10/16/ads-insights-api-metric-availability-updates/)). Historical reports that used 7- or 28-day view will not match current numbers — note the break in any trend line.
+
 ### Practical Attribution Approach
 
 1. **Use UTM parameters consistently** — Tag every campaign, ad, and link
@@ -394,7 +435,7 @@ utm_term: [keyword] (search only)
 - [ ] Conversion events defined and tested with real test conversion
 - [ ] UTM parameters added to all ad destination URLs
 - [ ] GA4 goals/events configured to match conversion events
-- [ ] Attribution window set appropriately (7 or 28 day)
+- [ ] Attribution window set appropriately and documented (e.g., Meta: 7-day click + 1-day view; 7-/28-day view windows no longer exist)
 
 ### Landing Page
 
@@ -469,7 +510,7 @@ utm_term: [keyword] (search only)
 | CTR dropping week over week | Creative fatigue (>3 frequency) | Refresh creative every 2-4 weeks. Expand audience to reduce frequency. |
 | Budget not spending | Audience too narrow or bid too low | Check audience size with `audience_sizer.py`. Increase bid 10-20%. |
 | Platform reports inflated conversions | Attribution window too wide | Compare platform data to GA4/CRM. Use incrementality testing for true lift. |
-| Performance Max underperforming | Insufficient conversion data | Need 30+ conversions in 30 days for PMax to optimize. Start with Search campaigns. |
+| Performance Max underperforming | Insufficient or low-quality conversion data | Build steady conversion volume first (start with Search), optimize to a revenue-linked conversion, and add brand exclusions + negatives so PMax is not just harvesting branded traffic. |
 | CPA spikes after budget increase | Algorithm learning disrupted | Never increase budget more than 20-30% at a time. Wait 3-5 days between changes. |
 
 ---

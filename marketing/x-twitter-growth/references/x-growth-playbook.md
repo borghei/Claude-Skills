@@ -2,19 +2,25 @@
 
 ## Algorithm Fundamentals
 
-### How X Ranks Content (2025-2026)
+### How X Ranks Content
 
-The X algorithm uses a multi-stage ranking system:
+> **Historical vs. current (as of September 2026).** The candidate counts, 50/50 mix, and signal weights below come from X's **2023** open-source release of its recommendation algorithm. They are historical and approximate. In 2026 X published a newer For You ranker at [github.com/xai-org/x-algorithm](https://github.com/xai-org/x-algorithm): in-network and out-of-network posts are ranked together by a transformer model that predicts how likely *this viewer* is to take each action (like, reply, repost, dwell, block, report, etc.), and configurable weights blend those predicted probabilities into a score. The repo notes that the weights scale each viewer's *predicted* probability of an action, not raw engagement counts — so "one reply = N likes" arithmetic does not hold. Check the repo for current parameters before quoting numbers.
+
+The 2023 system used a multi-stage ranking pipeline:
 
 1. **Candidate generation** - Selects ~1,500 candidate tweets
 2. **Feature extraction** - Analyzes tweet and author signals
 3. **Ranking model** - Scores each candidate
 4. **Filtering** - Removes low-quality, duplicate, blocked content
-5. **Mixing** - Blends in-network (50%) and out-of-network (50%) content
+5. **Mixing** - Blends in-network (~50%) and out-of-network (~50%) content
 
-### Key Ranking Signals
+The current ranker keeps the same shape (retrieve in- and out-of-network candidates, hydrate, filter, score, then blend in ads and recommendations), with visibility filtering decided separately from ranking.
 
-**Positive signals (ordered by weight):**
+### Key Ranking Signals (2023 release — historical)
+
+The durable lesson holds in both versions: conversation (replies, especially replies you engage with), reposts, and dwell outweigh passive likes, and negative feedback (mutes, blocks, reports) is heavily penalized.
+
+**Positive signals (ordered by weight in the 2023 release; multiples are approximate):**
 1. Reply (weighted ~27x a like)
 2. Retweet/Quote tweet (weighted ~4x a like)
 3. Like
@@ -29,7 +35,10 @@ The X algorithm uses a multi-stage ranking system:
 - Report
 - Block
 
-### Content Type Multipliers
+### Content Type Multipliers (unofficial heuristics)
+
+These are practitioner rules of thumb, not published X parameters — use them as testing hypotheses.
+
 
 - Text-only tweets: 1.0x baseline
 - Tweets with images: 2.0x

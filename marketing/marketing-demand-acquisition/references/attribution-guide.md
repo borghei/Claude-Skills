@@ -176,7 +176,7 @@ Success Criteria: [20% lift, 95% confidence]
 Variant A (Control): [Current pricing page]
 Variant B (Treatment): [Pricing page + case study carousel]
 
-Tools: [HubSpot A/B test or Google Optimize]
+Tools: [HubSpot A/B test or another A/B testing tool]
 ```
 
 ### Statistical Requirements

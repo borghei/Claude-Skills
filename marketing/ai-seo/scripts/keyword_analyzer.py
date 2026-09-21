@@ -53,12 +53,12 @@ AI_OVERVIEW_TRIGGERS = [
 FORMAT_RECOMMENDATIONS = {
     "informational": {
         "primary": "Definition block + numbered steps",
-        "schema": "FAQPage, HowTo, or Article",
+        "schema": "Article + BreadcrumbList (FAQPage/HowTo optional; no Google rich result)",
         "ai_format": "Lead with 1-2 sentence definition, then structured steps",
     },
     "commercial": {
         "primary": "Comparison table + pros/cons lists",
-        "schema": "Product, Review, or FAQPage",
+        "schema": "Product + Review snippet",
         "ai_format": "Structured comparison with clear recommendation",
     },
     "transactional": {

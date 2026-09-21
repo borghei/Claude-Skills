@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: marketing
   domain: content
-  updated: 2026-03-09
+  updated: 2026-09-21
 ---
 # Content Humanizer
 
@@ -396,9 +396,16 @@ Every vague claim must become either specific or honestly qualified. There is no
 | Brand voice inconsistent after editing | Voice injection done without reference examples or clear guidelines | Request one example of writing the brand loves before injecting voice; extract formality, humor, and relationship stance |
 | Over-humanized technical documentation | Personality injection applied to content that needs clarity over personality | Match humanization level to content type — docs need clarity; blog posts and marketing copy need personality |
 | Specificity gaps flagged but cannot be filled | Writer does not have access to real data, expert quotes, or original research | Flag clearly as "author must provide" — humanizer cannot invent proof points. Honest qualification beats vague authority |
-| AI detection tools still flagging content | Structural patterns (SEEB uniformity) persist despite word-level changes | Vary paragraph structures deliberately — single-sentence paragraphs, questions, fragments, asides, confessions |
+| Reviewers still say the piece reads as robotic | Structural patterns (SEEB uniformity) persist despite word-level changes | Vary paragraph structures deliberately — single-sentence paragraphs, questions, fragments, asides. Judge by reader quality, not by AI-detector scores |
 | Readability dropped after humanization | Informal language and fragments reduced Flesch score | Balance personality with readability — fragments are fine but complex vocabulary can hurt scores. Target Flesch 60-70 |
-| Google SynthID or similar tool detects AI origin | Content was generated with tools that embed watermarks (e.g., Google Gemini) | Rewrite substantially rather than editing in place; change structure, not just words. SynthID detection is statistical |
+
+### Compliance Note: Humanizing Is Not Hiding Provenance
+
+This skill improves voice, clarity, and specificity. It is not a tool for removing watermarks (e.g., SynthID) or defeating AI-content detection, and should not be used to conceal AI involvement where disclosure is required.
+
+- **EU AI Act Article 50** applies from 2 August 2026 (as of September 2026). Providers of generative AI systems must mark outputs in a machine-readable, detectable way (Art. 50(2); systems already on the market before 2 August 2026 have until 2 December 2026). Deployers must disclose deepfakes and label AI-generated or manipulated text published to inform the public on matters of public interest — unless the text has undergone genuine human review or editorial control by someone who holds editorial responsibility (Art. 50(4)). Spell-checking or a light pass does not count as that review. Source: [European Commission — Transparency obligations under Article 50](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act).
+- **Platform and client rules** — many ad platforms, publishers, and clients require AI disclosure for synthetic images, video, or endorsements regardless of how the text reads.
+- **Practical rule:** if disclosure is required, keep it. Humanize the writing; do not strip provenance labels, metadata, or watermarks. When in doubt, route to legal review.
 
 ---
 
@@ -435,10 +442,10 @@ Every vague claim must become either specific or honestly qualified. There is no
 
 **Known limitations:**
 - Cannot add specificity where no data exists — must flag for author input
-- AI detection tools (GPTZero, Originality.ai, Google SynthID) have false positive rates of 10-30%
+- Third-party AI-text detectors are unreliable and produce false positives — do not use their scores as a quality target
 - Voice injection without clear brand guidelines produces inconsistent results
 - Humanization of very short content (<300 words) may not have enough surface area for meaningful improvement
-- Content watermarked by AI generation tools (SynthID) may require substantial rewriting beyond pattern-level edits
+- Out of scope: removing watermarks or provenance markers (e.g., SynthID, C2PA metadata) — see the Compliance Note above
 
 ---
 

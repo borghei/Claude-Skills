@@ -48,7 +48,7 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 | Metric | Good | Needs Improvement | Poor |
 |--------|------|-------------------|------|
 | LCP (Largest Contentful Paint) | < 2.5s | 2.5s - 4s | > 4s |
-| FID (First Input Delay) | < 100ms | 100 - 300ms | > 300ms |
+| INP (Interaction to Next Paint) | ≤ 200ms | 200 - 500ms | > 500ms |
 | CLS (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 |
 
 **Structure:**
@@ -184,7 +184,7 @@ python scripts/backlink_analyzer.py --domain example.com --output links.csv
 |---------|-------------|-----|
 | Rankings dropped after Google core update | E-E-A-T signals insufficient or content quality below new thresholds | Audit content against December 2025 / March 2026 core update criteria — add experience signals, author credentials, original data |
 | High impressions but low CTR | Title tags and meta descriptions not compelling enough for the SERP | Rewrite titles with numbers, power words, and clear value props; test meta descriptions with hooks |
-| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers; 43% of sites still fail INP in 2026 |
+| FID replaced by INP — pages now failing CWV | INP measures all interactions, not just first — JS-heavy pages fail | Break long JS tasks, defer third-party scripts, audit event handlers. INP replaced FID as a Core Web Vital on March 12, 2024 ("good" = 200 ms or less) |
 | Indexed pages declining in Search Console | Google tightening quality bar — deindexing thin or duplicate content | Consolidate thin pages, add unique content, improve E-E-A-T signals on remaining pages |
 | AI Overviews stealing clicks from position 1 | Google AI Overviews now appear in 50%+ of queries, reducing organic CTR by ~42% | Optimize for AI citation (extractable content blocks), add FAQ schema, target queries less likely to trigger AI Overviews |
 | Keyword cannibalization across blog and product pages | Multiple pages competing for same keyword with conflicting intent | Map one primary keyword per page, consolidate or redirect competing pages, differentiate intent |

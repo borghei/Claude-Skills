@@ -21,15 +21,15 @@ from datetime import date
 
 SUPPORTED_TYPES = {
     "Article": "Blog posts, news articles, guides",
-    "FAQPage": "FAQ sections with Q&A pairs",
-    "HowTo": "Step-by-step tutorials and guides",
+    "FAQPage": "FAQ sections with Q&A pairs (no Google rich result since May 2026)",
+    "HowTo": "Step-by-step tutorials (no Google rich result since Sept 2023)",
     "Product": "Product pages with pricing",
     "Organization": "Company/brand homepage",
     "Person": "Author or team member pages",
     "LocalBusiness": "Local business with physical location",
     "BreadcrumbList": "Navigation breadcrumb trail",
     "Event": "Events with dates and locations",
-    "WebSite": "Site-level with search action",
+    "WebSite": "Site-level name/URL (SearchAction kept for other consumers; Google sitelinks search box retired Nov 2024)",
     "SoftwareApplication": "Software or app listings",
     "VideoObject": "Video content pages",
     "Course": "Online courses and training",
