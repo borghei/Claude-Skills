@@ -16,20 +16,24 @@ async function pathExists(p) {
   }
 }
 
+// --to wins; otherwise detect. --dir needs no detected assistant: it installs
+// into that path directly, recorded under the "custom" target.
+export async function resolveTarget(options, cwd = process.cwd()) {
+  if (options.to) return getTarget(options.to);
+  const detected = await detectTarget(cwd);
+  if (detected) return detected;
+  return options.dir ? { name: "custom" } : null;
+}
+
 export async function addCommand(skillName, options) {
   const skill = await findSkill(skillName);
 
-  let target;
-  if (options.to) {
-    target = getTarget(options.to);
-  } else {
-    target = await detectTarget();
-    if (!target) {
-      log.error(
-        `Couldn't detect an AI assistant in this directory.\n  Re-run with --to <${TARGET_NAMES.join("|")}>\n  Or cd into a project that has one of: .claude/, .cursor/, .codex/, .gemini/, .cursorrules, .windsurfrules, .clinerules, .goosehints, AGENTS.md`,
-      );
-      process.exit(1);
-    }
+  const target = await resolveTarget(options);
+  if (!target) {
+    log.error(
+      `Couldn't detect an AI assistant in this directory.\n  Re-run with --to <${TARGET_NAMES.join("|")}> or --dir <path>\n  Or cd into a project that has one of: .claude/, .cursor/, .codex/, .gemini/, .cursorrules, .windsurfrules, .clinerules, .goosehints, AGENTS.md`,
+    );
+    process.exit(1);
   }
 
   const installPath = options.dir

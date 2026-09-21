@@ -1,3 +1,6 @@
+// Deterministic: these tests read the bundled catalog, never the network.
+process.env.CLAUDE_SKILLS_OFFLINE = "1";
+
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { loadManifest, findSkill } from "../src/manifest.js";
@@ -69,4 +72,14 @@ test("detectTarget returns null for empty dir", async () => {
   const dir = await mkdtemp(join(tmpdir(), "cs-test-"));
   const target = await detectTarget(dir);
   assert.equal(target, null);
+});
+
+test("resolveTarget: --dir installs without a detected assistant", async () => {
+  const { resolveTarget } = await import("../src/commands/add.js");
+  const dir = await mkdtemp(join(tmpdir(), "cs-test-"));
+  assert.equal((await resolveTarget({ dir: "./out" }, dir))?.name, "custom");
+  assert.equal(await resolveTarget({}, dir), null);
+  await mkdir(join(dir, ".claude"));
+  assert.equal((await resolveTarget({ dir: "./out" }, dir))?.name, "claude");
+  assert.equal((await resolveTarget({ to: "cursor" }, dir))?.name, "cursor");
 });

@@ -20,7 +20,7 @@ claude-skills info senior-fullstack        # Full detail for one skill
 
 claude-skills add senior-fullstack         # Install into the detected assistant
 claude-skills add senior-fullstack --to cursor   # Force target
-claude-skills add senior-fullstack --dir ./my-skills  # Install into a specific dir
+claude-skills add senior-fullstack --dir ./my-skills  # Install into a specific dir (no assistant detection needed)
 claude-skills add senior-fullstack --force # Overwrite if already installed
 
 claude-skills update                       # Update every installed skill
@@ -48,6 +48,18 @@ The CLI detects your AI assistant by looking for marker files in the current dir
 | `.goosehints` | Goose | `.ai-skills/<name>/` |
 
 If the CLI can't detect a target, pass `--to <name>` explicitly.
+
+## Skill catalog
+
+The CLI reads the live catalog from the repository's `main` branch, so skills added to the library show up without a new npm release. It caches the catalog for an hour (`~/.cache/claude-skills/`) and falls back to the copy bundled in the package when you're offline or GitHub is unreachable.
+
+| Variable | Effect |
+|---|---|
+| `CLAUDE_SKILLS_OFFLINE=1` | Use only the bundled catalog (no network call for the catalog) |
+| `CLAUDE_SKILLS_CACHE_DIR` | Cache location (default `$XDG_CACHE_HOME/claude-skills` or `~/.cache/claude-skills`) |
+| `CLAUDE_SKILLS_CATALOG_URL` | Alternative catalog URL, e.g. a fork |
+
+Skill files are always downloaded from `main`.
 
 ## Lockfile
 
