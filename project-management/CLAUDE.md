@@ -28,6 +28,12 @@ This guide covers the **66 production-ready project management skills** organize
 - **execution/test-scenarios/** - 7-category coverage generator (1 tool)
 - **execution/sprint-plan/** - Capacity math + commit discipline (1 tool)
 
+**AI-era delivery additions (September 2026, 2 new skills):**
+
+### AI prototyping and agent delivery (2 NEW)
+- **discovery/ai-prototyping/** - Idea → AI-generated prototype → user validation → engineering handoff; prototype-vs-spec by uncertainty type, F0-F4 fidelity ladder, handoff gate (2 tools: `prototype_plan.py`, `prototype_handoff_checker.py`)
+- **execution/agents-in-the-team/** - Delivery when AI coding/ops agents take tickets; delegation bands + hard blocks, agent-ready tickets, human accountability, review-capacity gate, DORA + agent metrics by author type, security, rollout (2 tools: `agent_delegation_scorer.py`, `agent_delivery_metrics.py`)
+
 
 ### Role-Based Skills (10)
 1. **senior-pm/** - Portfolio management, stakeholder mapping, EMV risk analysis, executive reporting
@@ -210,7 +216,7 @@ See `notion-pm/references/notion-api-patterns.md` for full library.
 
 **Focus:** Product discovery workflows — ideation, experimentation, assumption mapping, risk analysis, interview synthesis
 
-**Python Tools:** `experiment_designer.py`, `assumption_tracker.py`, `risk_categorizer.py`, `interview_synthesizer.py`
+**Python Tools:** `experiment_designer.py`, `assumption_tracker.py`, `risk_categorizer.py`, `interview_synthesizer.py`, `prototype_plan.py`, `prototype_handoff_checker.py`
 
 **Key Workflows:**
 - Product Trio ideation (PM + Designer + Engineer perspectives)
@@ -218,12 +224,13 @@ See `notion-pm/references/notion-api-patterns.md` for full library.
 - Assumption mapping with Impact × Risk prioritization
 - Pre-mortem with Tiger/Paper Tiger/Elephant classification
 - Customer interview → opportunity solution tree
+- AI prototyping: prototype-vs-spec decision, fidelity plan with kill criteria, handoff gate (`ai-prototyping/`)
 
 ### Execution Skills (`execution/`)
 
 **Focus:** PM execution artifacts — PRDs, OKRs, roadmaps, prioritization, refinement, flow metrics, status, launch, release
 
-**Python Tools:** `prd_scaffolder.py`, `okr_validator.py`, `roadmap_transformer.py`, `prioritization_scorer.py`, `release_notes_generator.py`, `refinement_scorer.py`, `status_generator.py`, `metric_tree_builder.py`, `flow_metrics.py`, `dependency_graph.py`
+**Python Tools:** `prd_scaffolder.py`, `okr_validator.py`, `roadmap_transformer.py`, `prioritization_scorer.py`, `release_notes_generator.py`, `refinement_scorer.py`, `status_generator.py`, `metric_tree_builder.py`, `flow_metrics.py`, `dependency_graph.py`, `agent_delegation_scorer.py`, `agent_delivery_metrics.py`
 
 **Key Workflows:**
 - PRD generation with 8-section structure
@@ -237,6 +244,7 @@ See `notion-pm/references/notion-api-patterns.md` for full library.
 - Weekly exec status update from issue data
 - Beta + launch playbooks
 - Release notes from tickets/changelogs
+- Agents in the team: agent-eligibility scoring, review-capacity gate, human vs agent delivery metrics (`agents-in-the-team/`)
 
 ### Career Skills (`career/`) ★ NEW
 

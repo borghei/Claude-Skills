@@ -1,0 +1,72 @@
+{
+  "sprint": "Sprint 42",
+  "as_of": "2026-09-21",
+  "team": {
+    "name": "Payments Platform",
+    "reviewers": [
+      {"name": "Senior engineer A", "review_hours_per_sprint": 6},
+      {"name": "Senior engineer B", "review_hours_per_sprint": 6},
+      {"name": "Tech lead", "review_hours_per_sprint": 4}
+    ],
+    "max_review_utilization": 0.8,
+    "review_model": {"base_hours": 0.5, "hours_per_point": 0.5, "rework_allowance": 0.3}
+  },
+  "tickets": [
+    {
+      "id": "PAY-101", "title": "Add unit tests for currency rounding helpers", "type": "test",
+      "risk": "low", "blast_radius": "isolated", "test_coverage": "good", "points": 2,
+      "acceptance_criteria": ["Tests cover half-even rounding for 5 currencies", "Coverage of rounding.py at least 90%"],
+      "context_links": ["src/money/rounding.py"], "constraints": ["Do not change production code"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-102", "title": "Bump HTTP client library to latest patch", "type": "dependency-update",
+      "risk": "low", "blast_radius": "module", "test_coverage": "good", "points": 1,
+      "acceptance_criteria": ["Lockfile updated to latest patch release", "CI green, no new deprecation warnings"],
+      "context_links": ["requirements.lock"], "constraints": ["Patch versions only"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-103", "title": "Fix pagination off-by-one on invoice list API", "type": "bug",
+      "risk": "medium", "blast_radius": "service", "test_coverage": "partial", "points": 3,
+      "acceptance_criteria": ["Page 2 starts at item limit+1", "Regression test added for boundary"],
+      "context_links": ["api/invoices.py", "Issue thread with repro"], "constraints": ["No API contract change"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-104", "title": "Refactor refund service into smaller modules", "type": "refactor",
+      "risk": "medium", "blast_radius": "service", "test_coverage": "partial", "points": 8,
+      "acceptance_criteria": ["No behavior change; all existing tests pass", "Each module under 300 lines"],
+      "context_links": ["services/refunds/"], "constraints": ["Keep public interfaces"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-105", "title": "Rotate webhook signing secret handling", "type": "security",
+      "risk": "high", "blast_radius": "cross-system", "test_coverage": "partial", "points": 5,
+      "touches": ["secrets", "payments"],
+      "acceptance_criteria": ["Old and new secrets accepted during rotation window"],
+      "context_links": ["runbooks/webhook-secrets.md"], "constraints": ["Zero-downtime rotation"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-106", "title": "Improve checkout", "type": "feature",
+      "risk": "medium", "blast_radius": "service", "test_coverage": "none", "points": 5,
+      "acceptance_criteria": [],
+      "planned_assignee": "human"
+    },
+    {
+      "id": "PAY-107", "title": "Update API docs for new invoice filters", "type": "docs",
+      "risk": "low", "blast_radius": "isolated", "test_coverage": "partial", "points": 1,
+      "acceptance_criteria": ["All 4 new filters documented with examples", "Docs build passes link check"],
+      "context_links": ["docs/api/invoices.md"], "constraints": ["Follow docs style guide"],
+      "planned_assignee": "agent"
+    },
+    {
+      "id": "PAY-108", "title": "Add CSV export to payouts report", "type": "feature",
+      "risk": "medium", "blast_radius": "module", "test_coverage": "good", "points": 5,
+      "acceptance_criteria": ["Export matches on-screen columns", "Exports up to 50k rows under 10 s", "Amounts use locale-independent format"],
+      "context_links": ["reports/payouts.py", "Design note in ticket"], "constraints": ["Reuse existing export helper"],
+      "planned_assignee": "agent"
+    }
+  ]
+}

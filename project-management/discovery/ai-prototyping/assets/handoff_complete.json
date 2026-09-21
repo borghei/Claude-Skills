@@ -1,0 +1,46 @@
+{
+  "initiative": "Expense approvals on mobile",
+  "as_of": "2026-09-21",
+  "prototype_link": "https://example.internal/prototypes/mobile-approvals-v3",
+  "disposition": "throwaway - engineering rebuilds on the production mobile stack; reuse copy and flow only",
+  "problem": "Finance approvers at 50-500 employee customers batch approvals into a weekly desktop session, so employees wait a median of 6 days for reimbursement and submit duplicate chasers to support.",
+  "target_users": "Finance approvers (primary), submitting employees (secondary)",
+  "success_metrics": [
+    {"name": "Median submit-to-approval time", "baseline": "6 days", "target": "2 days", "window": "90 days after GA"},
+    {"name": "Share of approvals done on mobile", "baseline": "0%", "target": "30%", "window": "90 days after GA"}
+  ],
+  "validated_findings": [
+    {"hypothesis": "H1 desirability", "participants": 10, "threshold": "at least 6 of 10 join pilot waitlist", "result": "7 of 10 joined", "status": "validated"},
+    {"hypothesis": "H2 usability", "participants": 6, "threshold": "at least 5 of 6 unassisted, median under 60s", "result": "5 of 6 unassisted, median 48s; 1 failure on the policy-violation badge", "status": "validated with fix"},
+    {"hypothesis": "H3 feasibility", "participants": 0, "threshold": "at least 90 percent precision", "result": "not tested in prototype - carried as a risk", "status": "open"}
+  ],
+  "throwaway_list": [
+    "Auth: prototype uses a hard-coded demo login - build on the production SSO/session layer",
+    "Error states: offline, timeout and partial-sync states are not designed",
+    "Accessibility: generated UI not audited; screen reader labels missing on the receipt viewer",
+    "Security: no input validation, no rate limiting, no security review of generated code",
+    "Performance: synthetic data set of 40 receipts; no pagination or image compression",
+    "Data model: flat JSON mock - engineering designs the real schema and audit trail"
+  ],
+  "acceptance_criteria": [
+    "Given a pending expense, when the approver taps the push notification, then the expense detail opens in under 2 seconds on a mid-range device",
+    "Given an out-of-policy line, when the approver views the expense, then the violation badge and the policy rule text are shown before the approve button",
+    "Given the approver rejects, when they submit, then a reason is mandatory and the employee is notified within 1 minute",
+    "All approval screens must meet WCAG 2.2 AA for contrast, labels and keyboard/switch access"
+  ],
+  "non_goals": [
+    "Submitting expenses on mobile (already shipped)",
+    "Multi-level approval chains (desktop only in v1)",
+    "Offline approvals"
+  ],
+  "constraints": ["Ship on the existing mobile app release train", "No new vendor for OCR in v1"],
+  "risks": ["H3 OCR precision unproven on real receipts - spike before sprint 2", "Push notification opt-in rates on Android unknown"],
+  "data_privacy": {
+    "real_customer_data_used": false,
+    "approval_ref": "",
+    "notes": "Prototype used 40 synthetic receipts generated from public templates; no customer receipts were uploaded to any prototype tool"
+  },
+  "security": "Prototype repository archived read-only; no production secrets were used; generated code will not be merged - rebuild follows the standard secure-SDLC review",
+  "accessibility": "Baseline WCAG 2.2 AA for the production build; prototype findings list known gaps above",
+  "ip_review": "Prototype tool terms reviewed by legal on 2026-09-02: outputs owned by us; no third-party assets or fonts with restrictive licenses in the prototype"
+}

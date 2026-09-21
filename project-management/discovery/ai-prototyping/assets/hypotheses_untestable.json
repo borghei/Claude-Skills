@@ -1,0 +1,42 @@
+{
+  "initiative": "AI meeting recap for sales teams",
+  "as_of": "2026-09-21",
+  "constraints": {
+    "real_data_approved": false,
+    "max_days": 5
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "Sales reps will love an auto-generated call recap",
+      "uncertainty": "desirability",
+      "impact": 5,
+      "evidence": "none",
+      "target_segment": "",
+      "success_metric": "",
+      "threshold": ""
+    },
+    {
+      "id": "H2",
+      "statement": "The recap can be generated from real call recordings",
+      "uncertainty": "feasibility",
+      "impact": 4,
+      "evidence": "anecdotal",
+      "needs_real_data": true,
+      "target_segment": "Engineering spike (no users)",
+      "success_metric": "Recap judged accurate by the account owner",
+      "threshold": ""
+    },
+    {
+      "id": "H3",
+      "statement": "Reps can find and edit the recap before it syncs to the CRM",
+      "uncertainty": "usability",
+      "impact": 3,
+      "evidence": "none",
+      "dynamic_states": true,
+      "target_segment": "Account executives, mid-market team",
+      "success_metric": "Unassisted task success on 'edit and sync the recap'",
+      "threshold": "at least 5 of 6 participants"
+    }
+  ]
+}

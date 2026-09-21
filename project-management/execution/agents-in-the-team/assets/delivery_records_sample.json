@@ -1,0 +1,463 @@
+{
+ "team": "Payments Platform",
+ "as_of": "2026-09-21",
+ "period": {
+  "start": "2026-08-03",
+  "end": "2026-08-31"
+ },
+ "prs": [
+  {
+   "id": "H-1",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-04T22:00:00Z",
+   "first_review_at": "2026-08-05T00:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 25,
+   "merged_at": "2026-08-05T18:00:00Z"
+  },
+  {
+   "id": "H-2",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-06T11:00:00Z",
+   "first_review_at": "2026-08-06T15:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 35,
+   "merged_at": "2026-08-07T13:00:00Z"
+  },
+  {
+   "id": "H-3",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-08T00:00:00Z",
+   "first_review_at": "2026-08-08T03:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 20,
+   "merged_at": "2026-08-08T22:00:00Z"
+  },
+  {
+   "id": "H-4",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-09T13:00:00Z",
+   "first_review_at": "2026-08-09T18:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 30,
+   "merged_at": "2026-08-10T19:00:00Z"
+  },
+  {
+   "id": "H-5",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-11T02:00:00Z",
+   "first_review_at": "2026-08-11T04:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 40,
+   "merged_at": "2026-08-11T20:00:00Z"
+  },
+  {
+   "id": "H-6",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-12T15:00:00Z",
+   "first_review_at": "2026-08-12T21:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 25,
+   "merged_at": "2026-08-13T19:00:00Z"
+  },
+  {
+   "id": "H-7",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-14T04:00:00Z",
+   "first_review_at": "2026-08-14T07:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 15,
+   "merged_at": "2026-08-15T04:00:00Z"
+  },
+  {
+   "id": "H-8",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-15T17:00:00Z",
+   "first_review_at": "2026-08-15T21:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 30,
+   "merged_at": "2026-08-16T13:00:00Z"
+  },
+  {
+   "id": "H-9",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-17T06:00:00Z",
+   "first_review_at": "2026-08-17T11:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 45,
+   "merged_at": "2026-08-18T22:00:00Z"
+  },
+  {
+   "id": "H-10",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-18T19:00:00Z",
+   "first_review_at": "2026-08-18T21:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 20,
+   "merged_at": "2026-08-19T11:00:00Z"
+  },
+  {
+   "id": "H-11",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-20T08:00:00Z",
+   "first_review_at": "2026-08-20T11:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 25,
+   "merged_at": "2026-08-21T10:00:00Z"
+  },
+  {
+   "id": "H-12",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-21T21:00:00Z",
+   "first_review_at": "2026-08-22T01:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 30,
+   "merged_at": "2026-08-23T03:00:00Z",
+   "fix_of": "H-5"
+  },
+  {
+   "id": "H-13",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-23T10:00:00Z",
+   "first_review_at": "2026-08-23T16:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 50,
+   "merged_at": "2026-08-24T22:00:00Z"
+  },
+  {
+   "id": "H-14",
+   "author_type": "human",
+   "state": "merged",
+   "opened_at": "2026-08-24T23:00:00Z",
+   "first_review_at": "2026-08-25T02:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 20,
+   "merged_at": "2026-08-25T21:00:00Z"
+  },
+  {
+   "id": "H-15",
+   "author_type": "human",
+   "state": "closed",
+   "opened_at": "2026-08-26T12:00:00Z",
+   "first_review_at": "2026-08-26T20:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 15,
+   "closed_at": "2026-08-28T02:00:00Z"
+  },
+  {
+   "id": "H-16",
+   "author_type": "human",
+   "state": "closed",
+   "opened_at": "2026-08-28T01:00:00Z",
+   "first_review_at": "2026-08-28T06:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 10,
+   "closed_at": "2026-08-29T12:00:00Z"
+  },
+  {
+   "id": "A-1",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-05T09:00:00Z",
+   "first_review_at": "2026-08-05T15:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 45,
+   "merged_at": "2026-08-06T15:00:00Z"
+  },
+  {
+   "id": "A-2",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-06T22:00:00Z",
+   "first_review_at": "2026-08-07T07:00:00Z",
+   "changes_requested": 2,
+   "review_minutes": 60,
+   "merged_at": "2026-08-08T14:00:00Z"
+  },
+  {
+   "id": "A-3",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-08T11:00:00Z",
+   "first_review_at": "2026-08-08T16:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 30,
+   "merged_at": "2026-08-09T13:00:00Z"
+  },
+  {
+   "id": "A-4",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-10T00:00:00Z",
+   "first_review_at": "2026-08-10T08:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 55,
+   "merged_at": "2026-08-11T20:00:00Z"
+  },
+  {
+   "id": "A-5",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-11T13:00:00Z",
+   "first_review_at": "2026-08-11T20:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 40,
+   "merged_at": "2026-08-12T19:00:00Z"
+  },
+  {
+   "id": "A-6",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-13T02:00:00Z",
+   "first_review_at": "2026-08-13T12:00:00Z",
+   "changes_requested": 2,
+   "review_minutes": 70,
+   "merged_at": "2026-08-15T04:00:00Z",
+   "reverted": true
+  },
+  {
+   "id": "A-7",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-14T15:00:00Z",
+   "first_review_at": "2026-08-14T21:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 35,
+   "merged_at": "2026-08-15T19:00:00Z"
+  },
+  {
+   "id": "A-8",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-16T04:00:00Z",
+   "first_review_at": "2026-08-16T16:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 50,
+   "merged_at": "2026-08-18T02:00:00Z"
+  },
+  {
+   "id": "A-9",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-17T17:00:00Z",
+   "first_review_at": "2026-08-18T01:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 45,
+   "merged_at": "2026-08-19T05:00:00Z",
+   "fix_of": "A-2"
+  },
+  {
+   "id": "A-10",
+   "author_type": "agent",
+   "state": "merged",
+   "opened_at": "2026-08-19T06:00:00Z",
+   "first_review_at": "2026-08-19T15:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 40,
+   "merged_at": "2026-08-21T00:00:00Z"
+  },
+  {
+   "id": "A-11",
+   "author_type": "agent",
+   "state": "closed",
+   "opened_at": "2026-08-20T19:00:00Z",
+   "first_review_at": "2026-08-21T09:00:00Z",
+   "changes_requested": 2,
+   "review_minutes": 40,
+   "closed_at": "2026-08-22T15:00:00Z"
+  },
+  {
+   "id": "A-12",
+   "author_type": "agent",
+   "state": "closed",
+   "opened_at": "2026-08-22T08:00:00Z",
+   "first_review_at": "2026-08-22T19:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 30,
+   "closed_at": "2026-08-24T01:00:00Z"
+  },
+  {
+   "id": "A-13",
+   "author_type": "agent",
+   "state": "closed",
+   "opened_at": "2026-08-23T21:00:00Z",
+   "first_review_at": "2026-08-24T13:00:00Z",
+   "changes_requested": 0,
+   "review_minutes": 20,
+   "closed_at": "2026-08-25T19:00:00Z"
+  },
+  {
+   "id": "A-14",
+   "author_type": "agent",
+   "state": "closed",
+   "opened_at": "2026-08-25T10:00:00Z",
+   "first_review_at": "2026-08-25T22:00:00Z",
+   "changes_requested": 1,
+   "review_minutes": 25,
+   "closed_at": "2026-08-27T04:00:00Z"
+  }
+ ],
+ "deployments": [
+  {
+   "id": "D-1",
+   "at": "2026-08-05T15:00:00Z",
+   "prs": [
+    "H-1",
+    "H-2"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-2",
+   "at": "2026-08-07T15:00:00Z",
+   "prs": [
+    "A-1",
+    "H-3"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-3",
+   "at": "2026-08-09T15:00:00Z",
+   "prs": [
+    "H-4"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-4",
+   "at": "2026-08-11T15:00:00Z",
+   "prs": [
+    "A-2",
+    "A-3"
+   ],
+   "failed": true,
+   "unplanned": false,
+   "recovered_at": "2026-08-11T16:35:00Z"
+  },
+  {
+   "id": "D-5",
+   "at": "2026-08-13T15:00:00Z",
+   "prs": [
+    "H-5",
+    "H-6"
+   ],
+   "failed": true,
+   "unplanned": false,
+   "recovered_at": "2026-08-13T15:50:00Z"
+  },
+  {
+   "id": "D-6",
+   "at": "2026-08-15T15:00:00Z",
+   "prs": [
+    "A-4"
+   ],
+   "failed": false,
+   "unplanned": true
+  },
+  {
+   "id": "D-7",
+   "at": "2026-08-17T15:00:00Z",
+   "prs": [
+    "H-7",
+    "H-8"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-8",
+   "at": "2026-08-19T15:00:00Z",
+   "prs": [
+    "A-5",
+    "H-9"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-9",
+   "at": "2026-08-21T15:00:00Z",
+   "prs": [
+    "H-10"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-10",
+   "at": "2026-08-23T15:00:00Z",
+   "prs": [
+    "A-6",
+    "A-7"
+   ],
+   "failed": true,
+   "unplanned": false,
+   "recovered_at": "2026-08-23T19:00:00Z"
+  },
+  {
+   "id": "D-11",
+   "at": "2026-08-25T15:00:00Z",
+   "prs": [
+    "H-11",
+    "H-12"
+   ],
+   "failed": false,
+   "unplanned": true
+  },
+  {
+   "id": "D-12",
+   "at": "2026-08-27T15:00:00Z",
+   "prs": [
+    "A-8",
+    "A-9",
+    "A-10"
+   ],
+   "failed": false,
+   "unplanned": false
+  },
+  {
+   "id": "D-13",
+   "at": "2026-08-29T15:00:00Z",
+   "prs": [
+    "H-13",
+    "H-14"
+   ],
+   "failed": false,
+   "unplanned": false
+  }
+ ],
+ "defects": [
+  {
+   "id": "BUG-1",
+   "found_in": "production",
+   "caused_by_pr": "A-2"
+  },
+  {
+   "id": "BUG-2",
+   "found_in": "production",
+   "caused_by_pr": "A-6"
+  },
+  {
+   "id": "BUG-3",
+   "found_in": "production",
+   "caused_by_pr": "H-5"
+  }
+ ]
+}
