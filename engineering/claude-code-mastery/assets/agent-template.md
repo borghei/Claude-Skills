@@ -3,7 +3,7 @@ name: your-agent-name
 description: >-
   Brief description of what this agent does and when to invoke it.
   Include trigger phrases like "review security", "write tests", etc.
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Glob
@@ -84,9 +84,10 @@ CUSTOMIZATION GUIDE:
   5. Add/remove Rules based on your requirements
 
 MODEL OPTIONS:
-  claude-opus-4-20250514      - Complex analysis, architecture decisions
-  claude-sonnet-4-20250514    - General coding, standard review (recommended default)
-  claude-haiku-3-5-20241022   - Simple checks, formatting, quick tasks
+  opus      - Complex analysis, architecture decisions
+  sonnet    - General coding, standard review (recommended default)
+  haiku     - Simple checks, formatting, quick tasks
+  inherit   - Use the session's model
 
 TOOL ACCESS PATTERNS:
   Read-only (review):     Read, Glob, Grep

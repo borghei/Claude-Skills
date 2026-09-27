@@ -48,11 +48,11 @@ Read this for the step-by-step playbooks: optimizing a CLAUDE.md, authoring a ne
 ## Workflow 3: Create a Subagent
 
 1. **Define scope** -- One narrow responsibility per agent.
-2. **Create agent YAML** at `.claude/agents/agent-name.yaml`:
+2. **Create the agent file** at `.claude/agents/agent-name.md` (YAML frontmatter + markdown body as the system prompt):
    ```yaml
    name: security-reviewer
    description: Reviews code for security vulnerabilities
-   model: claude-sonnet-4-20250514
+   model: sonnet
    allowed-tools:
      - Read
      - Glob

@@ -475,22 +475,22 @@ When creating agents or suggesting configurations, choose models based on the ta
 
 | Task Type | Recommended Model | Rationale |
 |-----------|------------------|-----------|
-| Complex reasoning, architecture | claude-opus-4-20250514 | Highest capability |
-| General coding, review | claude-sonnet-4-20250514 | Best speed/quality balance |
-| Simple tasks, formatting | claude-haiku-3-5-20241022 | Fastest, cheapest |
-| Subagent tasks | claude-sonnet-4-20250514 | Good balance for delegated work |
+| Complex reasoning, architecture | `opus` | Highest capability |
+| General coding, review | `sonnet` | Best speed/quality balance |
+| Simple tasks, formatting | `haiku` | Fastest, cheapest |
+| Subagent tasks | `sonnet` (or `inherit`) | Good balance for delegated work |
 
 For agent definitions that specify a model:
 
 ```yaml
 # Complex analysis agent
-model: claude-opus-4-20250514
+model: opus
 
 # General-purpose coding agent
-model: claude-sonnet-4-20250514
+model: sonnet
 
 # Quick formatting/linting agent
-model: claude-haiku-3-5-20241022
+model: haiku
 ```
 
 ---

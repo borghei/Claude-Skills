@@ -146,7 +146,7 @@ Agent files use YAML frontmatter followed by optional markdown content.
 ---
 name: security-reviewer
 description: Reviews code changes for security vulnerabilities and compliance issues
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Glob
@@ -205,12 +205,12 @@ description: What it does  # Brief description for discovery
 ### Optional Fields
 
 ```yaml
-model: claude-sonnet-4-20250514   # Model override (default: session model)
-allowed-tools:                     # Tool whitelist (default: all tools)
-  - Read
-  - Glob
-custom-instructions: |             # System prompt for the agent
-  Your behavioral instructions here.
+model: sonnet          # Model alias override (default: inherit)
+tools: Read, Glob      # Tool allowlist (omit to inherit all tools)
+---
+
+Your behavioral instructions here. The markdown body below the
+frontmatter is the agent's system prompt.
 ```
 
 ### Field Details
@@ -221,14 +221,14 @@ agents directory.
 **`description`** -- Helps Claude decide when to suggest this agent. Also shown
 when listing agents with `/agents`.
 
-**`model`** -- Override the model for this agent. Use cheaper/faster models for
-simple tasks:
-- `claude-opus-4-20250514` -- Complex analysis, architecture review
-- `claude-sonnet-4-20250514` -- General coding, standard review
-- `claude-haiku-3-5-20241022` -- Simple formatting, quick checks
+**`model`** -- Override the model for this agent. Use an alias so the agent
+tracks the current model in each tier (`inherit` uses the session model):
+- `opus` -- Complex analysis, architecture review
+- `sonnet` -- General coding, standard review
+- `haiku` -- Simple formatting, quick checks
 
-**`allowed-tools`** -- Whitelist of tools the agent can use. Supports glob patterns
-for Bash commands:
+**`tools`** -- Allowlist of tools the agent can use (comma-separated). Supports
+patterns for Bash commands:
 - `Read` -- Read files
 - `Glob` -- Find files
 - `Grep` -- Search content
@@ -238,8 +238,8 @@ for Bash commands:
 - `WebFetch` -- Fetch URLs
 - `WebSearch` -- Search the web
 
-**`custom-instructions`** -- The system prompt. This is where you define the
-agent's personality, workflow, output format, and constraints.
+**Body** -- The markdown below the frontmatter is the system prompt. This is where
+you define the agent's workflow, output format, and constraints.
 
 ---
 
@@ -531,7 +531,7 @@ Ensure agent-generated code matches project style:
 ---
 name: security-reviewer
 description: Reviews code for security vulnerabilities, secrets, and compliance issues
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Glob
@@ -562,7 +562,7 @@ custom-instructions: |
 ---
 name: test-writer
 description: Generates comprehensive test suites with edge cases and mocking
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Write
@@ -594,7 +594,7 @@ custom-instructions: |
 ---
 name: doc-generator
 description: Generates API documentation, code comments, and README files
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Write
@@ -622,7 +622,7 @@ custom-instructions: |
 ---
 name: migration-helper
 description: Generates database migration scripts and validates schema changes
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Write
@@ -650,7 +650,7 @@ custom-instructions: |
 ---
 name: performance-profiler
 description: Analyzes code for performance bottlenecks, N+1 queries, and memory leaks
-model: claude-sonnet-4-20250514
+model: sonnet
 allowed-tools:
   - Read
   - Glob
