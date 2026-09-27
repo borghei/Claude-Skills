@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-21T22:03:54+00:00",
+  "generated_at": "2026-09-27T18:16:03+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -65,7 +65,7 @@
         "references/troubleshooting-and-tool-reference.md",
         "tool_schema_generator.py"
       ],
-      "size_bytes": 288146,
+      "size_bytes": 288239,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -160,7 +160,7 @@
         "scripts/workflow_validator.py",
         "scripts/workflow_visualizer.py"
       ],
-      "size_bytes": 96002,
+      "size_bytes": 96063,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
@@ -580,7 +580,7 @@
         "scripts/context_analyzer.py",
         "scripts/skill_scaffolder.py"
       ],
-      "size_bytes": 128126,
+      "size_bytes": 127904,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -1146,7 +1146,7 @@
         "scripts/reasoning_budget_advisor.py",
         "scripts/reasoning_loop_allocator.py"
       ],
-      "size_bytes": 38865,
+      "size_bytes": 39060,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -1501,7 +1501,7 @@
         "scripts/prompt_optimizer.py",
         "scripts/token_counter.py"
       ],
-      "size_bytes": 50428,
+      "size_bytes": 50736,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -1800,7 +1800,7 @@
         "scripts/prompt_analyzer.py",
         "scripts/prompt_diff.py"
       ],
-      "size_bytes": 59814,
+      "size_bytes": 60506,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2469,7 +2469,7 @@
         "scripts/model_deployment_pipeline.py",
         "scripts/rag_system_builder.py"
       ],
-      "size_bytes": 53376,
+      "size_bytes": 53433,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2541,7 +2541,7 @@
         "scripts/prompt_optimizer.py",
         "scripts/rag_evaluator.py"
       ],
-      "size_bytes": 132477,
+      "size_bytes": 133091,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
