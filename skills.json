@@ -396,7 +396,7 @@
     },
     {
       "name": "claude-code-mastery",
-      "description": "",
+      "description": ">-",
       "path": "engineering/claude-code-mastery/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1270,7 +1270,7 @@
     },
     {
       "name": "senior-cloud-architect",
-      "description": "",
+      "description": ">-",
       "path": "engineering/senior-cloud-architect/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1331,7 +1331,7 @@
     },
     {
       "name": "senior-data-scientist",
-      "description": "",
+      "description": ">-",
       "path": "engineering/senior-data-scientist/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1431,7 +1431,7 @@
     },
     {
       "name": "senior-mobile",
-      "description": "",
+      "description": ">-",
       "path": "engineering/senior-mobile/SKILL.md",
       "domain": "engineering",
       "category": "engineering",

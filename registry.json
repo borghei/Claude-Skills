@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T18:36:18+00:00",
+  "generated_at": "2026-09-27T19:15:39+00:00",
   "repository": "claude-skills",
   "skill_count": 372,
   "domain_count": 20,
@@ -282,7 +282,7 @@
     {
       "name": "claude-code-mastery",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "claude-code",
         "skill-authoring",
@@ -1009,7 +1009,7 @@
     {
       "name": "senior-cloud-architect",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "cloud",
         "aws",
@@ -1061,7 +1061,7 @@
     {
       "name": "senior-data-scientist",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "data-science",
         "ml",
@@ -1146,7 +1146,7 @@
     {
       "name": "senior-mobile",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "mobile",
         "ios",

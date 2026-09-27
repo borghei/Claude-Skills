@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T18:36:18+00:00",
+  "generated_at": "2026-09-27T19:15:39+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -552,7 +552,7 @@
     {
       "name": "claude-code-mastery",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "claude-code",
         "skill-authoring",
@@ -580,7 +580,7 @@
         "scripts/context_analyzer.py",
         "scripts/skill_scaffolder.py"
       ],
-      "size_bytes": 130513,
+      "size_bytes": 130993,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2203,7 +2203,7 @@
     {
       "name": "senior-cloud-architect",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "cloud",
         "aws",
@@ -2225,7 +2225,7 @@
         "references/cloud-architecture-playbooks.md",
         "references/cloud-operations.md"
       ],
-      "size_bytes": 14267,
+      "size_bytes": 14721,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -2304,7 +2304,7 @@
     {
       "name": "senior-data-scientist",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "data-science",
         "ml",
@@ -2331,7 +2331,7 @@
         "scripts/feature_engineering_pipeline.py",
         "scripts/model_evaluation_suite.py"
       ],
-      "size_bytes": 32079,
+      "size_bytes": 32553,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2478,7 +2478,7 @@
     {
       "name": "senior-mobile",
       "domain": "engineering",
-      "description": "",
+      "description": ">-",
       "tags": [
         "mobile",
         "ios",
@@ -2508,7 +2508,7 @@
         "scripts/mobile_scaffold.py",
         "scripts/store_metadata_generator.py"
       ],
-      "size_bytes": 197086,
+      "size_bytes": 197539,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-09-27T18:36:18+00:00",
+  "updated": "2026-09-27T19:15:39+00:00",
   "total_skills": 372,
   "skills": [
     {
@@ -266,7 +266,7 @@
     },
     {
       "name": "claude-code-mastery",
-      "description": "",
+      "description": ">-",
       "domain": "engineering",
       "path": "engineering/claude-code-mastery/SKILL.md",
       "tools": [
@@ -1033,7 +1033,7 @@
     },
     {
       "name": "senior-cloud-architect",
-      "description": "",
+      "description": ">-",
       "domain": "engineering",
       "path": "engineering/senior-cloud-architect/SKILL.md",
       "tools": [],
@@ -1084,7 +1084,7 @@
     },
     {
       "name": "senior-data-scientist",
-      "description": "",
+      "description": ">-",
       "domain": "engineering",
       "path": "engineering/senior-data-scientist/SKILL.md",
       "tools": [
@@ -1173,7 +1173,7 @@
     },
     {
       "name": "senior-mobile",
-      "description": "",
+      "description": ">-",
       "domain": "engineering",
       "path": "engineering/senior-mobile/SKILL.md",
       "tools": [
