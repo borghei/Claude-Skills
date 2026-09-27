@@ -39,8 +39,6 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **Standards Library** | [standards/CLAUDE.md](standards/CLAUDE.md) | Communication, quality, git, security standards |
 | **Templates** | [templates/CLAUDE.md](templates/CLAUDE.md) | Template system usage |
 
-**Current Sprint:** See [documentation/delivery/sprint-11-05-2025/](documentation/delivery/sprint-11-05-2025/) for active sprint context and progress.
-
 ## Architecture Overview
 
 ### Repository Structure
@@ -180,23 +178,6 @@ hand-maintained `site/index.html`.
 - Keep scripts runnable with minimal setup (`pip install package` at most)
 - Document all dependencies in SKILL.md
 - Prefer standard library implementations
-
-## Current Sprint
-
-**Active Sprint:** sprint-11-05-2025 (Nov 5-19, 2025)
-**Goal:** Skill-Agent Integration Phase 1-2
-**Status:** ✅ COMPLETE - All 6 days finished, 5 agents deployed
-
-**Deliverables:**
-- 5 production agents: cs-content-creator, cs-demand-gen-specialist, cs-ceo-advisor, cs-cto-advisor, cs-product-manager
-- 1 agent template for future development
-- Modular documentation structure (main + 9 domain CLAUDE.md files)
-- Branch protection and workflow documentation
-
-**Progress Tracking:**
-- [Sprint Plan](documentation/delivery/sprint-11-05-2025/plan.md) - Day-by-day execution plan
-- [Sprint Context](documentation/delivery/sprint-11-05-2025/context.md) - Goals, scope, risks
-- [Sprint Progress](documentation/delivery/sprint-11-05-2025/PROGRESS.md) - Real-time auto-updating tracker
 
 ## Roadmap
 
