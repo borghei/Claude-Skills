@@ -54,6 +54,8 @@ AGENT_STYLES: dict[str, str] = {
 }
 
 MODEL_SHORT_NAMES: dict[str, str] = {
+    "claude-fable-5-1":  "Fable",
+    "claude-opus-5-5":   "Opus 5.5",
     "claude-opus-5":     "Opus",
     "claude-sonnet-5":   "Sonnet",
     "claude-haiku-4-5":  "Haiku",

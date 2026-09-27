@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T18:16:03+00:00",
+  "generated_at": "2026-09-27T18:17:05+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -160,7 +160,7 @@
         "scripts/workflow_validator.py",
         "scripts/workflow_visualizer.py"
       ],
-      "size_bytes": 96063,
+      "size_bytes": 96444,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,

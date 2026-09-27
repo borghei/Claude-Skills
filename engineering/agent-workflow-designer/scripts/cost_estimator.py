@@ -55,7 +55,10 @@ MODEL_PRICING: dict[str, dict[str, float]] = {
     "claude-opus-5":    {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
     "claude-sonnet-5":  {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
     "claude-haiku-4-5": {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
-    # Aliases (current model in each tier)
+    # Legacy snapshots (deprecated) kept so older workflow files still price correctly
+    "claude-opus-4-20250514":   {"input": 15.00, "output": 75.00, "cached_input": 1.50},
+    "claude-sonnet-4-20250514": {"input": 3.00,  "output": 15.00, "cached_input": 0.30},
+    # Aliases (priced as the model each alias resolves to: Opus 5, Sonnet 5, Haiku 4.5)
     "claude-opus":   {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
     "claude-sonnet": {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
     "claude-haiku":  {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
