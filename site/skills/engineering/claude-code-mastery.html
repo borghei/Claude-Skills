@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Claude Code Mastery - Claude Skills</title>
-  <meta name="description" content="">
+  <meta name="description" content="&gt;-">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/claude-code-mastery.html">
   <meta property="og:title" content="Claude Code Mastery - Claude Skills">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="&gt;-">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/claude-code-mastery.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Claude Code Mastery", "description": "", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/claude-code-mastery.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Claude Code Mastery", "description": ">-", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/claude-code-mastery.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Claude Code Mastery</h1>
-    <p class="page-subtitle"></p>
+    <p class="page-subtitle">&gt;-</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">claude-code</span><span class="tag">skill-authoring</span><span class="tag">subagents</span><span class="tag">hooks</span></div>
   </div>
@@ -393,6 +393,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Claude Code Mastery (Engineering domain).
 
+&gt;-
+
 Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, subagent creation, hooks automation, and context engineering. **Keywords:** claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks, context-window, token-budget, MCP-servers, worktrees, permission-modes, prom
 
 ## How to Help
@@ -412,6 +414,8 @@ Start by asking the user what they need help with.">
       <details class="prompt-details">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Claude Code Mastery (Engineering domain).
+
+&gt;-
 
 Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, subagent creation, hooks automation, and context engineering. **Keywords:** claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks, context-window, token-budget, MCP-servers, worktrees, permission-modes, prom
 
@@ -451,7 +455,7 @@ Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, sub
 
 - **CLAUDE.md optimization** — audit, restructure, compress, and hierarchize config files for token efficiency.
 - **Skill authoring** — scaffold and write discoverable skill packages with correct layout and frontmatter.
-- **Subagent creation** — define scoped agents with `allowed-tools` and structured custom instructions.
+- **Subagent creation** — write `.claude/agents/&lt;name&gt;.md` files with a `tools` allowlist and a Markdown-body system prompt.
 - **Hooks automation** — wire `PreToolUse`/`PostToolUse`/`Stop` lifecycle scripts via `.claude/settings.json`.
 - **Context engineering** — measure and manage the context-window token budget across a codebase.
 
@@ -530,8 +534,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
 | [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
-| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
-| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent `.md` file; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent system prompts (the agent file body) |
 | [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
 | [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
 | [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
@@ -562,7 +566,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Claude Code Mastery&quot;**
-   - Description: &quot;&quot;
+   - Description: &quot;&gt;-&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -595,7 +599,7 @@ Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, sub
 
 - **CLAUDE.md optimization** — audit, restructure, compress, and hierarchize config files for token efficiency.
 - **Skill authoring** — scaffold and write discoverable skill packages with correct layout and frontmatter.
-- **Subagent creation** — define scoped agents with `allowed-tools` and structured custom instructions.
+- **Subagent creation** — write `.claude/agents/&lt;name&gt;.md` files with a `tools` allowlist and a Markdown-body system prompt.
 - **Hooks automation** — wire `PreToolUse`/`PostToolUse`/`Stop` lifecycle scripts via `.claude/settings.json`.
 - **Context engineering** — measure and manage the context-window token budget across a codebase.
 
@@ -674,8 +678,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
 | [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
-| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
-| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent `.md` file; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent system prompts (the agent file body) |
 | [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
 | [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
 | [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
@@ -706,7 +710,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Claude Code Mastery&quot;**
-   - Description: &quot;&quot;
+   - Description: &quot;&gt;-&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
