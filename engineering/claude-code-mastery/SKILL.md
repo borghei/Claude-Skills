@@ -1,6 +1,13 @@
 ---
 name: claude-code-mastery
-description: 
+description: >-
+  Use when the user asks to "optimize CLAUDE.md", "create a new skill",
+  "write a custom agent", "configure hooks", "manage context window",
+  "set up MCP servers", "scaffold a skill package", "analyze token budget",
+  "create subagents", "configure permissions", "set up worktrees", or
+  "integrate Claude Code with editors". Covers Claude Code CLI mastery,
+  skill authoring, context engineering, hooks automation, subagent creation,
+  and development workflow optimization.
 license: MIT
 metadata:
   version: 1.1.0

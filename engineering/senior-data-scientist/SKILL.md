@@ -1,6 +1,12 @@
 ---
 name: senior-data-scientist
-description: 
+description: >-
+  Use when the user asks to "design an experiment", "build a predictive model",
+  "run A/B test analysis", "perform causal inference", "engineer features",
+  "evaluate model performance", "set up MLOps pipeline", "analyze time series",
+  "calculate sample size", or "deploy a model to production".
+  Expert data science covering statistical modeling, experimentation, causal inference,
+  feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0

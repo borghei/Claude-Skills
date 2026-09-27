@@ -1,6 +1,12 @@
 ---
 name: senior-mobile
-description: 
+description: >-
+  Use when the user asks to "build a mobile app", "scaffold React Native project",
+  "create SwiftUI views", "set up Jetpack Compose", "optimize mobile performance",
+  "configure Expo Router navigation", "implement offline-first storage",
+  "submit to App Store", or "profile mobile rendering".
+  Expert mobile development covering iOS (Swift/SwiftUI), Android (Kotlin/Compose),
+  React Native, and Flutter for native and cross-platform applications.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0

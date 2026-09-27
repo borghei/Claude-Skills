@@ -1,6 +1,12 @@
 ---
 name: senior-cloud-architect
-description: 
+description: >-
+  Use when the user asks to "design cloud architecture", "set up Terraform infrastructure",
+  "optimize cloud costs", "plan disaster recovery", "configure multi-region failover",
+  "audit IAM policies", "migrate to cloud", "set up VPC networking",
+  "compare AWS vs GCP vs Azure", or "right-size cloud instances".
+  Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy,
+  cost optimization, security, and infrastructure automation.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
