@@ -30,7 +30,7 @@ class ModelPricing:
     token_ratio: float = 1.0   # Multiplier vs. GPT-4 tokenizer baseline
 
 
-# Pricing as of Q1 2026
+# Pricing as of Q1 2026 (Anthropic rows checked 2026-09)
 MODEL_CATALOG = {
     "gpt-4o": ModelPricing("GPT-4o", "OpenAI", 2.50, 10.00, 128000, 1.0),
     "gpt-4o-mini": ModelPricing("GPT-4o-mini", "OpenAI", 0.15, 0.60, 128000, 1.0),
@@ -38,9 +38,11 @@ MODEL_CATALOG = {
     "o1": ModelPricing("o1", "OpenAI", 15.00, 60.00, 200000, 1.0),
     "o1-mini": ModelPricing("o1-mini", "OpenAI", 3.00, 12.00, 128000, 1.0),
     "o3-mini": ModelPricing("o3-mini", "OpenAI", 1.10, 4.40, 200000, 1.0),
-    "claude-opus": ModelPricing("Claude Opus 4", "Anthropic", 15.00, 75.00, 200000, 1.05),
-    "claude-sonnet": ModelPricing("Claude Sonnet 4", "Anthropic", 3.00, 15.00, 200000, 1.05),
-    "claude-haiku": ModelPricing("Claude Haiku 3.5", "Anthropic", 0.80, 4.00, 200000, 1.05),
+    "claude-fable": ModelPricing("Claude Fable 5.1", "Anthropic", 10.00, 50.00, 1000000, 1.05),
+    "claude-opus": ModelPricing("Claude Opus 5", "Anthropic", 5.00, 25.00, 1000000, 1.05),
+    "claude-opus-5-5": ModelPricing("Claude Opus 5.5", "Anthropic", 4.00, 20.00, 1000000, 1.05),
+    "claude-sonnet": ModelPricing("Claude Sonnet 5", "Anthropic", 2.00, 10.00, 1000000, 1.05),
+    "claude-haiku": ModelPricing("Claude Haiku 4.5", "Anthropic", 1.00, 5.00, 200000, 1.05),
     "gemini-pro": ModelPricing("Gemini 2.0 Pro", "Google", 1.25, 5.00, 1000000, 0.95),
     "gemini-flash": ModelPricing("Gemini 2.0 Flash", "Google", 0.075, 0.30, 1000000, 0.95),
 }

@@ -47,7 +47,7 @@ class OpenAIProvider(LLMProvider):
         return response.choices[0].text
 
 class AnthropicProvider(LLMProvider):
-    def __init__(self, api_key: str, model: str = "claude-3-opus"):
+    def __init__(self, api_key: str, model: str = "claude-opus-5"):
         self.client = Anthropic(api_key=api_key)
         self.model = model
 
@@ -97,7 +97,7 @@ def call_with_fallback(
 |---------|----------|-----------|
 | Zero-shot | Simple tasks | Task description + input |
 | Few-shot | Complex tasks | Examples + task + input |
-| Chain-of-thought | Reasoning | "Think step by step" + task |
+| Chain-of-thought | Reasoning | On Claude: adaptive thinking + `effort` (API); elsewhere "Think step by step" + task |
 | Role-based | Specialized output | System role + task |
 
 ### Few-Shot Template
@@ -235,7 +235,7 @@ def calculate_cost(
     PRICING = {
         "gpt-4": {"input": 0.03, "output": 0.06},
         "gpt-3.5-turbo": {"input": 0.0005, "output": 0.0015},
-        "claude-3-opus": {"input": 0.015, "output": 0.075},
+        "claude-opus-5": {"input": 0.005, "output": 0.025},
     }
 
     prices = PRICING.get(model, {"input": 0.01, "output": 0.03})

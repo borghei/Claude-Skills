@@ -35,9 +35,11 @@ Token counts can vary 10-20% between tokenizers for the same text.
 
 | Model | Input (per 1M tokens) | Output (per 1M tokens) | Context Window |
 |-------|----------------------|------------------------|----------------|
-| Claude Opus 4 | $15.00 | $75.00 | 200K |
-| Claude Sonnet 4 | $3.00 | $15.00 | 200K |
-| Claude Haiku 3.5 | $0.80 | $4.00 | 200K |
+| Claude Fable 5.1 | $10.00 | $50.00 | 1M |
+| Claude Opus 5.5 | $4.00 | $20.00 | 1M |
+| Claude Opus 5 | $5.00 | $25.00 | 1M |
+| Claude Sonnet 5 | $2.00 | $10.00 | 1M |
+| Claude Haiku 4.5 | $1.00 | $5.00 | 200K |
 
 ### Google Models
 

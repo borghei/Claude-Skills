@@ -11,18 +11,18 @@ class IntentRouter:
     """Route requests to specialized agents based on intent classification."""
 
     ROUTING_TABLE = {
-        "code_generation": {"agent": "coder", "model": "claude-sonnet-4-20250514"},
-        "code_review": {"agent": "reviewer", "model": "claude-sonnet-4-20250514"},
-        "research": {"agent": "researcher", "model": "claude-sonnet-4-20250514"},
-        "simple_question": {"agent": "assistant", "model": "claude-haiku-4-20250514"},
-        "creative_writing": {"agent": "writer", "model": "claude-sonnet-4-20250514"},
-        "complex_analysis": {"agent": "analyst", "model": "claude-sonnet-4-20250514"},
+        "code_generation": {"agent": "coder", "model": "claude-sonnet-5"},
+        "code_review": {"agent": "reviewer", "model": "claude-sonnet-5"},
+        "research": {"agent": "researcher", "model": "claude-sonnet-5"},
+        "simple_question": {"agent": "assistant", "model": "claude-haiku-4-5"},
+        "creative_writing": {"agent": "writer", "model": "claude-sonnet-5"},
+        "complex_analysis": {"agent": "analyst", "model": "claude-sonnet-5"},
     }
 
     async def route(self, message: str) -> dict:
         # Use a fast, cheap model for classification
         classification = await self.client.messages.create(
-            model="claude-haiku-4-20250514",
+            model="claude-haiku-4-5",
             max_tokens=50,
             system="Classify the user intent. Respond with ONLY one of: code_generation, code_review, research, simple_question, creative_writing, complex_analysis",
             messages=[{"role": "user", "content": message}],
@@ -35,9 +35,9 @@ class IntentRouter:
 
 ```python
 MODEL_LIMITS = {
-    "claude-sonnet-4-20250514": 200_000,
-    "claude-haiku-4-20250514": 200_000,
-    "claude-opus-4-20250514": 200_000,
+    "claude-sonnet-5": 1_000_000,
+    "claude-haiku-4-5": 200_000,
+    "claude-opus-5": 1_000_000,
     "gpt-4o": 128_000,
 }
 

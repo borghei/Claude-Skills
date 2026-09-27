@@ -379,8 +379,9 @@ def estimate_cost(config: AgentConfig, runs: int = 100) -> Dict[str, Any]:
         'gpt-4': {'input': 0.03, 'output': 0.06},
         'gpt-4-turbo': {'input': 0.01, 'output': 0.03},
         'gpt-3.5-turbo': {'input': 0.0005, 'output': 0.0015},
-        'claude-3-opus': {'input': 0.015, 'output': 0.075},
-        'claude-3-sonnet': {'input': 0.003, 'output': 0.015},
+        'claude-opus-5': {'input': 0.005, 'output': 0.025},
+        'claude-sonnet-5': {'input': 0.002, 'output': 0.010},
+        'claude-haiku-4-5': {'input': 0.001, 'output': 0.005},
     }
 
     model_cost = costs.get(config.model, costs['gpt-4'])

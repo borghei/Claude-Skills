@@ -9,7 +9,7 @@ Workflow JSON format:
 {
   "name": "content-pipeline",
   "steps": [
-    {"id": "research", "agent": "researcher", "depends_on": [], "model": "claude-sonnet-4-20250514"},
+    {"id": "research", "agent": "researcher", "depends_on": [], "model": "claude-sonnet-5"},
     {"id": "write", "agent": "writer", "depends_on": ["research"]},
     {"id": "review", "agent": "reviewer", "depends_on": ["write"], "terminal": true}
   ]
@@ -54,9 +54,9 @@ AGENT_STYLES: dict[str, str] = {
 }
 
 MODEL_SHORT_NAMES: dict[str, str] = {
-    "claude-opus-4-20250514":   "Opus",
-    "claude-sonnet-4-20250514": "Sonnet",
-    "claude-haiku-4-20250514":  "Haiku",
+    "claude-opus-5":     "Opus",
+    "claude-sonnet-5":   "Sonnet",
+    "claude-haiku-4-5":  "Haiku",
     "claude-opus":   "Opus",
     "claude-sonnet": "Sonnet",
     "claude-haiku":  "Haiku",

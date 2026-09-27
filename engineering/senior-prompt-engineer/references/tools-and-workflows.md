@@ -371,14 +371,14 @@ python scripts/prompt_optimizer.py <prompt_file> [options]
 | `--tokens` | `-t` | flag | off | Count tokens and estimate cost only |
 | `--optimize` | `-O` | flag | off | Generate whitespace-optimized version of the prompt |
 | `--extract-examples` | `-e` | flag | off | Extract few-shot examples (Input/Output pairs) as JSON |
-| `--model` | `-m` | choice | `gpt-4` | Model for token/cost estimation. Choices: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`, `claude-3-opus`, `claude-3-sonnet`, `claude-3-haiku` |
+| `--model` | `-m` | choice | `gpt-4` | Model for token/cost estimation. Choices: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`, `claude-opus-5`, `claude-sonnet-5`, `claude-haiku-4-5` |
 | `--output` | `-o` | string | _(none)_ | Write results to this file path |
 | `--json` | `-j` | flag | off | Output analysis as JSON instead of human-readable report |
 | `--compare` | `-c` | string | _(none)_ | Path to a baseline analysis JSON file for comparison |
 
 **Example:**
 ```bash
-python scripts/prompt_optimizer.py prompt.txt --analyze --model claude-3-sonnet --json
+python scripts/prompt_optimizer.py prompt.txt --analyze --model claude-sonnet-5 --json
 ```
 
 **Output Formats:**

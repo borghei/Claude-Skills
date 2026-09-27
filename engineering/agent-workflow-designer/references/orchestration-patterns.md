@@ -22,7 +22,7 @@ class PipelineState(TypedDict):
     stage_costs: Annotated[list[dict], "append"]  # accumulates cost per stage
 
 def research_stage(state: PipelineState) -> dict:
-    model = ChatAnthropic(model="claude-sonnet-4-20250514", max_tokens=2048)
+    model = ChatAnthropic(model="claude-sonnet-5", max_tokens=2048)
     result = model.invoke(
         f"Research the following topic thoroughly. Provide key facts, statistics, "
         f"and expert perspectives:\n\n{state['topic']}"
@@ -33,7 +33,7 @@ def research_stage(state: PipelineState) -> dict:
     }
 
 def writing_stage(state: PipelineState) -> dict:
-    model = ChatAnthropic(model="claude-sonnet-4-20250514", max_tokens=4096)
+    model = ChatAnthropic(model="claude-sonnet-5", max_tokens=4096)
     result = model.invoke(
         f"Using this research, write a compelling 800-word blog post with a hook, "
         f"3 main sections, and a CTA:\n\n{state['research']}"
@@ -44,7 +44,7 @@ def writing_stage(state: PipelineState) -> dict:
     }
 
 def editing_stage(state: PipelineState) -> dict:
-    model = ChatAnthropic(model="claude-haiku-4-20250514", max_tokens=4096)
+    model = ChatAnthropic(model="claude-haiku-4-5", max_tokens=4096)
     result = model.invoke(
         f"Edit this draft for clarity, flow, and grammar. Return only the improved "
         f"version:\n\n{state['draft']}"
@@ -84,7 +84,7 @@ class FanOutTask:
     name: str
     system_prompt: str
     user_message: str
-    model: str = "claude-sonnet-4-20250514"
+    model: str = "claude-sonnet-5"
 
 @dataclass
 class FanOutResult:
@@ -144,7 +144,7 @@ async def fan_out_fan_in(
     )
 
     merge_response = await client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5",
         max_tokens=4096,
         system="Synthesize the following parallel analyses into a unified report.",
         messages=[{"role": "user", "content": f"{merge_prompt}\n\n{combined}"}],
@@ -188,7 +188,7 @@ class HierarchicalOrchestrator:
     async def plan(self, request: str) -> list[SubTask]:
         """Orchestrator creates an execution plan with dependencies."""
         response = await self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5",
             max_tokens=2048,
             system=f"""You are a task orchestrator. Break down the request into subtasks.
 Available specialists: {', '.join(SPECIALISTS.keys())}
@@ -219,7 +219,7 @@ Rules:
         # Final synthesis
         all_outputs = "\n\n".join(f"### {k}\n{v}" for k, v in results.items())
         synthesis = await self.client.messages.create(
-            model="claude-sonnet-4-20250514",
+            model="claude-sonnet-5",
             max_tokens=4096,
             system="Synthesize specialist outputs into a coherent final response.",
             messages=[{"role": "user", "content": f"Request: {request}\n\nOutputs:\n{all_outputs}"}],

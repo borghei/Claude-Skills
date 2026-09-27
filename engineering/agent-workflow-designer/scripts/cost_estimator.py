@@ -13,7 +13,7 @@ Workflow JSON format:
       "id": "research",
       "agent": "researcher",
       "depends_on": [],
-      "model": "claude-sonnet-4-20250514",
+      "model": "claude-sonnet-5",
       "estimated_input_tokens": 2000,
       "estimated_output_tokens": 4000
     },
@@ -21,7 +21,7 @@ Workflow JSON format:
       "id": "write",
       "agent": "writer",
       "depends_on": ["research"],
-      "model": "claude-sonnet-4-20250514",
+      "model": "claude-sonnet-5",
       "estimated_input_tokens": 5000,
       "estimated_output_tokens": 8000
     }
@@ -37,7 +37,7 @@ Usage:
   python cost_estimator.py workflow.json
   python cost_estimator.py workflow.json --json
   python cost_estimator.py workflow.json --runs 1000
-  python cost_estimator.py workflow.json --override-model claude-haiku-4-20250514
+  python cost_estimator.py workflow.json --override-model claude-haiku-4-5
 """
 
 import argparse
@@ -45,26 +45,29 @@ import json
 import sys
 from typing import Any
 
-# Pricing per 1M tokens (USD) as of early 2026
+# Pricing per 1M tokens (USD), Anthropic rows checked 2026-09.
+# cached_input = cache-read rate (0.1x input; Opus 5.5 is $0.20, Fable 5.1 $0.25).
 # Source: anthropic.com/pricing, openai.com/pricing
 MODEL_PRICING: dict[str, dict[str, float]] = {
     # Anthropic models
-    "claude-opus-4-20250514":   {"input": 15.00, "output": 75.00, "cached_input": 1.50},
-    "claude-sonnet-4-20250514": {"input": 3.00,  "output": 15.00, "cached_input": 0.30},
-    "claude-haiku-4-20250514":  {"input": 0.80,  "output": 4.00,  "cached_input": 0.08},
-    # Aliases
-    "claude-opus":   {"input": 15.00, "output": 75.00, "cached_input": 1.50},
-    "claude-sonnet": {"input": 3.00,  "output": 15.00, "cached_input": 0.30},
-    "claude-haiku":  {"input": 0.80,  "output": 4.00,  "cached_input": 0.08},
+    "claude-fable-5-1": {"input": 10.00, "output": 50.00, "cached_input": 0.25},
+    "claude-opus-5-5":  {"input": 4.00,  "output": 20.00, "cached_input": 0.20},
+    "claude-opus-5":    {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
+    "claude-sonnet-5":  {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
+    "claude-haiku-4-5": {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
+    # Aliases (current model in each tier)
+    "claude-opus":   {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
+    "claude-sonnet": {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
+    "claude-haiku":  {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
     # OpenAI models (approximate)
     "gpt-4o":       {"input": 2.50, "output": 10.00, "cached_input": 1.25},
     "gpt-4o-mini":  {"input": 0.15, "output": 0.60,  "cached_input": 0.075},
     "gpt-4-turbo":  {"input": 10.00, "output": 30.00, "cached_input": 5.00},
     # Default fallback
-    "default":      {"input": 3.00,  "output": 15.00, "cached_input": 0.30},
+    "default":      {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
 }
 
-DEFAULT_MODEL = "claude-sonnet-4-20250514"
+DEFAULT_MODEL = "claude-sonnet-5"
 DEFAULT_INPUT_TOKENS = 1000
 DEFAULT_OUTPUT_TOKENS = 500
 
