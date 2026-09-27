@@ -57,51 +57,46 @@ The cs-cfo-advisor agent bridges the gap between raw financial data and board-re
 
 5. **Burn Rate Calculator**
    - **Purpose:** Calculates current and projected burn rate, runway in months, and cash-zero date under multiple scenarios
-   - **Path:** `../../finance/financial-analyst/scripts/burn_rate_calculator.py`
-   - **Usage:** `python ../../finance/financial-analyst/scripts/burn_rate_calculator.py cash_data.json`
+   - **Path:** `../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py`
+   - **Usage:** `python ../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py --input cash_data.json`
    - **Output Formats:** Runway report with scenario projections, JSON
    - **Use Cases:** Board reporting, fundraising timing, cost reduction planning
 
 6. **Financial Health Scorer**
    - **Purpose:** Produces a composite financial health score (0-100) across liquidity, profitability, growth, and efficiency dimensions
-   - **Path:** `../../finance/financial-analyst/scripts/financial_health_scorer.py`
-   - **Usage:** `python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json`
+   - **Path:** `../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py`
+   - **Usage:** `python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json`
    - **Output Formats:** Health score with dimension breakdown, JSON
    - **Use Cases:** Board dashboards, investor updates, trend monitoring
 
 7. **Scenario Modeler**
    - **Purpose:** Models best-case, base-case, and worst-case financial scenarios with probability-weighted outcomes
-   - **Path:** `../../finance/financial-analyst/scripts/scenario_modeler.py`
-   - **Usage:** `python ../../finance/financial-analyst/scripts/scenario_modeler.py scenarios.json`
+   - **Path:** `../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py`
+   - **Usage:** `python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input scenarios.json`
    - **Output Formats:** Scenario comparison with probability-weighted expected value, JSON
    - **Use Cases:** Board preparation, strategic planning, risk management
 
 8. **Revenue Waterfall Analyzer**
    - **Purpose:** Decomposes revenue changes into new, expansion, contraction, and churn components for cohort-level analysis
-   - **Path:** `../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py`
-   - **Usage:** `python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json`
+   - **Path:** `../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py`
+   - **Usage:** `python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json`
    - **Output Formats:** Waterfall chart data with cohort breakdown, JSON
    - **Use Cases:** Board revenue reporting, investor narratives, retention analysis
 
 ### Knowledge Bases
 
 1. **Financial Analysis Frameworks**
-   - **Location:** `../../finance/financial-analyst/references/financial_analysis_guide.md`
+   - **Location:** `../../finance/financial-analyst/references/financial-ratios-guide.md`
    - **Content:** Ratio interpretation, valuation methodologies, benchmarking frameworks
    - **Use Case:** Monthly review analysis, investor Q&A preparation
 
-2. **CFO Strategic Playbook**
-   - **Location:** `../../c-level-advisor/cfo-advisor/references/cfo_strategic_playbook.md`
-   - **Content:** Capital allocation frameworks, board communication strategies, fundraising playbooks
-   - **Use Case:** Board preparation, strategic financial decisions
-
-3. **Revenue Operations Guide**
-   - **Location:** `../../business-growth/revenue-operations/references/revenue_ops_guide.md`
+2. **Revenue Operations Guide**
+   - **Location:** `../../business-growth/revenue-operations/references/revops-metrics-guide.md`
    - **Content:** Revenue recognition, pipeline analysis, forecasting methodologies
    - **Use Case:** Revenue reporting, forecast accuracy improvement
 
-4. **Pricing Strategy Framework**
-   - **Location:** `../../business-growth/pricing-strategy/references/pricing_guide.md`
+3. **Pricing Strategy Framework**
+   - **Location:** `../../business-growth/pricing-strategy/references/pricing-models.md`
    - **Content:** Pricing models, elasticity analysis, competitive pricing frameworks
    - **Use Case:** Pricing reviews, margin optimization, new product pricing
 
@@ -122,11 +117,11 @@ The cs-cfo-advisor agent bridges the gap between raw financial data and board-re
    ```
 3. **Score Financial Health** - Generate composite health score with trend
    ```bash
-   python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json
+   python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json
    ```
 4. **Check Burn Rate** - Update runway projection
    ```bash
-   python ../../finance/financial-analyst/scripts/burn_rate_calculator.py cash_data.json
+   python ../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py --input cash_data.json
    ```
 5. **Compile Executive Summary** - Synthesize findings into 1-page executive summary with key metrics, variances, and action items
 
@@ -139,8 +134,8 @@ The cs-cfo-advisor agent bridges the gap between raw financial data and board-re
 # Monthly financial review automation
 python ../../finance/financial-analyst/scripts/ratio_calculator.py financials.json > ratios.txt
 python ../../finance/financial-analyst/scripts/budget_variance_analyzer.py actuals.json budget.json > variance.txt
-python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json > health-score.txt
-python ../../finance/financial-analyst/scripts/burn_rate_calculator.py cash_data.json > runway.txt
+python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json > health-score.txt
+python ../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py --input cash_data.json > runway.txt
 echo "Monthly review data ready for executive summary compilation"
 ```
 
@@ -151,15 +146,15 @@ echo "Monthly review data ready for executive summary compilation"
 **Steps:**
 1. **Generate Metrics Dashboard** - Financial health score with dimension breakdown
    ```bash
-   python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json
+   python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json
    ```
 2. **Build Revenue Narrative** - Decompose revenue changes by component
    ```bash
-   python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json
+   python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json
    ```
 3. **Model Scenarios** - Present best/base/worst case with probability weighting
    ```bash
-   python ../../finance/financial-analyst/scripts/scenario_modeler.py scenarios.json
+   python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input scenarios.json
    ```
 4. **Update Valuation** - Run DCF with latest projections for internal valuation tracking
    ```bash
@@ -169,10 +164,7 @@ echo "Monthly review data ready for executive summary compilation"
    ```bash
    python ../../finance/financial-analyst/scripts/ratio_calculator.py financials.json
    ```
-6. **Reference Board Playbook** - Apply board communication best practices
-   ```bash
-   cat ../../c-level-advisor/cfo-advisor/references/cfo_strategic_playbook.md
-   ```
+6. **Reference Board Playbook** - Apply board communication best practices from the CFO Advisor skill's Board Financial Presentation section
 7. **Assemble Board Package** - Compile into structured board deck: financial summary, revenue analysis, scenario outlook, key risks, capital allocation recommendation
 
 **Expected Output:** Board-ready financial package with metrics dashboard, revenue waterfall, scenario analysis, valuation update, and capital allocation recommendation
@@ -182,9 +174,9 @@ echo "Monthly review data ready for executive summary compilation"
 **Example:**
 ```bash
 # Board prep automation
-python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json > dashboard.txt
-python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json > waterfall.txt
-python ../../finance/financial-analyst/scripts/scenario_modeler.py scenarios.json > scenarios.txt
+python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json > dashboard.txt
+python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json > waterfall.txt
+python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input scenarios.json > scenarios.txt
 python ../../finance/financial-analyst/scripts/dcf_valuation.py projections.json > valuation.txt
 echo "Board financial package inputs ready for assembly"
 ```
@@ -196,7 +188,7 @@ echo "Board financial package inputs ready for assembly"
 **Steps:**
 1. **Decompose Revenue Changes** - Analyze new, expansion, contraction, and churn by cohort
    ```bash
-   python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json
+   python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json
    ```
 2. **Rebuild Forecast** - Update forecast with latest actuals and revised assumptions
    ```bash
@@ -204,11 +196,11 @@ echo "Board financial package inputs ready for assembly"
    ```
 3. **Review Pricing Impact** - Reference pricing frameworks for margin analysis
    ```bash
-   cat ../../business-growth/pricing-strategy/references/pricing_guide.md
+   cat ../../business-growth/pricing-strategy/references/pricing-models.md
    ```
 4. **Model Revenue Scenarios** - Project revenue under different growth/churn assumptions
    ```bash
-   python ../../finance/financial-analyst/scripts/scenario_modeler.py revenue_scenarios.json
+   python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input revenue_scenarios.json
    ```
 5. **Synthesize Findings** - Produce revenue analysis brief with cohort insights, forecast update, pricing recommendations, and action items
 
@@ -219,9 +211,9 @@ echo "Board financial package inputs ready for assembly"
 **Example:**
 ```bash
 # Revenue deep-dive
-python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json > waterfall.txt
+python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json > waterfall.txt
 python ../../finance/financial-analyst/scripts/forecast_builder.py historical.json assumptions.json > forecast.txt
-python ../../finance/financial-analyst/scripts/scenario_modeler.py revenue_scenarios.json > scenarios.txt
+python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input revenue_scenarios.json > scenarios.txt
 echo "Revenue analysis complete — review outputs for synthesis"
 ```
 
@@ -238,7 +230,7 @@ echo "Quarter: $(date +%Y-Q%q)"
 
 echo ""
 echo "--- Financial Health Score ---"
-python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json
+python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json
 
 echo ""
 echo "--- Key Ratios ---"
@@ -246,11 +238,11 @@ python ../../finance/financial-analyst/scripts/ratio_calculator.py financials.js
 
 echo ""
 echo "--- Revenue Waterfall ---"
-python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json
+python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json
 
 echo ""
 echo "--- Runway Status ---"
-python ../../finance/financial-analyst/scripts/burn_rate_calculator.py cash_data.json
+python ../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py --input cash_data.json
 
 echo ""
 echo "--- Forecast vs Actuals ---"
@@ -267,13 +259,13 @@ echo "--- Company Valuation ---"
 python ../../finance/financial-analyst/scripts/dcf_valuation.py projections.json
 
 echo "--- Growth Scenarios ---"
-python ../../finance/financial-analyst/scripts/scenario_modeler.py fundraising_scenarios.json
+python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input fundraising_scenarios.json
 
 echo "--- Revenue Story ---"
-python ../../business-growth/revenue-operations/scripts/revenue_waterfall_analyzer.py revenue_data.json
+python ../../c-level-advisor/cro-advisor/scripts/revenue_waterfall_analyzer.py --input revenue_data.json
 
 echo "--- Financial Health ---"
-python ../../finance/financial-analyst/scripts/financial_health_scorer.py financials.json
+python ../../c-level-advisor/cfo-advisor/scripts/financial_health_scorer.py --input financials.json
 ```
 
 ### Example 3: Cost Reduction Analysis
@@ -281,8 +273,8 @@ python ../../finance/financial-analyst/scripts/financial_health_scorer.py financ
 ```bash
 # Analyze cost structure for optimization
 python ../../finance/financial-analyst/scripts/budget_variance_analyzer.py actuals.json budget.json > variance.txt
-python ../../finance/financial-analyst/scripts/burn_rate_calculator.py cash_data.json > burn-rate.txt
-python ../../finance/financial-analyst/scripts/scenario_modeler.py cost_reduction_scenarios.json > scenarios.txt
+python ../../c-level-advisor/cfo-advisor/scripts/burn_rate_calculator.py --input cash_data.json > burn-rate.txt
+python ../../c-level-advisor/cfo-advisor/scripts/scenario_modeler.py --input cost_reduction_scenarios.json > scenarios.txt
 echo "Cost reduction scenarios ready for executive review"
 ```
 

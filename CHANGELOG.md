@@ -5,6 +5,13 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.12.3] - 2026-09-27
+
+### Fixed
+
+- **Every script a skill, domain guide or agent tells you to run now exists.** About 26 skills, 5 domain `CLAUDE.md` files and 10 agents named scripts that were never written (for example `scripts/deploy.py --env production` in delivery-manager). Each reference now points at the real script with the same job and its real flags, or the step is written as an instruction without a command. 225 unresolved script paths → 0.
+- **Root-level agents resolve their skills.** Four agents used `../../` paths that climbed out of the repo, and six pointed at renamed skill directories.
+
 ## [4.12.2] - 2026-09-27
 
 ### Fixed

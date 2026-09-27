@@ -159,29 +159,6 @@ Brand Health Dashboard - Q1 2026
   Share of Voice: 32% (+2%)    Sentiment: 85% positive
 ```
 
-## Scripts
-
-```bash
-# Brand audit analyzer
-python scripts/brand_audit.py --surveys survey_data.csv
-
-# Competitive positioning mapper
-python scripts/positioning_map.py --competitors comp_data.csv
-
-# Brand voice analyzer
-python scripts/voice_analyzer.py --content content.txt
-
-# Brand guidelines generator
-python scripts/guidelines_gen.py --config brand_config.yaml
-```
-
-## Reference Materials
-
-- `references/positioning.md` - Positioning frameworks
-- `references/identity.md` - Identity system guide
-- `references/architecture.md` - Brand architecture models
-- `references/governance.md` - Governance best practices
-
 ---
 
 ## Troubleshooting

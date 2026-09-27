@@ -178,13 +178,6 @@ Cost per Unit = (Direct + Indirect) / Units Produced
 3. **Check** -- Compare results to the target. If gap remains, perform root-cause analysis.
 4. **Act** -- If successful, standardize and scale. If not, return to Plan with new hypotheses.
 
-## Reference Materials
-
-- `references/process_design.md` - Process design principles
-- `references/lean_operations.md` - Lean methodology
-- `references/vendor_management.md` - Vendor management guide
-- `references/cost_optimization.md` - Cost reduction strategies
-
 ## Scripts
 
 ```bash

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T19:19:44+00:00",
+  "generated_at": "2026-09-27T21:12:22+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -2331,7 +2331,7 @@
         "scripts/feature_engineering_pipeline.py",
         "scripts/model_evaluation_suite.py"
       ],
-      "size_bytes": 32552,
+      "size_bytes": 32450,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2541,7 +2541,7 @@
         "scripts/prompt_optimizer.py",
         "scripts/rag_evaluator.py"
       ],
-      "size_bytes": 133091,
+      "size_bytes": 133095,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3014,10 +3014,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3334,7 +3335,7 @@
         "scripts/brand_health_dashboard.py",
         "scripts/positioning_map_generator.py"
       ],
-      "size_bytes": 42298,
+      "size_bytes": 41682,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3656,7 +3657,7 @@
         "scripts/growth_loop_modeler.py",
         "scripts/viral_coefficient_calculator.py"
       ],
-      "size_bytes": 39305,
+      "size_bytes": 38684,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -3734,7 +3735,7 @@
         "scripts/cohort_analyzer.py",
         "scripts/marketing_forecast_generator.py"
       ],
-      "size_bytes": 36682,
+      "size_bytes": 36048,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4042,7 +4043,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 42002,
+      "size_bytes": 41340,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4315,7 +4316,7 @@
         "scripts/financial_health_scorer.py",
         "scripts/scenario_modeler.py"
       ],
-      "size_bytes": 49903,
+      "size_bytes": 49278,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4546,7 +4547,7 @@
         "scripts/channel_mix_optimizer.py",
         "scripts/marketing_roi_calculator.py"
       ],
-      "size_bytes": 41740,
+      "size_bytes": 41122,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -4624,7 +4625,7 @@
         "scripts/operational_kpi_tracker.py",
         "scripts/process_efficiency_scorer.py"
       ],
-      "size_bytes": 41891,
+      "size_bytes": 41234,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -7103,7 +7104,7 @@
         "scripts/team_health_checker.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 67667,
+      "size_bytes": 67625,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7354,7 +7355,7 @@
         "scripts/dependency_mapper.py",
         "scripts/risk_register.py"
       ],
-      "size_bytes": 84901,
+      "size_bytes": 84620,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8866,7 +8867,7 @@
         "scripts/portfolio_dashboard.py",
         "scripts/resource_allocator.py"
       ],
-      "size_bytes": 64845,
+      "size_bytes": 64734,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -9285,7 +9286,7 @@
         "scripts/component_scaffold.py",
         "scripts/token_gen.py"
       ],
-      "size_bytes": 54885,
+      "size_bytes": 54235,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9352,7 +9353,7 @@
         "scripts/journey_mapper.py",
         "scripts/usability_scorer.py"
       ],
-      "size_bytes": 55786,
+      "size_bytes": 55137,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9642,7 +9643,7 @@
         "scripts/kpi_tracker.py",
         "scripts/metric_validator.py"
       ],
-      "size_bytes": 37794,
+      "size_bytes": 37519,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9672,7 +9673,7 @@
         "scripts/query_optimizer.py",
         "scripts/report_generator.py"
       ],
-      "size_bytes": 36618,
+      "size_bytes": 36367,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9702,7 +9703,7 @@
         "scripts/feature_selector.py",
         "scripts/hypothesis_tester.py"
       ],
-      "size_bytes": 42849,
+      "size_bytes": 42591,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9733,7 +9734,7 @@
         "scripts/model_registry.py",
         "scripts/pipeline_validator.py"
       ],
-      "size_bytes": 48468,
+      "size_bytes": 48212,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9802,7 +9803,7 @@
         "scripts/pipeline_analyzer.py",
         "scripts/win_loss_analyzer.py"
       ],
-      "size_bytes": 43128,
+      "size_bytes": 42955,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9832,7 +9833,7 @@
         "scripts/health_scorer.py",
         "scripts/qbr_generator.py"
       ],
-      "size_bytes": 47699,
+      "size_bytes": 47401,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9863,7 +9864,7 @@
         "scripts/rfp_analyzer.py",
         "scripts/technical_qualifier.py"
       ],
-      "size_bytes": 50170,
+      "size_bytes": 49831,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9893,7 +9894,7 @@
         "scripts/quota_calculator.py",
         "scripts/territory_planner.py"
       ],
-      "size_bytes": 51579,
+      "size_bytes": 51260,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9923,7 +9924,7 @@
         "scripts/migration_assessor.py",
         "scripts/sizing_calculator.py"
       ],
-      "size_bytes": 57371,
+      "size_bytes": 57044,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9953,7 +9954,7 @@
         "scripts/org_health_scorer.py",
         "scripts/workforce_dashboard.py"
       ],
-      "size_bytes": 64751,
+      "size_bytes": 64489,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9983,7 +9984,7 @@
         "scripts/process_mapper.py",
         "scripts/sla_tracker.py"
       ],
-      "size_bytes": 61115,
+      "size_bytes": 60850,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -10013,7 +10014,7 @@
         "scripts/headcount_planner.py",
         "scripts/survey_analyzer.py"
       ],
-      "size_bytes": 59674,
+      "size_bytes": 59410,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -10043,7 +10044,7 @@
         "scripts/interview_scorecard.py",
         "scripts/job_posting_analyzer.py"
       ],
-      "size_bytes": 63658,
+      "size_bytes": 63409,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,

@@ -171,13 +171,6 @@ def analyze_ab(control: np.ndarray, treatment: np.ndarray, alpha: float = 0.05) 
 ## Limitations -- [Known caveats]
 ```
 
-## Reference Materials
-
-- `references/ml_algorithms.md` -- Algorithm deep dives
-- `references/feature_engineering.md` -- Feature engineering patterns
-- `references/experimentation.md` -- A/B testing guide
-- `references/statistics.md` -- Statistical methods
-
 ## Scripts
 
 ```bash

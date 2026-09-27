@@ -186,14 +186,14 @@ Opportunity: Acme Corp - Enterprise Platform
 # Pipeline analyzer
 python scripts/pipeline_analyzer.py --data opportunities.csv
 
-# Forecast calculator
-python scripts/forecast.py --pipeline pipeline.csv --quarter Q4
+# Pipeline coverage against a quarterly quota
+python scripts/pipeline_analyzer.py --data opportunities.csv --quota 2500000
 
 # Win/loss analyzer
-python scripts/win_loss.py --deals closed_deals.csv
+python scripts/win_loss_analyzer.py --data closed_deals.csv
 
-# Account planner
-python scripts/account_plan.py --account "Account Name"
+# Deal scorer (MEDDPICC or BANT)
+python scripts/deal_scorer.py --data deals.csv --mode meddpicc
 ```
 
 ## Troubleshooting
@@ -262,10 +262,3 @@ python scripts/account_plan.py --account "Account Name"
 2. AE submits forecast to Sales Ops weekly by end-of-day Friday
 3. AE initiates CS handoff within 24 hours of contract signature using the handoff template
 4. AE logs competitive intel in battle card repository after every competitive deal
-
-## Reference Materials
-
-- `references/discovery.md` -- Discovery framework
-- `references/negotiation.md` -- Negotiation tactics
-- `references/objections.md` -- Objection handling
-- `references/forecasting.md` -- Forecasting best practices

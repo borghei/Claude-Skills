@@ -26,9 +26,9 @@ The cs-engineering-director agent bridges the gap between individual team metric
 - `../../engineering/code-reviewer/` - Code quality oversight
 - `../../engineering/senior-qa/` - Quality assurance and coverage
 - `../../engineering/tech-stack-evaluator/` - Technology evaluation
-- `../../engineering/devops-pipeline/` - CI/CD pipeline analysis
+- `../../engineering/devops-workflow-engineer/` - CI/CD pipeline analysis
 - `../../engineering/tech-debt-tracker/` - Debt scanning and prioritization
-- `../../engineering/team-scaling-calculator/` - Hiring and capacity planning
+- `../../c-level-advisor/vpe-advisor/` - Hiring and capacity planning
 - `../../engineering/skill-security-auditor/` - Security posture analysis
 
 ### Python Tools
@@ -52,15 +52,15 @@ The cs-engineering-director agent bridges the gap between individual team metric
    - **Use Cases:** Cross-team quality benchmarking, release risk assessment
 
 4. **Pipeline Analyzer**
-   - **Purpose:** Evaluates CI/CD pipeline health including build times, failure rates, and deployment frequency
-   - **Path:** `../../engineering/devops-pipeline/scripts/pipeline_analyzer.py`
-   - **Usage:** `python ../../engineering/devops-pipeline/scripts/pipeline_analyzer.py pipeline_config.yaml`
+   - **Purpose:** Analyzes CI/CD (GitHub Actions) workflows for optimization opportunities
+   - **Path:** `../../engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py`
+   - **Usage:** `python ../../engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py .github/workflows/`
    - **Use Cases:** DevOps maturity assessment, DORA metrics tracking, pipeline investment
 
-5. **Team Scaling Calculator**
-   - **Purpose:** Models team growth scenarios based on workload, velocity, and hiring timelines to produce headcount plans
-   - **Path:** `../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py`
-   - **Usage:** `python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py team_data.json`
+5. **Engineering Capacity Planner**
+   - **Purpose:** Projects engineering capacity per quarter from headcount, hiring plan, ramp-up, and attrition against demand to produce headcount plans
+   - **Path:** `../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py`
+   - **Usage:** `python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input team_data.json`
    - **Use Cases:** Headcount planning, hiring roadmaps, capacity forecasting
 
 6. **Stack Comparator**
@@ -100,7 +100,7 @@ The cs-engineering-director agent bridges the gap between individual team metric
    - **Use Case:** Technology radar methodology, standardized evaluation across teams
 
 3. **Tech Debt Management**
-   - **Location:** `../../engineering/tech-debt-tracker/references/debt_management_guide.md`
+   - **Location:** `../../engineering/tech-debt-tracker/references/methodology.md`
    - **Content:** Debt classification, prioritization frameworks, organizational paydown strategies
    - **Use Case:** Engineering-wide debt policy, investment communication to executives
 
@@ -124,7 +124,7 @@ The cs-engineering-director agent bridges the gap between individual team metric
    ```
 3. **Evaluate Pipeline Health** - Assess CI/CD maturity and DORA metrics
    ```bash
-   python ../../engineering/devops-pipeline/scripts/pipeline_analyzer.py pipeline_config.yaml
+   python ../../engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py .github/workflows/
    ```
 4. **Check Cross-Service Dependencies** - Identify coupling risks between services
    ```bash
@@ -153,7 +153,7 @@ done
 
 echo ""
 echo "--- Pipeline Health ---"
-python ../../engineering/devops-pipeline/scripts/pipeline_analyzer.py pipeline_config.yaml
+python ../../engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py .github/workflows/
 
 echo "=== Health Check Complete ==="
 ```
@@ -165,13 +165,13 @@ echo "=== Health Check Complete ==="
 **Steps:**
 1. **Assess Current Capacity** - Analyze current team velocity and workload
    ```bash
-   python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py team_data.json
+   python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input team_data.json
    ```
 2. **Map Roadmap Demands** - Estimate engineering effort required for upcoming product initiatives
 3. **Model Scaling Scenarios** - Run calculator with different hiring timelines and team structures
    ```bash
-   python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py scenario_aggressive.json
-   python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py scenario_conservative.json
+   python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input scenario_aggressive.json
+   python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input scenario_conservative.json
    ```
 4. **Calculate TCO** - Estimate cost of each scaling scenario
    ```bash
@@ -186,8 +186,8 @@ echo "=== Health Check Complete ==="
 **Example:**
 ```bash
 # Hiring plan analysis
-python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py team_data.json > current-capacity.txt
-python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py scenario_moderate.json > moderate-plan.txt
+python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input team_data.json > current-capacity.txt
+python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input scenario_moderate.json > moderate-plan.txt
 python ../../engineering/tech-stack-evaluator/scripts/tco_calculator.py hiring_costs.yaml > cost-projection.txt
 echo "Hiring plan scenarios ready for review"
 ```
@@ -246,11 +246,11 @@ python ../../engineering/tech-debt-tracker/scripts/debt_scanner.py /path/to/repo
 
 echo ""
 echo "--- Team Capacity & Scaling ---"
-python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py team_data.json
+python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input team_data.json
 
 echo ""
 echo "--- Pipeline Metrics (DORA) ---"
-python ../../engineering/devops-pipeline/scripts/pipeline_analyzer.py pipeline_config.yaml
+python ../../engineering/devops-workflow-engineer/scripts/pipeline_analyzer.py .github/workflows/
 
 echo ""
 echo "--- Technology Stack Fitness ---"
@@ -270,7 +270,7 @@ echo "--- Buy Option TCO ---"
 python ../../engineering/tech-stack-evaluator/scripts/tco_calculator.py buy_option.yaml
 
 echo "--- Hiring Impact (Build) ---"
-python ../../engineering/team-scaling-calculator/scripts/team_scaling_calculator.py build_team.json
+python ../../c-level-advisor/vpe-advisor/scripts/eng_capacity_planner.py --input build_team.json
 
 echo "--- Feature Comparison ---"
 python ../../engineering/tech-stack-evaluator/scripts/stack_comparator.py build_vs_buy.yaml

@@ -57,16 +57,12 @@ The cs-content-creator agent bridges the gap between creative content production
 ### Templates
 
 1. **Content Calendar Template**
-   - **Location:** `../../marketing/content-creator/assets/content-calendar.md`
+   - **Location:** `../../marketing/content-creator/assets/content_calendar_template.md`
    - **Use Case:** Planning monthly content, tracking production pipeline
 
 2. **SEO Checklist**
-   - **Location:** `../../marketing/content-creator/assets/seo-checklist.md`
+   - **Location:** `../../marketing/seo-audit/references/audit-checklist.md`
    - **Use Case:** Pre-publish validation, SEO audit
-
-3. **Content Brief Template**
-   - **Location:** `../../marketing/content-creator/assets/content-brief.md`
-   - **Use Case:** Writer briefing, stakeholder alignment
 
 ## Workflows
 
@@ -171,13 +167,13 @@ done
    ```
 2. **Copy Content Calendar** - Use template for campaign planning
    ```bash
-   cp ../../marketing/content-creator/assets/content-calendar.md campaign-calendar.md
+   cp ../../marketing/content-creator/assets/content_calendar_template.md campaign-calendar.md
    ```
 3. **Define Brand Voice Target** - Reference brand guidelines for campaign tone
    ```bash
    cat ../../marketing/content-creator/references/brand_guidelines.md
    ```
-4. **Create Content Briefs** - Use brief template for each content piece
+4. **Create Content Briefs** - Write a brief for each content piece (goal, audience, keyword, format)
 5. **Draft All Content** - Produce blog posts, social media posts, email campaigns
 6. **Validate Before Publishing** - Run analyzers on all campaign content
    ```bash

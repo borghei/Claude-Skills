@@ -20,9 +20,9 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
 ## Skill Integration
 
 **Primary Skills:**
-- `../../ra-qm-team/soc2-compliance/` - SOC 2 Type I/II readiness and auditing
-- `../../ra-qm-team/nist-csf-compliance/` - NIST Cybersecurity Framework maturity assessment
-- `../../ra-qm-team/gdpr-compliance/` - GDPR compliance and data protection
+- `../../ra-qm-team/soc2-compliance-expert/` - SOC 2 Type I/II readiness and auditing
+- `../../ra-qm-team/nist-csf-specialist/` - NIST Cybersecurity Framework maturity assessment
+- `../../ra-qm-team/gdpr-dsgvo-expert/` - GDPR compliance and data protection
 - `../../ra-qm-team/infrastructure-compliance-auditor/` - Infrastructure security auditing
 - `../../engineering/skill-security-auditor/` - Code-level security scanning
 - `../../c-level-advisor/ciso-advisor/` - CISO strategic frameworks and governance
@@ -31,22 +31,22 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
 
 1. **SOC 2 Readiness Checker**
    - **Purpose:** Assesses SOC 2 readiness across Trust Service Criteria (Security, Availability, Processing Integrity, Confidentiality, Privacy) with gap identification
-   - **Path:** `../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py`
-   - **Usage:** `python ../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py controls.json`
+   - **Path:** `../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py`
+   - **Usage:** `python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py --config controls.json`
    - **Output Formats:** Readiness score with per-criteria breakdown, JSON
    - **Use Cases:** Pre-audit assessment, control gap identification, remediation planning
 
 2. **SOC 2 Infrastructure Auditor**
    - **Purpose:** Audits infrastructure configuration against SOC 2 control requirements including access controls, encryption, logging, and monitoring
-   - **Path:** `../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py`
-   - **Usage:** `python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py infra_config.yaml`
+   - **Path:** `../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py`
+   - **Usage:** `python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config infra_config.json`
    - **Output Formats:** Audit findings with severity ratings, JSON
    - **Use Cases:** Continuous compliance monitoring, audit evidence collection, infrastructure hardening
 
 3. **CSF Maturity Assessor**
    - **Purpose:** Evaluates organizational maturity against NIST Cybersecurity Framework functions (Identify, Protect, Detect, Respond, Recover) with tier scoring
-   - **Path:** `../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py`
-   - **Usage:** `python ../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py assessment.json`
+   - **Path:** `../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py`
+   - **Usage:** `python ../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py --input assessment.json --target-tier 3`
    - **Output Formats:** Maturity tier per function with recommendations, JSON
    - **Use Cases:** Security program maturity tracking, board reporting, improvement roadmapping
 
@@ -59,8 +59,8 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
 
 5. **Secret Scanner**
    - **Purpose:** Detects hardcoded secrets, API keys, tokens, and credentials in source code and configuration files
-   - **Path:** `../../engineering/skill-security-auditor/scripts/secret_scanner.py`
-   - **Usage:** `python ../../engineering/skill-security-auditor/scripts/secret_scanner.py .`
+   - **Path:** `../../engineering/senior-security/scripts/secret_scanner.py`
+   - **Usage:** `python ../../engineering/senior-security/scripts/secret_scanner.py .`
    - **Output Formats:** Findings with file locations and severity, JSON
    - **Use Cases:** Pre-commit checks, repository audits, incident investigation
 
@@ -88,22 +88,22 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
 ### Knowledge Bases
 
 1. **SOC 2 Control Framework**
-   - **Location:** `../../ra-qm-team/soc2-compliance/references/soc2_control_framework.md`
+   - **Location:** `../../ra-qm-team/soc2-compliance-expert/references/trust-services-criteria-guide.md`
    - **Content:** Trust Service Criteria mapping, control objectives, evidence requirements
    - **Use Case:** Control design, audit preparation, evidence collection guidance
 
 2. **NIST CSF Implementation Guide**
-   - **Location:** `../../ra-qm-team/nist-csf-compliance/references/csf_implementation_guide.md`
+   - **Location:** `../../ra-qm-team/nist-csf-specialist/references/csf-implementation-playbook.md`
    - **Content:** Framework functions, categories, subcategories, implementation tiers
    - **Use Case:** Maturity improvement planning, security program design
 
 3. **GDPR Compliance Guide**
-   - **Location:** `../../ra-qm-team/gdpr-compliance/references/gdpr_compliance_guide.md`
+   - **Location:** `../../ra-qm-team/gdpr-dsgvo-expert/references/gdpr_compliance_guide.md`
    - **Content:** GDPR articles, lawful bases, data subject rights, DPIA methodology
    - **Use Case:** Privacy program design, DPIA execution, regulatory response
 
 4. **CISO Strategic Playbook**
-   - **Location:** `../../c-level-advisor/ciso-advisor/references/ciso_strategic_playbook.md`
+   - **Location:** `../../c-level-advisor/ciso-advisor/SKILL.md`
    - **Content:** Board communication frameworks, security budget justification, incident communication, vendor risk management
    - **Use Case:** Board reporting, budget proposals, incident response planning
 
@@ -120,11 +120,11 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
    ```
 2. **Audit Infrastructure** - Check infrastructure configuration against SOC 2 controls
    ```bash
-   python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py infra_config.yaml
+   python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config infra_config.json
    ```
 3. **Scan for Secrets** - Detect hardcoded credentials across repositories
    ```bash
-   python ../../engineering/skill-security-auditor/scripts/secret_scanner.py /path/to/repo
+   python ../../engineering/senior-security/scripts/secret_scanner.py /path/to/repo
    ```
 4. **Scan Code for Vulnerabilities** - Identify security flaws in application code
    ```bash
@@ -144,8 +144,8 @@ The cs-ciso-advisor agent bridges the gap between technical security findings an
 ```bash
 # Full security posture assessment
 python ../../c-level-advisor/ciso-advisor/scripts/security_posture_scorer.py posture_data.json > posture-score.txt
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py infra_config.yaml > infra-audit.txt
-python ../../engineering/skill-security-auditor/scripts/secret_scanner.py . > secret-scan.txt
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config infra_config.json > infra-audit.txt
+python ../../engineering/senior-security/scripts/secret_scanner.py . > secret-scan.txt
 python ../../engineering/skill-security-auditor/scripts/code_scanner.py src/ > vuln-scan.txt
 echo "Security posture assessment complete — compile executive report"
 ```
@@ -157,11 +157,11 @@ echo "Security posture assessment complete — compile executive report"
 **Steps:**
 1. **Assess SOC 2 Readiness** - Evaluate Trust Service Criteria compliance
    ```bash
-   python ../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py controls.json
+   python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py --config controls.json
    ```
 2. **Assess NIST CSF Maturity** - Score maturity across five framework functions
    ```bash
-   python ../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py assessment.json
+   python ../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py --input assessment.json --target-tier 3
    ```
 3. **Track Multi-Framework Compliance** - Generate unified compliance view
    ```bash
@@ -169,7 +169,7 @@ echo "Security posture assessment complete — compile executive report"
    ```
 4. **Reference GDPR Requirements** - Review data protection obligations
    ```bash
-   cat ../../ra-qm-team/gdpr-compliance/references/gdpr_compliance_guide.md
+   cat ../../ra-qm-team/gdpr-dsgvo-expert/references/gdpr_compliance_guide.md
    ```
 5. **Identify Cross-Framework Gaps** - Map overlapping controls and unique gaps across frameworks
 6. **Produce Dashboard** - Unified compliance status with per-framework scores, gap counts, and remediation timeline
@@ -181,8 +181,8 @@ echo "Security posture assessment complete — compile executive report"
 **Example:**
 ```bash
 # Compliance dashboard generation
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py controls.json > soc2-readiness.txt
-python ../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py assessment.json > nist-maturity.txt
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py --config controls.json > soc2-readiness.txt
+python ../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py --input assessment.json --target-tier 3 > nist-maturity.txt
 python ../../c-level-advisor/ciso-advisor/scripts/compliance_tracker.py compliance_data.json > compliance-status.txt
 echo "Compliance dashboard inputs ready for assembly"
 ```
@@ -202,15 +202,15 @@ echo "Compliance dashboard inputs ready for assembly"
    ```
 3. **Audit Detection Capabilities** - Verify monitoring and alerting infrastructure
    ```bash
-   python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py monitoring_config.yaml
+   python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config monitoring_config.json
    ```
 4. **Reference CISO Playbook** - Review incident communication and response frameworks
    ```bash
-   cat ../../c-level-advisor/ciso-advisor/references/ciso_strategic_playbook.md
+   cat ../../c-level-advisor/ciso-advisor/SKILL.md
    ```
 5. **Assess NIST CSF Response/Recover** - Score maturity of Respond and Recover functions
    ```bash
-   python ../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py assessment.json
+   python ../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py --input assessment.json --target-tier 3
    ```
 6. **Produce Readiness Report** - Document response team roles, communication chain, detection gaps, and tabletop exercise recommendations
 
@@ -223,7 +223,7 @@ echo "Compliance dashboard inputs ready for assembly"
 # Incident readiness check
 python ../../c-level-advisor/ciso-advisor/scripts/risk_register_manager.py risk_register.json > risk-status.txt
 python ../../c-level-advisor/ciso-advisor/scripts/compliance_tracker.py compliance_data.json > compliance-check.txt
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py monitoring_config.yaml > monitoring-audit.txt
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config monitoring_config.json > monitoring-audit.txt
 echo "Incident readiness assessment complete"
 ```
 
@@ -252,11 +252,11 @@ python ../../c-level-advisor/ciso-advisor/scripts/compliance_tracker.py complian
 
 echo ""
 echo "--- SOC 2 Readiness ---"
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py controls.json
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py --config controls.json
 
 echo ""
 echo "--- NIST CSF Maturity ---"
-python ../../ra-qm-team/nist-csf-compliance/scripts/csf_maturity_assessor.py assessment.json
+python ../../ra-qm-team/nist-csf-specialist/scripts/csf_maturity_assessor.py --input assessment.json --target-tier 3
 
 echo "=== Board Report Data Complete ==="
 ```
@@ -266,13 +266,13 @@ echo "=== Board Report Data Complete ==="
 ```bash
 # Prepare for upcoming SOC 2 Type II audit
 echo "--- SOC 2 Readiness Assessment ---"
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_readiness_checker.py controls.json
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_readiness_checker.py --config controls.json
 
 echo "--- Infrastructure Audit (pre-check) ---"
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py infra_config.yaml
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config infra_config.json
 
 echo "--- Secret Exposure Check ---"
-python ../../engineering/skill-security-auditor/scripts/secret_scanner.py .
+python ../../engineering/senior-security/scripts/secret_scanner.py .
 
 echo "--- Compliance Gap Summary ---"
 python ../../c-level-advisor/ciso-advisor/scripts/compliance_tracker.py compliance_data.json
@@ -286,10 +286,10 @@ echo "--- Code Vulnerability Scan ---"
 python ../../engineering/skill-security-auditor/scripts/code_scanner.py src/
 
 echo "--- Secret Detection ---"
-python ../../engineering/skill-security-auditor/scripts/secret_scanner.py .
+python ../../engineering/senior-security/scripts/secret_scanner.py .
 
 echo "--- Infrastructure Security ---"
-python ../../ra-qm-team/soc2-compliance/scripts/soc2_infrastructure_auditor.py infra_config.yaml
+python ../../ra-qm-team/soc2-compliance-expert/scripts/soc2_infrastructure_auditor.py --config infra_config.json
 
 echo "--- Update Risk Register ---"
 python ../../c-level-advisor/ciso-advisor/scripts/risk_register_manager.py risk_register.json
@@ -329,9 +329,9 @@ python ../../c-level-advisor/ciso-advisor/scripts/risk_register_manager.py risk_
 
 ## References
 
-- **SOC 2 Compliance Skill:** [../../ra-qm-team/soc2-compliance/SKILL.md](../../ra-qm-team/soc2-compliance/SKILL.md)
-- **NIST CSF Compliance Skill:** [../../ra-qm-team/nist-csf-compliance/SKILL.md](../../ra-qm-team/nist-csf-compliance/SKILL.md)
-- **GDPR Compliance Skill:** [../../ra-qm-team/gdpr-compliance/SKILL.md](../../ra-qm-team/gdpr-compliance/SKILL.md)
+- **SOC 2 Compliance Skill:** [../../ra-qm-team/soc2-compliance-expert/SKILL.md](../../ra-qm-team/soc2-compliance-expert/SKILL.md)
+- **NIST CSF Compliance Skill:** [../../ra-qm-team/nist-csf-specialist/SKILL.md](../../ra-qm-team/nist-csf-specialist/SKILL.md)
+- **GDPR Compliance Skill:** [../../ra-qm-team/gdpr-dsgvo-expert/SKILL.md](../../ra-qm-team/gdpr-dsgvo-expert/SKILL.md)
 - **Security Auditor Skill:** [../../engineering/skill-security-auditor/SKILL.md](../../engineering/skill-security-auditor/SKILL.md)
 - **CISO Advisor Skill:** [../../c-level-advisor/ciso-advisor/SKILL.md](../../c-level-advisor/ciso-advisor/SKILL.md)
 - **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)

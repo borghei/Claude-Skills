@@ -228,17 +228,14 @@ The agent tracks three dimensions of POC success:
 ## Scripts
 
 ```bash
-# Requirements analyzer
-python scripts/requirements_analyzer.py --input requirements.xlsx
+# Architecture scorer
+python scripts/architecture_scorer.py --data architecture.csv
 
-# Architecture diagram generator
-python scripts/arch_diagram.py --config solution.yaml
+# Sizing calculator
+python scripts/sizing_calculator.py --data workloads.csv --growth-factor 1.5
 
-# Security assessment
-python scripts/security_assess.py --customer "Customer Name"
-
-# POC tracker
-python scripts/poc_tracker.py --customer "Customer Name"
+# Migration assessor
+python scripts/migration_assessor.py --data migration.csv --detailed
 ```
 
 ## Troubleshooting
@@ -310,10 +307,3 @@ python scripts/poc_tracker.py --customer "Customer Name"
 2. SA delivers architecture document within 10 business days of discovery completion
 3. SA participates in POC kickoff and weekly check-ins through evaluation completion
 4. SA delivers implementation handoff package to Engineering/PS within 5 days of deal close
-
-## Reference Materials
-
-- `references/architecture_patterns.md` -- Common patterns
-- `references/integration_guide.md` -- Integration best practices
-- `references/security_framework.md` -- Security requirements
-- `references/poc_playbook.md` -- POC execution guide

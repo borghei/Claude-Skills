@@ -77,12 +77,12 @@ The cs-tech-lead agent bridges the gap between strategic architecture goals and 
    - **Use Case:** Architecture review criteria, pattern drift detection
 
 2. **Code Review Best Practices**
-   - **Location:** `../../engineering/code-reviewer/references/code_review_best_practices.md`
+   - **Location:** `../../engineering/code-reviewer/references/code_review_checklist.md`
    - **Content:** Review checklists, quality gates, common anti-patterns
    - **Use Case:** Standardizing review quality across the team
 
 3. **Tech Debt Management**
-   - **Location:** `../../engineering/tech-debt-tracker/references/debt_management_guide.md`
+   - **Location:** `../../engineering/tech-debt-tracker/references/methodology.md`
    - **Content:** Debt classification, prioritization frameworks, paydown strategies
    - **Use Case:** Sprint planning, stakeholder communication about debt investment
 
@@ -134,7 +134,7 @@ echo "Coupling score target: < 0.3 | Circular deps target: 0"
    ```
 3. **Reference Debt Management Guide** - Apply classification and paydown strategies
    ```bash
-   cat ../../engineering/tech-debt-tracker/references/debt_management_guide.md
+   cat ../../engineering/tech-debt-tracker/references/methodology.md
    ```
 4. **Create Tickets** - Export top-priority items as structured tickets with effort estimates, acceptance criteria, and ROI justification for sprint planning
 

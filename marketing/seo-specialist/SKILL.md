@@ -153,29 +153,6 @@ SEO Performance - March 2026
   Core Web Vitals: Pass | Index: 1,234 pages | Crawl Errors: 3
 ```
 
-## Scripts
-
-```bash
-# Site audit
-python scripts/site_audit.py --url https://example.com --output audit.html
-
-# Keyword research
-python scripts/keyword_research.py --seed "cloud computing" --output keywords.csv
-
-# Rank tracker
-python scripts/rank_tracker.py --keywords keywords.csv --domain example.com
-
-# Backlink analyzer
-python scripts/backlink_analyzer.py --domain example.com --output links.csv
-```
-
-## Reference Materials
-
-- `references/technical_seo.md` - Technical SEO guide
-- `references/keyword_research.md` - Keyword research methods
-- `references/link_building.md` - Link building playbook
-- `references/algorithm_updates.md` - Google update history
-
 ---
 
 ## Troubleshooting

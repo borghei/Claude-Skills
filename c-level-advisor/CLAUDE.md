@@ -50,7 +50,7 @@ This guide covers the 31 production-ready C-level advisory skills for strategic 
 
 **Usage:**
 ```bash
-python ceo-advisor/scripts/strategic_analyzer.py company-data.json
+python ceo-advisor/scripts/strategy_analyzer.py
 ```
 
 ### Decision-Making Frameworks
@@ -85,7 +85,7 @@ python ceo-advisor/scripts/strategic_analyzer.py company-data.json
 
 **Usage:**
 ```bash
-python cto-advisor/scripts/tech_stack_evaluator.py requirements.yaml
+python cto-advisor/scripts/tech_debt_analyzer.py
 ```
 
 ### Technical Decision Frameworks
@@ -103,13 +103,13 @@ python cto-advisor/scripts/tech_stack_evaluator.py requirements.yaml
 
 ```bash
 # 1. Market analysis
-python ceo-advisor/scripts/market_analyzer.py industry-data.csv
+python competitive-intel/scripts/market_landscape_mapper.py --input market-data.json
 
 # 2. SWOT analysis
-python ceo-advisor/scripts/swot_generator.py
+python competitive-intel/scripts/swot_analyzer.py --input swot-data.json
 
 # 3. Strategy formulation
-python ceo-advisor/scripts/strategy_planner.py
+python ceo-advisor/scripts/strategy_analyzer.py
 
 # 4. OKR cascade (link to product-strategist)
 python ../product-team/product-strategist/scripts/okr_cascade_generator.py growth
@@ -118,17 +118,14 @@ python ../product-team/product-strategist/scripts/okr_cascade_generator.py growt
 ### Workflow 2: Technical Strategy (CTO)
 
 ```bash
-# 1. Evaluate technology options
-python cto-advisor/scripts/tech_stack_evaluator.py requirements.yaml
+# 1. Evaluate technology options against weighted criteria (performance, scalability, ecosystem, TCO)
 
-# 2. Architecture decision
-python cto-advisor/scripts/adr_generator.py
+# 2. Architecture decision: record it as an ADR (format: cto-advisor/references/architecture_decision_records.md)
 
 # 3. Team capacity planning
-python cto-advisor/scripts/capacity_planner.py team-data.json
+python vpe-advisor/scripts/eng_capacity_planner.py --input team-data.json
 
-# 4. Engineering roadmap
-python cto-advisor/scripts/roadmap_generator.py priorities.csv
+# 4. Engineering roadmap: sequence priorities against the capacity projection from step 3
 ```
 
 ## Integration with Other Skills

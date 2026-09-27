@@ -20,76 +20,76 @@ The cs-growth-lead agent bridges the gap between growth strategy and execution, 
 ## Skill Integration
 
 **Skills Referenced:**
-- `../../business-growth/churn-prevention/`
-- `../../business-growth/signup-flow-cro/`
-- `../../business-growth/pricing-strategy/`
-- `../../marketing/growth-marketer/`
+- `../business-growth/churn-prevention/`
+- `../business-growth/signup-flow-cro/`
+- `../business-growth/pricing-strategy/`
+- `../marketing/growth-marketer/`
 
 ### Python Tools
 
 1. **Churn Impact Calculator**
    - **Purpose:** Models the revenue impact of churn reduction at different rates and identifies highest-impact retention levers
-   - **Path:** `../../business-growth/churn-prevention/scripts/churn_impact_calculator.py`
-   - **Usage:** `python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py`
+   - **Path:** `../business-growth/churn-prevention/scripts/churn_impact_calculator.py`
+   - **Usage:** `python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py`
    - **Features:** Churn rate modeling, revenue impact projection, cohort survival analysis, retention lever identification
    - **Use Cases:** Retention strategy planning, churn reduction business cases, board-level retention reporting
 
 2. **Growth Loop Modeler**
    - **Purpose:** Models compound growth loops including viral, content, paid, and product-led loops with projected outcomes
-   - **Path:** `../../marketing/growth-marketer/scripts/growth_loop_modeler.py`
-   - **Usage:** `python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py`
+   - **Path:** `../marketing/growth-marketer/scripts/growth_loop_modeler.py`
+   - **Usage:** `python ../marketing/growth-marketer/scripts/growth_loop_modeler.py`
    - **Features:** Loop modeling, compound growth projection, loop efficiency scoring, bottleneck identification
    - **Use Cases:** Growth model development, loop optimization, growth strategy planning
 
 3. **Viral Coefficient Calculator**
    - **Purpose:** Calculates viral coefficients and models organic growth from referral and sharing mechanisms
-   - **Path:** `../../marketing/growth-marketer/scripts/viral_coefficient_calculator.py`
-   - **Usage:** `python ../../marketing/growth-marketer/scripts/viral_coefficient_calculator.py`
+   - **Path:** `../marketing/growth-marketer/scripts/viral_coefficient_calculator.py`
+   - **Usage:** `python ../marketing/growth-marketer/scripts/viral_coefficient_calculator.py`
    - **Features:** K-factor calculation, viral cycle time modeling, referral program ROI, sharing mechanism analysis
    - **Use Cases:** Referral program design, viral feature evaluation, organic growth forecasting
 
 4. **Signup Flow Scorer**
    - **Purpose:** Scores signup and onboarding flows against conversion best practices and identifies friction points
-   - **Path:** `../../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py`
-   - **Usage:** `python ../../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py`
+   - **Path:** `../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py`
+   - **Usage:** `python ../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py`
    - **Features:** Flow scoring, friction identification, step-by-step conversion analysis, best practice benchmarking
    - **Use Cases:** Signup flow audits, onboarding optimization, conversion rate improvement
 
 5. **Price Sensitivity Calculator**
    - **Purpose:** Models price sensitivity and willingness-to-pay to identify optimal price points
-   - **Path:** `../../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py`
-   - **Usage:** `python ../../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py`
+   - **Path:** `../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py`
+   - **Usage:** `python ../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py`
    - **Features:** Van Westendorp analysis, price elasticity modeling, willingness-to-pay curves, segment-level pricing
    - **Use Cases:** Pricing research, price increase planning, new product pricing, tier optimization
 
 6. **Conversion Benchmark Calculator**
    - **Purpose:** Benchmarks conversion rates against industry standards and identifies improvement opportunities
-   - **Path:** `../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py`
-   - **Usage:** `python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py`
+   - **Path:** `../business-growth/page-cro/scripts/conversion_benchmark_calculator.py`
+   - **Usage:** `python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type landing-page --traffic organic --current-rate 2.5`
    - **Features:** Industry benchmarking, funnel stage analysis, conversion gap scoring, improvement opportunity ranking
    - **Use Cases:** Funnel audits, performance benchmarking, goal setting, board reporting
 
 7. **Activation Funnel Analyzer**
    - **Purpose:** Analyzes activation funnels to identify drop-off points and optimize time-to-value
-   - **Path:** `../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py`
-   - **Usage:** `python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py`
+   - **Path:** `../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py`
+   - **Usage:** `python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json`
    - **Features:** Funnel visualization, drop-off analysis, time-to-activation measurement, aha-moment identification
    - **Use Cases:** Activation optimization, onboarding redesign, time-to-value reduction
 
 ### Knowledge Bases
 
 1. **Churn Prevention Playbook**
-   - **Location:** `../../business-growth/churn-prevention/references/`
+   - **Location:** `../business-growth/churn-prevention/SKILL.md`
    - **Content:** Churn prediction models, retention frameworks, win-back campaign strategies, cohort analysis methodologies
    - **Use Case:** Retention strategy development, churn root cause analysis
 
 2. **Signup Flow CRO Guide**
-   - **Location:** `../../business-growth/signup-flow-cro/references/`
+   - **Location:** `../business-growth/signup-flow-cro/SKILL.md`
    - **Content:** Conversion rate optimization frameworks, A/B testing methodologies, onboarding best practices, friction reduction patterns
    - **Use Case:** Signup optimization, onboarding design, experiment planning
 
 3. **Pricing Strategy Framework**
-   - **Location:** `../../business-growth/pricing-strategy/references/`
+   - **Location:** `../business-growth/pricing-strategy/references/`
    - **Content:** Pricing models (freemium, usage-based, tiered), willingness-to-pay research methods, price increase playbooks, packaging strategies
    - **Use Case:** Pricing decisions, monetization strategy, packaging optimization
 
@@ -102,19 +102,19 @@ The cs-growth-lead agent bridges the gap between growth strategy and execution, 
 **Steps:**
 1. **Activation Funnel Analysis** - Map and analyze the activation funnel to identify critical drop-off points
    ```bash
-   python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py
+   python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json
    ```
 2. **Signup Flow Scoring** - Score the signup and onboarding experience against best practices
    ```bash
-   python ../../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py
+   python ../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py
    ```
 3. **Conversion Benchmarking** - Compare conversion rates against industry standards
    ```bash
-   python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py
+   python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type landing-page --traffic organic --current-rate 2.5
    ```
 4. **Growth Loop Assessment** - Model current growth loops and identify efficiency opportunities
    ```bash
-   python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py
+   python ../marketing/growth-marketer/scripts/growth_loop_modeler.py
    ```
 5. **Prioritization** - Rank growth opportunities by ICE (Impact, Confidence, Ease) score
 6. **Experiment Backlog** - Build prioritized experiment backlog with hypothesis, metric, and success criteria for each
@@ -126,10 +126,10 @@ The cs-growth-lead agent bridges the gap between growth strategy and execution, 
 **Example:**
 ```bash
 # Full growth audit pipeline
-python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py > funnel-analysis.txt
-python ../../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py > signup-score.txt
-python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py > benchmarks.txt
-python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py > growth-loops.txt
+python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json > funnel-analysis.txt
+python ../business-growth/signup-flow-cro/scripts/signup_flow_scorer.py > signup-score.txt
+python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type landing-page --traffic organic --current-rate 2.5 > benchmarks.txt
+python ../marketing/growth-marketer/scripts/growth_loop_modeler.py > growth-loops.txt
 # Synthesize into growth audit with prioritized experiment backlog
 ```
 
@@ -140,15 +140,15 @@ python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py > growth-l
 **Steps:**
 1. **Churn Impact Analysis** - Model the revenue impact of current churn rates and improvement scenarios
    ```bash
-   python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py
+   python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py
    ```
 2. **Reference Retention Frameworks** - Review churn prevention best practices and retention playbooks
    ```bash
-   cat ../../business-growth/churn-prevention/references/*.md
+   cat ../business-growth/churn-prevention/SKILL.md
    ```
 3. **Activation Funnel Review** - Check if activation quality is contributing to downstream churn
    ```bash
-   python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py
+   python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json
    ```
 4. **Cohort Analysis** - Segment churn by acquisition channel, plan, feature usage, and demographics
 5. **Root Cause Mapping** - Identify top churn drivers: product gaps, value realization failures, competitive losses, pricing friction
@@ -161,8 +161,8 @@ python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py > growth-l
 **Example:**
 ```bash
 # Retention deep dive pipeline
-python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py > churn-impact.txt
-python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py > activation-quality.txt
+python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py > churn-impact.txt
+python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json > activation-quality.txt
 # Combine with cohort data for root cause analysis and retention roadmap
 ```
 
@@ -173,19 +173,19 @@ python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.
 **Steps:**
 1. **Price Sensitivity Analysis** - Model willingness-to-pay and identify optimal price points
    ```bash
-   python ../../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py
+   python ../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py
    ```
 2. **Reference Pricing Frameworks** - Review pricing models and packaging strategies
    ```bash
-   cat ../../business-growth/pricing-strategy/references/*.md
+   cat ../business-growth/pricing-strategy/references/*.md
    ```
 3. **Conversion Impact Modeling** - Assess how pricing changes affect conversion rates
    ```bash
-   python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py
+   python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type pricing --traffic organic --current-rate 2.5
    ```
 4. **Churn Impact Assessment** - Model how pricing changes affect retention
    ```bash
-   python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py
+   python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py
    ```
 5. **Experiment Design** - Design pricing A/B tests with proper segmentation and measurement
 6. **Implementation Plan** - Build rollout plan including grandfathering, communication, and monitoring
@@ -197,9 +197,9 @@ python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.
 **Example:**
 ```bash
 # Pricing optimization pipeline
-python ../../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py > price-sensitivity.txt
-python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py > conversion-impact.txt
-python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py > churn-risk.txt
+python ../business-growth/pricing-strategy/scripts/price_sensitivity_calculator.py > price-sensitivity.txt
+python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type pricing --traffic organic --current-rate 2.5 > conversion-impact.txt
+python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py > churn-risk.txt
 # Design pricing experiment from combined analysis
 ```
 
@@ -217,27 +217,27 @@ echo "============================================="
 # Activation funnel health
 echo ""
 echo "Activation Funnel:"
-python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py
+python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json
 
 # Conversion benchmarks
 echo ""
 echo "Conversion Benchmarks:"
-python ../../business-growth/signup-flow-cro/scripts/conversion_benchmark_calculator.py
+python ../business-growth/page-cro/scripts/conversion_benchmark_calculator.py --page-type landing-page --traffic organic --current-rate 2.5
 
 # Churn tracking
 echo ""
 echo "Churn Impact Model:"
-python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py
+python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py
 
 # Viral metrics
 echo ""
 echo "Viral Coefficient:"
-python ../../marketing/growth-marketer/scripts/viral_coefficient_calculator.py
+python ../marketing/growth-marketer/scripts/viral_coefficient_calculator.py
 
 # Growth loop health
 echo ""
 echo "Growth Loop Performance:"
-python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py
+python ../marketing/growth-marketer/scripts/growth_loop_modeler.py
 ```
 
 ### Example 2: New Feature Growth Assessment
@@ -249,16 +249,16 @@ echo "Feature Growth Impact Assessment"
 echo "================================="
 
 # Model growth loop contribution
-python ../../marketing/growth-marketer/scripts/growth_loop_modeler.py > loop-impact.txt
+python ../marketing/growth-marketer/scripts/growth_loop_modeler.py > loop-impact.txt
 
 # Assess viral potential
-python ../../marketing/growth-marketer/scripts/viral_coefficient_calculator.py > viral-potential.txt
+python ../marketing/growth-marketer/scripts/viral_coefficient_calculator.py > viral-potential.txt
 
 # Check activation impact
-python ../../business-growth/signup-flow-cro/scripts/activation_funnel_analyzer.py > activation-impact.txt
+python ../business-growth/onboarding-cro/scripts/activation_funnel_analyzer.py funnel_data.json > activation-impact.txt
 
 # Model retention impact
-python ../../business-growth/churn-prevention/scripts/churn_impact_calculator.py > retention-impact.txt
+python ../business-growth/churn-prevention/scripts/churn_impact_calculator.py > retention-impact.txt
 
 echo "Assessment complete - review outputs for growth impact scoring"
 ```
@@ -298,10 +298,10 @@ echo "Assessment complete - review outputs for growth impact scoring"
 
 ## References
 
-- **Churn Prevention Skill:** [../../business-growth/churn-prevention/SKILL.md](../../business-growth/churn-prevention/SKILL.md)
-- **Signup Flow CRO Skill:** [../../business-growth/signup-flow-cro/SKILL.md](../../business-growth/signup-flow-cro/SKILL.md)
-- **Pricing Strategy Skill:** [../../business-growth/pricing-strategy/SKILL.md](../../business-growth/pricing-strategy/SKILL.md)
-- **Growth Marketer Skill:** [../../marketing/growth-marketer/SKILL.md](../../marketing/growth-marketer/SKILL.md)
+- **Churn Prevention Skill:** [../business-growth/churn-prevention/SKILL.md](../business-growth/churn-prevention/SKILL.md)
+- **Signup Flow CRO Skill:** [../business-growth/signup-flow-cro/SKILL.md](../business-growth/signup-flow-cro/SKILL.md)
+- **Pricing Strategy Skill:** [../business-growth/pricing-strategy/SKILL.md](../business-growth/pricing-strategy/SKILL.md)
+- **Growth Marketer Skill:** [../marketing/growth-marketer/SKILL.md](../marketing/growth-marketer/SKILL.md)
 - **Agent Development Guide:** [agents/CLAUDE.md](agents/CLAUDE.md)
 
 ---

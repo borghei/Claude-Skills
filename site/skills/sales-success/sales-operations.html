@@ -681,17 +681,14 @@ TOOL UTILIZATION
 ## Scripts
 
 ```bash
-# Pipeline analyzer
-python scripts/pipeline_analyzer.py --data opportunities.csv
-
-# Territory optimizer
-python scripts/territory_optimizer.py --accounts accounts.csv --reps 10
+# Territory planner
+python scripts/territory_planner.py --accounts accounts.csv --reps 10
 
 # Quota calculator
-python scripts/quota_calculator.py --target 50000000 --reps team.csv
+python scripts/quota_calculator.py --data team.csv --quarter Q4-2026
 
-# Forecast reporter
-python scripts/forecast_report.py --quarter Q4 --output report.html
+# Forecast analyzer
+python scripts/forecast_analyzer.py --data forecast_history.csv --quarters 4
 ```
 
 ## Troubleshooting
@@ -764,13 +761,6 @@ python scripts/forecast_report.py --quarter Q4 --output report.html
 2. Sales Ops delivers weekly pipeline report to sales leadership every Monday by 10 AM
 3. Sales Ops collects forecast submissions from AEs every Friday and publishes rolled-up forecast by Monday
 4. Sales Ops runs monthly territory health review and flags imbalances exceeding 15% variance
-
-## Reference Materials
-
-- `references/analytics.md` -- Sales analytics guide
-- `references/territory.md` -- Territory planning
-- `references/compensation.md` -- Comp design principles
-- `references/forecasting.md` -- Forecasting methodology
 
 ---
 
@@ -1037,17 +1027,14 @@ TOOL UTILIZATION
 ## Scripts
 
 ```bash
-# Pipeline analyzer
-python scripts/pipeline_analyzer.py --data opportunities.csv
-
-# Territory optimizer
-python scripts/territory_optimizer.py --accounts accounts.csv --reps 10
+# Territory planner
+python scripts/territory_planner.py --accounts accounts.csv --reps 10
 
 # Quota calculator
-python scripts/quota_calculator.py --target 50000000 --reps team.csv
+python scripts/quota_calculator.py --data team.csv --quarter Q4-2026
 
-# Forecast reporter
-python scripts/forecast_report.py --quarter Q4 --output report.html
+# Forecast analyzer
+python scripts/forecast_analyzer.py --data forecast_history.csv --quarters 4
 ```
 
 ## Troubleshooting
@@ -1120,13 +1107,6 @@ python scripts/forecast_report.py --quarter Q4 --output report.html
 2. Sales Ops delivers weekly pipeline report to sales leadership every Monday by 10 AM
 3. Sales Ops collects forecast submissions from AEs every Friday and publishes rolled-up forecast by Monday
 4. Sales Ops runs monthly territory health review and flags imbalances exceeding 15% variance
-
-## Reference Materials
-
-- `references/analytics.md` -- Sales analytics guide
-- `references/territory.md` -- Territory planning
-- `references/compensation.md` -- Comp design principles
-- `references/forecasting.md` -- Forecasting methodology
 
 ---
 

@@ -185,13 +185,6 @@ security_model:
       permissions: [view, export, edit, delete, publish]
 ```
 
-## Reference Materials
-
-- `references/dashboard_patterns.md` -- Dashboard design patterns
-- `references/visualization_guide.md` -- Chart selection guide
-- `references/kpi_library.md` -- Standard KPI definitions
-- `references/storytelling.md` -- Data storytelling techniques
-
 ## Scripts
 
 ```bash

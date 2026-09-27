@@ -163,29 +163,6 @@ Targets:
 | Series B (10-20) | CMO, Director Brand, Director Demand Gen, Manager Content, Manager Ops, ICs |
 | Series C+ (20+) | CMO, VP Brand, VP Demand Gen, VP Revenue Marketing, VP Marketing Ops, Specialized teams |
 
-## Scripts
-
-```bash
-# Campaign performance analyzer
-python scripts/campaign_analyzer.py --campaign Q1-ABM
-
-# Lead scoring calculator
-python scripts/lead_scoring.py --leads leads.csv
-
-# Content calendar generator
-python scripts/content_calendar.py --pillars topics.yaml
-
-# Attribution reporter
-python scripts/attribution.py --period monthly
-```
-
-## References
-
-- `references/brand_guidelines.md` -- Brand standards and usage
-- `references/demand_gen_playbook.md` -- Campaign execution guide
-- `references/content_strategy.md` -- Content planning framework
-- `references/martech_stack.md` -- Technology recommendations
-
 ---
 
 ## Tool Reference

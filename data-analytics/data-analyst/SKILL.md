@@ -173,13 +173,6 @@ def test_independence(table, alpha=0.05):
 ## Next Steps -- Follow-up actions
 ```
 
-## Reference Materials
-
-- `references/sql_patterns.md` -- Advanced SQL queries
-- `references/visualization.md` -- Chart selection guide
-- `references/statistics.md` -- Statistical methods
-- `references/storytelling.md` -- Presentation best practices
-
 ## Scripts
 
 ```bash

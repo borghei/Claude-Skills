@@ -46,10 +46,8 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 ## Quick Start
 
 ```bash
-python scripts/dependency_analyzer.py --projects projects.yaml      # critical path
-python scripts/resource_forecast.py --program program.yaml --months 12
-python scripts/benefits_tracker.py --plan benefits_plan.yaml
-python scripts/program_dashboard.py --program "Name"                # RAG dashboard
+python scripts/resource_allocator.py --resources resources.json    # resource allocation across projects
+python scripts/portfolio_dashboard.py --portfolio portfolio.json    # RAG dashboard
 ```
 
 Run the six-step workflow (structure → charter → dependencies → resources → benefits → status) — full procedure, tables, validation checkpoints, and dashboard format are in the operating guide below.

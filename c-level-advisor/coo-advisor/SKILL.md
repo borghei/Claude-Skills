@@ -184,29 +184,6 @@ ROI: Handles 2x volume with 43% fewer incremental hires
 3. Adjust rolling forecast
 4. Document corrective actions with owners and deadlines
 
-## Scripts
-
-```bash
-# Process efficiency analyzer
-python scripts/process_analyzer.py --process onboarding
-
-# Capacity planning calculator
-python scripts/capacity_planner.py --forecast demand.csv
-
-# Vendor scorecard generator
-python scripts/vendor_scorecard.py --vendors vendors.yaml
-
-# Operational dashboard builder
-python scripts/ops_dashboard.py --metrics metrics.json
-```
-
-## References
-
-- `references/process_templates.md` -- Standard process documentation
-- `references/scaling_playbook.md` -- Scaling operations guide
-- `references/vendor_management.md` -- Vendor relationship framework
-- `references/bcp_template.md` -- Business continuity planning
-
 ---
 
 ## Tool Reference

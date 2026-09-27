@@ -172,29 +172,6 @@ def growth_forecast(current_users, monthly_growth_rate, months):
     return users
 ```
 
-## Scripts
-
-```bash
-# Experiment analyzer
-python scripts/experiment_analyzer.py --experiment exp_001 --data results.csv
-
-# Funnel analyzer
-python scripts/funnel_analyzer.py --events events.csv --output funnel.html
-
-# Cohort generator
-python scripts/cohort_generator.py --users users.csv --metric retention
-
-# Growth model
-python scripts/growth_model.py --current 10000 --growth 0.1 --months 12
-```
-
-## Reference Materials
-
-- `references/experimentation.md` - A/B testing guide
-- `references/acquisition.md` - Channel playbooks
-- `references/retention.md` - Retention strategies
-- `references/viral.md` - Viral mechanics
-
 ---
 
 ## Troubleshooting

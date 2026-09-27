@@ -102,19 +102,19 @@ Recommendations:
 - CLI-first design for automation
 - Supports markdown and HTML input
 
-### 3. Demand Generation Analyzer (`marketing-demand-acquisition/scripts/`)
+### 3. CAC Calculator (`marketing-demand-acquisition/scripts/calculate_cac.py`)
 
-**Purpose:** Analyze demand generation campaigns and acquisition funnels
+**Purpose:** Calculate customer acquisition cost per channel and blended
 
 **Features:**
-- Campaign performance analysis
-- Acquisition channel evaluation
-- Conversion funnel metrics
-- ROI calculation
+- Per-channel CAC (spend / customers)
+- Blended CAC across channels
+- B2B SaaS CAC benchmarks by channel
 
 **Usage:**
 ```bash
-python marketing-demand-acquisition/scripts/demand_gen_analyzer.py campaign-data.csv
+# Takes no arguments: edit the channel data in the script, then run
+python marketing-demand-acquisition/scripts/calculate_cac.py
 ```
 
 ### Campaign Analytics Tools
@@ -247,7 +247,7 @@ cat content-creator/references/content_frameworks.md
 cat content-creator/references/brand_guidelines.md
 
 # 4. Analyze performance
-python marketing-demand-acquisition/scripts/demand_gen_analyzer.py campaign-results.csv
+python campaign-analytics/scripts/campaign_roi_calculator.py campaign-results.json
 ```
 
 ### Pattern 3: Campaign Performance Analysis
@@ -278,7 +278,7 @@ python content-creator/scripts/seo_optimizer.py article.md "main keyword"
 python content-creator/scripts/seo_optimizer.py article.md "main keyword" "secondary,keywords"
 
 # Demand generation
-python marketing-demand-acquisition/scripts/demand_gen_analyzer.py data.csv
+python marketing-demand-acquisition/scripts/calculate_cac.py
 
 # Campaign analytics
 python campaign-analytics/scripts/attribution_analyzer.py campaign_data.json

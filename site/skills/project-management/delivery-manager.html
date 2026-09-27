@@ -479,21 +479,18 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 ## Quick Start
 
 ```bash
-python scripts/release_checker.py --version v2.5.0            # release readiness vs exit criteria
-python scripts/deploy.py --env production --strategy canary    # coordinate a deployment
-python scripts/sla_calculator.py --service portal --period month  # SLA + error budget
-python scripts/incident_report.py --id INC-2024-0125           # incident report from timeline
+python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
+python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
+python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
 ```
 
 ## Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `release_checker.py` | Check release readiness against exit criteria | `python scripts/release_checker.py --version v2.5.0` |
-| `deploy.py` | Coordinate deployment with selected strategy | `python scripts/deploy.py --env production --strategy canary` |
-| `sla_calculator.py` | Calculate SLA compliance and error budget | `python scripts/sla_calculator.py --service portal --period month` |
-| `incident_report.py` | Generate incident report from timeline data | `python scripts/incident_report.py --id INC-2024-0125` |
 | `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
+| `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
+| `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
 
 ## References
 
@@ -622,21 +619,18 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 ## Quick Start
 
 ```bash
-python scripts/release_checker.py --version v2.5.0            # release readiness vs exit criteria
-python scripts/deploy.py --env production --strategy canary    # coordinate a deployment
-python scripts/sla_calculator.py --service portal --period month  # SLA + error budget
-python scripts/incident_report.py --id INC-2024-0125           # incident report from timeline
+python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
+python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
+python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
 ```
 
 ## Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `release_checker.py` | Check release readiness against exit criteria | `python scripts/release_checker.py --version v2.5.0` |
-| `deploy.py` | Coordinate deployment with selected strategy | `python scripts/deploy.py --env production --strategy canary` |
-| `sla_calculator.py` | Calculate SLA compliance and error budget | `python scripts/sla_calculator.py --service portal --period month` |
-| `incident_report.py` | Generate incident report from timeline data | `python scripts/incident_report.py --id INC-2024-0125` |
 | `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
+| `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
+| `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
 
 ## References
 
@@ -768,10 +762,9 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/delivery-manager/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python scripts/release_checker.py --version v2.5.0            # release readiness vs exit criteria
-python scripts/deploy.py --env production --strategy canary    # coordinate a deployment
-python scripts/sla_calculator.py --service portal --period month  # SLA + error budget
-python scripts/incident_report.py --id INC-2024-0125           # incident report from timeline
+  <h2>Quick Start</h2><pre><code>python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
+python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
+python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
 </code></pre>
   <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/delivery-manager/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>

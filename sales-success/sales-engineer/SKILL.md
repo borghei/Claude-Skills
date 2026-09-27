@@ -260,17 +260,14 @@ The agent applies LAER for every technical objection:
 ## Scripts
 
 ```bash
-# Demo environment setup
-python scripts/demo_setup.py --customer "Customer Name" --use-cases uc1,uc2
+# Demo planner
+python scripts/demo_planner.py --data prospect.csv --duration 60
 
 # RFP analyzer
-python scripts/rfp_analyzer.py --rfp rfp.pdf --output requirements.csv
+python scripts/rfp_analyzer.py --data rfp_requirements.csv --deadline 2026-12-15
 
-# POC tracker
-python scripts/poc_tracker.py --customer "Customer Name" --status update
-
-# Competitive comparison
-python scripts/competitive_compare.py --competitor "Competitor Name"
+# Technical qualifier
+python scripts/technical_qualifier.py --requirements requirements.csv --threshold 70
 ```
 
 ## Troubleshooting
@@ -340,10 +337,3 @@ python scripts/competitive_compare.py --competitor "Competitor Name"
 2. SE delivers demo plan to AE for review at least 24 hours before scheduled demo
 3. SE documents technical win/loss for every completed evaluation within 5 business days
 4. SE escalates to SA when deal requires custom integration architecture or multi-system design
-
-## Reference Materials
-
-- `references/demo_playbook.md` -- Demo best practices
-- `references/objections.md` -- Objection handling guide
-- `references/competitive.md` -- Competitive intelligence
-- `references/rfp_templates.md` -- RFP response templates

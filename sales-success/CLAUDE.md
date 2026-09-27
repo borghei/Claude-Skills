@@ -32,21 +32,20 @@ This guide covers the 5 sales success skills and planned Python automation tools
 ## Recommended Python Tools (Planned)
 
 ### Pipeline and Deal Management
-- **Pipeline Analyzer** (`sales-operations/scripts/pipeline_analyzer.py`) - Coverage ratio calculation, stage conversion rates, deal aging analysis, and velocity metrics
-- **Win-Rate Calculator** (`sales-operations/scripts/win_rate_calculator.py`) - Historical win rates by segment, deal size, sales cycle length, and competitive presence
-- **Deal Scoring Engine** (`account-executive/scripts/deal_scoring_engine.py`) - Score deal health based on MEDDPICC or BANT qualification criteria
+- **Pipeline Analyzer** (`account-executive/scripts/pipeline_analyzer.py`) - Coverage ratio calculation, stage conversion rates, deal aging analysis, and velocity metrics
+- **Win/Loss Analyzer** (`account-executive/scripts/win_loss_analyzer.py`) - Historical win rates by segment, deal size, sales cycle length, and competitive presence
+- **Deal Scorer** (`account-executive/scripts/deal_scorer.py`) - Score deal health based on MEDDPICC or BANT qualification criteria
 
 ### Territory and Quota Planning
 - **Territory Planner** (`sales-operations/scripts/territory_planner.py`) - Balance territories by account count, revenue potential, and geographic distribution
-- **Quota Attainment Tracker** (`sales-operations/scripts/quota_attainment_tracker.py`) - Track individual and team quota attainment with pacing indicators
+- **Quota Calculator** (`sales-operations/scripts/quota_calculator.py`) - Track individual and team quota attainment with pacing indicators
 
 ### Customer Success
-- **Customer Health Scorer** (`customer-success-manager/scripts/customer_health_scorer.py`) - Multi-dimensional health scoring across usage, engagement, support, and relationship signals
-- **Renewal Forecaster** (`customer-success-manager/scripts/renewal_forecaster.py`) - Predict renewal likelihood based on health score trends, contract terms, and engagement history
+- **Health Scorer** (`customer-success-manager/scripts/health_scorer.py`) - Multi-dimensional health scoring across usage, engagement, support, and relationship signals
+- **Churn Predictor** (`customer-success-manager/scripts/churn_predictor.py`) - Predict churn risk over a renewal horizon from health and engagement data
 
 ### Technical Sales
-- **RFP Coverage Analyzer** (`sales-engineer/scripts/rfp_coverage_analyzer.py`) - Score requirement coverage, identify gaps, and generate response prioritization
-- **POC Success Tracker** (`solutions-architect/scripts/poc_success_tracker.py`) - Track proof-of-concept milestones, success criteria completion, and evaluation scores
+- **RFP Analyzer** (`sales-engineer/scripts/rfp_analyzer.py`) - Score requirement coverage, identify gaps, and generate response prioritization
 
 ## Integration with Other Domains
 
@@ -67,16 +66,16 @@ This guide covers the 5 sales success skills and planned Python automation tools
 **Cross-Domain Workflow:**
 ```bash
 # 1. Analyze pipeline health
-python sales-operations/scripts/pipeline_analyzer.py pipeline_data.json
+python account-executive/scripts/pipeline_analyzer.py --data pipeline_data.json
 
 # 2. Calculate win rates by segment
-python sales-operations/scripts/win_rate_calculator.py deal_history.json
+python account-executive/scripts/win_loss_analyzer.py --data deal_history.json
 
 # 3. Score customer health for expansion opportunities
-python customer-success-manager/scripts/customer_health_scorer.py customer_data.json
+python customer-success-manager/scripts/health_scorer.py --data customer_data.json
 
 # 4. Plan balanced territories for next quarter
-python sales-operations/scripts/territory_planner.py account_data.json
+python sales-operations/scripts/territory_planner.py --accounts account_data.json --reps 8
 ```
 
 ## Quality Standards

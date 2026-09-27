@@ -214,13 +214,6 @@ Structure the EVP around five pillars:
 | Offer Accept Rate | Accepts / Offers extended | 85%+ |
 | Source Effectiveness | Hires per source / Cost per source | Varies |
 
-## Reference Materials
-
-- `references/interviewing.md` - Interview best practices
-- `references/sourcing.md` - Sourcing strategies
-- `references/employer_brand.md` - Employer branding guide
-- `references/dei_hiring.md` - Inclusive hiring practices
-
 ## Scripts
 
 ```bash

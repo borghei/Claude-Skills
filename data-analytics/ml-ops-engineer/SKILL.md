@@ -232,10 +232,6 @@ For extended pipeline examples (Kubeflow, Airflow DAGs, full CI/CD workflows), s
 ## Reference Materials
 
 - `REFERENCE.md` -- Extended patterns: Kubeflow pipelines, Airflow DAGs, CI/CD workflows, model registry operations
-- `references/deployment_patterns.md` -- Model deployment strategies
-- `references/monitoring_guide.md` -- ML monitoring best practices
-- `references/feature_store.md` -- Feature store patterns
-- `references/pipeline_design.md` -- ML pipeline architecture
 
 ## Scripts
 

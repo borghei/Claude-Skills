@@ -208,16 +208,13 @@ Customer: Acme Corp
 
 ```bash
 # Health score calculator
-python scripts/health_score.py --customer "Customer Name"
+python scripts/health_scorer.py --data customers.csv
 
 # QBR generator
-python scripts/qbr_generator.py --customer "Customer Name" --quarter Q4
+python scripts/qbr_generator.py --data customers.csv --quarter Q4-2026
 
-# Risk analyzer
-python scripts/risk_analyzer.py --portfolio customers.csv
-
-# Renewal forecaster
-python scripts/renewal_forecast.py --period Q1
+# Churn risk predictor
+python scripts/churn_predictor.py --data customers.csv --horizon 90
 ```
 
 ## Troubleshooting
@@ -289,10 +286,3 @@ python scripts/renewal_forecast.py --period Q1
 2. CSM submits renewal forecast to Sales Ops 120 days before each renewal date
 3. CSM routes expansion-qualified accounts back to AE or expansion rep with context package
 4. CSM flags product issues affecting 3+ accounts to Product within 24 hours
-
-## Reference Materials
-
-- `references/onboarding.md` -- Onboarding playbook
-- `references/health_scoring.md` -- Health score methodology
-- `references/retention.md` -- Retention strategies
-- `references/expansion.md` -- Expansion playbook

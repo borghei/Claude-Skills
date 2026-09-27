@@ -67,7 +67,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
-| `senior-ml-engineer` | LLM integration and model deployment | Optimized prompts from this skill feed into `llm_integration_builder.py` prompt templates |
+| `senior-ml-engineer` | LLM integration and model deployment | Optimized prompts from this skill feed into the prompt templates of its LLM integration layer |
 | `senior-data-scientist` | A/B test design for prompt experiments | `experiment_designer.py` defines test parameters; this skill provides the prompt variants to compare |
 | `senior-data-engineer` | RAG pipeline orchestration | `pipeline_orchestrator.py` builds the retrieval pipeline; this skill evaluates its output quality |
 | `senior-fullstack` | End-to-end application scaffolding | Fullstack apps consume agent configs validated by `agent_orchestrator.py` |

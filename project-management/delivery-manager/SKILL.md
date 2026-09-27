@@ -47,21 +47,18 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 ## Quick Start
 
 ```bash
-python scripts/release_checker.py --version v2.5.0            # release readiness vs exit criteria
-python scripts/deploy.py --env production --strategy canary    # coordinate a deployment
-python scripts/sla_calculator.py --service portal --period month  # SLA + error budget
-python scripts/incident_report.py --id INC-2024-0125           # incident report from timeline
+python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
+python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
+python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
 ```
 
 ## Tools
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `release_checker.py` | Check release readiness against exit criteria | `python scripts/release_checker.py --version v2.5.0` |
-| `deploy.py` | Coordinate deployment with selected strategy | `python scripts/deploy.py --env production --strategy canary` |
-| `sla_calculator.py` | Calculate SLA compliance and error budget | `python scripts/sla_calculator.py --service portal --period month` |
-| `incident_report.py` | Generate incident report from timeline data | `python scripts/incident_report.py --id INC-2024-0125` |
 | `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
+| `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
+| `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
 
 ## References
 

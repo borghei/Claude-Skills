@@ -218,29 +218,6 @@ Design System Health
   Custom components created this quarter: 4 (was 12)
 ```
 
-## Scripts
-
-```bash
-# Token generator
-python scripts/token_gen.py --source tokens.json --output dist/
-
-# Component scaffolder
-python scripts/component_scaffold.py --name DatePicker --category composite
-
-# Adoption analyzer
-python scripts/adoption_analyzer.py --repos repos.yaml
-
-# Visual regression test
-python scripts/visual_regression.py --baseline main --compare feature/new-button
-```
-
-## Reference Materials
-
-- `references/token_architecture.md` - Token system design
-- `references/component_patterns.md` - Component best practices
-- `references/governance.md` - Contribution guidelines
-- `references/figma_setup.md` - Figma library management
-
 ---
 
 ## Tool Reference

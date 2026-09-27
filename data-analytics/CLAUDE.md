@@ -31,19 +31,16 @@ This guide covers the 5 data analytics skills and planned Python automation tool
 ## Recommended Python Tools (Planned)
 
 ### SQL and Query Tools
-- **SQL Generator** (`data-analyst/scripts/sql_generator.py`) - Generate common query patterns (aggregation, window functions, CTEs) from natural-language descriptions
 - **Query Optimizer** (`data-analyst/scripts/query_optimizer.py`) - Analyze SQL for performance issues, suggest indexes, and rewrite inefficient patterns
 
 ### Visualization Helpers
-- **Chart Recommender** (`business-intelligence/scripts/chart_recommender.py`) - Recommend chart types based on data shape, cardinality, and analysis goal
 - **Dashboard Spec Generator** (`business-intelligence/scripts/dashboard_spec_generator.py`) - Generate dashboard layout specifications from KPI definitions
 
 ### Data Quality and Testing
-- **Data Quality Validator** (`analytics-engineer/scripts/data_quality_validator.py`) - Schema validation, null checks, uniqueness constraints, freshness monitoring
-- **Data Profiler** (`analytics-engineer/scripts/data_profiler.py`) - Automated column profiling with distribution analysis, outlier detection, and completeness scores
+- **Data Profiler** (`data-analyst/scripts/data_profiler.py`) - Automated column profiling with distribution analysis, outlier detection, and completeness scores
 
 ### ML Operations
-- **Model Health Monitor** (`ml-ops-engineer/scripts/model_health_monitor.py`) - Track prediction drift, data drift, and model performance degradation
+- **Drift Detector** (`ml-ops-engineer/scripts/drift_detector.py`) - Detect data and model drift between a reference and a current dataset
 - **Experiment Tracker** (`data-scientist/scripts/experiment_tracker.py`) - Log experiment parameters, metrics, and artifacts in structured JSON format
 
 ## Integration with Engineering Team
@@ -60,16 +57,15 @@ The data-analytics domain connects closely with engineering skills:
 **Cross-Domain Workflow:**
 ```bash
 # 1. Profile raw data quality
-python analytics-engineer/scripts/data_profiler.py raw_data.csv
+python data-analyst/scripts/data_profiler.py --file raw_data.csv
 
-# 2. Validate transformation output
-python analytics-engineer/scripts/data_quality_validator.py transformed_data.json
+# 2. Validate transformation output (schema, nulls, uniqueness, freshness) with dbt tests before publishing
 
 # 3. Generate dashboard specification
-python business-intelligence/scripts/dashboard_spec_generator.py kpi_definitions.json
+python business-intelligence/scripts/dashboard_spec_generator.py --definitions kpi_definitions.json
 
 # 4. Monitor deployed ML model
-python ml-ops-engineer/scripts/model_health_monitor.py model_metrics.json
+python ml-ops-engineer/scripts/drift_detector.py --reference baseline.csv --current production.csv
 ```
 
 ## Quality Standards

@@ -35,28 +35,28 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 ### Knowledge Bases
 
 1. **Acquisition Frameworks**
-   - **Location:** `../../marketing/marketing-demand-acquisition/references/acquisition_frameworks.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/SKILL.md`
    - **Content:** Lead generation strategies, conversion optimization frameworks, acquisition funnel templates
    - **Use Case:** Campaign planning, strategy development, funnel design
 
 2. **Channel Best Practices**
-   - **Location:** `../../marketing/marketing-demand-acquisition/references/channel_best_practices.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/references/campaign-templates.md`
    - **Content:** Paid search (Google Ads), paid social (LinkedIn, Facebook), content marketing, email campaigns
    - **Use Case:** Channel-specific optimization, budget allocation, A/B testing
 
 3. **Conversion Optimization**
-   - **Location:** `../../marketing/marketing-demand-acquisition/references/conversion_optimization.md`
+   - **Location:** `../../business-growth/page-cro/SKILL.md`
    - **Content:** Landing page best practices, CTA optimization, form optimization, lead magnets
    - **Use Case:** Conversion rate improvement, landing page design, lead capture optimization
 
 ### Templates
 
 1. **Campaign Planning Template**
-   - **Location:** `../../marketing/marketing-demand-acquisition/assets/campaign-plan.md`
+   - **Location:** `../../marketing/marketing-demand-acquisition/references/campaign-templates.md`
    - **Use Case:** Multi-channel campaign planning, goal setting
 
 2. **Funnel Analysis Template**
-   - **Location:** `../../marketing/marketing-demand-acquisition/assets/funnel-analysis.md`
+   - **Location:** `../../marketing/campaign-analytics/references/funnel-optimization-framework.md`
    - **Use Case:** Conversion funnel mapping, bottleneck identification
 
 ## Workflows
@@ -69,19 +69,19 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
 1. **Define Campaign Goals** - Set targets for leads, MQLs, SQLs, conversion rates
 2. **Reference Acquisition Frameworks** - Review proven lead generation strategies
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/acquisition_frameworks.md
+   cat ../../marketing/marketing-demand-acquisition/SKILL.md
    ```
 3. **Select Channels** - Choose optimal mix based on target audience and budget
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/channel_best_practices.md
+   cat ../../marketing/marketing-demand-acquisition/references/campaign-templates.md
    ```
 4. **Create Campaign Plan** - Use template to structure multi-channel approach
    ```bash
-   cp ../../marketing/marketing-demand-acquisition/assets/campaign-plan.md q4-demand-gen-campaign.md
+   cat ../../marketing/marketing-demand-acquisition/references/campaign-templates.md
    ```
 5. **Design Landing Pages** - Reference conversion optimization best practices
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../business-growth/page-cro/SKILL.md
    ```
 6. **Launch and Monitor** - Deploy campaigns, track metrics, collect data
 
@@ -101,7 +101,7 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
    ```
 3. **Map Conversion Funnel** - Use template to visualize drop-off points
    ```bash
-   cp ../../marketing/marketing-demand-acquisition/assets/funnel-analysis.md current-funnel-analysis.md
+   cat ../../marketing/campaign-analytics/references/funnel-optimization-framework.md
    ```
 4. **Identify Bottlenecks** - Analyze conversion rates at each funnel stage:
    - Awareness → Interest (CTR)
@@ -110,7 +110,7 @@ The cs-demand-gen-specialist agent bridges the gap between marketing strategy an
    - Intent → Purchase/MQL (qualification rate)
 5. **Reference Optimization Guides** - Review best practices for problem areas
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../business-growth/page-cro/SKILL.md
    ```
 6. **Implement A/B Tests** - Test hypotheses for improvement
 7. **Re-calculate CAC Post-Optimization** - Measure cost efficiency improvements
@@ -147,7 +147,7 @@ cat cac-report.txt
    ```
 3. **Reference Channel Best Practices** - Understand benchmarks for each channel
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/channel_best_practices.md
+   cat ../../marketing/marketing-demand-acquisition/references/campaign-templates.md
    ```
 4. **Calculate Key Metrics:**
    - CAC (Customer Acquisition Cost) by channel
@@ -169,7 +169,7 @@ cat cac-report.txt
 1. **Define Lead Magnet** - Choose format: ebook, webinar, template, assessment, free trial
 2. **Reference Conversion Best Practices** - Review lead capture optimization strategies
    ```bash
-   cat ../../marketing/marketing-demand-acquisition/references/conversion_optimization.md
+   cat ../../business-growth/page-cro/SKILL.md
    ```
 3. **Create Landing Page** - Design high-converting landing page with:
    - Clear value proposition

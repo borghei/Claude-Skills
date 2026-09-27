@@ -29,20 +29,19 @@ This guide covers the 4 HR operations skills and planned Python automation tools
 ## Recommended Python Tools (Planned)
 
 ### Organizational Analysis
-- **Org Chart Analyzer** (`operations-manager/scripts/org_chart_analyzer.py`) - Analyze reporting structures for span of control, layers of management, and organizational bottlenecks
-- **Headcount Planner** (`operations-manager/scripts/headcount_planner.py`) - Model hiring plans against budget, attrition rates, and growth targets
+- **Org Health Scorer** (`hr-business-partner/scripts/org_health_scorer.py`) - Score department health across retention, engagement, performance, development, compensation, and structure (span of control, open roles)
+- **Headcount Planner** (`people-analytics/scripts/headcount_planner.py`) - Model hiring plans against attrition rates, growth targets, and hiring capacity
 
 ### Talent Acquisition
-- **Hiring Funnel Analyzer** (`talent-acquisition/scripts/hiring_funnel_analyzer.py`) - Stage-by-stage conversion rates, time-to-fill analysis, bottleneck identification, and sourcing channel comparison
-- **Interview Scorecard Generator** (`talent-acquisition/scripts/interview_scorecard_generator.py`) - Generate structured interview scorecards based on role competencies and leveling criteria
+- **Candidate Pipeline Tracker** (`talent-acquisition/scripts/candidate_pipeline_tracker.py`) - Stage-by-stage conversion rates, time-to-fill analysis, bottleneck identification, and sourcing channel comparison
+- **Interview Scorecard** (`talent-acquisition/scripts/interview_scorecard.py`) - Generate structured interview scorecards based on role competencies and leveling criteria
 
 ### Compensation and Benchmarking
-- **Compensation Benchmarker** (`people-analytics/scripts/compensation_benchmarker.py`) - Compare compensation data against market bands, flag outliers, and calculate compa-ratios
-- **Pay Equity Analyzer** (`people-analytics/scripts/pay_equity_analyzer.py`) - Statistical analysis of pay gaps across demographic groups with confidence intervals
+- **Compensation Analyzer** (`hr-business-partner/scripts/compensation_analyzer.py`) - Compare compensation data against bands, flag outliers, calculate compa-ratios, and measure pay gaps across demographic groups
 
 ### Workforce Analytics
-- **Attrition Risk Scorer** (`people-analytics/scripts/attrition_risk_scorer.py`) - Score employees on flight risk based on tenure, engagement signals, and historical patterns
-- **Engagement Survey Analyzer** (`people-analytics/scripts/engagement_survey_analyzer.py`) - Aggregate survey responses, identify themes, and benchmark against prior periods
+- **Attrition Predictor** (`people-analytics/scripts/attrition_predictor.py`) - Score employees on flight risk based on tenure, engagement signals, and historical patterns
+- **Survey Analyzer** (`people-analytics/scripts/survey_analyzer.py`) - Aggregate survey responses, identify themes, and benchmark against prior periods
 
 ## Integration with Other Domains
 
@@ -62,17 +61,17 @@ This guide covers the 4 HR operations skills and planned Python automation tools
 
 **Cross-Domain Workflow:**
 ```bash
-# 1. Analyze current organizational structure
-python operations-manager/scripts/org_chart_analyzer.py org_data.json
+# 1. Score current organizational health
+python hr-business-partner/scripts/org_health_scorer.py --file org_metrics.csv
 
 # 2. Model headcount needs for next quarter
-python operations-manager/scripts/headcount_planner.py plan_data.json
+python people-analytics/scripts/headcount_planner.py --file workforce.csv --growth 0.15 --attrition 0.12
 
 # 3. Evaluate hiring funnel health
-python talent-acquisition/scripts/hiring_funnel_analyzer.py funnel_data.json
+python talent-acquisition/scripts/candidate_pipeline_tracker.py --file pipeline.csv
 
 # 4. Benchmark compensation for open roles
-python people-analytics/scripts/compensation_benchmarker.py comp_data.json
+python hr-business-partner/scripts/compensation_analyzer.py --file comp_data.csv
 ```
 
 ## Quality Standards

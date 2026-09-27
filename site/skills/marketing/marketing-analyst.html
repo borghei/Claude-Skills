@@ -653,29 +653,6 @@ def analyze_ab_test(control_conv, control_total, treatment_conv, treatment_total
     }
 ```
 
-## Scripts
-
-```bash
-# Campaign analyzer
-python scripts/campaign_analyzer.py --data campaigns.csv --output report.html
-
-# Attribution calculator
-python scripts/attribution.py --touchpoints journeys.csv --model position
-
-# ROI calculator
-python scripts/roi_calculator.py --spend spend.csv --revenue revenue.csv
-
-# Forecast generator
-python scripts/forecast.py --historical data.csv --periods 6
-```
-
-## Reference Materials
-
-- `references/metrics.md` - Marketing metrics guide
-- `references/attribution.md` - Attribution modeling
-- `references/reporting.md` - Reporting best practices
-- `references/forecasting.md` - Forecasting methods
-
 ---
 
 ## Troubleshooting
@@ -957,29 +934,6 @@ def analyze_ab_test(control_conv, control_total, treatment_conv, treatment_total
         &#x27;significant&#x27;: p_value &lt; alpha,
     }
 ```
-
-## Scripts
-
-```bash
-# Campaign analyzer
-python scripts/campaign_analyzer.py --data campaigns.csv --output report.html
-
-# Attribution calculator
-python scripts/attribution.py --touchpoints journeys.csv --model position
-
-# ROI calculator
-python scripts/roi_calculator.py --spend spend.csv --revenue revenue.csv
-
-# Forecast generator
-python scripts/forecast.py --historical data.csv --periods 6
-```
-
-## Reference Materials
-
-- `references/metrics.md` - Marketing metrics guide
-- `references/attribution.md` - Attribution modeling
-- `references/reporting.md` - Reporting best practices
-- `references/forecasting.md` - Forecasting methods
 
 ---
 

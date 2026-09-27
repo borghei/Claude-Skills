@@ -220,29 +220,6 @@ Board recommendation: Raise in 6 months at current trajectory.
 
 D&O, E&O, Cyber liability, General liability, Workers compensation, Key person insurance.
 
-## Scripts
-
-```bash
-# Unit economics calculator
-python scripts/unit_economics.py --metrics data.csv
-
-# Cash flow projector
-python scripts/cash_forecast.py --actuals Q1.csv --assumptions model.yaml
-
-# Financial model builder
-python scripts/fin_model.py --template saas --output model.xlsx
-
-# Investor metrics dashboard
-python scripts/investor_metrics.py --period monthly
-```
-
-## References
-
-- `references/financial_modeling.md` -- Model building guide
-- `references/saas_metrics.md` -- SaaS metrics deep dive
-- `references/accounting_policies.md` -- Policy documentation
-- `references/audit_prep.md` -- Audit readiness guide
-
 ---
 
 ## Tool Reference

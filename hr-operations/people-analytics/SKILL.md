@@ -255,13 +255,6 @@ Before starting any people analytics project:
 - [ ] Data retention policy defined
 - [ ] Employee communication planned (transparency principle)
 
-## Reference Materials
-
-- `references/hr_metrics.md` - Complete HR metrics guide
-- `references/predictive_models.md` - Predictive modeling approaches
-- `references/survey_design.md` - Survey methodology
-- `references/data_ethics.md` - Ethical analytics practices
-
 ## Scripts
 
 ```bash

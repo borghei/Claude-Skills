@@ -20,78 +20,78 @@ The cs-cmo-advisor agent bridges the gap between marketing strategy and executio
 ## Skill Integration
 
 **Skills Referenced:**
-- `../../marketing/campaign-analytics/`
-- `../../marketing/seo-specialist/`
-- `../../marketing/content-strategy/`
-- `../../marketing/growth-marketer/`
-- `../../marketing/marketing-analyst/`
-- `../../marketing/brand-strategist/`
+- `../marketing/campaign-analytics/`
+- `../marketing/seo-specialist/`
+- `../marketing/content-strategy/`
+- `../marketing/growth-marketer/`
+- `../marketing/marketing-analyst/`
+- `../marketing/brand-strategist/`
 
 ### Python Tools
 
 1. **Attribution Analyzer**
    - **Purpose:** Analyzes multi-touch attribution across marketing channels to identify highest-impact touchpoints and optimize spend allocation
-   - **Path:** `../../marketing/campaign-analytics/scripts/attribution_analyzer.py`
-   - **Usage:** `python ../../marketing/campaign-analytics/scripts/attribution_analyzer.py`
+   - **Path:** `../marketing/campaign-analytics/scripts/attribution_analyzer.py`
+   - **Usage:** `python ../marketing/campaign-analytics/scripts/attribution_analyzer.py`
    - **Features:** Multi-touch attribution modeling, channel contribution scoring, conversion path analysis
    - **Use Cases:** Campaign attribution reviews, budget reallocation, channel performance analysis
 
 2. **Campaign ROI Calculator**
    - **Purpose:** Calculates return on investment for marketing campaigns with cost breakdown and revenue attribution
-   - **Path:** `../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py`
-   - **Usage:** `python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py`
+   - **Path:** `../marketing/campaign-analytics/scripts/campaign_roi_calculator.py`
+   - **Usage:** `python ../marketing/campaign-analytics/scripts/campaign_roi_calculator.py`
    - **Features:** ROI computation, cost-per-acquisition analysis, lifetime value modeling, spend efficiency scoring
    - **Use Cases:** Campaign performance reviews, budget justification, quarterly marketing reporting
 
 3. **Keyword Analyzer**
    - **Purpose:** Analyzes keyword opportunities for SEO strategy including difficulty, volume, and competitive gaps
-   - **Path:** `../../marketing/seo-specialist/scripts/keyword_analyzer.py`
-   - **Usage:** `python ../../marketing/seo-specialist/scripts/keyword_analyzer.py`
+   - **Path:** `../marketing/seo-specialist/scripts/keyword_analyzer.py`
+   - **Usage:** `python ../marketing/seo-specialist/scripts/keyword_analyzer.py`
    - **Features:** Keyword difficulty scoring, search volume analysis, competitive gap identification, content opportunity mapping
    - **Use Cases:** SEO strategy planning, content calendar development, organic growth initiatives
 
 4. **Content Scorer**
    - **Purpose:** Scores content quality and optimization against SEO best practices and engagement benchmarks
-   - **Path:** `../../marketing/content-strategy/scripts/content_scorer.py`
-   - **Usage:** `python ../../marketing/content-strategy/scripts/content_scorer.py`
+   - **Path:** `../marketing/seo-specialist/scripts/content_scorer.py`
+   - **Usage:** `python ../marketing/seo-specialist/scripts/content_scorer.py content.md`
    - **Features:** Content quality scoring, readability analysis, SEO optimization grading, engagement prediction
    - **Use Cases:** Content audit, editorial quality gates, content performance optimization
 
 5. **Channel Mix Optimizer**
    - **Purpose:** Optimizes marketing budget allocation across channels using historical performance and diminishing returns modeling
-   - **Path:** `../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py`
-   - **Usage:** `python ../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py`
+   - **Path:** `../marketing/marketing-analyst/scripts/channel_mix_optimizer.py`
+   - **Usage:** `python ../marketing/marketing-analyst/scripts/channel_mix_optimizer.py`
    - **Features:** Budget allocation optimization, diminishing returns analysis, channel synergy modeling, scenario planning
    - **Use Cases:** Annual budget planning, quarterly rebalancing, new channel evaluation
 
 6. **Brand Health Dashboard**
    - **Purpose:** Generates brand health metrics including awareness, sentiment, consideration, and loyalty scores
-   - **Path:** `../../marketing/brand-strategist/scripts/brand_health_dashboard.py`
-   - **Usage:** `python ../../marketing/brand-strategist/scripts/brand_health_dashboard.py`
+   - **Path:** `../marketing/brand-strategist/scripts/brand_health_dashboard.py`
+   - **Usage:** `python ../marketing/brand-strategist/scripts/brand_health_dashboard.py`
    - **Features:** Brand health scoring, sentiment tracking, competitive positioning, brand equity trending
    - **Use Cases:** Quarterly brand reviews, competitive benchmarking, brand strategy development
 
 7. **Marketing Forecast Generator**
    - **Purpose:** Generates marketing performance forecasts based on historical trends and planned initiatives
-   - **Path:** `../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py`
-   - **Usage:** `python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py`
+   - **Path:** `../marketing/marketing-analyst/scripts/marketing_forecast_generator.py`
+   - **Usage:** `python ../marketing/marketing-analyst/scripts/marketing_forecast_generator.py`
    - **Features:** Pipeline forecasting, traffic projection, conversion rate modeling, seasonal adjustment
    - **Use Cases:** Annual planning, board reporting, goal setting, resource planning
 
 ### Knowledge Bases
 
 1. **Campaign Analytics Framework**
-   - **Location:** `../../marketing/campaign-analytics/references/`
+   - **Location:** `../marketing/campaign-analytics/references/`
    - **Content:** Attribution models, campaign measurement frameworks, KPI definitions, reporting templates
    - **Use Case:** Campaign performance analysis, marketing measurement strategy
 
 2. **SEO Strategy Guide**
-   - **Location:** `../../marketing/seo-specialist/references/`
+   - **Location:** `../marketing/seo-audit/references/`
    - **Content:** Technical SEO checklists, content optimization guidelines, link building strategies, algorithm update analysis
    - **Use Case:** SEO strategy development, technical audits, content optimization
 
 3. **Brand Strategy Playbook**
-   - **Location:** `../../marketing/brand-strategist/references/`
+   - **Location:** `../marketing/content-creator/references/brand_guidelines.md`
    - **Content:** Brand positioning frameworks, messaging architecture, visual identity guidelines, brand audit methodology
    - **Use Case:** Brand development, positioning exercises, messaging alignment
 
@@ -104,19 +104,19 @@ The cs-cmo-advisor agent bridges the gap between marketing strategy and executio
 **Steps:**
 1. **Attribution Analysis** - Map customer journeys and identify highest-impact touchpoints
    ```bash
-   python ../../marketing/campaign-analytics/scripts/attribution_analyzer.py
+   python ../marketing/campaign-analytics/scripts/attribution_analyzer.py
    ```
 2. **ROI Calculation** - Calculate return on investment across all active campaigns
    ```bash
-   python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py
+   python ../marketing/campaign-analytics/scripts/campaign_roi_calculator.py
    ```
 3. **Channel Mix Optimization** - Identify reallocation opportunities based on performance data
    ```bash
-   python ../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py
+   python ../marketing/marketing-analyst/scripts/channel_mix_optimizer.py
    ```
 4. **Performance Forecasting** - Project future performance based on optimized allocation
    ```bash
-   python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
+   python ../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
    ```
 5. **Synthesize Findings** - Combine insights into executive-ready campaign review with specific budget reallocation recommendations
 
@@ -127,10 +127,10 @@ The cs-cmo-advisor agent bridges the gap between marketing strategy and executio
 **Example:**
 ```bash
 # Full campaign performance review pipeline
-python ../../marketing/campaign-analytics/scripts/attribution_analyzer.py > attribution-report.txt
-python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py > roi-report.txt
-python ../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py > channel-optimization.txt
-python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py > forecast.txt
+python ../marketing/campaign-analytics/scripts/attribution_analyzer.py > attribution-report.txt
+python ../marketing/campaign-analytics/scripts/campaign_roi_calculator.py > roi-report.txt
+python ../marketing/marketing-analyst/scripts/channel_mix_optimizer.py > channel-optimization.txt
+python ../marketing/marketing-analyst/scripts/marketing_forecast_generator.py > forecast.txt
 # Synthesize into executive campaign review deck
 ```
 
@@ -141,15 +141,15 @@ python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
 **Steps:**
 1. **Keyword Analysis** - Identify high-value keyword opportunities and competitive gaps
    ```bash
-   python ../../marketing/seo-specialist/scripts/keyword_analyzer.py
+   python ../marketing/seo-specialist/scripts/keyword_analyzer.py
    ```
 2. **Content Scoring** - Audit existing content against SEO best practices and quality benchmarks
    ```bash
-   python ../../marketing/content-strategy/scripts/content_scorer.py
+   python ../marketing/seo-specialist/scripts/content_scorer.py content.md
    ```
 3. **Reference SEO Best Practices** - Review technical SEO checklist and optimization guidelines
    ```bash
-   cat ../../marketing/seo-specialist/references/*.md
+   cat ../marketing/seo-audit/references/*.md
    ```
 4. **Prioritize Actions** - Rank SEO improvements by effort vs. impact, focusing on quick wins first
 5. **Build Content Calendar** - Create prioritized content plan targeting identified keyword gaps
@@ -161,8 +161,8 @@ python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
 **Example:**
 ```bash
 # SEO health check pipeline
-python ../../marketing/seo-specialist/scripts/keyword_analyzer.py > keyword-opportunities.txt
-python ../../marketing/content-strategy/scripts/content_scorer.py > content-audit.txt
+python ../marketing/seo-specialist/scripts/keyword_analyzer.py > keyword-opportunities.txt
+python ../marketing/seo-specialist/scripts/content_scorer.py content.md > content-audit.txt
 # Prioritize and build content calendar from combined insights
 ```
 
@@ -173,15 +173,15 @@ python ../../marketing/content-strategy/scripts/content_scorer.py > content-audi
 **Steps:**
 1. **Brand Health Scoring** - Generate current brand health metrics across key dimensions
    ```bash
-   python ../../marketing/brand-strategist/scripts/brand_health_dashboard.py
+   python ../marketing/brand-strategist/scripts/brand_health_dashboard.py
    ```
 2. **Content Quality Audit** - Assess brand consistency across content touchpoints
    ```bash
-   python ../../marketing/content-strategy/scripts/content_scorer.py
+   python ../marketing/seo-specialist/scripts/content_scorer.py content.md
    ```
 3. **Reference Brand Strategy Frameworks** - Review positioning and messaging best practices
    ```bash
-   cat ../../marketing/brand-strategist/references/*.md
+   cat ../marketing/content-creator/references/brand_guidelines.md
    ```
 4. **Competitive Analysis** - Benchmark brand metrics against key competitors
 5. **Strategic Recommendations** - Develop brand improvement roadmap with quarterly milestones
@@ -193,8 +193,8 @@ python ../../marketing/content-strategy/scripts/content_scorer.py > content-audi
 **Example:**
 ```bash
 # Brand health assessment pipeline
-python ../../marketing/brand-strategist/scripts/brand_health_dashboard.py > brand-health.txt
-python ../../marketing/content-strategy/scripts/content_scorer.py > content-consistency.txt
+python ../marketing/brand-strategist/scripts/brand_health_dashboard.py > brand-health.txt
+python ../marketing/seo-specialist/scripts/content_scorer.py content.md > content-consistency.txt
 # Combine into brand health dashboard and strategic recommendations
 ```
 
@@ -212,31 +212,31 @@ echo "======================================================"
 # Campaign performance
 echo ""
 echo "Campaign Attribution:"
-python ../../marketing/campaign-analytics/scripts/attribution_analyzer.py
+python ../marketing/campaign-analytics/scripts/attribution_analyzer.py
 
 echo ""
 echo "Campaign ROI:"
-python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py
+python ../marketing/campaign-analytics/scripts/campaign_roi_calculator.py
 
 # Channel optimization
 echo ""
 echo "Channel Mix Optimization:"
-python ../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py
+python ../marketing/marketing-analyst/scripts/channel_mix_optimizer.py
 
 # SEO health
 echo ""
 echo "Keyword Opportunities:"
-python ../../marketing/seo-specialist/scripts/keyword_analyzer.py
+python ../marketing/seo-specialist/scripts/keyword_analyzer.py
 
 # Brand health
 echo ""
 echo "Brand Health Score:"
-python ../../marketing/brand-strategist/scripts/brand_health_dashboard.py
+python ../marketing/brand-strategist/scripts/brand_health_dashboard.py
 
 # Forecast
 echo ""
 echo "Next Quarter Forecast:"
-python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
+python ../marketing/marketing-analyst/scripts/marketing_forecast_generator.py
 ```
 
 ### Example 2: Marketing Budget Reallocation
@@ -248,16 +248,16 @@ echo "Marketing Budget Reallocation Analysis"
 echo "======================================="
 
 # Current campaign ROI
-python ../../marketing/campaign-analytics/scripts/campaign_roi_calculator.py > current-roi.txt
+python ../marketing/campaign-analytics/scripts/campaign_roi_calculator.py > current-roi.txt
 
 # Attribution insights
-python ../../marketing/campaign-analytics/scripts/attribution_analyzer.py > attribution.txt
+python ../marketing/campaign-analytics/scripts/attribution_analyzer.py > attribution.txt
 
 # Optimized channel mix
-python ../../marketing/marketing-analyst/scripts/channel_mix_optimizer.py > optimized-mix.txt
+python ../marketing/marketing-analyst/scripts/channel_mix_optimizer.py > optimized-mix.txt
 
 # Forecast with new allocation
-python ../../marketing/marketing-analyst/scripts/marketing_forecast_generator.py > forecast.txt
+python ../marketing/marketing-analyst/scripts/marketing_forecast_generator.py > forecast.txt
 
 echo "Analysis complete - review outputs for reallocation recommendations"
 ```
@@ -297,9 +297,9 @@ echo "Analysis complete - review outputs for reallocation recommendations"
 
 ## References
 
-- **Campaign Analytics Skill:** [../../marketing/campaign-analytics/SKILL.md](../../marketing/campaign-analytics/SKILL.md)
-- **SEO Specialist Skill:** [../../marketing/seo-specialist/SKILL.md](../../marketing/seo-specialist/SKILL.md)
-- **Brand Strategist Skill:** [../../marketing/brand-strategist/SKILL.md](../../marketing/brand-strategist/SKILL.md)
+- **Campaign Analytics Skill:** [../marketing/campaign-analytics/SKILL.md](../marketing/campaign-analytics/SKILL.md)
+- **SEO Specialist Skill:** [../marketing/seo-specialist/SKILL.md](../marketing/seo-specialist/SKILL.md)
+- **Brand Strategist Skill:** [../marketing/brand-strategist/SKILL.md](../marketing/brand-strategist/SKILL.md)
 - **Agent Development Guide:** [agents/CLAUDE.md](agents/CLAUDE.md)
 
 ---
