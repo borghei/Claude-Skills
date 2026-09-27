@@ -43,19 +43,23 @@ Every production prompt has a layered structure. Order matters.
 
 ### Standard CoT
 
+On current Claude models, reasoning happens in API-level thinking
+(`thinking: {type: "adaptive"}` plus `effort`); read it from thinking blocks rather
+than asking for it in the answer. Asking Claude Opus 5.5 to reproduce its
+reasoning in the output can trigger a `reasoning_extraction` refusal. Use the
+prompt pattern below only on models without native thinking.
+
 ```
-Think through this step by step:
+Work through this in order:
 1. First, identify [what needs to be analyzed]
 2. Then, evaluate [specific criteria]
 3. Finally, synthesize [the conclusion]
-
-Show your reasoning for each step.
 ```
 
 **When to use:** Complex reasoning, math, multi-step logic
 **When NOT to use:** Simple classification, formatting tasks, creative writing
 
-### Structured CoT with Scratchpad
+### Structured CoT with Scratchpad (models without native thinking only)
 
 ```
 Use the following reasoning process:
@@ -70,7 +74,8 @@ Use the following reasoning process:
 Then provide your final answer outside the scratchpad tags.
 ```
 
-**Advantage:** Model can reason messy, output is clean.
+**Advantage:** Model can reason messy, output is clean. On Claude models with
+thinking, the thinking block already gives you this separation; skip the tags.
 
 ### Self-Consistency CoT
 

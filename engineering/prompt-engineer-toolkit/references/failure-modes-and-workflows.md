@@ -6,8 +6,8 @@ Read this when debugging a prompt or running a lifecycle workflow — common fai
 
 | Failure Mode | Symptom | Fix |
 |-------------|---------|-----|
-| Instruction override | Model ignores constraints | Move constraints earlier, add "CRITICAL:" prefix |
-| Format drift | Output structure varies between calls | Add JSON schema, reduce temperature |
+| Instruction override | Model ignores constraints | Move constraints earlier and state the reason beside each one; add emphasis only to the single instruction a test shows is underweighted (blanket "CRITICAL:" prefixes cause over-triggering on current models) |
+| Format drift | Output structure varies between calls | Use structured outputs (JSON schema); on Claude Opus 4.7+ / Sonnet 5, non-default temperature is rejected |
 | Sycophancy | Model agrees with wrong premise | Add "Challenge assumptions" instruction |
 | Verbosity bloat | Output too long, buries the answer | Add word/token limits, "be concise" |
 | Hallucination | Fabricated facts, citations, or code | Add "Only reference provided context" |
@@ -65,10 +65,10 @@ Read this when debugging a prompt or running a lifecycle workflow — common fai
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| Model ignores critical instructions | Instructions buried in the middle of a long prompt | Front-load and back-load critical constraints; use "CRITICAL:" or "IMPORTANT:" prefixes to increase salience |
-| Output format randomly breaks | Temperature too high or format spec is ambiguous | Set temperature to 0.0-0.2 for structured output; provide an exact JSON schema rather than prose descriptions |
+| Model ignores critical instructions | Instructions buried in the middle of a long prompt | Front-load critical constraints and give the reason for each; reserve emphasis for the one instruction a test shows is underweighted |
+| Output format randomly breaks | Format spec is ambiguous | Use structured outputs with an exact JSON schema rather than prose descriptions (temperature is not settable on Claude Opus 4.7+ / Sonnet 5) |
 | Few-shot examples cause repetitive output | Examples are too similar, anchoring the model on a single pattern | Diversify examples across input types, lengths, and complexity levels; add "each input is independent" instruction |
-| Prompt works on one model but fails on another | Model-specific instruction-following differences | Run full test suite on the target model; adjust layer ordering and verbosity per `references/model-specific-behaviors.md` |
+| Prompt works on one model but fails on another | Model-specific instruction-following differences | Run full test suite on the target model; adjust layer ordering and verbosity for that model |
 | Test scores drop after a minor prompt edit | Removed a constraint or anti-pattern that was load-bearing | Always diff before deploying; check if constraints, examples, or anti-patterns were removed; use the Prompt Diff Analysis checklist |
 | Confidence scores cluster at extremes (all 0.9+ or all 0.1) | Calibration instructions missing or poorly defined | Add explicit confidence-level definitions (VERIFIED / LIKELY / UNCERTAIN / SPECULATIVE) with concrete criteria for each level |
 | Prompt exceeds context window budget | Accumulated examples and instructions over multiple iterations | Audit token usage per layer; trim redundant examples; switch to dynamic few-shot selection to include only the most relevant shots |

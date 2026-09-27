@@ -163,8 +163,12 @@ The 7 apples cost $11.20
 | Show work | "Show your calculations" | Math problems |
 | Reasoning chain | "Explain your reasoning" | Justification needed |
 
-**Zero-shot CoT:**
-Simply append "Let's think step by step." to any prompt.
+**On current Claude models:** reasoning is built in and set through the API
+(`thinking: {type: "adaptive"}` plus `effort`; on Claude Opus 5.5 thinking is
+always on). Appending "Let's think step by step" is redundant there; raise
+`effort` for harder problems instead. Keep explicit step prompts for models
+without native thinking, or when the numbered steps are part of the required
+output.
 
 ---
 
@@ -285,8 +289,10 @@ Expected Output:
 
 **Format enforcement techniques:**
 ```
-# Strong enforcement
-"Return ONLY valid JSON. Start with { and end with }"
+# Preferred on Claude: structured outputs (output_config.format with a JSON
+# schema) guarantee the shape; no prompt-level enforcement needed.
+# Prompt-only fallback for providers without structured outputs:
+"Return valid JSON only."
 
 # Schema validation hint
 "The output must be valid JSON matching this TypeScript type:
@@ -310,7 +316,8 @@ type Output = { name: string; age: number; active: boolean }"
 **Example approach:**
 
 ```
-# Run this prompt 5 times with temperature=0.7
+# Run this prompt 5 times with default sampling (Claude Opus 4.7+ and
+# Sonnet 5 reject non-default temperature; vary the prompt instead)
 
 Solve this logic puzzle. Think through it step by step.
 
@@ -327,7 +334,7 @@ What pet does each person have?
 # Pseudo-code for self-consistency
 answers = []
 for i in range(5):
-    response = llm.generate(prompt, temperature=0.7)
+    response = llm.generate(prompt)
     answer = extract_final_answer(response)
     answers.append(answer)
 

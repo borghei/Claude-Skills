@@ -2,8 +2,10 @@
 
 Reusable patterns for allocating, escalating, and capping reasoning effort, plus the
 cost/quality/latency model behind the advisor scripts. **Model-agnostic:** effort is
-described conceptually (none / low / medium / high) — map it to whatever effort knob or
-thinking-token budget your provider exposes.
+described conceptually (none / low / medium / high) — map it to whatever effort knob your provider exposes. On Claude, that knob is
+`effort` with adaptive thinking; token budgets (`budget_tokens`) are removed on
+current models, and where thinking is always on (Claude Opus 5.5, Claude Fable 5.1)
+"none" maps to `effort: "low"`.
 
 ---
 
