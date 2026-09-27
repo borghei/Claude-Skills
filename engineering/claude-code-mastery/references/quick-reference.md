@@ -9,7 +9,7 @@ Read this for the at-a-glance tables (slash commands, permission modes, CLAUDE.m
 | `/compact` | Summarize conversation to free context |
 | `/clear` | Clear conversation history |
 | `/model` | Switch model mid-session |
-| `/agents` | List and invoke custom agents |
+| `/agents` | Since v2.1.198 prints a reminder; create subagents by editing `.claude/agents/<name>.md` or asking Claude |
 | `/permissions` | View and modify tool permissions |
 | `/cost` | Show token usage and cost |
 | `/doctor` | Diagnose configuration issues |
@@ -54,7 +54,7 @@ Read this for the at-a-glance tables (slash commands, permission modes, CLAUDE.m
 | Skill not triggering on expected prompts | Description field in YAML frontmatter missing trigger phrases | Add quoted user phrases to the `description` field (e.g., `"optimize queries"`, `"profile memory"`) |
 | Context window exhausted mid-task | Root CLAUDE.md too large or too many files read | Run `context_analyzer.py` to audit token usage, then move domain content to child CLAUDE.md files |
 | Hook not firing after tool use | Matcher in `.claude/settings.json` does not match the tool name | Verify the `matcher` regex matches the exact tool name (e.g., `Edit\|Write`, not `edit\|write`) |
-| Subagent exceeds scope and edits unrelated files | `allowed-tools` list is too permissive | Restrict to read-only tools (`Read, Glob, Grep`) and add write tools only when necessary |
+| Subagent exceeds scope and edits unrelated files | `tools` is missing (inherits every tool), too permissive, or written as `allowed-tools` (ignored for agents) | Set `tools: Read, Glob, Grep` and add write tools only when necessary |
 | Scaffolder fails with "Directory already exists" | Target skill directory already present on disk | Remove or rename the existing directory, or choose a different skill name |
 | Optimizer reports low score despite good structure | Token count exceeds the default 6000 limit | Pass `--token-limit` matching your actual budget (e.g., `--token-limit 10000`) |
 
@@ -64,6 +64,6 @@ Read this for the at-a-glance tables (slash commands, permission modes, CLAUDE.m
 - Root CLAUDE.md stays under 4000 tokens (verified by `claudemd_optimizer.py --token-limit 4000`)
 - Auto-loaded configuration (all CLAUDE.md files combined) consumes less than 10% of the context window
 - Every new skill scaffolded passes the optimizer with zero "critical" missing sections
-- Subagents stay within their declared `allowed-tools` scope during testing
+- Subagents stay within their declared `tools` scope during testing
 - Hooks execute in under 500ms to avoid perceptible delay on tool use
 - Context analyzer shows 50%+ of the context window available for source code and reasoning

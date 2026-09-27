@@ -20,7 +20,7 @@ Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, sub
 
 - **CLAUDE.md optimization** — audit, restructure, compress, and hierarchize config files for token efficiency.
 - **Skill authoring** — scaffold and write discoverable skill packages with correct layout and frontmatter.
-- **Subagent creation** — define scoped agents with `allowed-tools` and structured custom instructions.
+- **Subagent creation** — write `.claude/agents/<name>.md` files with a `tools` allowlist and a Markdown-body system prompt.
 - **Hooks automation** — wire `PreToolUse`/`PostToolUse`/`Stop` lifecycle scripts via `.claude/settings.json`.
 - **Context engineering** — measure and manage the context-window token budget across a codebase.
 
@@ -99,8 +99,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 | Skill | Integration | Data Flow |
 |-------|-------------|-----------|
 | [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
-| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent YAML; Code Reviewer provides the review logic |
-| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent `custom-instructions` |
+| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent `.md` file; Code Reviewer provides the review logic |
+| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent system prompts (the agent file body) |
 | [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
 | [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
 | [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |

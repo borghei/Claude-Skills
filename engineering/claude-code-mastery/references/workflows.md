@@ -49,25 +49,25 @@ Read this for the step-by-step playbooks: optimizing a CLAUDE.md, authoring a ne
 
 1. **Define scope** -- One narrow responsibility per agent.
 2. **Create the agent file** at `.claude/agents/agent-name.md` (YAML frontmatter + markdown body as the system prompt):
-   ```yaml
+   ```markdown
+   ---
    name: security-reviewer
-   description: Reviews code for security vulnerabilities
+   description: Reviews code for security vulnerabilities. Use proactively after code changes.
+   tools: Read, Glob, Grep, Bash
    model: sonnet
-   allowed-tools:
-     - Read
-     - Glob
-     - Grep
-     - Bash(git diff*)
-   custom-instructions: |
-     For every change:
-     1. Check for hardcoded secrets
-     2. Identify injection vulnerabilities
-     3. Verify auth patterns
-     4. Flag insecure dependencies
-     Output a structured report with severity levels.
+   ---
+
+   You are a security reviewer. Use Bash only for read-only git commands.
+   For every change:
+   1. Check for hardcoded secrets
+   2. Identify injection vulnerabilities
+   3. Verify auth patterns
+   4. Flag insecure dependencies
+   Output a structured report with severity levels.
    ```
-3. **Set tool access** -- read-only (`Read, Glob, Grep`), read+commands (`+ Bash(npm test*)`), or write-capable (`+ Edit, Write`).
-4. **Invoke** -- `/agents/security-reviewer Review the last 3 commits`
+   The body after the closing `---` is the system prompt. `allowed-tools` and `custom-instructions` are not agent keys and are silently ignored.
+3. **Set tool access** -- `tools` takes tool names only: read-only (`Read, Glob, Grep`), read+commands (`+ Bash`), or write-capable (`+ Edit, Write`). Omit `tools` to inherit everything. To limit which commands Bash may run, use `permissions.deny` rules in `.claude/settings.json`; `Bash(npm test *)` in `tools` does not narrow Bash.
+4. **Invoke** -- "Use the security-reviewer subagent to review the last 3 commits", or `@"security-reviewer (agent)"` from the `@` typeahead. Claude also delegates on its own when a request matches the `description`.
 5. **Validate** -- Confirm the agent stays within scope and produces structured output.
 
 ## Workflow 4: Configure Hooks

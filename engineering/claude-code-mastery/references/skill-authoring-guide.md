@@ -416,14 +416,17 @@ time. These allow skills to be parameterized and dynamic.
 
 | Variable | Description | Example Value |
 |----------|-------------|---------------|
-| `$ARGUMENTS` | Full argument string passed to the skill | `"review the auth module"` |
-| `$1` | First positional argument (space-separated) | `"review"` |
-| `$2` | Second positional argument | `"the"` |
-| `$N` | Nth positional argument | (any word by position) |
-| `$PROJECT_DIR` | Absolute path to the project root | `/home/user/my-project` |
-| `$FILE` | Currently active file path (if applicable) | `src/auth/login.ts` |
+| `$ARGUMENTS` | Full argument string passed to the skill | `"review src/auth/"` |
+| `$ARGUMENTS[N]` / `$N` | Argument by 0-based index (`$0` is the first) | `$0` = `"review"` |
+| `$name` | Named argument declared in the `arguments` frontmatter list | `$target` |
+| `${CLAUDE_PROJECT_DIR}` | Absolute path to the project root | `/home/user/my-project` |
+| `${CLAUDE_SKILL_DIR}` | Directory containing the skill's SKILL.md | `/home/user/.claude/skills/my-skill` |
+| `${CLAUDE_SESSION_ID}` | Current session ID | `abc123...` |
 
 ### Using Substitutions in SKILL.md
+
+Substitutions work in the SKILL.md body, which is where the skill's
+instructions live. There is no `custom-instructions` frontmatter key.
 
 ```markdown
 ## Quick Start
@@ -431,41 +434,31 @@ time. These allow skills to be parameterized and dynamic.
 Analyzing: $ARGUMENTS
 
 \```bash
-python scripts/analyzer.py $PROJECT_DIR $1
+python ${CLAUDE_SKILL_DIR}/scripts/analyzer.py ${CLAUDE_PROJECT_DIR} $0
 \```
 ```
 
 When the user invokes the skill with arguments, the variables are replaced
 before the skill content is processed.
 
-### Using Substitutions in Frontmatter
-
-```yaml
-custom-instructions: |
-  Analyze the following request: $ARGUMENTS
-  Focus on the project at: $PROJECT_DIR
-  Currently active file: $FILE
-```
-
 ### Practical Examples
 
-**Skill invoked with:** `/skill my-skill review src/auth/`
+**Skill invoked with:** `/my-skill review src/auth/`
 
 | Variable | Resolves To |
 |----------|-------------|
 | `$ARGUMENTS` | `review src/auth/` |
-| `$1` | `review` |
-| `$2` | `src/auth/` |
-| `$PROJECT_DIR` | `/home/user/my-project` |
+| `$0` | `review` |
+| `$1` | `src/auth/` |
+| `${CLAUDE_PROJECT_DIR}` | `/home/user/my-project` |
 
 ### Best Practices for Substitutions
 
 1. **Always provide defaults** -- Do not assume `$ARGUMENTS` is non-empty.
 2. **Document expected arguments** -- In the Quick Start section, show what
    arguments the skill expects.
-3. **Use `$PROJECT_DIR`** for scripts -- Ensures paths resolve correctly
-   regardless of where the skill is invoked from.
-4. **Avoid `$FILE` in mandatory flows** -- It may be empty if no file is active.
+3. **Use `${CLAUDE_SKILL_DIR}`** for bundled scripts -- Ensures paths resolve
+   correctly regardless of the working directory.
 
 ---
 

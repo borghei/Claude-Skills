@@ -27,8 +27,8 @@ prompts, tool restrictions, and behavioral instructions. They operate in
 isolation from the main conversation but can return results.
 
 **Key properties:**
-- Run with a separate system prompt (custom-instructions)
-- Can be restricted to specific tools (allowed-tools)
+- Run with their own system prompt (the Markdown body of the agent file)
+- Can be restricted to specific tools (the `tools` frontmatter field)
 - Execute in the same project directory
 - Return their output to the calling conversation
 - Do not share conversation history with the main session
@@ -63,7 +63,7 @@ without custom configuration.
 
 **Invocation:**
 ```
-/agents/explore How is authentication implemented in this project?
+Use the Explore subagent to find how authentication is implemented in this project
 ```
 
 ### Plan Agent
@@ -82,7 +82,7 @@ without custom configuration.
 
 **Invocation:**
 ```
-/agents/plan Plan the migration from REST to GraphQL for the user service
+Use the Plan subagent to plan the migration from REST to GraphQL for the user service
 ```
 
 ### General-Purpose Subagent
@@ -112,12 +112,18 @@ Custom agents live in `.claude/agents/`:
     └── migration-helper.md
 ```
 
-**Invocation:**
+**Invocation** -- there is no `/agents/<name>` command. Claude delegates on its own
+when a request matches an agent's `description`, or you ask for one explicitly:
+
 ```
-/agents/security-reviewer Review the authentication module for vulnerabilities
-/agents/test-writer Write unit tests for src/services/payment.ts
-/agents/doc-generator Generate API documentation for the REST endpoints
+Use the security-reviewer subagent to review the authentication module for vulnerabilities
+@"test-writer (agent)" write unit tests for src/services/payment.ts
+claude --agent doc-generator     # run the whole session as that agent
 ```
+
+The `@` form comes from typing `@` and picking the agent from the typeahead.
+`/agents` no longer opens a wizard; create agents by editing `.claude/agents/`
+directly or by asking Claude to write the file.
 
 ---
 
@@ -140,49 +146,51 @@ Every agent needs a narrow, well-defined scope. Good agents do one thing well.
 
 ### Step 2: Create the Agent File
 
-Agent files use YAML frontmatter followed by optional markdown content.
+Save the agent as `.claude/agents/security-reviewer.md` (project scope) or
+`~/.claude/agents/security-reviewer.md` (all your projects). The file is YAML
+frontmatter followed by a Markdown body, and **the body is the system prompt**.
+There is no `.yaml` agent file and no `custom-instructions` or `allowed-tools`
+key for agents: Claude Code silently ignores unknown keys, so an agent written
+that way gets every tool and an empty prompt.
 
-```yaml
+```markdown
 ---
 name: security-reviewer
-description: Reviews code changes for security vulnerabilities and compliance issues
+description: Reviews code changes for security vulnerabilities and compliance issues. Use proactively after changes to auth, input handling, or dependencies.
+tools: Read, Glob, Grep, Bash
 model: sonnet
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash(git diff*)
-  - Bash(git log*)
-custom-instructions: |
-  You are a security-focused code reviewer. For every change you review:
-
-  1. Check for hardcoded secrets, credentials, API keys, or tokens
-  2. Identify injection vulnerabilities (SQL, XSS, command injection)
-  3. Verify authentication and authorization patterns
-  4. Flag insecure dependencies or deprecated crypto functions
-  5. Check for information disclosure in error messages
-
-  Output Format:
-  ## Security Review Summary
-  - **Risk Level:** HIGH / MEDIUM / LOW / CLEAN
-  - **Issues Found:** N
-
-  ## Issues
-  For each issue:
-  - File and line number
-  - Severity (Critical / High / Medium / Low / Info)
-  - Description
-  - Recommended fix
-
-  ## Recommendations
-  Prioritized list of actions.
 ---
+
+You are a security-focused code reviewer. Use Bash only for read-only git
+commands (`git diff`, `git log`, `git show`). For every change you review:
+
+1. Check for hardcoded secrets, credentials, API keys, or tokens
+2. Identify injection vulnerabilities (SQL, XSS, command injection)
+3. Verify authentication and authorization patterns
+4. Flag insecure dependencies or deprecated crypto functions
+5. Check for information disclosure in error messages
+
+## Output Format
+
+### Security Review Summary
+- **Risk Level:** HIGH / MEDIUM / LOW / CLEAN
+- **Issues Found:** N
+
+### Issues
+For each issue:
+- File and line number
+- Severity (Critical / High / Medium / Low / Info)
+- Description
+- Recommended fix
+
+### Recommendations
+Prioritized list of actions.
 ```
 
 ### Step 3: Test the Agent
 
 ```
-/agents/security-reviewer Review the changes in the last commit
+Use the security-reviewer subagent to review the changes in the last commit
 ```
 
 Verify that:
@@ -204,9 +212,13 @@ description: What it does  # Brief description for discovery
 
 ### Optional Fields
 
-```yaml
-model: sonnet          # Model alias override (default: inherit)
-tools: Read, Glob      # Tool allowlist (omit to inherit all tools)
+```markdown
+model: sonnet          # sonnet | opus | haiku | inherit (default: inherit)
+tools: Read, Glob      # Tool allowlist, comma-separated (omit to inherit all tools)
+disallowedTools: Write # Tools to remove from the inherited set
+maxTurns: 25           # Cap on agentic turns
+permissionMode: plan   # default | acceptEdits | auto | dontAsk | bypassPermissions | plan
+isolation: worktree    # Run in a temporary git worktree
 ---
 
 Your behavioral instructions here. The markdown body below the
@@ -215,11 +227,12 @@ frontmatter is the agent's system prompt.
 
 ### Field Details
 
-**`name`** -- Used for invocation: `/agents/<name>`. Must be unique within the
-agents directory.
+**`name`** -- Lowercase, hyphenated identifier. Used when you ask for the agent
+by name or @-mention it. Must be unique; the frontmatter `name`, not the file
+path, identifies the agent.
 
-**`description`** -- Helps Claude decide when to suggest this agent. Also shown
-when listing agents with `/agents`.
+**`description`** -- Claude reads this to decide when to delegate to the agent.
+Say what it does and when to use it ("Use proactively after code changes").
 
 **`model`** -- Override the model for this agent. Use an alias so the agent
 tracks the current model in each tier (`inherit` uses the session model):
@@ -227,16 +240,21 @@ tracks the current model in each tier (`inherit` uses the session model):
 - `sonnet` -- General coding, standard review
 - `haiku` -- Simple formatting, quick checks
 
-**`tools`** -- Allowlist of tools the agent can use (comma-separated). Supports
-patterns for Bash commands:
+**`tools`** -- Allowlist of tool names the agent can use (comma-separated; a YAML
+list also works). Omit it and the agent inherits every tool, MCP tools included:
 - `Read` -- Read files
 - `Glob` -- Find files
 - `Grep` -- Search content
 - `Edit` -- Modify files
 - `Write` -- Create files
-- `Bash(pattern*)` -- Run matching bash commands
+- `Bash` -- Run shell commands
 - `WebFetch` -- Fetch URLs
 - `WebSearch` -- Search the web
+
+`tools` works at the tool level only. A specifier such as `Bash(git diff *)`
+does not narrow Bash to matching commands. To limit which commands an agent
+may run, grant `Bash` and add deny rules to `permissions.deny` in
+`.claude/settings.json`, or gate commands with a `PreToolUse` hook.
 
 **Body** -- The markdown below the frontmatter is the system prompt. This is where
 you define the agent's workflow, output format, and constraints.
@@ -248,39 +266,25 @@ you define the agent's workflow, output format, and constraints.
 ### Read-Only Agent (Safe for Review)
 
 ```yaml
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
+tools: Read, Glob, Grep
 ```
 
 Best for: Code review, security audit, documentation analysis, architecture review.
 
-### Read + Specific Commands
+### Read + Commands
 
 ```yaml
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash(git diff*)
-  - Bash(git log*)
-  - Bash(npm test*)
-  - Bash(npm run lint*)
+tools: Read, Glob, Grep, Bash
 ```
 
-Best for: Review tasks that need git context or test results.
+Best for: Review tasks that need git context or test results. Name the allowed
+commands in the system prompt, and enforce the limit with permission rules
+(see Restricted Bash below), because `tools` cannot scope Bash by command.
 
 ### Write-Capable Agent
 
 ```yaml
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Glob
-  - Grep
-  - Bash(mkdir*)
+tools: Read, Write, Edit, Glob, Grep
 ```
 
 Best for: Code generation, test writing, documentation generation.
@@ -288,31 +292,33 @@ Best for: Code generation, test writing, documentation generation.
 ### Full Access Agent
 
 ```yaml
-# Omit allowed-tools entirely for full access
-# Or explicitly:
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Glob
-  - Grep
-  - Bash
-  - WebFetch
-  - WebSearch
+# Omit tools entirely to inherit every tool (including MCP tools)
+# Or list them explicitly:
+tools: Read, Write, Edit, Glob, Grep, Bash, WebFetch, WebSearch
 ```
 
 Best for: Complex multi-step tasks that need all capabilities.
 
-### Restricted Bash Patterns
+### Restricted Bash
 
-```yaml
-allowed-tools:
-  - Bash(python scripts/*)      # Only run project scripts
-  - Bash(npm run *)             # Only run npm scripts
-  - Bash(docker compose *)      # Only docker commands
-  - Bash(git status)            # Specific git commands (no glob)
-  - Bash(git diff*)             # Git diff with any arguments
+Command-level limits live in settings, not in the agent file. Give the agent
+`Bash` in `tools`, then deny what it must never run in `.claude/settings.json`:
+
+```json
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push *)",
+      "Bash(rm -rf *)",
+      "Bash(docker compose down *)"
+    ]
+  }
+}
 ```
+
+Deny rules apply to the main session and every subagent. For a rule that only
+one agent should obey, add a `PreToolUse` hook under that agent's `hooks`
+frontmatter field.
 
 ---
 
@@ -324,7 +330,7 @@ Use a read-only agent to review, then act on the findings yourself.
 
 ```
 # Step 1: Agent reviews
-/agents/security-reviewer Review all files changed in the last 5 commits
+Use the security-reviewer subagent to review all files changed in the last 5 commits
 
 # Step 2: Human or main session acts on findings
 Fix the SQL injection vulnerability identified in src/db/queries.ts line 45
@@ -336,10 +342,10 @@ Use a write agent to generate code, then a review agent to check it.
 
 ```
 # Step 1: Generate
-/agents/test-writer Write comprehensive tests for src/services/auth.ts
+Use the test-writer subagent to write comprehensive tests for src/services/auth.ts
 
 # Step 2: Review
-/agents/security-reviewer Review the newly generated test file for any security issues
+Use the security-reviewer subagent to review the newly generated test file for security issues
 ```
 
 ### Pattern 3: Parallel Research
@@ -347,11 +353,9 @@ Use a write agent to generate code, then a review agent to check it.
 Use multiple agents to research different aspects simultaneously.
 
 ```
-# Research architecture patterns
-/agents/architecture-analyst Analyze the data flow in the payment processing module
-
-# Research performance characteristics
-/agents/performance-profiler Identify potential bottlenecks in the checkout flow
+Run these in parallel: the architecture-analyst subagent analyzes the data flow
+in the payment processing module, and the performance-profiler subagent
+identifies potential bottlenecks in the checkout flow
 ```
 
 ### Pattern 4: Specialized Transformation
@@ -360,10 +364,10 @@ Use agents for specific, repeatable transformations.
 
 ```
 # Convert JavaScript to TypeScript
-/agents/ts-migrator Convert src/utils/helpers.js to TypeScript with strict mode
+@"ts-migrator (agent)" convert src/utils/helpers.js to TypeScript with strict mode
 
 # Generate API docs from code
-/agents/doc-generator Create OpenAPI spec from src/routes/*.ts
+@"doc-generator (agent)" create an OpenAPI spec from src/routes/*.ts
 ```
 
 ### Pattern 5: Guardrail Agent
@@ -372,7 +376,7 @@ Use a pre-check agent before making changes.
 
 ```
 # Check if change is safe
-/agents/impact-analyzer What files and tests would be affected by renaming the User model to Account?
+Use the impact-analyzer subagent: what files and tests would be affected by renaming the User model to Account?
 
 # Then proceed with the change
 Rename the User model to Account across the entire codebase
@@ -390,7 +394,7 @@ Subagents do NOT have access to:
 - Other agents' outputs
 
 Subagents DO have access to:
-- All project files (subject to allowed-tools)
+- All project files (subject to `tools`)
 - CLAUDE.md files (loaded automatically)
 - The current git state
 
@@ -399,14 +403,14 @@ Subagents DO have access to:
 Agent output appears in the main conversation. To preserve findings:
 
 1. **Ask the agent to write to a file:**
-   Include in custom-instructions: "Write your findings to a file."
+   Add to the agent's system prompt (the file body): "Write your findings to a file."
 
 2. **Capture in conversation:**
    The agent's output is visible in the main session's context.
 
 3. **Use a handoff document:**
    ```
-   /agents/analyzer Analyze the codebase and write a summary to .claude/analysis.md
+   Use the analyzer subagent to analyze the codebase and write a summary to .claude/analysis.md
    ```
 
 ### Cross-Agent Communication
@@ -415,10 +419,10 @@ Agents cannot communicate directly. Use files as the communication channel:
 
 ```
 # Agent A writes findings
-/agents/security-reviewer Review code and write findings to /tmp/security-review.md
+Use the security-reviewer subagent to review the code and write findings to /tmp/security-review.md
 
 # Agent B reads findings
-/agents/fix-planner Read /tmp/security-review.md and create a prioritized fix plan
+Use the fix-planner subagent to read /tmp/security-review.md and create a prioritized fix plan
 ```
 
 ---
@@ -432,37 +436,36 @@ They share the filesystem but not conversation state.
 
 ### Worktree Isolation
 
-For agents that modify files, consider using git worktrees for true isolation:
+For agents that modify files, set `isolation: worktree` in the frontmatter. The
+agent then runs in a temporary git worktree, so its edits never touch your
+checkout; the worktree is cleaned up if the agent makes no changes.
 
-```bash
-# Create isolated worktree
-git worktree add .claude/worktrees/agent-work agent-branch
+```markdown
+---
+name: refactor-worker
+description: Performs large mechanical refactors in an isolated worktree
+tools: Read, Edit, Write, Glob, Grep, Bash
+isolation: worktree
+---
 
-# Agent works in the worktree (configure in custom-instructions)
+Apply the requested refactor, run the tests, and report the branch and diff summary.
 ```
 
 ### Permission Isolation
 
-Use `allowed-tools` to create hard boundaries:
+Use `tools` to create hard boundaries:
 
 ```yaml
 # Agent cannot modify anything
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
+tools: Read, Glob, Grep
 
-# Agent can only modify test files
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
-  - Edit    # But custom-instructions say: "Only edit files in __tests__/"
-  - Write   # But custom-instructions say: "Only write to __tests__/"
+# Agent can edit, but its system prompt says "Only edit files in __tests__/"
+tools: Read, Glob, Grep, Edit, Write
 ```
 
-Note: `allowed-tools` enforces tool-level restrictions. For path-level restrictions,
-use custom-instructions (advisory, not enforced by the system).
+Note: `tools` enforces tool-level restrictions. Path-level restrictions written
+in the system prompt are advisory; to enforce them, add `Edit`/`Write` deny rules
+in settings or a `PreToolUse` hook.
 
 ---
 
@@ -527,155 +530,133 @@ Ensure agent-generated code matches project style:
 
 ### Recipe 1: Security Review Agent
 
-```yaml
+```markdown
 ---
 name: security-reviewer
 description: Reviews code for security vulnerabilities, secrets, and compliance issues
 model: sonnet
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash(git diff*)
-  - Bash(git log*)
-  - Bash(git show*)
-custom-instructions: |
-  You are a senior security engineer performing code review.
-
-  Review Checklist:
-  1. Hardcoded secrets (API keys, passwords, tokens, connection strings)
-  2. Injection vulnerabilities (SQL, XSS, command, LDAP, template)
-  3. Authentication flaws (broken auth, missing checks, weak tokens)
-  4. Authorization gaps (IDOR, privilege escalation, missing RBAC)
-  5. Cryptographic issues (weak algorithms, missing encryption, bad RNG)
-  6. Information disclosure (verbose errors, stack traces, debug endpoints)
-  7. Dependency vulnerabilities (known CVEs, outdated packages)
-
-  Output a structured markdown report with severity levels.
-  Always end with a risk score: CRITICAL / HIGH / MEDIUM / LOW / CLEAN.
+tools: Read, Glob, Grep, Bash
 ---
+
+You are a senior security engineer performing code review.
+Use Bash only for read-only git commands (`git diff`, `git log`, `git show`).
+
+Review Checklist:
+1. Hardcoded secrets (API keys, passwords, tokens, connection strings)
+2. Injection vulnerabilities (SQL, XSS, command, LDAP, template)
+3. Authentication flaws (broken auth, missing checks, weak tokens)
+4. Authorization gaps (IDOR, privilege escalation, missing RBAC)
+5. Cryptographic issues (weak algorithms, missing encryption, bad RNG)
+6. Information disclosure (verbose errors, stack traces, debug endpoints)
+7. Dependency vulnerabilities (known CVEs, outdated packages)
+
+Output a structured markdown report with severity levels.
+Always end with a risk score: CRITICAL / HIGH / MEDIUM / LOW / CLEAN.
 ```
 
 ### Recipe 2: Test Writer Agent
 
-```yaml
+```markdown
 ---
 name: test-writer
 description: Generates comprehensive test suites with edge cases and mocking
 model: sonnet
-allowed-tools:
-  - Read
-  - Write
-  - Glob
-  - Grep
-  - Bash(npm test*)
-  - Bash(npx jest*)
-custom-instructions: |
-  You write comprehensive test suites. For every module you test:
-
-  1. Read the source code thoroughly
-  2. Identify all public functions and methods
-  3. Write tests covering:
-     - Happy path for each function
-     - Edge cases (null, empty, boundary values)
-     - Error cases (invalid input, network failures)
-     - Integration points (mocked external dependencies)
-  4. Use the project's existing test framework and patterns
-  5. Run the tests to verify they pass
-
-  Naming: describe("ModuleName", () => { it("should verb when condition", ...) })
-  Target: 90%+ line coverage for the tested module.
+tools: Read, Write, Glob, Grep, Bash
 ---
+
+You write comprehensive test suites. Use Bash only to run the test suite
+(`npm test`, `npx jest`). For every module you test:
+
+1. Read the source code thoroughly
+2. Identify all public functions and methods
+3. Write tests covering:
+   - Happy path for each function
+   - Edge cases (null, empty, boundary values)
+   - Error cases (invalid input, network failures)
+   - Integration points (mocked external dependencies)
+4. Use the project's existing test framework and patterns
+5. Run the tests to verify they pass
+
+Naming: describe("ModuleName", () => { it("should verb when condition", ...) })
+Target: 90%+ line coverage for the tested module.
 ```
 
 ### Recipe 3: Documentation Generator
 
-```yaml
+```markdown
 ---
 name: doc-generator
 description: Generates API documentation, code comments, and README files
 model: sonnet
-allowed-tools:
-  - Read
-  - Write
-  - Glob
-  - Grep
-custom-instructions: |
-  You generate clear, accurate documentation from source code.
-
-  Documentation Types:
-  - API docs: Extract routes, parameters, response shapes from code
-  - Code comments: Add JSDoc/docstrings to undocumented functions
-  - README: Generate project overview from codebase analysis
-
-  Rules:
-  - Never invent features that don't exist in the code
-  - Include realistic examples based on actual code paths
-  - Use the project's existing documentation style
-  - Mark any assumptions with [ASSUMPTION] tag
+tools: Read, Write, Glob, Grep
 ---
+
+You generate clear, accurate documentation from source code.
+
+Documentation Types:
+- API docs: Extract routes, parameters, response shapes from code
+- Code comments: Add JSDoc/docstrings to undocumented functions
+- README: Generate project overview from codebase analysis
+
+Rules:
+- Never invent features that don't exist in the code
+- Include realistic examples based on actual code paths
+- Use the project's existing documentation style
+- Mark any assumptions with [ASSUMPTION] tag
 ```
 
 ### Recipe 4: Database Migration Agent
 
-```yaml
+```markdown
 ---
 name: migration-helper
 description: Generates database migration scripts and validates schema changes
 model: sonnet
-allowed-tools:
-  - Read
-  - Write
-  - Glob
-  - Grep
-  - Bash(npx prisma*)
-  - Bash(npm run migrate*)
-custom-instructions: |
-  You create safe database migration scripts.
-
-  Safety Rules:
-  1. NEVER drop columns or tables without explicit user confirmation
-  2. Always create reversible migrations (up AND down)
-  3. Add NOT NULL constraints in two steps (add nullable, backfill, alter)
-  4. Create indexes CONCURRENTLY when possible
-  5. Estimate data migration time for large tables
-
-  Output: Migration file + summary of changes + rollback plan.
+tools: Read, Write, Glob, Grep, Bash
 ---
+
+You create safe database migration scripts.
+Use Bash only for `npx prisma` and `npm run migrate` commands.
+
+Safety Rules:
+1. NEVER drop columns or tables without explicit user confirmation
+2. Always create reversible migrations (up AND down)
+3. Add NOT NULL constraints in two steps (add nullable, backfill, alter)
+4. Create indexes CONCURRENTLY when possible
+5. Estimate data migration time for large tables
+
+Output: Migration file + summary of changes + rollback plan.
 ```
 
 ### Recipe 5: Performance Profiler Agent
 
-```yaml
+```markdown
 ---
 name: performance-profiler
 description: Analyzes code for performance bottlenecks, N+1 queries, and memory leaks
 model: sonnet
-allowed-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash(git log*)
-custom-instructions: |
-  You are a performance engineering specialist.
-
-  Analysis Areas:
-  1. N+1 query patterns in ORM usage
-  2. Missing database indexes for common queries
-  3. Unbounded list operations (no pagination)
-  4. Memory leaks (event listeners, closures, caches without eviction)
-  5. Synchronous operations that should be async
-  6. Missing caching opportunities
-  7. Large payload responses without pagination
-
-  Severity Levels:
-  - P0: Will cause outage under load
-  - P1: Significant performance degradation
-  - P2: Noticeable slowdown
-  - P3: Optimization opportunity
-
-  Output a prioritized list with file:line references and fix suggestions.
+tools: Read, Glob, Grep, Bash
 ---
+
+You are a performance engineering specialist.
+Use Bash only for `git log`, to find recently changed hot paths.
+
+Analysis Areas:
+1. N+1 query patterns in ORM usage
+2. Missing database indexes for common queries
+3. Unbounded list operations (no pagination)
+4. Memory leaks (event listeners, closures, caches without eviction)
+5. Synchronous operations that should be async
+6. Missing caching opportunities
+7. Large payload responses without pagination
+
+Severity Levels:
+- P0: Will cause outage under load
+- P1: Significant performance degradation
+- P2: Noticeable slowdown
+- P3: Optimization opportunity
+
+Output a prioritized list with file:line references and fix suggestions.
 ```
 
 ---
@@ -697,7 +678,7 @@ custom-instructions: |
 
 1. **Knowledge + tools + templates** -> Make it a skill.
 2. **Focused task + persona + restrictions** -> Make it an agent.
-3. **Reads many files, want clean context** -> Agent in fork mode.
+3. **Reads many files, want clean context** -> Subagent (fresh context window).
 4. **Quick question using conversation history** -> Skill or inline prompt.
 5. **Repeatable specialized review** -> Agent (security-reviewer, test-runner).
 6. **Domain expertise for multiple workflows** -> Skill (covers broader scope).

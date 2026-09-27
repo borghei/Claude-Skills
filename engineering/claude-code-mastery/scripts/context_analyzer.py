@@ -28,7 +28,7 @@ CHARS_PER_TOKEN = 4
 FILE_CATEGORIES = {
     "claude_config": {
         "label": "Claude Configuration",
-        "patterns": ["CLAUDE.md", "claude.md", ".claude/settings.json", ".claude/agents/*.yaml", ".claude/agents/*.yml"],
+        "patterns": ["CLAUDE.md", "claude.md", ".claude/settings.json", ".claude/agents/*.md"],
         "description": "CLAUDE.md files and .claude/ configuration (loaded automatically)",
     },
     "skill_files": {
