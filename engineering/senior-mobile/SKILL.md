@@ -1,6 +1,6 @@
 ---
 name: senior-mobile
-description: >-
+description: >
   Use when the user asks to "build a mobile app", "scaffold React Native project",
   "create SwiftUI views", "set up Jetpack Compose", "optimize mobile performance",
   "configure Expo Router navigation", "implement offline-first storage",

@@ -5,6 +5,12 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.12.2] - 2026-09-27
+
+### Fixed
+
+- **The four restored skills show their description on the site and in the catalog.** Their descriptions used the `>-` block style, which the catalog builder does not read, so `skills.json`, `registry.json` and the skill pages carried a literal `>-`. They now use the `>` style the other skills use.
+
 ## [4.12.1] - 2026-09-27 (current-Claude accuracy pass)
 
 ### Fixed

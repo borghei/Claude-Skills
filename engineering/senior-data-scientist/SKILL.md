@@ -1,6 +1,6 @@
 ---
 name: senior-data-scientist
-description: >-
+description: >
   Use when the user asks to "design an experiment", "build a predictive model",
   "run A/B test analysis", "perform causal inference", "engineer features",
   "evaluate model performance", "set up MLOps pipeline", "analyze time series",

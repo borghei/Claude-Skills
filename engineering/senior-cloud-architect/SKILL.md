@@ -1,6 +1,6 @@
 ---
 name: senior-cloud-architect
-description: >-
+description: >
   Use when the user asks to "design cloud architecture", "set up Terraform infrastructure",
   "optimize cloud costs", "plan disaster recovery", "configure multi-region failover",
   "audit IAM policies", "migrate to cloud", "set up VPC networking",

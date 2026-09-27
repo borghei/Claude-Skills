@@ -1,6 +1,6 @@
 ---
 name: claude-code-mastery
-description: >-
+description: >
   Use when the user asks to "optimize CLAUDE.md", "create a new skill",
   "write a custom agent", "configure hooks", "manage context window",
   "set up MCP servers", "scaffold a skill package", "analyze token budget",

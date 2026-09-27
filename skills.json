@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
   "description": "The Universal AI Skills Library — 372 production-ready skills across 20 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.12.1",
+  "version": "4.12.2",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
@@ -396,7 +396,7 @@
     },
     {
       "name": "claude-code-mastery",
-      "description": ">-",
+      "description": "Use when the user asks to \"optimize CLAUDE.md\", \"create a new skill\", \"write a custom agent\", \"configure hooks\", \"manage context window\", \"set up MCP servers\", \"scaffold a skill package\", \"analyze token budget\", \"create subagents\", \"configure permissions\", \"set up worktrees\", or \"integrate Claude Code with editors\". Covers Claude Code CLI mastery, skill authoring, context engineering, hooks automation, subagent creation, and development workflow optimization.",
       "path": "engineering/claude-code-mastery/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1270,7 +1270,7 @@
     },
     {
       "name": "senior-cloud-architect",
-      "description": ">-",
+      "description": "Use when the user asks to \"design cloud architecture\", \"set up Terraform infrastructure\", \"optimize cloud costs\", \"plan disaster recovery\", \"configure multi-region failover\", \"audit IAM policies\", \"migrate to cloud\", \"set up VPC networking\", \"compare AWS vs GCP vs Azure\", or \"right-size cloud instances\". Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy, cost optimization, security, and infrastructure automation.",
       "path": "engineering/senior-cloud-architect/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1331,7 +1331,7 @@
     },
     {
       "name": "senior-data-scientist",
-      "description": ">-",
+      "description": "Use when the user asks to \"design an experiment\", \"build a predictive model\", \"run A/B test analysis\", \"perform causal inference\", \"engineer features\", \"evaluate model performance\", \"set up MLOps pipeline\", \"analyze time series\", \"calculate sample size\", or \"deploy a model to production\". Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.",
       "path": "engineering/senior-data-scientist/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1431,7 +1431,7 @@
     },
     {
       "name": "senior-mobile",
-      "description": ">-",
+      "description": "Use when the user asks to \"build a mobile app\", \"scaffold React Native project\", \"create SwiftUI views\", \"set up Jetpack Compose\", \"optimize mobile performance\", \"configure Expo Router navigation\", \"implement offline-first storage\", \"submit to App Store\", or \"profile mobile rendering\". Expert mobile development covering iOS (Swift/SwiftUI), Android (Kotlin/Compose), React Native, and Flutter for native and cross-platform applications.",
       "path": "engineering/senior-mobile/SKILL.md",
       "domain": "engineering",
       "category": "engineering",

@@ -8,7 +8,9 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
-**v4.12.1** (September 2026)
+**v4.12.2** (September 2026)
+
+- The four restored skills show their real description on the site and in the catalog
 
 - Current-Claude accuracy pass: four skill descriptions restored, the real Claude Code subagent format in `claude-code-mastery`, current model IDs and prices in every example and cost tool
 

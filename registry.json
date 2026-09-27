@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T19:17:42+00:00",
+  "generated_at": "2026-09-27T19:19:03+00:00",
   "repository": "claude-skills",
   "skill_count": 372,
   "domain_count": 20,
@@ -282,7 +282,7 @@
     {
       "name": "claude-code-mastery",
       "domain": "engineering",
-      "description": ">-",
+      "description": "Use when the user asks to \"optimize CLAUDE.md\", \"create a new skill\", \"write a custom agent\", \"configure hooks\", \"manage context window\", \"set up MCP servers\", \"scaffold a skill package\", \"analyze token budget\", \"create subagents\", \"configure permissions\", \"set up worktrees\", or \"integrate Claude Code with editors\". Covers Claude Code CLI mastery, skill authoring, context engineering, hooks automation, subagent creation, and development workflow optimization.",
       "tags": [
         "claude-code",
         "skill-authoring",
@@ -1009,7 +1009,7 @@
     {
       "name": "senior-cloud-architect",
       "domain": "engineering",
-      "description": ">-",
+      "description": "Use when the user asks to \"design cloud architecture\", \"set up Terraform infrastructure\", \"optimize cloud costs\", \"plan disaster recovery\", \"configure multi-region failover\", \"audit IAM policies\", \"migrate to cloud\", \"set up VPC networking\", \"compare AWS vs GCP vs Azure\", or \"right-size cloud instances\". Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy, cost optimization, security, and infrastructure automation.",
       "tags": [
         "cloud",
         "aws",
@@ -1061,7 +1061,7 @@
     {
       "name": "senior-data-scientist",
       "domain": "engineering",
-      "description": ">-",
+      "description": "Use when the user asks to \"design an experiment\", \"build a predictive model\", \"run A/B test analysis\", \"perform causal inference\", \"engineer features\", \"evaluate model performance\", \"set up MLOps pipeline\", \"analyze time series\", \"calculate sample size\", or \"deploy a model to production\". Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.",
       "tags": [
         "data-science",
         "ml",
@@ -1146,7 +1146,7 @@
     {
       "name": "senior-mobile",
       "domain": "engineering",
-      "description": ">-",
+      "description": "Use when the user asks to \"build a mobile app\", \"scaffold React Native project\", \"create SwiftUI views\", \"set up Jetpack Compose\", \"optimize mobile performance\", \"configure Expo Router navigation\", \"implement offline-first storage\", \"submit to App Store\", or \"profile mobile rendering\". Expert mobile development covering iOS (Swift/SwiftUI), Android (Kotlin/Compose), React Native, and Flutter for native and cross-platform applications.",
       "tags": [
         "mobile",
         "ios",
