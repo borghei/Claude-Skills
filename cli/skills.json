@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T18:17:05+00:00",
+  "generated_at": "2026-09-27T18:36:18+00:00",
   "skill_count": 372,
   "domain_count": 20,
   "skills": [
@@ -580,7 +580,7 @@
         "scripts/context_analyzer.py",
         "scripts/skill_scaffolder.py"
       ],
-      "size_bytes": 127904,
+      "size_bytes": 130513,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
