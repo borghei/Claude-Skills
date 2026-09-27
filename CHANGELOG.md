@@ -5,6 +5,19 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.12.1] - 2026-09-27 (current-Claude accuracy pass)
+
+### Fixed
+
+- **Four skills could not be routed to.** The frontmatter standardisation left `description` empty on `claude-code-mastery`, `senior-mobile`, `senior-data-scientist` and `senior-cloud-architect`; each description is restored.
+- **`claude-code-mastery` teaches the real subagent format**: a Markdown file in `.claude/agents/` with `name`, `description`, `tools` and `model` in the frontmatter and the system prompt as the body. The `.yaml` files, `allowed-tools:` and `custom-instructions:` it showed are ignored by Claude Code, so agents built from them got every tool and no prompt.
+- **Retired and never-valid Claude model IDs are gone from examples, templates and cost tools** (`claude-3-opus-20240229`, `claude-haiku-4-20250514`, `claude-haiku-3-5-20241022`, …). API examples use `claude-sonnet-5`, `claude-opus-5` and `claude-haiku-4-5`; agent files use the `sonnet` / `opus` / `haiku` aliases. The cost tools are re-priced (Sonnet 5 $2/$10, Haiku 4.5 $1/$5, Opus 5 $5/$25, Opus 5.5 $4/$20, Fable 5.1 $10/$50) and keep the legacy dated IDs at their old prices so older workflow files still cost correctly.
+
+### Changed
+
+- **Prompting guides carry current-Claude notes** next to "think step by step", scratchpad tags, `CRITICAL:` prefixes and temperature tuning: on current Claude models thinking depth is set with `effort`, asking for reasoning in the output can be refused, emphasis over-triggers, and structured outputs replace JSON-by-instruction. The techniques stay for other providers.
+- CLAUDE.md no longer describes a finished November 2025 sprint as active.
+
 ## [4.12.0] - 2026-09-22 (2026 refresh — AI-era marketing and PM, security hardening)
 
 **372 skills · 20 domains · 867 Python tools.**

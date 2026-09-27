@@ -8,7 +8,9 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
-**v4.12.0** (September 2026)
+**v4.12.1** (September 2026)
+
+- Current-Claude accuracy pass: four skill descriptions restored, the real Claude Code subagent format in `claude-code-mastery`, current model IDs and prices in every example and cost tool
 
 - 372 production-ready skills across 20 domains, 867 Python automation tools, 76 agents
 - 4 new AI-era skills: `ai-content-disclosure` and `conversational-ads` (marketing), `ai-prototyping` and `agents-in-the-team` (project management)
