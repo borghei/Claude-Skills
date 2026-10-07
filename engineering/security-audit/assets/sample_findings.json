@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "run_id": "orders-api-run-1",
+  "findings": [
+    {
+      "verdict": "needs_validation",
+      "fingerprint": "identity:reset:host-derived-link",
+      "title": "Password reset link may be built from a caller-supplied Host header",
+      "summary": "When PUBLIC_BASE_URL is unset, the reset email uses the request's Host header as the link origin. Whether an attacker can control that header depends on the production proxy.",
+      "suspected_root_cause": "build_reset_url falls back to request.host instead of failing when no public origin is configured",
+      "trace": [
+        {
+          "step": "entry",
+          "file": "src/api/auth.py",
+          "line": 61,
+          "symbol": "request_password_reset",
+          "note": "unauthenticated request names the account to reset"
+        },
+        {
+          "step": "sink",
+          "file": "src/mail/links.py",
+          "line": 19,
+          "symbol": "build_reset_url",
+          "note": "link origin taken from request.host when the setting is empty"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "config/settings.py",
+          "line": 34,
+          "note": "PUBLIC_BASE_URL defaults to an empty string"
+        },
+        {
+          "file": "deploy/ingress.yaml",
+          "line": 12,
+          "note": "ingress in the repository does not set or restrict Host"
+        }
+      ],
+      "blockers": [
+        "The production proxy configuration is not in the repository, so it is unknown whether an arbitrary Host header reaches the application"
+      ],
+      "resolution": {
+        "local": "Start the app from tests/conftest.py with PUBLIC_BASE_URL unset, post a reset request with a dummy Host, and read the link in the captured outbound mail fixture",
+        "owner_check": "Confirm whether the production load balancer forwards the client's Host header unchanged, and whether PUBLIC_BASE_URL is set in the production environment"
+      }
+    },
+    {
+      "verdict": "confirmed",
+      "fingerprint": "orders:refund:missing-owner-check",
+      "title": "Any tenant can refund another tenant's order",
+      "summary": "The refund route loads the order by ID and issues the refund without checking that the caller's tenant owns it.",
+      "root_cause": "POST /orders/{id}/refund is registered without the require_owner dependency that the read and update routes use",
+      "violated_invariant": "Only the tenant that owns an order may change its payment state",
+      "actor": "Any authenticated user of any tenant",
+      "affected": "Orders and payment balances of every other tenant",
+      "trace": [
+        {
+          "step": "entry",
+          "file": "src/api/orders.py",
+          "line": 88,
+          "symbol": "refund_order",
+          "note": "authenticated route; order ID taken from the path"
+        },
+        {
+          "step": "flow",
+          "file": "src/services/refunds.py",
+          "line": 41,
+          "symbol": "apply_refund",
+          "note": "order fetched by ID with no tenant filter"
+        },
+        {
+          "step": "sink",
+          "file": "src/db/orders.py",
+          "line": 120,
+          "symbol": "mark_refunded",
+          "note": "status and balance updated for the fetched order"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "src/api/orders.py",
+          "line": 52,
+          "note": "GET and PATCH routes declare Depends(require_owner); the refund route at line 88 does not"
+        },
+        {
+          "file": "src/db/orders.py",
+          "line": 97,
+          "note": "get_order selects by id only"
+        }
+      ],
+      "preconditions": [
+        {
+          "kind": "authentication",
+          "detail": "A valid session in any tenant"
+        },
+        {
+          "kind": "data_state",
+          "detail": "The target order ID is known or guessed; IDs are sequential integers"
+        }
+      ],
+      "reproduction": {
+        "interface": "HTTP API through the repository's test client",
+        "inputs": [
+          "POST /orders/1001/refund {\"reason\": \"duplicate\"} sent with tenant B's session; order 1001 belongs to tenant A"
+        ],
+        "steps": [
+          "Load the two-tenant fixture from tests/api/conftest.py",
+          "Send the request as the tenant B fixture user",
+          "Read order 1001 back as tenant A"
+        ],
+        "observed": "Response 200; order 1001 status changed to refunded and tenant A's balance was reduced by the order total"
+      },
+      "fix": {
+        "strategy": "Enforce ownership at the route with the same require_owner dependency the sibling routes use, and add the tenant to the service-layer lookup so the write path cannot be reached with a foreign order",
+        "regression_test": "tests/api/test_refunds.py: tenant B refunding tenant A's order returns 404 and leaves the order unchanged",
+        "changes": [
+          {
+            "file": "src/api/orders.py",
+            "change": "Add Depends(require_owner) to refund_order"
+          },
+          {
+            "file": "src/services/refunds.py",
+            "change": "Fetch the order with get_order_for_tenant(order_id, tenant_id)"
+          }
+        ]
+      },
+      "severity": {
+        "likelihood": {
+          "level": "high",
+          "why": "Requires only an ordinary account and a sequential ID"
+        },
+        "impact": {
+          "level": "high",
+          "why": "Cross-tenant write to payment state was demonstrated"
+        },
+        "overall": "high"
+      },
+      "confidence": {
+        "level": "high",
+        "why": "Reproduced locally by the hunter and independently re-read by a verifier"
+      }
+    },
+    {
+      "verdict": "rejected",
+      "fingerprint": "orders:search:sort-interpolation",
+      "title": "Sort parameter interpolated into ORDER BY",
+      "summary": "The sort value is formatted into the query string, which looked like an injection point.",
+      "suspected_root_cause": "search_orders builds ORDER BY with string formatting",
+      "trace": [
+        {
+          "step": "entry",
+          "file": "src/api/orders.py",
+          "line": 131,
+          "symbol": "search_orders_route",
+          "note": "sort taken from the query string"
+        },
+        {
+          "step": "sink",
+          "file": "src/db/orders.py",
+          "line": 64,
+          "symbol": "search_orders",
+          "note": "sort formatted into ORDER BY"
+        }
+      ],
+      "evidence": [
+        {
+          "file": "src/api/schemas.py",
+          "line": 27,
+          "note": "sort is an enum of four column names validated before the handler runs"
+        }
+      ],
+      "rejection_reason": "The request schema restricts sort to four fixed values, so no caller-controlled text reaches the query"
+    }
+  ]
+}

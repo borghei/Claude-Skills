@@ -1,0 +1,29 @@
+{
+  "topic": "Why we stopped running a weekly all-hands and what replaced it",
+  "goal": "conversation",
+  "audience": "Heads of operations and founders at companies of 30 to 150 people",
+  "author": "Dario Venn, COO at Lanternworks (fictional)",
+  "length": "standard",
+  "material": {
+    "figure": "The Monday all-hands cost 62 person-hours a week across 62 people",
+    "dated_event": "On 9 June we cancelled it with two days' notice and no replacement ready",
+    "scene": "",
+    "changed_belief": "I believed a weekly all-hands was the cheapest way to keep everyone aligned",
+    "opposing_view": "",
+    "before_after": "Questions asked in the open went from about 3 a week in the meeting to 19 a week in the written thread within a month",
+    "quote": "Ines in finance wrote: 'I have never once asked a question in that meeting and I have asked four this week.'",
+    "rule": "",
+    "sample_count": "",
+    "question_received": "",
+    "person_to_credit": "",
+    "term": "",
+    "prediction": "",
+    "steps": [
+      "Each team lead posts a written update by Monday 10:00",
+      "Questions go in one thread, answered by Wednesday",
+      "A 20-minute call on the first Monday of the month, questions only"
+    ]
+  },
+  "must_include": ["the two weeks where it went badly"],
+  "must_avoid": ["naming the client that complained"]
+}

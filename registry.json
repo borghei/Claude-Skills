@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-09-27T21:13:15+00:00",
+  "generated_at": "2026-10-07T00:46:25+00:00",
   "repository": "claude-skills",
-  "skill_count": 372,
-  "domain_count": 20,
+  "skill_count": 385,
+  "domain_count": 21,
   "domains": [
     "business-growth",
     "business-operations",
@@ -23,6 +23,7 @@
     "research",
     "research-ops",
     "sales-success",
+    "tools",
     "vertical-advisors",
     "workflow"
   ],
@@ -951,6 +952,23 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "path": "engineering/secrets-vault-manager",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "security-audit",
+      "domain": "engineering",
+      "description": "Multi-agent source security audit with a coverage ledger, independently verified findings, and machine-checked records. Use when asked to audit a codebase, find vulnerabilities, or run a source-level pen test.",
+      "tags": [
+        "security-audit",
+        "vulnerability-research",
+        "multi-agent",
+        "code-review",
+        "appsec"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "engineering/security-audit",
       "has_scripts": true,
       "has_references": true
     },
@@ -5449,6 +5467,211 @@
       "version": "1.0.0",
       "updated": "2026-07-21",
       "path": "markdown-html/md-slides",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-comment-writer",
+      "domain": "tools",
+      "description": "Drafts comments on other people's LinkedIn posts that add a specific the post lacked, then gates them offline. Use when commenting on a post, engaging with a prospect or peer, or checking a comment before pasting it.",
+      "tags": [
+        "linkedin",
+        "comments",
+        "engagement",
+        "social-selling",
+        "writing"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-comment-writer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-content-planner",
+      "domain": "tools",
+      "description": "Builds a weekly or monthly LinkedIn publishing plan from content pillars, a posting cadence and a format mix, with a founder-oriented pillar set as an alternative to the general one. Use when planning a week, a month or a launch period of posts rather than drafting a single post.",
+      "tags": [
+        "linkedin",
+        "content-calendar",
+        "content-pillars",
+        "editorial-planning",
+        "founder-content"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-content-planner",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-content-repurposer",
+      "domain": "tools",
+      "description": "Turns something made for another channel (a thread, a video or talk transcript, a blog post, a newsletter) into a post that reads as native to LinkedIn, without changing what the source says. Use when existing material should become a LinkedIn post rather than writing one from a blank page.",
+      "tags": [
+        "linkedin",
+        "repurposing",
+        "content-adaptation",
+        "transcripts",
+        "fidelity-check"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-content-repurposer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-employee-advocacy",
+      "domain": "tools",
+      "description": "Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.",
+      "tags": [
+        "linkedin",
+        "employee-advocacy",
+        "governance",
+        "team-cadence",
+        "social-policy"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-employee-advocacy",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-engagement-analytics",
+      "domain": "tools",
+      "description": "Segments who reacted to and commented on a post from a CSV or JSON export, and says whether it reached the intended audience. Use when reviewing a post's engagers, checking audience fit, or building a baseline.",
+      "tags": [
+        "linkedin",
+        "analytics",
+        "audience-segmentation",
+        "engagement",
+        "privacy"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-engagement-analytics",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-hook-analyzer",
+      "domain": "tools",
+      "description": "Extracts and classifies the opening-line pattern of LinkedIn posts the user pastes or saves, and turns each into a reusable slot template with cautions. Use when studying why an opening works, building a swipe file, or adapting a hook pattern without copying it.",
+      "tags": [
+        "linkedin",
+        "hooks",
+        "swipe-file",
+        "pattern-analysis",
+        "copywriting"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-hook-analyzer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-humanizer",
+      "domain": "tools",
+      "description": "Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author's own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone's voice.",
+      "tags": [
+        "linkedin",
+        "humanizer",
+        "ai-writing",
+        "editing",
+        "voice",
+        "pre-publish"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-humanizer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-post-writer",
+      "domain": "tools",
+      "description": "Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author's real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.",
+      "tags": [
+        "linkedin",
+        "copywriting",
+        "hooks",
+        "content-drafting",
+        "pre-publish"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-post-writer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-profile-optimizer",
+      "domain": "tools",
+      "description": "Audits and rewrites a LinkedIn profile from pasted text: headline, About, experience, skills, Featured, banner and photo. Use when reviewing a profile, fixing a headline or About, or preparing a profile before posting more.",
+      "tags": [
+        "linkedin",
+        "profile",
+        "headline",
+        "personal-branding",
+        "career"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-profile-optimizer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-reply-manager",
+      "domain": "tools",
+      "description": "Triages a pasted LinkedIn comment section and drafts replies: which comments to answer, in what order, which to ignore. Use when answering comments on your own post, replying inside a thread, or clearing a backlog.",
+      "tags": [
+        "linkedin",
+        "replies",
+        "comment-triage",
+        "community-management",
+        "engagement"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-reply-manager",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-story-interviewer",
+      "domain": "tools",
+      "description": "Interviews a person to surface what they actually have to say, and keeps the answers in a local story bank file that later LinkedIn drafts draw on. Use when someone has never posted, when drafts keep coming out generic, or when the story bank is thin or stale.",
+      "tags": [
+        "linkedin",
+        "interviewing",
+        "story-bank",
+        "content-discovery",
+        "personal-brand"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-story-interviewer",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "linkedin-thread-tracker",
+      "domain": "tools",
+      "description": "Keeps a local log of LinkedIn comments you left, records who replied, and reports follow-ups due, overdue, or dead. Use when logging a comment, checking which threads need an answer, or reviewing reply rates.",
+      "tags": [
+        "linkedin",
+        "follow-up",
+        "thread-tracking",
+        "engagement",
+        "relationship-building"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-10-07",
+      "path": "tools/linkedin/linkedin-thread-tracker",
       "has_scripts": true,
       "has_references": true
     },

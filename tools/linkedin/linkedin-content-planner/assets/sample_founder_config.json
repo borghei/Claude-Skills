@@ -1,0 +1,65 @@
+{
+  "owner": "Dariusz Feng-Okafor, founder of Pellwick (clinic scheduling software)",
+  "start_date": "2026-11-02",
+  "weeks": 2,
+  "posting_weekdays": [
+    "mon",
+    "wed",
+    "thu"
+  ],
+  "conversation_weekdays": [
+    "tue",
+    "fri"
+  ],
+  "skip_dates": [],
+  "pillars": [
+    {
+      "name": "market-view",
+      "share": 25,
+      "ask": "reply",
+      "formats": [
+        "text"
+      ]
+    },
+    {
+      "name": "build-log",
+      "share": 30,
+      "ask": "keep",
+      "formats": [
+        "text",
+        "image"
+      ]
+    },
+    {
+      "name": "customer-desk",
+      "share": 30,
+      "ask": "contact",
+      "formats": [
+        "text",
+        "image"
+      ]
+    },
+    {
+      "name": "ledger",
+      "share": 15,
+      "ask": "pass-on",
+      "formats": [
+        "text"
+      ]
+    }
+  ],
+  "formats": [
+    {
+      "name": "text",
+      "share": 70
+    },
+    {
+      "name": "image",
+      "share": 30,
+      "produced": true
+    }
+  ],
+  "limits": {
+    "max_produced_per_week": 1
+  }
+}

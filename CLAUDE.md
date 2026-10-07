@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 372 production-ready skills across 20 domains with 867 Python automation tools, 76 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (70 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 385 production-ready skills across 21 domains with 900 Python automation tools, 77 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (70 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -36,6 +36,7 @@ This repository uses **modular documentation**. For domain-specific guidance, se
 | **Research Ops** | [research-ops/CLAUDE.md](research-ops/CLAUDE.md) | 4 skills: market research, product research, clinical research operations, research finance — applied/operational, distinct from academic `research/` |
 | **Business Operations** | [business-operations/CLAUDE.md](business-operations/CLAUDE.md) | 6 skills: capacity planning, process mapping, vendor management, internal comms, knowledge ops, procurement optimization |
 | **Markdown-HTML** | [markdown-html/CLAUDE.md](markdown-html/CLAUDE.md) | 4 skills: md-document, md-slides, md-review gate, design-system — markdown→HTML publishing (stdlib only, zero network) |
+| **Tools** | [tools/CLAUDE.md](tools/CLAUDE.md) | 12 skills: the LinkedIn suite (`tools/linkedin/`) — story interviewer, planner, post writer, hook analyzer, humanizer, repurposer, comment writer, reply manager, thread tracker, profile optimizer, employee advocacy, engagement analytics. Offline, stdlib only |
 | **Standards Library** | [standards/CLAUDE.md](standards/CLAUDE.md) | Communication, quality, git, security standards |
 | **Templates** | [templates/CLAUDE.md](templates/CLAUDE.md) | Template system usage |
 
@@ -55,7 +56,7 @@ claude-code-skills/
 ├── agents/
 │   ├── (domain dirs)/         # 26 cs-* prefixed skill agents
 │   └── personas/              # 7 cross-domain personas (startup-cto, solo-founder, etc.)
-├── engineering/               # 82 engineering skills + 3 compound sub-skill systems
+├── engineering/               # 92 engineering skills + 3 compound sub-skill systems
 ├── marketing/                 # 41 marketing skills + Python tools (incl. aeo)
 ├── product-team/              # 13 product skills + Python tools (Tier 2: product-analytics, apple-hig-expert, research-summarizer, spec-to-repo, roadmap-communicator)
 ├── project-management/        # 70 PM skills (most-used domain) — role-based, discovery/, execution/, career/, strategy-frameworks/ (Tier 3), gtm/ (Tier 3), linear-expert, notion-pm
@@ -64,6 +65,7 @@ claude-code-skills/
 ├── research-ops/              # 4 applied research ops skills — market, product, clinical, research-finance
 ├── business-operations/       # 6 business ops skills — capacity, process, vendor, comms, knowledge, procurement
 ├── markdown-html/             # 4 markdown→HTML publishing skills — document, slides, review gate, design-system
+├── tools/                     # 12 platform toolkit skills — the LinkedIn suite under tools/linkedin/ (offline, stdlib only)
 ├── ra-qm-team/                # 27 RA/QM compliance skills (incl. audit-prep/ subfolder)
 ├── business-growth/           # 20 business & growth skills (incl. commercial: deal-desk, channel-economics, partnerships-architect, commercial-policy)
 ├── data-analytics/            # 5 data analytics skills + Python tools
@@ -145,7 +147,7 @@ mkdocs build                                  # 1. docs/ -> site/  (CLEANS site/
 git checkout HEAD -- site/index.html \
                      site/css/style.css \
                      site/js/main.js          # 2. restore the hand-maintained landing page
-python3 scripts/generate_site.py              # 3. skills.json -> 372 skill + 20 domain pages
+python3 scripts/generate_site.py              # 3. skills.json -> 385 skill + 21 domain pages
 ```
 
 - **`mkdocs build` wipes `site/` before writing.** It must run first, never last.
@@ -230,9 +232,11 @@ hand-maintained `site/index.html`.
 
 ---
 
-**Last Updated:** September 2026
-**Version:** 4.12.3
-**Status:** 372 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 20 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 20 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 70 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+**Last Updated:** October 2026
+**Version:** 4.13.0
+**Status:** 385 skills, 69 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 21 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 21 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 70 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+- **Recent additions (October 2026) — new `tools/` domain, LinkedIn suite (12 skills, 27 stdlib tools):** `tools/linkedin/` holds linkedin-story-interviewer, -content-planner, -post-writer, -hook-analyzer, -humanizer, -content-repurposer, -comment-writer, -reply-manager, -thread-tracker, -profile-optimizer, -employee-advocacy and -engagement-analytics. Offline by design: nothing posts, schedules or scrapes; drafts are pasted by the user and analysis runs on pasted text or exports. Gates exit 1 on their deliberately flawed samples.
+- **Recent additions (October 2026) — security audit:** engineering `security-audit` (6 stdlib tools, 14 references) and the `cs-security-auditor` agent that leads it. Six phases — reconnaissance, coverage-ledger-driven hunting, independent candidate validation, schema-checked `findings.json`, fresh record verification, reporting — with three run-time breadth tiers (`core`, `focused`, `full`). The agent asks for the tier before every full audit. Validators exit non-zero on an invalid ledger or findings file by design.
 - **Recent additions (September 2026) — 4 skills + 2026 refresh:** marketing `ai-content-disclosure` and `conversational-ads`; PM `discovery/ai-prototyping` and `execution/agents-in-the-team` (8 stdlib tools). Existing marketing and PM skills refreshed against 2025–2026 changes: retired FAQ/HowTo rich results, AI crawler and Search Console AI controls, Advantage+/AI Max, GA4 AI Assistant channel, Productboard API v2, Jira `/search/jql`, Notion data sources, DORA 2024 benchmarks, EU AI Act Omnibus (Reg. 2026/1744), Atlassian Data Center end-of-life. Workflow templates hardened against shell injection (CWE-78).
 - **Recent additions (July 2026) — 25 skills, 3 new domains:** `business-operations/` (capacity-planner, process-mapper, vendor-management, internal-comms, knowledge-ops, procurement-optimizer), `research-ops/` (market-research, product-research, clinical-research, research-finance — applied/operational, distinct from academic `research/`), and `markdown-html/` (md-document, md-slides, md-review, design-system — stdlib-only markdown→HTML with zero network calls). Plus 5 engineering skills (write-a-skill, spec-driven-workflow, code-tour, agent-harness, cloud-security), data-analytics/statistical-analyst, 2 PM skills (team-communications, meeting-analyzer), and 3 personal-productivity skills (capture, deep-work, reflect). 44 new stdlib Python tools. Several tools ship deliberate CI gates that exit non-zero on flawed sample data — see each SKILL.md's exit-code contract.
 - **Recent Tier-3 additions (May 2026):** 12 PM skills in new subfolders `strategy-frameworks/` (business-model-canvas, lean-canvas, swot-analysis, porters-five-forces, ansoff-matrix) and `gtm/` (gtm-strategy, ideal-customer-profile), plus discovery additions (opportunity-solution-tree, metrics-dashboard) and execution additions (stakeholder-map, test-scenarios, sprint-plan). 12 stdlib Python validators, ~12K lines.

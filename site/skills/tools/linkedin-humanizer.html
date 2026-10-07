@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linkedin Humanizer - Claude Skills</title>
+  <meta name="description" content="Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-humanizer.html">
+  <meta property="og:title" content="Linkedin Humanizer - Claude Skills">
+  <meta property="og:description" content="Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-humanizer.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Linkedin Humanizer", "description": "Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author's own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone's voice.", "applicationCategory": "Tools", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/tools/linkedin-humanizer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/tools/">Tools</a><span class=sep>/</span><span>Linkedin Humanizer</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Linkedin Humanizer</h1>
+    <p class="page-subtitle">Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone&#x27;s voice.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Tools</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">linkedin</span><span class="tag">humanizer</span><span class="tag">ai-writing</span><span class="tag">editing</span><span class="tag">voice</span><span class="tag">pre-publish</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Linkedin Humanizer (Tools domain).
+
+Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone&#x27;s voice.
+
+A draft that sounds generated fails twice. Readers who recognise the cadence stop at the second line, and the author&#x27;s name is now attached to a paragraph that could have been posted by anyone. The usual fix makes it worse: someone
+
+## Your Key Capabilities
+- — Audit a draft before it is published
+- — Rewrite without leaving edit marks
+- — Build a voice fingerprint and edit against it
+- The three tiers
+- What to do with a finding
+- Which gate settings to use
+
+## Frameworks &amp; Templates You Know
+- 5. Record the result in `assets/voice_profile_template.md` so the next draft
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-humanizer
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Linkedin Humanizer (Tools domain).
+
+Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone&#x27;s voice.
+
+A draft that sounds generated fails twice. Readers who recognise the cadence stop at the second line, and the author&#x27;s name is now attached to a paragraph that could have been posted by anyone. The usual fix makes it worse: someone
+
+## Your Key Capabilities
+- — Audit a draft before it is published
+- — Rewrite without leaving edit marks
+- — Build a voice fingerprint and edit against it
+- The three tiers
+- What to do with a finding
+- Which gate settings to use
+
+## Frameworks &amp; Templates You Know
+- 5. Record the result in `assets/voice_profile_template.md` so the next draft
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-humanizer
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Linkedin Humanizer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Humanizer
+
+A draft that sounds generated fails twice. Readers who recognise the cadence
+stop at the second line, and the author&#x27;s name is now attached to a paragraph
+that could have been posted by anyone. The usual fix makes it worse: someone
+runs a find-and-replace on a list of forbidden words, chops the long sentences
+into fragments, sprinkles in &quot;honestly&quot;, and produces text that sounds like a
+machine imitating a person who is trying not to sound like a machine.
+
+This skill treats the problem as editing, with a catalogue. Thirty-three rules
+are sorted into three tiers by what should happen to the text: **remove** (tool
+residue no person writes), **reduce** (habits that are fine once and a signature
+in bulk), and **review** (choices a careful writer makes on purpose). Each rule
+carries the reason it fires, the fix, and the case for keeping the text as it
+is. A separate scorer handles emoji placement, and a fingerprint built from the
+author&#x27;s own past posts decides which habits are theirs and must survive the
+edit.
+
+**Scope boundary.** This skill edits and audits a draft that already exists. It
+does **not** choose an angle or write a post from a blank page; that is
+`linkedin-post-writer`. It does **not** classify the opening lines of other
+people&#x27;s posts for reuse; that is `linkedin-hook-analyzer`. Comments and replies
+have their own skills (`linkedin-comment-writer`, `linkedin-reply-manager`),
+though the catalogue here applies to any short text pasted in. Interviewing the
+author for the missing story or figure is `linkedin-story-interviewer`; this
+skill only reports that the figure is missing. It makes no claim about how any
+automated classifier will score the text and does not try to defeat one: the
+target is a human reader. Everything runs offline on text the user supplies.
+Nothing is posted, scheduled, fetched or sent anywhere; the user pastes the
+finished draft into LinkedIn themselves.
+
+## When to use this skill
+
+- A draft was produced with a writing assistant and is about to go out under a person&#x27;s name
+- A post &quot;feels off&quot; and nobody can say which sentence is responsible
+- An editor or ghostwriter needs to justify a change to an author who likes the sentence
+- A team wants one pre-publish gate that every draft passes, with a documented exit code
+- An earlier clean-up pass removed every dash and contraction and the result reads stiff
+- Several past posts are available and drafts keep drifting away from how the author writes
+
+## Inputs the skill expects
+
+- The draft as plain text (a `.txt` file or stdin). Formatting should be what will be pasted
+- Optional: three to ten of the author&#x27;s own past posts, separated by `---` lines, for the fingerprint
+- Optional: the facts the draft is missing (a figure with what it counts, a name, a date). The skill asks for them; it never invents them
+- Who will read the post, when the audience is unusually strict about style
+
+## Clarify First
+
+Before editing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit only, or audit and rewrite** — an audit returns findings and leaves every word alone; a rewrite changes the author&#x27;s text and needs their sign-off on meaning
+- [ ] **Whether past posts are available** — with a fingerprint, the author&#x27;s real habits (their dashes, their fragments) are waived; without one, every reduce-tier rule applies at face value and the edit may strip their voice
+- [ ] **The facts behind vague sentences** — when the audit reports &quot;nothing only the author could know&quot;, the only honest fix is a real figure or name from the author; the agent must not supply one
+- [ ] **How strict the audience is** — a general feed needs the remove and reduce tiers; an audience that hunts for generated text may justify acting on the review tier too
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just
+clean it up,&quot; run the remove and reduce tiers, change nothing in the review
+tier, and list every assumption and every unfilled fact at the top of the reply.
+
+## Workflows
+
+Quick start: run Workflow 1 on the draft, fix what it reports, and re-run until
+the exit code is 0.
+
+### Workflow 1 — Audit a draft before it is published
+
+1. Save the draft exactly as it will be pasted, including line breaks.
+2. Run the tell audit. Read the remove tier first: those hits block the gate on
+   their own and usually mean a paste accident, not a style problem.
+3. Run the emoji audit. It scores placement, not presence.
+4. For each reduce-tier finding, read the `seen:` lines and decide per instance.
+   The allowance exists because one contrast or one triple is ordinary writing.
+5. Validate the result: the gate must pass (exit 0) before the draft is handed
+   back. If it fails only on rule RD-16, stop and get the missing detail from the
+   author.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt --why
+
+python3 tools/linkedin/linkedin-humanizer/scripts/emoji_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt
+```
+
+The sample draft fails with four blockers and a habit load of 29 against a limit
+of 6. `assets/sample_draft_edited.txt` is the same post after Workflow 2 and
+passes both tools.
+
+### Workflow 2 — Rewrite without leaving edit marks
+
+1. Clear the remove tier completely, then re-run. Removing a pasted preamble
+   changes which line is the opening, and the opener rule only inspects line one.
+2. Work paragraph by paragraph, worst first. Where RD-19 fired, rewrite the
+   paragraph from its underlying fact; replacing words one at a time yields the
+   same empty paragraph in different vocabulary.
+3. Fix each remaining reduce-tier hit with the move in
+   `references/rewrite-playbook.md`. Excess dashes become commas, colons or
+   brackets, never full stops: splitting at a dash manufactures fragments.
+4. Ask the author for any missing figure, name or date. Leave a visible gap in
+   the reply if they have none.
+5. Run the over-edit checklist (playbook §6): no new fragments, no added candor
+   phrases, contractions and at least one long sentence still present.
+6. Re-run the audit with `--tier review` and confirm the gate passes.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_rules.py --explain RD-03
+
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft_edited.txt --tier review
+```
+
+### Workflow 3 — Build a voice fingerprint and edit against it
+
+1. Collect at least five posts the author wrote themselves, without assistance,
+   into one file separated by `---` lines. Reshares and announcements written by
+   a comms team do not count.
+2. Build the fingerprint and save the JSON. Read the `Protect` lines: these are
+   reduce-tier rules the author&#x27;s own writing already exceeds.
+3. Audit the draft with `--voice`. Protected rules are still displayed, marked
+   as the author&#x27;s habit, and add nothing to the load.
+4. Compare the draft to the fingerprint. Drift on three or more measures means
+   the draft is in someone else&#x27;s voice even if no rule fired.
+5. Record the result in `assets/voice_profile_template.md` so the next draft
+   starts from it.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/voice_fingerprint.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_past_posts.txt \
+  --compare tools/linkedin/linkedin-humanizer/assets/sample_draft.txt
+
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt \
+  --voice tools/linkedin/linkedin-humanizer/assets/sample_voice.json
+```
+
+## Decision frameworks
+
+### The three tiers
+
+| Tier | What it catches | How it is counted | Effect on the gate |
+|------|-----------------|-------------------|--------------------|
+| **Remove** (RM-01 to RM-07) | Citation tokens, assistant preamble and sign-off, model self-reference, unfilled placeholders, unrendered markup, option labels | One hit is enough | Any hit fails the gate |
+| **Reduce** (RD-01 to RD-19) | Stock vocabulary, contrast frames, staged question-and-answer, triples, fragments, announced candor, stock openers and closers, dash density, noun stacks, hedge stacks, no author-only detail | Hits above a per-post allowance, weighted 1-3 | Load above `--max-load` fails the gate |
+| **Review** (RV-01 to RV-07) | A single dash, a lone triple, passive voice, curly quotes, semicolons, out-of-fashion flagged words, a long post with no contractions | Reported as notes | Never fails the gate |
+
+The tiers are a statement about evidence. A remove-tier hit is proof of a paste
+accident. A reduce-tier hit is a pattern that only means something in quantity.
+A review-tier hit is a taste question, and treating taste as proof is how good
+sentences get deleted. All allowances and weights are editorial heuristics.
+
+### What to do with a finding
+
+| Situation | Action | Why |
+|-----------|--------|-----|
+| Remove-tier hit | [PROVEN] Delete or fill, every time, then re-run | No reader forgives a visible placeholder, and it shifts which line the opener rule sees |
+| One paragraph holds three or more stock words (RD-19) | [PROVEN] Rewrite the paragraph from the fact it gestures at | Word swaps keep the emptiness; the paragraph has no claim to preserve |
+| Reduce-tier hit at exactly the allowance | [RECOMMENDED] Leave it | One contrast or one triple is ordinary prose; scrubbing to zero is its own tell |
+| Rule fires on a habit visible in the author&#x27;s past posts | [RECOMMENDED] Waive through the fingerprint, not by hand | The waiver is then recorded and repeatable across drafts |
+| RD-16 fires and the author has no figure to give | [RECOMMENDED] Ship the post shorter and plainer | An honest thin post beats a specific-sounding invented one |
+| Review-tier notes on a general-audience post | [RECOMMENDED] Read them, change nothing by default | Each has a legitimate human use documented in the catalogue |
+| Acting on the whole review tier for a strict audience | [EXPERIMENTAL] Only on request, and re-check for over-editing | Removing every dash, triple and passive tends to flatten the voice |
+
+### Which gate settings to use
+
+| Draft type | `--max-load` | Emoji `--fail-under` | Notes |
+|------------|--------------|----------------------|-------|
+| Personal post, general audience | 6 (default) | 60 (default) | [RECOMMENDED] The setting the samples are calibrated on |
+| Company-page or executive post | 3 | 75 | [RECOMMENDED] More scrutiny, fewer second chances |
+| Short reshare caption under 40 words | 6 | 60 | Density rules have little to measure; read the result as a spot check |
+| Author with a fingerprint on file | 6 with `--voice` | 60 with `--usual N` | [PROVEN] Stops the gate punishing the author for sounding like themselves |
+
+## Anti-Patterns
+
+### Scrubbing by word list
+**Mistake:** The editor searches for twenty forbidden words, swaps each for a synonym, and calls the draft clean. &quot;Leverage our comprehensive platform&quot; becomes &quot;use our full platform&quot;.
+**Why it happens:** A word list is easy to share and easy to apply, and the vocabulary is the most visible layer of the problem.
+**Instead:** Treat stock vocabulary as a symptom of a paragraph with no claim. When RD-19 fires, find the fact the paragraph was avoiding (&quot;seven fields before you could print a label&quot;) and write that. `tell_audit.py` weights a vocabulary cluster three times a single word for this reason.
+
+### Curing flat rhythm with fragments
+**Mistake:** Every sentence is the same length, so the editor breaks them up. &quot;It worked. Really worked. Better than expected.&quot; The draft now trips RD-06 and RD-07.
+**Why it happens:** Advice to &quot;vary sentence length&quot; is correct and gets applied as &quot;add short sentences&quot;, because short is quicker to produce than long.
+**Instead:** Fix uniformity by joining, not cutting. Take two adjacent sentences that are causally related and connect them with a clause that carries the cause. Change one place per paragraph and stop.
+
+### Adding sincerity
+**Mistake:** The draft feels impersonal, so the edit inserts &quot;I&#x27;ll be honest&quot;, &quot;this one was hard to write&quot;, or a confession the author never made.
+**Why it happens:** Vulnerability is a real quality of good posts and the phrase is a cheap proxy for it.
+**Instead:** Delete announcements of candor (RD-08) and replace them with the uncomfortable fact itself, dated and unframed: &quot;We lost the account on 14 March.&quot; If no such fact exists, the post is not a vulnerable one, and that is fine. The agent never invents one.
+
+### Treating the review tier as a to-do list
+**Mistake:** Every dash, every passive verb and every list of three is removed because the audit mentioned them.
+**Why it happens:** A finding looks like an instruction, and &quot;zero findings&quot; looks like the goal.
+**Instead:** The review tier is displayed only on request and never affects the exit code. Read `keep it when` in `tell_rules.py --explain` before touching anything. A 300-word post with no dashes, no contractions and no triples has been visibly scrubbed.
+
+### Auditing against rules instead of against the author
+**Mistake:** An author who has written in clipped fragments for years is edited into flowing paragraphs because RD-06 fired.
+**Why it happens:** The catalogue is to hand and the author&#x27;s back catalogue is not.
+**Instead:** Build the fingerprint first (Workflow 3). It takes five past posts and one command, and it converts &quot;this is how they write&quot; from an argument into a file the audit reads.
+
+### Promising a score from an automated checker
+**Mistake:** The author asks whether the post will &quot;pass&quot; some classifier and the editor says yes.
+**Why it happens:** A number feels like a deliverable.
+**Instead:** Say plainly that this skill does not measure or target any classifier, that short texts give such tools little to work with, and that the standard here is whether a person who knows the author would believe they wrote it.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/tell_audit.py` | The gate. Applies the three-tier catalogue to a draft, reports each rule that fired with the matching text and fix, honours a voice file, exits 1 on any blocker or excess habit load |
+| `scripts/tell_rules.py` | Rule data and shared text splitters. `--list` prints the catalogue; `--explain RULE_ID` prints why a rule fires, the fix, and when to keep the text |
+| `scripts/emoji_audit.py` | Scores emoji placement from 0 to 100 across eight rules (bullet runs, headings, stock set, clusters, opening line); exits 1 below `--fail-under` |
+| `scripts/voice_fingerprint.py` | Builds a fingerprint from past posts (medians, recurring words, protected rules) and with `--compare` reports where a draft drifts; exits 1 beyond `--max-drift` |
+| `references/rule-catalogue.md` | Every rule with what it looks like, why readers notice, a before-and-after rewrite, and the legitimate reason to keep it |
+| `references/rewrite-playbook.md` | Order of operations for a rewrite, the paragraph-level method, a full worked example, and the over-edit checklist |
+| `references/emoji-patterns.md` | The eight placement rules, how the score is built, what a hand-placed emoji looks like, and how to tune the thresholds to an author |
+| `references/voice-fingerprint-guide.md` | What each measure means, how many posts are enough, how protection works, and how to settle a conflict between a rule and a habit |
+| `assets/sample_draft.txt` | A generated-sounding draft that trips all three tiers and five emoji rules |
+| `assets/sample_draft_edited.txt` | The same post rewritten with real detail; passes both gates |
+| `assets/sample_past_posts.txt` | Five posts by a fictional support lead, used to build the sample fingerprint |
+| `assets/sample_voice.json` | Fingerprint generated from the sample posts, ready to pass to `--voice` |
+| `assets/voice_profile_template.md` | Fill-in profile recording an author&#x27;s fingerprint, protected habits and off-limits phrases |
+| `assets/audit_report_template.md` | Fill-in report for handing audit results and proposed edits back to an author |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Humanizer&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Humanizer in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Humanizer&quot;**
+   - Description: &quot;Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone&#x27;s voice.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-humanizer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Linkedin Humanizer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Humanizer
+
+A draft that sounds generated fails twice. Readers who recognise the cadence
+stop at the second line, and the author&#x27;s name is now attached to a paragraph
+that could have been posted by anyone. The usual fix makes it worse: someone
+runs a find-and-replace on a list of forbidden words, chops the long sentences
+into fragments, sprinkles in &quot;honestly&quot;, and produces text that sounds like a
+machine imitating a person who is trying not to sound like a machine.
+
+This skill treats the problem as editing, with a catalogue. Thirty-three rules
+are sorted into three tiers by what should happen to the text: **remove** (tool
+residue no person writes), **reduce** (habits that are fine once and a signature
+in bulk), and **review** (choices a careful writer makes on purpose). Each rule
+carries the reason it fires, the fix, and the case for keeping the text as it
+is. A separate scorer handles emoji placement, and a fingerprint built from the
+author&#x27;s own past posts decides which habits are theirs and must survive the
+edit.
+
+**Scope boundary.** This skill edits and audits a draft that already exists. It
+does **not** choose an angle or write a post from a blank page; that is
+`linkedin-post-writer`. It does **not** classify the opening lines of other
+people&#x27;s posts for reuse; that is `linkedin-hook-analyzer`. Comments and replies
+have their own skills (`linkedin-comment-writer`, `linkedin-reply-manager`),
+though the catalogue here applies to any short text pasted in. Interviewing the
+author for the missing story or figure is `linkedin-story-interviewer`; this
+skill only reports that the figure is missing. It makes no claim about how any
+automated classifier will score the text and does not try to defeat one: the
+target is a human reader. Everything runs offline on text the user supplies.
+Nothing is posted, scheduled, fetched or sent anywhere; the user pastes the
+finished draft into LinkedIn themselves.
+
+## When to use this skill
+
+- A draft was produced with a writing assistant and is about to go out under a person&#x27;s name
+- A post &quot;feels off&quot; and nobody can say which sentence is responsible
+- An editor or ghostwriter needs to justify a change to an author who likes the sentence
+- A team wants one pre-publish gate that every draft passes, with a documented exit code
+- An earlier clean-up pass removed every dash and contraction and the result reads stiff
+- Several past posts are available and drafts keep drifting away from how the author writes
+
+## Inputs the skill expects
+
+- The draft as plain text (a `.txt` file or stdin). Formatting should be what will be pasted
+- Optional: three to ten of the author&#x27;s own past posts, separated by `---` lines, for the fingerprint
+- Optional: the facts the draft is missing (a figure with what it counts, a name, a date). The skill asks for them; it never invents them
+- Who will read the post, when the audience is unusually strict about style
+
+## Clarify First
+
+Before editing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Audit only, or audit and rewrite** — an audit returns findings and leaves every word alone; a rewrite changes the author&#x27;s text and needs their sign-off on meaning
+- [ ] **Whether past posts are available** — with a fingerprint, the author&#x27;s real habits (their dashes, their fragments) are waived; without one, every reduce-tier rule applies at face value and the edit may strip their voice
+- [ ] **The facts behind vague sentences** — when the audit reports &quot;nothing only the author could know&quot;, the only honest fix is a real figure or name from the author; the agent must not supply one
+- [ ] **How strict the audience is** — a general feed needs the remove and reduce tiers; an audience that hunts for generated text may justify acting on the review tier too
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just
+clean it up,&quot; run the remove and reduce tiers, change nothing in the review
+tier, and list every assumption and every unfilled fact at the top of the reply.
+
+## Workflows
+
+Quick start: run Workflow 1 on the draft, fix what it reports, and re-run until
+the exit code is 0.
+
+### Workflow 1 — Audit a draft before it is published
+
+1. Save the draft exactly as it will be pasted, including line breaks.
+2. Run the tell audit. Read the remove tier first: those hits block the gate on
+   their own and usually mean a paste accident, not a style problem.
+3. Run the emoji audit. It scores placement, not presence.
+4. For each reduce-tier finding, read the `seen:` lines and decide per instance.
+   The allowance exists because one contrast or one triple is ordinary writing.
+5. Validate the result: the gate must pass (exit 0) before the draft is handed
+   back. If it fails only on rule RD-16, stop and get the missing detail from the
+   author.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt --why
+
+python3 tools/linkedin/linkedin-humanizer/scripts/emoji_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt
+```
+
+The sample draft fails with four blockers and a habit load of 29 against a limit
+of 6. `assets/sample_draft_edited.txt` is the same post after Workflow 2 and
+passes both tools.
+
+### Workflow 2 — Rewrite without leaving edit marks
+
+1. Clear the remove tier completely, then re-run. Removing a pasted preamble
+   changes which line is the opening, and the opener rule only inspects line one.
+2. Work paragraph by paragraph, worst first. Where RD-19 fired, rewrite the
+   paragraph from its underlying fact; replacing words one at a time yields the
+   same empty paragraph in different vocabulary.
+3. Fix each remaining reduce-tier hit with the move in
+   `references/rewrite-playbook.md`. Excess dashes become commas, colons or
+   brackets, never full stops: splitting at a dash manufactures fragments.
+4. Ask the author for any missing figure, name or date. Leave a visible gap in
+   the reply if they have none.
+5. Run the over-edit checklist (playbook §6): no new fragments, no added candor
+   phrases, contractions and at least one long sentence still present.
+6. Re-run the audit with `--tier review` and confirm the gate passes.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_rules.py --explain RD-03
+
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft_edited.txt --tier review
+```
+
+### Workflow 3 — Build a voice fingerprint and edit against it
+
+1. Collect at least five posts the author wrote themselves, without assistance,
+   into one file separated by `---` lines. Reshares and announcements written by
+   a comms team do not count.
+2. Build the fingerprint and save the JSON. Read the `Protect` lines: these are
+   reduce-tier rules the author&#x27;s own writing already exceeds.
+3. Audit the draft with `--voice`. Protected rules are still displayed, marked
+   as the author&#x27;s habit, and add nothing to the load.
+4. Compare the draft to the fingerprint. Drift on three or more measures means
+   the draft is in someone else&#x27;s voice even if no rule fired.
+5. Record the result in `assets/voice_profile_template.md` so the next draft
+   starts from it.
+
+```bash
+python3 tools/linkedin/linkedin-humanizer/scripts/voice_fingerprint.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_past_posts.txt \
+  --compare tools/linkedin/linkedin-humanizer/assets/sample_draft.txt
+
+python3 tools/linkedin/linkedin-humanizer/scripts/tell_audit.py \
+  --input tools/linkedin/linkedin-humanizer/assets/sample_draft.txt \
+  --voice tools/linkedin/linkedin-humanizer/assets/sample_voice.json
+```
+
+## Decision frameworks
+
+### The three tiers
+
+| Tier | What it catches | How it is counted | Effect on the gate |
+|------|-----------------|-------------------|--------------------|
+| **Remove** (RM-01 to RM-07) | Citation tokens, assistant preamble and sign-off, model self-reference, unfilled placeholders, unrendered markup, option labels | One hit is enough | Any hit fails the gate |
+| **Reduce** (RD-01 to RD-19) | Stock vocabulary, contrast frames, staged question-and-answer, triples, fragments, announced candor, stock openers and closers, dash density, noun stacks, hedge stacks, no author-only detail | Hits above a per-post allowance, weighted 1-3 | Load above `--max-load` fails the gate |
+| **Review** (RV-01 to RV-07) | A single dash, a lone triple, passive voice, curly quotes, semicolons, out-of-fashion flagged words, a long post with no contractions | Reported as notes | Never fails the gate |
+
+The tiers are a statement about evidence. A remove-tier hit is proof of a paste
+accident. A reduce-tier hit is a pattern that only means something in quantity.
+A review-tier hit is a taste question, and treating taste as proof is how good
+sentences get deleted. All allowances and weights are editorial heuristics.
+
+### What to do with a finding
+
+| Situation | Action | Why |
+|-----------|--------|-----|
+| Remove-tier hit | [PROVEN] Delete or fill, every time, then re-run | No reader forgives a visible placeholder, and it shifts which line the opener rule sees |
+| One paragraph holds three or more stock words (RD-19) | [PROVEN] Rewrite the paragraph from the fact it gestures at | Word swaps keep the emptiness; the paragraph has no claim to preserve |
+| Reduce-tier hit at exactly the allowance | [RECOMMENDED] Leave it | One contrast or one triple is ordinary prose; scrubbing to zero is its own tell |
+| Rule fires on a habit visible in the author&#x27;s past posts | [RECOMMENDED] Waive through the fingerprint, not by hand | The waiver is then recorded and repeatable across drafts |
+| RD-16 fires and the author has no figure to give | [RECOMMENDED] Ship the post shorter and plainer | An honest thin post beats a specific-sounding invented one |
+| Review-tier notes on a general-audience post | [RECOMMENDED] Read them, change nothing by default | Each has a legitimate human use documented in the catalogue |
+| Acting on the whole review tier for a strict audience | [EXPERIMENTAL] Only on request, and re-check for over-editing | Removing every dash, triple and passive tends to flatten the voice |
+
+### Which gate settings to use
+
+| Draft type | `--max-load` | Emoji `--fail-under` | Notes |
+|------------|--------------|----------------------|-------|
+| Personal post, general audience | 6 (default) | 60 (default) | [RECOMMENDED] The setting the samples are calibrated on |
+| Company-page or executive post | 3 | 75 | [RECOMMENDED] More scrutiny, fewer second chances |
+| Short reshare caption under 40 words | 6 | 60 | Density rules have little to measure; read the result as a spot check |
+| Author with a fingerprint on file | 6 with `--voice` | 60 with `--usual N` | [PROVEN] Stops the gate punishing the author for sounding like themselves |
+
+## Anti-Patterns
+
+### Scrubbing by word list
+**Mistake:** The editor searches for twenty forbidden words, swaps each for a synonym, and calls the draft clean. &quot;Leverage our comprehensive platform&quot; becomes &quot;use our full platform&quot;.
+**Why it happens:** A word list is easy to share and easy to apply, and the vocabulary is the most visible layer of the problem.
+**Instead:** Treat stock vocabulary as a symptom of a paragraph with no claim. When RD-19 fires, find the fact the paragraph was avoiding (&quot;seven fields before you could print a label&quot;) and write that. `tell_audit.py` weights a vocabulary cluster three times a single word for this reason.
+
+### Curing flat rhythm with fragments
+**Mistake:** Every sentence is the same length, so the editor breaks them up. &quot;It worked. Really worked. Better than expected.&quot; The draft now trips RD-06 and RD-07.
+**Why it happens:** Advice to &quot;vary sentence length&quot; is correct and gets applied as &quot;add short sentences&quot;, because short is quicker to produce than long.
+**Instead:** Fix uniformity by joining, not cutting. Take two adjacent sentences that are causally related and connect them with a clause that carries the cause. Change one place per paragraph and stop.
+
+### Adding sincerity
+**Mistake:** The draft feels impersonal, so the edit inserts &quot;I&#x27;ll be honest&quot;, &quot;this one was hard to write&quot;, or a confession the author never made.
+**Why it happens:** Vulnerability is a real quality of good posts and the phrase is a cheap proxy for it.
+**Instead:** Delete announcements of candor (RD-08) and replace them with the uncomfortable fact itself, dated and unframed: &quot;We lost the account on 14 March.&quot; If no such fact exists, the post is not a vulnerable one, and that is fine. The agent never invents one.
+
+### Treating the review tier as a to-do list
+**Mistake:** Every dash, every passive verb and every list of three is removed because the audit mentioned them.
+**Why it happens:** A finding looks like an instruction, and &quot;zero findings&quot; looks like the goal.
+**Instead:** The review tier is displayed only on request and never affects the exit code. Read `keep it when` in `tell_rules.py --explain` before touching anything. A 300-word post with no dashes, no contractions and no triples has been visibly scrubbed.
+
+### Auditing against rules instead of against the author
+**Mistake:** An author who has written in clipped fragments for years is edited into flowing paragraphs because RD-06 fired.
+**Why it happens:** The catalogue is to hand and the author&#x27;s back catalogue is not.
+**Instead:** Build the fingerprint first (Workflow 3). It takes five past posts and one command, and it converts &quot;this is how they write&quot; from an argument into a file the audit reads.
+
+### Promising a score from an automated checker
+**Mistake:** The author asks whether the post will &quot;pass&quot; some classifier and the editor says yes.
+**Why it happens:** A number feels like a deliverable.
+**Instead:** Say plainly that this skill does not measure or target any classifier, that short texts give such tools little to work with, and that the standard here is whether a person who knows the author would believe they wrote it.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/tell_audit.py` | The gate. Applies the three-tier catalogue to a draft, reports each rule that fired with the matching text and fix, honours a voice file, exits 1 on any blocker or excess habit load |
+| `scripts/tell_rules.py` | Rule data and shared text splitters. `--list` prints the catalogue; `--explain RULE_ID` prints why a rule fires, the fix, and when to keep the text |
+| `scripts/emoji_audit.py` | Scores emoji placement from 0 to 100 across eight rules (bullet runs, headings, stock set, clusters, opening line); exits 1 below `--fail-under` |
+| `scripts/voice_fingerprint.py` | Builds a fingerprint from past posts (medians, recurring words, protected rules) and with `--compare` reports where a draft drifts; exits 1 beyond `--max-drift` |
+| `references/rule-catalogue.md` | Every rule with what it looks like, why readers notice, a before-and-after rewrite, and the legitimate reason to keep it |
+| `references/rewrite-playbook.md` | Order of operations for a rewrite, the paragraph-level method, a full worked example, and the over-edit checklist |
+| `references/emoji-patterns.md` | The eight placement rules, how the score is built, what a hand-placed emoji looks like, and how to tune the thresholds to an author |
+| `references/voice-fingerprint-guide.md` | What each measure means, how many posts are enough, how protection works, and how to settle a conflict between a rule and a habit |
+| `assets/sample_draft.txt` | A generated-sounding draft that trips all three tiers and five emoji rules |
+| `assets/sample_draft_edited.txt` | The same post rewritten with real detail; passes both gates |
+| `assets/sample_past_posts.txt` | Five posts by a fictional support lead, used to build the sample fingerprint |
+| `assets/sample_voice.json` | Fingerprint generated from the sample posts, ready to pass to `--voice` |
+| `assets/voice_profile_template.md` | Fill-in profile recording an author&#x27;s fingerprint, protected habits and off-limits phrases |
+| `assets/audit_report_template.md` | Fill-in report for handing audit results and proposed edits back to an author |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Humanizer&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Humanizer in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Humanizer&quot;**
+   - Description: &quot;Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author&#x27;s own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone&#x27;s voice.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-humanizer/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install tools/linkedin/linkedin-humanizer ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-humanizer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/linkedin-humanizer/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/linkedin-humanizer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/linkedin-humanizer/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/linkedin-humanizer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: tools/linkedin/linkedin-humanizer/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-humanizer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-humanizer your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/tools/linkedin/linkedin-humanizer</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python tools/linkedin/linkedin-humanizer/scripts/tool_name.py --help</code></pre>
+  
+  
+  <h2>Related Skills in Tools</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-comment-writer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Comment Writer</h3><p>Drafts comments on other people&#x27;s LinkedIn posts that add a specific the post lacked, then gates...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-planner.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Planner</h3><p>Builds a weekly or monthly LinkedIn publishing plan from content pillars, a posting cadence and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-repurposer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Repurposer</h3><p>Turns something made for another channel (a thread, a video or talk transcript, a blog post, a...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-employee-advocacy.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Employee Advocacy</h3><p>Designs and runs an employee advocacy programme: who posts what and how often, review rules, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-engagement-analytics.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Engagement Analytics</h3><p>Segments who reacted to and commented on a post from a CSV or JSON export, and says whether it...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-hook-analyzer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Hook Analyzer</h3><p>Extracts and classifies the opening-line pattern of LinkedIn posts the user pastes or saves, and...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-humanizer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

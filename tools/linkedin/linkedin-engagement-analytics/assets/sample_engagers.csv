@@ -1,0 +1,59 @@
+name,headline,company,engagement,comment
+Anneke Vossberg,VP Platform Engineering,Quillon Payments,comment,"We moved to a follow-the-sun rota last year and the paging volume halved. Curious how you handled handover notes."
+Anneke Vossberg,VP Platform Engineering,Quillon Payments,reaction,
+Dariusz Kowalczyk-Reyes,Director of Site Reliability Engineering,Ferrowmoor Bank,comment,"The point about alert ownership is the one most teams skip."
+Imogen Tarrant,Head of Infrastructure at Pellamy Health,,reaction,
+Thabo Nkemelu,Staff SRE,Quillon Payments,comment,"Would love to see the runbook template."
+Signe Aaltonen,Engineering Manager - Platform,Ostrava Freight Systems,reaction,
+Rafael Montcada,CTO,Tindra Robotics,comment,"We tried this at forty engineers and it fell over at eighty. What changed for you at scale?"
+Priyanka Deshmukh-Hale,Senior Software Engineer,Sablewick Retail,reaction,
+Oluwaseun Bright,DevOps Engineer,Corvane Logistics,reaction,
+Katarzyna Wren,Director of Engineering,Brackenfold Energy,reaction,
+Mateus Albrecht,Principal Engineer | Reliability and incident response,Ferrowmoor Bank,comment,"Blameless reviews only work if the action items get owners."
+Yuki Hartigan,Head of Platform,Sablewick Retail,reaction,
+Leopold Ansah,Co-founder at Vantor Studio,,reaction,
+Brigid O'Callan,Founder & CEO,Hollowmere Labs,comment,"Great post!"
+Tomasz Ellery,SRE Manager,Pellamy Health,comment,"Our on-call satisfaction score went up once we capped pages per shift. Do you cap?"
+Nadia Feroz,Infrastructure Engineer,Pellamy Health,reaction,
+Henrik Sjoberg,VP Engineering,Corvane Logistics,reaction,
+Chiamaka Ord,Software Developer,Ostrava Freight Systems,reaction,
+Wendell Pryce,Technical Recruiter,Larkhaven Talent,comment,"Hiring SREs? I have three great candidates."
+Marisol Etxeberria,Talent Partner at Larkhaven Talent,,reaction,
+Jonas Whitcombe,Account Executive,Pagerline Tools,comment,"We solve exactly this. Happy to show you a demo."
+Elif Sarikaya,Sales Development Representative,Pagerline Tools,reaction,
+Corin Mabuza,Marketing Manager,Kestrelby Cloud,reaction,
+Saoirse Lindqvist,Head of Content,Kestrelby Cloud,comment,"So proud of this team."
+Bao Trinh,Product Designer,Kestrelby Cloud,reaction,
+Ignatius Roe,Chief Revenue Officer,Kestrelby Cloud,reaction,
+Halima Outram,Customer Success Manager,Kestrelby Cloud,reaction,
+Viktor Dalgaard,Software Engineer,Kestrelby Cloud,reaction,
+Petra Zielinski,People Operations Lead,Kestrelby Cloud,reaction,
+Emeka Sandoval,Senior Platform Engineer,Brackenfold Energy,comment,"Saving this for our next retro."
+Aurelia Novak,Director of Cloud Operations,Quillon Payments,reaction,
+Fintan Abara,Engineering Manager,Tindra Robotics,reaction,
+Roswitha Kane,Data Engineer,Sablewick Retail,reaction,
+Mirela Costin,Product Manager,Ostrava Freight Systems,reaction,
+Desmond Iweala,Student at Brightwater University,,reaction,
+Tove Marchetti,Computer Science Undergraduate,,reaction,
+Callum Idowu,Freelance DevOps Consultant,,comment,"Solid breakdown. The escalation tiers match what I see with clients."
+Ingrid Balasubramanian,VP Infrastructure and Security,Ferrowmoor Bank,reaction,
+Octavio Rehn,Helping teams ship faster,,reaction,
+Lucinda Marsh,Dreamer. Builder. Dad.,,reaction,
+Samir Halloran,Head of Engineering at Hollowmere Labs,,comment,"How long did the migration take end to end?"
+Greta Onwudiwe,Site Reliability Engineer,Corvane Logistics,reaction,
+Pascal Thornbury,IT Manager,Brackenfold Energy,reaction,
+Zofia Renner,Chief Technology Officer,Sablewick Retail,reaction,
+Kofi Lanesborough,Engineering Director,Pellamy Health,comment,"We are about to split platform and product on-call. Any regrets doing that?"
+Mei-Lin Castellan,Senior Product Marketing Manager,Pagerline Tools,reaction,
+Anselm Vickery,Operations Analyst,Corvane Logistics,reaction,
+Ruth Adeyinka-Stone,Lead Platform Engineer,Quillon Payments,reaction,
+Bertil Maddox,Financial Controller,Ostrava Freight Systems,reaction,
+Noor Castellanos,QA Engineer,Tindra Robotics,reaction,
+Isolde Farrant,VP of Engineering at Wexmoor Systems,,comment,"Sharing with my leads. The cost-of-a-page framing is useful."
+Gideon Ashworth,Director of Platform Engineering,Wexmoor Systems,reaction,
+Tamsin Okoro,,Wexmoor Systems,reaction,
+Laszlo Brennan,Security Engineer,Ferrowmoor Bank,reaction,
+Chidi Vantress,Solutions Architect,Pagerline Tools,reaction,
+Maeve Ostrowski,Head of Developer Experience,Brackenfold Energy,reaction,
+Yusuf Carraway,Engineering Manager,Wexmoor Systems,reaction,
+Linnea Abayomi,Open to work,,reaction,

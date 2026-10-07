@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "owner": "Your name",
+  "updated": "2026-01-01",
+  "sessions": 0,
+  "pillars": ["first-pillar", "second-pillar", "third-pillar"],
+  "entries": [
+    {
+      "id": "S-001",
+      "kind": "figure",
+      "title": "Short label you will recognise in six months",
+      "detail": "What happened, in facts: who, what, how much, over what period. At least two sentences.",
+      "when": "2025-03",
+      "pillars": ["first-pillar"],
+      "figure": {
+        "value": "the number as you would say it",
+        "measures": "exactly what it counts",
+        "basis": "where the number comes from and how it was measured"
+      },
+      "words": "A phrase of yours worth keeping exactly as you said it.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-002",
+      "kind": "reversal",
+      "title": "Something you changed your mind about",
+      "detail": "What made you change it: the day, the person, the result you did not expect.",
+      "when": "2024",
+      "pillars": ["second-pillar"],
+      "before": "What you used to believe, in one sentence.",
+      "after": "What you believe now, in one sentence.",
+      "words": "",
+      "naming": "ask",
+      "status": "soft",
+      "used_in": []
+    },
+    {
+      "id": "S-003",
+      "kind": "stance",
+      "title": "An opinion you would defend",
+      "detail": "The claim and the experience it rests on.",
+      "when": "2025",
+      "pillars": ["third-pillar"],
+      "against": "Who disagrees, as a group you could name.",
+      "price": "What holding this view has cost you.",
+      "words": "",
+      "naming": "clear",
+      "status": "soft",
+      "used_in": []
+    }
+  ],
+  "naming": {
+    "free": [],
+    "ask_first": [],
+    "never": []
+  },
+  "no_go": [],
+  "voice_notes": {
+    "says": [],
+    "never_says": [],
+    "sample_lines": []
+  }
+}

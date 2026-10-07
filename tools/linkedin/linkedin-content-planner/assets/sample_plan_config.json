@@ -1,0 +1,79 @@
+{
+  "owner": "Ines Varga-Mbeki, Quillmoor Payroll Studio",
+  "start_date": "2026-10-12",
+  "weeks": 4,
+  "posting_weekdays": [
+    "tue",
+    "thu",
+    "fri"
+  ],
+  "conversation_weekdays": [
+    "mon",
+    "wed"
+  ],
+  "skip_dates": [
+    "2026-10-30"
+  ],
+  "pillars": [
+    {
+      "name": "craft",
+      "share": 35,
+      "ask": "keep",
+      "formats": [
+        "text",
+        "document"
+      ]
+    },
+    {
+      "name": "field-notes",
+      "share": 30,
+      "ask": "reply",
+      "formats": [
+        "text",
+        "video"
+      ]
+    },
+    {
+      "name": "peers",
+      "share": 20,
+      "ask": "pass-on",
+      "formats": [
+        "text"
+      ]
+    },
+    {
+      "name": "offer",
+      "share": 15,
+      "ask": "contact",
+      "promotional": true,
+      "formats": [
+        "text",
+        "document"
+      ]
+    }
+  ],
+  "formats": [
+    {
+      "name": "text",
+      "share": 50
+    },
+    {
+      "name": "document",
+      "share": 30,
+      "produced": true
+    },
+    {
+      "name": "video",
+      "share": 20,
+      "produced": true
+    }
+  ],
+  "limits": {
+    "max_posts_per_week": 5,
+    "max_pillar_share": 50,
+    "max_promotional_per_week": 1,
+    "max_produced_per_week": 1,
+    "max_ask_share": 60,
+    "share_tolerance": 15
+  }
+}

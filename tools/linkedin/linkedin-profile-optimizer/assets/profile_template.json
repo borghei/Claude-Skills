@@ -1,0 +1,51 @@
+{
+  "_how_to_fill": "Paste your own profile text into the string fields. Answer the photo and banner questions honestly by looking at the profile on a phone; the auditor cannot see images. Delete this line when done.",
+  "name": "",
+  "goal": "clients | job_search | authority | hiring  (keep one)",
+  "as_of_year": 2026,
+  "target_keywords": ["the term a searcher would type", "a second term"],
+  "audience_terms": ["how your audience names itself", "sector or company stage"],
+  "custom_url": "linkedin.com/in/",
+  "headline": "",
+  "about": "",
+  "experience": [
+    {
+      "title": "",
+      "company": "",
+      "start": "YYYY",
+      "end": "present",
+      "description": "",
+      "bullets": [""],
+      "skills": [""],
+      "media": 0
+    }
+  ],
+  "skills": {
+    "pinned": ["", "", ""],
+    "all": [""]
+  },
+  "featured": [
+    {
+      "type": "case_study | testimonial | results_post | booking_link | contact_page | lead_magnet | newsletter | portfolio | project | work_sample | post | article | talk | research | book | podcast | team_story | culture_post | engineering_blog | careers_page | open_role",
+      "title": "",
+      "age_months": 0
+    }
+  ],
+  "recommendations": [
+    {"relationship": "manager | client | peer | report | partner", "year": 2026, "specific": true}
+  ],
+  "photo": {
+    "present": true,
+    "solo": true,
+    "face_clear": true,
+    "plain_background": true,
+    "age_years": 0
+  },
+  "banner": {
+    "present": true,
+    "custom": true,
+    "states_value": true,
+    "text_clear_of_photo": true,
+    "checked_on_mobile": true
+  }
+}

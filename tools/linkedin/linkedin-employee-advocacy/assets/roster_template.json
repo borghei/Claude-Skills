@@ -1,0 +1,40 @@
+{
+  "_how_to_fill": "One entry per person who has been asked. Set opted_in to true only after they have said yes. Answer every governance key truthfully; an unanswered key is reported as a gap. Delete this line when done.",
+  "programme": {
+    "name": "",
+    "goal": "pipeline | hiring | reputation | category  (keep one)",
+    "week": 1,
+    "reviewer_hours_per_week": 1,
+    "review_share_estimate": 0.25,
+    "governance": {
+      "owner": "",
+      "voluntary": true,
+      "performance_linked": false,
+      "company_holds_credentials": false,
+      "disclosure_guidance": false,
+      "identical_copy_allowed": false,
+      "scripted_engagement": false,
+      "restricted_topics_list": false,
+      "review_triggers_defined": false,
+      "review_turnaround_hours": 8,
+      "opt_out_path": false,
+      "incident_pause_rule": false,
+      "offboarding_rule": false,
+      "ai_drafting_rule": false
+    }
+  },
+  "members": [
+    {
+      "name": "",
+      "role_family": "founder | executive | marketing | sales | customer_success | people | product | engineering | design | other",
+      "seniority": "junior | mid | senior | lead",
+      "experience": "new | occasional | regular",
+      "hours_per_week": 1,
+      "opted_in": false,
+      "weeks_in_programme": 0,
+      "restricted_role": false,
+      "pre_publication_check": false,
+      "topics": ["", ""]
+    }
+  ]
+}

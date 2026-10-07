@@ -1,0 +1,73 @@
+{
+  "_note": "Invented person and companies. A typical 'copied from the CV' profile, before any rewrite.",
+  "name": "Ines Varga",
+  "goal": "clients",
+  "as_of_year": 2026,
+  "target_keywords": ["revenue operations", "RevOps", "forecasting", "CRM migration"],
+  "audience_terms": ["B2B software", "Series A", "Series B", "sales leaders", "founders"],
+  "custom_url": "linkedin.com/in/ines-varga-7b41a9c20",
+  "headline": "Head of Revenue Operations at Tallowmere Systems",
+  "about": "Ines is a passionate and results-driven operations leader with a proven track record across sales, marketing and customer success. She has worked with teams of all sizes and thrives in fast-moving environments where she can bring structure to complexity. Ines is a strategic thinker who enjoys building relationships and helping organisations reach their potential. Outside of work she enjoys trail running and is learning Portuguese.",
+  "experience": [
+    {
+      "title": "Head of Revenue Operations",
+      "company": "Tallowmere Systems",
+      "start": "2022",
+      "end": "present",
+      "description": "",
+      "bullets": [
+        "Responsible for the sales and marketing technology stack",
+        "Worked on forecasting process with the sales leadership team",
+        "Helped with the migration to a new CRM",
+        "Handled reporting for the board"
+      ],
+      "skills": [],
+      "media": 0
+    },
+    {
+      "title": "Sales Operations Manager",
+      "company": "Brightquay Logistics",
+      "start": "2018",
+      "end": "2022",
+      "description": "",
+      "bullets": [
+        "Responsible for territory planning and quota setting",
+        "Assisted with rollout of a new commission plan for 40 sellers"
+      ],
+      "skills": [],
+      "media": 0
+    },
+    {
+      "title": "Business Analyst",
+      "company": "Fennholt Software",
+      "start": "2015",
+      "end": "2018",
+      "description": "",
+      "bullets": [],
+      "skills": [],
+      "media": 0
+    }
+  ],
+  "skills": {
+    "pinned": [],
+    "all": ["Leadership", "Microsoft Excel", "Teamwork", "Salesforce"]
+  },
+  "featured": [],
+  "recommendations": [
+    {"relationship": "manager", "year": 2017, "specific": false}
+  ],
+  "photo": {
+    "present": true,
+    "solo": false,
+    "face_clear": true,
+    "plain_background": false,
+    "age_years": 6
+  },
+  "banner": {
+    "present": false,
+    "custom": false,
+    "states_value": false,
+    "text_clear_of_photo": false,
+    "checked_on_mobile": false
+  }
+}

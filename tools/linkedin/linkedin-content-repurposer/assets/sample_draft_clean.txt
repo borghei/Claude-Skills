@@ -1,0 +1,19 @@
+We nearly bought a system to predict bus breakdowns. Then I read 31 breakdown reports by hand.
+
+19 of them described a fault a driver had already written down.
+
+I plan maintenance for 86 buses at Fenwater Transit. In the first half of 2024 we had those 31 roadside breakdowns, and the proposed answer was a predictive maintenance platform.
+
+The reports took me two evenings. What they showed was not a prediction problem. Drivers were filling in defect cards at the end of each shift. The cards were collected at 6am and typed up at 2pm. By then the buses were back on the road.
+
+The fault was known. It was known to a tray.
+
+So we changed one thing. The night fitter now reads the cards at 10pm, before the morning run-out.
+
+In the second half of 2024 we had 12 roadside breakdowns. Same fleet, same routes, same budget.
+
+For years I believed we were short of data. We were not. We had it sixteen hours late.
+
+If your team is about to buy something that predicts failures, try this first: pick one defect that someone has already reported, and time how long it takes to reach a person who can fix it.
+
+How long is that gap where you work?

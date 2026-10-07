@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — **339 production-ready skill packages across 17 professional domains** with **787 Python automation tools**, 76 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex / ChatGPT, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — **339 production-ready skill packages across 17 professional domains** with **787 Python automation tools**, 77 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex / ChatGPT, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -26,7 +26,7 @@ This is the **universal AI skills library** — **339 production-ready skill pac
 ## Repository Structure (domain → skill count)
 
 ```
-├── engineering/            # 82 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
+├── engineering/            # 92 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
 ├── project-management/     # 70 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
 ├── marketing/              # 41 skills — content, SEO/AEO, demand gen, brand, analytics
 ├── c-level-advisor/        # 31 skills — CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE
@@ -43,7 +43,7 @@ This is the **universal AI skills library** — **339 production-ready skill pac
 ├── research/               # 4 skills  — litreview, grants, patent, dossier
 ├── finance/                # 3 skills  — financial analysis, DCF, forecasting
 ├── workflow/               # 2 skills  — skill-router, handoff (meta-skills)
-├── agents/                 # 68 cs-* domain agents + 8 cross-domain personas
+├── agents/                 # 69 cs-* domain agents + 8 cross-domain personas
 ├── scripts/                # Manifest builder (build_manifest.py) + skill installer
 ├── standards/              # Best-practices library
 ├── templates/              # Reusable templates + sample workflows

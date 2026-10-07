@@ -1,0 +1,22 @@
+{
+  "_how_to_fill": "Describe who the post was written for BEFORE looking at who engaged. Run 'segment_rules.py --list-rules' for the valid seniority and function names. Leave goal_core_share and baseline.core_share as null until you have your own history; replace them with your own figures as fractions (0.25 means 25%), never with a borrowed benchmark. Delete this line when done.",
+  "post": {
+    "title": "",
+    "intent": "one sentence: who this was for and what you hoped they would do"
+  },
+  "target": {
+    "seniority": ["founder_owner", "executive", "vp", "director", "manager_lead", "individual_contributor", "early_career"],
+    "functions": ["engineering"],
+    "title_keywords": [],
+    "companies": []
+  },
+  "own_companies": [""],
+  "goal_core_share": null,
+  "baseline": {
+    "core_share": null,
+    "posts": 0,
+    "classified_engagers": 0,
+    "window": ""
+  },
+  "min_sample": 30
+}

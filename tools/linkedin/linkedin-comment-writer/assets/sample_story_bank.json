@@ -1,0 +1,57 @@
+{
+  "_about": "Invented sample of an optional story bank, in the format produced by linkedin-story-interviewer. This skill only reads it; it works without one. All people and companies are fictional.",
+  "schema_version": 1,
+  "owner": "Tomas Okafor-Reyes",
+  "updated": "2026-10-01",
+  "sessions": 2,
+  "pillars": ["billing-operations", "founder-notes"],
+  "entries": [
+    {
+      "id": "S-001",
+      "kind": "figure",
+      "title": "Kickoff call dropped for small accounts",
+      "detail": "Removed the kickoff call for accounts under 50 seats in 2025. No complaints; larger accounts kept a 20-minute version because procurement wanted a named contact.",
+      "when": "2025",
+      "pillars": ["billing-operations"],
+      "status": "ready",
+      "naming": "clear",
+      "used_in": [],
+      "figure": {"value": "50 seats", "measures": "threshold below which the kickoff call was removed", "basis": "own onboarding records"}
+    },
+    {
+      "id": "S-002",
+      "kind": "reversal",
+      "title": "Weekly status email stopped",
+      "detail": "Sent a weekly status email to every client for four years. Stopped in January 2026; three of roughly sixty clients noticed.",
+      "when": "2026-01",
+      "pillars": ["founder-notes"],
+      "status": "ready",
+      "naming": "clear",
+      "used_in": [],
+      "before": "Weekly status email to all clients",
+      "after": "Status on request only"
+    },
+    {
+      "id": "S-003",
+      "kind": "anecdote",
+      "title": "Clinic group that churned over invoicing",
+      "detail": "A multi-site clinic group left after a credit-note error. Details not yet confirmed with the account lead.",
+      "when": "2025-09",
+      "pillars": ["billing-operations"],
+      "status": "soft",
+      "naming": "anonymise",
+      "used_in": []
+    }
+  ],
+  "naming": {
+    "free": ["Kestrel Ledger"],
+    "ask_first": ["Harbourline"],
+    "never": ["Ashgrove Clinics"]
+  },
+  "no_go": ["the 2025 layoffs", "fundraising"],
+  "voice_notes": {
+    "says": ["nobody blinked", "in practice"],
+    "never_says": ["game changer", "thrilled"],
+    "sample_lines": ["The ritual that survives longest is the one that reassures the vendor."]
+  }
+}

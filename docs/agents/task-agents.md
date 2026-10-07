@@ -15,6 +15,7 @@ title: Task Agents
 | **cs-code-auditor** | Deep code quality and security audits | code-reviewer, senior-security, tech-debt-tracker |
 | **cs-architecture-reviewer** | System design review and ADR generation | senior-architect, database-designer, migration-architect |
 | **cs-security-engineer** | Application security assessment and remediation | senior-security, senior-secops, dependency-auditor |
+| **cs-security-auditor** | Multi-phase source security audit with verified findings | security-audit |
 | **cs-doc-writer** | Technical documentation generation | codebase-onboarding, doc-drift-detector, changelog-generator |
 
 ## C-Level Agents

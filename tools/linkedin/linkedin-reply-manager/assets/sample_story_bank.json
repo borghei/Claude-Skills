@@ -1,0 +1,55 @@
+{
+  "_about": "Invented sample of an optional story bank, in the format produced by linkedin-story-interviewer. This skill only reads it; it works without one. All people and companies are fictional.",
+  "schema_version": 1,
+  "owner": "Nadia Ferreira-Blom",
+  "updated": "2026-10-02",
+  "sessions": 1,
+  "pillars": ["delivery-operations"],
+  "entries": [
+    {
+      "id": "S-001",
+      "kind": "figure",
+      "title": "Ranges back-tested before launch",
+      "detail": "The delivery range was back-tested against two quarters of deliveries. Eight in ten shipments landed inside it network-wide; the two mountain lanes ran at about six in ten.",
+      "when": "2026-03",
+      "pillars": ["delivery-operations"],
+      "status": "ready",
+      "naming": "clear",
+      "used_in": ["post of 5 Oct 2026"],
+      "figure": {"value": "8 in 10", "measures": "shipments arriving inside the quoted range", "basis": "two quarters of delivery scans"}
+    },
+    {
+      "id": "S-002",
+      "kind": "build",
+      "title": "Range model started as a spreadsheet",
+      "detail": "The first version was a spreadsheet fed by two years of delivery scans; planners later rebuilt it inside the scheduling tool.",
+      "when": "2025",
+      "pillars": ["delivery-operations"],
+      "status": "ready",
+      "naming": "clear",
+      "used_in": []
+    },
+    {
+      "id": "S-003",
+      "kind": "cost",
+      "title": "Dispatcher retraining",
+      "detail": "Retraining dispatchers to read out the range took longer than planned. Hours not yet confirmed.",
+      "when": "2026",
+      "pillars": ["delivery-operations"],
+      "status": "soft",
+      "naming": "clear",
+      "used_in": []
+    }
+  ],
+  "naming": {
+    "free": ["Tidewater Freight Systems"],
+    "ask_first": [],
+    "never": ["Corvane Retail"]
+  },
+  "no_go": ["carrier contract dispute"],
+  "voice_notes": {
+    "says": ["literally", "by count"],
+    "never_says": ["circle back", "super excited"],
+    "sample_lines": ["The range is not a hedge."]
+  }
+}

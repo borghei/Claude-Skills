@@ -5,6 +5,18 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.0] - 2026-10-07
+
+### Added
+
+- **New `tools/` domain with a 12-skill LinkedIn suite** under `tools/linkedin/`, installable as the `tools-skills` plugin. The skills cover the whole loop: `linkedin-story-interviewer` (find what you have to say and keep it in a local story bank), `linkedin-content-planner`, `linkedin-post-writer`, `linkedin-hook-analyzer`, `linkedin-humanizer`, `linkedin-content-repurposer`, `linkedin-comment-writer`, `linkedin-reply-manager`, `linkedin-thread-tracker`, `linkedin-profile-optimizer`, `linkedin-employee-advocacy` and `linkedin-engagement-analytics`. 27 stdlib Python tools. The suite is offline by design: nothing posts, schedules or scrapes; you paste drafts yourself and analysis runs on text or exports you provide. Several tools are gates that exit 1 on their deliberately flawed sample input.
+- **`security-audit` engineering skill**: a six-phase source security audit run by a lead agent with isolated sub-agents — reconnaissance, hunting driven by a coverage ledger, refutation of every candidate by a different agent, schema-checked `findings.json`, a second fresh read of each record, then reports. Findings end as confirmed, needs validation, or rejected. Six stdlib tools, including validators for the ledger and findings and a safe evidence-promotion tool; 14 references covering 9 core attack classes and 10 domain companions.
+- **`cs-security-auditor` agent** leads the audit and asks for a breadth tier before every full run: `core`, `focused` (core plus web/auth, AI/LLM, supply chain, cloud) or `full` (all 10 companions). Run it as the session's main agent; it needs to launch sub-agents.
+
+### Changed
+
+- Counts across the README, docs and site: 385 skills, 21 domains, 900 Python tools, 77 agents. Engineering skill counts that still said 82 now say 92.
+
 ## [4.12.3] - 2026-09-27
 
 ### Fixed

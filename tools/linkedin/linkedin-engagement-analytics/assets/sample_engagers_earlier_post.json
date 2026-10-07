@@ -1,0 +1,21 @@
+{
+  "_note": "Invented people and companies. A smaller export from an earlier post by the same author, in JSON form, used to show pooling for a baseline.",
+  "engagers": [
+    {"name": "Anneke Vossberg", "headline": "VP Platform Engineering", "company": "Quillon Payments", "engagement": "reaction"},
+    {"name": "Tomasz Ellery", "headline": "SRE Manager", "company": "Pellamy Health", "engagement": "comment", "comment": "Second this. We learned it the hard way."},
+    {"name": "Corin Mabuza", "headline": "Marketing Manager", "company": "Kestrelby Cloud", "engagement": "reaction"},
+    {"name": "Saoirse Lindqvist", "headline": "Head of Content", "company": "Kestrelby Cloud", "engagement": "reaction"},
+    {"name": "Viktor Dalgaard", "headline": "Software Engineer", "company": "Kestrelby Cloud", "engagement": "comment", "comment": "Nice one."},
+    {"name": "Halima Outram", "headline": "Customer Success Manager", "company": "Kestrelby Cloud", "engagement": "reaction"},
+    {"name": "Wendell Pryce", "headline": "Technical Recruiter", "company": "Larkhaven Talent", "engagement": "reaction"},
+    {"name": "Jonas Whitcombe", "headline": "Account Executive", "company": "Pagerline Tools", "engagement": "comment", "comment": "Let's connect."},
+    {"name": "Ottilie Fenwick", "headline": "Junior Developer", "company": "Sablewick Retail", "engagement": "reaction"},
+    {"name": "Desmond Iweala", "headline": "Student at Brightwater University", "engagement": "reaction"},
+    {"name": "Radek Summerscale", "headline": "Business Development Manager", "company": "Corvane Logistics", "engagement": "reaction"},
+    {"name": "Henrik Sjoberg", "headline": "VP Engineering", "company": "Corvane Logistics", "engagement": "reaction"},
+    {"name": "Philippa Nwosu", "headline": "Senior Software Engineer", "company": "Tindra Robotics", "engagement": "reaction"},
+    {"name": "Arvid Castellane", "headline": "Marketing Coordinator", "company": "Ostrava Freight Systems", "engagement": "reaction"},
+    {"name": "Emeka Sandoval", "headline": "Senior Platform Engineer", "company": "Brackenfold Energy", "engagement": "reaction"},
+    {"name": "Mirela Costin", "headline": "Product Manager", "company": "Ostrava Freight Systems", "engagement": "reaction"}
+  ]
+}

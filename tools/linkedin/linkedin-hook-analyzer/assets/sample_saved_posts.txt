@@ -1,0 +1,89 @@
+# Halima Sørby, warehouse ops lead - saved 2 Sep
+£18,200 and 41 days: that's what it cost us to move a database nobody had asked us to move.
+
+The old one worked. It was slow on Mondays and the vendor had announced end of support for 2029.
+
+We moved it in March because it felt responsible. The Monday slowness turned out to be a report someone scheduled in 2021.
+
+If I'd spent one afternoon reading the query log first, I'd have saved the 41 days.
+
+What's the most expensive fix you've shipped for a problem you hadn't diagnosed?
+---
+# Teodor Azikiwe, recruiter - saved 4 Sep
+Last March I rejected a candidate in the first ten minutes because she didn't have a degree.
+
+She joined a competitor. I know this because eight months later she led the team that won an account from us.
+
+The degree line had been in our job template since before I joined. I'd never asked what it was for.
+
+It's gone now. So are two other lines nobody could explain.
+---
+# Wren Calloway, design manager - saved 9 Sep
+For years I told junior designers to show three options in every review.
+
+Then I sat in on 22 reviews in one quarter and counted. In 19 of them the team picked the option the designer had clearly liked best, and the other two had cost about a day each.
+
+Now I ask for one option and the reason the second-best idea lost.
+
+Reviews are shorter. The reasons are better than the extra mock-ups ever were.
+---
+# Okonkwo Tate, finance director - saved 11 Sep
+Our month-end close went from 11 working days to 4 between January and June.
+
+No new software. Three changes, in order of effect:
+
+1. We stopped waiting for one supplier statement that always arrived late and accrued an estimate instead.
+2. Expense claims close on the 25th, not the 31st.
+3. I stopped reviewing journals under £500.
+
+The third one was the hardest to agree to and has caused one error in six months. It was £212.
+---
+# Marisol Brandt, customer success - saved 12 Sep
+"I don't need a success manager, I need the export button to work."
+
+A customer wrote that to me in April, and it's been stuck to my monitor since.
+
+We'd been measuring ourselves on meetings held. She was measuring us on whether the product did the thing.
+
+I now start every quarterly review by asking what's still broken. The meetings are less comfortable and renewals in my book are up.
+---
+# Ilya Fenwick, engineering manager - saved 15 Sep
+I reviewed 140 incident reports from the last two years and 61 of them had the same root cause field: "human error."
+
+That isn't a cause. It's where the investigation stopped.
+
+When we reopened ten of them, eight came back to a deploy step that needed two people awake at once.
+
+We automated that step in a week.
+---
+# saved 16 Sep, author unknown
+Ever feel like your meetings could have been an email?
+
+You're not alone.
+
+Here are some tips to make meetings better.
+
+What do you think? Tag someone who needs this!
+
+#meetings #productivity #leadership #worklife #tips
+---
+# Anneke Duval, founder - saved 18 Sep
+I'm thrilled to announce that we've closed our seed round!
+
+It's been an incredible journey and I'm so grateful to everyone who believed in us.
+
+More soon.
+---
+# Jomo Rask, head of sales - saved 20 Sep
+Our rule: no discount is approved on a call.
+
+It dates from one Thursday in 2023 when I gave away 30% to close a deal that would have closed anyway. I found that out later from the buyer, over lunch, and she was kind about it.
+
+Any discount now gets written up and approved the next morning. We lose a little speed. Average discount has dropped from 18% to 11%.
+---
+# Priya Lindqvist, product lead - saved 22 Sep
+The quarter went sideways and nobody on the team could say exactly when.
+
+We had dashboards. We had standups. What we didn't have was anyone whose job it was to say "this is late" out loud.
+
+So we gave that job to one person per project. It rotates monthly.

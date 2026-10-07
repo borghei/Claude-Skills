@@ -1,6 +1,6 @@
 # Installation Guide - AI Skills Library
 
-Complete installation guide for all 372 production-ready skills across 20 domains, 867 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 8 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
+Complete installation guide for all 385 production-ready skills across 21 domains, 900 Python tools, 77 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 8 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
 
 ## Table of Contents
 
@@ -122,7 +122,7 @@ Install **one skill per domain group** into your project with built-in auto-upda
 ### List Available Skills
 
 ```bash
-# List all 372 skills across 20 domains
+# List all 385 skills across 21 domains
 python scripts/skill-installer.py list
 
 # List skills in a specific group
@@ -226,6 +226,7 @@ This adds the skills library to your available marketplaces.
 /plugin install research-skills@claude-code-skills             # 4 research skills
 /plugin install research-ops-skills@claude-code-skills         # 4 research ops skills
 /plugin install markdown-html-skills@claude-code-skills        # 4 markdown→HTML skills
+/plugin install tools-skills@claude-code-skills                # 12 LinkedIn suite skills
 /plugin install finance-skills@claude-code-skills              # 3 finance skills
 /plugin install workflow-skills@claude-code-skills             # 2 workflow meta-skills
 ```
@@ -962,6 +963,6 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 
 ---
 
-**Last Updated:** September 2026
-**Skills Version:** 4.12.3 (372 production skills, 867 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 8 CI/CD workflows)
+**Last Updated:** October 2026
+**Skills Version:** 4.13.0 (385 production skills, 900 Python tools, 77 agents, 26 slash commands, 21 compound sub-skills, 8 CI/CD workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

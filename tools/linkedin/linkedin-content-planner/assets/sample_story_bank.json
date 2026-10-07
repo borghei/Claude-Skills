@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "owner": "Ines Varga-Mbeki",
+  "updated": "2026-10-01",
+  "sessions": 1,
+  "pillars": [
+    "craft",
+    "field-notes",
+    "peers",
+    "offer"
+  ],
+  "entries": [
+    {
+      "id": "S-001",
+      "kind": "figure",
+      "title": "Payroll corrections after the cut-off change",
+      "detail": "Moved the timesheet cut-off at a 48-person joinery from Friday noon to Thursday 4pm in February 2025. Correction runs fell from 9 in the prior six months to 2 in the next six.",
+      "when": "2025-02",
+      "pillars": [
+        "craft"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [],
+      "figure": {
+        "value": "9 correction runs down to 2",
+        "measures": "off-cycle payroll correction runs per six months at one client",
+        "basis": "own run log, same headcount both periods"
+      },
+      "words": "The software was fine. The deadline was in the wrong place."
+    },
+    {
+      "id": "S-002",
+      "kind": "build",
+      "title": "The one-page overtime sheet",
+      "detail": "Wrote a single-page overtime rules sheet for a metal fabricator in 2024 that replaced a 14-page policy. Supervisors pin it by the clock.",
+      "when": "2024-06",
+      "pillars": [
+        "craft"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [],
+      "words": "If it does not fit on the wall it does not get read."
+    },
+    {
+      "id": "S-003",
+      "kind": "reversal",
+      "title": "Stopped recommending weekly pay runs",
+      "detail": "Recommended weekly pay to every shop-floor client until 2023. Three clients moved to fortnightly and reported fewer advance requests, not more.",
+      "when": "2023-09",
+      "pillars": [
+        "craft",
+        "field-notes"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [
+        "2026-09-22 post on pay frequency"
+      ],
+      "before": "Weekly pay is kinder to hourly staff.",
+      "after": "Predictable pay is kinder than frequent pay."
+    },
+    {
+      "id": "S-004",
+      "kind": "cost",
+      "title": "The holiday accrual I got wrong",
+      "detail": "Misread a carry-over clause for a 30-person bakery in 2022. Reissued 30 statements and refunded my fee for the quarter.",
+      "when": "2022-11",
+      "pillars": [
+        "field-notes"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [],
+      "price": "One quarter's fee and an uncomfortable all-hands at 5am.",
+      "words": "I apologised between the ovens."
+    },
+    {
+      "id": "S-005",
+      "kind": "anecdote",
+      "title": "The supervisor with the shoebox",
+      "detail": "A night supervisor kept every amended timesheet for 6 years in a shoebox because he did not trust the system. In 2021 the shoebox settled a dispute the system could not.",
+      "when": "2021",
+      "pillars": [
+        "field-notes",
+        "peers"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [],
+      "words": "He was the audit trail."
+    },
+    {
+      "id": "S-006",
+      "kind": "stance",
+      "title": "Payroll belongs in operations, not finance",
+      "detail": "Have argued since 2020 that payroll questions should be answered on the shop floor the same day. Lost one retainer over it.",
+      "when": "2020",
+      "pillars": [
+        "peers"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": [],
+      "against": "Finance directors who want one reporting line.",
+      "price": "One retainer, and a reputation for being stubborn about org charts."
+    },
+    {
+      "id": "S-007",
+      "kind": "role",
+      "title": "Eleven years in-house before going independent",
+      "detail": "Ran payroll in-house for a 400-person furniture maker from 2009 to 2020 before starting the studio.",
+      "when": "2009",
+      "pillars": [
+        "field-notes"
+      ],
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-008",
+      "kind": "build",
+      "title": "Quarterly payroll health check",
+      "detail": "A fixed-scope review for manufacturers under 100 staff, first run in 2023, 17 completed so far.",
+      "when": "2023",
+      "pillars": [
+        "offer"
+      ],
+      "naming": "clear",
+      "status": "soft",
+      "used_in": []
+    }
+  ],
+  "naming": {
+    "free": [
+      "Quillmoor Payroll Studio"
+    ],
+    "ask_first": [],
+    "never": []
+  },
+  "no_go": [
+    "client names"
+  ],
+  "voice_notes": {
+    "says": [
+      "on the shop floor",
+      "by the clock"
+    ],
+    "never_says": [
+      "human capital"
+    ],
+    "sample_lines": [
+      "The software was fine. The deadline was in the wrong place."
+    ]
+  }
+}

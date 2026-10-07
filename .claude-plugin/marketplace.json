@@ -4,18 +4,18 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant — 372 expert skills across 20 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 385 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "372 production-ready AI skill packages across 20 domains, installable per-domain as Claude Code plugins",
+    "description": "385 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
     {
       "name": "engineering-advanced-skills",
       "source": "./engineering",
-      "description": "82 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
+      "description": "92 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -375,6 +375,24 @@
         "publishing"
       ],
       "category": "documentation"
+    },
+    {
+      "name": "tools-skills",
+      "source": "./tools",
+      "description": "12 platform toolkit skills: the LinkedIn suite — post writing, humanizing, hooks, comments, replies, thread tracking, planning, repurposing, story interviews, profile, employee advocacy, and engagement analytics",
+      "version": "1.0.0",
+      "author": {
+        "name": "borghei"
+      },
+      "keywords": [
+        "linkedin",
+        "social",
+        "content",
+        "personal-brand",
+        "employee-advocacy",
+        "analytics"
+      ],
+      "category": "marketing"
     }
   ]
 }

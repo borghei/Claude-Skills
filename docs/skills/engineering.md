@@ -4,7 +4,7 @@ title: Engineering Skills
 
 # Engineering Skills
 
-**82 skills** with **248+ Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
+**92 skills** with **254+ Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
 
 ## AI & Agent Systems
 
@@ -78,6 +78,7 @@ title: Engineering Skills
 | [skill-security-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/skill-security-auditor/SKILL.md) | Security audit for AI agent skills -- prompt injection, dangerous code patterns | 3 |
 | [threat-detection](https://github.com/borghei/Claude-Skills/blob/main/engineering/threat-detection/SKILL.md) | Log analysis for brute force, injection attempts, privilege escalation | 1 |
 | [red-team](https://github.com/borghei/Claude-Skills/blob/main/engineering/red-team/SKILL.md) | Security engagement planning, rules of engagement, attack phase planning | 1 |
+| [security-audit](https://github.com/borghei/Claude-Skills/blob/main/engineering/security-audit/SKILL.md) | Multi-agent source security audit -- coverage ledger, independent verification, machine-validated findings, three breadth tiers | 6 |
 | [dependency-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/dependency-auditor/SKILL.md) | Dependency vulnerabilities, license compliance, upgrade planning | 3 |
 
 ## Quality & Testing
