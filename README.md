@@ -7,7 +7,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Skills-385-brightgreen.svg" alt="385 Skills">
-  <img src="https://img.shields.io/badge/Domains-20-blue.svg" alt="20 Domains">
+  <img src="https://img.shields.io/badge/Domains-21-blue.svg" alt="21 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-77-purple.svg" alt="77 Expert Agents">
   <img src="https://img.shields.io/badge/AI_Assistants-11-orange.svg" alt="11 AI Assistants">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">

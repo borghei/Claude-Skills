@@ -8,6 +8,10 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.1** (October 2026)
+
+- README badge corrected to 21 domains, matching the domain list and every other count
+
 **v4.13.0** (October 2026)
 
 - New `tools/` domain with the 12-skill LinkedIn suite: story interviews, planning, post writing, hook analysis, humanizing, repurposing, comments, replies, thread tracking, profile, employee advocacy and engagement analytics. Offline tools; nothing is posted for you
