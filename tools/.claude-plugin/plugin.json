@@ -1,0 +1,13 @@
+{
+  "name": "tools-skills",
+  "description": "12 platform toolkit skills: the LinkedIn suite — post writing, humanizing, hooks, comments, replies, thread tracking, planning, repurposing, story interviews, profile, employee advocacy, and engagement analytics",
+  "version": "1.0.0",
+  "author": {
+    "name": "borghei",
+    "url": "https://borghei.me"
+  },
+  "homepage": "https://github.com/borghei/Claude-Skills/tree/main/tools",
+  "repository": "https://github.com/borghei/Claude-Skills",
+  "license": "MIT",
+  "skills": "./"
+}

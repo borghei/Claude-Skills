@@ -1,0 +1,11 @@
+Our median time from signup to first shipped label was 9 days in January. It is 2 days now, and the change that did most of the work was deleting things.
+
+I run onboarding at Tidewell. In February Maren Okafor on our support team pulled 60 onboarding calls and tagged the minute each customer first went quiet. In 41 of them it was the same screen: the carrier-rates table, which asked for seven fields before you could print anything.
+
+We'd built that table because enterprise buyers asked for it during sales calls. New accounts with three staff and one warehouse didn't need it, and they couldn't skip it.
+
+So we made it optional and pre-filled the two fields we could guess from the postcode. That took Isak four days. Nothing else we shipped this quarter moved the number by more than half a day, including the guided tour I'd argued for since last autumn (I was wrong about the tour).
+
+What we haven't solved: accounts that connect a second warehouse still stall at about the same rate as before, and I don't know why yet.
+
+If you've cut an onboarding step and seen activation get worse, I'd like to hear which step it was.

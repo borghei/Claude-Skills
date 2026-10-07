@@ -1,0 +1,23 @@
+On 9 June we cancelled our weekly all-hands with two days' notice and nothing to replace it.
+
+The second half of that sentence was the mistake.
+
+I'd defended that meeting for three years. Sixty-two people, every Monday, 62 person-hours a week. In a typical week about three questions were asked out loud, nearly always by the same four people.
+
+The first fortnight without it was worse. Two teams shipped conflicting changes to the pricing page, and a client noticed before we did.
+
+What we should have started with, and now run:
+
+1. Each team lead posts a written update by 10:00 on Monday.
+2. Questions go into one thread and get answered by Wednesday.
+3. On the first Monday of the month there's a 20-minute call. Questions only, no slides.
+
+Within a month, questions asked in the open went from about 3 a week to 19.
+
+Ines in finance wrote: "I have never once asked a question in that meeting and I have asked four this week."
+
+I'd assumed the meeting was where alignment happened. It was where four people talked.
+
+If you've replaced a standing meeting with writing, what broke in the first two weeks?
+
+#operations #meetings

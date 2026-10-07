@@ -1,0 +1,54 @@
+{
+  "owner": "Your name",
+  "start_date": "2026-01-05",
+  "weeks": 4,
+  "posting_weekdays": [
+    "tue",
+    "thu"
+  ],
+  "conversation_weekdays": [
+    "mon",
+    "wed"
+  ],
+  "skip_dates": [],
+  "pillars": [
+    {
+      "name": "first-pillar",
+      "share": 40,
+      "ask": "keep",
+      "formats": [
+        "text"
+      ]
+    },
+    {
+      "name": "second-pillar",
+      "share": 35,
+      "ask": "reply",
+      "formats": [
+        "text"
+      ]
+    },
+    {
+      "name": "third-pillar",
+      "share": 25,
+      "ask": "pass-on",
+      "formats": [
+        "text"
+      ]
+    }
+  ],
+  "formats": [
+    {
+      "name": "text",
+      "share": 100
+    }
+  ],
+  "limits": {
+    "max_posts_per_week": 5,
+    "max_pillar_share": 50,
+    "max_promotional_per_week": 1,
+    "max_produced_per_week": 1,
+    "max_ask_share": 60,
+    "share_tolerance": 15
+  }
+}

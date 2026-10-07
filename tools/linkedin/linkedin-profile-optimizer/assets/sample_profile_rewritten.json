@@ -1,0 +1,81 @@
+{
+  "_note": "The same invented person after one pass through the rewrite worksheet. Used to show the re-audit step.",
+  "name": "Ines Varga",
+  "goal": "clients",
+  "as_of_year": 2026,
+  "target_keywords": ["revenue operations", "RevOps", "forecasting", "CRM migration"],
+  "audience_terms": ["B2B software", "Series A", "Series B", "sales leaders", "founders"],
+  "custom_url": "linkedin.com/in/inesvarga",
+  "headline": "Revenue operations for Series A and Series B software companies | Forecasting you can take to the board, CRM migration without a lost quarter | Fractional RevOps lead, ex-Tallowmere Systems",
+  "about": "Most Series B forecasts are a spreadsheet one person understands. I rebuild revenue operations so the number sales leaders give the board on day 5 is the number they close on day 90.\n\nI work with B2B software companies between roughly 30 and 200 people, usually in the year after a funding round, when the CRM that worked for six sellers stops working for thirty.\n\nWhat that has looked like:\n- At Tallowmere Systems I led a CRM migration covering 62 sellers and 4 years of pipeline history. We cut over in one weekend and lost no open opportunities.\n- The forecasting process I introduced brought quarterly forecast error from 31% to 9% across 6 consecutive quarters.\n- At Brightquay Logistics I redesigned territories and commission for 40 sellers; disputes per quarter fell from 22 to 3.\n\nHow I work: a three-week diagnostic first, written up in plain language, then a fixed-scope rebuild with your team doing the work alongside me so it survives after I leave.\n\nI take on two clients at a time. If your forecast and your CRM disagree, send me a message with your team size and CRM, and I will tell you within a day whether I can help.",
+  "experience": [
+    {
+      "title": "Fractional Head of Revenue Operations",
+      "company": "Varga RevOps",
+      "start": "2025",
+      "end": "present",
+      "description": "Forecasting, CRM migration and RevOps hiring for Series A and Series B software companies.",
+      "bullets": [
+        "Ran 5 revenue operations diagnostics in 12 months; 4 became rebuild engagements",
+        "Rebuilt stage definitions and forecasting for a 28-seller team; forecast error fell from 26% to 11% in 2 quarters",
+        "Wrote the RevOps hiring scorecard now used by 3 client companies"
+      ],
+      "skills": ["Revenue Operations", "Sales Forecasting", "CRM Migration"],
+      "media": 2
+    },
+    {
+      "title": "Head of Revenue Operations",
+      "company": "Tallowmere Systems",
+      "start": "2022",
+      "end": "2025",
+      "description": "Owned systems, forecasting and planning for a 62-seller B2B software sales team.",
+      "bullets": [
+        "Led a CRM migration for 62 sellers and 4 years of history with a single-weekend cutover",
+        "Cut quarterly forecast error from 31% to 9% over 6 quarters by replacing rep-entered dates with stage-exit evidence",
+        "Reduced the board reporting cycle from 9 working days to 2"
+      ],
+      "skills": ["Revenue Operations", "Salesforce", "Sales Forecasting"],
+      "media": 1
+    },
+    {
+      "title": "Sales Operations Manager",
+      "company": "Brightquay Logistics",
+      "start": "2018",
+      "end": "2022",
+      "description": "Territory, quota and commission design for a 40-seller field team.",
+      "bullets": [
+        "Redesigned territories and the commission plan for 40 sellers; quarterly disputes fell from 22 to 3"
+      ],
+      "skills": ["Territory Planning", "Sales Compensation"],
+      "media": 0
+    }
+  ],
+  "skills": {
+    "pinned": ["Revenue Operations", "Sales Forecasting", "CRM Migration"],
+    "all": ["Revenue Operations", "RevOps", "Sales Forecasting", "Forecasting", "CRM Migration", "Salesforce", "Territory Planning", "Sales Compensation", "Pipeline Management", "Board Reporting", "Sales Operations", "Data Migration"]
+  },
+  "featured": [
+    {"type": "case_study", "title": "How a 62-seller CRM migration cut over in one weekend", "age_months": 3},
+    {"type": "results_post", "title": "Forecast error from 31% to 9%: the four changes that did it", "age_months": 5},
+    {"type": "booking_link", "title": "Book a 30-minute RevOps diagnostic call", "age_months": 1}
+  ],
+  "recommendations": [
+    {"relationship": "manager", "year": 2025, "specific": true},
+    {"relationship": "client", "year": 2026, "specific": true},
+    {"relationship": "peer", "year": 2017, "specific": false}
+  ],
+  "photo": {
+    "present": true,
+    "solo": true,
+    "face_clear": true,
+    "plain_background": true,
+    "age_years": 0
+  },
+  "banner": {
+    "present": true,
+    "custom": true,
+    "states_value": true,
+    "text_clear_of_photo": true,
+    "checked_on_mobile": true
+  }
+}

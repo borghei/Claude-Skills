@@ -23,7 +23,7 @@ Located in `.claude/agents/`. Invoke with `/agents/name` in Claude Code.
 
 Located in `agents/`. These are specialized AI personas that orchestrate multiple skills with domain-specific behavior. Each agent file defines the persona, tools, and workflows the agent uses.
 
-### Engineering (6)
+### Engineering (7)
 
 | Agent | Role | File |
 |-------|------|------|
@@ -33,6 +33,7 @@ Located in `agents/`. These are specialized AI personas that orchestrate multipl
 | **cs-code-auditor** | Deep code audit, quality analysis, refactoring recommendations | `agents/engineering/cs-code-auditor.md` |
 | **cs-doc-writer** | Technical documentation, API docs, architecture guides | `agents/engineering/cs-doc-writer.md` |
 | **cs-security-engineer** | Security engineering, threat modeling, vulnerability assessment | `agents/engineering/cs-security-engineer.md` |
+| **cs-security-auditor** | Multi-phase source security audit with independent verification; breadth tier chosen per run | `agents/engineering/cs-security-auditor.md` |
 
 ### C-Level (3)
 

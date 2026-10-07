@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "run_id": "orders-api-run-1",
+  "units": [
+    {
+      "coverage_id": "cu-0fd9027294b4ff3c369d",
+      "refs": {
+        "surface": "repository",
+        "boundary": "repository#baseline",
+        "subsystem": "repository",
+        "attack_class": "attack-classes.md#Baseline exposures"
+      },
+      "label": "Whole repository: baseline exposures",
+      "starting_paths": [
+        "config/settings.py",
+        "src/app.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Baseline exposures"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "covered",
+      "owner": "hunter-04",
+      "reviewed_paths": [
+        ".gitignore",
+        "config/settings.py",
+        "requirements.lock",
+        "src/app.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-04",
+          "reviewed_paths": [
+            "config/settings.py",
+            ".gitignore",
+            "requirements.lock",
+            "src/app.py"
+          ],
+          "invariant": "No shipped secret, open debug switch, or unauthenticated diagnostic route",
+          "method": "source",
+          "result": "every item checked; debug is gated on an environment value read once at start; no secrets or unprotected routes found",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [],
+      "unresolved": [],
+      "attempts": [],
+      "hardening": [
+        "Pin the two dependencies in requirements.lock that use a version range"
+      ]
+    },
+    {
+      "coverage_id": "cu-4b2c324566475f50b679",
+      "refs": {
+        "surface": "src/api/orders.py#GET /orders/search",
+        "boundary": "src/db/orders.py#search_orders",
+        "subsystem": "services/orders",
+        "attack_class": "attack-classes.md#Injection"
+      },
+      "label": "Order search: query construction from the q and sort parameters",
+      "starting_paths": [
+        "src/api/orders.py",
+        "src/db/orders.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Injection"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "candidate",
+      "owner": "hunter-03",
+      "reviewed_paths": [
+        "src/api/orders.py",
+        "src/api/schemas.py",
+        "src/db/orders.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-03",
+          "reviewed_paths": [
+            "src/api/orders.py",
+            "src/db/orders.py"
+          ],
+          "invariant": "Caller text never becomes SQL structure",
+          "method": "source",
+          "result": "q is bound as a parameter; sort is interpolated into ORDER BY and looked suspicious",
+          "evidence_file": null
+        },
+        {
+          "agent_id": "verifier-03",
+          "reviewed_paths": [
+            "src/db/orders.py",
+            "src/api/schemas.py"
+          ],
+          "invariant": "The sort value is constrained before interpolation",
+          "method": "source",
+          "result": "schemas.py restricts sort to a four-value enum validated before the handler runs; no caller text reaches the query",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [
+        "orders:search:sort-interpolation"
+      ],
+      "unresolved": [],
+      "attempts": []
+    },
+    {
+      "coverage_id": "cu-4cd95d7167c66d6d8a54",
+      "refs": {
+        "surface": "src/api/orders.py#POST /orders/{id}/refund",
+        "boundary": "src/services/refunds.py#apply_refund",
+        "subsystem": "services/orders",
+        "attack_class": "attack-classes.md#Business logic"
+      },
+      "label": "Refund flow: amount limits and repeated refunds",
+      "starting_paths": [
+        "src/services/refunds.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Business logic"
+      ],
+      "excluded_blocks": [],
+      "origin": "critic",
+      "wave": 2,
+      "status": "covered",
+      "owner": "hunter-06",
+      "reviewed_paths": [
+        "src/db/orders.py",
+        "src/services/refunds.py",
+        "tests/services/test_refunds.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-06",
+          "reviewed_paths": [
+            "src/services/refunds.py",
+            "src/db/orders.py",
+            "tests/services/test_refunds.py"
+          ],
+          "invariant": "Total refunded never exceeds the amount paid, including under concurrent requests",
+          "method": "source",
+          "result": "refund and balance update run in one transaction with a row lock; negative and over-limit amounts are rejected before the write",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [],
+      "unresolved": [],
+      "attempts": [
+        {
+          "wave": 1,
+          "status": "covered",
+          "owner": "hunter-05",
+          "reviewed_paths": [
+            "src/services/refunds.py"
+          ],
+          "checks": [
+            {
+              "agent_id": "hunter-05",
+              "reviewed_paths": [
+                "src/services/refunds.py"
+              ],
+              "invariant": "Refund amount is validated",
+              "method": "source",
+              "result": "amount is checked against the order total",
+              "evidence_file": null
+            }
+          ],
+          "fingerprints": [],
+          "unresolved": [],
+          "reopen_reason": "closed without reading the concurrent path in src/db/orders.py that the balance update uses"
+        }
+      ]
+    },
+    {
+      "coverage_id": "cu-a8cbdb7fe84db79cd728",
+      "refs": {
+        "surface": "src/api/reports.py#GET /reports/export",
+        "boundary": "src/authz/policy.py#require_role",
+        "subsystem": "services/reporting",
+        "attack_class": "attack-classes.md#Feature abuse and data exposure"
+      },
+      "label": "Report export: row scope of exported data",
+      "starting_paths": [
+        "src/api/reports.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Feature abuse and data exposure"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "deferred",
+      "owner": null,
+      "reviewed_paths": [],
+      "checks": [],
+      "fingerprints": [],
+      "unresolved": [
+        "budget_cannot_fund_hunters"
+      ],
+      "attempts": []
+    },
+    {
+      "coverage_id": "cu-b0309fd3c832ac96155e",
+      "refs": {
+        "surface": "src/api/auth.py#POST /password/reset",
+        "boundary": "src/mail/links.py#build_reset_url",
+        "subsystem": "services/identity",
+        "attack_class": "web-protocol-and-auth.md#Host and forwarded-header trust"
+      },
+      "label": "Password reset: origin of the host used in emailed links",
+      "starting_paths": [
+        "src/api/auth.py",
+        "src/mail/links.py"
+      ],
+      "class_blocks": [
+        "web-protocol-and-auth.md#Host and forwarded-header trust",
+        "web-protocol-and-auth.md#Password reset and account recovery"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "candidate",
+      "owner": "hunter-02",
+      "reviewed_paths": [
+        "config/settings.py",
+        "deploy/ingress.yaml",
+        "src/api/auth.py",
+        "src/mail/links.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-02",
+          "reviewed_paths": [
+            "src/api/auth.py",
+            "src/mail/links.py",
+            "config/settings.py"
+          ],
+          "invariant": "Reset links are built from a configured origin, never from request headers",
+          "method": "source",
+          "result": "build_reset_url uses request.host when PUBLIC_BASE_URL is unset; settings.py leaves it unset by default",
+          "evidence_file": null
+        },
+        {
+          "agent_id": "verifier-02",
+          "reviewed_paths": [
+            "src/mail/links.py",
+            "deploy/ingress.yaml"
+          ],
+          "invariant": "The ingress in the repository fixes the Host header before it reaches the app",
+          "method": "source",
+          "result": "deploy/ingress.yaml routes by path only and does not set or restrict Host; production overlay is not in the repository",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [
+        "identity:reset:host-derived-link"
+      ],
+      "unresolved": [
+        "whether the production proxy overrides or validates Host"
+      ],
+      "attempts": []
+    },
+    {
+      "coverage_id": "cu-b21b2524c4ae7d41843c",
+      "refs": {
+        "surface": "src/api/webhooks.py#POST /webhooks/test",
+        "boundary": "src/net/fetch.py#fetch_url",
+        "subsystem": "services/integrations",
+        "attack_class": "attack-classes.md#Files, fetches, and resource handling"
+      },
+      "label": "Webhook test: server-side fetch of a caller-supplied URL",
+      "starting_paths": [
+        "src/api/webhooks.py",
+        "src/net/fetch.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Files, fetches, and resource handling"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "blocked",
+      "owner": "hunter-07",
+      "reviewed_paths": [
+        "src/api/webhooks.py",
+        "src/net/fetch.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-07",
+          "reviewed_paths": [
+            "src/api/webhooks.py",
+            "src/net/fetch.py"
+          ],
+          "invariant": "The server refuses to fetch internal addresses, including after a redirect",
+          "method": "source",
+          "result": "an allowlist check runs on the first URL; redirect handling is delegated to a client wrapper whose configuration is loaded at run time",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [],
+      "unresolved": [
+        "redirect policy is set by a runtime config file not present in the repository and no sandbox was available to observe it"
+      ],
+      "attempts": []
+    },
+    {
+      "coverage_id": "cu-b85a24022c50ffa86b8e",
+      "refs": {
+        "surface": "web/src/App.tsx#router",
+        "boundary": "web/src/render/markdown.tsx#renderNote",
+        "subsystem": "web",
+        "attack_class": "attack-classes.md#Injection"
+      },
+      "label": "Web client: rendering of user-written order notes",
+      "starting_paths": [
+        "web/src/render/markdown.tsx"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Injection"
+      ],
+      "excluded_blocks": [],
+      "origin": "none",
+      "wave": 1,
+      "status": "out_of_scope",
+      "owner": null,
+      "reviewed_paths": [],
+      "checks": [],
+      "fingerprints": [],
+      "unresolved": [
+        "companion_outside_tier:client-side.md"
+      ],
+      "attempts": []
+    },
+    {
+      "coverage_id": "cu-c565fdde20a55cc15828",
+      "refs": {
+        "surface": "src/api/orders.py#POST /orders/{id}/refund",
+        "boundary": "src/authz/policy.py#require_owner",
+        "subsystem": "services/orders",
+        "attack_class": "attack-classes.md#Access control"
+      },
+      "label": "Refund endpoint: owner check on order refunds",
+      "starting_paths": [
+        "src/api/orders.py",
+        "src/authz/policy.py"
+      ],
+      "class_blocks": [
+        "attack-classes.md#Access control"
+      ],
+      "excluded_blocks": [
+        {
+          "block": "attack-classes.md#Injection",
+          "reason": "handler takes a numeric path ID and a fixed enum reason; no interpreted sink"
+        }
+      ],
+      "origin": "none",
+      "wave": 1,
+      "status": "candidate",
+      "owner": "hunter-01",
+      "reviewed_paths": [
+        "src/api/orders.py",
+        "src/authz/policy.py",
+        "src/db/orders.py",
+        "src/services/refunds.py",
+        "tests/api/test_refunds.py"
+      ],
+      "checks": [
+        {
+          "agent_id": "hunter-01",
+          "reviewed_paths": [
+            "src/api/orders.py",
+            "src/services/refunds.py",
+            "src/db/orders.py"
+          ],
+          "invariant": "A refund may only be issued by the tenant that owns the order",
+          "method": "source",
+          "result": "refund handler loads the order by ID alone; require_owner is applied to GET and PATCH but not to the refund route",
+          "evidence_file": null
+        },
+        {
+          "agent_id": "hunter-01",
+          "reviewed_paths": [
+            "tests/api/test_refunds.py"
+          ],
+          "invariant": "Tenant B cannot refund tenant A's order",
+          "method": "local",
+          "result": "existing test client with two fixture tenants: tenant B's request returned 200 and the fixture order moved to refunded",
+          "evidence_file": "agents/hunter-01/evidence/refund_cross_tenant.txt"
+        },
+        {
+          "agent_id": "verifier-01",
+          "reviewed_paths": [
+            "src/api/orders.py",
+            "src/authz/policy.py",
+            "src/services/refunds.py"
+          ],
+          "invariant": "No middleware or service-layer check enforces ownership on the refund path",
+          "method": "source",
+          "result": "re-read the route table and service; no ownership check exists between the handler and the write",
+          "evidence_file": null
+        }
+      ],
+      "fingerprints": [
+        "orders:refund:missing-owner-check"
+      ],
+      "unresolved": [],
+      "attempts": []
+    }
+  ]
+}

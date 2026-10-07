@@ -1,6 +1,6 @@
 # Skills Reference
 
-Complete reference for **372 skills across 20 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **385 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
 
@@ -221,10 +221,11 @@ Enterprise-grade skills with sophisticated analysis tooling.
 | [chaos-engineering](https://github.com/borghei/Claude-Skills/blob/main/engineering/chaos-engineering/SKILL.md) | Hypothesis-driven fault injection, gameday playbooks, maturity model | 3 |
 | [secrets-vault-manager](https://github.com/borghei/Claude-Skills/blob/main/engineering/secrets-vault-manager/SKILL.md) | Vault configuration, secret rotation planning, audit log analysis | 3 |
 
-### Security & Threat (4)
+### Security & Threat (5)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [security-audit](https://github.com/borghei/Claude-Skills/blob/main/engineering/security-audit/SKILL.md) | Multi-agent source audit: coverage ledger, independent verification, validated findings | 6 |
 | [cloud-security](https://github.com/borghei/Claude-Skills/blob/main/engineering/cloud-security/SKILL.md) | AWS/Azure/GCP posture: IAM least privilege, exposure, encryption, logging | 4 |
 | [ai-security](https://github.com/borghei/Claude-Skills/blob/main/engineering/ai-security/SKILL.md) | AI/ML pipeline security, prompt injection, data poisoning risk | 1 |
 | [red-team](https://github.com/borghei/Claude-Skills/blob/main/engineering/red-team/SKILL.md) | Engagement scoping, rules of engagement, adversary simulation planning | 1 |
@@ -724,6 +725,25 @@ The markdown → HTML publishing pipeline: authored Markdown becomes a self-cont
 | [md-slides](https://github.com/borghei/Claude-Skills/blob/main/markdown-html/md-slides/SKILL.md) | Self-contained HTML deck: layouts, speaker notes, keyboard nav, density linter | 4 |
 | [md-review](https://github.com/borghei/Claude-Skills/blob/main/markdown-html/md-review/SKILL.md) | Pre-publication gate: heading structure, link resolution, readability, a11y | 3 |
 | [design-system](https://github.com/borghei/Claude-Skills/blob/main/markdown-html/design-system/SKILL.md) | Design tokens, light/dark theming, WCAG contrast, one inlinable CSS bundle | 3 |
+
+## Tools (12)
+
+Platform toolkits. The LinkedIn suite: find what to say, plan, write, check, converse, and learn from who responded. Offline, stdlib-only, no posting or scraping.
+
+| Skill | Description | Tools |
+|-------|-------------|-------|
+| [linkedin-story-interviewer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-story-interviewer) | Interview that surfaces what you have to say; keeps a local story bank | 2 |
+| [linkedin-content-planner](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-content-planner) | Weekly or monthly plan from pillars, cadence and format mix; founder pillar set | 2 |
+| [linkedin-post-writer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-post-writer) | Angle and opening pattern from a brief, post structure, pre-publish gate | 2 |
+| [linkedin-hook-analyzer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-hook-analyzer) | Classifies opening-line patterns in saved posts into reusable templates | 2 |
+| [linkedin-humanizer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-humanizer) | Tiered machine-writing tell audit, emoji scoring, voice fingerprint | 4 |
+| [linkedin-content-repurposer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-content-repurposer) | Thread, transcript or article into a native post, with a fidelity check | 3 |
+| [linkedin-comment-writer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-comment-writer) | Comments that add something, gated by a 13-rule linter | 2 |
+| [linkedin-reply-manager](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-reply-manager) | Triage of a pasted comment section and gated reply drafts | 2 |
+| [linkedin-thread-tracker](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-thread-tracker) | Local log of comments left: replies received, follow-ups due, dead threads | 2 |
+| [linkedin-profile-optimizer](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-profile-optimizer) | Section-by-section profile audit and rewrite | 2 |
+| [linkedin-employee-advocacy](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-employee-advocacy) | Team cadence matrix, consent and review rules for an advocacy programme | 2 |
+| [linkedin-engagement-analytics](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-engagement-analytics) | Audience segments from an engagement export, compared with the target | 2 |
 
 ## Workflow (2)
 

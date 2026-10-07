@@ -1,0 +1,27 @@
+{
+  "_about": "Template. Replace the placeholder thread with your own, or start empty with: thread_log.py init --log <file> --owner \"<your name>\". Delete this line if you like; the tools ignore it.",
+  "owner": "<your display name>",
+  "threads": [
+    {
+      "id": "T-001",
+      "post_author": "<whose post you commented on>",
+      "tier": "standard",
+      "post_topic": "<what the post was about, in a few words>",
+      "post_ref": "<optional note to help you find the post again; never opened by the tools>",
+      "commented_at": "2026-01-31T09:00:00+00:00",
+      "comment": "<the comment you posted>",
+      "events": [
+        {
+          "at": "2026-01-31T15:00:00+00:00",
+          "who": "author",
+          "note": "<what they said, summarised in a line>"
+        },
+        {
+          "at": "2026-01-31T17:00:00+00:00",
+          "who": "me",
+          "note": "<what you answered>"
+        }
+      ]
+    }
+  ]
+}

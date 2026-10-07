@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linkedin Post Writer - Claude Skills</title>
+  <meta name="description" content="Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choos">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-post-writer.html">
+  <meta property="og:title" content="Linkedin Post Writer - Claude Skills">
+  <meta property="og:description" content="Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choos">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-post-writer.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Linkedin Post Writer", "description": "Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author's real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.", "applicationCategory": "Tools", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/tools/linkedin-post-writer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/tools/">Tools</a><span class=sep>/</span><span>Linkedin Post Writer</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Linkedin Post Writer</h1>
+    <p class="page-subtitle">Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Tools</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">linkedin</span><span class="tag">copywriting</span><span class="tag">hooks</span><span class="tag">content-drafting</span><span class="tag">pre-publish</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Linkedin Post Writer (Tools domain).
+
+Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.
+
+Most weak posts are decided before the first word is written. The author starts from a topic (&quot;something about onboarding&quot;) instead of from material (a number, a date, a thing a customer said), so the draft has to be built from
+
+## Your Key Capabilities
+- — From brief to angle
+- — Draft the post
+- — Gate the draft before it is pasted
+- Pattern by material
+- Choices that come up in every draft
+- Platform mechanics the gate assumes
+
+## Frameworks &amp; Templates You Know
+- 1. Fill in `assets/post_brief_template.md` with the author, or convert their
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-post-writer
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Linkedin Post Writer (Tools domain).
+
+Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.
+
+Most weak posts are decided before the first word is written. The author starts from a topic (&quot;something about onboarding&quot;) instead of from material (a number, a date, a thing a customer said), so the draft has to be built from
+
+## Your Key Capabilities
+- — From brief to angle
+- — Draft the post
+- — Gate the draft before it is pasted
+- Pattern by material
+- Choices that come up in every draft
+- Platform mechanics the gate assumes
+
+## Frameworks &amp; Templates You Know
+- 1. Fill in `assets/post_brief_template.md` with the author, or convert their
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-post-writer
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Linkedin Post Writer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Post Writer
+
+Most weak posts are decided before the first word is written. The author
+starts from a topic (&quot;something about onboarding&quot;) instead of from material (a
+number, a date, a thing a customer said), so the draft has to be built from
+generalities, and generalities all sound alike. The opening is then chosen for
+how it sounds, a format is borrowed from a post that did well for someone else,
+and the result is a confident paragraph about nothing in particular with a
+question bolted to the end.
+
+This skill reverses the order. It starts with an inventory of what the author
+really has, lets that inventory decide which of fourteen opening patterns are
+available, builds the body from beats that each need a fact, and runs a
+mechanical gate before the text leaves the editor. Patterns the author lacks
+the material for are not offered; instead the skill says which single question
+would unlock them.
+
+**Scope boundary.** This skill drafts a single feed post and checks it. It does
+**not** run the full machine-tell audit, score emoji, or build a voice
+fingerprint; hand the draft to `linkedin-humanizer` for that. It does **not**
+study other people&#x27;s posts to extract their openings; that is
+`linkedin-hook-analyzer`. Drawing a story out of an author who &quot;has nothing to
+say&quot; is `linkedin-story-interviewer`; turning an article, talk or thread into
+posts is `linkedin-content-repurposer`; deciding what to post this month is
+`linkedin-content-planner`. Comments and replies (`linkedin-comment-writer`,
+`linkedin-reply-manager`, `linkedin-thread-tracker`), profile copy
+(`linkedin-profile-optimizer`), team programmes (`linkedin-employee-advocacy`)
+and performance review (`linkedin-engagement-analytics`) are separate skills.
+Everything here is offline: the skill produces text for the user to paste into
+LinkedIn themselves. It does not post, schedule, fetch, or call any service.
+
+## When to use this skill
+
+- Someone asks for a LinkedIn post and has a topic but no angle
+- A draft exists and the opening is not working
+- An author has one good fact (a result, a mistake, a quote) and wants the post built around it
+- A ghostwriter needs a repeatable way to brief, draft and check posts for several authors
+- A draft is finished and needs a last mechanical check before it is pasted
+- The same author keeps producing the same shape of post and wants a different one
+
+## Inputs the skill expects
+
+- A brief: topic, one goal, the audience in a sentence (`assets/post_brief_template.md`)
+- The author&#x27;s material: any of a figure, a dated event, a scene, a changed belief, an opposing view, a before-and-after, a quote, a rule, a sample count, a question they were asked, a person to credit, a term to explain, a prediction, a list of steps
+- Constraints: what must be included, what must not be named, preferred length
+- Optional: a voice profile or two past posts, so the draft is in the author&#x27;s register
+
+## Clarify First
+
+Before drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The one goal** (conversation, saves, reshares, or inbound interest) — it changes which pattern ranks first and what the last line asks for; a post that tries for all four gets none
+- [ ] **What the author actually has** — at least one concrete item of material; without it every pattern is locked and the only honest output is a question back to the author
+- [ ] **Who it is for** — the same fact is written differently for peers, buyers and candidates; &quot;everyone&quot; produces a post for no one
+- [ ] **What cannot be said** — client names, unreleased figures, people who have not agreed to be named; these decide whether a quote or a number can be used at all
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just
+draft it,&quot; use the material in the request as given, pick the top-ranked
+pattern, and list the assumed goal and audience at the top of the reply. If
+there is no material at all, ask the single unlock question for the pattern
+that best fits the topic; do not invent a figure to get started.
+
+## Workflows
+
+Quick start: fill in the brief, run the picker, draft from the first option,
+run the gate.
+
+### Workflow 1 — From brief to angle
+
+1. Fill in `assets/post_brief_template.md` with the author, or convert their
+   notes into the JSON shape in `assets/sample_brief.json`. Leave a material
+   field empty if the author does not have it.
+2. Run the picker. It ranks only the patterns the material supports and lists
+   the rest as locked, each with the question that would unlock it.
+3. Read any `caution` lines. A counter-position or a prediction with no
+   evidence behind it is an opinion; get the evidence or choose another pattern.
+4. Offer the author the top two or three options in one line each. Let them
+   choose; they know which one they are comfortable publishing.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/angle_picker.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_brief.json --top 3
+```
+
+### Workflow 2 — Draft the post
+
+1. Write the opening from the chosen pattern in
+   `references/opening-patterns.md`. The agent writes it from the author&#x27;s
+   material and nothing else; the point of the line must land inside the first
+   clause.
+2. Write the second line so it works if the first is all the reader sees
+   before expanding: add the stake, do not restate.
+3. Build the body from the pattern&#x27;s beats (`references/post-structures.md`).
+   One beat per paragraph, each anchored to a fact. Cut any beat the author has
+   no fact for.
+4. Include the part that did not work. A post with no cost, exception or open
+   question reads as an advertisement.
+5. Close according to the goal: a question only a practitioner could answer,
+   the last fact, or nothing. Never a stock ask.
+6. Draft two alternative openings from the second-ranked pattern so the author
+   has a real choice.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/angle_picker.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_brief.json \
+  --top 5 --format json
+```
+
+### Workflow 3 — Gate the draft before it is pasted
+
+1. Save the draft as plain text with the line breaks it will have in the feed.
+2. Run the gate. Blockers fail it outright; more than three warnings fail it.
+3. Fix blockers first: a leftover placeholder or a stock closing line is never
+   acceptable. Then work the warnings in the order shown.
+4. Verify that every figure, name and quote in the draft appears in the brief,
+   using the manual checklist in `references/pre-publish-gate.md` §4. The tool
+   cannot do this part.
+5. Re-run until the exit code is 0, then hand over the text with its character
+   count. For a full style audit, pass the result to `linkedin-humanizer`.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/post_gate.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_draft.txt
+
+python3 tools/linkedin/linkedin-post-writer/scripts/post_gate.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_draft_revised.txt
+```
+
+The first sample fails with two blockers and three warnings. The revised
+version of the same post passes clean.
+
+## Decision frameworks
+
+### Pattern by material
+
+The pattern is chosen by what the author has, then ranked by goal. Goal-fit
+scores are editorial heuristics, not measurements.
+
+| The author has… | Pattern | Strongest for |
+|-----------------|---------|---------------|
+| One precise figure | Receipt line | Saves, inbound |
+| A date and something that went wrong | Dated mistake | Conversation |
+| A moment they were present for | Cold scene | Conversation, reshares |
+| A belief they dropped | Changed mind | Conversation |
+| A disagreement with common practice, plus evidence | Counter-position | Conversation, reshares |
+| A before and an after | Measured gap | Saves, inbound |
+| Someone&#x27;s exact words | Borrowed line | Conversation |
+| A rule they keep | House rule | Saves |
+| A count of things examined | Field count | Saves, reshares, inbound |
+| A question they keep being asked | Reported question | Conversation |
+| A person who did a specific thing | Named credit | Reshares |
+| A term their audience misuses | Plain definition | Saves |
+| An expectation with a date on it | Dated bet | Conversation, reshares |
+| Three or more real steps | Counted list | Saves |
+
+### Choices that come up in every draft
+
+| Decision | Recommendation | Why |
+|----------|----------------|-----|
+| Start from topic or from material | [PROVEN] Material. If there is none, ask for it before drafting | A post is as specific as its least specific input |
+| Opening: statement or question | [RECOMMENDED] Statement. Put a real question at the close | A question in line one asks for attention before giving a reason |
+| Where the key fact goes | [PROVEN] In the first clause of the first line | The feed truncates the opening; anything after the cut is seen only by people already interested |
+| How many ideas | [PROVEN] One. Park the second in a note for the next post | Two ideas halve the space for evidence on each |
+| Length | [RECOMMENDED] As long as the facts last: usually 600 to 1,400 characters | Past the facts, length is restatement |
+| Include what failed | [RECOMMENDED] Yes, with the same precision as what worked | It is what separates a report from a promotion |
+| Hashtags | [RECOMMENDED] None to three, on the last line | They are labels, not content |
+| A link in the body | [EXPERIMENTAL] Put it in the first comment unless the link is the point | Widely practised, effect unverified; the gate warns and `--allow-links` overrides |
+| Mentioning the author&#x27;s product | [RECOMMENDED] Once, where the story reaches it | Earlier, the post becomes an advert |
+
+### Platform mechanics the gate assumes
+
+| Setting | Default | Status |
+|---------|---------|--------|
+| Post character limit | 3,000 | Current as of writing; verify in the product |
+| Characters visible before truncation | 140 | Conservative mobile estimate as of writing; desktop shows more. Override with `--fold-chars` |
+| Markdown rendering | None | As of writing, asterisks and pound signs display literally |
+
+These change without notice. Treat them as configuration, not knowledge.
+
+## Anti-Patterns
+
+### Writing the opening first and looking for a post to fit it
+**Mistake:** The author has a line they like (&quot;Nobody talks about the real cost of meetings&quot;) and builds four paragraphs to justify it.
+**Why it happens:** A good-sounding line arrives easily and feels like progress. The material that would support it takes effort to dig out.
+**Instead:** Fill in the brief first. `angle_picker.py` will show that the line is a teaser with nothing behind it, and that the author&#x27;s real asset is, say, &quot;62 person-hours every Monday&quot;, which opens the post on its own.
+
+### Borrowing a format without the material it needs
+**Mistake:** A measured-gap post did well for someone else, so the author writes &quot;We went from struggling to thriving in six months&quot; with no figures.
+**Why it happens:** The format is visible and the measurements behind it are not.
+**Instead:** Treat every pattern&#x27;s `needs` as a hard requirement. A gap needs two numbers measured the same way and a time span. If the author has one number, it is a receipt line; if none, the pattern is locked and the picker says what to ask.
+
+### Trying for every goal at once
+**Mistake:** The post tells a story, lists seven tips, thanks the team, and ends by inviting people to book a call.
+**Why it happens:** Each addition seems free, and each stakeholder has a request.
+**Instead:** One goal per post, chosen in the brief. The goal sets the pattern ranking and the close. Everything else goes in a note for the next post; `linkedin-content-planner` is the place to schedule them.
+
+### Leaving out what went wrong
+**Mistake:** Every paragraph reports success. The fortnight where two teams shipped conflicting changes is cut &quot;to keep it positive&quot;.
+**Why it happens:** The author is writing under their employer&#x27;s name and caution feels safe.
+**Instead:** Keep one cost, exception or unsolved part, stated as precisely as the wins. Compare the two sample drafts: the revised one opens on the mistake, and it is the more credible post.
+
+### Closing with a generic ask
+**Mistake:** &quot;What do you think?&quot; or &quot;Agree?&quot; as the last line.
+**Why it happens:** The author has been told to end on a question and has no specific one.
+**Instead:** Ask something that can only be answered from experience (&quot;what broke in the first two weeks?&quot;) or end on the last fact. `post_gate.py` blocks the stock wordings outright.
+
+### Passing the gate and skipping the read-through
+**Mistake:** Exit code 0, so the draft is pasted.
+**Why it happens:** A green check feels like approval.
+**Instead:** The gate checks mechanics. It cannot tell whether the figure is right, whether Ines agreed to be quoted, or whether the post is interesting. Check every fact against the brief and have the author read the text aloud once.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/angle_picker.py` | Ranks the fourteen opening patterns by the material in a brief and the stated goal; prints the opening skeleton, body beats and close for each, and the unlock question for every pattern the brief cannot support |
+| `scripts/post_gate.py` | Pre-paste gate with fifteen checks: opening fit and phrasing, length, placeholders and markup, paragraph density, hashtags, links, specificity, habit spot-check, closing line; exits 1 on any blocker or excess warnings |
+| `references/opening-patterns.md` | The fourteen patterns: what each needs, how to build it, an original example, the usual way it goes wrong, and four opening types to avoid |
+| `references/post-structures.md` | Body beats per pattern, the second line, closes by goal, length bands, layout, and a full worked draft from the sample brief |
+| `references/pre-publish-gate.md` | Every gate check with its level and rationale, platform mechanics and their caveats, the manual checks the tool cannot do, and how to tune thresholds |
+| `assets/sample_brief.json` | A filled brief for a fictional COO writing about cancelling a weekly all-hands |
+| `assets/sample_draft.txt` | First draft from that brief; fails the gate on a placeholder, a stock closer, a long opening, a dense paragraph and six hashtags |
+| `assets/sample_draft_revised.txt` | The same post after revision; passes the gate |
+| `assets/post_brief_template.md` | Fill-in brief covering goal, audience, material inventory, constraints and sign-off |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Post Writer&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Post Writer in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Post Writer&quot;**
+   - Description: &quot;Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-post-writer/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Linkedin Post Writer&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Post Writer
+
+Most weak posts are decided before the first word is written. The author
+starts from a topic (&quot;something about onboarding&quot;) instead of from material (a
+number, a date, a thing a customer said), so the draft has to be built from
+generalities, and generalities all sound alike. The opening is then chosen for
+how it sounds, a format is borrowed from a post that did well for someone else,
+and the result is a confident paragraph about nothing in particular with a
+question bolted to the end.
+
+This skill reverses the order. It starts with an inventory of what the author
+really has, lets that inventory decide which of fourteen opening patterns are
+available, builds the body from beats that each need a fact, and runs a
+mechanical gate before the text leaves the editor. Patterns the author lacks
+the material for are not offered; instead the skill says which single question
+would unlock them.
+
+**Scope boundary.** This skill drafts a single feed post and checks it. It does
+**not** run the full machine-tell audit, score emoji, or build a voice
+fingerprint; hand the draft to `linkedin-humanizer` for that. It does **not**
+study other people&#x27;s posts to extract their openings; that is
+`linkedin-hook-analyzer`. Drawing a story out of an author who &quot;has nothing to
+say&quot; is `linkedin-story-interviewer`; turning an article, talk or thread into
+posts is `linkedin-content-repurposer`; deciding what to post this month is
+`linkedin-content-planner`. Comments and replies (`linkedin-comment-writer`,
+`linkedin-reply-manager`, `linkedin-thread-tracker`), profile copy
+(`linkedin-profile-optimizer`), team programmes (`linkedin-employee-advocacy`)
+and performance review (`linkedin-engagement-analytics`) are separate skills.
+Everything here is offline: the skill produces text for the user to paste into
+LinkedIn themselves. It does not post, schedule, fetch, or call any service.
+
+## When to use this skill
+
+- Someone asks for a LinkedIn post and has a topic but no angle
+- A draft exists and the opening is not working
+- An author has one good fact (a result, a mistake, a quote) and wants the post built around it
+- A ghostwriter needs a repeatable way to brief, draft and check posts for several authors
+- A draft is finished and needs a last mechanical check before it is pasted
+- The same author keeps producing the same shape of post and wants a different one
+
+## Inputs the skill expects
+
+- A brief: topic, one goal, the audience in a sentence (`assets/post_brief_template.md`)
+- The author&#x27;s material: any of a figure, a dated event, a scene, a changed belief, an opposing view, a before-and-after, a quote, a rule, a sample count, a question they were asked, a person to credit, a term to explain, a prediction, a list of steps
+- Constraints: what must be included, what must not be named, preferred length
+- Optional: a voice profile or two past posts, so the draft is in the author&#x27;s register
+
+## Clarify First
+
+Before drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **The one goal** (conversation, saves, reshares, or inbound interest) — it changes which pattern ranks first and what the last line asks for; a post that tries for all four gets none
+- [ ] **What the author actually has** — at least one concrete item of material; without it every pattern is locked and the only honest output is a question back to the author
+- [ ] **Who it is for** — the same fact is written differently for peers, buyers and candidates; &quot;everyone&quot; produces a post for no one
+- [ ] **What cannot be said** — client names, unreleased figures, people who have not agreed to be named; these decide whether a quote or a number can be used at all
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just
+draft it,&quot; use the material in the request as given, pick the top-ranked
+pattern, and list the assumed goal and audience at the top of the reply. If
+there is no material at all, ask the single unlock question for the pattern
+that best fits the topic; do not invent a figure to get started.
+
+## Workflows
+
+Quick start: fill in the brief, run the picker, draft from the first option,
+run the gate.
+
+### Workflow 1 — From brief to angle
+
+1. Fill in `assets/post_brief_template.md` with the author, or convert their
+   notes into the JSON shape in `assets/sample_brief.json`. Leave a material
+   field empty if the author does not have it.
+2. Run the picker. It ranks only the patterns the material supports and lists
+   the rest as locked, each with the question that would unlock it.
+3. Read any `caution` lines. A counter-position or a prediction with no
+   evidence behind it is an opinion; get the evidence or choose another pattern.
+4. Offer the author the top two or three options in one line each. Let them
+   choose; they know which one they are comfortable publishing.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/angle_picker.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_brief.json --top 3
+```
+
+### Workflow 2 — Draft the post
+
+1. Write the opening from the chosen pattern in
+   `references/opening-patterns.md`. The agent writes it from the author&#x27;s
+   material and nothing else; the point of the line must land inside the first
+   clause.
+2. Write the second line so it works if the first is all the reader sees
+   before expanding: add the stake, do not restate.
+3. Build the body from the pattern&#x27;s beats (`references/post-structures.md`).
+   One beat per paragraph, each anchored to a fact. Cut any beat the author has
+   no fact for.
+4. Include the part that did not work. A post with no cost, exception or open
+   question reads as an advertisement.
+5. Close according to the goal: a question only a practitioner could answer,
+   the last fact, or nothing. Never a stock ask.
+6. Draft two alternative openings from the second-ranked pattern so the author
+   has a real choice.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/angle_picker.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_brief.json \
+  --top 5 --format json
+```
+
+### Workflow 3 — Gate the draft before it is pasted
+
+1. Save the draft as plain text with the line breaks it will have in the feed.
+2. Run the gate. Blockers fail it outright; more than three warnings fail it.
+3. Fix blockers first: a leftover placeholder or a stock closing line is never
+   acceptable. Then work the warnings in the order shown.
+4. Verify that every figure, name and quote in the draft appears in the brief,
+   using the manual checklist in `references/pre-publish-gate.md` §4. The tool
+   cannot do this part.
+5. Re-run until the exit code is 0, then hand over the text with its character
+   count. For a full style audit, pass the result to `linkedin-humanizer`.
+
+```bash
+python3 tools/linkedin/linkedin-post-writer/scripts/post_gate.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_draft.txt
+
+python3 tools/linkedin/linkedin-post-writer/scripts/post_gate.py \
+  --input tools/linkedin/linkedin-post-writer/assets/sample_draft_revised.txt
+```
+
+The first sample fails with two blockers and three warnings. The revised
+version of the same post passes clean.
+
+## Decision frameworks
+
+### Pattern by material
+
+The pattern is chosen by what the author has, then ranked by goal. Goal-fit
+scores are editorial heuristics, not measurements.
+
+| The author has… | Pattern | Strongest for |
+|-----------------|---------|---------------|
+| One precise figure | Receipt line | Saves, inbound |
+| A date and something that went wrong | Dated mistake | Conversation |
+| A moment they were present for | Cold scene | Conversation, reshares |
+| A belief they dropped | Changed mind | Conversation |
+| A disagreement with common practice, plus evidence | Counter-position | Conversation, reshares |
+| A before and an after | Measured gap | Saves, inbound |
+| Someone&#x27;s exact words | Borrowed line | Conversation |
+| A rule they keep | House rule | Saves |
+| A count of things examined | Field count | Saves, reshares, inbound |
+| A question they keep being asked | Reported question | Conversation |
+| A person who did a specific thing | Named credit | Reshares |
+| A term their audience misuses | Plain definition | Saves |
+| An expectation with a date on it | Dated bet | Conversation, reshares |
+| Three or more real steps | Counted list | Saves |
+
+### Choices that come up in every draft
+
+| Decision | Recommendation | Why |
+|----------|----------------|-----|
+| Start from topic or from material | [PROVEN] Material. If there is none, ask for it before drafting | A post is as specific as its least specific input |
+| Opening: statement or question | [RECOMMENDED] Statement. Put a real question at the close | A question in line one asks for attention before giving a reason |
+| Where the key fact goes | [PROVEN] In the first clause of the first line | The feed truncates the opening; anything after the cut is seen only by people already interested |
+| How many ideas | [PROVEN] One. Park the second in a note for the next post | Two ideas halve the space for evidence on each |
+| Length | [RECOMMENDED] As long as the facts last: usually 600 to 1,400 characters | Past the facts, length is restatement |
+| Include what failed | [RECOMMENDED] Yes, with the same precision as what worked | It is what separates a report from a promotion |
+| Hashtags | [RECOMMENDED] None to three, on the last line | They are labels, not content |
+| A link in the body | [EXPERIMENTAL] Put it in the first comment unless the link is the point | Widely practised, effect unverified; the gate warns and `--allow-links` overrides |
+| Mentioning the author&#x27;s product | [RECOMMENDED] Once, where the story reaches it | Earlier, the post becomes an advert |
+
+### Platform mechanics the gate assumes
+
+| Setting | Default | Status |
+|---------|---------|--------|
+| Post character limit | 3,000 | Current as of writing; verify in the product |
+| Characters visible before truncation | 140 | Conservative mobile estimate as of writing; desktop shows more. Override with `--fold-chars` |
+| Markdown rendering | None | As of writing, asterisks and pound signs display literally |
+
+These change without notice. Treat them as configuration, not knowledge.
+
+## Anti-Patterns
+
+### Writing the opening first and looking for a post to fit it
+**Mistake:** The author has a line they like (&quot;Nobody talks about the real cost of meetings&quot;) and builds four paragraphs to justify it.
+**Why it happens:** A good-sounding line arrives easily and feels like progress. The material that would support it takes effort to dig out.
+**Instead:** Fill in the brief first. `angle_picker.py` will show that the line is a teaser with nothing behind it, and that the author&#x27;s real asset is, say, &quot;62 person-hours every Monday&quot;, which opens the post on its own.
+
+### Borrowing a format without the material it needs
+**Mistake:** A measured-gap post did well for someone else, so the author writes &quot;We went from struggling to thriving in six months&quot; with no figures.
+**Why it happens:** The format is visible and the measurements behind it are not.
+**Instead:** Treat every pattern&#x27;s `needs` as a hard requirement. A gap needs two numbers measured the same way and a time span. If the author has one number, it is a receipt line; if none, the pattern is locked and the picker says what to ask.
+
+### Trying for every goal at once
+**Mistake:** The post tells a story, lists seven tips, thanks the team, and ends by inviting people to book a call.
+**Why it happens:** Each addition seems free, and each stakeholder has a request.
+**Instead:** One goal per post, chosen in the brief. The goal sets the pattern ranking and the close. Everything else goes in a note for the next post; `linkedin-content-planner` is the place to schedule them.
+
+### Leaving out what went wrong
+**Mistake:** Every paragraph reports success. The fortnight where two teams shipped conflicting changes is cut &quot;to keep it positive&quot;.
+**Why it happens:** The author is writing under their employer&#x27;s name and caution feels safe.
+**Instead:** Keep one cost, exception or unsolved part, stated as precisely as the wins. Compare the two sample drafts: the revised one opens on the mistake, and it is the more credible post.
+
+### Closing with a generic ask
+**Mistake:** &quot;What do you think?&quot; or &quot;Agree?&quot; as the last line.
+**Why it happens:** The author has been told to end on a question and has no specific one.
+**Instead:** Ask something that can only be answered from experience (&quot;what broke in the first two weeks?&quot;) or end on the last fact. `post_gate.py` blocks the stock wordings outright.
+
+### Passing the gate and skipping the read-through
+**Mistake:** Exit code 0, so the draft is pasted.
+**Why it happens:** A green check feels like approval.
+**Instead:** The gate checks mechanics. It cannot tell whether the figure is right, whether Ines agreed to be quoted, or whether the post is interesting. Check every fact against the brief and have the author read the text aloud once.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/angle_picker.py` | Ranks the fourteen opening patterns by the material in a brief and the stated goal; prints the opening skeleton, body beats and close for each, and the unlock question for every pattern the brief cannot support |
+| `scripts/post_gate.py` | Pre-paste gate with fifteen checks: opening fit and phrasing, length, placeholders and markup, paragraph density, hashtags, links, specificity, habit spot-check, closing line; exits 1 on any blocker or excess warnings |
+| `references/opening-patterns.md` | The fourteen patterns: what each needs, how to build it, an original example, the usual way it goes wrong, and four opening types to avoid |
+| `references/post-structures.md` | Body beats per pattern, the second line, closes by goal, length bands, layout, and a full worked draft from the sample brief |
+| `references/pre-publish-gate.md` | Every gate check with its level and rationale, platform mechanics and their caveats, the manual checks the tool cannot do, and how to tune thresholds |
+| `assets/sample_brief.json` | A filled brief for a fictional COO writing about cancelling a weekly all-hands |
+| `assets/sample_draft.txt` | First draft from that brief; fails the gate on a placeholder, a stock closer, a long opening, a dense paragraph and six hashtags |
+| `assets/sample_draft_revised.txt` | The same post after revision; passes the gate |
+| `assets/post_brief_template.md` | Fill-in brief covering goal, audience, material inventory, constraints and sign-off |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Post Writer&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Post Writer in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Post Writer&quot;**
+   - Description: &quot;Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author&#x27;s real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-post-writer/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install tools/linkedin/linkedin-post-writer ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-post-writer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/linkedin-post-writer/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/linkedin-post-writer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/linkedin-post-writer/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/linkedin-post-writer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: tools/linkedin/linkedin-post-writer/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-post-writer your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-post-writer your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/tools/linkedin/linkedin-post-writer</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python tools/linkedin/linkedin-post-writer/scripts/tool_name.py --help</code></pre>
+  
+  
+  <h2>Related Skills in Tools</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-comment-writer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Comment Writer</h3><p>Drafts comments on other people&#x27;s LinkedIn posts that add a specific the post lacked, then gates...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-planner.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Planner</h3><p>Builds a weekly or monthly LinkedIn publishing plan from content pillars, a posting cadence and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-repurposer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Repurposer</h3><p>Turns something made for another channel (a thread, a video or talk transcript, a blog post, a...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-employee-advocacy.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Employee Advocacy</h3><p>Designs and runs an employee advocacy programme: who posts what and how often, review rules, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-engagement-analytics.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Engagement Analytics</h3><p>Segments who reacted to and commented on a post from a CSV or JSON export, and says whether it...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-hook-analyzer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Hook Analyzer</h3><p>Extracts and classifies the opening-line pattern of LinkedIn posts the user pastes or saves, and...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-post-writer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

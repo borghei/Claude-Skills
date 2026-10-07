@@ -1,0 +1,22 @@
+{
+  "_note": "Invented post, companies and figures. The baseline is this author's own trailing history, built with Workflow 3.",
+  "post": {
+    "title": "What we changed about on-call after the March outage",
+    "intent": "Reach engineering leaders who own reliability at mid-size companies"
+  },
+  "target": {
+    "seniority": ["executive", "vp", "director", "manager_lead"],
+    "functions": ["engineering"],
+    "title_keywords": ["platform", "sre", "reliability", "infrastructure"],
+    "companies": ["Quillon Payments", "Ferrowmoor Bank", "Pellamy Health"]
+  },
+  "own_companies": ["Kestrelby Cloud"],
+  "goal_core_share": 0.3,
+  "baseline": {
+    "core_share": 0.21,
+    "posts": 6,
+    "classified_engagers": 212,
+    "window": "the six posts before this one"
+  },
+  "min_sample": 30
+}

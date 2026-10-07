@@ -50,6 +50,7 @@ DOMAIN_META = {
     "hr-operations":      {"label": "HR Operations",      "desc": "Talent acquisition, people analytics, HR business partner"},
     "finance":            {"label": "Finance",            "desc": "DCF valuation, budgeting, forecasting, ratio analysis"},
     "legal":              {"label": "Legal",              "desc": "Contract review, NDA, privacy, DPIA, risk, compliance (EXPERIMENTAL)"},
+    "tools":              {"label": "Tools",              "desc": "Platform toolkits: the LinkedIn suite for posts, comments, planning, profile, and analytics"},
 }
 
 # Inline SVG icons (16x16, stroke-based line icons)

@@ -1,0 +1,45 @@
+{
+  "posts_analysed": 5,
+  "confidence": "usable",
+  "medians": {
+    "words": 98.0,
+    "words_per_sentence": 11.73,
+    "sentence_spread": 6.25,
+    "words_per_paragraph": 24.5,
+    "first_person_per_100": 5.1,
+    "contractions_per_100": 5.38,
+    "dashes_per_100": 1.02,
+    "fragments": 0.0,
+    "tiny_paragraphs": 0.0,
+    "triples": 0.0,
+    "label_lines": 0.0,
+    "emoji": 0.0,
+    "questions": 0.0,
+    "exclamations": 0.0,
+    "opening_chars": 99.0,
+    "lowercase_starts": 0.0,
+    "closes_on_question": 0.0
+  },
+  "signature_words": [
+    "page",
+    "people",
+    "first",
+    "team",
+    "answers",
+    "customers",
+    "four",
+    "hours",
+    "know",
+    "line",
+    "minutes",
+    "name"
+  ],
+  "protected_rules": [
+    {
+      "id": "RD-11",
+      "reason": "the author's own posts carry about this many dashes",
+      "measure": "dashes_per_100",
+      "value": 1.02
+    }
+  ]
+}

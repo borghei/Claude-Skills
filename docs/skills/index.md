@@ -4,14 +4,14 @@ title: Skill Catalog
 
 # Skill Catalog
 
-372 production-ready skills across 20 domains, each with Python CLI tools, reference guides, and templates.
+385 production-ready skills across 21 domains, each with Python CLI tools, reference guides, and templates.
 
 ## Domains at a Glance
 
 | Domain | Skills | Tools | Page |
 |---|:---:|:---:|---|
 | **★ Project Management** (most-used) | **70** | **82+** | **[View all](project-management.md)** |
-| Engineering | 91 | 248 | [View all](engineering.md) |
+| Engineering | 92 | 254 | [View all](engineering.md) |
 | Marketing | 41 | 118+ | [View all](marketing.md) |
 | C-Level Advisory | 31 | 88+ | [View all](c-level.md) |
 | RA/QM & Compliance | 27 | 50+ | [View all](compliance.md) |
@@ -28,9 +28,10 @@ title: Skill Catalog
 | Business Operations (new) | 6 | 18 | [View all](business-operations.md) |
 | Research Ops (new) | 4 | 12 | [View all](research-ops.md) |
 | Markdown & HTML (new) | 4 | 14 | [View all](markdown-html.md) |
+| Tools — LinkedIn suite (new) | 12 | 27 | [View all](tools.md) |
 | Finance | 3 | 10 | [View all](business.md#finance) |
 | Workflow (meta-skills) | 2 | — | [View all](other.md) |
-| **Total** | **372** | **867** | |
+| **Total** | **385** | **900** | |
 
 ## Skill Package Structure
 

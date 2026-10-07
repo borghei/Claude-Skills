@@ -1,0 +1,142 @@
+{
+  "_about": "Invented sample. Every person, company and exchange here is fictional. Run the tracker with --as-of 2026-10-07T09:00:00+00:00 to reproduce the documented output; it contains one thread in every state.",
+  "owner": "Tomas Okafor-Reyes",
+  "threads": [
+    {
+      "id": "T-001",
+      "post_author": "Ilse Vandermeer",
+      "tier": "priority",
+      "post_topic": "Removing the kickoff call from onboarding",
+      "post_ref": "Harbourline VP CS, post of 6 Oct",
+      "commented_at": "2026-10-06T08:20:00+00:00",
+      "comment": "The enterprise split matches what we saw. We dropped our kickoff for accounts under 50 seats last year and nobody blinked.",
+      "events": [
+        {"at": "2026-10-06T19:40:00+00:00", "who": "author", "note": "Asked whether the short call for large accounts is run by sales or by success"}
+      ]
+    },
+    {
+      "id": "T-002",
+      "post_author": "Gideon Abara-Lindt",
+      "tier": "priority",
+      "post_topic": "Usage-based pricing and finance teams",
+      "post_ref": "CFO at Northmere, post of 4 Oct",
+      "commented_at": "2026-10-04T10:00:00+00:00",
+      "comment": "Our finance buyers accepted usage pricing once the invoice showed a ceiling. Without the ceiling, three of five stalled in procurement.",
+      "events": [
+        {"at": "2026-10-05T07:30:00+00:00", "who": "author", "note": "Wanted to know how the ceiling was set and whether anyone hit it"}
+      ]
+    },
+    {
+      "id": "T-003",
+      "post_author": "Marisol Etxeberria",
+      "tier": "standard",
+      "post_topic": "Why her team stopped doing quarterly business reviews",
+      "post_ref": "",
+      "commented_at": "2026-09-26T14:00:00+00:00",
+      "comment": "We replaced ours with a one-page note sent two days before renewal conversations. Attendance stopped being the measure.",
+      "events": [
+        {"at": "2026-09-27T09:00:00+00:00", "who": "author", "note": "Asked to see the structure of the one-page note"}
+      ]
+    },
+    {
+      "id": "T-004",
+      "post_author": "Kwabena Osei-Hartley",
+      "tier": "standard",
+      "post_topic": "Hiring a first revenue-operations person",
+      "post_ref": "",
+      "commented_at": "2026-10-06T15:00:00+00:00",
+      "comment": "We hired ours too late, after the third pricing change. What did the first ninety days look like for yours?",
+      "events": []
+    },
+    {
+      "id": "T-005",
+      "post_author": "Freya Lindahl-Moreau",
+      "tier": "priority",
+      "post_topic": "Annual versus monthly billing for small clinics",
+      "post_ref": "Founder of Pellow Health, post of 3 Oct",
+      "commented_at": "2026-10-03T09:00:00+00:00",
+      "comment": "Monthly kept clinics under five staff from churning in their first year for us; annual only worked once they had a practice manager.",
+      "events": [
+        {"at": "2026-10-03T13:00:00+00:00", "who": "author", "note": "Asked what share of small clinics moved to annual later"},
+        {"at": "2026-10-03T15:30:00+00:00", "who": "me", "note": "Answered: about a third, mostly at the second renewal"}
+      ]
+    },
+    {
+      "id": "T-006",
+      "post_author": "Dmitri Vasilakis",
+      "tier": "standard",
+      "post_topic": "Dunning emails that do not sound like threats",
+      "post_ref": "",
+      "commented_at": "2026-09-30T11:00:00+00:00",
+      "comment": "The version that worked best for us named the person who would call, with a day. Recovery went up and complaints went down.",
+      "events": []
+    },
+    {
+      "id": "T-007",
+      "post_author": "Hannelore Brandt-Nakamura",
+      "tier": "standard",
+      "post_topic": "Chart-of-accounts design for multi-entity startups",
+      "post_ref": "",
+      "commented_at": "2026-09-18T08:00:00+00:00",
+      "comment": "We learned the hard way to keep intercompany accounts out of the operating ranges from day one.",
+      "events": []
+    },
+    {
+      "id": "T-008",
+      "post_author": "Olumide Farrington",
+      "tier": "priority",
+      "post_topic": "Refund policy as a sales tool",
+      "post_ref": "Head of Sales at Quillfield, post of 28 Sep",
+      "commented_at": "2026-09-28T09:00:00+00:00",
+      "comment": "A no-questions refund in the first sixty days cost us under two percent of revenue and removed the longest objection in our calls.",
+      "events": [
+        {"at": "2026-09-28T12:00:00+00:00", "who": "author", "note": "Asked whether abuse went up"},
+        {"at": "2026-09-28T14:00:00+00:00", "who": "me", "note": "Answered: four cases in a year, all under a month old"},
+        {"at": "2026-09-29T08:30:00+00:00", "who": "author", "note": "Said he would test it on the mid-market plan"},
+        {"at": "2026-09-29T10:30:00+00:00", "who": "me", "note": "Suggested starting with the plan that has the most trial-to-paid friction"}
+      ]
+    },
+    {
+      "id": "T-009",
+      "post_author": "Chiara Benedetti-Rao",
+      "tier": "standard",
+      "post_topic": "Seat-based pricing is dying",
+      "post_ref": "",
+      "commented_at": "2026-10-05T12:00:00+00:00",
+      "comment": "Seats still work for us where every seat is a named clinician. It breaks when one login is shared by a front desk.",
+      "events": [
+        {"at": "2026-10-06T20:00:00+00:00", "who": "other", "name": "Lars Oedegaard", "note": "Disagreed: says named seats only hold under about fifty users"}
+      ]
+    },
+    {
+      "id": "T-010",
+      "post_author": "Sunniva Aaltonen",
+      "tier": "standard",
+      "post_topic": "Moving invoicing in-house",
+      "post_ref": "",
+      "commented_at": "2026-09-22T10:00:00+00:00",
+      "comment": "The part that surprised us was credit notes, not invoices. They took four times the engineering effort.",
+      "events": [
+        {"at": "2026-09-22T16:00:00+00:00", "who": "author", "note": "Asked for an example of a credit-note edge case"},
+        {"at": "2026-09-23T09:00:00+00:00", "who": "me", "note": "Gave the partial-refund-after-plan-change case"}
+      ],
+      "closed": {"at": "2026-09-25T11:00:00+00:00", "reason": "She messaged; continued by direct message"}
+    },
+    {
+      "id": "T-011",
+      "post_author": "Rashida Okonjo-Weiss",
+      "tier": "priority",
+      "post_topic": "Why her finance team rejects tools without an audit trail",
+      "post_ref": "Controller at Brackenridge Group, post of 5 Oct",
+      "commented_at": "2026-10-05T08:00:00+00:00",
+      "comment": "We lost two deals before we understood that the audit trail had to be exportable, not just visible.",
+      "events": [
+        {"at": "2026-10-05T10:00:00+00:00", "who": "author", "note": "Asked which export format the auditors accepted"},
+        {"at": "2026-10-05T11:00:00+00:00", "who": "me", "note": "Answered: a dated CSV per period plus a signed summary"},
+        {"at": "2026-10-06T16:00:00+00:00", "who": "author", "note": "Asked whether the summary was signed by us or by the customer"},
+        {"at": "2026-10-06T17:00:00+00:00", "who": "me", "note": "Answered: by the customer's controller, we only generate it"},
+        {"at": "2026-10-07T07:00:00+00:00", "who": "author", "note": "Said that matches what her auditors want and thanked me"}
+      ]
+    }
+  ]
+}

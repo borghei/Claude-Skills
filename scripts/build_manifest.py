@@ -45,6 +45,7 @@ DOMAINS = [
     "research-ops",
     "business-operations",
     "markdown-html",
+    "tools",
     "workflow",
 ]
 

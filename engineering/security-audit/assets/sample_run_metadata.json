@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "run_id": "orders-api-run-1",
+  "repo": "orders-api",
+  "target": "/home/auditor/code/orders-api",
+  "source_ref": {
+    "commit": "4b1e9c0d2a7f5e6b8c3d1f0a9e8b7c6d5a4f3e2b",
+    "dirty": false
+  },
+  "tier": "focused",
+  "companions": [
+    "web-protocol-and-auth.md",
+    "ai-and-llm.md",
+    "supply-chain-and-release.md",
+    "cloud-and-deployment.md"
+  ],
+  "profile": "standard",
+  "scope_paths": [],
+  "budget": 24,
+  "agents_spent": 24,
+  "execution_policy": "source-review-and-sandboxed-local-only",
+  "prior_runs": [],
+  "shared_file_owner": "lead",
+  "run_status": "complete",
+  "incomplete_reason": null,
+  "created": "2026-10-07T09:00:00Z"
+}

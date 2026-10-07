@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "owner": "Odalys Venter",
+  "updated": "2026-09-18",
+  "sessions": 2,
+  "pillars": ["ops-craft", "field-notes", "team", "offer"],
+  "entries": [
+    {
+      "id": "S-001",
+      "kind": "role",
+      "title": "Night-shift dispatcher to operations lead",
+      "detail": "Joined Marlowe Cold Chain in 2017 as the only night dispatcher for 14 refrigerated trucks. Became operations lead in 2022 with 61 trucks and three depots to answer for.",
+      "when": "2017",
+      "pillars": ["field-notes"],
+      "words": "For five years my desk was a phone, a whiteboard and a kettle.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-002",
+      "kind": "figure",
+      "title": "Spoilage claims after the door-open rule",
+      "detail": "Spoilage claims fell from 37 in the first half of 2024 to 11 in the second half after we capped dock door-open time at 6 minutes per load.",
+      "when": "2024-07",
+      "pillars": ["ops-craft"],
+      "figure": {
+        "value": "37 claims down to 11",
+        "measures": "customer spoilage claims per half-year across three depots",
+        "basis": "claims ledger kept by finance, same customers both halves"
+      },
+      "words": "Nobody had ever timed the door. We had timed everything else.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": ["2026-09-02 post on dock timing"]
+    },
+    {
+      "id": "S-003",
+      "kind": "build",
+      "title": "The paper route board",
+      "detail": "Built a laminated route board for the Tilbrook depot in March 2023 after the planning software went down for 9 days. Drivers kept using it after the software came back.",
+      "when": "2023-03",
+      "pillars": ["ops-craft", "field-notes"],
+      "words": "The outage ended. The board stayed.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-004",
+      "kind": "reversal",
+      "title": "Stopped believing in route optimisation first",
+      "detail": "Spent 2021 pushing for a route optimiser. A week riding along in truck 22 in January 2022 showed the lost time was at the dock, not on the road.",
+      "when": "2022-01",
+      "pillars": ["ops-craft"],
+      "before": "The route is where the minutes are lost.",
+      "after": "The dock is where the minutes are lost; the route only shows it.",
+      "words": "I had been optimising the part I could see on a map.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-005",
+      "kind": "cost",
+      "title": "The Easter weekend reefer failure",
+      "detail": "Approved a deferred compressor service on two trailers in March 2023. Both failed over Easter and we wrote off 4 pallets of dairy for Halvorsen Foods.",
+      "when": "2023-04",
+      "pillars": ["field-notes"],
+      "price": "About 19,000 in product, one driver's holiday, and a customer review meeting I did not enjoy.",
+      "words": "I saved a service slot and bought a write-off.",
+      "naming": "anonymise",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-006",
+      "kind": "stance",
+      "title": "Dispatch should sit next to the dock, not in head office",
+      "detail": "Moved two dispatchers from the head office floor to a cabin beside the Tilbrook dock in 2024. Radio calls about load order dropped by roughly half within 3 weeks.",
+      "when": "2024-05",
+      "pillars": ["ops-craft", "team"],
+      "against": "Most ops directors I know, who want planners near finance and sales.",
+      "price": "",
+      "words": "A planner who cannot hear the forklifts is guessing.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-007",
+      "kind": "anecdote",
+      "title": "The driver who labelled the fridge",
+      "detail": "A driver called Bram taped a note inside trailer 9 in 2019 that said 'this one lies by two degrees'. He was right, and the sensor had been wrong for 7 months.",
+      "when": "2019",
+      "pillars": ["field-notes", "team"],
+      "words": "This one lies by two degrees.",
+      "naming": "ask",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-008",
+      "kind": "figure",
+      "title": "Pick accuracy improvement",
+      "detail": "We improved pick accuracy significantly after changing the bay layout.",
+      "when": "2025",
+      "pillars": ["ops-craft"],
+      "figure": {
+        "value": "significantly better",
+        "measures": "",
+        "basis": ""
+      },
+      "naming": "clear",
+      "status": "ready",
+      "used_in": []
+    },
+    {
+      "id": "S-009",
+      "kind": "anecdote",
+      "title": "First hire I got wrong",
+      "detail": "Hired a depot supervisor recently who left quickly.",
+      "when": "recently",
+      "pillars": ["team"],
+      "status": "soft",
+      "used_in": []
+    },
+    {
+      "id": "S-010",
+      "kind": "build",
+      "title": "Thursday cab ride-along",
+      "detail": "Since September 2022 every office hire spends one Thursday a quarter in a cab. 23 people have done it, including the finance director.",
+      "when": "2022-09",
+      "pillars": ["team"],
+      "words": "You plan differently once you have waited at a locked gate.",
+      "naming": "clear",
+      "status": "ready",
+      "used_in": ["2026-08-11 post on ride-alongs", "2026-09-09 comment thread recap"]
+    }
+  ],
+  "naming": {
+    "free": ["Marlowe Cold Chain", "Tilbrook depot"],
+    "ask_first": ["Bram"],
+    "never": ["Halvorsen Foods"]
+  },
+  "no_go": ["union negotiation", "depot sale"],
+  "voice_notes": {
+    "says": ["at the dock", "timed it", "rode along"],
+    "never_says": ["synergy", "supply chain excellence", "best-in-class"],
+    "sample_lines": [
+      "Nobody had ever timed the door. We had timed everything else.",
+      "A planner who cannot hear the forklifts is guessing."
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+For three years I believed that a weekly all-hands meeting was the cheapest possible way to keep sixty-two people pointed in the same direction, and I defended it every time someone suggested otherwise.
+
+On 9 June we cancelled it with two days' notice and nothing ready to replace it. That part was a mistake and I'd do it differently.
+
+The meeting cost 62 person-hours every Monday. In a typical week about three questions were asked out loud, nearly always by the same four people. The first fortnight without it was worse: two teams shipped conflicting changes to the pricing page, and a client noticed before we did. We then set up the replacement we should have started with, which is that each team lead posts a written update by 10:00 on Monday, questions go into one thread and get answered by Wednesday, and on the first Monday of the month there is a 20-minute call that is questions only with no slides and no updates.
+
+Within a month the number of questions asked in the open went from about 3 a week to 19. Ines in finance wrote: "I have never once asked a question in that meeting and I have asked four this week."
+
+Full write-up with our template here: [link]
+
+What do you think?
+
+#leadership #management #meetings #remotework #operations #startups

@@ -1,0 +1,41 @@
+We closed 1,140 support tickets in August with five people. In August last year it took nine people to close 900.
+
+I'd love to say that was a tooling win — it wasn't, mostly. Jonas rewrote our 14 most-used macros so they answered the question in the first line instead of the third, and that's most of it.
+
+The part I didn't expect: reopens dropped too. People don't write back when the first reply actually answers them.
+
+If your queue is growing, read your ten most-used macros out loud before you buy anything.
+---
+I got a promotion wrong last spring and it took me four months to notice.
+
+Priyanka was the best agent on the team — fastest, kindest, the one customers asked for by name. So I made her a team lead. By July she'd stopped taking tickets, hated her calendar, and two of her reports had asked to move.
+
+Nothing was wrong with her. I'd taken the thing she was great at and replaced it with meetings.
+
+We split the role in September. She's a senior agent again with a pay band that matches the lead track, and she runs the Thursday review, which she likes. Nobody's asked to move since.
+
+I'd assumed the only way up was management because that's how it worked everywhere I'd been. It doesn't have to.
+---
+A customer told me last week that our status page was "technically honest and practically useless."
+
+She was right. It said "degraded performance" for six hours on the 3rd while label printing was fully down for anyone on the old API.
+
+We've changed two things. Incidents now name the feature that's broken in plain words, and whoever's on call writes the update, not comms. It's rougher. It's also true — and it's posted about twenty minutes sooner.
+
+I still don't know how to show partial outages well. If you've seen a status page that does, send it my way?
+---
+Small thing that's saved me hours: I stopped writing "let me know if you have questions" at the end of handover docs.
+
+Now the last line is the one question I think the reader will have — and the answer.
+
+Tried it on the warehouse onboarding guide in June. Follow-up messages on that doc went from eleven the month before to three.
+
+It works because I have to actually guess what's unclear, and usually that means I go back and fix the unclear bit.
+---
+We turned off chat for nine days in October. On purpose.
+
+The team was drowning — median first reply had crept to 47 minutes, and half the chats were people asking where a parcel was, which the tracking page already answers.
+
+So chat went away and a bigger "Where's my parcel?" box went on the help page. Email volume went up by about a fifth. Total contacts went down by a third.
+
+We've turned chat back on, but only for accounts with an open incident. I thought customers would be angry. Four complained. One of them was my mum, who doesn't use the product.

@@ -1,13 +1,13 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 372 production-ready skills across 20 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.12.3",
+  "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
+  "version": "4.13.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 372,
-  "updated": "2026-09-27",
+  "total_skills": 385,
+  "updated": "2026-10-07",
   "domains": {
     "business-growth": {
       "count": 20,
@@ -30,8 +30,8 @@
       "tools": 4
     },
     "engineering": {
-      "count": 91,
-      "tools": 261
+      "count": 92,
+      "tools": 267
     },
     "finance": {
       "count": 3,
@@ -80,6 +80,10 @@
     "sales-success": {
       "count": 5,
       "tools": 15
+    },
+    "tools": {
+      "count": 12,
+      "tools": 27
     },
     "vertical-advisors": {
       "count": 7,
@@ -1206,6 +1210,26 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "security-audit",
+      "description": "Multi-agent source security audit with a coverage ledger, independently verified findings, and machine-checked records. Use when asked to audit a codebase, find vulnerabilities, or run a source-level pen test.",
+      "path": "engineering/security-audit/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "security-audit",
+        "vulnerability-research",
+        "multi-agent",
+        "code-review",
+        "appsec"
+      ],
+      "tools": 6,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "self-improving-agent",
@@ -6623,6 +6647,247 @@
         "accessibility"
       ],
       "tools": 4,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-comment-writer",
+      "description": "Drafts comments on other people's LinkedIn posts that add a specific the post lacked, then gates them offline. Use when commenting on a post, engaging with a prospect or peer, or checking a comment before pasting it.",
+      "path": "tools/linkedin/linkedin-comment-writer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "comments",
+        "engagement",
+        "social-selling",
+        "writing"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-content-planner",
+      "description": "Builds a weekly or monthly LinkedIn publishing plan from content pillars, a posting cadence and a format mix, with a founder-oriented pillar set as an alternative to the general one. Use when planning a week, a month or a launch period of posts rather than drafting a single post.",
+      "path": "tools/linkedin/linkedin-content-planner/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "content-calendar",
+        "content-pillars",
+        "editorial-planning",
+        "founder-content"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-content-repurposer",
+      "description": "Turns something made for another channel (a thread, a video or talk transcript, a blog post, a newsletter) into a post that reads as native to LinkedIn, without changing what the source says. Use when existing material should become a LinkedIn post rather than writing one from a blank page.",
+      "path": "tools/linkedin/linkedin-content-repurposer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "repurposing",
+        "content-adaptation",
+        "transcripts",
+        "fidelity-check"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-employee-advocacy",
+      "description": "Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.",
+      "path": "tools/linkedin/linkedin-employee-advocacy/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "employee-advocacy",
+        "governance",
+        "team-cadence",
+        "social-policy"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-engagement-analytics",
+      "description": "Segments who reacted to and commented on a post from a CSV or JSON export, and says whether it reached the intended audience. Use when reviewing a post's engagers, checking audience fit, or building a baseline.",
+      "path": "tools/linkedin/linkedin-engagement-analytics/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "analytics",
+        "audience-segmentation",
+        "engagement",
+        "privacy"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-hook-analyzer",
+      "description": "Extracts and classifies the opening-line pattern of LinkedIn posts the user pastes or saves, and turns each into a reusable slot template with cautions. Use when studying why an opening works, building a swipe file, or adapting a hook pattern without copying it.",
+      "path": "tools/linkedin/linkedin-hook-analyzer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "hooks",
+        "swipe-file",
+        "pattern-analysis",
+        "copywriting"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-humanizer",
+      "description": "Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue, emoji-pattern scoring, rule explanations, and a voice fingerprint built from the author's own posts. Use when a draft reads generated, before publishing, or when an edit flattened someone's voice.",
+      "path": "tools/linkedin/linkedin-humanizer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "humanizer",
+        "ai-writing",
+        "editing",
+        "voice",
+        "pre-publish"
+      ],
+      "tools": 4,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-post-writer",
+      "description": "Drafts LinkedIn posts from a brief: picks an angle and opening pattern the author's real material supports, structures the body, and gates the draft before it is pasted. Use when writing a post, choosing a hook, or checking a draft before publishing.",
+      "path": "tools/linkedin/linkedin-post-writer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "copywriting",
+        "hooks",
+        "content-drafting",
+        "pre-publish"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-profile-optimizer",
+      "description": "Audits and rewrites a LinkedIn profile from pasted text: headline, About, experience, skills, Featured, banner and photo. Use when reviewing a profile, fixing a headline or About, or preparing a profile before posting more.",
+      "path": "tools/linkedin/linkedin-profile-optimizer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "profile",
+        "headline",
+        "personal-branding",
+        "career"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-reply-manager",
+      "description": "Triages a pasted LinkedIn comment section and drafts replies: which comments to answer, in what order, which to ignore. Use when answering comments on your own post, replying inside a thread, or clearing a backlog.",
+      "path": "tools/linkedin/linkedin-reply-manager/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "replies",
+        "comment-triage",
+        "community-management",
+        "engagement"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-story-interviewer",
+      "description": "Interviews a person to surface what they actually have to say, and keeps the answers in a local story bank file that later LinkedIn drafts draw on. Use when someone has never posted, when drafts keep coming out generic, or when the story bank is thin or stale.",
+      "path": "tools/linkedin/linkedin-story-interviewer/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "interviewing",
+        "story-bank",
+        "content-discovery",
+        "personal-brand"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "linkedin-thread-tracker",
+      "description": "Keeps a local log of LinkedIn comments you left, records who replied, and reports follow-ups due, overdue, or dead. Use when logging a comment, checking which threads need an answer, or reviewing reply rates.",
+      "path": "tools/linkedin/linkedin-thread-tracker/SKILL.md",
+      "domain": "tools",
+      "category": "tools",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "linkedin",
+        "follow-up",
+        "thread-tracking",
+        "engagement",
+        "relationship-building"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },

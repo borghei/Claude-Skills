@@ -1,0 +1,17 @@
+1/ A thread 🧵 on the dullest change I ever made to a bus depot, and why it beat every piece of software we bought that year.
+
+2/ I plan maintenance for 86 buses at Fenwater Transit. In 2024 we had 31 roadside breakdowns in the first six months. Management wanted a predictive maintenance platform. cc @fenwater_ops
+
+3/ Before anyone signed anything I read every breakdown report by hand. It took two evenings. 19 of the 31 were things a driver had already written on a defect card.
+
+4/ So the information existed. It was just sitting in a tray. The cards were collected at 6am and typed up at 2pm, after the buses had already gone back out.
+
+5/ We changed one thing: the night fitter reads the defect cards at 10pm, before the morning run-out, instead of the office reading them the next afternoon.
+
+6/ Second half of 2024: 12 roadside breakdowns. Same fleet, same routes, same budget. No new system.
+
+7/ I used to think our problem was that we did not have enough data. We had the data. We had it sixteen hours too late.
+
+8/ What I'd tell any ops team: before you buy something that predicts failures, time how long a known defect takes to reach someone who can fix it.
+
+9/ Full write-up with the card template here: https://example.com/fenwater-defect-cards RT if this was useful, and follow for more depot stories. #maintenance #fleet #transit #operations

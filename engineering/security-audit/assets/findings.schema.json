@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Security audit findings",
+  "description": "Final records of one audit run. Each record carries exactly one verdict, and the verdict decides which fields are allowed. Validate with scripts/validate_findings.py, which also enforces ordering, path safety, trace shape, and severity rules that a schema cannot express.",
+  "type": "object",
+  "required": ["schema_version", "run_id", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "findings": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/confirmed"},
+          {"$ref": "#/$defs/needs_validation"},
+          {"$ref": "#/$defs/rejected"}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "fingerprint": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/@+-]{0,199}$"
+    },
+    "text": {"type": "string", "minLength": 1},
+    "level": {"type": "string", "enum": ["informational", "low", "medium", "high", "critical"]},
+    "trace": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["step", "file", "line", "symbol", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "step": {"type": "string", "enum": ["entry", "flow", "sink"]},
+          "file": {"$ref": "#/$defs/text"},
+          "line": {"type": "integer", "minimum": 1},
+          "symbol": {"$ref": "#/$defs/text"},
+          "note": {"$ref": "#/$defs/text"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["file", "line", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "file": {"$ref": "#/$defs/text"},
+          "line": {"type": "integer", "minimum": 1},
+          "note": {"$ref": "#/$defs/text"}
+        }
+      }
+    },
+    "rated": {
+      "type": "object",
+      "required": ["level", "why"],
+      "additionalProperties": false,
+      "properties": {
+        "level": {"$ref": "#/$defs/level"},
+        "why": {"$ref": "#/$defs/text"}
+      }
+    },
+    "confirmed": {
+      "type": "object",
+      "required": ["verdict", "fingerprint", "title", "summary", "root_cause", "violated_invariant", "actor", "affected", "trace", "evidence", "preconditions", "reproduction", "fix", "severity", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {"type": "string", "const": "confirmed"},
+        "fingerprint": {"$ref": "#/$defs/fingerprint"},
+        "title": {"$ref": "#/$defs/text"},
+        "summary": {"$ref": "#/$defs/text"},
+        "root_cause": {"$ref": "#/$defs/text"},
+        "violated_invariant": {"$ref": "#/$defs/text"},
+        "actor": {"$ref": "#/$defs/text"},
+        "affected": {"$ref": "#/$defs/text"},
+        "trace": {"$ref": "#/$defs/trace"},
+        "evidence": {"$ref": "#/$defs/evidence"},
+        "preconditions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "detail"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": {"type": "string", "enum": ["authentication", "role", "user_interaction", "configuration", "network_position", "environment", "data_state", "timing", "third_party"]},
+              "detail": {"$ref": "#/$defs/text"}
+            }
+          }
+        },
+        "reproduction": {
+          "type": "object",
+          "required": ["interface", "inputs", "steps", "observed"],
+          "additionalProperties": false,
+          "properties": {
+            "interface": {"$ref": "#/$defs/text"},
+            "inputs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+            "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+            "observed": {"$ref": "#/$defs/text"}
+          }
+        },
+        "fix": {
+          "type": "object",
+          "required": ["strategy", "regression_test"],
+          "additionalProperties": false,
+          "properties": {
+            "strategy": {"$ref": "#/$defs/text"},
+            "regression_test": {"$ref": "#/$defs/text"},
+            "changes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["file", "change"],
+                "additionalProperties": false,
+                "properties": {
+                  "file": {"$ref": "#/$defs/text"},
+                  "change": {"$ref": "#/$defs/text"}
+                }
+              }
+            }
+          }
+        },
+        "severity": {
+          "type": "object",
+          "required": ["likelihood", "impact", "overall"],
+          "additionalProperties": false,
+          "properties": {
+            "likelihood": {"$ref": "#/$defs/rated"},
+            "impact": {"$ref": "#/$defs/rated"},
+            "overall": {"$ref": "#/$defs/level"}
+          }
+        },
+        "confidence": {
+          "type": "object",
+          "required": ["level", "why"],
+          "additionalProperties": false,
+          "properties": {
+            "level": {"type": "string", "enum": ["low", "medium", "high"]},
+            "why": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "needs_validation": {
+      "type": "object",
+      "required": ["verdict", "fingerprint", "title", "summary", "suspected_root_cause", "trace", "evidence", "blockers", "resolution"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {"type": "string", "const": "needs_validation"},
+        "fingerprint": {"$ref": "#/$defs/fingerprint"},
+        "title": {"$ref": "#/$defs/text"},
+        "summary": {"$ref": "#/$defs/text"},
+        "suspected_root_cause": {"$ref": "#/$defs/text"},
+        "trace": {"$ref": "#/$defs/trace"},
+        "evidence": {"$ref": "#/$defs/evidence"},
+        "blockers": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "local": {"$ref": "#/$defs/text"},
+            "owner_check": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+    "rejected": {
+      "type": "object",
+      "required": ["verdict", "fingerprint", "title", "summary", "suspected_root_cause", "trace", "evidence", "rejection_reason"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {"type": "string", "const": "rejected"},
+        "fingerprint": {"$ref": "#/$defs/fingerprint"},
+        "title": {"$ref": "#/$defs/text"},
+        "summary": {"$ref": "#/$defs/text"},
+        "suspected_root_cause": {"$ref": "#/$defs/text"},
+        "trace": {"$ref": "#/$defs/trace"},
+        "evidence": {"$ref": "#/$defs/evidence"},
+        "rejection_reason": {"$ref": "#/$defs/text"}
+      }
+    }
+  }
+}

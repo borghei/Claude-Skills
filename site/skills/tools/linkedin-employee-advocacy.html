@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linkedin Employee Advocacy - Claude Skills</title>
+  <meta name="description" content="Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a progra">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-employee-advocacy.html">
+  <meta property="og:title" content="Linkedin Employee Advocacy - Claude Skills">
+  <meta property="og:description" content="Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a progra">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-employee-advocacy.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Linkedin Employee Advocacy", "description": "Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.", "applicationCategory": "Tools", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/tools/linkedin-employee-advocacy.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/tools/">Tools</a><span class=sep>/</span><span>Linkedin Employee Advocacy</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Linkedin Employee Advocacy</h1>
+    <p class="page-subtitle">Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Tools</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">linkedin</span><span class="tag">employee-advocacy</span><span class="tag">governance</span><span class="tag">team-cadence</span><span class="tag">social-policy</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Linkedin Employee Advocacy (Tools domain).
+
+Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.
+
+Advocacy programmes usually fail the same way. Marketing writes a post, sends it to thirty people with &quot;please share&quot;, and eight of them paste it on the same morning. Colleagues like each other&#x27;s copies for a week. A manager starts
+
+## Your Key Capabilities
+- — Quick start: plan a roster
+- — Write the charter and clear the gate
+- — Four-week review and recalibration
+- What the company may supply
+- Review design
+- Cadence decisions
+
+## Frameworks &amp; Templates You Know
+- - Honest answers to the governance questions in `assets/roster_template.json`
+- 1. Copy `assets/roster_template.json`. Add one entry per person who has been
+- 1. Fill in `assets/advocacy_charter_template.md` using
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-employee-advocacy
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Linkedin Employee Advocacy (Tools domain).
+
+Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.
+
+Advocacy programmes usually fail the same way. Marketing writes a post, sends it to thirty people with &quot;please share&quot;, and eight of them paste it on the same morning. Colleagues like each other&#x27;s copies for a week. A manager starts
+
+## Your Key Capabilities
+- — Quick start: plan a roster
+- — Write the charter and clear the gate
+- — Four-week review and recalibration
+- What the company may supply
+- Review design
+- Cadence decisions
+
+## Frameworks &amp; Templates You Know
+- - Honest answers to the governance questions in `assets/roster_template.json`
+- 1. Copy `assets/roster_template.json`. Add one entry per person who has been
+- 1. Fill in `assets/advocacy_charter_template.md` using
+- Decision frameworks
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/linkedin-employee-advocacy
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Linkedin Employee Advocacy&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Employee Advocacy
+
+Advocacy programmes usually fail the same way. Marketing writes a post, sends
+it to thirty people with &quot;please share&quot;, and eight of them paste it on the
+same morning. Colleagues like each other&#x27;s copies for a week. A manager starts
+asking who has posted. By the second month the willing have gone quiet and the
+unwilling are resentful, and the company has taught its own staff that their
+personal accounts are a distribution list.
+
+The cause is treating employees&#x27; accounts as a channel the company owns. This
+skill designs the programme the other way round: people opt in individually,
+write in their own words about subjects they know first-hand, at a cadence
+sized to the time they have actually agreed to, with review limited to a short
+list of risk triggers. It works **offline**. It plans from a roster file the
+user supplies; it does not post, schedule, log in to anything, or collect data
+from the network.
+
+**Scope boundary.** This skill designs and governs the team programme. It does
+**not** write anyone&#x27;s posts or comments (`linkedin-post-writer`,
+`linkedin-comment-writer`), clean up drafting-tool phrasing
+(`linkedin-humanizer`), or test opening lines (`linkedin-hook-analyzer`). It
+does **not** manage replies or follow threads (`linkedin-reply-manager`,
+`linkedin-thread-tracker`), build an individual&#x27;s content calendar or recycle
+material (`linkedin-content-planner`, `linkedin-content-repurposer`), or
+interview a person to find their stories (`linkedin-story-interviewer`).
+Individual profiles are `linkedin-profile-optimizer`; working out who a post
+reached is `linkedin-engagement-analytics`. None of those is required to use
+this one.
+
+## When to use this skill
+
+- A leader wants &quot;the team posting&quot; and there is no charter, roster or cadence yet
+- A programme exists but output is identical, sporadic or has stopped
+- HR, legal or a works council asks what the rules are and none are written down
+- People are being nominated by managers instead of asked
+- A review queue has become the reason nothing gets published
+- The sponsor wants to know whether the programme is working, and the only numbers are a leaderboard
+
+## Inputs the skill expects
+
+- The programme goal: pipeline, hiring, reputation or category
+- A roster of people who have been asked: role family, seniority, how often they post today, hours a week they have agreed to, their own topics, and whether they said yes
+- Honest answers to the governance questions in `assets/roster_template.json`
+- Who the owner and the checkers are, and how much time the checkers have
+- Any regulated or restricted roles on the team
+- The countries the team works in, for the legal review of disclosure and employment wording
+
+## Clarify First
+
+Before producing a plan or charter, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Whether each person has opted in themselves** — the planner schedules only people with a recorded yes; a manager&#x27;s list is not consent and changes the roster entirely
+- [ ] **The programme goal** — decides which role families the plan depends on and what the outcome log counts
+- [ ] **Hours each person has really agreed to** — every cadence is capped by it; an optimistic figure produces a plan nobody keeps
+- [ ] **Regulated roles and jurisdictions** — decides who needs a pre-publication check and which sections of the charter need counsel
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Workflows
+
+### Workflow 1 — Quick start: plan a roster
+
+1. Copy `assets/roster_template.json`. Add one entry per person who has been
+   asked, and set `opted_in` to true only for those who said yes.
+2. Answer every governance key. An unanswered key is reported as a gap.
+3. Run the planner and read the findings before the matrix; blockers come
+   first.
+4. The agent reports the weekly matrix, the topic coverage map, each blocker
+   with its fix, and the assumptions used (time model, review share).
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json
+```
+
+### Workflow 2 — Write the charter and clear the gate
+
+1. Fill in `assets/advocacy_charter_template.md` using
+   `references/governance-and-consent.md`: consent, never-scripted list,
+   disclosure, triggers and checkers, incident pause, leavers.
+2. Send sections 4, 5 and 8 for legal review in each jurisdiction.
+3. Update the roster&#x27;s governance answers to match what the charter now says.
+4. Re-run the planner as a quality gate. It must pass with no blockers before
+   anyone is invited to post.
+5. Share each member their own row and record their acceptance in charter
+   section 12.
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json \
+  --fail-on blocker
+
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_rules.py --list-rules
+```
+
+### Workflow 3 — Four-week review and recalibration
+
+1. Collect plan versus actual at team level and each member&#x27;s honest estimate
+   of minutes spent. Do not collect individual reach figures unless offered.
+2. Calibrate the time model with the team median
+   (`references/programme-design.md` §10) and re-run for the current week.
+3. Resolve crowded topics by vantage point and agree changes with the members
+   concerned.
+4. Update the baseline sheet and the outcome log
+   (`references/measuring-the-programme.md` §3 and §5).
+5. Verify that nobody has been moved up a stage without asking for it.
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json \
+  --week 8 --minutes-per-post 55 --format json
+```
+
+## Decision frameworks
+
+### What the company may supply
+
+| Supplied by the company | Verdict | Reason |
+|-------------------------|---------|--------|
+| Facts, figures and names cleared for public use | [PROVEN] Yes | Removes the &quot;am I allowed to say this&quot; delay, which is the real blocker |
+| Links, images, event details | [PROVEN] Yes | Source material, not speech |
+| A list of possible angles by role | [RECOMMENDED] Yes | Prompts thinking without writing it |
+| A conversation or interview that becomes the person&#x27;s own post | [RECOMMENDED] Yes | The words and opinions remain theirs |
+| A finished post to paste | No | Duplicate copy is recognisable and it puts words in people&#x27;s mouths |
+| Opinions, praise, testimonials, personal stories | Never | These are only true when the person originates them |
+| A rota for liking and commenting on colleagues&#x27; posts | Never | Manufactured engagement misleads readers |
+
+### Review design
+
+| Choice | Recommendation | Reason |
+|--------|----------------|--------|
+| Review everything or review by trigger | [RECOMMENDED] By trigger | Most posts carry no risk; a universal queue slows all of them and teaches people their voice needs permission |
+| What a checker may change | [RECOMMENDED] Facts and timing only | Style edits push people into the company voice, then out of the programme |
+| Missed review deadline | [RECOMMENDED] Escalate to the owner; silence is not approval | A post that tripped a trigger should not publish because someone was busy |
+| Restricted roles | [PROVEN] Named specialist check before anything about the business | The exposure is real and specific to the role |
+| Automated pre-screening of drafts for trigger words | [EXPERIMENTAL] Only as a prompt to the author | Helpful as a reminder; harmful if it becomes a gate people cannot argue with |
+
+### Cadence decisions
+
+| Situation | Recommendation |
+|-----------|----------------|
+| New to posting | [RECOMMENDED] Start with comments only, then a post a fortnight |
+| Engineer or designer with thirty minutes a week | [RECOMMENDED] Plan as comment-only or a post a fortnight, on purpose |
+| Someone wants to post daily | Check it fits the job; raise agreed hours before raising the plan |
+| Launch week | Supply more material; do not coordinate timing or raise targets |
+| One person produces most of the team&#x27;s posts | Spread the load and protect that person&#x27;s time; do not present the programme as broader than it is |
+
+### Blocker or warning
+
+| Finding class | Severity | Why |
+|---------------|----------|-----|
+| Not voluntary, tied to pay or review, company holds logins | Blocker | Removes the employee&#x27;s free choice or control of their own account |
+| No disclosure guidance, verbatim shared copy, engagement rota | Blocker | Misleads readers |
+| No trigger list, restricted role without a check | Blocker | Leaves the company&#x27;s real risks uncaught |
+| No pause rule, no leaver rule, slow review, no owner | Warning | The programme can start, but will fail at the first hard week |
+| Crowded topic, thin time budget, review overload | Warning | Sustainability problems the plan can fix |
+
+## Anti-Patterns
+
+### The &quot;please share&quot; email
+**Mistake:** Marketing sends a finished post to the team and asks everyone to publish it.
+**Why it happens:** It is the fastest way to produce visible activity, and it guarantees the message is on-brand.
+**Instead:** Send the facts, the link and one line of possible angles per role. Anyone who wants to mention it writes their own post or reshares with a comment of their own. Rule GV-05 blocks verbatim copy for this reason.
+
+### Enrolment by org chart
+**Mistake:** The roster is &quot;everyone in sales and marketing&quot;, announced at an all-hands.
+**Why it happens:** Asking people one at a time is slow, and a large roster looks like commitment.
+**Instead:** Invite individually, share the charter first, and record each yes. Start with the five who want to. The planner excludes anyone without `opted_in: true` and reports them (RS-01) so the gap is visible.
+
+### The leaderboard
+**Mistake:** A weekly ranking of who posted most or reached furthest is shared in a team channel.
+**Why it happens:** It feels like recognition, and it is the easiest thing to build from the available numbers.
+**Instead:** Report team totals and thank people for specific posts. Ranking individuals makes participation a performance matter, rewards whoever already had the largest audience, and reliably produces padding and pasted copy.
+
+### Reviewing voice instead of risk
+**Mistake:** Every post goes through a queue, and comes back with a new opening and brand vocabulary.
+**Why it happens:** The reviewer is a writer and wants to help, and nobody defined what the review is for.
+**Instead:** Review only posts that trip a written trigger, and limit the checker to one question about a fact or a date (`references/governance-and-consent.md` §6 and §7).
+
+### Uniform cadence
+**Mistake:** Everyone is asked for three posts a week.
+**Why it happens:** One number is easy to communicate and easy to track.
+**Instead:** Size each row to the person&#x27;s role, habit and agreed hours. A founder and an engineer with thirty minutes do not share a cadence, and a comment-only member is a full member.
+
+### Asking staff to defend the company
+**Mistake:** During criticism or an incident, employees are encouraged to post supportive messages or reply to critics.
+**Why it happens:** It looks like a show of strength, and people offer.
+**Instead:** Call the pause in the charter, give people one agreed line that points to the official statement, and leave it there. Staged support is recognisable and extends the story.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/advocacy_planner.py` | Builds a per-person weekly cadence matrix from a roster, capped by each person&#x27;s time; maps topic coverage, estimates review load, and reports governance and roster findings; `--fail-on` turns it into a gate |
+| `scripts/advocacy_rules.py` | Cadence starting points by role family, seniority and stage factors, the time model, goal emphasis, and the governance rule catalogue; `--list-rules` prints them |
+| `references/programme-design.md` | Design principles, who to invite, how cadence is sized, stages, topic allocation, the weekly note, launch sequence, calibration |
+| `references/governance-and-consent.md` | Consent, account ownership, the never-scripted list, disclosure, review by trigger, escalation, restricted roles, incident pause, leavers, audit |
+| `references/measuring-the-programme.md` | Three measurement levels, what not to measure, building a baseline from your own history, honest attribution, health indicators, review rhythm |
+| `assets/sample_roster.json` | Invented nine-person roster with deliberate governance and roster gaps |
+| `assets/roster_template.json` | Blank roster with every governance key and member field |
+| `assets/advocacy_charter_template.md` | Fill-in charter covering consent, never-scripted list, disclosure, triggers, pause, leavers and agreed plans |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Employee Advocacy&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Employee Advocacy in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Employee Advocacy&quot;**
+   - Description: &quot;Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-employee-advocacy/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Linkedin Employee Advocacy&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# LinkedIn Employee Advocacy
+
+Advocacy programmes usually fail the same way. Marketing writes a post, sends
+it to thirty people with &quot;please share&quot;, and eight of them paste it on the
+same morning. Colleagues like each other&#x27;s copies for a week. A manager starts
+asking who has posted. By the second month the willing have gone quiet and the
+unwilling are resentful, and the company has taught its own staff that their
+personal accounts are a distribution list.
+
+The cause is treating employees&#x27; accounts as a channel the company owns. This
+skill designs the programme the other way round: people opt in individually,
+write in their own words about subjects they know first-hand, at a cadence
+sized to the time they have actually agreed to, with review limited to a short
+list of risk triggers. It works **offline**. It plans from a roster file the
+user supplies; it does not post, schedule, log in to anything, or collect data
+from the network.
+
+**Scope boundary.** This skill designs and governs the team programme. It does
+**not** write anyone&#x27;s posts or comments (`linkedin-post-writer`,
+`linkedin-comment-writer`), clean up drafting-tool phrasing
+(`linkedin-humanizer`), or test opening lines (`linkedin-hook-analyzer`). It
+does **not** manage replies or follow threads (`linkedin-reply-manager`,
+`linkedin-thread-tracker`), build an individual&#x27;s content calendar or recycle
+material (`linkedin-content-planner`, `linkedin-content-repurposer`), or
+interview a person to find their stories (`linkedin-story-interviewer`).
+Individual profiles are `linkedin-profile-optimizer`; working out who a post
+reached is `linkedin-engagement-analytics`. None of those is required to use
+this one.
+
+## When to use this skill
+
+- A leader wants &quot;the team posting&quot; and there is no charter, roster or cadence yet
+- A programme exists but output is identical, sporadic or has stopped
+- HR, legal or a works council asks what the rules are and none are written down
+- People are being nominated by managers instead of asked
+- A review queue has become the reason nothing gets published
+- The sponsor wants to know whether the programme is working, and the only numbers are a leaderboard
+
+## Inputs the skill expects
+
+- The programme goal: pipeline, hiring, reputation or category
+- A roster of people who have been asked: role family, seniority, how often they post today, hours a week they have agreed to, their own topics, and whether they said yes
+- Honest answers to the governance questions in `assets/roster_template.json`
+- Who the owner and the checkers are, and how much time the checkers have
+- Any regulated or restricted roles on the team
+- The countries the team works in, for the legal review of disclosure and employment wording
+
+## Clarify First
+
+Before producing a plan or charter, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Whether each person has opted in themselves** — the planner schedules only people with a recorded yes; a manager&#x27;s list is not consent and changes the roster entirely
+- [ ] **The programme goal** — decides which role families the plan depends on and what the outcome log counts
+- [ ] **Hours each person has really agreed to** — every cadence is capped by it; an optimistic figure produces a plan nobody keeps
+- [ ] **Regulated roles and jurisdictions** — decides who needs a pre-publication check and which sections of the charter need counsel
+
+Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Workflows
+
+### Workflow 1 — Quick start: plan a roster
+
+1. Copy `assets/roster_template.json`. Add one entry per person who has been
+   asked, and set `opted_in` to true only for those who said yes.
+2. Answer every governance key. An unanswered key is reported as a gap.
+3. Run the planner and read the findings before the matrix; blockers come
+   first.
+4. The agent reports the weekly matrix, the topic coverage map, each blocker
+   with its fix, and the assumptions used (time model, review share).
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json
+```
+
+### Workflow 2 — Write the charter and clear the gate
+
+1. Fill in `assets/advocacy_charter_template.md` using
+   `references/governance-and-consent.md`: consent, never-scripted list,
+   disclosure, triggers and checkers, incident pause, leavers.
+2. Send sections 4, 5 and 8 for legal review in each jurisdiction.
+3. Update the roster&#x27;s governance answers to match what the charter now says.
+4. Re-run the planner as a quality gate. It must pass with no blockers before
+   anyone is invited to post.
+5. Share each member their own row and record their acceptance in charter
+   section 12.
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json \
+  --fail-on blocker
+
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_rules.py --list-rules
+```
+
+### Workflow 3 — Four-week review and recalibration
+
+1. Collect plan versus actual at team level and each member&#x27;s honest estimate
+   of minutes spent. Do not collect individual reach figures unless offered.
+2. Calibrate the time model with the team median
+   (`references/programme-design.md` §10) and re-run for the current week.
+3. Resolve crowded topics by vantage point and agree changes with the members
+   concerned.
+4. Update the baseline sheet and the outcome log
+   (`references/measuring-the-programme.md` §3 and §5).
+5. Verify that nobody has been moved up a stage without asking for it.
+
+```bash
+python3 tools/linkedin/linkedin-employee-advocacy/scripts/advocacy_planner.py \
+  --input tools/linkedin/linkedin-employee-advocacy/assets/sample_roster.json \
+  --week 8 --minutes-per-post 55 --format json
+```
+
+## Decision frameworks
+
+### What the company may supply
+
+| Supplied by the company | Verdict | Reason |
+|-------------------------|---------|--------|
+| Facts, figures and names cleared for public use | [PROVEN] Yes | Removes the &quot;am I allowed to say this&quot; delay, which is the real blocker |
+| Links, images, event details | [PROVEN] Yes | Source material, not speech |
+| A list of possible angles by role | [RECOMMENDED] Yes | Prompts thinking without writing it |
+| A conversation or interview that becomes the person&#x27;s own post | [RECOMMENDED] Yes | The words and opinions remain theirs |
+| A finished post to paste | No | Duplicate copy is recognisable and it puts words in people&#x27;s mouths |
+| Opinions, praise, testimonials, personal stories | Never | These are only true when the person originates them |
+| A rota for liking and commenting on colleagues&#x27; posts | Never | Manufactured engagement misleads readers |
+
+### Review design
+
+| Choice | Recommendation | Reason |
+|--------|----------------|--------|
+| Review everything or review by trigger | [RECOMMENDED] By trigger | Most posts carry no risk; a universal queue slows all of them and teaches people their voice needs permission |
+| What a checker may change | [RECOMMENDED] Facts and timing only | Style edits push people into the company voice, then out of the programme |
+| Missed review deadline | [RECOMMENDED] Escalate to the owner; silence is not approval | A post that tripped a trigger should not publish because someone was busy |
+| Restricted roles | [PROVEN] Named specialist check before anything about the business | The exposure is real and specific to the role |
+| Automated pre-screening of drafts for trigger words | [EXPERIMENTAL] Only as a prompt to the author | Helpful as a reminder; harmful if it becomes a gate people cannot argue with |
+
+### Cadence decisions
+
+| Situation | Recommendation |
+|-----------|----------------|
+| New to posting | [RECOMMENDED] Start with comments only, then a post a fortnight |
+| Engineer or designer with thirty minutes a week | [RECOMMENDED] Plan as comment-only or a post a fortnight, on purpose |
+| Someone wants to post daily | Check it fits the job; raise agreed hours before raising the plan |
+| Launch week | Supply more material; do not coordinate timing or raise targets |
+| One person produces most of the team&#x27;s posts | Spread the load and protect that person&#x27;s time; do not present the programme as broader than it is |
+
+### Blocker or warning
+
+| Finding class | Severity | Why |
+|---------------|----------|-----|
+| Not voluntary, tied to pay or review, company holds logins | Blocker | Removes the employee&#x27;s free choice or control of their own account |
+| No disclosure guidance, verbatim shared copy, engagement rota | Blocker | Misleads readers |
+| No trigger list, restricted role without a check | Blocker | Leaves the company&#x27;s real risks uncaught |
+| No pause rule, no leaver rule, slow review, no owner | Warning | The programme can start, but will fail at the first hard week |
+| Crowded topic, thin time budget, review overload | Warning | Sustainability problems the plan can fix |
+
+## Anti-Patterns
+
+### The &quot;please share&quot; email
+**Mistake:** Marketing sends a finished post to the team and asks everyone to publish it.
+**Why it happens:** It is the fastest way to produce visible activity, and it guarantees the message is on-brand.
+**Instead:** Send the facts, the link and one line of possible angles per role. Anyone who wants to mention it writes their own post or reshares with a comment of their own. Rule GV-05 blocks verbatim copy for this reason.
+
+### Enrolment by org chart
+**Mistake:** The roster is &quot;everyone in sales and marketing&quot;, announced at an all-hands.
+**Why it happens:** Asking people one at a time is slow, and a large roster looks like commitment.
+**Instead:** Invite individually, share the charter first, and record each yes. Start with the five who want to. The planner excludes anyone without `opted_in: true` and reports them (RS-01) so the gap is visible.
+
+### The leaderboard
+**Mistake:** A weekly ranking of who posted most or reached furthest is shared in a team channel.
+**Why it happens:** It feels like recognition, and it is the easiest thing to build from the available numbers.
+**Instead:** Report team totals and thank people for specific posts. Ranking individuals makes participation a performance matter, rewards whoever already had the largest audience, and reliably produces padding and pasted copy.
+
+### Reviewing voice instead of risk
+**Mistake:** Every post goes through a queue, and comes back with a new opening and brand vocabulary.
+**Why it happens:** The reviewer is a writer and wants to help, and nobody defined what the review is for.
+**Instead:** Review only posts that trip a written trigger, and limit the checker to one question about a fact or a date (`references/governance-and-consent.md` §6 and §7).
+
+### Uniform cadence
+**Mistake:** Everyone is asked for three posts a week.
+**Why it happens:** One number is easy to communicate and easy to track.
+**Instead:** Size each row to the person&#x27;s role, habit and agreed hours. A founder and an engineer with thirty minutes do not share a cadence, and a comment-only member is a full member.
+
+### Asking staff to defend the company
+**Mistake:** During criticism or an incident, employees are encouraged to post supportive messages or reply to critics.
+**Why it happens:** It looks like a show of strength, and people offer.
+**Instead:** Call the pause in the charter, give people one agreed line that points to the official statement, and leave it there. Staged support is recognisable and extends the story.
+
+## Files
+
+Tools overview and reference documentation for this skill:
+
+| File | Purpose |
+|------|---------|
+| `scripts/advocacy_planner.py` | Builds a per-person weekly cadence matrix from a roster, capped by each person&#x27;s time; maps topic coverage, estimates review load, and reports governance and roster findings; `--fail-on` turns it into a gate |
+| `scripts/advocacy_rules.py` | Cadence starting points by role family, seniority and stage factors, the time model, goal emphasis, and the governance rule catalogue; `--list-rules` prints them |
+| `references/programme-design.md` | Design principles, who to invite, how cadence is sized, stages, topic allocation, the weekly note, launch sequence, calibration |
+| `references/governance-and-consent.md` | Consent, account ownership, the never-scripted list, disclosure, review by trigger, escalation, restricted roles, incident pause, leavers, audit |
+| `references/measuring-the-programme.md` | Three measurement levels, what not to measure, building a baseline from your own history, honest attribution, health indicators, review rhythm |
+| `assets/sample_roster.json` | Invented nine-person roster with deliberate governance and roster gaps |
+| `assets/roster_template.json` | Blank roster with every governance key and member field |
+| `assets/advocacy_charter_template.md` | Fill-in charter covering consent, never-scripted list, disclosure, triggers, pause, leavers and agreed plans |
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Linkedin Employee Advocacy&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Linkedin Employee Advocacy in the Tools domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Linkedin Employee Advocacy&quot;**
+   - Description: &quot;Designs and runs an employee advocacy programme: who posts what and how often, review rules, and what is never scripted. Use when getting a team posting, writing an advocacy policy, or fixing a programme that has stalled.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-employee-advocacy/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install tools/linkedin/linkedin-employee-advocacy ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-employee-advocacy your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/linkedin-employee-advocacy/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/linkedin-employee-advocacy your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/linkedin-employee-advocacy/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/linkedin-employee-advocacy your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: tools/linkedin/linkedin-employee-advocacy/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-employee-advocacy your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/tools/linkedin/linkedin-employee-advocacy your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/tools/linkedin/linkedin-employee-advocacy</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python tools/linkedin/linkedin-employee-advocacy/scripts/tool_name.py --help</code></pre>
+  
+  
+  <h2>Related Skills in Tools</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-comment-writer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Comment Writer</h3><p>Drafts comments on other people&#x27;s LinkedIn posts that add a specific the post lacked, then gates...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-planner.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Planner</h3><p>Builds a weekly or monthly LinkedIn publishing plan from content pillars, a posting cadence and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-content-repurposer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Content Repurposer</h3><p>Turns something made for another channel (a thread, a video or talk transcript, a blog post, a...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-engagement-analytics.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Engagement Analytics</h3><p>Segments who reacted to and commented on a post from a CSV or JSON export, and says whether it...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-hook-analyzer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Hook Analyzer</h3><p>Extracts and classifies the opening-line pattern of LinkedIn posts the user pastes or saves, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/tools/linkedin-humanizer.html" class="skill-card" style="text-decoration:none"><h3>Linkedin Humanizer</h3><p>Audits and rewrites LinkedIn drafts to remove machine-sounding patterns: tiered tell catalogue,...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/tools/linkedin/linkedin-employee-advocacy/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

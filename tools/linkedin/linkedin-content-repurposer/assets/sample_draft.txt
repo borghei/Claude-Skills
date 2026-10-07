@@ -1,0 +1,15 @@
+As I posted in my thread last week, here is the dullest change I ever made to a bus depot.
+
+I plan maintenance for 86 buses at Fenwater Transit. In 2024 we had 31 roadside breakdowns in the first six months. Management wanted a predictive maintenance platform.
+
+Before anyone signed anything I read every breakdown report by hand. It took two evenings. 19 of the 31 were things a driver had already written on a defect card.
+
+So the information existed. It was just sitting in a tray. The cards were collected at 6am and typed up at 2pm, after the buses had already gone back out.
+
+We changed one thing: the night fitter reads the defect cards at 10pm, before the morning run-out.
+
+Second half of 2024: 9 roadside breakdowns, a 71% drop. As my depot manager put it, "the best system we ever bought was a man with a torch."
+
+Full write-up here: https://example.com/fenwater-defect-cards
+
+#maintenance #fleet #transit #operations
