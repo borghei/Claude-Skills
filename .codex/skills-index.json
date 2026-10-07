@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 235,
+  "total_skills": 236,
   "skills": [
     {
       "name": "channel-economics",
@@ -686,6 +686,12 @@
     {
       "name": "secrets-vault-manager",
       "source": "../../engineering/secrets-vault-manager",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "security-audit",
+      "source": "../../engineering/security-audit",
       "category": "engineering",
       "description": ">"
     },
@@ -1428,7 +1434,7 @@
       "description": "Executive leadership and advisory skills"
     },
     "engineering": {
-      "count": 91,
+      "count": 92,
       "source": "../../engineering",
       "description": "Software engineering and technical skills"
     },
