@@ -260,3 +260,21 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_reply_drafts.json` | Nine draft replies to that section — four that pass and five that each trip a block |
 | `assets/sample_story_bank.json` | Fictional story bank showing the optional input: ready and soft entries, naming rules, no-go topics; pass it with `--story-bank` |
 | `assets/reply_sweep_template.md` | Fill-in worksheet for a sweep: intake, triage decisions, drafts, and the paste-by-hand log |
+
+## Scope & Limitations
+
+**In Scope:**
+- Triages a pasted comment section into ten categories, detects which comments are already answered, scores and orders the reply queue, and says where each reply belongs in the thread (`comment_triage.py`).
+- Gates draft replies against eleven rules: canned thanks, dodged questions, length, unsolicited pitches, echo, unnamed nested replies, defensive wording, pasted duplicates, gushing openers, replies shaped by text aimed at an assistant, and names or topics a story bank rules out (`reply_linter.py`).
+- Six reply patterns and a decision table for hostile, mistaken, bad-faith, competitor and sensitive comments.
+
+**Out of Scope:**
+- The first comment on someone else's post; see `tools/linkedin/linkedin-comment-writer/`.
+- A running record of threads and follow-up dates; see `tools/linkedin/linkedin-thread-tracker/`.
+- Analysing who engaged with a post; see `tools/linkedin/linkedin-engagement-analytics/`.
+- Reading comments from LinkedIn, posting replies, or hiding and reporting comments. The user pastes the section in and each reply back by hand.
+
+**Important Caveats:**
+- Category and answered-or-not detection are heuristics; `references/triage-rules.md` lists what the tool gets wrong. Where order or nesting is unclear in a paste, the agent asks.
+- Queue order depends on the timestamps in the paste and the `--as-of` time.
+- How comments nest and notify on LinkedIn is current as of writing; verify it in the product.

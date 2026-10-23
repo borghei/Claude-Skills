@@ -407,6 +407,7 @@ Structured reflection at daily, weekly, and quarterly cadence that ends in a cha
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- - A prediction-log template and a timed 90-minute quarterly reflection agenda.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -440,6 +441,7 @@ Structured reflection at daily, weekly, and quarterly cadence that ends in a cha
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- - A prediction-log template and a timed 90-minute quarterly reflection agenda.
 
 ## How to Help
 When the user asks for help in this domain:
@@ -693,6 +695,26 @@ resolution cycle, most immediate payoff in planning.
 | `assets/sample_predictions.json` | 30 predictions (27 resolved, 3 pending) showing realistic delivery-date overconfidence, so scoring runs out of the box |
 | `assets/sample_commitments.json` | One week of commitments — 10 items spanning kept/missed/partial/open with two chronic carries, for the weekly cadence |
 | `assets/sample_commitments_quarterly.json` | One quarter of commitments — 18 items with four chronic carries and three overdue, for the quarterly cadence |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Calibration scoring of a prediction log: Brier score, Murphy decomposition, calibration table, per-domain breakdown, skill score against the base rate, and worst calls (`calibration_scorer.py`, with `--selftest` for the scoring invariants).
+- Cadence-specific prompt sets for daily, weekly and quarterly reflection, with per-commitment accountability prompts, keep-rate reading and a closing requirement (`reflection_prompt_generator.py`).
+- The three-cycle rule, keep-rate bands and a table of where overconfidence concentrates.
+- A prediction-log template and a timed 90-minute quarterly reflection agenda.
+
+**Out of Scope:**
+- The weekly operating review of wins, blockers and next-week priorities (see `personal-productivity/weekly-review/`).
+- Team retrospectives (see `project-management/sprint-retrospective/`).
+- Leadership coaching for executives (see `c-level-advisor/executive-mentor/`).
+- Mental health or therapeutic support.
+
+**Important Caveats:**
+- The tools read JSON logs the user keeps. They do not read calendars, task managers or journals, and they never read the clock; dates are passed in.
+- Below about 20 resolved predictions, the calibration score is too noisy to act on.
+- The score covers only the predictions logged. A log of easy predictions produces a good score that says little about judgement.
+- Outcomes are resolved by the user. The tools cannot check whether a prediction came true.
 
 ---
 
@@ -969,6 +991,26 @@ resolution cycle, most immediate payoff in planning.
 | `assets/sample_predictions.json` | 30 predictions (27 resolved, 3 pending) showing realistic delivery-date overconfidence, so scoring runs out of the box |
 | `assets/sample_commitments.json` | One week of commitments — 10 items spanning kept/missed/partial/open with two chronic carries, for the weekly cadence |
 | `assets/sample_commitments_quarterly.json` | One quarter of commitments — 18 items with four chronic carries and three overdue, for the quarterly cadence |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Calibration scoring of a prediction log: Brier score, Murphy decomposition, calibration table, per-domain breakdown, skill score against the base rate, and worst calls (`calibration_scorer.py`, with `--selftest` for the scoring invariants).
+- Cadence-specific prompt sets for daily, weekly and quarterly reflection, with per-commitment accountability prompts, keep-rate reading and a closing requirement (`reflection_prompt_generator.py`).
+- The three-cycle rule, keep-rate bands and a table of where overconfidence concentrates.
+- A prediction-log template and a timed 90-minute quarterly reflection agenda.
+
+**Out of Scope:**
+- The weekly operating review of wins, blockers and next-week priorities (see `personal-productivity/weekly-review/`).
+- Team retrospectives (see `project-management/sprint-retrospective/`).
+- Leadership coaching for executives (see `c-level-advisor/executive-mentor/`).
+- Mental health or therapeutic support.
+
+**Important Caveats:**
+- The tools read JSON logs the user keeps. They do not read calendars, task managers or journals, and they never read the clock; dates are passed in.
+- Below about 20 resolved predictions, the calibration score is too noisy to act on.
+- The score covers only the predictions logged. A log of easy predictions produces a good score that says little about judgement.
+- Outcomes are resolved by the user. The tools cannot check whether a prediction came true.
 
 ---
 

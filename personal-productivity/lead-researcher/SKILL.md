@@ -36,6 +36,7 @@ Score and qualify sales leads against an Ideal Customer Profile (ICP) definition
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -163,6 +164,27 @@ python scripts/lead_qualifier.py icp.json leads.csv --json
 - **One signal per email.** Multi-signal openers feel like research dumps; one well-chosen signal feels human.
 - **Leads are not opportunities.** A scored A-tier lead is permission to reach out, not a forecasted deal.
 - **Logs over feel.** Track which signals correlate with closed-won — let data update the ICP, not vibes.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Scoring a leads CSV against an `icp.json` definition with `lead_qualifier.py`: weighted must-have, nice-to-have and disqualifier rules, a 0-100 score, an A, B, C or disqualified tier, and matched signals per lead.
+- Building an ICP from closed-won customers, following `references/icp_framework.md` and `assets/icp_schema.json`.
+- First-touch outreach hooks tied to one matched signal, using `assets/outreach_template.md`.
+
+**Out of Scope:**
+- Finding or enriching leads. The skill does not scrape websites, LinkedIn or data providers.
+- Multi-step email sequences and deliverability (see `marketing/cold-email/`).
+- Segment-level ICP strategy for go-to-market planning (see `project-management/gtm/ideal-customer-profile/`).
+- Pipeline management and revenue forecasting (see `business-growth/revenue-operations/`).
+- Writing scores or tiers back to a CRM.
+
+**Important Caveats:**
+- All lead data comes from a CSV the user supplies. Signals such as funding or hiring are only as current as that export.
+- Scores are heuristic matches of field values against the ICP rules. Missing or inconsistently worded fields lower the score.
+- A high score means fit with the ICP as written, not buying intent. An ICP that is not tested against past wins and losses produces confident but wrong rankings.
 
 ---
 

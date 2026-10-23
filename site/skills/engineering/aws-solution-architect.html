@@ -478,13 +478,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-These are Python classes imported from `scripts/` (no CLI). See [references/tool-reference.md](references/tool-reference.md) for full parameters, methods, and examples.
+Each script is a command-line tool and an importable class. Every CLI prints an input template with `--example` (or `--help`) and supports `--format json`. See [references/tool-reference.md](references/tool-reference.md) for full parameters, methods, and examples.
 
 | Tool | Purpose | Usage |
 |------|---------|-------|
-| `architecture_designer.py` | Recommend a pattern + service stack + cost estimate from requirements | `from scripts.architecture_designer import ArchitectureDesigner` |
-| `serverless_stack.py` | Generate CloudFormation / CDK / Terraform serverless templates | `from scripts.serverless_stack import ServerlessStackGenerator` |
-| `cost_optimizer.py` | Analyze inventory + spend → prioritized savings recommendations | `from scripts.cost_optimizer import CostOptimizer` |
+| `architecture_designer.py` | Recommend a pattern + service stack + cost estimate from requirements | `python scripts/architecture_designer.py --input requirements.json` |
+| `serverless_stack.py` | Generate CloudFormation / CDK / Terraform serverless templates | `python scripts/serverless_stack.py --app-name my-app --region us-east-1 --format cloudformation` |
+| `cost_optimizer.py` | Analyze inventory + spend → prioritized savings recommendations | `python scripts/cost_optimizer.py --resources current_setup.json --monthly-spend 2000` |
 
 ## References
 
@@ -603,13 +603,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-These are Python classes imported from `scripts/` (no CLI). See [references/tool-reference.md](references/tool-reference.md) for full parameters, methods, and examples.
+Each script is a command-line tool and an importable class. Every CLI prints an input template with `--example` (or `--help`) and supports `--format json`. See [references/tool-reference.md](references/tool-reference.md) for full parameters, methods, and examples.
 
 | Tool | Purpose | Usage |
 |------|---------|-------|
-| `architecture_designer.py` | Recommend a pattern + service stack + cost estimate from requirements | `from scripts.architecture_designer import ArchitectureDesigner` |
-| `serverless_stack.py` | Generate CloudFormation / CDK / Terraform serverless templates | `from scripts.serverless_stack import ServerlessStackGenerator` |
-| `cost_optimizer.py` | Analyze inventory + spend → prioritized savings recommendations | `from scripts.cost_optimizer import CostOptimizer` |
+| `architecture_designer.py` | Recommend a pattern + service stack + cost estimate from requirements | `python scripts/architecture_designer.py --input requirements.json` |
+| `serverless_stack.py` | Generate CloudFormation / CDK / Terraform serverless templates | `python scripts/serverless_stack.py --app-name my-app --region us-east-1 --format cloudformation` |
+| `cost_optimizer.py` | Analyze inventory + spend → prioritized savings recommendations | `python scripts/cost_optimizer.py --resources current_setup.json --monthly-spend 2000` |
 
 ## References
 

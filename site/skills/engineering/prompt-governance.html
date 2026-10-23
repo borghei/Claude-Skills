@@ -512,10 +512,29 @@ python scripts/prompt_catalog_manager.py --list --catalog-dir ./prompts
 5. Deploy from catalog (never from ad-hoc sources)
 
 ### Prompt Versioning
-1. Store all prompts in catalog with semantic versioning
+1. Store all prompts in the catalog; each `--add` with changed content gets the next patch version (1.0.0, 1.0.1, ...), and identical content is rejected as a duplicate
 2. Use `--diff` to compare versions before promotion
-3. Maintain audit trail of all prompt changes
-4. Roll back to previous versions when issues detected
+3. Move the latest version through draft, review, approved and deployed with `--status`; keep the catalog directory in version control for the audit trail
+4. There is no rollback command, and re-adding an earlier version&#x27;s text is rejected as a duplicate. To roll back, redeploy the previous version&#x27;s text from `versions/&lt;name&gt;_v&lt;x_y_z&gt;.txt` and mark the bad latest version `retired` with `--status retired` (the CLI changes the latest version only)
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Pattern-based audit of a prompt with `prompt_auditor.py` across four check groups: injection, bias, safety and quality, selectable with `--checks`.
+- A local, file-based prompt catalog with `prompt_catalog_manager.py`: init, add with automatic version numbers and a content hash, list, search, diff between versions, and status changes (draft, review, approved, deployed, retired).
+- The prompt review and versioning workflows, and the policies, audit categories, severity levels, catalog schema and review checklist in `references/prompt-governance-framework.md`.
+
+**Out of Scope:**
+- Testing a deployed model or application against live injection or jailbreak attempts (see `engineering/ai-security/`).
+- Measuring output quality or task accuracy of a prompt (see `engineering/agentic-evaluation-framework/`).
+- Writing or tuning prompts (see `engineering/senior-prompt-engineer/`) and reducing token cost (see `engineering/llm-cost-optimizer/`).
+- Regulatory AI governance such as the EU AI Act or ISO/IEC 42001 (see `ra-qm-team/eu-ai-act-specialist/` and `ra-qm-team/iso42001-ai-management/`).
+- Serving prompts to an application or rolling them back at runtime. The catalog records versions and status only.
+
+**Important Caveats:**
+- The auditor matches regular expressions against prompt text. It catches known phrasings, misses reworded or new ones, and can flag harmless text. A clean audit is not evidence that a prompt is safe or unbiased.
+- The auditor and the catalog are not linked. New catalog entries are stored with audit status `pending`, and running the auditor does not update it.
+- The catalog is a local directory with a JSON index and no access control, locking or signing. Approval and audit trail depend on the user&#x27;s own version control and review process.
 
 ## Reference Documentation
 
@@ -638,10 +657,29 @@ python scripts/prompt_catalog_manager.py --list --catalog-dir ./prompts
 5. Deploy from catalog (never from ad-hoc sources)
 
 ### Prompt Versioning
-1. Store all prompts in catalog with semantic versioning
+1. Store all prompts in the catalog; each `--add` with changed content gets the next patch version (1.0.0, 1.0.1, ...), and identical content is rejected as a duplicate
 2. Use `--diff` to compare versions before promotion
-3. Maintain audit trail of all prompt changes
-4. Roll back to previous versions when issues detected
+3. Move the latest version through draft, review, approved and deployed with `--status`; keep the catalog directory in version control for the audit trail
+4. There is no rollback command, and re-adding an earlier version&#x27;s text is rejected as a duplicate. To roll back, redeploy the previous version&#x27;s text from `versions/&lt;name&gt;_v&lt;x_y_z&gt;.txt` and mark the bad latest version `retired` with `--status retired` (the CLI changes the latest version only)
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Pattern-based audit of a prompt with `prompt_auditor.py` across four check groups: injection, bias, safety and quality, selectable with `--checks`.
+- A local, file-based prompt catalog with `prompt_catalog_manager.py`: init, add with automatic version numbers and a content hash, list, search, diff between versions, and status changes (draft, review, approved, deployed, retired).
+- The prompt review and versioning workflows, and the policies, audit categories, severity levels, catalog schema and review checklist in `references/prompt-governance-framework.md`.
+
+**Out of Scope:**
+- Testing a deployed model or application against live injection or jailbreak attempts (see `engineering/ai-security/`).
+- Measuring output quality or task accuracy of a prompt (see `engineering/agentic-evaluation-framework/`).
+- Writing or tuning prompts (see `engineering/senior-prompt-engineer/`) and reducing token cost (see `engineering/llm-cost-optimizer/`).
+- Regulatory AI governance such as the EU AI Act or ISO/IEC 42001 (see `ra-qm-team/eu-ai-act-specialist/` and `ra-qm-team/iso42001-ai-management/`).
+- Serving prompts to an application or rolling them back at runtime. The catalog records versions and status only.
+
+**Important Caveats:**
+- The auditor matches regular expressions against prompt text. It catches known phrasings, misses reworded or new ones, and can flag harmless text. A clean audit is not evidence that a prompt is safe or unbiased.
+- The auditor and the catalog are not linked. New catalog entries are stored with audit status `pending`, and running the auditor does not update it.
+- The catalog is a local directory with a JSON index and no access control, locking or signing. Approval and audit trail depend on the user&#x27;s own version control and review process.
 
 ## Reference Documentation
 

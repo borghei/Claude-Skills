@@ -34,7 +34,7 @@ End-to-end GCP-specific architecture: service selection, Google Cloud Architectu
 |-----------|---------------|
 | Designing a GCP architecture from scratch | Yes — start with **compute decision tree** |
 | Reviewing an existing GCP architecture | Yes — run **CAF assessment** via `scripts/gcp_caf_scorer.py` |
-| Validating a Terraform / Deployment Manager plan | Yes — `scripts/gcp_architecture_validator.py` |
+| Validating Terraform files or a YAML workload spec | Yes — `scripts/gcp_architecture_validator.py` (Deployment Manager is not read) |
 | Estimating GCP cost for a workload | Yes — `scripts/gcp_cost_estimator.py` |
 | Picking between GKE / Cloud Run / Functions / Cloud Run Jobs | Yes — see **compute decision tree** |
 | Setting up IAM / Workload Identity correctly | Yes — see **identity reference** |
@@ -47,7 +47,7 @@ End-to-end GCP-specific architecture: service selection, Google Cloud Architectu
 Before designing or assessing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
 - **Task:** design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `gcp_architecture_validator.py` vs `gcp_cost_estimator.py` vs `gcp_caf_scorer.py`).
-- **Workload spec:** the YAML workload config, or the Terraform/Deployment Manager files (the input the scripts parse).
+- **Workload spec:** the YAML workload config, or the Terraform files (the input the scripts parse). Deployment Manager templates are not read; for those, describe the workload in the YAML spec instead.
 - **Priority pillar:** reliability, security, cost, operational excellence, or performance (weights the CAF assessment and which recommendations lead).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -59,6 +59,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `gcp_architecture_validator.py` | Validate a Terraform plan or YAML workload spec for anti-patterns | `python scripts/gcp_architecture_validator.py --terraform ./infra/*.tf` |
 | `gcp_cost_estimator.py` | Estimate monthly GCP cost from a workload spec, with optimization opportunities | `python scripts/gcp_cost_estimator.py --workload-config workload.yaml` |
 | `gcp_caf_scorer.py` | Score a workload against the five Cloud Architecture Framework pillars | `python scripts/gcp_caf_scorer.py --workload-config workload.yaml` |
+
+## Scope & Limitations
+
+**In Scope:**
+- GCP service selection through decision trees for compute and data stores, plus networking and identity patterns including Workload Identity Federation
+- Cloud Architecture Framework scoring with `gcp_caf_scorer.py`: five pillars, ten checks each, read from a YAML workload spec
+- Anti-pattern checks with `gcp_architecture_validator.py` on a YAML workload spec or Terraform files: public IPs on managed services, service account keys, single-zone tier-1, basic roles at project level, public buckets, default VPC, missing org policy, Cloud SQL without HA and on-demand BigQuery at high volume
+- Rough monthly cost estimates with `gcp_cost_estimator.py`, with optimization suggestions, plus design, review and migration workflows
+
+**Out of Scope:**
+- Cross-cloud patterns and the AWS and Azure equivalents (see `engineering/senior-cloud-architect/`, `engineering/aws-solution-architect/` and `engineering/azure-cloud-architect/`)
+- Writing or reviewing Terraform modules (see `engineering/terraform-patterns/`)
+- Security posture audits of an exported cloud inventory and IAM (see `engineering/cloud-security/`)
+- Kubernetes operator design for GKE workloads (see `engineering/kubernetes-operator/`)
+- Compliance evidence and control mapping (see `ra-qm-team/soc2-compliance-expert/` and `ra-qm-team/information-security-manager-iso27001/`)
+
+**Important Caveats:**
+- The scripts never call GCP. They read files the user provides, and the CAF score reflects what the YAML spec declares, not what is deployed.
+- The validator scans Terraform text with pattern rules and does not evaluate plans, modules or variables. It does not read Deployment Manager templates.
+- Cost figures come from a built-in table of approximate US-region list prices from early 2026, with no sustained-use or committed-use discounts. They are for relative comparison, not a quote; check the Google Cloud Pricing Calculator before budgeting.
+- Service tiers, SLAs, limits and prices in the references change often and should be confirmed against current Google Cloud documentation.
 
 ## References
 

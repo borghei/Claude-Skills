@@ -684,6 +684,24 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_swipe.json` | Three invented posts in the JSON input format |
 | `assets/swipe_file_template.md` | Fill-in swipe-file log: one entry per saved post, a pattern tally, and a list of templates ready for use |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classifies the opening of each pasted post into one of eighteen patterns (fourteen worth reusing, four to avoid), with a confidence, a runner-up and the cues that decided it (`hook_classifier.py`).
+- Produces a slot template for each opening, describes the body shape and close, and states what material the user needs before the pattern is theirs to use.
+- Reads a `---`-separated text file or a JSON list of posts, and summarises a swipe file by pattern.
+
+**Out of Scope:**
+- Drafting a post or choosing an angle for the user&#x27;s own material; see `tools/linkedin/linkedin-post-writer/`.
+- Auditing a draft for machine-sounding patterns; see `tools/linkedin/linkedin-humanizer/`.
+- Measuring how the saved posts performed; see `tools/linkedin/linkedin-engagement-analytics/`.
+- Collecting posts from LinkedIn, opening URLs, posting or scheduling. The user pastes or saves the posts.
+
+**Important Caveats:**
+- Classification is weighted cue matching, not a reading of the post. Ironic, blended or unusual openings can be misclassified, and the cues are English-only.
+- A pattern label says nothing about whether the opening performed well. No claim is made about how the feed treats any pattern.
+- The fold position (`--fold-chars`) is an estimate as of writing; verify it in the product.
+
 ---
 
 ## What I Need You to Do
@@ -941,6 +959,24 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_saved_posts.txt` | Ten invented saved posts covering nine patterns and one free-form opening |
 | `assets/sample_swipe.json` | Three invented posts in the JSON input format |
 | `assets/swipe_file_template.md` | Fill-in swipe-file log: one entry per saved post, a pattern tally, and a list of templates ready for use |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classifies the opening of each pasted post into one of eighteen patterns (fourteen worth reusing, four to avoid), with a confidence, a runner-up and the cues that decided it (`hook_classifier.py`).
+- Produces a slot template for each opening, describes the body shape and close, and states what material the user needs before the pattern is theirs to use.
+- Reads a `---`-separated text file or a JSON list of posts, and summarises a swipe file by pattern.
+
+**Out of Scope:**
+- Drafting a post or choosing an angle for the user&#x27;s own material; see `tools/linkedin/linkedin-post-writer/`.
+- Auditing a draft for machine-sounding patterns; see `tools/linkedin/linkedin-humanizer/`.
+- Measuring how the saved posts performed; see `tools/linkedin/linkedin-engagement-analytics/`.
+- Collecting posts from LinkedIn, opening URLs, posting or scheduling. The user pastes or saves the posts.
+
+**Important Caveats:**
+- Classification is weighted cue matching, not a reading of the post. Ironic, blended or unusual openings can be misclassified, and the cues are English-only.
+- A pattern label says nothing about whether the opening performed well. No claim is made about how the feed treats any pattern.
+- The fold position (`--fold-chars`) is an estimate as of writing; verify it in the product.
 
 ---
 

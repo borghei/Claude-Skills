@@ -33,7 +33,7 @@ End-to-end Azure-specific architecture: service selection, Well-Architected Fram
 |-----------|---------------|
 | Designing an Azure architecture from scratch | Yes — start with the **compute decision tree** |
 | Reviewing an existing Azure architecture | Yes — run **WAF assessment** via `scripts/azure_waf_scorer.py` |
-| Validating an ARM/Bicep/Terraform plan | Yes — `scripts/azure_architecture_validator.py` |
+| Validating a Bicep template or a YAML workload spec | Yes — `scripts/azure_architecture_validator.py` (ARM JSON and Terraform are not checked) |
 | Estimating Azure cost for a workload | Yes — `scripts/azure_cost_estimator.py` |
 | Picking compute, data store, networking, or identity | Yes — see the decision-trees reference |
 | Going to production without WAF review | Don't — run the WAF scorer first |
@@ -43,7 +43,7 @@ End-to-end Azure-specific architecture: service selection, Well-Architected Fram
 Before designing or assessing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
 - **Task:** design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `azure_architecture_validator.py` vs `azure_cost_estimator.py` vs `azure_waf_scorer.py`).
-- **Workload spec:** the YAML workload config, or the Bicep/ARM/Terraform files (the input the scripts parse).
+- **Workload spec:** the YAML workload config, or the Bicep files (the input the scripts parse). ARM JSON templates and Terraform are not checked; for Terraform, describe the workload in the YAML spec instead.
 - **Priority pillar:** reliability, security, cost, operational excellence, or performance (weights the WAF assessment and which recommendations lead).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -52,11 +52,32 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `azure_architecture_validator.py` | Validate a Bicep/ARM/YAML workload for anti-patterns and missing best-practice settings | `python scripts/azure_architecture_validator.py --bicep ./infra/*.bicep` |
+| `azure_architecture_validator.py` | Validate a Bicep or YAML workload for anti-patterns and missing best-practice settings | `python scripts/azure_architecture_validator.py --bicep ./infra/*.bicep` |
 | `azure_cost_estimator.py` | Estimate monthly Azure cost from a YAML workload spec | `python scripts/azure_cost_estimator.py --workload-config workload.yaml` |
 | `azure_waf_scorer.py` | Score a workload against the five Well-Architected pillars | `python scripts/azure_waf_scorer.py --workload-config workload.yaml` |
 
 All scripts: stdlib only, argparse CLI, JSON or markdown output (`--format`).
+
+## Scope & Limitations
+
+**In Scope:**
+- Azure service selection through decision trees for compute, data stores, networking and identity
+- Well-Architected Framework scoring with `azure_waf_scorer.py`: five pillars, ten checks each, read from a YAML workload spec
+- Anti-pattern checks with `azure_architecture_validator.py` on a YAML workload spec or Bicep files: public endpoints, shared keys instead of Managed Identity, single-AZ tier-1, wide RBAC scopes, missing diagnostics and locks, and credentials in parameters
+- Rough monthly cost estimates with `azure_cost_estimator.py` from a YAML workload spec, with prioritized optimization suggestions
+
+**Out of Scope:**
+- Cross-cloud patterns and the AWS and GCP equivalents (see `engineering/senior-cloud-architect/`, `engineering/aws-solution-architect/` and `engineering/gcp-cloud-architect/`)
+- Writing or reviewing Terraform modules (see `engineering/terraform-patterns/`)
+- Security posture audits of an exported cloud inventory and IAM (see `engineering/cloud-security/`)
+- Kubernetes operator design for AKS workloads (see `engineering/kubernetes-operator/`)
+- Compliance evidence and control mapping (see `ra-qm-team/soc2-compliance-expert/` and `ra-qm-team/information-security-manager-iso27001/`)
+
+**Important Caveats:**
+- The scripts never call Azure. They read files the user provides, and the WAF score reflects what the YAML spec declares, not what is deployed.
+- The validator scans Bicep text with pattern rules; its rules do not match ARM JSON syntax, so ARM templates pass without findings. It does not compile templates or resolve modules and parameters, and it does not read Terraform.
+- Cost figures come from a built-in table of approximate list prices from early 2026, with no reservation or savings-plan discounts. They are for relative comparison, not a quote; check the Azure Pricing Calculator before budgeting.
+- Service tiers, SLAs, limits and prices in the references change often and should be confirmed against current Azure documentation.
 
 ## References
 

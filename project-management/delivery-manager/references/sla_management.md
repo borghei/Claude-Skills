@@ -4,9 +4,7 @@ Read this when calculating SLA compliance, error budgets, and burn rates, or set
 
 ## Track SLA and Error Budget
 
-```bash
-python scripts/sla_calculator.py --service portal --period month
-```
+The skill has no SLA tool; compute the budget from your monitoring data as below.
 
 **Error budget calculation example:**
 ```

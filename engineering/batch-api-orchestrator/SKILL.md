@@ -76,6 +76,25 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 4. Apply the partial-failure handling (retry only failed items, never the whole batch) from the reference.
 5. Choose polling vs callback for completion, per the reference guidance.
 
+## Scope & Limitations
+
+**In Scope:**
+- The batch versus realtime decision, based on latency tolerance (`realtime`, `minutes`, `hours`, `days`)
+- Cost comparison of realtime and batch runs with `batch_cost_estimator.py` from request volume, average token counts, the user's own per-token prices and batch discount
+- Job plans from `batch_job_planner.py`: chunk sizes, an idempotency-key scheme, retry policy (exponential, fixed or none) and partial-failure handling
+- Job design guidance from the references: reconciliation by request id, dead-letter sets, polling versus callbacks, chunk sizing and break-even modelling
+
+**Out of Scope:**
+- Submitting, polling or downloading batch jobs; the skill does not call any vendor API or include client code for one
+- Wider LLM cost work such as token counting, caching and model routing (see `engineering/llm-cost-optimizer/`)
+- Designing the evaluations that often run as batch jobs (see `engineering/agentic-evaluation-framework/` and `engineering/agent-harness/`)
+- Streaming and interactive request handling
+
+**Important Caveats:**
+- The default prices in `batch_cost_estimator.py` are neutral placeholders, not real prices. Estimates mean something only after the user supplies current vendor prices and discount.
+- The roughly half-price batch discount is a rule of thumb. Discounts, maximum batch sizes, completion windows and result retention differ by vendor and change over time.
+- Estimates assume every request costs the average token count. Long-tail inputs, retries and failed items add cost the model does not show.
+
 ## Reference Documentation
 
 - **[references/batch-patterns-and-decision-tree.md](references/batch-patterns-and-decision-tree.md)** — when-to-batch decision tree; job design (idempotency keys, partial failures, reconciliation, polling vs callback); fitting use cases (evals, backfills, embeddings, bulk classification/extraction); and anti-patterns such as batching interactive requests.

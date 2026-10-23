@@ -522,6 +522,26 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 4. Inspect the win-rate matrix for intransitivity (A&gt;B, B&gt;C, but C&gt;A) — a sign of an unreliable judge or genuinely tied variants; collect more matches or add human adjudication.
 5. Report the ranking next to cost and latency per variant so the &quot;winner&quot; is the best *quality-per-dollar-per-second*, not just the highest score.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Choosing a grading method (programmatic check, LLM-as-judge or human review) for each quality dimension
+- Weighted rubric scoring with `rubric_scorer.py`: weighted totals, per-criterion means, pass/fail against thresholds and an inter-rater agreement metric
+- Pairwise ranking of variants with `pairwise_ranking.py` using Elo and Bradley-Terry, plus a win-rate matrix for spotting intransitive results
+- Judge bias mitigation (position, verbosity, self-preference, sycophancy) and judge calibration against human labels, from the methodology and pitfalls references
+
+**Out of Scope:**
+- Calling a judge model or the model under test; scores and match outcomes are collected elsewhere and passed in as JSON
+- Scenario suites with structural tool-call assertions, transcript replay and regression diffs (see `engineering/agent-harness/`)
+- Writing or tuning the prompts being evaluated (see `engineering/prompt-engineer-toolkit/`)
+- Measuring and cutting token spend (see `engineering/llm-cost-optimizer/`)
+
+**Important Caveats:**
+- The scripts aggregate numbers the user supplies. They cannot tell whether the underlying judgements were biased, careless or made on the training set.
+- An LLM judge is only trustworthy after its scores agree with human labels on a held-out set. Agreement can drift when the judge model or prompt changes.
+- Elo depends on match order and the K-factor. With few matches per pair, rankings from either method are unstable.
+- The skill is vendor-agnostic and names no model. Judge model choice and pricing are left to the user.
+
 ## Reference Documentation
 
 - **[references/llm-judge-methodology.md](references/llm-judge-methodology.md)** — rubric design and scale anchoring; absolute vs pairwise scoring; the judge-bias catalog (position, verbosity, self-preference, sycophancy) with concrete mitigations; calibrating a judge against human labels; the eval feedback loop (collect → grade → analyze → fix → regression-gate); and the quality/cost/latency metrics to track together.
@@ -647,6 +667,26 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 3. Run `pairwise_ranking.py` to get Elo and Bradley-Terry rankings plus the win-rate matrix; Bradley-Terry is order-independent and preferred for a fixed batch, Elo for a streaming sequence of matches.
 4. Inspect the win-rate matrix for intransitivity (A&gt;B, B&gt;C, but C&gt;A) — a sign of an unreliable judge or genuinely tied variants; collect more matches or add human adjudication.
 5. Report the ranking next to cost and latency per variant so the &quot;winner&quot; is the best *quality-per-dollar-per-second*, not just the highest score.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Choosing a grading method (programmatic check, LLM-as-judge or human review) for each quality dimension
+- Weighted rubric scoring with `rubric_scorer.py`: weighted totals, per-criterion means, pass/fail against thresholds and an inter-rater agreement metric
+- Pairwise ranking of variants with `pairwise_ranking.py` using Elo and Bradley-Terry, plus a win-rate matrix for spotting intransitive results
+- Judge bias mitigation (position, verbosity, self-preference, sycophancy) and judge calibration against human labels, from the methodology and pitfalls references
+
+**Out of Scope:**
+- Calling a judge model or the model under test; scores and match outcomes are collected elsewhere and passed in as JSON
+- Scenario suites with structural tool-call assertions, transcript replay and regression diffs (see `engineering/agent-harness/`)
+- Writing or tuning the prompts being evaluated (see `engineering/prompt-engineer-toolkit/`)
+- Measuring and cutting token spend (see `engineering/llm-cost-optimizer/`)
+
+**Important Caveats:**
+- The scripts aggregate numbers the user supplies. They cannot tell whether the underlying judgements were biased, careless or made on the training set.
+- An LLM judge is only trustworthy after its scores agree with human labels on a held-out set. Agreement can drift when the judge model or prompt changes.
+- Elo depends on match order and the K-factor. With few matches per pair, rankings from either method are unstable.
+- The skill is vendor-agnostic and names no model. Judge model choice and pricing are left to the user.
 
 ## Reference Documentation
 

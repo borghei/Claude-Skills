@@ -3,7 +3,7 @@
 Audit Log Analyzer - Analyze vault audit logs for suspicious access patterns.
 
 Parses Vault audit log files (JSON format) and detects anomalies including
-off-hours access, bulk reads, failed auth attempts, and privilege escalation.
+off-hours access, bulk reads, failed auth attempts, root token use, and access to unusual paths.
 
 Author: Claude Skills Engineering Team
 License: MIT
@@ -106,7 +106,7 @@ def parse_log_file(path: Path) -> List[AuditEvent]:
 
 
 def detect_off_hours_access(events: List[AuditEvent]) -> List[Alert]:
-    """Detect access outside business hours (6am-10pm local)."""
+    """Detect access outside business hours (6am-10pm), using the hour in the logged timestamp as written, with no time zone conversion."""
     alerts = []
     off_hours_events = []
 

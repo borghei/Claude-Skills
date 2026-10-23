@@ -29,7 +29,7 @@ Before planning the engagement, settle the inputs below. When one is missing or 
 
 - **Authorization & ROE owner:** who has signed off and the escalation contacts (no engagement plan without confirmed authorization).
 - **In-scope targets & boundaries:** the exact assets in and explicitly out of bounds (drives scope and `--target`).
-- **Engagement type:** red-team / pentest / purple / bug-bounty (sets stealth, methodology, and `--type`).
+- **Engagement type:** red-team / pentest / purple-team / app-security (sets stealth, methodology, and `--type`). The planner has no bug bounty type.
 - **Compliance framework:** e.g. pci-dss (maps test cases to controls via `--compliance`).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -38,7 +38,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ```bash
 # Plan a red team engagement
-python scripts/engagement_planner.py --type red-team --target "web application" --duration 2w
+python scripts/engagement_planner.py --type red-team --target web-application --duration 2w
 
 # Plan a penetration test
 python scripts/engagement_planner.py --type pentest --target "api,network" --duration 1w --compliance pci-dss
@@ -79,6 +79,27 @@ Generates comprehensive engagement plans including:
 3. Execute against compliance-specific checklist
 4. Generate evidence for auditors
 
+## Scope & Limitations
+
+**In Scope:**
+- Engagement plans from `engagement_planner.py` for four engagement types (red-team, pentest, purple-team, app-security) and the targets listed in its `--help`.
+- Plan content: scope, rules of engagement, methodology choice, phases with dates, communication and escalation, and a deliverables checklist, in text or JSON.
+- Optional mapping to a compliance framework with `--compliance` (pci-dss, soc2, hipaa, iso27001).
+- Frameworks, rules-of-engagement elements and phase guidance in `references/red-team-methodology.md`.
+
+**Out of Scope:**
+- Carrying out an engagement. The skill produces planning documents and runs nothing against any system.
+- Source-level vulnerability review of a repository (see `engineering/security-audit/`).
+- Threat modeling and secure design review (see `engineering/senior-security/`), and detecting attacks in logs (see `engineering/threat-detection/`).
+- Running a compliance program or audit (see `ra-qm-team/pci-dss-specialist/` and `ra-qm-team/soc2-compliance-expert/`).
+- Legal review of authorization letters or engagement contracts.
+
+**Important Caveats:**
+- The skill is for authorized engagements only. Confirmed authorization comes first, as Clarify First requires, and the generated rules of engagement are not a substitute for written sign-off from the asset owner.
+- Plans are built from fixed templates. Dates, phase lengths, contacts and test lists are defaults that need adjusting to the real engagement.
+- An engagement covers only what was in scope during its time box. Its findings are not a guarantee that no other vulnerabilities exist.
+- Compliance mappings are a starting point. The assessor and the current version of the framework decide what evidence is required.
+
 ## Reference Documentation
 
 - [Red Team Methodology](references/red-team-methodology.md) - Frameworks, attack phases, and engagement standards
@@ -89,4 +110,4 @@ Generates comprehensive engagement plans including:
 - **Red Team**: Full adversary simulation, stealth required, tests detection/response
 - **Penetration Test**: Authorized vulnerability exploitation, known to defenders
 - **Purple Team**: Collaborative attack/defense, real-time knowledge sharing
-- **Bug Bounty Triage**: Structured vulnerability validation from external reports
+- **Application Security Assessment**: Focused testing of web, mobile and API applications

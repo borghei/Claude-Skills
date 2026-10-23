@@ -36,6 +36,7 @@ Tailor a base resume to a specific job description with keyword-match scoring, g
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -162,6 +163,27 @@ python scripts/resume_matcher.py resume.txt jd.txt --json
 - **Keep one master resume.** Tailor variants from a single source of truth.
 - **Two pages max.** Even for senior roles, two pages is the ceiling outside academia.
 - **Plain text, single-column.** ATS systems still mishandle tables, graphics, and multi-column layouts.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Keyword match scoring of a resume against a job description, weighted by JD frequency, with kept, missing and resume-only keyword lists (`resume_matcher.py`).
+- Bullet rewrites with the CAR pattern, an action-verb library and a weak-phrase list in `references/bullet_rewrite_patterns.md`.
+- ATS formatting guidance in `references/ats_optimization_guide.md` and a resume skeleton in `assets/tailored_resume_template.md`.
+- Cover letter evidence sentences drawn from matched keywords.
+
+**Out of Scope:**
+- Parsing PDF or DOCX resumes. Both inputs are plain text files.
+- Interview preparation (see `project-management/career/pm-interview-prep/` for product management roles).
+- LinkedIn profile work (see `tools/linkedin/linkedin-profile-optimizer/`).
+- Hiring-side screening and job description writing (see `hr-operations/talent-acquisition/`).
+
+**Important Caveats:**
+- The match score is keyword overlap. It does not reproduce any specific ATS, and real systems parse and weight fields differently.
+- Synonyms and different phrasing count as misses, so the missing-keyword list needs human review.
+- A higher score is not a better resume. Adding skills the candidate does not have raises the score and misrepresents the candidate.
 
 ---
 

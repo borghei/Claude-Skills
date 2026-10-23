@@ -94,6 +94,27 @@ Stages: `seed` (default), `series-a`.
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Structure scoring of a slide-by-slide markdown summary against the required slides for `seed` or `series-a` (`deck_structure_scorer.py`).
+- Gap flags for missing slide categories, with a hint for each.
+- YC, Sequoia and a16z structure heuristics, common mistakes and stage differences in `references/pitch_deck_heuristics.md`, plus a summary template.
+
+**Out of Scope:**
+- Judging the business, the market or the quality of the content. The scorer checks structure only.
+- Reading .pptx or PDF files. Auditing the deck file is covered by `documents/pptx-toolkit/`.
+- Financial models and valuation (see `finance/financial-analyst/`).
+- Board decks and ongoing investor updates (see `c-level-advisor/board-deck-builder/` and `personal-productivity/investor-update-generator/`).
+- Rubrics for rounds later than Series A.
+
+**Important Caveats:**
+- The score depends on the summary the user writes. Vague summaries produce false gaps, and keyword-heavy ones can pass a slide that is weak.
+- Slides are matched by keyword patterns per category, not by reading the deck.
+- The heuristics reflect public guidance from YC, Sequoia and a16z. Individual investors differ, and the guidance changes over time.
+
+---
+
 ## Reference Guides
 
 - **`references/pitch_deck_heuristics.md`** — YC, Sequoia, a16z deck structure heuristics; common mistakes; stage differences

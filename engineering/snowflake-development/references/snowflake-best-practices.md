@@ -43,7 +43,7 @@
 ### Auto-Suspend Settings
 - **Ad-hoc queries**: 60 seconds (minimize idle costs)
 - **BI dashboards**: 300 seconds (balance between cost and responsiveness)
-- **ETL pipelines**: 0 seconds (suspend immediately after completion)
+- **ETL pipelines**: 60 seconds, or run `ALTER WAREHOUSE ... SUSPEND` as the last pipeline step. A value of 0 disables auto-suspend.
 - **Always-on services**: Never auto-suspend (if constant query flow)
 
 ### Multi-Cluster Warehouses

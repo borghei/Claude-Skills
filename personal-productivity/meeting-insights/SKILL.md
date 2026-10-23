@@ -36,6 +36,7 @@ Turn raw meeting transcripts into a structured set of decisions, action items, o
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -171,8 +172,30 @@ Bob: Yes, that's the risk — if legal slips, launch slips.
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Extraction from a `Speaker: text` transcript of decisions, action items with a heuristic owner and due date, open questions, risks, pains and quotes (`transcript_analyzer.py`).
+- A post-meeting recap built from `assets/recap_template.md`.
+- Customer interview signals from the pains and quotes output.
+- An append-only decision log workflow keyed by date and topic.
+
+**Out of Scope:**
+- Recording or transcribing audio. Transcripts come from tools such as Otter, Fireflies, Zoom or Google Meet.
+- Tracking follow-through on actions across a recurring meeting (see `project-management/meeting-analyzer/`).
+- Synthesis of themes across many customer interviews (see `project-management/discovery/interview-synthesis/`).
+- An executive decision register that separates deliberation from approved decisions (see `c-level-advisor/decision-logger/`).
+
+**Important Caveats:**
+- Extraction relies on trigger phrases. It misses decisions phrased indirectly and can flag false positives, such as references to past decisions.
+- Owners and due dates are guesses. They need checking before a recap is sent.
+- Transcripts without speaker labels lose owner attribution.
+- The tool does not store the decision log. The user keeps it.
+
+---
+
 ## Integration Points
 
-- Pairs with `product-team/user-story/` for converting interview pains into stories
+- Pairs with `product-team/agile-product-owner/` for converting interview pains into stories
 - Pairs with `project-management/` for action-item tracking
 - Feeds into `marketing/` voice-of-customer workflows

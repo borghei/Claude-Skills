@@ -223,3 +223,21 @@ Tools overview and reference documentation for this skill:
 | `assets/story_bank_template.json` | Empty bank with one example entry per common kind, ready to copy |
 | `assets/interview_session_template.md` | Session notes sheet: agenda, raw answers, pressed points, refusals, entries to write |
 | `assets/draft_seed_template.md` | Six-slot seed that a single-post session hands to drafting |
+
+## Scope & Limitations
+
+**In Scope:**
+- Runs a structured interview that presses each vague answer once and records only what the person can stand behind.
+- Stores the result in a local story bank JSON file with seven entry kinds, naming rules and no-go topics. The format is defined here and read by sibling skills.
+- Audits a bank for missing fields, naming and no-go conflicts, soft phrasing, stale entries, and ready and unused material per pillar, then prints questions for the next session (`story_bank_audit.py`).
+
+**Out of Scope:**
+- Writing posts from the material; see `tools/linkedin/linkedin-post-writer/`.
+- Laying entries out across a calendar; see `tools/linkedin/linkedin-content-planner/`.
+- Headline, About and experience copy; see `tools/linkedin/linkedin-profile-optimizer/`.
+- Reading a LinkedIn profile or any page, posting or scheduling. Facts come only from the user.
+
+**Important Caveats:**
+- The bank holds what the user says. Figures are not verified, and a CV or notes handed over are treated as prompts for questions, not as answers.
+- The bank can hold personal and confidential detail. It belongs outside version control, or in a path version control ignores.
+- Staleness and per-pillar minimums (`--stale-days`, `--min-per-pillar`) are house defaults.

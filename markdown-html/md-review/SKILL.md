@@ -83,20 +83,32 @@ Swap in `sample_article_clean.md` to see all three pass.
 Phase 1 of any rollout. Collect the real finding distribution before deciding what to enforce.
 
 1. Run every file with `--fail-on never` so nothing exits non-zero.
-2. Emit JSON and append to a single JSONL stream.
+2. Emit JSON, one report file per source file, into a directory you choose (`OUT`).
 3. Rank rules by frequency; tune thresholds and the term map before switching the gate on.
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
 CFG=markdown-html/md-review/assets/sample_review_config.json
 
-find markdown-html/md-review/assets -name '*.md' -print0 |
-  xargs -0 -I{} python3 markdown-html/md-review/scripts/md_review_gate.py \
-    --input {} --config "$CFG" --format json --fail-on never > /tmp/md_audit.jsonl
+OUT=./md-audit   # where the per-file JSON reports go
+mkdir -p "$OUT"
 
-python3 -c "import json;[print(f['rule']) for l in open('/tmp/md_audit.jsonl') if l.strip().startswith('{')]" 2>/dev/null || \
-  echo "inspect /tmp/md_audit.jsonl for the per-file finding arrays"
+find markdown-html/md-review/assets -name '*.md' -print0 |
+  while IFS= read -r -d '' f; do
+    python3 markdown-html/md-review/scripts/md_review_gate.py \
+      --input "$f" --config "$CFG" --format json --fail-on never > "$OUT/$(basename "$f" .md).json"
+  done
+
+python3 - "$OUT" <<'PY'
+import collections, json, pathlib, sys
+reports = [json.loads(p.read_text()) for p in pathlib.Path(sys.argv[1]).glob("*.json")]
+counts = collections.Counter(f["rule"] for r in reports for f in r["findings"])
+for rule, n in counts.most_common():
+    print(f"{n:4d}  {rule}")
+PY
 ```
+
+Report files are named after the source file, so give each corpus run its own `OUT` if two sources share a name.
 
 ### Workflow 3 — Calibrate prose to an audience
 
@@ -242,7 +254,7 @@ Keep 1 and 2 distinct. Collapsing them sends every failure to the wrong person f
 | File | Purpose |
 | --- | --- |
 | `scripts/md_review_gate.py` | Heading structure, frontmatter schema, and accessibility checks with a configurable severity gate; exits 2 on blocking findings |
-| `scripts/link_checker.py` | Resolves relative file targets and anchor fragments on disk, reports duplicate heading anchors, inventories external URLs without fetching them |
+| `scripts/link_checker.py` | Resolves relative file targets and anchor fragments on disk, reports duplicate heading anchors, inventories external URLs without fetching them; base64 PNG, JPEG, GIF, WebP and AVIF image data URIs count as embedded and pass |
 | `scripts/readability_scorer.py` | Flesch Reading Ease, Flesch-Kincaid grade, syllable counting, long-sentence and passive-voice heuristics, and term-map consistency |
 | `references/review-rulebook-and-severity-model.md` | Full rule catalog with default severities, config schema, slug algorithm, gate design, and CI integration patterns |
 | `references/readability-accessibility-and-terminology.md` | Readability formulas, audience target bands, syllable heuristic and its failure cases, WCAG success criteria per check, term-map governance |
@@ -250,3 +262,23 @@ Keep 1 and 2 distinct. Collapsing them sends every failure to the wrong person f
 | `assets/sample_article.md` | Sample input containing deliberate defects; drives the non-zero-exit demonstration for all three scripts |
 | `assets/sample_article_clean.md` | Clean sample input that passes all three scripts with exit code 0 |
 | `assets/review_report_template.md` | Reviewer-facing report template with verdict, findings, link, readability, accessibility, and sign-off sections |
+
+## Scope & Limitations
+
+**In Scope:**
+- Checks heading structure, required frontmatter fields and source-level accessibility (alt text, table header rows, link text) against a configurable severity gate (`md_review_gate.py`).
+- Resolves relative file links and anchor fragments on disk, reports duplicate heading anchors, and lists external URLs without fetching them (`link_checker.py`).
+- Scores Flesch Reading Ease, Flesch-Kincaid grade, long sentences and passive voice, and checks terms against a preferred and disallowed term map (`readability_scorer.py`).
+- Audience readability bands, severity rules and a phased rollout plan for gating an existing corpus.
+
+**Out of Scope:**
+- Checking whether external links are live. URLs are listed, never requested.
+- Converting markdown to HTML; see `markdown-html/md-document/` and `markdown-html/md-slides/`.
+- Color contrast, keyboard navigation, focus order and the accessibility tree, which need rendered HTML. Theme contrast is covered by `markdown-html/design-system/`.
+- Spelling, factual accuracy and whether code samples run.
+
+**Important Caveats:**
+- Source-level checks cover part of WCAG (1.1.1, 1.3.1, 2.4.4 and part of 2.4.6). A clean run does not show that the published page conforms.
+- Readability scores rest on a heuristic syllable count and sentence splitter tuned for English. An abbreviation such as "e.g." before a capital letter can split a sentence wrongly, and passive-voice detection is a heuristic.
+- Root-relative links (`/path`) are reported as unchecked unless `--root` is given. The frontmatter parser handles a subset of YAML.
+- Findings depend on the review config. A term map or required-field list that does not match the house style produces false findings or misses real ones.

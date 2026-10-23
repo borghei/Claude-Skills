@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T13:24:11+00:00",
+  "generated_at": "2026-10-23T14:06:28+00:00",
   "repository": "claude-skills",
   "skill_count": 385,
   "domain_count": 21,
@@ -5867,7 +5867,7 @@
     {
       "name": "weekly-review",
       "domain": "personal-productivity",
-      "description": "Synthesize a week of inputs (calendar, tasks, journal, OKR check-ins) into a structured review with wins, learnings, blockers, and next-week priorities. Use for a Friday/Sunday weekly review, GTD review, or OKR check-in.",
+      "description": "Turn a week's wins, learnings, blockers and OKR progress, gathered by hand from your calendar, tasks and journal, into a structured review with next-week priorities. Use for a Friday/Sunday weekly review, GTD review, or OKR check-in.",
       "tags": [
         "weekly-review",
         "reflection",

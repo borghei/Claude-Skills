@@ -38,7 +38,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 # Analyze chart structure and quality
 python scripts/chart_analyzer.py --path ./charts/my-app
 
-# Validate values.yaml against chart requirements
+# Validate a values file against best-practice rules (--chart only helps locate the file)
 python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
 
 # JSON output for CI
@@ -64,7 +64,7 @@ Analyzes Helm chart structure, metadata, templates, and dependencies.
 
 ### values_validator.py
 
-Validates values files against chart expectations and Kubernetes best practices.
+Validates values files against fixed Kubernetes best-practice rules. `--chart` is only used to find a values file given as a path relative to the chart directory; values are not compared with what the chart's templates use.
 
 | Feature | Description |
 |---------|-------------|
@@ -105,6 +105,25 @@ for env in dev staging production; do
     --values "values-${env}.yaml"
 done
 ```
+
+## Scope & Limitations
+
+**In Scope:**
+- Static review of a Helm chart directory with `chart_analyzer.py`: required files, Chart.yaml fields and version format, template file checks, subchart dependency pinning, and NOTES.txt and README presence.
+- Best-practice checks on one or more values files with `values_validator.py`: resource requests and limits, security context, image tags, replica count, service, ingress TLS, probes and autoscaling.
+- Text or JSON output, with `--strict` on the analyzer to treat warnings as errors in CI.
+- The chart review and pre-release workflows, backed by `references/helm-best-practices.md`.
+
+**Out of Scope:**
+- Rendering, linting, installing or upgrading charts. The scripts do not call `helm` or a cluster.
+- Generating new charts or templates. The scripts review existing files.
+- Kubernetes operators and custom controllers (see `engineering/kubernetes-operator/`).
+- Building container images (see `engineering/docker-development/`) and designing CI pipelines (see `engineering/ci-cd-pipeline-builder/`).
+
+**Important Caveats:**
+- Both scripts read YAML with a small stdlib parser and inspect templates with regular expressions. Template logic, `--set` overrides and values merged at install time are not evaluated, so a clean report does not mean the rendered manifests are correct.
+- `values_validator.py` checks each values file against fixed best-practice rules. The `--chart` flag only locates the files; values are not compared with what the chart's templates actually use.
+- Findings are review prompts, not proof that a chart is secure or production ready. The reference lists `helm lint`, `helm template` and a dry-run install as the checks that cover rendering.
 
 ## Reference Documentation
 

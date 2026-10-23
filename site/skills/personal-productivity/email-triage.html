@@ -480,7 +480,7 @@ email, inbox, inbox zero, triage, unsubscribe, mailing list, mailbox, gmail, out
 Before triaging, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Inbox export fields:** subject, sender, snippet drive classification accuracy; missing columns degrade the buckets.
-- **Priority / VIP senders:** who always routes to reply_now regardless of content.
+- **Priority / VIP senders:** who should always land in reply_now regardless of content. The classifier has no VIP option, so the assistant moves mail from these senders into reply_now when reviewing its output.
 - **Unsubscribe tolerance:** purge all marketing vs keep newsletters you value; sets how aggressive the unsubscribe/delete buckets are.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -539,6 +539,28 @@ Action buckets:
 - **unsubscribe** — newsletters, marketing, promotional
 - **delete** — spam patterns, low-signal senders
 - **review** — couldn&#x27;t classify confidently
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classification of an exported inbox CSV into `reply_now`, `reply_later`, `archive`, `unsubscribe`, `delete` and `review` buckets (`email_classifier.py`).
+- Rule-based matching on sender domain, subject line and snippet.
+- Weekly triage, unsubscribe-pass and inbox-zero reset workflows, with Gmail filter recipes in `assets/gmail_filter_template.md`.
+- The inbox-zero method and daily routine in `references/inbox_zero_method.md`.
+
+**Out of Scope:**
+- Connecting to Gmail, Outlook or any mailbox. The skill does not read, move, delete or unsubscribe from mail.
+- Drafting replies to the emails it classifies.
+- Turning action emails into tasks and running the wider capture habit (see `personal-productivity/capture/`).
+- Security analysis of phishing or malicious email.
+
+**Important Caveats:**
+- Input is a CSV the user exports. Missing sender or snippet columns lower accuracy.
+- Classification is keyword and pattern based and can misfile mail. The `review` and `reply_now` buckets need a human check before acting.
+- The script has no setting for VIP or priority senders. Those are applied by hand when reviewing the output.
+- The filter recipes are written for Gmail. Other mail clients need their own rules.
 
 ---
 
@@ -627,7 +649,7 @@ email, inbox, inbox zero, triage, unsubscribe, mailing list, mailbox, gmail, out
 Before triaging, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Inbox export fields:** subject, sender, snippet drive classification accuracy; missing columns degrade the buckets.
-- **Priority / VIP senders:** who always routes to reply_now regardless of content.
+- **Priority / VIP senders:** who should always land in reply_now regardless of content. The classifier has no VIP option, so the assistant moves mail from these senders into reply_now when reviewing its output.
 - **Unsubscribe tolerance:** purge all marketing vs keep newsletters you value; sets how aggressive the unsubscribe/delete buckets are.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -686,6 +708,28 @@ Action buckets:
 - **unsubscribe** — newsletters, marketing, promotional
 - **delete** — spam patterns, low-signal senders
 - **review** — couldn&#x27;t classify confidently
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classification of an exported inbox CSV into `reply_now`, `reply_later`, `archive`, `unsubscribe`, `delete` and `review` buckets (`email_classifier.py`).
+- Rule-based matching on sender domain, subject line and snippet.
+- Weekly triage, unsubscribe-pass and inbox-zero reset workflows, with Gmail filter recipes in `assets/gmail_filter_template.md`.
+- The inbox-zero method and daily routine in `references/inbox_zero_method.md`.
+
+**Out of Scope:**
+- Connecting to Gmail, Outlook or any mailbox. The skill does not read, move, delete or unsubscribe from mail.
+- Drafting replies to the emails it classifies.
+- Turning action emails into tasks and running the wider capture habit (see `personal-productivity/capture/`).
+- Security analysis of phishing or malicious email.
+
+**Important Caveats:**
+- Input is a CSV the user exports. Missing sender or snippet columns lower accuracy.
+- Classification is keyword and pattern based and can misfile mail. The `review` and `reply_now` buckets need a human check before acting.
+- The script has no setting for VIP or priority senders. Those are applied by hand when reviewing the output.
+- The filter recipes are written for Gmail. Other mail clients need their own rules.
 
 ---
 

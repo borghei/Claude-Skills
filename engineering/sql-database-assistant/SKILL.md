@@ -28,7 +28,7 @@ Before analyzing or generating, settle the inputs below. When one is missing or 
 
 - **Task:** query optimization / schema documentation / migration generation (selects the script).
 - **SQL input:** the query, the DDL file, or the from/to schema pair to operate on (the script's actual input).
-- **Target database / dialect:** Postgres / MySQL / etc. (changes index recommendations and migration SQL syntax).
+- **Target database / dialect:** Postgres / MySQL / etc. The scripts have no dialect option and always emit PostgreSQL-style migration SQL, so for another database, adapt the generated statements by hand and note which ones changed.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
@@ -120,12 +120,34 @@ Generates migration SQL by comparing two schema DDL files.
 ### CI Integration
 
 ```bash
-# Lint SQL queries
-python scripts/query_optimizer.py --file queries/ --format json --strict
+# Lint SQL queries (--file takes one file, so loop over the directory)
+for f in queries/*.sql; do
+  python scripts/query_optimizer.py --file "$f" --format json --strict || exit 1
+done
 
 # Generate schema docs
 python scripts/schema_explorer.py --file schema.sql --format markdown > SCHEMA.md
 ```
+
+## Scope & Limitations
+
+**In Scope:**
+- Static review of a SQL query from a file or string with `query_optimizer.py`: `SELECT *`, likely index candidates, correlated subqueries, missing `WHERE`, join checks and leading-wildcard `LIKE`, with `--strict` for CI.
+- Schema documentation from DDL with `schema_explorer.py`: tables, columns, indexes and foreign keys, in text, JSON or Markdown.
+- Migration SQL from two DDL files with `migration_generator.py`, with up steps and commented rollback steps.
+- Index strategies, query patterns and anti-patterns in `references/sql-optimization.md`.
+
+**Out of Scope:**
+- Connecting to a database, running `EXPLAIN` or applying migrations.
+- Data modeling and schema design (see `engineering/database-designer/`).
+- Zero-downtime migration planning for large systems (see `engineering/migration-architect/`).
+- Snowflake-specific tuning (see `engineering/snowflake-development/`).
+
+**Important Caveats:**
+- All three tools parse SQL text with patterns. Index advice does not use real table sizes, statistics or query plans.
+- The scripts have no dialect option. Generated migrations use PostgreSQL-style syntax such as `ALTER COLUMN ... TYPE` and need adapting for other databases.
+- A renamed column is generated as a drop and an add, and rollback steps restore structure, not data. Generated migrations need review and a test on a copy of the database before production.
+- `--file` takes a single file, not a directory.
 
 ## Reference Documentation
 

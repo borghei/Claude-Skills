@@ -4,28 +4,26 @@ Read this when designing a cloud architecture, optimizing cost, planning disaste
 
 ## Quick Start
 
+This skill ships no scripts of its own. For the jobs below, use the tools in the sibling cloud skills or your provider's native tooling:
+
 ```bash
-# Analyze infrastructure costs
-python scripts/cost_analyzer.py --account production --period monthly
+# Cost estimate for a planned workload (Azure, GCP)
+python ../azure-cloud-architect/scripts/azure_cost_estimator.py --workload-config workload.yaml
+python ../gcp-cloud-architect/scripts/gcp_cost_estimator.py --workload-config workload.yaml
 
-# Run DR validation
-python scripts/dr_test.py --region us-west-2 --type failover
-
-# Audit security posture
-python scripts/security_audit.py --framework cis --output report.html
-
-# Generate resource inventory
-python scripts/inventory.py --accounts all --format csv
+# Security posture of an exported resource inventory (fails on high-severity findings)
+python ../cloud-security/scripts/posture_auditor.py --input inventory.json --fail-on high
 ```
 
 ## Tools
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/cost_analyzer.py` | Analyze cloud spend by service, environment, and tag |
-| `scripts/dr_test.py` | Validate disaster recovery failover procedures |
-| `scripts/security_audit.py` | Audit against CIS benchmarks and compliance frameworks |
-| `scripts/inventory.py` | Inventory all resources across accounts and regions |
+| Job | Where it lives |
+|-----|----------------|
+| Cost estimation | `engineering/azure-cloud-architect/` (`azure_cost_estimator.py`), `engineering/gcp-cloud-architect/` (`gcp_cost_estimator.py`) |
+| Security posture audit | `engineering/cloud-security/` (`posture_auditor.py`, `iam_least_privilege.py`) |
+| Architecture review | `engineering/azure-cloud-architect/` (`azure_architecture_validator.py`), `engineering/gcp-cloud-architect/` (`gcp_architecture_validator.py`) |
+| Resource inventory | The provider's own inventory service (AWS Config, Azure Resource Graph, Google Cloud Asset Inventory) |
+| Disaster-recovery testing | A scheduled failover drill run from your runbooks and infrastructure code; no script can validate it for you |
 
 ## Cloud Platform Comparison
 
@@ -61,7 +59,7 @@ python scripts/inventory.py --accounts all --format csv
 4. **Configure database** -- RDS Multi-AZ for production, single-AZ for staging. Set backup retention to 30 days (production) or 7 days (non-production).
 5. **Add caching layer** -- ElastiCache (Redis) between application and database.
 6. **Layer security** -- WAF on CloudFront, NACLs on subnets, security groups on instances. Apply least-privilege IAM.
-7. **Validate** -- Run `python scripts/security_audit.py --framework cis` and resolve all high-severity findings.
+7. **Validate** -- Run `python ../cloud-security/scripts/posture_auditor.py --input inventory.json --fail-on high` on an inventory export and resolve all high-severity findings.
 
 ### Reference Architecture
 
@@ -74,7 +72,7 @@ Route 53 (DNS) -> CloudFront + WAF -> ALB
 
 ## Workflow 2: Optimize Cloud Costs
 
-1. **Audit current spend** -- `python scripts/cost_analyzer.py --account production --period monthly`
+1. **Audit current spend** -- Pull a month of spend by service, environment and tag from the provider's billing export (AWS Cost Explorer, Azure Cost Management, Google Cloud Billing).
 2. **Right-size instances** -- Identify instances with avg CPU <10% and max CPU <30% as downsize candidates:
    ```python
    # Pseudocode for right-sizing logic
@@ -110,11 +108,11 @@ Route 53 (DNS) -> CloudFront + WAF -> ALB
    - Database: continuous replication, 35-day retention, cross-region, encrypted
    - Application data: daily, 90-day retention, lifecycle to IA at 30d, Glacier at 90d
    - Configuration: on-change via git + S3, unlimited retention
-5. **Test** -- `python scripts/dr_test.py --region us-west-2 --type failover` and confirm RTO/RPO targets met.
+5. **Test** -- Run a failover drill into the recovery region and confirm the RTO/RPO targets were met.
 
 ## Workflow 4: Audit Security Posture
 
-1. **Run audit** -- `python scripts/security_audit.py --framework cis --output report.html`
+1. **Run audit** -- `python ../cloud-security/scripts/posture_auditor.py --input inventory.json --format json` on a resource inventory export.
 2. **Review network segmentation** -- Public subnets contain only NAT GW, ALB, bastion. Private subnets contain application tier. Data subnets contain RDS, Redis, Elasticsearch.
 3. **Enforce least-privilege IAM** -- Every policy scoped to specific resources and conditions:
    ```json

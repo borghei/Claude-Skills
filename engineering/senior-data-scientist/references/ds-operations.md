@@ -129,4 +129,4 @@ python scripts/model_evaluation_suite.py -i models/xgb_v3/ -o evaluation/report/
 }
 ```
 
-> **Note:** The Tools table references `scripts/statistical_analyzer.py` but this script does not yet exist in the repository. Statistical analysis workflows described in the SKILL.md can be performed using inline Python (scipy, statsmodels) as shown in Workflow 1 and Workflow 5.
+> **Note:** This skill has no standalone statistics tool. Run individual tests with inline Python (scipy, statsmodels), as in Workflow 1 and Workflow 5, or with `run_test.py` in `data-analytics/statistical-analyst/`.

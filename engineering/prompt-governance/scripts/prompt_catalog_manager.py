@@ -140,15 +140,15 @@ def add_prompt(catalog_dir: Path, name: str, content: str,
     existing_versions = [e.version for e in catalog.entries.get(name, [])]
     version = _next_version(existing_versions)
 
-    # Save content file
+    # Check for duplicate content before writing anything
     content_hash = _hash_content(content)
-    content_file = f"{name}_v{version.replace('.', '_')}.txt"
-    (versions_dir / content_file).write_text(content, encoding="utf-8")
-
-    # Check for duplicate content
     for existing in catalog.entries.get(name, []):
         if existing.content_hash == content_hash:
             return f"Duplicate: Content identical to {name} v{existing.version}. No new version created."
+
+    # Save content file
+    content_file = f"{name}_v{version.replace('.', '_')}.txt"
+    (versions_dir / content_file).write_text(content, encoding="utf-8")
 
     entry = PromptEntry(
         name=name,

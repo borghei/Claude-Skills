@@ -63,6 +63,27 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/deployment-strategies.md](references/deployment-strategies.md)** — deep deployment strategy guide (blue-green, canary, rolling). Read when planning a release rollout.
 - **[references/agentic-workflows-guide.md](references/agentic-workflows-guide.md)** — agentic/automated workflow patterns. Read when wiring up AI-driven or autonomous pipeline steps.
 
+## Scope & Limitations
+
+**In Scope:**
+- Generating GitHub Actions YAML with `workflow_generator.py` for CI, CD, release, security-scan and docs-check workflows in Python, Node, Go or Rust, with CD targets for Kubernetes, Docker Compose, AWS ECS or static hosting
+- Analyzing existing workflow files with `pipeline_analyzer.py` for missing caching and timeouts, serial job chains, deprecated actions, possible leaked secrets and oversized runners, with severity ratings and cost estimates
+- Deployment plans from `deployment_planner.py` for blue-green, canary or rolling releases, with health checks and rollback steps per environment
+- Patterns for reusable workflows, OIDC authentication, secrets hierarchy and multi-environment promotion from the references
+
+**Out of Scope:**
+- CI systems other than GitHub Actions, such as GitLab CI, CircleCI and Buildkite (see `engineering/ci-cd-pipeline-builder/`)
+- Provisioning infrastructure (see `engineering/terraform-patterns/` and `engineering/senior-devops/`)
+- Versioning, changelogs and release coordination (see `engineering/release-orchestrator/`)
+- Helm chart authoring and review (see `engineering/helm-chart-builder/`)
+- Running deployments or watching live rollouts; the tools produce files and plans only
+
+**Important Caveats:**
+- Generated workflows are templates. Secrets, environment names, deploy commands and action versions need review before the workflow runs.
+- The analyzer parses YAML with a minimal built-in parser and pattern checks. Complex anchors, expressions and reusable-workflow calls can be misread, and it does not run the workflow.
+- Runner cost estimates use a fixed per-minute table for GitHub-hosted runners. GitHub pricing and runner images change, so treat the numbers as rough.
+- Action versions and deprecations go stale quickly. Check pinned actions against their current releases.
+
 ## Integration Points
 
 | Skill | Integration |

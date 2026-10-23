@@ -82,12 +82,33 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ### meeting_prep_briefer.py
 
-Reads a structured JSON input describing meeting context and produces a one-page briefing in markdown.
+Reads a structured JSON input describing meeting context and produces a one-page briefing in markdown. `--json` prints the parsed input back as JSON, not the briefing; use the default markdown output for the briefing itself.
 
 ```bash
 python scripts/meeting_prep_briefer.py meeting_input.json
 python scripts/meeting_prep_briefer.py meeting_input.json --json
 ```
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- One-page markdown briefings built from a structured JSON input (`assets/meeting_input.json`) by `meeting_prep_briefer.py`.
+- Briefing structure that front-loads the goal and lists attendees and their positions, decisions sought, questions and talking points.
+- Workflows for customer calls, board and investor meetings, and manager 1:1s.
+- Briefing methodology in `references/briefing_methodology.md`: when a briefing helps, when it is overhead, and what goes in it.
+
+**Out of Scope:**
+- Reading calendars, email or CRM records. The skill does not pull meeting context from any system.
+- Building a board deck (see `c-level-advisor/board-deck-builder/`) or auditing a .pptx file (see `documents/pptx-toolkit/`).
+- Capturing decisions and action items after the meeting (see `personal-productivity/meeting-insights/`).
+- Preparing for meetings with a legal focus (see `legal/legal-meeting-briefing/`).
+
+**Important Caveats:**
+- The briefer formats what is in the input file. It does not research attendees or check facts, so the briefing is only as current as the context entered.
+- Attendee positions, leverage and talking points are the user's own judgement. The tool does not infer them.
+- The `--json` flag outputs the parsed input, not a JSON version of the briefing.
 
 ---
 

@@ -49,9 +49,7 @@ The agent drafts a charter covering:
 
 The agent analyzes cross-project dependencies and identifies the critical path:
 
-```bash
-python scripts/dependency_analyzer.py --projects projects.yaml
-```
+This skill has no dependency tool. Build the matrix from each project's plan, or run `dependency_mapper.py --deps deps.json` from `project-management/delivery-manager/` for a cross-team dependency map with critical-path flags.
 
 **Dependency matrix example:**
 
@@ -80,16 +78,14 @@ Critical Path: A (Design) -> B (API) -> C (Integration) -> D (Launch)
 The agent creates a resource allocation plan:
 
 ```bash
-python scripts/resource_forecast.py --program program.yaml --months 12
+python scripts/resource_allocator.py --resources resources.json
 ```
 
-Output includes per-role monthly allocation, total FTE forecast, and budget per month. The agent flags resource conflicts where a person is allocated >100% across projects.
+Output shows each person's total and effective allocation across projects, FTE per project, average utilization, and flags anyone over-allocated (above 100%) or under-utilized. It reports the current allocation; a month-by-month forecast and budget have to be built from it by hand.
 
 ### 5. Track Benefits Realization
 
-```bash
-python scripts/benefits_tracker.py --plan benefits_plan.yaml
-```
+Benefits are part of the portfolio data: give each program a benefits target and the realized amount, and `python scripts/portfolio_dashboard.py --portfolio portfolio.json` reports realized against target per program.
 
 For each benefit, the agent tracks:
 - **Definition:** Metric, baseline, target
@@ -131,29 +127,28 @@ KEY METRICS:
 
 ## Example: Program Dashboard Generation
 
-```bash
-$ python scripts/program_dashboard.py --program "Digital Transformation"
+`portfolio.json` follows the template that `python scripts/portfolio_dashboard.py --example` prints.
 
-Program: Digital Transformation    Status: AMBER (At Risk)
-Sponsor: Jane Smith                Phase: Execution
-==========================================================
-Schedule: AMBER (-2 weeks)   Budget: GREEN (92% of plan)
-Scope: GREEN (on track)      Quality: GREEN (meets standards)
-Risk: AMBER (3 High risks)   Resources: GREEN (stable)
+```text
+$ python scripts/portfolio_dashboard.py --portfolio portfolio.json
+Portfolio Dashboard: Digital Transformation Portfolio
+Date: 2026-10-23  |  Programs: 2
+======================================================================
+Portfolio Health: ON TRACK
+RAG: GREEN=1 | AMBER=1 | RED=0
+Budget: $1,520,000 / $2,800,000 (54.3%)
+Milestones: 8/12 (66.7%)
 
-Project Status:
-  Project A: GREEN  100% complete  (Complete)
-  Project B: AMBER   65% complete  (Next: API Delivery Feb 10)
-  Project C: GREEN   40% complete  (Next: Integration Start Feb 20)
-  Project D: BLUE     0% complete  (Not Started)
+  [AMBER] Customer Platform Modernization  (Phase: Execution)
+       Schedule: -3 days  |  Budget: 70%  |  Risks: 1 high
+       Benefits: $1,200,000 / $5,000,000 (24%)
+         - API Migration: Complete (100%)  Next: N/A (Done)
+         - Frontend Rebuild: In Progress (60%)  Next: Beta Release (2026-04-15)
 
-Key Metrics:
-  Milestones: 4/8 (50%)     Benefits: $1.2M realized / $10M target
-  Issues: 5 open (2 critical)  Deliverables: 12/20 (60%)
-
-Upcoming Milestones:
-  M5: Beta Release - Feb 15 (AMBER - at risk)
-  M6: UAT Complete - Mar 01 (GREEN - on track)
+  [GREEN] Data Analytics Platform  (Phase: Planning)
+       Schedule: +0 days  |  Budget: 15%  |  Risks: 0 high
+       Benefits: $0 / $2,000,000 (0%)
+         - Data Lake Setup: In Progress (33%)  Next: Schema Design Complete (2026-04-01)
 ```
 
 ## Stakeholder Management
@@ -192,10 +187,11 @@ The agent maintains a program risk register scored by Probability x Impact (1-5 
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `program_dashboard.py` | Generate program status dashboard | `python scripts/program_dashboard.py --program "Name"` |
-| `dependency_analyzer.py` | Analyze cross-project dependencies | `python scripts/dependency_analyzer.py --projects projects.yaml` |
-| `benefits_tracker.py` | Track benefits realization vs. plan | `python scripts/benefits_tracker.py --plan benefits_plan.yaml` |
-| `resource_forecast.py` | Forecast resource allocation | `python scripts/resource_forecast.py --program program.yaml --months 12` |
+| `portfolio_dashboard.py` | Portfolio and program status: RAG, budget, milestones, benefits realized | `python scripts/portfolio_dashboard.py --portfolio portfolio.json` |
+| `milestone_tracker.py` | Milestone status and trend analysis | `python scripts/milestone_tracker.py --milestones milestones.json` |
+| `resource_allocator.py` | Allocation across projects, over- and under-allocation | `python scripts/resource_allocator.py --resources resources.json` |
+
+Each tool prints an input template with `--example` and supports `--json`.
 
 ## Troubleshooting
 

@@ -9,14 +9,13 @@ Read this when running an A/B test, building a feature pipeline, training/evalua
 python scripts/experiment_designer.py --input data/ --output results/
 
 # Run feature engineering pipeline
-python scripts/feature_engineering_pipeline.py --target project/ --analyze
+python scripts/feature_engineering_pipeline.py --input data/ --output features/
 
 # Evaluate model performance
-python scripts/model_evaluation_suite.py --config config.yaml --deploy
-
-# Statistical analysis
-python scripts/statistical_analyzer.py --data input.csv --test ttest --output report.json
+python scripts/model_evaluation_suite.py --input models/ --output evaluation/ --config config.yaml
 ```
+
+For a single statistical test, use inline Python (scipy, statsmodels) as in Workflows 1 and 5, or `run_test.py` in `data-analytics/statistical-analyst/` (Welch's t, Mann-Whitney, chi-square, two-proportion).
 
 ## Tech Stack
 
@@ -55,7 +54,7 @@ python scripts/statistical_analyzer.py --data input.csv --test ttest --output re
 
 ## Workflow 2: Build a Feature Engineering Pipeline
 
-1. **Profile raw data** -- `python scripts/feature_engineering_pipeline.py --target project/ --analyze`
+1. **Profile raw data** -- with pandas (`df.isna().mean()`, `df.nunique()`, `df.describe()`) or your profiling tool of choice.
    - Identify null rates, cardinality, distributions, and data types.
 2. **Generate candidate features:**
    - Temporal: day-of-week, hour, recency, frequency, monetary (RFM)
@@ -95,7 +94,7 @@ python scripts/statistical_analyzer.py --data input.csv --test ttest --output re
    - Output drift: monitor prediction distribution shifts
    - Performance: track latency P50/P95/P99 targets (<50ms / <100ms / <200ms)
 4. **Enable canary deployment** -- Route 5% traffic to new model, compare metrics against baseline for 24-48 hours.
-5. **Validate** -- `python scripts/model_evaluation_suite.py --config config.yaml --deploy` confirms serving latency, error rate <0.1%, and model outputs match offline evaluation.
+5. **Validate** -- From serving metrics, confirm latency, error rate <0.1%, and that model outputs match the offline evaluation.
 
 ## Workflow 5: Perform Causal Inference
 
@@ -121,6 +120,8 @@ python scripts/statistical_analyzer.py --data input.csv --test ttest --output re
 | Error rate | < 0.1% |
 
 ## Common Commands
+
+These are commands for your own ML project (its tests, `train.py`, `evaluate.py`, deployment), not tools this skill ships:
 
 ```bash
 # Development

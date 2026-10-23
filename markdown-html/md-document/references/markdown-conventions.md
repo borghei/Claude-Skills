@@ -233,6 +233,10 @@ attribute:
 | `./relative` `/absolute` | `file:` |
 | `path/to/file.png` | any unrecognized scheme |
 
+One narrow exception: an image source may be a base64 data URI for a raster
+image (`data:image/png;base64,...`, also `jpeg`, `gif`, `webp` and `avif`). SVG
+data URIs, every other `data:` type and any `data:` link target stay blocked.
+
 A blocked URL becomes `#blocked-url` — the link stays visible so the problem is
 noticed, but it cannot execute. This is an allowlist rather than a
 `javascript:`-blocklist on purpose: blocklists are defeated by encoding tricks

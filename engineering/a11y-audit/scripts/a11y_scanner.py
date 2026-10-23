@@ -165,7 +165,7 @@ class A11yHTMLParser(HTMLParser):
                 idx = int(tabindex)
                 if idx > 0:
                     self.findings.append(Finding(
-                        severity="warning", wcag_level="AA", criterion="2.4.3",
+                        severity="critical", wcag_level="A", criterion="2.4.3",
                         file=self.filename, line=line, element=f"<{tag} tabindex=\"{idx}\">",
                         message=f"Positive tabindex ({idx}) disrupts natural tab order.",
                         recommendation="Use tabindex='0' for focusable or tabindex='-1' for programmatic focus.",
@@ -222,7 +222,7 @@ class A11yHTMLParser(HTMLParser):
         for level, line in self.heading_levels:
             if level > prev_level + 1 and prev_level > 0:
                 self.findings.append(Finding(
-                    severity="warning", wcag_level="AA", criterion="1.3.1",
+                    severity="critical", wcag_level="A", criterion="1.3.1",
                     file=self.filename, line=line, element=f"<h{level}>",
                     message=f"Heading level skipped: h{prev_level} to h{level}.",
                     recommendation=f"Use h{prev_level + 1} instead, or restructure heading hierarchy.",

@@ -21,6 +21,7 @@ TABLE_CAPTION_RE = re.compile(r"^Table:\s*(?P<caption>.+)$")
 FOOTNOTE_DEF_RE = re.compile(r"^\[\^(?P<id>[^\]]+)\]:\s*(?P<text>.+)$")
 HEADING_RE = re.compile(r"^(?P<hashes>#{1,6})\s+(?P<text>.+?)\s*$")
 SAFE_URL_RE = re.compile(r"^(https?:|mailto:|#|[./]|[A-Za-z0-9_-]+[./])")
+DATA_IMG_RE = re.compile(r"^data:image/(png|jpeg|gif|webp|avif);base64,[A-Za-z0-9+/]+={0,2}$")
 CODE_SPAN_RE = re.compile(r"`([^`]+)`")
 IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
@@ -40,14 +41,11 @@ def slugify(text: str) -> str:
     return re.sub(r"[\s_]+", "-", clean) or "section"
 
 
-def safe_url(url: str) -> str:
-    """Return an escaped url if its scheme is safe, else a neutral placeholder.
-
-    Blocks javascript:, data:, vbscript: and anything else that could execute
-    when the generated document is opened.
-    """
+def safe_url(url: str, image: bool = False) -> str:
+    """Escape an allowlisted url; data: only for base64 raster images (image=True)."""
     url = url.strip()
-    return html.escape(url, quote=True) if SAFE_URL_RE.match(url) else "#blocked-url"
+    ok = SAFE_URL_RE.match(url) or (image and DATA_IMG_RE.match(url))
+    return html.escape(url, quote=True) if ok else "#blocked-url"
 
 
 def collect_labels(lines: List[str]) -> Dict[str, Dict[str, Any]]:
@@ -123,7 +121,8 @@ def render_inline(text: str, labels: Dict[str, Dict[str, Any]],
                 f'{used_notes.index(note_id) + 1}</a></sup>')
 
     text = IMG_RE.sub(
-        lambda m: f'<img src="{safe_url(html.unescape(m.group(2)))}" alt="{m.group(1)}">', text)
+        lambda m: f'<img src="{safe_url(html.unescape(m.group(2)), image=True)}"'
+                  f' alt="{m.group(1)}">', text)
     text = XREF_RE.sub(xref, text)
     text = FNREF_RE.sub(footnote, text)
     text = LINK_RE.sub(
@@ -213,7 +212,8 @@ class Renderer:
         alt = html.escape(match.group("alt"), quote=True)
         caption = match.group("tail").strip() or match.group("alt")
         self.out.append(
-            f'<figure id="{anchor}"><img src="{safe_url(match.group("src"))}" alt="{alt}">'
+            f'<figure id="{anchor}">'
+            f'<img src="{safe_url(match.group("src"), image=True)}" alt="{alt}">'
             f'<figcaption>Figure {self.counters["fig"]}. {self.inline(caption)}</figcaption>'
             f"</figure>")
 

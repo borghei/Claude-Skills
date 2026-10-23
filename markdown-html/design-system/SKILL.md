@@ -209,3 +209,24 @@ gate and fails the dark one.
 | `assets/theme_brief_template.md` | Pre-work brief: decisions to settle before writing hex values |
 
 All scripts share one exit-code contract: **0** clean, **2** gate failed (findings at or above the threshold), **1** the tool itself errored. A CI job can therefore tell a real defect from a broken invocation.
+
+## Scope & Limitations
+
+**In Scope:**
+- Lints a design-token JSON file for scale sanity, ramp monotonicity, light/dark mode parity, literal hex values and orphan stops (`token_linter.py`).
+- Scores declared foreground/background pairings against WCAG AA or AAA in every mode, and cross-checks every role with `--all-pairs` (`contrast_validator.py`).
+- Compiles the tokens into one inlinable CSS bundle with light and dark blocks and no `@import`, web fonts or external assets (`theme_builder.py`).
+- Guidance on type ratios, contrast usage classes (`body`, `large`, `ui`, `decor`) and dark-mode role derivation for documents and decks.
+
+**Out of Scope:**
+- Product UI component libraries with buttons, form states or component variants; see `product-team/ui-design-system/`.
+- Rendering markdown into a document or a deck; see `markdown-html/md-document/` and `markdown-html/md-slides/`.
+- Checking the markdown content itself (links, headings, alt text, readability); see `markdown-html/md-review/`.
+- Fetching or embedding web fonts. Typefaces are declared as font stacks only.
+- Color-blindness simulation and foreground-against-foreground checks, such as two chart series side by side.
+
+**Important Caveats:**
+- Contrast ratio is a luminance measure and does not see hue. A passing run does not cover text over images, semi-transparent overlays, undeclared hover or focus states, or red/green pairs at equal luminance.
+- The validator checks the pairings declared in the token file, or every role pair with `--all-pairs`. It cannot see colors set in other stylesheets.
+- Colors must be 3- or 6-digit hex values or `ramp.step` references; other color formats are rejected.
+- The `body`, `large` and `ui` thresholds come from WCAG 2.1 criteria 1.4.3 and 1.4.11. The 1.5:1 `decor` floor is a house value, not a WCAG number.

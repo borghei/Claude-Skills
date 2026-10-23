@@ -74,6 +74,26 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 3. Apply the total budget cap as a hard stop so a stuck loop cannot run away.
 4. Instrument per-phase token spend; if observe/act phases consume high reasoning, that is an overthinking signal — clamp them.
 
+## Scope & Limitations
+
+**In Scope:**
+- Recommending a reasoning effort level (none, low, medium or high), or a prompt-first or cheaper-model route, with `reasoning_budget_advisor.py` from task type, error cost, step count, ambiguity, latency budget and verifiability
+- A rough cost multiplier range for each effort level, relative to a no-thinking call on the same model
+- Allocating effort across agent-loop phases (plan, act, observe, recover, finalize) under a total budget cap with `reasoning_loop_allocator.py`
+- Guidance on where reasoning pays off, overthinking failure modes, escalation ladders and circuit breakers from the references
+
+**Out of Scope:**
+- Calling a model or measuring real thinking-token use; the scripts make rule-based recommendations only
+- Token pricing, caching and model routing in general (see `engineering/llm-cost-optimizer/`)
+- Measuring whether more reasoning improved quality (see `engineering/agentic-evaluation-framework/`)
+- Prompt rewriting when the advice is prompt-first (see `engineering/prompt-engineer-toolkit/`)
+- Agent workflow structure beyond reasoning budgets (see `engineering/agent-workflow-designer/`)
+
+**Important Caveats:**
+- Recommendations come from fixed rules over coarse inputs that the user supplies. They are a starting point to confirm with an eval, not a measured optimum.
+- The cost multipliers are broad ranges. Real thinking-token use varies a lot by task and by model.
+- The skill is vendor-agnostic. How effort or thinking budgets are exposed, and what they cost, differs by provider and model version and changes often.
+
 ## Reference Documentation
 
 - [When to Use Extended Thinking](references/when-to-use-extended-thinking.md) - Decision matrix of task classes where reasoning pays off vs. is wasted, interaction with tool use and agent loops, budget guards, overthinking failure modes, and eval signals.

@@ -67,6 +67,25 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/kubernetes_patterns.md](references/kubernetes_patterns.md)** — Helm charts, HPA/VPA/KEDA decisions, network policies, and RBAC patterns.
 - **[references/cloud_platform_guide.md](references/cloud_platform_guide.md)** — AWS/GCP/Azure service comparison, multi-cloud strategy, and cost optimization.
 
+## Scope & Limitations
+
+**In Scope:**
+- Guidance and worked examples for containerizing and deploying an application, Terraform infrastructure as code and CI/CD pipeline design, in `references/devops-workflows-and-operations.md`.
+- Deployment strategy selection (rolling, blue-green, canary, feature flags), monitoring essentials (Four Golden Signals, SLO targets), anti-patterns and troubleshooting.
+- Kubernetes patterns (Helm structure, HPA, VPA and KEDA, network policies, RBAC, container security) in `references/kubernetes_patterns.md`.
+- Cloud service comparison, cost optimization, alerting rules and incident runbook templates in `references/cloud_platform_guide.md`.
+
+**Out of Scope:**
+- Generating CI/CD configs from a project's stack (see `engineering/ci-cd-pipeline-builder/`).
+- Static review of Terraform modules and security rules (see `engineering/terraform-patterns/`) and of Helm charts (see `engineering/helm-chart-builder/`).
+- Running an incident (see `engineering/incident-commander/`) and designing observability (see `engineering/observability-designer/`).
+- Applying anything to a cloud account or cluster. The skill has no cloud, cluster or CI access.
+
+**Important Caveats:**
+- The three scripts in `scripts/` are placeholders at this version. Each checks that the target path exists and prints an empty report; none generates a pipeline, Terraform module or deployment plan.
+- `references/cicd_pipeline_guide.md`, `references/deployment_strategies.md` and `references/infrastructure_as_code.md` contain template text rather than specific guidance.
+- Cloud services, CI platform syntax and Kubernetes APIs change often, so examples need checking against current provider documentation before use.
+
 ## Integration Points
 
 | Skill | Integration |

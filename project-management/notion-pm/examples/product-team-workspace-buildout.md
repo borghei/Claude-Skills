@@ -215,7 +215,7 @@ def create_prd_page(prd_dict):
     r.raise_for_status()
     return r.json()["id"]
 
-# Migrate each Google Doc PRD using prd_scaffolder.py output format
+# Migrate each Google Doc PRD into the section layout of project-management/execution/create-prd/scripts/prd_scaffolder.py
 for prd in EXISTING_PRDS:
     blocks = render_markdown_as_notion_blocks(prd["markdown"])
     create_prd_page({

@@ -259,7 +259,18 @@ def generate_phases(engagement_type: Dict, duration_days: int,
     total_pct = sum(PHASE_DETAILS.get(p, {"pct": 10})["pct"] for p in phase_names)
     current_date = start_date
 
-    for phase_name in phase_names:
+    # Round each share, then correct the entries with the largest rounding
+    # error so the displayed percentages add up to exactly 100.
+    raw_shares = [PHASE_DETAILS.get(p, {"pct": 10})["pct"] * 100 / total_pct for p in phase_names]
+    allocations = [round(share) for share in raw_shares]
+    drift = sum(allocations) - 100
+    step = 1 if drift > 0 else -1
+    by_error = sorted(range(len(raw_shares)),
+                      key=lambda i: (allocations[i] - raw_shares[i]) * step, reverse=True)
+    for i in by_error[:abs(drift)]:
+        allocations[i] -= step
+
+    for index, phase_name in enumerate(phase_names):
         details = PHASE_DETAILS.get(phase_name, {"pct": 10, "desc": phase_name})
         pct = details["pct"] / total_pct
         phase_days = max(1, round(duration_days * pct))
@@ -272,7 +283,7 @@ def generate_phases(engagement_type: Dict, duration_days: int,
             "start": current_date.strftime("%Y-%m-%d"),
             "end": end_date.strftime("%Y-%m-%d"),
             "description": details["desc"],
-            "allocation_pct": round(pct * 100),
+            "allocation_pct": allocations[index],
         })
 
         current_date = end_date

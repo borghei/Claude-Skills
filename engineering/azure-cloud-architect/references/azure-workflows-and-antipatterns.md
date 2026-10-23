@@ -92,7 +92,7 @@ See `azure-cost-optimization.md` for the full lever catalog and detection patter
 
 | Script | Input | Output |
 |--------|-------|--------|
-| `scripts/azure_architecture_validator.py` | Bicep/ARM file or YAML workload spec | Structural issues, anti-pattern findings, missing best-practice settings |
+| `scripts/azure_architecture_validator.py` | Bicep file or YAML workload spec | Structural issues, anti-pattern findings, missing best-practice settings |
 | `scripts/azure_cost_estimator.py` | YAML workload spec (services + tiers + scale) | Per-service monthly cost estimate, total, optimization opportunities |
 | `scripts/azure_waf_scorer.py` | YAML workload spec | Score per WAF pillar, gap analysis, recommendations |
 

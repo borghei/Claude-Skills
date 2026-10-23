@@ -25,9 +25,7 @@ The agent creates a release plan covering:
 3. **Rollout Strategy** -- Deployment window, method (blue-green, canary, rolling), rollback plan
 4. **Communication Plan** -- T-7 (scope finalized), T-1 (go/no-go), T-0 (release notes), T+1 (customer notification)
 
-```bash
-python scripts/release_checker.py --version v2.5.0
-```
+Check each exit criterion against the release record before the go/no-go meeting. The skill has no release-checker tool; the record below shows the expected format.
 
 **Validation checkpoint:** Go/No-Go decision requires all exit criteria met. Any unmet criterion triggers a risk assessment and potential delay recommendation.
 
@@ -46,9 +44,9 @@ Each change request requires: description, justification, impact analysis (syste
 
 ## Example: Release Readiness Check
 
-```bash
-$ python scripts/release_checker.py --version v2.5.0
+A readiness record, filled in by the delivery manager:
 
+```text
 Release Readiness: v2.5.0
 =========================
 Type: Minor Release (new features)
@@ -89,9 +87,7 @@ Reading notes:
 - Rework rate is optional. Mark unplanned fix deploys with `"rework": true` in the input and the tracker reports the rate without classifying it.
 - The 2025 DORA report ("State of AI-assisted Software Development") centres on seven team profiles from cluster analysis rather than leading with the Elite/High/Medium/Low levels, alongside the DORA AI Capabilities Model. Treat the 2024 levels as the latest published cut-offs, and use the profiles to diagnose *where* a team is constrained (throughput, instability, or well-being) rather than to rank teams.
 
-```bash
-python scripts/deploy.py --env production --strategy canary
-```
+Deployments themselves run through the team's own pipeline. This skill measures them: feed the deploy log to `python scripts/delivery_metrics_tracker.py --data deploys.json` for the DORA metrics above.
 
 ## Cross-Skill Integration
 

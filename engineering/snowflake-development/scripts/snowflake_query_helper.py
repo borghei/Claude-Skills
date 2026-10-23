@@ -53,7 +53,7 @@ class AnalysisReport:
 # SQL anti-pattern detection rules
 # (pattern, severity, category, title, description, suggestion, impact)
 SQL_PATTERNS = [
-    (r'\bSELECT\s+\*\b', "high", "performance",
+    (r'\bSELECT\s*(?:DISTINCT\s+)?\*', "high", "performance",
      "SELECT * detected",
      "SELECT * reads all columns, increasing I/O and network transfer. In columnar storage like Snowflake, specifying columns dramatically reduces scan time.",
      "Specify only the columns needed: SELECT col1, col2, ...",
@@ -158,14 +158,14 @@ WORKLOAD_PROFILES = {
     "etl": {
         "description": "Extract-Transform-Load batch processing",
         "typical_size": "Medium to Large",
-        "auto_suspend": 0,
+        "auto_suspend": 60,
         "auto_resume": True,
         "multi_cluster": False,
         "scaling_policy": "N/A",
         "tips": [
             "Size warehouse to complete ETL within SLA window",
             "Larger warehouse = faster completion, same total credits",
-            "Suspend immediately after pipeline completion",
+            "Run ALTER WAREHOUSE ... SUSPEND as the last pipeline step; AUTO_SUSPEND = 60 is the fallback",
             "Schedule during off-peak hours if using reserved capacity",
         ],
     },

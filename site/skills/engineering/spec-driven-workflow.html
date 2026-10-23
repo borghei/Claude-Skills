@@ -655,6 +655,25 @@ gets waived twice stops being read.
 | `assets/sample_trace_index.json` | Prebuilt trace index exercising covered, untested, test-only, and orphan states |
 | `assets/spec-template.md` | Skeleton for a new specification with the required structure |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Ambiguity linting of a markdown spec with `spec_lint.py`: seven rules, a precision ratio and exit-code gates (`--max-findings`, `--min-precision`).
+- Requirement extraction with stable IDs and content fingerprints with `spec_parse.py`, drift detection against a baseline, and a gate on missing acceptance criteria.
+- Two-way coverage between requirement IDs and annotated code and tests with `trace_coverage.py`, from a source tree or a prebuilt trace index, with orphan detection and a coverage floor.
+- Spec writing and traceability guidance in `references/`, plus a spec template and sample files in `assets/`.
+
+**Out of Scope:**
+- Writing the implementation or the tests (see `engineering/tdd-guide/`).
+- Breaking a PRD into tickets, branches and PRs (see `product-team/spec-to-repo/`).
+- Running the test suite or measuring code coverage.
+- Product discovery and deciding which requirements matter.
+
+**Important Caveats:**
+- Coverage means an annotation with the requirement ID was found. It does not show that the test passes or that the code meets the requirement.
+- The linter uses word and phrase rules. It can miss ambiguity phrased in other ways and can flag acceptable wording, so a high precision ratio still needs human review.
+- Stable IDs depend on section and order. Moving requirements between sections changes their IDs, which shows up as drift against the baseline.
+
 ---
 
 ## What I Need You to Do
@@ -891,6 +910,25 @@ gets waived twice stops being read.
 | `assets/sample_requirements.json` | Parsed baseline for the drift and coverage workflows |
 | `assets/sample_trace_index.json` | Prebuilt trace index exercising covered, untested, test-only, and orphan states |
 | `assets/spec-template.md` | Skeleton for a new specification with the required structure |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Ambiguity linting of a markdown spec with `spec_lint.py`: seven rules, a precision ratio and exit-code gates (`--max-findings`, `--min-precision`).
+- Requirement extraction with stable IDs and content fingerprints with `spec_parse.py`, drift detection against a baseline, and a gate on missing acceptance criteria.
+- Two-way coverage between requirement IDs and annotated code and tests with `trace_coverage.py`, from a source tree or a prebuilt trace index, with orphan detection and a coverage floor.
+- Spec writing and traceability guidance in `references/`, plus a spec template and sample files in `assets/`.
+
+**Out of Scope:**
+- Writing the implementation or the tests (see `engineering/tdd-guide/`).
+- Breaking a PRD into tickets, branches and PRs (see `product-team/spec-to-repo/`).
+- Running the test suite or measuring code coverage.
+- Product discovery and deciding which requirements matter.
+
+**Important Caveats:**
+- Coverage means an annotation with the requirement ID was found. It does not show that the test passes or that the code meets the requirement.
+- The linter uses word and phrase rules. It can miss ambiguity phrased in other ways and can flag acceptable wording, so a high precision ratio still needs human review.
+- Stable IDs depend on section and order. Moving requirements between sections changes their IDs, which shows up as drift against the baseline.
 
 ---
 

@@ -25,44 +25,58 @@ The agent monitors four metric categories:
 | Team | Happiness, psychological safety, engagement, sustainability | Team health |
 
 ```bash
-python scripts/metrics_dashboard.py --team "Team Alpha"
+python scripts/velocity_analyzer.py --sprints sprints.json      # Process: throughput trend and forecast
+python scripts/team_health_checker.py --survey survey.json      # Team: health across 10 dimensions
 ```
+
+Outcome and Quality metrics come from your product analytics and CI data; the skill has no tool that collects them.
 
 **Validation checkpoint:** Review metrics monthly. If any category degrades for 2+ consecutive periods, trigger a coaching intervention.
 
 ## Example: Transformation Kickoff Assessment
 
-```yaml
-# assessment.yaml
-organization: "Acme Corp"
-teams_assessed: 5
-dimensions:
-  values_and_mindset: 2
-  team_practices: 3
-  technical_excellence: 2
-  product_ownership: 2
-  leadership_support: 3
-  continuous_improvement: 2
+`assessment.json` (`python scripts/agile_maturity_scorer.py --example` prints this template):
+
+```json
+{
+  "organization": "Acme Corp",
+  "teams_assessed": 5,
+  "dimensions": {
+    "values_and_mindset": 2,
+    "team_practices": 3,
+    "technical_excellence": 2,
+    "product_ownership": 2,
+    "leadership_support": 3,
+    "continuous_improvement": 2
+  }
+}
 ```
 
 ```bash
-$ python scripts/maturity_scorer.py --assessment assessment.yaml
+$ python scripts/agile_maturity_scorer.py --assessment assessment.json
+
 
 Agile Maturity Assessment: Acme Corp
-=====================================
+Teams Assessed: 5
+============================================================
 Overall Score: 2.3 / 5.0 (Level 2: Repeatable)
+  Basic Scrum/Kanban in place, team-level practices established, some metrics tracked.
 
 Dimension Scores:
-  Values & Mindset:       2/5 - Teams follow process but lack agile mindset
-  Team Practices:         3/5 - Consistent Scrum ceremonies across teams
-  Technical Excellence:   2/5 - Limited automation, manual testing prevalent
-  Product Ownership:      2/5 - Feature-driven, not outcome-driven
-  Leadership Support:     3/5 - Middle management supportive, exec sponsorship partial
-  Continuous Improvement: 2/5 - Retrospectives happen but action items stall
+  Values & Mindset          2/5  [########------------]  Level 2: Repeatable
+  Team Practices            3/5  [############--------]  Level 3: Defined
+  Technical Excellence      2/5  [########------------]  Level 2: Repeatable
+  Product Ownership         2/5  [########------------]  Level 2: Repeatable
+  Leadership Support        3/5  [############--------]  Level 3: Defined
+  Continuous Improvement    2/5  [########------------]  Level 2: Repeatable
 
-Recommendation: Start with Scrum pilot on 2 willing teams.
-Focus first on Technical Excellence and Product Ownership.
-Target Level 3 within 6 months.
+Gap Analysis (target: Level 3):
+  [Medium] Values & Mindset: 2 -> 3 (gap: 1.0)
+  [Medium] Technical Excellence: 2 -> 3 (gap: 1.0)
+  [Medium] Product Ownership: 2 -> 3 (gap: 1.0)
+  [Medium] Continuous Improvement: 2 -> 3 (gap: 1.0)
+
+...
 ```
 
 ## Troubleshooting

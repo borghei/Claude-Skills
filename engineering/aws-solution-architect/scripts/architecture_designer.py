@@ -806,3 +806,81 @@ class ArchitectureDesigner:
         ]
 
         return checklist
+
+
+EXAMPLE_REQUIREMENTS = {
+    "application_type": "web_application",
+    "expected_users": 5000,
+    "requests_per_second": 20,
+    "budget_monthly_usd": 800,
+    "team_size": 3,
+    "aws_experience": "beginner",
+    "compliance": [],
+    "data_size_gb": 20,
+}
+
+
+def main():
+    import argparse
+    import json
+
+    parser = argparse.ArgumentParser(description="Recommend an AWS architecture pattern from application requirements.")
+    parser.add_argument("--input", help="Requirements JSON (see --example for the fields)")
+    parser.add_argument("--example", action="store_true", help="Print an example requirements file and exit")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    args = parser.parse_args()
+
+    if args.example:
+        print(json.dumps(EXAMPLE_REQUIREMENTS, indent=2))
+        return
+    if not args.input:
+        parser.error("--input is required (or use --example to see the expected fields)")
+    try:
+        with open(args.input) as f:
+            requirements = json.load(f)
+    except (OSError, ValueError) as e:
+        parser.error(f"cannot read {args.input}: {e}")
+    if not isinstance(requirements, dict):
+        parser.error(f"{args.input} must contain a JSON object (see --example)")
+    known = {t.value for t in ApplicationType}
+    if requirements.get("application_type", "web_application") not in known:
+        import sys
+        print(f"Note: unknown application_type '{requirements.get('application_type')}'; "
+              f"known types: {', '.join(sorted(known))}. Falling back to the default pattern.", file=sys.stderr)
+
+    designer = ArchitectureDesigner(requirements)
+    pattern = designer.recommend_architecture_pattern()
+    checklist = designer.generate_service_checklist()
+    if args.format == "json":
+        print(json.dumps({"pattern": pattern, "checklist": checklist}, indent=2, default=str))
+        return
+    print(f"Recommended pattern: {pattern.get('pattern_name')}")
+    print(f"  {pattern.get('description', '')}")
+    print(f"  Use case: {pattern.get('use_case', '')}")
+    cost = pattern.get("estimated_cost")
+    if cost:
+        print(f"  Estimated cost: {cost if not isinstance(cost, dict) else json.dumps(cost)}")
+    print("Services:")
+    for layer, svc in (pattern.get("services") or {}).items():
+        name = svc.get("service") if isinstance(svc, dict) else svc
+        purpose = svc.get("purpose", "") if isinstance(svc, dict) else ""
+        print(f"  - {layer}: {name}" + (f" ({purpose})" if purpose else ""))
+    for label in ("pros", "cons"):
+        items = pattern.get(label) or []
+        if items:
+            print(f"{label.capitalize()}:")
+            for item in items:
+                print(f"  - {item}")
+    if checklist:
+        print("Checklist:")
+        for item in checklist:
+            if isinstance(item, dict) and "tasks" in item:
+                print(f"  {item.get('phase', '')}:")
+                for task in item["tasks"]:
+                    print(f"    [ ] {task}")
+            else:
+                print(f"  [ ] {item}")
+
+
+if __name__ == "__main__":
+    main()

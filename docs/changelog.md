@@ -8,6 +8,12 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.8** (October 2026)
+
+- Every skill now has a Scope & Limitations section
+- No skill points to a tool that doesn't exist; the AWS architect tools run from the command line
+- Tool bugs fixed in Snowflake, Terraform, a11y, red-team, prompt-governance and the markdown-html converters; docs corrected to match what each tool does
+
 **v4.13.7** (October 2026)
 
 - EU AI Act high-risk deadlines updated to the Digital Omnibus: 2 December 2027 (Annex III) and 2 August 2028 (Annex I); transparency stays at 2 August 2026

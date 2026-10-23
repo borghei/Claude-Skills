@@ -16,6 +16,7 @@ from typing import Any, Dict, List
 LAYOUT_RE = re.compile(r"^\[layout:\s*(?P<name>[a-z-]+)\]\s*$")
 HEADING_RE = re.compile(r"^(?P<hashes>#{1,6})\s+(?P<text>.+?)\s*$")
 SAFE_URL_RE = re.compile(r"^(https?:|mailto:|#|[./]|[A-Za-z0-9_-]+[./])")
+DATA_IMG_RE = re.compile(r"^data:image/(png|jpeg|gif|webp|avif);base64,[A-Za-z0-9+/]+={0,2}$")
 CODE_SPAN_RE = re.compile(r"`([^`]+)`")
 IMG_RE = re.compile(r"!\[([^\]]*)\]\(([^)\s]+)\)")
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
@@ -28,10 +29,11 @@ NOTES_MARKER = "???"
 COLUMN_MARKER = ":::"
 
 
-def safe_url(url: str) -> str:
-    """Return an escaped url if its scheme is safe, else a neutral placeholder."""
+def safe_url(url: str, image: bool = False) -> str:
+    """Escape an allowlisted url; data: only for base64 raster images (image=True)."""
     url = url.strip()
-    return html.escape(url, quote=True) if SAFE_URL_RE.match(url) else "#blocked-url"
+    ok = SAFE_URL_RE.match(url) or (image and DATA_IMG_RE.match(url))
+    return html.escape(url, quote=True) if ok else "#blocked-url"
 
 
 def render_inline(text: str) -> str:
@@ -49,7 +51,8 @@ def render_inline(text: str) -> str:
 
     text = html.escape(CODE_SPAN_RE.sub(stash, text), quote=True)
     text = IMG_RE.sub(
-        lambda m: f'<img src="{safe_url(html.unescape(m.group(2)))}" alt="{m.group(1)}">', text)
+        lambda m: f'<img src="{safe_url(html.unescape(m.group(2)), image=True)}"'
+                  f' alt="{m.group(1)}">', text)
     text = LINK_RE.sub(
         lambda m: f'<a href="{safe_url(html.unescape(m.group(2)))}">{m.group(1)}</a>', text)
     text = ITALIC_RE.sub(r"<em>\1</em>", BOLD_RE.sub(r"<strong>\1</strong>", text))

@@ -79,8 +79,9 @@ jobs:
           EXIT=0
           for skill in $CHANGED_SKILLS; do
             echo "Auditing: $skill"
-            python3 scripts/skill_security_auditor.py "$skill" --strict --json >> audit-results.jsonl
-            if [ $? -ne 0 ]; then EXIT=1; fi
+            for scanner in code_scanner prompt_injection_scanner supply_chain_checker; do
+              python3 scripts/$scanner.py "$skill" --strict --json >> audit-results.jsonl || EXIT=1
+            done
           done
           exit $EXIT
 
