@@ -127,8 +127,8 @@ There is no `dev → main` release PR. A release is simply an annotated tag on `
 
 ```bash
 git checkout main && git pull origin main
-git tag -a v4.13.4 -m "v4.13.4 — <summary>"
-git push origin v4.13.4
+git tag -a v4.13.5 -m "v4.13.5 — <summary>"
+git push origin v4.13.5
 ```
 
 (`cli-v*` tags trigger the npm publish workflow; `vX.Y.Z` tags do not.)

@@ -61,6 +61,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 4. Run the Vision Review Checklist; rewrite anything scoring under 3 of 5.
 5. Test with 3 internal audiences and 2 customers; publish as the first link in onboarding and the cover of strategy decks; revisit annually.
 
+## Anti-Patterns
+
+### A mission statement labelled as vision
+**Mistake:** "Our vision: empower modern teams to do their best work." Present tense, abstract, no end date.
+**Why it happens:** Mission statements are familiar and safe, and nobody can disagree with them.
+**Instead:** Describe a dated future state with a measurable end point and name who benefits, for example "by 2031 the median customer saves 6 hours of meetings per engineer per week". No date and no end state means you wrote a mission.
+
+### A vision that rules nothing out
+**Mistake:** The vision covers every segment, use case and company size.
+**Why it happens:** Excluding a segment feels like giving up revenue or upsetting a stakeholder.
+**Instead:** State who you will serve and who you won't, with the reason. Then ask what the team would say no to because of this vision. If the answer is nothing, rewrite until it forces a trade-off.
+
+### Features in the vision
+**Mistake:** The vision names the AI agent, the board view and the voice notes the product will ship.
+**Why it happens:** Features are concrete, and concrete feels inspiring.
+**Instead:** Describe the outcome that stays constant and leave the means open. Search the draft for product nouns such as dashboard, agent, board or dropdown, and abstract each one up to what it achieves for the customer.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task -- keep this file lean and pull detail on demand:

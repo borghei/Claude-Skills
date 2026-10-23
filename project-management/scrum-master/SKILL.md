@@ -67,6 +67,25 @@ All tools accept JSON following `assets/sample_sprint_data.json`. The full 6-ste
 - `assets/user_story_template.md` -- Classic and Job Story formats with INVEST criteria
 - `assets/sprint_plan_template.md` -- Sprint plan with capacity, commitments, risks
 
+## Anti-Patterns
+
+### Retro action items that never land
+**Mistake:** Each retro produces 4-6 action items, and by the next retro most are undone while the team re-discusses the same problems.
+**Why it happens:** Adding an action item feels like progress, and nobody checks the old ones before writing new ones.
+**Instead:** Track completion with `retrospective_analyzer.py` and open each retro with last sprint's items. If the same problem shows up in more than 2 consecutive retros, root-cause it instead of adding another item.
+
+### Definition of Done drift
+**Mistake:** The DoD says "tested + reviewed + deployed", but many tickets close as Done with no tests or with deploys still pending.
+**Why it happens:** Late in the sprint, closing tickets looks better than carrying them over.
+**Instead:** Each sprint, sample 10 closed tickets and check each against the DoD. If more than 20% fall short, enforce the DoD through automation. Otherwise reported velocity overstates what was really done.
+
+### A sprint goal that names no outcome
+**Mistake:** The sprint goal is "complete the sprint backlog", or there is none.
+**Why it happens:** Planning centers on choosing tickets, so the goal gets written last as a summary of the list.
+**Instead:** Write the goal as a customer-visible outcome, and rewrite any goal that mentions a ticket count. A real goal lets the team trade scope mid-sprint and gives the sprint review something to inspect.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

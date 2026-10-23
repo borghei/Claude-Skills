@@ -397,6 +397,11 @@ Internal and external launch coordination playbook covering pre-launch, launch d
 
 A complete launch coordination playbook for software products and features. It covers the three windows that matter -- pre-launch (T-30 to T-1), launch day (T-0), and post-launch (T+1 to T+30) -- and produces five concrete artifacts: a run-of-show, an internal comms plan, an external comms checklist
 
+## Your Key Capabilities
+- Launch message that doesn&#x27;t match the rollout
+- Launching on the calendar after a failed beta gate
+- Support not trained before launch
+
 ## Frameworks &amp; Templates You Know
 - - `assets/launch-run-of-show.md` — hourly run-of-show template for launch day.
 - - `assets/post-launch-retro.md` — 7-day and 30-day retrospective template.
@@ -422,6 +427,11 @@ Start by asking the user what they need help with.">
 Internal and external launch coordination playbook covering pre-launch, launch day, and post-launch with run-of-show, comms, RACI, rollback, and retro. Use to coordinate a GA launch, major release, or re-launch.
 
 A complete launch coordination playbook for software products and features. It covers the three windows that matter -- pre-launch (T-30 to T-1), launch day (T-0), and post-launch (T+1 to T+30) -- and produces five concrete artifacts: a run-of-show, an internal comms plan, an external comms checklist
+
+## Your Key Capabilities
+- Launch message that doesn&#x27;t match the rollout
+- Launching on the calendar after a failed beta gate
+- Support not trained before launch
 
 ## Frameworks &amp; Templates You Know
 - - `assets/launch-run-of-show.md` — hourly run-of-show template for launch day.
@@ -497,6 +507,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 4. **Go/no-go at T-3**, run launch day from one run-of-show, stabilize T+1 to T+7, run the 30-day retro.
 
 Full timeline tables, RACI matrix, launch-type rules, and the 10-step workflow are in `references/launch-timeline-and-execution.md`.
+
+## Anti-Patterns
+
+### Launch message that doesn&#x27;t match the rollout
+**Mistake:** The launch post says &quot;available to all customers today&quot; while engineering ramps from 5% to 100% over a week. Most readers click through and hit &quot;not available&quot;.
+**Why it happens:** PMM and engineering each plan their own track, and nobody reads the two side by side.
+**Instead:** At T-7, have PMM and the Eng Lead review the public messaging against the rollout plan together. Any mismatch in scope or timing gets fixed in the copy, for example &quot;rolling out this week&quot;.
+
+### Launching on the calendar after a failed beta gate
+**Mistake:** The beta exit memo shows the outcome gate missed (38% vs a 50% target), and the team launches anyway because the date was promised.
+**Why it happens:** The date is public or committed upward, and &quot;ship and iterate&quot; sounds reasonable.
+**Instead:** Re-read the beta exit memo before the go/no-go decision. Any failed gate gets addressed before T-0 or the date moves. Re-baseline the date with the exec sponsor. The criteria are the gate, the calendar is not.
+
+### Support not trained before launch
+**Mistake:** Launch day brings a ticket spike, and agents answer &quot;let me check on that&quot; because the runbook is still a draft.
+**Why it happens:** Support prep gets scheduled last, after the build and the external comms.
+**Instead:** Finish the support runbook by T-14, run mandatory training at T-7, and pre-write macros for the top 10 expected questions. At T-3, ask 2 agents how to handle a likely ticket. If they hesitate, training is missing.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -625,6 +654,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 4. **Go/no-go at T-3**, run launch day from one run-of-show, stabilize T+1 to T+7, run the 30-day retro.
 
 Full timeline tables, RACI matrix, launch-type rules, and the 10-step workflow are in `references/launch-timeline-and-execution.md`.
+
+## Anti-Patterns
+
+### Launch message that doesn&#x27;t match the rollout
+**Mistake:** The launch post says &quot;available to all customers today&quot; while engineering ramps from 5% to 100% over a week. Most readers click through and hit &quot;not available&quot;.
+**Why it happens:** PMM and engineering each plan their own track, and nobody reads the two side by side.
+**Instead:** At T-7, have PMM and the Eng Lead review the public messaging against the rollout plan together. Any mismatch in scope or timing gets fixed in the copy, for example &quot;rolling out this week&quot;.
+
+### Launching on the calendar after a failed beta gate
+**Mistake:** The beta exit memo shows the outcome gate missed (38% vs a 50% target), and the team launches anyway because the date was promised.
+**Why it happens:** The date is public or committed upward, and &quot;ship and iterate&quot; sounds reasonable.
+**Instead:** Re-read the beta exit memo before the go/no-go decision. Any failed gate gets addressed before T-0 or the date moves. Re-baseline the date with the exec sponsor. The criteria are the gate, the calendar is not.
+
+### Support not trained before launch
+**Mistake:** Launch day brings a ticket spike, and agents answer &quot;let me check on that&quot; because the runbook is still a draft.
+**Why it happens:** Support prep gets scheduled last, after the build and the external comms.
+**Instead:** Finish the support runbook by T-14, run mandatory training at T-7, and pre-write macros for the top 10 expected questions. At T-3, ask 2 agents how to handle a likely ticket. If they hesitate, training is missing.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

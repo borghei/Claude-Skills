@@ -5,6 +5,19 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.5] - 2026-10-23
+
+### Added
+
+- **Anti-Patterns sections in 57 skills.** All 52 project-management skills that kept their common mistakes only in `references/red-flags.md` now carry the three most damaging ones in SKILL.md, where the assistant reads them on every run, each as Mistake / Why it happens / Instead with a pointer to the rest. The same was done for `create-prd`, `prioritization-frameworks`, `soc2-compliance-expert`, `pr-review-expert` and `ai-seo`. Every entry is condensed from the skill's own references.
+- **Clarify First in `pr-review-expert`**: it confirms the PR and base branch, what the change is for, and how deep to review before it starts.
+- **A new README header**: a treemap of all 385 skills by domain, sized by count, in light and dark themes, at 420 px tall instead of 640 so the install table stays on the first screen. `scripts/generate_header.py` rebuilds it from `skills.json`.
+
+### Fixed
+
+- The website's link-preview image pointed at a file that didn't exist. It now uses a 1280×640 PNG card made from the header.
+- `skill-tester` no longer prints a `datetime.utcnow()` deprecation warning on every run.
+
 ## [4.13.4] - 2026-10-23
 
 ### Changed

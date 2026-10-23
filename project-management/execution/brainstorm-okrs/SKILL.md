@@ -56,6 +56,25 @@ python scripts/okr_validator.py --demo              # built-in good/bad demo
 
 Any OKR set scoring below 70% must be revised before committing. See the references for the full workflow and input schema.
 
+## Anti-Patterns
+
+### Targets set at 100% confidence
+**Mistake:** Every KR is one the team is 95-100% sure to hit, such as a 4% MRR lift that would happen anyway.
+**Why it happens:** A green scorecard at quarter end feels safer than a visible miss.
+**Instead:** Set targets at 60-70% confidence and ask the team for its confidence number on each KR. A hit rate above 90% sustained over three quarters means the bar is too low.
+
+### Lowering the target mid-quarter
+**Mistake:** In week 8 a KR is behind, so the team cuts the target from 35% to 20% and reports it green.
+**Why it happens:** A red KR feels like failure in front of leadership.
+**Instead:** Keep the week-1 targets. Mark the KR red, look for what would close the gap, and if nothing realistic will, record the miss and its cause in the retrospective.
+
+### The roadmap listed as KRs
+**Mistake:** The OKR has five KRs, each "Ship X" for a planned roadmap item.
+**Why it happens:** The roadmap already exists, and copying it skips the hard choice of what to focus on.
+**Instead:** Keep three KRs per Objective (primary, secondary dimension, counter-metric) that measure change for customers or the business. List supporting initiatives separately. More than 4 KRs on one Objective is a flag.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

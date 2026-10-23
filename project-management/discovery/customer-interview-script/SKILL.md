@@ -61,6 +61,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 See `references/interview-execution-playbook.md` for the full method, scripts, question banks, pacing, and troubleshooting.
 
+## Anti-Patterns
+
+### Interviewing the wrong people
+**Mistake:** All eight interviews are with happy power users, but the question is why prospects don't convert.
+**Why it happens:** Current users are easy to recruit and glad to talk.
+**Instead:** Write the research question first, then recruit the population that can answer it. For churn, talk to churned users. For acquisition, talk to prospects who chose a competitor. Check recency too, since story recall weakens past about 90 days.
+
+### Demoing instead of listening
+**Mistake:** The interview turns into a 40-minute product demo, and the interviewee nods politely.
+**Why it happens:** Showing the product feels productive, and silence feels awkward.
+**Instead:** Keep the product out of a discovery interview. In a 60-minute session, the PM should talk less than 25% of the time. Spend the middle phase collecting stories with "tell me about the last time".
+
+### Notes without quotes
+**Mistake:** The notes hold only the PM's reading ("user wants faster setup") and no direct quotes.
+**Why it happens:** Summaries are faster to write than verbatim quotes.
+**Instead:** Capture 5-10 direct quotes per interview and debrief within 30 minutes. `discovery/interview-synthesis/` needs the customer's own words.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/interview-execution-playbook.md` -- read this before running an interview: the four-source frameworks, the verbatim 5-phase script, question banks by type, what-not-to-ask table, pacing, pair-interviewing roles, recording/consent, silence handling, workflow, troubleshooting, and success criteria.

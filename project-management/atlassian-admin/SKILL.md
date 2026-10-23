@@ -48,6 +48,25 @@ Until end of life Atlassian provides technical support, critical security fixes 
 - Optimizing system performance, planning backups, or running DR drills
 - Setting org-wide governance, naming conventions, and change management
 
+## Anti-Patterns
+
+### Admin rights as the default
+**Mistake:** Dozens of users hold org or site admin "because they sometimes need to change things."
+**Why it happens:** Granting admin is faster than working out the narrower permission someone needs.
+**Instead:** Keep org admins to 5 or 1% of users, whichever is larger. Above that, audit and remove. Every extra admin widens the blast radius, and SOC 2 and ISO 27001 auditors will flag it.
+
+### SSO with password login still on
+**Mistake:** SAML SSO is enabled, but Atlassian-account password login stays on "as a backup."
+**Why it happens:** Admins fear being locked out if the IdP fails.
+**Instead:** Audit the authentication policies. Users who can log in with a password bypass the IdP's MFA, IP allowlists and conditional access. Allow a second method only with a written reason and an audit log entry.
+
+### Bulk changes with no dry run
+**Mistake:** A bulk reassign or permission-scheme change runs straight in production.
+**Why it happens:** The JQL looks right, and running it once feels quicker than testing it.
+**Instead:** Write a change record before any bulk operation: JQL preview, sample check, backup and rollback plan. Jira's undo support is limited, so a wrong filter can change thousands of issues for good.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

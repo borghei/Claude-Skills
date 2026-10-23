@@ -397,6 +397,11 @@ Assumption mapping expert that identifies, categorizes, and prioritizes product 
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
 
+## Your Key Capabilities
+- Everything rated risky
+- Beliefs marked as facts
+- Testing the easiest assumption first
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
+
+## Your Key Capabilities
+- Everything rated risky
+- Beliefs marked as facts
+- Testing the easiest assumption first
 
 ## How to Help
 When the user asks for help in this domain:
@@ -485,6 +495,25 @@ python3 scripts/assumption_tracker.py input.json --format json
 ```
 
 Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+
+## Anti-Patterns
+
+### Everything rated risky
+**Mistake:** The map lists dozens of assumptions, nearly all high impact and low confidence, so nothing can be tested in order.
+**Why it happens:** Rating an assumption low-risk feels like tempting fate.
+**Instead:** Keep no more than about 20% of assumptions in the Test Now quadrant. If more land there, re-score `impact` and `confidence` against real evidence until the load-bearing ones stand out.
+
+### Beliefs marked as facts
+**Mistake:** &quot;Users want a faster checkout&quot; is rated `high` confidence because &quot;we know this,&quot; with no evidence cited.
+**Why it happens:** The most dangerous assumptions feel obviously true.
+**Instead:** Cite the evidence for every `high` confidence rating. &quot;We know this&quot; is not evidence. Without a source, rate it `low` and let `assumption_tracker.py` rank it.
+
+### Testing the easiest assumption first
+**Mistake:** The team tests the assumption with the easiest experiment, not the one the idea depends on most.
+**Why it happens:** Hard experiments are uncomfortable, and easy ones give quick wins.
+**Instead:** Rank by `Risk Score = Impact x (1 - Confidence)` and test the top three first, even when the experiment is hard. Give each one an owner and a date.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -602,6 +631,25 @@ python3 scripts/assumption_tracker.py input.json --format json
 ```
 
 Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+
+## Anti-Patterns
+
+### Everything rated risky
+**Mistake:** The map lists dozens of assumptions, nearly all high impact and low confidence, so nothing can be tested in order.
+**Why it happens:** Rating an assumption low-risk feels like tempting fate.
+**Instead:** Keep no more than about 20% of assumptions in the Test Now quadrant. If more land there, re-score `impact` and `confidence` against real evidence until the load-bearing ones stand out.
+
+### Beliefs marked as facts
+**Mistake:** &quot;Users want a faster checkout&quot; is rated `high` confidence because &quot;we know this,&quot; with no evidence cited.
+**Why it happens:** The most dangerous assumptions feel obviously true.
+**Instead:** Cite the evidence for every `high` confidence rating. &quot;We know this&quot; is not evidence. Without a source, rate it `low` and let `assumption_tracker.py` rank it.
+
+### Testing the easiest assumption first
+**Mistake:** The team tests the assumption with the easiest experiment, not the one the idea depends on most.
+**Why it happens:** Hard experiments are uncomfortable, and easy ones give quick wins.
+**Instead:** Rank by `Risk Score = Impact x (1 - Confidence)` and test the top three first, even when the experiment is hard. Give each one an owner and a date.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

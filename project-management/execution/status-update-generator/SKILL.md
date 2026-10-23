@@ -63,6 +63,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
 
+## Anti-Patterns
+
+### Activity reported as progress
+**Mistake:** Highlights list what the team did ("held kickoff with vendor", "started integration spec") instead of what changed.
+**Why it happens:** Activity is easy to pull from ticket titles and calendars, and it makes a slow week look busy.
+**Instead:** Give each highlight a completion verb or a measurable change: a decision made, a milestone hit, a metric moved. "Started", "held" or "discussed" with no decision is activity. Put at least 3 numbers in Highlights.
+
+### Risks copied forward unchanged
+**Mistake:** The same risk line ("vendor SDK might change") appears word for word from week 1 to week 6.
+**Why it happens:** Last week's update is the easiest template, and editing a risk means checking on it.
+**Instead:** Each week, mark every risk as mitigated, worse, or now an issue, and update its mitigation. A risk unchanged across 3 updates gets resolved, escalated or re-planned. If less than 30% of the update changed since last week, re-baseline or escalate.
+
+### Generating from a stale export
+**Mistake:** The Jira or Linear export feeding `status_generator.py` is several days old, so the update reports last week's state as current.
+**Why it happens:** Refreshing the export is a separate manual step, and the tool runs fine on old data.
+**Instead:** Check the export timestamp before you run the tool, and re-export anything older than 24 hours. The tool does not check freshness for you.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

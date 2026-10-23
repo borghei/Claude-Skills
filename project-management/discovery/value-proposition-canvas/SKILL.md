@@ -59,6 +59,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 See `references/canvas-construction-playbook.md` for the full two-side method, three fit levels, template, worked example, and troubleshooting.
 
+## Anti-Patterns
+
+### Every pain marked Extreme
+**Mistake:** Twelve pains, all tagged Extreme, and ten gains, all Essential.
+**Why it happens:** Each item felt important when the customer said it, and ranking means demoting someone's point.
+**Instead:** Force-rank jobs, pains and gains. Keep the top severity tier under 30% of items, and aim the Value Map at the top one or two first.
+
+### Customer Profile written after the solution
+**Mistake:** The team has already decided to build an AI assistant, then writes pains and gains that the assistant happens to solve.
+**Why it happens:** The canvas is often started to justify a plan that already has momentum.
+**Instead:** Build the Customer Profile from interviews before the Value Map is decided, using `discovery/interview-synthesis/` themes in customer language. Then check the Value Map against it element by element.
+
+### Pain relievers with no matching pain
+**Mistake:** The Value Map lists "real-time collaboration" as a pain reliever, but no pain in the Customer Profile relates to collaboration.
+**Why it happens:** Teams list what the product can do and file each capability under a heading.
+**Instead:** Name the specific pain each reliever addresses. If you cannot, drop the reliever or re-interview to learn whether a pain was missed. Apply the same test to gain creators.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/canvas-construction-playbook.md` -- read this when building a canvas end-to-end: both sides in detail, the three levels of fit, the markdown canvas template, a full worked example (Finance Reconciliation SaaS), common mistakes, workflow, troubleshooting, and success criteria.

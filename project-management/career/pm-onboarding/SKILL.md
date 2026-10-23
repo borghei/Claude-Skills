@@ -58,6 +58,25 @@ Before building the onboarding plan, confirm these inputs. If any is unknown or 
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Stakeholder map with no power dynamics
+**Mistake:** The map lists names and titles and stops there.
+**Why it happens:** An org chart is easy to copy, and opinions take conversations to learn.
+**Instead:** For each stakeholder, record their interest (what they want from your team), their influence and their current sentiment. Use the map to decide who to meet first and who to align before whom.
+
+### Saving the diagnosis for a Day-90 reveal
+**Mistake:** You form strong views by Day 30 and keep them private until the 90-day memo.
+**Why it happens:** Sharing a half-formed view feels riskier than presenting a finished one.
+**Instead:** Share a strawman of your point of view around Day 45-60 and invite input. Before you publish, have at least three stakeholders pressure-test it.
+
+### Overcommitting in the first sprint
+**Mistake:** Keen to look productive, you take on eight deliverables in your first sprint and miss five.
+**Why it happens:** New PMs want to show value fast, and they don't yet know how long things take here.
+**Instead:** Under-promise for the first 60 days. Aim for a 100% hit rate on commitments in the first 30 days. Below 80% damages your reputation for the rest of the year.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.

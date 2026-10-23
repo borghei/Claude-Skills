@@ -62,6 +62,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 4. Convert top-scored outcomes into opportunity statements (`<verb> <object> <context>`) with named owners.
 5. Hand off to `identify-assumptions/`, `brainstorm-experiments/`, or `create-prd/`. Revisit quarterly.
 
+## Anti-Patterns
+
+### Jobs written as product usage
+**Mistake:** The job list reads "use our analytics dashboard" or "open the AI assistant".
+**Why it happens:** The team knows its own product best, so it describes the customer's work in feature terms.
+**Instead:** Check every job statement for a tool, feature or interface name and rewrite any that has one. Use Klement's situation-motivation-outcome form ("When..., I want to..., so I can...") so the job stays solution-agnostic.
+
+### Outcome statements you cannot score
+**Mistake:** Desired outcomes such as "make customers feel valued" or "improve the experience".
+**Why it happens:** Fuzzy outcomes are easy to agree on in the room.
+**Instead:** Write each outcome so it can be measured with a stopwatch, a count, a percentage or a dollar value, for example "minimize the time it takes to identify which deal is at risk this week". Only then score Importance x Satisfaction.
+
+### Loudest voice sets the jobs
+**Mistake:** The workshop runs as open discussion, a senior PM does most of the talking, and the output matches that person's view from before the session.
+**Why it happens:** Open discussion feels faster than structured exercises, and few people contradict a senior leader.
+**Instead:** Start each block with 5 minutes of silent individual writing, then share round-robin and cluster with sticky-note voting. Check that everyone added at least 3 notes, and invite support and engineering voices directly.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task -- keep this file lean and pull detail on demand:

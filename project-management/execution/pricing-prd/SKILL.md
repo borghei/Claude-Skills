@@ -53,6 +53,25 @@ Before generating the pricing PRD, confirm these inputs. If any is unknown or va
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Van Westendorp without segmentation
+**Mistake:** One aggregate Van Westendorp curve across all respondents sets a single price for every segment.
+**Why it happens:** One curve is simpler to present, and the sample feels too small to split.
+**Instead:** Report the curves per segment (SMB, mid-market, enterprise) and price each tier inside its segment's IPP-to-OPP band. Treat the aggregate curve as informational only.
+
+### Conversion as the primary test metric
+**Mistake:** A cheaper variant lifts conversion, the team ships it, and 90 days later ARPU and retention are down.
+**Why it happens:** Conversion moves fast and is easy to read inside a short test window.
+**Instead:** Make ARPU (revenue per visitor) the primary metric in `assets/pricing_experiment_design.md`. Track trial-to-paid, D30 downgrade and D90 retention as secondary metrics. If the primary-metric line says only "conversion rate", rewrite it.
+
+### Testing prices on existing customers
+**Mistake:** The A/B split includes logged-in customers, who see a different price from the one they signed up at.
+**Why it happens:** Splitting all traffic is the default setup and gives the largest sample.
+**Instead:** Limit eligibility to anonymous visitors and new signups who haven't seen a price yet. Exclude existing customers and price-freeze contracts, get Legal sign-off on eligibility, and disclose pricing experiments in the Terms and the pricing FAQ.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.

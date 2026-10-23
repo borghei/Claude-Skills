@@ -397,6 +397,11 @@ Create, modify, and govern reusable Jira and Confluence templates, blueprints, a
 
 Specialist in creating, modifying, and managing reusable templates and files for Jira and Confluence. Ensures consistency, accelerates content creation, and maintains org-wide standards through canonical, parameterized templates rather than per-use-case sprawl. - **Template design** — Confluence pag
 
+## Your Key Capabilities
+- A new template for every variation
+- Fields nobody fills in
+- Macros that render empty
+
 ## Frameworks &amp; Templates You Know
 - Atlassian Template &amp; Files Creator Expert
 - - Building org-wide Confluence page templates or Jira issue templates
@@ -425,6 +430,11 @@ Start by asking the user what they need help with.">
 Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.
 
 Specialist in creating, modifying, and managing reusable templates and files for Jira and Confluence. Ensures consistency, accelerates content creation, and maintains org-wide standards through canonical, parameterized templates rather than per-use-case sprawl. - **Template design** — Confluence pag
+
+## Your Key Capabilities
+- A new template for every variation
+- Fields nobody fills in
+- Macros that render empty
 
 ## Frameworks &amp; Templates You Know
 - Atlassian Template &amp; Files Creator Expert
@@ -498,6 +508,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 5. **Train** users and **monitor** adoption; iterate quarterly
 
 Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
+
+## Anti-Patterns
+
+### A new template for every variation
+**Mistake:** The space fills up with &quot;PRD v1&quot;, &quot;PRD v2&quot;, &quot;PRD - mobile&quot; and copies of copies.
+**Why it happens:** Copying a template and tweaking it is quicker than changing the shared one.
+**Instead:** Keep a small set of canonical templates with parameterized sections. More than 15 templates in one top-level space is sprawl. Merge the variants and retire the rest.
+
+### Fields nobody fills in
+**Mistake:** The template has 40 fields, and 25 of them end up blank, &quot;TBD&quot; or &quot;N/A&quot;.
+**Why it happens:** Each field looked useful when someone proposed it, and nobody checks how they get used.
+**Instead:** Measure fill rate per field across the last 50 uses. Remove or make optional any field below 50%. Make a section required only if 80% or more of authors will have real content for it.
+
+### Macros that render empty
+**Mistake:** The template ships a Jira-issues macro with a hardcoded JQL filter, or a page-properties report on a label nobody uses.
+**Why it happens:** The macro worked in the space where the template was built.
+**Instead:** Render the template into a sample page before you publish it. Every macro must show real content or a clear &quot;configure me&quot; prompt. It must never show a silent blank.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -616,6 +645,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 5. **Train** users and **monitor** adoption; iterate quarterly
 
 Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
+
+## Anti-Patterns
+
+### A new template for every variation
+**Mistake:** The space fills up with &quot;PRD v1&quot;, &quot;PRD v2&quot;, &quot;PRD - mobile&quot; and copies of copies.
+**Why it happens:** Copying a template and tweaking it is quicker than changing the shared one.
+**Instead:** Keep a small set of canonical templates with parameterized sections. More than 15 templates in one top-level space is sprawl. Merge the variants and retire the rest.
+
+### Fields nobody fills in
+**Mistake:** The template has 40 fields, and 25 of them end up blank, &quot;TBD&quot; or &quot;N/A&quot;.
+**Why it happens:** Each field looked useful when someone proposed it, and nobody checks how they get used.
+**Instead:** Measure fill rate per field across the last 50 uses. Remove or make optional any field below 50%. Make a section required only if 80% or more of authors will have real content for it.
+
+### Macros that render empty
+**Mistake:** The template ships a Jira-issues macro with a hardcoded JQL filter, or a page-properties report on a label nobody uses.
+**Why it happens:** The macro worked in the space where the template was built.
+**Instead:** Render the template into a sample page before you publish it. Every macro must show real content or a clear &quot;configure me&quot; prompt. It must never show a silent blank.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

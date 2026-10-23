@@ -49,6 +49,25 @@ Before summarizing, confirm these inputs. If any is unknown or vague, ASK — do
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Posting an AI summary without review
+**Mistake:** A transcription tool's auto-summary is posted as the official summary, with nobody checking it.
+**Why it happens:** The output looks finished, and the 24-hour distribution window pushes people to send it as is.
+**Instead:** Treat any machine-generated summary as a draft. Someone who attended checks names, who decided what, and whether each action item was actually agreed, then adds a "reviewed by" line. No "reviewed by" line means it is still a draft.
+
+### Sensitive details sent to a wide list
+**Mistake:** A summary that goes beyond the attendees includes personnel feedback, a customer's commercial terms, or in-flight legal language.
+**Why it happens:** The summarizer captures everything said in the room, and the distribution list is set by habit.
+**Instead:** If anyone outside the meeting is on the distribution list, run a redaction pass before sending. Confirm confidentiality limits up front (see Clarify First). Once the email is sent, you cannot recall it.
+
+### Pasting the transcript as the summary
+**Mistake:** The "summary" is four pages of who said what.
+**Why it happens:** Copying the transcript feels safe because nothing is left out.
+**Instead:** Compress it into the template's sections: discussion points, numbered decisions, action items and open questions. If the summary runs past a page of named-speaker dialogue, cut it down.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

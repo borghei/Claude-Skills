@@ -66,6 +66,25 @@ python scripts/refinement_scorer.py --demo --format markdown                 # i
 
 Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing criteria, **0-2** send back to discovery.
 
+## Anti-Patterns
+
+### Acceptance criteria written as implementation steps
+**Mistake:** ACs read "POST /searches returns 201" and "SearchPanel component renders".
+**Why it happens:** Engineers often write the ACs while thinking through the build.
+**Instead:** Write each AC as an outcome a user, QA or designer can observe, such as "the search appears in the Saved list within 1 second". If an AC mentions an API, endpoint, component, table or status code, rewrite it.
+
+### Letting failing stories in at planning
+**Mistake:** Planning admits a story that scored 4/6 because "we have capacity, we'll figure out the metric during the sprint".
+**Why it happens:** An under-full sprint looks like wasted capacity.
+**Instead:** Hold the DoR at planning. A story below 5/6 goes back to refinement with an owner and a date for the missing piece. Count admitted stories that failed the DoR each sprint; the target is zero.
+
+### Re-refining the same story every week
+**Mistake:** A story sits on the candidate list for three sessions with notes like "need to understand integration".
+**Why it happens:** Discussing the story feels like progress, so nobody names the missing information as a discovery gap.
+**Instead:** Keep a session counter on each candidate. At session 3 without promotion, route it to `discovery/identify-assumptions/` with an owner for the assumption test, then re-enter it or kill it.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

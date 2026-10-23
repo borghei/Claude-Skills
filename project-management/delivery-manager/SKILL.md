@@ -60,6 +60,25 @@ python scripts/risk_register.py --risks risks.json                           # s
 | `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
 | `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
 
+## Anti-Patterns
+
+### Rollback plan never rehearsed
+**Mistake:** The release plan documents a rollback procedure that has never been run in production-like conditions.
+**Why it happens:** Writing the steps feels like enough, and rehearsal takes time from the release.
+**Instead:** Rehearse the rollback at least every 90 days and measure how long it takes. If it hasn't been rehearsed, treat the rollback path as theoretical in the Go/No-Go.
+
+### Error budget that never bites
+**Mistake:** The team has SLOs and an error budget but keeps shipping features when the budget is burned.
+**Why it happens:** Roadmap pressure wins the argument every time the budget runs out.
+**Instead:** Agree the consequence before the budget burns: feature freeze until reliability work restores it. Track burn rate with the SLA/error-budget workflow. If feature work has never paused for a burned budget, the budget is decoration.
+
+### Severity that doesn't match the criteria
+**Mistake:** Minor issues get logged as SEV-1, or real outages stay at SEV-3 to avoid the paperwork.
+**Why it happens:** Severity drives response time and post-mortem duty, so people bend it up or down.
+**Instead:** Classify against the documented SEV-1 to SEV-4 criteria. Sample 10 recent SEV-1s. If fewer than 80% meet the criteria, fix the classification before you trust the dashboard.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/release_process.md` -- Delivery maturity levels, release planning + exit criteria, change-request types, the release-readiness example, DORA metrics, cross-skill integration, troubleshooting, and success criteria. Read when planning a release or improving the pipeline.

@@ -59,6 +59,25 @@ python3 scripts/risk_categorizer.py input.json --format json
 
 Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
 
+## Anti-Patterns
+
+### Mitigating Paper Tigers
+**Mistake:** "AWS regional outage on launch day" is classed as a Tiger and gets weeks of redundancy work, with no evidence that it is likely.
+**Why it happens:** A frightening consequence feels like a high probability.
+**Instead:** For every Tiger, write the `evidence` that it could actually happen. A described consequence alone does not count. With no evidence, reclassify it as `paper_tiger` and cover it with a standard runbook.
+
+### Risks too vague to act on
+**Mistake:** The list holds "stakeholder issues", "scope creep" and "technical risk".
+**Why it happens:** Generic labels are safe to say aloud and need no evidence.
+**Instead:** Describe each risk as a concrete failure scenario in 1-2 sentences, such as "the CRO blocks launch on Day -7 because the enterprise SKU was cut". Translate worries ("the design feels weak") into a measurable consequence, or drop them.
+
+### Running the pre-mortem too late
+**Mistake:** The session happens a week before launch and surfaces a Tiger that needs four weeks of work. The team launches anyway.
+**Why it happens:** Pre-mortems get scheduled as a launch-readiness check instead of a planning step.
+**Instead:** Run the first pre-mortem at project kickoff and a second one around Day -30. For each risk, confirm it can still be mitigated in the time left.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

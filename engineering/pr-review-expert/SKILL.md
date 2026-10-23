@@ -43,6 +43,16 @@ Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond st
 - After an incident, to proactively review similar code changes.
 - For onboarding new contributors whose PRs need thorough feedback.
 
+## Clarify First
+
+Before reviewing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+
+- [ ] **Which PR and base branch** — blast radius and coverage deltas are computed against the base; a stale base reports changes that aren't in the PR
+- [ ] **What the change is for** (linked ticket or one-line intent) — without it, intended behaviour changes get flagged as bugs
+- [ ] **Review depth** — a full blast-radius and security pass, or a quick check of a small change — sets which workflow steps run
+
+Stop rule: ask only the 2–3 that most change the review. If the user says "just review it," proceed and state your assumptions at the top of the report.
+
 ## Tools
 
 | Tool | Purpose | Command |
@@ -50,6 +60,25 @@ Structured, systematic code review for GitHub PRs and GitLab MRs. Goes beyond st
 | `blast_radius_calculator.py` | Calculate PR blast radius from import chains / dependency trees of changed files | `git diff --name-only main...HEAD \| python scripts/blast_radius_calculator.py --root src` |
 | `diff_analyzer.py` | Analyze a diff for risk indicators (large files, sensitive paths, config/breaking/security patterns) | `gh pr diff $PR \| python scripts/diff_analyzer.py --json` |
 | `review_checklist_generator.py` | Generate a tailored review checklist from changed file types/patterns | `git diff --name-only main...HEAD \| python scripts/review_checklist_generator.py` |
+
+## Anti-Patterns
+
+### Reviewing style instead of substance
+**Mistake:** Most comments are about naming and formatting.
+**Why it happens:** Style problems are visible on a first read; logic and security problems need context.
+**Instead:** Leave formatting to the linter. Spend the review on blast radius, security, correctness and error paths, and label every comment `must:`, `nit:` or `question:`.
+
+### Judging risk by diff size
+**Mistake:** A five-line change to a shared utility is approved because it is five lines.
+**Why it happens:** The diff size is the only risk measure on the screen.
+**Instead:** Run `blast_radius_calculator.py` on the changed files. A small change in a shared module can break every service that imports it.
+
+### Approving an untested happy path
+**Mistake:** The PR only tests the success case.
+**Why it happens:** The tests pass and the coverage number looks fine.
+**Instead:** Check that error paths and edge cases have tests, and flag any new public function that has none.
+
+More pitfalls and the troubleshooting table: `references/best-practices-and-troubleshooting.md`.
 
 ## References
 

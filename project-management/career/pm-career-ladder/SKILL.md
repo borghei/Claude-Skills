@@ -62,6 +62,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 See `references/ladder-playbook.md` for the full ladder table, rubric detail, gap-analysis steps, growth-plan and promo-packet structures, and troubleshooting.
 
+## Anti-Patterns
+
+### Promo packet with no scope evidence
+**Mistake:** The packet lists launches ("shipped feature X") and never shows that the PM's scope grew.
+**Why it happens:** Shipped features are easy to list, and scope change is harder to describe.
+**Instead:** State the scope shift in the first paragraph, before any feature list. Promotion needs consistent next-level work across all five dimensions for at least two quarters. One strong deliverable is not enough.
+
+### "Influence" with no decision behind it
+**Mistake:** The packet says "influenced", "drove alignment" and "championed" but cannot point to a decision that turned on the PM's input.
+**Why it happens:** Influence is real but hard to trace, so people describe it in general terms.
+**Instead:** Rewrite every such claim as "decision made on [date] in [forum] based on [my artifact]". If you can't fill in the blanks, cut the claim. Back it with a partner quote where you have one.
+
+### Growth plan that changes nothing
+**Mistake:** The 6-month plan says "read more product books" and "improve communication."
+**Why it happens:** Generic goals are easy to agree on and hard to fail.
+**Instead:** For each of the 2-3 gap dimensions, name a behavior an observer could see change, such as a meeting you would not have run before or a document you would not have written. Review it monthly in your 1:1 and set a target promo cycle date.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/ladder-playbook.md](references/ladder-playbook.md)** — the full 5x6 ladder table, per-level rubric behaviors and promotion signals, gap-analysis process, 6-month growth plan, promo packet structure, workflow, troubleshooting, and success criteria. Read when scoring yourself or building a plan/packet.

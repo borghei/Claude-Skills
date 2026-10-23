@@ -66,6 +66,25 @@ Week -3   -1     0       1-5    6      7-12    13
 - **New PM joining mid-quarter.** Understand where the team is in the cycle and what is expected when.
 - **Failing OKR cadence.** Team has OKRs but no one references them by week 4 -- reset the ritual.
 
+## Anti-Patterns
+
+### Key results that are activities
+**Mistake:** "KR: launch the new pricing page by June 1." The KR is a deliverable.
+**Why it happens:** Deliverables are easy to plan and score, and shipping feels like success.
+**Instead:** Rewrite each KR as a measurable change, for example "free-to-paid conversion >= 4.5% by June 30", and treat the deliverable as the bet behind it. A KR built on ship, launch, build or complete with no downstream metric needs a rewrite.
+
+### Dependencies found mid-quarter
+**Mistake:** In week 6, Team A discovers it needs an API that Team B never put in its slate.
+**Why it happens:** Each team plans its own slate, and the cross-team check feels like extra overhead.
+**Instead:** Before kickoff, have every team list its initiatives and dependencies. Run a reconciliation session in week 0, and cut scope where the other team can't commit. No documented week-0 session means mid-quarter surprises.
+
+### A mid-quarter check-in with no authority to rebaseline
+**Mistake:** The week-6 check-in finds KR2 off-track, and the answer is "push harder".
+**Why it happens:** Descoping feels like admitting failure, so nobody is given the authority.
+**Instead:** Bring carry, kill, pivot and escalate options to the check-in, such as descope the KR, borrow capacity, or drop another KR. Record the decision and who signed off. A check-in with no rebaseline decisions was a status meeting.
+
+Eight more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task -- keep this file lean and pull detail on demand:

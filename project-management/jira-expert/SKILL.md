@@ -34,6 +34,25 @@ Master-level expertise in Jira configuration, project management, JQL, workflows
 - Building dashboards and configuring gadgets for a team or exec
 - Managing custom fields, issue links, security levels, or bulk operations
 
+## Anti-Patterns
+
+### A custom workflow for every project
+**Mistake:** Each project gets its own workflow with 12+ states, until the org runs dozens of distinct workflows.
+**Why it happens:** Every team asks for statuses that match its own process exactly, and saying yes is easy.
+**Instead:** Start new projects from a shared workflow and push back on per-project states. Count the active workflows across the org: more than 5 means consolidate. Cross-project reporting and reusable automation depend on shared statuses.
+
+### Unreadable JQL
+**Mistake:** Filters and dashboards run on 200-character JQL with nested AND / OR / NOT chains nobody can read.
+**Why it happens:** Each new condition gets bolted onto a query that already works, and nobody goes back to restructure it.
+**Instead:** Break any JQL longer than 120 characters or deeper than 2 levels of parentheses into named saved filters with comments. A misplaced OR or missing parenthesis silently drops tickets, and small named filters are easier to check.
+
+### Story points per person
+**Mistake:** A dashboard or filter groups completed story points by assignee, and the numbers end up in performance reviews.
+**Why it happens:** The data is already in Jira, and it looks like an objective productivity measure.
+**Instead:** Report story points at team level only, and remove any filter or gadget that groups them by assignee. Points are a team's relative sizing tool. Judging people by them leads to inflated estimates and avoided hard work.
+
+Eight more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

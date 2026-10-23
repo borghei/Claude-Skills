@@ -397,6 +397,11 @@ Transform output-based feature lists into outcome-driven Now/Next/Later roadmaps
 
 The agent transforms output-based roadmaps (&quot;build feature X&quot;) into outcome-driven roadmaps (&quot;enable customers to achieve Y&quot;) using the &quot;so what?&quot; technique and Now/Next/Later framing. It produces roadmaps that communicate strategy and measurable impact, not just feature lists and dates. - **Output 
 
+## Your Key Capabilities
+- Outcome statements on top of a dated feature list
+- Too many Now items
+- Interchangeable outcome statements
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Transform output-based feature lists into outcome-driven Now/Next/Later roadmaps using the &quot;so what?&quot; technique. Use when converting a feature-list roadmap to outcomes, communicating product strategy, or running quarterly planning.
 
 The agent transforms output-based roadmaps (&quot;build feature X&quot;) into outcome-driven roadmaps (&quot;enable customers to achieve Y&quot;) using the &quot;so what?&quot; technique and Now/Next/Later framing. It produces roadmaps that communicate strategy and measurable impact, not just feature lists and dates. - **Output 
+
+## Your Key Capabilities
+- Outcome statements on top of a dated feature list
+- Too many Now items
+- Interchangeable outcome statements
 
 ## How to Help
 When the user asks for help in this domain:
@@ -484,6 +494,25 @@ python scripts/roadmap_transformer.py --demo                          # run on b
 ```
 
 Each input initiative needs `title`, `description`, `quarter` (format &quot;Q[1-4] YYYY&quot;), and `type` (`feature`/`improvement`/`infrastructure`). The tool emits outcome-statement *templates* — fill the placeholders with real customer and business data.
+
+## Anti-Patterns
+
+### Outcome statements on top of a dated feature list
+**Mistake:** Each item opens with &quot;Enable [X] to [Y] so that [Z]&quot;, but underneath sits a feature list with ship dates, and standups only discuss the dates.
+**Why it happens:** Teams used to date-driven roadmaps add the outcome wording without changing how they work.
+**Instead:** Under each Now item, list the success metric with baseline and target, and frame the features as a working hypothesis the team will change if the metric doesn&#x27;t move. Check standup notes: if they name only features, the roadmap is still output-driven.
+
+### Too many Now items
+**Mistake:** The Now column lists 8 initiatives.
+**Why it happens:** Everything feels urgent, and moving an item to Next feels like saying no to a stakeholder.
+**Instead:** Cap Now at 2-3 items, sized to what the team can ship in 6-8 weeks. Move the rest to Next. More than 3 Now items means the commitment level on the roadmap is false.
+
+### Interchangeable outcome statements
+**Mistake:** &quot;Enable users to be more productive, so we grow revenue.&quot; &quot;Enable customers to succeed, so they retain better.&quot; The template is filled in mechanically.
+**Why it happens:** `roadmap_transformer.py` emits outcome templates, and placeholders are easy to fill with generic words.
+**Instead:** Each outcome names a specific segment, a specific job and a number. Read three statements aloud. If they could be swapped between items without anyone noticing, push the &quot;so what?&quot; chain 2-3 levels deeper.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -599,6 +628,25 @@ python scripts/roadmap_transformer.py --demo                          # run on b
 ```
 
 Each input initiative needs `title`, `description`, `quarter` (format &quot;Q[1-4] YYYY&quot;), and `type` (`feature`/`improvement`/`infrastructure`). The tool emits outcome-statement *templates* — fill the placeholders with real customer and business data.
+
+## Anti-Patterns
+
+### Outcome statements on top of a dated feature list
+**Mistake:** Each item opens with &quot;Enable [X] to [Y] so that [Z]&quot;, but underneath sits a feature list with ship dates, and standups only discuss the dates.
+**Why it happens:** Teams used to date-driven roadmaps add the outcome wording without changing how they work.
+**Instead:** Under each Now item, list the success metric with baseline and target, and frame the features as a working hypothesis the team will change if the metric doesn&#x27;t move. Check standup notes: if they name only features, the roadmap is still output-driven.
+
+### Too many Now items
+**Mistake:** The Now column lists 8 initiatives.
+**Why it happens:** Everything feels urgent, and moving an item to Next feels like saying no to a stakeholder.
+**Instead:** Cap Now at 2-3 items, sized to what the team can ship in 6-8 weeks. Move the rest to Next. More than 3 Now items means the commitment level on the roadmap is false.
+
+### Interchangeable outcome statements
+**Mistake:** &quot;Enable users to be more productive, so we grow revenue.&quot; &quot;Enable customers to succeed, so they retain better.&quot; The template is filled in mechanically.
+**Why it happens:** `roadmap_transformer.py` emits outcome templates, and placeholders are easy to fill with generic words.
+**Instead:** Each outcome names a specific segment, a specific job and a number. Read three statements aloud. If they could be swapped between items without anyone noticing, push the &quot;so what?&quot; chain 2-3 levels deeper.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

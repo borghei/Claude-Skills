@@ -397,6 +397,11 @@ Senior PM for enterprise software and SaaS — portfolio management, quantitativ
 
 Strategic project management for enterprise software, SaaS, and digital transformation initiatives. This skill provides sophisticated portfolio management capabilities, quantitative analysis tools, and executive-level reporting frameworks for managing complex, multi-million dollar project portfolios
 
+## Your Key Capabilities
+- Burying the ask in the executive report
+- Averaging the portfolio into one color
+- A risk matrix with no mitigations
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Senior PM for enterprise software and SaaS — portfolio management, quantitative risk analysis, prioritization, and executive reporting. Use for portfolio health reviews, board-ready status reports, and multi-project risk/capacity analysis.
 
 Strategic project management for enterprise software, SaaS, and digital transformation initiatives. This skill provides sophisticated portfolio management capabilities, quantitative analysis tools, and executive-level reporting frameworks for managing complex, multi-million dollar project portfolios
+
+## Your Key Capabilities
+- Burying the ask in the executive report
+- Averaging the portfolio into one color
+- A risk matrix with no mitigations
 
 ## How to Help
 When the user asks for help in this domain:
@@ -495,6 +505,25 @@ python3 scripts/resource_capacity_planner.py assets/sample_project_data.json
 # Stakeholder mapping (Mendelow&#x27;s Matrix + comms plan)
 python3 scripts/stakeholder_mapper.py --demo --format json
 ```
+
+## Anti-Patterns
+
+### Burying the ask in the executive report
+**Mistake:** The 20-slide deck puts the decision the exec must make on slide 14.
+**Why it happens:** Decks follow the order the work happened, so the ask lands at the end.
+**Instead:** Put the decision or ask on slide 1 or in the first 100 words. Any ask past slide 5 means the report needs restructuring. Executives skim, and a missed ask leads to a decision made on incomplete data.
+
+### Averaging the portfolio into one color
+**Mistake:** The dashboard shows portfolio health as a single R/Y/G. Two projects are red, but the aggregate reads yellow.
+**Why it happens:** One summary color is what executives asked for, and averaging is the easy way to produce it.
+**Instead:** Name each red project next to any aggregate from `project_health_dashboard.py`. Eight greens and two reds is not a yellow portfolio. It has two projects that need attention now.
+
+### A risk matrix with no mitigations
+**Mistake:** The risk matrix plots 22 risks by probability and impact, with no mitigation column.
+**Why it happens:** Plotting and scoring feel like the analysis, so the plan for each risk gets left for later.
+**Instead:** Give every risk a mitigation before the matrix goes to anyone. `risk_matrix_analyzer.py` outputs a mitigation strategy, so carry it into the report instead of showing the plot alone.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -626,6 +655,25 @@ python3 scripts/resource_capacity_planner.py assets/sample_project_data.json
 # Stakeholder mapping (Mendelow&#x27;s Matrix + comms plan)
 python3 scripts/stakeholder_mapper.py --demo --format json
 ```
+
+## Anti-Patterns
+
+### Burying the ask in the executive report
+**Mistake:** The 20-slide deck puts the decision the exec must make on slide 14.
+**Why it happens:** Decks follow the order the work happened, so the ask lands at the end.
+**Instead:** Put the decision or ask on slide 1 or in the first 100 words. Any ask past slide 5 means the report needs restructuring. Executives skim, and a missed ask leads to a decision made on incomplete data.
+
+### Averaging the portfolio into one color
+**Mistake:** The dashboard shows portfolio health as a single R/Y/G. Two projects are red, but the aggregate reads yellow.
+**Why it happens:** One summary color is what executives asked for, and averaging is the easy way to produce it.
+**Instead:** Name each red project next to any aggregate from `project_health_dashboard.py`. Eight greens and two reds is not a yellow portfolio. It has two projects that need attention now.
+
+### A risk matrix with no mitigations
+**Mistake:** The risk matrix plots 22 risks by probability and impact, with no mitigation column.
+**Why it happens:** Plotting and scoring feel like the analysis, so the plan for each risk gets left for later.
+**Instead:** Give every risk a mitigation before the matrix goes to anyone. `risk_matrix_analyzer.py` outputs a mitigation strategy, so carry it into the report instead of showing the plot alone.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

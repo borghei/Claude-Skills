@@ -50,6 +50,25 @@ Before building the DACI chart, confirm these inputs. If any is unknown or vague
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Informed roles that object late
+**Mistake:** Marketing is marked Informed on the launch date, objects three days before launch, and the date slips two weeks.
+**Why it happens:** Teams mark a role Informed to keep meetings small, without asking whether that role can block the decision.
+**Instead:** Make anyone who can stop the decision a Contributor or Approver from the start. Once the decision locks, a late objection goes to the Approver as an escalation.
+
+### Everyone marked Contributor
+**Mistake:** Most cells in the chart are C, so everyone expects to be consulted on everything.
+**Why it happens:** Assigning C avoids hard conversations about who is left out.
+**Instead:** Per decision, assign one D, one or two A, and at most 3-4 C. Give C only to roles with real expertise to add, and mark the rest I or leave them blank. More than 5 C cells on a row is a flag.
+
+### Vetoes with no written reason
+**Mistake:** The Driver proposes option A and the Approver says "No" with no follow-up. Two months later the same debate returns.
+**Why it happens:** A veto feels like the end of the matter, so writing it up seems optional.
+**Instead:** Ask Approvers to give every veto a written rationale and say what a counter-proposal would need to address. Keep these as decision records, and check the last 5 vetoes for them.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/playbook.md](references/playbook.md)** — read this when building or running a DACI chart: role definitions and rules, the 7-step build sequence (working group → roles → decisions → current-state map → pain points → target-state → transition plan), governance health metrics, troubleshooting, and success criteria.

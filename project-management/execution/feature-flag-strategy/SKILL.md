@@ -64,6 +64,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
+## Anti-Patterns
+
+### Ramping without reading the gate metrics
+**Mistake:** The flag moves 1% to 5% to 25% to 100% on schedule, and nobody checks the dashboard at any stage. The activation drop shows up at 100%.
+**Why it happens:** The ramp schedule feels like the safety mechanism, so following the dates feels like enough.
+**Instead:** Name the gate metric for every stage in `assets/rollout_plan_template.md`. At each stage, post the metric values and an ADVANCE or HOLD decision before moving on. If the ramp log has no metrics, the gates were not enforced.
+
+### Rollback that needs a code revert
+**Mistake:** During an incident, turning the feature off means opening a revert PR, waiting for review and redeploying. Customers carry the impact for 45 minutes.
+**Why it happens:** The flag was wired for release, and nobody tested the off path.
+**Instead:** Rollback must be a single config change that on-call can make in under 60 seconds. Drill it in non-production once a quarter and time it. If it takes more than 5 minutes, the kill-switch is broken.
+
+### Mobile flag with no client version gate
+**Mistake:** A mobile flag goes to 100% and older app versions crash because they cannot handle the new server response.
+**Why it happens:** Web flags take effect for everyone at once, and the same habit carries over to mobile.
+**Instead:** For every mobile flag, write down the minimum client version that supports the new behavior and set it as a prerequisite on the flag. Older clients keep the old behavior. Ramp fully only once that version's adoption is high enough.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/rollout-execution-playbook.md` -- read this when planning a rollout end-to-end: flag taxonomy, all 7 rollout shapes, kill-switch decision tree + thresholds, holdouts, flag-debt retirement, naming, dependency chains, approval/audit, workflow, troubleshooting, success criteria.

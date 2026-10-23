@@ -63,6 +63,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
 
+## Anti-Patterns
+
+### An internal FAQ with only easy questions
+**Mistake:** The internal FAQ has 6 questions like "What is this product?" and "Who is it for?". Cost, failure and "why now" are missing.
+**Why it happens:** Hard questions expose weak spots, and the author wants the idea to look ready.
+**Instead:** Write 10-20 Q&A pairs across all 9 required categories, including business model, feasibility, risk and scope. Fewer than 10 means the hard questions were skipped. Load the category you fear most, which you named in Clarify First.
+
+### No magnitude in the press release
+**Mistake:** The release says "saves time" or "improves efficiency" with no numbers.
+**Why it happens:** The real numbers aren't known yet, and vague claims can't be wrong.
+**Instead:** Quantify the outcome, for example "cuts pre-call prep from 90 minutes to 10". Count the numbers in the first half of the release. Fewer than 3 quantified claims means magnitude is missing.
+
+### No "what we will NOT do in v1"
+**Mistake:** The internal FAQ lists everything v1 does and nothing it leaves out.
+**Why it happens:** Listing exclusions feels like drawing attention to weaknesses before funding review.
+**Instead:** Add an explicit question, "What are we explicitly NOT doing in v1?", with each cut named and the reason given. Without it, every reader imagines features that later turn into commitments.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/prfaq-playbook.md](references/prfaq-playbook.md)** — the Working Backwards method, the 9-part press-release structure and test, internal/external FAQ category requirements and sample questions, the authoring workflow, troubleshooting, and success criteria. Read when drafting or reviewing a PR/FAQ.

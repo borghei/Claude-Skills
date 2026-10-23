@@ -65,6 +65,25 @@ When [situation], I want to [motivation], so I can [outcome].
 3. Apply INVEST; split any story that fails the Small or Independent test.
 4. Add 6-8 observable, outcome-focused acceptance criteria per story.
 
+## Anti-Patterns
+
+### A feature request in JTBD wording
+**Mistake:** "When I want to use saved searches, I want a saved-search button, so I can save searches." The situation names the feature and the outcome repeats it.
+**Why it happens:** The team already has a solution in mind, and the When/Want/So format is easy to fill around it.
+**Instead:** Strip the Want clause. If the remaining "When ... so I can ..." does not describe a real moment you could film, rewrite it from the user's situation. Run the JTBD discovery canvas first if you can't.
+
+### Acceptance criteria that describe implementation
+**Mistake:** ACs read "POST /saved-searches returns 201" or "React component renders".
+**Why it happens:** Engineers write the ACs, and the implementation is what they can see clearly.
+**Instead:** Write each AC as behavior a user or QA can observe: "after clicking Save, the search appears in the Saved list within 1 second". If an AC mentions an endpoint, status code, table or UI framework, rewrite it.
+
+### Acceptance criteria that cover only the happy path
+**Mistake:** All 6 ACs describe the main flow. None covers empty states, errors, limits or accessibility.
+**Why it happens:** The happy path is what the story describes, so it is what comes to mind first.
+**Instead:** Sort the 6-8 ACs by category. If fewer than 30% cover edge cases, empty states, errors or a11y, add them before the story enters sprint planning.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

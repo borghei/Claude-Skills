@@ -397,6 +397,11 @@ OKR brainstorming and validation using the Radical Focus framework — outcome o
 
 The agent generates and validates outcome-focused OKR sets using Christina Wodtke&#x27;s Radical Focus methodology. It produces inspirational objectives with measurable key results, applies counter-metric tests, and scores quality against proven criteria. - **Theme-anchored generation** — one theme per t
 
+## Your Key Capabilities
+- Targets set at 100% confidence
+- Lowering the target mid-quarter
+- The roadmap listed as KRs
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 OKR brainstorming and validation using the Radical Focus framework — outcome objectives, measurable key results, counter-metrics. Use for setting or validating quarterly OKRs, aligning team goals, or teaching outcomes vs outputs.
 
 The agent generates and validates outcome-focused OKR sets using Christina Wodtke&#x27;s Radical Focus methodology. It produces inspirational objectives with measurable key results, applies counter-metric tests, and scores quality against proven criteria. - **Theme-anchored generation** — one theme per t
+
+## Your Key Capabilities
+- Targets set at 100% confidence
+- Lowering the target mid-quarter
+- The roadmap listed as KRs
 
 ## How to Help
 When the user asks for help in this domain:
@@ -481,6 +491,25 @@ python scripts/okr_validator.py --demo              # built-in good/bad demo
 ```
 
 Any OKR set scoring below 70% must be revised before committing. See the references for the full workflow and input schema.
+
+## Anti-Patterns
+
+### Targets set at 100% confidence
+**Mistake:** Every KR is one the team is 95-100% sure to hit, such as a 4% MRR lift that would happen anyway.
+**Why it happens:** A green scorecard at quarter end feels safer than a visible miss.
+**Instead:** Set targets at 60-70% confidence and ask the team for its confidence number on each KR. A hit rate above 90% sustained over three quarters means the bar is too low.
+
+### Lowering the target mid-quarter
+**Mistake:** In week 8 a KR is behind, so the team cuts the target from 35% to 20% and reports it green.
+**Why it happens:** A red KR feels like failure in front of leadership.
+**Instead:** Keep the week-1 targets. Mark the KR red, look for what would close the gap, and if nothing realistic will, record the miss and its cause in the retrospective.
+
+### The roadmap listed as KRs
+**Mistake:** The OKR has five KRs, each &quot;Ship X&quot; for a planned roadmap item.
+**Why it happens:** The roadmap already exists, and copying it skips the hard choice of what to focus on.
+**Instead:** Keep three KRs per Objective (primary, secondary dimension, counter-metric) that measure change for customers or the business. List supporting initiatives separately. More than 4 KRs on one Objective is a flag.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -607,6 +636,25 @@ python scripts/okr_validator.py --demo              # built-in good/bad demo
 ```
 
 Any OKR set scoring below 70% must be revised before committing. See the references for the full workflow and input schema.
+
+## Anti-Patterns
+
+### Targets set at 100% confidence
+**Mistake:** Every KR is one the team is 95-100% sure to hit, such as a 4% MRR lift that would happen anyway.
+**Why it happens:** A green scorecard at quarter end feels safer than a visible miss.
+**Instead:** Set targets at 60-70% confidence and ask the team for its confidence number on each KR. A hit rate above 90% sustained over three quarters means the bar is too low.
+
+### Lowering the target mid-quarter
+**Mistake:** In week 8 a KR is behind, so the team cuts the target from 35% to 20% and reports it green.
+**Why it happens:** A red KR feels like failure in front of leadership.
+**Instead:** Keep the week-1 targets. Mark the KR red, look for what would close the gap, and if nothing realistic will, record the miss and its cause in the retrospective.
+
+### The roadmap listed as KRs
+**Mistake:** The OKR has five KRs, each &quot;Ship X&quot; for a planned roadmap item.
+**Why it happens:** The roadmap already exists, and copying it skips the hard choice of what to focus on.
+**Instead:** Keep three KRs per Objective (primary, secondary dimension, counter-metric) that measure change for customers or the business. List supporting initiatives separately. More than 4 KRs on one Objective is a flag.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

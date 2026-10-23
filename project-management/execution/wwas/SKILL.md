@@ -52,6 +52,25 @@ Before writing the item, confirm these inputs. If any is unknown or vague, ASK â
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### A Why that names the feature
+**Mistake:** "Why: to launch bulk-edit." The reason given for the work is the work itself.
+**Why it happens:** The team has already decided to build it, so the Why gets written after the fact.
+**Instead:** End the Why in a customer outcome or business metric tied to an objective or OKR. If the Why mentions the feature itself, rewrite it. If you can't, the item isn't ready to prioritize.
+
+### A Why with no hypothesis
+**Mistake:** The Why states the impact as a certainty, with no sign it is a bet and no plan to check it.
+**Why it happens:** A confident Why gets through prioritization more easily than one that admits doubt.
+**Instead:** Frame the Why as a hypothesis: the outcome you expect and how you will measure it after launch. Then the team can tell whether the bet paid off, and can de-prioritize the work when evidence says no.
+
+### Ignoring existing data and workflows
+**Mistake:** The What and the Acceptance Criteria describe only the new behavior. Neither says what happens to existing records, deprecated flows or in-flight states.
+**Why it happens:** The refinement discussion focuses on the new experience, and the migration tail is easy to miss.
+**Instead:** State what happens to existing data and workflows in the What or the Acceptance Criteria. If the item says nothing about them, ask the engineering reviewer to check for a migration before approving.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.

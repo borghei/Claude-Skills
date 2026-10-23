@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T12:24:40+00:00",
+  "generated_at": "2026-10-23T12:37:45+00:00",
   "skill_count": 385,
   "domain_count": 21,
   "skills": [
@@ -1898,7 +1898,7 @@
         "scripts/diff_analyzer.py",
         "scripts/review_checklist_generator.py"
       ],
-      "size_bytes": 61204,
+      "size_bytes": 62996,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2927,7 +2927,7 @@
         "scripts/script_tester.py",
         "scripts/skill_validator.py"
       ],
-      "size_bytes": 221040,
+      "size_bytes": 221170,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3250,10 +3250,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3458,7 +3459,7 @@
         "scripts/keyword_analyzer.py",
         "scripts/serp_simulator.py"
       ],
-      "size_bytes": 60874,
+      "size_bytes": 62079,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -6442,7 +6443,7 @@
         "scripts/soc2_infrastructure_auditor.py",
         "scripts/soc2_readiness_checker.py"
       ],
-      "size_bytes": 275239,
+      "size_bytes": 276564,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7670,7 +7671,7 @@
         "scripts/team_health_checker.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 67625,
+      "size_bytes": 68991,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7703,7 +7704,7 @@
         "scripts/permission_auditor.py",
         "scripts/system_health_checker.py"
       ],
-      "size_bytes": 74698,
+      "size_bytes": 76052,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7738,7 +7739,7 @@
         "scripts/template_usage_analyzer.py",
         "scripts/template_validator.py"
       ],
-      "size_bytes": 74844,
+      "size_bytes": 76187,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7772,7 +7773,7 @@
         "references/one-on-one-templates.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 57827,
+      "size_bytes": 59214,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7806,7 +7807,7 @@
         "references/ladder-rubric-detail.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 66398,
+      "size_bytes": 67880,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7841,7 +7842,7 @@
         "references/red-flags.md",
         "references/round-frameworks-and-prep.md"
       ],
-      "size_bytes": 73272,
+      "size_bytes": 74723,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7876,7 +7877,7 @@
         "references/first-90-days-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 70185,
+      "size_bytes": 71487,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -7909,7 +7910,7 @@
         "scripts/label_taxonomy_analyzer.py",
         "scripts/space_structure_analyzer.py"
       ],
-      "size_bytes": 83001,
+      "size_bytes": 84277,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -7945,7 +7946,7 @@
         "scripts/dependency_mapper.py",
         "scripts/risk_register.py"
       ],
-      "size_bytes": 84620,
+      "size_bytes": 86045,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8015,7 +8016,7 @@
         "references/red-flags.md",
         "scripts/experiment_designer.py"
       ],
-      "size_bytes": 66012,
+      "size_bytes": 67435,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8049,7 +8050,7 @@
         "scripts/opportunity_tree_builder.py",
         "scripts/scamper_generator.py"
       ],
-      "size_bytes": 70195,
+      "size_bytes": 71601,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8081,7 +8082,7 @@
         "references/interviewing-methodology-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 78160,
+      "size_bytes": 79500,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8113,7 +8114,7 @@
         "references/red-flags.md",
         "scripts/assumption_tracker.py"
       ],
-      "size_bytes": 68807,
+      "size_bytes": 70122,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8146,7 +8147,7 @@
         "references/synthesis-methodology-guide.md",
         "scripts/interview_synthesizer.py"
       ],
-      "size_bytes": 80990,
+      "size_bytes": 82517,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8183,7 +8184,7 @@
         "references/jtbd-method-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 96201,
+      "size_bytes": 97747,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8276,7 +8277,7 @@
         "references/red-flags.md",
         "scripts/risk_categorizer.py"
       ],
-      "size_bytes": 74809,
+      "size_bytes": 76237,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8310,7 +8311,7 @@
         "references/red-flags.md",
         "references/value-proposition-design-guide.md"
       ],
-      "size_bytes": 81545,
+      "size_bytes": 82959,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8346,7 +8347,7 @@
         "references/red-flags.md",
         "scripts/funnel_analyzer.py"
       ],
-      "size_bytes": 97752,
+      "size_bytes": 99283,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8421,7 +8422,7 @@
         "references/eval-design-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 106934,
+      "size_bytes": 108357,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8454,7 +8455,7 @@
         "references/refinement-playbook.md",
         "scripts/refinement_scorer.py"
       ],
-      "size_bytes": 79473,
+      "size_bytes": 80946,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8488,7 +8489,7 @@
         "references/beta-program-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 72068,
+      "size_bytes": 73490,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8520,7 +8521,7 @@
         "references/red-flags.md",
         "scripts/okr_validator.py"
       ],
-      "size_bytes": 63255,
+      "size_bytes": 64583,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8552,7 +8553,7 @@
         "references/red-flags.md",
         "scripts/prd_scaffolder.py"
       ],
-      "size_bytes": 62619,
+      "size_bytes": 63952,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8589,7 +8590,7 @@
         "references/tool-reference.md",
         "scripts/feedback_triage.py"
       ],
-      "size_bytes": 112224,
+      "size_bytes": 113730,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8622,7 +8623,7 @@
         "references/red-flags.md",
         "scripts/flow_metrics.py"
       ],
-      "size_bytes": 82074,
+      "size_bytes": 83455,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8651,7 +8652,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 34930,
+      "size_bytes": 36351,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8684,7 +8685,7 @@
         "references/red-flags.md",
         "scripts/dependency_graph.py"
       ],
-      "size_bytes": 78811,
+      "size_bytes": 80366,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8713,7 +8714,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 40742,
+      "size_bytes": 42265,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8748,7 +8749,7 @@
         "references/rollout-execution-playbook.md",
         "references/rollout-shape-comparison-guide.md"
       ],
-      "size_bytes": 90737,
+      "size_bytes": 92390,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8782,7 +8783,7 @@
         "scripts/story_converter.py",
         "scripts/story_quality_checker.py"
       ],
-      "size_bytes": 82796,
+      "size_bytes": 84301,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -8818,7 +8819,7 @@
         "references/launch-timeline-and-execution.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 77251,
+      "size_bytes": 78890,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8850,7 +8851,7 @@
         "references/red-flags.md",
         "scripts/metric_tree_builder.py"
       ],
-      "size_bytes": 76612,
+      "size_bytes": 78142,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8882,7 +8883,7 @@
         "references/red-flags.md",
         "scripts/roadmap_transformer.py"
       ],
-      "size_bytes": 67593,
+      "size_bytes": 69183,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8920,7 +8921,7 @@
         "references/post-mortem-process.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 91352,
+      "size_bytes": 92967,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8951,7 +8952,7 @@
         "references/red-flags.md",
         "references/working-backwards-guide.md"
       ],
-      "size_bytes": 61726,
+      "size_bytes": 63184,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -8988,7 +8989,7 @@
         "references/pricing-prd-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 106803,
+      "size_bytes": 108324,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9022,7 +9023,7 @@
         "references/tool-and-troubleshooting.md",
         "scripts/prioritization_scorer.py"
       ],
-      "size_bytes": 65662,
+      "size_bytes": 66876,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -9056,7 +9057,7 @@
         "references/vision-frameworks-guide.md",
         "references/vision-playbook.md"
       ],
-      "size_bytes": 74830,
+      "size_bytes": 76244,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9090,7 +9091,7 @@
         "references/quarterly-planning-guide.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 73432,
+      "size_bytes": 74931,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9122,7 +9123,7 @@
         "references/release-notes-guide.md",
         "scripts/release_notes_generator.py"
       ],
-      "size_bytes": 53904,
+      "size_bytes": 55498,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -9155,7 +9156,7 @@
         "references/roadmap-communication-guide.md",
         "references/roadmap-variants-playbook.md"
       ],
-      "size_bytes": 59559,
+      "size_bytes": 61058,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9250,7 +9251,7 @@
         "references/tool-and-troubleshooting.md",
         "scripts/status_generator.py"
       ],
-      "size_bytes": 66880,
+      "size_bytes": 68420,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -9279,7 +9280,7 @@
         "references/playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 34585,
+      "size_bytes": 36178,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9310,7 +9311,7 @@
         "references/splitting-patterns-guide.md",
         "references/story-splitting-procedure.md"
       ],
-      "size_bytes": 63190,
+      "size_bytes": 64727,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9344,7 +9345,7 @@
         "scripts/decision_log_builder.py",
         "scripts/meeting_effectiveness_scorer.py"
       ],
-      "size_bytes": 61771,
+      "size_bytes": 63278,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -9409,7 +9410,7 @@
         "scripts/invest_gate_checker.py",
         "scripts/wwas_quality_scorer.py"
       ],
-      "size_bytes": 76274,
+      "size_bytes": 77781,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -9507,7 +9508,7 @@
         "scripts/issue_quality_checker.py",
         "scripts/workflow_analyzer.py"
       ],
-      "size_bytes": 85351,
+      "size_bytes": 86933,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -9543,7 +9544,7 @@
         "references/linear-vs-jira.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 74871,
+      "size_bytes": 76318,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9616,7 +9617,7 @@
         "references/notion-pm-playbook.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 86475,
+      "size_bytes": 88033,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9654,7 +9655,7 @@
         "references/productboard-vs-jira-vs-linear.md",
         "references/red-flags.md"
       ],
-      "size_bytes": 108549,
+      "size_bytes": 110024,
       "tools_count": 0,
       "has_scripts": false,
       "has_references": true,
@@ -9687,7 +9688,7 @@
         "scripts/portfolio_dashboard.py",
         "scripts/resource_allocator.py"
       ],
-      "size_bytes": 64734,
+      "size_bytes": 66285,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -9733,7 +9734,7 @@
         "scripts/sprint_health_scorer.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 267353,
+      "size_bytes": 268873,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
@@ -9775,7 +9776,7 @@
         "scripts/risk_matrix_analyzer.py",
         "scripts/stakeholder_mapper.py"
       ],
-      "size_bytes": 282513,
+      "size_bytes": 283953,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
@@ -9812,7 +9813,7 @@
         "scripts/retro_report_generator.py",
         "scripts/velocity_analyzer.py"
       ],
-      "size_bytes": 150587,
+      "size_bytes": 152119,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,

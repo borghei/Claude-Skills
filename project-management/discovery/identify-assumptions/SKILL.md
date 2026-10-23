@@ -60,6 +60,25 @@ python3 scripts/assumption_tracker.py input.json --format json
 
 Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
 
+## Anti-Patterns
+
+### Everything rated risky
+**Mistake:** The map lists dozens of assumptions, nearly all high impact and low confidence, so nothing can be tested in order.
+**Why it happens:** Rating an assumption low-risk feels like tempting fate.
+**Instead:** Keep no more than about 20% of assumptions in the Test Now quadrant. If more land there, re-score `impact` and `confidence` against real evidence until the load-bearing ones stand out.
+
+### Beliefs marked as facts
+**Mistake:** "Users want a faster checkout" is rated `high` confidence because "we know this," with no evidence cited.
+**Why it happens:** The most dangerous assumptions feel obviously true.
+**Instead:** Cite the evidence for every `high` confidence rating. "We know this" is not evidence. Without a source, rate it `low` and let `assumption_tracker.py` rank it.
+
+### Testing the easiest assumption first
+**Mistake:** The team tests the assumption with the easiest experiment, not the one the idea depends on most.
+**Why it happens:** Hard experiments are uncomfortable, and easy ones give quick wins.
+**Instead:** Rank by `Risk Score = Impact x (1 - Confidence)` and test the top three first, even when the experiment is hard. Give each one an owner and a date.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

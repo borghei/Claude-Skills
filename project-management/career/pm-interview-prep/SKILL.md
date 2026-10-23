@@ -50,6 +50,25 @@ PM interviews test five distinct skills, each with its own format, frameworks, a
 
 See `references/round-frameworks-and-prep.md` for the full round reference, framework tables, level-calibration bars, prep workflow, and troubleshooting.
 
+## Anti-Patterns
+
+### Reciting the framework out loud
+**Mistake:** The answer opens with "I'll use CIRCLES: Comprehend, Identify, Report..." and then walks through each letter.
+**Why it happens:** Prep time goes into memorizing the acronym, so it comes out first under pressure.
+**Instead:** Use the framework as hidden structure. The interviewer should feel the structure without hearing the acronym. Record a mock: if you say the framework's name, you are leaning on it too visibly.
+
+### STAR stories with no result
+**Mistake:** The behavioral answer spends minutes on Situation, Task and Action, then ends with "it went well and we learned a lot."
+**Why it happens:** The action is the part you remember living through, and the numbers were never written down.
+**Instead:** State the Result as a number plus a learning in every story. Build the 8-12 stories in `assets/story_worksheet.md` with the quantified result filled in first. That is where interviewers read your level.
+
+### Success metrics with no counter-metric
+**Mistake:** "I'd measure success by DAU growth," with nothing on what might break if DAU rises.
+**Why it happens:** One clear metric sounds decisive in a timed answer.
+**Instead:** Pair every success metric with at least one counter-metric, such as retention or NPS, and say what result would worry you. Interviewers at PM level and above expect it.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/round-frameworks-and-prep.md](references/round-frameworks-and-prep.md)** — the five round types, full CIRCLES/AARM/STAR/Estimation frameworks with failure modes, per-level calibration tables, prep workflow, question excerpts, troubleshooting, and success criteria. Read when preparing any round.
