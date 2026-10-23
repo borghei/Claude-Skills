@@ -4,8 +4,15 @@ description: Sample skill for testing the skill-tester validation pipeline. Demo
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
+  author: borghei
   category: testing
+  domain: skill-testing
+  updated: 2026-02-16
   tier: BASIC
+  tags:
+    - sample
+    - testing
+    - text-processing
 ---
 
 # Sample Text Processor

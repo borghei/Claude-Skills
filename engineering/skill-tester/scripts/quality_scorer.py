@@ -487,8 +487,10 @@ class QualityScorer:
             
     def _score_frontmatter(self, content: str) -> float:
         """Score SKILL.md frontmatter quality"""
-        required_fields = ["Name", "Tier", "Category", "Dependencies", "Author", "Version"]
-        recommended_fields = ["Last Updated", "Description"]
+        # Schema from standards/skill-authoring-standard.md (Pattern 2)
+        required_fields = ["name", "description", "license",
+                           "metadata.version", "metadata.author", "metadata.category", "metadata.updated"]
+        recommended_fields = ["metadata.domain", "metadata.tags"]
         
         try:
             if not content.startswith('---'):
@@ -505,18 +507,25 @@ class QualityScorer:
                 return 5
                 
             score = 0
-            
+            metadata = frontmatter.get("metadata")
+            metadata = metadata if isinstance(metadata, dict) else {}
+
+            def present(field):
+                if field.startswith("metadata."):
+                    return bool(metadata.get(field.split(".", 1)[1]))
+                return bool(frontmatter.get(field))
+
             # Required fields (15 points)
-            present_required = sum(1 for field in required_fields if field in frontmatter)
+            present_required = sum(1 for field in required_fields if present(field))
             score += (present_required / len(required_fields)) * 15
             
             # Recommended fields (5 points)
-            present_recommended = sum(1 for field in recommended_fields if field in frontmatter)
+            present_recommended = sum(1 for field in recommended_fields if present(field))
             score += (present_recommended / len(recommended_fields)) * 5
             
             # Quality of field values (5 points)
             quality_bonus = 0
-            for field, value in frontmatter.items():
+            for value in list(frontmatter.values()) + list(metadata.values()):
                 if isinstance(value, str) and len(value.strip()) > 3:
                     quality_bonus += 0.5
                     

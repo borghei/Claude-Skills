@@ -8,6 +8,10 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.3** (October 2026)
+
+- `skill-tester` validates and scores the frontmatter schema the library actually uses, so real skills no longer fail its frontmatter check
+
 **v4.13.2** (October 2026)
 
 - Thirteen Python tools that crashed on start now run, and every tool answers `--help`

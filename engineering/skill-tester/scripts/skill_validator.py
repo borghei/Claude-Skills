@@ -313,9 +313,10 @@ class SkillValidator:
         "Name", "Description", "Features", "Usage", "Examples"
     ]
     
-    FRONTMATTER_REQUIRED_FIELDS = [
-        "Name", "Tier", "Category", "Dependencies", "Author", "Version"
-    ]
+    # Schema from standards/skill-authoring-standard.md (Pattern 2)
+    FRONTMATTER_REQUIRED_FIELDS = ["name", "description", "license"]
+    FRONTMATTER_REQUIRED_METADATA = ["version", "author", "category", "updated"]
+    FRONTMATTER_RECOMMENDED_METADATA = ["domain", "tags"]
     
     def __init__(self, skill_path: str, target_tier: Optional[str] = None, verbose: bool = False):
         self.skill_path = Path(skill_path).resolve()
@@ -436,11 +437,20 @@ class SkillValidator:
                     return
                     
                 # Check required fields
-                missing_fields = []
-                for field in self.FRONTMATTER_REQUIRED_FIELDS:
-                    if field not in frontmatter:
-                        missing_fields.append(field)
-                        
+                metadata = frontmatter.get("metadata")
+                metadata = metadata if isinstance(metadata, dict) else {}
+                missing_fields = [f for f in self.FRONTMATTER_REQUIRED_FIELDS if not frontmatter.get(f)]
+                missing_fields += [f"metadata.{f}" for f in self.FRONTMATTER_REQUIRED_METADATA
+                                   if not metadata.get(f)]
+                missing_recommended = [f"metadata.{f}" for f in self.FRONTMATTER_RECOMMENDED_METADATA
+                                       if not metadata.get(f)]
+                if missing_recommended:
+                    self.report.add_warning(
+                        f"Recommended frontmatter fields missing: {', '.join(missing_recommended)}")
+                if frontmatter.get("name") and frontmatter["name"] != self.skill_path.name:
+                    self.report.add_warning(
+                        f"Frontmatter name '{frontmatter['name']}' does not match folder '{self.skill_path.name}'")
+
                 if not missing_fields:
                     self.report.add_check("frontmatter_complete", True, 
                                          "All required frontmatter fields present", 1.0)
