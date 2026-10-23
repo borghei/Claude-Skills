@@ -23,7 +23,198 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
-import yaml
+
+
+# ---------------------------------------------------------------------------
+# Minimal YAML reader (stdlib only)
+#
+# Covers the block-style subset used by SKILL.md frontmatter and pipeline
+# configs: nested maps, lists (of scalars or maps), `>` / `|` block scalars,
+# quoted strings, inline `[a, b]` lists, and bool / null / number scalars.
+# Anchors, tags, multi-document streams and flow maps are not supported.
+# ---------------------------------------------------------------------------
+
+class YamlLiteError(ValueError):
+    """Raised when the text falls outside the supported YAML subset."""
+
+
+def _yaml_split_outside_quotes(text: str, sep: str) -> list:
+    """Split on `sep` wherever it falls outside single or double quotes."""
+    parts, buf, quote = [], '', None
+    for ch in text:
+        if quote:
+            quote = None if ch == quote else quote
+        elif ch in ('"', "'") and not buf.strip():
+            quote = ch
+        elif ch == sep:
+            parts.append(buf)
+            buf = ''
+            continue
+        buf += ch
+    parts.append(buf)
+    return parts
+
+
+def _yaml_strip_comment(value: str) -> str:
+    quote = value[:1] if value[:1] in ('"', "'") else None
+    start = value.find(quote, 1) + 1 if quote else 0
+    if quote and start == 0:
+        return value
+    cut = value.find(' #', start)
+    return value[:cut].rstrip() if cut != -1 else value
+
+
+def _yaml_scalar(text: str):
+    s = text.strip()
+    if len(s) >= 2 and s[0] == s[-1] == '"':
+        try:
+            return json.loads(s)
+        except ValueError:
+            return s[1:-1]
+    if len(s) >= 2 and s[0] == s[-1] == "'":
+        return s[1:-1].replace("''", "'")
+    if s.startswith('[') and s.endswith(']'):
+        inner = s[1:-1].strip()
+        return [_yaml_scalar(x) for x in _yaml_split_outside_quotes(inner, ',')] if inner else []
+    if s == '{}':
+        return {}
+    low = s.lower()
+    if low == 'true':
+        return True
+    if low == 'false':
+        return False
+    if low in ('null', '~', ''):
+        return None
+    for cast in (int, float):
+        try:
+            return cast(s)
+        except ValueError:
+            pass
+    return s
+
+
+def yaml_lite_load(text: str):
+    """Parse a block-style YAML document into dicts, lists and scalars."""
+    lines = text.expandtabs(2).splitlines()
+    pos = 0
+
+    def indent(line):
+        return len(line) - len(line.lstrip(' '))
+
+    def is_item(stripped):
+        return stripped == '-' or stripped.startswith('- ')
+
+    def skip_blank():
+        nonlocal pos
+        while pos < len(lines) and (not lines[pos].strip() or lines[pos].lstrip().startswith('#')):
+            pos += 1
+
+    def parse_block(ind):
+        skip_blank()
+        if pos >= len(lines):
+            return None
+        return parse_list(ind) if is_item(lines[pos].strip()) else parse_map(ind)
+
+    def parse_value(rest, ind):
+        if rest[:1] in ('>', '|'):
+            return parse_block_scalar(rest, ind)
+        if rest:
+            if rest[0] in '"\'[{':
+                return _yaml_scalar(rest)
+            return _yaml_scalar(plain_continuation(rest, ind))
+        skip_blank()
+        if pos < len(lines):
+            child = indent(lines[pos])
+            if child > ind:
+                return parse_block(child)
+            if child == ind and is_item(lines[pos].strip()):
+                return parse_list(ind)
+        return None
+
+    def plain_continuation(first, ind):
+        # A plain scalar may continue on more-indented lines; YAML folds them with spaces
+        nonlocal pos
+        words = [first]
+        while pos < len(lines):
+            line = lines[pos]
+            if line.strip() and indent(line) <= ind:
+                break
+            if line.strip() and not line.lstrip().startswith('#'):
+                words.append(line.strip())
+            pos += 1
+        return ' '.join(words)
+
+    def parse_map(ind):
+        nonlocal pos
+        out = {}
+        while True:
+            skip_blank()
+            if pos >= len(lines) or indent(lines[pos]) < ind:
+                return out
+            line = lines[pos].strip()
+            if indent(lines[pos]) > ind:
+                raise YamlLiteError(f"line {pos + 1}: unexpected indentation")
+            if is_item(line):
+                return out
+            key, sep, rest = line.partition(':')
+            if not sep or (rest and not rest.startswith(' ')):
+                raise YamlLiteError(f"line {pos + 1}: expected 'key: value'")
+            pos += 1
+            out[key.strip().strip('"\'')] = parse_value(_yaml_strip_comment(rest.strip()), ind)
+
+    def parse_list(ind):
+        nonlocal pos
+        out = []
+        while True:
+            skip_blank()
+            if pos >= len(lines) or indent(lines[pos]) != ind or not is_item(lines[pos].strip()):
+                return out
+            after_dash = lines[pos].strip()[1:]
+            item = after_dash.strip()
+            child = ind + 1 + len(after_dash) - len(after_dash.lstrip(' '))
+            key, sep, rest = item.partition(':')
+            if not item:
+                pos += 1
+                out.append(parse_value('', ind))
+            elif sep and item[0] not in '"\'[{' and (not rest or rest.startswith(' ')):
+                lines[pos] = ' ' * child + item
+                out.append(parse_map(child))
+            else:
+                pos += 1
+                out.append(_yaml_scalar(_yaml_strip_comment(item)))
+
+    def parse_block_scalar(header, ind):
+        nonlocal pos
+        body, body_ind = [], None
+        while pos < len(lines):
+            line = lines[pos]
+            if line.strip():
+                if indent(line) <= ind or (body_ind is not None and indent(line) < body_ind):
+                    break
+                if body_ind is None:
+                    body_ind = indent(line)
+                body.append(line[body_ind:])
+            else:
+                body.append('')
+            pos += 1
+        while body and body[-1] == '':
+            body.pop()
+        if header[0] == '|':
+            value = '\n'.join(body)
+        else:
+            value, prev_blank = '', True
+            for part in body:
+                if part == '':
+                    value += '\n'
+                    prev_blank = True
+                else:
+                    value += ('' if prev_blank else ' ') + part
+                    prev_blank = False
+        if not body:
+            return ''
+        return value if '-' in header else value + '\n'
+
+    return parse_block(0)
 
 
 class QualityDimension:
@@ -308,7 +499,7 @@ class QualityScorer:
                 return 5
                 
             frontmatter_text = content[3:end_marker].strip()
-            frontmatter = yaml.safe_load(frontmatter_text)
+            frontmatter = yaml_lite_load(frontmatter_text)
             
             if not isinstance(frontmatter, dict):
                 return 5
@@ -333,7 +524,7 @@ class QualityScorer:
             
             return min(score, 25)
             
-        except yaml.YAMLError:
+        except YamlLiteError:
             return 5  # Some credit for attempting frontmatter
             
     def _score_sections(self, content: str) -> float:

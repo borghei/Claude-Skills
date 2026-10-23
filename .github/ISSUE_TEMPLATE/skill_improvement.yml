@@ -1,0 +1,56 @@
+name: Skill Improvement
+description: Suggest improvements to an existing skill
+title: "[IMPROVEMENT] "
+labels: [enhancement]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      description: Folder path of the skill, e.g. `product-team/product-manager-toolkit`
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Improvement type
+      multiple: true
+      options:
+        - Add a Python tool
+        - Enhance an existing script
+        - Add reference material
+        - Improve SKILL.md
+        - Add templates or examples
+        - Update outdated frameworks or facts
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: limitation
+    attributes:
+      label: Current limitation
+      description: What is missing or wrong today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What exactly should change? For a new tool, give its name, input, output and an example command.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources
+      description: For factual updates, link the source (changelog, regulation, vendor docs).
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Will you implement it?
+      options:
+        - Yes, I'll open a PR
+        - I need help
+        - No, suggesting only
+    validations:
+      required: true

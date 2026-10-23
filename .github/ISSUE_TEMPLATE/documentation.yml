@@ -1,0 +1,41 @@
+name: Documentation Improvement
+description: Suggest improvements to documentation
+title: "[DOCS] "
+labels: [documentation]
+body:
+  - type: input
+    id: files
+    attributes:
+      label: File(s) affected
+      placeholder: README.md, engineering/code-tour/SKILL.md
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Issue type
+      multiple: true
+      options:
+        - Unclear instructions
+        - Missing information
+        - Outdated content
+        - Broken links
+        - Typos or grammar
+        - Missing examples
+        - Incorrect information
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the current text where possible.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed fix
+    validations:
+      required: true

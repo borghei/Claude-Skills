@@ -223,9 +223,9 @@ def print_human(result):
 def main():
     parser = argparse.ArgumentParser(description="Benchmark engagement metrics against industry standards")
     parser.add_argument("--enps", type=float, required=True, help="Employee NPS score")
-    parser.add_argument("--attrition", type=float, required=True, help="Annual attrition rate (%)")
+    parser.add_argument("--attrition", type=float, required=True, help="Annual attrition rate (%%)")
     parser.add_argument("--time-to-fill", type=float, required=True, help="Average days to fill a position")
-    parser.add_argument("--promotion-rate", type=float, required=True, help="Internal promotion rate (%)")
+    parser.add_argument("--promotion-rate", type=float, required=True, help="Internal promotion rate (%%)")
     parser.add_argument("--industry", default="saas", choices=list(BENCHMARKS.keys()), help="Industry for benchmarking")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()

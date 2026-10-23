@@ -4,7 +4,7 @@ title: Task Agents
 
 # Task Agents
 
-19 specialized `cs-*` agents organized by domain. Each agent combines multiple skills into a focused workflow.
+Highlights from the 68 specialized `cs-*` agents, organized by domain. The [Agents page](https://borghei.github.io/Claude-Skills/agents/) lists every one. Each agent combines multiple skills into a focused workflow.
 
 ## Engineering Agents
 

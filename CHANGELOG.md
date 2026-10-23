@@ -5,6 +5,20 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.2] - 2026-10-23
+
+### Fixed
+
+- **Thirteen Python tools that crashed before doing anything now run.** `component_scaffold.py` had a syntax error and could not load on any Python version. `team_scaling_calculator.py` built its salary table from itself and failed every budget projection. `pr_analyzer.py` claimed `-h` for `--head`, which collides with help; head is now `-H`. `engagement_benchmarker.py` and `headcount_planner.py` crashed on a bare `%` in their help text. `brand_voice_analyzer.py`, `seo_optimizer.py`, `customer_interview_analyzer.py`, `design_token_generator.py` and `scripts/export_bundle.py` now use argparse, keep their documented positional usage and answer `--help`; `seo_optimizer.py` gains the `--json` flag its SKILL.md already documented.
+- **`skill-tester` and `senior-data-engineer` no longer need PyYAML.** `skill_validator.py`, `quality_scorer.py` and `pipeline_orchestrator.py` read YAML with a small standard-library reader that parses every SKILL.md frontmatter in the repo the same way PyYAML does. `pipeline_orchestrator.py --config` now turns nested `source`, `destination` and `tasks` sections into its config types and reports a bad config file by name instead of failing with a Python error.
+- **`scripts/build_manifest.py --help` no longer rewrites the manifests.** It takes real arguments now, and `--check` compares all four manifests with the disk and exits 1 when they are out of date, without writing anything.
+- Counts across the README, docs, site, `AGENTS.md`, `GEMINI.md` and the Cursor, Windsurf, Cline and Goose rules now match the repo: 906 Python tools, 76 agents (68 `cs-*` agents and 8 personas) and 6 CI/CD workflows. The rules files still said 339 skills across 17 domains. The personas page now lists `skill-creator`.
+- The npm package `@borghei/claude-skills` lists the right author.
+
+### Changed
+
+- Issue templates are GitHub issue forms with required fields, and blank issues are turned off. Security reports point to the security policy.
+
 ## [4.13.1] - 2026-10-07
 
 ### Fixed

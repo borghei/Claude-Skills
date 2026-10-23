@@ -23,7 +23,7 @@
     "directory": "cli"
   },
   "license": "SEE LICENSE IN ../LICENSE",
-  "author": "Brian Borghei",
+  "author": "Amin Borghei",
   "type": "module",
   "bin": {
     "claude-skills": "bin/claude-skills.js"

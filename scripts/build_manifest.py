@@ -10,6 +10,7 @@ Standard library only. No external deps.
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import re
@@ -210,7 +211,37 @@ def build_skill_entry(domain: str, skill_dir: Path, rel_path: str | None = None)
     }
 
 
+# Keys that change on every run; ignored when --check compares against disk.
+VOLATILE_KEYS = ("generated_at", "updated")
+
+
+def _strip_volatile(data: dict) -> dict:
+    return {k: v for k, v in data.items() if k not in VOLATILE_KEYS}
+
+
+def _emit(path: Path, data: dict, check: bool, stale: list[str]) -> None:
+    """Write `data` to `path`, or in check mode record it as stale if it differs."""
+    if check:
+        try:
+            current = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            current = None
+        if current is None or _strip_volatile(current) != _strip_volatile(data):
+            stale.append(str(path.relative_to(REPO_ROOT)))
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def main(argv: list[str]) -> int:
+    parser = argparse.ArgumentParser(
+        description="Regenerate cli/skills.json, registry.json, .gemini/skills-index.json "
+                    "and the root skills.json from every SKILL.md in the repo.")
+    parser.add_argument("--check", action="store_true",
+                        help="Write nothing; exit 1 if any manifest is out of date")
+    args = parser.parse_args(argv)
+    stale: list[str] = []
+
     skills: list[dict] = []
     for domain in DOMAINS:
         domain_dir = REPO_ROOT / domain
@@ -245,11 +276,7 @@ def main(argv: list[str]) -> int:
         "skills": skills,
     }
 
-    MANIFEST_PATH.parent.mkdir(parents=True, exist_ok=True)
-    MANIFEST_PATH.write_text(
-        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _emit(MANIFEST_PATH, manifest, args.check, stale)
 
     registry = {
         "schema_version": "1.0.0",
@@ -260,10 +287,7 @@ def main(argv: list[str]) -> int:
         "domains": sorted({s["domain"] for s in skills}),
         "skills": [_registry_entry(s) for s in skills],
     }
-    REGISTRY_PATH.write_text(
-        json.dumps(registry, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _emit(REGISTRY_PATH, registry, args.check, stale)
 
     if GEMINI_INDEX_PATH.parent.is_dir():
         gemini_index = {
@@ -272,10 +296,7 @@ def main(argv: list[str]) -> int:
             "total_skills": len(skills),
             "skills": [_gemini_entry(s) for s in skills],
         }
-        GEMINI_INDEX_PATH.write_text(
-            json.dumps(gemini_index, indent=2, ensure_ascii=False) + "\n",
-            encoding="utf-8",
-        )
+        _emit(GEMINI_INDEX_PATH, gemini_index, args.check, stale)
 
     # Root catalog for the website generator (richer per-skill shape + per-domain rollup)
     domain_rollup: dict = {}
@@ -307,10 +328,16 @@ def main(argv: list[str]) -> int:
         "domains": {k: domain_rollup[k] for k in sorted(domain_rollup)},
         "skills": [_site_entry(s) for s in skills],
     }
-    SITE_CATALOG_PATH.write_text(
-        json.dumps(site_catalog, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+    _emit(SITE_CATALOG_PATH, site_catalog, args.check, stale)
+
+    if args.check:
+        if stale:
+            print("Out of date (run python3 scripts/build_manifest.py):")
+            for name in stale:
+                print(f"  {name}")
+            return 1
+        print(f"Manifests are current ({len(skills)} skills)")
+        return 0
 
     print(f"Wrote {MANIFEST_PATH.relative_to(REPO_ROOT)}")
     print(f"  skills: {manifest['skill_count']}")

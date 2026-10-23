@@ -1,13 +1,13 @@
 {
   "name": "claude-skills",
   "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.13.1",
+  "version": "4.13.2",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
   "total_skills": 385,
-  "updated": "2026-10-07",
+  "updated": "2026-10-23",
   "domains": {
     "business-growth": {
       "count": 20,

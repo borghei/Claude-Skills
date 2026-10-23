@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 385 production-ready skills across 21 domains with 900 Python automation tools, 77 AI agents (including 8 personas), 26 slash commands, 21 compound sub-skills, and 8 CI/CD workflows. **Project Management is the most-used domain (70 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 385 production-ready skills across 21 domains with 906 Python automation tools, 76 AI agents (68 cs-* agents + 8 personas), 26 slash commands, 21 compound sub-skills, and 6 CI/CD workflows. **Project Management is the most-used domain (70 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -51,11 +51,11 @@ claude-code-skills/
 │   └── commands/              # 26 slash commands (git, review, prd, tdd, rice, retro, etc.)
 ├── .gemini/                   # Gemini CLI support (skills-index.json + 20 skill wrappers)
 ├── .github/
-│   ├── workflows/             # 6 CI/CD workflows (pages, enforce-pr, security, review, etc.)
+│   ├── workflows/             # 6 CI/CD workflows (pages, build-manifest, publish-cli, skill-security-audit, sync-codex-skills, virustotal-scan)
 │   └── copilot-instructions.md # GitHub Copilot config
 ├── agents/
-│   ├── (domain dirs)/         # 26 cs-* prefixed skill agents
-│   └── personas/              # 7 cross-domain personas (startup-cto, solo-founder, etc.)
+│   ├── (domain dirs)/         # 68 cs-* prefixed skill agents
+│   └── personas/              # 8 cross-domain personas (startup-cto, solo-founder, etc.)
 ├── engineering/               # 92 engineering skills + 3 compound sub-skill systems
 ├── marketing/                 # 41 marketing skills + Python tools (incl. aeo)
 ├── product-team/              # 13 product skills + Python tools (Tier 2: product-analytics, apple-hig-expert, research-summarizer, spec-to-repo, roadmap-communicator)
@@ -233,8 +233,8 @@ hand-maintained `site/index.html`.
 ---
 
 **Last Updated:** October 2026
-**Version:** 4.13.1
-**Status:** 385 skills, 69 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 21 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 21 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 70 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+**Version:** 4.13.2
+**Status:** 385 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 21 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 21 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 70 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
 - **Recent additions (October 2026) — new `tools/` domain, LinkedIn suite (12 skills, 27 stdlib tools):** `tools/linkedin/` holds linkedin-story-interviewer, -content-planner, -post-writer, -hook-analyzer, -humanizer, -content-repurposer, -comment-writer, -reply-manager, -thread-tracker, -profile-optimizer, -employee-advocacy and -engagement-analytics. Offline by design: nothing posts, schedules or scrapes; drafts are pasted by the user and analysis runs on pasted text or exports. Gates exit 1 on their deliberately flawed samples.
 - **Recent additions (October 2026) — security audit:** engineering `security-audit` (6 stdlib tools, 14 references) and the `cs-security-auditor` agent that leads it. Six phases — reconnaissance, coverage-ledger-driven hunting, independent candidate validation, schema-checked `findings.json`, fresh record verification, reporting — with three run-time breadth tiers (`core`, `focused`, `full`). The agent asks for the tier before every full audit. Validators exit non-zero on an invalid ledger or findings file by design.
 - **Recent additions (September 2026) — 4 skills + 2026 refresh:** marketing `ai-content-disclosure` and `conversational-ads`; PM `discovery/ai-prototyping` and `execution/agents-in-the-team` (8 stdlib tools). Existing marketing and PM skills refreshed against 2025–2026 changes: retired FAQ/HowTo rich results, AI crawler and Search Console AI controls, Advantage+/AI Max, GA4 AI Assistant channel, Productboard API v2, Jira `/search/jql`, Notion data sources, DORA 2024 benchmarks, EU AI Act Omnibus (Reg. 2026/1744), Atlassian Data Center end-of-life. Workflow templates hardened against shell injection (CWE-78).

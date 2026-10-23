@@ -405,15 +405,19 @@ def optimize_content(content: str, keyword: str = None,
     return '\n'.join(output)
 
 if __name__ == "__main__":
-    import sys
-    
-    if len(sys.argv) > 1:
-        with open(sys.argv[1], 'r') as f:
-            content = f.read()
-        
-        keyword = sys.argv[2] if len(sys.argv) > 2 else None
-        secondary = sys.argv[3] if len(sys.argv) > 3 else None
-        
-        print(optimize_content(content, keyword, secondary))
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Score content for on-page SEO and suggest fixes.")
+    parser.add_argument("file", help="Text or markdown file to analyze")
+    parser.add_argument("keyword", nargs="?", help="Primary keyword")
+    parser.add_argument("secondary", nargs="?", help="Comma-separated secondary keywords")
+    parser.add_argument("--json", action="store_true", help="Output the raw analysis as JSON")
+    args = parser.parse_args()
+
+    with open(args.file, 'r') as f:
+        content = f.read()
+    if args.json:
+        secondary = [kw.strip() for kw in args.secondary.split(',')] if args.secondary else None
+        print(json.dumps(SEOOptimizer().analyze(content, args.keyword, secondary), indent=2))
     else:
-        print("Usage: python seo_optimizer.py <file> [primary_keyword] [secondary_keywords]")
+        print(optimize_content(content, args.keyword, args.secondary))

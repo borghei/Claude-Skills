@@ -31,7 +31,7 @@ title: Skill Catalog
 | Tools — LinkedIn suite (new) | 12 | 27 | [View all](tools.md) |
 | Finance | 3 | 10 | [View all](business.md#finance) |
 | Workflow (meta-skills) | 2 | — | [View all](other.md) |
-| **Total** | **385** | **900** | |
+| **Total** | **385** | **906** | |
 
 ## Skill Package Structure
 

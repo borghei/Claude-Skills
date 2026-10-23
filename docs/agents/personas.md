@@ -4,7 +4,7 @@ title: Personas
 
 # Personas
 
-7 cross-functional personas that combine skills from multiple domains into a single professional role. Unlike task agents (which focus on one function), personas think holistically about problems.
+8 cross-functional personas that combine skills from multiple domains into a single professional role. Unlike task agents (which focus on one function), personas think holistically about problems.
 
 ## Available Personas
 
@@ -17,6 +17,7 @@ title: Personas
 | **Content Strategist** | Marketing + SEO + Brand | Content-first marketing. Plans editorial strategy, SEO, brand voice, and content production workflows. |
 | **DevOps Engineer** | Engineering (DevOps + Security + Cloud) | Infrastructure and reliability. Covers CI/CD, containers, IaC, monitoring, and incident response. |
 | **Finance Lead** | Finance + C-Level (CFO) + Business | Financial operations. Covers modeling, forecasting, unit economics, fundraising, and board reporting. |
+| **Skill Creator** | Engineering + Standards | Authors new skills for this library and grades existing ones against the eval template. Four modes: Create, Grade, Compare, Analyze. |
 
 ## How Personas Differ from Task Agents
 
@@ -53,7 +54,8 @@ agents/personas/
 ├── growth-marketer.md
 ├── content-strategist.md
 ├── devops-engineer.md
-└── finance-lead.md
+├── finance-lead.md
+└── skill-creator.md
 ```
 
 Each file defines:

@@ -14,6 +14,7 @@ self-contained copy.
 
 from __future__ import annotations
 
+import argparse
 import shutil
 import sys
 from pathlib import Path
@@ -31,24 +32,20 @@ VALID_BUNDLES = [
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) < 1:
-        print(f"usage: {sys.argv[0]} <bundle-name> [output-dir]", file=sys.stderr)
-        print(f"       bundles: {', '.join(VALID_BUNDLES)}", file=sys.stderr)
-        return 2
+    parser = argparse.ArgumentParser(description="Copy a skill bundle out of the repo as a standalone folder.")
+    parser.add_argument("bundle", choices=VALID_BUNDLES, help="Bundle to export")
+    parser.add_argument("output_dir", nargs="?", help="Destination folder (default: /tmp/<bundle>)")
+    args = parser.parse_args(argv)
 
-    name = argv[0]
-    if name not in VALID_BUNDLES:
-        print(f"error: unknown bundle '{name}'", file=sys.stderr)
-        print(f"       valid: {', '.join(VALID_BUNDLES)}", file=sys.stderr)
-        return 2
+    name = args.bundle
 
     src = BUNDLES_DIR / name
     if not src.is_dir():
         print(f"error: {src} does not exist", file=sys.stderr)
         return 1
 
-    if len(argv) >= 2:
-        dst = Path(argv[1]).resolve()
+    if args.output_dir:
+        dst = Path(args.output_dir).resolve()
     else:
         dst = Path(f"/tmp/{name}").resolve()
 

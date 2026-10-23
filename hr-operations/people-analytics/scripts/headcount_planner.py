@@ -254,8 +254,8 @@ def main():
         description="Workforce headcount planning and scenario modeling."
     )
     parser.add_argument("--file", required=True, help="Path to workforce data CSV")
-    parser.add_argument("--growth", type=float, required=True, help="Annual growth rate (e.g., 0.15 for 15%)")
-    parser.add_argument("--attrition", type=float, required=True, help="Annual attrition rate (e.g., 0.12 for 12%)")
+    parser.add_argument("--growth", type=float, required=True, help="Annual growth rate (e.g., 0.15 for 15%%)")
+    parser.add_argument("--attrition", type=float, required=True, help="Annual attrition rate (e.g., 0.12 for 12%%)")
     parser.add_argument("--quarters", type=int, default=4, help="Number of quarters to forecast (default: 4)")
     parser.add_argument("--hiring-capacity", type=int, default=None, help="Max hires per quarter per department")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
