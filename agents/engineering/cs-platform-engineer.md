@@ -49,7 +49,7 @@ The cs-platform-engineer agent is most valuable when (1) standing up a new pipel
 **Goal:** Bring a new service onto the paved road in under a day, with CI, IaC, and a Helm chart wired up.
 
 **Steps:**
-1. Generate workflow: `python ../../engineering/devops-workflow-engineer/scripts/workflow_generator.py --service api --language python`
+1. Generate workflow: `python ../../engineering/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language python`
 2. Plan deployment strategy (canary / blue-green / rolling) using deployment-strategies reference
 3. Generate Terraform module skeleton; scan with `tf_security_scanner.py`
 4. Author Helm chart; validate with `values_validator.py` and `chart_analyzer.py`
@@ -99,7 +99,7 @@ python ../../engineering/helm-chart-builder/scripts/values_validator.py charts/a
 
 ### Example 2: New Service Bootstrap
 ```bash
-python ../../engineering/devops-workflow-engineer/scripts/workflow_generator.py --service billing --language go
+python ../../engineering/devops-workflow-engineer/scripts/workflow_generator.py --type ci --language go
 python ../../engineering/helm-chart-builder/scripts/chart_analyzer.py charts/billing/
 ```
 

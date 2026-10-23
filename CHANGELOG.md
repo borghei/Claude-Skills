@@ -5,6 +5,20 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.9] - 2026-10-23
+
+### Added
+
+- **Nine tools that were placeholders now work.** Each is standard-library Python with no network or subprocess calls, ships a sample input, and keeps the flags its docs show.
+  - `senior-data-scientist`: `experiment_designer.py` sizes A/B tests (sample size, power, duration, Bonferroni for extra arms); `feature_engineering_pipeline.py` profiles a CSV and drafts a feature plan (types, nulls, skew, correlations, leakage suspects, suggested transforms); `model_evaluation_suite.py` scores saved predictions (confusion matrix, ROC AUC, log loss, Brier, regression metrics, fold stability) and gives a readiness verdict on the thresholds it can measure.
+  - `senior-ml-engineer`: `model_deployment_pipeline.py` writes a Dockerfile (non-root, health check) and a Kubernetes Deployment, Service and autoscaler with probes and limits; `rag_system_builder.py` produces a rule-based RAG plan and config; `ml_monitoring_suite.py` measures drift between a baseline and a current CSV (PSI and Kolmogorov–Smirnov), writes alert rules and works as a CI gate.
+  - `senior-devops`: `pipeline_generator.py` detects a project's stack and writes CI config for GitHub Actions, GitLab CI, CircleCI or Jenkins; `terraform_scaffolder.py` scaffolds a module with remote state and locking, per-environment roots and pinned providers; `deployment_manager.py` plans a rolling, blue-green or canary release with health checks, rollback triggers and a runbook.
+- The `senior-devops` references for CI/CD, deployment strategies and infrastructure as code have real content in place of template text.
+
+### Changed
+
+- The `cs-data-scientist`, `cs-mlops-engineer`, `cs-devops-engineer` and `cs-platform-engineer` agents and the engineering guides use the tools' real commands.
+
 ## [4.13.8] - 2026-10-23
 
 ### Added

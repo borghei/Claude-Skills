@@ -1,0 +1,15 @@
+{
+  "name": "sample-node-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "devDependencies": {
+    "eslint": "^9.14.0",
+    "typescript": "^5.6.3"
+  }
+}

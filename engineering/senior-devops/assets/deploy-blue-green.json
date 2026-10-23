@@ -1,0 +1,16 @@
+{
+  "service": "payments-gateway",
+  "version": "5.0.0",
+  "previous_version": "4.9.2",
+  "replicas": 4,
+  "risk": "high",
+  "user_facing": true,
+  "traffic_rps": 8,
+  "stateful": false,
+  "schema_change": "none",
+  "rollback_tolerance_minutes": 1,
+  "can_double_capacity": true,
+  "health": {"port": 8443, "liveness_path": "/livez", "readiness_path": "/readyz", "startup_seconds": 45},
+  "baseline": {"error_rate_pct": 0.1, "p99_latency_ms": 300},
+  "slo": {"error_rate_pct": 0.5, "p99_latency_ms": 800}
+}

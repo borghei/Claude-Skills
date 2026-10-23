@@ -1,0 +1,20 @@
+{
+  "name": "support-kb",
+  "corpus": {
+    "documents": 120000,
+    "avg_doc_tokens": 1800,
+    "doc_types": {
+      "markdown": 0.6,
+      "pdf": 0.3,
+      "faq": 0.1
+    }
+  },
+  "queries_per_day": 40000,
+  "peak_to_average": 4,
+  "latency_budget_ms": 600,
+  "embedding_dim": 1024,
+  "update_frequency": "daily",
+  "exact_match_terms": true,
+  "context_tokens": 4000,
+  "memory_budget_gb": 16
+}

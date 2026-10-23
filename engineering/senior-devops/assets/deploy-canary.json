@@ -1,0 +1,16 @@
+{
+  "service": "checkout-api",
+  "version": "2.4.0",
+  "previous_version": "2.3.1",
+  "replicas": 6,
+  "risk": "medium",
+  "user_facing": true,
+  "traffic_rps": 400,
+  "stateful": false,
+  "schema_change": "backward_compatible",
+  "rollback_tolerance_minutes": 5,
+  "can_double_capacity": false,
+  "health": {"port": 8080, "liveness_path": "/healthz", "readiness_path": "/ready", "startup_seconds": 20},
+  "baseline": {"error_rate_pct": 0.3, "p99_latency_ms": 220},
+  "slo": {"error_rate_pct": 1.0, "p99_latency_ms": 500}
+}

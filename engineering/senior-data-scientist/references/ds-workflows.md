@@ -4,16 +4,21 @@ Read this when running an A/B test, building a feature pipeline, training/evalua
 
 ## Quick Start
 
+Run these from the skill folder. Each command works on the sample inputs in `assets/`; swap in your own values or files.
+
 ```bash
-# Design an experiment with power analysis
-python scripts/experiment_designer.py --input data/ --output results/
+# Size an A/B test: per-arm sample size, power and duration
+python scripts/experiment_designer.py --baseline 0.10 --mde 0.02 --daily-traffic 5000
+python scripts/experiment_designer.py --input assets/experiment_design.json --output results/
 
-# Run feature engineering pipeline
-python scripts/feature_engineering_pipeline.py --input data/ --output features/
+# Profile a dataset and draft a feature plan
+python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned --output features/
 
-# Evaluate model performance
-python scripts/model_evaluation_suite.py --input models/ --output evaluation/ --config config.yaml
+# Compare saved model predictions and check them against thresholds
+python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json
 ```
+
+A rerun into an `--output` folder that already holds the report stops with an error unless you add `--force`. Full flags and example output for each tool are in [ds-operations.md](ds-operations.md).
 
 For a single statistical test, use inline Python (scipy, statsmodels) as in Workflows 1 and 5, or `run_test.py` in `data-analytics/statistical-analyst/` (Welch's t, Mann-Whitney, chi-square, two-proportion).
 
@@ -31,9 +36,10 @@ For a single statistical test, use inline Python (scipy, statsmodels) as in Work
 ## Workflow 1: Design and Analyze an A/B Test
 
 1. **Define hypothesis** -- State the null and alternative hypotheses. Identify the primary metric (e.g., conversion rate, revenue per user).
-2. **Calculate sample size** -- `python scripts/experiment_designer.py --input data/ --output results/`
-   - Specify minimum detectable effect (MDE), significance level (alpha=0.05), and power (0.80).
-   - Example: For baseline conversion 5%, MDE 10% relative lift, need ~31,000 users per variant.
+2. **Calculate sample size** -- `python scripts/experiment_designer.py --baseline 0.05 --mde 0.10 --mde-type relative --daily-traffic 20000`
+   - Specify minimum detectable effect (MDE), significance level (`--alpha`, default 0.05), and power (`--power`, default 0.80). Use `--metric mean --std-dev ...` for a revenue-style metric and `--variants 3` or more for multi-arm tests (alpha is Bonferroni-adjusted).
+   - Example: for baseline conversion 5% and a 10% relative lift the tool returns 31,234 users per variant. With three arms the per-arm figure rises to 37,824.
+   - Act on its warnings: an underpowered design, a test longer than 28 days, or one shorter than a full week.
 3. **Randomize assignment** -- Use hash-based assignment on user ID for deterministic, reproducible splits.
 4. **Run experiment** -- Monitor for sample ratio mismatch (SRM) daily. Flag if observed ratio deviates >1% from expected.
 5. **Analyze results:**
@@ -54,15 +60,15 @@ For a single statistical test, use inline Python (scipy, statsmodels) as in Work
 
 ## Workflow 2: Build a Feature Engineering Pipeline
 
-1. **Profile raw data** -- with pandas (`df.isna().mean()`, `df.nunique()`, `df.describe()`) or your profiling tool of choice.
-   - Identify null rates, cardinality, distributions, and data types.
+1. **Profile raw data** -- `python scripts/feature_engineering_pipeline.py --input data.csv --target <target> --output features/`
+   - Reports type, null rate, cardinality, quantiles and skew per column, highly correlated numeric pairs, and each feature's association with the target. `features/feature_plan.json` holds a keep/transform/drop decision per column.
 2. **Generate candidate features:**
    - Temporal: day-of-week, hour, recency, frequency, monetary (RFM)
    - Aggregation: rolling means/sums over 7d/30d/90d windows
    - Interaction: ratio features, polynomial combinations
    - Text: TF-IDF, embedding vectors
-3. **Select features** -- Remove features with >95% null rate, near-zero variance, or >0.95 pairwise correlation. Use recursive feature elimination or SHAP importance.
-4. **Validate** -- Confirm no target leakage (no features derived from post-outcome data). Check train/test distribution alignment.
+3. **Select features** -- Remove features with >95% null rate, near-zero variance, or >0.95 pairwise correlation (the feature plan already marks these). Use recursive feature elimination or SHAP importance in your own training code.
+4. **Validate** -- Confirm no target leakage (no features derived from post-outcome data). The profiler lists features with an association of 0.90 or more as leakage suspects; check when each suspect becomes known. Check train/test distribution alignment.
 5. **Register** -- Store features in feature store with versioning and lineage metadata.
 
 ## Workflow 3: Train and Evaluate a Model
@@ -80,7 +86,8 @@ For a single statistical test, use inline Python (scipy, statsmodels) as in Work
    print(classification_report(y_test, y_pred))
    print(f"AUC-ROC: {roc_auc_score(y_test, y_prob):.4f}")
    ```
-5. **Validate** -- Check calibration (predicted probabilities match observed rates). Evaluate fairness metrics across protected groups. Confirm no overfitting (train vs test gap <5%).
+   To compare candidates without sklearn, save one prediction column per model next to the actuals and run `python scripts/model_evaluation_suite.py --input test_predictions.csv --target actual --folds 5 --config thresholds.json`. It reports the metrics side by side, the fold spread of the primary metric, and a READY or NOT READY verdict per model against the thresholds.
+5. **Validate** -- Check calibration (predicted probabilities match observed rates; the evaluation suite's Brier score is a single-number check). Evaluate fairness metrics across protected groups. Confirm no overfitting (train vs test gap <5%).
 
 ## Workflow 4: Deploy a Model to Production
 

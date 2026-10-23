@@ -37,7 +37,7 @@ The cs-data-scientist agent is most valuable when (1) designing an experiment be
 
 ### Workflow 1: Experiment Design Before Launch
 1. Define hypothesis, primary metric, guardrail metrics
-2. Run `python ../../engineering/senior-data-scientist/scripts/experiment_designer.py hypothesis.yaml` for power analysis
+2. Run `python ../../engineering/senior-data-scientist/scripts/experiment_designer.py --input experiment_design.json` for power analysis
 3. Pre-register decision rule (effect size threshold, significance, decision flowchart)
 4. Reference `experiment_design_frameworks.md` for stratification and randomization
 5. Lock the analysis plan before data collection starts
@@ -46,14 +46,14 @@ The cs-data-scientist agent is most valuable when (1) designing an experiment be
 
 ### Workflow 2: Feature Engineering With Leakage Prevention
 1. Apply patterns from `feature_engineering_patterns.md` (time-aware splits, leak-free encoding)
-2. Build pipeline: `python ../../engineering/senior-data-scientist/scripts/feature_engineering_pipeline.py spec.yaml`
+2. Build pipeline: `python ../../engineering/senior-data-scientist/scripts/feature_engineering_pipeline.py --input data.csv --target <target> --output features/`
 3. Audit for leakage: same-row feature using future data, group leakage, target leakage
 4. Document feature lineage for reproducibility
 
 **Time Estimate:** 1-2 weeks per feature set.
 
 ### Workflow 3: Model Evaluation
-1. Run evaluation suite: `python ../../engineering/senior-data-scientist/scripts/model_evaluation_suite.py model.pkl test.csv`
+1. Run evaluation suite: `python ../../engineering/senior-data-scientist/scripts/model_evaluation_suite.py --input predictions.csv --target actual --folds 5`
 2. Apply statistical tests from `statistical_methods_advanced.md` to compare models
 3. Slice by segment to catch performance disparities
 4. Produce evaluation report with confidence intervals, not just point estimates
@@ -63,8 +63,8 @@ The cs-data-scientist agent is most valuable when (1) designing an experiment be
 ## Integration Examples
 
 ```bash
-python ../../engineering/senior-data-scientist/scripts/experiment_designer.py hypothesis.yaml
-python ../../engineering/senior-data-scientist/scripts/model_evaluation_suite.py model.pkl test.csv
+python ../../engineering/senior-data-scientist/scripts/experiment_designer.py --input experiment_design.json
+python ../../engineering/senior-data-scientist/scripts/model_evaluation_suite.py --input predictions.csv --target actual
 ```
 
 ## Success Metrics

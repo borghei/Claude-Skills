@@ -252,7 +252,7 @@ npm run build
 python senior-ml-engineer/scripts/mlops_setup_tool.py
 
 # 2. Deploy model
-python senior-ml-engineer/scripts/model_deployment_pipeline.py model.pkl
+python senior-ml-engineer/scripts/model_deployment_pipeline.py --input deployment_spec.json --output deploy/
 
 # 3. Monitor performance
 # Check MLflow dashboard

@@ -1,0 +1,27 @@
+{
+  "name": "churn-classifier",
+  "framework": "sklearn",
+  "model_file": "model.joblib",
+  "image": "registry.example.com/ml/churn-classifier:1.4.0",
+  "port": 8080,
+  "replicas": {
+    "min": 2,
+    "max": 6
+  },
+  "resources": {
+    "cpu_request": "500m",
+    "cpu_limit": "1",
+    "memory_request": "1Gi",
+    "memory_limit": "2Gi"
+  },
+  "health": {
+    "liveness_path": "/health",
+    "readiness_path": "/ready"
+  },
+  "env": {
+    "LOG_LEVEL": "info",
+    "FEATURE_STORE_TOKEN": ""
+  },
+  "gpu": false,
+  "target_cpu_utilization": 70
+}

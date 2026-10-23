@@ -8,11 +8,11 @@ Read this when executing a containerize/deploy, Terraform IaC, or CI/CD pipeline
 # Generate CI/CD pipeline from project analysis
 python scripts/pipeline_generator.py <project-path> --platform github-actions --verbose
 
-# Scaffold Terraform infrastructure
-python scripts/terraform_scaffolder.py <target-path> --provider aws --env production --verbose
+# Scaffold a Terraform module with dev/staging/prod root modules and remote state
+python scripts/terraform_scaffolder.py <target-path> --provider aws --name app --envs dev,staging,prod
 
-# Manage deployment with canary strategy
-python scripts/deployment_manager.py <target-path> --strategy canary --verbose
+# Plan a deployment from a JSON spec (strategy, steps, health checks, rollback)
+python scripts/deployment_manager.py assets/deploy-canary.json
 ```
 
 ## Workflow 1: Containerize and Deploy
@@ -87,20 +87,21 @@ spec:
 **Step 1 -- Scaffold the module structure.**
 
 ```bash
-python scripts/terraform_scaffolder.py ./infrastructure --provider aws --env production --verbose
+python scripts/terraform_scaffolder.py ./infrastructure --provider aws --name platform --envs staging,production
 ```
 
-The agent produces:
+The tool produces:
 ```
 infrastructure/
   modules/
-    vpc/         # main.tf, variables.tf, outputs.tf
-    eks/
-    rds/
+    platform/      # main.tf, variables.tf, outputs.tf, versions.tf
   environments/
-    staging/     # main.tf, terraform.tfvars, backend.tf
+    staging/       # main.tf, backend.tf, providers.tf, variables.tf, versions.tf, terraform.tfvars
     production/
+  README.md
 ```
+
+Add further modules (vpc, eks, rds) next to `modules/platform/` and call them from each environment's `main.tf`.
 
 **Step 2 -- Configure remote state.**
 

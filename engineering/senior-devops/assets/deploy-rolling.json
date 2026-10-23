@@ -1,0 +1,14 @@
+{
+  "service": "report-worker",
+  "version": "1.8.0",
+  "previous_version": "1.7.4",
+  "replicas": 3,
+  "risk": "low",
+  "user_facing": false,
+  "traffic_rps": 5,
+  "stateful": false,
+  "schema_change": "none",
+  "rollback_tolerance_minutes": 30,
+  "can_double_capacity": false,
+  "health": {"port": 9000, "liveness_path": "/healthz", "readiness_path": "/ready", "startup_seconds": 10}
+}

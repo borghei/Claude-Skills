@@ -409,7 +409,7 @@ python scripts/project_scaffolder.py my-app --type nextjs-graphql
 
 # Step 3: Setup CI/CD
 cd ../senior-devops
-python scripts/pipeline_generator.py my-app --platform github
+python scripts/pipeline_generator.py ../my-app --platform github-actions
 ```
 
 ### Workflow 2: Code Review Process

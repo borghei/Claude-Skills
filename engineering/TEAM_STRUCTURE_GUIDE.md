@@ -338,7 +338,7 @@ python scripts/pipeline_orchestrator.py --input raw/ --output processed/
 
 # 3. Train ML model
 cd ../senior-ml-engineer
-python scripts/model_deployment_pipeline.py --train --config model_config.yaml
+python scripts/model_deployment_pipeline.py --input deployment_spec.json --output deploy/
 
 # 4. Optimize prompts
 cd ../senior-prompt-engineer
@@ -346,7 +346,7 @@ python scripts/prompt_optimizer.py --model gpt-4 --task classification
 
 # 5. Deploy with DevOps
 cd ../senior-devops
-python scripts/deployment_manager.py --service ml-api --environment production
+python scripts/deployment_manager.py deploy-ml-api.json
 ```
 
 ### **Workflow 2: Complete Application Development**
@@ -370,7 +370,7 @@ python scripts/test_suite_generator.py ../my-app --coverage
 
 # 5. CI/CD
 cd ../senior-devops
-python scripts/pipeline_generator.py my-app --platform github
+python scripts/pipeline_generator.py ../my-app --platform github-actions
 ```
 
 ### **Workflow 3: Data Science Project**
@@ -378,10 +378,10 @@ python scripts/pipeline_generator.py my-app --platform github
 ```bash
 # 1. Design experiment
 cd senior-data-scientist
-python scripts/experiment_designer.py --hypothesis "feature X improves conversion" --power 0.8
+python scripts/experiment_designer.py --baseline 0.10 --mde 0.02 --power 0.8
 
 # 2. Feature engineering
-python scripts/feature_engineering_pipeline.py --input data/raw --output data/features
+python scripts/feature_engineering_pipeline.py --input data/raw.csv --output data/features
 
 # 3. Build data pipeline
 cd ../senior-data-engineer
@@ -389,7 +389,7 @@ python scripts/pipeline_orchestrator.py --schedule daily --destination warehouse
 
 # 4. Deploy model
 cd ../senior-ml-engineer
-python scripts/model_deployment_pipeline.py --model ./models/best.pkl --endpoint /api/predict
+python scripts/model_deployment_pipeline.py --input deployment_spec.json --output deploy/
 ```
 
 ---
